@@ -271,7 +271,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../../../react-native/React/**",
-					"$(SRCROOT)/../../../../TechnicalValidation/QueryEmdros/node_modules/react-native/React/**",
+					"$(SRCROOT)/../../../../App/SourceViewBible/node_modules/react-native/React/**",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
@@ -286,7 +286,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../../../react-native/React/**",
-					"$(SRCROOT)/../../../../TechnicalValidation/QueryEmdros/node_modules/react-native/React/**",
+					"$(SRCROOT)/../../../../App/SourceViewBible/node_modules/react-native/React/**",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";

@@ -89,7 +89,6 @@ RCT_EXPORT_METHOD(query:(NSDictionary *)options resolver:(RCTPromiseResolveBlock
         params[@"count"] = @(YES);
     }
 
-    __weak typeof(self) weakSelf = self;
     [emdros query:query options:params completion:^(id result, NSError *error) {
         if (!error) {
             resolve(result);
