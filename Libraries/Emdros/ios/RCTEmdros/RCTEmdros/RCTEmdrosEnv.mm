@@ -143,6 +143,42 @@
     });
 }
 
+- (void)stringFrom:(NSInteger)from to:(NSInteger)to options:(NSDictionary *)options completion:(void (^)(id result, NSError *error))completion {
+//    extern std::string render_objects(EmdrosEnv *pEnv, const std::string& db_name, const std::string& JSON_stylesheet, const std::string& stylesheet, monad_m first_monad, monad_m last_monad, bool& bResult);
+    
+    dispatch_queue_t currentQueue = dispatch_get_current_queue();
+    dispatch_async(self.queue, ^{
+        try {
+            NSString *stylesheet = options[@"stylesheet"];
+            std::string dbName("");
+            std::string stylesheetString(stylesheet.UTF8String);
+            std::string stylesheetName("base");
+            bool bResult;
+            std::string rendered_objects = render_objects(_emdrosEnv, dbName, stylesheetString, stylesheetName, from, to, bResult);
+            NSString *string = [NSString stringWithUTF8String:rendered_objects.c_str()];
+            if (completion) {
+                dispatch_async(currentQueue, ^{
+                    completion(string, nil);
+                });
+            }
+        } catch (EmdrosException e) {
+            std::cerr << "ERROR: EmdrosException (Emdros error)..." << e.what() << std::endl;
+        } catch (EMdFDBException e) {
+            std::cerr << "ERROR: EMdFDBException (Database error)..." << std::endl;
+            std::cerr << _emdrosEnv->getDBError() << std::endl;
+            std::cerr << _emdrosEnv->getCompilerError() << std::endl;
+        } catch (BadMonadsException e) {
+            std::cerr << "BadMonadsException caught.  Program aborted." << std::endl;
+        } catch (WrongCharacterSetException e) {
+            std::cerr << "WrongCharacterSetException caught.  Program aborted." << std::endl;
+        } catch (EMdFOutputException e) {
+            std::cerr << "EMdFOutputException caught.  Program aborted." << std::endl;
+        } catch (...) {
+            std::cerr << "Unknown exception occurred.  Program aborted." << std::endl;
+        }
+    });
+}
+
 - (NSString *)monadSetForBook:(NSString *)book {
     long firstMonad = 0;
     long lastMonad = 0;

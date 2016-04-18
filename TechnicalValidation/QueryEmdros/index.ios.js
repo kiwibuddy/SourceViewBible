@@ -21,7 +21,7 @@ var DB = null;
 import Chart from './chart';
 var dismissKeyboard = require('dismissKeyboard');
 
-class example extends Component {
+class QueryEmdros extends Component {
   constructor() {
     super();
     this.openDatabase();
@@ -138,4 +138,4 @@ const styles = StyleSheet.create({
   }
 });
 
-AppRegistry.registerComponent('QueryEmdros', () => example);
+AppRegistry.registerComponent('QueryEmdros', () => QueryEmdros);

@@ -1,0 +1,16 @@
+{
+    "base" : {
+        "object_types": {
+            "token": {
+                "get": [ "surface" ],
+                "start": "{{ featurenomangle 0 }}"
+            }
+        },
+        "priority_list": [
+            "token"
+        ],
+        "prepend_XML_declaration" : false
+    },
+    "dictionaries": {
+    }
+}

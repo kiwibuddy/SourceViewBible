@@ -98,6 +98,23 @@ RCT_EXPORT_METHOD(query:(NSDictionary *)options resolver:(RCTPromiseResolveBlock
     }];
 }
 
+RCT_EXPORT_METHOD(string:(NSDictionary *)options resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    RCTEmdrosEnv *emdros = [self databaseForName:options[@"name"]];
+    NSInteger from = [options[@"from"] integerValue];
+    NSInteger to = [options[@"to"] integerValue];
+    NSString *stylesheet = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Template" ofType:@"json"] encoding:NSUTF8StringEncoding error:nil];
+    
+    NSMutableDictionary *emdrosOptions = [[NSMutableDictionary alloc] initWithDictionary:options];
+    emdrosOptions[@"stylesheet"] = stylesheet;
+    [emdros stringFrom:from to:to options:emdrosOptions completion:^(id result, NSError *error) {
+        if (!error) {
+            resolve(result);
+        } else {
+            reject(@"string_error", [NSString stringWithFormat:@"Error getting string from:%ld to:%ld", from, to], error);
+        }
+    }];
+}
+
 - (dispatch_queue_t)methodQueue {
     return dispatch_queue_create("com.facebook.React.Emdros", DISPATCH_QUEUE_SERIAL);
 }
