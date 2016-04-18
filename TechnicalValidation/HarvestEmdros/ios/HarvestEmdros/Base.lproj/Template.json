@@ -3,7 +3,8 @@
         "object_types": {
             "token": {
                 "get": [ "surface" ],
-                "start": "{{ featurenomangle 0 }}"
+                "start": "{{ featurenomangle 0 }}",
+                "end": " "
             }
         },
         "priority_list": [

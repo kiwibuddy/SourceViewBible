@@ -61,6 +61,8 @@ class HarvestEmdros extends Component {
       />;
     }
 
+    var text = (this.state.data ? <Text>{this.state.data}</Text> : null);
+
     return (
       <View style={styles.mainContainer}>
         <View style={styles.toolbar}>
@@ -73,13 +75,7 @@ class HarvestEmdros extends Component {
           </TouchableOpacity>
           {activityIndicator}
         </View>
-        <TextInput
-          style={styles.input}
-          multiline={true}
-          autoCorrect={false}
-          onChangeText={(query) => this.setState({query})}
-          value={this.state.query}
-        />
+        {text}
       </View>
     );
   }
