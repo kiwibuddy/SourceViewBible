@@ -5,6 +5,7 @@ Source View Bible
 This repository contains code and data used in creating the Source View Bible mobile app.
 
 ### Datasets
-#### en - English
-  * NLT - New Living Translation
-    * SourceView
+The datasets used in the app.
+
+### Technical Validation
+Projects used in testing and validating technical aspects of the app.
