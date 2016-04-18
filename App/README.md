@@ -7,7 +7,7 @@ Source View Bible Mobile App Setup
 ## Install Homebrew
 * http://brew.sh
 
-If already installed make sure it is up-to-date:
+If Homebrew is already installed make sure it is up-to-date:
 
 $ `brew update`
 
