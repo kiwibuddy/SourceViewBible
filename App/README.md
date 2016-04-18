@@ -26,5 +26,8 @@ $ `brew install flow`
 ## Install React Native
 $ `npm install -g react-native-cli`
 
+## Installing app dependencies
+$ `npm install`
+
 ## Starting the Packager
 $ `react-native start`
