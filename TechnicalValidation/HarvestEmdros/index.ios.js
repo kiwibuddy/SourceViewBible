@@ -45,7 +45,7 @@ class HarvestEmdros extends Component {
     let options = {stylesheet: STYLESHEET};
     DB.string(1,10500, options).then((result) => {
       let foo = 'React.createElement(ScrollView, {}, ' + result.slice(0, -1) + ')';
-      console.log("String:" + foo);
+      // console.log("String:" + foo);
       this.setState({loading: false, data: foo});
     }).catch((error) => {
       console.log("Error getting string " + error);
