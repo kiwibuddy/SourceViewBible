@@ -2,14 +2,9 @@
     "base" : {
         "object_types": {
             "source": {
-              "get": [ "source_name" ],
-              "start": "[{{ featurenomangle 0 }}]",
-              "end": "",
-            },
-            "verse": {
-              "get": [ "verse_start" ],
-              "start": "{{ featurenomangle 0 }} ",
-              "end": ""
+              "get": [ "source_color" ],
+              "start": "React.createElement(Text, {style:[styles.scripture, styles.{{ featurenomangle 0 }}]}, \"",
+              "end": "\"),",
             },
             "token": {
                 "get": [ "surface" ],

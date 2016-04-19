@@ -1,15 +1,18 @@
 'use strict';
 
-import React, {
+let React = require('react-native');
+
+let {
   AppRegistry,
   Component,
   StyleSheet,
   Text,
+  ScrollView,
   TextInput,
   TouchableOpacity,
   ActivityIndicatorIOS,
   View,
-} from 'react-native';
+} = React;
 
 import Emdros from 'react-native-emdros';
 var DB = null;
@@ -40,9 +43,10 @@ class HarvestEmdros extends Component {
     dismissKeyboard();
     this.setState({loading: true});
     let options = {stylesheet: STYLESHEET};
-    DB.string(1,107, options).then((result) => {
-      console.log("String: " + result);
-      this.setState({loading: false, data: result});
+    DB.string(1,10500, options).then((result) => {
+      let foo = 'React.createElement(ScrollView, {}, ' + result.slice(0, -1) + ')';
+      console.log("String:" + foo);
+      this.setState({loading: false, data: foo});
     }).catch((error) => {
       console.log("Error getting string " + error);
       this.setState({loading: false});
@@ -63,7 +67,8 @@ class HarvestEmdros extends Component {
       />;
     }
 
-    var text = (this.state.data ? <Text>{this.state.data}</Text> : null);
+    let scripture =  (this.state.data ? eval(this.state.data) : null);
+    var text = (scripture ? <View style={styles.container}>{scripture}</View> : null);
 
     return (
       <View style={styles.mainContainer}>
@@ -86,9 +91,7 @@ class HarvestEmdros extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    margin: 10,
   },
   welcome: {
     fontSize: 20,
@@ -118,6 +121,21 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     margin: 10,
+  },
+  scripture: {
+    fontSize: 20
+  },
+  Red: {
+    color: "#ff0000",
+  },
+  Black: {
+    color: "#000000",
+  },
+  Green: {
+    color: "#00fc00",
+  },
+  Blue: {
+    "color": "#0000ff"
   }
 });
 
