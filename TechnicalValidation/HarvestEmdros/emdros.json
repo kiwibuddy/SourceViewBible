@@ -1,9 +1,9 @@
 {
     "base" : {
         "object_types": {
-            "chapter": {
-              "get": [ "chapter" ],
-              "start": "C: {{ featurenomangle 0 }}",
+            "verse": {
+              "get": [ "verse_start" ],
+              "start": "{{ featurenomangle 0 }} ",
               "end": ""
             },
             "token": {
@@ -13,7 +13,8 @@
             }
         },
         "priority_list": [
-            "token"
+          "verse",
+          "token"
         ],
         "prepend_XML_declaration" : false
     },
