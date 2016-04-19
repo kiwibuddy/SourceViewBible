@@ -1,6 +1,11 @@
 {
     "base" : {
         "object_types": {
+            "source": {
+              "get": [ "source_name" ],
+              "start": "[{{ featurenomangle 0 }}]",
+              "end": "",
+            },
             "verse": {
               "get": [ "verse_start" ],
               "start": "{{ featurenomangle 0 }} ",
@@ -13,8 +18,6 @@
             }
         },
         "priority_list": [
-          "verse",
-          "token"
         ],
         "prepend_XML_declaration" : false
     },
