@@ -7,8 +7,8 @@
   },
   "dependencies": {
     "react": "^0.14.7",
-    "react-native": "^0.22.2",
-    "react-native-emdros": "file:../../Libraries/Emdros/",
-    "react-native-art-svg": "1.1.1"
+    "react-native": "^0.24.0",
+    "react-native-art-svg": "1.1.1",
+    "react-native-emdros": "file:../../Libraries/Emdros/"
   }
 }

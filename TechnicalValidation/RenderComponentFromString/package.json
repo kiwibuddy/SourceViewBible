@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "react": "^0.14.8",
-    "react-native": "^0.22.2"
+    "react-native": "^0.24.0"
   },
   "devDependencies": {
     "babel-eslint": "^6.0.2",
