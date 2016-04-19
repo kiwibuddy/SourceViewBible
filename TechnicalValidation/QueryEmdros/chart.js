@@ -2,6 +2,7 @@
 
 import React, {
   Component,
+  ScrollView
 } from 'react-native'
 
 import Svg,{
@@ -82,13 +83,17 @@ export default class Chart extends Component {
       x+= barItemWidth + 10;
       return bar;
     });
+
+    let chartWidth = x;
       return (
+        <ScrollView horizontal={true}>
           <Svg
               height={chartHeight}
-              width="1000"
+              width={chartWidth}
           >
           {bars}
           </Svg>
+        </ScrollView>
       );
   }
 }
