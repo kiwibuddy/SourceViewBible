@@ -26,7 +26,6 @@
 		ABBE39551CC573C6007228A3 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ABBE39541CC573C6007228A3 /* libstdc++.tbd */; };
 		ABBE39571CC573D3007228A3 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ABBE39561CC573D3007228A3 /* libz.tbd */; };
 		ABBE39591CC573DA007228A3 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ABBE39581CC573DA007228A3 /* libsqlite3.tbd */; };
-		ABBE398A1CC58E78007228A3 /* Template.json in Resources */ = {isa = PBXBuildFile; fileRef = ABBE39881CC58E78007228A3 /* Template.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,7 +134,6 @@
 		ABBE39541CC573C6007228A3 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		ABBE39561CC573D3007228A3 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		ABBE39581CC573DA007228A3 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		ABBE39891CC58E78007228A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = Base; path = HarvestEmdros/Base.lproj/Template.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,7 +245,6 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
-				ABBE39881CC58E78007228A3 /* Template.json */,
 			);
 			name = HarvestEmdros;
 			sourceTree = "<group>";
@@ -505,7 +502,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB5AD7A91CC56E9200BE404A /* sourceview.bpt in Resources */,
-				ABBE398A1CC58E78007228A3 /* Template.json in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
@@ -550,14 +546,6 @@
 			);
 			name = LaunchScreen.xib;
 			path = HarvestEmdros;
-			sourceTree = "<group>";
-		};
-		ABBE39881CC58E78007228A3 /* Template.json */ = {
-			isa = PBXVariantGroup;
-			children = (
-				ABBE39891CC58E78007228A3 /* Base */,
-			);
-			name = Template.json;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

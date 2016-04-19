@@ -37,10 +37,10 @@ export default class Emdros {
   }
 
   query(query, options) {
-    return EmdrosBridge.query({name: this.name, query: query});
+    return EmdrosBridge.query({...options, query: query, name: this.name});
   }
 
-  string(from, to) {
-    return EmdrosBridge.string({from: from, to: to, name: this.name})
+  string(from, to, options) {
+    return EmdrosBridge.string({...options, from: from, to: to, name: this.name})
   }
 }

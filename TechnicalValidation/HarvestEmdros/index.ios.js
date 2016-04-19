@@ -13,7 +13,8 @@ import React, {
 
 import Emdros from 'react-native-emdros';
 var DB = null;
-var dismissKeyboard = require('dismissKeyboard');
+let dismissKeyboard = require('dismissKeyboard');
+let STYLESHEET = require('./emdros.json');
 
 class HarvestEmdros extends Component {
   constructor() {
@@ -38,7 +39,8 @@ class HarvestEmdros extends Component {
   queryDatabase() {
     dismissKeyboard();
     this.setState({loading: true});
-    DB.string(1,107).then((result) => {
+    let options = {stylesheet: STYLESHEET};
+    DB.string(1,107, options).then((result) => {
       console.log("String: " + result);
       this.setState({loading: false, data: result});
     }).catch((error) => {

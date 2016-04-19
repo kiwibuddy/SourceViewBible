@@ -149,7 +149,8 @@
     dispatch_queue_t currentQueue = dispatch_get_current_queue();
     dispatch_async(self.queue, ^{
         try {
-            NSString *stylesheet = options[@"stylesheet"];
+            NSString *stylesheet = ([options[@"stylesheet"] isKindOfClass:[NSString class]] ? options[@"stylesheet"] : [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:options[@"stylesheet"] options:0 error:nil] encoding:NSUTF8StringEncoding]);
+                                    
             std::string dbName("");
             std::string stylesheetString(stylesheet.UTF8String);
             std::string stylesheetName("base");

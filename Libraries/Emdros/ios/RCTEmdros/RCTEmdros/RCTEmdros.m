@@ -102,11 +102,8 @@ RCT_EXPORT_METHOD(string:(NSDictionary *)options resolver:(RCTPromiseResolveBloc
     RCTEmdrosEnv *emdros = [self databaseForName:options[@"name"]];
     NSInteger from = [options[@"from"] integerValue];
     NSInteger to = [options[@"to"] integerValue];
-    NSString *stylesheet = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Template" ofType:@"json"] encoding:NSUTF8StringEncoding error:nil];
     
-    NSMutableDictionary *emdrosOptions = [[NSMutableDictionary alloc] initWithDictionary:options];
-    emdrosOptions[@"stylesheet"] = stylesheet;
-    [emdros stringFrom:from to:to options:emdrosOptions completion:^(id result, NSError *error) {
+    [emdros stringFrom:from to:to options:options completion:^(id result, NSError *error) {
         if (!error) {
             resolve(result);
         } else {
