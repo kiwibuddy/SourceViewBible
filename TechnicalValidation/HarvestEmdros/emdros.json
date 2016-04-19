@@ -1,6 +1,11 @@
 {
     "base" : {
         "object_types": {
+            "chapter": {
+              "get": [ "chapter" ],
+              "start": "C: {{ featurenomangle 0 }}",
+              "end": ""
+            },
             "token": {
                 "get": [ "surface" ],
                 "start": "{{ featurenomangle 0 }}",
