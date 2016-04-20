@@ -47,7 +47,6 @@ $ `brew install android-sdk`
 `export ANDROID_NDK=/usr/local/Cellar/android-ndk/r11b`
 
 
-
 # App Dependencies
 $ `npm install`
 
