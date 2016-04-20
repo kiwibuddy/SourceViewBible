@@ -7,9 +7,9 @@
               "end": "\"),",
             },
             "token": {
-                "get": [ "surface" ],
-                "start": "{{ featurenomangle 0 }}",
-                "end": " "
+                "get": [ "pre", "surface", "post" ],
+                "start": "{{ featurenomangle 0 }}{{ featurenomangle 1 }}{{ featurenomangle 2 }}",
+                "end": ""
             }
         },
         "priority_list": [
