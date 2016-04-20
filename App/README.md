@@ -44,7 +44,7 @@ $ `brew install android-sdk`
 ## Add Android NDK and SDK to ~/.bash_profile
 `export ANDROID_HOME=/usr/local/opt/android-sdk`
 
-`export ANDROID_NDK=/usr/local/Cellar/android-ndk/r10e`
+`export ANDROID_NDK=/usr/local/Cellar/android-ndk/r11b`
 
 
 
