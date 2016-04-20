@@ -23,6 +23,20 @@ $ `brew install watchman`
 ## Install Flow
 $ `brew install flow`
 
+## Install Gradle
+$ `brew install gradle`
+
+## Install Android NDK
+$ `brew install android-ndk`
+
+## Install Android SDK
+$ `brew install android-sdk`
+
+## Add Android NDK and SDK to ~/.bash_profile
+`export ANDROID_HOME=/usr/local/opt/android-sdk`
+
+`export ANDROID_NDK=/usr/local/Cellar/android-ndk/r10e`
+
 ## Install React Native
 $ `npm install -g react-native-cli`
 
