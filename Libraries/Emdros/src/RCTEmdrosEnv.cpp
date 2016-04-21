@@ -13,6 +13,7 @@ void Java_com_sourceviewbible_emdros_Emdros_connect(JNIEnv *env, jobject obj) {
   eBackendKind backend_kind = kBPT;
   std::string password = "";
 
+  EmdrosEnv *emdrosEnv;
   try {
     EmdrosEnv *emdrosEnv = new EmdrosEnv(output_kind, kCSUTF8, hostname, user, password, initial_db, backend_kind);
     if (emdrosEnv->connectionOk() == true) {
@@ -20,18 +21,18 @@ void Java_com_sourceviewbible_emdros_Emdros_connect(JNIEnv *env, jobject obj) {
     } else {
       std::cerr << "Not connected :(";
     }
-  } catch (EmdrosException e) {
-      std::cerr << "ERROR: EmdrosException (Emdros error)..." << e.what() << std::endl;
   } catch (EMdFDBException e) {
       std::cerr << "ERROR: EMdFDBException (Database error)..." << std::endl;
-      std::cerr << _emdrosEnv->getDBError() << std::endl;
-      std::cerr << _emdrosEnv->getCompilerError() << std::endl;
+      std::cerr << emdrosEnv->getDBError() << std::endl;
+      std::cerr << emdrosEnv->getCompilerError() << std::endl;
   } catch (BadMonadsException e) {
       std::cerr << "BadMonadsException caught.  Program aborted." << std::endl;
   } catch (WrongCharacterSetException e) {
       std::cerr << "WrongCharacterSetException caught.  Program aborted." << std::endl;
   } catch (EMdFOutputException e) {
       std::cerr << "EMdFOutputException caught.  Program aborted." << std::endl;
+  } catch (EmdrosException e) {
+      std::cerr << "ERROR: EmdrosException (Emdros error)..." << e.what() << std::endl;
   } catch (...) {
       std::cerr << "Unknown exception occurred.  Program aborted." << std::endl;
   }
