@@ -12,4 +12,8 @@ public class Emdros {
   }
 
   public native void connect();
+
+  static {
+      System.loadLibrary("Emdros");
+  }
 }

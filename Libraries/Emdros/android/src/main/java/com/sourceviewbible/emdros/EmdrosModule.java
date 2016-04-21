@@ -30,6 +30,8 @@ public class EmdrosModule extends ReactContextBaseJavaModule {
   // Javascript API
   @ReactMethod
   public void open(ReadableMap options, Promise promise) {
+      Emdros emdros = Emdros(this.createHashMap(options));
+      emdros.connect();
       promise.resolve(null);
   }
 
@@ -42,13 +44,13 @@ public class EmdrosModule extends ReactContextBaseJavaModule {
         return map;
     }
 
-    private Map<String, String> createHashMap(ReadableMap v) {
-        Map<String, String> map = new HashMap<String, String>();
-        ReadableMapKeySetIterator it = v.keySetIterator();
-        while (it.hasNextKey()) {
-          String key = it.nextKey();
-          map.put(key, v.getString(key));
-        }
-        return map;
-    }
+  private Map<String, String> createHashMap(ReadableMap v) {
+      Map<String, String> map = new HashMap<String, String>();
+      ReadableMapKeySetIterator it = v.keySetIterator();
+      while (it.hasNextKey()) {
+        String key = it.nextKey();
+        map.put(key, v.getString(key));
+      }
+      return map;
+  }
 }
