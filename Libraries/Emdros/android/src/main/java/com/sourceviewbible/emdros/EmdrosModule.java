@@ -17,6 +17,8 @@ import android.util.Log;
 import java.util.Map;
 import java.util.HashMap;
 
+import com.sourceviewbible.emdros.Endros;
+
 public class EmdrosModule extends ReactContextBaseJavaModule {
   public EmdrosModule(ReactApplicationContext reactContext) {
     super(reactContext);
