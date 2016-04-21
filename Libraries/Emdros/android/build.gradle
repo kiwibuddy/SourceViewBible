@@ -8,14 +8,24 @@ buildscript {
     }
 }
 
+apply plugin: 'com.android.library'
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
 
-    sourceSets {
-        main {
-            jni.srcDirs = []
-        }
+    sourceSets.main {
+        jniLibs.srcDir 'src/main/libs' //set libs as .so's location instead of jniLibs
+        jni.srcDirs = [] //disable automatic ndk-build call with auto-generated Android.mk
+    }
+
+    // call regular ndk-build(.cmd) script from app directory
+    task ndkBuild(type: Exec) {
+        commandLine 'ndk-build', '-C', file('src/main').absolutePath
+    }
+
+    tasks.withType(JavaCompile) {
+        compileTask -> compileTask.dependsOn ndkBuild
     }
 
     defaultConfig {
@@ -25,14 +35,6 @@ android {
         versionName "1.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
-        }
-    }
-    splits {
-        abi {
-            reset()
-            enable enableSeparateBuildPerCPUArchitecture
-            universalApk false  // If true, also generate a universal APK
-            include "armeabi-v7a", "x86"
         }
     }
     lintOptions {
@@ -45,4 +47,5 @@ repositories {
 }
 
 dependencies {
+    compile 'com.facebook.react:react-native:0.20.+'
 }
