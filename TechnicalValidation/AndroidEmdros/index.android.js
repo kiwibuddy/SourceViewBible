@@ -17,6 +17,14 @@ class AndroidEmdros extends Component {
   componentDidMount() {
     Emdros.open({name: "sourceview.bpt"}).then((emdros) => {
       console.log("Database opened!" + emdros);
+
+      let options = {stylesheet: "STYLESHEET"};
+      emdros.string(1,10500, options).then((result) => {
+        // let foo = 'React.createElement(ScrollView, {}, ' + result.slice(0, -1) + ')';
+        console.log("String:" + result);
+      }).catch((error) => {
+        console.log("Error getting string " + error);
+      });
     }).catch((error) => {
       console.log(error);
     });

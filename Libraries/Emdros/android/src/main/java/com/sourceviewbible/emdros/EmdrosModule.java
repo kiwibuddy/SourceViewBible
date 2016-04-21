@@ -41,6 +41,7 @@ public class EmdrosModule extends ReactContextBaseJavaModule {
     } else {
       emdros = new Emdros(this.createHashMap(options));
       emdros.connect();
+      this.openedDatabases.put(name, emdros);
       promise.resolve(null);
     }
   }
@@ -48,8 +49,10 @@ public class EmdrosModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void string(ReadableMap options, Promise promise) {
     String name = options.getString("name");
+    long from = options.getInt("from");
+    long to = options.getInt("to");
     Emdros emdros = this.openedDatabases.get(name);
-    String string = emdros.string(1, 10000, this.createHashMap(options));
+    String string = emdros.string(from, to, this.createHashMap(options));
     promise.resolve(string);
   }
 

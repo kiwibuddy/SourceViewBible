@@ -21,7 +21,7 @@ LOCAL_SRC_FILES := \
 				../../../../src/com_sourceviewbible_emdros_Emdros.cpp
 LOCAL_CPPFLAGS := -DUSE_SYSTEM_SQLITE3=0 -DTHREADSAFE=1
 LOCAL_CFLAGS := -DTHREADSAFE=1
-LOCAL_LDLIBS := -lz
+LOCAL_LDLIBS := -lz -llog
 LOCAL_CPP_FEATURES += exceptions
 LOCAL_SHARED_LIBRARIES := sqlite3
 include $(BUILD_SHARED_LIBRARY)

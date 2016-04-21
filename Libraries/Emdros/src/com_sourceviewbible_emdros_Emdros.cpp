@@ -4,6 +4,10 @@
 #include "harvest.h"
 #include <fstream>
 
+#include <android/log.h>
+#define LOG_TAG "Emdros"
+#define LOGV(LOG_TAG, ...) __android_log_print(ANDROID_LOG_VERBOSE, LOG_TAG, __VA_ARGS__)
+
 jfieldID getEmdrosEnvField(JNIEnv *env, jobject obj)
 {
     jclass c = env->GetObjectClass(obj);
@@ -37,9 +41,9 @@ void Java_com_sourceviewbible_emdros_Emdros_connect(JNIEnv *env, jobject obj) {
   try {
     emdrosEnv = new EmdrosEnv(output_kind, kCSUTF8, hostname, user, password, initial_db, backend_kind);
     if (emdrosEnv->connectionOk() == true) {
-      std::cerr << "Connected!!!! :-)";
+      LOGV("Connected!!!! :-)");
     } else {
-      std::cerr << "Not connected :(";
+      LOGV("Not connected :(");
     }
     setEmdrosEnv(env, obj, emdrosEnv);
   } catch (EMdFDBException e) {
