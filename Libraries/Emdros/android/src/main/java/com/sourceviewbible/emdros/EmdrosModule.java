@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class EmdrosModule extends ReactContextBaseJavaModule {
-  private Map<String, Object> openedDatabases;
+  private Map<String, Emdros> openedDatabases;
 
   public EmdrosModule(ReactApplicationContext reactContext) {
     super(reactContext);
