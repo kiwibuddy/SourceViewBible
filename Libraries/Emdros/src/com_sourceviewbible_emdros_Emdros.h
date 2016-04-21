@@ -15,6 +15,14 @@ extern "C" {
 JNIEXPORT void JNICALL Java_com_sourceviewbible_emdros_Emdros_connect
   (JNIEnv *, jobject);
 
+/*
+ * Class:     com_sourceviewbible_emdros_Emdros
+ * Method:    dispose
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_sourceviewbible_emdros_Emdros_dispose
+  (JNIEnv *, jobject);
+
 #ifdef __cplusplus
 }
 #endif

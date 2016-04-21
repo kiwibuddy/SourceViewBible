@@ -32,7 +32,7 @@ public class EmdrosModule extends ReactContextBaseJavaModule {
   // Javascript API
   @ReactMethod
   public void open(ReadableMap options, Promise promise) {
-    string name = options.get("name");
+    String name = options.getString("name");
     Emdros emdros = this.openedDatabases.get(name);
 
     if (emdros) {
@@ -46,7 +46,7 @@ public class EmdrosModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void string(ReadableMap options, Promise promise) {
-    string name = options.get("name");
+    String name = options.getString("name");
     Emdros emdros = this.openedDatabases.get(name);
     promise.resolve(null);
   }

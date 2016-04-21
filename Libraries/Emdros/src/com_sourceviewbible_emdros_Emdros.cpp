@@ -58,3 +58,9 @@ void Java_com_sourceviewbible_emdros_Emdros_connect(JNIEnv *env, jobject obj) {
       std::cerr << "Unknown exception occurred.  Program aborted." << std::endl;
   }
 }
+
+void Java_com_sourceviewbible_emdros_Emdros_dispose(JNIEnv *env, jobject obj) {
+  EmdrosEnv *emdrosEnv = getEmdrosEnv(env, obj);
+  setEmdrosEnv(env, obj, 0);
+  delete emdrosEnv;
+}
