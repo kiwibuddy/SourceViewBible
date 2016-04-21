@@ -17,7 +17,11 @@ public class EmdrosEnv {
 
   static {
     Log.v("Emdros", "static");
-    System.loadLibrary("Emdros");
-    Log.v("Emdros", "loadLibrary");
+
+    System.loadLibrary("stlport_shared");
+    Log.v("Emdros", "loaded stlport_shared");
+
+    System.loadLibrary("EmdrosEnv");
+    Log.v("Emdros", "loaded EmdrosEnv");
   }
 }

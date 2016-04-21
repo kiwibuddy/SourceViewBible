@@ -32,7 +32,9 @@ public class EmdrosModule extends ReactContextBaseJavaModule {
   public void open(ReadableMap options, Promise promise) {
       Log.v("Emdros", "open: " + options.toString());
       EmdrosEnv emdros = new EmdrosEnv(this.createHashMap(options));
+      Log.v("Emdros", "Trying to connect");
       emdros.connect();
+      Log.v("Emdros", "Connect called");
       promise.resolve(null);
   }
 
