@@ -64,7 +64,7 @@ void Java_com_sourceviewbible_emdros_Emdros_string(JNIEnv *, jobject, jlong, jlo
 }
 
 void Java_com_sourceviewbible_emdros_Emdros_dispose(JNIEnv *env, jobject obj) {
-  EmdrosEnv emdrosEnv = getEmdrosEnv(env, obj);
-  setEmdrosEnv(env, obj, 0);
-  delete emdrosEnv;
+  // EmdrosEnv emdrosEnv = getEmdrosEnv(env, obj);
+  // setEmdrosEnv(env, obj, 0);
+  // delete emdrosEnv;
 }
