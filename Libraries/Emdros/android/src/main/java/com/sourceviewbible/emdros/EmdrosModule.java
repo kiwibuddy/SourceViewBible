@@ -17,8 +17,6 @@ import android.util.Log;
 import java.util.Map;
 import java.util.HashMap;
 
-import com.sourceviewbible.emdros.Endros;
-
 public class EmdrosModule extends ReactContextBaseJavaModule {
   public EmdrosModule(ReactApplicationContext reactContext) {
     super(reactContext);
@@ -32,7 +30,7 @@ public class EmdrosModule extends ReactContextBaseJavaModule {
   // Javascript API
   @ReactMethod
   public void open(ReadableMap options, Promise promise) {
-      Emdros emdros = Emdros(this.createHashMap(options));
+      Emdros emdros = new Emdros(this.createHashMap(options));
       emdros.connect();
       promise.resolve(null);
   }
