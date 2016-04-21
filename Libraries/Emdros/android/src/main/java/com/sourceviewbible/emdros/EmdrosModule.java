@@ -22,6 +22,7 @@ public class EmdrosModule extends ReactContextBaseJavaModule {
 
   public EmdrosModule(ReactApplicationContext reactContext) {
     super(reactContext);
+    this.openedDatabases = new HashMap<String, Emdros>();
   }
 
   @Override
