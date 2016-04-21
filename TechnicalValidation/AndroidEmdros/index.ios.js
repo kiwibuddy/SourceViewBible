@@ -12,7 +12,17 @@ import React, {
   View
 } from 'react-native';
 
+import Emdros from 'react-native-emdros';
+
 class AndroidEmdros extends Component {
+  componentDidMount() {
+    Emdros.open({name: "sourceview.bpt"}).then((emdros) => {
+      console.log("Database opened!" + emdros);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
