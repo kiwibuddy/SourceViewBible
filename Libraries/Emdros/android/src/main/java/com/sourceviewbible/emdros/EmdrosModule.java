@@ -49,8 +49,8 @@ public class EmdrosModule extends ReactContextBaseJavaModule {
   public void string(ReadableMap options, Promise promise) {
     String name = options.getString("name");
     Emdros emdros = this.openedDatabases.get(name);
-    emdros.string(1, 10000, this.createHashMap(options));
-    promise.resolve(null);
+    String string = emdros.string(1, 10000, this.createHashMap(options));
+    promise.resolve(string);
   }
 
   // Private

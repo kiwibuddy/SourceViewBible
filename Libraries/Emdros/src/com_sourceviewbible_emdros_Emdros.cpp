@@ -59,8 +59,10 @@ void Java_com_sourceviewbible_emdros_Emdros_connect(JNIEnv *env, jobject obj) {
   }
 }
 
-void Java_com_sourceviewbible_emdros_Emdros_string(JNIEnv *, jobject, jlong, jlong, jobject) {
-
+jstring Java_com_sourceviewbible_emdros_Emdros_string(JNIEnv *env, jobject obj, jlong from, jlong to, jobject options) {
+  EmdrosEnv *emdrosEnv = getEmdrosEnv<EmdrosEnv>(env, obj);
+  std::string string = "Hello World";
+  return env->NewStringUTF(string.c_str());
 }
 
 void Java_com_sourceviewbible_emdros_Emdros_dispose(JNIEnv *env, jobject obj) {

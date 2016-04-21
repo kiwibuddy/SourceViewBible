@@ -18,9 +18,9 @@ JNIEXPORT void JNICALL Java_com_sourceviewbible_emdros_Emdros_connect
 /*
  * Class:     com_sourceviewbible_emdros_Emdros
  * Method:    string
- * Signature: (JJLjava/util/Map;)V
+ * Signature: (JJLjava/util/Map;)Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_com_sourceviewbible_emdros_Emdros_string
+JNIEXPORT jstring JNICALL Java_com_sourceviewbible_emdros_Emdros_string
   (JNIEnv *, jobject, jlong, jlong, jobject);
 
 /*
