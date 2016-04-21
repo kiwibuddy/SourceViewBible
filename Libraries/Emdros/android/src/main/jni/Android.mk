@@ -8,7 +8,7 @@ LOCAL_SRC_FILES := \
         ../../../../src/emdros_amalgamation.cpp \
         ../../../../src/bucket.cpp \
         ../../../../src/harvest.cpp \
-				../../../../src/RCTEmdrosEnv.cpp
+				../../../../src/com_sourceview_bible_emdros_Emdros.cpp
 
 LOCAL_CPPFLAGS := -DUSE_SYSTEM_SQLITE3=0  -DTHREADSAFE=1
 LOCAL_CFLAGS := -DTHREADSAFE=1
