@@ -37,7 +37,7 @@ public class MainActivity extends ReactActivity {
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
-            new EmdrosPackage() // include Emdros in getPackages
+            new EmdrosReactPackage() // include Emdros in getPackages
         );
     }
 }
