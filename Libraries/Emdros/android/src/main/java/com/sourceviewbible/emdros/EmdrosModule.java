@@ -18,6 +18,8 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class EmdrosModule extends ReactContextBaseJavaModule {
+  private Map<String, Object> openedDatabases;
+
   public EmdrosModule(ReactApplicationContext reactContext) {
     super(reactContext);
   }
@@ -30,12 +32,23 @@ public class EmdrosModule extends ReactContextBaseJavaModule {
   // Javascript API
   @ReactMethod
   public void open(ReadableMap options, Promise promise) {
-      Log.v("Emdros", "open: " + options.toString());
-      Emdros emdros = new Emdros(this.createHashMap(options));
-      Log.v("Emdros", "Trying to connect");
+    string name = options.get("name");
+    Emdros emdros = this.openedDatabases.get(name);
+
+    if (emdros) {
+      promise.resolve(nil);
+    } else {
+      emdros = new Emdros(this.createHashMap(options));
       emdros.connect();
-      Log.v("Emdros", "Connect called");
       promise.resolve(null);
+    }
+  }
+
+  @ReactMethod
+  public void string(ReadableMap options, Promise promise) {
+    string name = options.get("name");
+    Emdros emdros = this.openedDatabases.get(name);
+    promise.resolve(null);
   }
 
   // Private

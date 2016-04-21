@@ -25,7 +25,7 @@ void setEmdrosEnv(JNIEnv *env, jobject obj, T *t)
     env->SetLongField(obj, getEmdrosEnvField(env, obj), emdrosEnv);
 }
 
-void Java_com_sourceviewbible_emdros_EmdrosEnv_connect(JNIEnv *env, jobject obj) {
+void Java_com_sourceviewbible_emdros_Emdros_connect(JNIEnv *env, jobject obj) {
   eOutputKind output_kind = kOKConsole;
   std::string initial_db("file:///android_asset/sourceview.bpt");
   std::string hostname("localhost");
