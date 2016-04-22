@@ -100,7 +100,8 @@
                                     countInSheaf(sheaf, bucketMap);
                                     [[OCDBenchmark sharedBenchmark] end:[NSString stringWithFormat:@"Finished countInSheaf"]];
 
-                                    result = [self dictionaryWithBucketMap:bucketMap];
+                                    NSError *error = nil;
+                                    result = [self dictionaryWithBucketMap:bucketMap error:&error];
                                     delete bucketMap;
                                 }
                             }
@@ -191,8 +192,8 @@
 }
 
 #pragma mark - Private
-- (NSDictionary *)dictionaryWithBucketMap:(MonadRange2BucketMap *)bucketMap {
+- (NSDictionary *)dictionaryWithBucketMap:(MonadRange2BucketMap *)bucketMap error:(NSError **)error {
     std::string json = bucketMap->getJSON();
-    return [NSJSONSerialization JSONObjectWithData:[[NSString stringWithUTF8String:json.c_str()] dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+    return [NSJSONSerialization JSONObjectWithData:[[NSString stringWithUTF8String:json.c_str()] dataUsingEncoding:NSUTF8StringEncoding] options:0 error:error];
 }
 @end
