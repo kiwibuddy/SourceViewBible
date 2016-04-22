@@ -11,7 +11,7 @@ public class Emdros {
     this.options = options;
   }
 
-  public native void connect();
+  public native void connect(String databasePath);
   public native String string(long from, long to, String options);
 
   // Only used for cleanup of resources. Not called explicitly

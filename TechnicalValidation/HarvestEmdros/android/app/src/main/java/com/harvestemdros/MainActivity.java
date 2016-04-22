@@ -15,6 +15,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.File;
 
 import android.Manifest;
 import android.app.Activity;
@@ -27,7 +28,6 @@ import android.os.Environment;
 import com.sourceviewbible.emdros.*; // import the Emdros package
 
 public class MainActivity extends ReactActivity {
-
     /**
      * Returns the name of the main component registered from JavaScript.
      * This is used to schedule rendering of the component.
@@ -36,20 +36,15 @@ public class MainActivity extends ReactActivity {
     protected String getMainComponentName() {
         AssetManager assetManager = getAssets();
         try {
-          String out = getFilesDir().toString();
-          Log.v("Emdros", "Internal storage: " + out);
+          String outfilename = getFilesDir().toString() + File.separator + "sourceview.bpt";
+          Log.v("Emdros", "Internal storage: " + outfilename);
 
           String[] files = assetManager.list("");
           for (String filename : files) {
             Log.v("Emdros", "Asset File: " + filename);
           }
 
-          // String intStorageDirectory = getFilesDir().toString();
-          // File folder = new File(intStorageDirectory, "testthreepdf");
-          // folder.mkdirs();
-          //
-          InputStream myinput = assetManager.open("sourceview.bpt");
-          String outfilename = "/data/user/0/com.androidemdros/files/sourceview.bpt";
+          InputStream myinput = assetManager.open("sourceview/datasets/sourceview.bpt");
           OutputStream myoutput = new FileOutputStream(outfilename);
           byte[] buffer = new byte[1024];
           int length;

@@ -1,5 +1,6 @@
 'use strict';
 
+
 let React = require('react-native');
 
 let {

@@ -13,15 +13,19 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReadableMapKeySetIterator;
+
 import android.util.Log;
 import java.util.Map;
 import java.util.HashMap;
+import java.io.File;
 
 public class EmdrosModule extends ReactContextBaseJavaModule {
+  private ReactApplicationContext context;
   private Map<String, Emdros> openedDatabases;
 
   public EmdrosModule(ReactApplicationContext reactContext) {
     super(reactContext);
+    this.context = reactContext;
     this.openedDatabases = new HashMap<String, Emdros>();
   }
 
@@ -34,13 +38,14 @@ public class EmdrosModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void open(ReadableMap options, Promise promise) {
     String name = options.getString("name");
+    String databasePath = this.context.getFilesDir().toString() + File.separator + name;
     Emdros emdros = this.openedDatabases.get(name);
 
     if (emdros != null) {
       promise.resolve(null);
     } else {
       emdros = new Emdros(this.createHashMap(options));
-      emdros.connect();
+      emdros.connect(databasePath);
       this.openedDatabases.put(name, emdros);
       promise.resolve(null);
     }

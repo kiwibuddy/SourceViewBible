@@ -1,9 +1,8 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
+'use strict';
 
-import React, {
+
+let React = require('react-native');
+
   AppRegistry,
   Component,
   StyleSheet,
@@ -12,7 +11,7 @@ import React, {
   TextInput,
   TouchableOpacity,
   View,
-} from 'react-native';
+} = React;
 
 import Emdros from 'react-native-emdros';
 var DB = null;
@@ -60,7 +59,12 @@ class HarvestEmdros extends Component {
 
   render() {
     var activityIndicator = null;
-
+    if (this.state.loading) {
+      // activityIndicator = <ActivityIndicatorIOS
+      //     style={[{marginLeft: 20}]}
+      //     color="white"
+      // />;
+    }
 
     let scripture =  (this.state.data ? eval(this.state.data) : null);
     var text = (scripture ? <View style={styles.container}>{scripture}</View> : null);
