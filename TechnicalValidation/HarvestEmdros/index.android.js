@@ -3,6 +3,7 @@
 
 let React = require('react-native');
 
+let {
   AppRegistry,
   Component,
   StyleSheet,
