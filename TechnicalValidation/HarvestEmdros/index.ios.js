@@ -42,7 +42,7 @@ class HarvestEmdros extends Component {
   queryDatabase() {
     dismissKeyboard();
     this.setState({loading: true});
-    let options = {stylesheet: STYLESHEET};
+    let options = {stylesheet: JSON.stringify(STYLESHEET)};
     DB.string(1,10500, options).then((result) => {
       let foo = 'React.createElement(ScrollView, {}, ' + result.slice(0, -1) + ')';
       // console.log("String:" + foo);

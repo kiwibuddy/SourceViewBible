@@ -12,7 +12,7 @@ public class Emdros {
   }
 
   public native void connect();
-  public native String string(long from, long to, Map<String,String> options);
+  public native String string(long from, long to, String options);
 
   // Only used for cleanup of resources. Not called explicitly
   public native void dispose();

@@ -29,9 +29,20 @@ void setEmdrosEnv(JNIEnv *env, jobject obj, T *t)
     env->SetLongField(obj, getEmdrosEnvField(env, obj), emdrosEnv);
 }
 
+void GetJStringContent(JNIEnv *env, jstring AStr, std::string &ARes) {
+  if (!AStr) {
+    ARes.clear();
+    return;
+  }
+
+  const char *s = env->GetStringUTFChars(AStr,NULL);
+  ARes=s;
+  env->ReleaseStringUTFChars(AStr,s);
+}
+
 void Java_com_sourceviewbible_emdros_Emdros_connect(JNIEnv *env, jobject obj) {
   eOutputKind output_kind = kOKConsole;
-  std::string initial_db("file:///android_asset/sourceview.bpt");
+  std::string initial_db("/data/user/0/com.harvestemdros/files/sourceview.bpt");
   std::string hostname("localhost");
   std::string user("emdf");
   eBackendKind backend_kind = kBPT;
@@ -63,10 +74,17 @@ void Java_com_sourceviewbible_emdros_Emdros_connect(JNIEnv *env, jobject obj) {
   }
 }
 
-jstring Java_com_sourceviewbible_emdros_Emdros_string(JNIEnv *env, jobject obj, jlong from, jlong to, jobject options) {
+jstring Java_com_sourceviewbible_emdros_Emdros_string(JNIEnv *env, jobject obj, jlong from, jlong to, jstring jstylesheet) {
   EmdrosEnv *emdrosEnv = getEmdrosEnv<EmdrosEnv>(env, obj);
-  std::string string = "Hello World";
-  return env->NewStringUTF(string.c_str());
+
+  std::string stylesheet;
+  GetJStringContent(env, jstylesheet, stylesheet);
+
+  std::string dbName("");
+  std::string stylesheetName("base");
+  bool bResult;
+  std::string rendered_objects = render_objects(emdrosEnv, dbName, stylesheet, stylesheetName, (long)from, (long)to, bResult);
+  return env->NewStringUTF(rendered_objects.c_str());
 }
 
 void Java_com_sourceviewbible_emdros_Emdros_dispose(JNIEnv *env, jobject obj) {

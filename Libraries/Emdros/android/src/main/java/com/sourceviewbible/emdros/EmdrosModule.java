@@ -17,10 +17,6 @@ import android.util.Log;
 import java.util.Map;
 import java.util.HashMap;
 
-
-// import android.content.res.AssetManager;
-
-
 public class EmdrosModule extends ReactContextBaseJavaModule {
   private Map<String, Emdros> openedDatabases;
 
@@ -40,10 +36,6 @@ public class EmdrosModule extends ReactContextBaseJavaModule {
     String name = options.getString("name");
     Emdros emdros = this.openedDatabases.get(name);
 
-    // AssetManager assetManager = getAssets();
-    // String[] files = assetManager.list("");
-    // Log.v("Emdros", files.toString());
-
     if (emdros != null) {
       promise.resolve(null);
     } else {
@@ -59,8 +51,12 @@ public class EmdrosModule extends ReactContextBaseJavaModule {
     String name = options.getString("name");
     long from = options.getInt("from");
     long to = options.getInt("to");
+    String stylesheet = options.getString("stylesheet");
+
+    Log.v("Emdros", "Stylesheet: " + stylesheet);
+
     Emdros emdros = this.openedDatabases.get(name);
-    String string = emdros.string(from, to, null);
+    String string = emdros.string(from, to, stylesheet);
     promise.resolve(string);
   }
 
