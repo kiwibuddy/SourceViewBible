@@ -58,8 +58,6 @@ public class EmdrosModule extends ReactContextBaseJavaModule {
     long to = options.getInt("to");
     String stylesheet = options.getString("stylesheet");
 
-    Log.v("Emdros", "Stylesheet: " + stylesheet);
-
     Emdros emdros = this.openedDatabases.get(name);
     String string = emdros.string(from, to, stylesheet);
     promise.resolve(string);
