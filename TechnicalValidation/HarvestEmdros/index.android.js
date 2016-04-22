@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   scripture: {
-    fontSize: 20
+    fontSize: 36
   },
   Red: {
     color: "#ff0000",
