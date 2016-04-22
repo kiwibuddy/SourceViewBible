@@ -6,7 +6,7 @@
 
 #include <android/log.h>
 #define LOG_TAG "Emdros"
-#define LOGV(LOG_TAG, ...) __android_log_print(ANDROID_LOG_VERBOSE, LOG_TAG, __VA_ARGS__)
+#define LOGV(...) __android_log_print(ANDROID_LOG_VERBOSE, LOG_TAG, __VA_ARGS__)
 
 jfieldID getEmdrosEnvField(JNIEnv *env, jobject obj)
 {
@@ -41,9 +41,9 @@ void Java_com_sourceviewbible_emdros_Emdros_connect(JNIEnv *env, jobject obj) {
   try {
     emdrosEnv = new EmdrosEnv(output_kind, kCSUTF8, hostname, user, password, initial_db, backend_kind);
     if (emdrosEnv->connectionOk() == true) {
-      LOGV("Connected!!!! :-)");
+      LOGV("Connected!!!!");
     } else {
-      LOGV("Not connected :(");
+      LOGV("Not connected: %s", emdrosEnv->getDBError().c_str());
     }
     setEmdrosEnv(env, obj, emdrosEnv);
   } catch (EMdFDBException e) {
@@ -70,7 +70,7 @@ jstring Java_com_sourceviewbible_emdros_Emdros_string(JNIEnv *env, jobject obj, 
 }
 
 void Java_com_sourceviewbible_emdros_Emdros_dispose(JNIEnv *env, jobject obj) {
-  // EmdrosEnv emdrosEnv = getEmdrosEnv(env, obj);
+  // EmdrosEnv *emdrosEnv = getEmdrosEnv<EmdrosEnv>(env, obj);
   // setEmdrosEnv(env, obj, 0);
   // delete emdrosEnv;
 }
