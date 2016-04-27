@@ -87,7 +87,7 @@ public class MainActivity extends ReactActivity {
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
-            new CodePush("SfVCJt0E2BcS4kX9ZciwgFNGXWbIE1QaILXx-", this, BuildConfig.DEBUG),
+            new CodePush("Vnwt_2oUr7mjLXFUf8NEOR7q0EszE1QaILXx-", this, BuildConfig.DEBUG),
             new EmdrosReactPackage() // include Emdros in getPackages
         );
     }
