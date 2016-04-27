@@ -4,6 +4,8 @@ import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 
+import com.microsoft.codepush.react.CodePush;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -85,7 +87,13 @@ public class MainActivity extends ReactActivity {
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
+            new CodePush("SfVCJt0E2BcS4kX9ZciwgFNGXWbIE1QaILXx-", this, BuildConfig.DEBUG),
             new EmdrosReactPackage() // include Emdros in getPackages
         );
+    }
+
+    @Override
+    protected String getJSBundleFile() {
+        return CodePush.getBundleUrl();
     }
 }

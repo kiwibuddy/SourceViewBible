@@ -20,6 +20,8 @@ var DB = null;
 let dismissKeyboard = require('dismissKeyboard');
 let STYLESHEET = require('./emdros.json');
 
+import codePush from "react-native-code-push";
+
 class HarvestEmdros extends Component {
   constructor() {
     super();
@@ -29,6 +31,10 @@ class HarvestEmdros extends Component {
       log: null,
       query: 'Amo'
     };
+  }
+
+  componentDidMount() {
+    codePush.sync({installMode: codePush.InstallMode.ON_NEXT_RESUME });
   }
 
   openDatabase() {
