@@ -26,6 +26,9 @@ $ `brew install flow`
 ## Install React Native
 $ `npm install -g react-native-cli`
 
+## Install React Native Package Manager
+$ `npm install -g rnpm`
+
 # Android
   * http://facebook.github.io/react-native/docs/android-setup.html#content
 
