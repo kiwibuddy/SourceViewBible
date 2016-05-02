@@ -1,6 +1,6 @@
 'use strict';
 
 import {AppRegistry} from 'react-native';
-import SourceViewBibleApp from './app/SourceViewBibleApp.js';
+import SourceViewBible from './app/SourceViewBible';
 
-AppRegistry.registerComponent('SourceViewBible', () => SourceViewBibleApp);
+AppRegistry.registerComponent('SourceViewBible', () => SourceViewBible);
