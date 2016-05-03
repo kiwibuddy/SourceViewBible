@@ -121,11 +121,13 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'center',
       borderBottomWidth: 0.5,
+      borderBottomColor: '#B2B2B2',
   },
   toolbarButton: {
       color: '#CF1E00',
       textAlign: 'center',
-      flex: 1
+      flex: 1,
+      fontWeight: 'bold',
   },
   mainContainer: {
       flex: 1
