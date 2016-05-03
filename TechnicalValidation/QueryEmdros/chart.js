@@ -23,14 +23,14 @@ import Svg,{
     Stop
 } from 'react-native-art-svg';
 
-const barItemWidth = 20;
+const barItemWidth = 6;
 const chartHeight = 200;
 
 const colors = {
-  "Red": "#ff0000",
-  "Black": "#000000",
-  "Green": "#00fc00",
-  "Blue": "#0000ff"
+  "Red": "#FC3D39",
+  "Black": "#333333",
+  "Green": "#4CDA65",
+  "Blue": "#218AFF"
 }
 
 export default class Chart extends Component {

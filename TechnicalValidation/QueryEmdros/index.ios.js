@@ -115,14 +115,15 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   toolbar: {
-      backgroundColor: '#51c04d',
+      backgroundColor: '#F8F8F8',
       paddingTop: 30,
       paddingBottom: 10,
       flexDirection: 'row',
       justifyContent: 'center',
+      borderBottomWidth: 0.5,
   },
   toolbarButton: {
-      color: 'blue',
+      color: '#CF1E00',
       textAlign: 'center',
       flex: 1
   },
