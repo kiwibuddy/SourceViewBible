@@ -43,7 +43,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onButtonPress: () => {
-      dispatch(navigatePush('books'));
+      dispatch(navigatePush({
+        key: 'books',
+        title: 'Books'
+      }));
     }
   };
 }

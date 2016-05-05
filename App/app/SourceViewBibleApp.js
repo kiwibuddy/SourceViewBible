@@ -116,7 +116,7 @@ export default connect(
   }),
   dispatch => ({
     onNavigate: (action) => {
-      if (action.type && (action.type === NavigationRootContainer.getBackAction().type || action.type === NavigationCard.CardStackResponder.Action.BACK.type)) {
+      if (action.type && (action.type === NavigationRootContainer.getBackAction().type || action.type === NavigationCard.CardStackPanResponder.Actions.BACK.type)) {
         dispatch(navigatePop());
       } else {
         dispatch(navigatePush(action));
