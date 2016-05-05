@@ -3,12 +3,10 @@
 
 import React, { Component } from 'react';
 import ReactNative, { View, Text, NavigationExperimental, StyleSheet } from 'react-native';
-
+const Color = require('../common/colors');
 import SegmentedControl from '../common/segmented-control';
 
-const {
-  Header: NavigationHeader
-} = NavigationExperimental;
+const { Header: NavigationHeader } = NavigationExperimental;
 
 import { connect } from 'react-redux';
 
@@ -18,6 +16,7 @@ class Books extends Component {
       <View style={styles.container}>
         <SegmentedControl
           style={styles.segmentedControl}
+          tintColor={Color.tintColor}
           values={['Textual', 'Alphabetical', 'Principality']}
         />
       </View>
