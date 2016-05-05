@@ -2,5 +2,5 @@
 'use strict';
 
 module.exports = {
-  tintColor: '#ff0000'
+  tintColor: '#cf1e00'
 };
