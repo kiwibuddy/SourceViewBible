@@ -11,7 +11,7 @@ class Discover extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Hello</Text>
+        <Text style={styles.title}>Hello</Text>
       </View>
     );
   }
@@ -20,10 +20,16 @@ class Discover extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'red',
+    backgroundColor: 'blue',
     justifyContent: 'center',
     alignItems: 'center'
-  }
+  },
+	title: {
+		fontSize: 24,
+		fontWeight: '500',
+		color: '#ffffff',
+		marginBottom: 30
+	}
 });
 
 const mapStateToProps = (state) => {

@@ -53,7 +53,7 @@ class SourceViewBibleApp extends Component {
       return (
         <NavigationAnimatedView
           navigationState={navigationState}
-          style={styles.outerContainer}
+          style={styles.container}
           onNavigate={onNavigate}
           renderOverlay={this._renderHeader}
           renderScene={this._renderCard}
@@ -102,7 +102,7 @@ class SourceViewBibleApp extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   }
 });
 
