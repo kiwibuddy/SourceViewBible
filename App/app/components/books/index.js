@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff'
   },
   segmentedControl: {
-    marginTop: NavigationHeader.HEIGHT
+    marginTop: NavigationHeader.HEIGHT+8,
+    marginHorizontal: 8,
   }
 });
 
