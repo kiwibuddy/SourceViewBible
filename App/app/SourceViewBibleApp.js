@@ -13,6 +13,8 @@ import {
   PropTypes
 } from 'react-native';
 
+import BackAndroid from 'BackAndroid';
+
 import { navigatePush, navigatePop } from './actions';
 
 import Discover from './components/discover';
@@ -38,6 +40,7 @@ class SourceViewBibleApp extends Component {
   _renderHeader: any;
   _renderScene: any;
   _renderTitleComponent: any;
+  _handlers: (any);
 
   constructor(props: any) {
     super(props);
@@ -46,6 +49,42 @@ class SourceViewBibleApp extends Component {
     this._renderHeader = this._renderHeader.bind(this);
     this._renderScene = this._renderScene.bind(this);
     this._renderTitleComponent = this._renderTitleComponent.bind(this);
+    this._handlers = [];
+  }
+
+  componentDidMount() {
+    BackAndroid.addEventListener('hardwareBackPress', this._handleBackButton.bind(this));
+  }
+
+  componentWillUnmount() {
+    BackAndroid.removeEventListener('hardwareBackPress', this._handleBackButton.bind(this));
+  }
+
+  getChildContext() {
+    return {
+      addBackButtonListener: this.addBackButtonListener,
+      removeBackButtonListener: this.removeBackButtonListener,
+    };
+  }
+
+  addBackButtonListener(listener) {
+    this._handlers.push(listener);
+  }
+
+  removeBackButtonListener(listener) {
+    this._handlers = this._handlers.filter((handler) => handler !== listener);
+  }
+
+  _handleBackButton() {
+    for (let i = this._handlers.length - 1; i >= 0; i--) {
+      if (this._handlers[i]()) {
+        return true;
+      }
+    }
+
+    const { onNavigate } = this.props;
+    onNavigate( NavigationRootContainer.getBackAction());
+    return true;
   }
 
   render() {
@@ -103,6 +142,11 @@ class SourceViewBibleApp extends Component {
       }
     }
 }
+
+SourceViewBibleApp.childContextTypes = {
+  addBackButtonListener: React.PropTypes.func,
+  removeBackButtonListener: React.PropTypes.func,
+};
 
 const styles = StyleSheet.create({
   container: {
