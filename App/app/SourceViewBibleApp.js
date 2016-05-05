@@ -15,6 +15,8 @@ import {
 
 import { navigatePush, navigatePop } from './actions';
 
+import Discover from './components/discover';
+
 const {
   AnimatedView: NavigationAnimatedView,
   Card: NavigationCard,
@@ -89,11 +91,11 @@ class SourceViewBibleApp extends Component {
       const { navigationState } = scene;
 
       switch (navigationState.key) {
-        case 'First':
-          return null;
+        case 'discover':
+          return <Discover />;
 
         default:
-
+          return null;
       }
     }
 }
