@@ -13,6 +13,8 @@ import {
   PropTypes
 } from 'react-native';
 
+const Color = require('./components/common/colors');
+
 import BackAndroid from 'BackAndroid';
 
 import { navigatePush, navigatePop } from './actions';
