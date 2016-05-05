@@ -2,7 +2,9 @@
 'use strict';
 
 import React, { Component } from 'react';
-import ReactNative, { View, Text, Platform, SegmentedControlIOS, NavigationExperimental, StyleSheet } from 'react-native';
+import ReactNative, { View, Text, NavigationExperimental, StyleSheet } from 'react-native';
+
+import SegmentedControl from '../common/segmented-control';
 
 const {
   Header: NavigationHeader
@@ -12,16 +14,9 @@ import { connect } from 'react-redux';
 
 class Books extends Component {
   render() {
-    let segmentedControl;
-    if (Platform.OS === 'ios') {
-      segmentedControl = <SegmentedControlIOS
-        style={styles.segmentedControl}
-        values={['Textual', 'Alphabetical', 'Principality']}
-      />
-    }
     return (
       <View style={styles.container}>
-        {segmentedControl}
+        <SegmentedControl style={styles.segmentedControl} />
       </View>
     );
   }
