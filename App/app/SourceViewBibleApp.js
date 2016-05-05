@@ -18,7 +18,7 @@ import BackAndroid from 'BackAndroid';
 import { navigatePush, navigatePop } from './actions';
 
 import Discover from './components/discover';
-import Books from './components/discover/books';
+import Books from './components/books';
 
 const {
   AnimatedView: NavigationAnimatedView,
