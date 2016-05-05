@@ -82,8 +82,13 @@ class SourceViewBibleApp extends Component {
       }
     }
 
-    const { onNavigate } = this.props;
-    onNavigate( NavigationRootContainer.getBackAction());
+    const { navigationState, onNavigate } = this.props;
+
+    if (navigationState && navigationState.children[navigationState.children.length - 1].key === 'discover') {
+      return false;
+    }
+
+    onNavigate(NavigationRootContainer.getBackAction());
     return true;
   }
 
