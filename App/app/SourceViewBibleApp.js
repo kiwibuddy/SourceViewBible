@@ -16,6 +16,7 @@ import {
 import { navigatePush, navigatePop } from './actions';
 
 import Discover from './components/discover';
+import Books from './components/discover/books';
 
 const {
   AnimatedView: NavigationAnimatedView,
@@ -94,6 +95,9 @@ class SourceViewBibleApp extends Component {
         case 'discover':
           return <Discover />;
 
+        case 'books':
+          return <Books />;
+
         default:
           return null;
       }
@@ -112,7 +116,7 @@ export default connect(
   }),
   dispatch => ({
     onNavigate: (action) => {
-      if (action.type && (action.type === NavigationRootContainer.getBackAction().type || action.type === NavigationCard.CardStackResponder.Actions.BACK.type)) {
+      if (action.type && (action.type === NavigationRootContainer.getBackAction().type || action.type === NavigationCard.CardStackResponder.Action.BACK.type)) {
         dispatch(navigatePop());
       } else {
         dispatch(navigatePush(action));

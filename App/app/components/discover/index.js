@@ -2,7 +2,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 
 import { navigatePush } from '../../actions';
@@ -11,7 +11,9 @@ class Discover extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Hello</Text>
+        <TouchableOpacity onPress={this.props.onButtonPress}>
+          <Text style={styles.title}>Hello</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -41,7 +43,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onButtonPress: () => {
-      dispatch(navigatePush('Foo'));
+      dispatch(navigatePush('books'));
     }
   };
 }

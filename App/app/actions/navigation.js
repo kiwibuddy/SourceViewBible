@@ -1,6 +1,6 @@
 'use strict';
 
-export function navigationPush(state) {
+export function navigatePush(state) {
   state = typeof state === 'string' ? { key: state, title: state } : state;
   return {
     type: 'NAV_PUSH',
