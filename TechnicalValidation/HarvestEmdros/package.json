@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "react": "^0.14.8",
-    "react-native": "^0.24.0",
+    "react-native": "^0.25.1",
     "react-native-code-push": "^1.10.5-beta",
     "react-native-emdros": "file:../../Libraries/Emdros/"
   }
