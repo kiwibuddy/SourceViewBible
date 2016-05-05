@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
   },
   separator: {
-    height: 1,
+    height: StyleSheet.hairlineWidth,
     backgroundColor: '#CCCCCC',
   }
 });
