@@ -3,12 +3,12 @@
 
 import React, { Component } from 'react';
 import ReactNative, { View, Text, ListView, RecyclerViewBackedScrollView, NavigationExperimental, StyleSheet } from 'react-native';
+const { Header: NavigationHeader } = NavigationExperimental;
+import { connect } from 'react-redux';
+
 const Color = require('../common/colors');
 import SegmentedControl from '../common/segmented-control';
-
-const { Header: NavigationHeader } = NavigationExperimental;
-
-import { connect } from 'react-redux';
+import StackedBar from '../common/stacked-bar';
 
 class Books extends Component {
   state: {
@@ -55,6 +55,7 @@ class Books extends Component {
     return (
       <View>
         <Text>{rowData}</Text>
+        <StackedBar style={styles.stackedBar}/>
       </View>
     );
   }
@@ -72,6 +73,9 @@ const styles = StyleSheet.create({
   separator: {
     height: StyleSheet.hairlineWidth,
     backgroundColor: '#CCCCCC',
+  },
+  stackedBar: {
+    height: 4
   }
 });
 
