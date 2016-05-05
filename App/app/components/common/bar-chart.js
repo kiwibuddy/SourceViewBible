@@ -5,14 +5,12 @@ import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 
 class BarChart extends Component {
-  props: {
-    style: any;
-  };
+
 
   render() {
     return (
       <View style={[styles.container, this.props.style]}>
-
+      {this.props.children}
       </View>
     );
   }
@@ -32,8 +30,7 @@ const styles = StyleSheet.create({
   },
   bar: {
     flex: 1,
-    backgroundColor: 'red',
-    height: 2
+    backgroundColor: 'red'
   }
 });
 
