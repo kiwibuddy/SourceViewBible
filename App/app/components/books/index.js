@@ -55,7 +55,7 @@ class Books extends Component {
     return (
       <View>
         <Text>{rowData}</Text>
-        <StackedBarChart style={styles.stackedBarChart} data={null}/>
+        <StackedBarChart style={styles.stackedBarChart} data={[{name: rowData, black: 200, red: 300, green: 100, blue: 40}]}/>
       </View>
     );
   }
