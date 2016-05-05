@@ -13,6 +13,8 @@ import {
   PropTypes
 } from 'react-native';
 
+import { navigatePush, navigatePop } from './actions';
+
 const {
   AnimatedView: NavigationAnimatedView,
   Card: NavigationCard,
