@@ -16,7 +16,10 @@ class Books extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <SegmentedControl style={styles.segmentedControl} />
+        <SegmentedControl
+          style={styles.segmentedControl}
+          values={['Textual', 'Alphabetical', 'Principality']}
+        />
       </View>
     );
   }

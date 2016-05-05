@@ -15,11 +15,7 @@ export default class SegmentedControl extends Component {
 
   _renderIOS() {
     return (
-      <SegmentedControlIOS
-        style={this.props.style}
-        tintColor={this.props.tintColor}
-        values={['Textual', 'Alphabetical', 'Principality']}
-      />
+      <SegmentedControlIOS {...this.props} />
     );
   }
 
