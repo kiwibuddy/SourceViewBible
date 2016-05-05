@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 
 const Color = require('../common/colors');
 import SegmentedControl from '../common/segmented-control';
-import StackedBar from '../common/stacked-bar';
+import StackedBarChart from '../common/stacked-bar-chart';
 
 class Books extends Component {
   state: {
@@ -55,7 +55,7 @@ class Books extends Component {
     return (
       <View>
         <Text>{rowData}</Text>
-        <StackedBar style={styles.stackedBar}/>
+        <StackedBarChart style={styles.stackedBarChart} data={null}/>
       </View>
     );
   }
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     height: StyleSheet.hairlineWidth,
     backgroundColor: '#CCCCCC',
   },
-  stackedBar: {
+  stackedBarChart: {
     height: 2
   }
 });
