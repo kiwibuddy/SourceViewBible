@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#CCCCCC',
   },
   stackedBar: {
-    height: 4
+    height: 2
   }
 });
 
