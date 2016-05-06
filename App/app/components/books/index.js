@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
   separator: {
     height: StyleSheet.hairlineWidth,
     backgroundColor: '#CCCCCC',
+    marginLeft: 8,
   },
   stackedBarChart: {
     height: 2
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexWrap: 'wrap',
     flexDirection: 'row',
-    marginLeft: 8,
+    marginHorizontal: 8,
     paddingVertical: 4,
   },
   leftContainer: {
