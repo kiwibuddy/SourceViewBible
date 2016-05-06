@@ -45,17 +45,25 @@ class Books extends Component {
   }
 
   _renderSectionHeader(sectionData, sectionID) {
-    const title = sectionID === 'old' ? 'Old Testament' : 'New Testament';
+    const title = sectionID === 'old' ? 'OLD TESTAMENT' : 'NEW TESTAMENT';
     return (
-      <Text>{title}</Text>
+      <View style={styles.sectionHeader}>
+        <Text style={styles.sectionTitle}>{title}</Text>
+      </View>
     );
   }
 
   _renderRow(rowData, sectionID, rowID, highlightRow) {
     return (
-      <View>
-        <Text>{rowData}</Text>
-        <StackedBarChart style={styles.stackedBarChart} data={[{name: rowData, black: 200, red: 300, green: 100, blue: 40}]}/>
+      <View style={styles.cellContainer}>
+        <View style={styles.leftContainer}>
+          <Text style={styles.cellTitle}>{rowData}</Text>
+          <Text style={styles.cellSubTitle}>2hr</Text>
+        </View>
+        <View style={styles.rightContainer}>
+          <StackedBarChart style={styles.stackedBarChart} data={[{name: rowData, black: 200, red: 300, green: 100, blue: 40}]}/>
+          <Text style={styles.cellSubTitle}>68 sources</Text>
+        </View>
       </View>
     );
   }
@@ -76,7 +84,46 @@ const styles = StyleSheet.create({
   },
   stackedBarChart: {
     height: 2
-  }
+  },
+  sectionHeader: {
+    marginLeft: 8,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#c8c7cc',
+  },
+  sectionTitle: {
+    color: '#59626a',
+    marginTop: 8,
+    marginBottom: 6,
+    fontSize: 13,
+  },
+  cellContainer: {
+    flex: 1,
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    marginLeft: 8,
+    paddingVertical: 4,
+  },
+  leftContainer: {
+    flex: 1,
+  },
+  rightContainer: {
+    flex: 2,
+  },
+  cellTitle: {
+    color: '#59626a',
+    fontSize: 17,
+  },
+  cellSubTitle: {
+    color: '#B7C0C8',
+    fontSize: 13,
+  },
+  stackedBarChart: {
+    height: 2
+  },
+  stackedBarChart: {
+    height: 2
+	}
 });
 
 const mapStateToProps = (state) => {
