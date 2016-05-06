@@ -56,13 +56,13 @@ class Books extends Component {
   _renderRow(rowData, sectionID, rowID, highlightRow) {
     return (
       <View style={styles.cellContainer}>
-        <View style={styles.leftContainer}>
-          <Text style={styles.cellTitle}>{rowData}</Text>
-          <Text style={styles.cellSubTitle}>2hr</Text>
+        <View style={styles.topContainer}>
+          <View style={styles.leftContainer}><Text style={styles.cellTitle}>{rowData}</Text></View>
+          <View style={styles.rightContainer}><StackedBarChart style={styles.stackedBarChart} data={[{name: rowData, black: 200, red: 300, green: 100, blue: 40}]}/></View>
         </View>
-        <View style={styles.rightContainer}>
-          <StackedBarChart style={styles.stackedBarChart} data={[{name: rowData, black: 200, red: 300, green: 100, blue: 40}]}/>
-          <Text style={styles.cellSubTitle}>68 sources</Text>
+        <View style={styles.bottomContainer}>
+          <View style={styles.leftContainer}><Text style={styles.cellSubTitle}>2hr</Text></View>
+          <View style={styles.rightContainer}><Text style={styles.cellSubTitle}>68 sources</Text></View>
         </View>
       </View>
     );
@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
   segmentedControl: {
     marginTop: NavigationHeader.HEIGHT+8,
     marginHorizontal: 8,
+    marginBottom: 10,
   },
   separator: {
     height: StyleSheet.hairlineWidth,
@@ -84,26 +85,31 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   stackedBarChart: {
-    height: 2
+    height: 2,
+    marginVertical: 8,
   },
   sectionHeader: {
     marginLeft: 8,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: '#c8c7cc',
+    paddingBottom: 6,
+    backgroundColor: 'white',
   },
   sectionTitle: {
     color: '#59626a',
     marginTop: 8,
-    marginBottom: 6,
     fontSize: 13,
   },
   cellContainer: {
     flex: 1,
-    alignItems: 'center',
-    flexWrap: 'wrap',
-    flexDirection: 'row',
     marginHorizontal: 8,
     paddingVertical: 4,
+  },
+  topContainer: {
+    flexDirection: 'row',
+  },
+  bottomContainer: {
+    flexDirection: 'row',
   },
   leftContainer: {
     flex: 1,
