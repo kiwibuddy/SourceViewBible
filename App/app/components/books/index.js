@@ -117,10 +117,7 @@ const styles = StyleSheet.create({
   cellSubTitle: {
     color: '#B7C0C8',
     fontSize: 13,
-  },
-  stackedBarChart: {
-    height: 2
-	}
+  }
 });
 
 const mapStateToProps = (state) => {
