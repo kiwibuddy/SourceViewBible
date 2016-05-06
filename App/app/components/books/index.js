@@ -3,12 +3,12 @@
 
 import React, { Component } from 'react';
 import ReactNative, { View, Text, ListView, RecyclerViewBackedScrollView, NavigationExperimental, StyleSheet } from 'react-native';
-const { Header: NavigationHeader } = NavigationExperimental;
-import { connect } from 'react-redux';
-
 const Color = require('../common/colors');
 import SegmentedControl from '../common/segmented-control';
-import StackedBarChart from '../common/stacked-bar-chart';
+
+const { Header: NavigationHeader } = NavigationExperimental;
+
+import { connect } from 'react-redux';
 
 class Books extends Component {
   state: {
@@ -45,31 +45,16 @@ class Books extends Component {
   }
 
   _renderSectionHeader(sectionData, sectionID) {
-    const title = sectionID === 'old' ? 'OLD TESTAMENT' : 'NEW TESTAMENT';
+    const title = sectionID === 'old' ? 'Old Testament' : 'New Testament';
     return (
-      <View style={styles.sectionHeader}>
-        <Text style={styles.sectionTitle}>{title}</Text>
-      </View>
+      <Text>{title}</Text>
     );
   }
 
   _renderRow(rowData, sectionID, rowID, highlightRow) {
     return (
-<<<<<<< HEAD
-      <View style={styles.cellContainer}>
-        <View style={styles.leftContainer}>
-          <Text style={styles.cellTitle}>{rowData}</Text>
-          <Text style={styles.cellSubTitle}>2hr</Text>
-        </View>
-        <View style={styles.rightContainer}>
-          <Text style={styles.bar}>---</Text>
-          <Text style={styles.cellSubTitle}>68 sources</Text>
-        </View>
-=======
       <View>
         <Text>{rowData}</Text>
-        <StackedBarChart style={styles.stackedBarChart} data={[{name: rowData, black: 200, red: 300, green: 100, blue: 40}]}/>
->>>>>>> origin/master
       </View>
     );
   }
@@ -87,46 +72,6 @@ const styles = StyleSheet.create({
   separator: {
     height: StyleSheet.hairlineWidth,
     backgroundColor: '#CCCCCC',
-<<<<<<< HEAD
-    marginLeft: 8,
-  },
-  sectionHeader: {
-    marginLeft: 8,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#c8c7cc',
-  },
-  sectionTitle: {
-    color: '#59626a',
-    marginTop: 8,
-    marginBottom: 6,
-    fontSize: 13,
-  },
-  cellContainer: {
-    flex: 1,
-    alignItems: 'center',
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-    marginLeft: 8,
-    paddingVertical: 4,
-  },
-  leftContainer: {
-    flex: 1,
-  },
-  rightContainer: {
-    flex: 2,
-  },
-  cellTitle: {
-    color: '#59626a',
-    fontSize: 17,
-  },
-  cellSubTitle: {
-    color: '#B7C0C8',
-    fontSize: 13,
-=======
-  },
-  stackedBarChart: {
-    height: 2
->>>>>>> origin/master
   }
 });
 
