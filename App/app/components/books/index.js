@@ -120,9 +120,6 @@ const styles = StyleSheet.create({
   },
   stackedBarChart: {
     height: 2
-  },
-  stackedBarChart: {
-    height: 2
 	}
 });
 
