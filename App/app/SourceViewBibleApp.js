@@ -20,6 +20,7 @@ import { navigatePush, navigatePop } from './actions';
 
 import Discover from './components/discover';
 import Books from './components/books';
+import Book from './components/books/book';
 
 const {
   AnimatedView: NavigationAnimatedView,
@@ -142,6 +143,9 @@ class SourceViewBibleApp extends Component {
 
         case 'books':
           return <Books />;
+
+        case 'book':
+          return <Book book={navigationState.book} />;
 
         default:
           return null;

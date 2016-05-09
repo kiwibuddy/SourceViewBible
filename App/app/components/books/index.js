@@ -2,9 +2,10 @@
 'use strict';
 
 import React, { Component } from 'react';
-import ReactNative, { View, Text, ListView, RecyclerViewBackedScrollView, NavigationExperimental } from 'react-native';
+import ReactNative, { View, Text, ListView, TouchableOpacity, RecyclerViewBackedScrollView, NavigationExperimental } from 'react-native';
 const { Header: NavigationHeader } = NavigationExperimental;
 import { connect } from 'react-redux';
+import { navigatePush, navigateReset } from '../../actions';
 
 import Platform from '../../common/platform';
 import StyleSheet from '../../common/stylesheet';
@@ -50,7 +51,7 @@ class Books extends Component {
         <ListView
           dataSource={this.state.dataSource}
           renderSectionHeader={this._renderSectionHeader}
-          renderRow={this._renderRow}
+          renderRow={this._renderRow.bind(this)}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
         />
@@ -69,28 +70,30 @@ class Books extends Component {
 
   _renderRow(book, sectionID, rowID, highlightRow) {
     return (
-      <View style={styles.cellContainer}>
-        <View style={styles.topContainer}>
-          <View style={styles.leftContainer}>
-            <Text style={styles.cellTitle}>{book.name}</Text>
-          </View>
-          <View style={styles.rightContainer}>
-            <StackedBarChart
-              style={styles.stackedBarChart}
-              horizontal={true}
-              data={[{black: 200, red: 300, green: 100, blue: 40}]}
-            />
-          </View>
-        </View>
-        <View style={styles.bottomContainer}>
-          <View style={styles.leftContainer}>
-            <Text style={styles.cellSubTitle}>2hr</Text>
-          </View>
-          <View style={styles.rightContainer}>
-            <Text style={styles.cellSubTitle}>68 sources</Text>
+      <TouchableOpacity onPress={ () => this.props.onButtonPress(book)}>
+        <View style={styles.cellContainer}>
+          <View style={styles.topContainer}>
+            <View style={styles.leftContainer}>
+              <Text style={styles.cellTitle}>{book.name}</Text>
             </View>
+            <View style={styles.rightContainer}>
+              <StackedBarChart
+                style={styles.stackedBarChart}
+                horizontal={true}
+                data={[{black: 200, red: 300, green: 100, blue: 40}]}
+              />
+            </View>
+          </View>
+          <View style={styles.bottomContainer}>
+            <View style={styles.leftContainer}>
+              <Text style={styles.cellSubTitle}>2hr</Text>
+            </View>
+            <View style={styles.rightContainer}>
+              <Text style={styles.cellSubTitle}>68 sources</Text>
+              </View>
+          </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   }
 }
@@ -156,7 +159,7 @@ const styles = StyleSheet.create({
       },
       android: {
       },
-  }),
+  })
 });
 
 const mapStateToProps = (state) => {
@@ -167,7 +170,13 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
+    onButtonPress: (book) => {
+      dispatch(navigatePush({
+        key: 'book',
+        title: book.name,
+        book
+      }));
+    }
   };
 }
 
