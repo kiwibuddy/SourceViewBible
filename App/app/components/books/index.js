@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 
 const Color = require('../common/colors');
 import SegmentedControl from '../common/segmented-control';
-import StackedBarChart from '../common/stacked-bar-chart';
+import StackedBarChart from '../charts/stacked-bar-chart';
 
 class Books extends Component {
   state: {
@@ -57,12 +57,20 @@ class Books extends Component {
     return (
       <View style={styles.cellContainer}>
         <View style={styles.topContainer}>
-          <View style={styles.leftContainer}><Text style={styles.cellTitle}>{rowData}</Text></View>
-          <View style={styles.rightContainer}><StackedBarChart style={styles.stackedBarChart} data={[{name: rowData, black: 200, red: 300, green: 100, blue: 40}]}/></View>
+          <View style={styles.leftContainer}>
+            <Text style={styles.cellTitle}>{rowData}</Text>
+          </View>
+          <View style={styles.rightContainer}>
+            <StackedBarChart style={styles.stackedBarChart} data={[{name: rowData, black: 200, red: 300, green: 100, blue: 40}]}/>
+          </View>
         </View>
         <View style={styles.bottomContainer}>
-          <View style={styles.leftContainer}><Text style={styles.cellSubTitle}>2hr</Text></View>
-          <View style={styles.rightContainer}><Text style={styles.cellSubTitle}>68 sources</Text></View>
+          <View style={styles.leftContainer}>
+            <Text style={styles.cellSubTitle}>2hr</Text>
+          </View>
+          <View style={styles.rightContainer}>
+            <Text style={styles.cellSubTitle}>68 sources</Text>
+          </View>
         </View>
       </View>
     );
