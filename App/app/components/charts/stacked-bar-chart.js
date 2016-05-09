@@ -4,7 +4,7 @@
 import React, { Component, PropTypes } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { BarChart, Bar } from './bar-chart';
-const Colors = require('../common/colors');
+const Colors = require('../../common/colors');
 
 export default class StackedBarChart extends Component {
   static defaultProps = {

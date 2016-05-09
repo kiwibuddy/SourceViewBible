@@ -13,7 +13,7 @@ import {
   PropTypes
 } from 'react-native';
 
-const Color = require('./components/common/colors');
+const Color = require('./common/colors');
 
 import BackAndroid from 'BackAndroid';
 

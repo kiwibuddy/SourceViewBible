@@ -6,7 +6,9 @@ import ReactNative, { View, Text, ListView, RecyclerViewBackedScrollView, Naviga
 const { Header: NavigationHeader } = NavigationExperimental;
 import { connect } from 'react-redux';
 
-const Colors = require('../common/colors');
+const Colors = require('../../common/colors');
+const Localizable = require('../../common/localizable');
+
 import SegmentedControl from '../common/segmented-control';
 import StackedBarChart from '../charts/stacked-bar-chart';
 
@@ -45,7 +47,7 @@ class Books extends Component {
   }
 
   _renderSectionHeader(sectionData, sectionID) {
-    const title = sectionID === 'old' ? 'OLD TESTAMENT' : 'NEW TESTAMENT';
+    const title = sectionID === 'old' ? Localizable.t('OLD_TESTAMENT').toUpperCase() : Localizable.t('NEW_TESTAMENT').toUpperCase();
     return (
       <View style={styles.sectionHeader}>
         <Text style={styles.sectionTitle}>{title}</Text>
