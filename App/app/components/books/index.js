@@ -6,6 +6,7 @@ import ReactNative, { View, Text, ListView, RecyclerViewBackedScrollView, Naviga
 const { Header: NavigationHeader } = NavigationExperimental;
 import { connect } from 'react-redux';
 
+import Platform from '../../common/platform';
 const StyleSheet = require('../../common/stylesheet');
 const Colors = require('../../common/colors');
 const Localizable = require('../../common/localizable');
@@ -37,6 +38,7 @@ class Books extends Component {
         />
 
         <ListView
+          style={styles.listView}
           dataSource={this.state.dataSource}
           renderSectionHeader={this._renderSectionHeader}
           renderRow={this._renderRow}
@@ -90,7 +92,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff'
   },
   segmentedControl: {
-    marginTop: NavigationHeader.HEIGHT+8,
+    marginTop: NavigationHeader.HEIGHT + 8,
     marginHorizontal: 8,
     marginBottom: 10,
   },
@@ -139,7 +141,19 @@ const styles = StyleSheet.create({
   cellSubTitle: {
     color: '#B7C0C8',
     fontSize: 13,
-  }
+  },
+  ...Platform.select({
+      ios: {
+        listView: {
+
+        }
+      },
+      android: {
+        listView: {
+          marginTop: NavigationHeader.HEIGHT + 8,
+        }
+      },
+  }),
 });
 
 const mapStateToProps = (state) => {
