@@ -12,8 +12,7 @@ import {
   PropTypes
 } from 'react-native';
 
-const StyleSheet = require('./common/stylesheet');
-
+import StyleSheet from './common/stylesheet'
 
 import BackAndroid from 'BackAndroid';
 

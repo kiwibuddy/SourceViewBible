@@ -2,7 +2,7 @@
 
 import * as NavigationStateUtils from 'NavigationStateUtils'
 
-const Localizable = require('../common/localizable');
+import Localizable from '../common/localizable';
 
 const initialState = {
   key: 'MainNavigation',

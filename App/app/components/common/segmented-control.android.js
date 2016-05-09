@@ -3,7 +3,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
-const StyleSheet = require('../../common/stylesheet');
+import StyleSheet from '../../common/stylesheet'
 
 export default class SegmentedControl extends Component {
   static propTypes = {

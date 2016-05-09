@@ -7,9 +7,9 @@ const { Header: NavigationHeader } = NavigationExperimental;
 import { connect } from 'react-redux';
 
 import Platform from '../../common/platform';
-const StyleSheet = require('../../common/stylesheet');
-const Colors = require('../../common/colors');
-const Localizable = require('../../common/localizable');
+import StyleSheet from '../../common/stylesheet';
+import Colors from '../../common/colors';
+import Localizable from '../../common/localizable';
 
 import SegmentedControl from '../common/segmented-control';
 import StackedBarChart from '../charts/stacked-bar-chart';

@@ -7,8 +7,8 @@ import { connect } from 'react-redux';
 
 import { navigatePush } from '../../actions';
 
-const StyleSheet = require('../../common/stylesheet');
-const Localizable = require('../../common/localizable');
+import StyleSheet from '../../common/stylesheet'
+import Localizable from '../../common/localizable';
 
 class Discover extends Component {
   render() {
