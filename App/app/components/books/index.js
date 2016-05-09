@@ -14,6 +14,8 @@ import Localizable from '../../common/localizable';
 import SegmentedControl from '../common/segmented-control';
 import StackedBarChart from '../charts/stacked-bar-chart';
 
+const Bible = require('../../assets/en/books');
+
 class Books extends Component {
   state: {
     dataSource: any
@@ -22,9 +24,17 @@ class Books extends Component {
   constructor() {
       super();
 
+      const oldTestamentBooks = Bible.filter((book) => {
+        return book.testament === 'old';
+      });
+
+      const newTestamentBooks = Bible.filter((book) => {
+        return book.testament === 'new';
+      });
+
       const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
       this.state = {
-        dataSource: dataSource.cloneWithRowsAndSections({old: ['Genesis', 'Exodus', 'Leviticus'], new: ['Matthew', 'Mark', 'Luke']})
+        dataSource: dataSource.cloneWithRowsAndSections({old: oldTestamentBooks, new: newTestamentBooks})
       }
   }
 
@@ -57,18 +67,18 @@ class Books extends Component {
     );
   }
 
-  _renderRow(rowData, sectionID, rowID, highlightRow) {
+  _renderRow(book, sectionID, rowID, highlightRow) {
     return (
       <View style={styles.cellContainer}>
         <View style={styles.topContainer}>
           <View style={styles.leftContainer}>
-            <Text style={styles.cellTitle}>{rowData}</Text>
+            <Text style={styles.cellTitle}>{book.name}</Text>
           </View>
           <View style={styles.rightContainer}>
             <StackedBarChart
               style={styles.stackedBarChart}
               horizontal={true}
-              data={[{name: rowData, black: 200, red: 300, green: 100, blue: 40}]}
+              data={[{black: 200, red: 300, green: 100, blue: 40}]}
             />
           </View>
         </View>
