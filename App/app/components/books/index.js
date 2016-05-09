@@ -6,7 +6,7 @@ import ReactNative, { View, Text, ListView, RecyclerViewBackedScrollView, Naviga
 const { Header: NavigationHeader } = NavigationExperimental;
 import { connect } from 'react-redux';
 
-const Color = require('../common/colors');
+const Colors = require('../common/colors');
 import SegmentedControl from '../common/segmented-control';
 import StackedBarChart from '../charts/stacked-bar-chart';
 
@@ -29,7 +29,7 @@ class Books extends Component {
       <View style={styles.container}>
         <SegmentedControl
           style={styles.segmentedControl}
-          tintColor={Color.tintColor}
+          tintColor={Colors.tintColor}
           values={['Textual', 'Alphabetical', 'Principality']}
         />
 
@@ -70,7 +70,7 @@ class Books extends Component {
           </View>
           <View style={styles.rightContainer}>
             <Text style={styles.cellSubTitle}>68 sources</Text>
-          </View>
+            </View>
         </View>
       </View>
     );

@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
   },
   bar: {
     flex: 1,
-    backgroundColor: 'red'
   }
 });
 
