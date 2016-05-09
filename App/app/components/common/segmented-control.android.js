@@ -16,6 +16,7 @@ export default class SegmentedControl extends Component {
     const buttons = values.map((value) => {
       return this._renderButton(value);
     });
+
     return (
       <View style={[styles.container, this.props.style]}>
         {buttons}
@@ -24,9 +25,11 @@ export default class SegmentedControl extends Component {
   }
 
   _renderButton(title: String) {
-    <TouchableOpacity style={styles.button} onPress={this.props.onButtonPress}>
-      <Text style={styles.buttonTitle}>{title}</Text>
-    </TouchableOpacity>
+    return(
+      <TouchableOpacity key={'button-' + title} style={styles.button} onPress={this.props.onButtonPress}>
+        <Text style={styles.buttonTitle}>{title}</Text>
+      </TouchableOpacity>
+    );
   }
 }
 
@@ -37,9 +40,9 @@ const styles = StyleSheet.create({
   },
   button: {
     flex: 1,
-    backgroundColor: 'red'
+    alignItems: 'center'
   },
   buttonTitle: {
-    flex: 1
+
   }
 });
