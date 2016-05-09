@@ -3,6 +3,7 @@
 
 module.exports = {
   tintColor: '#cf1e00',
+  
   sources: {
     black: '#333333',
     red: '#FC3D39',
