@@ -1,20 +1,28 @@
 /* @flow */
 'use strict';
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { BarChart, Bar } from './bar-chart';
 const Colors = require('../common/colors');
 
 export default class StackedBarChart extends Component {
-  props: {
-    style: any;
-    data: any;
+  static defaultProps = {
+    horizontal: false
+  };
+
+  static propTypes = {
+    style: PropTypes.any,
+    data: PropTypes.any,
+    horizontal: PropTypes.bool
   };
 
   render() {
+    // const horizontal = this.props.horizontal === undefined ? false : this.props.horizontal;
+    const style = [styles.container, {flexDirection: this.props.horizontal ? 'row' : 'column'}, this.props.style];
+
     return (
-      <BarChart style={[styles.container, this.props.style]} data={this.props.data}>
+      <BarChart style={style} data={this.props.data}>
         <Bar
           style={{backgroundColor: Colors.sources.black}}
           dataKey={'black'}
@@ -38,7 +46,6 @@ export default class StackedBarChart extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: 'row'
+    flex: 1
   }
 });

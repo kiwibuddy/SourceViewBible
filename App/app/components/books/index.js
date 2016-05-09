@@ -61,7 +61,11 @@ class Books extends Component {
             <Text style={styles.cellTitle}>{rowData}</Text>
           </View>
           <View style={styles.rightContainer}>
-            <StackedBarChart style={styles.stackedBarChart} data={[{name: rowData, black: 200, red: 300, green: 100, blue: 40}]}/>
+            <StackedBarChart
+              style={styles.stackedBarChart}
+              horizontal={true}
+              data={[{name: rowData, black: 200, red: 300, green: 100, blue: 40}]}
+            />
           </View>
         </View>
         <View style={styles.bottomContainer}>
