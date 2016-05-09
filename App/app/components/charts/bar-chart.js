@@ -2,7 +2,8 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
+const StyleSheet = require('../../common/stylesheet');
 
 class BarChart extends Component {
   render() {

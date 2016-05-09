@@ -2,8 +2,10 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { BarChart, Bar } from './bar-chart';
+
+const StyleSheet = require('../../common/stylesheet');
 const Colors = require('../../common/colors');
 
 export default class StackedBarChart extends Component {

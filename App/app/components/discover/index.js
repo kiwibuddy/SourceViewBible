@@ -2,11 +2,12 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
 import { navigatePush } from '../../actions';
 
+const StyleSheet = require('../../common/stylesheet');
 const Localizable = require('../../common/localizable');
 
 class Discover extends Component {

@@ -2,10 +2,11 @@
 'use strict';
 
 import React, { Component } from 'react';
-import ReactNative, { View, Text, ListView, RecyclerViewBackedScrollView, NavigationExperimental, StyleSheet } from 'react-native';
+import ReactNative, { View, Text, ListView, RecyclerViewBackedScrollView, NavigationExperimental } from 'react-native';
 const { Header: NavigationHeader } = NavigationExperimental;
 import { connect } from 'react-redux';
 
+const StyleSheet = require('../../common/stylesheet');
 const Colors = require('../../common/colors');
 const Localizable = require('../../common/localizable');
 

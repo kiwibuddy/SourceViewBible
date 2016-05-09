@@ -9,11 +9,11 @@ import {
   NavigationExperimental,
   View,
   Text,
-  StyleSheet,
   PropTypes
 } from 'react-native';
 
-const Color = require('./common/colors');
+const StyleSheet = require('./common/stylesheet');
+
 
 import BackAndroid from 'BackAndroid';
 
