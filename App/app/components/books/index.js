@@ -38,7 +38,6 @@ class Books extends Component {
         />
 
         <ListView
-          style={styles.listView}
           dataSource={this.state.dataSource}
           renderSectionHeader={this._renderSectionHeader}
           renderRow={this._renderRow}
@@ -144,14 +143,8 @@ const styles = StyleSheet.create({
   },
   ...Platform.select({
       ios: {
-        listView: {
-
-        }
       },
       android: {
-        listView: {
-          marginTop: NavigationHeader.HEIGHT + 8,
-        }
       },
   }),
 });
