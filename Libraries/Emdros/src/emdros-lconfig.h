@@ -5,13 +5,13 @@
  *
  * Ulrik Petersen
  * Created: 10/21-2001
- * Last update: 9/27-2014
+ * Last update: 4/13-2015
  *
  */
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2001-2014  Ulrik Sandborg-Petersen
+ *   Copyright (C) 2001-2016  Ulrik Sandborg-Petersen
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License as
@@ -131,7 +131,29 @@
 #define HAVE_ISTREAM 1
 #define HAVE_OSTREAM 1
 
+#ifndef DEFAULT_BACKEND_ENUM
+
+#if 0
+
+#define DEFAULT_BACKEND_ENUM none
+
+#else
+
+#if USE_SQLITE2
+#define DEFAULT_BACKEND_ENUM kSQLite2
+#elif USE_SQLITE3
 #define DEFAULT_BACKEND_ENUM kSQLite3
+#elif USE_MYSQL
+#define DEFAULT_BACKEND_ENUM kMySQL
+#elif USE_POSTGRESQL
+#define DEFAULT_BACKEND_ENUM kPostgreSQL
+#else
+#define DEFAULT_BACKEND_ENUM kBackendNone
+#endif 
+
+#endif /* 0 */
+
+#endif /* !defined(DEFAULT_BACKEND_ENUM) */
 
 #ifndef USE_SYSTEM_SQLITE2
 /** USE_SYSTEM_SQLITE2 must be zero if we are using the local SQLite2,
@@ -146,7 +168,15 @@
  * otherwise, it must be non-zero.
  *@internal
  */
-#define USE_SYSTEM_SQLITE3 (1)
+#define USE_SYSTEM_SQLITE3 (0)
+#endif
+
+#ifndef USE_SYSTEM_ZLIB
+/** USE_SYSTEM_ZLIB must be zero if we are using the local zlib,
+ * otherwise, it must be non-zero.
+ *@internal
+ */
+#define USE_SYSTEM_ZLIB (1)
 #endif
 
 

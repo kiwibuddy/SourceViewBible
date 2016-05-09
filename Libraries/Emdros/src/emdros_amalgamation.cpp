@@ -2,7 +2,7 @@
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 1999-2015  Ulrik Sandborg-Petersen
+ *   Copyright (C) 1999-2016  Ulrik Sandborg-Petersen
  *
  ***********************************************************************/
 
@@ -12,6 +12,10 @@
  ****/
 #if defined(__GNUC__) && !defined(_GNU_SOURCE)
 # define _GNU_SOURCE
+#endif
+
+#ifndef HAVE_CONFIG_H
+#define HAVE_CONFIG_H  (1)
 #endif
 
 #include "emdros-lconfig.h"
@@ -25,14 +29,10 @@
 #ifndef SQLITE2_EMDFDB_NO_FSYNC
 #define SQLITE2_EMDFDB_NO_FSYNC
 #endif
-
-
-/**************** A copy of EMdF/crc32.cpp *****************/
-
-
-#line 1 "EMdF/crc32.cpp"
-        /*
- * crc32.cpp
+/**************** A copy of EMdF/crc32_emdros.cpp ****************/
+#line 1 "EMdF/crc32_emdros.cpp"
+/*
+ * crc32_emdros.cpp
  *
  * Algorithm to compute CRC32 hashes.
  *
@@ -207,11 +207,10 @@ int main(int argc, char *argv[])
 
 
 #endif // defined(TEST_CRC32)
-/**************** A copy of EMdF/emdf_primes.cpp *****************/
 
-
+/**************** A copy of EMdF/emdf_primes.cpp ****************/
 #line 1 "EMdF/emdf_primes.cpp"
-        /*
+/*
  *
  * Primes list suitable for making hash tables.
  *
@@ -280,11 +279,10 @@ long prime_list_get_next_higher_prime(long n)
         return a;
     }
 }
-/**************** A copy of EMdF/logging.cpp *****************/
 
-
+/**************** A copy of EMdF/logging.cpp ****************/
 #line 1 "EMdF/logging.cpp"
-        /*
+/*
  * logging.cpp
  *
  * Functions for logging
@@ -375,11 +373,9 @@ long prime_list_get_next_higher_prime(long n)
 
 
 /**************** leaving EMdF/logging.cpp temporarily *****************/
-/**************** A copy of include/emdf.h *****************/
-
-
+/**************** A copy of include/emdf.h ****************/
 #line 1 "include/emdf.h"
-        /*
+/*
  * emdf.h
  *
  * Basic definitions for EMdF
@@ -481,12 +477,10 @@ long prime_list_get_next_higher_prime(long n)
 
 
 #line 99 "include/emdf.h"
-        /**************** leaving include/emdf.h temporarily *****************/
-/**************** A copy of include/version-emdros.h *****************/
-
-
+/**************** leaving include/emdf.h temporarily *****************/
+/**************** A copy of include/version-emdros.h ****************/
 #line 1 "include/version-emdros.h"
-        /*
+/*
  * emdros-version.h.in
  *
  * Emdros version information
@@ -575,14 +569,15 @@ long prime_list_get_next_higher_prime(long n)
 #ifndef EMDROS_VERSION__H__
 #define EMDROS_VERSION__H__
 
-#define EMDROS_VERSION "3.4.1.pre22"
+#define EMDROS_VERSION "3.4.1.pre24"
 
 #endif /* EMDROS_VERSION__H__ */
+
 /**************** continuing include/emdf.h where we left off *****************/
 
 
 #line 100 "include/emdf.h"
-        
+
 
 #if defined(_MSC_VER)
 #pragma warning( disable : 4290 ) 
@@ -694,16 +689,15 @@ typedef long monad_m;
 
 
 #endif /* EMDF__H__ */
+
 /**************** continuing EMdF/logging.cpp where we left off *****************/
 
 
 #line 91 "EMdF/logging.cpp"
-        /**************** leaving EMdF/logging.cpp temporarily *****************/
-/**************** A copy of include/logging.h *****************/
-
-
+/**************** leaving EMdF/logging.cpp temporarily *****************/
+/**************** A copy of include/logging.h ****************/
 #line 1 "include/logging.h"
-        /*
+/*
  * logging.h
  *
  * Crude functions for logging
@@ -858,11 +852,12 @@ extern void logWriteTime(std::string function_name, std::string message);
 
 
 #endif // _LOGGING__H__
+
 /**************** continuing EMdF/logging.cpp where we left off *****************/
 
 
 #line 92 "EMdF/logging.cpp"
-        
+
 #include <time.h>
 #include <fstream>
 #include <cstdlib>
@@ -874,7 +869,7 @@ extern void logWriteTime(std::string function_name, std::string message);
 
 
 #line 101 "EMdF/logging.cpp"
-        #endif
+#endif
 
 
 /** Maximum string length that a timestamp can be.
@@ -968,11 +963,10 @@ void logWriteTime(std::string function_name, std::string message)
 
 
 
-/**************** A copy of EMdF/encryption.cpp *****************/
 
-
+/**************** A copy of EMdF/encryption.cpp ****************/
 #line 1 "EMdF/encryption.cpp"
-        /*
+/*
  * encryption.cpp
  *
  * Functions to encrypt and decrypt strings
@@ -1059,11 +1053,9 @@ void logWriteTime(std::string function_name, std::string message)
 
 
 /**************** leaving EMdF/encryption.cpp temporarily *****************/
-/**************** A copy of include/encryption.h *****************/
-
-
+/**************** A copy of include/encryption.h ****************/
 #line 1 "include/encryption.h"
-        /*
+/*
  * encryption.h
  *
  * Functions to encrypt and decrypt strings
@@ -1247,11 +1239,12 @@ inline void zeroFillString(std::string& str)
   }
 }
 
+
 /**************** continuing EMdF/encryption.cpp where we left off *****************/
 
 
 #line 87 "EMdF/encryption.cpp"
-        
+
 #define NO_ROL_BITS  (0xff)
 unsigned int g_rol_bits = NO_ROL_BITS;
 
@@ -1335,11 +1328,10 @@ std::string get_eor_string()
 }
 
 
-/**************** A copy of EMdF/arena.cpp *****************/
 
-
+/**************** A copy of EMdF/arena.cpp ****************/
 #line 1 "EMdF/arena.cpp"
-        /*
+/*
  * arena.cpp
  *
  * Arena and related classes
@@ -1429,11 +1421,9 @@ std::string get_eor_string()
  */
 
 /**************** leaving EMdF/arena.cpp temporarily *****************/
-/**************** A copy of include/arena.h *****************/
-
-
+/**************** A copy of include/arena.h ****************/
 #line 1 "include/arena.h"
-        /*
+/*
  * arena.h
  *
  * Arena and ArenaConstIterator
@@ -1530,11 +1520,9 @@ std::string get_eor_string()
 #include <cstring>
 #include <cstdlib>
 /**************** leaving include/arena.h temporarily *****************/
-/**************** A copy of include/debug.h *****************/
-
-
+/**************** A copy of include/debug.h ****************/
 #line 1 "include/debug.h"
-        /*
+/*
  * debug.h
  *
  * Debug defines for EMdF
@@ -1630,11 +1618,9 @@ std::string get_eor_string()
 #define DEBUG__H__
 
 /**************** leaving include/debug.h temporarily *****************/
-/**************** A copy of include/exception_emdros.h *****************/
-
-
+/**************** A copy of include/exception_emdros.h ****************/
 #line 1 "include/exception_emdros.h"
-        /*
+/*
  * exception_emdros.h
  *
  * Base class for all Emdros exceptions.
@@ -1757,23 +1743,22 @@ public:
 
 
 #endif // EMDROS_EXCEPTION__H__
+
 /**************** continuing include/debug.h where we left off *****************/
 
 
 #line 96 "include/debug.h"
-        /**************** leaving include/debug.h temporarily *****************/
-/**************** A copy of include/string_func.h *****************/
-
-
+/**************** leaving include/debug.h temporarily *****************/
+/**************** A copy of include/string_func.h ****************/
 #line 1 "include/string_func.h"
-        /*
+/*
  * string_func.h
  *
  * String helper functions
  *
  * Ulrik Petersen
  * Created: 3/1-2001
- * Last update: 2/23-2016
+ * Last update: 4/11-2016
  *
  */
 /************************************************************************
@@ -1869,12 +1854,10 @@ public:
 
 
 #line 100 "include/string_func.h"
-        /**************** leaving include/string_func.h temporarily *****************/
-/**************** A copy of include/emdf_enums.h *****************/
-
-
+/**************** leaving include/string_func.h temporarily *****************/
+/**************** A copy of include/emdf_enums.h ****************/
 #line 1 "include/emdf_enums.h"
-        /*
+/*
  * emdf_enums.h
  *
  * EMdF enumerations
@@ -2120,13 +2103,29 @@ enum eBackendKind {
 };
 
 
+/** A Monad Set Relation Clause operation
+ *
+ * part_of == "we" must be a subset of the other monad set.
+ *
+ * overlap == "we" must have a non-empty intersection with the other
+ * monad set.
+ *
+ */
+enum eMonadSetRelationOperation {
+	kMSROPartOf,
+	kMSROOverlap,
+	kMSROStartsIn
+};
+
+
 
 #endif /* EMDF_ENUMS__H__ */
+
 /**************** continuing include/string_func.h where we left off *****************/
 
 
 #line 101 "include/string_func.h"
-        
+
 class IntegerList; // Forward declaration
 
 extern void str_toupper(const std::string& in, std::string& result);
@@ -2528,17 +2527,64 @@ inline std::string escapeXMLEntities(const std::string& input)
 	return result;
 }
 
+inline bool hasJSONCharsToMangle(const std::string& input)
+{
+	return input.find_first_of("\"'\\\b\f\n\r\t", 0, 8) != std::string::npos;
+}
+
+inline std::string escapeJSONChars(const std::string& input)
+{
+	std::string result;
+	result.reserve(input.length() + 4);
+	std::string::const_iterator ci = input.begin();
+	std::string::const_iterator cend = input.end();
+	while (ci != cend) {
+		char c = *ci++;
+		switch (c) {
+		case '\"':
+			result += "\\\"";
+			break;
+		case '\'':
+			result += "\\'";
+			break;
+		case '\\':
+			result += "\\\\";
+			break;
+		case '\b':
+			result += "\\b";
+			break;
+		case '\f':
+			result += "\\f";
+			break;
+		case '\n':
+			result += "\\n";
+			break;
+		case '\r':
+			result += "\\r";
+			break;
+		case '\t':
+			result += "\\t";
+			break;
+		default:
+			result += c;
+			break;
+		}
+	}
+	return result;
+}
+
 
 
 
 
 #endif // STRING_FUNC__H__
 
+
 /**************** continuing include/debug.h where we left off *****************/
 
 
 #line 97 "include/debug.h"
-        #include <iostream>
+#include <iostream>
 #include <sstream>
 
 #ifndef EMDF_DEBUG
@@ -2625,11 +2671,12 @@ inline std::string escapeXMLEntities(const std::string& input)
 
 
 #endif /* DEBUG__H__ */
+
 /**************** continuing include/arena.h where we left off *****************/
 
 
 #line 97 "include/arena.h"
-        
+
 /**
  *\defgroup Arena Arena: Chunks of memory.
  *\ingroup EMdF
@@ -2987,15 +3034,16 @@ class Bigstring : protected Arena {
 
 
 #endif // ARENA__H__
+
 /**************** continuing EMdF/arena.cpp where we left off *****************/
 
 
 #line 90 "EMdF/arena.cpp"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 91 "EMdF/arena.cpp"
-        
+
 #include <iostream>
 
 ////////////////////////////////////////////////////////////////////
@@ -3151,11 +3199,10 @@ ArenaConstIterator Arena::const_iterator(unsigned int size) const
 
 
 
-/**************** A copy of EMdF/monads.cpp *****************/
 
-
+/**************** A copy of EMdF/monads.cpp ****************/
 #line 1 "EMdF/monads.cpp"
-        //
+//
 //
 // monads.cpp
 // monads and sets of monads
@@ -3246,11 +3293,9 @@ ArenaConstIterator Arena::const_iterator(unsigned int size) const
 #include <iostream>
 #include <sstream>
 /**************** leaving EMdF/monads.cpp temporarily *****************/
-/**************** A copy of include/monads.h *****************/
-
-
+/**************** A copy of include/monads.h ****************/
 #line 1 "include/monads.h"
-        //
+//
 //
 // monads.h
 // monad_ms and sets of monads
@@ -3348,12 +3393,10 @@ ArenaConstIterator Arena::const_iterator(unsigned int size) const
 
 
 #line 95 "include/monads.h"
-        /**************** leaving include/monads.h temporarily *****************/
-/**************** A copy of include/emdf_output.h *****************/
-
-
+/**************** leaving include/monads.h temporarily *****************/
+/**************** A copy of include/emdf_output.h ****************/
 #line 1 "include/emdf_output.h"
-        /*
+/*
  * emdf_output.h
  *
  * Class to output something either in XML or in console-format.
@@ -3452,11 +3495,11 @@ ArenaConstIterator Arena::const_iterator(unsigned int size) const
 
 
 #line 96 "include/emdf_output.h"
-        /**************** already included exception_emdros.h -- not including again *****************/
+/**************** already included exception_emdros.h -- not including again *****************/
 
 
 #line 97 "include/emdf_output.h"
-        
+
 #if HAVE_OSTREAM
 #include <ostream>
 #else
@@ -3466,11 +3509,9 @@ ArenaConstIterator Arena::const_iterator(unsigned int size) const
 #include <string>
 #include <list>
 /**************** leaving include/emdf_output.h temporarily *****************/
-/**************** A copy of include/llist.h *****************/
-
-
+/**************** A copy of include/llist.h ****************/
 #line 1 "include/llist.h"
-        /*
+/*
  * llist.h
  *
  * Linked list templates
@@ -3568,7 +3609,7 @@ ArenaConstIterator Arena::const_iterator(unsigned int size) const
 
 
 #line 95 "include/llist.h"
-        
+
 #include <iostream>
 
 template <class T> class LlistIterator; // Forward declaration
@@ -4848,20 +4889,19 @@ template<class T> const T& LVlistConstIterator<T>::current() throw(EmdrosExcepti
 
 
 #endif // __LList__h__
+
 /**************** continuing include/emdf_output.h where we left off *****************/
 
 
 #line 107 "include/emdf_output.h"
-        /**************** already included emdf_enums.h -- not including again *****************/
+/**************** already included emdf_enums.h -- not including again *****************/
 
 
 #line 108 "include/emdf_output.h"
-        /**************** leaving include/emdf_output.h temporarily *****************/
-/**************** A copy of include/emdf_exception.h *****************/
-
-
+/**************** leaving include/emdf_output.h temporarily *****************/
+/**************** A copy of include/emdf_exception.h ****************/
 #line 1 "include/emdf_exception.h"
-        /*
+/*
  * emdf_exception.h
  *
  * EMdF exceptions
@@ -4956,7 +4996,7 @@ template<class T> const T& LVlistConstIterator<T>::current() throw(EmdrosExcepti
 
 
 #line 92 "include/emdf_exception.h"
-        
+
 
 /** EMdF general EMdFDB exception.
  */
@@ -5125,11 +5165,12 @@ public:
 
 
 #endif // EMDF_EXCEPTION__H__
+
 /**************** continuing include/emdf_output.h where we left off *****************/
 
 
 #line 109 "include/emdf_output.h"
-        #endif
+#endif
 
 #ifndef SWIG
 /** Attribute name-value pair
@@ -5267,19 +5308,20 @@ class EMdFOutput {
 };
 
 #endif /* EMDF_OUTPUT__H__ */
+
 /**************** continuing include/monads.h where we left off *****************/
 
 
 #line 96 "include/monads.h"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 97 "include/monads.h"
-        /**************** already included exception_emdros.h -- not including again *****************/
+/**************** already included exception_emdros.h -- not including again *****************/
 
 
 #line 98 "include/monads.h"
-        #include <vector>
+#include <vector>
 #include <map>
 #endif // !defined SWIG
 #undef list
@@ -5287,12 +5329,12 @@ class EMdFOutput {
 
 
 #line 103 "include/monads.h"
-        #include <string>
+#include <string>
 /**************** already included debug.h -- not including again *****************/
 
 
 #line 105 "include/monads.h"
-        #if HAVE_OSTREAM
+#if HAVE_OSTREAM
 #include <ostream>
 #else
 #include <ostream.h>
@@ -5756,6 +5798,7 @@ class SetOfMonads {
 	SetOfMonads(monad_m first, monad_m last) throw(BadMonadsException) : monad_ms(), m_first(first), m_last(last) { monad_ms.push_back(MonadSetElement(first,last)); };
 	~SetOfMonads();
 	bool part_of(const SetOfMonads& other) const;
+	bool starts_in(const SetOfMonads& other) const;
 #ifndef SWIG
 	bool part_of(const FastSetOfMonads& other) const;
 #endif
@@ -5969,15 +6012,16 @@ class FastSetOfMonads {
 
 
 #endif //MONADS__H__
+
 /**************** continuing EMdF/monads.cpp where we left off *****************/
 
 
 #line 91 "EMdF/monads.cpp"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 92 "EMdF/monads.cpp"
-        
+
 
 //////////////////////////////////////////////////////////////////
 //
@@ -6680,6 +6724,21 @@ bool SetOfMonads::part_of(const SetOfMonads& other) const
 	else
 		return false;
 }
+
+/** Test for starts_in.
+ *
+ * Tests whether we start in \p other. That is, whether our first monad is a member
+ * of \p other.
+ *
+ * @param other the set in which to search for our start monad. 
+ *
+ * @return true if we start in \p other, false otherwise
+ */
+bool SetOfMonads::starts_in(const SetOfMonads& other) const
+{
+    return other.isMemberOf(m_first);
+}
+
 
 // fillInsertRange
 // Returns: a monad set with a particular range added 
@@ -9185,11 +9244,10 @@ void FastSetOfMonads::assign(const FastSetOfMonads& other)
 	m_last = other.m_last;
 	monad_ms = other.monad_ms;
 }
-/**************** A copy of EMdF/minidom.cpp *****************/
 
-
+/**************** A copy of EMdF/minidom.cpp ****************/
 #line 1 "EMdF/minidom.cpp"
-        /*
+/*
  * minidom.cpp
  *
  * DOM-like interface to XML
@@ -9279,11 +9337,9 @@ void FastSetOfMonads::assign(const FastSetOfMonads& other)
  */
 
 /**************** leaving EMdF/minidom.cpp temporarily *****************/
-/**************** A copy of include/minidom.h *****************/
-
-
+/**************** A copy of include/minidom.h ****************/
 #line 1 "include/minidom.h"
-        /*
+/*
  * minidom.h
  *
  * DOM-like interface to XML
@@ -9377,11 +9433,9 @@ void FastSetOfMonads::assign(const FastSetOfMonads& other)
 
 
 /**************** leaving include/minidom.h temporarily *****************/
-/**************** A copy of include/qdxml.h *****************/
-
-
+/**************** A copy of include/qdxml.h ****************/
 #line 1 "include/qdxml.h"
-        /*
+/*
  * qdxml.h
  *
  * Quick'n Dirty XML SAX-like parser
@@ -9478,7 +9532,7 @@ void FastSetOfMonads::assign(const FastSetOfMonads& other)
 
 
 #line 94 "include/qdxml.h"
-        #include <iostream>
+#include <iostream>
 
 
 #if HAVE_ISTREAM
@@ -9496,15 +9550,15 @@ void FastSetOfMonads::assign(const FastSetOfMonads& other)
 
 
 #line 109 "include/qdxml.h"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 110 "include/qdxml.h"
-        /**************** already included llist.h -- not including again *****************/
+/**************** already included llist.h -- not including again *****************/
 
 
 #line 111 "include/qdxml.h"
-        
+
 class QDException : public EmdrosException {
 public:
 	QDException(const std::string& msg) : EmdrosException(msg) {};
@@ -9640,11 +9694,12 @@ class QDParser {
 
 
 #endif
+
 /**************** continuing include/minidom.h where we left off *****************/
 
 
 #line 94 "include/minidom.h"
-        
+
 
 typedef enum {
 	ELEMENT_NODE = 1,
@@ -9748,11 +9803,12 @@ class MiniDOMDocument : public MiniDOMNode {
 extern MiniDOMDocument *MiniDOMParseStream(std::istream *pIn, MiniDOMDocument *pDoc = 0) throw(QDException);
 extern MiniDOMDocument *MiniDOMParseString(const std::string& str, MiniDOMDocument *pDoc = 0) throw(QDException);
 #endif
+
 /**************** continuing EMdF/minidom.cpp where we left off *****************/
 
 
 #line 90 "EMdF/minidom.cpp"
-        
+
 
 ////////////////////////////////////////////////////////////////
 //
@@ -10314,11 +10370,10 @@ MiniDOMDocument *MiniDOMParseString(const std::string& str, MiniDOMDocument *pDo
 	return MiniDOMParseStream(&istr, pDoc);
 }
 
-/**************** A copy of EMdF/qdxml.cpp *****************/
 
-
+/**************** A copy of EMdF/qdxml.cpp ****************/
 #line 1 "EMdF/qdxml.cpp"
-        /*
+/*
  * qdxml.cpp
  *
  * Quick'n Dirty XML SAX-like parser
@@ -10407,7 +10462,7 @@ MiniDOMDocument *MiniDOMParseString(const std::string& str, MiniDOMDocument *pDo
 
 
 #line 86 "EMdF/qdxml.cpp"
-        #include <cstring>
+#include <cstring>
 
 
 /*
@@ -11043,11 +11098,10 @@ QDParser::~QDParser()
 }
 
 
-/**************** A copy of EMdF/infos.cpp *****************/
 
-
+/**************** A copy of EMdF/infos.cpp ****************/
 #line 1 "EMdF/infos.cpp"
-        /*
+/*
  * infos.cpp
  *
  * classes FeatureInfo, EnumConstInfo
@@ -11137,11 +11191,9 @@ QDParser::~QDParser()
  */
 
 /**************** leaving EMdF/infos.cpp temporarily *****************/
-/**************** A copy of include/infos.h *****************/
-
-
+/**************** A copy of include/infos.h ****************/
 #line 1 "include/infos.h"
-        /*
+/*
  * infos.h
  *
  * classes FeatureInfo, EnumConstInfo, ObjectTypeInfo
@@ -11238,13 +11290,13 @@ QDParser::~QDParser()
 
 
 #line 94 "include/infos.h"
-        
+
 
 /**************** already included emdf.h -- not including again *****************/
 
 
 #line 97 "include/infos.h"
-        #include <list>
+#include <list>
 #include <string>
 
 class FeatureInfo {
@@ -11307,11 +11359,12 @@ public:
 
 
 #endif // INFOS__H__
+
 /**************** continuing EMdF/infos.cpp where we left off *****************/
 
 
 #line 90 "EMdF/infos.cpp"
-        
+
 
 ///////////////////////////////////////////////////////////
 //
@@ -11500,11 +11553,10 @@ bool ObjectTypeInfo::operator==(const ObjectTypeInfo& other) const
 }
 
 
-/**************** A copy of EMdF/table.cpp *****************/
 
-
+/**************** A copy of EMdF/table.cpp ****************/
 #line 1 "EMdF/table.cpp"
-        /*
+/*
  * table.cpp
  *
  * Tables
@@ -11602,17 +11654,15 @@ bool ObjectTypeInfo::operator==(const ObjectTypeInfo& other) const
 
 
 #line 95 "EMdF/table.cpp"
-        #endif
+#endif
 /**************** already included debug.h -- not including again *****************/
 
 
 #line 97 "EMdF/table.cpp"
-        /**************** leaving EMdF/table.cpp temporarily *****************/
-/**************** A copy of include/table.h *****************/
-
-
+/**************** leaving EMdF/table.cpp temporarily *****************/
+/**************** A copy of include/table.h ****************/
 #line 1 "include/table.h"
-        /*
+/*
  * table.h
  *
  * Tables
@@ -11711,16 +11761,16 @@ bool ObjectTypeInfo::operator==(const ObjectTypeInfo& other) const
 
 
 #line 96 "include/table.h"
-        #ifndef SWIG
+#ifndef SWIG
 /**************** already included emdf_output.h -- not including again *****************/
 
 
 #line 98 "include/table.h"
-        /**************** already included emdf_enums.h -- not including again *****************/
+/**************** already included emdf_enums.h -- not including again *****************/
 
 
 #line 99 "include/table.h"
-        #endif // !defined SWIG
+#endif // !defined SWIG
 
 #include <string>
 
@@ -11984,11 +12034,12 @@ class Table {
 
 
 #endif /* TABLE__H__ */
+
 /**************** continuing EMdF/table.cpp where we left off *****************/
 
 
 #line 98 "EMdF/table.cpp"
-        #include <iostream>
+#include <iostream>
 
 
 /////////////////////////////////////////////////////////////////
@@ -13375,11 +13426,10 @@ bool Table::equals(Table& other)  throw(TableRowException,TableColumnException,T
 	// If we came this far, the tables were identical
 	return true;
 }
-/**************** A copy of EMdF/utils.cpp *****************/
 
-
+/**************** A copy of EMdF/utils.cpp ****************/
 #line 1 "EMdF/utils.cpp"
-        /*
+/*
  * utils.cpp
  *
  * Utility functions for EMdF
@@ -13469,11 +13519,9 @@ bool Table::equals(Table& other)  throw(TableRowException,TableColumnException,T
 
  
 /**************** leaving EMdF/utils.cpp temporarily *****************/
-/**************** A copy of include/utils.h *****************/
-
-
+/**************** A copy of include/utils.h ****************/
 #line 1 "include/utils.h"
-        /*
+/*
  * utils.h
  *
  * Utility functions for EMdF
@@ -13575,15 +13623,16 @@ bool char2bool(char in);
 
 
 #endif /* UTILS__H__ */
+
 /**************** continuing EMdF/utils.cpp where we left off *****************/
 
 
 #line 90 "EMdF/utils.cpp"
-        /**************** already included emdf.h -- not including again *****************/
+/**************** already included emdf.h -- not including again *****************/
 
 
 #line 91 "EMdF/utils.cpp"
-        #include <ctype.h> // For tolower
+#include <ctype.h> // For tolower
  
 /** Convert a database name to something that can be passed to the backends.
  *
@@ -13635,11 +13684,10 @@ bool char2bool(char in)
 	return in == 'Y';
 }
 
-/**************** A copy of EMdF/string_func.cpp *****************/
 
-
+/**************** A copy of EMdF/string_func.cpp ****************/
 #line 1 "EMdF/string_func.cpp"
-        /*
+/*
  * string_func.cpp
  *
  * String helper functions
@@ -13732,16 +13780,14 @@ bool char2bool(char in)
 
 
 #line 90 "EMdF/string_func.cpp"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 91 "EMdF/string_func.cpp"
-        /**************** leaving EMdF/string_func.cpp temporarily *****************/
-/**************** A copy of include/string_list.h *****************/
-
-
+/**************** leaving EMdF/string_func.cpp temporarily *****************/
+/**************** A copy of include/string_list.h ****************/
 #line 1 "include/string_list.h"
-        /*
+/*
  * string_list.h
  *
  * ParserList and associated classes
@@ -13841,7 +13887,7 @@ bool char2bool(char in)
 
 
 #line 97 "include/string_list.h"
-        
+
 #ifndef SWIG
 template<typename T> struct T_is_pointer { static const bool value = false; };
 template<typename T> struct T_is_pointer<T*> { static const bool value = true; };
@@ -14304,24 +14350,23 @@ class IntegerList : public ParserListLong {
 
 
 #endif // STRING_LIST__H__
+
 /**************** continuing EMdF/string_func.cpp where we left off *****************/
 
 
 #line 92 "EMdF/string_func.cpp"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 93 "EMdF/string_func.cpp"
-        #include <cctype>
+#include <cctype>
 #include <cstring>
 #include <cstdlib>
 #include <sstream>
 /**************** leaving EMdF/string_func.cpp temporarily *****************/
-/**************** A copy of include/emdros_reserved_words.h *****************/
-
-
+/**************** A copy of include/emdros_reserved_words.h ****************/
 #line 1 "include/emdros_reserved_words.h"
-        #ifndef EMDROS_RESERVED_WORDS_H_
+#ifndef EMDROS_RESERVED_WORDS_H_
 #define EMDROS_RESERVED_WORDS_H_
 static const char *emdros_reserved_words[] = {
 "create",
@@ -14416,6 +14461,7 @@ static const char *emdros_reserved_words[] = {
 "union",
 "overlap",
 "part_of",
+"starts_in",
 "intersect",
 "difference",
 "replace",
@@ -14424,11 +14470,12 @@ static const char *emdros_reserved_words[] = {
  NULL
 };
 #endif /* EMDROS_RESERVED_WORDS_H_ */
+
 /**************** continuing EMdF/string_func.cpp where we left off *****************/
 
 
 #line 98 "EMdF/string_func.cpp"
-        
+
 #ifdef WIN32
 #ifndef snprintf
 /* In MSVC++ 2008, snprintf isn't defined, but _snprintf is. */
@@ -16151,11 +16198,10 @@ void print_indent(std::ostream *pOut, int indent)
 		}
 	}
 }
-/**************** A copy of EMdF/string_list.cpp *****************/
 
-
+/**************** A copy of EMdF/string_list.cpp ****************/
 #line 1 "EMdF/string_list.cpp"
-        /*
+/*
  * string_list.cpp
  *
  * StringList and associated classes
@@ -16253,14 +16299,13 @@ void print_indent(std::ostream *pOut, int indent)
 
 
 #line 95 "EMdF/string_list.cpp"
-        #endif
+#endif
 
 
-/**************** A copy of EMdF/string_set_cache.cpp *****************/
 
-
+/**************** A copy of EMdF/string_set_cache.cpp ****************/
 #line 1 "EMdF/string_set_cache.cpp"
-        /*
+/*
  * string_set_cache.cpp
  *
  * StringSetCache and related classes
@@ -16351,11 +16396,9 @@ void print_indent(std::ostream *pOut, int indent)
  */
 
 /**************** leaving EMdF/string_set_cache.cpp temporarily *****************/
-/**************** A copy of include/string_set_cache.h *****************/
-
-
+/**************** A copy of include/string_set_cache.h ****************/
 #line 1 "include/string_set_cache.h"
-        /*
+/*
  * string_set_cache.h
  *
  * StringSetCache and related classes
@@ -16457,7 +16500,7 @@ void print_indent(std::ostream *pOut, int indent)
 
 
 #line 99 "include/string_set_cache.h"
-        
+
 class StringSetsCache; // Forward declaration
 class Table; // Forward declaration
 class SetOfMonads; // Forward declaration
@@ -16508,19 +16551,20 @@ class StringSetsCache {
 
 
 #endif // STRING_SET_CACHE__H__
+
 /**************** continuing EMdF/string_set_cache.cpp where we left off *****************/
 
 
 #line 91 "EMdF/string_set_cache.cpp"
-        /**************** already included monads.h -- not including again *****************/
+/**************** already included monads.h -- not including again *****************/
 
 
 #line 92 "EMdF/string_set_cache.cpp"
-        /**************** already included table.h -- not including again *****************/
+/**************** already included table.h -- not including again *****************/
 
 
 #line 93 "EMdF/string_set_cache.cpp"
-        
+
 //////////////////////////////////////////////////////////////////
 //
 // StringSetCache
@@ -16768,11 +16812,10 @@ void StringSetsCache::clear(void)
 	}
 	m_sets.clear();
 }
-/**************** A copy of EMdF/emdf_hash.cpp *****************/
 
-
+/**************** A copy of EMdF/emdf_hash.cpp ****************/
 #line 1 "EMdF/emdf_hash.cpp"
-        /*
+/*
  * emdf_hash.cpp
  *
  * Hash table class for Emdros
@@ -16864,11 +16907,9 @@ void StringSetsCache::clear(void)
 
 
 /**************** leaving EMdF/emdf_hash.cpp temporarily *****************/
-/**************** A copy of include/emdf_hash.h *****************/
-
-
+/**************** A copy of include/emdf_hash.h ****************/
 #line 1 "include/emdf_hash.h"
-        /*
+/*
  * emdf_hash.h
  *
  * Hash table class for Emdros
@@ -16982,11 +17023,9 @@ typedef unsigned __int64 uint64_t;
 #endif
 
 /**************** leaving include/emdf_hash.h temporarily *****************/
-/**************** A copy of include/emdfdb.h *****************/
-
-
+/**************** A copy of include/emdfdb.h ****************/
 #line 1 "include/emdfdb.h"
-        /*
+/*
  * emdfdb.h
  *
  * EMdF database base class
@@ -17083,11 +17122,11 @@ typedef unsigned __int64 uint64_t;
 
 
 #line 94 "include/emdfdb.h"
-        /**************** already included infos.h -- not including again *****************/
+/**************** already included infos.h -- not including again *****************/
 
 
 #line 95 "include/emdfdb.h"
-        #include <string>
+#include <string>
 #include <list>
 #include <set>
 #include <vector>
@@ -17097,15 +17136,15 @@ typedef unsigned __int64 uint64_t;
 
 
 #line 102 "include/emdfdb.h"
-        /**************** already included emdf_exception.h -- not including again *****************/
+/**************** already included emdf_exception.h -- not including again *****************/
 
 
 #line 103 "include/emdfdb.h"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 104 "include/emdfdb.h"
-        #endif // !defined SWIG
+#endif // !defined SWIG
 
 
 #ifndef SWIG
@@ -17632,6 +17671,7 @@ class EMdFDB {
 			     EMdFFFeatures *pre_query_constraints,
 			     const std::list<FeatureInfo>& features_to_get,
 			     const std::string& monad_set_name,
+			     eMonadSetRelationOperation ms_operation,
 			     /* out */ Inst& Result);
  protected:
 	virtual bool getFeatureVectors(const std::list<FeatureInfo>& features_to_get,
@@ -17659,6 +17699,7 @@ class EMdFDB {
 			     const std::list<FeatureInfo>& features_to_get,
 			     const std::string& monad_set_name,
 			     eObjectRangeType objectRangeType,
+			     eMonadSetRelationOperation ms_operation,
 			     /* out */ Inst& Result);
  public:
 
@@ -18085,15 +18126,16 @@ extern std::string getStringFromeComparisonOp(eComparisonOp op);
 
 
 #endif // EMDFDB__H__
+
 /**************** continuing include/emdf_hash.h where we left off *****************/
 
 
 #line 114 "include/emdf_hash.h"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 115 "include/emdf_hash.h"
-        
+
 template<class V> class EmdrosStringHashTableNode {
  public:
 	std::string m_key;
@@ -18246,16 +18288,16 @@ inline int hash_djb2_int(int value, long hashtable_size)
 
 
 #endif /* EMDF_HASH__ */
+
 /**************** continuing EMdF/emdf_hash.cpp where we left off *****************/
 
 
 #line 92 "EMdF/emdf_hash.cpp"
-        
-/**************** A copy of EMdF/emdf_output.cpp *****************/
 
 
+/**************** A copy of EMdF/emdf_output.cpp ****************/
 #line 1 "EMdF/emdf_output.cpp"
-        /*
+/*
  * emdf_output.cpp
  *
  * Class to output something either in XML or in console-format.
@@ -18354,17 +18396,17 @@ inline int hash_djb2_int(int value, long hashtable_size)
 
 
 #line 96 "EMdF/emdf_output.cpp"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 97 "EMdF/emdf_output.cpp"
-        #endif
+#endif
 
 /**************** already included debug.h -- not including again *****************/
 
 
 #line 100 "EMdF/emdf_output.cpp"
-        
+
 /** Names of charsets.
  *\internal
  */
@@ -18886,11 +18928,10 @@ void EMdFOutput::jsonOutValueOrNull(long i)
 }
 
 
-/**************** A copy of EMdF/emdf_value.cpp *****************/
 
-
+/**************** A copy of EMdF/emdf_value.cpp ****************/
 #line 1 "EMdF/emdf_value.cpp"
-        /*
+/*
  * emdf_value.cpp
  *
  * EMdFValue class
@@ -18986,11 +19027,9 @@ void EMdFOutput::jsonOutValueOrNull(long i)
 #include <string~2.h>
 #else
 /**************** leaving EMdF/emdf_value.cpp temporarily *****************/
-/**************** A copy of include/emdf_value.h *****************/
-
-
+/**************** A copy of include/emdf_value.h ****************/
 #line 1 "include/emdf_value.h"
-        /*
+/*
  * emdf_value.h
  *
  * EMdFValue class
@@ -19087,16 +19126,16 @@ void EMdFOutput::jsonOutValueOrNull(long i)
 
 
 #line 94 "include/emdf_value.h"
-        #include <string>
+#include <string>
 /**************** already included emdf_enums.h -- not including again *****************/
 
 
 #line 96 "include/emdf_value.h"
-        /**************** already included exception_emdros.h -- not including again *****************/
+/**************** already included exception_emdros.h -- not including again *****************/
 
 
 #line 97 "include/emdf_value.h"
-        
+
 class IntegerList; // Forward declaration
 class SetOfMonads; // Forward declaration
 
@@ -19153,28 +19192,29 @@ private:
 
 
 #endif // EMDF_VALUE__H__
+
 /**************** continuing EMdF/emdf_value.cpp where we left off *****************/
 
 
 #line 96 "EMdF/emdf_value.cpp"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 97 "EMdF/emdf_value.cpp"
-        /**************** already included string_list.h -- not including again *****************/
+/**************** already included string_list.h -- not including again *****************/
 
 
 #line 98 "EMdF/emdf_value.cpp"
-        #endif
+#endif
 /**************** already included monads.h -- not including again *****************/
 
 
 #line 100 "EMdF/emdf_value.cpp"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 101 "EMdF/emdf_value.cpp"
-        #include <iostream>
+#include <iostream>
 
 // Don't use unless you plan to = assign a new value later
 EMdFValue::EMdFValue()
@@ -19607,11 +19647,10 @@ bool EMdFValue::compareSetOfMonads(const EMdFValue& other, eComparisonOp op) con
 	
 	return bResult;
 }
-/**************** A copy of EMdF/emdf_ffeatures.cpp *****************/
 
-
+/**************** A copy of EMdF/emdf_ffeatures.cpp ****************/
 #line 1 "EMdF/emdf_ffeatures.cpp"
-        /*
+/*
  * emdf_ffeatures.cpp
  *
  * Definitions of AST-classes for EMdF ffeatures
@@ -19707,7 +19746,7 @@ bool EMdFValue::compareSetOfMonads(const EMdFValue& other, eComparisonOp op) con
 
 
 #line 93 "EMdF/emdf_ffeatures.cpp"
-        #include <emdf_v~1.h>
+#include <emdf_v~1.h>
 #include <emdf_f~1.h>
 #include <string~1.h>
 #include <string~2.h>
@@ -19716,16 +19755,14 @@ bool EMdFValue::compareSetOfMonads(const EMdFValue& other, eComparisonOp op) con
 
 
 #line 99 "EMdF/emdf_ffeatures.cpp"
-        /**************** already included emdf_value.h -- not including again *****************/
+/**************** already included emdf_value.h -- not including again *****************/
 
 
 #line 100 "EMdF/emdf_ffeatures.cpp"
-        /**************** leaving EMdF/emdf_ffeatures.cpp temporarily *****************/
-/**************** A copy of include/emdf_ffeatures.h *****************/
-
-
+/**************** leaving EMdF/emdf_ffeatures.cpp temporarily *****************/
+/**************** A copy of include/emdf_ffeatures.h ****************/
 #line 1 "include/emdf_ffeatures.h"
-        /*
+/*
  * emdf_ffeatures.h
  *
  * Definitions of AST-classes for EMdF ffeatures
@@ -19823,7 +19860,7 @@ bool EMdFValue::compareSetOfMonads(const EMdFValue& other, eComparisonOp op) con
 
 
 #line 95 "include/emdf_ffeatures.h"
-        
+
 
 class EMdFValue; // Forward declaration
 class EMdFDBDBError; // Forward declaration
@@ -19955,28 +19992,29 @@ class EMdFFFeatures {
 
 
 #endif /* EMDF_FFEATURES__H__ */
+
 /**************** continuing EMdF/emdf_ffeatures.cpp where we left off *****************/
 
 
 #line 101 "EMdF/emdf_ffeatures.cpp"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 102 "EMdF/emdf_ffeatures.cpp"
-        /**************** already included string_list.h -- not including again *****************/
+/**************** already included string_list.h -- not including again *****************/
 
 
 #line 103 "EMdF/emdf_ffeatures.cpp"
-        #endif
+#endif
 /**************** already included emdfdb.h -- not including again *****************/
 
 
 #line 105 "EMdF/emdf_ffeatures.cpp"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 106 "EMdF/emdf_ffeatures.cpp"
-        
+
 
 ////////////////////////////////////////////////////////////
 //
@@ -20258,11 +20296,10 @@ std::string EMdFFFeatures::makeConstraints(EMdFDB *pDB) const throw(EMdFDBDBErro
 
 
 
-/**************** A copy of EMdF/enum_const_cache.cpp *****************/
 
-
+/**************** A copy of EMdF/enum_const_cache.cpp ****************/
 #line 1 "EMdF/enum_const_cache.cpp"
-        /*
+/*
  * enum_const_cache.cpp
  *
  * EnumConstCache class
@@ -20356,11 +20393,9 @@ std::string EMdFFFeatures::makeConstraints(EMdFDB *pDB) const throw(EMdFDBDBErro
 #include <enum_c~1.h>
 #else
 /**************** leaving EMdF/enum_const_cache.cpp temporarily *****************/
-/**************** A copy of include/enum_const_cache.h *****************/
-
-
+/**************** A copy of include/enum_const_cache.h ****************/
 #line 1 "include/enum_const_cache.h"
-        /*
+/*
  * enum_const_cache.h
  *
  * EnumConstCache class
@@ -20457,11 +20492,11 @@ std::string EMdFFFeatures::makeConstraints(EMdFDB *pDB) const throw(EMdFDBDBErro
 
 
 #line 94 "include/enum_const_cache.h"
-        /**************** already included infos.h -- not including again *****************/
+/**************** already included infos.h -- not including again *****************/
 
 
 #line 95 "include/enum_const_cache.h"
-        #include <vector>
+#include <vector>
 #include <map>
 #include <string>
 
@@ -20532,16 +20567,17 @@ class EnumConstCache {
 
 
 #endif // ENUM_CONST_CACHE__H__
+
 /**************** continuing EMdF/enum_const_cache.cpp where we left off *****************/
 
 
 #line 94 "EMdF/enum_const_cache.cpp"
-        #endif
+#endif
 /**************** already included debug.h -- not including again *****************/
 
 
 #line 96 "EMdF/enum_const_cache.cpp"
-        
+
 
 /** Local function to clear a ValueECIMap.
  *
@@ -20957,11 +20993,10 @@ void EnumConstCache::setNewDefault(id_d_t enum_id, const std::string& enum_value
 	}
 }
 
-/**************** A copy of EMdF/inst_object.cpp *****************/
 
-
+/**************** A copy of EMdF/inst_object.cpp ****************/
 #line 1 "EMdF/inst_object.cpp"
-        /*
+/*
  * inst_object.cpp
  *
  * InstObject class
@@ -21055,11 +21090,9 @@ void EnumConstCache::setNewDefault(id_d_t enum_id, const std::string& enum_value
 #include <inst_o~1.h>
 #else
 /**************** leaving EMdF/inst_object.cpp temporarily *****************/
-/**************** A copy of include/inst_object.h *****************/
-
-
+/**************** A copy of include/inst_object.h ****************/
 #line 1 "include/inst_object.h"
-        /*
+/*
  * inst_object.h
  *
  * InstObject class
@@ -21156,17 +21189,17 @@ void EnumConstCache::setNewDefault(id_d_t enum_id, const std::string& enum_value
 
 
 #line 94 "include/inst_object.h"
-        /**************** already included monads.h -- not including again *****************/
+/**************** already included monads.h -- not including again *****************/
 
 
 #line 95 "include/inst_object.h"
-        #include <vector>
+#include <vector>
 #include <string>
 /**************** already included emdf_value.h -- not including again *****************/
 
 
 #line 98 "include/inst_object.h"
-        
+
 
 
 enum {
@@ -21223,16 +21256,17 @@ public:
 
 
 #endif // INST_OBJECT__H__
+
 /**************** continuing EMdF/inst_object.cpp where we left off *****************/
 
 
 #line 94 "EMdF/inst_object.cpp"
-        #endif
+#endif
 /**************** already included debug.h -- not including again *****************/
 
 
 #line 96 "EMdF/inst_object.cpp"
-        
+
 
 InstObject::InstObject(id_d_t id_d, monad_m first_monad, monad_m last_monad, EMdFValue *feature_value_arr, int size_of_array)
 	: m_id_d(id_d), m_first(first_monad),
@@ -21342,11 +21376,10 @@ void InstObject::changeString(unsigned int index, const std::string& newString)
 	ASSERT_THROW(m_feature_value_arr != 0, "feature_val_arr is 0");
 	m_feature_value_arr[index].changeString(newString);
 }
-/**************** A copy of EMdF/inst.cpp *****************/
 
-
+/**************** A copy of EMdF/inst.cpp ****************/
 #line 1 "EMdF/inst.cpp"
-        /*
+/*
  * inst.cpp
  *
  * inst(T,U) class
@@ -21441,12 +21474,10 @@ void InstObject::changeString(unsigned int index, const std::string& newString)
 
 
 #line 92 "EMdF/inst.cpp"
-        /**************** leaving EMdF/inst.cpp temporarily *****************/
-/**************** A copy of include/inst.h *****************/
-
-
+/**************** leaving EMdF/inst.cpp temporarily *****************/
+/**************** A copy of include/inst.h ****************/
 #line 1 "include/inst.h"
-        /*
+/*
  * inst.h
  *
  * inst(T,Su) class
@@ -21543,19 +21574,19 @@ void InstObject::changeString(unsigned int index, const std::string& newString)
 
 
 #line 94 "include/inst.h"
-        /**************** already included inst_object.h -- not including again *****************/
+/**************** already included inst_object.h -- not including again *****************/
 
 
 #line 95 "include/inst.h"
-        /**************** already included arena.h -- not including again *****************/
+/**************** already included arena.h -- not including again *****************/
 
 
 #line 96 "include/inst.h"
-        /**************** already included monads.h -- not including again *****************/
+/**************** already included monads.h -- not including again *****************/
 
 
 #line 97 "include/inst.h"
-        #include <list>
+#include <list>
 #include <vector>
 #include <map>
 #include <string>
@@ -21891,15 +21922,16 @@ class Inst {
 
 
 #endif // INST__H__
+
 /**************** continuing EMdF/inst.cpp where we left off *****************/
 
 
 #line 93 "EMdF/inst.cpp"
-        /**************** already included logging.h -- not including again *****************/
+/**************** already included logging.h -- not including again *****************/
 
 
 #line 94 "EMdF/inst.cpp"
-        
+
 
 ////////////////////////////////////////////////////////////
 //
@@ -22565,24 +22597,23 @@ int SkipList::randomLevel()
 	return (level > MAX_LEVEL) ? MAX_LEVEL : level;
 }
 
-/**************** A copy of EMdF/json_classes.cpp *****************/
 
-
+/**************** A copy of EMdF/json_classes.cpp ****************/
 #line 1 "EMdF/json_classes.cpp"
-        /*
+/*
  * json_classes.cpp
  *
  * JSON classes
  *
  * Ulrik Sandborg-Petersen
  * Created: 7/28-2008
- * Last update: 4/9-2014
+ * Last update: 4/12-2016
  *
  */
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2008-2014  Ulrik Sandborg-Petersen
+ *   Copyright (C) 2008-2016  Ulrik Sandborg-Petersen
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License as
@@ -22656,18 +22687,16 @@ int SkipList::randomLevel()
 
 #include <fstream>
 /**************** leaving EMdF/json_classes.cpp temporarily *****************/
-/**************** A copy of include/json_classes.h *****************/
-
-
+/**************** A copy of include/json_classes.h ****************/
 #line 1 "include/json_classes.h"
-        /*
+/*
  * json.h
  *
  * JSON classes
  *
  * Ulrik Sandborg-Petersen
  * Created: 7/28-2008
- * Last update: 11/27-2012
+ * Last update: 4/12-2016
  *
  */
 /************************************************************************
@@ -22753,11 +22782,9 @@ int SkipList::randomLevel()
 #include <list>
 #include <ostream>
 /**************** leaving include/json_classes.h temporarily *****************/
-/**************** A copy of include/json_lexer.h *****************/
-
-
+/**************** A copy of include/json_lexer.h ****************/
 #line 1 "include/json_lexer.h"
-        /*
+/*
  * json_lexer.h
  *
  * JSON Lexer based on re2c
@@ -22847,11 +22874,9 @@ int SkipList::randomLevel()
 
 #include <string>
 /**************** leaving include/json_lexer.h temporarily *****************/
-/**************** A copy of include/mql_yylex.h *****************/
-
-
+/**************** A copy of include/mql_yylex.h ****************/
 #line 1 "include/mql_yylex.h"
-        /*
+/*
  * mql_yylex.h
  *
  * MQL yylex
@@ -22948,11 +22973,11 @@ int SkipList::randomLevel()
 
 
 #line 94 "include/mql_yylex.h"
-        /**************** already included arena.h -- not including again *****************/
+/**************** already included arena.h -- not including again *****************/
 
 
 #line 95 "include/mql_yylex.h"
-        
+
 extern int yylex(void *lvalp, void *parm);
 
 #define STRING_MAGIC "*&$STRING$&*"
@@ -23021,11 +23046,12 @@ inline Token* newToken()
 
 
 #endif // MQL_YYLEX__H__
+
 /**************** continuing include/json_lexer.h where we left off *****************/
 
 
 #line 90 "include/json_lexer.h"
-        
+
 class JSONScanner {
 protected:
 	std::string m_szIn;
@@ -23057,11 +23083,12 @@ private:
 
 
 #endif // JSON_LEXER__H__
+
 /**************** continuing include/json_classes.h where we left off *****************/
 
 
 #line 93 "include/json_classes.h"
-        
+
 typedef enum {
 	kJSONNull,
 	kJSONBoolean,
@@ -23102,6 +23129,7 @@ class JSONListElement {
 	JSONValue *extractValue(void) { JSONValue *pResult = m_pValue; m_pValue = 0; return pResult; };
 	void setNext(JSONListElement *pNext) { m_pNext = pNext; };
 	JSONListElement *getNext(void) { return m_pNext; };
+	static void destroyList(JSONListElement *pList);
  private:
 	JSONListElement(const JSONListElement& other);
 	JSONListElement& operator=(const JSONListElement& other);
@@ -23141,6 +23169,7 @@ class JSONValue {
 	std::list<std::string> getObjectKeys(void) const;
 	bool hasObjectKey(const std::string& key) const;
 	void pretty(std::ostream *pOut, int indent_level = 0) const;
+	void printCompact(std::ostream *pOut) const;
  private:
 	JSONValue(const JSONValue& other);
 	JSONValue& operator=(const JSONValue& other);
@@ -23187,20 +23216,19 @@ extern JSONValue *readAndParseJSONFromString(const std::string& json_string, std
 extern JSONValue *readAndParseJSONFromFile(const std::string& filename, std::string& error_message);
 
 #endif
+
 /**************** continuing EMdF/json_classes.cpp where we left off *****************/
 
 
 #line 87 "EMdF/json_classes.cpp"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 88 "EMdF/json_classes.cpp"
-        /**************** leaving EMdF/json_classes.cpp temporarily *****************/
-/**************** A copy of EMdF/jsonpars.h *****************/
-
-
+/**************** leaving EMdF/json_classes.cpp temporarily *****************/
+/**************** A copy of EMdF/jsonpars.h ****************/
 #line 1 "EMdF/jsonpars.h"
-        #define T_JSON_KEY_BRACE_OPEN                   1
+#define T_JSON_KEY_BRACE_OPEN                   1
 #define T_JSON_KEY_BRACE_CLOSE                  2
 #define T_JSON_KEY_COMMA                        3
 #define T_JSON_STRING                           4
@@ -23211,11 +23239,12 @@ extern JSONValue *readAndParseJSONFromFile(const std::string& filename, std::str
 #define T_JSON_KEY_FALSE                        9
 #define T_JSON_KEY_NULL                        10
 #define T_JSON_INTEGER                         11
+
 /**************** continuing EMdF/json_classes.cpp where we left off *****************/
 
 
 #line 89 "EMdF/json_classes.cpp"
-        
+
 //////////////////////////////////////////////////////////////////
 //
 // JSONKeyValuePair
@@ -23260,6 +23289,18 @@ JSONListElement::~JSONListElement()
 	delete m_pValue;
 	delete m_pNext;
 }
+
+void JSONListElement::destroyList(JSONListElement *pList)
+{
+	JSONListElement *pCur = pList;
+	while (pCur != 0) {
+		JSONListElement *pNext = pCur->m_pNext;
+		pCur->m_pNext = 0;
+		delete pCur;
+		pCur = pNext;
+	}
+}
+
 
 
 
@@ -23306,7 +23347,7 @@ JSONValue::JSONValue(JSONListElement *pTail)
 		m_value.m_pList->push_front(pCurValue);
 		pCur = pCur->getNext();
 	}
-	delete pTail;
+	JSONListElement::destroyList(pTail);
 }
 
 
@@ -23515,6 +23556,61 @@ JSONValue* JSONValue::getObjectValue(const std::string& key)
 		}
 	} else {
 		return 0;
+	}
+}
+
+void JSONValue::printCompact(std::ostream *pOut) const
+{
+	switch (m_kind) {
+	case kJSONNull:
+		(*pOut) << "null";
+		break;
+	case kJSONBoolean:
+		if (getBoolean()) {
+			(*pOut) << "true";
+		} else {
+			(*pOut) << "false";
+		}
+		break;
+	case kJSONInteger:
+		(*pOut) << getInteger();
+		break;
+	case kJSONString:
+		(*pOut) << '\"' << escapeJSONChars(getString()) << '\"';
+		break;
+	case kJSONList: {
+		(*pOut) << '[';
+		std::list<JSONValue*>::const_iterator ci = m_value.m_pList->begin();
+		if (ci != m_value.m_pList->end()) {
+			(*ci)->printCompact(pOut);
+			++ci;
+		}
+		while (ci != m_value.m_pList->end()) {
+			(*pOut) << ',';
+			(*ci)->printCompact(pOut);
+			++ci;
+		}
+		(*pOut) << ']';
+			}
+		break;
+	case kJSONObject: {
+		(*pOut) << '{';
+		std::map<std::string, JSONValue*>::const_iterator ci;
+		ci = m_value.m_pObject->begin();
+		if (ci != m_value.m_pObject->end()) {
+			(*pOut) << '\"' << escapeJSONChars(ci->first) << "\":";
+			ci->second->printCompact(pOut);
+			++ci;
+		}
+		while (ci != m_value.m_pObject->end()) {
+			(*pOut) << ',';
+			(*pOut) << '\"' << escapeJSONChars(ci->first) << "\":";
+			ci->second->printCompact(pOut);
+			++ci;
+		}
+		(*pOut) << '}';
+	}
+		break;
 	}
 }
 
@@ -23860,11 +23956,10 @@ JSONValue *readAndParseJSONFromFile(const std::string& filename, std::string& er
 }
 
 
-/**************** A copy of EMdF/json_lexer.cpp *****************/
 
-
+/**************** A copy of EMdF/json_lexer.cpp ****************/
 #line 1 "EMdF/json_lexer.cpp"
-        /* Generated by re2c 0.13.5 on Wed Mar 30 17:16:16 2016 */
+/* Generated by re2c 0.13.5 on Sun May  8 22:29:10 2016 */
 #line 1 "./json.re"
 /*
  * json.re
@@ -23873,13 +23968,13 @@ JSONValue *readAndParseJSONFromFile(const std::string& filename, std::string& er
  *
  * Ulrik Sandborg-Petersen
  * Created: 7/28-2008
- * Last update: 4/16-2015
+ * Last update: 4/28-2016
  *
  */
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2008-2015  Ulrik Sandborg-Petersen
+ *   Copyright (C) 2008-2016  Ulrik Sandborg-Petersen
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License as
@@ -23955,16 +24050,16 @@ JSONValue *readAndParseJSONFromFile(const std::string& filename, std::string& er
 
 
 #line 88 "EMdF/json_lexer.cpp"
-        /**************** already included jsonpars.h -- not including again *****************/
+/**************** already included jsonpars.h -- not including again *****************/
 
 
 #line 89 "EMdF/json_lexer.cpp"
-        #include <iostream>
+#include <iostream>
 /**************** already included string_func.h -- not including again *****************/
 
 
 #line 91 "EMdF/json_lexer.cpp"
-        
+
 #define YYCTYPE         unsigned char
 #define YYCURSOR        cur
 #define YYLIMIT         lim
@@ -24326,162 +24421,175 @@ jj60:
 #line 452 "./json_lexer.cpp"
 jj62:
 	yych = *(YYMARKER = ++YYCURSOR);
-	if (yych <= 'a') {
-		if (yych <= '"') {
+	if (yych <= 'b') {
+		if (yych <= '&') {
 			if (yych <= '\f') {
-				if (yych == '\n') goto jj74;
+				if (yych == '\n') goto jj75;
 			} else {
-				if (yych <= '\r') goto jj72;
-				if (yych >= '"') goto jj76;
+				if (yych <= '\r') goto jj73;
+				if (yych == '"') goto jj77;
 			}
 		} else {
-			if (yych <= '>') {
-				if (yych == '\'') goto jj78;
+			if (yych <= '?') {
+				if (yych <= '\'') goto jj79;
+				if (yych >= '?') goto jj81;
 			} else {
-				if (yych <= '?') goto jj80;
-				if (yych == '\\') goto jj82;
+				if (yych == '\\') goto jj83;
+				if (yych >= 'b') goto jj89;
 			}
 		}
 	} else {
-		if (yych <= 'r') {
-			if (yych <= 'f') {
-				if (yych <= 'b') goto jj88;
-				if (yych >= 'f') goto jj84;
+		if (yych <= 's') {
+			if (yych <= 'm') {
+				if (yych == 'f') goto jj85;
 			} else {
-				if (yych == 'n') goto jj92;
-				if (yych >= 'r') goto jj86;
+				if (yych <= 'n') goto jj93;
+				if (yych == 'r') goto jj87;
 			}
 		} else {
 			if (yych <= 'w') {
-				if (yych == 't') goto jj90;
+				if (yych <= 't') goto jj91;
+				if (yych <= 'u') goto jj69;
 			} else {
-				if (yych <= 'x') goto jj69;
-				if (yych == 0xE2) goto jj71;
+				if (yych <= 'x') goto jj71;
+				if (yych == 0xE2) goto jj72;
 			}
 		}
 	}
 jj63:
-#line 259 "./json.re"
+#line 268 "./json.re"
 	{ (*yylval)->pString->push_back(*tok);
 			       goto stringdq; }
-#line 493 "./json_lexer.cpp"
+#line 494 "./json_lexer.cpp"
 jj64:
 	++YYCURSOR;
-#line 258 "./json.re"
+#line 267 "./json.re"
 	{ if (cur >= lim) { goto end; } /* We might encounter a string which does not end before EOF. */ }
-#line 498 "./json_lexer.cpp"
+#line 499 "./json_lexer.cpp"
 jj66:
 	yych = *++YYCURSOR;
 	goto jj63;
 jj67:
 	++YYCURSOR;
-#line 261 "./json.re"
+#line 270 "./json.re"
 	{ (*yylval)->pString->push_back('\n');
 			       goto stringdq; }
-#line 507 "./json_lexer.cpp"
+#line 508 "./json_lexer.cpp"
 jj69:
 	yych = *++YYCURSOR;
 	if (yych <= '@') {
 		if (yych <= '/') goto jj70;
-		if (yych <= '9') goto jj101;
+		if (yych <= '9') goto jj105;
 	} else {
-		if (yych <= 'F') goto jj101;
+		if (yych <= 'F') goto jj105;
 		if (yych <= '`') goto jj70;
-		if (yych <= 'f') goto jj101;
+		if (yych <= 'f') goto jj105;
 	}
 jj70:
 	YYCURSOR = YYMARKER;
 	goto jj63;
 jj71:
 	yych = *++YYCURSOR;
-	if (yych == 0x80) goto jj96;
-	goto jj70;
+	if (yych <= '@') {
+		if (yych <= '/') goto jj70;
+		if (yych <= '9') goto jj102;
+		goto jj70;
+	} else {
+		if (yych <= 'F') goto jj102;
+		if (yych <= '`') goto jj70;
+		if (yych <= 'f') goto jj102;
+		goto jj70;
+	}
 jj72:
+	yych = *++YYCURSOR;
+	if (yych == 0x80) goto jj97;
+	goto jj70;
+jj73:
 	++YYCURSOR;
-	if ((yych = *YYCURSOR) == '\n') goto jj94;
+	if ((yych = *YYCURSOR) == '\n') goto jj95;
 #line 249 "./json.re"
 	{ /* eaten; it is a LineContinuation */ goto stringdq; }
-#line 530 "./json_lexer.cpp"
-jj74:
+#line 543 "./json_lexer.cpp"
+jj75:
 	++YYCURSOR;
 #line 247 "./json.re"
 	{ /* eaten; it is a LineContinuation */ goto stringdq; }
-#line 535 "./json_lexer.cpp"
-jj76:
+#line 548 "./json_lexer.cpp"
+jj77:
 	++YYCURSOR;
 #line 246 "./json.re"
 	{ (*yylval)->pString->push_back('\"'); goto stringdq; }
-#line 540 "./json_lexer.cpp"
-jj78:
+#line 553 "./json_lexer.cpp"
+jj79:
 	++YYCURSOR;
 #line 245 "./json.re"
 	{ (*yylval)->pString->push_back('\''); goto stringdq; }
-#line 545 "./json_lexer.cpp"
-jj80:
+#line 558 "./json_lexer.cpp"
+jj81:
 	++YYCURSOR;
 #line 244 "./json.re"
 	{ (*yylval)->pString->push_back('\?'); goto stringdq; }
-#line 550 "./json_lexer.cpp"
-jj82:
+#line 563 "./json_lexer.cpp"
+jj83:
 	++YYCURSOR;
 #line 243 "./json.re"
 	{ (*yylval)->pString->push_back('\\'); goto stringdq; }
-#line 555 "./json_lexer.cpp"
-jj84:
+#line 568 "./json_lexer.cpp"
+jj85:
 	++YYCURSOR;
 #line 242 "./json.re"
 	{ (*yylval)->pString->push_back('\f'); goto stringdq; }
-#line 560 "./json_lexer.cpp"
-jj86:
+#line 573 "./json_lexer.cpp"
+jj87:
 	++YYCURSOR;
 #line 241 "./json.re"
 	{ (*yylval)->pString->push_back('\r'); goto stringdq; }
-#line 565 "./json_lexer.cpp"
-jj88:
+#line 578 "./json_lexer.cpp"
+jj89:
 	++YYCURSOR;
 #line 240 "./json.re"
 	{ (*yylval)->pString->push_back('\b'); goto stringdq; }
-#line 570 "./json_lexer.cpp"
-jj90:
+#line 583 "./json_lexer.cpp"
+jj91:
 	++YYCURSOR;
 #line 239 "./json.re"
 	{ (*yylval)->pString->push_back('\t'); goto stringdq; }
-#line 575 "./json_lexer.cpp"
-jj92:
+#line 588 "./json_lexer.cpp"
+jj93:
 	++YYCURSOR;
 #line 238 "./json.re"
 	{ (*yylval)->pString->push_back('\n'); goto stringdq; }
-#line 580 "./json_lexer.cpp"
-jj94:
+#line 593 "./json_lexer.cpp"
+jj95:
 	++YYCURSOR;
 #line 248 "./json.re"
 	{ /* eaten; it is a LineContinuation */ goto stringdq; }
-#line 585 "./json_lexer.cpp"
-jj96:
+#line 598 "./json_lexer.cpp"
+jj97:
 	yych = *++YYCURSOR;
 	if (yych <= 0xA7) goto jj70;
-	if (yych <= 0xA8) goto jj99;
+	if (yych <= 0xA8) goto jj100;
 	if (yych >= 0xAA) goto jj70;
 	++YYCURSOR;
 #line 251 "./json.re"
 	{ /* \\ + \u2029 (<PS>) is eaten; it is a LineContinuation */ goto stringdq; }
-#line 594 "./json_lexer.cpp"
-jj99:
+#line 607 "./json_lexer.cpp"
+jj100:
 	++YYCURSOR;
 #line 250 "./json.re"
 	{ /* \\ + \u2028 (<LS>) is eaten; it is a LineContinuation */ goto stringdq; }
-#line 599 "./json_lexer.cpp"
-jj101:
+#line 612 "./json_lexer.cpp"
+jj102:
 	yych = *++YYCURSOR;
 	if (yych <= '@') {
 		if (yych <= '/') goto jj70;
 		if (yych >= ':') goto jj70;
 	} else {
-		if (yych <= 'F') goto jj102;
+		if (yych <= 'F') goto jj103;
 		if (yych <= '`') goto jj70;
 		if (yych >= 'g') goto jj70;
 	}
-jj102:
+jj103:
 	++YYCURSOR;
 #line 252 "./json.re"
 	{ tok += 2; // Go past SLASH x
@@ -24490,9 +24598,52 @@ jj102:
 			       (*yylval)->pString->push_back(hex2char(mystr.c_str()));
 			       goto stringdq; 			     
                              }
-#line 619 "./json_lexer.cpp"
+#line 632 "./json_lexer.cpp"
+jj105:
+	yych = *++YYCURSOR;
+	if (yych <= '@') {
+		if (yych <= '/') goto jj70;
+		if (yych >= ':') goto jj70;
+	} else {
+		if (yych <= 'F') goto jj106;
+		if (yych <= '`') goto jj70;
+		if (yych >= 'g') goto jj70;
+	}
+jj106:
+	yych = *++YYCURSOR;
+	if (yych <= '@') {
+		if (yych <= '/') goto jj70;
+		if (yych >= ':') goto jj70;
+	} else {
+		if (yych <= 'F') goto jj107;
+		if (yych <= '`') goto jj70;
+		if (yych >= 'g') goto jj70;
+	}
+jj107:
+	yych = *++YYCURSOR;
+	if (yych <= '@') {
+		if (yych <= '/') goto jj70;
+		if (yych >= ':') goto jj70;
+	} else {
+		if (yych <= 'F') goto jj108;
+		if (yych <= '`') goto jj70;
+		if (yych >= 'g') goto jj70;
+	}
+jj108:
+	++YYCURSOR;
+#line 258 "./json.re"
+	{ tok += 2; // Go past SLASH x
+			       std::string mystr;
+			       getString(mystr);
+			       long hex_long = hex2long(mystr);
+			       std::string utf8_output;
+			       long2utf8(hex_long, utf8_output);
+			       (*(*yylval)->pString) += utf8_output;
+			       goto stringdq; 			     
+                             }
+#line 675 "./json_lexer.cpp"
 }
-#line 263 "./json.re"
+#line 272 "./json.re"
 
 
  end:
@@ -24578,11 +24729,10 @@ std::string JSONScanner::getInputScannedSoFar()
                 }
         }
 }
-/**************** A copy of EMdF/json_parser.cpp *****************/
 
-
+/**************** A copy of EMdF/json_parser.cpp ****************/
 #line 1 "EMdF/json_parser.cpp"
-        /* Driver template for the LEMON parser generator.
+/* Driver template for the LEMON parser generator.
 ** The author disclaims copyright to this source code.
 */
 /* First off, code is included that follows the "include" declaration
@@ -24681,11 +24831,11 @@ std::string JSONScanner::getInputScannedSoFar()
 
 
 #line 96 "EMdF/json_parser.cpp"
-        /**************** already included mql_yylex.h -- not including again *****************/
+/**************** already included mql_yylex.h -- not including again *****************/
 
 
 #line 97 "EMdF/json_parser.cpp"
-        #include <cstdlib>
+#include <cstdlib>
 #include <string>
 
 #undef TOKEN
@@ -25868,11 +26018,10 @@ void JSONParser(
 #endif
   return;
 }
-/**************** A copy of EMdF/conn.cpp *****************/
 
-
+/**************** A copy of EMdF/conn.cpp ****************/
 #line 1 "EMdF/conn.cpp"
-        /*
+/*
  * conn.cpp
  *
  * Database connection abstract base class.
@@ -25963,11 +26112,9 @@ void JSONParser(
 
 
 /**************** leaving EMdF/conn.cpp temporarily *****************/
-/**************** A copy of include/conn.h *****************/
-
-
+/**************** A copy of include/conn.h ****************/
 #line 1 "include/conn.h"
-        /*
+/*
  * conn.h
  *
  * Database connection abstract base class.
@@ -26066,15 +26213,15 @@ void JSONParser(
 
 
 #line 96 "include/conn.h"
-        /**************** already included exception_emdros.h -- not including again *****************/
+/**************** already included exception_emdros.h -- not including again *****************/
 
 
 #line 97 "include/conn.h"
-        /**************** already included emdf_exception.h -- not including again *****************/
+/**************** already included emdf_exception.h -- not including again *****************/
 
 
 #line 98 "include/conn.h"
-        
+
 
 class EMdFConnection {
 public:
@@ -26173,20 +26320,21 @@ private:
 
 
 #endif // EMDF_CONN__H__
+
 /**************** continuing EMdF/conn.cpp where we left off *****************/
 
 
 #line 91 "EMdF/conn.cpp"
-        /**************** already included utils.h -- not including again *****************/
+/**************** already included utils.h -- not including again *****************/
 
 
 #line 92 "EMdF/conn.cpp"
-        #include <sstream>
+#include <sstream>
 /**************** already included debug.h -- not including again *****************/
 
 
 #line 94 "EMdF/conn.cpp"
-        
+
 
 EMdFConnection::EMdFConnection()
 {
@@ -26220,24 +26368,23 @@ bool EMdFConnection::useDatabase(const std::string& database_name, const std::st
   return false;
 }
 
-/**************** A copy of EMdF/emdfdb.cpp *****************/
 
-
+/**************** A copy of EMdF/emdfdb.cpp ****************/
 #line 1 "EMdF/emdfdb.cpp"
-        /*
+/*
  * emdfdb.cpp
  *
  * EMdF database base class
  *
  * Ulrik Petersen
  * Created: 1/27-2001
- * Last update: 10/16-2015
+ * Last update: 4/20-2016
  *
  */
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2001-2015  Ulrik Sandborg-Petersen
+ *   Copyright (C) 2001-2016  Ulrik Sandborg-Petersen
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License as
@@ -26317,7 +26464,7 @@ bool EMdFConnection::useDatabase(const std::string& database_name, const std::st
 
 
 #line 90 "EMdF/emdfdb.cpp"
-        // Do this because emdros-config might #define malloc,
+// Do this because emdros-config might #define malloc,
 // in which case some systems will fail to use the real 
 // malloc, thus causing build errors.
 #undef malloc
@@ -26327,53 +26474,51 @@ bool EMdFConnection::useDatabase(const std::string& database_name, const std::st
 
 
 #line 97 "EMdF/emdfdb.cpp"
-        /**************** already included conn.h -- not including again *****************/
+/**************** already included conn.h -- not including again *****************/
 
 
 #line 98 "EMdF/emdfdb.cpp"
-        /**************** already included inst.h -- not including again *****************/
+/**************** already included inst.h -- not including again *****************/
 
 
 #line 99 "EMdF/emdfdb.cpp"
-        /**************** already included monads.h -- not including again *****************/
+/**************** already included monads.h -- not including again *****************/
 
 
 #line 100 "EMdF/emdfdb.cpp"
-        /**************** already included emdfdb.h -- not including again *****************/
+/**************** already included emdfdb.h -- not including again *****************/
 
 
 #line 101 "EMdF/emdfdb.cpp"
-        /**************** already included emdf_value.h -- not including again *****************/
+/**************** already included emdf_value.h -- not including again *****************/
 
 
 #line 102 "EMdF/emdfdb.cpp"
-        /**************** already included emdf_ffeatures.h -- not including again *****************/
+/**************** already included emdf_ffeatures.h -- not including again *****************/
 
 
 #line 103 "EMdF/emdfdb.cpp"
-        /**************** already included enum_const_cache.h -- not including again *****************/
+/**************** already included enum_const_cache.h -- not including again *****************/
 
 
 #line 104 "EMdF/emdfdb.cpp"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 105 "EMdF/emdfdb.cpp"
-        /**************** already included string_list.h -- not including again *****************/
+/**************** already included string_list.h -- not including again *****************/
 
 
 #line 106 "EMdF/emdfdb.cpp"
-        /**************** already included string_set_cache.h -- not including again *****************/
+/**************** already included string_set_cache.h -- not including again *****************/
 
 
 #line 107 "EMdF/emdfdb.cpp"
-        /**************** leaving EMdF/emdfdb.cpp temporarily *****************/
-/**************** A copy of include/crc32.h *****************/
-
-
-#line 1 "include/crc32.h"
-        /*
- * crc32.h
+/**************** leaving EMdF/emdfdb.cpp temporarily *****************/
+/**************** A copy of include/crc32_emdros.h ****************/
+#line 1 "include/crc32_emdros.h"
+/*
+ * crc32_emdros.h
  *
  * Algorithm to compute CRC32 hashes.
  *
@@ -26383,26 +26528,27 @@ bool EMdFConnection::useDatabase(const std::string& database_name, const std::st
  */
 
 extern unsigned long emdros_crc32_calc(const unsigned char *inbuf, int buf_len);
+
 /**************** continuing EMdF/emdfdb.cpp where we left off *****************/
 
 
 #line 108 "EMdF/emdfdb.cpp"
-        /**************** already included utils.h -- not including again *****************/
+/**************** already included utils.h -- not including again *****************/
 
 
 #line 109 "EMdF/emdfdb.cpp"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 110 "EMdF/emdfdb.cpp"
-        #include <iostream>
+#include <iostream>
 #include <sstream>
 #include <set>
 /**************** already included logging.h -- not including again *****************/
 
 
 #line 114 "EMdF/emdfdb.cpp"
-        #if defined(HAVE_UNISTD_H) && HAVE_UNISTD_H
+#if defined(HAVE_UNISTD_H) && HAVE_UNISTD_H
 #include <unistd.h>
 #endif
 
@@ -27047,7 +27193,7 @@ bool EMdFDB::dropDatabase(const std::string& db_name)
 		std::ostringstream query_stream;
 		query_stream << "DROP DATABASE " << NewDbName;
 		if (!pConn->execCommand(query_stream.str())) {
-			DEBUG_COMMAND_QUERY_FAILED("EMdFDB::dropDatabase", query_stream.str().c_str());
+			DEBUG_COMMAND_QUERY_FAILED("EMdFDB::dropDatabase", query_stream.str());
 			return false;
 		}
 
@@ -27117,8 +27263,8 @@ bool EMdFDB::getSchemaVersion(/* out */ long& schema_version)
 				<< "SELECT schema_version\n"
 				<< "FROM schema_version\n"
 				<< "WHERE dummy_id = 0";
-			if (!pConn->execSelect(query_stream.str().c_str())) {
-				DEBUG_SELECT_QUERY_FAILED("EMdFDB::getSchemaVersion", query_stream.str().c_str());
+			if (!pConn->execSelect(query_stream.str())) {
+				DEBUG_SELECT_QUERY_FAILED("EMdFDB::getSchemaVersion", query_stream.str());
 				return false;
 			} 
 		}
@@ -27168,8 +27314,8 @@ bool EMdFDB::setSchemaVersion(long new_schema_version)
 			<< "UPDATE schema_version\n"
 			<< "SET schema_version = " << long2string(new_schema_version) << '\n'
 			<< "WHERE dummy_id = 0";
-		if (!pConn->execCommand(query_stream.str().c_str())) {
-			DEBUG_COMMAND_QUERY_FAILED("EMdFDB::setSchemaVersion", query_stream.str().c_str());
+		if (!pConn->execCommand(query_stream.str())) {
+			DEBUG_COMMAND_QUERY_FAILED("EMdFDB::setSchemaVersion", query_stream.str());
 			return false;
 		} 
 
@@ -27459,8 +27605,8 @@ bool EMdFDB::createObjectTypeOT_objects(const std::string& object_type_name,
 	OT_Objects_stream << "\n)" << WITHOUT_OIDS;
 
 	// Create OT_Objects
-	if (!pConn->execCommand(OT_Objects_stream.str().c_str())) {
-		DEBUG_COMMAND_QUERY_FAILED("EMdFDB::createObjectTypeOT_objects", OT_Objects_stream.str().c_str());
+	if (!pConn->execCommand(OT_Objects_stream.str())) {
+		DEBUG_COMMAND_QUERY_FAILED("EMdFDB::createObjectTypeOT_objects", OT_Objects_stream.str());
 		return false;
 	}
 	
@@ -27563,8 +27709,8 @@ bool EMdFDB::createObjectType(const std::string& object_type_name,
 				<< long2string(object_type_flags) << ", "
 				<< "0" 
 				<< ")\n";
-			if (!pConn->execCommand(query_stream.str().c_str())) {
-				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::createObjectType", query_stream.str().c_str());
+			if (!pConn->execCommand(query_stream.str())) {
+				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::createObjectType", query_stream.str());
 				if (bDoCommit)
 					pConn->abortTransaction();
 				return false;
@@ -27690,7 +27836,7 @@ bool EMdFDB::dropObjectType(const std::string& object_type_name, id_d_t object_t
 			std::ostringstream query_stream;
 			query_stream << "DROP TABLE " << normalizeTableName(OTN + "_objects", true);
 			if (!pConn->execCommand(query_stream.str())) {
-				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::dropObjectType", query_stream.str().c_str());
+				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::dropObjectType", query_stream.str());
 				if (bDoCommit)
 					pConn->abortTransaction();
 				return false;
@@ -27704,8 +27850,8 @@ bool EMdFDB::dropObjectType(const std::string& object_type_name, id_d_t object_t
 				<< "DELETE FROM features\n"
 				<< "WHERE object_type_id = " 
 				<< long2string(object_type_id);
-			if (!pConn->execCommand(query_stream.str().c_str())) {
-				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::dropObjectType", query_stream.str().c_str());
+			if (!pConn->execCommand(query_stream.str())) {
+				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::dropObjectType", query_stream.str());
 				if (bDoCommit)
 					pConn->abortTransaction();
 				return false;
@@ -27719,8 +27865,8 @@ bool EMdFDB::dropObjectType(const std::string& object_type_name, id_d_t object_t
 				<< "DELETE FROM object_types\n"
 				<< "WHERE object_type_id = " 
 				<< long2string(object_type_id);
-			if (!pConn->execCommand(query_stream.str().c_str())) {
-				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::dropObjectType", query_stream.str().c_str());
+			if (!pConn->execCommand(query_stream.str())) {
+				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::dropObjectType", query_stream.str());
 				if (bDoCommit)
 					pConn->abortTransaction();
 				return false;
@@ -27807,8 +27953,8 @@ bool EMdFDB::getLargestObjectLengthFromOT_objects(const std::string& object_type
 				query_stream 
 					<< "SELECT MAX(last_monad - first_monad + 1)\n"
 					<< "FROM " << normalizeTableName(OTN + "_objects", true);
-				if (!pConn->execSelect(query_stream.str().c_str())) {
-					DEBUG_SELECT_QUERY_FAILED("EMdFDB::getLargestObjectLengthFromOT_objects", query_stream.str().c_str());
+				if (!pConn->execSelect(query_stream.str())) {
+					DEBUG_SELECT_QUERY_FAILED("EMdFDB::getLargestObjectLengthFromOT_objects", query_stream.str());
 					return false;
 				} 
 
@@ -27877,8 +28023,8 @@ bool EMdFDB::getLargestObjectLength(const std::string& object_type_name,
 				<< "SELECT largest_object_length\n"
 				<< "FROM object_types\n"
 				<< "WHERE object_type_name = '" << OTN << "'";
-			if (!pConn->execSelect(query_stream.str().c_str())) {
-				DEBUG_SELECT_QUERY_FAILED("EMdFDB::getLargestObjectLength", query_stream.str().c_str());
+			if (!pConn->execSelect(query_stream.str())) {
+				DEBUG_SELECT_QUERY_FAILED("EMdFDB::getLargestObjectLength", query_stream.str());
 				bFirstSelectWasOK = false;
 			} 
 		}
@@ -27971,7 +28117,7 @@ bool EMdFDB::setLargestObjectLengthIfNecessary(const std::string& object_type_na
 				     << long2string(new_largest_object_length) << '\n'
 				     << "WHERE object_type_name = '" << OTN << "'";
 			if (!pConn->execCommand(query_stream.str())) {
-				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::setLargestObjectLength", query_stream.str().c_str());
+				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::setLargestObjectLength", query_stream.str());
 				if (bDoCommit)
 					pConn->abortTransaction();
 				return false;
@@ -28182,7 +28328,7 @@ bool EMdFDB::objectTypeExists(const std::string& object_type_name,
 			     << "FROM object_types\n"
 			     << "WHERE object_type_name = '" << OTN << "'";
 		if (!pConn->execSelect(query_stream.str())) {
-			DEBUG_SELECT_QUERY_FAILED("EMdFDB::objectTypeExists", query_stream.str().c_str());
+			DEBUG_SELECT_QUERY_FAILED("EMdFDB::objectTypeExists", query_stream.str());
 			return false;
 		}
 
@@ -28288,8 +28434,8 @@ bool EMdFDB::createEnum(const std::string& enum_name,
 			<< ", '" 
 			<< enum_name
 			<< "' )";
-		if (!pConn->execCommand(query_stream.str().c_str())) {
-			DEBUG_COMMAND_QUERY_FAILED("EMdFDB::createEnum", query_stream.str().c_str());
+		if (!pConn->execCommand(query_stream.str())) {
+			DEBUG_COMMAND_QUERY_FAILED("EMdFDB::createEnum", query_stream.str());
 			if (bDoCommit)
 				pConn->abortTransaction();
 			return false;
@@ -28351,8 +28497,8 @@ bool EMdFDB::dropEnum(id_d_t enum_id)
 			<< "DELETE\n"
 			<< "FROM enumeration_constants\n"
 			<< "WHERE enum_id = " << long2string(enum_id);
-		if (!pConn->execCommand(query_stream1.str().c_str())) {
-			DEBUG_COMMAND_QUERY_FAILED("EMdFDB::dropEnum", query_stream1.str().c_str());
+		if (!pConn->execCommand(query_stream1.str())) {
+			DEBUG_COMMAND_QUERY_FAILED("EMdFDB::dropEnum", query_stream1.str());
 			if (bDoCommit)
 				pConn->abortTransaction();
 			return false;
@@ -28364,8 +28510,8 @@ bool EMdFDB::dropEnum(id_d_t enum_id)
 			<< "DELETE\n"
 			<< "FROM enumerations\n"
 			<< "WHERE enum_id = " << long2string(enum_id);
-		if (!pConn->execCommand(query_stream2.str().c_str())) {
-			DEBUG_COMMAND_QUERY_FAILED("EMdFDB::dropEnum", query_stream2.str().c_str());
+		if (!pConn->execCommand(query_stream2.str())) {
+			DEBUG_COMMAND_QUERY_FAILED("EMdFDB::dropEnum", query_stream2.str());
 			if (bDoCommit)
 				pConn->abortTransaction();
 			return false;
@@ -28428,8 +28574,8 @@ bool EMdFDB::enumExists(id_d_t enum_id,
 			<< "SELECT enum_name\n"
 			<< "FROM enumerations\n"
 			<< "WHERE enum_id = " << long2string(enum_id);
-		if (!pConn->execSelect(query_stream.str().c_str())) {
-			DEBUG_SELECT_QUERY_FAILED("EMdFDB::enumExists", query_stream.str().c_str());
+		if (!pConn->execSelect(query_stream.str())) {
+			DEBUG_SELECT_QUERY_FAILED("EMdFDB::enumExists", query_stream.str());
 			return false;
 		}
 
@@ -28574,8 +28720,8 @@ bool EMdFDB::getDefault(id_d_t enum_id,
 			<< "FROM enumeration_constants\n"
 			<< "WHERE enum_id = " << long2string(enum_id) << "\n"
 			<< "      AND is_default = 'Y'";
-		if (!pConn->execSelect(query_stream.str().c_str())) {
-			DEBUG_SELECT_QUERY_FAILED("EMdFDB::getDefault", query_stream.str().c_str());
+		if (!pConn->execSelect(query_stream.str())) {
+			DEBUG_SELECT_QUERY_FAILED("EMdFDB::getDefault", query_stream.str());
 			return false;
 		}
 
@@ -28647,8 +28793,8 @@ bool EMdFDB::createEnumConstant(id_d_t enum_id,
 			<< "', " << long2string(ec_info.getValue())
 			<< ", '" << bool2char(ec_info.getIsDefault()) << "'\n"
 			<< ")";
-		if (!pConn->execCommand(query_stream.str().c_str())) {
-			DEBUG_COMMAND_QUERY_FAILED("EMdFDB::CreateEnumConst", query_stream.str().c_str());
+		if (!pConn->execCommand(query_stream.str())) {
+			DEBUG_COMMAND_QUERY_FAILED("EMdFDB::CreateEnumConst", query_stream.str());
 			return false;
 		}
 
@@ -29091,8 +29237,8 @@ bool EMdFDB::updateEnumConst(const std::string& enum_const_name,
 			<< "      AND enum_value_name = "
 			<< getMYSQL_BINARY() << "'" << enum_const_name << "'\n"
 			<< "      AND value = " << long2string(old_value);
-		if (!pConn->execCommand(query_stream.str().c_str())) {
-			DEBUG_COMMAND_QUERY_FAILED("EMdFDB::updateEnumConst", query_stream.str().c_str());
+		if (!pConn->execCommand(query_stream.str())) {
+			DEBUG_COMMAND_QUERY_FAILED("EMdFDB::updateEnumConst", query_stream.str());
 			return false;
 		}
 
@@ -29136,8 +29282,8 @@ bool EMdFDB::setDefaultEnumConst(id_d_t enum_id,
 			<< "UPDATE enumeration_constants\n"
 			<< "SET is_default = 'N'\n"
 			<< "WHERE enum_id = " << long2string(enum_id);
-		if (!pConn->execCommand(query_stream1.str().c_str())) {
-			DEBUG_COMMAND_QUERY_FAILED("EMdFDB::setDefaultEnumConst", query_stream1.str().c_str());
+		if (!pConn->execCommand(query_stream1.str())) {
+			DEBUG_COMMAND_QUERY_FAILED("EMdFDB::setDefaultEnumConst", query_stream1.str());
 			if (bDoCommit)
 				pConn->abortTransaction();
 			return false;
@@ -29151,8 +29297,8 @@ bool EMdFDB::setDefaultEnumConst(id_d_t enum_id,
 			<< "WHERE enum_id = " << long2string(enum_id) << "\n"
 			<< "      AND enum_value_name = "
 			<< getMYSQL_BINARY() << "'" << enum_const_name << "'";
-		if (!pConn->execCommand(query_stream2.str().c_str())) {
-			DEBUG_COMMAND_QUERY_FAILED("EMdFDB::setDefaultEnumConst", query_stream2.str().c_str());
+		if (!pConn->execCommand(query_stream2.str())) {
+			DEBUG_COMMAND_QUERY_FAILED("EMdFDB::setDefaultEnumConst", query_stream2.str());
 			if (bDoCommit)
 				pConn->abortTransaction();
 			return false;
@@ -29234,8 +29380,8 @@ bool EMdFDB::createFeature(const std::string& feature_name,
 			<< ", '" << bool2char(computed)
 			<< "'\n"
 			<< ")";
-		if (!pConn->execCommand(query_stream.str().c_str())) {
-			DEBUG_COMMAND_QUERY_FAILED("EMdFDB::createFeature", query_stream.str().c_str());
+		if (!pConn->execCommand(query_stream.str())) {
+			DEBUG_COMMAND_QUERY_FAILED("EMdFDB::createFeature", query_stream.str());
 			return false;
 		}
 
@@ -29418,14 +29564,14 @@ bool EMdFDB::addFeatureToOT_objects(const std::string& object_type_name,
 				query_stream << " DEFAULT " << default_value;
 			}
       
-			if (!pConn->execCommand(query_stream.str().c_str())) {
-				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::addFeatureToOT_objects", query_stream.str().c_str());
+			if (!pConn->execCommand(query_stream.str())) {
+				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::addFeatureToOT_objects", query_stream.str());
 				return false;
 			}
 
 			if (bUseSecondaryQuery) {
-				if (!pConn->execCommand(secondary_query.c_str())) {
-					DEBUG_COMMAND_QUERY_FAILED("EMdFDB::addFeatureToOT_objects", secondary_query.c_str());
+				if (!pConn->execCommand(secondary_query)) {
+					DEBUG_COMMAND_QUERY_FAILED("EMdFDB::addFeatureToOT_objects", secondary_query);
 					return false;
 				}
 			}
@@ -29449,8 +29595,8 @@ bool EMdFDB::addFeatureToOT_objects(const std::string& object_type_name,
 				query_stream << FeatureInfo2SQLvalue(OTN, object_type_id, true, fi);
 			}
       
-			if (!pConn->execCommand(query_stream.str().c_str())) {
-				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::addFeatureToOT_objects", query_stream.str().c_str());
+			if (!pConn->execCommand(query_stream.str())) {
+				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::addFeatureToOT_objects", query_stream.str());
 				return false;
 			}
 
@@ -29665,8 +29811,8 @@ bool EMdFDB::dropFeatureFromOT_objects(const std::string& object_type_name,
 	query_stream
 		<< "ALTER TABLE " << normalizeTableName(OTN + "_objects", false) << " DROP COLUMN "
 		<< encodeFeatureName(feature_name);
-	if (!pConn->execCommand(query_stream.str().c_str())) {
-		DEBUG_COMMAND_QUERY_FAILED("EMdFDB::dropFeatureFromOT_objects", query_stream.str().c_str());
+	if (!pConn->execCommand(query_stream.str())) {
+		DEBUG_COMMAND_QUERY_FAILED("EMdFDB::dropFeatureFromOT_objects", query_stream.str());
 		return false;
 	}
 
@@ -29675,8 +29821,8 @@ bool EMdFDB::dropFeatureFromOT_objects(const std::string& object_type_name,
 		query_stream
 			<< "ALTER TABLE " << normalizeTableName(OTN + "_objects", false) << " DROP COLUMN "
 			<< "first_monad_" << encodeFeatureName(feature_name);
-		if (!pConn->execCommand(query_stream.str().c_str())) {
-			DEBUG_COMMAND_QUERY_FAILED("EMdFDB::dropFeatureFromOT_objects", query_stream.str().c_str());
+		if (!pConn->execCommand(query_stream.str())) {
+			DEBUG_COMMAND_QUERY_FAILED("EMdFDB::dropFeatureFromOT_objects", query_stream.str());
 			return false;
 		}
 	}
@@ -29759,8 +29905,8 @@ bool EMdFDB::dropFeature(const std::string& object_type_name,
 				<< "WHERE object_type_id = " 
 				<< long2string(object_type_id) << "\n"
 				<< "      AND feature_name = '" << encodeFeatureName(feature_name) << "'";
-			if (!pConn->execCommand(query_stream.str().c_str())) {
-				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::dropFeature", query_stream.str().c_str());
+			if (!pConn->execCommand(query_stream.str())) {
+				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::dropFeature", query_stream.str());
 				if (bDoCommit)
 					pConn->abortTransaction();
 				return false;
@@ -29841,8 +29987,8 @@ bool EMdFDB::featureExists(const std::string& feature_name,
 			<< "WHERE object_type_id = " 
 			<< long2string(object_type_id) << "\n"
 			<< "      AND feature_name = '" << encodeFeatureName(feature_name) << "'";
-		if (!pConn->execSelect(query_stream.str().c_str())) {
-			DEBUG_SELECT_QUERY_FAILED("EMdFDB::featureExists", query_stream.str().c_str());
+		if (!pConn->execSelect(query_stream.str())) {
+			DEBUG_SELECT_QUERY_FAILED("EMdFDB::featureExists", query_stream.str());
 			return false;
 		}
 
@@ -29969,8 +30115,8 @@ bool EMdFDB::getFeatures(const std::string& object_type_name,
 			     << "\n";
 
 		// Execute query
-		if (!pConn->execSelect(query_stream.str().c_str())) {
-			DEBUG_SELECT_QUERY_FAILED("EMdFDB::getFeatures", query_stream.str().c_str());
+		if (!pConn->execSelect(query_stream.str())) {
+			DEBUG_SELECT_QUERY_FAILED("EMdFDB::getFeatures", query_stream.str());
 			return false;
 		}
   
@@ -30293,8 +30439,8 @@ bool EMdFDB::getFeaturesByQueryExec(const std::string query,
 	unsigned int feature_name_index = 0;
 
 	// Execute query
-	if (!pConn->execSelect(query.c_str())) {
-		DEBUG_SELECT_QUERY_FAILED("EMdFDB::getFeaturesByQueryExec", query.c_str());
+	if (!pConn->execSelect(query)) {
+		DEBUG_SELECT_QUERY_FAILED("EMdFDB::getFeaturesByQueryExec", query);
 		return false;
 	}
   
@@ -30713,8 +30859,8 @@ bool EMdFDB::loadStringSetIntoCache(const std::string& object_type_name,
 
 	std::string query = "SELECT id_d, string_value FROM " + normalizeTableName(table_name, true);
 
-	if (!pConn->execSelect(query.c_str())) {
-		DEBUG_SELECT_QUERY_FAILED("EMdFDB::loadStringSetIntoCache", query.c_str());
+	if (!pConn->execSelect(query)) {
+		DEBUG_SELECT_QUERY_FAILED("EMdFDB::loadStringSetIntoCache", query);
 		return false;
 	} 
   
@@ -30869,7 +31015,7 @@ bool EMdFDB::addStringToStringSetTable(const std::string& normalized_object_type
       
 	// Execute query
 	if (!pConn->execCommand(query)) {
-		DEBUG_COMMAND_QUERY_FAILED("EMdFDB::addStringToStringSetTable", query.c_str());
+		DEBUG_COMMAND_QUERY_FAILED("EMdFDB::addStringToStringSetTable", query);
 		return false;
 	}
 
@@ -30933,8 +31079,8 @@ bool EMdFDB::getID_DFromStringSet(const std::string& normalized_object_type_name
 	// Form query 
 	std::string query = "SELECT id_d FROM " + normalizeTableName(table_name, false) + " WHERE string_value = " + getMYSQL_BINARY() + encoded_string_to_find;
 
-	if (!pConn->execSelect(query.c_str())) {
-		DEBUG_SELECT_QUERY_FAILED("EMdFDB::getID_DFromStringSet", query.c_str());
+	if (!pConn->execSelect(query)) {
+		DEBUG_SELECT_QUERY_FAILED("EMdFDB::getID_DFromStringSet", query);
 		return false;
 	} 
 
@@ -31031,7 +31177,7 @@ bool EMdFDB::createStringSetTable(const std::string& object_type_name,
 
 	// Execute query for creating table
 	if (!pConn->execCommand(query)) {
-		DEBUG_COMMAND_QUERY_FAILED("EMdFDB::createStringSetTable", query.c_str());
+		DEBUG_COMMAND_QUERY_FAILED("EMdFDB::createStringSetTable", query);
 		return false;
 	}
 
@@ -31146,7 +31292,7 @@ bool EMdFDB::dropStringSetTable(const std::string& object_type_name,
 
 	// Execute query for creating table
 	if (!pConn->execCommand(query)) {
-		DEBUG_COMMAND_QUERY_FAILED("EMdFDB::dropStringSetTable", query.c_str());
+		DEBUG_COMMAND_QUERY_FAILED("EMdFDB::dropStringSetTable", query);
 		return false;
 	}
 
@@ -31275,7 +31421,7 @@ bool EMdFDB::selectMonadSets(/* out */ std::list<std::string>& monad_set_names)
 		// Make SQL statement
 		std::string query = "SELECT monad_set_name FROM monad_sets";
 		if (!pConn->execSelect(query)) {
-			DEBUG_SELECT_QUERY_FAILED("EMdFDB::selectMonadSets", query.c_str());
+			DEBUG_SELECT_QUERY_FAILED("EMdFDB::selectMonadSets", query);
 			return false;
 		}
 
@@ -31781,8 +31927,8 @@ bool EMdFDB::getObjectsHavingMonadsInMonadSet(const std::string object_type_name
 		     << "FROM " << normalizeTableName(OTN + "_objects", true) + "\n"
 		     << "WHERE " << where_clause.str()
 		     << "\nORDER BY object_id_d";
-	if (!pConn->execSelect(query_stream.str().c_str())) {
-		DEBUG_SELECT_QUERY_FAILED("EMdFDB::getObjectsHavingMonadsInMonadSet", query_stream.str().c_str());
+	if (!pConn->execSelect(query_stream.str())) {
+		DEBUG_SELECT_QUERY_FAILED("EMdFDB::getObjectsHavingMonadsInMonadSet", query_stream.str());
 		return false;
 	}
 
@@ -33167,6 +33313,7 @@ bool EMdFDB::getInst(const std::string& object_type_name,
 		     EMdFFFeatures *pre_query_constraints, /* ignored in EMdFDB */
 		     const std::list<FeatureInfo>& features_to_get,
 		     const std::string& monad_set_name,
+		     eMonadSetRelationOperation ms_operation,
 		     /* out */ Inst& Result)
 {
 	if (pConn == 0)
@@ -33188,6 +33335,7 @@ bool EMdFDB::getInst(const std::string& object_type_name,
 			     features_to_get,
 			     monad_set_name,
 			     objectRangeType,
+			     ms_operation,
 			     Result)) {
 			return false;
 		}
@@ -33249,6 +33397,7 @@ bool EMdFDB::getInst(const std::string& object_type_name,
 		     const std::list<FeatureInfo>& features_to_get,
 		     const std::string& monad_set_name,
 		     eObjectRangeType objectRangeType,
+		     eMonadSetRelationOperation ms_operation,
 		     /* out */ Inst& Result)
 {
 	if (pConn == 0)
@@ -33638,8 +33787,8 @@ bool EMdFDB::getInst(const std::string& object_type_name,
 				}
 			}
 		}
-		if (!pConn->execSelect(query_stream.str().c_str())) {
-			DEBUG_SELECT_QUERY_FAILED("EMdFDB::getInst", query_stream.str().c_str());
+		if (!pConn->execSelect(query_stream.str())) {
+			DEBUG_SELECT_QUERY_FAILED("EMdFDB::getInst", query_stream.str());
 			return false;
 		}
 		
@@ -33766,8 +33915,22 @@ bool EMdFDB::getInst(const std::string& object_type_name,
 					// we might get extraneous objects which would be
 					// wasteful to process in mql_R (the part_of Su constraint
 					// would not hold.) Hence it is easier to discard them here.
-					bDoAdd = mse_last <= last_monad 
-						&& mse_first >= first_monad;
+				    
+					switch (ms_operation) {
+					  case kMSROPartOf:
+						bDoAdd = mse_last <= last_monad 
+							&& mse_first >= first_monad;
+						break;
+
+					  case kMSROStartsIn:
+						bDoAdd = mse_first <= last_monad 
+							&& mse_first >= first_monad;
+						break;
+
+					  default:
+						ASSERT_THROW(false, "Unknown monad set operation in EMdFDB::getInst.");
+						break;
+					}
 				}
 				
 				if (bDoAdd) {
@@ -33864,8 +34027,8 @@ bool EMdFDB::getObjectsStartingAtSm(const std::string& object_type_name,
 			<< "WHERE first_monad = " << long2string(Sm);
 
 		// Execute query
-		if (!pConn->execSelect(query_stream.str().c_str())) {
-			DEBUG_SELECT_QUERY_FAILED("EMdFDB::getObjectsStartingAtSm", query_stream.str().c_str());
+		if (!pConn->execSelect(query_stream.str())) {
+			DEBUG_SELECT_QUERY_FAILED("EMdFDB::getObjectsStartingAtSm", query_stream.str());
 			return false;
 		}
       
@@ -34042,7 +34205,7 @@ bool EMdFDB::getMonadsFromID_Ds(const SetOfMonads& id_ds_set,
 
 			// Execute query
 			if (!pConn->execSelect(query)) {
-				DEBUG_SELECT_QUERY_FAILED("EMdFDB::getMonadsFromID_Ds", query.c_str());
+				DEBUG_SELECT_QUERY_FAILED("EMdFDB::getMonadsFromID_Ds", query);
 				return false;
 			}
 
@@ -34178,7 +34341,7 @@ bool EMdFDB::getSOMForObject(const std::string& object_type_name,
 			<< "WHERE object_id_d = " << long2string(object_id_d);
 		if (!pConn->execSelect(query_stream.str())) {
 			// Possibly emit debug message
-			DEBUG_SELECT_QUERY_FAILED("EMdFDB::getSOMForObject", query_stream.str().c_str());
+			DEBUG_SELECT_QUERY_FAILED("EMdFDB::getSOMForObject", query_stream.str());
 			// Return failure
 			return false;
 		}
@@ -34371,8 +34534,8 @@ bool EMdFDB::getFeaturesForObjectType(id_d_t object_type_id,
 			<< "FROM features\n"
 			<< "WHERE object_type_id = " << long2string(object_type_id)
 			<< "\nORDER BY feature_type_id";
-		if (!pConn->execSelect(query_stream.str().c_str())) {
-			DEBUG_SELECT_QUERY_FAILED("EMdFDB::getFeaturesForObjectType", query_stream.str().c_str());
+		if (!pConn->execSelect(query_stream.str())) {
+			DEBUG_SELECT_QUERY_FAILED("EMdFDB::getFeaturesForObjectType", query_stream.str());
 			return false;
 		}
 
@@ -34538,9 +34701,9 @@ bool EMdFDB::loadEnumConstantsIntoCache(id_d_t enum_id)
 			<< "SELECT enum_value_name, value, is_default\n"
 			<< "FROM enumeration_constants\n"
 			<< "WHERE enum_id = " << long2string(enum_id);
-		if (!pConn->execSelect(query_stream.str().c_str())) {
+		if (!pConn->execSelect(query_stream.str())) {
 			// Possibly emit debug message
-			DEBUG_SELECT_QUERY_FAILED("EMdFDB::loadEnumConstantsIntoCache", query_stream.str().c_str());
+			DEBUG_SELECT_QUERY_FAILED("EMdFDB::loadEnumConstantsIntoCache", query_stream.str());
 			// Return failue
 			return false;
 		}
@@ -34634,9 +34797,9 @@ bool EMdFDB::getEnumConstants(id_d_t enum_id,
 			<< "FROM enumeration_constants\n"
 			<< "WHERE enum_id = " << long2string(enum_id)
 			<< "\nORDER BY enum_value_name";
-		if (!pConn->execSelect(query_stream.str().c_str())) {
+		if (!pConn->execSelect(query_stream.str())) {
 			// Possibly emit debug message
-			DEBUG_SELECT_QUERY_FAILED("EMdFDB::getEnumConstants", query_stream.str().c_str());
+			DEBUG_SELECT_QUERY_FAILED("EMdFDB::getEnumConstants", query_stream.str());
 			// Return failue
 			return false;
 		}
@@ -34732,8 +34895,8 @@ bool EMdFDB::getObjectTypesUsingEnumeration(id_d_t enum_id,
 			<< "WHERE OT.object_type_id = F.object_type_id \n"
 			<< "      AND (F.feature_type_id = " << long2string(enum_feature_id) << "\n"
 			<< "           OR F.feature_type_id = " << long2string(list_of_enum_feature_id) << ")";
-		if (!pConn->execSelect(query_stream.str().c_str())) {
-			DEBUG_SELECT_QUERY_FAILED("EMdFDB::getObjectTypesUsingEnumeration", query_stream.str().c_str());
+		if (!pConn->execSelect(query_stream.str())) {
+			DEBUG_SELECT_QUERY_FAILED("EMdFDB::getObjectTypesUsingEnumeration", query_stream.str());
 			return false;
 		}
 
@@ -34818,7 +34981,7 @@ bool EMdFDB::getObjectsWithinMonads(const SetOfMonads& monads,
 			std::string(" SELECT object_id_d\n") 
 			+ "FROM " + normalizeTableName(OTN + "_objects", true) + "\n"
 			+ "WHERE (" + monad_constraints + ")";
-		if (!pConn->execSelect(query.c_str())) {
+		if (!pConn->execSelect(query)) {
 			DEBUG_SELECT_QUERY_FAILED("EMdFDB::getObjectsWithinMonads", query);
 			return false;
 		}
@@ -34889,8 +35052,8 @@ bool EMdFDB::objectID_DExistsInType(id_d_t object_id_d,
 			<< "SELECT object_id_d\n" 
 			<< "FROM " << normalizeTableName(OTN + "_objects", true) << "\n" //     
 			<< "WHERE object_id_d = " << long2string(object_id_d);
-		if (!pConn->execSelect(query_stream.str().c_str())) {
-			DEBUG_SELECT_QUERY_FAILED("EMdFDB::objectID_DExistsInType", query_stream.str().c_str());
+		if (!pConn->execSelect(query_stream.str())) {
+			DEBUG_SELECT_QUERY_FAILED("EMdFDB::objectID_DExistsInType", query_stream.str());
 			return false;
 		}
     
@@ -34944,7 +35107,7 @@ bool EMdFDB::objectID_DExists(id_d_t object_id_d,
 			bool bObjectTypeExists;
 			eObjectRangeType objectRangeType;
 			eMonadUniquenessType monadUniquenessType;
-			if (!objectTypeExists(ci->c_str(), 
+			if (!objectTypeExists(*ci, 
 					      bObjectTypeExists, object_type_id,
 					      objectRangeType,
 					      monadUniquenessType)) {
@@ -34955,7 +35118,7 @@ bool EMdFDB::objectID_DExists(id_d_t object_id_d,
 			// See if it exists in this type
 			bool bObjectExistsInType;
 			if (!objectID_DExistsInType(object_id_d, 
-						    ci->c_str(),
+						    *ci,
 						    bObjectExistsInType))
 				return false;
 
@@ -35079,8 +35242,8 @@ bool EMdFDB::createObject(id_d_t object_id_d,
 			strQuery << ")\n";
 
 			// Execute query
-			if (!pConn->execCommand(strQuery.str().c_str())) {
-				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::createObject", strQuery.str().c_str());
+			if (!pConn->execCommand(strQuery.str())) {
+				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::createObject", strQuery.str());
 				if (bDoCommit)
 					pConn->abortTransaction();
 				return false;
@@ -35205,8 +35368,8 @@ bool EMdFDB::updateObject(id_d_t object_id_d,
 			// Add WHERE
 			query_stream << "WHERE object_id_d = " << long2string(object_id_d);
 
-			if (!pConn->execCommand(query_stream.str().c_str())) {
-				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::updateObject", query_stream.str().c_str());
+			if (!pConn->execCommand(query_stream.str())) {
+				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::updateObject", query_stream.str());
 				return false;
 			}
 		} catch (EMdFDBDBError e) {
@@ -35259,8 +35422,8 @@ bool EMdFDB::dropObject(id_d_t object_id_d,
 				<< "DELETE\n"
 				<< "FROM " << normalizeTableName(OTN + "_objects", true) << "\n"
 				<< "WHERE object_id_d = " << long2string(object_id_d);
-			if (!pConn->execCommand(query_stream.str().c_str())) {
-				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::dropObject", query_stream.str().c_str());
+			if (!pConn->execCommand(query_stream.str())) {
+				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::dropObject", query_stream.str());
 				if (bDoCommit)
 					pConn->abortTransaction();
 				return false;
@@ -35420,8 +35583,8 @@ bool EMdFDB::dropObjectsInMonads(const SetOfMonads& monads,
 				<< "DELETE\n"
 				<< "FROM " << normalizeTableName(OTN + "_objects", true) << "\n"
 				<< "WHERE " << monad_constraints_first_last_monad;
-			if (!pConn->execCommand(query_stream.str().c_str())) {
-				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::dropObjectsInMonads", query_stream.str().c_str());
+			if (!pConn->execCommand(query_stream.str())) {
+				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::dropObjectsInMonads", query_stream.str());
 				if (bDoCommit)
 					pConn->abortTransaction();
 				result.clear();
@@ -36042,7 +36205,7 @@ bool EMdFDB::objectTypeHasObjects(const std::string& object_type_name,
 			query_stream 
 				<< "SELECT object_id_d FROM " 
 				<< normalizeTableName(OTN + "_objects", true) << " LIMIT 1";
-			if (!pConn->execSelect(query_stream.str().c_str())) {
+			if (!pConn->execSelect(query_stream.str())) {
 				DEBUG_X_FAILED("EMdFDB::objectTypeHasObjects", "executing LIMIT select.");
 				return false;
 			} else {
@@ -36163,7 +36326,7 @@ bool EMdFDB::tableExists(std::string table_name, bool&  /* out */ bTableExists)
 				<< "SELECT *" << '\n'
 				<< "FROM " << table_name << '\n'
 				<< "LIMIT 1";
-			if (!pConn->execSelect(query_stream.str().c_str())) {
+			if (!pConn->execSelect(query_stream.str())) {
 				bTableExists = false;
 			} else {
 				bTableExists = true;
@@ -36217,8 +36380,8 @@ bool EMdFDB::createMin_max_m_table(void)
 				<< "    max_m    INT NOT NULL"
 				<< "\n)"
 				<< WITHOUT_OIDS;
-			if (!pConn->execCommand(query_stream.str().c_str())) {
-				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::createMin_max_m_table", query_stream.str().c_str());
+			if (!pConn->execCommand(query_stream.str())) {
+				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::createMin_max_m_table", query_stream.str());
 				return false;
 			} 
 		}
@@ -36229,8 +36392,8 @@ bool EMdFDB::createMin_max_m_table(void)
 			query_stream 
 				<< "INSERT INTO max_m (dummy_id, max_m)\n"
 				<< "VALUES ( 0 , 0 )";
-			if (!pConn->execCommand(query_stream.str().c_str())) {
-				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::createMin_max_m_table", query_stream.str().c_str());
+			if (!pConn->execCommand(query_stream.str())) {
+				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::createMin_max_m_table", query_stream.str());
 				return false;
 			} 
 		}
@@ -36244,8 +36407,8 @@ bool EMdFDB::createMin_max_m_table(void)
 				<< "    min_m    INT NOT NULL"
 				<< "\n)"
 				<< WITHOUT_OIDS;
-			if (!pConn->execCommand(query_stream.str().c_str())) {
-				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::createMin_max_m_table", query_stream.str().c_str());
+			if (!pConn->execCommand(query_stream.str())) {
+				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::createMin_max_m_table", query_stream.str());
 				return false;
 			} 
 		}
@@ -36256,8 +36419,8 @@ bool EMdFDB::createMin_max_m_table(void)
 			query_stream 
 				<< "INSERT INTO min_m (dummy_id, min_m)\n"
 				<< "VALUES ( 0 , " << long2string(MAX_MONAD) << " )";
-			if (!pConn->execCommand(query_stream.str().c_str())) {
-				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::createMin_max_m_table", query_stream.str().c_str());
+			if (!pConn->execCommand(query_stream.str())) {
+				DEBUG_COMMAND_QUERY_FAILED("EMdFDB::createMin_max_m_table", query_stream.str());
 				return false;
 			} 
 		}
@@ -36389,8 +36552,8 @@ bool EMdFDB::setMin_max_m_fromObjectType(const std::string& object_type_name,
 				<< "SELECT object_id_d" << '\n'
 				<< "FROM " << normalizeTableName(OTN + "_objects", true) + "\n"
 				<< "LIMIT 1";
-			if (!pConn->execSelect(query_stream.str().c_str())) {
-				DEBUG_SELECT_QUERY_FAILED("EMdFDB::setMin_max_m_fromObjectType", query_stream.str().c_str());
+			if (!pConn->execSelect(query_stream.str())) {
+				DEBUG_SELECT_QUERY_FAILED("EMdFDB::setMin_max_m_fromObjectType", query_stream.str());
 				return false;
 			}
 
@@ -36431,8 +36594,8 @@ bool EMdFDB::setMin_max_m_fromObjectType(const std::string& object_type_name,
 			query_stream 
 				<< "SELECT MIN(" << firstm << "), MAX(" << lastm << ")\n"
 				<< "FROM " << normalizeTableName(OTN + "_objects", true);
-			if (!pConn->execSelect(query_stream.str().c_str())) {
-				DEBUG_SELECT_QUERY_FAILED("EMdFDB::setMin_max_m_fromObjectType", query_stream.str().c_str());
+			if (!pConn->execSelect(query_stream.str())) {
+				DEBUG_SELECT_QUERY_FAILED("EMdFDB::setMin_max_m_fromObjectType", query_stream.str());
 				return false;
 			} 
 		}
@@ -36514,8 +36677,8 @@ bool EMdFDB::getMax_m(monad_m& /* out */ max_m)
 				<< "SELECT max_m\n"
 				<< "FROM max_m\n"
 				<< "WHERE dummy_id = 0";
-			if (!pConn->execSelect(query_stream.str().c_str())) {
-				DEBUG_SELECT_QUERY_FAILED("EMdFDB::getMax_m", query_stream.str().c_str());
+			if (!pConn->execSelect(query_stream.str())) {
+				DEBUG_SELECT_QUERY_FAILED("EMdFDB::getMax_m", query_stream.str());
 				return false;
 			} 
 		}
@@ -36581,8 +36744,8 @@ bool EMdFDB::setMax_m(monad_m max_m_candidate, bool bSetUnconditionally)
 					<< "UPDATE max_m\n"
 					<< "SET max_m = " << long2string(max_m_candidate) << '\n'
 					<< "WHERE dummy_id = 0";
-				if (!pConn->execCommand(query_stream.str().c_str())) {
-					DEBUG_COMMAND_QUERY_FAILED("EMdFDB::setMax_m", query_stream.str().c_str());
+				if (!pConn->execCommand(query_stream.str())) {
+					DEBUG_COMMAND_QUERY_FAILED("EMdFDB::setMax_m", query_stream.str());
 					return false;
 				} 
 			}
@@ -36618,8 +36781,8 @@ bool EMdFDB::getMin_m(monad_m& /* out */ min_m)
 				<< "SELECT min_m\n"
 				<< "FROM min_m\n"
 				<< "WHERE dummy_id = 0";
-			if (!pConn->execSelect(query_stream.str().c_str())) {
-				DEBUG_SELECT_QUERY_FAILED("EMdFDB::getMin_m", query_stream.str().c_str());
+			if (!pConn->execSelect(query_stream.str())) {
+				DEBUG_SELECT_QUERY_FAILED("EMdFDB::getMin_m", query_stream.str());
 				return false;
 			} 
 		}
@@ -36684,8 +36847,8 @@ bool EMdFDB::setMin_m(monad_m min_m_candidate, bool bSetUnconditionally)
 					<< "UPDATE min_m\n"
 					<< "SET min_m = " << long2string(min_m_candidate) << '\n'
 					<< "WHERE dummy_id = 0";
-				if (!pConn->execCommand(query_stream.str().c_str())) {
-					DEBUG_COMMAND_QUERY_FAILED("EMdFDB::setMin_m", query_stream.str().c_str());
+				if (!pConn->execCommand(query_stream.str())) {
+					DEBUG_COMMAND_QUERY_FAILED("EMdFDB::setMin_m", query_stream.str());
 					return false;
 				} 
 			}
@@ -37221,8 +37384,8 @@ bool EMdFDB::createIndex(const std::string& index_name,
 		//
 		// Execute query
 		//
-		if (!pConn->execCommand(query_stream.str().c_str())) {
-			DEBUG_COMMAND_QUERY_FAILED("EMdFDB::createIndex", query_stream.str().c_str());
+		if (!pConn->execCommand(query_stream.str())) {
+			DEBUG_COMMAND_QUERY_FAILED("EMdFDB::createIndex", query_stream.str());
 			return false;
 		}
 
@@ -37279,8 +37442,8 @@ bool EMdFDB::createIndex(const std::string& index_name,
 		//
 		// Execute query
 		//
-		if (!pConn->execCommand(query_stream.str().c_str())) {
-			DEBUG_COMMAND_QUERY_FAILED("EMdFDB::createIndex", query_stream.str().c_str());
+		if (!pConn->execCommand(query_stream.str())) {
+			DEBUG_COMMAND_QUERY_FAILED("EMdFDB::createIndex", query_stream.str());
 			return false;
 		}
 
@@ -37733,7 +37896,7 @@ void EMdFDB::dropIndex(const std::string& index_name, const std::string& table_n
 		// Execute query
 		// Don't bother checking result
 		//
-		pConn->execCommand(query_stream.str().c_str());
+		pConn->execCommand(query_stream.str());
 
 
 		// If we got this far, there were no errors
@@ -38331,24 +38494,23 @@ std::string getStringFromeComparisonOp(eComparisonOp op)
 	}
 }
 
-/**************** A copy of EMdF/pgconn.cpp *****************/
 
-
+/**************** A copy of EMdF/pgconn.cpp ****************/
 #line 1 "EMdF/pgconn.cpp"
-        /*
+/*
  * pgconn.cpp
  *
  * PostgreSQL Database connection 
  *
  * Ulrik Petersen
  * Created: 1/27-2001
- * Last update: 4/18-2015
+ * Last update: 4/13-2016
  *
  */
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2001-2015  Ulrik Sandborg-Petersen
+ *   Copyright (C) 2001-2016  Ulrik Sandborg-Petersen
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License as
@@ -38430,17 +38592,15 @@ std::string getStringFromeComparisonOp(eComparisonOp op)
 
 
 #line 92 "EMdF/pgconn.cpp"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 93 "EMdF/pgconn.cpp"
-        #include <cstdlib>
+#include <cstdlib>
 /**************** leaving EMdF/pgconn.cpp temporarily *****************/
-/**************** A copy of include/pgconn.h *****************/
-
-
+/**************** A copy of include/pgconn.h ****************/
 #line 1 "include/pgconn.h"
-        /*
+/*
  * pgconn.h
  *
  * PostgreSQL Database connection 
@@ -38538,7 +38698,7 @@ std::string getStringFromeComparisonOp(eComparisonOp op)
 
 
 #line 95 "include/pgconn.h"
-        
+
 #ifndef USE_POSTGRESQL
 #define USE_POSTGRESQL (0)
 #endif
@@ -38547,7 +38707,7 @@ std::string getStringFromeComparisonOp(eComparisonOp op)
 
 
 #line 101 "include/pgconn.h"
-        
+
 #if USE_POSTGRESQL
 extern "C" {
 #include <libpq-fe.h>
@@ -38757,40 +38917,29 @@ private:
 
 
 #endif // EMDF_PGCONN__H__
+
 /**************** continuing EMdF/pgconn.cpp where we left off *****************/
 
 
 #line 95 "EMdF/pgconn.cpp"
-        /**************** already included logging.h -- not including again *****************/
+/**************** already included logging.h -- not including again *****************/
 
 
 #line 96 "EMdF/pgconn.cpp"
-        #include <iostream>
+#include <iostream>
 /**************** already included encryption.h -- not including again *****************/
 
 
 #line 98 "EMdF/pgconn.cpp"
-        #include <cstdlib>
+#include <cstdlib>
 #include <string>
 /**************** already included string_func.h -- not including again *****************/
 
 
 #line 101 "EMdF/pgconn.cpp"
-        #include <sstream>
-
-#ifdef WIN32
-#include <windows.h>
-#else
-#include <unistd.h> // for sleep()
-#endif
+#include <sstream>
 
 
-#ifdef WIN32
-static void sleep(DWORD milliseconds)
-{
-  SleepEx(milliseconds, FALSE);
-}
-#endif
 
 
 PgEMdFConnection::PgEMdFConnection(const std::string& host, const std::string& user, const std::string& passwd, const std::string& database_name)
@@ -39196,11 +39345,10 @@ bool PgEMdFConnection::vacuum(bool bAnalyze)
 #endif
 }
 
-/**************** A copy of EMdF/pgemdfdb.cpp *****************/
 
-
+/**************** A copy of EMdF/pgemdfdb.cpp ****************/
 #line 1 "EMdF/pgemdfdb.cpp"
-        /*
+/*
  * pgemdfdb.cpp
  *
  * PostgreSQL EMdF database base class
@@ -39291,11 +39439,9 @@ bool PgEMdFConnection::vacuum(bool bAnalyze)
 
 
 /**************** leaving EMdF/pgemdfdb.cpp temporarily *****************/
-/**************** A copy of include/pgemdfdb.h *****************/
-
-
+/**************** A copy of include/pgemdfdb.h ****************/
 #line 1 "include/pgemdfdb.h"
-        /*
+/*
  * pgemdfdb.h
  *
  * PostgreSQL EMdF database base class
@@ -39392,16 +39538,16 @@ bool PgEMdFConnection::vacuum(bool bAnalyze)
 
 
 #line 94 "include/pgemdfdb.h"
-        #ifndef SWIG
+#ifndef SWIG
 /**************** already included emdf.h -- not including again *****************/
 
 
 #line 96 "include/pgemdfdb.h"
-        /**************** already included emdfdb.h -- not including again *****************/
+/**************** already included emdfdb.h -- not including again *****************/
 
 
 #line 97 "include/pgemdfdb.h"
-        #include <list>
+#include <list>
 #endif // !defined SWIG
 #include <string>
 
@@ -39484,37 +39630,38 @@ class PgEMdFDB : public EMdFDB {
 
 
 #endif // PGEMDFDB__H__
+
 /**************** continuing EMdF/pgemdfdb.cpp where we left off *****************/
 
 
 #line 91 "EMdF/pgemdfdb.cpp"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 92 "EMdF/pgemdfdb.cpp"
-        /**************** already included utils.h -- not including again *****************/
+/**************** already included utils.h -- not including again *****************/
 
 
 #line 93 "EMdF/pgemdfdb.cpp"
-        /**************** already included encryption.h -- not including again *****************/
+/**************** already included encryption.h -- not including again *****************/
 
 
 #line 94 "EMdF/pgemdfdb.cpp"
-        /**************** already included inst_object.h -- not including again *****************/
+/**************** already included inst_object.h -- not including again *****************/
 
 
 #line 95 "EMdF/pgemdfdb.cpp"
-        /**************** already included string_list.h -- not including again *****************/
+/**************** already included string_list.h -- not including again *****************/
 
 
 #line 96 "EMdF/pgemdfdb.cpp"
-        
+
 #if defined(USE_POSTGRESQL) && USE_POSTGRESQL
 /**************** already included pgconn.h -- not including again *****************/
 
 
 #line 99 "EMdF/pgemdfdb.cpp"
-        #endif
+#endif
 
 /** Construct a PgEMdFDB object
  *
@@ -40343,11 +40490,10 @@ std::string PgEMdFDB::getEncodingClause(eCharsets charset) const
 
 
 #endif // USE_POSTGRESQL
-/**************** A copy of EMdF/mysqlconn.cpp *****************/
 
-
+/**************** A copy of EMdF/mysqlconn.cpp ****************/
 #line 1 "EMdF/mysqlconn.cpp"
-        /*
+/*
  * mysqlconn.cpp
  *
  * MySQL Database connection 
@@ -40442,11 +40588,9 @@ std::string PgEMdFDB::getEncodingClause(eCharsets charset) const
 #endif
 
 /**************** leaving EMdF/mysqlconn.cpp temporarily *****************/
-/**************** A copy of include/mysqlconn.h *****************/
-
-
+/**************** A copy of include/mysqlconn.h ****************/
 #line 1 "include/mysqlconn.h"
-        /*
+/*
  * mysqlconn.h
  *
  * MySQL Database connection 
@@ -40544,7 +40688,7 @@ std::string PgEMdFDB::getEncodingClause(eCharsets charset) const
 
 
 #line 95 "include/mysqlconn.h"
-        
+
 #ifndef USE_MYSQL
 #define USE_MYSQL 0
 #endif
@@ -40554,12 +40698,12 @@ std::string PgEMdFDB::getEncodingClause(eCharsets charset) const
 
 
 #line 102 "include/mysqlconn.h"
-        #include <cstdlib>
+#include <cstdlib>
 /**************** already included utils.h -- not including again *****************/
 
 
 #line 104 "include/mysqlconn.h"
-        
+
 #if USE_MYSQL
 #include <mysql.h>
 #endif
@@ -40760,30 +40904,31 @@ private:
 
 
 #endif // EMDF_MYSQLCONN__H__
+
 /**************** continuing EMdF/mysqlconn.cpp where we left off *****************/
 
 
 #line 95 "EMdF/mysqlconn.cpp"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 96 "EMdF/mysqlconn.cpp"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 97 "EMdF/mysqlconn.cpp"
-        #include <iostream>
+#include <iostream>
 #include <cstring>
 #include <cstdlib>
 /**************** already included logging.h -- not including again *****************/
 
 
 #line 101 "EMdF/mysqlconn.cpp"
-        /**************** already included encryption.h -- not including again *****************/
+/**************** already included encryption.h -- not including again *****************/
 
 
 #line 102 "EMdF/mysqlconn.cpp"
-        
+
 
 MySQLEMdFConnection::MySQLEMdFConnection(const std::string& host, const std::string& user, const std::string& passwd, const std::string& db)
 {
@@ -41194,11 +41339,10 @@ bool MySQLEMdFConnection::connect()
 	return false;
 #endif
 }
-/**************** A copy of EMdF/mysqlemdfdb.cpp *****************/
 
-
+/**************** A copy of EMdF/mysqlemdfdb.cpp ****************/
 #line 1 "EMdF/mysqlemdfdb.cpp"
-        /*
+/*
  * mysqlemdfdb.cpp
  *
  * MySQL EMdF database base class
@@ -41293,11 +41437,9 @@ bool MySQLEMdFConnection::connect()
 #endif
 
 /**************** leaving EMdF/mysqlemdfdb.cpp temporarily *****************/
-/**************** A copy of include/mysqlemdfdb.h *****************/
-
-
+/**************** A copy of include/mysqlemdfdb.h ****************/
 #line 1 "include/mysqlemdfdb.h"
-        /*
+/*
  * mysqlemdfdb.h
  *
  * MySQL EMdF database base class
@@ -41394,16 +41536,16 @@ bool MySQLEMdFConnection::connect()
 
 
 #line 94 "include/mysqlemdfdb.h"
-        #ifndef SWIG
+#ifndef SWIG
 /**************** already included emdf.h -- not including again *****************/
 
 
 #line 96 "include/mysqlemdfdb.h"
-        /**************** already included emdfdb.h -- not including again *****************/
+/**************** already included emdfdb.h -- not including again *****************/
 
 
 #line 97 "include/mysqlemdfdb.h"
-        #include <list>
+#include <list>
 #endif
 #include <string>
 
@@ -41481,30 +41623,31 @@ class MySQLEMdFDB : public EMdFDB {
 
 
 #endif // MYSQLEMDFDB__H__
+
 /**************** continuing EMdF/mysqlemdfdb.cpp where we left off *****************/
 
 
 #line 95 "EMdF/mysqlemdfdb.cpp"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 96 "EMdF/mysqlemdfdb.cpp"
-        /**************** already included inst_object.h -- not including again *****************/
+/**************** already included inst_object.h -- not including again *****************/
 
 
 #line 97 "EMdF/mysqlemdfdb.cpp"
-        /**************** already included string_list.h -- not including again *****************/
+/**************** already included string_list.h -- not including again *****************/
 
 
 #line 98 "EMdF/mysqlemdfdb.cpp"
-        
+
 
 #if defined(USE_MYSQL) && USE_MYSQL
 /**************** already included mysqlconn.h -- not including again *****************/
 
 
 #line 102 "EMdF/mysqlemdfdb.cpp"
-        #endif
+#endif
 
 
 /** Construct a MySQLEMdFDB object
@@ -42424,11 +42567,10 @@ std::string MySQLEMdFDB::getEncodingClause(eCharsets charset) const
 
 
 #endif // USE_MYSQL
-/**************** A copy of EMdF/sqliteconn.cpp *****************/
 
-
+/**************** A copy of EMdF/sqliteconn.cpp ****************/
 #line 1 "EMdF/sqliteconn.cpp"
-        /*
+/*
  * sqliteconn.cpp
  *
  * SQLite Database connection 
@@ -42522,11 +42664,11 @@ std::string MySQLEMdFDB::getEncodingClause(eCharsets charset) const
 
 
 #line 91 "EMdF/sqliteconn.cpp"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 92 "EMdF/sqliteconn.cpp"
-        #include <cstdlib>
+#include <cstdlib>
 #ifdef __DJGPP__
 #include <sqlite~1.h>
 #include <sqlite~2.h>
@@ -42534,11 +42676,9 @@ std::string MySQLEMdFDB::getEncodingClause(eCharsets charset) const
 #include <string~2.h>
 #else
 /**************** leaving EMdF/sqliteconn.cpp temporarily *****************/
-/**************** A copy of include/sqliteconn.h *****************/
-
-
+/**************** A copy of include/sqliteconn.h ****************/
 #line 1 "include/sqliteconn.h"
-        /*
+/*
  * sqliteconn.h
  *
  * SQLite Database connection 
@@ -42637,31 +42777,29 @@ std::string MySQLEMdFDB::getEncodingClause(eCharsets charset) const
 
 
 #line 96 "include/sqliteconn.h"
-        
+
 #include <cstdlib>
 /**************** already included conn.h -- not including again *****************/
 
 
 #line 99 "include/sqliteconn.h"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 100 "include/sqliteconn.h"
-        
+
 #if USE_SQLITE2
 extern "C" {
 /**************** leaving include/sqliteconn.h temporarily *****************/
-/**************** A copy of include/sqlite_emdros.h *****************/
-
-
+/**************** A copy of include/sqlite_emdros.h ****************/
 #line 1 "include/sqlite_emdros.h"
-        #ifndef SQLITE_EMDROS_H_
+#ifndef SQLITE_EMDROS_H_
 #define SQLITE_EMDROS_H_
 /**************** already included emdros-lconfig.h -- not including again *****************/
 
 
 #line 3 "include/sqlite_emdros.h"
-        #if USE_SQLITE2
+#if USE_SQLITE2
 /*
 ** 2001 September 15
 **
@@ -42695,7 +42833,7 @@ extern "C" {
 #ifdef SQLITE_VERSION
 # undef SQLITE_VERSION
 #else
-# define SQLITE_VERSION         "3.4.1.pre22"
+# define SQLITE_VERSION         "3.4.1.pre24"
 #endif
 
 /*
@@ -43550,11 +43688,12 @@ int sqlite_decode_binary(const unsigned char *in, unsigned char *out);
 #endif /* _SQLITE_H_ */
 #endif /* USE_SQLITE2 */
 #endif /* SQLITE_EMDROS_H_ */
+
 /**************** continuing include/sqliteconn.h where we left off *****************/
 
 
 #line 104 "include/sqliteconn.h"
-        }
+}
 #endif
 
 
@@ -43775,15 +43914,16 @@ class SQLiteEMdFConnection : public EMdFConnection {
 
 
 #endif // EMDF_SQLITECONN__H__
+
 /**************** continuing EMdF/sqliteconn.cpp where we left off *****************/
 
 
 #line 100 "EMdF/sqliteconn.cpp"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 101 "EMdF/sqliteconn.cpp"
-        #endif
+#endif
 
 
 
@@ -43798,7 +43938,7 @@ extern "C" {
 
 
 #line 113 "EMdF/sqliteconn.cpp"
-        #include <iostream>
+#include <iostream>
 #include <cstdlib>
 #include <sstream>
 
@@ -44292,11 +44432,10 @@ void SQLiteEMdFConnection::get_last_insert_rowid(long& result /* out */)
 #endif
 }
 
-/**************** A copy of EMdF/sqliteemdfdb.cpp *****************/
 
-
+/**************** A copy of EMdF/sqliteemdfdb.cpp ****************/
 #line 1 "EMdF/sqliteemdfdb.cpp"
-        /*
+/*
  * sqliteemdfdb.cpp
  *
  * SQLite EMdF database base class
@@ -44383,11 +44522,9 @@ void SQLiteEMdFConnection::get_last_insert_rowid(long& result /* out */)
 
 
 /**************** leaving EMdF/sqliteemdfdb.cpp temporarily *****************/
-/**************** A copy of include/sqliteemdfdb.h *****************/
-
-
+/**************** A copy of include/sqliteemdfdb.h ****************/
 #line 1 "include/sqliteemdfdb.h"
-        /*
+/*
  * sqliteemdfdb.h
  *
  * SQLite EMdF database base class
@@ -44484,16 +44621,16 @@ void SQLiteEMdFConnection::get_last_insert_rowid(long& result /* out */)
 
 
 #line 94 "include/sqliteemdfdb.h"
-        #ifndef SWIG
+#ifndef SWIG
 /**************** already included emdf.h -- not including again *****************/
 
 
 #line 96 "include/sqliteemdfdb.h"
-        /**************** already included emdfdb.h -- not including again *****************/
+/**************** already included emdfdb.h -- not including again *****************/
 
 
 #line 97 "include/sqliteemdfdb.h"
-        #include <list>
+#include <list>
 #include <map>
 #endif // !defined SWIG
 #include <string>
@@ -44597,33 +44734,34 @@ class SQLiteEMdFDB : public EMdFDB {
 
 
 #endif // SQLITEEMDFDB__H__
+
 /**************** continuing EMdF/sqliteemdfdb.cpp where we left off *****************/
 
 
 #line 87 "EMdF/sqliteemdfdb.cpp"
-        #include <string>
+#include <string>
 #include <cstring>
 /**************** already included utils.h -- not including again *****************/
 
 
 #line 90 "EMdF/sqliteemdfdb.cpp"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 91 "EMdF/sqliteemdfdb.cpp"
-        /**************** already included string_list.h -- not including again *****************/
+/**************** already included string_list.h -- not including again *****************/
 
 
 #line 92 "EMdF/sqliteemdfdb.cpp"
-        /**************** already included inst_object.h -- not including again *****************/
+/**************** already included inst_object.h -- not including again *****************/
 
 
 #line 93 "EMdF/sqliteemdfdb.cpp"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 94 "EMdF/sqliteemdfdb.cpp"
-        #include <cstdio>
+#include <cstdio>
 #include <functional>
 #include <algorithm>
 
@@ -44632,7 +44770,7 @@ class SQLiteEMdFDB : public EMdFDB {
 
 
 #line 100 "EMdF/sqliteemdfdb.cpp"
-        #endif
+#endif
 
 /**@file sqliteemdfdb.cpp
  *@brief Implementation of SQLite EMdF database (EMdF layer)
@@ -46279,11 +46417,10 @@ std::string SQLiteEMdFDB::getEncodingClause(eCharsets charset) const
 
 
 #endif // USE_SQLITE2
-/**************** A copy of EMdF/sqlite3conn.cpp *****************/
 
-
+/**************** A copy of EMdF/sqlite3conn.cpp ****************/
 #line 1 "EMdF/sqlite3conn.cpp"
-        /*
+/*
  * sqlite3conn.cpp
  *
  * SQLite3 Database connection 
@@ -46376,18 +46513,16 @@ std::string SQLiteEMdFDB::getEncodingClause(eCharsets charset) const
 
 
 #line 90 "EMdF/sqlite3conn.cpp"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 91 "EMdF/sqlite3conn.cpp"
-        #include <cstdlib>
+#include <cstdlib>
 #include <cassert>
 /**************** leaving EMdF/sqlite3conn.cpp temporarily *****************/
-/**************** A copy of include/sqlite3conn.h *****************/
-
-
+/**************** A copy of include/sqlite3conn.h ****************/
 #line 1 "include/sqlite3conn.h"
-        /*
+/*
  * sqlite3conn.h
  *
  * SQLite3 Database connection 
@@ -46484,28 +46619,26 @@ std::string SQLiteEMdFDB::getEncodingClause(eCharsets charset) const
 
 
 #line 94 "include/sqlite3conn.h"
-        
+
 
 #include <cstdlib>
 /**************** already included conn.h -- not including again *****************/
 
 
 #line 98 "include/sqlite3conn.h"
-        
+
 #if USE_SQLITE3
 extern "C" {
 /**************** leaving include/sqlite3conn.h temporarily *****************/
-/**************** A copy of include/sqlite3_emdros.h *****************/
-
-
+/**************** A copy of include/sqlite3_emdros.h ****************/
 #line 1 "include/sqlite3_emdros.h"
-        #ifndef SQLITE3_EMDROS_H_
+#ifndef SQLITE3_EMDROS_H_
 #define SQLITE3_EMDROS_H_
 /**************** already included emdros-lconfig.h -- not including again *****************/
 
 
 #line 3 "include/sqlite3_emdros.h"
-        #if USE_SQLITE3
+#if USE_SQLITE3
 /*
 ** 2001 September 15
 **
@@ -54951,18 +55084,19 @@ struct fts5_api {
 
 #endif /* USE_SQLITE3 */
 #endif /* SQLITE3_EMDROS_H_ */
+
 /**************** continuing include/sqlite3conn.h where we left off *****************/
 
 
 #line 102 "include/sqlite3conn.h"
-        }
+}
 #endif
 
 /**************** already included debug.h -- not including again *****************/
 
 
 #line 106 "include/sqlite3conn.h"
-        
+
 class SQLite3EMdFConnection : public EMdFConnection {
  private:
 	std::string m_db_name;
@@ -55003,7 +55137,8 @@ class SQLite3EMdFConnection : public EMdFConnection {
 	// Returns -1 on no fields.
 	virtual int getNoOfFields(void);
 
-	int getLastInsertRowID(void) {
+	/*
+	long getLastInsertRowID(void) {
 #if USE_SQLITE3
 		if (m_pDB == 0) {
 			return 0;
@@ -55014,6 +55149,7 @@ class SQLite3EMdFConnection : public EMdFConnection {
 		return 0;
 #endif
 	}
+	*/
 
 	// Getting next tuple
 	// Returns true on success, false on failure
@@ -55183,19 +55319,20 @@ class SQLite3EMdFConnection : public EMdFConnection {
 
 
 #endif // EMDF_SQLITE3CONN__H__
+
 /**************** continuing EMdF/sqlite3conn.cpp where we left off *****************/
 
 
 #line 94 "EMdF/sqlite3conn.cpp"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 95 "EMdF/sqlite3conn.cpp"
-        /**************** already included logging.h -- not including again *****************/
+/**************** already included logging.h -- not including again *****************/
 
 
 #line 96 "EMdF/sqlite3conn.cpp"
-        #include <iostream>
+#include <iostream>
 #include <cstdlib>
 #include <sstream>
 #ifndef WIN32
@@ -55669,11 +55806,10 @@ void SQLite3EMdFConnection::get_last_insert_rowid(long& result /* out */)
 }
 
 
-/**************** A copy of EMdF/sqlite3emdfdb.cpp *****************/
 
-
+/**************** A copy of EMdF/sqlite3emdfdb.cpp ****************/
 #line 1 "EMdF/sqlite3emdfdb.cpp"
-        /*
+/*
  * sqlite3emdfdb.cpp
  *
  * SQLite EMdF database base class
@@ -55765,20 +55901,18 @@ void SQLite3EMdFConnection::get_last_insert_rowid(long& result /* out */)
 
 
 #line 89 "EMdF/sqlite3emdfdb.cpp"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 90 "EMdF/sqlite3emdfdb.cpp"
-        /**************** already included string_list.h -- not including again *****************/
+/**************** already included string_list.h -- not including again *****************/
 
 
 #line 91 "EMdF/sqlite3emdfdb.cpp"
-        /**************** leaving EMdF/sqlite3emdfdb.cpp temporarily *****************/
-/**************** A copy of include/sqlite3emdfdb.h *****************/
-
-
+/**************** leaving EMdF/sqlite3emdfdb.cpp temporarily *****************/
+/**************** A copy of include/sqlite3emdfdb.h ****************/
 #line 1 "include/sqlite3emdfdb.h"
-        /*
+/*
  * sqlite3emdfdb.h
  *
  * SQLite3 EMdF database base class
@@ -55873,16 +56007,16 @@ void SQLite3EMdFConnection::get_last_insert_rowid(long& result /* out */)
 
 
 #line 92 "include/sqlite3emdfdb.h"
-        #ifndef SWIG
+#ifndef SWIG
 /**************** already included emdf.h -- not including again *****************/
 
 
 #line 94 "include/sqlite3emdfdb.h"
-        /**************** already included emdfdb.h -- not including again *****************/
+/**************** already included emdfdb.h -- not including again *****************/
 
 
 #line 95 "include/sqlite3emdfdb.h"
-        #include <list>
+#include <list>
 #include <map>
 #endif // !defined SWIG
 #include <string>
@@ -55990,19 +56124,20 @@ class SQLite3EMdFDB : public EMdFDB {
 
 
 #endif // SQLITE3EMDFDB__H__
+
 /**************** continuing EMdF/sqlite3emdfdb.cpp where we left off *****************/
 
 
 #line 92 "EMdF/sqlite3emdfdb.cpp"
-        /**************** already included inst_object.h -- not including again *****************/
+/**************** already included inst_object.h -- not including again *****************/
 
 
 #line 93 "EMdF/sqlite3emdfdb.cpp"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 94 "EMdF/sqlite3emdfdb.cpp"
-        #include <cstdio>
+#include <cstdio>
 #include <functional>
 #include <algorithm>
 
@@ -56011,7 +56146,7 @@ class SQLite3EMdFDB : public EMdFDB {
 
 
 #line 100 "EMdF/sqlite3emdfdb.cpp"
-        #endif
+#endif
 
 /**@file sqlite3emdfdb.cpp
  *@brief Implementation of SQLite EMdF database (EMdF layer)
@@ -57655,24 +57790,23 @@ std::string SQLite3EMdFDB::getEncodingClause(eCharsets charset) const
 
 
 #endif // USE_SQLITE3
-/**************** A copy of EMdF/bptemdfdb.cpp *****************/
 
-
+/**************** A copy of EMdF/bptemdfdb.cpp ****************/
 #line 1 "EMdF/bptemdfdb.cpp"
-        /*
+/*
  * bptemdfdb.cpp
  *
  * EMdF database class for Bit Packed Tables
  *
  * Ulrik Petersen
  * Created: 1/27-2001
- * Last update: 12/17-2015
+ * Last update: 4/27-2016
  *
  */
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2010-2015  Ulrik Sandborg-Petersen
+ *   Copyright (C) 2010-2016  Ulrik Sandborg-Petersen
  *
  *   This file is NOT under the GNU General Public License.  You must
  *   obtain a license from the author, Ulrik Sandborg-Petersen, in
@@ -57691,7 +57825,7 @@ std::string SQLite3EMdFDB::getEncodingClause(eCharsets charset) const
 
 
 #line 29 "EMdF/bptemdfdb.cpp"
-        // Do this because emdros-config might #define malloc,
+// Do this because emdros-config might #define malloc,
 // in which case some systems will fail to use the real 
 // malloc, thus causing build errors.
 #undef malloc
@@ -57701,85 +57835,83 @@ std::string SQLite3EMdFDB::getEncodingClause(eCharsets charset) const
 
 
 #line 36 "EMdF/bptemdfdb.cpp"
-        #include <cstdio>
+#include <cstdio>
 #include <map>
 #include <cstring>
 /**************** already included emdf_enums.h -- not including again *****************/
 
 
 #line 40 "EMdF/bptemdfdb.cpp"
-        #include <new>
+#include <new>
 /**************** already included exception_emdros.h -- not including again *****************/
 
 
 #line 42 "EMdF/bptemdfdb.cpp"
-        /**************** already included emdf_exception.h -- not including again *****************/
+/**************** already included emdf_exception.h -- not including again *****************/
 
 
 #line 43 "EMdF/bptemdfdb.cpp"
-        /**************** already included emdf_value.h -- not including again *****************/
+/**************** already included emdf_value.h -- not including again *****************/
 
 
 #line 44 "EMdF/bptemdfdb.cpp"
-        /**************** already included json_classes.h -- not including again *****************/
+/**************** already included json_classes.h -- not including again *****************/
 
 
 #line 45 "EMdF/bptemdfdb.cpp"
-        /**************** already included monads.h -- not including again *****************/
+/**************** already included monads.h -- not including again *****************/
 
 
 #line 46 "EMdF/bptemdfdb.cpp"
-        /**************** already included enum_const_cache.h -- not including again *****************/
+/**************** already included enum_const_cache.h -- not including again *****************/
 
 
 #line 47 "EMdF/bptemdfdb.cpp"
-        /**************** already included infos.h -- not including again *****************/
+/**************** already included infos.h -- not including again *****************/
 
 
 #line 48 "EMdF/bptemdfdb.cpp"
-        /**************** already included conn.h -- not including again *****************/
+/**************** already included conn.h -- not including again *****************/
 
 
 #line 49 "EMdF/bptemdfdb.cpp"
-        /**************** already included emdf_ffeatures.h -- not including again *****************/
+/**************** already included emdf_ffeatures.h -- not including again *****************/
 
 
 #line 50 "EMdF/bptemdfdb.cpp"
-        /**************** already included table.h -- not including again *****************/
+/**************** already included table.h -- not including again *****************/
 
 
 #line 51 "EMdF/bptemdfdb.cpp"
-        /**************** already included conn.h -- not including again *****************/
+/**************** already included conn.h -- not including again *****************/
 
 
 #line 52 "EMdF/bptemdfdb.cpp"
-        /**************** already included inst.h -- not including again *****************/
+/**************** already included inst.h -- not including again *****************/
 
 
 #line 53 "EMdF/bptemdfdb.cpp"
-        /**************** already included monads.h -- not including again *****************/
+/**************** already included monads.h -- not including again *****************/
 
 
 #line 54 "EMdF/bptemdfdb.cpp"
-        /**************** leaving EMdF/bptemdfdb.cpp temporarily *****************/
-/**************** A copy of include/bptemdfdb.h *****************/
-
-
+/**************** leaving EMdF/bptemdfdb.cpp temporarily *****************/
+/**************** A copy of include/bptemdfdb.h ****************/
 #line 1 "include/bptemdfdb.h"
-        /*
+/*
  * bptemdfdb.h
  *
  * EMdF database class for Bit Packed Tables
  *
  * Ulrik Petersen
  * Created: 1/27-2001
- * Last update: 10/19-2013
+ * Last update: 4/21-2016
  *
  */
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2010-2013  Ulrik Sandborg-Petersen
+ *   Copyright (C) 2010-2016  Ulrik Sandborg-Petersen
  *
  *   This file is NOT under the GNU General Public License.  You must
  *   obtain a license from the author, Ulrik Sandborg-Petersen, in
@@ -57802,7 +57934,7 @@ std::string SQLite3EMdFDB::getEncodingClause(eCharsets charset) const
 
 
 #line 33 "include/bptemdfdb.h"
-        #endif // !defined SWIG
+#endif // !defined SWIG
 
 class BPTEMdFComparison;
 class BPTEMdFConnection;
@@ -58115,6 +58247,7 @@ class BPTEMdFDB : public EMdFDB {
 			     EMdFFFeatures *pre_query_constraints,
 			     const std::list<FeatureInfo>& features_to_get,
 			     const std::string& monad_set_name,
+			     eMonadSetRelationOperation ms_operation,
 			     /* out */ Inst& Result);
  protected:
 	virtual bool getInstLocalBPT(const std::string& object_type_name,		
@@ -58125,6 +58258,7 @@ class BPTEMdFDB : public EMdFDB {
 				     const std::list<FeatureInfo>& features_to_get,	
 				     const std::string& monad_set_name,
 				     eObjectRangeType objectRangeType,
+				     eMonadSetRelationOperation ms_operation,
 				     /* out */ Inst& Result);
  public:
 
@@ -58304,66 +58438,66 @@ class BPTEMdFDB : public EMdFDB {
 bool BPTKeyIsOK(const std::string& key);
 
 #endif // BPTEMDFDB__H__
+
 /**************** continuing EMdF/bptemdfdb.cpp where we left off *****************/
 
 
 #line 55 "EMdF/bptemdfdb.cpp"
-        /**************** already included emdf_value.h -- not including again *****************/
+/**************** already included emdf_value.h -- not including again *****************/
 
 
 #line 56 "EMdF/bptemdfdb.cpp"
-        /**************** already included emdf_ffeatures.h -- not including again *****************/
+/**************** already included emdf_ffeatures.h -- not including again *****************/
 
 
 #line 57 "EMdF/bptemdfdb.cpp"
-        /**************** already included enum_const_cache.h -- not including again *****************/
+/**************** already included enum_const_cache.h -- not including again *****************/
 
 
 #line 58 "EMdF/bptemdfdb.cpp"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 59 "EMdF/bptemdfdb.cpp"
-        /**************** already included string_list.h -- not including again *****************/
+/**************** already included string_list.h -- not including again *****************/
 
 
 #line 60 "EMdF/bptemdfdb.cpp"
-        /**************** already included string_set_cache.h -- not including again *****************/
+/**************** already included string_set_cache.h -- not including again *****************/
 
 
 #line 61 "EMdF/bptemdfdb.cpp"
-        /**************** already included utils.h -- not including again *****************/
+/**************** already included utils.h -- not including again *****************/
 
 
 #line 62 "EMdF/bptemdfdb.cpp"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 63 "EMdF/bptemdfdb.cpp"
-        #include <iostream>
+#include <iostream>
 #include <sstream>
 #include <set>
 /**************** already included logging.h -- not including again *****************/
 
 
 #line 67 "EMdF/bptemdfdb.cpp"
-        #if defined(HAVE_UNISTD_H) && HAVE_UNISTD_H
+#if defined(HAVE_UNISTD_H) && HAVE_UNISTD_H
 #include <unistd.h>
 #endif
 /**************** leaving EMdF/bptemdfdb.cpp temporarily *****************/
-/**************** A copy of include/zlib_emdros.h *****************/
-
-
+/**************** A copy of include/zlib_emdros.h ****************/
 #line 1 "include/zlib_emdros.h"
-        #ifndef ZLIB_EMDROS_H_
+#ifndef ZLIB_EMDROS_H_
 #define ZLIB_EMDROS_H_
 #include <zlib.h>
 #endif /* !defined(ZLIB_EMDROS_H_) */
+
 /**************** continuing EMdF/bptemdfdb.cpp where we left off *****************/
 
 
 #line 71 "EMdF/bptemdfdb.cpp"
-        
+
 #if defined(WIN32) || defined(WIN64) || defined(__WIN32__) || defined(__WIN64__)
 #include <windows.h>
 #endif
@@ -59516,7 +59650,8 @@ Page *PageCache::loadPage(int page_number, void *pNextFreePageDataToUse)
 
 enum eQueryKind {
 	kQueryKindHavingMonadsIn,
-	kQueryKindInst,
+	kQueryKindPartOf,
+	kQueryKindStartsIn,
 	kQueryKindStartMonad,
 	kQueryKindFeatureIndex,
 	kQueryKindHasMonadIndexCursor
@@ -61731,15 +61866,10 @@ MonadSetElement BPTCursor::getCurMSE(const MonadSetElement& mse)
 		}
 		return MonadSetElement(first_monad, mse.last());
 	}
-	case kQueryKindInst:
-		return mse;
-		break;
+	case kQueryKindPartOf:
+	case kQueryKindStartsIn:
 	case kQueryKindStartMonad:
-		return mse;
-		break;
 	case kQueryKindFeatureIndex:
-		return mse;
-		break;
 	case kQueryKindHasMonadIndexCursor:
 		return mse;
 		break;
@@ -61866,7 +61996,8 @@ bool BPTCursor::resetCursor(bool bInitCursor)
 				return false;
 			}
 			break;
-		case kQueryKindInst:
+		case kQueryKindPartOf:
+		case kQueryKindStartsIn:
 			// std::cerr << "UP432: findRow(" << m_curmse.first() << ") is about to be called..." << std::endl;
 			if (!findRow(m_curmse.first())) {
 				// std::cerr << "UP430: findRow(" << m_curmse.first() << ") returned false." << std::endl;
@@ -62048,9 +62179,10 @@ bool BPTCursor::shouldAdvanceSomCI(bool& bMoreTuples, bool& bShouldAdvanceSomCI)
 			bShouldAdvanceSomCI = false;
 		}
 	} else {
-		// kQueryKindHavingMonadsIn or kQueryKindInst or kQueryKindFeatureIndex or kQueryKindHasMonadIndexCursor
+		// kQueryKindHavingMonadsIn or kQueryKindPartOf or kQueryKindStartsIn or kQueryKindFeatureIndex or kQueryKindHasMonadIndexCursor
 		ASSERT_THROW(m_query_kind == kQueryKindHavingMonadsIn 
-			     || m_query_kind == kQueryKindInst
+			     || m_query_kind == kQueryKindPartOf
+			     || m_query_kind == kQueryKindStartsIn
 			     || m_query_kind == kQueryKindFeatureIndex
 			     || m_query_kind == kQueryKindHasMonadIndexCursor,
 			     "Unknown m_query_kind");
@@ -62719,742 +62851,1540 @@ long BPTColumnValueAccessor::operator[](long row)
 	}
 	int bits = m_bits;
 
-	unsigned long result = 0;
+	unsigned int result = 0;
 	int overall_shift = 0;
 	unsigned long colbits_offset = real_file_offset - m_cur_file_offset;
 	unsigned char *p = &(m_colbits[colbits_offset]);
-	unsigned char *p1 = 0;
-	unsigned char *p2 = 0;
-	unsigned char *p3 = 0;
-	unsigned char *p4 = 0;
-
-#define GET_P1()  p1 = p; ++p1; 
-#define GET_P2()  GET_P1(); p2 = p1; ++p2;
-#define GET_P3()  GET_P2(); p3 = p2; ++p3;
-#define GET_P4()  GET_P3(); p4 = p3; ++p4;
 
 	bool bDoSlowVersion = true;
 	// std::cerr << "UP230: bit_index = " << bit_index << ", m_bits = " << m_bits << ", real_file_offset = " << real_file_offset << ", colbits_offset = " << colbits_offset << ", m_cur_file_offset = " << m_cur_file_offset << '\n';
 
-	switch (bit_index) {
+
+
+	switch(bit_index) {
 	case 0: {
 		bDoSlowVersion = false;
-		switch (bits) {
+		switch(bits) {
 		case 1:
-			result = *p & 0x01;
+			result =
+				((*p) & (0x00000001U));
 			break;
 		case 2:
-			result = *p & 0x03;
+			result =
+				((*p) & (0x00000003U));
 			break;
 		case 3:
-			result = *p & 0x07;
+			result =
+				((*p) & (0x00000007U));
 			break;
 		case 4:
-			result = *p & 0x0f;
+			result =
+				((*p) & (0x0000000fU));
 			break;
 		case 5:
-			result = *p & 0x1f;
+			result =
+				((*p) & (0x0000001fU));
 			break;
 		case 6:
-			result = *p & 0x3f;
+			result =
+				((*p) & (0x0000003fU));
 			break;
 		case 7:
-			result = *p & 0x7f;
+			result =
+				((*p) & (0x0000007fU));
 			break;
 		case 8:
-			result = *p;
+			result =
+				((*p) & (0x000000ffU));
 			break;
 		case 9:
-			GET_P1();
-			result = ((*p1 << 8) & 0x00000100U)
-				| *p;
+			result =
+				((*p++) & (0x000000ffU));
+			result |= ((*p << 8) & (0x00000100U));
 			break;
 		case 10:
-			GET_P1();
-			result = ((*p1 << 8) & 0x00000300U)
-				| *p;
+			result =
+				((*p++) & (0x000000ffU));
+			result |= ((*p << 8) & (0x00000300U));
 			break;
 		case 11:
-			GET_P1();	
-			result = ((*p1 << 8) & 0x00000700U)
-				| *p;
+			result =
+				((*p++) & (0x000000ffU));
+			result |= ((*p << 8) & (0x00000700U));
 			break;
 		case 12:
-			GET_P1();
-			result = ((*p1 << 8) & 0x00000f00U)
-				| *p;
+			result =
+				((*p++) & (0x000000ffU));
+			result |= ((*p << 8) & (0x00000f00U));
 			break;
 		case 13:
-			GET_P1();
-			result = ((*p1 << 8) & 0x00001f00U)
-				| *p;
+			result =
+				((*p++) & (0x000000ffU));
+			result |= ((*p << 8) & (0x00001f00U));
 			break;
 		case 14:
-			GET_P1();
-			result = ((*p1 << 8) & 0x00003f00U)
-				| *p;
+			result =
+				((*p++) & (0x000000ffU));
+			result |= ((*p << 8) & (0x00003f00U));
 			break;
 		case 15:
-			GET_P1();
-			result = ((*p1 << 8) & 0x00007f00U)
-				| *p;
+			result =
+				((*p++) & (0x000000ffU));
+			result |= ((*p << 8) & (0x00007f00U));
 			break;
 		case 16:
-			GET_P1();
-			result = ((*p1 << 8) & 0x0000ff00U)
-				| *p;
+			result =
+				((*p++) & (0x000000ffU));
+			result |= ((*p << 8) & (0x0000ff00U));
 			break;
 		case 17:
-			GET_P2();
-			result = ((*p2 << 16) & 0x00010000U)
-				| ((*p1 << 8) & 0x0000ff00U)
-				| *p;
+			result =
+				((*p++) & (0x000000ffU));
+			result |= ((*p++ << 8) & (0x0000ff00U));
+			result |= ((*p << 16) & (0x00010000U));
 			break;
 		case 18:
-			GET_P2();	
-			result = ((*p2 << 16) & 0x00030000U)
-				| ((*p1 << 8) & 0x0000ff00U)
-				| *p;
+			result =
+				((*p++) & (0x000000ffU));
+			result |= ((*p++ << 8) & (0x0000ff00U));
+			result |= ((*p << 16) & (0x00030000U));
 			break;
 		case 19:
-			GET_P2();
-			result = ((*p2 << 16) & 0x00070000U)
-				| ((*p1 << 8) & 0x0000ff00U)
-				| *p;
+			result =
+				((*p++) & (0x000000ffU));
+			result |= ((*p++ << 8) & (0x0000ff00U));
+			result |= ((*p << 16) & (0x00070000U));
 			break;
 		case 20:
-			GET_P2();
-			result = ((*p2 << 16) & 0x000f0000U)
-				| ((*p1 << 8) & 0x0000ff00U)
-				| *p;
+			result =
+				((*p++) & (0x000000ffU));
+			result |= ((*p++ << 8) & (0x0000ff00U));
+			result |= ((*p << 16) & (0x000f0000U));
 			break;
 		case 21:
-			GET_P2();
-			result = ((*p2 << 16) & 0x001f0000U)
-				| ((*p1 << 8) & 0x0000ff00U)
-				| *p;
+			result =
+				((*p++) & (0x000000ffU));
+			result |= ((*p++ << 8) & (0x0000ff00U));
+			result |= ((*p << 16) & (0x001f0000U));
 			break;
 		case 22:
-			GET_P2();
-			result = ((*p2 << 16) & 0x003f0000U)
-				| ((*p1 << 8) & 0x0000ff00U)
-				| *p;
+			result =
+				((*p++) & (0x000000ffU));
+			result |= ((*p++ << 8) & (0x0000ff00U));
+			result |= ((*p << 16) & (0x003f0000U));
 			break;
 		case 23:
-			GET_P2();
-			result = ((*p2 << 16) & 0x007f0000U)
-				| ((*p1 << 8) & 0x0000ff00U)
-				| *p;
+			result =
+				((*p++) & (0x000000ffU));
+			result |= ((*p++ << 8) & (0x0000ff00U));
+			result |= ((*p << 16) & (0x007f0000U));
 			break;
 		case 24:
-			GET_P2();
-			result = ((*p2 << 16) & 0x00ff0000U)
-				| ((*p1 << 8) & 0x0000ff00U)
-				| *p;
+			result =
+				((*p++) & (0x000000ffU));
+			result |= ((*p++ << 8) & (0x0000ff00U));
+			result |= ((*p << 16) & (0x00ff0000U));
 			break;
 		case 25:
-			GET_P3();
-			result =  ((*p3 << 24) & 0x01000000U)
-				| ((*p2 << 16) & 0x00ff0000U)
-				| ((*p1 << 8) & 0x0000ff00U)
-				| *p;
+			result =
+				((*p++) & (0x000000ffU));
+			result |= ((*p++ << 8) & (0x0000ff00U));
+			result |= ((*p++ << 16) & (0x00ff0000U));
+			result |= ((*p << 24) & (0x01000000U));
 			break;
 		case 26:
-			GET_P3();
-			result =  ((*p3 << 24) & 0x03000000U)
-				| ((*p2 << 16) & 0x00ff0000U)
-				| ((*p1 << 8) & 0x0000ff00U)
-				| *p;
+			result =
+				((*p++) & (0x000000ffU));
+			result |= ((*p++ << 8) & (0x0000ff00U));
+			result |= ((*p++ << 16) & (0x00ff0000U));
+			result |= ((*p << 24) & (0x03000000U));
 			break;
 		case 27:
-			GET_P3();
-			result =  ((*p3 << 24) & 0x07000000U)
-				| ((*p2 << 16) & 0x00ff0000U)
-				| ((*p1 << 8) & 0x0000ff00U)
-				| *p;
+			result =
+				((*p++) & (0x000000ffU));
+			result |= ((*p++ << 8) & (0x0000ff00U));
+			result |= ((*p++ << 16) & (0x00ff0000U));
+			result |= ((*p << 24) & (0x07000000U));
 			break;
 		case 28:
-			GET_P3();
-			result =  ((*p3 << 24) & 0x0f000000U)
-				| ((*p2 << 16) & 0x00ff0000U)
-				| ((*p1 << 8) & 0x0000ff00U)
-				| *p;
+			result =
+				((*p++) & (0x000000ffU));
+			result |= ((*p++ << 8) & (0x0000ff00U));
+			result |= ((*p++ << 16) & (0x00ff0000U));
+			result |= ((*p << 24) & (0x0f000000U));
 			break;
 		case 29:
-			GET_P3();	
-			result =  ((*p3 << 24) & 0x1f000000U)
-				| ((*p2 << 16) & 0x00ff0000U)
-				| ((*p1 << 8) & 0x0000ff00U)
-				| *p;
+			result =
+				((*p++) & (0x000000ffU));
+			result |= ((*p++ << 8) & (0x0000ff00U));
+			result |= ((*p++ << 16) & (0x00ff0000U));
+			result |= ((*p << 24) & (0x1f000000U));
 			break;
 		case 30:
-			GET_P3();
-			result =  ((*p3 << 24) & 0x3f000000U)
-				| ((*p2 << 16) & 0x00ff0000U)
-				| ((*p1 << 8) & 0x0000ff00U)
-				| *p;
+			result =
+				((*p++) & (0x000000ffU));
+			result |= ((*p++ << 8) & (0x0000ff00U));
+			result |= ((*p++ << 16) & (0x00ff0000U));
+			result |= ((*p << 24) & (0x3f000000U));
 			break;
 		case 31:
-			GET_P3();
-			result =  ((*p3 << 24) & 0x7f000000U)
-				| ((*p2 << 16) & 0x00ff0000U)
-				| ((*p1 << 8) & 0x0000ff00U)
-				| *p;
-			break;
-		default:
-			bDoSlowVersion = true;
+			result =
+				((*p++) & (0x000000ffU));
+			result |= ((*p++ << 8) & (0x0000ff00U));
+			result |= ((*p++ << 16) & (0x00ff0000U));
+			result |= ((*p << 24) & (0x7f000000U));
 			break;
 		}
-	}
 		break;
+	}
+    
 	case 1: {
 		bDoSlowVersion = false;
-		switch (bits) {
+		switch(bits) {
 		case 1:
-			result = ((*p >> 1) & 0x01);
+			result =
+				((*p >> 1) & (0x00000001U));
 			break;
 		case 2:
-			result = ((*p >> 1) & 0x03);
+			result =
+				((*p >> 1) & (0x00000003U));
 			break;
 		case 3:
-			result = ((*p >> 1) & 0x07);
+			result =
+				((*p >> 1) & (0x00000007U));
 			break;
 		case 4:
-			result = ((*p >> 1) & 0x0f);
+			result =
+				((*p >> 1) & (0x0000000fU));
 			break;
 		case 5:
-			result = ((*p >> 1) & 0x1f);
+			result =
+				((*p >> 1) & (0x0000001fU));
 			break;
 		case 6:
-			result = ((*p >> 1) & 0x3f);
+			result =
+				((*p >> 1) & (0x0000003fU));
 			break;
 		case 7:
-			result = ((*p >> 1) & 0x7f);
+			result =
+				((*p >> 1) & (0x0000007fU));
 			break;
 		case 8:
-			GET_P1();
-			result = ((*p1 << 7) & 0x00000080U)
-				| ((*p >> 1) & 0x7f);
+			result =
+				((*p++ >> 1) & (0x0000007fU));
+			result |= ((*p << 7) & (0x00000080U));
 			break;
 		case 9:
-			GET_P1();
-			result = ((*p1 << 7) & 0x00000180U)
-				| ((*p >> 1) & 0x7f);
+			result =
+				((*p++ >> 1) & (0x0000007fU));
+			result |= ((*p << 7) & (0x00000180U));
 			break;
 		case 10:
-			GET_P1();
-			result = ((*p1 << 7) & 0x00000380U)
-				| ((*p >> 1) & 0x7f);
+			result =
+				((*p++ >> 1) & (0x0000007fU));
+			result |= ((*p << 7) & (0x00000380U));
 			break;
 		case 11:
-			GET_P1();
-			result = ((*p1 << 7) & 0x00000780U)
-				| ((*p >> 1) & 0x7f);
+			result =
+				((*p++ >> 1) & (0x0000007fU));
+			result |= ((*p << 7) & (0x00000780U));
 			break;
 		case 12:
-			GET_P1();
-			result = ((*p1 << 7) & 0x00000f80U)
-				| ((*p >> 1) & 0x7f);
+			result =
+				((*p++ >> 1) & (0x0000007fU));
+			result |= ((*p << 7) & (0x00000f80U));
 			break;
 		case 13:
-			GET_P1();
-			result = ((*p1 << 7) & 0x00001f80U)
-				| ((*p >> 1) & 0x7f);
+			result =
+				((*p++ >> 1) & (0x0000007fU));
+			result |= ((*p << 7) & (0x00001f80U));
 			break;
 		case 14:
-			GET_P1();
-			result = ((*p1 << 7) & 0x00003f80U)
-				| ((*p >> 1) & 0x7f);
+			result =
+				((*p++ >> 1) & (0x0000007fU));
+			result |= ((*p << 7) & (0x00003f80U));
 			break;
 		case 15:
-			GET_P1();
-			result = ((*p1 << 7) & 0x00007f80U)
-				| ((*p >> 1) & 0x7f);
+			result =
+				((*p++ >> 1) & (0x0000007fU));
+			result |= ((*p << 7) & (0x00007f80U));
 			break;
 		case 16:
-			GET_P2();
-			result =  ((*p2 << 15) & 0x00008000U)
-				| ((*p1 << 7) & 0x00007f80U)
-				| ((*p >> 1) & 0x7f);
+			result =
+				((*p++ >> 1) & (0x0000007fU));
+			result |= ((*p++ << 7) & (0x00007f80U));
+			result |= ((*p << 15) & (0x00008000U));
 			break;
 		case 17:
-			GET_P2();
-			result =  ((*p2 << 15) & 0x00018000U)
-				| ((*p1 << 7) & 0x00007f80U)
-				| ((*p >> 1) & 0x7f);
+			result =
+				((*p++ >> 1) & (0x0000007fU));
+			result |= ((*p++ << 7) & (0x00007f80U));
+			result |= ((*p << 15) & (0x00018000U));
 			break;
 		case 18:
-			GET_P2();
-			result =  ((*p2 << 15) & 0x00038000U)
-				| ((*p1 << 7) & 0x00007f80U)
-				| ((*p >> 1) & 0x7f);
+			result =
+				((*p++ >> 1) & (0x0000007fU));
+			result |= ((*p++ << 7) & (0x00007f80U));
+			result |= ((*p << 15) & (0x00038000U));
 			break;
 		case 19:
-			GET_P2();
-			result =  ((*p2 << 15) & 0x00078000U)
-				| ((*p1 << 7) & 0x00007f80U)
-				| ((*p >> 1) & 0x7f);
+			result =
+				((*p++ >> 1) & (0x0000007fU));
+			result |= ((*p++ << 7) & (0x00007f80U));
+			result |= ((*p << 15) & (0x00078000U));
 			break;
 		case 20:
-			GET_P2();
-			result =  ((*p2 << 15) & 0x000f8000U)
-				| ((*p1 << 7) & 0x00007f80U)
-				| ((*p >> 1) & 0x7f);
+			result =
+				((*p++ >> 1) & (0x0000007fU));
+			result |= ((*p++ << 7) & (0x00007f80U));
+			result |= ((*p << 15) & (0x000f8000U));
 			break;
 		case 21:
-			GET_P2();
-			result =  ((*p2 << 15) & 0x001f8000U)
-				| ((*p1 << 7) & 0x00007f80U)
-				| ((*p >> 1) & 0x7f);
+			result =
+				((*p++ >> 1) & (0x0000007fU));
+			result |= ((*p++ << 7) & (0x00007f80U));
+			result |= ((*p << 15) & (0x001f8000U));
 			break;
-		case 22:	
-			GET_P2();
-			result =  ((*p2 << 15) & 0x003f8000U)
-				| ((*p1 << 7) & 0x00007f80U)
-				| ((*p >> 1) & 0x7f);
+		case 22:
+			result =
+				((*p++ >> 1) & (0x0000007fU));
+			result |= ((*p++ << 7) & (0x00007f80U));
+			result |= ((*p << 15) & (0x003f8000U));
 			break;
 		case 23:
-			GET_P2();	
-			result =  ((*p2 << 15) & 0x007f8000U)
-				| ((*p1 << 7) & 0x00007f80U)
-				| ((*p >> 1) & 0x7f);
+			result =
+				((*p++ >> 1) & (0x0000007fU));
+			result |= ((*p++ << 7) & (0x00007f80U));
+			result |= ((*p << 15) & (0x007f8000U));
 			break;
 		case 24:
-			GET_P3();
-			result =  ((*p3 << 23) & 0x00800000U)
-				| ((*p2 << 15) & 0x007f8000U)
-				| ((*p1 << 7) & 0x00007f80U)
-				| ((*p >> 1) & 0x7f);
+			result =
+				((*p++ >> 1) & (0x0000007fU));
+			result |= ((*p++ << 7) & (0x00007f80U));
+			result |= ((*p++ << 15) & (0x007f8000U));
+			result |= ((*p << 23) & (0x00800000U));
 			break;
 		case 25:
-			GET_P3();
-			result =  ((*p3 << 23) & 0x01800000U)
-				| ((*p2 << 15) & 0x007f8000U)
-				| ((*p1 << 7) & 0x00007f80U)
-				| ((*p >> 1) & 0x7f);
+			result =
+				((*p++ >> 1) & (0x0000007fU));
+			result |= ((*p++ << 7) & (0x00007f80U));
+			result |= ((*p++ << 15) & (0x007f8000U));
+			result |= ((*p << 23) & (0x01800000U));
 			break;
 		case 26:
-			GET_P3();
-			result =  ((*p3 << 23) & 0x03800000U)
-				| ((*p2 << 15) & 0x007f8000U)
-				| ((*p1 << 7) & 0x00007f80U)
-				| ((*p >> 1) & 0x7f);
+			result =
+				((*p++ >> 1) & (0x0000007fU));
+			result |= ((*p++ << 7) & (0x00007f80U));
+			result |= ((*p++ << 15) & (0x007f8000U));
+			result |= ((*p << 23) & (0x03800000U));
 			break;
 		case 27:
-			GET_P3();
-			result =  ((*p3 << 23) & 0x07800000U)
-				| ((*p2 << 15) & 0x007f8000U)
-				| ((*p1 << 7) & 0x00007f80U)
-				| ((*p >> 1) & 0x7f);
+			result =
+				((*p++ >> 1) & (0x0000007fU));
+			result |= ((*p++ << 7) & (0x00007f80U));
+			result |= ((*p++ << 15) & (0x007f8000U));
+			result |= ((*p << 23) & (0x07800000U));
 			break;
 		case 28:
-			GET_P3();
-			result =  ((*p3 << 23) & 0x0f800000U)
-				| ((*p2 << 15) & 0x007f8000U)
-				| ((*p1 << 7) & 0x00007f80U)
-				| ((*p >> 1) & 0x7f);
+			result =
+				((*p++ >> 1) & (0x0000007fU));
+			result |= ((*p++ << 7) & (0x00007f80U));
+			result |= ((*p++ << 15) & (0x007f8000U));
+			result |= ((*p << 23) & (0x0f800000U));
 			break;
 		case 29:
-			GET_P3();
-			result =  ((*p3 << 23) & 0x1f800000U)
-				| ((*p2 << 15) & 0x007f8000U)
-				| ((*p1 << 7) & 0x00007f80U)
-				| ((*p >> 1) & 0x7f);
+			result =
+				((*p++ >> 1) & (0x0000007fU));
+			result |= ((*p++ << 7) & (0x00007f80U));
+			result |= ((*p++ << 15) & (0x007f8000U));
+			result |= ((*p << 23) & (0x1f800000U));
 			break;
 		case 30:
-			GET_P3();
-			result =  ((*p3 << 23) & 0x3f800000U)
-				| ((*p2 << 15) & 0x007f8000U)
-				| ((*p1 << 7) & 0x00007f80U)
-				| ((*p >> 1) & 0x7f);
+			result =
+				((*p++ >> 1) & (0x0000007fU));
+			result |= ((*p++ << 7) & (0x00007f80U));
+			result |= ((*p++ << 15) & (0x007f8000U));
+			result |= ((*p << 23) & (0x3f800000U));
 			break;
 		case 31:
-			GET_P3();
-			result =  ((*p3 << 23) & 0x7f800000U)
-				| ((*p2 << 15) & 0x007f8000U)
-				| ((*p1 << 7) & 0x00007f80U)
-				| ((*p >> 1) & 0x7f);
-			break;
-		default:
-			bDoSlowVersion = true;
+			result =
+				((*p++ >> 1) & (0x0000007fU));
+			result |= ((*p++ << 7) & (0x00007f80U));
+			result |= ((*p++ << 15) & (0x007f8000U));
+			result |= ((*p << 23) & (0x7f800000U));
 			break;
 		}
-	}
 		break;
+	}
+    
 	case 2: {
 		bDoSlowVersion = false;
-		switch (bits) {
+		switch(bits) {
 		case 1:
-			result = ((*p >> 2) & 0x01);
+			result =
+				((*p >> 2) & (0x00000001U));
 			break;
 		case 2:
-			result = ((*p >> 2) & 0x03);
+			result =
+				((*p >> 2) & (0x00000003U));
 			break;
 		case 3:
-			result = ((*p >> 2) & 0x07);
+			result =
+				((*p >> 2) & (0x00000007U));
 			break;
 		case 4:
-			result = ((*p >> 2) & 0x0f);
+			result =
+				((*p >> 2) & (0x0000000fU));
 			break;
 		case 5:
-			result = ((*p >> 2) & 0x1f);
+			result =
+				((*p >> 2) & (0x0000001fU));
 			break;
 		case 6:
-			result = ((*p >> 2) & 0x3f);
+			result =
+				((*p >> 2) & (0x0000003fU));
 			break;
 		case 7:
-			GET_P1();
-			result = ((*p1 << 6) & 0x00000040U)
-				| ((*p >> 2) & 0x3f);
+			result =
+				((*p++ >> 2) & (0x0000003fU));
+			result |= ((*p << 6) & (0x00000040U));
 			break;
 		case 8:
-			GET_P1();
-			result = ((*p1 << 6) & 0x000000c0U)
-				| ((*p >> 2) & 0x3f);
+			result =
+				((*p++ >> 2) & (0x0000003fU));
+			result |= ((*p << 6) & (0x000000c0U));
 			break;
 		case 9:
-			GET_P1();
-			result = ((*p1 << 6) & 0x000001c0U)
-				| ((*p >> 2) & 0x3f);
+			result =
+				((*p++ >> 2) & (0x0000003fU));
+			result |= ((*p << 6) & (0x000001c0U));
 			break;
-
 		case 10:
-			GET_P1();
-			result = ((*p1 << 6) & 0x000003c0U)
-				| ((*p >> 2) & 0x3f);
+			result =
+				((*p++ >> 2) & (0x0000003fU));
+			result |= ((*p << 6) & (0x000003c0U));
 			break;
 		case 11:
-			GET_P1();
-			result = ((*p1 << 6) & 0x000007c0U)
-				| ((*p >> 2) & 0x3f);
+			result =
+				((*p++ >> 2) & (0x0000003fU));
+			result |= ((*p << 6) & (0x000007c0U));
 			break;
 		case 12:
-			GET_P1();
-			result = ((*p1 << 6) & 0x00000fc0U)
-				| ((*p >> 2) & 0x3f);
+			result =
+				((*p++ >> 2) & (0x0000003fU));
+			result |= ((*p << 6) & (0x00000fc0U));
 			break;
 		case 13:
-			GET_P1();
-			result = ((*p1 << 6) & 0x00001fc0U)
-				| ((*p >> 2) & 0x3f);
+			result =
+				((*p++ >> 2) & (0x0000003fU));
+			result |= ((*p << 6) & (0x00001fc0U));
 			break;
 		case 14:
-			GET_P1();
-			result = ((*p1 << 6) & 0x00003fc0U)
-				| ((*p >> 2) & 0x3f);
+			result =
+				((*p++ >> 2) & (0x0000003fU));
+			result |= ((*p << 6) & (0x00003fc0U));
 			break;
 		case 15:
-			GET_P2();
-			result = ((*p2 << 14) & 0x00004000U)
-				| ((*p1 << 6) & 0x00003fc0U)
-				| ((*p >> 2) & 0x3f);
+			result =
+				((*p++ >> 2) & (0x0000003fU));
+			result |= ((*p++ << 6) & (0x00003fc0U));
+			result |= ((*p << 14) & (0x00004000U));
 			break;
 		case 16:
-			GET_P2();
-			result = ((*p2 << 14) & 0x0000c000U)
-				| ((*p1 << 6) & 0x00003fc0U)
-				| ((*p >> 2) & 0x3f);
+			result =
+				((*p++ >> 2) & (0x0000003fU));
+			result |= ((*p++ << 6) & (0x00003fc0U));
+			result |= ((*p << 14) & (0x0000c000U));
 			break;
 		case 17:
-			GET_P2();
-			result = ((*p2 << 14) & 0x0001c000U)
-				| ((*p1 << 6) & 0x00003fc0U)
-				| ((*p >> 2) & 0x3f);
+			result =
+				((*p++ >> 2) & (0x0000003fU));
+			result |= ((*p++ << 6) & (0x00003fc0U));
+			result |= ((*p << 14) & (0x0001c000U));
 			break;
 		case 18:
-			GET_P2();
-			result = ((*p2 << 14) & 0x0003c000U)
-				| ((*p1 << 6) & 0x00003fc0U)
-				| ((*p >> 2) & 0x3f);
+			result =
+				((*p++ >> 2) & (0x0000003fU));
+			result |= ((*p++ << 6) & (0x00003fc0U));
+			result |= ((*p << 14) & (0x0003c000U));
 			break;
 		case 19:
-			GET_P2();
-			result = ((*p2 << 14) & 0x0007c000U)
-				| ((*p1 << 6) & 0x00003fc0U)
-				| ((*p >> 2) & 0x3f);
+			result =
+				((*p++ >> 2) & (0x0000003fU));
+			result |= ((*p++ << 6) & (0x00003fc0U));
+			result |= ((*p << 14) & (0x0007c000U));
 			break;
 		case 20:
-			GET_P2();
-			result = ((*p2 << 14) & 0x000fc000U)
-				| ((*p1 << 6) & 0x00003fc0U)
-				| ((*p >> 2) & 0x3f);
+			result =
+				((*p++ >> 2) & (0x0000003fU));
+			result |= ((*p++ << 6) & (0x00003fc0U));
+			result |= ((*p << 14) & (0x000fc000U));
 			break;
 		case 21:
-			GET_P2();	
-			result = ((*p2 << 14) & 0x001fc000U)
-				| ((*p1 << 6) & 0x00003fc0U)
-				| ((*p >> 2) & 0x3f);
+			result =
+				((*p++ >> 2) & (0x0000003fU));
+			result |= ((*p++ << 6) & (0x00003fc0U));
+			result |= ((*p << 14) & (0x001fc000U));
 			break;
 		case 22:
-			GET_P2();
-			result = ((*p2 << 14) & 0x003fc000U)
-				| ((*p1 << 6) & 0x00003fc0U)
-				| ((*p >> 2) & 0x3f);
+			result =
+				((*p++ >> 2) & (0x0000003fU));
+			result |= ((*p++ << 6) & (0x00003fc0U));
+			result |= ((*p << 14) & (0x003fc000U));
 			break;
 		case 23:
-			GET_P3();
-			result = ((*p3 << 22) & 0x00400000U)
-				| ((*p2 << 14) & 0x003fc000U)
-				| ((*p1 << 6) & 0x00003fc0U)
-				| ((*p >> 2) & 0x3f);
+			result =
+				((*p++ >> 2) & (0x0000003fU));
+			result |= ((*p++ << 6) & (0x00003fc0U));
+			result |= ((*p++ << 14) & (0x003fc000U));
+			result |= ((*p << 22) & (0x00400000U));
 			break;
-		case 24:	
-			GET_P3();
-			result = ((*p3 << 22) & 0x00c00000U)
-				| ((*p2 << 14) & 0x003fc000U)
-				| ((*p1 << 6) & 0x00003fc0U)
-				| ((*p >> 2) & 0x3f);
+		case 24:
+			result =
+				((*p++ >> 2) & (0x0000003fU));
+			result |= ((*p++ << 6) & (0x00003fc0U));
+			result |= ((*p++ << 14) & (0x003fc000U));
+			result |= ((*p << 22) & (0x00c00000U));
 			break;
 		case 25:
-			GET_P3();
-			result = ((*p3 << 22) & 0x01c00000U)
-				| ((*p2 << 14) & 0x003fc000U)
-				| ((*p1 << 6) & 0x00003fc0U)
-				| ((*p >> 2) & 0x3f);
+			result =
+				((*p++ >> 2) & (0x0000003fU));
+			result |= ((*p++ << 6) & (0x00003fc0U));
+			result |= ((*p++ << 14) & (0x003fc000U));
+			result |= ((*p << 22) & (0x01c00000U));
 			break;
 		case 26:
-			GET_P3();
-			result = ((*p3 << 22) & 0x03c00000U)
-				| ((*p2 << 14) & 0x003fc000U)
-				| ((*p1 << 6) & 0x00003fc0U)
-				| ((*p >> 2) & 0x3f);
+			result =
+				((*p++ >> 2) & (0x0000003fU));
+			result |= ((*p++ << 6) & (0x00003fc0U));
+			result |= ((*p++ << 14) & (0x003fc000U));
+			result |= ((*p << 22) & (0x03c00000U));
 			break;
 		case 27:
-			GET_P3();
-			result = ((*p3 << 22) & 0x07c00000U)
-				| ((*p2 << 14) & 0x003fc000U)
-				| ((*p1 << 6) & 0x00003fc0U)
-				| ((*p >> 2) & 0x3f);
+			result =
+				((*p++ >> 2) & (0x0000003fU));
+			result |= ((*p++ << 6) & (0x00003fc0U));
+			result |= ((*p++ << 14) & (0x003fc000U));
+			result |= ((*p << 22) & (0x07c00000U));
 			break;
 		case 28:
-			GET_P3();
-			result = ((*p3 << 22) & 0x0fc00000U)
-				| ((*p2 << 14) & 0x003fc000U)
-				| ((*p1 << 6) & 0x00003fc0U)
-				| ((*p >> 2) & 0x3f);
+			result =
+				((*p++ >> 2) & (0x0000003fU));
+			result |= ((*p++ << 6) & (0x00003fc0U));
+			result |= ((*p++ << 14) & (0x003fc000U));
+			result |= ((*p << 22) & (0x0fc00000U));
 			break;
 		case 29:
-			GET_P3();
-			result = ((*p3 << 22) & 0x1fc00000U)
-				| ((*p2 << 14) & 0x003fc000U)
-				| ((*p1 << 6) & 0x00003fc0U)
-				| ((*p >> 2) & 0x3f);
+			result =
+				((*p++ >> 2) & (0x0000003fU));
+			result |= ((*p++ << 6) & (0x00003fc0U));
+			result |= ((*p++ << 14) & (0x003fc000U));
+			result |= ((*p << 22) & (0x1fc00000U));
 			break;
 		case 30:
-			GET_P3();
-			result = ((*p3 << 22) & 0x3fc00000U)
-				| ((*p2 << 14) & 0x003fc000U)
-				| ((*p1 << 6) & 0x00003fc0U)
-				| ((*p >> 2) & 0x3f);
+			result =
+				((*p++ >> 2) & (0x0000003fU));
+			result |= ((*p++ << 6) & (0x00003fc0U));
+			result |= ((*p++ << 14) & (0x003fc000U));
+			result |= ((*p << 22) & (0x3fc00000U));
 			break;
 		case 31:
-			GET_P4();
-			result =  ((*p4 << 30) & 0x40000000U)
-				| ((*p3 << 22) & 0x3fc00000U)
-				| ((*p2 << 14) & 0x003fc000U)
-				| ((*p1 << 6) & 0x00003fc0U)
-				| ((*p >> 2) & 0x3f);
-			break;
-		default:
-			bDoSlowVersion = true;
+			result =
+				((*p++ >> 2) & (0x0000003fU));
+			result |= ((*p++ << 6) & (0x00003fc0U));
+			result |= ((*p++ << 14) & (0x003fc000U));
+			result |= ((*p++ << 22) & (0x3fc00000U));
+			result |= ((*p << 30) & (0x40000000U));
 			break;
 		}
-	}
 		break;
+	}
+    
+	case 3: {
+		bDoSlowVersion = false;
+		switch(bits) {
+		case 1:
+			result =
+				((*p >> 3) & (0x00000001U));
+			break;
+		case 2:
+			result =
+				((*p >> 3) & (0x00000003U));
+			break;
+		case 3:
+			result =
+				((*p >> 3) & (0x00000007U));
+			break;
+		case 4:
+			result =
+				((*p >> 3) & (0x0000000fU));
+			break;
+		case 5:
+			result =
+				((*p >> 3) & (0x0000001fU));
+			break;
+		case 6:
+			result =
+				((*p++ >> 3) & (0x0000001fU));
+			result |= ((*p << 5) & (0x00000020U));
+			break;
+		case 7:
+			result =
+				((*p++ >> 3) & (0x0000001fU));
+			result |= ((*p << 5) & (0x00000060U));
+			break;
+		case 8:
+			result =
+				((*p++ >> 3) & (0x0000001fU));
+			result |= ((*p << 5) & (0x000000e0U));
+			break;
+		case 9:
+			result =
+				((*p++ >> 3) & (0x0000001fU));
+			result |= ((*p << 5) & (0x000001e0U));
+			break;
+		case 10:
+			result =
+				((*p++ >> 3) & (0x0000001fU));
+			result |= ((*p << 5) & (0x000003e0U));
+			break;
+		case 11:
+			result =
+				((*p++ >> 3) & (0x0000001fU));
+			result |= ((*p << 5) & (0x000007e0U));
+			break;
+		case 12:
+			result =
+				((*p++ >> 3) & (0x0000001fU));
+			result |= ((*p << 5) & (0x00000fe0U));
+			break;
+		case 13:
+			result =
+				((*p++ >> 3) & (0x0000001fU));
+			result |= ((*p << 5) & (0x00001fe0U));
+			break;
+		case 14:
+			result =
+				((*p++ >> 3) & (0x0000001fU));
+			result |= ((*p++ << 5) & (0x00001fe0U));
+			result |= ((*p << 13) & (0x00002000U));
+			break;
+		case 15:
+			result =
+				((*p++ >> 3) & (0x0000001fU));
+			result |= ((*p++ << 5) & (0x00001fe0U));
+			result |= ((*p << 13) & (0x00006000U));
+			break;
+		case 16:
+			result =
+				((*p++ >> 3) & (0x0000001fU));
+			result |= ((*p++ << 5) & (0x00001fe0U));
+			result |= ((*p << 13) & (0x0000e000U));
+			break;
+		case 17:
+			result =
+				((*p++ >> 3) & (0x0000001fU));
+			result |= ((*p++ << 5) & (0x00001fe0U));
+			result |= ((*p << 13) & (0x0001e000U));
+			break;
+		case 18:
+			result =
+				((*p++ >> 3) & (0x0000001fU));
+			result |= ((*p++ << 5) & (0x00001fe0U));
+			result |= ((*p << 13) & (0x0003e000U));
+			break;
+		case 19:
+			result =
+				((*p++ >> 3) & (0x0000001fU));
+			result |= ((*p++ << 5) & (0x00001fe0U));
+			result |= ((*p << 13) & (0x0007e000U));
+			break;
+		case 20:
+			result =
+				((*p++ >> 3) & (0x0000001fU));
+			result |= ((*p++ << 5) & (0x00001fe0U));
+			result |= ((*p << 13) & (0x000fe000U));
+			break;
+		case 21:
+			result =
+				((*p++ >> 3) & (0x0000001fU));
+			result |= ((*p++ << 5) & (0x00001fe0U));
+			result |= ((*p << 13) & (0x001fe000U));
+			break;
+		case 22:
+			result =
+				((*p++ >> 3) & (0x0000001fU));
+			result |= ((*p++ << 5) & (0x00001fe0U));
+			result |= ((*p++ << 13) & (0x001fe000U));
+			result |= ((*p << 21) & (0x00200000U));
+			break;
+		case 23:
+			result =
+				((*p++ >> 3) & (0x0000001fU));
+			result |= ((*p++ << 5) & (0x00001fe0U));
+			result |= ((*p++ << 13) & (0x001fe000U));
+			result |= ((*p << 21) & (0x00600000U));
+			break;
+		case 24:
+			result =
+				((*p++ >> 3) & (0x0000001fU));
+			result |= ((*p++ << 5) & (0x00001fe0U));
+			result |= ((*p++ << 13) & (0x001fe000U));
+			result |= ((*p << 21) & (0x00e00000U));
+			break;
+		case 25:
+			result =
+				((*p++ >> 3) & (0x0000001fU));
+			result |= ((*p++ << 5) & (0x00001fe0U));
+			result |= ((*p++ << 13) & (0x001fe000U));
+			result |= ((*p << 21) & (0x01e00000U));
+			break;
+		case 26:
+			result =
+				((*p++ >> 3) & (0x0000001fU));
+			result |= ((*p++ << 5) & (0x00001fe0U));
+			result |= ((*p++ << 13) & (0x001fe000U));
+			result |= ((*p << 21) & (0x03e00000U));
+			break;
+		case 27:
+			result =
+				((*p++ >> 3) & (0x0000001fU));
+			result |= ((*p++ << 5) & (0x00001fe0U));
+			result |= ((*p++ << 13) & (0x001fe000U));
+			result |= ((*p << 21) & (0x07e00000U));
+			break;
+		case 28:
+			result =
+				((*p++ >> 3) & (0x0000001fU));
+			result |= ((*p++ << 5) & (0x00001fe0U));
+			result |= ((*p++ << 13) & (0x001fe000U));
+			result |= ((*p << 21) & (0x0fe00000U));
+			break;
+		case 29:
+			result =
+				((*p++ >> 3) & (0x0000001fU));
+			result |= ((*p++ << 5) & (0x00001fe0U));
+			result |= ((*p++ << 13) & (0x001fe000U));
+			result |= ((*p << 21) & (0x1fe00000U));
+			break;
+		case 30:
+			result =
+				((*p++ >> 3) & (0x0000001fU));
+			result |= ((*p++ << 5) & (0x00001fe0U));
+			result |= ((*p++ << 13) & (0x001fe000U));
+			result |= ((*p++ << 21) & (0x1fe00000U));
+			result |= ((*p << 29) & (0x20000000U));
+			break;
+		case 31:
+			result =
+				((*p++ >> 3) & (0x0000001fU));
+			result |= ((*p++ << 5) & (0x00001fe0U));
+			result |= ((*p++ << 13) & (0x001fe000U));
+			result |= ((*p++ << 21) & (0x1fe00000U));
+			result |= ((*p << 29) & (0x60000000U));
+			break;
+		}
+		break;
+	}
+    
 	case 4: {
 		bDoSlowVersion = false;
-		switch (bits) {
+		switch(bits) {
 		case 1:
-			result = ((*p >> 4) & 0x01);
+			result =
+				((*p >> 4) & (0x00000001U));
 			break;
 		case 2:
-			result = ((*p >> 4) & 0x03);
+			result =
+				((*p >> 4) & (0x00000003U));
 			break;
 		case 3:
-			result = ((*p >> 4) & 0x07);
+			result =
+				((*p >> 4) & (0x00000007U));
 			break;
 		case 4:
-			result = ((*p >> 4) & 0x0f);
+			result =
+				((*p >> 4) & (0x0000000fU));
 			break;
 		case 5:
-			GET_P1();
-			result =  ((*p1 << 4) & 0x00000010U)
-				| ((*p >> 4) & 0x0f);
+			result =
+				((*p++ >> 4) & (0x0000000fU));
+			result |= ((*p << 4) & (0x00000010U));
 			break;
 		case 6:
-			GET_P1();
-			result =  ((*p1 << 4) & 0x00000030U)
-				| ((*p >> 4) & 0x0f);
+			result =
+				((*p++ >> 4) & (0x0000000fU));
+			result |= ((*p << 4) & (0x00000030U));
 			break;
 		case 7:
-			GET_P1();
-			result =  ((*p1 << 4) & 0x00000070U)
-				| ((*p >> 4) & 0x0f);
+			result =
+				((*p++ >> 4) & (0x0000000fU));
+			result |= ((*p << 4) & (0x00000070U));
 			break;
 		case 8:
-			GET_P1();
-			result =  ((*p1 << 4) & 0x000000f0U)
-				| ((*p >> 4) & 0x0f);
+			result =
+				((*p++ >> 4) & (0x0000000fU));
+			result |= ((*p << 4) & (0x000000f0U));
 			break;
 		case 9:
-			GET_P1();
-			result =  ((*p1 << 4) & 0x000001f0U)
-				| ((*p >> 4) & 0x0f);
+			result =
+				((*p++ >> 4) & (0x0000000fU));
+			result |= ((*p << 4) & (0x000001f0U));
 			break;
 		case 10:
-			GET_P1();
-			result =  ((*p1 << 4) & 0x000003f0U)
-				| ((*p >> 4) & 0x0f);
+			result =
+				((*p++ >> 4) & (0x0000000fU));
+			result |= ((*p << 4) & (0x000003f0U));
 			break;
 		case 11:
-			GET_P1();
-			result =  ((*p1 << 4) & 0x000007f0U)
-				| ((*p >> 4) & 0x0f);
+			result =
+				((*p++ >> 4) & (0x0000000fU));
+			result |= ((*p << 4) & (0x000007f0U));
 			break;
 		case 12:
-			GET_P1();
-			result =  ((*p1 << 4) & 0x00000ff0U)
-				| ((*p >> 4) & 0x0f);
+			result =
+				((*p++ >> 4) & (0x0000000fU));
+			result |= ((*p << 4) & (0x00000ff0U));
 			break;
 		case 13:
-			GET_P2();
-			result =  ((*p2 << 12) & 0x00001000U)
-				| ((*p1 << 4) & 0x00000ff0U)
-				| ((*p >> 4) & 0x0f);
+			result =
+				((*p++ >> 4) & (0x0000000fU));
+			result |= ((*p++ << 4) & (0x00000ff0U));
+			result |= ((*p << 12) & (0x00001000U));
 			break;
 		case 14:
-			GET_P2();
-			result =  ((*p2 << 12) & 0x00003000U)
-				| ((*p1 << 4) & 0x00000ff0U)
-				| ((*p >> 4) & 0x0f);
+			result =
+				((*p++ >> 4) & (0x0000000fU));
+			result |= ((*p++ << 4) & (0x00000ff0U));
+			result |= ((*p << 12) & (0x00003000U));
 			break;
 		case 15:
-			GET_P2();
-			result =  ((*p2 << 12) & 0x00007000U)
-				| ((*p1 << 4) & 0x00000ff0U)
-				| ((*p >> 4) & 0x0f);
+			result =
+				((*p++ >> 4) & (0x0000000fU));
+			result |= ((*p++ << 4) & (0x00000ff0U));
+			result |= ((*p << 12) & (0x00007000U));
 			break;
 		case 16:
-			GET_P2();
-			result =  ((*p2 << 12) & 0x0000f000U)
-				| ((*p1 << 4) & 0x00000ff0U)
-				| ((*p >> 4) & 0x0f);
+			result =
+				((*p++ >> 4) & (0x0000000fU));
+			result |= ((*p++ << 4) & (0x00000ff0U));
+			result |= ((*p << 12) & (0x0000f000U));
 			break;
 		case 17:
-			GET_P2();
-			result =  ((*p2 << 12) & 0x0001f000U)
-				| ((*p1 << 4) & 0x00000ff0U)
-				| ((*p >> 4) & 0x0f);
+			result =
+				((*p++ >> 4) & (0x0000000fU));
+			result |= ((*p++ << 4) & (0x00000ff0U));
+			result |= ((*p << 12) & (0x0001f000U));
 			break;
 		case 18:
-			GET_P2();
-			result =  ((*p2 << 12) & 0x0003f000U)
-				| ((*p1 << 4) & 0x00000ff0U)
-				| ((*p >> 4) & 0x0f);
+			result =
+				((*p++ >> 4) & (0x0000000fU));
+			result |= ((*p++ << 4) & (0x00000ff0U));
+			result |= ((*p << 12) & (0x0003f000U));
 			break;
 		case 19:
-			GET_P2();
-			result =  ((*p2 << 12) & 0x0007f000U)
-				| ((*p1 << 4) & 0x00000ff0U)
-				| ((*p >> 4) & 0x0f);
+			result =
+				((*p++ >> 4) & (0x0000000fU));
+			result |= ((*p++ << 4) & (0x00000ff0U));
+			result |= ((*p << 12) & (0x0007f000U));
 			break;
 		case 20:
-			GET_P2();
-			result =  ((*p2 << 12) & 0x000ff000U)
-				| ((*p1 << 4) & 0x00000ff0U)
-				| ((*p >> 4) & 0x0f);
+			result =
+				((*p++ >> 4) & (0x0000000fU));
+			result |= ((*p++ << 4) & (0x00000ff0U));
+			result |= ((*p << 12) & (0x000ff000U));
 			break;
 		case 21:
-			GET_P3();
-			result =  ((*p3 << 20) & 0x00100000U)
-				| ((*p2 << 12) & 0x000ff000U)
-				| ((*p1 << 4) & 0x00000ff0U)
-				| ((*p >> 4) & 0x0f);
+			result =
+				((*p++ >> 4) & (0x0000000fU));
+			result |= ((*p++ << 4) & (0x00000ff0U));
+			result |= ((*p++ << 12) & (0x000ff000U));
+			result |= ((*p << 20) & (0x00100000U));
 			break;
 		case 22:
-			GET_P3();
-			result =  ((*p3 << 20) & 0x00300000U)
-				| ((*p2 << 12) & 0x000ff000U)
-				| ((*p1 << 4) & 0x00000ff0U)
-				| ((*p >> 4) & 0x0f);
+			result =
+				((*p++ >> 4) & (0x0000000fU));
+			result |= ((*p++ << 4) & (0x00000ff0U));
+			result |= ((*p++ << 12) & (0x000ff000U));
+			result |= ((*p << 20) & (0x00300000U));
 			break;
 		case 23:
-			GET_P3();
-			result =  ((*p3 << 20) & 0x00700000U)
-				| ((*p2 << 12) & 0x000ff000U)
-				| ((*p1 << 4) & 0x00000ff0U)
-				| ((*p >> 4) & 0x0f);
+			result =
+				((*p++ >> 4) & (0x0000000fU));
+			result |= ((*p++ << 4) & (0x00000ff0U));
+			result |= ((*p++ << 12) & (0x000ff000U));
+			result |= ((*p << 20) & (0x00700000U));
 			break;
-		case 24:	
-			GET_P3();
-			result =  ((*p3 << 20) & 0x00f00000U)
-				| ((*p2 << 12) & 0x000ff000U)
-				| ((*p1 << 4) & 0x00000ff0U)
-				| ((*p >> 4) & 0x0f);
+		case 24:
+			result =
+				((*p++ >> 4) & (0x0000000fU));
+			result |= ((*p++ << 4) & (0x00000ff0U));
+			result |= ((*p++ << 12) & (0x000ff000U));
+			result |= ((*p << 20) & (0x00f00000U));
 			break;
 		case 25:
-			GET_P3();
-			result =  ((*p3 << 20) & 0x01f00000U)
-				| ((*p2 << 12) & 0x000ff000U)
-				| ((*p1 << 4) & 0x00000ff0U)
-				| ((*p >> 4) & 0x0f);
+			result =
+				((*p++ >> 4) & (0x0000000fU));
+			result |= ((*p++ << 4) & (0x00000ff0U));
+			result |= ((*p++ << 12) & (0x000ff000U));
+			result |= ((*p << 20) & (0x01f00000U));
 			break;
 		case 26:
-			GET_P3();
-			result =  ((*p3 << 20) & 0x03f00000U)
-				| ((*p2 << 12) & 0x000ff000U)
-				| ((*p1 << 4) & 0x00000ff0U)
-				| ((*p >> 4) & 0x0f);
+			result =
+				((*p++ >> 4) & (0x0000000fU));
+			result |= ((*p++ << 4) & (0x00000ff0U));
+			result |= ((*p++ << 12) & (0x000ff000U));
+			result |= ((*p << 20) & (0x03f00000U));
 			break;
 		case 27:
-			GET_P3();
-			result =  ((*p3 << 20) & 0x07f00000U)
-				| ((*p2 << 12) & 0x000ff000U)
-				| ((*p1 << 4) & 0x00000ff0U)
-				| ((*p >> 4) & 0x0f);
+			result =
+				((*p++ >> 4) & (0x0000000fU));
+			result |= ((*p++ << 4) & (0x00000ff0U));
+			result |= ((*p++ << 12) & (0x000ff000U));
+			result |= ((*p << 20) & (0x07f00000U));
 			break;
 		case 28:
-			GET_P3();
-			result =  ((*p3 << 20) & 0x0ff00000U)
-				| ((*p2 << 12) & 0x000ff000U)
-				| ((*p1 << 4) & 0x00000ff0U)
-				| ((*p >> 4) & 0x0f);
+			result =
+				((*p++ >> 4) & (0x0000000fU));
+			result |= ((*p++ << 4) & (0x00000ff0U));
+			result |= ((*p++ << 12) & (0x000ff000U));
+			result |= ((*p << 20) & (0x0ff00000U));
 			break;
 		case 29:
-			GET_P4();
-			result =  ((*p4 << 28) & 0x10000000U)
-				| ((*p3 << 20) & 0x0ff00000U)
-				| ((*p2 << 12) & 0x000ff000U)
-				| ((*p1 << 4) & 0x00000ff0U)
-				| ((*p >> 4) & 0x0f);
+			result =
+				((*p++ >> 4) & (0x0000000fU));
+			result |= ((*p++ << 4) & (0x00000ff0U));
+			result |= ((*p++ << 12) & (0x000ff000U));
+			result |= ((*p++ << 20) & (0x0ff00000U));
+			result |= ((*p << 28) & (0x10000000U));
 			break;
 		case 30:
-			GET_P4();
-			result =  ((*p4 << 28) & 0x30000000U)
-				| ((*p3 << 20) & 0x0ff00000U)
-				| ((*p2 << 12) & 0x000ff000U)
-				| ((*p1 << 4) & 0x00000ff0U)
-				| ((*p >> 4) & 0x0f);
+			result =
+				((*p++ >> 4) & (0x0000000fU));
+			result |= ((*p++ << 4) & (0x00000ff0U));
+			result |= ((*p++ << 12) & (0x000ff000U));
+			result |= ((*p++ << 20) & (0x0ff00000U));
+			result |= ((*p << 28) & (0x30000000U));
 			break;
 		case 31:
-			GET_P4();
-			result =  ((*p4 << 28) & 0x70000000U)
-				| ((*p3 << 20) & 0x0ff00000U)
-				| ((*p2 << 12) & 0x000ff000U)
-				| ((*p1 << 4) & 0x00000ff0U)
-				| ((*p >> 4) & 0x0f);
-			break;
-		default:
-			bDoSlowVersion = true;
+			result =
+				((*p++ >> 4) & (0x0000000fU));
+			result |= ((*p++ << 4) & (0x00000ff0U));
+			result |= ((*p++ << 12) & (0x000ff000U));
+			result |= ((*p++ << 20) & (0x0ff00000U));
+			result |= ((*p << 28) & (0x70000000U));
 			break;
 		}
-	}
 		break;
+	}
+    
+	case 5: {
+		bDoSlowVersion = false;
+		switch(bits) {
+		case 1:
+			result =
+				((*p >> 5) & (0x00000001U));
+			break;
+		case 2:
+			result =
+				((*p >> 5) & (0x00000003U));
+			break;
+		case 3:
+			result =
+				((*p >> 5) & (0x00000007U));
+			break;
+		case 4:
+			result =
+				((*p++ >> 5) & (0x00000007U));
+			result |= ((*p << 3) & (0x00000008U));
+			break;
+		case 5:
+			result =
+				((*p++ >> 5) & (0x00000007U));
+			result |= ((*p << 3) & (0x00000018U));
+			break;
+		case 6:
+			result =
+				((*p++ >> 5) & (0x00000007U));
+			result |= ((*p << 3) & (0x00000038U));
+			break;
+		case 7:
+			result =
+				((*p++ >> 5) & (0x00000007U));
+			result |= ((*p << 3) & (0x00000078U));
+			break;
+		case 8:
+			result =
+				((*p++ >> 5) & (0x00000007U));
+			result |= ((*p << 3) & (0x000000f8U));
+			break;
+		case 9:
+			result =
+				((*p++ >> 5) & (0x00000007U));
+			result |= ((*p << 3) & (0x000001f8U));
+			break;
+		case 10:
+			result =
+				((*p++ >> 5) & (0x00000007U));
+			result |= ((*p << 3) & (0x000003f8U));
+			break;
+		case 11:
+			result =
+				((*p++ >> 5) & (0x00000007U));
+			result |= ((*p << 3) & (0x000007f8U));
+			break;
+		case 12:
+			result =
+				((*p++ >> 5) & (0x00000007U));
+			result |= ((*p++ << 3) & (0x000007f8U));
+			result |= ((*p << 11) & (0x00000800U));
+			break;
+		case 13:
+			result =
+				((*p++ >> 5) & (0x00000007U));
+			result |= ((*p++ << 3) & (0x000007f8U));
+			result |= ((*p << 11) & (0x00001800U));
+			break;
+		case 14:
+			result =
+				((*p++ >> 5) & (0x00000007U));
+			result |= ((*p++ << 3) & (0x000007f8U));
+			result |= ((*p << 11) & (0x00003800U));
+			break;
+		case 15:
+			result =
+				((*p++ >> 5) & (0x00000007U));
+			result |= ((*p++ << 3) & (0x000007f8U));
+			result |= ((*p << 11) & (0x00007800U));
+			break;
+		case 16:
+			result =
+				((*p++ >> 5) & (0x00000007U));
+			result |= ((*p++ << 3) & (0x000007f8U));
+			result |= ((*p << 11) & (0x0000f800U));
+			break;
+		case 17:
+			result =
+				((*p++ >> 5) & (0x00000007U));
+			result |= ((*p++ << 3) & (0x000007f8U));
+			result |= ((*p << 11) & (0x0001f800U));
+			break;
+		case 18:
+			result =
+				((*p++ >> 5) & (0x00000007U));
+			result |= ((*p++ << 3) & (0x000007f8U));
+			result |= ((*p << 11) & (0x0003f800U));
+			break;
+		case 19:
+			result =
+				((*p++ >> 5) & (0x00000007U));
+			result |= ((*p++ << 3) & (0x000007f8U));
+			result |= ((*p << 11) & (0x0007f800U));
+			break;
+		case 20:
+			result =
+				((*p++ >> 5) & (0x00000007U));
+			result |= ((*p++ << 3) & (0x000007f8U));
+			result |= ((*p++ << 11) & (0x0007f800U));
+			result |= ((*p << 19) & (0x00080000U));
+			break;
+		case 21:
+			result =
+				((*p++ >> 5) & (0x00000007U));
+			result |= ((*p++ << 3) & (0x000007f8U));
+			result |= ((*p++ << 11) & (0x0007f800U));
+			result |= ((*p << 19) & (0x00180000U));
+			break;
+		case 22:
+			result =
+				((*p++ >> 5) & (0x00000007U));
+			result |= ((*p++ << 3) & (0x000007f8U));
+			result |= ((*p++ << 11) & (0x0007f800U));
+			result |= ((*p << 19) & (0x00380000U));
+			break;
+		case 23:
+			result =
+				((*p++ >> 5) & (0x00000007U));
+			result |= ((*p++ << 3) & (0x000007f8U));
+			result |= ((*p++ << 11) & (0x0007f800U));
+			result |= ((*p << 19) & (0x00780000U));
+			break;
+		case 24:
+			result =
+				((*p++ >> 5) & (0x00000007U));
+			result |= ((*p++ << 3) & (0x000007f8U));
+			result |= ((*p++ << 11) & (0x0007f800U));
+			result |= ((*p << 19) & (0x00f80000U));
+			break;
+		case 25:
+			result =
+				((*p++ >> 5) & (0x00000007U));
+			result |= ((*p++ << 3) & (0x000007f8U));
+			result |= ((*p++ << 11) & (0x0007f800U));
+			result |= ((*p << 19) & (0x01f80000U));
+			break;
+		case 26:
+			result =
+				((*p++ >> 5) & (0x00000007U));
+			result |= ((*p++ << 3) & (0x000007f8U));
+			result |= ((*p++ << 11) & (0x0007f800U));
+			result |= ((*p << 19) & (0x03f80000U));
+			break;
+		case 27:
+			result =
+				((*p++ >> 5) & (0x00000007U));
+			result |= ((*p++ << 3) & (0x000007f8U));
+			result |= ((*p++ << 11) & (0x0007f800U));
+			result |= ((*p << 19) & (0x07f80000U));
+			break;
+		case 28:
+			result =
+				((*p++ >> 5) & (0x00000007U));
+			result |= ((*p++ << 3) & (0x000007f8U));
+			result |= ((*p++ << 11) & (0x0007f800U));
+			result |= ((*p++ << 19) & (0x07f80000U));
+			result |= ((*p << 27) & (0x08000000U));
+			break;
+		case 29:
+			result =
+				((*p++ >> 5) & (0x00000007U));
+			result |= ((*p++ << 3) & (0x000007f8U));
+			result |= ((*p++ << 11) & (0x0007f800U));
+			result |= ((*p++ << 19) & (0x07f80000U));
+			result |= ((*p << 27) & (0x18000000U));
+			break;
+		case 30:
+			result =
+				((*p++ >> 5) & (0x00000007U));
+			result |= ((*p++ << 3) & (0x000007f8U));
+			result |= ((*p++ << 11) & (0x0007f800U));
+			result |= ((*p++ << 19) & (0x07f80000U));
+			result |= ((*p << 27) & (0x38000000U));
+			break;
+		case 31:
+			result =
+				((*p++ >> 5) & (0x00000007U));
+			result |= ((*p++ << 3) & (0x000007f8U));
+			result |= ((*p++ << 11) & (0x0007f800U));
+			result |= ((*p++ << 19) & (0x07f80000U));
+			result |= ((*p << 27) & (0x78000000U));
+			break;
+		}
+		break;
+	}
+    
+	case 6: {
+		bDoSlowVersion = false;
+		switch(bits) {
+		case 1:
+			result =
+				((*p >> 6) & (0x00000001U));
+			break;
+		case 2:
+			result =
+				((*p >> 6) & (0x00000003U));
+			break;
+		case 3:
+			result =
+				((*p++ >> 6) & (0x00000003U));
+			result |= ((*p << 2) & (0x00000004U));
+			break;
+		case 4:
+			result =
+				((*p++ >> 6) & (0x00000003U));
+			result |= ((*p << 2) & (0x0000000cU));
+			break;
+		case 5:
+			result =
+				((*p++ >> 6) & (0x00000003U));
+			result |= ((*p << 2) & (0x0000001cU));
+			break;
+		case 6:
+			result =
+				((*p++ >> 6) & (0x00000003U));
+			result |= ((*p << 2) & (0x0000003cU));
+			break;
+		case 7:
+			result =
+				((*p++ >> 6) & (0x00000003U));
+			result |= ((*p << 2) & (0x0000007cU));
+			break;
+		case 8:
+			result =
+				((*p++ >> 6) & (0x00000003U));
+			result |= ((*p << 2) & (0x000000fcU));
+			break;
+		case 9:
+			result =
+				((*p++ >> 6) & (0x00000003U));
+			result |= ((*p << 2) & (0x000001fcU));
+			break;
+		case 10:
+			result =
+				((*p++ >> 6) & (0x00000003U));
+			result |= ((*p << 2) & (0x000003fcU));
+			break;
+		case 11:
+			result =
+				((*p++ >> 6) & (0x00000003U));
+			result |= ((*p++ << 2) & (0x000003fcU));
+			result |= ((*p << 10) & (0x00000400U));
+			break;
+		case 12:
+			result =
+				((*p++ >> 6) & (0x00000003U));
+			result |= ((*p++ << 2) & (0x000003fcU));
+			result |= ((*p << 10) & (0x00000c00U));
+			break;
+		case 13:
+			result =
+				((*p++ >> 6) & (0x00000003U));
+			result |= ((*p++ << 2) & (0x000003fcU));
+			result |= ((*p << 10) & (0x00001c00U));
+			break;
+		case 14:
+			result =
+				((*p++ >> 6) & (0x00000003U));
+			result |= ((*p++ << 2) & (0x000003fcU));
+			result |= ((*p << 10) & (0x00003c00U));
+			break;
+		case 15:
+			result =
+				((*p++ >> 6) & (0x00000003U));
+			result |= ((*p++ << 2) & (0x000003fcU));
+			result |= ((*p << 10) & (0x00007c00U));
+			break;
+		case 16:
+			result =
+				((*p++ >> 6) & (0x00000003U));
+			result |= ((*p++ << 2) & (0x000003fcU));
+			result |= ((*p << 10) & (0x0000fc00U));
+			break;
+		case 17:
+			result =
+				((*p++ >> 6) & (0x00000003U));
+			result |= ((*p++ << 2) & (0x000003fcU));
+			result |= ((*p << 10) & (0x0001fc00U));
+			break;
+		case 18:
+			result =
+				((*p++ >> 6) & (0x00000003U));
+			result |= ((*p++ << 2) & (0x000003fcU));
+			result |= ((*p << 10) & (0x0003fc00U));
+			break;
+		case 19:
+			result =
+				((*p++ >> 6) & (0x00000003U));
+			result |= ((*p++ << 2) & (0x000003fcU));
+			result |= ((*p++ << 10) & (0x0003fc00U));
+			result |= ((*p << 18) & (0x00040000U));
+			break;
+		case 20:
+			result =
+				((*p++ >> 6) & (0x00000003U));
+			result |= ((*p++ << 2) & (0x000003fcU));
+			result |= ((*p++ << 10) & (0x0003fc00U));
+			result |= ((*p << 18) & (0x000c0000U));
+			break;
+		case 21:
+			result =
+				((*p++ >> 6) & (0x00000003U));
+			result |= ((*p++ << 2) & (0x000003fcU));
+			result |= ((*p++ << 10) & (0x0003fc00U));
+			result |= ((*p << 18) & (0x001c0000U));
+			break;
+		case 22:
+			result =
+				((*p++ >> 6) & (0x00000003U));
+			result |= ((*p++ << 2) & (0x000003fcU));
+			result |= ((*p++ << 10) & (0x0003fc00U));
+			result |= ((*p << 18) & (0x003c0000U));
+			break;
+		case 23:
+			result =
+				((*p++ >> 6) & (0x00000003U));
+			result |= ((*p++ << 2) & (0x000003fcU));
+			result |= ((*p++ << 10) & (0x0003fc00U));
+			result |= ((*p << 18) & (0x007c0000U));
+			break;
+		case 24:
+			result =
+				((*p++ >> 6) & (0x00000003U));
+			result |= ((*p++ << 2) & (0x000003fcU));
+			result |= ((*p++ << 10) & (0x0003fc00U));
+			result |= ((*p << 18) & (0x00fc0000U));
+			break;
+		case 25:
+			result =
+				((*p++ >> 6) & (0x00000003U));
+			result |= ((*p++ << 2) & (0x000003fcU));
+			result |= ((*p++ << 10) & (0x0003fc00U));
+			result |= ((*p << 18) & (0x01fc0000U));
+			break;
+		case 26:
+			result =
+				((*p++ >> 6) & (0x00000003U));
+			result |= ((*p++ << 2) & (0x000003fcU));
+			result |= ((*p++ << 10) & (0x0003fc00U));
+			result |= ((*p << 18) & (0x03fc0000U));
+			break;
+		case 27:
+			result =
+				((*p++ >> 6) & (0x00000003U));
+			result |= ((*p++ << 2) & (0x000003fcU));
+			result |= ((*p++ << 10) & (0x0003fc00U));
+			result |= ((*p++ << 18) & (0x03fc0000U));
+			result |= ((*p << 26) & (0x04000000U));
+			break;
+		case 28:
+			result =
+				((*p++ >> 6) & (0x00000003U));
+			result |= ((*p++ << 2) & (0x000003fcU));
+			result |= ((*p++ << 10) & (0x0003fc00U));
+			result |= ((*p++ << 18) & (0x03fc0000U));
+			result |= ((*p << 26) & (0x0c000000U));
+			break;
+		case 29:
+			result =
+				((*p++ >> 6) & (0x00000003U));
+			result |= ((*p++ << 2) & (0x000003fcU));
+			result |= ((*p++ << 10) & (0x0003fc00U));
+			result |= ((*p++ << 18) & (0x03fc0000U));
+			result |= ((*p << 26) & (0x1c000000U));
+			break;
+		case 30:
+			result =
+				((*p++ >> 6) & (0x00000003U));
+			result |= ((*p++ << 2) & (0x000003fcU));
+			result |= ((*p++ << 10) & (0x0003fc00U));
+			result |= ((*p++ << 18) & (0x03fc0000U));
+			result |= ((*p << 26) & (0x3c000000U));
+			break;
+		case 31:
+			result =
+				((*p++ >> 6) & (0x00000003U));
+			result |= ((*p++ << 2) & (0x000003fcU));
+			result |= ((*p++ << 10) & (0x0003fc00U));
+			result |= ((*p++ << 18) & (0x03fc0000U));
+			result |= ((*p << 26) & (0x7c000000U));
+			break;
+		}
+		break;
+	}
+    
+	case 7: {
+		bDoSlowVersion = false;
+		switch(bits) {
+		case 1:
+			result =
+				((*p >> 7) & (0x00000001U));
+			break;
+		case 2:
+			result =
+				((*p++ >> 7) & (0x00000001U));
+			result |= ((*p << 1) & (0x00000002U));
+			break;
+		case 3:
+			result =
+				((*p++ >> 7) & (0x00000001U));
+			result |= ((*p << 1) & (0x00000006U));
+			break;
+		case 4:
+			result =
+				((*p++ >> 7) & (0x00000001U));
+			result |= ((*p << 1) & (0x0000000eU));
+			break;
+		case 5:
+			result =
+				((*p++ >> 7) & (0x00000001U));
+			result |= ((*p << 1) & (0x0000001eU));
+			break;
+		case 6:
+			result =
+				((*p++ >> 7) & (0x00000001U));
+			result |= ((*p << 1) & (0x0000003eU));
+			break;
+		case 7:
+			result =
+				((*p++ >> 7) & (0x00000001U));
+			result |= ((*p << 1) & (0x0000007eU));
+			break;
+		case 8:
+			result =
+				((*p++ >> 7) & (0x00000001U));
+			result |= ((*p << 1) & (0x000000feU));
+			break;
+		case 9:
+			result =
+				((*p++ >> 7) & (0x00000001U));
+			result |= ((*p << 1) & (0x000001feU));
+			break;
+		case 10:
+			result =
+				((*p++ >> 7) & (0x00000001U));
+			result |= ((*p++ << 1) & (0x000001feU));
+			result |= ((*p << 9) & (0x00000200U));
+			break;
+		case 11:
+			result =
+				((*p++ >> 7) & (0x00000001U));
+			result |= ((*p++ << 1) & (0x000001feU));
+			result |= ((*p << 9) & (0x00000600U));
+			break;
+		case 12:
+			result =
+				((*p++ >> 7) & (0x00000001U));
+			result |= ((*p++ << 1) & (0x000001feU));
+			result |= ((*p << 9) & (0x00000e00U));
+			break;
+		case 13:
+			result =
+				((*p++ >> 7) & (0x00000001U));
+			result |= ((*p++ << 1) & (0x000001feU));
+			result |= ((*p << 9) & (0x00001e00U));
+			break;
+		case 14:
+			result =
+				((*p++ >> 7) & (0x00000001U));
+			result |= ((*p++ << 1) & (0x000001feU));
+			result |= ((*p << 9) & (0x00003e00U));
+			break;
+		case 15:
+			result =
+				((*p++ >> 7) & (0x00000001U));
+			result |= ((*p++ << 1) & (0x000001feU));
+			result |= ((*p << 9) & (0x00007e00U));
+			break;
+		case 16:
+			result =
+				((*p++ >> 7) & (0x00000001U));
+			result |= ((*p++ << 1) & (0x000001feU));
+			result |= ((*p << 9) & (0x0000fe00U));
+			break;
+		case 17:
+			result =
+				((*p++ >> 7) & (0x00000001U));
+			result |= ((*p++ << 1) & (0x000001feU));
+			result |= ((*p << 9) & (0x0001fe00U));
+			break;
+		case 18:
+			result =
+				((*p++ >> 7) & (0x00000001U));
+			result |= ((*p++ << 1) & (0x000001feU));
+			result |= ((*p++ << 9) & (0x0001fe00U));
+			result |= ((*p << 17) & (0x00020000U));
+			break;
+		case 19:
+			result =
+				((*p++ >> 7) & (0x00000001U));
+			result |= ((*p++ << 1) & (0x000001feU));
+			result |= ((*p++ << 9) & (0x0001fe00U));
+			result |= ((*p << 17) & (0x00060000U));
+			break;
+		case 20:
+			result =
+				((*p++ >> 7) & (0x00000001U));
+			result |= ((*p++ << 1) & (0x000001feU));
+			result |= ((*p++ << 9) & (0x0001fe00U));
+			result |= ((*p << 17) & (0x000e0000U));
+			break;
+		case 21:
+			result =
+				((*p++ >> 7) & (0x00000001U));
+			result |= ((*p++ << 1) & (0x000001feU));
+			result |= ((*p++ << 9) & (0x0001fe00U));
+			result |= ((*p << 17) & (0x001e0000U));
+			break;
+		case 22:
+			result =
+				((*p++ >> 7) & (0x00000001U));
+			result |= ((*p++ << 1) & (0x000001feU));
+			result |= ((*p++ << 9) & (0x0001fe00U));
+			result |= ((*p << 17) & (0x003e0000U));
+			break;
+		case 23:
+			result =
+				((*p++ >> 7) & (0x00000001U));
+			result |= ((*p++ << 1) & (0x000001feU));
+			result |= ((*p++ << 9) & (0x0001fe00U));
+			result |= ((*p << 17) & (0x007e0000U));
+			break;
+		case 24:
+			result =
+				((*p++ >> 7) & (0x00000001U));
+			result |= ((*p++ << 1) & (0x000001feU));
+			result |= ((*p++ << 9) & (0x0001fe00U));
+			result |= ((*p << 17) & (0x00fe0000U));
+			break;
+		case 25:
+			result =
+				((*p++ >> 7) & (0x00000001U));
+			result |= ((*p++ << 1) & (0x000001feU));
+			result |= ((*p++ << 9) & (0x0001fe00U));
+			result |= ((*p << 17) & (0x01fe0000U));
+			break;
+		case 26:
+			result =
+				((*p++ >> 7) & (0x00000001U));
+			result |= ((*p++ << 1) & (0x000001feU));
+			result |= ((*p++ << 9) & (0x0001fe00U));
+			result |= ((*p++ << 17) & (0x01fe0000U));
+			result |= ((*p << 25) & (0x02000000U));
+			break;
+		case 27:
+			result =
+				((*p++ >> 7) & (0x00000001U));
+			result |= ((*p++ << 1) & (0x000001feU));
+			result |= ((*p++ << 9) & (0x0001fe00U));
+			result |= ((*p++ << 17) & (0x01fe0000U));
+			result |= ((*p << 25) & (0x06000000U));
+			break;
+		case 28:
+			result =
+				((*p++ >> 7) & (0x00000001U));
+			result |= ((*p++ << 1) & (0x000001feU));
+			result |= ((*p++ << 9) & (0x0001fe00U));
+			result |= ((*p++ << 17) & (0x01fe0000U));
+			result |= ((*p << 25) & (0x0e000000U));
+			break;
+		case 29:
+			result =
+				((*p++ >> 7) & (0x00000001U));
+			result |= ((*p++ << 1) & (0x000001feU));
+			result |= ((*p++ << 9) & (0x0001fe00U));
+			result |= ((*p++ << 17) & (0x01fe0000U));
+			result |= ((*p << 25) & (0x1e000000U));
+			break;
+		case 30:
+			result =
+				((*p++ >> 7) & (0x00000001U));
+			result |= ((*p++ << 1) & (0x000001feU));
+			result |= ((*p++ << 9) & (0x0001fe00U));
+			result |= ((*p++ << 17) & (0x01fe0000U));
+			result |= ((*p << 25) & (0x3e000000U));
+			break;
+		case 31:
+			result =
+				((*p++ >> 7) & (0x00000001U));
+			result |= ((*p++ << 1) & (0x000001feU));
+			result |= ((*p++ << 9) & (0x0001fe00U));
+			result |= ((*p++ << 17) & (0x01fe0000U));
+			result |= ((*p << 25) & (0x7e000000U));
+			break;
+		}
+		break;
+	}
+    
+
 	default:
 		bDoSlowVersion = true;
 		break;
-			
 	}
+
+
+
+
+
 
 	// std::cerr << "UP231: bit_index = " << bit_index << ", m_bits = " << m_bits << ", bDoSlowVersion = " << bDoSlowVersion << '\n';
 
@@ -65099,7 +66029,7 @@ bool BPTEMdFConnection::loadStringSetIntoCacheBPT(const std::string& normalized_
 	columns_to_get.push_back(encoded_feature_name);
 
 	if (!execQuery(normalized_object_type_name,
-		       kQueryKindInst,
+		       kQueryKindPartOf,
 		       0,
 		       "monads",
 		       columns_to_get,
@@ -68446,6 +69376,8 @@ bool BPTEMdFDB::getObjectsHavingMonadsIn(const std::string object_type_name,
  * used. Otherwise, the string must refer to a feature on the object
  * type which is a set of monads.
  *
+ * @param ms_operation Either kMSROPartOf or kMSROStartsIn
+ *
  * @param Result the Inst to get back.
  *
  * @return true on no DB error, false otherwise.
@@ -68458,6 +69390,7 @@ bool BPTEMdFDB::getInst(const std::string& object_type_name,
 			EMdFFFeatures *pre_query_constraints,
 			const std::list<FeatureInfo>& features_to_get,
 			const std::string& monad_set_name,
+			eMonadSetRelationOperation ms_operation,
 			/* out */ Inst& Result)
 {	
 	if (pConn == 0) {
@@ -68479,6 +69412,7 @@ bool BPTEMdFDB::getInst(const std::string& object_type_name,
 				     features_to_get,
 				     monad_set_name,
 				     objectRangeType,
+				     ms_operation,
 				     Result)) {
 			return false;
 		}
@@ -68540,6 +69474,7 @@ bool BPTEMdFDB::getInstLocalBPT(const std::string& object_type_name,
 				const std::list<FeatureInfo>& features_to_get,
 				const std::string& monad_set_name,
 				eObjectRangeType objectRangeType,
+				eMonadSetRelationOperation ms_operation,
 				/* out */ Inst& Result)
 {
 	if (pConn == 0)
@@ -68708,9 +69643,24 @@ bool BPTEMdFDB::getInstLocalBPT(const std::string& object_type_name,
 		// Build and execute first query
 		//
 		// ****************************************************
+		eQueryKind query_kind;
+		switch (ms_operation) {
+		case kMSROPartOf:
+			query_kind = kQueryKindPartOf;
+			break;
+		case kMSROStartsIn:
+			query_kind = kQueryKindStartsIn;
+			break;
+		default:
+			ASSERT_THROW(false,
+				     "ERROR: ms_operation is neither kMSROPartOf nor kMSROStartsIn, but " + long2string(ms_operation) + " in BPTEMdFDB::getInst().");
+			query_kind = kQueryKindPartOf; // Fool some compilers into giving no warning.
+			break;
+		}
+
 		LOG_WRITE_TIME("BPTEMdFDB::getInstLocalBPT", "Query starting.");
 		if (!((BPTEMdFConnection*)pConn)->execQuery(OTN,
-							    kQueryKindInst,
+							    query_kind,
 							    &Su,
 							    monad_set_name,
 							    columns_to_get,
@@ -69087,16 +70037,6 @@ bool BPTEMdFDB::getInstLocalBPT(const std::string& object_type_name,
 						}
 					}
 				}
-
-				// Add if we are using monad constraints
-				// or if first_monad / last_monad describe
-				// all_m-1.
-				// 
-				// If we are not using monad constraints,
-				// but this is because the monad constraints
-				// would coincide with all_m-1, then we add regardless,
-				// since we know that all objects are going to be
-				// within the boundaries.
 
 				// Make new object
 				// First allocate using Result Inst's allocator
@@ -70658,11 +71598,10 @@ bool BPTEMdFDB::getStringSetStrings(const std::string& object_type_name,
 	}
 	return true;		
 }
-/**************** A copy of EMdF/bpt2emdfdb.cpp *****************/
 
-
+/**************** A copy of EMdF/bpt2emdfdb.cpp ****************/
 #line 1 "EMdF/bpt2emdfdb.cpp"
-        /*
+/*
  * bpt2emdfdb.cpp
  *
  * EMdF database class for Bit Packed Tables version 2.
@@ -70762,7 +71701,7 @@ bool BPTEMdFDB::getStringSetStrings(const std::string& object_type_name,
 
 
 #line 97 "EMdF/bpt2emdfdb.cpp"
-        // Do this because emdros-config might #define malloc,
+// Do this because emdros-config might #define malloc,
 // in which case some systems will fail to use the real 
 // malloc, thus causing build errors.
 #undef malloc
@@ -70772,72 +71711,70 @@ bool BPTEMdFDB::getStringSetStrings(const std::string& object_type_name,
 
 
 #line 104 "EMdF/bpt2emdfdb.cpp"
-        #include <cstdio>
+#include <cstdio>
 #include <map>
 #include <cstring>
 /**************** already included emdf_enums.h -- not including again *****************/
 
 
 #line 108 "EMdF/bpt2emdfdb.cpp"
-        #include <new>
+#include <new>
 /**************** already included exception_emdros.h -- not including again *****************/
 
 
 #line 110 "EMdF/bpt2emdfdb.cpp"
-        /**************** already included emdf_exception.h -- not including again *****************/
+/**************** already included emdf_exception.h -- not including again *****************/
 
 
 #line 111 "EMdF/bpt2emdfdb.cpp"
-        /**************** already included emdf_value.h -- not including again *****************/
+/**************** already included emdf_value.h -- not including again *****************/
 
 
 #line 112 "EMdF/bpt2emdfdb.cpp"
-        /**************** already included json_classes.h -- not including again *****************/
+/**************** already included json_classes.h -- not including again *****************/
 
 
 #line 113 "EMdF/bpt2emdfdb.cpp"
-        /**************** already included monads.h -- not including again *****************/
+/**************** already included monads.h -- not including again *****************/
 
 
 #line 114 "EMdF/bpt2emdfdb.cpp"
-        /**************** already included enum_const_cache.h -- not including again *****************/
+/**************** already included enum_const_cache.h -- not including again *****************/
 
 
 #line 115 "EMdF/bpt2emdfdb.cpp"
-        /**************** already included infos.h -- not including again *****************/
+/**************** already included infos.h -- not including again *****************/
 
 
 #line 116 "EMdF/bpt2emdfdb.cpp"
-        /**************** already included conn.h -- not including again *****************/
+/**************** already included conn.h -- not including again *****************/
 
 
 #line 117 "EMdF/bpt2emdfdb.cpp"
-        /**************** already included emdf_ffeatures.h -- not including again *****************/
+/**************** already included emdf_ffeatures.h -- not including again *****************/
 
 
 #line 118 "EMdF/bpt2emdfdb.cpp"
-        /**************** already included table.h -- not including again *****************/
+/**************** already included table.h -- not including again *****************/
 
 
 #line 119 "EMdF/bpt2emdfdb.cpp"
-        /**************** already included conn.h -- not including again *****************/
+/**************** already included conn.h -- not including again *****************/
 
 
 #line 120 "EMdF/bpt2emdfdb.cpp"
-        /**************** already included inst.h -- not including again *****************/
+/**************** already included inst.h -- not including again *****************/
 
 
 #line 121 "EMdF/bpt2emdfdb.cpp"
-        /**************** already included monads.h -- not including again *****************/
+/**************** already included monads.h -- not including again *****************/
 
 
 #line 122 "EMdF/bpt2emdfdb.cpp"
-        /**************** leaving EMdF/bpt2emdfdb.cpp temporarily *****************/
-/**************** A copy of include/bpt2emdfdb.h *****************/
-
-
+/**************** leaving EMdF/bpt2emdfdb.cpp temporarily *****************/
+/**************** A copy of include/bpt2emdfdb.h ****************/
 #line 1 "include/bpt2emdfdb.h"
-        /*
+/*
  * bpt2emdfdb.h
  *
  * EMdF database class for Bit Packed Tables
@@ -70934,7 +71871,7 @@ bool BPTEMdFDB::getStringSetStrings(const std::string& object_type_name,
 
 
 #line 94 "include/bpt2emdfdb.h"
-        #endif // !defined SWIG
+#endif // !defined SWIG
 
 class BPT2EMdFComparison;
 class BPT2EMdFConnection;
@@ -71235,6 +72172,7 @@ class BPT2EMdFDB : public EMdFDB {
 			     EMdFFFeatures *pre_query_constraints,
 			     const std::list<FeatureInfo>& features_to_get,
 			     const std::string& monad_set_name,
+			     eMonadSetRelationOperation ms_operation,
 			     /* out */ Inst& Result);
  protected:
 	virtual bool getInstLocalBPT2(const std::string& object_type_name,		
@@ -71423,50 +72361,51 @@ class BPT2EMdFDB : public EMdFDB {
 
 
 #endif // BPT2EMDFDB__H__
+
 /**************** continuing EMdF/bpt2emdfdb.cpp where we left off *****************/
 
 
 #line 123 "EMdF/bpt2emdfdb.cpp"
-        /**************** already included emdf_value.h -- not including again *****************/
+/**************** already included emdf_value.h -- not including again *****************/
 
 
 #line 124 "EMdF/bpt2emdfdb.cpp"
-        /**************** already included emdf_ffeatures.h -- not including again *****************/
+/**************** already included emdf_ffeatures.h -- not including again *****************/
 
 
 #line 125 "EMdF/bpt2emdfdb.cpp"
-        /**************** already included enum_const_cache.h -- not including again *****************/
+/**************** already included enum_const_cache.h -- not including again *****************/
 
 
 #line 126 "EMdF/bpt2emdfdb.cpp"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 127 "EMdF/bpt2emdfdb.cpp"
-        /**************** already included string_list.h -- not including again *****************/
+/**************** already included string_list.h -- not including again *****************/
 
 
 #line 128 "EMdF/bpt2emdfdb.cpp"
-        /**************** already included string_set_cache.h -- not including again *****************/
+/**************** already included string_set_cache.h -- not including again *****************/
 
 
 #line 129 "EMdF/bpt2emdfdb.cpp"
-        /**************** already included utils.h -- not including again *****************/
+/**************** already included utils.h -- not including again *****************/
 
 
 #line 130 "EMdF/bpt2emdfdb.cpp"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 131 "EMdF/bpt2emdfdb.cpp"
-        #include <iostream>
+#include <iostream>
 #include <sstream>
 #include <set>
 /**************** already included logging.h -- not including again *****************/
 
 
 #line 135 "EMdF/bpt2emdfdb.cpp"
-        #if defined(HAVE_UNISTD_H) && HAVE_UNISTD_H
+#if defined(HAVE_UNISTD_H) && HAVE_UNISTD_H
 #include <unistd.h>
 #endif
 
@@ -72804,6 +73743,7 @@ bool BPT2EMdFDB::getInst(const std::string& object_type_name,
 			EMdFFFeatures *pre_query_constraints,
 			const std::list<FeatureInfo>& features_to_get,
 			const std::string& monad_set_name,
+			eMonadSetRelationOperation ms_operation,
 			/* out */ Inst& Result)
 {
 	DEBUG_X_IS_WRONG("BPT2EMdFDB::", "The BPT2 backend is not present in the Open Source version of Emdros.\nFor licensing the BPT2 backend, please contact Ulrik Sandborg-Petersen:\nulrikp-at-emdros{dot}org ... thanks!");
@@ -74080,11 +75020,10 @@ bool BPT2EMdFDB::getStringSetStrings(const std::string& object_type_name,
 	DEBUG_X_IS_WRONG("BPT2EMdFDB::", "The BPT2 backend is not present in the Open Source version of Emdros.\nFor licensing the BPT2 backend, please contact Ulrik Sandborg-Petersen:\nulrikp-at-emdros{dot}org ... thanks!");
 	return false;
 }
-/**************** A copy of MQL/mql_error.cpp *****************/
 
-
+/**************** A copy of MQL/mql_error.cpp ****************/
 #line 1 "MQL/mql_error.cpp"
-        /*
+/*
  * mql_error.cpp
  *
  * Definitions and functions for MQL error handling
@@ -74174,11 +75113,9 @@ bool BPT2EMdFDB::getStringSetStrings(const std::string& object_type_name,
  */
 
 /**************** leaving MQL/mql_error.cpp temporarily *****************/
-/**************** A copy of include/mql_error.h *****************/
-
-
+/**************** A copy of include/mql_error.h ****************/
 #line 1 "include/mql_error.h"
-        /*
+/*
  * mql_error.h
  *
  * Definitions and functions for MQL error handling
@@ -74303,11 +75240,12 @@ class MQLError {
 
 
 #endif /* MQL_ERROR__H__ */
+
 /**************** continuing MQL/mql_error.cpp where we left off *****************/
 
 
 #line 90 "MQL/mql_error.cpp"
-        
+
 /** Constructor.
  *
  * Do not use directly: Instead, let the MQLExecEnv manage the
@@ -74381,11 +75319,10 @@ std::string MQLError::getError(void)
 
 
 
-/**************** A copy of MQL/mql_sheaf.cpp *****************/
 
-
+/**************** A copy of MQL/mql_sheaf.cpp ****************/
 #line 1 "MQL/mql_sheaf.cpp"
-        /*
+/*
  * mql_sheaf.cpp
  *
  * MQL sheafs
@@ -74480,16 +75417,14 @@ std::string MQLError::getError(void)
 
 
 #line 92 "MQL/mql_sheaf.cpp"
-        /**************** already included emdf_value.h -- not including again *****************/
+/**************** already included emdf_value.h -- not including again *****************/
 
 
 #line 93 "MQL/mql_sheaf.cpp"
-        /**************** leaving MQL/mql_sheaf.cpp temporarily *****************/
-/**************** A copy of include/mql_sheaf.h *****************/
-
-
+/**************** leaving MQL/mql_sheaf.cpp temporarily *****************/
+/**************** A copy of include/mql_sheaf.h ****************/
 #line 1 "include/mql_sheaf.h"
-        /*
+/*
  * mql_sheaf.h
  *
  * MQL sheafs
@@ -74588,20 +75523,18 @@ std::string MQLError::getError(void)
 
 
 #line 96 "include/mql_sheaf.h"
-        #endif // !defined SWIG
+#endif // !defined SWIG
 /**************** already included monads.h -- not including again *****************/
 
 
 #line 98 "include/mql_sheaf.h"
-        #include <string>
+#include <string>
 #include <list>
 #include <map>
 /**************** leaving include/mql_sheaf.h temporarily *****************/
-/**************** A copy of include/mql_query.h *****************/
-
-
+/**************** A copy of include/mql_query.h ****************/
 #line 1 "include/mql_query.h"
-        /*
+/*
  * mql_query.h
  *
  * Definitions of AST-classes for MQL Query
@@ -74707,27 +75640,23 @@ std::string MQLError::getError(void)
 
 
 #line 103 "include/mql_query.h"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 104 "include/mql_query.h"
-        // emdf.h also includes emdros-lconfig.h
+// emdf.h also includes emdros-lconfig.h
 /**************** already included emdf.h -- not including again *****************/
 
 
 #line 106 "include/mql_query.h"
-        // So that this will be defined
+// So that this will be defined
 /**************** leaving include/mql_query.h temporarily *****************/
-/**************** A copy of include/pcre_emdros.h *****************/
-
-
+/**************** A copy of include/pcre_emdros.h ****************/
 #line 1 "include/pcre_emdros.h"
-        /**************** leaving include/pcre_emdros.h temporarily *****************/
-/**************** A copy of include/pcre_config.h *****************/
-
-
+/**************** leaving include/pcre_emdros.h temporarily *****************/
+/**************** A copy of include/pcre_config.h ****************/
 #line 1 "include/pcre_config.h"
-        /* config.h.  Generated from config.h.in by configure.  */
+/* config.h.  Generated from config.h.in by configure.  */
 /* config.h.in.  Generated from configure.ac by autoheader.  */
 
 
@@ -75076,11 +76005,12 @@ sure both macros are undefined; an emulation function will then be used. */
 
 /* Define to `unsigned int' if <sys/types.h> does not define. */
 /* #undef size_t */
+
 /**************** continuing include/pcre_emdros.h where we left off *****************/
 
 
 #line 1 "include/pcre_emdros.h"
-        /*************************************************
+/*************************************************
 *       Perl-Compatible Regular Expressions      *
 *************************************************/
 
@@ -75757,24 +76687,23 @@ PCRE_EXP_DECL void pcre32_jit_free_unused_memory(void);
 #endif
 
 #endif /* End of pcre.h */
+
 /**************** continuing include/mql_query.h where we left off *****************/
 
 
 #line 108 "include/mql_query.h"
-        /**************** already included infos.h -- not including again *****************/
+/**************** already included infos.h -- not including again *****************/
 
 
 #line 109 "include/mql_query.h"
-        /**************** already included emdf_enums.h -- not including again *****************/
+/**************** already included emdf_enums.h -- not including again *****************/
 
 
 #line 110 "include/mql_query.h"
-        /**************** leaving include/mql_query.h temporarily *****************/
-/**************** A copy of include/mql_enums.h *****************/
-
-
+/**************** leaving include/mql_query.h temporarily *****************/
+/**************** A copy of include/mql_enums.h ****************/
 #line 1 "include/mql_enums.h"
-        /*
+/*
  * mql_enums.h
  *
  * MQL enumerations
@@ -75868,19 +76797,6 @@ PCRE_EXP_DECL void pcre32_jit_free_unused_memory(void);
 #ifndef MQL_ENUMS__H__
 #define MQL_ENUMS__H__
 
-/** A Monad Set Relation Clause operation
- *
- * part_of == "we" must be a subset of the other monad set.
- *
- * overlap == "we" must have a non-empty intersection with the other
- * monad set.
- *
- */
-enum eMonadSetRelationOperation {
-	kMSROPartOf,
-	kMSROOverlap
-};
-
 enum eUniverseOrSubstrate {
 	kMSNSubstrate,
 	kMSNUniverse
@@ -75911,20 +76827,19 @@ enum eAggregateQueryStrategy {
 
 
 #endif /* MQL_ENUMS__H__ */
+
 /**************** continuing include/mql_query.h where we left off *****************/
 
 
 #line 111 "include/mql_query.h"
-        /**************** already included emdf_exception.h -- not including again *****************/
+/**************** already included emdf_exception.h -- not including again *****************/
 
 
 #line 112 "include/mql_query.h"
-        /**************** leaving include/mql_query.h temporarily *****************/
-/**************** A copy of include/mql_types.h *****************/
-
-
+/**************** leaving include/mql_query.h temporarily *****************/
+/**************** A copy of include/mql_types.h ****************/
 #line 1 "include/mql_types.h"
-        /*
+/*
  * mql_types.h
  *
  * Definitions of AST-classes for MQL
@@ -76025,11 +76940,9 @@ enum eAggregateQueryStrategy {
 
 #ifndef SWIG
 /**************** leaving include/mql_types.h temporarily *****************/
-/**************** A copy of include/mql_result.h *****************/
-
-
+/**************** A copy of include/mql_result.h ****************/
 #line 1 "include/mql_result.h"
-        /*
+/*
  * mql_result.h
  *
  * MQL results
@@ -76127,11 +77040,11 @@ enum eAggregateQueryStrategy {
 
 
 #line 95 "include/mql_result.h"
-        /**************** already included table.h -- not including again *****************/
+/**************** already included table.h -- not including again *****************/
 
 
 #line 96 "include/mql_result.h"
-        #include <string>
+#include <string>
 #include <map>
 #include <list>
 
@@ -76175,34 +77088,35 @@ public:
 
 
 #endif /* MQL_RESULT__H__ */
+
 /**************** continuing include/mql_types.h where we left off *****************/
 
 
 #line 101 "include/mql_types.h"
-        /**************** already included emdf.h -- not including again *****************/
+/**************** already included emdf.h -- not including again *****************/
 
 
 #line 102 "include/mql_types.h"
-        /**************** already included emdf_hash.h -- not including again *****************/
+/**************** already included emdf_hash.h -- not including again *****************/
 
 
 #line 103 "include/mql_types.h"
-        #include <string>
+#include <string>
 #include <map>
 #include <list>
 /**************** already included infos.h -- not including again *****************/
 
 
 #line 107 "include/mql_types.h"
-        /**************** already included monads.h -- not including again *****************/
+/**************** already included monads.h -- not including again *****************/
 
 
 #line 108 "include/mql_types.h"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 109 "include/mql_types.h"
-        #include <utility>
+#include <utility>
 
 
 
@@ -76594,11 +77508,12 @@ class Feature {
 
 #endif // !defined SWIG
 #endif /* MQL_TYPES__H__ */
+
 /**************** continuing include/mql_query.h where we left off *****************/
 
 
 #line 113 "include/mql_query.h"
-        
+
 
 
 
@@ -77528,23 +78443,24 @@ class Topograph {
 
 
 #endif /* MQL_QUERY_TYPES__H__ */
+
 /**************** continuing include/mql_sheaf.h where we left off *****************/
 
 
 #line 102 "include/mql_sheaf.h"
-        /**************** already included mql_enums.h -- not including again *****************/
+/**************** already included mql_enums.h -- not including again *****************/
 
 
 #line 103 "include/mql_sheaf.h"
-        /**************** already included arena.h -- not including again *****************/
+/**************** already included arena.h -- not including again *****************/
 
 
 #line 104 "include/mql_sheaf.h"
-        /**************** already included llist.h -- not including again *****************/
+/**************** already included llist.h -- not including again *****************/
 
 
 #line 105 "include/mql_sheaf.h"
-        
+
 
 class Sheaf; // forward declaration
 class MQLExecEnv; // forward declaration
@@ -78439,16 +79355,15 @@ extern FlatSheaf *mql_flatten_sheaf(StringList *pObjectTypeNames, EmdrosEnv *pEn
 
 
 #endif /* MQL_SHEAF__H__ */
+
 /**************** continuing MQL/mql_sheaf.cpp where we left off *****************/
 
 
 #line 94 "MQL/mql_sheaf.cpp"
-        /**************** leaving MQL/mql_sheaf.cpp temporarily *****************/
-/**************** A copy of include/mql_execution_environment.h *****************/
-
-
+/**************** leaving MQL/mql_sheaf.cpp temporarily *****************/
+/**************** A copy of include/mql_execution_environment.h ****************/
 #line 1 "include/mql_execution_environment.h"
-        /*
+/*
  * mql_execution_environment.h
  *
  * MQL execution environment
@@ -78545,34 +79460,32 @@ extern FlatSheaf *mql_flatten_sheaf(StringList *pObjectTypeNames, EmdrosEnv *pEn
 
 
 #line 94 "include/mql_execution_environment.h"
-        /**************** already included mql_types.h -- not including again *****************/
+/**************** already included mql_types.h -- not including again *****************/
 
 
 #line 95 "include/mql_execution_environment.h"
-        /**************** already included mql_error.h -- not including again *****************/
+/**************** already included mql_error.h -- not including again *****************/
 
 
 #line 96 "include/mql_execution_environment.h"
-        /**************** already included mql_query.h -- not including again *****************/
+/**************** already included mql_query.h -- not including again *****************/
 
 
 #line 97 "include/mql_execution_environment.h"
-        /**************** already included mql_sheaf.h -- not including again *****************/
+/**************** already included mql_sheaf.h -- not including again *****************/
 
 
 #line 98 "include/mql_execution_environment.h"
-        /**************** already included monads.h -- not including again *****************/
+/**************** already included monads.h -- not including again *****************/
 
 
 #line 99 "include/mql_execution_environment.h"
-        #include <map>
+#include <map>
 #ifndef SWIG
 /**************** leaving include/mql_execution_environment.h temporarily *****************/
-/**************** A copy of include/smart_vector.h *****************/
-
-
+/**************** A copy of include/smart_vector.h ****************/
 #line 1 "include/smart_vector.h"
-        /*
+/*
  * smart_vector.h
  *
  * SmartVector template
@@ -78775,16 +79688,15 @@ template <class T, class P> void SmartVector<T,P>::setValue(T* v, short int inde
 
 
 #endif // SMART_VECTOR__H__
+
 /**************** continuing include/mql_execution_environment.h where we left off *****************/
 
 
 #line 102 "include/mql_execution_environment.h"
-        /**************** leaving include/mql_execution_environment.h temporarily *****************/
-/**************** A copy of include/mql_lexer.h *****************/
-
-
+/**************** leaving include/mql_execution_environment.h temporarily *****************/
+/**************** A copy of include/mql_lexer.h ****************/
 #line 1 "include/mql_lexer.h"
-        /*
+/*
  * mql_lexer.h
  *
  * MQL Lexer based on re2c
@@ -78882,7 +79794,7 @@ template <class T, class P> void SmartVector<T,P>::setValue(T* v, short int inde
 
 
 #line 95 "include/mql_lexer.h"
-        
+
 class MQLScanner {
 protected:
 	const char *sz;
@@ -78907,15 +79819,16 @@ private:
 
 
 #endif // MQL_LEXER__H__
+
 /**************** continuing include/mql_execution_environment.h where we left off *****************/
 
 
 #line 103 "include/mql_execution_environment.h"
-        /**************** already included llist.h -- not including again *****************/
+/**************** already included llist.h -- not including again *****************/
 
 
 #line 104 "include/mql_execution_environment.h"
-        #endif // !defined SWIG
+#endif // !defined SWIG
 
 /**
  * \defgroup CompilerStages Stages of the MQL compiler
@@ -79286,16 +80199,15 @@ inline void MQLExecEnv::progress(void)
 #endif // !defined SWIG
 
 #endif // MQL_EXECUTION_ENVIRONMENT__H__
+
 /**************** continuing MQL/mql_sheaf.cpp where we left off *****************/
 
 
 #line 95 "MQL/mql_sheaf.cpp"
-        /**************** leaving MQL/mql_sheaf.cpp temporarily *****************/
-/**************** A copy of include/mql_utility.h *****************/
-
-
+/**************** leaving MQL/mql_sheaf.cpp temporarily *****************/
+/**************** A copy of include/mql_utility.h ****************/
 #line 1 "include/mql_utility.h"
-        /*
+/*
  * mql_utility.h
  *
  * MQL utility functions
@@ -79393,39 +80305,38 @@ inline void MQLExecEnv::progress(void)
 
 
 #line 95 "include/mql_utility.h"
-        /**************** already included monads.h -- not including again *****************/
+/**************** already included monads.h -- not including again *****************/
 
 
 #line 96 "include/mql_utility.h"
-        
+
 class Straw; // Forward declaration
 
 extern void restrict(const SetOfMonads& SOM, monad_m monad, SetOfMonads& result);
 extern void join(Straw* pStraw, ListOfStraws* pLS);
 // extern void hat(const SetOfMonads& O, SetOfMonads& out); // Has been obsolete...
 #endif /* MQL_UTILITY__H__ */
+
 /**************** continuing MQL/mql_sheaf.cpp where we left off *****************/
 
 
 #line 96 "MQL/mql_sheaf.cpp"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 97 "MQL/mql_sheaf.cpp"
-        /**************** already included mql_types.h -- not including again *****************/
+/**************** already included mql_types.h -- not including again *****************/
 
 
 #line 98 "MQL/mql_sheaf.cpp"
-        /**************** already included mql_query.h -- not including again *****************/
+/**************** already included mql_query.h -- not including again *****************/
 
 
 #line 99 "MQL/mql_sheaf.cpp"
-        /**************** leaving MQL/mql_sheaf.cpp temporarily *****************/
-/**************** A copy of include/environment_emdros.h *****************/
-
-
+/**************** leaving MQL/mql_sheaf.cpp temporarily *****************/
+/**************** A copy of include/environment_emdros.h ****************/
 #line 1 "include/environment_emdros.h"
-        /*
+/*
  * environment_emdros.h
  *
  * Emdros environment
@@ -79523,15 +80434,15 @@ extern void join(Straw* pStraw, ListOfStraws* pLS);
 
 
 #line 95 "include/environment_emdros.h"
-        /**************** already included emdros-lconfig.h -- not including again *****************/
+/**************** already included emdros-lconfig.h -- not including again *****************/
 
 
 #line 96 "include/environment_emdros.h"
-        /**************** already included emdf_enums.h -- not including again *****************/
+/**************** already included emdf_enums.h -- not including again *****************/
 
 
 #line 97 "include/environment_emdros.h"
-        
+
 #if HAVE_ISTREAM
 #include <istream>
 #else
@@ -79548,15 +80459,15 @@ extern void join(Straw* pStraw, ListOfStraws* pLS);
 
 
 #line 111 "include/environment_emdros.h"
-        /**************** already included table.h -- not including again *****************/
+/**************** already included table.h -- not including again *****************/
 
 
 #line 112 "include/environment_emdros.h"
-        /**************** already included monads.h -- not including again *****************/
+/**************** already included monads.h -- not including again *****************/
 
 
 #line 113 "include/environment_emdros.h"
-        
+
 
 
 #endif // !defined SWIG
@@ -79800,19 +80711,20 @@ class EmdrosEnv {
 
 
 #endif // ENVIRONMENT_EMDROS__H__
+
 /**************** continuing MQL/mql_sheaf.cpp where we left off *****************/
 
 
 #line 100 "MQL/mql_sheaf.cpp"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 101 "MQL/mql_sheaf.cpp"
-        /**************** already included string_list.h -- not including again *****************/
+/**************** already included string_list.h -- not including again *****************/
 
 
 #line 102 "MQL/mql_sheaf.cpp"
-        
+
 
 /////////////////////////////////////////////////////////////////
 //
@@ -83007,11 +83919,10 @@ FlatSheaf *mql_flatten_sheaf(StringList *pObjectTypeNames, EmdrosEnv *pEnv, Shea
 	EMdFDB *pDB = pEnv->getMQLEE()->pDB;
 	return mql_flatten_sheaf(pObjectTypeNames, pDB, ppSheaf);
 }
-/**************** A copy of MQL/mql_result.cpp *****************/
 
-
+/**************** A copy of MQL/mql_result.cpp ****************/
 #line 1 "MQL/mql_result.cpp"
-        /*
+/*
  * mql_result.cpp
  *
  * MQL results
@@ -83105,23 +84016,23 @@ FlatSheaf *mql_flatten_sheaf(StringList *pObjectTypeNames, EmdrosEnv *pEnv, Shea
 
 
 #line 91 "MQL/mql_result.cpp"
-        /**************** already included mql_execution_environment.h -- not including again *****************/
+/**************** already included mql_execution_environment.h -- not including again *****************/
 
 
 #line 92 "MQL/mql_result.cpp"
-        /**************** already included mql_sheaf.h -- not including again *****************/
+/**************** already included mql_sheaf.h -- not including again *****************/
 
 
 #line 93 "MQL/mql_result.cpp"
-        /**************** already included emdf_output.h -- not including again *****************/
+/**************** already included emdf_output.h -- not including again *****************/
 
 
 #line 94 "MQL/mql_result.cpp"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 95 "MQL/mql_result.cpp"
-        
+
 
 // For lists
 MQLResult::MQLResult() 
@@ -83307,11 +84218,10 @@ bool MQLResult::flatten(StringList *pObjectTypeNames, EMdFDB *pDB)
 		return true;
 	}
 }
-/**************** A copy of MQL/mql_execution_environment.cpp *****************/
 
-
+/**************** A copy of MQL/mql_execution_environment.cpp ****************/
 #line 1 "MQL/mql_execution_environment.cpp"
-        /*
+/*
  * mql_execution_environment.cpp
  *
  * MQL execution environment
@@ -83404,15 +84314,15 @@ bool MQLResult::flatten(StringList *pObjectTypeNames, EMdFDB *pDB)
 
 
 #line 90 "MQL/mql_execution_environment.cpp"
-        /**************** already included mql_execution_environment.h -- not including again *****************/
+/**************** already included mql_execution_environment.h -- not including again *****************/
 
 
 #line 91 "MQL/mql_execution_environment.cpp"
-        /**************** already included mql_lexer.h -- not including again *****************/
+/**************** already included mql_lexer.h -- not including again *****************/
 
 
 #line 92 "MQL/mql_execution_environment.cpp"
-        
+
 
 #include <cassert>
 
@@ -83686,11 +84596,10 @@ QueryNode* MQLExecEnv::getNodeFromNodeNumber(node_number_t node_number)
 		return 0;
 	}
 }
-/**************** A copy of MQL/mql_helper_classes.cpp *****************/
 
-
+/**************** A copy of MQL/mql_helper_classes.cpp ****************/
 #line 1 "MQL/mql_helper_classes.cpp"
-        /*
+/*
  * mql_helper_classes.cpp
  *
  * MQL helper classes
@@ -83791,41 +84700,39 @@ QueryNode* MQLExecEnv::getNodeFromNodeNumber(node_number_t node_number)
 
 
 #line 98 "MQL/mql_helper_classes.cpp"
-        /**************** already included string_list.h -- not including again *****************/
+/**************** already included string_list.h -- not including again *****************/
 
 
 #line 99 "MQL/mql_helper_classes.cpp"
-        /**************** already included inst.h -- not including again *****************/
+/**************** already included inst.h -- not including again *****************/
 
 
 #line 100 "MQL/mql_helper_classes.cpp"
-        #include <sstream>
+#include <sstream>
 /**************** already included mql_types.h -- not including again *****************/
 
 
 #line 102 "MQL/mql_helper_classes.cpp"
-        /**************** already included mql_error.h -- not including again *****************/
+/**************** already included mql_error.h -- not including again *****************/
 
 
 #line 103 "MQL/mql_helper_classes.cpp"
-        /**************** already included inst_object.h -- not including again *****************/
+/**************** already included inst_object.h -- not including again *****************/
 
 
 #line 104 "MQL/mql_helper_classes.cpp"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 105 "MQL/mql_helper_classes.cpp"
-        /**************** already included mql_execution_environment.h -- not including again *****************/
+/**************** already included mql_execution_environment.h -- not including again *****************/
 
 
 #line 106 "MQL/mql_helper_classes.cpp"
-        /**************** leaving MQL/mql_helper_classes.cpp temporarily *****************/
-/**************** A copy of include/mql_object.h *****************/
-
-
+/**************** leaving MQL/mql_helper_classes.cpp temporarily *****************/
+/**************** A copy of include/mql_object.h ****************/
 #line 1 "include/mql_object.h"
-        /*
+/*
  * mql_object.h
  *
  * MQL representation of an object while processing the query
@@ -83927,19 +84834,19 @@ QueryNode* MQLExecEnv::getNodeFromNodeNumber(node_number_t node_number)
 
 
 #line 99 "include/mql_object.h"
-        /**************** already included emdf_value.h -- not including again *****************/
+/**************** already included emdf_value.h -- not including again *****************/
 
 
 #line 100 "include/mql_object.h"
-        /**************** already included inst_object.h -- not including again *****************/
+/**************** already included inst_object.h -- not including again *****************/
 
 
 #line 101 "include/mql_object.h"
-        /**************** already included mql_enums.h -- not including again *****************/
+/**************** already included mql_enums.h -- not including again *****************/
 
 
 #line 102 "include/mql_object.h"
-        
+
 
 class EMdFDB; // Forward declaration
 
@@ -83966,20 +84873,19 @@ private:
 };
 
 #endif /* MQL_OBJECT__H__ */
+
 /**************** continuing MQL/mql_helper_classes.cpp where we left off *****************/
 
 
 #line 107 "MQL/mql_helper_classes.cpp"
-        /**************** already included mql_sheaf.h -- not including again *****************/
+/**************** already included mql_sheaf.h -- not including again *****************/
 
 
 #line 108 "MQL/mql_helper_classes.cpp"
-        /**************** leaving MQL/mql_helper_classes.cpp temporarily *****************/
-/**************** A copy of include/mql_object_type_statements.h *****************/
-
-
+/**************** leaving MQL/mql_helper_classes.cpp temporarily *****************/
+/**************** A copy of include/mql_object_type_statements.h ****************/
 #line 1 "include/mql_object_type_statements.h"
-        /*
+/*
  * mql_object_type_statements.h
  *
  * Definitions of AST-classes for MQL
@@ -84077,15 +84983,15 @@ private:
 
 
 #line 95 "include/mql_object_type_statements.h"
-        /**************** already included mql_execution_environment.h -- not including again *****************/
+/**************** already included mql_execution_environment.h -- not including again *****************/
 
 
 #line 96 "include/mql_object_type_statements.h"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 97 "include/mql_object_type_statements.h"
-        
+
 
 // Base class for the OBJECT TYPE statements
 class ObjectTypeStatement : public Statement {
@@ -84234,16 +85140,15 @@ public:
 
 
 #endif /* MQL_OBJECT_TYPE_STATEMENTS__H__ */
+
 /**************** continuing MQL/mql_helper_classes.cpp where we left off *****************/
 
 
 #line 109 "MQL/mql_helper_classes.cpp"
-        /**************** leaving MQL/mql_helper_classes.cpp temporarily *****************/
-/**************** A copy of include/mql_monads_statements.h *****************/
-
-
+/**************** leaving MQL/mql_helper_classes.cpp temporarily *****************/
+/**************** A copy of include/mql_monads_statements.h ****************/
 #line 1 "include/mql_monads_statements.h"
-        /*
+/*
  * mql_monads_statements.h
  *
  * Definitions of AST-classes for MQL
@@ -84336,15 +85241,15 @@ public:
 
 
 #line 90 "include/mql_monads_statements.h"
-        /**************** already included mql_execution_environment.h -- not including again *****************/
+/**************** already included mql_execution_environment.h -- not including again *****************/
 
 
 #line 91 "include/mql_monads_statements.h"
-        /**************** already included mql_object_type_statements.h -- not including again *****************/
+/**************** already included mql_object_type_statements.h -- not including again *****************/
 
 
 #line 92 "include/mql_monads_statements.h"
-        
+
 
 typedef enum { kSOUnion, kSOIntersect, kSODifference, kSONone, kSOReplace } eSetOperator;
 
@@ -84534,16 +85439,15 @@ public:
 
 
 #endif /* MQL_MONADS_STATEMENTS__H__ */
+
 /**************** continuing MQL/mql_helper_classes.cpp where we left off *****************/
 
 
 #line 110 "MQL/mql_helper_classes.cpp"
-        /**************** leaving MQL/mql_helper_classes.cpp temporarily *****************/
-/**************** A copy of include/mql_enumeration_statements.h *****************/
-
-
+/**************** leaving MQL/mql_helper_classes.cpp temporarily *****************/
+/**************** A copy of include/mql_enumeration_statements.h ****************/
 #line 1 "include/mql_enumeration_statements.h"
-        /*
+/*
  * mql_enumeration_statements.h
  *
  * Definitions of AST-classes for MQL
@@ -84641,11 +85545,11 @@ public:
 
 
 #line 95 "include/mql_enumeration_statements.h"
-        /**************** already included mql_execution_environment.h -- not including again *****************/
+/**************** already included mql_execution_environment.h -- not including again *****************/
 
 
 #line 96 "include/mql_enumeration_statements.h"
-        #include <set>
+#include <set>
 
 class EnumerationStatement : public Statement {
  protected:
@@ -84766,16 +85670,15 @@ class DropEnumerationStatement : public EnumerationStatement {
 
 
 #endif /* MQL_ENUMERATION_STATEMENTS__H__ */
+
 /**************** continuing MQL/mql_helper_classes.cpp where we left off *****************/
 
 
 #line 111 "MQL/mql_helper_classes.cpp"
-        /**************** leaving MQL/mql_helper_classes.cpp temporarily *****************/
-/**************** A copy of include/mql_object_statements.h *****************/
-
-
+/**************** leaving MQL/mql_helper_classes.cpp temporarily *****************/
+/**************** A copy of include/mql_object_statements.h ****************/
 #line 1 "include/mql_object_statements.h"
-        /*
+/*
  * mql_object_statements.h
  *
  * Definitions of AST-classes for MQL
@@ -84868,15 +85771,15 @@ class DropEnumerationStatement : public EnumerationStatement {
 
 
 #line 90 "include/mql_object_statements.h"
-        /**************** already included mql_object_type_statements.h -- not including again *****************/
+/**************** already included mql_object_type_statements.h -- not including again *****************/
 
 
 #line 91 "include/mql_object_statements.h"
-        /**************** already included mql_execution_environment.h -- not including again *****************/
+/**************** already included mql_execution_environment.h -- not including again *****************/
 
 
 #line 92 "include/mql_object_statements.h"
-        
+
 
 class InstObject; // Forward declaration
 
@@ -85219,19 +86122,20 @@ class DeleteObjectsByQueryStatement : public DeleteObjectsStatement, public Quer
 
 
 #endif /* MQL_OBJECT_STATEMENTS__H__ */
+
 /**************** continuing MQL/mql_helper_classes.cpp where we left off *****************/
 
 
 #line 112 "MQL/mql_helper_classes.cpp"
-        /**************** already included monads.h -- not including again *****************/
+/**************** already included monads.h -- not including again *****************/
 
 
 #line 113 "MQL/mql_helper_classes.cpp"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 114 "MQL/mql_helper_classes.cpp"
-        
+
 
 
 MaxRange::MaxRange(monad_m max_range)
@@ -88162,11 +89066,10 @@ bool ByMonads::getObjectsByMonads(MQLExecEnv *pEE,
 
 
 
-/**************** A copy of MQL/mql_object.cpp *****************/
 
-
+/**************** A copy of MQL/mql_object.cpp ****************/
 #line 1 "MQL/mql_object.cpp"
-        /*
+/*
  * mql_object.cpp
  *
  * MQL representation of an object while processing the query
@@ -88260,16 +89163,14 @@ bool ByMonads::getObjectsByMonads(MQLExecEnv *pEE,
 
 
 #line 91 "MQL/mql_object.cpp"
-        /**************** already included mql_object.h -- not including again *****************/
+/**************** already included mql_object.h -- not including again *****************/
 
 
 #line 92 "MQL/mql_object.cpp"
-        /**************** leaving MQL/mql_object.cpp temporarily *****************/
-/**************** A copy of include/mql_extern.h *****************/
-
-
+/**************** leaving MQL/mql_object.cpp temporarily *****************/
+/**************** A copy of include/mql_extern.h ****************/
 #line 1 "include/mql_extern.h"
-        /*
+/*
  * mql_extern.h
  *
  * MQL extern declarations
@@ -88366,15 +89267,16 @@ extern int yyparse(MQLExecEnv *pEE);
 
 
 
+
 /**************** continuing MQL/mql_object.cpp where we left off *****************/
 
 
 #line 93 "MQL/mql_object.cpp"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 94 "MQL/mql_object.cpp"
-        #include <algorithm>
+#include <algorithm>
 
 MQLObject::MQLObject() : 
 	m_feature_name_vec_inst(0)
@@ -88500,11 +89402,10 @@ short int MQLObject::getFeatureIndex(const std::string& feature_name) const
 
 
 
-/**************** A copy of MQL/mql_statement.cpp *****************/
 
-
+/**************** A copy of MQL/mql_statement.cpp ****************/
 #line 1 "MQL/mql_statement.cpp"
-        /*
+/*
  * mql_statement.cpp
  *
  * MQL Statement
@@ -88597,11 +89498,11 @@ short int MQLObject::getFeatureIndex(const std::string& feature_name) const
 
 
 #line 90 "MQL/mql_statement.cpp"
-        /**************** already included mql_execution_environment.h -- not including again *****************/
+/**************** already included mql_execution_environment.h -- not including again *****************/
 
 
 #line 91 "MQL/mql_statement.cpp"
-        
+
 ////////////////////////////////////////////////////////////
 //
 // Statement
@@ -88718,11 +89619,10 @@ MQLResult* Statement::getResult()
 { 
   return m_result; 
 }
-/**************** A copy of MQL/mql_segment_statements.cpp *****************/
 
-
+/**************** A copy of MQL/mql_segment_statements.cpp ****************/
 #line 1 "MQL/mql_segment_statements.cpp"
-        /*
+/*
  * mql_segment_statements.cpp
  *
  * MQL SEGMENT statements
@@ -88815,12 +89715,10 @@ MQLResult* Statement::getResult()
 
 
 #line 90 "MQL/mql_segment_statements.cpp"
-        /**************** leaving MQL/mql_segment_statements.cpp temporarily *****************/
-/**************** A copy of include/mql_segment_statements.h *****************/
-
-
+/**************** leaving MQL/mql_segment_statements.cpp temporarily *****************/
+/**************** A copy of include/mql_segment_statements.h ****************/
 #line 1 "include/mql_segment_statements.h"
-        /*
+/*
  * mql_segment_statements.h
  *
  * Definitions of AST-classes for MQL
@@ -88917,11 +89815,11 @@ MQLResult* Statement::getResult()
 
 
 #line 94 "include/mql_segment_statements.h"
-        /**************** already included mql_execution_environment.h -- not including again *****************/
+/**************** already included mql_execution_environment.h -- not including again *****************/
 
 
 #line 95 "include/mql_segment_statements.h"
-        
+
 
 // Base class for the segment manipulation statements
 class SegmentStatement : public Statement {
@@ -88948,11 +89846,12 @@ class CreateSegmentStatement : public SegmentStatement {
 
 
 #endif /* MQL_SEGMENT_STATEMENTS__H__ */
+
 /**************** continuing MQL/mql_segment_statements.cpp where we left off *****************/
 
 
 #line 91 "MQL/mql_segment_statements.cpp"
-        
+
 
 
 /////////////////////////////////////////////////////////////
@@ -89045,11 +89944,10 @@ bool CreateSegmentStatement::exec()
 	// If we got this far, we are a success.
 	return true;
 }
-/**************** A copy of MQL/mql_select_statements.cpp *****************/
 
-
+/**************** A copy of MQL/mql_select_statements.cpp ****************/
 #line 1 "MQL/mql_select_statements.cpp"
-        /*
+/*
  * mql_select_statements.cpp
  *
  * MQL SELECT statements
@@ -89143,16 +90041,14 @@ bool CreateSegmentStatement::exec()
 
 
 #line 91 "MQL/mql_select_statements.cpp"
-        /**************** already included mql_result.h -- not including again *****************/
+/**************** already included mql_result.h -- not including again *****************/
 
 
 #line 92 "MQL/mql_select_statements.cpp"
-        /**************** leaving MQL/mql_select_statements.cpp temporarily *****************/
-/**************** A copy of include/mql_select_statements.h *****************/
-
-
+/**************** leaving MQL/mql_select_statements.cpp temporarily *****************/
+/**************** A copy of include/mql_select_statements.h ****************/
 #line 1 "include/mql_select_statements.h"
-        /*
+/*
  * mql_select_statements.h
  *
  * Definitions of AST-classes for MQL
@@ -89250,19 +90146,19 @@ bool CreateSegmentStatement::exec()
 
 
 #line 95 "include/mql_select_statements.h"
-        /**************** already included mql_enumeration_statements.h -- not including again *****************/
+/**************** already included mql_enumeration_statements.h -- not including again *****************/
 
 
 #line 96 "include/mql_select_statements.h"
-        /**************** already included mql_object_type_statements.h -- not including again *****************/
+/**************** already included mql_object_type_statements.h -- not including again *****************/
 
 
 #line 97 "include/mql_select_statements.h"
-        /**************** already included mql_execution_environment.h -- not including again *****************/
+/**************** already included mql_execution_environment.h -- not including again *****************/
 
 
 #line 98 "include/mql_select_statements.h"
-        
+
 
 // SELECT (focus|all|) OBJECTS
 class SelectStatement : public Statement, public QueryBase {
@@ -89423,24 +90319,23 @@ public:
 
 
 #endif /* MQL_SELECT_STATEMENTS__H__ */
+
 /**************** continuing MQL/mql_select_statements.cpp where we left off *****************/
 
 
 #line 93 "MQL/mql_select_statements.cpp"
-        /**************** already included mql_query.h -- not including again *****************/
+/**************** already included mql_query.h -- not including again *****************/
 
 
 #line 94 "MQL/mql_select_statements.cpp"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 95 "MQL/mql_select_statements.cpp"
-        /**************** leaving MQL/mql_select_statements.cpp temporarily *****************/
-/**************** A copy of include/mql_R.h *****************/
-
-
+/**************** leaving MQL/mql_select_statements.cpp temporarily *****************/
+/**************** A copy of include/mql_R.h ****************/
 #line 1 "include/mql_R.h"
-        /*
+/*
  * mql_R.h
  *
  * MQL retrieval functions
@@ -89533,7 +90428,7 @@ public:
 
 
 #line 90 "include/mql_R.h"
-        
+
 class MQLExecEnv; // Forward declaration
 class Topograph; // Forward declaration
 class Sheaf; // Forward declaration
@@ -89546,23 +90441,24 @@ extern Inst* R_inst(MQLExecEnv *pEE, const SetOfMonads& Su, ObjectBlock *object_
 
 
 #endif /* MQL_R__H__ */
+
 /**************** continuing MQL/mql_select_statements.cpp where we left off *****************/
 
 
 #line 96 "MQL/mql_select_statements.cpp"
-        /**************** already included logging.h -- not including again *****************/
+/**************** already included logging.h -- not including again *****************/
 
 
 #line 97 "MQL/mql_select_statements.cpp"
-        /**************** already included monads.h -- not including again *****************/
+/**************** already included monads.h -- not including again *****************/
 
 
 #line 98 "MQL/mql_select_statements.cpp"
-        /**************** already included inst.h -- not including again *****************/
+/**************** already included inst.h -- not including again *****************/
 
 
 #line 99 "MQL/mql_select_statements.cpp"
-        
+
 
 //////////////////////////////////////////////////////////////
 //
@@ -90778,11 +91674,10 @@ bool SelectMonadSetsStatement::exec()
 }
 
 
-/**************** A copy of MQL/mql_utility.cpp *****************/
 
-
+/**************** A copy of MQL/mql_utility.cpp ****************/
 #line 1 "MQL/mql_utility.cpp"
-        /*
+/*
  * mql_utility.cpp
  *
  * MQL utility functions
@@ -90876,11 +91771,11 @@ bool SelectMonadSetsStatement::exec()
 
 
 #line 91 "MQL/mql_utility.cpp"
-        /**************** already included mql_utility.h -- not including again *****************/
+/**************** already included mql_utility.h -- not including again *****************/
 
 
 #line 92 "MQL/mql_utility.cpp"
-        
+
 
 
 /** Remove from som SOM all the monads from SOM.first() to monad_m
@@ -90924,11 +91819,10 @@ void hat(const SetOfMonads& O, SetOfMonads& out)
 }
 */
 
-/**************** A copy of MQL/mql_database_statements.cpp *****************/
 
-
+/**************** A copy of MQL/mql_database_statements.cpp ****************/
 #line 1 "MQL/mql_database_statements.cpp"
-        /*
+/*
  * mql_database_statements
  *
  * MQL DATABASE statements
@@ -91023,16 +91917,14 @@ void hat(const SetOfMonads& O, SetOfMonads& out)
 
 
 #line 92 "MQL/mql_database_statements.cpp"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 93 "MQL/mql_database_statements.cpp"
-        /**************** leaving MQL/mql_database_statements.cpp temporarily *****************/
-/**************** A copy of include/mql_database_statements.h *****************/
-
-
+/**************** leaving MQL/mql_database_statements.cpp temporarily *****************/
+/**************** A copy of include/mql_database_statements.h ****************/
 #line 1 "include/mql_database_statements.h"
-        /*
+/*
  * mql_database_statements.h
  *
  * Definitions of AST-classes for MQL
@@ -91130,15 +92022,15 @@ void hat(const SetOfMonads& O, SetOfMonads& out)
 
 
 #line 95 "include/mql_database_statements.h"
-        /**************** already included mql_object_type_statements.h -- not including again *****************/
+/**************** already included mql_object_type_statements.h -- not including again *****************/
 
 
 #line 96 "include/mql_database_statements.h"
-        /**************** already included mql_execution_environment.h -- not including again *****************/
+/**************** already included mql_execution_environment.h -- not including again *****************/
 
 
 #line 97 "include/mql_database_statements.h"
-        
+
 
 class DatabaseStatement : public Statement {
  protected:
@@ -91250,19 +92142,20 @@ class CreateIndexesStatement : public ObjectTypesStatement {
 
 
 #endif /* MQL_DATABASE_STATEMENTS__H__ */
+
 /**************** continuing MQL/mql_database_statements.cpp where we left off *****************/
 
 
 #line 94 "MQL/mql_database_statements.cpp"
-        /**************** already included mql_error.h -- not including again *****************/
+/**************** already included mql_error.h -- not including again *****************/
 
 
 #line 95 "MQL/mql_database_statements.cpp"
-        /**************** already included mql_execution_environment.h -- not including again *****************/
+/**************** already included mql_execution_environment.h -- not including again *****************/
 
 
 #line 96 "MQL/mql_database_statements.cpp"
-        
+
 
 //////////////////////////////////////////////////////////////
 //
@@ -91526,11 +92419,10 @@ bool CreateIndexesStatement::execOneType(const ObjectTypeInfo& oti)
   return true;
 }
 
-/**************** A copy of MQL/mql_enumeration_statements.cpp *****************/
 
-
+/**************** A copy of MQL/mql_enumeration_statements.cpp ****************/
 #line 1 "MQL/mql_enumeration_statements.cpp"
-        /*
+/*
  * mql_enumeration_statements.cpp
  *
  * MQL ENUMERATION statements
@@ -91623,15 +92515,15 @@ bool CreateIndexesStatement::execOneType(const ObjectTypeInfo& oti)
 
 
 #line 90 "MQL/mql_enumeration_statements.cpp"
-        /**************** already included mql_enumeration_statements.h -- not including again *****************/
+/**************** already included mql_enumeration_statements.h -- not including again *****************/
 
 
 #line 91 "MQL/mql_enumeration_statements.cpp"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 92 "MQL/mql_enumeration_statements.cpp"
-        
+
 //////////////////////////////////////////////////////////////
 //
 // ECDeclaration 
@@ -92476,11 +93368,10 @@ bool DropEnumerationStatement::exec()
 	// Drop in database
 	return m_pEE->pDB->dropEnum(m_enum_id);
 }
-/**************** A copy of MQL/mql_features_statements.cpp *****************/
 
-
+/**************** A copy of MQL/mql_features_statements.cpp ****************/
 #line 1 "MQL/mql_features_statements.cpp"
-        /*
+/*
  * mql_features_statements.cpp
  *
  * MQL FEATURES statements
@@ -92574,12 +93465,10 @@ bool DropEnumerationStatement::exec()
 
 
 #line 91 "MQL/mql_features_statements.cpp"
-        /**************** leaving MQL/mql_features_statements.cpp temporarily *****************/
-/**************** A copy of include/mql_features_statements.h *****************/
-
-
+/**************** leaving MQL/mql_features_statements.cpp temporarily *****************/
+/**************** A copy of include/mql_features_statements.h ****************/
 #line 1 "include/mql_features_statements.h"
-        /*
+/*
  * mql_features_statements.h
  *
  * Definitions of FEATURES statements for MQL
@@ -92677,15 +93566,15 @@ bool DropEnumerationStatement::exec()
 
 
 #line 95 "include/mql_features_statements.h"
-        /**************** already included mql_execution_environment.h -- not including again *****************/
+/**************** already included mql_execution_environment.h -- not including again *****************/
 
 
 #line 96 "include/mql_features_statements.h"
-        /**************** already included mql_object_type_statements.h -- not including again *****************/
+/**************** already included mql_object_type_statements.h -- not including again *****************/
 
 
 #line 97 "include/mql_features_statements.h"
-        
+
 // GET FEATURES
 class GetFeaturesStatement : public Statement {
 private:
@@ -92723,15 +93612,16 @@ public:
 
 
 #endif /* MQL_XXX__H__ */
+
 /**************** continuing MQL/mql_features_statements.cpp where we left off *****************/
 
 
 #line 92 "MQL/mql_features_statements.cpp"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 93 "MQL/mql_features_statements.cpp"
-        
+
 
 /////////////////////////////////////////////////////////////
 //
@@ -92979,11 +93869,10 @@ bool GetSetFromFeatureStatement::exec()
 }
 
 
-/**************** A copy of MQL/mql_meta_statements.cpp *****************/
 
-
+/**************** A copy of MQL/mql_meta_statements.cpp ****************/
 #line 1 "MQL/mql_meta_statements.cpp"
-        /*
+/*
  * mql_meta_statements.cpp
  *
  * MQL meta-statements
@@ -93075,11 +93964,9 @@ bool GetSetFromFeatureStatement::exec()
 
 
 /**************** leaving MQL/mql_meta_statements.cpp temporarily *****************/
-/**************** A copy of include/mql_meta_statements.h *****************/
-
-
+/**************** A copy of include/mql_meta_statements.h ****************/
 #line 1 "include/mql_meta_statements.h"
-        /*
+/*
  * mql_meta_statements.h
  *
  * Definitions of AST-classes for MQL
@@ -93177,11 +94064,11 @@ bool GetSetFromFeatureStatement::exec()
 
 
 #line 95 "include/mql_meta_statements.h"
-        /**************** already included mql_execution_environment.h -- not including again *****************/
+/**************** already included mql_execution_environment.h -- not including again *****************/
 
 
 #line 96 "include/mql_meta_statements.h"
-        
+
 
 // QUIT
 class QuitStatement : public Statement {
@@ -93195,11 +94082,12 @@ public:
 
 
 #endif /* MQL_META_STATEMENTS__H__ */
+
 /**************** continuing MQL/mql_meta_statements.cpp where we left off *****************/
 
 
 #line 92 "MQL/mql_meta_statements.cpp"
-        
+
 
 /////////////////////////////////////////////////////////////
 //
@@ -93220,11 +94108,10 @@ bool QuitStatement::exec()
   return true;
 }
 
-/**************** A copy of MQL/mql_monads_statements.cpp *****************/
 
-
+/**************** A copy of MQL/mql_monads_statements.cpp ****************/
 #line 1 "MQL/mql_monads_statements.cpp"
-        /*
+/*
  * mql_monads_statements.cpp
  *
  * MQL MONADS statements
@@ -93318,19 +94205,19 @@ bool QuitStatement::exec()
 
 
 #line 91 "MQL/mql_monads_statements.cpp"
-        /**************** already included mql_monads_statements.h -- not including again *****************/
+/**************** already included mql_monads_statements.h -- not including again *****************/
 
 
 #line 92 "MQL/mql_monads_statements.cpp"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 93 "MQL/mql_monads_statements.cpp"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 94 "MQL/mql_monads_statements.cpp"
-        
+
 /////////////////////////////////////////////////////////////
 //
 // MonadsStatement
@@ -93850,11 +94737,10 @@ bool DropMonadSetStatement::exec()
 }
 
 
-/**************** A copy of MQL/mql_object_statements.cpp *****************/
 
-
+/**************** A copy of MQL/mql_object_statements.cpp ****************/
 #line 1 "MQL/mql_object_statements.cpp"
-        /*
+/*
  * mql_object_statements.cpp
  *
  * MQL OBJECT statements
@@ -93949,19 +94835,19 @@ bool DropMonadSetStatement::exec()
 
 
 #line 92 "MQL/mql_object_statements.cpp"
-        /**************** already included mql_object_statements.h -- not including again *****************/
+/**************** already included mql_object_statements.h -- not including again *****************/
 
 
 #line 93 "MQL/mql_object_statements.cpp"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 94 "MQL/mql_object_statements.cpp"
-        /**************** already included inst_object.h -- not including again *****************/
+/**************** already included inst_object.h -- not including again *****************/
 
 
 #line 95 "MQL/mql_object_statements.cpp"
-        
+
 
 ////////////////////////////////////////////////////////////
 //
@@ -95703,11 +96589,10 @@ bool DeleteObjectsByQueryStatement::exec()
 
 
 
-/**************** A copy of MQL/mql_object_type_statements.cpp *****************/
 
-
+/**************** A copy of MQL/mql_object_type_statements.cpp ****************/
 #line 1 "MQL/mql_object_type_statements.cpp"
-        /*
+/*
  * mql_object_type_statements.cpp
  *
  * MQL OBJECT TYPE statements
@@ -95801,15 +96686,15 @@ bool DeleteObjectsByQueryStatement::exec()
 
 
 #line 91 "MQL/mql_object_type_statements.cpp"
-        /**************** already included mql_object_type_statements.h -- not including again *****************/
+/**************** already included mql_object_type_statements.h -- not including again *****************/
 
 
 #line 92 "MQL/mql_object_type_statements.cpp"
-        /**************** already included infos.h -- not including again *****************/
+/**************** already included infos.h -- not including again *****************/
 
 
 #line 93 "MQL/mql_object_type_statements.cpp"
-        #include <list>
+#include <list>
 
 
 /////////////////////////////////////////////////////////////
@@ -96319,11 +97204,10 @@ bool DropObjectTypeStatement::exec()
 
 
 
-/**************** A copy of MQL/mql_get_query.cpp *****************/
 
-
+/**************** A copy of MQL/mql_get_query.cpp ****************/
 #line 1 "MQL/mql_get_query.cpp"
-        /* Generated by re2c 0.13.5 on Wed Mar 30 17:16:16 2016 */
+/* Generated by re2c 0.13.5 on Sun May  8 22:29:11 2016 */
 #line 1 "./mql_gq.re"
 /*
  * mql_gq.cpp
@@ -96416,11 +97300,9 @@ bool DropObjectTypeStatement::exec()
 
 
 /**************** leaving MQL/mql_get_query.cpp temporarily *****************/
-/**************** A copy of include/mql_gq.h *****************/
-
-
+/**************** A copy of include/mql_gq.h ****************/
 #line 1 "include/mql_gq.h"
-        /*
+/*
  * mql_gq.h
  *
  * MQL "Get Query from stream" scanner
@@ -96517,11 +97399,11 @@ bool DropObjectTypeStatement::exec()
 
 
 #line 94 "include/mql_gq.h"
-        /**************** already included arena.h -- not including again *****************/
+/**************** already included arena.h -- not including again *****************/
 
 
 #line 95 "include/mql_gq.h"
-        
+
 #if HAVE_ISTREAM
 #include <istream>
 #else
@@ -96549,11 +97431,12 @@ private:
 };
 
 #endif // MQL_GQ__H__
+
 /**************** continuing MQL/mql_get_query.cpp where we left off *****************/
 
 
 #line 93 "MQL/mql_get_query.cpp"
-        
+
 #ifdef BSIZE
 #undef BSIZE
 #endif
@@ -97108,11 +97991,10 @@ int main(int argc, char *argv[])
 }
 
 */
-/**************** A copy of MQL/mql_yylex.cpp *****************/
 
-
+/**************** A copy of MQL/mql_yylex.cpp ****************/
 #line 1 "MQL/mql_yylex.cpp"
-        /*
+/*
  * mql_yylex.cpp
  *
  * MQL yylex
@@ -97205,11 +98087,11 @@ int main(int argc, char *argv[])
 
 
 #line 90 "MQL/mql_yylex.cpp"
-        /**************** already included mql_execution_environment.h -- not including again *****************/
+/**************** already included mql_execution_environment.h -- not including again *****************/
 
 
 #line 91 "MQL/mql_yylex.cpp"
-        
+
 
 /** MQL yylex function
  *
@@ -97225,11 +98107,10 @@ int yylex(void *lvalp, void *parm)
 {
 	return ((MQLExecEnv*) parm)->pLexer->scan((Token*) lvalp);
 }
-/**************** A copy of MQL/mql_lexer.cpp *****************/
 
-
+/**************** A copy of MQL/mql_lexer.cpp ****************/
 #line 1 "MQL/mql_lexer.cpp"
-        /* Generated by re2c 0.13.5 on Wed Mar 30 17:16:16 2016 */
+/* Generated by re2c 0.13.5 on Sun May  8 22:29:11 2016 */
 #line 1 "./mql.re"
 /*
  * mql.re
@@ -97238,13 +98119,13 @@ int yylex(void *lvalp, void *parm)
  *
  * Ulrik Petersen
  * Created: 6/23-2007
- * Last update: 4/16-2015
+ * Last update: 4/20-2016
  *
  */
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2001-2015  Ulrik Sandborg-Petersen
+ *   Copyright (C) 2001-2016  Ulrik Sandborg-Petersen
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License as
@@ -97324,12 +98205,10 @@ int yylex(void *lvalp, void *parm)
 
 
 #line 92 "MQL/mql_lexer.cpp"
-        /**************** leaving MQL/mql_lexer.cpp temporarily *****************/
-/**************** A copy of include/mqlpars.h *****************/
-
-
+/**************** leaving MQL/mql_lexer.cpp temporarily *****************/
+/**************** A copy of include/mqlpars.h ****************/
 #line 1 "include/mqlpars.h"
-        #define T_KEY_GO                           1
+#define T_KEY_GO                           1
 #define T_KEY_CREATE                       2
 #define T_KEY_DATABASE                     3
 #define T_IDENTIFIER                       4
@@ -97437,32 +98316,34 @@ int yylex(void *lvalp, void *parm)
 #define T_KEY_NORETRIEVE                 106
 #define T_KEY_RETRIEVE                   107
 #define T_KEY_PART_OF                    108
-#define T_KEY_OVERLAP                    109
-#define T_KEY_UNIVERSE                   110
-#define T_KEY_SUBSTRATE                  111
-#define T_KEY_LESS_THAN                  112
-#define T_KEY_GREATER_THAN               113
-#define T_KEY_NOT_EQUAL                  114
-#define T_KEY_LESS_THAN_OR_EQUAL         115
-#define T_KEY_GREATER_THAN_OR_EQUAL      116
-#define T_KEY_TILDE                      117
-#define T_KEY_NOT_TILDE                  118
-#define T_KEY_HAS                        119
-#define T_KEY_DOT                        120
-#define T_KEY_OPT_GAP                    121
-#define T_KEY_GAP                        122
-#define T_KEY_POWER                      123
-#define T_KEY_BETWEEN                    124
+#define T_KEY_STARTS_IN                  109
+#define T_KEY_OVERLAP                    110
+#define T_KEY_UNIVERSE                   111
+#define T_KEY_SUBSTRATE                  112
+#define T_KEY_LESS_THAN                  113
+#define T_KEY_GREATER_THAN               114
+#define T_KEY_NOT_EQUAL                  115
+#define T_KEY_LESS_THAN_OR_EQUAL         116
+#define T_KEY_GREATER_THAN_OR_EQUAL      117
+#define T_KEY_TILDE                      118
+#define T_KEY_NOT_TILDE                  119
+#define T_KEY_HAS                        120
+#define T_KEY_DOT                        121
+#define T_KEY_OPT_GAP                    122
+#define T_KEY_GAP                        123
+#define T_KEY_POWER                      124
+#define T_KEY_BETWEEN                    125
+
 /**************** continuing MQL/mql_lexer.cpp where we left off *****************/
 
 
 #line 93 "MQL/mql_lexer.cpp"
-        #include <iostream>
+#include <iostream>
 /**************** already included string_func.h -- not including again *****************/
 
 
 #line 95 "MQL/mql_lexer.cpp"
-        
+
 #undef YYCTYPE
 #undef YYCURSOR
 #undef YYLIMIT
@@ -97606,25 +98487,25 @@ xx2:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'R') {
 		if (yych <= 'N') {
-			if (yych == 'A') goto xx534;
+			if (yych == 'A') goto xx542;
 			goto xx94;
 		} else {
-			if (yych <= 'O') goto xx535;
+			if (yych <= 'O') goto xx543;
 			if (yych <= 'Q') goto xx94;
-			goto xx536;
+			goto xx544;
 		}
 	} else {
 		if (yych <= 'n') {
-			if (yych == 'a') goto xx534;
+			if (yych == 'a') goto xx542;
 			goto xx94;
 		} else {
-			if (yych <= 'o') goto xx535;
-			if (yych == 'r') goto xx536;
+			if (yych <= 'o') goto xx543;
+			if (yych == 'r') goto xx544;
 			goto xx94;
 		}
 	}
 xx3:
-#line 293 "./mql.re"
+#line 294 "./mql.re"
 	{ addToken();
 			      MQL_TOKEN_RETURN(STRING_MAGIC, T_IDENTIFIER);
 			    }
@@ -97633,20 +98514,20 @@ xx4:
 	yych = *++YYCURSOR;
 	if (yych <= 'S') {
 		if (yych <= 'O') {
-			if (yych == 'N') goto xx506;
+			if (yych == 'N') goto xx514;
 			goto xx94;
 		} else {
-			if (yych <= 'P') goto xx507;
+			if (yych <= 'P') goto xx515;
 			if (yych <= 'R') goto xx94;
-			goto xx508;
+			goto xx516;
 		}
 	} else {
 		if (yych <= 'o') {
-			if (yych == 'n') goto xx506;
+			if (yych == 'n') goto xx514;
 			goto xx94;
 		} else {
-			if (yych <= 'p') goto xx507;
-			if (yych == 's') goto xx508;
+			if (yych <= 'p') goto xx515;
+			if (yych == 's') goto xx516;
 			goto xx94;
 		}
 	}
@@ -97944,7 +98825,7 @@ xx22:
 xx23:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) == '.') goto xx120;
-#line 289 "./mql.re"
+#line 290 "./mql.re"
 	{ MQL_TOKEN_RETURN(".", T_KEY_DOT); }
 #line 581 "./mql_lexer.cpp"
 xx25:
@@ -97961,7 +98842,7 @@ xx27:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) == '<') goto xx107;
 	if (yych == '>') goto xx105;
-#line 269 "./mql.re"
+#line 270 "./mql.re"
 	{ MQL_TOKEN_RETURN("=", T_KEY_EQUALS);  }
 #line 598 "./mql_lexer.cpp"
 xx29:
@@ -97970,80 +98851,80 @@ xx29:
 	if (yych <= '=') goto xx101;
 	if (yych <= '>') goto xx103;
 xx30:
-#line 270 "./mql.re"
+#line 271 "./mql.re"
 	{ MQL_TOKEN_RETURN("<", T_KEY_LESS_THAN);  }
 #line 607 "./mql_lexer.cpp"
 xx31:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) == '=') goto xx99;
-#line 271 "./mql.re"
+#line 272 "./mql.re"
 	{ MQL_TOKEN_RETURN(">", T_KEY_GREATER_THAN);  }
 #line 613 "./mql_lexer.cpp"
 xx33:
 	++YYCURSOR;
-#line 277 "./mql.re"
+#line 278 "./mql.re"
 	{ MQL_TOKEN_RETURN("~", T_KEY_TILDE); }
 #line 618 "./mql_lexer.cpp"
 xx35:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) == '~') goto xx97;
-#line 292 "./mql.re"
+#line 293 "./mql.re"
 	{ MQL_TOKEN_RETURN("!", T_KEY_EXCLAMATION); }
 #line 624 "./mql_lexer.cpp"
 xx37:
 	++YYCURSOR;
-#line 279 "./mql.re"
+#line 280 "./mql.re"
 	{ MQL_TOKEN_RETURN("[", T_KEY_OPEN_SQUARE_BRACKET); }
 #line 629 "./mql_lexer.cpp"
 xx39:
 	++YYCURSOR;
-#line 280 "./mql.re"
+#line 281 "./mql.re"
 	{ MQL_TOKEN_RETURN("]", T_KEY_CLOSE_SQUARE_BRACKET); }
 #line 634 "./mql_lexer.cpp"
 xx41:
 	++YYCURSOR;
-#line 281 "./mql.re"
+#line 282 "./mql.re"
 	{ MQL_TOKEN_RETURN("{", T_KEY_OPEN_BRACE);  }
 #line 639 "./mql_lexer.cpp"
 xx43:
 	++YYCURSOR;
-#line 282 "./mql.re"
+#line 283 "./mql.re"
 	{ MQL_TOKEN_RETURN("}", T_KEY_CLOSE_BRACE);  }
 #line 644 "./mql_lexer.cpp"
 xx45:
 	++YYCURSOR;
-#line 283 "./mql.re"
+#line 284 "./mql.re"
 	{ MQL_TOKEN_RETURN("(", T_KEY_OPEN_BRACKET); }
 #line 649 "./mql_lexer.cpp"
 xx47:
 	++YYCURSOR;
-#line 284 "./mql.re"
+#line 285 "./mql.re"
 	{ MQL_TOKEN_RETURN(")", T_KEY_CLOSE_BRACKET); }
 #line 654 "./mql_lexer.cpp"
 xx49:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) == '=') goto xx95;
-#line 286 "./mql.re"
+#line 287 "./mql.re"
 	{ MQL_TOKEN_RETURN(":", T_KEY_COLON); }
 #line 660 "./mql_lexer.cpp"
 xx51:
 	++YYCURSOR;
-#line 287 "./mql.re"
+#line 288 "./mql.re"
 	{ MQL_TOKEN_RETURN(";", T_KEY_SEMICOLON); }
 #line 665 "./mql_lexer.cpp"
 xx53:
 	++YYCURSOR;
-#line 288 "./mql.re"
+#line 289 "./mql.re"
 	{ MQL_TOKEN_RETURN(",", T_KEY_COMMA); }
 #line 670 "./mql_lexer.cpp"
 xx55:
 	++YYCURSOR;
-#line 290 "./mql.re"
+#line 291 "./mql.re"
 	{ MQL_TOKEN_RETURN("*", T_KEY_STAR); }
 #line 675 "./mql_lexer.cpp"
 xx57:
 	++YYCURSOR;
-#line 291 "./mql.re"
+#line 292 "./mql.re"
 	{ MQL_TOKEN_RETURN("-", T_KEY_DASH); }
 #line 680 "./mql_lexer.cpp"
 xx59:
@@ -98059,7 +98940,7 @@ xx60:
 		if (yych <= 'z') goto xx88;
 	}
 xx61:
-#line 313 "./mql.re"
+#line 314 "./mql.re"
 	{ yylval->setChar(*tok);
 	    MQL_TOKEN_RETURN(CHAR_MAGIC, *tok); }
 #line 697 "./mql_lexer.cpp"
@@ -98068,13 +98949,13 @@ xx62:
 	if ((yych = *YYCURSOR) <= '/') goto xx63;
 	if (yych <= '9') goto xx79;
 xx63:
-#line 298 "./mql.re"
+#line 299 "./mql.re"
 	{ addInteger();
                               MQL_TOKEN_RETURN(INTEGER_MAGIC, T_INTEGER); }
 #line 706 "./mql_lexer.cpp"
 xx64:
 	++YYCURSOR;
-#line 300 "./mql.re"
+#line 301 "./mql.re"
 	{ yylval->setString(new std::string);
 			      yylval->pString->reserve(32);
 			      goto stringdq; 
@@ -98082,7 +98963,7 @@ xx64:
 #line 714 "./mql_lexer.cpp"
 xx66:
 	++YYCURSOR;
-#line 304 "./mql.re"
+#line 305 "./mql.re"
 	{ yylval->setString(new std::string);
 			      yylval->pString->reserve(32);
 			      goto stringsq; 
@@ -98090,27 +98971,27 @@ xx66:
 #line 722 "./mql_lexer.cpp"
 xx68:
 	++YYCURSOR;
-#line 308 "./mql.re"
+#line 309 "./mql.re"
 	{ goto scan; }
 #line 727 "./mql_lexer.cpp"
 xx70:
 	++YYCURSOR;
-#line 309 "./mql.re"
+#line 310 "./mql.re"
 	{ goto scan; }
 #line 732 "./mql_lexer.cpp"
 xx72:
 	++YYCURSOR;
-#line 310 "./mql.re"
+#line 311 "./mql.re"
 	{ goto scan; }
 #line 737 "./mql_lexer.cpp"
 xx74:
 	++YYCURSOR;
-#line 311 "./mql.re"
+#line 312 "./mql.re"
 	{ goto scan; }
 #line 742 "./mql_lexer.cpp"
 xx76:
 	++YYCURSOR;
-#line 312 "./mql.re"
+#line 313 "./mql.re"
 	{ if (cur >= lim) { goto end; } }
 #line 747 "./mql_lexer.cpp"
 xx78:
@@ -98159,7 +99040,7 @@ xx88:
 		}
 	}
 xx90:
-#line 296 "./mql.re"
+#line 297 "./mql.re"
 	{ addToken();
                                            MQL_TOKEN_RETURN("mark", T_MARK); }
 #line 797 "./mql_lexer.cpp"
@@ -98197,37 +99078,37 @@ xx94:
 	}
 xx95:
 	++YYCURSOR;
-#line 285 "./mql.re"
+#line 286 "./mql.re"
 	{ MQL_TOKEN_RETURN(":=", T_KEY_ASSIGN);  }
 #line 834 "./mql_lexer.cpp"
 xx97:
 	++YYCURSOR;
-#line 278 "./mql.re"
+#line 279 "./mql.re"
 	{ MQL_TOKEN_RETURN("!~", T_KEY_NOT_TILDE); }
 #line 839 "./mql_lexer.cpp"
 xx99:
 	++YYCURSOR;
-#line 275 "./mql.re"
+#line 276 "./mql.re"
 	{ MQL_TOKEN_RETURN(">=", T_KEY_GREATER_THAN_OR_EQUAL);  }
 #line 844 "./mql_lexer.cpp"
 xx101:
 	++YYCURSOR;
-#line 273 "./mql.re"
+#line 274 "./mql.re"
 	{ MQL_TOKEN_RETURN("<=", T_KEY_LESS_THAN_OR_EQUAL);  }
 #line 849 "./mql_lexer.cpp"
 xx103:
 	++YYCURSOR;
-#line 272 "./mql.re"
+#line 273 "./mql.re"
 	{ MQL_TOKEN_RETURN("<>", T_KEY_NOT_EQUAL);  }
 #line 854 "./mql_lexer.cpp"
 xx105:
 	++YYCURSOR;
-#line 276 "./mql.re"
+#line 277 "./mql.re"
 	{ MQL_TOKEN_RETURN("=>", T_KEY_GREATER_THAN_OR_EQUAL);  }
 #line 859 "./mql_lexer.cpp"
 xx107:
 	++YYCURSOR;
-#line 274 "./mql.re"
+#line 275 "./mql.re"
 	{ MQL_TOKEN_RETURN("=<", T_KEY_LESS_THAN_OR_EQUAL);  }
 #line 864 "./mql_lexer.cpp"
 xx109:
@@ -98888,7 +99769,7 @@ xx208:
 		}
 	}
 xx209:
-#line 268 "./mql.re"
+#line 269 "./mql.re"
 	{ MQL_TOKEN_RETURN("encoding", T_KEY_ENCODING); }
 #line 1525 "./mql_lexer.cpp"
 xx210:
@@ -99254,7 +100135,7 @@ xx261:
 		}
 	}
 xx262:
-#line 267 "./mql.re"
+#line 268 "./mql.re"
 	{ MQL_TOKEN_RETURN("replace", T_KEY_REPLACE); }
 #line 1891 "./mql_lexer.cpp"
 xx263:
@@ -100161,7 +101042,7 @@ xx392:
 		}
 	}
 xx393:
-#line 265 "./mql.re"
+#line 266 "./mql.re"
 	{ MQL_TOKEN_RETURN("intersect", T_KEY_INTERSECT); }
 #line 2798 "./mql_lexer.cpp"
 xx394:
@@ -100512,7 +101393,7 @@ xx444:
 		}
 	}
 xx445:
-#line 266 "./mql.re"
+#line 267 "./mql.re"
 	{ MQL_TOKEN_RETURN("difference", T_KEY_DIFFERENCE); }
 #line 3149 "./mql_lexer.cpp"
 xx446:
@@ -100622,38 +101503,48 @@ xx464:
 	yych = *++YYCURSOR;
 	if (yych <= 'T') {
 		if (yych <= 'K') {
-			if (yych == 'G') goto xx492;
+			if (yych == 'G') goto xx500;
 			goto xx94;
 		} else {
-			if (yych <= 'L') goto xx491;
+			if (yych <= 'L') goto xx499;
 			if (yych <= 'S') goto xx94;
-			goto xx493;
+			goto xx501;
 		}
 	} else {
 		if (yych <= 'k') {
-			if (yych == 'g') goto xx492;
+			if (yych == 'g') goto xx500;
 			goto xx94;
 		} else {
-			if (yych <= 'l') goto xx491;
-			if (yych == 't') goto xx493;
+			if (yych <= 'l') goto xx499;
+			if (yych == 't') goto xx501;
 			goto xx94;
 		}
 	}
 xx465:
 	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx487;
-	if (yych == 'e') goto xx487;
+	if (yych == 'E') goto xx495;
+	if (yych == 'e') goto xx495;
 	goto xx94;
 xx466:
 	yych = *++YYCURSOR;
-	if (yych == 'N') goto xx482;
-	if (yych == 'n') goto xx482;
+	if (yych == 'N') goto xx490;
+	if (yych == 'n') goto xx490;
 	goto xx94;
 xx467:
 	yych = *++YYCURSOR;
-	if (yych == 'R') goto xx477;
-	if (yych == 'r') goto xx477;
-	goto xx94;
+	if (yych <= 'R') {
+		if (yych == 'A') goto xx478;
+		if (yych <= 'Q') goto xx94;
+		goto xx477;
+	} else {
+		if (yych <= 'a') {
+			if (yych <= '`') goto xx94;
+			goto xx478;
+		} else {
+			if (yych == 'r') goto xx477;
+			goto xx94;
+		}
+	}
 xx468:
 	yych = *++YYCURSOR;
 	if (yych == 'B') goto xx469;
@@ -100699,432 +101590,422 @@ xx475:
 xx476:
 #line 223 "./mql.re"
 	{ MQL_TOKEN_RETURN("substrate", T_KEY_SUBSTRATE);  }
-#line 3334 "./mql_lexer.cpp"
+#line 3344 "./mql_lexer.cpp"
 xx477:
 	yych = *++YYCURSOR;
-	if (yych == 'I') goto xx478;
-	if (yych != 'i') goto xx94;
+	if (yych == 'I') goto xx486;
+	if (yych == 'i') goto xx486;
+	goto xx94;
 xx478:
 	yych = *++YYCURSOR;
-	if (yych == 'N') goto xx479;
-	if (yych != 'n') goto xx94;
+	if (yych == 'R') goto xx479;
+	if (yych != 'r') goto xx94;
 xx479:
 	yych = *++YYCURSOR;
-	if (yych == 'G') goto xx480;
-	if (yych != 'g') goto xx94;
+	if (yych == 'T') goto xx480;
+	if (yych != 't') goto xx94;
 xx480:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx481;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx93;
-		} else {
-			if (yych <= '`') goto xx481;
-			if (yych <= 'z') goto xx93;
-		}
-	}
-xx481:
-#line 197 "./mql.re"
-	{ MQL_TOKEN_RETURN("string", T_KEY_STRING);  }
-#line 3364 "./mql_lexer.cpp"
-xx482:
 	yych = *++YYCURSOR;
-	if (yych == 'G') goto xx483;
-	if (yych != 'g') goto xx94;
+	if (yych == 'S') goto xx481;
+	if (yych != 's') goto xx94;
+xx481:
+	yych = *++YYCURSOR;
+	if (yych != '_') goto xx94;
+	yych = *++YYCURSOR;
+	if (yych == 'I') goto xx483;
+	if (yych != 'i') goto xx94;
 xx483:
 	yych = *++YYCURSOR;
-	if (yych == 'L') goto xx484;
-	if (yych != 'l') goto xx94;
+	if (yych == 'N') goto xx484;
+	if (yych != 'n') goto xx94;
 xx484:
-	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx485;
-	if (yych != 'e') goto xx94;
-xx485:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx486;
+		if (yych <= '/') goto xx485;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx486;
+			if (yych <= '`') goto xx485;
 			if (yych <= 'z') goto xx93;
 		}
 	}
+xx485:
+#line 265 "./mql.re"
+	{ MQL_TOKEN_RETURN("starts_in", T_KEY_STARTS_IN); }
+#line 3389 "./mql_lexer.cpp"
 xx486:
-#line 213 "./mql.re"
-	{ MQL_TOKEN_RETURN("single", T_KEY_SINGLE); }
-#line 3394 "./mql_lexer.cpp"
+	yych = *++YYCURSOR;
+	if (yych == 'N') goto xx487;
+	if (yych != 'n') goto xx94;
 xx487:
 	yych = *++YYCURSOR;
-	if (yych == 'A') goto xx488;
-	if (yych != 'a') goto xx94;
+	if (yych == 'G') goto xx488;
+	if (yych != 'g') goto xx94;
 xx488:
-	yych = *++YYCURSOR;
-	if (yych == 'F') goto xx489;
-	if (yych != 'f') goto xx94;
-xx489:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx490;
+		if (yych <= '/') goto xx489;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx490;
+			if (yych <= '`') goto xx489;
 			if (yych <= 'z') goto xx93;
 		}
 	}
+xx489:
+#line 197 "./mql.re"
+	{ MQL_TOKEN_RETURN("string", T_KEY_STRING);  }
+#line 3415 "./mql_lexer.cpp"
 xx490:
-#line 257 "./mql.re"
-	{ MQL_TOKEN_RETURN("sheaf", T_KEY_SHEAF); }
-#line 3420 "./mql_lexer.cpp"
+	yych = *++YYCURSOR;
+	if (yych == 'G') goto xx491;
+	if (yych != 'g') goto xx94;
 xx491:
 	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx502;
-	if (yych == 'e') goto xx502;
-	goto xx94;
+	if (yych == 'L') goto xx492;
+	if (yych != 'l') goto xx94;
 xx492:
 	yych = *++YYCURSOR;
-	if (yych == 'M') goto xx497;
-	if (yych == 'm') goto xx497;
-	goto xx94;
+	if (yych == 'E') goto xx493;
+	if (yych != 'e') goto xx94;
 xx493:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx494;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx494;
+			if (yych <= 'z') goto xx93;
+		}
+	}
+xx494:
+#line 213 "./mql.re"
+	{ MQL_TOKEN_RETURN("single", T_KEY_SINGLE); }
+#line 3445 "./mql_lexer.cpp"
+xx495:
+	yych = *++YYCURSOR;
+	if (yych == 'A') goto xx496;
+	if (yych != 'a') goto xx94;
+xx496:
+	yych = *++YYCURSOR;
+	if (yych == 'F') goto xx497;
+	if (yych != 'f') goto xx94;
+xx497:
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx498;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx498;
+			if (yych <= 'z') goto xx93;
+		}
+	}
+xx498:
+#line 257 "./mql.re"
+	{ MQL_TOKEN_RETURN("sheaf", T_KEY_SHEAF); }
+#line 3471 "./mql_lexer.cpp"
+xx499:
+	yych = *++YYCURSOR;
+	if (yych == 'E') goto xx510;
+	if (yych == 'e') goto xx510;
+	goto xx94;
+xx500:
+	yych = *++YYCURSOR;
+	if (yych == 'M') goto xx505;
+	if (yych == 'm') goto xx505;
+	goto xx94;
+xx501:
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
 		if (yych <= '@') {
-			if (yych <= '/') goto xx494;
+			if (yych <= '/') goto xx502;
 			if (yych <= '9') goto xx93;
 		} else {
-			if (yych == 'S') goto xx495;
+			if (yych == 'S') goto xx503;
 			goto xx93;
 		}
 	} else {
 		if (yych <= '`') {
 			if (yych == '_') goto xx93;
 		} else {
-			if (yych == 's') goto xx495;
+			if (yych == 's') goto xx503;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx494:
+xx502:
 #line 260 "./mql.re"
 	{ MQL_TOKEN_RETURN("set", T_KEY_SET); }
-#line 3452 "./mql_lexer.cpp"
-xx495:
+#line 3503 "./mql_lexer.cpp"
+xx503:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx496;
+		if (yych <= '/') goto xx504;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx496;
+			if (yych <= '`') goto xx504;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx496:
+xx504:
 #line 261 "./mql.re"
 	{ MQL_TOKEN_RETURN("sets", T_KEY_SETS); }
-#line 3470 "./mql_lexer.cpp"
-xx497:
-	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx498;
-	if (yych != 'e') goto xx94;
-xx498:
-	yych = *++YYCURSOR;
-	if (yych == 'N') goto xx499;
-	if (yych != 'n') goto xx94;
-xx499:
-	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx500;
-	if (yych != 't') goto xx94;
-xx500:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx501;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx93;
-		} else {
-			if (yych <= '`') goto xx501;
-			if (yych <= 'z') goto xx93;
-		}
-	}
-xx501:
-#line 211 "./mql.re"
-	{ MQL_TOKEN_RETURN("segment", T_KEY_SEGMENT);  }
-#line 3500 "./mql_lexer.cpp"
-xx502:
-	yych = *++YYCURSOR;
-	if (yych == 'C') goto xx503;
-	if (yych != 'c') goto xx94;
-xx503:
-	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx504;
-	if (yych != 't') goto xx94;
-xx504:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx505;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx93;
-		} else {
-			if (yych <= '`') goto xx505;
-			if (yych <= 'z') goto xx93;
-		}
-	}
+#line 3521 "./mql_lexer.cpp"
 xx505:
-#line 173 "./mql.re"
-	{ MQL_TOKEN_RETURN("select", T_KEY_SELECT);  }
-#line 3526 "./mql_lexer.cpp"
+	yych = *++YYCURSOR;
+	if (yych == 'E') goto xx506;
+	if (yych != 'e') goto xx94;
 xx506:
 	yych = *++YYCURSOR;
-	if (yych == 'I') goto xx520;
-	if (yych == 'i') goto xx520;
-	goto xx94;
+	if (yych == 'N') goto xx507;
+	if (yych != 'n') goto xx94;
 xx507:
 	yych = *++YYCURSOR;
-	if (yych == 'D') goto xx515;
-	if (yych == 'd') goto xx515;
-	goto xx94;
+	if (yych == 'T') goto xx508;
+	if (yych != 't') goto xx94;
 xx508:
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx509;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx509;
+			if (yych <= 'z') goto xx93;
+		}
+	}
+xx509:
+#line 211 "./mql.re"
+	{ MQL_TOKEN_RETURN("segment", T_KEY_SEGMENT);  }
+#line 3551 "./mql_lexer.cpp"
+xx510:
+	yych = *++YYCURSOR;
+	if (yych == 'C') goto xx511;
+	if (yych != 'c') goto xx94;
+xx511:
+	yych = *++YYCURSOR;
+	if (yych == 'T') goto xx512;
+	if (yych != 't') goto xx94;
+xx512:
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx513;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx513;
+			if (yych <= 'z') goto xx93;
+		}
+	}
+xx513:
+#line 173 "./mql.re"
+	{ MQL_TOKEN_RETURN("select", T_KEY_SELECT);  }
+#line 3577 "./mql_lexer.cpp"
+xx514:
+	yych = *++YYCURSOR;
+	if (yych == 'I') goto xx528;
+	if (yych == 'i') goto xx528;
+	goto xx94;
+xx515:
+	yych = *++YYCURSOR;
+	if (yych == 'D') goto xx523;
+	if (yych == 'd') goto xx523;
+	goto xx94;
+xx516:
 	yych = *++YYCURSOR;
 	if (yych <= 'I') {
-		if (yych == 'E') goto xx509;
+		if (yych == 'E') goto xx517;
 		if (yych <= 'H') goto xx94;
-		goto xx511;
+		goto xx519;
 	} else {
 		if (yych <= 'e') {
 			if (yych <= 'd') goto xx94;
 		} else {
-			if (yych == 'i') goto xx511;
+			if (yych == 'i') goto xx519;
 			goto xx94;
 		}
 	}
-xx509:
+xx517:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx510;
+		if (yych <= '/') goto xx518;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx510;
+			if (yych <= '`') goto xx518;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx510:
+xx518:
 #line 179 "./mql.re"
 	{ MQL_TOKEN_RETURN("use", T_KEY_USE);  }
-#line 3568 "./mql_lexer.cpp"
-xx511:
+#line 3619 "./mql_lexer.cpp"
+xx519:
 	yych = *++YYCURSOR;
-	if (yych == 'N') goto xx512;
+	if (yych == 'N') goto xx520;
 	if (yych != 'n') goto xx94;
-xx512:
+xx520:
 	yych = *++YYCURSOR;
-	if (yych == 'G') goto xx513;
+	if (yych == 'G') goto xx521;
 	if (yych != 'g') goto xx94;
-xx513:
+xx521:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx514;
+		if (yych <= '/') goto xx522;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx514;
+			if (yych <= '`') goto xx522;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx514:
+xx522:
 #line 227 "./mql.re"
 	{ MQL_TOKEN_RETURN("using", T_KEY_USING);  }
-#line 3594 "./mql_lexer.cpp"
-xx515:
+#line 3645 "./mql_lexer.cpp"
+xx523:
 	yych = *++YYCURSOR;
-	if (yych == 'A') goto xx516;
+	if (yych == 'A') goto xx524;
 	if (yych != 'a') goto xx94;
-xx516:
+xx524:
 	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx517;
+	if (yych == 'T') goto xx525;
 	if (yych != 't') goto xx94;
-xx517:
+xx525:
 	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx518;
+	if (yych == 'E') goto xx526;
 	if (yych != 'e') goto xx94;
-xx518:
+xx526:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx519;
+		if (yych <= '/') goto xx527;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx519;
+			if (yych <= '`') goto xx527;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx519:
+xx527:
 #line 172 "./mql.re"
 	{ MQL_TOKEN_RETURN("update", T_KEY_UPDATE); }
-#line 3624 "./mql_lexer.cpp"
-xx520:
+#line 3675 "./mql_lexer.cpp"
+xx528:
 	yych = *++YYCURSOR;
 	if (yych <= 'V') {
 		if (yych <= 'P') {
 			if (yych != 'O') goto xx94;
 		} else {
-			if (yych <= 'Q') goto xx522;
+			if (yych <= 'Q') goto xx530;
 			if (yych <= 'U') goto xx94;
-			goto xx523;
+			goto xx531;
 		}
 	} else {
 		if (yych <= 'p') {
 			if (yych != 'o') goto xx94;
 		} else {
-			if (yych <= 'q') goto xx522;
-			if (yych == 'v') goto xx523;
+			if (yych <= 'q') goto xx530;
+			if (yych == 'v') goto xx531;
 			goto xx94;
 		}
 	}
 	yych = *++YYCURSOR;
-	if (yych == 'N') goto xx532;
-	if (yych == 'n') goto xx532;
+	if (yych == 'N') goto xx540;
+	if (yych == 'n') goto xx540;
 	goto xx94;
-xx522:
-	yych = *++YYCURSOR;
-	if (yych == 'U') goto xx529;
-	if (yych == 'u') goto xx529;
-	goto xx94;
-xx523:
-	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx524;
-	if (yych != 'e') goto xx94;
-xx524:
-	yych = *++YYCURSOR;
-	if (yych == 'R') goto xx525;
-	if (yych != 'r') goto xx94;
-xx525:
-	yych = *++YYCURSOR;
-	if (yych == 'S') goto xx526;
-	if (yych != 's') goto xx94;
-xx526:
-	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx527;
-	if (yych != 'e') goto xx94;
-xx527:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx528;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx93;
-		} else {
-			if (yych <= '`') goto xx528;
-			if (yych <= 'z') goto xx93;
-		}
-	}
-xx528:
-#line 222 "./mql.re"
-	{ MQL_TOKEN_RETURN("universe", T_KEY_UNIVERSE);  }
-#line 3686 "./mql_lexer.cpp"
-xx529:
-	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx530;
-	if (yych != 'e') goto xx94;
 xx530:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx531;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx93;
-		} else {
-			if (yych <= '`') goto xx531;
-			if (yych <= 'z') goto xx93;
-		}
-	}
+	yych = *++YYCURSOR;
+	if (yych == 'U') goto xx537;
+	if (yych == 'u') goto xx537;
+	goto xx94;
 xx531:
-#line 226 "./mql.re"
-	{ MQL_TOKEN_RETURN("unique", T_KEY_UNIQUE);  }
-#line 3708 "./mql_lexer.cpp"
+	yych = *++YYCURSOR;
+	if (yych == 'E') goto xx532;
+	if (yych != 'e') goto xx94;
 xx532:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx533;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx93;
-		} else {
-			if (yych <= '`') goto xx533;
-			if (yych <= 'z') goto xx93;
-		}
-	}
+	yych = *++YYCURSOR;
+	if (yych == 'R') goto xx533;
+	if (yych != 'r') goto xx94;
 xx533:
-#line 262 "./mql.re"
-	{ MQL_TOKEN_RETURN("union", T_KEY_UNION); }
-#line 3726 "./mql_lexer.cpp"
+	yych = *++YYCURSOR;
+	if (yych == 'S') goto xx534;
+	if (yych != 's') goto xx94;
 xx534:
 	yych = *++YYCURSOR;
-	if (yych == 'L') goto xx561;
-	if (yych == 'l') goto xx561;
-	goto xx94;
+	if (yych == 'E') goto xx535;
+	if (yych != 'e') goto xx94;
 xx535:
-	yych = *++YYCURSOR;
-	if (yych <= 'N') {
-		if (yych <= 'L') goto xx94;
-		if (yych <= 'M') goto xx542;
-		goto xx543;
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx536;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
 	} else {
-		if (yych <= 'l') goto xx94;
-		if (yych <= 'm') goto xx542;
-		if (yych <= 'n') goto xx543;
-		goto xx94;
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx536;
+			if (yych <= 'z') goto xx93;
+		}
 	}
 xx536:
-	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx537;
-	if (yych != 'e') goto xx94;
+#line 222 "./mql.re"
+	{ MQL_TOKEN_RETURN("universe", T_KEY_UNIVERSE);  }
+#line 3737 "./mql_lexer.cpp"
 xx537:
 	yych = *++YYCURSOR;
-	if (yych == 'A') goto xx538;
-	if (yych != 'a') goto xx94;
-xx538:
-	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx539;
-	if (yych != 't') goto xx94;
-xx539:
-	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx540;
+	if (yych == 'E') goto xx538;
 	if (yych != 'e') goto xx94;
+xx538:
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx539;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx539;
+			if (yych <= 'z') goto xx93;
+		}
+	}
+xx539:
+#line 226 "./mql.re"
+	{ MQL_TOKEN_RETURN("unique", T_KEY_UNIQUE);  }
+#line 3759 "./mql_lexer.cpp"
 xx540:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
@@ -101140,337 +102021,388 @@ xx540:
 		}
 	}
 xx541:
-#line 171 "./mql.re"
-	{ MQL_TOKEN_RETURN("create", T_KEY_CREATE); }
+#line 262 "./mql.re"
+	{ MQL_TOKEN_RETURN("union", T_KEY_UNION); }
 #line 3777 "./mql_lexer.cpp"
 xx542:
 	yych = *++YYCURSOR;
-	if (yych <= 'P') {
-		if (yych == 'M') goto xx551;
-		if (yych <= 'O') goto xx94;
-		goto xx552;
-	} else {
-		if (yych <= 'm') {
-			if (yych <= 'l') goto xx94;
-			goto xx551;
-		} else {
-			if (yych == 'p') goto xx552;
-			goto xx94;
-		}
-	}
+	if (yych == 'L') goto xx569;
+	if (yych == 'l') goto xx569;
+	goto xx94;
 xx543:
 	yych = *++YYCURSOR;
-	if (yych == 'S') goto xx544;
-	if (yych != 's') goto xx94;
+	if (yych <= 'N') {
+		if (yych <= 'L') goto xx94;
+		if (yych <= 'M') goto xx550;
+		goto xx551;
+	} else {
+		if (yych <= 'l') goto xx94;
+		if (yych <= 'm') goto xx550;
+		if (yych <= 'n') goto xx551;
+		goto xx94;
+	}
 xx544:
 	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx545;
-	if (yych != 't') goto xx94;
+	if (yych == 'E') goto xx545;
+	if (yych != 'e') goto xx94;
 xx545:
 	yych = *++YYCURSOR;
 	if (yych == 'A') goto xx546;
 	if (yych != 'a') goto xx94;
 xx546:
 	yych = *++YYCURSOR;
-	if (yych == 'N') goto xx547;
-	if (yych != 'n') goto xx94;
+	if (yych == 'T') goto xx547;
+	if (yych != 't') goto xx94;
 xx547:
 	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx548;
-	if (yych != 't') goto xx94;
+	if (yych == 'E') goto xx548;
+	if (yych != 'e') goto xx94;
 xx548:
-	yych = *++YYCURSOR;
-	if (yych == 'S') goto xx549;
-	if (yych != 's') goto xx94;
-xx549:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx550;
+		if (yych <= '/') goto xx549;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx550;
+			if (yych <= '`') goto xx549;
 			if (yych <= 'z') goto xx93;
 		}
 	}
+xx549:
+#line 171 "./mql.re"
+	{ MQL_TOKEN_RETURN("create", T_KEY_CREATE); }
+#line 3828 "./mql_lexer.cpp"
 xx550:
-#line 210 "./mql.re"
-	{ MQL_TOKEN_RETURN("constants", T_KEY_CONSTANTS);  }
-#line 3834 "./mql_lexer.cpp"
+	yych = *++YYCURSOR;
+	if (yych <= 'P') {
+		if (yych == 'M') goto xx559;
+		if (yych <= 'O') goto xx94;
+		goto xx560;
+	} else {
+		if (yych <= 'm') {
+			if (yych <= 'l') goto xx94;
+			goto xx559;
+		} else {
+			if (yych == 'p') goto xx560;
+			goto xx94;
+		}
+	}
 xx551:
 	yych = *++YYCURSOR;
-	if (yych == 'I') goto xx558;
-	if (yych == 'i') goto xx558;
-	goto xx94;
+	if (yych == 'S') goto xx552;
+	if (yych != 's') goto xx94;
 xx552:
 	yych = *++YYCURSOR;
-	if (yych == 'U') goto xx553;
-	if (yych != 'u') goto xx94;
+	if (yych == 'T') goto xx553;
+	if (yych != 't') goto xx94;
 xx553:
 	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx554;
-	if (yych != 't') goto xx94;
+	if (yych == 'A') goto xx554;
+	if (yych != 'a') goto xx94;
 xx554:
 	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx555;
-	if (yych != 'e') goto xx94;
+	if (yych == 'N') goto xx555;
+	if (yych != 'n') goto xx94;
 xx555:
 	yych = *++YYCURSOR;
-	if (yych == 'D') goto xx556;
-	if (yych != 'd') goto xx94;
-xx556:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx557;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx93;
-		} else {
-			if (yych <= '`') goto xx557;
-			if (yych <= 'z') goto xx93;
-		}
-	}
-xx557:
-#line 202 "./mql.re"
-	{ MQL_TOKEN_RETURN("computed", T_KEY_COMPUTED);  }
-#line 3873 "./mql_lexer.cpp"
-xx558:
-	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx559;
+	if (yych == 'T') goto xx556;
 	if (yych != 't') goto xx94;
-xx559:
+xx556:
+	yych = *++YYCURSOR;
+	if (yych == 'S') goto xx557;
+	if (yych != 's') goto xx94;
+xx557:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx560;
+		if (yych <= '/') goto xx558;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx560;
+			if (yych <= '`') goto xx558;
 			if (yych <= 'z') goto xx93;
 		}
 	}
+xx558:
+#line 210 "./mql.re"
+	{ MQL_TOKEN_RETURN("constants", T_KEY_CONSTANTS);  }
+#line 3885 "./mql_lexer.cpp"
+xx559:
+	yych = *++YYCURSOR;
+	if (yych == 'I') goto xx566;
+	if (yych == 'i') goto xx566;
+	goto xx94;
 xx560:
-#line 184 "./mql.re"
-	{ MQL_TOKEN_RETURN("commit", T_KEY_COMMIT); }
-#line 3895 "./mql_lexer.cpp"
+	yych = *++YYCURSOR;
+	if (yych == 'U') goto xx561;
+	if (yych != 'u') goto xx94;
 xx561:
 	yych = *++YYCURSOR;
-	if (yych == 'C') goto xx562;
-	if (yych != 'c') goto xx94;
+	if (yych == 'T') goto xx562;
+	if (yych != 't') goto xx94;
 xx562:
 	yych = *++YYCURSOR;
-	if (yych == 'U') goto xx563;
-	if (yych != 'u') goto xx94;
+	if (yych == 'E') goto xx563;
+	if (yych != 'e') goto xx94;
 xx563:
 	yych = *++YYCURSOR;
-	if (yych == 'L') goto xx564;
-	if (yych != 'l') goto xx94;
+	if (yych == 'D') goto xx564;
+	if (yych != 'd') goto xx94;
 xx564:
-	yych = *++YYCURSOR;
-	if (yych == 'A') goto xx565;
-	if (yych != 'a') goto xx94;
-xx565:
-	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx566;
-	if (yych != 't') goto xx94;
-xx566:
-	yych = *++YYCURSOR;
-	if (yych == 'I') goto xx567;
-	if (yych != 'i') goto xx94;
-xx567:
-	yych = *++YYCURSOR;
-	if (yych == 'O') goto xx568;
-	if (yych != 'o') goto xx94;
-xx568:
-	yych = *++YYCURSOR;
-	if (yych == 'N') goto xx569;
-	if (yych != 'n') goto xx94;
-xx569:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx570;
+		if (yych <= '/') goto xx565;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx570;
+			if (yych <= '`') goto xx565;
 			if (yych <= 'z') goto xx93;
 		}
 	}
+xx565:
+#line 202 "./mql.re"
+	{ MQL_TOKEN_RETURN("computed", T_KEY_COMPUTED);  }
+#line 3924 "./mql_lexer.cpp"
+xx566:
+	yych = *++YYCURSOR;
+	if (yych == 'T') goto xx567;
+	if (yych != 't') goto xx94;
+xx567:
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx568;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx568;
+			if (yych <= 'z') goto xx93;
+		}
+	}
+xx568:
+#line 184 "./mql.re"
+	{ MQL_TOKEN_RETURN("commit", T_KEY_COMMIT); }
+#line 3946 "./mql_lexer.cpp"
+xx569:
+	yych = *++YYCURSOR;
+	if (yych == 'C') goto xx570;
+	if (yych != 'c') goto xx94;
 xx570:
+	yych = *++YYCURSOR;
+	if (yych == 'U') goto xx571;
+	if (yych != 'u') goto xx94;
+xx571:
+	yych = *++YYCURSOR;
+	if (yych == 'L') goto xx572;
+	if (yych != 'l') goto xx94;
+xx572:
+	yych = *++YYCURSOR;
+	if (yych == 'A') goto xx573;
+	if (yych != 'a') goto xx94;
+xx573:
+	yych = *++YYCURSOR;
+	if (yych == 'T') goto xx574;
+	if (yych != 't') goto xx94;
+xx574:
+	yych = *++YYCURSOR;
+	if (yych == 'I') goto xx575;
+	if (yych != 'i') goto xx94;
+xx575:
+	yych = *++YYCURSOR;
+	if (yych == 'O') goto xx576;
+	if (yych != 'o') goto xx94;
+xx576:
+	yych = *++YYCURSOR;
+	if (yych == 'N') goto xx577;
+	if (yych != 'n') goto xx94;
+xx577:
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx578;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx578;
+			if (yych <= 'z') goto xx93;
+		}
+	}
+xx578:
 #line 250 "./mql.re"
 	{ MQL_TOKEN_RETURN("calculation", T_KEY_CALCULATION); }
-#line 3945 "./mql_lexer.cpp"
+#line 3996 "./mql_lexer.cpp"
 }
-#line 315 "./mql.re"
+#line 316 "./mql.re"
 
 
 stringdq:
 	tok = cur;
 
-#line 3953 "./mql_lexer.cpp"
+#line 4004 "./mql_lexer.cpp"
 {
 	YYCTYPE yych;
 	yych = *YYCURSOR;
 	if (yych <= '!') {
-		if (yych <= 0x00) goto xx577;
-		if (yych == '\n') goto xx580;
-		goto xx579;
+		if (yych <= 0x00) goto xx585;
+		if (yych == '\n') goto xx588;
+		goto xx587;
 	} else {
-		if (yych <= '"') goto xx573;
-		if (yych == '\\') goto xx575;
-		goto xx579;
+		if (yych <= '"') goto xx581;
+		if (yych == '\\') goto xx583;
+		goto xx587;
 	}
-xx573:
+xx581:
 	++YYCURSOR;
-#line 320 "./mql.re"
+#line 321 "./mql.re"
 	{ MQL_TOKEN_RETURN(STRING_MAGIC, T_STRING); }
-#line 3970 "./mql_lexer.cpp"
-xx575:
+#line 4021 "./mql_lexer.cpp"
+xx583:
 	yych = *(YYMARKER = ++YYCURSOR);
 	if (yych <= 'b') {
 		if (yych <= '3') {
 			if (yych <= '&') {
-				if (yych == '"') goto xx585;
+				if (yych == '"') goto xx593;
 			} else {
-				if (yych <= '\'') goto xx587;
-				if (yych >= '0') goto xx584;
+				if (yych <= '\'') goto xx595;
+				if (yych >= '0') goto xx592;
 			}
 		} else {
 			if (yych <= '[') {
-				if (yych == '?') goto xx589;
+				if (yych == '?') goto xx597;
 			} else {
-				if (yych <= '\\') goto xx591;
-				if (yych <= '`') goto xx576;
-				if (yych <= 'a') goto xx597;
-				goto xx599;
+				if (yych <= '\\') goto xx599;
+				if (yych <= '`') goto xx584;
+				if (yych <= 'a') goto xx605;
+				goto xx607;
 			}
 		}
 	} else {
 		if (yych <= 'r') {
 			if (yych <= 'm') {
-				if (yych == 'f') goto xx593;
+				if (yych == 'f') goto xx601;
 			} else {
-				if (yych <= 'n') goto xx605;
-				if (yych >= 'r') goto xx595;
+				if (yych <= 'n') goto xx613;
+				if (yych >= 'r') goto xx603;
 			}
 		} else {
 			if (yych <= 'u') {
-				if (yych == 't') goto xx603;
+				if (yych == 't') goto xx611;
 			} else {
-				if (yych <= 'v') goto xx601;
-				if (yych == 'x') goto xx582;
+				if (yych <= 'v') goto xx609;
+				if (yych == 'x') goto xx590;
 			}
 		}
 	}
-xx576:
-#line 347 "./mql.re"
+xx584:
+#line 348 "./mql.re"
 	{ yylval->pString->push_back(*tok);
 			       goto stringdq; }
-#line 4012 "./mql_lexer.cpp"
-xx577:
-	++YYCURSOR;
-#line 346 "./mql.re"
-	{ if (cur >= lim) { goto end; } }
-#line 4017 "./mql_lexer.cpp"
-xx579:
-	yych = *++YYCURSOR;
-	goto xx576;
-xx580:
-	++YYCURSOR;
-#line 349 "./mql.re"
-	{ yylval->pString->push_back('\n');
-			       goto stringdq; }
-#line 4026 "./mql_lexer.cpp"
-xx582:
-	yych = *++YYCURSOR;
-	if (yych <= '@') {
-		if (yych <= '/') goto xx583;
-		if (yych <= '9') goto xx610;
-	} else {
-		if (yych <= 'F') goto xx610;
-		if (yych <= '`') goto xx583;
-		if (yych <= 'f') goto xx610;
-	}
-xx583:
-	YYCURSOR = YYMARKER;
-	goto xx576;
-xx584:
-	yych = *++YYCURSOR;
-	if (yych <= '/') goto xx583;
-	if (yych <= '7') goto xx607;
-	goto xx583;
+#line 4063 "./mql_lexer.cpp"
 xx585:
 	++YYCURSOR;
-#line 331 "./mql.re"
-	{ yylval->pString->push_back('\"'); goto stringdq; }
-#line 4049 "./mql_lexer.cpp"
+#line 347 "./mql.re"
+	{ if (cur >= lim) { goto end; } }
+#line 4068 "./mql_lexer.cpp"
 xx587:
+	yych = *++YYCURSOR;
+	goto xx584;
+xx588:
 	++YYCURSOR;
-#line 330 "./mql.re"
-	{ yylval->pString->push_back('\''); goto stringdq; }
-#line 4054 "./mql_lexer.cpp"
-xx589:
-	++YYCURSOR;
-#line 329 "./mql.re"
-	{ yylval->pString->push_back('\?'); goto stringdq; }
-#line 4059 "./mql_lexer.cpp"
+#line 350 "./mql.re"
+	{ yylval->pString->push_back('\n');
+			       goto stringdq; }
+#line 4077 "./mql_lexer.cpp"
+xx590:
+	yych = *++YYCURSOR;
+	if (yych <= '@') {
+		if (yych <= '/') goto xx591;
+		if (yych <= '9') goto xx618;
+	} else {
+		if (yych <= 'F') goto xx618;
+		if (yych <= '`') goto xx591;
+		if (yych <= 'f') goto xx618;
+	}
 xx591:
-	++YYCURSOR;
-#line 328 "./mql.re"
-	{ yylval->pString->push_back('\\'); goto stringdq; }
-#line 4064 "./mql_lexer.cpp"
+	YYCURSOR = YYMARKER;
+	goto xx584;
+xx592:
+	yych = *++YYCURSOR;
+	if (yych <= '/') goto xx591;
+	if (yych <= '7') goto xx615;
+	goto xx591;
 xx593:
 	++YYCURSOR;
-#line 327 "./mql.re"
-	{ yylval->pString->push_back('\f'); goto stringdq; }
-#line 4069 "./mql_lexer.cpp"
+#line 332 "./mql.re"
+	{ yylval->pString->push_back('\"'); goto stringdq; }
+#line 4100 "./mql_lexer.cpp"
 xx595:
 	++YYCURSOR;
-#line 326 "./mql.re"
-	{ yylval->pString->push_back('\r'); goto stringdq; }
-#line 4074 "./mql_lexer.cpp"
+#line 331 "./mql.re"
+	{ yylval->pString->push_back('\''); goto stringdq; }
+#line 4105 "./mql_lexer.cpp"
 xx597:
 	++YYCURSOR;
-#line 325 "./mql.re"
-	{ yylval->pString->push_back('\a'); goto stringdq; }
-#line 4079 "./mql_lexer.cpp"
+#line 330 "./mql.re"
+	{ yylval->pString->push_back('\?'); goto stringdq; }
+#line 4110 "./mql_lexer.cpp"
 xx599:
 	++YYCURSOR;
-#line 324 "./mql.re"
-	{ yylval->pString->push_back('\b'); goto stringdq; }
-#line 4084 "./mql_lexer.cpp"
+#line 329 "./mql.re"
+	{ yylval->pString->push_back('\\'); goto stringdq; }
+#line 4115 "./mql_lexer.cpp"
 xx601:
 	++YYCURSOR;
-#line 323 "./mql.re"
-	{ yylval->pString->push_back('\v'); goto stringdq; }
-#line 4089 "./mql_lexer.cpp"
+#line 328 "./mql.re"
+	{ yylval->pString->push_back('\f'); goto stringdq; }
+#line 4120 "./mql_lexer.cpp"
 xx603:
 	++YYCURSOR;
-#line 322 "./mql.re"
-	{ yylval->pString->push_back('\t'); goto stringdq; }
-#line 4094 "./mql_lexer.cpp"
+#line 327 "./mql.re"
+	{ yylval->pString->push_back('\r'); goto stringdq; }
+#line 4125 "./mql_lexer.cpp"
 xx605:
 	++YYCURSOR;
-#line 321 "./mql.re"
-	{ yylval->pString->push_back('\n'); goto stringdq; }
-#line 4099 "./mql_lexer.cpp"
+#line 326 "./mql.re"
+	{ yylval->pString->push_back('\a'); goto stringdq; }
+#line 4130 "./mql_lexer.cpp"
 xx607:
-	yych = *++YYCURSOR;
-	if (yych <= '/') goto xx583;
-	if (yych >= '8') goto xx583;
 	++YYCURSOR;
-#line 332 "./mql.re"
+#line 325 "./mql.re"
+	{ yylval->pString->push_back('\b'); goto stringdq; }
+#line 4135 "./mql_lexer.cpp"
+xx609:
+	++YYCURSOR;
+#line 324 "./mql.re"
+	{ yylval->pString->push_back('\v'); goto stringdq; }
+#line 4140 "./mql_lexer.cpp"
+xx611:
+	++YYCURSOR;
+#line 323 "./mql.re"
+	{ yylval->pString->push_back('\t'); goto stringdq; }
+#line 4145 "./mql_lexer.cpp"
+xx613:
+	++YYCURSOR;
+#line 322 "./mql.re"
+	{ yylval->pString->push_back('\n'); goto stringdq; }
+#line 4150 "./mql_lexer.cpp"
+xx615:
+	yych = *++YYCURSOR;
+	if (yych <= '/') goto xx591;
+	if (yych >= '8') goto xx591;
+	++YYCURSOR;
+#line 333 "./mql.re"
 	{ tok += 1; // Go past SLASH 
       		        char szOctal[4];
 			const char *p = tok;
@@ -101481,66 +102413,66 @@ xx607:
 			*q = '\0';
 		        yylval->pString->push_back(octal2char(szOctal)); 
 		        goto stringdq; }
-#line 4116 "./mql_lexer.cpp"
-xx610:
+#line 4167 "./mql_lexer.cpp"
+xx618:
 	yych = *++YYCURSOR;
 	if (yych <= '@') {
-		if (yych <= '/') goto xx583;
-		if (yych >= ':') goto xx583;
+		if (yych <= '/') goto xx591;
+		if (yych >= ':') goto xx591;
 	} else {
-		if (yych <= 'F') goto xx611;
-		if (yych <= '`') goto xx583;
-		if (yych >= 'g') goto xx583;
+		if (yych <= 'F') goto xx619;
+		if (yych <= '`') goto xx591;
+		if (yych >= 'g') goto xx591;
 	}
-xx611:
+xx619:
 	++YYCURSOR;
-#line 342 "./mql.re"
+#line 343 "./mql.re"
 	{ 
 			       	      yylval->pString->push_back(hex2char(tok[2], tok[3]));
 			       	      goto stringdq; 			     
                              }
-#line 4134 "./mql_lexer.cpp"
+#line 4185 "./mql_lexer.cpp"
 }
-#line 351 "./mql.re"
+#line 352 "./mql.re"
 
 
 stringsq:
 	tok = cur;
 
-#line 4142 "./mql_lexer.cpp"
+#line 4193 "./mql_lexer.cpp"
 {
 	YYCTYPE yych;
 	yych = *YYCURSOR;
 	if (yych <= '\n') {
-		if (yych <= 0x00) goto xx617;
-		if (yych <= '\t') goto xx621;
-		goto xx619;
+		if (yych <= 0x00) goto xx625;
+		if (yych <= '\t') goto xx629;
+		goto xx627;
 	} else {
-		if (yych != '\'') goto xx621;
+		if (yych != '\'') goto xx629;
 	}
 	++YYCURSOR;
-#line 356 "./mql.re"
-	{ MQL_TOKEN_RETURN(STRING_MAGIC, T_STRING); }
-#line 4156 "./mql_lexer.cpp"
-xx617:
-	++YYCURSOR;
 #line 357 "./mql.re"
-	{ if (cur >= lim) { goto end; } }
-#line 4161 "./mql_lexer.cpp"
-xx619:
+	{ MQL_TOKEN_RETURN(STRING_MAGIC, T_STRING); }
+#line 4207 "./mql_lexer.cpp"
+xx625:
 	++YYCURSOR;
 #line 358 "./mql.re"
+	{ if (cur >= lim) { goto end; } }
+#line 4212 "./mql_lexer.cpp"
+xx627:
+	++YYCURSOR;
+#line 359 "./mql.re"
 	{ yylval->pString->push_back('\n');
 			       goto stringsq; }
-#line 4167 "./mql_lexer.cpp"
-xx621:
+#line 4218 "./mql_lexer.cpp"
+xx629:
 	++YYCURSOR;
-#line 360 "./mql.re"
+#line 361 "./mql.re"
 	{ yylval->pString->push_back(*tok);
 			       goto stringsq; }
-#line 4173 "./mql_lexer.cpp"
+#line 4224 "./mql_lexer.cpp"
 }
-#line 362 "./mql.re"
+#line 363 "./mql.re"
 
 	
  end:
@@ -101608,11 +102540,10 @@ void MQLScanner::getString(std::string& str)
 
 }
 
-/**************** A copy of MQL/mql_parser.cpp *****************/
 
-
+/**************** A copy of MQL/mql_parser.cpp ****************/
 #line 1 "MQL/mql_parser.cpp"
-        /* Driver template for the LEMON parser generator.
+/* Driver template for the LEMON parser generator.
 ** The author disclaims copyright to this source code.
 */
 /* First off, code is included that follows the "include" declaration
@@ -101628,13 +102559,13 @@ void MQLScanner::getString(std::string& str)
  *
  * Ulrik Petersen
  * Created: 2/27-2001
- * Last update: 4/16-2015
+ * Last update: 4/20-2016
  *
  */
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2001-2015  Ulrik Sandborg-Petersen
+ *   Copyright (C) 2001-2016  Ulrik Sandborg-Petersen
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License as
@@ -101713,69 +102644,69 @@ void MQLScanner::getString(std::string& str)
 
 
 #line 98 "MQL/mql_parser.cpp"
-        #include <cstdlib>
+#include <cstdlib>
 #include <string>
 /**************** already included mql_error.h -- not including again *****************/
 
 
 #line 101 "MQL/mql_parser.cpp"
-        /**************** already included mql_types.h -- not including again *****************/
+/**************** already included mql_types.h -- not including again *****************/
 
 
 #line 102 "MQL/mql_parser.cpp"
-        /**************** already included mql_database_statements.h -- not including again *****************/
+/**************** already included mql_database_statements.h -- not including again *****************/
 
 
 #line 103 "MQL/mql_parser.cpp"
-        /**************** already included mql_enumeration_statements.h -- not including again *****************/
+/**************** already included mql_enumeration_statements.h -- not including again *****************/
 
 
 #line 104 "MQL/mql_parser.cpp"
-        /**************** already included mql_features_statements.h -- not including again *****************/
+/**************** already included mql_features_statements.h -- not including again *****************/
 
 
 #line 105 "MQL/mql_parser.cpp"
-        /**************** already included mql_meta_statements.h -- not including again *****************/
+/**************** already included mql_meta_statements.h -- not including again *****************/
 
 
 #line 106 "MQL/mql_parser.cpp"
-        /**************** already included mql_monads_statements.h -- not including again *****************/
+/**************** already included mql_monads_statements.h -- not including again *****************/
 
 
 #line 107 "MQL/mql_parser.cpp"
-        /**************** already included mql_object_statements.h -- not including again *****************/
+/**************** already included mql_object_statements.h -- not including again *****************/
 
 
 #line 108 "MQL/mql_parser.cpp"
-        /**************** already included mql_object_type_statements.h -- not including again *****************/
+/**************** already included mql_object_type_statements.h -- not including again *****************/
 
 
 #line 109 "MQL/mql_parser.cpp"
-        /**************** already included mql_segment_statements.h -- not including again *****************/
+/**************** already included mql_segment_statements.h -- not including again *****************/
 
 
 #line 110 "MQL/mql_parser.cpp"
-        /**************** already included mql_select_statements.h -- not including again *****************/
+/**************** already included mql_select_statements.h -- not including again *****************/
 
 
 #line 111 "MQL/mql_parser.cpp"
-        /**************** already included mql_query.h -- not including again *****************/
+/**************** already included mql_query.h -- not including again *****************/
 
 
 #line 112 "MQL/mql_parser.cpp"
-        /**************** already included mql_extern.h -- not including again *****************/
+/**************** already included mql_extern.h -- not including again *****************/
 
 
 #line 113 "MQL/mql_parser.cpp"
-        /**************** already included mql_execution_environment.h -- not including again *****************/
+/**************** already included mql_execution_environment.h -- not including again *****************/
 
 
 #line 114 "MQL/mql_parser.cpp"
-        /**************** already included mql_yylex.h -- not including again *****************/
+/**************** already included mql_yylex.h -- not including again *****************/
 
 
 #line 115 "MQL/mql_parser.cpp"
-        
+
 #undef TOKEN
 
 #undef MQLYYCODETYPE
@@ -101851,64 +102782,64 @@ void MQLScanner::getString(std::string& str)
 **    MQLYY_NO_ACTION       The mqlyy_action[] code for no-op
 */
 #define MQLYYCODETYPE unsigned short int
-#define MQLYYNOCODE 300
+#define MQLYYNOCODE 301
 #define MQLYYACTIONTYPE unsigned short int
 #define MQLParserTOKENTYPE Token*
 typedef union {
   int mqlyyinit;
   MQLParserTOKENTYPE mqlyy0;
-  IntegerListNode* mqlyy1;
-  eObjectRangeType mqlyy4;
-  BlockString* mqlyy31;
-  MaxRange* mqlyy36;
-  eMonadUniquenessType mqlyy77;
-  MonadSetChainElement* mqlyy78;
-  eFirstLast mqlyy79;
-  eUniverseOrSubstrate mqlyy85;
-  int mqlyy98;
-  MQLType* mqlyy109;
-  Expression* mqlyy111;
-  BlockString0* mqlyy125;
-  FFeatures* mqlyy142;
-  BlockString1* mqlyy178;
-  bool mqlyy195;
-  eComparisonOp mqlyy202;
-  Statement* mqlyy204;
-  Power* mqlyy208;
-  BlockString2* mqlyy231;
-  StringListNode* mqlyy238;
-  ObjectSpecNoOT* mqlyy247;
-  UsingRange* mqlyy248;
-  MonadSetRelationClause* mqlyy253;
-  FTerm* mqlyy261;
-  OptGapBlock* mqlyy263;
-  eFocusSpec mqlyy311;
-  sheaf_return_type_pair* mqlyy335;
-  monad_m mqlyy348;
-  ObjectReferenceUsage* mqlyy366;
-  FeatureComparison* mqlyy370;
-  GrammarFeature* mqlyy374;
-  Value* mqlyy404;
-  ObjectBlock* mqlyy409;
-  eRetrieval mqlyy410;
-  MQLMonadSetElement* mqlyy434;
-  id_d_t mqlyy444;
-  Topograph* mqlyy445;
-  ID_D* mqlyy451;
-  eSetOperator mqlyy462;
-  FFactor* mqlyy472;
-  GapBlock* mqlyy476;
-  FeatureAssignment* mqlyy484;
-  long mqlyy485;
-  ECDeclaration* mqlyy486;
-  ECUpdate* mqlyy494;
-  FeatureDeclaration* mqlyy541;
-  ObjectSpec* mqlyy545;
-  FeatureUpdate* mqlyy550;
-  Block* mqlyy560;
-  Blocks* mqlyy571;
-  long* mqlyy579;
-  eMonadSetRelationOperation mqlyy586;
+  ObjectReferenceUsage* mqlyy6;
+  GapBlock* mqlyy18;
+  MQLMonadSetElement* mqlyy34;
+  ID_D* mqlyy51;
+  Power* mqlyy68;
+  id_d_t mqlyy72;
+  eFirstLast mqlyy90;
+  eComparisonOp mqlyy96;
+  eMonadSetRelationOperation mqlyy104;
+  eMonadUniquenessType mqlyy123;
+  ObjectBlock* mqlyy125;
+  bool mqlyy137;
+  Expression* mqlyy139;
+  Statement* mqlyy160;
+  FeatureDeclaration* mqlyy193;
+  Value* mqlyy204;
+  BlockString* mqlyy205;
+  GrammarFeature* mqlyy242;
+  long mqlyy249;
+  eFocusSpec mqlyy253;
+  OptGapBlock* mqlyy265;
+  MaxRange* mqlyy278;
+  MonadSetChainElement* mqlyy279;
+  MQLType* mqlyy283;
+  FFeatures* mqlyy288;
+  int mqlyy292;
+  Topograph* mqlyy295;
+  sheaf_return_type_pair* mqlyy309;
+  FTerm* mqlyy313;
+  IntegerListNode* mqlyy327;
+  monad_m mqlyy352;
+  ECUpdate* mqlyy362;
+  ObjectSpec* mqlyy365;
+  eRetrieval mqlyy372;
+  Blocks* mqlyy377;
+  MonadSetRelationClause* mqlyy385;
+  eObjectRangeType mqlyy388;
+  eUniverseOrSubstrate mqlyy397;
+  eSetOperator mqlyy398;
+  FeatureUpdate* mqlyy406;
+  FeatureComparison* mqlyy407;
+  Block* mqlyy414;
+  StringListNode* mqlyy440;
+  BlockString0* mqlyy445;
+  ObjectSpecNoOT* mqlyy457;
+  ECDeclaration* mqlyy461;
+  BlockString1* mqlyy498;
+  FFactor* mqlyy540;
+  BlockString2* mqlyy551;
+  UsingRange* mqlyy582;
+  long* mqlyy587;
+  FeatureAssignment* mqlyy600;
 } MQLYYMINORTYPE;
 #ifndef MQLYYSTACKDEPTH
 #define MQLYYSTACKDEPTH 2000
@@ -101918,15 +102849,15 @@ typedef union {
 #define MQLParserARG_FETCH MQLExecEnv *pEE = mqlyypParser->pEE
 #define MQLParserARG_STORE mqlyypParser->pEE = pEE
 #define MQLYYNSTATE             387
-#define MQLYYNRULE              368
+#define MQLYYNRULE              369
 #define MQLYY_MAX_SHIFT         386
-#define MQLYY_MIN_SHIFTREDUCE   696
-#define MQLYY_MAX_SHIFTREDUCE   1063
-#define MQLYY_MIN_REDUCE        1064
-#define MQLYY_MAX_REDUCE        1431
-#define MQLYY_ERROR_ACTION      1432
-#define MQLYY_ACCEPT_ACTION     1433
-#define MQLYY_NO_ACTION         1434
+#define MQLYY_MIN_SHIFTREDUCE   697
+#define MQLYY_MAX_SHIFTREDUCE   1065
+#define MQLYY_MIN_REDUCE        1066
+#define MQLYY_MAX_REDUCE        1434
+#define MQLYY_ERROR_ACTION      1435
+#define MQLYY_ACCEPT_ACTION     1436
+#define MQLYY_NO_ACTION         1437
 
 /* The mqlyyzerominor constant is used to initialize instances of
 ** MQLYYMINORTYPE objects to zero. */
@@ -101998,299 +102929,299 @@ static const MQLYYMINORTYPE mqlyyzerominor = { 0 };
 */
 #define MQLYY_ACTTAB_COUNT (883)
 static const MQLYYACTIONTYPE mqlyy_action[] = {
- /*     0 */  1433,  386,  697,  698,  699,  700,  701,  702,  703,  704,
- /*    10 */   705,  706,  707,  708,  709,  710,  711,  712,  713,  714,
- /*    20 */   715,  716,  717,  718,  719,  720,  721,  722,  723,  724,
- /*    30 */   725,  726,  727,  728,  729,  730,  731,  732,  733,  734,
- /*    40 */   735,  736,  737,  738,  739,  740,  741,  742,  743,   37,
- /*    50 */   115,  207,  903,  311,  170,  938,  148,  904,  147,   38,
- /*    60 */   164,  988,  251,  980,    4,  303,  235,  250,   69,  306,
- /*    70 */   778,  305,  304,    3,  899,  957,  964,  274,  299,  375,
- /*    80 */    60,  781,  374,  956,  302,  939, 1041, 1042, 1043, 1044,
- /*    90 */  1045,  979,  251,  980,    4,   69,  235,  250,  977,  978,
- /*   100 */    21,  132,  377,    9,   18,  296,  330,  149,   42,   71,
- /*   110 */   267,   95,  815,  160,   10,  831, 1041, 1042, 1043, 1044,
- /*   120 */  1045,   69, 1018,  842,  843,  776,  334,  252,  251,  980,
- /*   130 */     4,  179,  235,  250,  943,  905,  271,  830,  272,  251,
- /*   140 */   980,    4,   69,  985,  250,  976,  251,  980,    4,  940,
- /*   150 */   986,  250, 1041, 1042, 1043, 1044, 1045,  205,  241, 1015,
- /*   160 */  1019,  778,  848, 1041, 1042, 1043, 1044, 1045, 1407,   11,
- /*   170 */  1041, 1042, 1043, 1044, 1045,    1,  207,  872,  310,  100,
- /*   180 */   806,  107, 1024,  842,  843,  242, 1015, 1019,  943,  871,
- /*   190 */    48,  925,    1,  198,  838,  337,  942,  941, 1242,  259,
- /*   200 */   918,  353,  924,  940,  217,  963,  320,  165,  328,  113,
- /*   210 */   243,  241, 1015, 1019,    1,  368,  964,  104,  191,  189,
- /*   220 */   101,  361, 1025, 1026, 1027, 1028, 1029, 1030, 1031, 1032,
- /*   230 */   122,  243,  241, 1015, 1019,   96,   69,  288, 1034,   93,
- /*   240 */   240, 1035,  949,  293,   19,  860,  261,  168,   69,  776,
- /*   250 */   331,  315,  335,  842,  843,  281,  947,  177,  930,  989,
- /*   260 */   990,  953,  307,   68,  335,   68,  824,  825,  826,  372,
- /*   270 */   862,  838,   55,  239,    5,  255,  989,  990,  117,  116,
- /*   280 */    76,  949,  152,  931,  150,  219,  218, 1023,  239,  860,
- /*   290 */   335,  860,  944,  972,  139,  266,  947,   76,  989,  990,
- /*   300 */   973, 1020, 1036, 1033,  156,  153,  815,  842,  843,  312,
- /*   310 */    59,  935,  954,  372,  862,  372,  862,  159,    3,   76,
- /*   320 */     3,  336,   59,  935,    3,  204,  203, 1017, 1019,  187,
- /*   330 */   860,  183,  330,    3,  110,  212,  854,  969,  246, 1016,
- /*   340 */  1019,  999,  904,  810, 1040,  778, 1040,  335,   43,  935,
- /*   350 */  1040,   45,  811,   57,  372,  862,  938,  957,  938, 1040,
- /*   360 */   213,  845,  178,   68,  329,  955,  997,  998, 1052,  232,
- /*   370 */   963,  233,  860,  965,  877,  234,  796, 1009, 1010,  330,
- /*   380 */   224,  964,   95,  815,  237,  974,  939,  331,  939,  824,
- /*   390 */   825,  826,  119, 1050, 1051,  118,  372,  862,  938,  878,
- /*   400 */   875,  819,  295,   68,  121,  244,  936,  159, 1007, 1008,
- /*   410 */   225,   82,  812,   57,  794,  294,  974,  795,    6,  247,
- /*   420 */   995,  284,  953,    7,  247,  974,  855,  276,  939,  878,
- /*   430 */   877,  838,  291,   68,  289,  839,  210,  836,  835,  813,
- /*   440 */   374,  834,  833,  897,  782,  374,  378, 1047,   78,  822,
- /*   450 */   366,  904,  174,  959,  847,  851,  144,  908,  846,  178,
- /*   460 */   220,  880,  249,  921,  920, 1002,  349,  238,   20, 1009,
- /*   470 */  1010,  256,  345,  954,  916,  330,  208,  842,  843,  365,
- /*   480 */   330,  745,  746,  762,  763,  231, 1021,  230, 1022,  128,
- /*   490 */   896,   90,  228,  909,  906,   44,  829,   67,  853,  341,
- /*   500 */   841,  356,  340,  369,  359,   81,  894,  127,  983,   92,
- /*   510 */   343,   92,  946,  214,  773,  347,  945,  192,  371,   79,
- /*   520 */   879,  194,    8,  910,   51,   56,   83,   86, 1058,  369,
- /*   530 */   140,  859,  367,   81,  948,   28,  223,   41,   29, 1038,
- /*   540 */    46,  133,   49,  258,  245,  135,  755,  277,  279,  975,
- /*   550 */    53,  292,  928,  300,  169,  171,  376,  379,  200,  789,
- /*   560 */   788,  787,  786,  785,  869,   15,  202,  108,  227,  221,
- /*   570 */   898,   47,  109,  123,   27,   73,  994, 1063,   30,  114,
- /*   580 */    74,   75, 1062, 1061, 1059,  995,  236,  992,  125,   77,
- /*   590 */   863,  253,  124,   39,  206,  844,  257,  264,  919,  868,
- /*   600 */   923,  263,  131,  129,  268,  130,  873,  275,  278,  823,
- /*   610 */   211,  283,  838,  290,   32,  840,  331,  818,  265,   33,
- /*   620 */   870,  151,  850,  858,  857,  154,  856,  285,  155,  298,
- /*   630 */   157,  158,   34,   72,  758,  756,  753,  163,  308,  380,
- /*   640 */   382,  760,  864,  748,   97,  837,  747,  333,  322,  970,
- /*   650 */   967,  966,  962,  172,  866,  960,  313,  326,  185,  927,
- /*   660 */   832,  316,  364,   66,  327,  865,  324,   13,  363,  808,
- /*   670 */   951,  215,   17,  339,  105,   14,  182,  102,  196,  759,
- /*   680 */   188,  373,  103,  190,  193,  384,  888,  744,  199,  111,
- /*   690 */   887,  886,  222,  881,  226,  926,  201,  112,   62,  186,
- /*   700 */  1056,  229,  890, 1053, 1048,    2, 1057,  120,   92,   84,
- /*   710 */  1363,   22, 1005, 1004,   85, 1003,   40,  126,  248,  981,
- /*   720 */    11,   63,  895,  254,   87,  915,  913,  134,   88,   89,
- /*   730 */   900,  260,  262,  901,  136,  137,  902,  269,   31,  270,
- /*   740 */   273,  138,  827,  971,  141,   50,  914,  142,  280,   64,
- /*   750 */    91,  282,  907,  143,  209,  820,  286,  146,   52,  287,
- /*   760 */   145,   54,  968,   94,   25,  297,  162,  301,  766,  161,
- /*   770 */   814,  166,  765,  764,  817,  167,  309,   98,  961,   12,
- /*   780 */   314,  173,  317,   65,  175,   23,  318,   24,  319, 1331,
- /*   790 */   321,  867,  323,  180,  932,  805,   16,  181,  771,  332,
- /*   800 */   770,  769, 1066,  342,  176,  775,  937,   36,  385,   26,
- /*   810 */   800,  344,  325,   58,  346,  774,   35,  338,  184,  216,
- /*   820 */   348,  793,  352,  350,   99,  792,  791,  950,  197,  351,
- /*   830 */   354,  790,  767,  195,  357,  761,  355,  362,   61,  360,
- /*   840 */   358,  784,  802,  106,  749,   80,  798,  797,  751,  783,
- /*   850 */    70,  381,  383, 1064,  883, 1066, 1066, 1066, 1066,  861,
- /*   860 */  1066, 1066, 1066, 1066, 1066, 1066, 1066, 1066, 1066, 1066,
- /*   870 */  1066, 1066, 1066, 1066, 1066, 1066, 1066, 1066, 1066, 1066,
- /*   880 */  1066, 1066,  370,
+ /*     0 */  1436,  386,  698,  699,  700,  701,  702,  703,  704,  705,
+ /*    10 */   706,  707,  708,  709,  710,  711,  712,  713,  714,  715,
+ /*    20 */   716,  717,  718,  719,  720,  721,  722,  723,  724,  725,
+ /*    30 */   726,  727,  728,  729,  730,  731,  732,  733,  734,  735,
+ /*    40 */   736,  737,  738,  739,  740,  741,  742,  743,  744,   37,
+ /*    50 */   115,   95,  816,  311,  170,  939,  148,  964,  147,   38,
+ /*    60 */   164,  989,  251,  981,    4,  303,  235,  250,  965,  306,
+ /*    70 */   779,  305,  304,    3,  900, 1410,  965,  274,  299,  375,
+ /*    80 */    60,  782,  374,  207,  302,  940, 1043, 1044, 1045, 1046,
+ /*    90 */  1047,  980,  251,  981,    4,   69,  235,  250,  978,  979,
+ /*   100 */    21,  132,  377,    9,   18,  296,  330,  149,   44,   71,
+ /*   110 */   152,  246,  150,  160,   10,  207, 1043, 1044, 1045, 1046,
+ /*   120 */  1047,   69,  879,  843,  844,  777,   68,  252,  251,  981,
+ /*   130 */     4,  179,  235,  250,  334,  906,  271,  931,  272,  251,
+ /*   140 */   981,    4,  944,  986,  250,  977,  251,  981,    4,   69,
+ /*   150 */   987,  250, 1043, 1044, 1045, 1046, 1047,  941,  240, 1037,
+ /*   160 */   330,  779,  932, 1043, 1044, 1045, 1046, 1047,    6,  247,
+ /*   170 */  1043, 1044, 1045, 1046, 1047,    1,  310,  873,  244,  100,
+ /*   180 */   807,  107, 1026,  843,  844,  242, 1017, 1021,  944,  872,
+ /*   190 */    49,  926,    1,  198,   69,  337,  943,  942, 1244,  259,
+ /*   200 */   919,  353,  925,  941,  217,  165,  320,  861,  328,  113,
+ /*   210 */   243,  241, 1017, 1021,  261,  368,    1,  104,  191,  189,
+ /*   220 */   101,  361,   96, 1027, 1028, 1029, 1030, 1031, 1032, 1033,
+ /*   230 */  1034,  372,  863,  779,  168,   69,  777,  122,  243,  241,
+ /*   240 */  1017, 1021, 1036,  255,   19,  861,  288,  950,   93,  307,
+ /*   250 */   950,  839,  293,  843,  844,  335,   69,  177,  335,  990,
+ /*   260 */   991,  948,  139,  266,  281,   68,  825,  826,  827,  372,
+ /*   270 */   863,  964,   55,  110,    5,  849,  990,  991,  331,  117,
+ /*   280 */   116,   76,  965,  205,  241, 1017, 1021,  335,  331,  954,
+ /*   290 */   219,  218,  239,    3,  843,  844,  861,  945,   76,  861,
+ /*   300 */   990,  991,  973,  948,  335, 1022, 1038, 1035,  315,  974,
+ /*   310 */     7,  247,  312,   59,  936,  336,   59,  936,  159, 1042,
+ /*   320 */   372,  863,   76,  372,  863,    3, 1019, 1021,  156,  153,
+ /*   330 */   816,    3,  204,  203,    3,   68,  212,  855,  879,  187,
+ /*   340 */   955,  183,   68,  371,  232,  904,  937, 1018, 1021,  970,
+ /*   350 */   905, 1042,  797,  939,  905, 1000,  811, 1042, 1011, 1012,
+ /*   360 */  1042, 1054,   45,  936,   47,  812,   57,  958,  213,  846,
+ /*   370 */   178, 1008, 1009, 1010,  329,  956,  233,  939,  975,  839,
+ /*   380 */   998,  999,  234,  940,  861,  237, 1052, 1053,  119,  330,
+ /*   390 */   795,  118,  966,  796,  224,   95,  816,  825,  826,  827,
+ /*   400 */   121,  939,  878,  267,  820,  295,  975,  940,  372,  863,
+ /*   410 */   996,  159,  813,   57,  954,  276,  975,  839,  284,  239,
+ /*   420 */   878,  291,  289,  840,  225,   82,  898,  294,  876,  210,
+ /*   430 */   856,  940,   79, 1025,  837,  836, 1049,  958,  835,  834,
+ /*   440 */   814,  374,  783,  374,  830,  957,  144, 1020,  378,   78,
+ /*   450 */   823,  848,  852,  905,  174,  960,  909,  238,   20,  847,
+ /*   460 */   178,  249,  832,  330, 1003,  955,  366,  208,  231,  330,
+ /*   470 */   230,  220,  881, 1011, 1012,  228,  922,  921,  256,  843,
+ /*   480 */   844,  917,  746,  747,  831,  349,   68,  763,  764, 1023,
+ /*   490 */  1024,  345,  897,  128,   11,  365,   90,  984,  910,  907,
+ /*   500 */    46,   67,  341,  854,  842,  340,  369,   81,   92,  127,
+ /*   510 */   895,  343,  194,  947,  214,   51,   92,  774,  347,  356,
+ /*   520 */   946,  192,  359,   56,  880,    8,   28,   83,  911,   29,
+ /*   530 */   369,   86, 1060,  140,  860,  367,  949,   81,  223, 1040,
+ /*   540 */   245,  133,   43,   40,   42,  258,  135,  279,  277,  976,
+ /*   550 */    53,  300,  756,  292,  169,  171,  929,  790,  376,  789,
+ /*   560 */   379,  788,  787,  786,  200,   15,  870,  202,  227,  221,
+ /*   570 */   899,  108,   48,  109,   27,  123,   73,  995, 1065,  114,
+ /*   580 */    74, 1064, 1063,   75, 1061,  236,   30,  996,  993,   77,
+ /*   590 */   124,  125,  864,  253,   39,  845,  206,  130,  869,  920,
+ /*   600 */   257,  924,  263,  129,  264,  268,  874,  824,  275,  278,
+ /*   610 */   211,  283,  131,  839,  290,  265,  841,   32,  971,  871,
+ /*   620 */   331,  151,  819,   33,  851,  759,  859,  298,  154,  858,
+ /*   630 */   285,  857,  155,   34,  757,  754,   72,  157,  308,  163,
+ /*   640 */   158,  865,  380,  382,  838,  761,  749,   97,  333,  961,
+ /*   650 */   968,  967,  963,  172,  748,  322,  867,  833,  324,  316,
+ /*   660 */   866,   66,  326,  185,  327,  928,  364,   17,   13,  363,
+ /*   670 */   809,  313,  215,  102,  103,  952,   14,  105,  339,  196,
+ /*   680 */   188,  760,  373,  190,  193,  384,  182,  745,  927,  199,
+ /*   690 */   186,  889,  882,  222,  111,  888,  887,  201,  226,  112,
+ /*   700 */    62, 1058, 1055,  120, 1050,  229,  891,    2, 1059,   92,
+ /*   710 */    84, 1365,   22, 1006,   11,   85, 1004, 1005,   41,  126,
+ /*   720 */    63,  248,  982,  896,   87,  916,  254,  914,  134,   88,
+ /*   730 */    89,  901,  260,  136,  902,  903,  137,  262,  138,   31,
+ /*   740 */   269,  273,  828,  972,  270,  141,   50,  915,  142,  280,
+ /*   750 */    64,   91,  282,  908,  143,  209,  287,  286,  821,   52,
+ /*   760 */   146,  145,   54,  969,  297,   94,   25,  162,  815,  767,
+ /*   770 */   301,  766,  161,  167,  765,  818,   98,  166,  309,  962,
+ /*   780 */    12,  314,   65,  173,  175,   23,  318,  317,   24,  319,
+ /*   790 */   868, 1333,  323,  180,  321,   16,  933,  342,  181,  352,
+ /*   800 */   938,  216,  332,  772,   26,  176,  771,  770,   36,  801,
+ /*   810 */   776,  951,  325,   35,   58,  344,  775,  184,  794,   99,
+ /*   820 */   338,  348,  346,  750,  793,  752,  351,  792,  350,  354,
+ /*   830 */   791,  768,  195,  357,   61,  197,  360,  355,  762,  106,
+ /*   840 */   358,  785,  381,  383,  803,   80,   70,  799,  798,  784,
+ /*   850 */  1066,  806,  362,  385, 1068, 1068,  884, 1068, 1068,  862,
+ /*   860 */  1068, 1068, 1068, 1068, 1068, 1068, 1068, 1068, 1068, 1068,
+ /*   870 */  1068, 1068, 1068, 1068, 1068, 1068, 1068, 1068, 1068, 1068,
+ /*   880 */  1068, 1068,  370,
 };
 static const MQLYYCODETYPE mqlyy_lookahead[] = {
- /*     0 */   126,  127,  128,  129,  130,  131,  132,  133,  134,  135,
- /*    10 */   136,  137,  138,  139,  140,  141,  142,  143,  144,  145,
- /*    20 */   146,  147,  148,  149,  150,  151,  152,  153,  154,  155,
- /*    30 */   156,  157,  158,  159,  160,  161,  162,  163,  164,  165,
- /*    40 */   166,  167,  168,  169,  170,  171,  172,  173,  174,    2,
- /*    50 */   188,   27,  183,    6,    7,    4,  204,  188,  206,   12,
- /*    60 */    13,  265,  266,  267,  268,   17,  270,  271,  192,   22,
- /*    70 */     4,   24,   25,  238,  239,  248,   28,   30,   30,  189,
- /*    80 */   190,  191,  192,  256,  184,   34,  290,  291,  292,  293,
- /*    90 */   294,  265,  266,  267,  268,  192,  270,  271,  263,  264,
- /*   100 */    49,  227,  184,   52,   57,  205,  254,   60,   61,   62,
- /*   110 */   241,   58,   59,  213,   67,   46,  290,  291,  292,  293,
- /*   120 */   294,  192,   54,   75,   76,   17,  200,  265,  266,  267,
- /*   130 */   268,  213,  270,  271,  208,   69,   28,   68,   30,  266,
- /*   140 */   267,  268,  192,  270,  271,   98,  266,  267,  268,  223,
- /*   150 */   270,  271,  290,  291,  292,  293,  294,  281,  282,  283,
- /*   160 */   284,    4,   55,  290,  291,  292,  293,  294,   19,  101,
- /*   170 */   290,  291,  292,  293,  294,   18,   27,   69,  184,    4,
- /*   180 */   200,    3,   72,   75,   76,  282,  283,  284,  208,   81,
- /*   190 */    80,   83,   18,   15,    4,   17,    4,    5,   90,   91,
- /*   200 */    92,   26,   94,  223,   29,   17,   28,  213,   30,  280,
- /*   210 */   281,  282,  283,  284,   18,   40,   28,   42,   43,   44,
- /*   220 */    45,   46,  112,  113,  114,  115,  116,  117,  118,  119,
- /*   230 */   280,  281,  282,  283,  284,    3,  192,   28,  223,   30,
- /*   240 */     4,    5,    4,   34,   52,   53,  184,   15,  192,   17,
- /*   250 */    34,    2,  192,   75,   76,   46,  223,   79,   53,  102,
- /*   260 */   103,   45,   30,   73,  192,   73,   64,   65,   66,   77,
- /*   270 */    78,    4,   70,  273,  100,  213,  102,  103,  121,  122,
- /*   280 */   123,    4,  204,   78,  206,  252,  253,  287,  273,   53,
- /*   290 */   192,   53,   54,   84,  232,  233,  223,  123,  102,  103,
- /*   300 */    91,  286,  287,  288,   57,   58,   59,   75,   76,  249,
- /*   310 */   250,  251,   96,   77,   78,   77,   78,  203,  238,  123,
- /*   320 */   238,  249,  250,  251,  238,  252,  253,  283,  284,  204,
- /*   330 */    53,  206,  254,  238,    4,  221,  222,  183,  212,  283,
- /*   340 */   284,   81,  188,   19,  264,    4,  264,  192,  250,  251,
- /*   350 */   264,  201,  202,  203,   77,   78,    4,  248,    4,  264,
- /*   360 */   215,  216,  217,   73,  255,  256,  106,  107,   81,  289,
- /*   370 */    17,  289,   53,   19,  208,  289,    4,  110,  111,  254,
- /*   380 */    53,   28,   58,   59,  289,  192,   34,   34,   34,   64,
- /*   390 */    65,   66,  112,  106,  107,  115,   77,   78,    4,   69,
- /*   400 */   234,  204,  205,   73,  124,  279,  251,  203,  108,  109,
- /*   410 */    83,   84,  202,  203,   42,  261,  192,   45,  277,  278,
- /*   420 */     4,   69,   45,  277,  278,  192,  222,  206,   34,   69,
- /*   430 */   208,    4,  206,   73,  211,  212,  243,  208,  208,  191,
- /*   440 */   192,  212,  212,  188,  191,  192,  183,  208,  207,  208,
- /*   450 */     8,  188,  257,  258,  219,  220,  234,   19,  216,  217,
- /*   460 */   235,  236,   33,   75,   76,   36,   31,  243,   52,  110,
- /*   470 */   111,   17,   37,   96,   20,  254,  243,   75,   76,   37,
- /*   480 */   254,    4,    5,   20,   21,   86,   54,   88,   54,   52,
- /*   490 */    54,   51,  237,    4,   19,   71,   69,   71,   74,   27,
- /*   500 */    74,   27,   30,   71,   30,   71,   69,   71,  269,   71,
- /*   510 */    26,   71,   54,   29,   34,   35,   54,   71,   53,   72,
- /*   520 */    74,  193,  285,   34,  262,  209,  275,  275,  297,   71,
- /*   530 */   209,  223,  196,   71,  223,  295,  192,   62,  295,  192,
- /*   540 */   276,  245,  276,  244,  279,  213,  175,  205,  192,  192,
- /*   550 */   210,  205,  248,  192,  175,  175,  187,  182,  175,  197,
- /*   560 */   197,  197,  197,  197,  231,   89,   85,  230,    8,  188,
- /*   570 */   188,   62,  229,  104,  296,  272,  105,   53,  296,  274,
- /*   580 */   274,  274,  298,  298,  298,    4,  298,  273,  188,  272,
- /*   590 */    53,  224,  274,   80,  224,    4,  188,  188,  214,  231,
- /*   600 */   214,   30,  228,  230,  208,  229,   28,  188,  188,  208,
- /*   610 */   188,   10,    4,  188,   18,  212,   34,  204,  240,  188,
- /*   620 */   233,   18,    4,  218,  220,  218,  220,  242,  217,  214,
- /*   630 */   218,  217,  188,  212,   14,  180,    3,  178,  188,   16,
- /*   640 */     8,  181,  214,  176,  178,  212,  176,    8,   53,  260,
- /*   650 */   260,  259,  259,  204,    4,  258,  246,  214,   18,  208,
- /*   660 */   204,  188,   51,  218,  212,  226,  225,  188,   52,   56,
- /*   670 */   247,    8,   55,   48,  186,  188,  246,  199,  185,  181,
- /*   680 */   198,  195,  199,  198,  194,   10,   19,  177,  176,   18,
- /*   690 */    34,   34,   51,  236,   82,  247,   27,   71,   16,  246,
- /*   700 */    19,   87,   87,   19,   19,  101,   19,   35,   71,  120,
- /*   710 */   120,   35,   54,   54,   71,   36,   52,   18,   35,   19,
- /*   720 */   101,   99,   54,   93,   51,   20,   19,   18,   51,   10,
- /*   730 */    19,   21,   72,   53,   18,   90,   19,   34,   18,   31,
- /*   740 */    46,   80,   68,   19,   18,    8,   19,   18,   51,   63,
- /*   750 */    84,   30,   19,   18,   84,   19,   34,   18,   80,   31,
- /*   760 */    71,    8,   19,   51,   73,   72,   18,   20,   23,   46,
- /*   770 */    39,   46,   23,   23,   19,   18,   20,    3,   19,   18,
- /*   780 */    17,   51,   20,   19,   18,   97,   17,   97,    8,   97,
- /*   790 */    77,   53,   27,    8,   19,   54,   95,   46,   28,   45,
- /*   800 */    28,   28,  299,   27,   72,   34,   39,   73,    1,   51,
- /*   810 */    50,   32,   72,   71,   36,   34,   72,   49,   72,   33,
- /*   820 */    32,   34,   27,   41,   72,   34,   34,    4,   20,   46,
- /*   830 */    41,   34,   19,   18,   41,   19,   46,   53,   18,   41,
- /*   840 */    46,   39,   46,   17,    5,   41,   47,   47,    5,   39,
- /*   850 */    38,    9,   11,    0,   53,  299,  299,  299,  299,   53,
- /*   860 */   299,  299,  299,  299,  299,  299,  299,  299,  299,  299,
- /*   870 */   299,  299,  299,  299,  299,  299,  299,  299,  299,  299,
- /*   880 */   299,  299,   77,
+ /*     0 */   127,  128,  129,  130,  131,  132,  133,  134,  135,  136,
+ /*    10 */   137,  138,  139,  140,  141,  142,  143,  144,  145,  146,
+ /*    20 */   147,  148,  149,  150,  151,  152,  153,  154,  155,  156,
+ /*    30 */   157,  158,  159,  160,  161,  162,  163,  164,  165,  166,
+ /*    40 */   167,  168,  169,  170,  171,  172,  173,  174,  175,    2,
+ /*    50 */   189,   58,   59,    6,    7,    4,  205,   17,  207,   12,
+ /*    60 */    13,  266,  267,  268,  269,   17,  271,  272,   28,   22,
+ /*    70 */     4,   24,   25,  239,  240,   19,   28,   30,   30,  190,
+ /*    80 */   191,  192,  193,   27,  185,   34,  291,  292,  293,  294,
+ /*    90 */   295,  266,  267,  268,  269,  193,  271,  272,  264,  265,
+ /*   100 */    49,  228,  185,   52,   57,  206,  255,   60,   61,   62,
+ /*   110 */   205,  213,  207,  214,   67,   27,  291,  292,  293,  294,
+ /*   120 */   295,  193,   69,   75,   76,   17,   73,  266,  267,  268,
+ /*   130 */   269,  214,  271,  272,  201,   69,   28,   53,   30,  267,
+ /*   140 */   268,  269,  209,  271,  272,   98,  267,  268,  269,  193,
+ /*   150 */   271,  272,  291,  292,  293,  294,  295,  224,    4,    5,
+ /*   160 */   255,    4,   78,  291,  292,  293,  294,  295,  278,  279,
+ /*   170 */   291,  292,  293,  294,  295,   18,  185,   69,  280,    4,
+ /*   180 */   201,    3,   72,   75,   76,  283,  284,  285,  209,   81,
+ /*   190 */    80,   83,   18,   15,  193,   17,    4,    5,   90,   91,
+ /*   200 */    92,   26,   94,  224,   29,  214,   28,   53,   30,  281,
+ /*   210 */   282,  283,  284,  285,  185,   40,   18,   42,   43,   44,
+ /*   220 */    45,   46,    3,  113,  114,  115,  116,  117,  118,  119,
+ /*   230 */   120,   77,   78,    4,   15,  193,   17,  281,  282,  283,
+ /*   240 */   284,  285,  224,  214,   52,   53,   28,    4,   30,   30,
+ /*   250 */     4,    4,   34,   75,   76,  193,  193,   79,  193,  102,
+ /*   260 */   103,  224,  233,  234,   46,   73,   64,   65,   66,   77,
+ /*   270 */    78,   17,   70,    4,  100,   55,  102,  103,   34,  122,
+ /*   280 */   123,  124,   28,  282,  283,  284,  285,  193,   34,   45,
+ /*   290 */   253,  254,  274,  239,   75,   76,   53,   54,  124,   53,
+ /*   300 */   102,  103,   84,  224,  193,  287,  288,  289,    2,   91,
+ /*   310 */   278,  279,  250,  251,  252,  250,  251,  252,  204,  265,
+ /*   320 */    77,   78,  124,   77,   78,  239,  284,  285,   57,   58,
+ /*   330 */    59,  239,  253,  254,  239,   73,  222,  223,   69,  205,
+ /*   340 */    96,  207,   73,   53,  290,  184,  252,  284,  285,  184,
+ /*   350 */   189,  265,    4,    4,  189,   81,   19,  265,  111,  112,
+ /*   360 */   265,   81,  251,  252,  202,  203,  204,  249,  216,  217,
+ /*   370 */   218,  108,  109,  110,  256,  257,  290,    4,  193,    4,
+ /*   380 */   106,  107,  290,   34,   53,  290,  106,  107,  113,  255,
+ /*   390 */    42,  116,   19,   45,   53,   58,   59,   64,   65,   66,
+ /*   400 */   125,    4,  209,  242,  205,  206,  193,   34,   77,   78,
+ /*   410 */     4,  204,  203,  204,   45,  207,  193,    4,   69,  274,
+ /*   420 */   209,  207,  212,  213,   83,   84,  189,  262,  235,  244,
+ /*   430 */   223,   34,   72,  288,  209,  209,  209,  249,  213,  213,
+ /*   440 */   192,  193,  192,  193,   69,  257,  235,   54,  184,  208,
+ /*   450 */   209,  220,  221,  189,  258,  259,   19,  244,   52,  217,
+ /*   460 */   218,   33,   46,  255,   36,   96,    8,  244,   86,  255,
+ /*   470 */    88,  236,  237,  111,  112,  238,   75,   76,   17,   75,
+ /*   480 */    76,   20,    4,    5,   68,   31,   73,   20,   21,   54,
+ /*   490 */    54,   37,   54,   52,  101,   37,   51,  270,    4,   19,
+ /*   500 */    71,   71,   27,   74,   74,   30,   71,   71,   71,   71,
+ /*   510 */    69,   26,  194,   54,   29,  263,   71,   34,   35,   27,
+ /*   520 */    54,   71,   30,  210,   74,  286,  296,  276,   34,  296,
+ /*   530 */    71,  276,  298,  210,  224,  197,  224,   71,  193,  193,
+ /*   540 */   280,  246,   62,  277,  277,  245,  214,  193,  206,  193,
+ /*   550 */   211,  193,  176,  206,  176,  176,  249,  198,  188,  198,
+ /*   560 */   183,  198,  198,  198,  176,   89,  232,   85,    8,  189,
+ /*   570 */   189,  231,   62,  230,  297,  104,  273,  105,   53,  275,
+ /*   580 */   275,  299,  299,  275,  299,  299,  297,    4,  274,  273,
+ /*   590 */   275,  189,   53,  225,   80,    4,  225,  230,  232,  215,
+ /*   600 */   189,  215,   30,  231,  189,  209,   28,  209,  189,  189,
+ /*   610 */   189,   10,  229,    4,  189,  241,  213,   18,  261,  234,
+ /*   620 */    34,   18,  205,  189,    4,   14,  219,  215,  219,  221,
+ /*   630 */   243,  221,  218,  189,  181,    3,  213,  219,  189,  179,
+ /*   640 */   218,  215,   16,    8,  213,  182,  177,  179,    8,  259,
+ /*   650 */   261,  260,  260,  205,  177,   53,    4,  205,  226,  189,
+ /*   660 */   227,  219,  215,   18,  213,  209,   51,   55,  189,   52,
+ /*   670 */    56,  247,    8,  200,  200,  248,  189,  187,   48,  186,
+ /*   680 */   199,  182,  196,  199,  195,   10,  247,  178,  248,  177,
+ /*   690 */   247,   19,  237,   51,   18,   34,   34,   27,   82,   71,
+ /*   700 */    16,   19,   19,   35,   19,   87,   87,  101,   19,   71,
+ /*   710 */   121,  121,   35,   54,  101,   71,   36,   54,   52,   18,
+ /*   720 */    99,   35,   19,   54,   51,   20,   93,   19,   18,   51,
+ /*   730 */    10,   19,   21,   18,   53,   19,   90,   72,   80,   18,
+ /*   740 */    34,   46,   68,   19,   31,   18,    8,   19,   18,   51,
+ /*   750 */    63,   84,   30,   19,   18,   84,   31,   34,   19,   80,
+ /*   760 */    18,   71,    8,   19,   72,   51,   73,   18,   39,   23,
+ /*   770 */    20,   23,   46,   18,   23,   19,    3,   46,   20,   19,
+ /*   780 */    18,   17,   19,   51,   18,   97,   17,   20,   97,    8,
+ /*   790 */    53,   97,   27,    8,   77,   95,   19,   27,   46,   27,
+ /*   800 */    39,   33,   45,   28,   51,   72,   28,   28,   73,   50,
+ /*   810 */    34,    4,   72,   72,   71,   32,   34,   72,   34,   72,
+ /*   820 */    49,   32,   36,    5,   34,    5,   46,   34,   41,   41,
+ /*   830 */    34,   19,   18,   41,   18,   20,   41,   46,   19,   17,
+ /*   840 */    46,   39,    9,   11,   46,   41,   38,   47,   47,   39,
+ /*   850 */     0,   54,   53,    1,  300,  300,   53,  300,  300,   53,
+ /*   860 */   300,  300,  300,  300,  300,  300,  300,  300,  300,  300,
+ /*   870 */   300,  300,  300,  300,  300,  300,  300,  300,  300,  300,
+ /*   880 */   300,  300,   77,
 };
-#define MQLYY_SHIFT_USE_DFLT (-1)
+#define MQLYY_SHIFT_USE_DFLT (-8)
 #define MQLYY_SHIFT_COUNT (386)
-#define MQLYY_SHIFT_MIN   (0)
-#define MQLYY_SHIFT_MAX   (853)
+#define MQLYY_SHIFT_MIN   (-7)
+#define MQLYY_SHIFT_MAX   (852)
 static const short mqlyy_shift_ofst[] = {
- /*     0 */    47,  157,  196,  196,  174,  196,   51,   51,  236,   51,
- /*    10 */   108,   51,  394,  394,  394,   24,  192,  192,   48,  238,
- /*    20 */   277,   51,   51,  216,  216,  247,  216,  149,  149,  149,
- /*    30 */   149,   66,   66,  394,   53,  205,  107,  178,  232,  330,
- /*    40 */   267,  352,  353,  354,  247,  324,  300,  394,  416,  300,
- /*    50 */   377,  394,  360,  427,  377,  190,  190,  394,  205,  394,
- /*    60 */   394,   66,  341,  290,  290,  249,  447,  107,  465,  110,
- /*    70 */   175,  209,  202,  260,  287,  287,  280,  260,  325,  319,
- /*    80 */   372,  319,  394,  429,  394,  359,  429,  388,  454,  402,
- /*    90 */   188,  394,  394,   69,  188,  394,  477,  477,  477,  205,
- /*   100 */   442,  442,  442,  442,  442,  435,  463,  477,  476,  481,
- /*   110 */   560,  341,  341,  509,  469,  471,  471,  471,  524,  524,
- /*   120 */   524,  524,  509,  581,  469,  471,  341,  537,  537,  476,
- /*   130 */   481,  560,  513,  591,  341,  591,  341,  571,  290,  578,
- /*   140 */   290,  341,  341,  341,  601,  608,  341,  596,  596,  582,
- /*   150 */   603,  341,  603,  618,  447,  618,  107,  447,  618,  107,
- /*   160 */   591,  608,  341,  620,  633,  591,  608,  341,  623,  632,
- /*   170 */   633,  632,  639,  582,  249,  341,  595,  650,  618,  591,
- /*   180 */   582,  608,  640,  639,  290,  341,  640,  639,  611,  616,
- /*   190 */   611,  616,  465,  613,  617,  341,  663,  625,  623,  675,
- /*   200 */   632,  327,  399,  432,  434,   68,  436,  437,  440,  489,
- /*   210 */   438,  475,  424,  426,  472,  484,  480,  474,  458,  462,
- /*   220 */   446,  667,  671,  641,  656,  657,  669,  612,  626,  682,
- /*   230 */   614,  615,  681,  684,  685,  604,  672,  687,  637,  589,
- /*   240 */   590,  676,  676,  619,  658,  659,  643,  664,  679,  683,
- /*   250 */   699,  622,  700,  668,  673,  630,  705,  707,  709,  677,
- /*   260 */   719,  710,  680,  660,  711,  716,  645,  717,  720,  661,
- /*   270 */   703,  708,  674,  686,  694,  724,  726,  737,  727,  729,
- /*   280 */   666,  697,  670,  721,  733,  735,  678,  722,  728,  689,
- /*   290 */   736,  739,  753,  712,  743,  688,  690,  691,  693,  723,
- /*   300 */   731,  748,  747,  692,  745,  749,  750,  725,  755,  757,
- /*   310 */   756,  774,  759,  761,  730,  763,  764,  766,  762,  769,
- /*   320 */   780,  738,  713,  732,  765,  734,  740,  785,  751,  742,
- /*   330 */   744,  746,  752,  754,  767,  701,  775,  758,  760,  768,
- /*   340 */   770,  772,  773,  776,  771,  779,  781,  778,  786,  788,
- /*   350 */   787,  782,  783,  795,  791,  789,  790,  792,  793,  794,
- /*   360 */   797,  798,  741,  784,  796,  799,  800,  802,  804,  823,
- /*   370 */   801,  805,  806,  810,  812,  813,  815,  808,  816,  820,
- /*   380 */   826,  839,  842,  843,  841,  853,  807,
+ /*     0 */    47,  157,  198,  198,  174,  198,   51,   51,  154,   51,
+ /*    10 */   108,   51,  397,  397,  397,   88,  192,  192,   48,  243,
+ /*    20 */   246,   51,   51,  244,  244,  271,  244,   56,   56,   56,
+ /*    30 */    56,   66,   66,  397,   -7,   84,  220,  178,  219,  269,
+ /*    40 */   263,  247,  263,  349,  254,  373,  271,  337,  397,  406,
+ /*    50 */   369,  397,   53,  375,  369,  413,  413,  397,   84,  397,
+ /*    60 */   397,   66,  229,  262,  262,  306,  360,  220,  290,  110,
+ /*    70 */   175,  218,  202,  274,  280,  280,  275,  274,  333,  331,
+ /*    80 */   348,  331,  397,  428,  397,  362,  428,  401,  461,  404,
+ /*    90 */    40,  397,  397,  416,   40,  397,  478,  478,  478,   84,
+ /*   100 */   458,  458,  458,  458,  458,  454,  467,  478,  476,  482,
+ /*   110 */   560,  229,  229,  510,  471,  472,  472,  472,  525,  525,
+ /*   120 */   525,  525,  510,  583,  471,  472,  229,  539,  539,  476,
+ /*   130 */   482,  560,  514,  591,  229,  591,  229,  572,  262,  578,
+ /*   140 */   262,  229,  229,  229,  601,  609,  229,  599,  599,  586,
+ /*   150 */   603,  229,  603,  620,  360,  620,  220,  360,  620,  220,
+ /*   160 */   591,  609,  229,  611,  632,  591,  609,  229,  626,  635,
+ /*   170 */   632,  635,  640,  586,  306,  229,  602,  652,  620,  591,
+ /*   180 */   586,  609,  645,  640,  262,  229,  645,  640,  615,  617,
+ /*   190 */   615,  617,  290,  614,  612,  229,  664,  630,  626,  675,
+ /*   200 */   635,  341,  382,  435,  436,  393,  438,  441,  445,  494,
+ /*   210 */   437,  480,  429,  430,  475,  485,  483,  492,  459,  466,
+ /*   220 */   450,  672,  676,  642,  661,  662,  670,  616,  628,  684,
+ /*   230 */   618,  619,  682,  683,  685,  606,  668,  689,  638,  589,
+ /*   240 */   590,  677,  677,  613,  659,  663,  644,  666,  680,  686,
+ /*   250 */   701,  621,  703,  669,  673,  633,  705,  708,  710,  678,
+ /*   260 */   720,  711,  681,  665,  712,  715,  646,  716,  721,  658,
+ /*   270 */   706,  713,  674,  687,  695,  724,  727,  738,  728,  730,
+ /*   280 */   667,  698,  671,  722,  734,  736,  679,  723,  725,  690,
+ /*   290 */   739,  742,  754,  714,  744,  688,  691,  693,  692,  726,
+ /*   300 */   729,  749,  750,  694,  746,  748,  751,  731,  756,  755,
+ /*   310 */   758,  773,  760,  762,  732,  764,  763,  766,  767,  769,
+ /*   320 */   781,  737,  717,  733,  765,  735,  740,  785,  752,  743,
+ /*   330 */   741,  745,  747,  757,  761,  700,  777,  753,  759,  771,
+ /*   340 */   775,  778,  779,  770,  776,  783,  782,  786,  768,  789,
+ /*   350 */   784,  787,  780,  772,  790,  788,  791,  793,  792,  794,
+ /*   360 */   796,  795,  797,  799,  798,  800,  801,  802,  804,  807,
+ /*   370 */   803,  805,  806,  810,  808,  812,  814,  815,  819,  816,
+ /*   380 */   822,  818,  833,  820,  832,  850,  852,
 };
-#define MQLYY_REDUCE_USE_DFLT (-205)
+#define MQLYY_REDUCE_USE_DFLT (-206)
 #define MQLYY_REDUCE_COUNT (200)
-#define MQLYY_REDUCE_MIN   (-204)
+#define MQLYY_REDUCE_MIN   (-205)
 #define MQLYY_REDUCE_MAX   (512)
 static const short mqlyy_reduce_ofst[] = {
- /*     0 */  -126, -138, -204, -174, -127, -120,  -71,  -50,   15, -124,
- /*    10 */    62,  -97,   60,   72, -110, -165,  -74,  -20, -100,   33,
- /*    20 */    73,   44,   56, -148,   78,  114,  125,   80,   82,   86,
- /*    30 */    95, -131,  154,   98,  150,  109,  145,  -82,   -6,  166,
- /*    40 */   126,  193,  197,  155,  204,  210,  141,  224,    0,  146,
- /*    50 */   221,  233,  222,  223,  226,  229,  230,  248, -173,  155,
- /*    60 */   253,  263,  255,  239,  241,  195,  235,  242,  225,  237,
- /*    70 */   328,  262,  316,  251,  240,  243,  231,  252,  321,  308,
- /*    80 */   336,  311,  344,  264,  347,  265,  266,  296,  299,  332,
- /*    90 */   342,  356,  357,  340,  346,  361,  371,  379,  380,  304,
- /*   100 */   362,  363,  364,  365,  366,  369,  375,  383,  333,  337,
- /*   110 */   343,  381,  382,  278,  303,  305,  306,  307,  284,  285,
- /*   120 */   286,  288,  282,  314,  317,  318,  400,  367,  370,  368,
- /*   130 */   373,  376,  374,  384,  408,  386,  409,  378,  396,  387,
- /*   140 */   401,  419,  420,  422,  385,  403,  425,  389,  390,  413,
- /*   150 */   392,  431,  393,  405,  404,  407,  411,  406,  412,  414,
- /*   160 */   415,  421,  444,  455,  459,  428,  433,  450,  460,  467,
- /*   170 */   466,  470,  410,  449,  397,  473,  439,  441,  445,  443,
- /*   180 */   456,  452,  423,  430,  451,  479,  448,  453,  478,  482,
- /*   190 */   483,  485,  457,  486,  490,  487,  488,  493,  498,  510,
+ /*     0 */  -127, -139, -205, -175, -128, -121,  -72,  -44,   18,    1,
+ /*    10 */    29,  -98,   62,   65, -111, -166,  -67,  -21, -101,   37,
+ /*    20 */    79,   42,   63, -149,  -95,  114,  134,   54,   86,   92,
+ /*    30 */    95,  161,  165,  111,  162,  118,  152,  -83,   -9,  193,
+ /*    40 */  -110, -102,   32,  185,  199,   94,  207,  209,  213,  145,
+ /*    50 */   208,  223,  211,  210,  214,  225,  226,  248,  188,   94,
+ /*    60 */   250,  264,  237,  227,  241,  196,  231,  242,  235,  239,
+ /*    70 */   318,  252,  313,  251,  230,  233,  234,  255,  323,  310,
+ /*    80 */   338,  312,  345,  266,  346,  260,  267,  295,  300,  332,
+ /*    90 */   342,  354,  356,  339,  347,  358,  376,  378,  379,  307,
+ /*   100 */   359,  361,  363,  364,  365,  370,  377,  388,  334,  340,
+ /*   110 */   343,  380,  381,  277,  303,  304,  305,  308,  282,  283,
+ /*   120 */   285,  286,  289,  314,  316,  315,  402,  368,  371,  366,
+ /*   130 */   372,  367,  383,  384,  411,  386,  415,  374,  396,  385,
+ /*   140 */   398,  419,  420,  421,  387,  403,  425,  357,  389,  417,
+ /*   150 */   391,  434,  392,  407,  408,  409,  414,  410,  418,  422,
+ /*   160 */   412,  423,  444,  453,  460,  426,  431,  449,  463,  469,
+ /*   170 */   468,  477,  424,  448,  390,  470,  433,  432,  442,  447,
+ /*   180 */   452,  451,  427,  439,  456,  479,  440,  443,  473,  481,
+ /*   190 */   474,  484,  455,  486,  489,  487,  490,  493,  499,  509,
  /*   200 */   512,
 };
 static const MQLYYACTIONTYPE mqlyy_default[] = {
- /*     0 */  1432, 1432, 1432, 1432, 1352, 1432, 1379, 1379, 1432, 1432,
- /*    10 */  1145, 1432, 1302, 1302, 1148, 1261, 1432, 1432, 1145, 1432,
- /*    20 */  1432, 1432, 1432, 1432, 1432, 1184, 1432, 1261, 1261, 1261,
- /*    30 */  1261, 1432, 1432, 1432, 1184, 1432, 1217, 1145, 1145, 1432,
- /*    40 */  1432, 1432, 1432, 1432, 1184, 1184, 1374, 1432, 1432, 1374,
- /*    50 */  1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432, 1301,
- /*    60 */  1147, 1432, 1432, 1414, 1432, 1432, 1220, 1217, 1432, 1432,
- /*    70 */  1432, 1432, 1432, 1364, 1417, 1417, 1428, 1364, 1189, 1432,
- /*    80 */  1432, 1432, 1432, 1368, 1432, 1432, 1368, 1290, 1285, 1432,
- /*    90 */  1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432,
- /*   100 */  1167, 1167, 1167, 1167, 1167, 1140, 1432, 1432, 1432, 1257,
- /*   110 */  1253, 1432, 1432, 1423, 1359, 1361, 1361, 1361, 1432, 1432,
- /*   120 */  1432, 1432, 1423, 1432, 1359, 1361, 1432, 1432, 1432, 1432,
- /*   130 */  1257, 1253, 1244, 1432, 1432, 1432, 1432, 1432, 1432, 1242,
- /*   140 */  1432, 1432, 1432, 1432, 1279, 1432, 1432, 1432, 1432, 1432,
- /*   150 */  1432, 1432, 1432, 1432, 1432, 1432, 1217, 1432, 1432, 1217,
- /*   160 */  1432, 1432, 1432, 1125, 1122, 1432, 1432, 1432, 1432, 1118,
- /*   170 */  1122, 1118, 1297, 1432, 1326, 1432, 1432, 1432, 1432, 1432,
- /*   180 */  1432, 1432, 1432, 1297, 1432, 1432, 1432, 1297, 1171, 1172,
- /*   190 */  1171, 1172, 1432, 1177, 1175, 1432, 1136, 1169, 1432, 1120,
- /*   200 */  1118, 1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432,
- /*   210 */  1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432,
- /*   220 */  1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432, 1260, 1259,
- /*   230 */  1432, 1432, 1432, 1432, 1432, 1355, 1432, 1432, 1422, 1432,
- /*   240 */  1405, 1381, 1382, 1380, 1432, 1432, 1432, 1432, 1432, 1369,
- /*   250 */  1432, 1350, 1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432,
- /*   260 */  1280, 1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432,
- /*   270 */  1432, 1241, 1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432,
- /*   280 */  1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432, 1196,
- /*   290 */  1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432,
- /*   300 */  1432, 1432, 1432, 1144, 1432, 1432, 1432, 1432, 1432, 1432,
- /*   310 */  1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432,
- /*   320 */  1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432, 1320,
- /*   330 */  1432, 1432, 1432, 1432, 1432, 1432, 1432, 1144, 1432, 1432,
- /*   340 */  1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432,
- /*   350 */  1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432,
- /*   360 */  1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432,
- /*   370 */  1252, 1250, 1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432,
- /*   380 */  1432, 1432, 1432, 1432, 1432, 1432, 1432,
+ /*     0 */  1435, 1435, 1435, 1435, 1354, 1435, 1382, 1382, 1435, 1435,
+ /*    10 */  1147, 1435, 1304, 1304, 1150, 1263, 1435, 1435, 1147, 1435,
+ /*    20 */  1435, 1435, 1435, 1435, 1435, 1186, 1435, 1263, 1263, 1263,
+ /*    30 */  1263, 1435, 1435, 1435, 1186, 1435, 1219, 1147, 1147, 1435,
+ /*    40 */  1376, 1435, 1376, 1435, 1435, 1435, 1186, 1186, 1435, 1435,
+ /*    50 */  1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1303,
+ /*    60 */  1149, 1435, 1435, 1417, 1435, 1435, 1222, 1219, 1435, 1435,
+ /*    70 */  1435, 1435, 1435, 1366, 1420, 1420, 1431, 1366, 1191, 1435,
+ /*    80 */  1435, 1435, 1435, 1370, 1435, 1435, 1370, 1292, 1287, 1435,
+ /*    90 */  1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435,
+ /*   100 */  1169, 1169, 1169, 1169, 1169, 1142, 1435, 1435, 1435, 1259,
+ /*   110 */  1255, 1435, 1435, 1426, 1361, 1363, 1363, 1363, 1435, 1435,
+ /*   120 */  1435, 1435, 1426, 1435, 1361, 1363, 1435, 1435, 1435, 1435,
+ /*   130 */  1259, 1255, 1246, 1435, 1435, 1435, 1435, 1435, 1435, 1244,
+ /*   140 */  1435, 1435, 1435, 1435, 1281, 1435, 1435, 1435, 1435, 1435,
+ /*   150 */  1435, 1435, 1435, 1435, 1435, 1435, 1219, 1435, 1435, 1219,
+ /*   160 */  1435, 1435, 1435, 1127, 1124, 1435, 1435, 1435, 1435, 1120,
+ /*   170 */  1124, 1120, 1299, 1435, 1328, 1435, 1435, 1435, 1435, 1435,
+ /*   180 */  1435, 1435, 1435, 1299, 1435, 1435, 1435, 1299, 1173, 1174,
+ /*   190 */  1173, 1174, 1435, 1179, 1177, 1435, 1138, 1171, 1435, 1122,
+ /*   200 */  1120, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435,
+ /*   210 */  1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435,
+ /*   220 */  1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1262, 1261,
+ /*   230 */  1435, 1435, 1435, 1435, 1435, 1357, 1435, 1435, 1425, 1435,
+ /*   240 */  1408, 1384, 1385, 1383, 1435, 1435, 1435, 1435, 1435, 1371,
+ /*   250 */  1435, 1352, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435,
+ /*   260 */  1282, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435,
+ /*   270 */  1435, 1243, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435,
+ /*   280 */  1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1198,
+ /*   290 */  1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435,
+ /*   300 */  1435, 1435, 1435, 1146, 1435, 1435, 1435, 1435, 1435, 1435,
+ /*   310 */  1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435,
+ /*   320 */  1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1322,
+ /*   330 */  1435, 1435, 1435, 1435, 1435, 1435, 1435, 1146, 1435, 1435,
+ /*   340 */  1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435,
+ /*   350 */  1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435,
+ /*   360 */  1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435,
+ /*   370 */  1254, 1252, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435,
+ /*   380 */  1435, 1435, 1435, 1435, 1435, 1435, 1435,
 };
 
 /* The next table maps tokens into fallback tokens.  If a construct
@@ -102414,54 +103345,54 @@ static const char *const mqlyyTokenName[] = {
   "KEY_ID_DS",     "KEY_BY",        "KEY_QUIT",      "KEY_STAR",    
   "KEY_EXCLAMATION",  "KEY_OR",        "KEY_NOTEXIST",  "KEY_NOTEXISTS",
   "KEY_AS",        "MARK",          "KEY_NORETRIEVE",  "KEY_RETRIEVE",
-  "KEY_PART_OF",   "KEY_OVERLAP",   "KEY_UNIVERSE",  "KEY_SUBSTRATE",
-  "KEY_LESS_THAN",  "KEY_GREATER_THAN",  "KEY_NOT_EQUAL",  "KEY_LESS_THAN_OR_EQUAL",
-  "KEY_GREATER_THAN_OR_EQUAL",  "KEY_TILDE",     "KEY_NOT_TILDE",  "KEY_HAS",     
-  "KEY_DOT",       "KEY_OPT_GAP",   "KEY_GAP",       "KEY_POWER",   
-  "KEY_BETWEEN",   "error",         "statement",     "statement_by_itself",
-  "create_database_statement",  "initialize_database_statement",  "use_statement",  "drop_database_statement",
-  "vacuum_database_statement",  "create_object_type_statement",  "update_object_type_statement",  "drop_object_type_statement",
-  "insert_monads_statement",  "delete_monads_statement",  "get_monads_statement",  "monad_set_calculation_statement",
-  "create_enumeration_statement",  "update_enumeration_statement",  "drop_enumeration_statement",  "create_segment_statement",
-  "select_statement",  "select_objects_at_statement",  "select_objects_having_monads_in_statement",  "get_objects_having_monads_in_statement",
-  "get_set_from_feature_statement",  "select_object_types_statement",  "select_features_statement",  "select_enumerations_statement",
-  "select_enumeration_constants_statement",  "select_object_types_which_use_enum_statement",  "select_min_m_statement",  "select_max_m_statement",
-  "create_object_from_monads_statement",  "create_object_from_id_ds_statement",  "update_objects_by_monads_statement",  "update_objects_by_id_ds_statement",
-  "delete_objects_by_monads_statement",  "delete_objects_by_id_ds_statement",  "get_features_statement",  "quit_statement",
-  "create_indexes_statement",  "drop_indexes_statement",  "begin_transaction_statement",  "commit_transaction_statement",
-  "abort_transaction_statement",  "select_monad_sets_statement",  "get_monad_sets_statement",  "create_monad_set_statement",
-  "update_monad_set_statement",  "drop_monad_set_statement",  "create_objects_statement",  "database_name",
-  "opt_WITH_KEY",  "opt_USING_ENCODING",  "opt_DATABASE",  "opt_WITH_ENCODING",
-  "opt_ANALYZE",   "on_object_type",  "choice_type_types",  "choice_object_type_or_all",
-  "opt_OBJECT",    "opt_if_not_exists",  "opt_range_type",  "opt_monad_uniqueness_type",
-  "object_type_name",  "opt_feature_declaration_list",  "feature_declaration_list",  "feature_declaration",
-  "feature_name",  "feature_type",  "default_specification",  "opt_computed",
-  "list_feature_type",  "opt_with_index",  "opt_string_length",  "opt_from_set",
-  "expression",    "feature_update_list",  "feature_update",  "opt_ADD",     
-  "monad_specification",  "choice_number_OBJECTS",  "id_ds_specification",  "monad_set_chain",
-  "monad_set",     "monad_set_operator",  "choice_number_SET",  "monad_set_name_list",
-  "monad_set_name",  "choice_ENUM_ERATION",  "enumeration_name",  "ec_declaration_list",
-  "ec_declaration",  "opt_DEFAULT",   "ec_name",       "opt_ec_initialization",
-  "ec_initialization",  "ec_update_list",  "ec_update",     "signed_integer",
-  "unsigned_integer",  "segment_name",  "segment_range",  "select_clause",
-  "in_clause",     "with_max_range_clause",  "returning_clause",  "where_clause",
-  "focus_specification",  "opt_OBJECTS",   "in_specification",  "monad_set_element_list",
-  "monad_set_element",  "object_type_name_list",  "using_range_clause",  "mql_query",   
-  "single_monad_specification",  "object_type_to_find",  "using_monad_feature",  "feature_list",
-  "opt_OBJECTYPE",  "opt_ENUM_ERATION",  "with_id_d_specification",  "object_creation_specification",
-  "id_d_const",    "opt_list_of_feature_assignments",  "list_of_feature_assignments",  "feature_assignment",
-  "list_of_integer",  "list_of_identifier",  "choice_number_ID_DS",  "id_d_list",   
-  "id_d",          "object_creation_list",  "object_creation_no_object_type",  "object_update_specification",
-  "object_deletion_specification",  "object_type_name_to_delete",  "choice_number_FEATURES",  "topograph",   
-  "blocks",        "block_string",  "block_string0",  "block",       
-  "block_string1",  "star_monad_set",  "block_string2",  "notexist",    
-  "object_reference_declaration",  "object_reference",  "mark_declaration",  "retrieval",   
-  "firstlast",     "monad_set_relation_clause",  "monad_set_relation_operation",  "universe_or_substrate",
-  "feature_constraints",  "ffeatures",     "fterm",         "ffactor",     
-  "feature_comparison",  "comparison_operator",  "value",         "object_reference_usage",
-  "enum_const",    "opt_blocks",    "object_block",  "power",       
-  "opt_gap_block",  "gap_block",     "notexist_object_block",  "gap_retrieval",
-  "feature_retrieval",  "restrictor",    "limit",       
+  "KEY_PART_OF",   "KEY_STARTS_IN",  "KEY_OVERLAP",   "KEY_UNIVERSE",
+  "KEY_SUBSTRATE",  "KEY_LESS_THAN",  "KEY_GREATER_THAN",  "KEY_NOT_EQUAL",
+  "KEY_LESS_THAN_OR_EQUAL",  "KEY_GREATER_THAN_OR_EQUAL",  "KEY_TILDE",     "KEY_NOT_TILDE",
+  "KEY_HAS",       "KEY_DOT",       "KEY_OPT_GAP",   "KEY_GAP",     
+  "KEY_POWER",     "KEY_BETWEEN",   "error",         "statement",   
+  "statement_by_itself",  "create_database_statement",  "initialize_database_statement",  "use_statement",
+  "drop_database_statement",  "vacuum_database_statement",  "create_object_type_statement",  "update_object_type_statement",
+  "drop_object_type_statement",  "insert_monads_statement",  "delete_monads_statement",  "get_monads_statement",
+  "monad_set_calculation_statement",  "create_enumeration_statement",  "update_enumeration_statement",  "drop_enumeration_statement",
+  "create_segment_statement",  "select_statement",  "select_objects_at_statement",  "select_objects_having_monads_in_statement",
+  "get_objects_having_monads_in_statement",  "get_set_from_feature_statement",  "select_object_types_statement",  "select_features_statement",
+  "select_enumerations_statement",  "select_enumeration_constants_statement",  "select_object_types_which_use_enum_statement",  "select_min_m_statement",
+  "select_max_m_statement",  "create_object_from_monads_statement",  "create_object_from_id_ds_statement",  "update_objects_by_monads_statement",
+  "update_objects_by_id_ds_statement",  "delete_objects_by_monads_statement",  "delete_objects_by_id_ds_statement",  "get_features_statement",
+  "quit_statement",  "create_indexes_statement",  "drop_indexes_statement",  "begin_transaction_statement",
+  "commit_transaction_statement",  "abort_transaction_statement",  "select_monad_sets_statement",  "get_monad_sets_statement",
+  "create_monad_set_statement",  "update_monad_set_statement",  "drop_monad_set_statement",  "create_objects_statement",
+  "database_name",  "opt_WITH_KEY",  "opt_USING_ENCODING",  "opt_DATABASE",
+  "opt_WITH_ENCODING",  "opt_ANALYZE",   "on_object_type",  "choice_type_types",
+  "choice_object_type_or_all",  "opt_OBJECT",    "opt_if_not_exists",  "opt_range_type",
+  "opt_monad_uniqueness_type",  "object_type_name",  "opt_feature_declaration_list",  "feature_declaration_list",
+  "feature_declaration",  "feature_name",  "feature_type",  "default_specification",
+  "opt_computed",  "list_feature_type",  "opt_with_index",  "opt_string_length",
+  "opt_from_set",  "expression",    "feature_update_list",  "feature_update",
+  "opt_ADD",       "monad_specification",  "choice_number_OBJECTS",  "id_ds_specification",
+  "monad_set_chain",  "monad_set",     "monad_set_operator",  "choice_number_SET",
+  "monad_set_name_list",  "monad_set_name",  "choice_ENUM_ERATION",  "enumeration_name",
+  "ec_declaration_list",  "ec_declaration",  "opt_DEFAULT",   "ec_name",     
+  "opt_ec_initialization",  "ec_initialization",  "ec_update_list",  "ec_update",   
+  "signed_integer",  "unsigned_integer",  "segment_name",  "segment_range",
+  "select_clause",  "in_clause",     "with_max_range_clause",  "returning_clause",
+  "where_clause",  "focus_specification",  "opt_OBJECTS",   "in_specification",
+  "monad_set_element_list",  "monad_set_element",  "object_type_name_list",  "using_range_clause",
+  "mql_query",     "single_monad_specification",  "object_type_to_find",  "using_monad_feature",
+  "feature_list",  "opt_OBJECTYPE",  "opt_ENUM_ERATION",  "with_id_d_specification",
+  "object_creation_specification",  "id_d_const",    "opt_list_of_feature_assignments",  "list_of_feature_assignments",
+  "feature_assignment",  "list_of_integer",  "list_of_identifier",  "choice_number_ID_DS",
+  "id_d_list",     "id_d",          "object_creation_list",  "object_creation_no_object_type",
+  "object_update_specification",  "object_deletion_specification",  "object_type_name_to_delete",  "choice_number_FEATURES",
+  "topograph",     "blocks",        "block_string",  "block_string0",
+  "block",         "block_string1",  "star_monad_set",  "block_string2",
+  "notexist",      "object_reference_declaration",  "object_reference",  "mark_declaration",
+  "retrieval",     "firstlast",     "monad_set_relation_clause",  "monad_set_relation_operation",
+  "universe_or_substrate",  "feature_constraints",  "ffeatures",     "fterm",       
+  "ffactor",       "feature_comparison",  "comparison_operator",  "value",       
+  "object_reference_usage",  "enum_const",    "opt_blocks",    "object_block",
+  "power",         "opt_gap_block",  "gap_block",     "notexist_object_block",
+  "gap_retrieval",  "feature_retrieval",  "restrictor",    "limit",       
 };
 #endif /* NDEBUG */
 
@@ -102781,62 +103712,63 @@ static const char *const mqlyyRuleName[] = {
  /* 309 */ "monad_set_relation_clause ::= monad_set_relation_operation KEY_OPEN_BRACKET universe_or_substrate KEY_CLOSE_BRACKET",
  /* 310 */ "monad_set_relation_clause ::=",
  /* 311 */ "monad_set_relation_operation ::= KEY_PART_OF",
- /* 312 */ "monad_set_relation_operation ::= KEY_OVERLAP",
- /* 313 */ "universe_or_substrate ::= KEY_UNIVERSE",
- /* 314 */ "universe_or_substrate ::= KEY_SUBSTRATE",
- /* 315 */ "feature_constraints ::=",
- /* 316 */ "feature_constraints ::= ffeatures",
- /* 317 */ "ffeatures ::= fterm",
- /* 318 */ "ffeatures ::= ffeatures KEY_OR fterm",
- /* 319 */ "fterm ::= ffactor",
- /* 320 */ "fterm ::= fterm KEY_AND ffactor",
- /* 321 */ "ffactor ::= KEY_NOT ffactor",
- /* 322 */ "ffactor ::= KEY_OPEN_BRACKET ffeatures KEY_CLOSE_BRACKET",
- /* 323 */ "ffactor ::= feature_comparison",
- /* 324 */ "feature_comparison ::= feature_name comparison_operator value",
- /* 325 */ "feature_comparison ::= feature_name KEY_IN KEY_OPEN_BRACKET list_of_identifier KEY_CLOSE_BRACKET",
- /* 326 */ "feature_comparison ::= feature_name KEY_IN KEY_OPEN_BRACKET list_of_integer KEY_CLOSE_BRACKET",
- /* 327 */ "feature_comparison ::= feature_name KEY_IN object_reference_usage",
- /* 328 */ "comparison_operator ::= KEY_EQUALS",
- /* 329 */ "comparison_operator ::= KEY_LESS_THAN",
- /* 330 */ "comparison_operator ::= KEY_GREATER_THAN",
- /* 331 */ "comparison_operator ::= KEY_NOT_EQUAL",
- /* 332 */ "comparison_operator ::= KEY_LESS_THAN_OR_EQUAL",
- /* 333 */ "comparison_operator ::= KEY_GREATER_THAN_OR_EQUAL",
- /* 334 */ "comparison_operator ::= KEY_TILDE",
- /* 335 */ "comparison_operator ::= KEY_NOT_TILDE",
- /* 336 */ "comparison_operator ::= KEY_HAS",
- /* 337 */ "value ::= enum_const",
- /* 338 */ "value ::= signed_integer",
- /* 339 */ "value ::= STRING",
- /* 340 */ "value ::= object_reference_usage",
- /* 341 */ "enum_const ::= IDENTIFIER",
- /* 342 */ "object_reference_usage ::= object_reference KEY_DOT feature_name",
- /* 343 */ "opt_blocks ::=",
- /* 344 */ "opt_blocks ::= blocks",
- /* 345 */ "block ::= object_block",
- /* 346 */ "block ::= power",
- /* 347 */ "block ::= opt_gap_block",
- /* 348 */ "block ::= gap_block",
- /* 349 */ "block ::= notexist_object_block",
- /* 350 */ "star_monad_set ::=",
- /* 351 */ "star_monad_set ::= monad_set",
- /* 352 */ "opt_gap_block ::= KEY_OPEN_SQUARE_BRACKET KEY_OPT_GAP mark_declaration gap_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET",
- /* 353 */ "gap_retrieval ::=",
- /* 354 */ "gap_retrieval ::= KEY_NORETRIEVE",
- /* 355 */ "gap_retrieval ::= KEY_RETRIEVE",
- /* 356 */ "gap_retrieval ::= KEY_FOCUS",
- /* 357 */ "gap_block ::= KEY_OPEN_SQUARE_BRACKET KEY_GAP mark_declaration gap_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET",
- /* 358 */ "feature_retrieval ::= KEY_GET feature_list",
- /* 359 */ "feature_retrieval ::=",
- /* 360 */ "object_block ::= KEY_OPEN_SQUARE_BRACKET object_type_name mark_declaration object_reference_declaration retrieval firstlast monad_set_relation_clause feature_constraints feature_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET",
- /* 361 */ "notexist_object_block ::= notexist KEY_OPEN_SQUARE_BRACKET object_type_name mark_declaration object_reference_declaration retrieval firstlast monad_set_relation_clause feature_constraints feature_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET",
- /* 362 */ "power ::= KEY_POWER restrictor",
- /* 363 */ "power ::= KEY_POWER KEY_BETWEEN limit KEY_AND limit",
- /* 364 */ "restrictor ::=",
- /* 365 */ "restrictor ::= KEY_LESS_THAN limit",
- /* 366 */ "restrictor ::= KEY_LESS_THAN_OR_EQUAL limit",
- /* 367 */ "limit ::= INTEGER",
+ /* 312 */ "monad_set_relation_operation ::= KEY_STARTS_IN",
+ /* 313 */ "monad_set_relation_operation ::= KEY_OVERLAP",
+ /* 314 */ "universe_or_substrate ::= KEY_UNIVERSE",
+ /* 315 */ "universe_or_substrate ::= KEY_SUBSTRATE",
+ /* 316 */ "feature_constraints ::=",
+ /* 317 */ "feature_constraints ::= ffeatures",
+ /* 318 */ "ffeatures ::= fterm",
+ /* 319 */ "ffeatures ::= ffeatures KEY_OR fterm",
+ /* 320 */ "fterm ::= ffactor",
+ /* 321 */ "fterm ::= fterm KEY_AND ffactor",
+ /* 322 */ "ffactor ::= KEY_NOT ffactor",
+ /* 323 */ "ffactor ::= KEY_OPEN_BRACKET ffeatures KEY_CLOSE_BRACKET",
+ /* 324 */ "ffactor ::= feature_comparison",
+ /* 325 */ "feature_comparison ::= feature_name comparison_operator value",
+ /* 326 */ "feature_comparison ::= feature_name KEY_IN KEY_OPEN_BRACKET list_of_identifier KEY_CLOSE_BRACKET",
+ /* 327 */ "feature_comparison ::= feature_name KEY_IN KEY_OPEN_BRACKET list_of_integer KEY_CLOSE_BRACKET",
+ /* 328 */ "feature_comparison ::= feature_name KEY_IN object_reference_usage",
+ /* 329 */ "comparison_operator ::= KEY_EQUALS",
+ /* 330 */ "comparison_operator ::= KEY_LESS_THAN",
+ /* 331 */ "comparison_operator ::= KEY_GREATER_THAN",
+ /* 332 */ "comparison_operator ::= KEY_NOT_EQUAL",
+ /* 333 */ "comparison_operator ::= KEY_LESS_THAN_OR_EQUAL",
+ /* 334 */ "comparison_operator ::= KEY_GREATER_THAN_OR_EQUAL",
+ /* 335 */ "comparison_operator ::= KEY_TILDE",
+ /* 336 */ "comparison_operator ::= KEY_NOT_TILDE",
+ /* 337 */ "comparison_operator ::= KEY_HAS",
+ /* 338 */ "value ::= enum_const",
+ /* 339 */ "value ::= signed_integer",
+ /* 340 */ "value ::= STRING",
+ /* 341 */ "value ::= object_reference_usage",
+ /* 342 */ "enum_const ::= IDENTIFIER",
+ /* 343 */ "object_reference_usage ::= object_reference KEY_DOT feature_name",
+ /* 344 */ "opt_blocks ::=",
+ /* 345 */ "opt_blocks ::= blocks",
+ /* 346 */ "block ::= object_block",
+ /* 347 */ "block ::= power",
+ /* 348 */ "block ::= opt_gap_block",
+ /* 349 */ "block ::= gap_block",
+ /* 350 */ "block ::= notexist_object_block",
+ /* 351 */ "star_monad_set ::=",
+ /* 352 */ "star_monad_set ::= monad_set",
+ /* 353 */ "opt_gap_block ::= KEY_OPEN_SQUARE_BRACKET KEY_OPT_GAP mark_declaration gap_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET",
+ /* 354 */ "gap_retrieval ::=",
+ /* 355 */ "gap_retrieval ::= KEY_NORETRIEVE",
+ /* 356 */ "gap_retrieval ::= KEY_RETRIEVE",
+ /* 357 */ "gap_retrieval ::= KEY_FOCUS",
+ /* 358 */ "gap_block ::= KEY_OPEN_SQUARE_BRACKET KEY_GAP mark_declaration gap_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET",
+ /* 359 */ "feature_retrieval ::= KEY_GET feature_list",
+ /* 360 */ "feature_retrieval ::=",
+ /* 361 */ "object_block ::= KEY_OPEN_SQUARE_BRACKET object_type_name mark_declaration object_reference_declaration retrieval firstlast monad_set_relation_clause feature_constraints feature_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET",
+ /* 362 */ "notexist_object_block ::= notexist KEY_OPEN_SQUARE_BRACKET object_type_name mark_declaration object_reference_declaration retrieval firstlast monad_set_relation_clause feature_constraints feature_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET",
+ /* 363 */ "power ::= KEY_POWER restrictor",
+ /* 364 */ "power ::= KEY_POWER KEY_BETWEEN limit KEY_AND limit",
+ /* 365 */ "restrictor ::=",
+ /* 366 */ "restrictor ::= KEY_LESS_THAN limit",
+ /* 367 */ "restrictor ::= KEY_LESS_THAN_OR_EQUAL limit",
+ /* 368 */ "limit ::= INTEGER",
 };
 #endif /* NDEBUG */
 
@@ -103024,526 +103956,527 @@ static void mqlyy_destructor(
     case 106: /* KEY_NORETRIEVE */
     case 107: /* KEY_RETRIEVE */
     case 108: /* KEY_PART_OF */
-    case 109: /* KEY_OVERLAP */
-    case 110: /* KEY_UNIVERSE */
-    case 111: /* KEY_SUBSTRATE */
-    case 112: /* KEY_LESS_THAN */
-    case 113: /* KEY_GREATER_THAN */
-    case 114: /* KEY_NOT_EQUAL */
-    case 115: /* KEY_LESS_THAN_OR_EQUAL */
-    case 116: /* KEY_GREATER_THAN_OR_EQUAL */
-    case 117: /* KEY_TILDE */
-    case 118: /* KEY_NOT_TILDE */
-    case 119: /* KEY_HAS */
-    case 120: /* KEY_DOT */
-    case 121: /* KEY_OPT_GAP */
-    case 122: /* KEY_GAP */
-    case 123: /* KEY_POWER */
-    case 124: /* KEY_BETWEEN */
+    case 109: /* KEY_STARTS_IN */
+    case 110: /* KEY_OVERLAP */
+    case 111: /* KEY_UNIVERSE */
+    case 112: /* KEY_SUBSTRATE */
+    case 113: /* KEY_LESS_THAN */
+    case 114: /* KEY_GREATER_THAN */
+    case 115: /* KEY_NOT_EQUAL */
+    case 116: /* KEY_LESS_THAN_OR_EQUAL */
+    case 117: /* KEY_GREATER_THAN_OR_EQUAL */
+    case 118: /* KEY_TILDE */
+    case 119: /* KEY_NOT_TILDE */
+    case 120: /* KEY_HAS */
+    case 121: /* KEY_DOT */
+    case 122: /* KEY_OPT_GAP */
+    case 123: /* KEY_GAP */
+    case 124: /* KEY_POWER */
+    case 125: /* KEY_BETWEEN */
 {
 #line 130 "./mql.yxx"
  deleteToken((mqlyypminor->mqlyy0));
-#line 1385 "./mql.c"
+#line 1387 "./mql.c"
 }
       break;
-    case 126: /* statement */
-    case 127: /* statement_by_itself */
-    case 128: /* create_database_statement */
-    case 129: /* initialize_database_statement */
-    case 130: /* use_statement */
-    case 131: /* drop_database_statement */
-    case 132: /* vacuum_database_statement */
-    case 133: /* create_object_type_statement */
-    case 134: /* update_object_type_statement */
-    case 135: /* drop_object_type_statement */
-    case 136: /* insert_monads_statement */
-    case 137: /* delete_monads_statement */
-    case 138: /* get_monads_statement */
-    case 139: /* monad_set_calculation_statement */
-    case 140: /* create_enumeration_statement */
-    case 141: /* update_enumeration_statement */
-    case 142: /* drop_enumeration_statement */
-    case 143: /* create_segment_statement */
-    case 144: /* select_statement */
-    case 145: /* select_objects_at_statement */
-    case 146: /* select_objects_having_monads_in_statement */
-    case 147: /* get_objects_having_monads_in_statement */
-    case 149: /* select_object_types_statement */
-    case 151: /* select_enumerations_statement */
-    case 152: /* select_enumeration_constants_statement */
-    case 153: /* select_object_types_which_use_enum_statement */
-    case 154: /* select_min_m_statement */
-    case 155: /* select_max_m_statement */
-    case 156: /* create_object_from_monads_statement */
-    case 157: /* create_object_from_id_ds_statement */
-    case 158: /* update_objects_by_monads_statement */
-    case 159: /* update_objects_by_id_ds_statement */
-    case 160: /* delete_objects_by_monads_statement */
-    case 161: /* delete_objects_by_id_ds_statement */
-    case 162: /* get_features_statement */
-    case 163: /* quit_statement */
-    case 164: /* create_indexes_statement */
-    case 165: /* drop_indexes_statement */
-    case 166: /* begin_transaction_statement */
-    case 167: /* commit_transaction_statement */
-    case 168: /* abort_transaction_statement */
-    case 169: /* select_monad_sets_statement */
-    case 170: /* get_monad_sets_statement */
-    case 171: /* create_monad_set_statement */
-    case 172: /* update_monad_set_statement */
-    case 173: /* drop_monad_set_statement */
-    case 174: /* create_objects_statement */
+    case 127: /* statement */
+    case 128: /* statement_by_itself */
+    case 129: /* create_database_statement */
+    case 130: /* initialize_database_statement */
+    case 131: /* use_statement */
+    case 132: /* drop_database_statement */
+    case 133: /* vacuum_database_statement */
+    case 134: /* create_object_type_statement */
+    case 135: /* update_object_type_statement */
+    case 136: /* drop_object_type_statement */
+    case 137: /* insert_monads_statement */
+    case 138: /* delete_monads_statement */
+    case 139: /* get_monads_statement */
+    case 140: /* monad_set_calculation_statement */
+    case 141: /* create_enumeration_statement */
+    case 142: /* update_enumeration_statement */
+    case 143: /* drop_enumeration_statement */
+    case 144: /* create_segment_statement */
+    case 145: /* select_statement */
+    case 146: /* select_objects_at_statement */
+    case 147: /* select_objects_having_monads_in_statement */
+    case 148: /* get_objects_having_monads_in_statement */
+    case 150: /* select_object_types_statement */
+    case 152: /* select_enumerations_statement */
+    case 153: /* select_enumeration_constants_statement */
+    case 154: /* select_object_types_which_use_enum_statement */
+    case 155: /* select_min_m_statement */
+    case 156: /* select_max_m_statement */
+    case 157: /* create_object_from_monads_statement */
+    case 158: /* create_object_from_id_ds_statement */
+    case 159: /* update_objects_by_monads_statement */
+    case 160: /* update_objects_by_id_ds_statement */
+    case 161: /* delete_objects_by_monads_statement */
+    case 162: /* delete_objects_by_id_ds_statement */
+    case 163: /* get_features_statement */
+    case 164: /* quit_statement */
+    case 165: /* create_indexes_statement */
+    case 166: /* drop_indexes_statement */
+    case 167: /* begin_transaction_statement */
+    case 168: /* commit_transaction_statement */
+    case 169: /* abort_transaction_statement */
+    case 170: /* select_monad_sets_statement */
+    case 171: /* get_monad_sets_statement */
+    case 172: /* create_monad_set_statement */
+    case 173: /* update_monad_set_statement */
+    case 174: /* drop_monad_set_statement */
+    case 175: /* create_objects_statement */
 {
 #line 150 "./mql.yxx"
-delete((mqlyypminor->mqlyy204));
-#line 1438 "./mql.c"
+delete((mqlyypminor->mqlyy160));
+#line 1440 "./mql.c"
 }
       break;
-    case 175: /* database_name */
-    case 176: /* opt_WITH_KEY */
-    case 179: /* opt_WITH_ENCODING */
-    case 181: /* on_object_type */
-    case 183: /* choice_object_type_or_all */
-    case 188: /* object_type_name */
-    case 192: /* feature_name */
-    case 214: /* enumeration_name */
-    case 225: /* segment_name */
-    case 241: /* object_type_to_find */
-    case 242: /* using_monad_feature */
-    case 260: /* object_deletion_specification */
-    case 261: /* object_type_name_to_delete */
-    case 272: /* object_reference_declaration */
-    case 273: /* object_reference */
-    case 274: /* mark_declaration */
-    case 288: /* enum_const */
+    case 176: /* database_name */
+    case 177: /* opt_WITH_KEY */
+    case 180: /* opt_WITH_ENCODING */
+    case 182: /* on_object_type */
+    case 184: /* choice_object_type_or_all */
+    case 189: /* object_type_name */
+    case 193: /* feature_name */
+    case 215: /* enumeration_name */
+    case 226: /* segment_name */
+    case 242: /* object_type_to_find */
+    case 243: /* using_monad_feature */
+    case 261: /* object_deletion_specification */
+    case 262: /* object_type_name_to_delete */
+    case 273: /* object_reference_declaration */
+    case 274: /* object_reference */
+    case 275: /* mark_declaration */
+    case 289: /* enum_const */
 {
 #line 214 "./mql.yxx"
  deleteToken((mqlyypminor->mqlyy0)); 
-#line 1461 "./mql.c"
+#line 1463 "./mql.c"
 }
       break;
-    case 178: /* opt_DATABASE */
-    case 182: /* choice_type_types */
-    case 184: /* opt_OBJECT */
-    case 203: /* opt_ADD */
-    case 205: /* choice_number_OBJECTS */
-    case 210: /* choice_number_SET */
-    case 213: /* choice_ENUM_ERATION */
-    case 233: /* opt_OBJECTS */
-    case 244: /* opt_OBJECTYPE */
-    case 245: /* opt_ENUM_ERATION */
-    case 254: /* choice_number_ID_DS */
-    case 262: /* choice_number_FEATURES */
-    case 271: /* notexist */
+    case 179: /* opt_DATABASE */
+    case 183: /* choice_type_types */
+    case 185: /* opt_OBJECT */
+    case 204: /* opt_ADD */
+    case 206: /* choice_number_OBJECTS */
+    case 211: /* choice_number_SET */
+    case 214: /* choice_ENUM_ERATION */
+    case 234: /* opt_OBJECTS */
+    case 245: /* opt_OBJECTYPE */
+    case 246: /* opt_ENUM_ERATION */
+    case 255: /* choice_number_ID_DS */
+    case 263: /* choice_number_FEATURES */
+    case 272: /* notexist */
 {
 #line 242 "./mql.yxx"
 ;
-#line 1480 "./mql.c"
+#line 1482 "./mql.c"
 }
       break;
-    case 180: /* opt_ANALYZE */
-    case 185: /* opt_if_not_exists */
-    case 195: /* opt_computed */
-    case 197: /* opt_with_index */
-    case 199: /* opt_from_set */
-    case 217: /* opt_DEFAULT */
+    case 181: /* opt_ANALYZE */
+    case 186: /* opt_if_not_exists */
+    case 196: /* opt_computed */
+    case 198: /* opt_with_index */
+    case 200: /* opt_from_set */
+    case 218: /* opt_DEFAULT */
 {
 #line 260 "./mql.yxx"
 ;
-#line 1492 "./mql.c"
+#line 1494 "./mql.c"
 }
       break;
-    case 186: /* opt_range_type */
+    case 187: /* opt_range_type */
 {
 #line 325 "./mql.yxx"
 ;
-#line 1499 "./mql.c"
+#line 1501 "./mql.c"
 }
       break;
-    case 187: /* opt_monad_uniqueness_type */
+    case 188: /* opt_monad_uniqueness_type */
 {
 #line 336 "./mql.yxx"
 ;
-#line 1506 "./mql.c"
+#line 1508 "./mql.c"
 }
       break;
-    case 189: /* opt_feature_declaration_list */
-    case 190: /* feature_declaration_list */
-    case 191: /* feature_declaration */
+    case 190: /* opt_feature_declaration_list */
+    case 191: /* feature_declaration_list */
+    case 192: /* feature_declaration */
 {
 #line 358 "./mql.yxx"
-delete((mqlyypminor->mqlyy541));
-#line 1515 "./mql.c"
+delete((mqlyypminor->mqlyy193));
+#line 1517 "./mql.c"
 }
       break;
-    case 193: /* feature_type */
-    case 196: /* list_feature_type */
+    case 194: /* feature_type */
+    case 197: /* list_feature_type */
 {
 #line 380 "./mql.yxx"
-delete((mqlyypminor->mqlyy109));
-#line 1523 "./mql.c"
+delete((mqlyypminor->mqlyy283));
+#line 1525 "./mql.c"
 }
       break;
-    case 194: /* default_specification */
-    case 200: /* expression */
+    case 195: /* default_specification */
+    case 201: /* expression */
 {
 #line 438 "./mql.yxx"
-delete((mqlyypminor->mqlyy111));
-#line 1531 "./mql.c"
+delete((mqlyypminor->mqlyy139));
+#line 1533 "./mql.c"
 }
       break;
-    case 198: /* opt_string_length */
-    case 220: /* ec_initialization */
-    case 223: /* signed_integer */
-    case 224: /* unsigned_integer */
+    case 199: /* opt_string_length */
+    case 221: /* ec_initialization */
+    case 224: /* signed_integer */
+    case 225: /* unsigned_integer */
 {
 #line 430 "./mql.yxx"
 ;
-#line 1541 "./mql.c"
+#line 1543 "./mql.c"
 }
       break;
-    case 201: /* feature_update_list */
-    case 202: /* feature_update */
+    case 202: /* feature_update_list */
+    case 203: /* feature_update */
 {
 #line 463 "./mql.yxx"
-delete((mqlyypminor->mqlyy550));
-#line 1549 "./mql.c"
+delete((mqlyypminor->mqlyy406));
+#line 1551 "./mql.c"
 }
       break;
-    case 204: /* monad_specification */
-    case 208: /* monad_set */
-    case 226: /* segment_range */
-    case 228: /* in_clause */
-    case 234: /* in_specification */
-    case 235: /* monad_set_element_list */
-    case 236: /* monad_set_element */
-    case 269: /* star_monad_set */
+    case 205: /* monad_specification */
+    case 209: /* monad_set */
+    case 227: /* segment_range */
+    case 229: /* in_clause */
+    case 235: /* in_specification */
+    case 236: /* monad_set_element_list */
+    case 237: /* monad_set_element */
+    case 270: /* star_monad_set */
 {
 #line 1028 "./mql.yxx"
-delete((mqlyypminor->mqlyy434));
-#line 1563 "./mql.c"
+delete((mqlyypminor->mqlyy34));
+#line 1565 "./mql.c"
 }
       break;
-    case 206: /* id_ds_specification */
-    case 255: /* id_d_list */
-    case 256: /* id_d */
+    case 207: /* id_ds_specification */
+    case 256: /* id_d_list */
+    case 257: /* id_d */
 {
 #line 1129 "./mql.yxx"
-delete((mqlyypminor->mqlyy451));
-#line 1572 "./mql.c"
+delete((mqlyypminor->mqlyy51));
+#line 1574 "./mql.c"
 }
       break;
-    case 207: /* monad_set_chain */
+    case 208: /* monad_set_chain */
 {
 #line 524 "./mql.yxx"
-delete((mqlyypminor->mqlyy78));
-#line 1579 "./mql.c"
+delete((mqlyypminor->mqlyy279));
+#line 1581 "./mql.c"
 }
       break;
-    case 209: /* monad_set_operator */
+    case 210: /* monad_set_operator */
 {
 #line 532 "./mql.yxx"
 ;
-#line 1586 "./mql.c"
+#line 1588 "./mql.c"
 }
       break;
-    case 211: /* monad_set_name_list */
-    case 237: /* object_type_name_list */
-    case 253: /* list_of_identifier */
+    case 212: /* monad_set_name_list */
+    case 238: /* object_type_name_list */
+    case 254: /* list_of_identifier */
 {
 #line 608 "./mql.yxx"
-delete((mqlyypminor->mqlyy238));
-#line 1595 "./mql.c"
+delete((mqlyypminor->mqlyy440));
+#line 1597 "./mql.c"
 }
       break;
-    case 212: /* monad_set_name */
+    case 213: /* monad_set_name */
 {
 #line 603 "./mql.yxx"
 deleteToken((mqlyypminor->mqlyy0));
-#line 1602 "./mql.c"
+#line 1604 "./mql.c"
 }
       break;
-    case 215: /* ec_declaration_list */
-    case 216: /* ec_declaration */
+    case 216: /* ec_declaration_list */
+    case 217: /* ec_declaration */
 {
 #line 636 "./mql.yxx"
-delete((mqlyypminor->mqlyy486));
-#line 1610 "./mql.c"
+delete((mqlyypminor->mqlyy461));
+#line 1612 "./mql.c"
 }
       break;
-    case 218: /* ec_name */
+    case 219: /* ec_name */
 {
 #line 659 "./mql.yxx"
  deleteToken((mqlyypminor->mqlyy0));  
-#line 1617 "./mql.c"
+#line 1619 "./mql.c"
 }
       break;
-    case 219: /* opt_ec_initialization */
+    case 220: /* opt_ec_initialization */
 {
 #line 663 "./mql.yxx"
-delete((mqlyypminor->mqlyy579));
-#line 1624 "./mql.c"
+delete((mqlyypminor->mqlyy587));
+#line 1626 "./mql.c"
 }
       break;
-    case 221: /* ec_update_list */
-    case 222: /* ec_update */
+    case 222: /* ec_update_list */
+    case 223: /* ec_update */
 {
 #line 680 "./mql.yxx"
-delete((mqlyypminor->mqlyy494));
-#line 1632 "./mql.c"
+delete((mqlyypminor->mqlyy362));
+#line 1634 "./mql.c"
 }
       break;
-    case 227: /* select_clause */
-    case 232: /* focus_specification */
+    case 228: /* select_clause */
+    case 233: /* focus_specification */
 {
 #line 758 "./mql.yxx"
 ;
-#line 1640 "./mql.c"
+#line 1642 "./mql.c"
 }
       break;
-    case 229: /* with_max_range_clause */
+    case 230: /* with_max_range_clause */
 {
 #line 817 "./mql.yxx"
-delete((mqlyypminor->mqlyy36));
-#line 1647 "./mql.c"
+delete((mqlyypminor->mqlyy278));
+#line 1649 "./mql.c"
 }
       break;
-    case 230: /* returning_clause */
+    case 231: /* returning_clause */
 {
 #line 829 "./mql.yxx"
-delete((mqlyypminor->mqlyy335));
-#line 1654 "./mql.c"
+delete((mqlyypminor->mqlyy309));
+#line 1656 "./mql.c"
 }
       break;
-    case 231: /* where_clause */
-    case 239: /* mql_query */
-    case 263: /* topograph */
+    case 232: /* where_clause */
+    case 240: /* mql_query */
+    case 264: /* topograph */
 {
 #line 870 "./mql.yxx"
-delete((mqlyypminor->mqlyy445));
-#line 1663 "./mql.c"
+delete((mqlyypminor->mqlyy295));
+#line 1665 "./mql.c"
 }
       break;
-    case 238: /* using_range_clause */
+    case 239: /* using_range_clause */
 {
 #line 844 "./mql.yxx"
-delete((mqlyypminor->mqlyy248));
-#line 1670 "./mql.c"
+delete((mqlyypminor->mqlyy582));
+#line 1672 "./mql.c"
 }
       break;
-    case 240: /* single_monad_specification */
-    case 297: /* restrictor */
-    case 298: /* limit */
+    case 241: /* single_monad_specification */
+    case 298: /* restrictor */
+    case 299: /* limit */
 {
 #line 885 "./mql.yxx"
 ;
-#line 1679 "./mql.c"
+#line 1681 "./mql.c"
 }
       break;
-    case 243: /* feature_list */
-    case 296: /* feature_retrieval */
+    case 244: /* feature_list */
+    case 297: /* feature_retrieval */
 {
 #line 1275 "./mql.yxx"
-delete((mqlyypminor->mqlyy374));
-#line 1687 "./mql.c"
+delete((mqlyypminor->mqlyy242));
+#line 1689 "./mql.c"
 }
       break;
-    case 246: /* with_id_d_specification */
-    case 248: /* id_d_const */
+    case 247: /* with_id_d_specification */
+    case 249: /* id_d_const */
 {
 #line 1032 "./mql.yxx"
 ;
-#line 1695 "./mql.c"
+#line 1697 "./mql.c"
 }
       break;
-    case 247: /* object_creation_specification */
-    case 259: /* object_update_specification */
+    case 248: /* object_creation_specification */
+    case 260: /* object_update_specification */
 {
 #line 1047 "./mql.yxx"
-delete((mqlyypminor->mqlyy545));
-#line 1703 "./mql.c"
+delete((mqlyypminor->mqlyy365));
+#line 1705 "./mql.c"
 }
       break;
-    case 249: /* opt_list_of_feature_assignments */
-    case 250: /* list_of_feature_assignments */
-    case 251: /* feature_assignment */
+    case 250: /* opt_list_of_feature_assignments */
+    case 251: /* list_of_feature_assignments */
+    case 252: /* feature_assignment */
 {
 #line 1056 "./mql.yxx"
-delete((mqlyypminor->mqlyy484));
-#line 1712 "./mql.c"
+delete((mqlyypminor->mqlyy600));
+#line 1714 "./mql.c"
 }
       break;
-    case 252: /* list_of_integer */
+    case 253: /* list_of_integer */
 {
 #line 1102 "./mql.yxx"
-delete((mqlyypminor->mqlyy1));
-#line 1719 "./mql.c"
+delete((mqlyypminor->mqlyy327));
+#line 1721 "./mql.c"
 }
       break;
-    case 257: /* object_creation_list */
-    case 258: /* object_creation_no_object_type */
+    case 258: /* object_creation_list */
+    case 259: /* object_creation_no_object_type */
 {
 #line 1166 "./mql.yxx"
-delete((mqlyypminor->mqlyy247));
-#line 1727 "./mql.c"
+delete((mqlyypminor->mqlyy457));
+#line 1729 "./mql.c"
 }
       break;
-    case 264: /* blocks */
-    case 289: /* opt_blocks */
+    case 265: /* blocks */
+    case 290: /* opt_blocks */
 {
 #line 1301 "./mql.yxx"
-delete((mqlyypminor->mqlyy571));
-#line 1735 "./mql.c"
+delete((mqlyypminor->mqlyy377));
+#line 1737 "./mql.c"
 }
       break;
-    case 265: /* block_string */
+    case 266: /* block_string */
 {
 #line 1330 "./mql.yxx"
-delete((mqlyypminor->mqlyy31));
-#line 1742 "./mql.c"
+delete((mqlyypminor->mqlyy205));
+#line 1744 "./mql.c"
 }
       break;
-    case 266: /* block_string0 */
+    case 267: /* block_string0 */
 {
 #line 1306 "./mql.yxx"
-delete((mqlyypminor->mqlyy125));
-#line 1749 "./mql.c"
+delete((mqlyypminor->mqlyy445));
+#line 1751 "./mql.c"
 }
       break;
-    case 267: /* block */
+    case 268: /* block */
 {
-#line 1480 "./mql.yxx"
-delete((mqlyypminor->mqlyy560));
-#line 1756 "./mql.c"
+#line 1482 "./mql.yxx"
+delete((mqlyypminor->mqlyy414));
+#line 1758 "./mql.c"
 }
       break;
-    case 268: /* block_string1 */
+    case 269: /* block_string1 */
 {
 #line 1313 "./mql.yxx"
-delete((mqlyypminor->mqlyy178));
-#line 1763 "./mql.c"
+delete((mqlyypminor->mqlyy498));
+#line 1765 "./mql.c"
 }
       break;
-    case 270: /* block_string2 */
+    case 271: /* block_string2 */
 {
 #line 1320 "./mql.yxx"
-delete((mqlyypminor->mqlyy231));
-#line 1770 "./mql.c"
+delete((mqlyypminor->mqlyy551));
+#line 1772 "./mql.c"
 }
       break;
-    case 275: /* retrieval */
-    case 295: /* gap_retrieval */
+    case 276: /* retrieval */
+    case 296: /* gap_retrieval */
 {
 #line 1360 "./mql.yxx"
 ;
-#line 1778 "./mql.c"
+#line 1780 "./mql.c"
 }
       break;
-    case 276: /* firstlast */
+    case 277: /* firstlast */
 {
 #line 1367 "./mql.yxx"
 ;
-#line 1785 "./mql.c"
+#line 1787 "./mql.c"
 }
       break;
-    case 277: /* monad_set_relation_clause */
+    case 278: /* monad_set_relation_clause */
 {
 #line 1374 "./mql.yxx"
-delete((mqlyypminor->mqlyy253));
-#line 1792 "./mql.c"
+delete((mqlyypminor->mqlyy385));
+#line 1794 "./mql.c"
 }
       break;
-    case 278: /* monad_set_relation_operation */
+    case 279: /* monad_set_relation_operation */
 {
 #line 1383 "./mql.yxx"
 
-#line 1799 "./mql.c"
+#line 1801 "./mql.c"
 }
       break;
-    case 279: /* universe_or_substrate */
+    case 280: /* universe_or_substrate */
 {
-#line 1391 "./mql.yxx"
+#line 1393 "./mql.yxx"
  
-#line 1806 "./mql.c"
+#line 1808 "./mql.c"
 }
       break;
-    case 280: /* feature_constraints */
-    case 281: /* ffeatures */
+    case 281: /* feature_constraints */
+    case 282: /* ffeatures */
 {
-#line 1399 "./mql.yxx"
-delete((mqlyypminor->mqlyy142));
-#line 1814 "./mql.c"
+#line 1401 "./mql.yxx"
+delete((mqlyypminor->mqlyy288));
+#line 1816 "./mql.c"
 }
       break;
-    case 282: /* fterm */
+    case 283: /* fterm */
 {
-#line 1411 "./mql.yxx"
-delete((mqlyypminor->mqlyy261));
-#line 1821 "./mql.c"
+#line 1413 "./mql.yxx"
+delete((mqlyypminor->mqlyy313));
+#line 1823 "./mql.c"
 }
       break;
-    case 283: /* ffactor */
+    case 284: /* ffactor */
 {
-#line 1416 "./mql.yxx"
-delete((mqlyypminor->mqlyy472));
-#line 1828 "./mql.c"
+#line 1418 "./mql.yxx"
+delete((mqlyypminor->mqlyy540));
+#line 1830 "./mql.c"
 }
       break;
-    case 284: /* feature_comparison */
+    case 285: /* feature_comparison */
 {
-#line 1426 "./mql.yxx"
-delete((mqlyypminor->mqlyy370));
-#line 1835 "./mql.c"
+#line 1428 "./mql.yxx"
+delete((mqlyypminor->mqlyy407));
+#line 1837 "./mql.c"
 }
       break;
-    case 285: /* comparison_operator */
+    case 286: /* comparison_operator */
 {
-#line 1438 "./mql.yxx"
+#line 1440 "./mql.yxx"
 ;
-#line 1842 "./mql.c"
+#line 1844 "./mql.c"
 }
       break;
-    case 286: /* value */
+    case 287: /* value */
 {
-#line 1452 "./mql.yxx"
-delete((mqlyypminor->mqlyy404));
-#line 1849 "./mql.c"
+#line 1454 "./mql.yxx"
+delete((mqlyypminor->mqlyy204));
+#line 1851 "./mql.c"
 }
       break;
-    case 287: /* object_reference_usage */
+    case 288: /* object_reference_usage */
 {
-#line 1468 "./mql.yxx"
-delete((mqlyypminor->mqlyy366));
-#line 1856 "./mql.c"
+#line 1470 "./mql.yxx"
+delete((mqlyypminor->mqlyy6));
+#line 1858 "./mql.c"
 }
       break;
-    case 290: /* object_block */
-    case 294: /* notexist_object_block */
+    case 291: /* object_block */
+    case 295: /* notexist_object_block */
 {
-#line 1521 "./mql.yxx"
-delete((mqlyypminor->mqlyy409));
-#line 1864 "./mql.c"
+#line 1523 "./mql.yxx"
+delete((mqlyypminor->mqlyy125));
+#line 1866 "./mql.c"
 }
       break;
-    case 291: /* power */
+    case 292: /* power */
 {
-#line 1550 "./mql.yxx"
-delete((mqlyypminor->mqlyy208));
-#line 1871 "./mql.c"
+#line 1552 "./mql.yxx"
+delete((mqlyypminor->mqlyy68));
+#line 1873 "./mql.c"
 }
       break;
-    case 292: /* opt_gap_block */
+    case 293: /* opt_gap_block */
 {
-#line 1493 "./mql.yxx"
-delete((mqlyypminor->mqlyy263));
-#line 1878 "./mql.c"
+#line 1495 "./mql.yxx"
+delete((mqlyypminor->mqlyy265));
+#line 1880 "./mql.c"
 }
       break;
-    case 293: /* gap_block */
+    case 294: /* gap_block */
 {
-#line 1507 "./mql.yxx"
-delete((mqlyypminor->mqlyy476));
-#line 1885 "./mql.c"
+#line 1509 "./mql.yxx"
+delete((mqlyypminor->mqlyy18));
+#line 1887 "./mql.c"
 }
       break;
     default:  break;   /* If no destructor action specified: do nothing */
@@ -103730,7 +104663,7 @@ static void mqlyyStackOverflow(mqlyyParser *mqlyypParser, MQLYYMINORTYPE *mqlyyp
   std::string errMsg = "stack overflow. Bailing out...\n";
   pEE->pError->appendError(errMsg);
    
-#line 2072 "./mql.c"
+#line 2074 "./mql.c"
    MQLParserARG_STORE; /* Suppress warning about unused %extra_argument var */
 }
 
@@ -103800,374 +104733,375 @@ static const struct {
   MQLYYCODETYPE lhs;         /* Symbol on the left-hand side of the rule */
   unsigned char nrhs;     /* Number of right-hand side symbols in the rule */
 } mqlyyRuleInfo[] = {
-  { 126, 2 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 127, 1 },
-  { 128, 5 },
-  { 175, 1 },
-  { 175, 1 },
-  { 129, 4 },
+  { 127, 2 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 128, 1 },
+  { 129, 5 },
+  { 176, 1 },
+  { 176, 1 },
   { 130, 4 },
-  { 176, 3 },
-  { 176, 0 },
+  { 131, 4 },
   { 177, 3 },
   { 177, 0 },
-  { 178, 1 },
+  { 178, 3 },
   { 178, 0 },
-  { 131, 3 },
+  { 179, 1 },
+  { 179, 0 },
   { 132, 3 },
-  { 180, 0 },
-  { 180, 1 },
-  { 164, 3 },
+  { 133, 3 },
+  { 181, 0 },
+  { 181, 1 },
   { 165, 3 },
-  { 181, 6 },
-  { 182, 1 },
-  { 182, 1 },
-  { 166, 2 },
+  { 166, 3 },
+  { 182, 6 },
+  { 183, 1 },
+  { 183, 1 },
   { 167, 2 },
   { 168, 2 },
-  { 133, 10 },
-  { 186, 0 },
-  { 186, 4 },
-  { 186, 4 },
-  { 186, 4 },
+  { 169, 2 },
+  { 134, 10 },
   { 187, 0 },
   { 187, 4 },
-  { 187, 6 },
-  { 187, 3 },
-  { 184, 1 },
-  { 184, 0 },
-  { 188, 1 },
-  { 189, 1 },
-  { 189, 0 },
-  { 190, 1 },
-  { 190, 2 },
-  { 191, 6 },
-  { 191, 6 },
-  { 193, 2 },
-  { 193, 4 },
-  { 193, 4 },
-  { 193, 2 },
-  { 193, 2 },
-  { 193, 3 },
-  { 193, 5 },
-  { 193, 5 },
-  { 193, 5 },
-  { 196, 1 },
-  { 196, 1 },
-  { 196, 1 },
-  { 197, 2 },
-  { 197, 2 },
-  { 197, 0 },
-  { 185, 3 },
+  { 187, 4 },
+  { 187, 4 },
+  { 188, 0 },
+  { 188, 4 },
+  { 188, 6 },
+  { 188, 3 },
+  { 185, 1 },
   { 185, 0 },
-  { 199, 2 },
-  { 199, 0 },
-  { 198, 0 },
-  { 198, 3 },
+  { 189, 1 },
+  { 190, 1 },
+  { 190, 0 },
+  { 191, 1 },
+  { 191, 2 },
+  { 192, 6 },
+  { 192, 6 },
   { 194, 2 },
-  { 194, 0 },
-  { 195, 1 },
+  { 194, 4 },
+  { 194, 4 },
+  { 194, 2 },
+  { 194, 2 },
+  { 194, 3 },
+  { 194, 5 },
+  { 194, 5 },
+  { 194, 5 },
+  { 197, 1 },
+  { 197, 1 },
+  { 197, 1 },
+  { 198, 2 },
+  { 198, 2 },
+  { 198, 0 },
+  { 186, 3 },
+  { 186, 0 },
+  { 200, 2 },
+  { 200, 0 },
+  { 199, 0 },
+  { 199, 3 },
+  { 195, 2 },
   { 195, 0 },
-  { 134, 7 },
-  { 201, 1 },
-  { 201, 2 },
+  { 196, 1 },
+  { 196, 0 },
+  { 135, 7 },
+  { 202, 1 },
   { 202, 2 },
-  { 202, 3 },
-  { 203, 1 },
-  { 203, 0 },
-  { 135, 6 },
-  { 136, 2 },
+  { 203, 2 },
+  { 203, 3 },
+  { 204, 1 },
+  { 204, 0 },
+  { 136, 6 },
   { 137, 2 },
-  { 138, 9 },
-  { 139, 4 },
-  { 207, 1 },
-  { 207, 3 },
-  { 209, 1 },
-  { 209, 1 },
-  { 209, 1 },
-  { 169, 3 },
-  { 170, 4 },
-  { 170, 4 },
+  { 138, 2 },
+  { 139, 9 },
+  { 140, 4 },
+  { 208, 1 },
+  { 208, 3 },
   { 210, 1 },
   { 210, 1 },
-  { 171, 6 },
-  { 172, 6 },
-  { 172, 6 },
-  { 172, 6 },
-  { 172, 6 },
-  { 173, 4 },
-  { 212, 1 },
+  { 210, 1 },
+  { 170, 3 },
+  { 171, 4 },
+  { 171, 4 },
   { 211, 1 },
-  { 211, 3 },
-  { 140, 7 },
+  { 211, 1 },
+  { 172, 6 },
+  { 173, 6 },
+  { 173, 6 },
+  { 173, 6 },
+  { 173, 6 },
+  { 174, 4 },
   { 213, 1 },
-  { 213, 1 },
+  { 212, 1 },
+  { 212, 3 },
+  { 141, 7 },
+  { 214, 1 },
   { 214, 1 },
   { 215, 1 },
-  { 215, 3 },
+  { 216, 1 },
   { 216, 3 },
-  { 217, 1 },
-  { 217, 0 },
+  { 217, 3 },
   { 218, 1 },
+  { 218, 0 },
   { 219, 1 },
-  { 219, 0 },
-  { 141, 7 },
-  { 221, 1 },
-  { 221, 3 },
-  { 222, 4 },
-  { 222, 4 },
-  { 222, 2 },
-  { 220, 2 },
-  { 223, 1 },
+  { 220, 1 },
+  { 220, 0 },
+  { 142, 7 },
+  { 222, 1 },
+  { 222, 3 },
+  { 223, 4 },
+  { 223, 4 },
   { 223, 2 },
-  { 223, 1 },
+  { 221, 2 },
   { 224, 1 },
-  { 142, 3 },
-  { 143, 6 },
+  { 224, 2 },
+  { 224, 1 },
   { 225, 1 },
-  { 226, 3 },
-  { 144, 5 },
+  { 143, 3 },
   { 144, 6 },
+  { 226, 1 },
   { 227, 3 },
-  { 232, 1 },
-  { 232, 1 },
+  { 145, 5 },
+  { 145, 6 },
+  { 228, 3 },
   { 233, 1 },
-  { 233, 0 },
-  { 228, 2 },
-  { 228, 0 },
+  { 233, 1 },
   { 234, 1 },
-  { 234, 1 },
-  { 208, 3 },
+  { 234, 0 },
+  { 229, 2 },
+  { 229, 0 },
   { 235, 1 },
-  { 235, 3 },
+  { 235, 1 },
+  { 209, 3 },
   { 236, 1 },
   { 236, 3 },
-  { 236, 2 },
-  { 229, 0 },
-  { 229, 5 },
-  { 229, 5 },
-  { 229, 9 },
-  { 230, 0 },
-  { 230, 3 },
-  { 230, 3 },
-  { 230, 5 },
-  { 238, 0 },
-  { 238, 2 },
-  { 238, 6 },
-  { 238, 4 },
   { 237, 1 },
   { 237, 3 },
-  { 231, 2 },
-  { 145, 7 },
-  { 240, 3 },
-  { 146, 9 },
-  { 241, 1 },
-  { 183, 1 },
-  { 183, 1 },
-  { 147, 10 },
-  { 147, 12 },
-  { 147, 12 },
-  { 242, 4 },
-  { 242, 4 },
-  { 242, 0 },
-  { 149, 3 },
-  { 150, 7 },
-  { 148, 8 },
-  { 244, 2 },
-  { 244, 1 },
-  { 244, 0 },
-  { 151, 2 },
-  { 152, 6 },
-  { 245, 1 },
+  { 237, 2 },
+  { 230, 0 },
+  { 230, 5 },
+  { 230, 5 },
+  { 230, 9 },
+  { 231, 0 },
+  { 231, 3 },
+  { 231, 3 },
+  { 231, 5 },
+  { 239, 0 },
+  { 239, 2 },
+  { 239, 6 },
+  { 239, 4 },
+  { 238, 1 },
+  { 238, 3 },
+  { 232, 2 },
+  { 146, 7 },
+  { 241, 3 },
+  { 147, 9 },
+  { 242, 1 },
+  { 184, 1 },
+  { 184, 1 },
+  { 148, 10 },
+  { 148, 12 },
+  { 148, 12 },
+  { 243, 4 },
+  { 243, 4 },
+  { 243, 0 },
+  { 150, 3 },
+  { 151, 7 },
+  { 149, 8 },
+  { 245, 2 },
   { 245, 1 },
   { 245, 0 },
+  { 152, 2 },
   { 153, 6 },
-  { 154, 2 },
-  { 155, 2 },
-  { 156, 6 },
-  { 204, 3 },
-  { 246, 4 },
+  { 246, 1 },
+  { 246, 1 },
   { 246, 0 },
-  { 248, 1 },
-  { 248, 1 },
+  { 154, 6 },
+  { 155, 2 },
+  { 156, 2 },
+  { 157, 6 },
+  { 205, 3 },
   { 247, 4 },
+  { 247, 0 },
   { 249, 1 },
-  { 249, 0 },
+  { 249, 1 },
+  { 248, 4 },
   { 250, 1 },
-  { 250, 2 },
-  { 251, 4 },
-  { 192, 1 },
-  { 192, 1 },
-  { 200, 1 },
-  { 200, 1 },
-  { 200, 1 },
-  { 200, 1 },
-  { 200, 2 },
-  { 200, 3 },
-  { 200, 3 },
-  { 252, 1 },
-  { 252, 3 },
+  { 250, 0 },
+  { 251, 1 },
+  { 251, 2 },
+  { 252, 4 },
+  { 193, 1 },
+  { 193, 1 },
+  { 201, 1 },
+  { 201, 1 },
+  { 201, 1 },
+  { 201, 1 },
+  { 201, 2 },
+  { 201, 3 },
+  { 201, 3 },
   { 253, 1 },
   { 253, 3 },
-  { 157, 6 },
-  { 206, 3 },
   { 254, 1 },
-  { 254, 1 },
+  { 254, 3 },
+  { 158, 6 },
+  { 207, 3 },
   { 255, 1 },
-  { 255, 3 },
+  { 255, 1 },
   { 256, 1 },
-  { 174, 9 },
+  { 256, 3 },
   { 257, 1 },
-  { 257, 2 },
-  { 258, 8 },
-  { 158, 5 },
-  { 205, 1 },
-  { 205, 1 },
-  { 259, 4 },
+  { 175, 9 },
+  { 258, 1 },
+  { 258, 2 },
+  { 259, 8 },
   { 159, 5 },
+  { 206, 1 },
+  { 206, 1 },
+  { 260, 4 },
   { 160, 5 },
-  { 260, 3 },
-  { 261, 1 },
   { 161, 5 },
-  { 162, 10 },
+  { 261, 3 },
   { 262, 1 },
-  { 262, 1 },
-  { 243, 1 },
-  { 243, 3 },
-  { 163, 1 },
-  { 239, 1 },
+  { 162, 5 },
+  { 163, 10 },
   { 263, 1 },
-  { 264, 2 },
+  { 263, 1 },
+  { 244, 1 },
+  { 244, 3 },
+  { 164, 1 },
+  { 240, 1 },
+  { 264, 1 },
+  { 265, 2 },
+  { 267, 1 },
+  { 267, 3 },
+  { 269, 1 },
+  { 269, 3 },
+  { 271, 1 },
+  { 271, 2 },
+  { 271, 3 },
   { 266, 1 },
   { 266, 3 },
-  { 268, 1 },
-  { 268, 3 },
-  { 270, 1 },
-  { 270, 2 },
-  { 270, 3 },
-  { 265, 1 },
-  { 265, 3 },
-  { 271, 1 },
-  { 271, 1 },
-  { 272, 0 },
-  { 272, 2 },
-  { 274, 0 },
-  { 274, 1 },
-  { 273, 1 },
+  { 272, 1 },
+  { 272, 1 },
+  { 273, 0 },
+  { 273, 2 },
   { 275, 0 },
   { 275, 1 },
-  { 275, 1 },
-  { 275, 1 },
+  { 274, 1 },
   { 276, 0 },
   { 276, 1 },
   { 276, 1 },
-  { 276, 3 },
-  { 277, 6 },
-  { 277, 4 },
+  { 276, 1 },
   { 277, 0 },
-  { 278, 1 },
-  { 278, 1 },
+  { 277, 1 },
+  { 277, 1 },
+  { 277, 3 },
+  { 278, 6 },
+  { 278, 4 },
+  { 278, 0 },
   { 279, 1 },
   { 279, 1 },
-  { 280, 0 },
+  { 279, 1 },
   { 280, 1 },
+  { 280, 1 },
+  { 281, 0 },
   { 281, 1 },
-  { 281, 3 },
   { 282, 1 },
   { 282, 3 },
-  { 283, 2 },
-  { 283, 3 },
   { 283, 1 },
+  { 283, 3 },
+  { 284, 2 },
   { 284, 3 },
-  { 284, 5 },
-  { 284, 5 },
-  { 284, 3 },
-  { 285, 1 },
-  { 285, 1 },
-  { 285, 1 },
-  { 285, 1 },
-  { 285, 1 },
-  { 285, 1 },
-  { 285, 1 },
-  { 285, 1 },
-  { 285, 1 },
+  { 284, 1 },
+  { 285, 3 },
+  { 285, 5 },
+  { 285, 5 },
+  { 285, 3 },
   { 286, 1 },
   { 286, 1 },
   { 286, 1 },
   { 286, 1 },
-  { 288, 1 },
-  { 287, 3 },
-  { 289, 0 },
+  { 286, 1 },
+  { 286, 1 },
+  { 286, 1 },
+  { 286, 1 },
+  { 286, 1 },
+  { 287, 1 },
+  { 287, 1 },
+  { 287, 1 },
+  { 287, 1 },
   { 289, 1 },
-  { 267, 1 },
-  { 267, 1 },
-  { 267, 1 },
-  { 267, 1 },
-  { 267, 1 },
-  { 269, 0 },
-  { 269, 1 },
-  { 292, 6 },
-  { 295, 0 },
-  { 295, 1 },
-  { 295, 1 },
-  { 295, 1 },
+  { 288, 3 },
+  { 290, 0 },
+  { 290, 1 },
+  { 268, 1 },
+  { 268, 1 },
+  { 268, 1 },
+  { 268, 1 },
+  { 268, 1 },
+  { 270, 0 },
+  { 270, 1 },
   { 293, 6 },
-  { 296, 2 },
   { 296, 0 },
-  { 290, 11 },
-  { 294, 12 },
-  { 291, 2 },
-  { 291, 5 },
+  { 296, 1 },
+  { 296, 1 },
+  { 296, 1 },
+  { 294, 6 },
+  { 297, 2 },
   { 297, 0 },
-  { 297, 2 },
-  { 297, 2 },
-  { 298, 1 },
+  { 291, 11 },
+  { 295, 12 },
+  { 292, 2 },
+  { 292, 5 },
+  { 298, 0 },
+  { 298, 2 },
+  { 298, 2 },
+  { 299, 1 },
 };
 
 static void mqlyy_accept(mqlyyParser*);  /* Forward Declaration */
@@ -104225,9 +105159,9 @@ static void mqlyy_reduce(
   */
       case 0: /* statement ::= statement_by_itself KEY_GO */
 #line 151 "./mql.yxx"
-{ pEE->pStatement = mqlyymsp[-1].minor.mqlyy204;   mqlyy_destructor(mqlyypParser,1,&mqlyymsp[0].minor);
+{ pEE->pStatement = mqlyymsp[-1].minor.mqlyy160;   mqlyy_destructor(mqlyypParser,1,&mqlyymsp[0].minor);
 }
-#line 2569 "./mql.c"
+#line 2572 "./mql.c"
         break;
       case 1: /* statement_by_itself ::= create_database_statement */
       case 2: /* statement_by_itself ::= initialize_database_statement */ mqlyytestcase(mqlyyruleno==2);
@@ -104277,15 +105211,15 @@ static void mqlyy_reduce(
       case 46: /* statement_by_itself ::= drop_monad_set_statement */ mqlyytestcase(mqlyyruleno==46);
       case 47: /* statement_by_itself ::= create_objects_statement */ mqlyytestcase(mqlyyruleno==47);
 #line 155 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = mqlyymsp[0].minor.mqlyy204; }
-#line 2620 "./mql.c"
+{ mqlyygotominor.mqlyy160 = mqlyymsp[0].minor.mqlyy160; }
+#line 2623 "./mql.c"
         break;
       case 48: /* create_database_statement ::= KEY_CREATE KEY_DATABASE database_name opt_WITH_KEY opt_USING_ENCODING */
 #line 210 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new CreateDatabaseStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-2].minor.mqlyy0); deleteToken(mqlyymsp[-1].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-4].minor);
+{ mqlyygotominor.mqlyy160 = new CreateDatabaseStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-2].minor.mqlyy0); deleteToken(mqlyymsp[-1].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,3,&mqlyymsp[-3].minor);
 }
-#line 2627 "./mql.c"
+#line 2630 "./mql.c"
         break;
       case 49: /* database_name ::= IDENTIFIER */
       case 50: /* database_name ::= STRING */ mqlyytestcase(mqlyyruleno==50);
@@ -104299,69 +105233,69 @@ static void mqlyy_reduce(
       case 273: /* object_type_name_to_delete ::= choice_object_type_or_all */ mqlyytestcase(mqlyyruleno==273);
       case 298: /* mark_declaration ::= MARK */ mqlyytestcase(mqlyyruleno==298);
       case 299: /* object_reference ::= IDENTIFIER */ mqlyytestcase(mqlyyruleno==299);
-      case 341: /* enum_const ::= IDENTIFIER */ mqlyytestcase(mqlyyruleno==341);
+      case 342: /* enum_const ::= IDENTIFIER */ mqlyytestcase(mqlyyruleno==342);
 #line 215 "./mql.yxx"
 { mqlyygotominor.mqlyy0 = mqlyymsp[0].minor.mqlyy0; }
-#line 2644 "./mql.c"
+#line 2647 "./mql.c"
         break;
       case 51: /* initialize_database_statement ::= KEY_INITIALIZE KEY_DATABASE database_name opt_WITH_KEY */
 #line 222 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new InitializeDatabaseStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,6,&mqlyymsp[-3].minor);
+{ mqlyygotominor.mqlyy160 = new InitializeDatabaseStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,6,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,3,&mqlyymsp[-2].minor);
 }
-#line 2651 "./mql.c"
+#line 2654 "./mql.c"
         break;
       case 52: /* use_statement ::= KEY_USE opt_DATABASE database_name opt_WITH_KEY */
 #line 227 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new UseStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,7,&mqlyymsp[-3].minor);
-  mqlyy_destructor(mqlyypParser,178,&mqlyymsp[-2].minor);
+{ mqlyygotominor.mqlyy160 = new UseStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,7,&mqlyymsp[-3].minor);
+  mqlyy_destructor(mqlyypParser,179,&mqlyymsp[-2].minor);
 }
-#line 2658 "./mql.c"
+#line 2661 "./mql.c"
         break;
       case 53: /* opt_WITH_KEY ::= KEY_WITH KEY_KEY STRING */
 #line 231 "./mql.yxx"
 { mqlyygotominor.mqlyy0 = mqlyymsp[0].minor.mqlyy0;   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,9,&mqlyymsp[-1].minor);
 }
-#line 2665 "./mql.c"
+#line 2668 "./mql.c"
         break;
       case 54: /* opt_WITH_KEY ::= */
       case 56: /* opt_USING_ENCODING ::= */ mqlyytestcase(mqlyyruleno==56);
 #line 232 "./mql.yxx"
 { mqlyygotominor.mqlyy0 = newToken(); mqlyygotominor.mqlyy0->setString(new std::string("")); }
-#line 2671 "./mql.c"
+#line 2674 "./mql.c"
         break;
       case 55: /* opt_USING_ENCODING ::= KEY_USING KEY_ENCODING STRING */
 #line 237 "./mql.yxx"
 { mqlyygotominor.mqlyy0 = mqlyymsp[0].minor.mqlyy0;   mqlyy_destructor(mqlyypParser,10,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,11,&mqlyymsp[-1].minor);
 }
-#line 2678 "./mql.c"
+#line 2681 "./mql.c"
         break;
       case 57: /* opt_DATABASE ::= KEY_DATABASE */
 #line 243 "./mql.yxx"
-{ mqlyygotominor.mqlyy98=0;  mqlyy_destructor(mqlyypParser,3,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy292=0;  mqlyy_destructor(mqlyypParser,3,&mqlyymsp[0].minor);
 }
-#line 2684 "./mql.c"
+#line 2687 "./mql.c"
         break;
       case 58: /* opt_DATABASE ::= */
 #line 244 "./mql.yxx"
-{ mqlyygotominor.mqlyy98=0;}
-#line 2689 "./mql.c"
+{ mqlyygotominor.mqlyy292=0;}
+#line 2692 "./mql.c"
         break;
       case 59: /* drop_database_statement ::= KEY_DROP KEY_DATABASE database_name */
 #line 250 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new DropDatabaseStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,12,&mqlyymsp[-2].minor);
+{ mqlyygotominor.mqlyy160 = new DropDatabaseStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,12,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,3,&mqlyymsp[-1].minor);
 }
-#line 2696 "./mql.c"
+#line 2699 "./mql.c"
         break;
       case 60: /* vacuum_database_statement ::= KEY_VACUUM opt_DATABASE opt_ANALYZE */
 #line 256 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new VacuumDatabaseStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy195);   mqlyy_destructor(mqlyypParser,13,&mqlyymsp[-2].minor);
-  mqlyy_destructor(mqlyypParser,178,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy160 = new VacuumDatabaseStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy137);   mqlyy_destructor(mqlyypParser,13,&mqlyymsp[-2].minor);
+  mqlyy_destructor(mqlyypParser,179,&mqlyymsp[-1].minor);
 }
-#line 2703 "./mql.c"
+#line 2706 "./mql.c"
         break;
       case 61: /* opt_ANALYZE ::= */
       case 103: /* opt_with_index ::= */ mqlyytestcase(mqlyyruleno==103);
@@ -104369,28 +105303,28 @@ static void mqlyy_reduce(
       case 113: /* opt_computed ::= */ mqlyytestcase(mqlyyruleno==113);
       case 153: /* opt_DEFAULT ::= */ mqlyytestcase(mqlyyruleno==153);
 #line 261 "./mql.yxx"
-{ mqlyygotominor.mqlyy195 = false; }
-#line 2712 "./mql.c"
+{ mqlyygotominor.mqlyy137 = false; }
+#line 2715 "./mql.c"
         break;
       case 62: /* opt_ANALYZE ::= KEY_ANALYZE */
 #line 262 "./mql.yxx"
-{ mqlyygotominor.mqlyy195 = true;   mqlyy_destructor(mqlyypParser,14,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy137 = true;   mqlyy_destructor(mqlyypParser,14,&mqlyymsp[0].minor);
 }
-#line 2718 "./mql.c"
+#line 2721 "./mql.c"
         break;
       case 63: /* create_indexes_statement ::= KEY_CREATE KEY_INDEXES on_object_type */
 #line 268 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new CreateIndexesStatement((MQLExecEnv*) pEE, *(mqlyymsp[0].minor.mqlyy0->pString)); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-2].minor);
+{ mqlyygotominor.mqlyy160 = new CreateIndexesStatement((MQLExecEnv*) pEE, *(mqlyymsp[0].minor.mqlyy0->pString)); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,15,&mqlyymsp[-1].minor);
 }
-#line 2725 "./mql.c"
+#line 2728 "./mql.c"
         break;
       case 64: /* drop_indexes_statement ::= KEY_DROP KEY_INDEXES on_object_type */
 #line 274 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new DropIndexesStatement((MQLExecEnv*) pEE, *(mqlyymsp[0].minor.mqlyy0->pString)); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,12,&mqlyymsp[-2].minor);
+{ mqlyygotominor.mqlyy160 = new DropIndexesStatement((MQLExecEnv*) pEE, *(mqlyymsp[0].minor.mqlyy0->pString)); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,12,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,15,&mqlyymsp[-1].minor);
 }
-#line 2732 "./mql.c"
+#line 2735 "./mql.c"
         break;
       case 65: /* on_object_type ::= KEY_ON KEY_OBJECT choice_type_types KEY_OPEN_SQUARE_BRACKET choice_object_type_or_all KEY_CLOSE_SQUARE_BRACKET */
 #line 283 "./mql.yxx"
@@ -104399,778 +105333,778 @@ static void mqlyy_reduce(
   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 2741 "./mql.c"
+#line 2744 "./mql.c"
         break;
       case 66: /* choice_type_types ::= KEY_TYPE */
 #line 289 "./mql.yxx"
-{ mqlyygotominor.mqlyy98 = 0;   mqlyy_destructor(mqlyypParser,20,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy292 = 0;   mqlyy_destructor(mqlyypParser,20,&mqlyymsp[0].minor);
 }
-#line 2747 "./mql.c"
+#line 2750 "./mql.c"
         break;
       case 67: /* choice_type_types ::= KEY_TYPES */
 #line 290 "./mql.yxx"
-{ mqlyygotominor.mqlyy98 = 0;   mqlyy_destructor(mqlyypParser,21,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy292 = 0;   mqlyy_destructor(mqlyypParser,21,&mqlyymsp[0].minor);
 }
-#line 2753 "./mql.c"
+#line 2756 "./mql.c"
         break;
       case 68: /* begin_transaction_statement ::= KEY_BEGIN KEY_TRANSACTION */
 #line 296 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new BeginTransactionStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,22,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy160 = new BeginTransactionStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,22,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,23,&mqlyymsp[0].minor);
 }
-#line 2760 "./mql.c"
+#line 2763 "./mql.c"
         break;
       case 69: /* commit_transaction_statement ::= KEY_COMMIT KEY_TRANSACTION */
 #line 302 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new CommitTransactionStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,24,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy160 = new CommitTransactionStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,24,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,23,&mqlyymsp[0].minor);
 }
-#line 2767 "./mql.c"
+#line 2770 "./mql.c"
         break;
       case 70: /* abort_transaction_statement ::= KEY_ABORT KEY_TRANSACTION */
 #line 308 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new AbortTransactionStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,25,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy160 = new AbortTransactionStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,25,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,23,&mqlyymsp[0].minor);
 }
-#line 2774 "./mql.c"
+#line 2777 "./mql.c"
         break;
       case 71: /* create_object_type_statement ::= KEY_CREATE opt_OBJECT KEY_TYPE opt_if_not_exists opt_range_type opt_monad_uniqueness_type KEY_OPEN_SQUARE_BRACKET object_type_name opt_feature_declaration_list KEY_CLOSE_SQUARE_BRACKET */
 #line 321 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new CreateObjectTypeStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[-5].minor.mqlyy4, mqlyymsp[-4].minor.mqlyy77, mqlyymsp[-1].minor.mqlyy541, mqlyymsp[-6].minor.mqlyy195); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-9].minor);
+{ mqlyygotominor.mqlyy160 = new CreateObjectTypeStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[-5].minor.mqlyy388, mqlyymsp[-4].minor.mqlyy123, mqlyymsp[-1].minor.mqlyy193, mqlyymsp[-6].minor.mqlyy137); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-9].minor);
   mqlyy_destructor(mqlyypParser,20,&mqlyymsp[-7].minor);
   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 2783 "./mql.c"
+#line 2786 "./mql.c"
         break;
       case 72: /* opt_range_type ::= */
 #line 327 "./mql.yxx"
-{ mqlyygotominor.mqlyy4 = kORTMultipleRange; }
-#line 2788 "./mql.c"
+{ mqlyygotominor.mqlyy388 = kORTMultipleRange; }
+#line 2791 "./mql.c"
         break;
       case 73: /* opt_range_type ::= KEY_WITH KEY_MULTIPLE KEY_RANGE KEY_OBJECTS */
 #line 329 "./mql.yxx"
-{ mqlyygotominor.mqlyy4 = kORTMultipleRange;   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-3].minor);
+{ mqlyygotominor.mqlyy388 = kORTMultipleRange;   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,26,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,27,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,28,&mqlyymsp[0].minor);
 }
-#line 2797 "./mql.c"
+#line 2800 "./mql.c"
         break;
       case 74: /* opt_range_type ::= KEY_WITH KEY_SINGLE KEY_RANGE KEY_OBJECTS */
 #line 331 "./mql.yxx"
-{ mqlyygotominor.mqlyy4 = kORTSingleRange;   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-3].minor);
+{ mqlyygotominor.mqlyy388 = kORTSingleRange;   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,29,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,27,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,28,&mqlyymsp[0].minor);
 }
-#line 2806 "./mql.c"
+#line 2809 "./mql.c"
         break;
       case 75: /* opt_range_type ::= KEY_WITH KEY_SINGLE KEY_MONAD KEY_OBJECTS */
 #line 333 "./mql.yxx"
-{ mqlyygotominor.mqlyy4 = kORTSingleMonad;   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-3].minor);
+{ mqlyygotominor.mqlyy388 = kORTSingleMonad;   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,29,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,28,&mqlyymsp[0].minor);
 }
-#line 2815 "./mql.c"
+#line 2818 "./mql.c"
         break;
       case 76: /* opt_monad_uniqueness_type ::= */
 #line 338 "./mql.yxx"
-{ mqlyygotominor.mqlyy77 = kMUTNonUniqueMonads; }
-#line 2820 "./mql.c"
+{ mqlyygotominor.mqlyy123 = kMUTNonUniqueMonads; }
+#line 2823 "./mql.c"
         break;
       case 77: /* opt_monad_uniqueness_type ::= KEY_HAVING KEY_UNIQUE KEY_FIRST KEY_MONADS */
 #line 340 "./mql.yxx"
-{ mqlyygotominor.mqlyy77 = kMUTUniqueFirstMonads;   mqlyy_destructor(mqlyypParser,31,&mqlyymsp[-3].minor);
+{ mqlyygotominor.mqlyy123 = kMUTUniqueFirstMonads;   mqlyy_destructor(mqlyypParser,31,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,32,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,33,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[0].minor);
 }
-#line 2829 "./mql.c"
+#line 2832 "./mql.c"
         break;
       case 78: /* opt_monad_uniqueness_type ::= KEY_HAVING KEY_UNIQUE KEY_FIRST KEY_AND KEY_LAST KEY_MONADS */
 #line 342 "./mql.yxx"
-{ mqlyygotominor.mqlyy77 = kMUTUniqueFirstAndLastMonads;   mqlyy_destructor(mqlyypParser,31,&mqlyymsp[-5].minor);
+{ mqlyygotominor.mqlyy123 = kMUTUniqueFirstAndLastMonads;   mqlyy_destructor(mqlyypParser,31,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,32,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,33,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,35,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,36,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[0].minor);
 }
-#line 2840 "./mql.c"
+#line 2843 "./mql.c"
         break;
       case 79: /* opt_monad_uniqueness_type ::= KEY_WITHOUT KEY_UNIQUE KEY_MONADS */
 #line 344 "./mql.yxx"
-{ mqlyygotominor.mqlyy77 = kMUTNonUniqueMonads;   mqlyy_destructor(mqlyypParser,37,&mqlyymsp[-2].minor);
+{ mqlyygotominor.mqlyy123 = kMUTNonUniqueMonads;   mqlyy_destructor(mqlyypParser,37,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,32,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[0].minor);
 }
-#line 2848 "./mql.c"
+#line 2851 "./mql.c"
         break;
       case 80: /* opt_OBJECT ::= KEY_OBJECT */
 #line 349 "./mql.yxx"
-{ mqlyygotominor.mqlyy98 = 0;   mqlyy_destructor(mqlyypParser,17,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy292 = 0;   mqlyy_destructor(mqlyypParser,17,&mqlyymsp[0].minor);
 }
-#line 2854 "./mql.c"
+#line 2857 "./mql.c"
         break;
       case 81: /* opt_OBJECT ::= */
       case 120: /* opt_ADD ::= */ mqlyytestcase(mqlyyruleno==120);
       case 178: /* opt_OBJECTS ::= */ mqlyytestcase(mqlyyruleno==178);
 #line 350 "./mql.yxx"
-{ mqlyygotominor.mqlyy98 = 0; }
-#line 2861 "./mql.c"
+{ mqlyygotominor.mqlyy292 = 0; }
+#line 2864 "./mql.c"
         break;
       case 82: /* object_type_name ::= IDENTIFIER */
 #line 355 "./mql.yxx"
 {mqlyygotominor.mqlyy0 = mqlyymsp[0].minor.mqlyy0; }
-#line 2866 "./mql.c"
+#line 2869 "./mql.c"
         break;
       case 83: /* opt_feature_declaration_list ::= feature_declaration_list */
       case 85: /* feature_declaration_list ::= feature_declaration */ mqlyytestcase(mqlyyruleno==85);
 #line 359 "./mql.yxx"
-{ mqlyygotominor.mqlyy541 = mqlyymsp[0].minor.mqlyy541; }
-#line 2872 "./mql.c"
+{ mqlyygotominor.mqlyy193 = mqlyymsp[0].minor.mqlyy193; }
+#line 2875 "./mql.c"
         break;
       case 84: /* opt_feature_declaration_list ::= */
 #line 360 "./mql.yxx"
-{ mqlyygotominor.mqlyy541 = 0; }
-#line 2877 "./mql.c"
+{ mqlyygotominor.mqlyy193 = 0; }
+#line 2880 "./mql.c"
         break;
       case 86: /* feature_declaration_list ::= feature_declaration_list feature_declaration */
 #line 367 "./mql.yxx"
-{ mqlyygotominor.mqlyy541 = mqlyymsp[0].minor.mqlyy541; mqlyygotominor.mqlyy541->setNext(mqlyymsp[-1].minor.mqlyy541); }
-#line 2882 "./mql.c"
+{ mqlyygotominor.mqlyy193 = mqlyymsp[0].minor.mqlyy193; mqlyygotominor.mqlyy193->setNext(mqlyymsp[-1].minor.mqlyy193); }
+#line 2885 "./mql.c"
         break;
       case 87: /* feature_declaration ::= feature_name KEY_COLON feature_type default_specification opt_computed KEY_SEMICOLON */
 #line 373 "./mql.yxx"
-{ mqlyygotominor.mqlyy541 = new FeatureDeclaration(mqlyymsp[-5].minor.mqlyy0->extractString(), mqlyymsp[-3].minor.mqlyy109, mqlyymsp[-2].minor.mqlyy111, mqlyymsp[-1].minor.mqlyy195, 0); deleteToken(mqlyymsp[-5].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,38,&mqlyymsp[-4].minor);
+{ mqlyygotominor.mqlyy193 = new FeatureDeclaration(mqlyymsp[-5].minor.mqlyy0->extractString(), mqlyymsp[-3].minor.mqlyy283, mqlyymsp[-2].minor.mqlyy139, mqlyymsp[-1].minor.mqlyy137, 0); deleteToken(mqlyymsp[-5].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,38,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,39,&mqlyymsp[0].minor);
 }
-#line 2889 "./mql.c"
+#line 2892 "./mql.c"
         break;
       case 88: /* feature_declaration ::= feature_name KEY_COLON KEY_LIST KEY_OF list_feature_type KEY_SEMICOLON */
 #line 376 "./mql.yxx"
-{ mqlyygotominor.mqlyy541 = new FeatureDeclaration(mqlyymsp[-5].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy109, new Expression(), false, 0); deleteToken(mqlyymsp[-5].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,38,&mqlyymsp[-4].minor);
+{ mqlyygotominor.mqlyy193 = new FeatureDeclaration(mqlyymsp[-5].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy283, new Expression(), false, 0); deleteToken(mqlyymsp[-5].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,38,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,40,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,41,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,39,&mqlyymsp[0].minor);
 }
-#line 2898 "./mql.c"
+#line 2901 "./mql.c"
         break;
       case 89: /* feature_type ::= KEY_INTEGER opt_with_index */
 #line 382 "./mql.yxx"
-{ mqlyygotominor.mqlyy109 = new MQLType(kInteger, mqlyymsp[0].minor.mqlyy195);   mqlyy_destructor(mqlyypParser,42,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy283 = new MQLType(kInteger, mqlyymsp[0].minor.mqlyy137);   mqlyy_destructor(mqlyypParser,42,&mqlyymsp[-1].minor);
 }
-#line 2904 "./mql.c"
+#line 2907 "./mql.c"
         break;
       case 90: /* feature_type ::= KEY_STRING opt_string_length opt_from_set opt_with_index */
 #line 384 "./mql.yxx"
-{ mqlyygotominor.mqlyy109 = new MQLType(kString, mqlyymsp[-1].minor.mqlyy195, mqlyymsp[0].minor.mqlyy195);   mqlyy_destructor(mqlyypParser,43,&mqlyymsp[-3].minor);
-  mqlyy_destructor(mqlyypParser,198,&mqlyymsp[-2].minor);
+{ mqlyygotominor.mqlyy283 = new MQLType(kString, mqlyymsp[-1].minor.mqlyy137, mqlyymsp[0].minor.mqlyy137);   mqlyy_destructor(mqlyypParser,43,&mqlyymsp[-3].minor);
+  mqlyy_destructor(mqlyypParser,199,&mqlyymsp[-2].minor);
 }
-#line 2911 "./mql.c"
+#line 2914 "./mql.c"
         break;
       case 91: /* feature_type ::= KEY_ASCII opt_string_length opt_from_set opt_with_index */
 #line 386 "./mql.yxx"
-{ mqlyygotominor.mqlyy109 = new MQLType(kASCII, mqlyymsp[-1].minor.mqlyy195, mqlyymsp[0].minor.mqlyy195);   mqlyy_destructor(mqlyypParser,44,&mqlyymsp[-3].minor);
-  mqlyy_destructor(mqlyypParser,198,&mqlyymsp[-2].minor);
+{ mqlyygotominor.mqlyy283 = new MQLType(kASCII, mqlyymsp[-1].minor.mqlyy137, mqlyymsp[0].minor.mqlyy137);   mqlyy_destructor(mqlyypParser,44,&mqlyymsp[-3].minor);
+  mqlyy_destructor(mqlyypParser,199,&mqlyymsp[-2].minor);
 }
-#line 2918 "./mql.c"
+#line 2921 "./mql.c"
         break;
       case 92: /* feature_type ::= KEY_ID_D opt_with_index */
 #line 388 "./mql.yxx"
-{ mqlyygotominor.mqlyy109 = new MQLType(kID_D, mqlyymsp[0].minor.mqlyy195);   mqlyy_destructor(mqlyypParser,45,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy283 = new MQLType(kID_D, mqlyymsp[0].minor.mqlyy137);   mqlyy_destructor(mqlyypParser,45,&mqlyymsp[-1].minor);
 }
-#line 2924 "./mql.c"
+#line 2927 "./mql.c"
         break;
       case 93: /* feature_type ::= IDENTIFIER opt_with_index */
 #line 390 "./mql.yxx"
-{ mqlyygotominor.mqlyy109 = new MQLType(mqlyymsp[-1].minor.mqlyy0->extractString(), false, mqlyymsp[0].minor.mqlyy195); deleteToken(mqlyymsp[-1].minor.mqlyy0); }
-#line 2929 "./mql.c"
+{ mqlyygotominor.mqlyy283 = new MQLType(mqlyymsp[-1].minor.mqlyy0->extractString(), false, mqlyymsp[0].minor.mqlyy137); deleteToken(mqlyymsp[-1].minor.mqlyy0); }
+#line 2932 "./mql.c"
         break;
       case 94: /* feature_type ::= KEY_SET KEY_OF KEY_MONADS */
 #line 392 "./mql.yxx"
-{ mqlyygotominor.mqlyy109 = new MQLType(kORTMultipleRange);   mqlyy_destructor(mqlyypParser,46,&mqlyymsp[-2].minor);
+{ mqlyygotominor.mqlyy283 = new MQLType(kORTMultipleRange);   mqlyy_destructor(mqlyypParser,46,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,41,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[0].minor);
 }
-#line 2937 "./mql.c"
+#line 2940 "./mql.c"
         break;
       case 95: /* feature_type ::= KEY_SINGLE KEY_MONAD KEY_SET KEY_OF KEY_MONADS */
 #line 394 "./mql.yxx"
-{ mqlyygotominor.mqlyy109 = new MQLType(kORTSingleMonad);   mqlyy_destructor(mqlyypParser,29,&mqlyymsp[-4].minor);
+{ mqlyygotominor.mqlyy283 = new MQLType(kORTSingleMonad);   mqlyy_destructor(mqlyypParser,29,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,46,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,41,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[0].minor);
 }
-#line 2947 "./mql.c"
+#line 2950 "./mql.c"
         break;
       case 96: /* feature_type ::= KEY_SINGLE KEY_RANGE KEY_SET KEY_OF KEY_MONADS */
 #line 396 "./mql.yxx"
-{ mqlyygotominor.mqlyy109 = new MQLType(kORTSingleRange);   mqlyy_destructor(mqlyypParser,29,&mqlyymsp[-4].minor);
+{ mqlyygotominor.mqlyy283 = new MQLType(kORTSingleRange);   mqlyy_destructor(mqlyypParser,29,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,27,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,46,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,41,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[0].minor);
 }
-#line 2957 "./mql.c"
+#line 2960 "./mql.c"
         break;
       case 97: /* feature_type ::= KEY_MULTIPLE KEY_RANGE KEY_SET KEY_OF KEY_MONADS */
 #line 398 "./mql.yxx"
-{ mqlyygotominor.mqlyy109 = new MQLType(kORTMultipleRange);   mqlyy_destructor(mqlyypParser,26,&mqlyymsp[-4].minor);
+{ mqlyygotominor.mqlyy283 = new MQLType(kORTMultipleRange);   mqlyy_destructor(mqlyypParser,26,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,27,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,46,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,41,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[0].minor);
 }
-#line 2967 "./mql.c"
+#line 2970 "./mql.c"
         break;
       case 98: /* list_feature_type ::= KEY_INTEGER */
 #line 405 "./mql.yxx"
-{ mqlyygotominor.mqlyy109 = new MQLType(kListOfInteger);   mqlyy_destructor(mqlyypParser,42,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy283 = new MQLType(kListOfInteger);   mqlyy_destructor(mqlyypParser,42,&mqlyymsp[0].minor);
 }
-#line 2973 "./mql.c"
+#line 2976 "./mql.c"
         break;
       case 99: /* list_feature_type ::= KEY_ID_D */
 #line 407 "./mql.yxx"
-{ mqlyygotominor.mqlyy109 = new MQLType(kListOfID_D);   mqlyy_destructor(mqlyypParser,45,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy283 = new MQLType(kListOfID_D);   mqlyy_destructor(mqlyypParser,45,&mqlyymsp[0].minor);
 }
-#line 2979 "./mql.c"
+#line 2982 "./mql.c"
         break;
       case 100: /* list_feature_type ::= IDENTIFIER */
 #line 409 "./mql.yxx"
-{ mqlyygotominor.mqlyy109 = new MQLType(mqlyymsp[0].minor.mqlyy0->extractString(), true, false); deleteToken(mqlyymsp[0].minor.mqlyy0); }
-#line 2984 "./mql.c"
+{ mqlyygotominor.mqlyy283 = new MQLType(mqlyymsp[0].minor.mqlyy0->extractString(), true, false); deleteToken(mqlyymsp[0].minor.mqlyy0); }
+#line 2987 "./mql.c"
         break;
       case 101: /* opt_with_index ::= KEY_WITH KEY_INDEX */
 #line 414 "./mql.yxx"
-{ mqlyygotominor.mqlyy195 = true;   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy137 = true;   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,47,&mqlyymsp[0].minor);
 }
-#line 2991 "./mql.c"
+#line 2994 "./mql.c"
         break;
       case 102: /* opt_with_index ::= KEY_WITHOUT KEY_INDEX */
 #line 415 "./mql.yxx"
-{ mqlyygotominor.mqlyy195 = false;   mqlyy_destructor(mqlyypParser,37,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy137 = false;   mqlyy_destructor(mqlyypParser,37,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,47,&mqlyymsp[0].minor);
 }
-#line 2998 "./mql.c"
+#line 3001 "./mql.c"
         break;
       case 104: /* opt_if_not_exists ::= KEY_IF KEY_NOT KEY_EXISTS */
 #line 420 "./mql.yxx"
-{ mqlyygotominor.mqlyy195 = true;   mqlyy_destructor(mqlyypParser,48,&mqlyymsp[-2].minor);
+{ mqlyygotominor.mqlyy137 = true;   mqlyy_destructor(mqlyypParser,48,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,49,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,50,&mqlyymsp[0].minor);
 }
-#line 3006 "./mql.c"
+#line 3009 "./mql.c"
         break;
       case 106: /* opt_from_set ::= KEY_FROM KEY_SET */
 #line 425 "./mql.yxx"
-{mqlyygotominor.mqlyy195 = true;  mqlyy_destructor(mqlyypParser,51,&mqlyymsp[-1].minor);
+{mqlyygotominor.mqlyy137 = true;  mqlyy_destructor(mqlyypParser,51,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,46,&mqlyymsp[0].minor);
 }
-#line 3013 "./mql.c"
+#line 3016 "./mql.c"
         break;
       case 107: /* opt_from_set ::= */
 #line 426 "./mql.yxx"
-{mqlyygotominor.mqlyy195 = false;}
-#line 3018 "./mql.c"
+{mqlyygotominor.mqlyy137 = false;}
+#line 3021 "./mql.c"
         break;
       case 108: /* opt_string_length ::= */
 #line 432 "./mql.yxx"
-{ mqlyygotominor.mqlyy485 = 0; }
-#line 3023 "./mql.c"
+{ mqlyygotominor.mqlyy249 = 0; }
+#line 3026 "./mql.c"
         break;
       case 109: /* opt_string_length ::= KEY_OPEN_BRACKET INTEGER KEY_CLOSE_BRACKET */
 #line 434 "./mql.yxx"
-{ mqlyygotominor.mqlyy485 = 0;   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
+{ mqlyygotominor.mqlyy249 = 0;   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,53,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
 }
-#line 3031 "./mql.c"
+#line 3034 "./mql.c"
         break;
       case 110: /* default_specification ::= KEY_DEFAULT expression */
 #line 440 "./mql.yxx"
-{ mqlyygotominor.mqlyy111 = mqlyymsp[0].minor.mqlyy111;   mqlyy_destructor(mqlyypParser,55,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy139 = mqlyymsp[0].minor.mqlyy139;   mqlyy_destructor(mqlyypParser,55,&mqlyymsp[-1].minor);
 }
-#line 3037 "./mql.c"
+#line 3040 "./mql.c"
         break;
       case 111: /* default_specification ::= */
 #line 442 "./mql.yxx"
-{ mqlyygotominor.mqlyy111 = 0; }
-#line 3042 "./mql.c"
+{ mqlyygotominor.mqlyy139 = 0; }
+#line 3045 "./mql.c"
         break;
       case 112: /* opt_computed ::= KEY_COMPUTED */
 #line 448 "./mql.yxx"
-{ mqlyygotominor.mqlyy195 = true;   mqlyy_destructor(mqlyypParser,56,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy137 = true;   mqlyy_destructor(mqlyypParser,56,&mqlyymsp[0].minor);
 }
-#line 3048 "./mql.c"
+#line 3051 "./mql.c"
         break;
       case 114: /* update_object_type_statement ::= KEY_UPDATE opt_OBJECT KEY_TYPE KEY_OPEN_SQUARE_BRACKET object_type_name feature_update_list KEY_CLOSE_SQUARE_BRACKET */
 #line 459 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new UpdateObjectTypeStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy550); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-6].minor);
+{ mqlyygotominor.mqlyy160 = new UpdateObjectTypeStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy406); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-6].minor);
   mqlyy_destructor(mqlyypParser,20,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 3057 "./mql.c"
+#line 3060 "./mql.c"
         break;
       case 115: /* feature_update_list ::= feature_update */
 #line 465 "./mql.yxx"
-{ mqlyygotominor.mqlyy550 = mqlyymsp[0].minor.mqlyy550; }
-#line 3062 "./mql.c"
+{ mqlyygotominor.mqlyy406 = mqlyymsp[0].minor.mqlyy406; }
+#line 3065 "./mql.c"
         break;
       case 116: /* feature_update_list ::= feature_update_list feature_update */
 #line 467 "./mql.yxx"
-{ mqlyygotominor.mqlyy550 = mqlyymsp[0].minor.mqlyy550; mqlyygotominor.mqlyy550->setNext(mqlyymsp[-1].minor.mqlyy550); }
-#line 3067 "./mql.c"
+{ mqlyygotominor.mqlyy406 = mqlyymsp[0].minor.mqlyy406; mqlyygotominor.mqlyy406->setNext(mqlyymsp[-1].minor.mqlyy406); }
+#line 3070 "./mql.c"
         break;
       case 117: /* feature_update ::= opt_ADD feature_declaration */
 #line 473 "./mql.yxx"
-{ mqlyygotominor.mqlyy550 = new FeatureUpdate(mqlyymsp[0].minor.mqlyy541, 0); }
-#line 3072 "./mql.c"
+{ mqlyygotominor.mqlyy406 = new FeatureUpdate(mqlyymsp[0].minor.mqlyy193, 0); }
+#line 3075 "./mql.c"
         break;
       case 118: /* feature_update ::= KEY_REMOVE feature_name KEY_SEMICOLON */
 #line 475 "./mql.yxx"
-{ mqlyygotominor.mqlyy550 = new FeatureUpdate(mqlyymsp[-1].minor.mqlyy0->extractString(), 0); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,58,&mqlyymsp[-2].minor);
+{ mqlyygotominor.mqlyy406 = new FeatureUpdate(mqlyymsp[-1].minor.mqlyy0->extractString(), 0); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,58,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,39,&mqlyymsp[0].minor);
 }
-#line 3079 "./mql.c"
+#line 3082 "./mql.c"
         break;
       case 119: /* opt_ADD ::= KEY_ADD */
 #line 480 "./mql.yxx"
-{ mqlyygotominor.mqlyy98 = 0;   mqlyy_destructor(mqlyypParser,59,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy292 = 0;   mqlyy_destructor(mqlyypParser,59,&mqlyymsp[0].minor);
 }
-#line 3085 "./mql.c"
+#line 3088 "./mql.c"
         break;
       case 121: /* drop_object_type_statement ::= KEY_DROP opt_OBJECT KEY_TYPE KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET */
 #line 490 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new DropObjectTypeStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,12,&mqlyymsp[-5].minor);
+{ mqlyygotominor.mqlyy160 = new DropObjectTypeStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,12,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,20,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 3094 "./mql.c"
+#line 3097 "./mql.c"
         break;
       case 122: /* insert_monads_statement ::= KEY_INSERT monad_specification */
 #line 496 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new InsertMonadsStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy434);   mqlyy_destructor(mqlyypParser,60,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy160 = new InsertMonadsStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy34);   mqlyy_destructor(mqlyypParser,60,&mqlyymsp[-1].minor);
 }
-#line 3100 "./mql.c"
+#line 3103 "./mql.c"
         break;
       case 123: /* delete_monads_statement ::= KEY_DELETE monad_specification */
 #line 502 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new DeleteMonadsStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy434);   mqlyy_destructor(mqlyypParser,61,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy160 = new DeleteMonadsStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy34);   mqlyy_destructor(mqlyypParser,61,&mqlyymsp[-1].minor);
 }
-#line 3106 "./mql.c"
+#line 3109 "./mql.c"
         break;
       case 124: /* get_monads_statement ::= KEY_GET KEY_MONADS KEY_FROM choice_number_OBJECTS KEY_WITH id_ds_specification KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET */
 #line 513 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new GetMonadsStatement((MQLExecEnv*) pEE, mqlyymsp[-3].minor.mqlyy451, mqlyymsp[-1].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-8].minor);
+{ mqlyygotominor.mqlyy160 = new GetMonadsStatement((MQLExecEnv*) pEE, mqlyymsp[-3].minor.mqlyy51, mqlyymsp[-1].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-8].minor);
   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[-7].minor);
   mqlyy_destructor(mqlyypParser,51,&mqlyymsp[-6].minor);
   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 3117 "./mql.c"
+#line 3120 "./mql.c"
         break;
       case 125: /* monad_set_calculation_statement ::= KEY_MONAD KEY_SET KEY_CALCULATION monad_set_chain */
 #line 520 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new MonadSetCalculationStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy78);   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-3].minor);
+{ mqlyygotominor.mqlyy160 = new MonadSetCalculationStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy279);   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,46,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,63,&mqlyymsp[-1].minor);
 }
-#line 3125 "./mql.c"
+#line 3128 "./mql.c"
         break;
       case 126: /* monad_set_chain ::= monad_set */
 #line 526 "./mql.yxx"
-{ mqlyygotominor.mqlyy78 = new MonadSetChainElement(mqlyymsp[0].minor.mqlyy434, kSONone, 0); }
-#line 3130 "./mql.c"
+{ mqlyygotominor.mqlyy279 = new MonadSetChainElement(mqlyymsp[0].minor.mqlyy34, kSONone, 0); }
+#line 3133 "./mql.c"
         break;
       case 127: /* monad_set_chain ::= monad_set_chain monad_set_operator monad_set */
 #line 528 "./mql.yxx"
-{ mqlyygotominor.mqlyy78 = new MonadSetChainElement(mqlyymsp[0].minor.mqlyy434, mqlyymsp[-1].minor.mqlyy462, 0); mqlyygotominor.mqlyy78->setNext(mqlyymsp[-2].minor.mqlyy78); }
-#line 3135 "./mql.c"
+{ mqlyygotominor.mqlyy279 = new MonadSetChainElement(mqlyymsp[0].minor.mqlyy34, mqlyymsp[-1].minor.mqlyy398, 0); mqlyygotominor.mqlyy279->setNext(mqlyymsp[-2].minor.mqlyy279); }
+#line 3138 "./mql.c"
         break;
       case 128: /* monad_set_operator ::= KEY_UNION */
 #line 533 "./mql.yxx"
-{ mqlyygotominor.mqlyy462 = kSOUnion;   mqlyy_destructor(mqlyypParser,64,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy398 = kSOUnion;   mqlyy_destructor(mqlyypParser,64,&mqlyymsp[0].minor);
 }
-#line 3141 "./mql.c"
+#line 3144 "./mql.c"
         break;
       case 129: /* monad_set_operator ::= KEY_DIFFERENCE */
 #line 534 "./mql.yxx"
-{ mqlyygotominor.mqlyy462 = kSODifference;   mqlyy_destructor(mqlyypParser,65,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy398 = kSODifference;   mqlyy_destructor(mqlyypParser,65,&mqlyymsp[0].minor);
 }
-#line 3147 "./mql.c"
+#line 3150 "./mql.c"
         break;
       case 130: /* monad_set_operator ::= KEY_INTERSECT */
 #line 535 "./mql.yxx"
-{ mqlyygotominor.mqlyy462 = kSOIntersect;   mqlyy_destructor(mqlyypParser,66,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy398 = kSOIntersect;   mqlyy_destructor(mqlyypParser,66,&mqlyymsp[0].minor);
 }
-#line 3153 "./mql.c"
+#line 3156 "./mql.c"
         break;
       case 131: /* select_monad_sets_statement ::= KEY_SELECT KEY_MONAD KEY_SETS */
 #line 541 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new SelectMonadSetsStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-2].minor);
+{ mqlyygotominor.mqlyy160 = new SelectMonadSetsStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,68,&mqlyymsp[0].minor);
 }
-#line 3161 "./mql.c"
+#line 3164 "./mql.c"
         break;
       case 132: /* get_monad_sets_statement ::= KEY_GET KEY_MONAD choice_number_SET monad_set_name_list */
 #line 548 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new GetMonadSetsStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy238);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-3].minor);
+{ mqlyygotominor.mqlyy160 = new GetMonadSetsStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy440);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-2].minor);
 }
-#line 3168 "./mql.c"
+#line 3171 "./mql.c"
         break;
       case 133: /* get_monad_sets_statement ::= KEY_GET KEY_MONAD choice_number_SET KEY_ALL */
 #line 551 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new GetMonadSetsStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-3].minor);
+{ mqlyygotominor.mqlyy160 = new GetMonadSetsStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,69,&mqlyymsp[0].minor);
 }
-#line 3176 "./mql.c"
+#line 3179 "./mql.c"
         break;
       case 134: /* choice_number_SET ::= KEY_SETS */
 #line 556 "./mql.yxx"
-{mqlyygotominor.mqlyy98 = 0;  mqlyy_destructor(mqlyypParser,68,&mqlyymsp[0].minor);
+{mqlyygotominor.mqlyy292 = 0;  mqlyy_destructor(mqlyypParser,68,&mqlyymsp[0].minor);
 }
-#line 3182 "./mql.c"
+#line 3185 "./mql.c"
         break;
       case 135: /* choice_number_SET ::= KEY_SET */
 #line 557 "./mql.yxx"
-{mqlyygotominor.mqlyy98 = 0;  mqlyy_destructor(mqlyypParser,46,&mqlyymsp[0].minor);
+{mqlyygotominor.mqlyy292 = 0;  mqlyy_destructor(mqlyypParser,46,&mqlyymsp[0].minor);
 }
-#line 3188 "./mql.c"
+#line 3191 "./mql.c"
         break;
       case 136: /* create_monad_set_statement ::= KEY_CREATE KEY_MONAD KEY_SET monad_set_name KEY_WITH monad_specification */
 #line 564 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new CreateMonadSetStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy434); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-5].minor);
+{ mqlyygotominor.mqlyy160 = new CreateMonadSetStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy34); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,46,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-1].minor);
 }
-#line 3197 "./mql.c"
+#line 3200 "./mql.c"
         break;
       case 137: /* update_monad_set_statement ::= KEY_UPDATE KEY_MONAD KEY_SET monad_set_name monad_set_operator monad_set_name */
 #line 574 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new UpdateMonadSetStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy462, mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-2].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-5].minor);
+{ mqlyygotominor.mqlyy160 = new UpdateMonadSetStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy398, mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-2].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,46,&mqlyymsp[-3].minor);
 }
-#line 3205 "./mql.c"
+#line 3208 "./mql.c"
         break;
       case 138: /* update_monad_set_statement ::= KEY_UPDATE KEY_MONAD KEY_SET monad_set_name KEY_REPLACE monad_set_name */
 #line 580 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new UpdateMonadSetStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), kSOReplace, mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-2].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-5].minor);
+{ mqlyygotominor.mqlyy160 = new UpdateMonadSetStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), kSOReplace, mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-2].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,46,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,70,&mqlyymsp[-1].minor);
 }
-#line 3214 "./mql.c"
+#line 3217 "./mql.c"
         break;
       case 139: /* update_monad_set_statement ::= KEY_UPDATE KEY_MONAD KEY_SET monad_set_name monad_set_operator monad_set */
 #line 586 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new UpdateMonadSetStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy462, mqlyymsp[0].minor.mqlyy434); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-5].minor);
+{ mqlyygotominor.mqlyy160 = new UpdateMonadSetStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy398, mqlyymsp[0].minor.mqlyy34); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,46,&mqlyymsp[-3].minor);
 }
-#line 3222 "./mql.c"
+#line 3225 "./mql.c"
         break;
       case 140: /* update_monad_set_statement ::= KEY_UPDATE KEY_MONAD KEY_SET monad_set_name KEY_REPLACE monad_set */
 #line 592 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new UpdateMonadSetStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), kSOReplace, mqlyymsp[0].minor.mqlyy434); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-5].minor);
+{ mqlyygotominor.mqlyy160 = new UpdateMonadSetStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), kSOReplace, mqlyymsp[0].minor.mqlyy34); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,46,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,70,&mqlyymsp[-1].minor);
 }
-#line 3231 "./mql.c"
+#line 3234 "./mql.c"
         break;
       case 141: /* drop_monad_set_statement ::= KEY_DROP KEY_MONAD KEY_SET monad_set_name */
 #line 599 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new DropMonadSetStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,12,&mqlyymsp[-3].minor);
+{ mqlyygotominor.mqlyy160 = new DropMonadSetStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,12,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,46,&mqlyymsp[-1].minor);
 }
-#line 3239 "./mql.c"
+#line 3242 "./mql.c"
         break;
       case 143: /* monad_set_name_list ::= monad_set_name */
       case 201: /* object_type_name_list ::= object_type_name */ mqlyytestcase(mqlyyruleno==201);
       case 253: /* list_of_identifier ::= IDENTIFIER */ mqlyytestcase(mqlyyruleno==253);
 #line 610 "./mql.yxx"
-{ mqlyygotominor.mqlyy238 = new StringListNode(*(mqlyymsp[0].minor.mqlyy0->pString), 0); deleteToken(mqlyymsp[0].minor.mqlyy0); }
-#line 3246 "./mql.c"
+{ mqlyygotominor.mqlyy440 = new StringListNode(*(mqlyymsp[0].minor.mqlyy0->pString), 0); deleteToken(mqlyymsp[0].minor.mqlyy0); }
+#line 3249 "./mql.c"
         break;
       case 144: /* monad_set_name_list ::= monad_set_name_list KEY_COMMA monad_set_name */
       case 202: /* object_type_name_list ::= object_type_name_list KEY_COMMA object_type_name */ mqlyytestcase(mqlyyruleno==202);
       case 254: /* list_of_identifier ::= list_of_identifier KEY_COMMA IDENTIFIER */ mqlyytestcase(mqlyyruleno==254);
 #line 613 "./mql.yxx"
-{ mqlyygotominor.mqlyy238 = new StringListNode(*(mqlyymsp[0].minor.mqlyy0->pString), mqlyymsp[-2].minor.mqlyy238); mqlyymsp[-2].minor.mqlyy238->setNext(mqlyygotominor.mqlyy238); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy440 = new StringListNode(*(mqlyymsp[0].minor.mqlyy0->pString), mqlyymsp[-2].minor.mqlyy440); mqlyymsp[-2].minor.mqlyy440->setNext(mqlyygotominor.mqlyy440); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-1].minor);
 }
-#line 3254 "./mql.c"
+#line 3257 "./mql.c"
         break;
       case 145: /* create_enumeration_statement ::= KEY_CREATE choice_ENUM_ERATION enumeration_name KEY_EQUALS KEY_OPEN_BRACE ec_declaration_list KEY_CLOSE_BRACE */
 #line 622 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new CreateEnumerationStatement((MQLExecEnv*) pEE, mqlyymsp[-4].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy486); deleteToken(mqlyymsp[-4].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-6].minor);
+{ mqlyygotominor.mqlyy160 = new CreateEnumerationStatement((MQLExecEnv*) pEE, mqlyymsp[-4].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy461); deleteToken(mqlyymsp[-4].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-6].minor);
   mqlyy_destructor(mqlyypParser,72,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,73,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,74,&mqlyymsp[0].minor);
 }
-#line 3263 "./mql.c"
+#line 3266 "./mql.c"
         break;
       case 146: /* choice_ENUM_ERATION ::= KEY_ENUMERATION */
 #line 627 "./mql.yxx"
-{ mqlyygotominor.mqlyy98 = 0;   mqlyy_destructor(mqlyypParser,75,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy292 = 0;   mqlyy_destructor(mqlyypParser,75,&mqlyymsp[0].minor);
 }
-#line 3269 "./mql.c"
+#line 3272 "./mql.c"
         break;
       case 147: /* choice_ENUM_ERATION ::= KEY_ENUM */
 #line 628 "./mql.yxx"
-{ mqlyygotominor.mqlyy98 = 0;   mqlyy_destructor(mqlyypParser,76,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy292 = 0;   mqlyy_destructor(mqlyypParser,76,&mqlyymsp[0].minor);
 }
-#line 3275 "./mql.c"
+#line 3278 "./mql.c"
         break;
       case 149: /* ec_declaration_list ::= ec_declaration */
 #line 638 "./mql.yxx"
-{ mqlyygotominor.mqlyy486 = mqlyymsp[0].minor.mqlyy486; }
-#line 3280 "./mql.c"
+{ mqlyygotominor.mqlyy461 = mqlyymsp[0].minor.mqlyy461; }
+#line 3283 "./mql.c"
         break;
       case 150: /* ec_declaration_list ::= ec_declaration_list KEY_COMMA ec_declaration */
 #line 640 "./mql.yxx"
-{ mqlyygotominor.mqlyy486 = mqlyymsp[0].minor.mqlyy486; mqlyygotominor.mqlyy486->setNext(mqlyymsp[-2].minor.mqlyy486);   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy461 = mqlyymsp[0].minor.mqlyy461; mqlyygotominor.mqlyy461->setNext(mqlyymsp[-2].minor.mqlyy461);   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-1].minor);
 }
-#line 3286 "./mql.c"
+#line 3289 "./mql.c"
         break;
       case 151: /* ec_declaration ::= opt_DEFAULT ec_name opt_ec_initialization */
 #line 645 "./mql.yxx"
-{ mqlyygotominor.mqlyy486 = new ECDeclaration(mqlyymsp[-2].minor.mqlyy195, mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy579, 0); 
+{ mqlyygotominor.mqlyy461 = new ECDeclaration(mqlyymsp[-2].minor.mqlyy137, mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy587, 0); 
       deleteToken(mqlyymsp[-1].minor.mqlyy0); 
     }
-#line 3293 "./mql.c"
+#line 3296 "./mql.c"
         break;
       case 152: /* opt_DEFAULT ::= KEY_DEFAULT */
 #line 653 "./mql.yxx"
-{ mqlyygotominor.mqlyy195 = true;   mqlyy_destructor(mqlyypParser,55,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy137 = true;   mqlyy_destructor(mqlyypParser,55,&mqlyymsp[0].minor);
 }
-#line 3299 "./mql.c"
+#line 3302 "./mql.c"
         break;
       case 155: /* opt_ec_initialization ::= ec_initialization */
 #line 665 "./mql.yxx"
-{ mqlyygotominor.mqlyy579 = new long(mqlyymsp[0].minor.mqlyy485); }
-#line 3304 "./mql.c"
+{ mqlyygotominor.mqlyy587 = new long(mqlyymsp[0].minor.mqlyy249); }
+#line 3307 "./mql.c"
         break;
       case 156: /* opt_ec_initialization ::= */
 #line 668 "./mql.yxx"
-{ mqlyygotominor.mqlyy579 = 0; }
-#line 3309 "./mql.c"
+{ mqlyygotominor.mqlyy587 = 0; }
+#line 3312 "./mql.c"
         break;
       case 157: /* update_enumeration_statement ::= KEY_UPDATE choice_ENUM_ERATION enumeration_name KEY_EQUALS KEY_OPEN_BRACE ec_update_list KEY_CLOSE_BRACE */
 #line 676 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new UpdateEnumerationStatement((MQLExecEnv*) pEE, mqlyymsp[-4].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy494); deleteToken(mqlyymsp[-4].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-6].minor);
+{ mqlyygotominor.mqlyy160 = new UpdateEnumerationStatement((MQLExecEnv*) pEE, mqlyymsp[-4].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy362); deleteToken(mqlyymsp[-4].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-6].minor);
   mqlyy_destructor(mqlyypParser,72,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,73,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,74,&mqlyymsp[0].minor);
 }
-#line 3318 "./mql.c"
+#line 3321 "./mql.c"
         break;
       case 158: /* ec_update_list ::= ec_update */
 #line 682 "./mql.yxx"
-{ mqlyygotominor.mqlyy494 = mqlyymsp[0].minor.mqlyy494; }
-#line 3323 "./mql.c"
+{ mqlyygotominor.mqlyy362 = mqlyymsp[0].minor.mqlyy362; }
+#line 3326 "./mql.c"
         break;
       case 159: /* ec_update_list ::= ec_update_list KEY_COMMA ec_update */
 #line 684 "./mql.yxx"
-{ mqlyygotominor.mqlyy494 = mqlyymsp[0].minor.mqlyy494; mqlyygotominor.mqlyy494->setNext(mqlyymsp[-2].minor.mqlyy494);   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy362 = mqlyymsp[0].minor.mqlyy362; mqlyygotominor.mqlyy362->setNext(mqlyymsp[-2].minor.mqlyy362);   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-1].minor);
 }
-#line 3329 "./mql.c"
+#line 3332 "./mql.c"
         break;
       case 160: /* ec_update ::= opt_ADD opt_DEFAULT ec_name ec_initialization */
 #line 690 "./mql.yxx"
-{ mqlyygotominor.mqlyy494 = new ECUpdate(mqlyymsp[-2].minor.mqlyy195, mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy485, kAdd, 0); deleteToken(mqlyymsp[-1].minor.mqlyy0); }
-#line 3334 "./mql.c"
+{ mqlyygotominor.mqlyy362 = new ECUpdate(mqlyymsp[-2].minor.mqlyy137, mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy249, kAdd, 0); deleteToken(mqlyymsp[-1].minor.mqlyy0); }
+#line 3337 "./mql.c"
         break;
       case 161: /* ec_update ::= KEY_UPDATE opt_DEFAULT ec_name ec_initialization */
 #line 692 "./mql.yxx"
-{ mqlyygotominor.mqlyy494 = new ECUpdate(mqlyymsp[-2].minor.mqlyy195, mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy485, kUpdate, 0); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-3].minor);
+{ mqlyygotominor.mqlyy362 = new ECUpdate(mqlyymsp[-2].minor.mqlyy137, mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy249, kUpdate, 0); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-3].minor);
 }
-#line 3340 "./mql.c"
+#line 3343 "./mql.c"
         break;
       case 162: /* ec_update ::= KEY_REMOVE ec_name */
 #line 694 "./mql.yxx"
-{ mqlyygotominor.mqlyy494 = new ECUpdate(false, mqlyymsp[0].minor.mqlyy0->extractString(), 0, kRemove, 0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,58,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy362 = new ECUpdate(false, mqlyymsp[0].minor.mqlyy0->extractString(), 0, kRemove, 0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,58,&mqlyymsp[-1].minor);
 }
-#line 3346 "./mql.c"
+#line 3349 "./mql.c"
         break;
       case 163: /* ec_initialization ::= KEY_EQUALS signed_integer */
 #line 699 "./mql.yxx"
-{ mqlyygotominor.mqlyy485 = mqlyymsp[0].minor.mqlyy485;   mqlyy_destructor(mqlyypParser,72,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy249 = mqlyymsp[0].minor.mqlyy249;   mqlyy_destructor(mqlyypParser,72,&mqlyymsp[-1].minor);
 }
-#line 3352 "./mql.c"
+#line 3355 "./mql.c"
         break;
       case 164: /* signed_integer ::= INTEGER */
       case 167: /* unsigned_integer ::= INTEGER */ mqlyytestcase(mqlyyruleno==167);
 #line 703 "./mql.yxx"
-{ mqlyygotominor.mqlyy485 = mqlyymsp[0].minor.mqlyy0->integer; deleteToken(mqlyymsp[0].minor.mqlyy0); }
-#line 3358 "./mql.c"
+{ mqlyygotominor.mqlyy249 = mqlyymsp[0].minor.mqlyy0->integer; deleteToken(mqlyymsp[0].minor.mqlyy0); }
+#line 3361 "./mql.c"
         break;
       case 165: /* signed_integer ::= KEY_DASH INTEGER */
 #line 704 "./mql.yxx"
-{ mqlyygotominor.mqlyy485 = -(mqlyymsp[0].minor.mqlyy0->integer); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,77,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy249 = -(mqlyymsp[0].minor.mqlyy0->integer); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,77,&mqlyymsp[-1].minor);
 }
-#line 3364 "./mql.c"
+#line 3367 "./mql.c"
         break;
       case 166: /* signed_integer ::= KEY_NIL */
 #line 705 "./mql.yxx"
-{ mqlyygotominor.mqlyy485 = NIL;   mqlyy_destructor(mqlyypParser,78,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy249 = NIL;   mqlyy_destructor(mqlyypParser,78,&mqlyymsp[0].minor);
 }
-#line 3370 "./mql.c"
+#line 3373 "./mql.c"
         break;
       case 168: /* drop_enumeration_statement ::= KEY_DROP choice_ENUM_ERATION enumeration_name */
 #line 718 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new DropEnumerationStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,12,&mqlyymsp[-2].minor);
+{ mqlyygotominor.mqlyy160 = new DropEnumerationStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,12,&mqlyymsp[-2].minor);
 }
-#line 3376 "./mql.c"
+#line 3379 "./mql.c"
         break;
       case 169: /* create_segment_statement ::= KEY_CREATE KEY_SEGMENT segment_name KEY_RANGE KEY_EQUALS segment_range */
 #line 728 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new CreateSegmentStatement((MQLExecEnv*) pEE, mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy434); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-5].minor);
+{ mqlyygotominor.mqlyy160 = new CreateSegmentStatement((MQLExecEnv*) pEE, mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy34); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,79,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,27,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,72,&mqlyymsp[-1].minor);
 }
-#line 3385 "./mql.c"
+#line 3388 "./mql.c"
         break;
       case 171: /* segment_range ::= INTEGER KEY_DASH INTEGER */
 #line 738 "./mql.yxx"
-{ mqlyygotominor.mqlyy434 = new MQLMonadSetElement(mqlyymsp[-2].minor.mqlyy0->integer, mqlyymsp[0].minor.mqlyy0->integer, 0, true);  deleteToken(mqlyymsp[-2].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,77,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy34 = new MQLMonadSetElement(mqlyymsp[-2].minor.mqlyy0->integer, mqlyymsp[0].minor.mqlyy0->integer, 0, true);  deleteToken(mqlyymsp[-2].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,77,&mqlyymsp[-1].minor);
 }
-#line 3391 "./mql.c"
+#line 3394 "./mql.c"
         break;
       case 172: /* select_statement ::= select_clause in_clause with_max_range_clause returning_clause where_clause */
 #line 748 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new SelectStatement((MQLExecEnv*) pEE, mqlyymsp[-4].minor.mqlyy311, mqlyymsp[-3].minor.mqlyy434, mqlyymsp[-2].minor.mqlyy36, mqlyymsp[-1].minor.mqlyy335, mqlyymsp[0].minor.mqlyy445); }
-#line 3396 "./mql.c"
+{ mqlyygotominor.mqlyy160 = new SelectStatement((MQLExecEnv*) pEE, mqlyymsp[-4].minor.mqlyy253, mqlyymsp[-3].minor.mqlyy34, mqlyymsp[-2].minor.mqlyy278, mqlyymsp[-1].minor.mqlyy309, mqlyymsp[0].minor.mqlyy295); }
+#line 3399 "./mql.c"
         break;
       case 173: /* select_statement ::= select_clause KEY_IN IDENTIFIER with_max_range_clause returning_clause where_clause */
 #line 754 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new SelectStatement((MQLExecEnv*) pEE, mqlyymsp[-5].minor.mqlyy311, mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[-2].minor.mqlyy36, mqlyymsp[-1].minor.mqlyy335, mqlyymsp[0].minor.mqlyy445); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,80,&mqlyymsp[-4].minor);
+{ mqlyygotominor.mqlyy160 = new SelectStatement((MQLExecEnv*) pEE, mqlyymsp[-5].minor.mqlyy253, mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[-2].minor.mqlyy278, mqlyymsp[-1].minor.mqlyy309, mqlyymsp[0].minor.mqlyy295); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,80,&mqlyymsp[-4].minor);
 }
-#line 3402 "./mql.c"
+#line 3405 "./mql.c"
         break;
       case 174: /* select_clause ::= KEY_SELECT focus_specification opt_OBJECTS */
 #line 760 "./mql.yxx"
-{ mqlyygotominor.mqlyy311 = mqlyymsp[-1].minor.mqlyy311;   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-2].minor);
+{ mqlyygotominor.mqlyy253 = mqlyymsp[-1].minor.mqlyy253;   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-2].minor);
 }
-#line 3408 "./mql.c"
+#line 3411 "./mql.c"
         break;
       case 175: /* focus_specification ::= KEY_FOCUS */
 #line 765 "./mql.yxx"
-{ mqlyygotominor.mqlyy311 = kFocus;   mqlyy_destructor(mqlyypParser,81,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy253 = kFocus;   mqlyy_destructor(mqlyypParser,81,&mqlyymsp[0].minor);
 }
-#line 3414 "./mql.c"
+#line 3417 "./mql.c"
         break;
       case 176: /* focus_specification ::= KEY_ALL */
 #line 766 "./mql.yxx"
-{ mqlyygotominor.mqlyy311 = kAll;   mqlyy_destructor(mqlyypParser,69,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy253 = kAll;   mqlyy_destructor(mqlyypParser,69,&mqlyymsp[0].minor);
 }
-#line 3420 "./mql.c"
+#line 3423 "./mql.c"
         break;
       case 177: /* opt_OBJECTS ::= KEY_OBJECTS */
 #line 771 "./mql.yxx"
-{ mqlyygotominor.mqlyy98 = 0;   mqlyy_destructor(mqlyypParser,28,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy292 = 0;   mqlyy_destructor(mqlyypParser,28,&mqlyymsp[0].minor);
 }
-#line 3426 "./mql.c"
+#line 3429 "./mql.c"
         break;
       case 179: /* in_clause ::= KEY_IN in_specification */
 #line 778 "./mql.yxx"
-{ mqlyygotominor.mqlyy434 = mqlyymsp[0].minor.mqlyy434; mqlyygotominor.mqlyy434->setIsFirst(true);   mqlyy_destructor(mqlyypParser,80,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy34 = mqlyymsp[0].minor.mqlyy34; mqlyygotominor.mqlyy34->setIsFirst(true);   mqlyy_destructor(mqlyypParser,80,&mqlyymsp[-1].minor);
 }
-#line 3432 "./mql.c"
+#line 3435 "./mql.c"
         break;
       case 180: /* in_clause ::= */
 #line 780 "./mql.yxx"
-{ mqlyygotominor.mqlyy434 = new MQLMonadSetElement(1L, MAX_MONAD, 0, true); }
-#line 3437 "./mql.c"
+{ mqlyygotominor.mqlyy34 = new MQLMonadSetElement(1L, MAX_MONAD, 0, true); }
+#line 3440 "./mql.c"
         break;
       case 181: /* in_specification ::= monad_set */
-      case 351: /* star_monad_set ::= monad_set */ mqlyytestcase(mqlyyruleno==351);
+      case 352: /* star_monad_set ::= monad_set */ mqlyytestcase(mqlyyruleno==352);
 #line 786 "./mql.yxx"
-{ mqlyygotominor.mqlyy434 = mqlyymsp[0].minor.mqlyy434; mqlyygotominor.mqlyy434->setIsFirst(true); }
-#line 3443 "./mql.c"
+{ mqlyygotominor.mqlyy34 = mqlyymsp[0].minor.mqlyy34; mqlyygotominor.mqlyy34->setIsFirst(true); }
+#line 3446 "./mql.c"
         break;
       case 182: /* in_specification ::= KEY_ALL */
 #line 788 "./mql.yxx"
-{ mqlyygotominor.mqlyy434 = new MQLMonadSetElement(1L, MAX_MONAD, 0, true);   mqlyy_destructor(mqlyypParser,69,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy34 = new MQLMonadSetElement(1L, MAX_MONAD, 0, true);   mqlyy_destructor(mqlyypParser,69,&mqlyymsp[0].minor);
 }
-#line 3449 "./mql.c"
+#line 3452 "./mql.c"
         break;
       case 183: /* monad_set ::= KEY_OPEN_BRACE monad_set_element_list KEY_CLOSE_BRACE */
 #line 794 "./mql.yxx"
-{ mqlyygotominor.mqlyy434 = mqlyymsp[-1].minor.mqlyy434; mqlyygotominor.mqlyy434->setIsFirst(true);   mqlyy_destructor(mqlyypParser,73,&mqlyymsp[-2].minor);
+{ mqlyygotominor.mqlyy34 = mqlyymsp[-1].minor.mqlyy34; mqlyygotominor.mqlyy34->setIsFirst(true);   mqlyy_destructor(mqlyypParser,73,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,74,&mqlyymsp[0].minor);
 }
-#line 3456 "./mql.c"
+#line 3459 "./mql.c"
         break;
       case 184: /* monad_set_element_list ::= monad_set_element */
 #line 800 "./mql.yxx"
-{ mqlyygotominor.mqlyy434 = mqlyymsp[0].minor.mqlyy434; }
-#line 3461 "./mql.c"
+{ mqlyygotominor.mqlyy34 = mqlyymsp[0].minor.mqlyy34; }
+#line 3464 "./mql.c"
         break;
       case 185: /* monad_set_element_list ::= monad_set_element_list KEY_COMMA monad_set_element */
 #line 803 "./mql.yxx"
-{ mqlyygotominor.mqlyy434 = mqlyymsp[0].minor.mqlyy434; mqlyygotominor.mqlyy434->setNext(mqlyymsp[-2].minor.mqlyy434);   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy34 = mqlyymsp[0].minor.mqlyy34; mqlyygotominor.mqlyy34->setNext(mqlyymsp[-2].minor.mqlyy34);   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-1].minor);
 }
-#line 3467 "./mql.c"
+#line 3470 "./mql.c"
         break;
       case 186: /* monad_set_element ::= INTEGER */
 #line 809 "./mql.yxx"
-{ mqlyygotominor.mqlyy434 = new MQLMonadSetElement(mqlyymsp[0].minor.mqlyy0->integer, 0, false); deleteToken(mqlyymsp[0].minor.mqlyy0); }
-#line 3472 "./mql.c"
+{ mqlyygotominor.mqlyy34 = new MQLMonadSetElement(mqlyymsp[0].minor.mqlyy0->integer, 0, false); deleteToken(mqlyymsp[0].minor.mqlyy0); }
+#line 3475 "./mql.c"
         break;
       case 187: /* monad_set_element ::= INTEGER KEY_DASH INTEGER */
 #line 811 "./mql.yxx"
-{ mqlyygotominor.mqlyy434 = new MQLMonadSetElement(mqlyymsp[-2].minor.mqlyy0->integer, mqlyymsp[0].minor.mqlyy0->integer, 0, false); deleteToken(mqlyymsp[-2].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,77,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy34 = new MQLMonadSetElement(mqlyymsp[-2].minor.mqlyy0->integer, mqlyymsp[0].minor.mqlyy0->integer, 0, false); deleteToken(mqlyymsp[-2].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,77,&mqlyymsp[-1].minor);
 }
-#line 3478 "./mql.c"
+#line 3481 "./mql.c"
         break;
       case 188: /* monad_set_element ::= INTEGER KEY_DASH */
 #line 813 "./mql.yxx"
-{ mqlyygotominor.mqlyy434 = new MQLMonadSetElement(mqlyymsp[-1].minor.mqlyy0->integer, MAX_MONAD, 0, false); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,77,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy34 = new MQLMonadSetElement(mqlyymsp[-1].minor.mqlyy0->integer, MAX_MONAD, 0, false); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,77,&mqlyymsp[0].minor);
 }
-#line 3484 "./mql.c"
+#line 3487 "./mql.c"
         break;
       case 189: /* with_max_range_clause ::= */
 #line 819 "./mql.yxx"
-{ mqlyygotominor.mqlyy36 = new MaxRange(MAX_MONAD); }
-#line 3489 "./mql.c"
+{ mqlyygotominor.mqlyy278 = new MaxRange(MAX_MONAD); }
+#line 3492 "./mql.c"
         break;
       case 190: /* with_max_range_clause ::= KEY_WITH KEY_MAX KEY_RANGE KEY_MAX_M KEY_MONADS */
 #line 821 "./mql.yxx"
-{ mqlyygotominor.mqlyy36 = new MaxRange(MAX_MONAD);   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-4].minor);
+{ mqlyygotominor.mqlyy278 = new MaxRange(MAX_MONAD);   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,82,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,27,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,83,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[0].minor);
 }
-#line 3499 "./mql.c"
+#line 3502 "./mql.c"
         break;
       case 191: /* with_max_range_clause ::= KEY_WITH KEY_MAX KEY_RANGE INTEGER KEY_MONADS */
 #line 823 "./mql.yxx"
-{ mqlyygotominor.mqlyy36 = new MaxRange(mqlyymsp[-1].minor.mqlyy0->integer); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-4].minor);
+{ mqlyygotominor.mqlyy278 = new MaxRange(mqlyymsp[-1].minor.mqlyy0->integer); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,82,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,27,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[0].minor);
 }
-#line 3508 "./mql.c"
+#line 3511 "./mql.c"
         break;
       case 192: /* with_max_range_clause ::= KEY_WITH KEY_MAX KEY_RANGE KEY_FEATURE feature_name KEY_FROM KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET */
 #line 825 "./mql.yxx"
-{ mqlyygotominor.mqlyy36 = new MaxRange(mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[-4].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0); deleteToken(mqlyymsp[-4].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-8].minor);
+{ mqlyygotominor.mqlyy278 = new MaxRange(mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[-4].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0); deleteToken(mqlyymsp[-4].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-8].minor);
   mqlyy_destructor(mqlyypParser,82,&mqlyymsp[-7].minor);
   mqlyy_destructor(mqlyypParser,27,&mqlyymsp[-6].minor);
   mqlyy_destructor(mqlyypParser,84,&mqlyymsp[-5].minor);
@@ -105178,95 +106112,95 @@ static void mqlyy_reduce(
   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 3520 "./mql.c"
+#line 3523 "./mql.c"
         break;
       case 193: /* returning_clause ::= */
 #line 831 "./mql.yxx"
-{ mqlyygotominor.mqlyy335 = new sheaf_return_type_pair(kFullSheaf, ((StringList*) 0)); }
-#line 3525 "./mql.c"
+{ mqlyygotominor.mqlyy309 = new sheaf_return_type_pair(kFullSheaf, ((StringList*) 0)); }
+#line 3528 "./mql.c"
         break;
       case 194: /* returning_clause ::= KEY_RETURNING KEY_FULL KEY_SHEAF */
 #line 833 "./mql.yxx"
-{ mqlyygotominor.mqlyy335 = new sheaf_return_type_pair(kFullSheaf, ((StringList*) 0));   mqlyy_destructor(mqlyypParser,85,&mqlyymsp[-2].minor);
+{ mqlyygotominor.mqlyy309 = new sheaf_return_type_pair(kFullSheaf, ((StringList*) 0));   mqlyy_destructor(mqlyypParser,85,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,86,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,87,&mqlyymsp[0].minor);
 }
-#line 3533 "./mql.c"
+#line 3536 "./mql.c"
         break;
       case 195: /* returning_clause ::= KEY_RETURNING KEY_FLAT KEY_SHEAF */
 #line 835 "./mql.yxx"
 { StringList *pSL = new StringList(); 
-      mqlyygotominor.mqlyy335 = new sheaf_return_type_pair(kFlatSheaf, pSL);   mqlyy_destructor(mqlyypParser,85,&mqlyymsp[-2].minor);
+      mqlyygotominor.mqlyy309 = new sheaf_return_type_pair(kFlatSheaf, pSL);   mqlyy_destructor(mqlyypParser,85,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,88,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,87,&mqlyymsp[0].minor);
 }
-#line 3542 "./mql.c"
+#line 3545 "./mql.c"
         break;
       case 196: /* returning_clause ::= KEY_RETURNING KEY_FLAT KEY_SHEAF KEY_ON object_type_name_list */
 #line 839 "./mql.yxx"
-{ StringList *pSL = new StringList(mqlyymsp[0].minor.mqlyy238); 
-      delete mqlyymsp[0].minor.mqlyy238;
-      mqlyygotominor.mqlyy335 = new sheaf_return_type_pair(kFlatSheaf, pSL);   mqlyy_destructor(mqlyypParser,85,&mqlyymsp[-4].minor);
+{ StringList *pSL = new StringList(mqlyymsp[0].minor.mqlyy440); 
+      delete mqlyymsp[0].minor.mqlyy440;
+      mqlyygotominor.mqlyy309 = new sheaf_return_type_pair(kFlatSheaf, pSL);   mqlyy_destructor(mqlyypParser,85,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,88,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,87,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,16,&mqlyymsp[-1].minor);
 }
-#line 3553 "./mql.c"
+#line 3556 "./mql.c"
         break;
       case 197: /* using_range_clause ::= */
 #line 846 "./mql.yxx"
-{ mqlyygotominor.mqlyy248 = 0; }
-#line 3558 "./mql.c"
+{ mqlyygotominor.mqlyy582 = 0; }
+#line 3561 "./mql.c"
         break;
       case 198: /* using_range_clause ::= KEY_RANGE KEY_ALL */
 #line 848 "./mql.yxx"
-{ mqlyygotominor.mqlyy248 = 0;   mqlyy_destructor(mqlyypParser,27,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy582 = 0;   mqlyy_destructor(mqlyypParser,27,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,69,&mqlyymsp[0].minor);
 }
-#line 3565 "./mql.c"
+#line 3568 "./mql.c"
         break;
       case 199: /* using_range_clause ::= KEY_RANGE KEY_OPEN_BRACKET unsigned_integer KEY_COMMA unsigned_integer KEY_CLOSE_BRACKET */
 #line 853 "./mql.yxx"
-{ mqlyygotominor.mqlyy248 = new UsingRange(mqlyymsp[-3].minor.mqlyy485, mqlyymsp[-1].minor.mqlyy485);   mqlyy_destructor(mqlyypParser,27,&mqlyymsp[-5].minor);
+{ mqlyygotominor.mqlyy582 = new UsingRange(mqlyymsp[-3].minor.mqlyy249, mqlyymsp[-1].minor.mqlyy249);   mqlyy_destructor(mqlyypParser,27,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
 }
-#line 3574 "./mql.c"
+#line 3577 "./mql.c"
         break;
       case 200: /* using_range_clause ::= KEY_RANGE KEY_OPEN_BRACKET unsigned_integer KEY_CLOSE_BRACKET */
 #line 858 "./mql.yxx"
-{ mqlyygotominor.mqlyy248 = new UsingRange(0, mqlyymsp[-1].minor.mqlyy485);   mqlyy_destructor(mqlyypParser,27,&mqlyymsp[-3].minor);
+{ mqlyygotominor.mqlyy582 = new UsingRange(0, mqlyymsp[-1].minor.mqlyy249);   mqlyy_destructor(mqlyypParser,27,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
 }
-#line 3582 "./mql.c"
+#line 3585 "./mql.c"
         break;
       case 203: /* where_clause ::= KEY_WHERE mql_query */
 #line 871 "./mql.yxx"
-{ mqlyygotominor.mqlyy445 = mqlyymsp[0].minor.mqlyy445;   mqlyy_destructor(mqlyypParser,89,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy295 = mqlyymsp[0].minor.mqlyy295;   mqlyy_destructor(mqlyypParser,89,&mqlyymsp[-1].minor);
 }
-#line 3588 "./mql.c"
+#line 3591 "./mql.c"
         break;
       case 204: /* select_objects_at_statement ::= KEY_SELECT opt_OBJECTS KEY_AT single_monad_specification KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET */
 #line 881 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new SelectObjectsAtStatement((MQLExecEnv*) pEE, mqlyymsp[-3].minor.mqlyy348, mqlyymsp[-1].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-6].minor);
+{ mqlyygotominor.mqlyy160 = new SelectObjectsAtStatement((MQLExecEnv*) pEE, mqlyymsp[-3].minor.mqlyy352, mqlyymsp[-1].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-6].minor);
   mqlyy_destructor(mqlyypParser,90,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 3597 "./mql.c"
+#line 3600 "./mql.c"
         break;
       case 205: /* single_monad_specification ::= KEY_MONAD KEY_EQUALS INTEGER */
 #line 887 "./mql.yxx"
-{ mqlyygotominor.mqlyy348 = mqlyymsp[0].minor.mqlyy0->integer; deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-2].minor);
+{ mqlyygotominor.mqlyy352 = mqlyymsp[0].minor.mqlyy0->integer; deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,72,&mqlyymsp[-1].minor);
 }
-#line 3604 "./mql.c"
+#line 3607 "./mql.c"
         break;
       case 206: /* select_objects_having_monads_in_statement ::= KEY_SELECT KEY_OBJECTS KEY_HAVING KEY_MONADS KEY_IN monad_set KEY_OPEN_SQUARE_BRACKET object_type_to_find KEY_CLOSE_SQUARE_BRACKET */
 #line 898 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new SelectObjectsHavingMonadsInStatement((MQLExecEnv*) pEE, mqlyymsp[-3].minor.mqlyy434, *(mqlyymsp[-1].minor.mqlyy0->pString)); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-8].minor);
+{ mqlyygotominor.mqlyy160 = new SelectObjectsHavingMonadsInStatement((MQLExecEnv*) pEE, mqlyymsp[-3].minor.mqlyy34, *(mqlyymsp[-1].minor.mqlyy0->pString)); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-8].minor);
   mqlyy_destructor(mqlyypParser,28,&mqlyymsp[-7].minor);
   mqlyy_destructor(mqlyypParser,31,&mqlyymsp[-6].minor);
   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[-5].minor);
@@ -105274,17 +106208,17 @@ static void mqlyy_reduce(
   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 3616 "./mql.c"
+#line 3619 "./mql.c"
         break;
       case 209: /* choice_object_type_or_all ::= KEY_ALL */
 #line 910 "./mql.yxx"
 { mqlyygotominor.mqlyy0 = newToken(); mqlyygotominor.mqlyy0->setString(new std::string("all"));   mqlyy_destructor(mqlyypParser,69,&mqlyymsp[0].minor);
 }
-#line 3622 "./mql.c"
+#line 3625 "./mql.c"
         break;
       case 210: /* get_objects_having_monads_in_statement ::= KEY_GET KEY_OBJECTS KEY_HAVING KEY_MONADS KEY_IN in_specification using_monad_feature KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET */
 #line 922 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new GetObjectsHavingMonadsInStatement((MQLExecEnv*) pEE, mqlyymsp[-4].minor.mqlyy434, mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[-3].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-9].minor);
+{ mqlyygotominor.mqlyy160 = new GetObjectsHavingMonadsInStatement((MQLExecEnv*) pEE, mqlyymsp[-4].minor.mqlyy34, mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[-3].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-9].minor);
   mqlyy_destructor(mqlyypParser,28,&mqlyymsp[-8].minor);
   mqlyy_destructor(mqlyypParser,31,&mqlyymsp[-7].minor);
   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[-6].minor);
@@ -105292,11 +106226,11 @@ static void mqlyy_reduce(
   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 3634 "./mql.c"
+#line 3637 "./mql.c"
         break;
       case 211: /* get_objects_having_monads_in_statement ::= KEY_GET KEY_OBJECTS KEY_HAVING KEY_MONADS KEY_IN in_specification using_monad_feature KEY_OPEN_SQUARE_BRACKET object_type_name KEY_GET KEY_ALL KEY_CLOSE_SQUARE_BRACKET */
 #line 930 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new GetObjectsHavingMonadsInStatement((MQLExecEnv*) pEE, mqlyymsp[-6].minor.mqlyy434, mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[-5].minor.mqlyy0->extractString(), true); deleteToken(mqlyymsp[-3].minor.mqlyy0); deleteToken(mqlyymsp[-5].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-11].minor);
+{ mqlyygotominor.mqlyy160 = new GetObjectsHavingMonadsInStatement((MQLExecEnv*) pEE, mqlyymsp[-6].minor.mqlyy34, mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[-5].minor.mqlyy0->extractString(), true); deleteToken(mqlyymsp[-3].minor.mqlyy0); deleteToken(mqlyymsp[-5].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-11].minor);
   mqlyy_destructor(mqlyypParser,28,&mqlyymsp[-10].minor);
   mqlyy_destructor(mqlyypParser,31,&mqlyymsp[-9].minor);
   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[-8].minor);
@@ -105306,11 +106240,11 @@ static void mqlyy_reduce(
   mqlyy_destructor(mqlyypParser,69,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 3648 "./mql.c"
+#line 3651 "./mql.c"
         break;
       case 212: /* get_objects_having_monads_in_statement ::= KEY_GET KEY_OBJECTS KEY_HAVING KEY_MONADS KEY_IN in_specification using_monad_feature KEY_OPEN_SQUARE_BRACKET object_type_name KEY_GET feature_list KEY_CLOSE_SQUARE_BRACKET */
 #line 938 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new GetObjectsHavingMonadsInStatement((MQLExecEnv*) pEE, mqlyymsp[-6].minor.mqlyy434, mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[-5].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy374); deleteToken(mqlyymsp[-3].minor.mqlyy0); deleteToken(mqlyymsp[-5].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-11].minor);
+{ mqlyygotominor.mqlyy160 = new GetObjectsHavingMonadsInStatement((MQLExecEnv*) pEE, mqlyymsp[-6].minor.mqlyy34, mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[-5].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy242); deleteToken(mqlyymsp[-3].minor.mqlyy0); deleteToken(mqlyymsp[-5].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-11].minor);
   mqlyy_destructor(mqlyypParser,28,&mqlyymsp[-10].minor);
   mqlyy_destructor(mqlyypParser,31,&mqlyymsp[-9].minor);
   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[-8].minor);
@@ -105319,7 +106253,7 @@ static void mqlyy_reduce(
   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 3661 "./mql.c"
+#line 3664 "./mql.c"
         break;
       case 213: /* using_monad_feature ::= KEY_USING KEY_MONAD KEY_FEATURE IDENTIFIER */
 #line 942 "./mql.yxx"
@@ -105327,7 +106261,7 @@ static void mqlyy_reduce(
   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,84,&mqlyymsp[-1].minor);
 }
-#line 3669 "./mql.c"
+#line 3672 "./mql.c"
         break;
       case 214: /* using_monad_feature ::= KEY_USING KEY_MONAD KEY_FEATURE KEY_MONADS */
 #line 943 "./mql.yxx"
@@ -105336,286 +106270,286 @@ static void mqlyy_reduce(
   mqlyy_destructor(mqlyypParser,84,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[0].minor);
 }
-#line 3678 "./mql.c"
+#line 3681 "./mql.c"
         break;
       case 215: /* using_monad_feature ::= */
 #line 944 "./mql.yxx"
 { mqlyygotominor.mqlyy0 = newToken(); mqlyygotominor.mqlyy0->setString(new std::string("monads")); }
-#line 3683 "./mql.c"
+#line 3686 "./mql.c"
         break;
       case 216: /* select_object_types_statement ::= KEY_SELECT opt_OBJECT KEY_TYPES */
 #line 951 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new SelectObjectTypesStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-2].minor);
+{ mqlyygotominor.mqlyy160 = new SelectObjectTypesStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,21,&mqlyymsp[0].minor);
 }
-#line 3690 "./mql.c"
+#line 3693 "./mql.c"
         break;
       case 217: /* select_features_statement ::= KEY_SELECT KEY_FEATURES KEY_FROM opt_OBJECTYPE KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET */
 #line 958 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new SelectFeaturesStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-6].minor);
+{ mqlyygotominor.mqlyy160 = new SelectFeaturesStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-6].minor);
   mqlyy_destructor(mqlyypParser,91,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,51,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 3700 "./mql.c"
+#line 3703 "./mql.c"
         break;
       case 218: /* get_set_from_feature_statement ::= KEY_GET KEY_SET KEY_FROM KEY_FEATURE feature_name KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET */
 #line 965 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new GetSetFromFeatureStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[-3].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-7].minor);
+{ mqlyygotominor.mqlyy160 = new GetSetFromFeatureStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[-3].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-7].minor);
   mqlyy_destructor(mqlyypParser,46,&mqlyymsp[-6].minor);
   mqlyy_destructor(mqlyypParser,51,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,84,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 3711 "./mql.c"
+#line 3714 "./mql.c"
         break;
       case 219: /* opt_OBJECTYPE ::= KEY_OBJECT KEY_TYPE */
 #line 970 "./mql.yxx"
-{ mqlyygotominor.mqlyy98=0;   mqlyy_destructor(mqlyypParser,17,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy292=0;   mqlyy_destructor(mqlyypParser,17,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,20,&mqlyymsp[0].minor);
 }
-#line 3718 "./mql.c"
+#line 3721 "./mql.c"
         break;
       case 220: /* opt_OBJECTYPE ::= KEY_TYPE */
 #line 971 "./mql.yxx"
-{ mqlyygotominor.mqlyy98=0;   mqlyy_destructor(mqlyypParser,20,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy292=0;   mqlyy_destructor(mqlyypParser,20,&mqlyymsp[0].minor);
 }
-#line 3724 "./mql.c"
+#line 3727 "./mql.c"
         break;
       case 221: /* opt_OBJECTYPE ::= */
 #line 972 "./mql.yxx"
-{ mqlyygotominor.mqlyy98=0; }
-#line 3729 "./mql.c"
+{ mqlyygotominor.mqlyy292=0; }
+#line 3732 "./mql.c"
         break;
       case 222: /* select_enumerations_statement ::= KEY_SELECT KEY_ENUMERATIONS */
 #line 978 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new SelectEnumerationsStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy160 = new SelectEnumerationsStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,92,&mqlyymsp[0].minor);
 }
-#line 3736 "./mql.c"
+#line 3739 "./mql.c"
         break;
       case 223: /* select_enumeration_constants_statement ::= KEY_SELECT choice_ENUM_ERATION KEY_CONSTANTS KEY_FROM opt_ENUM_ERATION enumeration_name */
 #line 987 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new SelectEnumerationConstantsStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-5].minor);
+{ mqlyygotominor.mqlyy160 = new SelectEnumerationConstantsStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,93,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,51,&mqlyymsp[-2].minor);
 }
-#line 3744 "./mql.c"
+#line 3747 "./mql.c"
         break;
       case 224: /* opt_ENUM_ERATION ::= KEY_ENUM */
 #line 992 "./mql.yxx"
-{mqlyygotominor.mqlyy98=0;  mqlyy_destructor(mqlyypParser,76,&mqlyymsp[0].minor);
+{mqlyygotominor.mqlyy292=0;  mqlyy_destructor(mqlyypParser,76,&mqlyymsp[0].minor);
 }
-#line 3750 "./mql.c"
+#line 3753 "./mql.c"
         break;
       case 225: /* opt_ENUM_ERATION ::= KEY_ENUMERATION */
 #line 993 "./mql.yxx"
-{mqlyygotominor.mqlyy98=0;  mqlyy_destructor(mqlyypParser,75,&mqlyymsp[0].minor);
+{mqlyygotominor.mqlyy292=0;  mqlyy_destructor(mqlyypParser,75,&mqlyymsp[0].minor);
 }
-#line 3756 "./mql.c"
+#line 3759 "./mql.c"
         break;
       case 226: /* opt_ENUM_ERATION ::= */
 #line 994 "./mql.yxx"
-{mqlyygotominor.mqlyy98=0;}
-#line 3761 "./mql.c"
+{mqlyygotominor.mqlyy292=0;}
+#line 3764 "./mql.c"
         break;
       case 227: /* select_object_types_which_use_enum_statement ::= KEY_SELECT opt_OBJECT KEY_TYPES KEY_USING choice_ENUM_ERATION enumeration_name */
 #line 1003 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new SelectObjectTypesUsingEnumerationStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-5].minor);
+{ mqlyygotominor.mqlyy160 = new SelectObjectTypesUsingEnumerationStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,21,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,10,&mqlyymsp[-2].minor);
 }
-#line 3769 "./mql.c"
+#line 3772 "./mql.c"
         break;
       case 228: /* select_min_m_statement ::= KEY_SELECT KEY_MIN_M */
 #line 1009 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new SelectMinMStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy160 = new SelectMinMStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,94,&mqlyymsp[0].minor);
 }
-#line 3776 "./mql.c"
+#line 3779 "./mql.c"
         break;
       case 229: /* select_max_m_statement ::= KEY_SELECT KEY_MAX_M */
 #line 1015 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new SelectMaxMStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy160 = new SelectMaxMStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,83,&mqlyymsp[0].minor);
 }
-#line 3783 "./mql.c"
+#line 3786 "./mql.c"
         break;
       case 230: /* create_object_from_monads_statement ::= KEY_CREATE KEY_OBJECT KEY_FROM monad_specification with_id_d_specification object_creation_specification */
 #line 1024 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new CreateObjectFromMonadsStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy434, mqlyymsp[-1].minor.mqlyy444, mqlyymsp[0].minor.mqlyy545);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-5].minor);
+{ mqlyygotominor.mqlyy160 = new CreateObjectFromMonadsStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy34, mqlyymsp[-1].minor.mqlyy72, mqlyymsp[0].minor.mqlyy365);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,17,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,51,&mqlyymsp[-3].minor);
 }
-#line 3791 "./mql.c"
+#line 3794 "./mql.c"
         break;
       case 231: /* monad_specification ::= KEY_MONADS KEY_EQUALS monad_set */
 #line 1029 "./mql.yxx"
-{ mqlyygotominor.mqlyy434 = mqlyymsp[0].minor.mqlyy434; mqlyygotominor.mqlyy434->setIsFirst(true);   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[-2].minor);
+{ mqlyygotominor.mqlyy34 = mqlyymsp[0].minor.mqlyy34; mqlyygotominor.mqlyy34->setIsFirst(true);   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,72,&mqlyymsp[-1].minor);
 }
-#line 3798 "./mql.c"
+#line 3801 "./mql.c"
         break;
       case 232: /* with_id_d_specification ::= KEY_WITH KEY_ID_D KEY_EQUALS id_d_const */
 #line 1034 "./mql.yxx"
-{ mqlyygotominor.mqlyy444 = mqlyymsp[0].minor.mqlyy444;   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-3].minor);
+{ mqlyygotominor.mqlyy72 = mqlyymsp[0].minor.mqlyy72;   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,45,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,72,&mqlyymsp[-1].minor);
 }
-#line 3806 "./mql.c"
+#line 3809 "./mql.c"
         break;
       case 233: /* with_id_d_specification ::= */
 #line 1036 "./mql.yxx"
-{ mqlyygotominor.mqlyy444 = NIL; }
-#line 3811 "./mql.c"
+{ mqlyygotominor.mqlyy72 = NIL; }
+#line 3814 "./mql.c"
         break;
       case 234: /* id_d_const ::= INTEGER */
 #line 1042 "./mql.yxx"
-{ mqlyygotominor.mqlyy444 = mqlyymsp[0].minor.mqlyy0->integer; deleteToken(mqlyymsp[0].minor.mqlyy0); }
-#line 3816 "./mql.c"
+{ mqlyygotominor.mqlyy72 = mqlyymsp[0].minor.mqlyy0->integer; deleteToken(mqlyymsp[0].minor.mqlyy0); }
+#line 3819 "./mql.c"
         break;
       case 235: /* id_d_const ::= KEY_NIL */
 #line 1044 "./mql.yxx"
-{ mqlyygotominor.mqlyy444 = NIL;   mqlyy_destructor(mqlyypParser,78,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy72 = NIL;   mqlyy_destructor(mqlyypParser,78,&mqlyymsp[0].minor);
 }
-#line 3822 "./mql.c"
+#line 3825 "./mql.c"
         break;
       case 236: /* object_creation_specification ::= KEY_OPEN_SQUARE_BRACKET object_type_name opt_list_of_feature_assignments KEY_CLOSE_SQUARE_BRACKET */
       case 269: /* object_update_specification ::= KEY_OPEN_SQUARE_BRACKET object_type_name list_of_feature_assignments KEY_CLOSE_SQUARE_BRACKET */ mqlyytestcase(mqlyyruleno==269);
 #line 1052 "./mql.yxx"
-{ mqlyygotominor.mqlyy545 = new ObjectSpec(mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy484); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-3].minor);
+{ mqlyygotominor.mqlyy365 = new ObjectSpec(mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy600); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 3830 "./mql.c"
+#line 3833 "./mql.c"
         break;
       case 237: /* opt_list_of_feature_assignments ::= list_of_feature_assignments */
       case 239: /* list_of_feature_assignments ::= feature_assignment */ mqlyytestcase(mqlyyruleno==239);
 #line 1058 "./mql.yxx"
-{ mqlyygotominor.mqlyy484 = mqlyymsp[0].minor.mqlyy484; }
-#line 3836 "./mql.c"
+{ mqlyygotominor.mqlyy600 = mqlyymsp[0].minor.mqlyy600; }
+#line 3839 "./mql.c"
         break;
       case 238: /* opt_list_of_feature_assignments ::= */
 #line 1060 "./mql.yxx"
-{ mqlyygotominor.mqlyy484 = 0; }
-#line 3841 "./mql.c"
+{ mqlyygotominor.mqlyy600 = 0; }
+#line 3844 "./mql.c"
         break;
       case 240: /* list_of_feature_assignments ::= list_of_feature_assignments feature_assignment */
 #line 1069 "./mql.yxx"
-{ mqlyygotominor.mqlyy484 = mqlyymsp[0].minor.mqlyy484; mqlyygotominor.mqlyy484->setNext(mqlyymsp[-1].minor.mqlyy484); }
-#line 3846 "./mql.c"
+{ mqlyygotominor.mqlyy600 = mqlyymsp[0].minor.mqlyy600; mqlyygotominor.mqlyy600->setNext(mqlyymsp[-1].minor.mqlyy600); }
+#line 3849 "./mql.c"
         break;
       case 241: /* feature_assignment ::= feature_name KEY_ASSIGN expression KEY_SEMICOLON */
 #line 1075 "./mql.yxx"
-{ mqlyygotominor.mqlyy484 = new FeatureAssignment(mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy111, 0); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,95,&mqlyymsp[-2].minor);
+{ mqlyygotominor.mqlyy600 = new FeatureAssignment(mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy139, 0); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,95,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,39,&mqlyymsp[0].minor);
 }
-#line 3853 "./mql.c"
+#line 3856 "./mql.c"
         break;
       case 243: /* feature_name ::= KEY_MONADS */
 #line 1081 "./mql.yxx"
 { mqlyygotominor.mqlyy0 = newToken(); mqlyygotominor.mqlyy0->setString(new std::string("monads"));   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[0].minor);
 }
-#line 3859 "./mql.c"
+#line 3862 "./mql.c"
         break;
       case 244: /* expression ::= signed_integer */
 #line 1086 "./mql.yxx"
-{ mqlyygotominor.mqlyy111 = new Expression(mqlyymsp[0].minor.mqlyy485); }
-#line 3864 "./mql.c"
+{ mqlyygotominor.mqlyy139 = new Expression(mqlyymsp[0].minor.mqlyy249); }
+#line 3867 "./mql.c"
         break;
       case 245: /* expression ::= STRING */
 #line 1088 "./mql.yxx"
-{ mqlyygotominor.mqlyy111 = new Expression(mqlyymsp[0].minor.mqlyy0->extractString(), kExprString); deleteToken(mqlyymsp[0].minor.mqlyy0); }
-#line 3869 "./mql.c"
+{ mqlyygotominor.mqlyy139 = new Expression(mqlyymsp[0].minor.mqlyy0->extractString(), kExprString); deleteToken(mqlyymsp[0].minor.mqlyy0); }
+#line 3872 "./mql.c"
         break;
       case 246: /* expression ::= IDENTIFIER */
 #line 1090 "./mql.yxx"
-{ mqlyygotominor.mqlyy111 = new Expression(mqlyymsp[0].minor.mqlyy0->extractString(), kExprIdentifier); deleteToken(mqlyymsp[0].minor.mqlyy0); }
-#line 3874 "./mql.c"
+{ mqlyygotominor.mqlyy139 = new Expression(mqlyymsp[0].minor.mqlyy0->extractString(), kExprIdentifier); deleteToken(mqlyymsp[0].minor.mqlyy0); }
+#line 3877 "./mql.c"
         break;
       case 247: /* expression ::= monad_set */
 #line 1092 "./mql.yxx"
-{ mqlyygotominor.mqlyy111 = new Expression(mqlyymsp[0].minor.mqlyy434); }
-#line 3879 "./mql.c"
+{ mqlyygotominor.mqlyy139 = new Expression(mqlyymsp[0].minor.mqlyy34); }
+#line 3882 "./mql.c"
         break;
       case 248: /* expression ::= KEY_OPEN_BRACKET KEY_CLOSE_BRACKET */
 #line 1094 "./mql.yxx"
-{ mqlyygotominor.mqlyy111 = new Expression(); /* empty list */   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy139 = new Expression(); /* empty list */   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
 }
-#line 3886 "./mql.c"
+#line 3889 "./mql.c"
         break;
       case 249: /* expression ::= KEY_OPEN_BRACKET list_of_integer KEY_CLOSE_BRACKET */
 #line 1096 "./mql.yxx"
-{ mqlyygotominor.mqlyy111 = new Expression(new IntegerList(mqlyymsp[-1].minor.mqlyy1)); delete mqlyymsp[-1].minor.mqlyy1;   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
+{ mqlyygotominor.mqlyy139 = new Expression(new IntegerList(mqlyymsp[-1].minor.mqlyy327)); delete mqlyymsp[-1].minor.mqlyy327;   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
 }
-#line 3893 "./mql.c"
+#line 3896 "./mql.c"
         break;
       case 250: /* expression ::= KEY_OPEN_BRACKET list_of_identifier KEY_CLOSE_BRACKET */
 #line 1098 "./mql.yxx"
-{ mqlyygotominor.mqlyy111 = new Expression(new StringList(mqlyymsp[-1].minor.mqlyy238), kExprListOfIdentifier); delete mqlyymsp[-1].minor.mqlyy238;   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
+{ mqlyygotominor.mqlyy139 = new Expression(new StringList(mqlyymsp[-1].minor.mqlyy440), kExprListOfIdentifier); delete mqlyymsp[-1].minor.mqlyy440;   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
 }
-#line 3900 "./mql.c"
+#line 3903 "./mql.c"
         break;
       case 251: /* list_of_integer ::= signed_integer */
 #line 1104 "./mql.yxx"
-{ mqlyygotominor.mqlyy1 = new IntegerListNode(mqlyymsp[0].minor.mqlyy485, 0); }
-#line 3905 "./mql.c"
+{ mqlyygotominor.mqlyy327 = new IntegerListNode(mqlyymsp[0].minor.mqlyy249, 0); }
+#line 3908 "./mql.c"
         break;
       case 252: /* list_of_integer ::= list_of_integer KEY_COMMA signed_integer */
 #line 1107 "./mql.yxx"
-{ mqlyygotominor.mqlyy1 = new IntegerListNode(mqlyymsp[0].minor.mqlyy485, mqlyymsp[-2].minor.mqlyy1); mqlyymsp[-2].minor.mqlyy1->setNext(mqlyygotominor.mqlyy1);   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy327 = new IntegerListNode(mqlyymsp[0].minor.mqlyy249, mqlyymsp[-2].minor.mqlyy327); mqlyymsp[-2].minor.mqlyy327->setNext(mqlyygotominor.mqlyy327);   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-1].minor);
 }
-#line 3911 "./mql.c"
+#line 3914 "./mql.c"
         break;
       case 255: /* create_object_from_id_ds_statement ::= KEY_CREATE KEY_OBJECT KEY_FROM id_ds_specification with_id_d_specification object_creation_specification */
 #line 1125 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new CreateObjectFromID_DsStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy451, mqlyymsp[-1].minor.mqlyy444, mqlyymsp[0].minor.mqlyy545);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-5].minor);
+{ mqlyygotominor.mqlyy160 = new CreateObjectFromID_DsStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy51, mqlyymsp[-1].minor.mqlyy72, mqlyymsp[0].minor.mqlyy365);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,17,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,51,&mqlyymsp[-3].minor);
 }
-#line 3919 "./mql.c"
+#line 3922 "./mql.c"
         break;
       case 256: /* id_ds_specification ::= choice_number_ID_DS KEY_EQUALS id_d_list */
 #line 1131 "./mql.yxx"
-{ mqlyygotominor.mqlyy451 = mqlyymsp[0].minor.mqlyy451;   mqlyy_destructor(mqlyypParser,72,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy51 = mqlyymsp[0].minor.mqlyy51;   mqlyy_destructor(mqlyypParser,72,&mqlyymsp[-1].minor);
 }
-#line 3925 "./mql.c"
+#line 3928 "./mql.c"
         break;
       case 257: /* choice_number_ID_DS ::= KEY_ID_D */
 #line 1136 "./mql.yxx"
-{mqlyygotominor.mqlyy98=0;  mqlyy_destructor(mqlyypParser,45,&mqlyymsp[0].minor);
+{mqlyygotominor.mqlyy292=0;  mqlyy_destructor(mqlyypParser,45,&mqlyymsp[0].minor);
 }
-#line 3931 "./mql.c"
+#line 3934 "./mql.c"
         break;
       case 258: /* choice_number_ID_DS ::= KEY_ID_DS */
 #line 1137 "./mql.yxx"
-{mqlyygotominor.mqlyy98=0;  mqlyy_destructor(mqlyypParser,96,&mqlyymsp[0].minor);
+{mqlyygotominor.mqlyy292=0;  mqlyy_destructor(mqlyypParser,96,&mqlyymsp[0].minor);
 }
-#line 3937 "./mql.c"
+#line 3940 "./mql.c"
         break;
       case 259: /* id_d_list ::= id_d */
 #line 1143 "./mql.yxx"
-{ mqlyygotominor.mqlyy451 = mqlyymsp[0].minor.mqlyy451; }
-#line 3942 "./mql.c"
+{ mqlyygotominor.mqlyy51 = mqlyymsp[0].minor.mqlyy51; }
+#line 3945 "./mql.c"
         break;
       case 260: /* id_d_list ::= id_d_list KEY_COMMA id_d */
 #line 1145 "./mql.yxx"
-{ mqlyygotominor.mqlyy451 = mqlyymsp[0].minor.mqlyy451; mqlyygotominor.mqlyy451->setNext(mqlyymsp[-2].minor.mqlyy451);   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy51 = mqlyymsp[0].minor.mqlyy51; mqlyygotominor.mqlyy51->setNext(mqlyymsp[-2].minor.mqlyy51);   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-1].minor);
 }
-#line 3948 "./mql.c"
+#line 3951 "./mql.c"
         break;
       case 261: /* id_d ::= id_d_const */
 #line 1150 "./mql.yxx"
-{ mqlyygotominor.mqlyy451 = new ID_D(mqlyymsp[0].minor.mqlyy444, 0); }
-#line 3953 "./mql.c"
+{ mqlyygotominor.mqlyy51 = new ID_D(mqlyymsp[0].minor.mqlyy72, 0); }
+#line 3956 "./mql.c"
         break;
       case 262: /* create_objects_statement ::= KEY_CREATE KEY_OBJECTS KEY_WITH KEY_OBJECT KEY_TYPE KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET object_creation_list */
 #line 1162 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new CreateObjectsStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy247); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-8].minor);
+{ mqlyygotominor.mqlyy160 = new CreateObjectsStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy457); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-8].minor);
   mqlyy_destructor(mqlyypParser,28,&mqlyymsp[-7].minor);
   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-6].minor);
   mqlyy_destructor(mqlyypParser,17,&mqlyymsp[-5].minor);
@@ -105623,576 +106557,582 @@ static void mqlyy_reduce(
   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[-1].minor);
 }
-#line 3965 "./mql.c"
+#line 3968 "./mql.c"
         break;
       case 263: /* object_creation_list ::= object_creation_no_object_type */
 #line 1169 "./mql.yxx"
-{ mqlyygotominor.mqlyy247 = mqlyymsp[0].minor.mqlyy247; }
-#line 3970 "./mql.c"
+{ mqlyygotominor.mqlyy457 = mqlyymsp[0].minor.mqlyy457; }
+#line 3973 "./mql.c"
         break;
       case 264: /* object_creation_list ::= object_creation_list object_creation_no_object_type */
 #line 1172 "./mql.yxx"
-{ mqlyygotominor.mqlyy247 = mqlyymsp[0].minor.mqlyy247; mqlyygotominor.mqlyy247->setNext(mqlyymsp[-1].minor.mqlyy247); }
-#line 3975 "./mql.c"
+{ mqlyygotominor.mqlyy457 = mqlyymsp[0].minor.mqlyy457; mqlyygotominor.mqlyy457->setNext(mqlyymsp[-1].minor.mqlyy457); }
+#line 3978 "./mql.c"
         break;
       case 265: /* object_creation_no_object_type ::= KEY_CREATE KEY_OBJECT KEY_FROM monad_specification with_id_d_specification KEY_OPEN_SQUARE_BRACKET opt_list_of_feature_assignments KEY_CLOSE_SQUARE_BRACKET */
 #line 1184 "./mql.yxx"
-{ mqlyygotominor.mqlyy247 = new ObjectSpecNoOT(mqlyymsp[-4].minor.mqlyy434, mqlyymsp[-3].minor.mqlyy444, mqlyymsp[-1].minor.mqlyy484, 0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-7].minor);
+{ mqlyygotominor.mqlyy457 = new ObjectSpecNoOT(mqlyymsp[-4].minor.mqlyy34, mqlyymsp[-3].minor.mqlyy72, mqlyymsp[-1].minor.mqlyy600, 0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-7].minor);
   mqlyy_destructor(mqlyypParser,17,&mqlyymsp[-6].minor);
   mqlyy_destructor(mqlyypParser,51,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 3985 "./mql.c"
+#line 3988 "./mql.c"
         break;
       case 266: /* update_objects_by_monads_statement ::= KEY_UPDATE choice_number_OBJECTS KEY_BY monad_specification object_update_specification */
 #line 1193 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new UpdateObjectsByMonadsStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy434, mqlyymsp[0].minor.mqlyy545);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-4].minor);
+{ mqlyygotominor.mqlyy160 = new UpdateObjectsByMonadsStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy34, mqlyymsp[0].minor.mqlyy365);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,97,&mqlyymsp[-2].minor);
 }
-#line 3992 "./mql.c"
+#line 3995 "./mql.c"
         break;
       case 267: /* choice_number_OBJECTS ::= KEY_OBJECT */
 #line 1198 "./mql.yxx"
-{mqlyygotominor.mqlyy98=0;  mqlyy_destructor(mqlyypParser,17,&mqlyymsp[0].minor);
+{mqlyygotominor.mqlyy292=0;  mqlyy_destructor(mqlyypParser,17,&mqlyymsp[0].minor);
 }
-#line 3998 "./mql.c"
+#line 4001 "./mql.c"
         break;
       case 268: /* choice_number_OBJECTS ::= KEY_OBJECTS */
 #line 1199 "./mql.yxx"
-{mqlyygotominor.mqlyy98=0;  mqlyy_destructor(mqlyypParser,28,&mqlyymsp[0].minor);
+{mqlyygotominor.mqlyy292=0;  mqlyy_destructor(mqlyypParser,28,&mqlyymsp[0].minor);
 }
-#line 4004 "./mql.c"
+#line 4007 "./mql.c"
         break;
       case 270: /* update_objects_by_id_ds_statement ::= KEY_UPDATE choice_number_OBJECTS KEY_BY id_ds_specification object_update_specification */
 #line 1219 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new UpdateObjectsByID_DsStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy451, mqlyymsp[0].minor.mqlyy545);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-4].minor);
+{ mqlyygotominor.mqlyy160 = new UpdateObjectsByID_DsStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy51, mqlyymsp[0].minor.mqlyy365);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,97,&mqlyymsp[-2].minor);
 }
-#line 4011 "./mql.c"
+#line 4014 "./mql.c"
         break;
       case 271: /* delete_objects_by_monads_statement ::= KEY_DELETE choice_number_OBJECTS KEY_BY monad_specification object_deletion_specification */
 #line 1229 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new DeleteObjectsByMonadsStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy434, *(mqlyymsp[0].minor.mqlyy0->pString)); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,61,&mqlyymsp[-4].minor);
+{ mqlyygotominor.mqlyy160 = new DeleteObjectsByMonadsStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy34, *(mqlyymsp[0].minor.mqlyy0->pString)); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,61,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,97,&mqlyymsp[-2].minor);
 }
-#line 4018 "./mql.c"
+#line 4021 "./mql.c"
         break;
       case 272: /* object_deletion_specification ::= KEY_OPEN_SQUARE_BRACKET object_type_name_to_delete KEY_CLOSE_SQUARE_BRACKET */
 #line 1238 "./mql.yxx"
 { mqlyygotominor.mqlyy0 = mqlyymsp[-1].minor.mqlyy0;   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 4025 "./mql.c"
+#line 4028 "./mql.c"
         break;
       case 274: /* delete_objects_by_id_ds_statement ::= KEY_DELETE choice_number_OBJECTS KEY_BY id_ds_specification object_deletion_specification */
 #line 1254 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new DeleteObjectsByID_DsStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy451, *(mqlyymsp[0].minor.mqlyy0->pString)); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,61,&mqlyymsp[-4].minor);
+{ mqlyygotominor.mqlyy160 = new DeleteObjectsByID_DsStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy51, *(mqlyymsp[0].minor.mqlyy0->pString)); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,61,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,97,&mqlyymsp[-2].minor);
 }
-#line 4032 "./mql.c"
+#line 4035 "./mql.c"
         break;
       case 275: /* get_features_statement ::= KEY_GET choice_number_FEATURES feature_list KEY_FROM choice_number_OBJECTS KEY_WITH id_ds_specification KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET */
 #line 1266 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new GetFeaturesStatement((MQLExecEnv*) pEE, mqlyymsp[-7].minor.mqlyy374, mqlyymsp[-3].minor.mqlyy451, mqlyymsp[-1].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-9].minor);
+{ mqlyygotominor.mqlyy160 = new GetFeaturesStatement((MQLExecEnv*) pEE, mqlyymsp[-7].minor.mqlyy242, mqlyymsp[-3].minor.mqlyy51, mqlyymsp[-1].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-9].minor);
   mqlyy_destructor(mqlyypParser,51,&mqlyymsp[-6].minor);
   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 4042 "./mql.c"
+#line 4045 "./mql.c"
         break;
       case 276: /* choice_number_FEATURES ::= KEY_FEATURE */
 #line 1271 "./mql.yxx"
-{mqlyygotominor.mqlyy98=0;  mqlyy_destructor(mqlyypParser,84,&mqlyymsp[0].minor);
+{mqlyygotominor.mqlyy292=0;  mqlyy_destructor(mqlyypParser,84,&mqlyymsp[0].minor);
 }
-#line 4048 "./mql.c"
+#line 4051 "./mql.c"
         break;
       case 277: /* choice_number_FEATURES ::= KEY_FEATURES */
 #line 1272 "./mql.yxx"
-{mqlyygotominor.mqlyy98=0;  mqlyy_destructor(mqlyypParser,91,&mqlyymsp[0].minor);
+{mqlyygotominor.mqlyy292=0;  mqlyy_destructor(mqlyypParser,91,&mqlyymsp[0].minor);
 }
-#line 4054 "./mql.c"
+#line 4057 "./mql.c"
         break;
       case 278: /* feature_list ::= feature_name */
 #line 1277 "./mql.yxx"
-{ mqlyygotominor.mqlyy374 = new GrammarFeature(mqlyymsp[0].minor.mqlyy0->extractString(), 0); deleteToken(mqlyymsp[0].minor.mqlyy0); }
-#line 4059 "./mql.c"
+{ mqlyygotominor.mqlyy242 = new GrammarFeature(mqlyymsp[0].minor.mqlyy0->extractString(), 0); deleteToken(mqlyymsp[0].minor.mqlyy0); }
+#line 4062 "./mql.c"
         break;
       case 279: /* feature_list ::= feature_list KEY_COMMA feature_name */
 #line 1279 "./mql.yxx"
-{ mqlyygotominor.mqlyy374 = new GrammarFeature(mqlyymsp[0].minor.mqlyy0->extractString(), mqlyymsp[-2].minor.mqlyy374); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy242 = new GrammarFeature(mqlyymsp[0].minor.mqlyy0->extractString(), mqlyymsp[-2].minor.mqlyy242); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-1].minor);
 }
-#line 4065 "./mql.c"
+#line 4068 "./mql.c"
         break;
       case 280: /* quit_statement ::= KEY_QUIT */
 #line 1285 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new QuitStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,98,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy160 = new QuitStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,98,&mqlyymsp[0].minor);
 }
-#line 4071 "./mql.c"
+#line 4074 "./mql.c"
         break;
       case 281: /* mql_query ::= topograph */
 #line 1291 "./mql.yxx"
-{ mqlyygotominor.mqlyy445 = mqlyymsp[0].minor.mqlyy445; }
-#line 4076 "./mql.c"
+{ mqlyygotominor.mqlyy295 = mqlyymsp[0].minor.mqlyy295; }
+#line 4079 "./mql.c"
         break;
       case 282: /* topograph ::= blocks */
 #line 1297 "./mql.yxx"
-{ mqlyygotominor.mqlyy445 = new Topograph(mqlyymsp[0].minor.mqlyy571); }
-#line 4081 "./mql.c"
+{ mqlyygotominor.mqlyy295 = new Topograph(mqlyymsp[0].minor.mqlyy377); }
+#line 4084 "./mql.c"
         break;
       case 283: /* blocks ::= using_range_clause block_string */
 #line 1303 "./mql.yxx"
-{ mqlyygotominor.mqlyy571 = new Blocks(mqlyymsp[0].minor.mqlyy31, mqlyymsp[-1].minor.mqlyy248); }
-#line 4086 "./mql.c"
+{ mqlyygotominor.mqlyy377 = new Blocks(mqlyymsp[0].minor.mqlyy205, mqlyymsp[-1].minor.mqlyy582); }
+#line 4089 "./mql.c"
         break;
       case 284: /* block_string0 ::= block */
 #line 1308 "./mql.yxx"
-{ mqlyygotominor.mqlyy125 = new BlockString0(mqlyymsp[0].minor.mqlyy560); }
-#line 4091 "./mql.c"
+{ mqlyygotominor.mqlyy445 = new BlockString0(mqlyymsp[0].minor.mqlyy414); }
+#line 4094 "./mql.c"
         break;
       case 285: /* block_string0 ::= KEY_OPEN_SQUARE_BRACKET block_string KEY_CLOSE_SQUARE_BRACKET */
 #line 1310 "./mql.yxx"
-{ mqlyygotominor.mqlyy125 = new BlockString0(mqlyymsp[-1].minor.mqlyy31);   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-2].minor);
+{ mqlyygotominor.mqlyy445 = new BlockString0(mqlyymsp[-1].minor.mqlyy205);   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 4098 "./mql.c"
+#line 4101 "./mql.c"
         break;
       case 286: /* block_string1 ::= block_string0 */
 #line 1315 "./mql.yxx"
-{ mqlyygotominor.mqlyy178 = new BlockString1(mqlyymsp[0].minor.mqlyy125); }
-#line 4103 "./mql.c"
+{ mqlyygotominor.mqlyy498 = new BlockString1(mqlyymsp[0].minor.mqlyy445); }
+#line 4106 "./mql.c"
         break;
       case 287: /* block_string1 ::= block_string0 KEY_STAR star_monad_set */
 #line 1317 "./mql.yxx"
-{ mqlyygotominor.mqlyy178 = new BlockString1(mqlyymsp[-2].minor.mqlyy125, mqlyymsp[0].minor.mqlyy434);   mqlyy_destructor(mqlyypParser,99,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy498 = new BlockString1(mqlyymsp[-2].minor.mqlyy445, mqlyymsp[0].minor.mqlyy34);   mqlyy_destructor(mqlyypParser,99,&mqlyymsp[-1].minor);
 }
-#line 4109 "./mql.c"
+#line 4112 "./mql.c"
         break;
       case 288: /* block_string2 ::= block_string1 */
 #line 1322 "./mql.yxx"
-{ mqlyygotominor.mqlyy231 = new BlockString2(mqlyymsp[0].minor.mqlyy178); }
-#line 4114 "./mql.c"
+{ mqlyygotominor.mqlyy551 = new BlockString2(mqlyymsp[0].minor.mqlyy498); }
+#line 4117 "./mql.c"
         break;
       case 289: /* block_string2 ::= block_string1 block_string2 */
 #line 1324 "./mql.yxx"
-{ mqlyygotominor.mqlyy231 = new BlockString2(mqlyymsp[-1].minor.mqlyy178, mqlyymsp[0].minor.mqlyy231, false); }
-#line 4119 "./mql.c"
+{ mqlyygotominor.mqlyy551 = new BlockString2(mqlyymsp[-1].minor.mqlyy498, mqlyymsp[0].minor.mqlyy551, false); }
+#line 4122 "./mql.c"
         break;
       case 290: /* block_string2 ::= block_string1 KEY_EXCLAMATION block_string2 */
 #line 1327 "./mql.yxx"
-{ mqlyygotominor.mqlyy231 = new BlockString2(mqlyymsp[-2].minor.mqlyy178, mqlyymsp[0].minor.mqlyy231, true);   mqlyy_destructor(mqlyypParser,100,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy551 = new BlockString2(mqlyymsp[-2].minor.mqlyy498, mqlyymsp[0].minor.mqlyy551, true);   mqlyy_destructor(mqlyypParser,100,&mqlyymsp[-1].minor);
 }
-#line 4125 "./mql.c"
+#line 4128 "./mql.c"
         break;
       case 291: /* block_string ::= block_string2 */
 #line 1332 "./mql.yxx"
-{ mqlyygotominor.mqlyy31 = new BlockString(mqlyymsp[0].minor.mqlyy231); }
-#line 4130 "./mql.c"
+{ mqlyygotominor.mqlyy205 = new BlockString(mqlyymsp[0].minor.mqlyy551); }
+#line 4133 "./mql.c"
         break;
       case 292: /* block_string ::= block_string2 KEY_OR block_string */
 #line 1334 "./mql.yxx"
-{ mqlyygotominor.mqlyy31 = new BlockString(mqlyymsp[-2].minor.mqlyy231, mqlyymsp[0].minor.mqlyy31);   mqlyy_destructor(mqlyypParser,101,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy205 = new BlockString(mqlyymsp[-2].minor.mqlyy551, mqlyymsp[0].minor.mqlyy205);   mqlyy_destructor(mqlyypParser,101,&mqlyymsp[-1].minor);
 }
-#line 4136 "./mql.c"
+#line 4139 "./mql.c"
         break;
       case 293: /* notexist ::= KEY_NOTEXIST */
 #line 1339 "./mql.yxx"
-{ mqlyygotominor.mqlyy98 = 0;   mqlyy_destructor(mqlyypParser,102,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy292 = 0;   mqlyy_destructor(mqlyypParser,102,&mqlyymsp[0].minor);
 }
-#line 4142 "./mql.c"
+#line 4145 "./mql.c"
         break;
       case 294: /* notexist ::= KEY_NOTEXISTS */
 #line 1340 "./mql.yxx"
-{ mqlyygotominor.mqlyy98 = 0;   mqlyy_destructor(mqlyypParser,103,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy292 = 0;   mqlyy_destructor(mqlyypParser,103,&mqlyymsp[0].minor);
 }
-#line 4148 "./mql.c"
+#line 4151 "./mql.c"
         break;
       case 295: /* object_reference_declaration ::= */
       case 297: /* mark_declaration ::= */ mqlyytestcase(mqlyyruleno==297);
 #line 1345 "./mql.yxx"
 { mqlyygotominor.mqlyy0 = newToken(); mqlyygotominor.mqlyy0->setString(new std::string()); }
-#line 4154 "./mql.c"
+#line 4157 "./mql.c"
         break;
       case 296: /* object_reference_declaration ::= KEY_AS object_reference */
 #line 1346 "./mql.yxx"
 { mqlyygotominor.mqlyy0 = mqlyymsp[0].minor.mqlyy0;   mqlyy_destructor(mqlyypParser,104,&mqlyymsp[-1].minor);
 }
-#line 4160 "./mql.c"
+#line 4163 "./mql.c"
         break;
       case 300: /* retrieval ::= */
 #line 1361 "./mql.yxx"
-{ mqlyygotominor.mqlyy410 = kRetrieve; }
-#line 4165 "./mql.c"
+{ mqlyygotominor.mqlyy372 = kRetrieve; }
+#line 4168 "./mql.c"
         break;
       case 301: /* retrieval ::= KEY_NORETRIEVE */
-      case 354: /* gap_retrieval ::= KEY_NORETRIEVE */ mqlyytestcase(mqlyyruleno==354);
+      case 355: /* gap_retrieval ::= KEY_NORETRIEVE */ mqlyytestcase(mqlyyruleno==355);
 #line 1362 "./mql.yxx"
-{ mqlyygotominor.mqlyy410 = kNoRetrieve;   mqlyy_destructor(mqlyypParser,106,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy372 = kNoRetrieve;   mqlyy_destructor(mqlyypParser,106,&mqlyymsp[0].minor);
 }
-#line 4172 "./mql.c"
+#line 4175 "./mql.c"
         break;
       case 302: /* retrieval ::= KEY_RETRIEVE */
-      case 355: /* gap_retrieval ::= KEY_RETRIEVE */ mqlyytestcase(mqlyyruleno==355);
+      case 356: /* gap_retrieval ::= KEY_RETRIEVE */ mqlyytestcase(mqlyyruleno==356);
 #line 1363 "./mql.yxx"
-{ mqlyygotominor.mqlyy410 = kRetrieve;   mqlyy_destructor(mqlyypParser,107,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy372 = kRetrieve;   mqlyy_destructor(mqlyypParser,107,&mqlyymsp[0].minor);
 }
-#line 4179 "./mql.c"
+#line 4182 "./mql.c"
         break;
       case 303: /* retrieval ::= KEY_FOCUS */
-      case 356: /* gap_retrieval ::= KEY_FOCUS */ mqlyytestcase(mqlyyruleno==356);
+      case 357: /* gap_retrieval ::= KEY_FOCUS */ mqlyytestcase(mqlyyruleno==357);
 #line 1364 "./mql.yxx"
-{ mqlyygotominor.mqlyy410 = kRetrieveFocus;   mqlyy_destructor(mqlyypParser,81,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy372 = kRetrieveFocus;   mqlyy_destructor(mqlyypParser,81,&mqlyymsp[0].minor);
 }
-#line 4186 "./mql.c"
+#line 4189 "./mql.c"
         break;
       case 304: /* firstlast ::= */
 #line 1368 "./mql.yxx"
-{ mqlyygotominor.mqlyy79 = kNoFirstLast; }
-#line 4191 "./mql.c"
+{ mqlyygotominor.mqlyy90 = kNoFirstLast; }
+#line 4194 "./mql.c"
         break;
       case 305: /* firstlast ::= KEY_FIRST */
 #line 1369 "./mql.yxx"
-{ mqlyygotominor.mqlyy79 = kFirst;   mqlyy_destructor(mqlyypParser,33,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy90 = kFirst;   mqlyy_destructor(mqlyypParser,33,&mqlyymsp[0].minor);
 }
-#line 4197 "./mql.c"
+#line 4200 "./mql.c"
         break;
       case 306: /* firstlast ::= KEY_LAST */
 #line 1370 "./mql.yxx"
-{ mqlyygotominor.mqlyy79 = kLast;   mqlyy_destructor(mqlyypParser,36,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy90 = kLast;   mqlyy_destructor(mqlyypParser,36,&mqlyymsp[0].minor);
 }
-#line 4203 "./mql.c"
+#line 4206 "./mql.c"
         break;
       case 307: /* firstlast ::= KEY_FIRST KEY_AND KEY_LAST */
 #line 1371 "./mql.yxx"
-{ mqlyygotominor.mqlyy79 = kFirstAndLast;   mqlyy_destructor(mqlyypParser,33,&mqlyymsp[-2].minor);
+{ mqlyygotominor.mqlyy90 = kFirstAndLast;   mqlyy_destructor(mqlyypParser,33,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,35,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,36,&mqlyymsp[0].minor);
 }
-#line 4211 "./mql.c"
+#line 4214 "./mql.c"
         break;
       case 308: /* monad_set_relation_clause ::= monad_set_relation_operation KEY_OPEN_BRACKET monad_set_name KEY_COMMA universe_or_substrate KEY_CLOSE_BRACKET */
 #line 1376 "./mql.yxx"
-{ mqlyygotominor.mqlyy253 = new MonadSetRelationClause(mqlyymsp[-5].minor.mqlyy586, mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy85); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-4].minor);
+{ mqlyygotominor.mqlyy385 = new MonadSetRelationClause(mqlyymsp[-5].minor.mqlyy104, mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy397); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
 }
-#line 4219 "./mql.c"
+#line 4222 "./mql.c"
         break;
       case 309: /* monad_set_relation_clause ::= monad_set_relation_operation KEY_OPEN_BRACKET universe_or_substrate KEY_CLOSE_BRACKET */
 #line 1378 "./mql.yxx"
-{ mqlyygotominor.mqlyy253 = new MonadSetRelationClause(mqlyymsp[-3].minor.mqlyy586, new std::string("monads"), mqlyymsp[-1].minor.mqlyy85);   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
+{ mqlyygotominor.mqlyy385 = new MonadSetRelationClause(mqlyymsp[-3].minor.mqlyy104, new std::string("monads"), mqlyymsp[-1].minor.mqlyy397);   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
 }
-#line 4226 "./mql.c"
+#line 4229 "./mql.c"
         break;
       case 310: /* monad_set_relation_clause ::= */
 #line 1380 "./mql.yxx"
-{ mqlyygotominor.mqlyy253 = new MonadSetRelationClause(kMSROPartOf, new std::string("monads"), kMSNSubstrate); }
-#line 4231 "./mql.c"
+{ mqlyygotominor.mqlyy385 = new MonadSetRelationClause(kMSROPartOf, new std::string("monads"), kMSNSubstrate); }
+#line 4234 "./mql.c"
         break;
       case 311: /* monad_set_relation_operation ::= KEY_PART_OF */
 #line 1385 "./mql.yxx"
-{ mqlyygotominor.mqlyy586 = kMSROPartOf;   mqlyy_destructor(mqlyypParser,108,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy104 = kMSROPartOf;   mqlyy_destructor(mqlyypParser,108,&mqlyymsp[0].minor);
 }
-#line 4237 "./mql.c"
+#line 4240 "./mql.c"
         break;
-      case 312: /* monad_set_relation_operation ::= KEY_OVERLAP */
+      case 312: /* monad_set_relation_operation ::= KEY_STARTS_IN */
 #line 1387 "./mql.yxx"
-{ mqlyygotominor.mqlyy586 = kMSROOverlap;   mqlyy_destructor(mqlyypParser,109,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy104 = kMSROStartsIn;   mqlyy_destructor(mqlyypParser,109,&mqlyymsp[0].minor);
 }
-#line 4243 "./mql.c"
+#line 4246 "./mql.c"
         break;
-      case 313: /* universe_or_substrate ::= KEY_UNIVERSE */
-#line 1393 "./mql.yxx"
-{ mqlyygotominor.mqlyy85 = kMSNUniverse;   mqlyy_destructor(mqlyypParser,110,&mqlyymsp[0].minor);
+      case 313: /* monad_set_relation_operation ::= KEY_OVERLAP */
+#line 1389 "./mql.yxx"
+{ mqlyygotominor.mqlyy104 = kMSROOverlap;   mqlyy_destructor(mqlyypParser,110,&mqlyymsp[0].minor);
 }
-#line 4249 "./mql.c"
+#line 4252 "./mql.c"
         break;
-      case 314: /* universe_or_substrate ::= KEY_SUBSTRATE */
+      case 314: /* universe_or_substrate ::= KEY_UNIVERSE */
 #line 1395 "./mql.yxx"
-{ mqlyygotominor.mqlyy85 = kMSNSubstrate;   mqlyy_destructor(mqlyypParser,111,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy397 = kMSNUniverse;   mqlyy_destructor(mqlyypParser,111,&mqlyymsp[0].minor);
 }
-#line 4255 "./mql.c"
+#line 4258 "./mql.c"
         break;
-      case 315: /* feature_constraints ::= */
-#line 1400 "./mql.yxx"
-{ mqlyygotominor.mqlyy142 = 0; }
-#line 4260 "./mql.c"
-        break;
-      case 316: /* feature_constraints ::= ffeatures */
-#line 1401 "./mql.yxx"
-{ mqlyygotominor.mqlyy142 = mqlyymsp[0].minor.mqlyy142; }
-#line 4265 "./mql.c"
-        break;
-      case 317: /* ffeatures ::= fterm */
-#line 1406 "./mql.yxx"
-{ mqlyygotominor.mqlyy142 = new FFeatures(mqlyymsp[0].minor.mqlyy261); }
-#line 4270 "./mql.c"
-        break;
-      case 318: /* ffeatures ::= ffeatures KEY_OR fterm */
-#line 1407 "./mql.yxx"
-{ mqlyygotominor.mqlyy142 = new FFeatures(mqlyymsp[-2].minor.mqlyy142, mqlyymsp[0].minor.mqlyy261);   mqlyy_destructor(mqlyypParser,101,&mqlyymsp[-1].minor);
+      case 315: /* universe_or_substrate ::= KEY_SUBSTRATE */
+#line 1397 "./mql.yxx"
+{ mqlyygotominor.mqlyy397 = kMSNSubstrate;   mqlyy_destructor(mqlyypParser,112,&mqlyymsp[0].minor);
 }
-#line 4276 "./mql.c"
+#line 4264 "./mql.c"
         break;
-      case 319: /* fterm ::= ffactor */
-#line 1412 "./mql.yxx"
-{ mqlyygotominor.mqlyy261 = new FTerm(mqlyymsp[0].minor.mqlyy472); }
-#line 4281 "./mql.c"
+      case 316: /* feature_constraints ::= */
+#line 1402 "./mql.yxx"
+{ mqlyygotominor.mqlyy288 = 0; }
+#line 4269 "./mql.c"
         break;
-      case 320: /* fterm ::= fterm KEY_AND ffactor */
-#line 1413 "./mql.yxx"
-{ mqlyygotominor.mqlyy261 = new FTerm(mqlyymsp[-2].minor.mqlyy261, mqlyymsp[0].minor.mqlyy472);   mqlyy_destructor(mqlyypParser,35,&mqlyymsp[-1].minor);
+      case 317: /* feature_constraints ::= ffeatures */
+#line 1403 "./mql.yxx"
+{ mqlyygotominor.mqlyy288 = mqlyymsp[0].minor.mqlyy288; }
+#line 4274 "./mql.c"
+        break;
+      case 318: /* ffeatures ::= fterm */
+#line 1408 "./mql.yxx"
+{ mqlyygotominor.mqlyy288 = new FFeatures(mqlyymsp[0].minor.mqlyy313); }
+#line 4279 "./mql.c"
+        break;
+      case 319: /* ffeatures ::= ffeatures KEY_OR fterm */
+#line 1409 "./mql.yxx"
+{ mqlyygotominor.mqlyy288 = new FFeatures(mqlyymsp[-2].minor.mqlyy288, mqlyymsp[0].minor.mqlyy313);   mqlyy_destructor(mqlyypParser,101,&mqlyymsp[-1].minor);
 }
-#line 4287 "./mql.c"
+#line 4285 "./mql.c"
         break;
-      case 321: /* ffactor ::= KEY_NOT ffactor */
-#line 1418 "./mql.yxx"
-{ mqlyygotominor.mqlyy472 = new FFactor(mqlyymsp[0].minor.mqlyy472);   mqlyy_destructor(mqlyypParser,49,&mqlyymsp[-1].minor);
+      case 320: /* fterm ::= ffactor */
+#line 1414 "./mql.yxx"
+{ mqlyygotominor.mqlyy313 = new FTerm(mqlyymsp[0].minor.mqlyy540); }
+#line 4290 "./mql.c"
+        break;
+      case 321: /* fterm ::= fterm KEY_AND ffactor */
+#line 1415 "./mql.yxx"
+{ mqlyygotominor.mqlyy313 = new FTerm(mqlyymsp[-2].minor.mqlyy313, mqlyymsp[0].minor.mqlyy540);   mqlyy_destructor(mqlyypParser,35,&mqlyymsp[-1].minor);
 }
-#line 4293 "./mql.c"
+#line 4296 "./mql.c"
         break;
-      case 322: /* ffactor ::= KEY_OPEN_BRACKET ffeatures KEY_CLOSE_BRACKET */
+      case 322: /* ffactor ::= KEY_NOT ffactor */
 #line 1420 "./mql.yxx"
-{ mqlyygotominor.mqlyy472 = new FFactor(mqlyymsp[-1].minor.mqlyy142);   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
-  mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy540 = new FFactor(mqlyymsp[0].minor.mqlyy540);   mqlyy_destructor(mqlyypParser,49,&mqlyymsp[-1].minor);
 }
-#line 4300 "./mql.c"
+#line 4302 "./mql.c"
         break;
-      case 323: /* ffactor ::= feature_comparison */
+      case 323: /* ffactor ::= KEY_OPEN_BRACKET ffeatures KEY_CLOSE_BRACKET */
 #line 1422 "./mql.yxx"
-{ mqlyygotominor.mqlyy472 = new FFactor(mqlyymsp[0].minor.mqlyy370); }
-#line 4305 "./mql.c"
+{ mqlyygotominor.mqlyy540 = new FFactor(mqlyymsp[-1].minor.mqlyy288);   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
+  mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
+}
+#line 4309 "./mql.c"
         break;
-      case 324: /* feature_comparison ::= feature_name comparison_operator value */
-#line 1428 "./mql.yxx"
-{ mqlyygotominor.mqlyy370 = new FeatureComparison(mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy202, mqlyymsp[0].minor.mqlyy404); deleteToken(mqlyymsp[-2].minor.mqlyy0); }
-#line 4310 "./mql.c"
+      case 324: /* ffactor ::= feature_comparison */
+#line 1424 "./mql.yxx"
+{ mqlyygotominor.mqlyy540 = new FFactor(mqlyymsp[0].minor.mqlyy407); }
+#line 4314 "./mql.c"
         break;
-      case 325: /* feature_comparison ::= feature_name KEY_IN KEY_OPEN_BRACKET list_of_identifier KEY_CLOSE_BRACKET */
+      case 325: /* feature_comparison ::= feature_name comparison_operator value */
 #line 1430 "./mql.yxx"
-{ mqlyygotominor.mqlyy370 = new FeatureComparison(mqlyymsp[-4].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy238); deleteToken(mqlyymsp[-4].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,80,&mqlyymsp[-3].minor);
-  mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
-  mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
-}
-#line 4318 "./mql.c"
+{ mqlyygotominor.mqlyy407 = new FeatureComparison(mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy96, mqlyymsp[0].minor.mqlyy204); deleteToken(mqlyymsp[-2].minor.mqlyy0); }
+#line 4319 "./mql.c"
         break;
-      case 326: /* feature_comparison ::= feature_name KEY_IN KEY_OPEN_BRACKET list_of_integer KEY_CLOSE_BRACKET */
+      case 326: /* feature_comparison ::= feature_name KEY_IN KEY_OPEN_BRACKET list_of_identifier KEY_CLOSE_BRACKET */
 #line 1432 "./mql.yxx"
-{ mqlyygotominor.mqlyy370 = new FeatureComparison(mqlyymsp[-4].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy1); deleteToken(mqlyymsp[-4].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,80,&mqlyymsp[-3].minor);
+{ mqlyygotominor.mqlyy407 = new FeatureComparison(mqlyymsp[-4].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy440); deleteToken(mqlyymsp[-4].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,80,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
 }
-#line 4326 "./mql.c"
+#line 4327 "./mql.c"
         break;
-      case 327: /* feature_comparison ::= feature_name KEY_IN object_reference_usage */
+      case 327: /* feature_comparison ::= feature_name KEY_IN KEY_OPEN_BRACKET list_of_integer KEY_CLOSE_BRACKET */
 #line 1434 "./mql.yxx"
-{ mqlyygotominor.mqlyy370 = new FeatureComparison(mqlyymsp[-2].minor.mqlyy0->extractString(), kIn, new Value(mqlyymsp[0].minor.mqlyy366)); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,80,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy407 = new FeatureComparison(mqlyymsp[-4].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy327); deleteToken(mqlyymsp[-4].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,80,&mqlyymsp[-3].minor);
+  mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
+  mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
 }
-#line 4332 "./mql.c"
+#line 4335 "./mql.c"
         break;
-      case 328: /* comparison_operator ::= KEY_EQUALS */
-#line 1439 "./mql.yxx"
-{ mqlyygotominor.mqlyy202 = kEqual;   mqlyy_destructor(mqlyypParser,72,&mqlyymsp[0].minor);
+      case 328: /* feature_comparison ::= feature_name KEY_IN object_reference_usage */
+#line 1436 "./mql.yxx"
+{ mqlyygotominor.mqlyy407 = new FeatureComparison(mqlyymsp[-2].minor.mqlyy0->extractString(), kIn, new Value(mqlyymsp[0].minor.mqlyy6)); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,80,&mqlyymsp[-1].minor);
 }
-#line 4338 "./mql.c"
+#line 4341 "./mql.c"
         break;
-      case 329: /* comparison_operator ::= KEY_LESS_THAN */
-#line 1440 "./mql.yxx"
-{ mqlyygotominor.mqlyy202 = kLessThan;   mqlyy_destructor(mqlyypParser,112,&mqlyymsp[0].minor);
-}
-#line 4344 "./mql.c"
-        break;
-      case 330: /* comparison_operator ::= KEY_GREATER_THAN */
+      case 329: /* comparison_operator ::= KEY_EQUALS */
 #line 1441 "./mql.yxx"
-{ mqlyygotominor.mqlyy202 = kGreaterThan;   mqlyy_destructor(mqlyypParser,113,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy96 = kEqual;   mqlyy_destructor(mqlyypParser,72,&mqlyymsp[0].minor);
 }
-#line 4350 "./mql.c"
+#line 4347 "./mql.c"
         break;
-      case 331: /* comparison_operator ::= KEY_NOT_EQUAL */
+      case 330: /* comparison_operator ::= KEY_LESS_THAN */
 #line 1442 "./mql.yxx"
-{ mqlyygotominor.mqlyy202 = kNotEqual;   mqlyy_destructor(mqlyypParser,114,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy96 = kLessThan;   mqlyy_destructor(mqlyypParser,113,&mqlyymsp[0].minor);
 }
-#line 4356 "./mql.c"
+#line 4353 "./mql.c"
         break;
-      case 332: /* comparison_operator ::= KEY_LESS_THAN_OR_EQUAL */
+      case 331: /* comparison_operator ::= KEY_GREATER_THAN */
 #line 1443 "./mql.yxx"
-{ mqlyygotominor.mqlyy202 = kLessThanOrEqual;   mqlyy_destructor(mqlyypParser,115,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy96 = kGreaterThan;   mqlyy_destructor(mqlyypParser,114,&mqlyymsp[0].minor);
 }
-#line 4362 "./mql.c"
+#line 4359 "./mql.c"
         break;
-      case 333: /* comparison_operator ::= KEY_GREATER_THAN_OR_EQUAL */
+      case 332: /* comparison_operator ::= KEY_NOT_EQUAL */
 #line 1444 "./mql.yxx"
-{ mqlyygotominor.mqlyy202 = kGreaterThanOrEqual;   mqlyy_destructor(mqlyypParser,116,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy96 = kNotEqual;   mqlyy_destructor(mqlyypParser,115,&mqlyymsp[0].minor);
 }
-#line 4368 "./mql.c"
+#line 4365 "./mql.c"
         break;
-      case 334: /* comparison_operator ::= KEY_TILDE */
+      case 333: /* comparison_operator ::= KEY_LESS_THAN_OR_EQUAL */
 #line 1445 "./mql.yxx"
-{ mqlyygotominor.mqlyy202 = kTilde;   mqlyy_destructor(mqlyypParser,117,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy96 = kLessThanOrEqual;   mqlyy_destructor(mqlyypParser,116,&mqlyymsp[0].minor);
 }
-#line 4374 "./mql.c"
+#line 4371 "./mql.c"
         break;
-      case 335: /* comparison_operator ::= KEY_NOT_TILDE */
+      case 334: /* comparison_operator ::= KEY_GREATER_THAN_OR_EQUAL */
 #line 1446 "./mql.yxx"
-{ mqlyygotominor.mqlyy202 = kNotTilde;   mqlyy_destructor(mqlyypParser,118,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy96 = kGreaterThanOrEqual;   mqlyy_destructor(mqlyypParser,117,&mqlyymsp[0].minor);
 }
-#line 4380 "./mql.c"
+#line 4377 "./mql.c"
         break;
-      case 336: /* comparison_operator ::= KEY_HAS */
+      case 335: /* comparison_operator ::= KEY_TILDE */
 #line 1447 "./mql.yxx"
-{ mqlyygotominor.mqlyy202 = kHas;   mqlyy_destructor(mqlyypParser,119,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy96 = kTilde;   mqlyy_destructor(mqlyypParser,118,&mqlyymsp[0].minor);
 }
-#line 4386 "./mql.c"
+#line 4383 "./mql.c"
         break;
-      case 337: /* value ::= enum_const */
-#line 1454 "./mql.yxx"
-{ mqlyygotominor.mqlyy404 = new Value(mqlyymsp[0].minor.mqlyy0->extractString(), kValEnumConst); deleteToken(mqlyymsp[0].minor.mqlyy0); }
-#line 4391 "./mql.c"
+      case 336: /* comparison_operator ::= KEY_NOT_TILDE */
+#line 1448 "./mql.yxx"
+{ mqlyygotominor.mqlyy96 = kNotTilde;   mqlyy_destructor(mqlyypParser,119,&mqlyymsp[0].minor);
+}
+#line 4389 "./mql.c"
         break;
-      case 338: /* value ::= signed_integer */
+      case 337: /* comparison_operator ::= KEY_HAS */
+#line 1449 "./mql.yxx"
+{ mqlyygotominor.mqlyy96 = kHas;   mqlyy_destructor(mqlyypParser,120,&mqlyymsp[0].minor);
+}
+#line 4395 "./mql.c"
+        break;
+      case 338: /* value ::= enum_const */
 #line 1456 "./mql.yxx"
-{ mqlyygotominor.mqlyy404 = new Value(mqlyymsp[0].minor.mqlyy485); }
-#line 4396 "./mql.c"
+{ mqlyygotominor.mqlyy204 = new Value(mqlyymsp[0].minor.mqlyy0->extractString(), kValEnumConst); deleteToken(mqlyymsp[0].minor.mqlyy0); }
+#line 4400 "./mql.c"
         break;
-      case 339: /* value ::= STRING */
+      case 339: /* value ::= signed_integer */
 #line 1458 "./mql.yxx"
-{ mqlyygotominor.mqlyy404 = new Value(mqlyymsp[0].minor.mqlyy0->extractString(), kValString); deleteToken(mqlyymsp[0].minor.mqlyy0); }
-#line 4401 "./mql.c"
+{ mqlyygotominor.mqlyy204 = new Value(mqlyymsp[0].minor.mqlyy249); }
+#line 4405 "./mql.c"
         break;
-      case 340: /* value ::= object_reference_usage */
+      case 340: /* value ::= STRING */
 #line 1460 "./mql.yxx"
-{ mqlyygotominor.mqlyy404 = new Value(mqlyymsp[0].minor.mqlyy366); }
-#line 4406 "./mql.c"
+{ mqlyygotominor.mqlyy204 = new Value(mqlyymsp[0].minor.mqlyy0->extractString(), kValString); deleteToken(mqlyymsp[0].minor.mqlyy0); }
+#line 4410 "./mql.c"
         break;
-      case 342: /* object_reference_usage ::= object_reference KEY_DOT feature_name */
-#line 1470 "./mql.yxx"
-{ mqlyygotominor.mqlyy366 = new ObjectReferenceUsage(mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-2].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,120,&mqlyymsp[-1].minor);
+      case 341: /* value ::= object_reference_usage */
+#line 1462 "./mql.yxx"
+{ mqlyygotominor.mqlyy204 = new Value(mqlyymsp[0].minor.mqlyy6); }
+#line 4415 "./mql.c"
+        break;
+      case 343: /* object_reference_usage ::= object_reference KEY_DOT feature_name */
+#line 1472 "./mql.yxx"
+{ mqlyygotominor.mqlyy6 = new ObjectReferenceUsage(mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-2].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,121,&mqlyymsp[-1].minor);
 }
-#line 4412 "./mql.c"
+#line 4421 "./mql.c"
         break;
-      case 343: /* opt_blocks ::= */
-#line 1475 "./mql.yxx"
-{ mqlyygotominor.mqlyy571 = 0; }
-#line 4417 "./mql.c"
+      case 344: /* opt_blocks ::= */
+#line 1477 "./mql.yxx"
+{ mqlyygotominor.mqlyy377 = 0; }
+#line 4426 "./mql.c"
         break;
-      case 344: /* opt_blocks ::= blocks */
-#line 1476 "./mql.yxx"
-{ mqlyygotominor.mqlyy571 = mqlyymsp[0].minor.mqlyy571; }
-#line 4422 "./mql.c"
+      case 345: /* opt_blocks ::= blocks */
+#line 1478 "./mql.yxx"
+{ mqlyygotominor.mqlyy377 = mqlyymsp[0].minor.mqlyy377; }
+#line 4431 "./mql.c"
         break;
-      case 345: /* block ::= object_block */
-      case 349: /* block ::= notexist_object_block */ mqlyytestcase(mqlyyruleno==349);
-#line 1481 "./mql.yxx"
-{ mqlyygotominor.mqlyy560 = new Block(mqlyymsp[0].minor.mqlyy409); }
-#line 4428 "./mql.c"
-        break;
-      case 346: /* block ::= power */
-#line 1482 "./mql.yxx"
-{ mqlyygotominor.mqlyy560 = new Block(mqlyymsp[0].minor.mqlyy208); }
-#line 4433 "./mql.c"
-        break;
-      case 347: /* block ::= opt_gap_block */
+      case 346: /* block ::= object_block */
+      case 350: /* block ::= notexist_object_block */ mqlyytestcase(mqlyyruleno==350);
 #line 1483 "./mql.yxx"
-{ mqlyygotominor.mqlyy560 = new Block(mqlyymsp[0].minor.mqlyy263); }
-#line 4438 "./mql.c"
+{ mqlyygotominor.mqlyy414 = new Block(mqlyymsp[0].minor.mqlyy125); }
+#line 4437 "./mql.c"
         break;
-      case 348: /* block ::= gap_block */
+      case 347: /* block ::= power */
 #line 1484 "./mql.yxx"
-{ mqlyygotominor.mqlyy560 = new Block(mqlyymsp[0].minor.mqlyy476); }
-#line 4443 "./mql.c"
+{ mqlyygotominor.mqlyy414 = new Block(mqlyymsp[0].minor.mqlyy68); }
+#line 4442 "./mql.c"
         break;
-      case 350: /* star_monad_set ::= */
-#line 1489 "./mql.yxx"
-{ mqlyygotominor.mqlyy434 = new MQLMonadSetElement(0, MAX_MONAD, 0, true); }
-#line 4448 "./mql.c"
+      case 348: /* block ::= opt_gap_block */
+#line 1485 "./mql.yxx"
+{ mqlyygotominor.mqlyy414 = new Block(mqlyymsp[0].minor.mqlyy265); }
+#line 4447 "./mql.c"
         break;
-      case 352: /* opt_gap_block ::= KEY_OPEN_SQUARE_BRACKET KEY_OPT_GAP mark_declaration gap_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET */
-#line 1495 "./mql.yxx"
-{ mqlyygotominor.mqlyy263 = new OptGapBlock(mqlyymsp[-2].minor.mqlyy410, mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy571); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-5].minor);
-  mqlyy_destructor(mqlyypParser,121,&mqlyymsp[-4].minor);
-  mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
-}
-#line 4456 "./mql.c"
+      case 349: /* block ::= gap_block */
+#line 1486 "./mql.yxx"
+{ mqlyygotominor.mqlyy414 = new Block(mqlyymsp[0].minor.mqlyy18); }
+#line 4452 "./mql.c"
         break;
-      case 353: /* gap_retrieval ::= */
-#line 1500 "./mql.yxx"
-{ mqlyygotominor.mqlyy410 = kNoRetrieve; }
-#line 4461 "./mql.c"
+      case 351: /* star_monad_set ::= */
+#line 1491 "./mql.yxx"
+{ mqlyygotominor.mqlyy34 = new MQLMonadSetElement(0, MAX_MONAD, 0, true); }
+#line 4457 "./mql.c"
         break;
-      case 357: /* gap_block ::= KEY_OPEN_SQUARE_BRACKET KEY_GAP mark_declaration gap_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET */
-#line 1509 "./mql.yxx"
-{ mqlyygotominor.mqlyy476 = new GapBlock(mqlyymsp[-2].minor.mqlyy410, mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy571); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-5].minor);
+      case 353: /* opt_gap_block ::= KEY_OPEN_SQUARE_BRACKET KEY_OPT_GAP mark_declaration gap_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET */
+#line 1497 "./mql.yxx"
+{ mqlyygotominor.mqlyy265 = new OptGapBlock(mqlyymsp[-2].minor.mqlyy372, mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy377); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,122,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 4469 "./mql.c"
+#line 4465 "./mql.c"
         break;
-      case 358: /* feature_retrieval ::= KEY_GET feature_list */
-#line 1516 "./mql.yxx"
-{ mqlyygotominor.mqlyy374 = mqlyymsp[0].minor.mqlyy374;   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-1].minor);
-}
-#line 4475 "./mql.c"
+      case 354: /* gap_retrieval ::= */
+#line 1502 "./mql.yxx"
+{ mqlyygotominor.mqlyy372 = kNoRetrieve; }
+#line 4470 "./mql.c"
         break;
-      case 359: /* feature_retrieval ::= */
-#line 1517 "./mql.yxx"
-{ mqlyygotominor.mqlyy374 = 0; }
-#line 4480 "./mql.c"
-        break;
-      case 360: /* object_block ::= KEY_OPEN_SQUARE_BRACKET object_type_name mark_declaration object_reference_declaration retrieval firstlast monad_set_relation_clause feature_constraints feature_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET */
-#line 1530 "./mql.yxx"
-{ mqlyygotominor.mqlyy409 = new ObjectBlock(mqlyymsp[-9].minor.mqlyy0->extractString(), mqlyymsp[-8].minor.mqlyy0->extractString(), mqlyymsp[-7].minor.mqlyy0->extractString(), mqlyymsp[-6].minor.mqlyy410, mqlyymsp[-5].minor.mqlyy79, mqlyymsp[-4].minor.mqlyy253, mqlyymsp[-3].minor.mqlyy142, mqlyymsp[-2].minor.mqlyy374, mqlyymsp[-1].minor.mqlyy571, false); 
-      deleteToken(mqlyymsp[-9].minor.mqlyy0); deleteToken(mqlyymsp[-8].minor.mqlyy0); deleteToken(mqlyymsp[-7].minor.mqlyy0); 
-      mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-10].minor);
+      case 358: /* gap_block ::= KEY_OPEN_SQUARE_BRACKET KEY_GAP mark_declaration gap_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET */
+#line 1511 "./mql.yxx"
+{ mqlyygotominor.mqlyy18 = new GapBlock(mqlyymsp[-2].minor.mqlyy372, mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy377); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-5].minor);
+  mqlyy_destructor(mqlyypParser,123,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
+#line 4478 "./mql.c"
+        break;
+      case 359: /* feature_retrieval ::= KEY_GET feature_list */
+#line 1518 "./mql.yxx"
+{ mqlyygotominor.mqlyy242 = mqlyymsp[0].minor.mqlyy242;   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-1].minor);
+}
+#line 4484 "./mql.c"
+        break;
+      case 360: /* feature_retrieval ::= */
+#line 1519 "./mql.yxx"
+{ mqlyygotominor.mqlyy242 = 0; }
 #line 4489 "./mql.c"
         break;
-      case 361: /* notexist_object_block ::= notexist KEY_OPEN_SQUARE_BRACKET object_type_name mark_declaration object_reference_declaration retrieval firstlast monad_set_relation_clause feature_constraints feature_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET */
-#line 1544 "./mql.yxx"
-{ mqlyygotominor.mqlyy409 = new ObjectBlock(mqlyymsp[-9].minor.mqlyy0->extractString(), mqlyymsp[-8].minor.mqlyy0->extractString(), mqlyymsp[-7].minor.mqlyy0->extractString(), mqlyymsp[-6].minor.mqlyy410, mqlyymsp[-5].minor.mqlyy79, mqlyymsp[-4].minor.mqlyy253, mqlyymsp[-3].minor.mqlyy142, mqlyymsp[-2].minor.mqlyy374, mqlyymsp[-1].minor.mqlyy571, true); 
+      case 361: /* object_block ::= KEY_OPEN_SQUARE_BRACKET object_type_name mark_declaration object_reference_declaration retrieval firstlast monad_set_relation_clause feature_constraints feature_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET */
+#line 1532 "./mql.yxx"
+{ mqlyygotominor.mqlyy125 = new ObjectBlock(mqlyymsp[-9].minor.mqlyy0->extractString(), mqlyymsp[-8].minor.mqlyy0->extractString(), mqlyymsp[-7].minor.mqlyy0->extractString(), mqlyymsp[-6].minor.mqlyy372, mqlyymsp[-5].minor.mqlyy90, mqlyymsp[-4].minor.mqlyy385, mqlyymsp[-3].minor.mqlyy288, mqlyymsp[-2].minor.mqlyy242, mqlyymsp[-1].minor.mqlyy377, false); 
       deleteToken(mqlyymsp[-9].minor.mqlyy0); deleteToken(mqlyymsp[-8].minor.mqlyy0); deleteToken(mqlyymsp[-7].minor.mqlyy0); 
       mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-10].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
 #line 4498 "./mql.c"
         break;
-      case 362: /* power ::= KEY_POWER restrictor */
-#line 1552 "./mql.yxx"
-{ mqlyygotominor.mqlyy208 = new Power(mqlyymsp[0].minor.mqlyy348);   mqlyy_destructor(mqlyypParser,123,&mqlyymsp[-1].minor);
+      case 362: /* notexist_object_block ::= notexist KEY_OPEN_SQUARE_BRACKET object_type_name mark_declaration object_reference_declaration retrieval firstlast monad_set_relation_clause feature_constraints feature_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET */
+#line 1546 "./mql.yxx"
+{ mqlyygotominor.mqlyy125 = new ObjectBlock(mqlyymsp[-9].minor.mqlyy0->extractString(), mqlyymsp[-8].minor.mqlyy0->extractString(), mqlyymsp[-7].minor.mqlyy0->extractString(), mqlyymsp[-6].minor.mqlyy372, mqlyymsp[-5].minor.mqlyy90, mqlyymsp[-4].minor.mqlyy385, mqlyymsp[-3].minor.mqlyy288, mqlyymsp[-2].minor.mqlyy242, mqlyymsp[-1].minor.mqlyy377, true); 
+      deleteToken(mqlyymsp[-9].minor.mqlyy0); deleteToken(mqlyymsp[-8].minor.mqlyy0); deleteToken(mqlyymsp[-7].minor.mqlyy0); 
+      mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-10].minor);
+  mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 4504 "./mql.c"
+#line 4507 "./mql.c"
         break;
-      case 363: /* power ::= KEY_POWER KEY_BETWEEN limit KEY_AND limit */
+      case 363: /* power ::= KEY_POWER restrictor */
 #line 1554 "./mql.yxx"
-{ mqlyygotominor.mqlyy208 = new Power(mqlyymsp[-2].minor.mqlyy348, mqlyymsp[0].minor.mqlyy348);   mqlyy_destructor(mqlyypParser,123,&mqlyymsp[-4].minor);
-  mqlyy_destructor(mqlyypParser,124,&mqlyymsp[-3].minor);
+{ mqlyygotominor.mqlyy68 = new Power(mqlyymsp[0].minor.mqlyy352);   mqlyy_destructor(mqlyypParser,124,&mqlyymsp[-1].minor);
+}
+#line 4513 "./mql.c"
+        break;
+      case 364: /* power ::= KEY_POWER KEY_BETWEEN limit KEY_AND limit */
+#line 1556 "./mql.yxx"
+{ mqlyygotominor.mqlyy68 = new Power(mqlyymsp[-2].minor.mqlyy352, mqlyymsp[0].minor.mqlyy352);   mqlyy_destructor(mqlyypParser,124,&mqlyymsp[-4].minor);
+  mqlyy_destructor(mqlyypParser,125,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,35,&mqlyymsp[-1].minor);
 }
-#line 4512 "./mql.c"
+#line 4521 "./mql.c"
         break;
-      case 364: /* restrictor ::= */
-#line 1558 "./mql.yxx"
-{ mqlyygotominor.mqlyy348 = MAX_MONAD; }
-#line 4517 "./mql.c"
-        break;
-      case 365: /* restrictor ::= KEY_LESS_THAN limit */
-#line 1559 "./mql.yxx"
-{ mqlyygotominor.mqlyy348 = mqlyymsp[0].minor.mqlyy348-1;   mqlyy_destructor(mqlyypParser,112,&mqlyymsp[-1].minor);
-}
-#line 4523 "./mql.c"
-        break;
-      case 366: /* restrictor ::= KEY_LESS_THAN_OR_EQUAL limit */
+      case 365: /* restrictor ::= */
 #line 1560 "./mql.yxx"
-{ mqlyygotominor.mqlyy348 = mqlyymsp[0].minor.mqlyy348;   mqlyy_destructor(mqlyypParser,115,&mqlyymsp[-1].minor);
-}
-#line 4529 "./mql.c"
+{ mqlyygotominor.mqlyy352 = MAX_MONAD; }
+#line 4526 "./mql.c"
         break;
-      case 367: /* limit ::= INTEGER */
-#line 1566 "./mql.yxx"
-{ mqlyygotominor.mqlyy348 = mqlyymsp[0].minor.mqlyy0->integer; deleteToken(mqlyymsp[0].minor.mqlyy0); }
-#line 4534 "./mql.c"
+      case 366: /* restrictor ::= KEY_LESS_THAN limit */
+#line 1561 "./mql.yxx"
+{ mqlyygotominor.mqlyy352 = mqlyymsp[0].minor.mqlyy352-1;   mqlyy_destructor(mqlyypParser,113,&mqlyymsp[-1].minor);
+}
+#line 4532 "./mql.c"
+        break;
+      case 367: /* restrictor ::= KEY_LESS_THAN_OR_EQUAL limit */
+#line 1562 "./mql.yxx"
+{ mqlyygotominor.mqlyy352 = mqlyymsp[0].minor.mqlyy352;   mqlyy_destructor(mqlyypParser,116,&mqlyymsp[-1].minor);
+}
+#line 4538 "./mql.c"
+        break;
+      case 368: /* limit ::= INTEGER */
+#line 1568 "./mql.yxx"
+{ mqlyygotominor.mqlyy352 = mqlyymsp[0].minor.mqlyy0->integer; deleteToken(mqlyymsp[0].minor.mqlyy0); }
+#line 4543 "./mql.c"
         break;
       default:
         break;
@@ -106242,7 +107182,7 @@ static void mqlyy_parse_failed(
 #line 140 "./mql.yxx"
 
   pEE->bSyntaxError = true;
-#line 4584 "./mql.c"
+#line 4593 "./mql.c"
   MQLParserARG_STORE; /* Suppress warning about unused %extra_argument variable */
 }
 #endif /* MQLYYNOERRORRECOVERY */
@@ -106262,7 +107202,7 @@ static void mqlyy_syntax_error(
   pEE->bSyntaxError = true;
   std::string errMsg = "syntax error near " + TOKEN->getTokenName() + '\n';
   pEE->pError->appendError(errMsg);
-#line 4604 "./mql.c"
+#line 4613 "./mql.c"
   MQLParserARG_STORE; /* Suppress warning about unused %extra_argument variable */
 }
 
@@ -106458,24 +107398,23 @@ void MQLParser(
 #endif
   return;
 }
-/**************** A copy of MQL/mql_query.cpp *****************/
 
-
+/**************** A copy of MQL/mql_query.cpp ****************/
 #line 1 "MQL/mql_query.cpp"
-        /*
+/*
  * mql_query.cpp
  *
  * MQL query classes
  *
  * Ulrik Petersen
  * Created: 2/27-2001
- * Last update: 4/16-2015
+ * Last update: 4/20-2016
  *
  */
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2001-2015  Ulrik Sandborg-Petersen
+ *   Copyright (C) 2001-2016  Ulrik Sandborg-Petersen
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License as
@@ -106557,68 +107496,68 @@ void MQLParser(
 
 
 #line 92 "MQL/mql_query.cpp"
-        /**************** already included emdf_ffeatures.h -- not including again *****************/
+/**************** already included emdf_ffeatures.h -- not including again *****************/
 
 
 #line 93 "MQL/mql_query.cpp"
-        /**************** already included enum_const_cache.h -- not including again *****************/
+/**************** already included enum_const_cache.h -- not including again *****************/
 
 
 #line 94 "MQL/mql_query.cpp"
-        /**************** already included mql_query.h -- not including again *****************/
+/**************** already included mql_query.h -- not including again *****************/
 
 
 #line 95 "MQL/mql_query.cpp"
-        /**************** already included mql_error.h -- not including again *****************/
+/**************** already included mql_error.h -- not including again *****************/
 
 
 #line 96 "MQL/mql_query.cpp"
-        /**************** already included mql_extern.h -- not including again *****************/
+/**************** already included mql_extern.h -- not including again *****************/
 
 
 #line 97 "MQL/mql_query.cpp"
-        /**************** already included mql_R.h -- not including again *****************/
+/**************** already included mql_R.h -- not including again *****************/
 
 
 #line 98 "MQL/mql_query.cpp"
-        /**************** already included mql_types.h -- not including again *****************/
+/**************** already included mql_types.h -- not including again *****************/
 
 
 #line 99 "MQL/mql_query.cpp"
-        /**************** already included emdf_value.h -- not including again *****************/
+/**************** already included emdf_value.h -- not including again *****************/
 
 
 #line 100 "MQL/mql_query.cpp"
-        /**************** already included mql_object.h -- not including again *****************/
+/**************** already included mql_object.h -- not including again *****************/
 
 
 #line 101 "MQL/mql_query.cpp"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 102 "MQL/mql_query.cpp"
-        /**************** already included mql_execution_environment.h -- not including again *****************/
+/**************** already included mql_execution_environment.h -- not including again *****************/
 
 
 #line 103 "MQL/mql_query.cpp"
-        #include <cstdlib>
+#include <cstdlib>
 /**************** already included logging.h -- not including again *****************/
 
 
 #line 105 "MQL/mql_query.cpp"
-        /**************** already included monads.h -- not including again *****************/
+/**************** already included monads.h -- not including again *****************/
 
 
 #line 106 "MQL/mql_query.cpp"
-        /**************** already included inst.h -- not including again *****************/
+/**************** already included inst.h -- not including again *****************/
 
 
 #line 107 "MQL/mql_query.cpp"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 108 "MQL/mql_query.cpp"
-        
+
 #undef MYMAX
 #undef MYMIN
 
@@ -106705,27 +107644,38 @@ bool MonadSetRelationClause::exec(const SetOfMonads& object_som,
 				  const SetOfMonads& universe, 
 				  const SetOfMonads& substrate) const
 {
-	if (m_operation == kMSROPartOf) {
-		if (m_universe_or_substrate == kMSNSubstrate) {
-			return object_som.part_of(substrate);
-		} else if (m_universe_or_substrate == kMSNUniverse) {
-			return object_som.part_of(universe);
-		} else {
-			ASSERT_THROW(false,
-				     "Unknown monad set name in MonadSetRelationClause::operation()");
-		}
-	} else if (m_operation == kMSROOverlap) {
-		if (m_universe_or_substrate == kMSNSubstrate) {
-			return SetOfMonads::overlap(object_som, substrate);
-		} else if (m_universe_or_substrate == kMSNUniverse) {
-			return SetOfMonads::overlap(object_som, universe);
-		} else {
-			ASSERT_THROW(false,
-				     "Unknown monad set name in MonadSetRelationClause::operation()");
-		}
-	} else {
-		ASSERT_THROW(false,
-			     "Unknown operation in MonadSetRelationClause::operation()");
+    // Select universe or substrate
+    const SetOfMonads *somp;
+    switch (m_universe_or_substrate) {
+      case kMSNSubstrate:
+            somp = &substrate;
+            break;
+
+      case kMSNUniverse:
+            somp = &universe;
+            break;
+
+      default:
+            ASSERT_THROW(false,
+                         "Unknown monad set name in MonadSetRelationClause::operation()");
+            break;
+    }
+
+    // Perform operation
+    switch (m_operation) {
+      case kMSROPartOf:
+            return object_som.part_of(*somp);
+
+      case kMSROOverlap:
+            return SetOfMonads::overlap(object_som, *somp);
+
+      case kMSROStartsIn:
+            return object_som.starts_in(*somp);
+
+      default:
+            ASSERT_THROW(false,
+                         "Unknown operation in MonadSetRelationClause::operation()");
+            break;
 	}
 }
 
@@ -106739,6 +107689,9 @@ std::string MonadSetRelationClause::calculateCharacteristicString() const
 		break;
 	case kMSROOverlap:
 		characteristic_string += "OL";
+		break;
+	case kMSROStartsIn:
+		characteristic_string += "SI";
 		break;
 	default:
 		ASSERT_THROW(false, "Unknown m_operation");
@@ -107636,6 +108589,55 @@ StartMonadIterator* Block::getSMI(MQLExecEnv *pEE, const SetOfMonads& U, const S
 				} else {
 					Uping = SetOfMonads(Suping.first(), Suping.last());
 				}
+			} else if (m_object_block->getMSRC()->getOperation() == kMSROStartsIn) {
+				// If we are doing other monad sets than
+				// 'monads', all bets are off as to where to
+				// start, so we start at 1, and end at
+				// MAX_MONAD.
+				//
+				// FIXME: What we really should be doing is to
+				// have a way of knowing what the largest
+				// object length is of any given monad set, as
+				// well as the largest last monad of any set
+				// of monads.
+				if (strcmp_nocase(m_object_block->getMSRC()->getOurMonadSet(), "monads") != 0) {
+					lower_bound_Sm = 1L;
+					upper_bound_Universe_end = MAX_MONAD;
+				} else {
+					lower_bound_Sm = MYMAX(pEE->m_all_m_1.first(),
+							       Sm);
+					
+					// Even for set of monads being the
+					// regular "monads" feature, we should
+					// not rely on Su having the last
+					// monad to be found.  Instead, we
+					// should set the end of the Su (and
+					// the end of the Univese) to be
+					// all_m_1's last monad.
+					monad_m max_m = pEE->m_all_m_1.last();
+
+					if (Su.isEmpty()) {
+						upper_bound_Universe_end = max_m;
+					} else {
+						monad_m largest_object_length = m_object_block->getLargestObjectLength();
+						upper_bound_Universe_end = MYMIN(max_m,
+										 Su.last() + largest_object_length);
+					}
+				}
+
+				if (Su.isEmpty()) {
+					Suping = Su;
+				} else {
+					Suping = SetOfMonads::intersect(Su, 
+									SetOfMonads(lower_bound_Sm, upper_bound_Universe_end));
+				}
+				
+				if (Suping.isEmpty()) {
+					Uping = Suping;
+				} else {
+					Uping = SetOfMonads(Suping.first(), Suping.last());
+				}
+
 			} else {
 				ASSERT_THROW(false,
 					     "Unknown object block monad set relation operator in Block::getSMI().");
@@ -111710,24 +112712,23 @@ void Topograph::addOBBToVec(OBBVec *pOBBVec)
 {
 	m_blocks->addOBBToVec(pOBBVec);
 }
-/**************** A copy of MQL/mql_R.cpp *****************/
 
-
+/**************** A copy of MQL/mql_R.cpp ****************/
 #line 1 "MQL/mql_R.cpp"
-        /*
+/*
  * mql_R.cpp
  *
  * MQL retrieval functions
  *
  * Ulrik Petersen
  * Created: 3/16-2001
- * Last update: 4/16-2014
+ * Last update: 4/20-2016
  *
  */
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2001-2014  Ulrik Sandborg-Petersen
+ *   Copyright (C) 2001-2016  Ulrik Sandborg-Petersen
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License as
@@ -111809,47 +112810,47 @@ void Topograph::addOBBToVec(OBBVec *pOBBVec)
 
 
 #line 92 "MQL/mql_R.cpp"
-        /**************** already included inst.h -- not including again *****************/
+/**************** already included inst.h -- not including again *****************/
 
 
 #line 93 "MQL/mql_R.cpp"
-        /**************** already included logging.h -- not including again *****************/
+/**************** already included logging.h -- not including again *****************/
 
 
 #line 94 "MQL/mql_R.cpp"
-        /**************** already included mql_object.h -- not including again *****************/
+/**************** already included mql_object.h -- not including again *****************/
 
 
 #line 95 "MQL/mql_R.cpp"
-        /**************** already included mql_extern.h -- not including again *****************/
+/**************** already included mql_extern.h -- not including again *****************/
 
 
 #line 96 "MQL/mql_R.cpp"
-        /**************** already included mql_sheaf.h -- not including again *****************/
+/**************** already included mql_sheaf.h -- not including again *****************/
 
 
 #line 97 "MQL/mql_R.cpp"
-        /**************** already included mql_utility.h -- not including again *****************/
+/**************** already included mql_utility.h -- not including again *****************/
 
 
 #line 98 "MQL/mql_R.cpp"
-        /**************** already included mql_query.h -- not including again *****************/
+/**************** already included mql_query.h -- not including again *****************/
 
 
 #line 99 "MQL/mql_R.cpp"
-        /**************** already included mql_execution_environment.h -- not including again *****************/
+/**************** already included mql_execution_environment.h -- not including again *****************/
 
 
 #line 100 "MQL/mql_R.cpp"
-        /**************** already included mql_R.h -- not including again *****************/
+/**************** already included mql_R.h -- not including again *****************/
 
 
 #line 101 "MQL/mql_R.cpp"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 102 "MQL/mql_R.cpp"
-        
+
 #undef MYMIN
 #define MYMIN(A, B) ((A < B) ? A : B)
 
@@ -112054,34 +113055,41 @@ Inst* R_inst(MQLExecEnv *pEE, const SetOfMonads& Su, ObjectBlock *object_block, 
 		
 
 		// Get inst
-		if (operation == kMSROPartOf) {
-			if (!pEE->pDB->getInst(object_block->getObjectTypeName(),
-					       object_block->getObjectTypeId(),
-					       characteristic_set, 
-					       pEE->m_all_m_1,
-					       pre_query_string,
-					       pre_query_constraints,
-					       FeatureInfos,
-					       object_block->getMSRC()->getOurMonadSet(),
-					       *pInst)) {
-				throw EMdFDBDBError();
-			}
-		} else if (operation == kMSROOverlap) {
-			if (!pEE->pDB->getObjectsHavingMonadsIn(object_block->getObjectTypeName(),
-								object_block->getObjectTypeId(),
-								object_block->getObjectRangeType(),
-								characteristic_set, 
-								pEE->m_all_m_1,
-								FeatureInfos,
-								object_block->getMSRC()->getOurMonadSet(),
-								pInst)) {
-				throw EMdFDBDBError();
-			}
-		} else {
-			ASSERT_THROW(false,
-				     "Unknown MSRC operation in R_inst.")
-		}
+        switch (operation) {
+          case kMSROPartOf:
+          case kMSROStartsIn:
+              if (!pEE->pDB->getInst(object_block->getObjectTypeName(),
+                                     object_block->getObjectTypeId(),
+                                     characteristic_set, 
+                                     pEE->m_all_m_1,
+                                     pre_query_string,
+                                     pre_query_constraints,
+                                     FeatureInfos,
+                                     object_block->getMSRC()->getOurMonadSet(),
+                                     operation,
+                                     *pInst)) {
+                  throw EMdFDBDBError();
+              }
+              break;
 
+          case kMSROOverlap:
+                if (!pEE->pDB->getObjectsHavingMonadsIn(object_block->getObjectTypeName(),
+                                                        object_block->getObjectTypeId(),
+                                                        object_block->getObjectRangeType(),
+                                                        characteristic_set, 
+                                                        pEE->m_all_m_1,
+                                                        FeatureInfos,
+                                                        object_block->getMSRC()->getOurMonadSet(),
+                                                        pInst)) {
+                    throw EMdFDBDBError();
+                }
+                break;
+
+          default:
+                ASSERT_THROW(false,
+                             "Unknown MSRC operation in R_inst.");
+                break;
+        }
 		// Write to log
 		// LOG_WRITE_TIME("mql_R.cpp:R_inst()", "Inst-creation finished.");
 	} 
@@ -113259,22 +114267,21 @@ bool R_features(MQLExecEnv *pEE, MQLObject* pObj, FFeatures* pFFeatures)
 		}
 	}
 }
-/**************** A copy of MQL/mql_execute.cpp *****************/
 
-
+/**************** A copy of MQL/mql_execute.cpp ****************/
 #line 1 "MQL/mql_execute.cpp"
-        /*
+/*
  * mql_execute.cpp
  *
  * Functions for executing MQL queries
  * Created: 3/23-2001
- * Last update: 8/20-2013
+ * Last update: 4/1-2016
  *
  */
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2001-2013   Ulrik Sandborg-Petersen
+ *   Copyright (C) 2001-2016   Ulrik Sandborg-Petersen
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License as
@@ -113355,20 +114362,18 @@ bool R_features(MQLExecEnv *pEE, MQLObject* pObj, FFeatures* pFFeatures)
 
 
 #line 89 "MQL/mql_execute.cpp"
-        /**************** already included arena.h -- not including again *****************/
+/**************** already included arena.h -- not including again *****************/
 
 
 #line 90 "MQL/mql_execute.cpp"
-        /**************** already included string_list.h -- not including again *****************/
+/**************** already included string_list.h -- not including again *****************/
 
 
 #line 91 "MQL/mql_execute.cpp"
-        /**************** leaving MQL/mql_execute.cpp temporarily *****************/
-/**************** A copy of include/mql_execute.h *****************/
-
-
+/**************** leaving MQL/mql_execute.cpp temporarily *****************/
+/**************** A copy of include/mql_execute.h ****************/
 #line 1 "include/mql_execute.h"
-        /*
+/*
  * mql_execute.h
  *
  * Functions for executing MQL queries
@@ -113469,7 +114474,7 @@ bool R_features(MQLExecEnv *pEE, MQLObject* pObj, FFeatures* pFFeatures)
 
 
 #line 98 "include/mql_execute.h"
-        #endif
+#endif
 
 #if HAVE_ISTREAM
 #include <istream>
@@ -113487,7 +114492,7 @@ bool R_features(MQLExecEnv *pEE, MQLObject* pObj, FFeatures* pFFeatures)
 
 
 #line 113 "include/mql_execute.h"
-        #endif
+#endif
 
 /**
  * \defgroup MQLExecute MQL Execution functions
@@ -113552,58 +114557,59 @@ extern bool mqlGetNextQuery(std::istream *pStrin,
 
 
 #endif /* MQL_EXECUTE__H__ */
+
 /**************** continuing MQL/mql_execute.cpp where we left off *****************/
 
 
 #line 92 "MQL/mql_execute.cpp"
-        /**************** already included mql_error.h -- not including again *****************/
+/**************** already included mql_error.h -- not including again *****************/
 
 
 #line 93 "MQL/mql_execute.cpp"
-        /**************** already included mql_result.h -- not including again *****************/
+/**************** already included mql_result.h -- not including again *****************/
 
 
 #line 94 "MQL/mql_execute.cpp"
-        /**************** already included mql_extern.h -- not including again *****************/
+/**************** already included mql_extern.h -- not including again *****************/
 
 
 #line 95 "MQL/mql_execute.cpp"
-        /**************** already included mql_execution_environment.h -- not including again *****************/
+/**************** already included mql_execution_environment.h -- not including again *****************/
 
 
 #line 96 "MQL/mql_execute.cpp"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 97 "MQL/mql_execute.cpp"
-        /**************** already included string_list.h -- not including again *****************/
+/**************** already included string_list.h -- not including again *****************/
 
 
 #line 98 "MQL/mql_execute.cpp"
-        /**************** already included mql_sheaf.h -- not including again *****************/
+/**************** already included mql_sheaf.h -- not including again *****************/
 
 
 #line 99 "MQL/mql_execute.cpp"
-        /**************** already included logging.h -- not including again *****************/
+/**************** already included logging.h -- not including again *****************/
 
 
 #line 100 "MQL/mql_execute.cpp"
-        #include <iostream>
+#include <iostream>
 #include <sstream>
 #include <fstream>
 /**************** already included debug.h -- not including again *****************/
 
 
 #line 104 "MQL/mql_execute.cpp"
-        /**************** already included mql_lexer.h -- not including again *****************/
+/**************** already included mql_lexer.h -- not including again *****************/
 
 
 #line 105 "MQL/mql_execute.cpp"
-        /**************** already included mql_gq.h -- not including again *****************/
+/**************** already included mql_gq.h -- not including again *****************/
 
 
 #line 106 "MQL/mql_execute.cpp"
-        
+
 // Prototypes
 extern void *MQLParserAlloc(void *(*mallocProc)(size_t));
 extern void MQLParserFree(void *p, void (*freeProc)(void*));
@@ -113867,23 +114873,24 @@ bool mqlExecuteStream(MQLExecEnv *pEE,
 	pEE->pCallback = pCallback;
 
 	// Take care of XML header
-	if (pEE->pOut->isXML()) {
-		pEE->pOut->printXMLDecl();
-		pEE->pOut->printDTDstart("mql_results");
-		MQLResult::printDTD(pEE->pOut);
-		Table::printDTD(pEE->pOut);
-		Sheaf::printDTD(pEE->pOut);
-		FlatSheaf::printDTD(pEE->pOut);
-		pEE->pOut->printDTDend();
-		pEE->pOut->startTag("mql_results", true);
-		pEE->pOut->newline();
-		pEE->pOut->flush();
-	} else if (pEE->pOut->isJSON()) {
-		pEE->pOut->jsonStartStruct();
-		pEE->pOut->jsonLabel("mql_results");
-		pEE->pOut->jsonStartArray();
-    }
-
+	if (bPrintResult) {
+		if (pEE->pOut->isXML()) {
+			pEE->pOut->printXMLDecl();
+			pEE->pOut->printDTDstart("mql_results");
+			MQLResult::printDTD(pEE->pOut);
+			Table::printDTD(pEE->pOut);
+			Sheaf::printDTD(pEE->pOut);
+			FlatSheaf::printDTD(pEE->pOut);
+			pEE->pOut->printDTDend();
+			pEE->pOut->startTag("mql_results", true);
+			pEE->pOut->newline();
+			pEE->pOut->flush();
+		} else if (pEE->pOut->isJSON()) {
+			pEE->pOut->jsonStartStruct();
+			pEE->pOut->jsonLabel("mql_results");
+			pEE->pOut->jsonStartArray();
+		}
+	}
 
 	// Initialize bExecResult
 	bool bExecDBResult = true;
@@ -113951,200 +114958,200 @@ bool mqlExecuteStream(MQLExecEnv *pEE,
 
 			// out pre-result material
 			if (bPrintResult) {
-                if (pEE->pOut->isXML()) {
-                    // Output "success" node
-                    AttributePairList status_attributes;
-                    status_attributes.push_back(AttributePair("success", bool_alpha2string(bSuccess)));
-                    pEE->pOut->startSingleTag("status", status_attributes, true);
-
-                    // Output error node?
-                    if (!bSuccess) {
-                        //
-                        // Start error node
-                        //
-                        pEE->pOut->startTag("error", true);
-
-                        //
-                        // error_source node
-                        // 
-
-                        // Figure out source
-                        bool bWasDB;
-                        //bool bWasCompiler;
-                        if (!bDBResult) {
-                            bWasDB = true;
-                            //bWasCompiler = false;
-                        } else if (!bCompileResult) {
-                            bWasDB = false;
-                            //bWasCompiler = true;
-                        } else {
-                            ASSERT_THROW(false,
-                                         "Source of error should be either DB or compiler...");
-                        }
-
-                        // Make source string
-                        std::string error_source_string;
-                        error_source_string = (bWasDB) ? "db" : "compiler";
-	 
-                        // Make error source attributes
-                        AttributePairList error_source_attributes;
-                        error_source_attributes.push_back(AttributePair("source", error_source_string));
-
-                        // Emit "error_source" node
-                        pEE->pOut->startSingleTag("error_source", error_source_attributes, true);
-
-                        //
-                        // error_stage node
-                        //
-
-                        // Get stage string
-                        std::string stage_string;
-                        switch (pEE->nCompilerStage) {
-                          case COMPILER_STAGE_NONE:	
-                                stage_string = "none";
-                                break;
-                          case COMPILER_STAGE_PARSE:	
-                                stage_string = "parse";
-                                break;
-                          case COMPILER_STAGE_WEED:
-                                stage_string = "weed";
-                                break;
-                          case COMPILER_STAGE_SYMBOL:
-                                stage_string = "symbol";
-                                break;
-                          case COMPILER_STAGE_TYPE:
-                                stage_string = "type";
-                                break;
-                          case COMPILER_STAGE_MONADS:
-                                stage_string = "monads";
-                                break;
-                          case COMPILER_STAGE_EXEC:
-                                stage_string = "exec";
-                                break;
-                          default:
-                                ASSERT_THROW(false,
-                                             "Unknown compiler stage");
-                                break;
-                        }
+				if (pEE->pOut->isXML()) {
+					// Output "success" node
+					AttributePairList status_attributes;
+					status_attributes.push_back(AttributePair("success", bool_alpha2string(bSuccess)));
+					pEE->pOut->startSingleTag("status", status_attributes, true);
+					
+					// Output error node?
+					if (!bSuccess) {
+						//
+						// Start error node
+						//
+						pEE->pOut->startTag("error", true);
+						
+						//
+						// error_source node
+						// 
+						
+						// Figure out source
+						bool bWasDB;
+						//bool bWasCompiler;
+						if (!bDBResult) {
+							bWasDB = true;
+							//bWasCompiler = false;
+						} else if (!bCompileResult) {
+							bWasDB = false;
+							//bWasCompiler = true;
+						} else {
+							ASSERT_THROW(false,
+								     "Source of error should be either DB or compiler...");
+						}
+						
+						// Make source string
+						std::string error_source_string;
+						error_source_string = (bWasDB) ? "db" : "compiler";
+						
+						// Make error source attributes
+						AttributePairList error_source_attributes;
+						error_source_attributes.push_back(AttributePair("source", error_source_string));
+						
+						// Emit "error_source" node
+						pEE->pOut->startSingleTag("error_source", error_source_attributes, true);
+						
+						//
+						// error_stage node
+						//
+						
+						// Get stage string
+						std::string stage_string;
+						switch (pEE->nCompilerStage) {
+						case COMPILER_STAGE_NONE:	
+							stage_string = "none";
+							break;
+						case COMPILER_STAGE_PARSE:	
+							stage_string = "parse";
+							break;
+						case COMPILER_STAGE_WEED:
+							stage_string = "weed";
+							break;
+						case COMPILER_STAGE_SYMBOL:
+							stage_string = "symbol";
+							break;
+						case COMPILER_STAGE_TYPE:
+							stage_string = "type";
+							break;
+						case COMPILER_STAGE_MONADS:
+							stage_string = "monads";
+							break;
+						case COMPILER_STAGE_EXEC:
+							stage_string = "exec";
+							break;
+						default:
+							ASSERT_THROW(false,
+								     "Unknown compiler stage");
+							break;
+						}
 	  
-                        // Make stage attributes
-                        AttributePairList error_stage_attributes;
-                        error_stage_attributes.push_back(AttributePair("stage", stage_string));
+						// Make stage attributes
+						AttributePairList error_stage_attributes;
+						error_stage_attributes.push_back(AttributePair("stage", stage_string));
 	  
-                        // Emit error_stage node
-                        pEE->pOut->startSingleTag("error_stage", error_stage_attributes, true);
+						// Emit error_stage node
+						pEE->pOut->startSingleTag("error_stage", error_stage_attributes, true);
 
-                        //
-                        // error_message_db node
-                        //
-                        pEE->pOut->startTag("error_message_db", true);
-                        std::string strError = pEE->pDB->errorMessage();
-                        pEE->pOut->outCharData(strError);
-                        pEE->pOut->endTag("error_message_db", true);
+						//
+						// error_message_db node
+						//
+						pEE->pOut->startTag("error_message_db", true);
+						std::string strError = pEE->pDB->errorMessage();
+						pEE->pOut->outCharData(strError);
+						pEE->pOut->endTag("error_message_db", true);
 	  
-                        //
-                        // error_message_compiler node
-                        //
-                        pEE->pOut->startTag("error_message_compiler", true);
-                        strError = pEE->pError->getError();
-                        pEE->pOut->outCharData(strError);
-                        pEE->pOut->endTag("error_message_compiler", true);
+						//
+						// error_message_compiler node
+						//
+						pEE->pOut->startTag("error_message_compiler", true);
+						strError = pEE->pError->getError();
+						pEE->pOut->outCharData(strError);
+						pEE->pOut->endTag("error_message_compiler", true);
 
-                        // End "error" node
-                        pEE->pOut->endTag("error", true);
-                    }
-                    pEE->pOut->flush();
-                } else if (pEE->pOut->isJSON()) {
-                    // Output "success" node
-                    pEE->pOut->jsonLabel("status_success");
-                    pEE->pOut->jsonOutValue(bSuccess);
+						// End "error" node
+						pEE->pOut->endTag("error", true);
+					}
+					pEE->pOut->flush();
+				} else if (pEE->pOut->isJSON()) {
+					// Output "success" node
+					pEE->pOut->jsonLabel("status_success");
+					pEE->pOut->jsonOutValue(bSuccess);
 
-                    // Output error node?
-                    if (!bSuccess) {
-                        //
-                        // Start error node
-                        //
-                        pEE->pOut->jsonLabel("error");
-                        pEE->pOut->jsonStartStruct();
+					// Output error node?
+					if (!bSuccess) {
+						//
+						// Start error node
+						//
+						pEE->pOut->jsonLabel("error");
+						pEE->pOut->jsonStartStruct();
+						
+						//
+						// error_source node
+						// 
+						
+						// Figure out source
+						bool bWasDB;
+						//bool bWasCompiler;
+						if (!bDBResult) {
+							bWasDB = true;
+							//bWasCompiler = false;
+						} else if (!bCompileResult) {
+							bWasDB = false;
+							//bWasCompiler = true;
+						} else {
+							ASSERT_THROW(false,
+								     "Source of error should be either DB or compiler...");
+						}
 
-                        //
-                        // error_source node
-                        // 
+						pEE->pOut->jsonLabel("error_source");
+						pEE->pOut->jsonOutValue(bWasDB ? "db" : "compiler");
 
-                        // Figure out source
-                        bool bWasDB;
-                        //bool bWasCompiler;
-                        if (!bDBResult) {
-                            bWasDB = true;
-                            //bWasCompiler = false;
-                        } else if (!bCompileResult) {
-                            bWasDB = false;
-                            //bWasCompiler = true;
-                        } else {
-                            ASSERT_THROW(false,
-                                         "Source of error should be either DB or compiler...");
-                        }
-
-                        pEE->pOut->jsonLabel("error_source");
-                        pEE->pOut->jsonOutValue(bWasDB ? "db" : "compiler");
-
-
-                        //
-                        // error_stage node
-                        //
-
-                        // Get stage string
-                        std::string stage_string;
-                        switch (pEE->nCompilerStage) {
-                          case COMPILER_STAGE_NONE:	
-                                stage_string = "none";
-                                break;
-                          case COMPILER_STAGE_PARSE:	
-                                stage_string = "parse";
-                                break;
-                          case COMPILER_STAGE_WEED:
-                                stage_string = "weed";
-                                break;
-                          case COMPILER_STAGE_SYMBOL:
-                                stage_string = "symbol";
-                                break;
-                          case COMPILER_STAGE_TYPE:
-                                stage_string = "type";
-                                break;
-                          case COMPILER_STAGE_MONADS:
-                                stage_string = "monads";
-                                break;
-                          case COMPILER_STAGE_EXEC:
-                                stage_string = "exec";
-                                break;
-                          default:
-                                ASSERT_THROW(false,
-                                             "Unknown compiler stage");
-                                break;
-                        }
-	  
-                        pEE->pOut->jsonLabel("error_stage");
-                        pEE->pOut->jsonOutValue(stage_string);
+						
+						//
+						// error_stage node
+						//
+						
+						// Get stage string
+						std::string stage_string;
+						switch (pEE->nCompilerStage) {
+						case COMPILER_STAGE_NONE:	
+							stage_string = "none";
+							break;
+						case COMPILER_STAGE_PARSE:	
+							stage_string = "parse";
+							break;
+						case COMPILER_STAGE_WEED:
+							stage_string = "weed";
+							break;
+						case COMPILER_STAGE_SYMBOL:
+							stage_string = "symbol";
+							break;
+						case COMPILER_STAGE_TYPE:
+							stage_string = "type";
+							break;
+						case COMPILER_STAGE_MONADS:
+							stage_string = "monads";
+							break;
+						case COMPILER_STAGE_EXEC:
+							stage_string = "exec";
+							break;
+						default:
+							ASSERT_THROW(false,
+								     "Unknown compiler stage");
+							break;
+						}
+						
+						pEE->pOut->jsonLabel("error_stage");
+						pEE->pOut->jsonOutValue(stage_string);
                         
+						
+						//
+						// error_message_db node
+						//
+						pEE->pOut->jsonLabel("error_message_db");
+						pEE->pOut->jsonOutValue(pEE->pDB->errorMessage());
+						
 
-                        //
-                        // error_message_db node
-                        //
-                        pEE->pOut->jsonLabel("error_message_db");
-                        pEE->pOut->jsonOutValue(pEE->pDB->errorMessage());
+						//
+						// error_message_compiler node
+						//
+						pEE->pOut->jsonLabel("error_message_compiler");
+						pEE->pOut->jsonOutValue(pEE->pError->getError());
 
-
-                        //
-                        // error_message_compiler node
-                        //
-                        pEE->pOut->jsonLabel("error_message_compiler");
-                        pEE->pOut->jsonOutValue(pEE->pError->getError());
-
-                        // End "error" node
-                        pEE->pOut->jsonEndStruct();
-                    }
-                }
-            }
+						// End "error" node
+						pEE->pOut->jsonEndStruct();
+					}
+				}
+			}
 
 			// Write to log
 			LOG_WRITE_TIME("mqlExecuteStream()", "Printing results.");
@@ -114169,34 +115176,36 @@ bool mqlExecuteStream(MQLExecEnv *pEE,
 
 			// out post-result material
 			if (bPrintResult) {
-                if (pEE->pOut->isXML()) {
-                    pEE->pOut->endTag("mql_result", true);
-                    pEE->pOut->newline();
-                    pEE->pOut->flush();
-                } else if (pEE->pOut->isJSON()) {
-                    pEE->pOut->jsonEndStruct();
-                }
-            }
+				if (pEE->pOut->isXML()) {
+					pEE->pOut->endTag("mql_result", true);
+					pEE->pOut->newline();
+					pEE->pOut->flush();
+				} else if (pEE->pOut->isJSON()) {
+					pEE->pOut->jsonEndStruct();
+				}
+			}
 		}
-    
+		
 		// Clean up
 		query = "";
 	} while (!pQSL->noMoreInput() && !(pEE->bQuit));
   
 	// Clean up
 	delete pQSL;
-
+	
 	// Take care of XML footer
-	if (pEE->pOut->isXML()) {
-		pEE->pOut->endTag("mql_results", true);
-		pEE->pOut->newline();
-		pEE->pOut->flush();
-	} else if (pEE->pOut->isJSON()) {
-        pEE->pOut->jsonEndArray();
-        pEE->pOut->jsonEndStruct();
-		pEE->pOut->newline();
-    }
-
+	if (bPrintResult) {
+		if (pEE->pOut->isXML()) {
+			pEE->pOut->endTag("mql_results", true);
+			pEE->pOut->newline();
+			pEE->pOut->flush();
+		} else if (pEE->pOut->isJSON()) {
+			pEE->pOut->jsonEndArray();
+			pEE->pOut->jsonEndStruct();
+			pEE->pOut->newline();
+		}
+	}
+	
 	// Unset pCallback 
 	//
 	// That way, we don't clean() it if it has gone away once we
@@ -114356,11 +115365,10 @@ bool mqlGetNextQuery(std::istream *pStrin, std::string& result)
 	}
 }
   
-/**************** A copy of MQL/emdros_environment.cpp *****************/
 
-
+/**************** A copy of MQL/emdros_environment.cpp ****************/
 #line 1 "MQL/emdros_environment.cpp"
-        /*
+/*
  * emdros_environment.cpp
  *
  * Emdros environment
@@ -114454,78 +115462,78 @@ bool mqlGetNextQuery(std::istream *pStrin, std::string& result)
 
 
 #line 91 "MQL/emdros_environment.cpp"
-        /**************** already included emdf_output.h -- not including again *****************/
+/**************** already included emdf_output.h -- not including again *****************/
 
 
 #line 92 "MQL/emdros_environment.cpp"
-        /**************** already included mql_result.h -- not including again *****************/
+/**************** already included mql_result.h -- not including again *****************/
 
 
 #line 93 "MQL/emdros_environment.cpp"
-        /**************** already included mql_types.h -- not including again *****************/
+/**************** already included mql_types.h -- not including again *****************/
 
 
 #line 94 "MQL/emdros_environment.cpp"
-        /**************** already included mql_error.h -- not including again *****************/
+/**************** already included mql_error.h -- not including again *****************/
 
 
 #line 95 "MQL/emdros_environment.cpp"
-        /**************** already included mql_execution_environment.h -- not including again *****************/
+/**************** already included mql_execution_environment.h -- not including again *****************/
 
 
 #line 96 "MQL/emdros_environment.cpp"
-        /**************** already included environment_emdros.h -- not including again *****************/
+/**************** already included environment_emdros.h -- not including again *****************/
 
 
 #line 97 "MQL/emdros_environment.cpp"
-        /**************** already included emdf_output.h -- not including again *****************/
+/**************** already included emdf_output.h -- not including again *****************/
 
 
 #line 98 "MQL/emdros_environment.cpp"
-        /**************** already included mql_execute.h -- not including again *****************/
+/**************** already included mql_execute.h -- not including again *****************/
 
 
 #line 99 "MQL/emdros_environment.cpp"
-        /**************** already included mql_sheaf.h -- not including again *****************/
+/**************** already included mql_sheaf.h -- not including again *****************/
 
 
 #line 100 "MQL/emdros_environment.cpp"
-        #include <string>
+#include <string>
 #include <iostream>
 /**************** already included debug.h -- not including again *****************/
 
 
 #line 103 "MQL/emdros_environment.cpp"
-        
+
 #if USE_POSTGRESQL
 /**************** already included pgemdfdb.h -- not including again *****************/
 
 
 #line 106 "MQL/emdros_environment.cpp"
-        #endif
+#endif
 #if USE_MYSQL
 /**************** already included mysqlemdfdb.h -- not including again *****************/
 
 
 #line 109 "MQL/emdros_environment.cpp"
-        #endif
+#endif
 #if USE_SQLITE2
 /**************** already included sqliteemdfdb.h -- not including again *****************/
 
 
 #line 112 "MQL/emdros_environment.cpp"
-        #endif
+#endif
 #if USE_SQLITE3
 /**************** already included sqlite3emdfdb.h -- not including again *****************/
 
 
 #line 115 "MQL/emdros_environment.cpp"
-        #endif
+#endif
 /**************** already included bptemdfdb.h -- not including again *****************/
 
 
 #line 117 "MQL/emdros_environment.cpp"
-        
+
 // Only used by constructors
 /** Initialize EmdrosEnv
  *\internal
@@ -115739,11 +116747,10 @@ bool EmdrosEnv::isTable(void)
 		return pResult->isTable();
 	}
 }
-/**************** A copy of harvest/memobject.cpp *****************/
 
-
+/**************** A copy of harvest/memobject.cpp ****************/
 #line 1 "harvest/memobject.cpp"
-        /*
+/*
  * memobject.cpp
  *
  * MemObject classes (and supporting classes)
@@ -115829,11 +116836,9 @@ bool EmdrosEnv::isTable(void)
  **************************************************************************/
 
 /**************** leaving harvest/memobject.cpp temporarily *****************/
-/**************** A copy of include/memobject.h *****************/
-
-
+/**************** A copy of include/memobject.h ****************/
 #line 1 "include/memobject.h"
-        /*
+/*
  * memobject.h
  *
  * MemObject classes (and supporting classes)
@@ -115924,11 +116929,11 @@ bool EmdrosEnv::isTable(void)
 
 
 #line 88 "include/memobject.h"
-        /**************** already included monads.h -- not including again *****************/
+/**************** already included monads.h -- not including again *****************/
 
 
 #line 89 "include/memobject.h"
-        #include <map>
+#include <map>
 #include <vector>
 #include <string>
 
@@ -115979,16 +116984,17 @@ class MemObject {
 };
 
 #endif // MEMOBJECT_H__
+
 /**************** continuing harvest/memobject.cpp where we left off *****************/
 
 
 #line 86 "harvest/memobject.cpp"
-        #include <string>
+#include <string>
 /**************** already included debug.h -- not including again *****************/
 
 
 #line 88 "harvest/memobject.cpp"
-        
+
 MemObject::MemObject(int nNoOfFeatures)
 	: m_OTN_surrogate(0), m_id_d(NIL)
 {
@@ -116055,18 +117061,17 @@ std::string MemObject::getFeature(unsigned int nFeatureIndex)
 
 
 
-/**************** A copy of harvest/templatelang_classes.cpp *****************/
 
-
+/**************** A copy of harvest/templatelang_classes.cpp ****************/
 #line 1 "harvest/templatelang_classes.cpp"
-        /*
+/*
  * templatelang_classes.cpp
  *
  * Template language classes
  *
  * Ulrik Sandborg-Petersen
  * Created: 7/28-2008
- * Last update: 2/23-2016
+ * Last update: 4/16-2016
  *
  */
 /************************************************************************
@@ -116148,23 +117153,21 @@ std::string MemObject::getFeature(unsigned int nFeatureIndex)
 
 
 #line 86 "harvest/templatelang_classes.cpp"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 87 "harvest/templatelang_classes.cpp"
-        /**************** leaving harvest/templatelang_classes.cpp temporarily *****************/
-/**************** A copy of include/templatelang_classes.h *****************/
-
-
+/**************** leaving harvest/templatelang_classes.cpp temporarily *****************/
+/**************** A copy of include/templatelang_classes.h ****************/
 #line 1 "include/templatelang_classes.h"
-        /*
+/*
  * templatelang.h
  *
  * Template language classes
  *
  * Ulrik Sandborg-Petersen
  * Created: 7/28-2008
- * Last update: 2/23-2016
+ * Last update: 4/11-2016
  *
  */
 /************************************************************************
@@ -116250,11 +117253,9 @@ std::string MemObject::getFeature(unsigned int nFeatureIndex)
 #include <list>
 
 /**************** leaving include/templatelang_classes.h temporarily *****************/
-/**************** A copy of include/templatelang_lexer.h *****************/
-
-
+/**************** A copy of include/templatelang_lexer.h ****************/
 #line 1 "include/templatelang_lexer.h"
-        /*
+/*
  * templatelang_lexer.h
  *
  * TEMPLATELANG Lexer based on re2c
@@ -116347,7 +117348,7 @@ std::string MemObject::getFeature(unsigned int nFeatureIndex)
 
 
 #line 90 "include/templatelang_lexer.h"
-        
+
 class TemplateLanguageScanner {
 protected:
 	const char *sz;
@@ -116372,19 +117373,20 @@ private:
 
 
 #endif // TemplateLang_LEXER__H__
+
 /**************** continuing include/templatelang_classes.h where we left off *****************/
 
 
 #line 93 "include/templatelang_classes.h"
-        /**************** already included qdxml.h -- not including again *****************/
+/**************** already included qdxml.h -- not including again *****************/
 
 
 #line 94 "include/templatelang_classes.h"
-        /**************** already included arena.h -- not including again *****************/
+/**************** already included arena.h -- not including again *****************/
 
 
 #line 95 "include/templatelang_classes.h"
-        
+
 class TemplateLangExecEnv; // Forward declaration
 class MemObject; // Forward declaration
 class JSONValue; // Forward declaration
@@ -116467,12 +117469,18 @@ class TemplateSimpleNode : public TemplateASTNode {
 	virtual void exec(TemplateLangExecEnv *pEE);
 };
 
+typedef enum {
+	kMKXML,
+	kMKJSON,
+	kMKNone
+} eMangleKind;
+
 class TemplateFeature : public TemplateASTNode {
  protected:
 	long m_index;
-	bool m_bMangleFeature;
+	eMangleKind m_mangle_kind;
  public:
-	TemplateFeature(long index, bool bMangleFeature);
+	TemplateFeature(long index, eMangleKind mangle_kind);
 	virtual ~TemplateFeature();
 
 	virtual void exec(TemplateLangExecEnv *pEE);
@@ -116869,67 +117877,68 @@ extern TemplateASTNode *parseTemplate(TemplateLangExecEnv* pEE, const std::strin
 extern std::string escapeXMLEntities(const std::string& input);
 
 #endif
+
 /**************** continuing harvest/templatelang_classes.cpp where we left off *****************/
 
 
 #line 88 "harvest/templatelang_classes.cpp"
-        /**************** leaving harvest/templatelang_classes.cpp temporarily *****************/
-/**************** A copy of harvest/templatelangpars.h *****************/
-
-
+/**************** leaving harvest/templatelang_classes.cpp temporarily *****************/
+/**************** A copy of harvest/templatelangpars.h ****************/
 #line 1 "harvest/templatelangpars.h"
-        #define T_TEMPLATELANG_KEY_ID_D                         1
+#define T_TEMPLATELANG_KEY_ID_D                         1
 #define T_TEMPLATELANG_KEY_FIRSTMONAD                   2
 #define T_TEMPLATELANG_KEY_FEATURE                      3
 #define T_TEMPLATELANG_KEY_SPACE                        4
 #define T_TEMPLATELANG_INTEGER                          5
 #define T_TEMPLATELANG_KEY_BB_CLOSE                     6
-#define T_TEMPLATELANG_KEY_FEATURENOMANGLE              7
-#define T_TEMPLATELANG_KEY_DBNAME                       8
-#define T_TEMPLATELANG_KEY_ATTRIB                       9
-#define T_TEMPLATELANG_IDENTIFIER                      10
-#define T_TEMPLATELANG_KEY_ATTRIB_NOMANGLE             11
-#define T_TEMPLATELANG_KEY_COPYATTRIBS                 12
-#define T_TEMPLATELANG_KEY_COUNTER                     13
-#define T_TEMPLATELANG_STRING                          14
-#define T_TEMPLATELANG_KEY_BARE_FORMAT                 15
-#define T_TEMPLATELANG_KEY_SETCOUNTER                  16
-#define T_TEMPLATELANG_KEY_BARE_VAR                    17
-#define T_TEMPLATELANG_KEY_INCCOUNTER                  18
-#define T_TEMPLATELANG_KEY_DECCOUNTER                  19
-#define T_TEMPLATELANG_KEY_LISTEMIT                    20
-#define T_TEMPLATELANG_KEY_LISTCLEAR                   21
-#define T_TEMPLATELANG_KEY_DICTLOOKUP                  22
-#define T_TEMPLATELANG_KEY_BARE_FEATURE                23
-#define T_TEMPLATELANG_KEY_BARE_FEATURENOMANGLE        24
-#define T_TEMPLATELANG_KEY_BARE_VARNOMANGLE            25
-#define T_TEMPLATELANG_KEY_BARE_COUNTER                26
-#define T_TEMPLATELANG_KEY_SETNIXING_ALL               27
-#define T_TEMPLATELANG_KEY_SETNIXING_DOC               28
-#define T_TEMPLATELANG_KEY_SETNIXING_OFF               29
-#define T_TEMPLATELANG_KEY_IF_FEATUREEQUAL             30
-#define T_TEMPLATELANG_KEY_IF_VAREQUAL                 31
-#define T_TEMPLATELANG_KEY_IF_LISTEMPTY                32
-#define T_TEMPLATELANG_KEY_IF_HASATTRIB                33
-#define T_TEMPLATELANG_KEY_IF_ATTRIBEQUAL              34
-#define T_TEMPLATELANG_KEY_ENDIF                       35
-#define T_TEMPLATELANG_KEY_ELSE                        36
-#define T_TEMPLATELANG_KEY_LISTAPPENDBEGIN             37
-#define T_TEMPLATELANG_KEY_LISTAPPENDEND               38
-#define T_TEMPLATELANG_KEY_SETVAR                      39
-#define T_TEMPLATELANG_KEY_SETVAREND                   40
-#define T_TEMPLATELANG_KEY_EMITVAR                     41
-#define T_TEMPLATELANG_CHAR                            42
-#define T_TEMPLATELANG_KEY_NEWLINE                     43
+#define T_TEMPLATELANG_KEY_FEATUREJSONMANGLE            7
+#define T_TEMPLATELANG_KEY_FEATURENOMANGLE              8
+#define T_TEMPLATELANG_KEY_DBNAME                       9
+#define T_TEMPLATELANG_KEY_ATTRIB                      10
+#define T_TEMPLATELANG_IDENTIFIER                      11
+#define T_TEMPLATELANG_KEY_ATTRIB_NOMANGLE             12
+#define T_TEMPLATELANG_KEY_COPYATTRIBS                 13
+#define T_TEMPLATELANG_KEY_COUNTER                     14
+#define T_TEMPLATELANG_STRING                          15
+#define T_TEMPLATELANG_KEY_BARE_FORMAT                 16
+#define T_TEMPLATELANG_KEY_SETCOUNTER                  17
+#define T_TEMPLATELANG_KEY_BARE_VAR                    18
+#define T_TEMPLATELANG_KEY_INCCOUNTER                  19
+#define T_TEMPLATELANG_KEY_DECCOUNTER                  20
+#define T_TEMPLATELANG_KEY_LISTEMIT                    21
+#define T_TEMPLATELANG_KEY_LISTCLEAR                   22
+#define T_TEMPLATELANG_KEY_DICTLOOKUP                  23
+#define T_TEMPLATELANG_KEY_BARE_FEATURE                24
+#define T_TEMPLATELANG_KEY_BARE_FEATURENOMANGLE        25
+#define T_TEMPLATELANG_KEY_BARE_VARNOMANGLE            26
+#define T_TEMPLATELANG_KEY_BARE_COUNTER                27
+#define T_TEMPLATELANG_KEY_SETNIXING_ALL               28
+#define T_TEMPLATELANG_KEY_SETNIXING_DOC               29
+#define T_TEMPLATELANG_KEY_SETNIXING_OFF               30
+#define T_TEMPLATELANG_KEY_IF_FEATUREEQUAL             31
+#define T_TEMPLATELANG_KEY_IF_VAREQUAL                 32
+#define T_TEMPLATELANG_KEY_IF_LISTEMPTY                33
+#define T_TEMPLATELANG_KEY_IF_HASATTRIB                34
+#define T_TEMPLATELANG_KEY_IF_ATTRIBEQUAL              35
+#define T_TEMPLATELANG_KEY_ENDIF                       36
+#define T_TEMPLATELANG_KEY_ELSE                        37
+#define T_TEMPLATELANG_KEY_LISTAPPENDBEGIN             38
+#define T_TEMPLATELANG_KEY_LISTAPPENDEND               39
+#define T_TEMPLATELANG_KEY_SETVAR                      40
+#define T_TEMPLATELANG_KEY_SETVAREND                   41
+#define T_TEMPLATELANG_KEY_EMITVAR                     42
+#define T_TEMPLATELANG_CHAR                            43
+#define T_TEMPLATELANG_KEY_NEWLINE                     44
+
 /**************** continuing harvest/templatelang_classes.cpp where we left off *****************/
 
 
 #line 89 "harvest/templatelang_classes.cpp"
-        /**************** already included memobject.h -- not including again *****************/
+/**************** already included memobject.h -- not including again *****************/
 
 
 #line 90 "harvest/templatelang_classes.cpp"
-        
+
 //////////////////////////////////////////////////////////////////
 //
 // TemplateASTNode
@@ -117029,10 +118038,10 @@ void TemplateSimpleNode::exec(TemplateLangExecEnv *pEE)
 //
 //////////////////////////////////////////////////////////////////
 
-TemplateFeature::TemplateFeature(long index, bool bMangleFeature)
+TemplateFeature::TemplateFeature(long index, eMangleKind mangle_kind)
 {
 	m_index = index;
-	m_bMangleFeature = bMangleFeature;
+	m_mangle_kind = mangle_kind;
 }
 
 
@@ -117045,15 +118054,25 @@ void TemplateFeature::exec(TemplateLangExecEnv *pEE)
 {
 	TemplateASTNode::exec(pEE);
 
-	if (m_bMangleFeature) {
-		std::string tmp(pEE->m_pObject->getFeature(m_index));
+	std::string tmp(pEE->m_pObject->getFeature(m_index));
+	switch (m_mangle_kind) {
+	case kMKXML:
 		if (hasXMLCharsToMangle(tmp)) {
 			pEE->addToOutput(escapeXMLEntities(tmp));
 		} else {
 			pEE->addToOutput(tmp);
 		}
-	} else {
-		pEE->addToOutput(pEE->m_pObject->getFeature(m_index));
+		break;
+	case kMKJSON:
+		if (hasJSONCharsToMangle(tmp)) {
+			pEE->addToOutput(escapeJSONChars(tmp));
+		} else {
+			pEE->addToOutput(tmp);
+		}
+		break;
+	case kMKNone:
+		pEE->addToOutput(tmp);
+		break;
 	}
 }
 
@@ -118022,6 +119041,7 @@ TemplateLangExecEnv::TemplateLangExecEnv()
 
 TemplateLangExecEnv::~TemplateLangExecEnv()
 {
+	clean();
 	delete m_pError;
 	delete m_pNode;
 	if (m_bOwnsBigString) {
@@ -118517,11 +119537,10 @@ TemplateASTNode *parseTemplate(TemplateLangExecEnv* pEE, const std::string& temp
 	return pTemplateLangResult;
 }
 
-/**************** A copy of harvest/templatelang_lexer.cpp *****************/
 
-
+/**************** A copy of harvest/templatelang_lexer.cpp ****************/
 #line 1 "harvest/templatelang_lexer.cpp"
-        /* Generated by re2c 0.13.5 on Wed Mar 30 17:16:17 2016 */
+/* Generated by re2c 0.13.5 on Sun May  8 22:29:11 2016 */
 #line 1 "./templatelang.re"
 /*
  * templatelang.re
@@ -118530,23 +119549,23 @@ TemplateASTNode *parseTemplate(TemplateLangExecEnv* pEE, const std::string& temp
  *
  * Ulrik Sandborg-Petersen
  * Created: 7/28-2008
- * Last update: 2/23-2016
+ * Last update: 4/11-2016
  *
  */
 /**************** already included templatelang_lexer.h -- not including again *****************/
 
 
 #line 13 "harvest/templatelang_lexer.cpp"
-        /**************** already included templatelangpars.h -- not including again *****************/
+/**************** already included templatelangpars.h -- not including again *****************/
 
 
 #line 14 "harvest/templatelang_lexer.cpp"
-        #include <iostream>
+#include <iostream>
 /**************** already included string_func.h -- not including again *****************/
 
 
 #line 16 "harvest/templatelang_lexer.cpp"
-        
+
 #define YYCTYPE         unsigned char
 #define YYCURSOR        cur
 #define YYLIMIT         lim
@@ -118677,9 +119696,9 @@ int TemplateLanguageScanner::scan(Token *pYYLVAL)
 tt2:
 	yyaccept = 0;
 	yych = *(YYMARKER = ++YYCURSOR);
-	if (yych == '}') goto tt352;
+	if (yych == '}') goto tt363;
 tt3:
-#line 168 "./templatelang.re"
+#line 169 "./templatelang.re"
 	{ TEMPLATELANG_TOKEN_RETURN(" ", T_TEMPLATELANG_KEY_SPACE); }
 #line 153 "./templatelang_lexer.cpp"
 tt4:
@@ -118687,7 +119706,7 @@ tt4:
 	yych = *(YYMARKER = ++YYCURSOR);
 	if (yych == '{') goto tt74;
 tt5:
-#line 175 "./templatelang.re"
+#line 176 "./templatelang.re"
 	{ yylval->setChar(*tok); TEMPLATELANG_TOKEN_RETURN(CHAR_MAGIC, T_TEMPLATELANG_CHAR);}
 #line 161 "./templatelang_lexer.cpp"
 tt6:
@@ -118695,7 +119714,7 @@ tt6:
 	if ((yych = *YYCURSOR) == 'o') goto tt67;
 	goto tt32;
 tt7:
-#line 162 "./templatelang.re"
+#line 163 "./templatelang.re"
 	{ addToken(); TEMPLATELANG_TOKEN_RETURN("identifier", T_TEMPLATELANG_IDENTIFIER);}
 #line 169 "./templatelang_lexer.cpp"
 tt8:
@@ -118715,35 +119734,35 @@ tt11:
 	yych = *YYCURSOR;
 	goto tt30;
 tt12:
-#line 163 "./templatelang.re"
+#line 164 "./templatelang.re"
 	{ addInteger();
                          TEMPLATELANG_TOKEN_RETURN(INTEGER_MAGIC, T_TEMPLATELANG_INTEGER); }
 #line 190 "./templatelang_lexer.cpp"
 tt13:
 	++YYCURSOR;
-#line 165 "./templatelang.re"
+#line 166 "./templatelang.re"
 	{ yylval->setString(new std::string);
 		         goto stringsq; 
                        }
 #line 197 "./templatelang_lexer.cpp"
 tt15:
 	++YYCURSOR;
-#line 169 "./templatelang.re"
+#line 170 "./templatelang.re"
 	{ yylval->setChar('\t'); TEMPLATELANG_TOKEN_RETURN(CHAR_MAGIC, T_TEMPLATELANG_CHAR); }
 #line 202 "./templatelang_lexer.cpp"
 tt17:
 	++YYCURSOR;
-#line 170 "./templatelang.re"
+#line 171 "./templatelang.re"
 	{ yylval->setChar('\r'); TEMPLATELANG_TOKEN_RETURN(CHAR_MAGIC, T_TEMPLATELANG_CHAR); }
 #line 207 "./templatelang_lexer.cpp"
 tt19:
 	++YYCURSOR;
-#line 171 "./templatelang.re"
+#line 172 "./templatelang.re"
 	{ TEMPLATELANG_TOKEN_RETURN("\\n", T_TEMPLATELANG_KEY_NEWLINE); }
 #line 212 "./templatelang_lexer.cpp"
 tt21:
 	++YYCURSOR;
-#line 172 "./templatelang.re"
+#line 173 "./templatelang.re"
 	{ if (cur >= lim) { goto end; } }
 #line 217 "./templatelang_lexer.cpp"
 tt23:
@@ -118756,12 +119775,12 @@ tt24:
 	goto tt5;
 tt25:
 	++YYCURSOR;
-#line 174 "./templatelang.re"
+#line 175 "./templatelang.re"
 	{ yylval->setChar('\''); TEMPLATELANG_TOKEN_RETURN(CHAR_MAGIC, T_TEMPLATELANG_CHAR); }
 #line 230 "./templatelang_lexer.cpp"
 tt27:
 	++YYCURSOR;
-#line 173 "./templatelang.re"
+#line 174 "./templatelang.re"
 	{ yylval->setChar('\\'); TEMPLATELANG_TOKEN_RETURN(CHAR_MAGIC, T_TEMPLATELANG_CHAR); }
 #line 235 "./templatelang_lexer.cpp"
 tt29:
@@ -118933,7 +119952,7 @@ tt58:
 		}
 	}
 tt66:
-#line 153 "./templatelang.re"
+#line 154 "./templatelang.re"
 	{ TEMPLATELANG_TOKEN_RETURN("bare-featurenomangle", T_TEMPLATELANG_KEY_BARE_FEATURENOMANGLE); }
 #line 407 "./templatelang_lexer.cpp"
 tt67:
@@ -118962,7 +119981,7 @@ tt67:
 	}
 tt73:
 #line 147 "./templatelang.re"
-	{ TEMPLATELANG_TOKEN_RETURN("bare-feature", T_TEMPLATELANG_KEY_BARE_COUNTER); }
+	{ TEMPLATELANG_TOKEN_RETURN("bare-counter", T_TEMPLATELANG_KEY_BARE_COUNTER); }
 #line 435 "./templatelang_lexer.cpp"
 tt74:
 	yych = *++YYCURSOR;
@@ -118983,7 +120002,7 @@ tt75:
 		if (yyaccept <= 3) {
 			goto tt225;
 		} else {
-			goto tt269;
+			goto tt280;
 		}
 	}
 tt76:
@@ -119002,20 +120021,20 @@ tt76:
 tt77:
 	yych = *++YYCURSOR;
 	if (yych <= 'e') {
-		if (yych == 'd') goto tt279;
+		if (yych == 'd') goto tt290;
 		goto tt75;
 	} else {
-		if (yych <= 'f') goto tt281;
-		if (yych == 'n') goto tt280;
+		if (yych <= 'f') goto tt292;
+		if (yych == 'n') goto tt291;
 		goto tt75;
 	}
 tt78:
 	yych = *++YYCURSOR;
-	if (yych == 't') goto tt264;
+	if (yych == 't') goto tt275;
 	goto tt75;
 tt79:
 	yych = *++YYCURSOR;
-	if (yych == 'o') goto tt247;
+	if (yych == 'o') goto tt258;
 	goto tt75;
 tt80:
 	yych = *++YYCURSOR;
@@ -119375,7 +120394,7 @@ tt210:
 #line 844 "./templatelang_lexer.cpp"
 tt218:
 	yych = *++YYCURSOR;
-	if (yych == 'r') goto tt235;
+	if (yych == 'r') goto tt246;
 	goto tt75;
 tt219:
 	yych = *++YYCURSOR;
@@ -119390,14 +120409,40 @@ tt219:
 	if (yych != 'e') goto tt75;
 	yyaccept = 3;
 	yych = *(YYMARKER = ++YYCURSOR);
+	if (yych == 'j') goto tt227;
 	if (yych == 'n') goto tt226;
 tt225:
 #line 146 "./templatelang.re"
 	{ TEMPLATELANG_TOKEN_RETURN("feature", T_TEMPLATELANG_KEY_FEATURE); }
-#line 866 "./templatelang_lexer.cpp"
+#line 867 "./templatelang_lexer.cpp"
 tt226:
 	yych = *++YYCURSOR;
+	if (yych == 'o') goto tt238;
+	goto tt75;
+tt227:
+	yych = *++YYCURSOR;
+	if (yych != 's') goto tt75;
+	yych = *++YYCURSOR;
 	if (yych != 'o') goto tt75;
+	yych = *++YYCURSOR;
+	if (yych != 'n') goto tt75;
+	yych = *++YYCURSOR;
+	if (yych != 'm') goto tt75;
+	yych = *++YYCURSOR;
+	if (yych != 'a') goto tt75;
+	yych = *++YYCURSOR;
+	if (yych != 'n') goto tt75;
+	yych = *++YYCURSOR;
+	if (yych != 'g') goto tt75;
+	yych = *++YYCURSOR;
+	if (yych != 'l') goto tt75;
+	yych = *++YYCURSOR;
+	if (yych != 'e') goto tt75;
+	++YYCURSOR;
+#line 153 "./templatelang.re"
+	{ TEMPLATELANG_TOKEN_RETURN("featurejsonmangle", T_TEMPLATELANG_KEY_FEATUREJSONMANGLE); }
+#line 894 "./templatelang_lexer.cpp"
+tt238:
 	yych = *++YYCURSOR;
 	if (yych != 'm') goto tt75;
 	yych = *++YYCURSOR;
@@ -119413,8 +120458,8 @@ tt226:
 	++YYCURSOR;
 #line 152 "./templatelang.re"
 	{ TEMPLATELANG_TOKEN_RETURN("featurenomangle", T_TEMPLATELANG_KEY_FEATURENOMANGLE); }
-#line 885 "./templatelang_lexer.cpp"
-tt235:
+#line 911 "./templatelang_lexer.cpp"
+tt246:
 	yych = *++YYCURSOR;
 	if (yych != 's') goto tt75;
 	yych = *++YYCURSOR;
@@ -119438,17 +120483,17 @@ tt235:
 	++YYCURSOR;
 #line 129 "./templatelang.re"
 	{ TEMPLATELANG_TOKEN_RETURN("firstmonad", T_TEMPLATELANG_KEY_FIRSTMONAD); }
-#line 910 "./templatelang_lexer.cpp"
-tt247:
+#line 936 "./templatelang_lexer.cpp"
+tt258:
 	yych = *++YYCURSOR;
-	if (yych == 'p') goto tt248;
-	if (yych == 'u') goto tt249;
+	if (yych == 'p') goto tt259;
+	if (yych == 'u') goto tt260;
 	goto tt75;
-tt248:
+tt259:
 	yych = *++YYCURSOR;
-	if (yych == 'y') goto tt255;
+	if (yych == 'y') goto tt266;
 	goto tt75;
-tt249:
+tt260:
 	yych = *++YYCURSOR;
 	if (yych != 'n') goto tt75;
 	yych = *++YYCURSOR;
@@ -119460,8 +120505,8 @@ tt249:
 	++YYCURSOR;
 #line 132 "./templatelang.re"
 	{ TEMPLATELANG_TOKEN_RETURN("counter", T_TEMPLATELANG_KEY_COUNTER); }
-#line 932 "./templatelang_lexer.cpp"
-tt255:
+#line 958 "./templatelang_lexer.cpp"
+tt266:
 	yych = *++YYCURSOR;
 	if (yych != 'a') goto tt75;
 	yych = *++YYCURSOR;
@@ -119477,10 +120522,10 @@ tt255:
 	yych = *++YYCURSOR;
 	if (yych != 's') goto tt75;
 	++YYCURSOR;
-#line 155 "./templatelang.re"
+#line 156 "./templatelang.re"
 	{ TEMPLATELANG_TOKEN_RETURN("copyattribs", T_TEMPLATELANG_KEY_COPYATTRIBS); }
-#line 951 "./templatelang_lexer.cpp"
-tt264:
+#line 977 "./templatelang_lexer.cpp"
+tt275:
 	yych = *++YYCURSOR;
 	if (yych != 't') goto tt75;
 	yych = *++YYCURSOR;
@@ -119491,12 +120536,12 @@ tt264:
 	if (yych != 'b') goto tt75;
 	yyaccept = 4;
 	yych = *(YYMARKER = ++YYCURSOR);
-	if (yych == 'n') goto tt270;
-tt269:
-#line 154 "./templatelang.re"
+	if (yych == 'n') goto tt281;
+tt280:
+#line 155 "./templatelang.re"
 	{ TEMPLATELANG_TOKEN_RETURN("attrib", T_TEMPLATELANG_KEY_ATTRIB); }
-#line 967 "./templatelang_lexer.cpp"
-tt270:
+#line 993 "./templatelang_lexer.cpp"
+tt281:
 	yych = *++YYCURSOR;
 	if (yych != 'o') goto tt75;
 	yych = *++YYCURSOR;
@@ -119512,46 +120557,46 @@ tt270:
 	yych = *++YYCURSOR;
 	if (yych != 'e') goto tt75;
 	++YYCURSOR;
-#line 156 "./templatelang.re"
+#line 157 "./templatelang.re"
 	{ TEMPLATELANG_TOKEN_RETURN("attribnomangle", T_TEMPLATELANG_KEY_ATTRIB_NOMANGLE); }
-#line 986 "./templatelang_lexer.cpp"
-tt279:
+#line 1012 "./templatelang_lexer.cpp"
+tt290:
 	yych = *++YYCURSOR;
-	if (yych == '_') goto tt346;
+	if (yych == '_') goto tt357;
 	goto tt75;
-tt280:
+tt291:
 	yych = *++YYCURSOR;
-	if (yych == 'c') goto tt337;
+	if (yych == 'c') goto tt348;
 	goto tt75;
-tt281:
+tt292:
 	yych = *++YYCURSOR;
 	if (yych != ' ') goto tt75;
 	yych = *++YYCURSOR;
 	switch (yych) {
-	case 'a':	goto tt287;
-	case 'f':	goto tt283;
-	case 'h':	goto tt286;
-	case 'l':	goto tt285;
-	case 'v':	goto tt284;
+	case 'a':	goto tt298;
+	case 'f':	goto tt294;
+	case 'h':	goto tt297;
+	case 'l':	goto tt296;
+	case 'v':	goto tt295;
 	default:	goto tt75;
 	}
-tt283:
+tt294:
 	yych = *++YYCURSOR;
-	if (yych == 'e') goto tt325;
+	if (yych == 'e') goto tt336;
 	goto tt75;
-tt284:
+tt295:
 	yych = *++YYCURSOR;
-	if (yych == 'a') goto tt317;
+	if (yych == 'a') goto tt328;
 	goto tt75;
-tt285:
+tt296:
 	yych = *++YYCURSOR;
-	if (yych == 'i') goto tt308;
+	if (yych == 'i') goto tt319;
 	goto tt75;
-tt286:
+tt297:
 	yych = *++YYCURSOR;
-	if (yych == 'a') goto tt299;
+	if (yych == 'a') goto tt310;
 	goto tt75;
-tt287:
+tt298:
 	yych = *++YYCURSOR;
 	if (yych != 't') goto tt75;
 	yych = *++YYCURSOR;
@@ -119573,10 +120618,10 @@ tt287:
 	yych = *++YYCURSOR;
 	if (yych != 'l') goto tt75;
 	++YYCURSOR;
-#line 161 "./templatelang.re"
+#line 162 "./templatelang.re"
 	{ TEMPLATELANG_TOKEN_RETURN("attribequal", T_TEMPLATELANG_KEY_IF_ATTRIBEQUAL); }
-#line 1047 "./templatelang_lexer.cpp"
-tt299:
+#line 1073 "./templatelang_lexer.cpp"
+tt310:
 	yych = *++YYCURSOR;
 	if (yych != 's') goto tt75;
 	yych = *++YYCURSOR;
@@ -119592,10 +120637,10 @@ tt299:
 	yych = *++YYCURSOR;
 	if (yych != 'b') goto tt75;
 	++YYCURSOR;
-#line 160 "./templatelang.re"
+#line 161 "./templatelang.re"
 	{ TEMPLATELANG_TOKEN_RETURN("hasattrib", T_TEMPLATELANG_KEY_IF_HASATTRIB); }
-#line 1066 "./templatelang_lexer.cpp"
-tt308:
+#line 1092 "./templatelang_lexer.cpp"
+tt319:
 	yych = *++YYCURSOR;
 	if (yych != 's') goto tt75;
 	yych = *++YYCURSOR;
@@ -119611,10 +120656,10 @@ tt308:
 	yych = *++YYCURSOR;
 	if (yych != 'y') goto tt75;
 	++YYCURSOR;
-#line 159 "./templatelang.re"
+#line 160 "./templatelang.re"
 	{ TEMPLATELANG_TOKEN_RETURN("listempty", T_TEMPLATELANG_KEY_IF_LISTEMPTY); }
-#line 1085 "./templatelang_lexer.cpp"
-tt317:
+#line 1111 "./templatelang_lexer.cpp"
+tt328:
 	yych = *++YYCURSOR;
 	if (yych != 'r') goto tt75;
 	yych = *++YYCURSOR;
@@ -119628,10 +120673,10 @@ tt317:
 	yych = *++YYCURSOR;
 	if (yych != 'l') goto tt75;
 	++YYCURSOR;
-#line 158 "./templatelang.re"
+#line 159 "./templatelang.re"
 	{ TEMPLATELANG_TOKEN_RETURN("varequal", T_TEMPLATELANG_KEY_IF_VAREQUAL); }
-#line 1102 "./templatelang_lexer.cpp"
-tt325:
+#line 1128 "./templatelang_lexer.cpp"
+tt336:
 	yych = *++YYCURSOR;
 	if (yych != 'a') goto tt75;
 	yych = *++YYCURSOR;
@@ -119653,10 +120698,10 @@ tt325:
 	yych = *++YYCURSOR;
 	if (yych != 'l') goto tt75;
 	++YYCURSOR;
-#line 157 "./templatelang.re"
+#line 158 "./templatelang.re"
 	{ TEMPLATELANG_TOKEN_RETURN("featureequal", T_TEMPLATELANG_KEY_IF_FEATUREEQUAL); }
-#line 1127 "./templatelang_lexer.cpp"
-tt337:
+#line 1153 "./templatelang_lexer.cpp"
+tt348:
 	yych = *++YYCURSOR;
 	if (yych != 'c') goto tt75;
 	yych = *++YYCURSOR;
@@ -119674,8 +120719,8 @@ tt337:
 	++YYCURSOR;
 #line 144 "./templatelang.re"
 	{ TEMPLATELANG_TOKEN_RETURN("inccounter", T_TEMPLATELANG_KEY_INCCOUNTER); }
-#line 1146 "./templatelang_lexer.cpp"
-tt346:
+#line 1172 "./templatelang_lexer.cpp"
+tt357:
 	yych = *++YYCURSOR;
 	if (yych != 'd') goto tt75;
 	yych = *++YYCURSOR;
@@ -119687,203 +120732,203 @@ tt346:
 	++YYCURSOR;
 #line 128 "./templatelang.re"
 	{ TEMPLATELANG_TOKEN_RETURN("id_d", T_TEMPLATELANG_KEY_ID_D); }
-#line 1159 "./templatelang_lexer.cpp"
-tt352:
+#line 1185 "./templatelang_lexer.cpp"
+tt363:
 	yych = *++YYCURSOR;
 	if (yych != '}') goto tt75;
 	++YYCURSOR;
 #line 125 "./templatelang.re"
 	{ TEMPLATELANG_TOKEN_RETURN("}}", T_TEMPLATELANG_KEY_BB_CLOSE); }
-#line 1166 "./templatelang_lexer.cpp"
+#line 1192 "./templatelang_lexer.cpp"
 }
-#line 176 "./templatelang.re"
+#line 177 "./templatelang.re"
 
 
 
 stringsq:
 	tok = cur;
 
-#line 1175 "./templatelang_lexer.cpp"
+#line 1201 "./templatelang_lexer.cpp"
 {
 	YYCTYPE yych;
 	yych = *YYCURSOR;
 	if (yych <= '&') {
-		if (yych <= 0x00) goto tt361;
-		if (yych == '\n') goto tt364;
-		goto tt363;
+		if (yych <= 0x00) goto tt372;
+		if (yych == '\n') goto tt375;
+		goto tt374;
 	} else {
-		if (yych <= '\'') goto tt357;
-		if (yych == '\\') goto tt359;
-		goto tt363;
+		if (yych <= '\'') goto tt368;
+		if (yych == '\\') goto tt370;
+		goto tt374;
 	}
-tt357:
+tt368:
 	++YYCURSOR;
-#line 182 "./templatelang.re"
+#line 183 "./templatelang.re"
 	{ TEMPLATELANG_TOKEN_RETURN(STRING_MAGIC, T_TEMPLATELANG_STRING); }
-#line 1192 "./templatelang_lexer.cpp"
-tt359:
+#line 1218 "./templatelang_lexer.cpp"
+tt370:
 	yych = *(YYMARKER = ++YYCURSOR);
 	if (yych <= 'b') {
 		if (yych <= '3') {
 			if (yych <= '&') {
-				if (yych == '"') goto tt369;
+				if (yych == '"') goto tt380;
 			} else {
-				if (yych <= '\'') goto tt371;
-				if (yych >= '0') goto tt368;
+				if (yych <= '\'') goto tt382;
+				if (yych >= '0') goto tt379;
 			}
 		} else {
 			if (yych <= '[') {
-				if (yych == '?') goto tt373;
+				if (yych == '?') goto tt384;
 			} else {
-				if (yych <= '\\') goto tt375;
-				if (yych <= '`') goto tt360;
-				if (yych <= 'a') goto tt381;
-				goto tt383;
+				if (yych <= '\\') goto tt386;
+				if (yych <= '`') goto tt371;
+				if (yych <= 'a') goto tt392;
+				goto tt394;
 			}
 		}
 	} else {
 		if (yych <= 'r') {
 			if (yych <= 'm') {
-				if (yych == 'f') goto tt377;
+				if (yych == 'f') goto tt388;
 			} else {
-				if (yych <= 'n') goto tt389;
-				if (yych >= 'r') goto tt379;
+				if (yych <= 'n') goto tt400;
+				if (yych >= 'r') goto tt390;
 			}
 		} else {
 			if (yych <= 'u') {
-				if (yych == 't') goto tt387;
+				if (yych == 't') goto tt398;
 			} else {
-				if (yych <= 'v') goto tt385;
-				if (yych == 'x') goto tt366;
+				if (yych <= 'v') goto tt396;
+				if (yych == 'x') goto tt377;
 			}
 		}
 	}
-tt360:
-#line 206 "./templatelang.re"
+tt371:
+#line 207 "./templatelang.re"
 	{ yylval->pString->push_back(*tok);
 			       goto stringsq; }
-#line 1234 "./templatelang_lexer.cpp"
-tt361:
+#line 1260 "./templatelang_lexer.cpp"
+tt372:
 	++YYCURSOR;
-#line 205 "./templatelang.re"
+#line 206 "./templatelang.re"
 	{ if (cur >= lim) { goto end; } }
-#line 1239 "./templatelang_lexer.cpp"
-tt363:
+#line 1265 "./templatelang_lexer.cpp"
+tt374:
 	yych = *++YYCURSOR;
-	goto tt360;
-tt364:
-	++YYCURSOR;
-#line 208 "./templatelang.re"
-	{ yylval->pString->push_back('\n');
-			       goto stringsq; }
-#line 1248 "./templatelang_lexer.cpp"
-tt366:
-	yych = *++YYCURSOR;
-	if (yych <= '@') {
-		if (yych <= '/') goto tt367;
-		if (yych <= '9') goto tt394;
-	} else {
-		if (yych <= 'F') goto tt394;
-		if (yych <= '`') goto tt367;
-		if (yych <= 'f') goto tt394;
-	}
-tt367:
-	YYCURSOR = YYMARKER;
-	goto tt360;
-tt368:
-	yych = *++YYCURSOR;
-	if (yych <= '/') goto tt367;
-	if (yych <= '7') goto tt391;
-	goto tt367;
-tt369:
-	++YYCURSOR;
-#line 193 "./templatelang.re"
-	{ yylval->pString->push_back('\"'); goto stringsq; }
-#line 1271 "./templatelang_lexer.cpp"
-tt371:
-	++YYCURSOR;
-#line 192 "./templatelang.re"
-	{ yylval->pString->push_back('\''); goto stringsq; }
-#line 1276 "./templatelang_lexer.cpp"
-tt373:
-	++YYCURSOR;
-#line 191 "./templatelang.re"
-	{ yylval->pString->push_back('\?'); goto stringsq; }
-#line 1281 "./templatelang_lexer.cpp"
+	goto tt371;
 tt375:
 	++YYCURSOR;
-#line 190 "./templatelang.re"
-	{ yylval->pString->push_back('\\'); goto stringsq; }
-#line 1286 "./templatelang_lexer.cpp"
+#line 209 "./templatelang.re"
+	{ yylval->pString->push_back('\n');
+			       goto stringsq; }
+#line 1274 "./templatelang_lexer.cpp"
 tt377:
-	++YYCURSOR;
-#line 189 "./templatelang.re"
-	{ yylval->pString->push_back('\f'); goto stringsq; }
-#line 1291 "./templatelang_lexer.cpp"
-tt379:
-	++YYCURSOR;
-#line 188 "./templatelang.re"
-	{ yylval->pString->push_back('\r'); goto stringsq; }
-#line 1296 "./templatelang_lexer.cpp"
-tt381:
-	++YYCURSOR;
-#line 187 "./templatelang.re"
-	{ yylval->pString->push_back('\a'); goto stringsq; }
-#line 1301 "./templatelang_lexer.cpp"
-tt383:
-	++YYCURSOR;
-#line 186 "./templatelang.re"
-	{ yylval->pString->push_back('\b'); goto stringsq; }
-#line 1306 "./templatelang_lexer.cpp"
-tt385:
-	++YYCURSOR;
-#line 185 "./templatelang.re"
-	{ yylval->pString->push_back('\v'); goto stringsq; }
-#line 1311 "./templatelang_lexer.cpp"
-tt387:
-	++YYCURSOR;
-#line 184 "./templatelang.re"
-	{ yylval->pString->push_back('\t'); goto stringsq; }
-#line 1316 "./templatelang_lexer.cpp"
-tt389:
-	++YYCURSOR;
-#line 183 "./templatelang.re"
-	{ yylval->pString->push_back('\n'); goto stringsq; }
-#line 1321 "./templatelang_lexer.cpp"
-tt391:
 	yych = *++YYCURSOR;
-	if (yych <= '/') goto tt367;
-	if (yych >= '8') goto tt367;
+	if (yych <= '@') {
+		if (yych <= '/') goto tt378;
+		if (yych <= '9') goto tt405;
+	} else {
+		if (yych <= 'F') goto tt405;
+		if (yych <= '`') goto tt378;
+		if (yych <= 'f') goto tt405;
+	}
+tt378:
+	YYCURSOR = YYMARKER;
+	goto tt371;
+tt379:
+	yych = *++YYCURSOR;
+	if (yych <= '/') goto tt378;
+	if (yych <= '7') goto tt402;
+	goto tt378;
+tt380:
 	++YYCURSOR;
 #line 194 "./templatelang.re"
+	{ yylval->pString->push_back('\"'); goto stringsq; }
+#line 1297 "./templatelang_lexer.cpp"
+tt382:
+	++YYCURSOR;
+#line 193 "./templatelang.re"
+	{ yylval->pString->push_back('\''); goto stringsq; }
+#line 1302 "./templatelang_lexer.cpp"
+tt384:
+	++YYCURSOR;
+#line 192 "./templatelang.re"
+	{ yylval->pString->push_back('\?'); goto stringsq; }
+#line 1307 "./templatelang_lexer.cpp"
+tt386:
+	++YYCURSOR;
+#line 191 "./templatelang.re"
+	{ yylval->pString->push_back('\\'); goto stringsq; }
+#line 1312 "./templatelang_lexer.cpp"
+tt388:
+	++YYCURSOR;
+#line 190 "./templatelang.re"
+	{ yylval->pString->push_back('\f'); goto stringsq; }
+#line 1317 "./templatelang_lexer.cpp"
+tt390:
+	++YYCURSOR;
+#line 189 "./templatelang.re"
+	{ yylval->pString->push_back('\r'); goto stringsq; }
+#line 1322 "./templatelang_lexer.cpp"
+tt392:
+	++YYCURSOR;
+#line 188 "./templatelang.re"
+	{ yylval->pString->push_back('\a'); goto stringsq; }
+#line 1327 "./templatelang_lexer.cpp"
+tt394:
+	++YYCURSOR;
+#line 187 "./templatelang.re"
+	{ yylval->pString->push_back('\b'); goto stringsq; }
+#line 1332 "./templatelang_lexer.cpp"
+tt396:
+	++YYCURSOR;
+#line 186 "./templatelang.re"
+	{ yylval->pString->push_back('\v'); goto stringsq; }
+#line 1337 "./templatelang_lexer.cpp"
+tt398:
+	++YYCURSOR;
+#line 185 "./templatelang.re"
+	{ yylval->pString->push_back('\t'); goto stringsq; }
+#line 1342 "./templatelang_lexer.cpp"
+tt400:
+	++YYCURSOR;
+#line 184 "./templatelang.re"
+	{ yylval->pString->push_back('\n'); goto stringsq; }
+#line 1347 "./templatelang_lexer.cpp"
+tt402:
+	yych = *++YYCURSOR;
+	if (yych <= '/') goto tt378;
+	if (yych >= '8') goto tt378;
+	++YYCURSOR;
+#line 195 "./templatelang.re"
 	{ tok += 1; // Go past SLASH 
 		    std::string mystr;
 		    getString(mystr);
 		    yylval->pString->push_back(octal2char(mystr.c_str())); 
 		    goto stringsq; }
-#line 1333 "./templatelang_lexer.cpp"
-tt394:
+#line 1359 "./templatelang_lexer.cpp"
+tt405:
 	yych = *++YYCURSOR;
 	if (yych <= '@') {
-		if (yych <= '/') goto tt367;
-		if (yych >= ':') goto tt367;
+		if (yych <= '/') goto tt378;
+		if (yych >= ':') goto tt378;
 	} else {
-		if (yych <= 'F') goto tt395;
-		if (yych <= '`') goto tt367;
-		if (yych >= 'g') goto tt367;
+		if (yych <= 'F') goto tt406;
+		if (yych <= '`') goto tt378;
+		if (yych >= 'g') goto tt378;
 	}
-tt395:
+tt406:
 	++YYCURSOR;
-#line 199 "./templatelang.re"
+#line 200 "./templatelang.re"
 	{ tok += 2; // Go past SLASH x
 			       std::string mystr;
 			       getString(mystr);
 			       yylval->pString->push_back(hex2char(mystr.c_str()));
 			       goto stringsq; 			     
                              }
-#line 1353 "./templatelang_lexer.cpp"
+#line 1379 "./templatelang_lexer.cpp"
 }
-#line 210 "./templatelang.re"
+#line 211 "./templatelang.re"
 
 
 
@@ -119943,11 +120988,10 @@ void TemplateLanguageScanner::getString(std::string& str)
 	}
 }
 
-/**************** A copy of harvest/templatelang_parser.cpp *****************/
 
-
+/**************** A copy of harvest/templatelang_parser.cpp ****************/
 #line 1 "harvest/templatelang_parser.cpp"
-        /* Driver template for the LEMON parser generator.
+/* Driver template for the LEMON parser generator.
 ** The author disclaims copyright to this source code.
 */
 /* First off, code is included that follows the "include" declaration
@@ -119963,7 +121007,7 @@ void TemplateLanguageScanner::getString(std::string& str)
  *
  * Ulrik Sandborg-Petersen
  * Created: 7/28-2008
- * Last update: 2/23-2016
+ * Last update: 4/11-2016
  *
  */
 /************************************************************************
@@ -120046,11 +121090,11 @@ void TemplateLanguageScanner::getString(std::string& str)
 
 
 #line 96 "harvest/templatelang_parser.cpp"
-        /**************** already included mql_yylex.h -- not including again *****************/
+/**************** already included mql_yylex.h -- not including again *****************/
 
 
 #line 97 "harvest/templatelang_parser.cpp"
-        #include <cstdlib>
+#include <cstdlib>
 #include <string>
 #include <cassert>
 
@@ -120114,30 +121158,30 @@ void TemplateLanguageScanner::getString(std::string& str)
 **    TMPLGYY_NO_ACTION       The tmplgyy_action[] code for no-op
 */
 #define TMPLGYYCODETYPE unsigned char
-#define TMPLGYYNOCODE 67
+#define TMPLGYYNOCODE 68
 #define TMPLGYYACTIONTYPE unsigned short int
 #define TemplateLangParserTOKENTYPE Token*
 typedef union {
   int tmplgyyinit;
   TemplateLangParserTOKENTYPE tmplgyy0;
-  TemplateNixing* tmplgyy4;
-  TemplateSetVarEnd* tmplgyy7;
-  TemplateString* tmplgyy10;
-  TemplateListAppendBegin* tmplgyy12;
-  TemplateIfHasAttrib* tmplgyy16;
-  TemplateIfFeatureEqual* tmplgyy22;
-  TemplateDictlookupCounter* tmplgyy57;
-  TemplateIfAttribEqual* tmplgyy60;
-  TemplateASTNode* tmplgyy73;
-  TemplateSetVarNow* tmplgyy88;
-  TemplateDictlookupFeature* tmplgyy93;
-  TemplateDictlookupVar* tmplgyy102;
-  TemplateSetVarBegin* tmplgyy109;
-  TemplateIf* tmplgyy114;
-  TemplateEmitVar* tmplgyy119;
-  TemplateIfListEmpty* tmplgyy129;
-  TemplateListAppendEnd* tmplgyy130;
-  TemplateIfVarEqual* tmplgyy131;
+  TemplateIfListEmpty* tmplgyy17;
+  TemplateIf* tmplgyy22;
+  TemplateSetVarBegin* tmplgyy35;
+  TemplateDictlookupFeature* tmplgyy37;
+  TemplateListAppendBegin* tmplgyy38;
+  TemplateSetVarNow* tmplgyy54;
+  TemplateASTNode* tmplgyy65;
+  TemplateString* tmplgyy80;
+  TemplateIfHasAttrib* tmplgyy81;
+  TemplateEmitVar* tmplgyy83;
+  TemplateIfVarEqual* tmplgyy87;
+  TemplateIfAttribEqual* tmplgyy96;
+  TemplateSetVarEnd* tmplgyy97;
+  TemplateListAppendEnd* tmplgyy100;
+  TemplateNixing* tmplgyy102;
+  TemplateDictlookupVar* tmplgyy104;
+  TemplateIfFeatureEqual* tmplgyy108;
+  TemplateDictlookupCounter* tmplgyy121;
 } TMPLGYYMINORTYPE;
 #ifndef TMPLGYYSTACKDEPTH
 #define TMPLGYYSTACKDEPTH 100
@@ -120146,16 +121190,16 @@ typedef union {
 #define TemplateLangParserARG_PDECL ,TemplateLangExecEnv *pEE
 #define TemplateLangParserARG_FETCH TemplateLangExecEnv *pEE = tmplgyypParser->pEE
 #define TemplateLangParserARG_STORE tmplgyypParser->pEE = pEE
-#define TMPLGYYNSTATE             118
-#define TMPLGYYNRULE              72
-#define TMPLGYY_MAX_SHIFT         117
-#define TMPLGYY_MIN_SHIFTREDUCE   189
-#define TMPLGYY_MAX_SHIFTREDUCE   260
-#define TMPLGYY_MIN_REDUCE        261
-#define TMPLGYY_MAX_REDUCE        332
-#define TMPLGYY_ERROR_ACTION      333
-#define TMPLGYY_ACCEPT_ACTION     334
-#define TMPLGYY_NO_ACTION         335
+#define TMPLGYYNSTATE             121
+#define TMPLGYYNRULE              74
+#define TMPLGYY_MAX_SHIFT         120
+#define TMPLGYY_MIN_SHIFTREDUCE   194
+#define TMPLGYY_MAX_SHIFTREDUCE   267
+#define TMPLGYY_MIN_REDUCE        268
+#define TMPLGYY_MAX_REDUCE        341
+#define TMPLGYY_ERROR_ACTION      342
+#define TMPLGYY_ACCEPT_ACTION     343
+#define TMPLGYY_NO_ACTION         344
 
 /* The tmplgyyzerominor constant is used to initialize instances of
 ** TMPLGYYMINORTYPE objects to zero. */
@@ -120225,143 +121269,149 @@ static const TMPLGYYMINORTYPE tmplgyyzerominor = { 0 };
 **                     shifting non-terminals after a reduce.
 **  tmplgyy_default[]       Default action for each state.
 */
-#define TMPLGYY_ACTTAB_COUNT (467)
+#define TMPLGYY_ACTTAB_COUNT (486)
 static const TMPLGYYACTIONTYPE tmplgyy_action[] = {
- /*     0 */   194,  195,  117,  259,  257,   15,  114,  198,  111,  251,
- /*    10 */   108,  105,  104,  258,  249,   98,  255,   91,   87,   83,
- /*    20 */    78,   75,  253,  254,  256,  252,  227,  228,  229,   47,
- /*    30 */    42,   35,   32,   29,  241,    3,   24,  245,   21,  248,
- /*    40 */    17,  250,  260,  194,  195,  117,  259,  257,   16,  114,
- /*    50 */   198,  111,  251,  108,  105,  104,  258,  246,   98,  255,
- /*    60 */    91,   87,   83,   78,   75,  253,  254,  256,  252,  227,
- /*    70 */   228,  229,   47,   42,   35,   32,   29,   18,    2,   24,
- /*    80 */   245,   21,  248,   17,  250,  260,  194,  195,  117,  259,
- /*    90 */   257,    9,  114,  198,  111,  251,  108,  105,  104,  258,
- /*   100 */    20,   98,  255,   91,   87,   83,   78,   75,  253,  254,
- /*   110 */   256,  252,  227,  228,  229,   47,   42,   35,   32,   29,
- /*   120 */   243,  244,   24,  245,   21,  248,   17,  250,  260,  194,
- /*   130 */   195,  117,  259,  257,   22,  114,  198,  111,  251,  108,
- /*   140 */   105,  104,  258,   23,   98,  255,   91,   87,   83,   78,
- /*   150 */    75,  253,  254,  256,  252,  227,  228,  229,   47,   42,
- /*   160 */    35,   32,   29,  242,  235,   24,  245,   21,  248,   17,
- /*   170 */   250,  260,  261,  194,  195,  117,  259,  257,   25,  114,
- /*   180 */   198,  111,  251,  108,  105,  104,  258,   26,   98,  255,
- /*   190 */    91,   87,   83,   78,   75,  253,  254,  256,  252,  227,
- /*   200 */   228,  229,   47,   42,   35,   32,   29,   27,   28,   24,
- /*   210 */   245,   21,  248,   17,  250,  260,  194,  195,  117,  259,
- /*   220 */   257,   30,  114,  198,  111,  251,  108,  105,  104,  258,
- /*   230 */   234,   98,  255,   91,   87,   83,   78,   75,  253,  254,
- /*   240 */   256,  252,  227,  228,  229,   47,   42,   35,   32,   29,
- /*   250 */    31,  233,   24,  245,   21,  248,   17,  250,  260,  334,
- /*   260 */     7,  190,  192,  193,  212,  213,  214,  215,  216,  217,
- /*   270 */   218,  219,  220,  221,  236,  237,  238,  240,  239,    1,
- /*   280 */     4,  190,  192,  193,  212,  213,  214,  215,  216,  217,
- /*   290 */   218,  219,  220,  221,  236,  237,  238,  240,  239,    1,
- /*   300 */     5,  190,  192,  193,  212,  213,  214,  215,  216,  217,
- /*   310 */   218,  219,  220,  221,  236,  237,  238,  240,  239,    1,
- /*   320 */     6,  190,  192,  193,  212,  213,  214,  215,  216,  217,
- /*   330 */   218,  219,  220,  221,  236,  237,  238,  240,  239,    1,
- /*   340 */   191,  192,  193,  212,  213,  214,  215,  216,  217,  218,
- /*   350 */   219,  220,  221,  236,  237,  238,  240,  239,    1,   62,
- /*   360 */    19,   39,  247,   95,   38,   72,   67,   57,   52,   85,
- /*   370 */    89,  208,  206,   33,  102,   94,  202,   34,  232,   37,
- /*   380 */   231,   36,   10,   40,   41,  230,   44,  226,   45,   46,
- /*   390 */    43,   48,   49,   51,  263,   54,  225,   56,   50,  263,
- /*   400 */    53,   55,  224,   59,  223,   61,   58,   64,   60,   65,
- /*   410 */    66,   63,   69,  222,   70,   71,   68,    8,   74,   73,
- /*   420 */    77,  211,   80,  210,   76,   82,   79,   86,  209,   84,
- /*   430 */   263,  207,   88,   81,   11,  205,   90,   93,   13,  263,
- /*   440 */    12,  204,   92,   97,   96,  263,  100,  203,  103,  263,
- /*   450 */    99,  201,  101,  200,  112,  107,  263,   14,  106,  199,
- /*   460 */   110,  196,  109,  113,  197,  115,  116,
+ /*     0 */   199,  200,  120,  266,  264,   15,  117,  114,  204,  111,
+ /*    10 */   257,  108,  105,  104,  265,  261,   98,  262,   91,   87,
+ /*    20 */    83,   78,   75,  259,  260,  263,  258,  233,  234,  235,
+ /*    30 */    47,   42,   35,   32,   29,  247,    3,   24,  251,   21,
+ /*    40 */   254,   17,  256,  267,  199,  200,  120,  266,  264,   16,
+ /*    50 */   117,  114,  204,  111,  257,  108,  105,  104,  265,  261,
+ /*    60 */    98,  262,   91,   87,   83,   78,   75,  259,  260,  263,
+ /*    70 */   258,  233,  234,  235,   47,   42,   35,   32,   29,  255,
+ /*    80 */     2,   24,  251,   21,  254,   17,  256,  267,  199,  200,
+ /*    90 */   120,  266,  264,   18,  117,  114,  204,  111,  257,  108,
+ /*   100 */   105,  104,  265,  261,   98,  262,   91,   87,   83,   78,
+ /*   110 */    75,  259,  260,  263,  258,  233,  234,  235,   47,   42,
+ /*   120 */    35,   32,   29,  249,   95,   24,  251,   21,  254,   17,
+ /*   130 */   256,  267,  199,  200,  120,  266,  264,   94,  117,  114,
+ /*   140 */   204,  111,  257,  108,  105,  104,  265,  261,   98,  262,
+ /*   150 */    91,   87,   83,   78,   75,  259,  260,  263,  258,  233,
+ /*   160 */   234,  235,   47,   42,   35,   32,   29,  248,  252,   24,
+ /*   170 */   251,   21,  254,   17,  256,  267,  268,  199,  200,  120,
+ /*   180 */   266,  264,    9,  117,  114,  204,  111,  257,  108,  105,
+ /*   190 */   104,  265,  261,   98,  262,   91,   87,   83,   78,   75,
+ /*   200 */   259,  260,  263,  258,  233,  234,  235,   47,   42,   35,
+ /*   210 */    32,   29,   20,  250,   24,  251,   21,  254,   17,  256,
+ /*   220 */   267,  199,  200,  120,  266,  264,   22,  117,  114,  204,
+ /*   230 */   111,  257,  108,  105,  104,  265,  261,   98,  262,   91,
+ /*   240 */    87,   83,   78,   75,  259,  260,  263,  258,  233,  234,
+ /*   250 */   235,   47,   42,   35,   32,   29,   23,  241,   24,  251,
+ /*   260 */    21,  254,   17,  256,  267,  343,    7,  195,  197,  198,
+ /*   270 */   218,  219,  220,  221,  222,  223,  224,  225,  226,  227,
+ /*   280 */   242,  243,  244,  246,  245,    1,    4,  195,  197,  198,
+ /*   290 */   218,  219,  220,  221,  222,  223,  224,  225,  226,  227,
+ /*   300 */   242,  243,  244,  246,  245,    1,    5,  195,  197,  198,
+ /*   310 */   218,  219,  220,  221,  222,  223,  224,  225,  226,  227,
+ /*   320 */   242,  243,  244,  246,  245,    1,    6,  195,  197,  198,
+ /*   330 */   218,  219,  220,  221,  222,  223,  224,  225,  226,  227,
+ /*   340 */   242,  243,  244,  246,  245,    1,  196,  197,  198,  218,
+ /*   350 */   219,  220,  221,  222,  223,  224,  225,  226,  227,  242,
+ /*   360 */   243,  244,  246,  245,    1,   62,   19,   39,  253,   25,
+ /*   370 */    38,   72,   67,   57,   52,   85,   89,  214,  212,  102,
+ /*   380 */    26,  208,   28,  240,   27,   30,   31,  239,   34,  238,
+ /*   390 */    37,  237,   10,   41,   33,   36,  236,   44,  232,   45,
+ /*   400 */    46,   49,   40,   51,  270,  270,   43,  231,   54,  230,
+ /*   410 */    48,   56,  270,   50,   59,   53,   61,   55,  270,   64,
+ /*   420 */   229,   65,   66,   58,   60,   70,   63,  228,   69,   71,
+ /*   430 */     8,   74,   68,   77,  217,  270,  216,   73,   76,   80,
+ /*   440 */   215,   82,  270,   84,   86,  213,   79,   81,   11,   88,
+ /*   450 */    90,  211,   93,  210,   13,   97,   12,   92,  209,  100,
+ /*   460 */   270,  103,  270,  270,   96,  207,  206,  112,   99,  106,
+ /*   470 */   101,   14,  205,  107,  110,  270,  109,  203,  113,  202,
+ /*   480 */   115,  116,  270,  119,  201,  118,
 };
 static const TMPLGYYCODETYPE tmplgyy_lookahead[] = {
- /*     0 */     1,    2,    3,    4,    5,   14,    7,    8,    9,   10,
- /*    10 */    11,   12,   13,   14,    6,   16,   17,   18,   19,   20,
+ /*     0 */     1,    2,    3,    4,    5,   15,    7,    8,    9,   10,
+ /*    10 */    11,   12,   13,   14,   15,   16,   17,   18,   19,   20,
  /*    20 */    21,   22,   23,   24,   25,   26,   27,   28,   29,   30,
  /*    30 */    31,   32,   33,   34,   35,   36,   37,   38,   39,   40,
- /*    40 */    41,   42,   43,    1,    2,    3,    4,    5,    4,    7,
- /*    50 */     8,    9,   10,   11,   12,   13,   14,    6,   16,   17,
- /*    60 */    18,   19,   20,   21,   22,   23,   24,   25,   26,   27,
- /*    70 */    28,   29,   30,   31,   32,   33,   34,   14,   36,   37,
- /*    80 */    38,   39,   40,   41,   42,   43,    1,    2,    3,    4,
- /*    90 */     5,   14,    7,    8,    9,   10,   11,   12,   13,   14,
- /*   100 */     4,   16,   17,   18,   19,   20,   21,   22,   23,   24,
- /*   110 */    25,   26,   27,   28,   29,   30,   31,   32,   33,   34,
- /*   120 */    35,    6,   37,   38,   39,   40,   41,   42,   43,    1,
- /*   130 */     2,    3,    4,    5,   14,    7,    8,    9,   10,   11,
- /*   140 */    12,   13,   14,    4,   16,   17,   18,   19,   20,   21,
- /*   150 */    22,   23,   24,   25,   26,   27,   28,   29,   30,   31,
- /*   160 */    32,   33,   34,   35,    6,   37,   38,   39,   40,   41,
- /*   170 */    42,   43,    0,    1,    2,    3,    4,    5,   14,    7,
- /*   180 */     8,    9,   10,   11,   12,   13,   14,    4,   16,   17,
- /*   190 */    18,   19,   20,   21,   22,   23,   24,   25,   26,   27,
- /*   200 */    28,   29,   30,   31,   32,   33,   34,   10,    4,   37,
- /*   210 */    38,   39,   40,   41,   42,   43,    1,    2,    3,    4,
- /*   220 */     5,   10,    7,    8,    9,   10,   11,   12,   13,   14,
- /*   230 */     6,   16,   17,   18,   19,   20,   21,   22,   23,   24,
- /*   240 */    25,   26,   27,   28,   29,   30,   31,   32,   33,   34,
- /*   250 */     4,    6,   37,   38,   39,   40,   41,   42,   43,   45,
- /*   260 */    46,   47,   48,   49,   50,   51,   52,   53,   54,   55,
- /*   270 */    56,   57,   58,   59,   60,   61,   62,   63,   64,   65,
- /*   280 */    46,   47,   48,   49,   50,   51,   52,   53,   54,   55,
- /*   290 */    56,   57,   58,   59,   60,   61,   62,   63,   64,   65,
- /*   300 */    46,   47,   48,   49,   50,   51,   52,   53,   54,   55,
- /*   310 */    56,   57,   58,   59,   60,   61,   62,   63,   64,   65,
- /*   320 */    46,   47,   48,   49,   50,   51,   52,   53,   54,   55,
- /*   330 */    56,   57,   58,   59,   60,   61,   62,   63,   64,   65,
- /*   340 */    47,   48,   49,   50,   51,   52,   53,   54,   55,   56,
- /*   350 */    57,   58,   59,   60,   61,   62,   63,   64,   65,   17,
- /*   360 */     4,   14,    6,    5,   17,   23,   24,   25,   26,    4,
- /*   370 */     4,    6,    6,   14,    4,   17,    6,    4,    6,    4,
- /*   380 */     6,   14,    4,   14,    4,    6,    4,    6,    5,    4,
- /*   390 */    14,   14,    4,    4,   66,    4,    6,    4,   14,   66,
- /*   400 */    14,   14,    6,    4,    6,    4,   14,    4,   14,    5,
- /*   410 */     4,   14,    4,    6,    5,    4,   14,    4,    4,   14,
- /*   420 */     4,    6,    4,    6,   14,    4,   14,    4,    6,    5,
- /*   430 */    66,    6,    5,   14,   14,    6,    4,    4,    4,   66,
- /*   440 */    14,    6,   14,    4,   14,   66,    4,    6,    4,   66,
- /*   450 */    14,    6,   15,    6,    5,    4,   66,   14,   10,    6,
- /*   460 */     4,    6,   10,    4,    6,    5,    4,
+ /*    40 */    41,   42,   43,   44,    1,    2,    3,    4,    5,    4,
+ /*    50 */     7,    8,    9,   10,   11,   12,   13,   14,   15,   16,
+ /*    60 */    17,   18,   19,   20,   21,   22,   23,   24,   25,   26,
+ /*    70 */    27,   28,   29,   30,   31,   32,   33,   34,   35,    6,
+ /*    80 */    37,   38,   39,   40,   41,   42,   43,   44,    1,    2,
+ /*    90 */     3,    4,    5,   15,    7,    8,    9,   10,   11,   12,
+ /*   100 */    13,   14,   15,   16,   17,   18,   19,   20,   21,   22,
+ /*   110 */    23,   24,   25,   26,   27,   28,   29,   30,   31,   32,
+ /*   120 */    33,   34,   35,   36,    5,   38,   39,   40,   41,   42,
+ /*   130 */    43,   44,    1,    2,    3,    4,    5,   18,    7,    8,
+ /*   140 */     9,   10,   11,   12,   13,   14,   15,   16,   17,   18,
+ /*   150 */    19,   20,   21,   22,   23,   24,   25,   26,   27,   28,
+ /*   160 */    29,   30,   31,   32,   33,   34,   35,   36,    6,   38,
+ /*   170 */    39,   40,   41,   42,   43,   44,    0,    1,    2,    3,
+ /*   180 */     4,    5,   15,    7,    8,    9,   10,   11,   12,   13,
+ /*   190 */    14,   15,   16,   17,   18,   19,   20,   21,   22,   23,
+ /*   200 */    24,   25,   26,   27,   28,   29,   30,   31,   32,   33,
+ /*   210 */    34,   35,    4,    6,   38,   39,   40,   41,   42,   43,
+ /*   220 */    44,    1,    2,    3,    4,    5,   15,    7,    8,    9,
+ /*   230 */    10,   11,   12,   13,   14,   15,   16,   17,   18,   19,
+ /*   240 */    20,   21,   22,   23,   24,   25,   26,   27,   28,   29,
+ /*   250 */    30,   31,   32,   33,   34,   35,    4,    6,   38,   39,
+ /*   260 */    40,   41,   42,   43,   44,   46,   47,   48,   49,   50,
+ /*   270 */    51,   52,   53,   54,   55,   56,   57,   58,   59,   60,
+ /*   280 */    61,   62,   63,   64,   65,   66,   47,   48,   49,   50,
+ /*   290 */    51,   52,   53,   54,   55,   56,   57,   58,   59,   60,
+ /*   300 */    61,   62,   63,   64,   65,   66,   47,   48,   49,   50,
+ /*   310 */    51,   52,   53,   54,   55,   56,   57,   58,   59,   60,
+ /*   320 */    61,   62,   63,   64,   65,   66,   47,   48,   49,   50,
+ /*   330 */    51,   52,   53,   54,   55,   56,   57,   58,   59,   60,
+ /*   340 */    61,   62,   63,   64,   65,   66,   48,   49,   50,   51,
+ /*   350 */    52,   53,   54,   55,   56,   57,   58,   59,   60,   61,
+ /*   360 */    62,   63,   64,   65,   66,   18,    4,   15,    6,   15,
+ /*   370 */    18,   24,   25,   26,   27,    4,    4,    6,    6,    4,
+ /*   380 */     4,    6,    4,    6,   11,   11,    4,    6,    4,    6,
+ /*   390 */     4,    6,    4,    4,   15,   15,    6,    4,    6,    5,
+ /*   400 */     4,    4,   15,    4,   67,   67,   15,    6,    4,    6,
+ /*   410 */    15,    4,   67,   15,    4,   15,    4,   15,   67,    4,
+ /*   420 */     6,    5,    4,   15,   15,    5,   15,    6,    4,    4,
+ /*   430 */     4,    4,   15,    4,    6,   67,    6,   15,   15,    4,
+ /*   440 */     6,    4,   67,    5,    4,    6,   15,   15,   15,    5,
+ /*   450 */     4,    6,    4,    6,    4,    4,   15,   15,    6,    4,
+ /*   460 */    67,    4,   67,   67,   15,    6,    6,    5,   15,   11,
+ /*   470 */    16,   15,    6,    4,    4,   67,   11,    6,    4,    6,
+ /*   480 */     5,    4,   67,    4,    6,    5,
 };
-#define TMPLGYY_SHIFT_USE_DFLT (-10)
-#define TMPLGYY_SHIFT_COUNT (117)
-#define TMPLGYY_SHIFT_MIN   (-9)
-#define TMPLGYY_SHIFT_MAX   (462)
+#define TMPLGYY_SHIFT_USE_DFLT (-11)
+#define TMPLGYY_SHIFT_COUNT (120)
+#define TMPLGYY_SHIFT_MIN   (-10)
+#define TMPLGYY_SHIFT_MAX   (480)
 static const short tmplgyy_shift_ofst[] = {
- /*     0 */   215,   42,  215,  215,   -1,   85,  128,  172,  342,  356,
- /*    10 */   347,  365,  366,  358,  370,    8,   -9,   44,   51,   63,
- /*    20 */    77,   96,  115,  120,  139,  158,  164,  183,  197,  204,
- /*    30 */   224,  211,  246,  245,  359,  373,  372,  367,  375,  374,
- /*    40 */   378,  369,  380,  379,  376,  382,  383,  385,  381,  377,
- /*    50 */   388,  384,  389,  390,  386,  391,  387,  393,  396,  392,
- /*    60 */   399,  394,  401,  398,  397,  403,  404,  406,  407,  402,
- /*    70 */   408,  409,  411,  413,  405,  414,  415,  410,  416,  417,
- /*    80 */   412,  418,  419,  421,  422,  424,  420,  423,  425,  427,
- /*    90 */   426,  432,  429,  428,  433,  435,  434,  430,  439,  441,
- /*   100 */   436,  442,  437,  443,  444,  445,  447,  448,  451,  453,
- /*   110 */   452,  456,  458,  449,  459,  455,  460,  462,
+ /*     0 */   220,   43,  220,  220,   -1,   87,  131,  176,  347,  362,
+ /*    10 */   352,  371,  372,  119,  375,   73,  -10,   45,  162,   78,
+ /*    20 */   167,  208,  207,  211,  252,  251,  354,  376,  373,  378,
+ /*    30 */   377,  374,  382,  381,  379,  384,  383,  380,  386,  385,
+ /*    40 */   388,  387,  389,  390,  391,  393,  394,  396,  392,  395,
+ /*    50 */   397,  398,  399,  401,  400,  404,  402,  407,  403,  408,
+ /*    60 */   410,  409,  412,  414,  411,  415,  416,  418,  421,  417,
+ /*    70 */   424,  420,  425,  426,  422,  427,  428,  423,  429,  430,
+ /*    80 */   431,  435,  432,  437,  434,  438,  433,  440,  439,  444,
+ /*    90 */   441,  446,  445,  442,  448,  447,  450,  449,  451,  452,
+ /*   100 */   453,  455,  454,  456,  457,  459,  460,  458,  469,  466,
+ /*   110 */   465,  470,  471,  462,  474,  473,  475,  477,  478,  480,
+ /*   120 */   479,
 };
 #define TMPLGYY_REDUCE_USE_DFLT (-1)
 #define TMPLGYY_REDUCE_COUNT (7)
 #define TMPLGYY_REDUCE_MIN   (0)
-#define TMPLGYY_REDUCE_MAX   (293)
+#define TMPLGYY_REDUCE_MAX   (298)
 static const short tmplgyy_reduce_ofst[] = {
- /*     0 */   214,  234,  254,  274,  293,  293,  293,  293,
+ /*     0 */   219,  239,  259,  279,  298,  298,  298,  298,
 };
 static const TMPLGYYACTIONTYPE tmplgyy_default[] = {
- /*     0 */   333,  333,  333,  333,  333,  333,  333,  333,  333,  333,
- /*    10 */   333,  333,  333,  333,  333,  333,  333,  333,  333,  333,
- /*    20 */   333,  333,  333,  333,  333,  333,  333,  333,  333,  333,
- /*    30 */   333,  333,  333,  333,  333,  333,  333,  333,  333,  333,
- /*    40 */   333,  333,  333,  333,  333,  333,  333,  333,  333,  333,
- /*    50 */   333,  333,  333,  333,  333,  333,  333,  333,  333,  333,
- /*    60 */   333,  333,  333,  333,  333,  333,  333,  333,  333,  333,
- /*    70 */   333,  333,  333,  333,  333,  333,  333,  333,  333,  333,
- /*    80 */   333,  333,  333,  333,  333,  333,  333,  333,  333,  333,
- /*    90 */   333,  333,  333,  333,  333,  333,  333,  333,  333,  333,
- /*   100 */   333,  333,  333,  333,  333,  333,  333,  333,  333,  333,
- /*   110 */   333,  333,  333,  333,  333,  333,  333,  333,
+ /*     0 */   342,  342,  342,  342,  342,  342,  342,  342,  342,  342,
+ /*    10 */   342,  342,  342,  342,  342,  342,  342,  342,  342,  342,
+ /*    20 */   342,  342,  342,  342,  342,  342,  342,  342,  342,  342,
+ /*    30 */   342,  342,  342,  342,  342,  342,  342,  342,  342,  342,
+ /*    40 */   342,  342,  342,  342,  342,  342,  342,  342,  342,  342,
+ /*    50 */   342,  342,  342,  342,  342,  342,  342,  342,  342,  342,
+ /*    60 */   342,  342,  342,  342,  342,  342,  342,  342,  342,  342,
+ /*    70 */   342,  342,  342,  342,  342,  342,  342,  342,  342,  342,
+ /*    80 */   342,  342,  342,  342,  342,  342,  342,  342,  342,  342,
+ /*    90 */   342,  342,  342,  342,  342,  342,  342,  342,  342,  342,
+ /*   100 */   342,  342,  342,  342,  342,  342,  342,  342,  342,  342,
+ /*   110 */   342,  342,  342,  342,  342,  342,  342,  342,  342,  342,
+ /*   120 */   342,
 };
 
 /* The next table maps tokens into fallback tokens.  If a construct
@@ -120459,22 +121509,22 @@ void TemplateLangParserTrace(FILE *TraceFILE, char *zTracePrompt){
 ** are required.  The following table supplies these names */
 static const char *const tmplgyyTokenName[] = { 
   "$",             "KEY_ID_D",      "KEY_FIRSTMONAD",  "KEY_FEATURE", 
-  "KEY_SPACE",     "INTEGER",       "KEY_BB_CLOSE",  "KEY_FEATURENOMANGLE",
-  "KEY_DBNAME",    "KEY_ATTRIB",    "IDENTIFIER",    "KEY_ATTRIB_NOMANGLE",
-  "KEY_COPYATTRIBS",  "KEY_COUNTER",   "STRING",        "KEY_BARE_FORMAT",
-  "KEY_SETCOUNTER",  "KEY_BARE_VAR",  "KEY_INCCOUNTER",  "KEY_DECCOUNTER",
-  "KEY_LISTEMIT",  "KEY_LISTCLEAR",  "KEY_DICTLOOKUP",  "KEY_BARE_FEATURE",
-  "KEY_BARE_FEATURENOMANGLE",  "KEY_BARE_VARNOMANGLE",  "KEY_BARE_COUNTER",  "KEY_SETNIXING_ALL",
-  "KEY_SETNIXING_DOC",  "KEY_SETNIXING_OFF",  "KEY_IF_FEATUREEQUAL",  "KEY_IF_VAREQUAL",
-  "KEY_IF_LISTEMPTY",  "KEY_IF_HASATTRIB",  "KEY_IF_ATTRIBEQUAL",  "KEY_ENDIF",   
-  "KEY_ELSE",      "KEY_LISTAPPENDBEGIN",  "KEY_LISTAPPENDEND",  "KEY_SETVAR",  
-  "KEY_SETVAREND",  "KEY_EMITVAR",   "CHAR",          "KEY_NEWLINE", 
-  "error",         "top_value",     "template_list",  "template_list_element",
-  "template_string",  "template_if",   "template_listappend",  "template_listappend_end",
-  "template_setvarnow",  "template_setvar",  "template_setvar_end",  "template_emitvar",
-  "template_setnixing",  "template_dictlookup_feature",  "template_dictlookup_var",  "template_dictlookup_counter",
-  "template_if_featureequal",  "template_if_varequal",  "template_if_listempty",  "template_if_hasattrib",
-  "template_if_attribequal",  "template_some_if",
+  "KEY_SPACE",     "INTEGER",       "KEY_BB_CLOSE",  "KEY_FEATUREJSONMANGLE",
+  "KEY_FEATURENOMANGLE",  "KEY_DBNAME",    "KEY_ATTRIB",    "IDENTIFIER",  
+  "KEY_ATTRIB_NOMANGLE",  "KEY_COPYATTRIBS",  "KEY_COUNTER",   "STRING",      
+  "KEY_BARE_FORMAT",  "KEY_SETCOUNTER",  "KEY_BARE_VAR",  "KEY_INCCOUNTER",
+  "KEY_DECCOUNTER",  "KEY_LISTEMIT",  "KEY_LISTCLEAR",  "KEY_DICTLOOKUP",
+  "KEY_BARE_FEATURE",  "KEY_BARE_FEATURENOMANGLE",  "KEY_BARE_VARNOMANGLE",  "KEY_BARE_COUNTER",
+  "KEY_SETNIXING_ALL",  "KEY_SETNIXING_DOC",  "KEY_SETNIXING_OFF",  "KEY_IF_FEATUREEQUAL",
+  "KEY_IF_VAREQUAL",  "KEY_IF_LISTEMPTY",  "KEY_IF_HASATTRIB",  "KEY_IF_ATTRIBEQUAL",
+  "KEY_ENDIF",     "KEY_ELSE",      "KEY_LISTAPPENDBEGIN",  "KEY_LISTAPPENDEND",
+  "KEY_SETVAR",    "KEY_SETVAREND",  "KEY_EMITVAR",   "CHAR",        
+  "KEY_NEWLINE",   "error",         "top_value",     "template_list",
+  "template_list_element",  "template_string",  "template_if",   "template_listappend",
+  "template_listappend_end",  "template_setvarnow",  "template_setvar",  "template_setvar_end",
+  "template_emitvar",  "template_setnixing",  "template_dictlookup_feature",  "template_dictlookup_var",
+  "template_dictlookup_counter",  "template_if_featureequal",  "template_if_varequal",  "template_if_listempty",
+  "template_if_hasattrib",  "template_if_attribequal",  "template_some_if",
 };
 #endif /* NDEBUG */
 
@@ -120490,70 +121540,72 @@ static const char *const tmplgyyRuleName[] = {
  /*   5 */ "template_list_element ::= KEY_ID_D",
  /*   6 */ "template_list_element ::= KEY_FIRSTMONAD",
  /*   7 */ "template_list_element ::= KEY_FEATURE KEY_SPACE INTEGER KEY_BB_CLOSE",
- /*   8 */ "template_list_element ::= KEY_FEATURENOMANGLE KEY_SPACE INTEGER KEY_BB_CLOSE",
- /*   9 */ "template_list_element ::= KEY_DBNAME",
- /*  10 */ "template_list_element ::= KEY_ATTRIB KEY_SPACE IDENTIFIER KEY_BB_CLOSE",
- /*  11 */ "template_list_element ::= KEY_ATTRIB_NOMANGLE KEY_SPACE IDENTIFIER KEY_BB_CLOSE",
- /*  12 */ "template_list_element ::= KEY_COPYATTRIBS KEY_BB_CLOSE",
- /*  13 */ "template_list_element ::= KEY_COUNTER KEY_SPACE STRING KEY_BB_CLOSE",
- /*  14 */ "template_list_element ::= KEY_COUNTER KEY_SPACE STRING KEY_SPACE KEY_BARE_FORMAT KEY_SPACE STRING KEY_BB_CLOSE",
- /*  15 */ "template_list_element ::= KEY_SETCOUNTER KEY_SPACE STRING KEY_SPACE INTEGER KEY_BB_CLOSE",
- /*  16 */ "template_list_element ::= KEY_SETCOUNTER KEY_SPACE STRING KEY_SPACE KEY_BARE_VAR KEY_SPACE STRING KEY_BB_CLOSE",
- /*  17 */ "template_list_element ::= KEY_INCCOUNTER KEY_SPACE STRING KEY_BB_CLOSE",
- /*  18 */ "template_list_element ::= KEY_INCCOUNTER KEY_SPACE STRING KEY_SPACE INTEGER KEY_BB_CLOSE",
- /*  19 */ "template_list_element ::= KEY_DECCOUNTER KEY_SPACE STRING KEY_BB_CLOSE",
- /*  20 */ "template_list_element ::= KEY_DECCOUNTER KEY_SPACE STRING KEY_SPACE INTEGER KEY_BB_CLOSE",
- /*  21 */ "template_list_element ::= KEY_LISTEMIT KEY_SPACE STRING KEY_SPACE STRING KEY_BB_CLOSE",
- /*  22 */ "template_list_element ::= KEY_LISTCLEAR KEY_SPACE STRING KEY_BB_CLOSE",
- /*  23 */ "template_list_element ::= template_listappend",
- /*  24 */ "template_list_element ::= template_listappend_end",
- /*  25 */ "template_list_element ::= template_setvarnow",
- /*  26 */ "template_list_element ::= template_setvar",
- /*  27 */ "template_list_element ::= template_setvar_end",
- /*  28 */ "template_list_element ::= template_emitvar",
- /*  29 */ "template_list_element ::= template_setnixing",
- /*  30 */ "template_list_element ::= template_dictlookup_feature",
- /*  31 */ "template_list_element ::= template_dictlookup_var",
- /*  32 */ "template_list_element ::= template_dictlookup_counter",
- /*  33 */ "template_dictlookup_feature ::= KEY_DICTLOOKUP KEY_SPACE STRING KEY_SPACE KEY_BARE_FEATURE KEY_SPACE INTEGER KEY_SPACE STRING KEY_BB_CLOSE",
- /*  34 */ "template_dictlookup_feature ::= KEY_DICTLOOKUP KEY_SPACE STRING KEY_SPACE KEY_BARE_FEATURENOMANGLE KEY_SPACE INTEGER KEY_SPACE STRING KEY_BB_CLOSE",
- /*  35 */ "template_dictlookup_var ::= KEY_DICTLOOKUP KEY_SPACE STRING KEY_SPACE KEY_BARE_VAR KEY_SPACE STRING KEY_SPACE STRING KEY_BB_CLOSE",
- /*  36 */ "template_dictlookup_var ::= KEY_DICTLOOKUP KEY_SPACE STRING KEY_SPACE KEY_BARE_VARNOMANGLE KEY_SPACE STRING KEY_SPACE STRING KEY_BB_CLOSE",
- /*  37 */ "template_dictlookup_counter ::= KEY_DICTLOOKUP KEY_SPACE STRING KEY_SPACE KEY_BARE_COUNTER KEY_SPACE STRING KEY_SPACE STRING KEY_BB_CLOSE",
- /*  38 */ "template_setnixing ::= KEY_SETNIXING_ALL",
- /*  39 */ "template_setnixing ::= KEY_SETNIXING_DOC",
- /*  40 */ "template_setnixing ::= KEY_SETNIXING_OFF",
- /*  41 */ "template_if_featureequal ::= KEY_IF_FEATUREEQUAL KEY_SPACE INTEGER KEY_SPACE STRING KEY_BB_CLOSE",
- /*  42 */ "template_if_varequal ::= KEY_IF_VAREQUAL KEY_SPACE STRING KEY_SPACE STRING KEY_BB_CLOSE",
- /*  43 */ "template_if_varequal ::= KEY_IF_VAREQUAL KEY_SPACE STRING KEY_SPACE KEY_BARE_VAR KEY_SPACE STRING KEY_BB_CLOSE",
- /*  44 */ "template_if_listempty ::= KEY_IF_LISTEMPTY KEY_SPACE STRING KEY_BB_CLOSE",
- /*  45 */ "template_if_hasattrib ::= KEY_IF_HASATTRIB KEY_SPACE IDENTIFIER KEY_BB_CLOSE",
- /*  46 */ "template_if_attribequal ::= KEY_IF_ATTRIBEQUAL KEY_SPACE IDENTIFIER KEY_SPACE STRING KEY_BB_CLOSE",
- /*  47 */ "template_some_if ::= template_if_featureequal",
- /*  48 */ "template_some_if ::= template_if_varequal",
- /*  49 */ "template_some_if ::= template_if_listempty",
- /*  50 */ "template_some_if ::= template_if_attribequal",
- /*  51 */ "template_some_if ::= template_if_hasattrib",
- /*  52 */ "template_if ::= template_some_if template_list KEY_ENDIF",
- /*  53 */ "template_if ::= template_some_if template_list KEY_ELSE template_list KEY_ENDIF",
- /*  54 */ "template_if ::= template_some_if KEY_ELSE template_list KEY_ENDIF",
- /*  55 */ "template_listappend ::= KEY_LISTAPPENDBEGIN KEY_SPACE STRING KEY_BB_CLOSE",
- /*  56 */ "template_listappend_end ::= KEY_LISTAPPENDEND",
- /*  57 */ "template_setvarnow ::= KEY_SETVAR KEY_SPACE STRING KEY_SPACE STRING KEY_BB_CLOSE",
- /*  58 */ "template_setvar ::= KEY_SETVAR KEY_SPACE STRING KEY_BB_CLOSE",
- /*  59 */ "template_setvar_end ::= KEY_SETVAREND",
- /*  60 */ "template_emitvar ::= KEY_EMITVAR KEY_SPACE STRING KEY_BB_CLOSE",
- /*  61 */ "template_string ::= CHAR",
- /*  62 */ "template_string ::= IDENTIFIER",
- /*  63 */ "template_string ::= KEY_BARE_COUNTER",
- /*  64 */ "template_string ::= KEY_BARE_FEATURE",
- /*  65 */ "template_string ::= KEY_BARE_FEATURENOMANGLE",
- /*  66 */ "template_string ::= KEY_BARE_VAR",
- /*  67 */ "template_string ::= KEY_BARE_VARNOMANGLE",
- /*  68 */ "template_string ::= INTEGER",
- /*  69 */ "template_string ::= STRING",
- /*  70 */ "template_string ::= KEY_SPACE",
- /*  71 */ "template_string ::= KEY_NEWLINE",
+ /*   8 */ "template_list_element ::= KEY_FEATUREJSONMANGLE KEY_SPACE INTEGER KEY_BB_CLOSE",
+ /*   9 */ "template_list_element ::= KEY_FEATURENOMANGLE KEY_SPACE INTEGER KEY_BB_CLOSE",
+ /*  10 */ "template_list_element ::= KEY_DBNAME",
+ /*  11 */ "template_list_element ::= KEY_ATTRIB KEY_SPACE IDENTIFIER KEY_BB_CLOSE",
+ /*  12 */ "template_list_element ::= KEY_ATTRIB_NOMANGLE KEY_SPACE IDENTIFIER KEY_BB_CLOSE",
+ /*  13 */ "template_list_element ::= KEY_COPYATTRIBS KEY_BB_CLOSE",
+ /*  14 */ "template_list_element ::= KEY_COUNTER KEY_SPACE STRING KEY_BB_CLOSE",
+ /*  15 */ "template_list_element ::= KEY_COUNTER KEY_SPACE STRING KEY_SPACE KEY_BARE_FORMAT KEY_SPACE STRING KEY_BB_CLOSE",
+ /*  16 */ "template_list_element ::= KEY_SETCOUNTER KEY_SPACE STRING KEY_SPACE INTEGER KEY_BB_CLOSE",
+ /*  17 */ "template_list_element ::= KEY_SETCOUNTER KEY_SPACE STRING KEY_SPACE KEY_BARE_VAR KEY_SPACE STRING KEY_BB_CLOSE",
+ /*  18 */ "template_list_element ::= KEY_INCCOUNTER KEY_SPACE STRING KEY_BB_CLOSE",
+ /*  19 */ "template_list_element ::= KEY_INCCOUNTER KEY_SPACE STRING KEY_SPACE INTEGER KEY_BB_CLOSE",
+ /*  20 */ "template_list_element ::= KEY_DECCOUNTER KEY_SPACE STRING KEY_BB_CLOSE",
+ /*  21 */ "template_list_element ::= KEY_DECCOUNTER KEY_SPACE STRING KEY_SPACE INTEGER KEY_BB_CLOSE",
+ /*  22 */ "template_list_element ::= KEY_LISTEMIT KEY_SPACE STRING KEY_SPACE STRING KEY_BB_CLOSE",
+ /*  23 */ "template_list_element ::= KEY_LISTCLEAR KEY_SPACE STRING KEY_BB_CLOSE",
+ /*  24 */ "template_list_element ::= template_listappend",
+ /*  25 */ "template_list_element ::= template_listappend_end",
+ /*  26 */ "template_list_element ::= template_setvarnow",
+ /*  27 */ "template_list_element ::= template_setvar",
+ /*  28 */ "template_list_element ::= template_setvar_end",
+ /*  29 */ "template_list_element ::= template_emitvar",
+ /*  30 */ "template_list_element ::= template_setnixing",
+ /*  31 */ "template_list_element ::= template_dictlookup_feature",
+ /*  32 */ "template_list_element ::= template_dictlookup_var",
+ /*  33 */ "template_list_element ::= template_dictlookup_counter",
+ /*  34 */ "template_dictlookup_feature ::= KEY_DICTLOOKUP KEY_SPACE STRING KEY_SPACE KEY_BARE_FEATURE KEY_SPACE INTEGER KEY_SPACE STRING KEY_BB_CLOSE",
+ /*  35 */ "template_dictlookup_feature ::= KEY_DICTLOOKUP KEY_SPACE STRING KEY_SPACE KEY_BARE_FEATURENOMANGLE KEY_SPACE INTEGER KEY_SPACE STRING KEY_BB_CLOSE",
+ /*  36 */ "template_dictlookup_var ::= KEY_DICTLOOKUP KEY_SPACE STRING KEY_SPACE KEY_BARE_VAR KEY_SPACE STRING KEY_SPACE STRING KEY_BB_CLOSE",
+ /*  37 */ "template_dictlookup_var ::= KEY_DICTLOOKUP KEY_SPACE STRING KEY_SPACE KEY_BARE_VARNOMANGLE KEY_SPACE STRING KEY_SPACE STRING KEY_BB_CLOSE",
+ /*  38 */ "template_dictlookup_counter ::= KEY_DICTLOOKUP KEY_SPACE STRING KEY_SPACE KEY_BARE_COUNTER KEY_SPACE STRING KEY_SPACE STRING KEY_BB_CLOSE",
+ /*  39 */ "template_setnixing ::= KEY_SETNIXING_ALL",
+ /*  40 */ "template_setnixing ::= KEY_SETNIXING_DOC",
+ /*  41 */ "template_setnixing ::= KEY_SETNIXING_OFF",
+ /*  42 */ "template_if_featureequal ::= KEY_IF_FEATUREEQUAL KEY_SPACE INTEGER KEY_SPACE STRING KEY_BB_CLOSE",
+ /*  43 */ "template_if_varequal ::= KEY_IF_VAREQUAL KEY_SPACE STRING KEY_SPACE STRING KEY_BB_CLOSE",
+ /*  44 */ "template_if_varequal ::= KEY_IF_VAREQUAL KEY_SPACE STRING KEY_SPACE KEY_BARE_VAR KEY_SPACE STRING KEY_BB_CLOSE",
+ /*  45 */ "template_if_listempty ::= KEY_IF_LISTEMPTY KEY_SPACE STRING KEY_BB_CLOSE",
+ /*  46 */ "template_if_hasattrib ::= KEY_IF_HASATTRIB KEY_SPACE IDENTIFIER KEY_BB_CLOSE",
+ /*  47 */ "template_if_attribequal ::= KEY_IF_ATTRIBEQUAL KEY_SPACE IDENTIFIER KEY_SPACE STRING KEY_BB_CLOSE",
+ /*  48 */ "template_some_if ::= template_if_featureequal",
+ /*  49 */ "template_some_if ::= template_if_varequal",
+ /*  50 */ "template_some_if ::= template_if_listempty",
+ /*  51 */ "template_some_if ::= template_if_attribequal",
+ /*  52 */ "template_some_if ::= template_if_hasattrib",
+ /*  53 */ "template_if ::= template_some_if template_list KEY_ENDIF",
+ /*  54 */ "template_if ::= template_some_if template_list KEY_ELSE template_list KEY_ENDIF",
+ /*  55 */ "template_if ::= template_some_if KEY_ELSE template_list KEY_ENDIF",
+ /*  56 */ "template_listappend ::= KEY_LISTAPPENDBEGIN KEY_SPACE STRING KEY_BB_CLOSE",
+ /*  57 */ "template_listappend_end ::= KEY_LISTAPPENDEND",
+ /*  58 */ "template_setvarnow ::= KEY_SETVAR KEY_SPACE STRING KEY_SPACE STRING KEY_BB_CLOSE",
+ /*  59 */ "template_setvar ::= KEY_SETVAR KEY_SPACE STRING KEY_BB_CLOSE",
+ /*  60 */ "template_setvar_end ::= KEY_SETVAREND",
+ /*  61 */ "template_emitvar ::= KEY_EMITVAR KEY_SPACE STRING KEY_BB_CLOSE",
+ /*  62 */ "template_string ::= CHAR",
+ /*  63 */ "template_string ::= IDENTIFIER",
+ /*  64 */ "template_string ::= KEY_BARE_COUNTER",
+ /*  65 */ "template_string ::= KEY_BARE_FEATURE",
+ /*  66 */ "template_string ::= KEY_BARE_FEATURENOMANGLE",
+ /*  67 */ "template_string ::= KEY_BARE_FORMAT",
+ /*  68 */ "template_string ::= KEY_BARE_VAR",
+ /*  69 */ "template_string ::= KEY_BARE_VARNOMANGLE",
+ /*  70 */ "template_string ::= INTEGER",
+ /*  71 */ "template_string ::= STRING",
+ /*  72 */ "template_string ::= KEY_SPACE",
+ /*  73 */ "template_string ::= KEY_NEWLINE",
 };
 #endif /* NDEBUG */
 
@@ -120639,182 +121691,183 @@ static void tmplgyy_destructor(
     case 4: /* KEY_SPACE */
     case 5: /* INTEGER */
     case 6: /* KEY_BB_CLOSE */
-    case 7: /* KEY_FEATURENOMANGLE */
-    case 8: /* KEY_DBNAME */
-    case 9: /* KEY_ATTRIB */
-    case 10: /* IDENTIFIER */
-    case 11: /* KEY_ATTRIB_NOMANGLE */
-    case 12: /* KEY_COPYATTRIBS */
-    case 13: /* KEY_COUNTER */
-    case 14: /* STRING */
-    case 15: /* KEY_BARE_FORMAT */
-    case 16: /* KEY_SETCOUNTER */
-    case 17: /* KEY_BARE_VAR */
-    case 18: /* KEY_INCCOUNTER */
-    case 19: /* KEY_DECCOUNTER */
-    case 20: /* KEY_LISTEMIT */
-    case 21: /* KEY_LISTCLEAR */
-    case 22: /* KEY_DICTLOOKUP */
-    case 23: /* KEY_BARE_FEATURE */
-    case 24: /* KEY_BARE_FEATURENOMANGLE */
-    case 25: /* KEY_BARE_VARNOMANGLE */
-    case 26: /* KEY_BARE_COUNTER */
-    case 27: /* KEY_SETNIXING_ALL */
-    case 28: /* KEY_SETNIXING_DOC */
-    case 29: /* KEY_SETNIXING_OFF */
-    case 30: /* KEY_IF_FEATUREEQUAL */
-    case 31: /* KEY_IF_VAREQUAL */
-    case 32: /* KEY_IF_LISTEMPTY */
-    case 33: /* KEY_IF_HASATTRIB */
-    case 34: /* KEY_IF_ATTRIBEQUAL */
-    case 35: /* KEY_ENDIF */
-    case 36: /* KEY_ELSE */
-    case 37: /* KEY_LISTAPPENDBEGIN */
-    case 38: /* KEY_LISTAPPENDEND */
-    case 39: /* KEY_SETVAR */
-    case 40: /* KEY_SETVAREND */
-    case 41: /* KEY_EMITVAR */
-    case 42: /* CHAR */
-    case 43: /* KEY_NEWLINE */
+    case 7: /* KEY_FEATUREJSONMANGLE */
+    case 8: /* KEY_FEATURENOMANGLE */
+    case 9: /* KEY_DBNAME */
+    case 10: /* KEY_ATTRIB */
+    case 11: /* IDENTIFIER */
+    case 12: /* KEY_ATTRIB_NOMANGLE */
+    case 13: /* KEY_COPYATTRIBS */
+    case 14: /* KEY_COUNTER */
+    case 15: /* STRING */
+    case 16: /* KEY_BARE_FORMAT */
+    case 17: /* KEY_SETCOUNTER */
+    case 18: /* KEY_BARE_VAR */
+    case 19: /* KEY_INCCOUNTER */
+    case 20: /* KEY_DECCOUNTER */
+    case 21: /* KEY_LISTEMIT */
+    case 22: /* KEY_LISTCLEAR */
+    case 23: /* KEY_DICTLOOKUP */
+    case 24: /* KEY_BARE_FEATURE */
+    case 25: /* KEY_BARE_FEATURENOMANGLE */
+    case 26: /* KEY_BARE_VARNOMANGLE */
+    case 27: /* KEY_BARE_COUNTER */
+    case 28: /* KEY_SETNIXING_ALL */
+    case 29: /* KEY_SETNIXING_DOC */
+    case 30: /* KEY_SETNIXING_OFF */
+    case 31: /* KEY_IF_FEATUREEQUAL */
+    case 32: /* KEY_IF_VAREQUAL */
+    case 33: /* KEY_IF_LISTEMPTY */
+    case 34: /* KEY_IF_HASATTRIB */
+    case 35: /* KEY_IF_ATTRIBEQUAL */
+    case 36: /* KEY_ENDIF */
+    case 37: /* KEY_ELSE */
+    case 38: /* KEY_LISTAPPENDBEGIN */
+    case 39: /* KEY_LISTAPPENDEND */
+    case 40: /* KEY_SETVAR */
+    case 41: /* KEY_SETVAREND */
+    case 42: /* KEY_EMITVAR */
+    case 43: /* CHAR */
+    case 44: /* KEY_NEWLINE */
 {
 #line 100 "./templatelang.yxx"
  (tmplgyypminor->tmplgyy0)->clear(); delete (tmplgyypminor->tmplgyy0); 
-#line 728 "./templatelang.c"
+#line 737 "./templatelang.c"
 }
       break;
-    case 45: /* top_value */
+    case 46: /* top_value */
 {
 #line 116 "./templatelang.yxx"
- delete((tmplgyypminor->tmplgyy73)); 
-#line 735 "./templatelang.c"
-}
-      break;
-    case 46: /* template_list */
-    case 47: /* template_list_element */
-    case 65: /* template_some_if */
-{
-#line 120 "./templatelang.yxx"
-delete((tmplgyypminor->tmplgyy73));
+ delete((tmplgyypminor->tmplgyy65)); 
 #line 744 "./templatelang.c"
 }
       break;
-    case 48: /* template_string */
+    case 47: /* template_list */
+    case 48: /* template_list_element */
+    case 66: /* template_some_if */
 {
-#line 338 "./templatelang.yxx"
-delete((tmplgyypminor->tmplgyy10));
-#line 751 "./templatelang.c"
+#line 120 "./templatelang.yxx"
+delete((tmplgyypminor->tmplgyy65));
+#line 753 "./templatelang.c"
 }
       break;
-    case 49: /* template_if */
+    case 49: /* template_string */
 {
-#line 291 "./templatelang.yxx"
-delete((tmplgyypminor->tmplgyy114));
-#line 758 "./templatelang.c"
+#line 340 "./templatelang.yxx"
+delete((tmplgyypminor->tmplgyy80));
+#line 760 "./templatelang.c"
 }
       break;
-    case 50: /* template_listappend */
+    case 50: /* template_if */
 {
-#line 301 "./templatelang.yxx"
-delete((tmplgyypminor->tmplgyy12));
-#line 765 "./templatelang.c"
+#line 293 "./templatelang.yxx"
+delete((tmplgyypminor->tmplgyy22));
+#line 767 "./templatelang.c"
 }
       break;
-    case 51: /* template_listappend_end */
+    case 51: /* template_listappend */
 {
-#line 307 "./templatelang.yxx"
-delete((tmplgyypminor->tmplgyy130));
-#line 772 "./templatelang.c"
+#line 303 "./templatelang.yxx"
+delete((tmplgyypminor->tmplgyy38));
+#line 774 "./templatelang.c"
 }
       break;
-    case 52: /* template_setvarnow */
+    case 52: /* template_listappend_end */
 {
-#line 313 "./templatelang.yxx"
-delete((tmplgyypminor->tmplgyy88));
-#line 779 "./templatelang.c"
+#line 309 "./templatelang.yxx"
+delete((tmplgyypminor->tmplgyy100));
+#line 781 "./templatelang.c"
 }
       break;
-    case 53: /* template_setvar */
+    case 53: /* template_setvarnow */
 {
-#line 318 "./templatelang.yxx"
-delete((tmplgyypminor->tmplgyy109));
-#line 786 "./templatelang.c"
+#line 315 "./templatelang.yxx"
+delete((tmplgyypminor->tmplgyy54));
+#line 788 "./templatelang.c"
 }
       break;
-    case 54: /* template_setvar_end */
+    case 54: /* template_setvar */
 {
-#line 324 "./templatelang.yxx"
-delete((tmplgyypminor->tmplgyy7));
-#line 793 "./templatelang.c"
+#line 320 "./templatelang.yxx"
+delete((tmplgyypminor->tmplgyy35));
+#line 795 "./templatelang.c"
 }
       break;
-    case 55: /* template_emitvar */
+    case 55: /* template_setvar_end */
 {
-#line 330 "./templatelang.yxx"
-delete((tmplgyypminor->tmplgyy119));
-#line 800 "./templatelang.c"
+#line 326 "./templatelang.yxx"
+delete((tmplgyypminor->tmplgyy97));
+#line 802 "./templatelang.c"
 }
       break;
-    case 56: /* template_setnixing */
+    case 56: /* template_emitvar */
 {
-#line 222 "./templatelang.yxx"
-delete ((tmplgyypminor->tmplgyy4));
-#line 807 "./templatelang.c"
+#line 332 "./templatelang.yxx"
+delete((tmplgyypminor->tmplgyy83));
+#line 809 "./templatelang.c"
 }
       break;
-    case 57: /* template_dictlookup_feature */
+    case 57: /* template_setnixing */
 {
-#line 191 "./templatelang.yxx"
-delete ((tmplgyypminor->tmplgyy93));
-#line 814 "./templatelang.c"
-}
-      break;
-    case 58: /* template_dictlookup_var */
-{
-#line 202 "./templatelang.yxx"
+#line 224 "./templatelang.yxx"
 delete ((tmplgyypminor->tmplgyy102));
-#line 821 "./templatelang.c"
+#line 816 "./templatelang.c"
 }
       break;
-    case 59: /* template_dictlookup_counter */
+    case 58: /* template_dictlookup_feature */
 {
-#line 214 "./templatelang.yxx"
-delete ((tmplgyypminor->tmplgyy57));
-#line 828 "./templatelang.c"
+#line 193 "./templatelang.yxx"
+delete ((tmplgyypminor->tmplgyy37));
+#line 823 "./templatelang.c"
 }
       break;
-    case 60: /* template_if_featureequal */
+    case 59: /* template_dictlookup_var */
 {
-#line 239 "./templatelang.yxx"
-delete ((tmplgyypminor->tmplgyy22));
-#line 835 "./templatelang.c"
+#line 204 "./templatelang.yxx"
+delete ((tmplgyypminor->tmplgyy104));
+#line 830 "./templatelang.c"
 }
       break;
-    case 61: /* template_if_varequal */
+    case 60: /* template_dictlookup_counter */
 {
-#line 246 "./templatelang.yxx"
-delete ((tmplgyypminor->tmplgyy131));
-#line 842 "./templatelang.c"
+#line 216 "./templatelang.yxx"
+delete ((tmplgyypminor->tmplgyy121));
+#line 837 "./templatelang.c"
 }
       break;
-    case 62: /* template_if_listempty */
+    case 61: /* template_if_featureequal */
 {
-#line 257 "./templatelang.yxx"
-delete ((tmplgyypminor->tmplgyy129));
-#line 849 "./templatelang.c"
+#line 241 "./templatelang.yxx"
+delete ((tmplgyypminor->tmplgyy108));
+#line 844 "./templatelang.c"
 }
       break;
-    case 63: /* template_if_hasattrib */
+    case 62: /* template_if_varequal */
 {
-#line 264 "./templatelang.yxx"
-delete ((tmplgyypminor->tmplgyy16));
-#line 856 "./templatelang.c"
+#line 248 "./templatelang.yxx"
+delete ((tmplgyypminor->tmplgyy87));
+#line 851 "./templatelang.c"
 }
       break;
-    case 64: /* template_if_attribequal */
+    case 63: /* template_if_listempty */
 {
-#line 271 "./templatelang.yxx"
-delete ((tmplgyypminor->tmplgyy60));
-#line 863 "./templatelang.c"
+#line 259 "./templatelang.yxx"
+delete ((tmplgyypminor->tmplgyy17));
+#line 858 "./templatelang.c"
+}
+      break;
+    case 64: /* template_if_hasattrib */
+{
+#line 266 "./templatelang.yxx"
+delete ((tmplgyypminor->tmplgyy81));
+#line 865 "./templatelang.c"
+}
+      break;
+    case 65: /* template_if_attribequal */
+{
+#line 273 "./templatelang.yxx"
+delete ((tmplgyypminor->tmplgyy96));
+#line 872 "./templatelang.c"
 }
       break;
     default:  break;   /* If no destructor action specified: do nothing */
@@ -121065,78 +122118,80 @@ static const struct {
   TMPLGYYCODETYPE lhs;         /* Symbol on the left-hand side of the rule */
   unsigned char nrhs;     /* Number of right-hand side symbols in the rule */
 } tmplgyyRuleInfo[] = {
-  { 45, 1 },
   { 46, 1 },
-  { 46, 2 },
   { 47, 1 },
-  { 47, 1 },
-  { 47, 1 },
-  { 47, 1 },
-  { 47, 4 },
-  { 47, 4 },
-  { 47, 1 },
-  { 47, 4 },
-  { 47, 4 },
   { 47, 2 },
-  { 47, 4 },
-  { 47, 8 },
-  { 47, 6 },
-  { 47, 8 },
-  { 47, 4 },
-  { 47, 6 },
-  { 47, 4 },
-  { 47, 6 },
-  { 47, 6 },
-  { 47, 4 },
-  { 47, 1 },
-  { 47, 1 },
-  { 47, 1 },
-  { 47, 1 },
-  { 47, 1 },
-  { 47, 1 },
-  { 47, 1 },
-  { 47, 1 },
-  { 47, 1 },
-  { 47, 1 },
-  { 57, 10 },
-  { 57, 10 },
+  { 48, 1 },
+  { 48, 1 },
+  { 48, 1 },
+  { 48, 1 },
+  { 48, 4 },
+  { 48, 4 },
+  { 48, 4 },
+  { 48, 1 },
+  { 48, 4 },
+  { 48, 4 },
+  { 48, 2 },
+  { 48, 4 },
+  { 48, 8 },
+  { 48, 6 },
+  { 48, 8 },
+  { 48, 4 },
+  { 48, 6 },
+  { 48, 4 },
+  { 48, 6 },
+  { 48, 6 },
+  { 48, 4 },
+  { 48, 1 },
+  { 48, 1 },
+  { 48, 1 },
+  { 48, 1 },
+  { 48, 1 },
+  { 48, 1 },
+  { 48, 1 },
+  { 48, 1 },
+  { 48, 1 },
+  { 48, 1 },
   { 58, 10 },
   { 58, 10 },
   { 59, 10 },
-  { 56, 1 },
-  { 56, 1 },
-  { 56, 1 },
-  { 60, 6 },
+  { 59, 10 },
+  { 60, 10 },
+  { 57, 1 },
+  { 57, 1 },
+  { 57, 1 },
   { 61, 6 },
-  { 61, 8 },
-  { 62, 4 },
+  { 62, 6 },
+  { 62, 8 },
   { 63, 4 },
-  { 64, 6 },
-  { 65, 1 },
-  { 65, 1 },
-  { 65, 1 },
-  { 65, 1 },
-  { 65, 1 },
-  { 49, 3 },
-  { 49, 5 },
-  { 49, 4 },
+  { 64, 4 },
+  { 65, 6 },
+  { 66, 1 },
+  { 66, 1 },
+  { 66, 1 },
+  { 66, 1 },
+  { 66, 1 },
+  { 50, 3 },
+  { 50, 5 },
   { 50, 4 },
-  { 51, 1 },
-  { 52, 6 },
-  { 53, 4 },
-  { 54, 1 },
-  { 55, 4 },
-  { 48, 1 },
-  { 48, 1 },
-  { 48, 1 },
-  { 48, 1 },
-  { 48, 1 },
-  { 48, 1 },
-  { 48, 1 },
-  { 48, 1 },
-  { 48, 1 },
-  { 48, 1 },
-  { 48, 1 },
+  { 51, 4 },
+  { 52, 1 },
+  { 53, 6 },
+  { 54, 4 },
+  { 55, 1 },
+  { 56, 4 },
+  { 49, 1 },
+  { 49, 1 },
+  { 49, 1 },
+  { 49, 1 },
+  { 49, 1 },
+  { 49, 1 },
+  { 49, 1 },
+  { 49, 1 },
+  { 49, 1 },
+  { 49, 1 },
+  { 49, 1 },
+  { 49, 1 },
 };
 
 static void tmplgyy_accept(tmplgyyParser*);  /* Forward Declaration */
@@ -121194,245 +122249,239 @@ static void tmplgyy_reduce(
   */
       case 0: /* top_value ::= template_list */
 #line 117 "./templatelang.yxx"
-{ pEE->setTopNode(tmplgyymsp[0].minor.tmplgyy73); }
-#line 1244 "./templatelang.c"
+{ pEE->setTopNode(tmplgyymsp[0].minor.tmplgyy65); }
+#line 1255 "./templatelang.c"
         break;
       case 1: /* template_list ::= template_list_element */
 #line 122 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = tmplgyymsp[0].minor.tmplgyy73; }
-#line 1249 "./templatelang.c"
+{ tmplgyygotominor.tmplgyy65 = tmplgyymsp[0].minor.tmplgyy65; }
+#line 1260 "./templatelang.c"
         break;
       case 2: /* template_list ::= template_list template_list_element */
 #line 124 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = tmplgyymsp[0].minor.tmplgyy73; tmplgyygotominor.tmplgyy73->setNext(tmplgyymsp[-1].minor.tmplgyy73); }
-#line 1254 "./templatelang.c"
+{ tmplgyygotominor.tmplgyy65 = tmplgyymsp[0].minor.tmplgyy65; tmplgyygotominor.tmplgyy65->setNext(tmplgyymsp[-1].minor.tmplgyy65); }
+#line 1265 "./templatelang.c"
         break;
       case 3: /* template_list_element ::= template_string */
 #line 129 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = tmplgyymsp[0].minor.tmplgyy10; }
-#line 1259 "./templatelang.c"
+{ tmplgyygotominor.tmplgyy65 = tmplgyymsp[0].minor.tmplgyy80; }
+#line 1270 "./templatelang.c"
         break;
       case 4: /* template_list_element ::= template_if */
 #line 131 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = tmplgyymsp[0].minor.tmplgyy114; }
-#line 1264 "./templatelang.c"
+{ tmplgyygotominor.tmplgyy65 = tmplgyymsp[0].minor.tmplgyy22; }
+#line 1275 "./templatelang.c"
         break;
       case 5: /* template_list_element ::= KEY_ID_D */
 #line 133 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = new TemplateSimpleNode(kTemplateID_D);   tmplgyy_destructor(tmplgyypParser,1,&tmplgyymsp[0].minor);
+{ tmplgyygotominor.tmplgyy65 = new TemplateSimpleNode(kTemplateID_D);   tmplgyy_destructor(tmplgyypParser,1,&tmplgyymsp[0].minor);
 }
-#line 1270 "./templatelang.c"
+#line 1281 "./templatelang.c"
         break;
       case 6: /* template_list_element ::= KEY_FIRSTMONAD */
 #line 135 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = new TemplateSimpleNode(kTemplateFirstMonad);   tmplgyy_destructor(tmplgyypParser,2,&tmplgyymsp[0].minor);
+{ tmplgyygotominor.tmplgyy65 = new TemplateSimpleNode(kTemplateFirstMonad);   tmplgyy_destructor(tmplgyypParser,2,&tmplgyymsp[0].minor);
 }
-#line 1276 "./templatelang.c"
+#line 1287 "./templatelang.c"
         break;
       case 7: /* template_list_element ::= KEY_FEATURE KEY_SPACE INTEGER KEY_BB_CLOSE */
 #line 137 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = new TemplateFeature(tmplgyymsp[-1].minor.tmplgyy0->integer, true); delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,3,&tmplgyymsp[-3].minor);
+{ tmplgyygotominor.tmplgyy65 = new TemplateFeature(tmplgyymsp[-1].minor.tmplgyy0->integer, kMKXML); delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,3,&tmplgyymsp[-3].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
   tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
 }
-#line 1284 "./templatelang.c"
+#line 1295 "./templatelang.c"
         break;
-      case 8: /* template_list_element ::= KEY_FEATURENOMANGLE KEY_SPACE INTEGER KEY_BB_CLOSE */
+      case 8: /* template_list_element ::= KEY_FEATUREJSONMANGLE KEY_SPACE INTEGER KEY_BB_CLOSE */
 #line 139 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = new TemplateFeature(tmplgyymsp[-1].minor.tmplgyy0->integer, false); delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,7,&tmplgyymsp[-3].minor);
+{ tmplgyygotominor.tmplgyy65 = new TemplateFeature(tmplgyymsp[-1].minor.tmplgyy0->integer, kMKJSON); delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,7,&tmplgyymsp[-3].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
   tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
 }
-#line 1292 "./templatelang.c"
+#line 1303 "./templatelang.c"
         break;
-      case 9: /* template_list_element ::= KEY_DBNAME */
+      case 9: /* template_list_element ::= KEY_FEATURENOMANGLE KEY_SPACE INTEGER KEY_BB_CLOSE */
 #line 141 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = new TemplateSimpleNode(kTemplateDBName);   tmplgyy_destructor(tmplgyypParser,8,&tmplgyymsp[0].minor);
+{ tmplgyygotominor.tmplgyy65 = new TemplateFeature(tmplgyymsp[-1].minor.tmplgyy0->integer, kMKNone); delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,8,&tmplgyymsp[-3].minor);
+  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
+  tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
 }
-#line 1298 "./templatelang.c"
+#line 1311 "./templatelang.c"
         break;
-      case 10: /* template_list_element ::= KEY_ATTRIB KEY_SPACE IDENTIFIER KEY_BB_CLOSE */
+      case 10: /* template_list_element ::= KEY_DBNAME */
 #line 143 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = new TemplateAttrib(tmplgyymsp[-1].minor.tmplgyy0->extractString()); delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,9,&tmplgyymsp[-3].minor);
-  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
-  tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
+{ tmplgyygotominor.tmplgyy65 = new TemplateSimpleNode(kTemplateDBName);   tmplgyy_destructor(tmplgyypParser,9,&tmplgyymsp[0].minor);
 }
-#line 1306 "./templatelang.c"
+#line 1317 "./templatelang.c"
         break;
-      case 11: /* template_list_element ::= KEY_ATTRIB_NOMANGLE KEY_SPACE IDENTIFIER KEY_BB_CLOSE */
+      case 11: /* template_list_element ::= KEY_ATTRIB KEY_SPACE IDENTIFIER KEY_BB_CLOSE */
 #line 145 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = new TemplateAttribNoMangle(tmplgyymsp[-1].minor.tmplgyy0->extractString()); delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,11,&tmplgyymsp[-3].minor);
+{ tmplgyygotominor.tmplgyy65 = new TemplateAttrib(tmplgyymsp[-1].minor.tmplgyy0->extractString()); delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,10,&tmplgyymsp[-3].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
   tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
 }
-#line 1314 "./templatelang.c"
+#line 1325 "./templatelang.c"
         break;
-      case 12: /* template_list_element ::= KEY_COPYATTRIBS KEY_BB_CLOSE */
+      case 12: /* template_list_element ::= KEY_ATTRIB_NOMANGLE KEY_SPACE IDENTIFIER KEY_BB_CLOSE */
 #line 147 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = new TemplateCopyAttribs();   tmplgyy_destructor(tmplgyypParser,12,&tmplgyymsp[-1].minor);
+{ tmplgyygotominor.tmplgyy65 = new TemplateAttribNoMangle(tmplgyymsp[-1].minor.tmplgyy0->extractString()); delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,12,&tmplgyymsp[-3].minor);
+  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
   tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
 }
-#line 1321 "./templatelang.c"
+#line 1333 "./templatelang.c"
         break;
-      case 13: /* template_list_element ::= KEY_COUNTER KEY_SPACE STRING KEY_BB_CLOSE */
+      case 13: /* template_list_element ::= KEY_COPYATTRIBS KEY_BB_CLOSE */
 #line 149 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = new TemplateCounter(tmplgyymsp[-1].minor.tmplgyy0->extractString()); delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,13,&tmplgyymsp[-3].minor);
-  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
-  tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
-}
-#line 1329 "./templatelang.c"
-        break;
-      case 14: /* template_list_element ::= KEY_COUNTER KEY_SPACE STRING KEY_SPACE KEY_BARE_FORMAT KEY_SPACE STRING KEY_BB_CLOSE */
-#line 151 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = new TemplateCounterFormat(tmplgyymsp[-5].minor.tmplgyy0->extractString(), tmplgyymsp[-1].minor.tmplgyy0->extractString()); delete tmplgyymsp[-5].minor.tmplgyy0; delete tmplgyymsp[-1].minor.tmplgyy0;  tmplgyy_destructor(tmplgyypParser,13,&tmplgyymsp[-7].minor);
-  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-6].minor);
-  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-4].minor);
-  tmplgyy_destructor(tmplgyypParser,15,&tmplgyymsp[-3].minor);
-  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
+{ tmplgyygotominor.tmplgyy65 = new TemplateCopyAttribs();   tmplgyy_destructor(tmplgyypParser,13,&tmplgyymsp[-1].minor);
   tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
 }
 #line 1340 "./templatelang.c"
         break;
-      case 15: /* template_list_element ::= KEY_SETCOUNTER KEY_SPACE STRING KEY_SPACE INTEGER KEY_BB_CLOSE */
-#line 153 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = new TemplateSetCounter(tmplgyymsp[-3].minor.tmplgyy0->extractString(), tmplgyymsp[-1].minor.tmplgyy0->integer); delete tmplgyymsp[-3].minor.tmplgyy0; delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,16,&tmplgyymsp[-5].minor);
-  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-4].minor);
+      case 14: /* template_list_element ::= KEY_COUNTER KEY_SPACE STRING KEY_BB_CLOSE */
+#line 151 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy65 = new TemplateCounter(tmplgyymsp[-1].minor.tmplgyy0->extractString()); delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,14,&tmplgyymsp[-3].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
   tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
 }
-#line 1349 "./templatelang.c"
+#line 1348 "./templatelang.c"
         break;
-      case 16: /* template_list_element ::= KEY_SETCOUNTER KEY_SPACE STRING KEY_SPACE KEY_BARE_VAR KEY_SPACE STRING KEY_BB_CLOSE */
-#line 155 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = new TemplateSetCounterVar(tmplgyymsp[-5].minor.tmplgyy0->extractString(), tmplgyymsp[-1].minor.tmplgyy0->extractString()); delete tmplgyymsp[-5].minor.tmplgyy0; delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,16,&tmplgyymsp[-7].minor);
+      case 15: /* template_list_element ::= KEY_COUNTER KEY_SPACE STRING KEY_SPACE KEY_BARE_FORMAT KEY_SPACE STRING KEY_BB_CLOSE */
+#line 153 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy65 = new TemplateCounterFormat(tmplgyymsp[-5].minor.tmplgyy0->extractString(), tmplgyymsp[-1].minor.tmplgyy0->extractString()); delete tmplgyymsp[-5].minor.tmplgyy0; delete tmplgyymsp[-1].minor.tmplgyy0;  tmplgyy_destructor(tmplgyypParser,14,&tmplgyymsp[-7].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-6].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-4].minor);
-  tmplgyy_destructor(tmplgyypParser,17,&tmplgyymsp[-3].minor);
+  tmplgyy_destructor(tmplgyypParser,16,&tmplgyymsp[-3].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
   tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
 }
-#line 1360 "./templatelang.c"
+#line 1359 "./templatelang.c"
         break;
-      case 17: /* template_list_element ::= KEY_INCCOUNTER KEY_SPACE STRING KEY_BB_CLOSE */
-#line 157 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = new TemplateIncCounter(tmplgyymsp[-1].minor.tmplgyy0->extractString(), 1); delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,18,&tmplgyymsp[-3].minor);
+      case 16: /* template_list_element ::= KEY_SETCOUNTER KEY_SPACE STRING KEY_SPACE INTEGER KEY_BB_CLOSE */
+#line 155 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy65 = new TemplateSetCounter(tmplgyymsp[-3].minor.tmplgyy0->extractString(), tmplgyymsp[-1].minor.tmplgyy0->integer); delete tmplgyymsp[-3].minor.tmplgyy0; delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,17,&tmplgyymsp[-5].minor);
+  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-4].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
   tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
 }
 #line 1368 "./templatelang.c"
         break;
-      case 18: /* template_list_element ::= KEY_INCCOUNTER KEY_SPACE STRING KEY_SPACE INTEGER KEY_BB_CLOSE */
-#line 159 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = new TemplateIncCounter(tmplgyymsp[-3].minor.tmplgyy0->extractString(), tmplgyymsp[-1].minor.tmplgyy0->integer); delete tmplgyymsp[-3].minor.tmplgyy0; delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,18,&tmplgyymsp[-5].minor);
-  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-4].minor);
-  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
-  tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
-}
-#line 1377 "./templatelang.c"
-        break;
-      case 19: /* template_list_element ::= KEY_DECCOUNTER KEY_SPACE STRING KEY_BB_CLOSE */
-#line 161 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = new TemplateDecCounter(tmplgyymsp[-1].minor.tmplgyy0->extractString(), 1); delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,19,&tmplgyymsp[-3].minor);
-  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
-  tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
-}
-#line 1385 "./templatelang.c"
-        break;
-      case 20: /* template_list_element ::= KEY_DECCOUNTER KEY_SPACE STRING KEY_SPACE INTEGER KEY_BB_CLOSE */
-#line 163 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = new TemplateDecCounter(tmplgyymsp[-3].minor.tmplgyy0->extractString(), tmplgyymsp[-1].minor.tmplgyy0->integer); delete tmplgyymsp[-3].minor.tmplgyy0; delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,19,&tmplgyymsp[-5].minor);
-  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-4].minor);
-  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
-  tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
-}
-#line 1394 "./templatelang.c"
-        break;
-      case 21: /* template_list_element ::= KEY_LISTEMIT KEY_SPACE STRING KEY_SPACE STRING KEY_BB_CLOSE */
-#line 165 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = new TemplateListEmit(tmplgyymsp[-3].minor.tmplgyy0->extractString(), tmplgyymsp[-1].minor.tmplgyy0->extractString()); delete tmplgyymsp[-3].minor.tmplgyy0; delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,20,&tmplgyymsp[-5].minor);
-  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-4].minor);
-  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
-  tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
-}
-#line 1403 "./templatelang.c"
-        break;
-      case 22: /* template_list_element ::= KEY_LISTCLEAR KEY_SPACE STRING KEY_BB_CLOSE */
-#line 167 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = new TemplateListClear(tmplgyymsp[-1].minor.tmplgyy0->extractString()); delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,21,&tmplgyymsp[-3].minor);
-  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
-  tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
-}
-#line 1411 "./templatelang.c"
-        break;
-      case 23: /* template_list_element ::= template_listappend */
-#line 169 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = tmplgyymsp[0].minor.tmplgyy12; }
-#line 1416 "./templatelang.c"
-        break;
-      case 24: /* template_list_element ::= template_listappend_end */
-#line 171 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = tmplgyymsp[0].minor.tmplgyy130; }
-#line 1421 "./templatelang.c"
-        break;
-      case 25: /* template_list_element ::= template_setvarnow */
-#line 173 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = tmplgyymsp[0].minor.tmplgyy88; }
-#line 1426 "./templatelang.c"
-        break;
-      case 26: /* template_list_element ::= template_setvar */
-#line 175 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = tmplgyymsp[0].minor.tmplgyy109; }
-#line 1431 "./templatelang.c"
-        break;
-      case 27: /* template_list_element ::= template_setvar_end */
-#line 177 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = tmplgyymsp[0].minor.tmplgyy7; }
-#line 1436 "./templatelang.c"
-        break;
-      case 28: /* template_list_element ::= template_emitvar */
-#line 179 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = tmplgyymsp[0].minor.tmplgyy119; }
-#line 1441 "./templatelang.c"
-        break;
-      case 29: /* template_list_element ::= template_setnixing */
-#line 181 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = tmplgyymsp[0].minor.tmplgyy4; }
-#line 1446 "./templatelang.c"
-        break;
-      case 30: /* template_list_element ::= template_dictlookup_feature */
-#line 183 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = tmplgyymsp[0].minor.tmplgyy93; }
-#line 1451 "./templatelang.c"
-        break;
-      case 31: /* template_list_element ::= template_dictlookup_var */
-#line 185 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = tmplgyymsp[0].minor.tmplgyy102; }
-#line 1456 "./templatelang.c"
-        break;
-      case 32: /* template_list_element ::= template_dictlookup_counter */
-#line 187 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = tmplgyymsp[0].minor.tmplgyy57; }
-#line 1461 "./templatelang.c"
-        break;
-      case 33: /* template_dictlookup_feature ::= KEY_DICTLOOKUP KEY_SPACE STRING KEY_SPACE KEY_BARE_FEATURE KEY_SPACE INTEGER KEY_SPACE STRING KEY_BB_CLOSE */
-#line 193 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy93 = new TemplateDictlookupFeature(tmplgyymsp[-7].minor.tmplgyy0->extractString(), tmplgyymsp[-3].minor.tmplgyy0->integer, tmplgyymsp[-1].minor.tmplgyy0->extractString(), true); 
-  delete tmplgyymsp[-7].minor.tmplgyy0; delete tmplgyymsp[-3].minor.tmplgyy0; delete tmplgyymsp[-1].minor.tmplgyy0;
-  tmplgyy_destructor(tmplgyypParser,22,&tmplgyymsp[-9].minor);
-  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-8].minor);
+      case 17: /* template_list_element ::= KEY_SETCOUNTER KEY_SPACE STRING KEY_SPACE KEY_BARE_VAR KEY_SPACE STRING KEY_BB_CLOSE */
+#line 157 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy65 = new TemplateSetCounterVar(tmplgyymsp[-5].minor.tmplgyy0->extractString(), tmplgyymsp[-1].minor.tmplgyy0->extractString()); delete tmplgyymsp[-5].minor.tmplgyy0; delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,17,&tmplgyymsp[-7].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-6].minor);
-  tmplgyy_destructor(tmplgyypParser,23,&tmplgyymsp[-5].minor);
+  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-4].minor);
+  tmplgyy_destructor(tmplgyypParser,18,&tmplgyymsp[-3].minor);
+  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
+  tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
+}
+#line 1379 "./templatelang.c"
+        break;
+      case 18: /* template_list_element ::= KEY_INCCOUNTER KEY_SPACE STRING KEY_BB_CLOSE */
+#line 159 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy65 = new TemplateIncCounter(tmplgyymsp[-1].minor.tmplgyy0->extractString(), 1); delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,19,&tmplgyymsp[-3].minor);
+  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
+  tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
+}
+#line 1387 "./templatelang.c"
+        break;
+      case 19: /* template_list_element ::= KEY_INCCOUNTER KEY_SPACE STRING KEY_SPACE INTEGER KEY_BB_CLOSE */
+#line 161 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy65 = new TemplateIncCounter(tmplgyymsp[-3].minor.tmplgyy0->extractString(), tmplgyymsp[-1].minor.tmplgyy0->integer); delete tmplgyymsp[-3].minor.tmplgyy0; delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,19,&tmplgyymsp[-5].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-4].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
   tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
 }
+#line 1396 "./templatelang.c"
+        break;
+      case 20: /* template_list_element ::= KEY_DECCOUNTER KEY_SPACE STRING KEY_BB_CLOSE */
+#line 163 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy65 = new TemplateDecCounter(tmplgyymsp[-1].minor.tmplgyy0->extractString(), 1); delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,20,&tmplgyymsp[-3].minor);
+  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
+  tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
+}
+#line 1404 "./templatelang.c"
+        break;
+      case 21: /* template_list_element ::= KEY_DECCOUNTER KEY_SPACE STRING KEY_SPACE INTEGER KEY_BB_CLOSE */
+#line 165 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy65 = new TemplateDecCounter(tmplgyymsp[-3].minor.tmplgyy0->extractString(), tmplgyymsp[-1].minor.tmplgyy0->integer); delete tmplgyymsp[-3].minor.tmplgyy0; delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,20,&tmplgyymsp[-5].minor);
+  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-4].minor);
+  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
+  tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
+}
+#line 1413 "./templatelang.c"
+        break;
+      case 22: /* template_list_element ::= KEY_LISTEMIT KEY_SPACE STRING KEY_SPACE STRING KEY_BB_CLOSE */
+#line 167 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy65 = new TemplateListEmit(tmplgyymsp[-3].minor.tmplgyy0->extractString(), tmplgyymsp[-1].minor.tmplgyy0->extractString()); delete tmplgyymsp[-3].minor.tmplgyy0; delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,21,&tmplgyymsp[-5].minor);
+  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-4].minor);
+  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
+  tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
+}
+#line 1422 "./templatelang.c"
+        break;
+      case 23: /* template_list_element ::= KEY_LISTCLEAR KEY_SPACE STRING KEY_BB_CLOSE */
+#line 169 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy65 = new TemplateListClear(tmplgyymsp[-1].minor.tmplgyy0->extractString()); delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,22,&tmplgyymsp[-3].minor);
+  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
+  tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
+}
+#line 1430 "./templatelang.c"
+        break;
+      case 24: /* template_list_element ::= template_listappend */
+#line 171 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy65 = tmplgyymsp[0].minor.tmplgyy38; }
+#line 1435 "./templatelang.c"
+        break;
+      case 25: /* template_list_element ::= template_listappend_end */
+#line 173 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy65 = tmplgyymsp[0].minor.tmplgyy100; }
+#line 1440 "./templatelang.c"
+        break;
+      case 26: /* template_list_element ::= template_setvarnow */
+#line 175 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy65 = tmplgyymsp[0].minor.tmplgyy54; }
+#line 1445 "./templatelang.c"
+        break;
+      case 27: /* template_list_element ::= template_setvar */
+#line 177 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy65 = tmplgyymsp[0].minor.tmplgyy35; }
+#line 1450 "./templatelang.c"
+        break;
+      case 28: /* template_list_element ::= template_setvar_end */
+#line 179 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy65 = tmplgyymsp[0].minor.tmplgyy97; }
+#line 1455 "./templatelang.c"
+        break;
+      case 29: /* template_list_element ::= template_emitvar */
+#line 181 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy65 = tmplgyymsp[0].minor.tmplgyy83; }
+#line 1460 "./templatelang.c"
+        break;
+      case 30: /* template_list_element ::= template_setnixing */
+#line 183 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy65 = tmplgyymsp[0].minor.tmplgyy102; }
+#line 1465 "./templatelang.c"
+        break;
+      case 31: /* template_list_element ::= template_dictlookup_feature */
+#line 185 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy65 = tmplgyymsp[0].minor.tmplgyy37; }
+#line 1470 "./templatelang.c"
+        break;
+      case 32: /* template_list_element ::= template_dictlookup_var */
+#line 187 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy65 = tmplgyymsp[0].minor.tmplgyy104; }
 #line 1475 "./templatelang.c"
         break;
-      case 34: /* template_dictlookup_feature ::= KEY_DICTLOOKUP KEY_SPACE STRING KEY_SPACE KEY_BARE_FEATURENOMANGLE KEY_SPACE INTEGER KEY_SPACE STRING KEY_BB_CLOSE */
-#line 197 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy93 = new TemplateDictlookupFeature(tmplgyymsp[-7].minor.tmplgyy0->extractString(), tmplgyymsp[-3].minor.tmplgyy0->integer, tmplgyymsp[-1].minor.tmplgyy0->extractString(), false); 
+      case 33: /* template_list_element ::= template_dictlookup_counter */
+#line 189 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy65 = tmplgyymsp[0].minor.tmplgyy121; }
+#line 1480 "./templatelang.c"
+        break;
+      case 34: /* template_dictlookup_feature ::= KEY_DICTLOOKUP KEY_SPACE STRING KEY_SPACE KEY_BARE_FEATURE KEY_SPACE INTEGER KEY_SPACE STRING KEY_BB_CLOSE */
+#line 195 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy37 = new TemplateDictlookupFeature(tmplgyymsp[-7].minor.tmplgyy0->extractString(), tmplgyymsp[-3].minor.tmplgyy0->integer, tmplgyymsp[-1].minor.tmplgyy0->extractString(), true); 
   delete tmplgyymsp[-7].minor.tmplgyy0; delete tmplgyymsp[-3].minor.tmplgyy0; delete tmplgyymsp[-1].minor.tmplgyy0;
-  tmplgyy_destructor(tmplgyypParser,22,&tmplgyymsp[-9].minor);
+  tmplgyy_destructor(tmplgyypParser,23,&tmplgyymsp[-9].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-8].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-6].minor);
   tmplgyy_destructor(tmplgyypParser,24,&tmplgyymsp[-5].minor);
@@ -121440,27 +122489,13 @@ static void tmplgyy_reduce(
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
   tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
 }
-#line 1489 "./templatelang.c"
+#line 1494 "./templatelang.c"
         break;
-      case 35: /* template_dictlookup_var ::= KEY_DICTLOOKUP KEY_SPACE STRING KEY_SPACE KEY_BARE_VAR KEY_SPACE STRING KEY_SPACE STRING KEY_BB_CLOSE */
-#line 204 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy102 = new TemplateDictlookupVar(tmplgyymsp[-7].minor.tmplgyy0->extractString(), tmplgyymsp[-3].minor.tmplgyy0->extractString(), tmplgyymsp[-1].minor.tmplgyy0->extractString(), true); 
+      case 35: /* template_dictlookup_feature ::= KEY_DICTLOOKUP KEY_SPACE STRING KEY_SPACE KEY_BARE_FEATURENOMANGLE KEY_SPACE INTEGER KEY_SPACE STRING KEY_BB_CLOSE */
+#line 199 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy37 = new TemplateDictlookupFeature(tmplgyymsp[-7].minor.tmplgyy0->extractString(), tmplgyymsp[-3].minor.tmplgyy0->integer, tmplgyymsp[-1].minor.tmplgyy0->extractString(), false); 
   delete tmplgyymsp[-7].minor.tmplgyy0; delete tmplgyymsp[-3].minor.tmplgyy0; delete tmplgyymsp[-1].minor.tmplgyy0;
-  tmplgyy_destructor(tmplgyypParser,22,&tmplgyymsp[-9].minor);
-  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-8].minor);
-  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-6].minor);
-  tmplgyy_destructor(tmplgyypParser,17,&tmplgyymsp[-5].minor);
-  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-4].minor);
-  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
-  tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
-}
-#line 1503 "./templatelang.c"
-        break;
-      case 36: /* template_dictlookup_var ::= KEY_DICTLOOKUP KEY_SPACE STRING KEY_SPACE KEY_BARE_VARNOMANGLE KEY_SPACE STRING KEY_SPACE STRING KEY_BB_CLOSE */
-#line 208 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy102 = new TemplateDictlookupVar(tmplgyymsp[-7].minor.tmplgyy0->extractString(), tmplgyymsp[-3].minor.tmplgyy0->extractString(), tmplgyymsp[-1].minor.tmplgyy0->extractString(), false); 
-  delete tmplgyymsp[-7].minor.tmplgyy0; delete tmplgyymsp[-3].minor.tmplgyy0; delete tmplgyymsp[-1].minor.tmplgyy0;
-  tmplgyy_destructor(tmplgyypParser,22,&tmplgyymsp[-9].minor);
+  tmplgyy_destructor(tmplgyypParser,23,&tmplgyymsp[-9].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-8].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-6].minor);
   tmplgyy_destructor(tmplgyypParser,25,&tmplgyymsp[-5].minor);
@@ -121468,13 +122503,27 @@ static void tmplgyy_reduce(
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
   tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
 }
-#line 1517 "./templatelang.c"
+#line 1508 "./templatelang.c"
         break;
-      case 37: /* template_dictlookup_counter ::= KEY_DICTLOOKUP KEY_SPACE STRING KEY_SPACE KEY_BARE_COUNTER KEY_SPACE STRING KEY_SPACE STRING KEY_BB_CLOSE */
-#line 216 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy57 = new TemplateDictlookupCounter(tmplgyymsp[-7].minor.tmplgyy0->extractString(), tmplgyymsp[-3].minor.tmplgyy0->extractString(), tmplgyymsp[-1].minor.tmplgyy0->extractString(), true); 
+      case 36: /* template_dictlookup_var ::= KEY_DICTLOOKUP KEY_SPACE STRING KEY_SPACE KEY_BARE_VAR KEY_SPACE STRING KEY_SPACE STRING KEY_BB_CLOSE */
+#line 206 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy104 = new TemplateDictlookupVar(tmplgyymsp[-7].minor.tmplgyy0->extractString(), tmplgyymsp[-3].minor.tmplgyy0->extractString(), tmplgyymsp[-1].minor.tmplgyy0->extractString(), true); 
   delete tmplgyymsp[-7].minor.tmplgyy0; delete tmplgyymsp[-3].minor.tmplgyy0; delete tmplgyymsp[-1].minor.tmplgyy0;
-  tmplgyy_destructor(tmplgyypParser,22,&tmplgyymsp[-9].minor);
+  tmplgyy_destructor(tmplgyypParser,23,&tmplgyymsp[-9].minor);
+  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-8].minor);
+  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-6].minor);
+  tmplgyy_destructor(tmplgyypParser,18,&tmplgyymsp[-5].minor);
+  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-4].minor);
+  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
+  tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
+}
+#line 1522 "./templatelang.c"
+        break;
+      case 37: /* template_dictlookup_var ::= KEY_DICTLOOKUP KEY_SPACE STRING KEY_SPACE KEY_BARE_VARNOMANGLE KEY_SPACE STRING KEY_SPACE STRING KEY_BB_CLOSE */
+#line 210 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy104 = new TemplateDictlookupVar(tmplgyymsp[-7].minor.tmplgyy0->extractString(), tmplgyymsp[-3].minor.tmplgyy0->extractString(), tmplgyymsp[-1].minor.tmplgyy0->extractString(), false); 
+  delete tmplgyymsp[-7].minor.tmplgyy0; delete tmplgyymsp[-3].minor.tmplgyy0; delete tmplgyymsp[-1].minor.tmplgyy0;
+  tmplgyy_destructor(tmplgyypParser,23,&tmplgyymsp[-9].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-8].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-6].minor);
   tmplgyy_destructor(tmplgyypParser,26,&tmplgyymsp[-5].minor);
@@ -121482,246 +122531,266 @@ static void tmplgyy_reduce(
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
   tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
 }
-#line 1531 "./templatelang.c"
+#line 1536 "./templatelang.c"
         break;
-      case 38: /* template_setnixing ::= KEY_SETNIXING_ALL */
-#line 224 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy4 = new TemplateNixing(kTNTAll); 
-  tmplgyy_destructor(tmplgyypParser,27,&tmplgyymsp[0].minor);
-}
-#line 1538 "./templatelang.c"
-        break;
-      case 39: /* template_setnixing ::= KEY_SETNIXING_DOC */
-#line 227 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy4 = new TemplateNixing(kTNTDoc); 
-  tmplgyy_destructor(tmplgyypParser,28,&tmplgyymsp[0].minor);
-}
-#line 1545 "./templatelang.c"
-        break;
-      case 40: /* template_setnixing ::= KEY_SETNIXING_OFF */
-#line 230 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy4 = new TemplateNixing(kTNTOff); 
-  tmplgyy_destructor(tmplgyypParser,29,&tmplgyymsp[0].minor);
-}
-#line 1552 "./templatelang.c"
-        break;
-      case 41: /* template_if_featureequal ::= KEY_IF_FEATUREEQUAL KEY_SPACE INTEGER KEY_SPACE STRING KEY_BB_CLOSE */
-#line 241 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy22 = new TemplateIfFeatureEqual(tmplgyymsp[-3].minor.tmplgyy0->integer, tmplgyymsp[-1].minor.tmplgyy0->extractString()); 
-  delete tmplgyymsp[-1].minor.tmplgyy0; delete tmplgyymsp[-3].minor.tmplgyy0;			     
-  tmplgyy_destructor(tmplgyypParser,30,&tmplgyymsp[-5].minor);
+      case 38: /* template_dictlookup_counter ::= KEY_DICTLOOKUP KEY_SPACE STRING KEY_SPACE KEY_BARE_COUNTER KEY_SPACE STRING KEY_SPACE STRING KEY_BB_CLOSE */
+#line 218 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy121 = new TemplateDictlookupCounter(tmplgyymsp[-7].minor.tmplgyy0->extractString(), tmplgyymsp[-3].minor.tmplgyy0->extractString(), tmplgyymsp[-1].minor.tmplgyy0->extractString(), true); 
+  delete tmplgyymsp[-7].minor.tmplgyy0; delete tmplgyymsp[-3].minor.tmplgyy0; delete tmplgyymsp[-1].minor.tmplgyy0;
+  tmplgyy_destructor(tmplgyypParser,23,&tmplgyymsp[-9].minor);
+  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-8].minor);
+  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-6].minor);
+  tmplgyy_destructor(tmplgyypParser,27,&tmplgyymsp[-5].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-4].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
   tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
 }
-#line 1563 "./templatelang.c"
+#line 1550 "./templatelang.c"
         break;
-      case 42: /* template_if_varequal ::= KEY_IF_VAREQUAL KEY_SPACE STRING KEY_SPACE STRING KEY_BB_CLOSE */
-#line 248 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy131 = new TemplateIfVarEqual(tmplgyymsp[-3].minor.tmplgyy0->extractString(), tmplgyymsp[-1].minor.tmplgyy0->extractString(), false); 
-  delete tmplgyymsp[-3].minor.tmplgyy0; delete tmplgyymsp[-1].minor.tmplgyy0;			     
+      case 39: /* template_setnixing ::= KEY_SETNIXING_ALL */
+#line 226 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy102 = new TemplateNixing(kTNTAll); 
+  tmplgyy_destructor(tmplgyypParser,28,&tmplgyymsp[0].minor);
+}
+#line 1557 "./templatelang.c"
+        break;
+      case 40: /* template_setnixing ::= KEY_SETNIXING_DOC */
+#line 229 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy102 = new TemplateNixing(kTNTDoc); 
+  tmplgyy_destructor(tmplgyypParser,29,&tmplgyymsp[0].minor);
+}
+#line 1564 "./templatelang.c"
+        break;
+      case 41: /* template_setnixing ::= KEY_SETNIXING_OFF */
+#line 232 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy102 = new TemplateNixing(kTNTOff); 
+  tmplgyy_destructor(tmplgyypParser,30,&tmplgyymsp[0].minor);
+}
+#line 1571 "./templatelang.c"
+        break;
+      case 42: /* template_if_featureequal ::= KEY_IF_FEATUREEQUAL KEY_SPACE INTEGER KEY_SPACE STRING KEY_BB_CLOSE */
+#line 243 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy108 = new TemplateIfFeatureEqual(tmplgyymsp[-3].minor.tmplgyy0->integer, tmplgyymsp[-1].minor.tmplgyy0->extractString()); 
+  delete tmplgyymsp[-1].minor.tmplgyy0; delete tmplgyymsp[-3].minor.tmplgyy0;			     
   tmplgyy_destructor(tmplgyypParser,31,&tmplgyymsp[-5].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-4].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
   tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
 }
-#line 1574 "./templatelang.c"
+#line 1582 "./templatelang.c"
         break;
-      case 43: /* template_if_varequal ::= KEY_IF_VAREQUAL KEY_SPACE STRING KEY_SPACE KEY_BARE_VAR KEY_SPACE STRING KEY_BB_CLOSE */
-#line 252 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy131 = new TemplateIfVarEqual(tmplgyymsp[-5].minor.tmplgyy0->extractString(), tmplgyymsp[-1].minor.tmplgyy0->extractString(), true); 
+      case 43: /* template_if_varequal ::= KEY_IF_VAREQUAL KEY_SPACE STRING KEY_SPACE STRING KEY_BB_CLOSE */
+#line 250 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy87 = new TemplateIfVarEqual(tmplgyymsp[-3].minor.tmplgyy0->extractString(), tmplgyymsp[-1].minor.tmplgyy0->extractString(), false); 
+  delete tmplgyymsp[-3].minor.tmplgyy0; delete tmplgyymsp[-1].minor.tmplgyy0;			     
+  tmplgyy_destructor(tmplgyypParser,32,&tmplgyymsp[-5].minor);
+  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-4].minor);
+  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
+  tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
+}
+#line 1593 "./templatelang.c"
+        break;
+      case 44: /* template_if_varequal ::= KEY_IF_VAREQUAL KEY_SPACE STRING KEY_SPACE KEY_BARE_VAR KEY_SPACE STRING KEY_BB_CLOSE */
+#line 254 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy87 = new TemplateIfVarEqual(tmplgyymsp[-5].minor.tmplgyy0->extractString(), tmplgyymsp[-1].minor.tmplgyy0->extractString(), true); 
   delete tmplgyymsp[-5].minor.tmplgyy0; delete tmplgyymsp[-1].minor.tmplgyy0;			     
-  tmplgyy_destructor(tmplgyypParser,31,&tmplgyymsp[-7].minor);
+  tmplgyy_destructor(tmplgyypParser,32,&tmplgyymsp[-7].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-6].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-4].minor);
-  tmplgyy_destructor(tmplgyypParser,17,&tmplgyymsp[-3].minor);
+  tmplgyy_destructor(tmplgyypParser,18,&tmplgyymsp[-3].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
   tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
 }
-#line 1587 "./templatelang.c"
+#line 1606 "./templatelang.c"
         break;
-      case 44: /* template_if_listempty ::= KEY_IF_LISTEMPTY KEY_SPACE STRING KEY_BB_CLOSE */
-#line 259 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy129 = new TemplateIfListEmpty(tmplgyymsp[-1].minor.tmplgyy0->extractString());
-  delete tmplgyymsp[-1].minor.tmplgyy0; 
-  tmplgyy_destructor(tmplgyypParser,32,&tmplgyymsp[-3].minor);
-  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
-  tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
-}
-#line 1597 "./templatelang.c"
-        break;
-      case 45: /* template_if_hasattrib ::= KEY_IF_HASATTRIB KEY_SPACE IDENTIFIER KEY_BB_CLOSE */
-#line 266 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy16 = new TemplateIfHasAttrib(tmplgyymsp[-1].minor.tmplgyy0->extractString()); 
+      case 45: /* template_if_listempty ::= KEY_IF_LISTEMPTY KEY_SPACE STRING KEY_BB_CLOSE */
+#line 261 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy17 = new TemplateIfListEmpty(tmplgyymsp[-1].minor.tmplgyy0->extractString());
   delete tmplgyymsp[-1].minor.tmplgyy0; 
   tmplgyy_destructor(tmplgyypParser,33,&tmplgyymsp[-3].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
   tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
 }
-#line 1607 "./templatelang.c"
+#line 1616 "./templatelang.c"
         break;
-      case 46: /* template_if_attribequal ::= KEY_IF_ATTRIBEQUAL KEY_SPACE IDENTIFIER KEY_SPACE STRING KEY_BB_CLOSE */
-#line 273 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy60 = new TemplateIfAttribEqual(tmplgyymsp[-3].minor.tmplgyy0->extractString(), tmplgyymsp[-1].minor.tmplgyy0->extractString()); 
+      case 46: /* template_if_hasattrib ::= KEY_IF_HASATTRIB KEY_SPACE IDENTIFIER KEY_BB_CLOSE */
+#line 268 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy81 = new TemplateIfHasAttrib(tmplgyymsp[-1].minor.tmplgyy0->extractString()); 
+  delete tmplgyymsp[-1].minor.tmplgyy0; 
+  tmplgyy_destructor(tmplgyypParser,34,&tmplgyymsp[-3].minor);
+  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
+  tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
+}
+#line 1626 "./templatelang.c"
+        break;
+      case 47: /* template_if_attribequal ::= KEY_IF_ATTRIBEQUAL KEY_SPACE IDENTIFIER KEY_SPACE STRING KEY_BB_CLOSE */
+#line 275 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy96 = new TemplateIfAttribEqual(tmplgyymsp[-3].minor.tmplgyy0->extractString(), tmplgyymsp[-1].minor.tmplgyy0->extractString()); 
   delete tmplgyymsp[-1].minor.tmplgyy0; delete tmplgyymsp[-3].minor.tmplgyy0; 
-  tmplgyy_destructor(tmplgyypParser,34,&tmplgyymsp[-5].minor);
+  tmplgyy_destructor(tmplgyypParser,35,&tmplgyymsp[-5].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-4].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
   tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
 }
-#line 1618 "./templatelang.c"
+#line 1637 "./templatelang.c"
         break;
-      case 47: /* template_some_if ::= template_if_featureequal */
-#line 280 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = tmplgyymsp[0].minor.tmplgyy22; }
-#line 1623 "./templatelang.c"
-        break;
-      case 48: /* template_some_if ::= template_if_varequal */
+      case 48: /* template_some_if ::= template_if_featureequal */
 #line 282 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = tmplgyymsp[0].minor.tmplgyy131; }
-#line 1628 "./templatelang.c"
+{ tmplgyygotominor.tmplgyy65 = tmplgyymsp[0].minor.tmplgyy108; }
+#line 1642 "./templatelang.c"
         break;
-      case 49: /* template_some_if ::= template_if_listempty */
+      case 49: /* template_some_if ::= template_if_varequal */
 #line 284 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = tmplgyymsp[0].minor.tmplgyy129; }
-#line 1633 "./templatelang.c"
+{ tmplgyygotominor.tmplgyy65 = tmplgyymsp[0].minor.tmplgyy87; }
+#line 1647 "./templatelang.c"
         break;
-      case 50: /* template_some_if ::= template_if_attribequal */
+      case 50: /* template_some_if ::= template_if_listempty */
 #line 286 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = tmplgyymsp[0].minor.tmplgyy60; }
-#line 1638 "./templatelang.c"
+{ tmplgyygotominor.tmplgyy65 = tmplgyymsp[0].minor.tmplgyy17; }
+#line 1652 "./templatelang.c"
         break;
-      case 51: /* template_some_if ::= template_if_hasattrib */
+      case 51: /* template_some_if ::= template_if_attribequal */
 #line 288 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy73 = tmplgyymsp[0].minor.tmplgyy16; }
-#line 1643 "./templatelang.c"
+{ tmplgyygotominor.tmplgyy65 = tmplgyymsp[0].minor.tmplgyy96; }
+#line 1657 "./templatelang.c"
         break;
-      case 52: /* template_if ::= template_some_if template_list KEY_ENDIF */
-#line 293 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy114 = new TemplateIf(tmplgyymsp[-2].minor.tmplgyy73, tmplgyymsp[-1].minor.tmplgyy73, 0);   tmplgyy_destructor(tmplgyypParser,35,&tmplgyymsp[0].minor);
-}
-#line 1649 "./templatelang.c"
+      case 52: /* template_some_if ::= template_if_hasattrib */
+#line 290 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy65 = tmplgyymsp[0].minor.tmplgyy81; }
+#line 1662 "./templatelang.c"
         break;
-      case 53: /* template_if ::= template_some_if template_list KEY_ELSE template_list KEY_ENDIF */
+      case 53: /* template_if ::= template_some_if template_list KEY_ENDIF */
 #line 295 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy114 = new TemplateIf(tmplgyymsp[-4].minor.tmplgyy73, tmplgyymsp[-3].minor.tmplgyy73, tmplgyymsp[-1].minor.tmplgyy73);   tmplgyy_destructor(tmplgyypParser,36,&tmplgyymsp[-2].minor);
-  tmplgyy_destructor(tmplgyypParser,35,&tmplgyymsp[0].minor);
+{ tmplgyygotominor.tmplgyy22 = new TemplateIf(tmplgyymsp[-2].minor.tmplgyy65, tmplgyymsp[-1].minor.tmplgyy65, 0);   tmplgyy_destructor(tmplgyypParser,36,&tmplgyymsp[0].minor);
 }
-#line 1656 "./templatelang.c"
+#line 1668 "./templatelang.c"
         break;
-      case 54: /* template_if ::= template_some_if KEY_ELSE template_list KEY_ENDIF */
+      case 54: /* template_if ::= template_some_if template_list KEY_ELSE template_list KEY_ENDIF */
 #line 297 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy114 = new TemplateIf(tmplgyymsp[-3].minor.tmplgyy73, 0, tmplgyymsp[-1].minor.tmplgyy73);   tmplgyy_destructor(tmplgyypParser,36,&tmplgyymsp[-2].minor);
-  tmplgyy_destructor(tmplgyypParser,35,&tmplgyymsp[0].minor);
+{ tmplgyygotominor.tmplgyy22 = new TemplateIf(tmplgyymsp[-4].minor.tmplgyy65, tmplgyymsp[-3].minor.tmplgyy65, tmplgyymsp[-1].minor.tmplgyy65);   tmplgyy_destructor(tmplgyypParser,37,&tmplgyymsp[-2].minor);
+  tmplgyy_destructor(tmplgyypParser,36,&tmplgyymsp[0].minor);
 }
-#line 1663 "./templatelang.c"
+#line 1675 "./templatelang.c"
         break;
-      case 55: /* template_listappend ::= KEY_LISTAPPENDBEGIN KEY_SPACE STRING KEY_BB_CLOSE */
-#line 303 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy12 = new TemplateListAppendBegin(tmplgyymsp[-1].minor.tmplgyy0->extractString()); delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,37,&tmplgyymsp[-3].minor);
+      case 55: /* template_if ::= template_some_if KEY_ELSE template_list KEY_ENDIF */
+#line 299 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy22 = new TemplateIf(tmplgyymsp[-3].minor.tmplgyy65, 0, tmplgyymsp[-1].minor.tmplgyy65);   tmplgyy_destructor(tmplgyypParser,37,&tmplgyymsp[-2].minor);
+  tmplgyy_destructor(tmplgyypParser,36,&tmplgyymsp[0].minor);
+}
+#line 1682 "./templatelang.c"
+        break;
+      case 56: /* template_listappend ::= KEY_LISTAPPENDBEGIN KEY_SPACE STRING KEY_BB_CLOSE */
+#line 305 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy38 = new TemplateListAppendBegin(tmplgyymsp[-1].minor.tmplgyy0->extractString()); delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,38,&tmplgyymsp[-3].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
   tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
 }
-#line 1671 "./templatelang.c"
+#line 1690 "./templatelang.c"
         break;
-      case 56: /* template_listappend_end ::= KEY_LISTAPPENDEND */
-#line 309 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy130 = new TemplateListAppendEnd();   tmplgyy_destructor(tmplgyypParser,38,&tmplgyymsp[0].minor);
+      case 57: /* template_listappend_end ::= KEY_LISTAPPENDEND */
+#line 311 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy100 = new TemplateListAppendEnd();   tmplgyy_destructor(tmplgyypParser,39,&tmplgyymsp[0].minor);
 }
-#line 1677 "./templatelang.c"
+#line 1696 "./templatelang.c"
         break;
-      case 57: /* template_setvarnow ::= KEY_SETVAR KEY_SPACE STRING KEY_SPACE STRING KEY_BB_CLOSE */
-#line 315 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy88 = new TemplateSetVarNow(tmplgyymsp[-3].minor.tmplgyy0->extractString(), tmplgyymsp[-1].minor.tmplgyy0->extractString()); delete tmplgyymsp[-3].minor.tmplgyy0; delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,39,&tmplgyymsp[-5].minor);
+      case 58: /* template_setvarnow ::= KEY_SETVAR KEY_SPACE STRING KEY_SPACE STRING KEY_BB_CLOSE */
+#line 317 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy54 = new TemplateSetVarNow(tmplgyymsp[-3].minor.tmplgyy0->extractString(), tmplgyymsp[-1].minor.tmplgyy0->extractString()); delete tmplgyymsp[-3].minor.tmplgyy0; delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,40,&tmplgyymsp[-5].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-4].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
   tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
 }
-#line 1686 "./templatelang.c"
+#line 1705 "./templatelang.c"
         break;
-      case 58: /* template_setvar ::= KEY_SETVAR KEY_SPACE STRING KEY_BB_CLOSE */
-#line 320 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy109 = new TemplateSetVarBegin(tmplgyymsp[-1].minor.tmplgyy0->extractString()); delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,39,&tmplgyymsp[-3].minor);
+      case 59: /* template_setvar ::= KEY_SETVAR KEY_SPACE STRING KEY_BB_CLOSE */
+#line 322 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy35 = new TemplateSetVarBegin(tmplgyymsp[-1].minor.tmplgyy0->extractString()); delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,40,&tmplgyymsp[-3].minor);
   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
   tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
 }
-#line 1694 "./templatelang.c"
-        break;
-      case 59: /* template_setvar_end ::= KEY_SETVAREND */
-#line 326 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy7 = new TemplateSetVarEnd();   tmplgyy_destructor(tmplgyypParser,40,&tmplgyymsp[0].minor);
-}
-#line 1700 "./templatelang.c"
-        break;
-      case 60: /* template_emitvar ::= KEY_EMITVAR KEY_SPACE STRING KEY_BB_CLOSE */
-#line 332 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy119 = new TemplateEmitVar(tmplgyymsp[-1].minor.tmplgyy0->extractString()); delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,41,&tmplgyymsp[-3].minor);
-  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
-  tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
-}
-#line 1708 "./templatelang.c"
-        break;
-      case 61: /* template_string ::= CHAR */
-#line 340 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy10 = new TemplateString(new std::string(1, tmplgyymsp[0].minor.tmplgyy0->cChar)); delete tmplgyymsp[0].minor.tmplgyy0; }
 #line 1713 "./templatelang.c"
         break;
-      case 62: /* template_string ::= IDENTIFIER */
+      case 60: /* template_setvar_end ::= KEY_SETVAREND */
+#line 328 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy97 = new TemplateSetVarEnd();   tmplgyy_destructor(tmplgyypParser,41,&tmplgyymsp[0].minor);
+}
+#line 1719 "./templatelang.c"
+        break;
+      case 61: /* template_emitvar ::= KEY_EMITVAR KEY_SPACE STRING KEY_BB_CLOSE */
+#line 334 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy83 = new TemplateEmitVar(tmplgyymsp[-1].minor.tmplgyy0->extractString()); delete tmplgyymsp[-1].minor.tmplgyy0;   tmplgyy_destructor(tmplgyypParser,42,&tmplgyymsp[-3].minor);
+  tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[-2].minor);
+  tmplgyy_destructor(tmplgyypParser,6,&tmplgyymsp[0].minor);
+}
+#line 1727 "./templatelang.c"
+        break;
+      case 62: /* template_string ::= CHAR */
 #line 342 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy10 = new TemplateString(tmplgyymsp[0].minor.tmplgyy0->extractString()); delete tmplgyymsp[0].minor.tmplgyy0; }
-#line 1718 "./templatelang.c"
+{ tmplgyygotominor.tmplgyy80 = new TemplateString(new std::string(1, tmplgyymsp[0].minor.tmplgyy0->cChar)); delete tmplgyymsp[0].minor.tmplgyy0; }
+#line 1732 "./templatelang.c"
         break;
-      case 63: /* template_string ::= KEY_BARE_COUNTER */
+      case 63: /* template_string ::= IDENTIFIER */
 #line 344 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy10 = new TemplateString(new std::string("counter"));   tmplgyy_destructor(tmplgyypParser,26,&tmplgyymsp[0].minor);
-}
-#line 1724 "./templatelang.c"
+{ tmplgyygotominor.tmplgyy80 = new TemplateString(tmplgyymsp[0].minor.tmplgyy0->extractString()); delete tmplgyymsp[0].minor.tmplgyy0; }
+#line 1737 "./templatelang.c"
         break;
-      case 64: /* template_string ::= KEY_BARE_FEATURE */
+      case 64: /* template_string ::= KEY_BARE_COUNTER */
 #line 346 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy10 = new TemplateString(new std::string("feature"));   tmplgyy_destructor(tmplgyypParser,23,&tmplgyymsp[0].minor);
+{ tmplgyygotominor.tmplgyy80 = new TemplateString(new std::string("counter"));   tmplgyy_destructor(tmplgyypParser,27,&tmplgyymsp[0].minor);
 }
-#line 1730 "./templatelang.c"
+#line 1743 "./templatelang.c"
         break;
-      case 65: /* template_string ::= KEY_BARE_FEATURENOMANGLE */
+      case 65: /* template_string ::= KEY_BARE_FEATURE */
 #line 348 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy10 = new TemplateString(new std::string("featurenomangle"));   tmplgyy_destructor(tmplgyypParser,24,&tmplgyymsp[0].minor);
+{ tmplgyygotominor.tmplgyy80 = new TemplateString(new std::string("feature"));   tmplgyy_destructor(tmplgyypParser,24,&tmplgyymsp[0].minor);
 }
-#line 1736 "./templatelang.c"
+#line 1749 "./templatelang.c"
         break;
-      case 66: /* template_string ::= KEY_BARE_VAR */
+      case 66: /* template_string ::= KEY_BARE_FEATURENOMANGLE */
 #line 350 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy10 = new TemplateString(new std::string("var"));   tmplgyy_destructor(tmplgyypParser,17,&tmplgyymsp[0].minor);
+{ tmplgyygotominor.tmplgyy80 = new TemplateString(new std::string("featurenomangle"));   tmplgyy_destructor(tmplgyypParser,25,&tmplgyymsp[0].minor);
 }
-#line 1742 "./templatelang.c"
+#line 1755 "./templatelang.c"
         break;
-      case 67: /* template_string ::= KEY_BARE_VARNOMANGLE */
+      case 67: /* template_string ::= KEY_BARE_FORMAT */
 #line 352 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy10 = new TemplateString(new std::string("varnomangle"));   tmplgyy_destructor(tmplgyypParser,25,&tmplgyymsp[0].minor);
+{ tmplgyygotominor.tmplgyy80 = new TemplateString(new std::string("format"));   tmplgyy_destructor(tmplgyypParser,16,&tmplgyymsp[0].minor);
 }
-#line 1748 "./templatelang.c"
+#line 1761 "./templatelang.c"
         break;
-      case 68: /* template_string ::= INTEGER */
+      case 68: /* template_string ::= KEY_BARE_VAR */
 #line 354 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy10 = new TemplateString(new std::string(*tmplgyymsp[0].minor.tmplgyy0->pString)); delete tmplgyymsp[0].minor.tmplgyy0; }
-#line 1753 "./templatelang.c"
+{ tmplgyygotominor.tmplgyy80 = new TemplateString(new std::string("var"));   tmplgyy_destructor(tmplgyypParser,18,&tmplgyymsp[0].minor);
+}
+#line 1767 "./templatelang.c"
         break;
-      case 69: /* template_string ::= STRING */
+      case 69: /* template_string ::= KEY_BARE_VARNOMANGLE */
 #line 356 "./templatelang.yxx"
-{ std::string *pString = new std::string("\""); *pString += *tmplgyymsp[0].minor.tmplgyy0->pString + "\""; tmplgyygotominor.tmplgyy10 = new TemplateString(pString); delete tmplgyymsp[0].minor.tmplgyy0; }
-#line 1758 "./templatelang.c"
+{ tmplgyygotominor.tmplgyy80 = new TemplateString(new std::string("varnomangle"));   tmplgyy_destructor(tmplgyypParser,26,&tmplgyymsp[0].minor);
+}
+#line 1773 "./templatelang.c"
         break;
-      case 70: /* template_string ::= KEY_SPACE */
+      case 70: /* template_string ::= INTEGER */
 #line 358 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy10 = new TemplateString(new std::string(" "));   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[0].minor);
-}
-#line 1764 "./templatelang.c"
+{ tmplgyygotominor.tmplgyy80 = new TemplateString(new std::string(*tmplgyymsp[0].minor.tmplgyy0->pString)); delete tmplgyymsp[0].minor.tmplgyy0; }
+#line 1778 "./templatelang.c"
         break;
-      case 71: /* template_string ::= KEY_NEWLINE */
+      case 71: /* template_string ::= STRING */
 #line 360 "./templatelang.yxx"
-{ tmplgyygotominor.tmplgyy10 = new TemplateString(new std::string("\n"));   tmplgyy_destructor(tmplgyypParser,43,&tmplgyymsp[0].minor);
+{ std::string *pString = new std::string("\""); *pString += *tmplgyymsp[0].minor.tmplgyy0->pString + "\""; tmplgyygotominor.tmplgyy80 = new TemplateString(pString); delete tmplgyymsp[0].minor.tmplgyy0; }
+#line 1783 "./templatelang.c"
+        break;
+      case 72: /* template_string ::= KEY_SPACE */
+#line 362 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy80 = new TemplateString(new std::string(" "));   tmplgyy_destructor(tmplgyypParser,4,&tmplgyymsp[0].minor);
 }
-#line 1770 "./templatelang.c"
+#line 1789 "./templatelang.c"
+        break;
+      case 73: /* template_string ::= KEY_NEWLINE */
+#line 364 "./templatelang.yxx"
+{ tmplgyygotominor.tmplgyy80 = new TemplateString(new std::string("\n"));   tmplgyy_destructor(tmplgyypParser,44,&tmplgyymsp[0].minor);
+}
+#line 1795 "./templatelang.c"
         break;
       default:
         break;
@@ -121771,7 +122840,7 @@ static void tmplgyy_parse_failed(
 #line 111 "./templatelang.yxx"
 
   pEE->bSyntaxError = true;
-#line 1820 "./templatelang.c"
+#line 1845 "./templatelang.c"
   TemplateLangParserARG_STORE; /* Suppress warning about unused %extra_argument variable */
 }
 #endif /* TMPLGYYNOERRORRECOVERY */
@@ -121791,7 +122860,7 @@ static void tmplgyy_syntax_error(
   pEE->bSyntaxError = true;
   std::string errMsg = "syntax error near " + TOKEN->getTokenName();
   pEE->addToError(errMsg);
-#line 1840 "./templatelang.c"
+#line 1865 "./templatelang.c"
   TemplateLangParserARG_STORE; /* Suppress warning about unused %extra_argument variable */
 }
 
@@ -121987,11 +123056,10 @@ void TemplateLangParser(
 #endif
   return;
 }
-/**************** A copy of harvest/renderobjects.cpp *****************/
 
-
+/**************** A copy of harvest/renderobjects.cpp ****************/
 #line 1 "harvest/renderobjects.cpp"
-        /*
+/*
  * renderobjects.cpp
  *
  * Classes and functions to render Emdros objects into XML (or
@@ -122078,11 +123146,9 @@ void TemplateLangParser(
  **************************************************************************/
 
 /**************** leaving harvest/renderobjects.cpp temporarily *****************/
-/**************** A copy of include/renderobjects.h *****************/
-
-
+/**************** A copy of include/renderobjects.h ****************/
 #line 1 "include/renderobjects.h"
-        /*
+/*
  * renderobjects.h
  *
  * Classes and methods to render Emdros objects into something else,
@@ -122090,13 +123156,13 @@ void TemplateLangParser(
  *
  * Ulrik Sandborg-Petersen
  * Created: 4/22-2007
- * Last update: 5/27-2014
+ * Last update: 4/14-2016
  *
  */
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2007-2014  Ulrik Sandborg-Petersen
+ *   Copyright (C) 2007-2016  Ulrik Sandborg-Petersen
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License as
@@ -122181,27 +123247,27 @@ void TemplateLangParser(
 
 
 #line 96 "include/renderobjects.h"
-        /**************** already included monads.h -- not including again *****************/
+/**************** already included monads.h -- not including again *****************/
 
 
 #line 97 "include/renderobjects.h"
-        /**************** already included memobject.h -- not including again *****************/
+/**************** already included memobject.h -- not including again *****************/
 
 
 #line 98 "include/renderobjects.h"
-        /**************** already included json_classes.h -- not including again *****************/
+/**************** already included json_classes.h -- not including again *****************/
 
 
 #line 99 "include/renderobjects.h"
-        /**************** already included templatelang_classes.h -- not including again *****************/
+/**************** already included templatelang_classes.h -- not including again *****************/
 
 
 #line 100 "include/renderobjects.h"
-        /**************** already included arena.h -- not including again *****************/
+/**************** already included arena.h -- not including again *****************/
 
 
 #line 101 "include/renderobjects.h"
-        
+
 
 #ifndef SWIG
 class MSEPObjectPair {
@@ -122212,7 +123278,9 @@ class MSEPObjectPair {
         MSEPObjectPair(monad_m mse_first, monad_m mse_last, MemObject *pObj) : m_mse_first(mse_first),
 		m_mse_last(mse_last),
 		m_pObj(pObj) {};
-	~MSEPObjectPair() {};
+	~MSEPObjectPair() {
+		delete m_pObj;
+	};
 };
 #endif
 
@@ -122329,23 +123397,24 @@ extern std::string render_objects(EmdrosEnv *pEnv, const std::string& db_name, c
 
 
 #endif
+
 /**************** continuing harvest/renderobjects.cpp where we left off *****************/
 
 
 #line 87 "harvest/renderobjects.cpp"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 88 "harvest/renderobjects.cpp"
-        /**************** already included mql_sheaf.h -- not including again *****************/
+/**************** already included mql_sheaf.h -- not including again *****************/
 
 
 #line 89 "harvest/renderobjects.cpp"
-        /**************** already included emdf_value.h -- not including again *****************/
+/**************** already included emdf_value.h -- not including again *****************/
 
 
 #line 90 "harvest/renderobjects.cpp"
-        #include <algorithm>
+#include <algorithm>
 
 
 
@@ -123463,11 +124532,10 @@ std::string render_objects(EmdrosEnv *pEnv, const std::string& db_name, const st
 		return result;
 	}
 }
-/**************** A copy of harvest/renderxml.cpp *****************/
 
-
+/**************** A copy of harvest/renderxml.cpp ****************/
 #line 1 "harvest/renderxml.cpp"
-        /*
+/*
  * renderxml.cpp
  *
  * Classes and functions to render XML into something else,
@@ -123555,11 +124623,9 @@ std::string render_objects(EmdrosEnv *pEnv, const std::string& db_name, const st
 
 
 /**************** leaving harvest/renderxml.cpp temporarily *****************/
-/**************** A copy of include/renderxml.h *****************/
-
-
+/**************** A copy of include/renderxml.h ****************/
 #line 1 "include/renderxml.h"
-        /*
+/*
  * renderxml.h
  *
  * Methods and classes to render XML into something else,
@@ -123653,11 +124719,11 @@ std::string render_objects(EmdrosEnv *pEnv, const std::string& db_name, const st
 
 
 #line 91 "include/renderxml.h"
-        /**************** already included templatelang_classes.h -- not including again *****************/
+/**************** already included templatelang_classes.h -- not including again *****************/
 
 
 #line 92 "include/renderxml.h"
-        
+
 extern std::string RenderXML(const std::string& xml, const JSONValue *pTopStyleSheet, const std::string& render_stylesheet, bool& bProcessOK, std::string& strError);
 
 extern std::string RenderXML(const std::string& xml, const JSONValue *pTopStyleSheet, const std::string& render_stylesheet, const TemplateLangVariableMap& variables, bool& bProcessOK, std::string& strError);
@@ -123665,15 +124731,16 @@ extern std::string RenderXML(const std::string& xml, const JSONValue *pTopStyleS
 extern std::string utf8ToEntity(const std::string& inHTML);
 
 #endif
+
 /**************** continuing harvest/renderxml.cpp where we left off *****************/
 
 
 #line 88 "harvest/renderxml.cpp"
-        /**************** already included templatelang_classes.h -- not including again *****************/
+/**************** already included templatelang_classes.h -- not including again *****************/
 
 
 #line 89 "harvest/renderxml.cpp"
-        
+
 #include <fstream>
 #include <sstream>
 #include <list>
@@ -123682,15 +124749,15 @@ extern std::string utf8ToEntity(const std::string& inHTML);
 
 
 #line 95 "harvest/renderxml.cpp"
-        /**************** already included qdxml.h -- not including again *****************/
+/**************** already included qdxml.h -- not including again *****************/
 
 
 #line 96 "harvest/renderxml.cpp"
-        /**************** already included arena.h -- not including again *****************/
+/**************** already included arena.h -- not including again *****************/
 
 
 #line 97 "harvest/renderxml.cpp"
-        
+
 
 
 
@@ -124264,13 +125331,12 @@ std::string RenderXML(const std::string& xml, const JSONValue *pTopStyleSheet, c
 	return RenderXML(xml, pTopStyleSheet, render_stylesheet, empty_vars, bProcessOK, strError);
 }
 
-    #undef MYMAX
-    #undef MYMIN
-            /**************** A copy of harvest/harvest_fts.cpp *****************/
 
-
+#undef MYMAX
+#undef MYMIN
+/**************** A copy of harvest/harvest_fts.cpp ****************/
 #line 1 "harvest/harvest_fts.cpp"
-        /*
+/*
  * harvest_fts.cpp
  *
  * Full Text Search, part of the harvest library.
@@ -124360,11 +125426,9 @@ std::string RenderXML(const std::string& xml, const JSONValue *pTopStyleSheet, c
  */
 
 /**************** leaving harvest/harvest_fts.cpp temporarily *****************/
-/**************** A copy of include/harvest_fts.h *****************/
-
-
+/**************** A copy of include/harvest_fts.h ****************/
 #line 1 "include/harvest_fts.h"
-        /*
+/*
  * harvest_fts.h
  *
  * Full Text Search, part of the harvest library.
@@ -124460,15 +125524,13 @@ std::string RenderXML(const std::string& xml, const JSONValue *pTopStyleSheet, c
 
 
 #line 93 "include/harvest_fts.h"
-        #include <string>
+#include <string>
 #include <set>
 #include <list>
 /**************** leaving include/harvest_fts.h temporarily *****************/
-/**************** A copy of include/emdros_environment.h *****************/
-
-
+/**************** A copy of include/emdros_environment.h ****************/
 #line 1 "include/emdros_environment.h"
-        /*
+/*
  * emdros_environment.h
  *
  * Emdros environment
@@ -124565,26 +125627,27 @@ std::string RenderXML(const std::string& xml, const JSONValue *pTopStyleSheet, c
 
 
 #line 94 "include/emdros_environment.h"
-        
+
 #endif // EMDROS_ENVIRONMENT__H__
+
 /**************** continuing include/harvest_fts.h where we left off *****************/
 
 
 #line 97 "include/harvest_fts.h"
-        /**************** already included json_classes.h -- not including again *****************/
+/**************** already included json_classes.h -- not including again *****************/
 
 
 #line 98 "include/harvest_fts.h"
-        /**************** already included string_list.h -- not including again *****************/
+/**************** already included string_list.h -- not including again *****************/
 
 
 #line 99 "include/harvest_fts.h"
-        
+
 /**************** already included emdros-lconfig.h -- not including again *****************/
 
 
 #line 101 "include/harvest_fts.h"
-        #if HAVE_OSTREAM
+#if HAVE_OSTREAM
 #include <ostream>
 #else
 #include <ostream.h>
@@ -125226,16 +126289,15 @@ extern StringList harvestFTSTokenize(const std::string& input_string, EmdrosFTSS
 extern std::list<StringList> harvestFTSGoogleTokenize(const std::string& input_string, EmdrosFTSStringFilter *pStringFilterList);
 
 #endif // HARVEST_FTS__H__
+
 /**************** continuing harvest/harvest_fts.cpp where we left off *****************/
 
 
 #line 90 "harvest/harvest_fts.cpp"
-        /**************** leaving harvest/harvest_fts.cpp temporarily *****************/
-/**************** A copy of include/harvest_fts2.h *****************/
-
-
+/**************** leaving harvest/harvest_fts.cpp temporarily *****************/
+/**************** A copy of include/harvest_fts2.h ****************/
 #line 1 "include/harvest_fts2.h"
-        /*
+/*
  * harvest_fts.h
  *
  * Full Text Search, part of the harvest library.
@@ -125331,7 +126393,7 @@ extern std::list<StringList> harvestFTSGoogleTokenize(const std::string& input_s
 
 
 #line 93 "include/harvest_fts2.h"
-        #include <string>
+#include <string>
 #include <map>
 #include <set>
 #include <list>
@@ -125472,16 +126534,15 @@ extern bool harvestFTS2Google(EmdrosEnv *pEnv, const std::string& bookcase_OTN, 
 
 
 #endif // HARVEST_FTS2__H__
+
 /**************** continuing harvest/harvest_fts.cpp where we left off *****************/
 
 
 #line 91 "harvest/harvest_fts.cpp"
-        /**************** leaving harvest/harvest_fts.cpp temporarily *****************/
-/**************** A copy of include/harvest_fts3.h *****************/
-
-
+/**************** leaving harvest/harvest_fts.cpp temporarily *****************/
+/**************** A copy of include/harvest_fts3.h ****************/
 #line 1 "include/harvest_fts3.h"
-        /*
+/*
  * harvest_fts3.h
  *
  * Full Text Search version 3, part of the harvest library.
@@ -125582,15 +126643,15 @@ extern bool harvestFTS2Google(EmdrosEnv *pEnv, const std::string& bookcase_OTN, 
 
 
 #line 98 "include/harvest_fts3.h"
-        /**************** already included emdros_environment.h -- not including again *****************/
+/**************** already included emdros_environment.h -- not including again *****************/
 
 
 #line 99 "include/harvest_fts3.h"
-        /**************** already included harvest_fts.h -- not including again *****************/
+/**************** already included harvest_fts.h -- not including again *****************/
 
 
 #line 100 "include/harvest_fts3.h"
-        
+
 class BookcaseHitList3; // Forward declaration
 
 class FTS3Search {
@@ -125616,33 +126677,34 @@ extern bool harvestFTS3Google(EmdrosEnv *pEnv, const std::string& bookcase_OTN, 
 
 
 #endif // HARVEST_FTS3__H__
+
 /**************** continuing harvest/harvest_fts.cpp where we left off *****************/
 
 
 #line 92 "harvest/harvest_fts.cpp"
-        #include <map>
+#include <map>
 
 /**************** already included emdf.h -- not including again *****************/
 
 
 #line 95 "harvest/harvest_fts.cpp"
-        /**************** already included mql_sheaf.h -- not including again *****************/
+/**************** already included mql_sheaf.h -- not including again *****************/
 
 
 #line 96 "harvest/harvest_fts.cpp"
-        /**************** already included mql_execution_environment.h -- not including again *****************/
+/**************** already included mql_execution_environment.h -- not including again *****************/
 
 
 #line 97 "harvest/harvest_fts.cpp"
-        /**************** already included emdfdb.h -- not including again *****************/
+/**************** already included emdfdb.h -- not including again *****************/
 
 
 #line 98 "harvest/harvest_fts.cpp"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 99 "harvest/harvest_fts.cpp"
-        
+
 
 #define MYSIGN(A) ((A == 0) ? 0 : ((A < 0) ? -1 : 1))
 #define MYABS(A) ((A < 0) ? -A : A)
@@ -127916,13 +128978,12 @@ bool harvestFTSGoogle(EmdrosEnv *pEnv, const std::string& bookcase_OTN, const st
 #undef MYMIN
 #undef MYMAX
 
-    #undef MYMAX
-    #undef MYMIN
-            /**************** A copy of harvest/harvest_fts2.cpp *****************/
 
-
+#undef MYMAX
+#undef MYMIN
+/**************** A copy of harvest/harvest_fts2.cpp ****************/
 #line 1 "harvest/harvest_fts2.cpp"
-        /*
+/*
  * harvest_fts2.cpp
  *
  * Full Text Search engine version 2, part of the Emdros Harvest
@@ -128016,37 +129077,37 @@ bool harvestFTSGoogle(EmdrosEnv *pEnv, const std::string& bookcase_OTN, const st
 
 
 #line 91 "harvest/harvest_fts2.cpp"
-        /**************** already included harvest_fts2.h -- not including again *****************/
+/**************** already included harvest_fts2.h -- not including again *****************/
 
 
 #line 92 "harvest/harvest_fts2.cpp"
-        #include <map>
+#include <map>
 
 /**************** already included emdf.h -- not including again *****************/
 
 
 #line 95 "harvest/harvest_fts2.cpp"
-        /**************** already included mql_sheaf.h -- not including again *****************/
+/**************** already included mql_sheaf.h -- not including again *****************/
 
 
 #line 96 "harvest/harvest_fts2.cpp"
-        /**************** already included emdf_value.h -- not including again *****************/
+/**************** already included emdf_value.h -- not including again *****************/
 
 
 #line 97 "harvest/harvest_fts2.cpp"
-        /**************** already included mql_execution_environment.h -- not including again *****************/
+/**************** already included mql_execution_environment.h -- not including again *****************/
 
 
 #line 98 "harvest/harvest_fts2.cpp"
-        /**************** already included emdfdb.h -- not including again *****************/
+/**************** already included emdfdb.h -- not including again *****************/
 
 
 #line 99 "harvest/harvest_fts2.cpp"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 100 "harvest/harvest_fts2.cpp"
-        
+
 
 
 #define MYABS(A) (((A) < 0) ? (-(A)) : (A))
@@ -129111,11 +130172,13 @@ void BookcaseHarvester2::process(const SetOfMonads& substrate, const StringList&
 	}
 }
 
-/**************** A copy of harvest/harvest_fts3.cpp *****************/
 
 
+#undef MYMAX
+#undef MYMIN
+/**************** A copy of harvest/harvest_fts3.cpp ****************/
 #line 1 "harvest/harvest_fts3.cpp"
-        /*
+/*
  * harvest_fts3.cpp
  *
  * Full Text Search engine version 3, part of the Emdros Harvest
@@ -129209,25 +130272,25 @@ void BookcaseHarvester2::process(const SetOfMonads& substrate, const StringList&
 
 
 #line 91 "harvest/harvest_fts3.cpp"
-        #include <map>
+#include <map>
 
 /**************** already included emdf.h -- not including again *****************/
 
 
 #line 94 "harvest/harvest_fts3.cpp"
-        /**************** already included mql_sheaf.h -- not including again *****************/
+/**************** already included mql_sheaf.h -- not including again *****************/
 
 
 #line 95 "harvest/harvest_fts3.cpp"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 96 "harvest/harvest_fts3.cpp"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 97 "harvest/harvest_fts3.cpp"
-        
+
 
 
 /******************************************************************
@@ -129995,5 +131058,683 @@ bool harvestFTS3Google(EmdrosEnv *pEnv, const std::string& bookcase_OTN, const s
 {
 	bool bUseGoogleSyntax = true;
 	return harvestFTS3(pEnv, bUseGoogleSyntax, bookcase_OTN, indexed_OTN, indexed_feature_name, substrate, query, largest_proximity, bReduceToSingleHitsWithinBookcases, error_message, result);
+}
+
+
+/**************** A copy of util/opt.cpp ****************/
+#line 1 "util/opt.cpp"
+/*
+ * opt.cpp
+ *
+ * Classes and functions to support getting arguments from argc and argv
+ *
+ * Ulrik Petersen
+ * Created: 7/19-2006
+ * Last update: 1/20-2007
+ *
+ */
+/************************************************************************
+ *
+ *   Emdros - the database engine for analyzed or annotated text
+ *   Copyright (C) 2006-2007  Ulrik Petersen
+ *
+ *   This program is free software; you can redistribute it and/or
+ *   modify it under the terms of the GNU General Public License as
+ *   published by the Free Software Foundation, license version 2.  
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *   General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+ *   02111-1307 USA
+ *
+ *
+ *   Special exception
+ *   =================
+ * 
+ *   In addition, as a special exception, Ulrik Petersen, the
+ *   copyright holder of Emdros, gives permission to link Emdros, in
+ *   whole or in part, with the libraries which are normally
+ *   distributed with:
+ *   
+ *   a) Sun's Java platform,
+ *   b) Python, 
+ *   c) Jython,
+ *   d) Ruby, and/or 
+ *   e) Perl 
+ *   f) PostgreSQL
+ *   g) OpenSSL
+ *
+ *   (or with modified versions of these), and to distribute linked
+ *   combinations including both Emdros, in whole or in part, and one
+ *   or more of the libraries normally distributed with (a)-(g) above.
+ *
+ *   Please note: This gives you special rights concerning the
+ *   libraries which normally accompany the above pieces of software.
+ *   It gives you no special rights concerning software that you write
+ *   yourself.  You must obey the GNU General Public License in all
+ *   respects for all of the code used other than the libraries
+ *   normally distributed with (a)-(g) above.
+ *
+ *   If you modify this file, you may extend this exception to your
+ *   version of the file, but you are not obligated to do so. If you
+ *   do not wish to do so, delete this exception statement from your
+ *   version.
+ *
+ *
+ *   Other licensing forms
+ *   =====================
+ *
+ *   If you wish to negotiate commercial licensing, please contact
+ *   Ulrik Petersen at ulrikp[at]users.sourceforge.net.
+ *
+ *   Licensing can also be negotiated if your organization is an
+ *   educational, non-profit, charity, missionary or similar
+ *   organization.
+ *
+ *
+ *   Website
+ *   =======
+ *
+ *   Emdros has a website here:
+ *
+ *   http://emdros.org
+ *
+ *
+ *
+ **************************************************************************/
+
+/**************** leaving util/opt.cpp temporarily *****************/
+/**************** A copy of include/opt.h ****************/
+#line 1 "include/opt.h"
+/*
+ * opt.h
+ *
+ * Classes and functions to support getting arguments from argc and argv
+ *
+ * Ulrik Petersen
+ * Created: 7/19-2006
+ * Last update: 10/3-2011
+ *
+ */
+/************************************************************************
+ *
+ *   Emdros - the database engine for analyzed or annotated text
+ *   Copyright (C) 2011  Ulrik Sandborg-Petersen
+ *
+ *   This program is free software; you can redistribute it and/or
+ *   modify it under the terms of the GNU General Public License as
+ *   published by the Free Software Foundation, license version 2.  
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *   General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+ *   02111-1307 USA
+ *
+ *
+ *   Special exception
+ *   =================
+ * 
+ *   In addition, as a special exception, Ulrik Petersen, the
+ *   copyright holder of Emdros, gives permission to link Emdros, in
+ *   whole or in part, with the libraries which are normally
+ *   distributed with:
+ *   
+ *   a) Sun's Java platform,
+ *   b) Python, 
+ *   c) Jython,
+ *   d) Ruby, and/or 
+ *   e) Perl 
+ *   f) PostgreSQL
+ *   g) OpenSSL
+ *
+ *   (or with modified versions of these), and to distribute linked
+ *   combinations including both Emdros, in whole or in part, and one
+ *   or more of the libraries normally distributed with (a)-(g) above.
+ *
+ *   Please note: This gives you special rights concerning the
+ *   libraries which normally accompany the above pieces of software.
+ *   It gives you no special rights concerning software that you write
+ *   yourself.  You must obey the GNU General Public License in all
+ *   respects for all of the code used other than the libraries
+ *   normally distributed with (a)-(g) above.
+ *
+ *   If you modify this file, you may extend this exception to your
+ *   version of the file, but you are not obligated to do so. If you
+ *   do not wish to do so, delete this exception statement from your
+ *   version.
+ *
+ *
+ *   Other licensing forms
+ *   =====================
+ *
+ *   If you wish to negotiate commercial licensing, please contact
+ *   Ulrik Petersen at ulrikp[at]users.sourceforge.net.
+ *
+ *   Licensing can also be negotiated if your organization is an
+ *   educational, non-profit, charity, missionary or similar
+ *   organization.
+ *
+ *
+ *   Website
+ *   =======
+ *
+ *   Emdros has a website here:
+ *
+ *   http://emdros.org
+ *
+ *
+ *
+ **************************************************************************/
+
+#ifndef OPTIONS__H__
+#define OPTIONS__H__
+
+#include <string>
+#include <map>
+#include <list>
+/**************** already included emdf_enums.h -- not including again *****************/
+
+
+#line 92 "include/opt.h"
+
+/**************** already included emdros-lconfig.h -- not including again *****************/
+
+
+#line 94 "include/opt.h"
+#if HAVE_OSTREAM
+#include <ostream>
+#else
+#include <ostream.h>
+#endif
+
+#include <iostream>
+
+typedef struct option_t {
+	std::string short_version; /**< For options with one -. */
+	std::string long_version; /**< For options with two -s. */
+	std::string help_string_when_no_param;    /**< string to print when needs a parameter and not given a parameter. */
+	bool bTakesParameter; /**< true iff this takes a parameter. */
+	std::string value;
+	std::string default_value;
+	bool bPresent;
+	option_t(const char *sv, /* without the - .*/
+		 const char *lv, /* without the -- . */
+		 bool tp=false, 
+		 const char *dv="", /* default value. */
+		 const char *hs="") 
+	{ 
+		short_version = std::string("-") + sv; 
+		long_version= std::string("--") + lv; 
+		help_string_when_no_param=hs; 
+		bTakesParameter=tp; 
+		default_value = dv,
+		value=""; 
+		bPresent=false;
+	};
+	// Use default copy-constructor: All strings must be constant.
+} option_t;
+
+typedef std::map<std::string, option_t> OptionMap_t;
+
+extern void addOption(const char *short_version, /* with or without the - . */
+		      const char *long_version,  /* with or without the -- . */
+		      bool takes_parameter = false,
+		      const char *default_value = "",
+		      const char *help_message_when_no_param = "");
+		      
+
+extern bool parseArguments(int argc, char *argv[], std::string& error_message, std::list<std::string>& surplus_arguments);
+
+extern bool getArgumentValue(const char *short_version, std::string& value);
+
+extern bool getArgumentPresent(const char *short_version);
+
+/* Must be declared in the program. */
+extern OptionMap_t theOptionMap; 
+
+/* Adds -h, -u, -p, -b, --version, --help, 
+ * and -e if bAddEncoding is true. */
+extern void addStandardArguments(bool bAddEncoding = false);
+
+extern bool getStandardArguments(bool& bShowVersion, bool& bShowHelp, std::string& hostname, std::string& user, std::string& password, eBackendKind& backend_kind, eCharsets& charset, std::string& error_message);
+
+extern void printUsageStandardArguments(std::ostream& ostr);
+
+extern void printUsageDefaultsOfStandardArguments(std::ostream& ostr);
+
+#endif // OPTIONS__H__
+
+/**************** continuing util/opt.cpp where we left off *****************/
+
+
+#line 86 "util/opt.cpp"
+/**************** already included debug.h -- not including again *****************/
+
+
+#line 87 "util/opt.cpp"
+/**************** already included string_func.h -- not including again *****************/
+
+
+#line 88 "util/opt.cpp"
+
+// global variable
+OptionMap_t theOptionMap;
+
+bool getHasEncodingOption(void)
+{
+	OptionMap_t::const_iterator ci = theOptionMap.find("-e");
+	if (ci == theOptionMap.end()) {
+		return false;
+	} else {
+		return ci->second.long_version == "--encoding";
+	}
+}
+
+std::string reduceOption(const std::string& in)
+{
+	std::string::size_type length = in.length();
+	if (length == 0) {
+		ASSERT_THROW(false, "opt.cpp: reduce_option: Cannot add empty option.");
+		return std::string(""); // Just to fool the compiler into giving no warning...
+	} else if (length == 1) {
+		if (in[0] == '-') {
+			return std::string("");
+		} else {
+			return in;
+		}
+	} else {
+		if (in[0] == '-') {
+			if (in[1] == '-') {
+				return in.substr(2);
+			} else {
+				return in.substr(1);
+			}
+		} else {
+			return in;
+		}
+	}
+}
+
+void addOption(const char *short_version, /* with or without the - . */
+	       const char *long_version,  /* with or without the -- . */
+	       bool takes_parameter,
+	       const char *default_value,
+	       const char *help_message_when_no_param)
+{
+	std::string sv = short_version;
+	std::string lv = long_version;
+	if (sv == lv
+	    && sv.length() >= 2
+	    && sv[0] == '-'
+	    && sv[1] == '-') {
+		sv = std::string("-") + reduceOption(sv); // Add "-" back on.
+		lv = reduceOption(lv);
+	} else {
+		sv = reduceOption(sv);
+		lv = reduceOption(lv);
+	}
+	option_t opt(sv.c_str(),
+		     lv.c_str(),
+		     takes_parameter,
+		     default_value,
+		     help_message_when_no_param);
+	theOptionMap.insert(std::make_pair(opt.short_version,opt));
+}
+
+option_t& isOption(const std::string& argument, bool& bIsOption)
+{
+	//
+	// It doesn't matter if the user fiddles with this one;
+	// It is only returned when bIsOption is false.
+	//
+	static option_t dummy_opt("","");
+
+	//
+	if (argument.length() > 1
+	    && argument[1] == '-') {
+		// Find via a linear search
+		OptionMap_t::iterator it, end;
+		it = theOptionMap.begin();
+		end = theOptionMap.end();
+		while (it != end) {
+			if (it->second.long_version == argument) {
+				bIsOption = true;
+				return it->second;
+			} 
+			++it;
+		} 
+	} else {
+		// Find from the second character out.
+		OptionMap_t::iterator it = theOptionMap.find(argument);
+		if (it == theOptionMap.end()) {
+			bIsOption = false;
+			return dummy_opt;
+		} else {
+			bIsOption = true;
+			return it->second;
+		}
+	}
+	bIsOption = false;
+	return dummy_opt;
+}
+
+
+bool parseArguments(int argc, char *argv[], std::string& error_message, std::list<std::string>& surplus_arguments)
+{
+	for (int i = 1; i < argc; ++i) {
+		if (argv[i][0] != '-') {
+			surplus_arguments.push_back(argv[i]);
+		} else {
+			// Starts with '-'
+			std::string argument(argv[i]);
+			bool bIsOption;
+			option_t& opt = isOption(argument, bIsOption);
+			if (!bIsOption) {
+				error_message = "Unknown option: " + argument;
+				return false;
+			} else {
+				// It is a known option
+				if (opt.bTakesParameter) {
+					++i;
+					if (i >= argc) {
+						std::string err = opt.help_string_when_no_param;
+						if (err == "") {
+							error_message = "Error: There must be a value after the option " + argument;
+						} else {
+							error_message = err;
+						}
+						return false;
+					} else {
+						opt.bPresent = true;
+						opt.value = std::string(argv[i]);
+					}
+				} else {
+					opt.bPresent = true;
+				}
+			}
+		}
+	}
+	return true;
+}
+
+bool getArgumentValue(const char *short_version, std::string& value)
+{
+	OptionMap_t::const_iterator ci = theOptionMap.find(std::string(short_version));
+	if (ci == theOptionMap.end()) {
+		return false;
+	} else {
+		if (ci->second.bPresent) {
+			value = ci->second.value;
+			return true;
+		} else {
+			value = ci->second.default_value;
+			return false;
+		}
+	}
+}
+
+
+bool getArgumentPresent(const char *short_version)
+{
+	OptionMap_t::const_iterator ci = theOptionMap.find(std::string(short_version));
+	if (ci == theOptionMap.end()) {
+		return false;
+	} else {
+		return ci->second.bPresent;
+	}
+}
+
+
+/* Adds -h, -u, -p, -b, --help, --version. */
+void addStandardArguments(bool bAddEncoding)
+{
+	addOption("--help", "--help");
+	addOption("-V", "--version");
+
+	addOption("-h", "--host", true,
+		  "localhost",
+		  "ERROR: -h and --host must have a hostname as their argument.\n"
+		  "       example: -h mql.example.com\n");
+	addOption("-u", "--user", true,
+		  "emdf",
+		  "ERROR: -u and --user must have a database user name as their argument.\n"
+		  "       example: -u emdf\n");
+	addOption("-p", "--password", true,
+		  "",
+		  "ERROR: -p and --password must have a database password as their argument.\n"
+		  "       example: -p secret\n");
+	addOption("-b", "--backend", true,
+		  backend_kind2string(DEFAULT_BACKEND_ENUM).c_str(),
+		  "ERROR: -b and --backend must have a database backend name as their argument.\n"
+		  "       Valid values are:\n\n"
+		  "       For PostgreSQL: p, pg, postgres, postgresql\n"
+		  "       For MySQL: m, my, mysql\n"
+		  "       For SQLite 2.X.X: 2, l, lt, sqlite, sqlite2, s\n\n"
+		  "       For SQLite 3.X.X: 3, lt3, sqlite3, s3\n\n"
+		  "       ... all are case-IN-sensitive.\n"
+		  );
+	if (bAddEncoding) {
+		addOption("-e", "--encoding", true,
+			  "UTF8",
+			  "ERROR: -e and --encoding must have an encoding as their argument.\n"
+			  "       example: -e UTF8\n"
+			  "       example: -e iso_8859-1, -e iso_8859-2, ... , -e iso_8859-15\n"
+			  );
+	}
+}
+
+
+bool getStandardArguments(bool& bShowVersion, bool& bShowHelp, std::string& hostname, std::string& user, std::string& password, eBackendKind& backend_kind, eCharsets& charset, std::string& error_message)
+{
+	bShowVersion = getArgumentPresent("-V");
+	bShowHelp = getArgumentPresent("--help");
+	
+	getArgumentValue("-h", hostname);
+	getArgumentValue("-u", user);
+	getArgumentValue("-p", password);
+
+	std::string backend_str;
+	if (getArgumentValue("-b", backend_str)) {
+		if (!string2backend_kind(backend_str, backend_kind)) {
+			error_message = std::string("Unknown backend for -b or --backend switch: '") + backend_str + "'.\n";
+			return false;
+		} 
+	} else {
+		backend_kind = DEFAULT_BACKEND_ENUM;
+	}
+
+	// Is encoding there?
+	if (getHasEncodingOption()) {
+		std::string encoding_str;
+		getArgumentValue("-e", encoding_str);
+		if (!string2charset(encoding_str, charset)) {
+			error_message = "ERROR: Unknown encoding '" + encoding_str + "'.\n"
+				+ "       Valid encodings:\n"
+				+ "       -e UTF8\n"
+				+ "       -e iso_8859-1, -e iso_8859_2, ..., -e iso_8859-15\n";
+			return false;
+		}
+	}
+
+	return true;
+}
+
+
+void printUsageStandardArguments(std::ostream& ostr)
+{
+	ostr << "   --help               Show this help" << std::endl;
+	ostr << "   -V , --version       Show version" << std::endl;
+	ostr << "   -h , --host host     Set hostname to connect to" << std::endl;
+	ostr << "   -u , --user user     Set database user to connect as (default: 'emdf')" << std::endl;
+	ostr << "   -p , --password pwd  Set password to use for database user" << std::endl;
+	ostr << "   -b , --backend bkend Use this backend. Valid values:" << std::endl;
+	ostr << "                        For PostgreSQL: p, pg, postgres, postgresql" << std::endl;
+	ostr << "                        For SQLite 2.X.X: 2, l, lt, sqlite, sqlite2, s" << std::endl;
+	ostr << "                        For SQLite 3.X.X: 3, lt3, sqlite3, s3" << std::endl;
+	ostr << "                        For MySQL: m, my, mysql" << std::endl;
+	ostr << "                        ... all are case-IN-sensitive." << std::endl;
+	if (getHasEncodingOption()) {
+		ostr << "   -e , --encoding enc  Can either be iso_8859-1 to iso_8859-15 or UTF8" << std::endl;     
+	}
+	
+}
+
+void printUsageDefaultsOfStandardArguments(std::ostream& ostr)
+{
+	ostr << "   -h localhost " << std::endl;
+	ostr << "   -u emdf " << std::endl;
+	ostr << "   -b " << backend_kind2string(DEFAULT_BACKEND_ENUM) << std::endl;
+	if (getHasEncodingOption()) {
+		ostr << "   -e UTF8 " << std::endl;
+	}
+}
+
+
+/**************** A copy of util/messages.cpp ****************/
+#line 1 "util/messages.cpp"
+/*
+ * messages.cpp
+ *
+ * Standard messages for Emdros
+ *
+ * Ulrik Petersen
+ * Created: 10/6-2006 (October 6, 2006)
+ * Last update: 2/19-2010
+ *
+ */
+/************************************************************************
+ *
+ *   Emdros - the database engine for analyzed or annotated text
+ *   Copyright (C) 2005-2010  Ulrik Sandborg-Petersen
+ *
+ *   This program is free software; you can redistribute it and/or
+ *   modify it under the terms of the GNU General Public License as
+ *   published by the Free Software Foundation, license version 2.  
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *   General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+ *   02111-1307 USA
+ *
+ *
+ *   Special exception
+ *   =================
+ * 
+ *   In addition, as a special exception, Ulrik Petersen, the
+ *   copyright holder of Emdros, gives permission to link Emdros, in
+ *   whole or in part, with the libraries which are normally
+ *   distributed with:
+ *   
+ *   a) Sun's Java platform,
+ *   b) Python, 
+ *   c) Jython,
+ *   d) Ruby, and/or 
+ *   e) Perl 
+ *   f) PostgreSQL
+ *   g) OpenSSL
+ *
+ *   (or with modified versions of these), and to distribute linked
+ *   combinations including both Emdros, in whole or in part, and one
+ *   or more of the libraries normally distributed with (a)-(g) above.
+ *
+ *   Please note: This gives you special rights concerning the
+ *   libraries which normally accompany the above pieces of software.
+ *   It gives you no special rights concerning software that you write
+ *   yourself.  You must obey the GNU General Public License in all
+ *   respects for all of the code used other than the libraries
+ *   normally distributed with (a)-(g) above.
+ *
+ *   If you modify this file, you may extend this exception to your
+ *   version of the file, but you are not obligated to do so. If you
+ *   do not wish to do so, delete this exception statement from your
+ *   version.
+ *
+ *
+ *   Other licensing forms
+ *   =====================
+ *
+ *   If you wish to negotiate commercial licensing, please contact
+ *   Ulrik Petersen at ulrikp[at]users.sourceforge.net.
+ *
+ *   Licensing can also be negotiated if your organization is an
+ *   educational, non-profit, charity, missionary or similar
+ *   organization.
+ *
+ *
+ *   Website
+ *   =======
+ *
+ *   Emdros has a website here:
+ *
+ *   http://emdros.org
+ *
+ *
+ *
+ **************************************************************************/
+
+/**@file messages.cpp
+ *@brief Implementation of standard Emdros messages
+ */
+
+
+#include <string>
+#include <ostream>
+/**************** already included emdf_enums.h -- not including again *****************/
+
+
+#line 93 "util/messages.cpp"
+/**************** already included debug.h -- not including again *****************/
+
+
+#line 94 "util/messages.cpp"
+
+/** Print emdros message when connection to backend is not OK.
+ *
+ * @param pOut The std::ostream on which to print the message.
+ *
+ * @param kind The eBackendKind to which the message is to pertain. A
+ * distinction is made between kMySQL and kPostgreSQL on the one hand,
+ * and kSQLite2 and kSQLite3 on the other hand.
+ */
+void emdrosMessageConnectionNotOK(std::ostream *pOut, eBackendKind kind)
+{
+	if (kind == kMySQL || kind == kPostgreSQL) {
+		(*pOut) << std::endl;
+		(*pOut) << "Connection to backend server could not be established." << std::endl;
+		(*pOut) << "This usually has one of the following causes:" << std::endl;
+		(*pOut) << "  - The back-end is not running." << std::endl;
+		(*pOut) << "  - The back-end is not configured for incoming TCP/IP connections." << std::endl;
+		(*pOut) << "  - You did not supply a user/password with the -u/-p options." << std::endl;
+		(*pOut) << "There are hints in the HOW-TO-USE document on configuring your back-end." << std::endl;
+		(*pOut) << "The full documentation comes with Emdros." << std::endl;
+		(*pOut) << "    Please see      <http://emdros.org/whattodo3.html>" << std::endl;
+		(*pOut) << "    for more information on this problem." << std::endl;
+	} else if (kind == kSQLite2 || kind == kSQLite3) {
+		(*pOut) << "Connection to SQLite database could not be established." << std::endl;
+	} else if (kind == kBPT) {
+		(*pOut) << "Connection to BPT database could not be established." << std::endl;
+		(*pOut) << "\nIf this is the Open Source version of Emdros, please be aware\n"
+			<< "that the BPT backend is only available through licensing from\n"
+			<< "the author of Emdros, Ulrik Sandborg-Petersen. Feel free to contact him:\n" 
+			<< "ulrikp@emdros.org\n\nThanks!" << std::endl;
+	} else {
+		ASSERT_THROW(false,
+			     "Unknown backend kind in emdrosMessageConnectionNotOK");
+	}
 }
 

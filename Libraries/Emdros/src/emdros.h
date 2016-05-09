@@ -1,13 +1,13 @@
+#ifndef EMDROS_H_
+#define EMDROS_H_
+
 
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 1999-2015  Ulrik Sandborg-Petersen
+ *   Copyright (C) 1999-2016  Ulrik Sandborg-Petersen
  *
  ***********************************************************************/
-
-#ifndef EMDROS_H_
-#define EMDROS_H_
 
 /****
  * _GNU_SOURCE MUST be defined before _any_ standard headers are included. 
@@ -15,6 +15,10 @@
  ****/
 #if defined(__GNUC__) && !defined(_GNU_SOURCE)
 # define _GNU_SOURCE
+#endif
+
+#ifndef HAVE_CONFIG_H
+#define HAVE_CONFIG_H  (1)
 #endif
 
 #include "emdros-lconfig.h"
@@ -28,13 +32,9 @@
 #ifndef SQLITE2_EMDFDB_NO_FSYNC
 #define SQLITE2_EMDFDB_NO_FSYNC
 #endif
-
-
-/**************** A copy of include/emdf.h *****************/
-
-
+/**************** A copy of include/emdf.h ****************/
 #line 1 "include/emdf.h"
-        /*
+/*
  * emdf.h
  *
  * Basic definitions for EMdF
@@ -136,12 +136,10 @@
 
 
 #line 99 "include/emdf.h"
-        /**************** leaving include/emdf.h temporarily *****************/
-/**************** A copy of include/version-emdros.h *****************/
-
-
+/**************** leaving include/emdf.h temporarily *****************/
+/**************** A copy of include/version-emdros.h ****************/
 #line 1 "include/version-emdros.h"
-        /*
+/*
  * emdros-version.h.in
  *
  * Emdros version information
@@ -230,14 +228,15 @@
 #ifndef EMDROS_VERSION__H__
 #define EMDROS_VERSION__H__
 
-#define EMDROS_VERSION "3.4.1.pre22"
+#define EMDROS_VERSION "3.4.1.pre24"
 
 #endif /* EMDROS_VERSION__H__ */
+
 /**************** continuing include/emdf.h where we left off *****************/
 
 
 #line 100 "include/emdf.h"
-        
+
 
 #if defined(_MSC_VER)
 #pragma warning( disable : 4290 ) 
@@ -349,11 +348,10 @@ typedef long monad_m;
 
 
 #endif /* EMDF__H__ */
-/**************** A copy of include/emdf_primes.h *****************/
 
-
+/**************** A copy of include/emdf_primes.h ****************/
 #line 1 "include/emdf_primes.h"
-        /*
+/*
  *
  * Primes list suitable for making hash tables.
  *
@@ -371,11 +369,10 @@ typedef long monad_m;
 extern long prime_list_get_next_higher_prime(long n);
 
 #endif /* if !defined(EMDF_PRIMES_H_)
-/**************** A copy of include/arena.h *****************/
 
-
+/**************** A copy of include/arena.h ****************/
 #line 1 "include/arena.h"
-        /*
+/*
  * arena.h
  *
  * Arena and ArenaConstIterator
@@ -472,11 +469,9 @@ extern long prime_list_get_next_higher_prime(long n);
 #include <cstring>
 #include <cstdlib>
 /**************** leaving include/arena.h temporarily *****************/
-/**************** A copy of include/debug.h *****************/
-
-
+/**************** A copy of include/debug.h ****************/
 #line 1 "include/debug.h"
-        /*
+/*
  * debug.h
  *
  * Debug defines for EMdF
@@ -572,11 +567,9 @@ extern long prime_list_get_next_higher_prime(long n);
 #define DEBUG__H__
 
 /**************** leaving include/debug.h temporarily *****************/
-/**************** A copy of include/exception_emdros.h *****************/
-
-
+/**************** A copy of include/exception_emdros.h ****************/
 #line 1 "include/exception_emdros.h"
-        /*
+/*
  * exception_emdros.h
  *
  * Base class for all Emdros exceptions.
@@ -699,23 +692,22 @@ public:
 
 
 #endif // EMDROS_EXCEPTION__H__
+
 /**************** continuing include/debug.h where we left off *****************/
 
 
 #line 96 "include/debug.h"
-        /**************** leaving include/debug.h temporarily *****************/
-/**************** A copy of include/string_func.h *****************/
-
-
+/**************** leaving include/debug.h temporarily *****************/
+/**************** A copy of include/string_func.h ****************/
 #line 1 "include/string_func.h"
-        /*
+/*
  * string_func.h
  *
  * String helper functions
  *
  * Ulrik Petersen
  * Created: 3/1-2001
- * Last update: 2/23-2016
+ * Last update: 4/11-2016
  *
  */
 /************************************************************************
@@ -811,12 +803,10 @@ public:
 
 
 #line 100 "include/string_func.h"
-        /**************** leaving include/string_func.h temporarily *****************/
-/**************** A copy of include/emdf_enums.h *****************/
-
-
+/**************** leaving include/string_func.h temporarily *****************/
+/**************** A copy of include/emdf_enums.h ****************/
 #line 1 "include/emdf_enums.h"
-        /*
+/*
  * emdf_enums.h
  *
  * EMdF enumerations
@@ -1062,13 +1052,29 @@ enum eBackendKind {
 };
 
 
+/** A Monad Set Relation Clause operation
+ *
+ * part_of == "we" must be a subset of the other monad set.
+ *
+ * overlap == "we" must have a non-empty intersection with the other
+ * monad set.
+ *
+ */
+enum eMonadSetRelationOperation {
+	kMSROPartOf,
+	kMSROOverlap,
+	kMSROStartsIn
+};
+
+
 
 #endif /* EMDF_ENUMS__H__ */
+
 /**************** continuing include/string_func.h where we left off *****************/
 
 
 #line 101 "include/string_func.h"
-        
+
 class IntegerList; // Forward declaration
 
 extern void str_toupper(const std::string& in, std::string& result);
@@ -1470,17 +1476,64 @@ inline std::string escapeXMLEntities(const std::string& input)
 	return result;
 }
 
+inline bool hasJSONCharsToMangle(const std::string& input)
+{
+	return input.find_first_of("\"'\\\b\f\n\r\t", 0, 8) != std::string::npos;
+}
+
+inline std::string escapeJSONChars(const std::string& input)
+{
+	std::string result;
+	result.reserve(input.length() + 4);
+	std::string::const_iterator ci = input.begin();
+	std::string::const_iterator cend = input.end();
+	while (ci != cend) {
+		char c = *ci++;
+		switch (c) {
+		case '\"':
+			result += "\\\"";
+			break;
+		case '\'':
+			result += "\\'";
+			break;
+		case '\\':
+			result += "\\\\";
+			break;
+		case '\b':
+			result += "\\b";
+			break;
+		case '\f':
+			result += "\\f";
+			break;
+		case '\n':
+			result += "\\n";
+			break;
+		case '\r':
+			result += "\\r";
+			break;
+		case '\t':
+			result += "\\t";
+			break;
+		default:
+			result += c;
+			break;
+		}
+	}
+	return result;
+}
+
 
 
 
 
 #endif // STRING_FUNC__H__
 
+
 /**************** continuing include/debug.h where we left off *****************/
 
 
 #line 97 "include/debug.h"
-        #include <iostream>
+#include <iostream>
 #include <sstream>
 
 #ifndef EMDF_DEBUG
@@ -1567,11 +1620,12 @@ inline std::string escapeXMLEntities(const std::string& input)
 
 
 #endif /* DEBUG__H__ */
+
 /**************** continuing include/arena.h where we left off *****************/
 
 
 #line 97 "include/arena.h"
-        
+
 /**
  *\defgroup Arena Arena: Chunks of memory.
  *\ingroup EMdF
@@ -1929,11 +1983,10 @@ class Bigstring : protected Arena {
 
 
 #endif // ARENA__H__
-/**************** A copy of include/bpt2dumper.h *****************/
 
-
+/**************** A copy of include/bpt2dumper.h ****************/
 #line 1 "include/bpt2dumper.h"
-        /*
+/*
  * bpt2dumper.h
  *
  * Classes and methods to dump another Emdros database into a Bit
@@ -1970,7 +2023,7 @@ class Bigstring : protected Arena {
 
 
 #line 34 "include/bpt2dumper.h"
-        
+
 class EmdrosEnv;
 
 #define BPT2_SCHEMA_1      (1L)
@@ -1978,11 +2031,10 @@ class EmdrosEnv;
 bool BPT2dumpAsBPT2(EmdrosEnv *pSourceEE, const std::string& bptfilename, const std::string& bptkey, std::string& /* out */ error_message, long schema_version, const std::string& payload_filename, const std::string& payload_inkey);
 
 #endif // BPT2DUMPER__H__
-/**************** A copy of include/bpt2emdfdb.h *****************/
 
-
+/**************** A copy of include/bpt2emdfdb.h ****************/
 #line 1 "include/bpt2emdfdb.h"
-        /*
+/*
  * bpt2emdfdb.h
  *
  * EMdF database class for Bit Packed Tables
@@ -2076,11 +2128,9 @@ bool BPT2dumpAsBPT2(EmdrosEnv *pSourceEE, const std::string& bptfilename, const 
 
 #ifndef SWIG
 /**************** leaving include/bpt2emdfdb.h temporarily *****************/
-/**************** A copy of include/emdfdb.h *****************/
-
-
+/**************** A copy of include/emdfdb.h ****************/
 #line 1 "include/emdfdb.h"
-        /*
+/*
  * emdfdb.h
  *
  * EMdF database base class
@@ -2177,12 +2227,10 @@ bool BPT2dumpAsBPT2(EmdrosEnv *pSourceEE, const std::string& bptfilename, const 
 
 
 #line 94 "include/emdfdb.h"
-        /**************** leaving include/emdfdb.h temporarily *****************/
-/**************** A copy of include/infos.h *****************/
-
-
+/**************** leaving include/emdfdb.h temporarily *****************/
+/**************** A copy of include/infos.h ****************/
 #line 1 "include/infos.h"
-        /*
+/*
  * infos.h
  *
  * classes FeatureInfo, EnumConstInfo, ObjectTypeInfo
@@ -2279,13 +2327,13 @@ bool BPT2dumpAsBPT2(EmdrosEnv *pSourceEE, const std::string& bptfilename, const 
 
 
 #line 94 "include/infos.h"
-        
+
 
 /**************** already included emdf.h -- not including again *****************/
 
 
 #line 97 "include/infos.h"
-        #include <list>
+#include <list>
 #include <string>
 
 class FeatureInfo {
@@ -2348,11 +2396,12 @@ public:
 
 
 #endif // INFOS__H__
+
 /**************** continuing include/emdfdb.h where we left off *****************/
 
 
 #line 95 "include/emdfdb.h"
-        #include <string>
+#include <string>
 #include <list>
 #include <set>
 #include <vector>
@@ -2362,12 +2411,10 @@ public:
 
 
 #line 102 "include/emdfdb.h"
-        /**************** leaving include/emdfdb.h temporarily *****************/
-/**************** A copy of include/emdf_exception.h *****************/
-
-
+/**************** leaving include/emdfdb.h temporarily *****************/
+/**************** A copy of include/emdf_exception.h ****************/
 #line 1 "include/emdf_exception.h"
-        /*
+/*
  * emdf_exception.h
  *
  * EMdF exceptions
@@ -2462,7 +2509,7 @@ public:
 
 
 #line 92 "include/emdf_exception.h"
-        
+
 
 /** EMdF general EMdFDB exception.
  */
@@ -2631,15 +2678,16 @@ public:
 
 
 #endif // EMDF_EXCEPTION__H__
+
 /**************** continuing include/emdfdb.h where we left off *****************/
 
 
 #line 103 "include/emdfdb.h"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 104 "include/emdfdb.h"
-        #endif // !defined SWIG
+#endif // !defined SWIG
 
 
 #ifndef SWIG
@@ -3166,6 +3214,7 @@ class EMdFDB {
 			     EMdFFFeatures *pre_query_constraints,
 			     const std::list<FeatureInfo>& features_to_get,
 			     const std::string& monad_set_name,
+			     eMonadSetRelationOperation ms_operation,
 			     /* out */ Inst& Result);
  protected:
 	virtual bool getFeatureVectors(const std::list<FeatureInfo>& features_to_get,
@@ -3193,6 +3242,7 @@ class EMdFDB {
 			     const std::list<FeatureInfo>& features_to_get,
 			     const std::string& monad_set_name,
 			     eObjectRangeType objectRangeType,
+			     eMonadSetRelationOperation ms_operation,
 			     /* out */ Inst& Result);
  public:
 
@@ -3619,11 +3669,12 @@ extern std::string getStringFromeComparisonOp(eComparisonOp op);
 
 
 #endif // EMDFDB__H__
+
 /**************** continuing include/bpt2emdfdb.h where we left off *****************/
 
 
 #line 94 "include/bpt2emdfdb.h"
-        #endif // !defined SWIG
+#endif // !defined SWIG
 
 class BPT2EMdFComparison;
 class BPT2EMdFConnection;
@@ -3924,6 +3975,7 @@ class BPT2EMdFDB : public EMdFDB {
 			     EMdFFFeatures *pre_query_constraints,
 			     const std::list<FeatureInfo>& features_to_get,
 			     const std::string& monad_set_name,
+			     eMonadSetRelationOperation ms_operation,
 			     /* out */ Inst& Result);
  protected:
 	virtual bool getInstLocalBPT2(const std::string& object_type_name,		
@@ -4112,11 +4164,10 @@ class BPT2EMdFDB : public EMdFDB {
 
 
 #endif // BPT2EMDFDB__H__
-/**************** A copy of include/bptdumper.h *****************/
 
-
+/**************** A copy of include/bptdumper.h ****************/
 #line 1 "include/bptdumper.h"
-        /*
+/*
  * bptdumper.h
  *
  * Classes and methods to dump another Emdros database into a Bit
@@ -4153,7 +4204,7 @@ class BPT2EMdFDB : public EMdFDB {
 
 
 #line 34 "include/bptdumper.h"
-        
+
 class EmdrosEnv;
 
 #define BPT_SCHEMA_1      (1L)
@@ -4165,24 +4216,23 @@ class EmdrosEnv;
 bool BPTdumpAsBPT(EmdrosEnv *pSourceEE, const std::string& bptfilename, const std::string& bptkey, std::string& /* out */ error_message, long schema_version, const std::string& payload_filename, const std::string& payload_inkey);
 
 #endif // BPTDUMPER__H__
-/**************** A copy of include/bptemdfdb.h *****************/
 
-
+/**************** A copy of include/bptemdfdb.h ****************/
 #line 1 "include/bptemdfdb.h"
-        /*
+/*
  * bptemdfdb.h
  *
  * EMdF database class for Bit Packed Tables
  *
  * Ulrik Petersen
  * Created: 1/27-2001
- * Last update: 10/19-2013
+ * Last update: 4/21-2016
  *
  */
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2010-2013  Ulrik Sandborg-Petersen
+ *   Copyright (C) 2010-2016  Ulrik Sandborg-Petersen
  *
  *   This file is NOT under the GNU General Public License.  You must
  *   obtain a license from the author, Ulrik Sandborg-Petersen, in
@@ -4205,7 +4255,7 @@ bool BPTdumpAsBPT(EmdrosEnv *pSourceEE, const std::string& bptfilename, const st
 
 
 #line 33 "include/bptemdfdb.h"
-        #endif // !defined SWIG
+#endif // !defined SWIG
 
 class BPTEMdFComparison;
 class BPTEMdFConnection;
@@ -4518,6 +4568,7 @@ class BPTEMdFDB : public EMdFDB {
 			     EMdFFFeatures *pre_query_constraints,
 			     const std::list<FeatureInfo>& features_to_get,
 			     const std::string& monad_set_name,
+			     eMonadSetRelationOperation ms_operation,
 			     /* out */ Inst& Result);
  protected:
 	virtual bool getInstLocalBPT(const std::string& object_type_name,		
@@ -4528,6 +4579,7 @@ class BPTEMdFDB : public EMdFDB {
 				     const std::list<FeatureInfo>& features_to_get,	
 				     const std::string& monad_set_name,
 				     eObjectRangeType objectRangeType,
+				     eMonadSetRelationOperation ms_operation,
 				     /* out */ Inst& Result);
  public:
 
@@ -4707,11 +4759,10 @@ class BPTEMdFDB : public EMdFDB {
 bool BPTKeyIsOK(const std::string& key);
 
 #endif // BPTEMDFDB__H__
-/**************** A copy of include/conn.h *****************/
 
-
+/**************** A copy of include/conn.h ****************/
 #line 1 "include/conn.h"
-        /*
+/*
  * conn.h
  *
  * Database connection abstract base class.
@@ -4810,15 +4861,15 @@ bool BPTKeyIsOK(const std::string& key);
 
 
 #line 96 "include/conn.h"
-        /**************** already included exception_emdros.h -- not including again *****************/
+/**************** already included exception_emdros.h -- not including again *****************/
 
 
 #line 97 "include/conn.h"
-        /**************** already included emdf_exception.h -- not including again *****************/
+/**************** already included emdf_exception.h -- not including again *****************/
 
 
 #line 98 "include/conn.h"
-        
+
 
 class EMdFConnection {
 public:
@@ -4917,12 +4968,11 @@ private:
 
 
 #endif // EMDF_CONN__H__
-/**************** A copy of include/crc32.h *****************/
 
-
-#line 1 "include/crc32.h"
-        /*
- * crc32.h
+/**************** A copy of include/crc32_emdros.h ****************/
+#line 1 "include/crc32_emdros.h"
+/*
+ * crc32_emdros.h
  *
  * Algorithm to compute CRC32 hashes.
  *
@@ -4932,11 +4982,10 @@ private:
  */
 
 extern unsigned long emdros_crc32_calc(const unsigned char *inbuf, int buf_len);
-/**************** A copy of include/emdf_ffeatures.h *****************/
 
-
+/**************** A copy of include/emdf_ffeatures.h ****************/
 #line 1 "include/emdf_ffeatures.h"
-        /*
+/*
  * emdf_ffeatures.h
  *
  * Definitions of AST-classes for EMdF ffeatures
@@ -5034,7 +5083,7 @@ extern unsigned long emdros_crc32_calc(const unsigned char *inbuf, int buf_len);
 
 
 #line 95 "include/emdf_ffeatures.h"
-        
+
 
 class EMdFValue; // Forward declaration
 class EMdFDBDBError; // Forward declaration
@@ -5166,11 +5215,10 @@ class EMdFFFeatures {
 
 
 #endif /* EMDF_FFEATURES__H__ */
-/**************** A copy of include/emdf_hash.h *****************/
 
-
+/**************** A copy of include/emdf_hash.h ****************/
 #line 1 "include/emdf_hash.h"
-        /*
+/*
  * emdf_hash.h
  *
  * Hash table class for Emdros
@@ -5287,11 +5335,11 @@ typedef unsigned __int64 uint64_t;
 
 
 #line 114 "include/emdf_hash.h"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 115 "include/emdf_hash.h"
-        
+
 template<class V> class EmdrosStringHashTableNode {
  public:
 	std::string m_key;
@@ -5444,11 +5492,10 @@ inline int hash_djb2_int(int value, long hashtable_size)
 
 
 #endif /* EMDF_HASH__ */
-/**************** A copy of include/emdf_output.h *****************/
 
-
+/**************** A copy of include/emdf_output.h ****************/
 #line 1 "include/emdf_output.h"
-        /*
+/*
  * emdf_output.h
  *
  * Class to output something either in XML or in console-format.
@@ -5547,11 +5594,11 @@ inline int hash_djb2_int(int value, long hashtable_size)
 
 
 #line 96 "include/emdf_output.h"
-        /**************** already included exception_emdros.h -- not including again *****************/
+/**************** already included exception_emdros.h -- not including again *****************/
 
 
 #line 97 "include/emdf_output.h"
-        
+
 #if HAVE_OSTREAM
 #include <ostream>
 #else
@@ -5561,11 +5608,9 @@ inline int hash_djb2_int(int value, long hashtable_size)
 #include <string>
 #include <list>
 /**************** leaving include/emdf_output.h temporarily *****************/
-/**************** A copy of include/llist.h *****************/
-
-
+/**************** A copy of include/llist.h ****************/
 #line 1 "include/llist.h"
-        /*
+/*
  * llist.h
  *
  * Linked list templates
@@ -5663,7 +5708,7 @@ inline int hash_djb2_int(int value, long hashtable_size)
 
 
 #line 95 "include/llist.h"
-        
+
 #include <iostream>
 
 template <class T> class LlistIterator; // Forward declaration
@@ -6943,19 +6988,20 @@ template<class T> const T& LVlistConstIterator<T>::current() throw(EmdrosExcepti
 
 
 #endif // __LList__h__
+
 /**************** continuing include/emdf_output.h where we left off *****************/
 
 
 #line 107 "include/emdf_output.h"
-        /**************** already included emdf_enums.h -- not including again *****************/
+/**************** already included emdf_enums.h -- not including again *****************/
 
 
 #line 108 "include/emdf_output.h"
-        /**************** already included emdf_exception.h -- not including again *****************/
+/**************** already included emdf_exception.h -- not including again *****************/
 
 
 #line 109 "include/emdf_output.h"
-        #endif
+#endif
 
 #ifndef SWIG
 /** Attribute name-value pair
@@ -7093,11 +7139,10 @@ class EMdFOutput {
 };
 
 #endif /* EMDF_OUTPUT__H__ */
-/**************** A copy of include/emdf_value.h *****************/
 
-
+/**************** A copy of include/emdf_value.h ****************/
 #line 1 "include/emdf_value.h"
-        /*
+/*
  * emdf_value.h
  *
  * EMdFValue class
@@ -7194,16 +7239,16 @@ class EMdFOutput {
 
 
 #line 94 "include/emdf_value.h"
-        #include <string>
+#include <string>
 /**************** already included emdf_enums.h -- not including again *****************/
 
 
 #line 96 "include/emdf_value.h"
-        /**************** already included exception_emdros.h -- not including again *****************/
+/**************** already included exception_emdros.h -- not including again *****************/
 
 
 #line 97 "include/emdf_value.h"
-        
+
 class IntegerList; // Forward declaration
 class SetOfMonads; // Forward declaration
 
@@ -7260,11 +7305,10 @@ private:
 
 
 #endif // EMDF_VALUE__H__
-/**************** A copy of include/emdros_environment.h *****************/
 
-
+/**************** A copy of include/emdros_environment.h ****************/
 #line 1 "include/emdros_environment.h"
-        /*
+/*
  * emdros_environment.h
  *
  * Emdros environment
@@ -7358,11 +7402,9 @@ private:
 #define EMDROS_ENVIRONMENT__H__
 
 /**************** leaving include/emdros_environment.h temporarily *****************/
-/**************** A copy of include/environment_emdros.h *****************/
-
-
+/**************** A copy of include/environment_emdros.h ****************/
 #line 1 "include/environment_emdros.h"
-        /*
+/*
  * environment_emdros.h
  *
  * Emdros environment
@@ -7460,15 +7502,15 @@ private:
 
 
 #line 95 "include/environment_emdros.h"
-        /**************** already included emdros-lconfig.h -- not including again *****************/
+/**************** already included emdros-lconfig.h -- not including again *****************/
 
 
 #line 96 "include/environment_emdros.h"
-        /**************** already included emdf_enums.h -- not including again *****************/
+/**************** already included emdf_enums.h -- not including again *****************/
 
 
 #line 97 "include/environment_emdros.h"
-        
+
 #if HAVE_ISTREAM
 #include <istream>
 #else
@@ -7485,12 +7527,10 @@ private:
 
 
 #line 111 "include/environment_emdros.h"
-        /**************** leaving include/environment_emdros.h temporarily *****************/
-/**************** A copy of include/table.h *****************/
-
-
+/**************** leaving include/environment_emdros.h temporarily *****************/
+/**************** A copy of include/table.h ****************/
 #line 1 "include/table.h"
-        /*
+/*
  * table.h
  *
  * Tables
@@ -7589,16 +7629,16 @@ private:
 
 
 #line 96 "include/table.h"
-        #ifndef SWIG
+#ifndef SWIG
 /**************** already included emdf_output.h -- not including again *****************/
 
 
 #line 98 "include/table.h"
-        /**************** already included emdf_enums.h -- not including again *****************/
+/**************** already included emdf_enums.h -- not including again *****************/
 
 
 #line 99 "include/table.h"
-        #endif // !defined SWIG
+#endif // !defined SWIG
 
 #include <string>
 
@@ -7862,16 +7902,15 @@ class Table {
 
 
 #endif /* TABLE__H__ */
+
 /**************** continuing include/environment_emdros.h where we left off *****************/
 
 
 #line 112 "include/environment_emdros.h"
-        /**************** leaving include/environment_emdros.h temporarily *****************/
-/**************** A copy of include/monads.h *****************/
-
-
+/**************** leaving include/environment_emdros.h temporarily *****************/
+/**************** A copy of include/monads.h ****************/
 #line 1 "include/monads.h"
-        //
+//
 //
 // monads.h
 // monad_ms and sets of monads
@@ -7969,19 +8008,19 @@ class Table {
 
 
 #line 95 "include/monads.h"
-        /**************** already included emdf_output.h -- not including again *****************/
+/**************** already included emdf_output.h -- not including again *****************/
 
 
 #line 96 "include/monads.h"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 97 "include/monads.h"
-        /**************** already included exception_emdros.h -- not including again *****************/
+/**************** already included exception_emdros.h -- not including again *****************/
 
 
 #line 98 "include/monads.h"
-        #include <vector>
+#include <vector>
 #include <map>
 #endif // !defined SWIG
 #undef list
@@ -7989,12 +8028,12 @@ class Table {
 
 
 #line 103 "include/monads.h"
-        #include <string>
+#include <string>
 /**************** already included debug.h -- not including again *****************/
 
 
 #line 105 "include/monads.h"
-        #if HAVE_OSTREAM
+#if HAVE_OSTREAM
 #include <ostream>
 #else
 #include <ostream.h>
@@ -8458,6 +8497,7 @@ class SetOfMonads {
 	SetOfMonads(monad_m first, monad_m last) throw(BadMonadsException) : monad_ms(), m_first(first), m_last(last) { monad_ms.push_back(MonadSetElement(first,last)); };
 	~SetOfMonads();
 	bool part_of(const SetOfMonads& other) const;
+	bool starts_in(const SetOfMonads& other) const;
 #ifndef SWIG
 	bool part_of(const FastSetOfMonads& other) const;
 #endif
@@ -8671,11 +8711,12 @@ class FastSetOfMonads {
 
 
 #endif //MONADS__H__
+
 /**************** continuing include/environment_emdros.h where we left off *****************/
 
 
 #line 113 "include/environment_emdros.h"
-        
+
 
 
 #endif // !defined SWIG
@@ -8919,17 +8960,17 @@ class EmdrosEnv {
 
 
 #endif // ENVIRONMENT_EMDROS__H__
+
 /**************** continuing include/emdros_environment.h where we left off *****************/
 
 
 #line 94 "include/emdros_environment.h"
-        
+
 #endif // EMDROS_ENVIRONMENT__H__
-/**************** A copy of include/emdros_reserved_words.h *****************/
 
-
+/**************** A copy of include/emdros_reserved_words.h ****************/
 #line 1 "include/emdros_reserved_words.h"
-        #ifndef EMDROS_RESERVED_WORDS_H_
+#ifndef EMDROS_RESERVED_WORDS_H_
 #define EMDROS_RESERVED_WORDS_H_
 static const char *emdros_reserved_words[] = {
 "create",
@@ -9024,6 +9065,7 @@ static const char *emdros_reserved_words[] = {
 "union",
 "overlap",
 "part_of",
+"starts_in",
 "intersect",
 "difference",
 "replace",
@@ -9032,11 +9074,10 @@ static const char *emdros_reserved_words[] = {
  NULL
 };
 #endif /* EMDROS_RESERVED_WORDS_H_ */
-/**************** A copy of include/encryption.h *****************/
 
-
+/**************** A copy of include/encryption.h ****************/
 #line 1 "include/encryption.h"
-        /*
+/*
  * encryption.h
  *
  * Functions to encrypt and decrypt strings
@@ -9220,11 +9261,10 @@ inline void zeroFillString(std::string& str)
   }
 }
 
-/**************** A copy of include/enum_const_cache.h *****************/
 
-
+/**************** A copy of include/enum_const_cache.h ****************/
 #line 1 "include/enum_const_cache.h"
-        /*
+/*
  * enum_const_cache.h
  *
  * EnumConstCache class
@@ -9321,11 +9361,11 @@ inline void zeroFillString(std::string& str)
 
 
 #line 94 "include/enum_const_cache.h"
-        /**************** already included infos.h -- not including again *****************/
+/**************** already included infos.h -- not including again *****************/
 
 
 #line 95 "include/enum_const_cache.h"
-        #include <vector>
+#include <vector>
 #include <map>
 #include <string>
 
@@ -9396,11 +9436,10 @@ class EnumConstCache {
 
 
 #endif // ENUM_CONST_CACHE__H__
-/**************** A copy of include/harvest_fts.h *****************/
 
-
+/**************** A copy of include/harvest_fts.h ****************/
 #line 1 "include/harvest_fts.h"
-        /*
+/*
  * harvest_fts.h
  *
  * Full Text Search, part of the harvest library.
@@ -9496,26 +9535,24 @@ class EnumConstCache {
 
 
 #line 93 "include/harvest_fts.h"
-        #include <string>
+#include <string>
 #include <set>
 #include <list>
 /**************** already included emdros_environment.h -- not including again *****************/
 
 
 #line 97 "include/harvest_fts.h"
-        /**************** leaving include/harvest_fts.h temporarily *****************/
-/**************** A copy of include/json_classes.h *****************/
-
-
+/**************** leaving include/harvest_fts.h temporarily *****************/
+/**************** A copy of include/json_classes.h ****************/
 #line 1 "include/json_classes.h"
-        /*
+/*
  * json.h
  *
  * JSON classes
  *
  * Ulrik Sandborg-Petersen
  * Created: 7/28-2008
- * Last update: 11/27-2012
+ * Last update: 4/12-2016
  *
  */
 /************************************************************************
@@ -9601,11 +9638,9 @@ class EnumConstCache {
 #include <list>
 #include <ostream>
 /**************** leaving include/json_classes.h temporarily *****************/
-/**************** A copy of include/json_lexer.h *****************/
-
-
+/**************** A copy of include/json_lexer.h ****************/
 #line 1 "include/json_lexer.h"
-        /*
+/*
  * json_lexer.h
  *
  * JSON Lexer based on re2c
@@ -9695,11 +9730,9 @@ class EnumConstCache {
 
 #include <string>
 /**************** leaving include/json_lexer.h temporarily *****************/
-/**************** A copy of include/mql_yylex.h *****************/
-
-
+/**************** A copy of include/mql_yylex.h ****************/
 #line 1 "include/mql_yylex.h"
-        /*
+/*
  * mql_yylex.h
  *
  * MQL yylex
@@ -9796,11 +9829,11 @@ class EnumConstCache {
 
 
 #line 94 "include/mql_yylex.h"
-        /**************** already included arena.h -- not including again *****************/
+/**************** already included arena.h -- not including again *****************/
 
 
 #line 95 "include/mql_yylex.h"
-        
+
 extern int yylex(void *lvalp, void *parm);
 
 #define STRING_MAGIC "*&$STRING$&*"
@@ -9869,11 +9902,12 @@ inline Token* newToken()
 
 
 #endif // MQL_YYLEX__H__
+
 /**************** continuing include/json_lexer.h where we left off *****************/
 
 
 #line 90 "include/json_lexer.h"
-        
+
 class JSONScanner {
 protected:
 	std::string m_szIn;
@@ -9905,11 +9939,12 @@ private:
 
 
 #endif // JSON_LEXER__H__
+
 /**************** continuing include/json_classes.h where we left off *****************/
 
 
 #line 93 "include/json_classes.h"
-        
+
 typedef enum {
 	kJSONNull,
 	kJSONBoolean,
@@ -9950,6 +9985,7 @@ class JSONListElement {
 	JSONValue *extractValue(void) { JSONValue *pResult = m_pValue; m_pValue = 0; return pResult; };
 	void setNext(JSONListElement *pNext) { m_pNext = pNext; };
 	JSONListElement *getNext(void) { return m_pNext; };
+	static void destroyList(JSONListElement *pList);
  private:
 	JSONListElement(const JSONListElement& other);
 	JSONListElement& operator=(const JSONListElement& other);
@@ -9989,6 +10025,7 @@ class JSONValue {
 	std::list<std::string> getObjectKeys(void) const;
 	bool hasObjectKey(const std::string& key) const;
 	void pretty(std::ostream *pOut, int indent_level = 0) const;
+	void printCompact(std::ostream *pOut) const;
  private:
 	JSONValue(const JSONValue& other);
 	JSONValue& operator=(const JSONValue& other);
@@ -10035,16 +10072,15 @@ extern JSONValue *readAndParseJSONFromString(const std::string& json_string, std
 extern JSONValue *readAndParseJSONFromFile(const std::string& filename, std::string& error_message);
 
 #endif
+
 /**************** continuing include/harvest_fts.h where we left off *****************/
 
 
 #line 98 "include/harvest_fts.h"
-        /**************** leaving include/harvest_fts.h temporarily *****************/
-/**************** A copy of include/string_list.h *****************/
-
-
+/**************** leaving include/harvest_fts.h temporarily *****************/
+/**************** A copy of include/string_list.h ****************/
 #line 1 "include/string_list.h"
-        /*
+/*
  * string_list.h
  *
  * ParserList and associated classes
@@ -10144,7 +10180,7 @@ extern JSONValue *readAndParseJSONFromFile(const std::string& filename, std::str
 
 
 #line 97 "include/string_list.h"
-        
+
 #ifndef SWIG
 template<typename T> struct T_is_pointer { static const bool value = false; };
 template<typename T> struct T_is_pointer<T*> { static const bool value = true; };
@@ -10607,16 +10643,17 @@ class IntegerList : public ParserListLong {
 
 
 #endif // STRING_LIST__H__
+
 /**************** continuing include/harvest_fts.h where we left off *****************/
 
 
 #line 99 "include/harvest_fts.h"
-        
+
 /**************** already included emdros-lconfig.h -- not including again *****************/
 
 
 #line 101 "include/harvest_fts.h"
-        #if HAVE_OSTREAM
+#if HAVE_OSTREAM
 #include <ostream>
 #else
 #include <ostream.h>
@@ -11258,11 +11295,10 @@ extern StringList harvestFTSTokenize(const std::string& input_string, EmdrosFTSS
 extern std::list<StringList> harvestFTSGoogleTokenize(const std::string& input_string, EmdrosFTSStringFilter *pStringFilterList);
 
 #endif // HARVEST_FTS__H__
-/**************** A copy of include/harvest_fts2.h *****************/
 
-
+/**************** A copy of include/harvest_fts2.h ****************/
 #line 1 "include/harvest_fts2.h"
-        /*
+/*
  * harvest_fts.h
  *
  * Full Text Search, part of the harvest library.
@@ -11358,7 +11394,7 @@ extern std::list<StringList> harvestFTSGoogleTokenize(const std::string& input_s
 
 
 #line 93 "include/harvest_fts2.h"
-        #include <string>
+#include <string>
 #include <map>
 #include <set>
 #include <list>
@@ -11499,11 +11535,10 @@ extern bool harvestFTS2Google(EmdrosEnv *pEnv, const std::string& bookcase_OTN, 
 
 
 #endif // HARVEST_FTS2__H__
-/**************** A copy of include/harvest_fts3.h *****************/
 
-
+/**************** A copy of include/harvest_fts3.h ****************/
 #line 1 "include/harvest_fts3.h"
-        /*
+/*
  * harvest_fts3.h
  *
  * Full Text Search version 3, part of the harvest library.
@@ -11604,15 +11639,15 @@ extern bool harvestFTS2Google(EmdrosEnv *pEnv, const std::string& bookcase_OTN, 
 
 
 #line 98 "include/harvest_fts3.h"
-        /**************** already included emdros_environment.h -- not including again *****************/
+/**************** already included emdros_environment.h -- not including again *****************/
 
 
 #line 99 "include/harvest_fts3.h"
-        /**************** already included harvest_fts.h -- not including again *****************/
+/**************** already included harvest_fts.h -- not including again *****************/
 
 
 #line 100 "include/harvest_fts3.h"
-        
+
 class BookcaseHitList3; // Forward declaration
 
 class FTS3Search {
@@ -11638,11 +11673,10 @@ extern bool harvestFTS3Google(EmdrosEnv *pEnv, const std::string& bookcase_OTN, 
 
 
 #endif // HARVEST_FTS3__H__
-/**************** A copy of include/inst.h *****************/
 
-
+/**************** A copy of include/inst.h ****************/
 #line 1 "include/inst.h"
-        /*
+/*
  * inst.h
  *
  * inst(T,Su) class
@@ -11739,12 +11773,10 @@ extern bool harvestFTS3Google(EmdrosEnv *pEnv, const std::string& bookcase_OTN, 
 
 
 #line 94 "include/inst.h"
-        /**************** leaving include/inst.h temporarily *****************/
-/**************** A copy of include/inst_object.h *****************/
-
-
+/**************** leaving include/inst.h temporarily *****************/
+/**************** A copy of include/inst_object.h ****************/
 #line 1 "include/inst_object.h"
-        /*
+/*
  * inst_object.h
  *
  * InstObject class
@@ -11841,17 +11873,17 @@ extern bool harvestFTS3Google(EmdrosEnv *pEnv, const std::string& bookcase_OTN, 
 
 
 #line 94 "include/inst_object.h"
-        /**************** already included monads.h -- not including again *****************/
+/**************** already included monads.h -- not including again *****************/
 
 
 #line 95 "include/inst_object.h"
-        #include <vector>
+#include <vector>
 #include <string>
 /**************** already included emdf_value.h -- not including again *****************/
 
 
 #line 98 "include/inst_object.h"
-        
+
 
 
 enum {
@@ -11908,19 +11940,20 @@ public:
 
 
 #endif // INST_OBJECT__H__
+
 /**************** continuing include/inst.h where we left off *****************/
 
 
 #line 95 "include/inst.h"
-        /**************** already included arena.h -- not including again *****************/
+/**************** already included arena.h -- not including again *****************/
 
 
 #line 96 "include/inst.h"
-        /**************** already included monads.h -- not including again *****************/
+/**************** already included monads.h -- not including again *****************/
 
 
 #line 97 "include/inst.h"
-        #include <list>
+#include <list>
 #include <vector>
 #include <map>
 #include <string>
@@ -12256,11 +12289,10 @@ class Inst {
 
 
 #endif // INST__H__
-/**************** A copy of include/logging.h *****************/
 
-
+/**************** A copy of include/logging.h ****************/
 #line 1 "include/logging.h"
-        /*
+/*
  * logging.h
  *
  * Crude functions for logging
@@ -12415,11 +12447,10 @@ extern void logWriteTime(std::string function_name, std::string message);
 
 
 #endif // _LOGGING__H__
-/**************** A copy of include/md5_emdros.h *****************/
 
-
+/**************** A copy of include/md5_emdros.h ****************/
 #line 1 "include/md5_emdros.h"
-        /* See md5.c for explanation and copyright information.  */
+/* See md5.c for explanation and copyright information.  */
 
 /*
  * $FreeBSD: src/contrib/cvs/lib/md5.h,v 1.2 1999/12/11 15:10:02 peter Exp $
@@ -12454,11 +12485,10 @@ std::string emdros_MD5Digest(const std::string& instring);
 
 #endif /* !MD5_EMDROS_H */
 
-/**************** A copy of include/memobject.h *****************/
 
-
+/**************** A copy of include/memobject.h ****************/
 #line 1 "include/memobject.h"
-        /*
+/*
  * memobject.h
  *
  * MemObject classes (and supporting classes)
@@ -12549,11 +12579,11 @@ std::string emdros_MD5Digest(const std::string& instring);
 
 
 #line 88 "include/memobject.h"
-        /**************** already included monads.h -- not including again *****************/
+/**************** already included monads.h -- not including again *****************/
 
 
 #line 89 "include/memobject.h"
-        #include <map>
+#include <map>
 #include <vector>
 #include <string>
 
@@ -12604,11 +12634,10 @@ class MemObject {
 };
 
 #endif // MEMOBJECT_H__
-/**************** A copy of include/messages.h *****************/
 
-
+/**************** A copy of include/messages.h ****************/
 #line 1 "include/messages.h"
-        /*
+/*
  * messages.h
  *
  * Standard messages for Emdros
@@ -12705,16 +12734,15 @@ class MemObject {
 
 
 #line 94 "include/messages.h"
-        
+
 extern void emdrosMessageConnectionNotOK(std::ostream *pOut, eBackendKind kind);
 
 
 #endif
-/**************** A copy of include/minidom.h *****************/
 
-
+/**************** A copy of include/minidom.h ****************/
 #line 1 "include/minidom.h"
-        /*
+/*
  * minidom.h
  *
  * DOM-like interface to XML
@@ -12808,11 +12836,9 @@ extern void emdrosMessageConnectionNotOK(std::ostream *pOut, eBackendKind kind);
 
 
 /**************** leaving include/minidom.h temporarily *****************/
-/**************** A copy of include/qdxml.h *****************/
-
-
+/**************** A copy of include/qdxml.h ****************/
 #line 1 "include/qdxml.h"
-        /*
+/*
  * qdxml.h
  *
  * Quick'n Dirty XML SAX-like parser
@@ -12909,7 +12935,7 @@ extern void emdrosMessageConnectionNotOK(std::ostream *pOut, eBackendKind kind);
 
 
 #line 94 "include/qdxml.h"
-        #include <iostream>
+#include <iostream>
 
 
 #if HAVE_ISTREAM
@@ -12927,15 +12953,15 @@ extern void emdrosMessageConnectionNotOK(std::ostream *pOut, eBackendKind kind);
 
 
 #line 109 "include/qdxml.h"
-        /**************** already included string_func.h -- not including again *****************/
+/**************** already included string_func.h -- not including again *****************/
 
 
 #line 110 "include/qdxml.h"
-        /**************** already included llist.h -- not including again *****************/
+/**************** already included llist.h -- not including again *****************/
 
 
 #line 111 "include/qdxml.h"
-        
+
 class QDException : public EmdrosException {
 public:
 	QDException(const std::string& msg) : EmdrosException(msg) {};
@@ -13071,11 +13097,12 @@ class QDParser {
 
 
 #endif
+
 /**************** continuing include/minidom.h where we left off *****************/
 
 
 #line 94 "include/minidom.h"
-        
+
 
 typedef enum {
 	ELEMENT_NODE = 1,
@@ -13179,11 +13206,10 @@ class MiniDOMDocument : public MiniDOMNode {
 extern MiniDOMDocument *MiniDOMParseStream(std::istream *pIn, MiniDOMDocument *pDoc = 0) throw(QDException);
 extern MiniDOMDocument *MiniDOMParseString(const std::string& str, MiniDOMDocument *pDoc = 0) throw(QDException);
 #endif
-/**************** A copy of include/mql_database_statements.h *****************/
 
-
+/**************** A copy of include/mql_database_statements.h ****************/
 #line 1 "include/mql_database_statements.h"
-        /*
+/*
  * mql_database_statements.h
  *
  * Definitions of AST-classes for MQL
@@ -13278,11 +13304,9 @@ extern MiniDOMDocument *MiniDOMParseString(const std::string& str, MiniDOMDocume
 #define MQL_DATABASE_STATEMENTS__H__
 
 /**************** leaving include/mql_database_statements.h temporarily *****************/
-/**************** A copy of include/mql_types.h *****************/
-
-
+/**************** A copy of include/mql_types.h ****************/
 #line 1 "include/mql_types.h"
-        /*
+/*
  * mql_types.h
  *
  * Definitions of AST-classes for MQL
@@ -13383,11 +13407,9 @@ extern MiniDOMDocument *MiniDOMParseString(const std::string& str, MiniDOMDocume
 
 #ifndef SWIG
 /**************** leaving include/mql_types.h temporarily *****************/
-/**************** A copy of include/mql_result.h *****************/
-
-
+/**************** A copy of include/mql_result.h ****************/
 #line 1 "include/mql_result.h"
-        /*
+/*
  * mql_result.h
  *
  * MQL results
@@ -13485,11 +13507,11 @@ extern MiniDOMDocument *MiniDOMParseString(const std::string& str, MiniDOMDocume
 
 
 #line 95 "include/mql_result.h"
-        /**************** already included table.h -- not including again *****************/
+/**************** already included table.h -- not including again *****************/
 
 
 #line 96 "include/mql_result.h"
-        #include <string>
+#include <string>
 #include <map>
 #include <list>
 
@@ -13533,34 +13555,35 @@ public:
 
 
 #endif /* MQL_RESULT__H__ */
+
 /**************** continuing include/mql_types.h where we left off *****************/
 
 
 #line 101 "include/mql_types.h"
-        /**************** already included emdf.h -- not including again *****************/
+/**************** already included emdf.h -- not including again *****************/
 
 
 #line 102 "include/mql_types.h"
-        /**************** already included emdf_hash.h -- not including again *****************/
+/**************** already included emdf_hash.h -- not including again *****************/
 
 
 #line 103 "include/mql_types.h"
-        #include <string>
+#include <string>
 #include <map>
 #include <list>
 /**************** already included infos.h -- not including again *****************/
 
 
 #line 107 "include/mql_types.h"
-        /**************** already included monads.h -- not including again *****************/
+/**************** already included monads.h -- not including again *****************/
 
 
 #line 108 "include/mql_types.h"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 109 "include/mql_types.h"
-        #include <utility>
+#include <utility>
 
 
 
@@ -13952,16 +13975,15 @@ class Feature {
 
 #endif // !defined SWIG
 #endif /* MQL_TYPES__H__ */
+
 /**************** continuing include/mql_database_statements.h where we left off *****************/
 
 
 #line 95 "include/mql_database_statements.h"
-        /**************** leaving include/mql_database_statements.h temporarily *****************/
-/**************** A copy of include/mql_object_type_statements.h *****************/
-
-
+/**************** leaving include/mql_database_statements.h temporarily *****************/
+/**************** A copy of include/mql_object_type_statements.h ****************/
 #line 1 "include/mql_object_type_statements.h"
-        /*
+/*
  * mql_object_type_statements.h
  *
  * Definitions of AST-classes for MQL
@@ -14059,12 +14081,10 @@ class Feature {
 
 
 #line 95 "include/mql_object_type_statements.h"
-        /**************** leaving include/mql_object_type_statements.h temporarily *****************/
-/**************** A copy of include/mql_execution_environment.h *****************/
-
-
+/**************** leaving include/mql_object_type_statements.h temporarily *****************/
+/**************** A copy of include/mql_execution_environment.h ****************/
 #line 1 "include/mql_execution_environment.h"
-        /*
+/*
  * mql_execution_environment.h
  *
  * MQL execution environment
@@ -14161,16 +14181,14 @@ class Feature {
 
 
 #line 94 "include/mql_execution_environment.h"
-        /**************** already included mql_types.h -- not including again *****************/
+/**************** already included mql_types.h -- not including again *****************/
 
 
 #line 95 "include/mql_execution_environment.h"
-        /**************** leaving include/mql_execution_environment.h temporarily *****************/
-/**************** A copy of include/mql_error.h *****************/
-
-
+/**************** leaving include/mql_execution_environment.h temporarily *****************/
+/**************** A copy of include/mql_error.h ****************/
 #line 1 "include/mql_error.h"
-        /*
+/*
  * mql_error.h
  *
  * Definitions and functions for MQL error handling
@@ -14295,16 +14313,15 @@ class MQLError {
 
 
 #endif /* MQL_ERROR__H__ */
+
 /**************** continuing include/mql_execution_environment.h where we left off *****************/
 
 
 #line 96 "include/mql_execution_environment.h"
-        /**************** leaving include/mql_execution_environment.h temporarily *****************/
-/**************** A copy of include/mql_query.h *****************/
-
-
+/**************** leaving include/mql_execution_environment.h temporarily *****************/
+/**************** A copy of include/mql_query.h ****************/
 #line 1 "include/mql_query.h"
-        /*
+/*
  * mql_query.h
  *
  * Definitions of AST-classes for MQL Query
@@ -14410,27 +14427,23 @@ class MQLError {
 
 
 #line 103 "include/mql_query.h"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 104 "include/mql_query.h"
-        // emdf.h also includes emdros-lconfig.h
+// emdf.h also includes emdros-lconfig.h
 /**************** already included emdf.h -- not including again *****************/
 
 
 #line 106 "include/mql_query.h"
-        // So that this will be defined
+// So that this will be defined
 /**************** leaving include/mql_query.h temporarily *****************/
-/**************** A copy of include/pcre_emdros.h *****************/
-
-
+/**************** A copy of include/pcre_emdros.h ****************/
 #line 1 "include/pcre_emdros.h"
-        /**************** leaving include/pcre_emdros.h temporarily *****************/
-/**************** A copy of include/pcre_config.h *****************/
-
-
+/**************** leaving include/pcre_emdros.h temporarily *****************/
+/**************** A copy of include/pcre_config.h ****************/
 #line 1 "include/pcre_config.h"
-        /* config.h.  Generated from config.h.in by configure.  */
+/* config.h.  Generated from config.h.in by configure.  */
 /* config.h.in.  Generated from configure.ac by autoheader.  */
 
 
@@ -14779,11 +14792,12 @@ sure both macros are undefined; an emulation function will then be used. */
 
 /* Define to `unsigned int' if <sys/types.h> does not define. */
 /* #undef size_t */
+
 /**************** continuing include/pcre_emdros.h where we left off *****************/
 
 
 #line 1 "include/pcre_emdros.h"
-        /*************************************************
+/*************************************************
 *       Perl-Compatible Regular Expressions      *
 *************************************************/
 
@@ -15460,24 +15474,23 @@ PCRE_EXP_DECL void pcre32_jit_free_unused_memory(void);
 #endif
 
 #endif /* End of pcre.h */
+
 /**************** continuing include/mql_query.h where we left off *****************/
 
 
 #line 108 "include/mql_query.h"
-        /**************** already included infos.h -- not including again *****************/
+/**************** already included infos.h -- not including again *****************/
 
 
 #line 109 "include/mql_query.h"
-        /**************** already included emdf_enums.h -- not including again *****************/
+/**************** already included emdf_enums.h -- not including again *****************/
 
 
 #line 110 "include/mql_query.h"
-        /**************** leaving include/mql_query.h temporarily *****************/
-/**************** A copy of include/mql_enums.h *****************/
-
-
+/**************** leaving include/mql_query.h temporarily *****************/
+/**************** A copy of include/mql_enums.h ****************/
 #line 1 "include/mql_enums.h"
-        /*
+/*
  * mql_enums.h
  *
  * MQL enumerations
@@ -15571,19 +15584,6 @@ PCRE_EXP_DECL void pcre32_jit_free_unused_memory(void);
 #ifndef MQL_ENUMS__H__
 #define MQL_ENUMS__H__
 
-/** A Monad Set Relation Clause operation
- *
- * part_of == "we" must be a subset of the other monad set.
- *
- * overlap == "we" must have a non-empty intersection with the other
- * monad set.
- *
- */
-enum eMonadSetRelationOperation {
-	kMSROPartOf,
-	kMSROOverlap
-};
-
 enum eUniverseOrSubstrate {
 	kMSNSubstrate,
 	kMSNUniverse
@@ -15614,19 +15614,20 @@ enum eAggregateQueryStrategy {
 
 
 #endif /* MQL_ENUMS__H__ */
+
 /**************** continuing include/mql_query.h where we left off *****************/
 
 
 #line 111 "include/mql_query.h"
-        /**************** already included emdf_exception.h -- not including again *****************/
+/**************** already included emdf_exception.h -- not including again *****************/
 
 
 #line 112 "include/mql_query.h"
-        /**************** already included mql_types.h -- not including again *****************/
+/**************** already included mql_types.h -- not including again *****************/
 
 
 #line 113 "include/mql_query.h"
-        
+
 
 
 
@@ -16556,16 +16557,15 @@ class Topograph {
 
 
 #endif /* MQL_QUERY_TYPES__H__ */
+
 /**************** continuing include/mql_execution_environment.h where we left off *****************/
 
 
 #line 97 "include/mql_execution_environment.h"
-        /**************** leaving include/mql_execution_environment.h temporarily *****************/
-/**************** A copy of include/mql_sheaf.h *****************/
-
-
+/**************** leaving include/mql_execution_environment.h temporarily *****************/
+/**************** A copy of include/mql_sheaf.h ****************/
 #line 1 "include/mql_sheaf.h"
-        /*
+/*
  * mql_sheaf.h
  *
  * MQL sheafs
@@ -16664,31 +16664,31 @@ class Topograph {
 
 
 #line 96 "include/mql_sheaf.h"
-        #endif // !defined SWIG
+#endif // !defined SWIG
 /**************** already included monads.h -- not including again *****************/
 
 
 #line 98 "include/mql_sheaf.h"
-        #include <string>
+#include <string>
 #include <list>
 #include <map>
 /**************** already included mql_query.h -- not including again *****************/
 
 
 #line 102 "include/mql_sheaf.h"
-        /**************** already included mql_enums.h -- not including again *****************/
+/**************** already included mql_enums.h -- not including again *****************/
 
 
 #line 103 "include/mql_sheaf.h"
-        /**************** already included arena.h -- not including again *****************/
+/**************** already included arena.h -- not including again *****************/
 
 
 #line 104 "include/mql_sheaf.h"
-        /**************** already included llist.h -- not including again *****************/
+/**************** already included llist.h -- not including again *****************/
 
 
 #line 105 "include/mql_sheaf.h"
-        
+
 
 class Sheaf; // forward declaration
 class MQLExecEnv; // forward declaration
@@ -17583,22 +17583,21 @@ extern FlatSheaf *mql_flatten_sheaf(StringList *pObjectTypeNames, EmdrosEnv *pEn
 
 
 #endif /* MQL_SHEAF__H__ */
+
 /**************** continuing include/mql_execution_environment.h where we left off *****************/
 
 
 #line 98 "include/mql_execution_environment.h"
-        /**************** already included monads.h -- not including again *****************/
+/**************** already included monads.h -- not including again *****************/
 
 
 #line 99 "include/mql_execution_environment.h"
-        #include <map>
+#include <map>
 #ifndef SWIG
 /**************** leaving include/mql_execution_environment.h temporarily *****************/
-/**************** A copy of include/smart_vector.h *****************/
-
-
+/**************** A copy of include/smart_vector.h ****************/
 #line 1 "include/smart_vector.h"
-        /*
+/*
  * smart_vector.h
  *
  * SmartVector template
@@ -17801,16 +17800,15 @@ template <class T, class P> void SmartVector<T,P>::setValue(T* v, short int inde
 
 
 #endif // SMART_VECTOR__H__
+
 /**************** continuing include/mql_execution_environment.h where we left off *****************/
 
 
 #line 102 "include/mql_execution_environment.h"
-        /**************** leaving include/mql_execution_environment.h temporarily *****************/
-/**************** A copy of include/mql_lexer.h *****************/
-
-
+/**************** leaving include/mql_execution_environment.h temporarily *****************/
+/**************** A copy of include/mql_lexer.h ****************/
 #line 1 "include/mql_lexer.h"
-        /*
+/*
  * mql_lexer.h
  *
  * MQL Lexer based on re2c
@@ -17908,7 +17906,7 @@ template <class T, class P> void SmartVector<T,P>::setValue(T* v, short int inde
 
 
 #line 95 "include/mql_lexer.h"
-        
+
 class MQLScanner {
 protected:
 	const char *sz;
@@ -17933,15 +17931,16 @@ private:
 
 
 #endif // MQL_LEXER__H__
+
 /**************** continuing include/mql_execution_environment.h where we left off *****************/
 
 
 #line 103 "include/mql_execution_environment.h"
-        /**************** already included llist.h -- not including again *****************/
+/**************** already included llist.h -- not including again *****************/
 
 
 #line 104 "include/mql_execution_environment.h"
-        #endif // !defined SWIG
+#endif // !defined SWIG
 
 /**
  * \defgroup CompilerStages Stages of the MQL compiler
@@ -18312,15 +18311,16 @@ inline void MQLExecEnv::progress(void)
 #endif // !defined SWIG
 
 #endif // MQL_EXECUTION_ENVIRONMENT__H__
+
 /**************** continuing include/mql_object_type_statements.h where we left off *****************/
 
 
 #line 96 "include/mql_object_type_statements.h"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 97 "include/mql_object_type_statements.h"
-        
+
 
 // Base class for the OBJECT TYPE statements
 class ObjectTypeStatement : public Statement {
@@ -18469,15 +18469,16 @@ public:
 
 
 #endif /* MQL_OBJECT_TYPE_STATEMENTS__H__ */
+
 /**************** continuing include/mql_database_statements.h where we left off *****************/
 
 
 #line 96 "include/mql_database_statements.h"
-        /**************** already included mql_execution_environment.h -- not including again *****************/
+/**************** already included mql_execution_environment.h -- not including again *****************/
 
 
 #line 97 "include/mql_database_statements.h"
-        
+
 
 class DatabaseStatement : public Statement {
  protected:
@@ -18589,11 +18590,10 @@ class CreateIndexesStatement : public ObjectTypesStatement {
 
 
 #endif /* MQL_DATABASE_STATEMENTS__H__ */
-/**************** A copy of include/mql_enumeration_statements.h *****************/
 
-
+/**************** A copy of include/mql_enumeration_statements.h ****************/
 #line 1 "include/mql_enumeration_statements.h"
-        /*
+/*
  * mql_enumeration_statements.h
  *
  * Definitions of AST-classes for MQL
@@ -18691,11 +18691,11 @@ class CreateIndexesStatement : public ObjectTypesStatement {
 
 
 #line 95 "include/mql_enumeration_statements.h"
-        /**************** already included mql_execution_environment.h -- not including again *****************/
+/**************** already included mql_execution_environment.h -- not including again *****************/
 
 
 #line 96 "include/mql_enumeration_statements.h"
-        #include <set>
+#include <set>
 
 class EnumerationStatement : public Statement {
  protected:
@@ -18816,11 +18816,10 @@ class DropEnumerationStatement : public EnumerationStatement {
 
 
 #endif /* MQL_ENUMERATION_STATEMENTS__H__ */
-/**************** A copy of include/mql_execute.h *****************/
 
-
+/**************** A copy of include/mql_execute.h ****************/
 #line 1 "include/mql_execute.h"
-        /*
+/*
  * mql_execute.h
  *
  * Functions for executing MQL queries
@@ -18921,7 +18920,7 @@ class DropEnumerationStatement : public EnumerationStatement {
 
 
 #line 98 "include/mql_execute.h"
-        #endif
+#endif
 
 #if HAVE_ISTREAM
 #include <istream>
@@ -18939,7 +18938,7 @@ class DropEnumerationStatement : public EnumerationStatement {
 
 
 #line 113 "include/mql_execute.h"
-        #endif
+#endif
 
 /**
  * \defgroup MQLExecute MQL Execution functions
@@ -19004,11 +19003,10 @@ extern bool mqlGetNextQuery(std::istream *pStrin,
 
 
 #endif /* MQL_EXECUTE__H__ */
-/**************** A copy of include/mql_exporter.h *****************/
 
-
+/**************** A copy of include/mql_exporter.h ****************/
 #line 1 "include/mql_exporter.h"
-        /*
+/*
  * mql_exporter.h
  *
  * A class to dump Emdros databases to MQL
@@ -19101,7 +19099,7 @@ extern bool mqlGetNextQuery(std::istream *pStrin,
 
 
 #line 90 "include/mql_exporter.h"
-        // Do this because emdros-config might #define malloc,
+// Do this because emdros-config might #define malloc,
 // in which case some systems will fail to use the real 
 // malloc, thus causing build errors.
 #undef malloc
@@ -19110,18 +19108,18 @@ extern bool mqlGetNextQuery(std::istream *pStrin,
 
 
 #line 96 "include/mql_exporter.h"
-        #include <iostream>
+#include <iostream>
 #include <string>
 /**************** already included environment_emdros.h -- not including again *****************/
 
 
 #line 99 "include/mql_exporter.h"
-        #include <list>
+#include <list>
 /**************** already included infos.h -- not including again *****************/
 
 
 #line 101 "include/mql_exporter.h"
-        
+
 
 #define DEFAULT_BATCH_SIZE (50000)
 #define START_MONAD_NO_VALUE (MAX_MONAD)
@@ -19222,11 +19220,10 @@ protected:
 
 
 #endif /* MQL_ERROR__H__ */
-/**************** A copy of include/mql_extern.h *****************/
 
-
+/**************** A copy of include/mql_extern.h ****************/
 #line 1 "include/mql_extern.h"
-        /*
+/*
  * mql_extern.h
  *
  * MQL extern declarations
@@ -19323,11 +19320,10 @@ extern int yyparse(MQLExecEnv *pEE);
 
 
 
-/**************** A copy of include/mql_features_statements.h *****************/
 
-
+/**************** A copy of include/mql_features_statements.h ****************/
 #line 1 "include/mql_features_statements.h"
-        /*
+/*
  * mql_features_statements.h
  *
  * Definitions of FEATURES statements for MQL
@@ -19425,15 +19421,15 @@ extern int yyparse(MQLExecEnv *pEE);
 
 
 #line 95 "include/mql_features_statements.h"
-        /**************** already included mql_execution_environment.h -- not including again *****************/
+/**************** already included mql_execution_environment.h -- not including again *****************/
 
 
 #line 96 "include/mql_features_statements.h"
-        /**************** already included mql_object_type_statements.h -- not including again *****************/
+/**************** already included mql_object_type_statements.h -- not including again *****************/
 
 
 #line 97 "include/mql_features_statements.h"
-        
+
 // GET FEATURES
 class GetFeaturesStatement : public Statement {
 private:
@@ -19471,11 +19467,10 @@ public:
 
 
 #endif /* MQL_XXX__H__ */
-/**************** A copy of include/mql_gq.h *****************/
 
-
+/**************** A copy of include/mql_gq.h ****************/
 #line 1 "include/mql_gq.h"
-        /*
+/*
  * mql_gq.h
  *
  * MQL "Get Query from stream" scanner
@@ -19572,11 +19567,11 @@ public:
 
 
 #line 94 "include/mql_gq.h"
-        /**************** already included arena.h -- not including again *****************/
+/**************** already included arena.h -- not including again *****************/
 
 
 #line 95 "include/mql_gq.h"
-        
+
 #if HAVE_ISTREAM
 #include <istream>
 #else
@@ -19604,11 +19599,10 @@ private:
 };
 
 #endif // MQL_GQ__H__
-/**************** A copy of include/mql_meta_statements.h *****************/
 
-
+/**************** A copy of include/mql_meta_statements.h ****************/
 #line 1 "include/mql_meta_statements.h"
-        /*
+/*
  * mql_meta_statements.h
  *
  * Definitions of AST-classes for MQL
@@ -19706,11 +19700,11 @@ private:
 
 
 #line 95 "include/mql_meta_statements.h"
-        /**************** already included mql_execution_environment.h -- not including again *****************/
+/**************** already included mql_execution_environment.h -- not including again *****************/
 
 
 #line 96 "include/mql_meta_statements.h"
-        
+
 
 // QUIT
 class QuitStatement : public Statement {
@@ -19724,11 +19718,10 @@ public:
 
 
 #endif /* MQL_META_STATEMENTS__H__ */
-/**************** A copy of include/mql_monads_statements.h *****************/
 
-
+/**************** A copy of include/mql_monads_statements.h ****************/
 #line 1 "include/mql_monads_statements.h"
-        /*
+/*
  * mql_monads_statements.h
  *
  * Definitions of AST-classes for MQL
@@ -19821,15 +19814,15 @@ public:
 
 
 #line 90 "include/mql_monads_statements.h"
-        /**************** already included mql_execution_environment.h -- not including again *****************/
+/**************** already included mql_execution_environment.h -- not including again *****************/
 
 
 #line 91 "include/mql_monads_statements.h"
-        /**************** already included mql_object_type_statements.h -- not including again *****************/
+/**************** already included mql_object_type_statements.h -- not including again *****************/
 
 
 #line 92 "include/mql_monads_statements.h"
-        
+
 
 typedef enum { kSOUnion, kSOIntersect, kSODifference, kSONone, kSOReplace } eSetOperator;
 
@@ -20019,11 +20012,10 @@ public:
 
 
 #endif /* MQL_MONADS_STATEMENTS__H__ */
-/**************** A copy of include/mql_object.h *****************/
 
-
+/**************** A copy of include/mql_object.h ****************/
 #line 1 "include/mql_object.h"
-        /*
+/*
  * mql_object.h
  *
  * MQL representation of an object while processing the query
@@ -20125,19 +20117,19 @@ public:
 
 
 #line 99 "include/mql_object.h"
-        /**************** already included emdf_value.h -- not including again *****************/
+/**************** already included emdf_value.h -- not including again *****************/
 
 
 #line 100 "include/mql_object.h"
-        /**************** already included inst_object.h -- not including again *****************/
+/**************** already included inst_object.h -- not including again *****************/
 
 
 #line 101 "include/mql_object.h"
-        /**************** already included mql_enums.h -- not including again *****************/
+/**************** already included mql_enums.h -- not including again *****************/
 
 
 #line 102 "include/mql_object.h"
-        
+
 
 class EMdFDB; // Forward declaration
 
@@ -20164,11 +20156,10 @@ private:
 };
 
 #endif /* MQL_OBJECT__H__ */
-/**************** A copy of include/mql_object_statements.h *****************/
 
-
+/**************** A copy of include/mql_object_statements.h ****************/
 #line 1 "include/mql_object_statements.h"
-        /*
+/*
  * mql_object_statements.h
  *
  * Definitions of AST-classes for MQL
@@ -20261,15 +20252,15 @@ private:
 
 
 #line 90 "include/mql_object_statements.h"
-        /**************** already included mql_object_type_statements.h -- not including again *****************/
+/**************** already included mql_object_type_statements.h -- not including again *****************/
 
 
 #line 91 "include/mql_object_statements.h"
-        /**************** already included mql_execution_environment.h -- not including again *****************/
+/**************** already included mql_execution_environment.h -- not including again *****************/
 
 
 #line 92 "include/mql_object_statements.h"
-        
+
 
 class InstObject; // Forward declaration
 
@@ -20612,11 +20603,10 @@ class DeleteObjectsByQueryStatement : public DeleteObjectsStatement, public Quer
 
 
 #endif /* MQL_OBJECT_STATEMENTS__H__ */
-/**************** A copy of include/mqlpars.h *****************/
 
-
+/**************** A copy of include/mqlpars.h ****************/
 #line 1 "include/mqlpars.h"
-        #define T_KEY_GO                           1
+#define T_KEY_GO                           1
 #define T_KEY_CREATE                       2
 #define T_KEY_DATABASE                     3
 #define T_IDENTIFIER                       4
@@ -20724,27 +20714,27 @@ class DeleteObjectsByQueryStatement : public DeleteObjectsStatement, public Quer
 #define T_KEY_NORETRIEVE                 106
 #define T_KEY_RETRIEVE                   107
 #define T_KEY_PART_OF                    108
-#define T_KEY_OVERLAP                    109
-#define T_KEY_UNIVERSE                   110
-#define T_KEY_SUBSTRATE                  111
-#define T_KEY_LESS_THAN                  112
-#define T_KEY_GREATER_THAN               113
-#define T_KEY_NOT_EQUAL                  114
-#define T_KEY_LESS_THAN_OR_EQUAL         115
-#define T_KEY_GREATER_THAN_OR_EQUAL      116
-#define T_KEY_TILDE                      117
-#define T_KEY_NOT_TILDE                  118
-#define T_KEY_HAS                        119
-#define T_KEY_DOT                        120
-#define T_KEY_OPT_GAP                    121
-#define T_KEY_GAP                        122
-#define T_KEY_POWER                      123
-#define T_KEY_BETWEEN                    124
-/**************** A copy of include/mql_R.h *****************/
+#define T_KEY_STARTS_IN                  109
+#define T_KEY_OVERLAP                    110
+#define T_KEY_UNIVERSE                   111
+#define T_KEY_SUBSTRATE                  112
+#define T_KEY_LESS_THAN                  113
+#define T_KEY_GREATER_THAN               114
+#define T_KEY_NOT_EQUAL                  115
+#define T_KEY_LESS_THAN_OR_EQUAL         116
+#define T_KEY_GREATER_THAN_OR_EQUAL      117
+#define T_KEY_TILDE                      118
+#define T_KEY_NOT_TILDE                  119
+#define T_KEY_HAS                        120
+#define T_KEY_DOT                        121
+#define T_KEY_OPT_GAP                    122
+#define T_KEY_GAP                        123
+#define T_KEY_POWER                      124
+#define T_KEY_BETWEEN                    125
 
-
+/**************** A copy of include/mql_R.h ****************/
 #line 1 "include/mql_R.h"
-        /*
+/*
  * mql_R.h
  *
  * MQL retrieval functions
@@ -20837,7 +20827,7 @@ class DeleteObjectsByQueryStatement : public DeleteObjectsStatement, public Quer
 
 
 #line 90 "include/mql_R.h"
-        
+
 class MQLExecEnv; // Forward declaration
 class Topograph; // Forward declaration
 class Sheaf; // Forward declaration
@@ -20850,11 +20840,10 @@ extern Inst* R_inst(MQLExecEnv *pEE, const SetOfMonads& Su, ObjectBlock *object_
 
 
 #endif /* MQL_R__H__ */
-/**************** A copy of include/mql_segment_statements.h *****************/
 
-
+/**************** A copy of include/mql_segment_statements.h ****************/
 #line 1 "include/mql_segment_statements.h"
-        /*
+/*
  * mql_segment_statements.h
  *
  * Definitions of AST-classes for MQL
@@ -20951,11 +20940,11 @@ extern Inst* R_inst(MQLExecEnv *pEE, const SetOfMonads& Su, ObjectBlock *object_
 
 
 #line 94 "include/mql_segment_statements.h"
-        /**************** already included mql_execution_environment.h -- not including again *****************/
+/**************** already included mql_execution_environment.h -- not including again *****************/
 
 
 #line 95 "include/mql_segment_statements.h"
-        
+
 
 // Base class for the segment manipulation statements
 class SegmentStatement : public Statement {
@@ -20982,11 +20971,10 @@ class CreateSegmentStatement : public SegmentStatement {
 
 
 #endif /* MQL_SEGMENT_STATEMENTS__H__ */
-/**************** A copy of include/mql_select_statements.h *****************/
 
-
+/**************** A copy of include/mql_select_statements.h ****************/
 #line 1 "include/mql_select_statements.h"
-        /*
+/*
  * mql_select_statements.h
  *
  * Definitions of AST-classes for MQL
@@ -21084,19 +21072,19 @@ class CreateSegmentStatement : public SegmentStatement {
 
 
 #line 95 "include/mql_select_statements.h"
-        /**************** already included mql_enumeration_statements.h -- not including again *****************/
+/**************** already included mql_enumeration_statements.h -- not including again *****************/
 
 
 #line 96 "include/mql_select_statements.h"
-        /**************** already included mql_object_type_statements.h -- not including again *****************/
+/**************** already included mql_object_type_statements.h -- not including again *****************/
 
 
 #line 97 "include/mql_select_statements.h"
-        /**************** already included mql_execution_environment.h -- not including again *****************/
+/**************** already included mql_execution_environment.h -- not including again *****************/
 
 
 #line 98 "include/mql_select_statements.h"
-        
+
 
 // SELECT (focus|all|) OBJECTS
 class SelectStatement : public Statement, public QueryBase {
@@ -21257,11 +21245,10 @@ public:
 
 
 #endif /* MQL_SELECT_STATEMENTS__H__ */
-/**************** A copy of include/mql_utility.h *****************/
 
-
+/**************** A copy of include/mql_utility.h ****************/
 #line 1 "include/mql_utility.h"
-        /*
+/*
  * mql_utility.h
  *
  * MQL utility functions
@@ -21359,22 +21346,21 @@ public:
 
 
 #line 95 "include/mql_utility.h"
-        /**************** already included monads.h -- not including again *****************/
+/**************** already included monads.h -- not including again *****************/
 
 
 #line 96 "include/mql_utility.h"
-        
+
 class Straw; // Forward declaration
 
 extern void restrict(const SetOfMonads& SOM, monad_m monad, SetOfMonads& result);
 extern void join(Straw* pStraw, ListOfStraws* pLS);
 // extern void hat(const SetOfMonads& O, SetOfMonads& out); // Has been obsolete...
 #endif /* MQL_UTILITY__H__ */
-/**************** A copy of include/mysqlconn.h *****************/
 
-
+/**************** A copy of include/mysqlconn.h ****************/
 #line 1 "include/mysqlconn.h"
-        /*
+/*
  * mysqlconn.h
  *
  * MySQL Database connection 
@@ -21472,7 +21458,7 @@ extern void join(Straw* pStraw, ListOfStraws* pLS);
 
 
 #line 95 "include/mysqlconn.h"
-        
+
 #ifndef USE_MYSQL
 #define USE_MYSQL 0
 #endif
@@ -21482,13 +21468,11 @@ extern void join(Straw* pStraw, ListOfStraws* pLS);
 
 
 #line 102 "include/mysqlconn.h"
-        #include <cstdlib>
+#include <cstdlib>
 /**************** leaving include/mysqlconn.h temporarily *****************/
-/**************** A copy of include/utils.h *****************/
-
-
+/**************** A copy of include/utils.h ****************/
 #line 1 "include/utils.h"
-        /*
+/*
  * utils.h
  *
  * Utility functions for EMdF
@@ -21590,11 +21574,12 @@ bool char2bool(char in);
 
 
 #endif /* UTILS__H__ */
+
 /**************** continuing include/mysqlconn.h where we left off *****************/
 
 
 #line 104 "include/mysqlconn.h"
-        
+
 #if USE_MYSQL
 #include <mysql.h>
 #endif
@@ -21795,11 +21780,10 @@ private:
 
 
 #endif // EMDF_MYSQLCONN__H__
-/**************** A copy of include/mysqlemdfdb.h *****************/
 
-
+/**************** A copy of include/mysqlemdfdb.h ****************/
 #line 1 "include/mysqlemdfdb.h"
-        /*
+/*
  * mysqlemdfdb.h
  *
  * MySQL EMdF database base class
@@ -21896,16 +21880,16 @@ private:
 
 
 #line 94 "include/mysqlemdfdb.h"
-        #ifndef SWIG
+#ifndef SWIG
 /**************** already included emdf.h -- not including again *****************/
 
 
 #line 96 "include/mysqlemdfdb.h"
-        /**************** already included emdfdb.h -- not including again *****************/
+/**************** already included emdfdb.h -- not including again *****************/
 
 
 #line 97 "include/mysqlemdfdb.h"
-        #include <list>
+#include <list>
 #endif
 #include <string>
 
@@ -21983,11 +21967,10 @@ class MySQLEMdFDB : public EMdFDB {
 
 
 #endif // MYSQLEMDFDB__H__
-/**************** A copy of include/pgconn.h *****************/
 
-
+/**************** A copy of include/pgconn.h ****************/
 #line 1 "include/pgconn.h"
-        /*
+/*
  * pgconn.h
  *
  * PostgreSQL Database connection 
@@ -22085,7 +22068,7 @@ class MySQLEMdFDB : public EMdFDB {
 
 
 #line 95 "include/pgconn.h"
-        
+
 #ifndef USE_POSTGRESQL
 #define USE_POSTGRESQL (0)
 #endif
@@ -22094,7 +22077,7 @@ class MySQLEMdFDB : public EMdFDB {
 
 
 #line 101 "include/pgconn.h"
-        
+
 #if USE_POSTGRESQL
 extern "C" {
 #include <libpq-fe.h>
@@ -22304,11 +22287,10 @@ private:
 
 
 #endif // EMDF_PGCONN__H__
-/**************** A copy of include/pgemdfdb.h *****************/
 
-
+/**************** A copy of include/pgemdfdb.h ****************/
 #line 1 "include/pgemdfdb.h"
-        /*
+/*
  * pgemdfdb.h
  *
  * PostgreSQL EMdF database base class
@@ -22405,16 +22387,16 @@ private:
 
 
 #line 94 "include/pgemdfdb.h"
-        #ifndef SWIG
+#ifndef SWIG
 /**************** already included emdf.h -- not including again *****************/
 
 
 #line 96 "include/pgemdfdb.h"
-        /**************** already included emdfdb.h -- not including again *****************/
+/**************** already included emdfdb.h -- not including again *****************/
 
 
 #line 97 "include/pgemdfdb.h"
-        #include <list>
+#include <list>
 #endif // !defined SWIG
 #include <string>
 
@@ -22497,11 +22479,10 @@ class PgEMdFDB : public EMdFDB {
 
 
 #endif // PGEMDFDB__H__
-/**************** A copy of include/prefix_emdros.h *****************/
 
-
+/**************** A copy of include/prefix_emdros.h ****************/
 #line 1 "include/prefix_emdros.h"
-        /*
+/*
  * prefix_emdros.h.in
  *
  * A crude abstraction of the current OS.
@@ -22607,11 +22588,10 @@ extern std::string app_prefix(void);
 
 
 #endif // PREFIX_EMDROS__H__
-/**************** A copy of include/renderobjects.h *****************/
 
-
+/**************** A copy of include/renderobjects.h ****************/
 #line 1 "include/renderobjects.h"
-        /*
+/*
  * renderobjects.h
  *
  * Classes and methods to render Emdros objects into something else,
@@ -22619,13 +22599,13 @@ extern std::string app_prefix(void);
  *
  * Ulrik Sandborg-Petersen
  * Created: 4/22-2007
- * Last update: 5/27-2014
+ * Last update: 4/14-2016
  *
  */
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2007-2014  Ulrik Sandborg-Petersen
+ *   Copyright (C) 2007-2016  Ulrik Sandborg-Petersen
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License as
@@ -22710,31 +22690,29 @@ extern std::string app_prefix(void);
 
 
 #line 96 "include/renderobjects.h"
-        /**************** already included monads.h -- not including again *****************/
+/**************** already included monads.h -- not including again *****************/
 
 
 #line 97 "include/renderobjects.h"
-        /**************** already included memobject.h -- not including again *****************/
+/**************** already included memobject.h -- not including again *****************/
 
 
 #line 98 "include/renderobjects.h"
-        /**************** already included json_classes.h -- not including again *****************/
+/**************** already included json_classes.h -- not including again *****************/
 
 
 #line 99 "include/renderobjects.h"
-        /**************** leaving include/renderobjects.h temporarily *****************/
-/**************** A copy of include/templatelang_classes.h *****************/
-
-
+/**************** leaving include/renderobjects.h temporarily *****************/
+/**************** A copy of include/templatelang_classes.h ****************/
 #line 1 "include/templatelang_classes.h"
-        /*
+/*
  * templatelang.h
  *
  * Template language classes
  *
  * Ulrik Sandborg-Petersen
  * Created: 7/28-2008
- * Last update: 2/23-2016
+ * Last update: 4/11-2016
  *
  */
 /************************************************************************
@@ -22820,11 +22798,9 @@ extern std::string app_prefix(void);
 #include <list>
 
 /**************** leaving include/templatelang_classes.h temporarily *****************/
-/**************** A copy of include/templatelang_lexer.h *****************/
-
-
+/**************** A copy of include/templatelang_lexer.h ****************/
 #line 1 "include/templatelang_lexer.h"
-        /*
+/*
  * templatelang_lexer.h
  *
  * TEMPLATELANG Lexer based on re2c
@@ -22917,7 +22893,7 @@ extern std::string app_prefix(void);
 
 
 #line 90 "include/templatelang_lexer.h"
-        
+
 class TemplateLanguageScanner {
 protected:
 	const char *sz;
@@ -22942,19 +22918,20 @@ private:
 
 
 #endif // TemplateLang_LEXER__H__
+
 /**************** continuing include/templatelang_classes.h where we left off *****************/
 
 
 #line 93 "include/templatelang_classes.h"
-        /**************** already included qdxml.h -- not including again *****************/
+/**************** already included qdxml.h -- not including again *****************/
 
 
 #line 94 "include/templatelang_classes.h"
-        /**************** already included arena.h -- not including again *****************/
+/**************** already included arena.h -- not including again *****************/
 
 
 #line 95 "include/templatelang_classes.h"
-        
+
 class TemplateLangExecEnv; // Forward declaration
 class MemObject; // Forward declaration
 class JSONValue; // Forward declaration
@@ -23037,12 +23014,18 @@ class TemplateSimpleNode : public TemplateASTNode {
 	virtual void exec(TemplateLangExecEnv *pEE);
 };
 
+typedef enum {
+	kMKXML,
+	kMKJSON,
+	kMKNone
+} eMangleKind;
+
 class TemplateFeature : public TemplateASTNode {
  protected:
 	long m_index;
-	bool m_bMangleFeature;
+	eMangleKind m_mangle_kind;
  public:
-	TemplateFeature(long index, bool bMangleFeature);
+	TemplateFeature(long index, eMangleKind mangle_kind);
 	virtual ~TemplateFeature();
 
 	virtual void exec(TemplateLangExecEnv *pEE);
@@ -23439,15 +23422,16 @@ extern TemplateASTNode *parseTemplate(TemplateLangExecEnv* pEE, const std::strin
 extern std::string escapeXMLEntities(const std::string& input);
 
 #endif
+
 /**************** continuing include/renderobjects.h where we left off *****************/
 
 
 #line 100 "include/renderobjects.h"
-        /**************** already included arena.h -- not including again *****************/
+/**************** already included arena.h -- not including again *****************/
 
 
 #line 101 "include/renderobjects.h"
-        
+
 
 #ifndef SWIG
 class MSEPObjectPair {
@@ -23458,7 +23442,9 @@ class MSEPObjectPair {
         MSEPObjectPair(monad_m mse_first, monad_m mse_last, MemObject *pObj) : m_mse_first(mse_first),
 		m_mse_last(mse_last),
 		m_pObj(pObj) {};
-	~MSEPObjectPair() {};
+	~MSEPObjectPair() {
+		delete m_pObj;
+	};
 };
 #endif
 
@@ -23575,11 +23561,10 @@ extern std::string render_objects(EmdrosEnv *pEnv, const std::string& db_name, c
 
 
 #endif
-/**************** A copy of include/renderxml.h *****************/
 
-
+/**************** A copy of include/renderxml.h ****************/
 #line 1 "include/renderxml.h"
-        /*
+/*
  * renderxml.h
  *
  * Methods and classes to render XML into something else,
@@ -23673,11 +23658,11 @@ extern std::string render_objects(EmdrosEnv *pEnv, const std::string& db_name, c
 
 
 #line 91 "include/renderxml.h"
-        /**************** already included templatelang_classes.h -- not including again *****************/
+/**************** already included templatelang_classes.h -- not including again *****************/
 
 
 #line 92 "include/renderxml.h"
-        
+
 extern std::string RenderXML(const std::string& xml, const JSONValue *pTopStyleSheet, const std::string& render_stylesheet, bool& bProcessOK, std::string& strError);
 
 extern std::string RenderXML(const std::string& xml, const JSONValue *pTopStyleSheet, const std::string& render_stylesheet, const TemplateLangVariableMap& variables, bool& bProcessOK, std::string& strError);
@@ -23685,11 +23670,10 @@ extern std::string RenderXML(const std::string& xml, const JSONValue *pTopStyleS
 extern std::string utf8ToEntity(const std::string& inHTML);
 
 #endif
-/**************** A copy of include/sqlite3conn.h *****************/
 
-
+/**************** A copy of include/sqlite3conn.h ****************/
 #line 1 "include/sqlite3conn.h"
-        /*
+/*
  * sqlite3conn.h
  *
  * SQLite3 Database connection 
@@ -23786,28 +23770,26 @@ extern std::string utf8ToEntity(const std::string& inHTML);
 
 
 #line 94 "include/sqlite3conn.h"
-        
+
 
 #include <cstdlib>
 /**************** already included conn.h -- not including again *****************/
 
 
 #line 98 "include/sqlite3conn.h"
-        
+
 #if USE_SQLITE3
 extern "C" {
 /**************** leaving include/sqlite3conn.h temporarily *****************/
-/**************** A copy of include/sqlite3_emdros.h *****************/
-
-
+/**************** A copy of include/sqlite3_emdros.h ****************/
 #line 1 "include/sqlite3_emdros.h"
-        #ifndef SQLITE3_EMDROS_H_
+#ifndef SQLITE3_EMDROS_H_
 #define SQLITE3_EMDROS_H_
 /**************** already included emdros-lconfig.h -- not including again *****************/
 
 
 #line 3 "include/sqlite3_emdros.h"
-        #if USE_SQLITE3
+#if USE_SQLITE3
 /*
 ** 2001 September 15
 **
@@ -32253,18 +32235,19 @@ struct fts5_api {
 
 #endif /* USE_SQLITE3 */
 #endif /* SQLITE3_EMDROS_H_ */
+
 /**************** continuing include/sqlite3conn.h where we left off *****************/
 
 
 #line 102 "include/sqlite3conn.h"
-        }
+}
 #endif
 
 /**************** already included debug.h -- not including again *****************/
 
 
 #line 106 "include/sqlite3conn.h"
-        
+
 class SQLite3EMdFConnection : public EMdFConnection {
  private:
 	std::string m_db_name;
@@ -32305,7 +32288,8 @@ class SQLite3EMdFConnection : public EMdFConnection {
 	// Returns -1 on no fields.
 	virtual int getNoOfFields(void);
 
-	int getLastInsertRowID(void) {
+	/*
+	long getLastInsertRowID(void) {
 #if USE_SQLITE3
 		if (m_pDB == 0) {
 			return 0;
@@ -32316,6 +32300,7 @@ class SQLite3EMdFConnection : public EMdFConnection {
 		return 0;
 #endif
 	}
+	*/
 
 	// Getting next tuple
 	// Returns true on success, false on failure
@@ -32485,11 +32470,10 @@ class SQLite3EMdFConnection : public EMdFConnection {
 
 
 #endif // EMDF_SQLITE3CONN__H__
-/**************** A copy of include/sqlite3emdfdb.h *****************/
 
-
+/**************** A copy of include/sqlite3emdfdb.h ****************/
 #line 1 "include/sqlite3emdfdb.h"
-        /*
+/*
  * sqlite3emdfdb.h
  *
  * SQLite3 EMdF database base class
@@ -32584,16 +32568,16 @@ class SQLite3EMdFConnection : public EMdFConnection {
 
 
 #line 92 "include/sqlite3emdfdb.h"
-        #ifndef SWIG
+#ifndef SWIG
 /**************** already included emdf.h -- not including again *****************/
 
 
 #line 94 "include/sqlite3emdfdb.h"
-        /**************** already included emdfdb.h -- not including again *****************/
+/**************** already included emdfdb.h -- not including again *****************/
 
 
 #line 95 "include/sqlite3emdfdb.h"
-        #include <list>
+#include <list>
 #include <map>
 #endif // !defined SWIG
 #include <string>
@@ -32701,11 +32685,10 @@ class SQLite3EMdFDB : public EMdFDB {
 
 
 #endif // SQLITE3EMDFDB__H__
-/**************** A copy of include/sqliteconn.h *****************/
 
-
+/**************** A copy of include/sqliteconn.h ****************/
 #line 1 "include/sqliteconn.h"
-        /*
+/*
  * sqliteconn.h
  *
  * SQLite Database connection 
@@ -32804,31 +32787,29 @@ class SQLite3EMdFDB : public EMdFDB {
 
 
 #line 96 "include/sqliteconn.h"
-        
+
 #include <cstdlib>
 /**************** already included conn.h -- not including again *****************/
 
 
 #line 99 "include/sqliteconn.h"
-        /**************** already included debug.h -- not including again *****************/
+/**************** already included debug.h -- not including again *****************/
 
 
 #line 100 "include/sqliteconn.h"
-        
+
 #if USE_SQLITE2
 extern "C" {
 /**************** leaving include/sqliteconn.h temporarily *****************/
-/**************** A copy of include/sqlite_emdros.h *****************/
-
-
+/**************** A copy of include/sqlite_emdros.h ****************/
 #line 1 "include/sqlite_emdros.h"
-        #ifndef SQLITE_EMDROS_H_
+#ifndef SQLITE_EMDROS_H_
 #define SQLITE_EMDROS_H_
 /**************** already included emdros-lconfig.h -- not including again *****************/
 
 
 #line 3 "include/sqlite_emdros.h"
-        #if USE_SQLITE2
+#if USE_SQLITE2
 /*
 ** 2001 September 15
 **
@@ -32862,7 +32843,7 @@ extern "C" {
 #ifdef SQLITE_VERSION
 # undef SQLITE_VERSION
 #else
-# define SQLITE_VERSION         "3.4.1.pre22"
+# define SQLITE_VERSION         "3.4.1.pre24"
 #endif
 
 /*
@@ -33717,11 +33698,12 @@ int sqlite_decode_binary(const unsigned char *in, unsigned char *out);
 #endif /* _SQLITE_H_ */
 #endif /* USE_SQLITE2 */
 #endif /* SQLITE_EMDROS_H_ */
+
 /**************** continuing include/sqliteconn.h where we left off *****************/
 
 
 #line 104 "include/sqliteconn.h"
-        }
+}
 #endif
 
 
@@ -33942,11 +33924,10 @@ class SQLiteEMdFConnection : public EMdFConnection {
 
 
 #endif // EMDF_SQLITECONN__H__
-/**************** A copy of include/sqliteemdfdb.h *****************/
 
-
+/**************** A copy of include/sqliteemdfdb.h ****************/
 #line 1 "include/sqliteemdfdb.h"
-        /*
+/*
  * sqliteemdfdb.h
  *
  * SQLite EMdF database base class
@@ -34043,16 +34024,16 @@ class SQLiteEMdFConnection : public EMdFConnection {
 
 
 #line 94 "include/sqliteemdfdb.h"
-        #ifndef SWIG
+#ifndef SWIG
 /**************** already included emdf.h -- not including again *****************/
 
 
 #line 96 "include/sqliteemdfdb.h"
-        /**************** already included emdfdb.h -- not including again *****************/
+/**************** already included emdfdb.h -- not including again *****************/
 
 
 #line 97 "include/sqliteemdfdb.h"
-        #include <list>
+#include <list>
 #include <map>
 #endif // !defined SWIG
 #include <string>
@@ -34156,11 +34137,10 @@ class SQLiteEMdFDB : public EMdFDB {
 
 
 #endif // SQLITEEMDFDB__H__
-/**************** A copy of include/string_set_cache.h *****************/
 
-
+/**************** A copy of include/string_set_cache.h ****************/
 #line 1 "include/string_set_cache.h"
-        /*
+/*
  * string_set_cache.h
  *
  * StringSetCache and related classes
@@ -34262,7 +34242,7 @@ class SQLiteEMdFDB : public EMdFDB {
 
 
 #line 99 "include/string_set_cache.h"
-        
+
 class StringSetsCache; // Forward declaration
 class Table; // Forward declaration
 class SetOfMonads; // Forward declaration
@@ -34313,19 +34293,17 @@ class StringSetsCache {
 
 
 #endif // STRING_SET_CACHE__H__
-/**************** A copy of include/zlib_emdros.h *****************/
 
-
+/**************** A copy of include/zlib_emdros.h ****************/
 #line 1 "include/zlib_emdros.h"
-        #ifndef ZLIB_EMDROS_H_
+#ifndef ZLIB_EMDROS_H_
 #define ZLIB_EMDROS_H_
 #include <zlib.h>
 #endif /* !defined(ZLIB_EMDROS_H_) */
-/**************** A copy of EMdF/jsonpars.h *****************/
 
-
+/**************** A copy of EMdF/jsonpars.h ****************/
 #line 1 "EMdF/jsonpars.h"
-        #define T_JSON_KEY_BRACE_OPEN                   1
+#define T_JSON_KEY_BRACE_OPEN                   1
 #define T_JSON_KEY_BRACE_CLOSE                  2
 #define T_JSON_KEY_COMMA                        3
 #define T_JSON_STRING                           4
@@ -34336,53 +34314,218 @@ class StringSetsCache {
 #define T_JSON_KEY_FALSE                        9
 #define T_JSON_KEY_NULL                        10
 #define T_JSON_INTEGER                         11
-/**************** A copy of harvest/templatelangpars.h *****************/
 
-
+/**************** A copy of harvest/templatelangpars.h ****************/
 #line 1 "harvest/templatelangpars.h"
-        #define T_TEMPLATELANG_KEY_ID_D                         1
+#define T_TEMPLATELANG_KEY_ID_D                         1
 #define T_TEMPLATELANG_KEY_FIRSTMONAD                   2
 #define T_TEMPLATELANG_KEY_FEATURE                      3
 #define T_TEMPLATELANG_KEY_SPACE                        4
 #define T_TEMPLATELANG_INTEGER                          5
 #define T_TEMPLATELANG_KEY_BB_CLOSE                     6
-#define T_TEMPLATELANG_KEY_FEATURENOMANGLE              7
-#define T_TEMPLATELANG_KEY_DBNAME                       8
-#define T_TEMPLATELANG_KEY_ATTRIB                       9
-#define T_TEMPLATELANG_IDENTIFIER                      10
-#define T_TEMPLATELANG_KEY_ATTRIB_NOMANGLE             11
-#define T_TEMPLATELANG_KEY_COPYATTRIBS                 12
-#define T_TEMPLATELANG_KEY_COUNTER                     13
-#define T_TEMPLATELANG_STRING                          14
-#define T_TEMPLATELANG_KEY_BARE_FORMAT                 15
-#define T_TEMPLATELANG_KEY_SETCOUNTER                  16
-#define T_TEMPLATELANG_KEY_BARE_VAR                    17
-#define T_TEMPLATELANG_KEY_INCCOUNTER                  18
-#define T_TEMPLATELANG_KEY_DECCOUNTER                  19
-#define T_TEMPLATELANG_KEY_LISTEMIT                    20
-#define T_TEMPLATELANG_KEY_LISTCLEAR                   21
-#define T_TEMPLATELANG_KEY_DICTLOOKUP                  22
-#define T_TEMPLATELANG_KEY_BARE_FEATURE                23
-#define T_TEMPLATELANG_KEY_BARE_FEATURENOMANGLE        24
-#define T_TEMPLATELANG_KEY_BARE_VARNOMANGLE            25
-#define T_TEMPLATELANG_KEY_BARE_COUNTER                26
-#define T_TEMPLATELANG_KEY_SETNIXING_ALL               27
-#define T_TEMPLATELANG_KEY_SETNIXING_DOC               28
-#define T_TEMPLATELANG_KEY_SETNIXING_OFF               29
-#define T_TEMPLATELANG_KEY_IF_FEATUREEQUAL             30
-#define T_TEMPLATELANG_KEY_IF_VAREQUAL                 31
-#define T_TEMPLATELANG_KEY_IF_LISTEMPTY                32
-#define T_TEMPLATELANG_KEY_IF_HASATTRIB                33
-#define T_TEMPLATELANG_KEY_IF_ATTRIBEQUAL              34
-#define T_TEMPLATELANG_KEY_ENDIF                       35
-#define T_TEMPLATELANG_KEY_ELSE                        36
-#define T_TEMPLATELANG_KEY_LISTAPPENDBEGIN             37
-#define T_TEMPLATELANG_KEY_LISTAPPENDEND               38
-#define T_TEMPLATELANG_KEY_SETVAR                      39
-#define T_TEMPLATELANG_KEY_SETVAREND                   40
-#define T_TEMPLATELANG_KEY_EMITVAR                     41
-#define T_TEMPLATELANG_CHAR                            42
-#define T_TEMPLATELANG_KEY_NEWLINE                     43
+#define T_TEMPLATELANG_KEY_FEATUREJSONMANGLE            7
+#define T_TEMPLATELANG_KEY_FEATURENOMANGLE              8
+#define T_TEMPLATELANG_KEY_DBNAME                       9
+#define T_TEMPLATELANG_KEY_ATTRIB                      10
+#define T_TEMPLATELANG_IDENTIFIER                      11
+#define T_TEMPLATELANG_KEY_ATTRIB_NOMANGLE             12
+#define T_TEMPLATELANG_KEY_COPYATTRIBS                 13
+#define T_TEMPLATELANG_KEY_COUNTER                     14
+#define T_TEMPLATELANG_STRING                          15
+#define T_TEMPLATELANG_KEY_BARE_FORMAT                 16
+#define T_TEMPLATELANG_KEY_SETCOUNTER                  17
+#define T_TEMPLATELANG_KEY_BARE_VAR                    18
+#define T_TEMPLATELANG_KEY_INCCOUNTER                  19
+#define T_TEMPLATELANG_KEY_DECCOUNTER                  20
+#define T_TEMPLATELANG_KEY_LISTEMIT                    21
+#define T_TEMPLATELANG_KEY_LISTCLEAR                   22
+#define T_TEMPLATELANG_KEY_DICTLOOKUP                  23
+#define T_TEMPLATELANG_KEY_BARE_FEATURE                24
+#define T_TEMPLATELANG_KEY_BARE_FEATURENOMANGLE        25
+#define T_TEMPLATELANG_KEY_BARE_VARNOMANGLE            26
+#define T_TEMPLATELANG_KEY_BARE_COUNTER                27
+#define T_TEMPLATELANG_KEY_SETNIXING_ALL               28
+#define T_TEMPLATELANG_KEY_SETNIXING_DOC               29
+#define T_TEMPLATELANG_KEY_SETNIXING_OFF               30
+#define T_TEMPLATELANG_KEY_IF_FEATUREEQUAL             31
+#define T_TEMPLATELANG_KEY_IF_VAREQUAL                 32
+#define T_TEMPLATELANG_KEY_IF_LISTEMPTY                33
+#define T_TEMPLATELANG_KEY_IF_HASATTRIB                34
+#define T_TEMPLATELANG_KEY_IF_ATTRIBEQUAL              35
+#define T_TEMPLATELANG_KEY_ENDIF                       36
+#define T_TEMPLATELANG_KEY_ELSE                        37
+#define T_TEMPLATELANG_KEY_LISTAPPENDBEGIN             38
+#define T_TEMPLATELANG_KEY_LISTAPPENDEND               39
+#define T_TEMPLATELANG_KEY_SETVAR                      40
+#define T_TEMPLATELANG_KEY_SETVAREND                   41
+#define T_TEMPLATELANG_KEY_EMITVAR                     42
+#define T_TEMPLATELANG_CHAR                            43
+#define T_TEMPLATELANG_KEY_NEWLINE                     44
+
+/**************** A copy of include/opt.h ****************/
+#line 1 "include/opt.h"
+/*
+ * opt.h
+ *
+ * Classes and functions to support getting arguments from argc and argv
+ *
+ * Ulrik Petersen
+ * Created: 7/19-2006
+ * Last update: 10/3-2011
+ *
+ */
+/************************************************************************
+ *
+ *   Emdros - the database engine for analyzed or annotated text
+ *   Copyright (C) 2011  Ulrik Sandborg-Petersen
+ *
+ *   This program is free software; you can redistribute it and/or
+ *   modify it under the terms of the GNU General Public License as
+ *   published by the Free Software Foundation, license version 2.  
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *   General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+ *   02111-1307 USA
+ *
+ *
+ *   Special exception
+ *   =================
+ * 
+ *   In addition, as a special exception, Ulrik Petersen, the
+ *   copyright holder of Emdros, gives permission to link Emdros, in
+ *   whole or in part, with the libraries which are normally
+ *   distributed with:
+ *   
+ *   a) Sun's Java platform,
+ *   b) Python, 
+ *   c) Jython,
+ *   d) Ruby, and/or 
+ *   e) Perl 
+ *   f) PostgreSQL
+ *   g) OpenSSL
+ *
+ *   (or with modified versions of these), and to distribute linked
+ *   combinations including both Emdros, in whole or in part, and one
+ *   or more of the libraries normally distributed with (a)-(g) above.
+ *
+ *   Please note: This gives you special rights concerning the
+ *   libraries which normally accompany the above pieces of software.
+ *   It gives you no special rights concerning software that you write
+ *   yourself.  You must obey the GNU General Public License in all
+ *   respects for all of the code used other than the libraries
+ *   normally distributed with (a)-(g) above.
+ *
+ *   If you modify this file, you may extend this exception to your
+ *   version of the file, but you are not obligated to do so. If you
+ *   do not wish to do so, delete this exception statement from your
+ *   version.
+ *
+ *
+ *   Other licensing forms
+ *   =====================
+ *
+ *   If you wish to negotiate commercial licensing, please contact
+ *   Ulrik Petersen at ulrikp[at]users.sourceforge.net.
+ *
+ *   Licensing can also be negotiated if your organization is an
+ *   educational, non-profit, charity, missionary or similar
+ *   organization.
+ *
+ *
+ *   Website
+ *   =======
+ *
+ *   Emdros has a website here:
+ *
+ *   http://emdros.org
+ *
+ *
+ *
+ **************************************************************************/
+
+#ifndef OPTIONS__H__
+#define OPTIONS__H__
+
+#include <string>
+#include <map>
+#include <list>
+/**************** already included emdf_enums.h -- not including again *****************/
+
+
+#line 92 "include/opt.h"
+
+/**************** already included emdros-lconfig.h -- not including again *****************/
+
+
+#line 94 "include/opt.h"
+#if HAVE_OSTREAM
+#include <ostream>
+#else
+#include <ostream.h>
+#endif
+
+#include <iostream>
+
+typedef struct option_t {
+	std::string short_version; /**< For options with one -. */
+	std::string long_version; /**< For options with two -s. */
+	std::string help_string_when_no_param;    /**< string to print when needs a parameter and not given a parameter. */
+	bool bTakesParameter; /**< true iff this takes a parameter. */
+	std::string value;
+	std::string default_value;
+	bool bPresent;
+	option_t(const char *sv, /* without the - .*/
+		 const char *lv, /* without the -- . */
+		 bool tp=false, 
+		 const char *dv="", /* default value. */
+		 const char *hs="") 
+	{ 
+		short_version = std::string("-") + sv; 
+		long_version= std::string("--") + lv; 
+		help_string_when_no_param=hs; 
+		bTakesParameter=tp; 
+		default_value = dv,
+		value=""; 
+		bPresent=false;
+	};
+	// Use default copy-constructor: All strings must be constant.
+} option_t;
+
+typedef std::map<std::string, option_t> OptionMap_t;
+
+extern void addOption(const char *short_version, /* with or without the - . */
+		      const char *long_version,  /* with or without the -- . */
+		      bool takes_parameter = false,
+		      const char *default_value = "",
+		      const char *help_message_when_no_param = "");
+		      
+
+extern bool parseArguments(int argc, char *argv[], std::string& error_message, std::list<std::string>& surplus_arguments);
+
+extern bool getArgumentValue(const char *short_version, std::string& value);
+
+extern bool getArgumentPresent(const char *short_version);
+
+/* Must be declared in the program. */
+extern OptionMap_t theOptionMap; 
+
+/* Adds -h, -u, -p, -b, --version, --help, 
+ * and -e if bAddEncoding is true. */
+extern void addStandardArguments(bool bAddEncoding = false);
+
+extern bool getStandardArguments(bool& bShowVersion, bool& bShowHelp, std::string& hostname, std::string& user, std::string& password, eBackendKind& backend_kind, eCharsets& charset, std::string& error_message);
+
+extern void printUsageStandardArguments(std::ostream& ostr);
+
+extern void printUsageDefaultsOfStandardArguments(std::ostream& ostr);
+
+#endif // OPTIONS__H__
 
 
 #endif /* !defined(EMDROS_H_) */
