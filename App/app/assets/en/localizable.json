@@ -5,5 +5,7 @@
     'textual': 'Textual',
     'alphabetical': 'Alphabetical',
     'principality': 'Principality',
+    'discover': 'Discover',
+    'books': 'Books',
   }
 }

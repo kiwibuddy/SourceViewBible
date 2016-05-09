@@ -2,11 +2,13 @@
 
 import * as NavigationStateUtils from 'NavigationStateUtils'
 
+const Localizable = require('../common/localizable');
+
 const initialState = {
   key: 'MainNavigation',
   index: 0,
   children: [
-    { key: 'discover', title: 'Discover' }
+    { key: 'discover', title: Localizable.t('discover') }
   ]
 }
 

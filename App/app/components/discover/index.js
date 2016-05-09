@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 
 import { navigatePush } from '../../actions';
 
+const Localizable = require('../../common/localizable');
+
 class Discover extends Component {
   render() {
     return (
@@ -45,7 +47,7 @@ const mapDispatchToProps = (dispatch) => {
     onButtonPress: () => {
       dispatch(navigatePush({
         key: 'books',
-        title: 'Books'
+        title: Localizable.t('books')
       }));
     }
   };
