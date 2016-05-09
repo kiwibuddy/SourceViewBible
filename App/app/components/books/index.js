@@ -70,7 +70,7 @@ class Books extends Component {
   _renderRow(book, sectionID, rowID, highlightRow) {
     return (
       <View style={styles.cellContainer}>
-        <View style={styles.topContainer}>
+        <View style={styles.horizontalContainer}>
           <View style={styles.leftContainer}>
             <Text style={styles.cellTitle}>{book.name}</Text>
           </View>
@@ -82,7 +82,7 @@ class Books extends Component {
             />
           </View>
         </View>
-        <View style={styles.bottomContainer}>
+        <View style={styles.horizontalContainer}>
           <View style={styles.leftContainer}>
             <Text style={styles.cellSubTitle}>2hr</Text>
           </View>
@@ -99,11 +99,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff'
-  },
-  segmentedControl: {
-    marginTop: NavigationHeader.HEIGHT + 8,
-    marginHorizontal: 8,
-    marginBottom: 10,
   },
   separator: {
     height: StyleSheet.hairlineWidth,
@@ -131,17 +126,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
     paddingVertical: 4,
   },
-  topContainer: {
-    flexDirection: 'row',
-  },
-  bottomContainer: {
+  horizontalContainer: {
     flexDirection: 'row',
   },
   leftContainer: {
-    flex: 1,
+    flex: 1.2,
   },
   rightContainer: {
-    flex: 2,
+    flex: 1.8,
   },
   cellTitle: {
     color: '#59626a',
@@ -153,8 +145,18 @@ const styles = StyleSheet.create({
   },
   ...Platform.select({
       ios: {
+        segmentedControl: {
+          marginTop: NavigationHeader.HEIGHT + 8,
+          marginHorizontal: 8,
+          marginBottom: 10,
+        },
       },
       android: {
+        segmentedControl: {
+          marginTop: NavigationHeader.HEIGHT,
+          shadowColor: 'red',
+          elevation: 2,
+        },
       },
   }),
 });

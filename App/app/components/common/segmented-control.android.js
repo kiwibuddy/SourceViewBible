@@ -36,13 +36,15 @@ export default class SegmentedControl extends Component {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    height: 28
+    height: 60,
+    backgroundColor: '#F9F9F9',
   },
   button: {
     flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   buttonTitle: {
-
+    fontSize: 18,
+    fontWeight: 'bold',
   }
 });
