@@ -13,12 +13,11 @@ export default class StackedBarChart extends Component {
 
   static propTypes = {
     style: PropTypes.any,
-    data: PropTypes.any,
+    data: PropTypes.any.isRequired,
     horizontal: PropTypes.bool
   };
 
   render() {
-    // const horizontal = this.props.horizontal === undefined ? false : this.props.horizontal;
     const style = [styles.container, {flexDirection: this.props.horizontal ? 'row' : 'column'}, this.props.style];
 
     return (
