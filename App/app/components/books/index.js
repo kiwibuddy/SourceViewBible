@@ -32,7 +32,7 @@ class Books extends Component {
         <SegmentedControl
           style={styles.segmentedControl}
           tintColor={Colors.tintColor}
-          values={['Textual', 'Alphabetical', 'Principality']}
+          values={[Localizable.t('textual'), Localizable.t('alphabetical'), Localizable.t('principality')]}
         />
 
         <ListView
@@ -47,7 +47,7 @@ class Books extends Component {
   }
 
   _renderSectionHeader(sectionData, sectionID) {
-    const title = sectionID === 'old' ? Localizable.t('OLD_TESTAMENT').toUpperCase() : Localizable.t('NEW_TESTAMENT').toUpperCase();
+    const title = sectionID === 'old' ? Localizable.t('old-testament').toUpperCase() : Localizable.t('new-testament').toUpperCase();
     return (
       <View style={styles.sectionHeader}>
         <Text style={styles.sectionTitle}>{title}</Text>
