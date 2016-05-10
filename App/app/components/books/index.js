@@ -24,8 +24,8 @@ class Books extends Component {
     selectedSegmentIndex: number
   };
 
-  constructor() {
-      super();
+  constructor(props) {
+      super(props);
 
       const oldTestamentBooks = Bible.filter((book) => {
         return book.testament === 'old';
@@ -40,6 +40,16 @@ class Books extends Component {
         dataSource: dataSource.cloneWithRowsAndSections({old: oldTestamentBooks, new: newTestamentBooks}),
         selectedSegmentIndex: 0
       }
+
+      this.queryDatabase();
+  }
+
+  queryDatabase() {
+    this.props.database.query('Amo').then((result) => {
+      console.log(result);
+    }).catch((error) => {
+      console.log('Error executing query' + error);
+    });
   }
 
   render() {
