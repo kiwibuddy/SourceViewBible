@@ -21,7 +21,6 @@
 		AB4B2AC41CC5633D00B9FD5D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB4B2ABE1CC5633D00B9FD5D /* LaunchScreen.xib */; };
 		AB4B2AC51CC5633D00B9FD5D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB4B2AC01CC5633D00B9FD5D /* Images.xcassets */; };
 		AB4B2AC71CC5633D00B9FD5D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AB4B2AC21CC5633D00B9FD5D /* main.m */; };
-		AB4B2AD61CC5644400B9FD5D /* libRCTEmdros.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB4B2AD31CC5638B00B9FD5D /* libRCTEmdros.a */; };
 		AB4B2ADA1CC5664F00B9FD5D /* sourceview.bpt in Resources */ = {isa = PBXBuildFile; fileRef = AB4B2AD91CC5664F00B9FD5D /* sourceview.bpt */; };
 		AB626B981CACA42000544E7F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AB626B971CACA42000544E7F /* libz.tbd */; };
 		AB951B571CA9AF1100B7A23E /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AB951B551CA9AF1100B7A23E /* libc++.tbd */; };
@@ -101,7 +100,7 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
-		AB4B2AD21CC5638B00B9FD5D /* PBXContainerItemProxy */ = {
+		AB47133A1CE25B3100E9EB48 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AB4B2ACE1CC5638B00B9FD5D /* RCTEmdros.xcodeproj */;
 			proxyType = 2;
@@ -135,7 +134,7 @@
 		AB4B2AC01CC5633D00B9FD5D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AB4B2AC11CC5633D00B9FD5D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB4B2AC21CC5633D00B9FD5D /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		AB4B2ACE1CC5638B00B9FD5D /* RCTEmdros.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTEmdros.xcodeproj; path = ../../../Libraries/Emdros/ios/RCTEmdros/RCTEmdros.xcodeproj; sourceTree = "<group>"; };
+		AB4B2ACE1CC5638B00B9FD5D /* RCTEmdros.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTEmdros.xcodeproj; path = ../../../../Libraries/Emdros/ios/RCTEmdros/RCTEmdros.xcodeproj; sourceTree = "<group>"; };
 		AB4B2AD91CC5664F00B9FD5D /* sourceview.bpt */ = {isa = PBXFileReference; lastKnownFileType = file; name = sourceview.bpt; path = ../../../../Datasets/en/NLT/sourceview.bpt; sourceTree = "<group>"; };
 		AB626B971CACA42000544E7F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		AB951B551CA9AF1100B7A23E /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
@@ -154,7 +153,6 @@
 				AB951B5A1CA9AF1C00B7A23E /* libsqlite3.tbd in Frameworks */,
 				AB951B571CA9AF1100B7A23E /* libc++.tbd in Frameworks */,
 				AB951B581CA9AF1100B7A23E /* libstdc++.tbd in Frameworks */,
-				AB4B2AD61CC5644400B9FD5D /* libRCTEmdros.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
@@ -250,7 +248,6 @@
 				AB951B591CA9AF1C00B7A23E /* libsqlite3.tbd */,
 				AB951B551CA9AF1100B7A23E /* libc++.tbd */,
 				AB951B561CA9AF1100B7A23E /* libstdc++.tbd */,
-				AB4B2ACE1CC5638B00B9FD5D /* RCTEmdros.xcodeproj */,
 				ABE1775F1CAEF72A00E39B1A /* ART.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -293,7 +290,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		AB4B2ABB1CC5633D00B9FD5D /* QueryEmdros */ = {
+		AB47132A1CE25B2B00E9EB48 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				AB4B2ABC1CC5633D00B9FD5D /* AppDelegate.h */,
@@ -304,15 +301,24 @@
 				AB4B2AC11CC5633D00B9FD5D /* Info.plist */,
 				AB4B2AC21CC5633D00B9FD5D /* main.m */,
 			);
-			path = QueryEmdros;
+			name = Resources;
 			sourceTree = "<group>";
 		};
-		AB4B2ACF1CC5638B00B9FD5D /* Products */ = {
+		AB4713371CE25B3100E9EB48 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AB4B2AD31CC5638B00B9FD5D /* libRCTEmdros.a */,
+				AB47133B1CE25B3100E9EB48 /* libRCTEmdros.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		AB4B2ABB1CC5633D00B9FD5D /* QueryEmdros */ = {
+			isa = PBXGroup;
+			children = (
+				AB4B2ACE1CC5638B00B9FD5D /* RCTEmdros.xcodeproj */,
+				AB47132A1CE25B2B00E9EB48 /* Resources */,
+			);
+			path = QueryEmdros;
 			sourceTree = "<group>";
 		};
 		ABE177601CAEF72A00E39B1A /* Products */ = {
@@ -379,7 +385,7 @@
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
 				},
 				{
-					ProductGroup = AB4B2ACF1CC5638B00B9FD5D /* Products */;
+					ProductGroup = AB4713371CE25B3100E9EB48 /* Products */;
 					ProjectRef = AB4B2ACE1CC5638B00B9FD5D /* RCTEmdros.xcodeproj */;
 				},
 				{
@@ -497,11 +503,11 @@
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		AB4B2AD31CC5638B00B9FD5D /* libRCTEmdros.a */ = {
+		AB47133B1CE25B3100E9EB48 /* libRCTEmdros.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRCTEmdros.a;
-			remoteRef = AB4B2AD21CC5638B00B9FD5D /* PBXContainerItemProxy */;
+			remoteRef = AB47133A1CE25B3100E9EB48 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		ABE177641CAEF72B00E39B1A /* libART.a */ = {
