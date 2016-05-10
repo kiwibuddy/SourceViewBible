@@ -27,8 +27,9 @@ RCT_EXPORT_MODULE(Emdros)
 }
 
 RCT_EXPORT_METHOD(open:(NSDictionary *)options resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-    NSString *name = options[@"name"];
-    NSString *database = [[NSBundle mainBundle] pathForResource:name ofType:nil];
+    NSString *name = [options[@"name"] lastPathComponent];
+    NSString *directory = [options[@"name"] stringByDeletingLastPathComponent];
+    NSString *database = [[NSBundle mainBundle] pathForResource:name ofType:nil inDirectory:directory];
     
     RCTEmdrosEnv *emdros = self.openedDatabases[database];
     if (emdros) {
@@ -68,6 +69,15 @@ RCT_EXPORT_METHOD(query:(NSDictionary *)options resolver:(RCTPromiseResolveBlock
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:options];
 
     NSString *query = options[@"query"];
+//    query = RCTEmdrosQuery(
+//        COUNT ALL OBJECTS
+//        IN {1-51551}
+//        WHERE
+//        [Source GET source_color, source_name
+//        [Token is_word=true]
+//        ]
+//        GO
+//    );
     
     if ([query componentsSeparatedByString:@"\n"].count <= 1) {
         params[@"count"] = @(YES);

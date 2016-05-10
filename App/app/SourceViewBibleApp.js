@@ -22,6 +22,9 @@ import Discover from './components/discover';
 import Books from './components/books';
 import Book from './components/books/book';
 
+import Emdros from 'react-native-emdros';
+let DB = null;
+
 const {
   AnimatedView: NavigationAnimatedView,
   Card: NavigationCard,
@@ -52,6 +55,8 @@ class SourceViewBibleApp extends Component {
     this._renderScene = this._renderScene.bind(this);
     this._renderTitleComponent = this._renderTitleComponent.bind(this);
     this._handlers = [];
+
+    this.openDatabase();
   }
 
   componentDidMount() {
@@ -92,6 +97,15 @@ class SourceViewBibleApp extends Component {
 
     onNavigate(NavigationRootContainer.getBackAction());
     return true;
+  }
+
+  openDatabase() {
+    Emdros.open({name: "en/NLT/sourceview.bpt"}).then((emdros) => {
+      console.log("Database opened!" + emdros);
+      DB = emdros;
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
   render() {
