@@ -11,7 +11,8 @@ export default class SegmentedControl extends Component {
     style: PropTypes.any,
     tintColor: ColorPropType,
     values: PropTypes.arrayOf(PropTypes.string),
-    selectedIndex: PropTypes.number
+    selectedIndex: PropTypes.number,
+    onValueChange: PropTypes.func
   };
 
   state: {
@@ -64,7 +65,7 @@ export default class SegmentedControl extends Component {
         key={'button-' + title}
         ref={index}
         style={styles.button}
-        onPress={() => this.props.onButtonPress(index)}
+        onPress={() => this.props.onValueChange(index)}
       >
         <Text style={[styles.buttonTitle, {color: tintColor}]}>{title.toLocaleUpperCase()}</Text>
       </TouchableOpacity>

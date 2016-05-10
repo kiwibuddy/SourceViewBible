@@ -47,6 +47,7 @@ class Books extends Component {
           tintColor={Colors.tintColor}
           values={[Localizable.t('textual'), Localizable.t('alphabetical'), Localizable.t('principality')]}
           selectedIndex={0}
+          onValueChange={(index) => console.log('SelectedIndex: ' + index)}
         />
 
         <ListView
@@ -71,7 +72,6 @@ class Books extends Component {
 
   _renderRow(book, sectionID, rowID, highlightRow) {
     return (
-
       <TouchableOpacity onPress={ () => this.props.onButtonPress(book) }>
         <View style={styles.cellContainer}>
           <View style={styles.horizontalContainer}>
