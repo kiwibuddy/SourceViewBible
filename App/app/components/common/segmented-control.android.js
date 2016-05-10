@@ -27,7 +27,7 @@ export default class SegmentedControl extends Component {
   _renderButton(title: String) {
     return(
       <TouchableOpacity key={'button-' + title} style={styles.button} onPress={this.props.onButtonPress}>
-        <Text style={styles.buttonTitle}>{title}</Text>
+        <Text style={styles.buttonTitle}>{title.toLocaleUpperCase()}</Text>
       </TouchableOpacity>
     );
   }

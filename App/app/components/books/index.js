@@ -60,10 +60,10 @@ class Books extends Component {
   }
 
   _renderSectionHeader(sectionData, sectionID) {
-    const title = sectionID === 'old' ? Localizable.t('old-testament').toUpperCase() : Localizable.t('new-testament').toUpperCase();
+    const title = sectionID === 'old' ? Localizable.t('old-testament') : Localizable.t('new-testament');
     return (
       <View style={styles.sectionHeader}>
-        <Text style={styles.sectionTitle}>{title}</Text>
+        <Text style={styles.sectionTitle}>{title.toLocaleUpperCase()}</Text>
       </View>
     );
   }
