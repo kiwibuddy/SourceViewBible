@@ -64,6 +64,8 @@ const styles = StyleSheet.create({
     fontFamily: 'sans-serif-medium'
   },
   indicator: {
-    height: 2
+    height: 2,
+    left: 0,
+    width: 110
   }
 });
