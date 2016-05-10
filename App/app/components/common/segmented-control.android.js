@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   },
   indicator: {
     position: 'absolute',
-    height: 2,
+    height: 3,
     bottom: 0
   }
 });
