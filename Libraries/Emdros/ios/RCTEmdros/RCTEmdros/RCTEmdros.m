@@ -66,30 +66,8 @@ RCT_EXPORT_METHOD(close:(NSString *)name) {
 RCT_EXPORT_METHOD(query:(NSDictionary *)options resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     RCTEmdrosEnv *emdros = [self databaseForName:options[@"name"]];
 
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:options];
-
     NSString *query = options[@"query"];
-    if ([query componentsSeparatedByString:@"\n"].count <= 1) {
-        params[@"count"] = @(YES);
-        
-        NSString *monadSet = [emdros monadSetForBook:query];
-        
-        query = [NSString stringWithFormat:RCTEmdrosQuery(
-          COUNT ALL OBJECTS IN %@
-          WHERE
-          [Source GET source_color
-           [Token is_word=true]
-           ]
-          GO), monadSet
-        ];
-    }
-    
-    if ([query.uppercaseString hasPrefix:@"COUNT"]) {
-        query = [query stringByReplacingOccurrencesOfString:@"COUNT" withString:@"SELECT" options:NSCaseInsensitiveSearch range:NSMakeRange(0, MIN(5, query.length))];
-        params[@"count"] = @(YES);
-    }
-
-    [emdros query:query options:params completion:^(id result, NSError *error) {
+    [emdros query:query options:options completion:^(id result, NSError *error) {
         if (!error) {
             resolve(result);
         } else {

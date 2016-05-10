@@ -80,27 +80,22 @@
                     Sheaf *sheaf = _emdrosEnv->takeOverSheaf();
 
                     if (sheaf) {
-                        if (options[@"count"]) {
-                            NSString *selectQuery = [query substringToIndex:[query rangeOfString:@"WHERE"].location];
-                            NSString *query = [NSString stringWithFormat:@"%@ WHERE [chapter GET chapter] GO", selectQuery];
+                        if ([options[@"count"] boolValue]) {
+                            NSString *type = options[@"type"];
+                            NSString *feature = options[@"feature"];
+                            NSInteger firstMonad = options[@"firstMonad"] ? [options[@"firstMonad"] integerValue] : 1;
+                            NSInteger lastMonad = options[@"lastMonad"] ? [options[@"lastMonad"] integerValue] : MAX_MONAD;
+                            SetOfMonads in_som(firstMonad, lastMonad);
+                            
+                            bool bResult = false;
+                            MonadRange2BucketMap *bucketMap = getBucketMapFromParams(_emdrosEnv, std::string(type.UTF8String), std::string(feature.UTF8String), in_som, bResult);
+                            if (bucketMap != 0 && bResult) {
+                                countInSheaf(sheaf, bucketMap);
 
-                            if (_emdrosEnv->executeString(std::string(query.UTF8String), bResult, false, true)) {
-                                if (bResult) {
-                                    Sheaf *binSheaf = _emdrosEnv->takeOverSheaf();
-                                    MonadRange2BucketMap *bucketMap = makeBucketMapFromSheaf(binSheaf);
-                                    delete binSheaf;
-
-                                    [[OCDBenchmark sharedBenchmark] begin];
-                                    countInSheaf(sheaf, bucketMap);
-                                    [[OCDBenchmark sharedBenchmark] end:[NSString stringWithFormat:@"Finished countInSheaf"]];
-
-                                    NSError *error = nil;
-                                    result = [self dictionaryWithBucketMap:bucketMap error:&error];
-                                    delete bucketMap;
-                                }
+                                NSError *error = nil;
+                                result = [self dictionaryWithBucketMap:bucketMap error:&error];
+                                delete bucketMap;
                             }
-
-
                         } else {
                             SheafIterator si = sheaf->iterator();
                             while (si.hasNext()) {
