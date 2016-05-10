@@ -16,6 +16,7 @@ import SegmentedControl from '../common/segmented-control';
 import StackedBarChart from '../charts/stacked-bar-chart';
 
 const Bible = require('../../assets/en/books');
+const SEGMENTS = [Localizable.t('textual'), Localizable.t('alphabetical'), Localizable.t('principality')];
 
 class Books extends Component {
   state: {
@@ -47,8 +48,9 @@ class Books extends Component {
         <SegmentedControl
           style={styles.segmentedControl}
           tintColor={Colors.tintColor}
-          values={[Localizable.t('textual'), Localizable.t('alphabetical'), Localizable.t('principality')]}
+          values={SEGMENTS}
           selectedIndex={this.state.selectedSegmentIndex}
+          onValueChange={(value) => console.log('selectedIndex: ' + SEGMENTS.indexOf(value))}
         />
 
         <ListView
