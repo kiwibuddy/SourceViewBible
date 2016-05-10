@@ -60,7 +60,12 @@ export default class SegmentedControl extends Component {
 
   _renderButton(index: PropTypes.number, title: String, tintColor: ColorPropType) {
     return(
-      <TouchableOpacity key={'button-' + title} ref={index} style={styles.button} onPress={this.props.onButtonPress}>
+      <TouchableOpacity
+        key={'button-' + title}
+        ref={index}
+        style={styles.button}
+        onPress={() => this.props.onButtonPress(index)}
+      >
         <Text style={[styles.buttonTitle, {color: tintColor}]}>{title.toLocaleUpperCase()}</Text>
       </TouchableOpacity>
     );

@@ -72,7 +72,7 @@ class Books extends Component {
   _renderRow(book, sectionID, rowID, highlightRow) {
     return (
 
-      <TouchableOpacity onPress={ () => this.props.onButtonPress(book)}>
+      <TouchableOpacity onPress={ () => this.props.onButtonPress(book) }>
         <View style={styles.cellContainer}>
           <View style={styles.horizontalContainer}>
             <View style={styles.leftContainer}>
