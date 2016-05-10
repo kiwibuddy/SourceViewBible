@@ -1,6 +1,7 @@
 package com.sourceviewbible;
 
 import com.facebook.react.ReactActivity;
+import com.sourceviewbible.emdros.EmdrosReactPackage;
 import com.i18n.reactnativei18n.ReactNativeI18n;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -97,6 +98,7 @@ public class MainActivity extends ReactActivity {
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
+            new EmdrosReactPackage(),
             new ReactNativeI18n()
         );
     }
