@@ -50,24 +50,18 @@
         _emdrosEnv = new EmdrosEnv(output_kind, kCSUTF8, hostname, user, password, initial_db, backend_kind);
     }
 
-    dispatch_queue_t currentQueue = dispatch_get_current_queue();
     dispatch_async(self.queue, ^{
         BOOL isConnected = _emdrosEnv->connectionOk() == true;
 
-        NSLog(@"Opened database");
+        NSLog(@"Opened database mainThread: %i", [NSThread isMainThread]);
 
-        if (completion) {
-            dispatch_async(currentQueue, ^{
-                completion(isConnected, nil);
-            });
-        }
+        if (completion) completion(isConnected, nil);
     });
 }
 
 - (void)query:(NSString *)query options:(NSDictionary *)options completion:(void (^)(id result, NSError *error))completion {
     NSLog(@"Executing query: %@", query);
 
-    dispatch_queue_t currentQueue = dispatch_get_current_queue();
     dispatch_async(self.queue, ^{
         try {
             bool bResult;
@@ -118,16 +112,10 @@
                         delete sheaf;
 
 
-                        if (completion) {
-                            dispatch_async(currentQueue, ^{
-                                completion(result, nil);
-                            });
-                        }
+                        if (completion) completion(result, nil);
                     }
                 }
             }
-        } catch (EmdrosException e) {
-            std::cerr << "ERROR: EmdrosException (Emdros error)..." << e.what() << std::endl;
         } catch (EMdFDBException e) {
             std::cerr << "ERROR: EMdFDBException (Database error)..." << std::endl;
             std::cerr << _emdrosEnv->getDBError() << std::endl;
@@ -138,6 +126,8 @@
             std::cerr << "WrongCharacterSetException caught.  Program aborted." << std::endl;
         } catch (EMdFOutputException e) {
             std::cerr << "EMdFOutputException caught.  Program aborted." << std::endl;
+        } catch (EmdrosException e) {
+            std::cerr << "ERROR: EmdrosException (Emdros error)..." << e.what() << std::endl;
         } catch (...) {
             std::cerr << "Unknown exception occurred.  Program aborted." << std::endl;
         }
@@ -147,7 +137,6 @@
 - (void)stringFrom:(NSInteger)from to:(NSInteger)to options:(NSDictionary *)options completion:(void (^)(id result, NSError *error))completion {
 //    extern std::string render_objects(EmdrosEnv *pEnv, const std::string& db_name, const std::string& JSON_stylesheet, const std::string& stylesheet, monad_m first_monad, monad_m last_monad, bool& bResult);
 
-    dispatch_queue_t currentQueue = dispatch_get_current_queue();
     dispatch_async(self.queue, ^{
         try {
             NSString *stylesheet = ([options[@"stylesheet"] isKindOfClass:[NSString class]] ? options[@"stylesheet"] : [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:options[@"stylesheet"] options:0 error:nil] encoding:NSUTF8StringEncoding]);
@@ -158,11 +147,7 @@
             bool bResult;
             std::string rendered_objects = render_objects(_emdrosEnv, dbName, stylesheetString, stylesheetName, from, to, bResult);
             NSString *string = [NSString stringWithUTF8String:rendered_objects.c_str()];
-            if (completion) {
-                dispatch_async(currentQueue, ^{
-                    completion(string, nil);
-                });
-            }
+            if (completion) completion(string, nil);
         } catch (EMdFDBException e) {
             std::cerr << "ERROR: EMdFDBException (Database error)..." << std::endl;
             std::cerr << _emdrosEnv->getDBError() << std::endl;
