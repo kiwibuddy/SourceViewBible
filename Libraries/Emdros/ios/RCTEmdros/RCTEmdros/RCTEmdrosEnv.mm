@@ -110,7 +110,7 @@
                         } else {
                             SheafIterator si = sheaf->iterator();
                             while (si.hasNext()) {
-                                Straw *pStraw = si.next();
+//                                Straw *pStraw = si.next();
 
 
                             }
