@@ -3,7 +3,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import ColorPropType from 'ColorPropType';
-import { TouchableOpacity, View, Text } from 'react-native';
+import { Animated, TouchableOpacity, View, Text } from 'react-native';
 import StyleSheet from '../../common/stylesheet'
 
 export default class SegmentedControl extends Component {
@@ -31,7 +31,7 @@ export default class SegmentedControl extends Component {
         <View style={styles.buttons}>
           {buttons}
         </View>
-        <View style={indicatorStyle} />
+        <Animated.View style={indicatorStyle} />
       </View>
     );
   }
@@ -53,12 +53,11 @@ const styles = StyleSheet.create({
   buttons: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   button: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   buttonTitle: {
     fontSize: 14,
