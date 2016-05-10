@@ -15,7 +15,7 @@ class Discover extends Component {
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={this.props.onButtonPress}>
-          <Text style={styles.title}>Hello</Text>
+          <Text style={styles.title}>Books</Text>
         </TouchableOpacity>
       </View>
     );
@@ -25,14 +25,14 @@ class Discover extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'blue',
+    backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center'
   },
 	title: {
 		fontSize: 24,
 		fontWeight: '500',
-		color: '#ffffff',
+		color: '#CF1E00',
 		marginBottom: 30
 	}
 });
