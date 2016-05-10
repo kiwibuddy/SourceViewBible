@@ -278,6 +278,7 @@
 		13B07FAE1A68108700A75B9A /* SourceViewBible */ = {
 			isa = PBXGroup;
 			children = (
+				AB5489401CE273DC00F96FF0 /* RCTEmdros.xcodeproj */,
 				AB4713101CE251D100E9EB48 /* Resources */,
 			);
 			name = SourceViewBible;
@@ -335,7 +336,6 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* SourceViewBibleTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
-				AB5489401CE273DC00F96FF0 /* RCTEmdros.xcodeproj */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
