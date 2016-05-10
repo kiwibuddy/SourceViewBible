@@ -100,13 +100,24 @@ class SourceViewBibleApp extends Component {
   }
 
   openDatabase() {
-    Emdros.open({name: "Datasets/en/NLT/sourceview.bpt"}).then((emdros) => {
-      console.log("Database opened!" + emdros);
+    Emdros.open({name: 'Datasets/en/NLT/sourceview.bpt'}).then((emdros) => {
+      console.log('Database opened!!!!' + emdros);
       DB = emdros;
+      this.queryDatabase();
     }).catch((error) => {
       console.log(error);
     });
   }
+
+  queryDatabase() {
+    if (DB == null) return;
+
+    DB.query('Amo').then((result) => {
+
+    }).catch((error) => {
+      console.log('Error executing query' + error);
+    });
+}
 
   render() {
       const { navigationState, onNavigate } = this.props;

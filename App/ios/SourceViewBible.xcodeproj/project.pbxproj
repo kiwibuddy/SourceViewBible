@@ -21,7 +21,6 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
-		2733E1E3F7E84A9192513C23 /* libRCTEmdros.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE4B0ED1C4C74D01AB84FB66 /* libRCTEmdros.a */; };
 		6274C4694D4844B6A806B358 /* libRNI18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE4C78311794C1C9C0D3EA7 /* libRNI18n.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		AB2A027A1CE2695000B53661 /* Datasets in Resources */ = {isa = PBXBuildFile; fileRef = AB2A02791CE2695000B53661 /* Datasets */; };
@@ -108,13 +107,6 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
-		AB5219CD1CE2516D00305812 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AB5219C91CE2516D00305812 /* RCTEmdros.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = AB3E37EF1CA9927D00A7C3A1;
-			remoteInfo = RCTEmdros;
-		};
 		ABA1BCE61CE1279500BEA3A1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BE37A65CBA6142C9B7784708 /* RNI18n.xcodeproj */;
@@ -155,12 +147,10 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		9EE4C78311794C1C9C0D3EA7 /* libRNI18n.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNI18n.a; sourceTree = "<group>"; };
 		AB2A02791CE2695000B53661 /* Datasets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Datasets; path = SourceViewBible/Datasets; sourceTree = "<group>"; };
-		AB5219C91CE2516D00305812 /* RCTEmdros.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTEmdros.xcodeproj; path = ../../Libraries/Emdros/ios/RCTEmdros/RCTEmdros.xcodeproj; sourceTree = "<group>"; };
 		ABA1BCEA1CE127A300BEA3A1 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		ABA1BCEC1CE127AE00BEA3A1 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		ABA1BCEE1CE127B700BEA3A1 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		BE37A65CBA6142C9B7784708 /* RNI18n.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNI18n.xcodeproj; path = "../node_modules/react-native-i18n/RNI18n.xcodeproj"; sourceTree = "<group>"; };
-		EE4B0ED1C4C74D01AB84FB66 /* libRCTEmdros.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTEmdros.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,7 +179,6 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				6274C4694D4844B6A806B358 /* libRNI18n.a in Frameworks */,
-				2733E1E3F7E84A9192513C23 /* libRCTEmdros.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,7 +261,6 @@
 		13B07FAE1A68108700A75B9A /* SourceViewBible */ = {
 			isa = PBXGroup;
 			children = (
-				AB5219C91CE2516D00305812 /* RCTEmdros.xcodeproj */,
 				AB4713101CE251D100E9EB48 /* Resources */,
 			);
 			name = SourceViewBible;
@@ -359,14 +347,6 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		AB5219CA1CE2516D00305812 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				AB5219CE1CE2516D00305812 /* libRCTEmdros.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		ABA1BCD51CE1279300BEA3A1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -445,10 +425,6 @@
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
-				},
-				{
-					ProductGroup = AB5219CA1CE2516D00305812 /* Products */;
-					ProjectRef = AB5219C91CE2516D00305812 /* RCTEmdros.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302B61ABCB90400DB3ED1 /* Products */;
@@ -568,13 +544,6 @@
 			fileType = archive.ar;
 			path = libRCTText.a;
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		AB5219CE1CE2516D00305812 /* libRCTEmdros.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRCTEmdros.a;
-			remoteRef = AB5219CD1CE2516D00305812 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		ABA1BCE71CE1279500BEA3A1 /* libRNI18n.a */ = {

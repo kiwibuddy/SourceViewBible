@@ -194,6 +194,7 @@
 #pragma mark - Private
 - (NSDictionary *)dictionaryWithBucketMap:(MonadRange2BucketMap *)bucketMap error:(NSError **)error {
     std::string json = bucketMap->getJSON();
-    return [NSJSONSerialization JSONObjectWithData:[[NSString stringWithUTF8String:json.c_str()] dataUsingEncoding:NSUTF8StringEncoding] options:0 error:error];
+    NSString *data = [NSString stringWithUTF8String:json.c_str()];
+    return [NSJSONSerialization JSONObjectWithData:[data dataUsingEncoding:NSUTF8StringEncoding] options:0 error:error];
 }
 @end

@@ -69,30 +69,30 @@ RCT_EXPORT_METHOD(query:(NSDictionary *)options resolver:(RCTPromiseResolveBlock
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:options];
 
     NSString *query = options[@"query"];
-//    query = RCTEmdrosQuery(
-//        COUNT ALL OBJECTS
-//        IN {1-51551}
-//        WHERE
-//        [Source GET source_color, source_name
-//        [Token is_word=true]
-//        ]
-//        GO
-//    );
+    query = RCTEmdrosQuery(
+        COUNT ALL OBJECTS
+        IN {1-51551}
+        WHERE
+        [Source GET source_color, source_name
+        [Token is_word=true]
+        ]
+        GO
+    );
     
-    if ([query componentsSeparatedByString:@"\n"].count <= 1) {
-        params[@"count"] = @(YES);
-        
-        NSString *monadSet = [emdros monadSetForBook:query];
-        
-        query = [NSString stringWithFormat:RCTEmdrosQuery(
-          COUNT ALL OBJECTS IN %@
-          WHERE
-          [Source GET source_color
-           [Token is_word=true]
-           ]
-          GO), monadSet
-        ];
-    }
+//    if ([query componentsSeparatedByString:@"\n"].count <= 1) {
+//        params[@"count"] = @(YES);
+//        
+//        NSString *monadSet = [emdros monadSetForBook:query];
+//        
+//        query = [NSString stringWithFormat:RCTEmdrosQuery(
+//          COUNT ALL OBJECTS IN %@
+//          WHERE
+//          [Source GET source_color
+//           [Token is_word=true]
+//           ]
+//          GO), monadSet
+//        ];
+//    }
     
     if ([query.uppercaseString hasPrefix:@"COUNT"]) {
         query = [query stringByReplacingOccurrencesOfString:@"COUNT" withString:@"SELECT" options:NSCaseInsensitiveSearch range:NSMakeRange(0, MIN(5, query.length))];
