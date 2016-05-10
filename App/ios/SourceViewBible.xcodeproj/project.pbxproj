@@ -24,7 +24,7 @@
 		2733E1E3F7E84A9192513C23 /* libRCTEmdros.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE4B0ED1C4C74D01AB84FB66 /* libRCTEmdros.a */; };
 		6274C4694D4844B6A806B358 /* libRNI18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE4C78311794C1C9C0D3EA7 /* libRNI18n.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		AB2A02761CE25F9A00B53661 /* en in Resources */ = {isa = PBXBuildFile; fileRef = AB2A02751CE25F9A00B53661 /* en */; };
+		AB2A027A1CE2695000B53661 /* Datasets in Resources */ = {isa = PBXBuildFile; fileRef = AB2A02791CE2695000B53661 /* Datasets */; };
 		ABA1BCEB1CE127A300BEA3A1 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA1BCEA1CE127A300BEA3A1 /* libz.tbd */; };
 		ABA1BCED1CE127AE00BEA3A1 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA1BCEC1CE127AE00BEA3A1 /* libstdc++.tbd */; };
 		ABA1BCEF1CE127B700BEA3A1 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA1BCEE1CE127B700BEA3A1 /* libsqlite3.tbd */; };
@@ -154,7 +154,7 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		9EE4C78311794C1C9C0D3EA7 /* libRNI18n.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNI18n.a; sourceTree = "<group>"; };
-		AB2A02751CE25F9A00B53661 /* en */ = {isa = PBXFileReference; lastKnownFileType = folder; name = en; path = ../../Datasets/en; sourceTree = "<group>"; };
+		AB2A02791CE2695000B53661 /* Datasets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Datasets; path = SourceViewBible/Datasets; sourceTree = "<group>"; };
 		AB5219C91CE2516D00305812 /* RCTEmdros.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTEmdros.xcodeproj; path = ../../Libraries/Emdros/ios/RCTEmdros/RCTEmdros.xcodeproj; sourceTree = "<group>"; };
 		ABA1BCEA1CE127A300BEA3A1 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		ABA1BCEC1CE127AE00BEA3A1 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
@@ -344,18 +344,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		AB2A02671CE25F7600B53661 /* Datasets */ = {
-			isa = PBXGroup;
-			children = (
-				AB2A02751CE25F9A00B53661 /* en */,
-			);
-			name = Datasets;
-			sourceTree = "<group>";
-		};
 		AB4713101CE251D100E9EB48 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				AB2A02671CE25F7600B53661 /* Datasets */,
+				AB2A02791CE2695000B53661 /* Datasets */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -614,8 +606,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				AB2A02761CE25F9A00B53661 /* en in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				AB2A027A1CE2695000B53661 /* Datasets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
