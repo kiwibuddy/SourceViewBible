@@ -53,7 +53,7 @@ class Books extends Component {
       ]
       GO`;
     this.props.database.query(query, {count: true, type: 'Book', 'feature': 'DJHRef'}).then((result) => {
-      console.log(result);
+      console.log('Executed Query');
     }).catch((error) => {
       console.log('Error executing query' + error);
     });

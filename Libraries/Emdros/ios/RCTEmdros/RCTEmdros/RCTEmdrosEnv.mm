@@ -60,8 +60,6 @@
 }
 
 - (void)query:(NSString *)query options:(NSDictionary *)options completion:(void (^)(id result, NSError *error))completion {
-    NSLog(@"Executing query: %@", query);
-
     dispatch_async(self.queue, ^{
         try {
             bool bResult;
@@ -71,7 +69,7 @@
             if (!_emdrosEnv->executeString(std::string(query.UTF8String), bResult, false, true)) {
                 NSLog(@"FAILURE: Database error executing string.");
             } else {
-                [[OCDBenchmark sharedBenchmark] end:[NSString stringWithFormat:@"Finished query: %@", query]];
+                [[OCDBenchmark sharedBenchmark] end:[NSString stringWithFormat:@"Query: %@", query]];
                 if (!bResult) {
                     NSLog(@"FAILURE: Compiler error executing string.");
                 } else {
@@ -87,20 +85,28 @@
                             NSInteger lastMonad = options[@"lastMonad"] ? [options[@"lastMonad"] integerValue] : MAX_MONAD;
                             SetOfMonads in_som(firstMonad, lastMonad);
                             
+                            [[OCDBenchmark sharedBenchmark] begin];
                             bool bResult = false;
                             MonadRange2BucketMap *bucketMap = getBucketMapFromParams(_emdrosEnv, std::string(type.UTF8String), std::string(feature.UTF8String), in_som, bResult);
+                            [[OCDBenchmark sharedBenchmark] end:[NSString stringWithFormat:@"getBucketMapFromParams"]];
+                            
                             if (bucketMap != 0 && bResult) {
+                                [[OCDBenchmark sharedBenchmark] begin];
                                 countInSheaf(sheaf, bucketMap);
+                                [[OCDBenchmark sharedBenchmark] end:[NSString stringWithFormat:@"countInSheaf"]];
 
+
+                                [[OCDBenchmark sharedBenchmark] begin];
                                 NSError *error = nil;
                                 result = [self dictionaryWithBucketMap:bucketMap error:&error];
+                                [[OCDBenchmark sharedBenchmark] end:[NSString stringWithFormat:@"dictionaryWithBucketMap"]];
+                                
                                 delete bucketMap;
                             }
                         } else {
                             SheafIterator si = sheaf->iterator();
                             while (si.hasNext()) {
 //                                Straw *pStraw = si.next();
-
 
                             }
                         }
