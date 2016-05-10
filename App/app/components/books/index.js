@@ -2,7 +2,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import ReactNative, { View, Text, ListView, TouchableOpacity, RecyclerViewBackedScrollView, NavigationExperimental } from 'react-native';
+import ReactNative, { View, Text, ListView, TouchableOpacity, RecyclerViewBackedScrollView, NavigationExperimental, PropTypes } from 'react-native';
 const { Header: NavigationHeader } = NavigationExperimental;
 import { connect } from 'react-redux';
 import { navigatePush, navigateReset } from '../../actions';
@@ -19,7 +19,8 @@ const Bible = require('../../assets/en/books');
 
 class Books extends Component {
   state: {
-    dataSource: any
+    dataSource: any,
+    selectedSegmentIndex: number
   };
 
   constructor() {
@@ -35,7 +36,8 @@ class Books extends Component {
 
       const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
       this.state = {
-        dataSource: dataSource.cloneWithRowsAndSections({old: oldTestamentBooks, new: newTestamentBooks})
+        dataSource: dataSource.cloneWithRowsAndSections({old: oldTestamentBooks, new: newTestamentBooks}),
+        selectedSegmentIndex: 0
       }
   }
 
@@ -46,8 +48,7 @@ class Books extends Component {
           style={styles.segmentedControl}
           tintColor={Colors.tintColor}
           values={[Localizable.t('textual'), Localizable.t('alphabetical'), Localizable.t('principality')]}
-          selectedIndex={0}
-          onValueChange={(index) => console.log('SelectedIndex: ' + index)}
+          selectedIndex={this.state.selectedSegmentIndex}
         />
 
         <ListView

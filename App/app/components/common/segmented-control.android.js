@@ -16,6 +16,7 @@ export default class SegmentedControl extends Component {
   };
 
   state: {
+    selectedIndex: number,
     __indicatorLeft: any,
     __indicatorWidth: any
   };
@@ -24,8 +25,9 @@ export default class SegmentedControl extends Component {
     super(props);
 
     this.state = {
-      __indicatorLeft: new Animated.Value(0),
-      __indicatorWidth: new Animated.Value(0)
+      selectedIndex: props.selectedIndex || 0,
+      indicatorLeft: new Animated.Value(0),
+      indicatorWidth: new Animated.Value(0)
     };
   }
 
@@ -34,7 +36,7 @@ export default class SegmentedControl extends Component {
     let index = 0;
     const buttons = values.map((value) => {
       let buttonIndex = index;
-      let isButtonSelected = buttonIndex === this.props.selectedIndex;
+      let isButtonSelected = buttonIndex === this.state.selectedIndex;
       let tintColor = (isButtonSelected ? this.props.tintColor : null);
       index++;
       return this._renderButton(buttonIndex, value, tintColor);
@@ -42,8 +44,8 @@ export default class SegmentedControl extends Component {
 
     const indicatorStyle = [styles.indicator, {
       backgroundColor: this.props.tintColor,
-      left: this.state.__indicatorLeft,
-      width: this.state.__indicatorWidth
+      left: this.state.indicatorLeft,
+      width: this.state.indicatorWidth
     }];
 
     return (
@@ -65,7 +67,7 @@ export default class SegmentedControl extends Component {
         key={'button-' + title}
         ref={index}
         style={styles.button}
-        onPress={() => this.props.onValueChange(index)}
+        onPress={() => this._onValueChange(index, title)}
       >
         <Text style={[styles.buttonTitle, {color: tintColor}]}>{title.toLocaleUpperCase()}</Text>
       </TouchableOpacity>
@@ -73,10 +75,15 @@ export default class SegmentedControl extends Component {
   }
 
   _measureSelectedButton() {
-    this.refs[this.props.selectedIndex].measure((ox, oy, width, height, px, py) => {
-      this.state.__indicatorLeft.setValue(px);
-      this.state.__indicatorWidth.setValue(width);
+    this.refs[this.state.selectedIndex].measure((ox, oy, width, height, px, py) => {
+      this.state.indicatorLeft.setValue(px);
+      this.state.indicatorWidth.setValue(width);
     });
+  }
+
+  _onValueChange(index, title) {
+    this.setState({selectedIndex: index});
+    if (this.props.onValueChange) this.props.onValueChange(title);
   }
 }
 
@@ -99,8 +106,8 @@ const styles = StyleSheet.create({
     fontFamily: 'sans-serif-medium'
   },
   indicator: {
+    position: 'absolute',
     height: 2,
-    left: 0,
-    width: 110
+    bottom: 0
   }
 });
