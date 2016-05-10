@@ -33,7 +33,7 @@ public class MainActivity extends ReactActivity {
 
         AssetManager assetManager = getAssets();
         try {
-            String database =  "Datasets" + File.separator + "en" + File.separator + "NLT" + File.separator + "sourceview.bpt";
+            String database =  "Datasets" + File.separator + "en" + File.separator + "NLT" + File.separator + "SourceView.bpt";
             String outfilename = getFilesDir().toString() + File.separator + database;
             File outfile = new File(outfilename);
             File directory = outfile.getParentFile();
