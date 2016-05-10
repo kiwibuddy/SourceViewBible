@@ -2,52 +2,69 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
+import ColorPropType from 'ColorPropType';
 import { TouchableOpacity, View, Text } from 'react-native';
 import StyleSheet from '../../common/stylesheet'
 
 export default class SegmentedControl extends Component {
   static propTypes = {
     style: PropTypes.any,
-    values: PropTypes.any.isRequired
+    tintColor: ColorPropType,
+    values: PropTypes.arrayOf(PropTypes.string),
+    selectedIndex: PropTypes.number
   };
 
   render() {
     const values = this.props.values;
+    let index = 0;
     const buttons = values.map((value) => {
-      return this._renderButton(value);
+      let isButtonSelected = index === this.props.selectedIndex;
+      let tintColor = (isButtonSelected ? this.props.tintColor : null);
+      index++;
+      return this._renderButton(value, tintColor);
     });
 
+    const indicatorStyle = [styles.indicator, {backgroundColor: this.props.tintColor}];
+
     return (
-      <View style={[styles.container, this.props.style]}>
-        {buttons}
+      <View style={[styles.tabBar, this.props.style]}>
+        <View style={styles.buttons}>
+          {buttons}
+        </View>
+        <View style={indicatorStyle} />
       </View>
     );
   }
 
-  _renderButton(title: String) {
+  _renderButton(title: String, tintColor: ColorPropType) {
     return(
       <TouchableOpacity key={'button-' + title} style={styles.button} onPress={this.props.onButtonPress}>
-        <Text style={styles.buttonTitle}>{title.toLocaleUpperCase()}</Text>
+        <Text style={[styles.buttonTitle, {color: tintColor}]}>{title.toLocaleUpperCase()}</Text>
       </TouchableOpacity>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  tabBar: {
+    height: 48,
+    backgroundColor: '#FFF',
+  },
+  buttons: {
+    flex: 1,
     flexDirection: 'row',
-    height: 60,
-    backgroundColor: '#F9F9F9',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   button: {
     flex: 1,
-    height: 60,
     justifyContent: 'center',
     alignItems: 'center',
   },
   buttonTitle: {
-    fontSize: 15,
-    fontWeight: 'bold',
+    fontSize: 14,
+    fontFamily: 'sans-serif-medium'
+  },
+  indicator: {
+    height: 2
   }
 });

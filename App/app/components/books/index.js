@@ -46,6 +46,7 @@ class Books extends Component {
           style={styles.segmentedControl}
           tintColor={Colors.tintColor}
           values={[Localizable.t('textual'), Localizable.t('alphabetical'), Localizable.t('principality')]}
+          selectedIndex={0}
         />
 
         <ListView

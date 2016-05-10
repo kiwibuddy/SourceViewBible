@@ -112,6 +112,7 @@ class SourceViewBibleApp extends Component {
       return (
         <NavigationHeader
           {...props}
+          style={{elevation: 0}}
           renderTitleComponent={this._renderTitleComponent}
         />
       );
