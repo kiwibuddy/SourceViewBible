@@ -82,6 +82,8 @@ export default class SegmentedControl extends Component {
   }
 
   _onValueChange(index, title) {
+    if (index === this.state.selectedIndex) return;
+    
     this.setState({selectedIndex: index});
     if (this.props.onValueChange) this.props.onValueChange(title);
   }
