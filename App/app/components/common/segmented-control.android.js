@@ -38,13 +38,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height: 60,
     backgroundColor: '#F9F9F9',
+    alignItems: 'center'
   },
   button: {
     flex: 1,
+    height: 60,
+    justifyContent: 'center',
     alignItems: 'center',
   },
   buttonTitle: {
-    fontSize: 18,
+    fontSize: 15,
     fontWeight: 'bold',
   }
 });

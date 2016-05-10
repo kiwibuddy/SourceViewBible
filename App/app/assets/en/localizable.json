@@ -2,9 +2,9 @@
   en: {
     'old-testament': 'Old Testament',
     'new-testament': 'New Testament',
-    'textual': 'Textual',
-    'alphabetical': 'Alphabetical',
-    'principality': 'Principality',
+    'textual': 'TEXTUAL',
+    'alphabetical': 'ALPHABETICAL',
+    'principality': 'PRINCIPALITY',
     'discover': 'Discover',
     'books': 'Books',
   }
