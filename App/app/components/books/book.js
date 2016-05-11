@@ -16,27 +16,27 @@ class Book extends Component {
       <View style={styles.container}>
         <View style={styles.sourceFilterContainer}>
           <View style={styles.sourceButtonContainer}>
-          <Text style={[styles.sourceButtonTitle, styles.tintBlack]}>37%</Text>
-            <View style={[styles.roundButton, styles.borderBlack]}>
-            <Text style={[styles.roundButtonTitle, styles.tintBlack]}>NARRATOR</Text>
+          <Text style={[styles.sourceButtonTitle, {color: Colors.sources.black}]}>37%</Text>
+            <View style={[styles.roundButton, {borderColor: Colors.sources.black}]}>
+            <Text style={[styles.roundButtonTitle, {color: Colors.sources.black}]}>NARRATOR</Text>
             </View>
           </View>
           <View style={styles.sourceButtonContainer}>
-          <Text style={[styles.sourceButtonTitle, styles.tintRed]}>37%</Text>
-            <View style={[styles.roundButton, styles.borderRed]}>
-            <Text style={[styles.roundButtonTitle, styles.tintRed]}>GOD</Text>
+          <Text style={[styles.sourceButtonTitle, {color: Colors.sources.red}]}>37%</Text>
+            <View style={[styles.roundButton, {borderColor: Colors.sources.red}]}>
+            <Text style={[styles.roundButtonTitle, {color: Colors.sources.red}]}>GOD</Text>
             </View>
           </View>
           <View style={styles.sourceButtonContainer}>
-            <Text style={[styles.sourceButtonTitle, styles.tintGreen]}>37%</Text>
-            <View style={[styles.roundButton, styles.borderGreen]}>
-            <Text style={[styles.roundButtonTitle, styles.tintGreen]}>LEAD</Text>
+            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.green}]}>37%</Text>
+            <View style={[styles.roundButton, {borderColor: Colors.sources.green}]}>
+            <Text style={[styles.roundButtonTitle, {color: Colors.sources.green}]}>LEAD</Text>
             </View>
           </View>
           <View style={styles.sourceButtonContainer}>
-            <Text style={[styles.sourceButtonTitle, styles.tintBlue]}>37%</Text>
-            <View style={[styles.roundButton, styles.borderBlue]}>
-              <Text style={[styles.roundButtonTitle, styles.tintBlue]}>SUPPORT</Text>
+            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.blue}]}>37%</Text>
+            <View style={[styles.roundButton, {borderColor: Colors.sources.blue}]}>
+              <Text style={[styles.roundButtonTitle, {color: Colors.sources.blue}]}>SUPPORT</Text>
             </View>
           </View>
           <View style={styles.sectionHeaderContainer}>
@@ -75,30 +75,6 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     paddingHorizontal: 5,
     alignItems: 'center',
-  },
-  tintBlack: {
-    color: 'black',
-  },
-  borderBlack: {
-    borderColor: 'black',
-  },
-  tintRed: {
-    color: '#fc3d39',
-  },
-  borderRed: {
-    borderColor: '#fc3d39',
-  },
-  tintGreen: {
-    color: '#4cda65',
-  },
-  borderGreen: {
-    borderColor: '#4cda65',
-  },
-  tintBlue: {
-    color: '#017bff',
-  },
-  borderBlue: {
-    borderColor: '#017bff',
   },
   roundButtonTitle: {
     fontSize: 11,
