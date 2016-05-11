@@ -14,7 +14,7 @@ class Book extends Component {
   render() {
     return(
       <View style={styles.container}>
-        <View style={styles.sourcefilter}>
+        <View style={styles.sourceFilterContainer}>
           <View style={styles.sourceButtonContainer}>
           <Text style={[styles.sourceButtonTitle, styles.tintBlack]}>37%</Text>
             <View style={[styles.roundButton, styles.borderBlack]}>
@@ -39,6 +39,9 @@ class Book extends Component {
               <Text style={[styles.roundButtonTitle, styles.tintBlue]}>SUPPORT</Text>
             </View>
           </View>
+          <View style={styles.sectionHeaderContainer}>
+
+          </View>
         </View>
       </View>
     );
@@ -51,7 +54,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     marginTop: NavigationHeader.HEIGHT,
   },
-  sourcefilter: {
+  sourceFilterContainer: {
     flexDirection: 'row',
     marginTop: 10,
     marginHorizontal: 10,
