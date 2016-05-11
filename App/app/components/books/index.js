@@ -131,8 +131,9 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   stackedBarChart: {
-    height: 2,
-    marginVertical: 8,
+    height: 4,
+    flex: 0,
+    marginTop: 7,
   },
   sectionHeaderContainer: {
     marginLeft: 8,

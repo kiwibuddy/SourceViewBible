@@ -10,10 +10,17 @@ import StyleSheet from '../../common/stylesheet';
 import Colors from '../../common/colors';
 import Platform from '../../common/platform';
 
+import StackedBarChart from '../charts/stacked-bar-chart';
+
 class Book extends Component {
   render() {
     return(
       <View style={styles.container}>
+      <StackedBarChart
+        style={styles.stackedBarChart}
+        horizontal={true}
+        data={[{black: 200, red: 300, green: 100, blue: 40}]}
+      />
         <View style={styles.sourceFilterContainer}>
           <View style={styles.sourceButtonContainer}>
           <Text style={[styles.sourceButtonTitle, {color: Colors.sources.black}]}>37%</Text>
@@ -56,6 +63,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     marginTop: NavigationHeader.HEIGHT,
   },
+  stackedBarChart: {
+    height: 3,
+    flex: 0,
+  },
   sourceFilterContainer: {
     flexDirection: 'row',
     marginHorizontal: 9,
@@ -97,6 +108,7 @@ const styles = StyleSheet.create({
   },
   sectionText: {
     marginVertical: 8,
+    lineHeight: 20,
   },
   ...Platform.select({
       ios: {
