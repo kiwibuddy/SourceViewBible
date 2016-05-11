@@ -39,9 +39,9 @@ class Book extends Component {
               <Text style={[styles.roundButtonTitle, {color: Colors.sources.blue}]}>SUPPORT</Text>
             </View>
           </View>
-          <View style={styles.sectionHeaderContainer}>
-
-          </View>
+        </View>
+        <View style={styles.sectionHeaderContainer}>
+          <Text style={styles.sectionHeaderTitle}>INTRODUCTION</Text>
         </View>
       </View>
     );
@@ -56,8 +56,8 @@ const styles = StyleSheet.create({
   },
   sourceFilterContainer: {
     flexDirection: 'row',
-    marginTop: 10,
-    marginHorizontal: 10,
+    marginHorizontal: 9,
+    marginVertical: 10,
   },
   sourceButtonContainer: {
     flex: 1,
@@ -78,6 +78,18 @@ const styles = StyleSheet.create({
   },
   roundButtonTitle: {
     fontSize: 11,
+  },
+  sectionHeaderContainer: {
+    marginLeft: 15,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#c8c7cc',
+    paddingBottom: 6,
+    backgroundColor: 'white',
+  },
+  sectionHeaderTitle: {
+    color: '#cf1e00',
+    marginTop: 8,
+    fontSize: 13,
   },
   ...Platform.select({
       ios: {

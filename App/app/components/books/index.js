@@ -84,8 +84,8 @@ class Books extends Component {
   _renderSectionHeader(sectionData, sectionID) {
     const title = sectionID === 'old' ? Localizable.t('old-testament') : Localizable.t('new-testament');
     return (
-      <View style={styles.sectionHeader}>
-        <Text style={styles.sectionTitle}>{title.toLocaleUpperCase()}</Text>
+      <View style={styles.sectionHeaderContainer}>
+        <Text style={styles.sectionHeaderTitle}>{title.toLocaleUpperCase()}</Text>
       </View>
     );
   }
@@ -134,14 +134,14 @@ const styles = StyleSheet.create({
     height: 2,
     marginVertical: 8,
   },
-  sectionHeader: {
+  sectionHeaderContainer: {
     marginLeft: 8,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: '#c8c7cc',
     paddingBottom: 6,
     backgroundColor: 'white',
   },
-  sectionTitle: {
+  sectionHeaderTitle: {
     color: '#59626a',
     marginTop: 8,
     fontSize: 13,
