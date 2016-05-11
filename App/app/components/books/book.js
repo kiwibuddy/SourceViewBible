@@ -7,6 +7,7 @@ const { Header: NavigationHeader } = NavigationExperimental;
 import { connect } from 'react-redux';
 
 import StyleSheet from '../../common/stylesheet';
+import Colors from '../../common/colors';
 import Platform from '../../common/platform';
 
 class Book extends Component {
