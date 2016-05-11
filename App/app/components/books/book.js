@@ -33,7 +33,7 @@ class Book extends Component {
             </View>
           </View>
           <View style={styles.sourceButtonContainer}>
-          <Text style={[styles.sourceButtonTitle, styles.tintBlue]}>37%</Text>
+            <Text style={[styles.sourceButtonTitle, styles.tintBlue]}>37%</Text>
             <View style={[styles.roundButton, styles.borderBlue]}>
               <Text style={[styles.roundButtonTitle, styles.tintBlue]}>SUPPORT</Text>
             </View>
@@ -52,24 +52,24 @@ const styles = StyleSheet.create({
   },
   sourcefilter: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     marginTop: 10,
     marginHorizontal: 10,
   },
   sourceButtonContainer: {
-    alignItems: 'center',
+    flex: 1,
+    marginHorizontal: 5,
   },
   sourceButtonTitle: {
     fontSize: 25,
     fontWeight: '300',
     marginBottom: 5,
+    alignSelf: 'center',
   },
   roundButton: {
     borderRadius: 20,
     borderWidth: 1,
     paddingVertical: 4,
     paddingHorizontal: 5,
-    width: 80,
     alignItems: 'center',
   },
   tintBlack: {
