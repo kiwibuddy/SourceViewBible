@@ -40,9 +40,11 @@ class Book extends Component {
             </View>
           </View>
         </View>
-        <View style={styles.sectionHeaderContainer}>
-          <Text style={styles.sectionHeaderTitle}>INTRODUCTION</Text>
-        </View>
+        <View style={styles.section}>
+          <View style={styles.sectionHeaderContainer}>
+            <Text style={styles.sectionHeaderTitle}>INTRODUCTION</Text>
+            </View>
+            <Text style={styles.sectionText}>Though Amos’s perspective is reflected in the (black) words of the Narrator we only hear his voice directly in eight (green) passages. Read through these passages and you discover some interesting...</Text></View>
       </View>
     );
   }
@@ -79,8 +81,10 @@ const styles = StyleSheet.create({
   roundButtonTitle: {
     fontSize: 11,
   },
-  sectionHeaderContainer: {
+  section: {
     marginLeft: 15,
+  },
+  sectionHeaderContainer: {
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: '#c8c7cc',
     paddingBottom: 6,
@@ -90,6 +94,9 @@ const styles = StyleSheet.create({
     color: '#cf1e00',
     marginTop: 8,
     fontSize: 13,
+  },
+  sectionText: {
+    marginVertical: 8,
   },
   ...Platform.select({
       ios: {
