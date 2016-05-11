@@ -15,7 +15,7 @@ class Book extends Component {
       <View style={styles.container}>
         <View style={styles.sourcefilter}>
           <View style={styles.sourceButtonContainer}>
-            <Text>37%</Text>
+            <Text style={styles.sourceButtonTitle}>37%</Text>
             <View style={styles.sourceButton}>
               <Text>Narrator</Text>
             </View>
@@ -31,6 +31,17 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     marginTop: NavigationHeader.HEIGHT,
+  },
+  sourcefilter: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  sourceButtonContainer: {
+    alignItems: 'center',
+  },
+  sourceButtonTitle: {
+    fontSize: 25,
+    fontWeight: '300',
   },
   ...Platform.select({
       ios: {
