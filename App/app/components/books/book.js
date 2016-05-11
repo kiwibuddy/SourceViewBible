@@ -13,7 +13,14 @@ class Book extends Component {
   render() {
     return(
       <View style={styles.container}>
-        <Text>{this.props.book.name}</Text>
+        <View style={styles.sourcefilter}>
+          <View style={styles.sourceButtonContainer}>
+            <Text>37%</Text>
+            <View style={styles.sourceButton}>
+              <Text>Narrator</Text>
+            </View>
+          </View>
+        </View>
       </View>
     );
   }
@@ -22,16 +29,9 @@ class Book extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'green',
-    justifyContent: 'center',
-    alignItems: 'center'
+    backgroundColor: '#fff',
+    marginTop: NavigationHeader.HEIGHT,
   },
-	title: {
-		fontSize: 24,
-		fontWeight: '500',
-		color: '#ffffff',
-		marginBottom: 30
-	},
   ...Platform.select({
       ios: {
       },
