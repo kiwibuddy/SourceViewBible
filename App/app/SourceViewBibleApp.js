@@ -32,6 +32,8 @@ const {
   RootContainer: NavigationRootContainer
 } = NavigationExperimental;
 
+const NavigationHeaderBackButton = require('./components/common/NavigationHeaderBackButton');
+
 import { connect } from 'react-redux';
 
 type Props = {
@@ -128,6 +130,7 @@ class SourceViewBibleApp extends Component {
           {...props}
           style={{elevation: 0}}
           renderTitleComponent={this._renderTitleComponent}
+          renderLeftComponent={this._renderLeftComponent}
         />
       );
     }
@@ -136,6 +139,12 @@ class SourceViewBibleApp extends Component {
       const title = props.scene.navigationState.title;
       return (
         <NavigationHeader.Title>{title}</NavigationHeader.Title>
+      );
+    }
+
+    _renderLeftComponent(/*NavigationSceneRendererProps*/ props) {
+      return (
+        props.scene.index > 0 ? <NavigationHeaderBackButton /> : null
       );
     }
 
