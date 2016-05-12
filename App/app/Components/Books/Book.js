@@ -2,7 +2,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import ReactNative, { View, Text, NavigationExperimental } from 'react-native';
+import ReactNative, { View, Text, TouchableOpacity, NavigationExperimental } from 'react-native';
 const { Header: NavigationHeader } = NavigationExperimental;
 import { connect } from 'react-redux';
 
@@ -23,30 +23,30 @@ class Book extends Component {
           data={[{black: 0, red: 0, green: 0, blue: 0}]}
         />
         <View style={styles.sourceFilterContainer}>
-          <View style={styles.sourceButtonContainer}>
+          <TouchableOpacity style={styles.sourceButtonContainer}>
             <Text style={[styles.sourceButtonTitle, {color: Colors.sources.black}]}>0%</Text>
             <View style={[styles.roundButton, {borderColor: Colors.sources.black}]}>
               <Text style={[styles.roundButtonTitle, {color: Colors.sources.black}]}>{Localizable.t('sources.narrator').toLocaleUpperCase()}</Text>
             </View>
-          </View>
-          <View style={styles.sourceButtonContainer}>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.sourceButtonContainer}>
             <Text style={[styles.sourceButtonTitle, {color: Colors.sources.red}]}>0%</Text>
             <View style={[styles.roundButton, {borderColor: Colors.sources.red}]}>
               <Text style={[styles.roundButtonTitle, {color: Colors.sources.red}]}>{Localizable.t('sources.god').toLocaleUpperCase()}</Text>
             </View>
-          </View>
-          <View style={styles.sourceButtonContainer}>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.sourceButtonContainer}>
             <Text style={[styles.sourceButtonTitle, {color: Colors.sources.green}]}>0%</Text>
             <View style={[styles.roundButton, {borderColor: Colors.sources.green}]}>
               <Text style={[styles.roundButtonTitle, {color: Colors.sources.green}]}>{Localizable.t('sources.lead').toLocaleUpperCase()}</Text>
             </View>
-          </View>
-          <View style={styles.sourceButtonContainer}>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.sourceButtonContainer}>
             <Text style={[styles.sourceButtonTitle, {color: Colors.sources.blue}]}>0%</Text>
             <View style={[styles.roundButton, {borderColor: Colors.sources.blue}]}>
               <Text style={[styles.roundButtonTitle, {color: Colors.sources.blue}]}>{Localizable.t('sources.support').toLocaleUpperCase()}</Text>
             </View>
-          </View>
+          </TouchableOpacity>
         </View>
         <View style={styles.section}>
           <View style={styles.sectionHeaderContainer}>
