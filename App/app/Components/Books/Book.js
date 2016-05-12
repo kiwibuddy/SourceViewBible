@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import StyleSheet from '../../Common/StyleSheet';
 import Colors from '../../Common/Colors';
 import Platform from '../../Common/Platform';
+import Localizable from '../../Common/Localizable';
 
 import StackedBarChart from '../Charts/StackedBarChart';
 
@@ -25,31 +26,31 @@ class Book extends Component {
           <View style={styles.sourceButtonContainer}>
             <Text style={[styles.sourceButtonTitle, {color: Colors.sources.black}]}>37%</Text>
             <View style={[styles.roundButton, {borderColor: Colors.sources.black}]}>
-              <Text style={[styles.roundButtonTitle, {color: Colors.sources.black}]}>NARRATOR</Text>
+              <Text style={[styles.roundButtonTitle, {color: Colors.sources.black}]}>{Localizable.t('narrator').toLocaleUpperCase()}</Text>
             </View>
           </View>
           <View style={styles.sourceButtonContainer}>
             <Text style={[styles.sourceButtonTitle, {color: Colors.sources.red}]}>37%</Text>
             <View style={[styles.roundButton, {borderColor: Colors.sources.red}]}>
-              <Text style={[styles.roundButtonTitle, {color: Colors.sources.red}]}>GOD</Text>
+              <Text style={[styles.roundButtonTitle, {color: Colors.sources.red}]}>{Localizable.t('god').toLocaleUpperCase()}</Text>
             </View>
           </View>
           <View style={styles.sourceButtonContainer}>
             <Text style={[styles.sourceButtonTitle, {color: Colors.sources.green}]}>37%</Text>
             <View style={[styles.roundButton, {borderColor: Colors.sources.green}]}>
-              <Text style={[styles.roundButtonTitle, {color: Colors.sources.green}]}>LEAD</Text>
+              <Text style={[styles.roundButtonTitle, {color: Colors.sources.green}]}>{Localizable.t('lead').toLocaleUpperCase()}</Text>
             </View>
           </View>
           <View style={styles.sourceButtonContainer}>
             <Text style={[styles.sourceButtonTitle, {color: Colors.sources.blue}]}>37%</Text>
             <View style={[styles.roundButton, {borderColor: Colors.sources.blue}]}>
-              <Text style={[styles.roundButtonTitle, {color: Colors.sources.blue}]}>SUPPORT</Text>
+              <Text style={[styles.roundButtonTitle, {color: Colors.sources.blue}]}>{Localizable.t('support').toLocaleUpperCase()}</Text>
             </View>
           </View>
         </View>
         <View style={styles.section}>
           <View style={styles.sectionHeaderContainer}>
-            <Text style={styles.sectionHeaderTitle}>INTRODUCTION</Text>
+            <Text style={styles.sectionHeaderTitle}>{Localizable.t('introduction').toLocaleUpperCase()}</Text>
           </View>
           <Text style={styles.sectionText}>Though Amos’s perspective is reflected in the (black) words of the Narrator we only hear his voice directly in eight (green) passages. Read through these passages and you discover some interesting...</Text>
         </View>

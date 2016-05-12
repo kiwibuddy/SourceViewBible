@@ -7,5 +7,10 @@
     'principality': 'Principality',
     'discover': 'Discover',
     'books': 'Books',
+    'narrator': 'Narrator',
+    'god': 'God',
+    'lead': 'Lead',
+    'support': 'Support',
+    'introduction': 'Introduction'
   }
 }
