@@ -45,6 +45,8 @@ class Books extends Component {
   }
 
   queryDatabase() {
+    if (Platform.OS === 'android') return;
+    
     let query = `
       SELECT ALL OBJECTS
       WHERE
