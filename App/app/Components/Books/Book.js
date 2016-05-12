@@ -85,6 +85,28 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     alignSelf: 'center',
   },
+  roundButton: {
+    borderRadius: 20,
+    borderWidth: 1,
+    paddingVertical: 4,
+    paddingHorizontal: 5,
+    alignItems: 'center',
+  },
+  roundButtonTitle: {
+    fontSize: 11,
+  },
+  section: {
+    marginLeft: 15,
+  },
+  sectionText: {
+    marginVertical: 8,
+    lineHeight: 20,
+  },
+  sectionMore: {
+    color: '#cf1e00',
+    alignSelf: 'flex-end',
+    marginRight: 10,
+  },
   ...Platform.select({
       ios: {
       },

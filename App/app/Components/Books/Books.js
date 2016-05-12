@@ -108,6 +108,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff'
   },
+  separator: {
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: '#CCCCCC',
+    marginLeft: 8,
+  },
   stackedBarChart: {
     height: 4,
     flex: 0,
