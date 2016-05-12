@@ -53,6 +53,7 @@ class Book extends Component {
             <Text style={styles.sectionHeaderTitle}>{Localizable.t('introduction').toLocaleUpperCase()}</Text>
           </View>
           <Text style={styles.sectionText}>Though Amos’s perspective is reflected in the (black) words of the Narrator we only hear his voice directly in eight (green) passages. Read through these passages and you discover some interesting...</Text>
+          <Text style={styles.sectionMore}>more</Text>
         </View>
       </View>
     );
@@ -83,34 +84,6 @@ const styles = StyleSheet.create({
     fontWeight: '300',
     marginBottom: 5,
     alignSelf: 'center',
-  },
-  roundButton: {
-    borderRadius: 20,
-    borderWidth: 1,
-    paddingVertical: 4,
-    paddingHorizontal: 5,
-    alignItems: 'center',
-  },
-  roundButtonTitle: {
-    fontSize: 11,
-  },
-  section: {
-    marginLeft: 15,
-  },
-  sectionHeaderContainer: {
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#c8c7cc',
-    paddingBottom: 6,
-    backgroundColor: 'white',
-  },
-  sectionHeaderTitle: {
-    color: '#cf1e00',
-    marginTop: 8,
-    fontSize: 13,
-  },
-  sectionText: {
-    marginVertical: 8,
-    lineHeight: 20,
   },
   ...Platform.select({
       ios: {
