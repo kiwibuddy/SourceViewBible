@@ -15,7 +15,7 @@ import Localizable from '../../Common/Localizable';
 import SegmentedControl from '../Common/SegmentedControl';
 import StackedBarChart from '../Charts/StackedBarChart';
 
-const Bible = require('../../Assets/en/books');
+const Bible = require('../../Locale/en/books');
 const SEGMENTS = [Localizable.t('textual'), Localizable.t('alphabetical'), Localizable.t('principality')];
 
 class Books extends Component {
