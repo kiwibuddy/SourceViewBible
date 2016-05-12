@@ -2,6 +2,7 @@
 'use strict';
 
 import { StyleSheet } from 'react-native';
+import Colors from './Colors';
 
 function create(styles: any) {
   const defaultStyles = {
