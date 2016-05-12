@@ -18,7 +18,7 @@ class Book extends Component {
     return(
       <View style={styles.container}>
         <StackedBarChart
-          style={styles.stackedBarChart}
+          style={styles.stackedBarChartHeader}
           horizontal={true}
           data={[{black: 0, red: 0, green: 0, blue: 0}]}
         />
@@ -63,6 +63,7 @@ class Book extends Component {
             <View style={styles.sectionHeaderShadow}></View>
             <View style={styles.cellContainer}>
               <View style={styles.leftContainer}>
+                <View style={styles.sourceAvatar}></View>
                 <Text style={styles.cellTitle}>Narrator</Text>
               </View>
               <View style={styles.rightContainer}>
@@ -74,6 +75,7 @@ class Book extends Component {
                 <Text style={styles.cellSubTitle}>100 words</Text>
               </View>
             </View>
+            <View style={styles.separator}></View>
           </View>
         </ScrollView>
       </View>
@@ -87,7 +89,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     marginTop: NavigationHeader.HEIGHT,
   },
-  stackedBarChart: {
+  stackedBarChartHeader: {
     height: 3,
     flex: 0,
   },
@@ -131,6 +133,31 @@ const styles = StyleSheet.create({
     color: Colors.tintColor,
     alignSelf: 'flex-end',
     marginRight: 10,
+  },
+  cellContainer: {
+    flex: 1,
+    marginRight: 15,
+    paddingVertical: 12,
+    flexDirection: 'row',
+  },
+  leftContainer: {
+    flex: 1.2,
+    flexDirection: 'row',
+    paddingTop: 2,
+  },
+  rightContainer: {
+    flex: 1.8,
+  },
+  sourceAvatar: {
+    width: 20,
+    height: 20,
+    backgroundColor: 'red',
+    marginRight: 10,
+  },
+  stackedBarChart: {
+    height: 4,
+    flex: 0,
+    marginBottom: 7,
   },
   ...Platform.select({
       ios: {

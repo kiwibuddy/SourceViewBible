@@ -17,6 +17,18 @@ function create(styles: any) {
       marginTop: 8,
       fontSize: 13,
     },
+    cellTitle: {
+      color: '#59626a',
+      fontSize: 17,
+    },
+    cellSubTitle: {
+      color: '#B7C0C8',
+      fontSize: 13,
+    },
+    separator: {
+      height: StyleSheet.hairlineWidth,
+      backgroundColor: '#CCCCCC',
+    },
     ...styles,
   };
 

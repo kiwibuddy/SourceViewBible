@@ -108,11 +108,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff'
   },
-  separator: {
-    height: StyleSheet.hairlineWidth,
-    backgroundColor: '#CCCCCC',
-    marginLeft: 15,
-  },
   stackedBarChart: {
     height: 4,
     flex: 0,
@@ -144,13 +139,10 @@ const styles = StyleSheet.create({
   rightContainer: {
     flex: 1.8,
   },
-  cellTitle: {
-    color: '#59626a',
-    fontSize: 17,
-  },
-  cellSubTitle: {
-    color: '#B7C0C8',
-    fontSize: 13,
+  separator: {
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: '#CCCCCC',
+    marginLeft: 15,
   },
   ...Platform.select({
       ios: {
