@@ -20,29 +20,29 @@ class Book extends Component {
         <StackedBarChart
           style={styles.stackedBarChart}
           horizontal={true}
-          data={[{black: 200, red: 300, green: 100, blue: 40}]}
+          data={[{black: 0, red: 0, green: 0, blue: 0}]}
         />
         <View style={styles.sourceFilterContainer}>
           <View style={styles.sourceButtonContainer}>
-            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.black}]}>37%</Text>
+            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.black}]}>0%</Text>
             <View style={[styles.roundButton, {borderColor: Colors.sources.black}]}>
               <Text style={[styles.roundButtonTitle, {color: Colors.sources.black}]}>{Localizable.t('narrator').toLocaleUpperCase()}</Text>
             </View>
           </View>
           <View style={styles.sourceButtonContainer}>
-            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.red}]}>37%</Text>
+            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.red}]}>0%</Text>
             <View style={[styles.roundButton, {borderColor: Colors.sources.red}]}>
               <Text style={[styles.roundButtonTitle, {color: Colors.sources.red}]}>{Localizable.t('god').toLocaleUpperCase()}</Text>
             </View>
           </View>
           <View style={styles.sourceButtonContainer}>
-            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.green}]}>37%</Text>
+            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.green}]}>0%</Text>
             <View style={[styles.roundButton, {borderColor: Colors.sources.green}]}>
               <Text style={[styles.roundButtonTitle, {color: Colors.sources.green}]}>{Localizable.t('lead').toLocaleUpperCase()}</Text>
             </View>
           </View>
           <View style={styles.sourceButtonContainer}>
-            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.blue}]}>37%</Text>
+            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.blue}]}>0%</Text>
             <View style={[styles.roundButton, {borderColor: Colors.sources.blue}]}>
               <Text style={[styles.roundButtonTitle, {color: Colors.sources.blue}]}>{Localizable.t('support').toLocaleUpperCase()}</Text>
             </View>

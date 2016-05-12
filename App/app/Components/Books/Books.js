@@ -85,16 +85,16 @@ class Books extends Component {
               <StackedBarChart
                 style={styles.stackedBarChart}
                 horizontal={true}
-                data={[{black: 200, red: 300, green: 100, blue: 40}]}
+                data={[{black: 0, red: 0, green: 0, blue: 0}]}
               />
             </View>
           </View>
           <View style={styles.horizontalContainer}>
             <View style={styles.leftContainer}>
-              <Text style={styles.cellSubTitle}>2hr</Text>
+              <Text style={styles.cellSubTitle}>0 min</Text>
             </View>
             <View style={styles.rightContainer}>
-              <Text style={styles.cellSubTitle}>68 sources</Text>
+              <Text style={styles.cellSubTitle}>0 sources</Text>
               </View>
           </View>
         </View>
