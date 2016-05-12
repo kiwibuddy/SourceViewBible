@@ -61,6 +61,19 @@ class Book extends Component {
               <Text style={styles.sectionHeaderTitle}>SOURCES</Text>
             </View>
             <View style={styles.sectionHeaderShadow}></View>
+            <View style={styles.cellContainer}>
+              <View style={styles.leftContainer}>
+                <Text style={styles.cellTitle}>Narrator</Text>
+              </View>
+              <View style={styles.rightContainer}>
+                <StackedBarChart
+                  style={styles.stackedBarChart}
+                  horizontal={true}
+                  data={[{black: 0, red: 0, green: 0, blue: 0}]}
+                />
+                <Text style={styles.cellSubTitle}>100 words</Text>
+              </View>
+            </View>
           </View>
         </ScrollView>
       </View>
