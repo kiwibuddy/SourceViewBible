@@ -61,14 +61,14 @@ class Book extends Component {
               <Text style={styles.sectionHeaderTitle}>SOURCES</Text>
             </View>
             <View style={styles.sectionHeaderShadow}></View>
-            <View style={styles.cellContainer}>
+            <View style={styles.sourcesCellContainer}>
               <View style={styles.sourcesLeftContainer}>
                 <View style={styles.sourceAvatar}></View>
                 <Text style={styles.cellTitle}>Narrator</Text>
               </View>
               <View style={styles.sourcesRightContainer}>
                 <StackedBarChart
-                  style={styles.stackedBarChart}
+                  style={styles.sourcesStackedBarChart}
                   horizontal={true}
                   data={[{black: 0, red: 0, green: 0, blue: 0}]}
                 />
@@ -84,17 +84,25 @@ class Book extends Component {
             </View>
             <View style={styles.sectionHeaderShadow}></View>
             <View style={styles.cellContainer}>
-              <View style={styles.sourcesLeftContainer}>
-                <View style={styles.sourceAvatar}></View>
-                <Text style={styles.cellTitle}>Narrator</Text>
+              <View style={styles.horizontalContainer}>
+                <View style={styles.leftContainer}>
+                  <Text style={styles.cellTitle}>Chapter 1</Text>
+                </View>
+                <View style={styles.rightContainer}>
+                  <StackedBarChart
+                    style={styles.stackedBarChart}
+                    horizontal={true}
+                    data={[{black: 0, red: 0, green: 0, blue: 0}]}
+                  />
+                </View>
               </View>
-              <View style={styles.sourcesRightContainer}>
-                <StackedBarChart
-                  style={styles.stackedBarChart}
-                  horizontal={true}
-                  data={[{black: 0, red: 0, green: 0, blue: 0}]}
-                />
-                <Text style={styles.cellSubTitle}>100 words</Text>
+              <View style={styles.horizontalContainer}>
+                <View style={styles.leftContainer}>
+                  <Text style={styles.cellSubTitle}>0 min</Text>
+                </View>
+                <View style={styles.rightContainer}>
+                  <Text style={styles.cellSubTitle}>{Localizable.t('sources.count', {count: 0})}</Text>
+                  </View>
               </View>
             </View>
             <View style={styles.separator}></View>
@@ -156,7 +164,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     marginRight: 10,
   },
-  cellContainer: {
+  sourcesCellContainer: {
     flex: 1,
     marginRight: 15,
     paddingVertical: 12,
@@ -176,10 +184,29 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     marginRight: 10,
   },
-  stackedBarChart: {
+  sourcesStackedBarChart: {
     height: 4,
     flex: 0,
     marginBottom: 7,
+  },
+  cellContainer: {
+    flex: 1,
+    marginRight: 15,
+    paddingVertical: 4,
+  },
+  horizontalContainer: {
+    flexDirection: 'row',
+  },
+  leftContainer: {
+    flex: 1,
+  },
+  rightContainer: {
+    flex: 2,
+  },
+  stackedBarChart: {
+    height: 4,
+    flex: 0,
+    marginTop: 7,
   },
   ...Platform.select({
       ios: {
