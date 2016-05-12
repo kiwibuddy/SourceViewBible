@@ -16,28 +16,28 @@ class Book extends Component {
   render() {
     return(
       <View style={styles.container}>
-      <StackedBarChart
-        style={styles.stackedBarChart}
-        horizontal={true}
-        data={[{black: 200, red: 300, green: 100, blue: 40}]}
-      />
+        <StackedBarChart
+          style={styles.stackedBarChart}
+          horizontal={true}
+          data={[{black: 200, red: 300, green: 100, blue: 40}]}
+        />
         <View style={styles.sourceFilterContainer}>
           <View style={styles.sourceButtonContainer}>
-          <Text style={[styles.sourceButtonTitle, {color: Colors.sources.black}]}>37%</Text>
+            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.black}]}>37%</Text>
             <View style={[styles.roundButton, {borderColor: Colors.sources.black}]}>
-            <Text style={[styles.roundButtonTitle, {color: Colors.sources.black}]}>NARRATOR</Text>
+              <Text style={[styles.roundButtonTitle, {color: Colors.sources.black}]}>NARRATOR</Text>
             </View>
           </View>
           <View style={styles.sourceButtonContainer}>
-          <Text style={[styles.sourceButtonTitle, {color: Colors.sources.red}]}>37%</Text>
+            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.red}]}>37%</Text>
             <View style={[styles.roundButton, {borderColor: Colors.sources.red}]}>
-            <Text style={[styles.roundButtonTitle, {color: Colors.sources.red}]}>GOD</Text>
+              <Text style={[styles.roundButtonTitle, {color: Colors.sources.red}]}>GOD</Text>
             </View>
           </View>
           <View style={styles.sourceButtonContainer}>
             <Text style={[styles.sourceButtonTitle, {color: Colors.sources.green}]}>37%</Text>
             <View style={[styles.roundButton, {borderColor: Colors.sources.green}]}>
-            <Text style={[styles.roundButtonTitle, {color: Colors.sources.green}]}>LEAD</Text>
+              <Text style={[styles.roundButtonTitle, {color: Colors.sources.green}]}>LEAD</Text>
             </View>
           </View>
           <View style={styles.sourceButtonContainer}>
@@ -50,8 +50,9 @@ class Book extends Component {
         <View style={styles.section}>
           <View style={styles.sectionHeaderContainer}>
             <Text style={styles.sectionHeaderTitle}>INTRODUCTION</Text>
-            </View>
-            <Text style={styles.sectionText}>Though Amos’s perspective is reflected in the (black) words of the Narrator we only hear his voice directly in eight (green) passages. Read through these passages and you discover some interesting...</Text></View>
+          </View>
+          <Text style={styles.sectionText}>Though Amos’s perspective is reflected in the (black) words of the Narrator we only hear his voice directly in eight (green) passages. Read through these passages and you discover some interesting...</Text>
+        </View>
       </View>
     );
   }
