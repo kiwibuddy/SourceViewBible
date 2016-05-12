@@ -6,8 +6,8 @@ module.exports = {
   
   sources: {
     black: '#333333',
-    red: '#FC3D39',
-    green: '#4CDA65',
-    blue: '#218AFF',
+    red: '#fc3d39',
+    green: '#4cda65',
+    blue: '#218aff',
   }
 };
