@@ -62,11 +62,33 @@ class Book extends Component {
             </View>
             <View style={styles.sectionHeaderShadow}></View>
             <View style={styles.cellContainer}>
-              <View style={styles.leftContainer}>
+              <View style={styles.sourcesLeftContainer}>
                 <View style={styles.sourceAvatar}></View>
                 <Text style={styles.cellTitle}>Narrator</Text>
               </View>
-              <View style={styles.rightContainer}>
+              <View style={styles.sourcesRightContainer}>
+                <StackedBarChart
+                  style={styles.stackedBarChart}
+                  horizontal={true}
+                  data={[{black: 0, red: 0, green: 0, blue: 0}]}
+                />
+                <Text style={styles.cellSubTitle}>100 words</Text>
+              </View>
+            </View>
+            <View style={styles.separator}></View>
+          </View>
+          <View style={styles.section}>
+            <View style={styles.sectionHeaderContainer}>
+              <Text style={styles.sectionHeaderTitle}>9 CHAPTERS</Text>
+              <Text style={styles.sectionHeaderTitle}>28min read</Text>
+            </View>
+            <View style={styles.sectionHeaderShadow}></View>
+            <View style={styles.cellContainer}>
+              <View style={styles.sourcesLeftContainer}>
+                <View style={styles.sourceAvatar}></View>
+                <Text style={styles.cellTitle}>Narrator</Text>
+              </View>
+              <View style={styles.sourcesRightContainer}>
                 <StackedBarChart
                   style={styles.stackedBarChart}
                   horizontal={true}
@@ -140,12 +162,12 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     flexDirection: 'row',
   },
-  leftContainer: {
+  sourcesLeftContainer: {
     flex: 1,
     flexDirection: 'row',
     paddingTop: 2,
   },
-  rightContainer: {
+  sourcesRightContainer: {
     flex: 1,
   },
   sourceAvatar: {

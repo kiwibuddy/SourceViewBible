@@ -11,6 +11,9 @@ function create(styles: any) {
       borderBottomColor: '#c8c7cc',
       paddingBottom: 6,
       backgroundColor: 'white',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      paddingRight: 15,
     },
     sectionHeaderTitle: {
       color: Colors.tintColor,
