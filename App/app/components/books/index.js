@@ -40,25 +40,6 @@ class Books extends Component {
         dataSource: dataSource.cloneWithRowsAndSections({old: oldTestamentBooks, new: newTestamentBooks}),
         selectedSegmentIndex: 0
       }
-
-      this.queryDatabase();
-  }
-
-  queryDatabase() {
-    if (Platform.OS === 'android') return;
-    
-    let query = `
-      SELECT ALL OBJECTS
-      WHERE
-      [Source GET source_color
-        [Token is_word=true]
-      ]
-      GO`;
-    this.props.database.query(query, {count: true, type: 'Book', 'feature': 'DJHRef'}).then((result) => {
-      console.log('Executed Query');
-    }).catch((error) => {
-      console.log('Error executing query' + error);
-    });
   }
 
   render() {
