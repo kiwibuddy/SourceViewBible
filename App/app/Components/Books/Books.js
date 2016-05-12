@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   separator: {
     height: StyleSheet.hairlineWidth,
     backgroundColor: '#CCCCCC',
-    marginLeft: 8,
+    marginLeft: 15,
   },
   stackedBarChart: {
     height: 4,
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: '#c8c7cc',
     paddingBottom: 6,
-    marginLeft: 8,
+    marginLeft: 15,
     backgroundColor: 'white',
   },
   sectionHeaderTitle: {
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
   },
   cellContainer: {
     flex: 1,
-    marginHorizontal: 8,
+    marginHorizontal: 15,
     paddingVertical: 4,
   },
   horizontalContainer: {
