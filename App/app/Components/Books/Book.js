@@ -141,12 +141,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   leftContainer: {
-    flex: 1.2,
+    flex: 1,
     flexDirection: 'row',
     paddingTop: 2,
   },
   rightContainer: {
-    flex: 1.8,
+    flex: 1,
   },
   sourceAvatar: {
     width: 20,
