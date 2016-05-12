@@ -55,6 +55,12 @@ class Book extends Component {
           <Text style={styles.sectionText}>Though Amos’s perspective is reflected in the (black) words of the Narrator we only hear his voice directly in eight (green) passages. Read through these passages and you discover some interesting...</Text>
           <Text style={styles.sectionMore}>more</Text>
         </View>
+        <View style={styles.section}>
+        <View style={styles.sectionHeaderContainer}>
+          <Text style={styles.sectionHeaderTitle}>SOURCES</Text>
+        </View>
+        <View style={styles.sectionHeaderShadow}></View>
+        </View>
       </View>
     );
   }
@@ -97,6 +103,10 @@ const styles = StyleSheet.create({
   },
   section: {
     marginLeft: 15,
+  },
+  sectionHeaderShadow: {
+    borderBottomWidth: 3,
+    borderBottomColor: '#f4f7f9',
   },
   sectionText: {
     marginVertical: 8,
