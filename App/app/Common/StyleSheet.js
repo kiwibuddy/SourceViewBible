@@ -13,7 +13,7 @@ function create(styles: any) {
       backgroundColor: 'white',
     },
     sectionHeaderTitle: {
-      color: '#cf1e00',
+      color: Colors.tintColor,
       marginTop: 8,
       fontSize: 13,
     },

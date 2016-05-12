@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
   sectionMore: {
-    color: Colors.sources.red,
+    color: Colors.tintColor,
     alignSelf: 'flex-end',
     marginRight: 10,
   },
