@@ -2,7 +2,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import ReactNative, { View, Text, TouchableOpacity, NavigationExperimental } from 'react-native';
+import ReactNative, { View, Text, ScrollView, TouchableOpacity, NavigationExperimental } from 'react-native';
 const { Header: NavigationHeader } = NavigationExperimental;
 import { connect } from 'react-redux';
 
@@ -48,6 +48,7 @@ class Book extends Component {
             </View>
           </TouchableOpacity>
         </View>
+        <ScrollView>
         <View style={styles.section}>
           <View style={styles.sectionHeaderContainer}>
             <Text style={styles.sectionHeaderTitle}>{Localizable.t('introduction').toLocaleUpperCase()}</Text>
@@ -61,6 +62,7 @@ class Book extends Component {
           </View>
           <View style={styles.sectionHeaderShadow}></View>
         </View>
+        </ScrollView>
       </View>
     );
   }
