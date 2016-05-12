@@ -56,10 +56,10 @@ class Book extends Component {
           <Text style={styles.sectionMore}>more</Text>
         </View>
         <View style={styles.section}>
-        <View style={styles.sectionHeaderContainer}>
-          <Text style={styles.sectionHeaderTitle}>SOURCES</Text>
-        </View>
-        <View style={styles.sectionHeaderShadow}></View>
+          <View style={styles.sectionHeaderContainer}>
+            <Text style={styles.sectionHeaderTitle}>SOURCES</Text>
+          </View>
+          <View style={styles.sectionHeaderShadow}></View>
         </View>
       </View>
     );
