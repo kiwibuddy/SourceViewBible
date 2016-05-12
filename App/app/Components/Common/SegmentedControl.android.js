@@ -83,7 +83,7 @@ export default class SegmentedControl extends Component {
 
   _onValueChange(index, title) {
     if (index === this.state.selectedIndex) return;
-    
+
     this.setState({selectedIndex: index});
     if (this.props.onValueChange) this.props.onValueChange(title);
   }
@@ -96,16 +96,16 @@ const styles = StyleSheet.create({
   },
   buttons: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center'
+    flexDirection: 'row'
   },
   button: {
     flex: 1,
-    alignItems: 'center'
+    justifyContent: 'center',
   },
   buttonTitle: {
     fontSize: 14,
-    fontFamily: 'sans-serif-medium'
+    fontFamily: 'sans-serif-medium',
+    alignSelf: 'center',
   },
   indicator: {
     position: 'absolute',
