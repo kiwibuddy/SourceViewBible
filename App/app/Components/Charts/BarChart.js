@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import StyleSheet from '../../common/stylesheet';
+import StyleSheet from '../../Common/StyleSheet';
 
 class BarChart extends Component {
   render() {

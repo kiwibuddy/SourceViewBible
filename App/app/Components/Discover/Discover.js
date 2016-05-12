@@ -5,10 +5,10 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
-import { navigatePush } from '../../actions';
+import { navigatePush } from '../../Actions';
 
-import StyleSheet from '../../common/stylesheet'
-import Localizable from '../../common/localizable';
+import StyleSheet from '../../Common/StyleSheet'
+import Localizable from '../../Common/Localizable';
 
 class Discover extends Component {
   render() {

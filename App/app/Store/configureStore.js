@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 
 import promise from './promise';
 import array from './array';
-import reducers from '../reducers';
+import reducers from '../Reducers';
 
 const createSourceViewBibleStore = applyMiddleware(thunk, promise, array)(createStore);
 

@@ -5,17 +5,17 @@ import React, { Component } from 'react';
 import ReactNative, { View, Text, ListView, TouchableOpacity, RecyclerViewBackedScrollView, NavigationExperimental, PropTypes } from 'react-native';
 const { Header: NavigationHeader } = NavigationExperimental;
 import { connect } from 'react-redux';
-import { navigatePush, navigateReset } from '../../actions';
+import { navigatePush, navigateReset } from '../../Actions';
 
-import Platform from '../../common/platform';
-import StyleSheet from '../../common/stylesheet';
-import Colors from '../../common/colors';
-import Localizable from '../../common/localizable';
+import Platform from '../../Common/Platform';
+import StyleSheet from '../../Common/StyleSheet';
+import Colors from '../../Common/Colors';
+import Localizable from '../../Common/Localizable';
 
-import SegmentedControl from '../common/segmented-control';
-import StackedBarChart from '../charts/stacked-bar-chart';
+import SegmentedControl from '../Common/SegmentedControl';
+import StackedBarChart from '../Charts/StackedBarChart';
 
-const Bible = require('../../assets/en/books');
+const Bible = require('../../Assets/en/books');
 const SEGMENTS = [Localizable.t('textual'), Localizable.t('alphabetical'), Localizable.t('principality')];
 
 class Books extends Component {

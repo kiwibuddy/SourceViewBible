@@ -12,15 +12,15 @@ import {
   PropTypes
 } from 'react-native';
 
-import StyleSheet from './common/stylesheet'
+import StyleSheet from './Common/StyleSheet'
 
 import BackAndroid from 'BackAndroid';
 
-import { navigatePush, navigatePop } from './actions';
+import { navigatePush, navigatePop } from './Actions';
 
-import Discover from './components/discover';
-import Books from './components/books';
-import Book from './components/books/book';
+import Discover from './Components/Discover/Discover';
+import Books from './Components/Books/Books';
+import Book from './Components/Books/Book';
 
 import Emdros from 'react-native-emdros';
 let DB = null;
@@ -32,7 +32,7 @@ const {
   RootContainer: NavigationRootContainer
 } = NavigationExperimental;
 
-const NavigationHeaderBackButton = require('./components/common/NavigationHeaderBackButton');
+const NavigationHeaderBackButton = require('./Components/Common/NavigationHeaderBackButton');
 
 import { connect } from 'react-redux';
 

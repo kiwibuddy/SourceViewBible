@@ -13,7 +13,7 @@ const {
   TouchableOpacity,
 } = ReactNative;
 
-import Colors from '../../common/colors';
+import Colors from '../../Common/Colors';
 
 type Props = {
   onNavigate: Function

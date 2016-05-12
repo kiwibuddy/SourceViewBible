@@ -4,7 +4,7 @@
 import React, { Component, PropTypes } from 'react';
 import ColorPropType from 'ColorPropType';
 import { Animated, TouchableOpacity, View, Text } from 'react-native';
-import StyleSheet from '../../common/stylesheet'
+import StyleSheet from '../../Common/StyleSheet'
 
 export default class SegmentedControl extends Component {
   static propTypes = {

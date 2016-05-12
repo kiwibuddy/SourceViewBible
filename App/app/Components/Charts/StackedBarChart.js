@@ -3,10 +3,10 @@
 
 import React, { Component, PropTypes } from 'react';
 import { View } from 'react-native';
-import { BarChart, Bar } from './bar-chart';
+import { BarChart, Bar } from './BarChart';
 
-import StyleSheet from '../../common/stylesheet';
-import Colors from '../../common/colors';
+import StyleSheet from '../../Common/StyleSheet';
+import Colors from '../../Common/Colors';
 
 export default class StackedBarChart extends Component {
   static defaultProps = {

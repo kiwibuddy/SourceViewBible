@@ -6,11 +6,11 @@ import ReactNative, { View, Text, NavigationExperimental } from 'react-native';
 const { Header: NavigationHeader } = NavigationExperimental;
 import { connect } from 'react-redux';
 
-import StyleSheet from '../../common/stylesheet';
-import Colors from '../../common/colors';
-import Platform from '../../common/platform';
+import StyleSheet from '../../Common/StyleSheet';
+import Colors from '../../Common/Colors';
+import Platform from '../../Common/Platform';
 
-import StackedBarChart from '../charts/stacked-bar-chart';
+import StackedBarChart from '../Charts/StackedBarChart';
 
 class Book extends Component {
   render() {

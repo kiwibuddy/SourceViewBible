@@ -4,7 +4,11 @@
 import { StyleSheet } from 'react-native';
 
 function create(styles: any) {
-  return StyleSheet.create(styles);
+  const defaultStyles = {
+    ...styles
+  };
+
+  return StyleSheet.create(defaultStyles);
 };
 
 module.exports = {

@@ -2,7 +2,7 @@
 
 import * as NavigationStateUtils from 'NavigationStateUtils'
 
-import Localizable from '../common/localizable';
+import Localizable from '../Common/Localizable';
 
 const initialState = {
   key: 'MainNavigation',
