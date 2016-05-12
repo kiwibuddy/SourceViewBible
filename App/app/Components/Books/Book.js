@@ -49,19 +49,19 @@ class Book extends Component {
           </TouchableOpacity>
         </View>
         <ScrollView>
-        <View style={styles.section}>
-          <View style={styles.sectionHeaderContainer}>
-            <Text style={styles.sectionHeaderTitle}>{Localizable.t('introduction').toLocaleUpperCase()}</Text>
+          <View style={styles.section}>
+            <View style={styles.sectionHeaderContainer}>
+              <Text style={styles.sectionHeaderTitle}>{Localizable.t('introduction').toLocaleUpperCase()}</Text>
+            </View>
+            <Text style={styles.sectionText}>Though Amos’s perspective is reflected in the (black) words of the Narrator we only hear his voice directly in eight (green) passages. Read through these passages and you discover some interesting...</Text>
+            <Text style={styles.sectionMore}>more</Text>
           </View>
-          <Text style={styles.sectionText}>Though Amos’s perspective is reflected in the (black) words of the Narrator we only hear his voice directly in eight (green) passages. Read through these passages and you discover some interesting...</Text>
-          <Text style={styles.sectionMore}>more</Text>
-        </View>
-        <View style={styles.section}>
-          <View style={styles.sectionHeaderContainer}>
-            <Text style={styles.sectionHeaderTitle}>SOURCES</Text>
+          <View style={styles.section}>
+            <View style={styles.sectionHeaderContainer}>
+              <Text style={styles.sectionHeaderTitle}>SOURCES</Text>
+            </View>
+            <View style={styles.sectionHeaderShadow}></View>
           </View>
-          <View style={styles.sectionHeaderShadow}></View>
-        </View>
         </ScrollView>
       </View>
     );
