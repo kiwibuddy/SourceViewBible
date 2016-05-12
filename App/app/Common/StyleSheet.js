@@ -5,7 +5,6 @@ import { StyleSheet } from 'react-native';
 
 function create(styles: any) {
   const defaultStyles = {
-    ...styles,
     sectionHeaderContainer: {
       borderBottomWidth: StyleSheet.hairlineWidth,
       borderBottomColor: '#c8c7cc',
@@ -17,6 +16,7 @@ function create(styles: any) {
       marginTop: 8,
       fontSize: 13,
     },
+    ...styles,
   };
 
   return StyleSheet.create(defaultStyles);

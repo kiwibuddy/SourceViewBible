@@ -119,10 +119,16 @@ const styles = StyleSheet.create({
     marginTop: 7,
   },
   sectionHeaderContainer: {
-    marginLeft: 80,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#c8c7cc',
+    paddingBottom: 6,
+    marginLeft: 8,
+    backgroundColor: 'white',
   },
   sectionHeaderTitle: {
     color: '#59626a',
+    marginTop: 8,
+    fontSize: 13,
   },
   cellContainer: {
     flex: 1,
