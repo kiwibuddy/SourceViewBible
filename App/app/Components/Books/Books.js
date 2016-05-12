@@ -94,7 +94,7 @@ class Books extends Component {
               <Text style={styles.cellSubTitle}>0 min</Text>
             </View>
             <View style={styles.rightContainer}>
-              <Text style={styles.cellSubTitle}>0 sources</Text>
+              <Text style={styles.cellSubTitle}>{Localizable.t('sources.count', {count: 0})}</Text>
               </View>
           </View>
         </View>

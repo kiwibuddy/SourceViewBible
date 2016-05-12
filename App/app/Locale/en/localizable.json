@@ -7,10 +7,17 @@
     'principality': 'Principality',
     'discover': 'Discover',
     'books': 'Books',
-    'narrator': 'Narrator',
-    'god': 'God',
-    'lead': 'Lead',
-    'support': 'Support',
+    'source-narrator': 'Narrator',
+    'source-god': 'God',
+    'source-lead': 'Lead',
+    'source-support': 'Support',
+    'sources': {
+      text: 'Sources',
+      count: {
+        one: '1 source',
+        other: '{{count}} sources'
+      }
+    },
     'introduction': 'Introduction'
   }
 }

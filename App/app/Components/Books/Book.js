@@ -26,25 +26,25 @@ class Book extends Component {
           <View style={styles.sourceButtonContainer}>
             <Text style={[styles.sourceButtonTitle, {color: Colors.sources.black}]}>0%</Text>
             <View style={[styles.roundButton, {borderColor: Colors.sources.black}]}>
-              <Text style={[styles.roundButtonTitle, {color: Colors.sources.black}]}>{Localizable.t('narrator').toLocaleUpperCase()}</Text>
+              <Text style={[styles.roundButtonTitle, {color: Colors.sources.black}]}>{Localizable.t('source-narrator').toLocaleUpperCase()}</Text>
             </View>
           </View>
           <View style={styles.sourceButtonContainer}>
             <Text style={[styles.sourceButtonTitle, {color: Colors.sources.red}]}>0%</Text>
             <View style={[styles.roundButton, {borderColor: Colors.sources.red}]}>
-              <Text style={[styles.roundButtonTitle, {color: Colors.sources.red}]}>{Localizable.t('god').toLocaleUpperCase()}</Text>
+              <Text style={[styles.roundButtonTitle, {color: Colors.sources.red}]}>{Localizable.t('source-god').toLocaleUpperCase()}</Text>
             </View>
           </View>
           <View style={styles.sourceButtonContainer}>
             <Text style={[styles.sourceButtonTitle, {color: Colors.sources.green}]}>0%</Text>
             <View style={[styles.roundButton, {borderColor: Colors.sources.green}]}>
-              <Text style={[styles.roundButtonTitle, {color: Colors.sources.green}]}>{Localizable.t('lead').toLocaleUpperCase()}</Text>
+              <Text style={[styles.roundButtonTitle, {color: Colors.sources.green}]}>{Localizable.t('source-lead').toLocaleUpperCase()}</Text>
             </View>
           </View>
           <View style={styles.sourceButtonContainer}>
             <Text style={[styles.sourceButtonTitle, {color: Colors.sources.blue}]}>0%</Text>
             <View style={[styles.roundButton, {borderColor: Colors.sources.blue}]}>
-              <Text style={[styles.roundButtonTitle, {color: Colors.sources.blue}]}>{Localizable.t('support').toLocaleUpperCase()}</Text>
+              <Text style={[styles.roundButtonTitle, {color: Colors.sources.blue}]}>{Localizable.t('source-support').toLocaleUpperCase()}</Text>
             </View>
           </View>
         </View>
