@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     marginLeft: 15,
   },
   sectionHeaderShadow: {
-    borderBottomWidth: 3,
+    borderBottomWidth: 2,
     borderBottomColor: '#f4f7f9',
   },
   sectionText: {
