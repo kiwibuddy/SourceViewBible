@@ -53,7 +53,9 @@ class Book extends Component {
             <View style={StyleSheet.styles.sectionHeaderContainer}>
               <Text style={StyleSheet.styles.sectionHeaderTitle}>{Localizable.t('introduction').toLocaleUpperCase()}</Text>
             </View>
-            <Text style={styles.sectionText}>Though Amos’s perspective is reflected in the (black) words of the Narrator we only hear his voice directly in eight (green) passages. Read through these passages and you discover some interesting...</Text>
+            <Text style={styles.sectionText} numberOfLines={4}>
+              Commodo id deserunt ea proident reprehenderit aliquip deserunt tempor sit aute excepteur esse veniam magna. Sit dolore laborum ex cillum ex fugiat sint. Minim labore exercitation exercitation exercitation sit eu labore Lorem. In aute amet do voluptate minim qui ex commodo magna amet dolore excepteur voluptate ullamco aliquip. Duis culpa pariatur ea laboris consectetur aliqua non sint aliquip. Anim ullamco sint ullamco est laborum occaecat ullamco sunt ipsum eu amet esse dolore laboris ea eiusmod amet. Do cillum elit consectetur dolore occaecat magna est nulla ex tempor laboris qui Lorem ad ex aliquip pariatur.
+            </Text>
             <Text style={styles.sectionMore}>more</Text>
           </View>
           <View style={styles.section}>
@@ -72,7 +74,7 @@ class Book extends Component {
                   horizontal={true}
                   data={[{black: 0, red: 0, green: 0, blue: 0}]}
                 />
-                <Text style={StyleSheet.styles.cell.subtitle}>100 words</Text>
+                <Text style={StyleSheet.styles.cell.subtitle}>0 words</Text>
               </View>
             </View>
             <View style={StyleSheet.styles.separator}></View>
@@ -80,7 +82,7 @@ class Book extends Component {
           <View style={styles.section}>
             <View style={StyleSheet.styles.sectionHeaderContainer}>
               <Text style={StyleSheet.styles.sectionHeaderTitle}>9 CHAPTERS</Text>
-              <Text style={StyleSheet.styles.sectionHeaderTitle}>28min read</Text>
+              <Text style={StyleSheet.styles.sectionHeaderTitle}>0 min read</Text>
             </View>
             <View style={styles.sectionHeaderShadow}></View>
             <View style={styles.cellContainer}>
