@@ -12,7 +12,7 @@ const styles = {
   sectionHeaderContainer: {
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: '#c8c7cc',
-    paddingBottom: 6,
+    paddingVertical: 6,
     backgroundColor: 'white',
     flexDirection: 'row',
     justifyContent: 'space-between',

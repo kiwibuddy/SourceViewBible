@@ -63,7 +63,7 @@ class Book extends Component {
               <Text style={StyleSheet.styles.sectionHeaderTitle}>SOURCES</Text>
             </View>
             <View style={styles.sectionHeaderShadow}></View>
-            <View style={styles.sourcesCellContainer}>
+            <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
               <View style={styles.sourcesLeftContainer}>
                 <View style={styles.sourceAvatar}></View>
                 <Text style={StyleSheet.styles.cell.title}>Narrator</Text>
@@ -85,7 +85,7 @@ class Book extends Component {
               <Text style={StyleSheet.styles.sectionHeaderTitle}>0 min read</Text>
             </View>
             <View style={styles.sectionHeaderShadow}></View>
-            <View style={styles.cellContainer}>
+            <View style={[styles.cellContainer, {paddingVertical: 8}]}>
               <View style={styles.horizontalContainer}>
                 <View style={styles.leftContainer}>
                   <Text style={StyleSheet.styles.cell.title}>Chapter 1</Text>
@@ -111,15 +111,50 @@ class Book extends Component {
           </View>
           <View style={styles.section}>
             <View style={StyleSheet.styles.sectionHeaderContainer}>
-              <Text style={StyleSheet.styles.sectionHeaderTitle}>7 SPHERES</Text>
+              <Text style={StyleSheet.styles.sectionHeaderTitle}>0 SPHERES</Text>
             </View>
             <View style={styles.sectionHeaderShadow}></View>
-            <View style={styles.cellContainer}>
+            <View style={[styles.cellContainer, {paddingVertical: 12}]}>
               <View style={styles.horizontalContainer}>
                 <View style={styles.leftContainer}>
                   <Text style={StyleSheet.styles.cell.title}>Chapter 1</Text>
                 </View>
-                <View style={styles.rightContainer}>
+                <View style={[styles.rightContainer, {flexDirection: 'row', alignItems: 'center'}]}>
+                  <StackedBarChart
+                    style={styles.BarChart}
+                    horizontal={false}
+                    data={[{black: 0, red: 0, green: 0, blue: 0}]}
+                  />
+                  <StackedBarChart
+                    style={styles.BarChart}
+                    horizontal={false}
+                    data={[{black: 0, red: 0, green: 0, blue: 0}]}
+                  />
+                  <StackedBarChart
+                    style={styles.BarChart}
+                    horizontal={false}
+                    data={[{black: 0, red: 0, green: 0, blue: 0}]}
+                  />
+                  <StackedBarChart
+                    style={styles.BarChart}
+                    horizontal={false}
+                    data={[{black: 0, red: 0, green: 0, blue: 0}]}
+                  />
+                  <StackedBarChart
+                    style={styles.BarChart}
+                    horizontal={false}
+                    data={[{black: 0, red: 0, green: 0, blue: 0}]}
+                  />
+                  <StackedBarChart
+                    style={styles.BarChart}
+                    horizontal={false}
+                    data={[{black: 0, red: 0, green: 0, blue: 0}]}
+                  />
+                  <StackedBarChart
+                    style={[styles.BarChart,{marginRight: 10}]}
+                    horizontal={false}
+                    data={[{black: 0, red: 0, green: 0, blue: 0}]}
+                  />
                   <Text style={StyleSheet.styles.cell.subtitle}>0 spheres</Text>
                 </View>
               </View>
@@ -145,7 +180,7 @@ const styles = StyleSheet.create({
   sourceFilterContainer: {
     flexDirection: 'row',
     marginHorizontal: 9,
-    marginVertical: 10,
+    marginVertical: 8,
   },
   sourceButtonContainer: {
     flex: 1,
@@ -186,7 +221,6 @@ const styles = StyleSheet.create({
   sourcesCellContainer: {
     flex: 1,
     marginRight: 15,
-    paddingVertical: 12,
     flexDirection: 'row',
   },
   sourcesLeftContainer: {
@@ -208,10 +242,16 @@ const styles = StyleSheet.create({
     flex: 0,
     marginBottom: 7,
   },
+  BarChart: {
+    width: 4,
+    height: 23,
+    flex: 0,
+    backgroundColor: '#ededed',
+    marginRight: 3,
+  },
   cellContainer: {
     flex: 1,
     marginRight: 15,
-    paddingVertical: 4,
   },
   horizontalContainer: {
     flexDirection: 'row',
