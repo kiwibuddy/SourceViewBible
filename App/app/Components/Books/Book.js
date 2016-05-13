@@ -120,7 +120,7 @@ class Book extends Component {
                   <Text style={StyleSheet.styles.cell.title}>Chapter 1</Text>
                 </View>
                 <View style={styles.rightContainer}>
-                  <Text style={StyleSheet.styles.cell.subtitle}>7 spheres</Text>
+                  <Text style={StyleSheet.styles.cell.subtitle}>0 spheres</Text>
                 </View>
               </View>
             </View>
