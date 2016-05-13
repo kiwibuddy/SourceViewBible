@@ -140,8 +140,7 @@ const styles = StyleSheet.create({
     flex: 1.8,
   },
   separator: {
-    height: StyleSheet.hairlineWidth,
-    backgroundColor: '#CCCCCC',
+    ...StyleSheet.styles.separator,
     marginLeft: 15,
   },
   ...Platform.select({
