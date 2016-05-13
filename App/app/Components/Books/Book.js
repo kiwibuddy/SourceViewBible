@@ -81,7 +81,7 @@ class Book extends Component {
           </View>
           <View style={styles.section}>
             <View style={StyleSheet.styles.sectionHeaderContainer}>
-              <Text style={StyleSheet.styles.sectionHeaderTitle}>9 CHAPTERS</Text>
+              <Text style={StyleSheet.styles.sectionHeaderTitle}>0 CHAPTERS</Text>
               <Text style={StyleSheet.styles.sectionHeaderTitle}>0 min read</Text>
             </View>
             <View style={styles.sectionHeaderShadow}></View>
