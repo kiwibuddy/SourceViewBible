@@ -79,7 +79,7 @@ class Books extends Component {
         <View style={styles.cellContainer}>
           <View style={styles.horizontalContainer}>
             <View style={styles.leftContainer}>
-              <Text style={StyleSheet.styles.cellTitle}>{book.name}</Text>
+              <Text style={StyleSheet.styles.cell.title}>{book.name}</Text>
             </View>
             <View style={styles.rightContainer}>
               <StackedBarChart
@@ -91,10 +91,10 @@ class Books extends Component {
           </View>
           <View style={styles.horizontalContainer}>
             <View style={styles.leftContainer}>
-              <Text style={StyleSheet.styles.cellSubTitle}>0 min</Text>
+              <Text style={StyleSheet.styles.cell.subtitle}>0 min</Text>
             </View>
             <View style={styles.rightContainer}>
-              <Text style={StyleSheet.styles.cellSubTitle}>{Localizable.t('sources.count', {count: 0})}</Text>
+              <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('sources.count', {count: 0})}</Text>
               </View>
           </View>
         </View>

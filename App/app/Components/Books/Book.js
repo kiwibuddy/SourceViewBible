@@ -64,7 +64,7 @@ class Book extends Component {
             <View style={styles.sourcesCellContainer}>
               <View style={styles.sourcesLeftContainer}>
                 <View style={styles.sourceAvatar}></View>
-                <Text style={StyleSheet.styles.cellTitle}>Narrator</Text>
+                <Text style={StyleSheet.styles.cell.title}>Narrator</Text>
               </View>
               <View style={styles.sourcesRightContainer}>
                 <StackedBarChart
@@ -72,7 +72,7 @@ class Book extends Component {
                   horizontal={true}
                   data={[{black: 0, red: 0, green: 0, blue: 0}]}
                 />
-                <Text style={StyleSheet.styles.cellSubTitle}>100 words</Text>
+                <Text style={StyleSheet.styles.cell.subtitle}>100 words</Text>
               </View>
             </View>
             <View style={StyleSheet.styles.separator}></View>
@@ -86,7 +86,7 @@ class Book extends Component {
             <View style={styles.cellContainer}>
               <View style={styles.horizontalContainer}>
                 <View style={styles.leftContainer}>
-                  <Text style={StyleSheet.styles.cellTitle}>Chapter 1</Text>
+                  <Text style={StyleSheet.styles.cell.title}>Chapter 1</Text>
                 </View>
                 <View style={styles.rightContainer}>
                   <StackedBarChart
@@ -98,10 +98,10 @@ class Book extends Component {
               </View>
               <View style={styles.horizontalContainer}>
                 <View style={styles.leftContainer}>
-                  <Text style={StyleSheet.styles.cellSubTitle}>0 min</Text>
+                  <Text style={StyleSheet.styles.cell.subtitle}>0 min</Text>
                 </View>
                 <View style={styles.rightContainer}>
-                  <Text style={StyleSheet.styles.cellSubTitle}>{Localizable.t('sources.count', {count: 0})}</Text>
+                  <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('sources.count', {count: 0})}</Text>
                   </View>
               </View>
             </View>
@@ -115,10 +115,10 @@ class Book extends Component {
             <View style={styles.cellContainer}>
               <View style={styles.horizontalContainer}>
                 <View style={styles.leftContainer}>
-                  <Text style={StyleSheet.styles.cellTitle}>Chapter 1</Text>
+                  <Text style={StyleSheet.styles.cell.title}>Chapter 1</Text>
                 </View>
                 <View style={styles.rightContainer}>
-                  <Text style={StyleSheet.styles.cellSubTitle}>7 spheres</Text>
+                  <Text style={StyleSheet.styles.cell.subtitle}>7 spheres</Text>
                 </View>
               </View>
             </View>

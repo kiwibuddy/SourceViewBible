@@ -23,13 +23,15 @@ const styles = {
     marginTop: 8,
     fontSize: 13,
   },
-  cellTitle: {
-    color: '#59626a',
-    fontSize: 17,
-  },
-  cellSubTitle: {
-    color: '#B7C0C8',
-    fontSize: 13,
+  cell: {
+    title: {
+      color: '#59626a',
+      fontSize: 17,
+    },
+    subtitle: {
+      color: '#B7C0C8',
+      fontSize: 13,
+    },
   },
   separator: {
     height: StyleSheet.hairlineWidth,
