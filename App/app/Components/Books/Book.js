@@ -50,21 +50,21 @@ class Book extends Component {
         </View>
         <ScrollView>
           <View style={styles.section}>
-            <View style={styles.sectionHeaderContainer}>
-              <Text style={styles.sectionHeaderTitle}>{Localizable.t('introduction').toLocaleUpperCase()}</Text>
+            <View style={StyleSheet.styles.sectionHeaderContainer}>
+              <Text style={StyleSheet.styles.sectionHeaderTitle}>{Localizable.t('introduction').toLocaleUpperCase()}</Text>
             </View>
             <Text style={styles.sectionText}>Though Amos’s perspective is reflected in the (black) words of the Narrator we only hear his voice directly in eight (green) passages. Read through these passages and you discover some interesting...</Text>
             <Text style={styles.sectionMore}>more</Text>
           </View>
           <View style={styles.section}>
-            <View style={styles.sectionHeaderContainer}>
-              <Text style={styles.sectionHeaderTitle}>SOURCES</Text>
+            <View style={StyleSheet.styles.sectionHeaderContainer}>
+              <Text style={StyleSheet.styles.sectionHeaderTitle}>SOURCES</Text>
             </View>
             <View style={styles.sectionHeaderShadow}></View>
             <View style={styles.sourcesCellContainer}>
               <View style={styles.sourcesLeftContainer}>
                 <View style={styles.sourceAvatar}></View>
-                <Text style={styles.cellTitle}>Narrator</Text>
+                <Text style={StyleSheet.styles.cellTitle}>Narrator</Text>
               </View>
               <View style={styles.sourcesRightContainer}>
                 <StackedBarChart
@@ -72,21 +72,21 @@ class Book extends Component {
                   horizontal={true}
                   data={[{black: 0, red: 0, green: 0, blue: 0}]}
                 />
-                <Text style={styles.cellSubTitle}>100 words</Text>
+                <Text style={StyleSheet.styles.cellSubTitle}>100 words</Text>
               </View>
             </View>
-            <View style={styles.separator}></View>
+            <View style={StyleSheet.styles.separator}></View>
           </View>
           <View style={styles.section}>
-            <View style={styles.sectionHeaderContainer}>
-              <Text style={styles.sectionHeaderTitle}>9 CHAPTERS</Text>
-              <Text style={styles.sectionHeaderTitle}>28min read</Text>
+            <View style={StyleSheet.styles.sectionHeaderContainer}>
+              <Text style={StyleSheet.styles.sectionHeaderTitle}>9 CHAPTERS</Text>
+              <Text style={StyleSheet.styles.sectionHeaderTitle}>28min read</Text>
             </View>
             <View style={styles.sectionHeaderShadow}></View>
             <View style={styles.cellContainer}>
               <View style={styles.horizontalContainer}>
                 <View style={styles.leftContainer}>
-                  <Text style={styles.cellTitle}>Chapter 1</Text>
+                  <Text style={StyleSheet.styles.cellTitle}>Chapter 1</Text>
                 </View>
                 <View style={styles.rightContainer}>
                   <StackedBarChart
@@ -98,31 +98,31 @@ class Book extends Component {
               </View>
               <View style={styles.horizontalContainer}>
                 <View style={styles.leftContainer}>
-                  <Text style={styles.cellSubTitle}>0 min</Text>
+                  <Text style={StyleSheet.styles.cellSubTitle}>0 min</Text>
                 </View>
                 <View style={styles.rightContainer}>
-                  <Text style={styles.cellSubTitle}>{Localizable.t('sources.count', {count: 0})}</Text>
+                  <Text style={StyleSheet.styles.cellSubTitle}>{Localizable.t('sources.count', {count: 0})}</Text>
                   </View>
               </View>
             </View>
-            <View style={styles.separator}></View>
+            <View style={StyleSheet.styles.separator}></View>
           </View>
           <View style={styles.section}>
-            <View style={styles.sectionHeaderContainer}>
-              <Text style={styles.sectionHeaderTitle}>7 SPHERES</Text>
+            <View style={StyleSheet.styles.sectionHeaderContainer}>
+              <Text style={StyleSheet.styles.sectionHeaderTitle}>7 SPHERES</Text>
             </View>
             <View style={styles.sectionHeaderShadow}></View>
             <View style={styles.cellContainer}>
               <View style={styles.horizontalContainer}>
                 <View style={styles.leftContainer}>
-                  <Text style={styles.cellTitle}>Chapter 1</Text>
+                  <Text style={StyleSheet.styles.cellTitle}>Chapter 1</Text>
                 </View>
                 <View style={styles.rightContainer}>
-                  <Text style={styles.cellSubTitle}>7 spheres</Text>
+                  <Text style={StyleSheet.styles.cellSubTitle}>7 spheres</Text>
                 </View>
               </View>
             </View>
-            <View style={styles.separator}></View>
+            <View style={StyleSheet.styles.separator}></View>
           </View>
         </ScrollView>
       </View>
