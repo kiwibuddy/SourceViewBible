@@ -121,9 +121,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   sectionHeaderTitle: {
+    ...StyleSheet.styles.sectionHeaderTitle,
     color: '#59626a',
-    marginTop: 8,
-    fontSize: 13,
   },
   cellContainer: {
     flex: 1,
