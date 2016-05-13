@@ -107,6 +107,23 @@ class Book extends Component {
             </View>
             <View style={styles.separator}></View>
           </View>
+          <View style={styles.section}>
+            <View style={styles.sectionHeaderContainer}>
+              <Text style={styles.sectionHeaderTitle}>7 SPHERES</Text>
+            </View>
+            <View style={styles.sectionHeaderShadow}></View>
+            <View style={styles.cellContainer}>
+              <View style={styles.horizontalContainer}>
+                <View style={styles.leftContainer}>
+                  <Text style={styles.cellTitle}>Chapter 1</Text>
+                </View>
+                <View style={styles.rightContainer}>
+                  <Text style={styles.cellSubTitle}>7 spheres</Text>
+                </View>
+              </View>
+            </View>
+            <View style={styles.separator}></View>
+          </View>
         </ScrollView>
       </View>
     );
