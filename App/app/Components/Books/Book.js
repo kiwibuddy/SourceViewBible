@@ -6,10 +6,7 @@ import ReactNative, { View, Text, ScrollView, TouchableOpacity, NavigationExperi
 const { Header: NavigationHeader } = NavigationExperimental;
 import { connect } from 'react-redux';
 
-import StyleSheet from '../../Common/StyleSheet';
-import Colors from '../../Common/Colors';
-import Platform from '../../Common/Platform';
-import Localizable from '../../Common/Localizable';
+import { Colors, StyleSheet, Localizable, Platform } from '../../Common';
 
 import StackedBarChart from '../Charts/StackedBarChart';
 

@@ -7,10 +7,7 @@ const { Header: NavigationHeader } = NavigationExperimental;
 import { connect } from 'react-redux';
 import { navigatePush, navigateReset } from '../../Actions';
 
-import Platform from '../../Common/Platform';
-import StyleSheet from '../../Common/StyleSheet';
-import Colors from '../../Common/Colors';
-import Localizable from '../../Common/Localizable';
+import { Colors, StyleSheet, Localizable, Platform } from '../../Common';
 
 import SegmentedControl from '../Common/SegmentedControl';
 import StackedBarChart from '../Charts/StackedBarChart';
