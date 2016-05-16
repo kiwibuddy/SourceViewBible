@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 
 import { Colors, StyleSheet, Localizable, Platform } from '../../Common';
 
-import StackedBarChart from '../Charts/StackedBarChart';
+import { StackedBarChart, SpheresBarChart } from '../Charts';
 
 class Book extends Component {
   render() {
@@ -117,10 +117,10 @@ class Book extends Component {
                   <Text style={StyleSheet.styles.cell.title}>Chapter 1</Text>
                 </View>
                 <View style={styles.rightContainer}>
-                  <StackedBarChart
+                  <SpheresBarChart
                     style={styles.stackedBarChart}
                     horizontal={true}
-                    data={[{black: 1, red: 1, green: 1, blue: 1}]}
+                    data={[{family: 1, economics: 1, government: 1, religion: 1, education: 1, communication: 1, celebration: 1}]}
                   />
                 </View>
               </View>
