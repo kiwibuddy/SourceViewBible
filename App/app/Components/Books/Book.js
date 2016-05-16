@@ -118,39 +118,17 @@ class Book extends Component {
                 </View>
                 <View style={[styles.rightContainer, {flexDirection: 'row', alignItems: 'center'}]}>
                   <StackedBarChart
-                    style={styles.BarChart}
+                    style={styles.barChart}
                     horizontal={false}
-                    data={[{black: 0, red: 0, green: 0, blue: 0}]}
-                  />
-                  <StackedBarChart
-                    style={styles.BarChart}
-                    horizontal={false}
-                    data={[{black: 0, red: 0, green: 0, blue: 0}]}
-                  />
-                  <StackedBarChart
-                    style={styles.BarChart}
-                    horizontal={false}
-                    data={[{black: 0, red: 0, green: 0, blue: 0}]}
-                  />
-                  <StackedBarChart
-                    style={styles.BarChart}
-                    horizontal={false}
-                    data={[{black: 0, red: 0, green: 0, blue: 0}]}
-                  />
-                  <StackedBarChart
-                    style={styles.BarChart}
-                    horizontal={false}
-                    data={[{black: 0, red: 0, green: 0, blue: 0}]}
-                  />
-                  <StackedBarChart
-                    style={styles.BarChart}
-                    horizontal={false}
-                    data={[{black: 0, red: 0, green: 0, blue: 0}]}
-                  />
-                  <StackedBarChart
-                    style={[styles.BarChart,{marginRight: 10}]}
-                    horizontal={false}
-                    data={[{black: 0, red: 0, green: 0, blue: 0}]}
+                    data={[
+                      {black: 0, red: 0, green: 0, blue: 0},
+                      {black: 0, red: 0, green: 0, blue: 0},
+                      {black: 0, red: 0, green: 0, blue: 0},
+                      {black: 0, red: 0, green: 0, blue: 0},
+                      {black: 0, red: 0, green: 0, blue: 0},
+                      {black: 0, red: 0, green: 0, blue: 0},
+                      {black: 0, red: 0, green: 0, blue: 0}
+                    ]}
                   />
                   <Text style={StyleSheet.styles.cell.subtitle}>0 spheres</Text>
                 </View>
@@ -239,7 +217,7 @@ const styles = StyleSheet.create({
     flex: 0,
     marginBottom: 7,
   },
-  BarChart: {
+  barChart: {
     width: 4,
     height: 23,
     flex: 0,
