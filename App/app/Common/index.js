@@ -5,7 +5,7 @@ import Colors from './Colors';
 import StyleSheet from './StyleSheet';
 import Localizable from './Localizable';
 
-// $FlowFixMe: suppressing this flow error
+// $FlowBug: Flow doesn't understand platform extensions
 import Platform from './Platform';
 
 module.exports = {
