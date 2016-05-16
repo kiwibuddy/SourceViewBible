@@ -119,7 +119,6 @@ class Book extends Component {
                 <View style={[styles.rightContainer, {flexDirection: 'row', alignItems: 'center'}]}>
                   <StackedBarChart
                     barStyle={styles.barChart}
-                    horizontal={false}
                     data={[
                       {name: '1', black: 1, red: 1, green: 1, blue: 1},
                       {name: '2', black: 1, red: 1, green: 1, blue: 1},
