@@ -61,7 +61,7 @@ class Book extends Component {
             <View style={styles.sectionHeaderShadow}></View>
             <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
               <View style={styles.sourcesLeftContainer}>
-                <Image source={require('../../Images/avatars/narrator.png')} style={styles.sourceAvatar} />
+                <Image source={require('../../Images/avatars/narrator.png')} style={[styles.sourceAvatar, {tintColor: Colors.sources.narrator}]} />
                 <Text style={StyleSheet.styles.cell.title}>Narrator</Text>
               </View>
               <View style={styles.sourcesRightContainer}>
