@@ -98,7 +98,6 @@ class SourceViewBibleApp extends Component {
 
   openDatabase() {
     Emdros.open({name: 'Datasets/en/NLT/SourceView.bpt'}).then((emdros) => {
-      console.log('Database opened!!!!' + emdros);
       DB = emdros;
     }).catch((error) => {
       console.log(error);

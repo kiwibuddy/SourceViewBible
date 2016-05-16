@@ -52,9 +52,6 @@
 
     dispatch_async(self.queue, ^{
         BOOL isConnected = _emdrosEnv->connectionOk() == true;
-
-        NSLog(@"Opened database mainThread: %i", [NSThread isMainThread]);
-
         if (completion) completion(isConnected, nil);
     });
 }
