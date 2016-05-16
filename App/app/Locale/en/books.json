@@ -20,7 +20,7 @@
   {'key': 'psalm', 'testament': 'old', 'name': 'Psalm'},
   {'key': 'proverbs', 'testament': 'old', 'name': 'Proverbs'},
   {'key': 'ecclesiastes', 'testament': 'old', 'name': 'Ecclesiastes'},
-  {'key': 'song-of-solomon', 'testament': 'old', 'name': 'Song of Solomon'},
+  {'key': 'song-of-songs', 'testament': 'old', 'name': 'Song of Songs'},
   {'key': 'isaiah', 'testament': 'old', 'name': 'Isaiah'},
   {'key': 'jeremiah', 'testament': 'old', 'name': 'Jeremiah'},
   {'key': 'lamentations', 'testament': 'old', 'name': 'Lamentations'},
