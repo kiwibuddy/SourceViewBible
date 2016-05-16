@@ -57,7 +57,7 @@ class Book extends Component {
           </View>
           <View style={styles.section}>
             <View style={StyleSheet.styles.sectionHeaderContainer}>
-              <Text style={StyleSheet.styles.sectionHeaderTitle}>SOURCES</Text>
+              <Text style={StyleSheet.styles.sectionHeaderTitle}>0 SOURCES</Text>
             </View>
             <View style={styles.sectionHeaderShadow}></View>
             <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
