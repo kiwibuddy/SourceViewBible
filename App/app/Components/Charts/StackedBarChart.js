@@ -12,7 +12,7 @@ const SOURCES = ['black', 'red', 'green', 'blue'];
 
 const StackedBarChart = (props: Object) => {
   const chartStyle = [styles.chart, props.style];
-  const stackedBarStyle = [styles.stackedBar, {flexDirection: props.horizontal ? 'row' : 'column'}];
+  const stackedBarStyle = [styles.stackedBar, {flexDirection: props.horizontal ? 'row' : 'column'}, props.barStyle];
   const sources = (props.horizontal ? SOURCES : SOURCES.slice().reverse());
 
   const bars = props.data.map((data) => {
@@ -38,6 +38,7 @@ const StackedBarChart = (props: Object) => {
 
 StackedBarChart.propTypes = {
   style: PropTypes.any,
+  barStyle: PropTypes.any,
   data: PropTypes.any.isRequired,
   horizontal: PropTypes.bool
 };
