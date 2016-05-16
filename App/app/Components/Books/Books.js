@@ -81,7 +81,6 @@ class Books extends Component {
             <View style={styles.rightContainer}>
               <SourcesBarChart
                 style={styles.stackedBarChart}
-                horizontal={true}
                 data={[{narrator: 1, god: 1, lead: 1, support: 1}]}
               />
             </View>

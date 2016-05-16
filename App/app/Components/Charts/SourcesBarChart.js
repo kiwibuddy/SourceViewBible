@@ -43,7 +43,7 @@ SourcesBarChart.propTypes = {
 };
 
 SourcesBarChart.defaultProps = {
-  horizontal: false
+  horizontal: true
 }
 
 const styles = StyleSheet.create({

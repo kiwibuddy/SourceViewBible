@@ -16,7 +16,6 @@ class Book extends Component {
       <View style={styles.container}>
         <SourcesBarChart
           style={styles.stackedBarChartHeader}
-          horizontal={true}
           data={[{narrator: 1, god: 1, lead: 1, support: 1}]}
         />
         <View style={styles.sourceFilterContainer}>
@@ -68,7 +67,6 @@ class Book extends Component {
               <View style={styles.sourcesRightContainer}>
                 <SourcesBarChart
                   style={styles.sourcesSourcesBarChart}
-                  horizontal={true}
                   data={[{narrator: 1, god: 1, lead: 1, support: 1}]}
                 />
                 <Text style={StyleSheet.styles.cell.subtitle}>0 words</Text>
@@ -90,7 +88,6 @@ class Book extends Component {
                 <View style={styles.rightContainer}>
                   <SourcesBarChart
                     style={styles.stackedBarChart}
-                    horizontal={true}
                     data={[{narrator: 1, god: 1, lead: 1, support: 1}]}
                   />
                 </View>
@@ -119,7 +116,6 @@ class Book extends Component {
                 <View style={styles.rightContainer}>
                   <SpheresBarChart
                     style={styles.stackedBarChart}
-                    horizontal={true}
                     data={[{family: 1, economics: 1, government: 1, religion: 1, education: 1, communication: 1, celebration: 1}]}
                   />
                 </View>

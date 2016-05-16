@@ -42,7 +42,7 @@ SpheresBarChart.propTypes = {
 };
 
 SpheresBarChart.defaultProps = {
-  horizontal: false
+  horizontal: true
 }
 
 const styles = StyleSheet.create({
