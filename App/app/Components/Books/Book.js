@@ -57,6 +57,9 @@ class Book extends Component {
           <View style={styles.section}>
             <View style={StyleSheet.styles.sectionHeaderContainer}>
               <Text style={StyleSheet.styles.sectionHeaderTitle}>0 SOURCES</Text>
+              <View style={styles.sectionHeaderDetail}>
+                <Image source={require('../../Images/common/disclosure-s.png')}  style={styles.disclosure} />
+              </View>
             </View>
             <View style={styles.sectionHeaderShadow}></View>
             <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
@@ -79,7 +82,7 @@ class Book extends Component {
               <Text style={StyleSheet.styles.sectionHeaderTitle}>0 CHAPTERS</Text>
               <View style={styles.sectionHeaderDetail}>
                 <Text style={StyleSheet.styles.sectionHeaderTitle}>0 min read</Text>
-                <Image source={require('../../Images/common/disclosure.png')}  style={styles.disclosure} />
+                <Image source={require('../../Images/common/disclosure-s.png')}  style={styles.disclosure} />
               </View>
             </View>
             <View style={styles.sectionHeaderShadow}></View>
@@ -108,7 +111,10 @@ class Book extends Component {
           </View>
           <View style={styles.section}>
             <View style={StyleSheet.styles.sectionHeaderContainer}>
-            <Text style={StyleSheet.styles.sectionHeaderTitle}>0 SPHERES</Text>
+              <Text style={StyleSheet.styles.sectionHeaderTitle}>0 SPHERES</Text>
+              <View style={styles.sectionHeaderDetail}>
+                <Image source={require('../../Images/common/disclosure-s.png')}  style={styles.disclosure} />
+              </View>
             </View>
             <View style={styles.sectionHeaderShadow}></View>
             <View style={[styles.cellContainer, {paddingVertical: 8}]}>
