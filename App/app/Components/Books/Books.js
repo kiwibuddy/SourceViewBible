@@ -9,7 +9,9 @@ import { navigatePush, navigateReset } from '../../Actions';
 
 import { Colors, StyleSheet, Localizable, Platform } from '../../Common';
 
+// $FlowFixMe: suppressing this flow error
 import SegmentedControl from '../Common/SegmentedControl';
+
 import SourcesBarChart from '../Charts/SourcesBarChart';
 
 const Bible = require('../../Locale/en/books');
