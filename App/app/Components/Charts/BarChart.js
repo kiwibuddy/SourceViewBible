@@ -1,26 +1,26 @@
 /* @flow */
 'use strict';
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { View } from 'react-native';
 import StyleSheet from '../../Common/StyleSheet';
 
-class BarChart extends Component {
-  render() {
-    return (
-      <View style={[styles.container, this.props.style]}>
-      {this.props.children}
-      </View>
-    );
-  }
+const BarChart = (props: Object) => (
+  <View style={[styles.container, props.style]}>
+    {props.children}
+  </View>
+)
+
+BarChart.propTypes = {
+  props: PropTypes.object
 }
 
-class Bar extends Component {
-  render() {
-    return (
-      <View style={[styles.bar, this.props.style]}></View>
-    );
-  }
+const Bar = (props: Object) => (
+  <View style={[styles.bar, props.style]}></View>
+)
+
+Bar.propTypes = {
+  props: PropTypes.object
 }
 
 const styles = StyleSheet.create({
