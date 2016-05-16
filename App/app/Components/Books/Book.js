@@ -2,7 +2,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import ReactNative, { View, Text, ScrollView, TouchableOpacity, NavigationExperimental } from 'react-native';
+import ReactNative, { View, Text, ScrollView, TouchableOpacity, NavigationExperimental, Image } from 'react-native';
 const { Header: NavigationHeader } = NavigationExperimental;
 import { connect } from 'react-redux';
 
@@ -62,8 +62,7 @@ class Book extends Component {
             <View style={styles.sectionHeaderShadow}></View>
             <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
               <View style={styles.sourcesLeftContainer}>
-                <View style={styles.sourceAvatar}>
-                </View>
+                <View style={styles.sourceAvatar}><Image source={require('../../Images/avatars/narrator.png')} style={{width: 20, height: 20}} /></View>
                 <Text style={StyleSheet.styles.cell.title}>Narrator</Text>
               </View>
               <View style={styles.sourcesRightContainer}>
@@ -208,7 +207,6 @@ const styles = StyleSheet.create({
   sourceAvatar: {
     width: 20,
     height: 20,
-    backgroundColor: 'red',
     marginRight: 10,
   },
   sourcesStackedBarChart: {
