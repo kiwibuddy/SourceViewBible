@@ -62,7 +62,8 @@ class Book extends Component {
             <View style={styles.sectionHeaderShadow}></View>
             <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
               <View style={styles.sourcesLeftContainer}>
-                <View style={styles.sourceAvatar}></View>
+                <View style={styles.sourceAvatar}>
+                </View>
                 <Text style={StyleSheet.styles.cell.title}>Narrator</Text>
               </View>
               <View style={styles.sourcesRightContainer}>
@@ -108,29 +109,28 @@ class Book extends Component {
           </View>
           <View style={styles.section}>
             <View style={StyleSheet.styles.sectionHeaderContainer}>
-              <Text style={StyleSheet.styles.sectionHeaderTitle}>0 SPHERES</Text>
+            <Text style={StyleSheet.styles.sectionHeaderTitle}>0 SPHERES</Text>
             </View>
             <View style={styles.sectionHeaderShadow}></View>
-            <View style={[styles.cellContainer, {paddingVertical: 12}]}>
+            <View style={[styles.cellContainer, {paddingVertical: 8}]}>
               <View style={styles.horizontalContainer}>
                 <View style={styles.leftContainer}>
                   <Text style={StyleSheet.styles.cell.title}>Chapter 1</Text>
                 </View>
-                <View style={[styles.rightContainer, {flexDirection: 'row', alignItems: 'center'}]}>
+                <View style={styles.rightContainer}>
                   <StackedBarChart
-                    barStyle={styles.barChart}
-                    data={[
-                      {name: '1', black: 1, red: 1, green: 1, blue: 1},
-                      {name: '2', black: 1, red: 1, green: 1, blue: 1},
-                      {name: '3', black: 1, red: 1, green: 1, blue: 1},
-                      {name: '4', black: 1, red: 1, green: 1, blue: 1},
-                      {name: '5', black: 1, red: 1, green: 1, blue: 1},
-                      {name: '6', black: 1, red: 1, green: 1, blue: 1},
-                      {name: '7', black: 1, red: 1, green: 1, blue: 1}
-                    ]}
+                    style={styles.stackedBarChart}
+                    horizontal={true}
+                    data={[{black: 1, red: 1, green: 1, blue: 1}]}
                   />
-                  <Text style={StyleSheet.styles.cell.subtitle}>0 spheres</Text>
                 </View>
+              </View>
+              <View style={styles.horizontalContainer}>
+                <View style={styles.leftContainer}>
+                </View>
+                <View style={styles.rightContainer}>
+                  <Text style={StyleSheet.styles.cell.subtitle}>0 spheres</Text>
+                  </View>
               </View>
             </View>
             <View style={StyleSheet.styles.separator}></View>
