@@ -10,7 +10,7 @@ import Colors from '../../Common/Colors';
 
 const SOURCES = ['black', 'red', 'green', 'blue'];
 
-const StackedBarChart = (props: Object) => {
+const SourcesBarChart = (props: Object) => {
   const chartStyle = [styles.chart, props.style];
   const stackedBarStyle = [styles.stackedBar, {flexDirection: props.horizontal ? 'row' : 'column'}, props.barStyle];
   const sources = (props.horizontal ? SOURCES : SOURCES.slice().reverse());
@@ -36,14 +36,14 @@ const StackedBarChart = (props: Object) => {
   );
 }
 
-StackedBarChart.propTypes = {
+SourcesBarChart.propTypes = {
   style: PropTypes.any,
   barStyle: PropTypes.any,
   data: PropTypes.any.isRequired,
   horizontal: PropTypes.bool
 };
 
-StackedBarChart.defaultProps = {
+SourcesBarChart.defaultProps = {
   horizontal: false
 }
 
@@ -57,4 +57,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default StackedBarChart;
+export default SourcesBarChart;

@@ -8,13 +8,13 @@ import { connect } from 'react-redux';
 
 import { Colors, StyleSheet, Localizable, Platform } from '../../Common';
 
-import { StackedBarChart, SpheresBarChart } from '../Charts';
+import { SourcesBarChart, SpheresBarChart } from '../Charts';
 
 class Book extends Component {
   render() {
     return(
       <View style={styles.container}>
-        <StackedBarChart
+        <SourcesBarChart
           style={styles.stackedBarChartHeader}
           horizontal={true}
           data={[{black: 1, red: 1, green: 1, blue: 1}]}
@@ -66,8 +66,8 @@ class Book extends Component {
                 <Text style={StyleSheet.styles.cell.title}>Narrator</Text>
               </View>
               <View style={styles.sourcesRightContainer}>
-                <StackedBarChart
-                  style={styles.sourcesStackedBarChart}
+                <SourcesBarChart
+                  style={styles.sourcesSourcesBarChart}
                   horizontal={true}
                   data={[{black: 1, red: 1, green: 1, blue: 1}]}
                 />
@@ -88,7 +88,7 @@ class Book extends Component {
                   <Text style={StyleSheet.styles.cell.title}>Chapter 1</Text>
                 </View>
                 <View style={styles.rightContainer}>
-                  <StackedBarChart
+                  <SourcesBarChart
                     style={styles.stackedBarChart}
                     horizontal={true}
                     data={[{black: 1, red: 1, green: 1, blue: 1}]}
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
     height: 20,
     marginRight: 10,
   },
-  sourcesStackedBarChart: {
+  sourcesSourcesBarChart: {
     height: 4,
     flex: 0,
     marginBottom: 7,

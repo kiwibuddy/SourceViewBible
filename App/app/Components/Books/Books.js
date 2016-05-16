@@ -10,7 +10,7 @@ import { navigatePush, navigateReset } from '../../Actions';
 import { Colors, StyleSheet, Localizable, Platform } from '../../Common';
 
 import SegmentedControl from '../Common/SegmentedControl';
-import StackedBarChart from '../Charts/StackedBarChart';
+import SourcesBarChart from '../Charts/SourcesBarChart';
 
 const Bible = require('../../Locale/en/books');
 const SEGMENTS = [Localizable.t('textual'), Localizable.t('alphabetical'), Localizable.t('principality')];
@@ -79,7 +79,7 @@ class Books extends Component {
               <Text style={StyleSheet.styles.cell.title}>{book.name}</Text>
             </View>
             <View style={styles.rightContainer}>
-              <StackedBarChart
+              <SourcesBarChart
                 style={styles.stackedBarChart}
                 horizontal={true}
                 data={[{black: 1, red: 1, green: 1, blue: 1}]}

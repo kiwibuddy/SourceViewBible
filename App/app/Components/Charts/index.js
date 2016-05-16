@@ -1,10 +1,10 @@
 /* @flow */
 'use strict';
 
-import StackedBarChart from './StackedBarChart';
+import SourcesBarChart from './SourcesBarChart';
 import SpheresBarChart from './SpheresBarChart';
 
 module.exports = {
-  StackedBarChart,
+  SourcesBarChart,
   SpheresBarChart,
 };
