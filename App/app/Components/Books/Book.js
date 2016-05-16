@@ -121,13 +121,13 @@ class Book extends Component {
                     style={styles.barChart}
                     horizontal={false}
                     data={[
-                      {black: 0, red: 0, green: 0, blue: 0},
-                      {black: 0, red: 0, green: 0, blue: 0},
-                      {black: 0, red: 0, green: 0, blue: 0},
-                      {black: 0, red: 0, green: 0, blue: 0},
-                      {black: 0, red: 0, green: 0, blue: 0},
-                      {black: 0, red: 0, green: 0, blue: 0},
-                      {black: 0, red: 0, green: 0, blue: 0}
+                      {name: '1', black: 0, red: 0, green: 0, blue: 0},
+                      {name: '2', black: 0, red: 0, green: 0, blue: 0},
+                      {name: '3', black: 0, red: 0, green: 0, blue: 0},
+                      {name: '4', black: 0, red: 0, green: 0, blue: 0},
+                      {name: '5', black: 0, red: 0, green: 0, blue: 0},
+                      {name: '6', black: 0, red: 0, green: 0, blue: 0},
+                      {name: '7', black: 0, red: 0, green: 0, blue: 0}
                     ]}
                   />
                   <Text style={StyleSheet.styles.cell.subtitle}>0 spheres</Text>
