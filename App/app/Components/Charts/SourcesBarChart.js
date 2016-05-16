@@ -3,7 +3,6 @@
 
 import React, { Component, PropTypes } from 'react';
 import { View } from 'react-native';
-import { BarChart, Bar } from './BarChart';
 
 import StyleSheet from '../../Common/StyleSheet';
 import Colors from '../../Common/Colors';
@@ -18,7 +17,7 @@ const SourcesBarChart = (props: Object) => {
   const bars = props.data.map((data) => {
     const bar = sources.map((source) => {
       return (
-        <Bar key={'source-' + source} style={{backgroundColor: Colors.sources[source], flex: data[source]}} />
+        <View key={'source-' + source} style={{backgroundColor: Colors.sources[source], flex: data[source]}} />
       );
     });
 
@@ -30,9 +29,9 @@ const SourcesBarChart = (props: Object) => {
   });
 
   return (
-    <BarChart style={chartStyle}>
+    <View style={chartStyle}>
       {bars}
-    </BarChart>
+    </View>
   );
 }
 
