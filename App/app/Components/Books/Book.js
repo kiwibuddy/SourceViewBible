@@ -58,7 +58,7 @@ class Book extends Component {
             <View style={StyleSheet.styles.sectionHeaderContainer}>
               <Text style={StyleSheet.styles.sectionHeaderTitle}>0 SOURCES</Text>
               <View style={styles.sectionHeaderDetail}>
-                <Image source={require('../../Images/common/disclosure-s.png')}  style={styles.disclosure} />
+                <Image source={require('../../Images/common/disclosure.png')}  style={[styles.disclosure, styles.disclosureDown]} />
               </View>
             </View>
             <View style={styles.sectionHeaderShadow}></View>
@@ -82,7 +82,7 @@ class Book extends Component {
               <Text style={StyleSheet.styles.sectionHeaderTitle}>0 CHAPTERS</Text>
               <View style={styles.sectionHeaderDetail}>
                 <Text style={StyleSheet.styles.sectionHeaderTitle}>0 min read</Text>
-                <Image source={require('../../Images/common/disclosure-s.png')}  style={styles.disclosure} />
+                <Image source={require('../../Images/common/disclosure.png')}  style={[styles.disclosure, styles.disclosureDown]} />
               </View>
             </View>
             <View style={styles.sectionHeaderShadow}></View>
@@ -113,7 +113,7 @@ class Book extends Component {
             <View style={StyleSheet.styles.sectionHeaderContainer}>
               <Text style={StyleSheet.styles.sectionHeaderTitle}>0 SPHERES</Text>
               <View style={styles.sectionHeaderDetail}>
-                <Image source={require('../../Images/common/disclosure-s.png')}  style={styles.disclosure} />
+                <Image source={require('../../Images/common/disclosure.png')}  style={[styles.disclosure, styles.disclosureDown]} />
               </View>
             </View>
             <View style={styles.sectionHeaderShadow}></View>
@@ -250,6 +250,9 @@ const styles = StyleSheet.create({
     marginTop: 8,
     marginLeft: 5,
     marginRight: -5,
+  },
+  disclosureDown: {
+    transform: [{rotate: '90deg'}],
   },
   sectionHeaderDetail: {
     flexDirection: 'row',
