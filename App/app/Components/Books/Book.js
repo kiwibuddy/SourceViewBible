@@ -62,7 +62,7 @@ class Book extends Component {
             <View style={styles.sectionHeaderShadow}></View>
             <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
               <View style={styles.sourcesLeftContainer}>
-                <View style={styles.sourceAvatar}><Image source={require('../../Images/avatars/narrator.png')} style={{width: 20, height: 20}} /></View>
+                <Image source={require('../../Images/avatars/narrator.png')} style={styles.sourceAvatar} />
                 <Text style={StyleSheet.styles.cell.title}>Narrator</Text>
               </View>
               <View style={styles.sourcesRightContainer}>
@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
   sourceAvatar: {
     width: 20,
     height: 20,
-    marginRight: 10,
+    marginRight: 10
   },
   sourcesSourcesBarChart: {
     height: 4,
