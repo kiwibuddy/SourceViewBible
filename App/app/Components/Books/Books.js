@@ -82,7 +82,7 @@ class Books extends Component {
               <StackedBarChart
                 style={styles.stackedBarChart}
                 horizontal={true}
-                data={[{black: 0, red: 0, green: 0, blue: 0}]}
+                data={[{black: 1, red: 1, green: 1, blue: 1}]}
               />
             </View>
           </View>

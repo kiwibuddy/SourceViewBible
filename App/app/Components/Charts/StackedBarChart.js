@@ -17,10 +17,8 @@ const StackedBarChart = (props: Object) => {
 
   const bars = props.data.map((data) => {
     const bar = sources.map((source) => {
-      const color = Colors.sources[source];
-
       return (
-        <Bar key={'source-' + source} style={{backgroundColor: color}} />
+        <Bar key={'source-' + source} style={{backgroundColor: Colors.sources[source], flex: data[source]}} />
       );
     });
 

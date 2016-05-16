@@ -17,7 +17,7 @@ class Book extends Component {
         <StackedBarChart
           style={styles.stackedBarChartHeader}
           horizontal={true}
-          data={[{black: 0, red: 0, green: 0, blue: 0}]}
+          data={[{black: 1, red: 1, green: 1, blue: 1}]}
         />
         <View style={styles.sourceFilterContainer}>
           <TouchableOpacity style={styles.sourceButtonContainer}>
@@ -69,7 +69,7 @@ class Book extends Component {
                 <StackedBarChart
                   style={styles.sourcesStackedBarChart}
                   horizontal={true}
-                  data={[{black: 0, red: 0, green: 0, blue: 0}]}
+                  data={[{black: 1, red: 1, green: 1, blue: 1}]}
                 />
                 <Text style={StyleSheet.styles.cell.subtitle}>0 words</Text>
               </View>
@@ -91,7 +91,7 @@ class Book extends Component {
                   <StackedBarChart
                     style={styles.stackedBarChart}
                     horizontal={true}
-                    data={[{black: 0, red: 0, green: 0, blue: 0}]}
+                    data={[{black: 1, red: 1, green: 1, blue: 1}]}
                   />
                 </View>
               </View>
@@ -121,13 +121,13 @@ class Book extends Component {
                     style={styles.barChart}
                     horizontal={false}
                     data={[
-                      {name: '1', black: 0, red: 0, green: 0, blue: 0},
-                      {name: '2', black: 0, red: 0, green: 0, blue: 0},
-                      {name: '3', black: 0, red: 0, green: 0, blue: 0},
-                      {name: '4', black: 0, red: 0, green: 0, blue: 0},
-                      {name: '5', black: 0, red: 0, green: 0, blue: 0},
-                      {name: '6', black: 0, red: 0, green: 0, blue: 0},
-                      {name: '7', black: 0, red: 0, green: 0, blue: 0}
+                      {name: '1', black: 1, red: 1, green: 1, blue: 1},
+                      {name: '2', black: 1, red: 1, green: 1, blue: 1},
+                      {name: '3', black: 1, red: 1, green: 1, blue: 1},
+                      {name: '4', black: 1, red: 1, green: 1, blue: 1},
+                      {name: '5', black: 1, red: 1, green: 1, blue: 1},
+                      {name: '6', black: 1, red: 1, green: 1, blue: 1},
+                      {name: '7', black: 1, red: 1, green: 1, blue: 1}
                     ]}
                   />
                   <Text style={StyleSheet.styles.cell.subtitle}>0 spheres</Text>
