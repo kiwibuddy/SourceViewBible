@@ -9,26 +9,29 @@ import StyleSheet from '../../Common/StyleSheet';
 import Colors from '../../Common/Colors';
 
 const StackedBarChart = (props: Object) => {
-  const style = [styles.container, {flexDirection: props.horizontal ? 'row' : 'column'}, props.style];
+  const chartStyle = [styles.chart, props.style];
+  const stackedBarStyle = [styles.stackedBar, {flexDirection: props.horizontal ? 'row' : 'column'}];
 
   return (
-    <BarChart style={style}>
-      <Bar
-        style={{backgroundColor: Colors.sources.black}}
-        dataKey={'black'}
-      />
-      <Bar
-        style={{backgroundColor: Colors.sources.red}}
-        dataKey={'red'}
-      />
-      <Bar
-        style={{backgroundColor: Colors.sources.green}}
-        dataKey={'green'}
-      />
-      <Bar
-        style={{backgroundColor: Colors.sources.blue}}
-        dataKey={'blue'}
-      />
+    <BarChart style={chartStyle}>
+      <View style={stackedBarStyle}>
+        <Bar
+          style={{backgroundColor: Colors.sources.black}}
+          dataKey={'black'}
+        />
+        <Bar
+          style={{backgroundColor: Colors.sources.red}}
+          dataKey={'red'}
+        />
+        <Bar
+          style={{backgroundColor: Colors.sources.green}}
+          dataKey={'green'}
+        />
+        <Bar
+          style={{backgroundColor: Colors.sources.blue}}
+          dataKey={'blue'}
+        />
+      </View>
     </BarChart>
   );
 }
@@ -44,7 +47,10 @@ StackedBarChart.defaultProps = {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  chart: {
+    flex: 1
+  },
+  stackedBar: {
     flex: 1
   }
 });
