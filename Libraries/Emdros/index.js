@@ -11,7 +11,6 @@ export default class Emdros {
   }
 
   static open(options) {
-    console.log(options);
     let name = options.name;
 
     var promise = new Promise((resolve, reject) => {
