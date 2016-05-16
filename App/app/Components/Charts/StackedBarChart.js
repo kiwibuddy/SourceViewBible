@@ -20,10 +20,7 @@ const StackedBarChart = (props: Object) => {
       const color = Colors.sources[source];
 
       return (
-        <Bar
-          key={'source-' + source}
-          style={{backgroundColor: color}}
-        />
+        <Bar key={'source-' + source} style={{backgroundColor: color}} />
       );
     });
 
