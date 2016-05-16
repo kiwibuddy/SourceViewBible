@@ -78,6 +78,7 @@ class Book extends Component {
             <View style={StyleSheet.styles.sectionHeaderContainer}>
               <Text style={StyleSheet.styles.sectionHeaderTitle}>0 CHAPTERS</Text>
               <Text style={StyleSheet.styles.sectionHeaderTitle}>0 min read</Text>
+              <Image source={require('../../Images/common/disclosre.png')} />
             </View>
             <View style={styles.sectionHeaderShadow}></View>
             <View style={[styles.cellContainer, {paddingVertical: 8}]}>
