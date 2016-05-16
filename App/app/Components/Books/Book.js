@@ -66,7 +66,7 @@ class Book extends Component {
               </View>
               <View style={styles.sourcesRightContainer}>
                 <SourcesBarChart
-                  style={styles.sourcesSourcesBarChart}
+                  style={styles.sourcesBarChart}
                   data={[{narrator: 1, god: 1, lead: 1, support: 1}]}
                 />
                 <Text style={StyleSheet.styles.cell.subtitle}>0 words</Text>
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     height: 20,
     marginRight: 10
   },
-  sourcesSourcesBarChart: {
+  sourcesBarChart: {
     height: 4,
     flex: 0,
     marginBottom: 7,
