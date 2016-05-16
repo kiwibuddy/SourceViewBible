@@ -24,7 +24,6 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		AB1CF3521CEA744B00547708 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB1CF3501CEA744B00547708 /* LaunchScreen.storyboard */; };
 		AB5489481CE2747B00F96FF0 /* libRCTEmdros.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB5489451CE273DC00F96FF0 /* libRCTEmdros.a */; };
-		AB5489811CE2760000F96FF0 /* Datasets in Resources */ = {isa = PBXBuildFile; fileRef = AB5489801CE2760000F96FF0 /* Datasets */; };
 		ABA1BCEB1CE127A300BEA3A1 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA1BCEA1CE127A300BEA3A1 /* libz.tbd */; };
 		ABA1BCED1CE127AE00BEA3A1 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA1BCEC1CE127AE00BEA3A1 /* libstdc++.tbd */; };
 		ABA1BCEF1CE127B700BEA3A1 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA1BCEE1CE127B700BEA3A1 /* libsqlite3.tbd */; };
@@ -614,7 +613,6 @@
 			files = (
 				AB1CF3521CEA744B00547708 /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				AB5489811CE2760000F96FF0 /* Datasets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -53,7 +53,7 @@ class SourceViewBibleApp extends Component {
     super(props);
     this._handlers = [];
 
-    this.openDatabase();
+    // this.openDatabase();
   }
 
   componentDidMount() {
