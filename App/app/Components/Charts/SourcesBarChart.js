@@ -7,7 +7,7 @@ import { View } from 'react-native';
 import StyleSheet from '../../Common/StyleSheet';
 import Colors from '../../Common/Colors';
 
-const SOURCES = ['black', 'red', 'green', 'blue'];
+const SOURCES = ['narrator', 'god', 'lead', 'support'];
 
 const SourcesBarChart = (props: Object) => {
   const chartStyle = [styles.chart, props.style];

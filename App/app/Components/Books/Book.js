@@ -17,31 +17,31 @@ class Book extends Component {
         <SourcesBarChart
           style={styles.stackedBarChartHeader}
           horizontal={true}
-          data={[{black: 1, red: 1, green: 1, blue: 1}]}
+          data={[{narrator: 1, god: 1, lead: 1, support: 1}]}
         />
         <View style={styles.sourceFilterContainer}>
           <TouchableOpacity style={styles.sourceButtonContainer}>
-            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.black}]}>0%</Text>
-            <View style={[styles.roundButton, {borderColor: Colors.sources.black}]}>
-              <Text style={[styles.roundButtonTitle, {color: Colors.sources.black}]}>{Localizable.t('sources.narrator').toLocaleUpperCase()}</Text>
+            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.narrator}]}>0%</Text>
+            <View style={[styles.roundButton, {borderColor: Colors.sources.narrator}]}>
+              <Text style={[styles.roundButtonTitle, {color: Colors.sources.narrator}]}>{Localizable.t('sources.narrator').toLocaleUpperCase()}</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.sourceButtonContainer}>
-            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.red}]}>0%</Text>
-            <View style={[styles.roundButton, {borderColor: Colors.sources.red}]}>
-              <Text style={[styles.roundButtonTitle, {color: Colors.sources.red}]}>{Localizable.t('sources.god').toLocaleUpperCase()}</Text>
+            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.god}]}>0%</Text>
+            <View style={[styles.roundButton, {borderColor: Colors.sources.god}]}>
+              <Text style={[styles.roundButtonTitle, {color: Colors.sources.god}]}>{Localizable.t('sources.god').toLocaleUpperCase()}</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.sourceButtonContainer}>
-            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.green}]}>0%</Text>
-            <View style={[styles.roundButton, {borderColor: Colors.sources.green}]}>
-              <Text style={[styles.roundButtonTitle, {color: Colors.sources.green}]}>{Localizable.t('sources.lead').toLocaleUpperCase()}</Text>
+            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.lead}]}>0%</Text>
+            <View style={[styles.roundButton, {borderColor: Colors.sources.lead}]}>
+              <Text style={[styles.roundButtonTitle, {color: Colors.sources.lead}]}>{Localizable.t('sources.lead').toLocaleUpperCase()}</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.sourceButtonContainer}>
-            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.blue}]}>0%</Text>
-            <View style={[styles.roundButton, {borderColor: Colors.sources.blue}]}>
-              <Text style={[styles.roundButtonTitle, {color: Colors.sources.blue}]}>{Localizable.t('sources.support').toLocaleUpperCase()}</Text>
+            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.support}]}>0%</Text>
+            <View style={[styles.roundButton, {borderColor: Colors.sources.support}]}>
+              <Text style={[styles.roundButtonTitle, {color: Colors.sources.support}]}>{Localizable.t('sources.support').toLocaleUpperCase()}</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -69,7 +69,7 @@ class Book extends Component {
                 <SourcesBarChart
                   style={styles.sourcesSourcesBarChart}
                   horizontal={true}
-                  data={[{black: 1, red: 1, green: 1, blue: 1}]}
+                  data={[{narrator: 1, god: 1, lead: 1, support: 1}]}
                 />
                 <Text style={StyleSheet.styles.cell.subtitle}>0 words</Text>
               </View>
@@ -91,7 +91,7 @@ class Book extends Component {
                   <SourcesBarChart
                     style={styles.stackedBarChart}
                     horizontal={true}
-                    data={[{black: 1, red: 1, green: 1, blue: 1}]}
+                    data={[{narrator: 1, god: 1, lead: 1, support: 1}]}
                   />
                 </View>
               </View>
