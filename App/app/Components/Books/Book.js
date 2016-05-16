@@ -77,8 +77,10 @@ class Book extends Component {
           <View style={styles.section}>
             <View style={StyleSheet.styles.sectionHeaderContainer}>
               <Text style={StyleSheet.styles.sectionHeaderTitle}>0 CHAPTERS</Text>
-              <Text style={StyleSheet.styles.sectionHeaderTitle}>0 min read</Text>
-              <Image source={require('../../Images/common/disclosre.png')} />
+              <View style={styles.sectionHeaderDetail}>
+                <Text style={StyleSheet.styles.sectionHeaderTitle}>0 min read</Text>
+                <Image source={require('../../Images/common/disclosure.png')}  style={styles.disclosure} />
+              </View>
             </View>
             <View style={styles.sectionHeaderShadow}></View>
             <View style={[styles.cellContainer, {paddingVertical: 8}]}>
@@ -235,6 +237,17 @@ const styles = StyleSheet.create({
     height: 4,
     flex: 0,
     marginTop: 7,
+  },
+  disclosure: {
+    width: 15,
+    height: 15,
+    marginTop: 8,
+    marginLeft: 5,
+    marginRight: -5,
+  },
+  sectionHeaderDetail: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   ...Platform.select({
       ios: {
