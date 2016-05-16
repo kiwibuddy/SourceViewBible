@@ -56,7 +56,7 @@ class Books extends Component {
         <ListView
           dataSource={this.state.dataSource}
           renderSectionHeader={this._renderSectionHeader}
-          renderRow={this._renderRow.bind(this)}
+          renderRow={this._renderRow}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
         />
@@ -73,7 +73,7 @@ class Books extends Component {
     );
   }
 
-  _renderRow(book, sectionID, rowID, highlightRow) {
+  _renderRow = (book, sectionID, rowID, highlightRow) => {
     return (
       <TouchableOpacity onPress={ () => this.props.onButtonPress(book) }>
         <View style={styles.cellContainer}>
@@ -100,7 +100,7 @@ class Books extends Component {
         </View>
       </TouchableOpacity>
     );
-  }
+  };
 }
 
 const styles = StyleSheet.create({

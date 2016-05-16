@@ -51,22 +51,17 @@ class SourceViewBibleApp extends Component {
 
   constructor(props: any) {
     super(props);
-
-    this._renderCard = this._renderCard.bind(this);
-    this._renderHeader = this._renderHeader.bind(this);
-    this._renderScene = this._renderScene.bind(this);
-    this._renderTitleComponent = this._renderTitleComponent.bind(this);
     this._handlers = [];
 
     this.openDatabase();
   }
 
   componentDidMount() {
-    BackAndroid.addEventListener('hardwareBackPress', this._handleBackButton.bind(this));
+    BackAndroid.addEventListener('hardwareBackPress', this._handleBackButton);
   }
 
   componentWillUnmount() {
-    BackAndroid.removeEventListener('hardwareBackPress', this._handleBackButton.bind(this));
+    BackAndroid.removeEventListener('hardwareBackPress', this._handleBackButton);
   }
 
   getChildContext() {
@@ -84,7 +79,7 @@ class SourceViewBibleApp extends Component {
     this._handlers = this._handlers.filter((handler) => handler !== listener);
   }
 
-  _handleBackButton() {
+  _handleBackButton = () => {
     for (let i = this._handlers.length - 1; i >= 0; i--) {
       if (this._handlers[i]()) {
         return true;
@@ -99,7 +94,7 @@ class SourceViewBibleApp extends Component {
 
     onNavigate(NavigationRootContainer.getBackAction());
     return true;
-  }
+  };
 
   openDatabase() {
     Emdros.open({name: 'Datasets/en/NLT/SourceView.bpt'}).then((emdros) => {
@@ -124,7 +119,7 @@ class SourceViewBibleApp extends Component {
       );
     }
 
-    _renderHeader(/*NavigationSceneRendererProps*/ props) {
+    _renderHeader = (/*NavigationSceneRendererProps*/ props) => {
       return (
         <NavigationHeader
           {...props}
@@ -133,22 +128,22 @@ class SourceViewBibleApp extends Component {
           renderLeftComponent={this._renderLeftComponent}
         />
       );
-    }
+    };
 
-    _renderTitleComponent(/*NavigationSceneRendererProps*/ props) {
+    _renderTitleComponent = (/*NavigationSceneRendererProps*/ props) => {
       const title = props.scene.navigationState.title;
       return (
         <NavigationHeader.Title>{title}</NavigationHeader.Title>
       );
-    }
+    };
 
-    _renderLeftComponent(/*NavigationSceneRendererProps*/ props) {
+    _renderLeftComponent = (/*NavigationSceneRendererProps*/ props) => {
       return (
         props.scene.index > 0 ? <NavigationHeaderBackButton /> : null
       );
-    }
+    };
 
-    _renderCard(/*NavigationSceneRendererProps*/ props) {
+    _renderCard = (/*NavigationSceneRendererProps*/ props) => {
       return (
         <NavigationCard
           {...props}
@@ -156,7 +151,7 @@ class SourceViewBibleApp extends Component {
           key={props.scene.navigationState.key}
         />
       );
-    }
+    };
 
     _renderScene({scene}) {
       const { navigationState } = scene;

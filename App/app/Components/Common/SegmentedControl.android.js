@@ -51,7 +51,7 @@ export default class SegmentedControl extends Component {
     return (
       <View
         style={[styles.tabBar, this.props.style]}
-        onLayout={this._measureSelectedButton.bind(this)}
+        onLayout={this._measureSelectedButton}
       >
         <View style={styles.buttons}>
           {buttons}
@@ -67,26 +67,26 @@ export default class SegmentedControl extends Component {
         key={'button-' + title}
         ref={index}
         style={styles.button}
-        onPress={() => this._onValueChange(index, title)}
+        onPress={this._onValueChange}
       >
         <Text style={[styles.buttonTitle, {color: tintColor}]}>{title.toLocaleUpperCase()}</Text>
       </TouchableOpacity>
     );
   }
 
-  _measureSelectedButton() {
+  _measureSelectedButton = () => {
     this.refs[this.state.selectedIndex].measure((ox, oy, width, height, px, py) => {
       this.state.indicatorLeft.setValue(px);
       this.state.indicatorWidth.setValue(width);
     });
-  }
+  };
 
-  _onValueChange(index, title) {
+  _onValueChange = (index, title) => {
     if (index === this.state.selectedIndex) return;
 
     this.setState({selectedIndex: index});
     if (this.props.onValueChange) this.props.onValueChange(title);
-  }
+  };
 }
 
 const styles = StyleSheet.create({
