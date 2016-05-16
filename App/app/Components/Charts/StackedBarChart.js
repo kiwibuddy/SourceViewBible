@@ -14,7 +14,7 @@ const StackedBarChart = (props: Object) => {
   const chartStyle = [styles.chart, props.style];
   const stackedBarStyle = [styles.stackedBar, {flexDirection: props.horizontal ? 'row' : 'column'}];
   const sources = (props.horizontal ? SOURCES : SOURCES.reverse());
-  
+
   const bars = props.data.map((data) => {
     const bar = sources.map((source) => {
       const color = Colors.sources[source];
@@ -28,10 +28,7 @@ const StackedBarChart = (props: Object) => {
     });
 
     return (
-      <View
-        key={'bar-' + data.name}
-        style={stackedBarStyle}
-      >
+      <View key={'bar-' + data.name} style={stackedBarStyle}>
         {bar}
       </View>
     )
