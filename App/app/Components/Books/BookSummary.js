@@ -27,36 +27,6 @@ class BookSummary extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <SourcesBarChart
-          style={styles.stackedBarChartHeader}
-          data={[{narrator: 1, god: 1, lead: 1, support: 1}]}
-        />
-        <View style={styles.sourceFilterContainer}>
-          <TouchableOpacity style={styles.sourceButtonContainer}>
-            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.narrator}]}>0%</Text>
-            <View style={[styles.roundButton, {borderColor: Colors.sources.narrator}]}>
-              <Text style={[styles.roundButtonTitle, {color: Colors.sources.narrator}]}>{Localizable.t('sources.narrator').toLocaleUpperCase()}</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.sourceButtonContainer}>
-            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.god}]}>0%</Text>
-            <View style={[styles.roundButton, {borderColor: Colors.sources.god}]}>
-              <Text style={[styles.roundButtonTitle, {color: Colors.sources.god}]}>{Localizable.t('sources.god').toLocaleUpperCase()}</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.sourceButtonContainer}>
-            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.lead}]}>0%</Text>
-            <View style={[styles.roundButton, {borderColor: Colors.sources.lead}]}>
-              <Text style={[styles.roundButtonTitle, {color: Colors.sources.lead}]}>{Localizable.t('sources.lead').toLocaleUpperCase()}</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.sourceButtonContainer}>
-            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.support}]}>0%</Text>
-            <View style={[styles.roundButton, {borderColor: Colors.sources.support}]}>
-              <Text style={[styles.roundButtonTitle, {color: Colors.sources.support}]}>{Localizable.t('sources.support').toLocaleUpperCase()}</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
         <ScrollView>
           <View style={styles.section}>
             <View style={StyleSheet.styles.sectionHeaderContainer}>
@@ -66,29 +36,6 @@ class BookSummary extends Component {
               Commodo id deserunt ea proident reprehenderit aliquip deserunt tempor sit aute excepteur esse veniam magna. Sit dolore laborum ex cillum ex fugiat sint. Minim labore exercitation exercitation exercitation sit eu labore Lorem. In aute amet do voluptate minim qui ex commodo magna amet dolore excepteur voluptate ullamco aliquip. Duis culpa pariatur ea laboris consectetur aliqua non sint aliquip. Anim ullamco sint ullamco est laborum occaecat ullamco sunt ipsum eu amet esse dolore laboris ea eiusmod amet. Do cillum elit consectetur dolore occaecat magna est nulla ex tempor laboris qui Lorem ad ex aliquip pariatur.
             </Text>
             <Text style={styles.sectionMore}>more</Text>
-          </View>
-          <View style={styles.section}>
-            <View style={StyleSheet.styles.sectionHeaderContainer}>
-              <Text style={StyleSheet.styles.sectionHeaderTitle}>0 SOURCES</Text>
-              <View style={styles.sectionHeaderDetail}>
-                <Image source={require('../../Images/common/disclosure.png')}  style={[styles.disclosure, styles.disclosureDown]} />
-              </View>
-            </View>
-            <View style={styles.sectionHeaderShadow}></View>
-            <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
-              <View style={styles.sourcesLeftContainer}>
-                <Image source={require('../../Images/avatars/narrator.png')} style={[styles.sourceAvatar, {tintColor: Colors.sources.narrator}]} />
-                <Text style={StyleSheet.styles.cell.title}>Narrator</Text>
-              </View>
-              <View style={styles.sourcesRightContainer}>
-                <SourcesBarChart
-                  style={styles.sourcesBarChart}
-                  data={[{narrator: 1, god: 1, lead: 1, support: 1}]}
-                />
-                <Text style={StyleSheet.styles.cell.subtitle}>0 words</Text>
-              </View>
-            </View>
-            <View style={StyleSheet.styles.separator}></View>
           </View>
           <View style={styles.section}>
             <View style={StyleSheet.styles.sectionHeaderContainer}>
@@ -163,35 +110,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     marginTop: NavigationHeader.HEIGHT,
-  },
-  stackedBarChartHeader: {
-    height: 3,
-    flex: 0,
-  },
-  sourceFilterContainer: {
-    flexDirection: 'row',
-    marginHorizontal: 9,
-    marginVertical: 8,
-  },
-  sourceButtonContainer: {
-    flex: 1,
-    marginHorizontal: 5,
-  },
-  sourceButtonTitle: {
-    fontSize: 25,
-    fontWeight: '300',
-    marginBottom: 5,
-    alignSelf: 'center',
-  },
-  roundButton: {
-    borderRadius: 20,
-    borderWidth: 1,
-    paddingVertical: 4,
-    paddingHorizontal: 5,
-    alignItems: 'center',
-  },
-  roundButtonTitle: {
-    fontSize: 11,
   },
   section: {
     marginLeft: 15,
