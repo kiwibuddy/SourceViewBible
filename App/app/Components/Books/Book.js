@@ -22,64 +22,76 @@ import { Colors, StyleSheet, Localizable } from '../../Common';
 import TabNavigator from 'react-native-tab-navigator';
 
 import BookSummary from './BookSummary';
+import BookChapters from './BookChapters';
+import BookSources from './BookSources';
+import BookSpheres from './BookSpheres';
+import BookWords from './BookWords';
 
 class Book extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedTab: 'summary'
+    };
+  }
+
   render() {
     return (
       <TabNavigator>
         <TabNavigator.Item
-          selected={true}
+          selected={this.state.selectedTab === 'summary'}
           title={Localizable.t('tabs.summary')}
           titleStyle={styles.tabTitleStyle}
           selectedTitleStyle={styles.selectedTabTitleStyle}
           renderIcon={() => <Image source={require('../../Images/tabs/summary.png')} style={styles.tabIcon} />}
           renderSelectedIcon={() => <Image source={require('../../Images/tabs/summary-s.png')} style={styles.selectedTabIcon} />}
+          onPress={() => this.setState({ selectedTab: 'summary' })}
         >
           <BookSummary />
         </TabNavigator.Item>
         <TabNavigator.Item
-          selected={false}
+          selected={this.state.selectedTab === 'chapters'}
           title={Localizable.t('tabs.chapters')}
           titleStyle={styles.tabTitleStyle}
           selectedTitleStyle={styles.selectedTabTitleStyle}
           renderIcon={() => <Image source={require('../../Images/tabs/chapters.png')} style={styles.tabIcon} />}
           renderSelectedIcon={() => <Image source={require('../../Images/tabs/chapters-s.png')} style={styles.selectedTabIcon} />}
+          onPress={() => this.setState({ selectedTab: 'chapters' })}
         >
-          <View>
-          </View>
+          <BookChapters />
         </TabNavigator.Item>
         <TabNavigator.Item
-          selected={false}
+          selected={this.state.selectedTab === 'sources'}
           title={Localizable.t('tabs.sources')}
           titleStyle={styles.tabTitleStyle}
           selectedTitleStyle={styles.selectedTabTitleStyle}
           renderIcon={() => <Image source={require('../../Images/tabs/sources.png')} style={styles.tabIcon} />}
           renderSelectedIcon={() => <Image source={require('../../Images/tabs/sources-s.png')} style={styles.selectedTabIcon} />}
+          onPress={() => this.setState({ selectedTab: 'sources' })}
         >
-          <View>
-          </View>
+          <BookSources />
         </TabNavigator.Item>
         <TabNavigator.Item
-          selected={false}
+          selected={this.state.selectedTab === 'spheres'}
           title={Localizable.t('tabs.spheres')}
           titleStyle={styles.tabTitleStyle}
           selectedTitleStyle={styles.selectedTabTitleStyle}
           renderIcon={() => <Image source={require('../../Images/tabs/spheres.png')} style={styles.tabIcon} />}
           renderSelectedIcon={() => <Image source={require('../../Images/tabs/spheres-s.png')} style={styles.selectedTabIcon} />}
+          onPress={() => this.setState({ selectedTab: 'spheres' })}
         >
-          <View>
-          </View>
+          <BookSpheres />
         </TabNavigator.Item>
         <TabNavigator.Item
-          selected={false}
+          selected={this.state.selectedTab === 'words'}
           title={Localizable.t('tabs.words')}
           titleStyle={styles.tabTitleStyle}
           selectedTitleStyle={styles.selectedTabTitleStyle}
           renderIcon={() => <Image source={require('../../Images/tabs/words.png')} style={styles.tabIcon} />}
           renderSelectedIcon={() => <Image source={require('../../Images/tabs/words-s.png')} style={styles.selectedTabIcon} />}
+          onPress={() => this.setState({ selectedTab: 'words' })}
         >
-          <View>
-          </View>
+          <BookWords />
         </TabNavigator.Item>
       </TabNavigator>
     );
