@@ -35,8 +35,7 @@ class Book extends Component {
           renderIcon={() => <Image source={require('../../Images/tabs/summary.png')} style={styles.tabIcon} />}
           renderSelectedIcon={() => <Image source={require('../../Images/tabs/summary-s.png')} style={styles.selectedTabIcon} />}
         >
-          <BookSummary>
-          </BookSummary>
+          <BookSummary />
         </TabNavigator.Item>
         <TabNavigator.Item
           selected={false}
