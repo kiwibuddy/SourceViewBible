@@ -2,11 +2,11 @@
 'use strict';
 
 import React, { Component } from 'react';
-import ReactNative, { View, Text, ScrollView, TouchableOpacity, NavigationExperimental, Image } from 'react-native';
+import ReactNative, { View, Text, ScrollView, TouchableOpacity, NavigationExperimental, Image, Platform } from 'react-native';
 const { Header: NavigationHeader } = NavigationExperimental;
 import { connect } from 'react-redux';
 
-import { Colors, StyleSheet, Localizable, Platform } from '../../Common';
+import { Colors, StyleSheet, Localizable } from '../../Common';
 
 import { SourcesBarChart, SpheresBarChart } from '../Charts';
 
