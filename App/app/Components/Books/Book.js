@@ -41,8 +41,10 @@ class Book extends Component {
         <TabNavigator.Item
           selected={false}
           title={Localizable.t('tabs.chapters')}
-          renderIcon={() => <Image source={require('../../Images/tabs/chapters.png')} />}
-          renderSelectedIcon={() => <Image source={require('../../Images/tabs/chapters-s.png')} />}
+          titleStyle={styles.tabTitle}
+          selectedTitleStyle={styles.selectedTabTitle}
+          renderIcon={() => <Image source={require('../../Images/tabs/chapters.png')} style={styles.tabIcon} />}
+          renderSelectedIcon={() => <Image source={require('../../Images/tabs/chapters-s.png')} style={styles.selectedTabIcon} />}
         >
           <View>
           </View>
@@ -50,8 +52,10 @@ class Book extends Component {
         <TabNavigator.Item
           selected={false}
           title={Localizable.t('tabs.sources')}
-          renderIcon={() => <Image source={require('../../Images/tabs/sources.png')} />}
-          renderSelectedIcon={() => <Image source={require('../../Images/tabs/sources-s.png')} />}
+          titleStyle={styles.tabTitle}
+          selectedTitleStyle={styles.selectedTabTitle}
+          renderIcon={() => <Image source={require('../../Images/tabs/sources.png')} style={styles.tabIcon} />}
+          renderSelectedIcon={() => <Image source={require('../../Images/tabs/sources-s.png')} style={styles.selectedTabIcon} />}
         >
           <View>
           </View>
@@ -59,8 +63,10 @@ class Book extends Component {
         <TabNavigator.Item
           selected={false}
           title={Localizable.t('tabs.spheres')}
-          renderIcon={() => <Image source={require('../../Images/tabs/spheres.png')} />}
-          renderSelectedIcon={() => <Image source={require('../../Images/tabs/spheres-s.png')} />}
+          titleStyle={styles.tabTitle}
+          selectedTitleStyle={styles.selectedTabTitle}
+          renderIcon={() => <Image source={require('../../Images/tabs/spheres.png')} style={styles.tabIcon} />}
+          renderSelectedIcon={() => <Image source={require('../../Images/tabs/spheres-s.png')} style={styles.selectedTabIcon} />}
         >
           <View>
           </View>
@@ -68,8 +74,10 @@ class Book extends Component {
         <TabNavigator.Item
           selected={false}
           title={Localizable.t('tabs.words')}
-          renderIcon={() => <Image source={require('../../Images/tabs/words.png')} />}
-          renderSelectedIcon={() => <Image source={require('../../Images/tabs/words-s.png')} />}
+          titleStyle={styles.tabTitle}
+          selectedTitleStyle={styles.selectedTabTitle}
+          renderIcon={() => <Image source={require('../../Images/tabs/words.png')} style={styles.tabIcon} />}
+          renderSelectedIcon={() => <Image source={require('../../Images/tabs/words-s.png')} style={styles.selectedTabIcon} />}
         >
           <View>
           </View>
@@ -81,12 +89,13 @@ class Book extends Component {
 
 const styles = StyleSheet.create({
   tabTitle: {
+    color: '#929292',
   },
   selectedTabTitle: {
     color: Colors.tintColor
   },
   tabIcon: {
-    tintColor: 'blue'
+    tintColor: '#929292'
   },
   selectedTabIcon: {
     tintColor: Colors.tintColor
