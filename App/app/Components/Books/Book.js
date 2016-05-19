@@ -9,15 +9,19 @@ import ReactNative, {
   ScrollView,
   TouchableOpacity,
   NavigationExperimental,
-  Image,
-  Platform
+  Image
 } from 'react-native';
 
 const { Header: NavigationHeader } = NavigationExperimental;
 
 import { connect } from 'react-redux';
 
-import { Colors, StyleSheet, Localizable } from '../../Common';
+import {
+  Colors,
+  StyleSheet,
+  Localizable,
+  Platform
+} from '../../Common';
 
 import TabNavigator from 'react-native-tab-navigator';
 

@@ -2,12 +2,27 @@
 'use strict';
 
 import React, { Component } from 'react';
-import ReactNative, { View, Text, ListView, TouchableOpacity, RecyclerViewBackedScrollView, NavigationExperimental, PropTypes, Platform } from 'react-native';
+
+import ReactNative, {
+  View,
+  Text,
+  ListView,
+  TouchableOpacity,
+  RecyclerViewBackedScrollView,
+  NavigationExperimental,
+  PropTypes
+} from 'react-native';
+
 const { Header: NavigationHeader } = NavigationExperimental;
 import { connect } from 'react-redux';
 import { navigatePush, navigateReset } from '../../Actions';
 
-import { Colors, StyleSheet, Localizable } from '../../Common';
+import {
+  Colors,
+  StyleSheet,
+  Localizable,
+  Platform
+} from '../../Common';
 
 import SegmentedControl from '../Common/SegmentedControl';
 

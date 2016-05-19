@@ -9,8 +9,7 @@ import ReactNative, {
   ScrollView,
   TouchableOpacity,
   NavigationExperimental,
-  Image,
-  Platform
+  Image
 } from 'react-native';
 
 const { Header: NavigationHeader } = NavigationExperimental;
@@ -18,7 +17,8 @@ const { Header: NavigationHeader } = NavigationExperimental;
 import {
   Colors,
   StyleSheet,
-  Localizable
+  Localizable,
+  Platform
 } from '../../Common';
 
 class BookChapters extends Component {

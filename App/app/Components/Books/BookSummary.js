@@ -9,13 +9,17 @@ import ReactNative, {
   ScrollView,
   TouchableOpacity,
   NavigationExperimental,
-  Image,
-  Platform
+  Image
 } from 'react-native';
 
 const { Header: NavigationHeader } = NavigationExperimental;
 
-import { Colors, StyleSheet, Localizable } from '../../Common';
+import {
+  Colors,
+  StyleSheet,
+  Localizable,
+  Platform
+} from '../../Common';
 
 import { SourcesBarChart, SpheresBarChart } from '../Charts';
 
