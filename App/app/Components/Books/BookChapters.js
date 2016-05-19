@@ -28,14 +28,6 @@ class BookChapters extends Component {
     return (
       <View style={styles.container}>
       <View style={styles.section}>
-        <View style={StyleSheet.styles.sectionHeaderContainer}>
-          <Text style={StyleSheet.styles.sectionHeaderTitle}>0 CHAPTERS</Text>
-          <View style={styles.sectionHeaderDetail}>
-            <Text style={StyleSheet.styles.sectionHeaderTitle}>0 min read</Text>
-            <Image source={require('../../Images/common/disclosure.png')}  style={[styles.disclosure, styles.disclosureDown]} />
-          </View>
-        </View>
-        <View style={styles.sectionHeaderShadow}></View>
         <View style={[styles.cellContainer, {paddingVertical: 8}]}>
           <View style={styles.horizontalContainer}>
             <View style={styles.leftContainer}>
@@ -54,6 +46,27 @@ class BookChapters extends Component {
             </View>
             <View style={styles.rightContainer}>
               <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('sources.count', {count: 0})}</Text>
+              </View>
+          </View>
+        </View>
+        <View style={StyleSheet.styles.separator}></View>
+        <View style={[styles.cellContainer, {paddingVertical: 8}]}>
+          <View style={styles.horizontalContainer}>
+            <View style={styles.leftContainer}>
+              <Text style={StyleSheet.styles.cell.title}>Chapter 1</Text>
+            </View>
+            <View style={styles.rightContainer}>
+              <SpheresBarChart
+                style={styles.stackedBarChart}
+                data={[{family: 1, economics: 1, government: 1, religion: 1, education: 1, communication: 1, celebration: 1}]}
+              />
+            </View>
+          </View>
+          <View style={styles.horizontalContainer}>
+            <View style={styles.leftContainer}>
+            </View>
+            <View style={styles.rightContainer}>
+              <Text style={StyleSheet.styles.cell.subtitle}>0 spheres</Text>
               </View>
           </View>
         </View>

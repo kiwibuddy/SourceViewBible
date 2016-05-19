@@ -58,6 +58,7 @@ class BookSources extends Component {
           </TouchableOpacity>
         </View>
         <View style={styles.section}>
+          <View style={StyleSheet.styles.separator}></View>
           <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
             <View style={styles.sourcesLeftContainer}>
               <Image source={require('../../Images/avatars/narrator.png')} style={[styles.sourceAvatar, {tintColor: Colors.sources.narrator}]} />
