@@ -19,5 +19,12 @@
       }
     },
     introduction: 'Introduction',
+    tabs: {
+      summary: 'Summary',
+      chapters: 'Chapters',
+      sources: 'Sources',
+      spheres: 'Spheres',
+      words: 'Words'
+    }
   }
 }

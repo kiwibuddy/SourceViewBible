@@ -1,0 +1,278 @@
+/* @flow */
+'use strict';
+
+import React, { Component } from 'react';
+
+import ReactNative, {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  NavigationExperimental,
+  Image,
+  Platform
+} from 'react-native';
+
+const { Header: NavigationHeader } = NavigationExperimental;
+
+import { Colors, StyleSheet, Localizable } from '../../Common';
+
+import { SourcesBarChart, SpheresBarChart } from '../Charts';
+
+class BookSummary extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <SourcesBarChart
+          style={styles.stackedBarChartHeader}
+          data={[{narrator: 1, god: 1, lead: 1, support: 1}]}
+        />
+        <View style={styles.sourceFilterContainer}>
+          <TouchableOpacity style={styles.sourceButtonContainer}>
+            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.narrator}]}>0%</Text>
+            <View style={[styles.roundButton, {borderColor: Colors.sources.narrator}]}>
+              <Text style={[styles.roundButtonTitle, {color: Colors.sources.narrator}]}>{Localizable.t('sources.narrator').toLocaleUpperCase()}</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.sourceButtonContainer}>
+            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.god}]}>0%</Text>
+            <View style={[styles.roundButton, {borderColor: Colors.sources.god}]}>
+              <Text style={[styles.roundButtonTitle, {color: Colors.sources.god}]}>{Localizable.t('sources.god').toLocaleUpperCase()}</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.sourceButtonContainer}>
+            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.lead}]}>0%</Text>
+            <View style={[styles.roundButton, {borderColor: Colors.sources.lead}]}>
+              <Text style={[styles.roundButtonTitle, {color: Colors.sources.lead}]}>{Localizable.t('sources.lead').toLocaleUpperCase()}</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.sourceButtonContainer}>
+            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.support}]}>0%</Text>
+            <View style={[styles.roundButton, {borderColor: Colors.sources.support}]}>
+              <Text style={[styles.roundButtonTitle, {color: Colors.sources.support}]}>{Localizable.t('sources.support').toLocaleUpperCase()}</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <ScrollView>
+          <View style={styles.section}>
+            <View style={StyleSheet.styles.sectionHeaderContainer}>
+              <Text style={StyleSheet.styles.sectionHeaderTitle}>{Localizable.t('introduction').toLocaleUpperCase()}</Text>
+            </View>
+            <Text style={styles.sectionText} numberOfLines={4}>
+              Commodo id deserunt ea proident reprehenderit aliquip deserunt tempor sit aute excepteur esse veniam magna. Sit dolore laborum ex cillum ex fugiat sint. Minim labore exercitation exercitation exercitation sit eu labore Lorem. In aute amet do voluptate minim qui ex commodo magna amet dolore excepteur voluptate ullamco aliquip. Duis culpa pariatur ea laboris consectetur aliqua non sint aliquip. Anim ullamco sint ullamco est laborum occaecat ullamco sunt ipsum eu amet esse dolore laboris ea eiusmod amet. Do cillum elit consectetur dolore occaecat magna est nulla ex tempor laboris qui Lorem ad ex aliquip pariatur.
+            </Text>
+            <Text style={styles.sectionMore}>more</Text>
+          </View>
+          <View style={styles.section}>
+            <View style={StyleSheet.styles.sectionHeaderContainer}>
+              <Text style={StyleSheet.styles.sectionHeaderTitle}>0 SOURCES</Text>
+              <View style={styles.sectionHeaderDetail}>
+                <Image source={require('../../Images/common/disclosure.png')}  style={[styles.disclosure, styles.disclosureDown]} />
+              </View>
+            </View>
+            <View style={styles.sectionHeaderShadow}></View>
+            <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
+              <View style={styles.sourcesLeftContainer}>
+                <Image source={require('../../Images/avatars/narrator.png')} style={[styles.sourceAvatar, {tintColor: Colors.sources.narrator}]} />
+                <Text style={StyleSheet.styles.cell.title}>Narrator</Text>
+              </View>
+              <View style={styles.sourcesRightContainer}>
+                <SourcesBarChart
+                  style={styles.sourcesBarChart}
+                  data={[{narrator: 1, god: 1, lead: 1, support: 1}]}
+                />
+                <Text style={StyleSheet.styles.cell.subtitle}>0 words</Text>
+              </View>
+            </View>
+            <View style={StyleSheet.styles.separator}></View>
+          </View>
+          <View style={styles.section}>
+            <View style={StyleSheet.styles.sectionHeaderContainer}>
+              <Text style={StyleSheet.styles.sectionHeaderTitle}>0 CHAPTERS</Text>
+              <View style={styles.sectionHeaderDetail}>
+                <Text style={StyleSheet.styles.sectionHeaderTitle}>0 min read</Text>
+                <Image source={require('../../Images/common/disclosure.png')}  style={[styles.disclosure, styles.disclosureDown]} />
+              </View>
+            </View>
+            <View style={styles.sectionHeaderShadow}></View>
+            <View style={[styles.cellContainer, {paddingVertical: 8}]}>
+              <View style={styles.horizontalContainer}>
+                <View style={styles.leftContainer}>
+                  <Text style={StyleSheet.styles.cell.title}>Chapter 1</Text>
+                </View>
+                <View style={styles.rightContainer}>
+                  <SourcesBarChart
+                    style={styles.stackedBarChart}
+                    data={[{narrator: 1, god: 1, lead: 1, support: 1}]}
+                  />
+                </View>
+              </View>
+              <View style={styles.horizontalContainer}>
+                <View style={styles.leftContainer}>
+                  <Text style={StyleSheet.styles.cell.subtitle}>0 min</Text>
+                </View>
+                <View style={styles.rightContainer}>
+                  <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('sources.count', {count: 0})}</Text>
+                  </View>
+              </View>
+            </View>
+            <View style={StyleSheet.styles.separator}></View>
+          </View>
+          <View style={styles.section}>
+            <View style={StyleSheet.styles.sectionHeaderContainer}>
+              <Text style={StyleSheet.styles.sectionHeaderTitle}>0 SPHERES</Text>
+              <View style={styles.sectionHeaderDetail}>
+                <Image source={require('../../Images/common/disclosure.png')}  style={[styles.disclosure, styles.disclosureDown]} />
+              </View>
+            </View>
+            <View style={styles.sectionHeaderShadow}></View>
+            <View style={[styles.cellContainer, {paddingVertical: 8}]}>
+              <View style={styles.horizontalContainer}>
+                <View style={styles.leftContainer}>
+                  <Text style={StyleSheet.styles.cell.title}>Chapter 1</Text>
+                </View>
+                <View style={styles.rightContainer}>
+                  <SpheresBarChart
+                    style={styles.stackedBarChart}
+                    data={[{family: 1, economics: 1, government: 1, religion: 1, education: 1, communication: 1, celebration: 1}]}
+                  />
+                </View>
+              </View>
+              <View style={styles.horizontalContainer}>
+                <View style={styles.leftContainer}>
+                </View>
+                <View style={styles.rightContainer}>
+                  <Text style={StyleSheet.styles.cell.subtitle}>0 spheres</Text>
+                  </View>
+              </View>
+            </View>
+            <View style={StyleSheet.styles.separator}></View>
+          </View>
+        </ScrollView>
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    marginTop: NavigationHeader.HEIGHT,
+  },
+  stackedBarChartHeader: {
+    height: 3,
+    flex: 0,
+  },
+  sourceFilterContainer: {
+    flexDirection: 'row',
+    marginHorizontal: 9,
+    marginVertical: 8,
+  },
+  sourceButtonContainer: {
+    flex: 1,
+    marginHorizontal: 5,
+  },
+  sourceButtonTitle: {
+    fontSize: 25,
+    fontWeight: '300',
+    marginBottom: 5,
+    alignSelf: 'center',
+  },
+  roundButton: {
+    borderRadius: 20,
+    borderWidth: 1,
+    paddingVertical: 4,
+    paddingHorizontal: 5,
+    alignItems: 'center',
+  },
+  roundButtonTitle: {
+    fontSize: 11,
+  },
+  section: {
+    marginLeft: 15,
+  },
+  sectionHeaderShadow: {
+    borderBottomWidth: 2,
+    borderBottomColor: '#f4f7f9',
+  },
+  sectionText: {
+    marginVertical: 8,
+    lineHeight: 20,
+  },
+  sectionMore: {
+    color: Colors.tintColor,
+    alignSelf: 'flex-end',
+    marginRight: 10,
+  },
+  sourcesCellContainer: {
+    flex: 1,
+    marginRight: 15,
+    flexDirection: 'row',
+  },
+  sourcesLeftContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    paddingTop: 2,
+  },
+  sourcesRightContainer: {
+    flex: 1,
+  },
+  sourceAvatar: {
+    width: 20,
+    height: 20,
+    marginRight: 10
+  },
+  sourcesBarChart: {
+    height: 4,
+    flex: 0,
+    marginBottom: 7,
+  },
+  barChart: {
+    width: 4,
+    height: 23,
+    flex: 0,
+    backgroundColor: '#ededed',
+    marginRight: 3,
+  },
+  cellContainer: {
+    flex: 1,
+    marginRight: 15,
+  },
+  horizontalContainer: {
+    flexDirection: 'row',
+  },
+  leftContainer: {
+    flex: 1,
+  },
+  rightContainer: {
+    flex: 2,
+  },
+  stackedBarChart: {
+    height: 4,
+    flex: 0,
+    marginTop: 7,
+  },
+  disclosure: {
+    width: 15,
+    height: 15,
+    marginTop: 8,
+    marginLeft: 5,
+    marginRight: -5,
+  },
+  disclosureDown: {
+    transform: [{rotate: '90deg'}],
+  },
+  sectionHeaderDetail: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  ...Platform.select({
+      ios: {
+      },
+      android: {
+      },
+  })
+});
+
+export default BookSummary;
