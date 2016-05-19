@@ -30,8 +30,10 @@ class Book extends Component {
         <TabNavigator.Item
           selected={true}
           title={Localizable.t('tabs.summary')}
-          renderIcon={() => <Image source={require('../../Images/tabs/summary.png')} />}
-          renderSelectedIcon={() => <Image source={require('../../Images/tabs/summary-s.png')} />}
+          titleStyle={styles.tabTitle}
+          selectedTitleStyle={styles.selectedTabTitle}
+          renderIcon={() => <Image source={require('../../Images/tabs/summary.png')} style={styles.tabIcon} />}
+          renderSelectedIcon={() => <Image source={require('../../Images/tabs/summary-s.png')} style={styles.selectedTabIcon} />}
         >
           <BookSummary>
           </BookSummary>
@@ -78,7 +80,17 @@ class Book extends Component {
 }
 
 const styles = StyleSheet.create({
-
+  tabTitle: {
+  },
+  selectedTabTitle: {
+    color: Colors.tintColor
+  },
+  tabIcon: {
+    tintColor: 'blue'
+  },
+  selectedTabIcon: {
+    tintColor: Colors.tintColor
+  }
 });
 
 const mapStateToProps = (state) => {
