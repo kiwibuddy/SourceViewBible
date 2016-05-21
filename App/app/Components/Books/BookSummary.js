@@ -65,6 +65,16 @@ class BookSummary extends Component {
             <Image source={require('../../Images/avatars/human-male.png')} style={[styles.sourceImage, {tintColor: Colors.sources.lead}]}/>
             <Text style={styles.buttonSubtitle}>Lead</Text>
           </TouchableOpacity>
+
+          <TouchableOpacity style={styles.sourceButton}>
+            <Image source={require('../../Images/avatars/human-male.png')} style={[styles.sourceImage, {tintColor: Colors.sources.support}]}/>
+            <Text style={styles.buttonSubtitle}>Support</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.sourceButton}>
+            <Image source={require('../../Images/avatars/human-group.png')} style={[styles.sourceImage, {tintColor: Colors.sources.support}]}/>
+            <Text style={styles.buttonSubtitle}>More Support</Text>
+          </TouchableOpacity>
         </View>
 
         <TouchableOpacity style={styles.readButton}>
