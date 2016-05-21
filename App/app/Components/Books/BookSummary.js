@@ -80,6 +80,8 @@ class BookSummary extends Component {
         <TouchableOpacity style={styles.readButton}>
           <Text style={styles.readButtonTitle}>0 min read</Text>
         </TouchableOpacity>
+
+        <View style={StyleSheet.styles.separator} />
       </ScrollView>
     );
   }
@@ -138,7 +140,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     overflow:'hidden',
     alignSelf: 'center',
-    marginVertical: 20,
+    marginVertical: 40,
     justifyContent: 'center',
   },
   readButtonTitle: {
