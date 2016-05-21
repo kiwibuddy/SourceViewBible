@@ -131,21 +131,20 @@ const styles = StyleSheet.create({
     margin: 4,
   },
   readButton: {
-    // backgroundColor: Colors.tintColor,
-    alignSelf: 'center',
-    // height: 30,
-    marginVertical: 20
-  },
-  readButtonTitle: {
     backgroundColor: Colors.tintColor,
-    color: 'white',
-    fontSize: 18,
-    paddingVertical: 8,
-    paddingHorizontal: 20,
     borderColor: Colors.tintColor,
+    height: 40,
     borderRadius: 20,
     borderWidth: 1,
-    overflow:'hidden'
+    overflow:'hidden',
+    alignSelf: 'center',
+    marginVertical: 20,
+    justifyContent: 'center',
+  },
+  readButtonTitle: {
+    color: 'white',
+    fontSize: 18,
+    padding: 20,
   },
   keyline: {
     flex:0,
