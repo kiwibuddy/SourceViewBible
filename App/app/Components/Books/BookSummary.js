@@ -115,6 +115,7 @@ const styles = StyleSheet.create({
   buttonSubtitle: {
     color: Colors.subtitle,
     fontSize: 12,
+    textAlign: 'center',
     marginBottom: 4,
   },
   sourcesContainer: {
