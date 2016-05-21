@@ -35,7 +35,7 @@ const styles = {
   },
   separator: {
     height: StyleSheet.hairlineWidth,
-    backgroundColor: '#CCCCCC',
+    backgroundColor: Colors.separator,
   },
 };
 

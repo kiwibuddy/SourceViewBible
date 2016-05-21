@@ -23,13 +23,21 @@ import {
 
 import { SourcesBarChart, SpheresBarChart, WordCloud } from '../Charts';
 
-import Keyline from '../Common/Keyline';
-
 class BookSummary extends Component {
   render() {
     return (
       <ScrollView style={styles.container}>
         <WordCloud style={styles.wordCloud} />
+        <View style={styles.statsContainer}>
+          <TouchableOpacity style={{flex: 1}}>
+          </TouchableOpacity>
+          <View style={styles.keyline} />
+          <TouchableOpacity style={{flex: 1}}>
+          </TouchableOpacity>
+          <View style={styles.keyline} />
+          <TouchableOpacity style={{flex: 1}}>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     );
   }
@@ -44,6 +52,19 @@ const styles = StyleSheet.create({
   wordCloud: {
     height: 200,
     backgroundColor: '#5633b3',
+  },
+  statsContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    height: 44,
+    marginTop: 10,
+    borderBottomColor: Colors.separator,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  keyline: {
+    flex:0,
+    width: StyleSheet.hairlineWidth,
+    backgroundColor: Colors.separator
   },
   ...Platform.select({
       ios: {

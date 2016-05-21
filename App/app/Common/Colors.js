@@ -3,6 +3,7 @@
 
 module.exports = {
   tintColor: '#cf1e00',
+  separator: '#CCCCCC',
 
   sources: {
     narrator: '#333333',
