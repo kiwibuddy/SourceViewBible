@@ -4,7 +4,7 @@
  * Copyright (C) 2016 SourceView LLC. All rights reserved.
  *
  * Created: 2016/03/31
- * Last update: 2016/03/31
+ * Last update: 2016/05/20
  *
  * Contributors:
  *
@@ -24,220 +24,122 @@
 
 typedef enum {
 	kBKCount,
-	kBKBucket
+	kBKBucket,
+	kBKBin
 } eBucketKind;
 
-/*
- * SELECT ALL OBJECTS
- * WHERE
- * [Source GET source_color
- *    [Token GET surface is_word = true AND Family = true]
- * ]
- * GO
- *
- *
- */
 
 class Bucket; // Forward declaration
-typedef std::map<std::string, Bucket*> String2PBucketMap;
+typedef std::set<std::string> StringSet;
+typedef std::map<std::string, StringSet> String2StringSetMap;
+typedef std::map<monad_m, String2StringSetMap> Monad2String2StringSetMap;
 
-class BucketConstIterator; // Forward declaration
+typedef std::map<std::string, Bucket*> String2PBucketMap;
+typedef std::map<std::string, String2PBucketMap> String2String2PBucketMap;
+
+
+class BucketValue {
+ public:
+	const std::string m_object_type_name;
+	const std::string m_feature_name;
+	const std::string m_feature_value;
+	const monad_m m_first_monad;
+	const monad_m m_last_monad;
+	const eBucketKind m_bucket_kind;
+	BucketValue(const std::string& object_type_name,
+		    const std::string& feature_name,
+		    const std::string& feature_value,
+		    monad_m first_monad,
+		    monad_m last_monad,
+		    eBucketKind bucket_kind);
+	BucketValue(const BucketValue& other);
+	~BucketValue();
+};
+
 
 /*
  * The Bucket data structure is designed to facilitate counting of
- * items in a Sheaf arising from a SELECT ALL OBJECTS Emdros query.
+ * items in an Emdros database.
  *
  * The Bucket is a recursive data structure defined as follows:
  *
- * A bucket is either:
+ * A Bucket is either:
  *
- * a) A count of something, or
+ * a) kBKCount: An integer count.
  *
- * b) An associative map mapping feature values to Bucket objects.
+ * b) kBKBucket: An associative map mapping feature names to an
+ * associative map mapping feature values to integer counts.
+ * Additionally, a Bucket of kind kBKBucket has an object type name as
+ * a field.
  *
- * Additionally, the MonadRange2BucketMap structure (called a "map of
- * bins", since a bin is larger than a bucket), is designed to "bin"
- * buckets by ranges of monads.
- *
- * The idea is, if you want to group Buckets by, say, chapters, then
- * you first run a query to retrieve all Chapter objects in a given
- * monad range (say, a Book), then you add the monad range of each
- * Chapter object to the MonadRange2BucketMap, and only then do you
- * traverse the Sheaf of the query you are interested in counting.
- * While traversing the Sheaf to be counted, the MonadRange2BucketMap
- * is used to hold, create, and retrieve the Buckets which are to hold
- * each path from the outermost object block level to the innermost.
- *
- * For example, say you want to count the Tokens of a given book,
- * group them by Source color, and additionally group the sources by
- * chapters.  Additionally, say you'd want to do this for the book of
- * Job. Here is what you'd do:
- *
- * monad_m book_first_monad = 0;
- * monad_m book_last_monad = 0;
- *
- * // Defined in harvest.cpp.
- * if (!getMonadsForBook(pEE, "Job", book_first_monad, book_last_monad)) {
- * 	// Error.
- * }  else {
- * 	// Now get the BucketMap.
- * 	SetOfMonads book_som(book_first_monad, book_last_monad);
- * 	
- * 	bool bResult = false;
- * 	MonadRange2BucketMap *pBucketMap =
- * 		getBucketMapFromParams(pEE,
- * 				       "chapter", // bin object type name
- * 				       "chapter", // bin feature name
- * 				       book_som,
- * 				       bResult);
- * 	
- * 	if (!bResult) {
- * 		// Error
- * 	} else {
- * 		query = "SELECT ALL OBJECTS IN" + book_som.toString();
- * 		query += "WHERE [Source GET source_color [Token]]GO";
- *  
- * 		if (!pEE->executeString(query, bResult, false, false)) {
- * 			// Error
- * 		} else {
- * 			Sheaf *pSheaf = pEE->takeOverSheaf();
- * 
- * 			countInSheaf(pSheaf, pBucketMap);
- * 
- * 			delete pSheaf;
- * 
- * 			return pBucketMap;
- * 		}
- * 	}
- * }
+ * c) kBKBin: A data structure which has the same information as a
+ * kBKBucket, but also takes a monad range in order to know which
+ * inner Bucket to put something into.  That is, a kBKBin decides
+ * which inner bucket to put something into primarily by means of a
+ * monad range, and secondarily by means of a feature name and value.
  *
  */
 class Bucket {
  protected:
-	friend class BucketConstIterator;
+	long m_kind_or_count; // -2 == kBKBin, -1 == kBKBucket, >= 0 == KBKCount
+ public:
+	Bucket(eBucketKind bucket_kind);
+	virtual ~Bucket();
+
+	static Bucket *newBucket(eBucketKind bucket_kind, const std::string& object_type_name);
 	
-	long m_kind_or_count; // -1 means BucketBucket, >= 0 means count bucket
-	String2PBucketMap *m_bucket_map;
- public:
-	Bucket(eBucketKind kind);
-	~Bucket();
+	virtual eBucketKind getKind() const;
 
-	Bucket *getBucket(const std::string& feature, eBucketKind kind);
-	long incrementCount();
+	virtual void addBucketValue(const BucketValue& bv, eBucketKind child_bucket_kind, const std::string& child_object_type_name);
 
-	long getCount() const;
-
-	long getRecursiveCount() const;
-
-	eBucketKind getKind() const { return (m_kind_or_count < 0) ? kBKBucket : kBKCount; };
-
-	void prettyPrint(std::ostream& out, int indent = 0) const;
-
-	void getJSONInBigstring(Bigstring *pResult) const;
-};
-
-/** A const iterator for a Bucket of kind kBKBucket.
- *
- * Here is how you could use it:
- *
- * BucketConstIterator bucket_it(pBucket);
- * while (bucket_it.hasNext()) {
- *	std::pair<std::string, const Bucket*> mypair = bucket_it.next();
- *
- *	std::string feature = mypair.first;
- *	const Bucket *pInnerBucket = mypair.second;
- *
- *	// Do something with the pInnerBucket and/or feature, such as
- *	// getting the kind with pInnerBucket->getKind(), getting the
- *	// count (if pInnerBucket is of kind kBKCount) recursing, or
- *	// some such.
- * }
- *
- */
-class BucketConstIterator {
-	const Bucket *m_mother_bucket;
-	String2PBucketMap::const_iterator m_it;
-	String2PBucketMap::const_iterator m_end;
- public:
-	BucketConstIterator(const Bucket *pMotherBucket);
-	~BucketConstIterator();
-
-	bool hasNext() const;
-	std::pair<std::string, const Bucket*> next();
-	std::pair<std::string, const Bucket*> current() const;
-};
-
-class MonadRange2BucketMapConstIterator;
-
-typedef std::map<monad_m, Bucket*> Monad2PBucketMap;
-typedef std::map<monad_m, monad_m> Monad2MonadMap;
-typedef std::map<monad_m, std::string> Monad2StringMap;
-
-/** A class to have one or more "bins", where each "bin" represents a
- * range of monads pointing to a Bucket.
- *
- * The MonadRange2BucketMap must be populated with monad ranges
- * *before* getting any Buckets, using the
- * MonadRange2BucketMap::addRange() method.
- *
- * @see Bucket for an explanation of how to create a
- * MonadRange2BucketMap.
- *
- */
-class MonadRange2BucketMap {
- protected:
-	friend class MonadRange2BucketMapConstIterator;
+	virtual void getBucketListFromMonad(const BucketValue& bv, int depth, eBucketKind child_bucket_kind, const std::string& child_object_type_name, std::list<Bucket*>& /* out */ bucket_list);
 	
-	Monad2PBucketMap m_bucket_map;
-	Monad2MonadMap m_monad_range_map;
-	Monad2StringMap m_name_map;
- public:
-	MonadRange2BucketMap();
-	~MonadRange2BucketMap();
+	virtual void incrementCountInChild(const BucketValue& bv);
 
-	void addRange(monad_m first_monad, monad_m last_monad, const std::string& name);
+	virtual void incrementCount();
 
-	Bucket *getBucket(monad_m monad, eBucketKind kind);
+	virtual long getCount() const;
 
-	const Bucket *findConstBucket(monad_m monad) const;
+	virtual void prettyPrint(std::ostream& out, int indent = 0) const;
 
-	std::string findName(monad_m monad) const;
+	virtual std::string getJSON() const;
 
-	monad_m findFirstMonad(monad_m monad) const;
+	virtual void getJSONInBigstring(Bigstring *pResult) const;
 
-	void prettyPrint(std::ostream& out, int indent = 0) const;
-
-	std::string getJSON() const;
- protected:
-	void getBinJSONInBigstring(Bigstring *pResult, const Bucket *pBucket, monad_m first_monad, monad_m last_monad) const;
-};
-
-/** Class to iterate over the bins in a MonadRange2BucketMap.
- *
- * @see BucketConstIterator for a general overview of how to use.
- *
- */
-class MonadRange2BucketMapConstIterator {
- protected:
-	const MonadRange2BucketMap *m_mother_bucket_map;
-	Monad2MonadMap::const_iterator m_it;
-	Monad2MonadMap::const_iterator m_end;
- public:
-	MonadRange2BucketMapConstIterator(const MonadRange2BucketMap *mother_bucket_map);
-	~MonadRange2BucketMapConstIterator();
-
-	bool hasNext() const;
-	std::pair<monad_m, monad_m> next();
-	std::pair<monad_m, monad_m> current() const;
 };
 
 
-void countInSheaf(const Sheaf *pSheaf, MonadRange2BucketMap *pBucketMap);
+class BinBucket : public Bucket {
+ protected:
+	std::string m_object_type_name;
+	Monad2String2StringSetMap m_monad_map;
+	String2String2PBucketMap m_feature_map;	
+ public:
+	BinBucket(eBucketKind newKind, const std::string& object_type_name);
 
-MonadRange2BucketMap *makeBucketMapFromSheaf(const Sheaf *pSheaf);
+	virtual ~BinBucket();
 
-MonadRange2BucketMap *getBucketMapFromParams(EmdrosEnv *pEE, const std::string& bin_otn, const std::string& bin_feature_name, const SetOfMonads& in_som, bool& bResult);
+	virtual void addBucketValue(const BucketValue& bv, eBucketKind child_bucket_kind, const std::string& child_object_type_name);
 
+	virtual void incrementCountInChild(const BucketValue& bv);
+
+	virtual void prettyPrint(std::ostream& out, int indent = 0) const;
+
+	virtual void getJSONInBigstring(Bigstring *pResult) const;
+
+	virtual void getBucketListFromMonad(const BucketValue& bv, int depth, eBucketKind child_bucket_kind, const std::string& child_object_type_name, std::list<Bucket*>& /* out */ bucket_list);
+
+	virtual Bucket *getBucketFromFeatureNameAndValue(const std::string& feature_name, const std::string& feature_value);
+
+	virtual void getBucketListFromFeatureName(const std::string& feature_name, std::list<Bucket*>& feature_bucket_list);
+};
+
+
+
+
+Bucket *getBucketFromJSONBucketSpecification(EmdrosEnv *pEnv, const std::string& json_string, const SetOfMonads& substrate, std::string& error_message);
 
 #endif /* !defined(BUCKET_H_) */
+
+
 

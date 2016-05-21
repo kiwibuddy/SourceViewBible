@@ -23,5 +23,7 @@
 
 bool getMonadsForBook(EmdrosEnv *pEE, const std::string& book, monad_m& first_monad, monad_m& last_monad);
 
+std::string countInBuckets(EmdrosEnv *pEE, const std::string& json_string, const SetOfMonads& substrate, std::string& error_message);
+
 #endif /* !defined(HARVEST_H_) */
 

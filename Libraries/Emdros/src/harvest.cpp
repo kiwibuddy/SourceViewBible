@@ -22,6 +22,10 @@
 #include "harvest.h"
 #endif
 
+#ifndef BUCKET_H_
+#include "bucket.h"
+#endif
+
 #include "emdros.h"
 
 /** Get a SetOfMonads which is the big-union of all sets of monads in
@@ -98,4 +102,42 @@ bool getMonadsForBook(EmdrosEnv *pEE, const std::string& book, monad_m& first_mo
 		return true;
 	}
 	return false;
+}
+
+/** Return a string containing a JSON encoding of the Bucket arising
+ * from running the given bucket specification on the given EmdrosEnv.
+ *
+ * Upon error, the returned JSON string is simply the empty, object,
+ * "{}".
+ *
+ * @param pEE A valid EmdrosEnv being an open connection to the
+ * database which the caller wishes to search.
+ *
+ * @param bucket_specification_json_string A string giving the JSON
+ * serialization of the bucket specification JSON object.
+ *
+ * @param substrate A SetOfMonads giving the monads within which to
+ * search.  If this is empty, then all monads are searched at the top
+ * level.
+ *
+ * @param error_message An output string that contains any error
+ * message (for developer consumption only -- not to be passed on to
+ * the user).
+ *
+ * @return On error, the string "{}".  On success, a JSON
+ * representation of the Bucket resulting from running the bucket
+ * specification on the given substrate using the pEE Emdros
+ * connection.
+ *
+ */
+std::string countInBuckets(EmdrosEnv *pEE, const std::string& bucket_specification_json_string, const SetOfMonads& substrate, std::string& error_message)
+{
+	Bucket *pBucket = getBucketFromJSONBucketSpecification(pEE, bucket_specification_json_string, substrate, error_message);
+	if (pBucket == 0) {
+		return "{}";
+	} else {
+		std::string result = pBucket->getJSON();
+		delete pBucket;
+		return result;
+	}
 }
