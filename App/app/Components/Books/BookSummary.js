@@ -28,24 +28,42 @@ class BookSummary extends Component {
     return (
       <ScrollView style={styles.container}>
         <WordCloud style={styles.wordCloud} />
+
         <View style={styles.statisticsContainer}>
           <TouchableOpacity style={styles.statisticButton}>
             <Text style={styles.statisticButtonTitle}>0</Text>
-            <Text style={styles.statisticButtonSubtitle}>Chapters</Text>
+            <Text style={styles.buttonSubtitle}>Chapters</Text>
           </TouchableOpacity>
 
           <View style={styles.keyline} />
 
           <TouchableOpacity style={styles.statisticButton}>
             <Text style={styles.statisticButtonTitle}>0</Text>
-            <Text style={styles.statisticButtonSubtitle}>Sources</Text>
+            <Text style={styles.buttonSubtitle}>Sources</Text>
           </TouchableOpacity>
 
           <View style={styles.keyline} />
 
           <TouchableOpacity style={styles.statisticButton}>
             <Text style={styles.statisticButtonTitle}>0</Text>
-            <Text style={styles.statisticButtonSubtitle}>Spheres</Text>
+            <Text style={styles.buttonSubtitle}>Spheres</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.sourcesContainer}>
+          <TouchableOpacity style={styles.sourceButton}>
+            <Image source={require('../../Images/avatars/narrator.png')} style={styles.sourceImage}/>
+            <Text style={styles.buttonSubtitle}>Narrator</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.sourceButton}>
+            <Image source={require('../../Images/avatars/divine.png')} style={[styles.sourceImage, {tintColor: Colors.sources.god}]}/>
+            <Text style={styles.buttonSubtitle}>God</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.sourceButton}>
+            <Image source={require('../../Images/avatars/human-male.png')} style={[styles.sourceImage, {tintColor: Colors.sources.lead}]}/>
+            <Text style={styles.buttonSubtitle}>Lead</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -78,10 +96,25 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: Colors.tintColor,
   },
-  statisticButtonSubtitle: {
+  buttonSubtitle: {
     color: Colors.subtitle,
     fontSize: 12,
     marginBottom: 4,
+  },
+  sourcesContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    marginHorizontal: 4,
+  },
+  sourceButton: {
+    flex: 1,
+    margin: 8,
+    alignItems: 'center',
+  },
+  sourceImage: {
+    width: 20,
+    height: 20,
+    margin: 4,
   },
   keyline: {
     flex:0,
