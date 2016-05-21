@@ -140,7 +140,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     overflow:'hidden',
     alignSelf: 'center',
-    marginVertical: 40,
+    marginTop: 20,
+    marginBottom: 40,
     justifyContent: 'center',
   },
   readButtonTitle: {
