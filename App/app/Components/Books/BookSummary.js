@@ -21,19 +21,16 @@ import {
   Platform
 } from '../../Common';
 
-import { SourcesBarChart, SpheresBarChart } from '../Charts';
+import { SourcesBarChart, SpheresBarChart, WordCloud } from '../Charts';
+
+import Keyline from '../Common/Keyline';
 
 class BookSummary extends Component {
   render() {
     return (
-      <View style={styles.container}>
-          <View style={styles.section}>
-            <Text style={styles.sectionText} numberOfLines={4}>
-              Commodo id deserunt ea proident reprehenderit aliquip deserunt tempor sit aute excepteur esse veniam magna. Sit dolore laborum ex cillum ex fugiat sint. Minim labore exercitation exercitation exercitation sit eu labore Lorem. In aute amet do voluptate minim qui ex commodo magna amet dolore excepteur voluptate ullamco aliquip. Duis culpa pariatur ea laboris consectetur aliqua non sint aliquip. Anim ullamco sint ullamco est laborum occaecat ullamco sunt ipsum eu amet esse dolore laboris ea eiusmod amet. Do cillum elit consectetur dolore occaecat magna est nulla ex tempor laboris qui Lorem ad ex aliquip pariatur.
-            </Text>
-            <Text style={styles.sectionMore}>more</Text>
-          </View>
-      </View>
+      <ScrollView style={styles.container}>
+        <WordCloud style={styles.wordCloud} />
+      </ScrollView>
     );
   }
 }
@@ -44,13 +41,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     marginTop: NavigationHeader.HEIGHT,
   },
-  section: {
-    marginLeft: 15,
-  },
-  sectionMore: {
-    color: Colors.tintColor,
-    alignSelf: 'flex-end',
-    marginRight: 10,
+  wordCloud: {
+    height: 200,
+    backgroundColor: '#5633b3',
   },
   ...Platform.select({
       ios: {
