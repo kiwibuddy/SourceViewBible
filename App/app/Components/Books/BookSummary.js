@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   sourcesContainer: {
     flex: 1,
     flexDirection: 'row',
-    marginHorizontal: 4,
+    margin: 4,
   },
   sourceButton: {
     flex: 1,
