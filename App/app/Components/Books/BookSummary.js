@@ -144,7 +144,8 @@ const styles = StyleSheet.create({
   readButtonTitle: {
     color: 'white',
     fontSize: 18,
-    padding: 20,
+    paddingVertical: 20,
+    paddingHorizontal: 40
   },
   keyline: {
     flex:0,
