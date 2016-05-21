@@ -66,6 +66,10 @@ class BookSummary extends Component {
             <Text style={styles.buttonSubtitle}>Lead</Text>
           </TouchableOpacity>
         </View>
+
+        <TouchableOpacity style={styles.readButton}>
+          <Text style={styles.readButtonTitle}>0 min read</Text>
+        </TouchableOpacity>
       </ScrollView>
     );
   }
@@ -115,6 +119,23 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     margin: 4,
+  },
+  readButton: {
+    // backgroundColor: Colors.tintColor,
+    alignSelf: 'center',
+    // height: 30,
+    marginVertical: 20
+  },
+  readButtonTitle: {
+    backgroundColor: Colors.tintColor,
+    color: 'white',
+    fontSize: 18,
+    paddingVertical: 8,
+    paddingHorizontal: 20,
+    borderColor: Colors.tintColor,
+    borderRadius: 20,
+    borderWidth: 1,
+    overflow:'hidden'
   },
   keyline: {
     flex:0,
