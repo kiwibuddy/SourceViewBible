@@ -128,8 +128,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   sourceImage: {
-    width: 20,
-    height: 20,
+    width: 40,
+    height: 40,
     margin: 4,
   },
   readButton: {
