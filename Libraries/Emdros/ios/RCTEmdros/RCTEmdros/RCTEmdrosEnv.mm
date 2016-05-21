@@ -59,60 +59,23 @@
 - (void)query:(NSString *)query options:(NSDictionary *)options completion:(void (^)(id result, NSError *error))completion {
     dispatch_async(self.queue, ^{
         try {
-            bool bResult;
-            std::string strError;
-            [[OCDBenchmark sharedBenchmark] begin];
-
-            if (!_emdrosEnv->executeString(std::string(query.UTF8String), bResult, false, true)) {
-                NSLog(@"FAILURE: Database error executing string.");
+            if ([options[@"count"] boolValue]) {
+               [[OCDBenchmark sharedBenchmark] begin];
+                
+                NSInteger firstMonad = options[@"firstMonad"] ? [options[@"firstMonad"] integerValue] : 1;
+                NSInteger lastMonad = options[@"lastMonad"] ? [options[@"lastMonad"] integerValue] : MAX_MONAD;
+                SetOfMonads substrate(firstMonad, lastMonad);
+                
+                std::string errorMessage;
+                std::string json = countInBuckets(_emdrosEnv, std::string(query.UTF8String), substrate, errorMessage);
+                
+                NSString *data = [NSString stringWithUTF8String:json.c_str()];
+                NSError *error = nil;
+                NSDictionary *result = [NSJSONSerialization JSONObjectWithData:[data dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
+                
+                if (completion) completion(result, nil);
             } else {
-                [[OCDBenchmark sharedBenchmark] end:[NSString stringWithFormat:@"Query: %@", query]];
-                if (!bResult) {
-                    NSLog(@"FAILURE: Compiler error executing string.");
-                } else {
-                    id result = nil;
-
-                    Sheaf *sheaf = _emdrosEnv->takeOverSheaf();
-
-                    if (sheaf) {
-                        if ([options[@"count"] boolValue]) {
-                            NSString *type = options[@"type"];
-                            NSString *feature = options[@"feature"];
-                            NSInteger firstMonad = options[@"firstMonad"] ? [options[@"firstMonad"] integerValue] : 1;
-                            NSInteger lastMonad = options[@"lastMonad"] ? [options[@"lastMonad"] integerValue] : MAX_MONAD;
-                            SetOfMonads in_som(firstMonad, lastMonad);
-                            
-                            [[OCDBenchmark sharedBenchmark] begin];
-                            bool bResult = false;
-                            MonadRange2BucketMap *bucketMap = getBucketMapFromParams(_emdrosEnv, std::string(type.UTF8String), std::string(feature.UTF8String), in_som, bResult);
-                            [[OCDBenchmark sharedBenchmark] end:[NSString stringWithFormat:@"getBucketMapFromParams"]];
-                            
-                            if (bucketMap != 0 && bResult) {
-                                [[OCDBenchmark sharedBenchmark] begin];
-                                countInSheaf(sheaf, bucketMap);
-                                [[OCDBenchmark sharedBenchmark] end:[NSString stringWithFormat:@"countInSheaf"]];
-
-
-                                [[OCDBenchmark sharedBenchmark] begin];
-                                NSError *error = nil;
-                                result = [self dictionaryWithBucketMap:bucketMap error:&error];
-                                [[OCDBenchmark sharedBenchmark] end:[NSString stringWithFormat:@"dictionaryWithBucketMap"]];
-                                
-                                delete bucketMap;
-                            }
-                        } else {
-                            SheafIterator si = sheaf->iterator();
-                            while (si.hasNext()) {
-//                                Straw *pStraw = si.next();
-
-                            }
-                        }
-                        delete sheaf;
-
-
-                        if (completion) completion(result, nil);
-                    }
-                }
+                
             }
         } catch (EMdFDBException e) {
             std::cerr << "ERROR: EMdFDBException (Database error)..." << std::endl;
@@ -174,10 +137,4 @@
     return nil;
 }
 
-#pragma mark - Private
-- (NSDictionary *)dictionaryWithBucketMap:(MonadRange2BucketMap *)bucketMap error:(NSError **)error {
-    std::string json = bucketMap->getJSON();
-    NSString *data = [NSString stringWithUTF8String:json.c_str()];
-    return [NSJSONSerialization JSONObjectWithData:[data dataUsingEncoding:NSUTF8StringEncoding] options:0 error:error];
-}
 @end
