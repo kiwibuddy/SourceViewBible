@@ -28,14 +28,24 @@ class BookSummary extends Component {
     return (
       <ScrollView style={styles.container}>
         <WordCloud style={styles.wordCloud} />
-        <View style={styles.statsContainer}>
-          <TouchableOpacity style={{flex: 1}}>
+        <View style={styles.statisticsContainer}>
+          <TouchableOpacity style={styles.statisticButton}>
+            <Text style={styles.statisticButtonTitle}>0</Text>
+            <Text style={styles.statisticButtonSubtitle}>Chapters</Text>
           </TouchableOpacity>
+
           <View style={styles.keyline} />
-          <TouchableOpacity style={{flex: 1}}>
+
+          <TouchableOpacity style={styles.statisticButton}>
+            <Text style={styles.statisticButtonTitle}>0</Text>
+            <Text style={styles.statisticButtonSubtitle}>Sources</Text>
           </TouchableOpacity>
+
           <View style={styles.keyline} />
-          <TouchableOpacity style={{flex: 1}}>
+
+          <TouchableOpacity style={styles.statisticButton}>
+            <Text style={styles.statisticButtonTitle}>0</Text>
+            <Text style={styles.statisticButtonSubtitle}>Spheres</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -53,13 +63,25 @@ const styles = StyleSheet.create({
     height: 200,
     backgroundColor: '#5633b3',
   },
-  statsContainer: {
+  statisticsContainer: {
     flex: 1,
     flexDirection: 'row',
-    height: 44,
     marginTop: 10,
     borderBottomColor: Colors.separator,
     borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  statisticButton: {
+    flex: 1,
+    alignItems: 'center'
+  },
+  statisticButtonTitle: {
+    fontSize: 24,
+    color: Colors.tintColor,
+  },
+  statisticButtonSubtitle: {
+    color: Colors.subtitle,
+    fontSize: 12,
+    marginBottom: 4,
   },
   keyline: {
     flex:0,
