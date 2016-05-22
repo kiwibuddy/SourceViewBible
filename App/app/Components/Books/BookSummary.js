@@ -92,7 +92,7 @@ class BookSummary extends Component {
 
           <TouchableOpacity style={styles.sourceButton}>
             <Image source={require('../../Images/avatars/human-group.png')} style={[styles.sourceImage, {tintColor: Colors.sources.support}]}/>
-            <Text style={styles.buttonSubtitle}>More Support</Text>
+            <Text style={styles.buttonSubtitle}>Other Support</Text>
           </TouchableOpacity>
         </View>
 
