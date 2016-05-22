@@ -33,14 +33,20 @@ class BookSummary extends Component {
         />
 
         <View style={styles.statisticsContainer}>
-          <TouchableOpacity style={styles.statisticButton}>
+          <TouchableOpacity
+            style={styles.statisticButton}
+            onPress={this.props.onPressChapters}
+          >
             <Text style={styles.statisticButtonTitle}>0</Text>
             <Text style={styles.buttonSubtitle}>Chapters</Text>
           </TouchableOpacity>
 
           <View style={styles.keyline} />
 
-          <TouchableOpacity style={styles.statisticButton}>
+          <TouchableOpacity
+            style={styles.statisticButton}
+            onPress={this.props.onPressSources}
+          >
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
               <Text style={styles.statisticButtonTitle}>0</Text>
               <SourcesBarChart
@@ -55,7 +61,10 @@ class BookSummary extends Component {
 
           <View style={styles.keyline} />
 
-          <TouchableOpacity style={styles.statisticButton}>
+          <TouchableOpacity
+            style={styles.statisticButton}
+            onPress={this.props.onPressSpheres}
+          >
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
               <Text style={styles.statisticButtonTitle}>0</Text>
               <SpheresBarChart
