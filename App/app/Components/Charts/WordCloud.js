@@ -19,13 +19,19 @@ const WordCloud = (props: Object) => {
   const style = props.style;
   return (
     <View style={style}>
-
+      <LinearGradient
+        colors={props.colors}
+        start={[0.0, 0.25]} end={[0.5, 1.0]}
+        style={styles.gradient}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-
+  gradient: {
+    flex: 1
+  }
 });
 
 export default WordCloud;

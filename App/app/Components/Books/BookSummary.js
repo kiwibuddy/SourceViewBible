@@ -27,7 +27,10 @@ class BookSummary extends Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        <WordCloud style={styles.wordCloud} />
+        <WordCloud
+          colors={['#a856cd',  '#3722a7']}
+          style={styles.wordCloud}
+        />
 
         <View style={styles.statisticsContainer}>
           <TouchableOpacity style={styles.statisticButton}>
@@ -115,8 +118,7 @@ const styles = StyleSheet.create({
     marginTop: NavigationHeader.HEIGHT,
   },
   wordCloud: {
-    height: 200,
-    backgroundColor: '#5633b3',
+    height: 200
   },
   statisticsContainer: {
     flex: 1,
