@@ -20,7 +20,7 @@ const WordCloud = (props: Object) => {
   return (
     <View style={style}>
       <LinearGradient
-        colors={props.colors}
+        colors={props.backgroundColors}
         start={[0.0, 0.25]} end={[0.5, 1.0]}
         style={styles.gradient}
       />
