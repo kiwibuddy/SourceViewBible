@@ -13,15 +13,20 @@ const SpheresBarChart = (props: Object) => {
   const stackedBarStyle = [styles.stackedBar, {flexDirection: props.horizontal ? 'row' : 'column'}, props.barStyle];
   const spheres = (props.horizontal ? SPHERES : SPHERES.slice().reverse());
 
+  let barIndex = 0;
   const bars = props.data.map((data) => {
     const bar = spheres.map((sphere) => {
+      const value = data[sphere];
+      if (value == undefined) return null;
+
       return (
-        <View key={'sphere-' + sphere} style={{backgroundColor: Colors.spheres[sphere], flex: data[sphere]}} />
+        <View key={'sphere-' + sphere} style={{backgroundColor: Colors.spheres[sphere], flex: value}} />
       );
     });
+    if (!bar) return null;
 
     return (
-      <View key={'bar-' + data.name} style={stackedBarStyle}>
+      <View key={'bar-' + barIndex++} style={stackedBarStyle}>
         {bar}
       </View>
     )

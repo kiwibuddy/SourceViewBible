@@ -38,14 +38,30 @@ class BookSummary extends Component {
           <View style={styles.keyline} />
 
           <TouchableOpacity style={styles.statisticButton}>
-            <Text style={styles.statisticButtonTitle}>0</Text>
+            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+              <Text style={styles.statisticButtonTitle}>0</Text>
+              <SourcesBarChart
+                style={{flex: 0, marginHorizontal: 4}}
+                barStyle={{width: 2, height: 20, marginHorizontal: 1}}
+                horizontal={false}
+                data={[{narrator: 1}, {god: 1}, {lead: 1}, {support: 1}]}
+              />
+            </View>
             <Text style={styles.buttonSubtitle}>Sources</Text>
           </TouchableOpacity>
 
           <View style={styles.keyline} />
 
           <TouchableOpacity style={styles.statisticButton}>
-            <Text style={styles.statisticButtonTitle}>0</Text>
+            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+              <Text style={styles.statisticButtonTitle}>0</Text>
+              <SpheresBarChart
+                style={{flex: 0, marginHorizontal: 4}}
+                barStyle={{width: 2, height: 20, marginHorizontal: 1}}
+                horizontal={false}
+                data={[{family: 1}, {economics: 1}, {government: 1}, {religion: 1}, {education: 1}, {communication: 1}, {celebration: 1}]}
+              />
+            </View>
             <Text style={styles.buttonSubtitle}>Spheres</Text>
           </TouchableOpacity>
         </View>
@@ -106,17 +122,19 @@ const styles = StyleSheet.create({
   },
   statisticButton: {
     flex: 1,
-    alignItems: 'center'
   },
   statisticButtonTitle: {
     fontSize: 24,
     color: Colors.tintColor,
+    alignSelf: 'center'
   },
   buttonSubtitle: {
+    flex: 1,
     color: Colors.subtitle,
     fontSize: 12,
     textAlign: 'center',
     marginBottom: 4,
+    alignSelf: 'center'
   },
   sourcesContainer: {
     flex: 1,

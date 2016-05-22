@@ -14,15 +14,20 @@ const SourcesBarChart = (props: Object) => {
   const stackedBarStyle = [styles.stackedBar, {flexDirection: props.horizontal ? 'row' : 'column'}, props.barStyle];
   const sources = (props.horizontal ? SOURCES : SOURCES.slice().reverse());
 
+  let barIndex = 0;
   const bars = props.data.map((data) => {
     const bar = sources.map((source) => {
+      const value = data[source];
+      if (value == undefined) return null;
+
       return (
-        <View key={'source-' + source} style={{backgroundColor: Colors.sources[source], flex: data[source]}} />
+        <View key={'source-' + source} style={{backgroundColor: Colors.sources[source], flex: value}} />
       );
     });
+    if (!bar) return null;
 
     return (
-      <View key={'bar-' + data.name} style={stackedBarStyle}>
+      <View key={'bar-' + barIndex++} style={stackedBarStyle}>
         {bar}
       </View>
     )
@@ -50,6 +55,10 @@ const styles = StyleSheet.create({
   chart: {
     flex: 1,
     flexDirection: 'row',
+  },
+  barContainer: {
+    flex: 1,
+    backgroundColor: 'yellow'
   },
   stackedBar: {
     flex: 1
