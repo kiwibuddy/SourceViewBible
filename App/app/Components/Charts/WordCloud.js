@@ -13,11 +13,13 @@ import {
   StyleSheet
 } from '../../Common';
 
+import LinearGradient from 'react-native-linear-gradient';
+
 const WordCloud = (props: Object) => {
   const style = props.style;
   return (
     <View style={style}>
-    
+
     </View>
   );
 };
