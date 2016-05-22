@@ -97,7 +97,12 @@ class BookSummary extends Component {
           <Text style={styles.readButtonTitle}>0 min read</Text>
         </TouchableOpacity>
 
-        <View style={StyleSheet.styles.separator} />
+        <View style={[{marginBottom: 20}, StyleSheet.styles.separator]} />
+
+        <View style={styles.contentContainer}>
+          <Text style={styles.contentHeader}>{Localizable.t('how-to-read', {name: this.props.book.name}).toLocaleUpperCase()}</Text>
+          <Text style={styles.contentBody}>Lorem magna laboris proident proident aliqua ea et nisi. Elit amet et non aute dolor eu anim nostrud do enim dolore. Non do esse dolore velit incididunt eiusmod voluptate sunt. Duis sunt labore proident culpa ullamco duis magna ullamco consectetur voluptate ipsum ut sint velit anim. Incididunt aute id fugiat esse irure excepteur eu eiusmod eiusmod nostrud consequat velit id.</Text>
+        </View>
       </ScrollView>
     );
   }
@@ -168,6 +173,19 @@ const styles = StyleSheet.create({
     fontSize: 18,
     paddingVertical: 20,
     paddingHorizontal: 40
+  },
+  contentContainer: {
+    marginHorizontal: 15
+  },
+  contentHeader: {
+    fontSize: 17,
+    color: '#59626a',
+  },
+  contentBody: {
+    fontSize: 16,
+    lineHeight: 22,
+    color: '#59626a',
+    marginVertical: 4,
   },
   keyline: {
     flex:0,

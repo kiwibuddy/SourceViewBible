@@ -25,6 +25,7 @@
       sources: 'Sources',
       spheres: 'Spheres',
       words: 'Words'
-    }
+    },
+    'how-to-read': 'How to read {{name}}',
   }
 }
