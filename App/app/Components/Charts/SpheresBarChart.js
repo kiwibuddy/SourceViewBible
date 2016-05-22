@@ -19,8 +19,13 @@ const SpheresBarChart = (props: Object) => {
       const value = data[sphere];
       if (value == undefined) return null;
 
+      const barStyle = {
+        backgroundColor: Colors.spheres[sphere],
+        marginTop: (props.horizontal ? 0 : Math.floor(Math.random() * 7)),
+        flex: value
+      }
       return (
-        <View key={'sphere-' + sphere} style={{backgroundColor: Colors.spheres[sphere], flex: value}} />
+        <View key={'sphere-' + sphere} style={barStyle} />
       );
     });
     if (!bar) return null;
@@ -56,7 +61,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   stackedBar: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#ededed'
   }
 });
 

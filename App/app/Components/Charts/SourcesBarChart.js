@@ -20,8 +20,13 @@ const SourcesBarChart = (props: Object) => {
       const value = data[source];
       if (value == undefined) return null;
 
+      const barStyle = {
+        backgroundColor: Colors.sources[source],
+        marginTop: (props.horizontal ? 0 : Math.floor(Math.random() * 7)),
+        flex: value
+      }
       return (
-        <View key={'source-' + source} style={{backgroundColor: Colors.sources[source], flex: value}} />
+        <View key={'source-' + source} style={barStyle} />
       );
     });
     if (!bar) return null;
@@ -56,12 +61,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
   },
-  barContainer: {
-    flex: 1,
-    backgroundColor: 'yellow'
-  },
   stackedBar: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#ededed'
   }
 });
 
