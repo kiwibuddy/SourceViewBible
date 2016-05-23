@@ -71,7 +71,10 @@ function seedBooks(emdros, realm) {
               let chapterSources = null;
               const sourceData = chapterData[chapterIndex]["Source"];
               if (sourceData != null) {
-
+                  const sourceNameData = sourceData["source_name"];
+                  if (sourceNameData != null) {
+                    
+                  }
               }
 
               const chapter = {

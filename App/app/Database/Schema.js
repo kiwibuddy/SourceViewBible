@@ -8,9 +8,9 @@ const Book = {
     DJHRef: 'string',
     chapters: {type: 'list', objectType: 'Chapter'},
     sources: {type: 'list', objectType: 'Source'},
-    spheres: {type: 'list', objectType: 'Sphere'},
+    spheres: {type: 'list', objectType: 'Count'},
     wordCount: {type: 'int', default: 0},
-    words: {type: 'list', objectType: 'WordCount'},
+    words: {type: 'list', objectType: 'Count'},
   }
 };
 
@@ -27,10 +27,9 @@ const Chapter = {
 };
 
 const Source = {
-  name: 'Source',
+  name: 'Sphere',
   properties: {
-    name: 'string',
-    type: 'string',
+    name: 'string'
   }
 };
 
@@ -41,13 +40,13 @@ const Sphere = {
   }
 };
 
-const WordCount = {
-  name: 'WordCount',
+const Count = {
+  name: 'Count',
   properties: {
-    word: 'string',
-    count: 'int',
+    type: 'string',
+    count: {type: 'int', default: 0},
   }
 }
 
-const Schema = [Book, Chapter, Source, Sphere, WordCount];
+const Schema = [Book, Chapter, Source, Sphere, Count];
 export default Schema;
