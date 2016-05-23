@@ -8,7 +8,7 @@ const Book = {
     DJHRef: 'string',
     chapters: {type: 'list', objectType: 'Chapter'},
     sources: {type: 'list', objectType: 'Source'},
-    spheres: {type: 'list', objectType: 'Count'},
+    spheres: {type: 'list', objectType: 'Sphere'},
     wordCount: {type: 'int', default: 0},
     words: {type: 'list', objectType: 'Count'},
   }
