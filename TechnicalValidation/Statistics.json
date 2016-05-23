@@ -1,0 +1,16 @@
+{
+  "objectTypeName": "Book",
+  "feature": "DJHRef",
+  "buckets": {
+    "objectTypeName": "Chapter",
+    "feature": "chapter",
+    "buckets": {
+      "objectTypeName": "Source",
+      "feature": ["source_color", "source_name"],
+      "buckets": {
+        "objectTypeName": "Token",
+        "expression" : "is_word=true"
+      }
+    }
+  }
+}

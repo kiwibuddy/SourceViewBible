@@ -68,10 +68,13 @@
                 
                 std::string errorMessage;
                 std::string json = countInBuckets(_emdrosEnv, std::string(query.UTF8String), substrate, errorMessage);
+                [[OCDBenchmark sharedBenchmark] end:[NSString stringWithFormat:@"%@ countInBuckets", query]];
                 
+                [[OCDBenchmark sharedBenchmark] begin];
                 NSString *data = [NSString stringWithUTF8String:json.c_str()];
                 NSError *error = nil;
                 NSDictionary *result = [NSJSONSerialization JSONObjectWithData:[data dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
+                [[OCDBenchmark sharedBenchmark] end:[NSString stringWithFormat:@"%@ JSONObjectWithData", query]];
                 
                 if (completion) completion(result, nil);
             } else {
