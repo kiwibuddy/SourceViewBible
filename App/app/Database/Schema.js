@@ -1,3 +1,6 @@
+/* @flow */
+'use strict';
+
 const Book = {
   name: 'Book',
   properties: {
@@ -44,3 +47,6 @@ const WordCount = {
     count: 'int',
   }
 }
+
+const Schema = [Book, Chapter, Source, Sphere, WordCount];
+export default Schema;
