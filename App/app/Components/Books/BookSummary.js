@@ -34,21 +34,21 @@ class BookSummary extends Component {
 
         <View style={styles.statisticsContainer}>
           <TouchableOpacity
-            style={styles.statisticButton}
+            style={styles.statisticContainer}
             onPress={this.props.onPressChapters}
           >
-            <Text style={styles.statisticButtonTitle}>0</Text>
+            <Text style={styles.statisticTitle}>0</Text>
             <Text style={styles.buttonSubtitle}>Chapters</Text>
           </TouchableOpacity>
 
           <View style={styles.keyline} />
 
           <TouchableOpacity
-            style={styles.statisticButton}
+            style={styles.statisticContainer}
             onPress={this.props.onPressSources}
           >
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={styles.statisticButtonTitle}>0</Text>
+              <Text style={styles.statisticTitle}>0</Text>
               <SourcesBarChart
                 style={{flex: 0, marginHorizontal: 4}}
                 barStyle={{width: 2, height: 20, marginHorizontal: 1}}
@@ -62,11 +62,11 @@ class BookSummary extends Component {
           <View style={styles.keyline} />
 
           <TouchableOpacity
-            style={styles.statisticButton}
+            style={styles.statisticContainer}
             onPress={this.props.onPressSpheres}
           >
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={styles.statisticButtonTitle}>0</Text>
+              <Text style={styles.statisticTitle}>0</Text>
               <SpheresBarChart
                 style={{flex: 0, marginHorizontal: 4}}
                 barStyle={{width: 2, height: 20, marginHorizontal: 1}}
@@ -136,10 +136,10 @@ const styles = StyleSheet.create({
     borderBottomColor: Colors.separator,
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
-  statisticButton: {
+  statisticContainer: {
     flex: 1,
   },
-  statisticButtonTitle: {
+  statisticTitle: {
     fontSize: 24,
     color: Colors.tintColor,
     alignSelf: 'center'
@@ -150,7 +150,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     textAlign: 'center',
     marginBottom: 4,
-    alignSelf: 'center'
   },
   sourcesContainer: {
     flex: 1,
