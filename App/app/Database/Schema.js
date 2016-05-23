@@ -23,7 +23,7 @@ const Chapter = {
   }
 };
 
- onst Source = {
+const Source = {
   name: 'Source',
   properties: {
     name: 'string',
