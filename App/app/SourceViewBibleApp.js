@@ -22,9 +22,6 @@ import Discover from './Components/Discover/Discover';
 import Books from './Components/Books/Books';
 import Book from './Components/Books/Book';
 
-import Emdros from 'react-native-emdros';
-let DB = null;
-
 const {
   AnimatedView: NavigationAnimatedView,
   Card: NavigationCard,
@@ -35,6 +32,8 @@ const {
 const NavigationHeaderBackButton = require('./Components/Common/NavigationHeaderBackButton');
 
 import { connect } from 'react-redux';
+
+import Emdros from './API/Emdros';
 
 type Props = {
   navigationState: Object,
@@ -52,12 +51,12 @@ class SourceViewBibleApp extends Component {
   constructor(props: any) {
     super(props);
     this._handlers = [];
-
-    // this.openDatabase();
   }
 
   componentDidMount() {
     BackAndroid.addEventListener('hardwareBackPress', this._handleBackButton);
+
+    Emdros.openDatabase();
   }
 
   componentWillUnmount() {
@@ -95,14 +94,6 @@ class SourceViewBibleApp extends Component {
     onNavigate(NavigationRootContainer.getBackAction());
     return true;
   };
-
-  openDatabase() {
-    Emdros.open({name: 'Datasets/en/NLT/SourceView.bpt'}).then((emdros) => {
-      DB = emdros;
-    }).catch((error) => {
-      console.log(error);
-    });
-  }
 
   render() {
       const { navigationState, onNavigate } = this.props;
@@ -157,13 +148,13 @@ class SourceViewBibleApp extends Component {
 
       switch (navigationState.key) {
         case 'discover':
-          return <Discover database={DB} />;
+          return <Discover />;
 
         case 'books':
-          return <Books database={DB} />;
+          return <Books />;
 
         case 'book':
-          return <Book book={navigationState.book} database={DB} />;
+          return <Book book={navigationState.book} />;
 
         default:
           return null;

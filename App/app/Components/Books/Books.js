@@ -30,8 +30,18 @@ import SegmentedControl from '../Common/SegmentedControl';
 
 import { SourcesBarChart, SpheresBarChart, WordCloud } from '../Charts';
 
+import Emdros from '../../API/Emdros';
+
 const Bible = require('../../Locale/en/books');
 const SEGMENTS = [Localizable.t('textual'), Localizable.t('alphabetical'), Localizable.t('principality')];
+
+const OLD_TESTAMENT_BOOKS = Bible.filter((book) => {
+  return book.testament === 'old';
+});
+
+const NEW_TESTAMENT_BOOKS = Bible.filter((book) => {
+  return book.testament === 'new';
+});
 
 class Books extends Component {
   state: {
@@ -42,19 +52,34 @@ class Books extends Component {
   constructor(props) {
       super(props);
 
-      const oldTestamentBooks = Bible.filter((book) => {
-        return book.testament === 'old';
-      });
-
-      const newTestamentBooks = Bible.filter((book) => {
-        return book.testament === 'new';
-      });
-
       const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
       this.state = {
-        dataSource: dataSource.cloneWithRowsAndSections({old: oldTestamentBooks, new: newTestamentBooks}),
+        dataSource: dataSource.cloneWithRowsAndSections({old: OLD_TESTAMENT_BOOKS, new: NEW_TESTAMENT_BOOKS}),
         selectedSegmentIndex: 0
       }
+  }
+
+  componentDidMount() {
+    // const query = `
+    // {
+    //   "objectTypeName": "Book",
+    //   "feature": "DJHRef",
+    //   "buckets": {
+    //     "objectTypeName": "Source",
+    //     "feature": "source_color",
+    //     "buckets": {
+    //       "objectTypeName": "Token",
+    //       "expression" : "is_word=true"
+    //     }
+    //   }
+    // }
+    // `;
+    //
+    // Emdros.query(query, {count: true}).then((result) => {
+    //   console.log(result);
+    // }).catch((error) => {
+    //   console.log(error);
+    // });
   }
 
   render() {
