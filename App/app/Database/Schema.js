@@ -7,6 +7,7 @@ const Book = {
     sources: {type: 'list', objectType: 'Source'},
     spheres: {type: 'list', objectType: 'Sphere'},
     wordCount: 'int',
+    words: {type: 'list', objectType: 'WordCount'},
   }
 };
 
@@ -18,6 +19,7 @@ const Chapter = {
     sources: {type: 'list', objectType: 'Source'},
     spheres: {type: 'list', objectType: 'Sphere'},
     wordCount: 'int',
+    words: {type: 'list', objectType: 'WordCount'},
   }
 };
 
@@ -34,3 +36,11 @@ const Sphere = {
     name: 'string'
   }
 };
+
+const WordCount = {
+  name: 'WordCount',
+  properties: {
+    word: 'string',
+    count: 'int',
+  }
+}
