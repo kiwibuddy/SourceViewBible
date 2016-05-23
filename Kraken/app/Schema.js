@@ -27,7 +27,7 @@ const Chapter = {
 };
 
 const Source = {
-  name: 'Sphere',
+  name: 'Source',
   properties: {
     name: 'string'
   }
