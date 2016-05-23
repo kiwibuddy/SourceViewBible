@@ -80,27 +80,27 @@ class BookSummary extends Component {
 
         <View style={styles.sourcesContainer}>
           <TouchableOpacity style={styles.sourceButton}>
-            <Image source={require('../../Images/avatars/narrator.png')} style={styles.sourceImage}/>
+            <Image source={require('../../Images/avatars/narrator-medium.png')} style={styles.sourceImage}/>
             <Text style={styles.buttonSubtitle}>Narrator</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.sourceButton}>
-            <Image source={require('../../Images/avatars/divine.png')} style={[styles.sourceImage, {tintColor: Colors.sources.god}]}/>
+            <Image source={require('../../Images/avatars/divine-medium.png')} style={[styles.sourceImage, {tintColor: Colors.sources.god}]}/>
             <Text style={styles.buttonSubtitle}>God</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.sourceButton}>
-            <Image source={require('../../Images/avatars/human-male.png')} style={[styles.sourceImage, {tintColor: Colors.sources.lead}]}/>
+            <Image source={require('../../Images/avatars/human-male-medium.png')} style={[styles.sourceImage, {tintColor: Colors.sources.lead}]}/>
             <Text style={styles.buttonSubtitle}>Lead</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.sourceButton}>
-            <Image source={require('../../Images/avatars/human-male.png')} style={[styles.sourceImage, {tintColor: Colors.sources.support}]}/>
+            <Image source={require('../../Images/avatars/human-male-medium.png')} style={[styles.sourceImage, {tintColor: Colors.sources.support}]}/>
             <Text style={styles.buttonSubtitle}>Support</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.sourceButton}>
-            <Image source={require('../../Images/avatars/human-group.png')} style={[styles.sourceImage, {tintColor: Colors.sources.support}]}/>
+            <Image source={require('../../Images/avatars/human-group-medium.png')} style={[styles.sourceImage, {tintColor: Colors.sources.support}]}/>
             <Text style={styles.buttonSubtitle}>Other Support</Text>
           </TouchableOpacity>
         </View>
