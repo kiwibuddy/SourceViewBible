@@ -18,13 +18,17 @@ import LinearGradient from 'react-native-linear-gradient';
 
 const WordCloud = (props: Object) => {
   const style = props.style;
+  const words = props.children;
+
   return (
     <View style={style}>
       <LinearGradient
         colors={props.backgroundColors}
         start={[0.0, 0.25]} end={[0.5, 1.0]}
         style={styles.gradient}
-      />
+      >
+      {words}
+      </LinearGradient>
     </View>
   );
 };
