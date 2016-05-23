@@ -33,6 +33,7 @@ class Bucket; // Forward declaration
 typedef std::set<std::string> StringSet;
 typedef std::map<std::string, StringSet> String2StringSetMap;
 typedef std::map<monad_m, String2StringSetMap> Monad2String2StringSetMap;
+typedef std::map<monad_m, monad_m> Monad2MonadMap;
 
 typedef std::map<std::string, Bucket*> String2PBucketMap;
 typedef std::map<std::string, String2PBucketMap> String2String2PBucketMap;
@@ -113,6 +114,7 @@ class BinBucket : public Bucket {
  protected:
 	std::string m_object_type_name;
 	Monad2String2StringSetMap m_monad_map;
+	Monad2MonadMap m_first_monad_map;
 	String2String2PBucketMap m_feature_map;	
  public:
 	BinBucket(eBucketKind newKind, const std::string& object_type_name);

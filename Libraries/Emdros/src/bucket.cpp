@@ -4,7 +4,7 @@
  * Copyright (C) 2016 SourceView LLC. All rights reserved.
  *
  * Created: 2016/03/31
- * Last update: 2016/05/21
+ * Last update: 2016/05/23
  *
  * Contributors:
  *
@@ -692,6 +692,7 @@ BinBucket::~BinBucket()
 	}
 	m_feature_map.clear();
 	m_monad_map.clear();
+	m_first_monad_map.clear();
 }
 
 void BinBucket::incrementCountInChild(const BucketValue& bv)	
@@ -760,7 +761,6 @@ void BinBucket::getBucketListFromFeatureName(const std::string& feature_name, st
 void BinBucket::getBucketListFromMonad(const BucketValue& bv, int depth, eBucketKind child_bucket_kind, const std::string& child_object_type_name, std::list<Bucket*>& /* out */ bucket_list)
 {
 	if (depth == 0) {
-		monad_m monad = bv.m_last_monad;
 		addBucketValue(bv, child_bucket_kind, child_object_type_name);
 		bucket_list.push_back(this);
 	} else {
@@ -772,26 +772,31 @@ void BinBucket::getBucketListFromMonad(const BucketValue& bv, int depth, eBucket
 			mit1 = m_monad_map.find(rmit1->first);
 		}
 
-		// Go back one more than we need to
+		// Go back one more than we need to, or until the
+		// beginning, whichever comes first
 		while (mit1 != m_monad_map.begin()
 		       && mit1->first >= bv.m_first_monad) {
 			--mit1;
 		}
 
-
+		// Go forwards if necessary
 		if (mit1 != m_monad_map.end()
-		    && mit1->first < bv.m_first_monad) {
+		    && (mit1->first < bv.m_first_monad
+			|| m_first_monad_map[mit1->first] > bv.m_first_monad)) {
 			++mit1;
 		}
+
 		while (mit1 != m_monad_map.end()) {
-			ASSERT_THROW(mit1 != m_monad_map.end(),
-				     "mit1 == m_monad_map.end() should be impossible due to the guard above.");
+			ASSERT_THROW(mit1->first >= bv.m_last_monad
+				     || mit1->first >= bv.m_first_monad,
+				     "ERROR in logic: This monad-assert should be true by now.");
 			
+
 			String2StringSetMap::iterator msetit1 = mit1->second.begin();
 			String2StringSetMap::iterator msetit1end = mit1->second.end();
 			while (msetit1 != msetit1end) {
 				std::string feature_name = msetit1->first;
-				
+
 				StringSet::iterator setit1 = msetit1->second.begin();
 				StringSet::iterator setit1end = msetit1->second.end();
 				while (setit1 != setit1end) {
@@ -802,7 +807,7 @@ void BinBucket::getBucketListFromMonad(const BucketValue& bv, int depth, eBucket
 					if (pInnerBucket != 0) {
 						pInnerBucket->getBucketListFromMonad(bv, depth-1, child_bucket_kind, child_object_type_name, bucket_list);
 					}
-					
+						
 					++setit1;
 				}
 				
@@ -811,6 +816,8 @@ void BinBucket::getBucketListFromMonad(const BucketValue& bv, int depth, eBucket
 			if (mit1->first <= bv.m_last_monad) {
 				++mit1;
 				if (mit1 == m_monad_map.end()) {
+					break;
+				} else if (m_first_monad_map[mit1->first] > bv.m_last_monad) {
 					break;
 				}
 			} else {
@@ -824,6 +831,7 @@ void BinBucket::getBucketListFromMonad(const BucketValue& bv, int depth, eBucket
 
 void BinBucket::addBucketValue(const BucketValue& bv, eBucketKind child_bucket_kind, const std::string& child_object_type_name)
 {
+	// m_feature_map
 	String2String2PBucketMap::iterator fit1 =  m_feature_map.find(bv.m_feature_name);
 	if (fit1 == m_feature_map.end()) {
 		String2PBucketMap new_map;
@@ -845,6 +853,7 @@ void BinBucket::addBucketValue(const BucketValue& bv, eBucketKind child_bucket_k
 		}
 	}
 
+	// m_monad_map
 	Monad2String2StringSetMap::iterator mit1 = m_monad_map.find(bv.m_last_monad);
 	if (mit1 == m_monad_map.end()) {
 		StringSet new_set;
@@ -866,6 +875,9 @@ void BinBucket::addBucketValue(const BucketValue& bv, eBucketKind child_bucket_k
 			mfit1->second.insert(bv.m_feature_value);
 		}
 	}
+
+	// m_first_monad_map
+	m_first_monad_map[bv.m_last_monad] = bv.m_first_monad;
 }
 
 
@@ -886,49 +898,76 @@ void BinBucket::getJSONInBigstring(Bigstring *pResult) const
 {
 	ADD_SZ("{\"");
 	ADD_STRING(m_object_type_name);
-	ADD_SZ("\":{");
+	ADD_SZ("\":");
 
 	String2String2PBucketMap::const_iterator ci1 = m_feature_map.begin();
-	String2String2PBucketMap::const_iterator ci1end = m_feature_map.end();
-	while (ci1 != ci1end) {
-		std::string feature_name = ci1->first;
+	
+	// Is this a next-to-ininermost bucket whose feature
+	// name is empty and whose only feature value is
+	// empty?
+	if (m_feature_map.size() == 1
+	    && ci1->first.empty()) {
+		// Yes (and the asserts below prove it).
 
-		ADD_CHAR('\"');
-		ADD_STRING(feature_name);
-		ADD_SZ("\":{");
-
+		ASSERT_THROW(ci1->second.size() == 1,
+			     "Error: We should only have one feature value, and it should be empty, when the feature name is empty (probably this is something that got changed in BucketSpecification::makeBucket or one of its callees).");
 		String2PBucketMap::const_iterator ci2 = ci1->second.begin();
-		String2PBucketMap::const_iterator ci2end = ci1->second.end();
-		while (ci2 != ci2end) {
-			std::string feature_value = ci2->first;
-			Bucket *pBucket = ci2->second;
-
-
+		ASSERT_THROW(ci2->first.empty(),
+			     "Error: We should only have an empty feature value.");
+		Bucket *pBucket = ci2->second;
+		
+		
+		if (pBucket != 0) {
+			ASSERT_THROW(pBucket->getKind() == kBKCount,
+				     "Logic error: The pBucket->getKind() should be kBKCount.");
+			pBucket->getJSONInBigstring(pResult);
+		}
+	} else {
+		ADD_CHAR('{');
+		
+		String2String2PBucketMap::const_iterator ci1end = m_feature_map.end();
+		while (ci1 != ci1end) {
+			std::string feature_name = ci1->first;
+			
 			ADD_CHAR('\"');
-			ADD_STRING(feature_value);
-			ADD_SZ("\":");
+			ADD_STRING(feature_name);
+			ADD_SZ("\":{");
 
-			if (pBucket != 0) {
-				pBucket->getJSONInBigstring(pResult);
+			String2PBucketMap::const_iterator ci2 = ci1->second.begin();
+			String2PBucketMap::const_iterator ci2end = ci1->second.end();
+			while (ci2 != ci2end) {
+				std::string feature_value = ci2->first;
+				Bucket *pBucket = ci2->second;
+				
+				
+				ADD_CHAR('\"');
+				ADD_STRING(feature_value);
+				ADD_SZ("\":");
+				
+				if (pBucket != 0) {
+					pBucket->getJSONInBigstring(pResult);
+				}
+				
+				++ci2;
+				
+				if (ci2 != ci2end) {
+					ADD_CHAR(',');
+				}
 			}
 
-			++ci2;
-
-			if (ci2 != ci2end) {
+		
+			ADD_CHAR('}');
+			
+			++ci1;
+			
+			if (ci1 != ci1end) {
 				ADD_CHAR(',');
 			}
 		}
-		
 		ADD_CHAR('}');
-		
-		++ci1;
-
-		if (ci1 != ci1end) {
-			ADD_CHAR(',');
-		}
 	}
 
-	ADD_SZ("}}");
+	ADD_CHAR('}');
 }
 
 
