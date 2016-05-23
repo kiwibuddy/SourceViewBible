@@ -1,7 +1,7 @@
 /* @flow */
 'use strict';
 
-function ReadingTime(words) {
+function ReadingTime(words: number) {
   const minutes = words / 200;
   const time = minutes * 60 * 1000;
   const displayed = Math.ceil(minutes);

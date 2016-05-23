@@ -32,6 +32,10 @@ import BookSpheres from './BookSpheres';
 import BookWords from './BookWords';
 
 class Book extends Component {
+  state: {
+    selectedTab: string
+  };
+
   constructor(props) {
     super(props);
     this.state = {

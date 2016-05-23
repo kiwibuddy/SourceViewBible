@@ -24,6 +24,7 @@ import {
   Platform
 } from '../../Common';
 
+// $FlowBug: - Flow can't find os module extension
 import SegmentedControl from '../Common/SegmentedControl';
 
 import SourcesBarChart from '../Charts/SourcesBarChart';
@@ -69,7 +70,7 @@ class Books extends Component {
         <ListView
           dataSource={this.state.dataSource}
           renderSectionHeader={this._renderSectionHeader}
-          renderRow={this._renderRow}
+          renderRow={this._renderItem}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
         />
@@ -86,7 +87,7 @@ class Books extends Component {
     );
   }
 
-  _renderRow = (book, sectionID, rowID, highlightRow) => {
+  _renderItem = (book, sectionID, rowID, highlightRow) => {
     return (
       <TouchableOpacity onPress={ () => this.props.onButtonPress(book) }>
         <View style={styles.cellContainer}>
