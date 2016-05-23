@@ -12,7 +12,13 @@ import {
   View
 } from 'react-native';
 
+const Seed = require('./app/seed');
+
 class Kraken extends Component {
+  componentDidMount() {
+    Seed.kraken();
+  }
+
   render() {
     return (
       <View style={styles.container}>

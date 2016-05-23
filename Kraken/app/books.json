@@ -1,0 +1,398 @@
+[
+  {
+    "djhref": "Gen",
+    "key": "genesis",
+    "testament": "old",
+    "name": "Genesis"
+  },
+  {
+    "djhref": "Exo",
+    "key": "exodus",
+    "testament": "old",
+    "name": "Exodus"
+  },
+  {
+    "djhref": "Lev",
+    "key": "leviticus",
+    "testament": "old",
+    "name": "Leviticus"
+  },
+  {
+    "djhref": "Num",
+    "key": "numbers",
+    "testament": "old",
+    "name": "Numbers"
+  },
+  {
+    "djhref": "Deu",
+    "key": "deuteronomy",
+    "testament": "old",
+    "name": "Deuteronomy"
+  },
+  {
+    "djhref": "Jos",
+    "key": "joshua",
+    "testament": "old",
+    "name": "Joshua"
+  },
+  {
+    "djhref": "Jdg",
+    "key": "judges",
+    "testament": "old",
+    "name": "Judges"
+  },
+  {
+    "djhref": "Rut",
+    "key": "ruth",
+    "testament": "old",
+    "name": "Ruth"
+  },
+  {
+    "djhref": "1Sa",
+    "key": "1-samuel",
+    "testament": "old",
+    "name": "1 Samuel"
+  },
+  {
+    "djhref": "2Sa",
+    "key": "2-samuel",
+    "testament": "old",
+    "name": "2 Samuel"
+  },
+  {
+    "djhref": "1Ki",
+    "key": "1-kings",
+    "testament": "old",
+    "name": "1 Kings"
+  },
+  {
+    "djhref": "2Ki",
+    "key": "2-kings",
+    "testament": "old",
+    "name": "2 Kings"
+  },
+  {
+    "djhref": "1Ch",
+    "key": "1-chronicles",
+    "testament": "old",
+    "name": "1 Chronicles"
+  },
+  {
+    "djhref": "2Ch",
+    "key": "2-chronicles",
+    "testament": "old",
+    "name": "2 Chronicles"
+  },
+  {
+    "djhref": "Ezr",
+    "key": "ezra",
+    "testament": "old",
+    "name": "Ezra"
+  },
+  {
+    "djhref": "Neh",
+    "key": "nehemiah",
+    "testament": "old",
+    "name": "Nehemiah"
+  },
+  {
+    "djhref": "Est",
+    "key": "esther",
+    "testament": "old",
+    "name": "Esther"
+  },
+  {
+    "djhref": "Job",
+    "key": "job",
+    "testament": "old",
+    "name": "Job"
+  },
+  {
+    "djhref": "Psa",
+    "key": "psalm",
+    "testament": "old",
+    "name": "Psalm"
+  },
+  {
+    "djhref": "Pro",
+    "key": "proverbs",
+    "testament": "old",
+    "name": "Proverbs"
+  },
+  {
+    "djhref": "Ecc",
+    "key": "ecclesiastes",
+    "testament": "old",
+    "name": "Ecclesiastes"
+  },
+  {
+    "djhref": "SoS",
+    "key": "song-of-songs",
+    "testament": "old",
+    "name": "Song of Songs"
+  },
+  {
+    "djhref": "Isa",
+    "key": "isaiah",
+    "testament": "old",
+    "name": "Isaiah"
+  },
+  {
+    "djhref": "Jer",
+    "key": "jeremiah",
+    "testament": "old",
+    "name": "Jeremiah"
+  },
+  {
+    "djhref": "Lam",
+    "key": "lamentations",
+    "testament": "old",
+    "name": "Lamentations"
+  },
+  {
+    "djhref": "Eze",
+    "key": "ezekiel",
+    "testament": "old",
+    "name": "Ezekiel"
+  },
+  {
+    "djhref": "Dan",
+    "key": "daniel",
+    "testament": "old",
+    "name": "Daniel"
+  },
+  {
+    "djhref": "Hos",
+    "key": "hosea",
+    "testament": "old",
+    "name": "Hosea"
+  },
+  {
+    "djhref": "Joe",
+    "key": "joel",
+    "testament": "old",
+    "name": "Joel"
+  },
+  {
+    "djhref": "Amo",
+    "key": "amos",
+    "testament": "old",
+    "name": "Amos"
+  },
+  {
+    "djhref": "Oba",
+    "key": "obadiah",
+    "testament": "old",
+    "name": "Obadiah"
+  },
+  {
+    "djhref": "Jon",
+    "key": "jonah",
+    "testament": "old",
+    "name": "Jonah"
+  },
+  {
+    "djhref": "Mic",
+    "key": "micah",
+    "testament": "old",
+    "name": "Micah"
+  },
+  {
+    "djhref": "Nah",
+    "key": "nahum",
+    "testament": "old",
+    "name": "Nahum"
+  },
+  {
+    "djhref": "Hab",
+    "key": "habakkuk",
+    "testament": "old",
+    "name": "Habakkuk"
+  },
+  {
+    "djhref": "Zep",
+    "key": "zephaniah",
+    "testament": "old",
+    "name": "Zephaniah"
+  },
+  {
+    "djhref": "Hag",
+    "key": "haggai",
+    "testament": "old",
+    "name": "Haggai"
+  },
+  {
+    "djhref": "Zec",
+    "key": "zechariah",
+    "testament": "old",
+    "name": "Zechariah"
+  },
+  {
+    "djhref": "Mal",
+    "key": "malachi",
+    "testament": "old",
+    "name": "Malachi"
+  },
+  {
+    "djhref": "Mat",
+    "key": "matthew",
+    "testament": "new",
+    "name": "Matthew"
+  },
+  {
+    "djhref": "Mar",
+    "key": "mark",
+    "testament": "new",
+    "name": "Mark"
+  },
+  {
+    "djhref": "Luk",
+    "key": "luke",
+    "testament": "new",
+    "name": "Luke"
+  },
+  {
+    "djhref": "Joh",
+    "key": "john",
+    "testament": "new",
+    "name": "John"
+  },
+  {
+    "djhref": "Act",
+    "key": "acts",
+    "testament": "new",
+    "name": "Acts"
+  },
+  {
+    "djhref": "Rom",
+    "key": "romans",
+    "testament": "new",
+    "name": "Romans"
+  },
+  {
+    "djhref": "1Co",
+    "key": "1-corinthians",
+    "testament": "new",
+    "name": "1 Corinthians"
+  },
+  {
+    "djhref": "2Co",
+    "key": "2-corinthians",
+    "testament": "new",
+    "name": "2 Corinthians"
+  },
+  {
+    "djhref": "Gal",
+    "key": "galatians",
+    "testament": "new",
+    "name": "Galatians"
+  },
+  {
+    "djhref": "Eph",
+    "key": "ephesians",
+    "testament": "new",
+    "name": "Ephesians"
+  },
+  {
+    "djhref": "Php",
+    "key": "philippians",
+    "testament": "new",
+    "name": "Philippians"
+  },
+  {
+    "djhref": "Col",
+    "key": "colossians",
+    "testament": "new",
+    "name": "Colossians"
+  },
+  {
+    "djhref": "1Th",
+    "key": "1-thessalonians",
+    "testament": "new",
+    "name": "1 Thessalonians"
+  },
+  {
+    "djhref": "2Th",
+    "key": "2-thessalonians",
+    "testament": "new",
+    "name": "2 Thessalonians"
+  },
+  {
+    "djhref": "1Ti",
+    "key": "1-timothy",
+    "testament": "new",
+    "name": "1 Timothy"
+  },
+  {
+    "djhref": "2Ti",
+    "key": "2-timothy",
+    "testament": "new",
+    "name": "2 Timothy"
+  },
+  {
+    "djhref": "Tit",
+    "key": "titus",
+    "testament": "new",
+    "name": "Titus"
+  },
+  {
+    "djhref": "Phm",
+    "key": "philemon",
+    "testament": "new",
+    "name": "Philemon"
+  },
+  {
+    "djhref": "Heb",
+    "key": "hebrews",
+    "testament": "new",
+    "name": "Hebrews"
+  },
+  {
+    "djhref": "Jam",
+    "key": "james",
+    "testament": "new",
+    "name": "James"
+  },
+  {
+    "djhref": "1Pe",
+    "key": "1-peter",
+    "testament": "new",
+    "name": "1 Peter"
+  },
+  {
+    "djhref": "2Pe",
+    "key": "2-peter",
+    "testament": "new",
+    "name": "2 Peter"
+  },
+  {
+    "djhref": "1Jn",
+    "key": "1-john",
+    "testament": "new",
+    "name": "1 John"
+  },
+  {
+    "djhref": "2Jn",
+    "key": "2-john",
+    "testament": "new",
+    "name": "2 John"
+  },
+  {
+    "djhref": "3Jn",
+    "key": "3-john",
+    "testament": "new",
+    "name": "3 John"
+  },
+  {
+    "djhref": "Jud",
+    "key": "jude",
+    "testament": "new",
+    "name": "Jude"
+  },
+  {
+    "djhref": "Rev",
+    "key": "revelation",
+    "testament": "new",
+    "name": "Revelation"
+  }
+]
