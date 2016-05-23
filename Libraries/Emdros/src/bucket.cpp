@@ -95,16 +95,19 @@ protected:
 	std::string m_object_type_name;
 	std::list<std::string> m_feature_name_list;
 	std::string m_expression;
+	std::string m_bucket_kind_override;
 	Sheaf *m_pSheaf;
 	BucketSpecification *m_inner_bucket_specification;
 public:
 	BucketSpecification(const std::string& object_type_name,
 			    const std::list<std::string> feature_name_list,
-			    const std::string& expression);
+			    const std::string& expression,
+			    const std::string& bucket_kind_override);
 	~BucketSpecification();
 
 	bool getOTNIsBin() const;
 
+	bool weed(std::string& error_message) const;
 
 	bool execute(EmdrosEnv *pEnv, const SetOfMonads& substrate, std::string& error_message);
 
@@ -131,10 +134,12 @@ protected:
 
 BucketSpecification::BucketSpecification(const std::string& object_type_name,
 					 const std::list<std::string> feature_name_list,
-					 const std::string& expression)
+					 const std::string& expression,
+					 const std::string& bucket_kind_override)
 	: m_object_type_name(object_type_name),
 	  m_feature_name_list(feature_name_list),
 	  m_expression(expression),
+	  m_bucket_kind_override(bucket_kind_override),
 	  m_pSheaf(0),
 	  m_inner_bucket_specification(0)
 {
@@ -151,14 +156,17 @@ BucketSpecification::~BucketSpecification()
 
 bool BucketSpecification::getOTNIsBin() const
 {
-	std::string lowercase_OTN = m_object_type_name;
-	str_tolower(lowercase_OTN);
-	
-	if (lowercase_OTN == "book"
-	    || lowercase_OTN == "chapter"
-	    || lowercase_OTN == "conversation") {
+	if (m_bucket_kind_override.empty()) {
+		return false;
+	} else if (m_bucket_kind_override == "count") {
+		return false;
+	} else if (m_bucket_kind_override == "bucket") {
+		return false;
+	} else if (m_bucket_kind_override == "bin") {
 		return true;
 	} else {
+		ASSERT_THROW(false,
+			     "ERROR: BucketSpecification::m_bucket_kind_override = '" + m_bucket_kind_override + "', which is unknown. We should have caught this in BucketSpecification::weed().\n");
 		return false;
 	}
 }
@@ -182,7 +190,36 @@ std::string BucketSpecification::getQuery(const SetOfMonads& substrate) const
 	return query;
 }
 
-
+bool BucketSpecification::weed(std::string& error_message) const
+{
+	bool bResult = true;
+	if (m_inner_bucket_specification != 0) {
+		bResult = m_inner_bucket_specification->weed(error_message);
+	}
+	if (!bResult) {
+		return false;
+	}
+	
+	if (m_bucket_kind_override.empty()) {
+		bResult = true;
+	} else if (m_bucket_kind_override == "count") {
+		bResult = m_inner_bucket_specification == 0;
+		if (!bResult) {
+			error_message += "ERROR: objectTypeName '" + m_object_type_name + "' has a 'bucket_kind' value of 'count', yet this is not the innermost bucket specification. The 'count' bucket kind can only be specified on the innermost bucket specification.\n";
+		}
+	} else if (m_bucket_kind_override == "bin"
+		   || m_bucket_kind_override == "bucket") {
+		bResult = m_inner_bucket_specification != 0;
+		if (!bResult) {
+			error_message += "ERROR: objectTypeName '" + m_object_type_name + "' has a 'bucket_kind' value of '" + m_bucket_kind_override + "', yet this is the innermost bucket specification. The '" + m_bucket_kind_override + "' bucket kind can only be specified on non-innermost bucket specifications.\n";
+		}
+	} else {
+		bResult = false;
+		error_message += "ERROR: objectTypeName '" + m_object_type_name + "' has a 'bucket_kind' value of '" + m_bucket_kind_override + "', but this kind is unknown. Please fix the input.";
+	}
+	
+	return bResult;
+}
 
 
 bool BucketSpecification::execute(EmdrosEnv *pEnv, const SetOfMonads& substrate, std::string& error_message)
@@ -279,7 +316,10 @@ Bucket *BucketSpecification::makeBucket(BucketSpecification *pTopBucketSpecifica
 	eBucketKind top_bucket_kind = pTopBucketSpecification->getBucketKind();
 	std::string top_object_type_name = pTopBucketSpecification->m_object_type_name;
 
-	Bucket *pTopLevelBucket = new BinBucket(top_bucket_kind, top_object_type_name);
+	std::string child_object_type_name;
+	eBucketKind child_bucket_kind = pTopBucketSpecification->getChildBucketKind(child_object_type_name);
+
+	Bucket *pTopLevelBucket = Bucket::newBucket(top_bucket_kind, top_object_type_name, child_bucket_kind);
 
 	int depth = 0;
 	BucketSpecification *pBucketSpecification = pTopBucketSpecification;
@@ -300,8 +340,20 @@ void BucketSpecification::makeBucketStructure(Bucket *pTopLevelBucket, int depth
 
 	std::string child_object_type_name;
 	eBucketKind child_bucket_kind = getChildBucketKind(child_object_type_name);
-
 	bool bHasChild = m_inner_bucket_specification != 0;
+
+	// Calculate grandchild's bucket kind (if a grandchild exists,
+	// otherwise default to kBKCount, which is used here in lieu
+	// of 'kBKNone'.
+	eBucketKind grandchild_bucket_kind = kBKCount;
+	if (bHasChild) {
+		std::string dummy_grandchild_bucket_otn;
+		grandchild_bucket_kind = m_inner_bucket_specification->getChildBucketKind(dummy_grandchild_bucket_otn);
+		(void) dummy_grandchild_bucket_otn; // Silence a warning
+	} else {
+		grandchild_bucket_kind = kBKCount;
+	}
+			      
 
 	std::vector<std::string> feature_name_vec;
 	std::vector<std::string> feature_value_vec;
@@ -365,7 +417,7 @@ void BucketSpecification::makeBucketStructure(Bucket *pTopLevelBucket, int depth
 							  bucket_kind);
 				std::list<Bucket*> bucket_list;
 
-				pTopLevelBucket->getBucketListFromMonad(myBucketValue, depth, child_bucket_kind, child_object_type_name, bucket_list);
+				pTopLevelBucket->getBucketListFromMonad(myBucketValue, depth, child_bucket_kind, child_object_type_name, grandchild_bucket_kind, bucket_list);
 				std::list<Bucket*>::iterator bucket_it1 = bucket_list.begin();
 				std::list<Bucket*>::iterator bucket_it1end = bucket_list.end();
 				while (bucket_it1 != bucket_it1end) {
@@ -434,6 +486,7 @@ BucketSpecification *getBucketSpecificationFromJSONValue(const JSONValue *pJSONV
 		std::string object_type_name;
 		std::list<std::string> feature_name_list;
 		std::string expression;
+		std::string bucket_kind_override;
 		BucketSpecification *pInnerBucketSpecification = 0;
 
 		// This will return 0 if "buckets" is not a key in pJSONValue.
@@ -443,7 +496,9 @@ BucketSpecification *getBucketSpecificationFromJSONValue(const JSONValue *pJSONV
 			const JSONValue *pFeature = pJSONValue->getObjectValue("feature");
 			if (pFeature->getKind() == kJSONString) {
 				std::string feature_name = pFeature->getString();
-				feature_name_list.push_back(feature_name);
+				if (feature_name != "") {
+					feature_name_list.push_back(feature_name);
+				}
 			} else if (pFeature->getKind() == kJSONList) {
 				const std::list<JSONValue*>& feature_list = pFeature->getList();
 				std::list<JSONValue*>::const_iterator ci = feature_list.begin();
@@ -452,7 +507,9 @@ BucketSpecification *getBucketSpecificationFromJSONValue(const JSONValue *pJSONV
 					const JSONValue *pListMember = *ci;
 					if (pListMember->getKind() == kJSONString) {
 						std::string feature_name = pListMember->getString();
-						feature_name_list.push_back(feature_name);
+						if (feature_name != "") {
+							feature_name_list.push_back(feature_name);
+						}
 					}
 					++ci;
 				}
@@ -465,11 +522,14 @@ BucketSpecification *getBucketSpecificationFromJSONValue(const JSONValue *pJSONV
 		}
 
 		expression = getStringFromJSONDict(pJSONValue, "expression");
+
+		bucket_kind_override = getStringFromJSONDict(pJSONValue, "bucket_kind");
 		
 		BucketSpecification *pResult =
 			new BucketSpecification(object_type_name,
 						feature_name_list,
-						expression);
+						expression,
+						bucket_kind_override);
 		if (pBucketsDict != 0) {
 			pInnerBucketSpecification = getBucketSpecificationFromJSONValue(pBucketsDict);
 			pResult->setInnerBucketSpecification(pInnerBucketSpecification);
@@ -488,7 +548,13 @@ BucketSpecification *getBucketSpecificationFromJSONString(const std::string& jso
 	} else {
 		BucketSpecification *pResult = getBucketSpecificationFromJSONValue(pValue);
 		delete pValue;
-		return pResult;
+		if (pResult->weed(error_message)) {
+			return pResult;
+		} else {
+			error_message += "Error in weeding bucket specification.\n";
+			delete pResult;
+			return 0;
+		}
 	}
 }
 
@@ -528,18 +594,37 @@ Bucket *getBucketFromJSONBucketSpecification(EmdrosEnv *pEnv, const std::string&
 // Bucket
 //
 /////////////////////////////////////////////////////////////////
-Bucket::Bucket(eBucketKind bucket_kind)
+Bucket::Bucket(eBucketKind bucket_kind, eBucketKind child_bucket_kind)
 {
-	switch (bucket_kind) {
-	case kBKCount:
+	if (bucket_kind == kBKCount) {
 		m_kind_or_count = 0;
-		break;
-	case kBKBucket:
-		m_kind_or_count = -1;
-		break;
-	case kBKBin:
-		m_kind_or_count = -2;
-		break;
+	} else if (bucket_kind == kBKBucket) {
+		switch (child_bucket_kind) {
+		case kBKCount:
+			m_kind_or_count = -10;
+		case kBKBucket:
+			m_kind_or_count = -11;
+		case kBKBin:
+			m_kind_or_count = -12;
+			break;
+		default:
+			ASSERT_THROW(false, "Unknown child_bucket_kind.");
+		}
+	} else if (bucket_kind == kBKBin) {
+		switch (child_bucket_kind) {
+		case kBKCount:
+			m_kind_or_count = -20;
+		case kBKBucket:
+			m_kind_or_count = -21;
+		case kBKBin:
+			m_kind_or_count = -22;
+			break;
+		default:
+			ASSERT_THROW(false, "Unknown child_bucket_kind.");
+		}
+	} else {
+		ASSERT_THROW(false,
+			     "Logic error: We should not be able to get here.");
 	}
 }
 
@@ -552,44 +637,77 @@ Bucket::~Bucket()
 eBucketKind Bucket::getKind() const
 {
 	switch (m_kind_or_count) {
-	case -2:
+	case -22:
+	case -21:
+	case -20:
 		return kBKBin;
-	case -1:
+	case -12:
+	case -11:
+	case -10:
 		return kBKBucket;
 	default:
+		ASSERT_THROW(m_kind_or_count >= 0,
+			     "ERROR: Unknown m_kind_or_count = " + long2string(m_kind_or_count));
 		return kBKCount;
 	}
 }
 
-Bucket *Bucket::newBucket(eBucketKind bucket_kind, const std::string& object_type_name)
+
+eBucketKind Bucket::getChildKind() const
+{
+	switch (m_kind_or_count) {
+	case -22:
+	case -12:
+		return kBKBin;
+		break;
+	case -21:
+	case -11:
+		return kBKBucket;
+		break;
+	case -20:
+	case -10:
+		return kBKCount;
+		break;
+	default:
+		ASSERT_THROW(m_kind_or_count >= 0,
+			     "ERROR: Unknown m_kind_or_count = " + long2string(m_kind_or_count));
+		return kBKCount;
+	}
+}
+
+Bucket *Bucket::newBucket(eBucketKind bucket_kind, const std::string& object_type_name, eBucketKind child_bucket_kind)
 {
 	Bucket *pResult = 0;
 	if (bucket_kind == kBKCount) {
-		pResult = new Bucket(kBKCount);
+		pResult = new Bucket(kBKCount, kBKCount);
+	} else if (bucket_kind == kBKBucket
+		   || bucket_kind == kBKBin) {
+		pResult = new BucketBucket(bucket_kind, object_type_name, child_bucket_kind);
 	} else {
-		pResult = new BinBucket(bucket_kind, object_type_name);
+		ASSERT_THROW(false,
+			     "ERROR: Unknown bucket_kind. We updated the eBucketKind enum, but did not update this code. Please fix.");
 	}
 	return pResult;
 }
 
-void Bucket::addBucketValue(const BucketValue& bv, eBucketKind child_bucket_kind, const std::string& child_object_type_name)
+void Bucket::addBucketValue(const BucketValue& bv, eBucketKind child_bucket_kind, const std::string& child_object_type_name, eBucketKind grandchild_bucket_kind)
 {
 	ASSERT_THROW(false,
 		     "ERROR: Bucket::addBucketValue() must not be called on Bucket.");
 }
 
 
-void Bucket::getBucketListFromMonad(const BucketValue& myBucketValue, int depth, eBucketKind child_bucket_kind, const std::string& child_object_type_name, std::list<Bucket*>& /* out */ bucket_list)
+void Bucket::getBucketListFromMonad(const BucketValue& myBucketValue, int depth, eBucketKind child_bucket_kind, const std::string& child_object_type_name, eBucketKind grandchild_bucket_kind, std::list<Bucket*>& /* out */ bucket_list)
 {
 	ASSERT_THROW(false,
-		     "ERROR: Bucket::getBucketListFromMonad() must not be called except on BinBucket.");
+		     "ERROR: Bucket::getBucketListFromMonad() must not be called except on BucketBucket.");
 }
 
 
 void Bucket::incrementCountInChild(const BucketValue& bv)
 {
 	ASSERT_THROW(false,
-		     "ERROR: Bucket::incrementCountInChild() called. This should only be called on a BinBucket object.");
+		     "ERROR: Bucket::incrementCountInChild() called. This should only be called on a BucketBucket object.");
 }
 
 void Bucket::incrementCount()
@@ -661,18 +779,18 @@ std::string Bucket::getJSON() const
 
 /////////////////////////////////////////////////////////////////
 //
-// BinBucket
+// BucketBucket
 //
 /////////////////////////////////////////////////////////////////
 
-BinBucket::BinBucket(eBucketKind newKind, const std::string& object_type_name)
-	: Bucket(newKind),
+BucketBucket::BucketBucket(eBucketKind newKind, const std::string& object_type_name, eBucketKind child_kind)
+	: Bucket(newKind, child_kind),
 	  m_object_type_name(object_type_name)
 {
 }
 
 
-BinBucket::~BinBucket()
+BucketBucket::~BucketBucket()
 {
 	String2String2PBucketMap::iterator it1 = m_feature_map.begin();
 	String2String2PBucketMap::iterator it1end = m_feature_map.end();
@@ -695,12 +813,12 @@ BinBucket::~BinBucket()
 	m_first_monad_map.clear();
 }
 
-void BinBucket::incrementCountInChild(const BucketValue& bv)	
+void BucketBucket::incrementCountInChild(const BucketValue& bv)	
 {
 	String2String2PBucketMap::iterator fit1 = m_feature_map.find(bv.m_feature_name);
 	if (fit1 == m_feature_map.end()) {
 		String2PBucketMap new_map;
-		Bucket *pNewBucket = new Bucket(kBKCount);
+		Bucket *pNewBucket = new Bucket(kBKCount, kBKCount);
 		pNewBucket->incrementCount();
 		new_map.insert(std::make_pair(bv.m_feature_value, pNewBucket));
 		m_feature_map.insert(std::make_pair(bv.m_feature_name, new_map));
@@ -708,12 +826,12 @@ void BinBucket::incrementCountInChild(const BucketValue& bv)
 		String2PBucketMap::iterator spit1 = fit1->second.find(bv.m_feature_value);
 		Bucket *pInnerBucket = 0;
 		if (spit1 == fit1->second.end()) {
-			pInnerBucket = new Bucket(kBKCount);
+			pInnerBucket = new Bucket(kBKCount, kBKCount);
 			fit1->second[bv.m_feature_value] = pInnerBucket;
 		} else {
 			pInnerBucket = spit1->second;
 			if (pInnerBucket == 0) {
-				pInnerBucket = new Bucket(kBKCount);
+				pInnerBucket = new Bucket(kBKCount, kBKCount);
 				fit1->second[bv.m_feature_value] = pInnerBucket;
 			}
 		}
@@ -722,7 +840,7 @@ void BinBucket::incrementCountInChild(const BucketValue& bv)
 }
 
 
-Bucket *BinBucket::getBucketFromFeatureNameAndValue(const std::string& feature_name, const std::string& feature_value)
+Bucket *BucketBucket::getBucketFromFeatureNameAndValue(const std::string& feature_name, const std::string& feature_value)
 {
 	String2String2PBucketMap::iterator fit1 = m_feature_map.find(feature_name);
 	if (fit1 == m_feature_map.end()) {
@@ -740,7 +858,7 @@ Bucket *BinBucket::getBucketFromFeatureNameAndValue(const std::string& feature_n
 	}
 }
 
-void BinBucket::getBucketListFromFeatureName(const std::string& feature_name, std::list<Bucket*>& feature_bucket_list)
+void BucketBucket::getBucketListFromFeatureName(const std::string& feature_name, std::list<Bucket*>& feature_bucket_list)
 {
 	String2String2PBucketMap::iterator fit1 = m_feature_map.find(feature_name);
 	if (fit1 == m_feature_map.end()) {
@@ -758,10 +876,10 @@ void BinBucket::getBucketListFromFeatureName(const std::string& feature_name, st
 }
 	
 
-void BinBucket::getBucketListFromMonad(const BucketValue& bv, int depth, eBucketKind child_bucket_kind, const std::string& child_object_type_name, std::list<Bucket*>& /* out */ bucket_list)
+void BucketBucket::getBucketListFromMonad(const BucketValue& bv, int depth, eBucketKind child_bucket_kind, const std::string& child_object_type_name, eBucketKind grandchild_bucket_kind, std::list<Bucket*>& /* out */ bucket_list)
 {
 	if (depth == 0) {
-		addBucketValue(bv, child_bucket_kind, child_object_type_name);
+		addBucketValue(bv, child_bucket_kind, child_object_type_name, grandchild_bucket_kind);
 		bucket_list.push_back(this);
 	} else {
 		monad_m monad = bv.m_last_monad;
@@ -805,7 +923,7 @@ void BinBucket::getBucketListFromMonad(const BucketValue& bv, int depth, eBucket
 					Bucket *pInnerBucket = getBucketFromFeatureNameAndValue(feature_name, feature_value);
 					
 					if (pInnerBucket != 0) {
-						pInnerBucket->getBucketListFromMonad(bv, depth-1, child_bucket_kind, child_object_type_name, bucket_list);
+						pInnerBucket->getBucketListFromMonad(bv, depth-1, child_bucket_kind, child_object_type_name, grandchild_bucket_kind, bucket_list);
 					}
 						
 					++setit1;
@@ -829,24 +947,41 @@ void BinBucket::getBucketListFromMonad(const BucketValue& bv, int depth, eBucket
 
 
 
-void BinBucket::addBucketValue(const BucketValue& bv, eBucketKind child_bucket_kind, const std::string& child_object_type_name)
+void BucketBucket::addBucketValue(const BucketValue& bv, eBucketKind child_bucket_kind, const std::string& child_object_type_name, eBucketKind grandchild_bucket_kind)
 {
+	std::string feature_value;
+	switch (getKind()) {
+	case kBKBin:
+		feature_value = monad_m2string(bv.m_first_monad) + ":" + bv.m_feature_value;
+		break;
+	case kBKBucket:
+		feature_value = bv.m_feature_value;
+		break;
+	case kBKCount:
+		ASSERT_THROW(false,
+			     "ERROR: BucketBucket::getKind() == kBKCount, yet this should not be possible here. Please fix the logic.\n");
+		break;
+	default:
+		ASSERT_THROW(false,
+			     "ERROR: BucketBucket::getKind(): value is unknown. We changed the eBucketKind enum without changing this code. Please fix the code.\n");
+		break;
+	}
 	// m_feature_map
 	String2String2PBucketMap::iterator fit1 =  m_feature_map.find(bv.m_feature_name);
 	if (fit1 == m_feature_map.end()) {
 		String2PBucketMap new_map;
-		Bucket *pChildBucket = Bucket::newBucket(child_bucket_kind, child_object_type_name);
-		new_map.insert(std::make_pair(bv.m_feature_value, pChildBucket));
+		Bucket *pChildBucket = Bucket::newBucket(child_bucket_kind, child_object_type_name, grandchild_bucket_kind);
+		new_map.insert(std::make_pair(feature_value, pChildBucket));
 		m_feature_map.insert(std::make_pair(bv.m_feature_name, new_map));
 	} else {
-		String2PBucketMap::iterator fit2 = fit1->second.find(bv.m_feature_value);
+		String2PBucketMap::iterator fit2 = fit1->second.find(feature_value);
 		if (fit2 == fit1->second.end()) {
-			Bucket *pChildBucket = Bucket::newBucket(child_bucket_kind, child_object_type_name);
-			fit1->second.insert(std::make_pair(bv.m_feature_value, pChildBucket));
+			Bucket *pChildBucket = Bucket::newBucket(child_bucket_kind, child_object_type_name, grandchild_bucket_kind);
+			fit1->second.insert(std::make_pair(feature_value, pChildBucket));
 		} else {
 			if (fit2->second == (Bucket*) 0) {
-				Bucket *pChildBucket = Bucket::newBucket(child_bucket_kind, child_object_type_name);
-				fit1->second[bv.m_feature_value] = pChildBucket;
+				Bucket *pChildBucket = Bucket::newBucket(child_bucket_kind, child_object_type_name, grandchild_bucket_kind);
+				fit1->second[feature_value] = pChildBucket;
 			} else {
 				// Nothing to do.
 			}
@@ -857,7 +992,7 @@ void BinBucket::addBucketValue(const BucketValue& bv, eBucketKind child_bucket_k
 	Monad2String2StringSetMap::iterator mit1 = m_monad_map.find(bv.m_last_monad);
 	if (mit1 == m_monad_map.end()) {
 		StringSet new_set;
-		new_set.insert(bv.m_feature_value);
+		new_set.insert(feature_value);
 		String2StringSetMap new_map;
 		new_map.insert(std::make_pair(bv.m_feature_name, new_set));
 		m_monad_map.insert(std::make_pair(bv.m_last_monad, new_map));
@@ -865,14 +1000,14 @@ void BinBucket::addBucketValue(const BucketValue& bv, eBucketKind child_bucket_k
 		String2StringSetMap::iterator mfit1 = mit1->second.find(bv.m_feature_name);
 		if (mfit1 == mit1->second.end()) {
 			StringSet new_set;
-			new_set.insert(bv.m_feature_value);
+			new_set.insert(feature_value);
 			mit1->second.insert(std::make_pair(bv.m_feature_name, new_set));
 		} else {
 			// Add it regardless of whether it is there already.
 			// This is a set, so this does no harm, and is faster
 			// than first searching for it, then
 			// inserting it if it is not there.
-			mfit1->second.insert(bv.m_feature_value);
+			mfit1->second.insert(feature_value);
 		}
 	}
 
@@ -881,7 +1016,7 @@ void BinBucket::addBucketValue(const BucketValue& bv, eBucketKind child_bucket_k
 }
 
 
-void BinBucket::prettyPrint(std::ostream& ostr, int indent) const
+void BucketBucket::prettyPrint(std::ostream& ostr, int indent) const
 {
 	local_print_indent(ostr, indent);
 	ostr << "{\n";
@@ -894,8 +1029,10 @@ void BinBucket::prettyPrint(std::ostream& ostr, int indent) const
 }
 
 
-void BinBucket::getJSONInBigstring(Bigstring *pResult) const
+void BucketBucket::getJSONInBigstring(Bigstring *pResult) const
 {
+	eBucketKind myKind = getKind();
+	
 	ADD_SZ("{\"");
 	ADD_STRING(m_object_type_name);
 	ADD_SZ("\":");
@@ -923,21 +1060,40 @@ void BinBucket::getJSONInBigstring(Bigstring *pResult) const
 			pBucket->getJSONInBigstring(pResult);
 		}
 	} else {
-		ADD_CHAR('{');
-		
 		String2String2PBucketMap::const_iterator ci1end = m_feature_map.end();
+		if (myKind == kBKBin) {
+			ADD_SZ("[");				
+		}
+
+		ADD_CHAR('{');
+
+		std::string prev_first_monad;
+		std::string first_monad;
+		
 		while (ci1 != ci1end) {
-			std::string feature_name = ci1->first;
 			
+			std::string feature_name = ci1->first;
+
 			ADD_CHAR('\"');
 			ADD_STRING(feature_name);
 			ADD_SZ("\":{");
-
+			
 			String2PBucketMap::const_iterator ci2 = ci1->second.begin();
 			String2PBucketMap::const_iterator ci2end = ci1->second.end();
 			while (ci2 != ci2end) {
 				std::string feature_value = ci2->first;
 				Bucket *pBucket = ci2->second;
+				
+				if (myKind == kBKBin) {
+					// Cut off up to the first
+					// ':', since we added the
+					// first_monad + ":" in
+					// BucketBucket::addBucketValue().
+					std::string::size_type colon_index = feature_value.find_first_of(":");
+					feature_value = feature_value.substr(colon_index + 1, std::string::npos);
+					first_monad = feature_value.substr(0, colon_index);
+				}
+				
 				
 				
 				ADD_CHAR('\"');
@@ -950,21 +1106,46 @@ void BinBucket::getJSONInBigstring(Bigstring *pResult) const
 				
 				++ci2;
 				
-				if (ci2 != ci2end) {
-					ADD_CHAR(',');
+				
+				if (myKind == kBKBin) {
+					if (prev_first_monad != first_monad) {
+						prev_first_monad = first_monad;
+						if (ci2 != ci2end) {
+							ADD_SZ("}},{\"");
+							ADD_STRING(feature_name);
+							ADD_SZ("\":{");
+						} else {
+							//ADD_CHAR('}');
+						}
+					} else {
+						if (ci2 != ci2end) {
+							ADD_CHAR(',');
+						}
+					}
+				}  else {
+					if (ci2 != ci2end) {
+						ADD_CHAR(',');
+					}
 				}
+				
 			}
 
-		
-			ADD_CHAR('}');
-			
+			ADD_SZ("}");				
+
 			++ci1;
 			
 			if (ci1 != ci1end) {
 				ADD_CHAR(',');
 			}
+
 		}
-		ADD_CHAR('}');
+
+			
+		ADD_SZ("}");
+		
+		if (myKind == kBKBin) {
+			ADD_CHAR(']');				
+		} 
 	}
 
 	ADD_CHAR('}');

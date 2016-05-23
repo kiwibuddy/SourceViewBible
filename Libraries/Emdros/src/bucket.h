@@ -82,18 +82,26 @@ class BucketValue {
  */
 class Bucket {
  protected:
-	long m_kind_or_count; // -2 == kBKBin, -1 == kBKBucket, >= 0 == KBKCount
+	// -22 == I am kBKBin, child is kBKBin
+	// -21 == I am kBKBin, child is kBKBucket
+	// -20 == I am kBKBin, child is kBKCount
+	// -12 == I am kBKBucket, child is kBKBin
+	// -11 == I am kBKBucket, child is kBKBin
+	// -10 == I am kBKBucket, child is kBKCount
+	// >= 0 == I am kBKCount, I do not have a child
+	long m_kind_or_count;
  public:
-	Bucket(eBucketKind bucket_kind);
+	Bucket(eBucketKind bucket_kind, eBucketKind child_bucket_kind);
 	virtual ~Bucket();
 
-	static Bucket *newBucket(eBucketKind bucket_kind, const std::string& object_type_name);
+	static Bucket *newBucket(eBucketKind bucket_kind, const std::string& object_type_name, eBucketKind child_bucket_kind);
 	
 	virtual eBucketKind getKind() const;
+	virtual eBucketKind getChildKind() const;
 
-	virtual void addBucketValue(const BucketValue& bv, eBucketKind child_bucket_kind, const std::string& child_object_type_name);
+	virtual void addBucketValue(const BucketValue& bv, eBucketKind child_bucket_kind, const std::string& child_object_type_name, eBucketKind grandchild_bucket_kind);
 
-	virtual void getBucketListFromMonad(const BucketValue& bv, int depth, eBucketKind child_bucket_kind, const std::string& child_object_type_name, std::list<Bucket*>& /* out */ bucket_list);
+	virtual void getBucketListFromMonad(const BucketValue& bv, int depth, eBucketKind child_bucket_kind, const std::string& child_object_type_name, eBucketKind grandchild_bucket_kind, std::list<Bucket*>& /* out */ bucket_list);
 	
 	virtual void incrementCountInChild(const BucketValue& bv);
 
@@ -110,18 +118,18 @@ class Bucket {
 };
 
 
-class BinBucket : public Bucket {
+class BucketBucket : public Bucket {
  protected:
 	std::string m_object_type_name;
 	Monad2String2StringSetMap m_monad_map;
 	Monad2MonadMap m_first_monad_map;
 	String2String2PBucketMap m_feature_map;	
  public:
-	BinBucket(eBucketKind newKind, const std::string& object_type_name);
+	BucketBucket(eBucketKind newKind, const std::string& object_type_name, eBucketKind child_kind);
 
-	virtual ~BinBucket();
+	virtual ~BucketBucket();
 
-	virtual void addBucketValue(const BucketValue& bv, eBucketKind child_bucket_kind, const std::string& child_object_type_name);
+	virtual void addBucketValue(const BucketValue& bv, eBucketKind child_bucket_kind, const std::string& child_object_type_name, eBucketKind grandchild_bucket_kind);
 
 	virtual void incrementCountInChild(const BucketValue& bv);
 
@@ -129,7 +137,7 @@ class BinBucket : public Bucket {
 
 	virtual void getJSONInBigstring(Bigstring *pResult) const;
 
-	virtual void getBucketListFromMonad(const BucketValue& bv, int depth, eBucketKind child_bucket_kind, const std::string& child_object_type_name, std::list<Bucket*>& /* out */ bucket_list);
+	virtual void getBucketListFromMonad(const BucketValue& bv, int depth, eBucketKind child_bucket_kind, const std::string& child_object_type_name, eBucketKind grandchild_bucket_kind, std::list<Bucket*>& /* out */ bucket_list);
 
 	virtual Bucket *getBucketFromFeatureNameAndValue(const std::string& feature_name, const std::string& feature_value);
 
