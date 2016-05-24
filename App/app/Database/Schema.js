@@ -14,6 +14,7 @@ const Book = {
     sourceTypesCounts: {type: 'list', objectType: 'Count'},
     sphereCount: {type: 'int', default: 0},
     sphereCounts: {type: 'list', objectType: 'Count'},
+    principalSphere: 'string',
     wordCount: {type: 'int', default: 0},
     wordCounts: {type: 'list', objectType: 'Count'},
   }
