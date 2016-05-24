@@ -200,13 +200,6 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(0, 0, 0, 0.20)',
     borderWidth: StyleSheet.hairlineWidth,
     borderRadius: 3,
-    shadowColor: "#000000",
-    shadowOpacity: 0.8,
-    shadowRadius: 3,
-    shadowOffset: {
-      height: 1,
-      width: 0
-    },
     overflow:'hidden',
     backgroundColor: '#fff',
     margin: 5,
