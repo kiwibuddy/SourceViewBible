@@ -14,15 +14,28 @@ const SourcesBarChart = (props: Object) => {
   const stackedBarStyle = [styles.stackedBar, {flexDirection: props.horizontal ? 'row' : 'column'}, props.barStyle];
   const sources = (props.horizontal ? SOURCES : SOURCES.slice().reverse());
 
+  let maxChartValue = 0;
+  props.data.forEach((data, index) => {
+    let maxBarValue = 0;
+    sources.forEach((source, index) => {
+        const value = data[source] || 0;
+        maxBarValue += value;
+    });
+    if (maxBarValue > maxChartValue) {
+      maxChartValue = maxBarValue;
+    }
+  });
+
   let barIndex = 0;
   const bars = props.data.map((data) => {
+    let maxBarValue = 0;
     const bar = sources.map((source) => {
       const value = data[source];
-      if (value == undefined) return null;
+      if (value === undefined) return null;
+      maxBarValue += value;
 
       const barStyle = {
         backgroundColor: Colors.sources[source],
-        marginTop: (props.horizontal ? 0 : 0),
         flex: value
       }
       return (
@@ -31,8 +44,11 @@ const SourcesBarChart = (props: Object) => {
     });
     if (!bar) return null;
 
+
+
     return (
       <View key={'bar-' + barIndex++} style={stackedBarStyle}>
+        <View style={{flex: 2000, backgroundColor: 'red'}} />
         {bar}
       </View>
     )
