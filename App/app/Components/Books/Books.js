@@ -181,6 +181,9 @@ const styles = StyleSheet.create({
   gradient: {
     flex: 0,
     height: 3,
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4,
+    overflow: 'hidden'
   },
   bookTitle: {
     flex: 0,
