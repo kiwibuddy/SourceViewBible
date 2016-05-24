@@ -55,7 +55,7 @@ class BookSummary extends Component {
               <Text style={styles.statisticTitle}>{book.sourceCount}</Text>
               <SourcesBarChart
                 style={{flex: 0, marginHorizontal: 4}}
-                barStyle={{width: 2, height: 20, marginHorizontal: 1}}
+                barStyle={{width: 3, height: 20, marginHorizontal: 1.5}}
                 horizontal={false}
                 data={[{narrator: book.sourceTypeCounts.narrator}, {god: book.sourceTypeCounts.god}, {lead: book.sourceTypeCounts.lead}, {support: book.sourceTypeCounts.support}]}
               />
@@ -73,7 +73,7 @@ class BookSummary extends Component {
               <Text style={styles.statisticTitle}>0</Text>
               <SpheresBarChart
                 style={{flex: 0, marginHorizontal: 4}}
-                barStyle={{width: 2, height: 20, marginHorizontal: 1}}
+                barStyle={{width: 3, height: 20, marginHorizontal: 1.5}}
                 horizontal={false}
                 data={[{family: 1}, {economics: 1}, {government: 1}, {religion: 1}, {education: 1}, {communication: 1}, {celebration: 1}]}
               />
@@ -193,6 +193,7 @@ const styles = StyleSheet.create({
   },
   contentHeader: {
     fontSize: 17,
+    fontWeight: 'bold',
     color: '#59626a',
   },
   contentBody: {
