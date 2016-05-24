@@ -59,29 +59,6 @@ class Books extends Component {
       }
   }
 
-  componentDidMount() {
-    // const query = `
-    // {
-    //   "objectTypeName": "Book",
-    //   "feature": "DJHRef",
-    //   "buckets": {
-    //     "objectTypeName": "Source",
-    //     "feature": "source_color",
-    //     "buckets": {
-    //       "objectTypeName": "Token",
-    //       "expression" : "is_word=true"
-    //     }
-    //   }
-    // }
-    // `;
-    //
-    // Emdros.query(query, {count: true}).then((result) => {
-    //   console.log(result);
-    // }).catch((error) => {
-    //   console.log(error);
-    // });
-  }
-
   render() {
     return (
       <View style={styles.container}>
@@ -96,7 +73,7 @@ class Books extends Component {
         <ListView
           contentContainerStyle={styles.list}
           dataSource={this.state.dataSource}
-          initialListSize={15}
+          initialListSize={18}
           renderRow={this._renderItem}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
         />
