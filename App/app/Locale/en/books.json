@@ -1,396 +1,396 @@
 [
   {
-    "djhref": "Gen",
+    "DJHRef": "Gen",
     "key": "genesis",
     "testament": "old",
     "name": "Genesis"
   },
   {
-    "djhref": "Exo",
+    "DJHRef": "Exo",
     "key": "exodus",
     "testament": "old",
     "name": "Exodus"
   },
   {
-    "djhref": "Lev",
+    "DJHRef": "Lev",
     "key": "leviticus",
     "testament": "old",
     "name": "Leviticus"
   },
   {
-    "djhref": "Num",
+    "DJHRef": "Num",
     "key": "numbers",
     "testament": "old",
     "name": "Numbers"
   },
   {
-    "djhref": "Deu",
+    "DJHRef": "Deu",
     "key": "deuteronomy",
     "testament": "old",
     "name": "Deuteronomy"
   },
   {
-    "djhref": "Jos",
+    "DJHRef": "Jos",
     "key": "joshua",
     "testament": "old",
     "name": "Joshua"
   },
   {
-    "djhref": "Jdg",
+    "DJHRef": "Jdg",
     "key": "judges",
     "testament": "old",
     "name": "Judges"
   },
   {
-    "djhref": "Rut",
+    "DJHRef": "Rut",
     "key": "ruth",
     "testament": "old",
     "name": "Ruth"
   },
   {
-    "djhref": "1Sa",
+    "DJHRef": "1Sa",
     "key": "1-samuel",
     "testament": "old",
     "name": "1 Samuel"
   },
   {
-    "djhref": "2Sa",
+    "DJHRef": "2Sa",
     "key": "2-samuel",
     "testament": "old",
     "name": "2 Samuel"
   },
   {
-    "djhref": "1Ki",
+    "DJHRef": "1Ki",
     "key": "1-kings",
     "testament": "old",
     "name": "1 Kings"
   },
   {
-    "djhref": "2Ki",
+    "DJHRef": "2Ki",
     "key": "2-kings",
     "testament": "old",
     "name": "2 Kings"
   },
   {
-    "djhref": "1Ch",
+    "DJHRef": "1Ch",
     "key": "1-chronicles",
     "testament": "old",
     "name": "1 Chronicles"
   },
   {
-    "djhref": "2Ch",
+    "DJHRef": "2Ch",
     "key": "2-chronicles",
     "testament": "old",
     "name": "2 Chronicles"
   },
   {
-    "djhref": "Ezr",
+    "DJHRef": "Ezr",
     "key": "ezra",
     "testament": "old",
     "name": "Ezra"
   },
   {
-    "djhref": "Neh",
+    "DJHRef": "Neh",
     "key": "nehemiah",
     "testament": "old",
     "name": "Nehemiah"
   },
   {
-    "djhref": "Est",
+    "DJHRef": "Est",
     "key": "esther",
     "testament": "old",
     "name": "Esther"
   },
   {
-    "djhref": "Job",
+    "DJHRef": "Job",
     "key": "job",
     "testament": "old",
     "name": "Job"
   },
   {
-    "djhref": "Psa",
+    "DJHRef": "Psa",
     "key": "psalm",
     "testament": "old",
     "name": "Psalm"
   },
   {
-    "djhref": "Pro",
+    "DJHRef": "Pro",
     "key": "proverbs",
     "testament": "old",
     "name": "Proverbs"
   },
   {
-    "djhref": "Ecc",
+    "DJHRef": "Ecc",
     "key": "ecclesiastes",
     "testament": "old",
     "name": "Ecclesiastes"
   },
   {
-    "djhref": "SoS",
+    "DJHRef": "SoS",
     "key": "song-of-songs",
     "testament": "old",
     "name": "Song of Songs"
   },
   {
-    "djhref": "Isa",
+    "DJHRef": "Isa",
     "key": "isaiah",
     "testament": "old",
     "name": "Isaiah"
   },
   {
-    "djhref": "Jer",
+    "DJHRef": "Jer",
     "key": "jeremiah",
     "testament": "old",
     "name": "Jeremiah"
   },
   {
-    "djhref": "Lam",
+    "DJHRef": "Lam",
     "key": "lamentations",
     "testament": "old",
     "name": "Lamentations"
   },
   {
-    "djhref": "Eze",
+    "DJHRef": "Eze",
     "key": "ezekiel",
     "testament": "old",
     "name": "Ezekiel"
   },
   {
-    "djhref": "Dan",
+    "DJHRef": "Dan",
     "key": "daniel",
     "testament": "old",
     "name": "Daniel"
   },
   {
-    "djhref": "Hos",
+    "DJHRef": "Hos",
     "key": "hosea",
     "testament": "old",
     "name": "Hosea"
   },
   {
-    "djhref": "Joe",
+    "DJHRef": "Joe",
     "key": "joel",
     "testament": "old",
     "name": "Joel"
   },
   {
-    "djhref": "Amo",
+    "DJHRef": "Amo",
     "key": "amos",
     "testament": "old",
     "name": "Amos"
   },
   {
-    "djhref": "Oba",
+    "DJHRef": "Oba",
     "key": "obadiah",
     "testament": "old",
     "name": "Obadiah"
   },
   {
-    "djhref": "Jon",
+    "DJHRef": "Jon",
     "key": "jonah",
     "testament": "old",
     "name": "Jonah"
   },
   {
-    "djhref": "Mic",
+    "DJHRef": "Mic",
     "key": "micah",
     "testament": "old",
     "name": "Micah"
   },
   {
-    "djhref": "Nah",
+    "DJHRef": "Nah",
     "key": "nahum",
     "testament": "old",
     "name": "Nahum"
   },
   {
-    "djhref": "Hab",
+    "DJHRef": "Hab",
     "key": "habakkuk",
     "testament": "old",
     "name": "Habakkuk"
   },
   {
-    "djhref": "Zep",
+    "DJHRef": "Zep",
     "key": "zephaniah",
     "testament": "old",
     "name": "Zephaniah"
   },
   {
-    "djhref": "Hag",
+    "DJHRef": "Hag",
     "key": "haggai",
     "testament": "old",
     "name": "Haggai"
   },
   {
-    "djhref": "Zec",
+    "DJHRef": "Zec",
     "key": "zechariah",
     "testament": "old",
     "name": "Zechariah"
   },
   {
-    "djhref": "Mal",
+    "DJHRef": "Mal",
     "key": "malachi",
     "testament": "old",
     "name": "Malachi"
   },
   {
-    "djhref": "Mat",
+    "DJHRef": "Mat",
     "key": "matthew",
     "testament": "new",
     "name": "Matthew"
   },
   {
-    "djhref": "Mar",
+    "DJHRef": "Mar",
     "key": "mark",
     "testament": "new",
     "name": "Mark"
   },
   {
-    "djhref": "Luk",
+    "DJHRef": "Luk",
     "key": "luke",
     "testament": "new",
     "name": "Luke"
   },
   {
-    "djhref": "Joh",
+    "DJHRef": "Joh",
     "key": "john",
     "testament": "new",
     "name": "John"
   },
   {
-    "djhref": "Act",
+    "DJHRef": "Act",
     "key": "acts",
     "testament": "new",
     "name": "Acts"
   },
   {
-    "djhref": "Rom",
+    "DJHRef": "Rom",
     "key": "romans",
     "testament": "new",
     "name": "Romans"
   },
   {
-    "djhref": "1Co",
+    "DJHRef": "1Co",
     "key": "1-corinthians",
     "testament": "new",
     "name": "1 Corinthians"
   },
   {
-    "djhref": "2Co",
+    "DJHRef": "2Co",
     "key": "2-corinthians",
     "testament": "new",
     "name": "2 Corinthians"
   },
   {
-    "djhref": "Gal",
+    "DJHRef": "Gal",
     "key": "galatians",
     "testament": "new",
     "name": "Galatians"
   },
   {
-    "djhref": "Eph",
+    "DJHRef": "Eph",
     "key": "ephesians",
     "testament": "new",
     "name": "Ephesians"
   },
   {
-    "djhref": "Php",
+    "DJHRef": "Php",
     "key": "philippians",
     "testament": "new",
     "name": "Philippians"
   },
   {
-    "djhref": "Col",
+    "DJHRef": "Col",
     "key": "colossians",
     "testament": "new",
     "name": "Colossians"
   },
   {
-    "djhref": "1Th",
+    "DJHRef": "1Th",
     "key": "1-thessalonians",
     "testament": "new",
     "name": "1 Thessalonians"
   },
   {
-    "djhref": "2Th",
+    "DJHRef": "2Th",
     "key": "2-thessalonians",
     "testament": "new",
     "name": "2 Thessalonians"
   },
   {
-    "djhref": "1Ti",
+    "DJHRef": "1Ti",
     "key": "1-timothy",
     "testament": "new",
     "name": "1 Timothy"
   },
   {
-    "djhref": "2Ti",
+    "DJHRef": "2Ti",
     "key": "2-timothy",
     "testament": "new",
     "name": "2 Timothy"
   },
   {
-    "djhref": "Tit",
+    "DJHRef": "Tit",
     "key": "titus",
     "testament": "new",
     "name": "Titus"
   },
   {
-    "djhref": "Phm",
+    "DJHRef": "Phm",
     "key": "philemon",
     "testament": "new",
     "name": "Philemon"
   },
   {
-    "djhref": "Heb",
+    "DJHRef": "Heb",
     "key": "hebrews",
     "testament": "new",
     "name": "Hebrews"
   },
   {
-    "djhref": "Jam",
+    "DJHRef": "Jam",
     "key": "james",
     "testament": "new",
     "name": "James"
   },
   {
-    "djhref": "1Pe",
+    "DJHRef": "1Pe",
     "key": "1-peter",
     "testament": "new",
     "name": "1 Peter"
   },
   {
-    "djhref": "2Pe",
+    "DJHRef": "2Pe",
     "key": "2-peter",
     "testament": "new",
     "name": "2 Peter"
   },
   {
-    "djhref": "1Jn",
+    "DJHRef": "1Jn",
     "key": "1-john",
     "testament": "new",
     "name": "1 John"
   },
   {
-    "djhref": "2Jn",
+    "DJHRef": "2Jn",
     "key": "2-john",
     "testament": "new",
     "name": "2 John"
   },
   {
-    "djhref": "3Jn",
+    "DJHRef": "3Jn",
     "key": "3-john",
     "testament": "new",
     "name": "3 John"
   },
   {
-    "djhref": "Jud",
+    "DJHRef": "Jud",
     "key": "jude",
     "testament": "new",
     "name": "Jude"
   },
   {
-    "djhref": "Rev",
+    "DJHRef": "Rev",
     "key": "revelation",
     "testament": "new",
     "name": "Revelation"
