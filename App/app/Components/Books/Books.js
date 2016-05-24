@@ -32,7 +32,8 @@ import { SourcesBarChart, SpheresBarChart, WordCloud } from '../Charts';
 
 import Emdros from '../../API/Emdros';
 
-const Bible = require('../../Locale/en/books');
+const Bible = require('../../Locale/en/NLT/SourceView.json');
+
 const SEGMENTS = [Localizable.t('textual'), Localizable.t('alphabetical'), Localizable.t('principality')];
 
 const OLD_TESTAMENT_BOOKS = Bible.filter((book) => {
