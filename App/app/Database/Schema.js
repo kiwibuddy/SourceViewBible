@@ -7,10 +7,14 @@ const Book = {
     name: 'string',
     DJHRef: 'string',
     chapters: {type: 'list', objectType: 'Chapter'},
+    chapterCount: {type: 'int', default: 0},
     sources: {type: 'list', objectType: 'Source'},
-    spheres: {type: 'list', objectType: 'Sphere'},
+    sourceCount: {type: 'int', default: 0},
+    sourceTypesCounts: {type: 'list', objectType: 'Count'},
+    sphereCount: {type: 'int', default: 0},
+    sphereCounts: {type: 'list', objectType: 'Count'},
     wordCount: {type: 'int', default: 0},
-    words: {type: 'list', objectType: 'Count'},
+    wordCounts: {type: 'list', objectType: 'Count'},
   }
 };
 
@@ -20,9 +24,12 @@ const Chapter = {
     chapter: 'int',
     DJHRef: 'string',
     sources: {type: 'list', objectType: 'Source'},
-    spheres: {type: 'list', objectType: 'Sphere'},
+    sourceCount: {type: 'int', default: 0},
+    sourceTypesCounts: {type: 'list', objectType: 'Count'},
+    sphereCount: {type: 'int', default: 0},
+    sphereCounts: {type: 'list', objectType: 'Count'},
     wordCount: {type: 'int', default: 0},
-    words: {type: 'list', objectType: 'WordCount'},
+    wordCounts: {type: 'list', objectType: 'Count'},
   }
 };
 
@@ -33,20 +40,14 @@ const Source = {
   }
 };
 
-const Sphere = {
-  name: 'Sphere',
-  properties: {
-    name: 'string'
-  }
-};
-
 const Count = {
   name: 'Count',
   properties: {
-    type: 'string',
+    name: 'string',
     count: {type: 'int', default: 0},
   }
 }
 
-const Schema = [Book, Chapter, Source, Sphere, Count];
-export default Schema;
+module.exports = {
+  Schema: [Book, Chapter, Source, Count]
+}
