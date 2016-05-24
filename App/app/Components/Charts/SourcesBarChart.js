@@ -44,11 +44,12 @@ const SourcesBarChart = (props: Object) => {
     });
     if (!bar) return null;
 
-
+    const delta = maxChartValue - maxBarValue;
+    const deltaBar = delta > 0 ? <View style={[{flex: delta}, styles.deltaBar]} /> : null;
 
     return (
       <View key={'bar-' + barIndex++} style={stackedBarStyle}>
-        <View style={{flex: 2000, backgroundColor: 'red'}} />
+        {deltaBar}
         {bar}
       </View>
     )
@@ -77,9 +78,11 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
   },
+  deltaBar: {
+    backgroundColor: '#ededed',
+  },
   stackedBar: {
     flex: 1,
-    backgroundColor: '#ededed'
   }
 });
 

@@ -25,6 +25,8 @@ import { SourcesBarChart, SpheresBarChart, WordCloud } from '../Charts';
 
 class BookSummary extends Component {
   render() {
+    const { book } = this.props;
+
     return (
       <ScrollView style={styles.container}>
         <WordCloud
@@ -53,7 +55,7 @@ class BookSummary extends Component {
                 style={{flex: 0, marginHorizontal: 4}}
                 barStyle={{width: 2, height: 20, marginHorizontal: 1}}
                 horizontal={false}
-                data={[{narrator: 1}, {god: 1}, {lead: 1}, {support: 1}]}
+                data={[{narrator: book.sourceTypeCounts.narrator}, {god: book.sourceTypeCounts.god}, {lead: book.sourceTypeCounts.lead}, {support: book.sourceTypeCounts.support}]}
               />
             </View>
             <Text style={styles.buttonSubtitle}>Sources</Text>
