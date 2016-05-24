@@ -14,6 +14,9 @@ class Discover extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <View style={styles.sectionHeaderContainer}>
+          <Text style={StyleSheet.styles.sectionHeaderTitle}>BOOKS</Text>
+        </View>
         <TouchableOpacity onPress={this.props.onButtonPress}>
           <Text style={styles.title}>Books</Text>
         </TouchableOpacity>

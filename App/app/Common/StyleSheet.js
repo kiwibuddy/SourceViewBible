@@ -19,7 +19,7 @@ const styles = {
     paddingRight: 15,
   },
   sectionHeaderTitle: {
-    color: Colors.tintColor,
+    color: '#59626a',
     marginTop: 8,
     fontSize: 13,
   },
