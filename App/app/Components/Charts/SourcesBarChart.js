@@ -22,7 +22,7 @@ const SourcesBarChart = (props: Object) => {
 
       const barStyle = {
         backgroundColor: Colors.sources[source],
-        marginTop: (props.horizontal ? 0 : Math.floor(Math.random() * 15)),
+        marginTop: (props.horizontal ? 0 : 0),
         flex: value
       }
       return (

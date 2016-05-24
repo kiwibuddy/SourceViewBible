@@ -104,13 +104,13 @@ class Books extends Component {
         <View style={styles.statisticsContainer}>
           <View style={styles.statisticContainer} >
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={styles.statisticTitle}>0</Text>
+              <Text style={styles.statisticTitle}>{book.sourceCount}</Text>
               <Text style={styles.statisticSubtitle}>Sources</Text>
               <SourcesBarChart
                 style={{flex: 0, marginLeft: 4}}
                 barStyle={{width: 2, height: 12, marginHorizontal: 1}}
                 horizontal={false}
-                data={[{narrator: 1}, {god: 1}, {lead: 1}, {support: 1}]}
+                data={[{narrator: book.sourceTypeCounts.narrator}, {god: book.sourceTypeCounts.god}, {lead: book.sourceTypeCounts.lead}, {support: book.sourceTypeCounts.support}]}
               />
             </View>
           </View>
