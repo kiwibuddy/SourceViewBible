@@ -41,7 +41,7 @@ class BookSummary extends Component {
             style={styles.statisticContainer}
             onPress={this.props.onPressChapters}
           >
-            <Text style={styles.statisticTitle}>0</Text>
+            <Text style={styles.statisticTitle}>{book.chapterCount}</Text>
             <Text style={styles.buttonSubtitle}>Chapters</Text>
           </TouchableOpacity>
 
@@ -52,7 +52,7 @@ class BookSummary extends Component {
             onPress={this.props.onPressSources}
           >
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={styles.statisticTitle}>0</Text>
+              <Text style={styles.statisticTitle}>{book.sourceCount}</Text>
               <SourcesBarChart
                 style={{flex: 0, marginHorizontal: 4}}
                 barStyle={{width: 2, height: 20, marginHorizontal: 1}}
