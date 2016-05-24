@@ -6,6 +6,7 @@ const Book = {
   properties: {
     name: 'string',
     DJHRef: 'string',
+    testament: 'int',
     chapterCount: {type: 'int', default: 0},
     chapters: {type: 'list', objectType: 'Chapter'},
     sourceCount: {type: 'int', default: 0},
