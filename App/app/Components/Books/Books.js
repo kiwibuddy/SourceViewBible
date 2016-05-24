@@ -32,9 +32,6 @@ import { SourcesBarChart, SpheresBarChart, WordCloud } from '../Charts';
 
 import { ReadingTime } from '../../Common/NumberHelper';
 
-const moment = require('moment');
-require('moment-duration-format');
-
 const Bible = require('../../Locale/en/NLT/SourceView.json');
 
 const SEGMENTS = [Localizable.t('textual'), Localizable.t('alphabetical'), Localizable.t('principality')];
@@ -102,7 +99,7 @@ class Books extends Component {
           style={styles.wordCloud}>
         </WordCloud>
         <Text style={styles.bookTitle}>{book.name}</Text>
-        <Text style={styles.bookReadTime}>{moment.duration(ReadingTime(book.wordCount), "minutes").format("h [hrs] m [min]")}</Text>
+        <Text style={styles.bookReadTime}>{ReadingTime(book.wordCount)}</Text>
         <View style={styles.keyline} />
         <View style={styles.statisticsContainer}>
           <View style={styles.statisticContainer} >

@@ -23,6 +23,8 @@ import {
 
 import { SourcesBarChart, SpheresBarChart, WordCloud } from '../Charts';
 
+import { ReadingTime } from '../../Common/NumberHelper';
+
 class BookSummary extends Component {
   render() {
     const { book } = this.props;
@@ -108,7 +110,7 @@ class BookSummary extends Component {
         </View>
 
         <TouchableOpacity style={styles.readButton}>
-          <Text style={styles.readButtonTitle}>0 min read</Text>
+          <Text style={styles.readButtonTitle}>{ReadingTime(book.wordCount)} read</Text>
         </TouchableOpacity>
 
         <View style={[{marginBottom: 20}, StyleSheet.styles.separator]} />
