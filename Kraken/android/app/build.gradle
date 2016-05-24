@@ -120,6 +120,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-fs')
     compile project(':realm')
     compile project(':react-native-emdros')
     compile fileTree(dir: "libs", include: ["*.jar"])

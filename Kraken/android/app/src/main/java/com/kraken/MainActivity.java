@@ -1,6 +1,7 @@
 package com.kraken;
 
 import com.facebook.react.ReactActivity;
+import com.rnfs.RNFSPackage;
 import io.realm.react.RealmReactPackage;
 import com.sourceviewbible.emdros.EmdrosReactPackage;
 import com.facebook.react.ReactPackage;
@@ -37,6 +38,7 @@ public class MainActivity extends ReactActivity {
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
+            new RNFSPackage(),
             new RealmReactPackage(),
             new EmdrosReactPackage()
         );

@@ -3,49 +3,7 @@
     "DJHRef": "Gen",
     "key": "genesis",
     "testament": 0,
-    "name": "Genesis",
-    "wordCount": 0,
-    "chapterCount": 0,
-    "chapters": [
-      {
-        "wordCount": 0,
-        "sourceTypeCounts": {
-          "narrator": 0,
-          "god": 0,
-          "lead": 0,
-          "support": 0
-        },
-        "sphereCount": 0,
-        "sphereCounts": {
-          "family": 0,
-          "economics": 0,
-          "government": 0,
-          "religion": 0,
-          "education": 0,
-          "communication": 0,
-          "celebration": 0
-        }
-      }
-    ],
-    "sourceTypeCounts": {
-      "narrator": 0,
-      "god": 0,
-      "lead": 0,
-      "support": 0
-    },
-    "sphereCount": 0,
-    "sphereCounts": {
-      "family": 0,
-      "economics": 0,
-      "government": 0,
-      "religion": 0,
-      "education": 0,
-      "communication": 0,
-      "celebration": 0
-    },
-    "sources": [
-
-    ]
+    "name": "Genesis"
   },
   {
     "DJHRef": "Exo",

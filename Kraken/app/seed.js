@@ -4,31 +4,41 @@
 import Schema from './Schema';
 import Realm from 'realm';
 import Emdros from 'react-native-emdros';
+import RNFS from 'react-native-fs';
 
 const DATABASE_PATH = '/tmp/SourceView.realm';
+const JSON_PATH='/tmp/SourceView.json';
+
 const BIBLE = require('./books');
+const SOURCE_TYPE_MAP = {
+  "Black": "narrator",
+  "Red": "god",
+  "Green": "lead",
+  "Blue": "support"
+};
 
 export function kraken() {
   console.log('Hello!');
 
-  const realm = new Realm({
-    path: DATABASE_PATH,
-    schema: Schema
-  });
+  // const realm = new Realm({
+  //   path: DATABASE_PATH,
+  //   schema: Schema
+  // });
+  const realm = null;
 
   Emdros.open({name: 'Datasets/en/NLT/SourceView.bpt'}).then((emdros) => {
-    seed(emdros, realm);
+    seed(emdros);
   }).catch((error) => {
     console.log(error);
   });
 }
 
-function seed(emdros, realm) {
+function seed(emdros) {
   console.log('seeding...');
-  seedBooks(emdros, realm);
+  seedBooks(emdros);
 }
 
-function seedBooks(emdros, realm) {
+function seedBooks(emdros) {
   console.log('seeding books...');
 
   const query = `
@@ -50,77 +60,85 @@ function seedBooks(emdros, realm) {
   }
   `;
 
-  // name: 'string',
-  // DJHRef: 'string',
-  // testament: 'int',
-  // chapterCount: {type: 'int', default: 0},
-  // chapters: {type: 'list', objectType: 'Chapter'},
-  // sourceCount: {type: 'int', default: 0},
-  // sources: {type: 'list', objectType: 'Source'},
-  // sourceTypesCounts: {type: 'list', objectType: 'Count'},
-  // sphereCount: {type: 'int', default: 0},
-  // sphereCounts: {type: 'list', objectType: 'Count'},
-  // principalSphere: 'string',
-  // wordCount: {type: 'int', default: 0},
-  // wordCounts: {type: 'list', objectType: 'Count'},
-
   emdros.query(query, {count: true}).then((data) => {
-    realm.write(() => {
-      for (let [index, book] of BIBLE.entries()) {
-        const bookData = data["Book"]["DJHRef"][book.djhref];
-        if (bookData != null) {
-          let chapters = null;
-          let sources = null;
-          let bookWordCount = 0;
+    let bookObjects = [];
 
-          const chapterData = bookData["Chapter"]["chapter"];
-          if (chapterData != null) {
+    for (let [index, book] of BIBLE.entries()) {
+      const bookData = data["Book"]["DJHRef"][book.DJHRef];
+      if (bookData != null) {
+        let bookWordCount = 0;
+        let chapters = [];
+        let bookSourceTypeCounts = {
+            "narrator": 0,
+            "god": 0,
+            "lead": 0,
+            "support": 0
+        };
+        let bookSources = {};
+
+        const chapterData = bookData["Chapter"]["chapter"];
+        if (chapterData != null) {
+          chapters = Object.keys(chapterData).map((chapterIndex) => {
             let chapterWordCount = 0;
+            let sourceTypeCounts = {};
+            let chapterSources = {};
 
-            chapters = Object.keys(chapterData).map((chapterIndex) => {
-              let chapterSources = null;
-              const sourceData = chapterData[chapterIndex]["Source"];
-              if (sourceData != null) {
-                  const sourceTypeData = sourceData["source_color"];
-                  if (sourceTypeData != null) {
-                    Object.keys(sourceTypeData).forEach(function(sourceType, index) {
-                      const tokenData = sourceTypeData[sourceType]["Token"];
-                      if (tokenData != null) {
-                        chapterWordCount += tokenData;
-                      }
-                    });
-                  }
+            const sourceData = chapterData[chapterIndex]["Source"];
+            if (sourceData != null) {
+                const sourceTypeData = sourceData["source_color"];
+                if (sourceTypeData != null) {
+                  Object.keys(sourceTypeData).forEach(function(sourceColor, index) {
+                    const tokenCount = sourceTypeData[sourceColor]["Token"];
+                    if (tokenCount != null) {
+                      const sourceType = SOURCE_TYPE_MAP[sourceColor];
+                      sourceTypeCounts[sourceType] = tokenCount;
+                      bookSourceTypeCounts[sourceType] += tokenCount;
+                      chapterWordCount += tokenCount;
+                    }
+                  });
+                }
 
-                  const sourceNameData = sourceData["source_name"];
-                  if (sourceNameData != null) {
-                    Object.keys(sourceNameData).forEach(function(source, index) {
-                      const tokenData = sourceNameData[source]["Token"];
-                      if (tokenData != null) {
+                const sourceNameData = sourceData["source_name"];
+                if (sourceNameData != null) {
+                  Object.keys(sourceNameData).forEach(function(source, index) {
+                    const tokenCount = sourceNameData[source]["Token"];
+                    if (tokenCount != null) {
+                      let chapterSourceTokenCount = chapterSources[source] || 0;
+                      chapterSources[source] = chapterSourceTokenCount + tokenCount;
 
-                      }
-                    });
-                  }
-              }
+                      let bookSourceTokenCount = bookSources[source] || 0;
+                      bookSources[source] = chapterSourceTokenCount + tokenCount;
+                    }
+                  });
+                }
+            }
 
-              bookWordCount += chapterWordCount;
+            bookWordCount += chapterWordCount;
 
-              const chapter = {
-                chapter: parseInt(chapterIndex),
-                DJHRef: '',
-                wordCount: chapterWordCount
-              };
-              return chapter;
-            });
-          }
-
-          let bookObject = {name: book.name, DJHRef: book.djhref, chapters: chapters, sources: sources, wordCount: bookWordCount}
-          console.log(bookObject);
-          realm.create('Book', bookObject);
+            const chapter = {
+              wordCount: chapterWordCount,
+              sourceTypeCounts: sourceTypeCounts,
+              sourceCount: Object.keys(chapterSources).length,
+              sources: chapterSources
+            };
+            return chapter;
+          });
         }
-      }
 
-      console.log('Seeded books.')
+        let bookObject = {...book, wordCount: bookWordCount, chapterCount: chapters.length, chapters: chapters, sourceTypeCounts: bookSourceTypeCounts, sourceCount:Object.keys(bookSources).length, sources: bookSources};
+        bookObjects.push(bookObject);
+      }
+    }
+
+    console.log(bookObjects);
+
+    RNFS.writeFile(JSON_PATH, JSON.stringify(bookObjects), 'utf8').then((success) => {
+      console.log('FILE WRITTEN!');
+    }).catch((err) => {
+      console.log(err.message);
     });
+
+    console.log('Seeded books.')
   }).catch((error) => {
     console.log(error);
   })
