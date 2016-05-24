@@ -107,8 +107,8 @@ class Books extends Component {
               <Text style={styles.statisticTitle}>0</Text>
               <Text style={styles.statisticSubtitle}>Sources</Text>
               <SourcesBarChart
-                style={{flex: 0, marginHorizontal: 4}}
-                barStyle={{width: 2, height: 20, marginHorizontal: 1}}
+                style={{flex: 0, marginLeft: 4}}
+                barStyle={{width: 2, height: 12, marginHorizontal: 1}}
                 horizontal={false}
                 data={[{narrator: 1}, {god: 1}, {lead: 1}, {support: 1}]}
               />
@@ -119,8 +119,8 @@ class Books extends Component {
               <Text style={styles.statisticTitle}>0</Text>
               <Text style={styles.statisticSubtitle}>Spheres</Text>
               <SpheresBarChart
-                style={{flex: 0, marginHorizontal: 4}}
-                barStyle={{width: 2, height: 20, marginHorizontal: 1}}
+                style={{flex: 0, marginLeft: 4}}
+                barStyle={{width: 2, height: 12, marginHorizontal: 1}}
                 horizontal={false}
                 data={[{family: 1}, {economics: 1}, {government: 1}, {religion: 1}, {education: 1}, {communication: 1}, {celebration: 1}]}
               />
@@ -159,14 +159,20 @@ const styles = StyleSheet.create({
     color: '#59626a',
   },
   itemContainer: {
-    borderColor: 'rgba(0, 0, 0, 0.20)',
+    borderColor: 'rgba(0, 0, 0, 0.15)',
     borderWidth: StyleSheet.hairlineWidth,
     borderRadius: 4,
-    overflow:'hidden',
     backgroundColor: '#fff',
     margin: 5,
-    width: 112,
+    width: 110,
     height: 84,
+    shadowColor: "black",
+    shadowOpacity: 0.05,
+    shadowRadius: 0.4,
+    shadowOffset: {
+      height: 1,
+      width: 0
+    },
   },
   wordCloud: {
     flex: 0,
@@ -191,9 +197,11 @@ const styles = StyleSheet.create({
   statisticsContainer: {
     flex: 1,
     flexDirection: 'column',
-    marginTop: 8,
+    marginHorizontal: 5,
     borderBottomColor: Colors.separator,
-    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  statisticContainer: {
+    marginTop: 5,
   },
   statisticTitle: {
     fontSize: 9,
@@ -224,7 +232,7 @@ const styles = StyleSheet.create({
     flex:0,
     height: StyleSheet.hairlineWidth,
     backgroundColor: '#e0e0e0',
-    marginHorizontal: 5,
+    marginHorizontal: 2,
   },
   horizontalContainer: {
     flexDirection: 'row',
