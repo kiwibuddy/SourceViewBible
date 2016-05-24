@@ -118,11 +118,9 @@ class Books extends Component {
       <TouchableOpacity style={styles.itemContainer} onPress={ () => this.props.onButtonPress(book) }>
         <WordCloud
           backgroundColors={['#a856cd',  '#3722a7']}
-          style={styles.wordCloud}
-        >
-          <Text style={styles.bookTitle}>{book.name}</Text>
+          style={styles.wordCloud}>
         </WordCloud>
-
+        <Text style={styles.bookTitle}>{book.name}</Text>
         <View style={styles.statisticsContainer}>
           <View style={styles.statisticContainer} >
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
@@ -199,20 +197,25 @@ const styles = StyleSheet.create({
     color: '#59626a',
   },
   itemContainer: {
-    borderColor: '#dcdcdc',
+    borderColor: 'rgba(0, 0, 0, 0.20)',
     borderWidth: StyleSheet.hairlineWidth,
-    borderRadius: 2,
+    borderRadius: 3,
+    shadowColor: "#000000",
+    shadowOpacity: 0.8,
+    shadowRadius: 3,
+    shadowOffset: {
+      height: 1,
+      width: 0
+    },
     overflow:'hidden',
-    backgroundColor: '#f9f9f9',
-    margin: 10,
-    width: 100,
-    height: 110
+    backgroundColor: '#fff',
+    margin: 5,
+    width: 112,
+    height: 110,
   },
   wordCloud: {
     flex: 0,
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'center',
+    height: 3,
   },
   bookTitle: {
     flex: 1,
