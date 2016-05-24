@@ -21,7 +21,7 @@ const SpheresBarChart = (props: Object) => {
 
       const barStyle = {
         backgroundColor: Colors.spheres[sphere],
-        marginTop: (props.horizontal ? 0 : Math.floor(Math.random() * 15)),
+        marginTop: (props.horizontal ? 0 : 20),
         flex: value
       }
       return (
