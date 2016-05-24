@@ -36,11 +36,11 @@ const Bible = require('../../Locale/en/books');
 const SEGMENTS = [Localizable.t('textual'), Localizable.t('alphabetical'), Localizable.t('principality')];
 
 const OLD_TESTAMENT_BOOKS = Bible.filter((book) => {
-  return book.testament === 'old';
+  return book.testament === 0;
 });
 
 const NEW_TESTAMENT_BOOKS = Bible.filter((book) => {
-  return book.testament === 'new';
+  return book.testament === 1;
 });
 
 class Books extends Component {
@@ -105,7 +105,7 @@ class Books extends Component {
   }
 
   _renderSectionHeader(sectionData, sectionID) {
-    const title = sectionID === 'old' ? Localizable.t('old-testament') : Localizable.t('new-testament');
+    const title = sectionID === 0 ? Localizable.t('old-testament') : Localizable.t('new-testament');
     return (
       <View style={styles.sectionHeaderContainer}>
         <Text style={styles.sectionHeaderTitle}>{title.toLocaleUpperCase()}</Text>

@@ -50,44 +50,73 @@ function seedBooks(emdros, realm) {
   }
   `;
 
+  // name: 'string',
   // DJHRef: 'string',
+  // testament: 'int',
+  // chapterCount: {type: 'int', default: 0},
   // chapters: {type: 'list', objectType: 'Chapter'},
+  // sourceCount: {type: 'int', default: 0},
   // sources: {type: 'list', objectType: 'Source'},
-  // spheres: {type: 'list', objectType: 'Sphere'},
-  // wordCount: 'int',
-  // words: {type: 'list', objectType: 'WordCount'},
+  // sourceTypesCounts: {type: 'list', objectType: 'Count'},
+  // sphereCount: {type: 'int', default: 0},
+  // sphereCounts: {type: 'list', objectType: 'Count'},
+  // principalSphere: 'string',
+  // wordCount: {type: 'int', default: 0},
+  // wordCounts: {type: 'list', objectType: 'Count'},
 
   emdros.query(query, {count: true}).then((data) => {
     realm.write(() => {
       for (let [index, book] of BIBLE.entries()) {
         const bookData = data["Book"]["DJHRef"][book.djhref];
-        let chapters = null;
-        let sources = null;
-
         if (bookData != null) {
+          let chapters = null;
+          let sources = null;
+          let bookWordCount = 0;
+
           const chapterData = bookData["Chapter"]["chapter"];
           if (chapterData != null) {
+            let chapterWordCount = 0;
+
             chapters = Object.keys(chapterData).map((chapterIndex) => {
               let chapterSources = null;
               const sourceData = chapterData[chapterIndex]["Source"];
               if (sourceData != null) {
+                  const sourceTypeData = sourceData["source_color"];
+                  if (sourceTypeData != null) {
+                    Object.keys(sourceTypeData).forEach(function(sourceType, index) {
+                      const tokenData = sourceTypeData[sourceType]["Token"];
+                      if (tokenData != null) {
+                        chapterWordCount += tokenData;
+                      }
+                    });
+                  }
+
                   const sourceNameData = sourceData["source_name"];
                   if (sourceNameData != null) {
-                    
+                    Object.keys(sourceNameData).forEach(function(source, index) {
+                      const tokenData = sourceNameData[source]["Token"];
+                      if (tokenData != null) {
+
+                      }
+                    });
                   }
               }
+
+              bookWordCount += chapterWordCount;
 
               const chapter = {
                 chapter: parseInt(chapterIndex),
                 DJHRef: '',
-                sources: chapterSources,
+                wordCount: chapterWordCount
               };
               return chapter;
             });
           }
-        }
 
-        realm.create('Book', {name: book.name, DJHRef: book.djhref, chapters: chapters, sources: sources});
+          let bookObject = {name: book.name, DJHRef: book.djhref, chapters: chapters, sources: sources, wordCount: bookWordCount}
+          console.log(bookObject);
+          realm.create('Book', bookObject);
+        }
       }
 
       console.log('Seeded books.')
