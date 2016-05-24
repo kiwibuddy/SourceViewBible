@@ -127,6 +127,7 @@ class Books extends Component {
           <View style={styles.statisticContainer} >
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
               <Text style={styles.statisticTitle}>0</Text>
+              <Text style={styles.statisticSubtitle}>Sources</Text>
               <SourcesBarChart
                 style={{flex: 0, marginHorizontal: 4}}
                 barStyle={{width: 2, height: 20, marginHorizontal: 1}}
@@ -134,14 +135,11 @@ class Books extends Component {
                 data={[{narrator: 1}, {god: 1}, {lead: 1}, {support: 1}]}
               />
             </View>
-            <Text style={styles.statisticSubtitle}>Sources</Text>
           </View>
-
-          <View style={styles.keyline} />
-
           <View style={styles.statisticContainer} >
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
               <Text style={styles.statisticTitle}>0</Text>
+              <Text style={styles.statisticSubtitle}>Spheres</Text>
               <SpheresBarChart
                 style={{flex: 0, marginHorizontal: 4}}
                 barStyle={{width: 2, height: 20, marginHorizontal: 1}}
@@ -149,7 +147,6 @@ class Books extends Component {
                 data={[{family: 1}, {economics: 1}, {government: 1}, {religion: 1}, {education: 1}, {communication: 1}, {celebration: 1}]}
               />
             </View>
-            <Text style={styles.statisticSubtitle}>Spheres</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -186,12 +183,12 @@ const styles = StyleSheet.create({
   itemContainer: {
     borderColor: 'rgba(0, 0, 0, 0.20)',
     borderWidth: StyleSheet.hairlineWidth,
-    borderRadius: 3,
+    borderRadius: 4,
     overflow:'hidden',
     backgroundColor: '#fff',
     margin: 5,
     width: 112,
-    height: 110,
+    height: 84,
   },
   wordCloud: {
     flex: 0,
@@ -211,28 +208,24 @@ const styles = StyleSheet.create({
     color: '#9b9b9b',
     textAlign: 'center',
     marginTop: 1,
+    marginBottom: 7,
   },
   statisticsContainer: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'column',
     marginTop: 8,
     borderBottomColor: Colors.separator,
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
-  statisticContainer: {
-    flex: 1,
-  },
   statisticTitle: {
-    fontSize: 14,
+    fontSize: 9,
     color: Colors.tintColor,
-    alignSelf: 'center'
+    marginRight: 3,
   },
   statisticSubtitle: {
     flex: 1,
     color: Colors.subtitle,
-    fontSize: 10,
-    textAlign: 'center',
-    marginBottom: 4,
+    fontSize: 9,
   },
   sourcesContainer: {
     flexDirection: 'row',
@@ -251,8 +244,9 @@ const styles = StyleSheet.create({
   },
   keyline: {
     flex:0,
-    width: StyleSheet.hairlineWidth,
-    backgroundColor: Colors.separator
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: '#e0e0e0',
+    marginHorizontal: 5,
   },
   horizontalContainer: {
     flexDirection: 'row',
