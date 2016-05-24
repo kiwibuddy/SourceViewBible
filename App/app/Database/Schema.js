@@ -6,10 +6,10 @@ const Book = {
   properties: {
     name: 'string',
     DJHRef: 'string',
-    chapters: {type: 'list', objectType: 'Chapter'},
     chapterCount: {type: 'int', default: 0},
-    sources: {type: 'list', objectType: 'Source'},
+    chapters: {type: 'list', objectType: 'Chapter'},
     sourceCount: {type: 'int', default: 0},
+    sources: {type: 'list', objectType: 'Source'},
     sourceTypesCounts: {type: 'list', objectType: 'Count'},
     sphereCount: {type: 'int', default: 0},
     sphereCounts: {type: 'list', objectType: 'Count'},
@@ -23,8 +23,8 @@ const Chapter = {
   properties: {
     chapter: 'int',
     DJHRef: 'string',
-    sources: {type: 'list', objectType: 'Source'},
     sourceCount: {type: 'int', default: 0},
+    sources: {type: 'list', objectType: 'Source'},
     sourceTypesCounts: {type: 'list', objectType: 'Count'},
     sphereCount: {type: 'int', default: 0},
     sphereCounts: {type: 'list', objectType: 'Count'},
