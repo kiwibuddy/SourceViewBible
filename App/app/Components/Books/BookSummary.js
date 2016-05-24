@@ -29,6 +29,10 @@ class BookSummary extends Component {
   render() {
     const { book } = this.props;
 
+    const sources = Object.keys(book.sources).sort((a, b) => book.sources[a] > book.sources[b] ? -1 : 1).slice(0, 5).map((source) => {
+      return this._renderSource({name: source, actant: 'human', type: 'support'});
+    });
+
     return (
       <ScrollView style={styles.container}>
         <WordCloud
@@ -83,30 +87,7 @@ class BookSummary extends Component {
         </View>
 
         <View style={styles.sourcesContainer}>
-          <TouchableOpacity style={styles.sourceButton}>
-            <Image source={require('../../Images/avatars/narrator-medium.png')} style={styles.sourceImage}/>
-            <Text style={styles.buttonSubtitle}>Narrator</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.sourceButton}>
-            <Image source={require('../../Images/avatars/divine-medium.png')} style={[styles.sourceImage, {tintColor: Colors.sources.god}]}/>
-            <Text style={styles.buttonSubtitle}>God</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.sourceButton}>
-            <Image source={require('../../Images/avatars/human-male-medium.png')} style={[styles.sourceImage, {tintColor: Colors.sources.lead}]}/>
-            <Text style={styles.buttonSubtitle}>Lead</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.sourceButton}>
-            <Image source={require('../../Images/avatars/human-male-medium.png')} style={[styles.sourceImage, {tintColor: Colors.sources.support}]}/>
-            <Text style={styles.buttonSubtitle}>Support</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.sourceButton}>
-            <Image source={require('../../Images/avatars/human-group-medium.png')} style={[styles.sourceImage, {tintColor: Colors.sources.support}]}/>
-            <Text style={styles.buttonSubtitle}>Other Support</Text>
-          </TouchableOpacity>
+          {sources}
         </View>
 
         <TouchableOpacity style={styles.readButton}>
@@ -122,6 +103,16 @@ class BookSummary extends Component {
       </ScrollView>
     );
   }
+
+  _renderSource = (source: Object) => {
+    return (
+      <TouchableOpacity key={'source-' + source.name} style={styles.sourceButton}>
+        <Image source={require('../../Images/avatars/narrator-medium.png')} style={styles.sourceImage}/>
+        <Text style={styles.buttonSubtitle}>{source.name}</Text>
+      </TouchableOpacity>
+    );
+  };
+
 }
 
 const styles = StyleSheet.create({
