@@ -121,6 +121,8 @@ class Books extends Component {
           style={styles.wordCloud}>
         </WordCloud>
         <Text style={styles.bookTitle}>{book.name}</Text>
+        <Text style={styles.bookReadTime}>3hr 23min</Text>
+        <View style={styles.keyline} />
         <View style={styles.statisticsContainer}>
           <View style={styles.statisticContainer} >
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
@@ -150,21 +152,6 @@ class Books extends Component {
             <Text style={styles.statisticSubtitle}>Spheres</Text>
           </View>
         </View>
-
-        <View style={styles.sourcesContainer}>
-          <Image source={require('../../Images/avatars/narrator.png')} style={styles.sourceImage}/>
-
-          <Image source={require('../../Images/avatars/divine.png')} style={[styles.sourceImage, {tintColor: Colors.sources.god}]}/>
-
-          <Image source={require('../../Images/avatars/human-male.png')} style={[styles.sourceImage, {tintColor: Colors.sources.lead}]}/>
-
-          <Image source={require('../../Images/avatars/human-male.png')} style={[styles.sourceImage, {tintColor: Colors.sources.support}]}/>
-
-          <Image source={require('../../Images/avatars/human-group.png')} style={[styles.sourceImage, {tintColor: Colors.sources.support}]}/>
-        </View>
-
-        <Text style={styles.readTitle}>0 min read</Text>
-
       </TouchableOpacity>
     );
   };
@@ -211,11 +198,19 @@ const styles = StyleSheet.create({
     height: 3,
   },
   bookTitle: {
-    flex: 1,
-    fontSize: 12,
-    color: 'white',
-    backgroundColor: 'transparent',
-    textAlign: 'center'
+    flex: 0,
+    fontSize: 13,
+    color: '#59626a',
+    textAlign: 'center',
+    fontWeight: '500',
+    marginTop: 5,
+  },
+  bookReadTime: {
+    flex: 0,
+    fontSize: 9,
+    color: '#9b9b9b',
+    textAlign: 'center',
+    marginTop: 1,
   },
   statisticsContainer: {
     flex: 1,
