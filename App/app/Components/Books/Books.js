@@ -28,7 +28,10 @@ import {
 // $FlowBug: - Flow can't find os module extension
 import SegmentedControl from '../Common/SegmentedControl';
 
-import { SourcesBarChart, SpheresBarChart, WordCloud } from '../Charts';
+// $FlowBug: Can't find os module extension
+import LinearGradient from 'react-native-linear-gradient';
+
+import { SourcesBarChart, SpheresBarChart } from '../Charts';
 
 import { ReadingTime } from '../../Common/NumberHelper';
 
@@ -94,10 +97,11 @@ class Books extends Component {
   _renderItem = (book, sectionID, rowID, highlightRow) => {
     return (
       <TouchableOpacity style={styles.itemContainer} onPress={ () => this.props.onButtonPress(book) }>
-        <WordCloud
-          backgroundColors={['#a856cd',  '#3722a7']}
-          style={styles.wordCloud}>
-        </WordCloud>
+        <LinearGradient
+          colors={['#a856cd', '#3722a7']}
+          start={[0.0, 0.25]} end={[0.5, 1.0]}
+          style={styles.gradient}
+        />
         <Text style={styles.bookTitle}>{book.name}</Text>
         <Text style={styles.bookReadTime}>{ReadingTime(book.wordCount)}</Text>
         <View style={styles.keyline} />
@@ -174,7 +178,7 @@ const styles = StyleSheet.create({
       width: 0
     },
   },
-  wordCloud: {
+  gradient: {
     flex: 0,
     height: 3,
   },

@@ -35,7 +35,7 @@ const WordCloud = (props: Object) => {
 
 const styles = StyleSheet.create({
   gradient: {
-    flex: 1
+    flex: 1,
   }
 });
 
