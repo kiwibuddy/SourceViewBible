@@ -28,7 +28,7 @@ module.exports = {
       gradient: ['#FFBF00', '#FF933A']
     },
     religion: {
-      tint:'#4ED962',
+      tint:'#64AA20',
       gradient: ['#8BC624', '#429321']
     },
     education: {
@@ -40,8 +40,8 @@ module.exports = {
       gradient: ['#C86DD7', '#3023AE']
     },
     celebration: {
-      tint:'#E058AD',
-      gradient: ['#F2407B', '#9F041B']
+      tint:'#C44DF8',
+      gradient: ['#E14DF8', '#B84DF8']
     }
   },
 
