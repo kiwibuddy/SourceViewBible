@@ -238,6 +238,8 @@ async function seedChapterSourceWordCounts(emdros, objects) {
 }
 
 function seedObjectSourceWordCounts(object, sourceData) {
+  object.sourceCount = 0;
+
   if (sourceData != null) {
     object.sourceTypeCounts = {};
     const sourceTypeData = sourceData["source_color"];
