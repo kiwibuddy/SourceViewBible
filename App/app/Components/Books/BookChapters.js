@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     marginTop: NavigationHeader.HEIGHT,
   },
   section: {
-    marginLeft: 15,
+    marginLeft: 8,
   },
   cellContainer: {
     flex: 1,
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
   },
   separator: {
     ...StyleSheet.styles.separator,
-    marginLeft: 15,
+    marginLeft: 8,
   },
   ...Platform.select({
       ios: {
