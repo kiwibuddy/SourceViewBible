@@ -83,6 +83,7 @@ class BookSources extends Component {
             </View>
           </TouchableOpacity>
         </View>
+        <View style={[StyleSheet.styles.separator, {marginLeft: 8}]}></View>
 
         <ListView
           contentContainerStyle={styles.list}
@@ -116,7 +117,6 @@ class BookSources extends Component {
 
     return (
       <View style={styles.section}>
-        <View style={StyleSheet.styles.separator}></View>
         <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
           <View style={styles.sourcesLeftContainer}>
             <Image source={image} style={[styles.sourceAvatar, {tintColor: tintColor}]} />
@@ -131,6 +131,7 @@ class BookSources extends Component {
             <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('words.count', {count: source.wordCount, localizedCount: source.wordCount.toLocaleString()})}</Text>
           </View>
         </View>
+        <View style={[StyleSheet.styles.separator, {marginLeft: 0}]}></View>
       </View>
     );
   };
@@ -148,8 +149,9 @@ const styles = StyleSheet.create({
   },
   sourceFilterContainer: {
     flexDirection: 'row',
-    marginHorizontal: 9,
+    marginHorizontal: 5,
     marginVertical: 8,
+    marginBottom: 15,
   },
   sourceButtonContainer: {
     flex: 1,
@@ -172,7 +174,7 @@ const styles = StyleSheet.create({
     fontSize: 11,
   },
   section: {
-    marginLeft: 15,
+    marginLeft: 8,
   },
   sourcesCellContainer: {
     flex: 1,
@@ -180,7 +182,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   sourcesLeftContainer: {
-    flex: 1,
+    flex: 2,
     flexDirection: 'row',
     paddingTop: 2,
   },
@@ -190,7 +192,7 @@ const styles = StyleSheet.create({
   sourceAvatar: {
     width: 20,
     height: 20,
-    marginRight: 10
+    marginRight: 5
   },
   sourcesBarChart: {
     height: 4,
