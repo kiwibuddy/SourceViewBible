@@ -91,18 +91,32 @@ class BookSources extends Component {
   }
 
   _renderRow = (source: Object, sectionID: string, rowID: string, highlightRow: boolean) => {
+    const SOURCE_TYPE_MAP = {
+      "The Narrator": "narrator",
+      "God": "god"
+    }
+    const sourceType = SOURCE_TYPE_MAP[source.name] || "support";
+    const tintColor = Colors.sources[sourceType];
+    const IMAGE_MAP = {
+      "narrator": require('../../Images/avatars/narrator-medium.png'),
+      "god": require('../../Images/avatars/divine-medium.png'),
+    }
+    const image = IMAGE_MAP[sourceType] || require('../../Images/avatars/human-group-medium.png');
+    const chartData = {};
+    chartData[sourceType] = source.wordCount;
+
     return (
       <View style={styles.section}>
         <View style={StyleSheet.styles.separator}></View>
         <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
           <View style={styles.sourcesLeftContainer}>
-            <Image source={require('../../Images/avatars/narrator.png')} style={[styles.sourceAvatar, {tintColor: Colors.sources.narrator}]} />
+            <Image source={image} style={[styles.sourceAvatar, {tintColor: tintColor}]} />
             <Text style={StyleSheet.styles.cell.title}>{source.name}</Text>
           </View>
           <View style={styles.sourcesRightContainer}>
             <SourcesBarChart
               style={styles.sourcesBarChart}
-              data={[{narrator: source.wordCount}]}
+              data={[chartData]}
             />
             <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('words.count', {count: source.wordCount})}</Text>
           </View>
