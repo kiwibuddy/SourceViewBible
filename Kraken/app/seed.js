@@ -252,11 +252,17 @@ function seedObjectSourceWordCounts(object, sourceData) {
     object.sourceCounts = {};
     const sourceNameData = sourceData["source_name"];
     if (sourceNameData != null) {
+      const sourceCounts = {};
       Object.keys(sourceNameData).forEach(function(sourceName, index) {
         const wordCount = sourceNameData[sourceName]["Token"] || 0;
-        object.sourceCounts[sourceName] = wordCount;
+        sourceCounts[sourceName] = wordCount;
       });
-      object.sourceCount = Object.keys(object.sourceCounts).length;
+
+      object.sourceCounts = Object.keys(sourceCounts).sort((a, b) => sourceCounts[a] > sourceCounts[b] ? -1 : 1).map((source) => {
+        return {name: source, wordCount: sourceCounts[source]};
+      });
+
+      object.sourceCount = object.sourceCounts.length;
     }
   }
 }

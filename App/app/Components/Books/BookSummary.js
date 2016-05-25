@@ -29,8 +29,8 @@ class BookSummary extends Component {
   render() {
     const { book } = this.props;
 
-    const sources = Object.keys(book.sources).sort((a, b) => book.sources[a] > book.sources[b] ? -1 : 1).slice(0, 5).map((source) => {
-      return this._renderSource({name: source, actant: 'human', type: 'support'});
+    const sources = book.sourceCounts.slice(0, 5).map((source) => {
+      return this._renderSource(source);
     });
 
     return (
