@@ -45,6 +45,12 @@ class BookSources extends Component {
   }
 
   render() {
+    const { book } = this.props
+    const narratorPercent = (book.sourceTypeCounts.narrator / book.wordCount) * 100;
+    const godPercent = (book.sourceTypeCounts.god / book.wordCount) * 100;
+    const leadPercent = (book.sourceTypeCounts.lead / book.wordCount) * 100;
+    const supportPercent = (book.sourceTypeCounts.support / book.wordCount) * 100;
+
     return (
       <View style={styles.container}>
         <SourcesBarChart
@@ -53,25 +59,25 @@ class BookSources extends Component {
         />
         <View style={styles.sourceFilterContainer}>
           <TouchableOpacity style={styles.sourceButtonContainer}>
-            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.narrator}]}>0%</Text>
+            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.narrator}]}>{Localizable.toPercentage(narratorPercent, {precision: 0})}</Text>
             <View style={[styles.roundButton, {borderColor: Colors.sources.narrator}]}>
               <Text style={[styles.roundButtonTitle, {color: Colors.sources.narrator}]}>{Localizable.t('sources.narrator').toLocaleUpperCase()}</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.sourceButtonContainer}>
-            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.god}]}>0%</Text>
+            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.god}]}>{Localizable.toPercentage(godPercent, {precision: 0})}</Text>
             <View style={[styles.roundButton, {borderColor: Colors.sources.god}]}>
               <Text style={[styles.roundButtonTitle, {color: Colors.sources.god}]}>{Localizable.t('sources.god').toLocaleUpperCase()}</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.sourceButtonContainer}>
-            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.lead}]}>0%</Text>
+            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.lead}]}>{Localizable.toPercentage(leadPercent, {precision: 0})}</Text>
             <View style={[styles.roundButton, {borderColor: Colors.sources.lead}]}>
               <Text style={[styles.roundButtonTitle, {color: Colors.sources.lead}]}>{Localizable.t('sources.lead').toLocaleUpperCase()}</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.sourceButtonContainer}>
-            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.support}]}>0%</Text>
+            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.support}]}>{Localizable.toPercentage(supportPercent, {precision: 0})}</Text>
             <View style={[styles.roundButton, {borderColor: Colors.sources.support}]}>
               <Text style={[styles.roundButtonTitle, {color: Colors.sources.support}]}>{Localizable.t('sources.support').toLocaleUpperCase()}</Text>
             </View>
