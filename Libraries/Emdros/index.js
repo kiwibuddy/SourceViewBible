@@ -35,11 +35,11 @@ export default class Emdros {
     EmdrosBridge.close(this.name);
   }
 
-  query(query, options) {
+  async query(query, options) {
     return EmdrosBridge.query({...options, query: query, name: this.name});
   }
 
-  string(from, to, options) {
+  async string(from, to, options) {
     return EmdrosBridge.string({...options, from: from, to: to, name: this.name})
   }
 }
