@@ -7,18 +7,22 @@ import { connect } from 'react-redux';
 
 import { navigatePush } from '../../Actions';
 
-import StyleSheet from '../../Common/StyleSheet'
+import {
+  Colors,
+  StyleSheet,
+} from '../../Common';
+
 import Localizable from '../../Common/Localizable';
 
 class Discover extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.sectionHeaderContainer}>
-          <Text style={StyleSheet.styles.sectionHeaderTitle}>BOOKS</Text>
-        </View>
         <TouchableOpacity onPress={this.props.onButtonPress}>
-          <Text style={styles.title}>Books</Text>
+          <View style={styles.sectionHeaderContainer}>
+            <Text style={StyleSheet.styles.sectionHeaderTitle}>BOOKS</Text>
+            <Text style={[StyleSheet.styles.sectionHeaderTitle, {color: Colors.tintColor}]}>View All</Text>
+          </View>
         </TouchableOpacity>
       </View>
     );
@@ -29,15 +33,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    justifyContent: 'center',
-    alignItems: 'center'
+    paddingTop: 58,
   },
 	title: {
 		fontSize: 24,
 		fontWeight: '500',
 		color: '#CF1E00',
 		marginBottom: 30
-	}
+	},
+  sectionHeaderContainer: {
+    height: 30,
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
 });
 
 const mapStateToProps = (state) => {
