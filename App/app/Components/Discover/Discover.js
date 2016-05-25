@@ -2,7 +2,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
 import { navigatePush } from '../../Actions';
@@ -19,10 +19,13 @@ class Discover extends Component {
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={this.props.onButtonPress}>
-          <View style={styles.sectionHeaderContainer}>
-            <Text style={StyleSheet.styles.sectionHeaderTitle}>BOOKS</Text>
-            <Text style={[StyleSheet.styles.sectionHeaderTitle, {color: Colors.tintColor}]}>View All</Text>
-          </View>
+          <View style={StyleSheet.styles.sectionHeaderContainer}>
+              <Text style={StyleSheet.styles.sectionHeaderTitle}>BOOKS</Text>
+              <View style={styles.sectionHeaderDetail}>
+                <Text style={[StyleSheet.styles.sectionHeaderTitle, {color: Colors.tintColor}]}>View All</Text>
+                <Image source={require('../../Images/common/disclosure.png')}  style={styles.disclosure} />
+              </View>
+            </View>
         </TouchableOpacity>
       </View>
     );
@@ -34,17 +37,22 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     paddingTop: 58,
+    paddingLeft: 8,
   },
-	title: {
-		fontSize: 24,
-		fontWeight: '500',
-		color: '#CF1E00',
-		marginBottom: 30
-	},
   sectionHeaderContainer: {
-    height: 30,
-    alignItems: 'center',
+    ...StyleSheet.styles.sectionHeaderContainer,
+    backgroundColor: 'red'
+  },
+  disclosure: {
+    width: 15,
+    height: 15,
+    marginTop: 8,
+    marginLeft: 5,
+    marginRight: -10,
+  },
+  sectionHeaderDetail: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });
 
