@@ -25,7 +25,7 @@ class BookSpheres extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Spheres</Text>
+        <Text style={styles.title}>TBD</Text>
       </View>
     );
   }
@@ -36,6 +36,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     marginTop: NavigationHeader.HEIGHT,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  title: {
+    color: '#EDEDED',
+    fontSize: 90,
+    fontWeight: 'bold',
   }
 });
 
