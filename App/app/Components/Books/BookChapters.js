@@ -77,8 +77,6 @@ class BookChapters extends Component {
   }
 
   _renderRow = (chapter: Object, sectionID: string, rowID: string, highlightRow: boolean) => {
-    const { book } = this.props;
-
     return (
       <View style={styles.section}>
         <View style={[styles.cellContainer, {paddingVertical: 8}]}>
@@ -90,7 +88,6 @@ class BookChapters extends Component {
               <SourcesBarChart
                 style={styles.stackedBarChart}
                 data={[chapter.sourceTypeCounts]}
-                maxChartValue={book.maxChapterWordCount}
               />
             </View>
           </View>

@@ -14,19 +14,17 @@ const SourcesBarChart = (props: Object) => {
   const stackedBarStyle = [styles.stackedBar, {flexDirection: props.horizontal ? 'row' : 'column'}, props.barStyle];
   const sources = (props.horizontal ? SOURCES : SOURCES.slice().reverse());
 
-  let maxChartValue = props.maxChartValue || 0;
-  if (props.maxChartValue == null) {
-    props.data.forEach((data, index) => {
-      let maxBarValue = 0;
-      sources.forEach((source, index) => {
-          const value = data[source] || 0;
-          maxBarValue += value;
-      });
-      if (maxBarValue > maxChartValue) {
-        maxChartValue = maxBarValue;
-      }
+  let maxChartValue = 0;
+  props.data.forEach((data, index) => {
+    let maxBarValue = 0;
+    sources.forEach((source, index) => {
+        const value = data[source] || 0;
+        maxBarValue += value;
     });
-  }
+    if (maxBarValue > maxChartValue) {
+      maxChartValue = maxBarValue;
+    }
+  });
 
   let barIndex = 0;
   const bars = props.data.map((data) => {
@@ -47,16 +45,12 @@ const SourcesBarChart = (props: Object) => {
     if (!bar) return null;
 
     const delta = maxChartValue - maxBarValue;
-    const deltaBar = delta > 0 ? <View key='deltaBar' style={[{flex: delta}, styles.deltaBar]} /> : null;
-    let chart = null;
-    if (props.horizontal) {
-      chart = [bar, deltaBar];
-    } else {
-      chart = [deltaBar, bar];
-    }
+    const deltaBar = delta > 0 ? <View style={[{flex: delta}, styles.deltaBar]} /> : null;
+
     return (
       <View key={'bar-' + barIndex++} style={stackedBarStyle}>
-        {chart}
+        {deltaBar}
+        {bar}
       </View>
     )
   });
