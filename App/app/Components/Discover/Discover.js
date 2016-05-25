@@ -26,7 +26,7 @@ class Discover extends Component {
       <View style={styles.container}>
 
         <TouchableOpacity onPress={this.props.onButtonPress}>
-          <View style={StyleSheet.styles.sectionHeaderContainer}>
+          <View style={styles.sectionHeaderContainer}>
               <Text style={StyleSheet.styles.sectionHeaderTitle}>BOOKS</Text>
               <View style={styles.sectionHeaderDetail}>
                 <Text style={[StyleSheet.styles.sectionHeaderTitle, {color: Colors.tintColor}]}>View All</Text>
@@ -86,9 +86,7 @@ const styles = StyleSheet.create({
   },
   sectionHeaderContainer: {
     ...StyleSheet.styles.sectionHeaderContainer,
-    backgroundColor: 'red',
     borderBottomWidth: 0,
-    borderBottomColor: 'red',
   },
   disclosure: {
     width: 15,
