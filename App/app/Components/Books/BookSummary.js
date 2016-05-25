@@ -42,7 +42,7 @@ class BookSummary extends Component {
           style={styles.wordCloud}
         >
           <View style={{opacity: 0.75}}>
-            <Text style={styles.wc1, {alignSelf: 'center', backgroundColor:'transparent'}]}>{words[0].word}</Text>
+            <Text style={[styles.wc1, {alignSelf: 'center', backgroundColor:'transparent'}]}>{words[0].word}</Text>
             <Text style={{color: 'white', backgroundColor:'transparent'}}>{words[1].word}</Text>
             <Text style={{color: 'white', backgroundColor:'transparent'}}>{words[2].word}</Text>
             <Text style={{color: 'white', backgroundColor:'transparent'}}>{words[3].word}</Text>
