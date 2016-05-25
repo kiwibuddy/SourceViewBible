@@ -45,11 +45,10 @@ async function seed(emdros, objects) {
 
   await seedChapters(emdros, objects);
   await seedWordCounts(emdros, objects)
-    // seedWordCounts(emdros, objects)
 }
 
 async function seedChapters(emdros, objects) {
-  console.log('Seeding chapters...');
+  console.log('Seeding Chapters...');
   const query = `
   {
     "objectTypeName": "Book",
@@ -68,7 +67,8 @@ async function seedChapters(emdros, objects) {
           const chapterCount = bookData["Chapter"] || 0;
           const chapters = []
           for (let i = 0; i < chapterCount; i++) {
-            chapters.push({});
+            const chapterNumber = i + 1;
+            chapters.push({chapterNumber: chapterNumber});
           }
           book["chapterCount"] = chapters.length;
           book["chapters"] = chapters;
@@ -84,6 +84,7 @@ async function seedChapters(emdros, objects) {
 
 async function seedWordCounts(emdros, objects) {
   await seedBookWordCounts(emdros, objects);
+  await seedChapterWordCounts(emdros, objects);
 }
 
 async function seedBookWordCounts(emdros, objects) {
@@ -116,13 +117,46 @@ async function seedBookWordCounts(emdros, objects) {
   });
 }
 
-function seedChapterWordCounts(emdros, objects) {
-  return new Promise((resolve, reject) => {
+async function seedChapterWordCounts(emdros, objects) {
+  console.log('Seeding Chapter Word Counts...');
+  const query = `
+  {
+    "objectTypeName": "Book",
+    "feature": "DJHRef",
+    "buckets": {
+      "objectTypeName": "Chapter",
+      "feature": "chapter",
+      "buckets": {
+        "objectTypeName": "Token",
+        "expression" : "is_word=true"
+      }
+    }
+  }
+  `;
 
+  return new Promise((resolve, reject) => {
+    emdros.query(query, {count: true}).then((data) => {
+      for (let [index, book] of objects.entries()) {
+        const bookData = data["Book"]["DJHRef"][book.DJHRef];
+        if (bookData != null) {
+          const chapterData = bookData["Chapter"]["chapter"];
+          if (chapterData != null) {
+            book.chapters.forEach((chapter, index) => {
+              const wordCount = chapterData[chapter.chapterNumber.toString()]["Token"] || 0;
+              chapter["wordCount"] = wordCount;
+            });
+          }
+        }
+      }
+
+      resolve();
+    }).catch((error) => {
+      console.log(error);
+    })
   });
 }
 
-function seedChapterWordCounts(emdros, objects) {
+function seedSourceWordCounts(emdros, objects) {
   const query = `
   {
     "objectTypeName": "Book",
