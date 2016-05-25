@@ -102,9 +102,9 @@ class BookSources extends Component {
           <View style={styles.sourcesRightContainer}>
             <SourcesBarChart
               style={styles.sourcesBarChart}
-              data={[{narrator: 1, god: 1, lead: 1, support: 1}]}
+              data={[{narrator: source.wordCount}]}
             />
-            <Text style={StyleSheet.styles.cell.subtitle}>0 words</Text>
+            <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('words.count', {count: source.wordCount})}</Text>
           </View>
         </View>
       </View>

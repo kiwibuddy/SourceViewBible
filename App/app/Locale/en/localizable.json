@@ -1,32 +1,38 @@
 {
   en: {
-    'old-testament': 'Old Testament',
-    'new-testament': 'New Testament',
-    textual: 'Textual',
-    alphabetical: 'Alphabetical',
-    principality: 'Principality',
-    discover: 'Discover',
-    books: 'Books',
+    "old-testament": "Old Testament",
+    "new-testament": "New Testament",
+    textual: "Textual",
+    alphabetical: "Alphabetical",
+    principality: "Principality",
+    discover: "Discover",
+    books: "Books",
     sources: {
-      narrator: 'Narrator',
-      god: 'God',
-      lead: 'Lead',
-      support: 'Support',
-      text: 'Sources',
+      narrator: "Narrator",
+      god: "God",
+      lead: "Lead",
+      support: "Support",
+      text: "Sources",
       count: {
-        one: '1 source',
-        other: '{{count}} sources'
+        one: "1 source",
+        other: "{{count}} sources"
       }
     },
-    spheres: 'Spheres',
-    introduction: 'Introduction',
+    spheres: "Spheres",
+    introduction: "Introduction",
     tabs: {
-      summary: 'Summary',
-      chapters: 'Chapters',
-      sources: 'Sources',
-      spheres: 'Spheres',
-      words: 'Words'
+      summary: "Summary",
+      chapters: "Chapters",
+      sources: "Sources",
+      spheres: "Spheres",
+      words: "Words"
     },
-    'how-to-read': 'How to read {{name}}',
+    "how-to-read": "How to read {{name}}",
+    words: {
+      count: {
+        one: "1 word",
+        other: "{{count}} words"
+      }
+    },
   }
 }
