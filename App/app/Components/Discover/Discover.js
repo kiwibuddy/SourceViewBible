@@ -50,7 +50,7 @@ class Discover extends Component {
 
   _renderBook = (book) => {
     return (
-      <TouchableOpacity key={'book-' + book.key} style={styles.itemContainer}>
+      <TouchableOpacity key={'book-' + book.key} style={styles.itemContainer}  onPress={ () => this.props.onBookPress(book) }>
         <LinearGradient
           colors={Colors.spheres[book.principalSphere].gradient}
           start={[0.0, 0.25]} end={[0.5, 1.0]}
@@ -234,6 +234,13 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(navigatePush({
         key: 'books',
         title: Localizable.t('books')
+      }));
+    },
+    onBookPress: (book) => {
+      dispatch(navigatePush({
+        key: 'book',
+        title: book.name,
+        book
       }));
     }
   };
