@@ -60,6 +60,7 @@ class Book extends Component {
             onPressChapters={() => this.setState({ selectedTab: 'chapters' })}
             onPressSources={() => this.setState({ selectedTab: 'sources' })}
             onPressSpheres={() => this.setState({ selectedTab: 'spheres' })}
+            onPressWords={() => this.setState({ selectedTab: 'words' })}
           />
         </TabNavigator.Item>
         <TabNavigator.Item
