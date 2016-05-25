@@ -70,6 +70,7 @@ class BookChapters extends Component {
           initialListSize={18}
           renderRow={this._renderRow}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+          renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
         />
       </View>
     );
@@ -99,7 +100,6 @@ class BookChapters extends Component {
               </View>
           </View>
         </View>
-        <View style={StyleSheet.styles.separator}></View>
       </View>
     );
   };

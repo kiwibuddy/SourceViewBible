@@ -6,7 +6,8 @@ import React, { Component } from 'react';
 import ReactNative, {
   View,
   Text,
-  ScrollView,
+  ListView,
+  RecyclerViewBackedScrollView,
   TouchableOpacity,
   NavigationExperimental,
   Image
@@ -24,6 +25,25 @@ import {
 import SourcesBarChart from '../Charts/SourcesBarChart';
 
 class BookSources extends Component {
+  state: {
+    dataSource: any
+  };
+
+  constructor(props: Object) {
+    super(props);
+
+    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
+    this.state = {
+      dataSource: dataSource
+    };
+  }
+
+  componentDidMount() {
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(this.props.book.sourceCounts)
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -57,26 +77,39 @@ class BookSources extends Component {
             </View>
           </TouchableOpacity>
         </View>
-        <View style={styles.section}>
-          <View style={StyleSheet.styles.separator}></View>
-          <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
-            <View style={styles.sourcesLeftContainer}>
-              <Image source={require('../../Images/avatars/narrator.png')} style={[styles.sourceAvatar, {tintColor: Colors.sources.narrator}]} />
-              <Text style={StyleSheet.styles.cell.title}>Narrator</Text>
-            </View>
-            <View style={styles.sourcesRightContainer}>
-              <SourcesBarChart
-                style={styles.sourcesBarChart}
-                data={[{narrator: 1, god: 1, lead: 1, support: 1}]}
-              />
-              <Text style={StyleSheet.styles.cell.subtitle}>0 words</Text>
-            </View>
-          </View>
-          <View style={StyleSheet.styles.separator}></View>
-        </View>
+
+        <ListView
+          contentContainerStyle={styles.list}
+          dataSource={this.state.dataSource}
+          initialListSize={18}
+          renderRow={this._renderRow}
+          renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+          renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
+        />
       </View>
     );
   }
+
+  _renderRow = (source: Object, sectionID: string, rowID: string, highlightRow: boolean) => {
+    return (
+      <View style={styles.section}>
+        <View style={StyleSheet.styles.separator}></View>
+        <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
+          <View style={styles.sourcesLeftContainer}>
+            <Image source={require('../../Images/avatars/narrator.png')} style={[styles.sourceAvatar, {tintColor: Colors.sources.narrator}]} />
+            <Text style={StyleSheet.styles.cell.title}>{source.name}</Text>
+          </View>
+          <View style={styles.sourcesRightContainer}>
+            <SourcesBarChart
+              style={styles.sourcesBarChart}
+              data={[{narrator: 1, god: 1, lead: 1, support: 1}]}
+            />
+            <Text style={StyleSheet.styles.cell.subtitle}>0 words</Text>
+          </View>
+        </View>
+      </View>
+    );
+  };
 }
 
 const styles = StyleSheet.create({

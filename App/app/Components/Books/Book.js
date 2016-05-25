@@ -82,7 +82,7 @@ class Book extends Component {
           renderSelectedIcon={() => <Image source={require('../../Images/tabs/sources-s.png')} style={styles.selectedTabIcon} />}
           onPress={() => this.setState({ selectedTab: 'sources' })}
         >
-          <BookSources />
+          <BookSources book={this.props.book} />
         </TabNavigator.Item>
         <TabNavigator.Item
           selected={this.state.selectedTab === 'spheres'}
