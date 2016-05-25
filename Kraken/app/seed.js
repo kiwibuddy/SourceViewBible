@@ -289,9 +289,10 @@ async function seedBookWordCloud(emdros, objects) {
 
 function seedObjectSourceWordCounts(object, sourceData) {
   object.sourceCount = 0;
+  object.sourceCounts = [];
+  object.sourceTypeCounts = {};
 
   if (sourceData != null) {
-    object.sourceTypeCounts = {};
     const sourceTypeData = sourceData["source_color"];
     if (sourceTypeData != null) {
       Object.keys(sourceTypeData).forEach(function(sourceColor, index) {
@@ -301,7 +302,6 @@ function seedObjectSourceWordCounts(object, sourceData) {
       });
     }
 
-    object.sourceCounts = {};
     const sourceNameData = sourceData["source_name"];
     if (sourceNameData != null) {
       const sourceCounts = {};
