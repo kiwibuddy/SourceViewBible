@@ -150,10 +150,15 @@ async function seedChapterWordCounts(emdros, objects) {
         if (bookData != null) {
           const chapterData = bookData["Chapter"]["chapter"];
           if (chapterData != null) {
+            let maxChapterWordCount = 0;
             book.chapters.forEach((chapter, index) => {
               const wordCount = chapterData[chapter.chapterNumber.toString()]["Token"] || 0;
               chapter["wordCount"] = wordCount;
+              if (wordCount > maxChapterWordCount) {
+                maxChapterWordCount = wordCount;
+              }
             });
+            book.maxChapterWordCount = maxChapterWordCount;
           }
         }
       }
@@ -289,6 +294,7 @@ async function seedBookWordCloud(emdros, objects) {
 
 function seedObjectSourceWordCounts(object, sourceData) {
   object.sourceCount = 0;
+  object.maxSourceWordCount = 0;
   object.sourceCounts = [];
   object.sourceTypeCounts = {};
 
@@ -315,6 +321,7 @@ function seedObjectSourceWordCounts(object, sourceData) {
       });
 
       object.sourceCount = object.sourceCounts.length;
+      object.maxSourceWordCount = object.sourceCounts[0].wordCount;
     }
   }
 }

@@ -31,7 +31,7 @@
     words: {
       count: {
         one: "1 word",
-        other: "{{count}} words"
+        other: "{{localizedCount}} words"
       }
     },
   }

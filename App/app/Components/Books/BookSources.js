@@ -91,9 +91,12 @@ class BookSources extends Component {
   }
 
   _renderRow = (source: Object, sectionID: string, rowID: string, highlightRow: boolean) => {
+    const { book } = this.props;
+
     const SOURCE_TYPE_MAP = {
       "The Narrator": "narrator",
-      "God": "god"
+      "God": "god",
+      "Jesus": "god"
     }
     const sourceType = SOURCE_TYPE_MAP[source.name] || "support";
     const tintColor = Colors.sources[sourceType];
@@ -117,8 +120,9 @@ class BookSources extends Component {
             <SourcesBarChart
               style={styles.sourcesBarChart}
               data={[chartData]}
+              maxChartValue={book.maxSourceWordCount}
             />
-            <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('words.count', {count: source.wordCount.toLocaleString()})}</Text>
+            <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('words.count', {count: source.wordCount, localizedCount: source.wordCount.toLocaleString()})}</Text>
           </View>
         </View>
       </View>
