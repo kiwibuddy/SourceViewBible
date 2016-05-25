@@ -41,7 +41,9 @@ const styles = StyleSheet.create({
   },
   sectionHeaderContainer: {
     ...StyleSheet.styles.sectionHeaderContainer,
-    backgroundColor: 'red'
+    backgroundColor: 'red',
+    borderBottomWidth: 0,
+    borderBottomColor: 'red',
   },
   disclosure: {
     width: 15,
