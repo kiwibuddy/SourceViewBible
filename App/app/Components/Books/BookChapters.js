@@ -88,6 +88,7 @@ class BookChapters extends Component {
               <SourcesBarChart
                 style={styles.stackedBarChart}
                 data={[chapter.sourceTypeCounts]}
+                maxChartValue={1000}
               />
             </View>
           </View>

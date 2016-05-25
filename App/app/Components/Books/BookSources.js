@@ -117,6 +117,7 @@ class BookSources extends Component {
             <SourcesBarChart
               style={styles.sourcesBarChart}
               data={[chartData]}
+              maxChartValue={1000}
             />
             <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('words.count', {count: source.wordCount.toLocaleString()})}</Text>
           </View>
