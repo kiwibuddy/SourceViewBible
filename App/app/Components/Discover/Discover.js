@@ -12,6 +12,7 @@ import {
   StyleSheet,
 } from '../../Common';
 
+// $FlowBug: Can't find os module extension
 import LinearGradient from 'react-native-linear-gradient';
 
 import { SourcesBarChart, SpheresBarChart } from '../Charts';
