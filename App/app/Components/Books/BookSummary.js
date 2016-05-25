@@ -36,7 +36,7 @@ class BookSummary extends Component {
     return (
       <ScrollView style={styles.container}>
         <WordCloud
-          backgroundColors={Colors.spheres.celebration.gradient}
+          backgroundColors={Colors.spheres[book.principalSphere].gradient}
           style={styles.wordCloud}
         />
 

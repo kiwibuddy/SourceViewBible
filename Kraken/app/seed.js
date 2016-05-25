@@ -22,6 +22,8 @@ const SOURCE_TYPE_MAP = {
   "Blue": "support"
 };
 
+const SPHERES = ["family", "economics", "government", "religion", "education", "communication", "celebration"];
+
 export async function kraken() {
   console.log('Hello!');
 
@@ -90,6 +92,7 @@ async function seedWordCounts(emdros, objects) {
   await seedBookWordCounts(emdros, objects);
   await seedChapterWordCounts(emdros, objects);
   await seedBookSourceWordCounts(emdros, objects);
+  await seedBookSphereWordCounts(emdros, objects);
   await seedChapterSourceWordCounts(emdros, objects);
 }
 
@@ -181,8 +184,6 @@ async function seedBookSourceWordCounts(emdros, objects) {
 
   return new Promise((resolve, reject) => {
     emdros.query(query, {count: true}).then((data) => {
-      let bookObjects = [];
-
       for (let [index, book] of objects.entries()) {
         const bookData = data["Book"]["DJHRef"][book.DJHRef];
         if (bookData != null) {
@@ -195,6 +196,18 @@ async function seedBookSourceWordCounts(emdros, objects) {
     }).catch((error) => {
       console.log(error);
     })
+  });
+}
+
+async function seedBookSphereWordCounts(emdros, objects) {
+  console.log('Seeding Book Sphere Word Counts');
+
+  return new Promise((resolve, reject) => {
+    for (let [index, book] of objects.entries()) {
+      book.principalSphere = SPHERES[Math.floor(Math.random() * SPHERES.length)];
+    }
+
+    resolve();
   });
 }
 
