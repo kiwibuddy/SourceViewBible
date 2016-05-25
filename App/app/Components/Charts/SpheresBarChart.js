@@ -20,7 +20,7 @@ const SpheresBarChart = (props: Object) => {
       if (value == undefined) return null;
 
       const barStyle = {
-        backgroundColor: Colors.spheres[sphere],
+        backgroundColor: Colors.spheres[sphere].tint,
         marginTop: (props.horizontal ? 0 : Math.floor(Math.random() * 12)),
         flex: value
       }
