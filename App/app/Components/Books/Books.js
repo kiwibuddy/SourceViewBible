@@ -54,13 +54,19 @@ class Books extends Component {
   };
 
   constructor(props) {
-      super(props);
+    super(props);
 
-      const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
-      this.state = {
-        dataSource: dataSource.cloneWithRowsAndSections({old: OLD_TESTAMENT_BOOKS, new: NEW_TESTAMENT_BOOKS}),
-        selectedSegmentIndex: 0
-      }
+    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
+    this.state = {
+      dataSource: dataSource,
+      selectedSegmentIndex: 0
+    };
+  }
+
+  componentDidMount() {
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRowsAndSections({old: OLD_TESTAMENT_BOOKS, new: NEW_TESTAMENT_BOOKS})
+    });
   }
 
   render() {

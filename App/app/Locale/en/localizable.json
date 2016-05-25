@@ -18,6 +18,7 @@
         other: '{{count}} sources'
       }
     },
+    spheres: 'Spheres',
     introduction: 'Introduction',
     tabs: {
       summary: 'Summary',

@@ -6,7 +6,8 @@ import React, { Component } from 'react';
 import ReactNative, {
   View,
   Text,
-  ScrollView,
+  ListView,
+  RecyclerViewBackedScrollView,
   TouchableOpacity,
   NavigationExperimental,
   Image
@@ -21,60 +22,87 @@ import {
   Platform
 } from '../../Common';
 
+// $FlowBug: - Flow can't find os module extension
+import SegmentedControl from '../Common/SegmentedControl';
+
 import { SourcesBarChart, SpheresBarChart } from '../Charts';
 
+import { ReadingTime } from '../../Common/NumberHelper';
+
+const SEGMENTS = [Localizable.t('sources.text'), Localizable.t('spheres')];
+
 class BookChapters extends Component {
+  state: {
+    dataSource: any,
+    selectedSegmentIndex: number
+  };
+
+  constructor(props: Object) {
+    super(props);
+
+    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
+    this.state = {
+      dataSource: dataSource,
+      selectedSegmentIndex: 0
+    };
+  }
+
+  componentDidMount() {
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(this.props.book.chapters)
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
+        <SegmentedControl
+          style={styles.segmentedControl}
+          tintColor={Colors.tintColor}
+          values={SEGMENTS}
+          selectedIndex={this.state.selectedSegmentIndex}
+          onValueChange={(value) => console.log('selectedIndex: ' + SEGMENTS.indexOf(value))}
+        />
+
+        <ListView
+          contentContainerStyle={styles.list}
+          dataSource={this.state.dataSource}
+          initialListSize={18}
+          renderRow={this._renderRow}
+          renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+        />
+      </View>
+    );
+  }
+
+  _renderRow = (chapter: Object, sectionID: string, rowID: string, highlightRow: boolean) => {
+    return (
       <View style={styles.section}>
         <View style={[styles.cellContainer, {paddingVertical: 8}]}>
           <View style={styles.horizontalContainer}>
             <View style={styles.leftContainer}>
-              <Text style={StyleSheet.styles.cell.title}>Chapter 1</Text>
+              <Text style={StyleSheet.styles.cell.title}>Chapter {chapter.chapterNumber}</Text>
             </View>
             <View style={styles.rightContainer}>
               <SourcesBarChart
                 style={styles.stackedBarChart}
-                data={[{narrator: 1, god: 1, lead: 1, support: 1}]}
+                data={[chapter.sourceTypeCounts]}
               />
             </View>
           </View>
           <View style={styles.horizontalContainer}>
             <View style={styles.leftContainer}>
-              <Text style={StyleSheet.styles.cell.subtitle}>0 min</Text>
+              <Text style={StyleSheet.styles.cell.subtitle}>{ReadingTime(chapter.wordCount)}</Text>
             </View>
             <View style={styles.rightContainer}>
-              <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('sources.count', {count: 0})}</Text>
+              <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('sources.count', {count: chapter.sourceCount})}</Text>
               </View>
           </View>
         </View>
         <View style={StyleSheet.styles.separator}></View>
-        <View style={[styles.cellContainer, {paddingVertical: 8}]}>
-          <View style={styles.horizontalContainer}>
-            <View style={styles.leftContainer}>
-              <Text style={StyleSheet.styles.cell.title}>Chapter 1</Text>
-            </View>
-            <View style={styles.rightContainer}>
-              <SpheresBarChart
-                style={styles.stackedBarChart}
-                data={[{family: 1, economics: 1, government: 1, religion: 1, education: 1, communication: 1, celebration: 1}]}
-              />
-            </View>
-          </View>
-          <View style={styles.horizontalContainer}>
-            <View style={styles.leftContainer}>
-            </View>
-            <View style={styles.rightContainer}>
-              <Text style={StyleSheet.styles.cell.subtitle}>0 spheres</Text>
-              </View>
-          </View>
-        </View>
-        <View style={StyleSheet.styles.separator}></View>
-      </View>
       </View>
     );
-  }
+  };
 }
 
 const styles = StyleSheet.create({
@@ -118,6 +146,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  separator: {
+    ...StyleSheet.styles.separator,
+    marginLeft: 15,
+  },
+  ...Platform.select({
+      ios: {
+        segmentedControl: {
+          marginTop: 8,
+          marginHorizontal: 8,
+          marginBottom: 10,
+        },
+      },
+      android: {
+        segmentedControl: {
+          shadowColor: 'red',
+          elevation: 2,
+        },
+      },
+  })
 });
 
 export default BookChapters;
