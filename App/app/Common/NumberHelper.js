@@ -4,7 +4,7 @@
 const moment = require('moment');
 require('moment-duration-format');
 
-const WORDS_PER_MINUTE = 150;
+const WORDS_PER_MINUTE = 180;
 
 function ReadingTime(words: number) {
   const minutes = words / WORDS_PER_MINUTE;
