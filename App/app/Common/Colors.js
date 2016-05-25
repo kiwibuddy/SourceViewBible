@@ -17,31 +17,31 @@ module.exports = {
   spheres: {
     family: {
       tint:'#FF3A2E',
-      gradient: ['#a856cd',  '#FF3A2E']
+      gradient: ['#FF4B3B',  '#AA0606']
     },
     economics: {
       tint:'#FF9700',
-      gradient: ['#a856cd',  '#FF9700']
+      gradient: ['#FC882A',  '#D4202F']
     },
     government: {
       tint:'#FECB01',
-      gradient: ['#a856cd',  '#FECB01']
+      gradient: ['#FFBF00',  '#FF933A']
     },
     religion: {
       tint:'#4ED962',
-      gradient: ['#a856cd',  '#4ED962']
+      gradient: ['#8BC624',  '#429321']
     },
     education: {
       tint:'#25B8D7',
-      gradient: ['#a856cd',  '#25B8D7']
+      gradient: ['#11C7B8',  '#1A5A78']
     },
     communication: {
       tint:'#5A5AD3',
-      gradient: ['#a856cd',  '#5A5AD3']
+      gradient: ['#C86DD7',  '#3023AE']
     },
     celebration: {
       tint:'#E058AD',
-      gradient: ['#a856cd',  '#3722a7']
+      gradient: ['#F2407B',  '#9F041B']
     }
   },
 
