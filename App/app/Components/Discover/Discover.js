@@ -12,12 +12,19 @@ import {
   StyleSheet,
 } from '../../Common';
 
+import LinearGradient from 'react-native-linear-gradient';
+
+import { SourcesBarChart, SpheresBarChart } from '../Charts';
+
+import { ReadingTime } from '../../Common/NumberHelper';
+
 import Localizable from '../../Common/Localizable';
 
 class Discover extends Component {
   render() {
     return (
       <View style={styles.container}>
+
         <TouchableOpacity onPress={this.props.onButtonPress}>
           <View style={StyleSheet.styles.sectionHeaderContainer}>
               <Text style={StyleSheet.styles.sectionHeaderTitle}>BOOKS</Text>
@@ -27,6 +34,44 @@ class Discover extends Component {
               </View>
             </View>
         </TouchableOpacity>
+
+        <TouchableOpacity style={styles.itemContainer} onPress={ () => this.props.onButtonPress(book) }>
+          <LinearGradient
+            colors={['#a856cd', '#3722a7']}
+            start={[0.0, 0.25]} end={[0.5, 1.0]}
+            style={styles.gradient}
+          />
+          <Text style={styles.bookTitle}>John</Text>
+          <Text style={styles.bookReadTime}>0</Text>
+          <View style={styles.keyline} />
+          <View style={styles.statisticsContainer}>
+            <View style={styles.statisticContainer} >
+              <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+                <Text style={styles.statisticTitle}>0</Text>
+                <Text style={styles.statisticSubtitle}>Sources</Text>
+                <SourcesBarChart
+                  style={{flex: 0, marginLeft: 4}}
+                  barStyle={{width: 2, height: 12, marginHorizontal: 1}}
+                  horizontal={false}
+                  data={[{narrator: 1}, {god: 1}, {lead: 1}, {support: 1}]}
+                />
+              </View>
+            </View>
+            <View style={styles.statisticContainer} >
+              <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+                <Text style={styles.statisticTitle}>0</Text>
+                <Text style={styles.statisticSubtitle}>Spheres</Text>
+                <SpheresBarChart
+                  style={{flex: 0, marginLeft: 4}}
+                  barStyle={{width: 2, height: 12, marginHorizontal: 1}}
+                  horizontal={false}
+                  data={[{family: 1}, {economics: 1}, {government: 1}, {religion: 1}, {education: 1}, {communication: 1}, {celebration: 1}]}
+                />
+              </View>
+            </View>
+          </View>
+        </TouchableOpacity>
+
       </View>
     );
   }
@@ -55,6 +100,98 @@ const styles = StyleSheet.create({
   sectionHeaderDetail: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  itemContainer: {
+    borderColor: 'rgba(0, 0, 0, 0.15)',
+    borderWidth: StyleSheet.hairlineWidth,
+    borderRadius: 4,
+    backgroundColor: '#fff',
+    margin: 5,
+    width: 110,
+    height: 84,
+    shadowColor: "black",
+    shadowOpacity: 0.05,
+    shadowRadius: 0.4,
+    shadowOffset: {
+      height: 1,
+      width: 0
+    },
+  },
+  gradient: {
+    flex: 0,
+    height: 3,
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4,
+    overflow: 'hidden'
+  },
+  bookTitle: {
+    flex: 0,
+    fontSize: 13,
+    color: '#59626a',
+    textAlign: 'center',
+    fontWeight: '500',
+    marginTop: 5,
+  },
+  bookReadTime: {
+    flex: 0,
+    fontSize: 9,
+    color: '#9b9b9b',
+    textAlign: 'center',
+    marginTop: 1,
+    marginBottom: 7,
+  },
+  statisticsContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    marginHorizontal: 5,
+    borderBottomColor: Colors.separator,
+  },
+  statisticContainer: {
+    marginTop: 5,
+  },
+  statisticTitle: {
+    fontSize: 9,
+    color: Colors.tintColor,
+    marginRight: 3,
+  },
+  statisticSubtitle: {
+    flex: 1,
+    color: Colors.subtitle,
+    fontSize: 9,
+  },
+  sourcesContainer: {
+    flexDirection: 'row',
+    margin: 4,
+  },
+  sourceImage: {
+    width: 10,
+    height: 10,
+    margin: 4,
+  },
+  readTitle: {
+    color: Colors.subtitle,
+    fontSize: 12,
+    alignSelf: 'center',
+    paddingBottom: 8,
+  },
+  keyline: {
+    flex:0,
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: '#e0e0e0',
+    marginHorizontal: 2,
+  },
+  horizontalContainer: {
+    flexDirection: 'row',
+  },
+  leftContainer: {
+    flex: 1.2,
+  },
+  rightContainer: {
+    flex: 1.8,
+  },
+  separator: {
+    ...StyleSheet.styles.separator,
+    marginLeft: 15,
   },
 });
 
