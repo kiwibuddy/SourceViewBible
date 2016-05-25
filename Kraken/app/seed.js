@@ -29,15 +29,13 @@ export async function kraken() {
   const emdros = await Emdros.open({name: 'Datasets/en/NLT/SourceView.bpt'});
   let objects = BIBLE;
   await seed(emdros, BIBLE);
-  console.log('Done Seeding.');
 
-  console.log(objects);
-
-    // RNFS.writeFile(JSON_PATH, JSON.stringify(objects), 'utf8').then((success) => {
-    //   console.log('Done Seeding.');
-    // }).catch((err) => {
-    //   console.log(err.message);
-    // });
+  RNFS.writeFile(JSON_PATH, JSON.stringify(objects), 'utf8').then((success) => {
+    console.log('Done Seeding.');
+    console.log(objects);
+  }).catch((err) => {
+    console.log(err.message);
+  });
 }
 
 async function seed(emdros, objects) {
@@ -86,6 +84,7 @@ async function seedWordCounts(emdros, objects) {
   await seedBookWordCounts(emdros, objects);
   await seedChapterWordCounts(emdros, objects);
   await seedBookSourceWordCounts(emdros, objects);
+  await seedChapterSourceWordCounts(emdros, objects);
 }
 
 async function seedBookWordCounts(emdros, objects) {
@@ -182,25 +181,51 @@ async function seedBookSourceWordCounts(emdros, objects) {
         const bookData = data["Book"]["DJHRef"][book.DJHRef];
         if (bookData != null) {
           const sourceData = bookData["Source"];
-          if (sourceData != null) {
-            book.sourceTypeCounts = {};
-            const sourceTypeData = sourceData["source_color"];
-            if (sourceTypeData != null) {
-              Object.keys(sourceTypeData).forEach(function(sourceColor, index) {
-                const wordCount = sourceTypeData[sourceColor]["Token"] || 0;
-                const sourceType = SOURCE_TYPE_MAP[sourceColor];
-                book.sourceTypeCounts[sourceType] = wordCount;
-              });
-            }
+          seedObjectSourceWordCounts(book, sourceData);
+        }
+      }
 
-            book.sourceCounts = {};
-            const sourceNameData = sourceData["source_name"];
-            if (sourceNameData != null) {
-              Object.keys(sourceNameData).forEach(function(sourceName, index) {
-                const wordCount = sourceNameData[sourceName]["Token"] || 0;
-                book.sourceCounts[sourceName] = wordCount;
-              });
-            }
+      resolve();
+    }).catch((error) => {
+      console.log(error);
+    })
+  });
+}
+
+async function seedChapterSourceWordCounts(emdros, objects) {
+  console.log('Seeding Chapter Source Word Counts');
+  const query = `
+  {
+    "objectTypeName": "Book",
+    "feature": "DJHRef",
+    "buckets": {
+      "objectTypeName": "Chapter",
+      "feature": "chapter",
+      "buckets": {
+        "objectTypeName": "Source",
+        "feature": ["source_color", "source_name"],
+        "buckets": {
+          "objectTypeName": "Token",
+          "expression" : "is_word=true"
+        }
+      }
+    }
+  }
+  `;
+
+  return new Promise((resolve, reject) => {
+    emdros.query(query, {count: true}).then((data) => {
+      let bookObjects = [];
+
+      for (let [index, book] of objects.entries()) {
+        const bookData = data["Book"]["DJHRef"][book.DJHRef];
+        if (bookData != null) {
+          const chapterData = bookData["Chapter"]["chapter"];
+          if (chapterData != null) {
+            book.chapters.forEach((chapter, index) => {
+              const sourceData = chapterData[chapter.chapterNumber.toString()]["Source"];
+              seedObjectSourceWordCounts(chapter, sourceData);
+            });
           }
         }
       }
@@ -210,4 +235,28 @@ async function seedBookSourceWordCounts(emdros, objects) {
       console.log(error);
     })
   });
+}
+
+function seedObjectSourceWordCounts(object, sourceData) {
+  if (sourceData != null) {
+    object.sourceTypeCounts = {};
+    const sourceTypeData = sourceData["source_color"];
+    if (sourceTypeData != null) {
+      Object.keys(sourceTypeData).forEach(function(sourceColor, index) {
+        const wordCount = sourceTypeData[sourceColor]["Token"] || 0;
+        const sourceType = SOURCE_TYPE_MAP[sourceColor];
+        object.sourceTypeCounts[sourceType] = wordCount;
+      });
+    }
+
+    object.sourceCounts = {};
+    const sourceNameData = sourceData["source_name"];
+    if (sourceNameData != null) {
+      Object.keys(sourceNameData).forEach(function(sourceName, index) {
+        const wordCount = sourceNameData[sourceName]["Token"] || 0;
+        object.sourceCounts[sourceName] = wordCount;
+      });
+      object.sourceCount = Object.keys(object.sourceCounts).length;
+    }
+  }
 }
