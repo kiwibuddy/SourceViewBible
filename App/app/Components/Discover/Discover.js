@@ -108,7 +108,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: '#c8c7cc',
-    paddingBottom: 10,
+    paddingTop: 3,
+    paddingBottom: 15,
+  },
+  sectionHeaderDetail: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   disclosure: {
     width: 15,
@@ -116,10 +121,6 @@ const styles = StyleSheet.create({
     marginTop: 8,
     marginLeft: 5,
     marginRight: -10,
-  },
-  sectionHeaderDetail: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
   },
   itemContainer: {
     borderColor: 'rgba(0, 0, 0, 0.15)',
