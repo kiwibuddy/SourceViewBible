@@ -42,25 +42,27 @@ class BookSummary extends Component {
           style={styles.wordCloud}
         >
           <View style={{opacity: 0.75}}>
-            <Text style={styles.wc1, {alignSelf: 'center', backgroundColor:'transparent'}]}>{words[0].word}</Text>
-            <Text style={{color: 'white', backgroundColor:'transparent'}}>{words[1].word}</Text>
-            <Text style={{color: 'white', backgroundColor:'transparent'}}>{words[2].word}</Text>
-            <Text style={{color: 'white', backgroundColor:'transparent'}}>{words[3].word}</Text>
-            <Text style={{color: 'white', backgroundColor:'transparent'}}>{words[4].word}</Text>
+            <Text style={[styles.wc1, {top: 50, alignSelf: 'center'}]}>{words[0].word}</Text>
+          </View>
+          <View style={{opacity: 0.75}}>
+            <Text style={[styles.wc2, {top: 0, right: 0}]}>{words[1].word}</Text>
+            <Text style={[styles.wc2, {top: 0, right: 0}]}>{words[2].word}</Text>
+            <Text style={[styles.wc2, {top: 0, right: 0}]}>{words[3].word}</Text>
+            <Text style={[styles.wc2, {top: 0, right: 0}]}>{words[4].word}</Text>
           </View>
           <View style={{opacity: 0.5}}>
-            <Text style={{color: 'white', backgroundColor:'transparent'}}>{words[5].word}</Text>
-            <Text style={{color: 'white', backgroundColor:'transparent'}}>{words[6].word}</Text>
-            <Text style={{color: 'white', backgroundColor:'transparent'}}>{words[7].word}</Text>
-            <Text style={{color: 'white', backgroundColor:'transparent'}}>{words[8].word}</Text>
+            <Text style={[styles.wc3, {top: 0, right: 0}]}>{words[5].word}</Text>
+            <Text style={[styles.wc3, {top: 0, right: 0}]}>{words[6].word}</Text>
+            <Text style={[styles.wc3, {top: 0, right: 0}]}>{words[7].word}</Text>
+            <Text style={[styles.wc3, {top: 0, right: 0}]}>{words[8].word}</Text>
           </View>
           <View style={{opacity: 0.35}}>
-            <Text style={{color: 'white', backgroundColor:'transparent'}}>{words[9].word}</Text>
-            <Text style={{color: 'white', backgroundColor:'transparent'}}>{words[10].word}</Text>
-            <Text style={{color: 'white', backgroundColor:'transparent'}}>{words[11].word}</Text>
-            <Text style={{color: 'white', backgroundColor:'transparent'}}>{words[12].word}</Text>
-            <Text style={{color: 'white', backgroundColor:'transparent'}}>{words[13].word}</Text>
-            <Text style={{color: 'white', backgroundColor:'transparent'}}>{words[14].word}</Text>
+            <Text style={[styles.wc4, {top: 0, right: 0}]}>{words[9].word}</Text>
+            <Text style={[styles.wc4, {top: 0, right: 0}]}>{words[10].word}</Text>
+            <Text style={[styles.wc4, {top: 0, right: 0}]}>{words[11].word}</Text>
+            <Text style={[styles.wc4, {top: 0, right: 0}]}>{words[12].word}</Text>
+            <Text style={[styles.wc4, {top: 0, right: 0}]}>{words[13].word}</Text>
+            <Text style={[styles.wc4, {top: 0, right: 0}]}>{words[14].word}</Text>
           </View>
         </WordCloud>
 
@@ -157,11 +159,34 @@ const styles = StyleSheet.create({
     marginTop: NavigationHeader.HEIGHT,
   },
   wordCloud: {
-    height: 200
+    height: 200,
   },
   wc1: {
     color: 'white',
     backgroundColor:'transparent',
+    fontSize: 66,
+    fontWeight: '100',
+  },
+  wc2: {
+    color: 'white',
+    backgroundColor:'transparent',
+    fontSize: 42,
+    fontWeight: '100',
+    position: 'absolute',
+  },
+  wc3: {
+    color: 'white',
+    backgroundColor:'transparent',
+    fontSize: 30,
+    fontWeight: '100',
+    position: 'absolute',
+  },
+  wc4: {
+    color: 'white',
+    backgroundColor:'transparent',
+    fontSize: 18,
+    fontWeight: '100',
+    position: 'absolute',
   },
   statisticsContainer: {
     flex: 1,
