@@ -32,16 +32,46 @@ class Discover extends Component {
 
         <TouchableOpacity onPress={this.props.onButtonPress}>
           <View style={styles.sectionHeaderContainer}>
-              <Text style={StyleSheet.styles.sectionHeaderTitle}>BOOKS</Text>
-              <View style={styles.sectionHeaderDetail}>
-                <Text style={[StyleSheet.styles.sectionHeaderTitle, {color: Colors.tintColor}]}>View All</Text>
-                <Image source={require('../../Images/common/disclosure.png')}  style={styles.disclosure} />
-              </View>
+            <Text style={StyleSheet.styles.sectionHeaderTitle}>BOOKS</Text>
+            <View style={styles.sectionHeaderDetail}>
+              <Text style={[StyleSheet.styles.sectionHeaderTitle, {color: Colors.tintColor}]}>View All</Text>
+              <Image source={require('../../Images/common/disclosure.png')}  style={styles.disclosure} />
+            </View>
             </View>
         </TouchableOpacity>
 
         <View style={styles.sectionContainer}>
           {books}
+        </View>
+
+        <View style={styles.sectionHeaderContainer}>
+          <Text style={StyleSheet.styles.sectionHeaderTitle}>SOURCES</Text>
+        </View>
+
+        <View style={styles.sectionContainer}>
+          <View style={styles.itemContainerBlank}></View>
+          <View style={styles.itemContainerBlank}></View>
+          <View style={styles.itemContainerBlank}></View>
+        </View>
+
+        <View style={styles.sectionHeaderContainer}>
+          <Text style={StyleSheet.styles.sectionHeaderTitle}>SPHERES</Text>
+        </View>
+
+        <View style={styles.sectionContainer}>
+          <View style={styles.itemContainerBlank}></View>
+          <View style={styles.itemContainerBlank}></View>
+          <View style={styles.itemContainerBlank}></View>
+        </View>
+
+        <View style={styles.sectionHeaderContainer}>
+          <Text style={StyleSheet.styles.sectionHeaderTitle}>WORDS</Text>
+        </View>
+
+        <View style={styles.sectionContainer}>
+          <View style={styles.itemContainerBlank}></View>
+          <View style={styles.itemContainerBlank}></View>
+          <View style={styles.itemContainerBlank}></View>
         </View>
 
       </View>
@@ -96,19 +126,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    paddingTop: 58,
+    paddingTop: 64,
     paddingLeft: 8,
   },
   sectionHeaderContainer: {
     ...StyleSheet.styles.sectionHeaderContainer,
     borderBottomWidth: 0,
-    height: 35,
   },
   sectionContainer: {
     flexDirection: 'row',
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: '#c8c7cc',
-    paddingTop: 3,
+    paddingTop: 5,
     paddingBottom: 15,
   },
   sectionHeaderDetail: {
@@ -138,6 +167,14 @@ const styles = StyleSheet.create({
       height: 1,
       width: 0
     },
+  },
+  itemContainerBlank: {
+    borderRadius: 4,
+    backgroundColor: '#F9F9F9',
+    margin: 0,
+    marginRight: 8,
+    width: 115,
+    height: 127,
   },
   gradient: {
     flex: 0,
