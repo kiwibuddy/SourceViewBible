@@ -85,6 +85,7 @@ async function seedChapters(emdros, objects) {
 async function seedWordCounts(emdros, objects) {
   await seedBookWordCounts(emdros, objects);
   await seedChapterWordCounts(emdros, objects);
+  await seedBookSourceWordCounts(emdros, objects);
 }
 
 async function seedBookWordCounts(emdros, objects) {
@@ -156,7 +157,62 @@ async function seedChapterWordCounts(emdros, objects) {
   });
 }
 
-function seedSourceWordCounts(emdros, objects) {
+async function seedBookSourceWordCounts(emdros, objects) {
+  console.log('Seeding Book Source Word Counts');
+  const query = `
+  {
+    "objectTypeName": "Book",
+    "feature": "DJHRef",
+    "buckets": {
+      "objectTypeName": "Source",
+      "feature": ["source_color", "source_name"],
+      "buckets": {
+        "objectTypeName": "Token",
+        "expression" : "is_word=true"
+      }
+    }
+  }
+  `;
+
+  return new Promise((resolve, reject) => {
+    emdros.query(query, {count: true}).then((data) => {
+      let bookObjects = [];
+
+      for (let [index, book] of objects.entries()) {
+        const bookData = data["Book"]["DJHRef"][book.DJHRef];
+        if (bookData != null) {
+          const sourceData = bookData["Source"];
+          if (sourceData != null) {
+            book.sourceTypeCounts = {};
+            const sourceTypeData = sourceData["source_color"];
+            if (sourceTypeData != null) {
+              Object.keys(sourceTypeData).forEach(function(sourceColor, index) {
+                const wordCount = sourceTypeData[sourceColor]["Token"] || 0;
+                const sourceType = SOURCE_TYPE_MAP[sourceColor];
+                book.sourceTypeCounts[sourceType] = wordCount;
+              });
+            }
+
+            book.sourceCounts = {};
+            const sourceNameData = sourceData["source_name"];
+            if (sourceNameData != null) {
+              Object.keys(sourceNameData).forEach(function(sourceName, index) {
+                const wordCount = sourceNameData[sourceName]["Token"] || 0;
+                book.sourceCounts[sourceName] = wordCount;
+              });
+            }
+          }
+        }
+      }
+
+      resolve();
+    }).catch((error) => {
+      console.log(error);
+    })
+  });
+}
+
+async function seedSourceWordCounts(emdros, objects) {
   const query = `
   {
     "objectTypeName": "Book",
@@ -179,7 +235,7 @@ function seedSourceWordCounts(emdros, objects) {
   emdros.query(query, {count: true}).then((data) => {
     let bookObjects = [];
 
-    for (let [index, book] of BIBLE.entries()) {
+    for (let [index, book] of objects.entries()) {
       const bookData = data["Book"]["DJHRef"][book.DJHRef];
       if (bookData != null) {
         let bookWordCount = 0;
