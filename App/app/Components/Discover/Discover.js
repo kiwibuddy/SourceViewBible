@@ -36,42 +36,45 @@ class Discover extends Component {
             </View>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.itemContainer}>
-          <LinearGradient
-            colors={Colors.spheres.celebration.gradient}
-            start={[0.0, 0.25]} end={[0.5, 1.0]}
-            style={styles.gradient}
-          />
-          <Text style={styles.bookTitle}>John</Text>
-          <Text style={styles.bookReadTime}>0</Text>
-          <View style={styles.keyline} />
-          <View style={styles.statisticsContainer}>
-            <View style={styles.statisticContainer} >
-              <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-                <Text style={styles.statisticTitle}>0</Text>
-                <Text style={styles.statisticSubtitle}>Sources</Text>
-                <SourcesBarChart
-                  style={{flex: 0, marginLeft: 4}}
-                  barStyle={{width: 2, height: 12, marginHorizontal: 1}}
-                  horizontal={false}
-                  data={[{narrator: 1}, {god: 1}, {lead: 1}, {support: 1}]}
-                />
+        <View style={styles.sectionContainer}>
+          <TouchableOpacity style={styles.itemContainer}>
+            <LinearGradient
+              colors={Colors.spheres.celebration.gradient}
+              start={[0.0, 0.25]} end={[0.5, 1.0]}
+              style={styles.gradient}
+            />
+            <Image source={require('../../Images/discover/icon-books.png')}  style={styles.icon} />
+            <Text style={styles.bookTitle}>John</Text>
+            <Text style={styles.bookReadTime}>0</Text>
+            <View style={styles.keyline} />
+            <View style={styles.statisticsContainer}>
+              <View style={styles.statisticContainer} >
+                <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+                  <Text style={styles.statisticTitle}>0</Text>
+                  <Text style={styles.statisticSubtitle}>Sources</Text>
+                  <SourcesBarChart
+                    style={{flex: 0, marginLeft: 4}}
+                    barStyle={{width: 2, height: 12, marginHorizontal: 1}}
+                    horizontal={false}
+                    data={[{narrator: 1}, {god: 1}, {lead: 1}, {support: 1}]}
+                  />
+                </View>
+              </View>
+              <View style={styles.statisticContainer} >
+                <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+                  <Text style={styles.statisticTitle}>0</Text>
+                  <Text style={styles.statisticSubtitle}>Spheres</Text>
+                  <SpheresBarChart
+                    style={{flex: 0, marginLeft: 4}}
+                    barStyle={{width: 2, height: 12, marginHorizontal: 1}}
+                    horizontal={false}
+                    data={[{family: 1}, {economics: 1}, {government: 1}, {religion: 1}, {education: 1}, {communication: 1}, {celebration: 1}]}
+                  />
+                </View>
               </View>
             </View>
-            <View style={styles.statisticContainer} >
-              <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-                <Text style={styles.statisticTitle}>0</Text>
-                <Text style={styles.statisticSubtitle}>Spheres</Text>
-                <SpheresBarChart
-                  style={{flex: 0, marginLeft: 4}}
-                  barStyle={{width: 2, height: 12, marginHorizontal: 1}}
-                  horizontal={false}
-                  data={[{family: 1}, {economics: 1}, {government: 1}, {religion: 1}, {education: 1}, {communication: 1}, {celebration: 1}]}
-                />
-              </View>
-            </View>
-          </View>
-        </TouchableOpacity>
+          </TouchableOpacity>
+        </View>
 
       </View>
     );
@@ -88,6 +91,12 @@ const styles = StyleSheet.create({
   sectionHeaderContainer: {
     ...StyleSheet.styles.sectionHeaderContainer,
     borderBottomWidth: 0,
+    height: 35,
+  },
+  sectionContainer: {
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#c8c7cc',
+    paddingBottom: 10,
   },
   disclosure: {
     width: 15,
@@ -105,9 +114,9 @@ const styles = StyleSheet.create({
     borderWidth: StyleSheet.hairlineWidth,
     borderRadius: 4,
     backgroundColor: '#fff',
-    margin: 5,
+    margin: 0,
     width: 110,
-    height: 84,
+    height: 127,
     shadowColor: "black",
     shadowOpacity: 0.05,
     shadowRadius: 0.4,
@@ -123,13 +132,20 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 4,
     overflow: 'hidden'
   },
+  icon: {
+    width: 40,
+    height: 40,
+    alignSelf: 'center',
+    marginTop: 7,
+    tintColor: Colors.tintColor
+  },
   bookTitle: {
     flex: 0,
     fontSize: 13,
     color: '#59626a',
     textAlign: 'center',
     fontWeight: '500',
-    marginTop: 5,
+    marginTop: 1,
   },
   bookReadTime: {
     flex: 0,
