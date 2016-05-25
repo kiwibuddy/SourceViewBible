@@ -98,7 +98,7 @@ class Books extends Component {
     return (
       <TouchableOpacity style={styles.itemContainer} onPress={ () => this.props.onButtonPress(book) }>
         <LinearGradient
-          colors={Colors.spheres.celebration.gradient}
+          colors={this._sphereGradientForBook(book)}
           start={[0.0, 0.25]} end={[0.5, 1.0]}
           style={styles.gradient}
         />
@@ -134,6 +134,12 @@ class Books extends Component {
       </TouchableOpacity>
     );
   };
+
+  _sphereGradientForBook(book) {
+    const spheres = Object.keys(Colors.spheres);
+    const sphereIndex = Math.floor(Math.random() * spheres.length);
+    return Colors.spheres[spheres[sphereIndex]].gradient;
+  }
 }
 
 const styles = StyleSheet.create({
