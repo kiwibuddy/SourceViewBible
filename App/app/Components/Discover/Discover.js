@@ -37,7 +37,7 @@ class Discover extends Component {
 
         <TouchableOpacity style={styles.itemContainer} onPress={ () => this.props.onButtonPress(book) }>
           <LinearGradient
-            colors={['#a856cd', '#3722a7']}
+            colors={Colors.spheres.celebration.gradient}
             start={[0.0, 0.25]} end={[0.5, 1.0]}
             style={styles.gradient}
           />
