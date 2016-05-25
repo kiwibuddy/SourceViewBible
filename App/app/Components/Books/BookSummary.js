@@ -41,20 +41,20 @@ class BookSummary extends Component {
           backgroundColors={Colors.spheres[book.principalSphere].gradient}
           style={styles.wordCloud}
         >
-          <View>
-            <Text style={{color: 'white', backgroundColor:'transparent'}}>{words[0].word}</Text>
+          <View style={{opacity: 0.75}}>
+            <Text style={styles.wc1, {alignSelf: 'center', backgroundColor:'transparent'}]}>{words[0].word}</Text>
             <Text style={{color: 'white', backgroundColor:'transparent'}}>{words[1].word}</Text>
             <Text style={{color: 'white', backgroundColor:'transparent'}}>{words[2].word}</Text>
             <Text style={{color: 'white', backgroundColor:'transparent'}}>{words[3].word}</Text>
             <Text style={{color: 'white', backgroundColor:'transparent'}}>{words[4].word}</Text>
           </View>
-          <View>
+          <View style={{opacity: 0.5}}>
             <Text style={{color: 'white', backgroundColor:'transparent'}}>{words[5].word}</Text>
             <Text style={{color: 'white', backgroundColor:'transparent'}}>{words[6].word}</Text>
             <Text style={{color: 'white', backgroundColor:'transparent'}}>{words[7].word}</Text>
             <Text style={{color: 'white', backgroundColor:'transparent'}}>{words[8].word}</Text>
           </View>
-          <View>
+          <View style={{opacity: 0.35}}>
             <Text style={{color: 'white', backgroundColor:'transparent'}}>{words[9].word}</Text>
             <Text style={{color: 'white', backgroundColor:'transparent'}}>{words[10].word}</Text>
             <Text style={{color: 'white', backgroundColor:'transparent'}}>{words[11].word}</Text>
@@ -158,6 +158,10 @@ const styles = StyleSheet.create({
   },
   wordCloud: {
     height: 200
+  },
+  wc1: {
+    color: 'white',
+    backgroundColor:'transparent',
   },
   statisticsContainer: {
     flex: 1,
