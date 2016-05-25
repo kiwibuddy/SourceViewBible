@@ -98,10 +98,10 @@ class BookSources extends Component {
     const sourceType = SOURCE_TYPE_MAP[source.name] || "support";
     const tintColor = Colors.sources[sourceType];
     const IMAGE_MAP = {
-      "narrator": require('../../Images/avatars/narrator-medium.png'),
-      "god": require('../../Images/avatars/divine-medium.png'),
+      "narrator": require('../../Images/avatars/narrator.png'),
+      "god": require('../../Images/avatars/divine.png'),
     }
-    const image = IMAGE_MAP[sourceType] || require('../../Images/avatars/human-group-medium.png');
+    const image = IMAGE_MAP[sourceType] || require('../../Images/avatars/human-group.png');
     const chartData = {};
     chartData[sourceType] = source.wordCount;
 
