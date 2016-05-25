@@ -296,7 +296,12 @@ function seedObjectSourceWordCounts(object, sourceData) {
   object.sourceCount = 0;
   object.maxSourceWordCount = 0;
   object.sourceCounts = [];
-  object.sourceTypeCounts = {};
+  object.sourceTypeCounts = {
+    "narrator": 0,
+    "god": 0,
+    "lead": 0,
+    "support": 0
+  };
 
   if (sourceData != null) {
     const sourceTypeData = sourceData["source_color"];
