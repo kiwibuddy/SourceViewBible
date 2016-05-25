@@ -105,9 +105,20 @@ class BookSummary extends Component {
   }
 
   _renderSource = (source: Object) => {
+    const SOURCE_TYPE_MAP = {
+      "The Narrator": "narrator",
+      "God": "god"
+    }
+    const sourceType = SOURCE_TYPE_MAP[source.name] || "support";
+    const tintColor = Colors.sources[sourceType];
+    const IMAGE_MAP = {
+      "narrator": require('../../Images/avatars/narrator-medium.png'),
+      "god": require('../../Images/avatars/divine-medium.png'),
+    }
+    const image = IMAGE_MAP[sourceType] || require('../../Images/avatars/human-group-medium.png');
     return (
       <TouchableOpacity key={'source-' + source.name} style={styles.sourceButton}>
-        <Image source={require('../../Images/avatars/human-group-medium.png')} style={styles.sourceImage}/>
+        <Image source={image} style={[styles.sourceImage, {tintColor: tintColor}]}/>
         <Text style={styles.buttonSubtitle}>{source.name}</Text>
       </TouchableOpacity>
     );
