@@ -21,8 +21,12 @@ import { ReadingTime } from '../../Common/NumberHelper';
 
 import Localizable from '../../Common/Localizable';
 
+const Bible = require('../../Locale/en/NLT/SourceView.json');
+
 class Discover extends Component {
   render() {
+    const books = Bible.slice(0, 3).map(this._renderBook);
+
     return (
       <View style={styles.container}>
 
@@ -37,48 +41,55 @@ class Discover extends Component {
         </TouchableOpacity>
 
         <View style={styles.sectionContainer}>
-          <TouchableOpacity style={styles.itemContainer}>
-            <LinearGradient
-              colors={Colors.spheres.celebration.gradient}
-              start={[0.0, 0.25]} end={[0.5, 1.0]}
-              style={styles.gradient}
-            />
-            <Image source={require('../../Images/discover/icon-books.png')}  style={styles.icon} />
-            <Text style={styles.bookTitle}>John</Text>
-            <Text style={styles.bookReadTime}>0</Text>
-            <View style={styles.keyline} />
-            <View style={styles.statisticsContainer}>
-              <View style={styles.statisticContainer} >
-                <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-                  <Text style={styles.statisticTitle}>0</Text>
-                  <Text style={styles.statisticSubtitle}>Sources</Text>
-                  <SourcesBarChart
-                    style={{flex: 0, marginLeft: 4}}
-                    barStyle={{width: 2, height: 12, marginHorizontal: 1}}
-                    horizontal={false}
-                    data={[{narrator: 1}, {god: 1}, {lead: 1}, {support: 1}]}
-                  />
-                </View>
-              </View>
-              <View style={styles.statisticContainer} >
-                <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-                  <Text style={styles.statisticTitle}>0</Text>
-                  <Text style={styles.statisticSubtitle}>Spheres</Text>
-                  <SpheresBarChart
-                    style={{flex: 0, marginLeft: 4}}
-                    barStyle={{width: 2, height: 12, marginHorizontal: 1}}
-                    horizontal={false}
-                    data={[{family: 1}, {economics: 1}, {government: 1}, {religion: 1}, {education: 1}, {communication: 1}, {celebration: 1}]}
-                  />
-                </View>
-              </View>
-            </View>
-          </TouchableOpacity>
+          {books}
         </View>
 
       </View>
     );
   }
+
+  _renderBook = (book) => {
+    return (
+      <TouchableOpacity key={'book-' + book.key} style={styles.itemContainer}>
+        <LinearGradient
+          colors={Colors.spheres[book.principalSphere].gradient}
+          start={[0.0, 0.25]} end={[0.5, 1.0]}
+          style={styles.gradient}
+        />
+        <Image source={require('../../Images/discover/icon-books.png')}  style={[styles.icon, {tintColor: Colors.spheres[book.principalSphere].tint}]} />
+        <Text style={styles.bookTitle}>{book.name}</Text>
+        <Text style={styles.bookReadTime}>{ReadingTime(book.wordCount)}</Text>
+        <View style={styles.keyline} />
+        <View style={styles.statisticsContainer}>
+          <View style={styles.statisticContainer} >
+            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+              <Text style={styles.statisticTitle}>{book.sourceCount}</Text>
+              <Text style={styles.statisticSubtitle}>Sources</Text>
+              <SourcesBarChart
+                style={{flex: 0, marginLeft: 4}}
+                barStyle={{width: 2, height: 12, marginHorizontal: 1}}
+                horizontal={false}
+                data={[{narrator: book.sourceTypeCounts.narrator}, {god: book.sourceTypeCounts.god}, {lead: book.sourceTypeCounts.lead}, {support: book.sourceTypeCounts.support}]}
+              />
+            </View>
+          </View>
+          <View style={styles.statisticContainer} >
+            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+              <Text style={styles.statisticTitle}>0</Text>
+              <Text style={styles.statisticSubtitle}>Spheres</Text>
+              <SpheresBarChart
+                style={{flex: 0, marginLeft: 4}}
+                barStyle={{width: 2, height: 12, marginHorizontal: 1}}
+                horizontal={false}
+                data={[{family: 1}, {economics: 1}, {government: 1}, {religion: 1}, {education: 1}, {communication: 1}, {celebration: 1}]}
+              />
+            </View>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
 }
 
 const styles = StyleSheet.create({
@@ -94,6 +105,7 @@ const styles = StyleSheet.create({
     height: 35,
   },
   sectionContainer: {
+    flexDirection: 'row',
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: '#c8c7cc',
     paddingBottom: 10,

@@ -3691,7 +3691,7 @@
       "narrator": 2000,
       "god": 20826
     },
-    "principalSphere": "government",
+    "principalSphere": "religion",
     "words": [
       {
         "word": "Lord",
@@ -4840,7 +4840,7 @@
       "narrator": 11571,
       "god": 12326
     },
-    "principalSphere": "government",
+    "principalSphere": "communication",
     "words": [
       {
         "word": "Lord",
@@ -5558,7 +5558,7 @@
       "narrator": 1500,
       "god": 457
     },
-    "principalSphere": "celebration",
+    "principalSphere": "religion",
     "words": [
       {
         "word": "Lord",
@@ -7397,7 +7397,7 @@
       "narrator": 10530,
       "god": 735
     },
-    "principalSphere": "government",
+    "principalSphere": "celebration",
     "words": [
       {
         "word": "Lord",
@@ -7671,7 +7671,7 @@
       "support": 1208,
       "lead": 206
     },
-    "principalSphere": "family",
+    "principalSphere": "celebration",
     "words": [
       {
         "word": "Naomi",
@@ -9129,7 +9129,7 @@
       "narrator": 11439,
       "god": 714
     },
-    "principalSphere": "religion",
+    "principalSphere": "communication",
     "words": [
       {
         "word": "Lord",
@@ -10245,7 +10245,7 @@
       "narrator": 9918,
       "god": 498
     },
-    "principalSphere": "celebration",
+    "principalSphere": "economics",
     "words": [
       {
         "word": "David",
@@ -11275,7 +11275,7 @@
       "narrator": 13269,
       "god": 982
     },
-    "principalSphere": "economics",
+    "principalSphere": "education",
     "words": [
       {
         "word": "Lord",
@@ -12470,7 +12470,7 @@
       "narrator": 14852,
       "god": 592
     },
-    "principalSphere": "economics",
+    "principalSphere": "celebration",
     "words": [
       {
         "word": "Lord",
@@ -13201,7 +13201,7 @@
       "narrator": 15531,
       "god": 444
     },
-    "principalSphere": "government",
+    "principalSphere": "family",
     "words": [
       {
         "word": "David",
@@ -14397,7 +14397,7 @@
       "narrator": 17564,
       "god": 572
     },
-    "principalSphere": "government",
+    "principalSphere": "education",
     "words": [
       {
         "word": "Lord",
@@ -14786,7 +14786,7 @@
       "support": 1986,
       "lead": 523
     },
-    "principalSphere": "communication",
+    "principalSphere": "education",
     "words": [
       {
         "word": "God",
@@ -15280,7 +15280,7 @@
       "support": 2050,
       "lead": 1107
     },
-    "principalSphere": "celebration",
+    "principalSphere": "family",
     "words": [
       {
         "word": "son",
@@ -15679,7 +15679,7 @@
       "support": 1040,
       "lead": 370
     },
-    "principalSphere": "government",
+    "principalSphere": "education",
     "words": [
       {
         "word": "king",
@@ -16660,7 +16660,7 @@
       "narrator": 945,
       "god": 1998
     },
-    "principalSphere": "economics",
+    "principalSphere": "government",
     "words": [
       {
         "word": "God",
@@ -19609,7 +19609,7 @@
       "support": 8659,
       "lead": 18721
     },
-    "principalSphere": "education",
+    "principalSphere": "religion",
     "words": [
       {
         "word": "Lord",
@@ -20302,7 +20302,7 @@
       "support": 2887,
       "lead": 7696
     },
-    "principalSphere": "communication",
+    "principalSphere": "economics",
     "words": [
       {
         "word": "Lord",
@@ -20964,7 +20964,7 @@
       "support": 912,
       "lead": 1344
     },
-    "principalSphere": "celebration",
+    "principalSphere": "family",
     "words": [
       {
         "word": "love",
@@ -22669,7 +22669,7 @@
       "narrator": 17725,
       "god": 13678
     },
-    "principalSphere": "education",
+    "principalSphere": "religion",
     "words": [
       {
         "word": "Lord",
@@ -24213,7 +24213,7 @@
       "narrator": 10544,
       "god": 22264
     },
-    "principalSphere": "communication",
+    "principalSphere": "celebration",
     "words": [
       {
         "word": "Lord",
@@ -24472,7 +24472,7 @@
       "narrator": 2627,
       "god": 18
     },
-    "principalSphere": "religion",
+    "principalSphere": "celebration",
     "words": [
       {
         "word": "Lord",
@@ -25562,7 +25562,7 @@
       "narrator": 6005,
       "god": 28517
     },
-    "principalSphere": "religion",
+    "principalSphere": "economics",
     "words": [
       {
         "word": "Lord",
@@ -26060,7 +26060,7 @@
       "narrator": 2996,
       "god": 1872
     },
-    "principalSphere": "government",
+    "principalSphere": "religion",
     "words": [
       {
         "word": "king",
@@ -26484,7 +26484,7 @@
       "narrator": 1183,
       "god": 3914
     },
-    "principalSphere": "family",
+    "principalSphere": "education",
     "words": [
       {
         "word": "Israel",
@@ -26655,7 +26655,7 @@
       "support": 34,
       "god": 792
     },
-    "principalSphere": "family",
+    "principalSphere": "government",
     "words": [
       {
         "word": "Lord",
@@ -27024,7 +27024,7 @@
       "narrator": 1545,
       "god": 2267
     },
-    "principalSphere": "education",
+    "principalSphere": "communication",
     "words": [
       {
         "word": "Lord",
@@ -27164,7 +27164,7 @@
       "lead": 11,
       "god": 641
     },
-    "principalSphere": "communication",
+    "principalSphere": "economics",
     "words": [
       {
         "word": "Edom",
@@ -27401,7 +27401,7 @@
       "narrator": 641,
       "god": 110
     },
-    "principalSphere": "communication",
+    "principalSphere": "celebration",
     "words": [
       {
         "word": "Lord",
@@ -27712,7 +27712,7 @@
       "support": 211,
       "god": 833
     },
-    "principalSphere": "communication",
+    "principalSphere": "economics",
     "words": [
       {
         "word": "Lord",
@@ -27892,7 +27892,7 @@
       "support": 2,
       "god": 175
     },
-    "principalSphere": "government",
+    "principalSphere": "economics",
     "words": [
       {
         "word": "Nineveh",
@@ -28077,7 +28077,7 @@
       "lead": 685,
       "god": 662
     },
-    "principalSphere": "celebration",
+    "principalSphere": "government",
     "words": [
       {
         "word": "Lord",
@@ -28267,7 +28267,7 @@
       "narrator": 683,
       "god": 838
     },
-    "principalSphere": "religion",
+    "principalSphere": "celebration",
     "words": [
       {
         "word": "Lord",
@@ -28437,7 +28437,7 @@
       "narrator": 238,
       "god": 650
     },
-    "principalSphere": "family",
+    "principalSphere": "government",
     "words": [
       {
         "word": "Lord",
@@ -28903,7 +28903,7 @@
       "narrator": 2345,
       "god": 2912
     },
-    "principalSphere": "education",
+    "principalSphere": "communication",
     "words": [
       {
         "word": "Lord",
@@ -29116,7 +29116,7 @@
       "support": 35,
       "god": 1400
     },
-    "principalSphere": "family",
+    "principalSphere": "celebration",
     "words": [
       {
         "word": "Lord",
@@ -30304,7 +30304,7 @@
       "narrator": 7577,
       "god": 13703
     },
-    "principalSphere": "celebration",
+    "principalSphere": "government",
     "words": [
       {
         "word": "Jesus",
@@ -31232,7 +31232,7 @@
       "narrator": 8003,
       "god": 5409
     },
-    "principalSphere": "communication",
+    "principalSphere": "celebration",
     "words": [
       {
         "word": "Jesus",
@@ -32534,7 +32534,7 @@
       "narrator": 9760,
       "god": 12601
     },
-    "principalSphere": "communication",
+    "principalSphere": "education",
     "words": [
       {
         "word": "Jesus",
@@ -33599,7 +33599,7 @@
       "narrator": 7196,
       "god": 8234
     },
-    "principalSphere": "communication",
+    "principalSphere": "economics",
     "words": [
       {
         "word": "Jesus",
@@ -35215,7 +35215,7 @@
     ],
     "sourceTypeCounts": {
     },
-    "principalSphere": "religion",
+    "principalSphere": "family",
     "words": [
       {
         "word": "God",
@@ -35492,7 +35492,7 @@
     ],
     "sourceTypeCounts": {
     },
-    "principalSphere": "education",
+    "principalSphere": "celebration",
     "words": [
       {
         "word": "God",
@@ -35736,7 +35736,7 @@
     ],
     "sourceTypeCounts": {
     },
-    "principalSphere": "government",
+    "principalSphere": "religion",
     "words": [
       {
         "word": "God",
@@ -35903,7 +35903,7 @@
     ],
     "sourceTypeCounts": {
     },
-    "principalSphere": "family",
+    "principalSphere": "religion",
     "words": [
       {
         "word": "God",
@@ -36070,7 +36070,7 @@
     ],
     "sourceTypeCounts": {
     },
-    "principalSphere": "economics",
+    "principalSphere": "education",
     "words": [
       {
         "word": "God",
@@ -36215,7 +36215,7 @@
     ],
     "sourceTypeCounts": {
     },
-    "principalSphere": "religion",
+    "principalSphere": "government",
     "words": [
       {
         "word": "Christ",
@@ -36360,7 +36360,7 @@
     ],
     "sourceTypeCounts": {
     },
-    "principalSphere": "family",
+    "principalSphere": "communication",
     "words": [
       {
         "word": "Christ",
@@ -36516,7 +36516,7 @@
     ],
     "sourceTypeCounts": {
     },
-    "principalSphere": "religion",
+    "principalSphere": "economics",
     "words": [
       {
         "word": "God",
@@ -36817,7 +36817,7 @@
     ],
     "sourceTypeCounts": {
     },
-    "principalSphere": "communication",
+    "principalSphere": "government",
     "words": [
       {
         "word": "God",
@@ -36962,7 +36962,7 @@
     ],
     "sourceTypeCounts": {
     },
-    "principalSphere": "communication",
+    "principalSphere": "celebration",
     "words": [
       {
         "word": "God",
@@ -37096,7 +37096,7 @@
     ],
     "sourceTypeCounts": {
     },
-    "principalSphere": "family",
+    "principalSphere": "government",
     "words": [
       {
         "word": "God",
@@ -37208,7 +37208,7 @@
     ],
     "sourceTypeCounts": {
     },
-    "principalSphere": "communication",
+    "principalSphere": "government",
     "words": [
       {
         "word": "Christ",
@@ -37452,7 +37452,7 @@
     ],
     "sourceTypeCounts": {
     },
-    "principalSphere": "economics",
+    "principalSphere": "government",
     "words": [
       {
         "word": "God",
@@ -37608,7 +37608,7 @@
     ],
     "sourceTypeCounts": {
     },
-    "principalSphere": "religion",
+    "principalSphere": "education",
     "words": [
       {
         "word": "God",
@@ -37764,7 +37764,7 @@
     ],
     "sourceTypeCounts": {
     },
-    "principalSphere": "communication",
+    "principalSphere": "education",
     "words": [
       {
         "word": "God",
@@ -37898,7 +37898,7 @@
     ],
     "sourceTypeCounts": {
     },
-    "principalSphere": "education",
+    "principalSphere": "celebration",
     "words": [
       {
         "word": "God",
@@ -38054,7 +38054,7 @@
     ],
     "sourceTypeCounts": {
     },
-    "principalSphere": "economics",
+    "principalSphere": "family",
     "words": [
       {
         "word": "God",
@@ -38278,7 +38278,7 @@
     ],
     "sourceTypeCounts": {
     },
-    "principalSphere": "communication",
+    "principalSphere": "family",
     "words": [
       {
         "word": "truth",
@@ -38390,7 +38390,7 @@
     ],
     "sourceTypeCounts": {
     },
-    "principalSphere": "celebration",
+    "principalSphere": "communication",
     "words": [
       {
         "word": "God",
@@ -39242,7 +39242,7 @@
       "narrator": 7204,
       "god": 2479
     },
-    "principalSphere": "religion",
+    "principalSphere": "government",
     "words": [
       {
         "word": "God",
