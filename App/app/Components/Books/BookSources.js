@@ -95,7 +95,8 @@ class BookSources extends Component {
 
     const SOURCE_TYPE_MAP = {
       "The Narrator": "narrator",
-      "God": "god"
+      "God": "god",
+      "Jesus": "god"
     }
     const sourceType = SOURCE_TYPE_MAP[source.name] || "support";
     const tintColor = Colors.sources[sourceType];
