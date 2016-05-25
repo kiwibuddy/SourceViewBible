@@ -107,7 +107,7 @@ class BookSummary extends Component {
   _renderSource = (source: Object) => {
     return (
       <TouchableOpacity key={'source-' + source.name} style={styles.sourceButton}>
-        <Image source={require('../../Images/avatars/narrator-medium.png')} style={styles.sourceImage}/>
+        <Image source={require('../../Images/avatars/human-group-medium.png')} style={styles.sourceImage}/>
         <Text style={styles.buttonSubtitle}>{source.name}</Text>
       </TouchableOpacity>
     );
