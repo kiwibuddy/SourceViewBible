@@ -25,6 +25,8 @@ import { SourcesBarChart, SpheresBarChart, WordCloud } from '../Charts';
 
 import ParallaxMotionView from '../Common/ParallaxMotionView';
 
+import Icon from '../Common/Icon';
+
 import { ReadingTime } from '../../Common/NumberHelper';
 
 class BookSummary extends Component {
