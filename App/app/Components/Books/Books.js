@@ -104,7 +104,7 @@ class Books extends Component {
     return (
       <TouchableOpacity style={styles.itemContainer} onPress={ () => this.props.onButtonPress(book) }>
         <LinearGradient
-          colors={Colors.spheres[book.principalSphere].gradientTiny}
+          colors={Colors.spheres[book.principalSphere].gradient.tiny}
           start={[0.0, 0.25]} end={[0.5, 1.0]}
           style={styles.gradient}
         />
