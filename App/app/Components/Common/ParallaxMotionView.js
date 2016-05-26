@@ -7,6 +7,10 @@ import { View, StyleSheet } from 'react-native';
 import ParallaxMotion from 'react-native-parallax-motion';
 
 export default class ParallaxMotionView extends Component {
+  defaultProps: {
+    intensity: 1
+  };
+
   componentDidMount() {
     ParallaxMotion.startUpdates(1000/60, (motionData) => {
       // console.log(motionData.attitude);
@@ -19,7 +23,7 @@ export default class ParallaxMotionView extends Component {
   }
 
   render() {
-    const children = this.props.children.map((child, index) => {
+    const children = React.Children.map(this.props.children, (child, index) => {
       return React.cloneElement(child, {
         key: 'parallax-motion-view-child-' + index,
         ref: 'parallax-motion-view-child-' + index
@@ -36,21 +40,22 @@ export default class ParallaxMotionView extends Component {
   _updateChildren = (motionData: Object) => {
     let horizontalMotion = 0;
     let verticalMotion = 0;
+    let intensity = this.props.intensity;
 
     if (motionData) {
-      horizontalMotion = (motionData.attitude.roll);
-      verticalMotion = (motionData.attitude.pitch);
+      horizontalMotion = motionData.attitude.roll * intensity;
+      verticalMotion = motionData.attitude.pitch * intensity;
     }
 
-    this.props.children.forEach((child, index) => {
+    React.Children.forEach(this.props.children, (child, index) => {
       const style = StyleSheet.flatten(child.props.style);
       const { left, right, top } = style;
 
       const updatedStyle = {
         ...style,
-        left: left * horizontalMotion,
-        right: right * horizontalMotion,
-        top: top * verticalMotion
+        left: left + horizontalMotion,
+        right: right + horizontalMotion,
+        top: top + verticalMotion
       };
 
       this.refs['parallax-motion-view-child-' + index].setNativeProps({
