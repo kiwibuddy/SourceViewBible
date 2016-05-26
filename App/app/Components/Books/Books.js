@@ -148,7 +148,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff'
   },
   list: {
-    justifyContent: 'center',
+    justifyContent: 'space-around',
+    alignItems: 'center',
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
@@ -173,7 +174,7 @@ const styles = StyleSheet.create({
     borderWidth: StyleSheet.hairlineWidth,
     borderRadius: 4,
     backgroundColor: '#fff',
-    margin: 5,
+    marginVertical: 5,
     width: 110,
     height: 95,
     shadowColor: "black",
