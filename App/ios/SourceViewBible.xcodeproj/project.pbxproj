@@ -26,6 +26,7 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		AB1CF3521CEA744B00547708 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB1CF3501CEA744B00547708 /* LaunchScreen.storyboard */; };
 		AB5489481CE2747B00F96FF0 /* libRCTEmdros.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB5489451CE273DC00F96FF0 /* libRCTEmdros.a */; };
+		AB5A7E361CF781DA00728DB2 /* sourceview.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB5A7E351CF781DA00728DB2 /* sourceview.ttf */; };
 		ABA1BCEB1CE127A300BEA3A1 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA1BCEA1CE127A300BEA3A1 /* libz.tbd */; };
 		ABA1BCED1CE127AE00BEA3A1 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA1BCEC1CE127AE00BEA3A1 /* libstdc++.tbd */; };
 		ABA1BCEF1CE127B700BEA3A1 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA1BCEE1CE127B700BEA3A1 /* libsqlite3.tbd */; };
@@ -191,6 +192,7 @@
 		AB1CF3511CEA744B00547708 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = SourceViewBible/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AB5489401CE273DC00F96FF0 /* RCTEmdros.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTEmdros.xcodeproj; path = ../../Libraries/Emdros/ios/RCTEmdros/RCTEmdros.xcodeproj; sourceTree = "<group>"; };
 		AB5489801CE2760000F96FF0 /* Datasets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Datasets; path = ../../Datasets; sourceTree = "<group>"; };
+		AB5A7E351CF781DA00728DB2 /* sourceview.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sourceview.ttf; sourceTree = "<group>"; };
 		ABA1BCEA1CE127A300BEA3A1 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		ABA1BCEC1CE127AE00BEA3A1 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		ABA1BCEE1CE127B700BEA3A1 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -405,6 +407,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				AB1CF3501CEA744B00547708 /* LaunchScreen.storyboard */,
+				AB5A7E351CF781DA00728DB2 /* sourceview.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -707,6 +710,7 @@
 			files = (
 				AB1CF3521CEA744B00547708 /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				AB5A7E361CF781DA00728DB2 /* sourceview.ttf in Resources */,
 				ABB3CE3B1CF0FD1A00BBA0B7 /* Datasets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
