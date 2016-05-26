@@ -239,7 +239,7 @@ const styles = StyleSheet.create({
   sourcesContainer: {
     flex: 1,
     flexDirection: 'row',
-    margin: 4,
+    margin: 1,
   },
   sourceButton: {
     flex: 1,
