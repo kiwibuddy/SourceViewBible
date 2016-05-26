@@ -29,13 +29,19 @@ import Icon from '../Common/Icon';
 
 import { ReadingTime } from '../../Common/NumberHelper';
 
+const MAX_NUMBER_OF_SOURCES = 4;
+
 class BookSummary extends Component {
   render() {
     const { book } = this.props;
 
-    const sources = book.sourceCounts.slice(0, 5).map((source) => {
+    const sources = book.sourceCounts.slice(0, MAX_NUMBER_OF_SOURCES).map((source) => {
       return this._renderSource(source);
     });
+
+    if (book.sourceCounts.length > MAX_NUMBER_OF_SOURCES) {
+      sources.push(this._renderMoreSource());
+    }
 
     const words = book.words;
 
@@ -154,6 +160,22 @@ class BookSummary extends Component {
     );
   };
 
+  _renderMoreSource = () => {
+    return (
+      <TouchableOpacity
+        key={'source-more'}
+        style={styles.sourceButton}
+        onPress={this.props.onPressSources}
+      >
+        <Icon
+          name="more"
+          size={40}
+          style={[styles.sourceIcon, {color: Colors.tintColor}]} size={40}
+        />
+        <Text style={styles.buttonSubtitle}>More</Text>
+      </TouchableOpacity>
+    );
+  };
 }
 
 const styles = StyleSheet.create({

@@ -9,6 +9,7 @@ const GLYPH_MAP = {
   "narrator": Icons.avatar.narrator,
   "god": Icons.avatar.divine,
   "divine": Icons.avatar.divine,
+  "more": Icons.avatar.more,
 }
 
 const Icon = (props: Object) => {
