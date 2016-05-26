@@ -17,31 +17,38 @@ module.exports = {
   spheres: {
     family: {
       tint:'#FF3A2E',
-      gradient: ['#FF4B3B', '#AA0606']
+      gradient: ['#FF4B3B', '#AA0606'],
+      gradientTiny: ['#FF4B3B', '#CA211A']
     },
     economics: {
       tint:'#FF9700',
-      gradient: ['#FC882A', '#D4202F']
+      gradient: ['#FC882A', '#D4202F'],
+      gradientTiny: ['#FC882A', '#E64F2C']
     },
     government: {
       tint:'#FECB01',
-      gradient: ['#FFBF00', '#FF933A']
+      gradient: ['#FFBF00', '#FF933A'],
+      gradientTiny: ['#FFBF00', '#FFA621']
     },
     religion: {
       tint:'#64AA20',
-      gradient: ['#8BC624', '#429321']
+      gradient: ['#8BC624', '#429321'],
+      gradientTiny: ['#8BC624', '#5FA722']
     },
     education: {
       tint:'#25B8D7',
-      gradient: ['#11C7B8', '#1A5A78']
+      gradient: ['#11C7B8', '#1A5A78'],
+      gradientTiny: ['#11C7B8', '#168C96']
     },
     communication: {
       tint:'#5A5AD3',
-      gradient: ['#C86DD7', '#3023AE']
+      gradient: ['#C86DD7', '#3023AE'],
+      gradientTiny: ['#C86DD7', '#7E49C3']
     },
     celebration: {
       tint:'#C44DF8',
-      gradient: ['#E14DF8', '#B84DF8']
+      gradient: ['#D8379F', '#AD39DF'],
+      gradientTiny: ['#8379F', '#C937B5']
     }
   },
 
