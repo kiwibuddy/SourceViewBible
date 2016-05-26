@@ -24,6 +24,8 @@ import {
 
 import SourcesBarChart from '../Charts/SourcesBarChart';
 
+import Icon from '../Common/Icon';
+
 class BookSources extends Component {
   state: {
     dataSource: any
@@ -106,12 +108,7 @@ class BookSources extends Component {
       "Jesus": "god"
     }
     const sourceType = SOURCE_TYPE_MAP[source.name] || "support";
-    const tintColor = Colors.sources[sourceType];
-    const IMAGE_MAP = {
-      "narrator": require('../../Images/avatars/narrator.png'),
-      "god": require('../../Images/avatars/divine.png'),
-    }
-    const image = IMAGE_MAP[sourceType] || require('../../Images/avatars/human-group.png');
+    const color = Colors.sources[sourceType];
     const chartData = {};
     chartData[sourceType] = source.wordCount;
 
@@ -119,7 +116,11 @@ class BookSources extends Component {
       <View style={styles.section}>
         <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
           <View style={styles.sourcesLeftContainer}>
-            <Image source={image} style={[styles.sourceAvatar, {tintColor: tintColor}]} />
+            <Icon
+              name={sourceType}
+              style={[styles.sourceAvatar, {color: color}]}
+              size={20}
+            />
             <Text style={StyleSheet.styles.cell.title}>{source.name}</Text>
           </View>
           <View style={styles.sourcesRightContainer}>

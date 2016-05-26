@@ -141,15 +141,14 @@ class BookSummary extends Component {
       "Jesus": "god"
     }
     const sourceType = SOURCE_TYPE_MAP[source.name] || "support";
-    const tintColor = Colors.sources[sourceType];
-    const IMAGE_MAP = {
-      "narrator": require('../../Images/avatars/narrator-medium.png'),
-      "god": require('../../Images/avatars/divine-medium.png'),
-    }
-    const image = IMAGE_MAP[sourceType] || require('../../Images/avatars/human-group-medium.png');
+    const color = Colors.sources[sourceType];
     return (
       <TouchableOpacity key={'source-' + source.name} style={styles.sourceButton}>
-        <Image source={image} style={[styles.sourceImage, {tintColor: tintColor}]}/>
+        <Icon
+          name={sourceType}
+          size={40}
+          style={[styles.sourceIcon, {color: color}]} size={40}
+        />
         <Text style={styles.buttonSubtitle}>{source.name}</Text>
       </TouchableOpacity>
     );
@@ -225,9 +224,7 @@ const styles = StyleSheet.create({
     margin: 8,
     alignItems: 'center',
   },
-  sourceImage: {
-    width: 40,
-    height: 40,
+  sourceIcon: {
     margin: 4,
   },
   readButton: {
