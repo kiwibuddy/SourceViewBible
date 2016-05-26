@@ -43,9 +43,9 @@ class BookSummary extends Component {
           backgroundColors={Colors.spheres[book.principalSphere].gradient.big}
           style={styles.wordCloud}
         >
-          <View style={{opacity: 0.8}}>
+          <ParallaxMotionView intensity={5} style={{opacity: 0.8}}>
             <Text style={[styles.wc1, {top: 50, alignSelf: 'center'}]}>{words[0].word}</Text>
-          </View>
+          </ParallaxMotionView>
           <ParallaxMotionView intensity={10} style={{opacity: 0.8}}>
             <Text style={[styles.wc2, {top: 55, right: 15}]}>{words[1].word}</Text>
             <Text style={[styles.wc2, {top: 85, left: 15}]}>{words[2].word}</Text>

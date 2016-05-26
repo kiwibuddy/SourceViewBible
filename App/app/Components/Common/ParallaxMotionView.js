@@ -7,13 +7,8 @@ import { View, StyleSheet } from 'react-native';
 import ParallaxMotion from 'react-native-parallax-motion';
 
 export default class ParallaxMotionView extends Component {
-  defaultProps: {
-    intensity: 1
-  };
-
   componentDidMount() {
     ParallaxMotion.startUpdates(1000/60, (motionData) => {
-      // console.log(motionData.attitude);
       this._updateChildren(motionData);
     });
   }
@@ -40,7 +35,7 @@ export default class ParallaxMotionView extends Component {
   _updateChildren = (motionData: Object) => {
     let horizontalMotion = 0;
     let verticalMotion = 0;
-    let intensity = this.props.intensity;
+    let intensity = this.props.intensity || 1;
 
     if (motionData) {
       horizontalMotion = motionData.attitude.roll * intensity;
