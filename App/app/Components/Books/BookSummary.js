@@ -110,7 +110,7 @@ class BookSummary extends Component {
             onPress={this.props.onPressSpheres}
           >
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={styles.statisticTitle}>0</Text>
+              <Text style={styles.statisticTitle}>7</Text>
               <SpheresBarChart
                 style={{flex: 0, marginHorizontal: 4}}
                 barStyle={{width: 3, height: 20, marginHorizontal: 1.5}}

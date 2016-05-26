@@ -149,14 +149,16 @@ const styles = StyleSheet.create({
     flex: 0,
   },
   sourceFilterContainer: {
+    flex: 0,
     flexDirection: 'row',
     marginHorizontal: 5,
     marginVertical: 8,
     marginBottom: 15,
+    justifyContent: 'space-around'
   },
   sourceButtonContainer: {
     flex: 1,
-    marginHorizontal: 5,
+    marginHorizontal: 2,
   },
   sourceButtonTitle: {
     fontSize: 25,
@@ -168,7 +170,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderWidth: 1,
     paddingVertical: 4,
-    paddingHorizontal: 5,
     alignItems: 'center',
   },
   roundButtonTitle: {
