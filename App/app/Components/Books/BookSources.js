@@ -55,7 +55,7 @@ class BookSources extends Component {
       <View style={styles.container}>
         <SourcesBarChart
           style={styles.stackedBarChartHeader}
-          data={[{narrator: 1, god: 1, lead: 1, support: 1}]}
+          data={[book.sourceTypeCounts]}
         />
         <View style={styles.sourceFilterContainer}>
           <TouchableOpacity style={styles.sourceButtonContainer}>
