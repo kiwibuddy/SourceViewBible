@@ -2,7 +2,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 
 import { navigatePush } from '../../Actions';
@@ -41,7 +41,9 @@ class Discover extends Component {
         </TouchableOpacity>
 
         <View style={styles.sectionContainer}>
-          {books}
+          <ScrollView horizontal={true}>
+            {books}
+          </ScrollView>
         </View>
 
         <View style={styles.sectionHeaderContainer}>
