@@ -23,6 +23,8 @@ import {
 
 import { SourcesBarChart, SpheresBarChart, WordCloud } from '../Charts';
 
+import ParallaxMotionView from '../Common/ParallaxMotionView';
+
 import { ReadingTime } from '../../Common/NumberHelper';
 
 class BookSummary extends Component {
@@ -44,26 +46,26 @@ class BookSummary extends Component {
           <View style={{opacity: 0.8}}>
             <Text style={[styles.wc1, {top: 50, alignSelf: 'center'}]}>{words[0].word}</Text>
           </View>
-          <View style={{opacity: 0.8}}>
+          <ParallaxMotionView style={{opacity: 0.8}}>
             <Text style={[styles.wc2, {top: 55, right: 15}]}>{words[1].word}</Text>
             <Text style={[styles.wc2, {top: 85, left: 15}]}>{words[2].word}</Text>
             <Text style={[styles.wc2, {top: -95, left: -10}]}>{words[3].word}</Text>
             <Text style={[styles.wc2, {top: -100, right: 40}]}>{words[4].word}</Text>
-          </View>
-          <View style={{opacity: 0.6}}>
+          </ParallaxMotionView>
+          <ParallaxMotionView style={{opacity: 0.6}}>
             <Text style={[styles.wc3, {top: 10, right: 10}]}>{words[5].word}</Text>
             <Text style={[styles.wc3, {top: -25, left: 10}]}>{words[6].word}</Text>
             <Text style={[styles.wc3, {top: -50, right: -10}]}>{words[7].word}</Text>
             <Text style={[styles.wc3, {top: 45, left: 30}]}>{words[8].word}</Text>
-          </View>
-          <View style={{opacity: 0.3}}>
+          </ParallaxMotionView>
+          <ParallaxMotionView style={{opacity: 0.3}}>
             <Text style={[styles.wc4, {top: -60, right: 150}]}>{words[9].word}</Text>
             <Text style={[styles.wc4, {top: 80, right: 170}]}>{words[10].word}</Text>
             <Text style={[styles.wc4, {top: -45, left: 80}]}>{words[11].word}</Text>
             <Text style={[styles.wc4, {top: 20, left: -10}]}>{words[12].word}</Text>
             <Text style={[styles.wc4, {top: -90, left: 130}]}>{words[13].word}</Text>
             <Text style={[styles.wc4, {top: -15, right: 60}]}>{words[14].word}</Text>
-          </View>
+          </ParallaxMotionView>
         </WordCloud>
 
         <View style={styles.statisticsContainer}>
