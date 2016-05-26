@@ -31,7 +31,7 @@ import { ReadingTime } from '../../Common/NumberHelper';
 
 const MAX_NUMBER_OF_SOURCES = 4;
 
-class BookSummary extends Component {
+class BookOverview extends Component {
   render() {
     const { book } = this.props;
 
@@ -296,4 +296,4 @@ const styles = StyleSheet.create({
   })
 });
 
-export default BookSummary;
+export default BookOverview;

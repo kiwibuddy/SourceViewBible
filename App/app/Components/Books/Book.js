@@ -25,7 +25,7 @@ import {
 
 import TabNavigator from 'react-native-tab-navigator';
 
-import BookSummary from './BookSummary';
+import BookOverview from './BookOverview';
 import BookChapters from './BookChapters';
 import BookSources from './BookSources';
 import BookSpheres from './BookSpheres';
@@ -48,14 +48,14 @@ class Book extends Component {
       <TabNavigator>
         <TabNavigator.Item
           selected={this.state.selectedTab === 'summary'}
-          title={Localizable.t('tabs.summary')}
+          title={Localizable.t('tabs.overview')}
           titleStyle={styles.tabTitleStyle}
           selectedTitleStyle={styles.selectedTabTitleStyle}
           renderIcon={() => <Image source={require('../../Images/tabs/summary.png')} style={styles.tabIcon} />}
           renderSelectedIcon={() => <Image source={require('../../Images/tabs/summary-s.png')} style={styles.selectedTabIcon} />}
           onPress={() => this.setState({ selectedTab: 'summary' })}
         >
-          <BookSummary
+          <BookOverview
             book={this.props.book}
             onPressChapters={() => this.setState({ selectedTab: 'chapters' })}
             onPressSources={() => this.setState({ selectedTab: 'sources' })}
