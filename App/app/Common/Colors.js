@@ -48,7 +48,7 @@ module.exports = {
     celebration: {
       tint:'#C44DF8',
       gradient: ['#D8379F', '#AD39DF'],
-      gradientTiny: ['#8379F', '#C937B5']
+      gradientTiny: ['#D8379F', '#C937B5']
     }
   },
 
