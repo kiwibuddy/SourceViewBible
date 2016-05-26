@@ -29,7 +29,7 @@ const styles = {
       fontSize: 17,
     },
     subtitle: {
-      color: '#B7C0C8',
+      color: '#9B9B9B',
       fontSize: 13,
     },
   },
