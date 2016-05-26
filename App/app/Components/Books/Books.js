@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     margin: 5,
     width: 110,
-    height: 84,
+    height: 87,
     shadowColor: "black",
     shadowOpacity: 0.05,
     shadowRadius: 0.4,
@@ -201,11 +201,11 @@ const styles = StyleSheet.create({
   },
   bookReadTime: {
     flex: 0,
-    fontSize: 9,
+    fontSize: 11,
     color: '#9b9b9b',
     textAlign: 'center',
     marginTop: 1,
-    marginBottom: 7,
+    marginBottom: 5,
   },
   statisticsContainer: {
     flex: 1,
@@ -217,14 +217,14 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   statisticTitle: {
-    fontSize: 9,
+    fontSize: 11,
     color: Colors.tintColor,
     marginRight: 3,
   },
   statisticSubtitle: {
     flex: 1,
     color: Colors.subtitle,
-    fontSize: 9,
+    fontSize: 11,
   },
   sourcesContainer: {
     flexDirection: 'row',
