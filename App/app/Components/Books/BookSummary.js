@@ -153,7 +153,7 @@ class BookSummary extends Component {
         <Icon
           name={sourceType}
           size={40}
-          style={[styles.sourceIcon, {color: color}]} size={40}
+          style={[styles.sourceIcon, {color: color}]}
         />
         <Text style={styles.buttonSubtitle}>{source.name}</Text>
       </TouchableOpacity>
@@ -170,7 +170,7 @@ class BookSummary extends Component {
         <Icon
           name="more"
           size={40}
-          style={[styles.sourceIcon, {color: Colors.tintColor}]} size={40}
+          style={[styles.sourceIcon, {color: Colors.tintColor}]}
         />
         <Text style={styles.buttonSubtitle}>{Localizable.t("more")}</Text>
       </TouchableOpacity>
