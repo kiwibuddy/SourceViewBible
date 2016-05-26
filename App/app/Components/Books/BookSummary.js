@@ -172,7 +172,7 @@ class BookSummary extends Component {
           size={40}
           style={[styles.sourceIcon, {color: Colors.tintColor}]} size={40}
         />
-        <Text style={styles.buttonSubtitle}>More</Text>
+        <Text style={styles.buttonSubtitle}>{Localizable.t("more")}</Text>
       </TouchableOpacity>
     );
   };

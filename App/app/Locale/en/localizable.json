@@ -34,5 +34,6 @@
         other: "{{localizedCount}} words"
       }
     },
+    more: "More"
   }
 }
