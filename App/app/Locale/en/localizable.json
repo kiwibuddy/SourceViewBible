@@ -2,9 +2,9 @@
   en: {
     "old-testament": "Old Testament",
     "new-testament": "New Testament",
-    textual: "Textual",
+    textual: "Text Order",
     alphabetical: "Alphabetical",
-    principality: "Principality",
+    principality: "Read Time",
     discover: "Discover",
     books: "Books",
     sources: {
