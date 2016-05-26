@@ -1,0 +1,32 @@
+{
+  "name": "react-native-parallax-motion",
+  "version": "0.0.1",
+  "description": "Parallax Motion",
+  "main": "./index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "react": "^15.0.2",
+    "react-native": "^0.26.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "Jonathan Younger",
+  "license": "MIT",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "keywords": [
+    "react",
+    "native",
+    "parallax",
+    "motion",
+    "react-native",
+    "ios",
+    "android"
+  ]
+}

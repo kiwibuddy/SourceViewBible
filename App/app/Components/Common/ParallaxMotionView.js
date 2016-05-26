@@ -4,50 +4,25 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 
-// const DeviceMotion = require('react-native-device-motion');
+import ParallaxMotion from 'react-native-parallax-motion';
 
 export default class ParallaxMotionView extends Component {
-  state: {
-    motionData: any
-  };
-
-  constructor(props: Object) {
-    super(props);
-
-    this.state = {
-      motionData: null
-    };
+  componentDidMount() {
+    ParallaxMotion.startUpdates(1000/60, (motionData) => {
+      // console.log(motionData.attitude);
+      this._updateChildren(motionData);
+    });
   }
 
-  componentDidMount() {
-    // DeviceMotion.startDeviceMotionUpdates(1000/60, (data) => {
-    //   this.setState({
-    //     motionData: data,
-    //   });
-    // });
+  componentWillUnmount() {
+    ParallaxMotion.stopUpdates();
   }
 
   render() {
-    const motionData = this.state.motionData;
-
-    let horizontalMotion = 0;
-    let verticalMotion = 0;
-
-    if (motionData) {
-      horizontalMotion = (motionData.attitude.roll+1)*100;
-      verticalMotion = (motionData.attitude.pitch+1)*100;
-    }
-
-    const children = React.Children.map(this.props.children, (child, index) => {
-      const { left, right, top } = StyleSheet.flatten(child.props.style);
-      const style = {
-        left: left + horizontalMotion,
-        top: top + verticalMotion,
-        right: right + horizontalMotion
-      };
-
+    const children = this.props.children.map((child, index) => {
       return React.cloneElement(child, {
-        style: [child.props.style, style]
+        key: 'parallax-motion-view-child-' + index,
+        ref: 'parallax-motion-view-child-' + index
       });
     });
 
@@ -57,4 +32,30 @@ export default class ParallaxMotionView extends Component {
       </View>
     );
   }
+
+  _updateChildren = (motionData: Object) => {
+    let horizontalMotion = 0;
+    let verticalMotion = 0;
+
+    if (motionData) {
+      horizontalMotion = (motionData.attitude.roll);
+      verticalMotion = (motionData.attitude.pitch);
+    }
+
+    this.props.children.forEach((child, index) => {
+      const style = StyleSheet.flatten(child.props.style);
+      const { left, right, top } = style;
+
+      const updatedStyle = {
+        ...style,
+        left: left * horizontalMotion,
+        right: right * horizontalMotion,
+        top: top * verticalMotion
+      };
+
+      this.refs['parallax-motion-view-child-' + index].setNativeProps({
+        style: updatedStyle
+      });
+    });
+  };
 };
