@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     margin: 5,
     width: 110,
-    height: 87,
+    height: 95,
     shadowColor: "black",
     shadowOpacity: 0.05,
     shadowRadius: 0.4,
@@ -205,16 +205,16 @@ const styles = StyleSheet.create({
     color: '#9b9b9b',
     textAlign: 'center',
     marginTop: 1,
-    marginBottom: 5,
+    marginBottom: 7,
   },
   statisticsContainer: {
     flex: 1,
     flexDirection: 'column',
-    marginHorizontal: 5,
+    marginHorizontal: 10,
     borderBottomColor: Colors.separator,
   },
   statisticContainer: {
-    marginTop: 5,
+    marginTop: 7,
   },
   statisticTitle: {
     fontSize: 11,
