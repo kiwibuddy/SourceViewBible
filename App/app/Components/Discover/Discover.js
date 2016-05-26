@@ -139,7 +139,6 @@ const styles = StyleSheet.create({
     borderBottomColor: '#c8c7cc',
     paddingTop: 5,
     paddingBottom: 15,
-    justifyContent: 'space-around',
   },
   sectionHeaderDetail: {
     flexDirection: 'row',
@@ -158,6 +157,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: '#fff',
     margin: 0,
+    marginRight: 8,
     width: 115,
     height: 138,
     shadowColor: "black",
