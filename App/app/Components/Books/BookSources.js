@@ -129,7 +129,7 @@ class BookSources extends Component {
               data={[chartData]}
               maxChartValue={book.maxSourceWordCount}
             />
-            <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('words.count', {count: source.wordCount, localizedCount: source.wordCount.toLocaleString()})}</Text>
+            <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('words.count', {count: source.wordCount, localizedCount: Localizable.toNumber(source.wordCount, {precision: 0})})}</Text>
           </View>
         </View>
         <View style={[StyleSheet.styles.separator, {marginLeft: 0}]}></View>
