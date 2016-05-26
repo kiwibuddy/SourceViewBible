@@ -14,7 +14,7 @@
     "react-native-emdros": "file:../Libraries/Emdros/",
     "react-native-i18n": "0.0.8",
     "react-native-linear-gradient": "^1.5.7",
-    "react-native-parallel-motion": "file:../Libraries/react-native-parallel-motion/",
+    "react-native-parallax-motion": "file:../Libraries/react-native-parallax-motion/",
     "react-native-tab-navigator": "^0.3.0",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
