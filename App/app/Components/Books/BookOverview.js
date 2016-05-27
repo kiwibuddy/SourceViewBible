@@ -272,8 +272,8 @@ const styles = StyleSheet.create({
   readButtonTitle: {
     color: 'white',
     fontSize: 18,
-    paddingVertical: 20,
-    paddingHorizontal: 40
+    marginVertical: 20,
+    marginHorizontal: 40,
   },
   contentContainer: {
     marginHorizontal: 15
