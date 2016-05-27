@@ -45,7 +45,7 @@ class Book extends Component {
 
   render() {
     return (
-      <TabNavigator>
+      <TabNavigator tabBarStyle={styles.tabBarStyle} tabBarShadowStyle={styles.tabBarShadowStyle}>
         <TabNavigator.Item
           selected={this.state.selectedTab === 'summary'}
           title={Localizable.t('tabs.overview')}
@@ -124,7 +124,21 @@ const styles = StyleSheet.create({
   },
   selectedTabIcon: {
     tintColor: Colors.tintColor
-  }
+  },
+  ...Platform.select({
+    ios: {
+
+    },
+    android: {
+      tabBarStyle: {
+        height: 56,
+        backgroundColor: 'white',
+      },
+      tabBarShadowStyle: {
+        
+      }
+    }
+  })
 });
 
 const mapStateToProps = (state) => {
