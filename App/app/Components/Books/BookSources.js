@@ -106,9 +106,15 @@ class BookSources extends Component {
       "The Narrator": "narrator",
       "God": "god",
       "Jesus": "god"
-    }
+    };
+    const ICON_MAP = {
+      "narrator": "avatar-narrator",
+      "god": "avatar-divine",
+    };
+
     const sourceType = SOURCE_TYPE_MAP[source.name] || "support";
     const color = Colors.sources[sourceType];
+    const iconName = ICON_MAP[sourceType] || "avatar-human-group";
     const chartData = {};
     chartData[sourceType] = source.wordCount;
 
@@ -117,7 +123,7 @@ class BookSources extends Component {
         <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
           <View style={styles.sourcesLeftContainer}>
             <Icon
-              name={sourceType}
+              name={iconName}
               style={[styles.sourceAvatar, {color: color}]}
               size={20}
             />

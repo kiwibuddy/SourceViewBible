@@ -3,29 +3,14 @@
 
 import React, { Component } from 'react';
 import { Text } from 'react-native';
-import Icons from '../../Common/Icons';
 
-const GLYPH_MAP = {
-  "narrator": Icons.avatar.narrator,
-  "god": Icons.avatar.divine,
-  "divine": Icons.avatar.divine,
-  "more": Icons.avatar.more,
-}
+import { createIconSetFromFontello } from 'react-native-vector-icons';
+import fontelloConfig from '../../Images/font/config.json';
+const FontIcon = createIconSetFromFontello(fontelloConfig);
 
 const Icon = (props: Object) => {
-  const { name, size, style } = props;
-
-  const styleDefaults = {
-    fontFamily: 'sourceview',
-    fontSize: size,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
-  };
-
-  const glyph = GLYPH_MAP[name] || Icons.avatar.humanGroup;
-
   return (
-      <Text style={[styleDefaults, props.style, {fontFamily:"sourceView"}]}>{glyph}{props.children}</Text>
+    <FontIcon {...props} />
   );
 };
 

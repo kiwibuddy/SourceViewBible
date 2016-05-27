@@ -10,6 +10,7 @@ module.exports = {
   sources: {
     narrator: '#333333',
     god: '#fc3d39',
+    divine: '#fc3d39',
     lead: '#4cda65',
     support: '#218aff',
   },

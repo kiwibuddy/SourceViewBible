@@ -147,13 +147,19 @@ class BookOverview extends Component {
       "The Narrator": "narrator",
       "God": "god",
       "Jesus": "god"
-    }
+    };
+    const ICON_MAP = {
+      "narrator": "avatar-narrator",
+      "god": "avatar-divine",
+    };
+
     const sourceType = SOURCE_TYPE_MAP[source.name] || "support";
     const color = Colors.sources[sourceType];
+    const iconName = ICON_MAP[sourceType] || "avatar-human-group";
     return (
       <TouchableOpacity key={'source-' + source.name} style={styles.sourceButton}>
         <Icon
-          name={sourceType}
+          name={iconName}
           size={40}
           style={[styles.sourceIcon, {color: color}]}
         />
@@ -170,7 +176,7 @@ class BookOverview extends Component {
         onPress={this.props.onPressSources}
       >
         <Icon
-          name="more"
+          name="avatar-more"
           size={40}
           style={[styles.sourceIcon, {color: Colors.tintColor}]}
         />

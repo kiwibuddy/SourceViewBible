@@ -1,6 +1,7 @@
 package com.sourceviewbible;
 
 import com.facebook.react.ReactActivity;
+import com.oblador.vectoricons.VectorIconsPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.sourceviewbible.emdros.EmdrosReactPackage;
 import com.i18n.reactnativei18n.ReactNativeI18n;
@@ -99,6 +100,7 @@ public class MainActivity extends ReactActivity {
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
+            new VectorIconsPackage(),
             new LinearGradientPackage(),
             new EmdrosReactPackage(),
             new ReactNativeI18n()
