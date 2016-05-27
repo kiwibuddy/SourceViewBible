@@ -6,6 +6,8 @@ import ColorPropType from 'ColorPropType';
 import { Animated, TouchableOpacity, View, Text } from 'react-native';
 import StyleSheet from '../../Common/StyleSheet'
 
+const SEGMENT_REF = 'segment-';
+
 export default class SegmentedControl extends Component {
   static propTypes = {
     style: PropTypes.any,
@@ -65,9 +67,9 @@ export default class SegmentedControl extends Component {
     return(
       <TouchableOpacity
         key={'button-' + title}
-        ref={index}
+        ref={SEGMENT_REF + index}
         style={styles.button}
-        onPress={this._onValueChange}
+        onPress={() => this._onValueChange(index, title)}
       >
         <Text style={[styles.buttonTitle, {color: tintColor}]}>{title.toLocaleUpperCase()}</Text>
       </TouchableOpacity>
@@ -75,7 +77,7 @@ export default class SegmentedControl extends Component {
   }
 
   _measureSelectedButton = () => {
-    this.refs[this.state.selectedIndex].measure((ox, oy, width, height, px, py) => {
+    this.refs[SEGMENT_REF + this.state.selectedIndex].measure((ox, oy, width, height, px, py) => {
       this.state.indicatorLeft.setValue(px);
       this.state.indicatorWidth.setValue(width);
     });
