@@ -44,13 +44,14 @@ export default class ParallaxMotionView extends Component {
 
     React.Children.forEach(this.props.children, (child, index) => {
       const style = StyleSheet.flatten(child.props.style);
-      const { left, right, top } = style;
+      const { top, left, bottom, right } = style;
 
       const updatedStyle = {
         ...style,
+        top: top + verticalMotion,
         left: left + horizontalMotion,
+        bottom: bottom + verticalMotion,
         right: right + horizontalMotion,
-        top: top + verticalMotion
       };
 
       this.refs['parallax-motion-view-child-' + index].setNativeProps({
