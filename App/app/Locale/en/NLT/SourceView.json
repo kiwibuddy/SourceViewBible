@@ -1875,7 +1875,7 @@
       "lead": 6285,
       "support": 6814
     },
-    "principalSphere": "communication",
+    "principalSphere": "celebration",
     "words": [
       {
         "word": "Jacob",
@@ -3135,7 +3135,7 @@
       "lead": 3556,
       "support": 1611
     },
-    "principalSphere": "family",
+    "principalSphere": "celebration",
     "words": [
       {
         "word": "Lord",
@@ -3849,7 +3849,7 @@
       "lead": 654,
       "support": 45
     },
-    "principalSphere": "education",
+    "principalSphere": "communication",
     "words": [
       {
         "word": "Lord",
@@ -3942,13 +3942,13 @@
     "chapters": [
       {
         "chapterNumber": 1,
-        "wordCount": 539,
+        "wordCount": 540,
         "sourceCount": 2,
-        "maxSourceWordCount": 306,
+        "maxSourceWordCount": 307,
         "sourceCounts": [
           {
             "name": "God",
-            "wordCount": 306
+            "wordCount": 307
           },
           {
             "name": "The Narrator",
@@ -3957,20 +3957,20 @@
         ],
         "sourceTypeCounts": {
           "narrator": 199,
-          "god": 306,
+          "god": 307,
           "lead": 0,
           "support": 0
         }
       },
       {
         "chapterNumber": 2,
-        "wordCount": 476,
+        "wordCount": 477,
         "sourceCount": 2,
-        "maxSourceWordCount": 409,
+        "maxSourceWordCount": 410,
         "sourceCounts": [
           {
             "name": "God",
-            "wordCount": 409
+            "wordCount": 410
           },
           {
             "name": "The Narrator",
@@ -3979,7 +3979,7 @@
         ],
         "sourceTypeCounts": {
           "narrator": 67,
-          "god": 409,
+          "god": 410,
           "lead": 0,
           "support": 0
         }
@@ -4074,13 +4074,13 @@
       },
       {
         "chapterNumber": 7,
-        "wordCount": 1940,
+        "wordCount": 1942,
         "sourceCount": 2,
-        "maxSourceWordCount": 1900,
+        "maxSourceWordCount": 1902,
         "sourceCounts": [
           {
             "name": "The Narrator",
-            "wordCount": 1900
+            "wordCount": 1902
           },
           {
             "name": "God",
@@ -4088,7 +4088,7 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 1900,
+          "narrator": 1902,
           "god": 40,
           "lead": 0,
           "support": 0
@@ -4148,13 +4148,13 @@
       },
       {
         "chapterNumber": 10,
-        "wordCount": 785,
+        "wordCount": 786,
         "sourceCount": 4,
-        "maxSourceWordCount": 435,
+        "maxSourceWordCount": 436,
         "sourceCounts": [
           {
             "name": "The Narrator",
-            "wordCount": 435
+            "wordCount": 436
           },
           {
             "name": "God",
@@ -4170,7 +4170,7 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 435,
+          "narrator": 436,
           "god": 239,
           "lead": 97,
           "support": 14
@@ -4457,7 +4457,7 @@
       {
         "chapterNumber": 20,
         "wordCount": 757,
-        "sourceCount": 5,
+        "sourceCount": 6,
         "maxSourceWordCount": 359,
         "sourceCounts": [
           {
@@ -4470,7 +4470,7 @@
           },
           {
             "name": "Moses",
-            "wordCount": 136
+            "wordCount": 125
           },
           {
             "name": "The Israelites",
@@ -4479,6 +4479,10 @@
           {
             "name": "The King of Edom",
             "wordCount": 22
+          },
+          {
+            "name": "Moses & Aaron",
+            "wordCount": 11
           }
         ],
         "sourceTypeCounts": {
@@ -4917,22 +4921,22 @@
         }
       }
     ],
-    "wordCount": 29251,
-    "maxChapterWordCount": 1940,
+    "wordCount": 29256,
+    "maxChapterWordCount": 1942,
     "sourceCount": 28,
-    "maxSourceWordCount": 12326,
+    "maxSourceWordCount": 12328,
     "sourceCounts": [
       {
         "name": "God",
-        "wordCount": 12326
+        "wordCount": 12328
       },
       {
         "name": "The Narrator",
-        "wordCount": 11571
+        "wordCount": 11574
       },
       {
         "name": "Moses",
-        "wordCount": 2419
+        "wordCount": 2408
       },
       {
         "name": "Balaam",
@@ -4991,16 +4995,16 @@
         "wordCount": 44
       },
       {
+        "name": "Moses & Aaron",
+        "wordCount": 36
+      },
+      {
         "name": "Balaam’s Donkey",
         "wordCount": 33
       },
       {
         "name": "Aaron",
         "wordCount": 29
-      },
-      {
-        "name": "Moses & Aaron",
-        "wordCount": 25
       },
       {
         "name": "The King of Edom",
@@ -5036,8 +5040,8 @@
       }
     ],
     "sourceTypeCounts": {
-      "narrator": 11571,
-      "god": 12326,
+      "narrator": 11574,
+      "god": 12328,
       "lead": 2461,
       "support": 2893
     },
@@ -5112,15 +5116,15 @@
         "wordCount": 68
       },
       {
-        "word": "Balaam",
-        "wordCount": 67
-      },
-      {
         "word": "named",
         "wordCount": 67
       },
       {
         "word": "men",
+        "wordCount": 67
+      },
+      {
+        "word": "Balaam",
         "wordCount": 67
       }
     ]
@@ -5180,21 +5184,21 @@
         "chapterNumber": 3,
         "wordCount": 830,
         "sourceCount": 2,
-        "maxSourceWordCount": 683,
+        "maxSourceWordCount": 716,
         "sourceCounts": [
           {
             "name": "Moses",
-            "wordCount": 683
+            "wordCount": 716
           },
           {
             "name": "The Narrator",
-            "wordCount": 147
+            "wordCount": 114
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 147,
+          "narrator": 114,
           "god": 0,
-          "lead": 683,
+          "lead": 716,
           "support": 0
         }
       },
@@ -5816,15 +5820,15 @@
     "wordCount": 26317,
     "maxChapterWordCount": 1775,
     "sourceCount": 5,
-    "maxSourceWordCount": 24149,
+    "maxSourceWordCount": 24182,
     "sourceCounts": [
       {
         "name": "Moses",
-        "wordCount": 24149
+        "wordCount": 24182
       },
       {
         "name": "The Narrator",
-        "wordCount": 1500
+        "wordCount": 1467
       },
       {
         "name": "God",
@@ -5840,12 +5844,12 @@
       }
     ],
     "sourceTypeCounts": {
-      "narrator": 1500,
+      "narrator": 1467,
       "god": 457,
-      "lead": 24149,
+      "lead": 24182,
       "support": 211
     },
-    "principalSphere": "communication",
+    "principalSphere": "education",
     "words": [
       {
         "word": "Lord",
@@ -6681,7 +6685,7 @@
       "lead": 2666,
       "support": 2027
     },
-    "principalSphere": "communication",
+    "principalSphere": "family",
     "words": [
       {
         "word": "Lord",
@@ -7743,7 +7747,7 @@
       "lead": 2419,
       "support": 3186
     },
-    "principalSphere": "economics",
+    "principalSphere": "celebration",
     "words": [
       {
         "word": "Lord",
@@ -8023,7 +8027,7 @@
       "lead": 206,
       "support": 1208
     },
-    "principalSphere": "celebration",
+    "principalSphere": "economics",
     "words": [
       {
         "word": "Naomi",
@@ -9513,7 +9517,7 @@
       "lead": 3526,
       "support": 6414
     },
-    "principalSphere": "economics",
+    "principalSphere": "education",
     "words": [
       {
         "word": "Lord",
@@ -9726,13 +9730,13 @@
       },
       {
         "chapterNumber": 5,
-        "wordCount": 615,
+        "wordCount": 616,
         "sourceCount": 5,
-        "maxSourceWordCount": 439,
+        "maxSourceWordCount": 440,
         "sourceCounts": [
           {
             "name": "The Narrator",
-            "wordCount": 439
+            "wordCount": 440
           },
           {
             "name": "God",
@@ -9752,7 +9756,7 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 439,
+          "narrator": 440,
           "god": 66,
           "lead": 49,
           "support": 61
@@ -10441,14 +10445,14 @@
         }
       }
     ],
-    "wordCount": 18502,
+    "wordCount": 18503,
     "maxChapterWordCount": 1268,
     "sourceCount": 50,
-    "maxSourceWordCount": 9918,
+    "maxSourceWordCount": 9919,
     "sourceCounts": [
       {
         "name": "The Narrator",
-        "wordCount": 9918
+        "wordCount": 9919
       },
       {
         "name": "David",
@@ -10648,12 +10652,12 @@
       }
     ],
     "sourceTypeCounts": {
-      "narrator": 9918,
+      "narrator": 9919,
       "god": 498,
       "lead": 3547,
       "support": 4539
     },
-    "principalSphere": "economics",
+    "principalSphere": "communication",
     "words": [
       {
         "word": "David",
@@ -10747,7 +10751,7 @@
       {
         "chapterNumber": 1,
         "wordCount": 1404,
-        "sourceCount": 12,
+        "sourceCount": 11,
         "maxSourceWordCount": 563,
         "sourceCounts": [
           {
@@ -10759,8 +10763,8 @@
             "wordCount": 210
           },
           {
-            "name": "Jonathan son of Abiathar",
-            "wordCount": 171
+            "name": "Jonathan Son of Abiathar",
+            "wordCount": 174
           },
           {
             "name": "Bathsheba",
@@ -10793,10 +10797,6 @@
           {
             "name": "The Israelites",
             "wordCount": 4
-          },
-          {
-            "name": "Jonathan Son of Abiathar",
-            "wordCount": 3
           }
         ],
         "sourceTypeCounts": {
@@ -11483,7 +11483,7 @@
     ],
     "wordCount": 22133,
     "maxChapterWordCount": 1896,
-    "sourceCount": 54,
+    "sourceCount": 53,
     "maxSourceWordCount": 13269,
     "sourceCounts": [
       {
@@ -11543,8 +11543,8 @@
         "wordCount": 174
       },
       {
-        "name": "Jonathan son of Abiathar",
-        "wordCount": 171
+        "name": "Jonathan Son of Abiathar",
+        "wordCount": 174
       },
       {
         "name": "Jeroboam I of Israel",
@@ -11655,11 +11655,11 @@
         "wordCount": 16
       },
       {
-        "name": "Pharaoh (Solomon’s)",
+        "name": "Shimei Son of Gera",
         "wordCount": 13
       },
       {
-        "name": "Shimei Son of Gera",
+        "name": "Pharaoh (Solomon’s)",
         "wordCount": 13
       },
       {
@@ -11697,10 +11697,6 @@
       {
         "name": "The Prophets of Baal",
         "wordCount": 4
-      },
-      {
-        "name": "Jonathan Son of Abiathar",
-        "wordCount": 3
       }
     ],
     "sourceTypeCounts": {
@@ -11709,7 +11705,7 @@
       "lead": 3282,
       "support": 4600
     },
-    "principalSphere": "communication",
+    "principalSphere": "education",
     "words": [
       {
         "word": "Lord",
@@ -12630,13 +12626,13 @@
       },
       {
         "chapterNumber": 25,
-        "wordCount": 881,
+        "wordCount": 882,
         "sourceCount": 2,
-        "maxSourceWordCount": 858,
+        "maxSourceWordCount": 859,
         "sourceCounts": [
           {
             "name": "The Narrator",
-            "wordCount": 858
+            "wordCount": 859
           },
           {
             "name": "Gedaliah of Judah",
@@ -12644,21 +12640,21 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 858,
+          "narrator": 859,
           "god": 0,
           "lead": 23,
           "support": 0
         }
       }
     ],
-    "wordCount": 22084,
+    "wordCount": 22085,
     "maxChapterWordCount": 1412,
     "sourceCount": 68,
-    "maxSourceWordCount": 14852,
+    "maxSourceWordCount": 14853,
     "sourceCounts": [
       {
         "name": "The Narrator",
-        "wordCount": 14852
+        "wordCount": 14853
       },
       {
         "name": "Elisha the Prophet",
@@ -12930,12 +12926,12 @@
       }
     ],
     "sourceTypeCounts": {
-      "narrator": 14852,
+      "narrator": 14853,
       "god": 592,
       "lead": 1628,
       "support": 5012
     },
-    "principalSphere": "communication",
+    "principalSphere": "religion",
     "words": [
       {
         "word": "Lord",
@@ -12986,11 +12982,11 @@
         "wordCount": 68
       },
       {
-        "word": "reign",
+        "word": "Jehu",
         "wordCount": 64
       },
       {
-        "word": "Jehu",
+        "word": "reign",
         "wordCount": 64
       },
       {
@@ -13006,11 +13002,11 @@
         "wordCount": 52
       },
       {
-        "word": "Samaria",
+        "word": "man",
         "wordCount": 51
       },
       {
-        "word": "man",
+        "word": "Samaria",
         "wordCount": 51
       },
       {
@@ -13043,7 +13039,7 @@
       },
       {
         "chapterNumber": 2,
-        "wordCount": 877,
+        "wordCount": 878,
         "sourceCount": 0,
         "maxSourceWordCount": 0,
         "sourceCounts": [
@@ -13058,7 +13054,7 @@
       },
       {
         "chapterNumber": 3,
-        "wordCount": 331,
+        "wordCount": 332,
         "sourceCount": 0,
         "maxSourceWordCount": 0,
         "sourceCounts": [
@@ -13131,17 +13127,17 @@
       },
       {
         "chapterNumber": 7,
-        "wordCount": 724,
+        "wordCount": 725,
         "sourceCount": 1,
-        "maxSourceWordCount": 724,
+        "maxSourceWordCount": 725,
         "sourceCounts": [
           {
             "name": "The Narrator",
-            "wordCount": 724
+            "wordCount": 725
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 724,
+          "narrator": 725,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -13289,13 +13285,13 @@
       },
       {
         "chapterNumber": 14,
-        "wordCount": 340,
+        "wordCount": 341,
         "sourceCount": 3,
-        "maxSourceWordCount": 246,
+        "maxSourceWordCount": 247,
         "sourceCounts": [
           {
             "name": "The Narrator",
-            "wordCount": 246
+            "wordCount": 247
           },
           {
             "name": "God",
@@ -13307,7 +13303,7 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 246,
+          "narrator": 247,
           "god": 64,
           "lead": 30,
           "support": 0
@@ -13660,14 +13656,14 @@
         }
       }
     ],
-    "wordCount": 19131,
+    "wordCount": 19135,
     "maxChapterWordCount": 981,
     "sourceCount": 15,
-    "maxSourceWordCount": 15531,
+    "maxSourceWordCount": 15535,
     "sourceCounts": [
       {
         "name": "The Narrator",
-        "wordCount": 15531
+        "wordCount": 15535
       },
       {
         "name": "David",
@@ -13727,12 +13723,12 @@
       }
     ],
     "sourceTypeCounts": {
-      "narrator": 15531,
+      "narrator": 15535,
       "god": 444,
       "lead": 2776,
       "support": 380
     },
-    "principalSphere": "communication",
+    "principalSphere": "education",
     "words": [
       {
         "word": "David",
@@ -13775,11 +13771,11 @@
         "wordCount": 52
       },
       {
-        "word": "leader",
+        "word": "people",
         "wordCount": 51
       },
       {
-        "word": "people",
+        "word": "leader",
         "wordCount": 51
       },
       {
@@ -13787,11 +13783,11 @@
         "wordCount": 48
       },
       {
-        "word": "relatives",
+        "word": "men",
         "wordCount": 43
       },
       {
-        "word": "men",
+        "word": "relatives",
         "wordCount": 43
       },
       {
@@ -14209,17 +14205,17 @@
       },
       {
         "chapterNumber": 17,
-        "wordCount": 396,
+        "wordCount": 397,
         "sourceCount": 1,
-        "maxSourceWordCount": 396,
+        "maxSourceWordCount": 397,
         "sourceCounts": [
           {
             "name": "The Narrator",
-            "wordCount": 396
+            "wordCount": 397
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 396,
+          "narrator": 397,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -14760,14 +14756,14 @@
         }
       }
     ],
-    "wordCount": 24313,
+    "wordCount": 24314,
     "maxChapterWordCount": 1233,
     "sourceCount": 53,
-    "maxSourceWordCount": 17564,
+    "maxSourceWordCount": 17565,
     "sourceCounts": [
       {
         "name": "The Narrator",
-        "wordCount": 17564
+        "wordCount": 17565
       },
       {
         "name": "Solomon",
@@ -14979,12 +14975,12 @@
       }
     ],
     "sourceTypeCounts": {
-      "narrator": 17564,
+      "narrator": 17565,
       "god": 572,
       "lead": 3416,
       "support": 2761
     },
-    "principalSphere": "communication",
+    "principalSphere": "education",
     "words": [
       {
         "word": "Lord",
@@ -15007,11 +15003,11 @@
         "wordCount": 176
       },
       {
-        "word": "Israel",
+        "word": "Judah",
         "wordCount": 169
       },
       {
-        "word": "Judah",
+        "word": "Israel",
         "wordCount": 169
       },
       {
@@ -15392,7 +15388,7 @@
       "lead": 523,
       "support": 1986
     },
-    "principalSphere": "religion",
+    "principalSphere": "family",
     "words": [
       {
         "word": "God",
@@ -15910,7 +15906,7 @@
       "lead": 1107,
       "support": 2050
     },
-    "principalSphere": "economics",
+    "principalSphere": "communication",
     "words": [
       {
         "word": "son",
@@ -16326,7 +16322,7 @@
       "lead": 370,
       "support": 1040
     },
-    "principalSphere": "religion",
+    "principalSphere": "government",
     "words": [
       {
         "word": "king",
@@ -17398,7 +17394,7 @@
       "lead": 8141,
       "support": 5775
     },
-    "principalSphere": "education",
+    "principalSphere": "religion",
     "words": [
       {
         "word": "God",
@@ -17491,7 +17487,7 @@
     "chapters": [
       {
         "chapterNumber": 1,
-        "wordCount": 111,
+        "wordCount": 112,
         "sourceCount": 1,
         "maxSourceWordCount": 111,
         "sourceCounts": [
@@ -17501,15 +17497,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 111,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 111
         }
       },
       {
         "chapterNumber": 2,
-        "wordCount": 211,
+        "wordCount": 212,
         "sourceCount": 1,
         "maxSourceWordCount": 211,
         "sourceCounts": [
@@ -17519,15 +17515,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 211,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 211
         }
       },
       {
         "chapterNumber": 3,
-        "wordCount": 134,
+        "wordCount": 135,
         "sourceCount": 2,
         "maxSourceWordCount": 121,
         "sourceCounts": [
@@ -17549,7 +17545,7 @@
       },
       {
         "chapterNumber": 4,
-        "wordCount": 162,
+        "wordCount": 163,
         "sourceCount": 2,
         "maxSourceWordCount": 148,
         "sourceCounts": [
@@ -17571,7 +17567,7 @@
       },
       {
         "chapterNumber": 5,
-        "wordCount": 254,
+        "wordCount": 255,
         "sourceCount": 2,
         "maxSourceWordCount": 240,
         "sourceCounts": [
@@ -17593,7 +17589,7 @@
       },
       {
         "chapterNumber": 6,
-        "wordCount": 164,
+        "wordCount": 165,
         "sourceCount": 2,
         "maxSourceWordCount": 149,
         "sourceCounts": [
@@ -17615,7 +17611,7 @@
       },
       {
         "chapterNumber": 7,
-        "wordCount": 294,
+        "wordCount": 295,
         "sourceCount": 2,
         "maxSourceWordCount": 277,
         "sourceCounts": [
@@ -17637,7 +17633,7 @@
       },
       {
         "chapterNumber": 8,
-        "wordCount": 160,
+        "wordCount": 161,
         "sourceCount": 2,
         "maxSourceWordCount": 145,
         "sourceCounts": [
@@ -17659,7 +17655,7 @@
       },
       {
         "chapterNumber": 9,
-        "wordCount": 348,
+        "wordCount": 349,
         "sourceCount": 2,
         "maxSourceWordCount": 330,
         "sourceCounts": [
@@ -17681,7 +17677,7 @@
       },
       {
         "chapterNumber": 10,
-        "wordCount": 326,
+        "wordCount": 327,
         "sourceCount": 1,
         "maxSourceWordCount": 326,
         "sourceCounts": [
@@ -17691,15 +17687,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 326,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 326
         }
       },
       {
         "chapterNumber": 11,
-        "wordCount": 135,
+        "wordCount": 136,
         "sourceCount": 2,
         "maxSourceWordCount": 127,
         "sourceCounts": [
@@ -17721,7 +17717,7 @@
       },
       {
         "chapterNumber": 12,
-        "wordCount": 155,
+        "wordCount": 156,
         "sourceCount": 2,
         "maxSourceWordCount": 140,
         "sourceCounts": [
@@ -17743,7 +17739,7 @@
       },
       {
         "chapterNumber": 13,
-        "wordCount": 115,
+        "wordCount": 116,
         "sourceCount": 2,
         "maxSourceWordCount": 107,
         "sourceCounts": [
@@ -17765,7 +17761,7 @@
       },
       {
         "chapterNumber": 14,
-        "wordCount": 148,
+        "wordCount": 149,
         "sourceCount": 2,
         "maxSourceWordCount": 140,
         "sourceCounts": [
@@ -17787,7 +17783,7 @@
       },
       {
         "chapterNumber": 15,
-        "wordCount": 95,
+        "wordCount": 96,
         "sourceCount": 2,
         "maxSourceWordCount": 91,
         "sourceCounts": [
@@ -17809,7 +17805,7 @@
       },
       {
         "chapterNumber": 16,
-        "wordCount": 197,
+        "wordCount": 198,
         "sourceCount": 2,
         "maxSourceWordCount": 193,
         "sourceCounts": [
@@ -17831,7 +17827,7 @@
       },
       {
         "chapterNumber": 17,
-        "wordCount": 287,
+        "wordCount": 288,
         "sourceCount": 2,
         "maxSourceWordCount": 283,
         "sourceCounts": [
@@ -17853,7 +17849,7 @@
       },
       {
         "chapterNumber": 18,
-        "wordCount": 860,
+        "wordCount": 861,
         "sourceCount": 2,
         "maxSourceWordCount": 824,
         "sourceCounts": [
@@ -17875,7 +17871,7 @@
       },
       {
         "chapterNumber": 19,
-        "wordCount": 279,
+        "wordCount": 280,
         "sourceCount": 2,
         "maxSourceWordCount": 271,
         "sourceCounts": [
@@ -17897,7 +17893,7 @@
       },
       {
         "chapterNumber": 20,
-        "wordCount": 172,
+        "wordCount": 173,
         "sourceCount": 2,
         "maxSourceWordCount": 164,
         "sourceCounts": [
@@ -17919,7 +17915,7 @@
       },
       {
         "chapterNumber": 21,
-        "wordCount": 226,
+        "wordCount": 227,
         "sourceCount": 2,
         "maxSourceWordCount": 218,
         "sourceCounts": [
@@ -17941,7 +17937,7 @@
       },
       {
         "chapterNumber": 22,
-        "wordCount": 590,
+        "wordCount": 591,
         "sourceCount": 2,
         "maxSourceWordCount": 572,
         "sourceCounts": [
@@ -17963,7 +17959,7 @@
       },
       {
         "chapterNumber": 23,
-        "wordCount": 123,
+        "wordCount": 124,
         "sourceCount": 2,
         "maxSourceWordCount": 119,
         "sourceCounts": [
@@ -17985,7 +17981,7 @@
       },
       {
         "chapterNumber": 24,
-        "wordCount": 168,
+        "wordCount": 169,
         "sourceCount": 2,
         "maxSourceWordCount": 164,
         "sourceCounts": [
@@ -18007,7 +18003,7 @@
       },
       {
         "chapterNumber": 25,
-        "wordCount": 342,
+        "wordCount": 343,
         "sourceCount": 2,
         "maxSourceWordCount": 338,
         "sourceCounts": [
@@ -18029,7 +18025,7 @@
       },
       {
         "chapterNumber": 26,
-        "wordCount": 181,
+        "wordCount": 182,
         "sourceCount": 2,
         "maxSourceWordCount": 177,
         "sourceCounts": [
@@ -18051,7 +18047,7 @@
       },
       {
         "chapterNumber": 27,
-        "wordCount": 330,
+        "wordCount": 331,
         "sourceCount": 2,
         "maxSourceWordCount": 326,
         "sourceCounts": [
@@ -18073,7 +18069,7 @@
       },
       {
         "chapterNumber": 28,
-        "wordCount": 223,
+        "wordCount": 224,
         "sourceCount": 2,
         "maxSourceWordCount": 219,
         "sourceCounts": [
@@ -18095,7 +18091,7 @@
       },
       {
         "chapterNumber": 29,
-        "wordCount": 176,
+        "wordCount": 177,
         "sourceCount": 2,
         "maxSourceWordCount": 172,
         "sourceCounts": [
@@ -18117,7 +18113,7 @@
       },
       {
         "chapterNumber": 30,
-        "wordCount": 225,
+        "wordCount": 226,
         "sourceCount": 2,
         "maxSourceWordCount": 213,
         "sourceCounts": [
@@ -18139,7 +18135,7 @@
       },
       {
         "chapterNumber": 31,
-        "wordCount": 498,
+        "wordCount": 499,
         "sourceCount": 2,
         "maxSourceWordCount": 490,
         "sourceCounts": [
@@ -18161,7 +18157,7 @@
       },
       {
         "chapterNumber": 32,
-        "wordCount": 236,
+        "wordCount": 237,
         "sourceCount": 2,
         "maxSourceWordCount": 232,
         "sourceCounts": [
@@ -18183,7 +18179,7 @@
       },
       {
         "chapterNumber": 33,
-        "wordCount": 324,
+        "wordCount": 325,
         "sourceCount": 1,
         "maxSourceWordCount": 324,
         "sourceCounts": [
@@ -18193,15 +18189,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 324,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 324
         }
       },
       {
         "chapterNumber": 34,
-        "wordCount": 378,
+        "wordCount": 379,
         "sourceCount": 2,
         "maxSourceWordCount": 358,
         "sourceCounts": [
@@ -18223,7 +18219,7 @@
       },
       {
         "chapterNumber": 35,
-        "wordCount": 550,
+        "wordCount": 551,
         "sourceCount": 2,
         "maxSourceWordCount": 546,
         "sourceCounts": [
@@ -18245,7 +18241,7 @@
       },
       {
         "chapterNumber": 36,
-        "wordCount": 211,
+        "wordCount": 212,
         "sourceCount": 2,
         "maxSourceWordCount": 198,
         "sourceCounts": [
@@ -18267,7 +18263,7 @@
       },
       {
         "chapterNumber": 37,
-        "wordCount": 658,
+        "wordCount": 659,
         "sourceCount": 2,
         "maxSourceWordCount": 654,
         "sourceCounts": [
@@ -18289,7 +18285,7 @@
       },
       {
         "chapterNumber": 38,
-        "wordCount": 311,
+        "wordCount": 312,
         "sourceCount": 2,
         "maxSourceWordCount": 302,
         "sourceCounts": [
@@ -18311,7 +18307,7 @@
       },
       {
         "chapterNumber": 39,
-        "wordCount": 278,
+        "wordCount": 279,
         "sourceCount": 2,
         "maxSourceWordCount": 269,
         "sourceCounts": [
@@ -18333,7 +18329,7 @@
       },
       {
         "chapterNumber": 40,
-        "wordCount": 434,
+        "wordCount": 435,
         "sourceCount": 2,
         "maxSourceWordCount": 426,
         "sourceCounts": [
@@ -18355,7 +18351,7 @@
       },
       {
         "chapterNumber": 41,
-        "wordCount": 230,
+        "wordCount": 231,
         "sourceCount": 2,
         "maxSourceWordCount": 222,
         "sourceCounts": [
@@ -18377,7 +18373,7 @@
       },
       {
         "chapterNumber": 42,
-        "wordCount": 262,
+        "wordCount": 263,
         "sourceCount": 2,
         "maxSourceWordCount": 251,
         "sourceCounts": [
@@ -18399,7 +18395,7 @@
       },
       {
         "chapterNumber": 43,
-        "wordCount": 122,
+        "wordCount": 123,
         "sourceCount": 1,
         "maxSourceWordCount": 122,
         "sourceCounts": [
@@ -18409,15 +18405,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 122,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 122
         }
       },
       {
         "chapterNumber": 44,
-        "wordCount": 456,
+        "wordCount": 457,
         "sourceCount": 2,
         "maxSourceWordCount": 445,
         "sourceCounts": [
@@ -18439,7 +18435,7 @@
       },
       {
         "chapterNumber": 45,
-        "wordCount": 311,
+        "wordCount": 312,
         "sourceCount": 2,
         "maxSourceWordCount": 290,
         "sourceCounts": [
@@ -18461,7 +18457,7 @@
       },
       {
         "chapterNumber": 46,
-        "wordCount": 210,
+        "wordCount": 211,
         "sourceCount": 2,
         "maxSourceWordCount": 193,
         "sourceCounts": [
@@ -18483,7 +18479,7 @@
       },
       {
         "chapterNumber": 47,
-        "wordCount": 151,
+        "wordCount": 152,
         "sourceCount": 2,
         "maxSourceWordCount": 140,
         "sourceCounts": [
@@ -18505,7 +18501,7 @@
       },
       {
         "chapterNumber": 48,
-        "wordCount": 270,
+        "wordCount": 271,
         "sourceCount": 2,
         "maxSourceWordCount": 261,
         "sourceCounts": [
@@ -18527,7 +18523,7 @@
       },
       {
         "chapterNumber": 49,
-        "wordCount": 307,
+        "wordCount": 308,
         "sourceCount": 2,
         "maxSourceWordCount": 296,
         "sourceCounts": [
@@ -18549,7 +18545,7 @@
       },
       {
         "chapterNumber": 50,
-        "wordCount": 401,
+        "wordCount": 402,
         "sourceCount": 2,
         "maxSourceWordCount": 397,
         "sourceCounts": [
@@ -18571,7 +18567,7 @@
       },
       {
         "chapterNumber": 51,
-        "wordCount": 340,
+        "wordCount": 341,
         "sourceCount": 2,
         "maxSourceWordCount": 316,
         "sourceCounts": [
@@ -18593,7 +18589,7 @@
       },
       {
         "chapterNumber": 52,
-        "wordCount": 197,
+        "wordCount": 198,
         "sourceCount": 2,
         "maxSourceWordCount": 174,
         "sourceCounts": [
@@ -18615,7 +18611,7 @@
       },
       {
         "chapterNumber": 53,
-        "wordCount": 150,
+        "wordCount": 151,
         "sourceCount": 2,
         "maxSourceWordCount": 140,
         "sourceCounts": [
@@ -18637,7 +18633,7 @@
       },
       {
         "chapterNumber": 54,
-        "wordCount": 139,
+        "wordCount": 140,
         "sourceCount": 2,
         "maxSourceWordCount": 109,
         "sourceCounts": [
@@ -18659,7 +18655,7 @@
       },
       {
         "chapterNumber": 55,
-        "wordCount": 397,
+        "wordCount": 398,
         "sourceCount": 2,
         "maxSourceWordCount": 383,
         "sourceCounts": [
@@ -18681,7 +18677,7 @@
       },
       {
         "chapterNumber": 56,
-        "wordCount": 270,
+        "wordCount": 271,
         "sourceCount": 2,
         "maxSourceWordCount": 243,
         "sourceCounts": [
@@ -18703,7 +18699,7 @@
       },
       {
         "chapterNumber": 57,
-        "wordCount": 254,
+        "wordCount": 255,
         "sourceCount": 2,
         "maxSourceWordCount": 225,
         "sourceCounts": [
@@ -18725,7 +18721,7 @@
       },
       {
         "chapterNumber": 58,
-        "wordCount": 203,
+        "wordCount": 204,
         "sourceCount": 2,
         "maxSourceWordCount": 186,
         "sourceCounts": [
@@ -18747,7 +18743,7 @@
       },
       {
         "chapterNumber": 59,
-        "wordCount": 373,
+        "wordCount": 374,
         "sourceCount": 2,
         "maxSourceWordCount": 340,
         "sourceCounts": [
@@ -18769,7 +18765,7 @@
       },
       {
         "chapterNumber": 60,
-        "wordCount": 250,
+        "wordCount": 251,
         "sourceCount": 2,
         "maxSourceWordCount": 208,
         "sourceCounts": [
@@ -18791,7 +18787,7 @@
       },
       {
         "chapterNumber": 61,
-        "wordCount": 146,
+        "wordCount": 147,
         "sourceCount": 2,
         "maxSourceWordCount": 132,
         "sourceCounts": [
@@ -18813,7 +18809,7 @@
       },
       {
         "chapterNumber": 62,
-        "wordCount": 260,
+        "wordCount": 261,
         "sourceCount": 2,
         "maxSourceWordCount": 251,
         "sourceCounts": [
@@ -18835,7 +18831,7 @@
       },
       {
         "chapterNumber": 63,
-        "wordCount": 197,
+        "wordCount": 198,
         "sourceCount": 2,
         "maxSourceWordCount": 182,
         "sourceCounts": [
@@ -18857,7 +18853,7 @@
       },
       {
         "chapterNumber": 64,
-        "wordCount": 175,
+        "wordCount": 176,
         "sourceCount": 2,
         "maxSourceWordCount": 167,
         "sourceCounts": [
@@ -18879,7 +18875,7 @@
       },
       {
         "chapterNumber": 65,
-        "wordCount": 271,
+        "wordCount": 272,
         "sourceCount": 2,
         "maxSourceWordCount": 261,
         "sourceCounts": [
@@ -18901,7 +18897,7 @@
       },
       {
         "chapterNumber": 66,
-        "wordCount": 326,
+        "wordCount": 327,
         "sourceCount": 2,
         "maxSourceWordCount": 318,
         "sourceCounts": [
@@ -18915,15 +18911,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 326,
+          "narrator": 8,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 318
         }
       },
       {
         "chapterNumber": 67,
-        "wordCount": 124,
+        "wordCount": 125,
         "sourceCount": 2,
         "maxSourceWordCount": 110,
         "sourceCounts": [
@@ -18937,15 +18933,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 124,
+          "narrator": 14,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 110
         }
       },
       {
         "chapterNumber": 68,
-        "wordCount": 663,
+        "wordCount": 664,
         "sourceCount": 2,
         "maxSourceWordCount": 653,
         "sourceCounts": [
@@ -18967,7 +18963,7 @@
       },
       {
         "chapterNumber": 69,
-        "wordCount": 663,
+        "wordCount": 664,
         "sourceCount": 2,
         "maxSourceWordCount": 648,
         "sourceCounts": [
@@ -18989,7 +18985,7 @@
       },
       {
         "chapterNumber": 70,
-        "wordCount": 119,
+        "wordCount": 120,
         "sourceCount": 2,
         "maxSourceWordCount": 106,
         "sourceCounts": [
@@ -19011,7 +19007,7 @@
       },
       {
         "chapterNumber": 71,
-        "wordCount": 470,
+        "wordCount": 471,
         "sourceCount": 1,
         "maxSourceWordCount": 470,
         "sourceCounts": [
@@ -19021,15 +19017,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 470,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 470
         }
       },
       {
         "chapterNumber": 72,
-        "wordCount": 375,
+        "wordCount": 376,
         "sourceCount": 2,
         "maxSourceWordCount": 362,
         "sourceCounts": [
@@ -19051,7 +19047,7 @@
       },
       {
         "chapterNumber": 73,
-        "wordCount": 434,
+        "wordCount": 435,
         "sourceCount": 2,
         "maxSourceWordCount": 430,
         "sourceCounts": [
@@ -19073,7 +19069,7 @@
       },
       {
         "chapterNumber": 74,
-        "wordCount": 369,
+        "wordCount": 370,
         "sourceCount": 2,
         "maxSourceWordCount": 365,
         "sourceCounts": [
@@ -19095,7 +19091,7 @@
       },
       {
         "chapterNumber": 75,
-        "wordCount": 216,
+        "wordCount": 217,
         "sourceCount": 2,
         "maxSourceWordCount": 197,
         "sourceCounts": [
@@ -19117,7 +19113,7 @@
       },
       {
         "chapterNumber": 76,
-        "wordCount": 200,
+        "wordCount": 201,
         "sourceCount": 2,
         "maxSourceWordCount": 184,
         "sourceCounts": [
@@ -19139,7 +19135,7 @@
       },
       {
         "chapterNumber": 77,
-        "wordCount": 328,
+        "wordCount": 329,
         "sourceCount": 2,
         "maxSourceWordCount": 319,
         "sourceCounts": [
@@ -19161,7 +19157,7 @@
       },
       {
         "chapterNumber": 78,
-        "wordCount": 1186,
+        "wordCount": 1187,
         "sourceCount": 2,
         "maxSourceWordCount": 1182,
         "sourceCounts": [
@@ -19183,7 +19179,7 @@
       },
       {
         "chapterNumber": 79,
-        "wordCount": 278,
+        "wordCount": 279,
         "sourceCount": 2,
         "maxSourceWordCount": 274,
         "sourceCounts": [
@@ -19205,7 +19201,7 @@
       },
       {
         "chapterNumber": 80,
-        "wordCount": 351,
+        "wordCount": 352,
         "sourceCount": 2,
         "maxSourceWordCount": 333,
         "sourceCounts": [
@@ -19227,7 +19223,7 @@
       },
       {
         "chapterNumber": 81,
-        "wordCount": 301,
+        "wordCount": 302,
         "sourceCount": 2,
         "maxSourceWordCount": 286,
         "sourceCounts": [
@@ -19249,7 +19245,7 @@
       },
       {
         "chapterNumber": 82,
-        "wordCount": 124,
+        "wordCount": 125,
         "sourceCount": 2,
         "maxSourceWordCount": 120,
         "sourceCounts": [
@@ -19271,7 +19267,7 @@
       },
       {
         "chapterNumber": 83,
-        "wordCount": 268,
+        "wordCount": 269,
         "sourceCount": 2,
         "maxSourceWordCount": 262,
         "sourceCounts": [
@@ -19293,7 +19289,7 @@
       },
       {
         "chapterNumber": 84,
-        "wordCount": 281,
+        "wordCount": 282,
         "sourceCount": 2,
         "maxSourceWordCount": 263,
         "sourceCounts": [
@@ -19315,7 +19311,7 @@
       },
       {
         "chapterNumber": 85,
-        "wordCount": 204,
+        "wordCount": 205,
         "sourceCount": 2,
         "maxSourceWordCount": 193,
         "sourceCounts": [
@@ -19337,7 +19333,7 @@
       },
       {
         "chapterNumber": 86,
-        "wordCount": 306,
+        "wordCount": 307,
         "sourceCount": 2,
         "maxSourceWordCount": 302,
         "sourceCounts": [
@@ -19359,7 +19355,7 @@
       },
       {
         "chapterNumber": 87,
-        "wordCount": 125,
+        "wordCount": 126,
         "sourceCount": 2,
         "maxSourceWordCount": 116,
         "sourceCounts": [
@@ -19381,7 +19377,7 @@
       },
       {
         "chapterNumber": 88,
-        "wordCount": 322,
+        "wordCount": 323,
         "sourceCount": 2,
         "maxSourceWordCount": 293,
         "sourceCounts": [
@@ -19403,7 +19399,7 @@
       },
       {
         "chapterNumber": 89,
-        "wordCount": 822,
+        "wordCount": 823,
         "sourceCount": 2,
         "maxSourceWordCount": 816,
         "sourceCounts": [
@@ -19425,7 +19421,7 @@
       },
       {
         "chapterNumber": 90,
-        "wordCount": 288,
+        "wordCount": 289,
         "sourceCount": 2,
         "maxSourceWordCount": 280,
         "sourceCounts": [
@@ -19447,7 +19443,7 @@
       },
       {
         "chapterNumber": 91,
-        "wordCount": 271,
+        "wordCount": 272,
         "sourceCount": 1,
         "maxSourceWordCount": 271,
         "sourceCounts": [
@@ -19457,15 +19453,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 271,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 271
         }
       },
       {
         "chapterNumber": 92,
-        "wordCount": 240,
+        "wordCount": 241,
         "sourceCount": 2,
         "maxSourceWordCount": 229,
         "sourceCounts": [
@@ -19479,15 +19475,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 240,
+          "narrator": 11,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 229
         }
       },
       {
         "chapterNumber": 93,
-        "wordCount": 102,
+        "wordCount": 103,
         "sourceCount": 1,
         "maxSourceWordCount": 102,
         "sourceCounts": [
@@ -19497,15 +19493,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 102,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 102
         }
       },
       {
         "chapterNumber": 94,
-        "wordCount": 335,
+        "wordCount": 336,
         "sourceCount": 1,
         "maxSourceWordCount": 335,
         "sourceCounts": [
@@ -19515,15 +19511,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 335,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 335
         }
       },
       {
         "chapterNumber": 95,
-        "wordCount": 198,
+        "wordCount": 199,
         "sourceCount": 1,
         "maxSourceWordCount": 198,
         "sourceCounts": [
@@ -19533,15 +19529,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 198,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 198
         }
       },
       {
         "chapterNumber": 96,
-        "wordCount": 222,
+        "wordCount": 223,
         "sourceCount": 1,
         "maxSourceWordCount": 222,
         "sourceCounts": [
@@ -19551,15 +19547,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 222,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 222
         }
       },
       {
         "chapterNumber": 97,
-        "wordCount": 182,
+        "wordCount": 183,
         "sourceCount": 1,
         "maxSourceWordCount": 182,
         "sourceCounts": [
@@ -19569,15 +19565,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 182,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 182
         }
       },
       {
         "chapterNumber": 98,
-        "wordCount": 178,
+        "wordCount": 179,
         "sourceCount": 2,
         "maxSourceWordCount": 176,
         "sourceCounts": [
@@ -19591,15 +19587,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 178,
+          "narrator": 2,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 176
         }
       },
       {
         "chapterNumber": 99,
-        "wordCount": 162,
+        "wordCount": 163,
         "sourceCount": 1,
         "maxSourceWordCount": 162,
         "sourceCounts": [
@@ -19609,15 +19605,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 162,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 162
         }
       },
       {
         "chapterNumber": 100,
-        "wordCount": 82,
+        "wordCount": 83,
         "sourceCount": 2,
         "maxSourceWordCount": 78,
         "sourceCounts": [
@@ -19631,15 +19627,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 82,
+          "narrator": 4,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 78
         }
       },
       {
         "chapterNumber": 101,
-        "wordCount": 157,
+        "wordCount": 158,
         "sourceCount": 2,
         "maxSourceWordCount": 153,
         "sourceCounts": [
@@ -19661,7 +19657,7 @@
       },
       {
         "chapterNumber": 102,
-        "wordCount": 442,
+        "wordCount": 443,
         "sourceCount": 2,
         "maxSourceWordCount": 429,
         "sourceCounts": [
@@ -19675,15 +19671,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 442,
+          "narrator": 13,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 429
         }
       },
       {
         "chapterNumber": 103,
-        "wordCount": 346,
+        "wordCount": 347,
         "sourceCount": 2,
         "maxSourceWordCount": 342,
         "sourceCounts": [
@@ -19705,7 +19701,7 @@
       },
       {
         "chapterNumber": 104,
-        "wordCount": 580,
+        "wordCount": 581,
         "sourceCount": 1,
         "maxSourceWordCount": 580,
         "sourceCounts": [
@@ -19715,15 +19711,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 580,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 580
         }
       },
       {
         "chapterNumber": 105,
-        "wordCount": 663,
+        "wordCount": 664,
         "sourceCount": 1,
         "maxSourceWordCount": 663,
         "sourceCounts": [
@@ -19733,15 +19729,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 663,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 663
         }
       },
       {
         "chapterNumber": 106,
-        "wordCount": 767,
+        "wordCount": 768,
         "sourceCount": 1,
         "maxSourceWordCount": 767,
         "sourceCounts": [
@@ -19751,15 +19747,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 767,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 767
         }
       },
       {
         "chapterNumber": 107,
-        "wordCount": 621,
+        "wordCount": 622,
         "sourceCount": 1,
         "maxSourceWordCount": 621,
         "sourceCounts": [
@@ -19769,15 +19765,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 621,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 621
         }
       },
       {
         "chapterNumber": 108,
-        "wordCount": 221,
+        "wordCount": 222,
         "sourceCount": 2,
         "maxSourceWordCount": 215,
         "sourceCounts": [
@@ -19799,7 +19795,7 @@
       },
       {
         "chapterNumber": 109,
-        "wordCount": 495,
+        "wordCount": 496,
         "sourceCount": 2,
         "maxSourceWordCount": 487,
         "sourceCounts": [
@@ -19821,7 +19817,7 @@
       },
       {
         "chapterNumber": 110,
-        "wordCount": 152,
+        "wordCount": 153,
         "sourceCount": 2,
         "maxSourceWordCount": 148,
         "sourceCounts": [
@@ -19843,7 +19839,7 @@
       },
       {
         "chapterNumber": 111,
-        "wordCount": 163,
+        "wordCount": 164,
         "sourceCount": 1,
         "maxSourceWordCount": 163,
         "sourceCounts": [
@@ -19853,15 +19849,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 163,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 163
         }
       },
       {
         "chapterNumber": 112,
-        "wordCount": 158,
+        "wordCount": 159,
         "sourceCount": 1,
         "maxSourceWordCount": 158,
         "sourceCounts": [
@@ -19871,15 +19867,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 158,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 158
         }
       },
       {
         "chapterNumber": 113,
-        "wordCount": 118,
+        "wordCount": 119,
         "sourceCount": 1,
         "maxSourceWordCount": 118,
         "sourceCounts": [
@@ -19889,15 +19885,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 118,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 118
         }
       },
       {
         "chapterNumber": 114,
-        "wordCount": 124,
+        "wordCount": 125,
         "sourceCount": 1,
         "maxSourceWordCount": 124,
         "sourceCounts": [
@@ -19907,15 +19903,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 124,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 124
         }
       },
       {
         "chapterNumber": 115,
-        "wordCount": 258,
+        "wordCount": 259,
         "sourceCount": 1,
         "maxSourceWordCount": 258,
         "sourceCounts": [
@@ -19925,15 +19921,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 258,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 258
         }
       },
       {
         "chapterNumber": 116,
-        "wordCount": 281,
+        "wordCount": 282,
         "sourceCount": 1,
         "maxSourceWordCount": 281,
         "sourceCounts": [
@@ -19943,15 +19939,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 281,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 281
         }
       },
       {
         "chapterNumber": 117,
-        "wordCount": 30,
+        "wordCount": 31,
         "sourceCount": 1,
         "maxSourceWordCount": 30,
         "sourceCounts": [
@@ -19961,15 +19957,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 30,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 30
         }
       },
       {
         "chapterNumber": 118,
-        "wordCount": 450,
+        "wordCount": 451,
         "sourceCount": 1,
         "maxSourceWordCount": 450,
         "sourceCounts": [
@@ -19979,15 +19975,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 450,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 450
         }
       },
       {
         "chapterNumber": 119,
-        "wordCount": 2362,
+        "wordCount": 2363,
         "sourceCount": 1,
         "maxSourceWordCount": 2361,
         "sourceCounts": [
@@ -19997,15 +19993,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 2361,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 2361
         }
       },
       {
         "chapterNumber": 120,
-        "wordCount": 100,
+        "wordCount": 101,
         "sourceCount": 2,
         "maxSourceWordCount": 93,
         "sourceCounts": [
@@ -20019,15 +20015,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 100,
+          "narrator": 7,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 93
         }
       },
       {
         "chapterNumber": 121,
-        "wordCount": 110,
+        "wordCount": 111,
         "sourceCount": 2,
         "maxSourceWordCount": 103,
         "sourceCounts": [
@@ -20041,15 +20037,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 110,
+          "narrator": 7,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 103
         }
       },
       {
         "chapterNumber": 122,
-        "wordCount": 158,
+        "wordCount": 159,
         "sourceCount": 2,
         "maxSourceWordCount": 147,
         "sourceCounts": [
@@ -20071,7 +20067,7 @@
       },
       {
         "chapterNumber": 123,
-        "wordCount": 83,
+        "wordCount": 84,
         "sourceCount": 2,
         "maxSourceWordCount": 76,
         "sourceCounts": [
@@ -20085,15 +20081,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 83,
+          "narrator": 7,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 76
         }
       },
       {
         "chapterNumber": 124,
-        "wordCount": 115,
+        "wordCount": 116,
         "sourceCount": 2,
         "maxSourceWordCount": 104,
         "sourceCounts": [
@@ -20115,7 +20111,7 @@
       },
       {
         "chapterNumber": 125,
-        "wordCount": 102,
+        "wordCount": 103,
         "sourceCount": 2,
         "maxSourceWordCount": 95,
         "sourceCounts": [
@@ -20129,15 +20125,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 102,
+          "narrator": 7,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 95
         }
       },
       {
         "chapterNumber": 126,
-        "wordCount": 94,
+        "wordCount": 95,
         "sourceCount": 2,
         "maxSourceWordCount": 87,
         "sourceCounts": [
@@ -20151,15 +20147,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 94,
+          "narrator": 7,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 87
         }
       },
       {
         "chapterNumber": 127,
-        "wordCount": 122,
+        "wordCount": 123,
         "sourceCount": 2,
         "maxSourceWordCount": 111,
         "sourceCounts": [
@@ -20181,7 +20177,7 @@
       },
       {
         "chapterNumber": 128,
-        "wordCount": 102,
+        "wordCount": 103,
         "sourceCount": 2,
         "maxSourceWordCount": 95,
         "sourceCounts": [
@@ -20195,15 +20191,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 102,
+          "narrator": 7,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 95
         }
       },
       {
         "chapterNumber": 129,
-        "wordCount": 125,
+        "wordCount": 126,
         "sourceCount": 2,
         "maxSourceWordCount": 118,
         "sourceCounts": [
@@ -20217,15 +20213,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 125,
+          "narrator": 7,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 118
         }
       },
       {
         "chapterNumber": 130,
-        "wordCount": 122,
+        "wordCount": 123,
         "sourceCount": 2,
         "maxSourceWordCount": 115,
         "sourceCounts": [
@@ -20239,15 +20235,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 122,
+          "narrator": 7,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 115
         }
       },
       {
         "chapterNumber": 131,
-        "wordCount": 79,
+        "wordCount": 80,
         "sourceCount": 2,
         "maxSourceWordCount": 68,
         "sourceCounts": [
@@ -20269,7 +20265,7 @@
       },
       {
         "chapterNumber": 132,
-        "wordCount": 301,
+        "wordCount": 302,
         "sourceCount": 2,
         "maxSourceWordCount": 294,
         "sourceCounts": [
@@ -20283,15 +20279,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 301,
+          "narrator": 7,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 294
         }
       },
       {
         "chapterNumber": 133,
-        "wordCount": 79,
+        "wordCount": 80,
         "sourceCount": 2,
         "maxSourceWordCount": 68,
         "sourceCounts": [
@@ -20313,7 +20309,7 @@
       },
       {
         "chapterNumber": 134,
-        "wordCount": 50,
+        "wordCount": 51,
         "sourceCount": 2,
         "maxSourceWordCount": 43,
         "sourceCounts": [
@@ -20327,15 +20323,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 50,
+          "narrator": 7,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 43
         }
       },
       {
         "chapterNumber": 135,
-        "wordCount": 311,
+        "wordCount": 312,
         "sourceCount": 1,
         "maxSourceWordCount": 311,
         "sourceCounts": [
@@ -20345,15 +20341,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 311,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 311
         }
       },
       {
         "chapterNumber": 136,
-        "wordCount": 334,
+        "wordCount": 335,
         "sourceCount": 1,
         "maxSourceWordCount": 334,
         "sourceCounts": [
@@ -20363,15 +20359,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 334,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 334
         }
       },
       {
         "chapterNumber": 137,
-        "wordCount": 166,
+        "wordCount": 167,
         "sourceCount": 1,
         "maxSourceWordCount": 166,
         "sourceCounts": [
@@ -20381,15 +20377,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 166,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 166
         }
       },
       {
         "chapterNumber": 138,
-        "wordCount": 178,
+        "wordCount": 179,
         "sourceCount": 2,
         "maxSourceWordCount": 174,
         "sourceCounts": [
@@ -20411,7 +20407,7 @@
       },
       {
         "chapterNumber": 139,
-        "wordCount": 411,
+        "wordCount": 412,
         "sourceCount": 2,
         "maxSourceWordCount": 403,
         "sourceCounts": [
@@ -20433,7 +20429,7 @@
       },
       {
         "chapterNumber": 140,
-        "wordCount": 243,
+        "wordCount": 244,
         "sourceCount": 2,
         "maxSourceWordCount": 235,
         "sourceCounts": [
@@ -20455,7 +20451,7 @@
       },
       {
         "chapterNumber": 141,
-        "wordCount": 196,
+        "wordCount": 197,
         "sourceCount": 2,
         "maxSourceWordCount": 192,
         "sourceCounts": [
@@ -20477,7 +20473,7 @@
       },
       {
         "chapterNumber": 142,
-        "wordCount": 156,
+        "wordCount": 157,
         "sourceCount": 2,
         "maxSourceWordCount": 144,
         "sourceCounts": [
@@ -20499,7 +20495,7 @@
       },
       {
         "chapterNumber": 143,
-        "wordCount": 226,
+        "wordCount": 227,
         "sourceCount": 2,
         "maxSourceWordCount": 222,
         "sourceCounts": [
@@ -20521,7 +20517,7 @@
       },
       {
         "chapterNumber": 144,
-        "wordCount": 306,
+        "wordCount": 307,
         "sourceCount": 2,
         "maxSourceWordCount": 302,
         "sourceCounts": [
@@ -20543,7 +20539,7 @@
       },
       {
         "chapterNumber": 145,
-        "wordCount": 332,
+        "wordCount": 333,
         "sourceCount": 2,
         "maxSourceWordCount": 326,
         "sourceCounts": [
@@ -20565,7 +20561,7 @@
       },
       {
         "chapterNumber": 146,
-        "wordCount": 179,
+        "wordCount": 180,
         "sourceCount": 1,
         "maxSourceWordCount": 179,
         "sourceCounts": [
@@ -20575,15 +20571,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 179,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 179
         }
       },
       {
         "chapterNumber": 147,
-        "wordCount": 283,
+        "wordCount": 284,
         "sourceCount": 1,
         "maxSourceWordCount": 283,
         "sourceCounts": [
@@ -20593,15 +20589,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 283,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 283
         }
       },
       {
         "chapterNumber": 148,
-        "wordCount": 191,
+        "wordCount": 192,
         "sourceCount": 1,
         "maxSourceWordCount": 191,
         "sourceCounts": [
@@ -20611,15 +20607,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 191,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 191
         }
       },
       {
         "chapterNumber": 149,
-        "wordCount": 133,
+        "wordCount": 134,
         "sourceCount": 1,
         "maxSourceWordCount": 133,
         "sourceCounts": [
@@ -20629,15 +20625,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 133,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 133
         }
       },
       {
         "chapterNumber": 150,
-        "wordCount": 79,
+        "wordCount": 80,
         "sourceCount": 1,
         "maxSourceWordCount": 79,
         "sourceCounts": [
@@ -20647,15 +20643,15 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 79,
+          "narrator": 0,
           "god": 0,
           "lead": 0,
-          "support": 0
+          "support": 79
         }
       }
     ],
-    "wordCount": 42380,
-    "maxChapterWordCount": 2362,
+    "wordCount": 42530,
+    "maxChapterWordCount": 2363,
     "sourceCount": 8,
     "maxSourceWordCount": 18721,
     "sourceCounts": [
@@ -20693,10 +20689,10 @@
       }
     ],
     "sourceTypeCounts": {
-      "narrator": 14999,
+      "narrator": 1254,
       "god": 0,
       "lead": 18721,
-      "support": 8659
+      "support": 22404
     },
     "principalSphere": "education",
     "words": [
@@ -20719,6 +20715,10 @@
       {
         "word": "love",
         "wordCount": 159
+      },
+      {
+        "word": "Psalm",
+        "wordCount": 150
       },
       {
         "word": "enemies",
@@ -20775,10 +20775,6 @@
       {
         "word": "joy",
         "wordCount": 73
-      },
-      {
-        "word": "heart",
-        "wordCount": 72
       }
     ]
   },
@@ -21472,7 +21468,7 @@
       "lead": 7696,
       "support": 2887
     },
-    "principalSphere": "government",
+    "principalSphere": "religion",
     "words": [
       {
         "word": "Lord",
@@ -21856,7 +21852,7 @@
       "lead": 197,
       "support": 65
     },
-    "principalSphere": "education",
+    "principalSphere": "economics",
     "words": [
       {
         "word": "people",
@@ -22172,7 +22168,7 @@
       "lead": 1344,
       "support": 912
     },
-    "principalSphere": "celebration",
+    "principalSphere": "family",
     "words": [
       {
         "word": "love",
@@ -23984,7 +23980,7 @@
       "lead": 1190,
       "support": 2765
     },
-    "principalSphere": "education",
+    "principalSphere": "religion",
     "words": [
       {
         "word": "Lord",
@@ -24995,13 +24991,13 @@
       },
       {
         "chapterNumber": 36,
-        "wordCount": 884,
+        "wordCount": 887,
         "sourceCount": 5,
-        "maxSourceWordCount": 530,
+        "maxSourceWordCount": 533,
         "sourceCounts": [
           {
             "name": "The Narrator",
-            "wordCount": 530
+            "wordCount": 533
           },
           {
             "name": "God",
@@ -25016,12 +25012,12 @@
             "wordCount": 45
           },
           {
-            "name": "Baruch son of Neriah",
+            "name": "Baruch Son of Neriah",
             "wordCount": 16
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 530,
+          "narrator": 533,
           "god": 207,
           "lead": 86,
           "support": 61
@@ -25054,7 +25050,7 @@
             "wordCount": 8
           },
           {
-            "name": "Irijah son of Shelemiah",
+            "name": "Irijah Son of Shelemiah",
             "wordCount": 6
           }
         ],
@@ -25144,7 +25140,7 @@
             "wordCount": 82
           },
           {
-            "name": "Johanan son of Kareah",
+            "name": "Johanan Son of Kareah",
             "wordCount": 33
           },
           {
@@ -25161,21 +25157,21 @@
       },
       {
         "chapterNumber": 41,
-        "wordCount": 448,
+        "wordCount": 449,
         "sourceCount": 2,
-        "maxSourceWordCount": 439,
+        "maxSourceWordCount": 440,
         "sourceCounts": [
           {
             "name": "The Narrator",
-            "wordCount": 439
+            "wordCount": 440
           },
           {
-            "name": "Ishmael son of Nethaniah",
+            "name": "Ishmael Son of Nethaniah",
             "wordCount": 9
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 439,
+          "narrator": 440,
           "god": 0,
           "lead": 0,
           "support": 9
@@ -25452,7 +25448,7 @@
         }
       }
     ],
-    "wordCount": 38800,
+    "wordCount": 38804,
     "maxChapterWordCount": 1697,
     "sourceCount": 31,
     "maxSourceWordCount": 22264,
@@ -25463,7 +25459,7 @@
       },
       {
         "name": "The Narrator",
-        "wordCount": 10544
+        "wordCount": 10548
       },
       {
         "name": "Jeremiah",
@@ -25522,11 +25518,11 @@
         "wordCount": 43
       },
       {
-        "name": "Idolatrous Women",
+        "name": "Priests, Prophets, People",
         "wordCount": 37
       },
       {
-        "name": "Priests, Prophets, People",
+        "name": "Idolatrous Women",
         "wordCount": 37
       },
       {
@@ -25534,7 +25530,7 @@
         "wordCount": 36
       },
       {
-        "name": "Johanan son of Kareah",
+        "name": "Johanan Son of Kareah",
         "wordCount": 33
       },
       {
@@ -25558,7 +25554,7 @@
         "wordCount": 16
       },
       {
-        "name": "Baruch son of Neriah",
+        "name": "Baruch Son of Neriah",
         "wordCount": 16
       },
       {
@@ -25566,15 +25562,15 @@
         "wordCount": 13
       },
       {
+        "name": "Ishmael Son of Nethaniah",
+        "wordCount": 9
+      },
+      {
         "name": "Jehucal & Zephaniah",
         "wordCount": 9
       },
       {
-        "name": "Ishmael son of Nethaniah",
-        "wordCount": 9
-      },
-      {
-        "name": "Irijah son of Shelemiah",
+        "name": "Irijah Son of Shelemiah",
         "wordCount": 6
       },
       {
@@ -25583,12 +25579,12 @@
       }
     ],
     "sourceTypeCounts": {
-      "narrator": 10544,
+      "narrator": 10548,
       "god": 22264,
       "lead": 4032,
       "support": 1960
     },
-    "principalSphere": "government",
+    "principalSphere": "family",
     "words": [
       {
         "word": "Lord",
@@ -25683,15 +25679,15 @@
         "chapterNumber": 1,
         "wordCount": 736,
         "sourceCount": 3,
-        "maxSourceWordCount": 350,
+        "maxSourceWordCount": 371,
         "sourceCounts": [
+          {
+            "name": "The Narrator",
+            "wordCount": 371
+          },
           {
             "name": "Jerusalem",
             "wordCount": 350
-          },
-          {
-            "name": "The Narrator",
-            "wordCount": 71
           },
           {
             "name": "God",
@@ -25699,7 +25695,7 @@
           }
         ],
         "sourceTypeCounts": {
-          "narrator": 71,
+          "narrator": 371,
           "god": 15,
           "lead": 350,
           "support": 0
@@ -25854,7 +25850,7 @@
       "lead": 531,
       "support": 87
     },
-    "principalSphere": "celebration",
+    "principalSphere": "communication",
     "words": [
       {
         "word": "Lord",
@@ -27039,7 +27035,7 @@
       "lead": 254,
       "support": 16
     },
-    "principalSphere": "education",
+    "principalSphere": "economics",
     "words": [
       {
         "word": "Lord",
@@ -27551,7 +27547,7 @@
       "lead": 2403,
       "support": 3315
     },
-    "principalSphere": "economics",
+    "principalSphere": "education",
     "words": [
       {
         "word": "king",
@@ -27999,7 +27995,7 @@
       "lead": 107,
       "support": 112
     },
-    "principalSphere": "government",
+    "principalSphere": "economics",
     "words": [
       {
         "word": "Israel",
@@ -28178,7 +28174,7 @@
       "lead": 0,
       "support": 34
     },
-    "principalSphere": "communication",
+    "principalSphere": "education",
     "words": [
       {
         "word": "Lord",
@@ -28556,7 +28552,7 @@
       "lead": 231,
       "support": 120
     },
-    "principalSphere": "religion",
+    "principalSphere": "government",
     "words": [
       {
         "word": "Lord",
@@ -28698,7 +28694,7 @@
       "lead": 11,
       "support": 0
     },
-    "principalSphere": "government",
+    "principalSphere": "education",
     "words": [
       {
         "word": "Edom",
@@ -28938,7 +28934,7 @@
       "lead": 326,
       "support": 171
     },
-    "principalSphere": "economics",
+    "principalSphere": "religion",
     "words": [
       {
         "word": "Lord",
@@ -29260,7 +29256,7 @@
       "lead": 0,
       "support": 211
     },
-    "principalSphere": "communication",
+    "principalSphere": "family",
     "words": [
       {
         "word": "Lord",
@@ -29446,7 +29442,7 @@
       "lead": 0,
       "support": 2
     },
-    "principalSphere": "family",
+    "principalSphere": "communication",
     "words": [
       {
         "word": "Nineveh",
@@ -29636,7 +29632,7 @@
       "lead": 685,
       "support": 0
     },
-    "principalSphere": "education",
+    "principalSphere": "family",
     "words": [
       {
         "word": "Lord",
@@ -29830,7 +29826,7 @@
       "lead": 46,
       "support": 11
     },
-    "principalSphere": "religion",
+    "principalSphere": "communication",
     "words": [
       {
         "word": "Lord",
@@ -30002,7 +29998,7 @@
       "lead": 186,
       "support": 2
     },
-    "principalSphere": "family",
+    "principalSphere": "government",
     "words": [
       {
         "word": "Lord",
@@ -30486,7 +30482,7 @@
       "lead": 189,
       "support": 583
     },
-    "principalSphere": "economics",
+    "principalSphere": "religion",
     "words": [
       {
         "word": "Lord",
@@ -30706,7 +30702,7 @@
       "lead": 0,
       "support": 35
     },
-    "principalSphere": "economics",
+    "principalSphere": "celebration",
     "words": [
       {
         "word": "Lord",
@@ -31922,7 +31918,7 @@
       "lead": 503,
       "support": 1990
     },
-    "principalSphere": "communication",
+    "principalSphere": "economics",
     "words": [
       {
         "word": "Jesus",
@@ -32858,7 +32854,7 @@
       "lead": 412,
       "support": 1376
     },
-    "principalSphere": "family",
+    "principalSphere": "religion",
     "words": [
       {
         "word": "Jesus",
@@ -34178,7 +34174,7 @@
       "lead": 354,
       "support": 2938
     },
-    "principalSphere": "economics",
+    "principalSphere": "communication",
     "words": [
       {
         "word": "Jesus",
@@ -34499,7 +34495,7 @@
       },
       {
         "chapterNumber": 7,
-        "wordCount": 1078,
+        "wordCount": 1069,
         "sourceCount": 8,
         "maxSourceWordCount": 396,
         "sourceCounts": [
@@ -34521,7 +34517,7 @@
           },
           {
             "name": "The Pharisees",
-            "wordCount": 65
+            "wordCount": 56
           },
           {
             "name": "Jesus’ Family",
@@ -34540,7 +34536,7 @@
           "narrator": 396,
           "god": 335,
           "lead": 0,
-          "support": 347
+          "support": 338
         }
       },
       {
@@ -35052,7 +35048,7 @@
         }
       }
     ],
-    "wordCount": 18665,
+    "wordCount": 18656,
     "maxChapterWordCount": 1397,
     "sourceCount": 48,
     "maxSourceWordCount": 8220,
@@ -35095,7 +35091,7 @@
       },
       {
         "name": "The Pharisees",
-        "wordCount": 133
+        "wordCount": 124
       },
       {
         "name": "Simon Peter",
@@ -35254,7 +35250,7 @@
       "narrator": 7196,
       "god": 8234,
       "lead": 457,
-      "support": 2778
+      "support": 2769
     },
     "principalSphere": "communication",
     "words": [
@@ -36620,7 +36616,7 @@
       "lead": 6140,
       "support": 4555
     },
-    "principalSphere": "economics",
+    "principalSphere": "education",
     "words": [
       {
         "word": "God",
@@ -36714,13 +36710,16 @@
       {
         "chapterNumber": 1,
         "wordCount": 833,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 833,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 833
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 833,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -36729,13 +36728,16 @@
       {
         "chapterNumber": 2,
         "wordCount": 720,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 720,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 720
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 720,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -36744,13 +36746,16 @@
       {
         "chapterNumber": 3,
         "wordCount": 698,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 698,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 698
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 698,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -36759,13 +36764,16 @@
       {
         "chapterNumber": 4,
         "wordCount": 645,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 645,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 645
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 645,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -36774,13 +36782,16 @@
       {
         "chapterNumber": 5,
         "wordCount": 608,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 608,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 608
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 608,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -36789,13 +36800,16 @@
       {
         "chapterNumber": 6,
         "wordCount": 571,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 571,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 571
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 571,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -36804,13 +36818,16 @@
       {
         "chapterNumber": 7,
         "wordCount": 714,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 714,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 714
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 714,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -36819,13 +36836,16 @@
       {
         "chapterNumber": 8,
         "wordCount": 1083,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 1083,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 1083
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 1083,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -36834,13 +36854,16 @@
       {
         "chapterNumber": 9,
         "wordCount": 850,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 850,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 850
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 850,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -36849,13 +36872,16 @@
       {
         "chapterNumber": 10,
         "wordCount": 527,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 527,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 527
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 527,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -36864,13 +36890,16 @@
       {
         "chapterNumber": 11,
         "wordCount": 1021,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 1021,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 1021
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 1021,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -36879,13 +36908,16 @@
       {
         "chapterNumber": 12,
         "wordCount": 489,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 489,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 489
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 489,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -36894,13 +36926,16 @@
       {
         "chapterNumber": 13,
         "wordCount": 400,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 400,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 400
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 400,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -36909,13 +36944,16 @@
       {
         "chapterNumber": 14,
         "wordCount": 627,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 627,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 627
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 627,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -36924,13 +36962,16 @@
       {
         "chapterNumber": 15,
         "wordCount": 881,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 881,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 881
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 881,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -36939,13 +36980,16 @@
       {
         "chapterNumber": 16,
         "wordCount": 582,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 582,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 582
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 582,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -36954,18 +36998,21 @@
     ],
     "wordCount": 11249,
     "maxChapterWordCount": 1083,
-    "sourceCount": 0,
-    "maxSourceWordCount": 0,
+    "sourceCount": 1,
+    "maxSourceWordCount": 11249,
     "sourceCounts": [
-
+      {
+        "name": "The Narrator",
+        "wordCount": 11249
+      }
     ],
     "sourceTypeCounts": {
-      "narrator": 0,
+      "narrator": 11249,
       "god": 0,
       "lead": 0,
       "support": 0
     },
-    "principalSphere": "communication",
+    "principalSphere": "family",
     "words": [
       {
         "word": "God",
@@ -37059,13 +37106,16 @@
       {
         "chapterNumber": 1,
         "wordCount": 738,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 738,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 738
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 738,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37074,13 +37124,16 @@
       {
         "chapterNumber": 2,
         "wordCount": 410,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 410,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 410
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 410,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37089,13 +37142,16 @@
       {
         "chapterNumber": 3,
         "wordCount": 538,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 538,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 538
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 538,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37104,13 +37160,16 @@
       {
         "chapterNumber": 4,
         "wordCount": 586,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 586,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 586
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 586,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37119,13 +37178,16 @@
       {
         "chapterNumber": 5,
         "wordCount": 388,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 388,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 388
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 388,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37134,13 +37196,16 @@
       {
         "chapterNumber": 6,
         "wordCount": 536,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 536,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 536
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 536,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37149,13 +37214,16 @@
       {
         "chapterNumber": 7,
         "wordCount": 1098,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 1098,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 1098
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 1098,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37164,13 +37232,16 @@
       {
         "chapterNumber": 8,
         "wordCount": 357,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 357,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 357
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 357,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37179,13 +37250,16 @@
       {
         "chapterNumber": 9,
         "wordCount": 761,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 761,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 761
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 761,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37194,13 +37268,16 @@
       {
         "chapterNumber": 10,
         "wordCount": 725,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 725,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 725
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 725,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37209,13 +37286,16 @@
       {
         "chapterNumber": 11,
         "wordCount": 787,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 787,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 787
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 787,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37224,13 +37304,16 @@
       {
         "chapterNumber": 12,
         "wordCount": 736,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 736,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 736
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 736,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37239,13 +37322,16 @@
       {
         "chapterNumber": 13,
         "wordCount": 295,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 295,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 295
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 295,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37254,13 +37340,16 @@
       {
         "chapterNumber": 14,
         "wordCount": 998,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 998,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 998
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 998,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37269,13 +37358,16 @@
       {
         "chapterNumber": 15,
         "wordCount": 1337,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 1337,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 1337
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 1337,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37284,13 +37376,16 @@
       {
         "chapterNumber": 16,
         "wordCount": 488,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 488,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 488
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 488,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37299,18 +37394,21 @@
     ],
     "wordCount": 10778,
     "maxChapterWordCount": 1337,
-    "sourceCount": 0,
-    "maxSourceWordCount": 0,
+    "sourceCount": 1,
+    "maxSourceWordCount": 10778,
     "sourceCounts": [
-
+      {
+        "name": "The Narrator",
+        "wordCount": 10778
+      }
     ],
     "sourceTypeCounts": {
-      "narrator": 0,
+      "narrator": 10778,
       "god": 0,
       "lead": 0,
       "support": 0
     },
-    "principalSphere": "government",
+    "principalSphere": "religion",
     "words": [
       {
         "word": "God",
@@ -37404,13 +37502,16 @@
       {
         "chapterNumber": 1,
         "wordCount": 696,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 696,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 696
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 696,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37419,13 +37520,16 @@
       {
         "chapterNumber": 2,
         "wordCount": 429,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 429,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 429
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 429,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37434,13 +37538,16 @@
       {
         "chapterNumber": 3,
         "wordCount": 483,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 483,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 483
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 483,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37449,13 +37556,16 @@
       {
         "chapterNumber": 4,
         "wordCount": 488,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 488,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 488
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 488,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37464,13 +37574,16 @@
       {
         "chapterNumber": 5,
         "wordCount": 561,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 561,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 561
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 561,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37479,13 +37592,16 @@
       {
         "chapterNumber": 6,
         "wordCount": 435,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 435,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 435
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 435,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37494,13 +37610,16 @@
       {
         "chapterNumber": 7,
         "wordCount": 504,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 504,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 504
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 504,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37509,13 +37628,16 @@
       {
         "chapterNumber": 8,
         "wordCount": 625,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 625,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 625
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 625,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37524,13 +37646,16 @@
       {
         "chapterNumber": 9,
         "wordCount": 426,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 426,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 426
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 426,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37539,13 +37664,16 @@
       {
         "chapterNumber": 10,
         "wordCount": 475,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 475,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 475
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 475,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37554,13 +37682,16 @@
       {
         "chapterNumber": 11,
         "wordCount": 804,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 804,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 804
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 804,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37569,13 +37700,16 @@
       {
         "chapterNumber": 12,
         "wordCount": 643,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 643,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 643
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 643,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37584,13 +37718,16 @@
       {
         "chapterNumber": 13,
         "wordCount": 391,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 391,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 391
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 391,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37599,18 +37736,21 @@
     ],
     "wordCount": 6960,
     "maxChapterWordCount": 804,
-    "sourceCount": 0,
-    "maxSourceWordCount": 0,
+    "sourceCount": 1,
+    "maxSourceWordCount": 6960,
     "sourceCounts": [
-
+      {
+        "name": "The Narrator",
+        "wordCount": 6960
+      }
     ],
     "sourceTypeCounts": {
-      "narrator": 0,
+      "narrator": 6960,
       "god": 0,
       "lead": 0,
       "support": 0
     },
-    "principalSphere": "government",
+    "principalSphere": "celebration",
     "words": [
       {
         "word": "God",
@@ -37704,13 +37844,16 @@
       {
         "chapterNumber": 1,
         "wordCount": 523,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 523,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 523
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 523,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37719,13 +37862,16 @@
       {
         "chapterNumber": 2,
         "wordCount": 709,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 709,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 709
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 709,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37734,13 +37880,16 @@
       {
         "chapterNumber": 3,
         "wordCount": 847,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 847,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 847
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 847,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37749,13 +37898,16 @@
       {
         "chapterNumber": 4,
         "wordCount": 803,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 803,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 803
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 803,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37764,13 +37916,16 @@
       {
         "chapterNumber": 5,
         "wordCount": 599,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 599,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 599
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 599,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37779,13 +37934,16 @@
       {
         "chapterNumber": 6,
         "wordCount": 439,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 439,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 439
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 439,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37794,13 +37952,16 @@
     ],
     "wordCount": 3920,
     "maxChapterWordCount": 847,
-    "sourceCount": 0,
-    "maxSourceWordCount": 0,
+    "sourceCount": 1,
+    "maxSourceWordCount": 3920,
     "sourceCounts": [
-
+      {
+        "name": "The Narrator",
+        "wordCount": 3920
+      }
     ],
     "sourceTypeCounts": {
-      "narrator": 0,
+      "narrator": 3920,
       "god": 0,
       "lead": 0,
       "support": 0
@@ -37899,13 +38060,16 @@
       {
         "chapterNumber": 1,
         "wordCount": 577,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 577,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 577
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 577,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37914,13 +38078,16 @@
       {
         "chapterNumber": 2,
         "wordCount": 595,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 595,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 595
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 595,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37929,13 +38096,16 @@
       {
         "chapterNumber": 3,
         "wordCount": 467,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 467,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 467
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 467,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37944,13 +38114,16 @@
       {
         "chapterNumber": 4,
         "wordCount": 673,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 673,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 673
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 673,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37959,13 +38132,16 @@
       {
         "chapterNumber": 5,
         "wordCount": 594,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 594,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 594
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 594,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37974,13 +38150,16 @@
       {
         "chapterNumber": 6,
         "wordCount": 545,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 545,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 545
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 545,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -37989,18 +38168,21 @@
     ],
     "wordCount": 3451,
     "maxChapterWordCount": 673,
-    "sourceCount": 0,
-    "maxSourceWordCount": 0,
+    "sourceCount": 1,
+    "maxSourceWordCount": 3451,
     "sourceCounts": [
-
+      {
+        "name": "The Narrator",
+        "wordCount": 3451
+      }
     ],
     "sourceTypeCounts": {
-      "narrator": 0,
+      "narrator": 3451,
       "god": 0,
       "lead": 0,
       "support": 0
     },
-    "principalSphere": "family",
+    "principalSphere": "religion",
     "words": [
       {
         "word": "God",
@@ -38094,13 +38276,16 @@
       {
         "chapterNumber": 1,
         "wordCount": 756,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 756,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 756
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 756,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -38109,13 +38294,16 @@
       {
         "chapterNumber": 2,
         "wordCount": 669,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 669,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 669
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 669,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -38124,13 +38312,16 @@
       {
         "chapterNumber": 3,
         "wordCount": 561,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 561,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 561
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 561,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -38139,13 +38330,16 @@
       {
         "chapterNumber": 4,
         "wordCount": 546,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 546,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 546
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 546,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -38154,13 +38348,16 @@
     ],
     "wordCount": 2532,
     "maxChapterWordCount": 756,
-    "sourceCount": 0,
-    "maxSourceWordCount": 0,
+    "sourceCount": 1,
+    "maxSourceWordCount": 2532,
     "sourceCounts": [
-
+      {
+        "name": "The Narrator",
+        "wordCount": 2532
+      }
     ],
     "sourceTypeCounts": {
-      "narrator": 0,
+      "narrator": 2532,
       "god": 0,
       "lead": 0,
       "support": 0
@@ -38259,13 +38456,16 @@
       {
         "chapterNumber": 1,
         "wordCount": 772,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 772,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 772
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 772,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -38274,13 +38474,16 @@
       {
         "chapterNumber": 2,
         "wordCount": 550,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 550,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 550
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 550,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -38289,13 +38492,16 @@
       {
         "chapterNumber": 3,
         "wordCount": 523,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 523,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 523
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 523,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -38304,13 +38510,16 @@
       {
         "chapterNumber": 4,
         "wordCount": 405,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 405,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 405
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 405,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -38319,18 +38528,21 @@
     ],
     "wordCount": 2250,
     "maxChapterWordCount": 772,
-    "sourceCount": 0,
-    "maxSourceWordCount": 0,
+    "sourceCount": 1,
+    "maxSourceWordCount": 2250,
     "sourceCounts": [
-
+      {
+        "name": "The Narrator",
+        "wordCount": 2250
+      }
     ],
     "sourceTypeCounts": {
-      "narrator": 0,
+      "narrator": 2250,
       "god": 0,
       "lead": 0,
       "support": 0
     },
-    "principalSphere": "government",
+    "principalSphere": "economics",
     "words": [
       {
         "word": "Christ",
@@ -38424,13 +38636,16 @@
       {
         "chapterNumber": 1,
         "wordCount": 306,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 306,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 306
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 306,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -38439,13 +38654,16 @@
       {
         "chapterNumber": 2,
         "wordCount": 576,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 576,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 576
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 576,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -38454,13 +38672,16 @@
       {
         "chapterNumber": 3,
         "wordCount": 328,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 328,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 328
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 328,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -38469,13 +38690,16 @@
       {
         "chapterNumber": 4,
         "wordCount": 432,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 432,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 432
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 432,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -38484,13 +38708,16 @@
       {
         "chapterNumber": 5,
         "wordCount": 469,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 469,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 469
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 469,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -38499,18 +38726,21 @@
     ],
     "wordCount": 2111,
     "maxChapterWordCount": 576,
-    "sourceCount": 0,
-    "maxSourceWordCount": 0,
+    "sourceCount": 1,
+    "maxSourceWordCount": 2111,
     "sourceCounts": [
-
+      {
+        "name": "The Narrator",
+        "wordCount": 2111
+      }
     ],
     "sourceTypeCounts": {
-      "narrator": 0,
+      "narrator": 2111,
       "god": 0,
       "lead": 0,
       "support": 0
     },
-    "principalSphere": "family",
+    "principalSphere": "economics",
     "words": [
       {
         "word": "God",
@@ -38604,13 +38834,16 @@
       {
         "chapterNumber": 1,
         "wordCount": 307,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 307,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 307
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 307,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -38619,13 +38852,16 @@
       {
         "chapterNumber": 2,
         "wordCount": 447,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 447,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 447
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 447,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -38634,13 +38870,16 @@
       {
         "chapterNumber": 3,
         "wordCount": 398,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 398,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 398
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 398,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -38649,18 +38888,21 @@
     ],
     "wordCount": 1152,
     "maxChapterWordCount": 447,
-    "sourceCount": 0,
-    "maxSourceWordCount": 0,
+    "sourceCount": 1,
+    "maxSourceWordCount": 1152,
     "sourceCounts": [
-
+      {
+        "name": "The Narrator",
+        "wordCount": 1152
+      }
     ],
     "sourceTypeCounts": {
-      "narrator": 0,
+      "narrator": 1152,
       "god": 0,
       "lead": 0,
       "support": 0
     },
-    "principalSphere": "celebration",
+    "principalSphere": "family",
     "words": [
       {
         "word": "Lord",
@@ -38754,13 +38996,16 @@
       {
         "chapterNumber": 1,
         "wordCount": 534,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 534,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 534
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 534,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -38769,13 +39014,16 @@
       {
         "chapterNumber": 2,
         "wordCount": 288,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 288,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 288
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 288,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -38784,13 +39032,16 @@
       {
         "chapterNumber": 3,
         "wordCount": 388,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 388,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 388
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 388,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -38799,13 +39050,16 @@
       {
         "chapterNumber": 4,
         "wordCount": 361,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 361,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 361
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 361,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -38814,13 +39068,16 @@
       {
         "chapterNumber": 5,
         "wordCount": 625,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 625,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 625
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 625,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -38829,13 +39086,16 @@
       {
         "chapterNumber": 6,
         "wordCount": 557,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 557,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 557
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 557,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -38844,13 +39104,16 @@
     ],
     "wordCount": 2753,
     "maxChapterWordCount": 625,
-    "sourceCount": 0,
-    "maxSourceWordCount": 0,
+    "sourceCount": 1,
+    "maxSourceWordCount": 2753,
     "sourceCounts": [
-
+      {
+        "name": "The Narrator",
+        "wordCount": 2753
+      }
     ],
     "sourceTypeCounts": {
-      "narrator": 0,
+      "narrator": 2753,
       "god": 0,
       "lead": 0,
       "support": 0
@@ -38949,13 +39212,16 @@
       {
         "chapterNumber": 1,
         "wordCount": 504,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 504,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 504
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 504,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -38964,13 +39230,16 @@
       {
         "chapterNumber": 2,
         "wordCount": 573,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 573,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 573
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 573,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -38979,13 +39248,16 @@
       {
         "chapterNumber": 3,
         "wordCount": 403,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 403,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 403
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 403,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -38994,13 +39266,16 @@
       {
         "chapterNumber": 4,
         "wordCount": 484,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 484,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 484
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 484,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -39009,18 +39284,21 @@
     ],
     "wordCount": 1964,
     "maxChapterWordCount": 573,
-    "sourceCount": 0,
-    "maxSourceWordCount": 0,
+    "sourceCount": 1,
+    "maxSourceWordCount": 1964,
     "sourceCounts": [
-
+      {
+        "name": "The Narrator",
+        "wordCount": 1964
+      }
     ],
     "sourceTypeCounts": {
-      "narrator": 0,
+      "narrator": 1964,
       "god": 0,
       "lead": 0,
       "support": 0
     },
-    "principalSphere": "family",
+    "principalSphere": "government",
     "words": [
       {
         "word": "God",
@@ -39114,13 +39392,16 @@
       {
         "chapterNumber": 1,
         "wordCount": 447,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 447,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 447
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 447,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -39129,13 +39410,16 @@
       {
         "chapterNumber": 2,
         "wordCount": 351,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 351,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 351
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 351,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -39144,13 +39428,16 @@
       {
         "chapterNumber": 3,
         "wordCount": 351,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 351,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 351
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 351,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -39159,18 +39446,21 @@
     ],
     "wordCount": 1149,
     "maxChapterWordCount": 447,
-    "sourceCount": 0,
-    "maxSourceWordCount": 0,
+    "sourceCount": 1,
+    "maxSourceWordCount": 1149,
     "sourceCounts": [
-
+      {
+        "name": "The Narrator",
+        "wordCount": 1149
+      }
     ],
     "sourceTypeCounts": {
-      "narrator": 0,
+      "narrator": 1149,
       "god": 0,
       "lead": 0,
       "support": 0
     },
-    "principalSphere": "government",
+    "principalSphere": "education",
     "words": [
       {
         "word": "God",
@@ -39264,13 +39554,16 @@
       {
         "chapterNumber": 1,
         "wordCount": 534,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 534,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 534
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 534,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -39279,18 +39572,21 @@
     ],
     "wordCount": 534,
     "maxChapterWordCount": 534,
-    "sourceCount": 0,
-    "maxSourceWordCount": 0,
+    "sourceCount": 1,
+    "maxSourceWordCount": 534,
     "sourceCounts": [
-
+      {
+        "name": "The Narrator",
+        "wordCount": 534
+      }
     ],
     "sourceTypeCounts": {
-      "narrator": 0,
+      "narrator": 534,
       "god": 0,
       "lead": 0,
       "support": 0
     },
-    "principalSphere": "family",
+    "principalSphere": "government",
     "words": [
       {
         "word": "Christ",
@@ -39384,13 +39680,16 @@
       {
         "chapterNumber": 1,
         "wordCount": 351,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 351,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 351
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 351,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -39399,13 +39698,16 @@
       {
         "chapterNumber": 2,
         "wordCount": 496,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 496,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 496
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 496,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -39414,13 +39716,16 @@
       {
         "chapterNumber": 3,
         "wordCount": 423,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 423,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 423
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 423,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -39429,13 +39734,16 @@
       {
         "chapterNumber": 4,
         "wordCount": 434,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 434,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 434
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 434,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -39444,13 +39752,16 @@
       {
         "chapterNumber": 5,
         "wordCount": 349,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 349,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 349
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 349,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -39459,13 +39770,16 @@
       {
         "chapterNumber": 6,
         "wordCount": 526,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 526,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 526
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 526,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -39474,13 +39788,16 @@
       {
         "chapterNumber": 7,
         "wordCount": 727,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 727,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 727
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 727,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -39489,13 +39806,16 @@
       {
         "chapterNumber": 8,
         "wordCount": 407,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 407,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 407
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 407,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -39504,13 +39824,16 @@
       {
         "chapterNumber": 9,
         "wordCount": 857,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 857,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 857
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 857,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -39519,13 +39842,16 @@
       {
         "chapterNumber": 10,
         "wordCount": 926,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 926,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 926
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 926,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -39534,13 +39860,16 @@
       {
         "chapterNumber": 11,
         "wordCount": 1125,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 1125,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 1125
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 1125,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -39549,13 +39878,16 @@
       {
         "chapterNumber": 12,
         "wordCount": 786,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 786,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 786
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 786,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -39564,13 +39896,16 @@
       {
         "chapterNumber": 13,
         "wordCount": 551,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 551,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 551
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 551,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -39579,18 +39914,21 @@
     ],
     "wordCount": 7958,
     "maxChapterWordCount": 1125,
-    "sourceCount": 0,
-    "maxSourceWordCount": 0,
+    "sourceCount": 1,
+    "maxSourceWordCount": 7958,
     "sourceCounts": [
-
+      {
+        "name": "The Narrator",
+        "wordCount": 7958
+      }
     ],
     "sourceTypeCounts": {
-      "narrator": 0,
+      "narrator": 7958,
       "god": 0,
       "lead": 0,
       "support": 0
     },
-    "principalSphere": "education",
+    "principalSphere": "government",
     "words": [
       {
         "word": "God",
@@ -39684,13 +40022,16 @@
       {
         "chapterNumber": 1,
         "wordCount": 585,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 585,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 585
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 585,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -39699,13 +40040,16 @@
       {
         "chapterNumber": 2,
         "wordCount": 624,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 624,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 624
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 624,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -39714,13 +40058,16 @@
       {
         "chapterNumber": 3,
         "wordCount": 399,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 399,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 399
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 399,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -39729,13 +40076,16 @@
       {
         "chapterNumber": 4,
         "wordCount": 450,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 450,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 450
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 450,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -39744,13 +40094,16 @@
       {
         "chapterNumber": 5,
         "wordCount": 517,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 517,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 517
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 517,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -39759,18 +40112,21 @@
     ],
     "wordCount": 2575,
     "maxChapterWordCount": 624,
-    "sourceCount": 0,
-    "maxSourceWordCount": 0,
+    "sourceCount": 1,
+    "maxSourceWordCount": 2575,
     "sourceCounts": [
-
+      {
+        "name": "The Narrator",
+        "wordCount": 2575
+      }
     ],
     "sourceTypeCounts": {
-      "narrator": 0,
+      "narrator": 2575,
       "god": 0,
       "lead": 0,
       "support": 0
     },
-    "principalSphere": "communication",
+    "principalSphere": "economics",
     "words": [
       {
         "word": "God",
@@ -39864,13 +40220,16 @@
       {
         "chapterNumber": 1,
         "wordCount": 728,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 728,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 728
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 728,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -39879,13 +40238,16 @@
       {
         "chapterNumber": 2,
         "wordCount": 636,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 636,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 636
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 636,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -39894,13 +40256,16 @@
       {
         "chapterNumber": 3,
         "wordCount": 592,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 592,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 592
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 592,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -39909,13 +40274,16 @@
       {
         "chapterNumber": 4,
         "wordCount": 501,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 501,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 501
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 501,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -39924,13 +40292,16 @@
       {
         "chapterNumber": 5,
         "wordCount": 369,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 369,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 369
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 369,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -39939,18 +40310,21 @@
     ],
     "wordCount": 2826,
     "maxChapterWordCount": 728,
-    "sourceCount": 0,
-    "maxSourceWordCount": 0,
+    "sourceCount": 1,
+    "maxSourceWordCount": 2826,
     "sourceCounts": [
-
+      {
+        "name": "The Narrator",
+        "wordCount": 2826
+      }
     ],
     "sourceTypeCounts": {
-      "narrator": 0,
+      "narrator": 2826,
       "god": 0,
       "lead": 0,
       "support": 0
     },
-    "principalSphere": "communication",
+    "principalSphere": "celebration",
     "words": [
       {
         "word": "God",
@@ -40044,13 +40418,16 @@
       {
         "chapterNumber": 1,
         "wordCount": 535,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 535,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 535
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 535,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -40059,13 +40436,16 @@
       {
         "chapterNumber": 2,
         "wordCount": 639,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 639,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 639
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 639,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -40074,13 +40454,16 @@
       {
         "chapterNumber": 3,
         "wordCount": 520,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 520,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 520
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 520,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -40089,18 +40472,21 @@
     ],
     "wordCount": 1694,
     "maxChapterWordCount": 639,
-    "sourceCount": 0,
-    "maxSourceWordCount": 0,
+    "sourceCount": 1,
+    "maxSourceWordCount": 1694,
     "sourceCounts": [
-
+      {
+        "name": "The Narrator",
+        "wordCount": 1694
+      }
     ],
     "sourceTypeCounts": {
-      "narrator": 0,
+      "narrator": 1694,
       "god": 0,
       "lead": 0,
       "support": 0
     },
-    "principalSphere": "economics",
+    "principalSphere": "government",
     "words": [
       {
         "word": "God",
@@ -40194,13 +40580,16 @@
       {
         "chapterNumber": 1,
         "wordCount": 277,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 277,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 277
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 277,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -40209,13 +40598,16 @@
       {
         "chapterNumber": 2,
         "wordCount": 809,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 809,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 809
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 809,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -40224,13 +40616,16 @@
       {
         "chapterNumber": 3,
         "wordCount": 618,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 618,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 618
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 618,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -40239,13 +40634,16 @@
       {
         "chapterNumber": 4,
         "wordCount": 576,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 576,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 576
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 576,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -40254,13 +40652,16 @@
       {
         "chapterNumber": 5,
         "wordCount": 494,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 494,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 494
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 494,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -40269,18 +40670,21 @@
     ],
     "wordCount": 2774,
     "maxChapterWordCount": 809,
-    "sourceCount": 0,
-    "maxSourceWordCount": 0,
+    "sourceCount": 1,
+    "maxSourceWordCount": 2774,
     "sourceCounts": [
-
+      {
+        "name": "The Narrator",
+        "wordCount": 2774
+      }
     ],
     "sourceTypeCounts": {
-      "narrator": 0,
+      "narrator": 2774,
       "god": 0,
       "lead": 0,
       "support": 0
     },
-    "principalSphere": "communication",
+    "principalSphere": "economics",
     "words": [
       {
         "word": "God",
@@ -40374,13 +40778,16 @@
       {
         "chapterNumber": 1,
         "wordCount": 326,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 326,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 326
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 326,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -40389,18 +40796,21 @@
     ],
     "wordCount": 326,
     "maxChapterWordCount": 326,
-    "sourceCount": 0,
-    "maxSourceWordCount": 0,
+    "sourceCount": 1,
+    "maxSourceWordCount": 326,
     "sourceCounts": [
-
+      {
+        "name": "The Narrator",
+        "wordCount": 326
+      }
     ],
     "sourceTypeCounts": {
-      "narrator": 0,
+      "narrator": 326,
       "god": 0,
       "lead": 0,
       "support": 0
     },
-    "principalSphere": "government",
+    "principalSphere": "religion",
     "words": [
       {
         "word": "truth",
@@ -40494,13 +40904,16 @@
       {
         "chapterNumber": 1,
         "wordCount": 366,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 366,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 366
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 366,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -40509,18 +40922,21 @@
     ],
     "wordCount": 366,
     "maxChapterWordCount": 366,
-    "sourceCount": 0,
-    "maxSourceWordCount": 0,
+    "sourceCount": 1,
+    "maxSourceWordCount": 366,
     "sourceCounts": [
-
+      {
+        "name": "The Narrator",
+        "wordCount": 366
+      }
     ],
     "sourceTypeCounts": {
-      "narrator": 0,
+      "narrator": 366,
       "god": 0,
       "lead": 0,
       "support": 0
     },
-    "principalSphere": "celebration",
+    "principalSphere": "communication",
     "words": [
       {
         "word": "truth",
@@ -40614,13 +41030,16 @@
       {
         "chapterNumber": 1,
         "wordCount": 777,
-        "sourceCount": 0,
-        "maxSourceWordCount": 0,
+        "sourceCount": 1,
+        "maxSourceWordCount": 777,
         "sourceCounts": [
-
+          {
+            "name": "The Narrator",
+            "wordCount": 777
+          }
         ],
         "sourceTypeCounts": {
-          "narrator": 0,
+          "narrator": 777,
           "god": 0,
           "lead": 0,
           "support": 0
@@ -40629,13 +41048,16 @@
     ],
     "wordCount": 777,
     "maxChapterWordCount": 777,
-    "sourceCount": 0,
-    "maxSourceWordCount": 0,
+    "sourceCount": 1,
+    "maxSourceWordCount": 777,
     "sourceCounts": [
-
+      {
+        "name": "The Narrator",
+        "wordCount": 777
+      }
     ],
     "sourceTypeCounts": {
-      "narrator": 0,
+      "narrator": 777,
       "god": 0,
       "lead": 0,
       "support": 0
@@ -41528,7 +41950,7 @@
       "lead": 7,
       "support": 2005
     },
-    "principalSphere": "education",
+    "principalSphere": "economics",
     "words": [
       {
         "word": "God",
