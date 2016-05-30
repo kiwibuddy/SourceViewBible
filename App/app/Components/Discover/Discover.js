@@ -291,10 +291,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     marginHorizontal: (width <= 320 ? 4 : 8),
   },
-  separator: {
-    height: StyleSheet.hairlineWidth,
-    backgroundColor: Colors.separator,
-  },
   statisticContainer: {
     marginTop: 7,
   },
