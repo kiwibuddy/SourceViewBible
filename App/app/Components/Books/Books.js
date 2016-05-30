@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     color: '#59626a',
   },
   itemContainer: {
-    width: (width / 3) -8,
+    width: ((width - 16) / 3),
   },
   item: {
     borderColor: 'rgba(0, 0, 0, 0.15)',
