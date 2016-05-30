@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginHorizontal: 8,
+    marginHorizontal: 4,
   },
   stackedBarChart: {
     height: 4,
@@ -178,9 +178,11 @@ const styles = StyleSheet.create({
     color: '#59626a',
   },
   itemContainer: {
-    width: ((width - 16) / 3),
+    width: ((width - 8) / 3),
   },
   item: {
+    marginHorizontal: 4,
+    marginBottom: 8,
     borderColor: 'rgba(0, 0, 0, 0.15)',
     borderWidth: StyleSheet.hairlineWidth,
     borderRadius: 4,
@@ -220,16 +222,16 @@ const styles = StyleSheet.create({
   statisticsContainer: {
     flex: 1,
     flexDirection: 'column',
-    marginHorizontal: 8,
+    marginHorizontal: (width <= 320 ? 4 : 8),
     borderBottomColor: Colors.separator,
   },
   statisticContainer: {
     marginTop: 7,
   },
   statisticTitle: {
-    fontSize: 11,
     color: Colors.tintColor,
     marginRight: 3,
+    fontSize: 11,
   },
   statisticSubtitle: {
     flex: 1,
