@@ -88,6 +88,7 @@ class Books extends Component {
           dataSource={this.state.dataSource}
           initialListSize={18}
           pageSize={3}
+          enableEmptySections={true}
           renderRow={this._renderItem}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
         />

@@ -91,6 +91,7 @@ class BookSources extends Component {
           contentContainerStyle={styles.list}
           dataSource={this.state.dataSource}
           initialListSize={18}
+          enableEmptySections={true}
           renderRow={this._renderRow}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
