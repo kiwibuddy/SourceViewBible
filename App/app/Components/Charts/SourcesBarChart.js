@@ -66,7 +66,7 @@ const SourcesBarChart = (props: Object) => {
       {bars}
     </View>
   );
-}
+};
 
 SourcesBarChart.propTypes = {
   style: PropTypes.any,

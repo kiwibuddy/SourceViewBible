@@ -42,7 +42,7 @@ const SpheresBarChart = (props: Object) => {
       {bars}
     </View>
   );
-}
+};
 
 SpheresBarChart.propTypes = {
   style: PropTypes.any,
