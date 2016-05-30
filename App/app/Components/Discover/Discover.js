@@ -90,6 +90,7 @@ class Discover extends Component {
             pagingEnabled={true}
             renderRow={this._renderBook}
             renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+            onMomentumScrollEnd={this.onScrollEnd}
           />
           <PageControl
             numberOfPages={3}
@@ -174,6 +175,18 @@ class Discover extends Component {
       </TouchableOpacity>
     );
   };
+
+  onScrollEnd = (e) => {
+    // making our events coming from android compatible to updateIndex logic
+    if (!e.nativeEvent.contentOffset) {
+      e.nativeEvent.contentOffset = {x: e.nativeEvent.position * width}
+    }
+
+    const currentPage = Math.floor((e.nativeEvent.contentOffset.x - width / 2) / width) + 1;
+    this.setState({
+      currentPage: currentPage
+    });
+  }
 
 }
 
