@@ -89,7 +89,10 @@ class Discover extends Component {
             renderRow={this._renderBook}
             renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           />
-          <PageControl pageCount={3} />
+          <PageControl
+            numberOfPages={3}
+            currentPage={1}
+          />
         </View>
 
         <View style={styles.sectionHeaderContainer}>

@@ -10,9 +10,9 @@ import {
 } from "../../Common";
 
 const PageControl = (props: Object) => {
-  const currentPage = 0;
+  const currentPage = props.currentPage || 0;
   const indicators = [];
-  for (let page = 0; page < props.pageCount; page++) {
+  for (let page = 0; page < props.numberOfPages; page++) {
     const indicatorStyle = (page == currentPage ? styles.currentIndicator : styles.indicator);
     const indicator = <View key={'indicator-' + page} style={indicatorStyle}/>;
     indicators.push(indicator);
