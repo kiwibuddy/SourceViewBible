@@ -40,7 +40,8 @@ const MAXIMUM_BOOK_COUNT = 9;
 
 class Discover extends Component {
   state: {
-    dataSource: any
+    dataSource: any,
+    currentPage: number
   };
 
   constructor(props) {
@@ -48,7 +49,8 @@ class Discover extends Component {
 
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     this.state = {
-      dataSource: dataSource
+      dataSource: dataSource,
+      currentPage: 0
     };
   }
 
@@ -91,7 +93,7 @@ class Discover extends Component {
           />
           <PageControl
             numberOfPages={3}
-            currentPage={1}
+            currentPage={this.state.currentPage}
           />
         </View>
 
@@ -320,10 +322,6 @@ const styles = StyleSheet.create({
   },
   rightContainer: {
     flex: 1.8,
-  },
-  separator: {
-    ...StyleSheet.styles.separator,
-    marginLeft: 15,
   },
 });
 
