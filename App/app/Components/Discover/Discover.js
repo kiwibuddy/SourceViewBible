@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginHorizontal: 0,
+    marginHorizontal: 4,
   },
   itemContainer: {
     width: ((width - 8) / 3),
