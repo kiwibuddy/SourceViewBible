@@ -2,8 +2,20 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
+import ReactNative, {
+  View,
+  Text,
+  Image,
+  ListView,
+  TouchableOpacity,
+  RecyclerViewBackedScrollView,
+  NavigationExperimental,
+  PropTypes,
+  Dimensions
+} from 'react-native';
 import { connect } from 'react-redux';
+
+const { width } = Dimensions.get('window');
 
 import { navigatePush } from '../../Actions';
 
@@ -22,8 +34,30 @@ import { ReadingTime } from '../../Common/NumberHelper';
 import Localizable from '../../Common/Localizable';
 
 const Bible = require('../../Locale/en/NLT/SourceView.json');
+const MAXIMUM_BOOK_COUNT = 9;
 
 class Discover extends Component {
+  state: {
+    dataSource: any
+  };
+
+  constructor(props) {
+    super(props);
+
+    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
+    this.state = {
+      dataSource: dataSource
+    };
+  }
+
+  componentDidMount() {
+    const books = Bible.slice(0, MAXIMUM_BOOK_COUNT);
+
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(books)
+    });
+  }
+
   render() {
     const books = Bible.slice(0, 3).map(this._renderBook);
 
@@ -41,9 +75,17 @@ class Discover extends Component {
         </TouchableOpacity>
 
         <View style={styles.sectionContainer}>
-          <ScrollView horizontal={true}>
-            {books}
-          </ScrollView>
+          <ListView
+            contentContainerStyle={styles.list}
+            dataSource={this.state.dataSource}
+            initialListSize={3}
+            pageSize={3}
+            enableEmptySections={true}
+            horizontal={true}
+            pagingEnabled={true}
+            renderRow={this._renderBook}
+            renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+          />
         </View>
 
         <View style={styles.sectionHeaderContainer}>
@@ -82,7 +124,7 @@ class Discover extends Component {
 
   _renderBook = (book) => {
     return (
-      <TouchableOpacity key={'book-' + book.key} style={styles.itemContainer}  onPress={ () => this.props.onBookPress(book) }>
+      <TouchableOpacity key={'book-' + book.key} style={styles.itemContainer} onPress={ () => this.props.onBookPress(book) }>
         <LinearGradient
           colors={Colors.spheres[book.principalSphere].gradient.tiny}
           start={[0.0, 0.25]} end={[0.5, 1.0]}
