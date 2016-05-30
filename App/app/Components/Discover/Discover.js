@@ -90,7 +90,7 @@ class Discover extends Component {
             pagingEnabled={true}
             renderRow={this._renderBook}
             renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
-            onMomentumScrollEnd={this.onScrollEnd}
+            onMomentumScrollEnd={this._onScrollEnd}
           />
           <PageControl
             numberOfPages={3}
@@ -100,39 +100,15 @@ class Discover extends Component {
 
         <View style={styles.separator}></View>
 
-        <View style={styles.sectionHeaderContainer}>
-          <Text style={StyleSheet.styles.sectionHeaderTitle}>SOURCES</Text>
-        </View>
-
-        <View style={[styles.sectionContainer, {paddingBottom: 15}]}>
-          <View style={styles.itemContainerBlank}></View>
-          <View style={styles.itemContainerBlank}></View>
-          <View style={styles.itemContainerBlank}></View>
-        </View>
+        {this._renderBlankSection("Sources")}
 
         <View style={styles.separator}></View>
 
-        <View style={styles.sectionHeaderContainer}>
-          <Text style={StyleSheet.styles.sectionHeaderTitle}>SPHERES</Text>
-        </View>
-
-        <View style={[styles.sectionContainer, {paddingBottom: 15}]}>
-          <View style={styles.itemContainerBlank}></View>
-          <View style={styles.itemContainerBlank}></View>
-          <View style={styles.itemContainerBlank}></View>
-        </View>
+        {this._renderBlankSection("Spheres")}
 
         <View style={styles.separator}></View>
 
-        <View style={styles.sectionHeaderContainer}>
-          <Text style={StyleSheet.styles.sectionHeaderTitle}>WORDS</Text>
-        </View>
-
-        <View style={[styles.sectionContainer, {paddingBottom: 15}]}>
-          <View style={styles.itemContainerBlank}></View>
-          <View style={styles.itemContainerBlank}></View>
-          <View style={styles.itemContainerBlank}></View>
-        </View>
+        {this._renderBlankSection("Words")}
 
       </View>
     );
@@ -182,7 +158,23 @@ class Discover extends Component {
     );
   };
 
-  onScrollEnd = (e) => {
+  _renderBlankSection = (title: string) => {
+    return (
+      <View>
+        <View style={styles.sectionHeaderContainer}>
+          <Text style={StyleSheet.styles.sectionHeaderTitle}>{title.toLocaleUpperCase()}</Text>
+        </View>
+
+        <View style={[styles.sectionContainer, {paddingBottom: 15, marginHorizontal: 4}]}>
+          <View style={styles.itemContainerBlank}></View>
+          <View style={styles.itemContainerBlank}></View>
+          <View style={styles.itemContainerBlank}></View>
+        </View>
+      </View>
+    );
+  };
+
+  _onScrollEnd = (e) => {
     // making our events coming from android compatible to updateIndex logic
     if (!e.nativeEvent.contentOffset) {
       e.nativeEvent.contentOffset = {x: e.nativeEvent.position * width}
@@ -192,7 +184,7 @@ class Discover extends Component {
     this.setState({
       currentPage: currentPage
     });
-  }
+  };
 
 }
 
@@ -252,8 +244,8 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: '#F9F9F9',
     margin: 0,
-    marginRight: 8,
-    width: 115,
+    marginHorizontal: 4,
+    flex: 1,
     height: 127,
   },
   gradient: {
