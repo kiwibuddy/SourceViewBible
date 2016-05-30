@@ -76,6 +76,7 @@ class Discover extends Component {
 
         <View style={styles.sectionContainer}>
           <ListView
+            style={{marginHorizontal: 4}}
             contentContainerStyle={styles.list}
             dataSource={this.state.dataSource}
             initialListSize={3}
@@ -202,7 +203,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginHorizontal: 4,
+    // marginHorizontal: 4,
   },
   itemContainer: {
     width: ((width - 8) / 3),
