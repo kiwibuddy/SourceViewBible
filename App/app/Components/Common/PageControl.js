@@ -12,7 +12,7 @@ import {
 const PageControl = (props: Object) => {
   const currentPage = 0;
   const indicators = [];
-  for (let page = 0; page < 3; page++) {
+  for (let page = 0; page < props.pageCount; page++) {
     const indicatorStyle = (page == currentPage ? styles.currentIndicator : styles.indicator);
     const indicator = <View key={'indicator-' + page} style={indicatorStyle}/>;
     indicators.push(indicator);

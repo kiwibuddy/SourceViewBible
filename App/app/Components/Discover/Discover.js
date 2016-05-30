@@ -29,6 +29,8 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import { SourcesBarChart, SpheresBarChart } from '../Charts';
 
+import PageControl from '../Common/PageControl';
+
 import { ReadingTime } from '../../Common/NumberHelper';
 
 import Localizable from '../../Common/Localizable';
@@ -74,7 +76,7 @@ class Discover extends Component {
             </View>
         </TouchableOpacity>
 
-        <View style={styles.sectionContainer}>
+        <View style={[styles.sectionContainer, {flexDirection: 'column'}]}>
           <ListView
             style={{marginHorizontal: 4}}
             contentContainerStyle={styles.list}
@@ -87,6 +89,7 @@ class Discover extends Component {
             renderRow={this._renderBook}
             renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           />
+          <PageControl pageCount={3} />
         </View>
 
         <View style={styles.sectionHeaderContainer}>
