@@ -98,31 +98,37 @@ class Discover extends Component {
           />
         </View>
 
+        <View style={styles.separator}></View>
+
         <View style={styles.sectionHeaderContainer}>
           <Text style={StyleSheet.styles.sectionHeaderTitle}>SOURCES</Text>
         </View>
 
-        <View style={styles.sectionContainer}>
+        <View style={[styles.sectionContainer, {paddingBottom: 15}]}>
           <View style={styles.itemContainerBlank}></View>
           <View style={styles.itemContainerBlank}></View>
           <View style={styles.itemContainerBlank}></View>
         </View>
+
+        <View style={styles.separator}></View>
 
         <View style={styles.sectionHeaderContainer}>
           <Text style={StyleSheet.styles.sectionHeaderTitle}>SPHERES</Text>
         </View>
 
-        <View style={styles.sectionContainer}>
+        <View style={[styles.sectionContainer, {paddingBottom: 15}]}>
           <View style={styles.itemContainerBlank}></View>
           <View style={styles.itemContainerBlank}></View>
           <View style={styles.itemContainerBlank}></View>
         </View>
+
+        <View style={styles.separator}></View>
 
         <View style={styles.sectionHeaderContainer}>
           <Text style={StyleSheet.styles.sectionHeaderTitle}>WORDS</Text>
         </View>
 
-        <View style={styles.sectionContainer}>
+        <View style={[styles.sectionContainer, {paddingBottom: 15}]}>
           <View style={styles.itemContainerBlank}></View>
           <View style={styles.itemContainerBlank}></View>
           <View style={styles.itemContainerBlank}></View>
@@ -200,13 +206,10 @@ const styles = StyleSheet.create({
     ...StyleSheet.styles.sectionHeaderContainer,
     borderBottomWidth: 0,
     marginLeft: 8,
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: '#c8c7cc',
   },
   sectionContainer: {
     flexDirection: 'row',
-    paddingTop: 5,
-    paddingBottom: 15,
+    paddingVertical: 5,
   },
   sectionHeaderDetail: {
     flexDirection: 'row',
@@ -287,7 +290,10 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     marginHorizontal: (width <= 320 ? 4 : 8),
-    borderBottomColor: Colors.separator,
+  },
+  separator: {
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: Colors.separator,
   },
   statisticContainer: {
     marginTop: 7,
