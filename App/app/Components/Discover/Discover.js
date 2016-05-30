@@ -51,7 +51,7 @@ class Discover extends Component {
   }
 
   componentDidMount() {
-    const books = Bible.slice(0, MAXIMUM_BOOK_COUNT);
+    const books = Bible.sort((a, b) => a.sourceCount > b.sourceCount ? -1 : 1).slice(0, MAXIMUM_BOOK_COUNT);
 
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(books)
