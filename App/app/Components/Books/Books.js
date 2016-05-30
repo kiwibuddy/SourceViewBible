@@ -11,12 +11,15 @@ import ReactNative, {
   TouchableOpacity,
   RecyclerViewBackedScrollView,
   NavigationExperimental,
-  PropTypes
+  PropTypes,
+  Dimensions
 } from 'react-native';
 
 const { Header: NavigationHeader } = NavigationExperimental;
 import { connect } from 'react-redux';
 import { navigatePush, navigateReset } from '../../Actions';
+
+const { width } = Dimensions.get('window');
 
 import {
   Colors,
@@ -84,6 +87,7 @@ class Books extends Component {
           contentContainerStyle={styles.list}
           dataSource={this.state.dataSource}
           initialListSize={18}
+          pageSize={3}
           renderRow={this._renderItem}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
         />
@@ -175,7 +179,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: '#fff',
     marginVertical: 5,
-    width: 110,
+    width: (width / 3) - 4,
     height: 95,
     shadowColor: "black",
     shadowOpacity: 0.05,
@@ -194,7 +198,7 @@ const styles = StyleSheet.create({
   },
   bookTitle: {
     flex: 0,
-    fontSize: 13,
+    fontSize: (width <= 320 ? 11 : 13),
     color: '#59626a',
     textAlign: 'center',
     fontWeight: '500',
@@ -211,7 +215,7 @@ const styles = StyleSheet.create({
   statisticsContainer: {
     flex: 1,
     flexDirection: 'column',
-    marginHorizontal: 10,
+    marginHorizontal: 8,
     borderBottomColor: Colors.separator,
   },
   statisticContainer: {
