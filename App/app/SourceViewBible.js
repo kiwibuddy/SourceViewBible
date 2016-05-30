@@ -1,6 +1,6 @@
 /* @flow */
 
-'use strict'
+"use strict"
 
 import SourceViewBibleApp from './SourceViewBibleApp';
 import React, { Component } from 'react';

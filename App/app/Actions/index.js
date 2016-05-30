@@ -1,5 +1,5 @@
 /* @flow */
-'use strict';
+"use strict";
 
 const navigationActions = require('./navigation');
 

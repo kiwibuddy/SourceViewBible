@@ -1,5 +1,5 @@
 /* @flow */
-'use strict';
+"use strict";
 
 import Emdros from 'react-native-emdros';
 let DB = null;

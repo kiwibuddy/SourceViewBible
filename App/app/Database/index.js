@@ -1,5 +1,5 @@
 /* @flow */
-'use strict';
+"use strict";
 
 import Schema from './Schema';
 

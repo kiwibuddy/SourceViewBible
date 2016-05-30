@@ -1,5 +1,5 @@
 /* @flow */
-'use strict';
+"use strict";
 
 import { StyleSheet } from 'react-native';
 import Colors from './Colors';

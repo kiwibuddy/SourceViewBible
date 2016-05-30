@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 export function navigatePush(state) {
   state = typeof state === 'string' ? { key: state, title: state } : state;

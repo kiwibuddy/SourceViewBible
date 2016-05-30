@@ -1,5 +1,5 @@
 /* @flow */
-'use strict';
+"use strict";
 
 const moment = require('moment');
 require('moment-duration-format');
