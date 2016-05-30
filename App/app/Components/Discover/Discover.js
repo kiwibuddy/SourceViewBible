@@ -7,6 +7,7 @@ import ReactNative, {
   Text,
   Image,
   ListView,
+  ScrollView,
   TouchableOpacity,
   RecyclerViewBackedScrollView,
   NavigationExperimental,
@@ -66,7 +67,7 @@ class Discover extends Component {
     const books = Bible.slice(0, 3).map(this._renderBook);
 
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
 
         <TouchableOpacity onPress={this.props.onButtonPress}>
           <View style={styles.sectionHeaderContainer}>
@@ -111,7 +112,7 @@ class Discover extends Component {
 
         {this._renderBlankSection("Words")}
 
-      </View>
+      </ScrollView>
     );
   }
 
