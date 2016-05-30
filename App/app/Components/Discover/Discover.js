@@ -125,38 +125,40 @@ class Discover extends Component {
   _renderBook = (book) => {
     return (
       <TouchableOpacity key={'book-' + book.key} style={styles.itemContainer} onPress={ () => this.props.onBookPress(book) }>
-        <LinearGradient
-          colors={Colors.spheres[book.principalSphere].gradient.tiny}
-          start={[0.0, 0.25]} end={[0.5, 1.0]}
-          style={styles.gradient}
-        />
-        <Image source={require('../../Images/discover/icon-books.png')}  style={[styles.icon, {tintColor: Colors.spheres[book.principalSphere].tint}]} />
-        <Text style={styles.bookTitle}>{book.name}</Text>
-        <Text style={styles.bookReadTime}>{ReadingTime(book.wordCount)}</Text>
-        <View style={styles.keyline} />
-        <View style={styles.statisticsContainer}>
-          <View style={styles.statisticContainer} >
-            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={styles.statisticTitle}>{book.sourceCount}</Text>
-              <Text style={styles.statisticSubtitle}>Sources</Text>
-              <SourcesBarChart
-                style={{flex: 0, marginLeft: 4}}
-                barStyle={{width: 2, height: 12, marginHorizontal: 1}}
-                horizontal={false}
-                data={[{narrator: book.sourceTypeCounts.narrator}, {god: book.sourceTypeCounts.god}, {lead: book.sourceTypeCounts.lead}, {support: book.sourceTypeCounts.support}]}
-              />
+        <View style={styles.item}>
+          <LinearGradient
+            colors={Colors.spheres[book.principalSphere].gradient.tiny}
+            start={[0.0, 0.25]} end={[0.5, 1.0]}
+            style={styles.gradient}
+          />
+          <Image source={require('../../Images/discover/icon-books.png')}  style={[styles.icon, {tintColor: Colors.spheres[book.principalSphere].tint}]} />
+          <Text style={styles.bookTitle}>{book.name}</Text>
+          <Text style={styles.bookReadTime}>{ReadingTime(book.wordCount)}</Text>
+          <View style={styles.keyline} />
+          <View style={styles.statisticsContainer}>
+            <View style={styles.statisticContainer} >
+              <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+                <Text style={styles.statisticTitle}>{book.sourceCount}</Text>
+                <Text style={styles.statisticSubtitle}>Sources</Text>
+                <SourcesBarChart
+                  style={{flex: 0, marginLeft: 4}}
+                  barStyle={{width: 2, height: 12, marginHorizontal: 1}}
+                  horizontal={false}
+                  data={[{narrator: book.sourceTypeCounts.narrator}, {god: book.sourceTypeCounts.god}, {lead: book.sourceTypeCounts.lead}, {support: book.sourceTypeCounts.support}]}
+                />
+              </View>
             </View>
-          </View>
-          <View style={styles.statisticContainer} >
-            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={styles.statisticTitle}>0</Text>
-              <Text style={styles.statisticSubtitle}>Spheres</Text>
-              <SpheresBarChart
-                style={{flex: 0, marginLeft: 4}}
-                barStyle={{width: 2, height: 12, marginHorizontal: 1}}
-                horizontal={false}
-                data={[{family: 1}, {economics: 1}, {government: 1}, {religion: 1}, {education: 1}, {communication: 1}, {celebration: 1}]}
-              />
+            <View style={styles.statisticContainer} >
+              <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+                <Text style={styles.statisticTitle}>0</Text>
+                <Text style={styles.statisticSubtitle}>Spheres</Text>
+                <SpheresBarChart
+                  style={{flex: 0, marginLeft: 4}}
+                  barStyle={{width: 2, height: 12, marginHorizontal: 1}}
+                  horizontal={false}
+                  data={[{family: 1}, {economics: 1}, {government: 1}, {religion: 1}, {education: 1}, {communication: 1}, {celebration: 1}]}
+                />
+              </View>
             </View>
           </View>
         </View>
@@ -171,16 +173,16 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     paddingTop: 64,
-    paddingLeft: 8,
   },
   sectionHeaderContainer: {
     ...StyleSheet.styles.sectionHeaderContainer,
     borderBottomWidth: 0,
+    marginLeft: 8,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: '#c8c7cc',
   },
   sectionContainer: {
     flexDirection: 'row',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#c8c7cc',
     paddingTop: 5,
     paddingBottom: 15,
   },
@@ -195,14 +197,23 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     marginRight: -10,
   },
+  list: {
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginHorizontal: 0,
+  },
   itemContainer: {
+    width: ((width - 8) / 3),
+  },
+  item: {
+    marginHorizontal: 4,
+    marginBottom: 8,
     borderColor: 'rgba(0, 0, 0, 0.15)',
     borderWidth: StyleSheet.hairlineWidth,
     borderRadius: 4,
     backgroundColor: '#fff',
-    margin: 0,
-    marginRight: 8,
-    width: 115,
     height: 138,
     shadowColor: "black",
     shadowOpacity: 0.05,
@@ -236,7 +247,7 @@ const styles = StyleSheet.create({
   },
   bookTitle: {
     flex: 0,
-    fontSize: 13,
+    fontSize: (width <= 320 ? 11 : 13),
     color: '#59626a',
     textAlign: 'center',
     fontWeight: '500',
@@ -253,7 +264,7 @@ const styles = StyleSheet.create({
   statisticsContainer: {
     flex: 1,
     flexDirection: 'column',
-    marginHorizontal: 10,
+    marginHorizontal: (width <= 320 ? 4 : 8),
     borderBottomColor: Colors.separator,
   },
   statisticContainer: {
@@ -268,6 +279,10 @@ const styles = StyleSheet.create({
     flex: 1,
     color: Colors.subtitle,
     fontSize: 11,
+  },
+  separator: {
+    ...StyleSheet.styles.separator,
+    marginLeft: 8,
   },
   sourcesContainer: {
     flexDirection: 'row',
