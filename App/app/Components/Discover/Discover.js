@@ -87,6 +87,7 @@ class Discover extends Component {
             pageSize={3}
             enableEmptySections={true}
             horizontal={true}
+            showsHorizontalScrollIndicator={false}
             pagingEnabled={true}
             renderRow={this._renderBook}
             renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
