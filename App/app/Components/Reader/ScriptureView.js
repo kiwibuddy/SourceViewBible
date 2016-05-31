@@ -39,7 +39,7 @@ export default class ScriptureView extends Component {
 
   componentDidMount() {
     Emdros.scripture(this.props.book, this.props.chapterNumber).then((result) => {
-      const scripture = 'React.createElement(ScrollView, {}, ' + result.slice(0, -1) + ')';
+      const scripture = 'React.createElement(View, {}, ' + result.slice(0, -1) + ')';
       this.setState({scripture});
       console.log('got scripture');
     }).catch((error) => {
@@ -53,7 +53,9 @@ export default class ScriptureView extends Component {
 
     return (
       <View style={styles.container}>
-        {scripture}
+        <ScrollView contentContainerStyle={styles.scriptureContainer}>
+          {scripture}
+        </ScrollView>
       </View>
     )
   }
@@ -64,6 +66,10 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: NavigationHeader.HEIGHT,
     backgroundColor: 'white'
+  },
+  scriptureContainer: {
+    marginVertical: 8,
+    marginHorizontal: 20
   },
   scripture: {
     fontSize: 18
