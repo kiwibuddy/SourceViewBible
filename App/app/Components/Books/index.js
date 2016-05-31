@@ -107,7 +107,7 @@ class Books extends Component {
 
   _renderItem = (book, sectionID, rowID, highlightRow) => {
     return (
-      <TouchableOpacity style={styles.itemContainer} onPress={ () => this.props.onBookPress(book) }>
+      <TouchableOpacity style={styles.itemContainer} onPress={ () => this.props.onPressBook(book) }>
         <View style={styles.item}>
           <LinearGradient
             colors={Colors.spheres[book.principalSphere].gradient.tiny}

@@ -133,7 +133,7 @@ class Discover extends Component {
     }
 
     if (props.scene.navigationState.key === 'books') {
-      return <Books onBookPress={this._onBookPress}/>
+      return <Books onPressBook={this._onPressBook}/>
     }
 
     if (props.scene.navigationState.key === 'reader') {
@@ -146,7 +146,7 @@ class Discover extends Component {
     return (
       <ScrollView style={styles.container}>
 
-        <TouchableOpacity onPress={this._onBooksPress}>
+        <TouchableOpacity onPress={this._onPressBooks}>
           <View style={styles.sectionHeaderContainer}>
             <Text style={StyleSheet.styles.sectionHeaderTitle}>BOOKS</Text>
             <View style={styles.sectionHeaderDetail}>
@@ -195,7 +195,7 @@ class Discover extends Component {
 
   _renderBook = (book: Object) => {
     return (
-      <TouchableOpacity key={'book-' + book.key} style={styles.itemContainer} onPress={ () => this._onBookPress(book) }>
+      <TouchableOpacity key={'book-' + book.key} style={styles.itemContainer} onPress={ () => this._onPressBook(book) }>
         <View style={styles.item}>
           <LinearGradient
             colors={Colors.spheres[book.principalSphere].gradient.tiny}
@@ -253,7 +253,7 @@ class Discover extends Component {
     );
   };
 
-  _onBookPress = (book: Object) => {
+  _onPressBook = (book: Object) => {
     this.props.onNavigate({
       type: 'push',
       route: {
@@ -264,7 +264,7 @@ class Discover extends Component {
     });
   }
 
-  _onBooksPress = () => {
+  _onPressBooks = () => {
     this.props.onNavigate({
       type: 'push',
       route: {
