@@ -4,6 +4,8 @@
 import Emdros from 'react-native-emdros';
 let DB = null;
 
+const SCRIPTURE_STYLESHEET = require('./scripture-stylesheet.json');
+
 function openDatabase() {
   Emdros.open({name: 'Datasets/en/NLT/SourceView.bpt'}).then((emdros) => {
     DB = emdros;
@@ -14,7 +16,7 @@ function openDatabase() {
 
 function query(query: string, options: Object) {
   if (DB == null) {
-    let promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       reject('DB is null');
     });
     return promise;
@@ -23,7 +25,20 @@ function query(query: string, options: Object) {
   return DB.query(query, options);
 }
 
+function scripture(book: Object) {
+  if (DB == null) {
+    const promise = new Promise((resolve, reject) => {
+      reject('DB is null');
+    });
+    return promise;
+  }
+
+  const options = {stylesheet: JSON.stringify(SCRIPTURE_STYLESHEET)};
+  return DB.string(1,10500, options);
+}
+
 module.exports = {
   openDatabase,
   query,
+  scripture
 }
