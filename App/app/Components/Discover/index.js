@@ -93,7 +93,7 @@ class Discover extends Component {
         onNavigate={this.props.onNavigate}
         renderScene={this._renderScene}
         renderOverlay={this._renderHeader}
-        style={styles.container}
+        style={styles.main}
       />
     );
   }
@@ -268,10 +268,13 @@ class Discover extends Component {
 }
 
 const styles = StyleSheet.create({
+  main: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     backgroundColor: 'white',
-    paddingTop: 40,
+    paddingTop: NavigationHeader.HEIGHT
   },
   sectionHeaderContainer: {
     ...StyleSheet.styles.sectionHeaderContainer,
