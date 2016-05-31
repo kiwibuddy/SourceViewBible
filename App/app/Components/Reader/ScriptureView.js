@@ -94,8 +94,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     color: Colors.sources.narrator,
-    fontFamily: 'Hoefler Text',
-    fontSize: 46,
+    fontFamily: 'Georgia',
+    lineHeight: 42,
+    fontSize: 44,
   },
   sourceColorRed: {
     color: Colors.sources.divine,
