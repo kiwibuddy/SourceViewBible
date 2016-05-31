@@ -64,14 +64,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: NavigationHeader.HEIGHT,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   scriptureContainer: {
-    marginVertical: 8,
-    marginHorizontal: 8
+    marginVertical: 20,
+    marginHorizontal: 20
   },
   scripture: {
-    fontSize: 18
+    fontFamily: 'Georgia',
+    fontSize: 16,
+    lineHeight: 26,
   },
   sourceColorRed: {
     color: Colors.sources.divine,

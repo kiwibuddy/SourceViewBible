@@ -8,7 +8,7 @@ module.exports = {
   subtitle: '#C0C0C0',
 
   sources: {
-    narrator: '#333333',
+    narrator: '#4A4A4A',
     god: '#fc3d39',
     divine: '#fc3d39',
     lead: '#4cda65',
