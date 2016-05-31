@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     borderTopWidth: StyleSheet.hairlineWidth,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderColor: Colors.sources.narrator,
-    paddingVertical: 10,
+    paddingVertical: 15,
     paddingHorizontal: 50,
     marginTop: 30,
     marginBottom: 30,
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     color: Colors.sources.narrator,
     fontFamily: 'Georgia',
-    lineHeight: 24,
+    lineHeight: 26,
     fontSize: 26,
   },
   sourceColorRed: {
