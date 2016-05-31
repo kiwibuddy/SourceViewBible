@@ -41,7 +41,6 @@ export default class ScriptureView extends Component {
     Emdros.scripture(this.props.book, this.props.chapterNumber).then((result) => {
       const scripture = 'React.createElement(View, {}, ' + result.slice(0, -1) + ')';
       this.setState({scripture});
-      console.log('got scripture');
     }).catch((error) => {
       console.log("Error getting string " + error);
     });
