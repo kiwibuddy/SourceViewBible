@@ -66,11 +66,15 @@ class Reader extends Component {
   };
 
   _renderTitleComponent = (props: Object) => {
-    const title = props.scene.navigationState.title;
+    let title = props.scene.navigationState.title;
+    if (this.state.book) {
+      title = this.state.book;
+    }
+
     return (
       <TouchableOpacity style={{flex: 1}} onPress={this._onPressDiscover}>
         <NavigationHeader.Title textStyle={{color: Colors.tintColor}}>
-            {this.state.book.name}
+            {title}
         </NavigationHeader.Title>
       </TouchableOpacity>
     );
