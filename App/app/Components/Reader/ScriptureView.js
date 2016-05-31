@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   },
   scriptureContainer: {
     marginVertical: 8,
-    marginHorizontal: 20
+    marginHorizontal: 8
   },
   scripture: {
     fontSize: 18
