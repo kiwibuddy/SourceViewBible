@@ -79,9 +79,9 @@ class BookChapters extends Component {
 
   _renderRow = (chapter: Object, sectionID: string, rowID: string, highlightRow: boolean) => {
     const { book } = this.props;
-
+    
     return (
-      <View style={styles.section}>
+      <TouchableOpacity style={styles.section} onPress={() => this.props.onPressScripture(this.props.book, chapter.chapterNumber)}>
         <View style={[styles.cellContainer, {paddingVertical: 8}]}>
           <View style={styles.horizontalContainer}>
             <View style={styles.leftContainer}>
@@ -104,7 +104,7 @@ class BookChapters extends Component {
               </View>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 }

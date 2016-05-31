@@ -35,7 +35,7 @@ class Reader extends Component {
     super(props);
 
     this.state = {
-      chapterNumber: 1
+      chapterNumber: props.chapterNumber || 1
     };
   }
 

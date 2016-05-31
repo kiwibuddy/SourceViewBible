@@ -91,7 +91,8 @@ class Discover extends Component {
 
     if (props.scene.navigationState.key === 'reader') {
       const book = props.scene.navigationState.book;
-      return <Reader book={book} />
+      const chapterNumber = props.scene.navigationState.chapterNumber;
+      return <Reader book={book} chapterNumber={chapterNumber} />
     }
   }
 
@@ -153,13 +154,16 @@ class Discover extends Component {
     });
   };
 
-  _onPressScripture = (book: Object) => {
+  _onPressScripture = (book: Object, chapterNumber: number) => {
+    console.log('c: ' + chapterNumber);
+
     this.props.onNavigate({
       type: 'push',
       route: {
         key: 'reader',
         title: book.name,
-        book
+        book,
+        chapterNumber
       }
     });
   };
