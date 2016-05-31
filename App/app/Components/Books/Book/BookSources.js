@@ -60,30 +60,10 @@ class BookSources extends Component {
           data={[book.sourceTypeCounts]}
         />
         <View style={styles.sourceFilterContainer}>
-          <TouchableOpacity style={styles.sourceButtonContainer}>
-            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.narrator}]}>{Localizable.toPercentage(narratorPercent, {precision: 0})}</Text>
-            <View style={[styles.roundButton, {borderColor: Colors.sources.narrator}]}>
-              <Text style={[styles.roundButtonTitle, {color: Colors.sources.narrator}]}>{Localizable.t('sources.narrator').toLocaleUpperCase()}</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.sourceButtonContainer}>
-            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.god}]}>{Localizable.toPercentage(godPercent, {precision: 0})}</Text>
-            <View style={[styles.roundButton, {borderColor: Colors.sources.god}]}>
-              <Text style={[styles.roundButtonTitle, {color: Colors.sources.god}]}>{Localizable.t('sources.god').toLocaleUpperCase()}</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.sourceButtonContainer}>
-            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.lead}]}>{Localizable.toPercentage(leadPercent, {precision: 0})}</Text>
-            <View style={[styles.roundButton, {borderColor: Colors.sources.lead}]}>
-              <Text style={[styles.roundButtonTitle, {color: Colors.sources.lead}]}>{Localizable.t('sources.lead').toLocaleUpperCase()}</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.sourceButtonContainer}>
-            <Text style={[styles.sourceButtonTitle, {color: Colors.sources.support}]}>{Localizable.toPercentage(supportPercent, {precision: 0})}</Text>
-            <View style={[styles.roundButton, {borderColor: Colors.sources.support}]}>
-              <Text style={[styles.roundButtonTitle, {color: Colors.sources.support}]}>{Localizable.t('sources.support').toLocaleUpperCase()}</Text>
-            </View>
-          </TouchableOpacity>
+          <Text style={[styles.sourcePercentageTitle, {color: Colors.sources.narrator}]}>{Localizable.toPercentage(narratorPercent, {precision: 0})}</Text>
+          <Text style={[styles.sourcePercentageTitle, {color: Colors.sources.god}]}>{Localizable.toPercentage(godPercent, {precision: 0})}</Text>
+          <Text style={[styles.sourcePercentageTitle, {color: Colors.sources.lead}]}>{Localizable.toPercentage(leadPercent, {precision: 0})}</Text>
+          <Text style={[styles.sourcePercentageTitle, {color: Colors.sources.support}]}>{Localizable.toPercentage(supportPercent, {precision: 0})}</Text>
         </View>
         <View style={[StyleSheet.styles.separator, {marginLeft: 8}]}></View>
 
@@ -165,22 +145,12 @@ const styles = StyleSheet.create({
   },
   sourceButtonContainer: {
     flex: 1,
-    marginHorizontal: 2,
   },
-  sourceButtonTitle: {
+  sourcePercentageTitle: {
     fontSize: 25,
-    fontWeight: '300',
-    marginBottom: 5,
+    fontWeight: '200',
     alignSelf: 'center',
-  },
-  roundButton: {
-    borderRadius: 20,
-    borderWidth: 1,
-    paddingVertical: 4,
-    alignItems: 'center',
-  },
-  roundButtonTitle: {
-    fontSize: 11,
+    marginTop: 5,
   },
   section: {
     marginLeft: 8,
