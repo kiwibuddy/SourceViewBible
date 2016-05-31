@@ -138,7 +138,9 @@ class BookOverview extends Component {
         </TouchableOpacity>
 
         <View style={[{marginBottom: 5}, StyleSheet.styles.separator]} />
-        {overview}
+        <View style={styles.overviewContainer}>
+          {overview}
+        </View>
       </ScrollView>
     );
   }
@@ -292,8 +294,11 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     marginHorizontal: 40,
   },
+  overviewContainer: {
+    paddingBottom: 30,
+  },
   contentContainer: {
-    marginHorizontal: 15,
+    marginHorizontal: 20,
   },
   contentHeader: {
     fontSize: 15,
