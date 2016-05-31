@@ -14,6 +14,16 @@ import ReactNative, {
   PropTypes,
   Dimensions
 } from 'react-native';
+
+const {
+  AnimatedView: NavigationAnimatedView,
+  Header: NavigationHeader,
+  CardStack: NavigationCardStack
+} = NavigationExperimental;
+
+
+const NavigationHeaderBackButton = require('../Common/NavigationHeaderBackButton');
+
 import { connect } from 'react-redux';
 
 const { width } = Dimensions.get('window');
@@ -64,10 +74,44 @@ class Discover extends Component {
   }
 
   render() {
-    const books = Bible.slice(0, 3).map(this._renderBook);
+    console.log('render');
 
     return (
-      <ScrollView style={styles.container}>
+      <NavigationAnimatedView
+        style={styles.container}
+        navigationState={this.props.navigation}
+        onNavigate={this.props.onNavigate}
+        renderOverlay={this._renderHeader}
+        renderScene={this._renderScene}
+      />
+    );
+  }
+
+  _renderHeader = (props: Object) => {
+    return (
+      <NavigationHeader
+        {...props}
+        style={{elevation: 0}}
+        renderTitleComponent={this._renderTitleComponent}
+        renderLeftComponent={this._renderLeftComponent}
+      />
+    );
+  };
+
+  _renderTitleComponent = (props: Object) => {
+    const title = props.scene.navigationState.title;
+    return (
+      <NavigationHeader.Title>{title}</NavigationHeader.Title>
+    );
+  };
+
+  _renderLeftComponent = (props: Object) => {
+    return (props.scene.index > 0 ? <NavigationHeaderBackButton /> : null);
+  };
+
+  _renderScene = (props: Object) => {
+    return (
+      <ScrollView key="scroll" style={styles.container}>
 
         <TouchableOpacity onPress={this.props.onButtonPress}>
           <View style={styles.sectionHeaderContainer}>
@@ -183,6 +227,7 @@ class Discover extends Component {
     }
 
     const currentPage = Math.floor((e.nativeEvent.contentOffset.x - width / 2) / width) + 1;
+
     this.setState({
       currentPage: currentPage
     });
@@ -194,7 +239,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    paddingTop: 64,
+    paddingTop: 40,
   },
   sectionHeaderContainer: {
     ...StyleSheet.styles.sectionHeaderContainer,
@@ -334,33 +379,24 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Discover;
+function mapDispatchToProps(dispatch) {
+	return {
+		dispatch
+	};
+}
 
-// const mapStateToProps = (state) => {
-//   return {
-//
-//   };
-// }
-//
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     onButtonPress: () => {
-//       dispatch(navigatePush({
-//         key: 'books',
-//         title: Localizable.t('books')
-//       }));
-//     },
-//     onBookPress: (book) => {
-//       dispatch(navigatePush({
-//         key: 'book',
-//         title: book.name,
-//         book
-//       }));
-//     }
-//   };
-// }
-//
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(Discover);
+function mapStateToProps(state) {
+	return {
+		navigation: state.get('discover')
+	};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps, (stateProps, dispatchProps, ownProps) => {
+	return Object.assign({}, ownProps, stateProps, dispatchProps, {
+		onNavigate: (action) => {
+			dispatchProps.dispatch(Object.assign(action, {
+				scope: stateProps.navigation.key
+			}));
+		}
+	});
+})(Discover);

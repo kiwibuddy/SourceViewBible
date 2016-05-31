@@ -36,6 +36,7 @@ class Reader extends Component {
   }
 
   _renderHeader = (props: Object) => {
+    return null;
     return (
       <NavigationHeader
         {...props}
@@ -54,8 +55,10 @@ class Reader extends Component {
   };
 
   _renderLeftComponent = (props: Object) => {
+    if (!props.scene.navigationState.showBackButton) return null;
+
     return (
-      props.scene.index > 0 ? <NavigationHeaderBackButton /> : null
+      <NavigationHeaderBackButton />
     );
   };
 
@@ -89,6 +92,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
+  console.log(state);
+
 	return {
 		navigation: state.get('reader')
 	};

@@ -21,7 +21,7 @@ const navigation = NavigationReducer.StackReducer({
 			},
 			{
 				key: 'discover',
-				title: 'Discover Fool'
+				title: 'Discover Foo'
 			}
 		],
 	},
