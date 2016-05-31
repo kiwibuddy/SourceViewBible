@@ -43,7 +43,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import { SourcesBarChart, SpheresBarChart } from '../Charts';
 
-import DiscoverSection from './DiscoverSection';
+import DiscoverBooks from './DiscoverBooks';
 
 import PageControl from '../Common/PageControl';
 
