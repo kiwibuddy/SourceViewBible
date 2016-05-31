@@ -17,14 +17,23 @@ import { connect } from 'react-redux';
 
 const NavigationHeaderBackButton = require('../Common/NavigationHeaderBackButton');
 
+import ScriptureView from './ScriptureView';
 import Discover from '../Discover';
 
 import { StyleSheet } from '../../Common';
 
 class Reader extends Component {
   state: {
-    book: Object
+    book: any
   };
+
+  constructor(props: Object) {
+    super(props);
+
+    this.state = {
+      book: null
+    };
+  }
 
   render() {
     return (
@@ -66,7 +75,7 @@ class Reader extends Component {
   _renderScene = (props: Object) => {
     if (props.scene.navigationState.key === 'scripture') {
       return (
-        <View style={{flex: 1, backgroundColor: 'orange'}}></View>
+        <ScriptureView book={this.state.book} />
       );
     }
 
@@ -92,7 +101,6 @@ class Reader extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'green'
   }
 });
 
