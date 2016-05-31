@@ -137,7 +137,7 @@ class BookOverview extends Component {
           <Text style={styles.readButtonTitle}>{ReadingTime(book.wordCount)} read</Text>
         </TouchableOpacity>
 
-        <View style={[{marginBottom: 20}, StyleSheet.styles.separator]} />
+        <View style={[{marginBottom: 5}, StyleSheet.styles.separator]} />
         {overview}
       </ScrollView>
     );
@@ -293,18 +293,18 @@ const styles = StyleSheet.create({
     marginHorizontal: 40,
   },
   contentContainer: {
-    marginHorizontal: 15
+    marginHorizontal: 15,
   },
   contentHeader: {
-    fontSize: 17,
+    fontSize: 15,
     fontWeight: 'bold',
     color: '#59626a',
+    marginTop: 25,
   },
   contentBody: {
     fontSize: 16,
-    lineHeight: 22,
+    lineHeight: 26,
     color: '#59626a',
-    marginVertical: 4,
   },
   keyline: {
     flex:0,
