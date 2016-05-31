@@ -128,7 +128,7 @@ class BookOverview extends Component {
           {sources}
         </View>
 
-        <TouchableOpacity style={styles.readButton}>
+        <TouchableOpacity style={styles.readButton} onPress={this.props.onPressScripture}>
           <Text style={styles.readButtonTitle}>{ReadingTime(book.wordCount)} read</Text>
         </TouchableOpacity>
 

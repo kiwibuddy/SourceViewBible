@@ -62,6 +62,7 @@ export default class Book extends Component {
             onPressSources={() => this.setState({ selectedTab: 'sources' })}
             onPressSpheres={() => this.setState({ selectedTab: 'spheres' })}
             onPressWords={() => this.setState({ selectedTab: 'words' })}
+            onPressScripture={() => this.props.onPressScripture(this.props.book)}
           />
         </TabNavigator.Item>
         <TabNavigator.Item

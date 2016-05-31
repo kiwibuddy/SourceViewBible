@@ -127,7 +127,7 @@ class Discover extends Component {
     }
 
     if (props.scene.navigationState.key === 'book') {
-      return <Book book={props.scene.navigationState.book} />
+      return <Book book={props.scene.navigationState.book} onPressScripture={this.props.onPressScripture} />
     }
 
     if (props.scene.navigationState.key === 'books') {

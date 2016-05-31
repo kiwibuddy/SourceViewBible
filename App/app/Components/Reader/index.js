@@ -22,6 +22,10 @@ import Discover from '../Discover';
 import { StyleSheet } from '../../Common';
 
 class Reader extends Component {
+  state: {
+    book: Object
+  };
+
   render() {
     return (
       <NavigationCardStack
@@ -51,7 +55,7 @@ class Reader extends Component {
   _renderTitleComponent = (props: Object) => {
     const title = props.scene.navigationState.title;
     return (
-      <NavigationHeader.Title>{title}</NavigationHeader.Title>
+      <NavigationHeader.Title>{this.state.book.name}</NavigationHeader.Title>
     );
   };
 
@@ -68,9 +72,20 @@ class Reader extends Component {
 
     if (props.scene.navigationState.key === 'discover') {
       return (
-        <Discover />
+        <Discover onPressScripture={this._onPressScripture} />
       );
     }
+  };
+
+  _onPressScripture = (book: Object) => {
+    this.props.onNavigate({
+			type: 'BackAction'
+		});
+
+    this.setState({
+      book
+    });
+
   };
 }
 
