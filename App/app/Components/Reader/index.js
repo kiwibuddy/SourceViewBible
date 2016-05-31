@@ -68,7 +68,7 @@ class Reader extends Component {
   _renderTitleComponent = (props: Object) => {
     let title = props.scene.navigationState.title;
     if (this.state.book) {
-      title = this.state.book;
+      title = this.state.book.name;
     }
 
     return (
