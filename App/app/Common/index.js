@@ -1,5 +1,5 @@
 /* @flow */
-"use strict";
+'use strict';
 
 import Colors from './Colors';
 import StyleSheet from './StyleSheet';

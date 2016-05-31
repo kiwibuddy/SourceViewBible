@@ -1,20 +1,13 @@
 /* @flow */
+'use strict';
 
-"use strict";
+import { createStore, compose } from 'redux';
+import { fromJS } from 'immutable';
+import createReducer from '../Reducers';
 
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-
-import promise from './promise';
-import array from './array';
-import reducers from '../Reducers';
-
-const createSourceViewBibleStore = applyMiddleware(thunk, promise, array)(createStore);
-
-function configureStore(onComplete: ?() => void) : Object {
-  const store = createSourceViewBibleStore(reducers);
-  if (onComplete != null) onComplete();
-  return store;
+function configureStore(initialState: Object = fromJS({ })) {
+	const createStoreWithMiddleware = compose()(createStore);
+	return createStoreWithMiddleware(createReducer(), initialState);
 }
 
 module.exports = configureStore;

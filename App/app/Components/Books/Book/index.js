@@ -1,5 +1,5 @@
 /* @flow */
-"use strict";
+'use strict';
 
 import React, { Component } from 'react';
 
@@ -135,25 +135,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
       },
       tabBarShadowStyle: {
-        
+
       }
     }
   })
 });
-
-const mapStateToProps = (state) => {
-  return {
-
-  };
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Book);

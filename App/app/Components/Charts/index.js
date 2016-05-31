@@ -1,5 +1,5 @@
 /* @flow */
-"use strict";
+'use strict';
 
 import SourcesBarChart from './SourcesBarChart';
 import SpheresBarChart from './SpheresBarChart';

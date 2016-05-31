@@ -1,10 +1,13 @@
 /* @flow */
-"use strict";
+'use strict';
 
-import { combineReducers } from 'redux';
+import reader from '../Components/Reader/reducer';
+import { combineReducers } from 'redux-immutable';
 
-const reducers = combineReducers({
-  navigationState: require('./navigation'),
-});
+const reducers = {
+  reader
+};
 
-export default reducers;
+export default function createReducer() {
+	return combineReducers(reducers);
+}

@@ -1,5 +1,5 @@
 /* @flow */
-"use strict";
+'use strict';
 
 const I18n = require('react-native-i18n');
 I18n.fallbacks = true;

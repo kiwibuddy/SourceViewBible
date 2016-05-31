@@ -1,5 +1,5 @@
 /* @flow */
-"use strict";
+'use strict';
 
 import React, { Component, PropTypes } from 'react';
 import ColorPropType from 'ColorPropType';
