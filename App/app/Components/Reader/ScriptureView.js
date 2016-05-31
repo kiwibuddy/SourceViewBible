@@ -53,7 +53,9 @@ export default class ScriptureView extends Component {
     return (
       <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.scriptureContainer}>
-          <Text>1</Text>
+          <View style={styles.scriptureChapterContainer}>
+            <Text style={styles.scriptureChapter}>1</Text>
+          </View>
           {scripture}
         </ScrollView>
       </View>
@@ -76,6 +78,24 @@ const styles = StyleSheet.create({
     fontFamily: 'Hoefler Text',
     fontSize: 18,
     lineHeight: 30,
+  },
+  scriptureChapterContainer: {
+    width: 1,
+    alignSelf: 'center',
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderColor: Colors.sources.narrator,
+    paddingVertical: 10,
+    paddingHorizontal: 50,
+    marginTop: 40,
+    marginBottom: 40,
+  },
+  scriptureChapter: {
+    alignSelf: 'center',
+    justifyContent: 'center',
+    color: Colors.sources.narrator,
+    fontFamily: 'Hoefler Text',
+    fontSize: 46,
   },
   sourceColorRed: {
     color: Colors.sources.divine,
