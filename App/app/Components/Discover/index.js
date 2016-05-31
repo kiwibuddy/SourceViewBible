@@ -30,6 +30,7 @@ const { width } = Dimensions.get('window');
 // import { navigatePush } from '../../Actions';
 
 import Book from '../Books/Book';
+import Books from '../Books';
 
 import {
   Colors,
@@ -128,13 +129,17 @@ class Discover extends Component {
     if (props.scene.navigationState.key === 'book') {
       return <Book book={props.scene.navigationState.book} />
     }
+
+    if (props.scene.navigationState.key === 'books') {
+      return <Books onBookPress={this._onBookPress}/>
+    }
   }
 
   _renderDiscover = () => {
     return (
       <ScrollView style={styles.container}>
 
-        <TouchableOpacity onPress={this.props.onButtonPress}>
+        <TouchableOpacity onPress={this._onBooksPress}>
           <View style={styles.sectionHeaderContainer}>
             <Text style={StyleSheet.styles.sectionHeaderTitle}>BOOKS</Text>
             <View style={styles.sectionHeaderDetail}>
@@ -251,6 +256,16 @@ class Discover extends Component {
       }
     });
   }
+
+  _onBooksPress = () => {
+    this.props.onNavigate({
+      type: 'push',
+      route: {
+        key: 'books',
+        title: Localizable.t('books'),
+      }
+    });
+  };
 
   _onScrollEnd = (e: Object) => {
     // making our events coming from android compatible to updateIndex logic
