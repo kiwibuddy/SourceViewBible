@@ -36,7 +36,8 @@ class Reader extends Component {
   }
 
   _renderHeader = (props: Object) => {
-    return null;
+    if (props.scene.navigationState.key !== 'scripture') return null;
+
     return (
       <NavigationHeader
         {...props}
@@ -55,11 +56,7 @@ class Reader extends Component {
   };
 
   _renderLeftComponent = (props: Object) => {
-    if (!props.scene.navigationState.showBackButton) return null;
-
-    return (
-      <NavigationHeaderBackButton />
-    );
+    return (props.scene.index > 0 ?  <NavigationHeaderBackButton /> : null);
   };
 
   _renderScene = (props: Object) => {
