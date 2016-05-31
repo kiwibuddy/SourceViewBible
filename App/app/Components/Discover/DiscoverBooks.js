@@ -205,14 +205,6 @@ const styles = StyleSheet.create({
       width: 0
     },
   },
-  itemContainerBlank: {
-    borderRadius: 4,
-    backgroundColor: '#F9F9F9',
-    margin: 0,
-    marginHorizontal: 4,
-    flex: 1,
-    height: 127,
-  },
   gradient: {
     flex: 0,
     height: 3,
@@ -285,14 +277,5 @@ const styles = StyleSheet.create({
     height: StyleSheet.hairlineWidth,
     backgroundColor: '#e0e0e0',
     marginHorizontal: 2,
-  },
-  horizontalContainer: {
-    flexDirection: 'row',
-  },
-  leftContainer: {
-    flex: 1.2,
-  },
-  rightContainer: {
-    flex: 1.8,
   },
 });
