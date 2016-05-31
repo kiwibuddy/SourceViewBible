@@ -90,6 +90,28 @@ RCT_EXPORT_METHOD(string:(NSDictionary *)options resolver:(RCTPromiseResolveBloc
     }];
 }
 
+RCT_EXPORT_METHOD(monadSet:(NSDictionary *)options resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    RCTEmdrosEnv *emdros = [self databaseForName:options[@"name"]];
+    
+    NSString *query = options[@"query"];
+    if (!query) {
+        NSString *book = options[@"book"];
+        NSInteger chapterNumber = [options[@"chapterNumber"] integerValue];
+        query = [NSString stringWithFormat:RCTEmdrosQuery(
+            SELECT ALL OBJECTS
+            WHERE [Chapter DJHBook='%@' AND chapter = %li]
+        ), book, (long)chapterNumber];
+    }
+    
+    NSDictionary *monadSet = [emdros monadSetForQuery:query];
+    
+    if (monadSet) {
+        resolve(monadSet);
+    } else {
+        reject(@"monad_set_error", [NSString stringWithFormat:@"Error getting monad set for query: %@", query], nil);
+    }
+}
+
 - (dispatch_queue_t)methodQueue {
     return dispatch_queue_create("com.facebook.React.Emdros", DISPATCH_QUEUE_SERIAL);
 }

@@ -74,7 +74,13 @@ async function seedChapters(emdros, objects) {
           const chapters = []
           for (let i = 0; i < chapterCount; i++) {
             const chapterNumber = i + 1;
-            chapters.push({chapterNumber: chapterNumber});
+            const chapter = {chapterNumber: chapterNumber};
+
+            monadSetForBookChapterNumber(emdros, book.DJHRef, chapterNumber).then(monadSet => {
+              chapter["monadSet"] = monadSet;
+            });
+            
+            chapters.push(chapter);
           }
           book["chapterCount"] = chapters.length;
           book["chapters"] = chapters;
@@ -86,6 +92,10 @@ async function seedChapters(emdros, objects) {
       console.log(error);
     });
   });
+}
+
+async function monadSetForBookChapterNumber(emdros, book, chapterNumber) {
+  return emdros.monadSet({book: book, chapterNumber: chapterNumber});
 }
 
 async function seedWordCounts(emdros, objects) {

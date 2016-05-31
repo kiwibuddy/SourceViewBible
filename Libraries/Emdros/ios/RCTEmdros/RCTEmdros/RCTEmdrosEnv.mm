@@ -140,4 +140,18 @@
     return nil;
 }
 
+- (NSDictionary *)monadSetForQuery:(NSString *)query {
+    SetOfMonads som;
+    long firstMonad = 0;
+    long lastMonad = 0;
+    bool bResult = getSOMForQuery(_emdrosEnv, query.UTF8String, false, som);
+    if (bResult && !som.isEmpty()) {
+        firstMonad = som.first();
+        lastMonad = som.last();
+        return @{@"first": @(firstMonad), @"last": @(lastMonad)};
+    }
+    
+    return nil;
+}
+
 @end

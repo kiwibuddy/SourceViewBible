@@ -40,6 +40,10 @@ export default class Emdros {
   }
 
   async string(from, to, options) {
-    return EmdrosBridge.string({...options, from: from, to: to, name: this.name})
+    return EmdrosBridge.string({...options, from: from, to: to, name: this.name});
+  }
+
+  async monadSet(options) {
+    return EmdrosBridge.monadSet({...options, name: this.name});
   }
 }

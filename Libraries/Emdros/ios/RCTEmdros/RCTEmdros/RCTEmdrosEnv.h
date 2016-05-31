@@ -29,4 +29,5 @@ typedef NS_ENUM(NSInteger, RCTEmdrosBackendKind) {
 - (void)stringFrom:(NSInteger)from to:(NSInteger)to options:(NSDictionary *)options completion:(void (^)(id result, NSError *error))completion;
 
 - (NSString *)monadSetForBook:(NSString *)book;
+- (NSDictionary *)monadSetForQuery:(NSString *)query;
 @end
