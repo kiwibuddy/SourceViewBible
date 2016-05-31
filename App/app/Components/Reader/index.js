@@ -17,6 +17,8 @@ import { connect } from 'react-redux';
 
 const NavigationHeaderBackButton = require('../Common/NavigationHeaderBackButton');
 
+import Discover from '../Discover';
+
 import { StyleSheet } from '../../Common';
 
 class Reader extends Component {
@@ -34,8 +36,6 @@ class Reader extends Component {
   }
 
   _renderHeader = (props: Object) => {
-    console.log(props);
-    
     return (
       <NavigationHeader
         {...props}
@@ -60,9 +60,17 @@ class Reader extends Component {
   };
 
   _renderScene = (props: Object) => {
-    return (
-      <View style={{flex: 1, backgroundColor: 'orange'}}></View>
-    )
+    if (props.scene.navigationState.key === 'scripture') {
+      return (
+        <View style={{flex: 1, backgroundColor: 'orange'}}></View>
+      );
+    }
+
+    if (props.scene.navigationState.key === 'discover') {
+      return (
+        <Discover />
+      );
+    }
   };
 }
 

@@ -1,8 +1,7 @@
 /* @flow */
 'use strict';
 
-import ReactNative from 'react-native';
-const { NavigationExperimental } = ReactNative;
+import { NavigationExperimental } from 'react-native';
 const { Reducer: NavigationReducer } = NavigationExperimental;
 
 const navigation = NavigationReducer.StackReducer({
@@ -14,11 +13,15 @@ const navigation = NavigationReducer.StackReducer({
 	},
 	initialState: {
 		key: 'reader',
-		index: 0,
+		index: 1,
 		children: [
 			{
 				key: 'scripture',
 				title: 'Scripture'
+			},
+			{
+				key: 'discover',
+				title: 'Discover Fool'
 			}
 		],
 	},

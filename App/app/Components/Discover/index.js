@@ -45,7 +45,7 @@ class Discover extends Component {
     currentPage: number
   };
 
-  constructor(props) {
+  constructor(props: Object) {
     super(props);
 
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
@@ -116,7 +116,7 @@ class Discover extends Component {
     );
   }
 
-  _renderBook = (book) => {
+  _renderBook = (book: Object) => {
     return (
       <TouchableOpacity key={'book-' + book.key} style={styles.itemContainer} onPress={ () => this.props.onBookPress(book) }>
         <View style={styles.item}>
@@ -176,7 +176,7 @@ class Discover extends Component {
     );
   };
 
-  _onScrollEnd = (e) => {
+  _onScrollEnd = (e: Object) => {
     // making our events coming from android compatible to updateIndex logic
     if (!e.nativeEvent.contentOffset) {
       e.nativeEvent.contentOffset = {x: e.nativeEvent.position * width}
@@ -334,31 +334,33 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state) => {
-  return {
+export default Discover;
 
-  };
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onButtonPress: () => {
-      dispatch(navigatePush({
-        key: 'books',
-        title: Localizable.t('books')
-      }));
-    },
-    onBookPress: (book) => {
-      dispatch(navigatePush({
-        key: 'book',
-        title: book.name,
-        book
-      }));
-    }
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Discover);
+// const mapStateToProps = (state) => {
+//   return {
+//
+//   };
+// }
+//
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     onButtonPress: () => {
+//       dispatch(navigatePush({
+//         key: 'books',
+//         title: Localizable.t('books')
+//       }));
+//     },
+//     onBookPress: (book) => {
+//       dispatch(navigatePush({
+//         key: 'book',
+//         title: book.name,
+//         book
+//       }));
+//     }
+//   };
+// }
+//
+// export default connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(Discover);
