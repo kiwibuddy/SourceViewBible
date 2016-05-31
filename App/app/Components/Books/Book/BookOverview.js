@@ -45,6 +45,11 @@ class BookOverview extends Component {
 
     const words = book.words;
 
+    let overview = null;
+    if (book.overview) {
+      overview = book.overview.map((section) => this._renderOverviewSection(section));
+    }
+
     return (
       <ScrollView style={styles.container}>
         <TouchableOpacity onPress={this.props.onPressWords}>
@@ -133,11 +138,7 @@ class BookOverview extends Component {
         </TouchableOpacity>
 
         <View style={[{marginBottom: 20}, StyleSheet.styles.separator]} />
-
-        <View style={styles.contentContainer}>
-          <Text style={styles.contentHeader}>{Localizable.t('how-to-read', {name: this.props.book.name}).toLocaleUpperCase()}</Text>
-          <Text style={styles.contentBody}>Lorem magna laboris proident proident aliqua ea et nisi. Elit amet et non aute dolor eu anim nostrud do enim dolore. Non do esse dolore velit incididunt eiusmod voluptate sunt. Duis sunt labore proident culpa ullamco duis magna ullamco consectetur voluptate ipsum ut sint velit anim. Incididunt aute id fugiat esse irure excepteur eu eiusmod eiusmod nostrud consequat velit id.</Text>
-        </View>
+        {overview}
       </ScrollView>
     );
   }
@@ -184,6 +185,15 @@ class BookOverview extends Component {
       </TouchableOpacity>
     );
   };
+
+  _renderOverviewSection = (section: Object) => {
+    return (
+      <View key={section.title} style={styles.contentContainer}>
+        <Text style={styles.contentHeader}>{section.title.toLocaleUpperCase()}</Text>
+        <Text style={styles.contentBody}>{section.content}</Text>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
