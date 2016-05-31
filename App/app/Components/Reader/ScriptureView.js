@@ -68,12 +68,12 @@ const styles = StyleSheet.create({
   },
   scriptureContainer: {
     marginVertical: 20,
-    marginHorizontal: 20
+    marginHorizontal: 25
   },
   scripture: {
-    fontFamily: 'Georgia',
-    fontSize: 16,
-    lineHeight: 26,
+    fontFamily: 'Hoefler Text',
+    fontSize: 18,
+    lineHeight: 30,
   },
   sourceColorRed: {
     color: Colors.sources.divine,
