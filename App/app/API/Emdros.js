@@ -25,7 +25,7 @@ function query(query: string, options: Object) {
   return DB.query(query, options);
 }
 
-function scripture(book: Object) {
+function scripture(book: Object, chapterNumber: number) {
   if (DB == null) {
     const promise = new Promise((resolve, reject) => {
       reject('DB is null');
@@ -34,7 +34,9 @@ function scripture(book: Object) {
   }
 
   const options = {stylesheet: JSON.stringify(SCRIPTURE_STYLESHEET)};
-  return DB.string(1,10500, options);
+  const chapter = book.chapters[chapterNumber - 1];
+
+  return DB.string(chapter.monadSet.first, chapter.monadSet.last, options);
 }
 
 module.exports = {

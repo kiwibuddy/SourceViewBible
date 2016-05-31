@@ -38,7 +38,7 @@ export default class ScriptureView extends Component {
   }
 
   componentDidMount() {
-    Emdros.scripture(this.props.book).then((result) => {
+    Emdros.scripture(this.props.book, 1).then((result) => {
       const scripture = 'React.createElement(ScrollView, {}, ' + result.slice(0, -1) + ')';
       this.setState({scripture});
       console.log('got scripture');
