@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 
 import {
   View,
+  TouchableOpacity,
   NavigationExperimental
 } from 'react-native';
 
@@ -20,7 +21,10 @@ const NavigationHeaderBackButton = require('../Common/NavigationHeaderBackButton
 import ScriptureView from './ScriptureView';
 import Discover from '../Discover';
 
-import { StyleSheet } from '../../Common';
+import {
+  Colors,
+  StyleSheet
+} from '../../Common';
 
 class Reader extends Component {
   state: {
@@ -64,7 +68,11 @@ class Reader extends Component {
   _renderTitleComponent = (props: Object) => {
     const title = props.scene.navigationState.title;
     return (
-      <NavigationHeader.Title>{this.state.book.name}</NavigationHeader.Title>
+      <TouchableOpacity style={{flex: 1}} onPress={this._onPressDiscover}>
+        <NavigationHeader.Title textStyle={{color: Colors.tintColor}}>
+            {this.state.book.name}
+        </NavigationHeader.Title>
+      </TouchableOpacity>
     );
   };
 
@@ -94,7 +102,15 @@ class Reader extends Component {
     this.setState({
       book
     });
+  };
 
+  _onPressDiscover = () => {
+    this.props.onNavigate({
+      type: 'push',
+      route: {
+        key: 'discover'
+      }
+    });
   };
 }
 
