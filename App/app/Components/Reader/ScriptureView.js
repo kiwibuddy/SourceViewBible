@@ -54,7 +54,7 @@ export default class ScriptureView extends Component {
       <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.scriptureContainer}>
           <View style={styles.scriptureChapterContainer}>
-            <Text style={styles.scriptureChapter}>1</Text>
+            <Text style={styles.scriptureChapter}>{this.props.chapterNumber}</Text>
           </View>
           {scripture}
         </ScrollView>
