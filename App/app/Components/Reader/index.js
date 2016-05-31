@@ -28,20 +28,20 @@ import {
 
 class Reader extends Component {
   state: {
-    book: any
+    chapterNumber: number,
   };
 
   constructor(props: Object) {
     super(props);
 
     this.state = {
-      book: null
+      chapterNumber: 1
     };
   }
 
   render() {
     return (
-      <ScriptureView book={this.props.book} />
+      <ScriptureView book={this.props.book} chapterNumber={this.state.chapterNumber} />
     );
   }
 
@@ -73,8 +73,8 @@ class Reader extends Component {
 
   _renderTitleComponent = (props: Object) => {
     let title = props.scene.navigationState.title;
-    if (this.state.book) {
-      title = this.state.book.name;
+    if (this.props.book) {
+      title = this.props.book.name;
     }
 
     return (
@@ -93,7 +93,7 @@ class Reader extends Component {
   _renderScene = (props: Object) => {
     if (props.scene.navigationState.key === 'scripture') {
       return (
-        <ScriptureView book={this.state.book} />
+        <ScriptureView book={this.props.book} />
       );
     }
 
