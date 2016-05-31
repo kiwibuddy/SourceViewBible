@@ -3,11 +3,11 @@
 
 import { combineReducers } from 'redux-immutable';
 
-import reader from '../Components/Reader/reducer';
+// import reader from '../Components/Reader/reducer';
 import discover from '../Components/Discover/reducer';
 
 const reducers = {
-  reader,
+  // reader,
   discover
 };
 

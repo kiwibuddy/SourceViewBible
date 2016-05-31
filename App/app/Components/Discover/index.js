@@ -31,6 +31,7 @@ const { width } = Dimensions.get('window');
 
 import Book from '../Books/Book';
 import Books from '../Books';
+import Reader from '../Reader';
 
 import {
   Colors,
@@ -127,11 +128,17 @@ class Discover extends Component {
     }
 
     if (props.scene.navigationState.key === 'book') {
-      return <Book book={props.scene.navigationState.book} onPressScripture={this.props.onPressScripture} />
+      const book = props.scene.navigationState.book;
+      return <Book book={book} onPressScripture={() => this._onPressScripture(book)} />
     }
 
     if (props.scene.navigationState.key === 'books') {
       return <Books onBookPress={this._onBookPress}/>
+    }
+
+    if (props.scene.navigationState.key === 'reader') {
+      const book = props.scene.navigationState.book;
+      return <Reader book={book} />
     }
   }
 
@@ -263,6 +270,17 @@ class Discover extends Component {
       route: {
         key: 'books',
         title: Localizable.t('books'),
+      }
+    });
+  };
+
+  _onPressScripture = (book: Object) => {
+    this.props.onNavigate({
+      type: 'push',
+      route: {
+        key: 'reader',
+        title: book.name,
+        book
       }
     });
   };

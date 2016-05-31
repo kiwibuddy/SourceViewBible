@@ -41,16 +41,22 @@ class Reader extends Component {
 
   render() {
     return (
-      <NavigationCardStack
-				direction={'vertical'}
-				navigationState={this.props.navigation}
-				onNavigate={this.props.onNavigate}
-				renderScene={this._renderScene}
-				renderOverlay={this._renderHeader}
-				style={styles.container}
-			/>
+      <ScriptureView book={this.props.book} />
     );
   }
+
+  // render() {
+  //   return (
+  //     <NavigationCardStack
+	// 			direction={'vertical'}
+	// 			navigationState={this.props.navigation}
+	// 			onNavigate={this.props.onNavigate}
+	// 			renderScene={this._renderScene}
+	// 			renderOverlay={this._renderHeader}
+	// 			style={styles.container}
+	// 		/>
+  //   );
+  // }
 
   _renderHeader = (props: Object) => {
     if (props.scene.navigationState.key !== 'scripture') return null;
@@ -124,29 +130,30 @@ const styles = StyleSheet.create({
   }
 });
 
+export default Reader;
 
-function mapDispatchToProps(dispatch) {
-	return {
-		dispatch
-	};
-}
-
-function mapStateToProps(state) {
-  console.log(state);
-
-	return {
-		navigation: state.get('reader')
-	};
-}
-
-export default connect(mapStateToProps, mapDispatchToProps, (stateProps, dispatchProps, ownProps) => {
-	return Object.assign({}, dispatchProps, stateProps, {
-		onNavigate: (action) => {
-			dispatchProps.dispatch(
-				Object.assign(action, {
-					scope: stateProps.navigation.key
-				})
-			);
-		}
-	});
-})(Reader);
+//
+//
+// function mapDispatchToProps(dispatch) {
+// 	return {
+// 		dispatch
+// 	};
+// }
+//
+// function mapStateToProps(state) {
+// 	return {
+// 		navigation: state.get('reader')
+// 	};
+// }
+//
+// export default connect(mapStateToProps, mapDispatchToProps, (stateProps, dispatchProps, ownProps) => {
+// 	return Object.assign({}, dispatchProps, stateProps, {
+// 		onNavigate: (action) => {
+// 			dispatchProps.dispatch(
+// 				Object.assign(action, {
+// 					scope: stateProps.navigation.key
+// 				})
+// 			);
+// 		}
+// 	});
+// })(Reader);

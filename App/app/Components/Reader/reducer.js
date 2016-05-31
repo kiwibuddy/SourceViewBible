@@ -13,15 +13,11 @@ const navigation = NavigationReducer.StackReducer({
 	},
 	initialState: {
 		key: 'reader',
-		index: 1,
+		index: 0,
 		children: [
 			{
 				key: 'scripture',
 				title: 'Scripture'
-			},
-			{
-				key: 'discover',
-				title: 'Discover Foo'
 			}
 		],
 	},
