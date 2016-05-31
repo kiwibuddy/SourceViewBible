@@ -6,7 +6,7 @@
     "name": "Genesis",
     "overview": [
       {
-        "title": "How to read Genesis",
+        "title": "How to read Exodus",
         "content": "If you’re like most people, you’ve wondered about the deep questions of life: Why are we here? What is life all about? Genesis takes you back to the beginning of time to find the answers. It tells about many beginnings: the first plants and animals; the first man and woman; the first sin; the first news of God’s salvation. It also shows God’s dealings with Noah, Abraham, Joseph, and others, repeatedly “demonstrating his desire to have fellowship with his people. \n\nGenesis is an exciting book, full of unforgettable stories that introduce fascinating people and detail remarkable events. It is an important book to read, for it is the foundation of all that follows in the pages of Scripture. In the first 11 chapters of Genesis you’ll get a big-picture view, covering four major events: the creation, the fall of humanity, the flood, and the record of nations that came into existence afterward. In the next 39 chapters (12-50) you’ll get a close-up view of one family—Abraham, Isaac, Jacob/Israel and his descendants. God called this family to himself so that through them he might eventually bless all the families of the earth (12:2).\n\nAs you read Genesis, take special notice of the focus Genesis places on the relationship between God and humanity—broken in the garden and restored through sacrifices and personal encounters with God. Through the stories of history Genesis illustrates cycles of sin and repentance—and continually shows God at work to accomplish his plans."
       },
       {
@@ -35,7 +35,29 @@
     "DJHRef": "Exo",
     "key": "exodus",
     "testament": 0,
-    "name": "Exodus"
+    "name": "Exodus",
+    "overview": [
+      {
+        "title": "How to read Exodus",
+        "content": "A spectacular escape and a hair-raising chase scene are only two of the many epic adventures in Exodus. But this book is much more than an adventure series; it recounts the supernatural rescue of an entire people by their God. Despite God’s intervention, the Israelites seem unable to remain loyal to him. Seeing their faltering faith can actually encourage us with a vivid lesson: Even imperfect people can get to know God, who loves them perfectly.\n\nExodus can be separated into two sections. The first 19 chapters describe the Israelites’ journey from bondage to deliverance, and the last 21 chapters record laws by which God wanted his people to live as they worshiped him and followed him. As you read Exodus, be alert to the marvelous teachings about God contained within its pages. God is revealed as powerful, caring, awesome in glory and majesty and worthy of exuberant worship, forgiving and merciful, and passionately loving.\n\nExodus spotlights God’s direct involvement in human history—how he goes to astonishing lengths to reach those he loves. For example, he helps Moses overcome an incredible inferiority complex to become a great leader in Israel. Repeatedly, Exodus shows how much God enjoys people who, aware of their weaknesses, trust him as their only hope.\n\nExodus spotlights God’s direct involvement in human history—how he goes to astonishing lengths to reach those he loves. For example, he helps Moses overcome an incredible inferiority complex to become a great leader in Israel. Repeatedly, Exodus shows how much God enjoys people who, aware of their weaknesses, trust him as their only hope."
+      },
+      {
+        "title": "Who wrote this book and when?",
+        "content": "Moses wrote it around 1440 bc."
+      },
+      {
+        "title": "Why was it written?",
+        "content": "To remind the Israelites how God had rescued them from oppression."
+      },
+      {
+        "title": "What was its historical setting?",
+        "content": "Jacob had migrated to Egypt with his family to escape a famine in Canaan some four centuries earlier. But the \"land of escape\" became a \"land of bondage\" as the Egyp-tians sought to maintain dominance over the Israelites by forcing them into slave labor. Shortly before his death in the desert, Moses reflected on and penned the swirling events of Israel’s escape from Egypt."
+      },
+      {
+        "title": "SourceView Insights.",
+        "content": "Moses is the lead person in this book; thus his words figure in green. His longest spoken part (496 words) is Moses 34. From Moses’ perspective, the most important thing to talk about is God’s extraordinary salvation of the people of Israel from bondage. Here the central theme of the book is stated and restated. Moses begins, \"This is a day to remember forever—the day you left Egypt, the place of your slavery.\" Then three times he reiterates God’s great act of redemption: \"Today the Lord has brought you out by the power of his mighty hand . . . With a strong hand, the Lord rescued you from Egypt . . . the power of the Lord’s mighty hand brought us out of Egypt.\"\n\nGod speaks more than anyone else in this book. The longest of his 87 spoken parts is 4,417 words long (God 67)! What motivated God to speak at such great length? His passionate desire is stated at the front end of this long exposition: “Have the people of Israel build me a holy sanctuary so I can live among them” (Exo 25:8). Intimate fellowship and relational proximity with his people is what God desires.\n\nThe blue sections of this book reveal an extraordinary cross-section of life in the ancient world. Speakers include two pharaohs, an Egyp-tian princess, Hebrew midwives, court officials, soldiers, magicians, slave drivers, and craftsmen. The voice of the Israelites is heard most often (14 times) as they and their leaders and foremen take an active role in this story. In many ways this book is a family history. Even as God begins to build a redeemed family on earth, we get a unique glimpse into Moses’ own family. Notice all the members of his family that have a speaking part in Exodus:\n\n• His father-in-law, Jethro/Reuel, speaks 10 times;\n• His adopted mother, Pharaoh’s daughter, speaks 5 times;\n• His brother, Aaron, speaks 4 times;\n• His sister, Miriam, speaks twice, as do his future sisters-in-law, Jethro/Reuel’s daughters;\n• His wife, Zipporah, speaks once."
+      },
+    ]
   },
   {
     "DJHRef": "Lev",
