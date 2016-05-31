@@ -43,6 +43,8 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import { SourcesBarChart, SpheresBarChart } from '../Charts';
 
+import DiscoverSection from './DiscoverSection';
+
 import PageControl from '../Common/PageControl';
 
 import { ReadingTime } from '../../Common/NumberHelper';
