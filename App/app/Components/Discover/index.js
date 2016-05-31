@@ -74,8 +74,6 @@ class Discover extends Component {
   }
 
   render() {
-    console.log('render');
-
     return (
       <NavigationAnimatedView
         style={styles.container}
@@ -85,6 +83,17 @@ class Discover extends Component {
         renderScene={this._renderScene}
       />
     );
+
+    // return (
+    //   <NavigationCardStack
+    //     direction={'horizontal'}
+    //     navigationState={this.props.navigation}
+    //     onNavigate={this.props.onNavigate}
+    //     renderScene={this._renderScene}
+    //     renderOverlay={this._renderHeader}
+    //     style={styles.container}
+    //   />
+    // );
   }
 
   _renderHeader = (props: Object) => {
