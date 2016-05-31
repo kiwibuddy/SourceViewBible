@@ -20,11 +20,11 @@ import {
   StyleSheet,
   Localizable,
   Platform
-} from '../../Common';
+} from '../../../Common';
 
-import SourcesBarChart from '../Charts/SourcesBarChart';
+import SourcesBarChart from '../../Charts/SourcesBarChart';
 
-import Icon from '../Common/Icon';
+import Icon from '../../Common/Icon';
 
 class BookSources extends Component {
   state: {

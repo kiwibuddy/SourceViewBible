@@ -21,7 +21,7 @@ import {
   StyleSheet,
   Localizable,
   Platform
-} from '../../Common';
+} from '../../../Common';
 
 import TabNavigator from 'react-native-tab-navigator';
 
@@ -31,13 +31,14 @@ import BookSources from './BookSources';
 import BookSpheres from './BookSpheres';
 import BookWords from './BookWords';
 
-class Book extends Component {
+export default class Book extends Component {
   state: {
     selectedTab: string
   };
 
-  constructor(props) {
+  constructor(props: Object) {
     super(props);
+
     this.state = {
       selectedTab: 'summary'
     };
@@ -51,8 +52,8 @@ class Book extends Component {
           title={Localizable.t('tabs.overview')}
           titleStyle={styles.tabTitleStyle}
           selectedTitleStyle={styles.selectedTabTitleStyle}
-          renderIcon={() => <Image source={require('../../Images/tabs/summary.png')} style={styles.tabIcon} />}
-          renderSelectedIcon={() => <Image source={require('../../Images/tabs/summary-s.png')} style={styles.selectedTabIcon} />}
+          renderIcon={() => <Image source={require('../../../Images/tabs/summary.png')} style={styles.tabIcon} />}
+          renderSelectedIcon={() => <Image source={require('../../../Images/tabs/summary-s.png')} style={styles.selectedTabIcon} />}
           onPress={() => this.setState({ selectedTab: 'summary' })}
         >
           <BookOverview
@@ -68,8 +69,8 @@ class Book extends Component {
           title={Localizable.t('tabs.chapters')}
           titleStyle={styles.tabTitleStyle}
           selectedTitleStyle={styles.selectedTabTitleStyle}
-          renderIcon={() => <Image source={require('../../Images/tabs/chapters.png')} style={styles.tabIcon} />}
-          renderSelectedIcon={() => <Image source={require('../../Images/tabs/chapters-s.png')} style={styles.selectedTabIcon} />}
+          renderIcon={() => <Image source={require('../../../Images/tabs/chapters.png')} style={styles.tabIcon} />}
+          renderSelectedIcon={() => <Image source={require('../../../Images/tabs/chapters-s.png')} style={styles.selectedTabIcon} />}
           onPress={() => this.setState({ selectedTab: 'chapters' })}
         >
           <BookChapters book={this.props.book} />
@@ -79,8 +80,8 @@ class Book extends Component {
           title={Localizable.t('tabs.sources')}
           titleStyle={styles.tabTitleStyle}
           selectedTitleStyle={styles.selectedTabTitleStyle}
-          renderIcon={() => <Image source={require('../../Images/tabs/sources.png')} style={styles.tabIcon} />}
-          renderSelectedIcon={() => <Image source={require('../../Images/tabs/sources-s.png')} style={styles.selectedTabIcon} />}
+          renderIcon={() => <Image source={require('../../../Images/tabs/sources.png')} style={styles.tabIcon} />}
+          renderSelectedIcon={() => <Image source={require('../../../Images/tabs/sources-s.png')} style={styles.selectedTabIcon} />}
           onPress={() => this.setState({ selectedTab: 'sources' })}
         >
           <BookSources book={this.props.book} />
@@ -90,8 +91,8 @@ class Book extends Component {
           title={Localizable.t('tabs.spheres')}
           titleStyle={styles.tabTitleStyle}
           selectedTitleStyle={styles.selectedTabTitleStyle}
-          renderIcon={() => <Image source={require('../../Images/tabs/spheres.png')} style={styles.tabIcon} />}
-          renderSelectedIcon={() => <Image source={require('../../Images/tabs/spheres-s.png')} style={styles.selectedTabIcon} />}
+          renderIcon={() => <Image source={require('../../../Images/tabs/spheres.png')} style={styles.tabIcon} />}
+          renderSelectedIcon={() => <Image source={require('../../../Images/tabs/spheres-s.png')} style={styles.selectedTabIcon} />}
           onPress={() => this.setState({ selectedTab: 'spheres' })}
         >
           <BookSpheres />
@@ -101,8 +102,8 @@ class Book extends Component {
           title={Localizable.t('tabs.words')}
           titleStyle={styles.tabTitleStyle}
           selectedTitleStyle={styles.selectedTabTitleStyle}
-          renderIcon={() => <Image source={require('../../Images/tabs/words.png')} style={styles.tabIcon} />}
-          renderSelectedIcon={() => <Image source={require('../../Images/tabs/words-s.png')} style={styles.selectedTabIcon} />}
+          renderIcon={() => <Image source={require('../../../Images/tabs/words.png')} style={styles.tabIcon} />}
+          renderSelectedIcon={() => <Image source={require('../../../Images/tabs/words-s.png')} style={styles.selectedTabIcon} />}
           onPress={() => this.setState({ selectedTab: 'words' })}
         >
           <BookWords />

@@ -20,14 +20,14 @@ import {
   StyleSheet,
   Localizable,
   Platform
-} from '../../Common';
+} from '../../../Common';
 
 // $FlowBug: - Flow can't find os module extension
-import SegmentedControl from '../Common/SegmentedControl';
+import SegmentedControl from '../../Common/SegmentedControl';
 
-import { SourcesBarChart, SpheresBarChart } from '../Charts';
+import { SourcesBarChart, SpheresBarChart } from '../../Charts';
 
-import { ReadingTime } from '../../Common/NumberHelper';
+import { ReadingTime } from '../../../Common/NumberHelper';
 
 const SEGMENTS = [Localizable.t('sources.text'), Localizable.t('spheres')];
 

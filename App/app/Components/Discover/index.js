@@ -21,14 +21,15 @@ const {
   CardStack: NavigationCardStack
 } = NavigationExperimental;
 
-
 const NavigationHeaderBackButton = require('../Common/NavigationHeaderBackButton');
 
 import { connect } from 'react-redux';
 
 const { width } = Dimensions.get('window');
 
-import { navigatePush } from '../../Actions';
+// import { navigatePush } from '../../Actions';
+
+import Book from '../Books/Book';
 
 import {
   Colors,
@@ -59,41 +60,42 @@ class Discover extends Component {
     super(props);
 
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
+    const books = Bible.sort((a, b) => a.sourceCount > b.sourceCount ? -1 : 1).slice(0, MAXIMUM_BOOK_COUNT);
     this.state = {
-      dataSource: dataSource,
+      dataSource: dataSource.cloneWithRows(books),
       currentPage: 0
     };
   }
 
-  componentDidMount() {
-    const books = Bible.sort((a, b) => a.sourceCount > b.sourceCount ? -1 : 1).slice(0, MAXIMUM_BOOK_COUNT);
-
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(books)
-    });
-  }
+  // componentDidMount() {
+  //   const books = Bible.sort((a, b) => a.sourceCount > b.sourceCount ? -1 : 1).slice(0, MAXIMUM_BOOK_COUNT);
+  //
+  //   this.setState({
+  //     dataSource: this.state.dataSource.cloneWithRows(books)
+  //   });
+  // }
 
   render() {
-    return (
-      <NavigationAnimatedView
-        style={styles.container}
-        navigationState={this.props.navigation}
-        onNavigate={this.props.onNavigate}
-        renderOverlay={this._renderHeader}
-        renderScene={this._renderScene}
-      />
-    );
-
     // return (
-    //   <NavigationCardStack
-    //     direction={'horizontal'}
+    //   <NavigationAnimatedView
+    //     style={styles.container}
     //     navigationState={this.props.navigation}
     //     onNavigate={this.props.onNavigate}
-    //     renderScene={this._renderScene}
     //     renderOverlay={this._renderHeader}
-    //     style={styles.container}
+    //     renderScene={this._renderScene}
     //   />
     // );
+
+    return (
+      <NavigationCardStack
+        direction={'horizontal'}
+        navigationState={this.props.navigation}
+        onNavigate={this.props.onNavigate}
+        renderScene={this._renderScene}
+        renderOverlay={this._renderHeader}
+        style={styles.container}
+      />
+    );
   }
 
   _renderHeader = (props: Object) => {
@@ -119,8 +121,18 @@ class Discover extends Component {
   };
 
   _renderScene = (props: Object) => {
+    if (props.scene.navigationState.key === 'discover') {
+      return this._renderDiscover();
+    }
+
+    if (props.scene.navigationState.key === 'book') {
+      return <Book book={props.scene.navigationState.book} />
+    }
+  }
+
+  _renderDiscover = () => {
     return (
-      <ScrollView key="scroll" style={styles.container}>
+      <ScrollView style={styles.container}>
 
         <TouchableOpacity onPress={this.props.onButtonPress}>
           <View style={styles.sectionHeaderContainer}>
@@ -171,7 +183,7 @@ class Discover extends Component {
 
   _renderBook = (book: Object) => {
     return (
-      <TouchableOpacity key={'book-' + book.key} style={styles.itemContainer} onPress={ () => this.props.onBookPress(book) }>
+      <TouchableOpacity key={'book-' + book.key} style={styles.itemContainer} onPress={ () => this._onBookPress(book) }>
         <View style={styles.item}>
           <LinearGradient
             colors={Colors.spheres[book.principalSphere].gradient.tiny}
@@ -228,6 +240,17 @@ class Discover extends Component {
       </View>
     );
   };
+
+  _onBookPress = (book: Object) => {
+    this.props.onNavigate({
+      type: 'push',
+      route: {
+        key: 'book',
+        title: book.name,
+        book
+      }
+    });
+  }
 
   _onScrollEnd = (e: Object) => {
     // making our events coming from android compatible to updateIndex logic

@@ -19,15 +19,15 @@ import {
   StyleSheet,
   Localizable,
   Platform
-} from '../../Common';
+} from '../../../Common';
 
-import { SourcesBarChart, SpheresBarChart, WordCloud } from '../Charts';
+import { SourcesBarChart, SpheresBarChart, WordCloud } from '../../Charts';
 
-import ParallaxMotionView from '../Common/ParallaxMotionView';
+import ParallaxMotionView from '../../Common/ParallaxMotionView';
 
-import Icon from '../Common/Icon';
+import Icon from '../../Common/Icon';
 
-import { ReadingTime } from '../../Common/NumberHelper';
+import { ReadingTime } from '../../../Common/NumberHelper';
 
 const MAX_NUMBER_OF_SOURCES = 4;
 

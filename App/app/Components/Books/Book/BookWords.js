@@ -19,7 +19,7 @@ import {
   StyleSheet,
   Localizable,
   Platform
-} from '../../Common';
+} from '../../../Common';
 
 class BookWords extends Component {
   render() {
