@@ -11,7 +11,7 @@ module.exports = {
     narrator: '#4A4A4A',
     god: '#fc3d39',
     divine: '#fc3d39',
-    lead: '#4cda65',
+    lead: '#19A555',
     support: '#218aff',
   },
 
