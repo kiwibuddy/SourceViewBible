@@ -65,7 +65,12 @@ export default class ScriptureView extends Component {
   }
 
   componentDidMount() {
-    this._fetchScripture(this.state.book, this.state.chapterNumber);
+    this._fetchScripture(this.state.book, this.state.chapterNumber).then((scripture) => {
+      this.setState({
+        scripture,
+        loading: false
+      });
+    });
   }
 
   render() {
@@ -134,7 +139,16 @@ export default class ScriptureView extends Component {
         showNextScripture: false
       });
 
-      this._fetchScripture(book, chapterNumber);
+      this._fetchScripture(book, chapterNumber).then((scripture) => {
+        this.setState({
+          book,
+          chapterNumber,
+          scripture,
+          loading: false
+        }, () => {
+          this.refs[SCROLLVIEW_REF].scrollTo({x: 0, y: 0, animated: false});
+        });
+      });
     }
   };
 
@@ -164,20 +178,7 @@ export default class ScriptureView extends Component {
   };
 
   _fetchScripture(book: Object, chapterNumber: number) {
-    return new Promise((resolve, reject) => {
-      Emdros.scripture(book, chapterNumber).then((scripture) => {
-        this.setState({
-          book,
-          chapterNumber,
-          scripture,
-          loading: false
-        }, () => {
-          this.refs[SCROLLVIEW_REF].scrollTo({x: 0, y: 0, animated: false});
-        });
-      }).catch((error) => {
-        console.log("Error getting string " + error);
-      });
-    });
+    return Emdros.scripture(book, chapterNumber);
   }
 }
 
