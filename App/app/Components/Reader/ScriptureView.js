@@ -43,7 +43,6 @@ export default class ScriptureView extends Component {
     chapter: any,
     scripture: any,
     previousScripture: any,
-    hasPreviousScripture: bool,
     showPreviousScripture: bool,
     nextScripture: any,
     showNextScripture: bool,
@@ -53,12 +52,14 @@ export default class ScriptureView extends Component {
   constructor(props: Object) {
     super(props);
     const { book, chapter } = props;
+
+    console.log(chapter);
+
     this.state = {
       book: book,
       chapter: chapter,
       scripture: null,
       previousScripture: null,
-      hasPreviousScripture: chapter.monadSet.first > 1,
       showPreviousScripture: false,
       nextScripture: null,
       showNextScripture: false,
@@ -72,6 +73,8 @@ export default class ScriptureView extends Component {
         scripture,
         loading: false
       });
+
+
     });
   }
 
@@ -106,8 +109,16 @@ export default class ScriptureView extends Component {
     )
   }
 
+  _hasPreviousScripture = () => {
+    return this.state.chapter.monadSet.first > 2;
+  };
+
+  _hasNextScripture = () => {
+    return true;
+  };
+
   _renderPreviousScripture = () => {
-    if (!this.state.showPreviousScripture) return null;
+    if (!this._hasPreviousScripture() || !this.state.showPreviousScripture) return null;
 
     return (
       <View style={{position:'absolute', top: -100, height: 100, left: 0, right: 0, backgroundColor: 'red'}}/>
@@ -115,7 +126,7 @@ export default class ScriptureView extends Component {
   };
 
   _renderNextScripture = () => {
-    if (!this.state.showNextScripture) return null;
+    if (!this._hasNextScripture() || !this.state.showNextScripture) return null;
 
     return (
       <View style={[styles.scriptureChapterContainer, { position: 'absolute', bottom: 0, left: 0, right: 0, backgroundColor: 'red'}]}>
@@ -128,7 +139,7 @@ export default class ScriptureView extends Component {
     this.waitingForRelease = false;
   };
 
-  _onResponderRelease= () => {
+  _onResponderRelease = () => {
     if (this.waitingForRelease) {
       this.waitingForRelease = false;
 
@@ -161,14 +172,14 @@ export default class ScriptureView extends Component {
     let distanceFromTop = e.nativeEvent.contentInset.top + e.nativeEvent.contentOffset.y;
     const distanceFromBottom = e.nativeEvent.contentSize.height - e.nativeEvent.layoutMeasurement.height - e.nativeEvent.contentOffset.y;
 
-    if (distanceFromTop < -MINIMUM_PULL_THRESHOLD) {
+    if (this._hasPreviousScripture() && distanceFromTop < -MINIMUM_PULL_THRESHOLD) {
       this.setState({showPreviousScripture: true, showNextScripture: false});
 
       if (distanceFromTop < -MINIMUM_RELEASE_THRESHOLD) {
         this.waitingForRelease = true;
         this.releaseDirection = ReleaseDirection.PREVIOUS;
       }
-    } else if (distanceFromBottom < -MINIMUM_PULL_THRESHOLD) {
+    } else if (this._hasNextScripture() && distanceFromBottom < -MINIMUM_PULL_THRESHOLD) {
       this.setState({showPreviousScripture: false, showNextScripture: true});
 
       if (distanceFromBottom < -MINIMUM_RELEASE_THRESHOLD) {
