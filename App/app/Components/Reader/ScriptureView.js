@@ -37,6 +37,7 @@ const ReleaseDirection = {
 export default class ScriptureView extends Component {
   waitingForRelease: bool = false;
   releaseDirection: any = null;
+  scrollViewHeight: number = 0;
 
   state: {
     book: any,
@@ -90,6 +91,8 @@ export default class ScriptureView extends Component {
           ref={SCROLLVIEW_REF}
           contentContainerStyle={styles.scriptureContainer}
           onScroll={this._onScroll}
+          onContentSizeChange={this._onContentSizeChange}
+          onLayout={(event) => this.scrollViewHeight = event.nativeEvent.layout.height}
           scrollEventThrottle={64}
           onResponderGrant={this._onResponderGrant}
           onResponderRelease={this._onResponderRelease}
@@ -162,8 +165,6 @@ export default class ScriptureView extends Component {
           chapter,
           scripture,
           loading: false
-        }, () => {
-          this.refs[SCROLLVIEW_REF].scrollTo({x: 0, y: 0, animated: false});
         });
 
         this._fetchPreviousScripture();
@@ -194,6 +195,15 @@ export default class ScriptureView extends Component {
     } else {
       this.setState({showPreviousScripture: false, showNextScripture: false});
     }
+  };
+
+  _onContentSizeChange = (width: number, height: number) => {
+    let scrollY = 0;
+    if (this.releaseDirection === ReleaseDirection.PREVIOUS && this.scrollViewHeight > 0) {
+      scrollY = height - this.scrollViewHeight;
+    }
+
+    this.refs[SCROLLVIEW_REF].scrollTo({y: scrollY, animated: false});
   };
 
   _fetchScripture = (options: Object) => {
