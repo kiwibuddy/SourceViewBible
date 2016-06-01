@@ -68,7 +68,7 @@ export default class ScriptureView extends Component {
     return (
       <View style={styles.container}>
 
-        {previousScripture}
+
 
         <ScrollView
           style={styles.contentContainer}
@@ -76,13 +76,17 @@ export default class ScriptureView extends Component {
           onScroll={this._onScroll}
           scrollEventThrottle={64}
         >
+          {previousScripture}
+
           <View style={styles.scriptureChapterContainer}>
             <Text style={styles.scriptureChapter}>{this.state.chapterNumber}</Text>
           </View>
           {scripture}
+
+          {nextScripture}
         </ScrollView>
 
-        {nextScripture}
+
 
       </View>
     )
@@ -92,7 +96,7 @@ export default class ScriptureView extends Component {
     if (!this.state.showPreviousScripture) return null;
 
     return (
-      <View style={{height: 100, backgroundColor: 'red'}}/>
+      <View style={{position:'absolute', top: -100, height: 100, left: 0, right: 0, backgroundColor: 'red'}}/>
     );
   };
 
@@ -100,7 +104,7 @@ export default class ScriptureView extends Component {
     if (!this.state.showNextScripture) return null;
 
     return (
-      <View style={[styles.scriptureChapterContainer, { backgroundColor: 'red'}]}>
+      <View style={[styles.scriptureChapterContainer, { position: 'absolute', bottom: -40, height: 40, left: 0, right: 0, backgroundColor: 'red'}]}>
         <Text style={styles.scriptureChapter}>{this.state.chapterNumber + 1}</Text>
       </View>
     );
