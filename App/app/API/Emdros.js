@@ -26,17 +26,22 @@ function query(query: string, options: Object) {
 }
 
 function scripture(book: Object, chapterNumber: number) {
-  if (DB == null) {
-    const promise = new Promise((resolve, reject) => {
-      reject('DB is null');
-    });
-    return promise;
-  }
-
   const options = {stylesheet: JSON.stringify(SCRIPTURE_STYLESHEET)};
   const chapter = book.chapters[chapterNumber - 1];
 
-  return DB.string(chapter.monadSet.first, chapter.monadSet.last, options);
+  return new Promise((resolve, reject) => {
+    if (DB == null) {
+      reject('DB is null');
+      return;
+    }
+
+    DB.string(chapter.monadSet.first, chapter.monadSet.last, options).then((result) => {
+      const scripture = 'React.createElement(View, {}, ' + result.slice(0, -1) + ')';
+      resolve(scripture);
+    }).catch((error) => {
+      reject(error);
+    });
+  })
 }
 
 module.exports = {

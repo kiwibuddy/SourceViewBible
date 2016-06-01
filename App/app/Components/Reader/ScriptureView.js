@@ -128,6 +128,12 @@ export default class ScriptureView extends Component {
       const book = this.state.book;
       const chapterNumber = (this.releaseDirection === ReleaseDirection.PREVIOUS ? this.state.chapterNumber - 1 : this.state.chapterNumber + 1);
 
+      this.setState({
+        loading: true,
+        showPreviousScripture: false,
+        showNextScripture: false
+      });
+
       this._fetchScripture(book, chapterNumber);
     }
   };
@@ -158,24 +164,19 @@ export default class ScriptureView extends Component {
   };
 
   _fetchScripture(book: Object, chapterNumber: number) {
-    this.setState({
-      loading: true,
-      showPreviousScripture: false,
-      showNextScripture: false
-    });
-
-    Emdros.scripture(book, chapterNumber).then((result) => {
-      const scripture = 'React.createElement(View, {}, ' + result.slice(0, -1) + ')';
-      this.setState({
-        book,
-        chapterNumber,
-        scripture,
-        loading: false
-      }, () => {
-        this.refs[SCROLLVIEW_REF].scrollTo({x: 0, y: 0, animated: false});
+    return new Promise((resolve, reject) => {
+      Emdros.scripture(book, chapterNumber).then((scripture) => {
+        this.setState({
+          book,
+          chapterNumber,
+          scripture,
+          loading: false
+        }, () => {
+          this.refs[SCROLLVIEW_REF].scrollTo({x: 0, y: 0, animated: false});
+        });
+      }).catch((error) => {
+        console.log("Error getting string " + error);
       });
-    }).catch((error) => {
-      console.log("Error getting string " + error);
     });
   }
 }
