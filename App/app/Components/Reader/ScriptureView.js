@@ -131,9 +131,11 @@ export default class ScriptureView extends Component {
     if (!this._hasNextScripture() || !this.state.showNextScripture) return null;
 
     return (
-      <View style={[styles.scriptureChapterContainer, { position: 'absolute', bottom: 0, left: 0, right: 0}]}>
-        <Text style={styles.scriptureChapter}>{this.state.chapter.chapterNumber + 1}</Text>
-      </View>
+      <View style={[{position: 'absolute', bottom: -100, left: 0, right: 0}]}>
+       <View style={[styles.scriptureChapterContainer, {flex: 0}]}>
+         <Text style={styles.scriptureChapter}>{this.state.chapter.chapterNumber + 1}</Text>
+       </View>
+     </View>
     );
   };
 
