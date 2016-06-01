@@ -108,12 +108,12 @@ export default class ScriptureView extends Component {
     )
   }
 
-  _hasPreviousScripture = (chapter: Object = this.state.chapter) => {
-    return chapter.monadSet.first > 2 && chapter.chapterNumber > 1;
+  _hasPreviousScripture = () => {
+    return this.state.chapter.chapterNumber > 1;
   };
 
   _hasNextScripture = () => {
-    return true;
+    return (this.state.chapter.chapterNumber) < this.state.book.chapters.length;
   };
 
   _renderPreviousScripture = () => {
@@ -158,7 +158,6 @@ export default class ScriptureView extends Component {
 
       this._fetchScripture({monadSet: chapter.monadSet}).then((scripture) => {
         this.setState({
-          book,
           chapter,
           scripture,
           loading: false
