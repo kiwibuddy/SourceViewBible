@@ -40,9 +40,10 @@ export default class ScriptureView extends Component {
 
   state: {
     book: any,
-    chapterNumber: number,
+    chapter: any,
     scripture: any,
     previousScripture: any,
+    hasPreviousScripture: bool,
     showPreviousScripture: bool,
     nextScripture: any,
     showNextScripture: bool,
@@ -51,12 +52,13 @@ export default class ScriptureView extends Component {
 
   constructor(props: Object) {
     super(props);
-
+    const { book, chapter } = props;
     this.state = {
-      book: props.book,
-      chapterNumber: props.chapterNumber,
+      book: book,
+      chapter: chapter,
       scripture: null,
       previousScripture: null,
+      hasPreviousScripture: chapter.monadSet.first > 1,
       showPreviousScripture: false,
       nextScripture: null,
       showNextScripture: false,
@@ -65,8 +67,7 @@ export default class ScriptureView extends Component {
   }
 
   componentDidMount() {
-    const { book, chapterNumber } = this.state;
-    this._fetchScripture({book, chapterNumber}).then((scripture) => {
+    this._fetchScripture({monadSet: this.state.chapter.monadSet}).then((scripture) => {
       this.setState({
         scripture,
         loading: false
@@ -95,7 +96,7 @@ export default class ScriptureView extends Component {
           {previousScripture}
 
           <View style={styles.scriptureChapterContainer}>
-            <Text style={styles.scriptureChapter}>{this.state.chapterNumber}</Text>
+            <Text style={styles.scriptureChapter}>{this.state.chapter.chapterNumber}</Text>
           </View>
           {scripture}
 
@@ -118,7 +119,7 @@ export default class ScriptureView extends Component {
 
     return (
       <View style={[styles.scriptureChapterContainer, { position: 'absolute', bottom: 0, left: 0, right: 0, backgroundColor: 'red'}]}>
-        <Text style={styles.scriptureChapter}>{this.state.chapterNumber + 1}</Text>
+        <Text style={styles.scriptureChapter}>{this.state.chapter.chapterNumber + 1}</Text>
       </View>
     );
   };
@@ -132,7 +133,8 @@ export default class ScriptureView extends Component {
       this.waitingForRelease = false;
 
       const book = this.state.book;
-      const chapterNumber = (this.releaseDirection === ReleaseDirection.PREVIOUS ? this.state.chapterNumber - 1 : this.state.chapterNumber + 1);
+      const chapterNumber = (this.releaseDirection === ReleaseDirection.PREVIOUS ? this.state.chapter.chapterNumber - 1 : this.state.chapter.chapterNumber + 1);
+      const chapter = book.chapters[chapterNumber - 1];
 
       this.setState({
         loading: true,
@@ -140,10 +142,10 @@ export default class ScriptureView extends Component {
         showNextScripture: false
       });
 
-      this._fetchScripture({book, chapterNumber}).then((scripture) => {
+      this._fetchScripture({monadSet: chapter.monadSet}).then((scripture) => {
         this.setState({
           book,
-          chapterNumber,
+          chapter,
           scripture,
           loading: false
         }, () => {
@@ -180,6 +182,10 @@ export default class ScriptureView extends Component {
 
   _fetchScripture(options: Object) {
     return Emdros.scripture(options);
+  }
+
+  _fetchPreviousScripture() {
+
   }
 }
 
