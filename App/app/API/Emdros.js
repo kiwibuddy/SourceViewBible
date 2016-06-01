@@ -25,9 +25,18 @@ function query(query: string, options: Object) {
   return DB.query(query, options);
 }
 
-function scripture(book: Object, chapterNumber: number) {
-  const options = {stylesheet: JSON.stringify(SCRIPTURE_STYLESHEET)};
-  const chapter = book.chapters[chapterNumber - 1];
+function scripture(options: Object) {
+  const style = {stylesheet: JSON.stringify(SCRIPTURE_STYLESHEET)};
+
+  let monadSet = options.monadSet;
+  if (!monadSet) {
+    const book = options.book;
+    if (book) {
+      const chapterNumber = options.chapterNumber || 1;
+      const chapter = book.chapters[chapterNumber - 1];
+      monadSet = chapter.monadSet;
+    }
+  }
 
   return new Promise((resolve, reject) => {
     if (DB == null) {
@@ -35,7 +44,7 @@ function scripture(book: Object, chapterNumber: number) {
       return;
     }
 
-    DB.string(chapter.monadSet.first, chapter.monadSet.last, options).then((result) => {
+    DB.string(monadSet.first, monadSet.last, style).then((result) => {
       const scripture = 'React.createElement(View, {}, ' + result.slice(0, -1) + ')';
       resolve(scripture);
     }).catch((error) => {

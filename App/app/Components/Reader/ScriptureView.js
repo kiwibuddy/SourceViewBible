@@ -65,7 +65,8 @@ export default class ScriptureView extends Component {
   }
 
   componentDidMount() {
-    this._fetchScripture(this.state.book, this.state.chapterNumber).then((scripture) => {
+    const { book, chapterNumber } = this.state;
+    this._fetchScripture({book, chapterNumber}).then((scripture) => {
       this.setState({
         scripture,
         loading: false
@@ -139,7 +140,7 @@ export default class ScriptureView extends Component {
         showNextScripture: false
       });
 
-      this._fetchScripture(book, chapterNumber).then((scripture) => {
+      this._fetchScripture({book, chapterNumber}).then((scripture) => {
         this.setState({
           book,
           chapterNumber,
@@ -177,8 +178,8 @@ export default class ScriptureView extends Component {
     }
   };
 
-  _fetchScripture(book: Object, chapterNumber: number) {
-    return Emdros.scripture(book, chapterNumber);
+  _fetchScripture(options: Object) {
+    return Emdros.scripture(options);
   }
 }
 
