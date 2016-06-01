@@ -25,7 +25,7 @@ import {
 import Emdros from '../../API/Emdros';
 
 const MINIMUM_PULL_THRESHOLD = 20;
-const MINIMUM_RELEASE_THRESHOLD = 80;
+const MINIMUM_RELEASE_THRESHOLD = 100;
 
 const SCROLLVIEW_REF = 'ScrollView';
 
