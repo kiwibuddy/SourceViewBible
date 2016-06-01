@@ -25,7 +25,7 @@ import {
 import Emdros from '../../API/Emdros';
 
 const MINIMUM_PULL_THRESHOLD = 20;
-const MINIMUM_RELEASE_THRESHOLD = 64;
+const MINIMUM_RELEASE_THRESHOLD = 80;
 
 const SCROLLVIEW_REF = 'ScrollView';
 
@@ -88,7 +88,6 @@ export default class ScriptureView extends Component {
       <View style={styles.container}>
         <ScrollView
           ref={SCROLLVIEW_REF}
-          style={styles.contentContainer}
           contentContainerStyle={styles.scriptureContainer}
           onScroll={this._onScroll}
           scrollEventThrottle={64}
@@ -121,7 +120,7 @@ export default class ScriptureView extends Component {
 
     const previousScripture = eval(this.state.previousScripture);
     return (
-      <View style={{position:'absolute', top: -200, left: 0, right: 0}}>
+      <View style={{}}>
         {previousScripture}
       </View>
     );
@@ -132,9 +131,9 @@ export default class ScriptureView extends Component {
 
     return (
       <View style={[{position: 'absolute', bottom: -100, left: 0, right: 0}]}>
-       <View style={[styles.scriptureChapterContainer, {flex: 0}]}>
-         <Text style={styles.scriptureChapter}>{this.state.chapter.chapterNumber + 1}</Text>
-       </View>
+        <View style={[styles.scriptureChapterContainer, {flex: 0}]}>
+          <Text style={styles.scriptureChapter}>{this.state.chapter.chapterNumber + 1}</Text>
+        </View>
      </View>
     );
   };
@@ -224,13 +223,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: NavigationHeader.HEIGHT,
     backgroundColor: 'white',
-  },
-  contentContainer: {
-    position: 'absolute',
-    top: NavigationHeader.HEIGHT,
-    left: 0,
-    bottom: 0,
-    right: 0
   },
   scriptureContainer: {
     marginVertical: 20,
