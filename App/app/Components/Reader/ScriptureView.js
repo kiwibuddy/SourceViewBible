@@ -120,7 +120,7 @@ export default class ScriptureView extends Component {
 
     const previousScripture = eval(this.state.previousScripture);
     return (
-      <View style={{}}>
+      <View style={{height: 100, justifyContent: 'flex-end', alignItems: 'flex-end'}}>
         {previousScripture}
       </View>
     );
