@@ -24,10 +24,20 @@ import {
 
 import Emdros from '../../API/Emdros';
 
-const MINIMUM_PULL_THRESHOLD = 40;
-const MINIMUM_RELEASE_THRESHOLD = 564;
+const MINIMUM_PULL_THRESHOLD = 20;
+const MINIMUM_RELEASE_THRESHOLD = 64;
+
+const SCROLLVIEW_REF = 'ScrollView';
+
+const ReleaseDirection = {
+  'PREVIOUS': 'previous',
+  'NEXT': 'next'
+}
 
 export default class ScriptureView extends Component {
+  waitingForRelease: bool = false;
+  releaseDirection: any = null;
+
   state: {
     book: any,
     chapterNumber: number,
@@ -36,7 +46,7 @@ export default class ScriptureView extends Component {
     showPreviousScripture: bool,
     nextScripture: any,
     showNextScripture: bool,
-    loading: bool
+    loading: bool,
   };
 
   constructor(props: Object) {
@@ -50,7 +60,7 @@ export default class ScriptureView extends Component {
       showPreviousScripture: false,
       nextScripture: null,
       showNextScripture: false,
-      loading: false
+      loading: false,
     };
   }
 
@@ -67,14 +77,14 @@ export default class ScriptureView extends Component {
 
     return (
       <View style={styles.container}>
-
-
-
         <ScrollView
+          ref={SCROLLVIEW_REF}
           style={styles.contentContainer}
           contentContainerStyle={styles.scriptureContainer}
           onScroll={this._onScroll}
           scrollEventThrottle={64}
+          onResponderGrant={this._onResponderGrant}
+          onResponderRelease={this._onResponderRelease}
         >
           {previousScripture}
 
@@ -85,9 +95,6 @@ export default class ScriptureView extends Component {
 
           {nextScripture}
         </ScrollView>
-
-
-
       </View>
     )
   }
@@ -110,6 +117,21 @@ export default class ScriptureView extends Component {
     );
   };
 
+  _onResponderGrant = () => {
+    this.waitingForRelease = false;
+  };
+
+  _onResponderRelease= () => {
+    if (this.waitingForRelease) {
+      this.waitingForRelease = false;
+
+      const book = this.state.book;
+      const chapterNumber = (this.releaseDirection === ReleaseDirection.PREVIOUS ? this.state.chapterNumber - 1 : this.state.chapterNumber + 1);
+
+      this._fetchScripture(book, chapterNumber);
+    }
+  };
+
   _onScroll = (e: Object) => {
     if (this.state.loading) return;
 
@@ -117,18 +139,18 @@ export default class ScriptureView extends Component {
     const distanceFromBottom = e.nativeEvent.contentSize.height - e.nativeEvent.layoutMeasurement.height - e.nativeEvent.contentOffset.y;
 
     if (distanceFromTop < -MINIMUM_PULL_THRESHOLD) {
-      console.log(distanceFromTop);
       this.setState({showPreviousScripture: true, showNextScripture: false});
 
       if (distanceFromTop < -MINIMUM_RELEASE_THRESHOLD) {
-        this._fetchScripture(this.state.book, this.state.chapterNumber - 1);
+        this.waitingForRelease = true;
+        this.releaseDirection = ReleaseDirection.PREVIOUS;
       }
     } else if (distanceFromBottom < -MINIMUM_PULL_THRESHOLD) {
-      console.log(distanceFromBottom);
       this.setState({showPreviousScripture: false, showNextScripture: true});
 
       if (distanceFromBottom < -MINIMUM_RELEASE_THRESHOLD) {
-        this._fetchScripture(this.state.book, this.state.chapterNumber + 1);
+        this.waitingForRelease = true;
+        this.releaseDirection = ReleaseDirection.NEXT;
       }
     } else {
       this.setState({showPreviousScripture: false, showNextScripture: false});
@@ -136,7 +158,11 @@ export default class ScriptureView extends Component {
   };
 
   _fetchScripture(book: Object, chapterNumber: number) {
-    this.setState({loading: true});
+    this.setState({
+      loading: true,
+      showPreviousScripture: false,
+      showNextScripture: false
+    });
 
     Emdros.scripture(book, chapterNumber).then((result) => {
       const scripture = 'React.createElement(View, {}, ' + result.slice(0, -1) + ')';
@@ -145,6 +171,8 @@ export default class ScriptureView extends Component {
         chapterNumber,
         scripture,
         loading: false
+      }, () => {
+        this.refs[SCROLLVIEW_REF].scrollTo({x: 0, y: 0, animated: false});
       });
     }).catch((error) => {
       console.log("Error getting string " + error);
