@@ -53,8 +53,6 @@ export default class ScriptureView extends Component {
     super(props);
     const { book, chapter } = props;
 
-    console.log(chapter);
-
     this.state = {
       book: book,
       chapter: chapter,
@@ -68,13 +66,14 @@ export default class ScriptureView extends Component {
   }
 
   componentDidMount() {
-    this._fetchScripture({monadSet: this.state.chapter.monadSet}).then((scripture) => {
+    const { chapter } = this.state;
+    this._fetchScripture({monadSet: chapter.monadSet}).then((scripture) => {
       this.setState({
         scripture,
         loading: false
       });
 
-
+      this._fetchPreviousScripture();
     });
   }
 
@@ -109,8 +108,8 @@ export default class ScriptureView extends Component {
     )
   }
 
-  _hasPreviousScripture = () => {
-    return this.state.chapter.monadSet.first > 2;
+  _hasPreviousScripture = (chapter: Object = this.state.chapter) => {
+    return chapter.monadSet.first > 2 && chapter.chapterNumber > 1;
   };
 
   _hasNextScripture = () => {
@@ -118,10 +117,13 @@ export default class ScriptureView extends Component {
   };
 
   _renderPreviousScripture = () => {
-    if (!this._hasPreviousScripture() || !this.state.showPreviousScripture) return null;
+    if (!this._hasPreviousScripture() || !this.state.showPreviousScripture || !this.state.previousScripture) return null;
 
+    const previousScripture = eval(this.state.previousScripture);
     return (
-      <View style={{position:'absolute', top: -100, height: 100, left: 0, right: 0, backgroundColor: 'red'}}/>
+      <View style={{position:'absolute', top: -200, left: 0, right: 0}}>
+        {previousScripture}
+      </View>
     );
   };
 
@@ -129,7 +131,7 @@ export default class ScriptureView extends Component {
     if (!this._hasNextScripture() || !this.state.showNextScripture) return null;
 
     return (
-      <View style={[styles.scriptureChapterContainer, { position: 'absolute', bottom: 0, left: 0, right: 0, backgroundColor: 'red'}]}>
+      <View style={[styles.scriptureChapterContainer, { position: 'absolute', bottom: 0, left: 0, right: 0}]}>
         <Text style={styles.scriptureChapter}>{this.state.chapter.chapterNumber + 1}</Text>
       </View>
     );
@@ -150,6 +152,7 @@ export default class ScriptureView extends Component {
       this.setState({
         loading: true,
         showPreviousScripture: false,
+        previousScripture: null,
         showNextScripture: false
       });
 
@@ -162,6 +165,8 @@ export default class ScriptureView extends Component {
         }, () => {
           this.refs[SCROLLVIEW_REF].scrollTo({x: 0, y: 0, animated: false});
         });
+
+        this._fetchPreviousScripture();
       });
     }
   };
@@ -191,13 +196,26 @@ export default class ScriptureView extends Component {
     }
   };
 
-  _fetchScripture(options: Object) {
+  _fetchScripture = (options: Object) => {
     return Emdros.scripture(options);
-  }
+  };
 
-  _fetchPreviousScripture() {
+  _fetchPreviousScripture = () => {
+    const { chapter } = this.state;
 
-  }
+    if (this._hasPreviousScripture()) {
+      const monadSet = {
+        first: chapter.monadSet.first - 100,
+        last: chapter.monadSet.first - 1
+      };
+
+      this._fetchScripture({monadSet}).then((scripture) => {
+        this.setState({
+          previousScripture: scripture
+        });
+      });
+    }
+  };
 }
 
 const styles = StyleSheet.create({
