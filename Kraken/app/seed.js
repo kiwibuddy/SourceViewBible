@@ -186,7 +186,6 @@ async function seedSourceOccurrences(emdros, objects) {
 
                   const monadData = sourceData[sourceName]["Token"]["self"];
                   if (monadData != null) {
-                    // console.log(`${book.name} - ${chapterNumber} - ${sourceName}`);
 
                     let firstMonad = null;
                     Object.keys(monadData).sort((a, b) => a > b ? 1 : -1).forEach((lastMonad) => {
@@ -196,8 +195,8 @@ async function seedSourceOccurrences(emdros, objects) {
                         const occurrence = {
                           chapter: chapterNumber,
                           monadSet: {
-                            first: firstMonad,
-                            last: lastMonad
+                            first: parseInt(firstMonad),
+                            last: parseInt(lastMonad)
                           }
                         }
                         source.occurrences.push(occurrence);
