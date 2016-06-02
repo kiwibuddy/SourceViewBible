@@ -124,9 +124,9 @@
 			remoteGlobalIDString = F12AFB9B1ADAF8F800E0535D;
 			remoteInfo = RNFS;
 		};
-		ABAA54601CF3A2000049AC9C /* PBXContainerItemProxy */ = {
+		AB79EA391D004E3F00743D97 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 55B9BB1E24A344519EA716E0 /* RCTEmdros.xcodeproj */;
+			containerPortal = AB79EA351D004E3F00743D97 /* RCTEmdros.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = AB3E37EF1CA9927D00A7C3A1;
 			remoteInfo = RCTEmdros;
@@ -155,11 +155,11 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		3A5848E56DF64E949F68E4E3 /* libRCTEmdros.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTEmdros.a; sourceTree = "<group>"; };
 		49DA0710CCF44DF48E163BEC /* libRNFS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFS.a; sourceTree = "<group>"; };
-		55B9BB1E24A344519EA716E0 /* RCTEmdros.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTEmdros.xcodeproj; path = "../node_modules/react-native-emdros/ios/RCTEmdros/RCTEmdros.xcodeproj"; sourceTree = "<group>"; };
 		5D03C4506E5546E1863FEF57 /* libRealmReact.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRealmReact.a; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		AB002B951CF3B0FE001B5D83 /* Datasets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Datasets; path = ../../Datasets; sourceTree = "<group>"; };
+		AB79EA351D004E3F00743D97 /* RCTEmdros.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTEmdros.xcodeproj; path = ../../Libraries/Emdros/ios/RCTEmdros/RCTEmdros.xcodeproj; sourceTree = "<group>"; };
 		ABAA546B1CF3A20F0049AC9C /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		ABAA546D1CF3A2160049AC9C /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		ABAA546F1CF3A21A0049AC9C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -322,7 +322,6 @@
 				832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */,
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
-				55B9BB1E24A344519EA716E0 /* RCTEmdros.xcodeproj */,
 				E5C75175B1F34745B4B0DC4A /* RealmReact.xcodeproj */,
 				BDB7C41228E14B52AFC2D5F3 /* RNFS.xcodeproj */,
 			);
@@ -340,6 +339,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				AB79EA351D004E3F00743D97 /* RCTEmdros.xcodeproj */,
 				AB002B951CF3B0FE001B5D83 /* Datasets */,
 				13B07FAE1A68108700A75B9A /* Kraken */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -376,10 +376,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		ABAA545C1CF3A2000049AC9C /* Products */ = {
+		AB79EA361D004E3F00743D97 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				ABAA54611CF3A2000049AC9C /* libRCTEmdros.a */,
+				AB79EA3A1D004E3F00743D97 /* libRCTEmdros.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -463,8 +463,8 @@
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
 				},
 				{
-					ProductGroup = ABAA545C1CF3A2000049AC9C /* Products */;
-					ProjectRef = 55B9BB1E24A344519EA716E0 /* RCTEmdros.xcodeproj */;
+					ProductGroup = AB79EA361D004E3F00743D97 /* Products */;
+					ProjectRef = AB79EA351D004E3F00743D97 /* RCTEmdros.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302B61ABCB90400DB3ED1 /* Products */;
@@ -604,11 +604,11 @@
 			remoteRef = AB26D70D1CF4FAEA006AE2FA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		ABAA54611CF3A2000049AC9C /* libRCTEmdros.a */ = {
+		AB79EA3A1D004E3F00743D97 /* libRCTEmdros.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRCTEmdros.a;
-			remoteRef = ABAA54601CF3A2000049AC9C /* PBXContainerItemProxy */;
+			remoteRef = AB79EA391D004E3F00743D97 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
