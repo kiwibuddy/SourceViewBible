@@ -100,7 +100,7 @@ class BookSources extends Component {
     chartData[sourceType] = source.wordCount;
 
     return (
-      <View style={styles.section}>
+      <TouchableOpacity style={styles.section} onPress={() => this._onPressScripture(source)}>
         <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
           <View style={styles.sourcesLeftContainer}>
             <Icon
@@ -120,8 +120,16 @@ class BookSources extends Component {
           </View>
         </View>
         <View style={[StyleSheet.styles.separator, {marginLeft: 0}]}></View>
-      </View>
+      </TouchableOpacity>
     );
+  };
+
+  _onPressScripture = (source: Object) => {
+    console.log(source);
+    const occurrence = source.occurrences[0];
+    if (occurrence) {
+      this.props.onPressScripture(this.props.book, occurrence.chapter);
+    }
   };
 }
 
