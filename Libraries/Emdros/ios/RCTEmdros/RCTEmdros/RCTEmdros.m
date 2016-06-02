@@ -94,15 +94,6 @@ RCT_EXPORT_METHOD(monadSet:(NSDictionary *)options resolver:(RCTPromiseResolveBl
     RCTEmdrosEnv *emdros = [self databaseForName:options[@"name"]];
     
     NSString *query = options[@"query"];
-    if (!query) {
-        NSString *book = options[@"book"];
-        NSInteger chapterNumber = [options[@"chapterNumber"] integerValue];
-        query = [NSString stringWithFormat:RCTEmdrosQuery(
-            SELECT ALL OBJECTS
-            WHERE [Chapter DJHBook='%@' AND chapter = %li]
-        ), book, (long)chapterNumber];
-    }
-    
     NSDictionary *monadSet = [emdros monadSetForQuery:query];
     
     if (monadSet) {

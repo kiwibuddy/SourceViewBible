@@ -79,7 +79,7 @@ async function seedChapters(emdros, objects) {
             monadSetForBookChapterNumber(emdros, book.DJHRef, chapterNumber).then(monadSet => {
               chapter["monadSet"] = monadSet;
             });
-            
+
             chapters.push(chapter);
           }
           book["chapterCount"] = chapters.length;
@@ -95,7 +95,12 @@ async function seedChapters(emdros, objects) {
 }
 
 async function monadSetForBookChapterNumber(emdros, book, chapterNumber) {
-  return emdros.monadSet({book: book, chapterNumber: chapterNumber});
+  const query = `
+    SELECT ALL OBJECTS
+    WHERE [Chapter DJHBook='${book}' AND chapter = ${chapterNumber}]
+  `;
+
+  return emdros.monadSet({query});
 }
 
 async function seedWordCounts(emdros, objects) {
