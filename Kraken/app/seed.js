@@ -49,6 +49,7 @@ async function seed(emdros, objects) {
   console.log('Seeding...');
 
   await seedChapters(emdros, objects);
+  await seedSources(emdros, objects);
   await seedWordCounts(emdros, objects);
   await seedBookWordCloud(emdros, objects);
 }
@@ -106,11 +107,74 @@ async function monadSetForBookChapterNumber(emdros, book, chapterNumber) {
   return emdros.monadSet({query});
 }
 
+async function seedSources(emdros, objects) {
+  console.log('Seeding Sources...');
+  const query = `
+  {
+    "objectTypeName": "Book",
+    "feature": "DJHRef",
+    "buckets": {
+      "objectTypeName": "Chapter",
+      "feature": "chapter",
+      "buckets": {
+        "objectTypeName": "Source",
+        "feature": "source_name"
+      }
+    }
+  }
+  `;
+
+  return new Promise((resolve, reject) => {
+    emdros.query(query, {count: true}).then((data) => {
+      for (let [index, book] of objects.entries()) {
+        const bookData = data["Book"]["DJHRef"][book.DJHRef];
+        if (bookData != null) {
+          const sources = {}
+          const chapterData = bookData["Chapter"]["chapter"];
+          if (chapterData != null) {
+            book.chapters.forEach((chapter, index) => {
+              const chapterNumber = chapter.chapterNumber;
+              const sourceData = chapterData[chapterNumber.toString()]["Source"]["source_name"];
+              if (sourceData != null) {
+                Object.keys(sourceData).forEach((sourceName) => {
+                  let source = sources[sourceName];
+                  if (!source) {
+                    source = {occurrences: []};
+                    sources[sourceName] = source;
+                  }
+
+                  const occurrence = {
+                    chapter: chapterNumber,
+                    monadSet: null
+                  };
+
+                  monadSetForBookChapterNumber(emdros, book.DJHRef, chapterNumber, sourceName).then(monadSet => {
+                    occurrence.monadSet = monadSet;
+                  });
+
+                  source.occurrences.push(occurrence);
+                })
+              }
+            });
+          }
+          book.sources = sources;
+        }
+      }
+
+      resolve();
+    }).catch((error) => {
+      console.log(error);
+    });
+  });
+}
+
 async function monadSetForBookChapterNumberSource(emdros, book, chapterNumber, sourceName) {
   const query = `
     SELECT ALL OBJECTS
     WHERE [Chapter DJHBook='${book}' AND chapter = ${chapterNumber}
-      [Source source_name='${sourceName}']
+      [Source source_name='${sourceName}'
+        [Token is_word=true]
+      ]
     ]
   `;
 
