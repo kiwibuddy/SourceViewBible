@@ -128,15 +128,18 @@ async function seedSources(emdros, objects) {
         const bookData = data["Book"]["DJHRef"][book.DJHRef];
         if (bookData != null) {
           const sources = {}
+          let sourceCount = 0;
 
           const sourceData = bookData["Source"]["source_name"];
           if (sourceData != null) {
             Object.keys(sourceData).forEach((sourceName) => {
                 sources[sourceName] = {};
+                sourceCount++;
             });
           }
 
           book.sources = sources;
+          book.sourceCount = sourceCount;
         }
       }
 
@@ -178,6 +181,7 @@ async function seedSourceOccurrences(emdros, objects) {
           if (chapterData != null) {
             book.chapters.forEach((chapter, index) => {
               const chapterNumber = chapter.chapterNumber;
+              
               const sourceData = chapterData[chapterNumber.toString()]["Source"]["source_name"];
               if (sourceData != null) {
                 Object.keys(sourceData).forEach((sourceName) => {
@@ -186,7 +190,6 @@ async function seedSourceOccurrences(emdros, objects) {
 
                   const monadData = sourceData[sourceName]["Token"]["self"];
                   if (monadData != null) {
-
                     let firstMonad = null;
                     Object.keys(monadData).sort((a, b) => a > b ? 1 : -1).forEach((lastMonad) => {
                       if (firstMonad == null) firstMonad = lastMonad;
@@ -325,7 +328,26 @@ async function seedBookSourceWordCounts(emdros, objects) {
         const bookData = data["Book"]["DJHRef"][book.DJHRef];
         if (bookData != null) {
           const sourceData = bookData["Source"];
-          seedObjectSourceWordCounts(book, sourceData);
+          if (sourceData != null) {
+            seedObjectSourceTypeWordCounts(book, sourceData);
+
+            const sourceNameData = sourceData["source_name"];
+            if (sourceNameData != null) {
+              let maxSourceWordCount = 0;
+
+              Object.keys(sourceNameData).forEach((sourceName) => {
+                const source = book.sources[sourceName];
+                const wordCount = sourceNameData[sourceName]["Token"] || 0;
+                source.wordCount = wordCount;
+
+                if (wordCount > maxSourceWordCount) {
+                  maxSourceWordCount = wordCount;
+                }
+              });
+
+              book.maxSourceWordCount = maxSourceWordCount;
+            }
+          }
         }
       }
 
@@ -380,7 +402,7 @@ async function seedChapterSourceWordCounts(emdros, objects) {
           if (chapterData != null) {
             book.chapters.forEach((chapter, index) => {
               const sourceData = chapterData[chapter.chapterNumber.toString()]["Source"];
-              seedObjectSourceWordCounts(chapter, sourceData);
+              seedObjectSourceTypeWordCounts(chapter, sourceData);
             });
           }
         }
@@ -424,10 +446,7 @@ async function seedBookWordCloud(emdros, objects) {
   });
 }
 
-function seedObjectSourceWordCounts(object, sourceData) {
-  object.sourceCount = 0;
-  object.maxSourceWordCount = 0;
-  object.sourceCounts = [];
+function seedObjectSourceTypeWordCounts(object, sourceData) {
   object.sourceTypeCounts = {
     "narrator": 0,
     "god": 0,
@@ -443,22 +462,6 @@ function seedObjectSourceWordCounts(object, sourceData) {
         const sourceType = SOURCE_TYPE_MAP[sourceColor];
         object.sourceTypeCounts[sourceType] = wordCount;
       });
-    }
-
-    const sourceNameData = sourceData["source_name"];
-    if (sourceNameData != null) {
-      const sourceCounts = {};
-      Object.keys(sourceNameData).forEach(function(sourceName, index) {
-        const wordCount = sourceNameData[sourceName]["Token"] || 0;
-        sourceCounts[sourceName] = wordCount;
-      });
-
-      object.sourceCounts = Object.keys(sourceCounts).sort((a, b) => sourceCounts[a] > sourceCounts[b] ? -1 : 1).map((source) => {
-        return {name: source, wordCount: sourceCounts[source]};
-      });
-
-      object.sourceCount = object.sourceCounts.length;
-      object.maxSourceWordCount = object.sourceCounts[0].wordCount;
     }
   }
 }
