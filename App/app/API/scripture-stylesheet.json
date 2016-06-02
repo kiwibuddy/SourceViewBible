@@ -1,12 +1,14 @@
 {
     "base" : {
         "object_types": {
-            "source": {
+            "Source": {
+              "docindexfeature" : "docindex",
               "get": [ "source_color" ],
               "start": "React.createElement(Text, {ref: \"monad-{{ firstmonad }}\", style:[styles.scripture, styles.sourceColor{{ featurenomangle 0 }}]}, \"",
               "end": "\"),",
             },
-            "token": {
+            "Token": {
+              "docindexfeature" : "docindex",
                 "get": [ "pre", "surface", "post" ],
                 "start": "{{ featurenomangle 0 }}{{ featurenomangle 1 }}{{ featurenomangle 2 }}",
                 "end": ""

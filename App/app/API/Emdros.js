@@ -45,7 +45,8 @@ function scripture(options: Object) {
     }
 
     DB.string(monadSet.first, monadSet.last, style).then((result) => {
-      const scripture = 'React.createElement(View, {}, ' + result.slice(0, -1) + ')';
+      const from = result.indexOf('React.create');
+      const scripture = 'React.createElement(View, {}, ' + result.slice(from, -1) + ')';
       resolve(scripture);
     }).catch((error) => {
       reject(error);
