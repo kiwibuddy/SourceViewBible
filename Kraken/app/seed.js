@@ -198,11 +198,24 @@ async function seedSourceOccurrences(emdros, objects) {
                       if (lastMonad != firstMonad && lastMonad - 1 != firstMonad) {
                         const occurrence = {
                           chapter: chapterNumber,
-                          monadSet: {
-                            first: parseInt(firstMonad),
-                            last: parseInt(lastMonad)
-                          }
+                          monadSet: null
                         }
+
+                        const query = `
+                          SELECT ALL OBJECTS
+                          WHERE
+                          [Chapter DJHBook='${book.DJHRef}' AND chapter = ${chapterNumber}
+                            [Source FOCUS source_name='${sourceName}'
+                              [Token self >= ${firstMonad} AND self <= ${lastMonad}]
+                            ]
+                          ]
+                        `;
+
+                        emdros.monadSet({query, useOnlyFocusObjects: true}).then(monadSet => {
+                          occurrence.monadSet = monadSet;
+                        }).catch(error => {
+                        });
+
                         source.occurrences.push(occurrence);
                         // console.log(`${book.name} - ${chapterNumber} - ${sourceName} occurrence {${firstMonad}, ${lastMonad}}`);
                       }
