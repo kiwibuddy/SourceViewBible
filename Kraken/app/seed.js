@@ -195,7 +195,7 @@ async function seedSourceOccurrences(emdros, objects) {
                         console.log(`${book.name} - ${chapterNumber} - ${sourceName} occurrence {${firstMonad}, ${lastMonad}}`);
                       }
 
-                      lastMonad = monad;
+                      firstMonad = lastMonad;
                     });
                   }
                 })
