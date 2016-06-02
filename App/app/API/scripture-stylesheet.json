@@ -3,7 +3,7 @@
         "object_types": {
             "source": {
               "get": [ "source_color" ],
-              "start": "React.createElement(Text, {style:[styles.scripture, styles.sourceColor{{ featurenomangle 0 }}]}, \"",
+              "start": "React.createElement(Text, {ref: \"monad-{{ firstmonad }}\", style:[styles.scripture, styles.sourceColor{{ featurenomangle 0 }}]}, \"",
               "end": "\"),",
             },
             "token": {
