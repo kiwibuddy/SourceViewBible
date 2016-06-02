@@ -50,6 +50,7 @@ async function seed(emdros, objects) {
 
   await seedChapters(emdros, objects);
   await seedSources(emdros, objects);
+  await seedSourceOccurrences(emdros, objects);
   await seedWordCounts(emdros, objects);
   await seedBookWordCloud(emdros, objects);
 }
@@ -115,12 +116,8 @@ async function seedSources(emdros, objects) {
     "objectTypeName": "Book",
     "feature": "DJHRef",
     "buckets": {
-      "objectTypeName": "Chapter",
-      "feature": "chapter",
-      "buckets": {
-        "objectTypeName": "Source",
-        "feature": "source_name"
-      }
+      "objectTypeName": "Source",
+      "feature": "source_name"
     }
   }
   `;
@@ -131,36 +128,14 @@ async function seedSources(emdros, objects) {
         const bookData = data["Book"]["DJHRef"][book.DJHRef];
         if (bookData != null) {
           const sources = {}
-          const chapterData = bookData["Chapter"]["chapter"];
-          if (chapterData != null) {
-            book.chapters.forEach((chapter, index) => {
-              const chapterNumber = chapter.chapterNumber;
-              const sourceData = chapterData[chapterNumber.toString()]["Source"]["source_name"];
-              if (sourceData != null) {
-                Object.keys(sourceData).forEach((sourceName) => {
-                  let source = sources[sourceName];
-                  if (!source) {
-                    source = {occurrences: []};
-                    sources[sourceName] = source;
-                  }
 
-                  // FIXME
-                  // const occurrence = {
-                  //   chapter: chapterNumber,
-                  //   monadSet: null
-                  // };
-                  //
-                  // monadSetForBookChapterNumberSource(emdros, book.DJHRef, chapterNumber, sourceName).then(monadSet => {
-                  //   occurrence.monadSet = monadSet;
-                  // }).catch((error) => {
-                  //
-                  // });
-                  //
-                  // source.occurrences.push(occurrence);
-                })
-              }
+          const sourceData = bookData["Source"]["source_name"];
+          if (sourceData != null) {
+            Object.keys(sourceData).forEach((sourceName) => {
+                sources[sourceName] = {};
             });
           }
+
           book.sources = sources;
         }
       }
@@ -172,16 +147,69 @@ async function seedSources(emdros, objects) {
   });
 }
 
-async function monadSetForBookChapterNumberSource(emdros, book, chapterNumber, sourceName) {
+async function seedSourceOccurrences(emdros, objects) {
+  console.log('Seeding Source Occurrences...');
   const query = `
-    SELECT ALL OBJECTS
-    WHERE
-    [Chapter DJHBook='${book}' AND chapter = ${chapterNumber}
-      [Source source_name='${sourceName}']
-    ]
+  {
+    "objectTypeName": "Book",
+    "feature": "DJHRef",
+    "buckets": {
+      "objectTypeName": "Chapter",
+      "feature": "chapter",
+      "buckets": {
+        "objectTypeName": "Source",
+        "feature": "source_name",
+        "buckets": {
+          "objectTypeName": "Token",
+          "feature": "self"
+        }
+      }
+    }
+  }
   `;
 
-  return emdros.monadSet({query});
+  return new Promise((resolve, reject) => {
+    emdros.query(query, {count: true}).then((data) => {
+      for (let [index, book] of objects.entries()) {
+        const bookData = data["Book"]["DJHRef"][book.DJHRef];
+        if (bookData != null) {
+          const sources = book.sources;
+          const chapterData = bookData["Chapter"]["chapter"];
+          if (chapterData != null) {
+            book.chapters.forEach((chapter, index) => {
+              const chapterNumber = chapter.chapterNumber;
+              const sourceData = chapterData[chapterNumber.toString()]["Source"]["source_name"];
+              if (sourceData != null) {
+                Object.keys(sourceData).forEach((sourceName) => {
+                  const source = sources[sourceName];
+
+                  const monadData = sourceData[sourceName]["Token"]["self"];
+                  if (monadData != null) {
+                    // console.log(`${book.name} - ${chapterNumber} - ${sourceName}`);
+
+                    let firstMonad = null;
+                    Object.keys(monadData).sort((a, b) => a > b ? 1 : -1).forEach((lastMonad) => {
+                      if (firstMonad == null) firstMonad = lastMonad;
+
+                      if (lastMonad != firstMonad && lastMonad - 1 != firstMonad) {
+                        console.log(`${book.name} - ${chapterNumber} - ${sourceName} occurrence {${firstMonad}, ${lastMonad}}`);
+                      }
+
+                      lastMonad = monad;
+                    });
+                  }
+                })
+              }
+            });
+          }
+        }
+      }
+
+      resolve();
+    }).catch((error) => {
+      console.log(error);
+    });
+  });
 }
 
 async function seedWordCounts(emdros, objects) {
