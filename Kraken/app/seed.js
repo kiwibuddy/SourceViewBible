@@ -163,10 +163,6 @@ async function seedSourceOccurrences(emdros, objects) {
       "buckets": {
         "objectTypeName": "Source",
         "feature": "source_name",
-        "buckets": {
-          "objectTypeName": "Token",
-          "feature": "self"
-        }
       }
     }
   }
@@ -188,42 +184,45 @@ async function seedSourceOccurrences(emdros, objects) {
                 Object.keys(sourceData).forEach((sourceName) => {
                   const source = sources[sourceName];
                   if (!source.occurrences) source.occurrences = [];
+                  source.occurrences.push({
+                    chapterNumber: chapterNumber
+                  });
 
-                  const monadData = sourceData[sourceName]["Token"]["self"];
-                  if (monadData != null) {
-                    let firstMonad = null;
-                    Object.keys(monadData).sort((a, b) => a > b ? 1 : -1).forEach((lastMonad) => {
-                      if (firstMonad == null) firstMonad = lastMonad;
-
-                      if (lastMonad != firstMonad && lastMonad - 1 != firstMonad) {
-                        const occurrence = {
-                          chapter: chapterNumber,
-                          monadSet: null
-                        }
-
-                        const query = `
-                          SELECT ALL OBJECTS
-                          WHERE
-                          [Chapter DJHBook='${book.DJHRef}' AND chapter = ${chapterNumber}
-                            [Source FOCUS source_name='${sourceName}'
-                              [Token self = ${firstMonad}]
-                            ]
-                          ]
-                        `;
-
-                        emdros.monadSet({query, useOnlyFocusObjects: true}).then(monadSet => {
-                          occurrence.monadSet = monadSet;
-                        }).catch(error => {
-                        });
-
-                        source.occurrences.push(occurrence);
-                        // console.log(`${book.name} - ${chapterNumber} - ${sourceName} occurrence {${firstMonad}, ${lastMonad}}`);
-                      }
-
-                      firstMonad = lastMonad;
-                    });
-                  }
-                })
+                  // const monadData = sourceData[sourceName]["Token"]["self"];
+                  // if (monadData != null) {
+                  //   let firstMonad = null;
+                  //   Object.keys(monadData).sort((a, b) => a > b ? 1 : -1).forEach((lastMonad) => {
+                  //     if (firstMonad == null) firstMonad = lastMonad;
+                  //
+                  //     if (lastMonad != firstMonad && lastMonad - 1 != firstMonad) {
+                  //       const occurrence = {
+                  //         chapter: chapterNumber,
+                  //         monadSet: null
+                  //       }
+                  //
+                  //       const query = `
+                  //         SELECT ALL OBJECTS
+                  //         WHERE
+                  //         [Chapter DJHBook='${book.DJHRef}' AND chapter = ${chapterNumber}
+                  //           [Source FOCUS source_name='${sourceName}'
+                  //             [Token self = ${firstMonad}]
+                  //           ]
+                  //         ]
+                  //       `;
+                  //
+                  //       emdros.monadSet({query, useOnlyFocusObjects: true}).then(monadSet => {
+                  //         occurrence.monadSet = monadSet;
+                  //       }).catch(error => {
+                  //       });
+                  //
+                  //       source.occurrences.push(occurrence);
+                  //       // console.log(`${book.name} - ${chapterNumber} - ${sourceName} occurrence {${firstMonad}, ${lastMonad}}`);
+                  //     }
+                  //
+                  //     firstMonad = lastMonad;
+                  //   });
+                  // }
+                });
               }
             });
           }
