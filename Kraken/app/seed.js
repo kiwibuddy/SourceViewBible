@@ -101,7 +101,8 @@ async function seedChapters(emdros, objects) {
 async function monadSetForBookChapterNumber(emdros, book, chapterNumber) {
   const query = `
     SELECT ALL OBJECTS
-    WHERE [Chapter DJHBook='${book}' AND chapter = ${chapterNumber}]
+    WHERE
+    [Chapter DJHBook='${book}' AND chapter = ${chapterNumber}]
   `;
 
   return emdros.monadSet({query});
@@ -143,16 +144,19 @@ async function seedSources(emdros, objects) {
                     sources[sourceName] = source;
                   }
 
-                  const occurrence = {
-                    chapter: chapterNumber,
-                    monadSet: null
-                  };
-
-                  monadSetForBookChapterNumber(emdros, book.DJHRef, chapterNumber, sourceName).then(monadSet => {
-                    occurrence.monadSet = monadSet;
-                  });
-
-                  source.occurrences.push(occurrence);
+                  // FIXME
+                  // const occurrence = {
+                  //   chapter: chapterNumber,
+                  //   monadSet: null
+                  // };
+                  //
+                  // monadSetForBookChapterNumberSource(emdros, book.DJHRef, chapterNumber, sourceName).then(monadSet => {
+                  //   occurrence.monadSet = monadSet;
+                  // }).catch((error) => {
+                  //
+                  // });
+                  //
+                  // source.occurrences.push(occurrence);
                 })
               }
             });
@@ -171,10 +175,9 @@ async function seedSources(emdros, objects) {
 async function monadSetForBookChapterNumberSource(emdros, book, chapterNumber, sourceName) {
   const query = `
     SELECT ALL OBJECTS
-    WHERE [Chapter DJHBook='${book}' AND chapter = ${chapterNumber}
-      [Source source_name='${sourceName}'
-        [Token is_word=true]
-      ]
+    WHERE
+    [Chapter DJHBook='${book}' AND chapter = ${chapterNumber}
+      [Source source_name='${sourceName}']
     ]
   `;
 

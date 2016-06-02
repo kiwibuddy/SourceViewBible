@@ -93,13 +93,11 @@ RCT_EXPORT_METHOD(string:(NSDictionary *)options resolver:(RCTPromiseResolveBloc
 RCT_EXPORT_METHOD(monadSet:(NSDictionary *)options resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     RCTEmdrosEnv *emdros = [self databaseForName:options[@"name"]];
     
-    NSString *query = options[@"query"];
-    NSDictionary *monadSet = [emdros monadSetForQuery:query];
-    
+    NSDictionary *monadSet = [emdros monadSet:options];    
     if (monadSet) {
         resolve(monadSet);
     } else {
-        reject(@"monad_set_error", [NSString stringWithFormat:@"Error getting monad set for query: %@", query], nil);
+        reject(@"monad_set_error", [NSString stringWithFormat:@"Error getting monad set for query: %@", options[@"query"]], nil);
     }
 }
 

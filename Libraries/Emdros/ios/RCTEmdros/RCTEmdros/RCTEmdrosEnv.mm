@@ -134,11 +134,14 @@
     return nil;
 }
 
-- (NSDictionary *)monadSetForQuery:(NSString *)query {
+- (NSDictionary *)monadSet:(NSDictionary *)options {
+    NSString *query = options[@"query"];
+    bool useOnlyFocusObjects = [options[@"useOnlyFocusObjects"] boolValue];
+
     SetOfMonads som;
     long firstMonad = 0;
     long lastMonad = 0;
-    bool bResult = getSOMForQuery(_emdrosEnv, query.UTF8String, false, som);
+    bool bResult = getSOMForQuery(_emdrosEnv, query.UTF8String, useOnlyFocusObjects, som);
     if (bResult && !som.isEmpty()) {
         firstMonad = som.first();
         lastMonad = som.last();
