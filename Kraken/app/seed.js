@@ -205,8 +205,8 @@ async function seedSourceOccurrences(emdros, objects) {
                           SELECT ALL OBJECTS
                           WHERE
                           [Chapter DJHBook='${book.DJHRef}' AND chapter = ${chapterNumber}
-                            [Source FOCUS source_name='${sourceName}'
-                              [Token self >= ${firstMonad} AND self <= ${lastMonad}]
+                            [Source source_name='${sourceName}'
+                              [Token FOCUS self >= ${firstMonad} AND self <= ${lastMonad}]
                             ]
                           ]
                         `;
