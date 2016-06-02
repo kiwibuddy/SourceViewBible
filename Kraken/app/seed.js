@@ -49,7 +49,6 @@ async function seed(emdros, objects) {
   console.log('Seeding...');
 
   await seedChapters(emdros, objects);
-  await seedSources(emdros, objects);
   await seedWordCounts(emdros, objects);
   await seedBookWordCloud(emdros, objects);
 }
@@ -98,14 +97,21 @@ async function seedChapters(emdros, objects) {
   });
 }
 
-async function seedSources(emdros, objects) {
-
-}
-
 async function monadSetForBookChapterNumber(emdros, book, chapterNumber) {
   const query = `
     SELECT ALL OBJECTS
     WHERE [Chapter DJHBook='${book}' AND chapter = ${chapterNumber}]
+  `;
+
+  return emdros.monadSet({query});
+}
+
+async function monadSetForBookChapterNumberSource(emdros, book, chapterNumber, sourceName) {
+  const query = `
+    SELECT ALL OBJECTS
+    WHERE [Chapter DJHBook='${book}' AND chapter = ${chapterNumber}
+      [Source source_name='${sourceName}']
+    ]
   `;
 
   return emdros.monadSet({query});
