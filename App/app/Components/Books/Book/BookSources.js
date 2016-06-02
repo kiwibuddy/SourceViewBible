@@ -42,7 +42,7 @@ class BookSources extends Component {
 
   componentDidMount() {
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(this.props.book.sourceCounts)
+      dataSource: this.state.dataSource.cloneWithRows(this.props.book.sources)
     });
   }
 

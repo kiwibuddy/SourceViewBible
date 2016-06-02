@@ -35,11 +35,11 @@ class BookOverview extends Component {
   render() {
     const { book } = this.props;
 
-    const sources = book.sourceCounts.slice(0, MAX_NUMBER_OF_SOURCES).map((source) => {
+    const sources = book.sources.slice(0, MAX_NUMBER_OF_SOURCES).map((source) => {
       return this._renderSource(source);
     });
 
-    if (book.sourceCounts.length > MAX_NUMBER_OF_SOURCES) {
+    if (book.sourceCount > MAX_NUMBER_OF_SOURCES) {
       sources.push(this._renderMoreSource());
     }
 

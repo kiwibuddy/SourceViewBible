@@ -416,7 +416,16 @@ async function seedChapterSourceWordCounts(emdros, objects) {
           if (chapterData != null) {
             book.chapters.forEach((chapter, index) => {
               const sourceData = chapterData[chapter.chapterNumber.toString()]["Source"];
-              seedObjectSourceTypeWordCounts(chapter, sourceData);
+              if (sourceData != null) {
+                seedObjectSourceTypeWordCounts(chapter, sourceData);
+
+                const sourceNameData = sourceData["source_name"];
+                if (sourceNameData != null) {
+                  chapter.sourceCount = Object.keys(sourceNameData).length;
+                } else {
+                  chapter.sourceCount = 0;
+                }
+              }
             });
           }
         }
