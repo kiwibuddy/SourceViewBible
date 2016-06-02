@@ -53,6 +53,7 @@ async function seed(emdros, objects) {
   await seedSourceOccurrences(emdros, objects);
   await seedWordCounts(emdros, objects);
   await seedBookWordCloud(emdros, objects);
+  normalizeSources(emdros, objects);
 }
 
 async function seedChapters(emdros, objects) {
@@ -181,7 +182,7 @@ async function seedSourceOccurrences(emdros, objects) {
           if (chapterData != null) {
             book.chapters.forEach((chapter, index) => {
               const chapterNumber = chapter.chapterNumber;
-              
+
               const sourceData = chapterData[chapterNumber.toString()]["Source"]["source_name"];
               if (sourceData != null) {
                 Object.keys(sourceData).forEach((sourceName) => {
@@ -444,6 +445,17 @@ async function seedBookWordCloud(emdros, objects) {
       console.log(error);
     })
   });
+}
+
+function normalizeSources(emdros, objects) {
+  console.log('Normalizing sources...');
+  for (let [index, book] of objects.entries()) {
+    const sources = book.sources;
+    book.sources = Object.keys(sources).sort((a, b) => sources[a].wordCount > sources[b].wordCount ? -1 : 1).map((sourceName) => {
+      const source = sources[sourceName];
+      return {...source, name: sourceName};
+    });
+  }
 }
 
 function seedObjectSourceTypeWordCounts(object, sourceData) {
