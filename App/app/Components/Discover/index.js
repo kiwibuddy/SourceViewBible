@@ -82,13 +82,14 @@ class Discover extends Component {
   _renderLeftComponent = (props: Object) => {
     const { scene, scenes } = props;
     if (scene.index == 0) return null;
+    const title = scene.navigationState.title;
 
     let backButtonTitle = null;
 
     const previousScene = scenes[scene.index - 1];
-    const title = previousScene.navigationState.title;
-    if (title && scene.navigationState.showsBackButton !== false && title.length < 15) {
-      backButtonTitle = <Text style={{marginLeft: -10, color: Colors.tintColor, fontSize: 17}}>{title}</Text>
+    const previousTitle = previousScene.navigationState.title;
+    if (previousTitle && previousTitle !== title && scene.navigationState.showsBackButton !== false && previousTitle.length < 15) {
+      backButtonTitle = <Text style={{marginLeft: -10, color: Colors.tintColor, fontSize: 17}}>{previousTitle}</Text>
     }
 
     return (
@@ -255,7 +256,8 @@ class Discover extends Component {
         key: 'reader',
         title: book.name,
         book,
-        chapterNumber
+        chapterNumber,
+        showsBackButton
       }
     });
   };
