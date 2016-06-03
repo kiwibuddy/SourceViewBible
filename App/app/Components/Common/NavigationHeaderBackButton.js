@@ -24,7 +24,7 @@ const NavigationHeaderBackButton = (props: Props) => (
   <TouchableOpacity style={styles.buttonContainer} onPress={() => props.onNavigate(NavigationRootContainer.getBackAction())}>
     <Image
       style={styles.button}
-      source={require('../../../node_modules/react-native/Libraries/CustomComponents/NavigationExperimental/assets/back-icon.png')}
+      source={require('../../Images/common/back.png')}
     />
     {props.children}
   </TouchableOpacity>
