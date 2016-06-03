@@ -80,13 +80,14 @@ class Discover extends Component {
   };
 
   _renderLeftComponent = (props: Object) => {
-    if (props.scene.index == 0) return null;
+    const { scene, scenes } = props;
+    if (scene.index == 0) return null;
 
     let backButtonTitle = null;
 
-    const previousScene = props.scenes[props.scene.index - 1];
+    const previousScene = scenes[scene.index - 1];
     const title = previousScene.navigationState.title;
-    if (title) {
+    if (title && title.length < 15) {
       backButtonTitle = <Text style={{marginLeft: -10, color: Colors.tintColor, fontSize: 17}}>{title}</Text>
     }
 
