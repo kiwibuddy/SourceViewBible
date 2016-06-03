@@ -87,7 +87,7 @@ class Discover extends Component {
     const previousScene = props.scenes[props.scene.index - 1];
     const title = previousScene.navigationState.title;
     if (title) {
-      backButtonTitle = <Text style={{marginLeft: -10, color: Colors.tintColor}}>{title}</Text>
+      backButtonTitle = <Text style={{marginLeft: -10, color: Colors.tintColor, fontSize: 17}}>{title}</Text>
     }
 
     return (
