@@ -72,16 +72,27 @@ class Discover extends Component {
   _renderTitleComponent = (props: Object) => {
     const title = props.scene.navigationState.title;
     return (
-      <NavigationHeader.Title>{title}</NavigationHeader.Title>
+      <NavigationHeader.Title
+        {...props}
+        style={{alignSelf: 'center', left: null, right: null}}
+      >{title}</NavigationHeader.Title>
     );
   };
 
   _renderLeftComponent = (props: Object) => {
     if (props.scene.index == 0) return null;
 
-    return (
-      <NavigationHeaderBackButton>
+    let backButtonTitle = null;
 
+    const previousScene = props.scenes[props.scene.index - 1];
+    const title = previousScene.navigationState.title;
+    if (title) {
+      backButtonTitle = <Text style={{marginLeft: -10, color: Colors.tintColor}}>{title}</Text>
+    }
+
+    return (
+      <NavigationHeaderBackButton {...props}>
+      {backButtonTitle}
       </NavigationHeaderBackButton>
     );
   };
