@@ -77,7 +77,13 @@ class Discover extends Component {
   };
 
   _renderLeftComponent = (props: Object) => {
-    return (props.scene.index > 0 ? <NavigationHeaderBackButton /> : null);
+    if (props.scene.index == 0) return null;
+
+    return (
+      <NavigationHeaderBackButton>
+
+      </NavigationHeaderBackButton>
+    );
   };
 
   _renderScene = (props: Object) => {
@@ -163,17 +169,6 @@ class Discover extends Component {
         </View>
       </View>
     );
-  };
-
-  _onPressBook = (book: Object) => {
-    this.props.onNavigate({
-      type: 'push',
-      route: {
-        key: 'book',
-        title: book.name,
-        book
-      }
-    });
   };
 
   _onPressBook = (book: Object) => {

@@ -16,7 +16,8 @@ const {
 import Colors from '../../Common/Colors';
 
 type Props = {
-  onNavigate: Function
+  onNavigate: Function,
+  children: [any]
 }
 
 const NavigationHeaderBackButton = (props: Props) => (
@@ -25,6 +26,7 @@ const NavigationHeaderBackButton = (props: Props) => (
       style={styles.button}
       source={require('../../../node_modules/react-native/Libraries/CustomComponents/NavigationExperimental/assets/back-icon.png')}
     />
+    {props.children}
   </TouchableOpacity>
 );
 
