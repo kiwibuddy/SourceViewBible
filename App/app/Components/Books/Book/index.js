@@ -23,8 +23,6 @@ import {
   Platform
 } from '../../../Common';
 
-import TabNavigator from 'react-native-tab-navigator';
-
 import BookOverview from './BookOverview';
 import BookChapters from './BookChapters';
 import BookSources from './BookSources';
@@ -46,76 +44,14 @@ export default class Book extends Component {
 
   render() {
     return (
-      <TabNavigator tabBarStyle={styles.tabBarStyle} tabBarShadowStyle={styles.tabBarShadowStyle}>
-        <TabNavigator.Item
-          selected={this.state.selectedTab === 'summary'}
-          title={Localizable.t('tabs.overview')}
-          titleStyle={styles.tabTitleStyle}
-          selectedTitleStyle={styles.selectedTabTitleStyle}
-          renderIcon={() => <Image source={require('../../../Images/tabs/summary.png')} style={styles.tabIcon} />}
-          renderSelectedIcon={() => <Image source={require('../../../Images/tabs/summary-s.png')} style={styles.selectedTabIcon} />}
-          onPress={() => this.setState({ selectedTab: 'summary' })}
-        >
-          <BookOverview
-            book={this.props.book}
-            onPressChapters={() => this.setState({ selectedTab: 'chapters' })}
-            onPressSources={() => this.setState({ selectedTab: 'sources' })}
-            onPressSpheres={() => this.setState({ selectedTab: 'spheres' })}
-            onPressWords={() => this.setState({ selectedTab: 'words' })}
-            onPressScripture={() => this.props.onPressScripture(this.props.book)}
-          />
-        </TabNavigator.Item>
-        <TabNavigator.Item
-          selected={this.state.selectedTab === 'chapters'}
-          title={Localizable.t('tabs.chapters')}
-          titleStyle={styles.tabTitleStyle}
-          selectedTitleStyle={styles.selectedTabTitleStyle}
-          renderIcon={() => <Image source={require('../../../Images/tabs/chapters.png')} style={styles.tabIcon} />}
-          renderSelectedIcon={() => <Image source={require('../../../Images/tabs/chapters-s.png')} style={styles.selectedTabIcon} />}
-          onPress={() => this.setState({ selectedTab: 'chapters' })}
-        >
-          <BookChapters
-            book={this.props.book}
-            onPressScripture={this.props.onPressScripture}
-          />
-        </TabNavigator.Item>
-        <TabNavigator.Item
-          selected={this.state.selectedTab === 'sources'}
-          title={Localizable.t('tabs.sources')}
-          titleStyle={styles.tabTitleStyle}
-          selectedTitleStyle={styles.selectedTabTitleStyle}
-          renderIcon={() => <Image source={require('../../../Images/tabs/sources.png')} style={styles.tabIcon} />}
-          renderSelectedIcon={() => <Image source={require('../../../Images/tabs/sources-s.png')} style={styles.selectedTabIcon} />}
-          onPress={() => this.setState({ selectedTab: 'sources' })}
-        >
-          <BookSources
-            book={this.props.book}
-            onPressScripture={this.props.onPressScripture}
-          />
-        </TabNavigator.Item>
-        <TabNavigator.Item
-          selected={this.state.selectedTab === 'spheres'}
-          title={Localizable.t('tabs.spheres')}
-          titleStyle={styles.tabTitleStyle}
-          selectedTitleStyle={styles.selectedTabTitleStyle}
-          renderIcon={() => <Image source={require('../../../Images/tabs/spheres.png')} style={styles.tabIcon} />}
-          renderSelectedIcon={() => <Image source={require('../../../Images/tabs/spheres-s.png')} style={styles.selectedTabIcon} />}
-          onPress={() => this.setState({ selectedTab: 'spheres' })}
-        >
-          <BookSpheres />
-        </TabNavigator.Item>
-        <TabNavigator.Item
-          selected={this.state.selectedTab === 'words'}
-          title={Localizable.t('tabs.words')}
-          titleStyle={styles.tabTitleStyle}
-          selectedTitleStyle={styles.selectedTabTitleStyle}
-          renderIcon={() => <Image source={require('../../../Images/tabs/words.png')} style={styles.tabIcon} />}
-          renderSelectedIcon={() => <Image source={require('../../../Images/tabs/words-s.png')} style={styles.selectedTabIcon} />}
-          onPress={() => this.setState({ selectedTab: 'words' })}
-        >
-          <BookWords />
-        </TabNavigator.Item>
-      </TabNavigator>
+      <BookOverview
+        book={this.props.book}
+        onPressChapters={() => this.props.onPressChapters(this.props.book)}
+        onPressSources={() => this.props.onPressSources(this.props.book)}
+        onPressSpheres={() => this.props.onPressSpheres(this.props.book)}
+        onPressWords={() => this.props.onPressWords(this.props.book)}
+        onPressScripture={() => this.props.onPressScripture(this.props.book)}
+      />
     );
   }
 }

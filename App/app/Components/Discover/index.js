@@ -27,6 +27,11 @@ import { connect } from 'react-redux';
 
 
 import Book from '../Books/Book';
+import BookChapters from '../Books/Book/BookChapters';
+import BookSources from '../Books/Book/BookSources';
+import BookSpheres from '../Books/Book/BookSpheres';
+import BookWords from '../Books/Book/BookWords';
+
 import Books from '../Books';
 import Reader from '../Reader';
 
@@ -82,7 +87,34 @@ class Discover extends Component {
 
     if (props.scene.navigationState.key === 'book') {
       const book = props.scene.navigationState.book;
-      return <Book book={book} onPressScripture={this._onPressScripture} />
+      return <Book
+        book={book}
+        onPressChapters={this._onPressChapters}
+        onPressSources={this._onPressSources}
+        onPressSpheres={this._onPressSpheres}
+        onPressWords={this._onPressWords}
+        onPressScripture={this._onPressScripture}
+      />
+    }
+
+    if (props.scene.navigationState.key === 'chapters') {
+      const book = props.scene.navigationState.book;
+      return <BookChapters book={book} onPressScripture={this._onPressScripture} />
+    }
+
+    if (props.scene.navigationState.key === 'sources') {
+      const book = props.scene.navigationState.book;
+      return <BookSources book={book} onPressScripture={this._onPressScripture} />
+    }
+
+    if (props.scene.navigationState.key === 'spheres') {
+      const book = props.scene.navigationState.book;
+      return <BookSpheres book={book} />
+    }
+
+    if (props.scene.navigationState.key === 'words') {
+      const book = props.scene.navigationState.book;
+      return <BookWords book={book} />
     }
 
     if (props.scene.navigationState.key === 'books') {
@@ -142,7 +174,62 @@ class Discover extends Component {
         book
       }
     });
-  }
+  };
+
+  _onPressBook = (book: Object) => {
+    this.props.onNavigate({
+      type: 'push',
+      route: {
+        key: 'book',
+        title: book.name,
+        book
+      }
+    });
+  };
+
+  _onPressChapters = (book: Object) => {
+    this.props.onNavigate({
+      type: 'push',
+      route: {
+        key: 'chapters',
+        title: 'Chapters',
+        book
+      }
+    });
+  };
+
+  _onPressSources = (book: Object) => {
+    this.props.onNavigate({
+      type: 'push',
+      route: {
+        key: 'sources',
+        title: 'Sources',
+        book
+      }
+    });
+  };
+
+  _onPressSpheres = (book: Object) => {
+    this.props.onNavigate({
+      type: 'push',
+      route: {
+        key: 'spheres',
+        title: 'Spheres',
+        book
+      }
+    });
+  };
+
+  _onPressWords = (book: Object) => {
+    this.props.onNavigate({
+      type: 'push',
+      route: {
+        key: 'words',
+        title: 'Words',
+        book
+      }
+    });
+  };
 
   _onPressBooks = () => {
     this.props.onNavigate({
