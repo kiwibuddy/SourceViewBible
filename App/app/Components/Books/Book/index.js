@@ -43,14 +43,16 @@ export default class Book extends Component {
   }
 
   render() {
+    const { book } = this.props;
+
     return (
       <BookOverview
         book={this.props.book}
-        onPressChapters={() => this.props.onPressChapters(this.props.book)}
-        onPressSources={() => this.props.onPressSources(this.props.book)}
-        onPressSpheres={() => this.props.onPressSpheres(this.props.book)}
-        onPressWords={() => this.props.onPressWords(this.props.book)}
-        onPressScripture={() => this.props.onPressScripture(this.props.book)}
+        onPressChapters={() => this.props.onPressChapters(book)}
+        onPressSources={() => this.props.onPressSources(book)}
+        onPressSpheres={() => this.props.onPressSpheres(book)}
+        onPressWords={() => this.props.onPressWords(book)}
+        onPressScripture={() => this.props.onPressScripture({book})}
       />
     );
   }

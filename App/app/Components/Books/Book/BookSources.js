@@ -127,7 +127,9 @@ class BookSources extends Component {
   _onPressScripture = (source: Object) => {
     const occurrence = source.occurrences[0];
     if (occurrence) {
-      this.props.onPressScripture(this.props.book, occurrence.chapterNumber);
+      const book = this.props.book;
+      const chapterNumber = occurrence.chapterNumber;
+      this.props.onPressScripture({book, chapterNumber});
     }
   };
 }

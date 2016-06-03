@@ -87,7 +87,7 @@ class Discover extends Component {
 
     const previousScene = scenes[scene.index - 1];
     const title = previousScene.navigationState.title;
-    if (title && title.length < 15) {
+    if (title && scene.navigationState.showsBackButton !== false && title.length < 15) {
       backButtonTitle = <Text style={{marginLeft: -10, color: Colors.tintColor, fontSize: 17}}>{title}</Text>
     }
 
@@ -248,7 +248,7 @@ class Discover extends Component {
     });
   };
 
-  _onPressScripture = (book: Object, chapterNumber: number) => {
+  _onPressScripture = ({book, chapterNumber, showsBackButton}) => {
     this.props.onNavigate({
       type: 'push',
       route: {

@@ -79,13 +79,14 @@ class BookChapters extends Component {
 
   _renderRow = (chapter: Object, sectionID: string, rowID: string, highlightRow: boolean) => {
     const { book } = this.props;
-    
+    const chapterNumber = chapter.chapterNumber;
+
     return (
-      <TouchableOpacity style={styles.section} onPress={() => this.props.onPressScripture(this.props.book, chapter.chapterNumber)}>
+      <TouchableOpacity style={styles.section} onPress={() => this.props.onPressScripture({book, chapterNumber})}>
         <View style={[styles.cellContainer, {paddingVertical: 8}]}>
           <View style={styles.horizontalContainer}>
             <View style={styles.leftContainer}>
-              <Text style={StyleSheet.styles.cell.title}>Chapter {chapter.chapterNumber}</Text>
+              <Text style={StyleSheet.styles.cell.title}>Chapter {chapterNumber}</Text>
             </View>
             <View style={styles.rightContainer}>
               <SourcesBarChart
