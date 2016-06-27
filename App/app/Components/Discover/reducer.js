@@ -14,7 +14,7 @@ const navigation = NavigationReducer.StackReducer({
 	initialState: {
 		key: 'discover',
 		index: 0,
-		children: [
+		routes: [
 			{
 				key: 'discover',
 				title: 'Discover'

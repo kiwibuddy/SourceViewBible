@@ -14,7 +14,7 @@ const navigation = NavigationReducer.StackReducer({
 	initialState: {
 		key: 'reader',
 		index: 0,
-		children: [
+		routes: [
 			{
 				key: 'scripture',
 				title: 'Scripture'

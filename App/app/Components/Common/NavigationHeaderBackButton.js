@@ -3,8 +3,6 @@
 
 const React = require('react');
 const ReactNative = require('react-native');
-const NavigationContainer = require('NavigationContainer');
-const NavigationRootContainer = require('NavigationRootContainer');
 
 const {
   Image,
@@ -21,7 +19,7 @@ type Props = {
 }
 
 const NavigationHeaderBackButton = (props: Props) => (
-  <TouchableOpacity style={styles.buttonContainer} onPress={() => props.onNavigate(NavigationRootContainer.getBackAction())}>
+  <TouchableOpacity style={styles.buttonContainer} onPress={() => props.onNavigate({type: 'BackAction'})}>
     <Image
       style={styles.button}
       source={require('../../Images/common/back.png')}
@@ -50,4 +48,4 @@ const styles = StyleSheet.create({
   }
 });
 
-module.exports = NavigationContainer.create(NavigationHeaderBackButton);
+module.exports = NavigationHeaderBackButton;

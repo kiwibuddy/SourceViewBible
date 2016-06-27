@@ -16,7 +16,6 @@ import ReactNative, {
 } from 'react-native';
 
 const {
-  AnimatedView: NavigationAnimatedView,
   Header: NavigationHeader,
   CardStack: NavigationCardStack
 } = NavigationExperimental;
@@ -51,14 +50,14 @@ class Discover extends Component {
         direction={'horizontal'}
         navigationState={this.props.navigation}
         onNavigate={this.props.onNavigate}
+        renderOverlay={this._renderOverlay}
         renderScene={this._renderScene}
-        renderOverlay={this._renderHeader}
         style={styles.main}
       />
     );
   }
 
-  _renderHeader = (props: Object) => {
+  _renderOverlay = (props: Object) => {
     return (
       <NavigationHeader
         {...props}
@@ -70,7 +69,7 @@ class Discover extends Component {
   };
 
   _renderTitleComponent = (props: Object) => {
-    const title = props.scene.navigationState.title;
+    const title = props.scene.route.title;
     return (
       <NavigationHeader.Title
         {...props}
@@ -82,13 +81,13 @@ class Discover extends Component {
   _renderLeftComponent = (props: Object) => {
     const { scene, scenes } = props;
     if (scene.index == 0) return null;
-    const title = scene.navigationState.title;
+    const title = scene.route.title;
 
     let backButtonTitle = null;
 
     const previousScene = scenes[scene.index - 1];
-    const previousTitle = previousScene.navigationState.title;
-    if (previousTitle && previousTitle !== title && scene.navigationState.showsBackButton !== false && previousTitle.length < 15) {
+    const previousTitle = previousScene.route.title;
+    if (previousTitle && previousTitle !== title && scene.route.showsBackButton !== false && previousTitle.length < 15) {
       backButtonTitle = <Text style={{marginLeft: -10, color: Colors.tintColor, fontSize: 17}}>{previousTitle}</Text>
     }
 
@@ -100,12 +99,12 @@ class Discover extends Component {
   };
 
   _renderScene = (props: Object) => {
-    if (props.scene.navigationState.key === 'discover') {
+    if (props.scene.route.key === 'discover') {
       return this._renderDiscover();
     }
 
-    if (props.scene.navigationState.key === 'book') {
-      const book = props.scene.navigationState.book;
+    if (props.scene.route.key === 'book') {
+      const book = props.scene.route.book;
       return <Book
         book={book}
         onPressChapters={this._onPressChapters}
@@ -116,33 +115,33 @@ class Discover extends Component {
       />
     }
 
-    if (props.scene.navigationState.key === 'chapters') {
-      const book = props.scene.navigationState.book;
+    if (props.scene.route.key === 'chapters') {
+      const book = props.scene.route.book;
       return <BookChapters book={book} onPressScripture={this._onPressScripture} />
     }
 
-    if (props.scene.navigationState.key === 'sources') {
-      const book = props.scene.navigationState.book;
+    if (props.scene.route.key === 'sources') {
+      const book = props.scene.route.book;
       return <BookSources book={book} onPressScripture={this._onPressScripture} />
     }
 
-    if (props.scene.navigationState.key === 'spheres') {
-      const book = props.scene.navigationState.book;
+    if (props.scene.route.key === 'spheres') {
+      const book = props.scene.route.book;
       return <BookSpheres book={book} />
     }
 
-    if (props.scene.navigationState.key === 'words') {
-      const book = props.scene.navigationState.book;
+    if (props.scene.route.key === 'words') {
+      const book = props.scene.route.book;
       return <BookWords book={book} />
     }
 
-    if (props.scene.navigationState.key === 'books') {
+    if (props.scene.route.key === 'books') {
       return <Books onPressBook={this._onPressBook}/>
     }
 
-    if (props.scene.navigationState.key === 'reader') {
-      const book = props.scene.navigationState.book;
-      const chapterNumber = props.scene.navigationState.chapterNumber;
+    if (props.scene.route.key === 'reader') {
+      const book = props.scene.route.book;
+      const chapterNumber = props.scene.route.chapterNumber;
       return <Reader book={book} chapterNumber={chapterNumber} />
     }
   }

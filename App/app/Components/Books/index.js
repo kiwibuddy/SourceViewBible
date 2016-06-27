@@ -28,10 +28,10 @@ import {
   Platform
 } from '../../Common';
 
-// $FlowBug: - Flow can't find os module extension
+// $FlowFixMe: - Flow can't find os module extension
 import SegmentedControl from '../Common/SegmentedControl';
 
-// $FlowBug: Can't find os module extension
+// $FlowFixMe: Can't find os module extension
 import LinearGradient from 'react-native-linear-gradient';
 
 import { SourcesBarChart, SpheresBarChart } from '../Charts';
@@ -308,7 +308,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Books);
+export default connect(mapStateToProps, mapDispatchToProps)(Books);
