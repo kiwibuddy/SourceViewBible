@@ -9,6 +9,7 @@
 
 #import "AppDelegate.h"
 
+#import "RCTBundleURLProvider.h"
 #import "RCTRootView.h"
 
 @implementation AppDelegate
@@ -17,11 +18,8 @@
 {
   NSURL *jsCodeLocation;
 
-#if (TARGET_IPHONE_SIMULATOR)
-  jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
-#else
-  jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
-#endif
+  [[RCTBundleURLProvider sharedSettings] setDefaults];
+  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"SourceViewBible"

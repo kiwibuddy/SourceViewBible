@@ -11,7 +11,6 @@ import ReactNative, {
   TouchableOpacity,
   RecyclerViewBackedScrollView,
   NavigationExperimental,
-  PropTypes,
   Dimensions
 } from 'react-native';
 
@@ -296,16 +295,10 @@ const mapStateToProps = (state) => {
   };
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onButtonPress: (book) => {
-      dispatch(navigatePush({
-        key: 'book',
-        title: book.name,
-        book
-      }));
-    }
-  };
+function mapDispatchToProps(dispatch) {
+	return {
+		dispatch
+	};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Books);

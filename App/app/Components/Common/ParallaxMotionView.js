@@ -44,6 +44,7 @@ export default class ParallaxMotionView extends Component {
 
     React.Children.forEach(this.props.children, (child, index) => {
       const style = StyleSheet.flatten(child.props.style);
+      if (style == null) return;
       const { top, left, bottom, right } = style;
 
       const updatedStyle = {

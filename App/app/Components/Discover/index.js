@@ -11,7 +11,6 @@ import ReactNative, {
   TouchableOpacity,
   RecyclerViewBackedScrollView,
   NavigationExperimental,
-  PropTypes,
   Dimensions
 } from 'react-native';
 
@@ -24,6 +23,11 @@ const NavigationHeaderBackButton = require('../Common/NavigationHeaderBackButton
 
 import { connect } from 'react-redux';
 
+import { actions } from 'react-native-navigation-redux-helpers';
+const {
+  popRoute,
+  pushRoute
+} = actions;
 
 import Book from '../Books/Book';
 import BookChapters from '../Books/Book/BookChapters';
@@ -49,7 +53,7 @@ class Discover extends Component {
       <NavigationCardStack
         direction={'horizontal'}
         navigationState={this.props.navigation}
-        onNavigate={this.props.onNavigate}
+        onNavigate={ () => {} }
         renderOverlay={this._renderOverlay}
         renderScene={this._renderScene}
         style={styles.main}
@@ -80,6 +84,7 @@ class Discover extends Component {
 
   _renderLeftComponent = (props: Object) => {
     const { scene, scenes } = props;
+    const { dispatch, navigation } = this.props;
     if (scene.index == 0) return null;
     const title = scene.route.title;
 
@@ -92,7 +97,7 @@ class Discover extends Component {
     }
 
     return (
-      <NavigationHeaderBackButton {...props}>
+      <NavigationHeaderBackButton {...props} onNavigate={() => dispatch(popRoute(navigation.key))}>
       {backButtonTitle}
       </NavigationHeaderBackButton>
     );
@@ -184,81 +189,74 @@ class Discover extends Component {
   };
 
   _onPressBook = (book: Object) => {
-    this.props.onNavigate({
-      type: 'push',
-      route: {
-        key: 'book',
-        title: book.name,
-        book
-      }
-    });
+    const { dispatch, navigation } = this.props;
+
+    dispatch(pushRoute({
+      key: 'book',
+      title: book.name,
+      book
+    }, navigation.key));
   };
 
   _onPressChapters = (book: Object) => {
-    this.props.onNavigate({
-      type: 'push',
-      route: {
-        key: 'chapters',
-        title: 'Chapters',
-        book
-      }
-    });
+    const { dispatch, navigation } = this.props;
+
+    dispatch(pushRoute({
+      key: 'chapters',
+      title: 'Chapters',
+      book
+    }, navigation.key));
   };
 
   _onPressSources = (book: Object) => {
-    this.props.onNavigate({
-      type: 'push',
-      route: {
-        key: 'sources',
-        title: 'Sources',
-        book
-      }
-    });
+    const { dispatch, navigation } = this.props;
+
+    dispatch(pushRoute({
+      key: 'sources',
+      title: 'Sources',
+      book
+    }, navigation.key));
   };
 
   _onPressSpheres = (book: Object) => {
-    this.props.onNavigate({
-      type: 'push',
-      route: {
-        key: 'spheres',
-        title: 'Spheres',
-        book
-      }
-    });
+    const { dispatch, navigation } = this.props;
+
+    dispatch(pushRoute({
+      key: 'spheres',
+      title: 'Spheres',
+      book
+    }, navigation.key));
   };
 
   _onPressWords = (book: Object) => {
-    this.props.onNavigate({
-      type: 'push',
-      route: {
-        key: 'words',
-        title: 'Words',
-        book
-      }
-    });
+    const { dispatch, navigation } = this.props;
+
+    dispatch(pushRoute({
+      key: 'words',
+      title: 'Words',
+      book
+    }, navigation.key));
   };
 
   _onPressBooks = () => {
-    this.props.onNavigate({
-      type: 'push',
-      route: {
-        key: 'books',
-        title: Localizable.t('books'),
-      }
-    });
+    const { dispatch, navigation } = this.props;
+
+    dispatch(pushRoute({
+      key: 'books',
+      title: Localizable.t('books')
+    }, navigation.key));
   };
 
   _onPressScripture = ({book, chapterNumber, showsBackButton}) => {
-    this.props.onNavigate({
-      type: 'push',
-      route: {
-        key: 'reader',
-        title: book.name,
-        book,
-        chapterNumber,
-        showsBackButton
-      }
-    });
+    const { dispatch, navigation } = this.props;
+
+    dispatch(pushRoute({
+      key: 'reader',
+      title: book.name,
+      book,
+      chapterNumber,
+      showsBackButton
+    }, navigation.key));
   };
 }
 
@@ -306,12 +304,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps, (stateProps, dispatchProps, ownProps) => {
-	return Object.assign({}, ownProps, stateProps, dispatchProps, {
-		onNavigate: (action) => {
-			dispatchProps.dispatch(Object.assign(action, {
-				scope: stateProps.navigation.key
-			}));
-		}
-	});
-})(Discover);
+export default connect(mapStateToProps, mapDispatchToProps)(Discover);

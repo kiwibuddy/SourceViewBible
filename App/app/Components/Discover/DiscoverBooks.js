@@ -11,7 +11,6 @@ import ReactNative, {
   TouchableOpacity,
   RecyclerViewBackedScrollView,
   NavigationExperimental,
-  PropTypes,
   Dimensions
 } from 'react-native';
 

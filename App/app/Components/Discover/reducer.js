@@ -1,32 +1,17 @@
 /* @flow */
 'use strict';
 
-import { NavigationExperimental } from 'react-native';
-const { Reducer: NavigationReducer } = NavigationExperimental;
+import { cardStackReducer } from 'react-native-navigation-redux-helpers';
 
-const navigation = NavigationReducer.StackReducer({
-	getPushedReducerForAction: (action) => {
-		if (action.type === 'push') {
-			return (state) => (state || action.route);
+const initialState = {
+	key: 'discover',
+	index: 0,
+	routes: [
+		{
+			key: 'discover',
+			title: 'Discover'
 		}
-		return null;
-	},
-	initialState: {
-		key: 'discover',
-		index: 0,
-		routes: [
-			{
-				key: 'discover',
-				title: 'Discover'
-			}
-		],
-	},
-});
-
-module.exports = (state: Object, action: Object) => {
-	if (action.scope && action.scope !== 'discover') {
-		return state;
-	} else {
-		return navigation(state, action);
-	}
+	],
 };
+
+module.exports = cardStackReducer(initialState);
