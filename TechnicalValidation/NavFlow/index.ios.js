@@ -249,20 +249,12 @@ class ExampleScene extends Component {
             onPress={() => navigate('push')}
           />
           <NavigationExampleRow
-            text="Pop Route"
-            onPress={() => navigate('pop')}
-          />
-          <NavigationExampleRow
             text="Back"
             onPress={() => navigate('back')}
           />
           <NavigationExampleRow
             text="Forward"
             onPress={() => navigate('forward')}
-          />
-          <NavigationExampleRow
-            text="Exit NavigationTransitioner Example"
-            onPress={() => navigate('exit')}
           />
         </ScrollView>
       </Animated.View>
