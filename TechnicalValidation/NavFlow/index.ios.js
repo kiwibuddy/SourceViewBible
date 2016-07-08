@@ -157,7 +157,12 @@ class Navigator extends Component {
     )
   };
 
-  _renderScene = (sceneProps: NavigationSceneRendererProps): ReactElement<any> => {
+  _renderScene = (sceneProps: NavigationSceneRendererProps): ?ReactElement<any> => {
+    const { scene, navigationState } = sceneProps;
+    if (Math.abs(navigationState.index - navigationState.routes.indexOf(scene.route)) > 2) {
+      return null;
+    }
+
     return (
       <ExampleScene
         {...sceneProps}
@@ -206,7 +211,7 @@ class Navigator extends Component {
   _configureTransition = (): NavigationTransitionSpec => {
     const easing: any = Easing.inOut(Easing.ease);
     return {
-      duration: 400,
+      duration: 250,
       easing,
     };
   }
