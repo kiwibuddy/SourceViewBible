@@ -56,17 +56,8 @@ function forward(state: NavigationState): NavigationState {
 function reducer(state: ?NavigationState, action: any): NavigationState {
   if (!state) {
     return {
-      index: 7,
-      routes: [
-        {key: 'route-1'},
-        {key: 'route-2'},
-        {key: 'route-3'},
-        {key: 'route-4'},
-        {key: 'route-5'},
-        {key: 'route-6'},
-        {key: 'route-7'},
-        {key: 'route-8'}
-      ],
+      index: 0,
+      routes: [{key: 'route-1'}],
     };
   }
 
@@ -265,8 +256,6 @@ class ExampleScene extends Component {
 
   render(): ReactElement<any> {
     const {scene, navigate} = this.props;
-    // console.log(scene);
-
     return (
       <Animated.View
         style={[styles.scene, this._getAnimatedStyle()]}>
