@@ -40,14 +40,14 @@ function reducer(state: ?NavigationState, action: any): NavigationState {
     return {
       index: 0,
       routes: [
-        {key: 'route-1'},
-        {key: 'route-2'},
-        {key: 'route-3'},
-        {key: 'route-4'},
-        {key: 'route-5'},
-        {key: 'route-6'},
-        {key: 'route-7'},
-        {key: 'route-8'}
+        {key: 'route-1', backgroundColor: '#246792'},
+        {key: 'route-2', backgroundColor: '#02104e'},
+        {key: 'route-3', backgroundColor: '#f855c8'},
+        {key: 'route-4', backgroundColor: '#7cda6f'},
+        {key: 'route-5', backgroundColor: '#784cc9'},
+        {key: 'route-6', backgroundColor: '#7baa22'},
+        {key: 'route-7', backgroundColor: '#ce6f6b'},
+        {key: 'route-8', backgroundColor: '#21fdae'}
       ],
     };
   }
@@ -232,9 +232,13 @@ class ExampleScene extends Component {
 
   render(): ReactElement<any> {
     const {scene, navigate} = this.props;
+    const style = {
+      backgroundColor: scene.route.backgroundColor
+    };
+
     return (
       <Animated.View
-        style={[styles.scene, this._getAnimatedStyle()]}>
+        style={[styles.scene, style, this._getAnimatedStyle()]}>
         <ScrollView style={styles.scrollView}>
           <NavigationExampleRow
             text={scene.route.key}
