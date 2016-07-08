@@ -35,29 +35,20 @@ const {
   Transitioner: NavigationTransitioner,
 } = NavigationExperimental;
 
-/**
- * Sets the focused route to the previous route.
- */
-function back(state: NavigationState): NavigationState {
-  const index = state.index - 1;
-  const route = state.routes[index];
-  return route ? NavigationStateUtils.jumpToIndex(state, index) : state;
-}
-
-/**
- * Sets the focused route to the next route.
- */
-function forward(state: NavigationState): NavigationState {
-  const index = state.index + 1;
-  const route = state.routes[index];
-  return route ? NavigationStateUtils.jumpToIndex(state, index) : state;
-}
-
 function reducer(state: ?NavigationState, action: any): NavigationState {
   if (!state) {
     return {
       index: 0,
-      routes: [{key: 'route-1'}],
+      routes: [
+        {key: 'route-1'},
+        {key: 'route-2'},
+        {key: 'route-3'},
+        {key: 'route-4'},
+        {key: 'route-5'},
+        {key: 'route-6'},
+        {key: 'route-7'},
+        {key: 'route-8'}
+      ],
     };
   }
 
@@ -68,9 +59,9 @@ function reducer(state: ?NavigationState, action: any): NavigationState {
     case 'pop':
       return NavigationStateUtils.pop(state);
     case 'back':
-      return back(state);
+      return NavigationStateUtils.back(state);
     case 'forward':
-      return forward(state);
+      return NavigationStateUtils.forward(state);
   }
   return state;
 }
@@ -100,28 +91,13 @@ class NavFlow extends Component {
   }
 
   _navigate(action: any): boolean {
-    if (action === 'exit') {
-      // Exits the example. `this.props.onExampleExit` is provided
-      // by the UI Explorer.
-      this.props.onExampleExit && this.props.onExampleExit();
-      return false;
-    }
-
     const navigationState = reducer(this.state.navigationState, action);
     if (navigationState === this.state.navigationState) {
       return false;
     }
 
-    console.log('navigate', navigationState);
-
     this.setState({navigationState});
     return true;
-  }
-
-  // This public method is optional. If exists, the UI explorer will call it
-  // the "back button" is pressed. Normally this is the cases for Android only.
-  handleBackAction(): boolean {
-    return this._navigate('pop');
   }
 }
 
