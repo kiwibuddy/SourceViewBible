@@ -8,12 +8,14 @@ import React, { Component, PropTypes } from 'react';
 import {
   Animated,
   AppRegistry,
+  Image,
   Easing,
   NavigationExperimental,
   Platform,
   ScrollView,
   StyleSheet,
   Text,
+  TouchableHighlight,
   View
 } from 'react-native';
 
@@ -199,9 +201,25 @@ class Navigator extends Component {
   };
 
   _renderToolbar = (props: NavigationTransitionProps) => {
+    const { navigate } = this.props;
+
     return (
       <View style={styles.toolbar}>
+        <TouchableHighlight
+          onPress={() => navigate('back')}
+          style={styles.toolbarButton}
+          underlayColor="rgba(0,0,0,.2)"
+        >
+          <Image style={styles.toolbarButtonIcon} source={require('./back.png')} />
+        </TouchableHighlight>
 
+        <TouchableHighlight
+          onPress={() => navigate('forward')}
+          style={styles.toolbarButton}
+          underlayColor="rgba(0,0,0,.2)"
+        >
+          <Image style={styles.toolbarButtonIcon} source={require('./forward.png')} />
+        </TouchableHighlight>
       </View>
     )
   };
@@ -247,14 +265,6 @@ class ExampleScene extends Component {
           <NavigationExampleRow
             text="Push Route"
             onPress={() => navigate('push')}
-          />
-          <NavigationExampleRow
-            text="Back"
-            onPress={() => navigate('back')}
-          />
-          <NavigationExampleRow
-            text="Forward"
-            onPress={() => navigate('forward')}
           />
         </ScrollView>
       </Animated.View>
@@ -338,6 +348,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
+  },
+  toolbarButton: {
+    width: 30,
+    height: 30,
+  },
+  toolbarButtonIcon: {
+    width: 30,
+    height: 30,
   },
   title: {
     flex: 1,
