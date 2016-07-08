@@ -203,22 +203,34 @@ class Navigator extends Component {
   _renderToolbar = (props: NavigationTransitionProps) => {
     const { navigate } = this.props;
 
+    const canGoBack = props.navigationState.index > 0;
+    const backButtonStyle = {
+      tintColor: canGoBack ? 'red' : 'gray'
+    };
+
+    const canGoForward = props.navigationState.index < props.navigationState.routes.length - 1;
+    const forwardButtonStyle = {
+      tintColor: canGoForward ? 'red' : 'gray'
+    };
+
     return (
       <View style={styles.toolbar}>
         <TouchableHighlight
+          disabled={!canGoBack}
           onPress={() => navigate('back')}
           style={styles.toolbarButton}
           underlayColor="rgba(0,0,0,.2)"
         >
-          <Image style={styles.toolbarButtonIcon} source={require('./back.png')} />
+          <Image style={[styles.toolbarButtonIcon, backButtonStyle]} source={require('./back.png')} />
         </TouchableHighlight>
 
         <TouchableHighlight
+          disabled={!canGoForward}
           onPress={() => navigate('forward')}
           style={styles.toolbarButton}
           underlayColor="rgba(0,0,0,.2)"
         >
-          <Image style={styles.toolbarButtonIcon} source={require('./forward.png')} />
+          <Image style={[styles.toolbarButtonIcon, forwardButtonStyle]} source={require('./forward.png')} />
         </TouchableHighlight>
       </View>
     )
