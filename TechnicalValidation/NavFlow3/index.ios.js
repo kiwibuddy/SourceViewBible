@@ -60,22 +60,26 @@ class NavFlow3 extends Component {
     });
   };
 
-  _openExampleScene = (props) => {
-    const route = {key: 'route-' + Date.now(),  ...props};
+  _pushRoute = (state, route) => {
     const routes = [
-      ...this.state.navigation.routes,
+      ...state.routes,
       route,
     ];
 
     const navigation = {
-      ...this.state.navigation,
+      ...state,
       index: routes.length - 1,
       routes,
     };
 
     if (navigation !== this.state.navigation) {
-      this.setState({ navigation });
+      this.setState({navigation});
     }
+  }
+
+  _openExampleScene = (props) => {
+    const route = {key: 'route-' + Date.now(),  ...props};
+    this._pushRoute(this.state.navigation, route);
   };
 
   _renderScene = ({ route, onPress }) => {
