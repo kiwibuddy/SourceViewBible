@@ -54,7 +54,7 @@ class NavFlow3 extends Component {
     this.setState({
       navigation: { ...this.state.navigation, index },
     });
-  }
+  };
 
   _renderScene = ({ route }) => {
     if (this.state.navigation.index !== this.state.navigation.routes.indexOf(route)) {
