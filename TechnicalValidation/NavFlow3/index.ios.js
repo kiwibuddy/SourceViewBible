@@ -37,7 +37,7 @@ class NavFlow3 extends Component {
   render() {
     const { navigation } = this.state;
     const route = navigation.routes[navigation.index];
-    const scene = this._renderScene({route});
+    const scene = this._renderScene({route, onPress: this._openExampleScene});
     const navigationBar = this._renderNavigationBar({navigationState: navigation});
     const toolbar = this._renderToolbar({navigationState: navigation, jumpToIndex: this._jumpToIndex});
 
@@ -56,12 +56,30 @@ class NavFlow3 extends Component {
     });
   };
 
-  _renderScene = ({ route }) => {
+  _openExampleScene = (props) => {
+    const route = {key: 'route-' + Date.now(),  ...props};
+    const routes = [
+      ...this.state.navigation.routes,
+      route,
+    ];
+
+    const navigation = {
+      ...this.state.navigation,
+      index: routes.length - 1,
+      routes,
+    };
+
+    if (navigation !== this.state.navigation) {
+      this.setState({ navigation });
+    }
+  };
+
+  _renderScene = ({ route, onPress }) => {
     if (this.state.navigation.index !== this.state.navigation.routes.indexOf(route)) {
       return null;
     }
 
-    return <ExampleScene style={[ styles.page, { backgroundColor: route.backgroundColor } ]} route={route} />;
+    return <ExampleScene style={[ styles.page, { backgroundColor: route.backgroundColor } ]} route={route} onPress={onPress} />;
   };
 
   _renderNavigationBar = (props) => {
@@ -123,10 +141,12 @@ class ExampleScene extends Component {
   }
 
   render() {
-    const {style, route} = this.props;
+    const {style, route, onPress} = this.props;
     return (
       <View style={style}>
-        <Text style={{color:'white'}}>{route.key}</Text>
+        <TouchableHighlight onPress={() => onPress({backgroundColor: 'red'})}>
+          <Text style={{color:'white'}}>{route.key}</Text>
+        </TouchableHighlight>
       </View>
     );
   }
