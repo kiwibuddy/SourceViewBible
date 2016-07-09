@@ -43,9 +43,12 @@ class NavFlow2 extends Component {
   };
 
   _renderScene = ({ route }) => {
-    if (Math.abs(this.state.navigation.index - this.state.navigation.routes.indexOf(route)) > 2) {
+    if (this.state.navigation.index !== this.state.navigation.routes.indexOf(route)) {
       return null;
     }
+    // if (Math.abs(this.state.navigation.index - this.state.navigation.routes.indexOf(route)) > 2) {
+    //   return null;
+    // }
 
     return <ExampleScene style={[ styles.page, { backgroundColor: route.backgroundColor } ]} route={route} />;
   };
