@@ -1,0 +1,3 @@
+rootProject.name = 'NavFlow3'
+
+include ':app'
