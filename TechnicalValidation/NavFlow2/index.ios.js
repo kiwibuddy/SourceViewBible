@@ -156,6 +156,7 @@ const styles = StyleSheet.create({
   page: {
     flex: 1,
     marginTop: 64,
+    marginBottom: 44,
     alignItems: 'center',
     justifyContent: 'center',
   },
