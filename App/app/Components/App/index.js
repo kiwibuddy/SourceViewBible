@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 
-import { NavigationBar, Toolbar } from '../Navigation';
+import { NavigationBar, Toolbar, ToolbarButton } from '../Navigation';
 
 export default class App extends Component {
   render() {
@@ -27,7 +27,28 @@ export default class App extends Component {
 
   _renderToolbar = () => {
     return (
-      <Toolbar />
+      <Toolbar>
+        <View style={{flex: 1, flexDirection: 'row'}}>
+          <ToolbarButton
+            imageSource={require('../Navigation/Images/nav-back.png')}
+            onPress={() => {}}
+          />
+          <ToolbarButton
+            imageSource={require('../Navigation/Images/nav-forward.png')}
+            onPress={() => {}}
+          />
+        </View>
+        <View style={{flex: 1, flexDirection: 'row'}}>
+          <ToolbarButton
+            imageSource={require('../Navigation/Images/nav-discoverycenter.png')}
+            onPress={() => {}}
+          />
+        </View>
+        <ToolbarButton
+          imageSource={require('../Navigation/Images/nav-bookmarks.png')}
+          onPress={() => {}}
+        />
+      </Toolbar>
     )
   };
 }
