@@ -5,13 +5,10 @@ import React, { Component, PropTypes } from 'react';
 const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
 
 import {
+  Platform,
+  StyleSheet,
   View
 } from 'react-native';
-
-import {
-  Colors,
-  StyleSheet,
-} from '../../Common';
 
 export default class Toolbar extends Component {
   render() {
@@ -24,6 +21,16 @@ export default class Toolbar extends Component {
 
 const styles = StyleSheet.create({
   toolbar: {
-    flex: 1,
+    position: 'absolute',
+    height: 44,
+    bottom: 0,
+    right: 0,
+    left: 0,
+    backgroundColor: Platform.OS === 'ios' ? '#EFEFF2' : '#FFF',
+    borderTopColor: 'rgba(0, 0, 0, .15)',
+    borderTopWidth: Platform.OS === 'ios' ? StyleSheet.hairlineWidth : 0,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
   },
 });
