@@ -57,7 +57,7 @@ export default class App extends Component {
   _renderPage = (props: any) => {
     const scene = this._renderScene(props);
     return (
-      <View style={{flex: 1, marginTop: 64}}>
+      <View style={{flex: 1, marginTop: NavigationBar.HEIGHT, marginBottom: Toolbar.HEIGHT}}>
         {scene}
       </View>
     );

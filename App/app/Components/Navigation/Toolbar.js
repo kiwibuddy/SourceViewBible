@@ -10,7 +10,11 @@ import {
   View
 } from 'react-native';
 
+const TOOLBAR_HEIGHT = 44;
+
 export default class Toolbar extends Component {
+  static HEIGHT = TOOLBAR_HEIGHT;
+
   render() {
     return (
       <View style={styles.toolbar}>
@@ -23,7 +27,7 @@ export default class Toolbar extends Component {
 const styles = StyleSheet.create({
   toolbar: {
     position: 'absolute',
-    height: 44,
+    height: TOOLBAR_HEIGHT,
     bottom: 0,
     right: 0,
     left: 0,

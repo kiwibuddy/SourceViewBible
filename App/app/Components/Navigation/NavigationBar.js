@@ -11,11 +11,11 @@ import {
   View
 } from 'react-native';
 
-const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
+const NAVIGATIONBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
 
 export default class NavigationBar extends Component {
-  static HEIGHT = APPBAR_HEIGHT + STATUSBAR_HEIGHT;
+  static HEIGHT = NAVIGATIONBAR_HEIGHT + STATUSBAR_HEIGHT;
 
   render() {
     return (
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   navigationBar: {
     position: 'absolute',
     top: 0,
-    height: APPBAR_HEIGHT + STATUSBAR_HEIGHT,
+    height: NAVIGATIONBAR_HEIGHT + STATUSBAR_HEIGHT,
     left: 0,
     right: 0,
     alignItems: 'center',
