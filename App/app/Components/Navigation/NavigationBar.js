@@ -20,6 +20,9 @@ export default class NavigationBar extends Component {
   render() {
     return (
       <View style={styles.navigationBar}>
+        <View style={styles.title}>
+          <Text style={styles.titleText}>{this.props.title}</Text>
+        </View>
       </View>
     );
   }
@@ -41,4 +44,18 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     marginBottom: 16, // This is needed for elevation shadow
   },
+  title: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginHorizontal: 16,
+    marginTop: Platform.OS === 'ios' ? STATUSBAR_HEIGHT : 0,
+  },
+  titleText: {
+    flex: 1,
+    fontSize: 18,
+    fontWeight: '500',
+    color: 'rgba(0, 0, 0, .9)',
+    textAlign: Platform.OS === 'ios' ? 'center' : 'left'
+  }
 });

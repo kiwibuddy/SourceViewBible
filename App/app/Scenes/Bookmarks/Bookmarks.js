@@ -36,10 +36,28 @@ export default class Bookmarks extends Component {
   _getRows = () => {
     return (
       [
-        '/Books/BookChapters',
-        '/Books/BookOverview'
+        '/Books',
+        '/Books/Overview',
+        '/Books/Chapters',
+        '/Books/Sources',
+        '/Books/Spheres',
+        '/Books/Words',
+        '/Discover',
+        '/DiscoveryCenter',
+        '/Reader',
+        '/Sources',
+        '/Sources/Overview',
+        '/Sources/Books',
+        '/Sources/Conversations',
+        '/Sources/Spheres',
+        '/Sources/Words',
+        '/Spheres',
+        '/Spheres/Overview',
+        '/Spheres/Books',
+        '/Spheres/Sources',
+        '/Spheres/Words'
       ]
-    )
+    );
   };
 
   render() {
@@ -58,7 +76,7 @@ export default class Bookmarks extends Component {
   _renderRow = (rowData: any) => {
     return (
       <TouchableHighlight
-        onPress={(rowData) => this.props.onPress({key: rowData})}
+        onPress={() => this.props.onPress({key: rowData})}
         style={styles.row}
         underlayColor="transparent"
       >
@@ -74,7 +92,6 @@ const styles = StyleSheet.create({
   },
   listView: {
     flex: 1,
-    marginTop: 64,
   },
   separator: {
     height: StyleSheet.hairlineWidth,
