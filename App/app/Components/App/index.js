@@ -6,41 +6,45 @@ import { View } from 'react-native';
 
 import { NavigationBar, Toolbar, ToolbarButton } from '../Navigation';
 
-type State = {
-  navigation: any,
-};
-
-function reducer(state, action) {
-  if (!state) {
-    return {
-      index: 0,
-      routes: [{key: '/Discover'}],
-    };
-  }
-};
+import Bookmarks from '../../Scenes/Bookmarks/Bookmarks';
 
 export default class App extends Component {
-  state: State;
-
-  constructor(props: any, context: any) {
-    super(props, context);
-
-    this.state = {
-      navigation: reducer(),
-    };
-  }
+  state = {
+    navigation: {
+      index: 0,
+      routes: [
+        {key: '/Bookmarks'},
+      ],
+    }
+  };
 
   render() {
-    const navigationBar = this._renderNavigationBar();
-    const toolbar = this._renderToolbar();
+    const { navigation } = this.state;
+    const route = navigation.routes[navigation.index];
+    const scene = this._renderScene({route});
+    const navigationBar = this._renderNavigationBar({navigationState: navigation});
+    const toolbar = this._renderToolbar({navigationState: navigation, jumpToIndex: this._jumpToIndex});
 
     return (
       <View style={{flex: 1}}>
+        {scene}
         {navigationBar}
         {toolbar}
       </View>
     );
   }
+
+  _renderScene = (props: any) => {
+    const { route } = props;
+
+    switch (route.key) {
+      case '/Bookmarks':
+        return <Bookmarks onPress={(route) => this._pushRoute(this.state.navigation, route)}/>;
+      default:
+        return null;
+    };
+
+  };
 
   _renderNavigationBar = () => {
     return (
@@ -48,17 +52,23 @@ export default class App extends Component {
     );
   };
 
-  _renderToolbar = () => {
+  _renderToolbar = (props: any) => {
+    const { navigationState, jumpToIndex } = props;
+    const canGoBack = navigationState.index > 0;
+    const canGoForward = navigationState.index < navigationState.routes.length - 1;
+
     return (
       <Toolbar>
         <View style={{flex: 1, flexDirection: 'row'}}>
           <ToolbarButton
+            disabled={!canGoBack}
             imageSource={require('../Navigation/Images/nav-back.png')}
-            onPress={() => {}}
+            onPress={() => jumpToIndex(navigationState.index - 1)}
           />
           <ToolbarButton
+            disabled={!canGoForward}
             imageSource={require('../Navigation/Images/nav-forward.png')}
-            onPress={() => {}}
+            onPress={() => jumpToIndex(navigationState.index + 1)}
           />
         </View>
         <View style={{flex: 1}}>
@@ -69,13 +79,32 @@ export default class App extends Component {
         </View>
         <ToolbarButton
           imageSource={require('../Navigation/Images/nav-bookmarks.png')}
-          onPress={this._onPressBookmarks}
+          onPress={() => {}}
         />
       </Toolbar>
     );
   };
 
-  _onPressBookmarks = () => {
+  _jumpToIndex = (index: number) => {
+    this.setState({
+      navigation: { ...this.state.navigation, index },
+    });
+  };
 
+  _pushRoute = (state: any, route: any) => {
+    const routes = [
+      ...state.routes,
+      route,
+    ];
+
+    const navigation = {
+      ...state,
+      index: routes.length - 1,
+      routes,
+    };
+
+    if (navigation !== this.state.navigation) {
+      this.setState({navigation});
+    }
   };
 }

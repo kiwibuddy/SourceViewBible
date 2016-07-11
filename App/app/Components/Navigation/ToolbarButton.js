@@ -17,20 +17,24 @@ import {
 } from '../../Common';
 
 type Props = {
+  disabled?: boolean,
   imageSource: any,
-  onPress: Function,
+  onPress?: Function,
 };
 
 const ToolbarButton = (props: Props) => {
+  const imageStyle = props.disabled ? {tintColor: 'gray'} : {};
+
   return (
     <TouchableHighlight
+      disabled={props.disabled}
       onPress={props.onPress}
       style={styles.button}
       underlayColor="transparent"
     >
       <Image
         source={props.imageSource}
-        style={styles.image}
+        style={[styles.image, imageStyle]}
       />
     </TouchableHighlight>
   );
