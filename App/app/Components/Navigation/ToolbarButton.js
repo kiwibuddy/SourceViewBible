@@ -42,8 +42,6 @@ const styles = StyleSheet.create({
     height: 30,
   },
   image: {
-    width: 30,
-    height: 30,
     tintColor: Colors.tintColor
   },
 });

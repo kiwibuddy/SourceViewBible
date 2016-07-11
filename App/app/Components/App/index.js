@@ -6,7 +6,30 @@ import { View } from 'react-native';
 
 import { NavigationBar, Toolbar, ToolbarButton } from '../Navigation';
 
+type State = {
+  navigation: any,
+};
+
+function reducer(state, action) {
+  if (!state) {
+    return {
+      index: 0,
+      routes: [{key: '/Discover'}],
+    };
+  }
+};
+
 export default class App extends Component {
+  state: State;
+
+  constructor(props: any, context: any) {
+    super(props, context);
+
+    this.state = {
+      navigation: reducer(),
+    };
+  }
+
   render() {
     const navigationBar = this._renderNavigationBar();
     const toolbar = this._renderToolbar();
@@ -46,9 +69,13 @@ export default class App extends Component {
         </View>
         <ToolbarButton
           imageSource={require('../Navigation/Images/nav-bookmarks.png')}
-          onPress={() => {}}
+          onPress={this._onPressBookmarks}
         />
       </Toolbar>
-    )
+    );
+  };
+
+  _onPressBookmarks = () => {
+
   };
 }
