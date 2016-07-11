@@ -7,3 +7,23 @@ const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithP
 import {
   View
 } from 'react-native';
+
+import {
+  Colors,
+  StyleSheet,
+} from '../../Common';
+
+export default class Toolbar extends Component {
+  render() {
+    return (
+      <View style={styles.toolbar}>
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  toolbar: {
+    flex: 1,
+  },
+});
