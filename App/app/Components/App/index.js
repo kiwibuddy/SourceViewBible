@@ -38,7 +38,7 @@ export default class App extends Component {
             onPress={() => {}}
           />
         </View>
-        <View style={{flex: 1, flexDirection: 'row'}}>
+        <View style={{flex: 1}}>
           <ToolbarButton
             imageSource={require('../Navigation/Images/nav-discoverycenter.png')}
             onPress={() => {}}
