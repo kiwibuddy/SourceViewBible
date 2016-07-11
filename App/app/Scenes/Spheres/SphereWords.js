@@ -23,7 +23,7 @@ export default class SphereWords extends Component {
       </View>
     );
   }
-};
+}
 
 const styles = StyleSheet.create({
   container: {

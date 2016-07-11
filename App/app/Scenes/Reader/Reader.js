@@ -23,7 +23,7 @@ export default class Reader extends Component {
       </View>
     );
   }
-};
+}
 
 const styles = StyleSheet.create({
   container: {

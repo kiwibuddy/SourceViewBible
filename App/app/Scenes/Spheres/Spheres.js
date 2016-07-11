@@ -23,7 +23,7 @@ export default class Spheres extends Component {
       </View>
     );
   }
-};
+}
 
 const styles = StyleSheet.create({
   container: {

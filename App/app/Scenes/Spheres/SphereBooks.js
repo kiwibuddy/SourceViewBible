@@ -23,7 +23,7 @@ export default class SphereBooks extends Component {
       </View>
     );
   }
-};
+}
 
 const styles = StyleSheet.create({
   container: {

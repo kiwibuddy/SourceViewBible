@@ -23,7 +23,7 @@ export default class SphereSources extends Component {
       </View>
     );
   }
-};
+}
 
 const styles = StyleSheet.create({
   container: {
