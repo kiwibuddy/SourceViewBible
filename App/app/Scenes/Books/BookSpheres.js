@@ -30,6 +30,7 @@ export default class BookSpheres extends Component {
           <View style={styles.statisticContainer}>
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
               <Text style={styles.statisticTitle}>7</Text>
+              <View style={styles.SpheresBarChart}></View>
             </View>
             <Text style={styles.statisticSubtitle}>Spheres</Text>
           </View>
