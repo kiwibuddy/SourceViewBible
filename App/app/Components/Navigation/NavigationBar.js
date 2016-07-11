@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: Platform.OS === 'ios' ? StyleSheet.hairlineWidth : 0,
     elevation: 4,
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     marginBottom: 16, // This is needed for elevation shadow
   },
   title: {
