@@ -28,6 +28,7 @@ type Props = {
   book: Object,
   onPressScripture: Function,
   onPressChapters: Function,
+  onPressSource: Function,
   onPressSources: Function,
   onPressSpheres: Function,
   onPressWords: Function,
@@ -162,7 +163,11 @@ export default class BookOverview extends Component {
     const color = Colors.sources[sourceType];
     const iconName = ICON_MAP[sourceType] || "avatar-human-group";
     return (
-      <TouchableOpacity key={'source-' + source.name} style={styles.sourceButton}>
+      <TouchableOpacity
+        key={'source-' + source.name}
+        onPress={() => this.props.onPressSource(source)}
+        style={styles.sourceButton}
+      >
         <Icon
           name={iconName}
           size={40}
