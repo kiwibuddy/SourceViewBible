@@ -70,6 +70,31 @@ export default class SourceOverview extends Component {
           </View>
           <View style={styles.separator} />
         </View>
+        <View style={styles.listContainer}>
+          <View style={styles.listItemHeader}>
+            <Text style={StyleSheet.styles.cell.titlebold}>Source spoke to</Text>
+            <View style={styles.horizontalContainer}>
+              <View style={styles.leftContainer}>
+                <Text style={StyleSheet.styles.cell.subtitle}>0 sources</Text>
+              </View>
+              <View style={styles.rightContainer}>
+                <Text style={StyleSheet.styles.cell.subtitle}>0 occurrences</Text>
+                </View>
+            </View>
+          </View>
+          <View style={styles.listItemContainer}>
+            <Icon
+              name={'avatar-human-group'}
+              size={20}
+              style={[styles.listItemIcon, {color: '#59626A'}]}
+            />
+            <View style={styles.listItem}>
+              <Text style={StyleSheet.styles.cell.title}>Meta Data Title</Text>
+              <Text style={StyleSheet.styles.cell.valuetitle}>Value</Text>
+            </View>
+          </View>
+          <View style={styles.separator} />
+        </View>
       </View>
     );
   }
@@ -94,6 +119,19 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     flexDirection: 'row',
   },
+  listItemHeader: {
+    borderTopWidth: 2,
+    borderTopColor: 'red',
+    paddingLeft: 15,
+    height: 55,
+    shadowColor: "black",
+    shadowOpacity: 0.05,
+    shadowRadius: 0.4,
+    shadowOffset: {
+      height: 1,
+      width: 0
+    },
+  },
   listItem: {
     flex: 1,
     flexDirection: 'row',
@@ -108,5 +146,14 @@ const styles = StyleSheet.create({
   separator: {
     ...StyleSheet.styles.separator,
     marginLeft: 15,
+  },
+  horizontalContainer: {
+    flexDirection: 'row',
+  },
+  leftContainer: {
+    flex: 1,
+  },
+  rightContainer: {
+    flex: 2,
   },
 });

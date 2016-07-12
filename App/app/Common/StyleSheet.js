@@ -88,6 +88,11 @@ const styles = {
       color: '#59626a',
       fontSize: 17,
     },
+    titlebold: {
+      color: '#59626a',
+      fontSize: 18,
+      fontWeight: 'bold',
+    },
     subtitle: {
       color: '#9B9B9B',
       fontSize: 13,
