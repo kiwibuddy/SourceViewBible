@@ -36,10 +36,8 @@ export default class Bookmarks extends Component {
   _getRows = () => {
     return (
       [
-        '/Books',
         '/Books/Spheres',
         '/Books/Words',
-        '/Discover',
         '/DiscoveryCenter',
         '/Sources',
         '/Sources/Overview',
