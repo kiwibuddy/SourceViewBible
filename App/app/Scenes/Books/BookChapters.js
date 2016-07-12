@@ -56,7 +56,7 @@ export default class BookChapters extends Component {
 
   componentDidMount() {
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(this.props.book.chapters)
+      dataSource: this._getDataSource(this.state.selectedSegmentIndex)
     });
   }
 
@@ -90,7 +90,7 @@ export default class BookChapters extends Component {
     const chapterNumber = chapter.chapterNumber;
 
     const chart = (this.state.selectedSegmentIndex === SEGMENT_INDEXES.SPHERES ? this._renderSpheresChart(book, chapter) : this._renderSourcesChart(book, chapter));
-    const subtitle = (this.state.selectedSegmentIndex === SEGMENT_INDEXES.SPHERES ? Localizable.t('spheres.count', {count: chapter.sourceCount}) : Localizable.t('sources.count', {count: chapter.sourceCount}) );
+    const subtitle = (this.state.selectedSegmentIndex === SEGMENT_INDEXES.SPHERES ? Localizable.t('spheres.count', {count: chapter.sphereCount || 7}) : Localizable.t('sources.count', {count: chapter.sourceCount}) );
 
     return (
       <TouchableOpacity style={styles.section} onPress={() => this.props.onPressScripture({book, chapterNumber})}>
@@ -130,10 +130,20 @@ export default class BookChapters extends Component {
     return (
       <SpheresBarChart
         style={styles.stackedBarChart}
-        data={[chapter.sourceTypeCounts]}
+        data={[{family: 1}, {economics: 1}, {government: 1}, {religion: 1}, {education: 1}, {communication: 1}, {celebration: 1}]}
         maxChartValue={book.maxChapterWordCount}
       />
     );
+  };
+
+  _getDataSource = (segmentIndex: number) => {
+    switch (segmentIndex) {
+      case SEGMENT_INDEXES.SPHERES:
+        return this.state.dataSource.cloneWithRowsAndSections({spheres: this.props.book.chapters});
+
+      default:
+        return this.state.dataSource.cloneWithRowsAndSections({sources: this.props.book.chapters});
+    }
   };
 
   _onSegmentedControlValueChanged = (value: number) => {
@@ -141,7 +151,8 @@ export default class BookChapters extends Component {
     listView.scrollTo({y: 0, animated: false});
 
     this.setState({
-      selectedSegmentIndex: value
+      selectedSegmentIndex: value,
+      dataSource: this._getDataSource(value)
     });
   };
 }
