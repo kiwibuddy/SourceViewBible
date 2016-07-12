@@ -9,6 +9,57 @@ function create(styles: Object) {
 };
 
 const styles = {
+  wordCloud: {
+    height: 200,
+    backgroundColor: 'red',
+    shadowColor: "black",
+    shadowOpacity: 0.05,
+    shadowRadius: 0.4,
+    shadowOffset: {
+      height: 1,
+      width: 0
+    },
+  },
+  statisticsContainer: {
+    flex: 0,
+    flexDirection: 'row',
+    marginTop: 5,
+    borderBottomColor: Colors.separator,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    shadowColor: "black",
+    shadowOpacity: 0.05,
+    shadowRadius: 0.4,
+    shadowOffset: {
+      height: 1,
+      width: 0
+    },
+  },
+  statisticContainer: {
+    flex: 1,
+  },
+  statisticTitle: {
+    fontSize: 24,
+    color: Colors.tintColor,
+    alignSelf: 'center'
+  },
+  statisticTitleBold: {
+    fontSize: 34,
+    fontWeight: '700',
+    color: '#59626A',
+    alignSelf: 'center'
+  },
+  statisticSubtitle: {
+    flex: 1,
+    color: Colors.subtitle,
+    fontSize: 12,
+    textAlign: 'center',
+    marginBottom: 8,
+  },
+  statisticKeyline: {
+    flex:0,
+    width: StyleSheet.hairlineWidth,
+    backgroundColor: Colors.separator
+  },
   sectionHeaderContainer: {
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: '#c8c7cc',

@@ -20,7 +20,7 @@ export default class BookWords extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.wordCloud}>
+        <View style={StyleSheet.styles.wordCloud}>
           <Image style={styles.wordCloudButton} source={require('../../Images/common/btn-expand.png')} />
         </View>
         <View style={styles.listContainer}>
@@ -38,17 +38,6 @@ export default class BookWords extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  wordCloud: {
-    height: 200,
-    backgroundColor: 'red',
-    shadowColor: "black",
-    shadowOpacity: 0.05,
-    shadowRadius: 0.4,
-    shadowOffset: {
-      height: 1,
-      width: 0
-    },
   },
   listItem: {
     paddingLeft: 15,

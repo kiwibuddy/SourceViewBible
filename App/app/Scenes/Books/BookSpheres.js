@@ -19,18 +19,18 @@ export default class BookSpheres extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.statisticsContainer}>
-          <View style={styles.statisticContainer}>
-            <Text style={styles.statisticTitle}>0</Text>
-            <Text style={styles.statisticSubtitle}>Words</Text>
+        <View style={StyleSheet.styles.statisticsContainer}>
+          <View style={StyleSheet.styles.statisticContainer}>
+            <Text style={StyleSheet.styles.statisticTitleBold}>0</Text>
+            <Text style={StyleSheet.styles.statisticSubtitle}>Words</Text>
           </View>
-          <View style={styles.keyline} />
-          <View style={styles.statisticContainer}>
+          <View style={StyleSheet.styles.statisticKeyline} />
+          <View style={StyleSheet.styles.statisticContainer}>
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={styles.statisticTitle}>7</Text>
+              <Text style={StyleSheet.styles.statisticTitleBold}>0</Text>
               <View style={styles.SpheresBarChart}></View>
             </View>
-            <Text style={styles.statisticSubtitle}>Spheres</Text>
+            <Text style={StyleSheet.styles.statisticSubtitle}>Spheres</Text>
           </View>
         </View>
         <View style={styles.listContainer}>
@@ -51,40 +51,6 @@ export default class BookSpheres extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  statisticsContainer: {
-    flex: 0,
-    flexDirection: 'row',
-    marginTop: 5,
-    borderBottomColor: Colors.separator,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    shadowColor: "black",
-    shadowOpacity: 0.05,
-    shadowRadius: 0.4,
-    shadowOffset: {
-      height: 1,
-      width: 0
-    },
-  },
-  statisticContainer: {
-    flex: 1,
-    paddingBottom: 10,
-  },
-  statisticTitle: {
-    fontSize: 34,
-    fontWeight: '700',
-    color: '#59626A',
-    alignSelf: 'center'
-  },
-  statisticSubtitle: {
-    fontSize: 13,
-    color: '#9B9B9B',
-    alignSelf: 'center'
-  },
-  keyline: {
-    flex:0,
-    width: StyleSheet.hairlineWidth,
-    backgroundColor: Colors.separator
   },
   listItemContainer: {
     paddingLeft: 8,
