@@ -15,12 +15,21 @@ import {
   Localizable
 } from '../../Common';
 
+import ScriptureView from './ScriptureView';
+
+type Props = {
+  book: Object,
+  chapterNumber: number,
+};
+
 export default class Reader extends Component {
   render() {
+    const book = this.props.book;
+    const chapterNumber = this.props.chapterNumber || 1;
+    const chapter = book.chapters[chapterNumber - 1];
+
     return (
-      <View style={styles.container}>
-        <Text>Reader</Text>
-      </View>
+      <ScriptureView book={book} chapter={chapter} />
     );
   }
 }

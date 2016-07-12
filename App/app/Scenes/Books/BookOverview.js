@@ -136,7 +136,10 @@ export default class BookOverview extends Component {
           {sources}
         </View>
 
-        <TouchableOpacity style={styles.readButton} onPress={this.props.onPressScripture}>
+        <TouchableOpacity
+          style={styles.readButton}
+          onPress={() => this.props.onPressScripture({book})}
+        >
           <Text style={styles.readButtonTitle}>{ReadingTime(book.wordCount)} read</Text>
         </TouchableOpacity>
 

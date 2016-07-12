@@ -12,10 +12,7 @@ const {
   Image,
   ScrollView,
   TouchableOpacity,
-  NavigationExperimental
 } = ReactNative;
-
-const { Header: NavigationHeader } = NavigationExperimental;
 
 import {
   Colors,
@@ -231,7 +228,6 @@ export default class ScriptureView extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: NavigationHeader.HEIGHT,
     backgroundColor: 'white',
   },
   scriptureContainer: {
