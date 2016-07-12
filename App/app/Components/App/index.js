@@ -213,9 +213,10 @@ export default class App extends Component {
 
   _pushRoute = (route: any) => {
     const state = this.state.navigation;
+    const delta = (state.routes.length - state.index) - 1;
 
     const routes = [
-      ...state.routes,
+      ...(delta > 0 ? state.routes.slice(0, -delta) : state.routes),
       route,
     ];
 
