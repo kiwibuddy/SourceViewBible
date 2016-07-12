@@ -70,7 +70,7 @@ export default class Bookmarks extends Component {
   _renderRow = (rowData: any) => {
     return (
       <TouchableOpacity
-        onPress={() => this.props.onPress({key: rowData})}
+        onPress={() => this.props.onPress({key: rowData, title: rowData})}
         style={styles.row}
       >
         <Text>{rowData}</Text>
