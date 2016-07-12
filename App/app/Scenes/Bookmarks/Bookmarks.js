@@ -41,7 +41,6 @@ export default class Bookmarks extends Component {
         '/Books/Words',
         '/Discover',
         '/DiscoveryCenter',
-        '/Reader',
         '/Sources',
         '/Sources/Overview',
         '/Sources/Books',

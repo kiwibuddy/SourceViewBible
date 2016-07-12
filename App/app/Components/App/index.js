@@ -72,7 +72,10 @@ export default class App extends Component {
       case '/Books':
         return <Books onPressBook={book => this._pushRoute({key: '/Books/Overview', book: book})} />;
       case '/Books/Chapters':
-        return <BookChapters book={route.book}/>;
+        return <BookChapters
+          book={route.book}
+          onPressScripture={({book, chapterNumber}) => this._pushRoute({key: '/Reader', book, chapterNumber})}
+        />;
       case '/Books/Overview':
         return <BookOverview
           book={route.book}
