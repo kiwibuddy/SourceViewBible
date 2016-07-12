@@ -17,14 +17,25 @@ import {
   Localizable
 } from '../../Common';
 
+import Icon from '../../Components/Common/Icon';
+
 export default class SourceOverview extends Component {
   render() {
     return (
       <View style={styles.container}>
         <View style={StyleSheet.styles.wordCloud}>
-          <Image style={styles.avatarBackground} source={require('../../Images/sources/avatar-background.png')} />
+          <View style={styles.sourceBackgroundContainer}>
+            <Image style={styles.sourceBackground} source={require('../../Images/sources/avatar-background.png')} />
+          </View>
+          <View style={styles.sourceIconContainer}>
+            <Icon
+              name={'avatar-human-group'}
+              size={100}
+              style={[styles.sourceIcon, {color: 'red'}]}
+            />
+          </View>
         </View>
-        <View style={[StyleSheet.styles.statisticsContainer, {paddingTop: 20}]}>
+        <View style={[StyleSheet.styles.statisticsContainer, {marginTop: 25}]}>
           <TouchableOpacity style={StyleSheet.styles.statisticContainer}>
             <Text style={StyleSheet.styles.statisticTitle}>0</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Book</Text>
@@ -45,6 +56,13 @@ export default class SourceOverview extends Component {
             <Text style={StyleSheet.styles.statisticSubtitle}>Spheres</Text>
           </TouchableOpacity>
         </View>
+        <View style={styles.listContainer}>
+          <View style={StyleSheet.styles.listItem}>
+            <Text style={StyleSheet.styles.cell.title}>Word</Text>
+            <Text style={StyleSheet.styles.cell.valuetitle}>0</Text>
+          </View>
+          <View style={styles.separator} />
+        </View>
       </View>
     );
   }
@@ -54,8 +72,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  avatarBackground: {
+  sourceBackgroundContainer: {
     alignSelf: 'center',
     marginTop: 100,
+  },
+  sourceIconContainer: {
+    alignSelf: 'center',
+    marginTop: -114,
+    backgroundColor: 'transparent',
+  },
+  separator: {
+    ...StyleSheet.styles.separator,
+    marginLeft: 15,
   },
 });

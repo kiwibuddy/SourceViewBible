@@ -24,7 +24,7 @@ export default class BookWords extends Component {
           <Image style={styles.wordCloudButton} source={require('../../Images/common/btn-expand.png')} />
         </View>
         <View style={styles.listContainer}>
-          <View style={styles.listItem}>
+          <View style={StyleSheet.styles.listItem}>
             <Text style={StyleSheet.styles.cell.title}>Word</Text>
             <Text style={StyleSheet.styles.cell.valuetitle}>0</Text>
           </View>
@@ -39,18 +39,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  listItem: {
-    paddingLeft: 15,
-    paddingRight: 15,
-    height: 44,
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
   separator: {
-    height: StyleSheet.hairlineWidth,
-    backgroundColor: Colors.separator,
+    ...StyleSheet.styles.separator,
     marginLeft: 15,
   },
   wordCloudButton: {

@@ -74,6 +74,15 @@ const styles = {
     marginTop: 8,
     fontSize: 13,
   },
+  listItem: {
+    paddingLeft: 15,
+    paddingRight: 15,
+    height: 44,
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   cell: {
     title: {
       color: '#59626a',
