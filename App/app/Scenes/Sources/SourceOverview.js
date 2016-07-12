@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 2,
     borderTopColor: 'red',
     paddingLeft: 15,
-    height: 55,
+    paddingVertical: 8,
     shadowColor: "black",
     shadowOpacity: 0.05,
     shadowRadius: 0.4,
