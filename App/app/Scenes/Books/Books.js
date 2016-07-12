@@ -27,6 +27,11 @@ import { ReadingTime } from '../../Common/NumberHelper';
 const Bible = require('../../Locale/en/NLT/SourceView.json');
 
 const SEGMENTS = [Localizable.t('textual'), Localizable.t('alphabetical'), Localizable.t('principality')];
+const SEGMENT_INDEXES = {
+  TEXTUAL: 0,
+  ALPHABETICAL: 1,
+  PRINCIPALITY: 2,
+};
 
 const OLD_TESTAMENT_BOOKS = Bible.filter((book) => {
   return book.testament === 0;
@@ -36,6 +41,8 @@ const NEW_TESTAMENT_BOOKS = Bible.filter((book) => {
   return book.testament === 1;
 });
 
+const BOOKS_SORTED_BY_ALPHABET = Bible.slice(0).sort((a, b) => a.name > b.name ? 1 : -1);
+const BOOKS_SORTED_BY_PRINCIPALITY = Bible.slice(0).sort((a, b) => a.wordCount > b.wordCount ? -1 : 1);
 const MAX_BOOK_WORD_COUNT = Math.max.apply(Math, Bible.map(book => book.wordCount));
 
 type State = {
@@ -49,16 +56,16 @@ export default class Books extends Component {
   constructor(props: any) {
     super(props);
 
-    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
+    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.key !== r2.key, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     this.state = {
       dataSource: dataSource,
-      selectedSegmentIndex: 0
+      selectedSegmentIndex: SEGMENT_INDEXES.TEXTUAL
     };
   }
 
   componentDidMount() {
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRowsAndSections({old: OLD_TESTAMENT_BOOKS, new: NEW_TESTAMENT_BOOKS})
+      dataSource: this._getDataSource(this.state.selectedSegmentIndex)
     });
   }
 
@@ -70,7 +77,7 @@ export default class Books extends Component {
           tintColor={Colors.tintColor}
           values={SEGMENTS}
           selectedIndex={this.state.selectedSegmentIndex}
-          onValueChange={(value) => console.log('selectedIndex: ' + SEGMENTS.indexOf(value))}
+          onValueChange={(value) => this._onSegmentedControlValueChanged(SEGMENTS.indexOf(value))}
         />
 
         <ListView
@@ -85,7 +92,7 @@ export default class Books extends Component {
 
   _renderRow = (book: Object, sectionID: any, rowID: any) => {
     return (
-      <TouchableOpacity style={styles.section} onPress={() => {}}>
+      <TouchableOpacity key={book.key} style={styles.section} onPress={() => {}}>
         <View style={[styles.cellContainer, {paddingVertical: 8}]}>
           <View style={styles.horizontalContainer}>
             <View style={styles.leftContainer}>
@@ -111,7 +118,33 @@ export default class Books extends Component {
       </TouchableOpacity>
     );
   };
-}
+
+  _getDataSource = (segmentIndex: number) => {
+    switch (segmentIndex) {
+      case SEGMENT_INDEXES.ALPHABETICAL:
+        console.log('alphabetical');
+        return this.state.dataSource.cloneWithRowsAndSections({alphabetical: BOOKS_SORTED_BY_ALPHABET});
+
+      case SEGMENT_INDEXES.PRINCIPALITY:
+        console.log('principality');
+        return this.state.dataSource.cloneWithRowsAndSections({principality: BOOKS_SORTED_BY_PRINCIPALITY});
+
+      default:
+        console.log('default');
+        return this.state.dataSource.cloneWithRowsAndSections({old: OLD_TESTAMENT_BOOKS, new: NEW_TESTAMENT_BOOKS});
+    }
+  };
+
+  _onSegmentedControlValueChanged = (value: number) => {
+    console.log('value changed', value);
+
+    this.setState({
+      selectedSegmentIndex: value,
+      dataSource: this._getDataSource(value)
+    });
+  };
+
+ }
 
 const styles = StyleSheet.create({
   container: {
