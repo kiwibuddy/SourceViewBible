@@ -230,7 +230,8 @@ export default class App extends Component {
     }
   };
 
-  _popRoute = (state: any) => {
+  _popRoute = () => {
+    const state = this.state.navigation;
     if (state.index <= 0) {
       // [Note]: Over-popping does not throw error. Instead, it will be no-op.
       return;
