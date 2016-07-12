@@ -7,7 +7,7 @@ const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithP
 import {
   ListView,
   Text,
-  TouchableHighlight,
+  TouchableOpacity,
   View
 } from 'react-native';
 
@@ -66,7 +66,7 @@ export default class Bookmarks extends Component {
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this._renderRow}
-          renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
+          renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={StyleSheet.styles.separator} />}
           style={styles.listView}
         />
       </View>
@@ -75,13 +75,12 @@ export default class Bookmarks extends Component {
 
   _renderRow = (rowData: any) => {
     return (
-      <TouchableHighlight
+      <TouchableOpacity
         onPress={() => this.props.onPress({key: rowData})}
         style={styles.row}
-        underlayColor="transparent"
       >
         <Text>{rowData}</Text>
-      </TouchableHighlight>
+      </TouchableOpacity>
     )
   };
 }
@@ -92,10 +91,6 @@ const styles = StyleSheet.create({
   },
   listView: {
     flex: 1,
-  },
-  separator: {
-    height: StyleSheet.hairlineWidth,
-    backgroundColor: '#CCCCCC',
   },
   row: {
     flexDirection: 'row',
