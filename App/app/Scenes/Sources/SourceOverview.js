@@ -31,7 +31,7 @@ export default class SourceOverview extends Component {
             <Icon
               name={'avatar-human-group'}
               size={100}
-              style={[styles.sourceIcon, {color: 'red'}]}
+              style={[styles.sourceIcon, {color: 'black'}]}
             />
           </View>
         </View>
@@ -57,9 +57,16 @@ export default class SourceOverview extends Component {
           </TouchableOpacity>
         </View>
         <View style={styles.listContainer}>
-          <View style={StyleSheet.styles.listItem}>
-            <Text style={StyleSheet.styles.cell.title}>Word</Text>
-            <Text style={StyleSheet.styles.cell.valuetitle}>0</Text>
+          <View style={styles.listItemContainer}>
+            <Icon
+              name={'avatar-human-group'}
+              size={20}
+              style={[styles.listItemIcon, {color: '#59626A'}]}
+            />
+            <View style={styles.listItem}>
+              <Text style={StyleSheet.styles.cell.title}>Meta Data Title</Text>
+              <Text style={StyleSheet.styles.cell.valuetitle}>Value</Text>
+            </View>
           </View>
           <View style={styles.separator} />
         </View>
@@ -80,6 +87,23 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: -114,
     backgroundColor: 'transparent',
+  },
+  listItemContainer: {
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingVertical: 5,
+    flexDirection: 'row',
+  },
+  listItem: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    height: 44,
+  },
+  listItemIcon: {
+    alignSelf: 'center',
+    paddingRight: 10,
   },
   separator: {
     ...StyleSheet.styles.separator,
