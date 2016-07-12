@@ -49,7 +49,7 @@ export default class App extends Component {
     const navigationBar = this._renderNavigationBar({navigationState: navigation});
     const toolbar = this._renderToolbar({navigationState: navigation, jumpToIndex: this._jumpToIndex});
     const scene = this._renderPage({route});
-    
+
     return (
       <View style={{flex: 1}}>
         {scene}
@@ -171,7 +171,7 @@ export default class App extends Component {
           <ToolbarButton
             disabled={!canGoBack}
             imageSource={require('../Navigation/Images/nav-back.png')}
-            onPress={() => this._popRoute(this.state.navigation)}
+            onPress={() => jumpToIndex(navigationState.index - 1)}
           />
           <ToolbarButton
             disabled={!canGoForward}
