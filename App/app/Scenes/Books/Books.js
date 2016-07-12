@@ -36,6 +36,8 @@ const NEW_TESTAMENT_BOOKS = Bible.filter((book) => {
   return book.testament === 1;
 });
 
+const MAX_BOOK_WORD_COUNT = Math.max.apply(Math, Bible.map(book => book.wordCount));
+
 type State = {
   dataSource: any,
   selectedSegmentIndex: number,
@@ -93,6 +95,7 @@ export default class Books extends Component {
               <SourcesBarChart
                 style={styles.stackedBarChart}
                 data={[book.sourceTypeCounts]}
+                maxChartValue={MAX_BOOK_WORD_COUNT}
               />
             </View>
           </View>
