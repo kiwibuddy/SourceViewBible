@@ -165,7 +165,7 @@ export default class App extends Component {
   };
 
   _renderToolbar = (props: any) => {
-    const { navigationState, jumpToIndex } = props;
+    const { navigationState } = props;
     const canGoBack = navigationState.index > 0;
     const canGoForward = navigationState.index < navigationState.routes.length - 1;
 
@@ -175,12 +175,12 @@ export default class App extends Component {
           <ToolbarButton
             disabled={!canGoBack}
             imageSource={require('../Navigation/Images/nav-back.png')}
-            onPress={() => jumpToIndex(navigationState.index - 1)}
+            onPress={() => this._goBack()}
           />
           <ToolbarButton
             disabled={!canGoForward}
             imageSource={require('../Navigation/Images/nav-forward.png')}
-            onPress={() => jumpToIndex(navigationState.index + 1)}
+            onPress={() => this._goForward()}
           />
         </View>
         <View style={{flex: 1}}>
@@ -203,14 +203,24 @@ export default class App extends Component {
     });
   };
 
+  _goBack = () => {
+    this._jumpToIndex(this.state.navigation.index - 1);
+  };
+
+  _goForward = () => {
+    this._jumpToIndex(this.state.navigation.index + 1);
+  };
+
   _pushRoute = (route: any) => {
+    const state = this.state.navigation;
+
     const routes = [
-      ...this.state.navigation.routes,
+      ...state.routes,
       route,
     ];
 
     const navigation = {
-      ...this.state.navigation,
+      ...state,
       index: routes.length - 1,
       routes,
     };
