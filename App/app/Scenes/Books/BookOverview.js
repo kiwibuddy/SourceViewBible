@@ -25,7 +25,12 @@ import { ReadingTime } from '../../Common/NumberHelper';
 const MAX_NUMBER_OF_SOURCES = 4;
 
 type Props = {
-  book: Object
+  book: Object,
+  onPressScripture: Function,
+  onPressChapters: Function,
+  onPressSources: Function,
+  onPressSpheres: Function,
+  onPressWords: Function,
 };
 
 export default class BookOverview extends Component {

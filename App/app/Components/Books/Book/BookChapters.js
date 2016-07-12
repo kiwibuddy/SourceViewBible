@@ -29,7 +29,7 @@ import { SourcesBarChart, SpheresBarChart } from '../../Charts';
 
 import { ReadingTime } from '../../../Common/NumberHelper';
 
-const SEGMENTS = [Localizable.t('sources.text'), Localizable.t('spheres')];
+const SEGMENTS = [Localizable.t('sources.text'), Localizable.t('spheres.text')];
 
 class BookChapters extends Component {
   state: {

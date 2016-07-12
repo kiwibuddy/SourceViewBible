@@ -68,13 +68,13 @@ export default class App extends Component {
 
     switch (route.key) {
       case '/Bookmarks':
-        return <Bookmarks onPress={(route) => this._pushRoute(this.state.navigation, route)}/>;
+        return <Bookmarks onPress={(route) => this._pushRoute(route)}/>;
       case '/Books':
-        return <Books onPressBook={book => this._pushRoute(this.state.navigation, {key: '/Books/Overview', book: book})}/>;
+        return <Books onPressBook={book => this._pushRoute({key: '/Books/Overview', book: book})}/>;
       case '/Books/Chapters':
-        return <BookChapters />;
+        return <BookChapters book={route.book}/>;
       case '/Books/Overview':
-        return <BookOverview book={route.book}/>;
+        return <BookOverview book={route.book} onPressChapters={() => this._pushRoute({key: '/Books/Chapters', book: route.book})}/>;
       case '/Books/Sources':
         return <BookSources />;
       case '/Books/Spheres':
@@ -161,14 +161,14 @@ export default class App extends Component {
     });
   };
 
-  _pushRoute = (state: any, route: any) => {
+  _pushRoute = (route: any) => {
     const routes = [
-      ...state.routes,
+      ...this.state.navigation.routes,
       route,
     ];
 
     const navigation = {
-      ...state,
+      ...this.state.navigation,
       index: routes.length - 1,
       routes,
     };

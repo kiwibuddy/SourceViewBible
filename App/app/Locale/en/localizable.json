@@ -18,7 +18,13 @@
         other: "{{count}} sources"
       }
     },
-    spheres: "Spheres",
+    spheres: {
+      text: "Spheres",
+      count: {
+        one: "1 sphere",
+        other: "{{count}} spheres"
+      }
+    },
     introduction: "Introduction",
     tabs: {
       overview: "Overview",

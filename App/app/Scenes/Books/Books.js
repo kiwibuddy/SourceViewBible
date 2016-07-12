@@ -33,7 +33,7 @@ const SEGMENT_INDEXES = {
   PRINCIPALITY: 2,
 };
 
-const LISTVIEW_REF = "LISTVIEW_REF";
+const LISTVIEW_REF = 'LISTVIEW_REF';
 
 const OLD_TESTAMENT_BOOKS = Bible.filter((book) => {
   return book.testament === 0;
@@ -148,7 +148,6 @@ export default class Books extends Component {
       dataSource: this._getDataSource(value)
     });
   };
-
  }
 
 const styles = StyleSheet.create({
