@@ -22,23 +22,26 @@ import {
 
 // $FlowFixMe: Can't find os module extension
 import LinearGradient from 'react-native-linear-gradient';
-
-import { SourcesBarChart, SpheresBarChart } from '../Charts';
-
-import PageControl from '../Common/PageControl';
-
+import { SourcesBarChart, SpheresBarChart } from '../../Components/Charts';
+import PageControl from '../../Components/Common/PageControl';
 import { ReadingTime } from '../../Common/NumberHelper';
-
 import Localizable from '../../Common/Localizable';
 
 const Bible = require('../../Locale/en/NLT/SourceView.json');
 const MAXIMUM_BOOK_COUNT = 9;
 
+type Props = {
+  onPressBook: Function,
+  onPressBooks: Function,
+};
+
+type State = {
+  dataSource: any,
+  currentPage: number
+}
+
 export default class DiscoverBooks extends Component {
-  state: {
-    dataSource: any,
-    currentPage: number
-  };
+  state: State;
 
   constructor(props: Object) {
     super(props);
