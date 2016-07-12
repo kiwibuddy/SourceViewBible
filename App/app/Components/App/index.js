@@ -88,7 +88,7 @@ export default class App extends Component {
           book={route.book}
           onPressChapters={() => this._pushRoute({key: '/Books/Chapters', book: route.book})}
           onPressScripture={({book, chapterNumber}) => this._pushRoute({key: '/Reader', book, chapterNumber, title: book.name})}
-          onPressSource={(source) => this._pushRoute({key: '/Sources/Overview', source: source})}
+          onPressSource={(source) => this._pushRoute({key: '/Sources/Overview', source: source, title: source.name})}
           onPressSources={() => this._pushRoute({key: '/Books/Sources', book: route.book})}
           onPressSpheres={() => this._pushRoute({key: '/Books/Spheres', book: route.book})}
           onPressWords={() => this._pushRoute({key: '/Books/Words', book: route.book})}
@@ -111,7 +111,10 @@ export default class App extends Component {
       case '/DiscoveryCenter':
         return <DiscoveryCenter />;
       case '/Reader':
-        return <Reader book={route.book} chapterNumber={route.chapterNumber || 1}/>;
+        return <Reader
+          book={route.book}
+          chapterNumber={route.chapterNumber || 1
+        }/>;
       case '/Sources':
         return <Sources />;
       case '/Sources/Overview':
