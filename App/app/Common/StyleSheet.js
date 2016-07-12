@@ -32,6 +32,10 @@ const styles = {
       color: '#9B9B9B',
       fontSize: 13,
     },
+    valuetitle: {
+      color: '#9B9B9B',
+      fontSize: 17,
+    },
   },
   separator: {
     height: StyleSheet.hairlineWidth,

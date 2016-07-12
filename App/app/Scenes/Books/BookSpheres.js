@@ -24,9 +24,7 @@ export default class BookSpheres extends Component {
             <Text style={styles.statisticTitle}>0</Text>
             <Text style={styles.statisticSubtitle}>Words</Text>
           </View>
-
           <View style={styles.keyline} />
-
           <View style={styles.statisticContainer}>
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
               <Text style={styles.statisticTitle}>7</Text>
@@ -34,6 +32,16 @@ export default class BookSpheres extends Component {
             </View>
             <Text style={styles.statisticSubtitle}>Spheres</Text>
           </View>
+        </View>
+        <View style={styles.listContainer}>
+          <View style={styles.listItemContainer}>
+            <View style={styles.pie}><Text style={styles.pieText}>0%</Text></View>
+            <View style={styles.listItem}>
+              <Text style={StyleSheet.styles.cell.title}>Family</Text>
+              <Text style={StyleSheet.styles.cell.valuetitle}>0 words</Text>
+            </View>
+          </View>
+          <View style={styles.separator} />
         </View>
       </View>
     );
@@ -77,5 +85,30 @@ const styles = StyleSheet.create({
     flex:0,
     width: StyleSheet.hairlineWidth,
     backgroundColor: Colors.separator
+  },
+  listItemContainer: {
+    paddingLeft: 8,
+    paddingRight: 15,
+    flexDirection: 'row',
+  },
+  listItem: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  pie: {
+    width: 57,
+    height: 57,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  pieText: {
+    fontSize: 17,
+  },
+  separator: {
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: Colors.separator,
+    marginLeft: 8,
   },
 });
