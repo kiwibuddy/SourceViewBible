@@ -24,7 +24,7 @@ export default class SourceOverview extends Component {
         <View style={StyleSheet.styles.wordCloud}>
           <Image style={styles.avatarBackground} source={require('../../Images/sources/avatar-background.png')} />
         </View>
-        <View style={StyleSheet.styles.statisticsContainer}>
+        <View style={[StyleSheet.styles.statisticsContainer, {paddingTop: 20}]}>
           <TouchableOpacity style={StyleSheet.styles.statisticContainer}>
             <Text style={StyleSheet.styles.statisticTitle}>0</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Book</Text>
