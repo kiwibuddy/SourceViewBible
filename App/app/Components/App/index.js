@@ -6,6 +6,10 @@ import { View } from 'react-native';
 
 import { NavigationBar, Toolbar, ToolbarButton } from '../Navigation';
 
+import {
+  Localizable,
+} from '../../Common';
+
 import Bookmarks from '../../Scenes/Bookmarks/Bookmarks';
 import BookChapters from '../../Scenes/Books/BookChapters';
 import BookOverview from '../../Scenes/Books/BookOverview';
@@ -33,7 +37,7 @@ export default class App extends Component {
     navigation: {
       index: 0,
       routes: [
-        {key: '/Discover'},
+        {key: '/Discover', title: Localizable.t('discover')},
       ],
     },
     showBookmarks: false
@@ -73,17 +77,17 @@ export default class App extends Component {
 
     switch (route.key) {
       case '/Books':
-        return <Books onPressBook={book => this._pushRoute({key: '/Books/Overview', book: book})} />;
+        return <Books onPressBook={book => this._pushRoute({key: '/Books/Overview', book: book, title: book.name})} />;
       case '/Books/Chapters':
         return <BookChapters
           book={route.book}
-          onPressScripture={({book, chapterNumber}) => this._pushRoute({key: '/Reader', book, chapterNumber})}
+          onPressScripture={({book, chapterNumber}) => this._pushRoute({key: '/Reader', book, chapterNumber, title: book.name})}
         />;
       case '/Books/Overview':
         return <BookOverview
           book={route.book}
           onPressChapters={() => this._pushRoute({key: '/Books/Chapters', book: route.book})}
-          onPressScripture={({book, chapterNumber}) => this._pushRoute({key: '/Reader', book, chapterNumber})}
+          onPressScripture={({book, chapterNumber}) => this._pushRoute({key: '/Reader', book, chapterNumber, title: book.name})}
           onPressSource={(source) => this._pushRoute({key: '/Sources/Overview', source: source})}
           onPressSources={() => this._pushRoute({key: '/Books/Sources', book: route.book})}
           onPressSpheres={() => this._pushRoute({key: '/Books/Spheres', book: route.book})}
@@ -92,7 +96,7 @@ export default class App extends Component {
       case '/Books/Sources':
         return <BookSources
           book={route.book}
-          onPressScripture={({book, chapterNumber}) => this._pushRoute({key: '/Reader', book, chapterNumber})}
+          onPressScripture={({book, chapterNumber}) => this._pushRoute({key: '/Reader', book, chapterNumber, title: book.name})}
         />;
       case '/Books/Spheres':
         return <BookSpheres book={route.book} />;
@@ -100,9 +104,9 @@ export default class App extends Component {
         return <BookWords book={route.book} />;
       case '/Discover':
         return <Discover
-          onPressBook={book => this._pushRoute({key: '/Books/Overview', book: book})}
-          onPressBooks={() => this._pushRoute({key: '/Books'})}
-          onPressScripture={({book, chapterNumber}) => this._pushRoute({key: '/Reader', book, chapterNumber})}
+          onPressBook={book => this._pushRoute({key: '/Books/Overview', book: book, title: book.name})}
+          onPressBooks={() => this._pushRoute({key: '/Books', title: Localizable.t('books')})}
+          onPressScripture={({book, chapterNumber}) => this._pushRoute({key: '/Reader', book, chapterNumber, title: book.name})}
         />;
       case '/DiscoveryCenter':
         return <DiscoveryCenter />;
@@ -156,7 +160,7 @@ export default class App extends Component {
     const { navigationState } = props;
     const route = navigationState.routes[navigationState.index];
     return (
-      <NavigationBar title={route.key}/>
+      <NavigationBar title={route.title}/>
     );
   };
 
