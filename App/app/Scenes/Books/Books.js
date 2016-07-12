@@ -33,6 +33,8 @@ const SEGMENT_INDEXES = {
   PRINCIPALITY: 2,
 };
 
+const LISTVIEW_REF = "LISTVIEW_REF";
+
 const OLD_TESTAMENT_BOOKS = Bible.filter((book) => {
   return book.testament === 0;
 });
@@ -81,6 +83,7 @@ export default class Books extends Component {
         />
 
         <ListView
+          ref="LISTVIEW_REF"
           dataSource={this.state.dataSource}
           renderRow={this._renderRow}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
@@ -122,21 +125,19 @@ export default class Books extends Component {
   _getDataSource = (segmentIndex: number) => {
     switch (segmentIndex) {
       case SEGMENT_INDEXES.ALPHABETICAL:
-        console.log('alphabetical');
         return this.state.dataSource.cloneWithRowsAndSections({alphabetical: BOOKS_SORTED_BY_ALPHABET});
 
       case SEGMENT_INDEXES.PRINCIPALITY:
-        console.log('principality');
         return this.state.dataSource.cloneWithRowsAndSections({principality: BOOKS_SORTED_BY_PRINCIPALITY});
 
       default:
-        console.log('default');
         return this.state.dataSource.cloneWithRowsAndSections({old: OLD_TESTAMENT_BOOKS, new: NEW_TESTAMENT_BOOKS});
     }
   };
 
   _onSegmentedControlValueChanged = (value: number) => {
-    console.log('value changed', value);
+    const listView = this.refs[LISTVIEW_REF];
+    listView.scrollTo({y: 0, animated: false});
 
     this.setState({
       selectedSegmentIndex: value,
