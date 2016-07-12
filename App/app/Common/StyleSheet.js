@@ -88,6 +88,10 @@ const styles = {
       color: '#59626a',
       fontSize: 17,
     },
+    titlemedium: {
+      color: '#59626a',
+      fontSize: 15,
+    },
     titlebold: {
       color: '#59626a',
       fontSize: 18,
@@ -100,6 +104,10 @@ const styles = {
     valuetitle: {
       color: '#9B9B9B',
       fontSize: 17,
+    },
+    valuetitlemedium: {
+      color: '#9B9B9B',
+      fontSize: 15,
     },
   },
   separator: {

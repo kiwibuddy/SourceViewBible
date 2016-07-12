@@ -64,8 +64,8 @@ export default class SourceOverview extends Component {
               style={[styles.listItemIcon, {color: '#59626A'}]}
             />
             <View style={styles.listItem}>
-              <Text style={StyleSheet.styles.cell.title}>Meta Data Title</Text>
-              <Text style={StyleSheet.styles.cell.valuetitle}>Value</Text>
+              <Text style={StyleSheet.styles.cell.titlemedium}>Meta Data Title</Text>
+              <Text style={StyleSheet.styles.cell.valuetitlemedium}>Value</Text>
             </View>
           </View>
           <View style={styles.separator} />
@@ -73,27 +73,60 @@ export default class SourceOverview extends Component {
         <View style={styles.listContainer}>
           <View style={styles.listItemHeader}>
             <Text style={StyleSheet.styles.cell.titlebold}>Source spoke to</Text>
-            <View style={styles.horizontalContainer}>
-              <View style={styles.leftContainer}>
+            <View style={styles.sourcesCellContainer}>
+              <View style={styles.sourcesLeftContainer}>
                 <Text style={StyleSheet.styles.cell.subtitle}>0 sources</Text>
               </View>
-              <View style={styles.rightContainer}>
+              <View style={styles.sourcesRightContainer}>
                 <Text style={StyleSheet.styles.cell.subtitle}>0 occurrences</Text>
-                </View>
+              </View>
             </View>
           </View>
-          <View style={styles.listItemContainer}>
-            <Icon
-              name={'avatar-human-group'}
-              size={20}
-              style={[styles.listItemIcon, {color: '#59626A'}]}
-            />
-            <View style={styles.listItem}>
-              <Text style={StyleSheet.styles.cell.title}>Meta Data Title</Text>
-              <Text style={StyleSheet.styles.cell.valuetitle}>Value</Text>
+          <TouchableOpacity style={styles.section} onPress={() => this._onPressScripture(source)}>
+            <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
+              <View style={styles.sourcesLeftContainer}>
+                <Icon
+                  name={'avatar-human-group'}
+                  style={[styles.sourceAvatar, {color: 'red'}]}
+                  size={20}
+                />
+                <Text style={StyleSheet.styles.cell.titlemedium}>Source Name</Text>
+              </View>
+              <View style={styles.sourcesRightContainer}>
+                <View style={styles.sourcesBarChart} />
+                <Text style={StyleSheet.styles.cell.subtitle}>0 words</Text>
+              </View>
+            </View>
+            <View style={[StyleSheet.styles.separator, {marginLeft: 0}]}></View>
+          </TouchableOpacity>
+          <View style={styles.listItemHeader}>
+            <Text style={StyleSheet.styles.cell.titlebold}>Spoke to</Text>
+            <View style={styles.sourcesCellContainer}>
+              <View style={styles.sourcesLeftContainer}>
+                <Text style={StyleSheet.styles.cell.subtitle}>0 sources</Text>
+              </View>
+              <View style={styles.sourcesRightContainer}>
+                <Text style={StyleSheet.styles.cell.subtitle}>0 occurrences</Text>
+              </View>
             </View>
           </View>
-          <View style={styles.separator} />
+          <TouchableOpacity style={styles.section} onPress={() => this._onPressScripture(source)}>
+            <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
+              <View style={styles.sourcesLeftContainer}>
+                <Icon
+                  name={'avatar-human-group'}
+                  style={[styles.sourceAvatar, {color: 'red'}]}
+                  size={20}
+                />
+                <Text style={StyleSheet.styles.cell.titlemedium}>Source Name</Text>
+              </View>
+              <View style={styles.sourcesRightContainer}>
+                <View style={styles.sourcesBarChart} />
+                <Text style={StyleSheet.styles.cell.subtitle}>0 words</Text>
+              </View>
+            </View>
+            <View style={[StyleSheet.styles.separator, {marginLeft: 0}]}></View>
+          </TouchableOpacity>
         </View>
       </View>
     );
@@ -124,6 +157,8 @@ const styles = StyleSheet.create({
     borderTopColor: 'red',
     paddingLeft: 15,
     paddingVertical: 8,
+    borderBottomColor: Colors.separator,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     shadowColor: "black",
     shadowOpacity: 0.05,
     shadowRadius: 0.4,
@@ -147,13 +182,30 @@ const styles = StyleSheet.create({
     ...StyleSheet.styles.separator,
     marginLeft: 15,
   },
-  horizontalContainer: {
+  section: {
+    marginLeft: 15,
+  },
+  sourcesCellContainer: {
+    flex: 1,
+    marginRight: 15,
     flexDirection: 'row',
   },
-  leftContainer: {
+  sourcesLeftContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    paddingTop: 2,
+  },
+  sourcesRightContainer: {
     flex: 1,
   },
-  rightContainer: {
-    flex: 2,
+  sourceAvatar: {
+    width: 20,
+    height: 20,
+    marginRight: 5
+  },
+  sourcesBarChart: {
+    height: 4,
+    flex: 0,
+    marginBottom: 7,
   },
 });
