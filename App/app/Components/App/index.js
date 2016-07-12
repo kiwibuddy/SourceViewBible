@@ -33,18 +33,23 @@ export default class App extends Component {
     navigation: {
       index: 0,
       routes: [
-        {key: '/Bookmarks'},
+        {key: '/Discover'},
       ],
-    }
+    },
+    showBookmarks: false
   };
 
   render() {
+    if (this.state.showBookmarks) {
+      return this._renderBookmarks();
+    }
+
     const { navigation } = this.state;
     const route = navigation.routes[navigation.index];
-    const scene = this._renderPage({route});
     const navigationBar = this._renderNavigationBar({navigationState: navigation});
     const toolbar = this._renderToolbar({navigationState: navigation, jumpToIndex: this._jumpToIndex});
-
+    const scene = this._renderPage({route});
+    
     return (
       <View style={{flex: 1}}>
         {scene}
@@ -67,8 +72,6 @@ export default class App extends Component {
     const { route } = props;
 
     switch (route.key) {
-      case '/Bookmarks':
-        return <Bookmarks onPress={(route) => this._pushRoute(route)} />;
       case '/Books':
         return <Books onPressBook={book => this._pushRoute({key: '/Books/Overview', book: book})} />;
       case '/Books/Chapters':
@@ -132,6 +135,23 @@ export default class App extends Component {
     };
   };
 
+  _renderBookmarks = () => {
+    return (
+      <View style={{flex: 1}}>
+        <NavigationBar title='Bookmarks'/>
+        <View style={{flex: 1, marginTop: NavigationBar.HEIGHT}}>
+          <Bookmarks
+            onPress={(route) => {
+              this.setState({showBookmarks: false}, () => {
+                this._pushRoute(route);
+              });
+            }}
+          />
+        </View>
+      </View>
+    );
+  };
+
   _renderNavigationBar = (props: any) => {
     const { navigationState } = props;
     const route = navigationState.routes[navigationState.index];
@@ -167,7 +187,7 @@ export default class App extends Component {
         </View>
         <ToolbarButton
           imageSource={require('../Navigation/Images/nav-bookmarks.png')}
-          onPress={() => {}}
+          onPress={() => {this.setState({showBookmarks: true})}}
         />
       </Toolbar>
     );
