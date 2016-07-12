@@ -89,6 +89,9 @@ export default class BookChapters extends Component {
     const { book } = this.props;
     const chapterNumber = chapter.chapterNumber;
 
+    const chart = (this.state.selectedSegmentIndex === SEGMENT_INDEXES.SPHERES ? this._renderSpheresChart(book, chapter) : this._renderSourcesChart(book, chapter));
+    const subtitle = (this.state.selectedSegmentIndex === SEGMENT_INDEXES.SPHERES ? Localizable.t('spheres.count', {count: chapter.sourceCount}) : Localizable.t('sources.count', {count: chapter.sourceCount}) );
+
     return (
       <TouchableOpacity style={styles.section} onPress={() => this.props.onPressScripture({book, chapterNumber})}>
         <View style={[styles.cellContainer, {paddingVertical: 8}]}>
@@ -97,11 +100,7 @@ export default class BookChapters extends Component {
               <Text style={StyleSheet.styles.cell.title}>Chapter {chapterNumber}</Text>
             </View>
             <View style={styles.rightContainer}>
-              <SourcesBarChart
-                style={styles.stackedBarChart}
-                data={[chapter.sourceTypeCounts]}
-                maxChartValue={book.maxChapterWordCount}
-              />
+              {chart}
             </View>
           </View>
           <View style={styles.horizontalContainer}>
@@ -109,11 +108,31 @@ export default class BookChapters extends Component {
               <Text style={StyleSheet.styles.cell.subtitle}>{ReadingTime(chapter.wordCount)}</Text>
             </View>
             <View style={styles.rightContainer}>
-              <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('sources.count', {count: chapter.sourceCount})}</Text>
+              <Text style={StyleSheet.styles.cell.subtitle}>{subtitle}</Text>
               </View>
           </View>
         </View>
       </TouchableOpacity>
+    );
+  };
+
+  _renderSourcesChart = (book: Object, chapter: Object) => {
+    return (
+      <SourcesBarChart
+        style={styles.stackedBarChart}
+        data={[chapter.sourceTypeCounts]}
+        maxChartValue={book.maxChapterWordCount}
+      />
+    );
+  };
+
+  _renderSpheresChart = (book: Object, chapter: Object) => {
+    return (
+      <SpheresBarChart
+        style={styles.stackedBarChart}
+        data={[chapter.sourceTypeCounts]}
+        maxChartValue={book.maxChapterWordCount}
+      />
     );
   };
 
