@@ -37,7 +37,6 @@ export default class Bookmarks extends Component {
     return (
       [
         '/Books',
-        '/Books/Sources',
         '/Books/Spheres',
         '/Books/Words',
         '/Discover',

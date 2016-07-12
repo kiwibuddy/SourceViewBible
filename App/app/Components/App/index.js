@@ -74,9 +74,9 @@ export default class App extends Component {
       case '/Books/Chapters':
         return <BookChapters book={route.book}/>;
       case '/Books/Overview':
-        return <BookOverview book={route.book} onPressChapters={() => this._pushRoute({key: '/Books/Chapters', book: route.book})}/>;
+        return <BookOverview book={route.book} onPressChapters={() => this._pushRoute({key: '/Books/Chapters', book: route.book})} onPressSources={() => this._pushRoute({key: '/Books/Sources', book: route.book})}/>;
       case '/Books/Sources':
-        return <BookSources />;
+        return <BookSources book={route.book} onPressScripture={() => {}}/>;
       case '/Books/Spheres':
         return <BookSpheres />;
       case '/Books/Words':
