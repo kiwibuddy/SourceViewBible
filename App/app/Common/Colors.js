@@ -5,7 +5,7 @@ module.exports = {
 
   tintColor: '#cf1e00',
   separator: '#CCCCCC',
-  subtitle: '#C0C0C0',
+  subtitle: '#9B9B9B',
 
   sources: {
     narrator: '#4A4A4A',

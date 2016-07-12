@@ -7,7 +7,8 @@ const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithP
 import {
   Text,
   View,
-  Image
+  Image,
+  TouchableOpacity,
 } from 'react-native';
 
 import {
@@ -22,6 +23,27 @@ export default class SourceOverview extends Component {
       <View style={styles.container}>
         <View style={styles.wordCloud}>
           <Image style={styles.avatarBackground} source={require('../../Images/sources/avatar-background.png')} />
+        </View>
+        <View style={styles.statisticsContainer}>
+          <TouchableOpacity style={styles.statisticContainer}>
+            <Text style={styles.statisticTitle}>0</Text>
+            <Text style={styles.statisticSubtitle}>Book</Text>
+          </TouchableOpacity>
+          <View style={styles.keyline} />
+          <TouchableOpacity style={styles.statisticContainer}>
+            <Text style={styles.statisticTitle}>0</Text>
+            <Text style={styles.statisticSubtitle}>Conversations</Text>
+          </TouchableOpacity>
+          <View style={styles.keyline} />
+          <TouchableOpacity style={styles.statisticContainer}>
+            <Text style={styles.statisticTitle}>0</Text>
+            <Text style={styles.statisticSubtitle}>Words</Text>
+          </TouchableOpacity>
+          <View style={styles.keyline} />
+          <TouchableOpacity style={styles.statisticContainer}>
+            <Text style={styles.statisticTitle}>0</Text>
+            <Text style={styles.statisticSubtitle}>Spheres</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );
@@ -46,5 +68,39 @@ const styles = StyleSheet.create({
   avatarBackground: {
     alignSelf: 'center',
     marginTop: 100,
-  }
+  },
+  statisticsContainer: {
+    flex: 0,
+    flexDirection: 'row',
+    marginTop: 5,
+    borderBottomColor: Colors.separator,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    shadowColor: "black",
+    shadowOpacity: 0.05,
+    shadowRadius: 0.4,
+    shadowOffset: {
+      height: 1,
+      width: 0
+    },
+  },
+  statisticContainer: {
+    flex: 1,
+  },
+  statisticTitle: {
+    fontSize: 24,
+    color: Colors.tintColor,
+    alignSelf: 'center'
+  },
+  statisticSubtitle: {
+    flex: 1,
+    color: Colors.subtitle,
+    fontSize: 12,
+    textAlign: 'center',
+    marginBottom: 4,
+  },
+  keyline: {
+    flex:0,
+    width: StyleSheet.hairlineWidth,
+    backgroundColor: Colors.separator
+  },
 });
