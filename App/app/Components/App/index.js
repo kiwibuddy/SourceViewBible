@@ -70,7 +70,7 @@ export default class App extends Component {
       case '/Bookmarks':
         return <Bookmarks onPress={(route) => this._pushRoute(this.state.navigation, route)}/>;
       case '/Books':
-        return <Books />;
+        return <Books onPressBook={book => console.log(book)}/>;
       case '/Books/Chapters':
         return <BookChapters />;
       case '/Books/Overview':

@@ -52,10 +52,14 @@ type State = {
   selectedSegmentIndex: number,
 };
 
+type Props = {
+  onPressBook: Function,
+};
+
 export default class Books extends Component {
   state: State;
 
-  constructor(props: any) {
+  constructor(props: Props) {
     super(props);
 
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.key !== r2.key, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
@@ -95,7 +99,7 @@ export default class Books extends Component {
 
   _renderRow = (book: Object, sectionID: any, rowID: any) => {
     return (
-      <TouchableOpacity key={book.key} style={styles.section} onPress={() => {}}>
+      <TouchableOpacity key={book.key} style={styles.section} onPress={() => this.props.onPressBook(book)}>
         <View style={[styles.cellContainer, {paddingVertical: 8}]}>
           <View style={styles.horizontalContainer}>
             <View style={styles.leftContainer}>
