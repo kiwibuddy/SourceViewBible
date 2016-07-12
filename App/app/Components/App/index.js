@@ -77,7 +77,7 @@ export default class App extends Component {
 
     switch (route.key) {
       case '/Books':
-        return <Books onPressBook={book => this._pushRoute({key: '/Books/Overview', book: book, title: book.name})} />;
+        return <Books onPressBook={book => this._pushRoute({key: '/Books/Overview', book: book, title: Localizable.t('book-overview', {name: book.name})})} />;
       case '/Books/Chapters':
         return <BookChapters
           book={route.book}
@@ -86,12 +86,12 @@ export default class App extends Component {
       case '/Books/Overview':
         return <BookOverview
           book={route.book}
-          onPressChapters={() => this._pushRoute({key: '/Books/Chapters', book: route.book})}
+          onPressChapters={() => this._pushRoute({key: '/Books/Chapters', book: route.book, title: Localizable.t('book-chapters', {name: route.book.name})})}
           onPressScripture={({book, chapterNumber}) => this._pushRoute({key: '/Reader', book, chapterNumber, title: book.name})}
           onPressSource={(source) => this._pushRoute({key: '/Sources/Overview', source: source, title: source.name})}
-          onPressSources={() => this._pushRoute({key: '/Books/Sources', book: route.book})}
-          onPressSpheres={() => this._pushRoute({key: '/Books/Spheres', book: route.book})}
-          onPressWords={() => this._pushRoute({key: '/Books/Words', book: route.book})}
+          onPressSources={() => this._pushRoute({key: '/Books/Sources', book: route.book, title: Localizable.t('book-sources', {name: route.book.name})})}
+          onPressSpheres={() => this._pushRoute({key: '/Books/Spheres', book: route.book, title: Localizable.t('book-spheres', {name: route.book.name})})}
+          onPressWords={() => this._pushRoute({key: '/Books/Words', book: route.book, title: Localizable.t('book-words', {name: route.book.name})})}
         />;
       case '/Books/Sources':
         return <BookSources
@@ -104,7 +104,7 @@ export default class App extends Component {
         return <BookWords book={route.book} />;
       case '/Discover':
         return <Discover
-          onPressBook={book => this._pushRoute({key: '/Books/Overview', book: book, title: book.name})}
+          onPressBook={book => this._pushRoute({key: '/Books/Overview', book: book, title: Localizable.t('book-overview', {name: book.name})})}
           onPressBooks={() => this._pushRoute({key: '/Books', title: Localizable.t('books')})}
           onPressScripture={({book, chapterNumber}) => this._pushRoute({key: '/Reader', book, chapterNumber, title: book.name})}
         />;

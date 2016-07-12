@@ -35,6 +35,11 @@
       words: "Words"
     },
     "how-to-read": "How to read {{name}}",
+    "book-overview": "Overview of {{name}}",
+    "book-chapters": "Chapters in {{name}}",
+    "book-sources": "Sources in {{name}}",
+    "book-spheres": "Spheres in {{name}}",
+    "book-words": "Words in {{name}}",
     words: {
       count: {
         one: "1 word",
