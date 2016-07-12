@@ -15,11 +15,15 @@ import {
   Localizable
 } from '../../Common';
 
+type Props = {
+  book: Object
+};
+
 export default class BookOverview extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>BookOverview</Text>
+        <Text>{this.props.book.name}</Text>
       </View>
     );
   }
