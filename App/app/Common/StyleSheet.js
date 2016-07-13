@@ -9,6 +9,14 @@ function create(styles: Object) {
 };
 
 const styles = {
+  navigationBar: {
+    doneButtonTitle: {
+      color: Colors.tintColor,
+      fontSize: 17,
+      fontWeight: '500',
+      marginLeft: 16
+    },
+  },
   wordCloud: {
     height: 200,
     backgroundColor: 'red',

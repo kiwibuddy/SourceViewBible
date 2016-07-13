@@ -78,7 +78,7 @@ export default class Bookmarks extends Component {
             hitSlop={{top: 10, bottom: 10}}
             onPress={this.props.onPressDone}
           >
-            <Text style={styles.doneButtonTitle}>{Localizable.t('done')}</Text>
+            <Text style={StyleSheet.styles.navigationBar.doneButtonTitle}>{Localizable.t('done')}</Text>
           </TouchableOpacity>
         </NavigationBar>
         <ListView
@@ -116,9 +116,5 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     padding: 10,
     backgroundColor: 'white',
-  },
-  doneButtonTitle: {
-    color: Colors.tintColor,
-    marginLeft: 16
   },
 });
