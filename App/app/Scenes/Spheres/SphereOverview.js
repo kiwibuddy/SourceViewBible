@@ -64,7 +64,10 @@ export default class SphereOverview extends Component {
             </View>
             <View style={styles.sourcesRightContainer}>
               <View style={styles.sourcesBarChart} />
-              <Text style={StyleSheet.styles.cell.subtitle}>0 words</Text>
+              <View style={styles.dataPair}>
+                <Text style={[StyleSheet.styles.cell.percentage, {color: 'red'}]}>0%</Text>
+                <Text style={StyleSheet.styles.cell.subtitle}>0 words</Text>
+              </View>
             </View>
           </View>
           <View style={[StyleSheet.styles.separator, {marginLeft: 0}]}></View>
@@ -86,7 +89,10 @@ export default class SphereOverview extends Component {
             </View>
             <View style={styles.sourcesRightContainer}>
               <View style={styles.sourcesBarChart} />
-              <Text style={StyleSheet.styles.cell.subtitle}>0 words</Text>
+              <View style={styles.dataPair}>
+                <Text style={[StyleSheet.styles.cell.percentage, {color: 'red'}]}>0%</Text>
+                <Text style={StyleSheet.styles.cell.subtitle}>0 words</Text>
+              </View>
             </View>
           </View>
           <View style={[StyleSheet.styles.separator, {marginLeft: 0}]}></View>
@@ -197,6 +203,10 @@ const styles = StyleSheet.create({
   },
   sourcesRightContainer: {
     flex: 1,
+  },
+  dataPair: {
+    flex: 1,
+    flexDirection: 'row',
   },
   sourceAvatar: {
     width: 20,

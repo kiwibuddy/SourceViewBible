@@ -109,6 +109,10 @@ const styles = {
       color: '#9B9B9B',
       fontSize: 13,
     },
+    percentage: {
+      width: 40,
+      fontSize: 13,
+    },
     valuetitle: {
       color: '#9B9B9B',
       fontSize: 17,
