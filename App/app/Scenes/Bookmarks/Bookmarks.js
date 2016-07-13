@@ -75,7 +75,6 @@ export default class Bookmarks extends Component {
             onValueChange={(value) => {}}
           />
           <TouchableOpacity
-            hitSlop={{top: 10, bottom: 10}}
             onPress={this.props.onPressDone}
           >
             <Text style={StyleSheet.styles.navigationBar.doneButtonTitle}>{Localizable.t('done')}</Text>
