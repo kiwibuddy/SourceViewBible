@@ -99,6 +99,8 @@ export default class DiscoverBooks extends Component {
   }
 
   _renderBook = (book: Object) => {
+    const spherePercent = (book.sphereWordCount / book.wordCount) * 100;
+
     return (
       <TouchableOpacity key={'book-' + book.key} style={styles.itemContainer} onPress={ () => this.props.onPressBook(book) }>
         <View style={styles.item}>
@@ -126,7 +128,7 @@ export default class DiscoverBooks extends Component {
             </View>
             <View style={styles.statisticContainer} >
               <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-                <Text style={styles.statisticTitle}>0%</Text>
+                <Text style={styles.statisticTitle}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
                 <Text style={styles.statisticSubtitle}>Spheres</Text>
                 <SpheresBarChart
                   style={{flex: 0, marginLeft: 4}}

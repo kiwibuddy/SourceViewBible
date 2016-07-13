@@ -53,6 +53,8 @@ export default class BookOverview extends Component {
       overview = book.overview.map((section) => this._renderOverviewSection(section));
     }
 
+    const spherePercent = (book.sphereWordCount / book.wordCount) * 100;
+
     return (
       <ScrollView style={styles.container}>
         <TouchableOpacity onPress={this.props.onPressWords}>
@@ -116,7 +118,7 @@ export default class BookOverview extends Component {
             onPress={this.props.onPressSpheres}
           >
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={StyleSheet.styles.statisticTitle}>7</Text>
+              <Text style={StyleSheet.styles.statisticTitle}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
               <SpheresBarChart
                 style={{flex: 0, marginHorizontal: 4}}
                 barStyle={{width: 3, height: 20, marginHorizontal: 1.5}}
