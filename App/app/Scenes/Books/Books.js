@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   leftContainer: {
-    flex: 1,
+    flex: 1.5,
   },
   rightContainer: {
     flex: 2,
