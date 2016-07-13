@@ -44,9 +44,11 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     marginHorizontal: 8,
+    paddingHorizontal: 16,
   },
   image: {
-    tintColor: Colors.tintColor
+    tintColor: Colors.tintColor,
+    alignSelf: 'center',
   },
 });
 
