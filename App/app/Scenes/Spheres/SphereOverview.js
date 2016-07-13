@@ -6,7 +6,8 @@ const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithP
 
 import {
   Text,
-  View
+  View,
+  TouchableOpacity
 } from 'react-native';
 
 import {
@@ -23,6 +24,22 @@ export default class SphereOverview extends Component {
         </View>
         <View style={styles.carouselGraphContainer}>
           <View style={[styles.carouselGraph, {width: 150}]} />
+        </View>
+        <View style={StyleSheet.styles.statisticsContainer}>
+          <TouchableOpacity style={StyleSheet.styles.statisticContainer}>
+            <Text style={StyleSheet.styles.statisticTitle}>0</Text>
+            <Text style={StyleSheet.styles.statisticSubtitle}>Books</Text>
+          </TouchableOpacity>
+          <View style={styles.keyline} />
+          <TouchableOpacity style={StyleSheet.styles.statisticContainer}>
+            <Text style={StyleSheet.styles.statisticTitle}>0</Text>
+            <Text style={StyleSheet.styles.statisticSubtitle}>Sources</Text>
+          </TouchableOpacity>
+          <View style={styles.keyline} />
+          <TouchableOpacity style={StyleSheet.styles.statisticContainer}>
+            <Text style={StyleSheet.styles.statisticTitle}>0</Text>
+            <Text style={StyleSheet.styles.statisticSubtitle}>Words</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );
@@ -44,5 +61,10 @@ const styles = StyleSheet.create({
   carouselGraph: {
     height: 2,
     backgroundColor: 'red',
+  },
+  keyline: {
+    flex:0,
+    width: StyleSheet.hairlineWidth,
+    backgroundColor: Colors.separator
   },
 });
