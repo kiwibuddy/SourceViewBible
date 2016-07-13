@@ -17,14 +17,25 @@ import {
   Localizable
 } from '../../Common';
 
+import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigation';
+
+// $FlowFixMe: - Flow can't find os module extension
+import SegmentedControl from '../../Components/Common/SegmentedControl';
+
+type Props = {
+  onPressDone: Function,
+  onPressRoute: Function,
+};
+
 type State = {
   dataSource: any,
 };
 
 export default class Bookmarks extends Component {
+  props: Props;
   state: State;
 
-  constructor(props: any) {
+  constructor(props: Props) {
     super(props);
 
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -55,6 +66,29 @@ export default class Bookmarks extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <NavigationBar>
+          <SegmentedControl
+            style={{flex: 1}}
+            tintColor={Colors.tintColor}
+            values={['History', 'Bookmarks', 'Highlights']}
+            selectedIndex={1}
+            onValueChange={(value) => {}}
+          />
+          <TouchableOpacity
+            style={{}}
+            onPress={this.props.onPressDone}
+          >
+            <Text style={{color: Colors.tintColor, marginLeft: 16}}>{Localizable.t('done')}</Text>
+          </TouchableOpacity>
+        </NavigationBar>
+        <View style={{flex: 1, marginTop: NavigationBar.HEIGHT}}>
+          <ListView
+            dataSource={this.state.dataSource}
+            renderRow={this._renderRow}
+            renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={StyleSheet.styles.separator} />}
+            style={styles.listView}
+          />
+        </View>
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this._renderRow}
@@ -68,7 +102,7 @@ export default class Bookmarks extends Component {
   _renderRow = (rowData: any) => {
     return (
       <TouchableOpacity
-        onPress={() => this.props.onPress({key: rowData, title: rowData})}
+        onPress={() => this.props.onPressRoute({key: rowData, title: rowData})}
         style={styles.row}
       >
         <Text>{rowData}</Text>

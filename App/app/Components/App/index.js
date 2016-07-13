@@ -10,9 +10,6 @@ import {
 
 import { NavigationBar, Toolbar, ToolbarButton } from '../Navigation';
 
-// $FlowFixMe: - Flow can't find os module extension
-import SegmentedControl from '../Common/SegmentedControl';
-
 import {
   Colors,
   Localizable,
@@ -164,32 +161,14 @@ export default class App extends Component {
 
   _renderBookmarks = () => {
     return (
-      <View style={{flex: 1}}>
-        <NavigationBar>
-          <SegmentedControl
-            style={{flex: 1}}
-            tintColor={Colors.tintColor}
-            values={['History', 'Bookmarks', 'Highlights']}
-            selectedIndex={1}
-            onValueChange={(value) => {}}
-          />
-          <TouchableOpacity
-            style={{}}
-            onPress={() => this.setState({showBookmarks: false})}
-          >
-            <Text style={{color: Colors.tintColor, marginLeft: 16}}>{Localizable.t('done')}</Text>
-          </TouchableOpacity>
-        </NavigationBar>
-        <View style={{flex: 1, marginTop: NavigationBar.HEIGHT}}>
-          <Bookmarks
-            onPress={(route) => {
-              this.setState({showBookmarks: false}, () => {
-                this._pushRoute(route);
-              });
-            }}
-          />
-        </View>
-      </View>
+      <Bookmarks
+        onPressDone={() => this.setState({showBookmarks: false})}
+        onPressRoute={(route) => {
+          this.setState({showBookmarks: false}, () => {
+            this._pushRoute(route);
+          });
+        }}
+      />
     );
   };
 
