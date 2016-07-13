@@ -33,7 +33,6 @@ export default class NavigationBar extends Component {
 
   render() {
     const title = this.props.title ? <NavigationBarTitle title={this.props.title} /> : null;
-    console.log(this.props.children);
 
     return (
       <View style={styles.navigationBar}>
