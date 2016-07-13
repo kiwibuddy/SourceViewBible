@@ -12,7 +12,7 @@ module.exports = {
       tint: '#4A4A4A',
       gradient: {
         big:['#4A4A4A', '#4A4A4A'],
-        tiny: ['#FF4B3B', '#FF4B3B']
+        tiny: ['#4A4A4A', '#4A4A4A']
       }
     },
     god: {
