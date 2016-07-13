@@ -123,7 +123,7 @@ const styles = {
     },
     bodybold: {
       color: '#59626a',
-      fontSize: 13,
+      fontSize: 14,
       fontWeight: 'bold',
     },
     occurence: {
