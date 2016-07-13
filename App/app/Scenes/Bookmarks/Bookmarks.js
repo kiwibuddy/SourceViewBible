@@ -89,12 +89,6 @@ export default class Bookmarks extends Component {
             style={styles.listView}
           />
         </View>
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={this._renderRow}
-          renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={StyleSheet.styles.separator} />}
-          style={styles.listView}
-        />
       </View>
     );
   }
