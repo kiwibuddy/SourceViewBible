@@ -698,14 +698,18 @@ function seedObjectSphereWordCounts(object, spheresData) {
   }
 
   if (spheresData != null) {
+    let sphereCount = 0;
+
     Object.keys(spheresData).forEach((sphereName) => {
       const sphereData = spheresData[sphereName];
-      const wordCount = sphereData.true;
-      if (wordCount && wordCount > 0) {
-        object.sphereCounts[SPHERE_MAP[sphereName]] = wordCount;
+      const wordCount = sphereData.true || 0;
+      object.sphereCounts[SPHERE_MAP[sphereName]] = wordCount;
+
+      if (wordCount > 0) {
+        sphereCount++;
       }
     });
 
-    object.sphereCount = Object.keys(spheresData).length;
+    object.sphereCount = sphereCount;
   }
 }
