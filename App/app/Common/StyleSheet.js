@@ -81,6 +81,7 @@ const styles = {
     color: '#59626a',
     marginTop: 8,
     fontSize: 13,
+    fontWeight: 'bold',
   },
   listItem: {
     paddingLeft: 15,

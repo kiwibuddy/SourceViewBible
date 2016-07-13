@@ -39,6 +39,9 @@ export default class SphereBooks extends Component {
         </View>
         <View style={styles.sphereBooksGraph}>
         </View>
+        <View style={styles.sectionHeaderContainer}>
+          <Text style={StyleSheet.styles.sectionHeaderTitle}>OLD TESTAMENT</Text>
+        </View>
         <TouchableOpacity style={styles.section}>
           <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
             <View style={styles.sourcesLeftContainer}>
@@ -75,8 +78,13 @@ const styles = StyleSheet.create({
       width: 0
     },
   },
+  sectionHeaderContainer: {
+    ...StyleSheet.styles.sectionHeaderContainer,
+    marginLeft: 8,
+    backgroundColor: 'transparent',
+  },
   section: {
-    marginLeft: 15,
+    marginLeft: 8,
   },
   sourcesCellContainer: {
     flex: 1,

@@ -68,7 +68,7 @@ export default class DiscoverBooks extends Component {
           <View style={styles.sectionHeaderContainer}>
             <Text style={StyleSheet.styles.sectionHeaderTitle}>BOOKS</Text>
             <View style={styles.sectionHeaderDetail}>
-              <Text style={[StyleSheet.styles.sectionHeaderTitle, {color: Colors.tintColor}]}>View All</Text>
+              <Text style={[StyleSheet.styles.sectionHeaderTitle, {color: Colors.tintColor, fontWeight: 'normal'}]}>View All</Text>
               <Image source={require('../../Images/common/disclosure.png')}  style={styles.disclosure} />
             </View>
             </View>
