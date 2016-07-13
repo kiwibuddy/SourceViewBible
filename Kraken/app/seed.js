@@ -324,6 +324,7 @@ async function seedChapterWordCounts(emdros, bible) {
           const chapterData = bookData["Chapter"]["chapter"];
           if (chapterData != null) {
             let maxChapterWordCount = 0;
+
             book.chapters.forEach((chapter, index) => {
               const wordCount = chapterData[chapter.chapterNumber.toString()]["Token"] || 0;
               chapter["wordCount"] = wordCount;
@@ -331,6 +332,7 @@ async function seedChapterWordCounts(emdros, bible) {
                 maxChapterWordCount = wordCount;
               }
             });
+
             book.maxChapterWordCount = maxChapterWordCount;
           }
         }
@@ -538,10 +540,8 @@ async function seedChapterSphereWordCount(emdros, bible) {
           const chapterData = bookData["Chapter"]["chapter"];
           if (chapterData != null) {
             book.chapters.forEach((chapter, index) => {
-              const wordCount = chapterData[chapter.chapterNumber.toString()]["Token"];
-              if (wordCount) {
-                chapter.sphereWordCount = wordCount;
-              }
+              const wordCount = chapterData[chapter.chapterNumber.toString()]["Token"] || 0;
+              chapter.sphereWordCount = wordCount;
             });
           }
         }
@@ -579,10 +579,29 @@ async function seedChapterSphereWordCounts(emdros, bible) {
         if (bookData != null) {
           const chapterData = bookData["Chapter"]["chapter"];
           if (chapterData != null) {
+            let maxChapterSphereWordCount = 0;
+
             book.chapters.forEach((chapter, index) => {
               const spheresData = chapterData[chapter.chapterNumber.toString()]["Token"];
-              seedObjectSphereWordCounts(chapter, spheresData);
+              if (spheresData) {
+                seedObjectSphereWordCounts(chapter, spheresData);
+
+                let chapterSphereWordCount = 0;
+                Object.keys(spheresData).forEach((sphereName) => {
+                  const sphereData = spheresData[sphereName];
+                  const wordCount = sphereData.true;
+                  if (wordCount && wordCount > 0) {
+                    chapterSphereWordCount += wordCount;
+                  }
+                });
+
+                if (chapterSphereWordCount > maxChapterSphereWordCount) {
+                  maxChapterSphereWordCount = chapterSphereWordCount;
+                }
+              }
             });
+
+            book.maxChapterSphereWordCount = maxChapterSphereWordCount;
           }
         }
       }
@@ -681,11 +700,9 @@ function seedObjectSphereWordCounts(object, spheresData) {
   if (spheresData != null) {
     Object.keys(spheresData).forEach((sphereName) => {
       const sphereData = spheresData[sphereName];
-      if (sphereData) {
-        const wordCount = sphereData.true;
-        if (wordCount && wordCount > 0) {
-          object.sphereCounts[SPHERE_MAP[sphereName]] = wordCount;
-        }
+      const wordCount = sphereData.true;
+      if (wordCount && wordCount > 0) {
+        object.sphereCounts[SPHERE_MAP[sphereName]] = wordCount;
       }
     });
 

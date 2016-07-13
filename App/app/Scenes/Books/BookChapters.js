@@ -131,7 +131,7 @@ export default class BookChapters extends Component {
       <SpheresBarChart
         style={styles.stackedBarChart}
         data={[chapter.sphereCounts]}
-        maxChartValue={book.maxChapterWordCount}
+        maxChartValue={book.maxChapterSphereWordCount}
       />
     );
   };
