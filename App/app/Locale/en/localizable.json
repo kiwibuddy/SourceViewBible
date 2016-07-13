@@ -51,6 +51,7 @@
         other: "{{localizedCount}} words"
       }
     },
-    more: "More"
+    more: "More",
+    done: "Done"
   }
 }

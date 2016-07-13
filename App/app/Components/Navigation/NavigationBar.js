@@ -14,14 +14,32 @@ import {
 const NAVIGATIONBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
 
+const NavigationBarTitle = (props: any) => {
+  return (
+    <Text style={styles.titleText}>{props.title}</Text>
+  );
+};
+
+type Props = {
+  title?: string,
+  children?: any,
+};
+
 export default class NavigationBar extends Component {
   static HEIGHT = NAVIGATIONBAR_HEIGHT + STATUSBAR_HEIGHT;
+  static Title = NavigationBarTitle;
+
+  props: Props;
 
   render() {
+    const title = this.props.title ? <NavigationBarTitle title={this.props.title} /> : null;
+    console.log(this.props.children);
+
     return (
       <View style={styles.navigationBar}>
         <View style={styles.title}>
-          <Text style={styles.titleText}>{this.props.title}</Text>
+          {title}
+          {this.props.children}
         </View>
       </View>
     );

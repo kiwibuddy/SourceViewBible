@@ -132,7 +132,8 @@ const styles = {
 };
 
 module.exports = {
-  styles: styles,
-  hairlineWidth: StyleSheet.hairlineWidth,
+  absoluteFill: StyleSheet.absoluteFill,
   create: create,
+  hairlineWidth: StyleSheet.hairlineWidth,
+  styles: styles,
 };
