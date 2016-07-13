@@ -143,5 +143,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 5,
     right: 5,
-  }
+  },
+  separator: {
+    ...StyleSheet.styles.separator,
+    marginLeft: 15,
+  },
 });
