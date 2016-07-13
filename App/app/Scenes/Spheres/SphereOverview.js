@@ -17,6 +17,8 @@ import {
   Localizable
 } from '../../Common';
 
+import Icon from '../../Components/Common/Icon';
+
 export default class SphereOverview extends Component {
   render() {
     return (
@@ -50,6 +52,45 @@ export default class SphereOverview extends Component {
           <Text style={styles.contentHeader}>How Family Shows Up in Scripture</Text>
           <Text style={[styles.contentBody, {marginTop: 5}]}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu imperdiet ipsum, at pellentesque arcu. Quisque eleifend enim id felis semper, id euismod dolor hendrerit. Sed fringilla dui eget enim pulvinar, vitae consequat dui bibendum. Maecenas nulla odio.</Text>
         </View>
+        <View style={styles.listContainer}>
+          <View style={styles.listItemHeader}>
+            <Text style={StyleSheet.styles.cell.titlebold}>Top Books</Text>
+          </View>
+        </View>
+        <TouchableOpacity style={styles.section}>
+          <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
+            <View style={styles.sourcesLeftContainer}>
+              <Text style={StyleSheet.styles.cell.titlemedium}>Book Name</Text>
+            </View>
+            <View style={styles.sourcesRightContainer}>
+              <View style={styles.sourcesBarChart} />
+              <Text style={StyleSheet.styles.cell.subtitle}>0 words</Text>
+            </View>
+          </View>
+          <View style={[StyleSheet.styles.separator, {marginLeft: 0}]}></View>
+        </TouchableOpacity>
+        <View style={styles.listContainer}>
+          <View style={styles.listItemHeader}>
+            <Text style={StyleSheet.styles.cell.titlebold}>Top Sources</Text>
+          </View>
+        </View>
+        <TouchableOpacity style={styles.section}>
+          <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
+            <View style={styles.sourcesLeftContainer}>
+              <Icon
+                name={'avatar-human-group'}
+                style={[styles.sourceAvatar, {color: 'red'}]}
+                size={20}
+              />
+              <Text style={StyleSheet.styles.cell.titlemedium}>Source Name</Text>
+            </View>
+            <View style={styles.sourcesRightContainer}>
+              <View style={styles.sourcesBarChart} />
+              <Text style={StyleSheet.styles.cell.subtitle}>0 words</Text>
+            </View>
+          </View>
+          <View style={[StyleSheet.styles.separator, {marginLeft: 0}]}></View>
+        </TouchableOpacity>
       </ScrollView>
     );
   }
@@ -96,6 +137,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     marginHorizontal: 20,
+    marginBottom: 35,
   },
   contentHeader: {
     fontSize: 24,
@@ -107,5 +149,63 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 26,
     color: '#59626a',
+  },
+  listItemContainer: {
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingVertical: 5,
+    flexDirection: 'row',
+  },
+  listItemHeader: {
+    borderTopWidth: 2,
+    borderTopColor: 'red',
+    paddingLeft: 15,
+    paddingVertical: 15,
+    borderBottomColor: Colors.separator,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    shadowColor: "black",
+    shadowOpacity: 0.05,
+    shadowRadius: 0.4,
+    shadowOffset: {
+      height: 1,
+      width: 0
+    },
+  },
+  listItem: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    height: 44,
+  },
+  separator: {
+    ...StyleSheet.styles.separator,
+    marginLeft: 15,
+  },
+  section: {
+    marginLeft: 15,
+  },
+  sourcesCellContainer: {
+    flex: 1,
+    marginRight: 15,
+    flexDirection: 'row',
+  },
+  sourcesLeftContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    paddingTop: 2,
+  },
+  sourcesRightContainer: {
+    flex: 1,
+  },
+  sourceAvatar: {
+    width: 20,
+    height: 20,
+    marginRight: 5
+  },
+  sourcesBarChart: {
+    height: 4,
+    flex: 0,
+    marginBottom: 7,
   },
 });
