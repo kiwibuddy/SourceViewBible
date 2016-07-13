@@ -64,7 +64,7 @@ export default class SphereOverview extends Component {
               <Text style={StyleSheet.styles.cell.titlemedium}>Book Name</Text>
             </View>
             <View style={styles.sourcesRightContainer}>
-              <View style={styles.sourcesBarChart} />
+              <View style={[styles.sourcesBarChart, {height: 4, backgroundColor: '#EDEDED'}]} />
               <View style={styles.dataPair}>
                 <Text style={[StyleSheet.styles.cell.percentage, {color: 'red'}]}>0%</Text>
                 <Text style={StyleSheet.styles.cell.subtitle}>0 words</Text>
@@ -93,7 +93,7 @@ export default class SphereOverview extends Component {
               <Text style={StyleSheet.styles.cell.titlemedium}>Source Name</Text>
             </View>
             <View style={styles.sourcesRightContainer}>
-              <View style={styles.sourcesBarChart} />
+              <View style={[styles.sourcesBarChart, {height: 4, backgroundColor: '#EDEDED'}]} />
               <View style={styles.dataPair}>
                 <Text style={[StyleSheet.styles.cell.percentage, {color: 'red'}]}>0%</Text>
                 <Text style={StyleSheet.styles.cell.subtitle}>0 words</Text>
