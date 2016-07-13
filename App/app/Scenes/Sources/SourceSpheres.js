@@ -19,7 +19,35 @@ export default class SourceSpheres extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>SourceSpheres</Text>
+        <View style={StyleSheet.styles.statisticsContainer}>
+          <View style={StyleSheet.styles.statisticContainer}>
+            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toNumber(0, {precision: 0})}</Text>
+            <Text style={StyleSheet.styles.statisticSubtitle}>Book</Text>
+          </View>
+          <View style={StyleSheet.styles.statisticKeyline} />
+          <View style={StyleSheet.styles.statisticContainer}>
+            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toNumber(0, {precision: 0})}</Text>
+            <Text style={StyleSheet.styles.statisticSubtitle}>Words</Text>
+          </View>
+          <View style={StyleSheet.styles.statisticKeyline} />
+          <View style={StyleSheet.styles.statisticContainer}>
+            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+              <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toNumber(0, {precision: 0})}</Text>
+              <View style={styles.SpheresBarChart}></View>
+            </View>
+            <Text style={StyleSheet.styles.statisticSubtitle}>Spheres</Text>
+          </View>
+        </View>
+        <View style={styles.listContainer}>
+          <View style={styles.listItemContainer}>
+            <View style={styles.pie}><Text style={styles.pieText}>0%</Text></View>
+            <View style={styles.listItem}>
+              <Text style={StyleSheet.styles.cell.title}>Family</Text>
+              <Text style={StyleSheet.styles.cell.valuetitle}>{Localizable.t('words.count', {count: 0, localizedCount: Localizable.toNumber(0, {precision: 0})})}</Text>
+            </View>
+          </View>
+          <View style={styles.separator} />
+        </View>
       </View>
     );
   }
@@ -28,5 +56,31 @@ export default class SourceSpheres extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  listItemContainer: {
+    paddingLeft: 8,
+    paddingRight: 15,
+    paddingVertical: 5,
+    flexDirection: 'row',
+  },
+  listItem: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  pie: {
+    width: 57,
+    height: 57,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  pieText: {
+    fontSize: 17,
+  },
+  separator: {
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: Colors.separator,
+    marginLeft: 8,
   },
 });
