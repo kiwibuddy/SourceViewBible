@@ -7,7 +7,8 @@ const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithP
 import {
   Text,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  ScrollView
 } from 'react-native';
 
 import {
@@ -19,7 +20,7 @@ import {
 export default class SphereOverview extends Component {
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <View style={styles.carouselContainer}>
         </View>
         <View style={styles.carouselGraphContainer}>
@@ -41,7 +42,15 @@ export default class SphereOverview extends Component {
             <Text style={StyleSheet.styles.statisticSubtitle}>Words</Text>
           </TouchableOpacity>
         </View>
-      </View>
+        <TouchableOpacity style={styles.readButton}>
+          <Text style={styles.readButtonTitle}>Explore 52 key passages</Text>
+        </TouchableOpacity>
+        <View style={styles.contentContainer}>
+          <Text style={[styles.contentBody, {marginBottom: -25}]}>Introduction</Text>
+          <Text style={styles.contentHeader}>How Family Shows Up in Scripture</Text>
+          <Text style={[styles.contentBody, {marginTop: 5}]}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu imperdiet ipsum, at pellentesque arcu. Quisque eleifend enim id felis semper, id euismod dolor hendrerit. Sed fringilla dui eget enim pulvinar, vitae consequat dui bibendum. Maecenas nulla odio.</Text>
+        </View>
+      </ScrollView>
     );
   }
 }
@@ -66,5 +75,37 @@ const styles = StyleSheet.create({
     flex:0,
     width: StyleSheet.hairlineWidth,
     backgroundColor: Colors.separator
+  },
+  readButton: {
+    backgroundColor: Colors.tintColor,
+    borderColor: Colors.tintColor,
+    height: 40,
+    borderRadius: 20,
+    borderWidth: 1,
+    overflow:'hidden',
+    alignSelf: 'center',
+    marginTop: 40,
+    marginBottom: 40,
+    justifyContent: 'center',
+  },
+  readButtonTitle: {
+    color: 'white',
+    fontSize: 18,
+    marginVertical: 20,
+    marginHorizontal: 40,
+  },
+  contentContainer: {
+    marginHorizontal: 20,
+  },
+  contentHeader: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#59626a',
+    marginTop: 25,
+  },
+  contentBody: {
+    fontSize: 16,
+    lineHeight: 26,
+    color: '#59626a',
   },
 });

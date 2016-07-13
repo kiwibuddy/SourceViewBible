@@ -94,9 +94,7 @@ export default class BookOverview extends Component {
             <Text style={StyleSheet.styles.statisticTitle}>{book.chapterCount}</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Chapters</Text>
           </TouchableOpacity>
-
           <View style={styles.keyline} />
-
           <TouchableOpacity
             style={StyleSheet.styles.statisticContainer}
             onPress={this.props.onPressSources}
@@ -112,9 +110,7 @@ export default class BookOverview extends Component {
             </View>
             <Text style={StyleSheet.styles.statisticSubtitle}>Sources</Text>
           </TouchableOpacity>
-
           <View style={styles.keyline} />
-
           <TouchableOpacity
             style={StyleSheet.styles.statisticContainer}
             onPress={this.props.onPressSpheres}
@@ -201,7 +197,7 @@ export default class BookOverview extends Component {
   _renderOverviewSection = (section: Object) => {
     return (
       <View key={section.title} style={styles.contentContainer}>
-        <Text style={styles.contentHeader}>{section.title.toLocaleUpperCase()}</Text>
+        <Text style={styles.contentHeader}>{section.title}</Text>
         <Text style={styles.contentBody}>{section.content}</Text>
       </View>
     );
@@ -284,7 +280,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   contentHeader: {
-    fontSize: 15,
+    fontSize: 24,
     fontWeight: 'bold',
     color: '#59626a',
     marginTop: 25,
