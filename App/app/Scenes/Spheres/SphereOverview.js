@@ -8,7 +8,8 @@ import {
   Text,
   View,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
+  Image
 } from 'react-native';
 
 import {
@@ -72,6 +73,10 @@ export default class SphereOverview extends Component {
           </View>
           <View style={[StyleSheet.styles.separator, {marginLeft: 0}]}></View>
         </TouchableOpacity>
+        <TouchableOpacity style={StyleSheet.styles.listItem}>
+          <Text style={StyleSheet.styles.cell.titlemore}>View More</Text>
+          <Image source={require('../../Images/common/disclosure.png')}  style={styles.disclosure} />
+        </TouchableOpacity>
         <View style={styles.listContainer}>
           <View style={styles.listItemHeader}>
             <Text style={StyleSheet.styles.cell.titlebold}>Top Sources</Text>
@@ -96,6 +101,10 @@ export default class SphereOverview extends Component {
             </View>
           </View>
           <View style={[StyleSheet.styles.separator, {marginLeft: 0}]}></View>
+        </TouchableOpacity>
+        <TouchableOpacity style={StyleSheet.styles.listItem}>
+          <Text style={StyleSheet.styles.cell.titlemore}>View More</Text>
+          <Image source={require('../../Images/common/disclosure.png')}  style={styles.disclosure} />
         </TouchableOpacity>
       </ScrollView>
     );

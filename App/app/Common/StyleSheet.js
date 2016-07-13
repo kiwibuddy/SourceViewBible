@@ -105,6 +105,10 @@ const styles = {
       fontSize: 18,
       fontWeight: 'bold',
     },
+    titlemore: {
+      color: '#CF1E00',
+      fontSize: 15,
+    },
     subtitle: {
       color: '#9B9B9B',
       fontSize: 13,
