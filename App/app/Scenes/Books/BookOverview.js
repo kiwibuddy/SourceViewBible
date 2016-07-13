@@ -121,7 +121,7 @@ export default class BookOverview extends Component {
                 style={{flex: 0, marginHorizontal: 4}}
                 barStyle={{width: 3, height: 20, marginHorizontal: 1.5}}
                 horizontal={false}
-                data={[{family: 1}, {economics: 1}, {government: 1}, {religion: 1}, {education: 1}, {communication: 1}, {celebration: 1}]}
+                data={[{family: book.sphereCounts.family}, {economics: book.sphereCounts.economics}, {government: book.sphereCounts.government}, {religion: book.sphereCounts.religion}, {education: book.sphereCounts.education}, {communication: book.sphereCounts.communication}, {celebration: book.sphereCounts.celebration}]}
               />
             </View>
             <Text style={StyleSheet.styles.statisticSubtitle}>Spheres</Text>

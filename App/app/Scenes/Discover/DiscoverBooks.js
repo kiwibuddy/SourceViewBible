@@ -126,13 +126,13 @@ export default class DiscoverBooks extends Component {
             </View>
             <View style={styles.statisticContainer} >
               <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-                <Text style={styles.statisticTitle}>0</Text>
+                <Text style={styles.statisticTitle}>0%</Text>
                 <Text style={styles.statisticSubtitle}>Spheres</Text>
                 <SpheresBarChart
                   style={{flex: 0, marginLeft: 4}}
                   barStyle={{width: 2, height: 12, marginHorizontal: 1}}
                   horizontal={false}
-                  data={[{family: 1}, {economics: 1}, {government: 1}, {religion: 1}, {education: 1}, {communication: 1}, {celebration: 1}]}
+                  data={[{family: book.sphereCounts.family}, {economics: book.sphereCounts.economics}, {government: book.sphereCounts.government}, {religion: book.sphereCounts.religion}, {education: book.sphereCounts.education}, {communication: book.sphereCounts.communication}, {celebration: book.sphereCounts.celebration}]}
                 />
               </View>
             </View>

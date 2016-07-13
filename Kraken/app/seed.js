@@ -674,7 +674,7 @@ function seedObjectWordCloud(object, wordData) {
 
 function seedObjectSphereWordCounts(object, spheresData) {
   if (!object.spheres) {
-    object.spheres = {};
+    object.sphereCounts = {};
     object.sphereCount = 0;
   }
 
@@ -684,13 +684,7 @@ function seedObjectSphereWordCounts(object, spheresData) {
       if (sphereData) {
         const wordCount = sphereData.true;
         if (wordCount && wordCount > 0) {
-          let sphere = object.spheres[SPHERE_MAP[sphereName]];
-          if (!sphere) {
-            sphere = {};
-          }
-          
-          sphere.wordCount = wordCount;
-          object.spheres[SPHERE_MAP[sphereName]] = sphere;
+          object.sphereCounts[SPHERE_MAP[sphereName]] = wordCount;
         }
       }
     });
