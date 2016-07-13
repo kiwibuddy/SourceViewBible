@@ -37,7 +37,7 @@ export default class BookWords extends Component {
     return (
       <View style={styles.container}>
         <WordCloud
-          backgroundColors={Colors.spheres[book.principalSphere].gradient.big}
+          backgroundColors={Colors.sources[book.principalSourceType].gradient.big}
           style={styles.wordCloud}
         >
           <ParallaxMotionView intensity={5} style={[styles.parallax, {opacity: 0.8}]}>

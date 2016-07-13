@@ -103,11 +103,11 @@ export default class DiscoverBooks extends Component {
       <TouchableOpacity key={'book-' + book.key} style={styles.itemContainer} onPress={ () => this.props.onPressBook(book) }>
         <View style={styles.item}>
           <LinearGradient
-            colors={Colors.spheres[book.principalSphere].gradient.tiny}
+            colors={Colors.sources[book.principalSourceType].gradient.tiny}
             start={[0.0, 0.25]} end={[0.5, 1.0]}
             style={styles.gradient}
           />
-          <Image source={require('../../Images/discover/icon-books.png')}  style={[styles.icon, {tintColor: Colors.spheres[book.principalSphere].tint}]} />
+          <Image source={require('../../Images/discover/icon-books.png')}  style={[styles.icon, {tintColor: Colors.sources[book.principalSourceType].tint}]} />
           <Text style={styles.bookTitle}>{book.name}</Text>
           <Text style={styles.bookReadTime}>{ReadingTime(book.wordCount)}</Text>
           <View style={styles.keyline} />

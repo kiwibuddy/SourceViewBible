@@ -57,7 +57,7 @@ export default class BookOverview extends Component {
       <ScrollView style={styles.container}>
         <TouchableOpacity onPress={this.props.onPressWords}>
           <WordCloud
-            backgroundColors={Colors.spheres[book.principalSphere].gradient.big}
+            backgroundColors={Colors.sources[book.principalSourceType].gradient.big}
             style={StyleSheet.styles.wordCloud}
           >
             <ParallaxMotionView intensity={5} style={[styles.parallax, {opacity: 0.8}]}>

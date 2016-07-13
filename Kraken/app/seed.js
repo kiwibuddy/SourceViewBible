@@ -486,6 +486,7 @@ function seedObjectSourceTypeWordCounts(object, sourceData) {
     "lead": 0,
     "support": 0
   };
+  object.principalSourceType = null;
 
   if (sourceData != null) {
     const sourceTypeData = sourceData["source_color"];
@@ -496,6 +497,8 @@ function seedObjectSourceTypeWordCounts(object, sourceData) {
         object.sourceTypeCounts[sourceType] = wordCount;
       });
     }
+
+    object.principalSourceType = Object.keys(object.sourceTypeCounts).reduce((a, b) => object.sourceTypeCounts[a] > object.sourceTypeCounts[b] ? a : b);
   }
 }
 
