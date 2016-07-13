@@ -49,7 +49,7 @@ export default class SphereOverview extends Component {
           <Text style={styles.readButtonTitle}>Explore 52 key passages</Text>
         </TouchableOpacity>
         <View style={styles.contentContainer}>
-          <Text style={[styles.contentBody, {marginBottom: -25}]}>Introduction</Text>
+          <Text style={[styles.contentBody, {marginBottom: -25, marginTop: -10}]}>Introduction</Text>
           <Text style={styles.contentHeader}>How Family Shows Up in Scripture</Text>
           <Text style={[styles.contentBody, {marginTop: 5}]}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu imperdiet ipsum, at pellentesque arcu. Quisque eleifend enim id felis semper, id euismod dolor hendrerit. Sed fringilla dui eget enim pulvinar, vitae consequat dui bibendum. Maecenas nulla odio.</Text>
         </View>
