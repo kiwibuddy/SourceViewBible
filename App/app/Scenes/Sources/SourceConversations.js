@@ -7,7 +7,8 @@ const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithP
 import {
   Text,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  Image
 } from 'react-native';
 
 import {
@@ -56,6 +57,7 @@ export default class SourceConversation extends Component {
               <View styl={styles.sourcesBarChart} />
               <Text style={StyleSheet.styles.cell.subtitle}>0 conversations</Text>
             </View>
+            <Image source={require('../../Images/common/disclosure.png')}  style={styles.disclosure} />
           </View>
           <View style={[StyleSheet.styles.separator, {marginLeft: -15}]}></View>
         </TouchableOpacity>
@@ -77,6 +79,18 @@ export default class SourceConversation extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  conversationGraph: {
+    height: 200,
+    borderBottomColor: Colors.separator,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    shadowColor: "black",
+    shadowOpacity: 0.05,
+    shadowRadius: 0.4,
+    shadowOffset: {
+      height: 1,
+      width: 0
+    },
   },
   section: {
     marginLeft: 15,
