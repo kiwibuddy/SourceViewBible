@@ -24,6 +24,7 @@ import Icon from '../../Components/Common/Icon';
 type Props = {
   book: Object,
   onPressScripture: Function,
+  onPressSource: Function,
 };
 
 type State = {
@@ -105,11 +106,13 @@ export default class BookSources extends Component {
       <TouchableOpacity style={styles.section} onPress={() => this._onPressScripture(source)}>
         <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
           <View style={styles.sourcesLeftContainer}>
-            <Icon
-              name={iconName}
-              style={[styles.sourceAvatar, {color: color}]}
-              size={20}
-            />
+            <TouchableOpacity onPress={() => this.props.onPressSource(source)}>
+              <Icon
+                name={iconName}
+                style={[styles.sourceAvatar, {color: color}]}
+                size={20}
+              />
+            </TouchableOpacity>
             <Text style={StyleSheet.styles.cell.title}>{source.name}</Text>
           </View>
           <View style={styles.sourcesRightContainer}>

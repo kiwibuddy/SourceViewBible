@@ -97,6 +97,7 @@ export default class App extends Component {
         return <BookSources
           book={route.book}
           onPressScripture={({book, chapterNumber}) => this._pushRoute({key: '/Reader', book, chapterNumber, title: book.name})}
+          onPressSource={(source) => this._pushRoute({key: '/Sources/Overview', source: source, title: source.name})}
         />;
       case '/Books/Spheres':
         return <BookSpheres book={route.book} />;
