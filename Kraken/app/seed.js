@@ -259,9 +259,13 @@ async function seedSourceOccurrences(emdros, bible) {
 async function seedWordCounts(emdros, bible) {
   await seedBookWordCounts(emdros, bible);
   await seedChapterWordCounts(emdros, bible);
+
   await seedBookSourceWordCounts(emdros, bible);
+  await seedBookSphereWordCount(emdros, bible);
   await seedBookSphereWordCounts(emdros, bible);
+
   await seedChapterSourceWordCounts(emdros, bible);
+  await seedChapterSphereWordCount(emdros, bible);
   await seedChapterSphereWordCounts(emdros, bible);
 }
 
@@ -423,6 +427,38 @@ async function seedBookSphereWordCounts(emdros, bible) {
   });
 }
 
+async function seedBookSphereWordCount(emdros, bible) {
+  console.log('Seeding Book Sphere Word Count...');
+  const query = `
+  {
+    "objectTypeName": "Book",
+    "feature": "DJHRef",
+    "buckets": {
+      "objectTypeName": "Token",
+      "expression" : "is_word=true AND (family=true OR economics=true OR government=true OR religion=true OR education=true OR mediacom=true OR celebration=true)"
+    }
+  }
+  `;
+
+  return new Promise((resolve, reject) => {
+    emdros.query(query, {count: true}).then((data) => {
+      for (let [index, book] of bible.books.entries()) {
+        const bookData = data["Book"]["DJHRef"][book.DJHRef];
+        if (bookData != null) {
+          const wordCount = bookData["Token"];
+          if (wordCount) {
+            book.sphereWordCount = wordCount;
+          }
+        }
+      }
+
+      resolve();
+    }).catch((error) => {
+      console.log(error);
+    })
+  });
+}
+
 async function seedChapterSourceWordCounts(emdros, bible) {
   console.log('Seeding Chapter Source Word Counts...');
   const query = `
@@ -464,6 +500,47 @@ async function seedChapterSourceWordCounts(emdros, bible) {
                 } else {
                   chapter.sourceCount = 0;
                 }
+              }
+            });
+          }
+        }
+      }
+
+      resolve();
+    }).catch((error) => {
+      console.log(error);
+    })
+  });
+}
+
+async function seedChapterSphereWordCount(emdros, bible) {
+  console.log('Seeding Chapter Sphere Word Count...');
+  const query = `
+  {
+    "objectTypeName": "Book",
+    "feature": "DJHRef",
+    "buckets": {
+      "objectTypeName": "Chapter",
+      "feature": "chapter",
+      "buckets": {
+        "objectTypeName": "Token",
+        "expression" : "is_word=true AND (family=true OR economics=true OR government=true OR religion=true OR education=true OR mediacom=true OR celebration=true)"
+      }
+    }
+  }
+  `;
+
+  return new Promise((resolve, reject) => {
+    emdros.query(query, {count: true}).then((data) => {
+      for (let [index, book] of bible.books.entries()) {
+        const bookData = data["Book"]["DJHRef"][book.DJHRef];
+        if (bookData != null) {
+          const chapterData = bookData["Chapter"]["chapter"];
+          if (chapterData != null) {
+            book.chapters.forEach((chapter, index) => {
+              const wordCount = chapterData[chapter.chapterNumber.toString()]["Token"];
+              if (wordCount) {
+                chapter.sphereWordCount = wordCount;
               }
             });
           }
@@ -603,11 +680,17 @@ function seedObjectSphereWordCounts(object, spheresData) {
 
   if (spheresData != null) {
     Object.keys(spheresData).forEach((sphereName) => {
-      const sphere = spheresData[sphereName];
-      if (sphere) {
-        const wordCount = sphere.true;
+      const sphereData = spheresData[sphereName];
+      if (sphereData) {
+        const wordCount = sphereData.true;
         if (wordCount && wordCount > 0) {
-          object.spheres[SPHERE_MAP[sphereName]] = wordCount;
+          let sphere = object.spheres[SPHERE_MAP[sphereName]];
+          if (!sphere) {
+            sphere = {};
+          }
+          
+          sphere.wordCount = wordCount;
+          object.spheres[SPHERE_MAP[sphereName]] = sphere;
         }
       }
     });
