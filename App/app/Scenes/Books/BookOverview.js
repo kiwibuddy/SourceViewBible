@@ -58,7 +58,7 @@ export default class BookOverview extends Component {
         <TouchableOpacity onPress={this.props.onPressWords}>
           <WordCloud
             backgroundColors={Colors.spheres[book.principalSphere].gradient.big}
-            style={styles.wordCloud}
+            style={StyleSheet.styles.wordCloud}
           >
             <ParallaxMotionView intensity={5} style={[styles.parallax, {opacity: 0.8}]}>
               <Text style={[styles.wc1, {top: 50, alignSelf: 'center'}]}>{words[0].word}</Text>
@@ -86,23 +86,23 @@ export default class BookOverview extends Component {
           </WordCloud>
         </TouchableOpacity>
 
-        <View style={styles.statisticsContainer}>
+        <View style={StyleSheet.styles.statisticsContainer}>
           <TouchableOpacity
-            style={styles.statisticContainer}
+            style={StyleSheet.styles.statisticContainer}
             onPress={this.props.onPressChapters}
           >
-            <Text style={styles.statisticTitle}>{book.chapterCount}</Text>
-            <Text style={styles.buttonSubtitle}>Chapters</Text>
+            <Text style={StyleSheet.styles.statisticTitle}>{book.chapterCount}</Text>
+            <Text style={StyleSheet.styles.statisticSubtitle}>Chapters</Text>
           </TouchableOpacity>
 
           <View style={styles.keyline} />
 
           <TouchableOpacity
-            style={styles.statisticContainer}
+            style={StyleSheet.styles.statisticContainer}
             onPress={this.props.onPressSources}
           >
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={styles.statisticTitle}>{book.sourceCount}</Text>
+              <Text style={StyleSheet.styles.statisticTitle}>{book.sourceCount}</Text>
               <SourcesBarChart
                 style={{flex: 0, marginHorizontal: 4}}
                 barStyle={{width: 3, height: 20, marginHorizontal: 1.5}}
@@ -110,17 +110,17 @@ export default class BookOverview extends Component {
                 data={[{narrator: book.sourceTypeCounts.narrator}, {god: book.sourceTypeCounts.god}, {lead: book.sourceTypeCounts.lead}, {support: book.sourceTypeCounts.support}]}
               />
             </View>
-            <Text style={styles.buttonSubtitle}>Sources</Text>
+            <Text style={StyleSheet.styles.statisticSubtitle}>Sources</Text>
           </TouchableOpacity>
 
           <View style={styles.keyline} />
 
           <TouchableOpacity
-            style={styles.statisticContainer}
+            style={StyleSheet.styles.statisticContainer}
             onPress={this.props.onPressSpheres}
           >
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={styles.statisticTitle}>7</Text>
+              <Text style={StyleSheet.styles.statisticTitle}>7</Text>
               <SpheresBarChart
                 style={{flex: 0, marginHorizontal: 4}}
                 barStyle={{width: 3, height: 20, marginHorizontal: 1.5}}
@@ -128,7 +128,7 @@ export default class BookOverview extends Component {
                 data={[{family: 1}, {economics: 1}, {government: 1}, {religion: 1}, {education: 1}, {communication: 1}, {celebration: 1}]}
               />
             </View>
-            <Text style={styles.buttonSubtitle}>Spheres</Text>
+            <Text style={StyleSheet.styles.statisticSubtitle}>Spheres</Text>
           </TouchableOpacity>
         </View>
 
@@ -176,7 +176,7 @@ export default class BookOverview extends Component {
           size={40}
           style={[styles.sourceIcon, {color: color}]}
         />
-        <Text style={styles.buttonSubtitle}>{source.name}</Text>
+        <Text style={StyleSheet.styles.statisticSubtitle}>{source.name}</Text>
       </TouchableOpacity>
     );
   };
@@ -193,7 +193,7 @@ export default class BookOverview extends Component {
           size={40}
           style={[styles.sourceIcon, {color: Colors.tintColor}]}
         />
-        <Text style={styles.buttonSubtitle}>{Localizable.t("more")}</Text>
+        <Text style={StyleSheet.styles.statisticSubtitle}>{Localizable.t("more")}</Text>
       </TouchableOpacity>
     );
   };
@@ -211,9 +211,6 @@ export default class BookOverview extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  wordCloud: {
-    height: 200
   },
   parallax: {
     position: 'absolute',
@@ -248,28 +245,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '200',
     position: 'absolute',
-  },
-  statisticsContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    marginTop: 10,
-    borderBottomColor: Colors.separator,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
-  statisticContainer: {
-    flex: 1,
-  },
-  statisticTitle: {
-    fontSize: 24,
-    color: Colors.tintColor,
-    alignSelf: 'center'
-  },
-  buttonSubtitle: {
-    flex: 1,
-    color: Colors.subtitle,
-    fontSize: 12,
-    textAlign: 'center',
-    marginBottom: 4,
   },
   sourcesContainer: {
     flex: 1,
