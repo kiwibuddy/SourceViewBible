@@ -96,9 +96,6 @@ export default class ScriptureView extends Component {
         >
           {previousScripture}
 
-          <View style={styles.scriptureChapterContainer}>
-            <Text style={styles.scriptureChapter}>{this.state.chapter.chapterNumber}</Text>
-          </View>
           {scripture}
 
           {nextScripture}
@@ -131,9 +128,7 @@ export default class ScriptureView extends Component {
 
     return (
       <View style={[{position: 'absolute', bottom: -100, left: 0, right: 0}]}>
-        <View style={[styles.scriptureChapterContainer, {flex: 0}]}>
-          <Text style={styles.scriptureChapter}>{this.state.chapter.chapterNumber + 1}</Text>
-        </View>
+
      </View>
     );
   };
