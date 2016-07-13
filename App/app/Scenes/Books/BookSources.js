@@ -62,14 +62,27 @@ export default class BookSources extends Component {
           style={styles.stackedBarChartHeader}
           data={[book.sourceTypeCounts]}
         />
-        <View style={styles.sourceFilterContainer}>
-          <Text style={[styles.sourcePercentageTitle, {color: Colors.sources.narrator.tint}]}>{Localizable.toPercentage(narratorPercent, {precision: 0})}</Text>
-          <Text style={[styles.sourcePercentageTitle, {color: Colors.sources.god.tint}]}>{Localizable.toPercentage(godPercent, {precision: 0})}</Text>
-          <Text style={[styles.sourcePercentageTitle, {color: Colors.sources.lead.tint}]}>{Localizable.toPercentage(leadPercent, {precision: 0})}</Text>
-          <Text style={[styles.sourcePercentageTitle, {color: Colors.sources.support.tint}]}>{Localizable.toPercentage(supportPercent, {precision: 0})}</Text>
+        <View style={StyleSheet.styles.statisticsContainer}>
+          <View style={StyleSheet.styles.statisticContainer}>
+            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(narratorPercent, {precision: 0})}</Text>
+            <Text style={StyleSheet.styles.statisticSubtitle}>Narrator</Text>
+          </View>
+          <View style={StyleSheet.styles.statisticKeyline} />
+          <View style={StyleSheet.styles.statisticContainer}>
+            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(godPercent, {precision: 0})}</Text>
+            <Text style={StyleSheet.styles.statisticSubtitle}>Divine</Text>
+          </View>
+          <View style={StyleSheet.styles.statisticKeyline} />
+          <View style={StyleSheet.styles.statisticContainer}>
+            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(leadPercent, {precision: 0})}</Text>
+            <Text style={StyleSheet.styles.statisticSubtitle}>Lead</Text>
+          </View>
+          <View style={StyleSheet.styles.statisticKeyline} />
+          <View style={StyleSheet.styles.statisticContainer}>
+            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(supportPercent, {precision: 0})}</Text>
+            <Text style={StyleSheet.styles.statisticSubtitle}>Support</Text>
+          </View>
         </View>
-        <View style={[StyleSheet.styles.separator, {marginLeft: 8}]}></View>
-
         <ListView
           contentContainerStyle={styles.list}
           dataSource={this.state.dataSource}
@@ -144,7 +157,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   stackedBarChartHeader: {
-    height: 3,
+    height: 2,
     flex: 0,
   },
   sourceFilterContainer: {
