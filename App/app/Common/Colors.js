@@ -9,19 +9,39 @@ module.exports = {
 
   sources: {
     narrator: {
-      tint: '#4A4A4A'
+      tint: '#4A4A4A',
+      gradient: {
+        big:['#4A4A4A', '#4A4A4A'],
+        tiny: ['#FF4B3B', '#FF4B3B']
+      }
     },
     god: {
-      tint: '#fc3d39'
+      tint: '#fc3d39',
+      gradient: {
+        big:['#fc3d39', '#fc3d39'],
+        tiny: ['#FF4B3B', '#FF4B3B']
+      }
     },
     divine: {
-      tint: '#fc3d39'
+      tint: '#fc3d39',
+      gradient: {
+        big:['#FF4B3B', '#fc3d39'],
+        tiny: ['#fc3d39', '#fc3d39']
+      }
     },
     lead: {
-      tint: '#19A555'
+      tint: '#19A555',
+      gradient: {
+        big:['#19A555', '#19A555'],
+        tiny: ['#19A555', '#19A555']
+      }
     },
     support: {
-      tint: '#218aff'
+      tint: '#218aff',
+      gradient: {
+        big:['#218aff', '#218aff'],
+        tiny: ['#218aff', '#218aff']
+      }
     },
   },
 
