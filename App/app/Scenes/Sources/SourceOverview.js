@@ -271,41 +271,42 @@ const styles = StyleSheet.create({
     height: 4,
     flex: 0,
     marginBottom: 7,
-  },  wordCloud: {
-      height: 200
-    },
-    parallax: {
-      position: 'absolute',
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0
-    },
-    wc1: {
-      color: 'white',
-      backgroundColor:'transparent',
-      fontSize: 66,
-      fontWeight: '200',
-    },
-    wc2: {
-      color: 'white',
-      backgroundColor:'transparent',
-      fontSize: 42,
-      fontWeight: '200',
-      position: 'absolute',
-    },
-    wc3: {
-      color: 'white',
-      backgroundColor:'transparent',
-      fontSize: 30,
-      fontWeight: '200',
-      position: 'absolute',
-    },
-    wc4: {
-      color: 'white',
-      backgroundColor:'transparent',
-      fontSize: 18,
-      fontWeight: '200',
-      position: 'absolute',
-    },
+  },
+  wordCloud: {
+    height: 200
+  },
+  parallax: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0
+  },
+  wc1: {
+    color: 'white',
+    backgroundColor:'transparent',
+    fontSize: 66,
+    fontWeight: '200',
+  },
+  wc2: {
+    color: 'white',
+    backgroundColor:'transparent',
+    fontSize: 42,
+    fontWeight: '200',
+    position: 'absolute',
+  },
+  wc3: {
+    color: 'white',
+    backgroundColor:'transparent',
+    fontSize: 30,
+    fontWeight: '200',
+    position: 'absolute',
+  },
+  wc4: {
+    color: 'white',
+    backgroundColor:'transparent',
+    fontSize: 18,
+    fontWeight: '200',
+    position: 'absolute',
+  },
 });

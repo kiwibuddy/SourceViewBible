@@ -15,19 +15,25 @@ import {
   Localizable
 } from '../../Common';
 
+type Props = {
+  book: Object,
+};
+
 export default class BookSpheres extends Component {
   render() {
+    const { book } = this.props;
+
     return (
       <View style={styles.container}>
         <View style={StyleSheet.styles.statisticsContainer}>
           <View style={StyleSheet.styles.statisticContainer}>
-            <Text style={StyleSheet.styles.statisticTitleBold}>0</Text>
+            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toNumber(0, {precision: 0})}</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Words</Text>
           </View>
           <View style={StyleSheet.styles.statisticKeyline} />
           <View style={StyleSheet.styles.statisticContainer}>
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={StyleSheet.styles.statisticTitleBold}>0</Text>
+              <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toNumber(0, {precision: 0})}</Text>
               <View style={styles.SpheresBarChart}></View>
             </View>
             <Text style={StyleSheet.styles.statisticSubtitle}>Spheres</Text>
@@ -38,7 +44,7 @@ export default class BookSpheres extends Component {
             <View style={styles.pie}><Text style={styles.pieText}>0%</Text></View>
             <View style={styles.listItem}>
               <Text style={StyleSheet.styles.cell.title}>Family</Text>
-              <Text style={StyleSheet.styles.cell.valuetitle}>0 words</Text>
+              <Text style={StyleSheet.styles.cell.valuetitle}>{Localizable.t('words.count', {count: 0, localizedCount: Localizable.toNumber(0, {precision: 0})})}</Text>
             </View>
           </View>
           <View style={styles.separator} />
