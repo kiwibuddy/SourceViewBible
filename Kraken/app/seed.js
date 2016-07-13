@@ -262,6 +262,7 @@ async function seedWordCounts(emdros, bible) {
   await seedBookSourceWordCounts(emdros, bible);
   await seedBookSphereWordCounts(emdros, bible);
   await seedChapterSourceWordCounts(emdros, bible);
+  await seedChapterSphereWordCounts(emdros, bible);
 }
 
 async function seedBookWordCounts(emdros, bible) {
@@ -339,7 +340,7 @@ async function seedChapterWordCounts(emdros, bible) {
 }
 
 async function seedBookSourceWordCounts(emdros, bible) {
-  console.log('Seeding Book Source Word Counts');
+  console.log('Seeding Book Source Word Counts...');
   const query = `
   {
     "objectTypeName": "Book",
@@ -392,7 +393,7 @@ async function seedBookSourceWordCounts(emdros, bible) {
 }
 
 async function seedBookSphereWordCounts(emdros, bible) {
-  console.log('Seeding Book Sphere Word Counts');
+  console.log('Seeding Book Sphere Word Counts...');
   const query = `
   {
     "objectTypeName": "Book",
@@ -423,7 +424,7 @@ async function seedBookSphereWordCounts(emdros, bible) {
 }
 
 async function seedChapterSourceWordCounts(emdros, bible) {
-  console.log('Seeding Chapter Source Word Counts');
+  console.log('Seeding Chapter Source Word Counts...');
   const query = `
   {
     "objectTypeName": "Book",
@@ -464,6 +465,46 @@ async function seedChapterSourceWordCounts(emdros, bible) {
                   chapter.sourceCount = 0;
                 }
               }
+            });
+          }
+        }
+      }
+
+      resolve();
+    }).catch((error) => {
+      console.log(error);
+    })
+  });
+}
+
+async function seedChapterSphereWordCounts(emdros, bible) {
+  console.log('Seeding Chapter Sphere Word Counts...');
+  const query = `
+  {
+    "objectTypeName": "Book",
+    "feature": "DJHRef",
+    "buckets": {
+      "objectTypeName": "Chapter",
+      "feature": "chapter",
+      "buckets": {
+        "objectTypeName": "Token",
+        "feature": ["family", "economics", "government", "religion", "education", "mediacom", "celebration"],
+        "expression" : "is_word=true"
+      }
+    }
+  }
+  `;
+
+  return new Promise((resolve, reject) => {
+    emdros.query(query, {count: true}).then((data) => {
+      for (let [index, book] of bible.books.entries()) {
+        const bookData = data["Book"]["DJHRef"][book.DJHRef];
+        if (bookData != null) {
+          const chapterData = bookData["Chapter"]["chapter"];
+          if (chapterData != null) {
+            book.chapters.forEach((chapter, index) => {
+              const spheresData = chapterData[chapter.chapterNumber.toString()]["Token"];
+              seedObjectSphereWordCounts(chapter, spheresData);
             });
           }
         }
