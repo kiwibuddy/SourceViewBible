@@ -130,7 +130,7 @@ export default class BookChapters extends Component {
     return (
       <SpheresBarChart
         style={styles.stackedBarChart}
-        data={[{family: 1}, {economics: 1}, {government: 1}, {religion: 1}, {education: 1}, {communication: 1}, {celebration: 1}]}
+        data={[chapter.sphereCounts]}
         maxChartValue={book.maxChapterWordCount}
       />
     );
