@@ -38,7 +38,7 @@ export default class BookSpheres extends Component {
               <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toNumber(book.sphereCount, {precision: 0})}</Text>
               <SpheresBarChart
                 style={{flex: 0, marginLeft: 4}}
-                barStyle={{width: 4, height: 24, marginHorizontal: 1}}
+                barStyle={{width: 4, height: 24, marginHorizontal: 2}}
                 horizontal={false}
                 data={[{family: book.sphereCounts.family}, {economics: book.sphereCounts.economics}, {government: book.sphereCounts.government}, {religion: book.sphereCounts.religion}, {education: book.sphereCounts.education}, {communication: book.sphereCounts.communication}, {celebration: book.sphereCounts.celebration}]}
               />
