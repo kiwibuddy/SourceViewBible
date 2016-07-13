@@ -109,6 +109,21 @@ const styles = {
       color: '#9B9B9B',
       fontSize: 15,
     },
+    body: {
+      color: '#59626a',
+      fontSize: 13,
+    },
+    bodybold: {
+      color: '#59626a',
+      fontSize: 13,
+      fontWeight: 'bold',
+    },
+    occurence: {
+      color: '#CF1E00',
+      fontSize: 13,
+      fontWeight: 'bold',
+      width: 15,
+    },
   },
   separator: {
     height: StyleSheet.hairlineWidth,
