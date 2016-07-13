@@ -35,17 +35,17 @@ const SEGMENT_INDEXES = {
 
 const LISTVIEW_REF = 'LISTVIEW_REF';
 
-const OLD_TESTAMENT_BOOKS = Bible.filter((book) => {
+const OLD_TESTAMENT_BOOKS = Bible.books.filter((book) => {
   return book.testament === 0;
 });
 
-const NEW_TESTAMENT_BOOKS = Bible.filter((book) => {
+const NEW_TESTAMENT_BOOKS = Bible.books.filter((book) => {
   return book.testament === 1;
 });
 
-const BOOKS_SORTED_BY_ALPHABET = Bible.slice(0).sort((a, b) => a.name > b.name ? 1 : -1);
-const BOOKS_SORTED_BY_PRINCIPALITY = Bible.slice(0).sort((a, b) => a.wordCount > b.wordCount ? -1 : 1);
-const MAX_BOOK_WORD_COUNT = Math.max.apply(Math, Bible.map(book => book.wordCount));
+const BOOKS_SORTED_BY_ALPHABET = Bible.books.slice(0).sort((a, b) => a.name > b.name ? 1 : -1);
+const BOOKS_SORTED_BY_PRINCIPALITY = Bible.books.slice(0).sort((a, b) => a.wordCount > b.wordCount ? -1 : 1);
+const MAX_BOOK_WORD_COUNT = Math.max.apply(Math, Bible.books.map(book => book.wordCount));
 
 type State = {
   dataSource: any,
