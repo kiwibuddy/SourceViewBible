@@ -163,7 +163,7 @@ export default class BookOverview extends Component {
     };
 
     const sourceType = SOURCE_TYPE_MAP[source.name] || "support";
-    const color = Colors.sources[sourceType];
+    const color = Colors.sources[sourceType].tint;
     const iconName = ICON_MAP[sourceType] || "avatar-human-group";
     return (
       <TouchableOpacity

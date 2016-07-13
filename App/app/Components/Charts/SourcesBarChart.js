@@ -37,7 +37,7 @@ const SourcesBarChart = (props: Object) => {
       maxBarValue += value;
 
       const barStyle = {
-        backgroundColor: Colors.sources[source],
+        backgroundColor: Colors.sources[source].tint,
         flex: value
       }
       return (

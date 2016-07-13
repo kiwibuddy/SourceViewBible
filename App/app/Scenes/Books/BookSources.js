@@ -63,10 +63,10 @@ export default class BookSources extends Component {
           data={[book.sourceTypeCounts]}
         />
         <View style={styles.sourceFilterContainer}>
-          <Text style={[styles.sourcePercentageTitle, {color: Colors.sources.narrator}]}>{Localizable.toPercentage(narratorPercent, {precision: 0})}</Text>
-          <Text style={[styles.sourcePercentageTitle, {color: Colors.sources.god}]}>{Localizable.toPercentage(godPercent, {precision: 0})}</Text>
-          <Text style={[styles.sourcePercentageTitle, {color: Colors.sources.lead}]}>{Localizable.toPercentage(leadPercent, {precision: 0})}</Text>
-          <Text style={[styles.sourcePercentageTitle, {color: Colors.sources.support}]}>{Localizable.toPercentage(supportPercent, {precision: 0})}</Text>
+          <Text style={[styles.sourcePercentageTitle, {color: Colors.sources.narrator.tint}]}>{Localizable.toPercentage(narratorPercent, {precision: 0})}</Text>
+          <Text style={[styles.sourcePercentageTitle, {color: Colors.sources.god.tint}]}>{Localizable.toPercentage(godPercent, {precision: 0})}</Text>
+          <Text style={[styles.sourcePercentageTitle, {color: Colors.sources.lead.tint}]}>{Localizable.toPercentage(leadPercent, {precision: 0})}</Text>
+          <Text style={[styles.sourcePercentageTitle, {color: Colors.sources.support.tint}]}>{Localizable.toPercentage(supportPercent, {precision: 0})}</Text>
         </View>
         <View style={[StyleSheet.styles.separator, {marginLeft: 8}]}></View>
 
@@ -97,7 +97,7 @@ export default class BookSources extends Component {
     };
 
     const sourceType = SOURCE_TYPE_MAP[source.name] || "support";
-    const color = Colors.sources[sourceType];
+    const color = Colors.sources[sourceType].tint;
     const iconName = ICON_MAP[sourceType] || "avatar-human-group";
     const chartData = {};
     chartData[sourceType] = source.wordCount;

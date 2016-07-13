@@ -244,7 +244,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderTopWidth: StyleSheet.hairlineWidth,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: Colors.sources.narrator,
+    borderColor: Colors.sources.narrator.tint,
     paddingVertical: 15,
     paddingHorizontal: 50,
     marginTop: 30,
@@ -253,21 +253,21 @@ const styles = StyleSheet.create({
   scriptureChapter: {
     alignSelf: 'center',
     justifyContent: 'center',
-    color: Colors.sources.narrator,
+    color: Colors.sources.narrator.tint,
     fontFamily: 'Georgia',
     lineHeight: 26,
     fontSize: 26,
   },
   sourceColorRed: {
-    color: Colors.sources.divine,
+    color: Colors.sources.divine.tint,
   },
   sourceColorBlack: {
-    color: Colors.sources.narrator,
+    color: Colors.sources.narrator.tint,
   },
   sourceColorGreen: {
-    color: Colors.sources.lead,
+    color: Colors.sources.lead.tint,
   },
   sourceColorBlue: {
-    "color": Colors.sources.support
+    "color": Colors.sources.support.tint
   },
 });

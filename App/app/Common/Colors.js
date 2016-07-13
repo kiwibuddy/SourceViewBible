@@ -8,11 +8,21 @@ module.exports = {
   subtitle: '#9B9B9B',
 
   sources: {
-    narrator: '#4A4A4A',
-    god: '#fc3d39',
-    divine: '#fc3d39',
-    lead: '#19A555',
-    support: '#218aff',
+    narrator: {
+      tint: '#4A4A4A'
+    },
+    god: {
+      tint: '#fc3d39'
+    },
+    divine: {
+      tint: '#fc3d39'
+    },
+    lead: {
+      tint: '#19A555'
+    },
+    support: {
+      tint: '#218aff'
+    },
   },
 
   spheres: {
