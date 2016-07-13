@@ -34,7 +34,15 @@ const SOURCE_TYPE_MAP = {
   "Blue": "support"
 };
 
-const SPHERES = ["family", "economics", "government", "religion", "education", "mediacom", "celebration"];
+const SPHERE_MAP = {
+  "family": "family",
+  "economics": "economics",
+  "government": "government",
+  "religion": "religion",
+  "education": "education",
+  "mediacom": "communication",
+  "celebration": "celebration"
+};
 
 export async function kraken() {
   console.log('Hello!');
@@ -385,13 +393,32 @@ async function seedBookSourceWordCounts(emdros, bible) {
 
 async function seedBookSphereWordCounts(emdros, bible) {
   console.log('Seeding Book Sphere Word Counts');
+  const query = `
+  {
+    "objectTypeName": "Book",
+    "feature": "DJHRef",
+    "buckets": {
+      "objectTypeName": "Token",
+      "feature": ["family", "economics", "government", "religion", "education", "mediacom", "celebration"],
+      "expression" : "is_word=true"
+    }
+  }
+  `;
 
   return new Promise((resolve, reject) => {
-    for (let [index, book] of bible.books.entries()) {
-      book.principalSphere = SPHERES[Math.floor(Math.random() * SPHERES.length)];
-    }
+    emdros.query(query, {count: true}).then((data) => {
+      for (let [index, book] of bible.books.entries()) {
+        const bookData = data["Book"]["DJHRef"][book.DJHRef];
+        if (bookData != null) {
+          const spheresData = bookData["Token"];
+          seedObjectSphereWordCounts(book, spheresData);
+        }
+      }
 
-    resolve();
+      resolve();
+    }).catch((error) => {
+      console.log(error);
+    })
   });
 }
 
@@ -524,5 +551,23 @@ function seedObjectWordCloud(object, wordData) {
     });
   } else {
     object.words = [];
+  }
+}
+
+function seedObjectSphereWordCounts(object, spheresData) {
+  if (!object.spheres) {
+    object.spheres = {};
+  }
+
+  if (spheresData != null) {
+    Object.keys(spheresData).forEach((sphereName) => {
+      const sphere = spheresData[sphereName];
+      if (sphere) {
+        const wordCount = sphere.true;
+        if (wordCount && wordCount > 0) {
+          object.spheres[SPHERE_MAP[sphereName]] = wordCount;
+        }
+      }
+    });
   }
 }
