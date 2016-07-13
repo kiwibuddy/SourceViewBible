@@ -40,6 +40,10 @@
     "book-sources": "Sources in {{name}}",
     "book-spheres": "Spheres in {{name}}",
     "book-words": "Words in {{name}}",
+    "source-books": "Books with {{name}}",
+    "source-conversations": "{{name} Conversations",
+    "source-spheres": "{{name}} Spheres",
+    "source-words": "Words of {{name}}",
     words: {
       count: {
         one: "1 word",

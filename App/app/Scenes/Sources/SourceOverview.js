@@ -23,7 +23,12 @@ import ParallaxMotionView from '../../Components/Common/ParallaxMotionView';
 import Icon from '../../Components/Common/Icon';
 
 type Props = {
+  onPressBooks: Function,
+  onPressConversations: Function,
+  onPressSource: Function,
+  onPressSpheres: Function,
   onPressWords: Function,
+
 };
 
 export default class SourceOverview extends Component {
@@ -95,22 +100,22 @@ export default class SourceOverview extends Component {
           </WordCloud>
         </TouchableOpacity>
         <View style={[StyleSheet.styles.statisticsContainer, {marginTop: 25}]}>
-          <TouchableOpacity style={StyleSheet.styles.statisticContainer}>
+          <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={this.props.onPressBooks}>
             <Text style={StyleSheet.styles.statisticTitle}>0</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Book</Text>
           </TouchableOpacity>
           <View style={StyleSheet.styles.statisticKeyline} />
-          <TouchableOpacity style={StyleSheet.styles.statisticContainer}>
+          <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={this.props.onPressConversations}>
             <Text style={StyleSheet.styles.statisticTitle}>0</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Conversations</Text>
           </TouchableOpacity>
           <View style={StyleSheet.styles.statisticKeyline} />
-          <TouchableOpacity style={StyleSheet.styles.statisticContainer}>
+          <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={this.props.onPressWords}>
             <Text style={StyleSheet.styles.statisticTitle}>0</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Words</Text>
           </TouchableOpacity>
           <View style={StyleSheet.styles.statisticKeyline} />
-          <TouchableOpacity style={StyleSheet.styles.statisticContainer}>
+          <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={this.props.onPressSpheres}>
             <Text style={StyleSheet.styles.statisticTitle}>0</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Spheres</Text>
           </TouchableOpacity>
@@ -141,7 +146,7 @@ export default class SourceOverview extends Component {
               </View>
             </View>
           </View>
-          <TouchableOpacity style={styles.section} onPress={() => {}}>
+          <TouchableOpacity style={styles.section} onPress={() => this.props.onPressSource()}>
             <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
               <View style={styles.sourcesLeftContainer}>
                 <Icon
@@ -169,7 +174,7 @@ export default class SourceOverview extends Component {
               </View>
             </View>
           </View>
-          <TouchableOpacity style={styles.section} onPress={() => {}}>
+          <TouchableOpacity style={styles.section} onPress={() => this.props.onPressSource()}>
             <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
               <View style={styles.sourcesLeftContainer}>
                 <Icon
