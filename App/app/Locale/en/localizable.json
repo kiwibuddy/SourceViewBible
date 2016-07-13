@@ -37,6 +37,7 @@
     "how-to-read": "How to read {{name}}",
     "book-overview": "Overview of {{name}}",
     "book-chapters": "Chapters in {{name}}",
+    "book-source": "{{source}} in {{book}}",
     "book-sources": "Sources in {{name}}",
     "book-spheres": "Spheres in {{name}}",
     "book-words": "Words in {{name}}",
