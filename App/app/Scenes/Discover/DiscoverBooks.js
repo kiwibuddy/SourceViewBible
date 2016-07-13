@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
   statisticsContainer: {
     flex: 1,
     flexDirection: 'column',
-    marginHorizontal: (width <= 320 ? 4 : 8),
+    marginHorizontal: (width <= 320 ? 2 : 5),
   },
   statisticContainer: {
     marginTop: 7,
