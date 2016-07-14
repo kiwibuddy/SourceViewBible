@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     borderTopColor: 'red',
     borderLeftColor: 'red',
     borderLeftWidth: 24,
-    borderRightColor: 'transparent',
+    borderRightColor: 'red',
     borderRightWidth: 24,
     borderBottomColor: 'red',
     borderBottomWidth: 24,
