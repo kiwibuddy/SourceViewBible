@@ -13,13 +13,13 @@ const BIBLE = {
   books: require('./books'),
   sources: [],
   spheres: [
-    { key: "family", name: "Family", bookCount: 0, bookCounts: {}, wordCount: 0 },
-    { key: "economics", name: "Economics", bookCount: 0, bookCounts: {}, wordCount: 0 },
-    { key: "government", name: "Government", bookCount: 0, bookCounts: {}, wordCount: 0 },
-    { key: "religion", name: "Religion", bookCount: 0, bookCounts: {}, wordCount: 0 },
-    { key: "education", name: "Education", bookCount: 0, bookCounts: {}, wordCount: 0 },
-    { key: "communication", name: "Communication", bookCount: 0, bookCounts: {}, wordCount: 0 },
-    { key: "celebration", name: "Celebration", bookCount: 0, bookCounts: {}, wordCount: 0 },
+    { key: "family", name: "Family", bookCount: 0, bookCounts: {}, wordCount: 0, words: [] },
+    { key: "economics", name: "Economics", bookCount: 0, bookCounts: {}, wordCount: 0, words: [] },
+    { key: "government", name: "Government", bookCount: 0, bookCounts: {}, wordCount: 0, words: [] },
+    { key: "religion", name: "Religion", bookCount: 0, bookCounts: {}, wordCount: 0, words: [] },
+    { key: "education", name: "Education", bookCount: 0, bookCounts: {}, wordCount: 0, words: [] },
+    { key: "communication", name: "Communication", bookCount: 0, bookCounts: {}, wordCount: 0, words: [] },
+    { key: "celebration", name: "Celebration", bookCount: 0, bookCounts: {}, wordCount: 0, words: [] },
   ]
 };
 
@@ -68,7 +68,7 @@ export async function kraken() {
 async function seed(emdros, bible) {
   console.log('Seeding...');
 
-  // await seedBooks(emdros, bible);
+  await seedBooks(emdros, bible);
   await seedSpheres(emdros, bible);
 }
 
@@ -670,6 +670,11 @@ async function seedSpheres(emdros, bible) {
   console.log('Seeding Spheres...');
 
   await seedSphereWordCounts(emdros, bible);
+
+  const sphereNames = Object.keys(SPHERE_MAP);
+  for (let sphereName of sphereNames) {
+    await seedSphereWordCloud(sphereName, emdros, bible);
+  }
 }
 
 async function seedSphereWordCounts(emdros, bible) {
@@ -693,6 +698,33 @@ async function seedSphereWordCounts(emdros, bible) {
           }
         });
       }
+
+      resolve();
+    }).catch((error) => {
+      console.log(error);
+    })
+  });
+}
+
+async function seedSphereWordCloud(sphereName, emdros, bible) {
+  const sphere = bible.spheres.find(sphere => sphere.key === SPHERE_MAP[sphereName]);
+  if (!sphere) {
+    return;
+  }
+
+  console.log(`Seeding Sphere: ${sphere.name} Word Cloud...`);
+  const query = `
+  {
+      "objectTypeName": "Token",
+      "feature": ["surface"],
+      "expression" : "is_word=true AND ${sphereName}=true"
+  }
+  `;
+
+  return new Promise((resolve, reject) => {
+    emdros.query(query, {count: true}).then((data) => {
+      const wordData = data["Token"]["surface"];
+      seedObjectWordCloud(sphere, wordData);
 
       resolve();
     }).catch((error) => {
