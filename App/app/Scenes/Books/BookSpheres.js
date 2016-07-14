@@ -17,7 +17,7 @@ import {
   Localizable
 } from '../../Common';
 
-import { SourcesBarChart, SpheresBarChart } from '../../Components/Charts';
+import { PieChart, SourcesBarChart, SpheresBarChart } from '../../Components/Charts';
 
 const Bible = require('../../Locale/en/NLT/SourceView.json');
 
@@ -92,10 +92,16 @@ export default class BookSpheres extends Component {
     const { book } = this.props;
     const wordCount = sphere.bookWordCount;
     const spherePercent = (wordCount / book.sphereWordCount) * 100;
+    const tintColor = Colors.spheres[sphere.key].tint;
 
     return (
       <View style={styles.listItemContainer}>
-        <View style={styles.pie}><Text style={styles.pieText}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text></View>
+        <PieChart
+          color={tintColor}
+          data={[spherePercent]}
+          label={Localizable.toPercentage(spherePercent, {precision: 0})}
+          size={57}
+        />
         <View style={styles.listItem}>
           <Text style={StyleSheet.styles.cell.title}>{sphere.name}</Text>
           <Text style={StyleSheet.styles.cell.valuetitle}>{Localizable.t('words.count', {count: wordCount, localizedCount: Localizable.toNumber(wordCount, {precision: 0})})}</Text>
@@ -120,15 +126,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-  },
-  pie: {
-    width: 57,
-    height: 57,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  pieText: {
-    fontSize: 17,
   },
   separator: {
     height: StyleSheet.hairlineWidth,
