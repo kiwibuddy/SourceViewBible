@@ -144,7 +144,7 @@ export default class DiscoverSpheres extends Component {
             </View>
             <View style={styles.statisticContainer} >
               <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-                <Text style={styles.statisticTitle}>{Localizable.t('words.count', {count: sphere.wordCount, localizedCount: Localizable.toNumber(sphere.wordCount, {precision: 0})})}</Text>
+                <Text style={styles.statisticTitle}>{Localizable.toNumber(sphere.wordCount, {precision: 0})}</Text>
                 <Text style={styles.statisticSubtitle}>Words</Text>
               </View>
             </View>
