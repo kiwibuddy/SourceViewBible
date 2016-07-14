@@ -136,7 +136,7 @@ export default class DiscoverBooks extends Component {
                 <Text style={styles.statisticTitle}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
                 <Text style={styles.statisticSubtitle}>Spheres</Text>
                 <SpheresBarChart
-                  style={{flex: 0, marginLeft: 4}}
+                  style={{flex: 0, marginLeft: 2}}
                   barStyle={{width: 2, height: 12, marginHorizontal: 1}}
                   horizontal={false}
                   data={[{family: book.sphereCounts.family}, {economics: book.sphereCounts.economics}, {government: book.sphereCounts.government}, {religion: book.sphereCounts.religion}, {education: book.sphereCounts.education}, {communication: book.sphereCounts.communication}, {celebration: book.sphereCounts.celebration}]}
@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
   statisticTitle: {
     fontSize: 11,
     color: Colors.tintColor,
-    marginRight: 3,
+    marginRight: 2,
   },
   statisticSubtitle: {
     flex: 1,
