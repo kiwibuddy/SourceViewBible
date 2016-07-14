@@ -111,7 +111,7 @@ export default class DiscoverBooks extends Component {
             style={styles.gradient}
           />
           <Icon
-            name="icon-books"
+            name="icon-books-filled"
             size={40}
             style={[styles.icon, {color: Colors.sources[book.principalSourceType].tint}]}
           />
