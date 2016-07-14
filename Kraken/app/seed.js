@@ -13,13 +13,13 @@ const BIBLE = {
   books: require('./books'),
   sources: [],
   spheres: [
-    { key: "family", name: "Family", bookCounts: {} },
-    { key: "economics", name: "Economics", bookCounts: {} },
-    { key: "government", name: "Government", bookCounts: {} },
-    { key: "religion", name: "Religion", bookCounts: {} },
-    { key: "education", name: "Education", bookCounts: {} },
-    { key: "communication", name: "Communication", bookCounts: {} },
-    { key: "celebration", name: "Celebration", bookCounts: {} },
+    { key: "family", name: "Family", bookCount: 0, bookCounts: {} },
+    { key: "economics", name: "Economics", bookCount: 0, bookCounts: {} },
+    { key: "government", name: "Government", bookCount: 0, bookCounts: {} },
+    { key: "religion", name: "Religion", bookCount: 0, bookCounts: {} },
+    { key: "education", name: "Education", bookCount: 0, bookCounts: {} },
+    { key: "communication", name: "Communication", bookCount: 0, bookCounts: {} },
+    { key: "celebration", name: "Celebration", bookCount: 0, bookCounts: {} },
   ]
 };
 
@@ -432,9 +432,12 @@ async function seedBookSphereWordCounts(emdros, bible) {
               const sphereData = spheresData[sphereName];
               const wordCount = sphereData.true || 0;
 
-              const sphere = bible.spheres.find(sphere => sphere.key === SPHERE_MAP[sphereName]);
-              if (sphere) {
-                sphere.bookCounts[book.key] = wordCount;
+              if (wordCount > 0) {
+                const sphere = bible.spheres.find(sphere => sphere.key === SPHERE_MAP[sphereName]);
+                if (sphere) {
+                  sphere.bookCounts[book.key] = wordCount;
+                  sphere.bookCount++;
+                }
               }
             });
           }
