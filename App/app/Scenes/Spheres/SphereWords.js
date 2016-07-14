@@ -6,9 +6,11 @@ const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithP
 
 import {
   Image,
+  ListView,
+  RecyclerViewBackedScrollView,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
 
 import {
@@ -25,7 +27,22 @@ type Props = {
   onPressWords: Function,
 };
 
+type State = {
+  dataSource: any
+};
+
 export default class SphereWords extends Component {
+  state: State;
+
+  constructor(props: Props) {
+    super(props);
+
+    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.key !== r2.key, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
+    this.state = {
+      dataSource: dataSource.cloneWithRows(props.sphere.words)
+    };
+  }
+
   render() {
     const { sphere } = this.props;
     const words = sphere.words;
@@ -64,16 +81,24 @@ export default class SphereWords extends Component {
             <Image source={require('../../Images/common/btn-expand.png')} />
           </TouchableOpacity>
         </WordCloud>
-        <View style={styles.listContainer}>
-          <View style={StyleSheet.styles.listItem}>
-            <Text style={StyleSheet.styles.cell.title}>Word</Text>
-            <Text style={StyleSheet.styles.cell.valuetitle}>0</Text>
-          </View>
-          <View style={styles.separator} />
-        </View>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this._renderRow}
+          renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+          renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
+        />
       </View>
     );
   }
+
+  _renderRow = (word: Object, sectionID: any, rowID: any) => {
+    return (
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
+        <Text style={StyleSheet.styles.cell.title}>{word.word}</Text>
+        <Text style={StyleSheet.styles.cell.valuetitle}>{Localizable.toNumber(word.wordCount, {precision: 0})}</Text>
+      </TouchableOpacity>
+    );
+  };
 }
 
 const styles = StyleSheet.create({

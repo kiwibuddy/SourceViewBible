@@ -39,7 +39,7 @@ export default class BookWords extends Component {
 
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.key !== r2.key, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     this.state = {
-      dataSource: dataSource.cloneWithRows(this.props.book.words)
+      dataSource: dataSource.cloneWithRows(props.book.words)
     };
   }
 
