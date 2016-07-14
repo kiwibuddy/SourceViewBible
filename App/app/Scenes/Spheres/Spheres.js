@@ -200,10 +200,17 @@ const styles = StyleSheet.create({
     width: CAROUSEL_ITEM_SIZE,
     height: CAROUSEL_ITEM_SIZE,
     borderRadius: CAROUSEL_ITEM_SIZE/2,
-    borderWidth: 1,
-    borderColor: 'white',
+    borderWidth: 0,
+    borderColor: '#B7C0C8',
     overflow:'hidden',
-    backgroundColor: '#D8D8D8',
+    backgroundColor: '#B7C0C8',
+    shadowColor: "black",
+    shadowOpacity: .5,
+    shadowRadius: 5,
+    shadowOffset: {
+      height: 0,
+      width: 0
+    },
   },
   carouselGraphContainer: {
     height: 2,
@@ -214,12 +221,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
   },
   sphereTitle: {
-    fontSize: 18,
+    fontSize: 21,
     fontWeight: 'bold',
-    color: '#59626a',
+    color: '#59626A',
   },
   sphereSubtitle: {
-
+    color: '#9B9B9B',
+    fontSize: 17,
   },
   keyline: {
     flex:0,
