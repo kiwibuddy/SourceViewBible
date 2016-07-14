@@ -5,6 +5,7 @@ import React, { Component, PropTypes } from 'react';
 const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
 
 import {
+  Image,
   ListView,
   Text,
   TouchableOpacity,
@@ -47,9 +48,9 @@ export default class Bookmarks extends Component {
   _getRows = () => {
     return (
       [
-        {key: '/Discover', title: 'Discover'},
-        {key: '/Books', title: 'Books'},
-        {key: '/Spheres', title: 'Spheres'},
+        {key: '/Discover', title: 'Discover', icon: require('../../Images/tabs/discover.png')},
+        {key: '/Books', title: 'Books', icon: require('../../Images/tabs/chapters.png')},
+        {key: '/Spheres', title: 'Spheres', icon: require('../../Images/tabs/spheres.png')},
       ]
     );
   };
@@ -87,6 +88,7 @@ export default class Bookmarks extends Component {
         onPress={() => this.props.onPressRoute(route)}
         style={styles.row}
       >
+        <Image source={route.icon} style={styles.icon} />
         <Text>{route.title}</Text>
       </TouchableOpacity>
     )
@@ -106,5 +108,8 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     padding: 10,
     backgroundColor: 'white',
+  },
+  icon: {
+    tintColor: Colors.tintColor,
   },
 });
