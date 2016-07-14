@@ -88,7 +88,7 @@ export default class Spheres extends Component {
           <View style={[styles.carouselGraph, {width: 150}]} />
         </View>
         <View style={StyleSheet.styles.statisticsContainer}>
-          <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={this.props.onPressBooks}>
+          <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.onPressBooks({sphere})}>
             <Text style={StyleSheet.styles.statisticTitle}>{sphere.bookCount}</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Books</Text>
           </TouchableOpacity>
@@ -98,7 +98,7 @@ export default class Spheres extends Component {
             <Text style={StyleSheet.styles.statisticSubtitle}>Sources</Text>
           </TouchableOpacity>
           <View style={styles.keyline} />
-          <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={this.props.onPressWords}>
+          <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.onPressWords({sphere})}>
             <Text style={StyleSheet.styles.statisticTitle}>{Localizable.toNumber(sphere.wordCount, {precision: 0})}</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Words</Text>
           </TouchableOpacity>
@@ -117,7 +117,7 @@ export default class Spheres extends Component {
           </View>
         </View>
         {bookRows}
-        <TouchableOpacity style={StyleSheet.styles.listItem} onPress={this.props.onPressBooks}>
+        <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => this.props.onPressBooks({sphere})}>
           <Text style={StyleSheet.styles.cell.titlemore}>View More</Text>
           <Image source={require('../../Images/common/disclosure.png')}  style={styles.disclosure} />
         </TouchableOpacity>
@@ -160,7 +160,7 @@ export default class Spheres extends Component {
     const spherePercent = (wordCount / book.wordCount) * 100;
 
     return (
-      <TouchableOpacity key={book.key} style={styles.section} onPress={() => this.props.onPressBook(book)}>
+      <TouchableOpacity key={book.key} style={styles.section} onPress={() => this.props.onPressBook({sphere, book})}>
         <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
           <View style={styles.sourcesLeftContainer}>
             <Text style={StyleSheet.styles.cell.titlemedium}>{book.name}</Text>
