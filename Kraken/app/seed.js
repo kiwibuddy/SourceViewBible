@@ -13,13 +13,13 @@ const BIBLE = {
   books: require('./books'),
   sources: [],
   spheres: [
-    { key: "family", name: "Family" },
-    { key: "economics", name: "Economics" },
-    { key: "government", name: "Government" },
-    { key: "religion", name: "Religion" },
-    { key: "education", name: "Education" },
-    { key: "communication", name: "Communication" },
-    { key: "celebration", name: "Celebration" },
+    { key: "family", name: "Family", bookCounts: {} },
+    { key: "economics", name: "Economics", bookCounts: {} },
+    { key: "government", name: "Government", bookCounts: {} },
+    { key: "religion", name: "Religion", bookCounts: {} },
+    { key: "education", name: "Education", bookCounts: {} },
+    { key: "communication", name: "Communication", bookCounts: {} },
+    { key: "celebration", name: "Celebration", bookCounts: {} },
   ]
 };
 
@@ -67,6 +67,13 @@ export async function kraken() {
 
 async function seed(emdros, bible) {
   console.log('Seeding...');
+
+  await seedBooks(emdros, bible);
+  await seedSpheres(emdros, bible);
+}
+
+async function seedBooks(emdros, bible) {
+  console.log('Seeding Books...');
 
   await seedChapters(emdros, bible);
   await seedSources(emdros, bible);
@@ -418,7 +425,19 @@ async function seedBookSphereWordCounts(emdros, bible) {
         const bookData = data["Book"]["DJHRef"][book.DJHRef];
         if (bookData != null) {
           const spheresData = bookData["Token"];
-          seedObjectSphereWordCounts(book, spheresData);
+          if (spheresData != null) {
+            seedObjectSphereWordCounts(book, spheresData);
+
+            Object.keys(spheresData).forEach((sphereName) => {
+              const sphereData = spheresData[sphereName];
+              const wordCount = sphereData.true || 0;
+
+              const sphere = bible.spheres.find(sphere => sphere.key === SPHERE_MAP[sphereName]);
+              if (sphere) {
+                sphere.bookCounts[book.key] = wordCount;
+              }
+            });
+          }
         }
       }
 
@@ -642,6 +661,10 @@ async function seedBookWordCloud(emdros, bible) {
       console.log(error);
     })
   });
+}
+
+async function seedSpheres(emdros, bible) {
+  // console.log('Seeding Spheres...');
 }
 
 function normalizeSources(emdros, bible) {
