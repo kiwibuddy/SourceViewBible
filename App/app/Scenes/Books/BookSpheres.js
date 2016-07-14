@@ -8,6 +8,7 @@ import {
   ListView,
   RecyclerViewBackedScrollView,
   Text,
+  TouchableOpacity,
   View
 } from 'react-native';
 
@@ -23,6 +24,7 @@ const Bible = require('../../Locale/en/NLT/SourceView.json');
 
 type Props = {
   book: Object,
+  onPressSphere: Function,
 };
 
 type State = {
@@ -95,7 +97,7 @@ export default class BookSpheres extends Component {
     const tintColor = Colors.spheres[sphere.key].tint;
 
     return (
-      <View style={styles.listItemContainer}>
+      <TouchableOpacity style={styles.listItemContainer} onPress={() => this.props.onPressSphere(sphere)}>
         <PieChart
           color={tintColor}
           slices={[{color: tintColor, value: wordCount}, {color: 'white', value: book.sphereWordCount}]}
@@ -107,7 +109,7 @@ export default class BookSpheres extends Component {
           <Text style={StyleSheet.styles.cell.title}>{sphere.name}</Text>
           <Text style={StyleSheet.styles.cell.valuetitle}>{Localizable.t('words.count', {count: wordCount, localizedCount: Localizable.toNumber(wordCount, {precision: 0})})}</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 }
