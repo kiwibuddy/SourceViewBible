@@ -13,13 +13,13 @@ const BIBLE = {
   books: require('./books'),
   sources: [],
   spheres: [
-    { key: "family", name: "Family", bookCount: 0, bookCounts: {} },
-    { key: "economics", name: "Economics", bookCount: 0, bookCounts: {} },
-    { key: "government", name: "Government", bookCount: 0, bookCounts: {} },
-    { key: "religion", name: "Religion", bookCount: 0, bookCounts: {} },
-    { key: "education", name: "Education", bookCount: 0, bookCounts: {} },
-    { key: "communication", name: "Communication", bookCount: 0, bookCounts: {} },
-    { key: "celebration", name: "Celebration", bookCount: 0, bookCounts: {} },
+    { key: "family", name: "Family", bookCount: 0, bookCounts: {}, wordCount: 0 },
+    { key: "economics", name: "Economics", bookCount: 0, bookCounts: {}, wordCount: 0 },
+    { key: "government", name: "Government", bookCount: 0, bookCounts: {}, wordCount: 0 },
+    { key: "religion", name: "Religion", bookCount: 0, bookCounts: {}, wordCount: 0 },
+    { key: "education", name: "Education", bookCount: 0, bookCounts: {}, wordCount: 0 },
+    { key: "communication", name: "Communication", bookCount: 0, bookCounts: {}, wordCount: 0 },
+    { key: "celebration", name: "Celebration", bookCount: 0, bookCounts: {}, wordCount: 0 },
   ]
 };
 
@@ -68,7 +68,7 @@ export async function kraken() {
 async function seed(emdros, bible) {
   console.log('Seeding...');
 
-  await seedBooks(emdros, bible);
+  // await seedBooks(emdros, bible);
   await seedSpheres(emdros, bible);
 }
 
@@ -667,7 +667,38 @@ async function seedBookWordCloud(emdros, bible) {
 }
 
 async function seedSpheres(emdros, bible) {
-  // console.log('Seeding Spheres...');
+  console.log('Seeding Spheres...');
+
+  await seedSphereWordCounts(emdros, bible);
+}
+
+async function seedSphereWordCounts(emdros, bible) {
+  console.log('Seeding Spheres Word Counts...');
+  const query = `
+  {
+      "objectTypeName": "Token",
+      "feature": ["family", "economics", "government", "religion", "education", "mediacom", "celebration"],
+      "expression" : "is_word=true"
+  }
+  `;
+
+  return new Promise((resolve, reject) => {
+    emdros.query(query, {count: true}).then((data) => {
+      const tokenData = data["Token"];
+      if (tokenData != null) {
+        Object.keys(tokenData).forEach(sphereName => {
+          const sphere = bible.spheres.find(sphere => sphere.key === SPHERE_MAP[sphereName]);
+          if (sphere) {
+            sphere.wordCount = tokenData[sphereName].true || 0;
+          }
+        });
+      }
+
+      resolve();
+    }).catch((error) => {
+      console.log(error);
+    })
+  });
 }
 
 function normalizeSources(emdros, bible) {
