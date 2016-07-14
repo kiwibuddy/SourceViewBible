@@ -24,6 +24,7 @@ const Bible = require('../../Locale/en/NLT/SourceView.json');
 
 type Props = {
   sphere?: Object,
+  onPressWords: Function,
 };
 
 type State = {
@@ -68,7 +69,7 @@ export default class Spheres extends Component {
             <Text style={StyleSheet.styles.statisticSubtitle}>Sources</Text>
           </TouchableOpacity>
           <View style={styles.keyline} />
-          <TouchableOpacity style={StyleSheet.styles.statisticContainer}>
+          <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={this.props.onPressWords}>
             <Text style={StyleSheet.styles.statisticTitle}>{Localizable.toNumber(sphere.wordCount, {precision: 0})}</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Words</Text>
           </TouchableOpacity>

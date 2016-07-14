@@ -28,6 +28,8 @@ import { ReadingTime } from '../../Common/NumberHelper';
 import Localizable from '../../Common/Localizable';
 
 const Bible = require('../../Locale/en/NLT/SourceView.json');
+Bible.wordCount = Bible.books.reduce((wordCount, book) => wordCount + book.wordCount, 0);
+
 const MAXIMUM_SPHERE_COUNT = 9;
 
 type Props = {
@@ -108,6 +110,7 @@ export default class DiscoverSpheres extends Component {
       return this._renderBlank();
     }
 
+    const spherePercent = (sphere.wordCount / Bible.wordCount) * 100;
     return (
       <TouchableOpacity style={styles.itemContainer} onPress={ () => this.props.onPressSphere(sphere) }>
         <View style={styles.item}>
@@ -118,7 +121,7 @@ export default class DiscoverSpheres extends Component {
           />
           <Image source={require('../../Images/discover/icon-books.png')}  style={[styles.icon, {tintColor: Colors.spheres[sphere.key].tint}]} />
           <Text style={styles.title}>{sphere.name}</Text>
-          <Text style={styles.subtitle}>0%</Text>
+          <Text style={styles.subtitle}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
           <View style={styles.keyline} />
           <View style={styles.statisticsContainer}>
             <View style={styles.statisticContainer} >

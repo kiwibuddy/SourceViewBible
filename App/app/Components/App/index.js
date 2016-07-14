@@ -144,7 +144,10 @@ export default class App extends Component {
       case '/Sources/Words':
         return <SourceWords />;
       case '/Spheres':
-        return <Spheres sphere={route.sphere} />;
+        return <Spheres
+          onPressWords={() => this._pushRoute({key: '/Spheres/Words', sphere: route.sphere, title: route.sphere.name })}
+          sphere={route.sphere}
+        />;
       case '/Spheres/Books':
         return <SphereBooks />;
       case '/Spheres/Passages':

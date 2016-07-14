@@ -55,7 +55,7 @@ export default class SphereWords extends Component {
     return (
       <View style={styles.container}>
         <WordCloud
-          backgroundColors={Colors.spheres['family'].gradient.big}
+          backgroundColors={Colors.spheres[sphere.key].gradient.big}
           style={styles.wordCloud}
         >
           <ParallaxMotionView intensity={5} style={[styles.parallax, {opacity: 0.8}]}>
