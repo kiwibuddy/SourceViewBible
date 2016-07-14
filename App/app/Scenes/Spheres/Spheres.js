@@ -5,6 +5,7 @@ import React, { Component, PropTypes } from 'react';
 const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
 
 import {
+  Dimensions,
   Image,
   ScrollView,
   Text,
@@ -18,9 +19,15 @@ import {
   Localizable
 } from '../../Common';
 
+// $FlowFixMe: Can't find os module extension
+import LinearGradient from 'react-native-linear-gradient';
 import Icon from '../../Components/Common/Icon';
 
 const Bible = require('../../Locale/en/NLT/SourceView.json');
+Bible.wordCount = Bible.books.reduce((wordCount, book) => wordCount + book.wordCount, 0);
+
+const WIDTH = Dimensions.get('window').width;
+const CAROUSEL_ITEM_SIZE = 80;
 
 type Props = {
   sphere?: Object,
@@ -50,11 +57,29 @@ export default class Spheres extends Component {
 
   render() {
     const { sphere } = this.state;
+    const spherePercent = (sphere.wordCount / Bible.wordCount) * 100;
 
     return (
       <ScrollView style={styles.container}>
-        <View style={styles.carouselContainer}>
-        </View>
+        <LinearGradient
+          colors={['#E1E9EE', '#FFFFFF']}
+          start={[0.5, 0.25]} end={[0.5, 1.0]}
+          style={styles.carouselContainer}
+        >
+          <View style={styles.carousel}>
+            <View style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE*1.2, right: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2) - (CAROUSEL_ITEM_SIZE/2.2), transform:[{scale:0.7}]}]} />
+            <View style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE*1.2, left: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2) - (CAROUSEL_ITEM_SIZE/2.2), transform:[{scale:0.7}]}]} />
+            <View style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE/1.25, right: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2.5) - (CAROUSEL_ITEM_SIZE*1.4), transform:[{scale:0.8}]}]} />
+            <View style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE/1.25, left: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2.5) - (CAROUSEL_ITEM_SIZE*1.4), transform:[{scale:0.8}]}]} />
+            <View style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE/2, right: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2.5) - (CAROUSEL_ITEM_SIZE), transform:[{scale:0.9}]}]} />
+            <View style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE/2, left: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2.5) - (CAROUSEL_ITEM_SIZE), transform:[{scale:0.9}]}]} />
+            <View style={[styles.carouselItem, {bottom: 0, left: WIDTH/2 - CAROUSEL_ITEM_SIZE/2}]} />
+          </View>
+          <View style={styles.carouselInfo}>
+            <Text style={styles.sphereTitle}>{sphere.name}</Text>
+            <Text style={styles.sphereSubtitle}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
+          </View>
+        </LinearGradient>
         <View style={styles.carouselGraphContainer}>
           <View style={[styles.carouselGraph, {width: 150}]} />
         </View>
@@ -148,6 +173,24 @@ const styles = StyleSheet.create({
     height: 250,
     backgroundColor: '#E1E9EE',
   },
+  carousel: {
+    flex: 1,
+  },
+  carouselInfo: {
+    backgroundColor: 'transparent',
+    alignItems: 'center',
+    marginVertical: 8,
+  },
+  carouselItem: {
+    position: 'absolute',
+    width: CAROUSEL_ITEM_SIZE,
+    height: CAROUSEL_ITEM_SIZE,
+    borderRadius: CAROUSEL_ITEM_SIZE/2,
+    borderWidth: 1,
+    borderColor: 'white',
+    overflow:'hidden',
+    backgroundColor: '#D8D8D8',
+  },
   carouselGraphContainer: {
     height: 2,
     backgroundColor: '#D8D8D8',
@@ -155,6 +198,14 @@ const styles = StyleSheet.create({
   carouselGraph: {
     height: 2,
     backgroundColor: 'red',
+  },
+  sphereTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#59626a',
+  },
+  sphereSubtitle: {
+
   },
   keyline: {
     flex:0,
