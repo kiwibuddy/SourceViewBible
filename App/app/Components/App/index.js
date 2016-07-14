@@ -151,13 +151,13 @@ export default class App extends Component {
           sphere={route.sphere}
         />;
       case '/Spheres/Books':
-        return <SphereBooks />;
+        return <SphereBooks sphere={route.sphere} />;
       case '/Spheres/Passages':
-        return <SpherePassages />;
+        return <SpherePassages sphere={route.sphere} />;
       case '/Spheres/Sources':
-        return <SphereSources />;
+        return <SphereSources sphere={route.sphere} />;
       case '/Spheres/Words':
-        return <SphereWords sphere={route.sphere}/>;
+        return <SphereWords sphere={route.sphere} />;
       default:
         return null;
     };

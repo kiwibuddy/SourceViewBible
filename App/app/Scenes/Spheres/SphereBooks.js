@@ -16,7 +16,13 @@ import {
   Localizable
 } from '../../Common';
 
+type Props = {
+  sphere: Object,
+};
+
 export default class SphereBooks extends Component {
+  props: Props;
+  
   render() {
     return (
       <View style={styles.container}>
@@ -38,9 +44,6 @@ export default class SphereBooks extends Component {
           <View style={StyleSheet.styles.statisticKeyline} />
         </View>
         <View style={styles.sphereBooksGraph}>
-        </View>
-        <View style={styles.sectionHeaderContainer}>
-          <Text style={StyleSheet.styles.sectionHeaderTitle}>OLD TESTAMENT</Text>
         </View>
         <TouchableOpacity style={styles.section}>
           <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
