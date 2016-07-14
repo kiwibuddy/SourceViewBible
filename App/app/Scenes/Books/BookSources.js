@@ -51,43 +51,15 @@ export default class BookSources extends Component {
 
   render() {
     const { book } = this.props
-    const narratorPercent = (book.sourceTypeCounts.narrator / book.wordCount) * 100;
-    const godPercent = (book.sourceTypeCounts.god / book.wordCount) * 100;
-    const leadPercent = (book.sourceTypeCounts.lead / book.wordCount) * 100;
-    const supportPercent = (book.sourceTypeCounts.support / book.wordCount) * 100;
 
     return (
       <View style={styles.container}>
-        <SourcesBarChart
-          style={styles.stackedBarChartHeader}
-          data={[book.sourceTypeCounts]}
-        />
-        <View style={StyleSheet.styles.statisticsContainer}>
-          <View style={StyleSheet.styles.statisticContainer}>
-            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(narratorPercent, {precision: 0})}</Text>
-            <Text style={StyleSheet.styles.statisticSubtitle}>Narrator</Text>
-          </View>
-          <View style={StyleSheet.styles.statisticKeyline} />
-          <View style={StyleSheet.styles.statisticContainer}>
-            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(godPercent, {precision: 0})}</Text>
-            <Text style={StyleSheet.styles.statisticSubtitle}>Divine</Text>
-          </View>
-          <View style={StyleSheet.styles.statisticKeyline} />
-          <View style={StyleSheet.styles.statisticContainer}>
-            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(leadPercent, {precision: 0})}</Text>
-            <Text style={StyleSheet.styles.statisticSubtitle}>Lead</Text>
-          </View>
-          <View style={StyleSheet.styles.statisticKeyline} />
-          <View style={StyleSheet.styles.statisticContainer}>
-            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(supportPercent, {precision: 0})}</Text>
-            <Text style={StyleSheet.styles.statisticSubtitle}>Support</Text>
-          </View>
-        </View>
         <ListView
           contentContainerStyle={styles.list}
           dataSource={this.state.dataSource}
           initialListSize={18}
           enableEmptySections={true}
+          renderHeader={this._renderHeader}
           renderRow={this._renderRow}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
@@ -141,6 +113,44 @@ export default class BookSources extends Component {
       </TouchableOpacity>
     );
   };
+
+  _renderHeader = (props: any) => {
+    const { book } = this.props;
+    const narratorPercent = (book.sourceTypeCounts.narrator / book.wordCount) * 100;
+    const godPercent = (book.sourceTypeCounts.god / book.wordCount) * 100;
+    const leadPercent = (book.sourceTypeCounts.lead / book.wordCount) * 100;
+    const supportPercent = (book.sourceTypeCounts.support / book.wordCount) * 100;
+
+    return (
+      <View>
+        <SourcesBarChart
+          style={styles.stackedBarChartHeader}
+          data={[book.sourceTypeCounts]}
+        />
+        <View style={StyleSheet.styles.statisticsContainer}>
+          <View style={StyleSheet.styles.statisticContainer}>
+            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(narratorPercent, {precision: 0})}</Text>
+            <Text style={StyleSheet.styles.statisticSubtitle}>Narrator</Text>
+          </View>
+          <View style={StyleSheet.styles.statisticKeyline} />
+          <View style={StyleSheet.styles.statisticContainer}>
+            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(godPercent, {precision: 0})}</Text>
+            <Text style={StyleSheet.styles.statisticSubtitle}>Divine</Text>
+          </View>
+          <View style={StyleSheet.styles.statisticKeyline} />
+          <View style={StyleSheet.styles.statisticContainer}>
+            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(leadPercent, {precision: 0})}</Text>
+            <Text style={StyleSheet.styles.statisticSubtitle}>Lead</Text>
+          </View>
+          <View style={StyleSheet.styles.statisticKeyline} />
+          <View style={StyleSheet.styles.statisticContainer}>
+            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(supportPercent, {precision: 0})}</Text>
+            <Text style={StyleSheet.styles.statisticSubtitle}>Support</Text>
+          </View>
+        </View>
+      </View>
+    );
+  }
 
   _onPressScripture = (source: Object) => {
     const occurrence = source.occurrences[0];
