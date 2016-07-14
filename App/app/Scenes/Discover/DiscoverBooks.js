@@ -26,6 +26,7 @@ import { SourcesBarChart, SpheresBarChart } from '../../Components/Charts';
 import PageControl from '../../Components/Common/PageControl';
 import { ReadingTime } from '../../Common/NumberHelper';
 import Localizable from '../../Common/Localizable';
+import Icon from '../../Components/Common/Icon';
 
 const Bible = require('../../Locale/en/NLT/SourceView.json');
 const MAXIMUM_BOOK_COUNT = 9;
@@ -109,7 +110,11 @@ export default class DiscoverBooks extends Component {
             start={[0.0, 0.25]} end={[0.5, 1.0]}
             style={styles.gradient}
           />
-          <Image source={require('../../Images/discover/icon-books.png')}  style={[styles.icon, {tintColor: Colors.sources[book.principalSourceType].tint}]} />
+          <Icon
+            name="icon-books"
+            size={40}
+            style={[styles.icon, {color: Colors.sources[book.principalSourceType].tint}]}
+          />
           <Text style={styles.bookTitle}>{book.name}</Text>
           <Text style={styles.bookReadTime}>{ReadingTime(book.wordCount)}</Text>
           <View style={styles.keyline} />
@@ -216,11 +221,9 @@ const styles = StyleSheet.create({
     overflow: 'hidden'
   },
   icon: {
-    width: 40,
-    height: 40,
     alignSelf: 'center',
     marginTop: 7,
-    tintColor: Colors.tintColor
+    color: Colors.tintColor
   },
   bookTitle: {
     flex: 0,
