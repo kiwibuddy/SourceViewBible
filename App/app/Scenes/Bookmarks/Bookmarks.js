@@ -54,7 +54,6 @@ export default class Bookmarks extends Component {
         '/Sources/Spheres',
         '/Sources/Words',
         '/Spheres',
-        '/Spheres/Overview',
         '/Spheres/Books',
         '/Spheres/Passages',
         '/Spheres/Sources',

@@ -33,7 +33,6 @@ import SourceConversations from '../../Scenes/Sources/SourceConversations';
 import SourceSpheres from '../../Scenes/Sources/SourceSpheres';
 import SourceWords from '../../Scenes/Sources/SourceWords';
 import Spheres from '../../Scenes/Spheres/Spheres';
-import SphereOverview from '../../Scenes/Spheres/SphereOverview';
 import SphereBooks from '../../Scenes/Spheres/SphereBooks';
 import SpherePassages from '../../Scenes/Spheres/SpherePassages';
 import SphereSources from '../../Scenes/Spheres/SphereSources';
@@ -144,8 +143,6 @@ export default class App extends Component {
         return <SourceWords />;
       case '/Spheres':
         return <Spheres />;
-      case '/Spheres/Overview':
-        return <SphereOverview />;
       case '/Spheres/Books':
         return <SphereBooks />;
       case '/Spheres/Passages':
