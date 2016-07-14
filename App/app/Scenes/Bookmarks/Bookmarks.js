@@ -47,10 +47,9 @@ export default class Bookmarks extends Component {
   _getRows = () => {
     return (
       [
-        '/Discover',
-        '/Books',
-        // '/Sources',
-        '/Spheres',
+        {key: '/Discover', title: 'Discover'},
+        {key: '/Books', title: 'Books'},
+        {key: '/Spheres', title: 'Spheres'},
       ]
     );
   };
@@ -82,13 +81,13 @@ export default class Bookmarks extends Component {
     );
   }
 
-  _renderRow = (rowData: any) => {
+  _renderRow = (route: Object) => {
     return (
       <TouchableOpacity
-        onPress={() => this.props.onPressRoute({key: rowData, title: rowData})}
+        onPress={() => this.props.onPressRoute(route)}
         style={styles.row}
       >
-        <Text>{rowData}</Text>
+        <Text>{route.title}</Text>
       </TouchableOpacity>
     )
   };
