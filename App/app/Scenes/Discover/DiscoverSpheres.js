@@ -54,7 +54,13 @@ export default class DiscoverSpheres extends Component {
   }
 
   componentDidMount() {
-    const spheres = Bible.spheres.slice(0, MAXIMUM_SPHERE_COUNT);
+    let spheres = Bible.spheres.slice(0, MAXIMUM_SPHERE_COUNT);
+    const delta = MAXIMUM_SPHERE_COUNT - spheres.length;
+    if (delta > 0) {
+      for (let i = 0; i < delta; i++) {
+        spheres.push({key: null});
+      }
+    }
 
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(spheres)
@@ -98,6 +104,10 @@ export default class DiscoverSpheres extends Component {
   }
 
   _renderSphere = (sphere: Object) => {
+    if (!sphere.key) {
+      return this._renderBlank();
+    }
+
     return (
       <TouchableOpacity style={styles.itemContainer} onPress={ () => this.props.onPressSphere(sphere) }>
         <View style={styles.item}>
@@ -134,6 +144,12 @@ export default class DiscoverSpheres extends Component {
       </TouchableOpacity>
     );
   };
+
+  _renderBlank = () => {
+    return (
+      <View style={[styles.itemContainer]} />
+    );
+  }
 
   _onScrollEnd = (e: Object) => {
     // making our events coming from android compatible to updateIndex logic
