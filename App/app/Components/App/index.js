@@ -130,7 +130,7 @@ export default class App extends Component {
         return <SourceOverview
           onPressBooks={() => this._pushRoute({key: '/Sources/Books', source: route.source, title: Localizable.t('source-books', {name: route.source.name})})}
           onPressConversations={() => this._pushRoute({key: '/Sources/Conversations', source: route.source, title: Localizable.t('source-conversations', {name: route.source.name})})}
-          onPressSource={(source) => this._pushRoute({key: '/Sources/Overview', source: source, title: source.name})}
+          onPressSource={(source) => source && this._pushRoute({key: '/Sources/Overview', source: source, title: source.name})}
           onPressSpheres={() => this._pushRoute({key: '/Sources/Spheres', source: route.source, title: Localizable.t('source-spheres', {name: route.source.name})})}
           onPressWords={() => this._pushRoute({key: '/Sources/Words', source: route.source, title: Localizable.t('source-words', {name: route.source.name})})}
           source={route.source}
