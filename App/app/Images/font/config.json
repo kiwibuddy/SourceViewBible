@@ -106,7 +106,7 @@
     },
     {
       "uid": "9d7e2d717669e5f9a4e0afcee60d782f",
-      "css": "icon-communications-filled",
+      "css": "icon-communication-filled",
       "code": 59404,
       "src": "custom_icons",
       "selected": true,
@@ -115,7 +115,7 @@
         "width": 1000
       },
       "search": [
-        "icon-communications"
+        "icon-communication"
       ]
     },
     {

@@ -26,6 +26,7 @@ import { SourcesBarChart, SpheresBarChart } from '../../Components/Charts';
 import PageControl from '../../Components/Common/PageControl';
 import { ReadingTime } from '../../Common/NumberHelper';
 import Localizable from '../../Common/Localizable';
+import Icon from '../../Components/Common/Icon';
 
 const Bible = require('../../Locale/en/NLT/SourceView.json');
 Bible.wordCount = Bible.books.reduce((wordCount, book) => wordCount + book.wordCount, 0);
@@ -111,6 +112,7 @@ export default class DiscoverSpheres extends Component {
     }
 
     const spherePercent = (sphere.wordCount / Bible.wordCount) * 100;
+    const iconName = `icon-${sphere.key}-filled`;
     return (
       <TouchableOpacity style={styles.itemContainer} onPress={ () => this.props.onPressSphere(sphere) }>
         <View style={styles.item}>
@@ -119,7 +121,11 @@ export default class DiscoverSpheres extends Component {
             start={[0.0, 0.25]} end={[0.5, 1.0]}
             style={styles.gradient}
           />
-          <Image source={require('../../Images/discover/icon-books.png')}  style={[styles.icon, {tintColor: Colors.spheres[sphere.key].tint}]} />
+          <Icon
+            name={iconName}
+            size={40}
+            style={[styles.icon, {color: Colors.spheres[sphere.key].tint}]}
+          />
           <Text style={styles.title}>{sphere.name}</Text>
           <Text style={styles.subtitle}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
           <View style={styles.keyline} />
@@ -226,11 +232,9 @@ const styles = StyleSheet.create({
     overflow: 'hidden'
   },
   icon: {
-    width: 40,
-    height: 40,
     alignSelf: 'center',
     marginTop: 7,
-    tintColor: Colors.tintColor
+    color: Colors.tintColor
   },
   title: {
     flex: 0,
