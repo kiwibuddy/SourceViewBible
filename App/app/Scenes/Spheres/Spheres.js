@@ -69,7 +69,7 @@ export default class Spheres extends Component {
           </TouchableOpacity>
           <View style={styles.keyline} />
           <TouchableOpacity style={StyleSheet.styles.statisticContainer}>
-            <Text style={StyleSheet.styles.statisticTitle}>0</Text>
+            <Text style={StyleSheet.styles.statisticTitle}>{Localizable.toNumber(sphere.wordCount, {precision: 0})}</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Words</Text>
           </TouchableOpacity>
         </View>
