@@ -150,7 +150,7 @@ export default class BookSources extends Component {
         </View>
       </View>
     );
-  }
+  };
 
   _onPressScripture = (source: Object) => {
     const occurrence = source.occurrences[0];
