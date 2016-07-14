@@ -28,7 +28,7 @@ Bible.wordCount = Bible.books.reduce((wordCount, book) => wordCount + book.wordC
 
 const WIDTH = Dimensions.get('window').width;
 const CAROUSEL_ITEM_SIZE = 80;
-const MAXIMUM_BOOK_COUNT = 10;
+const MAXIMUM_BOOK_COUNT = 5;
 
 type Props = {
   sphere?: Object,
