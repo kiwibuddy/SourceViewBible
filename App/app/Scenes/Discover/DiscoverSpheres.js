@@ -144,8 +144,8 @@ export default class DiscoverSpheres extends Component {
             </View>
             <View style={styles.statisticContainer} >
               <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-                <Text style={styles.statisticTitle}>{sphere.bookCount}</Text>
-                <Text style={styles.statisticSubtitle}>Books</Text>
+                <Text style={styles.statisticTitle}>{sphere.wordCount}</Text>
+                <Text style={styles.statisticSubtitle}>Words</Text>
               </View>
             </View>
           </View>
