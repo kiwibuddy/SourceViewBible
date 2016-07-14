@@ -17,6 +17,7 @@ import {
 } from '../../Common';
 
 import DiscoverBooks from './DiscoverBooks';
+import DiscoverSpheres from './DiscoverSpheres';
 
 type Props = {
   onPressBook: Function,
@@ -28,7 +29,7 @@ export default class Discovery extends Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        <DiscoverBooks onPressBooks={this.props.onPressBooks} onPressBook={this.props.onPressBook} onPressScripture={this.props.onPressScripture} />
+        <DiscoverBooks onPressBook={this.props.onPressBook} onPressBooks={this.props.onPressBooks} onPressScripture={this.props.onPressScripture} />
 
         <View style={styles.separator}></View>
 
@@ -36,11 +37,7 @@ export default class Discovery extends Component {
 
         <View style={styles.separator}></View>
 
-        {this._renderBlankSection("Spheres")}
-
-        <View style={styles.separator}></View>
-
-        {this._renderBlankSection("Words")}
+        <DiscoverSpheres onPressSphere={this.props.onPressSphere} onPressSpheres={this.props.onPressSpheres} />
 
       </ScrollView>
     );
