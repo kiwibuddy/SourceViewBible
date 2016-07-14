@@ -89,7 +89,7 @@ export default class Bookmarks extends Component {
         style={styles.row}
       >
         <Image source={route.icon} style={styles.icon} />
-        <Text>{route.title}</Text>
+        <Text style={StyleSheet.styles.cell.title}>{route.title}</Text>
       </TouchableOpacity>
     )
   };
@@ -102,14 +102,17 @@ const styles = StyleSheet.create({
   listView: {
     flex: 1,
     marginTop: NavigationBar.HEIGHT,
+    marginLeft: 15
   },
   row: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    padding: 10,
+    paddingVertical: 10,
     backgroundColor: 'white',
+    alignItems: 'center',
   },
   icon: {
     tintColor: Colors.tintColor,
+    marginRight: 10,
   },
 });
