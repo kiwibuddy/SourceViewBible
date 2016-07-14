@@ -28,9 +28,12 @@ Bible.wordCount = Bible.books.reduce((wordCount, book) => wordCount + book.wordC
 
 const WIDTH = Dimensions.get('window').width;
 const CAROUSEL_ITEM_SIZE = 80;
+const MAXIMUM_BOOK_COUNT = 10;
 
 type Props = {
   sphere?: Object,
+  onPressBook: Function,
+  onPressBooks: Function,
   onPressWords: Function,
 };
 
@@ -58,7 +61,8 @@ export default class Spheres extends Component {
   render() {
     const { sphere } = this.state;
     const spherePercent = (sphere.wordCount / Bible.wordCount) * 100;
-
+    const books = Object.keys(sphere.bookCounts).sort((a, b) => sphere.bookCounts[a] > sphere.bookCounts[b] ? -1 : 1).map(key => Bible.books.find(book => key === book.key)).slice(0, MAXIMUM_BOOK_COUNT);
+    const bookRows = books.map(book => this._renderBookRow(book));
     return (
       <ScrollView style={styles.container}>
         <LinearGradient
@@ -84,7 +88,7 @@ export default class Spheres extends Component {
           <View style={[styles.carouselGraph, {width: 150}]} />
         </View>
         <View style={StyleSheet.styles.statisticsContainer}>
-          <TouchableOpacity style={StyleSheet.styles.statisticContainer}>
+          <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={this.props.onPressBooks}>
             <Text style={StyleSheet.styles.statisticTitle}>{sphere.bookCount}</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Books</Text>
           </TouchableOpacity>
@@ -104,7 +108,7 @@ export default class Spheres extends Component {
         </TouchableOpacity>
         <View style={styles.contentContainer}>
           <Text style={[styles.contentBody, {marginBottom: -25, marginTop: -10}]}>Introduction</Text>
-          <Text style={styles.contentHeader}>How Family Shows Up in Scripture</Text>
+          <Text style={styles.contentHeader}>How {sphere.name} Shows Up in Scripture</Text>
           <Text style={[styles.contentBody, {marginTop: 5}]}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu imperdiet ipsum, at pellentesque arcu. Quisque eleifend enim id felis semper, id euismod dolor hendrerit. Sed fringilla dui eget enim pulvinar, vitae consequat dui bibendum. Maecenas nulla odio.</Text>
         </View>
         <View style={styles.listContainer}>
@@ -112,22 +116,8 @@ export default class Spheres extends Component {
             <Text style={StyleSheet.styles.cell.titlebold}>Top Books</Text>
           </View>
         </View>
-        <TouchableOpacity style={styles.section}>
-          <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
-            <View style={styles.sourcesLeftContainer}>
-              <Text style={StyleSheet.styles.cell.titlemedium}>Book Name</Text>
-            </View>
-            <View style={styles.sourcesRightContainer}>
-              <View style={[styles.sourcesBarChart, {height: 4, backgroundColor: '#EDEDED'}]} />
-              <View style={styles.dataPair}>
-                <Text style={[StyleSheet.styles.cell.percentage, {color: 'red'}]}>0%</Text>
-                <Text style={StyleSheet.styles.cell.subtitle}>0 words</Text>
-              </View>
-            </View>
-          </View>
-          <View style={[StyleSheet.styles.separator, {marginLeft: 0}]}></View>
-        </TouchableOpacity>
-        <TouchableOpacity style={StyleSheet.styles.listItem}>
+        {bookRows}
+        <TouchableOpacity style={StyleSheet.styles.listItem} onPress={this.props.onPressBooks}>
           <Text style={StyleSheet.styles.cell.titlemore}>View More</Text>
           <Image source={require('../../Images/common/disclosure.png')}  style={styles.disclosure} />
         </TouchableOpacity>
@@ -163,6 +153,30 @@ export default class Spheres extends Component {
       </ScrollView>
     );
   }
+
+  _renderBookRow = (book: Object) => {
+    const { sphere } = this.state;
+    const wordCount = sphere.bookCounts[book.key];
+    const spherePercent = (wordCount / book.wordCount) * 100;
+
+    return (
+      <TouchableOpacity key={book.key} style={styles.section} onPress={() => this.props.onPressBook(book)}>
+        <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
+          <View style={styles.sourcesLeftContainer}>
+            <Text style={StyleSheet.styles.cell.titlemedium}>{book.name}</Text>
+          </View>
+          <View style={styles.sourcesRightContainer}>
+            <View style={[styles.sourcesBarChart, {height: 4, backgroundColor: '#EDEDED'}]} />
+            <View style={styles.dataPair}>
+              <Text style={[StyleSheet.styles.cell.percentage, {color: 'red'}]}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
+              <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('words.count', {count: wordCount, localizedCount: Localizable.toNumber(wordCount, {precision: 0})})}</Text>
+            </View>
+          </View>
+        </View>
+        <View style={[StyleSheet.styles.separator, {marginLeft: 0}]}></View>
+      </TouchableOpacity>
+    );
+  };
 }
 
 const styles = StyleSheet.create({

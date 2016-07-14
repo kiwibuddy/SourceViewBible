@@ -26,31 +26,9 @@ type Props = {
 };
 
 export default class SphereWords extends Component {
-  constructor(props: Props) {
-    super(props);
-  }
-
   render() {
     const { sphere } = this.props;
-    const words = [
-      {word: 'Lorem'},
-      {word: 'Lorem'},
-      {word: 'Lorem'},
-      {word: 'Lorem'},
-      {word: 'Lorem'},
-      {word: 'Lorem'},
-      {word: 'Lorem'},
-      {word: 'Lorem'},
-      {word: 'Lorem'},
-      {word: 'Lorem'},
-      {word: 'Lorem'},
-      {word: 'Lorem'},
-      {word: 'Lorem'},
-      {word: 'Lorem'},
-      {word: 'Lorem'},
-      {word: 'Lorem'},
-      {word: 'Lorem'},
-    ];
+    const words = sphere.words;
 
     return (
       <View style={styles.container}>

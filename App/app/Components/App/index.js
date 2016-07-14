@@ -145,6 +145,8 @@ export default class App extends Component {
         return <SourceWords />;
       case '/Spheres':
         return <Spheres
+          onPressBook={(book) => {}}
+          onPressBooks={() => this._pushRoute({key: '/Spheres/Books', sphere: route.sphere, title: route.sphere.name })}
           onPressWords={() => this._pushRoute({key: '/Spheres/Words', sphere: route.sphere, title: route.sphere.name })}
           sphere={route.sphere}
         />;
@@ -155,7 +157,7 @@ export default class App extends Component {
       case '/Spheres/Sources':
         return <SphereSources />;
       case '/Spheres/Words':
-        return <SphereWords />;
+        return <SphereWords sphere={route.sphere}/>;
       default:
         return null;
     };
