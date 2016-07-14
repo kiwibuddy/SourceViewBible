@@ -20,8 +20,36 @@ import {
 
 import Icon from '../../Components/Common/Icon';
 
+const Bible = require('../../Locale/en/NLT/SourceView.json');
+
+type Props = {
+  sphere?: Object,
+};
+
+type State = {
+  sphere: Object
+};
+
 export default class Spheres extends Component {
+  props: Props;
+  state: State;
+
+  constructor(props: Props) {
+    super(props);
+
+    let sphere = null;
+    if (props.sphere) {
+      sphere = props.sphere;
+    } else {
+      sphere = Bible.spheres[0];
+    }
+
+    this.state = {sphere};
+  }
+
   render() {
+    const { sphere } = this.state;
+
     return (
       <ScrollView style={styles.container}>
         <View style={styles.carouselContainer}>
@@ -31,7 +59,7 @@ export default class Spheres extends Component {
         </View>
         <View style={StyleSheet.styles.statisticsContainer}>
           <TouchableOpacity style={StyleSheet.styles.statisticContainer}>
-            <Text style={StyleSheet.styles.statisticTitle}>0</Text>
+            <Text style={StyleSheet.styles.statisticTitle}>{sphere.bookCount}</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Books</Text>
           </TouchableOpacity>
           <View style={styles.keyline} />

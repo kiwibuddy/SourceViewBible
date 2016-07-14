@@ -144,7 +144,7 @@ export default class App extends Component {
       case '/Sources/Words':
         return <SourceWords />;
       case '/Spheres':
-        return <Spheres />;
+        return <Spheres sphere={route.sphere} />;
       case '/Spheres/Books':
         return <SphereBooks />;
       case '/Spheres/Passages':
