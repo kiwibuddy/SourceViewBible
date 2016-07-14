@@ -98,9 +98,10 @@ export default class BookSpheres extends Component {
       <View style={styles.listItemContainer}>
         <PieChart
           color={tintColor}
-          data={[spherePercent]}
+          slices={[{color: tintColor, value: wordCount}, {color: 'white', value: book.sphereWordCount}]}
           label={Localizable.toPercentage(spherePercent, {precision: 0})}
           size={57}
+          style={styles.pie}
         />
         <View style={styles.listItem}>
           <Text style={StyleSheet.styles.cell.title}>{sphere.name}</Text>
@@ -132,4 +133,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.separator,
     marginLeft: 8,
   },
+  pie: {
+    margin: 8,
+  }
 });
