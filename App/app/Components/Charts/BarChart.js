@@ -1,0 +1,83 @@
+/* @flow */
+'use strict';
+
+import React, { Component, PropTypes } from 'react';
+import { View } from 'react-native';
+import ColorPropType from 'ColorPropType';
+
+import StyleSheet from '../../Common/StyleSheet';
+import Colors from '../../Common/Colors';
+
+const BarChart = (props: Object) => {
+  const chartStyle = [styles.chart, props.style];
+  const stackedBarStyle = [styles.stackedBar, {flexDirection: props.horizontal ? 'row' : 'column'}, props.barStyle];
+  const bars = (props.horizontal ? props.bars : props.bars.slice(0).reverse());
+
+  bars.forEach((bar, index) => {
+    if (bar.slices != null) {
+      bar.value = bar.slices.reduce((barValue, slice) => barValue + slice.value, 0);
+    } else {
+      bar.slices = [{color: bar.color, value: bar.value}];
+    }
+  });
+
+  const maxChartValue = props.maxChartValue || bars.reduce((maxChartValue, bar) => bar.value);
+
+  const barGraphs = bars.map((bar, barIndex) => {
+    const barGraph = bar.slices.map((slice) => <View key={'bar-slice-' + slice} style={{backgroundColor: slice.color, flex: slice.value}} />);
+
+    const delta = maxChartValue - bar.value;
+    const deltaBarGraph = delta > 0 ? <View key='deltaBar' style={[styles.deltaBar, props.deltaStyle, {flex: delta}]} /> : null;
+    let chart = null;
+    if (props.horizontal) {
+      chart = [barGraph, deltaBarGraph];
+    } else {
+      chart = [deltaBarGraph, barGraph];
+    }
+    return (
+      <View key={'bar-' + barIndex} style={stackedBarStyle}>
+        {chart}
+      </View>
+    )
+  });
+
+  return (
+    <View style={chartStyle}>
+      {barGraphs}
+    </View>
+  );
+};
+
+BarChart.propTypes = {
+  bars: PropTypes.arrayOf(PropTypes.shape({
+    color: ColorPropType,
+    value: PropTypes.number.isRequired,
+    slices: PropTypes.arrayOf(PropTypes.shape({
+      color: ColorPropType,
+      value: PropTypes.number.isRequired,
+    })),
+  })).isRequired,
+  barStyle: PropTypes.any,
+  deltaStyle: PropTypes.any,
+  horizontal: PropTypes.bool,
+  style: PropTypes.any,
+};
+
+BarChart.defaultProps = {
+  horizontal: true
+}
+
+const styles = StyleSheet.create({
+  chart: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  deltaBar: {
+    backgroundColor: '#ededed',
+  },
+  stackedBar: {
+    flex: 1,
+  }
+});
+
+export default BarChart;

@@ -21,6 +21,7 @@ import {
 
 // $FlowFixMe: Can't find os module extension
 import LinearGradient from 'react-native-linear-gradient';
+import { BarChart } from '../../Components/Charts';
 import Icon from '../../Components/Common/Icon';
 
 const Bible = require('../../Locale/en/NLT/SourceView.json');
@@ -166,9 +167,14 @@ export default class Spheres extends Component {
             <Text style={StyleSheet.styles.cell.titlemedium}>{book.name}</Text>
           </View>
           <View style={styles.sourcesRightContainer}>
-            <View style={[styles.sourcesBarChart, {height: 4, backgroundColor: '#EDEDED'}]} />
+            <BarChart
+              bars={[{color: Colors.tintColor, value: spherePercent}]}
+              deltaStyle={styles.barChartDelta}
+              maxChartValue={100}
+              style={styles.sourcesBarChart}
+            />
             <View style={styles.dataPair}>
-              <Text style={[StyleSheet.styles.cell.percentage, {color: 'red'}]}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
+              <Text style={[StyleSheet.styles.cell.percentage, {color: Colors.tintColor}]}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
               <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('words.count', {count: wordCount, localizedCount: Localizable.toNumber(wordCount, {precision: 0})})}</Text>
             </View>
           </View>
@@ -341,8 +347,11 @@ const styles = StyleSheet.create({
     marginRight: 5
   },
   sourcesBarChart: {
-    height: 4,
     flex: 0,
+    height: 4,
     marginBottom: 7,
+  },
+  barChartDelta: {
+    backgroundColor: '#ffdcda',
   },
 });
