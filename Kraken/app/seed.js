@@ -44,6 +44,8 @@ const SPHERE_MAP = {
   "celebration": "celebration"
 };
 
+const SPHERE_KEYS = BIBLE.spheres.map(sphere => Object.keys(SPHERE_MAP).find(key => SPHERE_MAP[key] === sphere.key));
+
 export async function kraken() {
   console.log('Hello!');
 
@@ -214,41 +216,6 @@ async function seedSourceOccurrences(emdros, bible) {
                   source.occurrences.push({
                     chapterNumber: chapterNumber
                   });
-
-                  // const monadData = sourceData[sourceName]["Token"]["self"];
-                  // if (monadData != null) {
-                  //   let firstMonad = null;
-                  //   Object.keys(monadData).sort((a, b) => a > b ? 1 : -1).forEach((lastMonad) => {
-                  //     if (firstMonad == null) firstMonad = lastMonad;
-                  //
-                  //     if (lastMonad != firstMonad && lastMonad - 1 != firstMonad) {
-                  //       const occurrence = {
-                  //         chapter: chapterNumber,
-                  //         monadSet: null
-                  //       }
-                  //
-                  //       const query = `
-                  //         SELECT ALL OBJECTS
-                  //         WHERE
-                  //         [Chapter DJHBook='${book.DJHRef}' AND chapter = ${chapterNumber}
-                  //           [Source FOCUS source_name='${sourceName}'
-                  //             [Token self = ${firstMonad}]
-                  //           ]
-                  //         ]
-                  //       `;
-                  //
-                  //       emdros.monadSet({query, useOnlyFocusObjects: true}).then(monadSet => {
-                  //         occurrence.monadSet = monadSet;
-                  //       }).catch(error => {
-                  //       });
-                  //
-                  //       source.occurrences.push(occurrence);
-                  //       // console.log(`${book.name} - ${chapterNumber} - ${sourceName} occurrence {${firstMonad}, ${lastMonad}}`);
-                  //     }
-                  //
-                  //     firstMonad = lastMonad;
-                  //   });
-                  // }
                 });
               }
             });
@@ -427,19 +394,6 @@ async function seedBookSphereWordCounts(emdros, bible) {
           const spheresData = bookData["Token"];
           if (spheresData != null) {
             seedObjectSphereWordCounts(book, spheresData);
-
-            Object.keys(spheresData).forEach((sphereName) => {
-              const sphereData = spheresData[sphereName];
-              const wordCount = sphereData.true || 0;
-
-              if (wordCount > 0) {
-                const sphere = bible.spheres.find(sphere => sphere.key === SPHERE_MAP[sphereName]);
-                if (sphere) {
-                  sphere.bookCounts[book.key] = wordCount;
-                  sphere.bookCount++;
-                }
-              }
-            });
           }
         }
       }
@@ -453,13 +407,15 @@ async function seedBookSphereWordCounts(emdros, bible) {
 
 async function seedBookSphereWordCount(emdros, bible) {
   console.log('Seeding Book Sphere Word Count...');
+
+  const sphereExpression = SPHERE_KEYS.map(key => `${key}=true`).join(' OR ');
   const query = `
   {
     "objectTypeName": "Book",
     "feature": "DJHRef",
     "buckets": {
       "objectTypeName": "Token",
-      "expression" : "is_word=true AND (family=true OR economics=true OR government=true OR religion=true OR education=true OR mediacom=true OR celebration=true)"
+      "expression" : "is_word=true AND (${sphereExpression})"
     }
   }
   `;
@@ -539,6 +495,8 @@ async function seedChapterSourceWordCounts(emdros, bible) {
 
 async function seedChapterSphereWordCount(emdros, bible) {
   console.log('Seeding Chapter Sphere Word Count...');
+
+  const sphereExpression = SPHERE_KEYS.map(key => `${key}=true`).join(' OR ');
   const query = `
   {
     "objectTypeName": "Book",
@@ -548,7 +506,7 @@ async function seedChapterSphereWordCount(emdros, bible) {
       "feature": "chapter",
       "buckets": {
         "objectTypeName": "Token",
-        "expression" : "is_word=true AND (family=true OR economics=true OR government=true OR religion=true OR education=true OR mediacom=true OR celebration=true)"
+        "expression" : "is_word=true AND (${sphereExpression})"
       }
     }
   }
@@ -578,6 +536,8 @@ async function seedChapterSphereWordCount(emdros, bible) {
 
 async function seedChapterSphereWordCounts(emdros, bible) {
   console.log('Seeding Chapter Sphere Word Counts...');
+
+  const sphereFeatures = SPHERE_KEYS.map(key => `"${key}"`).join(', ');
   const query = `
   {
     "objectTypeName": "Book",
@@ -587,7 +547,7 @@ async function seedChapterSphereWordCounts(emdros, bible) {
       "feature": "chapter",
       "buckets": {
         "objectTypeName": "Token",
-        "feature": ["family", "economics", "government", "religion", "education", "mediacom", "celebration"],
+        "feature": [${sphereFeatures}],
         "expression" : "is_word=true"
       }
     }
@@ -679,30 +639,30 @@ async function seedSpheres(emdros, bible) {
 
 async function seedSphereWordCounts(emdros, bible) {
   console.log('Seeding Spheres Word Counts...');
-  const query = `
-  {
-      "objectTypeName": "Token",
-      "feature": ["family", "economics", "government", "religion", "education", "mediacom", "celebration"],
-      "expression" : "is_word=true"
-  }
-  `;
 
   return new Promise((resolve, reject) => {
-    emdros.query(query, {count: true}).then((data) => {
-      const tokenData = data["Token"];
-      if (tokenData != null) {
-        Object.keys(tokenData).forEach(sphereName => {
-          const sphere = bible.spheres.find(sphere => sphere.key === SPHERE_MAP[sphereName]);
-          if (sphere) {
-            sphere.wordCount = tokenData[sphereName].true || 0;
+    SPHERE_KEYS.forEach(key => {
+      const sphere = bible.spheres.find(sphere => sphere.key === SPHERE_MAP[key]);
+      if (sphere) {
+        let bookCount = 0;
+        let totalWordCount = 0;
+
+        bible.books.forEach(book => {
+          const wordCount = book.sphereCounts[sphere.key] || 0;
+          sphere.bookCounts[book.key] = wordCount;
+
+          if (wordCount > 0) {
+            bookCount++;
+            totalWordCount += wordCount;
           }
         });
-      }
 
-      resolve();
-    }).catch((error) => {
-      console.log(error);
-    })
+        sphere.bookCount = bookCount;
+        sphere.wordCount = totalWordCount;
+      }
+    });
+
+    resolve();
   });
 }
 
