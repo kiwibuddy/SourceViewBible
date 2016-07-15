@@ -85,7 +85,7 @@ export default class SourceOverview extends Component {
         <View style={[StyleSheet.styles.statisticsContainer, {marginTop: 25}]}>
           <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={this.props.onPressBooks}>
             <Text style={StyleSheet.styles.statisticTitle}>0</Text>
-            <Text style={StyleSheet.styles.statisticSubtitle}>Book</Text>
+            <Text style={StyleSheet.styles.statisticSubtitle}>Books</Text>
           </TouchableOpacity>
           <View style={StyleSheet.styles.statisticKeyline} />
           <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={this.props.onPressConversations}>
