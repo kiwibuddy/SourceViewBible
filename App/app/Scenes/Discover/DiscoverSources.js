@@ -29,6 +29,7 @@ import Localizable from '../../Common/Localizable';
 import Icon from '../../Components/Common/Icon';
 
 const Bible = require('../../Locale/en/NLT/SourceView.json');
+Bible.wordCount = Bible.books.reduce((wordCount, book) => wordCount + book.wordCount, 0);
 const MAXIMUM_SOURCE_COUNT = 9;
 
 type Props = {
@@ -111,6 +112,7 @@ export default class DiscoverSources extends Component {
       "god": "avatar-divine",
     };
 
+    const sourcePercent = (source.wordCount / Bible.wordCount) * 100;
     const sourceType = SOURCE_TYPE_MAP[source.name] || 'support';
     const iconName = ICON_MAP[sourceType] || 'avatar-human-group';
 
@@ -128,7 +130,7 @@ export default class DiscoverSources extends Component {
             style={[styles.icon, {color: Colors.sources[sourceType].tint}]}
           />
           <Text style={styles.sourceTitle}>{source.name}</Text>
-          <Text style={styles.sourceReadTime}>{ReadingTime(source.wordCount)}</Text>
+          <Text style={styles.sourceReadTime}>{Localizable.toPercentage(sourcePercent, {precision: 0})}</Text>
           <View style={styles.keyline} />
           <View style={styles.statisticsContainer}>
             <View style={styles.statisticContainer} >
