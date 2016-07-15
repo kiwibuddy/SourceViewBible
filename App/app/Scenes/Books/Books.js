@@ -47,13 +47,13 @@ const BOOKS_SORTED_BY_ALPHABET = Bible.books.slice(0).sort((a, b) => a.name > b.
 const BOOKS_SORTED_BY_PRINCIPALITY = Bible.books.slice(0).sort((a, b) => a.wordCount > b.wordCount ? -1 : 1);
 const MAX_BOOK_WORD_COUNT = Math.max.apply(Math, Bible.books.map(book => book.wordCount));
 
+type Props = {
+  onPressBook: Function,
+};
+
 type State = {
   dataSource: any,
   selectedSegmentIndex: number,
-};
-
-type Props = {
-  onPressBook: Function,
 };
 
 export default class Books extends Component {

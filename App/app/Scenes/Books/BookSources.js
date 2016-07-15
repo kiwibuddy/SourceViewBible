@@ -62,7 +62,7 @@ export default class BookSources extends Component {
           renderHeader={this._renderHeader}
           renderRow={this._renderRow}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
-          renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
+          renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={[StyleSheet.styles.separator, {marginLeft: 0}]} />}
         />
       </View>
     );
@@ -109,7 +109,6 @@ export default class BookSources extends Component {
             <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('words.count', {count: source.wordCount, localizedCount: Localizable.toNumber(source.wordCount, {precision: 0})})}</Text>
           </View>
         </View>
-        <View style={[StyleSheet.styles.separator, {marginLeft: 0}]}></View>
       </TouchableOpacity>
     );
   };

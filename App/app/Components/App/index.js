@@ -130,7 +130,9 @@ export default class App extends Component {
           chapterNumber={route.chapterNumber || 1
         }/>;
       case '/Sources':
-        return <Sources />;
+        return <Sources
+          onPressSource={(source) => source && this._pushRoute({key: '/Sources/Overview', source: source, title: source.name})}
+        />;
       case '/Sources/Overview':
         return <SourceOverview
           onPressBooks={() => this._pushRoute({key: '/Sources/Books', source: route.source, title: Localizable.t('source-books', {name: route.source.name})})}
