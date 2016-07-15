@@ -143,13 +143,21 @@ export default class App extends Component {
           source={route.source}
         />;
       case '/Sources/Books':
-        return <SourceBooks />;
+        return <SourceBooks
+          source={route.source}
+        />;
       case '/Sources/Conversations':
-        return <SourceConversations />;
+        return <SourceConversations
+          source={route.source}
+        />;
       case '/Sources/Spheres':
-        return <SourceSpheres />;
+        return <SourceSpheres
+          source={route.source}
+        />;
       case '/Sources/Words':
-        return <SourceWords />;
+        return <SourceWords
+          source={route.source}
+        />;
       case '/Spheres':
         return <Spheres
           onPressBook={({sphere, book}) => this._pushRoute({key: '/Books/Overview', book: book, title: Localizable.t('book-overview', {name: book.name})})}
