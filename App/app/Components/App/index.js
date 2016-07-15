@@ -118,6 +118,8 @@ export default class App extends Component {
           onPressBooks={() => this._pushRoute({key: '/Books', title: Localizable.t('books')})}
           onPressScripture={({book, chapterNumber}) => this._pushRoute({key: '/Reader', book, chapterNumber, title: book.name})}
           onPressSphere={sphere => this._pushRoute({key: '/Spheres', sphere: sphere, title: Localizable.t('spheres.text')})}
+          onPressSource={(source) => this._pushRoute({key: '/Sources/Overview', source: source, title: source.name})}
+          onPressSources={() => this._pushRoute({key: '/Sources', title: Localizable.t('sources.text')})}
           onPressSpheres={() => this._pushRoute({key: '/Spheres', title: Localizable.t('spheres.text')})}
         />;
       case '/DiscoveryCenter':

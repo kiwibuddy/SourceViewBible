@@ -17,6 +17,7 @@ import {
 } from '../../Common';
 
 import DiscoverBooks from './DiscoverBooks';
+import DiscoverSources from './DiscoverSources';
 import DiscoverSpheres from './DiscoverSpheres';
 
 type Props = {
@@ -33,7 +34,7 @@ export default class Discovery extends Component {
 
         <View style={styles.separator}></View>
 
-        {this._renderBlankSection("Sources")}
+        <DiscoverSources onPressSource={this.props.onPressSource} onPressSources={this.props.onPressSources} />
 
         <View style={styles.separator}></View>
 
