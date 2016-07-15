@@ -55,7 +55,7 @@ export default class DiscoverSources extends Component {
   }
 
   componentDidMount() {
-    const sources = Bible.sources.slice(0).sort((a, b) => a.sourceCount > b.sourceCount ? -1 : 1).slice(0, MAXIMUM_SOURCE_COUNT);
+    const sources = Bible.sources.slice(0).sort((a, b) => a.wordCount > b.wordCount ? -1 : 1).slice(0, MAXIMUM_SOURCE_COUNT);
 
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(sources)
@@ -100,20 +100,32 @@ export default class DiscoverSources extends Component {
   }
 
   _renderSource = (source: Object) => {
-    const spherePercent = (source.sphereWordCount / source.wordCount) * 100;
+    const SOURCE_TYPE_MAP = {
+      "The Narrator": "narrator",
+      "God": "god",
+      "Jesus": "god"
+    };
+
+    const ICON_MAP = {
+      "narrator": "avatar-narrator",
+      "god": "avatar-divine",
+    };
+
+    const sourceType = SOURCE_TYPE_MAP[source.name] || 'support';
+    const iconName = ICON_MAP[sourceType] || 'avatar-human-group';
 
     return (
       <TouchableOpacity key={'source-' + source.key} style={styles.itemContainer} onPress={ () => this.props.onPressSource(source) }>
         <View style={styles.item}>
           <LinearGradient
-            colors={Colors.sources[source.principalSourceType].gradient.tiny}
+            colors={Colors.sources[sourceType].gradient.tiny}
             start={[0.0, 0.25]} end={[0.5, 1.0]}
             style={styles.gradient}
           />
           <Icon
-            name="icon-sources-filled"
+            name={iconName}
             size={40}
-            style={[styles.icon, {color: Colors.sources[source.principalSourceType].tint}]}
+            style={[styles.icon, {color: Colors.sources[sourceType].tint}]}
           />
           <Text style={styles.sourceTitle}>{source.name}</Text>
           <Text style={styles.sourceReadTime}>{ReadingTime(source.wordCount)}</Text>
@@ -127,20 +139,14 @@ export default class DiscoverSources extends Component {
                   style={{flex: 0, marginLeft: 4}}
                   barStyle={{width: 2, height: 12, marginHorizontal: 1}}
                   horizontal={false}
-                  data={[{narrator: source.sourceTypeCounts.narrator}, {god: source.sourceTypeCounts.god}, {lead: source.sourceTypeCounts.lead}, {support: source.sourceTypeCounts.support}]}
+                  data={[{narrator: 1}, {god: 1}, {lead: 1}, {support: 1}]}
                 />
               </View>
             </View>
             <View style={styles.statisticContainer} >
               <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-                <Text style={styles.statisticTitle}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
-                <Text style={styles.statisticSubtitle}>Spheres</Text>
-                <SpheresBarChart
-                  style={{flex: 0, marginLeft: 2}}
-                  barStyle={{width: 2, height: 12, marginHorizontal: 1}}
-                  horizontal={false}
-                  data={[{family: source.sphereCounts.family}, {economics: source.sphereCounts.economics}, {government: source.sphereCounts.government}, {religion: source.sphereCounts.religion}, {education: source.sphereCounts.education}, {communication: source.sphereCounts.communication}, {celebration: source.sphereCounts.celebration}]}
-                />
+                <Text style={styles.statisticTitle}>{Localizable.toNumber(source.wordCount, {precision: 0})}</Text>
+                <Text style={styles.statisticSubtitle}>Words</Text>
               </View>
             </View>
           </View>

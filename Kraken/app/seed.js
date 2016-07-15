@@ -24,7 +24,7 @@ const BIBLE = {
 };
 
 const STOP_WORDS = ["a","able","about","across","after","all","almost","also","am","among","an","and","any","are","as","at","be","because","been","but","by","can","cannot","could","dear","did","do","does","either","else","ever","every","for","from","get","got","had","has","have","he","her","hers","him","his","how","however","i","if","in","into","is","it","its","just","least","let","like","likely","may","me","might","most","must","my","neither","no","nor","not","of","off","often","on","only","or","other","our","own","rather","s","said","say","says","she","should","since","so","some","than","that","the","their","them","then","there","these","they","this","tis","to","too","twas","us","wants","was","we","were","what","when","where","which","while","who","whom","why","will","with","would","yet","you","your"];
-const WORD_CLOUD_LIMIT = 100;
+const WORD_CLOUD_LIMIT = 20;
 const MINIMUM_WORD_LENGTH = 2;
 
 const SOURCE_TYPE_MAP = {
@@ -71,6 +71,7 @@ async function seed(emdros, bible) {
   console.log('Seeding...');
 
   await seedBooks(emdros, bible);
+  await seedSources(emdros, bible);
   await seedSpheres(emdros, bible);
 }
 
@@ -78,11 +79,10 @@ async function seedBooks(emdros, bible) {
   console.log('Seeding Books...');
 
   await seedChapters(emdros, bible);
-  await seedSources(emdros, bible);
+  await seedBookSources(emdros, bible);
   await seedSourceOccurrences(emdros, bible);
-  await seedWordCounts(emdros, bible);
+  await seedBookWordCounts(emdros, bible);
   await seedBookWordCloud(emdros, bible);
-  normalizeSources(emdros, bible);
 }
 
 async function seedChapters(emdros, bible) {
@@ -139,8 +139,8 @@ async function monadSetForBookChapterNumber(emdros, book, chapterNumber) {
   return emdros.monadSet({query});
 }
 
-async function seedSources(emdros, bible) {
-  console.log('Seeding Sources...');
+async function seedBookSources(emdros, bible) {
+  console.log('Seeding Book Sources...');
   const query = `
   {
     "objectTypeName": "Book",
@@ -163,14 +163,22 @@ async function seedSources(emdros, bible) {
           const sourceData = bookData["Source"]["source_name"];
           if (sourceData != null) {
             Object.keys(sourceData).forEach((sourceName) => {
-                sources[sourceName] = {};
-                sourceCount++;
+              sources[sourceName] = {};
+              sourceCount++;
             });
           }
 
           book.sources = sources;
           book.sourceCount = sourceCount;
         }
+      }
+
+      for (let [index, book] of bible.books.entries()) {
+        const sources = book.sources;
+        book.sources = Object.keys(sources).sort((a, b) => sources[a].wordCount > sources[b].wordCount ? -1 : 1).map((sourceName) => {
+          const source = sources[sourceName];
+          return {...source, name: sourceName};
+        });
       }
 
       resolve();
@@ -207,11 +215,10 @@ async function seedSourceOccurrences(emdros, bible) {
           if (chapterData != null) {
             book.chapters.forEach((chapter, index) => {
               const chapterNumber = chapter.chapterNumber;
-
               const sourceData = chapterData[chapterNumber.toString()]["Source"]["source_name"];
               if (sourceData != null) {
                 Object.keys(sourceData).forEach((sourceName) => {
-                  const source = sources[sourceName];
+                  const source = sources.find(source => source.name === sourceName);
                   if (!source.occurrences) source.occurrences = [];
                   source.occurrences.push({
                     chapterNumber: chapterNumber
@@ -230,8 +237,8 @@ async function seedSourceOccurrences(emdros, bible) {
   });
 }
 
-async function seedWordCounts(emdros, bible) {
-  await seedBookWordCounts(emdros, bible);
+async function seedBookWordCounts(emdros, bible) {
+  await seedBookWordCount(emdros, bible);
   await seedChapterWordCounts(emdros, bible);
 
   await seedBookSourceWordCounts(emdros, bible);
@@ -243,7 +250,7 @@ async function seedWordCounts(emdros, bible) {
   await seedChapterSphereWordCounts(emdros, bible);
 }
 
-async function seedBookWordCounts(emdros, bible) {
+async function seedBookWordCount(emdros, bible) {
   console.log('Seeding Book Word Counts...');
   const query = `
   {
@@ -350,7 +357,7 @@ async function seedBookSourceWordCounts(emdros, bible) {
               let maxSourceWordCount = 0;
 
               Object.keys(sourceNameData).forEach((sourceName) => {
-                const source = book.sources[sourceName];
+                const source = book.sources.find(source => source.name === sourceName);
                 const wordCount = sourceNameData[sourceName]["Token"] || 0;
                 source.wordCount = wordCount;
 
@@ -374,13 +381,14 @@ async function seedBookSourceWordCounts(emdros, bible) {
 
 async function seedBookSphereWordCounts(emdros, bible) {
   console.log('Seeding Book Sphere Word Counts...');
+  const sphereFeatures = SPHERE_KEYS.map(key => `"${key}"`).join(', ');
   const query = `
   {
     "objectTypeName": "Book",
     "feature": "DJHRef",
     "buckets": {
       "objectTypeName": "Token",
-      "feature": ["family", "economics", "government", "religion", "education", "mediacom", "celebration"],
+      "feature": [${sphereFeatures}],
       "expression" : "is_word=true"
     }
   }
@@ -637,13 +645,89 @@ async function seedSpheres(emdros, bible) {
   }
 }
 
+async function seedSources(emdros, bible) {
+  console.log('Seeding Sources...');
+
+  await seedSourceWordCounts(emdros, bible);
+  await seedSourceWordCloud(emdros, bible);
+}
+
+async function seedSourceWordCounts(emdros, bible) {
+  console.log('Seeding Source Word Counts...');
+  const query = `
+  {
+    "objectTypeName": "Source",
+    "feature": "source_name",
+    "buckets": {
+      "objectTypeName": "Token",
+      "expression" : "is_word=true"
+    }
+  }
+  `;
+
+  return new Promise((resolve, reject) => {
+    emdros.query(query, {count: true}).then((data) => {
+
+      const sourceData = data["Source"]["source_name"];
+      if (sourceData != null) {
+        Object.keys(sourceData).forEach(sourceName => {
+          let source = bible.sources.find(source => source.name === sourceName);
+          if (source == null) {
+            source = {key: sourceName, name: sourceName, wordCount: 0, words: []};
+            bible.sources.push(source);
+          }
+
+          const wordCount = sourceData[sourceName]["Token"] || 0;
+          source.wordCount = wordCount;
+        });
+      }
+
+      resolve();
+    }).catch((error) => {
+      console.log(error);
+    })
+  });
+}
+
+async function seedSourceWordCloud(emdros, bible) {
+  console.log('Seeding Source Word Cloud...');
+  const query = `
+  {
+    "objectTypeName": "Source",
+    "feature": "source_name",
+    "buckets": {
+      "objectTypeName": "Token",
+      "feature": "surface",
+      "expression" : "is_word=true"
+    }
+  }
+  `;
+
+  return new Promise((resolve, reject) => {
+    emdros.query(query, {count: true}).then((data) => {
+      const sourceData = data["Source"]["source_name"];
+      if (sourceData != null) {
+        Object.keys(sourceData).forEach(sourceName => {
+          let source = bible.sources.find(source => source.name === sourceName);
+          const wordData = sourceData[sourceName]["Token"]["surface"];
+          seedObjectWordCloud(source, wordData);
+        });
+      }
+
+      resolve();
+    }).catch((error) => {
+      console.log(error);
+    })
+  });
+}
+
 async function seedSphereWordCounts(emdros, bible) {
   console.log('Seeding Spheres Word Counts...');
 
   return new Promise((resolve, reject) => {
     SPHERE_KEYS.forEach(key => {
       const sphere = bible.spheres.find(sphere => sphere.key === SPHERE_MAP[key]);
-      if (sphere) {
+      if (sphere != null) {
         let bookCount = 0;
         let totalWordCount = 0;
 
@@ -691,17 +775,6 @@ async function seedSphereWordCloud(sphereName, emdros, bible) {
       console.log(error);
     })
   });
-}
-
-function normalizeSources(emdros, bible) {
-  console.log('Normalizing sources...');
-  for (let [index, book] of bible.books.entries()) {
-    const sources = book.sources;
-    book.sources = Object.keys(sources).sort((a, b) => sources[a].wordCount > sources[b].wordCount ? -1 : 1).map((sourceName) => {
-      const source = sources[sourceName];
-      return {...source, name: sourceName};
-    });
-  }
 }
 
 function seedObjectSourceTypeWordCounts(object, sourceData) {
