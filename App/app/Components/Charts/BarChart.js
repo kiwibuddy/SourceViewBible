@@ -13,7 +13,7 @@ const BarChart = (props: Object) => {
   const stackedBarStyle = [styles.stackedBar, {flexDirection: props.horizontal ? 'row' : 'column'}, props.barStyle];
   const bars = (props.horizontal ? props.bars : props.bars.slice(0).reverse());
 
-  bars.forEach((bar, index) => {
+  bars.forEach((bar) => {
     if (bar.slices != null) {
       bar.value = bar.slices.reduce((barValue, slice) => barValue + slice.value, 0);
     } else {
@@ -24,10 +24,10 @@ const BarChart = (props: Object) => {
   const maxChartValue = props.maxChartValue || bars.reduce((maxChartValue, bar) => bar.value);
 
   const barGraphs = bars.map((bar, barIndex) => {
-    const barGraph = bar.slices.map((slice) => <View key={'bar-slice-' + slice} style={{backgroundColor: slice.color, flex: slice.value}} />);
+    const barGraph = bar.slices.map((slice, sliceIndex) => <View key={'bar-slice-' + sliceIndex} style={{backgroundColor: slice.color, flex: slice.value}} />);
 
     const delta = maxChartValue - bar.value;
-    const deltaBarGraph = delta > 0 ? <View key='deltaBar' style={[styles.deltaBar, props.deltaStyle, {flex: delta}]} /> : null;
+    const deltaBarGraph = delta > 0 ? <View key={'deltaBar-' + barIndex} style={[styles.deltaBar, props.deltaStyle, {flex: delta}]} /> : null;
     let chart = null;
     if (props.horizontal) {
       chart = [barGraph, deltaBarGraph];
@@ -51,7 +51,7 @@ const BarChart = (props: Object) => {
 BarChart.propTypes = {
   bars: PropTypes.arrayOf(PropTypes.shape({
     color: ColorPropType,
-    value: PropTypes.number.isRequired,
+    value: PropTypes.number,
     slices: PropTypes.arrayOf(PropTypes.shape({
       color: ColorPropType,
       value: PropTypes.number.isRequired,
