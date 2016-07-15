@@ -38,7 +38,7 @@ export default class BookOverview extends Component {
   render() {
     const { book } = this.props;
 
-    const sources = book.sources.slice(0, MAX_NUMBER_OF_SOURCES).map((source) => {
+    const sources = book.sources.slice(0).sort((a, b) => a.wordCount > b.wordCount ? -1 : 1).slice(0, MAX_NUMBER_OF_SOURCES).map((source) => {
       return this._renderSource(source);
     });
 

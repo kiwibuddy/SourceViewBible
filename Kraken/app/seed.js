@@ -84,6 +84,7 @@ async function seedBooks(emdros, bible) {
   await seedSourceOccurrences(emdros, bible);
   await seedBookWordCounts(emdros, bible);
   await seedBookWordCloud(emdros, bible);
+  await seedBookSourceWordCloud(emdros, bible);
 
   bible.wordCount = bible.books.reduce((wordCount, book) => wordCount + book.wordCount, 0);
 }
@@ -627,6 +628,49 @@ async function seedBookWordCloud(emdros, bible) {
         if (bookData != null) {
           const wordData = bookData["Token"]["surface"];
           seedObjectWordCloud(book, wordData);
+        }
+      }
+
+      resolve();
+    }).catch((error) => {
+      console.log(error);
+    })
+  });
+}
+
+async function seedBookSourceWordCloud(emdros, bible) {
+  console.log('Seeding Book Source Word Cloud...');
+  const query = `
+  {
+    "objectTypeName": "Book",
+    "feature": "DJHRef",
+    "buckets": {
+      "objectTypeName": "Source",
+      "feature": "source_name",
+      "buckets": {
+        "objectTypeName": "Token",
+        "feature": "surface",
+        "expression" : "is_word=true"
+      }
+    }
+  }
+  `;
+
+  return new Promise((resolve, reject) => {
+    emdros.query(query, {count: true}).then((data) => {
+      for (let [index, book] of bible.books.entries()) {
+        const bookData = data["Book"]["DJHRef"][book.DJHRef];
+        if (bookData != null) {
+          const sourceData = bookData["Source"]["source_name"];
+          if (sourceData != null) {
+            Object.keys(sourceData).forEach(sourceName => {
+              const source = book.sources.find(source => source.name === sourceName);
+              if (source != null) {
+                const wordData = sourceData[sourceName]["Token"]["surface"];
+                seedObjectWordCloud(source, wordData);
+              }
+            });
+          }
         }
       }
 
