@@ -44,8 +44,9 @@ export default class BookSources extends Component {
   }
 
   componentDidMount() {
+    const sources = this.props.book.sources.slice(0).sort((a, b) => a.wordCount > b.wordCount ? -1 : 1);
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(this.props.book.sources)
+      dataSource: this.state.dataSource.cloneWithRows(sources)
     });
   }
 
