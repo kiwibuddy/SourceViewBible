@@ -29,7 +29,6 @@ import Localizable from '../../Common/Localizable';
 import Icon from '../../Components/Common/Icon';
 
 const Bible = require('../../Locale/en/NLT/SourceView.json');
-Bible.wordCount = Bible.books.reduce((wordCount, book) => wordCount + book.wordCount, 0);
 
 const MAXIMUM_SPHERE_COUNT = 9;
 

@@ -25,7 +25,6 @@ import { BarChart } from '../../Components/Charts';
 import Icon from '../../Components/Common/Icon';
 
 const Bible = require('../../Locale/en/NLT/SourceView.json');
-Bible.wordCount = Bible.books.reduce((wordCount, book) => wordCount + book.wordCount, 0);
 
 const WIDTH = Dimensions.get('window').width;
 const CAROUSEL_ITEM_SIZE = 80;
