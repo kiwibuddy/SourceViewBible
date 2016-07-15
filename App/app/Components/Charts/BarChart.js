@@ -21,7 +21,7 @@ const BarChart = (props: Object) => {
     }
   });
 
-  const maxChartValue = props.maxChartValue || bars.reduce((maxChartValue, bar) => bar.value);
+  const maxChartValue = props.maxChartValue ||  Math.max.apply(Math, bars.map(bar => bar.value));
 
   const barGraphs = bars.map((bar, barIndex) => {
     const barGraph = bar.slices.map((slice, sliceIndex) => <View key={'bar-slice-' + sliceIndex} style={{backgroundColor: slice.color, flex: slice.value}} />);

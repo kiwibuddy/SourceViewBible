@@ -23,25 +23,10 @@ const SpheresBarChart = (props: Object) => {
     return {slices};
   });
 
-  let maxChartValue = props.maxChartValue || 0;
-  if (props.maxChartValue == null) {
-    props.data.forEach((data, index) => {
-      let maxBarValue = 0;
-      SPHERES.forEach((sphere, index) => {
-          const value = data[sphere] || 0;
-          maxBarValue += value;
-      });
-      if (maxBarValue > maxChartValue) {
-        maxChartValue = maxBarValue;
-      }
-    });
-  }
-
   return (
     <BarChart
       {...props}
       bars={bars}
-      maxChartValue={maxChartValue}
     />
   );
 };
