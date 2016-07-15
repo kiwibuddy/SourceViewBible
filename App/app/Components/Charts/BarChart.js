@@ -17,7 +17,7 @@ const BarChart = (props: Object) => {
     if (bar.slices != null) {
       bar.value = bar.slices.reduce((barValue, slice) => barValue + slice.value, 0);
     } else {
-      bar.slices = [{color: bar.color, value: bar.value}];
+      bar.slices = [bar];
     }
   });
 
