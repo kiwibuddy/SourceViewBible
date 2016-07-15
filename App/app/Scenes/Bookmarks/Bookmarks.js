@@ -50,6 +50,7 @@ export default class Bookmarks extends Component {
       [
         {key: '/Discover', title: 'Discover', icon: require('../../Images/tabs/discover.png')},
         {key: '/Books', title: 'Books', icon: require('../../Images/tabs/chapters.png')},
+        {key: '/Sources', title: 'Sources', icon: require('../../Images/tabs/sources.png')},
         {key: '/Spheres', title: 'Spheres', icon: require('../../Images/tabs/spheres.png')},
       ]
     );
