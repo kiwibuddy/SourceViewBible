@@ -61,7 +61,7 @@ export default class Spheres extends Component {
   render() {
     const { sphere } = this.state;
     const spherePercent = (sphere.wordCount / Bible.wordCount) * 100;
-    const books = Object.keys(sphere.bookCounts).sort((a, b) => sphere.bookCounts[a] > sphere.bookCounts[b] ? -1 : 1).map(key => Bible.books.find(book => key === book.key)).slice(0, MAXIMUM_BOOK_COUNT);
+    const books = this._getBooks();
     const bookRows = books.map(book => this._renderBookRow(book));
     return (
       <ScrollView style={styles.container}>
@@ -177,7 +177,23 @@ export default class Spheres extends Component {
       </TouchableOpacity>
     );
   };
-}
+
+  _getBooks = () => {
+    const { sphere } = this.state;
+    return Bible.books.slice(0).sort((bookA, bookB) => {
+      const bookAWordCount = sphere.bookCounts[bookA.key];
+      const bookAPercent = (bookAWordCount / bookA.wordCount);
+
+      const bookBWordCount = sphere.bookCounts[bookB.key];
+      const bookBPercent = (bookBWordCount / bookB.wordCount);
+
+      if (bookAPercent == bookBPercent) {
+        return bookAWordCount > bookBWordCount ? -1 : 1;
+      }
+      return bookAPercent > bookBPercent ? -1 : 1;
+    }).slice(0, MAXIMUM_BOOK_COUNT);
+  };
+ }
 
 const styles = StyleSheet.create({
   container: {
