@@ -11,7 +11,7 @@ import Colors from '../../Common/Colors';
 const BarChart = (props: Object) => {
   const chartStyle = [styles.chart, props.style];
   const stackedBarStyle = [styles.stackedBar, {flexDirection: props.horizontal ? 'row' : 'column'}, props.barStyle];
-  const bars = (props.horizontal ? props.bars : props.bars.slice(0).reverse());
+  const bars = (props.horizontal ? props.bars.slice(0).reverse() : props.bars.slice(0));
 
   bars.forEach((bar) => {
     if (bar.slices != null) {
