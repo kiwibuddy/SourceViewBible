@@ -189,6 +189,7 @@ export default class App extends Component {
       case '/Spheres/Books':
         return <SphereBooks
           bible={Bible}
+          onPressBook={({sphere, book}) => this._pushRoute({key: '/Books/Overview', book: book, title: Localizable.t('book-overview', {name: book.name})})}
           sphere={route.sphere}
         />;
       case '/Spheres/Passages':

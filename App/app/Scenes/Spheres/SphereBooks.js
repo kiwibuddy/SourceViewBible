@@ -5,6 +5,8 @@ import React, { Component, PropTypes } from 'react';
 const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
 
 import {
+  ListView,
+  RecyclerViewBackedScrollView,
   Text,
   View,
   TouchableOpacity
@@ -16,15 +18,46 @@ import {
   Localizable
 } from '../../Common';
 
+import { BarChart, PieChart } from '../../Components/Charts';
+
 type Props = {
   bible: Object,
+  onPressBook: Function,
   sphere: Object,
+};
+
+type State = {
+  dataSource: any,
 };
 
 export default class SphereBooks extends Component {
   props: Props;
+  state: State;
+
+  constructor(props: Props) {
+    super(props);
+
+    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.key !== r2.key, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
+    const books = props.bible.books;
+
+    this.state = {
+      dataSource: dataSource.cloneWithRows(books)
+    };
+  }
 
   render() {
+    return (
+      <ListView
+        dataSource={this.state.dataSource}
+        renderHeader={this._renderHeader}
+        renderRow={this._renderRow}
+        renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+        renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={StyleSheet.styles.separator} />}
+      />
+    );
+  }
+
+  _renderHeader = () => {
     const { bible, sphere } = this.props;
     const spherePercent = (sphere.wordCount / bible.wordCount) * 100;
 
@@ -45,7 +78,7 @@ export default class SphereBooks extends Component {
     const newTestamentSpherePercent = (newTestamentSphereWordCount / newTestamentWordCount) * 100;
 
     return (
-      <View style={styles.container}>
+      <View>
         <View style={StyleSheet.styles.statisticsContainer}>
           <View style={StyleSheet.styles.statisticContainer}>
             <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
@@ -63,26 +96,38 @@ export default class SphereBooks extends Component {
           </View>
           <View style={StyleSheet.styles.statisticKeyline} />
         </View>
-        <View style={styles.sphereBooksGraph}>
-        </View>
-        <TouchableOpacity style={styles.section}>
-          <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
-            <View style={styles.sourcesLeftContainer}>
-              <Text style={StyleSheet.styles.cell.title}>Book Name</Text>
-            </View>
-            <View style={styles.sourcesRightContainer}>
-              <View style={[styles.sourcesBarChart, {height: 4, backgroundColor: '#EDEDED'}]} />
-              <View style={styles.dataPair}>
-                <Text style={[StyleSheet.styles.cell.percentage, {color: 'red'}]}>0%</Text>
-                <Text style={StyleSheet.styles.cell.subtitle}>0 words</Text>
-              </View>
-            </View>
-          </View>
-          <View style={[StyleSheet.styles.separator]}></View>
-        </TouchableOpacity>
+        <View style={styles.sphereBooksGraph} />
       </View>
     );
-  }
+  };
+
+  _renderRow = (book: Object) => {
+    const { sphere } = this.props;
+    const wordCount = sphere.bookCounts[book.key];
+    const spherePercent = (wordCount / book.wordCount) * 100;
+
+    return (
+      <TouchableOpacity style={styles.section} onPress={() => this.props.onPressBook({sphere, book})}>
+        <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
+          <View style={styles.sourcesLeftContainer}>
+            <Text style={StyleSheet.styles.cell.title}>{book.name}</Text>
+          </View>
+          <View style={styles.sourcesRightContainer}>
+            <BarChart
+              bars={[{color: Colors.tintColor, value: spherePercent}]}
+              deltaStyle={styles.barChartDelta}
+              maxChartValue={100}
+              style={styles.sourcesBarChart}
+            />
+            <View style={styles.dataPair}>
+              <Text style={[StyleSheet.styles.cell.percentage, {color: Colors.tintColor}]}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
+              <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('words.count', {count: wordCount, localizedCount: Localizable.toNumber(wordCount, {precision: 0})})}</Text>
+            </View>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  };
 }
 
 const styles = StyleSheet.create({
@@ -127,13 +172,16 @@ const styles = StyleSheet.create({
     height: 20,
     marginRight: 5
   },
-  sourcesBarChart: {
-    height: 4,
-    flex: 0,
-    marginBottom: 7,
-  },
   dataPair: {
     flex: 1,
     flexDirection: 'row',
+  },
+  sourcesBarChart: {
+    flex: 0,
+    height: 4,
+    marginBottom: 7,
+  },
+  barChartDelta: {
+    backgroundColor: '#ffdcda',
   },
 });
