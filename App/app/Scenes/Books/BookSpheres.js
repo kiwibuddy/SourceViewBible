@@ -94,12 +94,13 @@ export default class BookSpheres extends Component {
     const wordCount = sphere.bookWordCount;
     const spherePercent = (wordCount / book.sphereWordCount) * 100;
     const tintColor = Colors.spheres[sphere.key].tint;
+    const lightTintColor = Colors.spheres[sphere.key].lightTint;
 
     return (
       <TouchableOpacity style={styles.listItemContainer} onPress={() => this.props.onPressSphere(sphere)}>
         <PieChart
           color={tintColor}
-          slices={[{color: tintColor, value: wordCount}, {color: 'white', value: book.sphereWordCount}]}
+          slices={[{color: tintColor, value: wordCount}, {color: lightTintColor, value: book.sphereWordCount}]}
           label={Localizable.toPercentage(spherePercent, {precision: 0})}
           size={57}
           style={styles.pie}

@@ -48,6 +48,7 @@ module.exports = {
   spheres: {
     family: {
       tint:'#FF3A2E',
+      lightTint: '#ffdcda',
       gradient: {
         big:['#FF4B3B', '#AA0606'],
         tiny: ['#FF3A2E', '#FF3A2E']
@@ -55,6 +56,7 @@ module.exports = {
     },
     economics: {
       tint:'#FF9700',
+      lightTint: '#ffedd2',
       gradient: {
         big:['#FC882A', '#D4202F'],
         tiny: ['#FF9700', '#FF9700']
@@ -62,6 +64,7 @@ module.exports = {
     },
     government: {
       tint:'#FECB01',
+      lightTint: '#fff8d1',
       gradient: {
         big: ['#FFBF00', '#FF933A'],
         tiny: ['#FECB01', '#FECB01']
@@ -69,6 +72,7 @@ module.exports = {
     },
     religion: {
       tint:'#64AA20',
+      lightTint: '#e0fae4',
       gradient: {
         big: ['#8BC624', '#429321'],
         tiny: ['#64AA20', '#64AA20']
@@ -76,6 +80,7 @@ module.exports = {
     },
     education: {
       tint:'#25B8D7',
+      lightTint: '#d9f2f9',
       gradient: {
         big: ['#11C7B8', '#1A5A78'],
         tiny: ['#25B8D7', '#25B8D7']
@@ -83,6 +88,7 @@ module.exports = {
     },
     communication: {
       tint:'#5A5AD3',
+      lightTint: '#e1e2f8',
       gradient: {
         big: ['#C86DD7', '#3023AE'],
         tiny: ['#5A5AD3', '#5A5AD3']
@@ -90,6 +96,7 @@ module.exports = {
     },
     celebration: {
       tint:'#C44DF8',
+      lightTint: '#f9e0f0',
       gradient: {
         big: ['#D8379F', '#AD39DF'],
         tiny: ['#C44DF8', '#C44DF8']

@@ -35,6 +35,7 @@
 		83C64F629902405F8FE99CE8 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4DDB070ECE646E29D8F3A2C /* EvilIcons.ttf */; };
 		A2F03BA2CEB145999CF71563 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 898D5CA4A3A34A3AB98693E6 /* Zocial.ttf */; };
 		AB1CF3521CEA744B00547708 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB1CF3501CEA744B00547708 /* LaunchScreen.storyboard */; };
+		AB284CD51D3A8C8E00AFC7EA /* libART.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB284CC41D3A8C7100AFC7EA /* libART.a */; };
 		AB5489481CE2747B00F96FF0 /* libRCTEmdros.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB5489451CE273DC00F96FF0 /* libRCTEmdros.a */; };
 		AB5A7E361CF781DA00728DB2 /* sourceview.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB5A7E351CF781DA00728DB2 /* sourceview.ttf */; };
 		ABA1BCEB1CE127A300BEA3A1 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA1BCEA1CE127A300BEA3A1 /* libz.tbd */; };
@@ -121,6 +122,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
+		};
+		AB284CC31D3A8C7100AFC7EA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AB284CBF1D3A8C7100AFC7EA /* ART.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0CF68AC11AF0540F00FF9E5C;
+			remoteInfo = ART;
 		};
 		AB29E74D1CF7657D000126A1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -212,6 +220,7 @@
 		898D5CA4A3A34A3AB98693E6 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		9EE4C78311794C1C9C0D3EA7 /* libRNI18n.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNI18n.a; sourceTree = "<group>"; };
 		AB1CF3511CEA744B00547708 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = SourceViewBible/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		AB284CBF1D3A8C7100AFC7EA /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
 		AB5489401CE273DC00F96FF0 /* RCTEmdros.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTEmdros.xcodeproj; path = ../../Libraries/Emdros/ios/RCTEmdros/RCTEmdros.xcodeproj; sourceTree = "<group>"; };
 		AB5489801CE2760000F96FF0 /* Datasets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Datasets; path = ../../Datasets; sourceTree = "<group>"; };
 		AB5A7E351CF781DA00728DB2 /* sourceview.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sourceview.ttf; sourceTree = "<group>"; };
@@ -241,6 +250,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB284CD51D3A8C8E00AFC7EA /* libART.a in Frameworks */,
 				ABA1BCEF1CE127B700BEA3A1 /* libsqlite3.tbd in Frameworks */,
 				ABA1BCED1CE127AE00BEA3A1 /* libstdc++.tbd in Frameworks */,
 				ABA1BCEB1CE127A300BEA3A1 /* libz.tbd in Frameworks */,
@@ -367,6 +377,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				AB284CBF1D3A8C7100AFC7EA /* ART.xcodeproj */,
 				ABA1BCEE1CE127B700BEA3A1 /* libsqlite3.tbd */,
 				ABA1BCEC1CE127AE00BEA3A1 /* libstdc++.tbd */,
 				ABA1BCEA1CE127A300BEA3A1 /* libz.tbd */,
@@ -414,6 +425,14 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* SourceViewBible.app */,
 				00E356EE1AD99517003FC87E /* SourceViewBibleTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AB284CC01D3A8C7100AFC7EA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AB284CC41D3A8C7100AFC7EA /* libART.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -559,6 +578,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = AB284CC01D3A8C7100AFC7EA /* Products */;
+					ProjectRef = AB284CBF1D3A8C7100AFC7EA /* ART.xcodeproj */;
+				},
+				{
 					ProductGroup = ABE0009C1CF2565C008130F2 /* Products */;
 					ProjectRef = 6A9A33584A2C4D71B289C392 /* BVLinearGradient.xcodeproj */;
 				},
@@ -700,6 +723,13 @@
 			fileType = archive.ar;
 			path = libRCTText.a;
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AB284CC41D3A8C7100AFC7EA /* libART.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libART.a;
+			remoteRef = AB284CC31D3A8C7100AFC7EA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		AB29E74E1CF7657D000126A1 /* libRNParallaxMotion.a */ = {
