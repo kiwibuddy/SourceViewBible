@@ -37,8 +37,20 @@ export default class SphereBooks extends Component {
   constructor(props: Props) {
     super(props);
 
+    const { sphere } = props;
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.key !== r2.key, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
-    const books = props.bible.books;
+    const books = props.bible.books.slice(0).sort((bookA, bookB) => {
+      const bookAWordCount = sphere.bookCounts[bookA.key];
+      const bookAPercent = (bookAWordCount / bookA.wordCount);
+
+      const bookBWordCount = sphere.bookCounts[bookB.key];
+      const bookBPercent = (bookBWordCount / bookB.wordCount);
+
+      if (bookAPercent == bookBPercent) {
+        return bookAWordCount > bookBWordCount ? -1 : 1;
+      }
+      return bookAPercent > bookBPercent ? -1 : 1;
+    });
 
     this.state = {
       dataSource: dataSource.cloneWithRows(books)

@@ -31,10 +31,14 @@ export default class DiscoveryCenter extends Component {
         <NavigationBar title={Localizable.t('discovery-center')}>
           <TouchableOpacity
             onPress={this.props.onPressDone}
+            style={{position: 'absolute', right: 0}}
           >
             <Text style={StyleSheet.styles.navigationBar.doneButtonTitle}>{Localizable.t('done')}</Text>
           </TouchableOpacity>
         </NavigationBar>
+        <View style={styles.content}>
+          <Text style={styles.title}>Under construction</Text>
+        </View>
       </View>
     );
   }
@@ -43,5 +47,17 @@ export default class DiscoveryCenter extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  content: {
+    flex: 1,
+    marginTop: NavigationBar.HEIGHT,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  title: {
+    color: '#EDEDED',
+    fontSize: 48,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
