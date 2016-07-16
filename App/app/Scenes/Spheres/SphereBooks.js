@@ -28,6 +28,22 @@ export default class SphereBooks extends Component {
     const { bible, sphere } = this.props;
     const spherePercent = (sphere.wordCount / bible.wordCount) * 100;
 
+    let oldTestamentWordCount = 0;
+    let oldTestamentSphereWordCount = 0;
+    let newTestamentWordCount = 0;
+    let newTestamentSphereWordCount = 0;
+    bible.books.forEach(book => {
+      if (book.testament === 0) {
+        oldTestamentWordCount += book.wordCount;
+        oldTestamentSphereWordCount += sphere.bookCounts[book.key];
+      } else {
+        newTestamentWordCount += book.wordCount;
+        newTestamentSphereWordCount += sphere.bookCounts[book.key];
+      }
+    });
+    const oldTestamentSpherePercent = (oldTestamentSphereWordCount / oldTestamentWordCount) * 100;
+    const newTestamentSpherePercent = (newTestamentSphereWordCount / newTestamentWordCount) * 100;
+
     return (
       <View style={styles.container}>
         <View style={StyleSheet.styles.statisticsContainer}>
@@ -37,12 +53,12 @@ export default class SphereBooks extends Component {
           </View>
           <View style={StyleSheet.styles.statisticKeyline} />
           <View style={StyleSheet.styles.statisticContainer}>
-            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(0, {precision: 0})}</Text>
+            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(oldTestamentSpherePercent, {precision: 0})}</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Old Testament</Text>
           </View>
           <View style={StyleSheet.styles.statisticKeyline} />
           <View style={StyleSheet.styles.statisticContainer}>
-            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(0, {precision: 0})}</Text>
+            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(newTestamentSpherePercent, {precision: 0})}</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>New Testament</Text>
           </View>
           <View style={StyleSheet.styles.statisticKeyline} />
