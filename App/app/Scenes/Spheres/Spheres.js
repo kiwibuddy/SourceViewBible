@@ -35,6 +35,7 @@ type Props = {
   onPressBook: Function,
   onPressBooks: Function,
   onPressPassages: Function,
+  onPressSources: Function,
   onPressWords: Function,
 };
 
@@ -94,7 +95,7 @@ export default class Spheres extends Component {
             <Text style={StyleSheet.styles.statisticSubtitle}>Books</Text>
           </TouchableOpacity>
           <View style={styles.keyline} />
-          <TouchableOpacity style={StyleSheet.styles.statisticContainer}>
+          <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.onPressSources({sphere})}>
             <Text style={StyleSheet.styles.statisticTitle}>0</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Sources</Text>
           </TouchableOpacity>
@@ -147,7 +148,7 @@ export default class Spheres extends Component {
           </View>
           <View style={[StyleSheet.styles.separator, {marginLeft: 0}]}></View>
         </TouchableOpacity>
-        <TouchableOpacity style={StyleSheet.styles.listItem}>
+        <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => this.props.onPressSources({sphere})}>
           <Text style={StyleSheet.styles.cell.titlemore}>View More</Text>
           <Image source={require('../../Images/common/disclosure.png')}  style={styles.disclosure} />
         </TouchableOpacity>
