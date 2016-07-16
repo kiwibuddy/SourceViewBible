@@ -131,7 +131,9 @@ export default class App extends Component {
           onPressSpheres={() => this._pushRoute({key: '/Spheres', title: Localizable.t('spheres.text')})}
         />;
       case '/DiscoveryCenter':
-        return <DiscoveryCenter />;
+        return <DiscoveryCenter
+          onPressDone={() => this._popRoute()}
+        />;
       case '/Reader':
         return <Reader
           book={route.book}
@@ -216,7 +218,7 @@ export default class App extends Component {
         <View style={{flex: 1}}>
           <ToolbarButton
             imageSource={require('../Navigation/Images/nav-discoverycenter.png')}
-            onPress={() => {}}
+            onPress={() => {this._pushRoute({key: '/DiscoveryCenter', modal: true})}}
           />
         </View>
         <ToolbarButton
