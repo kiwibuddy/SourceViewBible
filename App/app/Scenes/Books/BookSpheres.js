@@ -20,9 +20,8 @@ import {
 
 import { PieChart, SourcesBarChart, SpheresBarChart } from '../../Components/Charts';
 
-const Bible = require('../../Locale/en/NLT/SourceView.json');
-
 type Props = {
+  bible: Object,
   book: Object,
   onPressSphere: Function,
 };
@@ -39,7 +38,7 @@ export default class BookSpheres extends Component {
     super(props);
 
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.key !== r2.key, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
-    const spheres = Bible.spheres.map(sphere => {
+    const spheres = props.bible.spheres.map(sphere => {
       return ({...sphere, bookWordCount: props.book.sphereCounts[sphere.key]});
     });
 

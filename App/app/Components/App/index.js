@@ -16,6 +16,8 @@ import {
   StyleSheet,
 } from '../../Common';
 
+const Bible = require('../../Locale/en/NLT/SourceView.json');
+
 import Bookmarks from '../../Scenes/Bookmarks/Bookmarks';
 import BookChapters from '../../Scenes/Books/BookChapters';
 import BookOverview from '../../Scenes/Books/BookOverview';
@@ -91,7 +93,10 @@ export default class App extends Component {
             }}
           />;
       case '/Books':
-        return <Books onPressBook={book => this._pushRoute({key: '/Books/Overview', book: book, title: Localizable.t('book-overview', {name: book.name})})} />;
+        return <Books
+          bible={Bible}
+          onPressBook={book => this._pushRoute({key: '/Books/Overview', book: book, title: Localizable.t('book-overview', {name: book.name})})}
+        />;
       case '/Books/Chapters':
         return <BookChapters
           book={route.book}
@@ -115,6 +120,7 @@ export default class App extends Component {
         />;
       case '/Books/Spheres':
         return <BookSpheres
+          bible={Bible}
           book={route.book}
           onPressSphere={sphere => this._pushRoute({key: '/Spheres', sphere: sphere, title: Localizable.t('spheres.text')})}
         />;
@@ -122,6 +128,7 @@ export default class App extends Component {
         return <BookWords book={route.book} />;
       case '/Discover':
         return <Discover
+          bible={Bible}
           onPressBook={book => this._pushRoute({key: '/Books/Overview', book: book, title: Localizable.t('book-overview', {name: book.name})})}
           onPressBooks={() => this._pushRoute({key: '/Books', title: Localizable.t('books')})}
           onPressScripture={({book, chapterNumber}) => this._pushRoute({key: '/Reader', book, chapterNumber, title: book.name})}
@@ -141,6 +148,7 @@ export default class App extends Component {
         }/>;
       case '/Sources':
         return <Sources
+          bible={Bible}
           onPressSource={(source) => source && this._pushRoute({key: '/Sources/Overview', source: source, title: source.name})}
         />;
       case '/Sources/Overview':
@@ -170,6 +178,7 @@ export default class App extends Component {
         />;
       case '/Spheres':
         return <Spheres
+          bible={Bible}
           onPressBook={({sphere, book}) => this._pushRoute({key: '/Books/Overview', book: book, title: Localizable.t('book-overview', {name: book.name})})}
           onPressBooks={({sphere}) => this._pushRoute({key: '/Spheres/Books', sphere: sphere, title: sphere.name })}
           onPressPassages={({sphere}) => this._pushRoute({key: '/Spheres/Passages', sphere: sphere, title: sphere.name })}
@@ -178,7 +187,10 @@ export default class App extends Component {
           sphere={route.sphere}
         />;
       case '/Spheres/Books':
-        return <SphereBooks sphere={route.sphere} />;
+        return <SphereBooks
+          bible={Bible}
+          sphere={route.sphere}
+        />;
       case '/Spheres/Passages':
         return <SpherePassages sphere={route.sphere} />;
       case '/Spheres/Sources':

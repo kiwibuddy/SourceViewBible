@@ -28,10 +28,10 @@ import { ReadingTime } from '../../Common/NumberHelper';
 import Localizable from '../../Common/Localizable';
 import Icon from '../../Components/Common/Icon';
 
-const Bible = require('../../Locale/en/NLT/SourceView.json');
 const MAXIMUM_BOOK_COUNT = 9;
 
 type Props = {
+  bible: Object,
   onPressBook: Function,
   onPressBooks: Function,
 };
@@ -55,7 +55,7 @@ export default class DiscoverBooks extends Component {
   }
 
   componentDidMount() {
-    const books = Bible.books.slice(0).sort((a, b) => a.sourceCount > b.sourceCount ? -1 : 1).slice(0, MAXIMUM_BOOK_COUNT);
+    const books = this.props.bible.books.slice(0).sort((a, b) => a.sourceCount > b.sourceCount ? -1 : 1).slice(0, MAXIMUM_BOOK_COUNT);
 
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(books)

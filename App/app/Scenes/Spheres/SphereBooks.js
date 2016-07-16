@@ -17,28 +17,32 @@ import {
 } from '../../Common';
 
 type Props = {
+  bible: Object,
   sphere: Object,
 };
 
 export default class SphereBooks extends Component {
   props: Props;
-  
+
   render() {
+    const { bible, sphere } = this.props;
+    const spherePercent = (sphere.wordCount / bible.wordCount) * 100;
+
     return (
       <View style={styles.container}>
         <View style={StyleSheet.styles.statisticsContainer}>
           <View style={StyleSheet.styles.statisticContainer}>
-            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toNumber(0, {precision: 0})}</Text>
+            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Whole Bible</Text>
           </View>
           <View style={StyleSheet.styles.statisticKeyline} />
           <View style={StyleSheet.styles.statisticContainer}>
-            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toNumber(0, {precision: 0})}</Text>
+            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(0, {precision: 0})}</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Old Testament</Text>
           </View>
           <View style={StyleSheet.styles.statisticKeyline} />
           <View style={StyleSheet.styles.statisticContainer}>
-            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toNumber(0, {precision: 0})}</Text>
+            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(0, {precision: 0})}</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>New Testament</Text>
           </View>
           <View style={StyleSheet.styles.statisticKeyline} />

@@ -28,8 +28,6 @@ import { ReadingTime } from '../../Common/NumberHelper';
 import Localizable from '../../Common/Localizable';
 import Icon from '../../Components/Common/Icon';
 
-const Bible = require('../../Locale/en/NLT/SourceView.json');
-
 const MAXIMUM_SOURCE_COUNT = 9;
 
 type Props = {
@@ -56,7 +54,7 @@ export default class DiscoverSources extends Component {
   }
 
   componentDidMount() {
-    const sources = Bible.sources.slice(0).sort((a, b) => a.wordCount > b.wordCount ? -1 : 1).slice(0, MAXIMUM_SOURCE_COUNT);
+    const sources = this.props.bible.sources.slice(0).sort((a, b) => a.wordCount > b.wordCount ? -1 : 1).slice(0, MAXIMUM_SOURCE_COUNT);
 
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(sources)
@@ -112,7 +110,7 @@ export default class DiscoverSources extends Component {
       "god": "avatar-divine",
     };
 
-    const sourcePercent = (source.wordCount / Bible.wordCount) * 100;
+    const sourcePercent = (source.wordCount / this.props.bible.wordCount) * 100;
     const sourceType = SOURCE_TYPE_MAP[source.name] || 'support';
     const iconName = ICON_MAP[sourceType] || 'avatar-human-group';
 

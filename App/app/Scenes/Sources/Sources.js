@@ -25,11 +25,10 @@ import { SourcesBarChart, SpheresBarChart } from '../../Components/Charts';
 import { ReadingTime } from '../../Common/NumberHelper';
 import Icon from '../../Components/Common/Icon';
 
-const Bible = require('../../Locale/en/NLT/SourceView.json');
-
 const LISTVIEW_REF = 'LISTVIEW_REF';
 
 type Props = {
+  bible: Object,
   onPressSource: Function,
 };
 
@@ -44,7 +43,7 @@ export default class Sources extends Component {
     super(props);
 
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.key !== r2.key, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
-    const sources = Bible.sources.slice(0).sort((a, b) => a.name > b.name ? 1 : -1);
+    const sources = props.bible.sources.slice(0).sort((a, b) => a.name > b.name ? 1 : -1);
 
     this.state = {
       dataSource: dataSource.cloneWithRowsAndSections({sources: sources})

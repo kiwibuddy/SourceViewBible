@@ -28,8 +28,6 @@ import { ReadingTime } from '../../Common/NumberHelper';
 import Localizable from '../../Common/Localizable';
 import Icon from '../../Components/Common/Icon';
 
-const Bible = require('../../Locale/en/NLT/SourceView.json');
-
 const MAXIMUM_SPHERE_COUNT = 9;
 
 type Props = {
@@ -56,7 +54,7 @@ export default class DiscoverSpheres extends Component {
   }
 
   componentDidMount() {
-    let spheres = Bible.spheres.slice(0, MAXIMUM_SPHERE_COUNT);
+    let spheres = this.props.bible.spheres.slice(0, MAXIMUM_SPHERE_COUNT);
     const delta = MAXIMUM_SPHERE_COUNT - spheres.length;
     if (delta > 0) {
       for (let i = 0; i < delta; i++) {
@@ -110,7 +108,7 @@ export default class DiscoverSpheres extends Component {
       return this._renderBlank();
     }
 
-    const spherePercent = (sphere.wordCount / Bible.wordCount) * 100;
+    const spherePercent = (sphere.wordCount / this.props.bible.wordCount) * 100;
     const iconName = `icon-${sphere.key}-filled`;
     return (
       <TouchableOpacity style={styles.itemContainer} onPress={ () => this.props.onPressSphere(sphere) }>

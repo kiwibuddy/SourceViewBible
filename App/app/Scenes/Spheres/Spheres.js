@@ -24,13 +24,12 @@ import LinearGradient from 'react-native-linear-gradient';
 import { BarChart } from '../../Components/Charts';
 import Icon from '../../Components/Common/Icon';
 
-const Bible = require('../../Locale/en/NLT/SourceView.json');
-
 const WIDTH = Dimensions.get('window').width;
 const CAROUSEL_ITEM_SIZE = 80;
 const MAXIMUM_BOOK_COUNT = 5;
 
 type Props = {
+  bible: Object,
   sphere?: Object,
   onPressBook: Function,
   onPressBooks: Function,
@@ -54,7 +53,7 @@ export default class Spheres extends Component {
     if (props.sphere) {
       sphere = props.sphere;
     } else {
-      sphere = Bible.spheres[0];
+      sphere = props.bible.spheres[0];
     }
 
     this.state = {sphere};
@@ -62,7 +61,7 @@ export default class Spheres extends Component {
 
   render() {
     const { sphere } = this.state;
-    const spherePercent = (sphere.wordCount / Bible.wordCount) * 100;
+    const spherePercent = (sphere.wordCount / this.props.bible.wordCount) * 100;
     const books = this._getBooks();
     const bookRows = books.map(book => this._renderBookRow(book));
     return (
@@ -186,8 +185,9 @@ export default class Spheres extends Component {
   };
 
   _getBooks = () => {
+    const { bible } = this.props;
     const { sphere } = this.state;
-    return Bible.books.slice(0).sort((bookA, bookB) => {
+    return bible.books.slice(0).sort((bookA, bookB) => {
       const bookAWordCount = sphere.bookCounts[bookA.key];
       const bookAPercent = (bookAWordCount / bookA.wordCount);
 
