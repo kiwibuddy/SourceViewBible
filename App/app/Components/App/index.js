@@ -45,21 +45,18 @@ export default class App extends Component {
       routes: [
         {key: '/Discover', title: Localizable.t('discover')},
       ],
-    },
-    showBookmarks: false
+    }
   };
 
   render() {
-    if (this.state.showBookmarks) {
-      return this._renderBookmarks();
-    }
-
     const { navigation } = this.state;
     const route = navigation.routes[navigation.index];
+
+    const scene = this._renderPage({route});
+    if (route.modal) return scene;
+
     const navigationBar = this._renderNavigationBar({navigationState: navigation});
     const toolbar = this._renderToolbar({navigationState: navigation, jumpToIndex: this._jumpToIndex});
-    const scene = this._renderPage({route});
-
     return (
       <View style={{flex: 1}}>
         {scene}
@@ -71,6 +68,8 @@ export default class App extends Component {
 
   _renderPage = (props: any) => {
     const scene = this._renderScene(props);
+    if (props.route.modal) return scene;
+
     return (
       <View style={{flex: 1, marginTop: NavigationBar.HEIGHT, marginBottom: Toolbar.HEIGHT}}>
         {scene}
@@ -82,6 +81,15 @@ export default class App extends Component {
     const { route } = props;
 
     switch (route.key) {
+      case '/Bookmarks':
+        return <Bookmarks
+            onPressDone={() => this._popRoute()}
+            onPressRoute={(route) => {
+              this._popRoute(() => {
+                this._pushRoute(route);
+              });
+            }}
+          />;
       case '/Books':
         return <Books onPressBook={book => this._pushRoute({key: '/Books/Overview', book: book, title: Localizable.t('book-overview', {name: book.name})})} />;
       case '/Books/Chapters':
@@ -178,19 +186,6 @@ export default class App extends Component {
     };
   };
 
-  _renderBookmarks = () => {
-    return (
-      <Bookmarks
-        onPressDone={() => this.setState({showBookmarks: false})}
-        onPressRoute={(route) => {
-          this.setState({showBookmarks: false}, () => {
-            this._pushRoute(route);
-          });
-        }}
-      />
-    );
-  };
-
   _renderNavigationBar = (props: any) => {
     const { navigationState } = props;
     const route = navigationState.routes[navigationState.index];
@@ -226,7 +221,7 @@ export default class App extends Component {
         </View>
         <ToolbarButton
           imageSource={require('../Navigation/Images/nav-bookmarks.png')}
-          onPress={() => {this.setState({showBookmarks: true})}}
+          onPress={() => {this._pushRoute({key: '/Bookmarks', modal: true})}}
         />
       </Toolbar>
     );
@@ -266,7 +261,7 @@ export default class App extends Component {
     }
   };
 
-  _popRoute = () => {
+  _popRoute = (callback?: Function) => {
     const state = this.state.navigation;
     if (state.index <= 0) {
       // [Note]: Over-popping does not throw error. Instead, it will be no-op.
@@ -280,7 +275,7 @@ export default class App extends Component {
     };
 
     if (navigation !== this.state.navigation) {
-      this.setState({navigation});
+      this.setState({navigation}, callback);
     }
   };
 }
