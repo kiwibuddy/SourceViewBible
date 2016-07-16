@@ -172,6 +172,7 @@ export default class App extends Component {
         return <Spheres
           onPressBook={({sphere, book}) => this._pushRoute({key: '/Books/Overview', book: book, title: Localizable.t('book-overview', {name: book.name})})}
           onPressBooks={({sphere}) => this._pushRoute({key: '/Spheres/Books', sphere: sphere, title: sphere.name })}
+          onPressPassages={({sphere}) => this._pushRoute({key: '/Spheres/Passages', sphere: sphere, title: sphere.name })}
           onPressWords={({sphere}) => this._pushRoute({key: '/Spheres/Words', sphere: sphere, title: sphere.name })}
           sphere={route.sphere}
         />;

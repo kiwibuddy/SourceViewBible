@@ -34,6 +34,7 @@ type Props = {
   sphere?: Object,
   onPressBook: Function,
   onPressBooks: Function,
+  onPressPassages: Function,
   onPressWords: Function,
 };
 
@@ -103,7 +104,7 @@ export default class Spheres extends Component {
             <Text style={StyleSheet.styles.statisticSubtitle}>Words</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.readButton}>
+        <TouchableOpacity style={styles.readButton} onPress={() => this.props.onPressPassages({sphere})}>
           <Text style={styles.readButtonTitle}>Explore 52 key passages</Text>
         </TouchableOpacity>
         <View style={styles.contentContainer}>
