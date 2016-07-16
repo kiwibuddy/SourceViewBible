@@ -247,6 +247,9 @@ export default class App extends Component {
 
   _pushRoute = (route: any) => {
     const state = this.state.navigation;
+    const currentRoute = state.routes[state.index];
+    if (route.key === currentRoute.key) return;
+
     const delta = (state.routes.length - state.index) - 1;
 
     const routes = [
