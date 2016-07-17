@@ -16,7 +16,6 @@ import com.oblador.vectoricons.VectorIconsPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.sourceviewbible.emdros.EmdrosReactPackage;
 import com.i18n.reactnativei18n.ReactNativeI18n;
-import com.facebook.react.ARTPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -33,8 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
           new VectorIconsPackage(),
           new LinearGradientPackage(),
           new EmdrosReactPackage(),
-          new ReactNativeI18n(),
-          new ARTPackage()
+          new ReactNativeI18n()
       );
     }
   };

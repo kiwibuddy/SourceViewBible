@@ -72,7 +72,6 @@ const styles = {
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: '#c8c7cc',
     paddingVertical: 6,
-    backgroundColor: 'white',
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingRight: 15,

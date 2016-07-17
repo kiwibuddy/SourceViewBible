@@ -7,7 +7,6 @@ import ReactNative, {
   Text,
   Image,
   ListView,
-  ScrollView,
   TouchableOpacity,
   RecyclerViewBackedScrollView,
   Dimensions
@@ -69,35 +68,33 @@ export default class DiscoverSpheres extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <TouchableOpacity onPress={this.props.onPressSpheres}>
-          <View style={styles.sectionHeaderContainer}>
-            <Text style={StyleSheet.styles.sectionHeaderTitle}>SPHERES</Text>
-            <View style={styles.sectionHeaderDetail}>
-              <Image source={require('../../Images/common/disclosure.png')}  style={styles.disclosure} />
-            </View>
-            </View>
-        </TouchableOpacity>
-
-        <View style={[styles.sectionContainer, {flexDirection: 'column'}]}>
-          <ListView
-            style={{marginHorizontal: 4}}
-            contentContainerStyle={styles.list}
-            dataSource={this.state.dataSource}
-            initialListSize={3}
-            pageSize={3}
-            enableEmptySections={true}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            pagingEnabled={true}
-            renderRow={this._renderSphere}
-            renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
-            onMomentumScrollEnd={this._onScrollEnd}
-          />
-          <PageControl
-            numberOfPages={3}
-            currentPage={this.state.currentPage}
-          />
+      <View style={{flex: 1}}>
+        <View style={styles.container}>
+         <TouchableOpacity onPress={this.props.onPressSpheres}>
+           <View style={styles.sectionHeaderContainer}>
+             <Text style={StyleSheet.styles.sectionHeaderTitle}>SPHERES</Text>
+             <View style={styles.sectionHeaderDetail}>
+               <Image source={require('../../Images/common/disclosure.png')}  style={styles.disclosure} />
+             </View>
+             </View>
+         </TouchableOpacity>
+          <View style={{paddingVertical: 5, flexDirection: 'column'}}>
+            <ListView
+              dataSource={this.state.dataSource}
+              enableEmptySections={true}
+              horizontal={true}
+              onMomentumScrollEnd={this._onScrollEnd}
+              pageSize={3}
+              pagingEnabled={true}
+              renderRow={this._renderSphere}
+              showsHorizontalScrollIndicator={false}
+              style={{marginHorizontal: 4}}
+            />
+            <PageControl
+              numberOfPages={3}
+              currentPage={this.state.currentPage}
+            />
+          </View>
         </View>
       </View>
     );
@@ -194,13 +191,6 @@ const styles = StyleSheet.create({
     marginTop: 8,
     marginLeft: 5,
     marginRight: -10,
-  },
-  list: {
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    // marginHorizontal: 4,
   },
   itemContainer: {
     width: ((width - 8) / 3),
