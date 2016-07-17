@@ -10,7 +10,7 @@ import {
   View
 } from 'react-native';
 
-const TOOLBAR_HEIGHT = 44;
+const TOOLBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 
 export default class Toolbar extends Component {
   static HEIGHT = TOOLBAR_HEIGHT;
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     left: 0,
     backgroundColor: Platform.OS === 'ios' ? '#EFEFF2' : '#FFF',
     borderTopColor: 'rgba(0, 0, 0, .15)',
-    borderTopWidth: Platform.OS === 'ios' ? StyleSheet.hairlineWidth : 0,
+    borderTopWidth: Platform.OS === 'ios' ? StyleSheet.hairlineWidth : 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
