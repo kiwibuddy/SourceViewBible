@@ -62,6 +62,35 @@ export default class Sources extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <View style={styles.listIndexContainer}>
+          <TouchableOpacity><Text style={styles.listIndexTitle}>A</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={styles.listIndexTitle}>B</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={styles.listIndexTitle}>C</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={styles.listIndexTitle}>D</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={styles.listIndexTitle}>E</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={styles.listIndexTitle}>F</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={styles.listIndexTitle}>G</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={styles.listIndexTitle}>H</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={styles.listIndexTitle}>I</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={styles.listIndexTitle}>J</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={styles.listIndexTitle}>K</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={styles.listIndexTitle}>L</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={styles.listIndexTitle}>M</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={styles.listIndexTitle}>N</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={styles.listIndexTitle}>O</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={styles.listIndexTitle}>P</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={styles.listIndexTitle}>Q</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={styles.listIndexTitle}>R</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={styles.listIndexTitle}>S</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={styles.listIndexTitle}>T</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={styles.listIndexTitle}>U</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={styles.listIndexTitle}>V</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={styles.listIndexTitle}>W</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={styles.listIndexTitle}>X</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={styles.listIndexTitle}>Y</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={styles.listIndexTitle}>Z</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={styles.listIndexTitle}>#</Text></TouchableOpacity>
+        </View>
         <ListView
           ref="LISTVIEW_REF"
           dataSource={this.state.dataSource}
@@ -164,16 +193,36 @@ const styles = StyleSheet.create({
     marginBottom: 7,
   },
   sectionHeaderContainer: {
-    ...StyleSheet.styles.sectionHeaderContainer,
+    paddingVertical: 8,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingRight: 15,
     backgroundColor: '#f0f0f0',
+    marginRight: 15,
   },
   sectionHeaderTitle: {
-    ...StyleSheet.styles.sectionHeaderTitle,
+    color: '#59626a',
+    fontSize: 17,
+    fontWeight: 'bold',
     marginLeft: 8,
   },
   separator: {
     ...StyleSheet.styles.separator,
     marginLeft: 8,
+    marginRight: 15,
+  },
+  listIndexContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    position: 'absolute',
+    right: 3,
+  },
+  listIndexTitle: {
+    color: '#CF1E00',
+    fontSize: 11,
+    fontWeight: '500',
   },
   ...Platform.select({
       ios: {
