@@ -133,12 +133,16 @@ export default class Sources extends Component {
       <TouchableOpacity style={styles.section} onPress={() => this.props.onPressSource(source)}>
         <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
           <View style={styles.sourcesLeftContainer}>
-              <Icon
-                name={iconName}
-                style={[styles.sourceAvatar, {color: color}]}
-                size={20}
-              />
+            <Icon
+              name={iconName}
+              style={[styles.sourceAvatar, {color: color}]}
+              size={20}
+            />
             <Text style={StyleSheet.styles.cell.title}>{source.name}</Text>
+            <Text style={StyleSheet.styles.cell.subtitle}>0 words</Text>
+          </View>
+          <View style={styles.sourcesRightContainer}>
+            <Text style={StyleSheet.styles.cell.subtitle}>0 BC</Text>
           </View>
         </View>
       </TouchableOpacity>
