@@ -21,7 +21,26 @@ import SourcesBarChart from '../../Components/Charts/SourcesBarChart';
 
 import Icon from '../../Components/Common/Icon';
 
+type Props = {
+  bible: Object,
+  sourceID: string,
+};
+
+type State = {
+  source: Object
+};
+
 export default class SourceConversation extends Component {
+  props: Props;
+  state: State;
+
+  constructor(props: Props) {
+    super(props);
+
+    const source = props.bible.sources.find(source => source.key === props.sourceID);
+    this.state = {source};
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -44,7 +63,7 @@ export default class SourceConversation extends Component {
         <TouchableOpacity style={styles.section}>
           <View style={[styles.sourcesCellContainer, {paddingVertical: 15}]}>
             <View style={styles.sourcesLeftContainer}>
-              <TouchableOpacity onPress={() => this.props.onPressSource(source)}>
+              <TouchableOpacity onPress={() => {}}>
                 <Icon
                   name={'avatar-human-group'}
                   style={[styles.sourceAvatar, {color: 'black'}]}
@@ -149,7 +168,6 @@ const styles = StyleSheet.create({
     ...StyleSheet.styles.separator,
   },
   body: {
-    ...StyleSheet.styles.body,
     paddingBottom: 5,
   },
 });

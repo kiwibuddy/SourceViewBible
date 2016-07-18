@@ -18,13 +18,16 @@ import {
 import ScriptureView from './ScriptureView';
 
 type Props = {
-  book: Object,
+  bible: Object,
+  bookID: string,
   chapterNumber: number,
 };
 
 export default class Reader extends Component {
+  props: Props;
+
   render() {
-    const book = this.props.book;
+    const book = this.props.bible.books.find(book => book.key === this.props.bookID);
     const chapterNumber = this.props.chapterNumber || 1;
     const chapter = book.chapters[chapterNumber - 1];
 

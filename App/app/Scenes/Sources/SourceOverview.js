@@ -23,7 +23,8 @@ import ParallaxMotionView from '../../Components/Common/ParallaxMotionView';
 import Icon from '../../Components/Common/Icon';
 
 type Props = {
-  source: Object,
+  bible: Object,
+  sourceID: string,
   onPressBooks: Function,
   onPressConversations: Function,
   onPressSource: Function,
@@ -31,13 +32,23 @@ type Props = {
   onPressWords: Function,
 };
 
+type State = {
+  source: Object
+};
+
 export default class SourceOverview extends Component {
+  props: Props;
+  state: State;
+
   constructor(props: Props) {
     super(props);
+
+    const source = props.bible.sources.find(source => source.key === props.sourceID);
+    this.state = {source};
   }
 
   render() {
-    const { source } = this.props;
+    const { source } = this.state;
     const words = source.words.map(word => word.word);
     return (
       <ScrollView style={styles.container}>

@@ -15,7 +15,26 @@ import {
   Localizable
 } from '../../Common';
 
+type Props = {
+  bible: Object,
+  sourceID: string,
+};
+
+type State = {
+  source: Object
+};
+
 export default class SourceBooks extends Component {
+  props: Props;
+  state: State;
+
+  constructor(props: Props) {
+    super(props);
+
+    const source = props.bible.sources.find(source => source.key === props.sourceID);
+    this.state = {source};
+  }
+
   render() {
     return (
       <View style={styles.container}>

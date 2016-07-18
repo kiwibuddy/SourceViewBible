@@ -23,12 +23,14 @@ import { SourcesBarChart, SpheresBarChart, WordCloud } from '../../Components/Ch
 import ParallaxMotionView from '../../Components/Common/ParallaxMotionView';
 
 type Props = {
-  source: Object,
+  bible: Object,
+  sourceID: string,
   onPressWords: Function,
 };
 
 type State = {
-  dataSource: any
+  dataSource: any,
+  source: Object,
 };
 
 export default class SourceWords extends Component {
@@ -37,9 +39,11 @@ export default class SourceWords extends Component {
   constructor(props: Props) {
     super(props);
 
+    const source = props.bible.sources.find(source => source.key === props.sourceID);
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.key !== r2.key, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     this.state = {
-      dataSource: dataSource.cloneWithRows(props.source.words)
+      source,
+      dataSource: dataSource.cloneWithRows(source.words)
     };
   }
 
@@ -73,7 +77,7 @@ export default class SourceWords extends Component {
       "Jesus": "god"
     };
 
-    const { source } = this.props;
+    const { source } = this.state;
     const words = source.words.map(word => word.word);
     const sourceType = SOURCE_TYPE_MAP[source.name] || 'support';
 

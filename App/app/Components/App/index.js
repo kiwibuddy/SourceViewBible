@@ -153,12 +153,11 @@ export default class App extends Component {
       case '/Reader':
         return <Reader
           bible={Bible}
-          book={route.book}
+          bookID={route.book.key}
           chapterNumber={route.chapterNumber || 1
         }/>;
       case '/Sources':
         return <Sources
-          bible={Bible}
           bible={Bible}
           onPressSource={(source) => source && this._pushRoute({key: '/Sources/Overview', source: source, title: source.name})}
         />;
@@ -170,27 +169,27 @@ export default class App extends Component {
           onPressSource={(source) => source && this._pushRoute({key: '/Sources/Overview', source: source, title: source.name})}
           onPressSpheres={() => this._pushRoute({key: '/Sources/Spheres', source: route.source, title: Localizable.t('source-spheres', {name: route.source.name})})}
           onPressWords={() => this._pushRoute({key: '/Sources/Words', source: route.source, title: Localizable.t('source-words', {name: route.source.name})})}
-          source={route.source}
+          sourceID={route.source.key}
         />;
       case '/Sources/Books':
         return <SourceBooks
           bible={Bible}
-          source={route.source}
+          sourceID={route.source.key}
         />;
       case '/Sources/Conversations':
         return <SourceConversations
           bible={Bible}
-          source={route.source}
+          sourceID={route.source.key}
         />;
       case '/Sources/Spheres':
         return <SourceSpheres
           bible={Bible}
-          source={route.source}
+          sourceID={route.source.key}
         />;
       case '/Sources/Words':
         return <SourceWords
           bible={Bible}
-          source={route.source}
+          sourceID={route.source.key}
         />;
       case '/Spheres':
         return <Spheres
