@@ -131,13 +131,15 @@ export default class Sources extends Component {
 
     return (
       <TouchableOpacity style={styles.section} onPress={() => this.props.onPressSource(source)}>
-        <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
-          <View style={styles.sourcesLeftContainer}>
+        <View style={styles.sourcesCellContainer}>
+          <View style={styles.sourcesAvatar}>
             <Icon
               name={iconName}
               style={[styles.sourceAvatar, {color: color}]}
               size={20}
             />
+          </View>
+          <View style={styles.sourcesLeftContainer}>
             <Text style={StyleSheet.styles.cell.title}>{source.name}</Text>
             <Text style={StyleSheet.styles.cell.subtitle}>0 words</Text>
           </View>
@@ -176,15 +178,23 @@ const styles = StyleSheet.create({
   sourcesCellContainer: {
     flex: 1,
     marginRight: 15,
+    paddingVertical: 6,
     flexDirection: 'row',
+  },
+  sourcesAvatar: {
+    justifyContent: 'center',
+    paddingRight: 5,
   },
   sourcesLeftContainer: {
     flex: 2,
-    flexDirection: 'row',
-    paddingTop: 2,
+    flexDirection: 'column',
   },
   sourcesRightContainer: {
     flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    marginRight: 8,
+    paddingTop: 4,
   },
   sourceAvatar: {
     width: 20,
