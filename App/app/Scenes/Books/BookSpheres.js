@@ -40,7 +40,7 @@ export default class BookSpheres extends Component {
 
     const book = props.bible.books.find(book => book.id === props.bookID);
 
-    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.key !== r2.key, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
+    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     const spheres = props.bible.spheres.map(sphere => {
       return ({...sphere, bookWordCount: book.sphereCounts[sphere.id]});
     });

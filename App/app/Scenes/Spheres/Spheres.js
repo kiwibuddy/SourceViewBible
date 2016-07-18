@@ -188,10 +188,10 @@ export default class Spheres extends Component {
     const { bible } = this.props;
     const { sphere } = this.state;
     return bible.books.slice(0).sort((bookA, bookB) => {
-      const bookAWordCount = sphere.bookCounts[bookA.key];
+      const bookAWordCount = sphere.bookCounts[bookA.id];
       const bookAPercent = (bookAWordCount / bookA.wordCount);
 
-      const bookBWordCount = sphere.bookCounts[bookB.key];
+      const bookBWordCount = sphere.bookCounts[bookB.id];
       const bookBPercent = (bookBWordCount / bookB.wordCount);
 
       if (bookAPercent == bookBPercent) {
