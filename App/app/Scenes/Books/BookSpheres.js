@@ -22,11 +22,12 @@ import { PieChart, SourcesBarChart, SpheresBarChart } from '../../Components/Cha
 
 type Props = {
   bible: Object,
-  book: Object,
+  bookID: string,
   onPressSphere: Function,
 };
 
 type State = {
+  book: Object,
   dataSource: any
 };
 
@@ -37,18 +38,21 @@ export default class BookSpheres extends Component {
   constructor(props: Props) {
     super(props);
 
+    const book = props.bible.books.find(book => book.key === props.bookID);
+
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.key !== r2.key, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     const spheres = props.bible.spheres.map(sphere => {
-      return ({...sphere, bookWordCount: props.book.sphereCounts[sphere.key]});
+      return ({...sphere, bookWordCount: book.sphereCounts[sphere.key]});
     });
 
     this.state = {
+      book,
       dataSource: dataSource.cloneWithRows(spheres)
     };
   }
 
   render() {
-    const { book } = this.props;
+    const { book } = this.state;
     return (
       <View style={styles.container}>
         <ListView
@@ -63,7 +67,7 @@ export default class BookSpheres extends Component {
   }
 
   _renderHeader = (props: any) => {
-    const { book } = this.props;
+    const { book } = this.state;
     const spherePercent = (book.sphereWordCount / book.wordCount) * 100;
 
     return (
@@ -90,7 +94,7 @@ export default class BookSpheres extends Component {
   };
 
   _renderRow = (sphere: Object) => {
-    const { book } = this.props;
+    const { book } = this.state;
     const wordCount = sphere.bookWordCount;
     const spherePercent = (wordCount / book.sphereWordCount) * 100;
     const tintColor = Colors.spheres[sphere.key].tint;

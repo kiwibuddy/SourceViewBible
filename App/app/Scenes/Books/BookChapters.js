@@ -33,22 +33,28 @@ const SEGMENT_INDEXES = {
 const LISTVIEW_REF = 'LISTVIEW_REF';
 
 type Props = {
-  book: Object
+  bible: Object,
+  bookID: string,
+  onPressScripture: Function
 };
 
 type State = {
+  book: Object,
   dataSource: any,
   selectedSegmentIndex: number,
 };
 
 export default class BookChapters extends Component {
+  props: Props;
   state: State;
 
   constructor(props: Object) {
     super(props);
 
+    const book = props.bible.books.find(book => book.key === props.bookID);
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     this.state = {
+      book,
       dataSource: dataSource,
       selectedSegmentIndex: 0
     };
@@ -86,7 +92,7 @@ export default class BookChapters extends Component {
   }
 
   _renderRow = (chapter: Object, sectionID: string, rowID: string, highlightRow: boolean) => {
-    const { book } = this.props;
+    const { book } = this.state;
     const chapterNumber = chapter.chapterNumber;
 
     const chart = (this.state.selectedSegmentIndex === SEGMENT_INDEXES.SPHERES ? this._renderSpheresChart(book, chapter) : this._renderSourcesChart(book, chapter));
@@ -137,12 +143,13 @@ export default class BookChapters extends Component {
   };
 
   _getDataSource = (segmentIndex: number) => {
+    const { book } = this.state;
     switch (segmentIndex) {
       case SEGMENT_INDEXES.SPHERES:
-        return this.state.dataSource.cloneWithRowsAndSections({spheres: this.props.book.chapters});
+        return this.state.dataSource.cloneWithRowsAndSections({spheres: book.chapters});
 
       default:
-        return this.state.dataSource.cloneWithRowsAndSections({sources: this.props.book.chapters});
+        return this.state.dataSource.cloneWithRowsAndSections({sources: book.chapters});
     }
   };
 

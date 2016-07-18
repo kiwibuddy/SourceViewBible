@@ -23,23 +23,29 @@ import { SourcesBarChart, SpheresBarChart, WordCloud } from '../../Components/Ch
 import ParallaxMotionView from '../../Components/Common/ParallaxMotionView';
 
 type Props = {
-  book: Object,
+  bible: Object,
+  bookID: string,
   onPressWords: Function,
 };
 
 type State = {
+  book: Object,
   dataSource: any
 };
 
 export default class BookWords extends Component {
+  props: Props;
   state: State;
 
   constructor(props: Props) {
     super(props);
 
+    const book = props.bible.books.find(book => book.key === props.bookID);
+
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.key !== r2.key, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     this.state = {
-      dataSource: dataSource.cloneWithRows(props.book.words)
+      book,
+      dataSource: dataSource.cloneWithRows(book.words)
     };
   }
 
@@ -67,7 +73,7 @@ export default class BookWords extends Component {
   };
 
   _renderHeader = (props: any) => {
-    const { book } = this.props;
+    const { book } = this.state;
     const words = book.words.map(word => word.word);
 
     return (

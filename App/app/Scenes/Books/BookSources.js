@@ -22,12 +22,14 @@ import SourcesBarChart from '../../Components/Charts/SourcesBarChart';
 import Icon from '../../Components/Common/Icon';
 
 type Props = {
-  book: Object,
+  bible: Object,
+  bookID: string,
   onPressScripture: Function,
   onPressSource: Function,
 };
 
 type State = {
+  book: Object,
   dataSource: any,
 };
 
@@ -37,21 +39,24 @@ export default class BookSources extends Component {
   constructor(props: Object) {
     super(props);
 
+    const book = props.bible.books.find(book => book.key === props.bookID);
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     this.state = {
-      dataSource: dataSource
+      book,
+      dataSource
     };
   }
 
   componentDidMount() {
-    const sources = this.props.book.sources.slice(0).sort((a, b) => a.wordCount > b.wordCount ? -1 : 1);
+    const { book } = this.state;
+    const sources = book.sources.slice(0).sort((a, b) => a.wordCount > b.wordCount ? -1 : 1);
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(sources)
     });
   }
 
   render() {
-    const { book } = this.props
+    const { book } = this.state;
 
     return (
       <View style={styles.container}>
@@ -70,7 +75,7 @@ export default class BookSources extends Component {
   }
 
   _renderRow = (source: Object, sectionID: string, rowID: string, highlightRow: boolean) => {
-    const { book } = this.props;
+    const { book } = this.state;
 
     const SOURCE_TYPE_MAP = {
       "The Narrator": "narrator",
@@ -115,7 +120,7 @@ export default class BookSources extends Component {
   };
 
   _renderHeader = (props: any) => {
-    const { book } = this.props;
+    const { book } = this.state;
     const narratorPercent = (book.sourceTypeCounts.narrator / book.wordCount) * 100;
     const godPercent = (book.sourceTypeCounts.god / book.wordCount) * 100;
     const leadPercent = (book.sourceTypeCounts.lead / book.wordCount) * 100;
@@ -155,7 +160,7 @@ export default class BookSources extends Component {
   _onPressScripture = (source: Object) => {
     const occurrence = source.occurrences[0];
     if (occurrence) {
-      const book = this.props.book;
+      const { book } = this.state;
       const chapterNumber = occurrence.chapterNumber;
       this.props.onPressScripture({book, chapterNumber});
     }

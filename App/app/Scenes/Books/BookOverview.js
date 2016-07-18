@@ -25,7 +25,8 @@ import { ReadingTime } from '../../Common/NumberHelper';
 const MAX_NUMBER_OF_SOURCES = 4;
 
 type Props = {
-  book: Object,
+  bible: Object,
+  bookID: string,
   onPressScripture: Function,
   onPressChapters: Function,
   onPressSource: Function,
@@ -34,9 +35,23 @@ type Props = {
   onPressWords: Function,
 };
 
+type State = {
+  book: Object
+};
+
 export default class BookOverview extends Component {
+  props: Props;
+  state: State;
+
+  constructor(props: Props) {
+    super(props);
+
+    const book = props.bible.books.find(book => book.key === props.bookID);
+    this.state = {book}
+  }
+
   render() {
-    const { book } = this.props;
+    const { book } = this.state;
 
     const sources = book.sources.slice(0).sort((a, b) => a.wordCount > b.wordCount ? -1 : 1).slice(0, MAX_NUMBER_OF_SOURCES).map((source) => {
       return this._renderSource(source);
