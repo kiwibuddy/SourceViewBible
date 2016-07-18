@@ -30,7 +30,7 @@ const MAXIMUM_BOOK_COUNT = 5;
 
 type Props = {
   bible: Object,
-  sphere?: Object,
+  sphereID?: string,
   onPressBook: Function,
   onPressBooks: Function,
   onPressPassages: Function,
@@ -50,8 +50,8 @@ export default class Spheres extends Component {
     super(props);
 
     let sphere = null;
-    if (props.sphere) {
-      sphere = props.sphere;
+    if (props.sphereID) {
+      sphere = props.bible.spheres.find(sphere => sphere.key === props.sphereID);
     } else {
       sphere = props.bible.spheres[0];
     }

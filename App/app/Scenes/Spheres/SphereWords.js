@@ -23,23 +23,28 @@ import { SourcesBarChart, SpheresBarChart, WordCloud } from '../../Components/Ch
 import ParallaxMotionView from '../../Components/Common/ParallaxMotionView';
 
 type Props = {
-  sphere: Object,
+  bible: Object,
+  sphereID: string,
   onPressWords: Function,
 };
 
 type State = {
-  dataSource: any
+  dataSource: any,
+  sphere: Object,
 };
 
 export default class SphereWords extends Component {
+  props: Props;
   state: State;
 
   constructor(props: Props) {
     super(props);
 
+    const sphere = props.bible.spheres.find(sphere => sphere.key === props.sphereID);
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.key !== r2.key, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     this.state = {
-      dataSource: dataSource.cloneWithRows(props.sphere.words)
+      dataSource: dataSource.cloneWithRows(sphere.words),
+      sphere
     };
   }
 
@@ -67,7 +72,7 @@ export default class SphereWords extends Component {
   };
 
   _renderHeader = (props: any) => {
-    const { sphere } = this.props;
+    const { sphere } = this.state;
     const words = sphere.words.map(word => word.word);
 
     return (

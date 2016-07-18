@@ -5,6 +5,7 @@ import React, { Component, PropTypes } from 'react';
 const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
 
 import {
+  ListView,
   Text,
   View
 } from 'react-native';
@@ -15,7 +16,31 @@ import {
   Localizable
 } from '../../Common';
 
+type Props = {
+  bible: Object,
+  sphereID: string,
+};
+
+type State = {
+  dataSource: any,
+  sphere: Object,
+};
+
 export default class SpherePassages extends Component {
+  props: Props;
+  state: State;
+
+  constructor(props: Props) {
+    super(props);
+
+    const sphere = props.bible.spheres.find(sphere => sphere.key === props.sphereID);
+    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.key !== r2.key, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
+    this.state = {
+      dataSource: dataSource,
+      sphere
+    };
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -70,7 +95,6 @@ const styles = StyleSheet.create({
     marginLeft: 15,
   },
   body: {
-    ...StyleSheet.styles.body,
     paddingBottom: 5,
   },
 });

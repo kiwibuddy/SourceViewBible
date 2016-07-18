@@ -5,9 +5,10 @@ import React, { Component, PropTypes } from 'react';
 const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
 
 import {
+  ListView,
   Text,
+  TouchableOpacity,
   View,
-  TouchableOpacity
 } from 'react-native';
 
 import {
@@ -18,7 +19,31 @@ import {
 
 import Icon from '../../Components/Common/Icon';
 
+type Props = {
+  bible: Object,
+  sphereID: string,
+};
+
+type State = {
+  dataSource: any,
+  sphere: Object,
+};
+
 export default class SphereSources extends Component {
+  props: Props;
+  state: State;
+
+  constructor(props: Props) {
+    super(props);
+
+    const sphere = props.bible.spheres.find(sphere => sphere.key === props.sphereID);
+    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.key !== r2.key, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
+    this.state = {
+      dataSource: dataSource,
+      sphere
+    };
+  }
+
   render() {
     return (
       <View style={styles.container}>

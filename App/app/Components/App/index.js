@@ -199,28 +199,29 @@ export default class App extends Component {
           onPressPassages={({sphere}) => this._pushRoute({key: '/Spheres/Passages', sphere: sphere, title: sphere.name })}
           onPressSources={({sphere}) => this._pushRoute({key: '/Spheres/Sources', sphere: sphere, title: sphere.name })}
           onPressWords={({sphere}) => this._pushRoute({key: '/Spheres/Words', sphere: sphere, title: sphere.name })}
-          sphere={route.sphere}
+          sphereID={route.sphere && route.sphere.key}
         />;
       case '/Spheres/Books':
         return <SphereBooks
           bible={Bible}
           onPressBook={({sphere, book}) => this._pushRoute({key: '/Books/Overview', book: book, title: Localizable.t('book-overview', {name: book.name})})}
-          sphere={route.sphere}
+          sphereID={route.sphere.key}
         />;
       case '/Spheres/Passages':
         return <SpherePassages
           bible={Bible}
-          sphere={route.sphere}
+          sphereID={route.sphere.key}
         />;
       case '/Spheres/Sources':
         return <SphereSources
           bible={Bible}
-          sphere={route.sphere}
+          sphereID={route.sphere.key}
         />;
       case '/Spheres/Words':
         return <SphereWords
           bible={Bible}
-          sphere={route.sphere}
+          onPressWords={() => {}}
+          sphereID={route.sphere.key}
         />;
       default:
         return null;

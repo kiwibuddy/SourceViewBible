@@ -23,11 +23,12 @@ import { BarChart, PieChart } from '../../Components/Charts';
 type Props = {
   bible: Object,
   onPressBook: Function,
-  sphere: Object,
+  sphereID: string,
 };
 
 type State = {
   dataSource: any,
+  sphere: Object,
 };
 
 export default class SphereBooks extends Component {
@@ -37,7 +38,7 @@ export default class SphereBooks extends Component {
   constructor(props: Props) {
     super(props);
 
-    const { sphere } = props;
+    const sphere = props.bible.spheres.find(sphere => sphere.key === props.sphereID);
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.key !== r2.key, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     const books = props.bible.books.slice(0).sort((bookA, bookB) => {
       const bookAWordCount = sphere.bookCounts[bookA.key];
@@ -53,7 +54,8 @@ export default class SphereBooks extends Component {
     });
 
     this.state = {
-      dataSource: dataSource.cloneWithRows(books)
+      dataSource: dataSource.cloneWithRows(books),
+      sphere
     };
   }
 
@@ -70,7 +72,8 @@ export default class SphereBooks extends Component {
   }
 
   _renderHeader = () => {
-    const { bible, sphere } = this.props;
+    const { bible } = this.props;
+    const { sphere } = this.state;
     const spherePercent = (sphere.wordCount / bible.wordCount) * 100;
 
     let oldTestamentWordCount = 0;
@@ -114,7 +117,7 @@ export default class SphereBooks extends Component {
   };
 
   _renderRow = (book: Object) => {
-    const { sphere } = this.props;
+    const { sphere } = this.state;
     const wordCount = sphere.bookCounts[book.key];
     const spherePercent = (wordCount / book.wordCount) * 100;
 
