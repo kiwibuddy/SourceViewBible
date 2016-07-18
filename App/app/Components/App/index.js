@@ -81,6 +81,9 @@ export default class App extends Component {
 
   _renderScene = (props: any) => {
     const { route } = props;
+    const book = this._findBook(route.bookID);
+    const source = this._findSource(route.sourceID);
+    const sphere = this._findSphere(route.sphereID);
 
     switch (route.key) {
       case '/Bookmarks':
@@ -96,52 +99,52 @@ export default class App extends Component {
       case '/Books':
         return <Books
           bible={Bible}
-          onPressBook={book => this._pushRoute({key: '/Books/Overview', book: book, title: Localizable.t('book-overview', {name: book.name})})}
+          onPressBook={book => this._pushRoute({key: '/Books/Overview', bookID: book.key, title: Localizable.t('book-overview', {name: book.name})})}
         />;
       case '/Books/Chapters':
         return <BookChapters
           bible={Bible}
-          bookID={route.book.key}
-          onPressScripture={({book, chapterNumber}) => this._pushRoute({key: '/Reader', book, chapterNumber, title: book.name})}
+          bookID={route.bookID}
+          onPressScripture={({book, chapterNumber}) => this._pushRoute({key: '/Reader', bookID: route.bookID, chapterNumber, title: book.name})}
         />;
       case '/Books/Overview':
         return <BookOverview
           bible={Bible}
-          bookID={route.book.key}
-          onPressChapters={() => this._pushRoute({key: '/Books/Chapters', book: route.book, title: Localizable.t('book-chapters', {name: route.book.name})})}
-          onPressScripture={({book, chapterNumber}) => this._pushRoute({key: '/Reader', book, chapterNumber, title: book.name})}
-          onPressSource={(source) => this._pushRoute({key: '/Sources/Overview', source: source, book: route.book, title: Localizable.t('book-source', {book: route.book.name, source: source.name})})}
-          onPressSources={() => this._pushRoute({key: '/Books/Sources', book: route.book, title: Localizable.t('book-sources', {name: route.book.name})})}
-          onPressSpheres={() => this._pushRoute({key: '/Books/Spheres', book: route.book, title: Localizable.t('book-spheres', {name: route.book.name})})}
-          onPressWords={() => this._pushRoute({key: '/Books/Words', book: route.book, title: Localizable.t('book-words', {name: route.book.name})})}
+          bookID={route.bookID}
+          onPressChapters={() => this._pushRoute({key: '/Books/Chapters', bookID: route.bookID, title: Localizable.t('book-chapters', {name: book.name})})}
+          onPressScripture={({book, chapterNumber}) => this._pushRoute({key: '/Reader', bookID: book.key, chapterNumber, title: book.name})}
+          onPressSource={(source) => this._pushRoute({key: '/Sources/Overview', sourceID: source.key, bookID: route.bookID, title: Localizable.t('book-source', {book: book.name, source: source.name})})}
+          onPressSources={() => this._pushRoute({key: '/Books/Sources', bookID: route.bookID, title: Localizable.t('book-sources', {name: book.name})})}
+          onPressSpheres={() => this._pushRoute({key: '/Books/Spheres', bookID: route.bookID, title: Localizable.t('book-spheres', {name: book.name})})}
+          onPressWords={() => this._pushRoute({key: '/Books/Words', bookID: route.bookID, title: Localizable.t('book-words', {name: book.name})})}
         />;
       case '/Books/Sources':
         return <BookSources
           bible={Bible}
-          bookID={route.book.key}
-          onPressScripture={({book, chapterNumber}) => this._pushRoute({key: '/Reader', book, chapterNumber, title: book.name})}
-          onPressSource={(source) => this._pushRoute({key: '/Sources/Overview', source: source, book: route.book, title: Localizable.t('book-source', {book: route.book.name, source: source.name})})}
+          bookID={route.bookID}
+          onPressScripture={({book, chapterNumber}) => this._pushRoute({key: '/Reader', bookID: book.key, chapterNumber, title: book.name})}
+          onPressSource={(source) => this._pushRoute({key: '/Sources/Overview', sourceID: source.key, bookID: route.bookID, title: Localizable.t('book-source', {book: book.name, source: source.name})})}
         />;
       case '/Books/Spheres':
         return <BookSpheres
           bible={Bible}
-          bookID={route.book.key}
-          onPressSphere={sphere => this._pushRoute({key: '/Spheres', sphere: sphere, title: Localizable.t('spheres.text')})}
+          bookID={route.bookID}
+          onPressSphere={sphere => this._pushRoute({key: '/Spheres', sphereID: sphere.key, title: Localizable.t('spheres.text')})}
         />;
       case '/Books/Words':
         return <BookWords
           bible={Bible}
-          bookID={route.book.key}
+          bookID={route.bookID}
           onPressWords={() => {}}
         />;
       case '/Discover':
         return <Discover
           bible={Bible}
-          onPressBook={book => this._pushRoute({key: '/Books/Overview', book: book, title: Localizable.t('book-overview', {name: book.name})})}
+          onPressBook={book => this._pushRoute({key: '/Books/Overview', bookID: book.key, title: Localizable.t('book-overview', {name: book.name})})}
           onPressBooks={() => this._pushRoute({key: '/Books', title: Localizable.t('books')})}
-          onPressScripture={({book, chapterNumber}) => this._pushRoute({key: '/Reader', book, chapterNumber, title: book.name})}
-          onPressSphere={sphere => this._pushRoute({key: '/Spheres', sphere: sphere, title: Localizable.t('spheres.text')})}
-          onPressSource={(source) => this._pushRoute({key: '/Sources/Overview', source: source, title: source.name})}
+          onPressScripture={({book, chapterNumber}) => this._pushRoute({key: '/Reader', bookID: book.key, chapterNumber, title: book.name})}
+          onPressSphere={sphere => this._pushRoute({key: '/Spheres', sphereID: sphere.key, title: Localizable.t('spheres.text')})}
+          onPressSource={(source) => this._pushRoute({key: '/Sources/Overview', sourceID: source.key, title: source.name})}
           onPressSources={() => this._pushRoute({key: '/Sources', title: Localizable.t('sources.text')})}
           onPressSpheres={() => this._pushRoute({key: '/Spheres', title: Localizable.t('spheres.text')})}
         />;
@@ -153,75 +156,75 @@ export default class App extends Component {
       case '/Reader':
         return <Reader
           bible={Bible}
-          bookID={route.book.key}
+          bookID={route.bookID}
           chapterNumber={route.chapterNumber || 1
         }/>;
       case '/Sources':
         return <Sources
           bible={Bible}
-          onPressSource={(source) => source && this._pushRoute({key: '/Sources/Overview', source: source, title: source.name})}
+          onPressSource={(source) => source && this._pushRoute({key: '/Sources/Overview', sourceID: source.key, title: source.name})}
         />;
       case '/Sources/Overview':
         return <SourceOverview
           bible={Bible}
-          onPressBooks={() => this._pushRoute({key: '/Sources/Books', source: route.source, title: Localizable.t('source-books', {name: route.source.name})})}
-          onPressConversations={() => this._pushRoute({key: '/Sources/Conversations', source: route.source, title: Localizable.t('source-conversations', {name: route.source.name})})}
-          onPressSource={(source) => source && this._pushRoute({key: '/Sources/Overview', source: source, title: source.name})}
-          onPressSpheres={() => this._pushRoute({key: '/Sources/Spheres', source: route.source, title: Localizable.t('source-spheres', {name: route.source.name})})}
-          onPressWords={() => this._pushRoute({key: '/Sources/Words', source: route.source, title: Localizable.t('source-words', {name: route.source.name})})}
-          sourceID={route.source.key}
+          onPressBooks={() => this._pushRoute({key: '/Sources/Books', sourceID: route.sourceID, title: Localizable.t('source-books', {name: source.name})})}
+          onPressConversations={() => this._pushRoute({key: '/Sources/Conversations', sourceID: route.sourceID, title: Localizable.t('source-conversations', {name: source.name})})}
+          onPressSource={(source) => source && this._pushRoute({key: '/Sources/Overview', sourceID: source.key, title: source.name})}
+          onPressSpheres={() => this._pushRoute({key: '/Sources/Spheres', sourceID: route.sourceID, title: Localizable.t('source-spheres', {name: source.name})})}
+          onPressWords={() => this._pushRoute({key: '/Sources/Words', sourceID: route.sourceID, title: Localizable.t('source-words', {name: source.name})})}
+          sourceID={route.sourceID}
         />;
       case '/Sources/Books':
         return <SourceBooks
           bible={Bible}
-          sourceID={route.source.key}
+          sourceID={route.sourceID}
         />;
       case '/Sources/Conversations':
         return <SourceConversations
           bible={Bible}
-          sourceID={route.source.key}
+          sourceID={route.sourceID}
         />;
       case '/Sources/Spheres':
         return <SourceSpheres
           bible={Bible}
-          sourceID={route.source.key}
+          sourceID={route.sourceID}
         />;
       case '/Sources/Words':
         return <SourceWords
           bible={Bible}
-          sourceID={route.source.key}
+          sourceID={route.sourceID}
         />;
       case '/Spheres':
         return <Spheres
           bible={Bible}
-          onPressBook={({sphere, book}) => this._pushRoute({key: '/Books/Overview', book: book, title: Localizable.t('book-overview', {name: book.name})})}
-          onPressBooks={({sphere}) => this._pushRoute({key: '/Spheres/Books', sphere: sphere, title: sphere.name })}
-          onPressPassages={({sphere}) => this._pushRoute({key: '/Spheres/Passages', sphere: sphere, title: sphere.name })}
-          onPressSources={({sphere}) => this._pushRoute({key: '/Spheres/Sources', sphere: sphere, title: sphere.name })}
-          onPressWords={({sphere}) => this._pushRoute({key: '/Spheres/Words', sphere: sphere, title: sphere.name })}
-          sphereID={route.sphere && route.sphere.key}
+          onPressBook={({sphere, book}) => this._pushRoute({key: '/Books/Overview', bookID: book.key, title: Localizable.t('book-overview', {name: book.name})})}
+          onPressBooks={({sphere}) => this._pushRoute({key: '/Spheres/Books', sphereID: sphere.key, title: sphere.name })}
+          onPressPassages={({sphere}) => this._pushRoute({key: '/Spheres/Passages', sphereID: sphere.key, title: sphere.name })}
+          onPressSources={({sphere}) => this._pushRoute({key: '/Spheres/Sources', sphereID: sphere.key, title: sphere.name })}
+          onPressWords={({sphere}) => this._pushRoute({key: '/Spheres/Words', sphereID: sphere.key, title: sphere.name })}
+          sphereID={route.sphereID}
         />;
       case '/Spheres/Books':
         return <SphereBooks
           bible={Bible}
-          onPressBook={({sphere, book}) => this._pushRoute({key: '/Books/Overview', book: book, title: Localizable.t('book-overview', {name: book.name})})}
-          sphereID={route.sphere.key}
+          onPressBook={({sphere, book}) => this._pushRoute({key: '/Books/Overview', bookID: book.key, title: Localizable.t('book-overview', {name: book.name})})}
+          sphereID={route.sphereID}
         />;
       case '/Spheres/Passages':
         return <SpherePassages
           bible={Bible}
-          sphereID={route.sphere.key}
+          sphereID={route.sphereID}
         />;
       case '/Spheres/Sources':
         return <SphereSources
           bible={Bible}
-          sphereID={route.sphere.key}
+          sphereID={route.sphereID}
         />;
       case '/Spheres/Words':
         return <SphereWords
           bible={Bible}
           onPressWords={() => {}}
-          sphereID={route.sphere.key}
+          sphereID={route.sphereID}
         />;
       default:
         return null;
@@ -323,6 +326,18 @@ export default class App extends Component {
       this.setState({navigation}, callback);
     }
   };
+
+  _findBook(bookID: string) {
+    return Bible.books.find(book => book.key === bookID);
+  }
+
+  _findSource(sourceID: string): Object {
+    return Bible.sources.find(source => source.key === sourceID);
+  }
+
+  _findSphere(sphereID: string): Object {
+    return Bible.spheres.find(sphere => sphere.key === sphereID);
+  }
 }
 
 const styles = StyleSheet.create({

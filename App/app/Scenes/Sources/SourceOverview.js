@@ -43,6 +43,8 @@ export default class SourceOverview extends Component {
   constructor(props: Props) {
     super(props);
 
+    console.log(props);
+
     const source = props.bible.sources.find(source => source.key === props.sourceID);
     this.state = {source};
   }
