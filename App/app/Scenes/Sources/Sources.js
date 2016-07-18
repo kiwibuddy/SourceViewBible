@@ -226,9 +226,10 @@ const styles = StyleSheet.create({
     marginRight: 15,
   },
   listIndexContainer: {
-    flex: 1,
+    top: 0,
+    bottom: 0,
     flexDirection: 'column',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
     right: 3,
