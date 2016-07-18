@@ -25,7 +25,7 @@ import { SourcesBarChart, SpheresBarChart } from '../../Components/Charts';
 import PageControl from '../../Components/Common/PageControl';
 import { ReadingTime } from '../../Common/NumberHelper';
 import Localizable from '../../Common/Localizable';
-import Icon from '../../Components/Common/Icon';
+import SourceIcon from '../../Components/Common/SourceIcon';
 
 const MAXIMUM_SOURCE_COUNT = 9;
 
@@ -102,14 +102,8 @@ export default class DiscoverSources extends Component {
       "Jesus": "god"
     };
 
-    const ICON_MAP = {
-      "narrator": "avatar-narrator",
-      "god": "avatar-divine",
-    };
-
     const sourcePercent = (source.wordCount / this.props.bible.wordCount) * 100;
     const sourceType = SOURCE_TYPE_MAP[source.name] || 'support';
-    const iconName = ICON_MAP[sourceType] || 'avatar-human-group';
 
     return (
       <TouchableOpacity key={'source-' + source.id} style={styles.itemContainer} onPress={ () => this.props.onPressSource(source) }>
@@ -119,10 +113,10 @@ export default class DiscoverSources extends Component {
             start={[0.0, 0.25]} end={[0.5, 1.0]}
             style={styles.gradient}
           />
-          <Icon
-            name={iconName}
+          <SourceIcon
+            source={source}
             size={40}
-            style={[styles.icon, {color: Colors.sources[sourceType].tint}]}
+            style={styles.icon}
           />
           <Text style={styles.sourceTitle}>{source.name}</Text>
           <Text style={styles.sourceReadTime}>{Localizable.toPercentage(sourcePercent, {precision: 0})}</Text>
