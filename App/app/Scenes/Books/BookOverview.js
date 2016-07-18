@@ -19,6 +19,7 @@ import {
 
 import { SourcesBarChart, SpheresBarChart, WordCloud } from '../../Components/Charts';
 import ParallaxMotionView from '../../Components/Common/ParallaxMotionView';
+import SourceIcon from '../../Components/Common/SourceIcon';
 import Icon from '../../Components/Common/Icon';
 import { ReadingTime } from '../../Common/NumberHelper';
 
@@ -165,29 +166,16 @@ export default class BookOverview extends Component {
   }
 
   _renderSource = (source: Object) => {
-    const SOURCE_TYPE_MAP = {
-      "The Narrator": "narrator",
-      "God": "god",
-      "Jesus": "god"
-    };
-    const ICON_MAP = {
-      "narrator": "avatar-narrator",
-      "god": "avatar-divine",
-    };
-
-    const sourceType = SOURCE_TYPE_MAP[source.name] || "support";
-    const color = Colors.sources[sourceType].tint;
-    const iconName = ICON_MAP[sourceType] || "avatar-human-group";
     return (
       <TouchableOpacity
         key={'source-' + source.name}
         onPress={() => this.props.onPressSource(source)}
         style={styles.sourceButton}
       >
-        <Icon
-          name={iconName}
+        <SourceIcon
+          source={source}
           size={40}
-          style={[styles.sourceIcon, {color: color}]}
+          style={styles.sourceIcon}
         />
         <Text style={StyleSheet.styles.statisticSubtitle}>{source.name}</Text>
       </TouchableOpacity>
