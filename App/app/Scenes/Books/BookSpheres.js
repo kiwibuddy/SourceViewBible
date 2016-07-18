@@ -38,11 +38,11 @@ export default class BookSpheres extends Component {
   constructor(props: Props) {
     super(props);
 
-    const book = props.bible.books.find(book => book.key === props.bookID);
+    const book = props.bible.books.find(book => book.id === props.bookID);
 
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.key !== r2.key, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     const spheres = props.bible.spheres.map(sphere => {
-      return ({...sphere, bookWordCount: book.sphereCounts[sphere.key]});
+      return ({...sphere, bookWordCount: book.sphereCounts[sphere.id]});
     });
 
     this.state = {
@@ -97,8 +97,8 @@ export default class BookSpheres extends Component {
     const { book } = this.state;
     const wordCount = sphere.bookWordCount;
     const spherePercent = (wordCount / book.sphereWordCount) * 100;
-    const tintColor = Colors.spheres[sphere.key].tint;
-    const lightTintColor = Colors.spheres[sphere.key].lightTint;
+    const tintColor = Colors.spheres[sphere.id].tint;
+    const lightTintColor = Colors.spheres[sphere.id].lightTint;
 
     return (
       <TouchableOpacity style={styles.listItemContainer} onPress={() => this.props.onPressSphere(sphere)}>

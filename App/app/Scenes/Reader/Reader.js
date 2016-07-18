@@ -27,7 +27,7 @@ export default class Reader extends Component {
   props: Props;
 
   render() {
-    const book = this.props.bible.books.find(book => book.key === this.props.bookID);
+    const book = this.props.bible.books.find(book => book.id === this.props.bookID);
     const chapterNumber = this.props.chapterNumber || 1;
     const chapter = book.chapters[chapterNumber - 1];
 

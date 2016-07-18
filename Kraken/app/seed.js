@@ -13,13 +13,13 @@ const BIBLE = {
   books: require('./books'),
   sources: [],
   spheres: [
-    { key: "family", name: "Family", bookCount: 0, bookCounts: {}, wordCount: 0, words: [] },
-    { key: "economics", name: "Economics", bookCount: 0, bookCounts: {}, wordCount: 0, words: [] },
-    { key: "government", name: "Government", bookCount: 0, bookCounts: {}, wordCount: 0, words: [] },
-    { key: "religion", name: "Religion", bookCount: 0, bookCounts: {}, wordCount: 0, words: [] },
-    { key: "education", name: "Education", bookCount: 0, bookCounts: {}, wordCount: 0, words: [] },
-    { key: "communication", name: "Communication", bookCount: 0, bookCounts: {}, wordCount: 0, words: [] },
-    { key: "celebration", name: "Celebration", bookCount: 0, bookCounts: {}, wordCount: 0, words: [] },
+    { id: "family", name: "Family", bookCount: 0, bookCounts: {}, wordCount: 0, words: [] },
+    { id: "economics", name: "Economics", bookCount: 0, bookCounts: {}, wordCount: 0, words: [] },
+    { id: "government", name: "Government", bookCount: 0, bookCounts: {}, wordCount: 0, words: [] },
+    { id: "religion", name: "Religion", bookCount: 0, bookCounts: {}, wordCount: 0, words: [] },
+    { id: "education", name: "Education", bookCount: 0, bookCounts: {}, wordCount: 0, words: [] },
+    { id: "communication", name: "Communication", bookCount: 0, bookCounts: {}, wordCount: 0, words: [] },
+    { id: "celebration", name: "Celebration", bookCount: 0, bookCounts: {}, wordCount: 0, words: [] },
   ],
   wordCount: 0,
 };
@@ -45,7 +45,7 @@ const SPHERE_MAP = {
   "celebration": "celebration"
 };
 
-const SPHERE_KEYS = BIBLE.spheres.map(sphere => Object.keys(SPHERE_MAP).find(key => SPHERE_MAP[key] === sphere.key));
+const SPHERE_KEYS = BIBLE.spheres.map(sphere => Object.keys(SPHERE_MAP).find(key => SPHERE_MAP[key] === sphere.id));
 
 export async function kraken() {
   console.log('Hello!');
@@ -167,7 +167,7 @@ async function seedBookSources(emdros, bible) {
           const sourceData = bookData["Source"]["source_name"];
           if (sourceData != null) {
             Object.keys(sourceData).forEach((sourceName) => {
-              sources[sourceName] = {wordCount: 0, words: []};
+              sources[sourceName] = {id: sourceName, wordCount: 0, words: []};
               sourceCount++;
             });
           }
@@ -720,7 +720,7 @@ async function seedSourceWordCounts(emdros, bible) {
         Object.keys(sourceData).forEach(sourceName => {
           let source = bible.sources.find(source => source.name === sourceName);
           if (source == null) {
-            source = {key: sourceName, name: sourceName, wordCount: 0, words: []};
+            source = {id: sourceName, name: sourceName, wordCount: 0, words: []};
             bible.sources.push(source);
           }
 
@@ -773,14 +773,14 @@ async function seedSphereWordCounts(emdros, bible) {
 
   return new Promise((resolve, reject) => {
     SPHERE_KEYS.forEach(key => {
-      const sphere = bible.spheres.find(sphere => sphere.key === SPHERE_MAP[key]);
+      const sphere = bible.spheres.find(sphere => sphere.id === SPHERE_MAP[key]);
       if (sphere != null) {
         let bookCount = 0;
         let totalWordCount = 0;
 
         bible.books.forEach(book => {
-          const wordCount = book.sphereCounts[sphere.key] || 0;
-          sphere.bookCounts[book.key] = wordCount;
+          const wordCount = book.sphereCounts[sphere.id] || 0;
+          sphere.bookCounts[book.id] = wordCount;
 
           if (wordCount > 0) {
             bookCount++;
@@ -798,7 +798,7 @@ async function seedSphereWordCounts(emdros, bible) {
 }
 
 async function seedSphereWordCloud(sphereName, emdros, bible) {
-  const sphere = bible.spheres.find(sphere => sphere.key === SPHERE_MAP[sphereName]);
+  const sphere = bible.spheres.find(sphere => sphere.id === SPHERE_MAP[sphereName]);
   if (!sphere) {
     return;
   }

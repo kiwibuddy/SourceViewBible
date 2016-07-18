@@ -39,7 +39,7 @@ export default class SourceWords extends Component {
   constructor(props: Props) {
     super(props);
 
-    const source = props.bible.sources.find(source => source.key === props.sourceID);
+    const source = props.bible.sources.find(source => source.id === props.sourceID);
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.key !== r2.key, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     this.state = {
       source,

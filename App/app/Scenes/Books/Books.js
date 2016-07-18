@@ -99,7 +99,7 @@ export default class Books extends Component {
 
   _renderRow = (book: Object, sectionID: any, rowID: any) => {
     return (
-      <TouchableOpacity key={book.key} style={styles.section} onPress={() => this.props.onPressBook(book)}>
+      <TouchableOpacity key={book.id} style={styles.section} onPress={() => this.props.onPressBook(book)}>
         <View style={[styles.cellContainer, {paddingVertical: 8}]}>
           <View style={styles.horizontalContainer}>
             <View style={styles.leftContainer}>

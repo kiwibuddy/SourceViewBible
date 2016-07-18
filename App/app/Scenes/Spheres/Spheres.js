@@ -51,7 +51,7 @@ export default class Spheres extends Component {
 
     let sphere = null;
     if (props.sphereID) {
-      sphere = props.bible.spheres.find(sphere => sphere.key === props.sphereID);
+      sphere = props.bible.spheres.find(sphere => sphere.id === props.sphereID);
     } else {
       sphere = props.bible.spheres[0];
     }
@@ -157,11 +157,11 @@ export default class Spheres extends Component {
 
   _renderBookRow = (book: Object) => {
     const { sphere } = this.state;
-    const wordCount = sphere.bookCounts[book.key];
+    const wordCount = sphere.bookCounts[book.id];
     const spherePercent = (wordCount / book.wordCount) * 100;
 
     return (
-      <TouchableOpacity key={book.key} style={styles.section} onPress={() => this.props.onPressBook({sphere, book})}>
+      <TouchableOpacity key={book.id} style={styles.section} onPress={() => this.props.onPressBook({sphere, book})}>
         <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
           <View style={styles.sourcesLeftContainer}>
             <Text style={StyleSheet.styles.cell.titlemedium}>{book.name}</Text>

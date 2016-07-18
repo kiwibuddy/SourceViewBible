@@ -112,7 +112,7 @@ export default class DiscoverSources extends Component {
     const iconName = ICON_MAP[sourceType] || 'avatar-human-group';
 
     return (
-      <TouchableOpacity key={'source-' + source.key} style={styles.itemContainer} onPress={ () => this.props.onPressSource(source) }>
+      <TouchableOpacity key={'source-' + source.id} style={styles.itemContainer} onPress={ () => this.props.onPressSource(source) }>
         <View style={styles.item}>
           <LinearGradient
             colors={Colors.sources[sourceType].gradient.tiny}

@@ -1,7 +1,7 @@
 [
   {
     "DJHRef": "Gen",
-    "key": "genesis",
+    "id": "genesis",
     "testament": 0,
     "name": "Genesis",
     "overview": [
@@ -33,7 +33,7 @@
   },
   {
     "DJHRef": "Exo",
-    "key": "exodus",
+    "id": "exodus",
     "testament": 0,
     "name": "Exodus",
     "overview": [
@@ -61,7 +61,7 @@
   },
   {
     "DJHRef": "Lev",
-    "key": "leviticus",
+    "id": "leviticus",
     "testament": 0,
     "name": "Leviticus",
     "overview": [
@@ -89,7 +89,7 @@
   },
   {
     "DJHRef": "Num",
-    "key": "numbers",
+    "id": "numbers",
     "testament": 0,
     "name": "Numbers",
     "overview": [
@@ -117,7 +117,7 @@
   },
   {
     "DJHRef": "Deu",
-    "key": "deuteronomy",
+    "id": "deuteronomy",
     "testament": 0,
     "name": "Deuteronomy",
     "overview": [
@@ -145,7 +145,7 @@
   },
   {
     "DJHRef": "Jos",
-    "key": "joshua",
+    "id": "joshua",
     "testament": 0,
     "name": "Joshua",
     "overview": [
@@ -173,7 +173,7 @@
   },
   {
     "DJHRef": "Jdg",
-    "key": "judges",
+    "id": "judges",
     "testament": 0,
     "name": "Judges",
     "overview": [
@@ -201,7 +201,7 @@
   },
   {
     "DJHRef": "Rut",
-    "key": "ruth",
+    "id": "ruth",
     "testament": 0,
     "name": "Ruth",
     "overview": [
@@ -229,7 +229,7 @@
   },
   {
     "DJHRef": "1Sa",
-    "key": "1-samuel",
+    "id": "1-samuel",
     "testament": 0,
     "name": "1 Samuel",
     "overview": [
@@ -257,7 +257,7 @@
   },
   {
     "DJHRef": "2Sa",
-    "key": "2-samuel",
+    "id": "2-samuel",
     "testament": 0,
     "name": "2 Samuel",
     "overview": [
@@ -285,7 +285,7 @@
   },
   {
     "DJHRef": "1Ki",
-    "key": "1-kings",
+    "id": "1-kings",
     "testament": 0,
     "name": "1 Kings",
     "overview": [
@@ -317,7 +317,7 @@
   },
   {
     "DJHRef": "2Ki",
-    "key": "2-kings",
+    "id": "2-kings",
     "testament": 0,
     "name": "2 Kings",
     "overview": [
@@ -345,7 +345,7 @@
   },
   {
     "DJHRef": "1Ch",
-    "key": "1-chronicles",
+    "id": "1-chronicles",
     "testament": 0,
     "name": "1 Chronicles",
     "overview": [
@@ -377,7 +377,7 @@
   },
   {
     "DJHRef": "2Ch",
-    "key": "2-chronicles",
+    "id": "2-chronicles",
     "testament": 0,
     "name": "2 Chronicles",
     "overview": [
@@ -409,7 +409,7 @@
   },
   {
     "DJHRef": "Ezr",
-    "key": "ezra",
+    "id": "ezra",
     "testament": 0,
     "name": "Ezra",
     "overview": [
@@ -437,7 +437,7 @@
   },
   {
     "DJHRef": "Neh",
-    "key": "nehemiah",
+    "id": "nehemiah",
     "testament": 0,
     "name": "Nehemiah",
     "overview": [
@@ -465,7 +465,7 @@
   },
   {
     "DJHRef": "Est",
-    "key": "esther",
+    "id": "esther",
     "testament": 0,
     "name": "Esther",
     "overview": [
@@ -493,7 +493,7 @@
   },
   {
     "DJHRef": "Job",
-    "key": "job",
+    "id": "job",
     "testament": 0,
     "name": "Job",
     "overview": [
@@ -517,7 +517,7 @@
   },
   {
     "DJHRef": "Psa",
-    "key": "psalms",
+    "id": "psalms",
     "testament": 0,
     "name": "Psalms",
     "overview": [
@@ -541,7 +541,7 @@
   },
   {
     "DJHRef": "Pro",
-    "key": "proverbs",
+    "id": "proverbs",
     "testament": 0,
     "name": "Proverbs",
     "overview": [
@@ -569,7 +569,7 @@
   },
   {
     "DJHRef": "Ecc",
-    "key": "ecclesiastes",
+    "id": "ecclesiastes",
     "testament": 0,
     "name": "Ecclesiastes",
     "overview": [
@@ -597,7 +597,7 @@
   },
   {
     "DJHRef": "SoS",
-    "key": "song-of-songs",
+    "id": "song-of-songs",
     "testament": 0,
     "name": "Song of Songs",
     "overview": [
@@ -625,7 +625,7 @@
   },
   {
     "DJHRef": "Isa",
-    "key": "isaiah",
+    "id": "isaiah",
     "testament": 0,
     "name": "Isaiah",
     "overview": [
@@ -649,7 +649,7 @@
   },
   {
     "DJHRef": "Jer",
-    "key": "jeremiah",
+    "id": "jeremiah",
     "testament": 0,
     "name": "Jeremiah",
     "overview": [
@@ -677,7 +677,7 @@
   },
   {
     "DJHRef": "Lam",
-    "key": "lamentations",
+    "id": "lamentations",
     "testament": 0,
     "name": "Lamentations",
     "overview": [
@@ -701,7 +701,7 @@
   },
   {
     "DJHRef": "Eze",
-    "key": "ezekiel",
+    "id": "ezekiel",
     "testament": 0,
     "name": "Ezekiel",
     "overview": [
@@ -725,7 +725,7 @@
   },
   {
     "DJHRef": "Dan",
-    "key": "daniel",
+    "id": "daniel",
     "testament": 0,
     "name": "Daniel",
     "overview": [
@@ -749,7 +749,7 @@
   },
   {
     "DJHRef": "Hos",
-    "key": "hosea",
+    "id": "hosea",
     "testament": 0,
     "name": "Hosea",
     "overview": [
@@ -773,7 +773,7 @@
   },
   {
     "DJHRef": "Joe",
-    "key": "joel",
+    "id": "joel",
     "testament": 0,
     "name": "Joel",
     "overview": [
@@ -797,7 +797,7 @@
   },
   {
     "DJHRef": "Amo",
-    "key": "amos",
+    "id": "amos",
     "testament": 0,
     "name": "Amos",
     "overview": [
@@ -825,7 +825,7 @@
   },
   {
     "DJHRef": "Oba",
-    "key": "obadiah",
+    "id": "obadiah",
     "testament": 0,
     "name": "Obadiah",
     "overview": [
@@ -849,7 +849,7 @@
   },
   {
     "DJHRef": "Jon",
-    "key": "jonah",
+    "id": "jonah",
     "testament": 0,
     "name": "Jonah",
     "overview": [
@@ -881,7 +881,7 @@
   },
   {
     "DJHRef": "Mic",
-    "key": "micah",
+    "id": "micah",
     "testament": 0,
     "name": "Micah",
     "overview": [
@@ -909,7 +909,7 @@
   },
   {
     "DJHRef": "Nah",
-    "key": "nahum",
+    "id": "nahum",
     "testament": 0,
     "name": "Nahum",
     "overview": [
@@ -937,7 +937,7 @@
   },
   {
     "DJHRef": "Hab",
-    "key": "habakkuk",
+    "id": "habakkuk",
     "testament": 0,
     "name": "Habakkuk",
     "overview": [
@@ -961,7 +961,7 @@
   },
   {
     "DJHRef": "Zep",
-    "key": "zephaniah",
+    "id": "zephaniah",
     "testament": 0,
     "name": "Zephaniah",
     "overview": [
@@ -989,7 +989,7 @@
   },
   {
     "DJHRef": "Hag",
-    "key": "haggai",
+    "id": "haggai",
     "testament": 0,
     "name": "Haggai",
     "overview": [
@@ -1017,7 +1017,7 @@
   },
   {
     "DJHRef": "Zec",
-    "key": "zechariah",
+    "id": "zechariah",
     "testament": 0,
     "name": "Zechariah",
     "overview": [
@@ -1041,7 +1041,7 @@
   },
   {
     "DJHRef": "Mal",
-    "key": "malachi",
+    "id": "malachi",
     "testament": 0,
     "name": "Malachi",
     "overview": [
@@ -1069,7 +1069,7 @@
   },
   {
     "DJHRef": "Mat",
-    "key": "matthew",
+    "id": "matthew",
     "testament": 1,
     "name": "Matthew",
     "overview": [
@@ -1097,7 +1097,7 @@
   },
   {
     "DJHRef": "Mar",
-    "key": "mark",
+    "id": "mark",
     "testament": 1,
     "name": "Mark",
     "overview": [
@@ -1125,7 +1125,7 @@
   },
   {
     "DJHRef": "Luk",
-    "key": "luke",
+    "id": "luke",
     "testament": 1,
     "name": "Luke",
     "overview": [
@@ -1149,7 +1149,7 @@
   },
   {
     "DJHRef": "Joh",
-    "key": "john",
+    "id": "john",
     "testament": 1,
     "name": "John",
     "overview": [
@@ -1181,7 +1181,7 @@
   },
   {
     "DJHRef": "Act",
-    "key": "acts",
+    "id": "acts",
     "testament": 1,
     "name": "Acts",
     "overview": [
@@ -1205,7 +1205,7 @@
   },
   {
     "DJHRef": "Rom",
-    "key": "romans",
+    "id": "romans",
     "testament": 1,
     "name": "Romans",
     "overview": [
@@ -1229,7 +1229,7 @@
   },
   {
     "DJHRef": "1Co",
-    "key": "1-corinthians",
+    "id": "1-corinthians",
     "testament": 1,
     "name": "1 Corinthians",
     "overview": [
@@ -1257,7 +1257,7 @@
   },
   {
     "DJHRef": "2Co",
-    "key": "2-corinthians",
+    "id": "2-corinthians",
     "testament": 1,
     "name": "2 Corinthians",
     "overview": [
@@ -1281,7 +1281,7 @@
   },
   {
     "DJHRef": "Gal",
-    "key": "galatians",
+    "id": "galatians",
     "testament": 1,
     "name": "Galatians",
     "overview": [
@@ -1305,7 +1305,7 @@
   },
   {
     "DJHRef": "Eph",
-    "key": "ephesians",
+    "id": "ephesians",
     "testament": 1,
     "name": "Ephesians",
     "overview": [
@@ -1329,7 +1329,7 @@
   },
   {
     "DJHRef": "Php",
-    "key": "philippians",
+    "id": "philippians",
     "testament": 1,
     "name": "Philippians",
     "overview": [
@@ -1357,7 +1357,7 @@
   },
   {
     "DJHRef": "Col",
-    "key": "colossians",
+    "id": "colossians",
     "testament": 1,
     "name": "Colossians",
     "overview": [
@@ -1381,7 +1381,7 @@
   },
   {
     "DJHRef": "1Th",
-    "key": "1-thessalonians",
+    "id": "1-thessalonians",
     "testament": 1,
     "name": "1 Thessalonians",
     "overview": [
@@ -1405,7 +1405,7 @@
   },
   {
     "DJHRef": "2Th",
-    "key": "2-thessalonians",
+    "id": "2-thessalonians",
     "testament": 1,
     "name": "2 Thessalonians",
     "overview": [
@@ -1429,7 +1429,7 @@
   },
   {
     "DJHRef": "1Ti",
-    "key": "1-timothy",
+    "id": "1-timothy",
     "testament": 1,
     "name": "1 Timothy",
     "overview": [
@@ -1453,7 +1453,7 @@
   },
   {
     "DJHRef": "2Ti",
-    "key": "2-timothy",
+    "id": "2-timothy",
     "testament": 1,
     "name": "2 Timothy",
     "overview": [
@@ -1477,7 +1477,7 @@
   },
   {
     "DJHRef": "Tit",
-    "key": "titus",
+    "id": "titus",
     "testament": 1,
     "name": "Titus",
     "overview": [
@@ -1501,7 +1501,7 @@
   },
   {
     "DJHRef": "Phm",
-    "key": "philemon",
+    "id": "philemon",
     "testament": 1,
     "name": "Philemon",
     "overview": [
@@ -1529,7 +1529,7 @@
   },
   {
     "DJHRef": "Heb",
-    "key": "hebrews",
+    "id": "hebrews",
     "testament": 1,
     "name": "Hebrews",
     "overview": [
@@ -1557,7 +1557,7 @@
   },
   {
     "DJHRef": "Jam",
-    "key": "james",
+    "id": "james",
     "testament": 1,
     "name": "James",
     "overview": [
@@ -1581,7 +1581,7 @@
   },
   {
     "DJHRef": "1Pe",
-    "key": "1-peter",
+    "id": "1-peter",
     "testament": 1,
     "name": "1 Peter",
     "overview": [
@@ -1605,7 +1605,7 @@
   },
   {
     "DJHRef": "2Pe",
-    "key": "2-peter",
+    "id": "2-peter",
     "testament": 1,
     "name": "2 Peter",
     "overview": [
@@ -1633,7 +1633,7 @@
   },
   {
     "DJHRef": "1Jn",
-    "key": "1-john",
+    "id": "1-john",
     "testament": 1,
     "name": "1 John",
     "overview": [
@@ -1661,7 +1661,7 @@
   },
   {
     "DJHRef": "2Jn",
-    "key": "2-john",
+    "id": "2-john",
     "testament": 1,
     "name": "2 John",
     "overview": [
@@ -1685,7 +1685,7 @@
   },
   {
     "DJHRef": "3Jn",
-    "key": "3-john",
+    "id": "3-john",
     "testament": 1,
     "name": "3 John",
     "overview": [
@@ -1709,7 +1709,7 @@
   },
   {
     "DJHRef": "Jud",
-    "key": "jude",
+    "id": "jude",
     "testament": 1,
     "name": "Jude",
     "overview": [
@@ -1737,7 +1737,7 @@
   },
   {
     "DJHRef": "Rev",
-    "key": "revelation",
+    "id": "revelation",
     "testament": 1,
     "name": "Revelation",
     "overview": [

@@ -46,7 +46,7 @@ export default class BookOverview extends Component {
   constructor(props: Props) {
     super(props);
 
-    const book = props.bible.books.find(book => book.key === props.bookID);
+    const book = props.bible.books.find(book => book.id === props.bookID);
     this.state = {book}
   }
 

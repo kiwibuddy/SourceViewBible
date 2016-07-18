@@ -37,7 +37,7 @@ export default class SourceConversation extends Component {
   constructor(props: Props) {
     super(props);
 
-    const source = props.bible.sources.find(source => source.key === props.sourceID);
+    const source = props.bible.sources.find(source => source.id === props.sourceID);
     this.state = {source};
   }
 

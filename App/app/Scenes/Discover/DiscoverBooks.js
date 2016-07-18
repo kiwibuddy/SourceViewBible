@@ -100,7 +100,7 @@ export default class DiscoverBooks extends Component {
     const spherePercent = (book.sphereWordCount / book.wordCount) * 100;
 
     return (
-      <TouchableOpacity key={'book-' + book.key} style={styles.itemContainer} onPress={ () => this.props.onPressBook(book) }>
+      <TouchableOpacity key={'book-' + book.id} style={styles.itemContainer} onPress={ () => this.props.onPressBook(book) }>
         <View style={styles.item}>
           <LinearGradient
             colors={Colors.sources[book.principalSourceType].gradient.tiny}

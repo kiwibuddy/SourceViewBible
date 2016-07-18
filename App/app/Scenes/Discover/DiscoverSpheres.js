@@ -101,24 +101,24 @@ export default class DiscoverSpheres extends Component {
   }
 
   _renderSphere = (sphere: Object) => {
-    if (!sphere.key) {
+    if (!sphere.id) {
       return this._renderBlank();
     }
 
     const spherePercent = (sphere.wordCount / this.props.bible.wordCount) * 100;
-    const iconName = `icon-${sphere.key}-filled`;
+    const iconName = `icon-${sphere.id}-filled`;
     return (
       <TouchableOpacity style={styles.itemContainer} onPress={ () => this.props.onPressSphere(sphere) }>
         <View style={styles.item}>
           <LinearGradient
-            colors={Colors.spheres[sphere.key].gradient.tiny}
+            colors={Colors.spheres[sphere.id].gradient.tiny}
             start={[0.0, 0.25]} end={[0.5, 1.0]}
             style={styles.gradient}
           />
           <Icon
             name={iconName}
             size={40}
-            style={[styles.icon, {color: Colors.spheres[sphere.key].tint}]}
+            style={[styles.icon, {color: Colors.spheres[sphere.id].tint}]}
           />
           <Text style={styles.title}>{sphere.name}</Text>
           <Text style={styles.subtitle}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>

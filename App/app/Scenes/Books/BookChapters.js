@@ -51,7 +51,7 @@ export default class BookChapters extends Component {
   constructor(props: Object) {
     super(props);
 
-    const book = props.bible.books.find(book => book.key === props.bookID);
+    const book = props.bible.books.find(book => book.id === props.bookID);
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     this.state = {
       book,

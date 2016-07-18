@@ -40,7 +40,7 @@ export default class SphereWords extends Component {
   constructor(props: Props) {
     super(props);
 
-    const sphere = props.bible.spheres.find(sphere => sphere.key === props.sphereID);
+    const sphere = props.bible.spheres.find(sphere => sphere.id === props.sphereID);
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.key !== r2.key, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     this.state = {
       dataSource: dataSource.cloneWithRows(sphere.words),
@@ -77,7 +77,7 @@ export default class SphereWords extends Component {
 
     return (
       <WordCloud
-        backgroundColors={Colors.spheres[sphere.key].gradient.big}
+        backgroundColors={Colors.spheres[sphere.id].gradient.big}
         style={styles.wordCloud}
       >
         <ParallaxMotionView intensity={5} style={[styles.parallax, {opacity: 0.8}]}>
