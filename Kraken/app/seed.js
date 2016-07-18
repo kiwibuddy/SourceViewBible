@@ -719,8 +719,8 @@ async function seedSourceWordCounts(emdros, bible) {
         Object.keys(sourceData).forEach(sourceName => {
           let source = bible.sources.find(source => source.name === sourceName);
           if (source == null) {
-            const firstInitial = sourceName[0];
-            source = {id: sourceName, name: sourceName, firstInitial: isNumber(firstInitial) ? '#' : firstInitial, wordCount: 0, words: [], gender: null, nature: null, chronologies: []};
+            const firstInitial = sourceName.charAt(0);
+            source = {id: sourceName, name: sourceName, firstInitial: isNumber(firstInitial) ? null : firstInitial, wordCount: 0, words: [], gender: null, nature: null, chronologies: []};
             bible.sources.push(source);
           }
 

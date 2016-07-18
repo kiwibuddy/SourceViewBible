@@ -36,6 +36,14 @@ type State = {
   dataSource: any,
 };
 
+var groupBy = function(xs, key) {
+  return xs.reduce(function(rv, x) {
+    var v = key instanceof Function ? key(x) : x[key];
+    (rv[v] = rv[v] || []).push(x);
+    return rv;
+  }, {});
+};
+
 export default class Sources extends Component {
   state: State;
 
@@ -43,10 +51,11 @@ export default class Sources extends Component {
     super(props);
 
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
-    const sources = props.bible.sources.slice(0).sort((a, b) => a.name > b.name ? 1 : -1);
+    const sources = props.bible.sources.slice(0).sort((a, b) => (a.firstInitial || 'ZZZZZ') > (b.firstInitial || 'ZZZZZ') ? 1 : -1);
+    const { rows, sections } = this._getRowsAndSections(sources);
 
     this.state = {
-      dataSource: dataSource.cloneWithRowsAndSections({sources: sources})
+      dataSource: dataSource.cloneWithRowsAndSections(rows, sections)
     };
   }
 
@@ -58,11 +67,21 @@ export default class Sources extends Component {
           dataSource={this.state.dataSource}
           renderRow={this._renderRow}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+          renderSectionHeader={this._renderSectionHeader}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
         />
       </View>
     );
   }
+
+  _renderSectionHeader = (sectionData: Object, sectionID: any) => {
+    const title = sectionID || '#';
+    return (
+      <View style={styles.sectionHeaderContainer}>
+        <Text style={styles.sectionHeaderTitle}>{title}</Text>
+      </View>
+    );
+  };
 
   _renderRow = (source: Object, sectionID: any, rowID: any) => {
     const SOURCE_TYPE_MAP = {
@@ -96,6 +115,22 @@ export default class Sources extends Component {
       </TouchableOpacity>
     );
   };
+
+  _getRowsAndSections = (sources: any) => {
+    const rows = {};
+    const sections = [];
+
+    sources.map((source) => {
+      const section = source.firstInitial;
+      if (sections.indexOf(section) === -1) {
+        sections.push(section);
+        rows[section] = [];
+      }
+      rows[section].push(source);
+    });
+
+    return {rows, sections};
+  };
  }
 
 const styles = StyleSheet.create({
@@ -127,6 +162,14 @@ const styles = StyleSheet.create({
     height: 4,
     flex: 0,
     marginBottom: 7,
+  },
+  sectionHeaderContainer: {
+    ...StyleSheet.styles.sectionHeaderContainer,
+    backgroundColor: '#f0f0f0',
+  },
+  sectionHeaderTitle: {
+    ...StyleSheet.styles.sectionHeaderTitle,
+    marginLeft: 8,
   },
   separator: {
     ...StyleSheet.styles.separator,
