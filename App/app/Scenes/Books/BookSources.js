@@ -19,7 +19,7 @@ import {
 } from '../../Common';
 
 import SourcesBarChart from '../../Components/Charts/SourcesBarChart';
-import Icon from '../../Components/Common/Icon';
+import SourceIcon from '../../Components/Common/SourceIcon';
 
 type Props = {
   bible: Object,
@@ -82,14 +82,8 @@ export default class BookSources extends Component {
       "God": "god",
       "Jesus": "god"
     };
-    const ICON_MAP = {
-      "narrator": "avatar-narrator",
-      "god": "avatar-divine",
-    };
 
     const sourceType = SOURCE_TYPE_MAP[source.name] || "support";
-    const color = Colors.sources[sourceType].tint;
-    const iconName = ICON_MAP[sourceType] || "avatar-human-group";
     const chartData = {};
     chartData[sourceType] = source.wordCount;
 
@@ -98,9 +92,9 @@ export default class BookSources extends Component {
         <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
           <View style={styles.sourcesLeftContainer}>
             <TouchableOpacity onPress={() => this.props.onPressSource(source)}>
-              <Icon
-                name={iconName}
-                style={[styles.sourceAvatar, {color: color}]}
+              <SourceIcon
+                source={source}
+                style={styles.sourceAvatar}
                 size={20}
               />
             </TouchableOpacity>
