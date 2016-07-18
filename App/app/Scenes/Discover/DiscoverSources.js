@@ -118,7 +118,7 @@ export default class DiscoverSources extends Component {
             size={40}
             style={styles.icon}
           />
-          <Text style={styles.sourceTitle}>{source.name}</Text>
+          <Text numberOfLines={1} style={styles.sourceTitle}>{source.name}</Text>
           <Text style={styles.sourceReadTime}>{Localizable.toPercentage(sourcePercent, {precision: 0})}</Text>
           <View style={styles.keyline} />
           <View style={styles.statisticsContainer}>
