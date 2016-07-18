@@ -714,13 +714,12 @@ async function seedSourceWordCounts(emdros, bible) {
 
   return new Promise((resolve, reject) => {
     emdros.query(query, {count: true}).then((data) => {
-
       const sourceData = data["Source"]["source_name"];
       if (sourceData != null) {
         Object.keys(sourceData).forEach(sourceName => {
           let source = bible.sources.find(source => source.name === sourceName);
           if (source == null) {
-            source = {id: sourceName, name: sourceName, wordCount: 0, words: []};
+            source = {id: sourceName, name: sourceName, firstInitial: sourceName[0], wordCount: 0, words: [], gender: null, nature: null, chronologies: []};
             bible.sources.push(source);
           }
 
