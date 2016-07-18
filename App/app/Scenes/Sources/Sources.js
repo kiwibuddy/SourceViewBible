@@ -23,7 +23,7 @@ import {
 import SegmentedControl from '../../Components/Common/SegmentedControl';
 import { SourcesBarChart, SpheresBarChart } from '../../Components/Charts';
 import { ReadingTime } from '../../Common/NumberHelper';
-import Icon from '../../Components/Common/Icon';
+import SourceIcon from '../../Components/Common/SourceIcon';
 
 const LISTVIEW_REF = 'LISTVIEW_REF';
 
@@ -118,30 +118,26 @@ export default class Sources extends Component {
       "God": "god",
       "Jesus": "god"
     };
-    const ICON_MAP = {
-      "narrator": "avatar-narrator",
-      "god": "avatar-divine",
-    };
 
     const sourceType = SOURCE_TYPE_MAP[source.name] || "support";
-    const color = Colors.sources[sourceType].tint;
-    const iconName = ICON_MAP[sourceType] || "avatar-human-group";
     const chartData = {};
     chartData[sourceType] = source.wordCount;
+
+    const wordCount = source.wordCount;
 
     return (
       <TouchableOpacity style={styles.section} onPress={() => this.props.onPressSource(source)}>
         <View style={styles.sourcesCellContainer}>
           <View style={styles.sourcesAvatar}>
-            <Icon
-              name={iconName}
-              style={[styles.sourceAvatar, {color: color}]}
+            <SourceIcon
+              source={source}
+              style={styles.sourceAvatar}
               size={20}
             />
           </View>
           <View style={styles.sourcesLeftContainer}>
             <Text style={StyleSheet.styles.cell.title}>{source.name}</Text>
-            <Text style={StyleSheet.styles.cell.subtitle}>0 words</Text>
+            <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('words.count', {count: wordCount, localizedCount: Localizable.toNumber(wordCount, {precision: 0})})}</Text>
           </View>
           <View style={styles.sourcesRightContainer}>
             <Text style={StyleSheet.styles.cell.subtitle}>0 BC</Text>
