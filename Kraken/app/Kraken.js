@@ -176,60 +176,6 @@ async function seedBookSphereWordCount(emdros, bible) {
   });
 }
 
-async function seedChapterSourceWordCounts(emdros, bible) {
-  console.log('Seeding Chapter Source Word Counts...');
-  const query = `
-  {
-    "objectTypeName": "Book",
-    "feature": "DJHRef",
-    "buckets": {
-      "objectTypeName": "Chapter",
-      "feature": "chapter",
-      "buckets": {
-        "objectTypeName": "Source",
-        "feature": ["source_color", "source_name"],
-        "buckets": {
-          "objectTypeName": "Token",
-          "expression" : "is_word=true"
-        }
-      }
-    }
-  }
-  `;
-
-  return new Promise((resolve, reject) => {
-    emdros.query(query, {count: true}).then((data) => {
-      let bookObjects = [];
-
-      for (let [index, book] of bible.books.entries()) {
-        const bookData = data["Book"]["DJHRef"][book.DJHRef];
-        if (bookData != null) {
-          const chapterData = bookData["Chapter"]["chapter"];
-          if (chapterData != null) {
-            book.chapters.forEach((chapter, index) => {
-              const sourceData = chapterData[chapter.chapterNumber.toString()]["Source"];
-              if (sourceData != null) {
-                seedObjectSourceTypeWordCounts(chapter, sourceData);
-
-                const sourceNameData = sourceData["source_name"];
-                if (sourceNameData != null) {
-                  chapter.sourceCount = Object.keys(sourceNameData).length;
-                } else {
-                  chapter.sourceCount = 0;
-                }
-              }
-            });
-          }
-        }
-      }
-
-      resolve();
-    }).catch((error) => {
-      console.log(error);
-    })
-  });
-}
-
 async function seedChapterSphereWordCount(emdros, bible) {
   console.log('Seeding Chapter Sphere Word Count...');
 
@@ -322,37 +268,6 @@ async function seedChapterSphereWordCounts(emdros, bible) {
 
             book.maxChapterSphereWordCount = maxChapterSphereWordCount;
           }
-        }
-      }
-
-      resolve();
-    }).catch((error) => {
-      console.log(error);
-    })
-  });
-}
-
-async function seedBookWordCloud(emdros, bible) {
-  console.log('Seeding Book Word Cloud...');
-  const query = `
-  {
-    "objectTypeName": "Book",
-    "feature": "DJHRef",
-    "buckets": {
-      "objectTypeName": "Token",
-      "feature": "surface",
-      "expression" : "is_word=true"
-    }
-  }
-  `;
-
-  return new Promise((resolve, reject) => {
-    emdros.query(query, {count: true}).then((data) => {
-      for (let [index, book] of bible.books.entries()) {
-        const bookData = data["Book"]["DJHRef"][book.DJHRef];
-        if (bookData != null) {
-          const wordData = bookData["Token"]["surface"];
-          seedObjectWordCloud(book, wordData);
         }
       }
 
