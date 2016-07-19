@@ -45,9 +45,9 @@ const Source = {
   name: 'Source',
   primaryKey: 'id',
   properties: {
-    id: 'int',
+    id: 'string',
     name: 'string',
-    firstInitial: 'string',
+    firstInitial: {type: 'string', optional: true},
     occurrences: {type: 'list', objectType: 'Occurrence'},
     wordCount: {type: 'int', default: 0},
     words: {type: 'list', objectType: 'Count'},
@@ -58,7 +58,7 @@ const Sphere = {
   name: 'Sphere',
   primaryKey: 'id',
   properties: {
-    id: 'int',
+    id: 'string',
     name: 'string',
     bookCount: {type: 'int', default: 0},
     bookCounts: {type: 'list', objectType: 'Count'},
