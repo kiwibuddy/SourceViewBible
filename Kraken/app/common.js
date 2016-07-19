@@ -80,6 +80,19 @@ export function seedObjectWordCloud(object: Object, wordData: Object) {
   }
 }
 
+export function getChapterID(book: Object, chapterNumber: number) {
+  return `${book.id}-${chapterNumber}`;
+}
+
+export function firstInitial(name: string) {
+  const firstInitial = name.charAt(0);
+  return isNumber(firstInitial) ? null : firstInitial;
+}
+
+export function getSourceID(name: string) {
+  return name;
+}
+
 export function isNumber(n: any) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 }
