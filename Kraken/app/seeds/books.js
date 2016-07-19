@@ -1,7 +1,7 @@
 /* @flow */
 'use strict';
 
-const {isNumber, seedObjectSourceTypeWordCounts, seedObjectSphereWordCounts, SPHERE_MAP} = require('../common');
+const {isNumber, seedObjectSourceTypeWordCounts, seedObjectSphereWordCounts, seedObjectWordCloud, SPHERE_MAP} = require('../common');
 
 const UUID = require('react-native-uuid');
 
@@ -22,6 +22,8 @@ export async function seedBooks(emdros: Object, realm: Object) {
   await seedBookSphereCounts(emdros, realm);
 
   await seedWordCounts(emdros, realm);
+
+  await seedBookWordCloud(emdros, realm);
 }
 
 async function seedNames(realm) {
@@ -251,6 +253,39 @@ async function seedBookSphereCounts(emdros, realm) {
           if (bookData != null) {
             const spheresData = bookData["Token"];
             seedObjectSphereWordCounts(book, spheresData);
+          }
+        });
+      });
+
+      resolve();
+    }).catch((error) => {
+      console.log(error);
+    })
+  });
+}
+
+async function seedBookWordCloud(emdros, realm) {
+  console.log('Seeding Book Word Cloud...');
+  const query = `
+  {
+    "objectTypeName": "Book",
+    "feature": "DJHRef",
+    "buckets": {
+      "objectTypeName": "Token",
+      "feature": "surface",
+      "expression" : "is_word=true"
+    }
+  }
+  `;
+
+  return new Promise((resolve, reject) => {
+    emdros.query(query, {count: true}).then((data) => {
+      realm.write(() => {
+        realm.objects('Book').forEach(book => {
+          const bookData = data["Book"]["DJHRef"][book.DJHRef];
+          if (bookData != null) {
+            const wordData = bookData["Token"]["surface"];
+            seedObjectWordCloud(book, wordData);
           }
         });
       });
