@@ -12,11 +12,11 @@ import {
   View
 } from 'react-native';
 
-const Seed = require('./app/seed');
+const Kraken = require('./app/Kraken');
 
-class Kraken extends Component {
+class KrakenApp extends Component {
   componentDidMount() {
-    Seed.kraken();
+    Kraken.release();
   }
 
   render() {
@@ -56,4 +56,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('Kraken', () => Kraken);
+AppRegistry.registerComponent('Kraken', () => KrakenApp);

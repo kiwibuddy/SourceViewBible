@@ -9,6 +9,13 @@ import RNFS from 'react-native-fs';
 const DATABASE_PATH = '/tmp/SourceView.realm';
 const JSON_PATH='/tmp/SourceView.json';
 
+const realm = new Realm({
+  path: DATABASE_PATH,
+  schema: Schema
+});
+
+const uuid = require('react-native-uuid');
+
 const BIBLE = {
   books: require('./books'),
   sources: [],
@@ -47,50 +54,71 @@ const SPHERE_MAP = {
 
 const SPHERE_KEYS = BIBLE.spheres.map(sphere => Object.keys(SPHERE_MAP).find(key => SPHERE_MAP[key] === sphere.id));
 
-export async function kraken() {
-  console.log('Hello!');
+const { seedBooks } = require('./seeds/books');
 
-  // const realm = new Realm({
-  //   path: DATABASE_PATH,
-  //   schema: Schema
-  // });
-  const realm = null;
+export async function release() {
+  console.log('Release the Kraken!');
 
   const emdros = await Emdros.open({name: 'Datasets/en/NLT/SourceView.bpt'});
-  let objects = BIBLE;
-  await seed(emdros, BIBLE);
+  await seed(emdros);
 
-  RNFS.writeFile(JSON_PATH, JSON.stringify(objects), 'utf8').then((success) => {
-    console.log('Done Seeding.');
-    console.log(objects);
-  }).catch((err) => {
-    console.log(err.message);
-  });
+  console.log('Kraken has been released!');
+  // RNFS.writeFile(JSON_PATH, JSON.stringify(objects), 'utf8').then((success) => {
+  //   console.log('Done Seeding.');
+  //   console.log(objects);
+  // }).catch((err) => {
+  //   console.log(err.message);
+  // });
 }
 
-async function seed(emdros, bible) {
-  console.log('Seeding...');
-
-  await seedBooks(emdros, bible);
-  await seedSources(emdros, bible);
-  await seedSpheres(emdros, bible);
+async function seed(emdros) {
+  await seedBooks(emdros, realm);
+  // await seedBooks(emdros, bible);
+  // await seedSources(emdros, bible);
+  // await seedSpheres(emdros, bible);
 }
 
-async function seedBooks(emdros, bible) {
+async function seedBooksFoo(emdros) {
   console.log('Seeding Books...');
 
-  await seedChapters(emdros, bible);
-  await seedBookSources(emdros, bible);
-  await seedSourceOccurrences(emdros, bible);
-  await seedBookWordCounts(emdros, bible);
-  await seedBookWordCloud(emdros, bible);
-  await seedBookSourceWordCloud(emdros, bible);
+  await seedBookNames();
+  await seedBookChapterCounts(emdros);
+  await seedBookChapters(emdros);
+  // await seedBookChapterMonadSets(emdros);
 
-  bible.wordCount = bible.books.reduce((wordCount, book) => wordCount + book.wordCount, 0);
-}
+  // await seedBookSources(emdros, bible);
+  // await seedSourceOccurrences(emdros, bible);
+  // await seedBookWordCounts(emdros, bible);
+  // await seedBookWordCloud(emdros, bible);
+  // await seedBookSourceWordCloud(emdros, bible);
+  //
+  // bible.wordCount = bible.books.reduce((wordCount, book) => wordCount + book.wordCount, 0);
+};
 
-async function seedChapters(emdros, bible) {
-  console.log('Seeding Chapters...');
+async function seedBookNames() {
+  console.log('Seeding Book Names...');
+  return new Promise((resolve, reject) => {
+    realm.write(() => {
+      BIBLE.books.forEach((bookInfo, index) => {
+        const book = {
+          id: bookInfo.id,
+          DJHRef: bookInfo.DJHRef,
+          name: bookInfo.name,
+          testament: bookInfo.testament,
+          textOrder: index + 1,
+          overview: bookInfo.overview,
+        };
+        realm.create('Book', book);
+      });
+    });
+
+    resolve();
+  });
+};
+
+async function seedBookChapterCounts(emdros) {
+  console.log('Seeding Book Chapter Counts...');
+
   const query = `
   {
     "objectTypeName": "Book",
@@ -103,44 +131,65 @@ async function seedChapters(emdros, bible) {
 
   return new Promise((resolve, reject) => {
     emdros.query(query, {count: true}).then((data) => {
-      for (let [index, book] of bible.books.entries()) {
-        const bookData = data["Book"]["DJHRef"][book.DJHRef];
-        if (bookData != null) {
-          const chapterCount = bookData["Chapter"] || 0;
-          const chapters = []
-          for (let i = 0; i < chapterCount; i++) {
-            const chapterNumber = i + 1;
-            const chapter = {
-              chapterNumber: chapterNumber,
-              monadSet: null
-            };
-
-            monadSetForBookChapterNumber(emdros, book.DJHRef, chapterNumber).then(monadSet => {
-              chapter.monadSet = monadSet;
-            });
-
-            chapters.push(chapter);
+      realm.write(() => {
+        realm.objects('Book').forEach(book => {
+          const bookData = data["Book"]["DJHRef"][book.DJHRef];
+          if (bookData != null) {
+            const chapterCount = bookData["Chapter"] || 0;
+            realm.create('Book', {id: book.id, chapterCount}, true);
           }
-          book["chapterCount"] = chapters.length;
-          book["chapters"] = chapters;
-        }
-      }
+        });
 
-      resolve();
+        resolve();
+      });
     }).catch((error) => {
       console.log(error);
     });
   });
 }
 
-async function monadSetForBookChapterNumber(emdros, book, chapterNumber) {
+async function seedBookChapters(emdros) {
+  console.log(`Seeding Book Chapters...`);
+
+  const books = [];
+  const bookChapters = {};
+  for (let [index, book] of realm.objects('Book').entries()) {
+    const chapterCount = book.chapterCount;
+    const chapters = [];
+    for (let i = 0; i < chapterCount; i++) {
+      const chapterNumber = i + 1;
+      const monadSet = await seedBookChapterMonadSet(emdros, book, chapterNumber);
+      const chapter = {
+        id: `${book.DJHRef}-${chapterNumber}`,
+        chapterNumber: chapterNumber,
+        principalSourceType: 'narrator',
+        firstMonad: monadSet.first,
+        lastMonad: monadSet.last
+      };
+      chapters.push(chapter);
+    }
+    bookChapters[book.id] = chapters;
+    books.push(book);
+  }
+
+  realm.write(() => {
+    books.forEach(book => {
+      console.log(`Seeding ${book.name} Chapters...`);
+      const chapters = bookChapters[book.id];
+      realm.create('Book', {id: book.id, chapters}, true);
+    });
+  });
+}
+
+async function seedBookChapterMonadSet(emdros, book, chapterNumber) {
+  console.log(`Seeding ${book.DJHRef} ${chapterNumber} MonadSet...`);
   const query = `
     SELECT ALL OBJECTS
     WHERE
-    [Chapter DJHBook='${book}' AND chapter = ${chapterNumber}]
+    [Chapter DJHBook='${book.DJHRef}' AND chapter = ${chapterNumber}]
   `;
 
-  return emdros.monadSet({query});
+  return await emdros.monadSet({query});
 }
 
 async function seedBookSources(emdros, bible) {

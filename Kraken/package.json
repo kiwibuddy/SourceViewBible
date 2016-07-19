@@ -10,6 +10,7 @@
     "react-native": "^0.29.1",
     "react-native-emdros": "file:../Libraries/Emdros/",
     "react-native-fs": "^1.4.0",
-    "realm": "^0.13.0"
+    "react-native-uuid": "^1.4.8",
+    "realm": "^0.14.0"
   }
 }
