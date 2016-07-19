@@ -73,7 +73,7 @@ async function seedSourceOccurrences(emdros, bible) {
           const sources = book.sources;
           const chapterData = bookData["Chapter"]["chapter"];
           if (chapterData != null) {
-            book.chapters.forEach((chapter, index) => {
+            for (let [index, chapter] of book.chapters.entries()) {
               const chapterNumber = chapter.chapterNumber;
               const sourceData = chapterData[chapterNumber.toString()]["Source"]["source_name"];
               if (sourceData != null) {
@@ -85,7 +85,7 @@ async function seedSourceOccurrences(emdros, bible) {
                   });
                 });
               }
-            });
+            }
           }
         }
       }

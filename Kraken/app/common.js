@@ -43,7 +43,7 @@ export function seedObjectSourceTypeWordCounts(realm: Object, type: string, key:
   }
 }
 
-export function seedObjectSphereWordCounts(object: Object, spheresData: Object) {
+export function seedObjectSphereWordCounts(realm: Object, type: string, key: any, spheresData: Object) {
   if (spheresData != null) {
     let sphereCount = 0;
     const sphereCounts = [];
@@ -62,8 +62,7 @@ export function seedObjectSphereWordCounts(object: Object, spheresData: Object) 
       }
     });
 
-    object.sphereCount = sphereCount;
-    object.sphereCounts = sphereCounts;
+    realm.create(type, {id: key, sphereCount, sphereCounts}, true);
   }
 }
 

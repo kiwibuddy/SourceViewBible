@@ -26,13 +26,13 @@ async function seedChapterCounts(emdros: Object, realm: Object) {
   return new Promise((resolve, reject) => {
     emdros.query(query, {count: true}).then((data) => {
       realm.write(() => {
-        realm.objects('Book').forEach(book => {
+        for (let [index, book] of realm.objects('Book').entries()) {
           const bookData = data["Book"]["DJHRef"][book.DJHRef];
           if (bookData != null) {
             const chapterCount = bookData["Chapter"] || 0;
             realm.create('Book', {id: book.id, chapterCount}, true);
           }
-        });
+        }
 
         resolve();
       });
@@ -113,27 +113,28 @@ async function seedWordCounts(emdros, realm) {
 
   return new Promise((resolve, reject) => {
     emdros.query(query, {count: true}).then((data) => {
-      realm.write(() => {
-        realm.objects('Book').forEach(book => {
-          const bookData = data["Book"]["DJHRef"][book.DJHRef];
-          if (bookData != null) {
-            const chapterData = bookData["Chapter"]["chapter"];
-            if (chapterData != null) {
+      for (let [index, book] of realm.objects('Book').entries()) {
+        const bookData = data["Book"]["DJHRef"][book.DJHRef];
+        if (bookData != null) {
+          const chapterData = bookData["Chapter"]["chapter"];
+          if (chapterData != null) {
+            realm.write(() => {
               let maxChapterWordCount = 0;
 
-              book.chapters.forEach((chapter, index) => {
+              for (let [index, chapter] of book.chapters.entries()) {
                 const wordCount = chapterData[chapter.chapterNumber.toString()]["Token"] || 0;
                 chapter.wordCount = wordCount;
                 if (wordCount > maxChapterWordCount) {
                   maxChapterWordCount = wordCount;
                 }
-              });
+              }
 
               book.maxChapterWordCount = maxChapterWordCount;
-            }
+            });
           }
-        });
-      });
+        }
+      }
+
 
       resolve();
     }).catch((error) => {
@@ -165,23 +166,21 @@ async function seedSourceTypeCounts(emdros, realm) {
 
   return new Promise((resolve, reject) => {
     emdros.query(query, {count: true}).then((data) => {
-      let bookObjects = [];
-
-      realm.write(() => {
-        realm.objects('Book').forEach(book => {
-          const bookData = data["Book"]["DJHRef"][book.DJHRef];
-          if (bookData != null) {
-            console.log(`Seeding ${book.name} Chapter Source Type Word Counts...`);
-            const chapterData = bookData["Chapter"]["chapter"];
-            if (chapterData != null) {
-              book.chapters.forEach((chapter, index) => {
+      for (let [index, book] of realm.objects('Book').entries()) {
+        const bookData = data["Book"]["DJHRef"][book.DJHRef];
+        if (bookData != null) {
+          console.log(`Seeding ${book.name} Chapter Source Type Word Counts...`);
+          const chapterData = bookData["Chapter"]["chapter"];
+          if (chapterData != null) {
+            realm.write(() => {
+              for (let [index, chapter] of book.chapters.entries()) {
                 const sourceData = chapterData[chapter.chapterNumber.toString()]["Source"]["source_color"];
                 seedObjectSourceTypeWordCounts(realm, 'Chapter', chapter.id, sourceData);
-              });
-            }
+              }
+            });
           }
-        });
-      });
+        }
+      }
 
       resolve();
     }).catch((error) => {
@@ -209,13 +208,13 @@ async function seedSources(emdros, realm) {
 
   return new Promise((resolve, reject) => {
     emdros.query(query, {count: true}).then((data) => {
-      realm.write(() => {
-        realm.objects('Book').forEach(book => {
-          const bookData = data["Book"]["DJHRef"][book.DJHRef];
-          if (bookData != null) {
-            const chapterData = bookData["Chapter"]["chapter"];
-            if (chapterData != null) {
-              book.chapters.forEach((chapter, index) => {
+      for (let [index, book] of realm.objects('Book').entries()) {
+        const bookData = data["Book"]["DJHRef"][book.DJHRef];
+        if (bookData != null) {
+          const chapterData = bookData["Chapter"]["chapter"];
+          if (chapterData != null) {
+            realm.write(() => {
+              for (let [index, chapter] of book.chapters.entries()) {
                 console.log(`Seeding ${book.name} Chapter Sources...`);
                 const sources = [];
                 const sourceData = chapterData[chapter.chapterNumber.toString()]["Source"]["source_name"];
@@ -229,11 +228,11 @@ async function seedSources(emdros, realm) {
                 }
 
                 realm.create('Chapter', {id: chapter.id, sourceCount: sources.length, sources}, true);
-              });
-            }
+              }
+            });
           }
-        });
-      });
+        }
+      }
 
       resolve();
     }).catch((error) => {
