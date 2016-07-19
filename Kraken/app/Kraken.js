@@ -69,9 +69,9 @@ export async function release() {
   await seed(emdros);
 
   const endTime = now();
-  const elapsedTime = endTime - startTime;
+  const elapsedTime = (endTime - startTime) / 1000;
 
-  console.log(`Kraken has been released in ${elapsedTime.toFixed(3)}ms!`);
+  console.log(`Kraken has been released in ${elapsedTime.toFixed(3)}s!`);
   // RNFS.writeFile(JSON_PATH, JSON.stringify(objects), 'utf8').then((success) => {
   //   console.log('Done Seeding.');
   //   console.log(objects);
@@ -172,193 +172,130 @@ async function seedChapterSphereWordCount(emdros, bible) {
   });
 }
 
-async function seedChapterSphereWordCounts(emdros, bible) {
-  console.log('Seeding Chapter Sphere Word Counts...');
+// async function seedChapterSphereWordCounts(emdros, bible) {
+//   console.log('Seeding Chapter Sphere Word Counts...');
+//
+//   const sphereFeatures = SPHERE_KEYS.map(key => `"${key}"`).join(', ');
+//   const query = `
+//   {
+//     "objectTypeName": "Book",
+//     "feature": "DJHRef",
+//     "buckets": {
+//       "objectTypeName": "Chapter",
+//       "feature": "chapter",
+//       "buckets": {
+//         "objectTypeName": "Token",
+//         "feature": [${sphereFeatures}],
+//         "expression" : "is_word=true"
+//       }
+//     }
+//   }
+//   `;
+//
+//   return new Promise((resolve, reject) => {
+//     emdros.query(query, {count: true}).then((data) => {
+//       for (let [index, book] of bible.books.entries()) {
+//         const bookData = data["Book"]["DJHRef"][book.DJHRef];
+//         if (bookData != null) {
+//           const chapterData = bookData["Chapter"]["chapter"];
+//           if (chapterData != null) {
+//             let maxChapterSphereWordCount = 0;
+//
+//             book.chapters.forEach((chapter, index) => {
+//               const spheresData = chapterData[chapter.chapterNumber.toString()]["Token"];
+//               if (spheresData) {
+//                 seedObjectSphereWordCounts(chapter, spheresData);
+//
+//                 let chapterSphereWordCount = 0;
+//                 Object.keys(spheresData).forEach((sphereName) => {
+//                   const sphereData = spheresData[sphereName];
+//                   const wordCount = sphereData.true;
+//                   if (wordCount && wordCount > 0) {
+//                     chapterSphereWordCount += wordCount;
+//                   }
+//                 });
+//
+//                 if (chapterSphereWordCount > maxChapterSphereWordCount) {
+//                   maxChapterSphereWordCount = chapterSphereWordCount;
+//                 }
+//               }
+//             });
+//
+//             book.maxChapterSphereWordCount = maxChapterSphereWordCount;
+//           }
+//         }
+//       }
+//
+//       resolve();
+//     }).catch((error) => {
+//       console.log(error);
+//     })
+//   });
+// }
 
-  const sphereFeatures = SPHERE_KEYS.map(key => `"${key}"`).join(', ');
-  const query = `
-  {
-    "objectTypeName": "Book",
-    "feature": "DJHRef",
-    "buckets": {
-      "objectTypeName": "Chapter",
-      "feature": "chapter",
-      "buckets": {
-        "objectTypeName": "Token",
-        "feature": [${sphereFeatures}],
-        "expression" : "is_word=true"
-      }
-    }
-  }
-  `;
+// async function seedSpheres(emdros, bible) {
+//   console.log('Seeding Spheres...');
+//
+//   await seedSphereWordCounts(emdros, bible);
+//
+//   const sphereNames = Object.keys(SPHERE_MAP);
+//   for (let sphereName of sphereNames) {
+//     await seedSphereWordCloud(sphereName, emdros, bible);
+//   }
+// }
 
-  return new Promise((resolve, reject) => {
-    emdros.query(query, {count: true}).then((data) => {
-      for (let [index, book] of bible.books.entries()) {
-        const bookData = data["Book"]["DJHRef"][book.DJHRef];
-        if (bookData != null) {
-          const chapterData = bookData["Chapter"]["chapter"];
-          if (chapterData != null) {
-            let maxChapterSphereWordCount = 0;
-
-            book.chapters.forEach((chapter, index) => {
-              const spheresData = chapterData[chapter.chapterNumber.toString()]["Token"];
-              if (spheresData) {
-                seedObjectSphereWordCounts(chapter, spheresData);
-
-                let chapterSphereWordCount = 0;
-                Object.keys(spheresData).forEach((sphereName) => {
-                  const sphereData = spheresData[sphereName];
-                  const wordCount = sphereData.true;
-                  if (wordCount && wordCount > 0) {
-                    chapterSphereWordCount += wordCount;
-                  }
-                });
-
-                if (chapterSphereWordCount > maxChapterSphereWordCount) {
-                  maxChapterSphereWordCount = chapterSphereWordCount;
-                }
-              }
-            });
-
-            book.maxChapterSphereWordCount = maxChapterSphereWordCount;
-          }
-        }
-      }
-
-      resolve();
-    }).catch((error) => {
-      console.log(error);
-    })
-  });
-}
-
-async function seedSpheres(emdros, bible) {
-  console.log('Seeding Spheres...');
-
-  await seedSphereWordCounts(emdros, bible);
-
-  const sphereNames = Object.keys(SPHERE_MAP);
-  for (let sphereName of sphereNames) {
-    await seedSphereWordCloud(sphereName, emdros, bible);
-  }
-}
-
-async function seedSphereWordCounts(emdros, bible) {
-  console.log('Seeding Spheres Word Counts...');
-
-  return new Promise((resolve, reject) => {
-    SPHERE_KEYS.forEach(key => {
-      const sphere = bible.spheres.find(sphere => sphere.id === SPHERE_MAP[key]);
-      if (sphere != null) {
-        let bookCount = 0;
-        let totalWordCount = 0;
-
-        bible.books.forEach(book => {
-          const wordCount = book.sphereCounts[sphere.id] || 0;
-          sphere.bookCounts[book.id] = wordCount;
-
-          if (wordCount > 0) {
-            bookCount++;
-            totalWordCount += wordCount;
-          }
-        });
-
-        sphere.bookCount = bookCount;
-        sphere.wordCount = totalWordCount;
-      }
-    });
-
-    resolve();
-  });
-}
-
-async function seedSphereWordCloud(sphereName, emdros, bible) {
-  const sphere = bible.spheres.find(sphere => sphere.id === SPHERE_MAP[sphereName]);
-  if (!sphere) {
-    return;
-  }
-
-  console.log(`Seeding Sphere: ${sphere.name} Word Cloud...`);
-  const query = `
-  {
-      "objectTypeName": "Token",
-      "feature": ["surface"],
-      "expression" : "is_word=true AND ${sphereName}=true"
-  }
-  `;
-
-  return new Promise((resolve, reject) => {
-    emdros.query(query, {count: true}).then((data) => {
-      const wordData = data["Token"]["surface"];
-      seedObjectWordCloud(sphere, wordData);
-
-      resolve();
-    }).catch((error) => {
-      console.log(error);
-    })
-  });
-}
-
-function seedObjectSourceTypeWordCounts(object, sourceData) {
-  object.sourceTypeCounts = {
-    "narrator": 0,
-    "god": 0,
-    "lead": 0,
-    "support": 0
-  };
-  object.principalSourceType = null;
-
-  if (sourceData != null) {
-    const sourceTypeData = sourceData["source_color"];
-    if (sourceTypeData != null) {
-      Object.keys(sourceTypeData).forEach(function(sourceColor, index) {
-        const wordCount = sourceTypeData[sourceColor]["Token"] || 0;
-        const sourceType = SOURCE_TYPE_MAP[sourceColor];
-        object.sourceTypeCounts[sourceType] = wordCount;
-      });
-    }
-
-    object.principalSourceType = Object.keys(object.sourceTypeCounts).reduce((a, b) => object.sourceTypeCounts[a] > object.sourceTypeCounts[b] ? a : b);
-  }
-}
-
-function seedObjectWordCloud(object, wordData) {
-  if (wordData != null) {
-    const words = Object.keys(wordData).filter((word) => {
-      return word.length > MINIMUM_WORD_LENGTH && STOP_WORDS.indexOf(word.toLowerCase()) == -1;
-    });
-    object.words = words.sort((a, b) => wordData[a] > wordData[b] ? -1 : 1).slice(0, WORD_CLOUD_LIMIT).map((word) => {
-      return {word: word, wordCount: wordData[word]};
-    });
-  } else {
-    object.words = [];
-  }
-}
-
-function seedObjectSphereWordCounts(object, spheresData) {
-  if (!object.spheres) {
-    object.sphereCounts = {};
-    object.sphereCount = 0;
-  }
-
-  if (spheresData != null) {
-    let sphereCount = 0;
-
-    Object.keys(spheresData).forEach((sphereName) => {
-      const sphereData = spheresData[sphereName];
-      const wordCount = sphereData.true || 0;
-      object.sphereCounts[SPHERE_MAP[sphereName]] = wordCount;
-
-      if (wordCount > 0) {
-        sphereCount++;
-      }
-    });
-
-    object.sphereCount = sphereCount;
-  }
-}
-
-function isNumber(n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
-}
+// async function seedSphereWordCounts(emdros, bible) {
+//   console.log('Seeding Spheres Word Counts...');
+//
+//   return new Promise((resolve, reject) => {
+//     SPHERE_KEYS.forEach(key => {
+//       const sphere = bible.spheres.find(sphere => sphere.id === SPHERE_MAP[key]);
+//       if (sphere != null) {
+//         let bookCount = 0;
+//         let totalWordCount = 0;
+//
+//         bible.books.forEach(book => {
+//           const wordCount = book.sphereCounts[sphere.id] || 0;
+//           sphere.bookCounts[book.id] = wordCount;
+//
+//           if (wordCount > 0) {
+//             bookCount++;
+//             totalWordCount += wordCount;
+//           }
+//         });
+//
+//         sphere.bookCount = bookCount;
+//         sphere.wordCount = totalWordCount;
+//       }
+//     });
+//
+//     resolve();
+//   });
+// }
+//
+// async function seedSphereWordCloud(sphereName, emdros, bible) {
+//   const sphere = bible.spheres.find(sphere => sphere.id === SPHERE_MAP[sphereName]);
+//   if (!sphere) {
+//     return;
+//   }
+//
+//   console.log(`Seeding Sphere: ${sphere.name} Word Cloud...`);
+//   const query = `
+//   {
+//       "objectTypeName": "Token",
+//       "feature": ["surface"],
+//       "expression" : "is_word=true AND ${sphereName}=true"
+//   }
+//   `;
+//
+//   return new Promise((resolve, reject) => {
+//     emdros.query(query, {count: true}).then((data) => {
+//       const wordData = data["Token"]["surface"];
+//       seedObjectWordCloud(sphere, wordData);
+//
+//       resolve();
+//     }).catch((error) => {
+//       console.log(error);
+//     })
+//   });
+// }

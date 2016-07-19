@@ -47,6 +47,8 @@ export async function seedSources(emdros: Object, realm: Object) {
   console.log('Seeding Sources...');
 
   await seedSourceWordCloud(emdros, realm);
+
+  await seedSourceOccurrences(emdros, realm);
 }
 
 async function seedSourceWordCloud(emdros, realm) {
@@ -83,7 +85,7 @@ async function seedSourceWordCloud(emdros, realm) {
   });
 }
 
-async function seedSourceOccurrences(emdros, bible) {
+async function seedSourceOccurrences(emdros, realm) {
   console.log('Seeding Source Occurrences...');
   const query = `
   {
@@ -102,7 +104,7 @@ async function seedSourceOccurrences(emdros, bible) {
 
   return new Promise((resolve, reject) => {
     emdros.query(query, {count: true}).then((data) => {
-      for (let [index, book] of bible.books.entries()) {
+      for (let [index, book] of realm.objects('Book').entries()) {
         const bookData = data["Book"]["DJHRef"][book.DJHRef];
         if (bookData != null) {
           const sources = book.sources;
@@ -113,10 +115,12 @@ async function seedSourceOccurrences(emdros, bible) {
               const sourceData = chapterData[chapterNumber.toString()]["Source"]["source_name"];
               if (sourceData != null) {
                 Object.keys(sourceData).forEach((sourceName) => {
-                  const source = sources.find(source => source.name === sourceName);
-                  if (!source.occurrences) source.occurrences = [];
-                  source.occurrences.push({
-                    chapterNumber: chapterNumber
+                  realm.write(() => {
+                    let source = realm.objects('Source').find(source => source.name === sourceName);
+                    source.occurrences.push({
+                      book,
+                      chapter
+                    });
                   });
                 });
               }
