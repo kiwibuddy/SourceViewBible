@@ -98,54 +98,6 @@ async function seedBooksFoo(emdros) {
 
 
 
-async function seedBookSources(emdros, bible) {
-  console.log('Seeding Book Sources...');
-  const query = `
-  {
-    "objectTypeName": "Book",
-    "feature": "DJHRef",
-    "buckets": {
-      "objectTypeName": "Source",
-      "feature": "source_name"
-    }
-  }
-  `;
-
-  return new Promise((resolve, reject) => {
-    emdros.query(query, {count: true}).then((data) => {
-      for (let [index, book] of bible.books.entries()) {
-        const bookData = data["Book"]["DJHRef"][book.DJHRef];
-        if (bookData != null) {
-          const sources = {}
-          let sourceCount = 0;
-
-          const sourceData = bookData["Source"]["source_name"];
-          if (sourceData != null) {
-            Object.keys(sourceData).forEach((sourceName) => {
-              sources[sourceName] = {id: sourceName, wordCount: 0, words: []};
-              sourceCount++;
-            });
-          }
-
-          book.sources = sources;
-          book.sourceCount = sourceCount;
-        }
-      }
-
-      for (let [index, book] of bible.books.entries()) {
-        const sources = book.sources;
-        book.sources = Object.keys(sources).sort((a, b) => sources[a].wordCount > sources[b].wordCount ? -1 : 1).map((sourceName) => {
-          const source = sources[sourceName];
-          return {...source, name: sourceName};
-        });
-      }
-
-      resolve();
-    }).catch((error) => {
-      console.log(error);
-    });
-  });
-}
 
 async function seedSourceOccurrences(emdros, bible) {
   console.log('Seeding Source Occurrences...');
@@ -209,35 +161,6 @@ async function seedBookWordCounts(emdros, bible) {
   await seedChapterSphereWordCounts(emdros, bible);
 }
 
-async function seedBookWordCount(emdros, bible) {
-  console.log('Seeding Book Word Counts...');
-  const query = `
-  {
-    "objectTypeName": "Book",
-    "feature": "DJHRef",
-    "buckets": {
-      "objectTypeName": "Token",
-      "expression" : "is_word=true"
-    }
-  }
-  `;
-
-  return new Promise((resolve, reject) => {
-    emdros.query(query, {count: true}).then((data) => {
-      for (let [index, book] of bible.books.entries()) {
-        const bookData = data["Book"]["DJHRef"][book.DJHRef];
-        if (bookData != null) {
-          const wordCount = bookData["Token"] || 0;
-          book["wordCount"] = wordCount;
-        }
-      }
-
-      resolve();
-    }).catch((error) => {
-      console.log(error);
-    })
-  });
-}
 
 async function seedChapterWordCounts(emdros, bible) {
   console.log('Seeding Chapter Word Counts...');

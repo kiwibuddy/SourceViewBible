@@ -1,6 +1,8 @@
 /* @flow */
 'use strict';
 
+const {isNumber, seedObjectSourceTypeWordCounts} = require('../common');
+
 const UUID = require('react-native-uuid');
 
 const BOOKS = require('../books');
@@ -14,6 +16,10 @@ export async function seedBooks(emdros: Object, realm: Object) {
   await seedChapters(emdros, realm);
 
   await seedSources(emdros, realm);
+
+  await seedSourceTypeCounts(emdros, realm);
+
+  await seedWordCounts(emdros, realm);
 }
 
 async function seedNames(realm) {
@@ -152,6 +158,74 @@ async function seedSources(emdros, realm) {
   });
 }
 
+async function seedWordCounts(emdros, realm) {
+  console.log('Seeding Book Word Counts...');
+  const query = `
+  {
+    "objectTypeName": "Book",
+    "feature": "DJHRef",
+    "buckets": {
+      "objectTypeName": "Token",
+      "expression" : "is_word=true"
+    }
+  }
+  `;
+
+  return new Promise((resolve, reject) => {
+    emdros.query(query, {count: true}).then((data) => {
+      realm.write(() => {
+        realm.objects('Book').forEach(book => {
+          const bookData = data["Book"]["DJHRef"][book.DJHRef];
+          if (bookData != null) {
+            const wordCount = bookData["Token"] || 0;
+            book.wordCount = wordCount;
+          }
+        });
+      });
+
+      resolve();
+    }).catch((error) => {
+      console.log(error);
+    })
+  });
+}
+
+async function seedSourceTypeCounts(emdros, realm) {
+  console.log('Seeding Book Source Type Word Counts...');
+  const query = `
+  {
+    "objectTypeName": "Book",
+    "feature": "DJHRef",
+    "buckets": {
+      "objectTypeName": "Source",
+      "feature": "source_color",
+      "buckets": {
+        "objectTypeName": "Token",
+        "expression" : "is_word=true"
+      }
+    }
+  }
+  `;
+
+  return new Promise((resolve, reject) => {
+    emdros.query(query, {count: true}).then((data) => {
+      realm.write(() => {
+        realm.objects('Book').forEach(book => {
+          const bookData = data["Book"]["DJHRef"][book.DJHRef];
+          if (bookData != null) {
+            const sourceData = bookData["Source"]["source_color"];
+            seedObjectSourceTypeWordCounts(book, sourceData);
+          }
+        });
+      });
+
+      resolve();
+    }).catch((error) => {
+      console.log(error);
+    })
+  });
+}
+
 function firstInitial(name: string) {
   const firstInitial = name.charAt(0);
   return isNumber(firstInitial) ? null : firstInitial;
@@ -159,8 +233,4 @@ function firstInitial(name: string) {
 
 function sourceID(name: string) {
   return name;
-}
-
-function isNumber(n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
 }

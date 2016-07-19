@@ -14,7 +14,9 @@ const Book = {
     chapters: {type: 'list', objectType: 'Chapter'},
     sourceCount: {type: 'int', default: 0},
     sources: {type: 'list', objectType: 'Source'},
+    sourceTypeCount: {type: 'int', default: 0},
     sourceTypeCounts: {type: 'list', objectType: 'Count'},
+    principalSourceType: {type: 'string', default: 'narrator'},
     sphereCount: {type: 'int', default: 0},
     sphereCounts: {type: 'list', objectType: 'Count'},
     wordCount: {type: 'int', default: 0},
@@ -70,8 +72,6 @@ const Sphere = {
 const Count = {
   name: 'Count',
   properties: {
-    countableID: {type: 'int', indexed: true},
-    countableType: {type: 'string', indexed: true},
     string: 'string',
     count: {type: 'int', default: 0},
   }
