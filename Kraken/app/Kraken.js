@@ -58,6 +58,7 @@ const SPHERE_KEYS = BIBLE.spheres.map(sphere => Object.keys(SPHERE_MAP).find(key
 const { seedBookObjects, seedBooks } = require('./seeds/books');
 const { seedChapterObjects, seedChapters } = require('./seeds/chapters');
 const { seedSourceObjects, seedSources } = require('./seeds/sources');
+const { seedSphereObjects, seedSpheres } = require('./seeds/spheres');
 
 export async function release() {
   console.log('Release the Kraken!');
@@ -95,6 +96,7 @@ async function seedBaseObjects(emdros) {
   await seedBookObjects(emdros, realm);
   await seedChapterObjects(emdros, realm);
   await seedSourceObjects(emdros, realm);
+  await seedSphereObjects(emdros, realm);
 }
 
 async function seedBookSphereWordCount(emdros, bible) {

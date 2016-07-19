@@ -87,7 +87,7 @@ async function seedBookChapterMonadSet(emdros, book, chapterNumber) {
 export async function seedChapters(emdros: Object, realm: Object) {
   console.log('Seeding Chapters...');
 
-  await seedSourceTypeCounts(emdros, realm);
+  await seedSourceCounts(emdros, realm);
 
   await seedSphereCounts(emdros, realm);
 
@@ -143,8 +143,8 @@ async function seedWordCounts(emdros, realm) {
   });
 }
 
-async function seedSourceTypeCounts(emdros, realm) {
-  console.log('Seeding Chapter Source Type Word Counts...');
+async function seedSourceCounts(emdros, realm) {
+  console.log('Seeding Chapter Source Counts...');
   const query = `
   {
     "objectTypeName": "Book",
@@ -154,7 +154,7 @@ async function seedSourceTypeCounts(emdros, realm) {
       "feature": "chapter",
       "buckets": {
         "objectTypeName": "Source",
-        "feature": "source_color",
+        "feature": ["source_color", "source_name"],
         "buckets": {
           "objectTypeName": "Token",
           "expression" : "is_word=true"
@@ -174,8 +174,16 @@ async function seedSourceTypeCounts(emdros, realm) {
           if (chapterData != null) {
             realm.write(() => {
               for (let [index, chapter] of book.chapters.entries()) {
-                const sourceData = chapterData[chapter.chapterNumber.toString()]["Source"]["source_color"];
-                seedObjectSourceTypeWordCounts(realm, 'Chapter', chapter.id, sourceData);
+                const sourceData = chapterData[chapter.chapterNumber.toString()]["Source"];
+
+                const sourceTypeData = sourceData["source_color"];
+                seedObjectSourceTypeWordCounts(realm, 'Chapter', chapter.id, sourceTypeData);
+
+                const sourceNameData = sourceData["source_name"];
+                if (sourceNameData != null) {
+                  const sourceCount = Object.keys(sourceNameData).length;
+                  realm.create('Chapter', {id: chapter.id, sourceCount}, true);
+                }
               }
             });
           }
