@@ -60,7 +60,9 @@ const Source = {
 
 const SourceRelation = {
   name: 'SourceRelation',
+  primaryKey: 'id',
   properties: {
+    id: 'string',
     source: 'Source',
     wordCount: {type: 'int', default: 0},
     words: {type: 'list', objectType: 'Count'},

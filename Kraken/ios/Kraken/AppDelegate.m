@@ -16,6 +16,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  
+  [[NSFileManager defaultManager] removeItemAtPath:@"/tmp/SourceView.realm" error:nil];
+  [[NSFileManager defaultManager] removeItemAtPath:@"/tmp/SourceView.realm.lock" error:nil];
+  [[NSFileManager defaultManager] removeItemAtPath:@"/tmp/SourceView.realm.note" error:nil];
+  
   NSURL *jsCodeLocation;
 
   [[RCTBundleURLProvider sharedSettings] setDefaults];

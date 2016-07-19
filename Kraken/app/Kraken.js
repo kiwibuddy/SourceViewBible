@@ -88,60 +88,6 @@ async function seedBaseObjects(emdros) {
   await seedSourceObjects(emdros, realm);
 }
 
-async function seedBookSourceWordCounts(emdros, bible) {
-  console.log('Seeding Book Source Word Counts...');
-  const query = `
-  {
-    "objectTypeName": "Book",
-    "feature": "DJHRef",
-    "buckets": {
-      "objectTypeName": "Source",
-      "feature": ["source_color", "source_name"],
-      "buckets": {
-        "objectTypeName": "Token",
-        "expression" : "is_word=true"
-      }
-    }
-  }
-  `;
-
-  return new Promise((resolve, reject) => {
-    emdros.query(query, {count: true}).then((data) => {
-      for (let [index, book] of bible.books.entries()) {
-        const bookData = data["Book"]["DJHRef"][book.DJHRef];
-        if (bookData != null) {
-          const sourceData = bookData["Source"];
-          if (sourceData != null) {
-            seedObjectSourceTypeWordCounts(book, sourceData);
-
-            const sourceNameData = sourceData["source_name"];
-            if (sourceNameData != null) {
-              let maxSourceWordCount = 0;
-
-              Object.keys(sourceNameData).forEach((sourceName) => {
-                const source = book.sources.find(source => source.name === sourceName);
-                const wordCount = sourceNameData[sourceName]["Token"] || 0;
-                source.wordCount = wordCount;
-
-                if (wordCount > maxSourceWordCount) {
-                  maxSourceWordCount = wordCount;
-                }
-              });
-
-              book.maxSourceWordCount = maxSourceWordCount;
-            }
-          }
-        }
-      }
-
-      resolve();
-    }).catch((error) => {
-      console.log(error);
-    })
-  });
-}
-
-
 async function seedBookSphereWordCount(emdros, bible) {
   console.log('Seeding Book Sphere Word Count...');
 
