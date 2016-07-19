@@ -54,7 +54,7 @@ const SPHERE_MAP = {
 
 const SPHERE_KEYS = BIBLE.spheres.map(sphere => Object.keys(SPHERE_MAP).find(key => SPHERE_MAP[key] === sphere.id));
 
-const { seedBookObjects } = require('./seeds/books');
+const { seedBookObjects, seedBooks } = require('./seeds/books');
 const { seedChapterObjects } = require('./seeds/chapters');
 const { seedSourceObjects } = require('./seeds/sources');
 
@@ -75,6 +75,8 @@ export async function release() {
 
 async function seed(emdros) {
   await seedBaseObjects(emdros);
+
+  await seedBooks(emdros, realm);
 }
 
 async function seedBaseObjects(emdros) {

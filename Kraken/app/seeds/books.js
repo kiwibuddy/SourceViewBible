@@ -8,25 +8,6 @@ const UUID = require('react-native-uuid');
 const BOOKS = require('../books');
 
 export async function seedBookObjects(emdros: Object, realm: Object) {
-  console.log('Seeding Books...');
-
-  await seedNames(realm);
-
-  // await seedChapterCounts(emdros, realm);
-  // await seedChapters(emdros, realm);
-
-  // await seedSources(emdros, realm);
-  //
-  // await seedSourceTypeCounts(emdros, realm);
-  //
-  // await seedBookSphereCounts(emdros, realm);
-  //
-  // await seedWordCounts(emdros, realm);
-  //
-  // await seedBookWordCloud(emdros, realm);
-}
-
-export async function seedNames(realm: Object) {
   console.log('Seeding Book Names...');
   return new Promise((resolve, reject) => {
     realm.write(() => {
@@ -47,77 +28,18 @@ export async function seedNames(realm: Object) {
   });
 };
 
+export async function seedBooks(emdros: Object, realm: Object) {
+  console.log('Seeding Books...');
 
+  await seedSourceTypeCounts(emdros, realm);
 
-async function seedSources(emdros, realm) {
-  console.log('Seeding Book Sources...');
-  const query = `
-  {
-    "objectTypeName": "Book",
-    "feature": "DJHRef",
-    "buckets": {
-      "objectTypeName": "Source",
-      "feature": "source_name"
-    }
-  }
-  `;
+  await seedSources(emdros, realm);
 
-  return new Promise((resolve, reject) => {
-    emdros.query(query, {count: true}).then((data) => {
-      realm.write(() => {
-        realm.objects('Book').forEach(book => {
-          const bookData = data["Book"]["DJHRef"][book.DJHRef];
-          if (bookData != null) {
-            const sources = [];
-            const sourceData = bookData["Source"]["source_name"];
-            if (sourceData != null) {
-              Object.keys(sourceData).forEach((sourceName) => {
-                sources.push({id: getSourceID(sourceName), name: sourceName, firstInitial: firstInitial(sourceName)});
-              });
-            }
+  await seedBookSphereCounts(emdros, realm);
 
-            realm.create('Book', {id: book.id, sourceCount: sources.length, sources}, true);
-          }
-        });
-      });
+  await seedWordCounts(emdros, realm);
 
-      resolve();
-    }).catch((error) => {
-      console.log(error);
-    });
-  });
-}
-
-async function seedWordCounts(emdros, realm) {
-  console.log('Seeding Book Word Counts...');
-  const query = `
-  {
-    "objectTypeName": "Book",
-    "feature": "DJHRef",
-    "buckets": {
-      "objectTypeName": "Token",
-      "expression" : "is_word=true"
-    }
-  }
-  `;
-
-  return new Promise((resolve, reject) => {
-    emdros.query(query, {count: true}).then((data) => {
-      realm.write(() => {
-        realm.objects('Book').forEach(book => {
-          const bookData = data["Book"]["DJHRef"][book.DJHRef];
-          if (bookData != null) {
-            const wordCount = bookData["Token"] || 0;
-            book.wordCount = wordCount;
-          }
-        });
-      });
-
-      resolve();
-    }).catch((error) => {
-      console.log(error);
-    })
-  });
+  await seedBookWordCloud(emdros, realm);
 }
 
 async function seedSourceTypeCounts(emdros, realm) {
@@ -156,6 +78,50 @@ async function seedSourceTypeCounts(emdros, realm) {
   });
 }
 
+async function seedSources(emdros, realm) {
+  console.log('Seeding Book Sources...');
+  const query = `
+  {
+    "objectTypeName": "Book",
+    "feature": "DJHRef",
+    "buckets": {
+      "objectTypeName": "Source",
+      "feature": "source_name"
+    }
+  }
+  `;
+
+  return new Promise((resolve, reject) => {
+    emdros.query(query, {count: true}).then((data) => {
+      realm.write(() => {
+        realm.objects('Book').forEach(book => {
+          const bookData = data["Book"]["DJHRef"][book.DJHRef];
+          if (bookData != null) {
+            const sources = [];
+            const sourceData = bookData["Source"]["source_name"];
+            if (sourceData != null) {
+              Object.keys(sourceData).forEach((sourceName) => {
+                const source = realm.objectForPrimaryKey('Source', getSourceID(sourceName));
+                if (source == null) {
+                  console.log('UH OH!!!!', sourceName);
+                } else {
+                  sources.push(source);
+                }
+              });
+            }
+
+            realm.create('Book', {id: book.id, sourceCount: sources.length, sources}, true);
+          }
+        });
+      });
+
+      resolve();
+    }).catch((error) => {
+      console.log(error);
+    });
+  });
+}
+
 async function seedBookSphereCounts(emdros, realm) {
   console.log('Seeding Book Sphere Word Counts...');
   const sphereFeatures = Object.keys(SPHERE_MAP).map(key => `"${key}"`).join(', ');
@@ -179,6 +145,38 @@ async function seedBookSphereCounts(emdros, realm) {
           if (bookData != null) {
             const spheresData = bookData["Token"];
             seedObjectSphereWordCounts(book, spheresData);
+          }
+        });
+      });
+
+      resolve();
+    }).catch((error) => {
+      console.log(error);
+    })
+  });
+}
+
+async function seedWordCounts(emdros, realm) {
+  console.log('Seeding Book Word Counts...');
+  const query = `
+  {
+    "objectTypeName": "Book",
+    "feature": "DJHRef",
+    "buckets": {
+      "objectTypeName": "Token",
+      "expression" : "is_word=true"
+    }
+  }
+  `;
+
+  return new Promise((resolve, reject) => {
+    emdros.query(query, {count: true}).then((data) => {
+      realm.write(() => {
+        realm.objects('Book').forEach(book => {
+          const bookData = data["Book"]["DJHRef"][book.DJHRef];
+          if (bookData != null) {
+            const wordCount = bookData["Token"] || 0;
+            book.wordCount = wordCount;
           }
         });
       });
