@@ -203,11 +203,11 @@ const styles = StyleSheet.create({
     marginBottom: 7,
   },
   sectionHeaderContainer: {
-    paddingVertical: 8,
+    paddingVertical: 6,
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingRight: 15,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#FAFAFA',
     marginRight: 15,
   },
   sectionHeaderTitle: {

@@ -8,7 +8,8 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Image
+  Image,
+  ScrollView
 } from 'react-native';
 
 import {
@@ -37,17 +38,51 @@ export default class DiscoveryCenter extends Component {
             <Text style={StyleSheet.styles.navigationBar.doneButtonTitle}>{Localizable.t('done')}</Text>
           </TouchableOpacity>
         </NavigationBar>
-        <View style={styles.content}>
+        <ScrollView style={styles.content}>
           <View style={styles.card}>
+            <View style={styles.header}>
+              <View style={styles.sourcesLeftContainer}>
+                <TouchableOpacity>
+                  <Image source={require('../../Images/discoverycenter/btn-delete.png')} />
+                </TouchableOpacity>
+              </View>
+            </View>
             <View style={styles.video}>
+              <Image source={require('../../Images/discoverycenter/video-header-dc.png')} />
               <TouchableOpacity style={styles.videoPlay}>
                 <Image source={require('../../Images/common/btn-play.png')} />
               </TouchableOpacity>
-              <Image source={require('../../Images/discoverycenter/video-header-dc.png')} />
             </View>
-            <View style={styles.message}></View>
+            <View style={styles.gettingstartedContainer}>
+              <Image style={styles.gettingstartedIcon} source={require('../../Images/discoverycenter/dc-icon.png')} />
+              <Text style={styles.gettingstartedHeader}>Create & Share Discoveries</Text>
+              <Text style={styles.gettingstartedBody}>Tap your way to new Biblical insights and share what your find.</Text>
+            </View>
           </View>
-        </View>
+          <View style={styles.card}>
+            <View style={styles.header}>
+              <View style={styles.sourcesLeftContainer}>
+                <TouchableOpacity>
+                  <Image source={require('../../Images/discoverycenter/btn-delete.png')} />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.sourcesRightContainer}>
+                <TouchableOpacity>
+                  <Image source={require('../../Images/discoverycenter/btn-duplicate.png')} />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.share}>
+                  <Image source={require('../../Images/discoverycenter/btn-share.png')} />
+                </TouchableOpacity>
+              </View>
+            </View>
+            <View style={styles.video}>
+              <Image source={require('../../Images/discoverycenter/dc-chartblankslate.png')} />
+            </View>
+            <View style={styles.message}>
+              <Text>Placeholder</Text>
+            </View>
+          </View>
+        </ScrollView>
       </View>
     );
   }
@@ -61,15 +96,13 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     marginTop: NavigationBar.HEIGHT,
-    justifyContent: 'center',
   },
   card: {
-    flex: 1,
     marginHorizontal: 4,
     marginVertical: 5,
     borderRadius: 2,
     backgroundColor: '#fff',
-    shadowColor: "black",
+    shadowColor: 'black',
     shadowOpacity: 0.1,
     shadowRadius: 0.8,
     shadowOffset: {
@@ -77,13 +110,74 @@ const styles = StyleSheet.create({
       width: 0,
     },
   },
+  header: {
+    flex: 0,
+    flexDirection: 'row',
+    height: 44,
+    justifyContent: 'center',
+    paddingHorizontal: 10,
+  },
+  sourcesLeftContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  sourcesRightContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  share: {
+    paddingLeft: 10,
+  },
   video: {
-    shadowColor: "black",
+    shadowColor: 'black',
     shadowOpacity: 0.1,
     shadowRadius: 0.8,
     shadowOffset: {
       height: 1,
       width: 0,
     },
-  }
+  },
+  chart: {
+    shadowColor: 'black',
+    shadowOpacity: 0.1,
+    shadowRadius: 0.8,
+    shadowOffset: {
+      height: 1,
+      width: 0,
+    },
+  },
+  videoPlay: {
+    flex: 1,
+    position: 'absolute',
+    right: 0,
+    left: 0,
+    top: 65,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  gettingstartedContainer: {
+    alignItems: 'center'
+  },
+  gettingstartedIcon: {
+    marginTop: 30,
+  },
+  gettingstartedHeader: {
+    fontSize: 28,
+    fontWeight: '700',
+    color: '#59626A',
+    textAlign: 'center',
+    marginTop: 15,
+  },
+  gettingstartedBody: {
+    fontSize: 17,
+    color: '#59626A',
+    textAlign: 'center',
+    marginTop: 10,
+    marginBottom: 40,
+    marginHorizontal: 20,
+  },
 });
