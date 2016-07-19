@@ -46,6 +46,41 @@ export async function seedSourceObjects(emdros: Object, realm: Object) {
 export async function seedSources(emdros: Object, realm: Object) {
   console.log('Seeding Sources...');
 
+  await seedSourceWordCloud(emdros, realm);
+}
+
+async function seedSourceWordCloud(emdros, realm) {
+  console.log('Seeding Source Word Cloud...');
+  const query = `
+  {
+    "objectTypeName": "Source",
+    "feature": "source_name",
+    "buckets": {
+      "objectTypeName": "Token",
+      "feature": "surface",
+      "expression" : "is_word=true"
+    }
+  }
+  `;
+
+  return new Promise((resolve, reject) => {
+    emdros.query(query, {count: true}).then((data) => {
+      const sourceData = data["Source"]["source_name"];
+      if (sourceData != null) {
+        Object.keys(sourceData).forEach(sourceName => {
+          realm.write(() => {
+            let source = realm.objects('Source').find(source => source.name === sourceName);
+            const wordData = sourceData[sourceName]["Token"]["surface"];
+            seedObjectWordCloud(realm, 'Source', source.id, wordData);
+          });
+        });
+      }
+
+      resolve();
+    }).catch((error) => {
+      console.log(error);
+    })
+  });
 }
 
 async function seedSourceOccurrences(emdros, bible) {

@@ -6,6 +6,7 @@ import Realm from 'realm';
 import Emdros from 'react-native-emdros';
 import RNFS from 'react-native-fs';
 
+const now = require('performance-now');
 const DATABASE_PATH = '/tmp/SourceView.realm';
 const JSON_PATH='/tmp/SourceView.json';
 
@@ -56,15 +57,21 @@ const SPHERE_KEYS = BIBLE.spheres.map(sphere => Object.keys(SPHERE_MAP).find(key
 
 const { seedBookObjects, seedBooks } = require('./seeds/books');
 const { seedChapterObjects, seedChapters } = require('./seeds/chapters');
-const { seedSourceObjects } = require('./seeds/sources');
+const { seedSourceObjects, seedSources } = require('./seeds/sources');
 
 export async function release() {
   console.log('Release the Kraken!');
 
   const emdros = await Emdros.open({name: 'Datasets/en/NLT/SourceView.bpt'});
+
+  const startTime = now();
+
   await seed(emdros);
 
-  console.log('Kraken has been released!');
+  const endTime = now();
+  const elapsedTime = endTime - startTime;
+
+  console.log(`Kraken has been released in ${elapsedTime.toFixed(3)}ms!`);
   // RNFS.writeFile(JSON_PATH, JSON.stringify(objects), 'utf8').then((success) => {
   //   console.log('Done Seeding.');
   //   console.log(objects);
@@ -79,6 +86,8 @@ async function seed(emdros) {
   await seedBooks(emdros, realm);
 
   await seedChapters(emdros, realm);
+
+  await seedSources(emdros, realm);
 }
 
 async function seedBaseObjects(emdros) {
@@ -224,49 +233,6 @@ async function seedChapterSphereWordCounts(emdros, bible) {
   });
 }
 
-async function seedBookSourceWordCloud(emdros, bible) {
-  console.log('Seeding Book Source Word Cloud...');
-  const query = `
-  {
-    "objectTypeName": "Book",
-    "feature": "DJHRef",
-    "buckets": {
-      "objectTypeName": "Source",
-      "feature": "source_name",
-      "buckets": {
-        "objectTypeName": "Token",
-        "feature": "surface",
-        "expression" : "is_word=true"
-      }
-    }
-  }
-  `;
-
-  return new Promise((resolve, reject) => {
-    emdros.query(query, {count: true}).then((data) => {
-      for (let [index, book] of bible.books.entries()) {
-        const bookData = data["Book"]["DJHRef"][book.DJHRef];
-        if (bookData != null) {
-          const sourceData = bookData["Source"]["source_name"];
-          if (sourceData != null) {
-            Object.keys(sourceData).forEach(sourceName => {
-              const source = book.sources.find(source => source.name === sourceName);
-              if (source != null) {
-                const wordData = sourceData[sourceName]["Token"]["surface"];
-                seedObjectWordCloud(source, wordData);
-              }
-            });
-          }
-        }
-      }
-
-      resolve();
-    }).catch((error) => {
-      console.log(error);
-    })
-  });
-}
-
 async function seedSpheres(emdros, bible) {
   console.log('Seeding Spheres...');
 
@@ -276,82 +242,6 @@ async function seedSpheres(emdros, bible) {
   for (let sphereName of sphereNames) {
     await seedSphereWordCloud(sphereName, emdros, bible);
   }
-}
-
-async function seedSources(emdros, bible) {
-  console.log('Seeding Sources...');
-
-  await seedSourceWordCounts(emdros, bible);
-  await seedSourceWordCloud(emdros, bible);
-}
-
-async function seedSourceWordCounts(emdros, bible) {
-  console.log('Seeding Source Word Counts...');
-  const query = `
-  {
-    "objectTypeName": "Source",
-    "feature": "source_name",
-    "buckets": {
-      "objectTypeName": "Token",
-      "expression" : "is_word=true"
-    }
-  }
-  `;
-
-  return new Promise((resolve, reject) => {
-    emdros.query(query, {count: true}).then((data) => {
-      const sourceData = data["Source"]["source_name"];
-      if (sourceData != null) {
-        Object.keys(sourceData).forEach(sourceName => {
-          let source = bible.sources.find(source => source.name === sourceName);
-          if (source == null) {
-            const firstInitial = sourceName.charAt(0);
-            source = {id: sourceName, name: sourceName, firstInitial: isNumber(firstInitial) ? null : firstInitial, wordCount: 0, words: [], gender: null, nature: null, chronologies: []};
-            bible.sources.push(source);
-          }
-
-          const wordCount = sourceData[sourceName]["Token"] || 0;
-          source.wordCount = wordCount;
-        });
-      }
-
-      resolve();
-    }).catch((error) => {
-      console.log(error);
-    })
-  });
-}
-
-async function seedSourceWordCloud(emdros, bible) {
-  console.log('Seeding Source Word Cloud...');
-  const query = `
-  {
-    "objectTypeName": "Source",
-    "feature": "source_name",
-    "buckets": {
-      "objectTypeName": "Token",
-      "feature": "surface",
-      "expression" : "is_word=true"
-    }
-  }
-  `;
-
-  return new Promise((resolve, reject) => {
-    emdros.query(query, {count: true}).then((data) => {
-      const sourceData = data["Source"]["source_name"];
-      if (sourceData != null) {
-        Object.keys(sourceData).forEach(sourceName => {
-          let source = bible.sources.find(source => source.name === sourceName);
-          const wordData = sourceData[sourceName]["Token"]["surface"];
-          seedObjectWordCloud(source, wordData);
-        });
-      }
-
-      resolve();
-    }).catch((error) => {
-      console.log(error);
-    })
-  });
 }
 
 async function seedSphereWordCounts(emdros, bible) {
