@@ -13,8 +13,9 @@ const Book = {
     chapterCount: {type: 'int', default: 0},
     chapters: {type: 'list', objectType: 'Chapter'},
     maxChapterWordCount: {type: 'int', default: 0},
+    maxSourceWordCount: {type: 'int', default: 0},
     sourceCount: {type: 'int', default: 0},
-    sources: {type: 'list', objectType: 'Source'},
+    sourceRelations: {type: 'list', objectType: 'SourceRelation'},
     sourceTypeCount: {type: 'int', default: 0},
     sourceTypeCounts: {type: 'list', objectType: 'Count'},
     principalSourceType: {type: 'string', default: 'narrator'},
@@ -35,7 +36,6 @@ const Chapter = {
     firstMonad: {type: 'int', default: 0},
     lastMonad: {type: 'int', default: 0},
     sourceCount: {type: 'int', default: 0},
-    sources: {type: 'list', objectType: 'Source'},
     sourceTypeCount: {type: 'int', default: 0},
     sourceTypeCounts: {type: 'list', objectType: 'Count'},
     principalSourceType: {type: 'string', default: 'narrator'},
@@ -53,6 +53,15 @@ const Source = {
     name: 'string',
     firstInitial: {type: 'string', optional: true},
     occurrences: {type: 'list', objectType: 'Occurrence'},
+    wordCount: {type: 'int', default: 0},
+    words: {type: 'list', objectType: 'Count'},
+  }
+};
+
+const SourceRelation = {
+  name: 'SourceRelation',
+  properties: {
+    source: 'Source',
     wordCount: {type: 'int', default: 0},
     words: {type: 'list', objectType: 'Count'},
   }
@@ -95,5 +104,5 @@ const Occurrence = {
   }
 };
 
-const Schema = [Book, Chapter, Source, Sphere, Count, Content, Occurrence];
+const Schema = [Book, Chapter, Source, SourceRelation, Sphere, Count, Content, Occurrence];
 export default Schema;

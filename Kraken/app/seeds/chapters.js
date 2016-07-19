@@ -89,8 +89,6 @@ export async function seedChapters(emdros: Object, realm: Object) {
 
   await seedSourceTypeCounts(emdros, realm);
 
-  await seedSources(emdros, realm);
-
   await seedSphereCounts(emdros, realm);
 
   await seedWordCounts(emdros, realm);
@@ -188,59 +186,6 @@ async function seedSourceTypeCounts(emdros, realm) {
     }).catch((error) => {
       console.log(error);
     })
-  });
-}
-
-async function seedSources(emdros, realm) {
-  console.log('Seeding Chapter Sources...');
-  const query = `
-  {
-    "objectTypeName": "Book",
-    "feature": "DJHRef",
-    "buckets": {
-      "objectTypeName": "Chapter",
-      "feature": "chapter",
-      "buckets": {
-        "objectTypeName": "Source",
-        "feature": "source_name"
-      }
-    }
-  }
-  `;
-
-  return new Promise((resolve, reject) => {
-    emdros.query(query, {count: true}).then((data) => {
-      for (let [index, book] of realm.objects('Book').entries()) {
-        const bookData = data["Book"]["DJHRef"][book.DJHRef];
-        if (bookData != null) {
-          const chapterData = bookData["Chapter"]["chapter"];
-          if (chapterData != null) {
-            console.log(`Seeding ${book.name} Chapter Sources...`);
-
-            realm.write(() => {
-              for (let [index, chapter] of book.chapters.entries()) {
-                const sources = [];
-                const sourceData = chapterData[chapter.chapterNumber.toString()]["Source"]["source_name"];
-                if (sourceData != null) {
-                  Object.keys(sourceData).forEach((sourceName) => {
-                    const source = realm.objectForPrimaryKey('Source', getSourceID(sourceName));
-                    if (source != null) {
-                      sources.push(source);
-                    }
-                  });
-                }
-
-                realm.create('Chapter', {id: chapter.id, sourceCount: sources.length, sources}, true);
-              }
-            });
-          }
-        }
-      }
-
-      resolve();
-    }).catch((error) => {
-      console.log(error);
-    });
   });
 }
 
