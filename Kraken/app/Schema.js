@@ -42,7 +42,6 @@ const Chapter = {
     sphereCount: {type: 'int', default: 0},
     sphereCounts: {type: 'list', objectType: 'Count'},
     wordCount: {type: 'int', default: 0},
-    words: {type: 'list', objectType: 'Count'},
   }
 };
 
