@@ -21,6 +21,7 @@ const Book = {
     principalSourceType: {type: 'string', default: 'narrator'},
     sphereCount: {type: 'int', default: 0},
     sphereCounts: {type: 'list', objectType: 'Count'},
+    sphereWordCount: {type: 'int', default: 0},
     wordCount: {type: 'int', default: 0},
     words: {type: 'list', objectType: 'Count'},
     overview: {type: 'list', objectType: 'Content'},
@@ -41,6 +42,7 @@ const Chapter = {
     principalSourceType: {type: 'string', default: 'narrator'},
     sphereCount: {type: 'int', default: 0},
     sphereCounts: {type: 'list', objectType: 'Count'},
+    sphereWordCount: {type: 'int', default: 0},
     wordCount: {type: 'int', default: 0},
   }
 };
