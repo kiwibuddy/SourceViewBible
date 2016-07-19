@@ -7,7 +7,8 @@ const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithP
 import {
   Text,
   TouchableOpacity,
-  View
+  View,
+  Image
 } from 'react-native';
 
 import {
@@ -37,7 +38,15 @@ export default class DiscoveryCenter extends Component {
           </TouchableOpacity>
         </NavigationBar>
         <View style={styles.content}>
-          <Text style={styles.title}>Under construction</Text>
+          <View style={styles.card}>
+            <View style={styles.video}>
+              <TouchableOpacity style={styles.videoPlay}>
+                <Image source={require('../../Images/common/btn-play.png')} />
+              </TouchableOpacity>
+              <Image source={require('../../Images/discoverycenter/video-header-dc.png')} />
+            </View>
+            <View style={styles.message}></View>
+          </View>
         </View>
       </View>
     );
@@ -47,17 +56,34 @@ export default class DiscoveryCenter extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#D8D8D8'
   },
   content: {
     flex: 1,
     marginTop: NavigationBar.HEIGHT,
-    alignItems: 'center',
     justifyContent: 'center',
   },
-  title: {
-    color: '#EDEDED',
-    fontSize: 48,
-    fontWeight: 'bold',
-    textAlign: 'center',
+  card: {
+    flex: 1,
+    marginHorizontal: 4,
+    marginVertical: 5,
+    borderRadius: 2,
+    backgroundColor: '#fff',
+    shadowColor: "black",
+    shadowOpacity: 0.1,
+    shadowRadius: 0.8,
+    shadowOffset: {
+      height: 1,
+      width: 0,
+    },
   },
+  video: {
+    shadowColor: "black",
+    shadowOpacity: 0.1,
+    shadowRadius: 0.8,
+    shadowOffset: {
+      height: 1,
+      width: 0,
+    },
+  }
 });
