@@ -176,7 +176,7 @@ async function seedSourceTypeCounts(emdros, realm) {
             if (chapterData != null) {
               book.chapters.forEach((chapter, index) => {
                 const sourceData = chapterData[chapter.chapterNumber.toString()]["Source"]["source_color"];
-                seedObjectSourceTypeWordCounts(chapter, sourceData);
+                seedObjectSourceTypeWordCounts(realm, 'Chapter', chapter.id, sourceData);
               });
             }
           }
@@ -216,8 +216,9 @@ async function seedSources(emdros, realm) {
             const chapterData = bookData["Chapter"]["chapter"];
             if (chapterData != null) {
               book.chapters.forEach((chapter, index) => {
+                console.log(`Seeding ${book.name} Chapter Sources...`);
                 const sources = [];
-                const sourceData = chapterData[chapter.chapterNumber.toString()]["Source"];
+                const sourceData = chapterData[chapter.chapterNumber.toString()]["Source"]["source_name"];
                 if (sourceData != null) {
                   Object.keys(sourceData).forEach((sourceName) => {
                     const source = realm.objectForPrimaryKey('Source', getSourceID(sourceName));

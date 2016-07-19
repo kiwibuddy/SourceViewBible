@@ -22,7 +22,7 @@ const STOP_WORDS = ["a","able","about","across","after","all","almost","also","a
 const WORD_CLOUD_LIMIT = 20;
 const MINIMUM_WORD_LENGTH = 2;
 
-export function seedObjectSourceTypeWordCounts(object: Object, sourceTypeData: Object) {
+export function seedObjectSourceTypeWordCounts(realm: Object, type: string, key: any, sourceTypeData: Object) {
   if (sourceTypeData != null) {
     let sourceTypeCount = 0;
     const sourceTypeCounts = [];
@@ -37,10 +37,9 @@ export function seedObjectSourceTypeWordCounts(object: Object, sourceTypeData: O
     });
 
     sourceTypeCounts.sort((a: Object, b: Object) => a.count > b.count ? -1 : 1);
+    const principalSourceType = sourceTypeCounts[0].string;
 
-    object.sourceTypeCount = sourceTypeCount;
-    object.sourceTypeCounts = sourceTypeCounts;
-    object.principalSourceType = sourceTypeCounts[0].string;
+    realm.create(type, {id: key, sourceTypeCount, sourceTypeCounts, principalSourceType}, true);
   }
 }
 

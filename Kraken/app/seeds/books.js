@@ -66,7 +66,7 @@ async function seedSourceTypeCounts(emdros, realm) {
           const bookData = data["Book"]["DJHRef"][book.DJHRef];
           if (bookData != null) {
             const sourceData = bookData["Source"]["source_color"];
-            seedObjectSourceTypeWordCounts(book, sourceData);
+            seedObjectSourceTypeWordCounts(realm, 'Book', book.id, sourceData);
           }
         });
       });
