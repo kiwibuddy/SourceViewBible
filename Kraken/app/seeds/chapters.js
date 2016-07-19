@@ -3,16 +3,6 @@
 
 const {getChapterID, firstInitial, getSourceID, seedObjectSourceTypeWordCounts, seedObjectSphereWordCounts, seedObjectWordCloud, SPHERE_MAP} = require('../common');
 
-// export async function seedChapters(emdros: Object, realm: Object) {
-//   console.log('Seeding Chapters...');
-//
-//   await seedSourceTypeCounts(emdros, realm);
-//
-//   await seedSources(emdros, realm);
-//
-//   await seedWordCounts(emdros, realm);
-// }
-
 export async function seedChapterObjects(emdros: Object, realm: Object) {
   console.log('Seeding Chapter Objects...');
 
@@ -92,6 +82,16 @@ async function seedBookChapterMonadSet(emdros, book, chapterNumber) {
   `;
 
   return await emdros.monadSet({query});
+}
+
+export async function seedChapters(emdros: Object, realm: Object) {
+  console.log('Seeding Chapters...');
+
+  await seedSourceTypeCounts(emdros, realm);
+
+  await seedSources(emdros, realm);
+
+  await seedWordCounts(emdros, realm);
 }
 
 async function seedWordCounts(emdros, realm) {
@@ -217,10 +217,13 @@ async function seedSources(emdros, realm) {
             if (chapterData != null) {
               book.chapters.forEach((chapter, index) => {
                 const sources = [];
-                const sourceData = chapterData["Source"]["source_name"];
+                const sourceData = chapterData[chapter.chapterNumber.toString()]["Source"];
                 if (sourceData != null) {
                   Object.keys(sourceData).forEach((sourceName) => {
-                    sources.push({id: getSourceID(sourceName), name: sourceName, firstInitial: firstInitial(sourceName)});
+                    const source = realm.objectForPrimaryKey('Source', getSourceID(sourceName));
+                    if (source != null) {
+                      sources.push(source);
+                    }
                   });
                 }
 

@@ -102,9 +102,7 @@ async function seedSources(emdros, realm) {
             if (sourceData != null) {
               Object.keys(sourceData).forEach((sourceName) => {
                 const source = realm.objectForPrimaryKey('Source', getSourceID(sourceName));
-                if (source == null) {
-                  console.log('UH OH!!!!', sourceName);
-                } else {
+                if (source != null) {
                   sources.push(source);
                 }
               });

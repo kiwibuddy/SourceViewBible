@@ -55,7 +55,7 @@ const SPHERE_MAP = {
 const SPHERE_KEYS = BIBLE.spheres.map(sphere => Object.keys(SPHERE_MAP).find(key => SPHERE_MAP[key] === sphere.id));
 
 const { seedBookObjects, seedBooks } = require('./seeds/books');
-const { seedChapterObjects } = require('./seeds/chapters');
+const { seedChapterObjects, seedChapters } = require('./seeds/chapters');
 const { seedSourceObjects } = require('./seeds/sources');
 
 export async function release() {
@@ -77,6 +77,8 @@ async function seed(emdros) {
   await seedBaseObjects(emdros);
 
   await seedBooks(emdros, realm);
+
+  await seedChapters(emdros, realm);
 }
 
 async function seedBaseObjects(emdros) {
@@ -84,117 +86,7 @@ async function seedBaseObjects(emdros) {
   await seedBookObjects(emdros, realm);
   await seedChapterObjects(emdros, realm);
   await seedSourceObjects(emdros, realm);
-  // await seedBooks(emdros, bible);
 }
-
-async function seedSourceOccurrences(emdros, bible) {
-  console.log('Seeding Source Occurrences...');
-  const query = `
-  {
-    "objectTypeName": "Book",
-    "feature": "DJHRef",
-    "buckets": {
-      "objectTypeName": "Chapter",
-      "feature": "chapter",
-      "buckets": {
-        "objectTypeName": "Source",
-        "feature": "source_name",
-      }
-    }
-  }
-  `;
-
-  return new Promise((resolve, reject) => {
-    emdros.query(query, {count: true}).then((data) => {
-      for (let [index, book] of bible.books.entries()) {
-        const bookData = data["Book"]["DJHRef"][book.DJHRef];
-        if (bookData != null) {
-          const sources = book.sources;
-          const chapterData = bookData["Chapter"]["chapter"];
-          if (chapterData != null) {
-            book.chapters.forEach((chapter, index) => {
-              const chapterNumber = chapter.chapterNumber;
-              const sourceData = chapterData[chapterNumber.toString()]["Source"]["source_name"];
-              if (sourceData != null) {
-                Object.keys(sourceData).forEach((sourceName) => {
-                  const source = sources.find(source => source.name === sourceName);
-                  if (!source.occurrences) source.occurrences = [];
-                  source.occurrences.push({
-                    chapterNumber: chapterNumber
-                  });
-                });
-              }
-            });
-          }
-        }
-      }
-
-      resolve();
-    }).catch((error) => {
-      console.log(error);
-    });
-  });
-}
-
-// async function seedBookWordCounts(emdros, bible) {
-//   await seedBookWordCount(emdros, bible);
-//   await seedChapterWordCounts(emdros, bible);
-//
-//   await seedBookSourceWordCounts(emdros, bible);
-//   await seedBookSphereWordCount(emdros, bible);
-//   await seedBookSphereWordCounts(emdros, bible);
-//
-//   await seedChapterSourceWordCounts(emdros, bible);
-//   await seedChapterSphereWordCount(emdros, bible);
-//   await seedChapterSphereWordCounts(emdros, bible);
-// }
-
-
-// async function seedChapterWordCounts(emdros, bible) {
-//   console.log('Seeding Chapter Word Counts...');
-//   const query = `
-//   {
-//     "objectTypeName": "Book",
-//     "feature": "DJHRef",
-//     "buckets": {
-//       "objectTypeName": "Chapter",
-//       "feature": "chapter",
-//       "buckets": {
-//         "objectTypeName": "Token",
-//         "expression" : "is_word=true"
-//       }
-//     }
-//   }
-//   `;
-//
-//   return new Promise((resolve, reject) => {
-//     emdros.query(query, {count: true}).then((data) => {
-//       for (let [index, book] of bible.books.entries()) {
-//         const bookData = data["Book"]["DJHRef"][book.DJHRef];
-//         if (bookData != null) {
-//           const chapterData = bookData["Chapter"]["chapter"];
-//           if (chapterData != null) {
-//             let maxChapterWordCount = 0;
-//
-//             book.chapters.forEach((chapter, index) => {
-//               const wordCount = chapterData[chapter.chapterNumber.toString()]["Token"] || 0;
-//               chapter["wordCount"] = wordCount;
-//               if (wordCount > maxChapterWordCount) {
-//                 maxChapterWordCount = wordCount;
-//               }
-//             });
-//
-//             book.maxChapterWordCount = maxChapterWordCount;
-//           }
-//         }
-//       }
-//
-//       resolve();
-//     }).catch((error) => {
-//       console.log(error);
-//     })
-//   });
-// }
 
 async function seedBookSourceWordCounts(emdros, bible) {
   console.log('Seeding Book Source Word Counts...');
