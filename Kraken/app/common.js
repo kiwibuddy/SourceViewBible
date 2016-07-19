@@ -1,11 +1,21 @@
 /* @flow */
 'use strict';
 
-const SOURCE_TYPE_MAP = {
+export const SOURCE_TYPE_MAP = {
   "Black": "narrator",
   "Red": "god",
   "Green": "lead",
   "Blue": "support"
+};
+
+export const SPHERE_MAP = {
+  "family": "family",
+  "economics": "economics",
+  "government": "government",
+  "religion": "religion",
+  "education": "education",
+  "mediacom": "communication",
+  "celebration": "celebration"
 };
 
 export function seedObjectSourceTypeWordCounts(object: Object, sourceTypeData: Object) {
@@ -27,6 +37,30 @@ export function seedObjectSourceTypeWordCounts(object: Object, sourceTypeData: O
     object.sourceTypeCount = sourceTypeCount;
     object.sourceTypeCounts = sourceTypeCounts;
     object.principalSourceType = sourceTypeCounts[0].string;
+  }
+}
+
+export function seedObjectSphereWordCounts(object: Object, spheresData: Object) {
+  if (spheresData != null) {
+    let sphereCount = 0;
+    const sphereCounts = [];
+
+    Object.keys(spheresData).forEach((sphereName) => {
+      const sphereData = spheresData[sphereName];
+      const wordCount = sphereData.true || 0;
+
+      sphereCounts.push({
+        string: SPHERE_MAP[sphereName],
+        count: wordCount
+      });
+
+      if (wordCount > 0) {
+        sphereCount++;
+      }
+    });
+
+    object.sphereCount = sphereCount;
+    object.sphereCounts = sphereCounts;
   }
 }
 
