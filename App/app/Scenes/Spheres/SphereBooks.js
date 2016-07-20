@@ -51,6 +51,7 @@ type State = {
 export default class SphereBooks extends Component {
   props: Props;
   state: State;
+  bookSortedByPercentage: any;
 
   constructor(props: Props) {
     super(props);
@@ -103,6 +104,8 @@ export default class SphereBooks extends Component {
     const oldTestamentSpherePercent = (oldTestamentSphereWordCount / oldTestamentWordCount) * 100;
     const newTestamentSpherePercent = (newTestamentSphereWordCount / newTestamentWordCount) * 100;
 
+    const books = this._bookSortedByPercentage().slice(0, 10);
+
     return (
       <View>
         <View style={StyleSheet.styles.statisticsContainer}>
@@ -125,22 +128,22 @@ export default class SphereBooks extends Component {
         <ScrollView style={styles.sphereBooksGraph}>
           <PieChart
             color={Colors.tintColor}
-            slices={[{color: Colors.tintColor, value: 50}, {color: Colors.lightTintColor, value: 50}]}
+            slices={[{color: Colors.tintColor, value: this._getPercentOfBook(books[0])}, {color: Colors.lightTintColor, value: 100-this._getPercentOfBook(books[0])}]}
             sliceWidth={6}
-            subtitle={'Foo'}
+            subtitle={books[0].DJHRef}
             subtitleStyle={{fontSize: 17}}
-            title={Localizable.toPercentage(50, {precision: 0})}
+            title={Localizable.toPercentage(this._getPercentOfBook(books[0]), {precision: 0})}
             titleStyle={{fontSize: 24}}
             size={100}
             style={[{top: 50, alignSelf: 'center'}]}
           />
           <PieChart
             color={Colors.tintColor}
-            slices={[{color: Colors.tintColor, value: 50}, {color: Colors.lightTintColor, value: 50}]}
+            slices={[{color: Colors.tintColor, value: this._getPercentOfBook(books[1])}, {color: Colors.lightTintColor, value: 100-this._getPercentOfBook(books[1])}]}
             sliceWidth={5}
-            subtitle={'Bar'}
+            subtitle={books[1].DJHRef}
             subtitleStyle={{fontSize: 15}}
-            title={Localizable.toPercentage(50, {precision: 0})}
+            title={Localizable.toPercentage(this._getPercentOfBook(books[1]), {precision: 0})}
             titleStyle={{fontSize: 20}}
             size={80}
             style={[styles.pie, {top: 100, left: 60}]}
@@ -159,8 +162,8 @@ export default class SphereBooks extends Component {
 
   _renderRow = (book: Object) => {
     const { sphere } = this.state;
-    const wordCount = sphere.countOfBook(book.id);
-    const spherePercent = (wordCount / book.wordCount) * 100;
+    const wordCount = this._getCountOfBook(book);
+    const spherePercent = this._getPercentOfBook(book);
 
     return (
       <TouchableOpacity style={styles.section} onPress={() => this.props.onPressBook({sphere, book})}>
@@ -185,6 +188,14 @@ export default class SphereBooks extends Component {
     );
   };
 
+  _getCountOfBook(book: Object) {
+    return this.state.sphere.countOfBook(book.id);
+  };
+
+  _getPercentOfBook(book: Object) {
+    return (this._getCountOfBook(book) / book.wordCount) * 100;
+  };
+
   _getDataSource = (segmentIndex: number) => {
     const { sphere } = this.state;
 
@@ -201,9 +212,11 @@ export default class SphereBooks extends Component {
   };
 
   _bookSortedByPercentage = () => {
+    if (this.bookSortedByPercentage) return this.bookSortedByPercentage;
+
     const { sphere } = this.state;
 
-    return Book.all().map(book => book).sort((bookA, bookB) => {
+    this.bookSortedByPercentage = Book.all().map(book => book).sort((bookA, bookB) => {
       const bookAWordCount = sphere.countOfBook(bookA.id);
       const bookAPercent = (bookAWordCount / bookA.wordCount);
 
@@ -215,6 +228,8 @@ export default class SphereBooks extends Component {
       }
       return bookAPercent > bookBPercent ? -1 : 1;
     });
+
+    return this.bookSortedByPercentage;
   }
 
   _onSegmentedControlValueChanged = (value: number) => {
