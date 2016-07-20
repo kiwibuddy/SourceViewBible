@@ -6,12 +6,12 @@ const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithP
 
 import {
   Image,
-  ListView,
   RecyclerViewBackedScrollView,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
+import { ListView } from '../../Components/Common/DatabaseListView';
 
 import {
   Colors,
