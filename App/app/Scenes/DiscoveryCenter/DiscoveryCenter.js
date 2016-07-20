@@ -80,8 +80,24 @@ export default class DiscoveryCenter extends Component {
             </View>
             <View style={styles.chart}>
               <Image source={require('../../Images/discoverycenter/dc-chartblankslate.png')} />
-              <View style={styles.chartHeader}></View>
-              <View style={styles.chartFooter}></View>
+              <View style={styles.chartHeader}>
+                <TouchableOpacity>
+                  <Text style={styles.chartHeaderButton}>BAR CHART</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Text style={styles.chartHeaderButton}>PIE CHART</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Text style={styles.chartHeaderButton}>CLOUD</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.chartFooter}>
+                <View style={styles.sourcesRightContainer}>
+                  <TouchableOpacity>
+                    <Image source={require('../../Images/discoverycenter/btn-fullscreen.png')} />
+                  </TouchableOpacity>
+                </View>
+              </View>
             </View>
             <View style={styles.message}>
               <Text>Placeholder</Text>
@@ -160,22 +176,33 @@ const styles = StyleSheet.create({
   chartHeader: {
     flex: 1,
     position: 'absolute',
-    right: 0,
-    left: 0,
+    right: 5,
+    left: 5,
     top: 0,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: 'white',
+    borderBottomColor: 'rgba(255, 255, 255, 0.35)',
     height: 44,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+  },
+  chartHeaderButton: {
+    fontSize: 11,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    paddingRight: 15,
   },
   chartFooter: {
     flex: 1,
     position: 'absolute',
-    right: 0,
-    left: 0,
-    top: 200,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: 'white',
+    right: 5,
+    left: 5,
+    top: 245,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: 'rgba(255, 255, 255, 0.35)',
     height: 44,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   videoPlay: {
     flex: 1,
