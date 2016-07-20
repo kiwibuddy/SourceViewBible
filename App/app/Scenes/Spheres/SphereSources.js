@@ -19,6 +19,8 @@ import {
 
 import Icon from '../../Components/Common/Icon';
 
+import { Sphere } from '../../Database';
+
 type Props = {
   bible: Object,
   sphereID: string,
@@ -36,7 +38,7 @@ export default class SphereSources extends Component {
   constructor(props: Props) {
     super(props);
 
-    const sphere = props.bible.spheres.find(sphere => sphere.id === props.sphereID);
+    const sphere = Sphere.findByID(props.sphereID);
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     this.state = {
       dataSource: dataSource,

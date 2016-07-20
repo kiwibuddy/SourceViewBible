@@ -22,6 +22,8 @@ import {
 import { SourcesBarChart, SpheresBarChart, WordCloud } from '../../Components/Charts';
 import ParallaxMotionView from '../../Components/Common/ParallaxMotionView';
 
+import { Sphere } from '../../Database';
+
 type Props = {
   bible: Object,
   sphereID: string,
@@ -40,7 +42,7 @@ export default class SphereWords extends Component {
   constructor(props: Props) {
     super(props);
 
-    const sphere = props.bible.spheres.find(sphere => sphere.id === props.sphereID);
+    const sphere = Sphere.findByID(props.sphereID);
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     this.state = {
       dataSource: dataSource.cloneWithRows(sphere.words),
@@ -65,15 +67,15 @@ export default class SphereWords extends Component {
   _renderRow = (word: Object, sectionID: any, rowID: any) => {
     return (
       <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
-        <Text style={StyleSheet.styles.cell.title}>{word.word}</Text>
-        <Text style={StyleSheet.styles.cell.valuetitle}>{Localizable.toNumber(word.wordCount, {precision: 0})}</Text>
+        <Text style={StyleSheet.styles.cell.title}>{word.string}</Text>
+        <Text style={StyleSheet.styles.cell.valuetitle}>{Localizable.toNumber(word.count, {precision: 0})}</Text>
       </TouchableOpacity>
     );
   };
 
   _renderHeader = (props: any) => {
     const { sphere } = this.state;
-    const words = sphere.words.map(word => word.word);
+    const words = sphere.words.map(word => word.string);
 
     return (
       <WordCloud
