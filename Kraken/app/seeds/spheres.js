@@ -42,10 +42,10 @@ async function seedSphereWordCounts(emdros, realm) {
         const bookCounts = [];
 
         for (let [index, book] of realm.objects('Book').entries()) {
-          const wordCount = book.sphereCounts.find(count => count.string === sphere.id) || 0;
+          const wordCount = book.sphereCounts.find(count => count.string === sphere.id).count || 0;
           bookCounts.push({
             string: book.id,
-            wordCount
+            count: wordCount
           });
 
           if (wordCount > 0) {
@@ -75,8 +75,10 @@ async function seedSphereWordCloud(sphereName, emdros, realm) {
 
   return new Promise((resolve, reject) => {
     emdros.query(query, {count: true}).then((data) => {
-      const wordData = data["Token"]["surface"];
-      seedObjectWordCloud(realm, 'Sphere', sphere.id, wordData);
+      realm.write(() => {
+        const wordData = data["Token"]["surface"];
+        seedObjectWordCloud(realm, 'Sphere', sphere.id, wordData);
+      });
 
       resolve();
     }).catch((error) => {
