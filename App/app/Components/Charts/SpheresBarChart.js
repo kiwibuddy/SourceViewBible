@@ -7,10 +7,19 @@ import BarChart from './BarChart';
 
 import { Colors, StyleSheet } from '../../Common';
 
+import Realm from 'realm';
+
 const SPHERES = ['family', 'economics', 'government', 'religion', 'education', 'communication', 'celebration'];
 
 const SpheresBarChart = (props: Object) => {
-  const bars = props.data.map((data) => {
+  const bars = props.data.map((barData) => {
+    let data = {};
+    if (barData instanceof Realm.List) {
+      barData.forEach(count => data[count.string] = count.count);
+    } else {
+      data = barData;
+    }
+
     const slices = SPHERES.map((sphere) => {
       const value = data[sphere];
       if (value === undefined) return null;

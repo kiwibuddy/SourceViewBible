@@ -5,24 +5,32 @@ import React, { Component, PropTypes } from 'react';
 const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
 
 import {
-  ListView,
   Platform,
   RecyclerViewBackedScrollView,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
+import { ListView } from '../../Components/Common/DatabaseListView';
 
 import {
+  Constants,
   Colors,
+  Localizable,
   StyleSheet,
-  Localizable
 } from '../../Common';
+
+const {
+  SourceType,
+  SphereType
+} = Constants;
 
 // $FlowFixMe: - Flow can't find os module extension
 import SegmentedControl from '../../Components/Common/SegmentedControl';
 import { SourcesBarChart, SpheresBarChart } from '../../Components/Charts';
 import { ReadingTime } from '../../Common/NumberHelper';
+
+import { Book } from '../../Database';
 
 const SEGMENTS = [Localizable.t('sources.text'), Localizable.t('spheres.text')];
 const SEGMENT_INDEXES = {
@@ -51,7 +59,7 @@ export default class BookChapters extends Component {
   constructor(props: Object) {
     super(props);
 
-    const book = props.bible.books.find(book => book.id === props.bookID);
+    const book = Book.findByID(props.bookID);
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     this.state = {
       book,

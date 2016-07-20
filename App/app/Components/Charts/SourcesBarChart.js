@@ -8,10 +8,19 @@ import BarChart from './BarChart';
 import StyleSheet from '../../Common/StyleSheet';
 import Colors from '../../Common/Colors';
 
+import Realm from 'realm';
+
 const SOURCES = ['narrator', 'god', 'lead', 'support'];
 
 const SourcesBarChart = (props: Object) => {
-  const bars = props.data.map((data) => {
+  const bars = props.data.map((barData) => {
+    let data = {};
+    if (barData instanceof Realm.List) {
+      barData.forEach(count => data[count.string] = count.count);
+    } else {
+      data = barData;
+    }
+
     const slices = SOURCES.map((source) => {
       const value = data[source];
       if (value === undefined) return null;
