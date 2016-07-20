@@ -89,6 +89,8 @@ async function seed(emdros) {
   await seedChapters(emdros, realm);
 
   await seedSources(emdros, realm);
+
+  await seedSpheres(emdros, realm);
 }
 
 async function seedBaseObjects(emdros) {

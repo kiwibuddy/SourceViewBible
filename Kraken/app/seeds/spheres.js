@@ -24,11 +24,43 @@ export async function seedSphereObjects(emdros: Object, realm: Object) {
 export async function seedSpheres(emdros: Object, realm: Object) {
   console.log('Seeding Spheres...');
 
+  await seedSphereWordCounts(emdros, realm);
+
   const sphereNames = Object.keys(SPHERE_MAP);
   for (let sphereName of sphereNames) {
     await seedSphereWordCloud(sphereName, emdros, realm);
   }
 }
+
+async function seedSphereWordCounts(emdros, realm) {
+  console.log('Seeding Spheres Word Counts...');
+
+  return new Promise((resolve, reject) => {
+    realm.objects('Sphere').forEach(sphere => {
+      realm.write(() => {
+        let bookCount = 0;
+        const bookCounts = [];
+
+        for (let [index, book] of realm.objects('Book').entries()) {
+          const wordCount = book.sphereCounts.find(count => count.string === sphere.id) || 0;
+          bookCounts.push({
+            string: book.id,
+            wordCount
+          });
+
+          if (wordCount > 0) {
+            bookCount++;
+          }
+        }
+
+        realm.create('Sphere', {id: sphere.id, bookCount, bookCounts}, true);
+      });
+    });
+
+    resolve();
+  });
+}
+
 
 async function seedSphereWordCloud(sphereName, emdros, realm) {
   const sphere = realm.objectForPrimaryKey('Sphere', SPHERE_MAP[sphereName]);
