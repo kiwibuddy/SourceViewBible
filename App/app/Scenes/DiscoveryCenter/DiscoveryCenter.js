@@ -93,6 +93,51 @@ export default class DiscoveryCenter extends Component {
               </View>
               <View style={styles.chartFooter}>
                 <View style={styles.sourcesRightContainer}>
+                </View>
+              </View>
+            </View>
+            <View style={styles.message}>
+              <View style={styles.filterItem}>
+                <TouchableOpacity>
+                  <Text style={[styles.chartButton, {color: Colors.tintColor}]}>+ ADD FILTER</Text>
+                </TouchableOpacity>
+                <View style={styles.filterBlankslate}>
+                  <Image source={require('../../Images/discoverycenter/filter-blankslate.png')} />
+                </View>
+              </View>
+            </View>
+          </View>
+          <View style={styles.card}>
+            <View style={styles.header}>
+              <View style={styles.sourcesLeftContainer}>
+                <TouchableOpacity>
+                  <Image source={require('../../Images/discoverycenter/btn-delete.png')} />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.sourcesRightContainer}>
+                <TouchableOpacity>
+                  <Image source={require('../../Images/discoverycenter/btn-duplicate.png')} />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.share}>
+                  <Image source={require('../../Images/discoverycenter/btn-share.png')} />
+                </TouchableOpacity>
+              </View>
+            </View>
+            <View style={styles.chart}>
+              <Image source={require('../../Images/discoverycenter/chart-blankslate.png')} />
+              <View style={styles.chartHeader}>
+                <TouchableOpacity>
+                  <Text style={[styles.chartButton, {color: '#FFFFFF'}]}>BAR CHART</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Text style={[styles.chartButton, {color: '#FFFFFF'}]}>PIE CHART</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Text style={[styles.chartButton, {color: '#FFFFFF'}]}>CLOUD</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.chartFooter}>
+                <View style={styles.sourcesRightContainer}>
                   <TouchableOpacity>
                     <Image source={require('../../Images/discoverycenter/btn-fullscreen.png')} />
                   </TouchableOpacity>
