@@ -4,6 +4,8 @@
 import React, { Component, PropTypes } from 'react';
 const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
 
+const { Database } = require('../../Database');
+
 import {
   ScrollView,
   Text,

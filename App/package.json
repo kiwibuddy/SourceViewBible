@@ -11,9 +11,11 @@
     "react": "^15.2.0",
     "react-native": "^0.29.1",
     "react-native-emdros": "file:../Libraries/Emdros/",
+    "react-native-fs": "^1.5.1",
     "react-native-i18n": "0.0.8",
     "react-native-linear-gradient": "^1.5.7",
     "react-native-parallax-motion": "file:../Libraries/react-native-parallax-motion/",
-    "react-native-vector-icons": "^2.0.3"
+    "react-native-vector-icons": "^2.0.3",
+    "realm": "^0.14.1"
   }
 }

@@ -12,6 +12,8 @@ import ReactNative, {
   Dimensions
 } from 'react-native';
 
+const { Database } = require('../../Database');
+
 const { width } = Dimensions.get('window');
 
 import {

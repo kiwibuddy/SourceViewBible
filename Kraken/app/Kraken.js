@@ -1,7 +1,7 @@
 /* @flow */
 'use strict';
 
-import Schema from './Schema';
+import SourceViewSchema from './SourceViewSchema';
 import Realm from 'realm';
 import Emdros from 'react-native-emdros';
 import RNFS from 'react-native-fs';
@@ -12,7 +12,7 @@ const JSON_PATH='/tmp/SourceView.json';
 
 const realm = new Realm({
   path: DATABASE_PATH,
-  schema: Schema
+  schema: SourceViewSchema
 });
 
 const { seedBookObjects, seedBooks } = require('./seeds/books');

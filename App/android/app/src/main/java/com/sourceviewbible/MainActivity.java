@@ -1,6 +1,8 @@
 package com.sourceviewbible;
 
 import com.facebook.react.ReactActivity;
+import com.rnfs.RNFSPackage;
+import io.realm.react.RealmReactPackage;
 
 import java.util.Arrays;
 import java.util.List;

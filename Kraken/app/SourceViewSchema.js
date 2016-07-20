@@ -1,7 +1,7 @@
 /* @flow */
 'use strict';
 
-const Book = {
+const BookSchema = {
   name: 'Book',
   primaryKey: 'id',
   properties: {
@@ -29,7 +29,12 @@ const Book = {
   }
 };
 
-const Chapter = {
+class Book {
+
+}
+Book.schema = BookSchema;
+
+const ChapterSchema = {
   name: 'Chapter',
   primaryKey: 'id',
   properties: {
@@ -48,7 +53,12 @@ const Chapter = {
   }
 };
 
-const Source = {
+class Chapter {
+
+}
+Chapter.schema = ChapterSchema;
+
+const SourceSchema = {
   name: 'Source',
   primaryKey: 'id',
   properties: {
@@ -61,7 +71,12 @@ const Source = {
   }
 };
 
-const SourceRelation = {
+class Source {
+
+}
+Source.schema = SourceSchema;
+
+const SourceRelationSchema = {
   name: 'SourceRelation',
   primaryKey: 'id',
   properties: {
@@ -72,7 +87,12 @@ const SourceRelation = {
   }
 };
 
-const Sphere = {
+class SourceRelation {
+
+}
+SourceRelation.schema = SourceRelationSchema;
+
+const SphereSchema = {
   name: 'Sphere',
   primaryKey: 'id',
   properties: {
@@ -85,7 +105,12 @@ const Sphere = {
   }
 };
 
-const Count = {
+class Sphere {
+
+}
+Sphere.schema = SphereSchema;
+
+const CountSchema = {
   name: 'Count',
   properties: {
     string: 'string',
@@ -93,7 +118,12 @@ const Count = {
   }
 };
 
-const Content = {
+class Count {
+
+}
+Count.schema = CountSchema;
+
+const ContentSchema = {
   name: 'Content',
   properties: {
     title: 'string',
@@ -101,13 +131,23 @@ const Content = {
   }
 };
 
-const Occurrence = {
+class Content {
+
+}
+Content.schema = ContentSchema;
+
+const OccurrenceSchema = {
   name: 'Occurrence',
   properties: {
     book: 'Book',
     chapter: 'Chapter',
   }
 };
+
+class Occurrence {
+
+}
+Occurrence.schema = OccurrenceSchema;
 
 const Schema = [Book, Chapter, Source, SourceRelation, Sphere, Count, Content, Occurrence];
 export default Schema;
