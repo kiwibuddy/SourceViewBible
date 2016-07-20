@@ -79,16 +79,16 @@ export default class DiscoveryCenter extends Component {
               </View>
             </View>
             <View style={styles.chart}>
-              <Image source={require('../../Images/discoverycenter/dc-chartblankslate.png')} />
+              <Image source={require('../../Images/discoverycenter/chart-blankslate.png')} />
               <View style={styles.chartHeader}>
                 <TouchableOpacity>
-                  <Text style={styles.chartHeaderButton}>BAR CHART</Text>
+                  <Text style={[styles.chartButton, {color: '#FFFFFF'}]}>BAR CHART</Text>
                 </TouchableOpacity>
                 <TouchableOpacity>
-                  <Text style={styles.chartHeaderButton}>PIE CHART</Text>
+                  <Text style={[styles.chartButton, {color: '#FFFFFF'}]}>PIE CHART</Text>
                 </TouchableOpacity>
                 <TouchableOpacity>
-                  <Text style={styles.chartHeaderButton}>CLOUD</Text>
+                  <Text style={[styles.chartButton, {color: '#FFFFFF'}]}>CLOUD</Text>
                 </TouchableOpacity>
               </View>
               <View style={styles.chartFooter}>
@@ -100,7 +100,14 @@ export default class DiscoveryCenter extends Component {
               </View>
             </View>
             <View style={styles.message}>
-              <Text>Placeholder</Text>
+              <View style={styles.filterItem}>
+                <TouchableOpacity>
+                  <Text style={[styles.chartButton, {color: Colors.tintColor}]}>+ ADD FILTER</Text>
+                </TouchableOpacity>
+                <View style={styles.filterBlankslate}>
+                  <Image source={require('../../Images/discoverycenter/filter-blankslate.png')} />
+                </View>
+              </View>
             </View>
           </View>
         </ScrollView>
@@ -186,10 +193,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 10,
   },
-  chartHeaderButton: {
+  chartButton: {
     fontSize: 11,
     fontWeight: 'bold',
-    color: '#FFFFFF',
     paddingRight: 15,
   },
   chartFooter: {
@@ -233,5 +239,12 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 40,
     marginHorizontal: 20,
+  },
+  filterItem: {
+    padding: 10,
+  },
+  filterBlankslate: {
+    paddingVertical: 50,
+    alignSelf: 'center',
   },
 });
