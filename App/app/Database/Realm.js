@@ -37,6 +37,10 @@ export class Book extends Realm.Object {
     return realm.objects('Book');
   }
 
+  static findByID(id: string) {
+    return realm.objectForPrimaryKey('Book', id);
+  }
+
   countOfSourceType(sourceType: string): number {
     const count = this.sourceTypeCounts.find(count => count.string === sourceType);
     return count && count.count || 0;
@@ -45,6 +49,10 @@ export class Book extends Realm.Object {
   countOfSphereType(sphereType: string): number {
     const count = this.sphereCounts.find(count => count.string === sphereType);
     return count && count.count || 0;
+  }
+
+  get sources(): Realm.List {
+    return this.sourceRelations.map(relation => relation.source);
   }
 }
 Book.schema = BookSchema;
@@ -90,6 +98,10 @@ export class Source extends Realm.Object {
   static all() {
     return realm.objects('Source');
   }
+
+  static findByID(id: string) {
+    return realm.objectForPrimaryKey('Source', id);
+  }
 }
 Source.schema = SourceSchema;
 
@@ -126,6 +138,10 @@ const SphereSchema = {
 export class Sphere extends Realm.Object {
   static all() {
     return realm.objects('Sphere').sorted('position');
+  }
+
+  static findByID(id: string) {
+    return realm.objectForPrimaryKey('Sphere', id);
   }
 }
 Sphere.schema = SphereSchema;
@@ -176,5 +192,3 @@ const realm = new Realm({
   schema: SourceViewSchema,
   readOnly: true,
 });
-
-console.log('initialzing database');

@@ -12,16 +12,24 @@ import {
 } from 'react-native';
 
 import {
+  Constants,
   Colors,
   StyleSheet,
   Localizable
 } from '../../Common';
+
+const {
+  SourceType,
+  SphereType
+} = Constants;
 
 import { SourcesBarChart, SpheresBarChart, WordCloud } from '../../Components/Charts';
 import ParallaxMotionView from '../../Components/Common/ParallaxMotionView';
 import SourceIcon from '../../Components/Common/SourceIcon';
 import Icon from '../../Components/Common/Icon';
 import { ReadingTime } from '../../Common/NumberHelper';
+
+import { Book } from '../../Database';
 
 const MAX_NUMBER_OF_SOURCES = 4;
 
@@ -47,7 +55,8 @@ export default class BookOverview extends Component {
   constructor(props: Props) {
     super(props);
 
-    const book = props.bible.books.find(book => book.id === props.bookID);
+    const book = Book.findByID(props.bookID);
+
     this.state = {book}
   }
 
@@ -62,7 +71,7 @@ export default class BookOverview extends Component {
       sources.push(this._renderMoreSource());
     }
 
-    const words = book.words.map(word => word.word);
+    const words = book.words.map(word => word.string);
 
     let overview = null;
     if (book.overview) {
@@ -123,7 +132,7 @@ export default class BookOverview extends Component {
                 style={{flex: 0, marginHorizontal: 4}}
                 barStyle={{width: 3, height: 20, marginHorizontal: 1.5}}
                 horizontal={false}
-                data={[{narrator: book.sourceTypeCounts.narrator}, {god: book.sourceTypeCounts.god}, {lead: book.sourceTypeCounts.lead}, {support: book.sourceTypeCounts.support}]}
+                data={[{narrator: book.countOfSourceType(SourceType.NARRATOR)}, {god: book.countOfSourceType(SourceType.GOD)}, {lead: book.countOfSourceType(SourceType.LEAD)}, {support: book.countOfSourceType(SourceType.SUPPORT)}]}
               />
             </View>
             <Text style={StyleSheet.styles.statisticSubtitle}>Sources</Text>
@@ -139,7 +148,7 @@ export default class BookOverview extends Component {
                 style={{flex: 0, marginHorizontal: 4}}
                 barStyle={{width: 3, height: 20, marginHorizontal: 1.5}}
                 horizontal={false}
-                data={[{family: book.sphereCounts.family}, {economics: book.sphereCounts.economics}, {government: book.sphereCounts.government}, {religion: book.sphereCounts.religion}, {education: book.sphereCounts.education}, {communication: book.sphereCounts.communication}, {celebration: book.sphereCounts.celebration}]}
+                data={[{family: book.countOfSphereType(SphereType.FAMILY)}, {economics: book.countOfSphereType(SphereType.ECONOMICS)}, {government: book.countOfSphereType(SphereType.GOVERNMENT)}, {religion: book.countOfSphereType(SphereType.RELIGION)}, {education: book.countOfSphereType(SphereType.EDUCATION)}, {communication: book.countOfSphereType(SphereType.COMMUNICATION)}, {celebration: book.countOfSphereType(SphereType.CELEBRATION)}]}
               />
             </View>
             <Text style={StyleSheet.styles.statisticSubtitle}>Spheres</Text>
@@ -203,7 +212,7 @@ export default class BookOverview extends Component {
     return (
       <View key={section.title} style={styles.contentContainer}>
         <Text style={styles.contentHeader}>{section.title}</Text>
-        <Text style={styles.contentBody}>{section.content}</Text>
+        <Text style={styles.contentBody}>{section.body}</Text>
       </View>
     );
   }
