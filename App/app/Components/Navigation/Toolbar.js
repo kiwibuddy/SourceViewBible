@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     borderTopColor: 'rgba(0, 0, 0, .15)',
     borderTopWidth: Platform.OS === 'ios' ? StyleSheet.hairlineWidth : 1,
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'center',
   },
 });

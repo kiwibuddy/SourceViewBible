@@ -31,6 +31,8 @@ export default class DiscoveryCenter extends Component {
   props: Props;
 
   render() {
+    const toolbar = this._renderToolbar();
+
     return (
       <View style={styles.container}>
         <NavigationBar title={Localizable.t('discovery-center')}>
@@ -206,9 +208,21 @@ export default class DiscoveryCenter extends Component {
             </View>
           </View>
         </ScrollView>
+        {toolbar}
       </View>
     );
   }
+
+  _renderToolbar = (props: any) => {
+    return (
+      <Toolbar>
+        <ToolbarButton
+          imageSource={require('../../Images/discoverycenter/btn-add-card.png')}
+          onPress={() => {}}
+        />
+      </Toolbar>
+    );
+  };
 }
 
 const styles = StyleSheet.create({
@@ -219,6 +233,7 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     marginTop: NavigationBar.HEIGHT,
+    marginBottom: Toolbar.HEIGHT,
   },
   card: {
     marginHorizontal: 4,
