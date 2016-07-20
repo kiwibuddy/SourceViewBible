@@ -5,13 +5,17 @@ import React, { Component, PropTypes } from 'react';
 const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
 
 import {
+  Dimensions,
   Platform,
   RecyclerViewBackedScrollView,
+  ScrollView,
   Text,
   View,
   TouchableOpacity
 } from 'react-native';
 import { ListView } from '../../Components/Common/DatabaseListView';
+
+const { width: WIDTH } = Dimensions.get('window');
 
 import {
   Colors,
@@ -118,7 +122,30 @@ export default class SphereBooks extends Component {
           </View>
           <View style={StyleSheet.styles.statisticKeyline} />
         </View>
-        <View style={styles.sphereBooksGraph} />
+        <ScrollView style={styles.sphereBooksGraph}>
+          <PieChart
+            color={Colors.tintColor}
+            slices={[{color: Colors.tintColor, value: 50}, {color: Colors.lightTintColor, value: 50}]}
+            sliceWidth={6}
+            subtitle={'Foo'}
+            subtitleStyle={{fontSize: 17}}
+            title={Localizable.toPercentage(50, {precision: 0})}
+            titleStyle={{fontSize: 24}}
+            size={100}
+            style={[{top: 50, alignSelf: 'center'}]}
+          />
+          <PieChart
+            color={Colors.tintColor}
+            slices={[{color: Colors.tintColor, value: 50}, {color: Colors.lightTintColor, value: 50}]}
+            sliceWidth={5}
+            subtitle={'Bar'}
+            subtitleStyle={{fontSize: 15}}
+            title={Localizable.toPercentage(50, {precision: 0})}
+            titleStyle={{fontSize: 20}}
+            size={80}
+            style={[styles.pie, {top: 100, left: 60}]}
+          />
+        </ScrollView>
         <SegmentedControl
           style={styles.segmentedControl}
           tintColor={Colors.tintColor}
@@ -245,7 +272,10 @@ const styles = StyleSheet.create({
     marginBottom: 7,
   },
   barChartDelta: {
-    backgroundColor: '#ffdcda',
+    backgroundColor: Colors.lightTintColor,
+  },
+  pie: {
+    position: 'absolute',
   },
   ...Platform.select({
       ios: {

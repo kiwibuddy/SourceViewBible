@@ -112,7 +112,7 @@ export default class BookSpheres extends Component {
         <PieChart
           color={tintColor}
           slices={[{color: tintColor, value: spherePercent}, {color: lightTintColor, value: 100 - spherePercent}]}
-          label={Localizable.toPercentage(spherePercent, {precision: 0})}
+          title={Localizable.toPercentage(spherePercent, {precision: 0})}
           size={57}
           style={styles.pie}
         />

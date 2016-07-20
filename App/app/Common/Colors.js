@@ -4,6 +4,7 @@
 module.exports = {
 
   tintColor: '#cf1e00',
+  lightTintColor: '#ffdcda',
   separator: '#CCCCCC',
   subtitle: '#9B9B9B',
 

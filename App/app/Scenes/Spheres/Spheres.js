@@ -356,6 +356,6 @@ const styles = StyleSheet.create({
     marginBottom: 7,
   },
   barChartDelta: {
-    backgroundColor: '#ffdcda',
+    backgroundColor: Colors.lightTintColor,
   },
 });

@@ -17,19 +17,21 @@ const {
   Surface,
 } = ART;
 
+const DEFAULT_SLICE_WIDTH = 4;
+const STROKE_WIDTH = 1;
+
+
 import StyleSheet from '../../Common/StyleSheet';
 import Colors from '../../Common/Colors';
 
 const PieChart = (props: Object) => {
-  const { color, size, slices } = props;
+  const { color, size, slices, titleStyle, subtitleStyle } = props;
   const chartStyle = [styles.chart, props.style, {width: size, height: size}];
 
   const sliceStyle = [styles.slice, {borderTopColor: color, borderLeftColor: color, borderBottomColor: color }];
-  const label = props.label ? <Text style={[styles.text, {color: color}]}>{props.label}</Text> : null;
+  const title = props.title ? <Text style={[styles.title, {color: color}, titleStyle]}>{props.title}</Text> : null;
+  const subtitle = props.subtitle ? <Text style={[styles.subtitle, subtitleStyle]}>{props.subtitle}</Text> : null;
 
-  const SLICE_WIDTH = 4;
-
-  const STROKE_WIDTH = 1;
   const radius = (size / 2) - STROKE_WIDTH;
 
   const centerX = size / 2;
@@ -69,7 +71,7 @@ const PieChart = (props: Object) => {
 				key={'wedge-' + i}
 				originX={centerX}
 				originY={centerY}
-        innerRadius={(size/2) - SLICE_WIDTH}
+        innerRadius={(size/2) - props.sliceWidth}
 				{...arc}
 			/>
 		);
@@ -84,7 +86,8 @@ const PieChart = (props: Object) => {
 					</Group>
 				</Surface>
 			</View>
-      {label}
+      {title}
+      {subtitle}
 		</TouchableOpacity>
   );
 };
@@ -218,22 +221,31 @@ PieChart.propTypes = {
     color: ColorPropType.isRequired,
     value: PropTypes.number.isRequired,
   })).isRequired,
+  sliceWidth: PropTypes.number,
   style: PropTypes.any,
   size: PropTypes.number.isRequired,
+  subtitle: PropTypes.string,
+  subtitleStyle: PropTypes.any,
+  title: PropTypes.string,
+  titleStyle: PropTypes.any,
 };
 
 PieChart.defaultProps = {
-  horizontal: true
-}
+  sliceWidth: DEFAULT_SLICE_WIDTH,
+};
 
 const styles = StyleSheet.create({
   chart: {
+    backgroundColor: 'transparent',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  text: {
+  title: {
     fontSize: 17,
-    backgroundColor: 'transparent',
+  },
+  subtitle: {
+    fontSize: 14,
+    color: Colors.subtitle,
   },
 });
 
