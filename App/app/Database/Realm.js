@@ -115,6 +115,7 @@ const SphereSchema = {
   properties: {
     id: 'string',
     name: 'string',
+    position: 'int',
     bookCount: {type: 'int', default: 0},
     bookCounts: {type: 'list', objectType: 'Count'},
     wordCount: {type: 'int', default: 0},
@@ -123,7 +124,9 @@ const SphereSchema = {
 };
 
 export class Sphere extends Realm.Object {
-
+  static all() {
+    return realm.objects('Sphere').sorted('position');
+  }
 }
 Sphere.schema = SphereSchema;
 

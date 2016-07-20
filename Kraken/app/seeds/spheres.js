@@ -4,13 +4,13 @@
 const {getChapterID, firstInitial, getSourceID, seedObjectSourceTypeWordCounts, seedObjectSphereWordCounts, seedObjectWordCloud, SPHERE_MAP} = require('../common');
 
 const SPHERES = [
-  { id: "family", name: "Family" },
-  { id: "economics", name: "Economics" },
-  { id: "government", name: "Government" },
-  { id: "religion", name: "Religion" },
-  { id: "education", name: "Education" },
-  { id: "communication", name: "Communication" },
-  { id: "celebration", name: "Celebration" },
+  { id: "family", name: "Family", position: 1 },
+  { id: "economics", name: "Economics", position: 2 },
+  { id: "government", name: "Government", position: 3 },
+  { id: "religion", name: "Religion", position: 4 },
+  { id: "education", name: "Education", position: 5 },
+  { id: "communication", name: "Communication", position: 6 },
+  { id: "celebration", name: "Celebration", position: 7 },
 ];
 
 export async function seedSphereObjects(emdros: Object, realm: Object) {

@@ -6,11 +6,13 @@ import ReactNative, {
   View,
   Text,
   Image,
-  ListView,
   TouchableOpacity,
   RecyclerViewBackedScrollView,
   Dimensions
 } from 'react-native';
+import { ListView } from '../../Components/Common/DatabaseListView';
+
+import { Sphere } from '../../Database';
 
 const { width } = Dimensions.get('window');
 
@@ -53,7 +55,7 @@ export default class DiscoverSpheres extends Component {
   }
 
   componentDidMount() {
-    let spheres = this.props.bible.spheres.slice(0, MAXIMUM_SPHERE_COUNT);
+    let spheres = Sphere.all().slice(0, MAXIMUM_SPHERE_COUNT);
     const delta = MAXIMUM_SPHERE_COUNT - spheres.length;
     if (delta > 0) {
       for (let i = 0; i < delta; i++) {
