@@ -161,34 +161,3 @@ async function seedBaseObjects(emdros) {
 //     })
 //   });
 // }
-
-
-// async function seedSphereWordCounts(emdros, bible) {
-//   console.log('Seeding Spheres Word Counts...');
-//
-//   return new Promise((resolve, reject) => {
-//     SPHERE_KEYS.forEach(key => {
-//       const sphere = bible.spheres.find(sphere => sphere.id === SPHERE_MAP[key]);
-//       if (sphere != null) {
-//         let bookCount = 0;
-//         let totalWordCount = 0;
-//
-//         bible.books.forEach(book => {
-//           const wordCount = book.sphereCounts[sphere.id] || 0;
-//           sphere.bookCounts[book.id] = wordCount;
-//
-//           if (wordCount > 0) {
-//             bookCount++;
-//             totalWordCount += wordCount;
-//           }
-//         });
-//
-//         sphere.bookCount = bookCount;
-//         sphere.wordCount = totalWordCount;
-//       }
-//     });
-//
-//     resolve();
-//   });
-// }
-//
