@@ -29,9 +29,9 @@ import SourceIcon from '../../Components/Common/SourceIcon';
 import Icon from '../../Components/Common/Icon';
 import { ReadingTime } from '../../Common/NumberHelper';
 
-import { Book } from '../../Database';
-
 const MAX_NUMBER_OF_SOURCES = 4;
+
+import { Book } from '../../Database';
 
 type Props = {
   bible: Object,

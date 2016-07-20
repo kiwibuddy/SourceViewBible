@@ -30,8 +30,6 @@ import SegmentedControl from '../../Components/Common/SegmentedControl';
 import { SourcesBarChart, SpheresBarChart } from '../../Components/Charts';
 import { ReadingTime } from '../../Common/NumberHelper';
 
-import { Book } from '../../Database';
-
 const SEGMENTS = [Localizable.t('sources.text'), Localizable.t('spheres.text')];
 const SEGMENT_INDEXES = {
   SOURCES: 0,
@@ -39,6 +37,8 @@ const SEGMENT_INDEXES = {
 };
 
 const LISTVIEW_REF = 'LISTVIEW_REF';
+
+import { Book } from '../../Database';
 
 type Props = {
   bible: Object,

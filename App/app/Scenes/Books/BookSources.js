@@ -5,21 +5,29 @@ import React, { Component, PropTypes } from 'react';
 const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
 
 import {
-  ListView,
   RecyclerViewBackedScrollView,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
+import { ListView } from '../../Components/Common/DatabaseListView';
 
 import {
   Colors,
+  Constants,
   StyleSheet,
   Localizable
 } from '../../Common';
 
+const {
+  SourceType,
+  SphereType
+} = Constants;
+
 import SourcesBarChart from '../../Components/Charts/SourcesBarChart';
 import SourceIcon from '../../Components/Common/SourceIcon';
+
+import { Book } from '../../Database';
 
 type Props = {
   bible: Object,
@@ -39,7 +47,7 @@ export default class BookSources extends Component {
   constructor(props: Object) {
     super(props);
 
-    const book = props.bible.books.find(book => book.id === props.bookID);
+    const book = Book.findByID(props.bookID);
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     this.state = {
       book,
@@ -73,6 +81,44 @@ export default class BookSources extends Component {
       </View>
     );
   }
+
+  _renderHeader = (props: any) => {
+    const { book } = this.state;
+    const narratorPercent = (book.countOfSourceType(SourceType.NARRATOR) / book.wordCount) * 100;
+    const godPercent = (book.countOfSourceType(SourceType.GOD) / book.wordCount) * 100;
+    const leadPercent = (book.countOfSourceType(SourceType.LEAD) / book.wordCount) * 100;
+    const supportPercent = (book.countOfSourceType(SourceType.SUPPORT) / book.wordCount) * 100;
+
+    return (
+      <View>
+        <SourcesBarChart
+          style={styles.stackedBarChartHeader}
+          data={[book.sourceTypeCounts]}
+        />
+        <View style={StyleSheet.styles.statisticsContainer}>
+          <View style={StyleSheet.styles.statisticContainer}>
+            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(narratorPercent, {precision: 0})}</Text>
+            <Text style={StyleSheet.styles.statisticSubtitle}>Narrator</Text>
+          </View>
+          <View style={StyleSheet.styles.statisticKeyline} />
+          <View style={StyleSheet.styles.statisticContainer}>
+            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(godPercent, {precision: 0})}</Text>
+            <Text style={StyleSheet.styles.statisticSubtitle}>Divine</Text>
+          </View>
+          <View style={StyleSheet.styles.statisticKeyline} />
+          <View style={StyleSheet.styles.statisticContainer}>
+            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(leadPercent, {precision: 0})}</Text>
+            <Text style={StyleSheet.styles.statisticSubtitle}>Lead</Text>
+          </View>
+          <View style={StyleSheet.styles.statisticKeyline} />
+          <View style={StyleSheet.styles.statisticContainer}>
+            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(supportPercent, {precision: 0})}</Text>
+            <Text style={StyleSheet.styles.statisticSubtitle}>Support</Text>
+          </View>
+        </View>
+      </View>
+    );
+  };
 
   _renderRow = (source: Object, sectionID: string, rowID: string, highlightRow: boolean) => {
     const { book } = this.state;
@@ -110,44 +156,6 @@ export default class BookSources extends Component {
           </View>
         </View>
       </TouchableOpacity>
-    );
-  };
-
-  _renderHeader = (props: any) => {
-    const { book } = this.state;
-    const narratorPercent = (book.sourceTypeCounts.narrator / book.wordCount) * 100;
-    const godPercent = (book.sourceTypeCounts.god / book.wordCount) * 100;
-    const leadPercent = (book.sourceTypeCounts.lead / book.wordCount) * 100;
-    const supportPercent = (book.sourceTypeCounts.support / book.wordCount) * 100;
-
-    return (
-      <View>
-        <SourcesBarChart
-          style={styles.stackedBarChartHeader}
-          data={[book.sourceTypeCounts]}
-        />
-        <View style={StyleSheet.styles.statisticsContainer}>
-          <View style={StyleSheet.styles.statisticContainer}>
-            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(narratorPercent, {precision: 0})}</Text>
-            <Text style={StyleSheet.styles.statisticSubtitle}>Narrator</Text>
-          </View>
-          <View style={StyleSheet.styles.statisticKeyline} />
-          <View style={StyleSheet.styles.statisticContainer}>
-            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(godPercent, {precision: 0})}</Text>
-            <Text style={StyleSheet.styles.statisticSubtitle}>Divine</Text>
-          </View>
-          <View style={StyleSheet.styles.statisticKeyline} />
-          <View style={StyleSheet.styles.statisticContainer}>
-            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(leadPercent, {precision: 0})}</Text>
-            <Text style={StyleSheet.styles.statisticSubtitle}>Lead</Text>
-          </View>
-          <View style={StyleSheet.styles.statisticKeyline} />
-          <View style={StyleSheet.styles.statisticContainer}>
-            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(supportPercent, {precision: 0})}</Text>
-            <Text style={StyleSheet.styles.statisticSubtitle}>Support</Text>
-          </View>
-        </View>
-      </View>
     );
   };
 
