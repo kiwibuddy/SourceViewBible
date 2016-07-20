@@ -196,21 +196,26 @@ export default class SphereBooks extends Component {
         return this.state.dataSource.cloneWithRowsAndSections({alphabetical: Book.all().sorted('name')});
 
       default:
-        const books = Book.all().map(book => book).sort((bookA, bookB) => {
-          const bookAWordCount = sphere.countOfBook(bookA.id);
-          const bookAPercent = (bookAWordCount / bookA.wordCount);
-
-          const bookBWordCount = sphere.countOfBook(bookB.id);
-          const bookBPercent = (bookBWordCount / bookB.wordCount);
-
-          if (bookAPercent == bookBPercent) {
-            return bookAWordCount > bookBWordCount ? -1 : 1;
-          }
-          return bookAPercent > bookBPercent ? -1 : 1;
-        });
-        return this.state.dataSource.cloneWithRowsAndSections({percentage: books});
+        return this.state.dataSource.cloneWithRowsAndSections({percentage: this._bookSortedByPercentage()});
     }
   };
+
+  _bookSortedByPercentage = () => {
+    const { sphere } = this.state;
+
+    return Book.all().map(book => book).sort((bookA, bookB) => {
+      const bookAWordCount = sphere.countOfBook(bookA.id);
+      const bookAPercent = (bookAWordCount / bookA.wordCount);
+
+      const bookBWordCount = sphere.countOfBook(bookB.id);
+      const bookBPercent = (bookBWordCount / bookB.wordCount);
+
+      if (bookAPercent == bookBPercent) {
+        return bookAWordCount > bookBWordCount ? -1 : 1;
+      }
+      return bookAPercent > bookBPercent ? -1 : 1;
+    });
+  }
 
   _onSegmentedControlValueChanged = (value: number) => {
     this.setState({
