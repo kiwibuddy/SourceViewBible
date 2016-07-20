@@ -126,7 +126,7 @@ export default class SphereBooks extends Component {
           <View style={StyleSheet.styles.statisticKeyline} />
         </View>
         <ScrollView style={styles.sphereBooksGraph}>
-          {this._renderPie({book: books[0], size: 100, subtitleStyle: {fontSize: 17}, titleStyle: {fontSize: 24}, style: {top: 50, alignSelf: 'center'}})}
+          {this._renderPie({book: books[0], size: 100, sliceWidth: 6, subtitleStyle: {fontSize: 17}, titleStyle: {fontSize: 24}, style: {top: 50, alignSelf: 'center'}})}
           {this._renderPie({book: books[1], size: 80, subtitleStyle: {fontSize: 15}, titleStyle: {fontSize: 20}, style: [styles.pie, {top: 100, left: 60}]})}
         </ScrollView>
         <SegmentedControl
@@ -168,7 +168,7 @@ export default class SphereBooks extends Component {
     );
   };
 
-  _renderPie({book, size, style, subtitleStyle, titleStyle}) {
+  _renderPie({book, size, sliceWidth, style, subtitleStyle, titleStyle}) {
     const bookPercent = this._getPercentOfBook(book);
     let slices = [{color: Colors.tintColor, value: bookPercent}];
     if (bookPercent < 100) slices.push({color: Colors.lightTintColor, value: 100-bookPercent});
@@ -176,7 +176,7 @@ export default class SphereBooks extends Component {
       <PieChart
         color={Colors.tintColor}
         slices={slices}
-        sliceWidth={6}
+        sliceWidth={sliceWidth}
         subtitle={book.DJHRef}
         subtitleStyle={subtitleStyle}
         title={Localizable.toPercentage(bookPercent, {precision: 0})}
