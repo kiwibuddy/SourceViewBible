@@ -87,7 +87,9 @@ const SourceSchema = {
 };
 
 export class Source extends Realm.Object {
-
+  static all() {
+    return realm.objects('Source');
+  }
 }
 Source.schema = SourceSchema;
 

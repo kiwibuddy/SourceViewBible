@@ -6,11 +6,13 @@ import ReactNative, {
   View,
   Text,
   Image,
-  ListView,
   TouchableOpacity,
   RecyclerViewBackedScrollView,
   Dimensions
 } from 'react-native';
+import { ListView } from '../../Components/Common/DatabaseListView';
+
+import { Source } from '../../Database';
 
 const { width } = Dimensions.get('window');
 
@@ -53,7 +55,7 @@ export default class DiscoverSources extends Component {
   }
 
   componentDidMount() {
-    const sources = this.props.bible.sources.slice(0).sort((a, b) => a.wordCount > b.wordCount ? -1 : 1).slice(0, MAXIMUM_SOURCE_COUNT);
+    const sources = Source.all().sorted('wordCount', true).slice(0, MAXIMUM_SOURCE_COUNT);
 
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(sources)
