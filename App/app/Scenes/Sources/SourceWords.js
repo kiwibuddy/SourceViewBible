@@ -22,6 +22,8 @@ import {
 import { SourcesBarChart, SpheresBarChart, WordCloud } from '../../Components/Charts';
 import ParallaxMotionView from '../../Components/Common/ParallaxMotionView';
 
+import { Source } from '../../Database';
+
 type Props = {
   bible: Object,
   sourceID: string,
@@ -39,7 +41,7 @@ export default class SourceWords extends Component {
   constructor(props: Props) {
     super(props);
 
-    const source = props.bible.sources.find(source => source.id === props.sourceID);
+    const source = Source.findByID(props.sourceID);
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     this.state = {
       source,
@@ -64,8 +66,8 @@ export default class SourceWords extends Component {
   _renderRow = (word: Object, sectionID: any, rowID: any) => {
     return (
       <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
-        <Text style={StyleSheet.styles.cell.title}>{word.word}</Text>
-        <Text style={StyleSheet.styles.cell.valuetitle}>{Localizable.toNumber(word.wordCount, {precision: 0})}</Text>
+        <Text style={StyleSheet.styles.cell.title}>{word.string}</Text>
+        <Text style={StyleSheet.styles.cell.valuetitle}>{Localizable.toNumber(word.count, {precision: 0})}</Text>
       </TouchableOpacity>
     );
   };
@@ -78,7 +80,7 @@ export default class SourceWords extends Component {
     };
 
     const { source } = this.state;
-    const words = source.words.map(word => word.word);
+    const words = source.words.map(word => word.string);
     const sourceType = SOURCE_TYPE_MAP[source.name] || 'support';
 
     return (

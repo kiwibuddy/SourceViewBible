@@ -15,6 +15,8 @@ import {
   Localizable
 } from '../../Common';
 
+import { Source } from '../../Database';
+
 type Props = {
   bible: Object,
   sourceID: string,
@@ -31,7 +33,7 @@ export default class SourceBooks extends Component {
   constructor(props: Props) {
     super(props);
 
-    const source = props.bible.sources.find(source => source.id === props.sourceID);
+    const source = Source.findByID(props.sourceID);
     this.state = {source};
   }
 

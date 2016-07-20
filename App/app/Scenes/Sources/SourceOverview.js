@@ -22,6 +22,8 @@ import { SourcesBarChart, SpheresBarChart, WordCloud } from '../../Components/Ch
 import ParallaxMotionView from '../../Components/Common/ParallaxMotionView';
 import Icon from '../../Components/Common/Icon';
 
+import { Source } from '../../Database';
+
 type Props = {
   bible: Object,
   sourceID: string,
@@ -43,13 +45,13 @@ export default class SourceOverview extends Component {
   constructor(props: Props) {
     super(props);
 
-    const source = props.bible.sources.find(source => source.id === props.sourceID);
+    const source = Source.findByID(props.sourceID);
     this.state = {source};
   }
 
   render() {
     const { source } = this.state;
-    const words = source.words.map(word => word.word);
+    const words = source.words.map(word => word.string);
     return (
       <ScrollView style={styles.container}>
         <TouchableOpacity onPress={this.props.onPressWords}>
