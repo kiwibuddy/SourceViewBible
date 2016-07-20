@@ -5,20 +5,22 @@ import React, { Component, PropTypes } from 'react';
 const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
 
 import {
-  ListView,
   RecyclerViewBackedScrollView,
   Text,
   View,
   TouchableOpacity
 } from 'react-native';
+import { ListView } from '../../Components/Common/DatabaseListView';
 
 import {
   Colors,
+  Localizable,
   StyleSheet,
-  Localizable
 } from '../../Common';
 
 import { BarChart, PieChart } from '../../Components/Charts';
+
+import { Book, Sphere } from '../../Database';
 
 type Props = {
   bible: Object,
@@ -38,13 +40,13 @@ export default class SphereBooks extends Component {
   constructor(props: Props) {
     super(props);
 
-    const sphere = props.bible.spheres.find(sphere => sphere.id === props.sphereID);
+    const sphere = Sphere.findByID(props.sphereID);
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
-    const books = props.bible.books.slice(0).sort((bookA, bookB) => {
-      const bookAWordCount = sphere.bookCounts[bookA.id];
+    const books = Book.all().map(book => book).sort((bookA, bookB) => {
+      const bookAWordCount = sphere.countOfBook(bookA.id);
       const bookAPercent = (bookAWordCount / bookA.wordCount);
 
-      const bookBWordCount = sphere.bookCounts[bookB.id];
+      const bookBWordCount = sphere.countOfBook(bookB.id);
       const bookBPercent = (bookBWordCount / bookB.wordCount);
 
       if (bookAPercent == bookBPercent) {
@@ -72,23 +74,22 @@ export default class SphereBooks extends Component {
   }
 
   _renderHeader = () => {
-    const { bible } = this.props;
     const { sphere } = this.state;
-    const spherePercent = (sphere.wordCount / bible.wordCount) * 100;
 
     let oldTestamentWordCount = 0;
     let oldTestamentSphereWordCount = 0;
     let newTestamentWordCount = 0;
     let newTestamentSphereWordCount = 0;
-    bible.books.forEach(book => {
+    Book.all().forEach(book => {
       if (book.testament === 0) {
         oldTestamentWordCount += book.wordCount;
-        oldTestamentSphereWordCount += sphere.bookCounts[book.id];
+        oldTestamentSphereWordCount += sphere.countOfBook(book.id);
       } else {
         newTestamentWordCount += book.wordCount;
-        newTestamentSphereWordCount += sphere.bookCounts[book.id];
+        newTestamentSphereWordCount += sphere.countOfBook(book.id);
       }
     });
+    const spherePercent = ((oldTestamentSphereWordCount + newTestamentSphereWordCount) / (oldTestamentWordCount + newTestamentWordCount))  * 100;
     const oldTestamentSpherePercent = (oldTestamentSphereWordCount / oldTestamentWordCount) * 100;
     const newTestamentSpherePercent = (newTestamentSphereWordCount / newTestamentWordCount) * 100;
 
@@ -118,7 +119,7 @@ export default class SphereBooks extends Component {
 
   _renderRow = (book: Object) => {
     const { sphere } = this.state;
-    const wordCount = sphere.bookCounts[book.id];
+    const wordCount = sphere.countOfBook(book.id);
     const spherePercent = (wordCount / book.wordCount) * 100;
 
     return (

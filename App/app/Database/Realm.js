@@ -148,6 +148,11 @@ export class Sphere extends Realm.Object {
   static findByID(id: string) {
     return realm.objectForPrimaryKey('Sphere', id);
   }
+
+  countOfBook(bookID: string): number {
+    const count = this.bookCounts.find(count => count.string === bookID);
+    return count && count.count || 0;
+  }
 }
 Sphere.schema = SphereSchema;
 
