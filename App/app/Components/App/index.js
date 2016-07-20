@@ -18,8 +18,6 @@ import {
 
 const Bible = require('../../Locale/en/NLT/SourceView.json');
 
-const { Database } = require('../../Database');
-
 import Bookmarks from '../../Scenes/Bookmarks/Bookmarks';
 import BookChapters from '../../Scenes/Books/BookChapters';
 import BookOverview from '../../Scenes/Books/BookOverview';

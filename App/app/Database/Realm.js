@@ -1,6 +1,9 @@
 /* @flow */
 'use strict';
 
+import Realm from 'realm';
+const RNFS = require('react-native-fs');
+
 const BookSchema = {
   name: 'Book',
   primaryKey: 'id',
@@ -29,8 +32,20 @@ const BookSchema = {
   }
 };
 
-class Book {
+export class Book extends Realm.Object {
+  static all() {
+    return realm.objects('Book');
+  }
 
+  countOfSourceType(sourceType: string): number {
+    const count = this.sourceTypeCounts.find(count => count.string === sourceType);
+    return count && count.count || 0;
+  }
+
+  countOfSphereType(sphereType: string): number {
+    const count = this.sphereCounts.find(count => count.string === sphereType);
+    return count && count.count || 0;
+  }
 }
 Book.schema = BookSchema;
 
@@ -53,7 +68,7 @@ const ChapterSchema = {
   }
 };
 
-class Chapter {
+export class Chapter extends Realm.Object {
 
 }
 Chapter.schema = ChapterSchema;
@@ -71,7 +86,7 @@ const SourceSchema = {
   }
 };
 
-class Source {
+export class Source extends Realm.Object {
 
 }
 Source.schema = SourceSchema;
@@ -87,7 +102,7 @@ const SourceRelationSchema = {
   }
 };
 
-class SourceRelation {
+export class SourceRelation extends Realm.Object {
 
 }
 SourceRelation.schema = SourceRelationSchema;
@@ -105,7 +120,7 @@ const SphereSchema = {
   }
 };
 
-class Sphere {
+export class Sphere extends Realm.Object {
 
 }
 Sphere.schema = SphereSchema;
@@ -118,7 +133,7 @@ const CountSchema = {
   }
 };
 
-class Count {
+export class Count extends Realm.Object {
 
 }
 Count.schema = CountSchema;
@@ -131,7 +146,7 @@ const ContentSchema = {
   }
 };
 
-class Content {
+export class Content extends Realm.Object {
 
 }
 Content.schema = ContentSchema;
@@ -144,10 +159,17 @@ const OccurrenceSchema = {
   }
 };
 
-class Occurrence {
+export class Occurrence extends Realm.Object {
 
 }
 Occurrence.schema = OccurrenceSchema;
 
-const Schema = [Book, Chapter, Source, SourceRelation, Sphere, Count, Content, Occurrence];
-export default Schema;
+const SourceViewSchema = [Book, Chapter, Source, SourceRelation, Sphere, Count, Content, Occurrence];
+
+const realm = new Realm({
+  path: RNFS.MainBundlePath + '/Datasets/en/NLT/SourceView.realm',
+  schema: SourceViewSchema,
+  readOnly: true,
+});
+
+console.log('initialzing database');

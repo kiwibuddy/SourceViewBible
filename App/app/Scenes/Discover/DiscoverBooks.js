@@ -6,20 +6,26 @@ import ReactNative, {
   View,
   Text,
   Image,
-  ListView,
   TouchableOpacity,
   RecyclerViewBackedScrollView,
   Dimensions
 } from 'react-native';
+import { ListView } from '../../Components/Common/DatabaseListView';
 
-const { Database } = require('../../Database');
+import { Book } from '../../Database';
 
 const { width } = Dimensions.get('window');
 
 import {
+  Constants,
   Colors,
   StyleSheet,
 } from '../../Common';
+
+const {
+  SourceType,
+  SphereType
+} = Constants;
 
 // $FlowFixMe: Can't find os module extension
 import LinearGradient from 'react-native-linear-gradient';
@@ -56,7 +62,7 @@ export default class DiscoverBooks extends Component {
   }
 
   componentDidMount() {
-    const books = this.props.bible.books.slice(0).sort((a, b) => a.sourceCount > b.sourceCount ? -1 : 1).slice(0, MAXIMUM_BOOK_COUNT);
+    const books = Book.all().sorted('sourceCount', true).slice(0, MAXIMUM_BOOK_COUNT);
 
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(books)
@@ -126,7 +132,7 @@ export default class DiscoverBooks extends Component {
                   style={{flex: 0, marginLeft: 4}}
                   barStyle={{width: 2, height: 12, marginHorizontal: 1}}
                   horizontal={false}
-                  data={[{narrator: book.sourceTypeCounts.narrator}, {god: book.sourceTypeCounts.god}, {lead: book.sourceTypeCounts.lead}, {support: book.sourceTypeCounts.support}]}
+                  data={[{narrator: book.countOfSourceType(SourceType.NARRATOR)}, {god: book.countOfSourceType(SourceType.GOD)}, {lead: book.countOfSourceType(SourceType.LEAD)}, {support: book.countOfSourceType(SourceType.SUPPORT)}]}
                 />
               </View>
             </View>
@@ -138,7 +144,7 @@ export default class DiscoverBooks extends Component {
                   style={{flex: 0, marginLeft: 2}}
                   barStyle={{width: 2, height: 12, marginHorizontal: 1}}
                   horizontal={false}
-                  data={[{family: book.sphereCounts.family}, {economics: book.sphereCounts.economics}, {government: book.sphereCounts.government}, {religion: book.sphereCounts.religion}, {education: book.sphereCounts.education}, {communication: book.sphereCounts.communication}, {celebration: book.sphereCounts.celebration}]}
+                  data={[{family: book.countOfSphereType(SphereType.FAMILY)}, {economics: book.countOfSphereType(SphereType.ECONOMICS)}, {government: book.countOfSphereType(SphereType.GOVERNMENT)}, {religion: book.countOfSphereType(SphereType.RELIGION)}, {education: book.countOfSphereType(SphereType.EDUCATION)}, {communication: book.countOfSphereType(SphereType.COMMUNICATION)}, {celebration: book.countOfSphereType(SphereType.CELEBRATION)}]}
                 />
               </View>
             </View>
