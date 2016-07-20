@@ -127,10 +127,12 @@ export default class DiscoveryCenter extends Component {
               <Image source={require('../../Images/discoverycenter/chart-blankslate.png')} />
               <View style={styles.chartHeader}>
                 <TouchableOpacity style={styles.leftContainer}>
+                  <Image style={styles.chartDropdown} source={require('../../Images/discoverycenter/chart-icn-dropdown.png')} />
                   <Image source={require('../../Images/discoverycenter/chart-icn-bar-yaxis.png')} />
                   <Text style={styles.chartProperty}>Choose Y Axis</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.rightContainer}>
+                  <Image style={styles.chartDropdown} source={require('../../Images/discoverycenter/chart-icn-dropdown.png')} />
                   <Image style={styles.chartIcon} source={require('../../Images/discoverycenter/chart-icn-bar-xaxis.png')} />
                   <Text style={styles.chartProperty}>Choose X Axis</Text>
                 </TouchableOpacity>
@@ -248,6 +250,11 @@ const styles = StyleSheet.create({
     fontSize: 11,
     paddingLeft: 5,
     color: '#FFFFFF'
+  },
+  chartDropdown: {
+    position: 'absolute',
+    right: 8,
+    top: 12,
   },
   chartFooter: {
     flex: 1,
