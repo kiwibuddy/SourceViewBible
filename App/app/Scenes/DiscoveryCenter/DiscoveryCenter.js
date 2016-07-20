@@ -156,6 +156,55 @@ export default class DiscoveryCenter extends Component {
               </View>
             </View>
           </View>
+          <View style={styles.card}>
+            <View style={styles.header}>
+              <View style={styles.leftContainer}>
+                <TouchableOpacity>
+                  <Image source={require('../../Images/discoverycenter/btn-delete.png')} />
+                </TouchableOpacity>
+              </View>
+              <View style={[styles.rightContainer, {justifyContent: 'flex-end'}]}>
+                <TouchableOpacity>
+                  <Image source={require('../../Images/discoverycenter/btn-duplicate.png')} />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.share}>
+                  <Image source={require('../../Images/discoverycenter/btn-share.png')} />
+                </TouchableOpacity>
+              </View>
+            </View>
+            <View style={styles.chart}>
+              <Image source={require('../../Images/discoverycenter/chart-placeholder.png')} />
+              <View style={styles.chartHeader}>
+                <TouchableOpacity style={styles.leftContainer}>
+                  <Image style={styles.chartDropdown} source={require('../../Images/discoverycenter/chart-icn-dropdown.png')} />
+                  <Image source={require('../../Images/discoverycenter/chart-icn-bar-yaxis.png')} />
+                  <Text style={styles.chartProperty}>Source Word</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.rightContainer}>
+                  <Image style={styles.chartDropdown} source={require('../../Images/discoverycenter/chart-icn-dropdown.png')} />
+                  <Image style={styles.chartIcon} source={require('../../Images/discoverycenter/chart-icn-bar-xaxis.png')} />
+                  <Text style={styles.chartProperty}>Source Vocation</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.chartFooter}>
+              <View style={[styles.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
+                  <TouchableOpacity>
+                    <Image source={require('../../Images/discoverycenter/btn-fullscreen.png')} />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+            <View style={styles.message}>
+              <View style={styles.filterItem}>
+                <TouchableOpacity>
+                  <Text style={[styles.chartButton, {color: Colors.tintColor}]}>+ ADD FILTER</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.readButton}>
+                  <Text style={styles.readButtonTitle}>Explore 423 occurrences</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
         </ScrollView>
       </View>
     );
@@ -304,5 +353,22 @@ const styles = StyleSheet.create({
   filterBlankslate: {
     paddingVertical: 50,
     alignSelf: 'center',
+  },
+  readButton: {
+    borderColor: Colors.tintColor,
+    height: 40,
+    borderRadius: 20,
+    borderWidth: 1,
+    overflow:'hidden',
+    alignSelf: 'center',
+    marginTop: 40,
+    marginBottom: 40,
+    justifyContent: 'center',
+  },
+  readButtonTitle: {
+    color: Colors.tintColor,
+    fontSize: 18,
+    marginVertical: 20,
+    marginHorizontal: 40,
   },
 });
