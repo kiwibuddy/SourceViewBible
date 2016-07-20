@@ -44,7 +44,7 @@ export default class DiscoveryCenter extends Component {
         <ScrollView style={styles.content}>
           <View style={styles.card}>
             <View style={styles.header}>
-              <View style={styles.sourcesLeftContainer}>
+              <View style={styles.leftContainer}>
                 <TouchableOpacity>
                   <Image source={require('../../Images/discoverycenter/btn-delete.png')} />
                 </TouchableOpacity>
@@ -64,12 +64,12 @@ export default class DiscoveryCenter extends Component {
           </View>
           <View style={styles.card}>
             <View style={styles.header}>
-              <View style={styles.sourcesLeftContainer}>
+              <View style={styles.leftContainer}>
                 <TouchableOpacity>
                   <Image source={require('../../Images/discoverycenter/btn-delete.png')} />
                 </TouchableOpacity>
               </View>
-              <View style={styles.sourcesRightContainer}>
+              <View style={[styles.rightContainer, {justifyContent: 'flex-end'}]}>
                 <TouchableOpacity>
                   <Image source={require('../../Images/discoverycenter/btn-duplicate.png')} />
                 </TouchableOpacity>
@@ -80,7 +80,7 @@ export default class DiscoveryCenter extends Component {
             </View>
             <View style={styles.chart}>
               <Image source={require('../../Images/discoverycenter/chart-blankslate.png')} />
-              <View style={styles.chartHeader}>
+              <View style={[styles.chartHeader, {paddingLeft: 10}]}>
                 <TouchableOpacity>
                   <Text style={[styles.chartButton, {color: '#FFFFFF'}]}>BAR CHART</Text>
                 </TouchableOpacity>
@@ -109,12 +109,12 @@ export default class DiscoveryCenter extends Component {
           </View>
           <View style={styles.card}>
             <View style={styles.header}>
-              <View style={styles.sourcesLeftContainer}>
+              <View style={styles.leftContainer}>
                 <TouchableOpacity>
                   <Image source={require('../../Images/discoverycenter/btn-delete.png')} />
                 </TouchableOpacity>
               </View>
-              <View style={styles.sourcesRightContainer}>
+              <View style={[styles.rightContainer, {justifyContent: 'flex-end'}]}>
                 <TouchableOpacity>
                   <Image source={require('../../Images/discoverycenter/btn-duplicate.png')} />
                 </TouchableOpacity>
@@ -126,18 +126,17 @@ export default class DiscoveryCenter extends Component {
             <View style={styles.chart}>
               <Image source={require('../../Images/discoverycenter/chart-blankslate.png')} />
               <View style={styles.chartHeader}>
-                <TouchableOpacity>
-                  <Text style={[styles.chartButton, {color: '#FFFFFF'}]}>BAR CHART</Text>
+                <TouchableOpacity style={styles.leftContainer}>
+                  <Image source={require('../../Images/discoverycenter/chart-icn-bar-yaxis.png')} />
+                  <Text style={styles.chartProperty}>Choose Y Axis</Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
-                  <Text style={[styles.chartButton, {color: '#FFFFFF'}]}>PIE CHART</Text>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <Text style={[styles.chartButton, {color: '#FFFFFF'}]}>CLOUD</Text>
+                <TouchableOpacity style={styles.rightContainer}>
+                  <Image style={styles.chartIcon} source={require('../../Images/discoverycenter/chart-icn-bar-xaxis.png')} />
+                  <Text style={styles.chartProperty}>Choose X Axis</Text>
                 </TouchableOpacity>
               </View>
               <View style={styles.chartFooter}>
-                <View style={styles.sourcesRightContainer}>
+              <View style={[styles.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
                   <TouchableOpacity>
                     <Image source={require('../../Images/discoverycenter/btn-fullscreen.png')} />
                   </TouchableOpacity>
@@ -186,21 +185,24 @@ const styles = StyleSheet.create({
   header: {
     flex: 0,
     flexDirection: 'row',
-    height: 44,
     justifyContent: 'center',
-    paddingHorizontal: 10,
   },
-  sourcesLeftContainer: {
+  leftContainer: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
+    borderRightWidth: StyleSheet.hairlineWidth,
+    borderRightColor: 'rgba(255, 255, 255, 0.35)',
+    paddingHorizontal: 10,
+    height: 44,
   },
-  sourcesRightContainer: {
+  rightContainer: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'flex-end',
     alignItems: 'center',
+    paddingHorizontal: 10,
+    height: 44,
   },
   share: {
     paddingLeft: 10,
@@ -233,15 +235,19 @@ const styles = StyleSheet.create({
     top: 0,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: 'rgba(255, 255, 255, 0.35)',
-    height: 44,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 10,
+    height: 44,
   },
   chartButton: {
     fontSize: 11,
     fontWeight: 'bold',
     paddingRight: 15,
+  },
+  chartProperty: {
+    fontSize: 11,
+    paddingLeft: 5,
+    color: '#FFFFFF'
   },
   chartFooter: {
     flex: 1,
