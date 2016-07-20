@@ -5,20 +5,28 @@ import React, { Component, PropTypes } from 'react';
 const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
 
 import {
-  ListView,
   RecyclerViewBackedScrollView,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
+import { ListView } from '../../Components/Common/DatabaseListView';
 
 import {
   Colors,
+  Constants,
   StyleSheet,
   Localizable
 } from '../../Common';
 
+const {
+  SourceType,
+  SphereType
+} = Constants;
+
 import { PieChart, SourcesBarChart, SpheresBarChart } from '../../Components/Charts';
+
+import { Book, Sphere } from '../../Database';
 
 type Props = {
   bible: Object,
@@ -38,11 +46,11 @@ export default class BookSpheres extends Component {
   constructor(props: Props) {
     super(props);
 
-    const book = props.bible.books.find(book => book.id === props.bookID);
+    const book = Book.findByID(props.bookID);
 
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
-    const spheres = props.bible.spheres.map(sphere => {
-      return ({...sphere, bookWordCount: book.sphereCounts[sphere.id]});
+    const spheres = Sphere.all().map(sphere => {
+      return ({...sphere, bookWordCount: book.countOfSphereType(sphere.id)});
     });
 
     this.state = {
@@ -84,7 +92,7 @@ export default class BookSpheres extends Component {
               style={{flex: 0, marginLeft: 4}}
               barStyle={{width: 4, height: 24, marginHorizontal: 2}}
               horizontal={false}
-              data={[{family: book.sphereCounts.family}, {economics: book.sphereCounts.economics}, {government: book.sphereCounts.government}, {religion: book.sphereCounts.religion}, {education: book.sphereCounts.education}, {communication: book.sphereCounts.communication}, {celebration: book.sphereCounts.celebration}]}
+              data={[{family: book.countOfSphereType(SphereType.FAMILY)}, {economics: book.countOfSphereType(SphereType.ECONOMICS)}, {government: book.countOfSphereType(SphereType.GOVERNMENT)}, {religion: book.countOfSphereType(SphereType.RELIGION)}, {education: book.countOfSphereType(SphereType.EDUCATION)}, {communication: book.countOfSphereType(SphereType.COMMUNICATION)}, {celebration: book.countOfSphereType(SphereType.CELEBRATION)}]}
             />
           </View>
           <Text style={StyleSheet.styles.statisticSubtitle}>Spheres</Text>
@@ -95,7 +103,7 @@ export default class BookSpheres extends Component {
 
   _renderRow = (sphere: Object) => {
     const { book } = this.state;
-    const wordCount = sphere.bookWordCount;
+    const wordCount = book.countOfSphereType(sphere.id);
     const spherePercent = (wordCount / book.sphereWordCount) * 100;
     const tintColor = Colors.spheres[sphere.id].tint;
     const lightTintColor = Colors.spheres[sphere.id].lightTint;
@@ -104,7 +112,7 @@ export default class BookSpheres extends Component {
       <TouchableOpacity style={styles.listItemContainer} onPress={() => this.props.onPressSphere(sphere)}>
         <PieChart
           color={tintColor}
-          slices={[{color: tintColor, value: wordCount}, {color: lightTintColor, value: book.sphereWordCount}]}
+          slices={[{color: tintColor, value: spherePercent}, {color: lightTintColor, value: 100 - spherePercent}]}
           label={Localizable.toPercentage(spherePercent, {precision: 0})}
           size={57}
           style={styles.pie}
