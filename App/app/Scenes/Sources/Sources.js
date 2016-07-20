@@ -5,13 +5,13 @@ import React, { Component, PropTypes } from 'react';
 const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
 
 import {
-  ListView,
   Platform,
   RecyclerViewBackedScrollView,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
+import { ListView } from '../../Components/Common/DatabaseListView';
 
 import {
   Colors,
@@ -26,6 +26,8 @@ import { ReadingTime } from '../../Common/NumberHelper';
 import SourceIcon from '../../Components/Common/SourceIcon';
 
 const LISTVIEW_REF = 'LISTVIEW_REF';
+
+import { Source } from '../../Database';
 
 type Props = {
   bible: Object,
@@ -51,7 +53,7 @@ export default class Sources extends Component {
     super(props);
 
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
-    const sources = props.bible.sources.slice(0).sort((a, b) => (a.firstInitial || 'ZZZZZ') > (b.firstInitial || 'ZZZZZ') ? 1 : -1);
+    const sources = Source.all().sorted('firstInitial').sorted('name');
     const { rows, sections } = this._getRowsAndSections(sources);
 
     this.state = {
@@ -104,7 +106,7 @@ export default class Sources extends Component {
   }
 
   _renderSectionHeader = (sectionData: Object, sectionID: any) => {
-    const title = sectionID || '#';
+    const title = sectionID;
     return (
       <View style={styles.sectionHeaderContainer}>
         <Text style={styles.sectionHeaderTitle}>{title}</Text>
@@ -159,6 +161,10 @@ export default class Sources extends Component {
       }
       rows[section].push(source);
     });
+
+    const numericSection = sections[0];
+    sections.shift();
+    sections.push(numericSection);
 
     return {rows, sections};
   };

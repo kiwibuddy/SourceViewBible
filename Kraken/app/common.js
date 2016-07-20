@@ -86,7 +86,7 @@ export function getChapterID(book: Object, chapterNumber: number) {
 
 export function firstInitial(name: string) {
   const firstInitial = name.charAt(0);
-  return isNumber(firstInitial) ? null : firstInitial;
+  return isNumber(firstInitial) ? '#' : firstInitial;
 }
 
 export function getSourceID(name: string) {
