@@ -1,6 +1,20 @@
 /* @flow */
 'use strict';
 
+import Realm from 'realm';
+
+const BibleSchema = {
+  name: 'Bible',
+  properties: {
+    wordCount: 'int',
+  }
+};
+
+class Bible extends Realm.Object {
+
+}
+Bible.schema = BibleSchema;
+
 const BookSchema = {
   name: 'Book',
   primaryKey: 'id',
@@ -29,7 +43,7 @@ const BookSchema = {
   }
 };
 
-class Book {
+class Book extends Realm.Object {
 
 }
 Book.schema = BookSchema;
@@ -53,7 +67,7 @@ const ChapterSchema = {
   }
 };
 
-class Chapter {
+class Chapter extends Realm.Object {
 
 }
 Chapter.schema = ChapterSchema;
@@ -71,7 +85,7 @@ const SourceSchema = {
   }
 };
 
-class Source {
+class Source extends Realm.Object {
 
 }
 Source.schema = SourceSchema;
@@ -87,7 +101,7 @@ const SourceRelationSchema = {
   }
 };
 
-class SourceRelation {
+class SourceRelation extends Realm.Object {
 
 }
 SourceRelation.schema = SourceRelationSchema;
@@ -106,7 +120,7 @@ const SphereSchema = {
   }
 };
 
-class Sphere {
+class Sphere extends Realm.Object {
 
 }
 Sphere.schema = SphereSchema;
@@ -119,7 +133,7 @@ const CountSchema = {
   }
 };
 
-class Count {
+class Count extends Realm.Object {
 
 }
 Count.schema = CountSchema;
@@ -132,7 +146,7 @@ const ContentSchema = {
   }
 };
 
-class Content {
+class Content extends Realm.Object {
 
 }
 Content.schema = ContentSchema;
@@ -145,10 +159,10 @@ const OccurrenceSchema = {
   }
 };
 
-class Occurrence {
+class Occurrence extends Realm.Object {
 
 }
 Occurrence.schema = OccurrenceSchema;
 
-const Schema = [Book, Chapter, Source, SourceRelation, Sphere, Count, Content, Occurrence];
+const Schema = [Bible, Book, Chapter, Source, SourceRelation, Sphere, Count, Content, Occurrence];
 export default Schema;

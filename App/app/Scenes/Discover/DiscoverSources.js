@@ -29,7 +29,7 @@ import SourceIcon from '../../Components/Common/SourceIcon';
 
 const MAXIMUM_SOURCE_COUNT = 9;
 
-import { Book, Source } from '../../Database';
+import { Bible, Book, Source } from '../../Database';
 
 type Props = {
   onPressSource: Function,
@@ -104,7 +104,7 @@ export default class DiscoverSources extends Component {
       "Jesus": "god"
     };
 
-    const sourcePercent = (source.wordCount / Book.wordCount) * 100;
+    const sourcePercent = (source.wordCount / Bible.wordCount) * 100;
     const sourceType = SOURCE_TYPE_MAP[source.name] || 'support';
 
     return (

@@ -4,6 +4,21 @@
 import Realm from 'realm';
 const RNFS = require('react-native-fs');
 
+const BibleSchema = {
+  name: 'Bible',
+  properties: {
+    wordCount: 'int',
+  }
+};
+
+export class Bible extends Realm.Object {
+  static get wordCount() {
+    const bible = realm.objects('Bible')[0];
+    return bible.wordCount;
+  }
+}
+Bible.schema = BibleSchema;
+
 const BookSchema = {
   name: 'Book',
   primaryKey: 'id',
@@ -199,7 +214,7 @@ export class Occurrence extends Realm.Object {
 }
 Occurrence.schema = OccurrenceSchema;
 
-const SourceViewSchema = [Book, Chapter, Source, SourceRelation, Sphere, Count, Content, Occurrence];
+const SourceViewSchema = [Bible, Book, Chapter, Source, SourceRelation, Sphere, Count, Content, Occurrence];
 
 const realm = new Realm({
   path: RNFS.MainBundlePath + '/Datasets/en/NLT/SourceView.realm',

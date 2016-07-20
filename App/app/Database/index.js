@@ -2,6 +2,7 @@
 'use strict';
 
 import {
+  Bible,
   Book,
   Chapter,
   Source,
@@ -9,6 +10,7 @@ import {
 } from './Realm';
 
 module.exports = {
+  Bible,
   Book,
   Chapter,
   Source,

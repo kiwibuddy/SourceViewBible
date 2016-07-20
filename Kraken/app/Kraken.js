@@ -51,12 +51,24 @@ async function seed(emdros) {
   await seedSources(emdros, realm);
 
   await seedSpheres(emdros, realm);
+
+  await seedBible(emdros, realm);
 }
 
 async function seedBaseObjects(emdros) {
   console.log('Seeding Base Objects');
+
   await seedBookObjects(emdros, realm);
   await seedChapterObjects(emdros, realm);
   await seedSourceObjects(emdros, realm);
   await seedSphereObjects(emdros, realm);
+}
+
+async function seedBible(emdros: Object, realm) {
+  console.log('Seeding Bible');
+  
+  realm.write(() => {
+    const wordCount = realm.objects('Book').reduce((sum, book) => sum += book.wordCount, 0);
+    realm.create('Bible', {wordCount});
+  })
 }

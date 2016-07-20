@@ -28,7 +28,7 @@ const WIDTH = Dimensions.get('window').width;
 const CAROUSEL_ITEM_SIZE = 80;
 const MAXIMUM_BOOK_COUNT = 5;
 
-import { Book, Sphere } from '../../Database';
+import { Bible, Book, Sphere } from '../../Database';
 
 type Props = {
   sphereID?: string,
@@ -67,7 +67,7 @@ export default class Spheres extends Component {
 
   render() {
     const { sphere, books } = this.state;
-    const spherePercent = (sphere.wordCount / Book.wordCount) * 100;
+    const spherePercent = (sphere.wordCount / Bible.wordCount) * 100;
     const bookRows = books.map(book => this._renderBookRow(book));
     return (
       <ScrollView style={styles.container}>
