@@ -18,6 +18,9 @@ import {
   Localizable
 } from '../../Common';
 
+// $FlowFixMe: Can't find os module extension
+import LinearGradient from 'react-native-linear-gradient';
+
 import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigation';
 
 type Props = {
@@ -75,7 +78,7 @@ export default class DiscoveryCenter extends Component {
                 </TouchableOpacity>
               </View>
             </View>
-            <View style={styles.video}>
+            <View style={styles.chart}>
               <Image source={require('../../Images/discoverycenter/dc-chartblankslate.png')} />
             </View>
             <View style={styles.message}>
@@ -149,6 +152,8 @@ const styles = StyleSheet.create({
       height: 1,
       width: 0,
     },
+    height: 295,
+    backgroundColor: '#5B6771',
   },
   videoPlay: {
     flex: 1,
