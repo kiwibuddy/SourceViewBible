@@ -77,7 +77,12 @@ const ChapterSchema = {
 };
 
 export class Chapter extends Realm.Object {
-
+  get monadSet(): Object {
+    return {
+      first: this.firstMonad,
+      last: this.lastMonad
+    };
+  }
 }
 Chapter.schema = ChapterSchema;
 
