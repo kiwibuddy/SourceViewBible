@@ -5,13 +5,13 @@ import React, { Component, PropTypes } from 'react';
 const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
 
 import {
-  ListView,
   Platform,
   RecyclerViewBackedScrollView,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
+import { ListView } from '../../Components/Common/DatabaseListView';
 
 import {
   Colors,
@@ -24,7 +24,7 @@ import SegmentedControl from '../../Components/Common/SegmentedControl';
 import { SourcesBarChart, SpheresBarChart } from '../../Components/Charts';
 import { ReadingTime } from '../../Common/NumberHelper';
 
-const Bible = require('../../Locale/en/NLT/SourceView.json');
+// const Bible = require('../../Locale/en/NLT/SourceView.json');
 
 const SEGMENTS = [Localizable.t('textual'), Localizable.t('alphabetical'), Localizable.t('principality')];
 const SEGMENT_INDEXES = {
@@ -35,17 +35,9 @@ const SEGMENT_INDEXES = {
 
 const LISTVIEW_REF = 'LISTVIEW_REF';
 
-const OLD_TESTAMENT_BOOKS = Bible.books.filter((book) => {
-  return book.testament === 0;
-});
+import { Book } from '../../Database';
 
-const NEW_TESTAMENT_BOOKS = Bible.books.filter((book) => {
-  return book.testament === 1;
-});
-
-const BOOKS_SORTED_BY_ALPHABET = Bible.books.slice(0).sort((a, b) => a.name > b.name ? 1 : -1);
-const BOOKS_SORTED_BY_PRINCIPALITY = Bible.books.slice(0).sort((a, b) => a.wordCount > b.wordCount ? -1 : 1);
-const MAX_BOOK_WORD_COUNT = Math.max.apply(Math, Bible.books.map(book => book.wordCount));
+const MAX_BOOK_WORD_COUNT = Math.max.apply(Math, Book.all().map(book => book.wordCount));
 
 type Props = {
   onPressBook: Function,
@@ -129,13 +121,13 @@ export default class Books extends Component {
   _getDataSource = (segmentIndex: number) => {
     switch (segmentIndex) {
       case SEGMENT_INDEXES.ALPHABETICAL:
-        return this.state.dataSource.cloneWithRowsAndSections({alphabetical: BOOKS_SORTED_BY_ALPHABET});
+        return this.state.dataSource.cloneWithRowsAndSections({alphabetical: Book.all().sorted('name')});
 
       case SEGMENT_INDEXES.PRINCIPALITY:
-        return this.state.dataSource.cloneWithRowsAndSections({principality: BOOKS_SORTED_BY_PRINCIPALITY});
+        return this.state.dataSource.cloneWithRowsAndSections({principality: Book.all().sorted('wordCount', true)});
 
       default:
-        return this.state.dataSource.cloneWithRowsAndSections({old: OLD_TESTAMENT_BOOKS, new: NEW_TESTAMENT_BOOKS});
+        return this.state.dataSource.cloneWithRowsAndSections({textOrder: Book.all().sorted('textOrder')});
     }
   };
 
