@@ -80,6 +80,8 @@ export default class DiscoveryCenter extends Component {
             </View>
             <View style={styles.chart}>
               <Image source={require('../../Images/discoverycenter/dc-chartblankslate.png')} />
+              <View style={styles.chartHeader}></View>
+              <View style={styles.chartFooter}></View>
             </View>
             <View style={styles.message}>
               <Text>Placeholder</Text>
@@ -145,6 +147,8 @@ const styles = StyleSheet.create({
     },
   },
   chart: {
+    height: 295,
+    backgroundColor: '#5B6771',
     shadowColor: 'black',
     shadowOpacity: 0.1,
     shadowRadius: 0.8,
@@ -152,8 +156,26 @@ const styles = StyleSheet.create({
       height: 1,
       width: 0,
     },
-    height: 295,
-    backgroundColor: '#5B6771',
+  },
+  chartHeader: {
+    flex: 1,
+    position: 'absolute',
+    right: 0,
+    left: 0,
+    top: 0,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: 'white',
+    height: 44,
+  },
+  chartFooter: {
+    flex: 1,
+    position: 'absolute',
+    right: 0,
+    left: 0,
+    top: 200,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: 'white',
+    height: 44,
   },
   videoPlay: {
     flex: 1,
