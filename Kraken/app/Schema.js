@@ -14,6 +14,7 @@ const Book = {
     chapters: {type: 'list', objectType: 'Chapter'},
     maxChapterWordCount: {type: 'int', default: 0},
     maxSourceWordCount: {type: 'int', default: 0},
+    maxChapterSphereWordCount: {type: 'int', default: 0},
     sourceCount: {type: 'int', default: 0},
     sourceRelations: {type: 'list', objectType: 'SourceRelation'},
     sourceTypeCount: {type: 'int', default: 0},

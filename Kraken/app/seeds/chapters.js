@@ -225,11 +225,31 @@ async function seedSphereCounts(emdros, realm) {
           const chapterData = bookData["Chapter"]["chapter"];
           if (chapterData != null) {
             console.log(`Seeding ${book.name} Chapter Sphere Word Counts...`);
+
             realm.write(() => {
+              let maxChapterSphereWordCount = 0;
+
               for (let [index, chapter] of book.chapters.entries()) {
                 const spheresData = chapterData[chapter.chapterNumber.toString()]["Token"];
                 seedObjectSphereWordCounts(realm, 'Chapter', chapter.id, spheresData);
+
+                if (spheresData != null) {
+                  let chapterSphereWordCount = 0;
+                  Object.keys(spheresData).forEach((sphereName) => {
+                    const sphereData = spheresData[sphereName];
+                    const wordCount = sphereData.true;
+                    if (wordCount && wordCount > 0) {
+                      chapterSphereWordCount += wordCount;
+                    }
+                  });
+
+                  if (chapterSphereWordCount > maxChapterSphereWordCount) {
+                    maxChapterSphereWordCount = chapterSphereWordCount;
+                  }
+                }
               }
+
+              realm.create('Book', {id: book.id, maxChapterSphereWordCount}, true)
             });
           }
         }
