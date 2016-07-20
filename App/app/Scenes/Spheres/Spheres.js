@@ -40,7 +40,8 @@ type Props = {
 };
 
 type State = {
-  sphere: Object
+  sphere: Object,
+  books: any,
 };
 
 export default class Spheres extends Component {
@@ -54,16 +55,19 @@ export default class Spheres extends Component {
     if (props.sphereID) {
       sphere = Sphere.findByID(props.sphereID);
     } else {
-      sphere = Sphere.all().slice(0, 1);
+      sphere = Sphere.all()[0];
     }
 
-    this.state = {sphere};
+    const books = this._getBooks(sphere);
+    this.state = {
+      sphere,
+      books
+    };
   }
 
   render() {
-    const { sphere } = this.state;
+    const { sphere, books } = this.state;
     const spherePercent = (sphere.wordCount / Book.wordCount) * 100;
-    const books = this._getBooks();
     const bookRows = books.map(book => this._renderBookRow(book));
     return (
       <ScrollView style={styles.container}>
@@ -185,8 +189,7 @@ export default class Spheres extends Component {
     );
   };
 
-  _getBooks = () => {
-    const { sphere } = this.state;
+  _getBooks = (sphere: Object) => {
     return Book.all().map(book => book).sort((bookA, bookB) => {
       const bookAWordCount = sphere.countOfBook(bookA.id);
       const bookAPercent = (bookAWordCount / bookA.wordCount);
