@@ -12,8 +12,6 @@ import ReactNative, {
 } from 'react-native';
 import { ListView } from '../../Components/Common/DatabaseListView';
 
-import { Source } from '../../Database';
-
 const { width } = Dimensions.get('window');
 
 import {
@@ -30,6 +28,8 @@ import Localizable from '../../Common/Localizable';
 import SourceIcon from '../../Components/Common/SourceIcon';
 
 const MAXIMUM_SOURCE_COUNT = 9;
+
+import { Book, Source } from '../../Database';
 
 type Props = {
   onPressSource: Function,
@@ -104,7 +104,7 @@ export default class DiscoverSources extends Component {
       "Jesus": "god"
     };
 
-    const sourcePercent = (source.wordCount / this.props.bible.wordCount) * 100;
+    const sourcePercent = (source.wordCount / Book.wordCount) * 100;
     const sourceType = SOURCE_TYPE_MAP[source.name] || 'support';
 
     return (

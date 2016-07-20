@@ -25,7 +25,6 @@ import ParallaxMotionView from '../../Components/Common/ParallaxMotionView';
 import { Sphere } from '../../Database';
 
 type Props = {
-  bible: Object,
   sphereID: string,
   onPressWords: Function,
 };

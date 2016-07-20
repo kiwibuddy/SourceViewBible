@@ -23,7 +23,6 @@ import { BarChart, PieChart } from '../../Components/Charts';
 import { Book, Sphere } from '../../Database';
 
 type Props = {
-  bible: Object,
   onPressBook: Function,
   sphereID: string,
 };

@@ -18,7 +18,6 @@ import {
 import { Source } from '../../Database';
 
 type Props = {
-  bible: Object,
   sourceID: string,
 };
 

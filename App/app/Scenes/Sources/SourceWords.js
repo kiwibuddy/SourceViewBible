@@ -25,7 +25,6 @@ import ParallaxMotionView from '../../Components/Common/ParallaxMotionView';
 import { Source } from '../../Database';
 
 type Props = {
-  bible: Object,
   sourceID: string,
   onPressWords: Function,
 };

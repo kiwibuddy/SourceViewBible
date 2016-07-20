@@ -38,7 +38,11 @@ export class Book extends Realm.Object {
   }
 
   static findByID(id: string) {
-    return realm.objectForPrimaryKey('Book', id);
+    return realm.objectForPrimaryKey('Book', id || '');
+  }
+
+  static get wordCount() {
+    return realm.objects('Book').reduce((sum, book) => sum += book.wordCount, 0);
   }
 
   countOfSourceType(sourceType: string): number {
@@ -105,7 +109,7 @@ export class Source extends Realm.Object {
   }
 
   static findByID(id: string) {
-    return realm.objectForPrimaryKey('Source', id);
+    return realm.objectForPrimaryKey('Source', id || '');
   }
 }
 Source.schema = SourceSchema;
@@ -146,7 +150,7 @@ export class Sphere extends Realm.Object {
   }
 
   static findByID(id: string) {
-    return realm.objectForPrimaryKey('Sphere', id);
+    return realm.objectForPrimaryKey('Sphere', id || '');
   }
 
   countOfBook(bookID: string): number {

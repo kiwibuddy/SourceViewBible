@@ -12,8 +12,6 @@ import ReactNative, {
 } from 'react-native';
 import { ListView } from '../../Components/Common/DatabaseListView';
 
-import { Sphere } from '../../Database';
-
 const { width } = Dimensions.get('window');
 
 import {
@@ -30,6 +28,8 @@ import Localizable from '../../Common/Localizable';
 import Icon from '../../Components/Common/Icon';
 
 const MAXIMUM_SPHERE_COUNT = 9;
+
+import { Book, Sphere } from '../../Database';
 
 type Props = {
   onPressSphere: Function,
@@ -107,7 +107,7 @@ export default class DiscoverSpheres extends Component {
       return this._renderBlank();
     }
 
-    const spherePercent = (sphere.wordCount / this.props.bible.wordCount) * 100;
+    const spherePercent = (sphere.wordCount / Book.wordCount) * 100;
     const iconName = `icon-${sphere.id}-filled`;
     return (
       <TouchableOpacity style={styles.itemContainer} onPress={ () => this.props.onPressSphere(sphere) }>

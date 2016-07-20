@@ -22,7 +22,6 @@ import Icon from '../../Components/Common/Icon';
 import { Sphere } from '../../Database';
 
 type Props = {
-  bible: Object,
   sphereID: string,
 };
 

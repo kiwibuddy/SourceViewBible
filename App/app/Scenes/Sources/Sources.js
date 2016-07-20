@@ -30,7 +30,6 @@ const LISTVIEW_REF = 'LISTVIEW_REF';
 import { Source } from '../../Database';
 
 type Props = {
-  bible: Object,
   onPressSource: Function,
 };
 

@@ -28,8 +28,9 @@ const WIDTH = Dimensions.get('window').width;
 const CAROUSEL_ITEM_SIZE = 80;
 const MAXIMUM_BOOK_COUNT = 5;
 
+import { Book, Sphere } from '../../Database';
+
 type Props = {
-  bible: Object,
   sphereID?: string,
   onPressBook: Function,
   onPressBooks: Function,
@@ -51,9 +52,9 @@ export default class Spheres extends Component {
 
     let sphere = null;
     if (props.sphereID) {
-      sphere = props.bible.spheres.find(sphere => sphere.id === props.sphereID);
+      sphere = Sphere.findByID(props.sphereID);
     } else {
-      sphere = props.bible.spheres[0];
+      sphere = Sphere.all().slice(0, 1);
     }
 
     this.state = {sphere};
@@ -61,7 +62,7 @@ export default class Spheres extends Component {
 
   render() {
     const { sphere } = this.state;
-    const spherePercent = (sphere.wordCount / this.props.bible.wordCount) * 100;
+    const spherePercent = (sphere.wordCount / Book.wordCount) * 100;
     const books = this._getBooks();
     const bookRows = books.map(book => this._renderBookRow(book));
     return (
@@ -157,7 +158,7 @@ export default class Spheres extends Component {
 
   _renderBookRow = (book: Object) => {
     const { sphere } = this.state;
-    const wordCount = sphere.bookCounts[book.id];
+    const wordCount = sphere.countOfBook(book.id);
     const spherePercent = (wordCount / book.wordCount) * 100;
 
     return (
@@ -185,13 +186,12 @@ export default class Spheres extends Component {
   };
 
   _getBooks = () => {
-    const { bible } = this.props;
     const { sphere } = this.state;
-    return bible.books.slice(0).sort((bookA, bookB) => {
-      const bookAWordCount = sphere.bookCounts[bookA.id];
+    return Book.all().map(book => book).sort((bookA, bookB) => {
+      const bookAWordCount = sphere.countOfBook(bookA.id);
       const bookAPercent = (bookAWordCount / bookA.wordCount);
 
-      const bookBWordCount = sphere.bookCounts[bookB.id];
+      const bookBWordCount = sphere.countOfBook(bookB.id);
       const bookBPercent = (bookBWordCount / bookB.wordCount);
 
       if (bookAPercent == bookBPercent) {

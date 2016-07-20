@@ -25,7 +25,6 @@ import Icon from '../../Components/Common/Icon';
 import { Source } from '../../Database';
 
 type Props = {
-  bible: Object,
   sourceID: string,
   onPressBooks: Function,
   onPressConversations: Function,

@@ -16,8 +16,6 @@ import {
   StyleSheet,
 } from '../../Common';
 
-const Bible = require('../../Locale/en/NLT/SourceView.json');
-
 import Bookmarks from '../../Scenes/Bookmarks/Bookmarks';
 import BookChapters from '../../Scenes/Books/BookChapters';
 import BookOverview from '../../Scenes/Books/BookOverview';
@@ -39,6 +37,8 @@ import SphereBooks from '../../Scenes/Spheres/SphereBooks';
 import SpherePassages from '../../Scenes/Spheres/SpherePassages';
 import SphereSources from '../../Scenes/Spheres/SphereSources';
 import SphereWords from '../../Scenes/Spheres/SphereWords';
+
+import { Book, Source, Sphere } from '../../Database';
 
 export default class App extends Component {
   state = {
@@ -88,7 +88,6 @@ export default class App extends Component {
     switch (route.key) {
       case '/Bookmarks':
         return <Bookmarks
-          bible={Bible}
           onPressDone={() => this._popRoute()}
           onPressRoute={(route) => {
             this._popRoute(() => {
@@ -98,18 +97,15 @@ export default class App extends Component {
         />;
       case '/Books':
         return <Books
-          bible={Bible}
           onPressBook={book => this._pushRoute({key: '/Books/Overview', bookID: book.id, title: Localizable.t('book-overview', {name: book.name})})}
         />;
       case '/Books/Chapters':
         return <BookChapters
-          bible={Bible}
           bookID={route.bookID}
           onPressScripture={({book, chapterNumber}) => this._pushRoute({key: '/Reader', bookID: route.bookID, chapterNumber, title: book.name})}
         />;
       case '/Books/Overview':
         return <BookOverview
-          bible={Bible}
           bookID={route.bookID}
           onPressChapters={() => this._pushRoute({key: '/Books/Chapters', bookID: route.bookID, title: Localizable.t('book-chapters', {name: book.name})})}
           onPressScripture={({book, chapterNumber}) => this._pushRoute({key: '/Reader', bookID: book.id, chapterNumber, title: book.name})}
@@ -120,26 +116,22 @@ export default class App extends Component {
         />;
       case '/Books/Sources':
         return <BookSources
-          bible={Bible}
           bookID={route.bookID}
           onPressScripture={({book, chapterNumber}) => this._pushRoute({key: '/Reader', bookID: book.id, chapterNumber, title: book.name})}
           onPressSource={(source) => this._pushRoute({key: '/Sources/Overview', sourceID: source.id, bookID: route.bookID, title: Localizable.t('book-source', {book: book.name, source: source.name})})}
         />;
       case '/Books/Spheres':
         return <BookSpheres
-          bible={Bible}
           bookID={route.bookID}
           onPressSphere={sphere => this._pushRoute({key: '/Spheres', sphereID: sphere.id, title: Localizable.t('spheres.text')})}
         />;
       case '/Books/Words':
         return <BookWords
-          bible={Bible}
           bookID={route.bookID}
           onPressWords={() => {}}
         />;
       case '/Discover':
         return <Discover
-          bible={Bible}
           onPressBook={book => this._pushRoute({key: '/Books/Overview', bookID: book.id, title: Localizable.t('book-overview', {name: book.name})})}
           onPressBooks={() => this._pushRoute({key: '/Books', title: Localizable.t('books')})}
           onPressScripture={({book, chapterNumber}) => this._pushRoute({key: '/Reader', bookID: book.id, chapterNumber, title: book.name})}
@@ -150,23 +142,19 @@ export default class App extends Component {
         />;
       case '/DiscoveryCenter':
         return <DiscoveryCenter
-          bible={Bible}
           onPressDone={() => this._popRoute()}
         />;
       case '/Reader':
         return <Reader
-          bible={Bible}
           bookID={route.bookID}
           chapterNumber={route.chapterNumber || 1
         }/>;
       case '/Sources':
         return <Sources
-          bible={Bible}
           onPressSource={(source) => source && this._pushRoute({key: '/Sources/Overview', sourceID: source.id, title: source.name})}
         />;
       case '/Sources/Overview':
         return <SourceOverview
-          bible={Bible}
           onPressBooks={() => this._pushRoute({key: '/Sources/Books', sourceID: route.sourceID, title: Localizable.t('source-books', {name: source.name})})}
           onPressConversations={() => this._pushRoute({key: '/Sources/Conversations', sourceID: route.sourceID, title: Localizable.t('source-conversations', {name: source.name})})}
           onPressSource={(source) => source && this._pushRoute({key: '/Sources/Overview', sourceID: source.id, title: source.name})}
@@ -176,27 +164,22 @@ export default class App extends Component {
         />;
       case '/Sources/Books':
         return <SourceBooks
-          bible={Bible}
           sourceID={route.sourceID}
         />;
       case '/Sources/Conversations':
         return <SourceConversations
-          bible={Bible}
           sourceID={route.sourceID}
         />;
       case '/Sources/Spheres':
         return <SourceSpheres
-          bible={Bible}
           sourceID={route.sourceID}
         />;
       case '/Sources/Words':
         return <SourceWords
-          bible={Bible}
           sourceID={route.sourceID}
         />;
       case '/Spheres':
         return <Spheres
-          bible={Bible}
           onPressBook={({sphere, book}) => this._pushRoute({key: '/Books/Overview', bookID: book.id, title: Localizable.t('book-overview', {name: book.name})})}
           onPressBooks={({sphere}) => this._pushRoute({key: '/Spheres/Books', sphereID: sphere.id, title: sphere.name })}
           onPressPassages={({sphere}) => this._pushRoute({key: '/Spheres/Passages', sphereID: sphere.id, title: sphere.name })}
@@ -206,23 +189,19 @@ export default class App extends Component {
         />;
       case '/Spheres/Books':
         return <SphereBooks
-          bible={Bible}
           onPressBook={({sphere, book}) => this._pushRoute({key: '/Books/Overview', bookID: book.id, title: Localizable.t('book-overview', {name: book.name})})}
           sphereID={route.sphereID}
         />;
       case '/Spheres/Passages':
         return <SpherePassages
-          bible={Bible}
           sphereID={route.sphereID}
         />;
       case '/Spheres/Sources':
         return <SphereSources
-          bible={Bible}
           sphereID={route.sphereID}
         />;
       case '/Spheres/Words':
         return <SphereWords
-          bible={Bible}
           onPressWords={() => {}}
           sphereID={route.sphereID}
         />;
@@ -328,15 +307,15 @@ export default class App extends Component {
   };
 
   _findBook(bookID: string) {
-    return Bible.books.find(book => book.id === bookID);
+    return Book.findByID(bookID);
   }
 
   _findSource(sourceID: string): Object {
-    return Bible.sources.find(source => source.id === sourceID);
+    return Source.findByID(sourceID)
   }
 
   _findSphere(sphereID: string): Object {
-    return Bible.spheres.find(sphere => sphere.id === sphereID);
+    return Sphere.findByID(sphereID);
   }
 }
 

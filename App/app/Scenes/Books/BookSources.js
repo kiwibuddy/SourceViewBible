@@ -30,7 +30,6 @@ import SourceIcon from '../../Components/Common/SourceIcon';
 import { Book } from '../../Database';
 
 type Props = {
-  bible: Object,
   bookID: string,
   onPressScripture: Function,
   onPressSource: Function,

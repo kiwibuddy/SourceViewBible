@@ -29,7 +29,6 @@ import { PieChart, SourcesBarChart, SpheresBarChart } from '../../Components/Cha
 import { Book, Sphere } from '../../Database';
 
 type Props = {
-  bible: Object,
   bookID: string,
   onPressSphere: Function,
 };

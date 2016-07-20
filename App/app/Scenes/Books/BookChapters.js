@@ -41,7 +41,6 @@ const LISTVIEW_REF = 'LISTVIEW_REF';
 import { Book } from '../../Database';
 
 type Props = {
-  bible: Object,
   bookID: string,
   onPressScripture: Function
 };

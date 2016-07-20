@@ -21,7 +21,6 @@ import DiscoverSources from './DiscoverSources';
 import DiscoverSpheres from './DiscoverSpheres';
 
 type Props = {
-  bible: Object,
   onPressBook: Function,
   onPressBooks: Function,
   onPressScripture: Function,
@@ -29,18 +28,17 @@ type Props = {
 
 export default class Discovery extends Component {
   render() {
-    const { bible } = this.props;
     return (
       <ScrollView style={styles.container}>
-        <DiscoverBooks bible={bible} onPressBook={this.props.onPressBook} onPressBooks={this.props.onPressBooks} onPressScripture={this.props.onPressScripture} />
+        <DiscoverBooks onPressBook={this.props.onPressBook} onPressBooks={this.props.onPressBooks} onPressScripture={this.props.onPressScripture} />
 
         <View style={styles.separator}></View>
 
-        <DiscoverSources bible={bible} onPressSource={this.props.onPressSource} onPressSources={this.props.onPressSources} />
+        <DiscoverSources onPressSource={this.props.onPressSource} onPressSources={this.props.onPressSources} />
 
         <View style={styles.separator}></View>
 
-        <DiscoverSpheres bible={bible} onPressSphere={this.props.onPressSphere} onPressSpheres={this.props.onPressSpheres} />
+        <DiscoverSpheres onPressSphere={this.props.onPressSphere} onPressSpheres={this.props.onPressSpheres} />
 
       </ScrollView>
     );

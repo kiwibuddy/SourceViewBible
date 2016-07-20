@@ -34,7 +34,6 @@ const MAX_NUMBER_OF_SOURCES = 4;
 import { Book } from '../../Database';
 
 type Props = {
-  bible: Object,
   bookID: string,
   onPressScripture: Function,
   onPressChapters: Function,

@@ -38,7 +38,6 @@ import Icon from '../../Components/Common/Icon';
 const MAXIMUM_BOOK_COUNT = 9;
 
 type Props = {
-  bible: Object,
   onPressBook: Function,
   onPressBooks: Function,
 };

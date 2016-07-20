@@ -20,7 +20,6 @@ import ScriptureView from './ScriptureView';
 import { Book } from '../../Database';
 
 type Props = {
-  bible: Object,
   bookID: string,
   chapterNumber: number,
 };
