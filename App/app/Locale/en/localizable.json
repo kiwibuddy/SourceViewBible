@@ -46,6 +46,7 @@
     "source-spheres": "{{name}} Spheres",
     "source-words": "Words of {{name}}",
     "discovery-center": "Discovery Center",
+    percentage: "Percentage",
     words: {
       count: {
         one: "1 word",

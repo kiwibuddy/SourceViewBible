@@ -5,6 +5,7 @@ import React, { Component, PropTypes } from 'react';
 const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
 
 import {
+  Platform,
   RecyclerViewBackedScrollView,
   Text,
   View,
@@ -20,7 +21,17 @@ import {
 
 import { BarChart, PieChart } from '../../Components/Charts';
 
+// $FlowFixMe: - Flow can't find os module extension
+import SegmentedControl from '../../Components/Common/SegmentedControl';
+
 import { Book, Sphere } from '../../Database';
+
+const SEGMENTS = [Localizable.t('textual'), Localizable.t('alphabetical'), Localizable.t('percentage')];
+const SEGMENT_INDEXES = {
+  TEXTUAL: 0,
+  ALPHABETICAL: 1,
+  PERCENTAGE: 2
+};
 
 type Props = {
   onPressBook: Function,
@@ -29,6 +40,7 @@ type Props = {
 
 type State = {
   dataSource: any,
+  selectedSegmentIndex: number,
   sphere: Object,
 };
 
@@ -41,23 +53,18 @@ export default class SphereBooks extends Component {
 
     const sphere = Sphere.findByID(props.sphereID);
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
-    const books = Book.all().map(book => book).sort((bookA, bookB) => {
-      const bookAWordCount = sphere.countOfBook(bookA.id);
-      const bookAPercent = (bookAWordCount / bookA.wordCount);
-
-      const bookBWordCount = sphere.countOfBook(bookB.id);
-      const bookBPercent = (bookBWordCount / bookB.wordCount);
-
-      if (bookAPercent == bookBPercent) {
-        return bookAWordCount > bookBWordCount ? -1 : 1;
-      }
-      return bookAPercent > bookBPercent ? -1 : 1;
-    });
 
     this.state = {
-      dataSource: dataSource.cloneWithRows(books),
+      dataSource: dataSource,
+      selectedSegmentIndex: SEGMENT_INDEXES.PERCENTAGE,
       sphere
     };
+  }
+
+  componentDidMount() {
+    this.setState({
+      dataSource: this._getDataSource(this.state.selectedSegmentIndex)
+    });
   }
 
   render() {
@@ -112,6 +119,13 @@ export default class SphereBooks extends Component {
           <View style={StyleSheet.styles.statisticKeyline} />
         </View>
         <View style={styles.sphereBooksGraph} />
+        <SegmentedControl
+          style={styles.segmentedControl}
+          tintColor={Colors.tintColor}
+          values={SEGMENTS}
+          selectedIndex={this.state.selectedSegmentIndex}
+          onValueChange={(value) => this._onSegmentedControlValueChanged(SEGMENTS.indexOf(value))}
+        />
       </View>
     );
   };
@@ -142,6 +156,40 @@ export default class SphereBooks extends Component {
         </View>
       </TouchableOpacity>
     );
+  };
+
+  _getDataSource = (segmentIndex: number) => {
+    const { sphere } = this.state;
+
+    switch (segmentIndex) {
+      case SEGMENT_INDEXES.TEXTUAL:
+        return this.state.dataSource.cloneWithRowsAndSections({textOrder: Book.all().sorted('textOrder')});
+
+      case SEGMENT_INDEXES.ALPHABETICAL:
+        return this.state.dataSource.cloneWithRowsAndSections({alphabetical: Book.all().sorted('name')});
+
+      default:
+        const books = Book.all().map(book => book).sort((bookA, bookB) => {
+          const bookAWordCount = sphere.countOfBook(bookA.id);
+          const bookAPercent = (bookAWordCount / bookA.wordCount);
+
+          const bookBWordCount = sphere.countOfBook(bookB.id);
+          const bookBPercent = (bookBWordCount / bookB.wordCount);
+
+          if (bookAPercent == bookBPercent) {
+            return bookAWordCount > bookBWordCount ? -1 : 1;
+          }
+          return bookAPercent > bookBPercent ? -1 : 1;
+        });
+        return this.state.dataSource.cloneWithRowsAndSections({percentage: books});
+    }
+  };
+
+  _onSegmentedControlValueChanged = (value: number) => {
+    this.setState({
+      selectedSegmentIndex: value,
+      dataSource: this._getDataSource(value)
+    });
   };
 }
 
@@ -199,4 +247,19 @@ const styles = StyleSheet.create({
   barChartDelta: {
     backgroundColor: '#ffdcda',
   },
+  ...Platform.select({
+      ios: {
+        segmentedControl: {
+          marginTop: 8,
+          marginHorizontal: 8,
+          marginBottom: 10,
+        },
+      },
+      android: {
+        segmentedControl: {
+          shadowColor: 'red',
+          elevation: 2,
+        },
+      },
+  })
 });
