@@ -283,7 +283,6 @@ const styles = StyleSheet.create({
     },
   },
   chart: {
-    height: 295,
     backgroundColor: '#5B6771',
     shadowColor: 'black',
     shadowOpacity: 0.1,
@@ -325,7 +324,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 5,
     left: 5,
-    top: 245,
+    bottom: 0,
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: 'rgba(255, 255, 255, 0.35)',
     height: 44,
