@@ -20,6 +20,7 @@ import {
 
 import Card from './Card';
 import GettingStartedCard from './GettingStartedCard';
+import BlankslateCard from './BlankslateCard';
 
 import { DeleteButton, DuplicateButton, ShareButton } from './Buttons';
 
@@ -50,48 +51,8 @@ export default class DiscoveryCenter extends Component {
         </NavigationBar>
         <ScrollView style={styles.content}>
           <GettingStartedCard />
-          <Card>
-            <Card.Header>
-              <View style={styles.leftContainer}>
-                <DeleteButton />
-              </View>
-              <View style={[styles.rightContainer, {justifyContent: 'flex-end'}]}>
-                <DuplicateButton />
-                <ShareButton style={styles.share} />
-              </View>
-            </Card.Header>
-            <View style={styles.chart}>
-              <Image source={require('../../Images/discoverycenter/chart-blankslate.png')} />
-              <View style={[styles.chartHeader, {paddingLeft: 10}]}>
-                <TouchableOpacity>
-                  <Text style={[styles.chartButton, {color: '#FFFFFF'}]}>BAR CHART</Text>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <Text style={[styles.chartButton, {color: '#FFFFFF'}]}>PIE CHART</Text>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <Text style={[styles.chartButton, {color: '#FFFFFF'}]}>CLOUD</Text>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.chartFooter}>
-                <View style={styles.sourcesRightContainer}>
-                </View>
-              </View>
-            </View>
-            <View style={styles.message}>
-              <View style={styles.filterItem}>
-                <View style={styles.leftContainer}>
-                  <TouchableOpacity>
-                  <Text style={[styles.chartButton, {color: Colors.tint}]}>+ ADD FILTER</Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-              <View style={styles.filterBlankslate}>
-                <Image source={require('../../Images/discoverycenter/filter-blankslate.png')} />
-              </View>
-            </View>
-          </Card>
-          <Card>
+          <BlankslateCard />
+          {/*<Card>
             <Card.Header>
               <View style={styles.leftContainer}>
                 <DeleteButton />
@@ -194,7 +155,7 @@ export default class DiscoveryCenter extends Component {
                 <Text style={styles.readButtonTitle}>Explore 423 occurrences</Text>
               </TouchableOpacity>
             </View>
-          </Card>
+          </Card>*/}
         </ScrollView>
         {toolbar}
       </View>
