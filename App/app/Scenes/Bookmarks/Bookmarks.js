@@ -70,7 +70,7 @@ export default class Bookmarks extends Component {
           <TouchableOpacity
             onPress={this.props.onPressDone}
           >
-            <Text style={StyleSheet.styles.navigationBar.doneButtonTitle}>{Localizable.t('done')}</Text>
+            <Text style={[StyleSheet.styles.navigationBar.doneButtonTitle, {marginLeft: 16}]}>{Localizable.t('done')}</Text>
           </TouchableOpacity>
         </NavigationBar>
         <ListView

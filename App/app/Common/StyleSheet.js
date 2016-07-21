@@ -14,7 +14,6 @@ const styles = {
       color: Colors.tint,
       fontSize: 17,
       fontWeight: '500',
-      marginLeft: 16
     },
   },
   wordCloud: {
