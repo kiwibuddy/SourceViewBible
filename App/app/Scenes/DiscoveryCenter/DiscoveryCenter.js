@@ -19,6 +19,7 @@ import {
 } from '../../Common';
 
 import Card, { CardHeader } from './Card';
+import { DeleteButton, DuplicateButton, ShareButton } from './Buttons';
 
 // $FlowFixMe: Can't find os module extension
 import LinearGradient from 'react-native-linear-gradient';
@@ -49,9 +50,7 @@ export default class DiscoveryCenter extends Component {
           <Card>
             <CardHeader>
               <View style={styles.leftContainer}>
-                <TouchableOpacity>
-                  <Image source={require('../../Images/discoverycenter/btn-delete.png')} />
-                </TouchableOpacity>
+                <DeleteButton />
               </View>
             </CardHeader>
             <View style={styles.video}>
@@ -71,17 +70,11 @@ export default class DiscoveryCenter extends Component {
           <Card>
             <CardHeader>
               <View style={styles.leftContainer}>
-                <TouchableOpacity>
-                  <Image source={require('../../Images/discoverycenter/btn-delete.png')} />
-                </TouchableOpacity>
+                <DeleteButton />
               </View>
               <View style={[styles.rightContainer, {justifyContent: 'flex-end'}]}>
-                <TouchableOpacity>
-                  <Image source={require('../../Images/discoverycenter/btn-duplicate.png')} />
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.share}>
-                  <Image source={require('../../Images/discoverycenter/btn-share.png')} />
-                </TouchableOpacity>
+                <DuplicateButton />
+                <ShareButton style={styles.share} />
               </View>
             </CardHeader>
             <View style={styles.chart}>
@@ -116,17 +109,11 @@ export default class DiscoveryCenter extends Component {
           <Card>
             <CardHeader>
               <View style={styles.leftContainer}>
-                <TouchableOpacity>
-                  <Image source={require('../../Images/discoverycenter/btn-delete.png')} />
-                </TouchableOpacity>
+                <DeleteButton />
               </View>
               <View style={[styles.rightContainer, {justifyContent: 'flex-end'}]}>
-                <TouchableOpacity>
-                  <Image source={require('../../Images/discoverycenter/btn-duplicate.png')} />
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.share}>
-                  <Image source={require('../../Images/discoverycenter/btn-share.png')} />
-                </TouchableOpacity>
+                <DuplicateButton />
+                <ShareButton style={styles.share} />
               </View>
             </CardHeader>
             <View style={styles.chart}>
@@ -165,17 +152,11 @@ export default class DiscoveryCenter extends Component {
           <Card>
             <CardHeader>
               <View style={styles.leftContainer}>
-                <TouchableOpacity>
-                  <Image source={require('../../Images/discoverycenter/btn-delete.png')} />
-                </TouchableOpacity>
+                <DeleteButton />
               </View>
               <View style={[styles.rightContainer, {justifyContent: 'flex-end'}]}>
-                <TouchableOpacity>
-                  <Image source={require('../../Images/discoverycenter/btn-duplicate.png')} />
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.share}>
-                  <Image source={require('../../Images/discoverycenter/btn-share.png')} />
-                </TouchableOpacity>
+                <DuplicateButton />
+                <ShareButton style={styles.share} />
               </View>
             </CardHeader>
             <View style={styles.chart}>
