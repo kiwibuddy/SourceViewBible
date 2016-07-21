@@ -76,7 +76,7 @@ module.exports = {
     },
     religion: {
       tint: '#88C807',
-      lightTint: '#e0fae4',
+      lightTint: '#DCEEB3',
       chromeTint: '#639104',
       gradient: {
         big: ['#8BC624', '#429321'],
