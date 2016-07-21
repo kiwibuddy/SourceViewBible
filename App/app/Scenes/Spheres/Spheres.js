@@ -66,10 +66,29 @@ export default class Spheres extends Component {
   }
 
   render() {
-    const { sphere, books } = this.state;
+    const { sphere } = this.state;
     const colors = Colors.spheres[sphere.id];
     const spherePercent = (sphere.wordCount / Bible.wordCount) * 100;
+
+    const books = this._getBooks(sphere);
     const bookRows = books.map(book => this._renderBookRow(book));
+
+    const spheres = Sphere.all();
+    const sphereCount = spheres.length;
+
+    let sphereIndex = 0;
+    spheres.forEach((s, index) => {
+      if (s.id === sphere.id) {
+        sphereIndex = index;
+      }
+    });
+    const sortedSpheres = spheres.slice().slice(sphereIndex, sphereCount);
+    for (let index = 0; index < sphereIndex; index++) {
+      sortedSpheres.push(spheres[index]);
+    }
+
+    const carouselIcons = sortedSpheres.map(sphere => this._renderCarouselIcon(sphere));
+
     return (
       <ScrollView style={styles.container}>
         <LinearGradient
@@ -78,13 +97,41 @@ export default class Spheres extends Component {
           style={styles.carouselContainer}
         >
           <View style={styles.carousel}>
-            <View style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE*1.2, right: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2) - (CAROUSEL_ITEM_SIZE/2.2), transform:[{scale:0.7}]}]} />
-            <View style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE*1.2, left: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2) - (CAROUSEL_ITEM_SIZE/2.2), transform:[{scale:0.7}]}]} />
-            <View style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE/1.25, right: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2.5) - (CAROUSEL_ITEM_SIZE*1.4), transform:[{scale:0.8}]}]} />
-            <View style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE/1.25, left: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2.5) - (CAROUSEL_ITEM_SIZE*1.4), transform:[{scale:0.8}]}]} />
-            <View style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE/2, right: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2.5) - (CAROUSEL_ITEM_SIZE), transform:[{scale:0.9}]}]} />
-            <View style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE/2, left: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2.5) - (CAROUSEL_ITEM_SIZE), transform:[{scale:0.9}]}]} />
-            <View style={[styles.carouselItem, {bottom: 0, left: WIDTH/2 - CAROUSEL_ITEM_SIZE/2}]} />
+            <TouchableOpacity
+              onPress={() => this._onPressSphere(sortedSpheres[6])}
+              style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE*1.2, right: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2) - (CAROUSEL_ITEM_SIZE/2.2), transform:[{scale:0.7}]}]}>
+              {carouselIcons[6]}
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this._onPressSphere(sortedSpheres[5])}
+              style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE*1.2, left: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2) - (CAROUSEL_ITEM_SIZE/2.2), transform:[{scale:0.7}]}]}>
+              {carouselIcons[5]}
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this._onPressSphere(sortedSpheres[4])}
+              style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE/1.25, right: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2.5) - (CAROUSEL_ITEM_SIZE*1.5), transform:[{scale:0.8}]}]}>
+              {carouselIcons[4]}
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this._onPressSphere(sortedSpheres[3])}
+              style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE/1.25, left: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2.5) - (CAROUSEL_ITEM_SIZE*1.5), transform:[{scale:0.8}]}]}>
+              {carouselIcons[3]}
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this._onPressSphere(sortedSpheres[2])}
+              style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE/2, right: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2.5) - (CAROUSEL_ITEM_SIZE), transform:[{scale:0.9}]}]}>
+              {carouselIcons[2]}
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this._onPressSphere(sortedSpheres[1])}
+              style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE/2, left: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2.5) - (CAROUSEL_ITEM_SIZE), transform:[{scale:0.9}]}]}>
+              {carouselIcons[1]}
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this._onPressSphere(sortedSpheres[0])}
+              style={[styles.carouselItem, {bottom: 0, left: WIDTH/2 - CAROUSEL_ITEM_SIZE/2}]}>
+              {carouselIcons[0]}
+            </TouchableOpacity>
           </View>
           <View style={styles.carouselInfo}>
             <Text style={styles.sphereTitle}>{sphere.name}</Text>
@@ -195,6 +242,27 @@ export default class Spheres extends Component {
   _getBooks = (sphere: Object) => {
     return sphere.bookCounts.map(count => Book.findByID(count.string)).slice(0, MAXIMUM_BOOK_COUNT);
   };
+
+  _renderCarouselIcon = (sphere: Object) => {
+    const iconName = `icon-${sphere.id}-filled`;
+    return (
+      <Icon
+        name={iconName}
+        size={CAROUSEL_ITEM_SIZE}
+        style={{color: Colors.spheres[sphere.id].tint}}
+      />
+    );
+  };
+
+  _onPressSphere = (sphere: Object) => {
+    if (sphere.id === this.state.sphere.id) return;
+    
+    const books = this._getBooks(sphere);
+    this.setState({
+      sphere,
+      books
+    });
+  }
  }
 
 const styles = StyleSheet.create({
@@ -218,17 +286,9 @@ const styles = StyleSheet.create({
     width: CAROUSEL_ITEM_SIZE,
     height: CAROUSEL_ITEM_SIZE,
     borderRadius: CAROUSEL_ITEM_SIZE/2,
-    borderWidth: 1,
-    borderColor: '#B7C0C8',
+    borderWidth: 0,
+    borderColor: 'transparent',
     overflow:'hidden',
-    backgroundColor: '#CED7DF',
-    shadowColor: "black",
-    shadowOpacity: .5,
-    shadowRadius: 5,
-    shadowOffset: {
-      height: 0,
-      width: 0
-    },
   },
   carouselGraphContainer: {
     height: 2,
