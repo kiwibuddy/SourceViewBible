@@ -181,7 +181,9 @@ export default class DiscoveryCenter extends Component {
           </Card>
         </ScrollView>
         {toolbar}
-        <View style={styles.overlayContainer}>
+        {/*
+          ----PopOver
+          <View style={styles.overlayContainer}>
           <View style={styles.popover}>
             <View style={styles.tableHeader}>
               <TouchableOpacity style={styles.leftContainer}>
@@ -203,6 +205,7 @@ export default class DiscoveryCenter extends Component {
             </ScrollView>
           </View>
         </View>
+       */}
       </View>
     );
   }
