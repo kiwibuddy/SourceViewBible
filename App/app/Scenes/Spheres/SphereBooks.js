@@ -200,7 +200,7 @@ export default class SphereBooks extends Component {
         subtitle={book.DJHRef}
         subtitleStyle={subtitleStyle}
         title={Localizable.toPercentage(bookPercent, {precision: 0})}
-        titleStyle={titleStyle}
+        titleStyle={[titleStyle, {color: colors.chromeTint}]}
         size={size}
         style={style}
       />
