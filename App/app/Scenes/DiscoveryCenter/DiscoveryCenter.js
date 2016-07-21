@@ -37,6 +37,7 @@ type Props = {
 
 type State = {
   cards: any,
+  cardIncrement: number,
 };
 
 export default class DiscoveryCenter extends Component {
@@ -52,7 +53,8 @@ export default class DiscoveryCenter extends Component {
 
     const cards = [{key: 'getting-started'}];
     this.state = {
-      cards
+      cards,
+      cardIncrement: cards.length,
     };
   }
 
@@ -238,13 +240,17 @@ export default class DiscoveryCenter extends Component {
   };
 
   _addCard = () => {
-    const card = {key: 'card-' + this.state.cards.length};
+    const cardIncrement = this.state.cardIncrement + 1;
+    const card = {key: 'card-' + cardIncrement};
     const cards = [
       ...this.state.cards,
       card
     ];
 
-    this.setState({cards}, () => {
+    this.setState({
+      cards,
+      cardIncrement
+    }, () => {
       this._scrollToBottom();
     });
   };

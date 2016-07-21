@@ -29,7 +29,7 @@ type Props = {
 const BlankslateCard = (props: Props) => {
   const { card } = props;
   return (
-    <Card key={card.key}>
+    <Card>
       <Card.Header>
         <View style={styles.leftContainer}>
           <DeleteButton onPress={props.onPressDelete}/>
