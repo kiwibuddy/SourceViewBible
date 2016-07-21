@@ -181,6 +181,22 @@ export default class DiscoveryCenter extends Component {
           </Card>
         </ScrollView>
         {toolbar}
+        <View style={styles.overlayContainer}>
+          <View style={styles.popover}>
+            <View style={styles.tableHeader}>
+              <TouchableOpacity style={styles.leftContainer}>
+                <Text style={styles.chartProperty}>Back</Text>
+              </TouchableOpacity>
+            </View>
+            <ScrollView>
+              <View style={StyleSheet.styles.statisticContainer}>
+                <Text style={StyleSheet.styles.statisticTitleBold}>Title</Text>
+                <Text style={StyleSheet.styles.statisticSubtitle}>Whole Bible</Text>
+              </View>
+              <View style={StyleSheet.styles.statisticKeyline} />
+            </ScrollView>
+          </View>
+        </View>
       </View>
     );
   }
@@ -353,4 +369,18 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     marginHorizontal: 40,
   },
+  overlayContainer: {
+    flex: 1,
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.10)',
+  },
+  popover: {
+    backgroundColor: 'rgba(255, 255, 255, 0.99)',
+    borderRadius: 4,
+    marginTop: 200,
+  }
 });
