@@ -11,9 +11,9 @@ import {
   StyleSheet,
 } from '../../Common';
 
-export const CardHeader = (props: Object) => {
+export const Header = (props: Object) => {
   return (
-    <View style={styles.header}>
+    <View {...props} style={[styles.header, props.style]}>
       {props.children}
     </View>
   );
@@ -21,12 +21,12 @@ export const CardHeader = (props: Object) => {
 
 const Card = (props: Object) => {
   return (
-    <View style={styles.card}>
+    <View style={styles.card} {...props}>
       {props.children}
     </View>
   );
 };
-Card.Header = CardHeader;
+Card.Header = Header;
 
 const styles = StyleSheet.create({
   card: {

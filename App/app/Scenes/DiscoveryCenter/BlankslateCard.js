@@ -16,6 +16,7 @@ import {
 } from '../../Common';
 
 import Card from './Card';
+import ChartBlankslate from './ChartBlankslate';
 
 import { DeleteButton, DuplicateButton, ShareButton } from './Buttons';
 
@@ -37,24 +38,7 @@ const BlankslateCard = (props: Props) => {
           <ShareButton style={styles.share} />
         </View>
       </Card.Header>
-      <View style={styles.chart}>
-        <Image source={require('../../Images/discoverycenter/chart-blankslate.png')} />
-        <View style={[styles.chartHeader, {paddingLeft: 10}]}>
-          <TouchableOpacity>
-            <Text style={[styles.chartButton, {color: '#FFFFFF'}]}>BAR CHART</Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={[styles.chartButton, {color: '#FFFFFF'}]}>PIE CHART</Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={[styles.chartButton, {color: '#FFFFFF'}]}>CLOUD</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.chartFooter}>
-          <View style={styles.sourcesRightContainer}>
-          </View>
-        </View>
-      </View>
+      <ChartBlankslate />
       <View style={styles.message}>
         <View style={styles.filterItem}>
           <View style={styles.leftContainer}>
@@ -92,30 +76,6 @@ const styles = StyleSheet.create({
   share: {
     paddingLeft: 10,
   },
-  chart: {
-    alignItems: 'center',
-    backgroundColor: '#5B6771',
-    overflow: 'hidden',
-    shadowColor: 'black',
-    shadowOpacity: 0.1,
-    shadowRadius: 0.8,
-    shadowOffset: {
-      height: 1,
-      width: 0,
-    },
-  },
-  chartHeader: {
-    flex: 1,
-    position: 'absolute',
-    right: 5,
-    left: 5,
-    top: 0,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: 'rgba(255, 255, 255, 0.35)',
-    flexDirection: 'row',
-    alignItems: 'center',
-    height: 44,
-  },
   chartButton: {
     fontSize: 11,
     fontWeight: 'bold',
@@ -130,18 +90,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 8,
     top: 12,
-  },
-  chartFooter: {
-    flex: 1,
-    position: 'absolute',
-    right: 5,
-    left: 5,
-    bottom: 0,
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: 'rgba(255, 255, 255, 0.35)',
-    height: 44,
-    flexDirection: 'row',
-    alignItems: 'center',
   },
   filterItem: {
     flex: 0,

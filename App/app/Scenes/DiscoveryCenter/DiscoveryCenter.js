@@ -75,7 +75,7 @@ export default class DiscoveryCenter extends Component {
           onContentSizeChange={(w, h) => this.contentHeight = h}
         >
           {cards}
-          <Card>
+          {/*<Card>
             <Card.Header>
               <View style={styles.leftContainer}>
                 <DeleteButton />
@@ -178,7 +178,7 @@ export default class DiscoveryCenter extends Component {
                 <Text style={styles.readButtonTitle}>Explore 423 occurrences</Text>
               </TouchableOpacity>
             </View>
-          </Card>
+          </Card>*/}
         </ScrollView>
         {toolbar}
         {/*
