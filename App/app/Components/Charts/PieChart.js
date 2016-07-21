@@ -119,7 +119,7 @@ class Wedge extends Component<void, any, any> {
  	_createCirclePath(or : number, ir : number) : Path {
 		const path = new Path();
 
-		path.move(0, or)
+		path.move(1, 1 + or)
 				.arc(or * 2, 0, or)
 				.arc(-or * 2, 0, or);
 

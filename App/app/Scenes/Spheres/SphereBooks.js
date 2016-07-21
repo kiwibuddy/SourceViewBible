@@ -178,7 +178,8 @@ export default class SphereBooks extends Component {
 
   _renderPie({book, size, sliceWidth, style, subtitleStyle, titleStyle}) {
     const bookPercent = this._getPercentOfBook(book);
-    const slices = [{color: Colors.tintColor, value: bookPercent}, {color: Colors.lightTintColor, value: 100-bookPercent}];
+    let slices = [{color: Colors.tintColor, value: bookPercent}];
+    if (100 - bookPercent > 0) slices.push({color: Colors.lightTintColor, value: 100-bookPercent});
     return (
       <PieChart
         color={Colors.tintColor}
