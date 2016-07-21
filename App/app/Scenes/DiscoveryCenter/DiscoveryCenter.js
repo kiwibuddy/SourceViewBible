@@ -18,6 +18,8 @@ import {
   Localizable
 } from '../../Common';
 
+import Card from './Card';
+
 // $FlowFixMe: Can't find os module extension
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -44,7 +46,7 @@ export default class DiscoveryCenter extends Component {
           </TouchableOpacity>
         </NavigationBar>
         <ScrollView style={styles.content}>
-          <View style={styles.card}>
+          <Card>
             <View style={styles.header}>
               <View style={styles.leftContainer}>
                 <TouchableOpacity>
@@ -65,8 +67,8 @@ export default class DiscoveryCenter extends Component {
               <Text style={styles.gettingstartedHeader}>Create & Share Discoveries</Text>
               <Text style={styles.gettingstartedBody}>Tap your way to new Biblical insights and share what your find.</Text>
             </View>
-          </View>
-          <View style={styles.card}>
+          </Card>
+          <Card>
             <View style={styles.header}>
               <View style={styles.leftContainer}>
                 <TouchableOpacity>
@@ -110,8 +112,8 @@ export default class DiscoveryCenter extends Component {
                 </View>
               </View>
             </View>
-          </View>
-          <View style={styles.card}>
+          </Card>
+          <Card>
             <View style={styles.header}>
               <View style={styles.leftContainer}>
                 <TouchableOpacity>
@@ -159,8 +161,8 @@ export default class DiscoveryCenter extends Component {
                 </View>
               </View>
             </View>
-          </View>
-          <View style={styles.card}>
+          </Card>
+          <Card>
             <View style={styles.header}>
               <View style={styles.leftContainer}>
                 <TouchableOpacity>
@@ -212,7 +214,7 @@ export default class DiscoveryCenter extends Component {
                 </TouchableOpacity>
               </View>
             </View>
-          </View>
+          </Card>
         </ScrollView>
         {toolbar}
       </View>
@@ -240,19 +242,6 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: NavigationBar.HEIGHT,
     marginBottom: Toolbar.HEIGHT,
-  },
-  card: {
-    marginHorizontal: 4,
-    marginVertical: 5,
-    borderRadius: 2,
-    backgroundColor: '#fff',
-    shadowColor: 'black',
-    shadowOpacity: 0.1,
-    shadowRadius: 0.8,
-    shadowOffset: {
-      height: 1,
-      width: 0,
-    },
   },
   header: {
     flex: 0,
