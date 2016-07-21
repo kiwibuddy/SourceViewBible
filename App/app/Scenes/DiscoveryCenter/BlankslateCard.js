@@ -19,9 +19,14 @@ import Card from './Card';
 
 import { DeleteButton, DuplicateButton, ShareButton } from './Buttons';
 
-const BlankslateCard = (props: Object) => {
+type Props = {
+  card: Object,
+};
+
+const BlankslateCard = (props: Props) => {
+  const { card } = props;
   return (
-    <Card>
+    <Card key={card.key}>
       <Card.Header>
         <View style={styles.leftContainer}>
           <DeleteButton />

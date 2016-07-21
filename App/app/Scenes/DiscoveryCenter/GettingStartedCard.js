@@ -17,9 +17,15 @@ import {
 import Card from './Card';
 import { DeleteButton } from './Buttons';
 
-const GettingStartedCard = (props: Object) => {
+type Props = {
+  card: Object,
+};
+
+const GettingStartedCard = (props: Props) => {
+  const { card } = props;
+
   return (
-    <Card>
+    <Card key={card.key}>
       <Card.Header>
         <View style={styles.leftContainer}>
           <DeleteButton />

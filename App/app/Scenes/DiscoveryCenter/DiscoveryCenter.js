@@ -29,16 +29,37 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigation';
 
+const SCROLLVIEW_REF = 'scrollview';
+
 type Props = {
   onPressDone: Function,
 };
 
+type State = {
+  cards: any,
+};
+
 export default class DiscoveryCenter extends Component {
   props: Props;
+  state: State;
+
+  contentHeight: number;
+
+  constructor(props: Object) {
+    super(props);
+
+    this.contentHeight = 0;
+
+    const cards = [{key: 'getting-started'}];
+    this.state = {
+      cards
+    };
+  }
 
   render() {
     const toolbar = this._renderToolbar();
 
+    const cards = this.state.cards.map(card => this._renderCard(card));
     return (
       <View style={styles.container}>
         <NavigationBar title={Localizable.t('discovery-center')}>
@@ -49,9 +70,11 @@ export default class DiscoveryCenter extends Component {
             <Text style={StyleSheet.styles.navigationBar.doneButtonTitle}>{Localizable.t('done')}</Text>
           </TouchableOpacity>
         </NavigationBar>
-        <ScrollView style={styles.content}>
-          <GettingStartedCard />
-          <BlankslateCard />
+        <ScrollView ref={SCROLLVIEW_REF}
+          style={styles.content}
+          onContentSizeChange={(w, h) => this.contentHeight = h}
+        >
+          {cards}
           {/*<Card>
             <Card.Header>
               <View style={styles.leftContainer}>
@@ -167,10 +190,38 @@ export default class DiscoveryCenter extends Component {
       <Toolbar>
         <ToolbarButton
           imageSource={require('../../Images/discoverycenter/btn-add-card.png')}
-          onPress={() => {}}
+          onPress={this._addCard}
         />
       </Toolbar>
     );
+  };
+
+  _renderCard = (card: Object) => {
+    if (card.key === 'getting-started') {
+      return <GettingStartedCard key={card.key} card={card} />;
+    } else {
+      return <BlankslateCard key={card.key} card={card} />;
+    }
+  };
+
+  _addCard = () => {
+    const card = {key: 'card-' + this.state.cards.length};
+    const cards = [
+      ...this.state.cards,
+      card
+    ];
+
+    this.setState({cards}, () => {
+      this._scrollToBottom();
+    });
+  };
+
+  _scrollToBottom = (animated: boolean = true) => {
+    const scrollHeight = this.contentHeight;
+    if (scrollHeight > 0) {
+      const scrollView = this.refs[SCROLLVIEW_REF];
+      scrollView.scrollTo({y: scrollHeight, animated: animated});
+    }
   };
 }
 
