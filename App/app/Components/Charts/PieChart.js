@@ -25,7 +25,7 @@ import StyleSheet from '../../Common/StyleSheet';
 import Colors from '../../Common/Colors';
 
 const PieChart = (props: Object) => {
-  const { color, size, slices, titleStyle, subtitleStyle } = props;
+  const { color, size, slices: data, titleStyle, subtitleStyle } = props;
   const chartStyle = [styles.chart, props.style, {width: size, height: size}];
 
   const sliceStyle = [styles.slice, {borderTopColor: color, borderLeftColor: color, borderBottomColor: color }];
@@ -37,8 +37,9 @@ const PieChart = (props: Object) => {
   const centerX = size / 2;
   const centerY = size / 2;
 
+  const slices = data.filter(slice => slice.value > 0);
   // Gather sum of all data to determine angles
-  const sum = slices.reduce((sum, slice) => sum += (slice.value > 0) ? slice.value : 0.001, 0);
+  const sum = slices.reduce((sum, slice) => sum += slice.value, 0);
 
   const sectors = slices.map(slice => Math.floor(360 * (slice.value/sum)));
   let startAngle = 0;
