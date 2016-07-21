@@ -26,7 +26,7 @@ const GettingStartedCard = (props: Props) => {
   const { card } = props;
 
   return (
-    <Card>
+    <Card key={card.key}>
       <Card.Header>
         <View style={styles.leftContainer}>
           <DeleteButton onPress={props.onPressDelete}/>
