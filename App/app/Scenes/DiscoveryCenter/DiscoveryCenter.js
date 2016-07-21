@@ -18,7 +18,7 @@ import {
   Localizable
 } from '../../Common';
 
-import Card, { CardHeader } from './Card';
+import Card from './Card';
 import { DeleteButton, DuplicateButton, ShareButton } from './Buttons';
 
 // $FlowFixMe: Can't find os module extension
@@ -48,11 +48,11 @@ export default class DiscoveryCenter extends Component {
         </NavigationBar>
         <ScrollView style={styles.content}>
           <Card>
-            <CardHeader>
+            <Card.Header>
               <View style={styles.leftContainer}>
                 <DeleteButton />
               </View>
-            </CardHeader>
+            </Card.Header>
             <View style={styles.video}>
               <View style={styles.videoImage}>
                 <Image source={require('../../Images/discoverycenter/video-header-dc.png')} />
@@ -68,7 +68,7 @@ export default class DiscoveryCenter extends Component {
             </View>
           </Card>
           <Card>
-            <CardHeader>
+            <Card.Header>
               <View style={styles.leftContainer}>
                 <DeleteButton />
               </View>
@@ -76,7 +76,7 @@ export default class DiscoveryCenter extends Component {
                 <DuplicateButton />
                 <ShareButton style={styles.share} />
               </View>
-            </CardHeader>
+            </Card.Header>
             <View style={styles.chart}>
               <Image source={require('../../Images/discoverycenter/chart-blankslate.png')} />
               <View style={[styles.chartHeader, {paddingLeft: 10}]}>
@@ -107,7 +107,7 @@ export default class DiscoveryCenter extends Component {
             </View>
           </Card>
           <Card>
-            <CardHeader>
+            <Card.Header>
               <View style={styles.leftContainer}>
                 <DeleteButton />
               </View>
@@ -115,7 +115,7 @@ export default class DiscoveryCenter extends Component {
                 <DuplicateButton />
                 <ShareButton style={styles.share} />
               </View>
-            </CardHeader>
+            </Card.Header>
             <View style={styles.chart}>
               <Image source={require('../../Images/discoverycenter/chart-blankslate.png')} />
               <View style={styles.chartHeader}>
@@ -150,7 +150,7 @@ export default class DiscoveryCenter extends Component {
             </View>
           </Card>
           <Card>
-            <CardHeader>
+            <Card.Header>
               <View style={styles.leftContainer}>
                 <DeleteButton />
               </View>
@@ -158,7 +158,7 @@ export default class DiscoveryCenter extends Component {
                 <DuplicateButton />
                 <ShareButton style={styles.share} />
               </View>
-            </CardHeader>
+            </Card.Header>
             <View style={styles.chart}>
               <Image source={require('../../Images/discoverycenter/chart-placeholder.png')} />
               <View style={styles.chartHeader}>

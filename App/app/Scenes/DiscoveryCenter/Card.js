@@ -26,6 +26,7 @@ const Card = (props: Object) => {
     </View>
   );
 };
+Card.Header = CardHeader;
 
 const styles = StyleSheet.create({
   card: {
