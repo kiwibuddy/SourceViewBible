@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
   icon: {
     alignSelf: 'center',
     marginTop: 7,
-    color: Colors.tintColor
+    color: Colors.tint
   },
   title: {
     flex: 0,
@@ -251,7 +251,7 @@ const styles = StyleSheet.create({
   },
   statisticTitle: {
     fontSize: 11,
-    color: Colors.tintColor,
+    color: Colors.tint,
     marginRight: 3,
   },
   statisticSubtitle: {

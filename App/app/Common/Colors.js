@@ -3,8 +3,8 @@
 
 module.exports = {
 
-  tintColor: '#cf1e00',
-  lightTintColor: '#ffdcda',
+  tint: '#cf1e00',
+  lightTint: '#ffdcda',
   separator: '#CCCCCC',
   subtitle: '#9B9B9B',
 

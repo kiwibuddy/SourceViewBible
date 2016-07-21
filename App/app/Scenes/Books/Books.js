@@ -72,7 +72,7 @@ export default class Books extends Component {
       <View style={styles.container}>
         <SegmentedControl
           style={styles.segmentedControl}
-          tintColor={Colors.tintColor}
+          tintColor={Colors.tint}
           values={SEGMENTS}
           selectedIndex={this.state.selectedSegmentIndex}
           onValueChange={(value) => this._onSegmentedControlValueChanged(SEGMENTS.indexOf(value))}

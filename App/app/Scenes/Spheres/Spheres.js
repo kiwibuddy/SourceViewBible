@@ -252,8 +252,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.separator
   },
   readButton: {
-    backgroundColor: Colors.tintColor,
-    borderColor: Colors.tintColor,
+    backgroundColor: Colors.tint,
+    borderColor: Colors.tint,
     height: 40,
     borderRadius: 20,
     borderWidth: 1,

@@ -200,7 +200,7 @@ export default class BookOverview extends Component {
         <Icon
           name="avatar-more"
           size={40}
-          style={[styles.sourceIcon, {color: Colors.tintColor}]}
+          style={[styles.sourceIcon, {color: Colors.tint}]}
         />
         <Text style={StyleSheet.styles.statisticSubtitle}>{Localizable.t("more")}</Text>
       </TouchableOpacity>
@@ -269,8 +269,8 @@ const styles = StyleSheet.create({
     margin: 4,
   },
   readButton: {
-    backgroundColor: Colors.tintColor,
-    borderColor: Colors.tintColor,
+    backgroundColor: Colors.tint,
+    borderColor: Colors.tint,
     height: 40,
     borderRadius: 20,
     borderWidth: 1,

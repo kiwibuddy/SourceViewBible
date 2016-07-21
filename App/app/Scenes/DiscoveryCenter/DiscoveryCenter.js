@@ -101,7 +101,7 @@ export default class DiscoveryCenter extends Component {
             <View style={styles.message}>
               <View style={styles.filterItem}>
                 <TouchableOpacity>
-                  <Text style={[styles.chartButton, {color: Colors.tintColor}]}>+ ADD FILTER</Text>
+                  <Text style={[styles.chartButton, {color: Colors.tint}]}>+ ADD FILTER</Text>
                 </TouchableOpacity>
                 <View style={styles.filterBlankslate}>
                   <Image source={require('../../Images/discoverycenter/filter-blankslate.png')} />
@@ -150,7 +150,7 @@ export default class DiscoveryCenter extends Component {
             <View style={styles.message}>
               <View style={styles.filterItem}>
                 <TouchableOpacity>
-                  <Text style={[styles.chartButton, {color: Colors.tintColor}]}>+ ADD FILTER</Text>
+                  <Text style={[styles.chartButton, {color: Colors.tint}]}>+ ADD FILTER</Text>
                 </TouchableOpacity>
                 <View style={styles.filterBlankslate}>
                   <Image source={require('../../Images/discoverycenter/filter-blankslate.png')} />
@@ -373,7 +373,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   readButton: {
-    borderColor: Colors.tintColor,
+    borderColor: Colors.tint,
     height: 40,
     borderRadius: 20,
     borderWidth: 1,
@@ -384,7 +384,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   readButtonTitle: {
-    color: Colors.tintColor,
+    color: Colors.tint,
     fontSize: 18,
     marginVertical: 20,
     marginHorizontal: 40,

@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   image: {
-    tintColor: Colors.tintColor,
+    tintColor: Colors.tint,
     alignSelf: 'center',
   },
 });

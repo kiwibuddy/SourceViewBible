@@ -62,7 +62,7 @@ export default class Bookmarks extends Component {
         <NavigationBar>
           <SegmentedControl
             style={{flex: 1}}
-            tintColor={Colors.tintColor}
+            tintColor={Colors.tint}
             values={['History', 'Bookmarks', 'Highlights']}
             selectedIndex={1}
             onValueChange={(value) => {}}
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   icon: {
-    tintColor: Colors.tintColor,
+    tintColor: Colors.tint,
     marginRight: 10,
   },
 });
