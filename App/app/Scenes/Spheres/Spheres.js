@@ -97,21 +97,21 @@ export default class Spheres extends Component {
         </View>
         <View style={StyleSheet.styles.statisticsContainer}>
           <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.onPressBooks({sphere})}>
-            <Text style={StyleSheet.styles.statisticTitle}>{sphere.bookCount}</Text>
+            <Text style={[StyleSheet.styles.statisticTitle, {color: colors.chromeTint}]}>{sphere.bookCount}</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Books</Text>
           </TouchableOpacity>
           <View style={styles.keyline} />
           <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.onPressSources({sphere})}>
-            <Text style={StyleSheet.styles.statisticTitle}>0</Text>
+            <Text style={[StyleSheet.styles.statisticTitle, {color: colors.chromeTint}]}>0</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Sources</Text>
           </TouchableOpacity>
           <View style={styles.keyline} />
           <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.onPressWords({sphere})}>
-            <Text style={StyleSheet.styles.statisticTitle}>{Localizable.toNumber(sphere.wordCount, {precision: 0})}</Text>
+            <Text style={[StyleSheet.styles.statisticTitle, {color: colors.chromeTint}]}>{Localizable.toNumber(sphere.wordCount, {precision: 0})}</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Words</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.readButton} onPress={() => this.props.onPressPassages({sphere})}>
+        <TouchableOpacity style={[styles.readButton, {backgroundColor: colors.chromeTint, borderColor: colors.chromeTint}]} onPress={() => this.props.onPressPassages({sphere})}>
           <Text style={styles.readButtonTitle}>Explore 52 key passages</Text>
         </TouchableOpacity>
         <View style={styles.contentContainer}>
@@ -126,7 +126,7 @@ export default class Spheres extends Component {
         </View>
         {bookRows}
         <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => this.props.onPressBooks({sphere})}>
-          <Text style={StyleSheet.styles.cell.titlemore}>View More</Text>
+          <Text style={[StyleSheet.styles.cell.titlemore, {color: colors.chromeTint}]}>View More</Text>
           <Image source={require('../../Images/common/disclosure.png')}  style={styles.disclosure} />
         </TouchableOpacity>
         <View style={styles.listContainer}>
@@ -155,7 +155,7 @@ export default class Spheres extends Component {
           <View style={[StyleSheet.styles.separator, {marginLeft: 0}]}></View>
         </TouchableOpacity>
         <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => this.props.onPressSources({sphere})}>
-          <Text style={StyleSheet.styles.cell.titlemore}>View More</Text>
+          <Text style={[StyleSheet.styles.cell.titlemore, {color: colors.chromeTint}]}>View More</Text>
           <Image source={require('../../Images/common/disclosure.png')}  style={styles.disclosure} />
         </TouchableOpacity>
       </ScrollView>

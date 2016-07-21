@@ -148,7 +148,7 @@ export default class SphereBooks extends Component {
         </ScrollView>
         <SegmentedControl
           style={styles.segmentedControl}
-          tintColor={colors.tint}
+          tintColor={colors.chromeTint}
           values={SEGMENTS}
           selectedIndex={this.state.selectedSegmentIndex}
           onValueChange={(value) => this._onSegmentedControlValueChanged(SEGMENTS.indexOf(value))}
