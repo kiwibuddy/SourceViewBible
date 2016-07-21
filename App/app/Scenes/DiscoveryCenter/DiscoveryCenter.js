@@ -53,7 +53,9 @@ export default class DiscoveryCenter extends Component {
               </View>
             </View>
             <View style={styles.video}>
-              <Image source={require('../../Images/discoverycenter/video-header-dc.png')} />
+              <View style={styles.videoImage}>
+                <Image source={require('../../Images/discoverycenter/video-header-dc.png')} />
+              </View>
               <TouchableOpacity style={styles.videoPlay}>
                 <Image source={require('../../Images/common/btn-play.png')} />
               </TouchableOpacity>
@@ -278,6 +280,9 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   video: {
+    alignItems: 'center',
+  },
+  videoImage: {
     shadowColor: 'black',
     shadowOpacity: 0.1,
     shadowRadius: 0.8,
@@ -285,6 +290,15 @@ const styles = StyleSheet.create({
       height: 1,
       width: 0,
     },
+  },
+  videoPlay: {
+    flex: 1,
+    position: 'absolute',
+    right: 0,
+    left: 0,
+    top: 65,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   chart: {
     backgroundColor: '#5B6771',
@@ -333,15 +347,6 @@ const styles = StyleSheet.create({
     borderTopColor: 'rgba(255, 255, 255, 0.35)',
     height: 44,
     flexDirection: 'row',
-    alignItems: 'center',
-  },
-  videoPlay: {
-    flex: 1,
-    position: 'absolute',
-    right: 0,
-    left: 0,
-    top: 65,
-    justifyContent: 'center',
     alignItems: 'center',
   },
   gettingstartedContainer: {
