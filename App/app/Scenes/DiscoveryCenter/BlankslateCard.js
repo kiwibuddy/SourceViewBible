@@ -17,6 +17,7 @@ import {
 
 import Card from './Card';
 import ChartBlankslate from './ChartBlankslate';
+import FilterBlankslate from './FilterBlankslate';
 
 import { DeleteButton, DuplicateButton, ShareButton } from './Buttons';
 
@@ -39,18 +40,7 @@ const BlankslateCard = (props: Props) => {
         </View>
       </Card.Header>
       <ChartBlankslate />
-      <View style={styles.message}>
-        <View style={styles.filterItem}>
-          <View style={styles.leftContainer}>
-            <TouchableOpacity>
-            <Text style={[styles.chartButton, {color: Colors.tint}]}>+ ADD FILTER</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.filterBlankslate}>
-          <Image source={require('../../Images/discoverycenter/filter-blankslate.png')} />
-        </View>
-      </View>
+      <FilterBlankslate />
     </Card>
   );
 };
@@ -72,33 +62,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 10,
     height: 44,
-  },
-  share: {
-    paddingLeft: 10,
-  },
-  chartButton: {
-    fontSize: 11,
-    fontWeight: 'bold',
-    paddingRight: 15,
-  },
-  chartProperty: {
-    fontSize: 11,
-    paddingLeft: 5,
-    color: '#FFFFFF'
-  },
-  chartDropdown: {
-    position: 'absolute',
-    right: 8,
-    top: 12,
-  },
-  filterItem: {
-    flex: 0,
-    flexDirection: 'row',
-    height: 44,
-  },
-  filterBlankslate: {
-    paddingVertical: 50,
-    alignSelf: 'center',
   },
 });
 

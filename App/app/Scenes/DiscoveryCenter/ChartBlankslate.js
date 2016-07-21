@@ -9,10 +9,6 @@ import {
 
 import Chart from './Chart';
 
-import {
-  StyleSheet,
-} from '../../Common';
-
 const ChartBlankslate = (props: Object) => {
   return (
     <Chart>
