@@ -21,6 +21,7 @@ import { DeleteButton, DuplicateButton, ShareButton } from './Buttons';
 
 type Props = {
   card: Object,
+  onPressDelete: Function,
 };
 
 const BlankslateCard = (props: Props) => {
@@ -29,7 +30,7 @@ const BlankslateCard = (props: Props) => {
     <Card key={card.key}>
       <Card.Header>
         <View style={styles.leftContainer}>
-          <DeleteButton />
+          <DeleteButton onPress={props.onPressDelete}/>
         </View>
         <View style={[styles.rightContainer, {justifyContent: 'flex-end'}]}>
           <DuplicateButton />

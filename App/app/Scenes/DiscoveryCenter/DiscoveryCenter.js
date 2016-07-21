@@ -198,9 +198,17 @@ export default class DiscoveryCenter extends Component {
 
   _renderCard = (card: Object) => {
     if (card.key === 'getting-started') {
-      return <GettingStartedCard key={card.key} card={card} />;
+      return <GettingStartedCard
+        key={card.key}
+        card={card}
+        onPressDelete={() => this._deleteCard(card)}
+      />;
     } else {
-      return <BlankslateCard key={card.key} card={card} />;
+      return <BlankslateCard
+        key={card.key}
+        card={card}
+        onPressDelete={() => this._deleteCard(card)}
+      />;
     }
   };
 
@@ -213,6 +221,19 @@ export default class DiscoveryCenter extends Component {
 
     this.setState({cards}, () => {
       this._scrollToBottom();
+    });
+  };
+
+  _deleteCard = (card: Object) => {
+    const cardIndex = this.state.cards.indexOf(card);
+    const cards = this.state.cards.slice();
+    cards.splice(cardIndex, 1);
+
+    this.setState({cards}, () => {
+      if (cards.length == 1) {
+        const scrollView = this.refs[SCROLLVIEW_REF];
+        scrollView.scrollTo({y: 0, animated: false});
+      }
     });
   };
 

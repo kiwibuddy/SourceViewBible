@@ -19,6 +19,7 @@ import { DeleteButton } from './Buttons';
 
 type Props = {
   card: Object,
+  onPressDelete: Function,
 };
 
 const GettingStartedCard = (props: Props) => {
@@ -28,7 +29,7 @@ const GettingStartedCard = (props: Props) => {
     <Card key={card.key}>
       <Card.Header>
         <View style={styles.leftContainer}>
-          <DeleteButton />
+          <DeleteButton onPress={props.onPressDelete}/>
         </View>
       </Card.Header>
       <View style={styles.video}>
