@@ -190,18 +190,7 @@ export default class Spheres extends Component {
   };
 
   _getBooks = (sphere: Object) => {
-    return Book.all().map(book => book).sort((bookA, bookB) => {
-      const bookAWordCount = sphere.countOfBook(bookA.id);
-      const bookAPercent = (bookAWordCount / bookA.wordCount);
-
-      const bookBWordCount = sphere.countOfBook(bookB.id);
-      const bookBPercent = (bookBWordCount / bookB.wordCount);
-
-      if (bookAPercent == bookBPercent) {
-        return bookAWordCount > bookBWordCount ? -1 : 1;
-      }
-      return bookAPercent > bookBPercent ? -1 : 1;
-    }).slice(0, MAXIMUM_BOOK_COUNT);
+    return sphere.bookCounts.map(count => Book.findByID(count.string)).slice(0, MAXIMUM_BOOK_COUNT);
   };
  }
 

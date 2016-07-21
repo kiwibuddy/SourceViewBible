@@ -25,9 +25,9 @@ const BookSchema = {
   properties: {
     id: 'string',
     DJHRef: 'string',
-    name: 'string',
+    name: {type: 'string', indexed: true},
     testament: 'int',
-    textOrder: 'int',
+    textOrder: {type: 'int', indexed: true},
     chapterCount: {type: 'int', default: 0},
     chapters: {type: 'list', objectType: 'Chapter'},
     maxChapterWordCount: {type: 'int', default: 0},

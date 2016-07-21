@@ -48,10 +48,18 @@ type State = {
   sphere: Object,
 };
 
+type PieProps = {
+  book: Object,
+  subtitleStyle?: any,
+  size: number,
+  sliceWidth?: number,
+  style?: any,
+  titleStyle?: any
+};
+
 export default class SphereBooks extends Component {
   props: Props;
   state: State;
-  bookSortedByPercentage: any;
 
   constructor(props: Props) {
     super(props);
@@ -176,7 +184,7 @@ export default class SphereBooks extends Component {
     );
   };
 
-  _renderPie({book, size, sliceWidth, style, subtitleStyle, titleStyle}) {
+  _renderPie({book, size, sliceWidth, style, subtitleStyle, titleStyle}: PieProps) {
     const bookPercent = this._getPercentOfBook(book);
     const slices = [{color: Colors.tintColor, value: bookPercent}, {color: Colors.lightTintColor, value: 100-bookPercent}];
     return (
@@ -218,24 +226,8 @@ export default class SphereBooks extends Component {
   };
 
   _bookSortedByPercentage = () => {
-    if (this.bookSortedByPercentage) return this.bookSortedByPercentage;
-
     const { sphere } = this.state;
-
-    this.bookSortedByPercentage = Book.all().map(book => book).sort((bookA, bookB) => {
-      const bookAWordCount = sphere.countOfBook(bookA.id);
-      const bookAPercent = (bookAWordCount / bookA.wordCount);
-
-      const bookBWordCount = sphere.countOfBook(bookB.id);
-      const bookBPercent = (bookBWordCount / bookB.wordCount);
-
-      if (bookAPercent == bookBPercent) {
-        return bookAWordCount > bookBWordCount ? -1 : 1;
-      }
-      return bookAPercent > bookBPercent ? -1 : 1;
-    });
-
-    return this.bookSortedByPercentage;
+    return sphere.bookCounts.map(count => Book.findByID(count.string));
   }
 
   _onSegmentedControlValueChanged = (value: number) => {

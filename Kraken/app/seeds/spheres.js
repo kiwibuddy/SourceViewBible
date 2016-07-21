@@ -53,6 +53,21 @@ async function seedSphereWordCounts(emdros, realm) {
           }
         }
 
+        bookCounts.sort((countA, countB) => {
+          const bookA = realm.objectForPrimaryKey('Book', countA.string);
+          const bookAWordCount = countA.count;
+          const bookAPercent = (bookAWordCount / bookA.wordCount) * 100;
+
+          const bookB = realm.objectForPrimaryKey('Book', countB.string);
+          const bookBWordCount = countB.count;
+          const bookBPercent = (bookBWordCount / bookB.wordCount) * 100;
+
+          if (bookAPercent == bookBPercent) {
+            return bookAWordCount > bookBWordCount ? -1 : 1;
+          }
+          return bookAPercent > bookBPercent ? -1 : 1;
+        });
+
         realm.create('Sphere', {id: sphere.id, bookCount, bookCounts}, true);
       });
     });
