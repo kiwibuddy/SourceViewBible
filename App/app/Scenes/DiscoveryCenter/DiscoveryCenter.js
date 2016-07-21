@@ -20,7 +20,6 @@ import {
 
 import Card from './Card';
 import GettingStartedCard from './GettingStartedCard';
-import BlankslateCard from './BlankslateCard';
 
 import { DeleteButton, DuplicateButton, ShareButton } from './Buttons';
 
@@ -231,7 +230,7 @@ export default class DiscoveryCenter extends Component {
         onPressDelete={() => this._deleteCard(card)}
       />;
     } else {
-      return <BlankslateCard
+      return <Card
         key={card.key}
         card={card}
         onPressDelete={() => this._deleteCard(card)}
