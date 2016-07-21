@@ -160,6 +160,7 @@ export default class SphereBooks extends Component {
     const { sphere } = this.state;
     const wordCount = this._getCountOfBook(book);
     const spherePercent = this._getPercentOfBook(book);
+    const colors = Colors.spheres[sphere.id];
 
     return (
       <TouchableOpacity style={styles.section} onPress={() => this.props.onPressBook({sphere, book})}>
@@ -169,13 +170,13 @@ export default class SphereBooks extends Component {
           </View>
           <View style={styles.sourcesRightContainer}>
             <BarChart
-              bars={[{color: Colors.tintColor, value: spherePercent}]}
-              deltaStyle={styles.barChartDelta}
+              bars={[{color: colors.tint, value: spherePercent}]}
+              deltaStyle={{backgroundColor: colors.lightTint}}
               maxChartValue={100}
               style={styles.sourcesBarChart}
             />
             <View style={styles.dataPair}>
-              <Text style={[StyleSheet.styles.cell.percentage, {color: Colors.tintColor}]}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
+              <Text style={[StyleSheet.styles.cell.percentage, {color: colors.tint}]}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
               <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('words.count', {count: wordCount, localizedCount: Localizable.toNumber(wordCount, {precision: 0})})}</Text>
             </View>
           </View>
@@ -185,11 +186,14 @@ export default class SphereBooks extends Component {
   };
 
   _renderPie({book, size, sliceWidth, style, subtitleStyle, titleStyle}: PieProps) {
+    const { sphere } = this.state;
+    const colors = Colors.spheres[sphere.id];
+
     const bookPercent = this._getPercentOfBook(book);
-    const slices = [{color: Colors.tintColor, value: bookPercent}, {color: Colors.lightTintColor, value: 100-bookPercent}];
+    const slices = [{color: colors.tint, value: bookPercent}, {color: colors.lightTint, value: 100-bookPercent}];
     return (
       <PieChart
-        color={Colors.tintColor}
+        color={colors.tint}
         slices={slices}
         sliceWidth={sliceWidth}
         subtitle={book.DJHRef}
@@ -288,9 +292,6 @@ const styles = StyleSheet.create({
     flex: 0,
     height: 4,
     marginBottom: 7,
-  },
-  barChartDelta: {
-    backgroundColor: Colors.lightTintColor,
   },
   pie: {
     position: 'absolute',
