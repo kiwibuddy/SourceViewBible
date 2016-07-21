@@ -67,6 +67,7 @@ export default class Spheres extends Component {
 
   render() {
     const { sphere, books } = this.state;
+    const colors = Colors.spheres[sphere.id];
     const spherePercent = (sphere.wordCount / Bible.wordCount) * 100;
     const bookRows = books.map(book => this._renderBookRow(book));
     return (
@@ -91,7 +92,7 @@ export default class Spheres extends Component {
           </View>
         </LinearGradient>
         <View style={styles.carouselGraphContainer}>
-          <View style={[styles.carouselGraph, {width: 150}]} />
+          <View style={[styles.carouselGraph, {backgroundColor: colors.tint, width: 150}]} />
         </View>
         <View style={StyleSheet.styles.statisticsContainer}>
           <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.onPressBooks({sphere})}>
