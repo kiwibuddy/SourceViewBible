@@ -152,6 +152,8 @@ export default class ScriptureView extends Component {
         showNextScripture: false
       });
 
+      this.props.onScriptureChange({book, chapterNumber});
+
       this._fetchScripture({monadSet: chapter.monadSet}).then((scripture) => {
         this.setState({
           chapter,

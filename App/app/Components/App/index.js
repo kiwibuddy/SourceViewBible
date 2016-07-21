@@ -147,8 +147,9 @@ export default class App extends Component {
       case '/Reader':
         return <Reader
           bookID={route.bookID}
-          chapterNumber={route.chapterNumber || 1
-        }/>;
+          chapterNumber={route.chapterNumber || 1}
+          onScriptureChange={({book, chapterNumber}) => this._replaceCurrentRoute({key: '/Reader', bookID: book.id, chapterNumber, title: book.name})}
+        />;
       case '/Sources':
         return <Sources
           onPressSource={(source) => source && this._pushRoute({key: '/Sources/Overview', sourceID: source.id, title: source.name})}

@@ -22,6 +22,7 @@ import { Book } from '../../Database';
 type Props = {
   bookID: string,
   chapterNumber: number,
+  onScriptureChange: Function,
 };
 
 export default class Reader extends Component {
@@ -33,7 +34,11 @@ export default class Reader extends Component {
     const chapter = book.chapters[chapterNumber - 1];
 
     return (
-      <ScriptureView book={book} chapter={chapter} />
+      <ScriptureView
+        book={book}
+        chapter={chapter}
+        onScriptureChange={this.props.onScriptureChange}
+      />
     );
   }
 }
