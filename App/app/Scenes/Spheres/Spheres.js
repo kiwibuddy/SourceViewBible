@@ -36,6 +36,7 @@ type Props = {
   onPressBooks: Function,
   onPressPassages: Function,
   onPressSources: Function,
+  onPressSphere: Function,
   onPressWords: Function,
 };
 
@@ -256,7 +257,8 @@ export default class Spheres extends Component {
 
   _onPressSphere = (sphere: Object) => {
     if (sphere.id === this.state.sphere.id) return;
-    
+    this.props.onPressSphere(sphere);
+
     const books = this._getBooks(sphere);
     this.setState({
       sphere,

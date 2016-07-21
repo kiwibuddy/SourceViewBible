@@ -184,6 +184,7 @@ export default class App extends Component {
           onPressBooks={({sphere}) => this._pushRoute({key: '/Spheres/Books', sphereID: sphere.id, title: sphere.name })}
           onPressPassages={({sphere}) => this._pushRoute({key: '/Spheres/Passages', sphereID: sphere.id, title: sphere.name })}
           onPressSources={({sphere}) => this._pushRoute({key: '/Spheres/Sources', sphereID: sphere.id, title: sphere.name })}
+          onPressSphere={sphere => this._replaceCurrentRoute({key: '/Spheres', sphereID: sphere.id, title: Localizable.t('spheres.text')})}
           onPressWords={({sphere}) => this._pushRoute({key: '/Spheres/Words', sphereID: sphere.id, title: sphere.name })}
           sphereID={route.sphereID}
         />;
@@ -303,6 +304,28 @@ export default class App extends Component {
 
     if (navigation !== this.state.navigation) {
       this.setState({navigation}, callback);
+    }
+  };
+
+  _replaceCurrentRoute = (route: any) => {
+    const state = this.state.navigation;
+    const currentRoute = state.routes[state.index];
+
+    const delta = (state.routes.length - state.index);
+
+    const routes = [
+      ...(delta > 0 ? state.routes.slice(0, -delta) : state.routes),
+      route,
+    ];
+
+    const navigation = {
+      ...state,
+      index: routes.length - 1,
+      routes,
+    };
+
+    if (navigation !== this.state.navigation) {
+      this.setState({navigation});
     }
   };
 
