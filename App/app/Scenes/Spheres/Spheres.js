@@ -162,6 +162,7 @@ export default class Spheres extends Component {
 
   _renderBookRow = (book: Object) => {
     const { sphere } = this.state;
+    const colors = Colors.spheres[sphere.id];
     const wordCount = sphere.countOfBook(book.id);
     const spherePercent = (wordCount / book.wordCount) * 100;
 
@@ -173,13 +174,13 @@ export default class Spheres extends Component {
           </View>
           <View style={styles.sourcesRightContainer}>
             <BarChart
-              bars={[{color: Colors.tintColor, value: spherePercent}]}
-              deltaStyle={styles.barChartDelta}
+              bars={[{color: colors.tint, value: spherePercent}]}
+              deltaStyle={{backgroundColor: colors.lightTint}}
               maxChartValue={100}
               style={styles.sourcesBarChart}
             />
             <View style={styles.dataPair}>
-              <Text style={[StyleSheet.styles.cell.percentage, {color: Colors.tintColor}]}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
+              <Text style={[StyleSheet.styles.cell.percentage, {color: colors.tint}]}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
               <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('words.count', {count: wordCount, localizedCount: Localizable.toNumber(wordCount, {precision: 0})})}</Text>
             </View>
           </View>
@@ -343,8 +344,5 @@ const styles = StyleSheet.create({
     flex: 0,
     height: 4,
     marginBottom: 7,
-  },
-  barChartDelta: {
-    backgroundColor: Colors.lightTintColor,
   },
 });
