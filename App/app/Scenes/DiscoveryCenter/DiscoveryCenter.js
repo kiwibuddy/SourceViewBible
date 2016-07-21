@@ -198,11 +198,12 @@ export default class DiscoveryCenter extends Component {
             </View>
             <View style={styles.message}>
               <View style={styles.filterItem}>
-                <TouchableOpacity>
-                  <Text style={[styles.chartButton, {color: '#9B9B9B'}]}>+ ADD FILTER</Text>
-                </TouchableOpacity>
+                <View style={styles.leftContainer}>
+                  <TouchableOpacity>
+                    <Text style={[styles.chartButton, {color: '#9B9B9B'}]}>+ ADD FILTER</Text>
+                  </TouchableOpacity>
+                </View>
                 <View style={[styles.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
-                  <Text style={[styles.chartButton, {color: '#9B9B9B'}]}>+ ADD FILTER</Text>
                 </View>
                 <TouchableOpacity style={styles.readButton}>
                   <Text style={styles.readButtonTitle}>Explore 423 occurrences</Text>
