@@ -18,7 +18,7 @@ import {
   Localizable
 } from '../../Common';
 
-import Card from './Card';
+import Card, { CardHeader } from './Card';
 
 // $FlowFixMe: Can't find os module extension
 import LinearGradient from 'react-native-linear-gradient';
@@ -47,13 +47,13 @@ export default class DiscoveryCenter extends Component {
         </NavigationBar>
         <ScrollView style={styles.content}>
           <Card>
-            <View style={styles.header}>
+            <CardHeader>
               <View style={styles.leftContainer}>
                 <TouchableOpacity>
                   <Image source={require('../../Images/discoverycenter/btn-delete.png')} />
                 </TouchableOpacity>
               </View>
-            </View>
+            </CardHeader>
             <View style={styles.video}>
               <View style={styles.videoImage}>
                 <Image source={require('../../Images/discoverycenter/video-header-dc.png')} />
@@ -69,7 +69,7 @@ export default class DiscoveryCenter extends Component {
             </View>
           </Card>
           <Card>
-            <View style={styles.header}>
+            <CardHeader>
               <View style={styles.leftContainer}>
                 <TouchableOpacity>
                   <Image source={require('../../Images/discoverycenter/btn-delete.png')} />
@@ -83,7 +83,7 @@ export default class DiscoveryCenter extends Component {
                   <Image source={require('../../Images/discoverycenter/btn-share.png')} />
                 </TouchableOpacity>
               </View>
-            </View>
+            </CardHeader>
             <View style={styles.chart}>
               <Image source={require('../../Images/discoverycenter/chart-blankslate.png')} />
               <View style={[styles.chartHeader, {paddingLeft: 10}]}>
@@ -114,7 +114,7 @@ export default class DiscoveryCenter extends Component {
             </View>
           </Card>
           <Card>
-            <View style={styles.header}>
+            <CardHeader>
               <View style={styles.leftContainer}>
                 <TouchableOpacity>
                   <Image source={require('../../Images/discoverycenter/btn-delete.png')} />
@@ -128,7 +128,7 @@ export default class DiscoveryCenter extends Component {
                   <Image source={require('../../Images/discoverycenter/btn-share.png')} />
                 </TouchableOpacity>
               </View>
-            </View>
+            </CardHeader>
             <View style={styles.chart}>
               <Image source={require('../../Images/discoverycenter/chart-blankslate.png')} />
               <View style={styles.chartHeader}>
@@ -163,7 +163,7 @@ export default class DiscoveryCenter extends Component {
             </View>
           </Card>
           <Card>
-            <View style={styles.header}>
+            <CardHeader>
               <View style={styles.leftContainer}>
                 <TouchableOpacity>
                   <Image source={require('../../Images/discoverycenter/btn-delete.png')} />
@@ -177,7 +177,7 @@ export default class DiscoveryCenter extends Component {
                   <Image source={require('../../Images/discoverycenter/btn-share.png')} />
                 </TouchableOpacity>
               </View>
-            </View>
+            </CardHeader>
             <View style={styles.chart}>
               <Image source={require('../../Images/discoverycenter/chart-placeholder.png')} />
               <View style={styles.chartHeader}>
@@ -242,11 +242,6 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: NavigationBar.HEIGHT,
     marginBottom: Toolbar.HEIGHT,
-  },
-  header: {
-    flex: 0,
-    flexDirection: 'row',
-    justifyContent: 'center',
   },
   leftContainer: {
     flex: 1,

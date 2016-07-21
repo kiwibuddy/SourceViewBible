@@ -11,6 +11,14 @@ import {
   StyleSheet,
 } from '../../Common';
 
+export const CardHeader = (props: Object) => {
+  return (
+    <View style={styles.header}>
+      {props.children}
+    </View>
+  );
+};
+
 const Card = (props: Object) => {
   return (
     <View style={styles.card}>
@@ -32,6 +40,11 @@ const styles = StyleSheet.create({
       height: 1,
       width: 0,
     },
+  },
+  header: {
+    flex: 0,
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
 });
 
