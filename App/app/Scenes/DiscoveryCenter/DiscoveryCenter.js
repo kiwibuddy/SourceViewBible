@@ -19,6 +19,8 @@ import {
 } from '../../Common';
 
 import Card from './Card';
+import GettingStartedCard from './GettingStartedCard';
+
 import { DeleteButton, DuplicateButton, ShareButton } from './Buttons';
 
 // $FlowFixMe: Can't find os module extension
@@ -47,26 +49,7 @@ export default class DiscoveryCenter extends Component {
           </TouchableOpacity>
         </NavigationBar>
         <ScrollView style={styles.content}>
-          <Card>
-            <Card.Header>
-              <View style={styles.leftContainer}>
-                <DeleteButton />
-              </View>
-            </Card.Header>
-            <View style={styles.video}>
-              <View style={styles.videoImage}>
-                <Image source={require('../../Images/discoverycenter/video-header-dc.png')} />
-              </View>
-              <TouchableOpacity style={styles.videoPlay}>
-                <Image source={require('../../Images/common/btn-play.png')} />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.gettingstartedContainer}>
-              <Image style={styles.gettingstartedIcon} source={require('../../Images/discoverycenter/dc-icon.png')} />
-              <Text style={styles.gettingstartedHeader}>Create & Share Discoveries</Text>
-              <Text style={styles.gettingstartedBody}>Tap your way to new Biblical insights and share what your find.</Text>
-            </View>
-          </Card>
+          <GettingStartedCard />
           <Card>
             <Card.Header>
               <View style={styles.leftContainer}>
@@ -244,27 +227,6 @@ const styles = StyleSheet.create({
   share: {
     paddingLeft: 10,
   },
-  video: {
-    alignItems: 'center',
-  },
-  videoImage: {
-    shadowColor: 'black',
-    shadowOpacity: 0.1,
-    shadowRadius: 0.8,
-    shadowOffset: {
-      height: 1,
-      width: 0,
-    },
-  },
-  videoPlay: {
-    flex: 1,
-    position: 'absolute',
-    right: 0,
-    left: 0,
-    top: 65,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   chart: {
     alignItems: 'center',
     backgroundColor: '#5B6771',
@@ -314,27 +276,6 @@ const styles = StyleSheet.create({
     height: 44,
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  gettingstartedContainer: {
-    alignItems: 'center'
-  },
-  gettingstartedIcon: {
-    marginTop: 30,
-  },
-  gettingstartedHeader: {
-    fontSize: 28,
-    fontWeight: '700',
-    color: '#59626A',
-    textAlign: 'center',
-    marginTop: 15,
-  },
-  gettingstartedBody: {
-    fontSize: 17,
-    color: '#59626A',
-    textAlign: 'center',
-    marginTop: 10,
-    marginBottom: 40,
-    marginHorizontal: 20,
   },
   filterItem: {
     padding: 10,
