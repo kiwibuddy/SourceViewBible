@@ -36,7 +36,7 @@ const BlankslateCard = (props: Props) => {
         </View>
         <View style={[styles.rightContainer, {justifyContent: 'flex-end'}]}>
           <DuplicateButton />
-          <ShareButton style={styles.share} />
+          <ShareButton style={{paddingLeft: 10}} />
         </View>
       </Card.Header>
       <ChartBlankslate />
