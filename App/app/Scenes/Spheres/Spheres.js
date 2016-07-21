@@ -120,7 +120,7 @@ export default class Spheres extends Component {
           <Text style={[styles.contentBody, {marginTop: 5}]}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu imperdiet ipsum, at pellentesque arcu. Quisque eleifend enim id felis semper, id euismod dolor hendrerit. Sed fringilla dui eget enim pulvinar, vitae consequat dui bibendum. Maecenas nulla odio.</Text>
         </View>
         <View style={styles.listContainer}>
-          <View style={styles.listItemHeader}>
+          <View style={[styles.listItemHeader, {borderTopColor: colors.tint}]}>
             <Text style={StyleSheet.styles.cell.titlebold}>Top Books</Text>
           </View>
         </View>
@@ -130,7 +130,7 @@ export default class Spheres extends Component {
           <Image source={require('../../Images/common/disclosure.png')}  style={styles.disclosure} />
         </TouchableOpacity>
         <View style={styles.listContainer}>
-          <View style={styles.listItemHeader}>
+          <View style={[styles.listItemHeader, {borderTopColor: colors.tint}]}>
             <Text style={StyleSheet.styles.cell.titlebold}>Top Sources</Text>
           </View>
         </View>
@@ -293,12 +293,11 @@ const styles = StyleSheet.create({
   },
   listItemHeader: {
     borderTopWidth: 2,
-    borderTopColor: 'red',
     paddingLeft: 15,
     paddingVertical: 15,
     borderBottomColor: Colors.separator,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    shadowColor: "black",
+    shadowColor: 'black',
     shadowOpacity: 0.05,
     shadowRadius: 0.4,
     shadowOffset: {
