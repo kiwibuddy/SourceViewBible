@@ -177,7 +177,7 @@ export default class SphereBooks extends Component {
               style={styles.sourcesBarChart}
             />
             <View style={styles.dataPair}>
-              <Text style={[StyleSheet.styles.cell.percentage, {color: colors.tint}]}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
+              <Text style={[StyleSheet.styles.cell.percentage, {color: colors.chromeTint}]}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
               <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('words.count', {count: wordCount, localizedCount: Localizable.toNumber(wordCount, {precision: 0})})}</Text>
             </View>
           </View>

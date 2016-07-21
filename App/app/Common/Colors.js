@@ -50,7 +50,7 @@ module.exports = {
     family: {
       tint: '#FF3A2E',
       lightTint: '#ffdcda',
-      chromeTint: '#FF3A2E',
+      chromeTint: '#C11F17',
       gradient: {
         big:['#FF4B3B', '#AA0606'],
         tiny: ['#FF3A2E', '#FF3A2E']
@@ -59,7 +59,7 @@ module.exports = {
     economics: {
       tint: '#FF9700',
       lightTint: '#ffedd2',
-      chromeTint: '#FF9700',
+      chromeTint: '#EA6E00',
       gradient: {
         big:['#FC882A', '#D4202F'],
         tiny: ['#FF9700', '#FF9700']
@@ -68,16 +68,16 @@ module.exports = {
     government: {
       tint: '#FECB01',
       lightTint: '#fff8d1',
-      chromeTint: '#FECB01',
+      chromeTint: '#FF9700',
       gradient: {
         big: ['#FFBF00', '#FF933A'],
         tiny: ['#FECB01', '#FECB01']
       }
     },
     religion: {
-      tint: '#64AA20',
+      tint: '#88C807',
       lightTint: '#e0fae4',
-      chromeTint: '#64AA20',
+      chromeTint: '#639104',
       gradient: {
         big: ['#8BC624', '#429321'],
         tiny: ['#64AA20', '#64AA20']
@@ -86,7 +86,7 @@ module.exports = {
     education: {
       tint: '#25B8D7',
       lightTint: '#d9f2f9',
-      chromeTint: '#25B8D7',
+      chromeTint: '#1F94AD',
       gradient: {
         big: ['#11C7B8', '#1A5A78'],
         tiny: ['#25B8D7', '#25B8D7']
@@ -95,7 +95,7 @@ module.exports = {
     communication: {
       tint: '#5A5AD3',
       lightTint: '#e1e2f8',
-      chromeTint: '#5A5AD3',
+      chromeTint: '#3B3B88',
       gradient: {
         big: ['#C86DD7', '#3023AE'],
         tiny: ['#5A5AD3', '#5A5AD3']
@@ -104,7 +104,7 @@ module.exports = {
     celebration: {
       tint: '#C44DF8',
       lightTint: '#f9e0f0',
-      chromeTint: '#C44DF8',
+      chromeTint: '#7B349A',
       gradient: {
         big: ['#D8379F', '#AD39DF'],
         tiny: ['#C44DF8', '#C44DF8']
