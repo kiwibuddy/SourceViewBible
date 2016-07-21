@@ -92,7 +92,8 @@ export default class Spheres extends Component {
           </View>
         </LinearGradient>
         <View style={styles.carouselGraphContainer}>
-          <View style={[styles.carouselGraph, {backgroundColor: colors.tint, width: 150}]} />
+          <View style={[styles.carouselGraph, {backgroundColor: colors.tint, flex: spherePercent}]} />
+          <View style={[styles.carouselGraph, {flex: 100-spherePercent}]} />
         </View>
         <View style={StyleSheet.styles.statisticsContainer}>
           <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.onPressBooks({sphere})}>
@@ -232,10 +233,10 @@ const styles = StyleSheet.create({
   carouselGraphContainer: {
     height: 2,
     backgroundColor: '#D8D8D8',
+    flexDirection: 'row',
   },
   carouselGraph: {
     height: 2,
-    backgroundColor: 'red',
   },
   sphereTitle: {
     fontSize: 21,
