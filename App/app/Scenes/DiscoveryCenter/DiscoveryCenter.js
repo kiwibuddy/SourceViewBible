@@ -175,9 +175,18 @@ export default class DiscoveryCenter extends Component {
                     <Text style={[styles.chartButton, {color: '#9B9B9B'}]}>+ ADD FILTER</Text>
                   </TouchableOpacity>
                 </View>
-                <View style={[styles.rightContainer, {justifyContent: 'flex-end'}]}>
+                <View style={[styles.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
                   <TouchableOpacity>
-                    <Text style={[styles.chartButton, {color: '#9B9B9B'}]}>+ ADD FILTER</Text>
+                    <Text style={[styles.chartButton, {color: Colors.tint}]}>BOOKS</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                    <Text style={[styles.chartButton, {color: Colors.tint}]}>WORDS</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                    <Text style={[styles.chartButton, {color: Colors.tint}]}>SOURCES</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                    <Text style={[styles.chartButton, {color: Colors.tint}]}>SPHERES</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -237,6 +246,7 @@ const styles = StyleSheet.create({
   chart: {
     alignItems: 'center',
     backgroundColor: '#5B6771',
+    overflow: 'hidden',
     shadowColor: 'black',
     shadowOpacity: 0.1,
     shadowRadius: 0.8,

@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
   },
   video: {
     alignItems: 'center',
+    overflow: 'hidden',
   },
   videoImage: {
     shadowColor: 'black',
