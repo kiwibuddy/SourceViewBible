@@ -301,6 +301,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   chart: {
+    alignItems: 'center',
     backgroundColor: '#5B6771',
     shadowColor: 'black',
     shadowOpacity: 0.1,
