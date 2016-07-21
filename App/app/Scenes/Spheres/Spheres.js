@@ -99,34 +99,34 @@ export default class Spheres extends Component {
         >
           <View style={styles.carousel}>
             <TouchableOpacity
-              onPress={() => this._onPressSphere(sortedSpheres[6])}
-              style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE*1.2, right: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2) - (CAROUSEL_ITEM_SIZE/2.2), transform:[{scale:0.7}]}]}>
-              {carouselIcons[6]}
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => this._onPressSphere(sortedSpheres[5])}
-              style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE*1.2, left: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2) - (CAROUSEL_ITEM_SIZE/2.2), transform:[{scale:0.7}]}]}>
-              {carouselIcons[5]}
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => this._onPressSphere(sortedSpheres[4])}
-              style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE/1.25, right: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2.5) - (CAROUSEL_ITEM_SIZE*1.5), transform:[{scale:0.8}]}]}>
-              {carouselIcons[4]}
-            </TouchableOpacity>
-            <TouchableOpacity
               onPress={() => this._onPressSphere(sortedSpheres[3])}
-              style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE/1.25, left: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2.5) - (CAROUSEL_ITEM_SIZE*1.5), transform:[{scale:0.8}]}]}>
+              style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE*1.2, right: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2) - (CAROUSEL_ITEM_SIZE/2.2), transform:[{scale:0.7}]}]}>
               {carouselIcons[3]}
             </TouchableOpacity>
             <TouchableOpacity
+              onPress={() => this._onPressSphere(sortedSpheres[4])}
+              style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE*1.2, left: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2) - (CAROUSEL_ITEM_SIZE/2.2), transform:[{scale:0.7}]}]}>
+              {carouselIcons[4]}
+            </TouchableOpacity>
+            <TouchableOpacity
               onPress={() => this._onPressSphere(sortedSpheres[2])}
-              style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE/2, right: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2.5) - (CAROUSEL_ITEM_SIZE), transform:[{scale:0.9}]}]}>
+              style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE/1.25, right: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2.5) - (CAROUSEL_ITEM_SIZE*1.5), transform:[{scale:0.8}]}]}>
               {carouselIcons[2]}
             </TouchableOpacity>
             <TouchableOpacity
+              onPress={() => this._onPressSphere(sortedSpheres[5])}
+              style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE/1.25, left: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2.5) - (CAROUSEL_ITEM_SIZE*1.5), transform:[{scale:0.8}]}]}>
+              {carouselIcons[5]}
+            </TouchableOpacity>
+            <TouchableOpacity
               onPress={() => this._onPressSphere(sortedSpheres[1])}
-              style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE/2, left: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2.5) - (CAROUSEL_ITEM_SIZE), transform:[{scale:0.9}]}]}>
+              style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE/2, right: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2.5) - (CAROUSEL_ITEM_SIZE), transform:[{scale:0.9}]}]}>
               {carouselIcons[1]}
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this._onPressSphere(sortedSpheres[6])}
+              style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE/2, left: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2.5) - (CAROUSEL_ITEM_SIZE), transform:[{scale:0.9}]}]}>
+              {carouselIcons[6]}
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => this._onPressSphere(sortedSpheres[0])}
