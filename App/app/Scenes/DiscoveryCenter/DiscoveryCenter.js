@@ -185,15 +185,21 @@ export default class DiscoveryCenter extends Component {
           <View style={styles.popover}>
             <View style={styles.tableHeader}>
               <TouchableOpacity style={styles.leftContainer}>
-                <Text style={styles.chartProperty}>Back</Text>
+                <Text style={styles.back}>Back</Text>
               </TouchableOpacity>
+              <View style={styles.separator} />
             </View>
             <ScrollView>
-              <View style={StyleSheet.styles.statisticContainer}>
-                <Text style={StyleSheet.styles.statisticTitleBold}>Title</Text>
-                <Text style={StyleSheet.styles.statisticSubtitle}>Whole Bible</Text>
-              </View>
-              <View style={StyleSheet.styles.statisticKeyline} />
+              <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
+                <Text style={StyleSheet.styles.cell.title}>Whole Bible</Text>
+                <Image source={require('../../Images/common/disclosure.png')}  style={styles.disclosure} />
+              </TouchableOpacity>
+              <View style={styles.separator} />
+              <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
+                <Text style={StyleSheet.styles.cell.title}>Whole Bible</Text>
+                <Image source={require('../../Images/common/disclosure.png')}  style={styles.disclosure} />
+              </TouchableOpacity>
+              <View style={styles.separator} />
             </ScrollView>
           </View>
         </View>
@@ -381,6 +387,19 @@ const styles = StyleSheet.create({
   popover: {
     backgroundColor: 'rgba(255, 255, 255, 0.99)',
     borderRadius: 4,
-    marginTop: 200,
+    position: 'absolute',
+    top: 400,
+    bottom: 0,
+    right: 0,
+    left: 0,
+  },
+  separator: {
+    ...StyleSheet.styles.separator,
+    marginLeft: 15,
+  },
+  back: {
+    color: Colors.tint,
+    fontSize: 17,
+    paddingLeft: 5,
   }
 });
