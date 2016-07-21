@@ -110,7 +110,7 @@ export default class BookSpheres extends Component {
     return (
       <TouchableOpacity style={styles.listItemContainer} onPress={() => this.props.onPressSphere(sphere)}>
         <PieChart
-          color={Color}
+          color={tintColor}
           slices={[{color: tintColor, value: spherePercent}, {color: lightTint, value: 100 - spherePercent}]}
           title={Localizable.toPercentage(spherePercent, {precision: 0})}
           size={57}
