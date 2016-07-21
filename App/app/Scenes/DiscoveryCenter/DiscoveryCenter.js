@@ -80,12 +80,14 @@ export default class DiscoveryCenter extends Component {
             </View>
             <View style={styles.message}>
               <View style={styles.filterItem}>
-                <TouchableOpacity>
+                <View style={styles.leftContainer}>
+                  <TouchableOpacity>
                   <Text style={[styles.chartButton, {color: Colors.tint}]}>+ ADD FILTER</Text>
-                </TouchableOpacity>
-                <View style={styles.filterBlankslate}>
-                  <Image source={require('../../Images/discoverycenter/filter-blankslate.png')} />
+                  </TouchableOpacity>
                 </View>
+              </View>
+              <View style={styles.filterBlankslate}>
+                <Image source={require('../../Images/discoverycenter/filter-blankslate.png')} />
               </View>
             </View>
           </Card>
@@ -123,12 +125,14 @@ export default class DiscoveryCenter extends Component {
             </View>
             <View style={styles.message}>
               <View style={styles.filterItem}>
-                <TouchableOpacity>
+                <View style={styles.leftContainer}>
+                  <TouchableOpacity>
                   <Text style={[styles.chartButton, {color: Colors.tint}]}>+ ADD FILTER</Text>
-                </TouchableOpacity>
-                <View style={styles.filterBlankslate}>
-                  <Image source={require('../../Images/discoverycenter/filter-blankslate.png')} />
+                  </TouchableOpacity>
                 </View>
+              </View>
+              <View style={styles.filterBlankslate}>
+                <Image source={require('../../Images/discoverycenter/filter-blankslate.png')} />
               </View>
             </View>
           </Card>
@@ -171,12 +175,15 @@ export default class DiscoveryCenter extends Component {
                     <Text style={[styles.chartButton, {color: '#9B9B9B'}]}>+ ADD FILTER</Text>
                   </TouchableOpacity>
                 </View>
-                <View style={[styles.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
+                <View style={[styles.rightContainer, {justifyContent: 'flex-end'}]}>
+                  <TouchableOpacity>
+                    <Text style={[styles.chartButton, {color: '#9B9B9B'}]}>+ ADD FILTER</Text>
+                  </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={styles.readButton}>
-                  <Text style={styles.readButtonTitle}>Explore 423 occurrences</Text>
-                </TouchableOpacity>
               </View>
+              <TouchableOpacity style={styles.readButton}>
+                <Text style={styles.readButtonTitle}>Explore 423 occurrences</Text>
+              </TouchableOpacity>
             </View>
           </Card>
         </ScrollView>
@@ -278,7 +285,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   filterItem: {
-    padding: 10,
+    flex: 0,
+    flexDirection: 'row',
+    height: 44,
   },
   filterBlankslate: {
     paddingVertical: 50,
