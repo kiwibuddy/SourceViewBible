@@ -94,6 +94,7 @@ export default class SphereBooks extends Component {
 
   _renderHeader = () => {
     const { sphere } = this.state;
+    const colors = Colors.spheres[sphere.id];
 
     let oldTestamentWordCount = 0;
     let oldTestamentSphereWordCount = 0;
@@ -147,7 +148,7 @@ export default class SphereBooks extends Component {
         </ScrollView>
         <SegmentedControl
           style={styles.segmentedControl}
-          tintColor={Colors.tintColor}
+          tintColor={colors.tint}
           values={SEGMENTS}
           selectedIndex={this.state.selectedSegmentIndex}
           onValueChange={(value) => this._onSegmentedControlValueChanged(SEGMENTS.indexOf(value))}
