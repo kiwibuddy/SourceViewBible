@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
     flex: 0,
     flexDirection: 'row',
     height: 44,
+    overflow: 'hidden',
   },
   button: {
     color: Colors.tint,
