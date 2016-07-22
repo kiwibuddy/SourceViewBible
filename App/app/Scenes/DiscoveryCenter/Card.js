@@ -11,8 +11,11 @@ import {
   StyleSheet,
 } from '../../Common';
 
+import Chart from './Chart';
 import ChartBlankslate from './ChartBlankslate';
 import FilterBlankslate from './FilterBlankslate';
+import BarChart from './BarChart';
+
 import { DeleteButton, DuplicateButton, ShareButton } from './Buttons';
 
 export const Header = (props: Object) => {
@@ -74,7 +77,7 @@ export default class Card extends Component {
   _renderHeader = () => {
     return (
       <Header>
-        <View style={styles.leftContainer}>
+        <View style={StyleSheet.styles.discoveryCenter.leftContainer}>
           <DeleteButton onPress={this.props.onPressDelete}/>
         </View>
         <View style={[StyleSheet.styles.discoveryCenter.rightContainer, {justifyContent: 'flex-end'}]}>
@@ -86,13 +89,21 @@ export default class Card extends Component {
   };
 
   _renderChart = () => {
-    if (this.state.chartType == null) {
-      return (
-        <ChartBlankslate />
-      );
-    }
+    switch (this.state.chartType) {
+      case Chart.Type.BAR:
+        return <BarChart />;
 
-    return null;
+      case Chart.Type.PIE:
+        return null;
+
+      case Chart.Type.CLOUD:
+        return null;
+
+      default:
+        return <ChartBlankslate
+          onPressChartType={(chartType) => this.setState({chartType})}
+        />;
+    }
   };
 
   _renderFilter = () => {

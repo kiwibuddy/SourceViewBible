@@ -14,6 +14,12 @@ import {
   StyleSheet,
 } from '../../Common';
 
+const ChartType = {
+  BAR: 'bar',
+  PIE: 'pie',
+  CLOUD: 'cloud',
+};
+
 const Header = (props: Object) => {
   return (
     <View {...props} style={[styles.header, props.style]}>
@@ -64,6 +70,7 @@ const Chart = (props: Object) => {
     </View>
   );
 };
+Chart.Type = ChartType;
 Chart.Header = Header;
 Chart.Footer = Footer;
 Chart.Button = Button;
