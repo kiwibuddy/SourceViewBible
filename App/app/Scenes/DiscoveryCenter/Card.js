@@ -96,7 +96,7 @@ export default class Card extends Component {
           <DeleteButton onPress={this.props.onPressDelete} />
         </View>
         <View style={[StyleSheet.styles.discoveryCenter.rightContainer, {justifyContent: 'flex-end'}]}>
-          <DuplicateButton onPress={this.props.onPressDuplicate} />
+          <DuplicateButton onPress={this._onPressDuplicate} />
           <ShareButton style={{paddingLeft: 10}} />
         </View>
       </Header>
@@ -157,6 +157,12 @@ export default class Card extends Component {
     const filter = {id: 'filter-' + Date.now()};
     this._addFilter(filter);
   };
+
+  _onPressDuplicate = () => {
+    if (this.props.onPressDuplicate) {
+      this.props.onPressDuplicate(this.state.card);
+    }
+  }
 
   _addFilter = (filter: Object) => {
     const { card } = this.state;

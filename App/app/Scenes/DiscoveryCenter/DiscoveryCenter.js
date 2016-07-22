@@ -127,7 +127,7 @@ export default class DiscoveryCenter extends Component {
         key={card.key}
         card={card}
         onPressDelete={() => this._deleteCard(card)}
-        onPressDuplicate={() => this._duplicateCard(card)}
+        onPressDuplicate={(card) => this._duplicateCard(card)}
       />;
     }
   };
