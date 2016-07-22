@@ -16,14 +16,20 @@ import {
   StyleSheet,
 } from '../../Common';
 
+type Props = {
+  onPressCancel: Function,
+};
+
 export default class Popover extends Component {
+  props: Props;
+
   render() {
     return (
-      <TouchableWithoutFeedback onPress={() => {}}>
+      <TouchableWithoutFeedback onPress={this.props.onPressCancel}>
         <View style={styles.overlayContainer}>
           <View style={styles.popover}>
             <View style={styles.tableHeader}>
-              <TouchableOpacity style={StyleSheet.styles.discoveryCenter.leftContainer}>
+              <TouchableOpacity style={StyleSheet.styles.discoveryCenter.leftContainer} onPress={this.props.onPressCancel}>
                 <Text style={styles.back}>Cancel</Text>
               </TouchableOpacity>
               <View style={styles.separator} />

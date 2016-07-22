@@ -115,7 +115,7 @@ export default class DiscoveryCenter extends Component {
     if (this.state.popover == null) return null;
 
     return (
-      <Popover />
+      <Popover onPressCancel={this._hidePopover}/>
     );
   }
 
