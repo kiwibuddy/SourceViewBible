@@ -25,14 +25,14 @@ const CloudChart = (props: Props) => {
       <Image source={require('../Images/chart-cloud-blankslate.png')} />
       <Chart.Header>
         <Chart.DropdownButton
-          image={require('../Images/chart-icn-word-yaxis.png')}
+          image={require('../Images/chart-icn-word-xaxis.png')}
           title="Choose Text"
-          style={StyleSheet.styles.discoveryCenter.leftContainer}
+          style={StyleSheet.styles.discoveryCenter.rightContainer}
         />
         <Chart.DropdownButton
-          image={require('../Images/chart-icn-word-xaxis.png')}
+          image={require('../Images/chart-icn-word-yaxis.png')}
           title="Choose Size"
-          style={StyleSheet.styles.discoveryCenter.rightContainer}
+          style={StyleSheet.styles.discoveryCenter.leftContainer}
         />
       </Chart.Header>
       <Chart.Footer>
