@@ -7,6 +7,7 @@ const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithP
 import {
   Dimensions,
   Image,
+  LayoutAnimation,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -99,36 +100,43 @@ export default class Spheres extends Component {
         >
           <View style={styles.carousel}>
             <TouchableOpacity
+              key={'sphere-' + sortedSpheres[3].id}
               onPress={() => this._onPressSphere(sortedSpheres[3])}
               style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE*1.2, right: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2) - (CAROUSEL_ITEM_SIZE/2.2), transform:[{scale:0.7}]}]}>
               {carouselIcons[3]}
             </TouchableOpacity>
             <TouchableOpacity
+              key={'sphere-' + sortedSpheres[4].id}
               onPress={() => this._onPressSphere(sortedSpheres[4])}
               style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE*1.2, left: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2) - (CAROUSEL_ITEM_SIZE/2.2), transform:[{scale:0.7}]}]}>
               {carouselIcons[4]}
             </TouchableOpacity>
             <TouchableOpacity
+              key={'sphere-' + sortedSpheres[2].id}
               onPress={() => this._onPressSphere(sortedSpheres[2])}
               style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE/1.25, right: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2.5) - (CAROUSEL_ITEM_SIZE*1.5), transform:[{scale:0.8}]}]}>
               {carouselIcons[2]}
             </TouchableOpacity>
             <TouchableOpacity
+              key={'sphere-' + sortedSpheres[5].id}
               onPress={() => this._onPressSphere(sortedSpheres[5])}
               style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE/1.25, left: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2.5) - (CAROUSEL_ITEM_SIZE*1.5), transform:[{scale:0.8}]}]}>
               {carouselIcons[5]}
             </TouchableOpacity>
             <TouchableOpacity
+              key={'sphere-' + sortedSpheres[1].id}
               onPress={() => this._onPressSphere(sortedSpheres[1])}
               style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE/2, right: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2.5) - (CAROUSEL_ITEM_SIZE), transform:[{scale:0.9}]}]}>
               {carouselIcons[1]}
             </TouchableOpacity>
             <TouchableOpacity
+              key={'sphere-' + sortedSpheres[6].id}
               onPress={() => this._onPressSphere(sortedSpheres[6])}
               style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE/2, left: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2.5) - (CAROUSEL_ITEM_SIZE), transform:[{scale:0.9}]}]}>
               {carouselIcons[6]}
             </TouchableOpacity>
             <TouchableOpacity
+              key={'sphere-' + sortedSpheres[0].id}
               onPress={() => this._onPressSphere(sortedSpheres[0])}
               style={[styles.carouselItem, {bottom: 0, left: WIDTH/2 - CAROUSEL_ITEM_SIZE/2}]}>
               {carouselIcons[0]}
@@ -259,6 +267,8 @@ export default class Spheres extends Component {
     if (sphere.id === this.state.sphere.id) return;
     this.props.onPressSphere(sphere);
 
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    
     const books = this._getBooks(sphere);
     this.setState({
       sphere,
