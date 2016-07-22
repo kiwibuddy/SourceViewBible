@@ -29,11 +29,24 @@ export default class Popover extends Component {
         <View style={styles.overlayContainer}>
           <View style={styles.popover}>
             <View style={styles.tableHeader}>
-              <TouchableOpacity style={StyleSheet.styles.discoveryCenter.leftContainer} onPress={this.props.onPressCancel}>
+              <TouchableOpacity  style={styles.backContainer} onPress={this.props.onPressCancel}>
                 <Text style={styles.back}>Cancel</Text>
               </TouchableOpacity>
-              <View style={styles.separator} />
+              <Text style={styles.title}>Books Filter</Text>
             </View>
+            <View style={[styles.separator, {marginLeft: 0}]} />
+            <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
+              <Text style={StyleSheet.styles.cell.title}>Whole Bible</Text>
+            </TouchableOpacity>
+            <View style={styles.separator} />
+            <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
+              <Text style={StyleSheet.styles.cell.title}>Old Testament</Text>
+            </TouchableOpacity>
+            <View style={styles.separator} />
+            <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
+              <Text style={StyleSheet.styles.cell.title}>New Testament</Text>
+            </TouchableOpacity>
+            <View style={styles.separator} />
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -60,15 +73,29 @@ const styles = StyleSheet.create({
     left: 4,
   },
   tableHeader: {
-
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 44,
   },
   separator: {
     ...StyleSheet.styles.separator,
     marginLeft: 15,
   },
+  backContainer: {
+    position: 'absolute',
+    left: 15,
+    justifyContent: 'center',
+    height: 44,
+  },
   back: {
     color: Colors.tint,
     fontSize: 17,
-    paddingLeft: 5,
+  },
+  title: {
+    color: 'black',
+    fontSize: 17,
+    fontWeight: 'bold',
+
   },
 });
