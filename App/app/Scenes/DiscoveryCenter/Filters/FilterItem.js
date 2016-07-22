@@ -36,6 +36,11 @@ const FilterItem = (props: Props) => {
           <Text style={styles.filterButtonTitle}>Narrator</Text>
           <Image source={require('../Images/chart-icn-dropdown-filter.png')} />
         </TouchableOpacity>
+        <Text>Foo is</Text>
+        <TouchableOpacity style={styles.filterButton}>
+          <Text style={styles.filterButtonTitle}>Narrator</Text>
+          <Image source={require('../Images/chart-icn-dropdown-filter.png')} />
+        </TouchableOpacity>
         <TouchableOpacity style={styles.filterDelete} onPress={props.onPressDeleteFilter}>
           <Image source={require('../Images/chart-icn-filter-delete.png')} />
         </TouchableOpacity>
