@@ -16,7 +16,7 @@ type Props = {
 const ChartBlankslate = (props: Props) => {
   return (
     <Chart>
-      <Image source={require('../Images/chart-blankslate.png')} />
+      <Image source={require('../Images/chart-bar-blankslate.png')} />
       <Chart.Header style={{paddingLeft: 10}}>
         <Chart.Button title="BAR CHART" style={{color: '#FFFFFF'}} onPress={() => props.onPressChartType(Chart.Type.BAR)} />
         <Chart.Button title="PIE CHART" style={{color: '#FFFFFF'}} onPress={() => props.onPressChartType(Chart.Type.PIE)}/>

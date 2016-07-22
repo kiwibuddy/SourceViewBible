@@ -18,7 +18,7 @@ import Chart from './Chart';
 const PieChart = (props: Object) => {
   return (
     <Chart>
-      <Image source={require('../Images/chart-blankslate.png')} />
+      <Image source={require('../Images/chart-bar-blankslate.png')} />
       <Chart.Header>
         <Chart.DropdownButton
           image={require('../Images/chart-icn-bar-yaxis.png')}
