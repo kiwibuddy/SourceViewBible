@@ -64,13 +64,13 @@ export default class AddFilterItem extends Component {
         <TouchableOpacity onPress={() => this._onPressFilterType(FilterType.BOOK)} >
           <Text style={styles.button}>BOOKS</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => this._onPressFilterType(FilterType.WORD)} >
+        <TouchableOpacity onPress={() => {}} >
           <Text style={styles.button}>WORDS</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => this._onPressFilterType(FilterType.SOURCE)} >
+        <TouchableOpacity onPress={() => {}} >
           <Text style={styles.button}>SOURCES</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => this._onPressFilterType(FilterType.SPHERE)} >
+        <TouchableOpacity onPress={() => {}} >
           <Text style={styles.button}>SPHERES</Text>
         </TouchableOpacity>
       </View>

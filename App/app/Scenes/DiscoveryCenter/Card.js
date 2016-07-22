@@ -28,6 +28,8 @@ import FilterItems from './Filters/FilterItems';
 
 import { DeleteButton, DuplicateButton, ShareButton } from './Buttons';
 
+import { FilterType } from './Constants';
+
 export const Header = (props: Object) => {
   return (
     <View {...props} style={[styles.header, props.style]}>
@@ -156,8 +158,12 @@ export default class Card extends Component {
   }
 
   _onPressFilterType = (filterType: string) => {
-    const filter = {id: 'filter-' + Date.now()};
-    this._addFilter(filter);
+    switch (filterType) {
+      case FilterType.BOOK:
+        const filter = {id: 'filter-' + Date.now()};
+        this._addFilter(filter);
+        break;
+    }
   };
 
   _onPressDuplicate = () => {
