@@ -17,7 +17,7 @@ const BarChart = (props: Object) => {
   return (
     <Chart>
       <Image source={require('../../Images/discoverycenter/chart-blankslate.png')} />
-      <Chart.Header style={{paddingLeft: 10}}>
+      <Chart.Header>
         <Chart.DropdownButton
           image={require('../../Images/discoverycenter/chart-icn-bar-yaxis.png')}
           title="Choose Y Axis"
