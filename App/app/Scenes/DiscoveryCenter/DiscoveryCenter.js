@@ -5,6 +5,7 @@ import React, { Component, PropTypes } from 'react';
 const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
 
 import {
+  LayoutAnimation,
   Text,
   TouchableOpacity,
   View,
@@ -153,6 +154,7 @@ export default class DiscoveryCenter extends Component {
     const cards = this.state.cards.slice();
     cards.splice(cardIndex, 1);
 
+    this._animateLayout();
     this.setState({cards}, () => {
       if (cards.length == 1) {
         const scrollView = this.refs[SCROLLVIEW_REF];
@@ -167,6 +169,10 @@ export default class DiscoveryCenter extends Component {
       const scrollView = this.refs[SCROLLVIEW_REF];
       scrollView.scrollTo({y: scrollHeight, animated: animated});
     }
+  };
+
+  _animateLayout = () => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
   };
 }
 

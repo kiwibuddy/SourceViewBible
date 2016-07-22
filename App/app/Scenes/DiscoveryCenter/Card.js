@@ -4,6 +4,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import {
+  LayoutAnimation,
   Text,
   TouchableOpacity,
   View
@@ -116,7 +117,10 @@ export default class Card extends Component {
 
       default:
         return <ChartBlankslate
-          onPressChartType={(chartType) => this.setState({chartType})}
+          onPressChartType={(chartType) => {
+            this._animateLayout();
+            this.setState({chartType});
+          }}
         />;
     }
   };
@@ -156,6 +160,7 @@ export default class Card extends Component {
       filter
     ];
 
+    this._animateLayout();
     this.setState({filters});
   };
 
@@ -163,7 +168,12 @@ export default class Card extends Component {
     const { filters } = this.state;
     filters.splice(filters.indexOf(filter), 1);
 
+    this._animateLayout();
     this.setState({filters});
+  };
+
+  _animateLayout = () => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
   };
 };
 
