@@ -115,7 +115,9 @@ export default class Card extends Component {
   _renderFilter = () => {
     if (this.state.filters.length == 0) {
       return (
-        <FilterBlankslate />
+        <FilterBlankslate
+          onPressAddFilter={() => console.log('add Filter')}
+        />
       );
     }
 

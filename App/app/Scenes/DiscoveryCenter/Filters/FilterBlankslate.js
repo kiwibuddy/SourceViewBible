@@ -15,12 +15,16 @@ import {
   StyleSheet,
 } from '../../../Common';
 
-const FilterBlankslate = (props: Object) => {
+type Props = {
+  onPressAddFilter: Function,
+};
+
+const FilterBlankslate = (props: Props) => {
   return (
     <View {...props}>
       <View style={styles.filterItem}>
         <View style={styles.leftContainer}>
-          <Chart.Button title="+ ADD FILTER" style={{color: Colors.tint}} />
+          <Chart.Button title="+ ADD FILTER" style={{color: Colors.tint}} onPress={props.onPressAddFilter} />
         </View>
       </View>
       <View style={styles.blankslate}>
