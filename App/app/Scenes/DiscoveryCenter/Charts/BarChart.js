@@ -27,12 +27,12 @@ const BarChart = (props: Props) => {
         <Chart.DropdownButton
           image={require('../Images/chart-icn-bar-xaxis.png')}
           title="Choose X Axis"
-          style={StyleSheet.styles.discoveryCenter.rightContainer}
+          style={StyleSheet.styles.discoveryCenter.leftContainer}
         />
         <Chart.DropdownButton
           image={require('../Images/chart-icn-bar-yaxis.png')}
           title="Choose Y Axis"
-          style={StyleSheet.styles.discoveryCenter.leftContainer}
+          style={StyleSheet.styles.discoveryCenter.rightContainer}
         />
       </Chart.Header>
       <Chart.Footer>

@@ -27,12 +27,12 @@ const CloudChart = (props: Props) => {
         <Chart.DropdownButton
           image={require('../Images/chart-icn-word-xaxis.png')}
           title="Choose Text"
-          style={StyleSheet.styles.discoveryCenter.rightContainer}
+          style={StyleSheet.styles.discoveryCenter.leftContainer}
         />
         <Chart.DropdownButton
           image={require('../Images/chart-icn-word-yaxis.png')}
           title="Choose Size"
-          style={StyleSheet.styles.discoveryCenter.leftContainer}
+          style={StyleSheet.styles.discoveryCenter.rightContainer}
         />
       </Chart.Header>
       <Chart.Footer>
