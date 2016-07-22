@@ -29,12 +29,19 @@ const Blankslate = () => {
 
 type Props = {
   filters: any,
+  onPressDeleteFilter: Function,
   onPressFilterType: Function,
 };
 
 const FilterItems = (props: Props) => {
   const { filters } = props;
-  const filterItems = filters.map(filter => <FilterItem key={filter.id} filter={filter} />);
+  const filterItems = filters.map(filter => {
+    return <FilterItem
+      key={filter.id}
+      filter={filter}
+      onPressDeleteFilter={() => props.onPressDeleteFilter(filter)}
+    />
+  });
   const blankslate = (filters.length > 0 ? null : <Blankslate />);
 
   return (

@@ -15,7 +15,12 @@ import {
   StyleSheet,
 } from '../../../Common';
 
-const FilterItem = (props: Object) => {
+type Props = {
+  filter: Object,
+  onPressDeleteFilter: Function,
+};
+
+const FilterItem = (props: Props) => {
   return (
     <View>
       <View style={StyleSheet.styles.discoveryCenter.topContainer}>
@@ -31,7 +36,7 @@ const FilterItem = (props: Object) => {
           <Text style={styles.filterButtonTitle}>Narrator</Text>
           <Image source={require('../Images/chart-icn-dropdown-filter.png')} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.filterDelete}>
+        <TouchableOpacity style={styles.filterDelete} onPress={props.onPressDeleteFilter}>
           <Image source={require('../Images/chart-icn-filter-delete.png')} />
         </TouchableOpacity>
       </View>

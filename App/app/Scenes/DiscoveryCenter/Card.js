@@ -124,6 +124,7 @@ export default class Card extends Component {
     return (
       <FilterItems
         filters={filters}
+        onPressDeleteFilter={(filter) => this._deleteFilter(filter)}
         onPressFilterType={this._onPressFilterType}
       />
     );
@@ -141,7 +142,24 @@ export default class Card extends Component {
   }
 
   _onPressFilterType = (filterType: string) => {
-    console.log(filterType);
+    const filter = {id: 'filter-' + Date.now()};
+    this._addFilter(filter);
+  };
+
+  _addFilter = (filter: Object) => {
+    const filters = [
+      ...this.state.filters,
+      filter
+    ];
+
+    this.setState({filters});
+  };
+
+  _deleteFilter = (filter: Object) => {
+    const { filters } = this.state;
+    filters.splice(filters.indexOf(filter), 1);
+
+    this.setState({filters});
   };
 };
 
