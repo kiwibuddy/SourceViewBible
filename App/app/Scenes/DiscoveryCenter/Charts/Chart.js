@@ -11,8 +11,12 @@ import {
 } from 'react-native';
 
 import {
+  Colors,
   StyleSheet,
 } from '../../../Common';
+
+// $FlowFixMe: Can't find os module extension
+import LinearGradient from 'react-native-linear-gradient';
 
 const ChartType = {
   BAR: 'bar',
@@ -66,7 +70,13 @@ const DropdownButton = (props: DropdownButtonProps) => {
 const Chart = (props: Object) => {
   return (
     <View style={styles.chart} {...props}>
-      {props.children}
+      <LinearGradient
+        colors={['#76838F', '#323B43']}
+        start={[0.5, 0.25]} end={[0.5, 1.0]}
+        style={{flex: 1}}
+      >
+        {props.children}
+      </LinearGradient>
     </View>
   );
 };
@@ -105,11 +115,13 @@ const styles = StyleSheet.create({
     fontSize: 11,
     fontWeight: 'bold',
     paddingRight: 15,
+    backgroundColor: 'transparent',
   },
   chartProperty: {
     fontSize: 11,
     paddingLeft: 5,
-    color: '#FFFFFF'
+    color: '#FFFFFF',
+    backgroundColor: 'transparent',
   },
   chartDropdown: {
     position: 'absolute',
