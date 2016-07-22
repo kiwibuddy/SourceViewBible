@@ -11,10 +11,16 @@ import {
   StyleSheet,
 } from '../../Common';
 
-import Chart from './Chart';
-import ChartBlankslate from './ChartBlankslate';
-import FilterBlankslate from './FilterBlankslate';
-import BarChart from './BarChart';
+import {
+  Chart,
+  BarChart,
+  ChartBlankslate,
+} from './Charts';
+
+import {
+  FilterBlankslate
+} from './Filters';
+
 
 import { DeleteButton, DuplicateButton, ShareButton } from './Buttons';
 
@@ -33,7 +39,7 @@ type Props = {
 
 type State = {
   chartType: any,
-  filter: any,
+  filters: any,
 };
 
 export default class Card extends Component {
@@ -45,7 +51,7 @@ export default class Card extends Component {
 
     this.state = {
       chartType: null,
-      filter: null,
+      filters: [],
     };
   }
 
@@ -107,7 +113,7 @@ export default class Card extends Component {
   };
 
   _renderFilter = () => {
-    if (this.state.filter == null) {
+    if (this.state.filters.length == 0) {
       return (
         <FilterBlankslate />
       );

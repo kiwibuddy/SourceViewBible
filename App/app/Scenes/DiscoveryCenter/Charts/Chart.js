@@ -12,7 +12,7 @@ import {
 
 import {
   StyleSheet,
-} from '../../Common';
+} from '../../../Common';
 
 const ChartType = {
   BAR: 'bar',
@@ -56,7 +56,7 @@ type DropdownButtonProps = {
 const DropdownButton = (props: DropdownButtonProps) => {
   return (
     <TouchableOpacity {...props}>
-      <Image style={styles.chartDropdown} source={require('../../Images/discoverycenter/chart-icn-dropdown.png')} />
+      <Image style={styles.chartDropdown} source={require('../../../Images/discoverycenter/chart-icn-dropdown.png')} />
       <Image style={styles.chartIcon} source={props.image} />
       <Text style={styles.chartProperty}>{props.title}</Text>
     </TouchableOpacity>

@@ -8,12 +8,12 @@ import {
   View,
 } from 'react-native';
 
-import Chart from './Chart';
+import { Chart } from '../Charts';
 
 import {
   Colors,
   StyleSheet,
-} from '../../Common';
+} from '../../../Common';
 
 const FilterBlankslate = (props: Object) => {
   return (
@@ -24,7 +24,7 @@ const FilterBlankslate = (props: Object) => {
         </View>
       </View>
       <View style={styles.blankslate}>
-        <Image source={require('../../Images/discoverycenter/filter-blankslate.png')} />
+        <Image source={require('../../../Images/discoverycenter/filter-blankslate.png')} />
       </View>
     </View>
   );
