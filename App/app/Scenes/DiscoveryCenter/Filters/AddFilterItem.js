@@ -26,7 +26,7 @@ type State = {
   showFilterOptions: boolean,
 };
 
-export default class AddFilter extends Component {
+export default class AddFilterItem extends Component {
   props: Props;
   state: State;
 

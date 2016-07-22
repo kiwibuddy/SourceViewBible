@@ -15,19 +15,19 @@ import {
   StyleSheet,
 } from '../../../Common';
 
-import AddFilter from './AddFilter';
+import AddFilterItem from './AddFilterItem';
 
 type Props = {
   onPressFilterType: Function,
 };
 
-export default class CardFilter extends Component {
+export default class FilterItems extends Component {
   props: Props;
 
   render() {
     return (
       <View>
-        <AddFilter onPressFilterType={this.props.onPressFilterType} />
+        <AddFilterItem onPressFilterType={this.props.onPressFilterType} />
         <View style={styles.blankslate}>
           <Image source={require('../Images/filter-blankslate.png')} />
         </View>

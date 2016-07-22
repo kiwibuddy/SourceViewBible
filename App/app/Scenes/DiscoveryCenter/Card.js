@@ -18,7 +18,7 @@ import {
 } from './Charts';
 
 import {
-  CardFilter
+  FilterItems
 } from './Filters';
 
 
@@ -62,7 +62,7 @@ export default class Card extends Component {
 
     const headerView = this._renderHeader();
     const chartView = this._renderChart();
-    const filterView = this._renderFilter();
+    const filterView = this._renderFilterItems();
 
     return (
       <View style={styles.card}>
@@ -114,10 +114,10 @@ export default class Card extends Component {
     }
   };
 
-  _renderFilter = () => {
+  _renderFilterItems = () => {
     if (this.state.filters.length == 0) {
       return (
-        <CardFilter
+        <FilterItems
           onPressFilterType={this._onPressFilterType}
         />
       );
