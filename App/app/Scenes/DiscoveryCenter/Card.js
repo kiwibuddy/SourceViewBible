@@ -41,6 +41,7 @@ type Props = {
 type State = {
   chartType: any,
   filters: any,
+  loading: boolean,
   occurrences: any,
 };
 
@@ -56,6 +57,7 @@ export default class Card extends Component {
     this.state = {
       chartType: null,
       filters: [],
+      loading: false,
       occurrences: [],
     };
   }
@@ -131,8 +133,10 @@ export default class Card extends Component {
   };
 
   _renderReadButton = () => {
-    const occurrenceCount = this.state.occurrences.length;
-    if (occurrenceCount == 0) return null;
+    const { occurrences, filters } = this.state;
+    const occurrenceCount = occurrences.length;
+    const filterCount = filters.length;
+    if (filterCount== 0 && occurrenceCount == 0) return null;
 
     return (
       <TouchableOpacity style={styles.readButton}>
