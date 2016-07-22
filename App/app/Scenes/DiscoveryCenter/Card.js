@@ -18,7 +18,7 @@ import {
 } from './Charts';
 
 import {
-  FilterBlankslate
+  ChartFilter
 } from './Filters';
 
 
@@ -117,7 +117,7 @@ export default class Card extends Component {
   _renderFilter = () => {
     if (this.state.filters.length == 0) {
       return (
-        <FilterBlankslate
+        <ChartFilter
           onPressAddFilter={this._onPressAddFilter}
         />
       );

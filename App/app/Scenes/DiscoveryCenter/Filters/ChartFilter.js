@@ -15,15 +15,19 @@ import {
   StyleSheet,
 } from '../../../Common';
 
+const FilterType = {
+
+};
+
 type Props = {
   onPressAddFilter: Function,
 };
 
-const FilterBlankslate = (props: Props) => {
+const ChartFilter = (props: Props) => {
   return (
     <View {...props}>
       <View style={styles.filterItem}>
-        <View style={styles.leftContainer}>
+        <View style={StyleSheet.styles.discoveryCenter.leftContainer}>
           <Chart.Button title="+ ADD FILTER" style={{color: Colors.tint}} onPress={props.onPressAddFilter} />
         </View>
       </View>
@@ -33,6 +37,7 @@ const FilterBlankslate = (props: Props) => {
     </View>
   );
 };
+ChartFilter.Type = FilterType;
 
 const styles = StyleSheet.create({
   filterItem: {
@@ -44,16 +49,6 @@ const styles = StyleSheet.create({
     paddingVertical: 50,
     alignSelf: 'center',
   },
-  leftContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    borderRightWidth: StyleSheet.hairlineWidth,
-    borderRightColor: 'rgba(255, 255, 255, 0.35)',
-    paddingHorizontal: 10,
-    height: 44,
-  },
 });
 
-export default FilterBlankslate;
+export default ChartFilter;

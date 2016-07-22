@@ -1,10 +1,8 @@
 /* @flow */
 'use strict';
 
-import Filter from './Filter';
-import FilterBlankslate from './FilterBlankslate';
+import ChartFilter from './ChartFilter';
 
 module.exports = {
-  Filter,
-  FilterBlankslate,
+  ChartFilter,
 };

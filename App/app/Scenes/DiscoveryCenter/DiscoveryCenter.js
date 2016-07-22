@@ -76,53 +76,7 @@ export default class DiscoveryCenter extends Component {
           onContentSizeChange={(w, h) => this.contentHeight = h}
         >
           {cards}
-          {/*<Card>
-            <Card.Header>
-              <View style={styles.leftContainer}>
-                <DeleteButton />
-              </View>
-              <View style={[styles.rightContainer, {justifyContent: 'flex-end'}]}>
-                <DuplicateButton />
-                <ShareButton style={styles.share} />
-              </View>
-            </Card.Header>
-            <View style={styles.chart}>
-              <Image source={require('./Images/chart-blankslate.png')} />
-              <View style={styles.chartHeader}>
-                <TouchableOpacity style={styles.leftContainer}>
-                  <Image style={styles.chartDropdown} source={require('./Images/chart-icn-dropdown.png')} />
-                  <Image source={require('./Images/chart-icn-bar-yaxis.png')} />
-                  <Text style={styles.chartProperty}>Choose Y Axis</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.rightContainer}>
-                  <Image style={styles.chartDropdown} source={require('./Images/chart-icn-dropdown.png')} />
-                  <Image style={styles.chartIcon} source={require('./Images/chart-icn-bar-xaxis.png')} />
-                  <Text style={styles.chartProperty}>Choose X Axis</Text>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.chartFooter}>
-              <View style={[styles.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
-                  <TouchableOpacity>
-                    <Image source={require('./Images/btn-fullscreen.png')} />
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </View>
-            <View style={styles.message}>
-              <View style={styles.filterItem}>
-                <View style={styles.topContainer}>
-                  <View style={styles.leftContainer}>
-                    <TouchableOpacity>
-                    <Text style={[styles.chartButton, {color: Colors.tint}]}>+ ADD FILTER</Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              </View>
-              <View style={styles.filterBlankslate}>
-                <Image source={require('./Images/filter-blankslate.png')} />
-              </View>
-            </View>
-          </Card>
+
           <Card>
             <Card.Header>
               <View style={styles.leftContainer}>
@@ -272,7 +226,7 @@ export default class DiscoveryCenter extends Component {
                 <Text style={styles.readButtonTitle}>Explore 423 occurrences</Text>
               </TouchableOpacity>
             </View>
-          </Card>*/}
+          </Card>
         </ScrollView>
         {toolbar}
         {/*

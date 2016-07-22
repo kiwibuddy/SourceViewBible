@@ -5,6 +5,8 @@ import React, { Component, PropTypes } from 'react';
 
 import {
   Image,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 
 import {
@@ -29,7 +31,13 @@ const BarChart = (props: Object) => {
           style={StyleSheet.styles.discoveryCenter.rightContainer}
         />
       </Chart.Header>
-      <Chart.Footer />
+      <Chart.Footer>
+        <View style={[StyleSheet.styles.discoveryCenter.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
+          <TouchableOpacity>
+            <Image source={require('../Images/btn-fullscreen.png')} />
+          </TouchableOpacity>
+        </View>
+      </Chart.Footer>
     </Chart>
   );
 };
