@@ -17,6 +17,7 @@ import {
 
 import { FilterType } from '../Constants';
 
+const hitSlop = {top: 10, left: 5, bottom: 10, right: 0};
 
 type Props = {
   onPressFilterType: Function,
@@ -44,7 +45,7 @@ export default class AddFilterItem extends Component {
       <View style={styles.filterItem}>
         <View style={StyleSheet.styles.discoveryCenter.topContainer}>
           <View style={StyleSheet.styles.discoveryCenter.leftContainer}>
-            <TouchableOpacity onPress={() => this.setState({showFilterOptions: true})}>
+            <TouchableOpacity hitSlop={hitSlop} onPress={() => this.setState({showFilterOptions: true})}>
               <Text style={[styles.button, addFilterButtonStyle]}>+ ADD FILTER</Text>
             </TouchableOpacity>
           </View>
@@ -61,16 +62,16 @@ export default class AddFilterItem extends Component {
     if (!showFilterOptions) return null;
     return (
       <View style={[StyleSheet.styles.discoveryCenter.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
-        <TouchableOpacity onPress={() => this._onPressFilterType(FilterType.BOOK)} >
+        <TouchableOpacity hitSlop={hitSlop} onPress={() => this._onPressFilterType(FilterType.BOOK)} >
           <Text style={styles.button}>BOOKS</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}} >
+        <TouchableOpacity hitSlop={hitSlop} onPress={() => {}} >
           <Text style={styles.button}>WORDS</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}} >
+        <TouchableOpacity hitSlop={hitSlop} onPress={() => {}} >
           <Text style={styles.button}>SOURCES</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}} >
+        <TouchableOpacity hitSlop={hitSlop} onPress={() => {}} >
           <Text style={styles.button}>SPHERES</Text>
         </TouchableOpacity>
       </View>

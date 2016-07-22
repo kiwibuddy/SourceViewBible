@@ -46,8 +46,8 @@ type ButtonProps = {
 };
 const Button = (props: ButtonProps) => {
   return (
-    <TouchableOpacity>
-      <Text {...props} style={[styles.button, props.style]}>{props.title}</Text>
+    <TouchableOpacity hitSlop={{top: 10, left: 5, bottom: 10, right: 0}}>
+      <Text style={[styles.button, props.style]}>{props.title}</Text>
     </TouchableOpacity>
   );
 };
