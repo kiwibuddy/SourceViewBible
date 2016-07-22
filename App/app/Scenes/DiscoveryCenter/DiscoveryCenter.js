@@ -37,6 +37,7 @@ type Props = {
 
 type State = {
   cards: any,
+  popover: any,
 };
 
 export default class DiscoveryCenter extends Component {
@@ -52,14 +53,15 @@ export default class DiscoveryCenter extends Component {
 
     const cards = [{key: 'getting-started'}];
     this.state = {
-      cards
+      cards,
+      popover: null
     };
   }
 
   render() {
     const toolbar = this._renderToolbar();
     const cards = this.state.cards.map(card => this._renderCard(card));
-    const popover = null;
+    const popover = this._renderPopover();
     return (
       <View style={styles.container}>
         <NavigationBar title={Localizable.t('discovery-center')}>
@@ -104,9 +106,18 @@ export default class DiscoveryCenter extends Component {
         card={card}
         onPressDelete={() => this._deleteCard(card)}
         onPressDuplicate={(card) => this._duplicateCard(card)}
+        onShowPopover={() => this._showPopover()}
       />;
     }
   };
+
+  _renderPopover = () => {
+    if (this.state.popover == null) return null;
+
+    return (
+      <Popover />
+    );
+  }
 
   _defaultCard = () => {
     return {
@@ -150,6 +161,20 @@ export default class DiscoveryCenter extends Component {
     this._addCard({
       ...card,
       key: 'card-'
+    });
+  };
+
+  _showPopover = () => {
+    this._animateLayout();
+    this.setState({
+      popover: true
+    });
+  };
+
+  _hidePopover = () => {
+    this._animateLayout();
+    this.setState({
+      popover: null
     });
   };
 

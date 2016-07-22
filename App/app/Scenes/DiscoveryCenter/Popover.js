@@ -7,6 +7,7 @@ import {
   Image,
   Text,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from 'react-native';
 
@@ -18,16 +19,18 @@ import {
 export default class Popover extends Component {
   render() {
     return (
-      <View style={styles.overlayContainer}>
-        <View style={styles.popover}>
-          <View style={styles.tableHeader}>
-            <TouchableOpacity style={StyleSheet.styles.discoveryCenter.leftContainer}>
-              <Text style={styles.back}>Cancel</Text>
-            </TouchableOpacity>
-            <View style={styles.separator} />
+      <TouchableWithoutFeedback onPress={() => {}}>
+        <View style={styles.overlayContainer}>
+          <View style={styles.popover}>
+            <View style={styles.tableHeader}>
+              <TouchableOpacity style={StyleSheet.styles.discoveryCenter.leftContainer}>
+                <Text style={styles.back}>Cancel</Text>
+              </TouchableOpacity>
+              <View style={styles.separator} />
+            </View>
           </View>
         </View>
-      </View>
+      </TouchableWithoutFeedback>
     );
   }
 }
@@ -45,10 +48,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0.99)',
     borderRadius: 4,
     position: 'absolute',
-    top: 28,
-    bottom: 8,
-    right: 8,
-    left: 8,
+    top: 24,
+    bottom: 4,
+    right: 4,
+    left: 4,
   },
   tableHeader: {
 

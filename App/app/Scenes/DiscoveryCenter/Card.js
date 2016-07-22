@@ -30,6 +30,8 @@ import { DeleteButton, DuplicateButton, ShareButton } from './Buttons';
 
 import { FilterType } from './Constants';
 
+import Popover from './Popover';
+
 export const Header = (props: Object) => {
   return (
     <View {...props} style={[styles.header, props.style]}>
@@ -43,6 +45,7 @@ type Props = {
   children?: any,
   onPressDelete?: Function,
   onPressDuplicate?: Function,
+  onShowPopover?: Function,
 };
 
 type State = {
@@ -158,11 +161,8 @@ export default class Card extends Component {
   }
 
   _onPressFilterType = (filterType: string) => {
-    switch (filterType) {
-      case FilterType.BOOK:
-        const filter = {id: 'filter-' + Date.now()};
-        this._addFilter(filter);
-        break;
+    if (this.props.onShowPopover) {
+      this.props.onShowPopover();
     }
   };
 
