@@ -15,7 +15,11 @@ import {
 
 import Chart from './Chart';
 
-const CloudChart = (props: Object) => {
+type Props = {
+  onPressChartType: Function,
+};
+
+const CloudChart = (props: Props) => {
   return (
     <Chart>
       <Image source={require('../Images/chart-blankslate.png')} />
@@ -33,13 +37,13 @@ const CloudChart = (props: Object) => {
       </Chart.Header>
       <Chart.Footer>
         <View style={[StyleSheet.styles.discoveryCenter.leftContainer, {justifyContent: 'flex-start', paddingLeft: 5, borderRightWidth: 0}]}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => props.onPressChartType(Chart.Type.BAR)}>
             <Image source={require('../Images/chart-type-bar.png')} />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => props.onPressChartType(Chart.Type.PIE)}>
             <Image source={require('../Images/chart-type-pie.png')} />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => props.onPressChartType(Chart.Type.CLOUD)}>
             <Image source={require('../Images/chart-type-cloud-s.png')} />
           </TouchableOpacity>
         </View>

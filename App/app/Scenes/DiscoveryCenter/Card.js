@@ -114,25 +114,17 @@ export default class Card extends Component {
     const { card } = this.state;
     switch (card.chartType) {
       case Chart.Type.BAR:
-        return <BarChart />;
+        return <BarChart onPressChartType={this._onPressChartType} />;
 
       case Chart.Type.PIE:
-        return <PieChart />;
+        return <PieChart onPressChartType={this._onPressChartType} />;
 
       case Chart.Type.CLOUD:
-        return <CloudChart />;
+        return <CloudChart onPressChartType={this._onPressChartType} />;
 
       default:
         return <ChartBlankslate
-          onPressChartType={(chartType) => {
-            this._animateLayout();
-
-            const card = {
-              ...this.state.card,
-              chartType
-            }
-            this.setState({card});
-          }}
+          onPressChartType={this._onPressChartType}
         />;
     }
   };
@@ -160,17 +152,27 @@ export default class Card extends Component {
     );
   }
 
-  _onPressFilterType = (filterType: string) => {
-    if (this.props.onShowPopover) {
-      this.props.onShowPopover();
-    }
-  };
-
   _onPressDuplicate = () => {
     if (this.props.onPressDuplicate) {
       this.props.onPressDuplicate(this.state.card);
     }
   }
+
+  _onPressChartType = (chartType: string) => {
+    this._animateLayout();
+
+    const card = {
+      ...this.state.card,
+      chartType
+    }
+    this.setState({card});
+  };
+
+  _onPressFilterType = (filterType: string) => {
+    if (this.props.onShowPopover) {
+      this.props.onShowPopover();
+    }
+  };
 
   _addFilter = (filter: Object) => {
     const { card } = this.state;
