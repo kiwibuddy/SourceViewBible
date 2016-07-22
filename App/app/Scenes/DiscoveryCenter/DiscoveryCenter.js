@@ -87,23 +87,23 @@ export default class DiscoveryCenter extends Component {
               </View>
             </Card.Header>
             <View style={styles.chart}>
-              <Image source={require('../../Images/discoverycenter/chart-blankslate.png')} />
+              <Image source={require('./Images/chart-blankslate.png')} />
               <View style={styles.chartHeader}>
                 <TouchableOpacity style={styles.leftContainer}>
-                  <Image style={styles.chartDropdown} source={require('../../Images/discoverycenter/chart-icn-dropdown.png')} />
-                  <Image source={require('../../Images/discoverycenter/chart-icn-bar-yaxis.png')} />
+                  <Image style={styles.chartDropdown} source={require('./Images/chart-icn-dropdown.png')} />
+                  <Image source={require('./Images/chart-icn-bar-yaxis.png')} />
                   <Text style={styles.chartProperty}>Choose Y Axis</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.rightContainer}>
-                  <Image style={styles.chartDropdown} source={require('../../Images/discoverycenter/chart-icn-dropdown.png')} />
-                  <Image style={styles.chartIcon} source={require('../../Images/discoverycenter/chart-icn-bar-xaxis.png')} />
+                  <Image style={styles.chartDropdown} source={require('./Images/chart-icn-dropdown.png')} />
+                  <Image style={styles.chartIcon} source={require('./Images/chart-icn-bar-xaxis.png')} />
                   <Text style={styles.chartProperty}>Choose X Axis</Text>
                 </TouchableOpacity>
               </View>
               <View style={styles.chartFooter}>
               <View style={[styles.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
                   <TouchableOpacity>
-                    <Image source={require('../../Images/discoverycenter/btn-fullscreen.png')} />
+                    <Image source={require('./Images/btn-fullscreen.png')} />
                   </TouchableOpacity>
                 </View>
               </View>
@@ -119,7 +119,7 @@ export default class DiscoveryCenter extends Component {
                 </View>
               </View>
               <View style={styles.filterBlankslate}>
-                <Image source={require('../../Images/discoverycenter/filter-blankslate.png')} />
+                <Image source={require('./Images/filter-blankslate.png')} />
               </View>
             </View>
           </Card>
@@ -134,23 +134,23 @@ export default class DiscoveryCenter extends Component {
               </View>
             </Card.Header>
             <View style={styles.chart}>
-              <Image source={require('../../Images/discoverycenter/chart-placeholder.png')} />
+              <Image source={require('./Images/chart-placeholder.png')} />
               <View style={styles.chartHeader}>
                 <TouchableOpacity style={styles.leftContainer}>
-                  <Image style={styles.chartDropdown} source={require('../../Images/discoverycenter/chart-icn-dropdown.png')} />
-                  <Image source={require('../../Images/discoverycenter/chart-icn-bar-yaxis.png')} />
+                  <Image style={styles.chartDropdown} source={require('./Images/chart-icn-dropdown.png')} />
+                  <Image source={require('./Images/chart-icn-bar-yaxis.png')} />
                   <Text style={styles.chartProperty}>Source Word</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.rightContainer}>
-                  <Image style={styles.chartDropdown} source={require('../../Images/discoverycenter/chart-icn-dropdown.png')} />
-                  <Image style={styles.chartIcon} source={require('../../Images/discoverycenter/chart-icn-bar-xaxis.png')} />
+                  <Image style={styles.chartDropdown} source={require('./Images/chart-icn-dropdown.png')} />
+                  <Image style={styles.chartIcon} source={require('./Images/chart-icn-bar-xaxis.png')} />
                   <Text style={styles.chartProperty}>Source Vocation</Text>
                 </TouchableOpacity>
               </View>
               <View style={styles.chartFooter}>
                 <View style={[styles.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
                     <TouchableOpacity>
-                      <Image source={require('../../Images/discoverycenter/btn-fullscreen.png')} />
+                      <Image source={require('./Images/btn-fullscreen.png')} />
                     </TouchableOpacity>
                 </View>
               </View>
@@ -195,23 +195,23 @@ export default class DiscoveryCenter extends Component {
               </View>
             </Card.Header>
             <View style={styles.chart}>
-              <Image source={require('../../Images/discoverycenter/chart-placeholder.png')} />
+              <Image source={require('./Images/chart-placeholder.png')} />
               <View style={styles.chartHeader}>
                 <TouchableOpacity style={styles.leftContainer}>
-                  <Image style={styles.chartDropdown} source={require('../../Images/discoverycenter/chart-icn-dropdown.png')} />
-                  <Image source={require('../../Images/discoverycenter/chart-icn-bar-yaxis.png')} />
+                  <Image style={styles.chartDropdown} source={require('./Images/chart-icn-dropdown.png')} />
+                  <Image source={require('./Images/chart-icn-bar-yaxis.png')} />
                   <Text style={styles.chartProperty}>Source Word</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.rightContainer}>
-                  <Image style={styles.chartDropdown} source={require('../../Images/discoverycenter/chart-icn-dropdown.png')} />
-                  <Image style={styles.chartIcon} source={require('../../Images/discoverycenter/chart-icn-bar-xaxis.png')} />
+                  <Image style={styles.chartDropdown} source={require('./Images/chart-icn-dropdown.png')} />
+                  <Image style={styles.chartIcon} source={require('./Images/chart-icn-bar-xaxis.png')} />
                   <Text style={styles.chartProperty}>Source Vocation</Text>
                 </TouchableOpacity>
               </View>
               <View style={styles.chartFooter}>
                 <View style={[styles.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
                     <TouchableOpacity>
-                      <Image source={require('../../Images/discoverycenter/btn-fullscreen.png')} />
+                      <Image source={require('./Images/btn-fullscreen.png')} />
                     </TouchableOpacity>
                 </View>
               </View>
@@ -231,10 +231,10 @@ export default class DiscoveryCenter extends Component {
                   <Text>In</Text>
                   <TouchableOpacity style={styles.filterButton}>
                     <Text style={styles.filterButtonTitle}>Genesis</Text>
-                    <Image source={require('../../Images/discoverycenter/chart-icn-dropdown-filter.png')} />
+                    <Image source={require('./Images/chart-icn-dropdown-filter.png')} />
                   </TouchableOpacity>
                   <TouchableOpacity style={styles.filterDelete}>
-                    <Image source={require('../../Images/discoverycenter/chart-icn-filter-delete.png')} />
+                    <Image source={require('./Images/chart-icn-filter-delete.png')} />
                   </TouchableOpacity>
                 </View>
               </View>
@@ -252,10 +252,10 @@ export default class DiscoveryCenter extends Component {
                   <Text>Role is</Text>
                   <TouchableOpacity style={styles.filterButton}>
                     <Text style={styles.filterButtonTitle}>Narrator</Text>
-                    <Image source={require('../../Images/discoverycenter/chart-icn-dropdown-filter.png')} />
+                    <Image source={require('./Images/chart-icn-dropdown-filter.png')} />
                   </TouchableOpacity>
                   <TouchableOpacity style={styles.filterDelete}>
-                    <Image source={require('../../Images/discoverycenter/chart-icn-filter-delete.png')} />
+                    <Image source={require('./Images/chart-icn-filter-delete.png')} />
                   </TouchableOpacity>
                 </View>
               </View>
@@ -308,7 +308,7 @@ export default class DiscoveryCenter extends Component {
     return (
       <Toolbar>
         <ToolbarButton
-          imageSource={require('../../Images/discoverycenter/btn-add-card.png')}
+          imageSource={require('./Images/btn-add-card.png')}
           onPress={this._addCard}
         />
       </Toolbar>

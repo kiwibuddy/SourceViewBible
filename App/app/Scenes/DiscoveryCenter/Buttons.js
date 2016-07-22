@@ -15,7 +15,7 @@ import {
 export const DeleteButton = (props: Object) => {
   return (
     <TouchableOpacity {...props}>
-      <Image source={require('../../Images/discoverycenter/btn-delete.png')} />
+      <Image source={require('./Images/btn-delete.png')} />
     </TouchableOpacity>
   );
 };
@@ -23,7 +23,7 @@ export const DeleteButton = (props: Object) => {
 export const DuplicateButton = (props: Object) => {
   return (
     <TouchableOpacity {...props}>
-      <Image source={require('../../Images/discoverycenter/btn-duplicate.png')} />
+      <Image source={require('./Images/btn-duplicate.png')} />
     </TouchableOpacity>
   );
 };
@@ -31,7 +31,7 @@ export const DuplicateButton = (props: Object) => {
 export const ShareButton = (props: Object) => {
   return (
     <TouchableOpacity {...props}>
-      <Image source={require('../../Images/discoverycenter/btn-share.png')} />
+      <Image source={require('./Images/btn-share.png')} />
     </TouchableOpacity>
   );
 };

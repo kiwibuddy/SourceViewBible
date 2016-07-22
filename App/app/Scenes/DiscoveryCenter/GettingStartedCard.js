@@ -34,14 +34,14 @@ const GettingStartedCard = (props: Props) => {
       </Card.Header>
       <View style={styles.video}>
         <View style={styles.videoImage}>
-          <Image source={require('../../Images/discoverycenter/video-header-dc.png')} />
+          <Image source={require('./Images/video-header-dc.png')} />
         </View>
         <TouchableOpacity style={styles.videoPlay}>
           <Image source={require('../../Images/common/btn-play.png')} />
         </TouchableOpacity>
       </View>
       <View style={styles.gettingstartedContainer}>
-        <Image style={styles.gettingstartedIcon} source={require('../../Images/discoverycenter/dc-icon.png')} />
+        <Image style={styles.gettingstartedIcon} source={require('./Images/dc-icon.png')} />
         <Text style={styles.gettingstartedHeader}>Create & Share Discoveries</Text>
         <Text style={styles.gettingstartedBody}>Tap your way to new Biblical insights and share what your find.</Text>
       </View>

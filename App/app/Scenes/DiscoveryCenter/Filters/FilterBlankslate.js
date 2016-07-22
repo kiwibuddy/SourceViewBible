@@ -28,7 +28,7 @@ const FilterBlankslate = (props: Props) => {
         </View>
       </View>
       <View style={styles.blankslate}>
-        <Image source={require('../../../Images/discoverycenter/filter-blankslate.png')} />
+        <Image source={require('../Images/filter-blankslate.png')} />
       </View>
     </View>
   );
