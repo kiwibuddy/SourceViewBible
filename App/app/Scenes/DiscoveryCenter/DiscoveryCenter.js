@@ -110,10 +110,12 @@ export default class DiscoveryCenter extends Component {
             </View>
             <View style={styles.message}>
               <View style={styles.filterItem}>
-                <View style={styles.leftContainer}>
-                  <TouchableOpacity>
-                  <Text style={[styles.chartButton, {color: Colors.tint}]}>+ ADD FILTER</Text>
-                  </TouchableOpacity>
+                <View style={styles.topContainer}>
+                  <View style={styles.leftContainer}>
+                    <TouchableOpacity>
+                    <Text style={[styles.chartButton, {color: Colors.tint}]}>+ ADD FILTER</Text>
+                    </TouchableOpacity>
+                  </View>
                 </View>
               </View>
               <View style={styles.filterBlankslate}>
@@ -155,24 +157,115 @@ export default class DiscoveryCenter extends Component {
             </View>
             <View style={styles.message}>
               <View style={styles.filterItem}>
-                <View style={styles.leftContainer}>
-                  <TouchableOpacity>
-                    <Text style={[styles.chartButton, {color: '#9B9B9B'}]}>+ ADD FILTER</Text>
+                <View style={styles.topContainer}>
+                  <View style={styles.leftContainer}>
+                    <TouchableOpacity>
+                      <Text style={[styles.chartButton, {color: '#9B9B9B'}]}>+ ADD FILTER</Text>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={[styles.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
+                    <TouchableOpacity>
+                      <Text style={[styles.chartButton, {color: Colors.tint}]}>BOOKS</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                      <Text style={[styles.chartButton, {color: Colors.tint}]}>WORDS</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                      <Text style={[styles.chartButton, {color: Colors.tint}]}>SOURCES</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                      <Text style={[styles.chartButton, {color: Colors.tint}]}>SPHERES</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </View>
+              <TouchableOpacity style={styles.readButton}>
+                <Text style={styles.readButtonTitle}>Explore 423 occurrences</Text>
+              </TouchableOpacity>
+            </View>
+          </Card>
+          <Card>
+            <Card.Header>
+              <View style={styles.leftContainer}>
+                <DeleteButton />
+              </View>
+              <View style={[styles.rightContainer, {justifyContent: 'flex-end'}]}>
+                <DuplicateButton />
+                <ShareButton style={styles.share} />
+              </View>
+            </Card.Header>
+            <View style={styles.chart}>
+              <Image source={require('../../Images/discoverycenter/chart-placeholder.png')} />
+              <View style={styles.chartHeader}>
+                <TouchableOpacity style={styles.leftContainer}>
+                  <Image style={styles.chartDropdown} source={require('../../Images/discoverycenter/chart-icn-dropdown.png')} />
+                  <Image source={require('../../Images/discoverycenter/chart-icn-bar-yaxis.png')} />
+                  <Text style={styles.chartProperty}>Source Word</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.rightContainer}>
+                  <Image style={styles.chartDropdown} source={require('../../Images/discoverycenter/chart-icn-dropdown.png')} />
+                  <Image style={styles.chartIcon} source={require('../../Images/discoverycenter/chart-icn-bar-xaxis.png')} />
+                  <Text style={styles.chartProperty}>Source Vocation</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.chartFooter}>
+                <View style={[styles.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
+                    <TouchableOpacity>
+                      <Image source={require('../../Images/discoverycenter/btn-fullscreen.png')} />
+                    </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+            <View style={styles.message}>
+              <View style={styles.filterItem}>
+                <View style={styles.topContainer}>
+                  <View style={styles.leftContainer}>
+                    <TouchableOpacity>
+                      <Text style={[styles.chartButton, {color: '#9B9B9B'}]}>BOOKS</Text>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={[styles.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
+                  </View>
+                </View>
+                <View style={styles.bottomContainer}>
+                  <Text>In</Text>
+                  <TouchableOpacity style={styles.filterButton}>
+                    <Text style={styles.filterButtonTitle}>Genesis</Text>
+                    <Image source={require('../../Images/discoverycenter/chart-icn-dropdown-filter.png')} />
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.filterDelete}>
+                    <Image source={require('../../Images/discoverycenter/chart-icn-filter-delete.png')} />
                   </TouchableOpacity>
                 </View>
-                <View style={[styles.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
-                  <TouchableOpacity>
-                    <Text style={[styles.chartButton, {color: Colors.tint}]}>BOOKS</Text>
+              </View>
+              <View style={styles.filterItem}>
+                <View style={styles.topContainer}>
+                  <View style={styles.leftContainer}>
+                    <TouchableOpacity>
+                      <Text style={[styles.chartButton, {color: '#9B9B9B'}]}>SOURCE</Text>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={[styles.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
+                  </View>
+                </View>
+                <View style={styles.bottomContainer}>
+                  <Text>Role is</Text>
+                  <TouchableOpacity style={styles.filterButton}>
+                    <Text style={styles.filterButtonTitle}>Narrator</Text>
+                    <Image source={require('../../Images/discoverycenter/chart-icn-dropdown-filter.png')} />
                   </TouchableOpacity>
-                  <TouchableOpacity>
-                    <Text style={[styles.chartButton, {color: Colors.tint}]}>WORDS</Text>
+                  <TouchableOpacity style={styles.filterDelete}>
+                    <Image source={require('../../Images/discoverycenter/chart-icn-filter-delete.png')} />
                   </TouchableOpacity>
-                  <TouchableOpacity>
-                    <Text style={[styles.chartButton, {color: Colors.tint}]}>SOURCES</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity>
-                    <Text style={[styles.chartButton, {color: Colors.tint}]}>SPHERES</Text>
-                  </TouchableOpacity>
+                </View>
+              </View>
+              <View style={styles.filterItem}>
+                <View style={styles.topContainer}>
+                  <View style={styles.leftContainer}>
+                    <TouchableOpacity>
+                    <Text style={[styles.chartButton, {color: Colors.tint}]}>+ ADD FILTER</Text>
+                    </TouchableOpacity>
+                  </View>
                 </View>
               </View>
               <TouchableOpacity style={styles.readButton}>
@@ -286,6 +379,32 @@ const styles = StyleSheet.create({
     marginTop: NavigationBar.HEIGHT,
     marginBottom: Toolbar.HEIGHT,
   },
+  topContainer: {
+    flex: 0,
+    flexDirection: 'row',
+  },
+  bottomContainer: {
+    flexDirection: 'row',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#C8C7CC',
+    marginHorizontal: 10,
+    paddingBottom: 10,
+    marginTop: -8,
+  },
+  filterButton: {
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.tint,
+    paddingHorizontal: 2,
+    marginHorizontal: 8,
+  },
+  filterButtonTitle: {
+    color: Colors.tint,
+  },
+  filterDelete: {
+    position: 'absolute',
+    right: 5,
+  },
   leftContainer: {
     flex: 1,
     flexDirection: 'row',
@@ -356,11 +475,6 @@ const styles = StyleSheet.create({
     height: 44,
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  filterItem: {
-    flex: 0,
-    flexDirection: 'row',
-    height: 44,
   },
   filterBlankslate: {
     paddingVertical: 50,
