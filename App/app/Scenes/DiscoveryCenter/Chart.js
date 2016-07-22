@@ -4,6 +4,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import {
+  Image,
   Text,
   TouchableOpacity,
   View,
@@ -41,6 +42,21 @@ const Button = (props: ButtonProps) => {
   );
 };
 
+type DropdownButtonProps = {
+  title: string,
+  image: any,
+};
+
+const DropdownButton = (props: DropdownButtonProps) => {
+  return (
+    <TouchableOpacity {...props}>
+      <Image style={styles.chartDropdown} source={require('../../Images/discoverycenter/chart-icn-dropdown.png')} />
+      <Image style={styles.chartIcon} source={props.image} />
+      <Text style={styles.chartProperty}>{props.title}</Text>
+    </TouchableOpacity>
+  )
+};
+
 const Chart = (props: Object) => {
   return (
     <View style={styles.chart} {...props}>
@@ -51,6 +67,7 @@ const Chart = (props: Object) => {
 Chart.Header = Header;
 Chart.Footer = Footer;
 Chart.Button = Button;
+Chart.DropdownButton = DropdownButton;
 
 const styles = StyleSheet.create({
   chart: {

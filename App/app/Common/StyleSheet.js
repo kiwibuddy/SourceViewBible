@@ -144,6 +144,25 @@ const styles = {
     height: StyleSheet.hairlineWidth,
     backgroundColor: Colors.separator,
   },
+  discoveryCenter: {
+    leftContainer: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+      borderRightWidth: StyleSheet.hairlineWidth,
+      borderRightColor: 'rgba(255, 255, 255, 0.35)',
+      paddingHorizontal: 10,
+      height: 44,
+    },
+    rightContainer: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingHorizontal: 10,
+      height: 44,
+    },
+  }
 };
 
 module.exports = {

@@ -77,7 +77,7 @@ export default class Card extends Component {
         <View style={styles.leftContainer}>
           <DeleteButton onPress={this.props.onPressDelete}/>
         </View>
-        <View style={[styles.rightContainer, {justifyContent: 'flex-end'}]}>
+        <View style={[StyleSheet.styles.discoveryCenter.rightContainer, {justifyContent: 'flex-end'}]}>
           <DuplicateButton />
           <ShareButton style={{paddingLeft: 10}} />
         </View>
@@ -126,22 +126,5 @@ const styles = StyleSheet.create({
     flex: 0,
     flexDirection: 'row',
     justifyContent: 'center',
-  },
-  leftContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    borderRightWidth: StyleSheet.hairlineWidth,
-    borderRightColor: 'rgba(255, 255, 255, 0.35)',
-    paddingHorizontal: 10,
-    height: 44,
-  },
-  rightContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 10,
-    height: 44,
   },
 });
