@@ -19,6 +19,8 @@ import {
 import {
   Chart,
   BarChart,
+  PieChart,
+  CloudChart,
   ChartBlankslate,
 } from './Charts';
 
@@ -110,10 +112,10 @@ export default class Card extends Component {
         return <BarChart />;
 
       case Chart.Type.PIE:
-        return null;
+        return <PieChart />;
 
       case Chart.Type.CLOUD:
-        return null;
+        return <CloudChart />;
 
       default:
         return <ChartBlankslate
