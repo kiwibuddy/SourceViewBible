@@ -32,9 +32,9 @@ const BarChart = (props: Object) => {
         />
       </Chart.Header>
       <Chart.Footer>
-        <View style={[StyleSheet.styles.discoveryCenter.leftContainer, {justifyContent: 'flex-start', paddingLeft: 5,       borderRightWidth: 0}]}>
+        <View style={[StyleSheet.styles.discoveryCenter.leftContainer, {justifyContent: 'flex-start', paddingLeft: 5, borderRightWidth: 0}]}>
           <TouchableOpacity>
-            <Image source={require('../Images/chart-type-bar.png')} />
+            <Image source={require('../Images/chart-type-bar-s.png')} />
           </TouchableOpacity>
           <TouchableOpacity>
             <Image source={require('../Images/chart-type-pie.png')} />
