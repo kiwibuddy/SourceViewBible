@@ -43,6 +43,8 @@ type State = {
 };
 
 export default class Card extends Component {
+  static Header = Header;
+
   props: Props;
   state: State;
 
@@ -116,7 +118,7 @@ export default class Card extends Component {
     if (this.state.filters.length == 0) {
       return (
         <FilterBlankslate
-          onPressAddFilter={() => console.log('add Filter')}
+          onPressAddFilter={this._onPressAddFilter}
         />
       );
     }
@@ -124,7 +126,9 @@ export default class Card extends Component {
     return null;
   }
 
-  static Header = Header;
+  _onPressAddFilter = () => {
+
+  };
 };
 
 const styles = StyleSheet.create({
