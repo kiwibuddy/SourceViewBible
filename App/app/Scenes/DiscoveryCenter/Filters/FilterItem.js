@@ -26,19 +26,19 @@ const FilterItem = (props: Props) => {
       <View style={StyleSheet.styles.discoveryCenter.topContainer}>
         <View style={StyleSheet.styles.discoveryCenter.leftContainer}>
           <TouchableOpacity>
-            <Text style={[styles.button, {color: '#9B9B9B'}]}>SOURCE</Text>
+            <Text style={[styles.button, {color: '#9B9B9B'}]}>BOOK RANGE</Text>
           </TouchableOpacity>
         </View>
       </View>
       <View style={StyleSheet.styles.discoveryCenter.bottomContainer}>
-        <Text>Role is</Text>
+        <Text>From</Text>
         <TouchableOpacity style={styles.filterButton}>
-          <Text style={styles.filterButtonTitle}>Narrator</Text>
+          <Text style={styles.filterButtonTitle}>Genesis</Text>
           <Image source={require('../Images/chart-icn-dropdown-filter.png')} />
         </TouchableOpacity>
-        <Text>Foo is</Text>
+        <Text>To</Text>
         <TouchableOpacity style={styles.filterButton}>
-          <Text style={styles.filterButtonTitle}>Narrator</Text>
+          <Text style={styles.filterButtonTitle}>Revelation</Text>
           <Image source={require('../Images/chart-icn-dropdown-filter.png')} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.filterDelete} onPress={props.onPressDeleteFilter}>

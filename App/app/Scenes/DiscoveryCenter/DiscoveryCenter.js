@@ -102,20 +102,29 @@ export default class DiscoveryCenter extends Component {
       />;
     } else {
       return <Card
+        ref={card.key}
         key={card.key}
         card={card}
         onPressDelete={() => this._deleteCard(card)}
         onPressDuplicate={(card) => this._duplicateCard(card)}
-        onShowPopover={() => this._showPopover()}
+        onShowPopover={() => this._showPopover(card)}
       />;
     }
   };
 
   _renderPopover = () => {
-    if (this.state.popover == null) return null;
+    const { popover } = this.state;
+    if (popover == null) return null;
 
     return (
-      <Popover onPressCancel={this._hidePopover}/>
+      <Popover
+        onDone={() => {
+          const card = popover;
+          this.refs[card.key].addFilter({id: 'filter-' + Date.now()})
+          this._hidePopover();
+        }}
+        onPressCancel={this._hidePopover}
+      />
     );
   }
 
@@ -164,10 +173,10 @@ export default class DiscoveryCenter extends Component {
     });
   };
 
-  _showPopover = () => {
+  _showPopover = (card: Object) => {
     this._animateLayout();
     this.setState({
-      popover: true
+      popover: card
     });
   };
 

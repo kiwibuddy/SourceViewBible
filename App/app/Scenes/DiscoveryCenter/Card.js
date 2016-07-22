@@ -174,7 +174,7 @@ export default class Card extends Component {
     }
   };
 
-  _addFilter = (filter: Object) => {
+  addFilter = (filter: Object) => {
     const { card } = this.state;
     const filters = [
       ...card.filters,

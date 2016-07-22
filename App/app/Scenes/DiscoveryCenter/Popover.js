@@ -18,6 +18,7 @@ import {
 
 type Props = {
   onPressCancel: Function,
+  onDone: Function,
 };
 
 export default class Popover extends Component {
@@ -25,31 +26,29 @@ export default class Popover extends Component {
 
   render() {
     return (
-      <TouchableWithoutFeedback onPress={this.props.onPressCancel}>
-        <View style={styles.overlayContainer}>
-          <View style={styles.popover}>
-            <View style={styles.tableHeader}>
-              <TouchableOpacity  style={styles.backContainer} onPress={this.props.onPressCancel}>
-                <Text style={styles.back}>Cancel</Text>
-              </TouchableOpacity>
-              <Text style={styles.title}>Books Filter</Text>
-            </View>
-            <View style={[styles.separator, {marginLeft: 0}]} />
-            <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
-              <Text style={StyleSheet.styles.cell.title}>Whole Bible</Text>
+      <View style={styles.overlayContainer}>
+        <View style={styles.popover}>
+          <View style={styles.tableHeader}>
+            <TouchableOpacity  style={styles.backContainer} onPress={this.props.onPressCancel}>
+              <Text style={styles.back}>Cancel</Text>
             </TouchableOpacity>
-            <View style={styles.separator} />
-            <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
-              <Text style={StyleSheet.styles.cell.title}>Old Testament</Text>
-            </TouchableOpacity>
-            <View style={styles.separator} />
-            <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
-              <Text style={StyleSheet.styles.cell.title}>New Testament</Text>
-            </TouchableOpacity>
-            <View style={styles.separator} />
+            <Text style={styles.title}>Books Filter</Text>
           </View>
+          <View style={[styles.separator, {marginLeft: 0}]} />
+          <TouchableOpacity style={StyleSheet.styles.listItem} onPress={this.props.onDone}>
+            <Text style={StyleSheet.styles.cell.title}>Whole Bible</Text>
+          </TouchableOpacity>
+          <View style={styles.separator} />
+          <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
+            <Text style={StyleSheet.styles.cell.title}>Old Testament</Text>
+          </TouchableOpacity>
+          <View style={styles.separator} />
+          <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
+            <Text style={StyleSheet.styles.cell.title}>New Testament</Text>
+          </TouchableOpacity>
+          <View style={styles.separator} />
         </View>
-      </TouchableWithoutFeedback>
+      </View>
     );
   }
 }
