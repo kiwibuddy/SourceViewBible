@@ -11,6 +11,7 @@ import {
 
 import {
   Colors,
+  Localizable,
   StyleSheet,
 } from '../../Common';
 
@@ -40,6 +41,7 @@ type Props = {
 type State = {
   chartType: any,
   filters: any,
+  occurrences: any,
 };
 
 export default class Card extends Component {
@@ -54,6 +56,7 @@ export default class Card extends Component {
     this.state = {
       chartType: null,
       filters: [],
+      occurrences: [],
     };
   }
 
@@ -117,17 +120,22 @@ export default class Card extends Component {
   };
 
   _renderFilterItems = () => {
+    const { filters } = this.state;
     return (
       <FilterItems
+        filters={filters}
         onPressFilterType={this._onPressFilterType}
       />
     );
   };
 
   _renderReadButton = () => {
+    const occurrenceCount = this.state.occurrences.length;
+    if (occurrenceCount == 0) return null;
+
     return (
       <TouchableOpacity style={styles.readButton}>
-        <Text style={styles.readButtonTitle}>Explore 423 occurrences</Text>
+        <Text style={styles.readButtonTitle}>{Localizable.t('explore-occurrences.count', {count: occurrenceCount, localizedCount: Localizable.toNumber(occurrenceCount, {precision: 0})})}</Text>
       </TouchableOpacity>
     );
   }

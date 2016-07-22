@@ -53,6 +53,12 @@
         other: "{{localizedCount}} words"
       }
     },
+    "explore-occurrences": {
+      count: {
+        one: "Explore 1 occurrence",
+        other: "Explore {{localizedCount}} occurrences"
+      }
+    },
     more: "More",
     done: "Done"
   }
