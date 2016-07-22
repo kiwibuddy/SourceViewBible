@@ -77,67 +77,7 @@ export default class DiscoveryCenter extends Component {
         >
           {cards}
 
-          <Card>
-            <Card.Header>
-              <View style={styles.leftContainer}>
-                <DeleteButton />
-              </View>
-              <View style={[styles.rightContainer, {justifyContent: 'flex-end'}]}>
-                <DuplicateButton />
-                <ShareButton style={styles.share} />
-              </View>
-            </Card.Header>
-            <View style={styles.chart}>
-              <Image source={require('./Images/chart-placeholder.png')} />
-              <View style={styles.chartHeader}>
-                <TouchableOpacity style={styles.leftContainer}>
-                  <Image style={styles.chartDropdown} source={require('./Images/chart-icn-dropdown.png')} />
-                  <Image source={require('./Images/chart-icn-bar-yaxis.png')} />
-                  <Text style={styles.chartProperty}>Source Word</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.rightContainer}>
-                  <Image style={styles.chartDropdown} source={require('./Images/chart-icn-dropdown.png')} />
-                  <Image style={styles.chartIcon} source={require('./Images/chart-icn-bar-xaxis.png')} />
-                  <Text style={styles.chartProperty}>Source Vocation</Text>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.chartFooter}>
-                <View style={[styles.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
-                    <TouchableOpacity>
-                      <Image source={require('./Images/btn-fullscreen.png')} />
-                    </TouchableOpacity>
-                </View>
-              </View>
-            </View>
-            <View style={styles.message}>
-              <View style={styles.filterItem}>
-                <View style={styles.topContainer}>
-                  <View style={styles.leftContainer}>
-                    <TouchableOpacity>
-                      <Text style={[styles.chartButton, {color: '#9B9B9B'}]}>+ ADD FILTER</Text>
-                    </TouchableOpacity>
-                  </View>
-                  <View style={[styles.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
-                    <TouchableOpacity>
-                      <Text style={[styles.chartButton, {color: Colors.tint}]}>BOOKS</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                      <Text style={[styles.chartButton, {color: Colors.tint}]}>WORDS</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                      <Text style={[styles.chartButton, {color: Colors.tint}]}>SOURCES</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                      <Text style={[styles.chartButton, {color: Colors.tint}]}>SPHERES</Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              </View>
-              <TouchableOpacity style={styles.readButton}>
-                <Text style={styles.readButtonTitle}>Explore 423 occurrences</Text>
-              </TouchableOpacity>
-            </View>
-          </Card>
+
           <Card>
             <Card.Header>
               <View style={styles.leftContainer}>

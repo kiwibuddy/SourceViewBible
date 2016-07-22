@@ -145,6 +145,18 @@ const styles = {
     backgroundColor: Colors.separator,
   },
   discoveryCenter: {
+    topContainer: {
+      flex: 0,
+      flexDirection: 'row',
+    },
+    bottomContainer: {
+      flexDirection: 'row',
+      borderBottomWidth: StyleSheet.hairlineWidth,
+      borderBottomColor: '#C8C7CC',
+      marginHorizontal: 10,
+      paddingBottom: 10,
+      marginTop: -8,
+    },
     leftContainer: {
       flex: 1,
       flexDirection: 'row',

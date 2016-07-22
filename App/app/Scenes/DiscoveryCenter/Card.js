@@ -118,7 +118,7 @@ export default class Card extends Component {
     if (this.state.filters.length == 0) {
       return (
         <CardFilter
-          onPressAddFilter={this._onPressAddFilter}
+          onPressFilterType={this._onPressFilterType}
         />
       );
     }
@@ -126,7 +126,7 @@ export default class Card extends Component {
     return null;
   }
 
-  _onPressAddFilter = () => {
+  _onPressFilterType = () => {
 
   };
 };
