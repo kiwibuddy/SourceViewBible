@@ -20,10 +20,7 @@ import {
   ChartBlankslate,
 } from './Charts';
 
-import {
-  FilterItems
-} from './Filters';
-
+import FilterItems from './Filters/FilterItems';
 
 import { DeleteButton, DuplicateButton, ShareButton } from './Buttons';
 
