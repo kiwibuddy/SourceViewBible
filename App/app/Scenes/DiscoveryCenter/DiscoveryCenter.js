@@ -81,7 +81,7 @@ export default class DiscoveryCenter extends Component {
           <View style={styles.overlayContainer}>
           <View style={styles.popover}>
             <View style={styles.tableHeader}>
-              <TouchableOpacity style={styles.leftContainer}>
+              <TouchableOpacity style={StyleSheet.styles.discoveryCenter.leftContainer}>
                 <Text style={styles.back}>Back</Text>
               </TouchableOpacity>
               <View style={styles.separator} />
@@ -179,124 +179,6 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: NavigationBar.HEIGHT,
     marginBottom: Toolbar.HEIGHT,
-  },
-  topContainer: {
-    flex: 0,
-    flexDirection: 'row',
-  },
-  bottomContainer: {
-    flexDirection: 'row',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#C8C7CC',
-    marginHorizontal: 10,
-    paddingBottom: 10,
-    marginTop: -8,
-  },
-  filterButton: {
-    flexDirection: 'row',
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.tint,
-    paddingHorizontal: 2,
-    marginHorizontal: 8,
-  },
-  filterButtonTitle: {
-    color: Colors.tint,
-  },
-  filterDelete: {
-    position: 'absolute',
-    right: 5,
-  },
-  leftContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    borderRightWidth: StyleSheet.hairlineWidth,
-    borderRightColor: 'rgba(255, 255, 255, 0.35)',
-    paddingHorizontal: 10,
-    height: 44,
-  },
-  rightContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 10,
-    height: 44,
-  },
-  share: {
-    paddingLeft: 10,
-  },
-  chart: {
-    alignItems: 'center',
-    backgroundColor: '#5B6771',
-    overflow: 'hidden',
-    shadowColor: 'black',
-    shadowOpacity: 0.1,
-    shadowRadius: 0.8,
-    shadowOffset: {
-      height: 1,
-      width: 0,
-    },
-  },
-  chartHeader: {
-    flex: 1,
-    position: 'absolute',
-    right: 5,
-    left: 5,
-    top: 0,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: 'rgba(255, 255, 255, 0.35)',
-    flexDirection: 'row',
-    alignItems: 'center',
-    height: 44,
-  },
-  chartButton: {
-    fontSize: 11,
-    fontWeight: 'bold',
-    paddingRight: 15,
-  },
-  chartProperty: {
-    fontSize: 11,
-    paddingLeft: 5,
-    color: '#FFFFFF'
-  },
-  chartDropdown: {
-    position: 'absolute',
-    right: 8,
-    top: 12,
-  },
-  chartFooter: {
-    flex: 1,
-    position: 'absolute',
-    right: 5,
-    left: 5,
-    bottom: 0,
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: 'rgba(255, 255, 255, 0.35)',
-    height: 44,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  filterBlankslate: {
-    paddingVertical: 50,
-    alignSelf: 'center',
-  },
-  readButton: {
-    borderColor: Colors.tint,
-    height: 40,
-    borderRadius: 20,
-    borderWidth: 1,
-    overflow:'hidden',
-    alignSelf: 'center',
-    marginTop: 40,
-    marginBottom: 40,
-    justifyContent: 'center',
-  },
-  readButtonTitle: {
-    color: Colors.tint,
-    fontSize: 18,
-    marginVertical: 20,
-    marginHorizontal: 40,
   },
   overlayContainer: {
     flex: 1,
