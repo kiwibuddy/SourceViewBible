@@ -21,7 +21,7 @@ import {
 
 import Card from './Card';
 import GettingStartedCard from './GettingStartedCard';
-
+import Popover from './Popover';
 import { DeleteButton, DuplicateButton, ShareButton } from './Buttons';
 
 // $FlowFixMe: Can't find os module extension
@@ -58,8 +58,8 @@ export default class DiscoveryCenter extends Component {
 
   render() {
     const toolbar = this._renderToolbar();
-
     const cards = this.state.cards.map(card => this._renderCard(card));
+    const popover = null;
     return (
       <View style={styles.container}>
         <NavigationBar title={Localizable.t('discovery-center')}>
@@ -75,31 +75,7 @@ export default class DiscoveryCenter extends Component {
           onContentSizeChange={(w, h) => this.contentHeight = h}
         >{cards}</ScrollView>
         {toolbar}
-        {/*
-          ----PopOver
-          <View style={styles.overlayContainer}>
-          <View style={styles.popover}>
-            <View style={styles.tableHeader}>
-              <TouchableOpacity style={StyleSheet.styles.discoveryCenter.leftContainer}>
-                <Text style={styles.back}>Back</Text>
-              </TouchableOpacity>
-              <View style={styles.separator} />
-            </View>
-            <ScrollView>
-              <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
-                <Text style={StyleSheet.styles.cell.title}>Whole Bible</Text>
-                <Image source={require('../../Images/common/disclosure.png')}  style={styles.disclosure} />
-              </TouchableOpacity>
-              <View style={styles.separator} />
-              <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
-                <Text style={StyleSheet.styles.cell.title}>Whole Bible</Text>
-                <Image source={require('../../Images/common/disclosure.png')}  style={styles.disclosure} />
-              </TouchableOpacity>
-              <View style={styles.separator} />
-            </ScrollView>
-          </View>
-        </View>
-       */}
+        {popover}
       </View>
     );
   }
@@ -200,31 +176,4 @@ const styles = StyleSheet.create({
     marginTop: NavigationBar.HEIGHT,
     marginBottom: Toolbar.HEIGHT,
   },
-  overlayContainer: {
-    flex: 1,
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    right: 0,
-    left: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.10)',
-  },
-  popover: {
-    backgroundColor: 'rgba(255, 255, 255, 0.99)',
-    borderRadius: 4,
-    position: 'absolute',
-    top: 400,
-    bottom: 0,
-    right: 0,
-    left: 0,
-  },
-  separator: {
-    ...StyleSheet.styles.separator,
-    marginLeft: 15,
-  },
-  back: {
-    color: Colors.tint,
-    fontSize: 17,
-    paddingLeft: 5,
-  }
 });
