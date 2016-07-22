@@ -1,8 +1,8 @@
 /* @flow */
 'use strict';
 
-import ChartFilter from './ChartFilter';
+import CardFilter from './CardFilter';
 
 module.exports = {
-  ChartFilter,
+  CardFilter,
 };

@@ -23,7 +23,7 @@ type Props = {
   onPressAddFilter: Function,
 };
 
-const ChartFilter = (props: Props) => {
+const CardFilter = (props: Props) => {
   return (
     <View {...props}>
       <View style={styles.filterItem}>
@@ -37,7 +37,7 @@ const ChartFilter = (props: Props) => {
     </View>
   );
 };
-ChartFilter.Type = FilterType;
+CardFilter.Type = FilterType;
 
 const styles = StyleSheet.create({
   filterItem: {
@@ -51,4 +51,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ChartFilter;
+export default CardFilter;

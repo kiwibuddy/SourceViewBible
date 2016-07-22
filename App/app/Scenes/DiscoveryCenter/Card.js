@@ -18,7 +18,7 @@ import {
 } from './Charts';
 
 import {
-  ChartFilter
+  CardFilter
 } from './Filters';
 
 
@@ -117,7 +117,7 @@ export default class Card extends Component {
   _renderFilter = () => {
     if (this.state.filters.length == 0) {
       return (
-        <ChartFilter
+        <CardFilter
           onPressAddFilter={this._onPressAddFilter}
         />
       );
