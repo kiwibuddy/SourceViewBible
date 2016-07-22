@@ -107,7 +107,7 @@ export default class DiscoveryCenter extends Component {
         card={card}
         onPressDelete={() => this._deleteCard(card)}
         onPressDuplicate={(card) => this._duplicateCard(card)}
-        onShowPopover={() => this._showPopover(card)}
+        onShowPopover={(props, onComplete) => this._showPopover(props, onComplete)}
       />;
     }
   };
@@ -118,9 +118,8 @@ export default class DiscoveryCenter extends Component {
 
     return (
       <Popover
-        onDone={() => {
-          const card = popover;
-          this.refs[card.key].addFilter({id: 'filter-' + Date.now()})
+        onDone={(filter) => {
+          popover.onComplete(filter);
           this._hidePopover();
         }}
         onPressCancel={this._hidePopover}
@@ -173,10 +172,10 @@ export default class DiscoveryCenter extends Component {
     });
   };
 
-  _showPopover = (card: Object) => {
+  _showPopover = (props: Object, onComplete: Function) => {
     this._animateLayout();
     this.setState({
-      popover: card
+      popover: {props, onComplete}
     });
   };
 

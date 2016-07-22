@@ -35,7 +35,7 @@ export default class Popover extends Component {
             <Text style={styles.title}>Books Filter</Text>
           </View>
           <View style={[styles.separator, {marginLeft: 0}]} />
-          <TouchableOpacity style={StyleSheet.styles.listItem} onPress={this.props.onDone}>
+          <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => this.props.onDone({id: 'filter-' + Date.now()})}>
             <Text style={StyleSheet.styles.cell.title}>Whole Bible</Text>
           </TouchableOpacity>
           <View style={styles.separator} />
