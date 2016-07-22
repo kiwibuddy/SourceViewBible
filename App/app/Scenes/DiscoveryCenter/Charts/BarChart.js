@@ -32,6 +32,17 @@ const BarChart = (props: Object) => {
         />
       </Chart.Header>
       <Chart.Footer>
+        <View style={[StyleSheet.styles.discoveryCenter.leftContainer, {justifyContent: 'flex-start', paddingLeft: 5,       borderRightWidth: 0}]}>
+          <TouchableOpacity>
+            <Image source={require('../Images/chart-type-bar.png')} />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Image source={require('../Images/chart-type-pie.png')} />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Image source={require('../Images/chart-type-cloud.png')} />
+          </TouchableOpacity>
+        </View>
         <View style={[StyleSheet.styles.discoveryCenter.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
           <TouchableOpacity>
             <Image source={require('../Images/btn-fullscreen.png')} />
