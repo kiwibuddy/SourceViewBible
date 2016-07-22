@@ -35,15 +35,15 @@ export const Header = (props: Object) => {
 };
 
 type Props = {
+  card: Object,
   children?: any,
   onPressDelete?: Function,
+  onPressDuplicate?: Function,
 };
 
 type State = {
-  chartType: any,
-  filters: any,
+  card: Object,
   loading: boolean,
-  occurrences: any,
 };
 
 export default class Card extends Component {
@@ -54,12 +54,11 @@ export default class Card extends Component {
 
   constructor(props: Props) {
     super(props);
+    const { card } = props;
 
     this.state = {
-      chartType: null,
-      filters: [],
+      card,
       loading: false,
-      occurrences: [],
     };
   }
 
@@ -94,10 +93,10 @@ export default class Card extends Component {
     return (
       <Header>
         <View style={StyleSheet.styles.discoveryCenter.leftContainer}>
-          <DeleteButton onPress={this.props.onPressDelete}/>
+          <DeleteButton onPress={this.props.onPressDelete} />
         </View>
         <View style={[StyleSheet.styles.discoveryCenter.rightContainer, {justifyContent: 'flex-end'}]}>
-          <DuplicateButton />
+          <DuplicateButton onPress={this.props.onPressDuplicate} />
           <ShareButton style={{paddingLeft: 10}} />
         </View>
       </Header>
@@ -105,7 +104,8 @@ export default class Card extends Component {
   };
 
   _renderChart = () => {
-    switch (this.state.chartType) {
+    const { card } = this.state;
+    switch (card.chartType) {
       case Chart.Type.BAR:
         return <BarChart />;
 
@@ -119,17 +119,21 @@ export default class Card extends Component {
         return <ChartBlankslate
           onPressChartType={(chartType) => {
             this._animateLayout();
-            this.setState({chartType});
+
+            const card = {
+              ...this.state.card,
+              chartType
+            }
+            this.setState({card});
           }}
         />;
     }
   };
 
   _renderFilterItems = () => {
-    const { filters } = this.state;
-    return (
+    const { card } = this.state;    return (
       <FilterItems
-        filters={filters}
+        filters={card.filters}
         onPressDeleteFilter={(filter) => this._deleteFilter(filter)}
         onPressFilterType={this._onPressFilterType}
       />
@@ -137,9 +141,9 @@ export default class Card extends Component {
   };
 
   _renderReadButton = () => {
-    const { occurrences, filters } = this.state;
-    const occurrenceCount = occurrences.length;
-    const filterCount = filters.length;
+    const { card } = this.state;
+    const occurrenceCount = card.occurrences.length;
+    const filterCount = card.filters.length;
     if (filterCount== 0 && occurrenceCount == 0) return null;
 
     return (
@@ -155,21 +159,33 @@ export default class Card extends Component {
   };
 
   _addFilter = (filter: Object) => {
+    const { card } = this.state;
     const filters = [
-      ...this.state.filters,
+      ...card.filters,
       filter
     ];
 
     this._animateLayout();
-    this.setState({filters});
+    this.setState({
+      card: {
+        ...card,
+        filters
+      }
+    });
   };
 
   _deleteFilter = (filter: Object) => {
-    const { filters } = this.state;
+    const { card } = this.state;
+    const filters = card.filters;
     filters.splice(filters.indexOf(filter), 1);
 
     this._animateLayout();
-    this.setState({filters});
+    this.setState({
+      card: {
+        ...card,
+        filters
+      }
+    });
   };
 
   _animateLayout = () => {

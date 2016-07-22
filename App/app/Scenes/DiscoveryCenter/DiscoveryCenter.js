@@ -37,7 +37,6 @@ type Props = {
 
 type State = {
   cards: any,
-  cardIncrement: number,
 };
 
 export default class DiscoveryCenter extends Component {
@@ -53,8 +52,7 @@ export default class DiscoveryCenter extends Component {
 
     const cards = [{key: 'getting-started'}];
     this.state = {
-      cards,
-      cardIncrement: cards.length,
+      cards
     };
   }
 
@@ -111,7 +109,7 @@ export default class DiscoveryCenter extends Component {
       <Toolbar>
         <ToolbarButton
           imageSource={require('./Images/btn-add-card.png')}
-          onPress={this._addCard}
+          onPress={() => this._addCard(this._defaultCard())}
         />
       </Toolbar>
     );
@@ -129,21 +127,30 @@ export default class DiscoveryCenter extends Component {
         key={card.key}
         card={card}
         onPressDelete={() => this._deleteCard(card)}
+        onPressDuplicate={() => this._duplicateCard(card)}
       />;
     }
   };
 
-  _addCard = () => {
-    const cardIncrement = this.state.cardIncrement + 1;
-    const card = {key: 'card-' + cardIncrement};
+  _defaultCard = () => {
+    return {
+      chartType: null,
+      filters: [],
+      occurrences: [],
+    }
+  }
+
+  _addCard = (card: Object) => {
     const cards = [
       ...this.state.cards,
-      card
+      {
+        ...card,
+        key: 'card-' + Date.now()
+      }
     ];
 
     this.setState({
-      cards,
-      cardIncrement
+      cards
     }, () => {
       this._scrollToBottom();
     });
@@ -160,6 +167,13 @@ export default class DiscoveryCenter extends Component {
         const scrollView = this.refs[SCROLLVIEW_REF];
         scrollView.scrollTo({y: 0, animated: false});
       }
+    });
+  };
+
+  _duplicateCard = (card: Object) => {
+    this._addCard({
+      ...card,
+      key: 'card-'
     });
   };
 
