@@ -43,10 +43,13 @@ const Footer = (props: Object) => {
 type ButtonProps = {
   title: string,
   style: any,
+  onPress: Function,
 };
+
 const Button = (props: ButtonProps) => {
+  const { onPress } = props;
   return (
-    <TouchableOpacity hitSlop={{top: 10, left: 5, bottom: 10, right: 0}}>
+    <TouchableOpacity hitSlop={{top: 10, left: 5, bottom: 10, right: 0}} onPress={onPress}>
       <Text style={[styles.button, props.style]}>{props.title}</Text>
     </TouchableOpacity>
   );
