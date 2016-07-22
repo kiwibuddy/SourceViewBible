@@ -126,8 +126,8 @@ export default class Card extends Component {
     return null;
   }
 
-  _onPressFilterType = () => {
-
+  _onPressFilterType = (filterType: string) => {
+    console.log(filterType);
   };
 };
 

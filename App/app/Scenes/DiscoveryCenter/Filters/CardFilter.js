@@ -17,17 +17,11 @@ import {
 
 import AddFilter from './AddFilter';
 
-const FilterType = {
-
-};
-
 type Props = {
   onPressFilterType: Function,
 };
 
 export default class CardFilter extends Component {
-  static Type = FilterType;
-
   props: Props;
 
   render() {

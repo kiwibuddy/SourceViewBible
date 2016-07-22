@@ -15,6 +15,8 @@ import {
   StyleSheet,
 } from '../../../Common';
 
+import { FilterType } from '../Constants';
+
 
 type Props = {
   onPressFilterType: Function,
@@ -59,16 +61,16 @@ export default class AddFilter extends Component {
     if (!showFilterOptions) return null;
     return (
       <View style={[StyleSheet.styles.discoveryCenter.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
-        <TouchableOpacity onPress={onPressFilterType} >
+        <TouchableOpacity onPress={() => onPressFilterType(FilterType.BOOK)} >
           <Text style={styles.button}>BOOKS</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={onPressFilterType} >
+        <TouchableOpacity onPress={() => onPressFilterType(FilterType.WORD)} >
           <Text style={styles.button}>WORDS</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={onPressFilterType} >
+        <TouchableOpacity onPress={() => onPressFilterType(FilterType.SOURCE)} >
           <Text style={styles.button}>SOURCES</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={onPressFilterType} >
+        <TouchableOpacity onPress={() => onPressFilterType(FilterType.SPHERE)} >
           <Text style={styles.button}>SPHERES</Text>
         </TouchableOpacity>
       </View>
