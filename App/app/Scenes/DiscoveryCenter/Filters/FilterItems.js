@@ -15,49 +15,41 @@ import {
   StyleSheet,
 } from '../../../Common';
 
+import FilterItem from './FilterItem';
 import AddFilterItem from './AddFilterItem';
+
+
+const Blankslate = () => {
+  return (
+    <View style={styles.blankslate}>
+      <Image source={require('../Images/filter-blankslate.png')} />
+    </View>
+  );
+};
 
 type Props = {
   onPressFilterType: Function,
 };
 
-export default class FilterItems extends Component {
-  props: Props;
+const FilterItems = (props: Props) => {
+  const filters = [{id: 0}, {id: 1}];
+  const filterItems = filters.map(filter => <FilterItem key={filter.id} filter={filter} />);
+  const blankslate = (filters.length > 0 ? null : <Blankslate />);
 
-  render() {
-    return (
-      <View>
-        <AddFilterItem onPressFilterType={this.props.onPressFilterType} />
-        <View style={styles.blankslate}>
-          <Image source={require('../Images/filter-blankslate.png')} />
-        </View>
-      </View>
-    );
-  }
-}
+  return (
+    <View>
+      {filterItems}
+      <AddFilterItem onPressFilterType={props.onPressFilterType} />
+      {blankslate}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-  filterItem: {
-    flex: 0,
-    flexDirection: 'row',
-    height: 44,
-  },
   blankslate: {
     paddingVertical: 50,
     alignSelf: 'center',
   },
-  filterButton: {
-    flexDirection: 'row',
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.tint,
-    paddingHorizontal: 2,
-    marginHorizontal: 8,
-  },
-  filterButtonTitle: {
-    color: Colors.tint,
-  },
-  filterDelete: {
-    position: 'absolute',
-    right: 5,
-  },
 });
+
+export default FilterItems;

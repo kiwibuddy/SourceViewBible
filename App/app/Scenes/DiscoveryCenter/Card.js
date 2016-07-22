@@ -4,10 +4,13 @@
 import React, { Component, PropTypes } from 'react';
 
 import {
+  Text,
+  TouchableOpacity,
   View
 } from 'react-native';
 
 import {
+  Colors,
   StyleSheet,
 } from '../../Common';
 
@@ -63,12 +66,14 @@ export default class Card extends Component {
     const headerView = this._renderHeader();
     const chartView = this._renderChart();
     const filterView = this._renderFilterItems();
+    const readButton = this._renderReadButton();
 
     return (
       <View style={styles.card}>
         {headerView}
         {chartView}
         {filterView}
+        {readButton}
       </View>
     );
   }
@@ -115,15 +120,19 @@ export default class Card extends Component {
   };
 
   _renderFilterItems = () => {
-    if (this.state.filters.length == 0) {
-      return (
-        <FilterItems
-          onPressFilterType={this._onPressFilterType}
-        />
-      );
-    }
+    return (
+      <FilterItems
+        onPressFilterType={this._onPressFilterType}
+      />
+    );
+  };
 
-    return null;
+  _renderReadButton = () => {
+    return (
+      <TouchableOpacity style={styles.readButton}>
+        <Text style={styles.readButtonTitle}>Explore 423 occurrences</Text>
+      </TouchableOpacity>
+    );
   }
 
   _onPressFilterType = (filterType: string) => {
@@ -149,5 +158,22 @@ const styles = StyleSheet.create({
     flex: 0,
     flexDirection: 'row',
     justifyContent: 'center',
+  },
+  readButton: {
+    borderColor: Colors.tint,
+    height: 40,
+    borderRadius: 20,
+    borderWidth: 1,
+    overflow:'hidden',
+    alignSelf: 'center',
+    marginTop: 40,
+    marginBottom: 40,
+    justifyContent: 'center',
+  },
+  readButtonTitle: {
+    color: Colors.tint,
+    fontSize: 18,
+    marginVertical: 20,
+    marginHorizontal: 40,
   },
 });
