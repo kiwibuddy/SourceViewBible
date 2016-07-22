@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
         segmentedControl: {
           marginTop: 8,
           marginHorizontal: 8,
-          marginBottom: 10,
+          marginBottom: 8,
         },
       },
       android: {

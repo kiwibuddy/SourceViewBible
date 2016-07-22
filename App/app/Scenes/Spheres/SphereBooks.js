@@ -148,7 +148,7 @@ export default class SphereBooks extends Component {
         </ScrollView>
         <SegmentedControl
           style={styles.segmentedControl}
-          tintColor={colors.chromeTint}
+          tintColor={'#59626A'}
           values={SEGMENTS}
           selectedIndex={this.state.selectedSegmentIndex}
           onValueChange={(value) => this._onSegmentedControlValueChanged(SEGMENTS.indexOf(value))}
@@ -300,9 +300,8 @@ const styles = StyleSheet.create({
   ...Platform.select({
       ios: {
         segmentedControl: {
-          marginTop: 8,
+          marginTop: 10,
           marginHorizontal: 8,
-          marginBottom: 10,
         },
       },
       android: {
