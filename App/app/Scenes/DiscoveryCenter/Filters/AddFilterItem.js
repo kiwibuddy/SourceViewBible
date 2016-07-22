@@ -61,21 +61,26 @@ export default class AddFilterItem extends Component {
     if (!showFilterOptions) return null;
     return (
       <View style={[StyleSheet.styles.discoveryCenter.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
-        <TouchableOpacity onPress={() => onPressFilterType(FilterType.BOOK)} >
+        <TouchableOpacity onPress={() => this._onPressFilterType(FilterType.BOOK)} >
           <Text style={styles.button}>BOOKS</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => onPressFilterType(FilterType.WORD)} >
+        <TouchableOpacity onPress={() => this._onPressFilterType(FilterType.WORD)} >
           <Text style={styles.button}>WORDS</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => onPressFilterType(FilterType.SOURCE)} >
+        <TouchableOpacity onPress={() => this._onPressFilterType(FilterType.SOURCE)} >
           <Text style={styles.button}>SOURCES</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => onPressFilterType(FilterType.SPHERE)} >
+        <TouchableOpacity onPress={() => this._onPressFilterType(FilterType.SPHERE)} >
           <Text style={styles.button}>SPHERES</Text>
         </TouchableOpacity>
       </View>
     );
   }
+
+  _onPressFilterType = (filterType: string) => {
+    this.props.onPressFilterType(filterType);
+    this.setState({showFilterOptions: false});
+  };
 }
 
 const styles = StyleSheet.create({
