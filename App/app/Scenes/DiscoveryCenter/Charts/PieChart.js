@@ -25,13 +25,18 @@ const PieChart = (props: Props) => {
       <Image source={require('../Images/chart-pie-blankslate.png')} />
       <Chart.Header>
         <Chart.DropdownButton
-          image={require('../Images/chart-icn-bar-xaxis.png')}
-          title="Choose X Axis"
+          image={require('../Images/chart-icn-pie-slices.png')}
+          title="Slices"
           style={StyleSheet.styles.discoveryCenter.leftContainer}
         />
         <Chart.DropdownButton
-          image={require('../Images/chart-icn-bar-yaxis.png')}
-          title="Choose Y Axis"
+          image={require('../Images/chart-icn-pie-slice-value.png')}
+          title="Slice"
+          style={StyleSheet.styles.discoveryCenter.leftContainer}
+        />
+        <Chart.DropdownButton
+          image={require('../Images/chart-icn-pies.png')}
+          title="Pies (optional)"
           style={StyleSheet.styles.discoveryCenter.rightContainer}
         />
       </Chart.Header>
