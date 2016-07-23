@@ -5,6 +5,7 @@ import React, { Component, PropTypes } from 'react';
 const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
 
 import {
+  AsyncStorage,
   Platform,
   RecyclerViewBackedScrollView,
   Text,
@@ -15,9 +16,12 @@ import { ListView } from '../../Components/Common/DatabaseListView';
 
 import {
   Colors,
+  Constants,
   StyleSheet,
   Localizable
 } from '../../Common';
+
+const { Preferences } = Constants;
 
 // $FlowFixMe: - Flow can't find os module extension
 import SegmentedControl from '../../Components/Common/SegmentedControl';
@@ -28,15 +32,15 @@ import { ReadingTime } from '../../Common/NumberHelper';
 
 const SEGMENTS = [Localizable.t('textual'), Localizable.t('alphabetical'), Localizable.t('principality')];
 const SEGMENT_INDEXES = {
-  TEXTUAL: 0,
+  TEXT: 0,
   ALPHABETICAL: 1,
   PRINCIPALITY: 2,
 };
 
 const LISTVIEW_REF = 'LISTVIEW_REF';
+const SORT_PREFERENCE = Preferences.Books.Sort + '.Books';
 
 import { Book } from '../../Database';
-
 const MAX_BOOK_WORD_COUNT = Math.max.apply(Math, Book.all().map(book => book.wordCount));
 
 type Props = {
@@ -45,7 +49,7 @@ type Props = {
 
 type State = {
   dataSource: any,
-  selectedSegmentIndex: number,
+  selectedSegmentIndex?: number,
 };
 
 export default class Books extends Component {
@@ -56,14 +60,19 @@ export default class Books extends Component {
 
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     this.state = {
-      dataSource: dataSource,
-      selectedSegmentIndex: SEGMENT_INDEXES.TEXTUAL
+      dataSource: dataSource
     };
   }
 
   componentDidMount() {
-    this.setState({
-      dataSource: this._getDataSource(this.state.selectedSegmentIndex)
+    AsyncStorage.getItem(SORT_PREFERENCE).then(sort => {
+      let selectedSegmentIndex = this.state.selectedSegmentIndex || SEGMENT_INDEXES.TEXT;
+      if (sort != null) selectedSegmentIndex = parseInt(sort);
+
+      this.setState({
+        dataSource: this._getDataSource(selectedSegmentIndex),
+        selectedSegmentIndex
+      });
     });
   }
 
@@ -134,6 +143,8 @@ export default class Books extends Component {
   _onSegmentedControlValueChanged = (value: number) => {
     const listView = this.refs[LISTVIEW_REF];
     listView.scrollTo({y: 0, animated: false});
+
+    AsyncStorage.setItem(SORT_PREFERENCE, value.toString());
 
     this.setState({
       selectedSegmentIndex: value,

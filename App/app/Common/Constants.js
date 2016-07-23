@@ -18,7 +18,14 @@ const SphereType = {
   CELEBRATION: 'celebration'
 };
 
+const Preferences = {
+  Books: {
+    Sort: 'com.sourceviewbible.preferences.books.sort'
+  }
+};
+
 module.exports = {
   SourceType,
-  SphereType
+  SphereType,
+  Preferences
 };

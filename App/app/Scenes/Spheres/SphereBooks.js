@@ -5,6 +5,7 @@ import React, { Component, PropTypes } from 'react';
 const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
 
 import {
+  AsyncStorage,
   Dimensions,
   Platform,
   RecyclerViewBackedScrollView,
@@ -19,9 +20,12 @@ const { width: WIDTH } = Dimensions.get('window');
 
 import {
   Colors,
+  Constants,
   Localizable,
   StyleSheet,
 } from '../../Common';
+
+const { Preferences } = Constants;
 
 import { BarChart, PieChart } from '../../Components/Charts';
 
@@ -32,10 +36,12 @@ import { Book, Sphere } from '../../Database';
 
 const SEGMENTS = [Localizable.t('textual'), Localizable.t('alphabetical'), Localizable.t('percentage')];
 const SEGMENT_INDEXES = {
-  TEXTUAL: 0,
+  TEXT: 0,
   ALPHABETICAL: 1,
-  PERCENTAGE: 2
+  PRINCIPALITY: 2
 };
+
+const SORT_PREFERENCE = Preferences.Books.Sort + '.SphereBooks';
 
 type Props = {
   onPressBook: Function,
@@ -44,7 +50,7 @@ type Props = {
 
 type State = {
   dataSource: any,
-  selectedSegmentIndex: number,
+  selectedSegmentIndex?: number,
   sphere: Object,
 };
 
@@ -69,14 +75,19 @@ export default class SphereBooks extends Component {
 
     this.state = {
       dataSource: dataSource,
-      selectedSegmentIndex: SEGMENT_INDEXES.PERCENTAGE,
       sphere
     };
   }
 
   componentDidMount() {
-    this.setState({
-      dataSource: this._getDataSource(this.state.selectedSegmentIndex)
+    AsyncStorage.getItem(SORT_PREFERENCE).then(sort => {
+      let selectedSegmentIndex = this.state.selectedSegmentIndex || SEGMENT_INDEXES.PRINCIPALITY;
+      if (sort != null) selectedSegmentIndex = parseInt(sort);
+
+      this.setState({
+        dataSource: this._getDataSource(selectedSegmentIndex),
+        selectedSegmentIndex
+      });
     });
   }
 
@@ -219,7 +230,7 @@ export default class SphereBooks extends Component {
     const { sphere } = this.state;
 
     switch (segmentIndex) {
-      case SEGMENT_INDEXES.TEXTUAL:
+      case SEGMENT_INDEXES.TEXT:
         return this.state.dataSource.cloneWithRowsAndSections({textOrder: Book.all().sorted('textOrder')});
 
       case SEGMENT_INDEXES.ALPHABETICAL:
@@ -236,6 +247,8 @@ export default class SphereBooks extends Component {
   }
 
   _onSegmentedControlValueChanged = (value: number) => {
+    AsyncStorage.setItem(SORT_PREFERENCE, value.toString());
+    
     this.setState({
       selectedSegmentIndex: value,
       dataSource: this._getDataSource(value)
