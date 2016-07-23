@@ -42,6 +42,20 @@ export class History extends Realm.Object {
   static all() {
     return realm.objects('History').sorted('date', true);
   }
+
+  static record(props: Object) {
+    const date = new Date();
+    const history = {
+      ...props,
+      date,
+    };
+
+    console.log(history);
+
+    realm.write(() => {
+      realm.create('History', history, true);
+    });
+  }
 }
 History.schema = HistorySchema;
 

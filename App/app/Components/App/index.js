@@ -40,6 +40,8 @@ import SphereWords from '../../Scenes/Spheres/SphereWords';
 
 import { Book, Source, Sphere } from '../../Database';
 
+import { History } from '../../Preferences';
+
 export default class App extends Component {
   state = {
     navigation: {
@@ -287,6 +289,10 @@ export default class App extends Component {
 
     if (navigation !== this.state.navigation) {
       this.setState({navigation});
+    }
+
+    if (!route.modal) {
+      History.record({id: 'history-' + Date.now(), title: route.title, path: route.key});
     }
   };
 
