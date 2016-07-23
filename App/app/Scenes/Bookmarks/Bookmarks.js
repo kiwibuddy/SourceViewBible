@@ -23,6 +23,16 @@ import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigati
 // $FlowFixMe: - Flow can't find os module extension
 import SegmentedControl from '../../Components/Common/SegmentedControl';
 
+import { History, Preference } from '../../Preferences';
+
+const SEGMENTS = [Localizable.t('history'), Localizable.t('bookmarks'), Localizable.t('highlights')];
+const SEGMENT_INDEXES = {
+  HISTORY: 0,
+  BOOKMARKS: 1,
+  HIGHLIGHTS: 2,
+};
+const SEGMENT_PREFERENCE = Preference.Keys.Bookmarks.SegmentIndex;
+
 type Props = {
   onPressDone: Function,
   onPressRoute: Function,
@@ -30,6 +40,7 @@ type Props = {
 
 type State = {
   dataSource: any,
+  selectedSegmentIndex: number
 };
 
 export default class Bookmarks extends Component {
@@ -40,8 +51,12 @@ export default class Bookmarks extends Component {
     super(props);
 
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    let selectedSegmentIndex = Preference.numberForKey(SEGMENT_PREFERENCE);
+    if (selectedSegmentIndex == null) selectedSegmentIndex = SEGMENT_INDEXES.BOOKMARKS;
+    
     this.state = {
       dataSource: dataSource.cloneWithRows(this._getRows()),
+      selectedSegmentIndex
     }
   }
 
@@ -63,9 +78,9 @@ export default class Bookmarks extends Component {
           <SegmentedControl
             style={{flex: 1}}
             tintColor={Colors.tint}
-            values={['History', 'Bookmarks', 'Highlights']}
-            selectedIndex={1}
-            onValueChange={(value) => {}}
+            values={SEGMENTS}
+            selectedIndex={this.state.selectedSegmentIndex}
+            onValueChange={(value) => this._onSegmentedControlValueChanged(SEGMENTS.indexOf(value))}
           />
           <TouchableOpacity
             onPress={this.props.onPressDone}
@@ -93,6 +108,14 @@ export default class Bookmarks extends Component {
         <Text style={StyleSheet.styles.cell.title}>{route.title}</Text>
       </TouchableOpacity>
     )
+  };
+
+  _onSegmentedControlValueChanged = (value: number) => {
+    Preference.setNumberForKey(value, SEGMENT_PREFERENCE);
+
+    this.setState({
+      selectedSegmentIndex: value
+    });
   };
 }
 

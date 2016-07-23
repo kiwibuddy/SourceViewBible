@@ -46,6 +46,9 @@
     "source-spheres": "{{name}} Spheres",
     "source-words": "Words of {{name}}",
     "discovery-center": "Discovery Center",
+    "bookmarks": "Bookmarks",
+    "history": "History",
+    "highlights": "Highlights",
     percentage: "Percentage",
     words: {
       count: {

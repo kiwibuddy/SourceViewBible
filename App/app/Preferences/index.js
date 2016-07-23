@@ -13,7 +13,7 @@ const Keys = {
     Chapters: PREFIX + 'books.chapters',
   },
   Bookmarks: {
-    TabIndex: PREFIX + 'bookmarks.tabIndex'
+    SegmentIndex: PREFIX + 'bookmarks.segmentIndex'
   },
 };
 Preference.Keys = Keys;
