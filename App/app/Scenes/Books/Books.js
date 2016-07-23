@@ -21,7 +21,7 @@ import {
   Localizable
 } from '../../Common';
 
-const { Preferences } = Constants;
+import Preference from '../../Preferences';
 
 // $FlowFixMe: - Flow can't find os module extension
 import SegmentedControl from '../../Components/Common/SegmentedControl';
@@ -38,7 +38,7 @@ const SEGMENT_INDEXES = {
 };
 
 const LISTVIEW_REF = 'LISTVIEW_REF';
-const SORT_PREFERENCE = Preferences.Books.Sort + '.Books';
+const SORT_PREFERENCE = Preference.Keys.Books.Sort + '.Books';
 
 import { Book } from '../../Database';
 const MAX_BOOK_WORD_COUNT = Math.max.apply(Math, Book.all().map(book => book.wordCount));
@@ -49,7 +49,7 @@ type Props = {
 
 type State = {
   dataSource: any,
-  selectedSegmentIndex?: number,
+  selectedSegmentIndex: number,
 };
 
 export default class Books extends Component {
@@ -60,19 +60,14 @@ export default class Books extends Component {
 
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     this.state = {
-      dataSource: dataSource
+      dataSource: dataSource,
+      selectedSegmentIndex: Preference.numberForKey(SORT_PREFERENCE) || SEGMENT_INDEXES.TEXT
     };
   }
 
   componentDidMount() {
-    AsyncStorage.getItem(SORT_PREFERENCE).then(sort => {
-      let selectedSegmentIndex = this.state.selectedSegmentIndex || SEGMENT_INDEXES.TEXT;
-      if (sort != null) selectedSegmentIndex = parseInt(sort);
-
-      this.setState({
-        dataSource: this._getDataSource(selectedSegmentIndex),
-        selectedSegmentIndex
-      });
+    this.setState({
+      dataSource: this._getDataSource(this.state.selectedSegmentIndex)
     });
   }
 
@@ -144,7 +139,7 @@ export default class Books extends Component {
     const listView = this.refs[LISTVIEW_REF];
     listView.scrollTo({y: 0, animated: false});
 
-    AsyncStorage.setItem(SORT_PREFERENCE, value.toString());
+    Preference.setNumberForKey(value, SORT_PREFERENCE);
 
     this.setState({
       selectedSegmentIndex: value,

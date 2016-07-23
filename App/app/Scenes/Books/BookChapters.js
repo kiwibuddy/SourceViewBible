@@ -22,10 +22,11 @@ import {
 } from '../../Common';
 
 const {
-  Preferences,
   SourceType,
   SphereType
 } = Constants;
+
+import Preference from '../../Preferences';
 
 // $FlowFixMe: - Flow can't find os module extension
 import SegmentedControl from '../../Components/Common/SegmentedControl';
@@ -39,7 +40,7 @@ const SEGMENT_INDEXES = {
 };
 
 const LISTVIEW_REF = 'LISTVIEW_REF';
-const SEGMENT_PREFERENCE = Preferences.Books.Chapters;
+const SEGMENT_PREFERENCE = Preference.Keys.Books.Chapters;
 
 import { Book } from '../../Database';
 
@@ -51,7 +52,7 @@ type Props = {
 type State = {
   book: Object,
   dataSource: any,
-  selectedSegmentIndex?: number,
+  selectedSegmentIndex: number,
 };
 
 export default class BookChapters extends Component {
@@ -65,19 +66,14 @@ export default class BookChapters extends Component {
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     this.state = {
       book,
-      dataSource: dataSource
+      dataSource: dataSource,
+      selectedSegmentIndex: Preference.numberForKey(SEGMENT_PREFERENCE) || SEGMENT_INDEXES.SOURCES
     };
   }
 
   componentDidMount() {
-    AsyncStorage.getItem(SEGMENT_PREFERENCE).then(sort => {
-      let selectedSegmentIndex = this.state.selectedSegmentIndex || SEGMENT_INDEXES.SOURCES;
-      if (sort != null) selectedSegmentIndex = parseInt(sort);
-
-      this.setState({
-        dataSource: this._getDataSource(selectedSegmentIndex),
-        selectedSegmentIndex
-      });
+    this.setState({
+      dataSource: this._getDataSource(this.state.selectedSegmentIndex)
     });
   }
 
@@ -172,7 +168,7 @@ export default class BookChapters extends Component {
     const listView = this.refs[LISTVIEW_REF];
     listView.scrollTo({y: 0, animated: false});
 
-    AsyncStorage.setItem(SEGMENT_PREFERENCE, value.toString());
+    Preference.setNumberForKey(value, SEGMENT_PREFERENCE);
 
     this.setState({
       selectedSegmentIndex: value,

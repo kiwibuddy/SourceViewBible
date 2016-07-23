@@ -25,7 +25,7 @@ import {
   StyleSheet,
 } from '../../Common';
 
-const { Preferences } = Constants;
+import Preference from '../../Preferences';
 
 import { BarChart, PieChart } from '../../Components/Charts';
 
@@ -41,7 +41,7 @@ const SEGMENT_INDEXES = {
   PRINCIPALITY: 2
 };
 
-const SORT_PREFERENCE = Preferences.Books.Sort + '.SphereBooks';
+const SORT_PREFERENCE = Preference.Keys.Books.Sort + '.SphereBooks';
 
 type Props = {
   onPressBook: Function,
@@ -50,7 +50,7 @@ type Props = {
 
 type State = {
   dataSource: any,
-  selectedSegmentIndex?: number,
+  selectedSegmentIndex: number,
   sphere: Object,
 };
 
@@ -73,21 +73,19 @@ export default class SphereBooks extends Component {
     const sphere = Sphere.findByID(props.sphereID);
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
 
+    let selectedSegmentIndex = Preference.numberForKey(SORT_PREFERENCE);
+    if (selectedSegmentIndex == null) selectedSegmentIndex = SEGMENT_INDEXES.PRINCIPALITY;
+    
     this.state = {
       dataSource: dataSource,
-      sphere
+      sphere,
+      selectedSegmentIndex
     };
   }
 
   componentDidMount() {
-    AsyncStorage.getItem(SORT_PREFERENCE).then(sort => {
-      let selectedSegmentIndex = this.state.selectedSegmentIndex || SEGMENT_INDEXES.PRINCIPALITY;
-      if (sort != null) selectedSegmentIndex = parseInt(sort);
-
-      this.setState({
-        dataSource: this._getDataSource(selectedSegmentIndex),
-        selectedSegmentIndex
-      });
+    this.setState({
+      dataSource: this._getDataSource(this.state.selectedSegmentIndex)
     });
   }
 
@@ -247,8 +245,8 @@ export default class SphereBooks extends Component {
   }
 
   _onSegmentedControlValueChanged = (value: number) => {
-    AsyncStorage.setItem(SORT_PREFERENCE, value.toString());
-    
+    Preference.setNumberForKey(value, SORT_PREFERENCE);
+
     this.setState({
       selectedSegmentIndex: value,
       dataSource: this._getDataSource(value)

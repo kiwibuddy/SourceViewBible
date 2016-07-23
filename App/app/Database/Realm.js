@@ -215,10 +215,10 @@ export class Occurrence extends Realm.Object {
 }
 Occurrence.schema = OccurrenceSchema;
 
-const SourceViewSchema = [Bible, Book, Chapter, Source, SourceRelation, Sphere, Count, Content, Occurrence];
+const Schema = [Bible, Book, Chapter, Source, SourceRelation, Sphere, Count, Content, Occurrence];
 
 const realm = new Realm({
-  schema: SourceViewSchema,
+  schema: Schema,
   readOnly: true,
   ...Platform.select({
     ios: {
