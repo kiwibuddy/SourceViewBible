@@ -1,8 +1,6 @@
 package com.sourceviewbible;
 
 import com.facebook.react.ReactActivity;
-import com.rnfs.RNFSPackage;
-import io.realm.react.RealmReactPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,50 +23,55 @@ import java.io.OutputStream;
 import java.io.File;
 
 public class MainActivity extends ReactActivity {
+    protected void copyAsset(String sourcePath, String destinationPath) {
+      try {
+        AssetManager assetManager = getAssets();
+
+        File destinationFile = new File(destinationPath);
+        File destinationDirectory = destinationFile.getParentFile();
+        if (!destinationDirectory.exists()) {
+          destinationDirectory.mkdirs();
+        }
+
+        if (!destinationFile.exists()) {
+          Log.v("Emdros", "Internal storage: " + destinationPath);
+
+          // String[] files = assetManager.list("");
+          // for (String filename : files) {
+          //   Log.v("Emdros", "Asset File: " + filename);
+          // }
+
+          InputStream sourceInputStream = assetManager.open(sourcePath);
+          OutputStream destinationOutputStream = new FileOutputStream(destinationPath);
+          byte[] buffer = new byte[1024];
+          int length;
+          while ((length = sourceInputStream.read(buffer)) > 0) {
+              destinationOutputStream.write(buffer, 0, length);
+          }
+          destinationOutputStream.flush();
+          destinationOutputStream.close();
+          sourceInputStream.close();
+
+          Log.v("Emdros", "Copied: " + destinationPath);
+        }
+      } catch (IOException e) {
+           Log.v("Emdros", "uh oh: " + e.toString());
+      }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        AssetManager assetManager = getAssets();
-        try {
-            String database =  "Datasets" + File.separator + "en" + File.separator + "NLT" + File.separator + "SourceView.bpt";
-            String outfilename = getFilesDir().toString() + File.separator + database;
-            File outfile = new File(outfilename);
-            File directory = outfile.getParentFile();
-            if (!directory.exists()) {
-              if (directory.mkdirs()) {
-                Log.v("Emdros", "Created directory");
-              } else {
-                Log.v("Emdros", "Shoot, could not create directory");
-              }
-            } else {
-              Log.v("Emdros", "Directory exists:" + directory);
-            }
+        String filesDirectoryPath = getFilesDir().toString();
 
-            if (!outfile.exists()) {
-              Log.v("Emdros", "Internal storage: " + outfilename);
+        String emdrosSourcePath = "sourceview/Datasets/en/NLT/SourceView.bpt";
+        String emdrosDestinationPath = filesDirectoryPath + "/Datasets/en/NLT/SourceView.bpt";
+        copyAsset(emdrosSourcePath, emdrosDestinationPath);
 
-              String[] files = assetManager.list("");
-              for (String filename : files) {
-                Log.v("Emdros", "Asset File: " + filename);
-              }
-
-              InputStream myinput = assetManager.open("sourceview" + File.separator + database);
-              OutputStream myoutput = new FileOutputStream(outfilename);
-              byte[] buffer = new byte[1024];
-              int length;
-              while ((length = myinput.read(buffer))>0) {
-                  myoutput.write(buffer,0,length);
-              }
-              myoutput.flush();
-              myoutput.close();
-              myinput.close();
-
-              Log.v("Emdros", "Copied: " + outfilename);
-            }
-        } catch (IOException e) {
-             Log.v("Emdros", "uh oh: " + e.toString());
-        }
+        String realmSourcePath = "sourceview/Datasets/en/NLT/SourceView.realm";
+        String realmDestinationPath = filesDirectoryPath + "/Datasets/en/NLT/SourceView.realm";
+        copyAsset(realmSourcePath, realmDestinationPath);
     }
 
     /**

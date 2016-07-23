@@ -1,6 +1,7 @@
 /* @flow */
 'use strict';
 
+import { Platform } from 'react-native';
 import Realm from 'realm';
 const RNFS = require('react-native-fs');
 
@@ -217,7 +218,14 @@ Occurrence.schema = OccurrenceSchema;
 const SourceViewSchema = [Bible, Book, Chapter, Source, SourceRelation, Sphere, Count, Content, Occurrence];
 
 const realm = new Realm({
-  path: RNFS.MainBundlePath + '/Datasets/en/NLT/SourceView.realm',
   schema: SourceViewSchema,
   readOnly: true,
+  ...Platform.select({
+    ios: {
+      path: RNFS.MainBundlePath + '/Datasets/en/NLT/SourceView.realm',
+    },
+    android: {
+      path: RNFS.DocumentDirectoryPath + '/Datasets/en/NLT/SourceView.realm',
+    }
+  })
 });
