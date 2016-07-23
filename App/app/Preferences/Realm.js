@@ -27,7 +27,23 @@ export class Preference extends Realm.Object {
 }
 Preference.schema = PreferenceSchema;
 
-const Schema = [Preference];
+const HistorySchema = {
+  name: 'History',
+  primaryKey: 'id',
+  properties: {
+    id: 'string',
+    date: 'date',
+    title: 'string',
+    path: 'string',
+  }
+}
+
+export class History extends Realm.Object {
+
+}
+History.schema = HistorySchema;
+
+const Schema = [Preference, History];
 
 const realm = new Realm({
   schema: Schema

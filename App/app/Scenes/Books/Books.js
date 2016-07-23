@@ -21,7 +21,7 @@ import {
   Localizable
 } from '../../Common';
 
-import Preference from '../../Preferences';
+import { Preference } from '../../Preferences';
 
 // $FlowFixMe: - Flow can't find os module extension
 import SegmentedControl from '../../Components/Common/SegmentedControl';

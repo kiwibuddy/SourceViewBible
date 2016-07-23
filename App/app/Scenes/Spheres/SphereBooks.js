@@ -25,7 +25,7 @@ import {
   StyleSheet,
 } from '../../Common';
 
-import Preference from '../../Preferences';
+import { Preference } from '../../Preferences';
 
 import { BarChart, PieChart } from '../../Components/Charts';
 

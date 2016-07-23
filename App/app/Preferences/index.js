@@ -2,6 +2,7 @@
 'use strict';
 
 import {
+  History,
   Preference,
 } from './Realm';
 
@@ -13,4 +14,7 @@ const Keys = {
 };
 Preference.Keys = Keys;
 
-export default Preference;
+module.exports = {
+  History,
+  Preference,
+};
