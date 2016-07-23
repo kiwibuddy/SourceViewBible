@@ -291,9 +291,7 @@ export default class App extends Component {
       this.setState({navigation});
     }
 
-    if (!route.modal) {
-      History.record(route);
-    }
+    History.record(route);
   };
 
   _popRoute = (callback?: Function) => {
@@ -334,6 +332,8 @@ export default class App extends Component {
     if (navigation !== this.state.navigation) {
       this.setState({navigation});
     }
+
+    History.record(route);
   };
 
   _findBook(bookID: string) {

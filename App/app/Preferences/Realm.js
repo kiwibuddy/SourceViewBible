@@ -34,6 +34,7 @@ const HistorySchema = {
     id: 'string',
     date: 'date',
     title: 'string',
+    routeKey: 'string',
     routeJSON: 'string',
   }
 }
@@ -43,9 +44,21 @@ export class History extends Realm.Object {
     return realm.objects('History').sorted('date', true);
   }
 
+  static last() {
+    return this.all().slice(0, 1);
+  }
+
   static record(route: Object) {
+    if (route.modal) return;
+    
+    let id = 'history-' + Date.now();
+    const last = this.last();
+    if (last.routeKey === route.key) {
+      id = last.id;
+    }
+
     const date = new Date();
-    const history = {id: 'history-' + Date.now(), date, title: route.title, routeJSON: JSON.stringify(route)}
+    const history = {id, date, title: route.longTitle || route.title, routeKey: route.key, routeJSON: JSON.stringify(route)}
     realm.write(() => {
       realm.create('History', history, true);
     });
