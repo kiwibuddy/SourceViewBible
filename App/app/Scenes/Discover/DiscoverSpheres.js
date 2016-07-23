@@ -140,7 +140,7 @@ export default class DiscoverSpheres extends Component {
             </View>
             <View style={styles.statisticContainer} >
               <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-                <Text style={styles.statisticTitle}>{Localizable.toNumber(sphere.wordCount, {precision: 0})}</Text>
+                <Text style={styles.statisticWordsTitle}>{Localizable.toNumber(sphere.wordCount, {precision: 0})}</Text>
                 <Text style={styles.statisticSubtitle}>Words</Text>
               </View>
             </View>
@@ -253,6 +253,14 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: Colors.tint,
     marginRight: 3,
+    margin: (width <= 320 ? 0 : null),
+    height: (width <= 320 ? 0 : null),
+  },
+  statisticWordsTitle: {
+    fontSize: 11,
+    color: Colors.tint,
+    marginRight: 3,
+    marginLeft: (width <= 320 ? 2 : null),
   },
   statisticSubtitle: {
     flex: 1,

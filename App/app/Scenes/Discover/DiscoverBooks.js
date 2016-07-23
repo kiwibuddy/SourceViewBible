@@ -250,6 +250,8 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: Colors.tint,
     marginRight: 2,
+    margin: (width <= 320 ? 0 : null),
+    height: (width <= 320 ? 0 : null),
   },
   statisticSubtitle: {
     flex: 1,
