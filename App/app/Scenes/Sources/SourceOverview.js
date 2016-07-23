@@ -95,23 +95,23 @@ export default class SourceOverview extends Component {
           </WordCloud>
         </TouchableOpacity>
         <View style={[StyleSheet.styles.statisticsContainer, {marginTop: 25}]}>
-          <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={this.props.onPressBooks}>
-            <Text style={StyleSheet.styles.statisticTitle}>0</Text>
+          <TouchableOpacity style={[StyleSheet.styles.statisticContainer, {marginHorizontal: -20}]} onPress={this.props.onPressBooks}>
+            <Text style={[StyleSheet.styles.statisticTitle, {fontSize: 18}]}>0</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Books</Text>
           </TouchableOpacity>
           <View style={StyleSheet.styles.statisticKeyline} />
           <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={this.props.onPressConversations}>
-            <Text style={StyleSheet.styles.statisticTitle}>0</Text>
+            <Text style={[StyleSheet.styles.statisticTitle, {fontSize: 18}]}>0</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Conversations</Text>
           </TouchableOpacity>
           <View style={StyleSheet.styles.statisticKeyline} />
           <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={this.props.onPressWords}>
-            <Text style={StyleSheet.styles.statisticTitle}>{Localizable.toNumber(source.wordCount, {precision: 0})}</Text>
+            <Text style={[StyleSheet.styles.statisticTitle, {fontSize: 18}]}>{Localizable.toNumber(source.wordCount, {precision: 0})}</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Words</Text>
           </TouchableOpacity>
           <View style={StyleSheet.styles.statisticKeyline} />
           <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={this.props.onPressSpheres}>
-            <Text style={StyleSheet.styles.statisticTitle}>0</Text>
+            <Text style={[StyleSheet.styles.statisticTitle, {fontSize: 18}]}>0</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Spheres</Text>
           </TouchableOpacity>
         </View>
