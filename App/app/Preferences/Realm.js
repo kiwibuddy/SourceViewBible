@@ -45,20 +45,27 @@ export class History extends Realm.Object {
   }
 
   static last() {
-    return this.all().slice(0, 1);
+    return this.all()[0];
   }
 
   static record(route: Object) {
     if (route.modal) return;
-    
+
     let id = 'history-' + Date.now();
     const last = this.last();
-    if (last.routeKey === route.key) {
+    if (last && last.routeKey === route.key) {
       id = last.id;
     }
 
     const date = new Date();
-    const history = {id, date, title: route.longTitle || route.title, routeKey: route.key, routeJSON: JSON.stringify(route)}
+    const history = {
+      id,
+      date,
+      title: route.title,
+      routeKey: route.key,
+      routeJSON: JSON.stringify(route)
+    }
+
     realm.write(() => {
       realm.create('History', history, true);
     });
