@@ -133,7 +133,7 @@ export default class Bookmarks extends Component {
   _renderHistoryRow = (history: Object) => {
     return (
       <TouchableOpacity
-        onPress={() => {}}
+        onPress={() => this.props.onPressRoute(history.route)}
         style={styles.row}
       >
         <Text style={StyleSheet.styles.cell.title}>{history.title}</Text>

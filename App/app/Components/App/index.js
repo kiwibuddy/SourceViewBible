@@ -292,7 +292,7 @@ export default class App extends Component {
     }
 
     if (!route.modal) {
-      History.record({id: 'history-' + Date.now(), title: route.title, path: route.key});
+      History.record(route);
     }
   };
 
