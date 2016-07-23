@@ -225,6 +225,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '500',
     marginTop: 1,
+    paddingHorizontal: 5,
   },
   sourceReadTime: {
     flex: 0,

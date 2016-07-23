@@ -119,7 +119,7 @@ export default class DiscoverBooks extends Component {
             size={40}
             style={[styles.icon, {color: Colors.sources[book.principalSourceType].tint}]}
           />
-          <Text style={styles.bookTitle}>{book.name}</Text>
+          <Text numberOfLines={1} style={styles.bookTitle}>{book.name}</Text>
           <Text style={styles.bookReadTime}>{ReadingTime(book.wordCount)}</Text>
           <View style={styles.keyline} />
           <View style={styles.statisticsContainer}>
@@ -229,6 +229,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '500',
     marginTop: 1,
+    paddingHorizontal: 5,
   },
   bookReadTime: {
     flex: 0,
