@@ -39,7 +39,9 @@ const HistorySchema = {
 }
 
 export class History extends Realm.Object {
-
+  static all() {
+    return realm.objects('History').sorted('date', true);
+  }
 }
 History.schema = HistorySchema;
 

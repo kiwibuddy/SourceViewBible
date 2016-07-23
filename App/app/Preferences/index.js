@@ -6,11 +6,15 @@ import {
   Preference,
 } from './Realm';
 
+const PREFIX = 'com.sourceviewbible.preferences.';
 const Keys = {
   Books: {
-    Sort: 'com.sourceviewbible.preferences.books.sort',
-    Chapters: 'com.sourceviewbible.preferences.books.chapters',
-  }
+    Sort: PREFIX + 'books.sort',
+    Chapters: PREFIX + 'books.chapters',
+  },
+  Bookmarks: {
+    TabIndex: PREFIX + 'bookmarks.tabIndex'
+  },
 };
 Preference.Keys = Keys;
 
