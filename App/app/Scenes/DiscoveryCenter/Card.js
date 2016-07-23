@@ -170,8 +170,10 @@ export default class Card extends Component {
 
   _onPressFilterType = (filterType: string) => {
     if (this.props.onShowPopover) {
-      this.props.onShowPopover({filterType}, (filter) => {
-        this._addFilter(filter);
+      const { card } = this.state;
+      this.props.onShowPopover({card, filterType}, (card) => {
+        this._animateLayout();
+        this.setState({card});
       });
     }
   };

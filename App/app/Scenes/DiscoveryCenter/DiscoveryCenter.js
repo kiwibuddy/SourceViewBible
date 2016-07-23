@@ -119,7 +119,16 @@ export default class DiscoveryCenter extends Component {
     return (
       <Popover
         onDone={(filter) => {
-          popover.onComplete(filter);
+          const { card } = popover.props;
+          const filters = [
+            ...card.filters,
+            filter
+          ];
+
+          popover.onComplete({
+            ...card,
+            filters
+          });
           this._hidePopover();
         }}
         onPressCancel={this._hidePopover}
