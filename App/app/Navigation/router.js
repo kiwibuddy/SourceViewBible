@@ -25,14 +25,14 @@ function pathToRegexp(path, keys, sensitive, strict) {
 }
 
 class Route {
-  path: any;
-  keys: any;
+  key: any;
+  params: any;
   regex: any;
 
-  constructor(path) {
-    this.path = path;
-    this.keys = [];
-    this.regex = pathToRegexp(this.path, this.keys, false, false);
+  constructor(key) {
+    this.key = key;
+    this.params = [];
+    this.regex = pathToRegexp(this.key, this.params, false, false);
   }
 
   match(path) {
@@ -41,10 +41,10 @@ class Route {
 
     const params = {};
     matches.forEach((match, i) => {
-      const key = this.keys[i - 1];
+      const param = this.params[i - 1];
       const val = ('string' == typeof match) ? decodeURIComponent(match) : match;
-      if (key) {
-        params[key.name] = val;
+      if (param) {
+        params[param.name] = val;
       }
     });
 
