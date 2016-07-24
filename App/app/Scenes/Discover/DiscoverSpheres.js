@@ -29,11 +29,12 @@ import Icon from '../../Components/Common/Icon';
 
 const MAXIMUM_SPHERE_COUNT = 9;
 
+import { spheresURL, sphereURL } from '../../Navigation';
+
 import { Bible, Book, Sphere } from '../../Database';
 
 type Props = {
-  onPressSphere: Function,
-  onPressSpheres: Function,
+  navigate: Function,
 };
 
 type State = {
@@ -72,7 +73,7 @@ export default class DiscoverSpheres extends Component {
     return (
       <View style={{flex: 1}}>
         <View style={styles.container}>
-         <TouchableOpacity onPress={this.props.onPressSpheres}>
+         <TouchableOpacity onPress={() => this.props.navigate(spheresURL({title: Localizable.t('spheres.text')}))}>
            <View style={styles.sectionHeaderContainer}>
              <Text style={StyleSheet.styles.sectionHeaderTitle}>SPHERES</Text>
              <View style={styles.sectionHeaderDetail}>
@@ -110,7 +111,7 @@ export default class DiscoverSpheres extends Component {
     const spherePercent = (sphere.wordCount / Bible.wordCount) * 100;
     const iconName = `icon-${sphere.id}-filled`;
     return (
-      <TouchableOpacity style={styles.itemContainer} onPress={ () => this.props.onPressSphere(sphere) }>
+      <TouchableOpacity style={styles.itemContainer} onPress={ () => this.props.navigate(sphereURL({sphereID: sphere.id, title: Localizable.t('spheres.text')})) }>
         <View style={styles.item}>
           <LinearGradient
             colors={Colors.spheres[sphere.id].gradient.tiny}

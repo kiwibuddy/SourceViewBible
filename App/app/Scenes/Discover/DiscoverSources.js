@@ -29,11 +29,12 @@ import SourceIcon from '../../Components/Common/SourceIcon';
 
 const MAXIMUM_SOURCE_COUNT = 9;
 
+import { sourcesURL, sourceURL } from '../../Navigation';
+
 import { Bible, Book, Source } from '../../Database';
 
 type Props = {
-  onPressSource: Function,
-  onPressSources: Function,
+  navigate: Function,
 };
 
 type State = {
@@ -66,7 +67,7 @@ export default class DiscoverSources extends Component {
     return (
       <View style={{flex: 1}}>
         <View style={styles.container}>
-         <TouchableOpacity onPress={this.props.onPressSources}>
+         <TouchableOpacity onPress={() => this.props.navigate(sourcesURL({title: Localizable.t('sources.text')}))}>
            <View style={styles.sectionHeaderContainer}>
              <Text style={StyleSheet.styles.sectionHeaderTitle}>SOURCES</Text>
              <View style={styles.sectionHeaderDetail}>
@@ -108,7 +109,7 @@ export default class DiscoverSources extends Component {
     const sourceType = SOURCE_TYPE_MAP[source.name] || 'support';
 
     return (
-      <TouchableOpacity key={'source-' + source.id} style={styles.itemContainer} onPress={ () => this.props.onPressSource(source) }>
+      <TouchableOpacity key={'source-' + source.id} style={styles.itemContainer} onPress={ () => this.props.navigate(sourceURL({sourceID: source.id, title: source.name})) }>
         <View style={styles.item}>
           <LinearGradient
             colors={Colors.sources[sourceType].gradient.tiny}
