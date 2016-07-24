@@ -49,6 +49,8 @@
     "bookmarks": "Bookmarks",
     "history": "History",
     "highlights": "Highlights",
+    "today": "Today",
+    "yesterday": "Yesterday",
     percentage: "Percentage",
     words: {
       count: {

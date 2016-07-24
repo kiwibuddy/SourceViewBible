@@ -37,16 +37,8 @@ const SEGMENT_INDEXES = {
 };
 const SEGMENT_PREFERENCE = Preference.Keys.Bookmarks.SegmentIndex;
 
-function groupBy(xs, key) {
-  return xs.reduce(function(rv, x) {
-    var v = key instanceof Function ? key(x) : x[key];
-    (rv[v] = rv[v] || []).push(x);
-    return rv;
-  }, {});
-}
-
 type Props = {
-
+  navigate: Function,
 };
 
 type State = {
@@ -55,6 +47,7 @@ type State = {
 };
 
 export default class Bookmarks extends Component {
+  props: Props;
   state: State;
 
   constructor(props: Props) {
@@ -199,11 +192,23 @@ export default class Bookmarks extends Component {
     const rows = {};
     const sections = [];
 
+    const today = moment();
+
     History.all().forEach((history) => {
-      const section = moment().calendar(history.date, {
-        sameDay: '[Today]',
-        lastDay: '[Yesterday]',
-      });
+      const dateDiff = today.diff(history.date, 'days');
+      let section = null;
+      switch (dateDiff) {
+        case 0:
+          section = Localizable.t('today');
+          break;
+
+        case 1:
+          section = Localizable.t('yesterday');
+          break;
+
+        default:
+          section = Localizable.strftime(history.date, "%A, %B %-d");
+      }
       if (sections.indexOf(section) === -1) {
         sections.push(section);
         rows[section] = [];
