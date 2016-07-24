@@ -32,6 +32,4 @@ router.addRoute('/Books', (params) => {
   />;
 });
 
-const {route, params} = router.match('/Books');
-
 module.exports = router;
