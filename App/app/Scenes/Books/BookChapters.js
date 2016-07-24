@@ -28,6 +28,8 @@ const {
 
 import { Preference } from '../../Preferences';
 
+import { readerURL } from '../../Navigation';
+
 // $FlowFixMe: - Flow can't find os module extension
 import SegmentedControl from '../../Components/Common/SegmentedControl';
 import { SourcesBarChart, SpheresBarChart } from '../../Components/Charts';
@@ -46,7 +48,7 @@ import { Book } from '../../Database';
 
 type Props = {
   bookID: string,
-  onPressScripture: Function
+  navigate: Function
 };
 
 type State = {
@@ -110,7 +112,7 @@ export default class BookChapters extends Component {
     const subtitle = (this.state.selectedSegmentIndex === SEGMENT_INDEXES.SPHERES ? Localizable.t('spheres.count', {count: chapter.sphereCount}) : Localizable.t('sources.count', {count: chapter.sourceCount}) );
 
     return (
-      <TouchableOpacity style={styles.section} onPress={() => this.props.onPressScripture({book, chapterNumber})}>
+      <TouchableOpacity style={styles.section} onPress={() => this.props.navigate(readerURL({bookID: book.id, chapterNumber, title: book.name}))}>
         <View style={[styles.cellContainer, {paddingVertical: 8}]}>
           <View style={styles.horizontalContainer}>
             <View style={styles.leftContainer}>

@@ -20,6 +20,8 @@ import {
 
 import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigation';
 
+import { BACK } from '../../Navigation';
+
 // $FlowFixMe: - Flow can't find os module extension
 import SegmentedControl from '../../Components/Common/SegmentedControl';
 
@@ -34,8 +36,7 @@ const SEGMENT_INDEXES = {
 const SEGMENT_PREFERENCE = Preference.Keys.Bookmarks.SegmentIndex;
 
 type Props = {
-  onPressDone: Function,
-  onPressRoute: Function,
+
 };
 
 type State = {
@@ -44,7 +45,6 @@ type State = {
 };
 
 export default class Bookmarks extends Component {
-  props: Props;
   state: State;
 
   constructor(props: Props) {
@@ -89,7 +89,7 @@ export default class Bookmarks extends Component {
             onValueChange={(value) => this._onSegmentedControlValueChanged(SEGMENTS.indexOf(value))}
           />
           <TouchableOpacity
-            onPress={this.props.onPressDone}
+            onPress={() => this.props.navigate(BACK)}
           >
             <Text style={[StyleSheet.styles.navigationBar.doneButtonTitle, {marginLeft: 16}]}>{Localizable.t('done')}</Text>
           </TouchableOpacity>
@@ -121,7 +121,7 @@ export default class Bookmarks extends Component {
   _renderBookmarkRow = (bookmark: Object) => {
     return (
       <TouchableOpacity
-        onPress={() => this.props.onPressRoute(bookmark)}
+        onPress={() => this.props.navigate(bookmark)}
         style={styles.row}
       >
         <Image source={bookmark.icon} style={styles.icon} />
@@ -134,7 +134,7 @@ export default class Bookmarks extends Component {
     const route = {path: history.path, title: history.title};
     return (
       <TouchableOpacity
-        onPress={() => this.props.onPressRoute(route)}
+        onPress={() => this.props.navigate(route)}
         style={styles.row}
       >
         <Text style={StyleSheet.styles.cell.title}>{history.title}</Text>

@@ -12,6 +12,8 @@ import ReactNative, {
 } from 'react-native';
 import { ListView } from '../../Components/Common/DatabaseListView';
 
+import { booksURL, bookURL } from '../../Navigation';
+
 import { Book } from '../../Database';
 
 const { width } = Dimensions.get('window');
@@ -38,8 +40,7 @@ import Icon from '../../Components/Common/Icon';
 const MAXIMUM_BOOK_COUNT = 9;
 
 type Props = {
-  onPressBook: Function,
-  onPressBooks: Function,
+
 };
 
 type State = {
@@ -72,7 +73,7 @@ export default class DiscoverBooks extends Component {
     return (
       <View style={{flex: 1}}>
         <View style={styles.container}>
-         <TouchableOpacity onPress={this.props.onPressBooks}>
+         <TouchableOpacity onPress={() => this.props.navigate(booksURL({title: Localizable.t('books')}))}>
            <View style={styles.sectionHeaderContainer}>
              <Text style={StyleSheet.styles.sectionHeaderTitle}>BOOKS</Text>
              <View style={styles.sectionHeaderDetail}>
@@ -107,7 +108,7 @@ export default class DiscoverBooks extends Component {
     const spherePercent = (book.sphereWordCount / book.wordCount) * 100;
 
     return (
-      <TouchableOpacity key={'book-' + book.id} style={styles.itemContainer} onPress={ () => this.props.onPressBook(book) }>
+      <TouchableOpacity key={'book-' + book.id} style={styles.itemContainer} onPress={ () => this.props.navigate(bookURL({bookID: book.id, title: Localizable.t('book-overview', {name: book.name})})) }>
         <View style={styles.item}>
           <LinearGradient
             colors={Colors.sources[book.principalSourceType].gradient.tiny}

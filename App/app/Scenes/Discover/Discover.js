@@ -21,24 +21,22 @@ import DiscoverSources from './DiscoverSources';
 import DiscoverSpheres from './DiscoverSpheres';
 
 type Props = {
-  onPressBook: Function,
-  onPressBooks: Function,
-  onPressScripture: Function,
+
 };
 
 export default class Discovery extends Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        <DiscoverBooks onPressBook={this.props.onPressBook} onPressBooks={this.props.onPressBooks} onPressScripture={this.props.onPressScripture} />
+        <DiscoverBooks navigate={this.props.navigate} />
 
         <View style={styles.separator}></View>
 
-        <DiscoverSources onPressSource={this.props.onPressSource} onPressSources={this.props.onPressSources} />
+        <DiscoverSources navigate={this.props.navigate} />
 
         <View style={styles.separator}></View>
 
-        <DiscoverSpheres onPressSphere={this.props.onPressSphere} onPressSpheres={this.props.onPressSpheres} />
+        <DiscoverSpheres navigate={this.props.navigate} />
 
       </ScrollView>
     );

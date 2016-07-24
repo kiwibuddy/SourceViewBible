@@ -48,4 +48,6 @@ export const spherePassagesURL = router.addRoute('/Spheres/:sphereID/Passages', 
 export const sphereSourcesURL = router.addRoute('/Spheres/:sphereID/Sources', SphereSources);
 export const sphereWordsURL = router.addRoute('/Spheres/:sphereID/Words', SphereWords);
 
+export const BACK = 'BACK';
+
 export default router;

@@ -23,6 +23,8 @@ const {
   SphereType
 } = Constants;
 
+import { bookChaptersURL, bookSourcesURL, bookSpheresURL, bookWordsURL, readerURL, sourceURL } from '../../Navigation';
+
 import { SourcesBarChart, SpheresBarChart, WordCloud } from '../../Components/Charts';
 import ParallaxMotionView from '../../Components/Common/ParallaxMotionView';
 import SourceIcon from '../../Components/Common/SourceIcon';
@@ -35,12 +37,7 @@ import { Book } from '../../Database';
 
 type Props = {
   bookID: string,
-  onPressScripture: Function,
-  onPressChapters: Function,
-  onPressSource: Function,
-  onPressSources: Function,
-  onPressSpheres: Function,
-  onPressWords: Function,
+  navigate: Function,
 };
 
 type State = {
@@ -81,7 +78,7 @@ export default class BookOverview extends Component {
 
     return (
       <ScrollView style={styles.container}>
-        <TouchableOpacity onPress={this.props.onPressWords}>
+        <TouchableOpacity onPress={() => this.props.navigate(bookWordsURL({bookID: book.id, title: Localizable.t('book-words', {name: book.name})}))}>
           <WordCloud
             backgroundColors={Colors.sources[book.principalSourceType].gradient.big}
             style={StyleSheet.styles.wordCloud}
@@ -115,7 +112,7 @@ export default class BookOverview extends Component {
         <View style={StyleSheet.styles.statisticsContainer}>
           <TouchableOpacity
             style={StyleSheet.styles.statisticContainer}
-            onPress={this.props.onPressChapters}
+            onPress={() => this.props.navigate(bookChaptersURL({bookID: book.id, title: Localizable.t('book-chapters', {name: book.name})}))}
           >
             <Text style={StyleSheet.styles.statisticTitle}>{book.chapterCount}</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Chapters</Text>
@@ -123,7 +120,7 @@ export default class BookOverview extends Component {
           <View style={styles.keyline} />
           <TouchableOpacity
             style={StyleSheet.styles.statisticContainer}
-            onPress={this.props.onPressSources}
+            onPress={() => this.props.navigate(bookSourcesURL({bookID: book.id, title: Localizable.t('book-sources', {name: book.name})}))}
           >
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
               <Text style={StyleSheet.styles.statisticTitle}>{book.sourceCount}</Text>
@@ -139,7 +136,7 @@ export default class BookOverview extends Component {
           <View style={styles.keyline} />
           <TouchableOpacity
             style={StyleSheet.styles.statisticContainer}
-            onPress={this.props.onPressSpheres}
+            onPress={() => this.props.navigate(bookSpheresURL({bookID: book.id, title: Localizable.t('book-spheres', {name: book.name})}))}
           >
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
               <Text style={StyleSheet.styles.statisticTitle}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
@@ -160,7 +157,7 @@ export default class BookOverview extends Component {
 
         <TouchableOpacity
           style={styles.readButton}
-          onPress={() => this.props.onPressScripture({book})}
+          onPress={() => this.props.navigate(readerURL({bookID: book.id, chapterNumber: 1, title: book.name}))}
         >
           <Text style={styles.readButtonTitle}>{ReadingTime(book.wordCount)} read</Text>
         </TouchableOpacity>
@@ -177,7 +174,7 @@ export default class BookOverview extends Component {
     return (
       <TouchableOpacity
         key={'source-' + source.name}
-        onPress={() => this.props.onPressSource(source)}
+        onPress={() => this.props.navigate(sourceURL({sourceID: source.id, title: source.name}))}
         style={styles.sourceButton}
       >
         <SourceIcon
@@ -191,11 +188,12 @@ export default class BookOverview extends Component {
   };
 
   _renderMoreSource = () => {
+    const { book } = this.state;
     return (
       <TouchableOpacity
         key={'source-more'}
         style={styles.sourceButton}
-        onPress={this.props.onPressSources}
+        onPress={() => this.props.navigate(bookSourcesURL({bookID: book.id, title: Localizable.t('book-sources', {name: book.name})}))}
       >
         <Icon
           name="avatar-more"
