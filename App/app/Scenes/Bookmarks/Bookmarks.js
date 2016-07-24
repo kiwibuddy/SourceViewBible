@@ -136,7 +136,7 @@ export default class Bookmarks extends Component {
   _renderBookmarkRow = (bookmark: Object) => {
     return (
       <TouchableOpacity
-        onPress={() => this.props.navigate(bookmark)}
+        onPress={() => this._navigate(bookmark)}
         style={styles.row}
       >
         <Image source={bookmark.icon} style={styles.icon} />
@@ -149,7 +149,7 @@ export default class Bookmarks extends Component {
     const route = {path: history.path, title: history.title};
     return (
       <TouchableOpacity
-        onPress={() => this.props.navigate(route)}
+        onPress={() => this._navigate(route)}
         style={styles.row}
       >
         <Text style={StyleSheet.styles.cell.title}>{history.title}</Text>
@@ -166,6 +166,12 @@ export default class Bookmarks extends Component {
         <Text style={StyleSheet.styles.cell.title}></Text>
       </TouchableOpacity>
     );
+  };
+
+  _navigate = (route: Object) => {
+    this.props.navigate(BACK, () => {
+      this.props.navigate(route);
+    });
   };
 
   _getDataSource = (segmentIndex: number) => {
