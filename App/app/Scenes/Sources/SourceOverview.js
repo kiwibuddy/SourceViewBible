@@ -22,15 +22,13 @@ import { SourcesBarChart, SpheresBarChart, WordCloud } from '../../Components/Ch
 import ParallaxMotionView from '../../Components/Common/ParallaxMotionView';
 import Icon from '../../Components/Common/Icon';
 
+import { sourceURL, sourceBooksURL, sourceConversationsURL, sourceSpheresURL, sourceWordsURL } from '../../Navigation';
+
 import { Source } from '../../Database';
 
 type Props = {
   sourceID: string,
-  onPressBooks: Function,
-  onPressConversations: Function,
-  onPressSource: Function,
-  onPressSpheres: Function,
-  onPressWords: Function,
+  navigate: Function,
 };
 
 type State = {
@@ -53,7 +51,7 @@ export default class SourceOverview extends Component {
     const words = source.words.map(word => word.string);
     return (
       <ScrollView style={styles.container}>
-        <TouchableOpacity onPress={this.props.onPressWords}>
+        <TouchableOpacity onPress={() => this.props.navigate(sourceWordsURL({sourceID: source.id, title: Localizable.t('source-words', {name: source.name})}))}>
           <WordCloud
             backgroundColors={Colors.spheres['family'].gradient.big}
             style={styles.wordCloud}
@@ -95,22 +93,22 @@ export default class SourceOverview extends Component {
           </WordCloud>
         </TouchableOpacity>
         <View style={[StyleSheet.styles.statisticsContainer, {marginTop: 25}]}>
-          <TouchableOpacity style={[StyleSheet.styles.statisticContainer, {marginHorizontal: -20}]} onPress={this.props.onPressBooks}>
+          <TouchableOpacity style={[StyleSheet.styles.statisticContainer, {marginHorizontal: -20}]} onPress={() => this.props.navigate(sourceBooksURL({sourceID: source.id, title: Localizable.t('source-books', {name: source.name})}))}>
             <Text style={[StyleSheet.styles.statisticTitle, {fontSize: 18}]}>0</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Books</Text>
           </TouchableOpacity>
           <View style={StyleSheet.styles.statisticKeyline} />
-          <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={this.props.onPressConversations}>
+          <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.navigate(sourceConversationsURL({sourceID: source.id, title: Localizable.t('source-conversations', {name: source.name})}))}>
             <Text style={[StyleSheet.styles.statisticTitle, {fontSize: 18}]}>0</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Conversations</Text>
           </TouchableOpacity>
           <View style={StyleSheet.styles.statisticKeyline} />
-          <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={this.props.onPressWords}>
+          <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.navigate(sourceWordsURL({sourceID: source.id, title: Localizable.t('source-words', {name: source.name})}))}>
             <Text style={[StyleSheet.styles.statisticTitle, {fontSize: 18}]}>{Localizable.toNumber(source.wordCount, {precision: 0})}</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Words</Text>
           </TouchableOpacity>
           <View style={StyleSheet.styles.statisticKeyline} />
-          <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={this.props.onPressSpheres}>
+          <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.navigate(sourceSpheresURL({sourceID: source.id, title: Localizable.t('source-spheres', {name: source.name})}))}>
             <Text style={[StyleSheet.styles.statisticTitle, {fontSize: 18}]}>0</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Spheres</Text>
           </TouchableOpacity>
@@ -141,7 +139,7 @@ export default class SourceOverview extends Component {
               </View>
             </View>
           </View>
-          <TouchableOpacity style={styles.section} onPress={() => this.props.onPressSource()}>
+          <TouchableOpacity style={styles.section} onPress={() => {}}>
             <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
               <View style={styles.sourcesLeftContainer}>
                 <Icon
@@ -169,7 +167,7 @@ export default class SourceOverview extends Component {
               </View>
             </View>
           </View>
-          <TouchableOpacity style={styles.section} onPress={() => this.props.onPressSource()}>
+          <TouchableOpacity style={styles.section} onPress={() => {}}>
             <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
               <View style={styles.sourcesLeftContainer}>
                 <Icon

@@ -27,10 +27,12 @@ import SourceIcon from '../../Components/Common/SourceIcon';
 
 const LISTVIEW_REF = 'LISTVIEW_REF';
 
+import { sourceURL } from '../../Navigation';
+
 import { Source } from '../../Database';
 
 type Props = {
-  onPressSource: Function,
+  navigate: Function,
 };
 
 type State = {
@@ -46,6 +48,7 @@ var groupBy = function(xs, key) {
 };
 
 export default class Sources extends Component {
+  props: Props;
   state: State;
 
   constructor(props: Props) {
@@ -127,7 +130,7 @@ export default class Sources extends Component {
     const wordCount = source.wordCount;
 
     return (
-      <TouchableOpacity style={styles.section} onPress={() => this.props.onPressSource(source)}>
+      <TouchableOpacity style={styles.section} onPress={() => this.props.navigate(sourceURL({sourceID: source.id, title: source.name}))}>
         <View style={styles.sourcesCellContainer}>
           <View style={styles.sourcesAvatar}>
             <SourceIcon
