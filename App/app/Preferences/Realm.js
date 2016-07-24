@@ -4,6 +4,8 @@
 import { Platform } from 'react-native';
 import Realm from 'realm';
 
+import moment from 'moment';
+
 const PreferenceSchema = {
   name: 'Preference',
   primaryKey: 'key',
@@ -43,20 +45,25 @@ export class History extends Realm.Object {
     return realm.objects('History').sorted('date', true);
   }
 
-  static last() {
-    return this.all()[0];
+  static findByPath(path: string) {
+    return realm.objects('History').filtered('path = $0', path)[0];
   }
 
   static record(route: Object) {
     if (route.modal) return;
 
-    const last = this.last();
-    if (last && last.path === route.path) return;
+    let id = null;
+    const existingHistory = this.findByPath(route.path);
+    if (existingHistory) {
+      const today = moment();
+      if (today.diff(existingHistory.date, 'days') == 0) {
+        id = existingHistory.id;
+      }
+    }
 
-    const id = 'history-' + Date.now();
     const date = new Date();
     const history = {
-      id,
+      id: id || 'history-' + Date.now(),
       date,
       title: route.title,
       path: route.path
