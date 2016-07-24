@@ -237,7 +237,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     backgroundColor: '#FAFAFA',
-    // marginRight: 15,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: '#c8c7cc',
   },
@@ -245,7 +244,7 @@ const styles = StyleSheet.create({
     color: '#59626a',
     fontSize: 15,
     fontWeight: 'bold',
-    marginLeft: 8,
+    marginLeft: 15,
   },
   row: {
     flexDirection: 'row',
