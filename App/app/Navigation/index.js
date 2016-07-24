@@ -27,8 +27,6 @@ import SphereSources from '../Scenes/Spheres/SphereSources';
 import SphereWords from '../Scenes/Spheres/SphereWords';
 
 router.addRoute('/Books', (params) => {
-  console.log('Books!');
-  console.log(params);
   return <Books
     onPressBook={() => {}}
   />;
