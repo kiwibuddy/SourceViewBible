@@ -43,8 +43,15 @@ export class History extends Realm.Object {
     return realm.objects('History').sorted('date', true);
   }
 
+  static last() {
+    return this.all()[0];
+  }
+
   static record(route: Object) {
     if (route.modal) return;
+
+    const last = this.last();
+    if (last && last.path === route.path) return;
 
     const id = 'history-' + Date.now();
     const date = new Date();
