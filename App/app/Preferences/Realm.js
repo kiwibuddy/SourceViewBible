@@ -34,8 +34,7 @@ const HistorySchema = {
     id: 'string',
     date: 'date',
     title: 'string',
-    routeKey: 'string',
-    routeJSON: 'string',
+    path: 'string'
   }
 }
 
@@ -53,17 +52,12 @@ export class History extends Realm.Object {
       id,
       date,
       title: route.title,
-      routeKey: route.key,
-      routeJSON: JSON.stringify(route)
+      path: route.path
     }
 
     realm.write(() => {
       realm.create('History', history, true);
     });
-  }
-
-  get route(): Object {
-    return JSON.parse(this.routeJSON);
   }
 }
 History.schema = HistorySchema;

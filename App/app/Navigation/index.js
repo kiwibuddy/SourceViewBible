@@ -26,10 +26,26 @@ import SpherePassages from '../Scenes/Spheres/SpherePassages';
 import SphereSources from '../Scenes/Spheres/SphereSources';
 import SphereWords from '../Scenes/Spheres/SphereWords';
 
-router.addRoute('/Books', (params) => {
-  return <Books
-    onPressBook={() => {}}
-  />;
-});
+export const bookmarksURL = router.addRoute('/Bookmarks', Bookmarks);
+export const booksURL = router.addRoute('/Books', Books);
+export const bookChaptersURL = router.addRoute('/Book/:bookID/Chapters', BookChapters);
+export const bookURL = router.addRoute('/Books/:bookID', BookOverview);
+export const bookSourcesURL = router.addRoute('/Books/:bookID/Sources', BookSources);
+export const bookSpheresURL = router.addRoute('/Books/:bookID/Spheres', BookSpheres);
+export const bookWordsURL = router.addRoute('/Books/:bookID/Words', BookWords);
+export const discoverURL = router.addRoute('/Discover', Discover);
+export const discoveryCenterURL = router.addRoute('/DiscoveryCenter', DiscoveryCenter);
+export const readerURL = router.addRoute('/Reader/:bookID/:chapterNumber', Reader);
+export const sourcesURL = router.addRoute('/Sources', Sources);
+export const sourceURL = router.addRoute('/Sources/:sourceID', SourceOverview);
+export const sourceBooksURL = router.addRoute('/Sources/:sourceID/Books', SourceBooks);
+export const sourceConversationsURL = router.addRoute('/Sources/:sourceID/Conversations', SourceConversations);
+export const sourceSpheresURL = router.addRoute('/Sources/:sourceID/Spheres', SourceSpheres);
+export const sourceWordsURL = router.addRoute('/Sources/:sourceID/Words', SourceWords);
+export const spheresURL = router.addRoute('/Spheres/?:sphereID', Spheres);
+export const sphereBooksURL = router.addRoute('/Spheres/:sphereID/Books', SphereBooks);
+export const spherePassagesURL = router.addRoute('/Spheres/:sphereID/Passages', SpherePassages);
+export const sphereSourcesURL = router.addRoute('/Spheres/:sphereID/Sources', SphereSources);
+export const sphereWordsURL = router.addRoute('/Spheres/:sphereID/Words', SphereWords);
 
-module.exports = router;
+export default router;

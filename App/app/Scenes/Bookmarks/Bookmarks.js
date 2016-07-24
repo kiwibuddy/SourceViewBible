@@ -69,10 +69,10 @@ export default class Bookmarks extends Component {
   _getRows = () => {
     return (
       [
-        {key: '/Discover', title: 'Discover', icon: require('../../Images/tabs/discover.png')},
-        {key: '/Books', title: 'Books', icon: require('../../Images/tabs/chapters.png')},
-        {key: '/Sources', title: 'Sources', icon: require('../../Images/tabs/sources.png')},
-        {key: '/Spheres', title: 'Spheres', icon: require('../../Images/tabs/spheres.png')},
+        {path: '/Discover', title: 'Discover', icon: require('../../Images/tabs/discover.png')},
+        {path: '/Books', title: 'Books', icon: require('../../Images/tabs/chapters.png')},
+        {path: '/Sources', title: 'Sources', icon: require('../../Images/tabs/sources.png')},
+        {path: '/Spheres', title: 'Spheres', icon: require('../../Images/tabs/spheres.png')},
       ]
     );
   };
@@ -131,9 +131,10 @@ export default class Bookmarks extends Component {
   }
 
   _renderHistoryRow = (history: Object) => {
+    const route = {path: history.path, title: history.title};
     return (
       <TouchableOpacity
-        onPress={() => this.props.onPressRoute(history.route)}
+        onPress={() => this.props.onPressRoute(route)}
         style={styles.row}
       >
         <Text style={StyleSheet.styles.cell.title}>{history.title}</Text>
@@ -162,10 +163,10 @@ export default class Bookmarks extends Component {
 
       default:
         const bookmarks = [
-          {key: '/Discover', title: 'Discover', icon: require('../../Images/tabs/discover.png')},
-          {key: '/Books', title: 'Books', icon: require('../../Images/tabs/chapters.png')},
-          {key: '/Sources', title: 'Sources', icon: require('../../Images/tabs/sources.png')},
-          {key: '/Spheres', title: 'Spheres', icon: require('../../Images/tabs/spheres.png')},
+          {path: '/Discover', title: 'Discover', icon: require('../../Images/tabs/discover.png')},
+          {path: '/Books', title: 'Books', icon: require('../../Images/tabs/chapters.png')},
+          {path: '/Sources', title: 'Sources', icon: require('../../Images/tabs/sources.png')},
+          {path: '/Spheres', title: 'Spheres', icon: require('../../Images/tabs/spheres.png')},
         ];
         return this.state.dataSource.cloneWithRowsAndSections({bookmarks: bookmarks});
     }

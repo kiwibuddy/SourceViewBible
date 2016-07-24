@@ -24,6 +24,27 @@ function pathToRegexp(path, keys, sensitive, strict) {
   return new RegExp(pattern);
 }
 
+function urlFor(path: string, params: any) {
+  let url = path;
+
+  const extraParams = {};
+  Object.keys(params).forEach(param => {
+    const paramKey = '/:' + param;
+    if (url.indexOf(paramKey) != -1) {
+      url = url.replace(paramKey, '/' + params[param]);
+    } else {
+      extraParams[param] = params[param];
+    }
+  });
+
+  url = url.replace(/\/:.*\?/g, '/').replace(/\?/g, '');
+
+  if (url.indexOf(':') != -1) {
+    throw new Error('missing parameters for url: '+path);
+  }
+  return {...extraParams, path: url};
+}
+
 class Route {
   key: any;
   params: any;
@@ -63,11 +84,14 @@ class Router {
     this.map = {};
   }
 
-  addRoute(key: string, scene: ?Function) {
-    if (!this.map[key]) {
-      this.map[key] = new Route(key, scene);
+  addRoute(key: string, scene: ?Function): Function {
+    let route = this.map[key];
+    if (!route) {
+      route = new Route(key, scene);
+      this.map[key] = route;
       this.routes.push(this.map[key]);
     }
+    return (params) => urlFor(key, params);
   }
 
   addRoutes(routes: any) {
@@ -86,21 +110,6 @@ class Router {
     }
 
     return {route: null, params: null};
-  }
-
-  urlFor(path: string, params: any) {
-    let url = path;
-
-    Object.keys(params).forEach(param => {
-      url = url.replace('/:' + param, '/' + params[param]);
-    });
-
-    url = url.replace(/\/:.*\?/g, '/').replace(/\?/g, '');
-
-    if (url.indexOf(':') != -1) {
-      throw new Error('missing parameters for url: '+path);
-    }
-    return url;
   }
 }
 
