@@ -27,12 +27,13 @@ const {
 import SourcesBarChart from '../../Components/Charts/SourcesBarChart';
 import SourceIcon from '../../Components/Common/SourceIcon';
 
+import { readerURL, sourceURL } from '../../Navigation';
+
 import { Book } from '../../Database';
 
 type Props = {
   bookID: string,
-  onPressScripture: Function,
-  onPressSource: Function,
+  navigate: Function,
 };
 
 type State = {
@@ -41,6 +42,7 @@ type State = {
 };
 
 export default class BookSources extends Component {
+  props: Props;
   state: State;
 
   constructor(props: Object) {
@@ -136,7 +138,7 @@ export default class BookSources extends Component {
       <TouchableOpacity style={styles.section} onPress={() => this._onPressScripture(source)}>
         <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
           <View style={styles.sourcesLeftContainer}>
-            <TouchableOpacity onPress={() => this.props.onPressSource(source)}>
+            <TouchableOpacity onPress={() => this.props.navigate(sourceURL({sourceID: source.id, title: source.name}))}>
               <SourceIcon
                 source={source}
                 style={styles.sourceAvatar}
@@ -162,8 +164,8 @@ export default class BookSources extends Component {
     const occurrence = source.occurrences[0];
     if (occurrence) {
       const { book } = this.state;
-      const chapterNumber = occurrence.chapterNumber;
-      this.props.onPressScripture({book, chapterNumber});
+      const chapterNumber = occurrence.chapterNumber || 1;
+      this.props.navigate(readerURL({bookID: book.id, chapterNumber, title: book.name}));
     }
   };
 }

@@ -23,6 +23,8 @@ import {
 
 import { Preference } from '../../Preferences';
 
+import { bookURL } from '../../Navigation';
+
 // $FlowFixMe: - Flow can't find os module extension
 import SegmentedControl from '../../Components/Common/SegmentedControl';
 import { SourcesBarChart, SpheresBarChart } from '../../Components/Charts';
@@ -44,7 +46,7 @@ import { Book } from '../../Database';
 const MAX_BOOK_WORD_COUNT = Math.max.apply(Math, Book.all().map(book => book.wordCount));
 
 type Props = {
-  onPressBook: Function,
+  navigate: Function,
 };
 
 type State = {
@@ -53,6 +55,7 @@ type State = {
 };
 
 export default class Books extends Component {
+  props: Props;
   state: State;
 
   constructor(props: Props) {
@@ -95,7 +98,7 @@ export default class Books extends Component {
 
   _renderRow = (book: Object, sectionID: any, rowID: any) => {
     return (
-      <TouchableOpacity key={book.id} style={styles.section} onPress={() => this.props.onPressBook(book)}>
+      <TouchableOpacity key={book.id} style={styles.section} onPress={() => this.props.navigate(bookURL({bookID: book.id, title: book.name}))}>
         <View style={[styles.cellContainer, {paddingVertical: 8}]}>
           <View style={styles.horizontalContainer}>
             <View style={styles.leftContainer}>

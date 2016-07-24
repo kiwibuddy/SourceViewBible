@@ -26,7 +26,6 @@ import { Book } from '../../Database';
 
 type Props = {
   bookID: string,
-  onPressWords: Function,
 };
 
 type State = {
@@ -106,7 +105,7 @@ export default class BookWords extends Component {
           <Text style={[styles.wc4, {top: 65, right: 60}]}>{words[14]}</Text>
         </ParallaxMotionView>
 
-        <TouchableOpacity style={styles.wordCloudButton} onPressWords={this.props.onPressWords}>
+        <TouchableOpacity style={styles.wordCloudButton}>
           <Image source={require('../../Images/common/btn-expand.png')} />
         </TouchableOpacity>
       </WordCloud>

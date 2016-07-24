@@ -26,11 +26,13 @@ const {
 
 import { PieChart, SourcesBarChart, SpheresBarChart } from '../../Components/Charts';
 
+import { sphereURL } from '../../Navigation';
+
 import { Book, Sphere } from '../../Database';
 
 type Props = {
   bookID: string,
-  onPressSphere: Function,
+  navigate: Function,
 };
 
 type State = {
@@ -107,7 +109,7 @@ export default class BookSpheres extends Component {
     const colors = Colors.spheres[sphere.id];
 
     return (
-      <TouchableOpacity style={styles.listItemContainer} onPress={() => this.props.onPressSphere(sphere)}>
+      <TouchableOpacity style={styles.listItemContainer} onPress={() => this.props.navigate(sphereURL({sphereID: sphere.id, title: Localizable.t('spheres.text')}))}>
         <PieChart
           color={colors.chromeTint}
           slices={[{color: colors.tint, value: spherePercent}, {color: colors.lightTint, value: 100 - spherePercent}]}
