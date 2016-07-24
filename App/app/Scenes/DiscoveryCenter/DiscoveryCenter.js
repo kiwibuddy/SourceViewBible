@@ -29,10 +29,12 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigation';
 
+import { BACK } from '../../Navigation';
+
 const SCROLLVIEW_REF = 'scrollview';
 
 type Props = {
-  onPressDone: Function,
+  navigate: Function,
 };
 
 type State = {
@@ -66,7 +68,7 @@ export default class DiscoveryCenter extends Component {
       <View style={styles.container}>
         <NavigationBar title={Localizable.t('discovery-center')}>
           <TouchableOpacity
-            onPress={this.props.onPressDone}
+            onPress={() => this.props.navigate(BACK)}
             style={{position: 'absolute', left: 0}}
           >
             <Text style={StyleSheet.styles.navigationBar.doneButtonTitle}>{Localizable.t('done')}</Text>

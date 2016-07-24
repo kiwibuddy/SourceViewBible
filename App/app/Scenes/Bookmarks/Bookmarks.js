@@ -18,6 +18,8 @@ import {
   Localizable
 } from '../../Common';
 
+import moment from 'moment';
+
 import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigation';
 
 import { BACK } from '../../Navigation';
@@ -34,6 +36,14 @@ const SEGMENT_INDEXES = {
   HIGHLIGHTS: 2,
 };
 const SEGMENT_PREFERENCE = Preference.Keys.Bookmarks.SegmentIndex;
+
+function groupBy(xs, key) {
+  return xs.reduce(function(rv, x) {
+    var v = key instanceof Function ? key(x) : x[key];
+    (rv[v] = rv[v] || []).push(x);
+    return rv;
+  }, {});
+}
 
 type Props = {
 
@@ -98,12 +108,24 @@ export default class Bookmarks extends Component {
           enableEmptySections={true}
           dataSource={this.state.dataSource}
           renderRow={this._renderRow}
+          renderSectionHeader={this._renderSectionHeader}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={StyleSheet.styles.separator} />}
           style={styles.listView}
         />
       </View>
     );
   }
+
+  _renderSectionHeader = (sectionData: Object, sectionID: any) => {
+    if (this.state.selectedSegmentIndex != SEGMENT_INDEXES.HISTORY) return null;
+
+    const title = sectionID;
+    return (
+      <View style={styles.sectionHeaderContainer}>
+        <Text style={styles.sectionHeaderTitle}>{title}</Text>
+      </View>
+    );
+  };
 
   _renderRow = (data: Object) => {
     switch (this.state.selectedSegmentIndex) {
@@ -156,7 +178,8 @@ export default class Bookmarks extends Component {
   _getDataSource = (segmentIndex: number) => {
     switch (segmentIndex) {
       case SEGMENT_INDEXES.HISTORY:
-        return this.state.dataSource.cloneWithRowsAndSections({history: History.all()});
+        const { rows, sections } = this._getHistory();
+        return this.state.dataSource.cloneWithRowsAndSections(rows, sections);
 
       case SEGMENT_INDEXES.HIGHLIGHTS:
         return this.state.dataSource.cloneWithRowsAndSections({highlights: []});
@@ -171,6 +194,25 @@ export default class Bookmarks extends Component {
         return this.state.dataSource.cloneWithRowsAndSections({bookmarks: bookmarks});
     }
   };
+
+  _getHistory = () => {
+    const rows = {};
+    const sections = [];
+
+    History.all().forEach((history) => {
+      const section = moment().calendar(history.date, {
+        sameDay: '[Today]',
+        lastDay: '[Yesterday]',
+      });
+      if (sections.indexOf(section) === -1) {
+        sections.push(section);
+        rows[section] = [];
+      }
+      rows[section].push(history);
+    });
+
+    return {rows, sections};
+  }
 
   _onSegmentedControlValueChanged = (value: number) => {
     Preference.setNumberForKey(value, SEGMENT_PREFERENCE);
@@ -189,7 +231,21 @@ const styles = StyleSheet.create({
   listView: {
     flex: 1,
     marginTop: NavigationBar.HEIGHT,
-    marginLeft: 15
+  },
+  sectionHeaderContainer: {
+    paddingVertical: 4,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: '#FAFAFA',
+    // marginRight: 15,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#c8c7cc',
+  },
+  sectionHeaderTitle: {
+    color: '#59626a',
+    fontSize: 15,
+    fontWeight: 'bold',
+    marginLeft: 8,
   },
   row: {
     flexDirection: 'row',
@@ -197,6 +253,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     backgroundColor: 'white',
     alignItems: 'center',
+    marginLeft: 15,
   },
   icon: {
     tintColor: Colors.tint,

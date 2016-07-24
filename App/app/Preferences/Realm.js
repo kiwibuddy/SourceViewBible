@@ -67,3 +67,5 @@ const Schema = [Preference, History];
 const realm = new Realm({
   schema: Schema
 });
+
+console.log('Preferences Path: ' + realm.path);

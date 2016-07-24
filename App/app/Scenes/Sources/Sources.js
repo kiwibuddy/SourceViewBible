@@ -39,14 +39,6 @@ type State = {
   dataSource: any,
 };
 
-var groupBy = function(xs, key) {
-  return xs.reduce(function(rv, x) {
-    var v = key instanceof Function ? key(x) : x[key];
-    (rv[v] = rv[v] || []).push(x);
-    return rv;
-  }, {});
-};
-
 export default class Sources extends Component {
   props: Props;
   state: State;
@@ -155,7 +147,7 @@ export default class Sources extends Component {
     const rows = {};
     const sections = [];
 
-    sources.map((source) => {
+    sources.forEach((source) => {
       const section = source.firstInitial;
       if (sections.indexOf(section) === -1) {
         sections.push(section);
