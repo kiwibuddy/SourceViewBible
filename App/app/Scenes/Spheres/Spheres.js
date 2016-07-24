@@ -29,16 +29,13 @@ const WIDTH = Dimensions.get('window').width;
 const CAROUSEL_ITEM_SIZE = 80;
 const MAXIMUM_BOOK_COUNT = 5;
 
+import { bookURL, sphereBooksURL, spherePassagesURL, sphereSourcesURL, sphereWordsURL, sphereURL } from '../../Navigation';
+
 import { Bible, Book, Sphere } from '../../Database';
 
 type Props = {
   sphereID?: string,
-  onPressBook: Function,
-  onPressBooks: Function,
-  onPressPassages: Function,
-  onPressSources: Function,
-  onPressSphere: Function,
-  onPressWords: Function,
+  navigate: Function,
 };
 
 type State = {
@@ -152,22 +149,22 @@ export default class Spheres extends Component {
           <View style={[styles.carouselGraph, {flex: 100-spherePercent}]} />
         </View>
         <View style={StyleSheet.styles.statisticsContainer}>
-          <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.onPressBooks({sphere})}>
+          <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.navigate(sphereBooksURL({sphereID: sphere.id, title: sphere.name}))}>
             <Text style={[StyleSheet.styles.statisticTitle, {color: colors.chromeTint}]}>{sphere.bookCount}</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Books</Text>
           </TouchableOpacity>
           <View style={styles.keyline} />
-          <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.onPressSources({sphere})}>
+          <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.navigate(sphereSourcesURL({sphereID: sphere.id, title: sphere.name}))}>
             <Text style={[StyleSheet.styles.statisticTitle, {color: colors.chromeTint}]}>0</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Sources</Text>
           </TouchableOpacity>
           <View style={styles.keyline} />
-          <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.onPressWords({sphere})}>
+          <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.navigate(sphereWordsURL({sphereID: sphere.id, title: sphere.name}))}>
             <Text style={[StyleSheet.styles.statisticTitle, {color: colors.chromeTint}]}>{Localizable.toNumber(sphere.wordCount, {precision: 0})}</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Words</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity style={[styles.readButton, {backgroundColor: colors.chromeTint, borderColor: colors.chromeTint}]} onPress={() => this.props.onPressPassages({sphere})}>
+        <TouchableOpacity style={[styles.readButton, {backgroundColor: colors.chromeTint, borderColor: colors.chromeTint}]} onPress={() => this.props.navigate(spherePassagesURL({sphereID: sphere.id, title: sphere.name}))}>
           <Text style={styles.readButtonTitle}>Explore 52 key passages</Text>
         </TouchableOpacity>
         <View style={styles.contentContainer}>
@@ -181,7 +178,7 @@ export default class Spheres extends Component {
           </View>
         </View>
         {bookRows}
-        <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => this.props.onPressBooks({sphere})}>
+        <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => this.props.navigate(sphereBooksURL({sphereID: sphere.id, title: sphere.name}))}>
           <Text style={[StyleSheet.styles.cell.titlemore, {color: colors.chromeTint}]}>View More</Text>
           <Image source={require('../../Images/common/disclosure.png')}  style={styles.disclosure} />
         </TouchableOpacity>
@@ -210,7 +207,7 @@ export default class Spheres extends Component {
           </View>
           <View style={[StyleSheet.styles.separator, {marginLeft: 0}]}></View>
         </TouchableOpacity>
-        <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => this.props.onPressSources({sphere})}>
+        <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => this.props.navigate(sphereSourcesURL({sphereID: sphere.id, title: sphere.name}))}>
           <Text style={[StyleSheet.styles.cell.titlemore, {color: colors.chromeTint}]}>View More</Text>
           <Image source={require('../../Images/common/disclosure.png')}  style={styles.disclosure} />
         </TouchableOpacity>
@@ -225,7 +222,7 @@ export default class Spheres extends Component {
     const spherePercent = (wordCount / book.wordCount) * 100;
 
     return (
-      <TouchableOpacity key={book.id} style={styles.section} onPress={() => this.props.onPressBook({sphere, book})}>
+      <TouchableOpacity key={book.id} style={styles.section} onPress={() => this.props.navigate(bookURL({bookID: book.id, title: book.name}))}>
         <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
           <View style={styles.sourcesLeftContainer}>
             <Text style={StyleSheet.styles.cell.titlemedium}>{book.name}</Text>
@@ -265,10 +262,10 @@ export default class Spheres extends Component {
 
   _onPressSphere = (sphere: Object) => {
     if (sphere.id === this.state.sphere.id) return;
-    this.props.onPressSphere(sphere);
+    this.props.navigate(sphereURL({sphereID: sphere.id, title: Localizable.t('spheres.text')}));
 
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    
+
     const books = this._getBooks(sphere);
     this.setState({
       sphere,

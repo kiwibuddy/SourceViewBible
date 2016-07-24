@@ -32,6 +32,8 @@ import { BarChart, PieChart } from '../../Components/Charts';
 // $FlowFixMe: - Flow can't find os module extension
 import SegmentedControl from '../../Components/Common/SegmentedControl';
 
+import { bookURL } from '../../Navigation';
+
 import { Book, Sphere } from '../../Database';
 
 const SEGMENTS = [Localizable.t('textual'), Localizable.t('alphabetical'), Localizable.t('percentage')];
@@ -44,7 +46,7 @@ const SEGMENT_INDEXES = {
 const SORT_PREFERENCE = Preference.Keys.Books.Sort + '.SphereBooks';
 
 type Props = {
-  onPressBook: Function,
+  navigate: Function,
   sphereID: string,
 };
 
@@ -75,7 +77,7 @@ export default class SphereBooks extends Component {
 
     let selectedSegmentIndex = Preference.numberForKey(SORT_PREFERENCE);
     if (selectedSegmentIndex == null) selectedSegmentIndex = SEGMENT_INDEXES.PRINCIPALITY;
-    
+
     this.state = {
       dataSource: dataSource,
       sphere,
@@ -173,7 +175,7 @@ export default class SphereBooks extends Component {
     const colors = Colors.spheres[sphere.id];
 
     return (
-      <TouchableOpacity style={styles.section} onPress={() => this.props.onPressBook({sphere, book})}>
+      <TouchableOpacity style={styles.section} onPress={() => this.props.navigate(bookURL({bookID: book.id, sphereID: sphere.id, title: Localizable.t('book-overview', {name: book.name})}))}>
         <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
           <View style={styles.sourcesLeftContainer}>
             <Text style={StyleSheet.styles.cell.title}>{book.name}</Text>

@@ -26,7 +26,7 @@ import { Sphere } from '../../Database';
 
 type Props = {
   sphereID: string,
-  onPressWords: Function,
+  navigate: Function,
 };
 
 type State = {
@@ -105,7 +105,7 @@ export default class SphereWords extends Component {
           <Text style={[styles.wc4, {top: 65, right: 60}]}>{words[14]}</Text>
         </ParallaxMotionView>
 
-        <TouchableOpacity style={styles.wordCloudButton} onPressWords={this.props.onPressWords}>
+        <TouchableOpacity style={styles.wordCloudButton}>
           <Image source={require('../../Images/common/btn-expand.png')} />
         </TouchableOpacity>
       </WordCloud>
