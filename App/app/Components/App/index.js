@@ -10,6 +10,8 @@ import {
 
 import { NavigationBar, Toolbar, ToolbarButton } from '../Navigation';
 
+import router from '../../Navigation';
+
 import {
   Colors,
   Localizable,
