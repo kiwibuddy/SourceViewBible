@@ -27,11 +27,13 @@ function pathToRegexp(path, keys, sensitive, strict) {
 class Route {
   key: any;
   params: any;
+  scene: any;
   regex: any;
 
-  constructor(key) {
+  constructor(key, scene: ?Function) {
     this.key = key;
     this.params = [];
+    this.scene = scene;
     this.regex = pathToRegexp(this.key, this.params, false, false);
   }
 
@@ -61,17 +63,18 @@ class Router {
     this.map = {};
   }
 
-  addPath(path: string) {
-    if (!this.map[path]) {
-      this.map[path] = new Route(path);
-      this.routes.push(this.map[path]);
+  addRoute(key: string, scene: ?Function) {
+    if (!this.map[key]) {
+      this.map[key] = new Route(key, scene);
+      this.routes.push(this.map[key]);
     }
   }
 
-  addRoutes(paths: any) {
-    paths.forEach(path => {
-      this.addPath(path);
-    })
+  addRoutes(routes: any) {
+    Object.keys(routes).forEach(key => {
+      const scene = routes[key];
+      this.addRoute(key, scene);
+    });
   }
 
   match(path: string): Object {
