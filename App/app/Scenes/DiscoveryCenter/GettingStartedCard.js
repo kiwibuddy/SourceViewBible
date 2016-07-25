@@ -84,8 +84,6 @@ const styles = StyleSheet.create({
   video: {
     alignItems: 'center',
     overflow: 'hidden',
-  },
-  videoImage: {
     shadowColor: 'black',
     shadowOpacity: 0.1,
     shadowRadius: 0.8,

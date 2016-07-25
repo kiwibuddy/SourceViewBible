@@ -22,7 +22,9 @@ type Props = {
 const BarChart = (props: Props) => {
   return (
     <Chart>
-      <Image source={require('../Images/chart-bar-blankslate.png')} />
+      <View style={StyleSheet.styles.discoveryCenter.chartContainer}>
+        <Image source={require('../Images/chart-bar-blankslate.png')} />
+      </View>
       <Chart.Header>
         <Chart.DropdownButton
           image={require('../Images/chart-icn-bar-xaxis.png')}

@@ -5,7 +5,12 @@ import React, { Component, PropTypes } from 'react';
 
 import {
   Image,
+  View,
 } from 'react-native';
+
+import {
+  StyleSheet,
+} from '../../../Common';
 
 import Chart from './Chart';
 
@@ -16,7 +21,9 @@ type Props = {
 const ChartBlankslate = (props: Props) => {
   return (
     <Chart>
-      <Image source={require('../Images/chart-bar-blankslate.png')} />
+      <View style={StyleSheet.styles.discoveryCenter.chartContainer}>
+        <Image source={require('../Images/chart-bar-blankslate.png')} />
+      </View>
       <Chart.Header style={{paddingLeft: 10}}>
         <Chart.Button title="BAR CHART" style={{color: '#FFFFFF'}} onPress={() => props.onPressChartType(Chart.Type.BAR)} />
         <Chart.Button title="PIE CHART" style={{color: '#FFFFFF'}} onPress={() => props.onPressChartType(Chart.Type.PIE)}/>

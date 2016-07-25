@@ -22,7 +22,9 @@ type Props = {
 const CloudChart = (props: Props) => {
   return (
     <Chart>
-      <Image source={require('../Images/chart-cloud-blankslate.png')} />
+      <View style={StyleSheet.styles.discoveryCenter.chartContainer}>
+        <Image source={require('../Images/chart-cloud-blankslate.png')} />
+      </View>
       <Chart.Header>
         <Chart.DropdownButton
           image={require('../Images/chart-icn-word-xaxis.png')}

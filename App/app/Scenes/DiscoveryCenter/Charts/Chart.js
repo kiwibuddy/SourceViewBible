@@ -91,8 +91,6 @@ Chart.DropdownButton = DropdownButton;
 
 const styles = StyleSheet.create({
   chart: {
-    alignItems: 'center',
-    backgroundColor: '#5B6771',
     overflow: 'hidden',
     shadowColor: 'black',
     shadowOpacity: 0.1,

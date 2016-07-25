@@ -173,6 +173,9 @@ const styles = {
       paddingHorizontal: 10,
       height: 44,
     },
+    chartContainer: {
+      alignItems: 'center',
+    },
   }
 };
 
