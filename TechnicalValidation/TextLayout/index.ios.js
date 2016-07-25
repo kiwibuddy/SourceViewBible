@@ -40,8 +40,6 @@ class TextLayout extends Component {
     Emdros.openDatabase().then(() => {
       const options = {monadSet: {first: 1, last: 1005}};
        Emdros.scripture(options).then(scripture => {
-         console.log(scripture);
-
          this.setState({scripture});
        }).catch(error => {
          console.log(error);
@@ -63,6 +61,14 @@ class TextLayout extends Component {
       </View>
     )
   }
+
+  _hello = () => {
+    console.log('World!!!');
+  };
+
+  _world = () => {
+    console.log('Hello!!!');
+  };
 }
 
 const styles = StyleSheet.create({
@@ -95,6 +101,10 @@ const styles = StyleSheet.create({
   chapterNumber: {
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  verse: {
+    width: 30,
+    height: 30,
   },
   verseNumber: {
     fontSize: 16,

@@ -9,7 +9,7 @@
       "Source": {
         "docindexfeature": "docindex",
         "get": [ "source_color" ],
-        "start": "React.createElement(Text, {style:[styles.scripture, styles.sourceColor{{ featurenomangle 0 }}]},",
+        "start": "React.createElement(Text, {style:[styles.scripture, styles.sourceColor{{ featurenomangle 0 }}], onPress:this._hello},",
         "end": "),",
       },
       "VerseNumberToken": {
@@ -17,6 +17,12 @@
         "get": [ "pre", "surface" ],
         "start": "React.createElement(Text, {style:[styles.scripture, styles.verseNumber]}, \"{{ featurenomangle 0 }}{{ featurenomangle 1 }}\"),",
         "end": "",
+      },
+      "Verse" : {
+         "docindexfeature" : "docindex",
+         "get" : [ "chapter", "verse_start" ],
+         "start": "React.createElement(Text, {style:styles.scripture, onPress:this._world},",
+         "end": "),",
       },
       "ChapterNumberToken": {
         "docindexfeature" : "docindex",
