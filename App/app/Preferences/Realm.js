@@ -34,9 +34,10 @@ const HistorySchema = {
   primaryKey: 'id',
   properties: {
     id: 'string',
-    date: 'date',
+    date: {type: 'date', indexed: true},
     title: 'string',
-    path: 'string'
+    description: {type: 'string', optional: true},
+    path: {type: 'string', indexed: true},
   }
 }
 
@@ -46,7 +47,7 @@ export class History extends Realm.Object {
   }
 
   static findByPath(path: string) {
-    return realm.objects('History').filtered('path = $0', path)[0];
+    return this.all().filtered('path = $0', path)[0];
   }
 
   static record(route: Object) {
@@ -66,12 +67,17 @@ export class History extends Realm.Object {
       id: id || 'history-' + Date.now(),
       date,
       title: route.title,
+      description: route.description,
       path: route.path
     }
 
     realm.write(() => {
       realm.create('History', history, true);
     });
+  }
+
+  get route(): Object {
+    return {path: this.path, title: this.title, description: this.description};
   }
 }
 History.schema = HistorySchema;

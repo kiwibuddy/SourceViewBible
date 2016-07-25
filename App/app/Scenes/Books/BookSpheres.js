@@ -109,7 +109,7 @@ export default class BookSpheres extends Component {
     const colors = Colors.spheres[sphere.id];
 
     return (
-      <TouchableOpacity style={styles.listItemContainer} onPress={() => this.props.navigate(sphereURL({sphereID: sphere.id, title: Localizable.t('spheres.text')}))}>
+      <TouchableOpacity style={styles.listItemContainer} onPress={() => this.props.navigate(sphereURL({sphereID: sphere.id, title: Localizable.t('spheres.text'), description: Localizable.t('sphere-overview', {name: sphere.name})}))}>
         <PieChart
           color={colors.chromeTint}
           slices={[{color: colors.tint, value: spherePercent}, {color: colors.lightTint, value: 100 - spherePercent}]}

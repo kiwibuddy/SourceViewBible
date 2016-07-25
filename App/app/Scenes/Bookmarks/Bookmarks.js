@@ -146,13 +146,12 @@ export default class Bookmarks extends Component {
   }
 
   _renderHistoryRow = (history: Object) => {
-    const route = {path: history.path, title: history.title};
     return (
       <TouchableOpacity
-        onPress={() => this._navigate(route)}
+        onPress={() => this._navigate(history.route)}
         style={styles.row}
       >
-        <Text style={StyleSheet.styles.cell.title}>{history.title}</Text>
+        <Text style={StyleSheet.styles.cell.title}>{history.description || history.title}</Text>
       </TouchableOpacity>
     );
   };

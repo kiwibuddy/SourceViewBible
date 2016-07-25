@@ -223,18 +223,6 @@ export default class App extends Component {
 
     History.record(route);
   };
-
-  _findBook(bookID: string) {
-    return Book.findByID(bookID);
-  }
-
-  _findSource(sourceID: string): Object {
-    return Source.findByID(sourceID)
-  }
-
-  _findSphere(sphereID: string): Object {
-    return Sphere.findByID(sphereID);
-  }
 }
 
 const styles = StyleSheet.create({
