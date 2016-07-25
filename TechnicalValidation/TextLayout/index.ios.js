@@ -38,7 +38,7 @@ class TextLayout extends Component {
 
   componentDidMount() {
     Emdros.openDatabase().then(() => {
-      const options = {monadSet: {first: 1, last: 1000}};
+      const options = {monadSet: {first: 1, last: 1005}};
        Emdros.scripture(options).then(scripture => {
          console.log(scripture);
 
@@ -91,6 +91,10 @@ const styles = StyleSheet.create({
   },
   sourceColorBlue: {
     color: 'blue'
+  },
+  chapterNumber: {
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   verseNumber: {
     fontSize: 16,
