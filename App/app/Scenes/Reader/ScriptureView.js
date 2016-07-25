@@ -161,7 +161,7 @@ export default class ScriptureView extends Component {
         showNextScripture: false
       });
 
-      this.props.navigate(readerURL({bookID: book.id, chapterNumber, title: book.name}), {replace: true});
+      this.props.navigate(readerURL({bookID: book.id, chapterNumber, title: book.name, description: `${book.name} ${chapterNumber}`}), {replace: true});
 
       this._fetchScripture({monadSet: chapter.monadSet}).then((scripture) => {
         this.setState({
