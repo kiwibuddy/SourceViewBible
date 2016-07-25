@@ -24,9 +24,9 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		26FCC397EDD748A0998CC090 /* libRCTEmdros.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BB1D6C7883841D9B4AA58A0 /* libRCTEmdros.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		AB39CF8F1D468D2C00C7A360 /* Datasets in Resources */ = {isa = PBXBuildFile; fileRef = AB39CF8E1D468D2C00C7A360 /* Datasets */; };
 		AB39CF911D468F9B00C7A360 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AB39CF901D468F9B00C7A360 /* libz.tbd */; };
 		AB39CF931D468FA100C7A360 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AB39CF921D468FA100C7A360 /* libsqlite3.tbd */; };
+		AB39CF951D46936600C7A360 /* SVB2 in Resources */ = {isa = PBXBuildFile; fileRef = AB39CF941D46936600C7A360 /* SVB2 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -140,9 +140,9 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		AB39CF881D468CA800C7A360 /* RCTEmdros.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTEmdros.xcodeproj; path = ../../../Libraries/Emdros/ios/RCTEmdros/RCTEmdros.xcodeproj; sourceTree = "<group>"; };
-		AB39CF8E1D468D2C00C7A360 /* Datasets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Datasets; path = ../../../Datasets; sourceTree = "<group>"; };
 		AB39CF901D468F9B00C7A360 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		AB39CF921D468FA100C7A360 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		AB39CF941D46936600C7A360 /* SVB2 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SVB2; path = ../../../../SVB2; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,7 +253,7 @@
 		13B07FAE1A68108700A75B9A /* TextLayout */ = {
 			isa = PBXGroup;
 			children = (
-				AB39CF8E1D468D2C00C7A360 /* Datasets */,
+				AB39CF941D46936600C7A360 /* SVB2 */,
 				AB39CF881D468CA800C7A360 /* RCTEmdros.xcodeproj */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -550,8 +550,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				AB39CF951D46936600C7A360 /* SVB2 in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				AB39CF8F1D468D2C00C7A360 /* Datasets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
