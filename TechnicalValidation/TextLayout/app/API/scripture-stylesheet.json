@@ -18,6 +18,12 @@
         "start": "React.createElement(Text, {style:[styles.scripture]}, \"{{ featurenomangle 0 }}{{ featurenomangle 1 }}{{ featurenomangle 2 }}\"),",
         "end": "",
       },
+      "NonWordToken": {
+        "docindexfeature" : "docindex",
+        "get": [ "pre", "surface", "post" ],
+        "start": "React.createElement(Text, {style:[styles.scripture]}, \"{{ featurenomangle 0 }}{{ featurenomangle 1 }}{{ featurenomangle 2 }}\"),",
+        "end": "",
+      },
     },
     "postprocess" : [
       {
