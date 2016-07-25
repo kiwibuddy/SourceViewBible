@@ -9,16 +9,22 @@
       "Source": {
         "docindexfeature": "docindex",
         "get": [ "source_color" ],
-        "start": "React.createElement(Text, {style:[styles.scripture, styles.sourceColor{{ featurenomangle 0 }}]}, \"",
-        "end": "\"),",
+        "start": "React.createElement(Text, {style:[styles.scripture, styles.sourceColor{{ featurenomangle 0 }}]},",
+        "end": "),",
       },
       "Token": {
         "docindexfeature" : "docindex",
         "get": [ "pre", "surface", "post" ],
-        "start": "{{ featurenomangle 0 }}{{ featurenomangle 1 }}{{ featurenomangle 2 }}",
-        "end": ""
+        "start": "React.createElement(Text, {style:[styles.scripture]}, \"{{ featurenomangle 0 }}{{ featurenomangle 1 }}{{ featurenomangle 2 }}\"),",
+        "end": "",
       },
     },
+    "postprocess" : [
+      {
+      "instring" : ",)",
+      "outstring" : ")",
+      },
+    ],
     "priority_list": [
     ],
     "prepend_XML_declaration" : false
