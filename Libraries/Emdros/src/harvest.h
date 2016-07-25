@@ -28,4 +28,3 @@ bool getSOMForQuery(EmdrosEnv *pEE, const std::string& query, bool bUseOnlyFocus
 std::string countInBuckets(EmdrosEnv *pEE, const std::string& json_string, const SetOfMonads& substrate, std::string& error_message);
 
 #endif /* !defined(HARVEST_H_) */
-

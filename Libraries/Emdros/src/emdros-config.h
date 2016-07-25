@@ -83,7 +83,7 @@
 #define PACKAGE_NAME "emdros"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "emdros 3.4.1.pre24"
+#define PACKAGE_STRING "emdros 3.4.1.pre29"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "emdros"
@@ -92,13 +92,13 @@
 #define PACKAGE_URL ""
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "3.4.1.pre24"
+#define PACKAGE_VERSION "3.4.1.pre29"
 
 /* Define to 1 if you have the ANSI C header files. */
 #define STDC_HEADERS 1
 
 /* Version number of package */
-#define VERSION "3.4.1.pre24"
+#define VERSION "3.4.1.pre29"
 
 /* Define to empty if `const' does not conform to ANSI C. */
 /* #undef const */

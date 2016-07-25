@@ -569,7 +569,7 @@ long prime_list_get_next_higher_prime(long n)
 #ifndef EMDROS_VERSION__H__
 #define EMDROS_VERSION__H__
 
-#define EMDROS_VERSION "3.4.1.pre24"
+#define EMDROS_VERSION "3.4.1.pre29"
 
 #endif /* EMDROS_VERSION__H__ */
 
@@ -1336,15 +1336,15 @@ std::string get_eor_string()
  *
  * Arena and related classes
  *
- * Ulrik Petersen
+ * Ulrik Sandborg-Petersen
  * Created: 3/2-2005
- * Last update: 11/27-2012
+ * Last update: 6/24-2016
  *
  */
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2001-2012  Ulrik Sandborg-Petersen
+ *   Copyright (C) 2001-2016  Ulrik Sandborg-Petersen
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License as
@@ -1428,15 +1428,15 @@ std::string get_eor_string()
  *
  * Arena and ArenaConstIterator
  *
- * Ulrik Petersen
+ * Ulrik Sandborg-Petersen
  * Created: 3/2-2005
- * Last update: 2/26-2014
+ * Last update: 6/24-2016
  *
  */
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2001-2014  Ulrik Sandborg-Petersen
+ *   Copyright (C) 2001-2016  Ulrik Sandborg-Petersen
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License as
@@ -1758,7 +1758,7 @@ public:
  *
  * Ulrik Petersen
  * Created: 3/1-2001
- * Last update: 4/11-2016
+ * Last update: 6/18-2016
  *
  */
 /************************************************************************
@@ -2246,7 +2246,7 @@ extern std::string remove_chars_in_string(const std::string& instr, const std::s
 
 extern std::string remove_punct(const std::string instr);
 
-bool string_ends_with(const std::string& input, const std::string& end);
+extern bool string_ends_with(const std::string& input, const std::string& end);
 
 
 
@@ -2415,31 +2415,34 @@ inline std::string char2octal(unsigned char c)
   return szResult;
 }
 
-void print_indent(std::ostream *pOut, int indent);
+extern void print_indent(std::ostream *pOut, int indent);
 
-bool string2charset(const std::string& input, eCharsets& charset);
-bool charset2string(eCharsets charset, std::string& output);
+extern bool string2charset(const std::string& input, eCharsets& charset);
+extern bool charset2string(eCharsets charset, std::string& output);
 
-bool string2backend_kind(const std::string& input, eBackendKind& backend_kind);
-std::string backend_kind2string(eBackendKind backend_kind);
+extern bool string2backend_kind(const std::string& input, eBackendKind& backend_kind);
+extern std::string backend_kind2string(eBackendKind backend_kind);
 
-void long2utf8(long input, std::string& output);
+extern void long2utf8(long input, std::string& output);
+extern unsigned int readOneUTF8Char(const std::string& instr, std::string::size_type instr_length, std::string::size_type& index);
+extern void codepoint2slashu(std::string& result, unsigned int c); 
+extern std::string escape_UTF8_string_with_slashu(const std::string& instr);
 
 
 /** A function to join a list of std::string with the string between
  *  inbetween each list member.
  */
-std::string joinList(std::string between, const std::list<std::string>& l, unsigned int nBigStringSize = 131072);
+extern std::string joinList(std::string between, const std::list<std::string>& l, unsigned int nBigStringSize = 131072);
 
 /** A function to join a vector of std::string with the string between
  *  inbetween each list member.
  */
-std::string joinVector(std::string between, const std::vector<std::string>& v, unsigned int nBigStringSize = 131072);
+extern std::string joinVector(std::string between, const std::vector<std::string>& v, unsigned int nBigStringSize = 131072);
 
 /** A function to join a list of id_d_t with the string between
  *  inbetween each list member.
  */
-std::string joinList(std::string between, const std::list<id_d_t>& l);
+extern std::string joinList(std::string between, const std::list<id_d_t>& l);
 
 
 /** A template to join a list of T into one long string
@@ -2458,13 +2461,13 @@ template<class T> std::string joinListEmptyBetween(const std::list<T>& l)
 }
 */
 
-std::string joinListEmptyBetween(const std::list<std::string>& l, unsigned int nBigStringSize = 131072);
+extern std::string joinListEmptyBetween(const std::list<std::string>& l, unsigned int nBigStringSize = 131072);
 
 class Bigstring; // Forward
 
-void joinListInBigstring(Bigstring *pBigstring, std::string between, const std::list<std::string>& l);
+extern void joinListInBigstring(Bigstring *pBigstring, std::string between, const std::list<std::string>& l);
 
-void joinListEmptyBetweenInBigstring(Bigstring *pBigstring, const std::list<std::string>& l);
+extern void joinListEmptyBetweenInBigstring(Bigstring *pBigstring, const std::list<std::string>& l);
 
 
 
@@ -2532,7 +2535,7 @@ inline bool hasJSONCharsToMangle(const std::string& input)
 	return input.find_first_of("\"'\\\b\f\n\r\t", 0, 8) != std::string::npos;
 }
 
-inline std::string escapeJSONChars(const std::string& input)
+inline std::string escapeJSONChars(const std::string& input, bool bEscapeAsUnicode)
 {
 	std::string result;
 	result.reserve(input.length() + 4);
@@ -2570,7 +2573,12 @@ inline std::string escapeJSONChars(const std::string& input)
 			break;
 		}
 	}
-	return result;
+	if (bEscapeAsUnicode) {
+		std::string real_result = escape_UTF8_string_with_slashu(result);
+		return real_result;
+	} else {
+		return result;
+	}
 }
 
 
@@ -2685,6 +2693,7 @@ inline std::string escapeJSONChars(const std::string& input)
 
 
 class ArenaConstIterator; // forward declaration
+class ArenaAccessor; // forward declaration
 class Bigstring; // forward declaration
 
 /**\internal
@@ -2696,6 +2705,7 @@ class Bigstring; // forward declaration
  */
 class Arena {
 	friend class ArenaConstIterator;
+	friend class ArenaAccessor;
  protected:
 	/** A chunk memory.
 	 *\ingroup Arena
@@ -2706,6 +2716,7 @@ class Arena {
 	private:
 		friend class Arena;
 		friend class ArenaConstIterator;
+		friend class ArenaAccessor;
 		friend class Bigstring;
 		enum { chunk_size = 512 * 1024 /**< The chunk size */
 		}; // 512KB
@@ -2847,6 +2858,7 @@ class Arena {
 		return pResult;
 	};
 	ArenaConstIterator const_iterator(unsigned int size) const;
+	ArenaAccessor accessor(unsigned int size);
  protected:
 	/** Add a new chunk.*/
 	void grow(void) { 
@@ -3031,6 +3043,72 @@ class Bigstring : protected Arena {
 };
 
 
+class ObjectArenaChunk {
+ protected:
+	friend class ObjectArenaAccessor;
+	friend class ObjectArenaConstIterator;
+	unsigned int m_object_size;
+	unsigned int m_max_object_count;
+	unsigned int m_cur_object_count;
+	unsigned int m_index; /**< Index of the first free byte in m_pBytes. */
+	unsigned int m_chunk_size;
+	char *m_pBytes;
+ public:
+	ObjectArenaChunk(unsigned int object_size, unsigned int object_count_per_chunk);
+	~ObjectArenaChunk();
+
+	bool canAllocateObject();
+	
+	// Returns 0 upon space not available in chunk
+	void *allocateObject();
+};
+
+class ObjectArena {
+ protected:
+	friend class ObjectArenaAccessor;
+	friend class ObjectArenaConstIterator;
+	std::vector<ObjectArenaChunk*> m_chunks;
+	ObjectArenaChunk *m_pCurChunk;
+	unsigned int m_object_size;
+	unsigned int m_object_count_per_chunk;
+	unsigned int m_total_object_count;
+ public:
+	ObjectArena(unsigned int object_size, unsigned int object_count_per_chunk);
+	~ObjectArena();
+	void *allocateObject();
+	void reset();
+ protected:
+	void deleteAll();
+	void grow();
+};
+
+class ObjectArenaAccessor {
+ private:
+	ObjectArena *m_pMotherArena;
+ public:
+	ObjectArenaAccessor(ObjectArena *pMotherArena);
+	~ObjectArenaAccessor();
+
+	void *operator[](unsigned int object_index);
+};
+
+class ObjectArenaConstIterator {
+ private:
+	const ObjectArena *m_pMotherArena;
+	unsigned int m_chunk_number;
+	ObjectArenaChunk *m_pCurChunk;
+	unsigned int m_chunk_byte_index;
+	unsigned int m_object_count;
+ public:
+	ObjectArenaConstIterator(const ObjectArena *pMotherArena);
+	~ObjectArenaConstIterator();
+
+	bool hasNext() const;
+
+	void *current();
+	void *next();
+};
+
 
 
 #endif // ARENA__H__
@@ -3045,6 +3123,206 @@ class Bigstring : protected Arena {
 #line 91 "EMdF/arena.cpp"
 
 #include <iostream>
+
+#include <cstring>
+
+////////////////////////////////////////////////////////////////////
+//
+// ObjectArenaChunk
+//
+////////////////////////////////////////////////////////////////////
+ObjectArenaChunk::ObjectArenaChunk(unsigned int object_size, unsigned int object_count_per_chunk)
+	: m_object_size(object_size),
+	  m_max_object_count(object_count_per_chunk),
+	  m_cur_object_count(0),
+	  m_index(0),
+	  m_chunk_size(object_size * object_count_per_chunk),
+	  m_pBytes(0)
+{
+	m_pBytes = new char[m_chunk_size];
+	memset((void*) m_pBytes, 0, m_chunk_size);
+}
+
+ObjectArenaChunk::~ObjectArenaChunk()
+{
+	delete[] m_pBytes;
+}
+
+bool ObjectArenaChunk::canAllocateObject()
+{
+	return m_cur_object_count < m_max_object_count;
+}
+	
+void *ObjectArenaChunk::allocateObject()
+{
+	if (canAllocateObject()) {
+		void *pObj = (void*) (m_pBytes + m_index);
+
+		m_index += m_object_size;
+		++m_cur_object_count;
+		
+		return pObj;
+	} else {
+		return 0;
+	}
+}
+
+////////////////////////////////////////////////////////////////////
+//
+// ObjectArena
+//
+////////////////////////////////////////////////////////////////////
+
+ObjectArena::ObjectArena(unsigned int object_size, unsigned int object_count_per_chunk)
+	: m_pCurChunk(0),
+	  m_object_size(object_size),
+	  m_object_count_per_chunk(object_count_per_chunk),
+	  m_total_object_count(0)
+{
+	grow();
+}
+
+
+ObjectArena::~ObjectArena()
+{
+	deleteAll();
+}
+
+
+void *ObjectArena::allocateObject()
+{
+	void *pObj = m_pCurChunk->allocateObject();
+	if (pObj == 0) {
+		// m_pCurChunk was exhausted
+		// Add another
+		grow();
+
+		// Then allocate in the new chunk
+		pObj = m_pCurChunk->allocateObject();
+	}
+
+	++m_total_object_count;
+
+	return pObj;
+}
+
+void ObjectArena::reset()
+{
+	deleteAll();
+	grow();
+}
+
+void ObjectArena::deleteAll()
+{
+	std::vector<ObjectArenaChunk*>::iterator it = m_chunks.begin();
+	std::vector<ObjectArenaChunk*>::iterator itend = m_chunks.end();
+	while (it != itend) {
+		delete *it;
+		++it;
+	}
+	m_chunks.clear();
+
+	m_total_object_count = 0;
+}
+
+
+void ObjectArena::grow()
+{
+	ObjectArenaChunk *pChunk = new ObjectArenaChunk(m_object_size, m_object_count_per_chunk);
+	m_chunks.push_back(pChunk);
+	m_pCurChunk = pChunk;
+}
+
+
+
+////////////////////////////////////////////////////////////////////
+//
+// ObjectArenaAccessor
+//
+////////////////////////////////////////////////////////////////////
+ObjectArenaAccessor::ObjectArenaAccessor(ObjectArena *pMotherArena)
+	: m_pMotherArena(pMotherArena)
+{
+}
+ObjectArenaAccessor::~ObjectArenaAccessor()
+{
+}
+
+void *ObjectArenaAccessor::operator[](unsigned int object_index)
+{
+	if (object_index < m_pMotherArena->m_total_object_count) {
+		unsigned int object_count_per_chunk = m_pMotherArena->m_object_count_per_chunk;
+		unsigned int index_into_chunk = object_index % object_count_per_chunk;
+		unsigned int chunk_index = object_index / object_count_per_chunk;
+		
+		ObjectArenaChunk *pChunk = m_pMotherArena->m_chunks[chunk_index];
+		unsigned int byte_index_into_chunk = index_into_chunk * m_pMotherArena->m_object_size;
+		void *pObj = (void*) (pChunk->m_pBytes + byte_index_into_chunk);
+		return pObj;
+	} else {
+		return 0;
+	}
+}
+
+////////////////////////////////////////////////////////////////////
+//
+// ObjectArenaConstIterator
+//
+////////////////////////////////////////////////////////////////////
+const ObjectArena *m_pMotherArena;
+unsigned int m_chunk_number;
+ObjectArenaChunk *m_pCurChunk;
+unsigned int m_chunk_byte_index;
+ObjectArenaConstIterator::ObjectArenaConstIterator(const ObjectArena *pMotherArena)
+	: m_pMotherArena(pMotherArena),
+	  m_chunk_number(0),
+	  m_pCurChunk(0),
+	  m_chunk_byte_index(0),
+	  m_object_count(0)
+{
+}
+
+ObjectArenaConstIterator::~ObjectArenaConstIterator()
+{
+}
+
+
+bool ObjectArenaConstIterator::hasNext() const
+{
+	return (m_object_count < m_pMotherArena->m_total_object_count);
+}
+
+void *ObjectArenaConstIterator::current() 
+{
+	if (hasNext()) {
+		void *pObj = (void*) (m_pCurChunk->m_pBytes + m_chunk_byte_index);
+		return pObj;
+	} else {
+		return 0;
+	}
+}
+
+void *ObjectArenaConstIterator::next() 
+{
+	if (hasNext()) {
+		void *pObj = (void*) (m_pCurChunk->m_pBytes + m_chunk_byte_index);
+		if (m_chunk_byte_index < m_pCurChunk->m_chunk_size) {
+			m_chunk_byte_index += m_pCurChunk->m_object_size;
+		} else {
+			++m_chunk_number;
+			
+			m_pCurChunk = m_pMotherArena->m_chunks[m_chunk_number];
+
+			m_chunk_byte_index = 0;
+		}
+		++m_object_count;
+		
+		return pObj;
+	} else {
+		return 0;
+	}
+}
+
 
 ////////////////////////////////////////////////////////////////////
 //
@@ -9245,6 +9523,422 @@ void FastSetOfMonads::assign(const FastSetOfMonads& other)
 	monad_ms = other.monad_ms;
 }
 
+/**************** A copy of EMdF/string2som_map.cpp ****************/
+#line 1 "EMdF/string2som_map.cpp"
+/*
+ * string2som_map.cpp
+ *
+ * String to SetOfMonads Map
+ *
+ * Ulrik Sandborg-Petersen
+ * Created: 6/22-2016
+ * Last update: 6/22-2016
+ *
+ */
+/************************************************************************
+ *
+ *   Emdros - the database engine for analyzed or annotated text
+ *   Copyright (C) 2016  Ulrik Sandborg-Petersen
+ *
+ *   This program is free software; you can redistribute it and/or
+ *   modify it under the terms of the GNU General Public License as
+ *   published by the Free Software Foundation, license version 2.  
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *   General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+ *   02111-1307 USA
+ *
+ *
+ *   Special exception
+ *   =================
+ * 
+ *   In addition, as a special exception, Ulrik Petersen, the
+ *   copyright holder of Emdros, gives permission to link Emdros, in
+ *   whole or in part, with the libraries which are normally
+ *   distributed with:
+ *   
+ *   a) Sun's Java platform,
+ *   b) Python, 
+ *   c) Jython,
+ *   d) Ruby, and/or 
+ *   e) Perl 
+ *   f) PostgreSQL
+ *   g) OpenSSL
+ *
+ *   (or with modified versions of these), and to distribute linked
+ *   combinations including both Emdros, in whole or in part, and one
+ *   or more of the libraries normally distributed with (a)-(g) above.
+ *
+ *   Please note: This gives you special rights concerning the
+ *   libraries which normally accompany the above pieces of software.
+ *   It gives you no special rights concerning software that you write
+ *   yourself.  You must obey the GNU General Public License in all
+ *   respects for all of the code used other than the libraries
+ *   normally distributed with (a)-(g) above.
+ *
+ *   If you modify this file, you may extend this exception to your
+ *   version of the file, but you are not obligated to do so. If you
+ *   do not wish to do so, delete this exception statement from your
+ *   version.
+ *
+ *
+ *   Other licensing forms
+ *   =====================
+ *
+ *   If you wish to negotiate commercial licensing, please contact
+ *   Ulrik Petersen at ulrikp[at]users.sourceforge.net.
+ *
+ *   Licensing can also be negotiated if your organization is an
+ *   educational, non-profit, charity, missionary or similar
+ *   organization.
+ *
+ *
+ *   Website
+ *   =======
+ *
+ *   Emdros has a website here:
+ *
+ *   http://emdros.org
+ *
+ *
+ *
+ **************************************************************************/
+
+/**@file string2som_map.cpp
+ *@brief String to SetOfMonads map (EMdF layer)
+ */
+
+/**************** leaving EMdF/string2som_map.cpp temporarily *****************/
+/**************** A copy of include/string2som_map.h ****************/
+#line 1 "include/string2som_map.h"
+/*
+ * string2som_map.h
+ *
+ * String to SetOfMonads Map
+ *
+ * Ulrik Sandborg-Petersen
+ * Created: 6/22-2016
+ * Last update: 6/22-2016
+ *
+ */
+/************************************************************************
+ *
+ *   Emdros - the database engine for analyzed or annotated text
+ *   Copyright (C) 2016  Ulrik Sandborg-Petersen
+ *
+ *   This program is free software; you can redistribute it and/or
+ *   modify it under the terms of the GNU General Public License as
+ *   published by the Free Software Foundation, license version 2.  
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *   General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+ *   02111-1307 USA
+ *
+ *
+ *   Special exception
+ *   =================
+ * 
+ *   In addition, as a special exception, Ulrik Petersen, the
+ *   copyright holder of Emdros, gives permission to link Emdros, in
+ *   whole or in part, with the libraries which are normally
+ *   distributed with:
+ *   
+ *   a) Sun's Java platform,
+ *   b) Python, 
+ *   c) Jython,
+ *   d) Ruby, and/or 
+ *   e) Perl 
+ *   f) PostgreSQL
+ *   g) OpenSSL
+ *
+ *   (or with modified versions of these), and to distribute linked
+ *   combinations including both Emdros, in whole or in part, and one
+ *   or more of the libraries normally distributed with (a)-(g) above.
+ *
+ *   Please note: This gives you special rights concerning the
+ *   libraries which normally accompany the above pieces of software.
+ *   It gives you no special rights concerning software that you write
+ *   yourself.  You must obey the GNU General Public License in all
+ *   respects for all of the code used other than the libraries
+ *   normally distributed with (a)-(g) above.
+ *
+ *   If you modify this file, you may extend this exception to your
+ *   version of the file, but you are not obligated to do so. If you
+ *   do not wish to do so, delete this exception statement from your
+ *   version.
+ *
+ *
+ *   Other licensing forms
+ *   =====================
+ *
+ *   If you wish to negotiate commercial licensing, please contact
+ *   Ulrik Petersen at ulrikp[at]users.sourceforge.net.
+ *
+ *   Licensing can also be negotiated if your organization is an
+ *   educational, non-profit, charity, missionary or similar
+ *   organization.
+ *
+ *
+ *   Website
+ *   =======
+ *
+ *   Emdros has a website here:
+ *
+ *   http://emdros.org
+ *
+ *
+ *
+ **************************************************************************/
+
+/**@file string2som_map.h
+ *@brief String to SetOfMonads map (EMdF layer)
+ */
+
+
+#ifndef STRING2SOM_MAP_
+#define STRING2SOM_MAP_
+
+#include <string>
+#include <map>
+
+/**************** already included monads.h -- not including again *****************/
+
+
+#line 97 "include/string2som_map.h"
+
+class String2SOMMap; // Forward declaration
+
+class String2SOMMapConstIterator {
+ protected:
+#ifndef SWIG
+	const String2SOMMap *m_pMother;
+	std::map<std::string, SetOfMonads>::const_iterator m_ci;
+#endif // !defined(SWIG)
+ public:
+	String2SOMMapConstIterator();
+	
+#ifndef SWIG
+	String2SOMMapConstIterator(const String2SOMMapConstIterator& other);
+	String2SOMMapConstIterator(const String2SOMMap *pMother);
+#endif // !defined(SWIG)
+
+	~String2SOMMapConstIterator();
+
+	bool hasNext() const;
+	std::string next();
+	std::string current() const;
+#ifndef SWIG
+	void assign(const String2SOMMapConstIterator& other);
+	String2SOMMapConstIterator& operator=(const String2SOMMapConstIterator& other);
+#endif
+};
+
+class String2SOMMap {
+ protected:
+	friend class String2SOMMapConstIterator;
+#ifndef SWIG
+	std::map<std::string, SetOfMonads> m_map;
+#endif // !defined(SWIG)
+ public:
+	String2SOMMap();
+	~String2SOMMap();
+
+	void addMonad(const std::string& key, monad_m monad);
+	void addMonadRange(const std::string& key, monad_m first_monad, monad_m last_monad);
+	void addMonadSet(const std::string& key, const SetOfMonads& som);
+
+	SetOfMonads getMonadSet(const std::string& key) const;
+	String2SOMMapConstIterator const_iterator() const;
+
+	bool hasKey(const std::string& key) const;
+	
+	bool isEmpty() const;
+};
+
+#endif // STRING2SOM_MAP_
+
+
+/**************** continuing EMdF/string2som_map.cpp where we left off *****************/
+
+
+#line 90 "EMdF/string2som_map.cpp"
+
+////////////////////////////////////////////////////////////////
+//
+// String2SOMMapConstIterator
+//
+////////////////////////////////////////////////////////////////
+
+String2SOMMapConstIterator::String2SOMMapConstIterator()
+{
+	m_pMother = 0;
+}
+
+
+String2SOMMapConstIterator::String2SOMMapConstIterator(const String2SOMMap *pMother)
+{
+	m_pMother = pMother;
+	if (m_pMother != 0) {
+		m_ci = m_pMother->m_map.begin();
+	}
+}
+
+
+String2SOMMapConstIterator::String2SOMMapConstIterator(const String2SOMMapConstIterator& other)
+{
+	assign(other);
+}
+
+
+String2SOMMapConstIterator::~String2SOMMapConstIterator()
+{
+	// Nothing to do.
+}
+
+
+
+bool String2SOMMapConstIterator::hasNext() const
+{
+	if (m_pMother == 0) {
+		return false;
+	} else {
+		return m_ci != m_pMother->m_map.end();
+	}
+}
+
+
+std::string String2SOMMapConstIterator::next()
+{
+	ASSERT_THROW(hasNext(), "String2SOMMapConstIterator::next(): hasNext() is false. Thus this function should not be called.");
+	std::string result_key = m_ci->first;
+	++m_ci;
+	return result_key;
+}
+
+
+std::string String2SOMMapConstIterator::current() const
+{
+	ASSERT_THROW(hasNext(), "String2SOMMapConstIterator::current(): hasNext() is false. Thus this function should not be called.");
+	return m_ci->first;
+}
+
+
+
+
+void String2SOMMapConstIterator::assign(const String2SOMMapConstIterator& other)
+{
+	m_pMother = other.m_pMother;
+	m_ci = other.m_ci;
+}
+
+
+String2SOMMapConstIterator& String2SOMMapConstIterator::operator=(const String2SOMMapConstIterator& other)
+{
+	assign(other);
+	return *this;
+}
+
+
+
+////////////////////////////////////////////////////////////////
+//
+// String2SOMMap
+//
+////////////////////////////////////////////////////////////////
+
+
+String2SOMMap::String2SOMMap()
+{
+}
+
+
+String2SOMMap::~String2SOMMap()
+{
+	m_map.clear();
+}
+
+
+
+void String2SOMMap::addMonad(const std::string& key, monad_m monad)
+{
+	std::map<std::string, SetOfMonads>::iterator it = m_map.find(key);
+	if (it == m_map.end()) {
+		std::pair<std::map<std::string, SetOfMonads>::iterator, bool> mypair = m_map.insert(std::make_pair(key, SetOfMonads()));
+		it = mypair.first;
+	}
+	it->second.add(monad);
+}
+
+
+void String2SOMMap::addMonadRange(const std::string& key, monad_m first_monad, monad_m last_monad)
+{
+	std::map<std::string, SetOfMonads>::iterator it = m_map.find(key);
+	if (it == m_map.end()) {
+		std::pair<std::map<std::string, SetOfMonads>::iterator, bool> mypair = m_map.insert(std::make_pair(key, SetOfMonads()));
+		it = mypair.first;
+	}
+	it->second.add(first_monad, last_monad);
+}
+
+
+void String2SOMMap::addMonadSet(const std::string& key, const SetOfMonads& som)
+{
+	// insert returns a pair where pair::first is an iterator
+	// pointing to the newly inserted element (if pair::second is
+	// true), or to an existing element with an equivalent key (if
+	// pair::second is false).
+	std::pair<std::map<std::string, SetOfMonads>::iterator, bool> mypair = m_map.insert(std::make_pair(key, som));
+	if (!mypair.second) {
+		mypair.first->second.unionWith(som);
+	}
+}
+
+
+
+SetOfMonads String2SOMMap::getMonadSet(const std::string& key) const
+{
+	std::map<std::string, SetOfMonads>::const_iterator ci = m_map.find(key);
+	if (ci == m_map.end()) {
+		return SetOfMonads();
+	} else {
+		return ci->second;
+	}
+}
+
+
+String2SOMMapConstIterator String2SOMMap::const_iterator() const
+{
+	return String2SOMMapConstIterator(this);
+}
+
+
+
+bool String2SOMMap::hasKey(const std::string& key) const
+{
+	return m_map.find(key) != m_map.end();
+}
+
+bool String2SOMMap::isEmpty() const
+{
+	return m_map.empty();
+}
+
+
+
+
+
 /**************** A copy of EMdF/minidom.cpp ****************/
 #line 1 "EMdF/minidom.cpp"
 /*
@@ -13694,7 +14388,7 @@ bool char2bool(char in)
  *
  * Ulrik Petersen
  * Created: 3/1-2001
- * Last update: 2/23-2016
+ * Last update: 6/18-2016
  *
  */
 /************************************************************************
@@ -14420,6 +15114,7 @@ static const char *emdros_reserved_words[] = {
 "having",
 "feature",
 "features",
+"aggregate",
 "universe",
 "substrate",
 "monads",
@@ -14449,7 +15144,10 @@ static const char *emdros_reserved_words[] = {
 "calculation",
 "min_m",
 "max_m",
+"min",
 "max",
+"sum",
+"count",
 "flat",
 "full",
 "on",
@@ -15092,6 +15790,43 @@ std::string ulong2hex(unsigned long in)
 	result += char2hex((in >> 8) & 0xFF);
 	result += char2hex(in & 0xFF);
 	return result;
+}
+
+/** Add \u10FFFFF hex-representation representation of a Unicode code point.
+ *
+ * Adds \uxxxx if <= 0xFFFF.
+ *
+ * Adds \uxxxxx if <= 0xFFFFF.
+ *
+ * Adds \uxxxxxx if <= 0xFFFFFF.
+ *
+ * Note that the highest possible Unicode code point is 0x0010FFFF.
+ *
+ * @param result The std::string into which to append the character.
+ *
+ * @param c The Unicode code point to add.
+ *
+ */
+void codepoint2slashu(std::string& result, unsigned int c)
+{
+	char szResult[2+6+1];
+	char *begin = &(szResult[0]);
+	char *p = begin;
+	*p++ = '\\';
+	*p++ = 'u';
+	if (c > 0x000FFFFF) {
+		*p++ = "0123456789abcdef"[(c >> 20) & 0x0F];
+	}
+	if (c > 0x0000FFFF) {
+		*p++ = "0123456789abcdef"[(c >> 16) & 0x0F];
+	}
+	*p++ = "0123456789abcdef"[(c >> 12) & 0x0F];
+	*p++ = "0123456789abcdef"[(c >> 8) & 0x0F];
+	*p++ = "0123456789abcdef"[(c >> 4) & 0x0F];
+	*p++ = "0123456789abcdef"[c & 0x0F];
+	*p = '\0';
+	
+	result+= std::string(begin, (p - begin));
 }
 
 /** Replace occurrences of one character with another character in a
@@ -16065,6 +16800,120 @@ void long2utf8(long c, std::string& output)
 	}
 }
 
+/*
+** This lookup table is used to help decode the first byte of
+** a multi-byte UTF8 character.
+**
+** "Stolen" from utf.c from SQLite3, which is Public Domain code.
+**
+** Adapted by Ulrik Sandborg-Petersen on 2016-06-18.
+*/
+static const unsigned char emdrosUtf8Trans[] = {
+  0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+  0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
+  0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17,
+  0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,
+  0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+  0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
+  0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+  0x00, 0x01, 0x02, 0x03, 0x00, 0x01, 0x00, 0x00,
+};
+
+
+/*
+**
+** Translate a single UTF-8 character.  Return the unicode value.
+**
+** "Stolen" from utf.c from SQLite3, which is Public Domain code.
+**
+** Adapted by Ulrik Sandborg-Petersen on 2016-06-18.
+**
+**
+** During translation, assume that the byte that zTerm points
+** is a 0x00.
+**
+** Write a pointer to the next unread byte back into *pzNext.
+**
+** Notes On Invalid UTF-8:
+**
+**  *  This routine never allows a 7-bit character (0x00 through 0x7f) to
+**     be encoded as a multi-byte character.  Any multi-byte character that
+**     attempts to encode a value between 0x00 and 0x7f is rendered as 0xfffd.
+**
+**  *  This routine never allows a UTF16 surrogate value to be encoded.
+**     If a multi-byte character attempts to encode a value between
+**     0xd800 and 0xe000 then it is rendered as 0xfffd.
+**
+**  *  Bytes in the range of 0x80 through 0xbf which occur as the first
+**     byte of a character are interpreted as single-byte characters
+**     and rendered as themselves even though they are technically
+**     invalid characters.
+**
+**  *  This routine accepts over-length UTF8 encodings
+**     for unicode values 0x80 and greater.  It does not change over-length
+**     encodings to 0xfffd as some systems recommend.
+*/
+#define EMDROS_READ_UTF8_C(zIn, zTerm, c)                           \
+  c = *(zIn++);                                            \
+  if( c>=0xc0 ){                                           \
+    c = emdrosUtf8Trans[c-0xc0];                         \
+    while( zIn!=zTerm && (*zIn & 0xc0)==0x80 ){            \
+      c = (c<<6) + (0x3f & *(zIn++));                      \
+    }                                                      \
+    if( c<0x80                                             \
+        || (c&0xFFFFF800)==0xD800                          \
+        || (c&0xFFFFFFFE)==0xFFFE ){  c = 0xFFFD; }        \
+  }
+#define EMDROS_READ_UTF8_CPLUSPLUS(instr, instr_length, index, c)   \
+  c = instr[index++]; \
+  if( c>=0xc0 ){                                           \
+    c = emdrosUtf8Trans[(c-0xc0) & 0xFF];				\
+    while( index != instr_length && (instr[index] & 0xc0)==0x80 ){            \
+      c = (c<<6) + (0x3f & instr[index++]);                      \
+    }                                                      \
+    if( c<0x80                                             \
+        || (c&0xFFFFF800)==0xD800                          \
+        || (c&0xFFFFFFFE)==0xFFFE ){  c = 0xFFFD; }        \
+  }
+unsigned int readOneUTF8Char(const std::string& instr, std::string::size_type instr_length, std::string::size_type& index)
+{
+  unsigned int c;
+
+  if (index >= instr_length) {
+	  return 0;
+  }
+  c = instr[index++];
+  if( c>=0xc0 ){
+    c = emdrosUtf8Trans[(c-0xc0) & 0xFF];
+    while( (instr[index] & 0xc0)==0x80 ){
+      c = (c<<6) + (0x3f & instr[index++]);
+    }
+    if( c<0x80
+        || (c&0xFFFFF800)==0xD800
+        || (c&0xFFFFFFFE)==0xFFFE ){  c = 0xFFFD; }
+  }
+  return c;
+}
+
+
+std::string escape_UTF8_string_with_slashu(const std::string& instr)
+{
+	std::string result;
+	std::string::size_type index = 0;
+	std::string::size_type instr_length = instr.length();
+	while (index < instr_length) {
+		unsigned int c = 0;
+		EMDROS_READ_UTF8_CPLUSPLUS(instr, instr_length, index, c);
+		if (c < 0x80) {
+			result += c;
+		} else {
+			codepoint2slashu(result, c);
+		}
+	}
+	return result;
+}
+
+
 // Convert all non-identifier characters to underscore..
 std::string convert_to_identifier(const std::string& instr)
 {
@@ -17006,6 +17855,7 @@ void StringSetsCache::clear(void)
 #include <string>
 #include <cstdlib>
 
+
 /*
  * <stdint.h> does not exist in MS Visual Studio 2008.
  * Hence, we typedef some things ourselves.
@@ -17021,6 +17871,8 @@ typedef unsigned __int64 uint64_t;
 #else
 #include <stdint.h>
 #endif
+
+#include <vector>
 
 /**************** leaving include/emdf_hash.h temporarily *****************/
 /**************** A copy of include/emdfdb.h ****************/
@@ -18130,11 +18982,14 @@ extern std::string getStringFromeComparisonOp(eComparisonOp op);
 /**************** continuing include/emdf_hash.h where we left off *****************/
 
 
-#line 114 "include/emdf_hash.h"
+#line 117 "include/emdf_hash.h"
 /**************** already included debug.h -- not including again *****************/
 
 
-#line 115 "include/emdf_hash.h"
+#line 118 "include/emdf_hash.h"
+
+
+// EmdrosStringHashTableNode
 
 template<class V> class EmdrosStringHashTableNode {
  public:
@@ -18148,6 +19003,8 @@ template<class V> class EmdrosStringHashTableNode {
 		return (m_key == other.m_key);
 	};
 };
+
+// EmdrosStringHashTable
 
 template<class V> class EmdrosStringHashTable {
  protected:
@@ -22607,7 +23464,7 @@ int SkipList::randomLevel()
  *
  * Ulrik Sandborg-Petersen
  * Created: 7/28-2008
- * Last update: 4/12-2016
+ * Last update: 6/18-2016
  *
  */
 /************************************************************************
@@ -22696,13 +23553,13 @@ int SkipList::randomLevel()
  *
  * Ulrik Sandborg-Petersen
  * Created: 7/28-2008
- * Last update: 4/12-2016
+ * Last update: 6/18-2016
  *
  */
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2008-2012  Ulrik Sandborg-Petersen
+ *   Copyright (C) 2008-2016  Ulrik Sandborg-Petersen
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License as
@@ -23168,8 +24025,8 @@ class JSONValue {
 #endif
 	std::list<std::string> getObjectKeys(void) const;
 	bool hasObjectKey(const std::string& key) const;
-	void pretty(std::ostream *pOut, int indent_level = 0) const;
-	void printCompact(std::ostream *pOut) const;
+	void pretty(std::ostream *pOut, int indent_level = 0, bool bEscapeAsUnicode = false) const;
+	void printCompact(std::ostream *pOut, bool bEscapeAsUnicode = false) const;
  private:
 	JSONValue(const JSONValue& other);
 	JSONValue& operator=(const JSONValue& other);
@@ -23559,7 +24416,7 @@ JSONValue* JSONValue::getObjectValue(const std::string& key)
 	}
 }
 
-void JSONValue::printCompact(std::ostream *pOut) const
+void JSONValue::printCompact(std::ostream *pOut, bool bEscapeAsUnicode) const
 {
 	switch (m_kind) {
 	case kJSONNull:
@@ -23576,18 +24433,18 @@ void JSONValue::printCompact(std::ostream *pOut) const
 		(*pOut) << getInteger();
 		break;
 	case kJSONString:
-		(*pOut) << '\"' << escapeJSONChars(getString()) << '\"';
+		(*pOut) << '\"' << escapeJSONChars(getString(), bEscapeAsUnicode) << '\"';
 		break;
 	case kJSONList: {
 		(*pOut) << '[';
 		std::list<JSONValue*>::const_iterator ci = m_value.m_pList->begin();
 		if (ci != m_value.m_pList->end()) {
-			(*ci)->printCompact(pOut);
+			(*ci)->printCompact(pOut, bEscapeAsUnicode);
 			++ci;
 		}
 		while (ci != m_value.m_pList->end()) {
 			(*pOut) << ',';
-			(*ci)->printCompact(pOut);
+			(*ci)->printCompact(pOut, bEscapeAsUnicode);
 			++ci;
 		}
 		(*pOut) << ']';
@@ -23598,14 +24455,14 @@ void JSONValue::printCompact(std::ostream *pOut) const
 		std::map<std::string, JSONValue*>::const_iterator ci;
 		ci = m_value.m_pObject->begin();
 		if (ci != m_value.m_pObject->end()) {
-			(*pOut) << '\"' << escapeJSONChars(ci->first) << "\":";
-			ci->second->printCompact(pOut);
+			(*pOut) << '\"' << escapeJSONChars(ci->first, bEscapeAsUnicode) << "\":";
+			ci->second->printCompact(pOut, bEscapeAsUnicode);
 			++ci;
 		}
 		while (ci != m_value.m_pObject->end()) {
 			(*pOut) << ',';
-			(*pOut) << '\"' << escapeJSONChars(ci->first) << "\":";
-			ci->second->printCompact(pOut);
+			(*pOut) << '\"' << escapeJSONChars(ci->first, bEscapeAsUnicode) << "\":";
+			ci->second->printCompact(pOut, bEscapeAsUnicode);
 			++ci;
 		}
 		(*pOut) << '}';
@@ -23614,7 +24471,7 @@ void JSONValue::printCompact(std::ostream *pOut) const
 	}
 }
 
-void JSONValue::pretty(std::ostream *pOut, int indent_level) const
+void JSONValue::pretty(std::ostream *pOut, int indent_level, bool bEscapeAsUnicode) const
 {
 	switch (m_kind) {
 	case kJSONNull:
@@ -23631,20 +24488,20 @@ void JSONValue::pretty(std::ostream *pOut, int indent_level) const
 		(*pOut) << getInteger();
 		break;
 	case kJSONString:
-		(*pOut) << '\"' << encodeSTRINGstring(getString()) << '\"';
+		(*pOut) << '\"' << escapeJSONChars(getString(), bEscapeAsUnicode) << '\"';
 		break;
 	case kJSONList: {
 		(*pOut) << "[\n";
 		std::list<JSONValue*>::const_iterator ci = m_value.m_pList->begin();
 		if (ci != m_value.m_pList->end()) {
 			indent(pOut, indent_level+1);
-			(*ci)->pretty(pOut, indent_level+1);
+			(*ci)->pretty(pOut, indent_level+1, bEscapeAsUnicode);
 			++ci;
 		}
 		while (ci != m_value.m_pList->end()) {
 			(*pOut) << ",\n";
 			indent(pOut, indent_level+1);
-			(*ci)->pretty(pOut, indent_level+1);
+			(*ci)->pretty(pOut, indent_level+1, bEscapeAsUnicode);
 			++ci;
 		}
 		(*pOut) << '\n';
@@ -23658,16 +24515,16 @@ void JSONValue::pretty(std::ostream *pOut, int indent_level) const
 		ci = m_value.m_pObject->begin();
 		if (ci != m_value.m_pObject->end()) {
 			indent(pOut, indent_level+1);
-			(*pOut) << '\"' << encodeSTRINGstring(ci->first) << "\" : ";
-			ci->second->pretty(pOut, indent_level+1);
+			(*pOut) << '\"' << escapeJSONChars(ci->first, bEscapeAsUnicode) << "\" : ";
+			ci->second->pretty(pOut, indent_level+1, bEscapeAsUnicode);
 			++ci;
 		}
 		while (ci != m_value.m_pObject->end()) {
 			(*pOut) << ",\n";
 			indent(pOut, indent_level+1);
-			(*pOut) << '\"' << encodeSTRINGstring(ci->first) << "\" : ";
+			(*pOut) << '\"' << escapeJSONChars(ci->first, bEscapeAsUnicode) << "\" : ";
 			
-			ci->second->pretty(pOut, indent_level+2);
+			ci->second->pretty(pOut, indent_level+2, bEscapeAsUnicode);
 			++ci;
 		}
 		(*pOut) << '\n';
@@ -23959,7 +24816,7 @@ JSONValue *readAndParseJSONFromFile(const std::string& filename, std::string& er
 
 /**************** A copy of EMdF/json_lexer.cpp ****************/
 #line 1 "EMdF/json_lexer.cpp"
-/* Generated by re2c 0.13.5 on Sun May  8 22:29:10 2016 */
+/* Generated by re2c 0.14.3 on Mon Jul 25 17:56:24 2016 */
 #line 1 "./json.re"
 /*
  * json.re
@@ -42833,7 +43690,7 @@ extern "C" {
 #ifdef SQLITE_VERSION
 # undef SQLITE_VERSION
 #else
-# define SQLITE_VERSION         "3.4.1.pre24"
+# define SQLITE_VERSION         "3.4.1.pre29"
 #endif
 
 /*
@@ -75329,7 +76186,7 @@ std::string MQLError::getError(void)
  *
  * Ulrik Petersen
  * Created: 3/8-2001
- * Last update: 2/13-2016
+ * Last update: 7/15-2016
  *
  */
 /************************************************************************
@@ -75429,9 +76286,9 @@ std::string MQLError::getError(void)
  *
  * MQL sheafs
  *
- * Ulrik Petersen
+ * Ulrik Sandborg-Petersen
  * Created: 3/8-2001
- * Last update: 2/13-2016
+ * Last update: 7/15-2016
  *
  */
 /************************************************************************
@@ -75541,13 +76398,13 @@ std::string MQLError::getError(void)
  *
  * Ulrik Petersen
  * Created: 2/27-2001
- * Last update: 6/2-2014
+ * Last update: 7/21-2016
  *
  */
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2001-2014  Ulrik Sandborg-Petersen
+ *   Copyright (C) 2001-2016  Ulrik Sandborg-Petersen
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License as
@@ -76710,13 +77567,13 @@ PCRE_EXP_DECL void pcre32_jit_free_unused_memory(void);
  *
  * Ulrik Petersen
  * Created: 8/21-2003
- * Last update: 1/6-2014
+ * Last update: 7/21-2016
  *
  */
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2004-2014  Ulrik Sandborg-Petersen
+ *   Copyright (C) 2004-2016  Ulrik Sandborg-Petersen
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License as
@@ -76825,6 +77682,14 @@ enum eAggregateQueryStrategy {
 };
 
 
+enum eAggregateFunction {
+	kAFMIN,
+	kAFMAX,
+	kAFSUM,
+	kAFCOUNT_ALL,
+	kAFCOUNT_FEATURE_COMPARISON
+};
+
 
 #endif /* MQL_ENUMS__H__ */
 
@@ -76846,13 +77711,13 @@ enum eAggregateQueryStrategy {
  *
  * Ulrik Petersen
  * Created: 2/27-2001
- * Last update: 12/1-2014
+ * Last update: 7/19-2016
  *
  */
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2001-2014  Ulrik Sandborg-Petersen
+ *   Copyright (C) 2001-2016  Ulrik Sandborg-Petersen
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License as
@@ -77093,33 +77958,37 @@ public:
 
 
 #line 101 "include/mql_types.h"
-/**************** already included emdf.h -- not including again *****************/
+/**************** already included mql_enums.h -- not including again *****************/
 
 
 #line 102 "include/mql_types.h"
-/**************** already included emdf_hash.h -- not including again *****************/
+/**************** already included emdf.h -- not including again *****************/
 
 
 #line 103 "include/mql_types.h"
+/**************** already included emdf_hash.h -- not including again *****************/
+
+
+#line 104 "include/mql_types.h"
 #include <string>
 #include <map>
 #include <list>
 /**************** already included infos.h -- not including again *****************/
 
 
-#line 107 "include/mql_types.h"
+#line 108 "include/mql_types.h"
 /**************** already included monads.h -- not including again *****************/
 
 
-#line 108 "include/mql_types.h"
+#line 109 "include/mql_types.h"
 /**************** already included debug.h -- not including again *****************/
 
 
-#line 109 "include/mql_types.h"
+#line 110 "include/mql_types.h"
 #include <utility>
 
 
-
+class FeatureComparison; // Forward declaration
 class Topograph; // Forward declaration
 class MQLExecEnv; // Forward declaration
 class MQLObject; // Forward declaration
@@ -77492,9 +78361,13 @@ class Feature {
 	void execMakeFeatureNameVector(std::vector<std::string>& FeatureNames);
 	void execMakeNameList(MQLResult *pResult);
 	void symbolAddToObject(MQLExecEnv *pEE, MQLObject *pObj);
+#ifndef SWIG
+	void symbolAddFeaturesToSet(std::set<std::string>& myset) const;
+#endif
 	void addEMdFValue(MatchedObject *pMO, MQLObject *pObj, bool bIterate);
 	void makeVectorOfSelves(std::vector<Feature*> **ppVec);
 	void assignListIndex(int current_index);
+	int getFeatureInstListIndex(const std::string& feature_name) const;
  private:
 	int getLength(int current_length) const { 
 		if (m_next != 0) { 
@@ -77504,6 +78377,41 @@ class Feature {
 		} 
 	};
 };
+
+class AggregateFeature {
+ protected:	
+	eAggregateFunction m_function;
+	long m_result;
+	Feature *m_feature;
+	FeatureComparison *m_feature_comparison;
+
+	std::string m_object_type_name;
+	id_d_t m_object_type_id;
+	AggregateFeature *m_next;
+	int m_inst_obj_feature_index;
+ public:
+	AggregateFeature(eAggregateFunction func);
+	AggregateFeature(eAggregateFunction func, std::string *feature_name);
+	AggregateFeature(eAggregateFunction func, FeatureComparison *feature_comparison);
+	virtual ~AggregateFeature();
+
+	virtual AggregateFeature* getNext() { return m_next; };
+	virtual void setNext(AggregateFeature* next) { m_next = next; };
+
+	virtual void setInstObjectFeatureIndex(int inst_obj_feature_index) { m_inst_obj_feature_index = inst_obj_feature_index; };
+	
+	virtual bool hasFeature() const { return m_feature != 0; };
+	virtual bool hasFeatureComparison() const { return m_feature_comparison != 0; };
+	virtual std::string getFeatureName() const;
+	virtual FeatureComparison *getFeatureComparison() const { return m_feature_comparison; };
+	
+	virtual long getResult() const { return m_result; };
+	virtual void weed(MQLExecEnv *pEE, bool& bResult);
+	virtual bool symbol(MQLExecEnv *pEE, const std::string& object_type_name, id_d_t object_type_id, bool& bResult);
+	virtual bool type(MQLExecEnv *pEE, bool& bResult);
+	virtual void exec(MQLExecEnv *pEE, const InstObject *pInstObj);
+};
+
 
 
 #endif // !defined SWIG
@@ -77908,7 +78816,7 @@ class FeatureComparison {
 	pcre_extra *m_pcre_extra;
 	int *m_ovector;
 	int m_ovectorsize;
-	short int m_feature_index;
+	int m_feature_index;
 	bool m_bCanBePreQueried;
 	bool m_bContextHasBeenNegative;
 	node_number_t m_ffeatures_parent;
@@ -77937,12 +78845,18 @@ class FeatureComparison {
 				    std::set<std::string>& ORD_set);
 	bool symbolObjectReferences2(MQLExecEnv *pEE);
 	void symbolAddFeatures(MQLObject* pObj, EMdFDB *pDB);
+#ifndef SWIG
+	void symbolAddFeaturesToSet(std::set<std::string>& myset) const;
+	bool symbolSetFeatureIndex(const std::vector<std::string>& feature_name_vec, bool& bResult);
+#endif
 	bool type(MQLExecEnv *pEE, bool& bResult);
 	const std::string& getFeatureName() { return *m_feature_name; };
 	eComparisonOp getComparisonOp() { return m_comparison_op; };
 	Value* getValue() { return m_value; };
 	void pretty(std::ostream *pOut, int indent, NonParentORDSolution *pNonParentORDSolution);
 	bool compare(MQLExecEnv *pEE, const EMdFValue *left_value, NonParentORDSolution *pNonParentORDSolution);
+	bool exec(MQLExecEnv *pEE, const InstObject *pInstObj);
+	
 	EMdFComparison *makeConstraints(EMdFDB *pDB, bool bContextHasBeenNegative) throw (EMdFDBDBError,EmdrosException);
 	/** Get m_feature_index
 	 *
@@ -77978,9 +78892,14 @@ class FFactor {
 		    id_d_t enclosing_object_type_id, 
 		    bool& bResult);
 	void symbolAddFeatures(MQLObject* pObj, EMdFDB *pDB);
+#ifndef SWIG
+	void symbolAddFeaturesToSet(std::set<std::string>& myset) const;
+	bool symbolSetFeatureIndex(const std::vector<std::string>& feature_name_vec, bool& bResult);	
+#endif
 	bool symbolObjectReferences(MQLExecEnv *pEE, bool& bResult, std::set<std::string>& ORD_set);
 	bool symbolObjectReferences2(MQLExecEnv *pEE);
 	bool type(MQLExecEnv *pEE, bool& bResult);
+	bool exec(MQLExecEnv *pEE, const InstObject *pInstObj);
 	void pretty(std::ostream *pOut, int indent, NonParentORDSolution *pNonParentORDSolution);
 	bool isNOT() const { return m_ffactor != 0; };
 	bool isParenthesis() const { return m_ffeatures != 0; };
@@ -78007,9 +78926,14 @@ class FTerm {
 		    id_d_t enclosing_object_type_id, 
 		    bool& bResult);
 	void symbolAddFeatures(MQLObject* pObj, EMdFDB *pDB);
+#ifndef SWIG
+	void symbolAddFeaturesToSet(std::set<std::string>& myset) const;
+	bool symbolSetFeatureIndex(const std::vector<std::string>& feature_name_vec, bool& bResult);	
+#endif
 	bool symbolObjectReferences(MQLExecEnv *pEE, bool& bResult, std::set<std::string>& ORD_set);
 	bool symbolObjectReferences2(MQLExecEnv *pEE);
 	bool type(MQLExecEnv *pEE, bool& bResult);
+	bool exec(MQLExecEnv *pEE, const InstObject *pInstObj);
 	void pretty(std::ostream *pOut, int indent, NonParentORDSolution *pNonParentORDSolution);
 	bool isFFactor() const { return m_fterm == 0; };
 	FFactor* getFFactor() { return m_ffactor; };
@@ -78045,7 +78969,12 @@ class FFeatures : public QueryNode {
 	bool symbolObjectReferences(MQLExecEnv *pEE, bool& bResult, std::set<std::string>& ORD_set);
 	bool symbolObjectReferences2(MQLExecEnv *pEE);
 	void symbolAddFeatures(MQLObject* pObj, EMdFDB *pDB);
+#ifndef SWIG
+	void symbolAddFeaturesToSet(std::set<std::string>& myset) const;
+	bool symbolSetFeatureIndex(const std::vector<std::string>& feature_name_vec, bool& bResult);	
+#endif
 	bool type(MQLExecEnv *pEE, bool& bResult);
+	bool exec(MQLExecEnv *pEE, const InstObject *pInstObj);
 	void pretty(std::ostream *pOut, int indent, NonParentORDSolution *pNonParentORDSolution);
 	bool isFTerm() const { return m_ffeatures == 0; };
 	FTerm* getFTerm() { return m_fterm; };
@@ -78151,6 +79080,16 @@ class ObjectBlock : public ObjectBlockBase {
 		    MonadSetRelationClause *pMSRC,
 		    FFeatures* feature_constraints,
 		    GrammarFeature* feature_retrieval,
+		    Blocks* opt_blocks,
+		    bool bIsNOTEXIST);
+	ObjectBlock(std::string* object_type_name,
+		    std::string* mark_declaration,
+		    std::string* object_reference,
+		    eRetrieval retrieval,
+		    eFirstLast first_last,
+		    MonadSetRelationClause *pMSRC,
+		    FFeatures* feature_constraints,
+		    Feature *GET_feature_retrieval,
 		    Blocks* opt_blocks,
 		    bool bIsNOTEXIST);
 	virtual ~ObjectBlock();
@@ -78456,10 +79395,18 @@ class Topograph {
 
 
 #line 104 "include/mql_sheaf.h"
-/**************** already included llist.h -- not including again *****************/
+/**************** already included inst.h -- not including again *****************/
 
 
 #line 105 "include/mql_sheaf.h"
+/**************** already included llist.h -- not including again *****************/
+
+
+#line 106 "include/mql_sheaf.h"
+/**************** already included string2som_map.h -- not including again *****************/
+
+
+#line 107 "include/mql_sheaf.h"
 
 
 class Sheaf; // forward declaration
@@ -78685,8 +79632,11 @@ class MatchedObject {
 	 *     -2 means noretrieve
 	 *     -3 means retrieve
 	 *     -4 means focus
-	 * If this object is a kMOKID_D, then m_id_d is >= 0
-	 *     id_d is m_id_d
+	 * If this object is a kMOKID_D, then:
+	 *     EITHER m_id_d is >= 0, and id_d is m_id_d.  
+	 *            Then m_value is of kind m_pValue_vec;
+	 *     OR m_id_d is <= -5, and id_d is m_id_d + 5
+	 *            Then m_value is of kind m_pInstObj
 	 */
 	id_d_t m_id_d;
 	/** The value_vec_t vector of pointers to EMdFValue objects.
@@ -78702,7 +79652,10 @@ class MatchedObject {
 	 *
 	 * @see value_vec_t.
 	 */
-	value_vec_t *m_pValue_vec;
+	union {
+		value_vec_t *m_pValue_vec;
+		const InstObject *m_pInstObject;
+	} m_values;
  public:  
 #ifndef SWIG
 	MatchedObject(const SetOfMonads& monads, 
@@ -78711,6 +79664,7 @@ class MatchedObject {
 		      Sheaf *sheaf); 
 	MatchedObject(id_d_t id_d, const SetOfMonads& monads, Sheaf* sheaf, ObjectBlockBase *pObjectBlock);
 	MatchedObject(id_d_t id_d, monad_m first_monad, monad_m last_monad, Sheaf* sheaf, ObjectBlockBase *pObjectBlock);
+	MatchedObject(const InstObject *pInstObj, ObjectBlockBase *pObjectBlock);
 #endif
 	MatchedObject(monad_m SmMinus1); // for kMOKEMPTY_mo
 	MatchedObject(const MatchedObject& other);
@@ -78724,7 +79678,7 @@ class MatchedObject {
 	 * Otherwise, return NIL.
 	 *
 	 */
-	id_d_t getID_D(void) const { if (m_id_d >= 0) return m_id_d; else return NIL;};
+	id_d_t getID_D(void) const { if (m_id_d >= 0) return m_id_d; else { if (m_id_d <= -5) return -1*(m_id_d + 5); else return NIL;}};
 	const Sheaf* getSheaf(void) const;
 
 	/** See whether inner sheaf is empty.
@@ -78748,6 +79702,8 @@ class MatchedObject {
 			return kMOKID_D;
 		} else if (m_id_d == -1) {
 			return kMOKEMPTY_mo;
+		} else if (m_id_d <= -5) {
+			return kMOKID_D;
 		} else if (m_id_d <= -2) {
 			return kMOKID_M;
 		} else {
@@ -78763,13 +79719,17 @@ class MatchedObject {
 	 * @return \p true if this is an ID_M matched object,
 	 * \p false if it is not.
 	 */
-	bool isID_M(void) const { return m_id_d <= -2; };
+	bool isID_M(void) const { return m_id_d <= -2 && m_id_d >= -4; };
+	/** Return true if the m_values union is of kind const InstObject*.
+	 *
+	 */
+	bool isInstObject(void) const { return m_id_d <= -5; };
 	/** Return true if this is an ID_D.
 	 *
 	 * @return \p true if this is an ID_D matched object,
 	 * \p false if it is not.
 	 */
-	bool isID_D(void) const { return m_id_d >= 0;  };
+	bool isID_D(void) const { return m_id_d >= 0 || m_id_d <= -5;  };
 	/** Return true if this is an EMPTY_mo
 	 *
 	 * @return \p true if this is an EMPTY_mo matched object,
@@ -78783,7 +79743,7 @@ class MatchedObject {
 	 * @return \p true if this matched object is in FOCUS,
 	 * \p false otherwise.
 	 */
-	bool getFocus(void) const { if (m_id_d >= 0) return m_pObjectBlock->isFocus(); else return m_id_d == -4; };
+	bool getFocus(void) const { if (isID_D()) return m_pObjectBlock->isFocus(); else return m_id_d == -4; };
 
 	/** Return the marks string (given in the query with a backping
 	 * ("`"), right after the object type in an object_block, or
@@ -78809,7 +79769,7 @@ class MatchedObject {
 	 * @return \p true if this matched object is to be retrieved,
 	 * \p false otherwise.
 	 */
-	bool getRetrieve(void) const { if (m_id_d >= 0) return m_pObjectBlock->isToBeRetrieved(); else return m_id_d <= -3; };
+	bool getRetrieve(void) const { if (isID_D()) return m_pObjectBlock->isToBeRetrieved(); else return m_id_d <= -3; };
 
 	/** Count objects recursively.
 	 *
@@ -78855,6 +79815,9 @@ class MatchedObject {
 
 	// See Sheaf::getSOM() for an explanation
 	void getSOM(SetOfMonads& som, bool bUseOnlyFocusObjects) const;
+
+	// See Sheaf::harvestMarks() for an explanation
+	void harvestMarks(String2SOMMap& result, bool bUseSingleMarks) const;
 #ifndef SWIG
 	/** Return the last monad of the matched object.
 	 *
@@ -79012,6 +79975,8 @@ class Straw {
 	
 	// See Sheaf::getSOM() for an explanation
 	void getSOM(SetOfMonads& som, bool bUseOnlyFocusObjects) const;
+	// See Sheaf::harvestMarks() for an explanation
+	void harvestMarks(String2SOMMap& result, bool bUseSingleMarks) const;
  private:
 	void copyOther(const Straw& other);
 	void deleteMos(void);
@@ -79190,6 +80155,16 @@ class Sheaf {
 	// want to include monads that are not in the sheaf.
 	void getSOM(SetOfMonads& som, bool bUseOnlyFocusObjects) const;
 
+	// The method retrives, in the String2SOMMap, the big-union of
+	// the sets of monads from the matched_objects which have
+	// "marks" on their blocks.  If bUseSingleMarks is true, every
+	// mark becomes its own key in the result, with possible
+	// duplication of monad set content.  If bUseSingleMarks is
+	// false, then the concatenation of marks is used.
+	// When there are no marks on a matched_object's block, then
+	// that matched_object is not used in the result.
+	void harvestMarks(String2SOMMap& result, bool bUseSingleMarks) const;
+
 	// Here is a version which starts with an empty set and returns the result
 	// rather than passing it as a parameter.
 	SetOfMonads getSOM(bool bUseOnlyFocusObjects) const;
@@ -79218,14 +80193,20 @@ class FlatStrawConstIterator; // forward declaration
 class FlatStraw {
  private:
 	friend class FlatStrawConstIterator;
-	Arena m_arena;
-	//	id_d_t m_object_type_id; // Not necessary
+#ifndef SWIG
+	Arena *m_pArena;
+	Inst *m_pInst;
+	ObjectBlockBase *m_pOBB;
+#endif
 	std::string m_object_type_name;
  public:
-	FlatStraw(const std::string& object_type_name) : m_object_type_name(object_type_name) {};
+        FlatStraw(const std::string& object_type_name);// : m_object_type_name(object_type_name) { m_pArena = new Arena(); };
+#ifndef SWIG
+        FlatStraw(const std::string& object_type_name, Inst *pInst, ObjectBlockBase *pOBB);// : m_object_type_name(object_type_name) { m_pArena = new Arena(); };
+#endif
 	~FlatStraw();
-	FlatStrawConstIterator const_iterator(void) const;
-	void addMO(const MatchedObject *pMO) { const MatchedObject** pMem = (const MatchedObject**) m_arena.allocate(sizeof(MatchedObject*)); *pMem = pMO; };
+	FlatStrawConstIterator const_iterator() const;
+	void addMO(const MatchedObject *pMO) { if (m_pArena != 0) { const MatchedObject** pMem = (const MatchedObject**) m_pArena->allocate(sizeof(MatchedObject*)); *pMem = pMO; } else {ASSERT_THROW(false, "Error: FlatStraw::addMO() was called, even though this was not an Arena-based FlatStraw.")};};
 	void printConsole(EMdFOutput *pOut) const throw(EmdrosException);
 	void printXML(EMdFOutput* pOut) const throw(EmdrosException);
 	void printJSON(EMdFOutput* pOut) const;
@@ -79235,31 +80216,41 @@ class FlatStraw {
 /** A const iterator on a FlatStraw.
  *@ingroup SheafGroup
  */
-class FlatStrawConstIterator : public ArenaConstIterator {
+class FlatStrawConstIterator {
+#ifndef SWIG
+	const FlatStraw *m_pMotherFlatStraw;
+	ArenaConstIterator *m_pArenaIt;
+	Inst::const_iterator m_InstIt;
+	MatchedObject *m_pPrevMO;
+	MatchedObject *m_pCurMO;
+#endif
  public:
-	/** Constructor for empty FlatStrawConstIterator which does
-	 *  not point to any Arena.
-	 */
-	FlatStrawConstIterator() : ArenaConstIterator() {};
-	/** Constructor which points to the beginning fo a FlatStraw.
-	 */
-	FlatStrawConstIterator(const FlatStraw *pMotherFlatStraw) : ArenaConstIterator(sizeof(MatchedObject*), &pMotherFlatStraw->m_arena) {};
+	FlatStrawConstIterator();
+	FlatStrawConstIterator(const FlatStraw *pMotherFlatStraw); // : ArenaConstIterator(sizeof(MatchedObject*), pMotherFlatStraw->m_pArena) {};
 	/** Copy constructor. 
 	 * 
 	 * @param other The other FlatStrawConstIterator from which to
 	 * initialize.
 	 */
-	FlatStrawConstIterator(const FlatStrawConstIterator& other) : ArenaConstIterator(other) {};
+	FlatStrawConstIterator(const FlatStrawConstIterator& other);
 	/** Test whether we have hit the end.
 	 * 
 	 * @return true iff we have not hit the end, i.e., there is at least one more left in the Arena.
 	 */
-	bool hasNext() const { return ArenaConstIterator::hasNext(); }; // Is the iterator == end iterator?  Doesn't alter iterator
+	bool hasNext() const; // { return ArenaConstIterator::hasNext(); }; // Is the iterator == end iterator?  Doesn't alter iterator
 	MatchedObject *next(); // Gets current and advances iterator afterwards
 	MatchedObject *current(); // Gets current without altering iterator
 	/** Destructor. 
 	 */
-	~FlatStrawConstIterator() {};
+	~FlatStrawConstIterator();
+	FlatStrawConstIterator& operator=(const FlatStrawConstIterator& other);
+ private:
+	void assign(const FlatStrawConstIterator& other);
+	void deleteAndShiftToNext();
+#ifndef SWIG
+	void setCurMO(const InstObject* pInstObj);
+#endif
+	
 };
 
 
@@ -79328,6 +80319,7 @@ class FlatSheaf {
 	void printXML(EMdFOutput* pOut) const throw(EmdrosException);
 	void printJSON(EMdFOutput* pOut) const;
 	static void printDTD(EMdFOutput *pOut);
+	void addFlatStraw(id_d_t object_type_id, FlatStraw *pFlatStraw);
 #ifndef SWIG
 	/** Set the m_pOBBVec.
 	 *@internal
@@ -80746,9 +81738,7 @@ MatchedObject::MatchedObject(monad_m SmMinus1)
 
 	m_last = SmMinus1;
 	m_u.first = SmMinus1;
-#if !DISABLE_MATCHED_OBJECT_VALUES
-	m_pValue_vec = 0;
-#endif
+	m_values.m_pValue_vec = 0;
 }
 
 
@@ -80777,9 +81767,7 @@ MatchedObject::MatchedObject(id_d_t id_d,
 		m_last = -1*monads.last();
 		m_u.pMonad_ms = new SetOfMonads(monads);
 	}
-#if !DISABLE_MATCHED_OBJECT_VALUES
-	m_pValue_vec = 0;
-#endif
+	m_values.m_pValue_vec = 0;
 	m_id_d = id_d;
 }
 
@@ -80809,9 +81797,7 @@ MatchedObject::MatchedObject(id_d_t id_d,
 	m_pObjectBlock = pObjectBlock;
 	m_last = last_monad;
 	m_u.first = first_monad;
-#if !DISABLE_MATCHED_OBJECT_VALUES
-	m_pValue_vec = 0;
-#endif
+	m_values.m_pValue_vec = 0;
 	m_id_d = id_d;
 }
 
@@ -80851,9 +81837,25 @@ MatchedObject::MatchedObject(const SetOfMonads& monads,
 		m_last = -1*monads.last();
 		m_u.pMonad_ms = new SetOfMonads(monads);
 	}
-#if !DISABLE_MATCHED_OBJECT_VALUES
-	m_pValue_vec = 0;
-#endif
+	m_values.m_pValue_vec = 0;
+}
+
+MatchedObject::MatchedObject(const InstObject *pInstObj, ObjectBlockBase *pObjectBlock)
+{
+	m_pObjectBlock = pObjectBlock;
+	m_sheaf = 0;
+
+	if (pInstObj->somHasOnlyOneMSE()) {
+		m_last = pInstObj->last();
+		m_u.first = pInstObj->first();
+	} else {
+		m_last = -1*pInstObj->last();
+		SetOfMonads monads;
+		pInstObj->getMonads(monads);
+		m_u.pMonad_ms = new SetOfMonads(monads);
+	}
+	m_id_d = -1*(pInstObj->getID_D()) - 5;
+	m_values.m_pInstObject = pInstObj;
 }
 
 /** Copy constructor for MatchedObject.
@@ -80883,18 +81885,20 @@ MatchedObject::MatchedObject(const MatchedObject& other)
 		m_u.pMonad_ms = new SetOfMonads(*other.m_u.pMonad_ms);
 	}
 
-#if !DISABLE_MATCHED_OBJECT_VALUES
-	if (other.m_pValue_vec == 0) {
-		m_pValue_vec = 0;
+	if (other.isInstObject()) {
+		m_values.m_pInstObject = other.m_values.m_pInstObject;
 	} else {
-		//m_pValue_vec = new value_vec_t;
-		m_pValue_vec = 0; // It will be created in addEMdFValue...
-		for (unsigned int i = 0; i < other.m_pValue_vec->size(); i++) {
-			EMdFValue *pValue = new EMdFValue(*((*other.m_pValue_vec)[i]));
-			addEMdFValue(i, pValue);
+		if (other.m_values.m_pValue_vec == 0) {
+			m_values.m_pValue_vec = 0;
+		} else {
+			//m_values.m_pValue_vec = new value_vec_t;
+			m_values.m_pValue_vec = 0; // It will be created in addEMdFValue...
+			for (unsigned int i = 0; i < other.m_values.m_pValue_vec->size(); i++) {
+				EMdFValue *pValue = new EMdFValue(*((*other.m_values.m_pValue_vec)[i]));
+				addEMdFValue(i, pValue);
+			}
 		}
 	}
-#endif
 }
 
 
@@ -80907,15 +81911,16 @@ MatchedObject::~MatchedObject()
 	if (m_last < 0) {
 		delete m_u.pMonad_ms;
 	}
-#if !DISABLE_MATCHED_OBJECT_VALUES
-	if (m_pValue_vec != 0) {
-		for (unsigned int i = 0; i < m_pValue_vec->size(); i++) {
-			delete (*m_pValue_vec)[i];
-			(*m_pValue_vec)[i] = 0;
+
+	if (!isInstObject()) {
+		if (m_values.m_pValue_vec != 0) {
+			for (unsigned int i = 0; i < m_values.m_pValue_vec->size(); i++) {
+				delete (*m_values.m_pValue_vec)[i];
+				(*m_values.m_pValue_vec)[i] = 0;
+			}
+			delete m_values.m_pValue_vec;
 		}
-		delete m_pValue_vec;
 	}
-#endif
 }
 
 /** Get the set of monads.
@@ -81062,6 +82067,38 @@ void MatchedObject::getSOM(SetOfMonads& som, bool bUseOnlyFocusObjects) const
 	}
 }
 
+void MatchedObject::harvestMarks(String2SOMMap& result, bool bUseSingleMarks) const
+{
+	std::string marks_string = getMarksString();
+	if (!marks_string.empty()) {
+		SetOfMonads som = getMonads();
+		
+		if (bUseSingleMarks) {
+			std::list<std::string> marks_list;
+
+			// cut off the first backping, so as to
+			// not have an empty string at the beginning
+			// of marks_list
+			split_string(marks_string.substr(1, std::string::npos), "`", marks_list);
+			std::list<std::string>::const_iterator marks_list_ci = marks_list.begin();
+			std::list<std::string>::const_iterator marks_list_cend = marks_list.end();
+			while (marks_list_ci != marks_list_cend) {
+				std::string mark = std::string("`") + *marks_list_ci;
+				result.addMonadSet(mark, som);
+				++marks_list_ci;
+			}
+		} else {
+			result.addMonadSet(marks_string, som);
+		}
+	}
+
+	// Recurse
+	if (m_sheaf != 0) {
+		m_sheaf->harvestMarks(result, bUseSingleMarks);
+	}
+}
+
+
 /** Get inner sheaf.
  *
  * The pointer returned is a "const Sheaf*".  You should not attempt
@@ -81114,7 +82151,6 @@ bool MatchedObject::sheafIsEmpty(void) const
  */
 std::string MatchedObject::getFeatureAsString(int index) const throw(EmdrosException)
 {
-#if !DISABLE_MATCHED_OBJECT_VALUES
 	const EMdFValue *pValue = getEMdFValue(index);
 	if (pValue == 0) {
 		throw EmdrosException("MatchedObject::getFeatureAsString: index out of range");
@@ -81187,10 +82223,6 @@ std::string MatchedObject::getFeatureAsString(int index) const throw(EmdrosExcep
 		ASSERT_THROW(false, "getFeatureAsString: Unknown EMdFValue kind.");
 		return ""; // Just to fool the compiler into giving no warning
 	}
-#else
-	ASSERT_THROW(false, "DISABLE_MATCHED_OBJECT_VALUES was set non-zero, but getFeatureAsString was called anyway.");
-	return ""; // Just to fool the compiler into giving no warning
-#endif
 }
 
 /** Get the string-value of an EMdFValue at a given index.
@@ -81212,7 +82244,6 @@ std::string MatchedObject::getFeatureAsString(int index) const throw(EmdrosExcep
  */
 long MatchedObject::getFeatureAsLong(int index) const throw(EmdrosException)
 {
-#if !DISABLE_MATCHED_OBJECT_VALUES
 	const EMdFValue *pValue = getEMdFValue(index);
 	if (pValue == 0) {
 		throw EmdrosException("MatchedObject::getFeatureAsLong: index out of range");
@@ -81248,10 +82279,6 @@ long MatchedObject::getFeatureAsLong(int index) const throw(EmdrosException)
 		ASSERT_THROW(false, "getFeatureAsLong: Unknown EMdFValue kind.");
 		return 0; // Just to fool the compiler into giving no warning
 	}
-#else
-	ASSERT_THROW(false, "DISABLE_MATCHED_OBJECT_VALUES was set non-zero, but getFeatureAsLong was called anyway.");
-	return 0; // Just to fool the compiler into giving no warning
-#endif
 }
 
 
@@ -81278,22 +82305,27 @@ long MatchedObject::getFeatureAsLong(int index) const throw(EmdrosException)
  */
 const EMdFValue *MatchedObject::getEMdFValue(int index) const throw(EmdrosException)
 {
-#if !DISABLE_MATCHED_OBJECT_VALUES
-	if (m_pValue_vec == 0) {
-		return 0;
-	} else {
-		value_vec_t::size_type size = m_pValue_vec->size();
+	if (isInstObject()) {
+		unsigned int size = m_values.m_pInstObject->getFeatureValueArrSize();
 		if (index < 0 
-		    || ((value_vec_t::size_type) index) >= size) {
+		    || ((unsigned int) index) >= size) {
 			return 0;
 		} else {
-			return (*m_pValue_vec)[index];
+			return m_values.m_pInstObject->getFeature((unsigned int) index);
+		}
+	} else {
+		if (m_values.m_pValue_vec == 0) {
+			return 0;
+		} else {
+			value_vec_t::size_type size = m_values.m_pValue_vec->size();
+			if (index < 0 
+			    || ((value_vec_t::size_type) index) >= size) {
+				return 0;
+			} else {
+				return (*m_values.m_pValue_vec)[index];
+			}
 		}
 	}
-#else
-	ASSERT_THROW(false, "DISABLE_MATCHED_OBJECT_VALUES was set non-zero, but getEMdFValue was called anyway.");
-	return 0; // Just to fool the compiler into giving no warning
-#endif
 }
 
 /** Get the EMdFValue by means of the feature name.
@@ -81322,13 +82354,8 @@ const EMdFValue *MatchedObject::getEMdFValue(int index) const throw(EmdrosExcept
  */
 const EMdFValue *MatchedObject::getEMdFValue(const std::string& feature_name) const throw(EmdrosException)
 {
-#if !DISABLE_MATCHED_OBJECT_VALUES
 	int index = getEMdFValueIndex(feature_name);
 	return getEMdFValue(index);
-#else
-	ASSERT_THROW(false, "DISABLE_MATCHED_OBJECT_VALUES was set non-zero, but getEMdFValue was called anyway.");
-	return 0; // Just to fool the compiler into giving no warning
-#endif
 }
 
 // Returns -1 on not found
@@ -81354,29 +82381,44 @@ const EMdFValue *MatchedObject::getEMdFValue(const std::string& feature_name) co
  */
 int MatchedObject::getEMdFValueIndex(const std::string& feature_name) const throw(EmdrosException)
 {
-#if !DISABLE_MATCHED_OBJECT_VALUES
-	if (m_pValue_vec == 0) {
-		return -1;
-	} else {
-		// Iterate through vector
-		int size = m_pValue_vec->size();
-		for (int i = 0; i < size; ++i) {
-			Feature *pFeature = m_pObjectBlock->getFeatureRetrievalFeature(i);
-			const std::string& v_feature_name = pFeature->getFeature();
-
-			// If this was the one, return i
-			if (strcmp_nocase(feature_name, v_feature_name) == 0) {
-				return i;
+	if (isInstObject()) {
+		unsigned int size = m_values.m_pInstObject->getFeatureValueArrSize();
+		if (size == 0) {
+			return -1;
+		} else {
+			for (unsigned int i = 0; i < size; ++i) {
+				Feature *pFeature = m_pObjectBlock->getFeatureRetrievalFeature(i);
+				const std::string& v_feature_name = pFeature->getFeature();
+				
+				// If this was the one, return i
+				if (strcmp_nocase(feature_name, v_feature_name) == 0) {
+					return i;
+				}
 			}
+			
+			// If we came here, we didn't find the index
+			return -1;
 		}
-
-		// If we came here, we didn't find the index
-		return -1;
+	} else {
+		if (m_values.m_pValue_vec == 0) {
+			return -1;
+		} else {
+			// Iterate through vector
+			int size = m_values.m_pValue_vec->size();
+			for (int i = 0; i < size; ++i) {
+				Feature *pFeature = m_pObjectBlock->getFeatureRetrievalFeature(i);
+				const std::string& v_feature_name = pFeature->getFeature();
+				
+				// If this was the one, return i
+				if (strcmp_nocase(feature_name, v_feature_name) == 0) {
+					return i;
+				}
+			}
+			
+			// If we came here, we didn't find the index
+			return -1;
+		}
 	}
-#else	
-	ASSERT_THROW(false, "DISABLE_MATCHED_OBJECT_VALUES was set non-zero, but getEMdFValueIndex was called anyway.");
-	return 0; // Just to fool the compiler into giving no warning
-#endif
 }
 
 /** Get enumeration label associated with an enum EMdFValue.
@@ -81408,41 +82450,41 @@ int MatchedObject::getEMdFValueIndex(const std::string& feature_name) const thro
  */
 std::string MatchedObject::getEnumLabel(int index) const throw(EmdrosException)
 {
-#if !DISABLE_MATCHED_OBJECT_VALUES
-	if (m_pValue_vec == 0) {
-		return "";
+	value_vec_t::size_type size = 0;
+	if (isInstObject()) {
+		size = m_values.m_pInstObject->getFeatureValueArrSize();
 	} else {
-		// Is index out of range?
-		value_vec_t::size_type size = m_pValue_vec->size();
-		if (index < 0 
-		    || ((value_vec_t::size_type) index) >= size) {
-			// Yes, index is out of range
+		if (m_values.m_pValue_vec == 0) {
 			return "";
 		} else {
-			// No, index is not out of range
-
-			// Get value
-			const EMdFValue *pValue = (*m_pValue_vec)[index];
-
-			// Get matching Feature
-			Feature *pFeature = m_pObjectBlock->getFeatureRetrievalFeature(index);
-
-			// Check that it is ENUM
-			id_d_t feature_type_id = pFeature->getFeatureTypeID();
-			if (featureTypeIdIsENUM(feature_type_id)
-			    || featureTypeIdIsListOfENUM(feature_type_id)) {
-				// It was an enum
-				return pFeature->getEnumConstNameFromValue(pValue->getEnum());
-			} else {
-				// It was not an enum
-				return "";
-			}
+			// Is index out of range?
+			size = m_values.m_pValue_vec->size();
 		}
 	}
-#else
-	ASSERT_THROW(false, "DISABLE_MATCHED_OBJECT_VALUES was set non-zero, but getEnumLabel was called anyway.");
-	return ""; // Just to fool the compiler into giving no warning
-#endif
+	if (index < 0 
+	    || ((value_vec_t::size_type) index) >= size) {
+		// Yes, index is out of range
+		return "";
+	} else {
+		// No, index is not out of range
+		
+		// Get value
+		const EMdFValue *pValue = getEMdFValue(index);
+				
+		// Get matching Feature
+		Feature *pFeature = m_pObjectBlock->getFeatureRetrievalFeature(index);
+		
+		// Check that it is ENUM
+		id_d_t feature_type_id = pFeature->getFeatureTypeID();
+		if (featureTypeIdIsENUM(feature_type_id)
+		    || featureTypeIdIsListOfENUM(feature_type_id)) {
+			// It was an enum
+			return pFeature->getEnumConstNameFromValue(pValue->getEnum());
+		} else {
+			// It was not an enum
+			return "";
+		}
+	}
 }
 
 
@@ -81459,7 +82501,7 @@ std::string MatchedObject::getEnumLabel(int index) const throw(EmdrosException)
  */
 StringList MatchedObject::getFeatureList(void) const
 {
-	if (m_id_d < 0) {
+	if (m_id_d < 0 && m_id_d >= -4) {
 		return StringList();
 	} else {
 		StringList result;
@@ -81491,17 +82533,21 @@ StringList MatchedObject::getFeatureList(void) const
  */
 unsigned int MatchedObject::getNoOfEMdFValues(void) const
 {
-	if (m_pValue_vec == 0) {
-		return 0;
+	if (isInstObject()) {
+		return m_values.m_pInstObject->getFeatureValueArrSize();
 	} else {
-		return m_pValue_vec->size();
+		if (m_values.m_pValue_vec == 0) {
+			return 0;
+		} else {
+			return m_values.m_pValue_vec->size();
+		}
 	}
 }
 
 /** Add an EMdFValue at a given index.
  *@internal
  *
- * Will initialize the m_pValue_vec vector if not present already.
+ * Will initialize the m_values.m_pValue_vec vector if not present already.
  *
  * The "addition" is really an assignment; the pointer will be
  * assigned at the given index.  The index MUST NOT be out of range.
@@ -81512,28 +82558,29 @@ unsigned int MatchedObject::getNoOfEMdFValues(void) const
  */
 void MatchedObject::addEMdFValue(unsigned int feature_index, EMdFValue *pValue) throw(EmdrosException)
 {
-#if !DISABLE_MATCHED_OBJECT_VALUES
-	// Create vector if not there already
-	if (m_pValue_vec == 0) {
-		ASSERT_THROW(m_pObjectBlock != 0, "pObjectBlock was 0");
-
-		// Get length from ObjectBlockBase's vector of Feature*
-		int length = m_pObjectBlock->getNoOfFeatureRetrievalFeatures();
-
-		// Initialize to this length
-		m_pValue_vec = new value_vec_t(length);
-
-		// Set all to nil.  This is called defensive programming.
-		for (int i = 0; i < length; ++i) {
-			(*m_pValue_vec)[i] = 0;
+	if (isInstObject()) {
+		ASSERT_THROW(false,
+			     "MatchedObject::addEMdFValue called even though m_values is a const InstObject*.  You cannot do this!");
+	} else {
+		// Create vector if not there already
+		if (m_values.m_pValue_vec == 0) {
+			ASSERT_THROW(m_pObjectBlock != 0, "pObjectBlock was 0");
+			
+			// Get length from ObjectBlockBase's vector of Feature*
+			int length = m_pObjectBlock->getNoOfFeatureRetrievalFeatures();
+			
+			// Initialize to this length
+			m_values.m_pValue_vec = new value_vec_t(length);
+			
+			// Set all to nil.  This is called defensive programming.
+			for (int i = 0; i < length; ++i) {
+				(*m_values.m_pValue_vec)[i] = 0;
+			}
 		}
-	}
   
-	// Set the correct pointer
-	(*m_pValue_vec)[feature_index] = pValue;
-#else
-	; // Don't do anything if we have disabled feature values
-#endif
+		// Set the correct pointer
+		(*m_values.m_pValue_vec)[feature_index] = pValue;
+	}
 }
 
 
@@ -81567,7 +82614,7 @@ bool MatchedObject::flatten(FlatSheaf *pFlatSheaf)
  */
 std::string MatchedObject::getObjectTypeName() const 
 { 
-	return (m_id_d < 0) ? "pow_m" : m_pObjectBlock->getObjectTypeName(); 
+	return (m_id_d < 0 && m_id_d >= -4) ? "pow_m" : m_pObjectBlock->getObjectTypeName(); 
 }
 
 /** Get the object type ID.
@@ -81578,7 +82625,7 @@ std::string MatchedObject::getObjectTypeName() const
  */
 id_d_t MatchedObject::getObjectTypeId() const 
 { 
-	return (m_id_d < 0) ? OBJECT_TYPE_POW_M : m_pObjectBlock->getObjectTypeId(); 
+	return (m_id_d < 0 && m_id_d >= -4) ? OBJECT_TYPE_POW_M : m_pObjectBlock->getObjectTypeId(); 
 }
 
 
@@ -81688,7 +82735,6 @@ void MatchedObject::printConsole(EMdFOutput *pOut, bool bIsForFullSheaf) const t
 		}
 	}
 
-#if !DISABLE_MATCHED_OBJECT_VALUES
 	if (isID_D()) {
 		std::string outstr;
 		outstr.reserve(512);
@@ -81697,7 +82743,7 @@ void MatchedObject::printConsole(EMdFOutput *pOut, bool bIsForFullSheaf) const t
 			outstr.push_back('(');
 			for (unsigned int i = 0; i < size; ) {
 				// Get value 
-				const EMdFValue *pValue = (*m_pValue_vec)[i];
+				const EMdFValue *pValue = getEMdFValue(i);
 
 				// Get matching Feature
 				Feature *pFeature = m_pObjectBlock->getFeatureRetrievalFeature(i);
@@ -81764,7 +82810,6 @@ void MatchedObject::printConsole(EMdFOutput *pOut, bool bIsForFullSheaf) const t
 
 		pOut->out(outstr);
 	}
-#endif
 
 	// If we are printing as a full sheaf, and the inner sheaf is 
 	// not the empty sheaf, we recurse into the inner sheaf.
@@ -81844,13 +82889,13 @@ void MatchedObject::printXML(EMdFOutput* pOut, bool bIsForFullSheaf) const throw
 		} else {
 			getMonads().printXML(pOut);
 		}
-#if !DISABLE_MATCHED_OBJECT_VALUES
-		if (m_pValue_vec != 0) {
+
+		if (isInstObject() || m_values.m_pValue_vec != 0) {
 			pOut->startTag("features", true);
 			int size = m_pObjectBlock->getNoOfGETFeatures();
 			for (int i = 0; i < size; ++i) {
 				// Get value
-				const EMdFValue *pValue = (*m_pValue_vec)[i];
+				const EMdFValue *pValue = getEMdFValue(i);
 
 				// Get Feature
 				Feature *pFeature = m_pObjectBlock->getFeatureRetrievalFeature(i);
@@ -81934,7 +82979,7 @@ void MatchedObject::printXML(EMdFOutput* pOut, bool bIsForFullSheaf) const throw
 			}
 			pOut->endTag("features", true);
 		}
-#endif
+
 		// If we are printing as a full sheaf, and the inner sheaf is 
 		// not the empty sheaf, we recurse into the inner sheaf.
 		// Otherwise, if either we are not printing a full sheaf (but
@@ -82021,17 +83066,17 @@ void MatchedObject::printJSON(EMdFOutput* pOut, bool bIsForFullSheaf) const
 		} else {
 			getMonads().printJSON(pOut);
 		}
-#if !DISABLE_MATCHED_OBJECT_VALUES
-		if (m_pValue_vec != 0) {
-			pOut->jsonLabel("features");
-            pOut->jsonStartArray();
 
+		if (isInstObject() || m_values.m_pValue_vec != 0) {
+			pOut->jsonLabel("features");
+			pOut->jsonStartArray();
+			
 			int size = m_pObjectBlock->getNoOfGETFeatures();
 			for (int i = 0; i < size; ++i) {
-                pOut->jsonStartStruct();
+				pOut->jsonStartStruct();
             
 				// Get value
-				const EMdFValue *pValue = (*m_pValue_vec)[i];
+				const EMdFValue *pValue = getEMdFValue(i);
 
 				// Get Feature
 				Feature *pFeature = m_pObjectBlock->getFeatureRetrievalFeature(i);
@@ -82101,25 +83146,25 @@ void MatchedObject::printJSON(EMdFOutput* pOut, bool bIsForFullSheaf) const
 					}
 				}
   
-                pOut->jsonLabel("feature_name");
-                pOut->jsonOutValue(feature_name);
-
-                pOut->jsonLabel("feature_type");
-                pOut->jsonOutValue(feature_type);
-
+				pOut->jsonLabel("feature_name");
+				pOut->jsonOutValue(feature_name);
+				
+				pOut->jsonLabel("feature_type");
+				pOut->jsonOutValue(feature_type);
+				
 				if (!enum_name.empty()) {
-                    pOut->jsonLabel("enum_name");
-                    pOut->jsonOutValue(enum_name);
+					pOut->jsonLabel("enum_name");
+					pOut->jsonOutValue(enum_name);
 				}
-	
-                pOut->jsonLabel("feature_value");
-                pOut->jsonOutValue(valstring);
-
-                pOut->jsonEndStruct();
+				
+				pOut->jsonLabel("feature_value");
+				pOut->jsonOutValue(valstring);
+				
+				pOut->jsonEndStruct();
 			}
 			pOut->jsonEndArray();
 		}
-#endif
+		
 		// If we are printing as a full sheaf, and the inner sheaf is 
 		// not the empty sheaf, we recurse into the inner sheaf.
 		// Otherwise, if either we are not printing a full sheaf (but
@@ -82132,7 +83177,7 @@ void MatchedObject::printJSON(EMdFOutput* pOut, bool bIsForFullSheaf) const
 			MQLExecEnv::m_EmptySheaf.printJSON(pOut);
 		}
 
-        pOut->jsonEndStruct();
+		pOut->jsonEndStruct();
 	}
 }
 
@@ -82465,6 +83510,14 @@ void Straw::getSOM(SetOfMonads& som, bool bUseOnlyFocusObjects) const
 	while (ci.hasNext()) {
 		(ci.current())->getSOM(som, bUseOnlyFocusObjects);
 		ci.next();
+	}
+}
+
+void Straw::harvestMarks(String2SOMMap& result, bool bUseSingleMarks) const
+{
+	StrawConstIterator ci = const_iterator();
+	while (ci.hasNext()) {
+		(ci.next())->harvestMarks(result, bUseSingleMarks);
 	}
 }
 
@@ -83283,6 +84336,14 @@ SetOfMonads Sheaf::getSOM(bool bUseOnlyFocusObjects) const
 	return result;
 }
 
+void Sheaf::harvestMarks(String2SOMMap& result, bool bUseSingleMarks) const
+{
+	SheafConstIterator ci = const_iterator();
+	while (ci.hasNext()) {
+		(ci.next())->harvestMarks(result, bUseSingleMarks);
+	}
+}
+
 
 void Sheaf::appendAndSubsume(Sheaf *pOther)
 {
@@ -83306,6 +84367,73 @@ void Sheaf::appendAndSubsume(Sheaf *pOther)
 //
 /////////////////////////////////////////////////////////////////
 
+/** Constructor for empty FlatStrawConstIterator which does
+ *  not point to any Arena or Inst.
+ */
+FlatStrawConstIterator::FlatStrawConstIterator()
+	: m_pMotherFlatStraw(0),
+	  m_pArenaIt(0),
+	  m_pPrevMO(0),
+	  m_pCurMO(0)
+{
+}
+
+/** Constructor which points to the beginning fo a FlatStraw.
+ */
+FlatStrawConstIterator::FlatStrawConstIterator(const FlatStraw *pMotherFlatStraw)
+	: m_pMotherFlatStraw(pMotherFlatStraw),
+	  m_pArenaIt(0),
+	  m_pPrevMO(0),
+	  m_pCurMO(0)
+{
+	if (pMotherFlatStraw->m_pArena != 0) {
+		m_pArenaIt = new ArenaConstIterator(sizeof(MatchedObject*), pMotherFlatStraw->m_pArena);
+	} else if (pMotherFlatStraw->m_pInst != 0) {
+		SetOfMonads Universe = SetOfMonads(1, MAX_MONAD);
+		pMotherFlatStraw->m_pInst->set_current_universe(Universe);
+		m_InstIt = pMotherFlatStraw->m_pInst->begin();
+	} 
+}
+
+/** Copy constructor. 
+ * 
+ * @param other The other FlatStrawConstIterator from which to
+ * initialize.
+ */
+FlatStrawConstIterator::FlatStrawConstIterator(const FlatStrawConstIterator& other)
+{
+	assign(other);
+}
+
+/** Destructor. 
+ */
+FlatStrawConstIterator::~FlatStrawConstIterator()
+{
+	if (m_pArenaIt != 0) {
+		delete m_pArenaIt;
+	} else {
+		delete m_pPrevMO;
+		delete m_pCurMO;
+	}
+}
+
+/** Test whether we have hit the end.
+ * 
+ * @return true iff we have not hit the end, i.e., there is at least one more left in the Arena or Inst
+ */
+bool FlatStrawConstIterator::hasNext() const
+{
+	if (m_pMotherFlatStraw == 0) {
+		return false;
+	} else {
+		if (m_pArenaIt != 0) {
+			return m_pArenaIt->hasNext();
+		} else {
+			return m_InstIt.hasNext();
+		}
+	}
+}
+
 /** Get current MatchedObject and advance iterator.
  *
  * @see FlatStrawConstIterator::current()
@@ -83314,8 +84442,13 @@ void Sheaf::appendAndSubsume(Sheaf *pOther)
  */
 MatchedObject *FlatStrawConstIterator::next()
 {
-	void *pMem = ArenaConstIterator::next();
-	return *((MatchedObject**)pMem);
+	if (m_pArenaIt != 0) {
+		void *pMem = m_pArenaIt->next();
+		return *((MatchedObject**)pMem);
+	} else {
+		deleteAndShiftToNext();
+		return m_pCurMO;
+	}
 }
 
 /** Get current MatchedObject but DO NOT advance the iterator.
@@ -83324,11 +84457,65 @@ MatchedObject *FlatStrawConstIterator::next()
  *
  * @return A pointer to the current MatchedObject.
  */
-MatchedObject *FlatStrawConstIterator::current()
+MatchedObject *FlatStrawConstIterator::current() // Gets current without altering iterator
 {
-	void *pMem = ArenaConstIterator::current();
-	return *((MatchedObject**)pMem);
+	if (m_pArenaIt != 0) {
+		void *pMem = m_pArenaIt->current();
+		return *((MatchedObject**)pMem);
+	} else {
+		setCurMO(m_InstIt.current());
+		return m_pCurMO;
+	}
 }
+	
+FlatStrawConstIterator& FlatStrawConstIterator::operator=(const FlatStrawConstIterator& other)
+{
+	assign(other);
+	return *this;
+}
+
+void FlatStrawConstIterator::assign(const FlatStrawConstIterator& other)
+{
+	m_pMotherFlatStraw = other.m_pMotherFlatStraw;
+	
+	if (other.m_pArenaIt) {
+		m_pArenaIt = new ArenaConstIterator(*other.m_pArenaIt);
+		m_pPrevMO = 0;
+		m_pCurMO = 0;
+	} else {
+		m_pArenaIt = 0;
+		m_InstIt = Inst::const_iterator(other.m_InstIt);
+		if (other.m_pPrevMO == 0) {
+			m_pPrevMO = 0;
+		} else {
+			m_pPrevMO = new MatchedObject(*other.m_pPrevMO);
+		}
+		if (other.m_pCurMO == 0) {
+			m_pCurMO = 0;
+		} else {
+			m_pCurMO = new MatchedObject(*other.m_pCurMO);
+		}
+	}
+}
+
+void FlatStrawConstIterator::setCurMO(const InstObject* pInstObj)
+{
+	m_pCurMO = new MatchedObject(pInstObj, m_pMotherFlatStraw->m_pOBB);
+}
+
+
+void FlatStrawConstIterator::deleteAndShiftToNext()
+{
+	delete m_pPrevMO;
+	m_pPrevMO = m_pCurMO;
+	
+	const InstObject *pInstObj = m_InstIt.next();
+	m_pCurMO = 0;
+	setCurMO(pInstObj);
+}
+       
+
+
 
 
 /////////////////////////////////////////////////////////////////
@@ -83337,16 +84524,63 @@ MatchedObject *FlatStrawConstIterator::current()
 //
 /////////////////////////////////////////////////////////////////
 
+/**
+ * Constructor for Arena-based FlatStraw
+ *
+ * @param object_type_name The object type name of the object type
+ * behind the FlatStraw (may be "pow_m").
+ */
+FlatStraw::FlatStraw(const std::string& object_type_name)
+	: m_pArena(0),
+	  m_pInst(0),
+	  m_pOBB(0),
+	  m_object_type_name(object_type_name)
+{
+	m_pArena = new Arena();
+}
+
+/**
+ * Constructor for Inst-based FlatStraw
+ *
+ * @param object_type_name The object type name of the object type
+ * behind the FlatStraw (may NOT be "pow_m").
+ */
+FlatStraw::FlatStraw(const std::string& object_type_name, Inst *pInst, ObjectBlockBase *pOBB)
+	: m_pArena(0),
+	  m_pInst(pInst),
+	  m_pOBB(pOBB),
+	  m_object_type_name(object_type_name)
+{
+}
+
+
 /** Destructor.
  */
 FlatStraw::~FlatStraw()
 {
-	FlatStrawConstIterator ci = const_iterator();
-	while (ci.hasNext()) {
-		MatchedObject *pMO = ci.next();
-		delete pMO;
+	if (m_pArena != 0) {
+		FlatStrawConstIterator ci = const_iterator();
+		while (ci.hasNext()) {
+			MatchedObject *pMO = ci.next();
+			delete pMO;
+		}
+		delete m_pArena;
+	} else {
+		delete m_pInst;
 	}
 }
+
+
+/** Get a FlatStrawConstIterator on this FlatStraw.
+ *
+ * @return A FlatStrawConstIterator pointing to the first MatchedObject
+ * in ourselves (if any).
+ */
+FlatStrawConstIterator FlatStraw::const_iterator(void) const 
+{
+	return FlatStrawConstIterator(this); 
+}
+
 
 /** Print on the console, console-style.
  *
@@ -83583,16 +84817,6 @@ FlatSheaf::~FlatSheaf()
 	}
 }
 
-/** Get a FlatStrawConstIterator on this FlatStraw.
- *
- * @return A FlatStrawConstIterator pointing to the first MatchedObject
- * in ourselves (if any).
- */
-FlatStrawConstIterator FlatStraw::const_iterator(void) const 
-{
-	return FlatStrawConstIterator(this); 
-}
-
 
 /** Add a MatchedObject to the FlatSheaf.
  *@internal
@@ -83640,6 +84864,20 @@ bool FlatSheaf::addMO(const MatchedObject *pMO)
 	} else {
 		return false;
 	}
+}
+
+void FlatSheaf::addFlatStraw(id_d_t object_type_id, FlatStraw *pFlatStraw)
+{
+	std::map<id_d_t, FlatStraw*>::iterator it = m_map.find(object_type_id);
+
+	// Add the flat straw if it is not there already,
+	// and/or get the flat straw pointer
+	if (it != m_map.end()) {
+		FlatStraw *pCurrentFlatStraw = it->second;
+		delete pCurrentFlatStraw;
+		m_map.erase(it);
+	}
+	m_map.insert(std::make_pair(object_type_id, pFlatStraw));
 }
 
 /** Add an empty flat straw associated with the given object type.
@@ -84606,13 +85844,13 @@ QueryNode* MQLExecEnv::getNodeFromNodeNumber(node_number_t node_number)
  *
  * Ulrik Petersen
  * Created: 2/27-2001
- * Last update: 7/12-2013
+ * Last update: 7/22-2016
  *
  */
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2001-2013  Ulrik Sandborg-Petersen
+ *   Copyright (C) 2001-2016  Ulrik Sandborg-Petersen
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License as
@@ -86127,14 +87365,20 @@ class DeleteObjectsByQueryStatement : public DeleteObjectsStatement, public Quer
 
 
 #line 112 "MQL/mql_helper_classes.cpp"
-/**************** already included monads.h -- not including again *****************/
+/**************** already included mql_query.h -- not including again *****************/
 
 
 #line 113 "MQL/mql_helper_classes.cpp"
-/**************** already included debug.h -- not including again *****************/
+/**************** already included monads.h -- not including again *****************/
 
 
 #line 114 "MQL/mql_helper_classes.cpp"
+/**************** already included debug.h -- not including again *****************/
+
+
+#line 115 "MQL/mql_helper_classes.cpp"
+
+#include <climits> // For LONG_MAX and LONG_MIN
 
 
 
@@ -88771,6 +90015,12 @@ Feature::~Feature()
   }
 */
 
+void Feature::symbolAddFeaturesToSet(std::set<std::string>& myset) const
+{
+	std::string lowercase_feature_name;
+	str_tolower(*m_feature, lowercase_feature_name);
+	myset.insert(lowercase_feature_name);
+}
 
 bool Feature::symbolFeaturesExist(MQLExecEnv *pEE, id_d_t object_type_id, bool& bResult)
 {
@@ -88931,6 +90181,22 @@ void Feature::addEMdFValue(MatchedObject *pMO, MQLObject *pObj, bool bIterate)
 	}
 }
 
+int Feature::getFeatureInstListIndex(const std::string& feature_name) const
+{
+	// Deal with ourselves first
+	if (strcmp_nocase(feature_name, *m_feature) == 0) {
+		return m_list_index;
+	}
+  
+	// Then deal with next
+	if (m_next != 0) { 
+		return m_next->getFeatureInstListIndex(feature_name);
+	}
+
+	// Return this as a fallback, if not found
+	return -1;
+}
+
 void Feature::assignListIndex(int current_index)
 {
 	// Deal with ourselves first
@@ -89061,6 +90327,239 @@ bool ByMonads::getObjectsByMonads(MQLExecEnv *pEE,
 
 
 
+//////////////////////////////////////////////////////////////
+//
+// AggregateFeature
+//
+//////////////////////////////////////////////////////////////
+AggregateFeature::AggregateFeature(eAggregateFunction func)
+	: m_function(func),
+	  m_result(0),
+	  m_feature(0),
+	  m_feature_comparison(0),
+	  m_object_type_name(""),
+	  m_object_type_id(0),
+	  m_next(0)
+{
+	ASSERT_THROW(func == kAFCOUNT_ALL,
+		     "AggregateFeature(eAggregateFunction) called with illegal func = " + long2string((long) func));
+}
+
+
+
+AggregateFeature::AggregateFeature(eAggregateFunction func, std::string *feature_name)
+	: m_function(func),
+	  m_result(0),
+	  m_feature(0),
+	  m_feature_comparison(0),
+	  m_object_type_name(""),
+	  m_object_type_id(0),
+	  m_next(0)
+{
+	ASSERT_THROW(feature_name != 0,
+		     "AggregateFeature(eAggregateFunction, std::string *) called with illegal std::string * == 0");
+
+	m_feature = new Feature(feature_name, 0);
+	
+	if (func == kAFMIN) {
+		m_result = LONG_MAX;
+	} else if (func == kAFMAX) {
+		m_result = LONG_MIN;
+	} else if (func == kAFSUM) {
+		m_result = 0;
+	} else {
+		ASSERT_THROW(false,
+			     "AggregateFeature(eAggregateFunction, std::string *) called with illegal func = " + long2string((long) func));
+	}
+
+}
+
+
+
+AggregateFeature::AggregateFeature(eAggregateFunction func, FeatureComparison *feature_comparison)
+	: m_function(func),
+	  m_result(0),
+	  m_feature(0),
+	  m_feature_comparison(feature_comparison),
+	  m_object_type_name(""),
+	  m_object_type_id(0),
+	  m_next(0)
+	
+{
+	ASSERT_THROW(func == kAFCOUNT_FEATURE_COMPARISON,
+		     "AggregateFeature(eAggregateFunction, FeatureComparison *) called with illegal func = " + long2string((long) func));
+	ASSERT_THROW(m_feature_comparison != 0,
+		     "AggregateFeature(eAggregateFunction, FeatureComparison *) called with illegal FeatureComparison * == 0");
+}
+
+
+
+AggregateFeature::~AggregateFeature()
+{
+	delete m_feature;
+	delete m_feature_comparison;
+	delete m_next;
+}
+
+std::string AggregateFeature::getFeatureName() const
+{
+	if (m_feature != 0) {
+		return m_feature->getFeature();
+	} else if (m_feature_comparison != 0) {
+		return m_feature_comparison->getFeatureName();
+	} else {
+		// This is not a logic error.
+		// If we have a COUNT(*), then no feature name is
+		// present.
+		return "";
+	}
+}
+
+
+void AggregateFeature::weed(MQLExecEnv *pEE, bool& bResult)
+{
+	bResult = true;
+	if (m_feature_comparison != 0) {
+		m_feature_comparison->weedFeatureConstraints(pEE, bResult, 0);
+	}
+
+	if (!bResult) {
+		return;
+	}
+
+	// Then deal with next
+	if (m_next != 0) {
+		m_next->weed(pEE, bResult);
+
+		if (!bResult) {
+			return;
+		}
+	}
+}
+
+
+
+bool AggregateFeature::symbol(MQLExecEnv *pEE, const std::string& object_type_name, id_d_t object_type_id, bool& bResult)
+{
+	bool bDBResult = true;
+	bResult = true;
+
+	m_object_type_name = object_type_name;
+	m_object_type_id = object_type_id;
+
+	if (m_feature != 0) {
+		bDBResult = m_feature->symbolFeaturesExist(pEE, object_type_id, bResult);
+	}
+	if (!bResult || !bDBResult) {
+		return bDBResult;
+	}
+
+	if (m_feature_comparison != 0) {
+		bDBResult = m_feature_comparison->symbol(pEE, object_type_name, object_type_id, bResult);
+	}
+
+	if (!bResult || !bDBResult) {
+		return bDBResult;
+	}
+
+	// Then deal with next
+	if (m_next != 0) {
+		if (!m_next->symbol(pEE, object_type_name, object_type_id, bResult))
+			return false;
+		if (!bResult)
+			return true;
+	}
+
+	return bDBResult;
+}
+
+
+
+bool AggregateFeature::type(MQLExecEnv *pEE, bool& bResult)
+{
+	bResult = true;
+	bool bDBResult = true;
+
+	if (m_feature != 0) {
+		bDBResult = m_feature->typeFeatureName(pEE, bResult);
+		if (!bResult || !bDBResult) {
+			return bDBResult;
+		}
+	
+		if (!featureTypeIdIsINTEGER(m_feature->getFeatureTypeID())) {
+			bResult = false;
+			pEE->pError->appendError("Error in aggregate function: feature with name " + m_feature->getFeature() + "\ndoes not have feature type INTEGER.\nThis is required by the aggregate function used.");
+		}
+		if (!bResult || !bDBResult) {
+			return bDBResult;
+		}
+	}		
+	
+	if (m_feature_comparison != 0) {
+		bDBResult = m_feature_comparison->type(pEE, bResult);
+	}
+
+	if (!bResult || !bDBResult) {
+		return bDBResult;
+	}
+
+	// Then deal with next
+	if (m_next != 0) {
+		if (!m_next->type(pEE, bResult))
+			return false;
+		if (!bResult)
+			return true;
+	}
+
+	return bDBResult;
+}
+
+
+
+void AggregateFeature::exec(MQLExecEnv *pEE, const InstObject *pInstObj)
+{
+	long feature_value = 0;
+	const EMdFValue *pEMdFValue = 0;
+	switch (m_function) {
+	case kAFMIN:
+		pEMdFValue = pInstObj->getFeature(m_inst_obj_feature_index);
+		
+		feature_value = pEMdFValue->getInt();
+		if (feature_value < m_result) {
+			m_result = feature_value;
+		}
+		break;
+	case kAFMAX:
+		pEMdFValue = pInstObj->getFeature(m_inst_obj_feature_index);
+		
+		feature_value = pEMdFValue->getInt();
+		if (feature_value > m_result) {
+			m_result = feature_value;
+		}
+		break;
+	case kAFSUM:
+		pEMdFValue = pInstObj->getFeature(m_inst_obj_feature_index);
+		
+		feature_value = pEMdFValue->getInt();
+		m_result += feature_value;
+		break;
+	case kAFCOUNT_ALL:
+		++m_result;
+		break;
+	case kAFCOUNT_FEATURE_COMPARISON:
+		pEMdFValue = pInstObj->getFeature(m_inst_obj_feature_index);
+		
+		if (m_feature_comparison->compare(pEE, pEMdFValue, 0)) {
+			++m_result;
+		}
+		break;
+	}
+
+	// Then deal with next
+	if (m_next != 0) {
+		m_next->exec(pEE, pInstObj);
+	}
+}
 
 
 
@@ -89954,13 +91453,13 @@ bool CreateSegmentStatement::exec()
  *
  * Ulrik Petersen
  * Created: 3/6-2001 (March 6, 2001)
- * Last update: 4/10-2014
+ * Last update: 7/22-2016
  *
  */
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2001-2014  Ulrik Sandborg-Petersen
+ *   Copyright (C) 2001-2016  Ulrik Sandborg-Petersen
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License as
@@ -90055,13 +91554,13 @@ bool CreateSegmentStatement::exec()
  *
  * Ulrik Petersen
  * Created: 11/22-2002
- * Last update: 12/1-2014
+ * Last update: 7/21-2016
  *
  */
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2002-2014  Ulrik Sandborg-Petersen
+ *   Copyright (C) 2002-2016  Ulrik Sandborg-Petersen
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License as
@@ -90244,6 +91743,31 @@ public:
   virtual bool type(bool& bResult);
   virtual bool monads(bool& bResult);
   virtual bool exec();
+};
+
+// GET AGGREGATE FEATURES
+class GetAggregateFeaturesStatement : public ObjectTypeStatement {
+private:
+	AggregateFeature *m_aggregate_feature_list;
+	MQLMonadSetElement* m_AST_monads;
+	std::string *m_monads_feature;
+	FFeatures *m_feature_constraints;
+	Feature *m_pFeaturesToGet;
+	ObjectBlock *m_pObjectBlock;
+	SetOfMonads m_monads;
+ public:
+	GetAggregateFeaturesStatement(MQLExecEnv *pEE,
+				      AggregateFeature *aggregate_feature_list,
+				      MQLMonadSetElement* in_clause,
+				      std::string *monads_feature,
+				      std::string *object_type_name,
+				      FFeatures *feature_constraints);
+	virtual ~GetAggregateFeaturesStatement();
+	virtual void weed(bool& bResult);
+	virtual bool symbol(bool& bResult);
+	virtual bool type(bool& bResult);
+	virtual bool monads(bool& bResult);
+	virtual bool exec();
 };
 
 // SELECT OBJECT TYPES
@@ -91106,6 +92630,7 @@ bool GetObjectsHavingMonadsInStatement::symbol(bool& bResult)
 							 false // Is (not, in this case) NOT EXIST
 							 );
 	}
+
 	m_pEE->pOBBVec = new OBBVec;
 	m_pEE->pOBBVec->push_back(m_pObjectBlockBase);
   
@@ -91202,7 +92727,7 @@ bool GetObjectsHavingMonadsInStatement::exec()
 		m_pFeaturesToGet->execMakeFeatureNameVector(FeatureNames);
 		m_pFeaturesToGet->execMakeFeatureList(FeatureInfos);
 	}
-	unsigned int no_of_features_to_get = FeatureNames.size();
+	//unsigned int no_of_features_to_get = FeatureNames.size(); // Unused variable
 	pInst = new Inst(FeatureNames);
 
 	// Get all_m-1
@@ -91241,48 +92766,8 @@ bool GetObjectsHavingMonadsInStatement::exec()
 		return false;
 	}
 
-/*
-	Straw *pStraw = new Straw();
-	SetOfMonads Universe = SetOfMonads(1, MAX_MONAD);
-	pInst->set_current_universe(Universe);
-	Inst::const_iterator ci = pInst->begin();
-	while (ci.hasNext()) {
-		const InstObject* pInstObject = ci.next();
 
-		id_d_t id_d = pInstObject->getID_D();
-
-		SetOfMonads som;
-		pInstObject->getMonads(som);
-
-		MatchedObject *pMo = new MatchedObject(id_d,
-						       som,
-						       0, // inner sheaf
-						       m_pObjectBlockBase);
-
-		if (m_pFeaturesToGet != 0) {
-			unsigned int feature_index = 0;
-			for (feature_index = 0;
-			     feature_index < no_of_features_to_get;
-			     feature_index++) {
-				const EMdFValue *pInstObjectValue = pInstObject->getFeature(feature_index);
-				EMdFValue *pNewValue = new EMdFValue(*pInstObjectValue);
-				pMo->addEMdFValue(feature_index, pNewValue);
-			}
-		}
-
-		pStraw->append(pMo);
-	}
-
-	delete pInst;
-
-	ListOfStraws *pLOS = new ListOfStraws();
-	pLOS->append(pStraw);
-	Sheaf *pSheaf = new Sheaf(pLOS);
-
-	m_result = new MQLResult(pSheaf, m_pEE);
-	m_result->flatten(object_type_list);
-*/
-	
+	/*
 	FlatSheaf *pFlatSheaf = new FlatSheaf(object_type_list);
 	SetOfMonads Universe = SetOfMonads(1, MAX_MONAD);
 	pInst->set_current_universe(Universe);
@@ -91325,8 +92810,490 @@ bool GetObjectsHavingMonadsInStatement::exec()
 
 	delete pInst;
 
+	*/
+
+	FlatSheaf *pFlatSheaf = new FlatSheaf(object_type_list);
+	FlatStraw *pFlatStraw = new FlatStraw(*m_object_type_name, pInst, m_pObjectBlockBase);
+	pFlatSheaf->setOBBVec(m_pEE->pOBBVec);
+	pFlatSheaf->addFlatStraw(m_object_type_id, pFlatStraw);
+
+	
 	m_result = new MQLResult(pFlatSheaf, m_pEE);
 
+	// If we came this far, there were no DB errors
+	return true;
+}
+
+  
+
+/////////////////////////////////////////////////////////////////
+//
+// SELECT AGGREGATE FEATURES 
+//
+// GetAggregateFeaturesStatement
+//
+/////////////////////////////////////////////////////////////////
+GetAggregateFeaturesStatement::GetAggregateFeaturesStatement(MQLExecEnv *pEE,
+							     AggregateFeature *aggregate_feature_list,
+							     MQLMonadSetElement* in_clause,
+							     std::string *monads_feature,
+							     std::string *object_type_name,
+							     FFeatures *feature_constraints) 
+	: ObjectTypeStatement(pEE, object_type_name),
+	  m_aggregate_feature_list(aggregate_feature_list),
+	  m_AST_monads(in_clause),
+	  m_monads_feature(monads_feature),
+	  m_feature_constraints(feature_constraints),
+	  m_pFeaturesToGet(0),
+	  m_pObjectBlock(0)
+{
+}
+
+GetAggregateFeaturesStatement::~GetAggregateFeaturesStatement()
+{
+	delete m_aggregate_feature_list;
+	delete m_AST_monads;
+	delete m_monads_feature;
+	delete m_feature_constraints;
+	delete m_pFeaturesToGet;	
+	delete m_pObjectBlock;
+}
+
+// 
+// - Check that all the ranges of monads are positive and monotonic
+//
+void GetAggregateFeaturesStatement::weed(bool& bResult)
+{
+	// Monad-ranges should be positive and monotonic
+	m_AST_monads->weed(m_pEE, true, bResult);
+	if (!bResult)
+		return;
+
+	if (m_feature_constraints != 0) {
+		node_number_t ffeatures_parent = 0;
+		m_feature_constraints->weedFeatureConstraints(m_pEE, bResult, ffeatures_parent);
+	}
+
+	if (!bResult) {
+		return;
+	}
+
+	if (m_aggregate_feature_list != 0) {
+		m_aggregate_feature_list->weed(m_pEE, bResult);
+	}
+	return;
+}
+
+
+//
+// - Check that the features exist for the given object type.
+//
+bool GetAggregateFeaturesStatement::symbol(bool& bResult)
+{
+	if (!ObjectTypeStatement::symbolObjectTypeExists(bResult)) {
+		return false;
+	}
+	if (!bResult) {
+		return true;
+	}
+
+	AggregateFeature *pAF = m_aggregate_feature_list;
+	
+	if (pAF != 0) {
+		bool bDBResult = pAF->symbol(m_pEE, *m_object_type_name, m_object_type_id, bResult);
+		if (!bDBResult || !bResult) {
+			return bDBResult;
+		}
+	}
+
+	std::set<std::string> feature_name_set;
+	pAF = m_aggregate_feature_list;
+	while (pAF != 0) {
+		if (pAF->hasFeature()) {
+			std::string normalized_feature_name;
+			str_tolower(pAF->getFeatureName(), normalized_feature_name);
+			feature_name_set.insert(normalized_feature_name);
+		
+		}
+
+		if (pAF->hasFeatureComparison()) {
+			pAF->getFeatureComparison()->symbolAddFeaturesToSet(feature_name_set);
+		}
+
+		pAF = pAF->getNext();
+	}
+	if (m_feature_constraints != 0) {
+		// First call symbol()
+		if (!m_feature_constraints->symbol(m_pEE,
+						   *m_object_type_name,
+						   m_object_type_id,
+						   bResult)) {
+			return false;
+		}
+
+		if (!bResult) {
+			return true;
+		}
+		
+		m_feature_constraints->symbolAddFeaturesToSet(feature_name_set);
+	}	
+
+	// Create m_pFeaturesToGet
+	std::set<std::string>::const_iterator fns_ci = feature_name_set.begin();
+	std::set<std::string>::const_iterator fns_cend = feature_name_set.end();
+	Feature *pNextFeature = 0;
+	while (fns_ci != fns_cend) {
+		std::string *feature_name = new std::string(*fns_ci);
+		m_pFeaturesToGet = new Feature(feature_name, pNextFeature);
+		pNextFeature = m_pFeaturesToGet;
+		++fns_ci;
+	}
+
+	if (m_pFeaturesToGet != 0) {
+		m_pFeaturesToGet->assignListIndex(0);
+
+		if (!m_pFeaturesToGet->symbolFeaturesExist(m_pEE, 
+							   m_object_type_id, 
+							   bResult))
+			return false;
+		if (!bResult)
+			return true;
+	}
+
+	// Set feature index into pInstObj on all pAF's
+	std::vector<std::string> FeatureNames;
+	if (m_pFeaturesToGet != 0) {
+		m_pFeaturesToGet->execMakeFeatureNameVector(FeatureNames);
+	}
+	
+	pAF = m_aggregate_feature_list;
+	while (pAF != 0) {
+		if (pAF->hasFeatureComparison()) {
+			if (!pAF->getFeatureComparison()->symbolSetFeatureIndex(FeatureNames, bResult)) {
+				m_pEE->pError->appendError("Symbol checking failed on one of the Aggregate Features.\n");
+				return false;
+			}
+			if (!bResult) {
+				m_pEE->pError->appendError("Symbol checking failed on one of the Aggregate Features.\n");
+				return true;
+			}
+		}
+
+		pAF = pAF->getNext();
+	}
+
+	/*
+	 * This has to be re-done in the exec() stage, since
+	 * ObjectBlock's take-over means that
+	 * FeatureComparison::m_feature_index is obliterated.
+	 *
+	 * It is done here, as well as in the exec stage, because
+	 * we need to actually symbol-check.
+	 *
+	 */
+	if (m_feature_constraints != 0) {
+		if (!m_feature_constraints->symbolSetFeatureIndex(FeatureNames, bResult)) {
+			return false;
+		}
+		if (!bResult) {
+			m_pEE->pError->appendError("Symbol checking failed on the Object Block's feature constraints.\n");
+			return true;
+		}
+	}
+
+
+	// Create m_pObjectBlock
+	if (m_pFeaturesToGet != 0) {
+		m_pObjectBlock = new ObjectBlock(new std::string(*m_object_type_name),
+						 new std::string(""), // mark_declaration
+						 new std::string(""), // object_reference
+						 kRetrieve,
+						 kNoFirstLast,
+						 new MonadSetRelationClause(kMSROPartOf, new std::string(*m_monads_feature), kMSNSubstrate),
+						 m_feature_constraints,
+						 new Feature(*m_pFeaturesToGet),
+						 (Blocks*) 0, // opt_blocks
+						 false // Is (not, in this case) NOT EXIST
+						 );
+	} else {
+		m_pObjectBlock = new ObjectBlock(new std::string(*m_object_type_name),
+						 new std::string(""), // mark_declaration
+						 new std::string(""), // object_reference
+						 kRetrieve,
+						 kNoFirstLast,
+						 new MonadSetRelationClause(kMSROPartOf, new std::string(*m_monads_feature), kMSNSubstrate),
+						 m_feature_constraints,
+						 (GrammarFeature*)0, // No other features to retrieve
+						 (Blocks*) 0, // opt_blocks
+						 false // Is (not, in this case) NOT EXIST
+						 );
+	}
+	m_feature_constraints = 0; // m_pObjectBlock has now officially taken over m_feature_constraints.
+	
+	/*
+	 * DON'T do this.
+	 * It is completely unnecessary, and we delete m_pObjectBlockBase
+	 * ourselves (following C++ best practices).
+	 * We don't want it deleted in MQLExecEnv d'tor.
+	 *
+	 */
+	/*
+	m_pEE->pOBBVec = new OBBVec;
+	m_pEE->pOBBVec->push_back(m_pObjectBlock);
+	*/
+
+	bool bDoCalculatePreQueryString = true;
+	if (!m_pObjectBlock->symbol(m_pEE, bDoCalculatePreQueryString, bResult)) {
+		return false;
+	}
+	
+	if (!bResult) {
+		return true;
+	}
+
+	if (strcmp_nocase(*m_monads_feature, "monads") != 0) {
+		bool bMonadFeatureExists;
+		id_d_t monad_feature_type_id;
+		std::string default_value;   // Dummy variable
+		bool is_computed;            // Dummy variable
+		if (!m_pEE->pDB->featureExists(*m_monads_feature,
+					       m_object_type_id,
+					       bMonadFeatureExists,
+					       monad_feature_type_id,
+					       default_value,
+					       is_computed))
+			return false;
+		if (!bMonadFeatureExists) {
+			m_pEE->pError->appendError("Monad feature " + *m_monads_feature + " does not exist on object type " + *m_object_type_name);
+			return false;
+		}
+
+		// Strictly speaking, this should be done in the type
+		// stage, but we'll cut a corner here since we know
+		// the information right now.
+		if (!featureTypeIdIsSOM(monad_feature_type_id)) {
+			m_pEE->pError->appendError("Feature " + *m_monads_feature + " on object type " + *m_object_type_name + " is not of type set of monads.");
+			return false;
+		}
+	}
+
+	// If we got this far, there were no DB errors and no compiler errors
+	bResult = true;
+	return true;
+}
+
+bool GetAggregateFeaturesStatement::type(bool& bResult)
+{
+	if (!ObjectTypeStatement::type(bResult)) {
+		return false;
+	}
+	if (!bResult) {
+		return true;
+	}
+
+	//
+	// - Get feature name and type
+	//
+	if (m_pFeaturesToGet != 0) {
+		if (!m_pFeaturesToGet->typeFeatureName(m_pEE, bResult))
+			return false;
+		if (!bResult)
+			return true;
+	}
+
+	if (m_pObjectBlock != 0) {
+		eObjectRangeType contextRangeType = kORTMultipleRange;
+		if (!m_pObjectBlock->type(m_pEE, contextRangeType, bResult)) {
+			return false;
+		}
+		if (!bResult) {
+			return true;
+		}
+	}
+
+	// If we got this far, there were no DB errors and no compiler errors
+	bResult = true;
+	return true;
+}
+
+
+//
+// - Build the set of monads
+//
+bool GetAggregateFeaturesStatement::monads(bool& bResult)
+{
+	//
+	// - Build the set of monads
+	//
+	m_AST_monads->monadsBuildSet(m_monads);
+  
+	// There were no DB errors and no compiler errors
+	bResult = true;
+	return true;
+} 
+
+
+bool GetAggregateFeaturesStatement::exec()
+{
+	std::list<std::pair<id_d_t, std::string> > object_type_list;
+	object_type_list.push_back(std::pair<id_d_t, std::string>(m_object_type_id, *m_object_type_name));
+
+	Inst *pInst = 0;
+	std::vector<std::string> FeatureNames;
+	std::list<FeatureInfo> FeatureInfos;
+	if (m_pFeaturesToGet != 0) {
+		m_pFeaturesToGet->execMakeFeatureNameVector(FeatureNames);
+		m_pFeaturesToGet->execMakeFeatureList(FeatureInfos);
+	}
+	// unsigned int no_of_features_to_get = FeatureNames.size(); // Unused variable
+
+	// Get pre-query string
+	std::string pre_query_string(m_pObjectBlock->getPreQueryString());
+	EMdFFFeatures *pre_query_constraints = m_pObjectBlock->getEMdFConstraints(m_pEE->pDB);
+
+
+	// Get all_m-1
+	bool bAllM1IsEmptyDatabase = false;
+	try {
+		if (!m_pEE->pDB->getAll_m_1(m_pEE->m_all_m_1)) {
+			return false;
+		}
+	} catch (BadMonadsException e) {
+		bAllM1IsEmptyDatabase = true;
+	}
+  
+	// Return an empty table
+	if (bAllM1IsEmptyDatabase) {
+		delete pInst;
+		m_result = new MQLResult();
+		return true;
+	}
+
+	// Make inst
+	pInst = new Inst(FeatureNames);
+	if (!m_pEE->pDB->getInst(*m_object_type_name,
+				 m_object_type_id,
+				 m_monads, 
+				 m_pEE->m_all_m_1,
+				 pre_query_string,
+				 pre_query_constraints,
+				 FeatureInfos,
+				 *m_monads_feature,
+				 kMSROPartOf,
+				 *pInst)) {
+		// DB failure.
+		// Return an empty Table
+		delete pInst;
+		m_result = new MQLResult();
+		return false;
+	}
+              	
+	
+	m_result = new MQLResult();
+
+	// Find out indexes to retrieve, and their AggregateFeature objects
+	std::vector<AggregateFeature*> aggregate_features_vec;
+	AggregateFeature *pAF = m_aggregate_feature_list;
+	while (pAF != 0) {
+		std::string AF_feature_name = pAF->getFeatureName();
+
+		if (!AF_feature_name.empty()) {
+			int feature_index = m_pFeaturesToGet->getFeatureInstListIndex(AF_feature_name);
+
+			// Did we find it or not?
+			if (feature_index < 0) {
+				// Did not find it.  This is really a logic
+				// error, but since this is at the advanced
+				// 'exec' stage, we don't throw an exception
+				// -- we return failure.
+
+				// Return empty table
+				delete pInst;
+				return false;
+			}
+		
+			pAF->setInstObjectFeatureIndex(feature_index);
+		} else {
+			pAF->setInstObjectFeatureIndex(-1);
+		}
+		aggregate_features_vec.push_back(pAF);
+		
+		pAF = pAF->getNext();
+	}
+
+	FFeatures *feature_constraints = m_pObjectBlock->getFeatureConstraints();
+
+	if (feature_constraints != 0) {
+		bool bDummyResult; // Already checked in symbol() stage
+		feature_constraints->symbolSetFeatureIndex(FeatureNames, bDummyResult);
+		(void) bDummyResult; // Silence a compiler warning
+	}
+	
+
+
+	//
+	// Execute aggregation
+	//
+	pInst->set_current_universe(m_pEE->m_all_m_1);
+
+	std::vector<AggregateFeature*>::size_type index_end = aggregate_features_vec.size();
+	Inst::const_iterator inst_it = pInst->begin();
+	if (feature_constraints == 0) {
+		while (inst_it.hasNext()) {
+			const InstObject *pInstObj = inst_it.next();
+
+			// This calls AggregateFeature::exec() on
+			// AggregateFeature::m_next, if non-nil.
+			m_aggregate_feature_list->exec(m_pEE, pInstObj);
+		}
+	} else { // feature_constraints != 0
+		while (inst_it.hasNext()) {
+			const InstObject *pInstObj = inst_it.next();
+			
+			// Feature constraints present.
+			// Only do it if they are true.
+			if (feature_constraints->exec(m_pEE, pInstObj)) {
+				// This calls AggregateFeature::exec() on
+				// AggregateFeature::m_next, if non-nil.
+				m_aggregate_feature_list->exec(m_pEE, pInstObj);
+			}
+		}
+	}
+
+	//
+	// Add header
+	//
+	int nColumnNumber = 1;
+	pAF = m_aggregate_feature_list;
+	while (pAF != 0) {
+		std::string column_name = "Column" + long2string(nColumnNumber);
+
+		m_result->appendHeader(column_name, kTCInteger);
+
+		++nColumnNumber;
+		pAF = pAF->getNext();
+	}
+
+	//
+	// Add values
+	//
+	// They appear in reverse order, due to the reverse order nature
+	// of the LALR(1) grammar's parsing of the aggregate_feature_list.
+	// Hence, we put them in a std::list<std::string>, and push them
+	// at the front.
+	pAF = m_aggregate_feature_list;
+	std::list<std::string> column_values;
+	while (pAF != 0) {
+		column_values.push_front(long2string(pAF->getResult()));
+
+		pAF = pAF->getNext();
+	}
+	m_result->append(column_values);
+	
+
+	// Clean up
+	delete pInst;
+	
 	// If we came this far, there were no DB errors
 	return true;
 }
@@ -97207,7 +99174,7 @@ bool DropObjectTypeStatement::exec()
 
 /**************** A copy of MQL/mql_get_query.cpp ****************/
 #line 1 "MQL/mql_get_query.cpp"
-/* Generated by re2c 0.13.5 on Sun May  8 22:29:11 2016 */
+/* Generated by re2c 0.14.3 on Mon Jul 25 17:56:25 2016 */
 #line 1 "./mql_gq.re"
 /*
  * mql_gq.cpp
@@ -98110,7 +100077,7 @@ int yylex(void *lvalp, void *parm)
 
 /**************** A copy of MQL/mql_lexer.cpp ****************/
 #line 1 "MQL/mql_lexer.cpp"
-/* Generated by re2c 0.13.5 on Sun May  8 22:29:11 2016 */
+/* Generated by re2c 0.14.3 on Mon Jul 25 17:56:25 2016 */
 #line 1 "./mql.re"
 /*
  * mql.re
@@ -98119,7 +100086,7 @@ int yylex(void *lvalp, void *parm)
  *
  * Ulrik Petersen
  * Created: 6/23-2007
- * Last update: 4/20-2016
+ * Last update: 7/19-2016
  *
  */
 /************************************************************************
@@ -98298,41 +100265,45 @@ int yylex(void *lvalp, void *parm)
 #define T_KEY_FLAT                        88
 #define T_KEY_WHERE                       89
 #define T_KEY_AT                          90
-#define T_KEY_FEATURES                    91
-#define T_KEY_ENUMERATIONS                92
-#define T_KEY_CONSTANTS                   93
-#define T_KEY_MIN_M                       94
-#define T_KEY_ASSIGN                      95
-#define T_KEY_ID_DS                       96
-#define T_KEY_BY                          97
-#define T_KEY_QUIT                        98
-#define T_KEY_STAR                        99
-#define T_KEY_EXCLAMATION                100
-#define T_KEY_OR                         101
-#define T_KEY_NOTEXIST                   102
-#define T_KEY_NOTEXISTS                  103
-#define T_KEY_AS                         104
-#define T_MARK                           105
-#define T_KEY_NORETRIEVE                 106
-#define T_KEY_RETRIEVE                   107
-#define T_KEY_PART_OF                    108
-#define T_KEY_STARTS_IN                  109
-#define T_KEY_OVERLAP                    110
-#define T_KEY_UNIVERSE                   111
-#define T_KEY_SUBSTRATE                  112
-#define T_KEY_LESS_THAN                  113
-#define T_KEY_GREATER_THAN               114
-#define T_KEY_NOT_EQUAL                  115
-#define T_KEY_LESS_THAN_OR_EQUAL         116
-#define T_KEY_GREATER_THAN_OR_EQUAL      117
-#define T_KEY_TILDE                      118
-#define T_KEY_NOT_TILDE                  119
-#define T_KEY_HAS                        120
-#define T_KEY_DOT                        121
-#define T_KEY_OPT_GAP                    122
-#define T_KEY_GAP                        123
-#define T_KEY_POWER                      124
-#define T_KEY_BETWEEN                    125
+#define T_KEY_AGGREGATE                   91
+#define T_KEY_FEATURES                    92
+#define T_KEY_MIN                         93
+#define T_KEY_SUM                         94
+#define T_KEY_COUNT                       95
+#define T_KEY_STAR                        96
+#define T_KEY_ENUMERATIONS                97
+#define T_KEY_CONSTANTS                   98
+#define T_KEY_MIN_M                       99
+#define T_KEY_ASSIGN                     100
+#define T_KEY_ID_DS                      101
+#define T_KEY_BY                         102
+#define T_KEY_QUIT                       103
+#define T_KEY_EXCLAMATION                104
+#define T_KEY_OR                         105
+#define T_KEY_NOTEXIST                   106
+#define T_KEY_NOTEXISTS                  107
+#define T_KEY_AS                         108
+#define T_MARK                           109
+#define T_KEY_NORETRIEVE                 110
+#define T_KEY_RETRIEVE                   111
+#define T_KEY_PART_OF                    112
+#define T_KEY_STARTS_IN                  113
+#define T_KEY_OVERLAP                    114
+#define T_KEY_UNIVERSE                   115
+#define T_KEY_SUBSTRATE                  116
+#define T_KEY_LESS_THAN                  117
+#define T_KEY_GREATER_THAN               118
+#define T_KEY_NOT_EQUAL                  119
+#define T_KEY_LESS_THAN_OR_EQUAL         120
+#define T_KEY_GREATER_THAN_OR_EQUAL      121
+#define T_KEY_TILDE                      122
+#define T_KEY_NOT_TILDE                  123
+#define T_KEY_HAS                        124
+#define T_KEY_DOT                        125
+#define T_KEY_OPT_GAP                    126
+#define T_KEY_GAP                        127
+#define T_KEY_POWER                      128
+#define T_KEY_BETWEEN                    129
 
 /**************** continuing MQL/mql_lexer.cpp where we left off *****************/
 
@@ -98487,25 +100458,25 @@ xx2:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'R') {
 		if (yych <= 'N') {
-			if (yych == 'A') goto xx542;
+			if (yych == 'A') goto xx554;
 			goto xx94;
 		} else {
-			if (yych <= 'O') goto xx543;
+			if (yych <= 'O') goto xx555;
 			if (yych <= 'Q') goto xx94;
-			goto xx544;
+			goto xx556;
 		}
 	} else {
 		if (yych <= 'n') {
-			if (yych == 'a') goto xx542;
+			if (yych == 'a') goto xx554;
 			goto xx94;
 		} else {
-			if (yych <= 'o') goto xx543;
-			if (yych == 'r') goto xx544;
+			if (yych <= 'o') goto xx555;
+			if (yych == 'r') goto xx556;
 			goto xx94;
 		}
 	}
 xx3:
-#line 294 "./mql.re"
+#line 298 "./mql.re"
 	{ addToken();
 			      MQL_TOKEN_RETURN(STRING_MAGIC, T_IDENTIFIER);
 			    }
@@ -98514,20 +100485,20 @@ xx4:
 	yych = *++YYCURSOR;
 	if (yych <= 'S') {
 		if (yych <= 'O') {
-			if (yych == 'N') goto xx514;
+			if (yych == 'N') goto xx526;
 			goto xx94;
 		} else {
-			if (yych <= 'P') goto xx515;
+			if (yych <= 'P') goto xx527;
 			if (yych <= 'R') goto xx94;
-			goto xx516;
+			goto xx528;
 		}
 	} else {
 		if (yych <= 'o') {
-			if (yych == 'n') goto xx514;
+			if (yych == 'n') goto xx526;
 			goto xx94;
 		} else {
-			if (yych <= 'p') goto xx515;
-			if (yych == 's') goto xx516;
+			if (yych <= 'p') goto xx527;
+			if (yych == 's') goto xx528;
 			goto xx94;
 		}
 	}
@@ -98535,27 +100506,27 @@ xx5:
 	yych = *++YYCURSOR;
 	if (yych <= 'U') {
 		if (yych <= 'H') {
-			if (yych == 'E') goto xx464;
+			if (yych == 'E') goto xx474;
 			if (yych <= 'G') goto xx94;
-			goto xx465;
+			goto xx475;
 		} else {
-			if (yych <= 'I') goto xx466;
+			if (yych <= 'I') goto xx476;
 			if (yych <= 'S') goto xx94;
-			if (yych <= 'T') goto xx467;
-			goto xx468;
+			if (yych <= 'T') goto xx477;
+			goto xx478;
 		}
 	} else {
 		if (yych <= 'h') {
-			if (yych == 'e') goto xx464;
+			if (yych == 'e') goto xx474;
 			if (yych <= 'g') goto xx94;
-			goto xx465;
+			goto xx475;
 		} else {
 			if (yych <= 's') {
-				if (yych <= 'i') goto xx466;
+				if (yych <= 'i') goto xx476;
 				goto xx94;
 			} else {
-				if (yych <= 't') goto xx467;
-				if (yych <= 'u') goto xx468;
+				if (yych <= 't') goto xx477;
+				if (yych <= 'u') goto xx478;
 				goto xx94;
 			}
 		}
@@ -98564,25 +100535,25 @@ xx6:
 	yych = *++YYCURSOR;
 	if (yych <= 'R') {
 		if (yych <= 'E') {
-			if (yych == 'A') goto xx430;
+			if (yych == 'A') goto xx440;
 			if (yych <= 'D') goto xx94;
-			goto xx431;
+			goto xx441;
 		} else {
-			if (yych == 'I') goto xx432;
+			if (yych == 'I') goto xx442;
 			if (yych <= 'Q') goto xx94;
-			goto xx433;
+			goto xx443;
 		}
 	} else {
 		if (yych <= 'e') {
-			if (yych == 'a') goto xx430;
+			if (yych == 'a') goto xx440;
 			if (yych <= 'd') goto xx94;
-			goto xx431;
+			goto xx441;
 		} else {
 			if (yych <= 'i') {
 				if (yych <= 'h') goto xx94;
-				goto xx432;
+				goto xx442;
 			} else {
-				if (yych == 'r') goto xx433;
+				if (yych == 'r') goto xx443;
 				goto xx94;
 			}
 		}
@@ -98591,20 +100562,20 @@ xx7:
 	yych = *++YYCURSOR;
 	if (yych <= 'O') {
 		if (yych <= 'D') {
-			if (yych == 'A') goto xx420;
+			if (yych == 'A') goto xx430;
 			goto xx94;
 		} else {
-			if (yych <= 'E') goto xx421;
+			if (yych <= 'E') goto xx431;
 			if (yych <= 'N') goto xx94;
-			goto xx422;
+			goto xx432;
 		}
 	} else {
 		if (yych <= 'd') {
-			if (yych == 'a') goto xx420;
+			if (yych == 'a') goto xx430;
 			goto xx94;
 		} else {
-			if (yych <= 'e') goto xx421;
-			if (yych == 'o') goto xx422;
+			if (yych <= 'e') goto xx431;
+			if (yych == 'o') goto xx432;
 			goto xx94;
 		}
 	}
@@ -98612,72 +100583,74 @@ xx8:
 	yych = *++YYCURSOR;
 	if (yych <= 'N') {
 		if (yych <= 'E') {
-			if (yych == 'D') goto xx377;
+			if (yych == 'D') goto xx387;
 			goto xx94;
 		} else {
-			if (yych <= 'F') goto xx378;
+			if (yych <= 'F') goto xx388;
 			if (yych <= 'M') goto xx94;
-			goto xx380;
+			goto xx390;
 		}
 	} else {
 		if (yych <= 'e') {
-			if (yych == 'd') goto xx377;
+			if (yych == 'd') goto xx387;
 			goto xx94;
 		} else {
-			if (yych <= 'f') goto xx378;
-			if (yych == 'n') goto xx380;
+			if (yych <= 'f') goto xx388;
+			if (yych == 'n') goto xx390;
 			goto xx94;
 		}
 	}
 xx9:
 	yych = *++YYCURSOR;
-	if (yych == 'A') goto xx371;
-	if (yych == 'a') goto xx371;
+	if (yych == 'A') goto xx381;
+	if (yych == 'a') goto xx381;
 	goto xx94;
 xx10:
 	yych = *++YYCURSOR;
 	switch (yych) {
 	case 'B':
-	case 'b':	goto xx343;
+	case 'b':	goto xx344;
 	case 'D':
-	case 'd':	goto xx344;
+	case 'd':	goto xx345;
+	case 'G':
+	case 'g':	goto xx346;
 	case 'L':
-	case 'l':	goto xx345;
+	case 'l':	goto xx347;
 	case 'N':
-	case 'n':	goto xx346;
+	case 'n':	goto xx348;
 	case 'S':
-	case 's':	goto xx347;
+	case 's':	goto xx349;
 	case 'T':
-	case 't':	goto xx349;
+	case 't':	goto xx351;
 	default:	goto xx94;
 	}
 xx11:
 	yych = *++YYCURSOR;
 	if (yych <= 'Y') {
-		if (yych == 'E') goto xx330;
+		if (yych == 'E') goto xx331;
 		if (yych <= 'X') goto xx94;
-		goto xx331;
+		goto xx332;
 	} else {
 		if (yych <= 'e') {
 			if (yych <= 'd') goto xx94;
-			goto xx330;
+			goto xx331;
 		} else {
-			if (yych == 'y') goto xx331;
+			if (yych == 'y') goto xx332;
 			goto xx94;
 		}
 	}
 xx12:
 	yych = *++YYCURSOR;
 	if (yych <= 'Y') {
-		if (yych == 'R') goto xx313;
+		if (yych == 'R') goto xx314;
 		if (yych <= 'X') goto xx94;
-		goto xx314;
+		goto xx315;
 	} else {
 		if (yych <= 'r') {
 			if (yych <= 'q') goto xx94;
-			goto xx313;
+			goto xx314;
 		} else {
-			if (yych == 'y') goto xx314;
+			if (yych == 'y') goto xx315;
 			goto xx94;
 		}
 	}
@@ -98685,44 +100658,44 @@ xx13:
 	yych = *++YYCURSOR;
 	switch (yych) {
 	case 'B':
-	case 'b':	goto xx292;
+	case 'b':	goto xx293;
 	case 'F':
-	case 'f':	goto xx293;
+	case 'f':	goto xx294;
 	case 'N':
-	case 'n':	goto xx295;
+	case 'n':	goto xx296;
 	case 'R':
-	case 'r':	goto xx297;
+	case 'r':	goto xx298;
 	case 'V':
-	case 'v':	goto xx299;
+	case 'v':	goto xx300;
 	default:	goto xx94;
 	}
 xx14:
 	yych = *++YYCURSOR;
 	if (yych <= 'I') {
-		if (yych == 'A') goto xx284;
+		if (yych == 'A') goto xx285;
 		if (yych <= 'H') goto xx94;
-		goto xx285;
+		goto xx286;
 	} else {
 		if (yych <= 'a') {
 			if (yych <= '`') goto xx94;
-			goto xx284;
+			goto xx285;
 		} else {
-			if (yych == 'i') goto xx285;
+			if (yych == 'i') goto xx286;
 			goto xx94;
 		}
 	}
 xx15:
 	yych = *++YYCURSOR;
 	if (yych <= 'E') {
-		if (yych == 'A') goto xx253;
+		if (yych == 'A') goto xx254;
 		if (yych <= 'D') goto xx94;
-		goto xx254;
+		goto xx255;
 	} else {
 		if (yych <= 'a') {
 			if (yych <= '`') goto xx94;
-			goto xx253;
+			goto xx254;
 		} else {
-			if (yych == 'e') goto xx254;
+			if (yych == 'e') goto xx255;
 			goto xx94;
 		}
 	}
@@ -98730,31 +100703,31 @@ xx16:
 	yych = *++YYCURSOR;
 	switch (yych) {
 	case 'E':
-	case 'e':	goto xx222;
+	case 'e':	goto xx223;
 	case 'I':
-	case 'i':	goto xx223;
+	case 'i':	goto xx224;
 	case 'L':
-	case 'l':	goto xx224;
+	case 'l':	goto xx225;
 	case 'O':
-	case 'o':	goto xx225;
+	case 'o':	goto xx226;
 	case 'R':
-	case 'r':	goto xx226;
+	case 'r':	goto xx227;
 	case 'U':
-	case 'u':	goto xx227;
+	case 'u':	goto xx228;
 	default:	goto xx94;
 	}
 xx17:
 	yych = *++YYCURSOR;
 	if (yych <= 'X') {
-		if (yych == 'N') goto xx195;
+		if (yych == 'N') goto xx196;
 		if (yych <= 'W') goto xx94;
-		goto xx196;
+		goto xx197;
 	} else {
 		if (yych <= 'n') {
 			if (yych <= 'm') goto xx94;
-			goto xx195;
+			goto xx196;
 		} else {
-			if (yych == 'x') goto xx196;
+			if (yych == 'x') goto xx197;
 			goto xx94;
 		}
 	}
@@ -98825,9 +100798,9 @@ xx22:
 xx23:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) == '.') goto xx120;
-#line 290 "./mql.re"
+#line 294 "./mql.re"
 	{ MQL_TOKEN_RETURN(".", T_KEY_DOT); }
-#line 581 "./mql_lexer.cpp"
+#line 583 "./mql_lexer.cpp"
 xx25:
 	yych = *++YYCURSOR;
 	if (yych == 'U') goto xx116;
@@ -98842,91 +100815,91 @@ xx27:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) == '<') goto xx107;
 	if (yych == '>') goto xx105;
-#line 270 "./mql.re"
+#line 274 "./mql.re"
 	{ MQL_TOKEN_RETURN("=", T_KEY_EQUALS);  }
-#line 598 "./mql_lexer.cpp"
+#line 600 "./mql_lexer.cpp"
 xx29:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= '<') goto xx30;
 	if (yych <= '=') goto xx101;
 	if (yych <= '>') goto xx103;
 xx30:
-#line 271 "./mql.re"
+#line 275 "./mql.re"
 	{ MQL_TOKEN_RETURN("<", T_KEY_LESS_THAN);  }
-#line 607 "./mql_lexer.cpp"
+#line 609 "./mql_lexer.cpp"
 xx31:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) == '=') goto xx99;
-#line 272 "./mql.re"
+#line 276 "./mql.re"
 	{ MQL_TOKEN_RETURN(">", T_KEY_GREATER_THAN);  }
-#line 613 "./mql_lexer.cpp"
+#line 615 "./mql_lexer.cpp"
 xx33:
 	++YYCURSOR;
-#line 278 "./mql.re"
+#line 282 "./mql.re"
 	{ MQL_TOKEN_RETURN("~", T_KEY_TILDE); }
-#line 618 "./mql_lexer.cpp"
+#line 620 "./mql_lexer.cpp"
 xx35:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) == '~') goto xx97;
-#line 293 "./mql.re"
+#line 297 "./mql.re"
 	{ MQL_TOKEN_RETURN("!", T_KEY_EXCLAMATION); }
-#line 624 "./mql_lexer.cpp"
+#line 626 "./mql_lexer.cpp"
 xx37:
 	++YYCURSOR;
-#line 280 "./mql.re"
+#line 284 "./mql.re"
 	{ MQL_TOKEN_RETURN("[", T_KEY_OPEN_SQUARE_BRACKET); }
-#line 629 "./mql_lexer.cpp"
+#line 631 "./mql_lexer.cpp"
 xx39:
 	++YYCURSOR;
-#line 281 "./mql.re"
+#line 285 "./mql.re"
 	{ MQL_TOKEN_RETURN("]", T_KEY_CLOSE_SQUARE_BRACKET); }
-#line 634 "./mql_lexer.cpp"
+#line 636 "./mql_lexer.cpp"
 xx41:
 	++YYCURSOR;
-#line 282 "./mql.re"
+#line 286 "./mql.re"
 	{ MQL_TOKEN_RETURN("{", T_KEY_OPEN_BRACE);  }
-#line 639 "./mql_lexer.cpp"
+#line 641 "./mql_lexer.cpp"
 xx43:
 	++YYCURSOR;
-#line 283 "./mql.re"
+#line 287 "./mql.re"
 	{ MQL_TOKEN_RETURN("}", T_KEY_CLOSE_BRACE);  }
-#line 644 "./mql_lexer.cpp"
+#line 646 "./mql_lexer.cpp"
 xx45:
 	++YYCURSOR;
-#line 284 "./mql.re"
+#line 288 "./mql.re"
 	{ MQL_TOKEN_RETURN("(", T_KEY_OPEN_BRACKET); }
-#line 649 "./mql_lexer.cpp"
+#line 651 "./mql_lexer.cpp"
 xx47:
 	++YYCURSOR;
-#line 285 "./mql.re"
+#line 289 "./mql.re"
 	{ MQL_TOKEN_RETURN(")", T_KEY_CLOSE_BRACKET); }
-#line 654 "./mql_lexer.cpp"
+#line 656 "./mql_lexer.cpp"
 xx49:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) == '=') goto xx95;
-#line 287 "./mql.re"
+#line 291 "./mql.re"
 	{ MQL_TOKEN_RETURN(":", T_KEY_COLON); }
-#line 660 "./mql_lexer.cpp"
+#line 662 "./mql_lexer.cpp"
 xx51:
 	++YYCURSOR;
-#line 288 "./mql.re"
+#line 292 "./mql.re"
 	{ MQL_TOKEN_RETURN(";", T_KEY_SEMICOLON); }
-#line 665 "./mql_lexer.cpp"
+#line 667 "./mql_lexer.cpp"
 xx53:
 	++YYCURSOR;
-#line 289 "./mql.re"
+#line 293 "./mql.re"
 	{ MQL_TOKEN_RETURN(",", T_KEY_COMMA); }
-#line 670 "./mql_lexer.cpp"
+#line 672 "./mql_lexer.cpp"
 xx55:
 	++YYCURSOR;
-#line 291 "./mql.re"
+#line 295 "./mql.re"
 	{ MQL_TOKEN_RETURN("*", T_KEY_STAR); }
-#line 675 "./mql_lexer.cpp"
+#line 677 "./mql_lexer.cpp"
 xx57:
 	++YYCURSOR;
-#line 292 "./mql.re"
+#line 296 "./mql.re"
 	{ MQL_TOKEN_RETURN("-", T_KEY_DASH); }
-#line 680 "./mql_lexer.cpp"
+#line 682 "./mql_lexer.cpp"
 xx59:
 	yych = *++YYCURSOR;
 	goto xx94;
@@ -98940,60 +100913,60 @@ xx60:
 		if (yych <= 'z') goto xx88;
 	}
 xx61:
-#line 314 "./mql.re"
+#line 318 "./mql.re"
 	{ yylval->setChar(*tok);
 	    MQL_TOKEN_RETURN(CHAR_MAGIC, *tok); }
-#line 697 "./mql_lexer.cpp"
+#line 699 "./mql_lexer.cpp"
 xx62:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= '/') goto xx63;
 	if (yych <= '9') goto xx79;
 xx63:
-#line 299 "./mql.re"
+#line 303 "./mql.re"
 	{ addInteger();
                               MQL_TOKEN_RETURN(INTEGER_MAGIC, T_INTEGER); }
-#line 706 "./mql_lexer.cpp"
+#line 708 "./mql_lexer.cpp"
 xx64:
-	++YYCURSOR;
-#line 301 "./mql.re"
-	{ yylval->setString(new std::string);
-			      yylval->pString->reserve(32);
-			      goto stringdq; 
-                            }
-#line 714 "./mql_lexer.cpp"
-xx66:
 	++YYCURSOR;
 #line 305 "./mql.re"
 	{ yylval->setString(new std::string);
 			      yylval->pString->reserve(32);
-			      goto stringsq; 
-			    }
-#line 722 "./mql_lexer.cpp"
-xx68:
+			      goto stringdq; 
+                            }
+#line 716 "./mql_lexer.cpp"
+xx66:
 	++YYCURSOR;
 #line 309 "./mql.re"
-	{ goto scan; }
-#line 727 "./mql_lexer.cpp"
-xx70:
-	++YYCURSOR;
-#line 310 "./mql.re"
-	{ goto scan; }
-#line 732 "./mql_lexer.cpp"
-xx72:
-	++YYCURSOR;
-#line 311 "./mql.re"
-	{ goto scan; }
-#line 737 "./mql_lexer.cpp"
-xx74:
-	++YYCURSOR;
-#line 312 "./mql.re"
-	{ goto scan; }
-#line 742 "./mql_lexer.cpp"
-xx76:
+	{ yylval->setString(new std::string);
+			      yylval->pString->reserve(32);
+			      goto stringsq; 
+			    }
+#line 724 "./mql_lexer.cpp"
+xx68:
 	++YYCURSOR;
 #line 313 "./mql.re"
+	{ goto scan; }
+#line 729 "./mql_lexer.cpp"
+xx70:
+	++YYCURSOR;
+#line 314 "./mql.re"
+	{ goto scan; }
+#line 734 "./mql_lexer.cpp"
+xx72:
+	++YYCURSOR;
+#line 315 "./mql.re"
+	{ goto scan; }
+#line 739 "./mql_lexer.cpp"
+xx74:
+	++YYCURSOR;
+#line 316 "./mql.re"
+	{ goto scan; }
+#line 744 "./mql_lexer.cpp"
+xx76:
+	++YYCURSOR;
+#line 317 "./mql.re"
 	{ if (cur >= lim) { goto end; } }
-#line 747 "./mql_lexer.cpp"
+#line 749 "./mql_lexer.cpp"
 xx78:
 	yych = *++YYCURSOR;
 	goto xx61;
@@ -99040,10 +101013,10 @@ xx88:
 		}
 	}
 xx90:
-#line 297 "./mql.re"
+#line 301 "./mql.re"
 	{ addToken();
                                            MQL_TOKEN_RETURN("mark", T_MARK); }
-#line 797 "./mql_lexer.cpp"
+#line 799 "./mql_lexer.cpp"
 xx91:
 	++YYCURSOR;
 	yych = *YYCURSOR;
@@ -99078,39 +101051,39 @@ xx94:
 	}
 xx95:
 	++YYCURSOR;
-#line 286 "./mql.re"
+#line 290 "./mql.re"
 	{ MQL_TOKEN_RETURN(":=", T_KEY_ASSIGN);  }
-#line 834 "./mql_lexer.cpp"
+#line 836 "./mql_lexer.cpp"
 xx97:
 	++YYCURSOR;
-#line 279 "./mql.re"
+#line 283 "./mql.re"
 	{ MQL_TOKEN_RETURN("!~", T_KEY_NOT_TILDE); }
-#line 839 "./mql_lexer.cpp"
+#line 841 "./mql_lexer.cpp"
 xx99:
 	++YYCURSOR;
-#line 276 "./mql.re"
+#line 280 "./mql.re"
 	{ MQL_TOKEN_RETURN(">=", T_KEY_GREATER_THAN_OR_EQUAL);  }
-#line 844 "./mql_lexer.cpp"
+#line 846 "./mql_lexer.cpp"
 xx101:
 	++YYCURSOR;
-#line 274 "./mql.re"
+#line 278 "./mql.re"
 	{ MQL_TOKEN_RETURN("<=", T_KEY_LESS_THAN_OR_EQUAL);  }
-#line 849 "./mql_lexer.cpp"
+#line 851 "./mql_lexer.cpp"
 xx103:
 	++YYCURSOR;
-#line 273 "./mql.re"
+#line 277 "./mql.re"
 	{ MQL_TOKEN_RETURN("<>", T_KEY_NOT_EQUAL);  }
-#line 854 "./mql_lexer.cpp"
+#line 856 "./mql_lexer.cpp"
 xx105:
 	++YYCURSOR;
-#line 277 "./mql.re"
+#line 281 "./mql.re"
 	{ MQL_TOKEN_RETURN("=>", T_KEY_GREATER_THAN_OR_EQUAL);  }
-#line 859 "./mql_lexer.cpp"
+#line 861 "./mql_lexer.cpp"
 xx107:
 	++YYCURSOR;
-#line 275 "./mql.re"
+#line 279 "./mql.re"
 	{ MQL_TOKEN_RETURN("=<", T_KEY_LESS_THAN_OR_EQUAL);  }
-#line 864 "./mql_lexer.cpp"
+#line 866 "./mql_lexer.cpp"
 xx109:
 	yych = *++YYCURSOR;
 	if (yych == 'R') goto xx110;
@@ -99144,9 +101117,9 @@ xx114:
 		}
 	}
 xx115:
-#line 264 "./mql.re"
+#line 268 "./mql.re"
 	{ MQL_TOKEN_RETURN("part_of", T_KEY_PART_OF); }
-#line 900 "./mql_lexer.cpp"
+#line 902 "./mql_lexer.cpp"
 xx116:
 	yych = *++YYCURSOR;
 	if (yych == 'I') goto xx117;
@@ -99170,14 +101143,14 @@ xx118:
 		}
 	}
 xx119:
-#line 259 "./mql.re"
+#line 263 "./mql.re"
 	{ MQL_TOKEN_RETURN("quit", T_KEY_QUIT); }
-#line 926 "./mql_lexer.cpp"
+#line 928 "./mql_lexer.cpp"
 xx120:
 	++YYCURSOR;
-#line 244 "./mql.re"
+#line 245 "./mql.re"
 	{ MQL_TOKEN_RETURN("..", T_KEY_POWER);  }
-#line 931 "./mql_lexer.cpp"
+#line 933 "./mql_lexer.cpp"
 xx122:
 	yych = *++YYCURSOR;
 	if (yych == 'L') goto xx143;
@@ -99221,9 +101194,9 @@ xx125:
 		}
 	}
 xx126:
-#line 237 "./mql.re"
+#line 238 "./mql.re"
 	{ MQL_TOKEN_RETURN("not", T_KEY_NOT);  }
-#line 977 "./mql_lexer.cpp"
+#line 979 "./mql_lexer.cpp"
 xx127:
 	yych = *++YYCURSOR;
 	if (yych == 'X') goto xx128;
@@ -99259,9 +101232,9 @@ xx131:
 		}
 	}
 xx132:
-#line 240 "./mql.re"
+#line 241 "./mql.re"
 	{ MQL_TOKEN_RETURN("notexist", T_KEY_NOTEXIST);  }
-#line 1015 "./mql_lexer.cpp"
+#line 1017 "./mql_lexer.cpp"
 xx133:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
@@ -99277,9 +101250,9 @@ xx133:
 		}
 	}
 xx134:
-#line 241 "./mql.re"
+#line 242 "./mql.re"
 	{ MQL_TOKEN_RETURN("notexists", T_KEY_NOTEXISTS);  }
-#line 1033 "./mql_lexer.cpp"
+#line 1035 "./mql_lexer.cpp"
 xx135:
 	yych = *++YYCURSOR;
 	if (yych == 'T') goto xx136;
@@ -99319,9 +101292,9 @@ xx141:
 		}
 	}
 xx142:
-#line 231 "./mql.re"
+#line 232 "./mql.re"
 	{ MQL_TOKEN_RETURN("noretrieve", T_KEY_NORETRIEVE);  }
-#line 1075 "./mql_lexer.cpp"
+#line 1077 "./mql_lexer.cpp"
 xx143:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
@@ -99337,9 +101310,9 @@ xx143:
 		}
 	}
 xx144:
-#line 247 "./mql.re"
+#line 248 "./mql.re"
 	{ MQL_TOKEN_RETURN("nil", T_KEY_NIL);  }
-#line 1093 "./mql_lexer.cpp"
+#line 1095 "./mql_lexer.cpp"
 xx145:
 	yych = *++YYCURSOR;
 	if (yych == 'Y') goto xx146;
@@ -99359,9 +101332,9 @@ xx146:
 		}
 	}
 xx147:
-#line 230 "./mql.re"
+#line 231 "./mql.re"
 	{ MQL_TOKEN_RETURN("key", T_KEY_KEY); }
-#line 1115 "./mql_lexer.cpp"
+#line 1117 "./mql_lexer.cpp"
 xx148:
 	yych = *++YYCURSOR;
 	if (yych == 'E') goto xx157;
@@ -99394,9 +101367,9 @@ xx151:
 		}
 	}
 xx152:
-#line 228 "./mql.re"
+#line 229 "./mql.re"
 	{ MQL_TOKEN_RETURN("with", T_KEY_WITH);  }
-#line 1150 "./mql_lexer.cpp"
+#line 1152 "./mql_lexer.cpp"
 xx153:
 	yych = *++YYCURSOR;
 	if (yych == 'U') goto xx154;
@@ -99420,9 +101393,9 @@ xx155:
 		}
 	}
 xx156:
-#line 229 "./mql.re"
+#line 230 "./mql.re"
 	{ MQL_TOKEN_RETURN("without", T_KEY_WITHOUT);  }
-#line 1176 "./mql_lexer.cpp"
+#line 1178 "./mql_lexer.cpp"
 xx157:
 	yych = *++YYCURSOR;
 	if (yych == 'R') goto xx158;
@@ -99448,7 +101421,7 @@ xx159:
 xx160:
 #line 218 "./mql.re"
 	{ MQL_TOKEN_RETURN("where", T_KEY_WHERE);  }
-#line 1202 "./mql_lexer.cpp"
+#line 1204 "./mql_lexer.cpp"
 xx161:
 	yych = *++YYCURSOR;
 	if (yych <= 'V') {
@@ -99480,7 +101453,7 @@ xx162:
 xx163:
 #line 217 "./mql.re"
 	{ MQL_TOKEN_RETURN("has", T_KEY_HAS);  }
-#line 1234 "./mql_lexer.cpp"
+#line 1236 "./mql_lexer.cpp"
 xx164:
 	yych = *++YYCURSOR;
 	if (yych == 'I') goto xx165;
@@ -99510,11 +101483,11 @@ xx167:
 xx168:
 #line 219 "./mql.re"
 	{ MQL_TOKEN_RETURN("having", T_KEY_HAVING); }
-#line 1264 "./mql_lexer.cpp"
+#line 1266 "./mql_lexer.cpp"
 xx169:
 	yych = *++YYCURSOR;
-	if (yych == 'X') goto xx190;
-	if (yych == 'x') goto xx190;
+	if (yych == 'X') goto xx191;
+	if (yych == 'x') goto xx191;
 	goto xx94;
 xx170:
 	yych = *++YYCURSOR;
@@ -99567,7 +101540,7 @@ xx178:
 xx179:
 #line 214 "./mql.re"
 	{ MQL_TOKEN_RETURN("multiple", T_KEY_MULTIPLE); }
-#line 1321 "./mql_lexer.cpp"
+#line 1323 "./mql_lexer.cpp"
 xx180:
 	yych = *++YYCURSOR;
 	if (yych == 'A') goto xx181;
@@ -99595,9 +101568,9 @@ xx182:
 		}
 	}
 xx183:
-#line 225 "./mql.re"
+#line 226 "./mql.re"
 	{ MQL_TOKEN_RETURN("monad", T_KEY_MONAD);  }
-#line 1351 "./mql_lexer.cpp"
+#line 1353 "./mql_lexer.cpp"
 xx184:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
@@ -99613,1204 +101586,1207 @@ xx184:
 		}
 	}
 xx185:
-#line 224 "./mql.re"
+#line 225 "./mql.re"
 	{ MQL_TOKEN_RETURN("monads", T_KEY_MONADS);  }
-#line 1369 "./mql_lexer.cpp"
+#line 1371 "./mql_lexer.cpp"
 xx186:
-	yych = *++YYCURSOR;
-	if (yych != '_') goto xx94;
-	yych = *++YYCURSOR;
-	if (yych == 'M') goto xx188;
-	if (yych != 'm') goto xx94;
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx187;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx188;
+		} else {
+			if (yych <= '`') goto xx187;
+			if (yych <= 'z') goto xx93;
+		}
+	}
+xx187:
+#line 254 "./mql.re"
+	{ MQL_TOKEN_RETURN("min", T_KEY_MIN); }
+#line 1389 "./mql_lexer.cpp"
 xx188:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx189;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx93;
-		} else {
-			if (yych <= '`') goto xx189;
-			if (yych <= 'z') goto xx93;
-		}
-	}
-xx189:
-#line 251 "./mql.re"
-	{ MQL_TOKEN_RETURN("min_m", T_KEY_MIN_M); }
-#line 1393 "./mql_lexer.cpp"
-xx190:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx191;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx192;
-		} else {
-			if (yych <= '`') goto xx191;
-			if (yych <= 'z') goto xx93;
-		}
-	}
-xx191:
-#line 253 "./mql.re"
-	{ MQL_TOKEN_RETURN("max", T_KEY_MAX); }
-#line 1411 "./mql_lexer.cpp"
-xx192:
 	yych = *++YYCURSOR;
-	if (yych == 'M') goto xx193;
+	if (yych == 'M') goto xx189;
 	if (yych != 'm') goto xx94;
-xx193:
+xx189:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx194;
+		if (yych <= '/') goto xx190;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx194;
+			if (yych <= '`') goto xx190;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx194:
+xx190:
 #line 252 "./mql.re"
-	{ MQL_TOKEN_RETURN("max_m", T_KEY_MAX_M); }
-#line 1433 "./mql_lexer.cpp"
+	{ MQL_TOKEN_RETURN("min_m", T_KEY_MIN_M); }
+#line 1411 "./mql_lexer.cpp"
+xx191:
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx192;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx193;
+		} else {
+			if (yych <= '`') goto xx192;
+			if (yych <= 'z') goto xx93;
+		}
+	}
+xx192:
+#line 255 "./mql.re"
+	{ MQL_TOKEN_RETURN("max", T_KEY_MAX); }
+#line 1429 "./mql_lexer.cpp"
+xx193:
+	yych = *++YYCURSOR;
+	if (yych == 'M') goto xx194;
+	if (yych != 'm') goto xx94;
+xx194:
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx195;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx195;
+			if (yych <= 'z') goto xx93;
+		}
+	}
 xx195:
+#line 253 "./mql.re"
+	{ MQL_TOKEN_RETURN("max_m", T_KEY_MAX_M); }
+#line 1451 "./mql_lexer.cpp"
+xx196:
 	yych = *++YYCURSOR;
 	if (yych <= 'U') {
-		if (yych == 'C') goto xx203;
+		if (yych == 'C') goto xx204;
 		if (yych <= 'T') goto xx94;
-		goto xx202;
+		goto xx203;
 	} else {
 		if (yych <= 'c') {
 			if (yych <= 'b') goto xx94;
-			goto xx203;
+			goto xx204;
 		} else {
-			if (yych == 'u') goto xx202;
+			if (yych == 'u') goto xx203;
 			goto xx94;
 		}
 	}
-xx196:
-	yych = *++YYCURSOR;
-	if (yych == 'I') goto xx197;
-	if (yych != 'i') goto xx94;
 xx197:
 	yych = *++YYCURSOR;
-	if (yych == 'S') goto xx198;
-	if (yych != 's') goto xx94;
+	if (yych == 'I') goto xx198;
+	if (yych != 'i') goto xx94;
 xx198:
 	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx199;
-	if (yych != 't') goto xx94;
+	if (yych == 'S') goto xx199;
+	if (yych != 's') goto xx94;
 xx199:
 	yych = *++YYCURSOR;
-	if (yych == 'S') goto xx200;
-	if (yych != 's') goto xx94;
+	if (yych == 'T') goto xx200;
+	if (yych != 't') goto xx94;
 xx200:
+	yych = *++YYCURSOR;
+	if (yych == 'S') goto xx201;
+	if (yych != 's') goto xx94;
+xx201:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx201;
+		if (yych <= '/') goto xx202;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx201;
+			if (yych <= '`') goto xx202;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx201:
-#line 238 "./mql.re"
-	{ MQL_TOKEN_RETURN("exists", T_KEY_EXISTS);  }
-#line 1482 "./mql_lexer.cpp"
 xx202:
-	yych = *++YYCURSOR;
-	if (yych == 'M') goto xx210;
-	if (yych == 'm') goto xx210;
-	goto xx94;
+#line 239 "./mql.re"
+	{ MQL_TOKEN_RETURN("exists", T_KEY_EXISTS);  }
+#line 1500 "./mql_lexer.cpp"
 xx203:
 	yych = *++YYCURSOR;
-	if (yych == 'O') goto xx204;
-	if (yych != 'o') goto xx94;
+	if (yych == 'M') goto xx211;
+	if (yych == 'm') goto xx211;
+	goto xx94;
 xx204:
 	yych = *++YYCURSOR;
-	if (yych == 'D') goto xx205;
-	if (yych != 'd') goto xx94;
+	if (yych == 'O') goto xx205;
+	if (yych != 'o') goto xx94;
 xx205:
 	yych = *++YYCURSOR;
-	if (yych == 'I') goto xx206;
-	if (yych != 'i') goto xx94;
+	if (yych == 'D') goto xx206;
+	if (yych != 'd') goto xx94;
 xx206:
 	yych = *++YYCURSOR;
-	if (yych == 'N') goto xx207;
-	if (yych != 'n') goto xx94;
+	if (yych == 'I') goto xx207;
+	if (yych != 'i') goto xx94;
 xx207:
 	yych = *++YYCURSOR;
-	if (yych == 'G') goto xx208;
-	if (yych != 'g') goto xx94;
+	if (yych == 'N') goto xx208;
+	if (yych != 'n') goto xx94;
 xx208:
+	yych = *++YYCURSOR;
+	if (yych == 'G') goto xx209;
+	if (yych != 'g') goto xx94;
+xx209:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx209;
+		if (yych <= '/') goto xx210;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx209;
+			if (yych <= '`') goto xx210;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx209:
-#line 269 "./mql.re"
-	{ MQL_TOKEN_RETURN("encoding", T_KEY_ENCODING); }
-#line 1525 "./mql_lexer.cpp"
 xx210:
+#line 273 "./mql.re"
+	{ MQL_TOKEN_RETURN("encoding", T_KEY_ENCODING); }
+#line 1543 "./mql_lexer.cpp"
+xx211:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
 		if (yych <= '@') {
-			if (yych <= '/') goto xx211;
+			if (yych <= '/') goto xx212;
 			if (yych <= '9') goto xx93;
 		} else {
-			if (yych == 'E') goto xx212;
+			if (yych == 'E') goto xx213;
 			goto xx93;
 		}
 	} else {
 		if (yych <= '`') {
 			if (yych == '_') goto xx93;
 		} else {
-			if (yych == 'e') goto xx212;
+			if (yych == 'e') goto xx213;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx211:
+xx212:
 #line 207 "./mql.re"
 	{ MQL_TOKEN_RETURN("enum", T_KEY_ENUM);  }
-#line 1547 "./mql_lexer.cpp"
-xx212:
-	yych = *++YYCURSOR;
-	if (yych == 'R') goto xx213;
-	if (yych != 'r') goto xx94;
+#line 1565 "./mql_lexer.cpp"
 xx213:
 	yych = *++YYCURSOR;
-	if (yych == 'A') goto xx214;
-	if (yych != 'a') goto xx94;
+	if (yych == 'R') goto xx214;
+	if (yych != 'r') goto xx94;
 xx214:
 	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx215;
-	if (yych != 't') goto xx94;
+	if (yych == 'A') goto xx215;
+	if (yych != 'a') goto xx94;
 xx215:
 	yych = *++YYCURSOR;
-	if (yych == 'I') goto xx216;
-	if (yych != 'i') goto xx94;
+	if (yych == 'T') goto xx216;
+	if (yych != 't') goto xx94;
 xx216:
 	yych = *++YYCURSOR;
-	if (yych == 'O') goto xx217;
-	if (yych != 'o') goto xx94;
+	if (yych == 'I') goto xx217;
+	if (yych != 'i') goto xx94;
 xx217:
 	yych = *++YYCURSOR;
-	if (yych == 'N') goto xx218;
-	if (yych != 'n') goto xx94;
+	if (yych == 'O') goto xx218;
+	if (yych != 'o') goto xx94;
 xx218:
+	yych = *++YYCURSOR;
+	if (yych == 'N') goto xx219;
+	if (yych != 'n') goto xx94;
+xx219:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
 		if (yych <= '@') {
-			if (yych <= '/') goto xx219;
+			if (yych <= '/') goto xx220;
 			if (yych <= '9') goto xx93;
 		} else {
-			if (yych == 'S') goto xx220;
+			if (yych == 'S') goto xx221;
 			goto xx93;
 		}
 	} else {
 		if (yych <= '`') {
 			if (yych == '_') goto xx93;
 		} else {
-			if (yych == 's') goto xx220;
+			if (yych == 's') goto xx221;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx219:
+xx220:
 #line 208 "./mql.re"
 	{ MQL_TOKEN_RETURN("enumeration", T_KEY_ENUMERATION);  }
-#line 1593 "./mql_lexer.cpp"
-xx220:
+#line 1611 "./mql_lexer.cpp"
+xx221:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx221;
+		if (yych <= '/') goto xx222;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx221;
+			if (yych <= '`') goto xx222;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx221:
+xx222:
 #line 209 "./mql.re"
 	{ MQL_TOKEN_RETURN("enumerations", T_KEY_ENUMERATIONS);  }
-#line 1611 "./mql_lexer.cpp"
-xx222:
-	yych = *++YYCURSOR;
-	if (yych == 'A') goto xx245;
-	if (yych == 'a') goto xx245;
-	goto xx94;
+#line 1629 "./mql_lexer.cpp"
 xx223:
 	yych = *++YYCURSOR;
-	if (yych == 'R') goto xx241;
-	if (yych == 'r') goto xx241;
+	if (yych == 'A') goto xx246;
+	if (yych == 'a') goto xx246;
 	goto xx94;
 xx224:
 	yych = *++YYCURSOR;
-	if (yych == 'A') goto xx238;
-	if (yych == 'a') goto xx238;
+	if (yych == 'R') goto xx242;
+	if (yych == 'r') goto xx242;
 	goto xx94;
 xx225:
 	yych = *++YYCURSOR;
-	if (yych == 'C') goto xx234;
-	if (yych == 'c') goto xx234;
+	if (yych == 'A') goto xx239;
+	if (yych == 'a') goto xx239;
 	goto xx94;
 xx226:
 	yych = *++YYCURSOR;
-	if (yych == 'O') goto xx231;
-	if (yych == 'o') goto xx231;
+	if (yych == 'C') goto xx235;
+	if (yych == 'c') goto xx235;
 	goto xx94;
 xx227:
 	yych = *++YYCURSOR;
-	if (yych == 'L') goto xx228;
-	if (yych != 'l') goto xx94;
+	if (yych == 'O') goto xx232;
+	if (yych == 'o') goto xx232;
+	goto xx94;
 xx228:
 	yych = *++YYCURSOR;
 	if (yych == 'L') goto xx229;
 	if (yych != 'l') goto xx94;
 xx229:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx230;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx93;
-		} else {
-			if (yych <= '`') goto xx230;
-			if (yych <= 'z') goto xx93;
-		}
-	}
-xx230:
-#line 255 "./mql.re"
-	{ MQL_TOKEN_RETURN("full", T_KEY_FULL); }
-#line 1662 "./mql_lexer.cpp"
-xx231:
 	yych = *++YYCURSOR;
-	if (yych == 'M') goto xx232;
-	if (yych != 'm') goto xx94;
-xx232:
+	if (yych == 'L') goto xx230;
+	if (yych != 'l') goto xx94;
+xx230:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx233;
+		if (yych <= '/') goto xx231;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx233;
+			if (yych <= '`') goto xx231;
 			if (yych <= 'z') goto xx93;
 		}
 	}
+xx231:
+#line 259 "./mql.re"
+	{ MQL_TOKEN_RETURN("full", T_KEY_FULL); }
+#line 1680 "./mql_lexer.cpp"
+xx232:
+	yych = *++YYCURSOR;
+	if (yych == 'M') goto xx233;
+	if (yych != 'm') goto xx94;
 xx233:
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx234;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx234;
+			if (yych <= 'z') goto xx93;
+		}
+	}
+xx234:
 #line 205 "./mql.re"
 	{ MQL_TOKEN_RETURN("from", T_KEY_FROM);  }
-#line 1684 "./mql_lexer.cpp"
-xx234:
-	yych = *++YYCURSOR;
-	if (yych == 'U') goto xx235;
-	if (yych != 'u') goto xx94;
+#line 1702 "./mql_lexer.cpp"
 xx235:
 	yych = *++YYCURSOR;
-	if (yych == 'S') goto xx236;
-	if (yych != 's') goto xx94;
+	if (yych == 'U') goto xx236;
+	if (yych != 'u') goto xx94;
 xx236:
+	yych = *++YYCURSOR;
+	if (yych == 'S') goto xx237;
+	if (yych != 's') goto xx94;
+xx237:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx237;
+		if (yych <= '/') goto xx238;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx237;
+			if (yych <= '`') goto xx238;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx237:
+xx238:
 #line 215 "./mql.re"
 	{ MQL_TOKEN_RETURN("focus", T_KEY_FOCUS);  }
-#line 1710 "./mql_lexer.cpp"
-xx238:
-	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx239;
-	if (yych != 't') goto xx94;
+#line 1728 "./mql_lexer.cpp"
 xx239:
+	yych = *++YYCURSOR;
+	if (yych == 'T') goto xx240;
+	if (yych != 't') goto xx94;
+xx240:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx240;
+		if (yych <= '/') goto xx241;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx240;
+			if (yych <= '`') goto xx241;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx240:
-#line 254 "./mql.re"
-	{ MQL_TOKEN_RETURN("flat", T_KEY_FLAT); }
-#line 1732 "./mql_lexer.cpp"
 xx241:
-	yych = *++YYCURSOR;
-	if (yych == 'S') goto xx242;
-	if (yych != 's') goto xx94;
+#line 258 "./mql.re"
+	{ MQL_TOKEN_RETURN("flat", T_KEY_FLAT); }
+#line 1750 "./mql_lexer.cpp"
 xx242:
 	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx243;
-	if (yych != 't') goto xx94;
+	if (yych == 'S') goto xx243;
+	if (yych != 's') goto xx94;
 xx243:
+	yych = *++YYCURSOR;
+	if (yych == 'T') goto xx244;
+	if (yych != 't') goto xx94;
+xx244:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx244;
+		if (yych <= '/') goto xx245;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx244;
+			if (yych <= '`') goto xx245;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx244:
-#line 233 "./mql.re"
-	{ MQL_TOKEN_RETURN("first", T_KEY_FIRST);  }
-#line 1758 "./mql_lexer.cpp"
 xx245:
-	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx246;
-	if (yych != 't') goto xx94;
+#line 234 "./mql.re"
+	{ MQL_TOKEN_RETURN("first", T_KEY_FIRST);  }
+#line 1776 "./mql_lexer.cpp"
 xx246:
 	yych = *++YYCURSOR;
-	if (yych == 'U') goto xx247;
-	if (yych != 'u') goto xx94;
+	if (yych == 'T') goto xx247;
+	if (yych != 't') goto xx94;
 xx247:
 	yych = *++YYCURSOR;
-	if (yych == 'R') goto xx248;
-	if (yych != 'r') goto xx94;
+	if (yych == 'U') goto xx248;
+	if (yych != 'u') goto xx94;
 xx248:
 	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx249;
-	if (yych != 'e') goto xx94;
+	if (yych == 'R') goto xx249;
+	if (yych != 'r') goto xx94;
 xx249:
+	yych = *++YYCURSOR;
+	if (yych == 'E') goto xx250;
+	if (yych != 'e') goto xx94;
+xx250:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
 		if (yych <= '@') {
-			if (yych <= '/') goto xx250;
+			if (yych <= '/') goto xx251;
 			if (yych <= '9') goto xx93;
 		} else {
-			if (yych == 'S') goto xx251;
+			if (yych == 'S') goto xx252;
 			goto xx93;
 		}
 	} else {
 		if (yych <= '`') {
 			if (yych == '_') goto xx93;
 		} else {
-			if (yych == 's') goto xx251;
+			if (yych == 's') goto xx252;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx250:
+xx251:
 #line 220 "./mql.re"
 	{ MQL_TOKEN_RETURN("feature", T_KEY_FEATURE);  }
-#line 1796 "./mql_lexer.cpp"
-xx251:
+#line 1814 "./mql_lexer.cpp"
+xx252:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx252;
+		if (yych <= '/') goto xx253;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx252;
+			if (yych <= '`') goto xx253;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx252:
+xx253:
 #line 221 "./mql.re"
 	{ MQL_TOKEN_RETURN("features", T_KEY_FEATURES);  }
-#line 1814 "./mql_lexer.cpp"
-xx253:
-	yych = *++YYCURSOR;
-	if (yych == 'N') goto xx280;
-	if (yych == 'n') goto xx280;
-	goto xx94;
+#line 1832 "./mql_lexer.cpp"
 xx254:
+	yych = *++YYCURSOR;
+	if (yych == 'N') goto xx281;
+	if (yych == 'n') goto xx281;
+	goto xx94;
+xx255:
 	yych = *++YYCURSOR;
 	if (yych <= 'T') {
 		if (yych <= 'O') {
 			if (yych != 'M') goto xx94;
 		} else {
-			if (yych <= 'P') goto xx257;
+			if (yych <= 'P') goto xx258;
 			if (yych <= 'S') goto xx94;
-			goto xx256;
+			goto xx257;
 		}
 	} else {
 		if (yych <= 'o') {
 			if (yych != 'm') goto xx94;
 		} else {
-			if (yych <= 'p') goto xx257;
-			if (yych == 't') goto xx256;
+			if (yych <= 'p') goto xx258;
+			if (yych == 't') goto xx257;
 			goto xx94;
 		}
 	}
 	yych = *++YYCURSOR;
-	if (yych == 'O') goto xx276;
-	if (yych == 'o') goto xx276;
+	if (yych == 'O') goto xx277;
+	if (yych == 'o') goto xx277;
 	goto xx94;
-xx256:
+xx257:
 	yych = *++YYCURSOR;
 	if (yych <= 'U') {
-		if (yych == 'R') goto xx263;
+		if (yych == 'R') goto xx264;
 		if (yych <= 'T') goto xx94;
-		goto xx264;
+		goto xx265;
 	} else {
 		if (yych <= 'r') {
 			if (yych <= 'q') goto xx94;
-			goto xx263;
+			goto xx264;
 		} else {
-			if (yych == 'u') goto xx264;
+			if (yych == 'u') goto xx265;
 			goto xx94;
 		}
 	}
-xx257:
-	yych = *++YYCURSOR;
-	if (yych == 'L') goto xx258;
-	if (yych != 'l') goto xx94;
 xx258:
 	yych = *++YYCURSOR;
-	if (yych == 'A') goto xx259;
-	if (yych != 'a') goto xx94;
+	if (yych == 'L') goto xx259;
+	if (yych != 'l') goto xx94;
 xx259:
 	yych = *++YYCURSOR;
-	if (yych == 'C') goto xx260;
-	if (yych != 'c') goto xx94;
+	if (yych == 'A') goto xx260;
+	if (yych != 'a') goto xx94;
 xx260:
 	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx261;
-	if (yych != 'e') goto xx94;
+	if (yych == 'C') goto xx261;
+	if (yych != 'c') goto xx94;
 xx261:
+	yych = *++YYCURSOR;
+	if (yych == 'E') goto xx262;
+	if (yych != 'e') goto xx94;
+xx262:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx262;
+		if (yych <= '/') goto xx263;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx262;
+			if (yych <= '`') goto xx263;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx262:
-#line 268 "./mql.re"
-	{ MQL_TOKEN_RETURN("replace", T_KEY_REPLACE); }
-#line 1891 "./mql_lexer.cpp"
 xx263:
-	yych = *++YYCURSOR;
-	if (yych == 'I') goto xx271;
-	if (yych == 'i') goto xx271;
-	goto xx94;
+#line 272 "./mql.re"
+	{ MQL_TOKEN_RETURN("replace", T_KEY_REPLACE); }
+#line 1909 "./mql_lexer.cpp"
 xx264:
 	yych = *++YYCURSOR;
-	if (yych == 'R') goto xx265;
-	if (yych != 'r') goto xx94;
+	if (yych == 'I') goto xx272;
+	if (yych == 'i') goto xx272;
+	goto xx94;
 xx265:
 	yych = *++YYCURSOR;
-	if (yych == 'N') goto xx266;
-	if (yych != 'n') goto xx94;
+	if (yych == 'R') goto xx266;
+	if (yych != 'r') goto xx94;
 xx266:
 	yych = *++YYCURSOR;
-	if (yych == 'I') goto xx267;
-	if (yych != 'i') goto xx94;
+	if (yych == 'N') goto xx267;
+	if (yych != 'n') goto xx94;
 xx267:
 	yych = *++YYCURSOR;
-	if (yych == 'N') goto xx268;
-	if (yych != 'n') goto xx94;
+	if (yych == 'I') goto xx268;
+	if (yych != 'i') goto xx94;
 xx268:
 	yych = *++YYCURSOR;
-	if (yych == 'G') goto xx269;
-	if (yych != 'g') goto xx94;
+	if (yych == 'N') goto xx269;
+	if (yych != 'n') goto xx94;
 xx269:
+	yych = *++YYCURSOR;
+	if (yych == 'G') goto xx270;
+	if (yych != 'g') goto xx94;
+xx270:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx270;
+		if (yych <= '/') goto xx271;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx270;
+			if (yych <= '`') goto xx271;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx270:
-#line 249 "./mql.re"
-	{ MQL_TOKEN_RETURN("returning", T_KEY_RETURNING); }
-#line 1934 "./mql_lexer.cpp"
 xx271:
-	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx272;
-	if (yych != 'e') goto xx94;
+#line 250 "./mql.re"
+	{ MQL_TOKEN_RETURN("returning", T_KEY_RETURNING); }
+#line 1952 "./mql_lexer.cpp"
 xx272:
 	yych = *++YYCURSOR;
-	if (yych == 'V') goto xx273;
-	if (yych != 'v') goto xx94;
+	if (yych == 'E') goto xx273;
+	if (yych != 'e') goto xx94;
 xx273:
 	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx274;
-	if (yych != 'e') goto xx94;
+	if (yych == 'V') goto xx274;
+	if (yych != 'v') goto xx94;
 xx274:
+	yych = *++YYCURSOR;
+	if (yych == 'E') goto xx275;
+	if (yych != 'e') goto xx94;
+xx275:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx275;
+		if (yych <= '/') goto xx276;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx275;
+			if (yych <= '`') goto xx276;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx275:
-#line 232 "./mql.re"
-	{ MQL_TOKEN_RETURN("retrieve", T_KEY_RETRIEVE);  }
-#line 1964 "./mql_lexer.cpp"
 xx276:
-	yych = *++YYCURSOR;
-	if (yych == 'V') goto xx277;
-	if (yych != 'v') goto xx94;
+#line 233 "./mql.re"
+	{ MQL_TOKEN_RETURN("retrieve", T_KEY_RETRIEVE);  }
+#line 1982 "./mql_lexer.cpp"
 xx277:
 	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx278;
-	if (yych != 'e') goto xx94;
+	if (yych == 'V') goto xx278;
+	if (yych != 'v') goto xx94;
 xx278:
+	yych = *++YYCURSOR;
+	if (yych == 'E') goto xx279;
+	if (yych != 'e') goto xx94;
+xx279:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx279;
+		if (yych <= '/') goto xx280;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx279;
+			if (yych <= '`') goto xx280;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx279:
+xx280:
 #line 204 "./mql.re"
 	{ MQL_TOKEN_RETURN("remove", T_KEY_REMOVE);  }
-#line 1990 "./mql_lexer.cpp"
-xx280:
-	yych = *++YYCURSOR;
-	if (yych == 'G') goto xx281;
-	if (yych != 'g') goto xx94;
+#line 2008 "./mql_lexer.cpp"
 xx281:
 	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx282;
-	if (yych != 'e') goto xx94;
+	if (yych == 'G') goto xx282;
+	if (yych != 'g') goto xx94;
 xx282:
+	yych = *++YYCURSOR;
+	if (yych == 'E') goto xx283;
+	if (yych != 'e') goto xx94;
+xx283:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx283;
+		if (yych <= '/') goto xx284;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx283;
+			if (yych <= '`') goto xx284;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx283:
+xx284:
 #line 212 "./mql.re"
 	{ MQL_TOKEN_RETURN("range", T_KEY_RANGE);  }
-#line 2016 "./mql_lexer.cpp"
-xx284:
-	yych = *++YYCURSOR;
-	if (yych == 'S') goto xx289;
-	if (yych == 's') goto xx289;
-	goto xx94;
+#line 2034 "./mql_lexer.cpp"
 xx285:
 	yych = *++YYCURSOR;
-	if (yych == 'S') goto xx286;
-	if (yych != 's') goto xx94;
+	if (yych == 'S') goto xx290;
+	if (yych == 's') goto xx290;
+	goto xx94;
 xx286:
 	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx287;
-	if (yych != 't') goto xx94;
+	if (yych == 'S') goto xx287;
+	if (yych != 's') goto xx94;
 xx287:
+	yych = *++YYCURSOR;
+	if (yych == 'T') goto xx288;
+	if (yych != 't') goto xx94;
+xx288:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx288;
+		if (yych <= '/') goto xx289;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx288;
+			if (yych <= '`') goto xx289;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx288:
+xx289:
 #line 191 "./mql.re"
 	{ MQL_TOKEN_RETURN("list", T_KEY_LIST); }
-#line 2047 "./mql_lexer.cpp"
-xx289:
-	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx290;
-	if (yych != 't') goto xx94;
+#line 2065 "./mql_lexer.cpp"
 xx290:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx291;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx93;
-		} else {
-			if (yych <= '`') goto xx291;
-			if (yych <= 'z') goto xx93;
-		}
-	}
-xx291:
-#line 234 "./mql.re"
-	{ MQL_TOKEN_RETURN("last", T_KEY_LAST);  }
-#line 2069 "./mql_lexer.cpp"
-xx292:
 	yych = *++YYCURSOR;
-	if (yych == 'J') goto xx306;
-	if (yych == 'j') goto xx306;
-	goto xx94;
-xx293:
+	if (yych == 'T') goto xx291;
+	if (yych != 't') goto xx94;
+xx291:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx294;
+		if (yych <= '/') goto xx292;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx294;
+			if (yych <= '`') goto xx292;
 			if (yych <= 'z') goto xx93;
 		}
 	}
+xx292:
+#line 235 "./mql.re"
+	{ MQL_TOKEN_RETURN("last", T_KEY_LAST);  }
+#line 2087 "./mql_lexer.cpp"
+xx293:
+	yych = *++YYCURSOR;
+	if (yych == 'J') goto xx307;
+	if (yych == 'j') goto xx307;
+	goto xx94;
 xx294:
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx295;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx295;
+			if (yych <= 'z') goto xx93;
+		}
+	}
+xx295:
 #line 192 "./mql.re"
 	{ MQL_TOKEN_RETURN("of", T_KEY_OF); }
-#line 2092 "./mql_lexer.cpp"
-xx295:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx296;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx93;
-		} else {
-			if (yych <= '`') goto xx296;
-			if (yych <= 'z') goto xx93;
-		}
-	}
-xx296:
-#line 256 "./mql.re"
-	{ MQL_TOKEN_RETURN("on", T_KEY_ON); }
 #line 2110 "./mql_lexer.cpp"
-xx297:
+xx296:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx298;
+		if (yych <= '/') goto xx297;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx298;
+			if (yych <= '`') goto xx297;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx298:
-#line 235 "./mql.re"
-	{ MQL_TOKEN_RETURN("or", T_KEY_OR);  }
+xx297:
+#line 260 "./mql.re"
+	{ MQL_TOKEN_RETURN("on", T_KEY_ON); }
 #line 2128 "./mql_lexer.cpp"
+xx298:
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx299;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx299;
+			if (yych <= 'z') goto xx93;
+		}
+	}
 xx299:
-	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx300;
-	if (yych != 'e') goto xx94;
+#line 236 "./mql.re"
+	{ MQL_TOKEN_RETURN("or", T_KEY_OR);  }
+#line 2146 "./mql_lexer.cpp"
 xx300:
 	yych = *++YYCURSOR;
-	if (yych == 'R') goto xx301;
-	if (yych != 'r') goto xx94;
+	if (yych == 'E') goto xx301;
+	if (yych != 'e') goto xx94;
 xx301:
 	yych = *++YYCURSOR;
-	if (yych == 'L') goto xx302;
-	if (yych != 'l') goto xx94;
+	if (yych == 'R') goto xx302;
+	if (yych != 'r') goto xx94;
 xx302:
 	yych = *++YYCURSOR;
-	if (yych == 'A') goto xx303;
-	if (yych != 'a') goto xx94;
+	if (yych == 'L') goto xx303;
+	if (yych != 'l') goto xx94;
 xx303:
 	yych = *++YYCURSOR;
-	if (yych == 'P') goto xx304;
-	if (yych != 'p') goto xx94;
+	if (yych == 'A') goto xx304;
+	if (yych != 'a') goto xx94;
 xx304:
+	yych = *++YYCURSOR;
+	if (yych == 'P') goto xx305;
+	if (yych != 'p') goto xx94;
+xx305:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx305;
+		if (yych <= '/') goto xx306;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx305;
+			if (yych <= '`') goto xx306;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx305:
-#line 263 "./mql.re"
-	{ MQL_TOKEN_RETURN("overlap", T_KEY_OVERLAP); }
-#line 2166 "./mql_lexer.cpp"
 xx306:
-	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx307;
-	if (yych != 'e') goto xx94;
+#line 267 "./mql.re"
+	{ MQL_TOKEN_RETURN("overlap", T_KEY_OVERLAP); }
+#line 2184 "./mql_lexer.cpp"
 xx307:
 	yych = *++YYCURSOR;
-	if (yych == 'C') goto xx308;
-	if (yych != 'c') goto xx94;
+	if (yych == 'E') goto xx308;
+	if (yych != 'e') goto xx94;
 xx308:
 	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx309;
-	if (yych != 't') goto xx94;
+	if (yych == 'C') goto xx309;
+	if (yych != 'c') goto xx94;
 xx309:
+	yych = *++YYCURSOR;
+	if (yych == 'T') goto xx310;
+	if (yych != 't') goto xx94;
+xx310:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
 		if (yych <= '@') {
-			if (yych <= '/') goto xx310;
+			if (yych <= '/') goto xx311;
 			if (yych <= '9') goto xx93;
 		} else {
-			if (yych == 'S') goto xx311;
+			if (yych == 'S') goto xx312;
 			goto xx93;
 		}
 	} else {
 		if (yych <= '`') {
 			if (yych == '_') goto xx93;
 		} else {
-			if (yych == 's') goto xx311;
+			if (yych == 's') goto xx312;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx310:
+xx311:
 #line 189 "./mql.re"
 	{ MQL_TOKEN_RETURN("object", T_KEY_OBJECT);  }
-#line 2200 "./mql_lexer.cpp"
-xx311:
+#line 2218 "./mql_lexer.cpp"
+xx312:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx312;
+		if (yych <= '/') goto xx313;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx312;
+			if (yych <= '`') goto xx313;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx312:
+xx313:
 #line 190 "./mql.re"
 	{ MQL_TOKEN_RETURN("objects", T_KEY_OBJECTS);  }
-#line 2218 "./mql_lexer.cpp"
-xx313:
-	yych = *++YYCURSOR;
-	if (yych == 'A') goto xx320;
-	if (yych == 'a') goto xx320;
-	goto xx94;
+#line 2236 "./mql_lexer.cpp"
 xx314:
 	yych = *++YYCURSOR;
-	if (yych == 'P') goto xx315;
-	if (yych != 'p') goto xx94;
+	if (yych == 'A') goto xx321;
+	if (yych == 'a') goto xx321;
+	goto xx94;
 xx315:
 	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx316;
-	if (yych != 'e') goto xx94;
+	if (yych == 'P') goto xx316;
+	if (yych != 'p') goto xx94;
 xx316:
+	yych = *++YYCURSOR;
+	if (yych == 'E') goto xx317;
+	if (yych != 'e') goto xx94;
+xx317:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
 		if (yych <= '@') {
-			if (yych <= '/') goto xx317;
+			if (yych <= '/') goto xx318;
 			if (yych <= '9') goto xx93;
 		} else {
-			if (yych == 'S') goto xx318;
+			if (yych == 'S') goto xx319;
 			goto xx93;
 		}
 	} else {
 		if (yych <= '`') {
 			if (yych == '_') goto xx93;
 		} else {
-			if (yych == 's') goto xx318;
+			if (yych == 's') goto xx319;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx317:
+xx318:
 #line 187 "./mql.re"
 	{ MQL_TOKEN_RETURN("type", T_KEY_TYPE);  }
-#line 2253 "./mql_lexer.cpp"
-xx318:
+#line 2271 "./mql_lexer.cpp"
+xx319:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx319;
+		if (yych <= '/') goto xx320;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx319;
+			if (yych <= '`') goto xx320;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx319:
+xx320:
 #line 188 "./mql.re"
 	{ MQL_TOKEN_RETURN("types", T_KEY_TYPES);  }
-#line 2271 "./mql_lexer.cpp"
-xx320:
-	yych = *++YYCURSOR;
-	if (yych == 'N') goto xx321;
-	if (yych != 'n') goto xx94;
+#line 2289 "./mql_lexer.cpp"
 xx321:
 	yych = *++YYCURSOR;
-	if (yych == 'S') goto xx322;
-	if (yych != 's') goto xx94;
+	if (yych == 'N') goto xx322;
+	if (yych != 'n') goto xx94;
 xx322:
 	yych = *++YYCURSOR;
-	if (yych == 'A') goto xx323;
-	if (yych != 'a') goto xx94;
+	if (yych == 'S') goto xx323;
+	if (yych != 's') goto xx94;
 xx323:
 	yych = *++YYCURSOR;
-	if (yych == 'C') goto xx324;
-	if (yych != 'c') goto xx94;
+	if (yych == 'A') goto xx324;
+	if (yych != 'a') goto xx94;
 xx324:
 	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx325;
-	if (yych != 't') goto xx94;
+	if (yych == 'C') goto xx325;
+	if (yych != 'c') goto xx94;
 xx325:
 	yych = *++YYCURSOR;
-	if (yych == 'I') goto xx326;
-	if (yych != 'i') goto xx94;
+	if (yych == 'T') goto xx326;
+	if (yych != 't') goto xx94;
 xx326:
 	yych = *++YYCURSOR;
-	if (yych == 'O') goto xx327;
-	if (yych != 'o') goto xx94;
+	if (yych == 'I') goto xx327;
+	if (yych != 'i') goto xx94;
 xx327:
 	yych = *++YYCURSOR;
-	if (yych == 'N') goto xx328;
-	if (yych != 'n') goto xx94;
+	if (yych == 'O') goto xx328;
+	if (yych != 'o') goto xx94;
 xx328:
+	yych = *++YYCURSOR;
+	if (yych == 'N') goto xx329;
+	if (yych != 'n') goto xx94;
+xx329:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx329;
+		if (yych <= '/') goto xx330;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx329;
+			if (yych <= '`') goto xx330;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx329:
+xx330:
 #line 186 "./mql.re"
 	{ MQL_TOKEN_RETURN("transaction", T_KEY_TRANSACTION); }
-#line 2321 "./mql_lexer.cpp"
-xx330:
+#line 2339 "./mql_lexer.cpp"
+xx331:
 	yych = *++YYCURSOR;
 	if (yych <= 'T') {
-		if (yych == 'G') goto xx333;
+		if (yych == 'G') goto xx334;
 		if (yych <= 'S') goto xx94;
-		goto xx334;
+		goto xx335;
 	} else {
 		if (yych <= 'g') {
 			if (yych <= 'f') goto xx94;
-			goto xx333;
+			goto xx334;
 		} else {
-			if (yych == 't') goto xx334;
+			if (yych == 't') goto xx335;
 			goto xx94;
 		}
 	}
-xx331:
+xx332:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx332;
+		if (yych <= '/') goto xx333;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx332;
+			if (yych <= '`') goto xx333;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx332:
+xx333:
 #line 206 "./mql.re"
 	{ MQL_TOKEN_RETURN("by", T_KEY_BY);  }
-#line 2354 "./mql_lexer.cpp"
-xx333:
-	yych = *++YYCURSOR;
-	if (yych == 'I') goto xx340;
-	if (yych == 'i') goto xx340;
-	goto xx94;
+#line 2372 "./mql_lexer.cpp"
 xx334:
 	yych = *++YYCURSOR;
-	if (yych == 'W') goto xx335;
-	if (yych != 'w') goto xx94;
+	if (yych == 'I') goto xx341;
+	if (yych == 'i') goto xx341;
+	goto xx94;
 xx335:
 	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx336;
-	if (yych != 'e') goto xx94;
+	if (yych == 'W') goto xx336;
+	if (yych != 'w') goto xx94;
 xx336:
 	yych = *++YYCURSOR;
 	if (yych == 'E') goto xx337;
 	if (yych != 'e') goto xx94;
 xx337:
 	yych = *++YYCURSOR;
-	if (yych == 'N') goto xx338;
-	if (yych != 'n') goto xx94;
+	if (yych == 'E') goto xx338;
+	if (yych != 'e') goto xx94;
 xx338:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx339;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx93;
-		} else {
-			if (yych <= '`') goto xx339;
-			if (yych <= 'z') goto xx93;
-		}
-	}
-xx339:
-#line 245 "./mql.re"
-	{ MQL_TOKEN_RETURN("between", T_KEY_BETWEEN); }
-#line 2393 "./mql_lexer.cpp"
-xx340:
 	yych = *++YYCURSOR;
-	if (yych == 'N') goto xx341;
+	if (yych == 'N') goto xx339;
 	if (yych != 'n') goto xx94;
-xx341:
+xx339:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx342;
+		if (yych <= '/') goto xx340;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx342;
+			if (yych <= '`') goto xx340;
 			if (yych <= 'z') goto xx93;
 		}
 	}
+xx340:
+#line 246 "./mql.re"
+	{ MQL_TOKEN_RETURN("between", T_KEY_BETWEEN); }
+#line 2411 "./mql_lexer.cpp"
+xx341:
+	yych = *++YYCURSOR;
+	if (yych == 'N') goto xx342;
+	if (yych != 'n') goto xx94;
 xx342:
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx343;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx343;
+			if (yych <= 'z') goto xx93;
+		}
+	}
+xx343:
 #line 183 "./mql.re"
 	{ MQL_TOKEN_RETURN("begin", T_KEY_BEGIN); }
-#line 2415 "./mql_lexer.cpp"
-xx343:
-	yych = *++YYCURSOR;
-	if (yych == 'O') goto xx367;
-	if (yych == 'o') goto xx367;
-	goto xx94;
+#line 2433 "./mql_lexer.cpp"
 xx344:
 	yych = *++YYCURSOR;
-	if (yych == 'D') goto xx365;
-	if (yych == 'd') goto xx365;
+	if (yych == 'O') goto xx377;
+	if (yych == 'o') goto xx377;
 	goto xx94;
 xx345:
 	yych = *++YYCURSOR;
-	if (yych == 'L') goto xx363;
-	if (yych == 'l') goto xx363;
+	if (yych == 'D') goto xx375;
+	if (yych == 'd') goto xx375;
 	goto xx94;
 xx346:
 	yych = *++YYCURSOR;
+	if (yych == 'G') goto xx367;
+	if (yych == 'g') goto xx367;
+	goto xx94;
+xx347:
+	yych = *++YYCURSOR;
+	if (yych == 'L') goto xx365;
+	if (yych == 'l') goto xx365;
+	goto xx94;
+xx348:
+	yych = *++YYCURSOR;
 	if (yych <= 'D') {
-		if (yych == 'A') goto xx355;
+		if (yych == 'A') goto xx357;
 		if (yych <= 'C') goto xx94;
-		goto xx356;
+		goto xx358;
 	} else {
 		if (yych <= 'a') {
 			if (yych <= '`') goto xx94;
-			goto xx355;
+			goto xx357;
 		} else {
-			if (yych == 'd') goto xx356;
+			if (yych == 'd') goto xx358;
 			goto xx94;
 		}
 	}
-xx347:
+xx349:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
 		if (yych <= '@') {
-			if (yych <= '/') goto xx348;
+			if (yych <= '/') goto xx350;
 			if (yych <= '9') goto xx93;
 		} else {
-			if (yych == 'C') goto xx351;
+			if (yych == 'C') goto xx353;
 			goto xx93;
 		}
 	} else {
 		if (yych <= '`') {
 			if (yych == '_') goto xx93;
 		} else {
-			if (yych == 'c') goto xx351;
-			if (yych <= 'z') goto xx93;
-		}
-	}
-xx348:
-#line 246 "./mql.re"
-	{ MQL_TOKEN_RETURN("as", T_KEY_AS);  }
-#line 2467 "./mql_lexer.cpp"
-xx349:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx350;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx93;
-		} else {
-			if (yych <= '`') goto xx350;
+			if (yych == 'c') goto xx353;
 			if (yych <= 'z') goto xx93;
 		}
 	}
 xx350:
-#line 258 "./mql.re"
-	{ MQL_TOKEN_RETURN("at", T_KEY_AT); }
-#line 2485 "./mql_lexer.cpp"
+#line 247 "./mql.re"
+	{ MQL_TOKEN_RETURN("as", T_KEY_AS);  }
+#line 2490 "./mql_lexer.cpp"
 xx351:
-	yych = *++YYCURSOR;
-	if (yych == 'I') goto xx352;
-	if (yych != 'i') goto xx94;
-xx352:
-	yych = *++YYCURSOR;
-	if (yych == 'I') goto xx353;
-	if (yych != 'i') goto xx94;
-xx353:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx354;
+		if (yych <= '/') goto xx352;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx354;
+			if (yych <= '`') goto xx352;
 			if (yych <= 'z') goto xx93;
 		}
 	}
+xx352:
+#line 262 "./mql.re"
+	{ MQL_TOKEN_RETURN("at", T_KEY_AT); }
+#line 2508 "./mql_lexer.cpp"
+xx353:
+	yych = *++YYCURSOR;
+	if (yych == 'I') goto xx354;
+	if (yych != 'i') goto xx94;
 xx354:
+	yych = *++YYCURSOR;
+	if (yych == 'I') goto xx355;
+	if (yych != 'i') goto xx94;
+xx355:
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx356;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx356;
+			if (yych <= 'z') goto xx93;
+		}
+	}
+xx356:
 #line 198 "./mql.re"
 	{ MQL_TOKEN_RETURN("ascii", T_KEY_ASCII); }
-#line 2511 "./mql_lexer.cpp"
-xx355:
+#line 2534 "./mql_lexer.cpp"
+xx357:
 	yych = *++YYCURSOR;
-	if (yych == 'L') goto xx358;
-	if (yych == 'l') goto xx358;
+	if (yych == 'L') goto xx360;
+	if (yych == 'l') goto xx360;
 	goto xx94;
-xx356:
+xx358:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx357;
+		if (yych <= '/') goto xx359;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx357;
+			if (yych <= '`') goto xx359;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx357:
-#line 236 "./mql.re"
-	{ MQL_TOKEN_RETURN("and", T_KEY_AND);  }
-#line 2534 "./mql_lexer.cpp"
-xx358:
-	yych = *++YYCURSOR;
-	if (yych == 'Y') goto xx359;
-	if (yych != 'y') goto xx94;
 xx359:
-	yych = *++YYCURSOR;
-	if (yych == 'Z') goto xx360;
-	if (yych != 'z') goto xx94;
+#line 237 "./mql.re"
+	{ MQL_TOKEN_RETURN("and", T_KEY_AND);  }
+#line 2557 "./mql_lexer.cpp"
 xx360:
 	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx361;
-	if (yych != 'e') goto xx94;
+	if (yych == 'Y') goto xx361;
+	if (yych != 'y') goto xx94;
 xx361:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx362;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx93;
-		} else {
-			if (yych <= '`') goto xx362;
-			if (yych <= 'z') goto xx93;
-		}
-	}
+	yych = *++YYCURSOR;
+	if (yych == 'Z') goto xx362;
+	if (yych != 'z') goto xx94;
 xx362:
-#line 182 "./mql.re"
-	{ MQL_TOKEN_RETURN("analyze", T_KEY_ANALYZE); }
-#line 2564 "./mql_lexer.cpp"
+	yych = *++YYCURSOR;
+	if (yych == 'E') goto xx363;
+	if (yych != 'e') goto xx94;
 xx363:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
@@ -100826,9 +102802,9 @@ xx363:
 		}
 	}
 xx364:
-#line 216 "./mql.re"
-	{ MQL_TOKEN_RETURN("all", T_KEY_ALL);  }
-#line 2582 "./mql_lexer.cpp"
+#line 182 "./mql.re"
+	{ MQL_TOKEN_RETURN("analyze", T_KEY_ANALYZE); }
+#line 2587 "./mql_lexer.cpp"
 xx365:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
@@ -100844,51 +102820,51 @@ xx365:
 		}
 	}
 xx366:
-#line 203 "./mql.re"
-	{ MQL_TOKEN_RETURN("add", T_KEY_ADD);  }
-#line 2600 "./mql_lexer.cpp"
+#line 216 "./mql.re"
+	{ MQL_TOKEN_RETURN("all", T_KEY_ALL);  }
+#line 2605 "./mql_lexer.cpp"
 xx367:
 	yych = *++YYCURSOR;
 	if (yych == 'R') goto xx368;
 	if (yych != 'r') goto xx94;
 xx368:
 	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx369;
-	if (yych != 't') goto xx94;
+	if (yych == 'E') goto xx369;
+	if (yych != 'e') goto xx94;
 xx369:
+	yych = *++YYCURSOR;
+	if (yych == 'G') goto xx370;
+	if (yych != 'g') goto xx94;
+xx370:
+	yych = *++YYCURSOR;
+	if (yych == 'A') goto xx371;
+	if (yych != 'a') goto xx94;
+xx371:
+	yych = *++YYCURSOR;
+	if (yych == 'T') goto xx372;
+	if (yych != 't') goto xx94;
+xx372:
+	yych = *++YYCURSOR;
+	if (yych == 'E') goto xx373;
+	if (yych != 'e') goto xx94;
+xx373:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx370;
+		if (yych <= '/') goto xx374;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx370;
+			if (yych <= '`') goto xx374;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx370:
-#line 185 "./mql.re"
-	{ MQL_TOKEN_RETURN("abort", T_KEY_ABORT); }
-#line 2626 "./mql_lexer.cpp"
-xx371:
-	yych = *++YYCURSOR;
-	if (yych == 'C') goto xx372;
-	if (yych != 'c') goto xx94;
-xx372:
-	yych = *++YYCURSOR;
-	if (yych == 'U') goto xx373;
-	if (yych != 'u') goto xx94;
-xx373:
-	yych = *++YYCURSOR;
-	if (yych == 'U') goto xx374;
-	if (yych != 'u') goto xx94;
 xx374:
-	yych = *++YYCURSOR;
-	if (yych == 'M') goto xx375;
-	if (yych != 'm') goto xx94;
+#line 222 "./mql.re"
+	{ MQL_TOKEN_RETURN("aggregate", T_KEY_AGGREGATE);  }
+#line 2647 "./mql_lexer.cpp"
 xx375:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
@@ -100904,49 +102880,109 @@ xx375:
 		}
 	}
 xx376:
-#line 181 "./mql.re"
-	{ MQL_TOKEN_RETURN("vacuum", T_KEY_VACUUM); }
-#line 2660 "./mql_lexer.cpp"
+#line 203 "./mql.re"
+	{ MQL_TOKEN_RETURN("add", T_KEY_ADD);  }
+#line 2665 "./mql_lexer.cpp"
 xx377:
 	yych = *++YYCURSOR;
-	if (yych == '_') goto xx415;
-	goto xx94;
+	if (yych == 'R') goto xx378;
+	if (yych != 'r') goto xx94;
 xx378:
+	yych = *++YYCURSOR;
+	if (yych == 'T') goto xx379;
+	if (yych != 't') goto xx94;
+xx379:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx379;
+		if (yych <= '/') goto xx380;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx379;
+			if (yych <= '`') goto xx380;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx379:
-#line 239 "./mql.re"
-	{ MQL_TOKEN_RETURN("if", T_KEY_IF);  }
-#line 2682 "./mql_lexer.cpp"
 xx380:
+#line 185 "./mql.re"
+	{ MQL_TOKEN_RETURN("abort", T_KEY_ABORT); }
+#line 2691 "./mql_lexer.cpp"
+xx381:
+	yych = *++YYCURSOR;
+	if (yych == 'C') goto xx382;
+	if (yych != 'c') goto xx94;
+xx382:
+	yych = *++YYCURSOR;
+	if (yych == 'U') goto xx383;
+	if (yych != 'u') goto xx94;
+xx383:
+	yych = *++YYCURSOR;
+	if (yych == 'U') goto xx384;
+	if (yych != 'u') goto xx94;
+xx384:
+	yych = *++YYCURSOR;
+	if (yych == 'M') goto xx385;
+	if (yych != 'm') goto xx94;
+xx385:
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx386;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx386;
+			if (yych <= 'z') goto xx93;
+		}
+	}
+xx386:
+#line 181 "./mql.re"
+	{ MQL_TOKEN_RETURN("vacuum", T_KEY_VACUUM); }
+#line 2725 "./mql_lexer.cpp"
+xx387:
+	yych = *++YYCURSOR;
+	if (yych == '_') goto xx425;
+	goto xx94;
+xx388:
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx389;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx389;
+			if (yych <= 'z') goto xx93;
+		}
+	}
+xx389:
+#line 240 "./mql.re"
+	{ MQL_TOKEN_RETURN("if", T_KEY_IF);  }
+#line 2747 "./mql_lexer.cpp"
+xx390:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
 		if (yych <= 'D') {
 			if (yych <= '9') {
 				if (yych >= '0') goto xx93;
 			} else {
-				if (yych <= '@') goto xx381;
+				if (yych <= '@') goto xx391;
 				if (yych <= 'C') goto xx93;
-				goto xx384;
+				goto xx394;
 			}
 		} else {
 			if (yych <= 'R') {
-				if (yych == 'I') goto xx383;
+				if (yych == 'I') goto xx393;
 				goto xx93;
 			} else {
-				if (yych <= 'S') goto xx382;
-				if (yych <= 'T') goto xx385;
+				if (yych <= 'S') goto xx392;
+				if (yych <= 'T') goto xx395;
 				goto xx93;
 			}
 		}
@@ -100955,1035 +102991,980 @@ xx380:
 			if (yych <= '`') {
 				if (yych == '_') goto xx93;
 			} else {
-				if (yych == 'd') goto xx384;
+				if (yych == 'd') goto xx394;
 				goto xx93;
 			}
 		} else {
 			if (yych <= 's') {
-				if (yych <= 'i') goto xx383;
+				if (yych <= 'i') goto xx393;
 				if (yych <= 'r') goto xx93;
-				goto xx382;
+				goto xx392;
 			} else {
-				if (yych <= 't') goto xx385;
+				if (yych <= 't') goto xx395;
 				if (yych <= 'z') goto xx93;
 			}
 		}
 	}
-xx381:
+xx391:
 #line 193 "./mql.re"
 	{ MQL_TOKEN_RETURN("in", T_KEY_IN);  }
-#line 2726 "./mql_lexer.cpp"
-xx382:
+#line 2791 "./mql_lexer.cpp"
+xx392:
 	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx411;
-	if (yych == 'e') goto xx411;
+	if (yych == 'E') goto xx421;
+	if (yych == 'e') goto xx421;
 	goto xx94;
-xx383:
+xx393:
 	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx403;
-	if (yych == 't') goto xx403;
+	if (yych == 'T') goto xx413;
+	if (yych == 't') goto xx413;
 	goto xx94;
-xx384:
+xx394:
 	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx397;
-	if (yych == 'e') goto xx397;
+	if (yych == 'E') goto xx407;
+	if (yych == 'e') goto xx407;
 	goto xx94;
-xx385:
+xx395:
 	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx386;
+	if (yych == 'E') goto xx396;
 	if (yych != 'e') goto xx94;
-xx386:
+xx396:
 	yych = *++YYCURSOR;
 	if (yych <= 'R') {
-		if (yych == 'G') goto xx387;
+		if (yych == 'G') goto xx397;
 		if (yych <= 'Q') goto xx94;
-		goto xx388;
+		goto xx398;
 	} else {
 		if (yych <= 'g') {
 			if (yych <= 'f') goto xx94;
 		} else {
-			if (yych == 'r') goto xx388;
+			if (yych == 'r') goto xx398;
 			goto xx94;
 		}
 	}
-xx387:
-	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx394;
-	if (yych == 'e') goto xx394;
-	goto xx94;
-xx388:
-	yych = *++YYCURSOR;
-	if (yych == 'S') goto xx389;
-	if (yych != 's') goto xx94;
-xx389:
-	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx390;
-	if (yych != 'e') goto xx94;
-xx390:
-	yych = *++YYCURSOR;
-	if (yych == 'C') goto xx391;
-	if (yych != 'c') goto xx94;
-xx391:
-	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx392;
-	if (yych != 't') goto xx94;
-xx392:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx393;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx93;
-		} else {
-			if (yych <= '`') goto xx393;
-			if (yych <= 'z') goto xx93;
-		}
-	}
-xx393:
-#line 266 "./mql.re"
-	{ MQL_TOKEN_RETURN("intersect", T_KEY_INTERSECT); }
-#line 2798 "./mql_lexer.cpp"
-xx394:
-	yych = *++YYCURSOR;
-	if (yych == 'R') goto xx395;
-	if (yych != 'r') goto xx94;
-xx395:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx396;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx93;
-		} else {
-			if (yych <= '`') goto xx396;
-			if (yych <= 'z') goto xx93;
-		}
-	}
-xx396:
-#line 196 "./mql.re"
-	{ MQL_TOKEN_RETURN("integer", T_KEY_INTEGER);  }
-#line 2820 "./mql_lexer.cpp"
 xx397:
 	yych = *++YYCURSOR;
-	if (yych == 'X') goto xx398;
-	if (yych != 'x') goto xx94;
+	if (yych == 'E') goto xx404;
+	if (yych == 'e') goto xx404;
+	goto xx94;
 xx398:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '@') {
-			if (yych <= '/') goto xx399;
-			if (yych <= '9') goto xx93;
-		} else {
-			if (yych == 'E') goto xx400;
-			goto xx93;
-		}
-	} else {
-		if (yych <= '`') {
-			if (yych == '_') goto xx93;
-		} else {
-			if (yych == 'e') goto xx400;
-			if (yych <= 'z') goto xx93;
-		}
-	}
+	yych = *++YYCURSOR;
+	if (yych == 'S') goto xx399;
+	if (yych != 's') goto xx94;
 xx399:
-#line 195 "./mql.re"
-	{ MQL_TOKEN_RETURN("index", T_KEY_INDEX); }
-#line 2846 "./mql_lexer.cpp"
+	yych = *++YYCURSOR;
+	if (yych == 'E') goto xx400;
+	if (yych != 'e') goto xx94;
 xx400:
 	yych = *++YYCURSOR;
-	if (yych == 'S') goto xx401;
-	if (yych != 's') goto xx94;
+	if (yych == 'C') goto xx401;
+	if (yych != 'c') goto xx94;
 xx401:
+	yych = *++YYCURSOR;
+	if (yych == 'T') goto xx402;
+	if (yych != 't') goto xx94;
+xx402:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx402;
+		if (yych <= '/') goto xx403;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx402;
+			if (yych <= '`') goto xx403;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx402:
-#line 194 "./mql.re"
-	{ MQL_TOKEN_RETURN("indexes", T_KEY_INDEXES); }
-#line 2868 "./mql_lexer.cpp"
 xx403:
-	yych = *++YYCURSOR;
-	if (yych == 'I') goto xx404;
-	if (yych != 'i') goto xx94;
+#line 270 "./mql.re"
+	{ MQL_TOKEN_RETURN("intersect", T_KEY_INTERSECT); }
+#line 2863 "./mql_lexer.cpp"
 xx404:
 	yych = *++YYCURSOR;
-	if (yych == 'A') goto xx405;
-	if (yych != 'a') goto xx94;
+	if (yych == 'R') goto xx405;
+	if (yych != 'r') goto xx94;
 xx405:
-	yych = *++YYCURSOR;
-	if (yych == 'L') goto xx406;
-	if (yych != 'l') goto xx94;
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx406;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx406;
+			if (yych <= 'z') goto xx93;
+		}
+	}
 xx406:
-	yych = *++YYCURSOR;
-	if (yych == 'I') goto xx407;
-	if (yych != 'i') goto xx94;
+#line 196 "./mql.re"
+	{ MQL_TOKEN_RETURN("integer", T_KEY_INTEGER);  }
+#line 2885 "./mql_lexer.cpp"
 xx407:
 	yych = *++YYCURSOR;
-	if (yych == 'Z') goto xx408;
-	if (yych != 'z') goto xx94;
+	if (yych == 'X') goto xx408;
+	if (yych != 'x') goto xx94;
 xx408:
-	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx409;
-	if (yych != 'e') goto xx94;
-xx409:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx410;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx93;
-		} else {
-			if (yych <= '`') goto xx410;
-			if (yych <= 'z') goto xx93;
-		}
-	}
-xx410:
-#line 180 "./mql.re"
-	{ MQL_TOKEN_RETURN("initialize", T_KEY_INITIALIZE);  }
-#line 2910 "./mql_lexer.cpp"
-xx411:
-	yych = *++YYCURSOR;
-	if (yych == 'R') goto xx412;
-	if (yych != 'r') goto xx94;
-xx412:
-	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx413;
-	if (yych != 't') goto xx94;
-xx413:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx414;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx93;
-		} else {
-			if (yych <= '`') goto xx414;
-			if (yych <= 'z') goto xx93;
-		}
-	}
-xx414:
-#line 176 "./mql.re"
-	{ MQL_TOKEN_RETURN("insert", T_KEY_INSERT);  }
-#line 2936 "./mql_lexer.cpp"
-xx415:
-	yych = *++YYCURSOR;
-	if (yych == 'D') goto xx416;
-	if (yych != 'd') goto xx94;
-xx416:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
 		if (yych <= '@') {
-			if (yych <= '/') goto xx417;
+			if (yych <= '/') goto xx409;
 			if (yych <= '9') goto xx93;
 		} else {
-			if (yych == 'S') goto xx418;
+			if (yych == 'E') goto xx410;
 			goto xx93;
 		}
 	} else {
 		if (yych <= '`') {
 			if (yych == '_') goto xx93;
 		} else {
-			if (yych == 's') goto xx418;
+			if (yych == 'e') goto xx410;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx417:
-#line 199 "./mql.re"
-	{ MQL_TOKEN_RETURN("id_d", T_KEY_ID_D);  }
-#line 2962 "./mql_lexer.cpp"
-xx418:
+xx409:
+#line 195 "./mql.re"
+	{ MQL_TOKEN_RETURN("index", T_KEY_INDEX); }
+#line 2911 "./mql_lexer.cpp"
+xx410:
+	yych = *++YYCURSOR;
+	if (yych == 'S') goto xx411;
+	if (yych != 's') goto xx94;
+xx411:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx419;
+		if (yych <= '/') goto xx412;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx419;
+			if (yych <= '`') goto xx412;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx419:
-#line 200 "./mql.re"
-	{ MQL_TOKEN_RETURN("id_ds", T_KEY_ID_DS);  }
-#line 2980 "./mql_lexer.cpp"
-xx420:
+xx412:
+#line 194 "./mql.re"
+	{ MQL_TOKEN_RETURN("indexes", T_KEY_INDEXES); }
+#line 2933 "./mql_lexer.cpp"
+xx413:
 	yych = *++YYCURSOR;
-	if (yych == 'P') goto xx426;
-	if (yych == 'p') goto xx426;
-	goto xx94;
+	if (yych == 'I') goto xx414;
+	if (yych != 'i') goto xx94;
+xx414:
+	yych = *++YYCURSOR;
+	if (yych == 'A') goto xx415;
+	if (yych != 'a') goto xx94;
+xx415:
+	yych = *++YYCURSOR;
+	if (yych == 'L') goto xx416;
+	if (yych != 'l') goto xx94;
+xx416:
+	yych = *++YYCURSOR;
+	if (yych == 'I') goto xx417;
+	if (yych != 'i') goto xx94;
+xx417:
+	yych = *++YYCURSOR;
+	if (yych == 'Z') goto xx418;
+	if (yych != 'z') goto xx94;
+xx418:
+	yych = *++YYCURSOR;
+	if (yych == 'E') goto xx419;
+	if (yych != 'e') goto xx94;
+xx419:
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx420;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx420;
+			if (yych <= 'z') goto xx93;
+		}
+	}
+xx420:
+#line 180 "./mql.re"
+	{ MQL_TOKEN_RETURN("initialize", T_KEY_INITIALIZE);  }
+#line 2975 "./mql_lexer.cpp"
 xx421:
 	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx424;
-	if (yych == 't') goto xx424;
-	goto xx94;
+	if (yych == 'R') goto xx422;
+	if (yych != 'r') goto xx94;
 xx422:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx423;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx93;
-		} else {
-			if (yych <= '`') goto xx423;
-			if (yych <= 'z') goto xx93;
-		}
-	}
+	yych = *++YYCURSOR;
+	if (yych == 'T') goto xx423;
+	if (yych != 't') goto xx94;
 xx423:
-#line 248 "./mql.re"
-	{ MQL_TOKEN_RETURN("go", T_KEY_GO); }
-#line 3008 "./mql_lexer.cpp"
-xx424:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx425;
+		if (yych <= '/') goto xx424;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx425;
+			if (yych <= '`') goto xx424;
 			if (yych <= 'z') goto xx93;
 		}
 	}
+xx424:
+#line 176 "./mql.re"
+	{ MQL_TOKEN_RETURN("insert", T_KEY_INSERT);  }
+#line 3001 "./mql_lexer.cpp"
 xx425:
+	yych = *++YYCURSOR;
+	if (yych == 'D') goto xx426;
+	if (yych != 'd') goto xx94;
+xx426:
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '@') {
+			if (yych <= '/') goto xx427;
+			if (yych <= '9') goto xx93;
+		} else {
+			if (yych == 'S') goto xx428;
+			goto xx93;
+		}
+	} else {
+		if (yych <= '`') {
+			if (yych == '_') goto xx93;
+		} else {
+			if (yych == 's') goto xx428;
+			if (yych <= 'z') goto xx93;
+		}
+	}
+xx427:
+#line 199 "./mql.re"
+	{ MQL_TOKEN_RETURN("id_d", T_KEY_ID_D);  }
+#line 3027 "./mql_lexer.cpp"
+xx428:
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx429;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx429;
+			if (yych <= 'z') goto xx93;
+		}
+	}
+xx429:
+#line 200 "./mql.re"
+	{ MQL_TOKEN_RETURN("id_ds", T_KEY_ID_DS);  }
+#line 3045 "./mql_lexer.cpp"
+xx430:
+	yych = *++YYCURSOR;
+	if (yych == 'P') goto xx436;
+	if (yych == 'p') goto xx436;
+	goto xx94;
+xx431:
+	yych = *++YYCURSOR;
+	if (yych == 'T') goto xx434;
+	if (yych == 't') goto xx434;
+	goto xx94;
+xx432:
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx433;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx433;
+			if (yych <= 'z') goto xx93;
+		}
+	}
+xx433:
+#line 249 "./mql.re"
+	{ MQL_TOKEN_RETURN("go", T_KEY_GO); }
+#line 3073 "./mql_lexer.cpp"
+xx434:
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx435;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx435;
+			if (yych <= 'z') goto xx93;
+		}
+	}
+xx435:
 #line 175 "./mql.re"
 	{ MQL_TOKEN_RETURN("get", T_KEY_GET);  }
-#line 3026 "./mql_lexer.cpp"
-xx426:
+#line 3091 "./mql_lexer.cpp"
+xx436:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= '@') {
 		if (yych <= '9') {
 			if (yych >= '0') goto xx93;
 		} else {
-			if (yych == '?') goto xx428;
+			if (yych == '?') goto xx438;
 		}
 	} else {
 		if (yych <= '_') {
 			if (yych <= 'Z') goto xx93;
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx427;
+			if (yych <= '`') goto xx437;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx427:
-#line 242 "./mql.re"
-	{ MQL_TOKEN_RETURN("gap", T_KEY_GAP);  }
-#line 3047 "./mql_lexer.cpp"
-xx428:
-	++YYCURSOR;
+xx437:
 #line 243 "./mql.re"
+	{ MQL_TOKEN_RETURN("gap", T_KEY_GAP);  }
+#line 3112 "./mql_lexer.cpp"
+xx438:
+	++YYCURSOR;
+#line 244 "./mql.re"
 	{ MQL_TOKEN_RETURN("gap?", T_KEY_OPT_GAP);  }
-#line 3052 "./mql_lexer.cpp"
-xx430:
+#line 3117 "./mql_lexer.cpp"
+xx440:
 	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx457;
-	if (yych == 't') goto xx457;
+	if (yych == 'T') goto xx467;
+	if (yych == 't') goto xx467;
 	goto xx94;
-xx431:
+xx441:
 	yych = *++YYCURSOR;
 	if (yych <= 'L') {
-		if (yych == 'F') goto xx447;
+		if (yych == 'F') goto xx457;
 		if (yych <= 'K') goto xx94;
-		goto xx446;
+		goto xx456;
 	} else {
 		if (yych <= 'f') {
 			if (yych <= 'e') goto xx94;
-			goto xx447;
+			goto xx457;
 		} else {
-			if (yych == 'l') goto xx446;
+			if (yych == 'l') goto xx456;
 			goto xx94;
 		}
 	}
-xx432:
-	yych = *++YYCURSOR;
-	if (yych == 'F') goto xx437;
-	if (yych == 'f') goto xx437;
-	goto xx94;
-xx433:
-	yych = *++YYCURSOR;
-	if (yych == 'O') goto xx434;
-	if (yych != 'o') goto xx94;
-xx434:
-	yych = *++YYCURSOR;
-	if (yych == 'P') goto xx435;
-	if (yych != 'p') goto xx94;
-xx435:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx436;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx93;
-		} else {
-			if (yych <= '`') goto xx436;
-			if (yych <= 'z') goto xx93;
-		}
-	}
-xx436:
-#line 174 "./mql.re"
-	{ MQL_TOKEN_RETURN("drop", T_KEY_DROP);  }
-#line 3103 "./mql_lexer.cpp"
-xx437:
-	yych = *++YYCURSOR;
-	if (yych == 'F') goto xx438;
-	if (yych != 'f') goto xx94;
-xx438:
-	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx439;
-	if (yych != 'e') goto xx94;
-xx439:
-	yych = *++YYCURSOR;
-	if (yych == 'R') goto xx440;
-	if (yych != 'r') goto xx94;
-xx440:
-	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx441;
-	if (yych != 'e') goto xx94;
-xx441:
-	yych = *++YYCURSOR;
-	if (yych == 'N') goto xx442;
-	if (yych != 'n') goto xx94;
 xx442:
 	yych = *++YYCURSOR;
-	if (yych == 'C') goto xx443;
-	if (yych != 'c') goto xx94;
+	if (yych == 'F') goto xx447;
+	if (yych == 'f') goto xx447;
+	goto xx94;
 xx443:
 	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx444;
-	if (yych != 'e') goto xx94;
+	if (yych == 'O') goto xx444;
+	if (yych != 'o') goto xx94;
 xx444:
+	yych = *++YYCURSOR;
+	if (yych == 'P') goto xx445;
+	if (yych != 'p') goto xx94;
+xx445:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx445;
+		if (yych <= '/') goto xx446;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx445;
+			if (yych <= '`') goto xx446;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx445:
-#line 267 "./mql.re"
-	{ MQL_TOKEN_RETURN("difference", T_KEY_DIFFERENCE); }
-#line 3149 "./mql_lexer.cpp"
 xx446:
-	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx453;
-	if (yych == 'e') goto xx453;
-	goto xx94;
+#line 174 "./mql.re"
+	{ MQL_TOKEN_RETURN("drop", T_KEY_DROP);  }
+#line 3168 "./mql_lexer.cpp"
 xx447:
 	yych = *++YYCURSOR;
-	if (yych == 'A') goto xx448;
-	if (yych != 'a') goto xx94;
+	if (yych == 'F') goto xx448;
+	if (yych != 'f') goto xx94;
 xx448:
 	yych = *++YYCURSOR;
-	if (yych == 'U') goto xx449;
-	if (yych != 'u') goto xx94;
+	if (yych == 'E') goto xx449;
+	if (yych != 'e') goto xx94;
 xx449:
 	yych = *++YYCURSOR;
-	if (yych == 'L') goto xx450;
-	if (yych != 'l') goto xx94;
+	if (yych == 'R') goto xx450;
+	if (yych != 'r') goto xx94;
 xx450:
 	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx451;
-	if (yych != 't') goto xx94;
+	if (yych == 'E') goto xx451;
+	if (yych != 'e') goto xx94;
 xx451:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx452;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx93;
-		} else {
-			if (yych <= '`') goto xx452;
-			if (yych <= 'z') goto xx93;
-		}
-	}
+	yych = *++YYCURSOR;
+	if (yych == 'N') goto xx452;
+	if (yych != 'n') goto xx94;
 xx452:
-#line 201 "./mql.re"
-	{ MQL_TOKEN_RETURN("default", T_KEY_DEFAULT);  }
-#line 3188 "./mql_lexer.cpp"
+	yych = *++YYCURSOR;
+	if (yych == 'C') goto xx453;
+	if (yych != 'c') goto xx94;
 xx453:
 	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx454;
-	if (yych != 't') goto xx94;
-xx454:
-	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx455;
+	if (yych == 'E') goto xx454;
 	if (yych != 'e') goto xx94;
-xx455:
+xx454:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx456;
+		if (yych <= '/') goto xx455;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx456;
+			if (yych <= '`') goto xx455;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx456:
-#line 177 "./mql.re"
-	{ MQL_TOKEN_RETURN("delete", T_KEY_DELETE);  }
+xx455:
+#line 271 "./mql.re"
+	{ MQL_TOKEN_RETURN("difference", T_KEY_DIFFERENCE); }
 #line 3214 "./mql_lexer.cpp"
+xx456:
+	yych = *++YYCURSOR;
+	if (yych == 'E') goto xx463;
+	if (yych == 'e') goto xx463;
+	goto xx94;
 xx457:
 	yych = *++YYCURSOR;
 	if (yych == 'A') goto xx458;
 	if (yych != 'a') goto xx94;
 xx458:
 	yych = *++YYCURSOR;
-	if (yych == 'B') goto xx459;
-	if (yych != 'b') goto xx94;
+	if (yych == 'U') goto xx459;
+	if (yych != 'u') goto xx94;
 xx459:
 	yych = *++YYCURSOR;
-	if (yych == 'A') goto xx460;
-	if (yych != 'a') goto xx94;
+	if (yych == 'L') goto xx460;
+	if (yych != 'l') goto xx94;
 xx460:
 	yych = *++YYCURSOR;
-	if (yych == 'S') goto xx461;
-	if (yych != 's') goto xx94;
+	if (yych == 'T') goto xx461;
+	if (yych != 't') goto xx94;
 xx461:
-	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx462;
-	if (yych != 'e') goto xx94;
-xx462:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx463;
+		if (yych <= '/') goto xx462;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx463;
+			if (yych <= '`') goto xx462;
 			if (yych <= 'z') goto xx93;
 		}
 	}
+xx462:
+#line 201 "./mql.re"
+	{ MQL_TOKEN_RETURN("default", T_KEY_DEFAULT);  }
+#line 3253 "./mql_lexer.cpp"
 xx463:
-#line 178 "./mql.re"
-	{ MQL_TOKEN_RETURN("database", T_KEY_DATABASE);  }
-#line 3252 "./mql_lexer.cpp"
+	yych = *++YYCURSOR;
+	if (yych == 'T') goto xx464;
+	if (yych != 't') goto xx94;
 xx464:
 	yych = *++YYCURSOR;
-	if (yych <= 'T') {
-		if (yych <= 'K') {
-			if (yych == 'G') goto xx500;
-			goto xx94;
-		} else {
-			if (yych <= 'L') goto xx499;
-			if (yych <= 'S') goto xx94;
-			goto xx501;
-		}
+	if (yych == 'E') goto xx465;
+	if (yych != 'e') goto xx94;
+xx465:
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx466;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
 	} else {
-		if (yych <= 'k') {
-			if (yych == 'g') goto xx500;
-			goto xx94;
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= 'l') goto xx499;
-			if (yych == 't') goto xx501;
-			goto xx94;
+			if (yych <= '`') goto xx466;
+			if (yych <= 'z') goto xx93;
 		}
 	}
-xx465:
-	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx495;
-	if (yych == 'e') goto xx495;
-	goto xx94;
 xx466:
-	yych = *++YYCURSOR;
-	if (yych == 'N') goto xx490;
-	if (yych == 'n') goto xx490;
-	goto xx94;
+#line 177 "./mql.re"
+	{ MQL_TOKEN_RETURN("delete", T_KEY_DELETE);  }
+#line 3279 "./mql_lexer.cpp"
 xx467:
 	yych = *++YYCURSOR;
-	if (yych <= 'R') {
-		if (yych == 'A') goto xx478;
-		if (yych <= 'Q') goto xx94;
-		goto xx477;
-	} else {
-		if (yych <= 'a') {
-			if (yych <= '`') goto xx94;
-			goto xx478;
-		} else {
-			if (yych == 'r') goto xx477;
-			goto xx94;
-		}
-	}
+	if (yych == 'A') goto xx468;
+	if (yych != 'a') goto xx94;
 xx468:
 	yych = *++YYCURSOR;
 	if (yych == 'B') goto xx469;
 	if (yych != 'b') goto xx94;
 xx469:
 	yych = *++YYCURSOR;
-	if (yych == 'S') goto xx470;
-	if (yych != 's') goto xx94;
+	if (yych == 'A') goto xx470;
+	if (yych != 'a') goto xx94;
 xx470:
 	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx471;
-	if (yych != 't') goto xx94;
+	if (yych == 'S') goto xx471;
+	if (yych != 's') goto xx94;
 xx471:
 	yych = *++YYCURSOR;
-	if (yych == 'R') goto xx472;
-	if (yych != 'r') goto xx94;
-xx472:
-	yych = *++YYCURSOR;
-	if (yych == 'A') goto xx473;
-	if (yych != 'a') goto xx94;
-xx473:
-	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx474;
-	if (yych != 't') goto xx94;
-xx474:
-	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx475;
+	if (yych == 'E') goto xx472;
 	if (yych != 'e') goto xx94;
-xx475:
+xx472:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx476;
+		if (yych <= '/') goto xx473;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx476;
+			if (yych <= '`') goto xx473;
 			if (yych <= 'z') goto xx93;
 		}
 	}
+xx473:
+#line 178 "./mql.re"
+	{ MQL_TOKEN_RETURN("database", T_KEY_DATABASE);  }
+#line 3317 "./mql_lexer.cpp"
+xx474:
+	yych = *++YYCURSOR;
+	if (yych <= 'T') {
+		if (yych <= 'K') {
+			if (yych == 'G') goto xx512;
+			goto xx94;
+		} else {
+			if (yych <= 'L') goto xx511;
+			if (yych <= 'S') goto xx94;
+			goto xx513;
+		}
+	} else {
+		if (yych <= 'k') {
+			if (yych == 'g') goto xx512;
+			goto xx94;
+		} else {
+			if (yych <= 'l') goto xx511;
+			if (yych == 't') goto xx513;
+			goto xx94;
+		}
+	}
+xx475:
+	yych = *++YYCURSOR;
+	if (yych == 'E') goto xx507;
+	if (yych == 'e') goto xx507;
+	goto xx94;
 xx476:
-#line 223 "./mql.re"
-	{ MQL_TOKEN_RETURN("substrate", T_KEY_SUBSTRATE);  }
-#line 3344 "./mql_lexer.cpp"
+	yych = *++YYCURSOR;
+	if (yych == 'N') goto xx502;
+	if (yych == 'n') goto xx502;
+	goto xx94;
 xx477:
 	yych = *++YYCURSOR;
-	if (yych == 'I') goto xx486;
-	if (yych == 'i') goto xx486;
-	goto xx94;
+	if (yych <= 'R') {
+		if (yych == 'A') goto xx490;
+		if (yych <= 'Q') goto xx94;
+		goto xx489;
+	} else {
+		if (yych <= 'a') {
+			if (yych <= '`') goto xx94;
+			goto xx490;
+		} else {
+			if (yych == 'r') goto xx489;
+			goto xx94;
+		}
+	}
 xx478:
 	yych = *++YYCURSOR;
-	if (yych == 'R') goto xx479;
-	if (yych != 'r') goto xx94;
+	if (yych <= 'M') {
+		if (yych == 'B') goto xx479;
+		if (yych <= 'L') goto xx94;
+		goto xx480;
+	} else {
+		if (yych <= 'b') {
+			if (yych <= 'a') goto xx94;
+		} else {
+			if (yych == 'm') goto xx480;
+			goto xx94;
+		}
+	}
 xx479:
 	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx480;
-	if (yych != 't') goto xx94;
+	if (yych == 'S') goto xx482;
+	if (yych == 's') goto xx482;
+	goto xx94;
 xx480:
-	yych = *++YYCURSOR;
-	if (yych == 'S') goto xx481;
-	if (yych != 's') goto xx94;
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx481;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx481;
+			if (yych <= 'z') goto xx93;
+		}
+	}
 xx481:
+#line 256 "./mql.re"
+	{ MQL_TOKEN_RETURN("sum", T_KEY_SUM); }
+#line 3400 "./mql_lexer.cpp"
+xx482:
+	yych = *++YYCURSOR;
+	if (yych == 'T') goto xx483;
+	if (yych != 't') goto xx94;
+xx483:
+	yych = *++YYCURSOR;
+	if (yych == 'R') goto xx484;
+	if (yych != 'r') goto xx94;
+xx484:
+	yych = *++YYCURSOR;
+	if (yych == 'A') goto xx485;
+	if (yych != 'a') goto xx94;
+xx485:
+	yych = *++YYCURSOR;
+	if (yych == 'T') goto xx486;
+	if (yych != 't') goto xx94;
+xx486:
+	yych = *++YYCURSOR;
+	if (yych == 'E') goto xx487;
+	if (yych != 'e') goto xx94;
+xx487:
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx488;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx488;
+			if (yych <= 'z') goto xx93;
+		}
+	}
+xx488:
+#line 224 "./mql.re"
+	{ MQL_TOKEN_RETURN("substrate", T_KEY_SUBSTRATE);  }
+#line 3438 "./mql_lexer.cpp"
+xx489:
+	yych = *++YYCURSOR;
+	if (yych == 'I') goto xx498;
+	if (yych == 'i') goto xx498;
+	goto xx94;
+xx490:
+	yych = *++YYCURSOR;
+	if (yych == 'R') goto xx491;
+	if (yych != 'r') goto xx94;
+xx491:
+	yych = *++YYCURSOR;
+	if (yych == 'T') goto xx492;
+	if (yych != 't') goto xx94;
+xx492:
+	yych = *++YYCURSOR;
+	if (yych == 'S') goto xx493;
+	if (yych != 's') goto xx94;
+xx493:
 	yych = *++YYCURSOR;
 	if (yych != '_') goto xx94;
 	yych = *++YYCURSOR;
-	if (yych == 'I') goto xx483;
+	if (yych == 'I') goto xx495;
 	if (yych != 'i') goto xx94;
-xx483:
-	yych = *++YYCURSOR;
-	if (yych == 'N') goto xx484;
-	if (yych != 'n') goto xx94;
-xx484:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx485;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx93;
-		} else {
-			if (yych <= '`') goto xx485;
-			if (yych <= 'z') goto xx93;
-		}
-	}
-xx485:
-#line 265 "./mql.re"
-	{ MQL_TOKEN_RETURN("starts_in", T_KEY_STARTS_IN); }
-#line 3389 "./mql_lexer.cpp"
-xx486:
-	yych = *++YYCURSOR;
-	if (yych == 'N') goto xx487;
-	if (yych != 'n') goto xx94;
-xx487:
-	yych = *++YYCURSOR;
-	if (yych == 'G') goto xx488;
-	if (yych != 'g') goto xx94;
-xx488:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx489;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx93;
-		} else {
-			if (yych <= '`') goto xx489;
-			if (yych <= 'z') goto xx93;
-		}
-	}
-xx489:
-#line 197 "./mql.re"
-	{ MQL_TOKEN_RETURN("string", T_KEY_STRING);  }
-#line 3415 "./mql_lexer.cpp"
-xx490:
-	yych = *++YYCURSOR;
-	if (yych == 'G') goto xx491;
-	if (yych != 'g') goto xx94;
-xx491:
-	yych = *++YYCURSOR;
-	if (yych == 'L') goto xx492;
-	if (yych != 'l') goto xx94;
-xx492:
-	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx493;
-	if (yych != 'e') goto xx94;
-xx493:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx494;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx93;
-		} else {
-			if (yych <= '`') goto xx494;
-			if (yych <= 'z') goto xx93;
-		}
-	}
-xx494:
-#line 213 "./mql.re"
-	{ MQL_TOKEN_RETURN("single", T_KEY_SINGLE); }
-#line 3445 "./mql_lexer.cpp"
 xx495:
 	yych = *++YYCURSOR;
-	if (yych == 'A') goto xx496;
-	if (yych != 'a') goto xx94;
+	if (yych == 'N') goto xx496;
+	if (yych != 'n') goto xx94;
 xx496:
-	yych = *++YYCURSOR;
-	if (yych == 'F') goto xx497;
-	if (yych != 'f') goto xx94;
-xx497:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx498;
+		if (yych <= '/') goto xx497;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx498;
+			if (yych <= '`') goto xx497;
 			if (yych <= 'z') goto xx93;
 		}
 	}
+xx497:
+#line 269 "./mql.re"
+	{ MQL_TOKEN_RETURN("starts_in", T_KEY_STARTS_IN); }
+#line 3483 "./mql_lexer.cpp"
 xx498:
-#line 257 "./mql.re"
-	{ MQL_TOKEN_RETURN("sheaf", T_KEY_SHEAF); }
-#line 3471 "./mql_lexer.cpp"
+	yych = *++YYCURSOR;
+	if (yych == 'N') goto xx499;
+	if (yych != 'n') goto xx94;
 xx499:
 	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx510;
-	if (yych == 'e') goto xx510;
-	goto xx94;
+	if (yych == 'G') goto xx500;
+	if (yych != 'g') goto xx94;
 xx500:
-	yych = *++YYCURSOR;
-	if (yych == 'M') goto xx505;
-	if (yych == 'm') goto xx505;
-	goto xx94;
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx501;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx501;
+			if (yych <= 'z') goto xx93;
+		}
+	}
 xx501:
+#line 197 "./mql.re"
+	{ MQL_TOKEN_RETURN("string", T_KEY_STRING);  }
+#line 3509 "./mql_lexer.cpp"
+xx502:
+	yych = *++YYCURSOR;
+	if (yych == 'G') goto xx503;
+	if (yych != 'g') goto xx94;
+xx503:
+	yych = *++YYCURSOR;
+	if (yych == 'L') goto xx504;
+	if (yych != 'l') goto xx94;
+xx504:
+	yych = *++YYCURSOR;
+	if (yych == 'E') goto xx505;
+	if (yych != 'e') goto xx94;
+xx505:
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx506;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx506;
+			if (yych <= 'z') goto xx93;
+		}
+	}
+xx506:
+#line 213 "./mql.re"
+	{ MQL_TOKEN_RETURN("single", T_KEY_SINGLE); }
+#line 3539 "./mql_lexer.cpp"
+xx507:
+	yych = *++YYCURSOR;
+	if (yych == 'A') goto xx508;
+	if (yych != 'a') goto xx94;
+xx508:
+	yych = *++YYCURSOR;
+	if (yych == 'F') goto xx509;
+	if (yych != 'f') goto xx94;
+xx509:
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx510;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx510;
+			if (yych <= 'z') goto xx93;
+		}
+	}
+xx510:
+#line 261 "./mql.re"
+	{ MQL_TOKEN_RETURN("sheaf", T_KEY_SHEAF); }
+#line 3565 "./mql_lexer.cpp"
+xx511:
+	yych = *++YYCURSOR;
+	if (yych == 'E') goto xx522;
+	if (yych == 'e') goto xx522;
+	goto xx94;
+xx512:
+	yych = *++YYCURSOR;
+	if (yych == 'M') goto xx517;
+	if (yych == 'm') goto xx517;
+	goto xx94;
+xx513:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
 		if (yych <= '@') {
-			if (yych <= '/') goto xx502;
+			if (yych <= '/') goto xx514;
 			if (yych <= '9') goto xx93;
 		} else {
-			if (yych == 'S') goto xx503;
+			if (yych == 'S') goto xx515;
 			goto xx93;
 		}
 	} else {
 		if (yych <= '`') {
 			if (yych == '_') goto xx93;
 		} else {
-			if (yych == 's') goto xx503;
+			if (yych == 's') goto xx515;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx502:
-#line 260 "./mql.re"
+xx514:
+#line 264 "./mql.re"
 	{ MQL_TOKEN_RETURN("set", T_KEY_SET); }
-#line 3503 "./mql_lexer.cpp"
-xx503:
+#line 3597 "./mql_lexer.cpp"
+xx515:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx504;
+		if (yych <= '/') goto xx516;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx504;
+			if (yych <= '`') goto xx516;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx504:
-#line 261 "./mql.re"
+xx516:
+#line 265 "./mql.re"
 	{ MQL_TOKEN_RETURN("sets", T_KEY_SETS); }
-#line 3521 "./mql_lexer.cpp"
-xx505:
+#line 3615 "./mql_lexer.cpp"
+xx517:
 	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx506;
+	if (yych == 'E') goto xx518;
 	if (yych != 'e') goto xx94;
-xx506:
+xx518:
 	yych = *++YYCURSOR;
-	if (yych == 'N') goto xx507;
+	if (yych == 'N') goto xx519;
 	if (yych != 'n') goto xx94;
-xx507:
+xx519:
 	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx508;
+	if (yych == 'T') goto xx520;
 	if (yych != 't') goto xx94;
-xx508:
+xx520:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx509;
+		if (yych <= '/') goto xx521;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx509;
+			if (yych <= '`') goto xx521;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx509:
+xx521:
 #line 211 "./mql.re"
 	{ MQL_TOKEN_RETURN("segment", T_KEY_SEGMENT);  }
-#line 3551 "./mql_lexer.cpp"
-xx510:
+#line 3645 "./mql_lexer.cpp"
+xx522:
 	yych = *++YYCURSOR;
-	if (yych == 'C') goto xx511;
+	if (yych == 'C') goto xx523;
 	if (yych != 'c') goto xx94;
-xx511:
+xx523:
 	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx512;
+	if (yych == 'T') goto xx524;
 	if (yych != 't') goto xx94;
-xx512:
+xx524:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx513;
+		if (yych <= '/') goto xx525;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx513;
+			if (yych <= '`') goto xx525;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx513:
+xx525:
 #line 173 "./mql.re"
 	{ MQL_TOKEN_RETURN("select", T_KEY_SELECT);  }
-#line 3577 "./mql_lexer.cpp"
-xx514:
+#line 3671 "./mql_lexer.cpp"
+xx526:
 	yych = *++YYCURSOR;
-	if (yych == 'I') goto xx528;
-	if (yych == 'i') goto xx528;
+	if (yych == 'I') goto xx540;
+	if (yych == 'i') goto xx540;
 	goto xx94;
-xx515:
+xx527:
 	yych = *++YYCURSOR;
-	if (yych == 'D') goto xx523;
-	if (yych == 'd') goto xx523;
+	if (yych == 'D') goto xx535;
+	if (yych == 'd') goto xx535;
 	goto xx94;
-xx516:
+xx528:
 	yych = *++YYCURSOR;
 	if (yych <= 'I') {
-		if (yych == 'E') goto xx517;
+		if (yych == 'E') goto xx529;
 		if (yych <= 'H') goto xx94;
-		goto xx519;
+		goto xx531;
 	} else {
 		if (yych <= 'e') {
 			if (yych <= 'd') goto xx94;
 		} else {
-			if (yych == 'i') goto xx519;
+			if (yych == 'i') goto xx531;
 			goto xx94;
 		}
 	}
-xx517:
+xx529:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx518;
+		if (yych <= '/') goto xx530;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx518;
+			if (yych <= '`') goto xx530;
 			if (yych <= 'z') goto xx93;
 		}
 	}
-xx518:
+xx530:
 #line 179 "./mql.re"
 	{ MQL_TOKEN_RETURN("use", T_KEY_USE);  }
-#line 3619 "./mql_lexer.cpp"
-xx519:
-	yych = *++YYCURSOR;
-	if (yych == 'N') goto xx520;
-	if (yych != 'n') goto xx94;
-xx520:
-	yych = *++YYCURSOR;
-	if (yych == 'G') goto xx521;
-	if (yych != 'g') goto xx94;
-xx521:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx522;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx93;
-		} else {
-			if (yych <= '`') goto xx522;
-			if (yych <= 'z') goto xx93;
-		}
-	}
-xx522:
-#line 227 "./mql.re"
-	{ MQL_TOKEN_RETURN("using", T_KEY_USING);  }
-#line 3645 "./mql_lexer.cpp"
-xx523:
-	yych = *++YYCURSOR;
-	if (yych == 'A') goto xx524;
-	if (yych != 'a') goto xx94;
-xx524:
-	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx525;
-	if (yych != 't') goto xx94;
-xx525:
-	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx526;
-	if (yych != 'e') goto xx94;
-xx526:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx527;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx93;
-		} else {
-			if (yych <= '`') goto xx527;
-			if (yych <= 'z') goto xx93;
-		}
-	}
-xx527:
-#line 172 "./mql.re"
-	{ MQL_TOKEN_RETURN("update", T_KEY_UPDATE); }
-#line 3675 "./mql_lexer.cpp"
-xx528:
-	yych = *++YYCURSOR;
-	if (yych <= 'V') {
-		if (yych <= 'P') {
-			if (yych != 'O') goto xx94;
-		} else {
-			if (yych <= 'Q') goto xx530;
-			if (yych <= 'U') goto xx94;
-			goto xx531;
-		}
-	} else {
-		if (yych <= 'p') {
-			if (yych != 'o') goto xx94;
-		} else {
-			if (yych <= 'q') goto xx530;
-			if (yych == 'v') goto xx531;
-			goto xx94;
-		}
-	}
-	yych = *++YYCURSOR;
-	if (yych == 'N') goto xx540;
-	if (yych == 'n') goto xx540;
-	goto xx94;
-xx530:
-	yych = *++YYCURSOR;
-	if (yych == 'U') goto xx537;
-	if (yych == 'u') goto xx537;
-	goto xx94;
+#line 3713 "./mql_lexer.cpp"
 xx531:
 	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx532;
-	if (yych != 'e') goto xx94;
+	if (yych == 'N') goto xx532;
+	if (yych != 'n') goto xx94;
 xx532:
 	yych = *++YYCURSOR;
-	if (yych == 'R') goto xx533;
-	if (yych != 'r') goto xx94;
+	if (yych == 'G') goto xx533;
+	if (yych != 'g') goto xx94;
 xx533:
-	yych = *++YYCURSOR;
-	if (yych == 'S') goto xx534;
-	if (yych != 's') goto xx94;
-xx534:
-	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx535;
-	if (yych != 'e') goto xx94;
-xx535:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx536;
+		if (yych <= '/') goto xx534;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx536;
+			if (yych <= '`') goto xx534;
 			if (yych <= 'z') goto xx93;
 		}
 	}
+xx534:
+#line 228 "./mql.re"
+	{ MQL_TOKEN_RETURN("using", T_KEY_USING);  }
+#line 3739 "./mql_lexer.cpp"
+xx535:
+	yych = *++YYCURSOR;
+	if (yych == 'A') goto xx536;
+	if (yych != 'a') goto xx94;
 xx536:
-#line 222 "./mql.re"
-	{ MQL_TOKEN_RETURN("universe", T_KEY_UNIVERSE);  }
-#line 3737 "./mql_lexer.cpp"
+	yych = *++YYCURSOR;
+	if (yych == 'T') goto xx537;
+	if (yych != 't') goto xx94;
 xx537:
 	yych = *++YYCURSOR;
 	if (yych == 'E') goto xx538;
@@ -102003,406 +103984,526 @@ xx538:
 		}
 	}
 xx539:
-#line 226 "./mql.re"
-	{ MQL_TOKEN_RETURN("unique", T_KEY_UNIQUE);  }
-#line 3759 "./mql_lexer.cpp"
+#line 172 "./mql.re"
+	{ MQL_TOKEN_RETURN("update", T_KEY_UPDATE); }
+#line 3769 "./mql_lexer.cpp"
 xx540:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx541;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx93;
+	yych = *++YYCURSOR;
+	if (yych <= 'V') {
+		if (yych <= 'P') {
+			if (yych != 'O') goto xx94;
 		} else {
-			if (yych <= '`') goto xx541;
-			if (yych <= 'z') goto xx93;
+			if (yych <= 'Q') goto xx542;
+			if (yych <= 'U') goto xx94;
+			goto xx543;
 		}
-	}
-xx541:
-#line 262 "./mql.re"
-	{ MQL_TOKEN_RETURN("union", T_KEY_UNION); }
-#line 3777 "./mql_lexer.cpp"
-xx542:
-	yych = *++YYCURSOR;
-	if (yych == 'L') goto xx569;
-	if (yych == 'l') goto xx569;
-	goto xx94;
-xx543:
-	yych = *++YYCURSOR;
-	if (yych <= 'N') {
-		if (yych <= 'L') goto xx94;
-		if (yych <= 'M') goto xx550;
-		goto xx551;
 	} else {
-		if (yych <= 'l') goto xx94;
-		if (yych <= 'm') goto xx550;
-		if (yych <= 'n') goto xx551;
-		goto xx94;
-	}
-xx544:
-	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx545;
-	if (yych != 'e') goto xx94;
-xx545:
-	yych = *++YYCURSOR;
-	if (yych == 'A') goto xx546;
-	if (yych != 'a') goto xx94;
-xx546:
-	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx547;
-	if (yych != 't') goto xx94;
-xx547:
-	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx548;
-	if (yych != 'e') goto xx94;
-xx548:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx549;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx93;
+		if (yych <= 'p') {
+			if (yych != 'o') goto xx94;
 		} else {
-			if (yych <= '`') goto xx549;
-			if (yych <= 'z') goto xx93;
-		}
-	}
-xx549:
-#line 171 "./mql.re"
-	{ MQL_TOKEN_RETURN("create", T_KEY_CREATE); }
-#line 3828 "./mql_lexer.cpp"
-xx550:
-	yych = *++YYCURSOR;
-	if (yych <= 'P') {
-		if (yych == 'M') goto xx559;
-		if (yych <= 'O') goto xx94;
-		goto xx560;
-	} else {
-		if (yych <= 'm') {
-			if (yych <= 'l') goto xx94;
-			goto xx559;
-		} else {
-			if (yych == 'p') goto xx560;
+			if (yych <= 'q') goto xx542;
+			if (yych == 'v') goto xx543;
 			goto xx94;
 		}
 	}
-xx551:
 	yych = *++YYCURSOR;
-	if (yych == 'S') goto xx552;
+	if (yych == 'N') goto xx552;
+	if (yych == 'n') goto xx552;
+	goto xx94;
+xx542:
+	yych = *++YYCURSOR;
+	if (yych == 'U') goto xx549;
+	if (yych == 'u') goto xx549;
+	goto xx94;
+xx543:
+	yych = *++YYCURSOR;
+	if (yych == 'E') goto xx544;
+	if (yych != 'e') goto xx94;
+xx544:
+	yych = *++YYCURSOR;
+	if (yych == 'R') goto xx545;
+	if (yych != 'r') goto xx94;
+xx545:
+	yych = *++YYCURSOR;
+	if (yych == 'S') goto xx546;
 	if (yych != 's') goto xx94;
+xx546:
+	yych = *++YYCURSOR;
+	if (yych == 'E') goto xx547;
+	if (yych != 'e') goto xx94;
+xx547:
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx548;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx548;
+			if (yych <= 'z') goto xx93;
+		}
+	}
+xx548:
+#line 223 "./mql.re"
+	{ MQL_TOKEN_RETURN("universe", T_KEY_UNIVERSE);  }
+#line 3831 "./mql_lexer.cpp"
+xx549:
+	yych = *++YYCURSOR;
+	if (yych == 'E') goto xx550;
+	if (yych != 'e') goto xx94;
+xx550:
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx551;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx551;
+			if (yych <= 'z') goto xx93;
+		}
+	}
+xx551:
+#line 227 "./mql.re"
+	{ MQL_TOKEN_RETURN("unique", T_KEY_UNIQUE);  }
+#line 3853 "./mql_lexer.cpp"
 xx552:
-	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx553;
-	if (yych != 't') goto xx94;
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx553;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx553;
+			if (yych <= 'z') goto xx93;
+		}
+	}
 xx553:
-	yych = *++YYCURSOR;
-	if (yych == 'A') goto xx554;
-	if (yych != 'a') goto xx94;
+#line 266 "./mql.re"
+	{ MQL_TOKEN_RETURN("union", T_KEY_UNION); }
+#line 3871 "./mql_lexer.cpp"
 xx554:
 	yych = *++YYCURSOR;
-	if (yych == 'N') goto xx555;
-	if (yych != 'n') goto xx94;
+	if (yych == 'L') goto xx585;
+	if (yych == 'l') goto xx585;
+	goto xx94;
 xx555:
 	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx556;
-	if (yych != 't') goto xx94;
+	if (yych <= 'U') {
+		if (yych <= 'M') {
+			if (yych <= 'L') goto xx94;
+			goto xx562;
+		} else {
+			if (yych <= 'N') goto xx563;
+			if (yych <= 'T') goto xx94;
+			goto xx564;
+		}
+	} else {
+		if (yych <= 'n') {
+			if (yych <= 'l') goto xx94;
+			if (yych <= 'm') goto xx562;
+			goto xx563;
+		} else {
+			if (yych == 'u') goto xx564;
+			goto xx94;
+		}
+	}
 xx556:
 	yych = *++YYCURSOR;
-	if (yych == 'S') goto xx557;
-	if (yych != 's') goto xx94;
+	if (yych == 'E') goto xx557;
+	if (yych != 'e') goto xx94;
 xx557:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx558;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx93;
-		} else {
-			if (yych <= '`') goto xx558;
-			if (yych <= 'z') goto xx93;
-		}
-	}
+	yych = *++YYCURSOR;
+	if (yych == 'A') goto xx558;
+	if (yych != 'a') goto xx94;
 xx558:
-#line 210 "./mql.re"
-	{ MQL_TOKEN_RETURN("constants", T_KEY_CONSTANTS);  }
-#line 3885 "./mql_lexer.cpp"
+	yych = *++YYCURSOR;
+	if (yych == 'T') goto xx559;
+	if (yych != 't') goto xx94;
 xx559:
 	yych = *++YYCURSOR;
-	if (yych == 'I') goto xx566;
-	if (yych == 'i') goto xx566;
-	goto xx94;
+	if (yych == 'E') goto xx560;
+	if (yych != 'e') goto xx94;
 xx560:
-	yych = *++YYCURSOR;
-	if (yych == 'U') goto xx561;
-	if (yych != 'u') goto xx94;
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx561;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx561;
+			if (yych <= 'z') goto xx93;
+		}
+	}
 xx561:
-	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx562;
-	if (yych != 't') goto xx94;
+#line 171 "./mql.re"
+	{ MQL_TOKEN_RETURN("create", T_KEY_CREATE); }
+#line 3931 "./mql_lexer.cpp"
 xx562:
 	yych = *++YYCURSOR;
-	if (yych == 'E') goto xx563;
-	if (yych != 'e') goto xx94;
+	if (yych <= 'P') {
+		if (yych == 'M') goto xx575;
+		if (yych <= 'O') goto xx94;
+		goto xx576;
+	} else {
+		if (yych <= 'm') {
+			if (yych <= 'l') goto xx94;
+			goto xx575;
+		} else {
+			if (yych == 'p') goto xx576;
+			goto xx94;
+		}
+	}
 xx563:
 	yych = *++YYCURSOR;
-	if (yych == 'D') goto xx564;
-	if (yych != 'd') goto xx94;
+	if (yych == 'S') goto xx568;
+	if (yych == 's') goto xx568;
+	goto xx94;
 xx564:
-	++YYCURSOR;
-	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx565;
-		if (yych <= '9') goto xx93;
-		if (yych >= 'A') goto xx93;
-	} else {
-		if (yych <= '_') {
-			if (yych >= '_') goto xx93;
-		} else {
-			if (yych <= '`') goto xx565;
-			if (yych <= 'z') goto xx93;
-		}
-	}
-xx565:
-#line 202 "./mql.re"
-	{ MQL_TOKEN_RETURN("computed", T_KEY_COMPUTED);  }
-#line 3924 "./mql_lexer.cpp"
-xx566:
 	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx567;
+	if (yych == 'N') goto xx565;
+	if (yych != 'n') goto xx94;
+xx565:
+	yych = *++YYCURSOR;
+	if (yych == 'T') goto xx566;
 	if (yych != 't') goto xx94;
-xx567:
+xx566:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx568;
+		if (yych <= '/') goto xx567;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx568;
+			if (yych <= '`') goto xx567;
 			if (yych <= 'z') goto xx93;
 		}
 	}
+xx567:
+#line 257 "./mql.re"
+	{ MQL_TOKEN_RETURN("count", T_KEY_COUNT); }
+#line 3977 "./mql_lexer.cpp"
 xx568:
-#line 184 "./mql.re"
-	{ MQL_TOKEN_RETURN("commit", T_KEY_COMMIT); }
-#line 3946 "./mql_lexer.cpp"
+	yych = *++YYCURSOR;
+	if (yych == 'T') goto xx569;
+	if (yych != 't') goto xx94;
 xx569:
 	yych = *++YYCURSOR;
-	if (yych == 'C') goto xx570;
-	if (yych != 'c') goto xx94;
+	if (yych == 'A') goto xx570;
+	if (yych != 'a') goto xx94;
 xx570:
 	yych = *++YYCURSOR;
-	if (yych == 'U') goto xx571;
-	if (yych != 'u') goto xx94;
+	if (yych == 'N') goto xx571;
+	if (yych != 'n') goto xx94;
 xx571:
 	yych = *++YYCURSOR;
-	if (yych == 'L') goto xx572;
-	if (yych != 'l') goto xx94;
+	if (yych == 'T') goto xx572;
+	if (yych != 't') goto xx94;
 xx572:
 	yych = *++YYCURSOR;
-	if (yych == 'A') goto xx573;
-	if (yych != 'a') goto xx94;
+	if (yych == 'S') goto xx573;
+	if (yych != 's') goto xx94;
 xx573:
-	yych = *++YYCURSOR;
-	if (yych == 'T') goto xx574;
-	if (yych != 't') goto xx94;
-xx574:
-	yych = *++YYCURSOR;
-	if (yych == 'I') goto xx575;
-	if (yych != 'i') goto xx94;
-xx575:
-	yych = *++YYCURSOR;
-	if (yych == 'O') goto xx576;
-	if (yych != 'o') goto xx94;
-xx576:
-	yych = *++YYCURSOR;
-	if (yych == 'N') goto xx577;
-	if (yych != 'n') goto xx94;
-xx577:
 	++YYCURSOR;
 	if ((yych = *YYCURSOR) <= 'Z') {
-		if (yych <= '/') goto xx578;
+		if (yych <= '/') goto xx574;
 		if (yych <= '9') goto xx93;
 		if (yych >= 'A') goto xx93;
 	} else {
 		if (yych <= '_') {
 			if (yych >= '_') goto xx93;
 		} else {
-			if (yych <= '`') goto xx578;
+			if (yych <= '`') goto xx574;
 			if (yych <= 'z') goto xx93;
 		}
 	}
+xx574:
+#line 210 "./mql.re"
+	{ MQL_TOKEN_RETURN("constants", T_KEY_CONSTANTS);  }
+#line 4015 "./mql_lexer.cpp"
+xx575:
+	yych = *++YYCURSOR;
+	if (yych == 'I') goto xx582;
+	if (yych == 'i') goto xx582;
+	goto xx94;
+xx576:
+	yych = *++YYCURSOR;
+	if (yych == 'U') goto xx577;
+	if (yych != 'u') goto xx94;
+xx577:
+	yych = *++YYCURSOR;
+	if (yych == 'T') goto xx578;
+	if (yych != 't') goto xx94;
 xx578:
-#line 250 "./mql.re"
+	yych = *++YYCURSOR;
+	if (yych == 'E') goto xx579;
+	if (yych != 'e') goto xx94;
+xx579:
+	yych = *++YYCURSOR;
+	if (yych == 'D') goto xx580;
+	if (yych != 'd') goto xx94;
+xx580:
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx581;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx581;
+			if (yych <= 'z') goto xx93;
+		}
+	}
+xx581:
+#line 202 "./mql.re"
+	{ MQL_TOKEN_RETURN("computed", T_KEY_COMPUTED);  }
+#line 4054 "./mql_lexer.cpp"
+xx582:
+	yych = *++YYCURSOR;
+	if (yych == 'T') goto xx583;
+	if (yych != 't') goto xx94;
+xx583:
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx584;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx584;
+			if (yych <= 'z') goto xx93;
+		}
+	}
+xx584:
+#line 184 "./mql.re"
+	{ MQL_TOKEN_RETURN("commit", T_KEY_COMMIT); }
+#line 4076 "./mql_lexer.cpp"
+xx585:
+	yych = *++YYCURSOR;
+	if (yych == 'C') goto xx586;
+	if (yych != 'c') goto xx94;
+xx586:
+	yych = *++YYCURSOR;
+	if (yych == 'U') goto xx587;
+	if (yych != 'u') goto xx94;
+xx587:
+	yych = *++YYCURSOR;
+	if (yych == 'L') goto xx588;
+	if (yych != 'l') goto xx94;
+xx588:
+	yych = *++YYCURSOR;
+	if (yych == 'A') goto xx589;
+	if (yych != 'a') goto xx94;
+xx589:
+	yych = *++YYCURSOR;
+	if (yych == 'T') goto xx590;
+	if (yych != 't') goto xx94;
+xx590:
+	yych = *++YYCURSOR;
+	if (yych == 'I') goto xx591;
+	if (yych != 'i') goto xx94;
+xx591:
+	yych = *++YYCURSOR;
+	if (yych == 'O') goto xx592;
+	if (yych != 'o') goto xx94;
+xx592:
+	yych = *++YYCURSOR;
+	if (yych == 'N') goto xx593;
+	if (yych != 'n') goto xx94;
+xx593:
+	++YYCURSOR;
+	if ((yych = *YYCURSOR) <= 'Z') {
+		if (yych <= '/') goto xx594;
+		if (yych <= '9') goto xx93;
+		if (yych >= 'A') goto xx93;
+	} else {
+		if (yych <= '_') {
+			if (yych >= '_') goto xx93;
+		} else {
+			if (yych <= '`') goto xx594;
+			if (yych <= 'z') goto xx93;
+		}
+	}
+xx594:
+#line 251 "./mql.re"
 	{ MQL_TOKEN_RETURN("calculation", T_KEY_CALCULATION); }
-#line 3996 "./mql_lexer.cpp"
+#line 4126 "./mql_lexer.cpp"
 }
-#line 316 "./mql.re"
+#line 320 "./mql.re"
 
 
 stringdq:
 	tok = cur;
 
-#line 4004 "./mql_lexer.cpp"
+#line 4134 "./mql_lexer.cpp"
 {
 	YYCTYPE yych;
 	yych = *YYCURSOR;
 	if (yych <= '!') {
-		if (yych <= 0x00) goto xx585;
-		if (yych == '\n') goto xx588;
-		goto xx587;
+		if (yych <= 0x00) goto xx601;
+		if (yych == '\n') goto xx604;
+		goto xx603;
 	} else {
-		if (yych <= '"') goto xx581;
-		if (yych == '\\') goto xx583;
-		goto xx587;
+		if (yych <= '"') goto xx597;
+		if (yych == '\\') goto xx599;
+		goto xx603;
 	}
-xx581:
+xx597:
 	++YYCURSOR;
-#line 321 "./mql.re"
+#line 325 "./mql.re"
 	{ MQL_TOKEN_RETURN(STRING_MAGIC, T_STRING); }
-#line 4021 "./mql_lexer.cpp"
-xx583:
+#line 4151 "./mql_lexer.cpp"
+xx599:
 	yych = *(YYMARKER = ++YYCURSOR);
 	if (yych <= 'b') {
 		if (yych <= '3') {
 			if (yych <= '&') {
-				if (yych == '"') goto xx593;
+				if (yych == '"') goto xx609;
 			} else {
-				if (yych <= '\'') goto xx595;
-				if (yych >= '0') goto xx592;
+				if (yych <= '\'') goto xx611;
+				if (yych >= '0') goto xx608;
 			}
 		} else {
 			if (yych <= '[') {
-				if (yych == '?') goto xx597;
+				if (yych == '?') goto xx613;
 			} else {
-				if (yych <= '\\') goto xx599;
-				if (yych <= '`') goto xx584;
-				if (yych <= 'a') goto xx605;
-				goto xx607;
+				if (yych <= '\\') goto xx615;
+				if (yych <= '`') goto xx600;
+				if (yych <= 'a') goto xx621;
+				goto xx623;
 			}
 		}
 	} else {
 		if (yych <= 'r') {
 			if (yych <= 'm') {
-				if (yych == 'f') goto xx601;
+				if (yych == 'f') goto xx617;
 			} else {
-				if (yych <= 'n') goto xx613;
-				if (yych >= 'r') goto xx603;
+				if (yych <= 'n') goto xx629;
+				if (yych >= 'r') goto xx619;
 			}
 		} else {
 			if (yych <= 'u') {
-				if (yych == 't') goto xx611;
+				if (yych == 't') goto xx627;
 			} else {
-				if (yych <= 'v') goto xx609;
-				if (yych == 'x') goto xx590;
+				if (yych <= 'v') goto xx625;
+				if (yych == 'x') goto xx606;
 			}
 		}
 	}
-xx584:
-#line 348 "./mql.re"
+xx600:
+#line 352 "./mql.re"
 	{ yylval->pString->push_back(*tok);
 			       goto stringdq; }
-#line 4063 "./mql_lexer.cpp"
-xx585:
-	++YYCURSOR;
-#line 347 "./mql.re"
-	{ if (cur >= lim) { goto end; } }
-#line 4068 "./mql_lexer.cpp"
-xx587:
-	yych = *++YYCURSOR;
-	goto xx584;
-xx588:
-	++YYCURSOR;
-#line 350 "./mql.re"
-	{ yylval->pString->push_back('\n');
-			       goto stringdq; }
-#line 4077 "./mql_lexer.cpp"
-xx590:
-	yych = *++YYCURSOR;
-	if (yych <= '@') {
-		if (yych <= '/') goto xx591;
-		if (yych <= '9') goto xx618;
-	} else {
-		if (yych <= 'F') goto xx618;
-		if (yych <= '`') goto xx591;
-		if (yych <= 'f') goto xx618;
-	}
-xx591:
-	YYCURSOR = YYMARKER;
-	goto xx584;
-xx592:
-	yych = *++YYCURSOR;
-	if (yych <= '/') goto xx591;
-	if (yych <= '7') goto xx615;
-	goto xx591;
-xx593:
-	++YYCURSOR;
-#line 332 "./mql.re"
-	{ yylval->pString->push_back('\"'); goto stringdq; }
-#line 4100 "./mql_lexer.cpp"
-xx595:
-	++YYCURSOR;
-#line 331 "./mql.re"
-	{ yylval->pString->push_back('\''); goto stringdq; }
-#line 4105 "./mql_lexer.cpp"
-xx597:
-	++YYCURSOR;
-#line 330 "./mql.re"
-	{ yylval->pString->push_back('\?'); goto stringdq; }
-#line 4110 "./mql_lexer.cpp"
-xx599:
-	++YYCURSOR;
-#line 329 "./mql.re"
-	{ yylval->pString->push_back('\\'); goto stringdq; }
-#line 4115 "./mql_lexer.cpp"
+#line 4193 "./mql_lexer.cpp"
 xx601:
 	++YYCURSOR;
-#line 328 "./mql.re"
-	{ yylval->pString->push_back('\f'); goto stringdq; }
-#line 4120 "./mql_lexer.cpp"
+#line 351 "./mql.re"
+	{ if (cur >= lim) { goto end; } }
+#line 4198 "./mql_lexer.cpp"
 xx603:
+	yych = *++YYCURSOR;
+	goto xx600;
+xx604:
 	++YYCURSOR;
-#line 327 "./mql.re"
-	{ yylval->pString->push_back('\r'); goto stringdq; }
-#line 4125 "./mql_lexer.cpp"
-xx605:
-	++YYCURSOR;
-#line 326 "./mql.re"
-	{ yylval->pString->push_back('\a'); goto stringdq; }
-#line 4130 "./mql_lexer.cpp"
+#line 354 "./mql.re"
+	{ yylval->pString->push_back('\n');
+			       goto stringdq; }
+#line 4207 "./mql_lexer.cpp"
+xx606:
+	yych = *++YYCURSOR;
+	if (yych <= '@') {
+		if (yych <= '/') goto xx607;
+		if (yych <= '9') goto xx634;
+	} else {
+		if (yych <= 'F') goto xx634;
+		if (yych <= '`') goto xx607;
+		if (yych <= 'f') goto xx634;
+	}
 xx607:
-	++YYCURSOR;
-#line 325 "./mql.re"
-	{ yylval->pString->push_back('\b'); goto stringdq; }
-#line 4135 "./mql_lexer.cpp"
+	YYCURSOR = YYMARKER;
+	goto xx600;
+xx608:
+	yych = *++YYCURSOR;
+	if (yych <= '/') goto xx607;
+	if (yych <= '7') goto xx631;
+	goto xx607;
 xx609:
 	++YYCURSOR;
-#line 324 "./mql.re"
-	{ yylval->pString->push_back('\v'); goto stringdq; }
-#line 4140 "./mql_lexer.cpp"
+#line 336 "./mql.re"
+	{ yylval->pString->push_back('\"'); goto stringdq; }
+#line 4230 "./mql_lexer.cpp"
 xx611:
 	++YYCURSOR;
-#line 323 "./mql.re"
-	{ yylval->pString->push_back('\t'); goto stringdq; }
-#line 4145 "./mql_lexer.cpp"
+#line 335 "./mql.re"
+	{ yylval->pString->push_back('\''); goto stringdq; }
+#line 4235 "./mql_lexer.cpp"
 xx613:
 	++YYCURSOR;
-#line 322 "./mql.re"
-	{ yylval->pString->push_back('\n'); goto stringdq; }
-#line 4150 "./mql_lexer.cpp"
+#line 334 "./mql.re"
+	{ yylval->pString->push_back('\?'); goto stringdq; }
+#line 4240 "./mql_lexer.cpp"
 xx615:
-	yych = *++YYCURSOR;
-	if (yych <= '/') goto xx591;
-	if (yych >= '8') goto xx591;
 	++YYCURSOR;
 #line 333 "./mql.re"
+	{ yylval->pString->push_back('\\'); goto stringdq; }
+#line 4245 "./mql_lexer.cpp"
+xx617:
+	++YYCURSOR;
+#line 332 "./mql.re"
+	{ yylval->pString->push_back('\f'); goto stringdq; }
+#line 4250 "./mql_lexer.cpp"
+xx619:
+	++YYCURSOR;
+#line 331 "./mql.re"
+	{ yylval->pString->push_back('\r'); goto stringdq; }
+#line 4255 "./mql_lexer.cpp"
+xx621:
+	++YYCURSOR;
+#line 330 "./mql.re"
+	{ yylval->pString->push_back('\a'); goto stringdq; }
+#line 4260 "./mql_lexer.cpp"
+xx623:
+	++YYCURSOR;
+#line 329 "./mql.re"
+	{ yylval->pString->push_back('\b'); goto stringdq; }
+#line 4265 "./mql_lexer.cpp"
+xx625:
+	++YYCURSOR;
+#line 328 "./mql.re"
+	{ yylval->pString->push_back('\v'); goto stringdq; }
+#line 4270 "./mql_lexer.cpp"
+xx627:
+	++YYCURSOR;
+#line 327 "./mql.re"
+	{ yylval->pString->push_back('\t'); goto stringdq; }
+#line 4275 "./mql_lexer.cpp"
+xx629:
+	++YYCURSOR;
+#line 326 "./mql.re"
+	{ yylval->pString->push_back('\n'); goto stringdq; }
+#line 4280 "./mql_lexer.cpp"
+xx631:
+	yych = *++YYCURSOR;
+	if (yych <= '/') goto xx607;
+	if (yych >= '8') goto xx607;
+	++YYCURSOR;
+#line 337 "./mql.re"
 	{ tok += 1; // Go past SLASH 
       		        char szOctal[4];
 			const char *p = tok;
@@ -102413,66 +104514,66 @@ xx615:
 			*q = '\0';
 		        yylval->pString->push_back(octal2char(szOctal)); 
 		        goto stringdq; }
-#line 4167 "./mql_lexer.cpp"
-xx618:
+#line 4297 "./mql_lexer.cpp"
+xx634:
 	yych = *++YYCURSOR;
 	if (yych <= '@') {
-		if (yych <= '/') goto xx591;
-		if (yych >= ':') goto xx591;
+		if (yych <= '/') goto xx607;
+		if (yych >= ':') goto xx607;
 	} else {
-		if (yych <= 'F') goto xx619;
-		if (yych <= '`') goto xx591;
-		if (yych >= 'g') goto xx591;
+		if (yych <= 'F') goto xx635;
+		if (yych <= '`') goto xx607;
+		if (yych >= 'g') goto xx607;
 	}
-xx619:
+xx635:
 	++YYCURSOR;
-#line 343 "./mql.re"
+#line 347 "./mql.re"
 	{ 
 			       	      yylval->pString->push_back(hex2char(tok[2], tok[3]));
 			       	      goto stringdq; 			     
                              }
-#line 4185 "./mql_lexer.cpp"
+#line 4315 "./mql_lexer.cpp"
 }
-#line 352 "./mql.re"
+#line 356 "./mql.re"
 
 
 stringsq:
 	tok = cur;
 
-#line 4193 "./mql_lexer.cpp"
+#line 4323 "./mql_lexer.cpp"
 {
 	YYCTYPE yych;
 	yych = *YYCURSOR;
 	if (yych <= '\n') {
-		if (yych <= 0x00) goto xx625;
-		if (yych <= '\t') goto xx629;
-		goto xx627;
+		if (yych <= 0x00) goto xx641;
+		if (yych <= '\t') goto xx645;
+		goto xx643;
 	} else {
-		if (yych != '\'') goto xx629;
+		if (yych != '\'') goto xx645;
 	}
 	++YYCURSOR;
-#line 357 "./mql.re"
+#line 361 "./mql.re"
 	{ MQL_TOKEN_RETURN(STRING_MAGIC, T_STRING); }
-#line 4207 "./mql_lexer.cpp"
-xx625:
+#line 4337 "./mql_lexer.cpp"
+xx641:
 	++YYCURSOR;
-#line 358 "./mql.re"
+#line 362 "./mql.re"
 	{ if (cur >= lim) { goto end; } }
-#line 4212 "./mql_lexer.cpp"
-xx627:
+#line 4342 "./mql_lexer.cpp"
+xx643:
 	++YYCURSOR;
-#line 359 "./mql.re"
+#line 363 "./mql.re"
 	{ yylval->pString->push_back('\n');
 			       goto stringsq; }
-#line 4218 "./mql_lexer.cpp"
-xx629:
+#line 4348 "./mql_lexer.cpp"
+xx645:
 	++YYCURSOR;
-#line 361 "./mql.re"
+#line 365 "./mql.re"
 	{ yylval->pString->push_back(*tok);
 			       goto stringsq; }
-#line 4224 "./mql_lexer.cpp"
+#line 4354 "./mql_lexer.cpp"
 }
-#line 363 "./mql.re"
+#line 367 "./mql.re"
 
 	
  end:
@@ -102559,7 +104660,7 @@ void MQLScanner::getString(std::string& str)
  *
  * Ulrik Petersen
  * Created: 2/27-2001
- * Last update: 4/20-2016
+ * Last update: 7/21-2016
  *
  */
 /************************************************************************
@@ -102782,64 +104883,65 @@ void MQLScanner::getString(std::string& str)
 **    MQLYY_NO_ACTION       The mqlyy_action[] code for no-op
 */
 #define MQLYYCODETYPE unsigned short int
-#define MQLYYNOCODE 301
+#define MQLYYNOCODE 309
 #define MQLYYACTIONTYPE unsigned short int
 #define MQLParserTOKENTYPE Token*
 typedef union {
   int mqlyyinit;
   MQLParserTOKENTYPE mqlyy0;
-  ObjectReferenceUsage* mqlyy6;
-  GapBlock* mqlyy18;
-  MQLMonadSetElement* mqlyy34;
-  ID_D* mqlyy51;
-  Power* mqlyy68;
-  id_d_t mqlyy72;
-  eFirstLast mqlyy90;
-  eComparisonOp mqlyy96;
-  eMonadSetRelationOperation mqlyy104;
-  eMonadUniquenessType mqlyy123;
-  ObjectBlock* mqlyy125;
-  bool mqlyy137;
-  Expression* mqlyy139;
-  Statement* mqlyy160;
+  ObjectSpecNoOT* mqlyy17;
+  sheaf_return_type_pair* mqlyy45;
+  FeatureUpdate* mqlyy70;
+  IntegerListNode* mqlyy71;
+  id_d_t mqlyy88;
+  Power* mqlyy92;
+  ECDeclaration* mqlyy93;
+  UsingRange* mqlyy94;
+  OptGapBlock* mqlyy97;
+  GrammarFeature* mqlyy98;
+  FFactor* mqlyy132;
+  ECUpdate* mqlyy138;
+  eSetOperator mqlyy142;
+  ObjectSpec* mqlyy173;
+  FeatureAssignment* mqlyy184;
+  BlockString0* mqlyy189;
   FeatureDeclaration* mqlyy193;
-  Value* mqlyy204;
-  BlockString* mqlyy205;
-  GrammarFeature* mqlyy242;
-  long mqlyy249;
-  eFocusSpec mqlyy253;
-  OptGapBlock* mqlyy265;
-  MaxRange* mqlyy278;
-  MonadSetChainElement* mqlyy279;
-  MQLType* mqlyy283;
-  FFeatures* mqlyy288;
-  int mqlyy292;
-  Topograph* mqlyy295;
-  sheaf_return_type_pair* mqlyy309;
-  FTerm* mqlyy313;
-  IntegerListNode* mqlyy327;
-  monad_m mqlyy352;
-  ECUpdate* mqlyy362;
-  ObjectSpec* mqlyy365;
-  eRetrieval mqlyy372;
-  Blocks* mqlyy377;
-  MonadSetRelationClause* mqlyy385;
-  eObjectRangeType mqlyy388;
-  eUniverseOrSubstrate mqlyy397;
-  eSetOperator mqlyy398;
-  FeatureUpdate* mqlyy406;
-  FeatureComparison* mqlyy407;
-  Block* mqlyy414;
-  StringListNode* mqlyy440;
-  BlockString0* mqlyy445;
-  ObjectSpecNoOT* mqlyy457;
-  ECDeclaration* mqlyy461;
-  BlockString1* mqlyy498;
-  FFactor* mqlyy540;
-  BlockString2* mqlyy551;
-  UsingRange* mqlyy582;
-  long* mqlyy587;
-  FeatureAssignment* mqlyy600;
+  eComparisonOp mqlyy200;
+  FTerm* mqlyy201;
+  StringListNode* mqlyy216;
+  BlockString1* mqlyy242;
+  AggregateFeature* mqlyy250;
+  long* mqlyy259;
+  MonadSetRelationClause* mqlyy265;
+  eObjectRangeType mqlyy276;
+  int mqlyy284;
+  BlockString2* mqlyy295;
+  GapBlock* mqlyy306;
+  MaxRange* mqlyy326;
+  Value* mqlyy356;
+  MQLMonadSetElement* mqlyy362;
+  Blocks* mqlyy369;
+  MQLType* mqlyy371;
+  long mqlyy377;
+  FeatureComparison* mqlyy398;
+  eMonadUniquenessType mqlyy411;
+  eFirstLast mqlyy426;
+  eFocusSpec mqlyy429;
+  Statement* mqlyy440;
+  FFeatures* mqlyy441;
+  Block* mqlyy478;
+  eRetrieval mqlyy484;
+  eUniverseOrSubstrate mqlyy485;
+  ObjectReferenceUsage* mqlyy494;
+  ID_D* mqlyy515;
+  MonadSetChainElement* mqlyy519;
+  bool mqlyy537;
+  ObjectBlock* mqlyy549;
+  BlockString* mqlyy557;
+  Topograph* mqlyy559;
+  eMonadSetRelationOperation mqlyy560;
+  Expression* mqlyy563;
+  monad_m mqlyy608;
 } MQLYYMINORTYPE;
 #ifndef MQLYYSTACKDEPTH
 #define MQLYYSTACKDEPTH 2000
@@ -102848,16 +104950,16 @@ typedef union {
 #define MQLParserARG_PDECL ,MQLExecEnv *pEE
 #define MQLParserARG_FETCH MQLExecEnv *pEE = mqlyypParser->pEE
 #define MQLParserARG_STORE mqlyypParser->pEE = pEE
-#define MQLYYNSTATE             387
-#define MQLYYNRULE              369
-#define MQLYY_MAX_SHIFT         386
-#define MQLYY_MIN_SHIFTREDUCE   697
-#define MQLYY_MAX_SHIFTREDUCE   1065
-#define MQLYY_MIN_REDUCE        1066
-#define MQLYY_MAX_REDUCE        1434
-#define MQLYY_ERROR_ACTION      1435
-#define MQLYY_ACCEPT_ACTION     1436
-#define MQLYY_NO_ACTION         1437
+#define MQLYYNSTATE             418
+#define MQLYYNRULE              381
+#define MQLYY_MAX_SHIFT         417
+#define MQLYY_MIN_SHIFTREDUCE   740
+#define MQLYY_MAX_SHIFTREDUCE   1120
+#define MQLYY_MIN_REDUCE        1121
+#define MQLYY_MAX_REDUCE        1501
+#define MQLYY_ERROR_ACTION      1502
+#define MQLYY_ACCEPT_ACTION     1503
+#define MQLYY_NO_ACTION         1504
 
 /* The mqlyyzerominor constant is used to initialize instances of
 ** MQLYYMINORTYPE objects to zero. */
@@ -102927,301 +105029,316 @@ static const MQLYYMINORTYPE mqlyyzerominor = { 0 };
 **                     shifting non-terminals after a reduce.
 **  mqlyy_default[]       Default action for each state.
 */
-#define MQLYY_ACTTAB_COUNT (883)
+#define MQLYY_ACTTAB_COUNT (926)
 static const MQLYYACTIONTYPE mqlyy_action[] = {
- /*     0 */  1436,  386,  698,  699,  700,  701,  702,  703,  704,  705,
- /*    10 */   706,  707,  708,  709,  710,  711,  712,  713,  714,  715,
- /*    20 */   716,  717,  718,  719,  720,  721,  722,  723,  724,  725,
- /*    30 */   726,  727,  728,  729,  730,  731,  732,  733,  734,  735,
- /*    40 */   736,  737,  738,  739,  740,  741,  742,  743,  744,   37,
- /*    50 */   115,   95,  816,  311,  170,  939,  148,  964,  147,   38,
- /*    60 */   164,  989,  251,  981,    4,  303,  235,  250,  965,  306,
- /*    70 */   779,  305,  304,    3,  900, 1410,  965,  274,  299,  375,
- /*    80 */    60,  782,  374,  207,  302,  940, 1043, 1044, 1045, 1046,
- /*    90 */  1047,  980,  251,  981,    4,   69,  235,  250,  978,  979,
- /*   100 */    21,  132,  377,    9,   18,  296,  330,  149,   44,   71,
- /*   110 */   152,  246,  150,  160,   10,  207, 1043, 1044, 1045, 1046,
- /*   120 */  1047,   69,  879,  843,  844,  777,   68,  252,  251,  981,
- /*   130 */     4,  179,  235,  250,  334,  906,  271,  931,  272,  251,
- /*   140 */   981,    4,  944,  986,  250,  977,  251,  981,    4,   69,
- /*   150 */   987,  250, 1043, 1044, 1045, 1046, 1047,  941,  240, 1037,
- /*   160 */   330,  779,  932, 1043, 1044, 1045, 1046, 1047,    6,  247,
- /*   170 */  1043, 1044, 1045, 1046, 1047,    1,  310,  873,  244,  100,
- /*   180 */   807,  107, 1026,  843,  844,  242, 1017, 1021,  944,  872,
- /*   190 */    49,  926,    1,  198,   69,  337,  943,  942, 1244,  259,
- /*   200 */   919,  353,  925,  941,  217,  165,  320,  861,  328,  113,
- /*   210 */   243,  241, 1017, 1021,  261,  368,    1,  104,  191,  189,
- /*   220 */   101,  361,   96, 1027, 1028, 1029, 1030, 1031, 1032, 1033,
- /*   230 */  1034,  372,  863,  779,  168,   69,  777,  122,  243,  241,
- /*   240 */  1017, 1021, 1036,  255,   19,  861,  288,  950,   93,  307,
- /*   250 */   950,  839,  293,  843,  844,  335,   69,  177,  335,  990,
- /*   260 */   991,  948,  139,  266,  281,   68,  825,  826,  827,  372,
- /*   270 */   863,  964,   55,  110,    5,  849,  990,  991,  331,  117,
- /*   280 */   116,   76,  965,  205,  241, 1017, 1021,  335,  331,  954,
- /*   290 */   219,  218,  239,    3,  843,  844,  861,  945,   76,  861,
- /*   300 */   990,  991,  973,  948,  335, 1022, 1038, 1035,  315,  974,
- /*   310 */     7,  247,  312,   59,  936,  336,   59,  936,  159, 1042,
- /*   320 */   372,  863,   76,  372,  863,    3, 1019, 1021,  156,  153,
- /*   330 */   816,    3,  204,  203,    3,   68,  212,  855,  879,  187,
- /*   340 */   955,  183,   68,  371,  232,  904,  937, 1018, 1021,  970,
- /*   350 */   905, 1042,  797,  939,  905, 1000,  811, 1042, 1011, 1012,
- /*   360 */  1042, 1054,   45,  936,   47,  812,   57,  958,  213,  846,
- /*   370 */   178, 1008, 1009, 1010,  329,  956,  233,  939,  975,  839,
- /*   380 */   998,  999,  234,  940,  861,  237, 1052, 1053,  119,  330,
- /*   390 */   795,  118,  966,  796,  224,   95,  816,  825,  826,  827,
- /*   400 */   121,  939,  878,  267,  820,  295,  975,  940,  372,  863,
- /*   410 */   996,  159,  813,   57,  954,  276,  975,  839,  284,  239,
- /*   420 */   878,  291,  289,  840,  225,   82,  898,  294,  876,  210,
- /*   430 */   856,  940,   79, 1025,  837,  836, 1049,  958,  835,  834,
- /*   440 */   814,  374,  783,  374,  830,  957,  144, 1020,  378,   78,
- /*   450 */   823,  848,  852,  905,  174,  960,  909,  238,   20,  847,
- /*   460 */   178,  249,  832,  330, 1003,  955,  366,  208,  231,  330,
- /*   470 */   230,  220,  881, 1011, 1012,  228,  922,  921,  256,  843,
- /*   480 */   844,  917,  746,  747,  831,  349,   68,  763,  764, 1023,
- /*   490 */  1024,  345,  897,  128,   11,  365,   90,  984,  910,  907,
- /*   500 */    46,   67,  341,  854,  842,  340,  369,   81,   92,  127,
- /*   510 */   895,  343,  194,  947,  214,   51,   92,  774,  347,  356,
- /*   520 */   946,  192,  359,   56,  880,    8,   28,   83,  911,   29,
- /*   530 */   369,   86, 1060,  140,  860,  367,  949,   81,  223, 1040,
- /*   540 */   245,  133,   43,   40,   42,  258,  135,  279,  277,  976,
- /*   550 */    53,  300,  756,  292,  169,  171,  929,  790,  376,  789,
- /*   560 */   379,  788,  787,  786,  200,   15,  870,  202,  227,  221,
- /*   570 */   899,  108,   48,  109,   27,  123,   73,  995, 1065,  114,
- /*   580 */    74, 1064, 1063,   75, 1061,  236,   30,  996,  993,   77,
- /*   590 */   124,  125,  864,  253,   39,  845,  206,  130,  869,  920,
- /*   600 */   257,  924,  263,  129,  264,  268,  874,  824,  275,  278,
- /*   610 */   211,  283,  131,  839,  290,  265,  841,   32,  971,  871,
- /*   620 */   331,  151,  819,   33,  851,  759,  859,  298,  154,  858,
- /*   630 */   285,  857,  155,   34,  757,  754,   72,  157,  308,  163,
- /*   640 */   158,  865,  380,  382,  838,  761,  749,   97,  333,  961,
- /*   650 */   968,  967,  963,  172,  748,  322,  867,  833,  324,  316,
- /*   660 */   866,   66,  326,  185,  327,  928,  364,   17,   13,  363,
- /*   670 */   809,  313,  215,  102,  103,  952,   14,  105,  339,  196,
- /*   680 */   188,  760,  373,  190,  193,  384,  182,  745,  927,  199,
- /*   690 */   186,  889,  882,  222,  111,  888,  887,  201,  226,  112,
- /*   700 */    62, 1058, 1055,  120, 1050,  229,  891,    2, 1059,   92,
- /*   710 */    84, 1365,   22, 1006,   11,   85, 1004, 1005,   41,  126,
- /*   720 */    63,  248,  982,  896,   87,  916,  254,  914,  134,   88,
- /*   730 */    89,  901,  260,  136,  902,  903,  137,  262,  138,   31,
- /*   740 */   269,  273,  828,  972,  270,  141,   50,  915,  142,  280,
- /*   750 */    64,   91,  282,  908,  143,  209,  287,  286,  821,   52,
- /*   760 */   146,  145,   54,  969,  297,   94,   25,  162,  815,  767,
- /*   770 */   301,  766,  161,  167,  765,  818,   98,  166,  309,  962,
- /*   780 */    12,  314,   65,  173,  175,   23,  318,  317,   24,  319,
- /*   790 */   868, 1333,  323,  180,  321,   16,  933,  342,  181,  352,
- /*   800 */   938,  216,  332,  772,   26,  176,  771,  770,   36,  801,
- /*   810 */   776,  951,  325,   35,   58,  344,  775,  184,  794,   99,
- /*   820 */   338,  348,  346,  750,  793,  752,  351,  792,  350,  354,
- /*   830 */   791,  768,  195,  357,   61,  197,  360,  355,  762,  106,
- /*   840 */   358,  785,  381,  383,  803,   80,   70,  799,  798,  784,
- /*   850 */  1066,  806,  362,  385, 1068, 1068,  884, 1068, 1068,  862,
- /*   860 */  1068, 1068, 1068, 1068, 1068, 1068, 1068, 1068, 1068, 1068,
- /*   870 */  1068, 1068, 1068, 1068, 1068, 1068, 1068, 1068, 1068, 1068,
- /*   880 */  1068, 1068,  370,
+ /*     0 */  1503,  417,  741,  742,  743,  744,  745,  746,  747,  748,
+ /*    10 */   749,  750,  751,  752,  753,  754,  755,  756,  757,  758,
+ /*    20 */   759,  760,  761,  762,  763,  764,  765,  766,  767,  768,
+ /*    30 */   769,  770,  771,  772,  773,  774,  775,  776,  777,  778,
+ /*    40 */   779,  780,  781,  782,  783,  784,  785,  786,  787,  788,
+ /*    50 */    40,  126,  366,   76,  342,  184,  218,  162,  334,  161,
+ /*    60 */    41,  178, 1044,  263, 1036,    4,  408,  252,  262, 1020,
+ /*    70 */   337,  330,  336,  335, 1035,  263, 1036,    4,  286,  252,
+ /*    80 */   262,  994,  994,  893, 1098, 1099, 1100, 1101, 1102,  312,
+ /*    90 */  1092,  406,   66,  826,  405,  193, 1098, 1099, 1100, 1101,
+ /*   100 */  1102,  228,  143, 1005,  952,   20,  365,   76,  163,   49,
+ /*   110 */    78,  995,  995,  361,  999,   12,  887,  888,   50,  991,
+ /*   120 */   821,  263, 1036,    4, 1075, 1041,  262,   24,  922,  996,
+ /*   130 */    11,  283,  366,  284,  264,  263, 1036,    4,  905,  252,
+ /*   140 */   262,  823, 1098, 1099, 1100, 1101, 1102,  227,  313, 1072,
+ /*   150 */  1076, 1032,  905, 1000,  920,    1, 1098, 1099, 1100, 1101,
+ /*   160 */  1102, 1081,  403,  907,   76,  258,  263, 1036,    4,  299,
+ /*   170 */  1042,  262,  917, 1081,  823,   13,  403,  907,  887,  888,
+ /*   180 */     1,   57,  261,   76,  916, 1058,  981, 1098, 1099, 1100,
+ /*   190 */  1101, 1102,  111, 1300,    3,  271,   76,  998,  997,  992,
+ /*   200 */   974,   76,  980, 1074, 1076,  964, 1082, 1083, 1084, 1085,
+ /*   210 */  1086, 1087, 1088, 1089,  384,  118,  124,  234, 1082, 1083,
+ /*   220 */  1084, 1085, 1086, 1087, 1088, 1089, 1097,  212,  399,  368,
+ /*   230 */   115,  205,  203,  112,  392,  133,    1, 1005,  256,  950,
+ /*   240 */   351,   76,  359, 1045, 1046,   21,  905, 1091,  249,  298,
+ /*   250 */  1091,  104,  273,  316,  366,  324, 1003,   99,  315,  313,
+ /*   260 */  1072, 1076,  107,  128,  127,   84,   74,  293, 1045, 1046,
+ /*   270 */   403,  907,  959,  333,  182, 1077,  821,  315,  313, 1072,
+ /*   280 */  1076,  267,  235,  236,  366,  346,  905,  887,  888,  338,
+ /*   290 */    84,  191, 1073, 1076,  327,  315,  313, 1072, 1076, 1477,
+ /*   300 */   150,  278,  174,  311, 1003, 1028,  311,  218,    3,  944,
+ /*   310 */   403,  907,  319, 1029, 1093, 1090,  306, 1093, 1090,  343,
+ /*   320 */    65,  991,    5,  121, 1045, 1046,  883,  308,  304,  302,
+ /*   330 */   223,  222,  922, 1003,  887,  888,  314, 1072, 1076, 1033,
+ /*   340 */  1034,  869,  870,  871,  851,  362,   84,   61,  823,  367,
+ /*   350 */    65,  991,  999,  166,  173,  164, 1009,    3,  155,  225,
+ /*   360 */   226,  170,  167,  860,  201,    3,  197,  996,    3,  948,
+ /*   370 */  1025,  994,  229,  899,  949,  949,   52,  856,   63, 1013,
+ /*   380 */   230,  890,  192,  994,  360, 1011, 1055, 1019,  923, 1097,
+ /*   390 */  1030,  855,   74, 1063, 1064, 1065, 1109, 1097, 1020,  994,
+ /*   400 */  1097,  995,   75,  841,  362,  130,  106,  860,  129,  361,
+ /*   410 */   986,  250, 1010,  995, 1021, 1053, 1054,  132,  905,  251,
+ /*   420 */   361,  341,  254,    6,  259, 1107, 1108,  279,  241,  995,
+ /*   430 */   106,  860,  869,  870,  871,  987,  294, 1066, 1067,    7,
+ /*   440 */   259,  839,  403,  907,  840,  864,  326,  173, 1030,  220,
+ /*   450 */   179,  857,   63, 1009,  325, 1030,  300,  288,  242,   90,
+ /*   460 */   923,  883, 1051,  311,   74,  322,  900,  883,  320,  884,
+ /*   470 */   858,  405, 1013,  942, 1080,  301,  881,  880, 1012,  409,
+ /*   480 */   879,  878,  827,  405,  949, 1104,  876,   86,  867,  188,
+ /*   490 */  1015,  892,  896,   74,  891,  192,  237,  925, 1066, 1067,
+ /*   500 */   977,  976,  268,  887,  888,  972, 1019,  255,  875, 1010,
+ /*   510 */    23,  361,  790,  791,  219,  397,  941, 1020,  380,  361,
+ /*   520 */   807,  808,  245,  248,  376,  247,  874,  965,  139,   97,
+ /*   530 */   962,  961,   51,  138,  960,  898,   74, 1078, 1079,  318,
+ /*   540 */    73,  208,   87,  886,  396,  939, 1002,  372,   89,   99,
+ /*   550 */   371,  400, 1039,  374,  400,   89,  231,  966, 1001,   79,
+ /*   560 */   818,  378,  387,  400,  206,  390,  402,  924,   55,    9,
+ /*   570 */    10,  953,   31,   47,   62,   89,   91,  151,   93,   32,
+ /*   580 */   904, 1004, 1115,  398,  240,   44,  257,   46,  144,  270,
+ /*   590 */   146,  289,  291,   59, 1031,  303,  305,  800,  307, 1095,
+ /*   600 */   323,  331,  183,  185,  407,  984,  410,  834,  833,  832,
+ /*   610 */   831,  214,  830,   17,  216,  914,  244,  238,  119,  120,
+ /*   620 */   943,   53,  134,   30,   81, 1050, 1120,  125, 1119,   33,
+ /*   630 */  1118,   82,   83, 1116,  253, 1051,  135,  136, 1048,   85,
+ /*   640 */   908,   43,  265,  217,  889,  269,  276,  913,  275,  142,
+ /*   650 */   140,  975,  141,  979,  918,  280,  868,  310,  287,  290,
+ /*   660 */   221,    8,   58,  915,  883,  277,  157,  885,  321,   35,
+ /*   670 */   362,  165,  895,   36, 1026,  803,  295,  903,  317,  168,
+ /*   680 */   902,  863,  169,  801,   37,  798,  901,  177,  339,  411,
+ /*   690 */   108,  413,  171,  329,  793,  172,  805,  792,  364,   80,
+ /*   700 */   911,  186,  909,  353,  882,  344, 1023, 1022, 1007, 1018,
+ /*   710 */   199,  347,  877,   15, 1016,  983,  196,  395,  853,  357,
+ /*   720 */    72,  394,  202,  358,  232,   19,  113,  910,   16,  355,
+ /*   730 */   114,  404,  204,  207,  116,  370,  982,  210,  804,  415,
+ /*   740 */   789,  933,  213,  122,  239,  932,  931,  215,  123,  243,
+ /*   750 */    68,  246,  935,    2, 1113, 1110, 1105, 1114,  131,   99,
+ /*   760 */  1061, 1060,   92, 1059,  926,   45,  260,  137,   69, 1037,
+ /*   770 */   200,  940,   94,  266,  971,  969,  145,   95,   96,  945,
+ /*   780 */   272,  946,  274,  147,  148,  947,  281,   34,  149,  285,
+ /*   790 */  1027,  152,  282,   54,  970,   70,  153,  292,  872,   98,
+ /*   800 */   963,  154,  958,   22,   56,  297,  296,  957,   13,   48,
+ /*   810 */   309,  103,   25,  951, 1432,  100,  956,  224,  955,  101,
+ /*   820 */   156,  158,  865,  160,  954,   60,  159, 1024,  102,  859,
+ /*   830 */   105,   42,  175,  176,  332,  811,  810,  180,  862,  809,
+ /*   840 */   181,  340,   26,   27, 1400,  109, 1017,   14,  187,  345,
+ /*   850 */    71,  189,  349,  350,  348,   28,  328,  912,  194,  988,
+ /*   860 */   190,   29,   39,  354,  352,  993,  195,  356,   38,   64,
+ /*   870 */   363,  198,  110,  845,  816,  815,  814,  369,  373,  377,
+ /*   880 */   381, 1006,  385,  820,  375,  383,  379,  819,  233,  794,
+ /*   890 */   838,  850,   18,  837,  209,  836,   67,  393,  835,  812,
+ /*   900 */   806,  401,  211,  382,  388,  117,  386,  391,  389,  829,
+ /*   910 */    88,  847,  828,   77,  843,  842,  412,  796, 1121,  414,
+ /*   920 */   416, 1123, 1123, 1123,  928,  906,
 };
 static const MQLYYCODETYPE mqlyy_lookahead[] = {
- /*     0 */   127,  128,  129,  130,  131,  132,  133,  134,  135,  136,
- /*    10 */   137,  138,  139,  140,  141,  142,  143,  144,  145,  146,
- /*    20 */   147,  148,  149,  150,  151,  152,  153,  154,  155,  156,
- /*    30 */   157,  158,  159,  160,  161,  162,  163,  164,  165,  166,
- /*    40 */   167,  168,  169,  170,  171,  172,  173,  174,  175,    2,
- /*    50 */   189,   58,   59,    6,    7,    4,  205,   17,  207,   12,
- /*    60 */    13,  266,  267,  268,  269,   17,  271,  272,   28,   22,
- /*    70 */     4,   24,   25,  239,  240,   19,   28,   30,   30,  190,
- /*    80 */   191,  192,  193,   27,  185,   34,  291,  292,  293,  294,
- /*    90 */   295,  266,  267,  268,  269,  193,  271,  272,  264,  265,
- /*   100 */    49,  228,  185,   52,   57,  206,  255,   60,   61,   62,
- /*   110 */   205,  213,  207,  214,   67,   27,  291,  292,  293,  294,
- /*   120 */   295,  193,   69,   75,   76,   17,   73,  266,  267,  268,
- /*   130 */   269,  214,  271,  272,  201,   69,   28,   53,   30,  267,
- /*   140 */   268,  269,  209,  271,  272,   98,  267,  268,  269,  193,
- /*   150 */   271,  272,  291,  292,  293,  294,  295,  224,    4,    5,
- /*   160 */   255,    4,   78,  291,  292,  293,  294,  295,  278,  279,
- /*   170 */   291,  292,  293,  294,  295,   18,  185,   69,  280,    4,
- /*   180 */   201,    3,   72,   75,   76,  283,  284,  285,  209,   81,
- /*   190 */    80,   83,   18,   15,  193,   17,    4,    5,   90,   91,
- /*   200 */    92,   26,   94,  224,   29,  214,   28,   53,   30,  281,
- /*   210 */   282,  283,  284,  285,  185,   40,   18,   42,   43,   44,
- /*   220 */    45,   46,    3,  113,  114,  115,  116,  117,  118,  119,
- /*   230 */   120,   77,   78,    4,   15,  193,   17,  281,  282,  283,
- /*   240 */   284,  285,  224,  214,   52,   53,   28,    4,   30,   30,
- /*   250 */     4,    4,   34,   75,   76,  193,  193,   79,  193,  102,
- /*   260 */   103,  224,  233,  234,   46,   73,   64,   65,   66,   77,
- /*   270 */    78,   17,   70,    4,  100,   55,  102,  103,   34,  122,
- /*   280 */   123,  124,   28,  282,  283,  284,  285,  193,   34,   45,
- /*   290 */   253,  254,  274,  239,   75,   76,   53,   54,  124,   53,
- /*   300 */   102,  103,   84,  224,  193,  287,  288,  289,    2,   91,
- /*   310 */   278,  279,  250,  251,  252,  250,  251,  252,  204,  265,
- /*   320 */    77,   78,  124,   77,   78,  239,  284,  285,   57,   58,
- /*   330 */    59,  239,  253,  254,  239,   73,  222,  223,   69,  205,
- /*   340 */    96,  207,   73,   53,  290,  184,  252,  284,  285,  184,
- /*   350 */   189,  265,    4,    4,  189,   81,   19,  265,  111,  112,
- /*   360 */   265,   81,  251,  252,  202,  203,  204,  249,  216,  217,
- /*   370 */   218,  108,  109,  110,  256,  257,  290,    4,  193,    4,
- /*   380 */   106,  107,  290,   34,   53,  290,  106,  107,  113,  255,
- /*   390 */    42,  116,   19,   45,   53,   58,   59,   64,   65,   66,
- /*   400 */   125,    4,  209,  242,  205,  206,  193,   34,   77,   78,
- /*   410 */     4,  204,  203,  204,   45,  207,  193,    4,   69,  274,
- /*   420 */   209,  207,  212,  213,   83,   84,  189,  262,  235,  244,
- /*   430 */   223,   34,   72,  288,  209,  209,  209,  249,  213,  213,
- /*   440 */   192,  193,  192,  193,   69,  257,  235,   54,  184,  208,
- /*   450 */   209,  220,  221,  189,  258,  259,   19,  244,   52,  217,
- /*   460 */   218,   33,   46,  255,   36,   96,    8,  244,   86,  255,
- /*   470 */    88,  236,  237,  111,  112,  238,   75,   76,   17,   75,
- /*   480 */    76,   20,    4,    5,   68,   31,   73,   20,   21,   54,
- /*   490 */    54,   37,   54,   52,  101,   37,   51,  270,    4,   19,
- /*   500 */    71,   71,   27,   74,   74,   30,   71,   71,   71,   71,
- /*   510 */    69,   26,  194,   54,   29,  263,   71,   34,   35,   27,
- /*   520 */    54,   71,   30,  210,   74,  286,  296,  276,   34,  296,
- /*   530 */    71,  276,  298,  210,  224,  197,  224,   71,  193,  193,
- /*   540 */   280,  246,   62,  277,  277,  245,  214,  193,  206,  193,
- /*   550 */   211,  193,  176,  206,  176,  176,  249,  198,  188,  198,
- /*   560 */   183,  198,  198,  198,  176,   89,  232,   85,    8,  189,
- /*   570 */   189,  231,   62,  230,  297,  104,  273,  105,   53,  275,
- /*   580 */   275,  299,  299,  275,  299,  299,  297,    4,  274,  273,
- /*   590 */   275,  189,   53,  225,   80,    4,  225,  230,  232,  215,
- /*   600 */   189,  215,   30,  231,  189,  209,   28,  209,  189,  189,
- /*   610 */   189,   10,  229,    4,  189,  241,  213,   18,  261,  234,
- /*   620 */    34,   18,  205,  189,    4,   14,  219,  215,  219,  221,
- /*   630 */   243,  221,  218,  189,  181,    3,  213,  219,  189,  179,
- /*   640 */   218,  215,   16,    8,  213,  182,  177,  179,    8,  259,
- /*   650 */   261,  260,  260,  205,  177,   53,    4,  205,  226,  189,
- /*   660 */   227,  219,  215,   18,  213,  209,   51,   55,  189,   52,
- /*   670 */    56,  247,    8,  200,  200,  248,  189,  187,   48,  186,
- /*   680 */   199,  182,  196,  199,  195,   10,  247,  178,  248,  177,
- /*   690 */   247,   19,  237,   51,   18,   34,   34,   27,   82,   71,
- /*   700 */    16,   19,   19,   35,   19,   87,   87,  101,   19,   71,
- /*   710 */   121,  121,   35,   54,  101,   71,   36,   54,   52,   18,
- /*   720 */    99,   35,   19,   54,   51,   20,   93,   19,   18,   51,
- /*   730 */    10,   19,   21,   18,   53,   19,   90,   72,   80,   18,
- /*   740 */    34,   46,   68,   19,   31,   18,    8,   19,   18,   51,
- /*   750 */    63,   84,   30,   19,   18,   84,   31,   34,   19,   80,
- /*   760 */    18,   71,    8,   19,   72,   51,   73,   18,   39,   23,
- /*   770 */    20,   23,   46,   18,   23,   19,    3,   46,   20,   19,
- /*   780 */    18,   17,   19,   51,   18,   97,   17,   20,   97,    8,
- /*   790 */    53,   97,   27,    8,   77,   95,   19,   27,   46,   27,
- /*   800 */    39,   33,   45,   28,   51,   72,   28,   28,   73,   50,
- /*   810 */    34,    4,   72,   72,   71,   32,   34,   72,   34,   72,
- /*   820 */    49,   32,   36,    5,   34,    5,   46,   34,   41,   41,
- /*   830 */    34,   19,   18,   41,   18,   20,   41,   46,   19,   17,
- /*   840 */    46,   39,    9,   11,   46,   41,   38,   47,   47,   39,
- /*   850 */     0,   54,   53,    1,  300,  300,   53,  300,  300,   53,
- /*   860 */   300,  300,  300,  300,  300,  300,  300,  300,  300,  300,
- /*   870 */   300,  300,  300,  300,  300,  300,  300,  300,  300,  300,
- /*   880 */   300,  300,   77,
+ /*     0 */   131,  132,  133,  134,  135,  136,  137,  138,  139,  140,
+ /*    10 */   141,  142,  143,  144,  145,  146,  147,  148,  149,  150,
+ /*    20 */   151,  152,  153,  154,  155,  156,  157,  158,  159,  160,
+ /*    30 */   161,  162,  163,  164,  165,  166,  167,  168,  169,  170,
+ /*    40 */   171,  172,  173,  174,  175,  176,  177,  178,  179,  180,
+ /*    50 */     2,  194,  198,  198,    6,    7,   27,  210,   17,  212,
+ /*    60 */    12,   13,  277,  278,  279,  280,  190,  282,  283,   28,
+ /*    70 */    22,   30,   24,   25,  277,  278,  279,  280,   30,  282,
+ /*    80 */   283,    4,    4,   55,  299,  300,  301,  302,  303,    4,
+ /*    90 */     5,  195,  196,  197,  198,  219,  299,  300,  301,  302,
+ /*   100 */   303,  248,  233,    4,  251,   57,  206,  198,   60,   61,
+ /*   110 */    62,   34,   34,  266,  214,   67,   75,   76,  264,  265,
+ /*   120 */    17,  278,  279,  280,   54,  282,  283,   49,  214,  229,
+ /*   130 */    52,   28,  198,   30,  277,  278,  279,  280,   53,  282,
+ /*   140 */   283,    4,  299,  300,  301,  302,  303,  292,  293,  294,
+ /*   150 */   295,  103,   53,   54,  240,   18,  299,  300,  301,  302,
+ /*   160 */   303,   72,   77,   78,  198,  218,  278,  279,  280,   80,
+ /*   170 */   282,  283,   69,   72,    4,  105,   77,   78,   75,   76,
+ /*   180 */    18,   80,   33,  198,   81,   36,   83,  299,  300,  301,
+ /*   190 */   302,  303,    4,   90,  244,   92,  198,    4,    5,  265,
+ /*   200 */    97,  198,   99,  294,  295,   19,  117,  118,  119,  120,
+ /*   210 */   121,  122,  123,  124,   26,    3,  250,   29,  117,  118,
+ /*   220 */   119,  120,  121,  122,  123,  124,  276,   15,   40,   17,
+ /*   230 */    42,   43,   44,   45,   46,  250,   18,    4,  291,   69,
+ /*   240 */    28,  198,   30,  106,  107,   52,   53,  229,  298,   28,
+ /*   250 */   229,   30,  190,  250,  198,   34,  229,   71,  292,  293,
+ /*   260 */   294,  295,    3,  126,  127,  128,   73,   46,  106,  107,
+ /*   270 */    77,   78,  254,  190,   15,  254,   17,  292,  293,  294,
+ /*   280 */   295,  219,  255,  256,  198,    2,   53,   75,   76,   30,
+ /*   290 */   128,   79,  294,  295,  211,  292,  293,  294,  295,   19,
+ /*   300 */   238,  239,  219,  285,  229,   84,  285,   27,  244,  245,
+ /*   310 */    77,   78,   91,   92,  296,  297,   82,  296,  297,  263,
+ /*   320 */   264,  265,  104,    4,  106,  107,    4,   93,   94,   95,
+ /*   330 */   255,  256,  214,  229,   75,   76,  293,  294,  295,  275,
+ /*   340 */   276,   64,   65,   66,  206,   34,  128,   70,    4,  263,
+ /*   350 */   264,  265,  214,  210,  209,  212,   45,  244,  240,  255,
+ /*   360 */   256,   57,   58,   59,  210,  244,  212,  229,  244,  189,
+ /*   370 */   189,    4,  227,  228,  194,  194,  207,  208,  209,  262,
+ /*   380 */   221,  222,  223,    4,  267,  268,   81,   17,   69,  276,
+ /*   390 */   198,   19,   73,  112,  113,  114,   81,  276,   28,    4,
+ /*   400 */   276,   34,  198,    4,   34,  117,   58,   59,  120,  266,
+ /*   410 */    53,  298,  101,   34,   19,  110,  111,  129,   53,  298,
+ /*   420 */   266,  190,  298,  289,  290,  110,  111,  247,   53,   34,
+ /*   430 */    58,   59,   64,   65,   66,   78,   69,  115,  116,  289,
+ /*   440 */   290,   42,   77,   78,   45,  210,  211,  209,  198,  257,
+ /*   450 */   219,  208,  209,   45,  273,  198,  252,  212,   83,   84,
+ /*   460 */    69,    4,    4,  285,   73,  212,  228,    4,  217,  218,
+ /*   470 */   197,  198,  262,  194,  296,   96,  214,  214,  268,  189,
+ /*   480 */   218,  218,  197,  198,  194,  214,   46,  213,  214,  269,
+ /*   490 */   270,  225,  226,   73,  222,  223,  241,  242,  115,  116,
+ /*   500 */    75,   76,   17,   75,   76,   20,   17,  257,   68,  101,
+ /*   510 */    52,  266,    4,    5,  257,    8,   54,   28,   31,  266,
+ /*   520 */    20,   21,  243,   86,   37,   88,   69,    4,   52,   51,
+ /*   530 */    19,   54,   71,   71,   54,   74,   73,   54,   54,   51,
+ /*   540 */    71,  199,   72,   74,   37,   69,   54,   27,   71,   71,
+ /*   550 */    30,   71,  281,   26,   71,   71,   29,   34,   54,   71,
+ /*   560 */    34,   35,   27,   71,   71,   30,   53,   74,  274,  253,
+ /*   570 */   253,  251,  304,   62,  215,   71,  287,  215,  287,  304,
+ /*   580 */   229,  229,  306,  202,  198,  288,  291,  288,  259,  258,
+ /*   590 */   219,  211,  198,  216,  198,  198,  198,  181,  198,  198,
+ /*   600 */   211,  198,  181,  181,  193,  262,  188,  203,  203,  203,
+ /*   610 */   203,  181,  203,   89,   85,  237,    8,  194,  236,  235,
+ /*   620 */   194,   62,  108,  305,  284,  109,   53,  286,  307,  305,
+ /*   630 */   307,  286,  286,  307,  307,    4,  286,  194,  285,  284,
+ /*   640 */    53,   80,  230,  230,    4,  194,  194,  237,   30,  234,
+ /*   650 */   236,  220,  235,  220,   28,  214,  214,   10,  194,  194,
+ /*   660 */   194,  194,   80,  239,    4,  246,  234,  218,  194,   18,
+ /*   670 */    34,   18,    4,  194,  272,   14,  249,  224,  249,  224,
+ /*   680 */   226,  210,  223,  186,  194,    3,  226,  184,  194,   16,
+ /*   690 */   184,    8,  224,  220,  182,  223,  187,  182,    8,  218,
+ /*   700 */     4,  210,  220,   53,  218,  260,  272,  271,  261,  271,
+ /*   710 */    18,  194,  210,  194,  270,  214,  260,   51,   56,  220,
+ /*   720 */   224,   52,  204,  218,    8,   55,  205,  232,  194,  231,
+ /*   730 */   205,  201,  204,  200,  192,   48,  261,  191,  187,   10,
+ /*   740 */   183,   19,  182,   18,   51,   34,   34,   27,   71,   82,
+ /*   750 */    16,   87,   87,  105,   19,   19,   19,   19,   35,   71,
+ /*   760 */    54,   54,   71,   36,  242,   52,   35,   18,   96,   19,
+ /*   770 */   260,   54,   51,   98,   20,   19,   18,   51,   10,   19,
+ /*   780 */    21,   53,   72,   18,   90,   19,   34,   18,   80,   46,
+ /*   790 */    19,   18,   31,    8,   19,   63,   18,   51,   68,   84,
+ /*   800 */    19,   18,   54,   52,   80,   31,   34,   54,  105,   52,
+ /*   810 */    30,  125,   35,   19,  125,   52,   54,   84,   54,   52,
+ /*   820 */    18,   28,   19,   18,   54,    8,   71,   19,   52,   39,
+ /*   830 */    51,   92,   46,   18,   20,   23,   23,   46,   19,   23,
+ /*   840 */    18,   20,  102,  102,  102,    3,   19,   18,   51,   17,
+ /*   850 */    19,   18,   17,    8,   20,   73,   72,   53,    8,   19,
+ /*   860 */    72,   51,   73,   27,   77,   39,   46,   72,   72,   71,
+ /*   870 */    45,   72,   72,   50,   28,   28,   28,   49,   27,   36,
+ /*   880 */    41,    4,   41,   34,   32,   27,   32,   34,   33,    5,
+ /*   890 */    34,   54,  100,   34,   18,   34,   18,   53,   34,   19,
+ /*   900 */    19,   77,   20,   46,   41,   17,   46,   41,   46,   39,
+ /*   910 */    41,   46,   39,   38,   47,   47,    9,    5,    0,   11,
+ /*   920 */     1,  308,  308,  308,   53,   53,
 };
-#define MQLYY_SHIFT_USE_DFLT (-8)
-#define MQLYY_SHIFT_COUNT (386)
-#define MQLYY_SHIFT_MIN   (-7)
-#define MQLYY_SHIFT_MAX   (852)
+#define MQLYY_SHIFT_USE_DFLT (-1)
+#define MQLYY_SHIFT_COUNT (417)
+#define MQLYY_SHIFT_MIN   (0)
+#define MQLYY_SHIFT_MAX   (919)
 static const short mqlyy_shift_ofst[] = {
- /*     0 */    47,  157,  198,  198,  174,  198,   51,   51,  154,   51,
- /*    10 */   108,   51,  397,  397,  397,   88,  192,  192,   48,  243,
- /*    20 */   246,   51,   51,  244,  244,  271,  244,   56,   56,   56,
- /*    30 */    56,   66,   66,  397,   -7,   84,  220,  178,  219,  269,
- /*    40 */   263,  247,  263,  349,  254,  373,  271,  337,  397,  406,
- /*    50 */   369,  397,   53,  375,  369,  413,  413,  397,   84,  397,
- /*    60 */   397,   66,  229,  262,  262,  306,  360,  220,  290,  110,
- /*    70 */   175,  218,  202,  274,  280,  280,  275,  274,  333,  331,
- /*    80 */   348,  331,  397,  428,  397,  362,  428,  401,  461,  404,
- /*    90 */    40,  397,  397,  416,   40,  397,  478,  478,  478,   84,
- /*   100 */   458,  458,  458,  458,  458,  454,  467,  478,  476,  482,
- /*   110 */   560,  229,  229,  510,  471,  472,  472,  472,  525,  525,
- /*   120 */   525,  525,  510,  583,  471,  472,  229,  539,  539,  476,
- /*   130 */   482,  560,  514,  591,  229,  591,  229,  572,  262,  578,
- /*   140 */   262,  229,  229,  229,  601,  609,  229,  599,  599,  586,
- /*   150 */   603,  229,  603,  620,  360,  620,  220,  360,  620,  220,
- /*   160 */   591,  609,  229,  611,  632,  591,  609,  229,  626,  635,
- /*   170 */   632,  635,  640,  586,  306,  229,  602,  652,  620,  591,
- /*   180 */   586,  609,  645,  640,  262,  229,  645,  640,  615,  617,
- /*   190 */   615,  617,  290,  614,  612,  229,  664,  630,  626,  675,
- /*   200 */   635,  341,  382,  435,  436,  393,  438,  441,  445,  494,
- /*   210 */   437,  480,  429,  430,  475,  485,  483,  492,  459,  466,
- /*   220 */   450,  672,  676,  642,  661,  662,  670,  616,  628,  684,
- /*   230 */   618,  619,  682,  683,  685,  606,  668,  689,  638,  589,
- /*   240 */   590,  677,  677,  613,  659,  663,  644,  666,  680,  686,
- /*   250 */   701,  621,  703,  669,  673,  633,  705,  708,  710,  678,
- /*   260 */   720,  711,  681,  665,  712,  715,  646,  716,  721,  658,
- /*   270 */   706,  713,  674,  687,  695,  724,  727,  738,  728,  730,
- /*   280 */   667,  698,  671,  722,  734,  736,  679,  723,  725,  690,
- /*   290 */   739,  742,  754,  714,  744,  688,  691,  693,  692,  726,
- /*   300 */   729,  749,  750,  694,  746,  748,  751,  731,  756,  755,
- /*   310 */   758,  773,  760,  762,  732,  764,  763,  766,  767,  769,
- /*   320 */   781,  737,  717,  733,  765,  735,  740,  785,  752,  743,
- /*   330 */   741,  745,  747,  757,  761,  700,  777,  753,  759,  771,
- /*   340 */   775,  778,  779,  770,  776,  783,  782,  786,  768,  789,
- /*   350 */   784,  787,  780,  772,  790,  788,  791,  793,  792,  794,
- /*   360 */   796,  795,  797,  799,  798,  800,  801,  802,  804,  807,
- /*   370 */   803,  805,  806,  810,  808,  812,  814,  815,  819,  816,
- /*   380 */   822,  818,  833,  820,  832,  850,  852,
+ /*     0 */    48,  137,  162,  162,  218,  162,   78,   78,   78,   85,
+ /*    10 */    85,   78,  103,   78,   77,   77,   77,   29,  193,  193,
+ /*    20 */    41,   99,  233,  233,   78,   78,  311,  311,  304,  311,
+ /*    30 */   280,  280,  280,  280,  170,  170,   77,  348,  357,   28,
+ /*    40 */   212,  259,  234,  319,  281,  322,  281,  367,  379,  370,
+ /*    50 */   395,  304,  372,   77,  408,   77,  391,  458,  391,  457,
+ /*    60 */   408,  463,  463,   77,  357,   77,   77,  170,  344,  420,
+ /*    70 */   420,  283,  470,   28,  513,   89,  101,  188,  221,  234,
+ /*    80 */   277,  305,  315,  315,  288,  305,  368,  365,  399,  365,
+ /*    90 */    77,  149,  383,  149,  425,  485,  428,  489,   77,   77,
+ /*   100 */    77,   77,   77,   77,  440,  489,   77,  508,  508,  508,
+ /*   110 */   357,  507,  507,  507,  507,  507,  487,  500,  508,  524,
+ /*   120 */   529,  608,  344,  344,  559,  514,  516,  516,  516,  573,
+ /*   130 */   573,  573,  573,  559,  631,  514,  516,  344,  587,  587,
+ /*   140 */   524,  529,  608,  561,  640,  344,  640,  344,  618,  420,
+ /*   150 */   626,  420,  344,  344,  344,  647,  344,  647,  582,  660,
+ /*   160 */   344,  651,  651,  636,  653,  344,  653,  668,  470,  668,
+ /*   170 */    28,  470,  668,   28,  640,  660,  344,  661,  682,  640,
+ /*   180 */   660,  344,  673,  683,  682,  683,  690,  636,  283,  344,
+ /*   190 */   650,  696,  668,  640,  636,  660,  692,  690,  420,  344,
+ /*   200 */   692,  690,  666,  669,  666,  669,  513,  662,  670,  344,
+ /*   210 */   716,  687,  673,  729,  683,  375,  437,  462,  476,  478,
+ /*   220 */   186,  511,  477,  480,  523,  483,  484,   70,  488,  461,
+ /*   230 */   469,  520,  527,  526,  535,  492,  504,  493,  722,  725,
+ /*   240 */   693,  711,  712,  720,  667,  677,  734,  664,  665,  735,
+ /*   250 */   736,  737,  648,  723,  738,  688,  706,  707,  691,  713,
+ /*   260 */   727,  731,  749,  672,  750,  717,  721,  675,  754,  756,
+ /*   270 */   758,  726,  768,  759,  728,  710,  760,  765,  694,  766,
+ /*   280 */   769,  708,  752,  761,  730,  732,  743,  771,  773,  785,
+ /*   290 */   775,  778,  715,  746,  781,  783,  724,  772,  774,  751,
+ /*   300 */   748,  753,  757,  762,  763,  764,  767,  770,  776,  733,
+ /*   310 */   780,  686,  689,  777,  777,  703,  794,  802,  793,  739,
+ /*   320 */   755,  803,  805,  817,  779,  808,  740,  741,  782,  784,
+ /*   330 */   786,  790,  815,  814,  742,  812,  813,  816,  791,  819,
+ /*   340 */   822,  821,  842,  827,  829,  797,  832,  831,  833,  834,
+ /*   350 */   835,  845,  804,  787,  788,  836,  789,  795,  850,  820,
+ /*   360 */   798,  796,  799,  800,  825,  826,  792,  840,  810,  823,
+ /*   370 */   828,  846,  847,  848,  851,  849,  852,  853,  843,  855,
+ /*   380 */   854,  856,  839,  857,  858,  859,  841,  860,  861,  863,
+ /*   390 */   862,  864,  866,  837,  844,  865,  867,  868,  870,  869,
+ /*   400 */   877,  871,  824,  872,  873,  875,  880,  876,  882,  881,
+ /*   410 */   878,  888,  884,  907,  912,  908,  918,  919,
 };
-#define MQLYY_REDUCE_USE_DFLT (-206)
-#define MQLYY_REDUCE_COUNT (200)
-#define MQLYY_REDUCE_MIN   (-205)
-#define MQLYY_REDUCE_MAX   (512)
+#define MQLYY_REDUCE_USE_DFLT (-216)
+#define MQLYY_REDUCE_COUNT (214)
+#define MQLYY_REDUCE_MIN   (-215)
+#define MQLYY_REDUCE_MAX   (560)
 static const short mqlyy_reduce_ofst[] = {
- /*     0 */  -127, -139, -205, -175, -128, -121,  -72,  -44,   18,    1,
- /*    10 */    29,  -98,   62,   65, -111, -166,  -67,  -21, -101,   37,
- /*    20 */    79,   42,   63, -149,  -95,  114,  134,   54,   86,   92,
- /*    30 */    95,  161,  165,  111,  162,  118,  152,  -83,   -9,  193,
- /*    40 */  -110, -102,   32,  185,  199,   94,  207,  209,  213,  145,
- /*    50 */   208,  223,  211,  210,  214,  225,  226,  248,  188,   94,
- /*    60 */   250,  264,  237,  227,  241,  196,  231,  242,  235,  239,
- /*    70 */   318,  252,  313,  251,  230,  233,  234,  255,  323,  310,
- /*    80 */   338,  312,  345,  266,  346,  260,  267,  295,  300,  332,
- /*    90 */   342,  354,  356,  339,  347,  358,  376,  378,  379,  307,
- /*   100 */   359,  361,  363,  364,  365,  370,  377,  388,  334,  340,
- /*   110 */   343,  380,  381,  277,  303,  304,  305,  308,  282,  283,
- /*   120 */   285,  286,  289,  314,  316,  315,  402,  368,  371,  366,
- /*   130 */   372,  367,  383,  384,  411,  386,  415,  374,  396,  385,
- /*   140 */   398,  419,  420,  421,  387,  403,  425,  357,  389,  417,
- /*   150 */   391,  434,  392,  407,  408,  409,  414,  410,  418,  422,
- /*   160 */   412,  423,  444,  453,  460,  426,  431,  449,  463,  469,
- /*   170 */   468,  477,  424,  448,  390,  470,  433,  432,  442,  447,
- /*   180 */   452,  451,  427,  439,  456,  479,  440,  443,  473,  481,
- /*   190 */   474,  484,  455,  486,  489,  487,  490,  493,  499,  509,
- /*   200 */   512,
+ /*     0 */  -131, -143, -215, -203, -157, -112,  -34,  -15,    3,   18,
+ /*    10 */    21, -145,   62,   43,   56,   86, -104,   64, -100,  138,
+ /*    20 */    83,   27,   75,  104,  -91,   -2, -153,  143,  145,  154,
+ /*    30 */   -50,  113,  121,  124,  180,  181, -146,  169,  117,  159,
+ /*    40 */  -124,  231, -147,  -86,  134,  -53,  150,  192,  204,  235,
+ /*    50 */   -66,  238,  243,  250,  245,  257,  118,  178,  -86,  251,
+ /*    60 */   253,  262,  263,  273,  210,  -66,  285,  290,  279,  271,
+ /*    70 */   274,  220,  266,  272,  255,  316,  317,  342,  294,  320,
+ /*    80 */   359,  289,  268,  275,  276,  291,  362,  351,  381,  352,
+ /*    90 */   386,  297,  295,  299,  329,  331,  371,  380,  394,  396,
+ /*   100 */   397,  398,  400,  401,  377,  389,  403,  416,  421,  422,
+ /*   110 */   343,  404,  405,  406,  407,  409,  411,  418,  430,  378,
+ /*   120 */   382,  384,  423,  426,  318,  340,  341,  345,  346,  321,
+ /*   130 */   323,  326,  327,  324,  353,  355,  350,  443,  412,  413,
+ /*   140 */   410,  414,  417,  415,  431,  451,  433,  452,  419,  441,
+ /*   150 */   424,  442,  464,  465,  466,  427,  467,  429,  432,  449,
+ /*   160 */   474,  402,  434,  471,  436,  479,  438,  453,  454,  455,
+ /*   170 */   459,  460,  468,  472,  473,  481,  490,  497,  503,  482,
+ /*   180 */   486,  494,  509,  512,  506,  515,  445,  491,  444,  517,
+ /*   190 */   495,  498,  496,  499,  502,  505,  447,  456,  501,  519,
+ /*   200 */   475,  510,  521,  518,  525,  528,  522,  530,  533,  534,
+ /*   210 */   542,  546,  551,  557,  560,
 };
 static const MQLYYACTIONTYPE mqlyy_default[] = {
- /*     0 */  1435, 1435, 1435, 1435, 1354, 1435, 1382, 1382, 1435, 1435,
- /*    10 */  1147, 1435, 1304, 1304, 1150, 1263, 1435, 1435, 1147, 1435,
- /*    20 */  1435, 1435, 1435, 1435, 1435, 1186, 1435, 1263, 1263, 1263,
- /*    30 */  1263, 1435, 1435, 1435, 1186, 1435, 1219, 1147, 1147, 1435,
- /*    40 */  1376, 1435, 1376, 1435, 1435, 1435, 1186, 1186, 1435, 1435,
- /*    50 */  1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1303,
- /*    60 */  1149, 1435, 1435, 1417, 1435, 1435, 1222, 1219, 1435, 1435,
- /*    70 */  1435, 1435, 1435, 1366, 1420, 1420, 1431, 1366, 1191, 1435,
- /*    80 */  1435, 1435, 1435, 1370, 1435, 1435, 1370, 1292, 1287, 1435,
- /*    90 */  1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435,
- /*   100 */  1169, 1169, 1169, 1169, 1169, 1142, 1435, 1435, 1435, 1259,
- /*   110 */  1255, 1435, 1435, 1426, 1361, 1363, 1363, 1363, 1435, 1435,
- /*   120 */  1435, 1435, 1426, 1435, 1361, 1363, 1435, 1435, 1435, 1435,
- /*   130 */  1259, 1255, 1246, 1435, 1435, 1435, 1435, 1435, 1435, 1244,
- /*   140 */  1435, 1435, 1435, 1435, 1281, 1435, 1435, 1435, 1435, 1435,
- /*   150 */  1435, 1435, 1435, 1435, 1435, 1435, 1219, 1435, 1435, 1219,
- /*   160 */  1435, 1435, 1435, 1127, 1124, 1435, 1435, 1435, 1435, 1120,
- /*   170 */  1124, 1120, 1299, 1435, 1328, 1435, 1435, 1435, 1435, 1435,
- /*   180 */  1435, 1435, 1435, 1299, 1435, 1435, 1435, 1299, 1173, 1174,
- /*   190 */  1173, 1174, 1435, 1179, 1177, 1435, 1138, 1171, 1435, 1122,
- /*   200 */  1120, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435,
- /*   210 */  1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435,
- /*   220 */  1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1262, 1261,
- /*   230 */  1435, 1435, 1435, 1435, 1435, 1357, 1435, 1435, 1425, 1435,
- /*   240 */  1408, 1384, 1385, 1383, 1435, 1435, 1435, 1435, 1435, 1371,
- /*   250 */  1435, 1352, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435,
- /*   260 */  1282, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435,
- /*   270 */  1435, 1243, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435,
- /*   280 */  1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1198,
- /*   290 */  1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435,
- /*   300 */  1435, 1435, 1435, 1146, 1435, 1435, 1435, 1435, 1435, 1435,
- /*   310 */  1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435,
- /*   320 */  1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1322,
- /*   330 */  1435, 1435, 1435, 1435, 1435, 1435, 1435, 1146, 1435, 1435,
- /*   340 */  1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435,
- /*   350 */  1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435,
- /*   360 */  1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435,
- /*   370 */  1254, 1252, 1435, 1435, 1435, 1435, 1435, 1435, 1435, 1435,
- /*   380 */  1435, 1435, 1435, 1435, 1435, 1435, 1435,
+ /*     0 */  1502, 1502, 1502, 1502, 1421, 1502, 1449, 1449, 1449, 1502,
+ /*    10 */  1502, 1502, 1203, 1502, 1371, 1371, 1206, 1319, 1502, 1502,
+ /*    20 */  1203, 1502, 1502, 1502, 1502, 1502, 1502, 1502, 1242, 1502,
+ /*    30 */  1319, 1319, 1319, 1319, 1502, 1502, 1502, 1242, 1502, 1275,
+ /*    40 */  1203, 1203, 1502, 1502, 1443, 1502, 1443, 1502, 1502, 1502,
+ /*    50 */  1502, 1242, 1242, 1502, 1502, 1502, 1502, 1502, 1502, 1502,
+ /*    60 */  1502, 1502, 1502, 1502, 1502, 1370, 1205, 1502, 1502, 1484,
+ /*    70 */  1502, 1502, 1278, 1275, 1502, 1502, 1502, 1502, 1502, 1502,
+ /*    80 */  1502, 1433, 1487, 1487, 1498, 1433, 1247, 1502, 1502, 1502,
+ /*    90 */  1502, 1437, 1502, 1437, 1359, 1354, 1502, 1502, 1502, 1502,
+ /*   100 */  1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502,
+ /*   110 */  1502, 1225, 1225, 1225, 1225, 1225, 1198, 1502, 1502, 1502,
+ /*   120 */  1315, 1311, 1502, 1502, 1493, 1428, 1430, 1430, 1430, 1502,
+ /*   130 */  1502, 1502, 1502, 1493, 1502, 1428, 1430, 1502, 1502, 1502,
+ /*   140 */  1502, 1315, 1311, 1302, 1502, 1502, 1502, 1502, 1502, 1502,
+ /*   150 */  1300, 1502, 1502, 1502, 1502, 1348, 1502, 1348, 1302, 1502,
+ /*   160 */  1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502,
+ /*   170 */  1275, 1502, 1502, 1275, 1502, 1502, 1502, 1183, 1180, 1502,
+ /*   180 */  1502, 1502, 1502, 1176, 1180, 1176, 1366, 1502, 1395, 1502,
+ /*   190 */  1502, 1502, 1502, 1502, 1502, 1502, 1502, 1366, 1502, 1502,
+ /*   200 */  1502, 1366, 1229, 1230, 1229, 1230, 1502, 1235, 1233, 1502,
+ /*   210 */  1194, 1227, 1502, 1178, 1176, 1502, 1502, 1502, 1502, 1502,
+ /*   220 */  1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502,
+ /*   230 */  1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502,
+ /*   240 */  1502, 1502, 1502, 1502, 1502, 1318, 1317, 1502, 1502, 1502,
+ /*   250 */  1502, 1502, 1424, 1502, 1502, 1492, 1502, 1502, 1502, 1502,
+ /*   260 */  1502, 1438, 1502, 1419, 1502, 1502, 1502, 1502, 1502, 1502,
+ /*   270 */  1502, 1502, 1349, 1502, 1502, 1502, 1502, 1502, 1502, 1502,
+ /*   280 */  1502, 1502, 1502, 1299, 1502, 1502, 1502, 1502, 1502, 1502,
+ /*   290 */  1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502,
+ /*   300 */  1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502,
+ /*   310 */  1502, 1502, 1475, 1451, 1452, 1450, 1502, 1502, 1502, 1502,
+ /*   320 */  1254, 1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502,
+ /*   330 */  1502, 1502, 1502, 1502, 1202, 1502, 1502, 1502, 1502, 1502,
+ /*   340 */  1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502,
+ /*   350 */  1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502,
+ /*   360 */  1389, 1502, 1502, 1502, 1502, 1502, 1502, 1502, 1202, 1502,
+ /*   370 */  1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502,
+ /*   380 */  1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502,
+ /*   390 */  1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502,
+ /*   400 */  1502, 1310, 1308, 1502, 1502, 1502, 1502, 1502, 1502, 1502,
+ /*   410 */  1502, 1502, 1502, 1502, 1502, 1502, 1502, 1502,
 };
 
 /* The next table maps tokens into fallback tokens.  If a construct
@@ -103340,9 +105457,10 @@ static const char *const mqlyyTokenName[] = {
   "KEY_ENUM",      "KEY_DASH",      "KEY_NIL",       "KEY_SEGMENT", 
   "KEY_IN",        "KEY_FOCUS",     "KEY_MAX",       "KEY_MAX_M",   
   "KEY_FEATURE",   "KEY_RETURNING",  "KEY_FULL",      "KEY_SHEAF",   
-  "KEY_FLAT",      "KEY_WHERE",     "KEY_AT",        "KEY_FEATURES",
-  "KEY_ENUMERATIONS",  "KEY_CONSTANTS",  "KEY_MIN_M",     "KEY_ASSIGN",  
-  "KEY_ID_DS",     "KEY_BY",        "KEY_QUIT",      "KEY_STAR",    
+  "KEY_FLAT",      "KEY_WHERE",     "KEY_AT",        "KEY_AGGREGATE",
+  "KEY_FEATURES",  "KEY_MIN",       "KEY_SUM",       "KEY_COUNT",   
+  "KEY_STAR",      "KEY_ENUMERATIONS",  "KEY_CONSTANTS",  "KEY_MIN_M",   
+  "KEY_ASSIGN",    "KEY_ID_DS",     "KEY_BY",        "KEY_QUIT",    
   "KEY_EXCLAMATION",  "KEY_OR",        "KEY_NOTEXIST",  "KEY_NOTEXISTS",
   "KEY_AS",        "MARK",          "KEY_NORETRIEVE",  "KEY_RETRIEVE",
   "KEY_PART_OF",   "KEY_STARTS_IN",  "KEY_OVERLAP",   "KEY_UNIVERSE",
@@ -103355,41 +105473,42 @@ static const char *const mqlyyTokenName[] = {
   "drop_object_type_statement",  "insert_monads_statement",  "delete_monads_statement",  "get_monads_statement",
   "monad_set_calculation_statement",  "create_enumeration_statement",  "update_enumeration_statement",  "drop_enumeration_statement",
   "create_segment_statement",  "select_statement",  "select_objects_at_statement",  "select_objects_having_monads_in_statement",
-  "get_objects_having_monads_in_statement",  "get_set_from_feature_statement",  "select_object_types_statement",  "select_features_statement",
-  "select_enumerations_statement",  "select_enumeration_constants_statement",  "select_object_types_which_use_enum_statement",  "select_min_m_statement",
-  "select_max_m_statement",  "create_object_from_monads_statement",  "create_object_from_id_ds_statement",  "update_objects_by_monads_statement",
-  "update_objects_by_id_ds_statement",  "delete_objects_by_monads_statement",  "delete_objects_by_id_ds_statement",  "get_features_statement",
-  "quit_statement",  "create_indexes_statement",  "drop_indexes_statement",  "begin_transaction_statement",
-  "commit_transaction_statement",  "abort_transaction_statement",  "select_monad_sets_statement",  "get_monad_sets_statement",
-  "create_monad_set_statement",  "update_monad_set_statement",  "drop_monad_set_statement",  "create_objects_statement",
-  "database_name",  "opt_WITH_KEY",  "opt_USING_ENCODING",  "opt_DATABASE",
-  "opt_WITH_ENCODING",  "opt_ANALYZE",   "on_object_type",  "choice_type_types",
-  "choice_object_type_or_all",  "opt_OBJECT",    "opt_if_not_exists",  "opt_range_type",
-  "opt_monad_uniqueness_type",  "object_type_name",  "opt_feature_declaration_list",  "feature_declaration_list",
-  "feature_declaration",  "feature_name",  "feature_type",  "default_specification",
-  "opt_computed",  "list_feature_type",  "opt_with_index",  "opt_string_length",
-  "opt_from_set",  "expression",    "feature_update_list",  "feature_update",
-  "opt_ADD",       "monad_specification",  "choice_number_OBJECTS",  "id_ds_specification",
-  "monad_set_chain",  "monad_set",     "monad_set_operator",  "choice_number_SET",
-  "monad_set_name_list",  "monad_set_name",  "choice_ENUM_ERATION",  "enumeration_name",
-  "ec_declaration_list",  "ec_declaration",  "opt_DEFAULT",   "ec_name",     
-  "opt_ec_initialization",  "ec_initialization",  "ec_update_list",  "ec_update",   
-  "signed_integer",  "unsigned_integer",  "segment_name",  "segment_range",
-  "select_clause",  "in_clause",     "with_max_range_clause",  "returning_clause",
-  "where_clause",  "focus_specification",  "opt_OBJECTS",   "in_specification",
-  "monad_set_element_list",  "monad_set_element",  "object_type_name_list",  "using_range_clause",
-  "mql_query",     "single_monad_specification",  "object_type_to_find",  "using_monad_feature",
-  "feature_list",  "opt_OBJECTYPE",  "opt_ENUM_ERATION",  "with_id_d_specification",
-  "object_creation_specification",  "id_d_const",    "opt_list_of_feature_assignments",  "list_of_feature_assignments",
-  "feature_assignment",  "list_of_integer",  "list_of_identifier",  "choice_number_ID_DS",
-  "id_d_list",     "id_d",          "object_creation_list",  "object_creation_no_object_type",
-  "object_update_specification",  "object_deletion_specification",  "object_type_name_to_delete",  "choice_number_FEATURES",
-  "topograph",     "blocks",        "block_string",  "block_string0",
-  "block",         "block_string1",  "star_monad_set",  "block_string2",
-  "notexist",      "object_reference_declaration",  "object_reference",  "mark_declaration",
-  "retrieval",     "firstlast",     "monad_set_relation_clause",  "monad_set_relation_operation",
-  "universe_or_substrate",  "feature_constraints",  "ffeatures",     "fterm",       
-  "ffactor",       "feature_comparison",  "comparison_operator",  "value",       
+  "get_aggregate_features_statement",  "get_objects_having_monads_in_statement",  "get_set_from_feature_statement",  "select_object_types_statement",
+  "select_features_statement",  "select_enumerations_statement",  "select_enumeration_constants_statement",  "select_object_types_which_use_enum_statement",
+  "select_min_m_statement",  "select_max_m_statement",  "create_object_from_monads_statement",  "create_object_from_id_ds_statement",
+  "update_objects_by_monads_statement",  "update_objects_by_id_ds_statement",  "delete_objects_by_monads_statement",  "delete_objects_by_id_ds_statement",
+  "get_features_statement",  "quit_statement",  "create_indexes_statement",  "drop_indexes_statement",
+  "begin_transaction_statement",  "commit_transaction_statement",  "abort_transaction_statement",  "select_monad_sets_statement",
+  "get_monad_sets_statement",  "create_monad_set_statement",  "update_monad_set_statement",  "drop_monad_set_statement",
+  "create_objects_statement",  "database_name",  "opt_WITH_KEY",  "opt_USING_ENCODING",
+  "opt_DATABASE",  "opt_WITH_ENCODING",  "opt_ANALYZE",   "on_object_type",
+  "choice_type_types",  "choice_object_type_or_all",  "opt_OBJECT",    "opt_if_not_exists",
+  "opt_range_type",  "opt_monad_uniqueness_type",  "object_type_name",  "opt_feature_declaration_list",
+  "feature_declaration_list",  "feature_declaration",  "feature_name",  "feature_type",
+  "default_specification",  "opt_computed",  "list_feature_type",  "opt_with_index",
+  "opt_string_length",  "opt_from_set",  "expression",    "feature_update_list",
+  "feature_update",  "opt_ADD",       "monad_specification",  "choice_number_OBJECTS",
+  "id_ds_specification",  "monad_set_chain",  "monad_set",     "monad_set_operator",
+  "choice_number_SET",  "monad_set_name_list",  "monad_set_name",  "choice_ENUM_ERATION",
+  "enumeration_name",  "ec_declaration_list",  "ec_declaration",  "opt_DEFAULT", 
+  "ec_name",       "opt_ec_initialization",  "ec_initialization",  "ec_update_list",
+  "ec_update",     "signed_integer",  "unsigned_integer",  "segment_name",
+  "segment_range",  "select_clause",  "in_clause",     "with_max_range_clause",
+  "returning_clause",  "where_clause",  "focus_specification",  "opt_OBJECTS", 
+  "in_specification",  "monad_set_element_list",  "monad_set_element",  "object_type_name_list",
+  "using_range_clause",  "mql_query",     "single_monad_specification",  "object_type_to_find",
+  "aggregate_feature_list",  "using_monad_feature",  "feature_constraints",  "aggregate_feature",
+  "aggregate_feature_comparison",  "comparison_operator",  "value",         "list_of_identifier",
+  "list_of_integer",  "feature_list",  "opt_OBJECTYPE",  "opt_ENUM_ERATION",
+  "with_id_d_specification",  "object_creation_specification",  "id_d_const",    "opt_list_of_feature_assignments",
+  "list_of_feature_assignments",  "feature_assignment",  "choice_number_ID_DS",  "id_d_list",   
+  "id_d",          "object_creation_list",  "object_creation_no_object_type",  "object_update_specification",
+  "object_deletion_specification",  "object_type_name_to_delete",  "choice_number_FEATURES",  "topograph",   
+  "blocks",        "block_string",  "block_string0",  "block",       
+  "block_string1",  "star_monad_set",  "block_string2",  "notexist",    
+  "object_reference_declaration",  "object_reference",  "mark_declaration",  "retrieval",   
+  "firstlast",     "monad_set_relation_clause",  "monad_set_relation_operation",  "universe_or_substrate",
+  "ffeatures",     "fterm",         "ffactor",       "feature_comparison",
   "object_reference_usage",  "enum_const",    "opt_blocks",    "object_block",
   "power",         "opt_gap_block",  "gap_block",     "notexist_object_block",
   "gap_retrieval",  "feature_retrieval",  "restrictor",    "limit",       
@@ -103420,355 +105539,367 @@ static const char *const mqlyyRuleName[] = {
  /*  17 */ "statement_by_itself ::= select_statement",
  /*  18 */ "statement_by_itself ::= select_objects_at_statement",
  /*  19 */ "statement_by_itself ::= select_objects_having_monads_in_statement",
- /*  20 */ "statement_by_itself ::= get_objects_having_monads_in_statement",
- /*  21 */ "statement_by_itself ::= get_set_from_feature_statement",
- /*  22 */ "statement_by_itself ::= select_object_types_statement",
- /*  23 */ "statement_by_itself ::= select_features_statement",
- /*  24 */ "statement_by_itself ::= select_enumerations_statement",
- /*  25 */ "statement_by_itself ::= select_enumeration_constants_statement",
- /*  26 */ "statement_by_itself ::= select_object_types_which_use_enum_statement",
- /*  27 */ "statement_by_itself ::= select_min_m_statement",
- /*  28 */ "statement_by_itself ::= select_max_m_statement",
- /*  29 */ "statement_by_itself ::= create_object_from_monads_statement",
- /*  30 */ "statement_by_itself ::= create_object_from_id_ds_statement",
- /*  31 */ "statement_by_itself ::= update_objects_by_monads_statement",
- /*  32 */ "statement_by_itself ::= update_objects_by_id_ds_statement",
- /*  33 */ "statement_by_itself ::= delete_objects_by_monads_statement",
- /*  34 */ "statement_by_itself ::= delete_objects_by_id_ds_statement",
- /*  35 */ "statement_by_itself ::= get_features_statement",
- /*  36 */ "statement_by_itself ::= quit_statement",
- /*  37 */ "statement_by_itself ::= create_indexes_statement",
- /*  38 */ "statement_by_itself ::= drop_indexes_statement",
- /*  39 */ "statement_by_itself ::= begin_transaction_statement",
- /*  40 */ "statement_by_itself ::= commit_transaction_statement",
- /*  41 */ "statement_by_itself ::= abort_transaction_statement",
- /*  42 */ "statement_by_itself ::= select_monad_sets_statement",
- /*  43 */ "statement_by_itself ::= get_monad_sets_statement",
- /*  44 */ "statement_by_itself ::= create_monad_set_statement",
- /*  45 */ "statement_by_itself ::= update_monad_set_statement",
- /*  46 */ "statement_by_itself ::= drop_monad_set_statement",
- /*  47 */ "statement_by_itself ::= create_objects_statement",
- /*  48 */ "create_database_statement ::= KEY_CREATE KEY_DATABASE database_name opt_WITH_KEY opt_USING_ENCODING",
- /*  49 */ "database_name ::= IDENTIFIER",
- /*  50 */ "database_name ::= STRING",
- /*  51 */ "initialize_database_statement ::= KEY_INITIALIZE KEY_DATABASE database_name opt_WITH_KEY",
- /*  52 */ "use_statement ::= KEY_USE opt_DATABASE database_name opt_WITH_KEY",
- /*  53 */ "opt_WITH_KEY ::= KEY_WITH KEY_KEY STRING",
- /*  54 */ "opt_WITH_KEY ::=",
- /*  55 */ "opt_USING_ENCODING ::= KEY_USING KEY_ENCODING STRING",
- /*  56 */ "opt_USING_ENCODING ::=",
- /*  57 */ "opt_DATABASE ::= KEY_DATABASE",
- /*  58 */ "opt_DATABASE ::=",
- /*  59 */ "drop_database_statement ::= KEY_DROP KEY_DATABASE database_name",
- /*  60 */ "vacuum_database_statement ::= KEY_VACUUM opt_DATABASE opt_ANALYZE",
- /*  61 */ "opt_ANALYZE ::=",
- /*  62 */ "opt_ANALYZE ::= KEY_ANALYZE",
- /*  63 */ "create_indexes_statement ::= KEY_CREATE KEY_INDEXES on_object_type",
- /*  64 */ "drop_indexes_statement ::= KEY_DROP KEY_INDEXES on_object_type",
- /*  65 */ "on_object_type ::= KEY_ON KEY_OBJECT choice_type_types KEY_OPEN_SQUARE_BRACKET choice_object_type_or_all KEY_CLOSE_SQUARE_BRACKET",
- /*  66 */ "choice_type_types ::= KEY_TYPE",
- /*  67 */ "choice_type_types ::= KEY_TYPES",
- /*  68 */ "begin_transaction_statement ::= KEY_BEGIN KEY_TRANSACTION",
- /*  69 */ "commit_transaction_statement ::= KEY_COMMIT KEY_TRANSACTION",
- /*  70 */ "abort_transaction_statement ::= KEY_ABORT KEY_TRANSACTION",
- /*  71 */ "create_object_type_statement ::= KEY_CREATE opt_OBJECT KEY_TYPE opt_if_not_exists opt_range_type opt_monad_uniqueness_type KEY_OPEN_SQUARE_BRACKET object_type_name opt_feature_declaration_list KEY_CLOSE_SQUARE_BRACKET",
- /*  72 */ "opt_range_type ::=",
- /*  73 */ "opt_range_type ::= KEY_WITH KEY_MULTIPLE KEY_RANGE KEY_OBJECTS",
- /*  74 */ "opt_range_type ::= KEY_WITH KEY_SINGLE KEY_RANGE KEY_OBJECTS",
- /*  75 */ "opt_range_type ::= KEY_WITH KEY_SINGLE KEY_MONAD KEY_OBJECTS",
- /*  76 */ "opt_monad_uniqueness_type ::=",
- /*  77 */ "opt_monad_uniqueness_type ::= KEY_HAVING KEY_UNIQUE KEY_FIRST KEY_MONADS",
- /*  78 */ "opt_monad_uniqueness_type ::= KEY_HAVING KEY_UNIQUE KEY_FIRST KEY_AND KEY_LAST KEY_MONADS",
- /*  79 */ "opt_monad_uniqueness_type ::= KEY_WITHOUT KEY_UNIQUE KEY_MONADS",
- /*  80 */ "opt_OBJECT ::= KEY_OBJECT",
- /*  81 */ "opt_OBJECT ::=",
- /*  82 */ "object_type_name ::= IDENTIFIER",
- /*  83 */ "opt_feature_declaration_list ::= feature_declaration_list",
- /*  84 */ "opt_feature_declaration_list ::=",
- /*  85 */ "feature_declaration_list ::= feature_declaration",
- /*  86 */ "feature_declaration_list ::= feature_declaration_list feature_declaration",
- /*  87 */ "feature_declaration ::= feature_name KEY_COLON feature_type default_specification opt_computed KEY_SEMICOLON",
- /*  88 */ "feature_declaration ::= feature_name KEY_COLON KEY_LIST KEY_OF list_feature_type KEY_SEMICOLON",
- /*  89 */ "feature_type ::= KEY_INTEGER opt_with_index",
- /*  90 */ "feature_type ::= KEY_STRING opt_string_length opt_from_set opt_with_index",
- /*  91 */ "feature_type ::= KEY_ASCII opt_string_length opt_from_set opt_with_index",
- /*  92 */ "feature_type ::= KEY_ID_D opt_with_index",
- /*  93 */ "feature_type ::= IDENTIFIER opt_with_index",
- /*  94 */ "feature_type ::= KEY_SET KEY_OF KEY_MONADS",
- /*  95 */ "feature_type ::= KEY_SINGLE KEY_MONAD KEY_SET KEY_OF KEY_MONADS",
- /*  96 */ "feature_type ::= KEY_SINGLE KEY_RANGE KEY_SET KEY_OF KEY_MONADS",
- /*  97 */ "feature_type ::= KEY_MULTIPLE KEY_RANGE KEY_SET KEY_OF KEY_MONADS",
- /*  98 */ "list_feature_type ::= KEY_INTEGER",
- /*  99 */ "list_feature_type ::= KEY_ID_D",
- /* 100 */ "list_feature_type ::= IDENTIFIER",
- /* 101 */ "opt_with_index ::= KEY_WITH KEY_INDEX",
- /* 102 */ "opt_with_index ::= KEY_WITHOUT KEY_INDEX",
- /* 103 */ "opt_with_index ::=",
- /* 104 */ "opt_if_not_exists ::= KEY_IF KEY_NOT KEY_EXISTS",
- /* 105 */ "opt_if_not_exists ::=",
- /* 106 */ "opt_from_set ::= KEY_FROM KEY_SET",
- /* 107 */ "opt_from_set ::=",
- /* 108 */ "opt_string_length ::=",
- /* 109 */ "opt_string_length ::= KEY_OPEN_BRACKET INTEGER KEY_CLOSE_BRACKET",
- /* 110 */ "default_specification ::= KEY_DEFAULT expression",
- /* 111 */ "default_specification ::=",
- /* 112 */ "opt_computed ::= KEY_COMPUTED",
- /* 113 */ "opt_computed ::=",
- /* 114 */ "update_object_type_statement ::= KEY_UPDATE opt_OBJECT KEY_TYPE KEY_OPEN_SQUARE_BRACKET object_type_name feature_update_list KEY_CLOSE_SQUARE_BRACKET",
- /* 115 */ "feature_update_list ::= feature_update",
- /* 116 */ "feature_update_list ::= feature_update_list feature_update",
- /* 117 */ "feature_update ::= opt_ADD feature_declaration",
- /* 118 */ "feature_update ::= KEY_REMOVE feature_name KEY_SEMICOLON",
- /* 119 */ "opt_ADD ::= KEY_ADD",
- /* 120 */ "opt_ADD ::=",
- /* 121 */ "drop_object_type_statement ::= KEY_DROP opt_OBJECT KEY_TYPE KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET",
- /* 122 */ "insert_monads_statement ::= KEY_INSERT monad_specification",
- /* 123 */ "delete_monads_statement ::= KEY_DELETE monad_specification",
- /* 124 */ "get_monads_statement ::= KEY_GET KEY_MONADS KEY_FROM choice_number_OBJECTS KEY_WITH id_ds_specification KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET",
- /* 125 */ "monad_set_calculation_statement ::= KEY_MONAD KEY_SET KEY_CALCULATION monad_set_chain",
- /* 126 */ "monad_set_chain ::= monad_set",
- /* 127 */ "monad_set_chain ::= monad_set_chain monad_set_operator monad_set",
- /* 128 */ "monad_set_operator ::= KEY_UNION",
- /* 129 */ "monad_set_operator ::= KEY_DIFFERENCE",
- /* 130 */ "monad_set_operator ::= KEY_INTERSECT",
- /* 131 */ "select_monad_sets_statement ::= KEY_SELECT KEY_MONAD KEY_SETS",
- /* 132 */ "get_monad_sets_statement ::= KEY_GET KEY_MONAD choice_number_SET monad_set_name_list",
- /* 133 */ "get_monad_sets_statement ::= KEY_GET KEY_MONAD choice_number_SET KEY_ALL",
- /* 134 */ "choice_number_SET ::= KEY_SETS",
- /* 135 */ "choice_number_SET ::= KEY_SET",
- /* 136 */ "create_monad_set_statement ::= KEY_CREATE KEY_MONAD KEY_SET monad_set_name KEY_WITH monad_specification",
- /* 137 */ "update_monad_set_statement ::= KEY_UPDATE KEY_MONAD KEY_SET monad_set_name monad_set_operator monad_set_name",
- /* 138 */ "update_monad_set_statement ::= KEY_UPDATE KEY_MONAD KEY_SET monad_set_name KEY_REPLACE monad_set_name",
- /* 139 */ "update_monad_set_statement ::= KEY_UPDATE KEY_MONAD KEY_SET monad_set_name monad_set_operator monad_set",
- /* 140 */ "update_monad_set_statement ::= KEY_UPDATE KEY_MONAD KEY_SET monad_set_name KEY_REPLACE monad_set",
- /* 141 */ "drop_monad_set_statement ::= KEY_DROP KEY_MONAD KEY_SET monad_set_name",
- /* 142 */ "monad_set_name ::= IDENTIFIER",
- /* 143 */ "monad_set_name_list ::= monad_set_name",
- /* 144 */ "monad_set_name_list ::= monad_set_name_list KEY_COMMA monad_set_name",
- /* 145 */ "create_enumeration_statement ::= KEY_CREATE choice_ENUM_ERATION enumeration_name KEY_EQUALS KEY_OPEN_BRACE ec_declaration_list KEY_CLOSE_BRACE",
- /* 146 */ "choice_ENUM_ERATION ::= KEY_ENUMERATION",
- /* 147 */ "choice_ENUM_ERATION ::= KEY_ENUM",
- /* 148 */ "enumeration_name ::= IDENTIFIER",
- /* 149 */ "ec_declaration_list ::= ec_declaration",
- /* 150 */ "ec_declaration_list ::= ec_declaration_list KEY_COMMA ec_declaration",
- /* 151 */ "ec_declaration ::= opt_DEFAULT ec_name opt_ec_initialization",
- /* 152 */ "opt_DEFAULT ::= KEY_DEFAULT",
- /* 153 */ "opt_DEFAULT ::=",
- /* 154 */ "ec_name ::= IDENTIFIER",
- /* 155 */ "opt_ec_initialization ::= ec_initialization",
- /* 156 */ "opt_ec_initialization ::=",
- /* 157 */ "update_enumeration_statement ::= KEY_UPDATE choice_ENUM_ERATION enumeration_name KEY_EQUALS KEY_OPEN_BRACE ec_update_list KEY_CLOSE_BRACE",
- /* 158 */ "ec_update_list ::= ec_update",
- /* 159 */ "ec_update_list ::= ec_update_list KEY_COMMA ec_update",
- /* 160 */ "ec_update ::= opt_ADD opt_DEFAULT ec_name ec_initialization",
- /* 161 */ "ec_update ::= KEY_UPDATE opt_DEFAULT ec_name ec_initialization",
- /* 162 */ "ec_update ::= KEY_REMOVE ec_name",
- /* 163 */ "ec_initialization ::= KEY_EQUALS signed_integer",
- /* 164 */ "signed_integer ::= INTEGER",
- /* 165 */ "signed_integer ::= KEY_DASH INTEGER",
- /* 166 */ "signed_integer ::= KEY_NIL",
- /* 167 */ "unsigned_integer ::= INTEGER",
- /* 168 */ "drop_enumeration_statement ::= KEY_DROP choice_ENUM_ERATION enumeration_name",
- /* 169 */ "create_segment_statement ::= KEY_CREATE KEY_SEGMENT segment_name KEY_RANGE KEY_EQUALS segment_range",
- /* 170 */ "segment_name ::= IDENTIFIER",
- /* 171 */ "segment_range ::= INTEGER KEY_DASH INTEGER",
- /* 172 */ "select_statement ::= select_clause in_clause with_max_range_clause returning_clause where_clause",
- /* 173 */ "select_statement ::= select_clause KEY_IN IDENTIFIER with_max_range_clause returning_clause where_clause",
- /* 174 */ "select_clause ::= KEY_SELECT focus_specification opt_OBJECTS",
- /* 175 */ "focus_specification ::= KEY_FOCUS",
- /* 176 */ "focus_specification ::= KEY_ALL",
- /* 177 */ "opt_OBJECTS ::= KEY_OBJECTS",
- /* 178 */ "opt_OBJECTS ::=",
- /* 179 */ "in_clause ::= KEY_IN in_specification",
- /* 180 */ "in_clause ::=",
- /* 181 */ "in_specification ::= monad_set",
- /* 182 */ "in_specification ::= KEY_ALL",
- /* 183 */ "monad_set ::= KEY_OPEN_BRACE monad_set_element_list KEY_CLOSE_BRACE",
- /* 184 */ "monad_set_element_list ::= monad_set_element",
- /* 185 */ "monad_set_element_list ::= monad_set_element_list KEY_COMMA monad_set_element",
- /* 186 */ "monad_set_element ::= INTEGER",
- /* 187 */ "monad_set_element ::= INTEGER KEY_DASH INTEGER",
- /* 188 */ "monad_set_element ::= INTEGER KEY_DASH",
- /* 189 */ "with_max_range_clause ::=",
- /* 190 */ "with_max_range_clause ::= KEY_WITH KEY_MAX KEY_RANGE KEY_MAX_M KEY_MONADS",
- /* 191 */ "with_max_range_clause ::= KEY_WITH KEY_MAX KEY_RANGE INTEGER KEY_MONADS",
- /* 192 */ "with_max_range_clause ::= KEY_WITH KEY_MAX KEY_RANGE KEY_FEATURE feature_name KEY_FROM KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET",
- /* 193 */ "returning_clause ::=",
- /* 194 */ "returning_clause ::= KEY_RETURNING KEY_FULL KEY_SHEAF",
- /* 195 */ "returning_clause ::= KEY_RETURNING KEY_FLAT KEY_SHEAF",
- /* 196 */ "returning_clause ::= KEY_RETURNING KEY_FLAT KEY_SHEAF KEY_ON object_type_name_list",
- /* 197 */ "using_range_clause ::=",
- /* 198 */ "using_range_clause ::= KEY_RANGE KEY_ALL",
- /* 199 */ "using_range_clause ::= KEY_RANGE KEY_OPEN_BRACKET unsigned_integer KEY_COMMA unsigned_integer KEY_CLOSE_BRACKET",
- /* 200 */ "using_range_clause ::= KEY_RANGE KEY_OPEN_BRACKET unsigned_integer KEY_CLOSE_BRACKET",
- /* 201 */ "object_type_name_list ::= object_type_name",
- /* 202 */ "object_type_name_list ::= object_type_name_list KEY_COMMA object_type_name",
- /* 203 */ "where_clause ::= KEY_WHERE mql_query",
- /* 204 */ "select_objects_at_statement ::= KEY_SELECT opt_OBJECTS KEY_AT single_monad_specification KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET",
- /* 205 */ "single_monad_specification ::= KEY_MONAD KEY_EQUALS INTEGER",
- /* 206 */ "select_objects_having_monads_in_statement ::= KEY_SELECT KEY_OBJECTS KEY_HAVING KEY_MONADS KEY_IN monad_set KEY_OPEN_SQUARE_BRACKET object_type_to_find KEY_CLOSE_SQUARE_BRACKET",
- /* 207 */ "object_type_to_find ::= choice_object_type_or_all",
- /* 208 */ "choice_object_type_or_all ::= object_type_name",
- /* 209 */ "choice_object_type_or_all ::= KEY_ALL",
- /* 210 */ "get_objects_having_monads_in_statement ::= KEY_GET KEY_OBJECTS KEY_HAVING KEY_MONADS KEY_IN in_specification using_monad_feature KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET",
- /* 211 */ "get_objects_having_monads_in_statement ::= KEY_GET KEY_OBJECTS KEY_HAVING KEY_MONADS KEY_IN in_specification using_monad_feature KEY_OPEN_SQUARE_BRACKET object_type_name KEY_GET KEY_ALL KEY_CLOSE_SQUARE_BRACKET",
- /* 212 */ "get_objects_having_monads_in_statement ::= KEY_GET KEY_OBJECTS KEY_HAVING KEY_MONADS KEY_IN in_specification using_monad_feature KEY_OPEN_SQUARE_BRACKET object_type_name KEY_GET feature_list KEY_CLOSE_SQUARE_BRACKET",
- /* 213 */ "using_monad_feature ::= KEY_USING KEY_MONAD KEY_FEATURE IDENTIFIER",
- /* 214 */ "using_monad_feature ::= KEY_USING KEY_MONAD KEY_FEATURE KEY_MONADS",
- /* 215 */ "using_monad_feature ::=",
- /* 216 */ "select_object_types_statement ::= KEY_SELECT opt_OBJECT KEY_TYPES",
- /* 217 */ "select_features_statement ::= KEY_SELECT KEY_FEATURES KEY_FROM opt_OBJECTYPE KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET",
- /* 218 */ "get_set_from_feature_statement ::= KEY_GET KEY_SET KEY_FROM KEY_FEATURE feature_name KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET",
- /* 219 */ "opt_OBJECTYPE ::= KEY_OBJECT KEY_TYPE",
- /* 220 */ "opt_OBJECTYPE ::= KEY_TYPE",
- /* 221 */ "opt_OBJECTYPE ::=",
- /* 222 */ "select_enumerations_statement ::= KEY_SELECT KEY_ENUMERATIONS",
- /* 223 */ "select_enumeration_constants_statement ::= KEY_SELECT choice_ENUM_ERATION KEY_CONSTANTS KEY_FROM opt_ENUM_ERATION enumeration_name",
- /* 224 */ "opt_ENUM_ERATION ::= KEY_ENUM",
- /* 225 */ "opt_ENUM_ERATION ::= KEY_ENUMERATION",
- /* 226 */ "opt_ENUM_ERATION ::=",
- /* 227 */ "select_object_types_which_use_enum_statement ::= KEY_SELECT opt_OBJECT KEY_TYPES KEY_USING choice_ENUM_ERATION enumeration_name",
- /* 228 */ "select_min_m_statement ::= KEY_SELECT KEY_MIN_M",
- /* 229 */ "select_max_m_statement ::= KEY_SELECT KEY_MAX_M",
- /* 230 */ "create_object_from_monads_statement ::= KEY_CREATE KEY_OBJECT KEY_FROM monad_specification with_id_d_specification object_creation_specification",
- /* 231 */ "monad_specification ::= KEY_MONADS KEY_EQUALS monad_set",
- /* 232 */ "with_id_d_specification ::= KEY_WITH KEY_ID_D KEY_EQUALS id_d_const",
- /* 233 */ "with_id_d_specification ::=",
- /* 234 */ "id_d_const ::= INTEGER",
- /* 235 */ "id_d_const ::= KEY_NIL",
- /* 236 */ "object_creation_specification ::= KEY_OPEN_SQUARE_BRACKET object_type_name opt_list_of_feature_assignments KEY_CLOSE_SQUARE_BRACKET",
- /* 237 */ "opt_list_of_feature_assignments ::= list_of_feature_assignments",
- /* 238 */ "opt_list_of_feature_assignments ::=",
- /* 239 */ "list_of_feature_assignments ::= feature_assignment",
- /* 240 */ "list_of_feature_assignments ::= list_of_feature_assignments feature_assignment",
- /* 241 */ "feature_assignment ::= feature_name KEY_ASSIGN expression KEY_SEMICOLON",
- /* 242 */ "feature_name ::= IDENTIFIER",
- /* 243 */ "feature_name ::= KEY_MONADS",
- /* 244 */ "expression ::= signed_integer",
- /* 245 */ "expression ::= STRING",
- /* 246 */ "expression ::= IDENTIFIER",
- /* 247 */ "expression ::= monad_set",
- /* 248 */ "expression ::= KEY_OPEN_BRACKET KEY_CLOSE_BRACKET",
- /* 249 */ "expression ::= KEY_OPEN_BRACKET list_of_integer KEY_CLOSE_BRACKET",
- /* 250 */ "expression ::= KEY_OPEN_BRACKET list_of_identifier KEY_CLOSE_BRACKET",
- /* 251 */ "list_of_integer ::= signed_integer",
- /* 252 */ "list_of_integer ::= list_of_integer KEY_COMMA signed_integer",
- /* 253 */ "list_of_identifier ::= IDENTIFIER",
- /* 254 */ "list_of_identifier ::= list_of_identifier KEY_COMMA IDENTIFIER",
- /* 255 */ "create_object_from_id_ds_statement ::= KEY_CREATE KEY_OBJECT KEY_FROM id_ds_specification with_id_d_specification object_creation_specification",
- /* 256 */ "id_ds_specification ::= choice_number_ID_DS KEY_EQUALS id_d_list",
- /* 257 */ "choice_number_ID_DS ::= KEY_ID_D",
- /* 258 */ "choice_number_ID_DS ::= KEY_ID_DS",
- /* 259 */ "id_d_list ::= id_d",
- /* 260 */ "id_d_list ::= id_d_list KEY_COMMA id_d",
- /* 261 */ "id_d ::= id_d_const",
- /* 262 */ "create_objects_statement ::= KEY_CREATE KEY_OBJECTS KEY_WITH KEY_OBJECT KEY_TYPE KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET object_creation_list",
- /* 263 */ "object_creation_list ::= object_creation_no_object_type",
- /* 264 */ "object_creation_list ::= object_creation_list object_creation_no_object_type",
- /* 265 */ "object_creation_no_object_type ::= KEY_CREATE KEY_OBJECT KEY_FROM monad_specification with_id_d_specification KEY_OPEN_SQUARE_BRACKET opt_list_of_feature_assignments KEY_CLOSE_SQUARE_BRACKET",
- /* 266 */ "update_objects_by_monads_statement ::= KEY_UPDATE choice_number_OBJECTS KEY_BY monad_specification object_update_specification",
- /* 267 */ "choice_number_OBJECTS ::= KEY_OBJECT",
- /* 268 */ "choice_number_OBJECTS ::= KEY_OBJECTS",
- /* 269 */ "object_update_specification ::= KEY_OPEN_SQUARE_BRACKET object_type_name list_of_feature_assignments KEY_CLOSE_SQUARE_BRACKET",
- /* 270 */ "update_objects_by_id_ds_statement ::= KEY_UPDATE choice_number_OBJECTS KEY_BY id_ds_specification object_update_specification",
- /* 271 */ "delete_objects_by_monads_statement ::= KEY_DELETE choice_number_OBJECTS KEY_BY monad_specification object_deletion_specification",
- /* 272 */ "object_deletion_specification ::= KEY_OPEN_SQUARE_BRACKET object_type_name_to_delete KEY_CLOSE_SQUARE_BRACKET",
- /* 273 */ "object_type_name_to_delete ::= choice_object_type_or_all",
- /* 274 */ "delete_objects_by_id_ds_statement ::= KEY_DELETE choice_number_OBJECTS KEY_BY id_ds_specification object_deletion_specification",
- /* 275 */ "get_features_statement ::= KEY_GET choice_number_FEATURES feature_list KEY_FROM choice_number_OBJECTS KEY_WITH id_ds_specification KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET",
- /* 276 */ "choice_number_FEATURES ::= KEY_FEATURE",
- /* 277 */ "choice_number_FEATURES ::= KEY_FEATURES",
- /* 278 */ "feature_list ::= feature_name",
- /* 279 */ "feature_list ::= feature_list KEY_COMMA feature_name",
- /* 280 */ "quit_statement ::= KEY_QUIT",
- /* 281 */ "mql_query ::= topograph",
- /* 282 */ "topograph ::= blocks",
- /* 283 */ "blocks ::= using_range_clause block_string",
- /* 284 */ "block_string0 ::= block",
- /* 285 */ "block_string0 ::= KEY_OPEN_SQUARE_BRACKET block_string KEY_CLOSE_SQUARE_BRACKET",
- /* 286 */ "block_string1 ::= block_string0",
- /* 287 */ "block_string1 ::= block_string0 KEY_STAR star_monad_set",
- /* 288 */ "block_string2 ::= block_string1",
- /* 289 */ "block_string2 ::= block_string1 block_string2",
- /* 290 */ "block_string2 ::= block_string1 KEY_EXCLAMATION block_string2",
- /* 291 */ "block_string ::= block_string2",
- /* 292 */ "block_string ::= block_string2 KEY_OR block_string",
- /* 293 */ "notexist ::= KEY_NOTEXIST",
- /* 294 */ "notexist ::= KEY_NOTEXISTS",
- /* 295 */ "object_reference_declaration ::=",
- /* 296 */ "object_reference_declaration ::= KEY_AS object_reference",
- /* 297 */ "mark_declaration ::=",
- /* 298 */ "mark_declaration ::= MARK",
- /* 299 */ "object_reference ::= IDENTIFIER",
- /* 300 */ "retrieval ::=",
- /* 301 */ "retrieval ::= KEY_NORETRIEVE",
- /* 302 */ "retrieval ::= KEY_RETRIEVE",
- /* 303 */ "retrieval ::= KEY_FOCUS",
- /* 304 */ "firstlast ::=",
- /* 305 */ "firstlast ::= KEY_FIRST",
- /* 306 */ "firstlast ::= KEY_LAST",
- /* 307 */ "firstlast ::= KEY_FIRST KEY_AND KEY_LAST",
- /* 308 */ "monad_set_relation_clause ::= monad_set_relation_operation KEY_OPEN_BRACKET monad_set_name KEY_COMMA universe_or_substrate KEY_CLOSE_BRACKET",
- /* 309 */ "monad_set_relation_clause ::= monad_set_relation_operation KEY_OPEN_BRACKET universe_or_substrate KEY_CLOSE_BRACKET",
- /* 310 */ "monad_set_relation_clause ::=",
- /* 311 */ "monad_set_relation_operation ::= KEY_PART_OF",
- /* 312 */ "monad_set_relation_operation ::= KEY_STARTS_IN",
- /* 313 */ "monad_set_relation_operation ::= KEY_OVERLAP",
- /* 314 */ "universe_or_substrate ::= KEY_UNIVERSE",
- /* 315 */ "universe_or_substrate ::= KEY_SUBSTRATE",
- /* 316 */ "feature_constraints ::=",
- /* 317 */ "feature_constraints ::= ffeatures",
- /* 318 */ "ffeatures ::= fterm",
- /* 319 */ "ffeatures ::= ffeatures KEY_OR fterm",
- /* 320 */ "fterm ::= ffactor",
- /* 321 */ "fterm ::= fterm KEY_AND ffactor",
- /* 322 */ "ffactor ::= KEY_NOT ffactor",
- /* 323 */ "ffactor ::= KEY_OPEN_BRACKET ffeatures KEY_CLOSE_BRACKET",
- /* 324 */ "ffactor ::= feature_comparison",
- /* 325 */ "feature_comparison ::= feature_name comparison_operator value",
- /* 326 */ "feature_comparison ::= feature_name KEY_IN KEY_OPEN_BRACKET list_of_identifier KEY_CLOSE_BRACKET",
- /* 327 */ "feature_comparison ::= feature_name KEY_IN KEY_OPEN_BRACKET list_of_integer KEY_CLOSE_BRACKET",
- /* 328 */ "feature_comparison ::= feature_name KEY_IN object_reference_usage",
- /* 329 */ "comparison_operator ::= KEY_EQUALS",
- /* 330 */ "comparison_operator ::= KEY_LESS_THAN",
- /* 331 */ "comparison_operator ::= KEY_GREATER_THAN",
- /* 332 */ "comparison_operator ::= KEY_NOT_EQUAL",
- /* 333 */ "comparison_operator ::= KEY_LESS_THAN_OR_EQUAL",
- /* 334 */ "comparison_operator ::= KEY_GREATER_THAN_OR_EQUAL",
- /* 335 */ "comparison_operator ::= KEY_TILDE",
- /* 336 */ "comparison_operator ::= KEY_NOT_TILDE",
- /* 337 */ "comparison_operator ::= KEY_HAS",
- /* 338 */ "value ::= enum_const",
- /* 339 */ "value ::= signed_integer",
- /* 340 */ "value ::= STRING",
- /* 341 */ "value ::= object_reference_usage",
- /* 342 */ "enum_const ::= IDENTIFIER",
- /* 343 */ "object_reference_usage ::= object_reference KEY_DOT feature_name",
- /* 344 */ "opt_blocks ::=",
- /* 345 */ "opt_blocks ::= blocks",
- /* 346 */ "block ::= object_block",
- /* 347 */ "block ::= power",
- /* 348 */ "block ::= opt_gap_block",
- /* 349 */ "block ::= gap_block",
- /* 350 */ "block ::= notexist_object_block",
- /* 351 */ "star_monad_set ::=",
- /* 352 */ "star_monad_set ::= monad_set",
- /* 353 */ "opt_gap_block ::= KEY_OPEN_SQUARE_BRACKET KEY_OPT_GAP mark_declaration gap_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET",
- /* 354 */ "gap_retrieval ::=",
- /* 355 */ "gap_retrieval ::= KEY_NORETRIEVE",
- /* 356 */ "gap_retrieval ::= KEY_RETRIEVE",
- /* 357 */ "gap_retrieval ::= KEY_FOCUS",
- /* 358 */ "gap_block ::= KEY_OPEN_SQUARE_BRACKET KEY_GAP mark_declaration gap_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET",
- /* 359 */ "feature_retrieval ::= KEY_GET feature_list",
- /* 360 */ "feature_retrieval ::=",
- /* 361 */ "object_block ::= KEY_OPEN_SQUARE_BRACKET object_type_name mark_declaration object_reference_declaration retrieval firstlast monad_set_relation_clause feature_constraints feature_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET",
- /* 362 */ "notexist_object_block ::= notexist KEY_OPEN_SQUARE_BRACKET object_type_name mark_declaration object_reference_declaration retrieval firstlast monad_set_relation_clause feature_constraints feature_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET",
- /* 363 */ "power ::= KEY_POWER restrictor",
- /* 364 */ "power ::= KEY_POWER KEY_BETWEEN limit KEY_AND limit",
- /* 365 */ "restrictor ::=",
- /* 366 */ "restrictor ::= KEY_LESS_THAN limit",
- /* 367 */ "restrictor ::= KEY_LESS_THAN_OR_EQUAL limit",
- /* 368 */ "limit ::= INTEGER",
+ /*  20 */ "statement_by_itself ::= get_aggregate_features_statement",
+ /*  21 */ "statement_by_itself ::= get_objects_having_monads_in_statement",
+ /*  22 */ "statement_by_itself ::= get_set_from_feature_statement",
+ /*  23 */ "statement_by_itself ::= select_object_types_statement",
+ /*  24 */ "statement_by_itself ::= select_features_statement",
+ /*  25 */ "statement_by_itself ::= select_enumerations_statement",
+ /*  26 */ "statement_by_itself ::= select_enumeration_constants_statement",
+ /*  27 */ "statement_by_itself ::= select_object_types_which_use_enum_statement",
+ /*  28 */ "statement_by_itself ::= select_min_m_statement",
+ /*  29 */ "statement_by_itself ::= select_max_m_statement",
+ /*  30 */ "statement_by_itself ::= create_object_from_monads_statement",
+ /*  31 */ "statement_by_itself ::= create_object_from_id_ds_statement",
+ /*  32 */ "statement_by_itself ::= update_objects_by_monads_statement",
+ /*  33 */ "statement_by_itself ::= update_objects_by_id_ds_statement",
+ /*  34 */ "statement_by_itself ::= delete_objects_by_monads_statement",
+ /*  35 */ "statement_by_itself ::= delete_objects_by_id_ds_statement",
+ /*  36 */ "statement_by_itself ::= get_features_statement",
+ /*  37 */ "statement_by_itself ::= quit_statement",
+ /*  38 */ "statement_by_itself ::= create_indexes_statement",
+ /*  39 */ "statement_by_itself ::= drop_indexes_statement",
+ /*  40 */ "statement_by_itself ::= begin_transaction_statement",
+ /*  41 */ "statement_by_itself ::= commit_transaction_statement",
+ /*  42 */ "statement_by_itself ::= abort_transaction_statement",
+ /*  43 */ "statement_by_itself ::= select_monad_sets_statement",
+ /*  44 */ "statement_by_itself ::= get_monad_sets_statement",
+ /*  45 */ "statement_by_itself ::= create_monad_set_statement",
+ /*  46 */ "statement_by_itself ::= update_monad_set_statement",
+ /*  47 */ "statement_by_itself ::= drop_monad_set_statement",
+ /*  48 */ "statement_by_itself ::= create_objects_statement",
+ /*  49 */ "create_database_statement ::= KEY_CREATE KEY_DATABASE database_name opt_WITH_KEY opt_USING_ENCODING",
+ /*  50 */ "database_name ::= IDENTIFIER",
+ /*  51 */ "database_name ::= STRING",
+ /*  52 */ "initialize_database_statement ::= KEY_INITIALIZE KEY_DATABASE database_name opt_WITH_KEY",
+ /*  53 */ "use_statement ::= KEY_USE opt_DATABASE database_name opt_WITH_KEY",
+ /*  54 */ "opt_WITH_KEY ::= KEY_WITH KEY_KEY STRING",
+ /*  55 */ "opt_WITH_KEY ::=",
+ /*  56 */ "opt_USING_ENCODING ::= KEY_USING KEY_ENCODING STRING",
+ /*  57 */ "opt_USING_ENCODING ::=",
+ /*  58 */ "opt_DATABASE ::= KEY_DATABASE",
+ /*  59 */ "opt_DATABASE ::=",
+ /*  60 */ "drop_database_statement ::= KEY_DROP KEY_DATABASE database_name",
+ /*  61 */ "vacuum_database_statement ::= KEY_VACUUM opt_DATABASE opt_ANALYZE",
+ /*  62 */ "opt_ANALYZE ::=",
+ /*  63 */ "opt_ANALYZE ::= KEY_ANALYZE",
+ /*  64 */ "create_indexes_statement ::= KEY_CREATE KEY_INDEXES on_object_type",
+ /*  65 */ "drop_indexes_statement ::= KEY_DROP KEY_INDEXES on_object_type",
+ /*  66 */ "on_object_type ::= KEY_ON KEY_OBJECT choice_type_types KEY_OPEN_SQUARE_BRACKET choice_object_type_or_all KEY_CLOSE_SQUARE_BRACKET",
+ /*  67 */ "choice_type_types ::= KEY_TYPE",
+ /*  68 */ "choice_type_types ::= KEY_TYPES",
+ /*  69 */ "begin_transaction_statement ::= KEY_BEGIN KEY_TRANSACTION",
+ /*  70 */ "commit_transaction_statement ::= KEY_COMMIT KEY_TRANSACTION",
+ /*  71 */ "abort_transaction_statement ::= KEY_ABORT KEY_TRANSACTION",
+ /*  72 */ "create_object_type_statement ::= KEY_CREATE opt_OBJECT KEY_TYPE opt_if_not_exists opt_range_type opt_monad_uniqueness_type KEY_OPEN_SQUARE_BRACKET object_type_name opt_feature_declaration_list KEY_CLOSE_SQUARE_BRACKET",
+ /*  73 */ "opt_range_type ::=",
+ /*  74 */ "opt_range_type ::= KEY_WITH KEY_MULTIPLE KEY_RANGE KEY_OBJECTS",
+ /*  75 */ "opt_range_type ::= KEY_WITH KEY_SINGLE KEY_RANGE KEY_OBJECTS",
+ /*  76 */ "opt_range_type ::= KEY_WITH KEY_SINGLE KEY_MONAD KEY_OBJECTS",
+ /*  77 */ "opt_monad_uniqueness_type ::=",
+ /*  78 */ "opt_monad_uniqueness_type ::= KEY_HAVING KEY_UNIQUE KEY_FIRST KEY_MONADS",
+ /*  79 */ "opt_monad_uniqueness_type ::= KEY_HAVING KEY_UNIQUE KEY_FIRST KEY_AND KEY_LAST KEY_MONADS",
+ /*  80 */ "opt_monad_uniqueness_type ::= KEY_WITHOUT KEY_UNIQUE KEY_MONADS",
+ /*  81 */ "opt_OBJECT ::= KEY_OBJECT",
+ /*  82 */ "opt_OBJECT ::=",
+ /*  83 */ "object_type_name ::= IDENTIFIER",
+ /*  84 */ "opt_feature_declaration_list ::= feature_declaration_list",
+ /*  85 */ "opt_feature_declaration_list ::=",
+ /*  86 */ "feature_declaration_list ::= feature_declaration",
+ /*  87 */ "feature_declaration_list ::= feature_declaration_list feature_declaration",
+ /*  88 */ "feature_declaration ::= feature_name KEY_COLON feature_type default_specification opt_computed KEY_SEMICOLON",
+ /*  89 */ "feature_declaration ::= feature_name KEY_COLON KEY_LIST KEY_OF list_feature_type KEY_SEMICOLON",
+ /*  90 */ "feature_type ::= KEY_INTEGER opt_with_index",
+ /*  91 */ "feature_type ::= KEY_STRING opt_string_length opt_from_set opt_with_index",
+ /*  92 */ "feature_type ::= KEY_ASCII opt_string_length opt_from_set opt_with_index",
+ /*  93 */ "feature_type ::= KEY_ID_D opt_with_index",
+ /*  94 */ "feature_type ::= IDENTIFIER opt_with_index",
+ /*  95 */ "feature_type ::= KEY_SET KEY_OF KEY_MONADS",
+ /*  96 */ "feature_type ::= KEY_SINGLE KEY_MONAD KEY_SET KEY_OF KEY_MONADS",
+ /*  97 */ "feature_type ::= KEY_SINGLE KEY_RANGE KEY_SET KEY_OF KEY_MONADS",
+ /*  98 */ "feature_type ::= KEY_MULTIPLE KEY_RANGE KEY_SET KEY_OF KEY_MONADS",
+ /*  99 */ "list_feature_type ::= KEY_INTEGER",
+ /* 100 */ "list_feature_type ::= KEY_ID_D",
+ /* 101 */ "list_feature_type ::= IDENTIFIER",
+ /* 102 */ "opt_with_index ::= KEY_WITH KEY_INDEX",
+ /* 103 */ "opt_with_index ::= KEY_WITHOUT KEY_INDEX",
+ /* 104 */ "opt_with_index ::=",
+ /* 105 */ "opt_if_not_exists ::= KEY_IF KEY_NOT KEY_EXISTS",
+ /* 106 */ "opt_if_not_exists ::=",
+ /* 107 */ "opt_from_set ::= KEY_FROM KEY_SET",
+ /* 108 */ "opt_from_set ::=",
+ /* 109 */ "opt_string_length ::=",
+ /* 110 */ "opt_string_length ::= KEY_OPEN_BRACKET INTEGER KEY_CLOSE_BRACKET",
+ /* 111 */ "default_specification ::= KEY_DEFAULT expression",
+ /* 112 */ "default_specification ::=",
+ /* 113 */ "opt_computed ::= KEY_COMPUTED",
+ /* 114 */ "opt_computed ::=",
+ /* 115 */ "update_object_type_statement ::= KEY_UPDATE opt_OBJECT KEY_TYPE KEY_OPEN_SQUARE_BRACKET object_type_name feature_update_list KEY_CLOSE_SQUARE_BRACKET",
+ /* 116 */ "feature_update_list ::= feature_update",
+ /* 117 */ "feature_update_list ::= feature_update_list feature_update",
+ /* 118 */ "feature_update ::= opt_ADD feature_declaration",
+ /* 119 */ "feature_update ::= KEY_REMOVE feature_name KEY_SEMICOLON",
+ /* 120 */ "opt_ADD ::= KEY_ADD",
+ /* 121 */ "opt_ADD ::=",
+ /* 122 */ "drop_object_type_statement ::= KEY_DROP opt_OBJECT KEY_TYPE KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET",
+ /* 123 */ "insert_monads_statement ::= KEY_INSERT monad_specification",
+ /* 124 */ "delete_monads_statement ::= KEY_DELETE monad_specification",
+ /* 125 */ "get_monads_statement ::= KEY_GET KEY_MONADS KEY_FROM choice_number_OBJECTS KEY_WITH id_ds_specification KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET",
+ /* 126 */ "monad_set_calculation_statement ::= KEY_MONAD KEY_SET KEY_CALCULATION monad_set_chain",
+ /* 127 */ "monad_set_chain ::= monad_set",
+ /* 128 */ "monad_set_chain ::= monad_set_chain monad_set_operator monad_set",
+ /* 129 */ "monad_set_operator ::= KEY_UNION",
+ /* 130 */ "monad_set_operator ::= KEY_DIFFERENCE",
+ /* 131 */ "monad_set_operator ::= KEY_INTERSECT",
+ /* 132 */ "select_monad_sets_statement ::= KEY_SELECT KEY_MONAD KEY_SETS",
+ /* 133 */ "get_monad_sets_statement ::= KEY_GET KEY_MONAD choice_number_SET monad_set_name_list",
+ /* 134 */ "get_monad_sets_statement ::= KEY_GET KEY_MONAD choice_number_SET KEY_ALL",
+ /* 135 */ "choice_number_SET ::= KEY_SETS",
+ /* 136 */ "choice_number_SET ::= KEY_SET",
+ /* 137 */ "create_monad_set_statement ::= KEY_CREATE KEY_MONAD KEY_SET monad_set_name KEY_WITH monad_specification",
+ /* 138 */ "update_monad_set_statement ::= KEY_UPDATE KEY_MONAD KEY_SET monad_set_name monad_set_operator monad_set_name",
+ /* 139 */ "update_monad_set_statement ::= KEY_UPDATE KEY_MONAD KEY_SET monad_set_name KEY_REPLACE monad_set_name",
+ /* 140 */ "update_monad_set_statement ::= KEY_UPDATE KEY_MONAD KEY_SET monad_set_name monad_set_operator monad_set",
+ /* 141 */ "update_monad_set_statement ::= KEY_UPDATE KEY_MONAD KEY_SET monad_set_name KEY_REPLACE monad_set",
+ /* 142 */ "drop_monad_set_statement ::= KEY_DROP KEY_MONAD KEY_SET monad_set_name",
+ /* 143 */ "monad_set_name ::= IDENTIFIER",
+ /* 144 */ "monad_set_name_list ::= monad_set_name",
+ /* 145 */ "monad_set_name_list ::= monad_set_name_list KEY_COMMA monad_set_name",
+ /* 146 */ "create_enumeration_statement ::= KEY_CREATE choice_ENUM_ERATION enumeration_name KEY_EQUALS KEY_OPEN_BRACE ec_declaration_list KEY_CLOSE_BRACE",
+ /* 147 */ "choice_ENUM_ERATION ::= KEY_ENUMERATION",
+ /* 148 */ "choice_ENUM_ERATION ::= KEY_ENUM",
+ /* 149 */ "enumeration_name ::= IDENTIFIER",
+ /* 150 */ "ec_declaration_list ::= ec_declaration",
+ /* 151 */ "ec_declaration_list ::= ec_declaration_list KEY_COMMA ec_declaration",
+ /* 152 */ "ec_declaration ::= opt_DEFAULT ec_name opt_ec_initialization",
+ /* 153 */ "opt_DEFAULT ::= KEY_DEFAULT",
+ /* 154 */ "opt_DEFAULT ::=",
+ /* 155 */ "ec_name ::= IDENTIFIER",
+ /* 156 */ "opt_ec_initialization ::= ec_initialization",
+ /* 157 */ "opt_ec_initialization ::=",
+ /* 158 */ "update_enumeration_statement ::= KEY_UPDATE choice_ENUM_ERATION enumeration_name KEY_EQUALS KEY_OPEN_BRACE ec_update_list KEY_CLOSE_BRACE",
+ /* 159 */ "ec_update_list ::= ec_update",
+ /* 160 */ "ec_update_list ::= ec_update_list KEY_COMMA ec_update",
+ /* 161 */ "ec_update ::= opt_ADD opt_DEFAULT ec_name ec_initialization",
+ /* 162 */ "ec_update ::= KEY_UPDATE opt_DEFAULT ec_name ec_initialization",
+ /* 163 */ "ec_update ::= KEY_REMOVE ec_name",
+ /* 164 */ "ec_initialization ::= KEY_EQUALS signed_integer",
+ /* 165 */ "signed_integer ::= INTEGER",
+ /* 166 */ "signed_integer ::= KEY_DASH INTEGER",
+ /* 167 */ "signed_integer ::= KEY_NIL",
+ /* 168 */ "unsigned_integer ::= INTEGER",
+ /* 169 */ "drop_enumeration_statement ::= KEY_DROP choice_ENUM_ERATION enumeration_name",
+ /* 170 */ "create_segment_statement ::= KEY_CREATE KEY_SEGMENT segment_name KEY_RANGE KEY_EQUALS segment_range",
+ /* 171 */ "segment_name ::= IDENTIFIER",
+ /* 172 */ "segment_range ::= INTEGER KEY_DASH INTEGER",
+ /* 173 */ "select_statement ::= select_clause in_clause with_max_range_clause returning_clause where_clause",
+ /* 174 */ "select_statement ::= select_clause KEY_IN IDENTIFIER with_max_range_clause returning_clause where_clause",
+ /* 175 */ "select_clause ::= KEY_SELECT focus_specification opt_OBJECTS",
+ /* 176 */ "focus_specification ::= KEY_FOCUS",
+ /* 177 */ "focus_specification ::= KEY_ALL",
+ /* 178 */ "opt_OBJECTS ::= KEY_OBJECTS",
+ /* 179 */ "opt_OBJECTS ::=",
+ /* 180 */ "in_clause ::= KEY_IN in_specification",
+ /* 181 */ "in_clause ::=",
+ /* 182 */ "in_specification ::= monad_set",
+ /* 183 */ "in_specification ::= KEY_ALL",
+ /* 184 */ "monad_set ::= KEY_OPEN_BRACE monad_set_element_list KEY_CLOSE_BRACE",
+ /* 185 */ "monad_set_element_list ::= monad_set_element",
+ /* 186 */ "monad_set_element_list ::= monad_set_element_list KEY_COMMA monad_set_element",
+ /* 187 */ "monad_set_element ::= INTEGER",
+ /* 188 */ "monad_set_element ::= INTEGER KEY_DASH INTEGER",
+ /* 189 */ "monad_set_element ::= INTEGER KEY_DASH",
+ /* 190 */ "with_max_range_clause ::=",
+ /* 191 */ "with_max_range_clause ::= KEY_WITH KEY_MAX KEY_RANGE KEY_MAX_M KEY_MONADS",
+ /* 192 */ "with_max_range_clause ::= KEY_WITH KEY_MAX KEY_RANGE INTEGER KEY_MONADS",
+ /* 193 */ "with_max_range_clause ::= KEY_WITH KEY_MAX KEY_RANGE KEY_FEATURE feature_name KEY_FROM KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET",
+ /* 194 */ "returning_clause ::=",
+ /* 195 */ "returning_clause ::= KEY_RETURNING KEY_FULL KEY_SHEAF",
+ /* 196 */ "returning_clause ::= KEY_RETURNING KEY_FLAT KEY_SHEAF",
+ /* 197 */ "returning_clause ::= KEY_RETURNING KEY_FLAT KEY_SHEAF KEY_ON object_type_name_list",
+ /* 198 */ "using_range_clause ::=",
+ /* 199 */ "using_range_clause ::= KEY_RANGE KEY_ALL",
+ /* 200 */ "using_range_clause ::= KEY_RANGE KEY_OPEN_BRACKET unsigned_integer KEY_COMMA unsigned_integer KEY_CLOSE_BRACKET",
+ /* 201 */ "using_range_clause ::= KEY_RANGE KEY_OPEN_BRACKET unsigned_integer KEY_CLOSE_BRACKET",
+ /* 202 */ "object_type_name_list ::= object_type_name",
+ /* 203 */ "object_type_name_list ::= object_type_name_list KEY_COMMA object_type_name",
+ /* 204 */ "where_clause ::= KEY_WHERE mql_query",
+ /* 205 */ "select_objects_at_statement ::= KEY_SELECT opt_OBJECTS KEY_AT single_monad_specification KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET",
+ /* 206 */ "single_monad_specification ::= KEY_MONAD KEY_EQUALS INTEGER",
+ /* 207 */ "select_objects_having_monads_in_statement ::= KEY_SELECT KEY_OBJECTS KEY_HAVING KEY_MONADS KEY_IN monad_set KEY_OPEN_SQUARE_BRACKET object_type_to_find KEY_CLOSE_SQUARE_BRACKET",
+ /* 208 */ "object_type_to_find ::= choice_object_type_or_all",
+ /* 209 */ "choice_object_type_or_all ::= object_type_name",
+ /* 210 */ "choice_object_type_or_all ::= KEY_ALL",
+ /* 211 */ "get_aggregate_features_statement ::= KEY_GET KEY_AGGREGATE KEY_FEATURES aggregate_feature_list KEY_FROM KEY_OBJECTS in_clause using_monad_feature KEY_OPEN_SQUARE_BRACKET object_type_name feature_constraints KEY_CLOSE_SQUARE_BRACKET",
+ /* 212 */ "aggregate_feature_list ::= aggregate_feature",
+ /* 213 */ "aggregate_feature_list ::= aggregate_feature_list KEY_COMMA aggregate_feature",
+ /* 214 */ "aggregate_feature ::= KEY_MIN KEY_OPEN_BRACKET feature_name KEY_CLOSE_BRACKET",
+ /* 215 */ "aggregate_feature ::= KEY_MAX KEY_OPEN_BRACKET feature_name KEY_CLOSE_BRACKET",
+ /* 216 */ "aggregate_feature ::= KEY_SUM KEY_OPEN_BRACKET feature_name KEY_CLOSE_BRACKET",
+ /* 217 */ "aggregate_feature ::= KEY_COUNT KEY_OPEN_BRACKET KEY_STAR KEY_CLOSE_BRACKET",
+ /* 218 */ "aggregate_feature ::= KEY_COUNT KEY_OPEN_BRACKET aggregate_feature_comparison KEY_CLOSE_BRACKET",
+ /* 219 */ "aggregate_feature_comparison ::= feature_name comparison_operator value",
+ /* 220 */ "aggregate_feature_comparison ::= feature_name KEY_IN KEY_OPEN_BRACKET list_of_identifier KEY_CLOSE_BRACKET",
+ /* 221 */ "aggregate_feature_comparison ::= feature_name KEY_IN KEY_OPEN_BRACKET list_of_integer KEY_CLOSE_BRACKET",
+ /* 222 */ "get_objects_having_monads_in_statement ::= KEY_GET KEY_OBJECTS KEY_HAVING KEY_MONADS KEY_IN in_specification using_monad_feature KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET",
+ /* 223 */ "get_objects_having_monads_in_statement ::= KEY_GET KEY_OBJECTS KEY_HAVING KEY_MONADS KEY_IN in_specification using_monad_feature KEY_OPEN_SQUARE_BRACKET object_type_name KEY_GET KEY_ALL KEY_CLOSE_SQUARE_BRACKET",
+ /* 224 */ "get_objects_having_monads_in_statement ::= KEY_GET KEY_OBJECTS KEY_HAVING KEY_MONADS KEY_IN in_specification using_monad_feature KEY_OPEN_SQUARE_BRACKET object_type_name KEY_GET feature_list KEY_CLOSE_SQUARE_BRACKET",
+ /* 225 */ "using_monad_feature ::= KEY_USING KEY_MONAD KEY_FEATURE IDENTIFIER",
+ /* 226 */ "using_monad_feature ::= KEY_USING KEY_MONAD KEY_FEATURE KEY_MONADS",
+ /* 227 */ "using_monad_feature ::=",
+ /* 228 */ "select_object_types_statement ::= KEY_SELECT opt_OBJECT KEY_TYPES",
+ /* 229 */ "select_features_statement ::= KEY_SELECT KEY_FEATURES KEY_FROM opt_OBJECTYPE KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET",
+ /* 230 */ "get_set_from_feature_statement ::= KEY_GET KEY_SET KEY_FROM KEY_FEATURE feature_name KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET",
+ /* 231 */ "opt_OBJECTYPE ::= KEY_OBJECT KEY_TYPE",
+ /* 232 */ "opt_OBJECTYPE ::= KEY_TYPE",
+ /* 233 */ "opt_OBJECTYPE ::=",
+ /* 234 */ "select_enumerations_statement ::= KEY_SELECT KEY_ENUMERATIONS",
+ /* 235 */ "select_enumeration_constants_statement ::= KEY_SELECT choice_ENUM_ERATION KEY_CONSTANTS KEY_FROM opt_ENUM_ERATION enumeration_name",
+ /* 236 */ "opt_ENUM_ERATION ::= KEY_ENUM",
+ /* 237 */ "opt_ENUM_ERATION ::= KEY_ENUMERATION",
+ /* 238 */ "opt_ENUM_ERATION ::=",
+ /* 239 */ "select_object_types_which_use_enum_statement ::= KEY_SELECT opt_OBJECT KEY_TYPES KEY_USING choice_ENUM_ERATION enumeration_name",
+ /* 240 */ "select_min_m_statement ::= KEY_SELECT KEY_MIN_M",
+ /* 241 */ "select_max_m_statement ::= KEY_SELECT KEY_MAX_M",
+ /* 242 */ "create_object_from_monads_statement ::= KEY_CREATE KEY_OBJECT KEY_FROM monad_specification with_id_d_specification object_creation_specification",
+ /* 243 */ "monad_specification ::= KEY_MONADS KEY_EQUALS monad_set",
+ /* 244 */ "with_id_d_specification ::= KEY_WITH KEY_ID_D KEY_EQUALS id_d_const",
+ /* 245 */ "with_id_d_specification ::=",
+ /* 246 */ "id_d_const ::= INTEGER",
+ /* 247 */ "id_d_const ::= KEY_NIL",
+ /* 248 */ "object_creation_specification ::= KEY_OPEN_SQUARE_BRACKET object_type_name opt_list_of_feature_assignments KEY_CLOSE_SQUARE_BRACKET",
+ /* 249 */ "opt_list_of_feature_assignments ::= list_of_feature_assignments",
+ /* 250 */ "opt_list_of_feature_assignments ::=",
+ /* 251 */ "list_of_feature_assignments ::= feature_assignment",
+ /* 252 */ "list_of_feature_assignments ::= list_of_feature_assignments feature_assignment",
+ /* 253 */ "feature_assignment ::= feature_name KEY_ASSIGN expression KEY_SEMICOLON",
+ /* 254 */ "feature_name ::= IDENTIFIER",
+ /* 255 */ "feature_name ::= KEY_MONADS",
+ /* 256 */ "expression ::= signed_integer",
+ /* 257 */ "expression ::= STRING",
+ /* 258 */ "expression ::= IDENTIFIER",
+ /* 259 */ "expression ::= monad_set",
+ /* 260 */ "expression ::= KEY_OPEN_BRACKET KEY_CLOSE_BRACKET",
+ /* 261 */ "expression ::= KEY_OPEN_BRACKET list_of_integer KEY_CLOSE_BRACKET",
+ /* 262 */ "expression ::= KEY_OPEN_BRACKET list_of_identifier KEY_CLOSE_BRACKET",
+ /* 263 */ "list_of_integer ::= signed_integer",
+ /* 264 */ "list_of_integer ::= list_of_integer KEY_COMMA signed_integer",
+ /* 265 */ "list_of_identifier ::= IDENTIFIER",
+ /* 266 */ "list_of_identifier ::= list_of_identifier KEY_COMMA IDENTIFIER",
+ /* 267 */ "create_object_from_id_ds_statement ::= KEY_CREATE KEY_OBJECT KEY_FROM id_ds_specification with_id_d_specification object_creation_specification",
+ /* 268 */ "id_ds_specification ::= choice_number_ID_DS KEY_EQUALS id_d_list",
+ /* 269 */ "choice_number_ID_DS ::= KEY_ID_D",
+ /* 270 */ "choice_number_ID_DS ::= KEY_ID_DS",
+ /* 271 */ "id_d_list ::= id_d",
+ /* 272 */ "id_d_list ::= id_d_list KEY_COMMA id_d",
+ /* 273 */ "id_d ::= id_d_const",
+ /* 274 */ "create_objects_statement ::= KEY_CREATE KEY_OBJECTS KEY_WITH KEY_OBJECT KEY_TYPE KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET object_creation_list",
+ /* 275 */ "object_creation_list ::= object_creation_no_object_type",
+ /* 276 */ "object_creation_list ::= object_creation_list object_creation_no_object_type",
+ /* 277 */ "object_creation_no_object_type ::= KEY_CREATE KEY_OBJECT KEY_FROM monad_specification with_id_d_specification KEY_OPEN_SQUARE_BRACKET opt_list_of_feature_assignments KEY_CLOSE_SQUARE_BRACKET",
+ /* 278 */ "update_objects_by_monads_statement ::= KEY_UPDATE choice_number_OBJECTS KEY_BY monad_specification object_update_specification",
+ /* 279 */ "choice_number_OBJECTS ::= KEY_OBJECT",
+ /* 280 */ "choice_number_OBJECTS ::= KEY_OBJECTS",
+ /* 281 */ "object_update_specification ::= KEY_OPEN_SQUARE_BRACKET object_type_name list_of_feature_assignments KEY_CLOSE_SQUARE_BRACKET",
+ /* 282 */ "update_objects_by_id_ds_statement ::= KEY_UPDATE choice_number_OBJECTS KEY_BY id_ds_specification object_update_specification",
+ /* 283 */ "delete_objects_by_monads_statement ::= KEY_DELETE choice_number_OBJECTS KEY_BY monad_specification object_deletion_specification",
+ /* 284 */ "object_deletion_specification ::= KEY_OPEN_SQUARE_BRACKET object_type_name_to_delete KEY_CLOSE_SQUARE_BRACKET",
+ /* 285 */ "object_type_name_to_delete ::= choice_object_type_or_all",
+ /* 286 */ "delete_objects_by_id_ds_statement ::= KEY_DELETE choice_number_OBJECTS KEY_BY id_ds_specification object_deletion_specification",
+ /* 287 */ "get_features_statement ::= KEY_GET choice_number_FEATURES feature_list KEY_FROM choice_number_OBJECTS KEY_WITH id_ds_specification KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET",
+ /* 288 */ "choice_number_FEATURES ::= KEY_FEATURE",
+ /* 289 */ "choice_number_FEATURES ::= KEY_FEATURES",
+ /* 290 */ "feature_list ::= feature_name",
+ /* 291 */ "feature_list ::= feature_list KEY_COMMA feature_name",
+ /* 292 */ "quit_statement ::= KEY_QUIT",
+ /* 293 */ "mql_query ::= topograph",
+ /* 294 */ "topograph ::= blocks",
+ /* 295 */ "blocks ::= using_range_clause block_string",
+ /* 296 */ "block_string0 ::= block",
+ /* 297 */ "block_string0 ::= KEY_OPEN_SQUARE_BRACKET block_string KEY_CLOSE_SQUARE_BRACKET",
+ /* 298 */ "block_string1 ::= block_string0",
+ /* 299 */ "block_string1 ::= block_string0 KEY_STAR star_monad_set",
+ /* 300 */ "block_string2 ::= block_string1",
+ /* 301 */ "block_string2 ::= block_string1 block_string2",
+ /* 302 */ "block_string2 ::= block_string1 KEY_EXCLAMATION block_string2",
+ /* 303 */ "block_string ::= block_string2",
+ /* 304 */ "block_string ::= block_string2 KEY_OR block_string",
+ /* 305 */ "notexist ::= KEY_NOTEXIST",
+ /* 306 */ "notexist ::= KEY_NOTEXISTS",
+ /* 307 */ "object_reference_declaration ::=",
+ /* 308 */ "object_reference_declaration ::= KEY_AS object_reference",
+ /* 309 */ "mark_declaration ::=",
+ /* 310 */ "mark_declaration ::= MARK",
+ /* 311 */ "object_reference ::= IDENTIFIER",
+ /* 312 */ "retrieval ::=",
+ /* 313 */ "retrieval ::= KEY_NORETRIEVE",
+ /* 314 */ "retrieval ::= KEY_RETRIEVE",
+ /* 315 */ "retrieval ::= KEY_FOCUS",
+ /* 316 */ "firstlast ::=",
+ /* 317 */ "firstlast ::= KEY_FIRST",
+ /* 318 */ "firstlast ::= KEY_LAST",
+ /* 319 */ "firstlast ::= KEY_FIRST KEY_AND KEY_LAST",
+ /* 320 */ "monad_set_relation_clause ::= monad_set_relation_operation KEY_OPEN_BRACKET monad_set_name KEY_COMMA universe_or_substrate KEY_CLOSE_BRACKET",
+ /* 321 */ "monad_set_relation_clause ::= monad_set_relation_operation KEY_OPEN_BRACKET universe_or_substrate KEY_CLOSE_BRACKET",
+ /* 322 */ "monad_set_relation_clause ::=",
+ /* 323 */ "monad_set_relation_operation ::= KEY_PART_OF",
+ /* 324 */ "monad_set_relation_operation ::= KEY_STARTS_IN",
+ /* 325 */ "monad_set_relation_operation ::= KEY_OVERLAP",
+ /* 326 */ "universe_or_substrate ::= KEY_UNIVERSE",
+ /* 327 */ "universe_or_substrate ::= KEY_SUBSTRATE",
+ /* 328 */ "feature_constraints ::=",
+ /* 329 */ "feature_constraints ::= ffeatures",
+ /* 330 */ "ffeatures ::= fterm",
+ /* 331 */ "ffeatures ::= ffeatures KEY_OR fterm",
+ /* 332 */ "fterm ::= ffactor",
+ /* 333 */ "fterm ::= fterm KEY_AND ffactor",
+ /* 334 */ "ffactor ::= KEY_NOT ffactor",
+ /* 335 */ "ffactor ::= KEY_OPEN_BRACKET ffeatures KEY_CLOSE_BRACKET",
+ /* 336 */ "ffactor ::= feature_comparison",
+ /* 337 */ "feature_comparison ::= feature_name comparison_operator value",
+ /* 338 */ "feature_comparison ::= feature_name KEY_IN KEY_OPEN_BRACKET list_of_identifier KEY_CLOSE_BRACKET",
+ /* 339 */ "feature_comparison ::= feature_name KEY_IN KEY_OPEN_BRACKET list_of_integer KEY_CLOSE_BRACKET",
+ /* 340 */ "feature_comparison ::= feature_name KEY_IN object_reference_usage",
+ /* 341 */ "comparison_operator ::= KEY_EQUALS",
+ /* 342 */ "comparison_operator ::= KEY_LESS_THAN",
+ /* 343 */ "comparison_operator ::= KEY_GREATER_THAN",
+ /* 344 */ "comparison_operator ::= KEY_NOT_EQUAL",
+ /* 345 */ "comparison_operator ::= KEY_LESS_THAN_OR_EQUAL",
+ /* 346 */ "comparison_operator ::= KEY_GREATER_THAN_OR_EQUAL",
+ /* 347 */ "comparison_operator ::= KEY_TILDE",
+ /* 348 */ "comparison_operator ::= KEY_NOT_TILDE",
+ /* 349 */ "comparison_operator ::= KEY_HAS",
+ /* 350 */ "value ::= enum_const",
+ /* 351 */ "value ::= signed_integer",
+ /* 352 */ "value ::= STRING",
+ /* 353 */ "value ::= object_reference_usage",
+ /* 354 */ "enum_const ::= IDENTIFIER",
+ /* 355 */ "object_reference_usage ::= object_reference KEY_DOT feature_name",
+ /* 356 */ "opt_blocks ::=",
+ /* 357 */ "opt_blocks ::= blocks",
+ /* 358 */ "block ::= object_block",
+ /* 359 */ "block ::= power",
+ /* 360 */ "block ::= opt_gap_block",
+ /* 361 */ "block ::= gap_block",
+ /* 362 */ "block ::= notexist_object_block",
+ /* 363 */ "star_monad_set ::=",
+ /* 364 */ "star_monad_set ::= monad_set",
+ /* 365 */ "opt_gap_block ::= KEY_OPEN_SQUARE_BRACKET KEY_OPT_GAP mark_declaration gap_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET",
+ /* 366 */ "gap_retrieval ::=",
+ /* 367 */ "gap_retrieval ::= KEY_NORETRIEVE",
+ /* 368 */ "gap_retrieval ::= KEY_RETRIEVE",
+ /* 369 */ "gap_retrieval ::= KEY_FOCUS",
+ /* 370 */ "gap_block ::= KEY_OPEN_SQUARE_BRACKET KEY_GAP mark_declaration gap_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET",
+ /* 371 */ "feature_retrieval ::= KEY_GET feature_list",
+ /* 372 */ "feature_retrieval ::=",
+ /* 373 */ "object_block ::= KEY_OPEN_SQUARE_BRACKET object_type_name mark_declaration object_reference_declaration retrieval firstlast monad_set_relation_clause feature_constraints feature_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET",
+ /* 374 */ "notexist_object_block ::= notexist KEY_OPEN_SQUARE_BRACKET object_type_name mark_declaration object_reference_declaration retrieval firstlast monad_set_relation_clause feature_constraints feature_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET",
+ /* 375 */ "power ::= KEY_POWER restrictor",
+ /* 376 */ "power ::= KEY_POWER KEY_BETWEEN limit KEY_AND limit",
+ /* 377 */ "restrictor ::=",
+ /* 378 */ "restrictor ::= KEY_LESS_THAN limit",
+ /* 379 */ "restrictor ::= KEY_LESS_THAN_OR_EQUAL limit",
+ /* 380 */ "limit ::= INTEGER",
 };
 #endif /* NDEBUG */
 
@@ -103938,545 +106069,559 @@ static void mqlyy_destructor(
     case 88: /* KEY_FLAT */
     case 89: /* KEY_WHERE */
     case 90: /* KEY_AT */
-    case 91: /* KEY_FEATURES */
-    case 92: /* KEY_ENUMERATIONS */
-    case 93: /* KEY_CONSTANTS */
-    case 94: /* KEY_MIN_M */
-    case 95: /* KEY_ASSIGN */
-    case 96: /* KEY_ID_DS */
-    case 97: /* KEY_BY */
-    case 98: /* KEY_QUIT */
-    case 99: /* KEY_STAR */
-    case 100: /* KEY_EXCLAMATION */
-    case 101: /* KEY_OR */
-    case 102: /* KEY_NOTEXIST */
-    case 103: /* KEY_NOTEXISTS */
-    case 104: /* KEY_AS */
-    case 105: /* MARK */
-    case 106: /* KEY_NORETRIEVE */
-    case 107: /* KEY_RETRIEVE */
-    case 108: /* KEY_PART_OF */
-    case 109: /* KEY_STARTS_IN */
-    case 110: /* KEY_OVERLAP */
-    case 111: /* KEY_UNIVERSE */
-    case 112: /* KEY_SUBSTRATE */
-    case 113: /* KEY_LESS_THAN */
-    case 114: /* KEY_GREATER_THAN */
-    case 115: /* KEY_NOT_EQUAL */
-    case 116: /* KEY_LESS_THAN_OR_EQUAL */
-    case 117: /* KEY_GREATER_THAN_OR_EQUAL */
-    case 118: /* KEY_TILDE */
-    case 119: /* KEY_NOT_TILDE */
-    case 120: /* KEY_HAS */
-    case 121: /* KEY_DOT */
-    case 122: /* KEY_OPT_GAP */
-    case 123: /* KEY_GAP */
-    case 124: /* KEY_POWER */
-    case 125: /* KEY_BETWEEN */
+    case 91: /* KEY_AGGREGATE */
+    case 92: /* KEY_FEATURES */
+    case 93: /* KEY_MIN */
+    case 94: /* KEY_SUM */
+    case 95: /* KEY_COUNT */
+    case 96: /* KEY_STAR */
+    case 97: /* KEY_ENUMERATIONS */
+    case 98: /* KEY_CONSTANTS */
+    case 99: /* KEY_MIN_M */
+    case 100: /* KEY_ASSIGN */
+    case 101: /* KEY_ID_DS */
+    case 102: /* KEY_BY */
+    case 103: /* KEY_QUIT */
+    case 104: /* KEY_EXCLAMATION */
+    case 105: /* KEY_OR */
+    case 106: /* KEY_NOTEXIST */
+    case 107: /* KEY_NOTEXISTS */
+    case 108: /* KEY_AS */
+    case 109: /* MARK */
+    case 110: /* KEY_NORETRIEVE */
+    case 111: /* KEY_RETRIEVE */
+    case 112: /* KEY_PART_OF */
+    case 113: /* KEY_STARTS_IN */
+    case 114: /* KEY_OVERLAP */
+    case 115: /* KEY_UNIVERSE */
+    case 116: /* KEY_SUBSTRATE */
+    case 117: /* KEY_LESS_THAN */
+    case 118: /* KEY_GREATER_THAN */
+    case 119: /* KEY_NOT_EQUAL */
+    case 120: /* KEY_LESS_THAN_OR_EQUAL */
+    case 121: /* KEY_GREATER_THAN_OR_EQUAL */
+    case 122: /* KEY_TILDE */
+    case 123: /* KEY_NOT_TILDE */
+    case 124: /* KEY_HAS */
+    case 125: /* KEY_DOT */
+    case 126: /* KEY_OPT_GAP */
+    case 127: /* KEY_GAP */
+    case 128: /* KEY_POWER */
+    case 129: /* KEY_BETWEEN */
 {
 #line 130 "./mql.yxx"
  deleteToken((mqlyypminor->mqlyy0));
-#line 1387 "./mql.c"
+#line 1421 "./mql.c"
 }
       break;
-    case 127: /* statement */
-    case 128: /* statement_by_itself */
-    case 129: /* create_database_statement */
-    case 130: /* initialize_database_statement */
-    case 131: /* use_statement */
-    case 132: /* drop_database_statement */
-    case 133: /* vacuum_database_statement */
-    case 134: /* create_object_type_statement */
-    case 135: /* update_object_type_statement */
-    case 136: /* drop_object_type_statement */
-    case 137: /* insert_monads_statement */
-    case 138: /* delete_monads_statement */
-    case 139: /* get_monads_statement */
-    case 140: /* monad_set_calculation_statement */
-    case 141: /* create_enumeration_statement */
-    case 142: /* update_enumeration_statement */
-    case 143: /* drop_enumeration_statement */
-    case 144: /* create_segment_statement */
-    case 145: /* select_statement */
-    case 146: /* select_objects_at_statement */
-    case 147: /* select_objects_having_monads_in_statement */
-    case 148: /* get_objects_having_monads_in_statement */
-    case 150: /* select_object_types_statement */
-    case 152: /* select_enumerations_statement */
-    case 153: /* select_enumeration_constants_statement */
-    case 154: /* select_object_types_which_use_enum_statement */
-    case 155: /* select_min_m_statement */
-    case 156: /* select_max_m_statement */
-    case 157: /* create_object_from_monads_statement */
-    case 158: /* create_object_from_id_ds_statement */
-    case 159: /* update_objects_by_monads_statement */
-    case 160: /* update_objects_by_id_ds_statement */
-    case 161: /* delete_objects_by_monads_statement */
-    case 162: /* delete_objects_by_id_ds_statement */
-    case 163: /* get_features_statement */
-    case 164: /* quit_statement */
-    case 165: /* create_indexes_statement */
-    case 166: /* drop_indexes_statement */
-    case 167: /* begin_transaction_statement */
-    case 168: /* commit_transaction_statement */
-    case 169: /* abort_transaction_statement */
-    case 170: /* select_monad_sets_statement */
-    case 171: /* get_monad_sets_statement */
-    case 172: /* create_monad_set_statement */
-    case 173: /* update_monad_set_statement */
-    case 174: /* drop_monad_set_statement */
-    case 175: /* create_objects_statement */
+    case 131: /* statement */
+    case 132: /* statement_by_itself */
+    case 133: /* create_database_statement */
+    case 134: /* initialize_database_statement */
+    case 135: /* use_statement */
+    case 136: /* drop_database_statement */
+    case 137: /* vacuum_database_statement */
+    case 138: /* create_object_type_statement */
+    case 139: /* update_object_type_statement */
+    case 140: /* drop_object_type_statement */
+    case 141: /* insert_monads_statement */
+    case 142: /* delete_monads_statement */
+    case 143: /* get_monads_statement */
+    case 144: /* monad_set_calculation_statement */
+    case 145: /* create_enumeration_statement */
+    case 146: /* update_enumeration_statement */
+    case 147: /* drop_enumeration_statement */
+    case 148: /* create_segment_statement */
+    case 149: /* select_statement */
+    case 150: /* select_objects_at_statement */
+    case 151: /* select_objects_having_monads_in_statement */
+    case 152: /* get_aggregate_features_statement */
+    case 153: /* get_objects_having_monads_in_statement */
+    case 155: /* select_object_types_statement */
+    case 157: /* select_enumerations_statement */
+    case 158: /* select_enumeration_constants_statement */
+    case 159: /* select_object_types_which_use_enum_statement */
+    case 160: /* select_min_m_statement */
+    case 161: /* select_max_m_statement */
+    case 162: /* create_object_from_monads_statement */
+    case 163: /* create_object_from_id_ds_statement */
+    case 164: /* update_objects_by_monads_statement */
+    case 165: /* update_objects_by_id_ds_statement */
+    case 166: /* delete_objects_by_monads_statement */
+    case 167: /* delete_objects_by_id_ds_statement */
+    case 168: /* get_features_statement */
+    case 169: /* quit_statement */
+    case 170: /* create_indexes_statement */
+    case 171: /* drop_indexes_statement */
+    case 172: /* begin_transaction_statement */
+    case 173: /* commit_transaction_statement */
+    case 174: /* abort_transaction_statement */
+    case 175: /* select_monad_sets_statement */
+    case 176: /* get_monad_sets_statement */
+    case 177: /* create_monad_set_statement */
+    case 178: /* update_monad_set_statement */
+    case 179: /* drop_monad_set_statement */
+    case 180: /* create_objects_statement */
 {
 #line 150 "./mql.yxx"
-delete((mqlyypminor->mqlyy160));
-#line 1440 "./mql.c"
+delete((mqlyypminor->mqlyy440));
+#line 1475 "./mql.c"
 }
       break;
-    case 176: /* database_name */
-    case 177: /* opt_WITH_KEY */
-    case 180: /* opt_WITH_ENCODING */
-    case 182: /* on_object_type */
-    case 184: /* choice_object_type_or_all */
-    case 189: /* object_type_name */
-    case 193: /* feature_name */
-    case 215: /* enumeration_name */
-    case 226: /* segment_name */
-    case 242: /* object_type_to_find */
-    case 243: /* using_monad_feature */
-    case 261: /* object_deletion_specification */
-    case 262: /* object_type_name_to_delete */
-    case 273: /* object_reference_declaration */
-    case 274: /* object_reference */
-    case 275: /* mark_declaration */
-    case 289: /* enum_const */
+    case 181: /* database_name */
+    case 182: /* opt_WITH_KEY */
+    case 185: /* opt_WITH_ENCODING */
+    case 187: /* on_object_type */
+    case 189: /* choice_object_type_or_all */
+    case 194: /* object_type_name */
+    case 198: /* feature_name */
+    case 220: /* enumeration_name */
+    case 231: /* segment_name */
+    case 247: /* object_type_to_find */
+    case 249: /* using_monad_feature */
+    case 272: /* object_deletion_specification */
+    case 273: /* object_type_name_to_delete */
+    case 284: /* object_reference_declaration */
+    case 285: /* object_reference */
+    case 286: /* mark_declaration */
+    case 297: /* enum_const */
 {
-#line 214 "./mql.yxx"
+#line 215 "./mql.yxx"
  deleteToken((mqlyypminor->mqlyy0)); 
-#line 1463 "./mql.c"
+#line 1498 "./mql.c"
 }
       break;
-    case 179: /* opt_DATABASE */
-    case 183: /* choice_type_types */
-    case 185: /* opt_OBJECT */
-    case 204: /* opt_ADD */
-    case 206: /* choice_number_OBJECTS */
-    case 211: /* choice_number_SET */
-    case 214: /* choice_ENUM_ERATION */
-    case 234: /* opt_OBJECTS */
-    case 245: /* opt_OBJECTYPE */
-    case 246: /* opt_ENUM_ERATION */
-    case 255: /* choice_number_ID_DS */
-    case 263: /* choice_number_FEATURES */
-    case 272: /* notexist */
+    case 184: /* opt_DATABASE */
+    case 188: /* choice_type_types */
+    case 190: /* opt_OBJECT */
+    case 209: /* opt_ADD */
+    case 211: /* choice_number_OBJECTS */
+    case 216: /* choice_number_SET */
+    case 219: /* choice_ENUM_ERATION */
+    case 239: /* opt_OBJECTS */
+    case 258: /* opt_OBJECTYPE */
+    case 259: /* opt_ENUM_ERATION */
+    case 266: /* choice_number_ID_DS */
+    case 274: /* choice_number_FEATURES */
+    case 283: /* notexist */
 {
-#line 242 "./mql.yxx"
+#line 243 "./mql.yxx"
 ;
-#line 1482 "./mql.c"
-}
-      break;
-    case 181: /* opt_ANALYZE */
-    case 186: /* opt_if_not_exists */
-    case 196: /* opt_computed */
-    case 198: /* opt_with_index */
-    case 200: /* opt_from_set */
-    case 218: /* opt_DEFAULT */
-{
-#line 260 "./mql.yxx"
-;
-#line 1494 "./mql.c"
-}
-      break;
-    case 187: /* opt_range_type */
-{
-#line 325 "./mql.yxx"
-;
-#line 1501 "./mql.c"
-}
-      break;
-    case 188: /* opt_monad_uniqueness_type */
-{
-#line 336 "./mql.yxx"
-;
-#line 1508 "./mql.c"
-}
-      break;
-    case 190: /* opt_feature_declaration_list */
-    case 191: /* feature_declaration_list */
-    case 192: /* feature_declaration */
-{
-#line 358 "./mql.yxx"
-delete((mqlyypminor->mqlyy193));
 #line 1517 "./mql.c"
 }
       break;
-    case 194: /* feature_type */
-    case 197: /* list_feature_type */
+    case 186: /* opt_ANALYZE */
+    case 191: /* opt_if_not_exists */
+    case 201: /* opt_computed */
+    case 203: /* opt_with_index */
+    case 205: /* opt_from_set */
+    case 223: /* opt_DEFAULT */
 {
-#line 380 "./mql.yxx"
-delete((mqlyypminor->mqlyy283));
-#line 1525 "./mql.c"
+#line 261 "./mql.yxx"
+;
+#line 1529 "./mql.c"
 }
       break;
-    case 195: /* default_specification */
-    case 201: /* expression */
+    case 192: /* opt_range_type */
 {
-#line 438 "./mql.yxx"
-delete((mqlyypminor->mqlyy139));
-#line 1533 "./mql.c"
+#line 326 "./mql.yxx"
+;
+#line 1536 "./mql.c"
 }
       break;
-    case 199: /* opt_string_length */
-    case 221: /* ec_initialization */
-    case 224: /* signed_integer */
-    case 225: /* unsigned_integer */
+    case 193: /* opt_monad_uniqueness_type */
 {
-#line 430 "./mql.yxx"
+#line 337 "./mql.yxx"
 ;
 #line 1543 "./mql.c"
 }
       break;
-    case 202: /* feature_update_list */
-    case 203: /* feature_update */
+    case 195: /* opt_feature_declaration_list */
+    case 196: /* feature_declaration_list */
+    case 197: /* feature_declaration */
 {
-#line 463 "./mql.yxx"
-delete((mqlyypminor->mqlyy406));
-#line 1551 "./mql.c"
+#line 359 "./mql.yxx"
+delete((mqlyypminor->mqlyy193));
+#line 1552 "./mql.c"
 }
       break;
-    case 205: /* monad_specification */
-    case 209: /* monad_set */
-    case 227: /* segment_range */
-    case 229: /* in_clause */
-    case 235: /* in_specification */
-    case 236: /* monad_set_element_list */
-    case 237: /* monad_set_element */
-    case 270: /* star_monad_set */
+    case 199: /* feature_type */
+    case 202: /* list_feature_type */
 {
-#line 1028 "./mql.yxx"
-delete((mqlyypminor->mqlyy34));
-#line 1565 "./mql.c"
+#line 381 "./mql.yxx"
+delete((mqlyypminor->mqlyy371));
+#line 1560 "./mql.c"
 }
       break;
-    case 207: /* id_ds_specification */
-    case 256: /* id_d_list */
-    case 257: /* id_d */
+    case 200: /* default_specification */
+    case 206: /* expression */
 {
-#line 1129 "./mql.yxx"
-delete((mqlyypminor->mqlyy51));
-#line 1574 "./mql.c"
+#line 439 "./mql.yxx"
+delete((mqlyypminor->mqlyy563));
+#line 1568 "./mql.c"
 }
       break;
-    case 208: /* monad_set_chain */
+    case 204: /* opt_string_length */
+    case 226: /* ec_initialization */
+    case 229: /* signed_integer */
+    case 230: /* unsigned_integer */
 {
-#line 524 "./mql.yxx"
-delete((mqlyypminor->mqlyy279));
-#line 1581 "./mql.c"
-}
-      break;
-    case 210: /* monad_set_operator */
-{
-#line 532 "./mql.yxx"
+#line 431 "./mql.yxx"
 ;
-#line 1588 "./mql.c"
+#line 1578 "./mql.c"
 }
       break;
-    case 212: /* monad_set_name_list */
-    case 238: /* object_type_name_list */
-    case 254: /* list_of_identifier */
+    case 207: /* feature_update_list */
+    case 208: /* feature_update */
 {
-#line 608 "./mql.yxx"
-delete((mqlyypminor->mqlyy440));
-#line 1597 "./mql.c"
+#line 464 "./mql.yxx"
+delete((mqlyypminor->mqlyy70));
+#line 1586 "./mql.c"
 }
       break;
-    case 213: /* monad_set_name */
+    case 210: /* monad_specification */
+    case 214: /* monad_set */
+    case 232: /* segment_range */
+    case 234: /* in_clause */
+    case 240: /* in_specification */
+    case 241: /* monad_set_element_list */
+    case 242: /* monad_set_element */
+    case 281: /* star_monad_set */
 {
-#line 603 "./mql.yxx"
-deleteToken((mqlyypminor->mqlyy0));
-#line 1604 "./mql.c"
-}
-      break;
-    case 216: /* ec_declaration_list */
-    case 217: /* ec_declaration */
-{
-#line 636 "./mql.yxx"
-delete((mqlyypminor->mqlyy461));
-#line 1612 "./mql.c"
-}
-      break;
-    case 219: /* ec_name */
-{
-#line 659 "./mql.yxx"
- deleteToken((mqlyypminor->mqlyy0));  
-#line 1619 "./mql.c"
-}
-      break;
-    case 220: /* opt_ec_initialization */
-{
-#line 663 "./mql.yxx"
-delete((mqlyypminor->mqlyy587));
-#line 1626 "./mql.c"
-}
-      break;
-    case 222: /* ec_update_list */
-    case 223: /* ec_update */
-{
-#line 680 "./mql.yxx"
+#line 1079 "./mql.yxx"
 delete((mqlyypminor->mqlyy362));
-#line 1634 "./mql.c"
+#line 1600 "./mql.c"
 }
       break;
-    case 228: /* select_clause */
-    case 233: /* focus_specification */
+    case 212: /* id_ds_specification */
+    case 267: /* id_d_list */
+    case 268: /* id_d */
 {
-#line 758 "./mql.yxx"
+#line 1180 "./mql.yxx"
+delete((mqlyypminor->mqlyy515));
+#line 1609 "./mql.c"
+}
+      break;
+    case 213: /* monad_set_chain */
+{
+#line 525 "./mql.yxx"
+delete((mqlyypminor->mqlyy519));
+#line 1616 "./mql.c"
+}
+      break;
+    case 215: /* monad_set_operator */
+{
+#line 533 "./mql.yxx"
 ;
-#line 1642 "./mql.c"
+#line 1623 "./mql.c"
 }
       break;
-    case 230: /* with_max_range_clause */
+    case 217: /* monad_set_name_list */
+    case 243: /* object_type_name_list */
+    case 255: /* list_of_identifier */
 {
-#line 817 "./mql.yxx"
-delete((mqlyypminor->mqlyy278));
-#line 1649 "./mql.c"
+#line 609 "./mql.yxx"
+delete((mqlyypminor->mqlyy216));
+#line 1632 "./mql.c"
 }
       break;
-    case 231: /* returning_clause */
+    case 218: /* monad_set_name */
 {
-#line 829 "./mql.yxx"
-delete((mqlyypminor->mqlyy309));
-#line 1656 "./mql.c"
+#line 604 "./mql.yxx"
+deleteToken((mqlyypminor->mqlyy0));
+#line 1639 "./mql.c"
 }
       break;
-    case 232: /* where_clause */
-    case 240: /* mql_query */
-    case 264: /* topograph */
+    case 221: /* ec_declaration_list */
+    case 222: /* ec_declaration */
 {
-#line 870 "./mql.yxx"
-delete((mqlyypminor->mqlyy295));
-#line 1665 "./mql.c"
+#line 637 "./mql.yxx"
+delete((mqlyypminor->mqlyy93));
+#line 1647 "./mql.c"
 }
       break;
-    case 239: /* using_range_clause */
+    case 224: /* ec_name */
 {
-#line 844 "./mql.yxx"
-delete((mqlyypminor->mqlyy582));
-#line 1672 "./mql.c"
+#line 660 "./mql.yxx"
+ deleteToken((mqlyypminor->mqlyy0));  
+#line 1654 "./mql.c"
 }
       break;
-    case 241: /* single_monad_specification */
-    case 298: /* restrictor */
-    case 299: /* limit */
+    case 225: /* opt_ec_initialization */
 {
-#line 885 "./mql.yxx"
+#line 664 "./mql.yxx"
+delete((mqlyypminor->mqlyy259));
+#line 1661 "./mql.c"
+}
+      break;
+    case 227: /* ec_update_list */
+    case 228: /* ec_update */
+{
+#line 681 "./mql.yxx"
+delete((mqlyypminor->mqlyy138));
+#line 1669 "./mql.c"
+}
+      break;
+    case 233: /* select_clause */
+    case 238: /* focus_specification */
+{
+#line 759 "./mql.yxx"
 ;
-#line 1681 "./mql.c"
+#line 1677 "./mql.c"
 }
       break;
-    case 244: /* feature_list */
-    case 297: /* feature_retrieval */
+    case 235: /* with_max_range_clause */
 {
-#line 1275 "./mql.yxx"
-delete((mqlyypminor->mqlyy242));
-#line 1689 "./mql.c"
+#line 818 "./mql.yxx"
+delete((mqlyypminor->mqlyy326));
+#line 1684 "./mql.c"
 }
       break;
-    case 247: /* with_id_d_specification */
-    case 249: /* id_d_const */
+    case 236: /* returning_clause */
 {
-#line 1032 "./mql.yxx"
+#line 830 "./mql.yxx"
+delete((mqlyypminor->mqlyy45));
+#line 1691 "./mql.c"
+}
+      break;
+    case 237: /* where_clause */
+    case 245: /* mql_query */
+    case 275: /* topograph */
+{
+#line 871 "./mql.yxx"
+delete((mqlyypminor->mqlyy559));
+#line 1700 "./mql.c"
+}
+      break;
+    case 244: /* using_range_clause */
+{
+#line 845 "./mql.yxx"
+delete((mqlyypminor->mqlyy94));
+#line 1707 "./mql.c"
+}
+      break;
+    case 246: /* single_monad_specification */
+    case 306: /* restrictor */
+    case 307: /* limit */
+{
+#line 886 "./mql.yxx"
 ;
-#line 1697 "./mql.c"
+#line 1716 "./mql.c"
 }
       break;
-    case 248: /* object_creation_specification */
-    case 260: /* object_update_specification */
+    case 248: /* aggregate_feature_list */
+    case 251: /* aggregate_feature */
 {
-#line 1047 "./mql.yxx"
-delete((mqlyypminor->mqlyy365));
-#line 1705 "./mql.c"
+#line 928 "./mql.yxx"
+delete((mqlyypminor->mqlyy250));
+#line 1724 "./mql.c"
 }
       break;
-    case 250: /* opt_list_of_feature_assignments */
-    case 251: /* list_of_feature_assignments */
-    case 252: /* feature_assignment */
+    case 250: /* feature_constraints */
+    case 292: /* ffeatures */
 {
-#line 1056 "./mql.yxx"
-delete((mqlyypminor->mqlyy600));
-#line 1714 "./mql.c"
+#line 1452 "./mql.yxx"
+delete((mqlyypminor->mqlyy441));
+#line 1732 "./mql.c"
 }
       break;
-    case 253: /* list_of_integer */
+    case 252: /* aggregate_feature_comparison */
+    case 295: /* feature_comparison */
 {
-#line 1102 "./mql.yxx"
-delete((mqlyypminor->mqlyy327));
-#line 1721 "./mql.c"
+#line 951 "./mql.yxx"
+delete((mqlyypminor->mqlyy398));
+#line 1740 "./mql.c"
 }
       break;
-    case 258: /* object_creation_list */
-    case 259: /* object_creation_no_object_type */
+    case 253: /* comparison_operator */
 {
-#line 1166 "./mql.yxx"
-delete((mqlyypminor->mqlyy457));
-#line 1729 "./mql.c"
-}
-      break;
-    case 265: /* blocks */
-    case 290: /* opt_blocks */
-{
-#line 1301 "./mql.yxx"
-delete((mqlyypminor->mqlyy377));
-#line 1737 "./mql.c"
-}
-      break;
-    case 266: /* block_string */
-{
-#line 1330 "./mql.yxx"
-delete((mqlyypminor->mqlyy205));
-#line 1744 "./mql.c"
-}
-      break;
-    case 267: /* block_string0 */
-{
-#line 1306 "./mql.yxx"
-delete((mqlyypminor->mqlyy445));
-#line 1751 "./mql.c"
-}
-      break;
-    case 268: /* block */
-{
-#line 1482 "./mql.yxx"
-delete((mqlyypminor->mqlyy414));
-#line 1758 "./mql.c"
-}
-      break;
-    case 269: /* block_string1 */
-{
-#line 1313 "./mql.yxx"
-delete((mqlyypminor->mqlyy498));
-#line 1765 "./mql.c"
-}
-      break;
-    case 271: /* block_string2 */
-{
-#line 1320 "./mql.yxx"
-delete((mqlyypminor->mqlyy551));
-#line 1772 "./mql.c"
-}
-      break;
-    case 276: /* retrieval */
-    case 296: /* gap_retrieval */
-{
-#line 1360 "./mql.yxx"
+#line 1491 "./mql.yxx"
 ;
-#line 1780 "./mql.c"
+#line 1747 "./mql.c"
 }
       break;
-    case 277: /* firstlast */
+    case 254: /* value */
 {
-#line 1367 "./mql.yxx"
+#line 1505 "./mql.yxx"
+delete((mqlyypminor->mqlyy356));
+#line 1754 "./mql.c"
+}
+      break;
+    case 256: /* list_of_integer */
+{
+#line 1153 "./mql.yxx"
+delete((mqlyypminor->mqlyy71));
+#line 1761 "./mql.c"
+}
+      break;
+    case 257: /* feature_list */
+    case 305: /* feature_retrieval */
+{
+#line 1326 "./mql.yxx"
+delete((mqlyypminor->mqlyy98));
+#line 1769 "./mql.c"
+}
+      break;
+    case 260: /* with_id_d_specification */
+    case 262: /* id_d_const */
+{
+#line 1083 "./mql.yxx"
 ;
-#line 1787 "./mql.c"
+#line 1777 "./mql.c"
 }
       break;
-    case 278: /* monad_set_relation_clause */
+    case 261: /* object_creation_specification */
+    case 271: /* object_update_specification */
 {
-#line 1374 "./mql.yxx"
-delete((mqlyypminor->mqlyy385));
+#line 1098 "./mql.yxx"
+delete((mqlyypminor->mqlyy173));
+#line 1785 "./mql.c"
+}
+      break;
+    case 263: /* opt_list_of_feature_assignments */
+    case 264: /* list_of_feature_assignments */
+    case 265: /* feature_assignment */
+{
+#line 1107 "./mql.yxx"
+delete((mqlyypminor->mqlyy184));
 #line 1794 "./mql.c"
 }
       break;
-    case 279: /* monad_set_relation_operation */
+    case 269: /* object_creation_list */
+    case 270: /* object_creation_no_object_type */
 {
-#line 1383 "./mql.yxx"
-
-#line 1801 "./mql.c"
+#line 1217 "./mql.yxx"
+delete((mqlyypminor->mqlyy17));
+#line 1802 "./mql.c"
 }
       break;
-    case 280: /* universe_or_substrate */
+    case 276: /* blocks */
+    case 298: /* opt_blocks */
 {
-#line 1393 "./mql.yxx"
- 
-#line 1808 "./mql.c"
+#line 1352 "./mql.yxx"
+delete((mqlyypminor->mqlyy369));
+#line 1810 "./mql.c"
 }
       break;
-    case 281: /* feature_constraints */
-    case 282: /* ffeatures */
+    case 277: /* block_string */
 {
-#line 1401 "./mql.yxx"
-delete((mqlyypminor->mqlyy288));
-#line 1816 "./mql.c"
+#line 1381 "./mql.yxx"
+delete((mqlyypminor->mqlyy557));
+#line 1817 "./mql.c"
 }
       break;
-    case 283: /* fterm */
+    case 278: /* block_string0 */
 {
-#line 1413 "./mql.yxx"
-delete((mqlyypminor->mqlyy313));
-#line 1823 "./mql.c"
+#line 1357 "./mql.yxx"
+delete((mqlyypminor->mqlyy189));
+#line 1824 "./mql.c"
 }
       break;
-    case 284: /* ffactor */
+    case 279: /* block */
+{
+#line 1533 "./mql.yxx"
+delete((mqlyypminor->mqlyy478));
+#line 1831 "./mql.c"
+}
+      break;
+    case 280: /* block_string1 */
+{
+#line 1364 "./mql.yxx"
+delete((mqlyypminor->mqlyy242));
+#line 1838 "./mql.c"
+}
+      break;
+    case 282: /* block_string2 */
+{
+#line 1371 "./mql.yxx"
+delete((mqlyypminor->mqlyy295));
+#line 1845 "./mql.c"
+}
+      break;
+    case 287: /* retrieval */
+    case 304: /* gap_retrieval */
+{
+#line 1411 "./mql.yxx"
+;
+#line 1853 "./mql.c"
+}
+      break;
+    case 288: /* firstlast */
 {
 #line 1418 "./mql.yxx"
-delete((mqlyypminor->mqlyy540));
-#line 1830 "./mql.c"
-}
-      break;
-    case 285: /* feature_comparison */
-{
-#line 1428 "./mql.yxx"
-delete((mqlyypminor->mqlyy407));
-#line 1837 "./mql.c"
-}
-      break;
-    case 286: /* comparison_operator */
-{
-#line 1440 "./mql.yxx"
 ;
-#line 1844 "./mql.c"
+#line 1860 "./mql.c"
 }
       break;
-    case 287: /* value */
+    case 289: /* monad_set_relation_clause */
 {
-#line 1454 "./mql.yxx"
-delete((mqlyypminor->mqlyy204));
-#line 1851 "./mql.c"
-}
-      break;
-    case 288: /* object_reference_usage */
-{
-#line 1470 "./mql.yxx"
-delete((mqlyypminor->mqlyy6));
-#line 1858 "./mql.c"
-}
-      break;
-    case 291: /* object_block */
-    case 295: /* notexist_object_block */
-{
-#line 1523 "./mql.yxx"
-delete((mqlyypminor->mqlyy125));
-#line 1866 "./mql.c"
-}
-      break;
-    case 292: /* power */
-{
-#line 1552 "./mql.yxx"
-delete((mqlyypminor->mqlyy68));
-#line 1873 "./mql.c"
-}
-      break;
-    case 293: /* opt_gap_block */
-{
-#line 1495 "./mql.yxx"
+#line 1425 "./mql.yxx"
 delete((mqlyypminor->mqlyy265));
-#line 1880 "./mql.c"
+#line 1867 "./mql.c"
 }
       break;
-    case 294: /* gap_block */
+    case 290: /* monad_set_relation_operation */
 {
-#line 1509 "./mql.yxx"
-delete((mqlyypminor->mqlyy18));
-#line 1887 "./mql.c"
+#line 1434 "./mql.yxx"
+
+#line 1874 "./mql.c"
+}
+      break;
+    case 291: /* universe_or_substrate */
+{
+#line 1444 "./mql.yxx"
+ 
+#line 1881 "./mql.c"
+}
+      break;
+    case 293: /* fterm */
+{
+#line 1464 "./mql.yxx"
+delete((mqlyypminor->mqlyy201));
+#line 1888 "./mql.c"
+}
+      break;
+    case 294: /* ffactor */
+{
+#line 1469 "./mql.yxx"
+delete((mqlyypminor->mqlyy132));
+#line 1895 "./mql.c"
+}
+      break;
+    case 296: /* object_reference_usage */
+{
+#line 1521 "./mql.yxx"
+delete((mqlyypminor->mqlyy494));
+#line 1902 "./mql.c"
+}
+      break;
+    case 299: /* object_block */
+    case 303: /* notexist_object_block */
+{
+#line 1574 "./mql.yxx"
+delete((mqlyypminor->mqlyy549));
+#line 1910 "./mql.c"
+}
+      break;
+    case 300: /* power */
+{
+#line 1603 "./mql.yxx"
+delete((mqlyypminor->mqlyy92));
+#line 1917 "./mql.c"
+}
+      break;
+    case 301: /* opt_gap_block */
+{
+#line 1546 "./mql.yxx"
+delete((mqlyypminor->mqlyy97));
+#line 1924 "./mql.c"
+}
+      break;
+    case 302: /* gap_block */
+{
+#line 1560 "./mql.yxx"
+delete((mqlyypminor->mqlyy306));
+#line 1931 "./mql.c"
 }
       break;
     default:  break;   /* If no destructor action specified: do nothing */
@@ -104663,7 +106808,7 @@ static void mqlyyStackOverflow(mqlyyParser *mqlyypParser, MQLYYMINORTYPE *mqlyyp
   std::string errMsg = "stack overflow. Bailing out...\n";
   pEE->pError->appendError(errMsg);
    
-#line 2074 "./mql.c"
+#line 2118 "./mql.c"
    MQLParserARG_STORE; /* Suppress warning about unused %extra_argument var */
 }
 
@@ -104733,375 +106878,387 @@ static const struct {
   MQLYYCODETYPE lhs;         /* Symbol on the left-hand side of the rule */
   unsigned char nrhs;     /* Number of right-hand side symbols in the rule */
 } mqlyyRuleInfo[] = {
-  { 127, 2 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 128, 1 },
-  { 129, 5 },
-  { 176, 1 },
-  { 176, 1 },
-  { 130, 4 },
-  { 131, 4 },
-  { 177, 3 },
-  { 177, 0 },
-  { 178, 3 },
-  { 178, 0 },
-  { 179, 1 },
-  { 179, 0 },
-  { 132, 3 },
-  { 133, 3 },
-  { 181, 0 },
+  { 131, 2 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 132, 1 },
+  { 133, 5 },
   { 181, 1 },
-  { 165, 3 },
-  { 166, 3 },
-  { 182, 6 },
-  { 183, 1 },
-  { 183, 1 },
-  { 167, 2 },
-  { 168, 2 },
-  { 169, 2 },
-  { 134, 10 },
-  { 187, 0 },
-  { 187, 4 },
-  { 187, 4 },
-  { 187, 4 },
-  { 188, 0 },
-  { 188, 4 },
-  { 188, 6 },
-  { 188, 3 },
-  { 185, 1 },
-  { 185, 0 },
-  { 189, 1 },
+  { 181, 1 },
+  { 134, 4 },
+  { 135, 4 },
+  { 182, 3 },
+  { 182, 0 },
+  { 183, 3 },
+  { 183, 0 },
+  { 184, 1 },
+  { 184, 0 },
+  { 136, 3 },
+  { 137, 3 },
+  { 186, 0 },
+  { 186, 1 },
+  { 170, 3 },
+  { 171, 3 },
+  { 187, 6 },
+  { 188, 1 },
+  { 188, 1 },
+  { 172, 2 },
+  { 173, 2 },
+  { 174, 2 },
+  { 138, 10 },
+  { 192, 0 },
+  { 192, 4 },
+  { 192, 4 },
+  { 192, 4 },
+  { 193, 0 },
+  { 193, 4 },
+  { 193, 6 },
+  { 193, 3 },
   { 190, 1 },
   { 190, 0 },
-  { 191, 1 },
-  { 191, 2 },
-  { 192, 6 },
-  { 192, 6 },
-  { 194, 2 },
-  { 194, 4 },
-  { 194, 4 },
-  { 194, 2 },
-  { 194, 2 },
-  { 194, 3 },
-  { 194, 5 },
-  { 194, 5 },
-  { 194, 5 },
-  { 197, 1 },
-  { 197, 1 },
-  { 197, 1 },
-  { 198, 2 },
-  { 198, 2 },
-  { 198, 0 },
-  { 186, 3 },
-  { 186, 0 },
-  { 200, 2 },
-  { 200, 0 },
-  { 199, 0 },
-  { 199, 3 },
-  { 195, 2 },
+  { 194, 1 },
+  { 195, 1 },
   { 195, 0 },
   { 196, 1 },
-  { 196, 0 },
-  { 135, 7 },
+  { 196, 2 },
+  { 197, 6 },
+  { 197, 6 },
+  { 199, 2 },
+  { 199, 4 },
+  { 199, 4 },
+  { 199, 2 },
+  { 199, 2 },
+  { 199, 3 },
+  { 199, 5 },
+  { 199, 5 },
+  { 199, 5 },
   { 202, 1 },
-  { 202, 2 },
+  { 202, 1 },
+  { 202, 1 },
   { 203, 2 },
-  { 203, 3 },
-  { 204, 1 },
+  { 203, 2 },
+  { 203, 0 },
+  { 191, 3 },
+  { 191, 0 },
+  { 205, 2 },
+  { 205, 0 },
   { 204, 0 },
-  { 136, 6 },
-  { 137, 2 },
-  { 138, 2 },
-  { 139, 9 },
-  { 140, 4 },
-  { 208, 1 },
+  { 204, 3 },
+  { 200, 2 },
+  { 200, 0 },
+  { 201, 1 },
+  { 201, 0 },
+  { 139, 7 },
+  { 207, 1 },
+  { 207, 2 },
+  { 208, 2 },
   { 208, 3 },
-  { 210, 1 },
-  { 210, 1 },
-  { 210, 1 },
-  { 170, 3 },
-  { 171, 4 },
-  { 171, 4 },
-  { 211, 1 },
-  { 211, 1 },
-  { 172, 6 },
-  { 173, 6 },
-  { 173, 6 },
-  { 173, 6 },
-  { 173, 6 },
-  { 174, 4 },
+  { 209, 1 },
+  { 209, 0 },
+  { 140, 6 },
+  { 141, 2 },
+  { 142, 2 },
+  { 143, 9 },
+  { 144, 4 },
   { 213, 1 },
-  { 212, 1 },
-  { 212, 3 },
-  { 141, 7 },
-  { 214, 1 },
-  { 214, 1 },
+  { 213, 3 },
   { 215, 1 },
+  { 215, 1 },
+  { 215, 1 },
+  { 175, 3 },
+  { 176, 4 },
+  { 176, 4 },
   { 216, 1 },
-  { 216, 3 },
-  { 217, 3 },
+  { 216, 1 },
+  { 177, 6 },
+  { 178, 6 },
+  { 178, 6 },
+  { 178, 6 },
+  { 178, 6 },
+  { 179, 4 },
   { 218, 1 },
-  { 218, 0 },
+  { 217, 1 },
+  { 217, 3 },
+  { 145, 7 },
+  { 219, 1 },
   { 219, 1 },
   { 220, 1 },
-  { 220, 0 },
-  { 142, 7 },
-  { 222, 1 },
+  { 221, 1 },
+  { 221, 3 },
   { 222, 3 },
-  { 223, 4 },
-  { 223, 4 },
-  { 223, 2 },
-  { 221, 2 },
-  { 224, 1 },
-  { 224, 2 },
+  { 223, 1 },
+  { 223, 0 },
   { 224, 1 },
   { 225, 1 },
-  { 143, 3 },
-  { 144, 6 },
-  { 226, 1 },
-  { 227, 3 },
-  { 145, 5 },
-  { 145, 6 },
-  { 228, 3 },
-  { 233, 1 },
-  { 233, 1 },
-  { 234, 1 },
-  { 234, 0 },
-  { 229, 2 },
-  { 229, 0 },
-  { 235, 1 },
-  { 235, 1 },
-  { 209, 3 },
-  { 236, 1 },
-  { 236, 3 },
-  { 237, 1 },
-  { 237, 3 },
-  { 237, 2 },
-  { 230, 0 },
-  { 230, 5 },
-  { 230, 5 },
-  { 230, 9 },
-  { 231, 0 },
-  { 231, 3 },
-  { 231, 3 },
-  { 231, 5 },
-  { 239, 0 },
-  { 239, 2 },
-  { 239, 6 },
-  { 239, 4 },
-  { 238, 1 },
-  { 238, 3 },
-  { 232, 2 },
+  { 225, 0 },
   { 146, 7 },
+  { 227, 1 },
+  { 227, 3 },
+  { 228, 4 },
+  { 228, 4 },
+  { 228, 2 },
+  { 226, 2 },
+  { 229, 1 },
+  { 229, 2 },
+  { 229, 1 },
+  { 230, 1 },
+  { 147, 3 },
+  { 148, 6 },
+  { 231, 1 },
+  { 232, 3 },
+  { 149, 5 },
+  { 149, 6 },
+  { 233, 3 },
+  { 238, 1 },
+  { 238, 1 },
+  { 239, 1 },
+  { 239, 0 },
+  { 234, 2 },
+  { 234, 0 },
+  { 240, 1 },
+  { 240, 1 },
+  { 214, 3 },
+  { 241, 1 },
   { 241, 3 },
-  { 147, 9 },
   { 242, 1 },
-  { 184, 1 },
-  { 184, 1 },
-  { 148, 10 },
-  { 148, 12 },
-  { 148, 12 },
-  { 243, 4 },
-  { 243, 4 },
-  { 243, 0 },
-  { 150, 3 },
-  { 151, 7 },
-  { 149, 8 },
-  { 245, 2 },
-  { 245, 1 },
-  { 245, 0 },
-  { 152, 2 },
-  { 153, 6 },
-  { 246, 1 },
-  { 246, 1 },
-  { 246, 0 },
-  { 154, 6 },
-  { 155, 2 },
-  { 156, 2 },
-  { 157, 6 },
-  { 205, 3 },
-  { 247, 4 },
-  { 247, 0 },
-  { 249, 1 },
-  { 249, 1 },
-  { 248, 4 },
-  { 250, 1 },
-  { 250, 0 },
-  { 251, 1 },
-  { 251, 2 },
-  { 252, 4 },
-  { 193, 1 },
-  { 193, 1 },
-  { 201, 1 },
-  { 201, 1 },
-  { 201, 1 },
-  { 201, 1 },
-  { 201, 2 },
-  { 201, 3 },
-  { 201, 3 },
-  { 253, 1 },
-  { 253, 3 },
-  { 254, 1 },
-  { 254, 3 },
+  { 242, 3 },
+  { 242, 2 },
+  { 235, 0 },
+  { 235, 5 },
+  { 235, 5 },
+  { 235, 9 },
+  { 236, 0 },
+  { 236, 3 },
+  { 236, 3 },
+  { 236, 5 },
+  { 244, 0 },
+  { 244, 2 },
+  { 244, 6 },
+  { 244, 4 },
+  { 243, 1 },
+  { 243, 3 },
+  { 237, 2 },
+  { 150, 7 },
+  { 246, 3 },
+  { 151, 9 },
+  { 247, 1 },
+  { 189, 1 },
+  { 189, 1 },
+  { 152, 12 },
+  { 248, 1 },
+  { 248, 3 },
+  { 251, 4 },
+  { 251, 4 },
+  { 251, 4 },
+  { 251, 4 },
+  { 251, 4 },
+  { 252, 3 },
+  { 252, 5 },
+  { 252, 5 },
+  { 153, 10 },
+  { 153, 12 },
+  { 153, 12 },
+  { 249, 4 },
+  { 249, 4 },
+  { 249, 0 },
+  { 155, 3 },
+  { 156, 7 },
+  { 154, 8 },
+  { 258, 2 },
+  { 258, 1 },
+  { 258, 0 },
+  { 157, 2 },
   { 158, 6 },
-  { 207, 3 },
-  { 255, 1 },
-  { 255, 1 },
+  { 259, 1 },
+  { 259, 1 },
+  { 259, 0 },
+  { 159, 6 },
+  { 160, 2 },
+  { 161, 2 },
+  { 162, 6 },
+  { 210, 3 },
+  { 260, 4 },
+  { 260, 0 },
+  { 262, 1 },
+  { 262, 1 },
+  { 261, 4 },
+  { 263, 1 },
+  { 263, 0 },
+  { 264, 1 },
+  { 264, 2 },
+  { 265, 4 },
+  { 198, 1 },
+  { 198, 1 },
+  { 206, 1 },
+  { 206, 1 },
+  { 206, 1 },
+  { 206, 1 },
+  { 206, 2 },
+  { 206, 3 },
+  { 206, 3 },
   { 256, 1 },
   { 256, 3 },
-  { 257, 1 },
-  { 175, 9 },
-  { 258, 1 },
-  { 258, 2 },
-  { 259, 8 },
-  { 159, 5 },
-  { 206, 1 },
-  { 206, 1 },
-  { 260, 4 },
-  { 160, 5 },
-  { 161, 5 },
-  { 261, 3 },
-  { 262, 1 },
-  { 162, 5 },
-  { 163, 10 },
-  { 263, 1 },
-  { 263, 1 },
-  { 244, 1 },
-  { 244, 3 },
-  { 164, 1 },
-  { 240, 1 },
-  { 264, 1 },
-  { 265, 2 },
+  { 255, 1 },
+  { 255, 3 },
+  { 163, 6 },
+  { 212, 3 },
+  { 266, 1 },
+  { 266, 1 },
   { 267, 1 },
   { 267, 3 },
+  { 268, 1 },
+  { 180, 9 },
   { 269, 1 },
-  { 269, 3 },
-  { 271, 1 },
-  { 271, 2 },
-  { 271, 3 },
-  { 266, 1 },
-  { 266, 3 },
-  { 272, 1 },
-  { 272, 1 },
-  { 273, 0 },
-  { 273, 2 },
-  { 275, 0 },
-  { 275, 1 },
+  { 269, 2 },
+  { 270, 8 },
+  { 164, 5 },
+  { 211, 1 },
+  { 211, 1 },
+  { 271, 4 },
+  { 165, 5 },
+  { 166, 5 },
+  { 272, 3 },
+  { 273, 1 },
+  { 167, 5 },
+  { 168, 10 },
   { 274, 1 },
-  { 276, 0 },
-  { 276, 1 },
-  { 276, 1 },
-  { 276, 1 },
-  { 277, 0 },
-  { 277, 1 },
+  { 274, 1 },
+  { 257, 1 },
+  { 257, 3 },
+  { 169, 1 },
+  { 245, 1 },
+  { 275, 1 },
+  { 276, 2 },
+  { 278, 1 },
+  { 278, 3 },
+  { 280, 1 },
+  { 280, 3 },
+  { 282, 1 },
+  { 282, 2 },
+  { 282, 3 },
   { 277, 1 },
   { 277, 3 },
-  { 278, 6 },
-  { 278, 4 },
-  { 278, 0 },
+  { 283, 1 },
+  { 283, 1 },
+  { 284, 0 },
+  { 284, 2 },
+  { 286, 0 },
+  { 286, 1 },
+  { 285, 1 },
+  { 287, 0 },
+  { 287, 1 },
+  { 287, 1 },
+  { 287, 1 },
+  { 288, 0 },
+  { 288, 1 },
+  { 288, 1 },
+  { 288, 3 },
+  { 289, 6 },
+  { 289, 4 },
+  { 289, 0 },
+  { 290, 1 },
+  { 290, 1 },
+  { 290, 1 },
+  { 291, 1 },
+  { 291, 1 },
+  { 250, 0 },
+  { 250, 1 },
+  { 292, 1 },
+  { 292, 3 },
+  { 293, 1 },
+  { 293, 3 },
+  { 294, 2 },
+  { 294, 3 },
+  { 294, 1 },
+  { 295, 3 },
+  { 295, 5 },
+  { 295, 5 },
+  { 295, 3 },
+  { 253, 1 },
+  { 253, 1 },
+  { 253, 1 },
+  { 253, 1 },
+  { 253, 1 },
+  { 253, 1 },
+  { 253, 1 },
+  { 253, 1 },
+  { 253, 1 },
+  { 254, 1 },
+  { 254, 1 },
+  { 254, 1 },
+  { 254, 1 },
+  { 297, 1 },
+  { 296, 3 },
+  { 298, 0 },
+  { 298, 1 },
   { 279, 1 },
   { 279, 1 },
   { 279, 1 },
-  { 280, 1 },
-  { 280, 1 },
+  { 279, 1 },
+  { 279, 1 },
   { 281, 0 },
   { 281, 1 },
-  { 282, 1 },
-  { 282, 3 },
-  { 283, 1 },
-  { 283, 3 },
-  { 284, 2 },
-  { 284, 3 },
-  { 284, 1 },
-  { 285, 3 },
-  { 285, 5 },
-  { 285, 5 },
-  { 285, 3 },
-  { 286, 1 },
-  { 286, 1 },
-  { 286, 1 },
-  { 286, 1 },
-  { 286, 1 },
-  { 286, 1 },
-  { 286, 1 },
-  { 286, 1 },
-  { 286, 1 },
-  { 287, 1 },
-  { 287, 1 },
-  { 287, 1 },
-  { 287, 1 },
-  { 289, 1 },
-  { 288, 3 },
-  { 290, 0 },
-  { 290, 1 },
-  { 268, 1 },
-  { 268, 1 },
-  { 268, 1 },
-  { 268, 1 },
-  { 268, 1 },
-  { 270, 0 },
-  { 270, 1 },
-  { 293, 6 },
-  { 296, 0 },
-  { 296, 1 },
-  { 296, 1 },
-  { 296, 1 },
-  { 294, 6 },
-  { 297, 2 },
-  { 297, 0 },
-  { 291, 11 },
-  { 295, 12 },
-  { 292, 2 },
-  { 292, 5 },
-  { 298, 0 },
-  { 298, 2 },
-  { 298, 2 },
-  { 299, 1 },
+  { 301, 6 },
+  { 304, 0 },
+  { 304, 1 },
+  { 304, 1 },
+  { 304, 1 },
+  { 302, 6 },
+  { 305, 2 },
+  { 305, 0 },
+  { 299, 11 },
+  { 303, 12 },
+  { 300, 2 },
+  { 300, 5 },
+  { 306, 0 },
+  { 306, 2 },
+  { 306, 2 },
+  { 307, 1 },
 };
 
 static void mqlyy_accept(mqlyyParser*);  /* Forward Declaration */
@@ -105159,9 +107316,9 @@ static void mqlyy_reduce(
   */
       case 0: /* statement ::= statement_by_itself KEY_GO */
 #line 151 "./mql.yxx"
-{ pEE->pStatement = mqlyymsp[-1].minor.mqlyy160;   mqlyy_destructor(mqlyypParser,1,&mqlyymsp[0].minor);
+{ pEE->pStatement = mqlyymsp[-1].minor.mqlyy440;   mqlyy_destructor(mqlyypParser,1,&mqlyymsp[0].minor);
 }
-#line 2572 "./mql.c"
+#line 2628 "./mql.c"
         break;
       case 1: /* statement_by_itself ::= create_database_statement */
       case 2: /* statement_by_itself ::= initialize_database_statement */ mqlyytestcase(mqlyyruleno==2);
@@ -105182,929 +107339,930 @@ static void mqlyy_reduce(
       case 17: /* statement_by_itself ::= select_statement */ mqlyytestcase(mqlyyruleno==17);
       case 18: /* statement_by_itself ::= select_objects_at_statement */ mqlyytestcase(mqlyyruleno==18);
       case 19: /* statement_by_itself ::= select_objects_having_monads_in_statement */ mqlyytestcase(mqlyyruleno==19);
-      case 20: /* statement_by_itself ::= get_objects_having_monads_in_statement */ mqlyytestcase(mqlyyruleno==20);
-      case 21: /* statement_by_itself ::= get_set_from_feature_statement */ mqlyytestcase(mqlyyruleno==21);
-      case 22: /* statement_by_itself ::= select_object_types_statement */ mqlyytestcase(mqlyyruleno==22);
-      case 23: /* statement_by_itself ::= select_features_statement */ mqlyytestcase(mqlyyruleno==23);
-      case 24: /* statement_by_itself ::= select_enumerations_statement */ mqlyytestcase(mqlyyruleno==24);
-      case 25: /* statement_by_itself ::= select_enumeration_constants_statement */ mqlyytestcase(mqlyyruleno==25);
-      case 26: /* statement_by_itself ::= select_object_types_which_use_enum_statement */ mqlyytestcase(mqlyyruleno==26);
-      case 27: /* statement_by_itself ::= select_min_m_statement */ mqlyytestcase(mqlyyruleno==27);
-      case 28: /* statement_by_itself ::= select_max_m_statement */ mqlyytestcase(mqlyyruleno==28);
-      case 29: /* statement_by_itself ::= create_object_from_monads_statement */ mqlyytestcase(mqlyyruleno==29);
-      case 30: /* statement_by_itself ::= create_object_from_id_ds_statement */ mqlyytestcase(mqlyyruleno==30);
-      case 31: /* statement_by_itself ::= update_objects_by_monads_statement */ mqlyytestcase(mqlyyruleno==31);
-      case 32: /* statement_by_itself ::= update_objects_by_id_ds_statement */ mqlyytestcase(mqlyyruleno==32);
-      case 33: /* statement_by_itself ::= delete_objects_by_monads_statement */ mqlyytestcase(mqlyyruleno==33);
-      case 34: /* statement_by_itself ::= delete_objects_by_id_ds_statement */ mqlyytestcase(mqlyyruleno==34);
-      case 35: /* statement_by_itself ::= get_features_statement */ mqlyytestcase(mqlyyruleno==35);
-      case 36: /* statement_by_itself ::= quit_statement */ mqlyytestcase(mqlyyruleno==36);
-      case 37: /* statement_by_itself ::= create_indexes_statement */ mqlyytestcase(mqlyyruleno==37);
-      case 38: /* statement_by_itself ::= drop_indexes_statement */ mqlyytestcase(mqlyyruleno==38);
-      case 39: /* statement_by_itself ::= begin_transaction_statement */ mqlyytestcase(mqlyyruleno==39);
-      case 40: /* statement_by_itself ::= commit_transaction_statement */ mqlyytestcase(mqlyyruleno==40);
-      case 41: /* statement_by_itself ::= abort_transaction_statement */ mqlyytestcase(mqlyyruleno==41);
-      case 42: /* statement_by_itself ::= select_monad_sets_statement */ mqlyytestcase(mqlyyruleno==42);
-      case 43: /* statement_by_itself ::= get_monad_sets_statement */ mqlyytestcase(mqlyyruleno==43);
-      case 44: /* statement_by_itself ::= create_monad_set_statement */ mqlyytestcase(mqlyyruleno==44);
-      case 45: /* statement_by_itself ::= update_monad_set_statement */ mqlyytestcase(mqlyyruleno==45);
-      case 46: /* statement_by_itself ::= drop_monad_set_statement */ mqlyytestcase(mqlyyruleno==46);
-      case 47: /* statement_by_itself ::= create_objects_statement */ mqlyytestcase(mqlyyruleno==47);
+      case 20: /* statement_by_itself ::= get_aggregate_features_statement */ mqlyytestcase(mqlyyruleno==20);
+      case 21: /* statement_by_itself ::= get_objects_having_monads_in_statement */ mqlyytestcase(mqlyyruleno==21);
+      case 22: /* statement_by_itself ::= get_set_from_feature_statement */ mqlyytestcase(mqlyyruleno==22);
+      case 23: /* statement_by_itself ::= select_object_types_statement */ mqlyytestcase(mqlyyruleno==23);
+      case 24: /* statement_by_itself ::= select_features_statement */ mqlyytestcase(mqlyyruleno==24);
+      case 25: /* statement_by_itself ::= select_enumerations_statement */ mqlyytestcase(mqlyyruleno==25);
+      case 26: /* statement_by_itself ::= select_enumeration_constants_statement */ mqlyytestcase(mqlyyruleno==26);
+      case 27: /* statement_by_itself ::= select_object_types_which_use_enum_statement */ mqlyytestcase(mqlyyruleno==27);
+      case 28: /* statement_by_itself ::= select_min_m_statement */ mqlyytestcase(mqlyyruleno==28);
+      case 29: /* statement_by_itself ::= select_max_m_statement */ mqlyytestcase(mqlyyruleno==29);
+      case 30: /* statement_by_itself ::= create_object_from_monads_statement */ mqlyytestcase(mqlyyruleno==30);
+      case 31: /* statement_by_itself ::= create_object_from_id_ds_statement */ mqlyytestcase(mqlyyruleno==31);
+      case 32: /* statement_by_itself ::= update_objects_by_monads_statement */ mqlyytestcase(mqlyyruleno==32);
+      case 33: /* statement_by_itself ::= update_objects_by_id_ds_statement */ mqlyytestcase(mqlyyruleno==33);
+      case 34: /* statement_by_itself ::= delete_objects_by_monads_statement */ mqlyytestcase(mqlyyruleno==34);
+      case 35: /* statement_by_itself ::= delete_objects_by_id_ds_statement */ mqlyytestcase(mqlyyruleno==35);
+      case 36: /* statement_by_itself ::= get_features_statement */ mqlyytestcase(mqlyyruleno==36);
+      case 37: /* statement_by_itself ::= quit_statement */ mqlyytestcase(mqlyyruleno==37);
+      case 38: /* statement_by_itself ::= create_indexes_statement */ mqlyytestcase(mqlyyruleno==38);
+      case 39: /* statement_by_itself ::= drop_indexes_statement */ mqlyytestcase(mqlyyruleno==39);
+      case 40: /* statement_by_itself ::= begin_transaction_statement */ mqlyytestcase(mqlyyruleno==40);
+      case 41: /* statement_by_itself ::= commit_transaction_statement */ mqlyytestcase(mqlyyruleno==41);
+      case 42: /* statement_by_itself ::= abort_transaction_statement */ mqlyytestcase(mqlyyruleno==42);
+      case 43: /* statement_by_itself ::= select_monad_sets_statement */ mqlyytestcase(mqlyyruleno==43);
+      case 44: /* statement_by_itself ::= get_monad_sets_statement */ mqlyytestcase(mqlyyruleno==44);
+      case 45: /* statement_by_itself ::= create_monad_set_statement */ mqlyytestcase(mqlyyruleno==45);
+      case 46: /* statement_by_itself ::= update_monad_set_statement */ mqlyytestcase(mqlyyruleno==46);
+      case 47: /* statement_by_itself ::= drop_monad_set_statement */ mqlyytestcase(mqlyyruleno==47);
+      case 48: /* statement_by_itself ::= create_objects_statement */ mqlyytestcase(mqlyyruleno==48);
 #line 155 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = mqlyymsp[0].minor.mqlyy160; }
-#line 2623 "./mql.c"
+{ mqlyygotominor.mqlyy440 = mqlyymsp[0].minor.mqlyy440; }
+#line 2680 "./mql.c"
         break;
-      case 48: /* create_database_statement ::= KEY_CREATE KEY_DATABASE database_name opt_WITH_KEY opt_USING_ENCODING */
-#line 210 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new CreateDatabaseStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-2].minor.mqlyy0); deleteToken(mqlyymsp[-1].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-4].minor);
+      case 49: /* create_database_statement ::= KEY_CREATE KEY_DATABASE database_name opt_WITH_KEY opt_USING_ENCODING */
+#line 211 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new CreateDatabaseStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-2].minor.mqlyy0); deleteToken(mqlyymsp[-1].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,3,&mqlyymsp[-3].minor);
-}
-#line 2630 "./mql.c"
-        break;
-      case 49: /* database_name ::= IDENTIFIER */
-      case 50: /* database_name ::= STRING */ mqlyytestcase(mqlyyruleno==50);
-      case 142: /* monad_set_name ::= IDENTIFIER */ mqlyytestcase(mqlyyruleno==142);
-      case 148: /* enumeration_name ::= IDENTIFIER */ mqlyytestcase(mqlyyruleno==148);
-      case 154: /* ec_name ::= IDENTIFIER */ mqlyytestcase(mqlyyruleno==154);
-      case 170: /* segment_name ::= IDENTIFIER */ mqlyytestcase(mqlyyruleno==170);
-      case 207: /* object_type_to_find ::= choice_object_type_or_all */ mqlyytestcase(mqlyyruleno==207);
-      case 208: /* choice_object_type_or_all ::= object_type_name */ mqlyytestcase(mqlyyruleno==208);
-      case 242: /* feature_name ::= IDENTIFIER */ mqlyytestcase(mqlyyruleno==242);
-      case 273: /* object_type_name_to_delete ::= choice_object_type_or_all */ mqlyytestcase(mqlyyruleno==273);
-      case 298: /* mark_declaration ::= MARK */ mqlyytestcase(mqlyyruleno==298);
-      case 299: /* object_reference ::= IDENTIFIER */ mqlyytestcase(mqlyyruleno==299);
-      case 342: /* enum_const ::= IDENTIFIER */ mqlyytestcase(mqlyyruleno==342);
-#line 215 "./mql.yxx"
-{ mqlyygotominor.mqlyy0 = mqlyymsp[0].minor.mqlyy0; }
-#line 2647 "./mql.c"
-        break;
-      case 51: /* initialize_database_statement ::= KEY_INITIALIZE KEY_DATABASE database_name opt_WITH_KEY */
-#line 222 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new InitializeDatabaseStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,6,&mqlyymsp[-3].minor);
-  mqlyy_destructor(mqlyypParser,3,&mqlyymsp[-2].minor);
-}
-#line 2654 "./mql.c"
-        break;
-      case 52: /* use_statement ::= KEY_USE opt_DATABASE database_name opt_WITH_KEY */
-#line 227 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new UseStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,7,&mqlyymsp[-3].minor);
-  mqlyy_destructor(mqlyypParser,179,&mqlyymsp[-2].minor);
-}
-#line 2661 "./mql.c"
-        break;
-      case 53: /* opt_WITH_KEY ::= KEY_WITH KEY_KEY STRING */
-#line 231 "./mql.yxx"
-{ mqlyygotominor.mqlyy0 = mqlyymsp[0].minor.mqlyy0;   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-2].minor);
-  mqlyy_destructor(mqlyypParser,9,&mqlyymsp[-1].minor);
-}
-#line 2668 "./mql.c"
-        break;
-      case 54: /* opt_WITH_KEY ::= */
-      case 56: /* opt_USING_ENCODING ::= */ mqlyytestcase(mqlyyruleno==56);
-#line 232 "./mql.yxx"
-{ mqlyygotominor.mqlyy0 = newToken(); mqlyygotominor.mqlyy0->setString(new std::string("")); }
-#line 2674 "./mql.c"
-        break;
-      case 55: /* opt_USING_ENCODING ::= KEY_USING KEY_ENCODING STRING */
-#line 237 "./mql.yxx"
-{ mqlyygotominor.mqlyy0 = mqlyymsp[0].minor.mqlyy0;   mqlyy_destructor(mqlyypParser,10,&mqlyymsp[-2].minor);
-  mqlyy_destructor(mqlyypParser,11,&mqlyymsp[-1].minor);
-}
-#line 2681 "./mql.c"
-        break;
-      case 57: /* opt_DATABASE ::= KEY_DATABASE */
-#line 243 "./mql.yxx"
-{ mqlyygotominor.mqlyy292=0;  mqlyy_destructor(mqlyypParser,3,&mqlyymsp[0].minor);
 }
 #line 2687 "./mql.c"
         break;
-      case 58: /* opt_DATABASE ::= */
-#line 244 "./mql.yxx"
-{ mqlyygotominor.mqlyy292=0;}
-#line 2692 "./mql.c"
+      case 50: /* database_name ::= IDENTIFIER */
+      case 51: /* database_name ::= STRING */ mqlyytestcase(mqlyyruleno==51);
+      case 143: /* monad_set_name ::= IDENTIFIER */ mqlyytestcase(mqlyyruleno==143);
+      case 149: /* enumeration_name ::= IDENTIFIER */ mqlyytestcase(mqlyyruleno==149);
+      case 155: /* ec_name ::= IDENTIFIER */ mqlyytestcase(mqlyyruleno==155);
+      case 171: /* segment_name ::= IDENTIFIER */ mqlyytestcase(mqlyyruleno==171);
+      case 208: /* object_type_to_find ::= choice_object_type_or_all */ mqlyytestcase(mqlyyruleno==208);
+      case 209: /* choice_object_type_or_all ::= object_type_name */ mqlyytestcase(mqlyyruleno==209);
+      case 254: /* feature_name ::= IDENTIFIER */ mqlyytestcase(mqlyyruleno==254);
+      case 285: /* object_type_name_to_delete ::= choice_object_type_or_all */ mqlyytestcase(mqlyyruleno==285);
+      case 310: /* mark_declaration ::= MARK */ mqlyytestcase(mqlyyruleno==310);
+      case 311: /* object_reference ::= IDENTIFIER */ mqlyytestcase(mqlyyruleno==311);
+      case 354: /* enum_const ::= IDENTIFIER */ mqlyytestcase(mqlyyruleno==354);
+#line 216 "./mql.yxx"
+{ mqlyygotominor.mqlyy0 = mqlyymsp[0].minor.mqlyy0; }
+#line 2704 "./mql.c"
         break;
-      case 59: /* drop_database_statement ::= KEY_DROP KEY_DATABASE database_name */
-#line 250 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new DropDatabaseStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,12,&mqlyymsp[-2].minor);
+      case 52: /* initialize_database_statement ::= KEY_INITIALIZE KEY_DATABASE database_name opt_WITH_KEY */
+#line 223 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new InitializeDatabaseStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,6,&mqlyymsp[-3].minor);
+  mqlyy_destructor(mqlyypParser,3,&mqlyymsp[-2].minor);
+}
+#line 2711 "./mql.c"
+        break;
+      case 53: /* use_statement ::= KEY_USE opt_DATABASE database_name opt_WITH_KEY */
+#line 228 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new UseStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,7,&mqlyymsp[-3].minor);
+  mqlyy_destructor(mqlyypParser,184,&mqlyymsp[-2].minor);
+}
+#line 2718 "./mql.c"
+        break;
+      case 54: /* opt_WITH_KEY ::= KEY_WITH KEY_KEY STRING */
+#line 232 "./mql.yxx"
+{ mqlyygotominor.mqlyy0 = mqlyymsp[0].minor.mqlyy0;   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-2].minor);
+  mqlyy_destructor(mqlyypParser,9,&mqlyymsp[-1].minor);
+}
+#line 2725 "./mql.c"
+        break;
+      case 55: /* opt_WITH_KEY ::= */
+      case 57: /* opt_USING_ENCODING ::= */ mqlyytestcase(mqlyyruleno==57);
+#line 233 "./mql.yxx"
+{ mqlyygotominor.mqlyy0 = newToken(); mqlyygotominor.mqlyy0->setString(new std::string("")); }
+#line 2731 "./mql.c"
+        break;
+      case 56: /* opt_USING_ENCODING ::= KEY_USING KEY_ENCODING STRING */
+#line 238 "./mql.yxx"
+{ mqlyygotominor.mqlyy0 = mqlyymsp[0].minor.mqlyy0;   mqlyy_destructor(mqlyypParser,10,&mqlyymsp[-2].minor);
+  mqlyy_destructor(mqlyypParser,11,&mqlyymsp[-1].minor);
+}
+#line 2738 "./mql.c"
+        break;
+      case 58: /* opt_DATABASE ::= KEY_DATABASE */
+#line 244 "./mql.yxx"
+{ mqlyygotominor.mqlyy284=0;  mqlyy_destructor(mqlyypParser,3,&mqlyymsp[0].minor);
+}
+#line 2744 "./mql.c"
+        break;
+      case 59: /* opt_DATABASE ::= */
+#line 245 "./mql.yxx"
+{ mqlyygotominor.mqlyy284=0;}
+#line 2749 "./mql.c"
+        break;
+      case 60: /* drop_database_statement ::= KEY_DROP KEY_DATABASE database_name */
+#line 251 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new DropDatabaseStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,12,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,3,&mqlyymsp[-1].minor);
 }
-#line 2699 "./mql.c"
+#line 2756 "./mql.c"
         break;
-      case 60: /* vacuum_database_statement ::= KEY_VACUUM opt_DATABASE opt_ANALYZE */
-#line 256 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new VacuumDatabaseStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy137);   mqlyy_destructor(mqlyypParser,13,&mqlyymsp[-2].minor);
-  mqlyy_destructor(mqlyypParser,179,&mqlyymsp[-1].minor);
+      case 61: /* vacuum_database_statement ::= KEY_VACUUM opt_DATABASE opt_ANALYZE */
+#line 257 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new VacuumDatabaseStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy537);   mqlyy_destructor(mqlyypParser,13,&mqlyymsp[-2].minor);
+  mqlyy_destructor(mqlyypParser,184,&mqlyymsp[-1].minor);
 }
-#line 2706 "./mql.c"
+#line 2763 "./mql.c"
         break;
-      case 61: /* opt_ANALYZE ::= */
-      case 103: /* opt_with_index ::= */ mqlyytestcase(mqlyyruleno==103);
-      case 105: /* opt_if_not_exists ::= */ mqlyytestcase(mqlyyruleno==105);
-      case 113: /* opt_computed ::= */ mqlyytestcase(mqlyyruleno==113);
-      case 153: /* opt_DEFAULT ::= */ mqlyytestcase(mqlyyruleno==153);
-#line 261 "./mql.yxx"
-{ mqlyygotominor.mqlyy137 = false; }
-#line 2715 "./mql.c"
-        break;
-      case 62: /* opt_ANALYZE ::= KEY_ANALYZE */
+      case 62: /* opt_ANALYZE ::= */
+      case 104: /* opt_with_index ::= */ mqlyytestcase(mqlyyruleno==104);
+      case 106: /* opt_if_not_exists ::= */ mqlyytestcase(mqlyyruleno==106);
+      case 114: /* opt_computed ::= */ mqlyytestcase(mqlyyruleno==114);
+      case 154: /* opt_DEFAULT ::= */ mqlyytestcase(mqlyyruleno==154);
 #line 262 "./mql.yxx"
-{ mqlyygotominor.mqlyy137 = true;   mqlyy_destructor(mqlyypParser,14,&mqlyymsp[0].minor);
-}
-#line 2721 "./mql.c"
+{ mqlyygotominor.mqlyy537 = false; }
+#line 2772 "./mql.c"
         break;
-      case 63: /* create_indexes_statement ::= KEY_CREATE KEY_INDEXES on_object_type */
-#line 268 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new CreateIndexesStatement((MQLExecEnv*) pEE, *(mqlyymsp[0].minor.mqlyy0->pString)); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-2].minor);
+      case 63: /* opt_ANALYZE ::= KEY_ANALYZE */
+#line 263 "./mql.yxx"
+{ mqlyygotominor.mqlyy537 = true;   mqlyy_destructor(mqlyypParser,14,&mqlyymsp[0].minor);
+}
+#line 2778 "./mql.c"
+        break;
+      case 64: /* create_indexes_statement ::= KEY_CREATE KEY_INDEXES on_object_type */
+#line 269 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new CreateIndexesStatement((MQLExecEnv*) pEE, *(mqlyymsp[0].minor.mqlyy0->pString)); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,15,&mqlyymsp[-1].minor);
 }
-#line 2728 "./mql.c"
+#line 2785 "./mql.c"
         break;
-      case 64: /* drop_indexes_statement ::= KEY_DROP KEY_INDEXES on_object_type */
-#line 274 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new DropIndexesStatement((MQLExecEnv*) pEE, *(mqlyymsp[0].minor.mqlyy0->pString)); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,12,&mqlyymsp[-2].minor);
+      case 65: /* drop_indexes_statement ::= KEY_DROP KEY_INDEXES on_object_type */
+#line 275 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new DropIndexesStatement((MQLExecEnv*) pEE, *(mqlyymsp[0].minor.mqlyy0->pString)); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,12,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,15,&mqlyymsp[-1].minor);
 }
-#line 2735 "./mql.c"
+#line 2792 "./mql.c"
         break;
-      case 65: /* on_object_type ::= KEY_ON KEY_OBJECT choice_type_types KEY_OPEN_SQUARE_BRACKET choice_object_type_or_all KEY_CLOSE_SQUARE_BRACKET */
-#line 283 "./mql.yxx"
+      case 66: /* on_object_type ::= KEY_ON KEY_OBJECT choice_type_types KEY_OPEN_SQUARE_BRACKET choice_object_type_or_all KEY_CLOSE_SQUARE_BRACKET */
+#line 284 "./mql.yxx"
 { mqlyygotominor.mqlyy0 = mqlyymsp[-1].minor.mqlyy0;   mqlyy_destructor(mqlyypParser,16,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,17,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 2744 "./mql.c"
+#line 2801 "./mql.c"
         break;
-      case 66: /* choice_type_types ::= KEY_TYPE */
-#line 289 "./mql.yxx"
-{ mqlyygotominor.mqlyy292 = 0;   mqlyy_destructor(mqlyypParser,20,&mqlyymsp[0].minor);
-}
-#line 2750 "./mql.c"
-        break;
-      case 67: /* choice_type_types ::= KEY_TYPES */
+      case 67: /* choice_type_types ::= KEY_TYPE */
 #line 290 "./mql.yxx"
-{ mqlyygotominor.mqlyy292 = 0;   mqlyy_destructor(mqlyypParser,21,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy284 = 0;   mqlyy_destructor(mqlyypParser,20,&mqlyymsp[0].minor);
 }
-#line 2756 "./mql.c"
+#line 2807 "./mql.c"
         break;
-      case 68: /* begin_transaction_statement ::= KEY_BEGIN KEY_TRANSACTION */
-#line 296 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new BeginTransactionStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,22,&mqlyymsp[-1].minor);
+      case 68: /* choice_type_types ::= KEY_TYPES */
+#line 291 "./mql.yxx"
+{ mqlyygotominor.mqlyy284 = 0;   mqlyy_destructor(mqlyypParser,21,&mqlyymsp[0].minor);
+}
+#line 2813 "./mql.c"
+        break;
+      case 69: /* begin_transaction_statement ::= KEY_BEGIN KEY_TRANSACTION */
+#line 297 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new BeginTransactionStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,22,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,23,&mqlyymsp[0].minor);
 }
-#line 2763 "./mql.c"
+#line 2820 "./mql.c"
         break;
-      case 69: /* commit_transaction_statement ::= KEY_COMMIT KEY_TRANSACTION */
-#line 302 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new CommitTransactionStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,24,&mqlyymsp[-1].minor);
+      case 70: /* commit_transaction_statement ::= KEY_COMMIT KEY_TRANSACTION */
+#line 303 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new CommitTransactionStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,24,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,23,&mqlyymsp[0].minor);
 }
-#line 2770 "./mql.c"
+#line 2827 "./mql.c"
         break;
-      case 70: /* abort_transaction_statement ::= KEY_ABORT KEY_TRANSACTION */
-#line 308 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new AbortTransactionStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,25,&mqlyymsp[-1].minor);
+      case 71: /* abort_transaction_statement ::= KEY_ABORT KEY_TRANSACTION */
+#line 309 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new AbortTransactionStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,25,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,23,&mqlyymsp[0].minor);
 }
-#line 2777 "./mql.c"
+#line 2834 "./mql.c"
         break;
-      case 71: /* create_object_type_statement ::= KEY_CREATE opt_OBJECT KEY_TYPE opt_if_not_exists opt_range_type opt_monad_uniqueness_type KEY_OPEN_SQUARE_BRACKET object_type_name opt_feature_declaration_list KEY_CLOSE_SQUARE_BRACKET */
-#line 321 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new CreateObjectTypeStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[-5].minor.mqlyy388, mqlyymsp[-4].minor.mqlyy123, mqlyymsp[-1].minor.mqlyy193, mqlyymsp[-6].minor.mqlyy137); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-9].minor);
+      case 72: /* create_object_type_statement ::= KEY_CREATE opt_OBJECT KEY_TYPE opt_if_not_exists opt_range_type opt_monad_uniqueness_type KEY_OPEN_SQUARE_BRACKET object_type_name opt_feature_declaration_list KEY_CLOSE_SQUARE_BRACKET */
+#line 322 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new CreateObjectTypeStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[-5].minor.mqlyy276, mqlyymsp[-4].minor.mqlyy411, mqlyymsp[-1].minor.mqlyy193, mqlyymsp[-6].minor.mqlyy537); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-9].minor);
   mqlyy_destructor(mqlyypParser,20,&mqlyymsp[-7].minor);
   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 2786 "./mql.c"
+#line 2843 "./mql.c"
         break;
-      case 72: /* opt_range_type ::= */
-#line 327 "./mql.yxx"
-{ mqlyygotominor.mqlyy388 = kORTMultipleRange; }
-#line 2791 "./mql.c"
+      case 73: /* opt_range_type ::= */
+#line 328 "./mql.yxx"
+{ mqlyygotominor.mqlyy276 = kORTMultipleRange; }
+#line 2848 "./mql.c"
         break;
-      case 73: /* opt_range_type ::= KEY_WITH KEY_MULTIPLE KEY_RANGE KEY_OBJECTS */
-#line 329 "./mql.yxx"
-{ mqlyygotominor.mqlyy388 = kORTMultipleRange;   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-3].minor);
+      case 74: /* opt_range_type ::= KEY_WITH KEY_MULTIPLE KEY_RANGE KEY_OBJECTS */
+#line 330 "./mql.yxx"
+{ mqlyygotominor.mqlyy276 = kORTMultipleRange;   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,26,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,27,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,28,&mqlyymsp[0].minor);
 }
-#line 2800 "./mql.c"
+#line 2857 "./mql.c"
         break;
-      case 74: /* opt_range_type ::= KEY_WITH KEY_SINGLE KEY_RANGE KEY_OBJECTS */
-#line 331 "./mql.yxx"
-{ mqlyygotominor.mqlyy388 = kORTSingleRange;   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-3].minor);
+      case 75: /* opt_range_type ::= KEY_WITH KEY_SINGLE KEY_RANGE KEY_OBJECTS */
+#line 332 "./mql.yxx"
+{ mqlyygotominor.mqlyy276 = kORTSingleRange;   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,29,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,27,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,28,&mqlyymsp[0].minor);
 }
-#line 2809 "./mql.c"
+#line 2866 "./mql.c"
         break;
-      case 75: /* opt_range_type ::= KEY_WITH KEY_SINGLE KEY_MONAD KEY_OBJECTS */
-#line 333 "./mql.yxx"
-{ mqlyygotominor.mqlyy388 = kORTSingleMonad;   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-3].minor);
+      case 76: /* opt_range_type ::= KEY_WITH KEY_SINGLE KEY_MONAD KEY_OBJECTS */
+#line 334 "./mql.yxx"
+{ mqlyygotominor.mqlyy276 = kORTSingleMonad;   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,29,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,28,&mqlyymsp[0].minor);
 }
-#line 2818 "./mql.c"
+#line 2875 "./mql.c"
         break;
-      case 76: /* opt_monad_uniqueness_type ::= */
-#line 338 "./mql.yxx"
-{ mqlyygotominor.mqlyy123 = kMUTNonUniqueMonads; }
-#line 2823 "./mql.c"
+      case 77: /* opt_monad_uniqueness_type ::= */
+#line 339 "./mql.yxx"
+{ mqlyygotominor.mqlyy411 = kMUTNonUniqueMonads; }
+#line 2880 "./mql.c"
         break;
-      case 77: /* opt_monad_uniqueness_type ::= KEY_HAVING KEY_UNIQUE KEY_FIRST KEY_MONADS */
-#line 340 "./mql.yxx"
-{ mqlyygotominor.mqlyy123 = kMUTUniqueFirstMonads;   mqlyy_destructor(mqlyypParser,31,&mqlyymsp[-3].minor);
+      case 78: /* opt_monad_uniqueness_type ::= KEY_HAVING KEY_UNIQUE KEY_FIRST KEY_MONADS */
+#line 341 "./mql.yxx"
+{ mqlyygotominor.mqlyy411 = kMUTUniqueFirstMonads;   mqlyy_destructor(mqlyypParser,31,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,32,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,33,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[0].minor);
 }
-#line 2832 "./mql.c"
+#line 2889 "./mql.c"
         break;
-      case 78: /* opt_monad_uniqueness_type ::= KEY_HAVING KEY_UNIQUE KEY_FIRST KEY_AND KEY_LAST KEY_MONADS */
-#line 342 "./mql.yxx"
-{ mqlyygotominor.mqlyy123 = kMUTUniqueFirstAndLastMonads;   mqlyy_destructor(mqlyypParser,31,&mqlyymsp[-5].minor);
+      case 79: /* opt_monad_uniqueness_type ::= KEY_HAVING KEY_UNIQUE KEY_FIRST KEY_AND KEY_LAST KEY_MONADS */
+#line 343 "./mql.yxx"
+{ mqlyygotominor.mqlyy411 = kMUTUniqueFirstAndLastMonads;   mqlyy_destructor(mqlyypParser,31,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,32,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,33,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,35,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,36,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[0].minor);
 }
-#line 2843 "./mql.c"
+#line 2900 "./mql.c"
         break;
-      case 79: /* opt_monad_uniqueness_type ::= KEY_WITHOUT KEY_UNIQUE KEY_MONADS */
-#line 344 "./mql.yxx"
-{ mqlyygotominor.mqlyy123 = kMUTNonUniqueMonads;   mqlyy_destructor(mqlyypParser,37,&mqlyymsp[-2].minor);
+      case 80: /* opt_monad_uniqueness_type ::= KEY_WITHOUT KEY_UNIQUE KEY_MONADS */
+#line 345 "./mql.yxx"
+{ mqlyygotominor.mqlyy411 = kMUTNonUniqueMonads;   mqlyy_destructor(mqlyypParser,37,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,32,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[0].minor);
 }
-#line 2851 "./mql.c"
+#line 2908 "./mql.c"
         break;
-      case 80: /* opt_OBJECT ::= KEY_OBJECT */
-#line 349 "./mql.yxx"
-{ mqlyygotominor.mqlyy292 = 0;   mqlyy_destructor(mqlyypParser,17,&mqlyymsp[0].minor);
-}
-#line 2857 "./mql.c"
-        break;
-      case 81: /* opt_OBJECT ::= */
-      case 120: /* opt_ADD ::= */ mqlyytestcase(mqlyyruleno==120);
-      case 178: /* opt_OBJECTS ::= */ mqlyytestcase(mqlyyruleno==178);
+      case 81: /* opt_OBJECT ::= KEY_OBJECT */
 #line 350 "./mql.yxx"
-{ mqlyygotominor.mqlyy292 = 0; }
-#line 2864 "./mql.c"
+{ mqlyygotominor.mqlyy284 = 0;   mqlyy_destructor(mqlyypParser,17,&mqlyymsp[0].minor);
+}
+#line 2914 "./mql.c"
         break;
-      case 82: /* object_type_name ::= IDENTIFIER */
-#line 355 "./mql.yxx"
+      case 82: /* opt_OBJECT ::= */
+      case 121: /* opt_ADD ::= */ mqlyytestcase(mqlyyruleno==121);
+      case 179: /* opt_OBJECTS ::= */ mqlyytestcase(mqlyyruleno==179);
+#line 351 "./mql.yxx"
+{ mqlyygotominor.mqlyy284 = 0; }
+#line 2921 "./mql.c"
+        break;
+      case 83: /* object_type_name ::= IDENTIFIER */
+#line 356 "./mql.yxx"
 {mqlyygotominor.mqlyy0 = mqlyymsp[0].minor.mqlyy0; }
-#line 2869 "./mql.c"
+#line 2926 "./mql.c"
         break;
-      case 83: /* opt_feature_declaration_list ::= feature_declaration_list */
-      case 85: /* feature_declaration_list ::= feature_declaration */ mqlyytestcase(mqlyyruleno==85);
-#line 359 "./mql.yxx"
-{ mqlyygotominor.mqlyy193 = mqlyymsp[0].minor.mqlyy193; }
-#line 2875 "./mql.c"
-        break;
-      case 84: /* opt_feature_declaration_list ::= */
+      case 84: /* opt_feature_declaration_list ::= feature_declaration_list */
+      case 86: /* feature_declaration_list ::= feature_declaration */ mqlyytestcase(mqlyyruleno==86);
 #line 360 "./mql.yxx"
+{ mqlyygotominor.mqlyy193 = mqlyymsp[0].minor.mqlyy193; }
+#line 2932 "./mql.c"
+        break;
+      case 85: /* opt_feature_declaration_list ::= */
+#line 361 "./mql.yxx"
 { mqlyygotominor.mqlyy193 = 0; }
-#line 2880 "./mql.c"
+#line 2937 "./mql.c"
         break;
-      case 86: /* feature_declaration_list ::= feature_declaration_list feature_declaration */
-#line 367 "./mql.yxx"
+      case 87: /* feature_declaration_list ::= feature_declaration_list feature_declaration */
+#line 368 "./mql.yxx"
 { mqlyygotominor.mqlyy193 = mqlyymsp[0].minor.mqlyy193; mqlyygotominor.mqlyy193->setNext(mqlyymsp[-1].minor.mqlyy193); }
-#line 2885 "./mql.c"
+#line 2942 "./mql.c"
         break;
-      case 87: /* feature_declaration ::= feature_name KEY_COLON feature_type default_specification opt_computed KEY_SEMICOLON */
-#line 373 "./mql.yxx"
-{ mqlyygotominor.mqlyy193 = new FeatureDeclaration(mqlyymsp[-5].minor.mqlyy0->extractString(), mqlyymsp[-3].minor.mqlyy283, mqlyymsp[-2].minor.mqlyy139, mqlyymsp[-1].minor.mqlyy137, 0); deleteToken(mqlyymsp[-5].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,38,&mqlyymsp[-4].minor);
+      case 88: /* feature_declaration ::= feature_name KEY_COLON feature_type default_specification opt_computed KEY_SEMICOLON */
+#line 374 "./mql.yxx"
+{ mqlyygotominor.mqlyy193 = new FeatureDeclaration(mqlyymsp[-5].minor.mqlyy0->extractString(), mqlyymsp[-3].minor.mqlyy371, mqlyymsp[-2].minor.mqlyy563, mqlyymsp[-1].minor.mqlyy537, 0); deleteToken(mqlyymsp[-5].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,38,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,39,&mqlyymsp[0].minor);
 }
-#line 2892 "./mql.c"
+#line 2949 "./mql.c"
         break;
-      case 88: /* feature_declaration ::= feature_name KEY_COLON KEY_LIST KEY_OF list_feature_type KEY_SEMICOLON */
-#line 376 "./mql.yxx"
-{ mqlyygotominor.mqlyy193 = new FeatureDeclaration(mqlyymsp[-5].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy283, new Expression(), false, 0); deleteToken(mqlyymsp[-5].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,38,&mqlyymsp[-4].minor);
+      case 89: /* feature_declaration ::= feature_name KEY_COLON KEY_LIST KEY_OF list_feature_type KEY_SEMICOLON */
+#line 377 "./mql.yxx"
+{ mqlyygotominor.mqlyy193 = new FeatureDeclaration(mqlyymsp[-5].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy371, new Expression(), false, 0); deleteToken(mqlyymsp[-5].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,38,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,40,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,41,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,39,&mqlyymsp[0].minor);
 }
-#line 2901 "./mql.c"
+#line 2958 "./mql.c"
         break;
-      case 89: /* feature_type ::= KEY_INTEGER opt_with_index */
-#line 382 "./mql.yxx"
-{ mqlyygotominor.mqlyy283 = new MQLType(kInteger, mqlyymsp[0].minor.mqlyy137);   mqlyy_destructor(mqlyypParser,42,&mqlyymsp[-1].minor);
+      case 90: /* feature_type ::= KEY_INTEGER opt_with_index */
+#line 383 "./mql.yxx"
+{ mqlyygotominor.mqlyy371 = new MQLType(kInteger, mqlyymsp[0].minor.mqlyy537);   mqlyy_destructor(mqlyypParser,42,&mqlyymsp[-1].minor);
 }
-#line 2907 "./mql.c"
+#line 2964 "./mql.c"
         break;
-      case 90: /* feature_type ::= KEY_STRING opt_string_length opt_from_set opt_with_index */
-#line 384 "./mql.yxx"
-{ mqlyygotominor.mqlyy283 = new MQLType(kString, mqlyymsp[-1].minor.mqlyy137, mqlyymsp[0].minor.mqlyy137);   mqlyy_destructor(mqlyypParser,43,&mqlyymsp[-3].minor);
-  mqlyy_destructor(mqlyypParser,199,&mqlyymsp[-2].minor);
+      case 91: /* feature_type ::= KEY_STRING opt_string_length opt_from_set opt_with_index */
+#line 385 "./mql.yxx"
+{ mqlyygotominor.mqlyy371 = new MQLType(kString, mqlyymsp[-1].minor.mqlyy537, mqlyymsp[0].minor.mqlyy537);   mqlyy_destructor(mqlyypParser,43,&mqlyymsp[-3].minor);
+  mqlyy_destructor(mqlyypParser,204,&mqlyymsp[-2].minor);
 }
-#line 2914 "./mql.c"
+#line 2971 "./mql.c"
         break;
-      case 91: /* feature_type ::= KEY_ASCII opt_string_length opt_from_set opt_with_index */
-#line 386 "./mql.yxx"
-{ mqlyygotominor.mqlyy283 = new MQLType(kASCII, mqlyymsp[-1].minor.mqlyy137, mqlyymsp[0].minor.mqlyy137);   mqlyy_destructor(mqlyypParser,44,&mqlyymsp[-3].minor);
-  mqlyy_destructor(mqlyypParser,199,&mqlyymsp[-2].minor);
+      case 92: /* feature_type ::= KEY_ASCII opt_string_length opt_from_set opt_with_index */
+#line 387 "./mql.yxx"
+{ mqlyygotominor.mqlyy371 = new MQLType(kASCII, mqlyymsp[-1].minor.mqlyy537, mqlyymsp[0].minor.mqlyy537);   mqlyy_destructor(mqlyypParser,44,&mqlyymsp[-3].minor);
+  mqlyy_destructor(mqlyypParser,204,&mqlyymsp[-2].minor);
 }
-#line 2921 "./mql.c"
+#line 2978 "./mql.c"
         break;
-      case 92: /* feature_type ::= KEY_ID_D opt_with_index */
-#line 388 "./mql.yxx"
-{ mqlyygotominor.mqlyy283 = new MQLType(kID_D, mqlyymsp[0].minor.mqlyy137);   mqlyy_destructor(mqlyypParser,45,&mqlyymsp[-1].minor);
+      case 93: /* feature_type ::= KEY_ID_D opt_with_index */
+#line 389 "./mql.yxx"
+{ mqlyygotominor.mqlyy371 = new MQLType(kID_D, mqlyymsp[0].minor.mqlyy537);   mqlyy_destructor(mqlyypParser,45,&mqlyymsp[-1].minor);
 }
-#line 2927 "./mql.c"
+#line 2984 "./mql.c"
         break;
-      case 93: /* feature_type ::= IDENTIFIER opt_with_index */
-#line 390 "./mql.yxx"
-{ mqlyygotominor.mqlyy283 = new MQLType(mqlyymsp[-1].minor.mqlyy0->extractString(), false, mqlyymsp[0].minor.mqlyy137); deleteToken(mqlyymsp[-1].minor.mqlyy0); }
-#line 2932 "./mql.c"
+      case 94: /* feature_type ::= IDENTIFIER opt_with_index */
+#line 391 "./mql.yxx"
+{ mqlyygotominor.mqlyy371 = new MQLType(mqlyymsp[-1].minor.mqlyy0->extractString(), false, mqlyymsp[0].minor.mqlyy537); deleteToken(mqlyymsp[-1].minor.mqlyy0); }
+#line 2989 "./mql.c"
         break;
-      case 94: /* feature_type ::= KEY_SET KEY_OF KEY_MONADS */
-#line 392 "./mql.yxx"
-{ mqlyygotominor.mqlyy283 = new MQLType(kORTMultipleRange);   mqlyy_destructor(mqlyypParser,46,&mqlyymsp[-2].minor);
+      case 95: /* feature_type ::= KEY_SET KEY_OF KEY_MONADS */
+#line 393 "./mql.yxx"
+{ mqlyygotominor.mqlyy371 = new MQLType(kORTMultipleRange);   mqlyy_destructor(mqlyypParser,46,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,41,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[0].minor);
 }
-#line 2940 "./mql.c"
+#line 2997 "./mql.c"
         break;
-      case 95: /* feature_type ::= KEY_SINGLE KEY_MONAD KEY_SET KEY_OF KEY_MONADS */
-#line 394 "./mql.yxx"
-{ mqlyygotominor.mqlyy283 = new MQLType(kORTSingleMonad);   mqlyy_destructor(mqlyypParser,29,&mqlyymsp[-4].minor);
+      case 96: /* feature_type ::= KEY_SINGLE KEY_MONAD KEY_SET KEY_OF KEY_MONADS */
+#line 395 "./mql.yxx"
+{ mqlyygotominor.mqlyy371 = new MQLType(kORTSingleMonad);   mqlyy_destructor(mqlyypParser,29,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,46,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,41,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[0].minor);
 }
-#line 2950 "./mql.c"
+#line 3007 "./mql.c"
         break;
-      case 96: /* feature_type ::= KEY_SINGLE KEY_RANGE KEY_SET KEY_OF KEY_MONADS */
-#line 396 "./mql.yxx"
-{ mqlyygotominor.mqlyy283 = new MQLType(kORTSingleRange);   mqlyy_destructor(mqlyypParser,29,&mqlyymsp[-4].minor);
+      case 97: /* feature_type ::= KEY_SINGLE KEY_RANGE KEY_SET KEY_OF KEY_MONADS */
+#line 397 "./mql.yxx"
+{ mqlyygotominor.mqlyy371 = new MQLType(kORTSingleRange);   mqlyy_destructor(mqlyypParser,29,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,27,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,46,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,41,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[0].minor);
 }
-#line 2960 "./mql.c"
+#line 3017 "./mql.c"
         break;
-      case 97: /* feature_type ::= KEY_MULTIPLE KEY_RANGE KEY_SET KEY_OF KEY_MONADS */
-#line 398 "./mql.yxx"
-{ mqlyygotominor.mqlyy283 = new MQLType(kORTMultipleRange);   mqlyy_destructor(mqlyypParser,26,&mqlyymsp[-4].minor);
+      case 98: /* feature_type ::= KEY_MULTIPLE KEY_RANGE KEY_SET KEY_OF KEY_MONADS */
+#line 399 "./mql.yxx"
+{ mqlyygotominor.mqlyy371 = new MQLType(kORTMultipleRange);   mqlyy_destructor(mqlyypParser,26,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,27,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,46,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,41,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[0].minor);
 }
-#line 2970 "./mql.c"
+#line 3027 "./mql.c"
         break;
-      case 98: /* list_feature_type ::= KEY_INTEGER */
-#line 405 "./mql.yxx"
-{ mqlyygotominor.mqlyy283 = new MQLType(kListOfInteger);   mqlyy_destructor(mqlyypParser,42,&mqlyymsp[0].minor);
+      case 99: /* list_feature_type ::= KEY_INTEGER */
+#line 406 "./mql.yxx"
+{ mqlyygotominor.mqlyy371 = new MQLType(kListOfInteger);   mqlyy_destructor(mqlyypParser,42,&mqlyymsp[0].minor);
 }
-#line 2976 "./mql.c"
+#line 3033 "./mql.c"
         break;
-      case 99: /* list_feature_type ::= KEY_ID_D */
-#line 407 "./mql.yxx"
-{ mqlyygotominor.mqlyy283 = new MQLType(kListOfID_D);   mqlyy_destructor(mqlyypParser,45,&mqlyymsp[0].minor);
+      case 100: /* list_feature_type ::= KEY_ID_D */
+#line 408 "./mql.yxx"
+{ mqlyygotominor.mqlyy371 = new MQLType(kListOfID_D);   mqlyy_destructor(mqlyypParser,45,&mqlyymsp[0].minor);
 }
-#line 2982 "./mql.c"
+#line 3039 "./mql.c"
         break;
-      case 100: /* list_feature_type ::= IDENTIFIER */
-#line 409 "./mql.yxx"
-{ mqlyygotominor.mqlyy283 = new MQLType(mqlyymsp[0].minor.mqlyy0->extractString(), true, false); deleteToken(mqlyymsp[0].minor.mqlyy0); }
-#line 2987 "./mql.c"
+      case 101: /* list_feature_type ::= IDENTIFIER */
+#line 410 "./mql.yxx"
+{ mqlyygotominor.mqlyy371 = new MQLType(mqlyymsp[0].minor.mqlyy0->extractString(), true, false); deleteToken(mqlyymsp[0].minor.mqlyy0); }
+#line 3044 "./mql.c"
         break;
-      case 101: /* opt_with_index ::= KEY_WITH KEY_INDEX */
-#line 414 "./mql.yxx"
-{ mqlyygotominor.mqlyy137 = true;   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-1].minor);
-  mqlyy_destructor(mqlyypParser,47,&mqlyymsp[0].minor);
-}
-#line 2994 "./mql.c"
-        break;
-      case 102: /* opt_with_index ::= KEY_WITHOUT KEY_INDEX */
+      case 102: /* opt_with_index ::= KEY_WITH KEY_INDEX */
 #line 415 "./mql.yxx"
-{ mqlyygotominor.mqlyy137 = false;   mqlyy_destructor(mqlyypParser,37,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy537 = true;   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,47,&mqlyymsp[0].minor);
-}
-#line 3001 "./mql.c"
-        break;
-      case 104: /* opt_if_not_exists ::= KEY_IF KEY_NOT KEY_EXISTS */
-#line 420 "./mql.yxx"
-{ mqlyygotominor.mqlyy137 = true;   mqlyy_destructor(mqlyypParser,48,&mqlyymsp[-2].minor);
-  mqlyy_destructor(mqlyypParser,49,&mqlyymsp[-1].minor);
-  mqlyy_destructor(mqlyypParser,50,&mqlyymsp[0].minor);
-}
-#line 3009 "./mql.c"
-        break;
-      case 106: /* opt_from_set ::= KEY_FROM KEY_SET */
-#line 425 "./mql.yxx"
-{mqlyygotominor.mqlyy137 = true;  mqlyy_destructor(mqlyypParser,51,&mqlyymsp[-1].minor);
-  mqlyy_destructor(mqlyypParser,46,&mqlyymsp[0].minor);
-}
-#line 3016 "./mql.c"
-        break;
-      case 107: /* opt_from_set ::= */
-#line 426 "./mql.yxx"
-{mqlyygotominor.mqlyy137 = false;}
-#line 3021 "./mql.c"
-        break;
-      case 108: /* opt_string_length ::= */
-#line 432 "./mql.yxx"
-{ mqlyygotominor.mqlyy249 = 0; }
-#line 3026 "./mql.c"
-        break;
-      case 109: /* opt_string_length ::= KEY_OPEN_BRACKET INTEGER KEY_CLOSE_BRACKET */
-#line 434 "./mql.yxx"
-{ mqlyygotominor.mqlyy249 = 0;   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
-  mqlyy_destructor(mqlyypParser,53,&mqlyymsp[-1].minor);
-  mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
-}
-#line 3034 "./mql.c"
-        break;
-      case 110: /* default_specification ::= KEY_DEFAULT expression */
-#line 440 "./mql.yxx"
-{ mqlyygotominor.mqlyy139 = mqlyymsp[0].minor.mqlyy139;   mqlyy_destructor(mqlyypParser,55,&mqlyymsp[-1].minor);
-}
-#line 3040 "./mql.c"
-        break;
-      case 111: /* default_specification ::= */
-#line 442 "./mql.yxx"
-{ mqlyygotominor.mqlyy139 = 0; }
-#line 3045 "./mql.c"
-        break;
-      case 112: /* opt_computed ::= KEY_COMPUTED */
-#line 448 "./mql.yxx"
-{ mqlyygotominor.mqlyy137 = true;   mqlyy_destructor(mqlyypParser,56,&mqlyymsp[0].minor);
 }
 #line 3051 "./mql.c"
         break;
-      case 114: /* update_object_type_statement ::= KEY_UPDATE opt_OBJECT KEY_TYPE KEY_OPEN_SQUARE_BRACKET object_type_name feature_update_list KEY_CLOSE_SQUARE_BRACKET */
-#line 459 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new UpdateObjectTypeStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy406); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-6].minor);
+      case 103: /* opt_with_index ::= KEY_WITHOUT KEY_INDEX */
+#line 416 "./mql.yxx"
+{ mqlyygotominor.mqlyy537 = false;   mqlyy_destructor(mqlyypParser,37,&mqlyymsp[-1].minor);
+  mqlyy_destructor(mqlyypParser,47,&mqlyymsp[0].minor);
+}
+#line 3058 "./mql.c"
+        break;
+      case 105: /* opt_if_not_exists ::= KEY_IF KEY_NOT KEY_EXISTS */
+#line 421 "./mql.yxx"
+{ mqlyygotominor.mqlyy537 = true;   mqlyy_destructor(mqlyypParser,48,&mqlyymsp[-2].minor);
+  mqlyy_destructor(mqlyypParser,49,&mqlyymsp[-1].minor);
+  mqlyy_destructor(mqlyypParser,50,&mqlyymsp[0].minor);
+}
+#line 3066 "./mql.c"
+        break;
+      case 107: /* opt_from_set ::= KEY_FROM KEY_SET */
+#line 426 "./mql.yxx"
+{mqlyygotominor.mqlyy537 = true;  mqlyy_destructor(mqlyypParser,51,&mqlyymsp[-1].minor);
+  mqlyy_destructor(mqlyypParser,46,&mqlyymsp[0].minor);
+}
+#line 3073 "./mql.c"
+        break;
+      case 108: /* opt_from_set ::= */
+#line 427 "./mql.yxx"
+{mqlyygotominor.mqlyy537 = false;}
+#line 3078 "./mql.c"
+        break;
+      case 109: /* opt_string_length ::= */
+#line 433 "./mql.yxx"
+{ mqlyygotominor.mqlyy377 = 0; }
+#line 3083 "./mql.c"
+        break;
+      case 110: /* opt_string_length ::= KEY_OPEN_BRACKET INTEGER KEY_CLOSE_BRACKET */
+#line 435 "./mql.yxx"
+{ mqlyygotominor.mqlyy377 = 0;   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
+  mqlyy_destructor(mqlyypParser,53,&mqlyymsp[-1].minor);
+  mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
+}
+#line 3091 "./mql.c"
+        break;
+      case 111: /* default_specification ::= KEY_DEFAULT expression */
+#line 441 "./mql.yxx"
+{ mqlyygotominor.mqlyy563 = mqlyymsp[0].minor.mqlyy563;   mqlyy_destructor(mqlyypParser,55,&mqlyymsp[-1].minor);
+}
+#line 3097 "./mql.c"
+        break;
+      case 112: /* default_specification ::= */
+#line 443 "./mql.yxx"
+{ mqlyygotominor.mqlyy563 = 0; }
+#line 3102 "./mql.c"
+        break;
+      case 113: /* opt_computed ::= KEY_COMPUTED */
+#line 449 "./mql.yxx"
+{ mqlyygotominor.mqlyy537 = true;   mqlyy_destructor(mqlyypParser,56,&mqlyymsp[0].minor);
+}
+#line 3108 "./mql.c"
+        break;
+      case 115: /* update_object_type_statement ::= KEY_UPDATE opt_OBJECT KEY_TYPE KEY_OPEN_SQUARE_BRACKET object_type_name feature_update_list KEY_CLOSE_SQUARE_BRACKET */
+#line 460 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new UpdateObjectTypeStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy70); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-6].minor);
   mqlyy_destructor(mqlyypParser,20,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 3060 "./mql.c"
+#line 3117 "./mql.c"
         break;
-      case 115: /* feature_update_list ::= feature_update */
-#line 465 "./mql.yxx"
-{ mqlyygotominor.mqlyy406 = mqlyymsp[0].minor.mqlyy406; }
-#line 3065 "./mql.c"
+      case 116: /* feature_update_list ::= feature_update */
+#line 466 "./mql.yxx"
+{ mqlyygotominor.mqlyy70 = mqlyymsp[0].minor.mqlyy70; }
+#line 3122 "./mql.c"
         break;
-      case 116: /* feature_update_list ::= feature_update_list feature_update */
-#line 467 "./mql.yxx"
-{ mqlyygotominor.mqlyy406 = mqlyymsp[0].minor.mqlyy406; mqlyygotominor.mqlyy406->setNext(mqlyymsp[-1].minor.mqlyy406); }
-#line 3070 "./mql.c"
+      case 117: /* feature_update_list ::= feature_update_list feature_update */
+#line 468 "./mql.yxx"
+{ mqlyygotominor.mqlyy70 = mqlyymsp[0].minor.mqlyy70; mqlyygotominor.mqlyy70->setNext(mqlyymsp[-1].minor.mqlyy70); }
+#line 3127 "./mql.c"
         break;
-      case 117: /* feature_update ::= opt_ADD feature_declaration */
-#line 473 "./mql.yxx"
-{ mqlyygotominor.mqlyy406 = new FeatureUpdate(mqlyymsp[0].minor.mqlyy193, 0); }
-#line 3075 "./mql.c"
+      case 118: /* feature_update ::= opt_ADD feature_declaration */
+#line 474 "./mql.yxx"
+{ mqlyygotominor.mqlyy70 = new FeatureUpdate(mqlyymsp[0].minor.mqlyy193, 0); }
+#line 3132 "./mql.c"
         break;
-      case 118: /* feature_update ::= KEY_REMOVE feature_name KEY_SEMICOLON */
-#line 475 "./mql.yxx"
-{ mqlyygotominor.mqlyy406 = new FeatureUpdate(mqlyymsp[-1].minor.mqlyy0->extractString(), 0); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,58,&mqlyymsp[-2].minor);
+      case 119: /* feature_update ::= KEY_REMOVE feature_name KEY_SEMICOLON */
+#line 476 "./mql.yxx"
+{ mqlyygotominor.mqlyy70 = new FeatureUpdate(mqlyymsp[-1].minor.mqlyy0->extractString(), 0); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,58,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,39,&mqlyymsp[0].minor);
 }
-#line 3082 "./mql.c"
+#line 3139 "./mql.c"
         break;
-      case 119: /* opt_ADD ::= KEY_ADD */
-#line 480 "./mql.yxx"
-{ mqlyygotominor.mqlyy292 = 0;   mqlyy_destructor(mqlyypParser,59,&mqlyymsp[0].minor);
+      case 120: /* opt_ADD ::= KEY_ADD */
+#line 481 "./mql.yxx"
+{ mqlyygotominor.mqlyy284 = 0;   mqlyy_destructor(mqlyypParser,59,&mqlyymsp[0].minor);
 }
-#line 3088 "./mql.c"
+#line 3145 "./mql.c"
         break;
-      case 121: /* drop_object_type_statement ::= KEY_DROP opt_OBJECT KEY_TYPE KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET */
-#line 490 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new DropObjectTypeStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,12,&mqlyymsp[-5].minor);
+      case 122: /* drop_object_type_statement ::= KEY_DROP opt_OBJECT KEY_TYPE KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET */
+#line 491 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new DropObjectTypeStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,12,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,20,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 3097 "./mql.c"
+#line 3154 "./mql.c"
         break;
-      case 122: /* insert_monads_statement ::= KEY_INSERT monad_specification */
-#line 496 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new InsertMonadsStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy34);   mqlyy_destructor(mqlyypParser,60,&mqlyymsp[-1].minor);
+      case 123: /* insert_monads_statement ::= KEY_INSERT monad_specification */
+#line 497 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new InsertMonadsStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy362);   mqlyy_destructor(mqlyypParser,60,&mqlyymsp[-1].minor);
 }
-#line 3103 "./mql.c"
+#line 3160 "./mql.c"
         break;
-      case 123: /* delete_monads_statement ::= KEY_DELETE monad_specification */
-#line 502 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new DeleteMonadsStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy34);   mqlyy_destructor(mqlyypParser,61,&mqlyymsp[-1].minor);
+      case 124: /* delete_monads_statement ::= KEY_DELETE monad_specification */
+#line 503 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new DeleteMonadsStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy362);   mqlyy_destructor(mqlyypParser,61,&mqlyymsp[-1].minor);
 }
-#line 3109 "./mql.c"
+#line 3166 "./mql.c"
         break;
-      case 124: /* get_monads_statement ::= KEY_GET KEY_MONADS KEY_FROM choice_number_OBJECTS KEY_WITH id_ds_specification KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET */
-#line 513 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new GetMonadsStatement((MQLExecEnv*) pEE, mqlyymsp[-3].minor.mqlyy51, mqlyymsp[-1].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-8].minor);
+      case 125: /* get_monads_statement ::= KEY_GET KEY_MONADS KEY_FROM choice_number_OBJECTS KEY_WITH id_ds_specification KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET */
+#line 514 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new GetMonadsStatement((MQLExecEnv*) pEE, mqlyymsp[-3].minor.mqlyy515, mqlyymsp[-1].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-8].minor);
   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[-7].minor);
   mqlyy_destructor(mqlyypParser,51,&mqlyymsp[-6].minor);
   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 3120 "./mql.c"
+#line 3177 "./mql.c"
         break;
-      case 125: /* monad_set_calculation_statement ::= KEY_MONAD KEY_SET KEY_CALCULATION monad_set_chain */
-#line 520 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new MonadSetCalculationStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy279);   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-3].minor);
+      case 126: /* monad_set_calculation_statement ::= KEY_MONAD KEY_SET KEY_CALCULATION monad_set_chain */
+#line 521 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new MonadSetCalculationStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy519);   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,46,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,63,&mqlyymsp[-1].minor);
 }
-#line 3128 "./mql.c"
+#line 3185 "./mql.c"
         break;
-      case 126: /* monad_set_chain ::= monad_set */
-#line 526 "./mql.yxx"
-{ mqlyygotominor.mqlyy279 = new MonadSetChainElement(mqlyymsp[0].minor.mqlyy34, kSONone, 0); }
-#line 3133 "./mql.c"
+      case 127: /* monad_set_chain ::= monad_set */
+#line 527 "./mql.yxx"
+{ mqlyygotominor.mqlyy519 = new MonadSetChainElement(mqlyymsp[0].minor.mqlyy362, kSONone, 0); }
+#line 3190 "./mql.c"
         break;
-      case 127: /* monad_set_chain ::= monad_set_chain monad_set_operator monad_set */
-#line 528 "./mql.yxx"
-{ mqlyygotominor.mqlyy279 = new MonadSetChainElement(mqlyymsp[0].minor.mqlyy34, mqlyymsp[-1].minor.mqlyy398, 0); mqlyygotominor.mqlyy279->setNext(mqlyymsp[-2].minor.mqlyy279); }
-#line 3138 "./mql.c"
+      case 128: /* monad_set_chain ::= monad_set_chain monad_set_operator monad_set */
+#line 529 "./mql.yxx"
+{ mqlyygotominor.mqlyy519 = new MonadSetChainElement(mqlyymsp[0].minor.mqlyy362, mqlyymsp[-1].minor.mqlyy142, 0); mqlyygotominor.mqlyy519->setNext(mqlyymsp[-2].minor.mqlyy519); }
+#line 3195 "./mql.c"
         break;
-      case 128: /* monad_set_operator ::= KEY_UNION */
-#line 533 "./mql.yxx"
-{ mqlyygotominor.mqlyy398 = kSOUnion;   mqlyy_destructor(mqlyypParser,64,&mqlyymsp[0].minor);
-}
-#line 3144 "./mql.c"
-        break;
-      case 129: /* monad_set_operator ::= KEY_DIFFERENCE */
+      case 129: /* monad_set_operator ::= KEY_UNION */
 #line 534 "./mql.yxx"
-{ mqlyygotominor.mqlyy398 = kSODifference;   mqlyy_destructor(mqlyypParser,65,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy142 = kSOUnion;   mqlyy_destructor(mqlyypParser,64,&mqlyymsp[0].minor);
 }
-#line 3150 "./mql.c"
+#line 3201 "./mql.c"
         break;
-      case 130: /* monad_set_operator ::= KEY_INTERSECT */
+      case 130: /* monad_set_operator ::= KEY_DIFFERENCE */
 #line 535 "./mql.yxx"
-{ mqlyygotominor.mqlyy398 = kSOIntersect;   mqlyy_destructor(mqlyypParser,66,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy142 = kSODifference;   mqlyy_destructor(mqlyypParser,65,&mqlyymsp[0].minor);
 }
-#line 3156 "./mql.c"
+#line 3207 "./mql.c"
         break;
-      case 131: /* select_monad_sets_statement ::= KEY_SELECT KEY_MONAD KEY_SETS */
-#line 541 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new SelectMonadSetsStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-2].minor);
+      case 131: /* monad_set_operator ::= KEY_INTERSECT */
+#line 536 "./mql.yxx"
+{ mqlyygotominor.mqlyy142 = kSOIntersect;   mqlyy_destructor(mqlyypParser,66,&mqlyymsp[0].minor);
+}
+#line 3213 "./mql.c"
+        break;
+      case 132: /* select_monad_sets_statement ::= KEY_SELECT KEY_MONAD KEY_SETS */
+#line 542 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new SelectMonadSetsStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,68,&mqlyymsp[0].minor);
 }
-#line 3164 "./mql.c"
+#line 3221 "./mql.c"
         break;
-      case 132: /* get_monad_sets_statement ::= KEY_GET KEY_MONAD choice_number_SET monad_set_name_list */
-#line 548 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new GetMonadSetsStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy440);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-3].minor);
+      case 133: /* get_monad_sets_statement ::= KEY_GET KEY_MONAD choice_number_SET monad_set_name_list */
+#line 549 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new GetMonadSetsStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy216);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-2].minor);
 }
-#line 3171 "./mql.c"
+#line 3228 "./mql.c"
         break;
-      case 133: /* get_monad_sets_statement ::= KEY_GET KEY_MONAD choice_number_SET KEY_ALL */
-#line 551 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new GetMonadSetsStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-3].minor);
+      case 134: /* get_monad_sets_statement ::= KEY_GET KEY_MONAD choice_number_SET KEY_ALL */
+#line 552 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new GetMonadSetsStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,69,&mqlyymsp[0].minor);
 }
-#line 3179 "./mql.c"
+#line 3236 "./mql.c"
         break;
-      case 134: /* choice_number_SET ::= KEY_SETS */
-#line 556 "./mql.yxx"
-{mqlyygotominor.mqlyy292 = 0;  mqlyy_destructor(mqlyypParser,68,&mqlyymsp[0].minor);
-}
-#line 3185 "./mql.c"
-        break;
-      case 135: /* choice_number_SET ::= KEY_SET */
+      case 135: /* choice_number_SET ::= KEY_SETS */
 #line 557 "./mql.yxx"
-{mqlyygotominor.mqlyy292 = 0;  mqlyy_destructor(mqlyypParser,46,&mqlyymsp[0].minor);
+{mqlyygotominor.mqlyy284 = 0;  mqlyy_destructor(mqlyypParser,68,&mqlyymsp[0].minor);
 }
-#line 3191 "./mql.c"
+#line 3242 "./mql.c"
         break;
-      case 136: /* create_monad_set_statement ::= KEY_CREATE KEY_MONAD KEY_SET monad_set_name KEY_WITH monad_specification */
-#line 564 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new CreateMonadSetStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy34); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-5].minor);
+      case 136: /* choice_number_SET ::= KEY_SET */
+#line 558 "./mql.yxx"
+{mqlyygotominor.mqlyy284 = 0;  mqlyy_destructor(mqlyypParser,46,&mqlyymsp[0].minor);
+}
+#line 3248 "./mql.c"
+        break;
+      case 137: /* create_monad_set_statement ::= KEY_CREATE KEY_MONAD KEY_SET monad_set_name KEY_WITH monad_specification */
+#line 565 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new CreateMonadSetStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy362); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,46,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-1].minor);
 }
-#line 3200 "./mql.c"
+#line 3257 "./mql.c"
         break;
-      case 137: /* update_monad_set_statement ::= KEY_UPDATE KEY_MONAD KEY_SET monad_set_name monad_set_operator monad_set_name */
-#line 574 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new UpdateMonadSetStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy398, mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-2].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-5].minor);
+      case 138: /* update_monad_set_statement ::= KEY_UPDATE KEY_MONAD KEY_SET monad_set_name monad_set_operator monad_set_name */
+#line 575 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new UpdateMonadSetStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy142, mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-2].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,46,&mqlyymsp[-3].minor);
 }
-#line 3208 "./mql.c"
+#line 3265 "./mql.c"
         break;
-      case 138: /* update_monad_set_statement ::= KEY_UPDATE KEY_MONAD KEY_SET monad_set_name KEY_REPLACE monad_set_name */
-#line 580 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new UpdateMonadSetStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), kSOReplace, mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-2].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-5].minor);
-  mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-4].minor);
-  mqlyy_destructor(mqlyypParser,46,&mqlyymsp[-3].minor);
-  mqlyy_destructor(mqlyypParser,70,&mqlyymsp[-1].minor);
-}
-#line 3217 "./mql.c"
-        break;
-      case 139: /* update_monad_set_statement ::= KEY_UPDATE KEY_MONAD KEY_SET monad_set_name monad_set_operator monad_set */
-#line 586 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new UpdateMonadSetStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy398, mqlyymsp[0].minor.mqlyy34); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-5].minor);
-  mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-4].minor);
-  mqlyy_destructor(mqlyypParser,46,&mqlyymsp[-3].minor);
-}
-#line 3225 "./mql.c"
-        break;
-      case 140: /* update_monad_set_statement ::= KEY_UPDATE KEY_MONAD KEY_SET monad_set_name KEY_REPLACE monad_set */
-#line 592 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new UpdateMonadSetStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), kSOReplace, mqlyymsp[0].minor.mqlyy34); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-5].minor);
+      case 139: /* update_monad_set_statement ::= KEY_UPDATE KEY_MONAD KEY_SET monad_set_name KEY_REPLACE monad_set_name */
+#line 581 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new UpdateMonadSetStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), kSOReplace, mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-2].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,46,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,70,&mqlyymsp[-1].minor);
 }
-#line 3234 "./mql.c"
+#line 3274 "./mql.c"
         break;
-      case 141: /* drop_monad_set_statement ::= KEY_DROP KEY_MONAD KEY_SET monad_set_name */
-#line 599 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new DropMonadSetStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,12,&mqlyymsp[-3].minor);
+      case 140: /* update_monad_set_statement ::= KEY_UPDATE KEY_MONAD KEY_SET monad_set_name monad_set_operator monad_set */
+#line 587 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new UpdateMonadSetStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy142, mqlyymsp[0].minor.mqlyy362); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-5].minor);
+  mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-4].minor);
+  mqlyy_destructor(mqlyypParser,46,&mqlyymsp[-3].minor);
+}
+#line 3282 "./mql.c"
+        break;
+      case 141: /* update_monad_set_statement ::= KEY_UPDATE KEY_MONAD KEY_SET monad_set_name KEY_REPLACE monad_set */
+#line 593 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new UpdateMonadSetStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), kSOReplace, mqlyymsp[0].minor.mqlyy362); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-5].minor);
+  mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-4].minor);
+  mqlyy_destructor(mqlyypParser,46,&mqlyymsp[-3].minor);
+  mqlyy_destructor(mqlyypParser,70,&mqlyymsp[-1].minor);
+}
+#line 3291 "./mql.c"
+        break;
+      case 142: /* drop_monad_set_statement ::= KEY_DROP KEY_MONAD KEY_SET monad_set_name */
+#line 600 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new DropMonadSetStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,12,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,46,&mqlyymsp[-1].minor);
 }
-#line 3242 "./mql.c"
+#line 3299 "./mql.c"
         break;
-      case 143: /* monad_set_name_list ::= monad_set_name */
-      case 201: /* object_type_name_list ::= object_type_name */ mqlyytestcase(mqlyyruleno==201);
-      case 253: /* list_of_identifier ::= IDENTIFIER */ mqlyytestcase(mqlyyruleno==253);
-#line 610 "./mql.yxx"
-{ mqlyygotominor.mqlyy440 = new StringListNode(*(mqlyymsp[0].minor.mqlyy0->pString), 0); deleteToken(mqlyymsp[0].minor.mqlyy0); }
-#line 3249 "./mql.c"
+      case 144: /* monad_set_name_list ::= monad_set_name */
+      case 202: /* object_type_name_list ::= object_type_name */ mqlyytestcase(mqlyyruleno==202);
+      case 265: /* list_of_identifier ::= IDENTIFIER */ mqlyytestcase(mqlyyruleno==265);
+#line 611 "./mql.yxx"
+{ mqlyygotominor.mqlyy216 = new StringListNode(*(mqlyymsp[0].minor.mqlyy0->pString), 0); deleteToken(mqlyymsp[0].minor.mqlyy0); }
+#line 3306 "./mql.c"
         break;
-      case 144: /* monad_set_name_list ::= monad_set_name_list KEY_COMMA monad_set_name */
-      case 202: /* object_type_name_list ::= object_type_name_list KEY_COMMA object_type_name */ mqlyytestcase(mqlyyruleno==202);
-      case 254: /* list_of_identifier ::= list_of_identifier KEY_COMMA IDENTIFIER */ mqlyytestcase(mqlyyruleno==254);
-#line 613 "./mql.yxx"
-{ mqlyygotominor.mqlyy440 = new StringListNode(*(mqlyymsp[0].minor.mqlyy0->pString), mqlyymsp[-2].minor.mqlyy440); mqlyymsp[-2].minor.mqlyy440->setNext(mqlyygotominor.mqlyy440); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-1].minor);
+      case 145: /* monad_set_name_list ::= monad_set_name_list KEY_COMMA monad_set_name */
+      case 203: /* object_type_name_list ::= object_type_name_list KEY_COMMA object_type_name */ mqlyytestcase(mqlyyruleno==203);
+      case 266: /* list_of_identifier ::= list_of_identifier KEY_COMMA IDENTIFIER */ mqlyytestcase(mqlyyruleno==266);
+#line 614 "./mql.yxx"
+{ mqlyygotominor.mqlyy216 = new StringListNode(*(mqlyymsp[0].minor.mqlyy0->pString), mqlyymsp[-2].minor.mqlyy216); mqlyymsp[-2].minor.mqlyy216->setNext(mqlyygotominor.mqlyy216); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-1].minor);
 }
-#line 3257 "./mql.c"
+#line 3314 "./mql.c"
         break;
-      case 145: /* create_enumeration_statement ::= KEY_CREATE choice_ENUM_ERATION enumeration_name KEY_EQUALS KEY_OPEN_BRACE ec_declaration_list KEY_CLOSE_BRACE */
-#line 622 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new CreateEnumerationStatement((MQLExecEnv*) pEE, mqlyymsp[-4].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy461); deleteToken(mqlyymsp[-4].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-6].minor);
+      case 146: /* create_enumeration_statement ::= KEY_CREATE choice_ENUM_ERATION enumeration_name KEY_EQUALS KEY_OPEN_BRACE ec_declaration_list KEY_CLOSE_BRACE */
+#line 623 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new CreateEnumerationStatement((MQLExecEnv*) pEE, mqlyymsp[-4].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy93); deleteToken(mqlyymsp[-4].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-6].minor);
   mqlyy_destructor(mqlyypParser,72,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,73,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,74,&mqlyymsp[0].minor);
 }
-#line 3266 "./mql.c"
+#line 3323 "./mql.c"
         break;
-      case 146: /* choice_ENUM_ERATION ::= KEY_ENUMERATION */
-#line 627 "./mql.yxx"
-{ mqlyygotominor.mqlyy292 = 0;   mqlyy_destructor(mqlyypParser,75,&mqlyymsp[0].minor);
-}
-#line 3272 "./mql.c"
-        break;
-      case 147: /* choice_ENUM_ERATION ::= KEY_ENUM */
+      case 147: /* choice_ENUM_ERATION ::= KEY_ENUMERATION */
 #line 628 "./mql.yxx"
-{ mqlyygotominor.mqlyy292 = 0;   mqlyy_destructor(mqlyypParser,76,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy284 = 0;   mqlyy_destructor(mqlyypParser,75,&mqlyymsp[0].minor);
 }
-#line 3278 "./mql.c"
+#line 3329 "./mql.c"
         break;
-      case 149: /* ec_declaration_list ::= ec_declaration */
-#line 638 "./mql.yxx"
-{ mqlyygotominor.mqlyy461 = mqlyymsp[0].minor.mqlyy461; }
-#line 3283 "./mql.c"
-        break;
-      case 150: /* ec_declaration_list ::= ec_declaration_list KEY_COMMA ec_declaration */
-#line 640 "./mql.yxx"
-{ mqlyygotominor.mqlyy461 = mqlyymsp[0].minor.mqlyy461; mqlyygotominor.mqlyy461->setNext(mqlyymsp[-2].minor.mqlyy461);   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-1].minor);
+      case 148: /* choice_ENUM_ERATION ::= KEY_ENUM */
+#line 629 "./mql.yxx"
+{ mqlyygotominor.mqlyy284 = 0;   mqlyy_destructor(mqlyypParser,76,&mqlyymsp[0].minor);
 }
-#line 3289 "./mql.c"
+#line 3335 "./mql.c"
         break;
-      case 151: /* ec_declaration ::= opt_DEFAULT ec_name opt_ec_initialization */
-#line 645 "./mql.yxx"
-{ mqlyygotominor.mqlyy461 = new ECDeclaration(mqlyymsp[-2].minor.mqlyy137, mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy587, 0); 
+      case 150: /* ec_declaration_list ::= ec_declaration */
+#line 639 "./mql.yxx"
+{ mqlyygotominor.mqlyy93 = mqlyymsp[0].minor.mqlyy93; }
+#line 3340 "./mql.c"
+        break;
+      case 151: /* ec_declaration_list ::= ec_declaration_list KEY_COMMA ec_declaration */
+#line 641 "./mql.yxx"
+{ mqlyygotominor.mqlyy93 = mqlyymsp[0].minor.mqlyy93; mqlyygotominor.mqlyy93->setNext(mqlyymsp[-2].minor.mqlyy93);   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-1].minor);
+}
+#line 3346 "./mql.c"
+        break;
+      case 152: /* ec_declaration ::= opt_DEFAULT ec_name opt_ec_initialization */
+#line 646 "./mql.yxx"
+{ mqlyygotominor.mqlyy93 = new ECDeclaration(mqlyymsp[-2].minor.mqlyy537, mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy259, 0); 
       deleteToken(mqlyymsp[-1].minor.mqlyy0); 
     }
-#line 3296 "./mql.c"
+#line 3353 "./mql.c"
         break;
-      case 152: /* opt_DEFAULT ::= KEY_DEFAULT */
-#line 653 "./mql.yxx"
-{ mqlyygotominor.mqlyy137 = true;   mqlyy_destructor(mqlyypParser,55,&mqlyymsp[0].minor);
+      case 153: /* opt_DEFAULT ::= KEY_DEFAULT */
+#line 654 "./mql.yxx"
+{ mqlyygotominor.mqlyy537 = true;   mqlyy_destructor(mqlyypParser,55,&mqlyymsp[0].minor);
 }
-#line 3302 "./mql.c"
+#line 3359 "./mql.c"
         break;
-      case 155: /* opt_ec_initialization ::= ec_initialization */
-#line 665 "./mql.yxx"
-{ mqlyygotominor.mqlyy587 = new long(mqlyymsp[0].minor.mqlyy249); }
-#line 3307 "./mql.c"
+      case 156: /* opt_ec_initialization ::= ec_initialization */
+#line 666 "./mql.yxx"
+{ mqlyygotominor.mqlyy259 = new long(mqlyymsp[0].minor.mqlyy377); }
+#line 3364 "./mql.c"
         break;
-      case 156: /* opt_ec_initialization ::= */
-#line 668 "./mql.yxx"
-{ mqlyygotominor.mqlyy587 = 0; }
-#line 3312 "./mql.c"
+      case 157: /* opt_ec_initialization ::= */
+#line 669 "./mql.yxx"
+{ mqlyygotominor.mqlyy259 = 0; }
+#line 3369 "./mql.c"
         break;
-      case 157: /* update_enumeration_statement ::= KEY_UPDATE choice_ENUM_ERATION enumeration_name KEY_EQUALS KEY_OPEN_BRACE ec_update_list KEY_CLOSE_BRACE */
-#line 676 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new UpdateEnumerationStatement((MQLExecEnv*) pEE, mqlyymsp[-4].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy362); deleteToken(mqlyymsp[-4].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-6].minor);
+      case 158: /* update_enumeration_statement ::= KEY_UPDATE choice_ENUM_ERATION enumeration_name KEY_EQUALS KEY_OPEN_BRACE ec_update_list KEY_CLOSE_BRACE */
+#line 677 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new UpdateEnumerationStatement((MQLExecEnv*) pEE, mqlyymsp[-4].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy138); deleteToken(mqlyymsp[-4].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-6].minor);
   mqlyy_destructor(mqlyypParser,72,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,73,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,74,&mqlyymsp[0].minor);
 }
-#line 3321 "./mql.c"
+#line 3378 "./mql.c"
         break;
-      case 158: /* ec_update_list ::= ec_update */
-#line 682 "./mql.yxx"
-{ mqlyygotominor.mqlyy362 = mqlyymsp[0].minor.mqlyy362; }
-#line 3326 "./mql.c"
+      case 159: /* ec_update_list ::= ec_update */
+#line 683 "./mql.yxx"
+{ mqlyygotominor.mqlyy138 = mqlyymsp[0].minor.mqlyy138; }
+#line 3383 "./mql.c"
         break;
-      case 159: /* ec_update_list ::= ec_update_list KEY_COMMA ec_update */
-#line 684 "./mql.yxx"
-{ mqlyygotominor.mqlyy362 = mqlyymsp[0].minor.mqlyy362; mqlyygotominor.mqlyy362->setNext(mqlyymsp[-2].minor.mqlyy362);   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-1].minor);
+      case 160: /* ec_update_list ::= ec_update_list KEY_COMMA ec_update */
+#line 685 "./mql.yxx"
+{ mqlyygotominor.mqlyy138 = mqlyymsp[0].minor.mqlyy138; mqlyygotominor.mqlyy138->setNext(mqlyymsp[-2].minor.mqlyy138);   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-1].minor);
 }
-#line 3332 "./mql.c"
+#line 3389 "./mql.c"
         break;
-      case 160: /* ec_update ::= opt_ADD opt_DEFAULT ec_name ec_initialization */
-#line 690 "./mql.yxx"
-{ mqlyygotominor.mqlyy362 = new ECUpdate(mqlyymsp[-2].minor.mqlyy137, mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy249, kAdd, 0); deleteToken(mqlyymsp[-1].minor.mqlyy0); }
-#line 3337 "./mql.c"
+      case 161: /* ec_update ::= opt_ADD opt_DEFAULT ec_name ec_initialization */
+#line 691 "./mql.yxx"
+{ mqlyygotominor.mqlyy138 = new ECUpdate(mqlyymsp[-2].minor.mqlyy537, mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy377, kAdd, 0); deleteToken(mqlyymsp[-1].minor.mqlyy0); }
+#line 3394 "./mql.c"
         break;
-      case 161: /* ec_update ::= KEY_UPDATE opt_DEFAULT ec_name ec_initialization */
-#line 692 "./mql.yxx"
-{ mqlyygotominor.mqlyy362 = new ECUpdate(mqlyymsp[-2].minor.mqlyy137, mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy249, kUpdate, 0); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-3].minor);
+      case 162: /* ec_update ::= KEY_UPDATE opt_DEFAULT ec_name ec_initialization */
+#line 693 "./mql.yxx"
+{ mqlyygotominor.mqlyy138 = new ECUpdate(mqlyymsp[-2].minor.mqlyy537, mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy377, kUpdate, 0); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-3].minor);
 }
-#line 3343 "./mql.c"
+#line 3400 "./mql.c"
         break;
-      case 162: /* ec_update ::= KEY_REMOVE ec_name */
-#line 694 "./mql.yxx"
-{ mqlyygotominor.mqlyy362 = new ECUpdate(false, mqlyymsp[0].minor.mqlyy0->extractString(), 0, kRemove, 0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,58,&mqlyymsp[-1].minor);
+      case 163: /* ec_update ::= KEY_REMOVE ec_name */
+#line 695 "./mql.yxx"
+{ mqlyygotominor.mqlyy138 = new ECUpdate(false, mqlyymsp[0].minor.mqlyy0->extractString(), 0, kRemove, 0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,58,&mqlyymsp[-1].minor);
 }
-#line 3349 "./mql.c"
+#line 3406 "./mql.c"
         break;
-      case 163: /* ec_initialization ::= KEY_EQUALS signed_integer */
-#line 699 "./mql.yxx"
-{ mqlyygotominor.mqlyy249 = mqlyymsp[0].minor.mqlyy249;   mqlyy_destructor(mqlyypParser,72,&mqlyymsp[-1].minor);
+      case 164: /* ec_initialization ::= KEY_EQUALS signed_integer */
+#line 700 "./mql.yxx"
+{ mqlyygotominor.mqlyy377 = mqlyymsp[0].minor.mqlyy377;   mqlyy_destructor(mqlyypParser,72,&mqlyymsp[-1].minor);
 }
-#line 3355 "./mql.c"
+#line 3412 "./mql.c"
         break;
-      case 164: /* signed_integer ::= INTEGER */
-      case 167: /* unsigned_integer ::= INTEGER */ mqlyytestcase(mqlyyruleno==167);
-#line 703 "./mql.yxx"
-{ mqlyygotominor.mqlyy249 = mqlyymsp[0].minor.mqlyy0->integer; deleteToken(mqlyymsp[0].minor.mqlyy0); }
-#line 3361 "./mql.c"
-        break;
-      case 165: /* signed_integer ::= KEY_DASH INTEGER */
+      case 165: /* signed_integer ::= INTEGER */
+      case 168: /* unsigned_integer ::= INTEGER */ mqlyytestcase(mqlyyruleno==168);
 #line 704 "./mql.yxx"
-{ mqlyygotominor.mqlyy249 = -(mqlyymsp[0].minor.mqlyy0->integer); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,77,&mqlyymsp[-1].minor);
-}
-#line 3367 "./mql.c"
+{ mqlyygotominor.mqlyy377 = mqlyymsp[0].minor.mqlyy0->integer; deleteToken(mqlyymsp[0].minor.mqlyy0); }
+#line 3418 "./mql.c"
         break;
-      case 166: /* signed_integer ::= KEY_NIL */
+      case 166: /* signed_integer ::= KEY_DASH INTEGER */
 #line 705 "./mql.yxx"
-{ mqlyygotominor.mqlyy249 = NIL;   mqlyy_destructor(mqlyypParser,78,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy377 = -(mqlyymsp[0].minor.mqlyy0->integer); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,77,&mqlyymsp[-1].minor);
 }
-#line 3373 "./mql.c"
+#line 3424 "./mql.c"
         break;
-      case 168: /* drop_enumeration_statement ::= KEY_DROP choice_ENUM_ERATION enumeration_name */
-#line 718 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new DropEnumerationStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,12,&mqlyymsp[-2].minor);
+      case 167: /* signed_integer ::= KEY_NIL */
+#line 706 "./mql.yxx"
+{ mqlyygotominor.mqlyy377 = NIL;   mqlyy_destructor(mqlyypParser,78,&mqlyymsp[0].minor);
 }
-#line 3379 "./mql.c"
+#line 3430 "./mql.c"
         break;
-      case 169: /* create_segment_statement ::= KEY_CREATE KEY_SEGMENT segment_name KEY_RANGE KEY_EQUALS segment_range */
-#line 728 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new CreateSegmentStatement((MQLExecEnv*) pEE, mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy34); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-5].minor);
+      case 169: /* drop_enumeration_statement ::= KEY_DROP choice_ENUM_ERATION enumeration_name */
+#line 719 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new DropEnumerationStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,12,&mqlyymsp[-2].minor);
+}
+#line 3436 "./mql.c"
+        break;
+      case 170: /* create_segment_statement ::= KEY_CREATE KEY_SEGMENT segment_name KEY_RANGE KEY_EQUALS segment_range */
+#line 729 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new CreateSegmentStatement((MQLExecEnv*) pEE, mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy362); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,79,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,27,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,72,&mqlyymsp[-1].minor);
 }
-#line 3388 "./mql.c"
+#line 3445 "./mql.c"
         break;
-      case 171: /* segment_range ::= INTEGER KEY_DASH INTEGER */
-#line 738 "./mql.yxx"
-{ mqlyygotominor.mqlyy34 = new MQLMonadSetElement(mqlyymsp[-2].minor.mqlyy0->integer, mqlyymsp[0].minor.mqlyy0->integer, 0, true);  deleteToken(mqlyymsp[-2].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,77,&mqlyymsp[-1].minor);
+      case 172: /* segment_range ::= INTEGER KEY_DASH INTEGER */
+#line 739 "./mql.yxx"
+{ mqlyygotominor.mqlyy362 = new MQLMonadSetElement(mqlyymsp[-2].minor.mqlyy0->integer, mqlyymsp[0].minor.mqlyy0->integer, 0, true);  deleteToken(mqlyymsp[-2].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,77,&mqlyymsp[-1].minor);
 }
-#line 3394 "./mql.c"
+#line 3451 "./mql.c"
         break;
-      case 172: /* select_statement ::= select_clause in_clause with_max_range_clause returning_clause where_clause */
-#line 748 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new SelectStatement((MQLExecEnv*) pEE, mqlyymsp[-4].minor.mqlyy253, mqlyymsp[-3].minor.mqlyy34, mqlyymsp[-2].minor.mqlyy278, mqlyymsp[-1].minor.mqlyy309, mqlyymsp[0].minor.mqlyy295); }
-#line 3399 "./mql.c"
+      case 173: /* select_statement ::= select_clause in_clause with_max_range_clause returning_clause where_clause */
+#line 749 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new SelectStatement((MQLExecEnv*) pEE, mqlyymsp[-4].minor.mqlyy429, mqlyymsp[-3].minor.mqlyy362, mqlyymsp[-2].minor.mqlyy326, mqlyymsp[-1].minor.mqlyy45, mqlyymsp[0].minor.mqlyy559); }
+#line 3456 "./mql.c"
         break;
-      case 173: /* select_statement ::= select_clause KEY_IN IDENTIFIER with_max_range_clause returning_clause where_clause */
-#line 754 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new SelectStatement((MQLExecEnv*) pEE, mqlyymsp[-5].minor.mqlyy253, mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[-2].minor.mqlyy278, mqlyymsp[-1].minor.mqlyy309, mqlyymsp[0].minor.mqlyy295); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,80,&mqlyymsp[-4].minor);
+      case 174: /* select_statement ::= select_clause KEY_IN IDENTIFIER with_max_range_clause returning_clause where_clause */
+#line 755 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new SelectStatement((MQLExecEnv*) pEE, mqlyymsp[-5].minor.mqlyy429, mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[-2].minor.mqlyy326, mqlyymsp[-1].minor.mqlyy45, mqlyymsp[0].minor.mqlyy559); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,80,&mqlyymsp[-4].minor);
 }
-#line 3405 "./mql.c"
+#line 3462 "./mql.c"
         break;
-      case 174: /* select_clause ::= KEY_SELECT focus_specification opt_OBJECTS */
-#line 760 "./mql.yxx"
-{ mqlyygotominor.mqlyy253 = mqlyymsp[-1].minor.mqlyy253;   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-2].minor);
+      case 175: /* select_clause ::= KEY_SELECT focus_specification opt_OBJECTS */
+#line 761 "./mql.yxx"
+{ mqlyygotominor.mqlyy429 = mqlyymsp[-1].minor.mqlyy429;   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-2].minor);
 }
-#line 3411 "./mql.c"
+#line 3468 "./mql.c"
         break;
-      case 175: /* focus_specification ::= KEY_FOCUS */
-#line 765 "./mql.yxx"
-{ mqlyygotominor.mqlyy253 = kFocus;   mqlyy_destructor(mqlyypParser,81,&mqlyymsp[0].minor);
-}
-#line 3417 "./mql.c"
-        break;
-      case 176: /* focus_specification ::= KEY_ALL */
+      case 176: /* focus_specification ::= KEY_FOCUS */
 #line 766 "./mql.yxx"
-{ mqlyygotominor.mqlyy253 = kAll;   mqlyy_destructor(mqlyypParser,69,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy429 = kFocus;   mqlyy_destructor(mqlyypParser,81,&mqlyymsp[0].minor);
 }
-#line 3423 "./mql.c"
+#line 3474 "./mql.c"
         break;
-      case 177: /* opt_OBJECTS ::= KEY_OBJECTS */
-#line 771 "./mql.yxx"
-{ mqlyygotominor.mqlyy292 = 0;   mqlyy_destructor(mqlyypParser,28,&mqlyymsp[0].minor);
+      case 177: /* focus_specification ::= KEY_ALL */
+#line 767 "./mql.yxx"
+{ mqlyygotominor.mqlyy429 = kAll;   mqlyy_destructor(mqlyypParser,69,&mqlyymsp[0].minor);
 }
-#line 3429 "./mql.c"
+#line 3480 "./mql.c"
         break;
-      case 179: /* in_clause ::= KEY_IN in_specification */
-#line 778 "./mql.yxx"
-{ mqlyygotominor.mqlyy34 = mqlyymsp[0].minor.mqlyy34; mqlyygotominor.mqlyy34->setIsFirst(true);   mqlyy_destructor(mqlyypParser,80,&mqlyymsp[-1].minor);
+      case 178: /* opt_OBJECTS ::= KEY_OBJECTS */
+#line 772 "./mql.yxx"
+{ mqlyygotominor.mqlyy284 = 0;   mqlyy_destructor(mqlyypParser,28,&mqlyymsp[0].minor);
 }
-#line 3435 "./mql.c"
+#line 3486 "./mql.c"
         break;
-      case 180: /* in_clause ::= */
-#line 780 "./mql.yxx"
-{ mqlyygotominor.mqlyy34 = new MQLMonadSetElement(1L, MAX_MONAD, 0, true); }
-#line 3440 "./mql.c"
-        break;
-      case 181: /* in_specification ::= monad_set */
-      case 352: /* star_monad_set ::= monad_set */ mqlyytestcase(mqlyyruleno==352);
-#line 786 "./mql.yxx"
-{ mqlyygotominor.mqlyy34 = mqlyymsp[0].minor.mqlyy34; mqlyygotominor.mqlyy34->setIsFirst(true); }
-#line 3446 "./mql.c"
-        break;
-      case 182: /* in_specification ::= KEY_ALL */
-#line 788 "./mql.yxx"
-{ mqlyygotominor.mqlyy34 = new MQLMonadSetElement(1L, MAX_MONAD, 0, true);   mqlyy_destructor(mqlyypParser,69,&mqlyymsp[0].minor);
+      case 180: /* in_clause ::= KEY_IN in_specification */
+#line 779 "./mql.yxx"
+{ mqlyygotominor.mqlyy362 = mqlyymsp[0].minor.mqlyy362; mqlyygotominor.mqlyy362->setIsFirst(true);   mqlyy_destructor(mqlyypParser,80,&mqlyymsp[-1].minor);
 }
-#line 3452 "./mql.c"
-        break;
-      case 183: /* monad_set ::= KEY_OPEN_BRACE monad_set_element_list KEY_CLOSE_BRACE */
-#line 794 "./mql.yxx"
-{ mqlyygotominor.mqlyy34 = mqlyymsp[-1].minor.mqlyy34; mqlyygotominor.mqlyy34->setIsFirst(true);   mqlyy_destructor(mqlyypParser,73,&mqlyymsp[-2].minor);
-  mqlyy_destructor(mqlyypParser,74,&mqlyymsp[0].minor);
-}
-#line 3459 "./mql.c"
-        break;
-      case 184: /* monad_set_element_list ::= monad_set_element */
-#line 800 "./mql.yxx"
-{ mqlyygotominor.mqlyy34 = mqlyymsp[0].minor.mqlyy34; }
-#line 3464 "./mql.c"
-        break;
-      case 185: /* monad_set_element_list ::= monad_set_element_list KEY_COMMA monad_set_element */
-#line 803 "./mql.yxx"
-{ mqlyygotominor.mqlyy34 = mqlyymsp[0].minor.mqlyy34; mqlyygotominor.mqlyy34->setNext(mqlyymsp[-2].minor.mqlyy34);   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-1].minor);
-}
-#line 3470 "./mql.c"
-        break;
-      case 186: /* monad_set_element ::= INTEGER */
-#line 809 "./mql.yxx"
-{ mqlyygotominor.mqlyy34 = new MQLMonadSetElement(mqlyymsp[0].minor.mqlyy0->integer, 0, false); deleteToken(mqlyymsp[0].minor.mqlyy0); }
-#line 3475 "./mql.c"
-        break;
-      case 187: /* monad_set_element ::= INTEGER KEY_DASH INTEGER */
-#line 811 "./mql.yxx"
-{ mqlyygotominor.mqlyy34 = new MQLMonadSetElement(mqlyymsp[-2].minor.mqlyy0->integer, mqlyymsp[0].minor.mqlyy0->integer, 0, false); deleteToken(mqlyymsp[-2].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,77,&mqlyymsp[-1].minor);
-}
-#line 3481 "./mql.c"
-        break;
-      case 188: /* monad_set_element ::= INTEGER KEY_DASH */
-#line 813 "./mql.yxx"
-{ mqlyygotominor.mqlyy34 = new MQLMonadSetElement(mqlyymsp[-1].minor.mqlyy0->integer, MAX_MONAD, 0, false); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,77,&mqlyymsp[0].minor);
-}
-#line 3487 "./mql.c"
-        break;
-      case 189: /* with_max_range_clause ::= */
-#line 819 "./mql.yxx"
-{ mqlyygotominor.mqlyy278 = new MaxRange(MAX_MONAD); }
 #line 3492 "./mql.c"
         break;
-      case 190: /* with_max_range_clause ::= KEY_WITH KEY_MAX KEY_RANGE KEY_MAX_M KEY_MONADS */
-#line 821 "./mql.yxx"
-{ mqlyygotominor.mqlyy278 = new MaxRange(MAX_MONAD);   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-4].minor);
+      case 181: /* in_clause ::= */
+#line 781 "./mql.yxx"
+{ mqlyygotominor.mqlyy362 = new MQLMonadSetElement(1L, MAX_MONAD, 0, true); }
+#line 3497 "./mql.c"
+        break;
+      case 182: /* in_specification ::= monad_set */
+      case 364: /* star_monad_set ::= monad_set */ mqlyytestcase(mqlyyruleno==364);
+#line 787 "./mql.yxx"
+{ mqlyygotominor.mqlyy362 = mqlyymsp[0].minor.mqlyy362; mqlyygotominor.mqlyy362->setIsFirst(true); }
+#line 3503 "./mql.c"
+        break;
+      case 183: /* in_specification ::= KEY_ALL */
+#line 789 "./mql.yxx"
+{ mqlyygotominor.mqlyy362 = new MQLMonadSetElement(1L, MAX_MONAD, 0, true);   mqlyy_destructor(mqlyypParser,69,&mqlyymsp[0].minor);
+}
+#line 3509 "./mql.c"
+        break;
+      case 184: /* monad_set ::= KEY_OPEN_BRACE monad_set_element_list KEY_CLOSE_BRACE */
+#line 795 "./mql.yxx"
+{ mqlyygotominor.mqlyy362 = mqlyymsp[-1].minor.mqlyy362; mqlyygotominor.mqlyy362->setIsFirst(true);   mqlyy_destructor(mqlyypParser,73,&mqlyymsp[-2].minor);
+  mqlyy_destructor(mqlyypParser,74,&mqlyymsp[0].minor);
+}
+#line 3516 "./mql.c"
+        break;
+      case 185: /* monad_set_element_list ::= monad_set_element */
+#line 801 "./mql.yxx"
+{ mqlyygotominor.mqlyy362 = mqlyymsp[0].minor.mqlyy362; }
+#line 3521 "./mql.c"
+        break;
+      case 186: /* monad_set_element_list ::= monad_set_element_list KEY_COMMA monad_set_element */
+#line 804 "./mql.yxx"
+{ mqlyygotominor.mqlyy362 = mqlyymsp[0].minor.mqlyy362; mqlyygotominor.mqlyy362->setNext(mqlyymsp[-2].minor.mqlyy362);   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-1].minor);
+}
+#line 3527 "./mql.c"
+        break;
+      case 187: /* monad_set_element ::= INTEGER */
+#line 810 "./mql.yxx"
+{ mqlyygotominor.mqlyy362 = new MQLMonadSetElement(mqlyymsp[0].minor.mqlyy0->integer, 0, false); deleteToken(mqlyymsp[0].minor.mqlyy0); }
+#line 3532 "./mql.c"
+        break;
+      case 188: /* monad_set_element ::= INTEGER KEY_DASH INTEGER */
+#line 812 "./mql.yxx"
+{ mqlyygotominor.mqlyy362 = new MQLMonadSetElement(mqlyymsp[-2].minor.mqlyy0->integer, mqlyymsp[0].minor.mqlyy0->integer, 0, false); deleteToken(mqlyymsp[-2].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,77,&mqlyymsp[-1].minor);
+}
+#line 3538 "./mql.c"
+        break;
+      case 189: /* monad_set_element ::= INTEGER KEY_DASH */
+#line 814 "./mql.yxx"
+{ mqlyygotominor.mqlyy362 = new MQLMonadSetElement(mqlyymsp[-1].minor.mqlyy0->integer, MAX_MONAD, 0, false); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,77,&mqlyymsp[0].minor);
+}
+#line 3544 "./mql.c"
+        break;
+      case 190: /* with_max_range_clause ::= */
+#line 820 "./mql.yxx"
+{ mqlyygotominor.mqlyy326 = new MaxRange(MAX_MONAD); }
+#line 3549 "./mql.c"
+        break;
+      case 191: /* with_max_range_clause ::= KEY_WITH KEY_MAX KEY_RANGE KEY_MAX_M KEY_MONADS */
+#line 822 "./mql.yxx"
+{ mqlyygotominor.mqlyy326 = new MaxRange(MAX_MONAD);   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,82,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,27,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,83,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[0].minor);
 }
-#line 3502 "./mql.c"
+#line 3559 "./mql.c"
         break;
-      case 191: /* with_max_range_clause ::= KEY_WITH KEY_MAX KEY_RANGE INTEGER KEY_MONADS */
-#line 823 "./mql.yxx"
-{ mqlyygotominor.mqlyy278 = new MaxRange(mqlyymsp[-1].minor.mqlyy0->integer); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-4].minor);
+      case 192: /* with_max_range_clause ::= KEY_WITH KEY_MAX KEY_RANGE INTEGER KEY_MONADS */
+#line 824 "./mql.yxx"
+{ mqlyygotominor.mqlyy326 = new MaxRange(mqlyymsp[-1].minor.mqlyy0->integer); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,82,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,27,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[0].minor);
 }
-#line 3511 "./mql.c"
+#line 3568 "./mql.c"
         break;
-      case 192: /* with_max_range_clause ::= KEY_WITH KEY_MAX KEY_RANGE KEY_FEATURE feature_name KEY_FROM KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET */
-#line 825 "./mql.yxx"
-{ mqlyygotominor.mqlyy278 = new MaxRange(mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[-4].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0); deleteToken(mqlyymsp[-4].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-8].minor);
+      case 193: /* with_max_range_clause ::= KEY_WITH KEY_MAX KEY_RANGE KEY_FEATURE feature_name KEY_FROM KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET */
+#line 826 "./mql.yxx"
+{ mqlyygotominor.mqlyy326 = new MaxRange(mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[-4].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0); deleteToken(mqlyymsp[-4].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-8].minor);
   mqlyy_destructor(mqlyypParser,82,&mqlyymsp[-7].minor);
   mqlyy_destructor(mqlyypParser,27,&mqlyymsp[-6].minor);
   mqlyy_destructor(mqlyypParser,84,&mqlyymsp[-5].minor);
@@ -106112,95 +108270,95 @@ static void mqlyy_reduce(
   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 3523 "./mql.c"
+#line 3580 "./mql.c"
         break;
-      case 193: /* returning_clause ::= */
-#line 831 "./mql.yxx"
-{ mqlyygotominor.mqlyy309 = new sheaf_return_type_pair(kFullSheaf, ((StringList*) 0)); }
-#line 3528 "./mql.c"
+      case 194: /* returning_clause ::= */
+#line 832 "./mql.yxx"
+{ mqlyygotominor.mqlyy45 = new sheaf_return_type_pair(kFullSheaf, ((StringList*) 0)); }
+#line 3585 "./mql.c"
         break;
-      case 194: /* returning_clause ::= KEY_RETURNING KEY_FULL KEY_SHEAF */
-#line 833 "./mql.yxx"
-{ mqlyygotominor.mqlyy309 = new sheaf_return_type_pair(kFullSheaf, ((StringList*) 0));   mqlyy_destructor(mqlyypParser,85,&mqlyymsp[-2].minor);
+      case 195: /* returning_clause ::= KEY_RETURNING KEY_FULL KEY_SHEAF */
+#line 834 "./mql.yxx"
+{ mqlyygotominor.mqlyy45 = new sheaf_return_type_pair(kFullSheaf, ((StringList*) 0));   mqlyy_destructor(mqlyypParser,85,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,86,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,87,&mqlyymsp[0].minor);
 }
-#line 3536 "./mql.c"
+#line 3593 "./mql.c"
         break;
-      case 195: /* returning_clause ::= KEY_RETURNING KEY_FLAT KEY_SHEAF */
-#line 835 "./mql.yxx"
+      case 196: /* returning_clause ::= KEY_RETURNING KEY_FLAT KEY_SHEAF */
+#line 836 "./mql.yxx"
 { StringList *pSL = new StringList(); 
-      mqlyygotominor.mqlyy309 = new sheaf_return_type_pair(kFlatSheaf, pSL);   mqlyy_destructor(mqlyypParser,85,&mqlyymsp[-2].minor);
+      mqlyygotominor.mqlyy45 = new sheaf_return_type_pair(kFlatSheaf, pSL);   mqlyy_destructor(mqlyypParser,85,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,88,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,87,&mqlyymsp[0].minor);
 }
-#line 3545 "./mql.c"
+#line 3602 "./mql.c"
         break;
-      case 196: /* returning_clause ::= KEY_RETURNING KEY_FLAT KEY_SHEAF KEY_ON object_type_name_list */
-#line 839 "./mql.yxx"
-{ StringList *pSL = new StringList(mqlyymsp[0].minor.mqlyy440); 
-      delete mqlyymsp[0].minor.mqlyy440;
-      mqlyygotominor.mqlyy309 = new sheaf_return_type_pair(kFlatSheaf, pSL);   mqlyy_destructor(mqlyypParser,85,&mqlyymsp[-4].minor);
+      case 197: /* returning_clause ::= KEY_RETURNING KEY_FLAT KEY_SHEAF KEY_ON object_type_name_list */
+#line 840 "./mql.yxx"
+{ StringList *pSL = new StringList(mqlyymsp[0].minor.mqlyy216); 
+      delete mqlyymsp[0].minor.mqlyy216;
+      mqlyygotominor.mqlyy45 = new sheaf_return_type_pair(kFlatSheaf, pSL);   mqlyy_destructor(mqlyypParser,85,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,88,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,87,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,16,&mqlyymsp[-1].minor);
 }
-#line 3556 "./mql.c"
+#line 3613 "./mql.c"
         break;
-      case 197: /* using_range_clause ::= */
-#line 846 "./mql.yxx"
-{ mqlyygotominor.mqlyy582 = 0; }
-#line 3561 "./mql.c"
+      case 198: /* using_range_clause ::= */
+#line 847 "./mql.yxx"
+{ mqlyygotominor.mqlyy94 = 0; }
+#line 3618 "./mql.c"
         break;
-      case 198: /* using_range_clause ::= KEY_RANGE KEY_ALL */
-#line 848 "./mql.yxx"
-{ mqlyygotominor.mqlyy582 = 0;   mqlyy_destructor(mqlyypParser,27,&mqlyymsp[-1].minor);
+      case 199: /* using_range_clause ::= KEY_RANGE KEY_ALL */
+#line 849 "./mql.yxx"
+{ mqlyygotominor.mqlyy94 = 0;   mqlyy_destructor(mqlyypParser,27,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,69,&mqlyymsp[0].minor);
 }
-#line 3568 "./mql.c"
+#line 3625 "./mql.c"
         break;
-      case 199: /* using_range_clause ::= KEY_RANGE KEY_OPEN_BRACKET unsigned_integer KEY_COMMA unsigned_integer KEY_CLOSE_BRACKET */
-#line 853 "./mql.yxx"
-{ mqlyygotominor.mqlyy582 = new UsingRange(mqlyymsp[-3].minor.mqlyy249, mqlyymsp[-1].minor.mqlyy249);   mqlyy_destructor(mqlyypParser,27,&mqlyymsp[-5].minor);
+      case 200: /* using_range_clause ::= KEY_RANGE KEY_OPEN_BRACKET unsigned_integer KEY_COMMA unsigned_integer KEY_CLOSE_BRACKET */
+#line 854 "./mql.yxx"
+{ mqlyygotominor.mqlyy94 = new UsingRange(mqlyymsp[-3].minor.mqlyy377, mqlyymsp[-1].minor.mqlyy377);   mqlyy_destructor(mqlyypParser,27,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
 }
-#line 3577 "./mql.c"
+#line 3634 "./mql.c"
         break;
-      case 200: /* using_range_clause ::= KEY_RANGE KEY_OPEN_BRACKET unsigned_integer KEY_CLOSE_BRACKET */
-#line 858 "./mql.yxx"
-{ mqlyygotominor.mqlyy582 = new UsingRange(0, mqlyymsp[-1].minor.mqlyy249);   mqlyy_destructor(mqlyypParser,27,&mqlyymsp[-3].minor);
+      case 201: /* using_range_clause ::= KEY_RANGE KEY_OPEN_BRACKET unsigned_integer KEY_CLOSE_BRACKET */
+#line 859 "./mql.yxx"
+{ mqlyygotominor.mqlyy94 = new UsingRange(0, mqlyymsp[-1].minor.mqlyy377);   mqlyy_destructor(mqlyypParser,27,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
 }
-#line 3585 "./mql.c"
+#line 3642 "./mql.c"
         break;
-      case 203: /* where_clause ::= KEY_WHERE mql_query */
-#line 871 "./mql.yxx"
-{ mqlyygotominor.mqlyy295 = mqlyymsp[0].minor.mqlyy295;   mqlyy_destructor(mqlyypParser,89,&mqlyymsp[-1].minor);
+      case 204: /* where_clause ::= KEY_WHERE mql_query */
+#line 872 "./mql.yxx"
+{ mqlyygotominor.mqlyy559 = mqlyymsp[0].minor.mqlyy559;   mqlyy_destructor(mqlyypParser,89,&mqlyymsp[-1].minor);
 }
-#line 3591 "./mql.c"
+#line 3648 "./mql.c"
         break;
-      case 204: /* select_objects_at_statement ::= KEY_SELECT opt_OBJECTS KEY_AT single_monad_specification KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET */
-#line 881 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new SelectObjectsAtStatement((MQLExecEnv*) pEE, mqlyymsp[-3].minor.mqlyy352, mqlyymsp[-1].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-6].minor);
+      case 205: /* select_objects_at_statement ::= KEY_SELECT opt_OBJECTS KEY_AT single_monad_specification KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET */
+#line 882 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new SelectObjectsAtStatement((MQLExecEnv*) pEE, mqlyymsp[-3].minor.mqlyy608, mqlyymsp[-1].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-6].minor);
   mqlyy_destructor(mqlyypParser,90,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 3600 "./mql.c"
+#line 3657 "./mql.c"
         break;
-      case 205: /* single_monad_specification ::= KEY_MONAD KEY_EQUALS INTEGER */
-#line 887 "./mql.yxx"
-{ mqlyygotominor.mqlyy352 = mqlyymsp[0].minor.mqlyy0->integer; deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-2].minor);
+      case 206: /* single_monad_specification ::= KEY_MONAD KEY_EQUALS INTEGER */
+#line 888 "./mql.yxx"
+{ mqlyygotominor.mqlyy608 = mqlyymsp[0].minor.mqlyy0->integer; deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,72,&mqlyymsp[-1].minor);
 }
-#line 3607 "./mql.c"
+#line 3664 "./mql.c"
         break;
-      case 206: /* select_objects_having_monads_in_statement ::= KEY_SELECT KEY_OBJECTS KEY_HAVING KEY_MONADS KEY_IN monad_set KEY_OPEN_SQUARE_BRACKET object_type_to_find KEY_CLOSE_SQUARE_BRACKET */
-#line 898 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new SelectObjectsHavingMonadsInStatement((MQLExecEnv*) pEE, mqlyymsp[-3].minor.mqlyy34, *(mqlyymsp[-1].minor.mqlyy0->pString)); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-8].minor);
+      case 207: /* select_objects_having_monads_in_statement ::= KEY_SELECT KEY_OBJECTS KEY_HAVING KEY_MONADS KEY_IN monad_set KEY_OPEN_SQUARE_BRACKET object_type_to_find KEY_CLOSE_SQUARE_BRACKET */
+#line 899 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new SelectObjectsHavingMonadsInStatement((MQLExecEnv*) pEE, mqlyymsp[-3].minor.mqlyy362, *(mqlyymsp[-1].minor.mqlyy0->pString)); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-8].minor);
   mqlyy_destructor(mqlyypParser,28,&mqlyymsp[-7].minor);
   mqlyy_destructor(mqlyypParser,31,&mqlyymsp[-6].minor);
   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[-5].minor);
@@ -106208,17 +108366,105 @@ static void mqlyy_reduce(
   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 3619 "./mql.c"
+#line 3676 "./mql.c"
         break;
-      case 209: /* choice_object_type_or_all ::= KEY_ALL */
-#line 910 "./mql.yxx"
+      case 210: /* choice_object_type_or_all ::= KEY_ALL */
+#line 911 "./mql.yxx"
 { mqlyygotominor.mqlyy0 = newToken(); mqlyygotominor.mqlyy0->setString(new std::string("all"));   mqlyy_destructor(mqlyypParser,69,&mqlyymsp[0].minor);
 }
-#line 3625 "./mql.c"
+#line 3682 "./mql.c"
         break;
-      case 210: /* get_objects_having_monads_in_statement ::= KEY_GET KEY_OBJECTS KEY_HAVING KEY_MONADS KEY_IN in_specification using_monad_feature KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET */
-#line 922 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new GetObjectsHavingMonadsInStatement((MQLExecEnv*) pEE, mqlyymsp[-4].minor.mqlyy34, mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[-3].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-9].minor);
+      case 211: /* get_aggregate_features_statement ::= KEY_GET KEY_AGGREGATE KEY_FEATURES aggregate_feature_list KEY_FROM KEY_OBJECTS in_clause using_monad_feature KEY_OPEN_SQUARE_BRACKET object_type_name feature_constraints KEY_CLOSE_SQUARE_BRACKET */
+#line 925 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new GetAggregateFeaturesStatement((MQLExecEnv*) pEE, mqlyymsp[-8].minor.mqlyy250, mqlyymsp[-5].minor.mqlyy362, mqlyymsp[-4].minor.mqlyy0->extractString(), mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy441); deleteToken(mqlyymsp[-4].minor.mqlyy0); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-11].minor);
+  mqlyy_destructor(mqlyypParser,91,&mqlyymsp[-10].minor);
+  mqlyy_destructor(mqlyypParser,92,&mqlyymsp[-9].minor);
+  mqlyy_destructor(mqlyypParser,51,&mqlyymsp[-7].minor);
+  mqlyy_destructor(mqlyypParser,28,&mqlyymsp[-6].minor);
+  mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-3].minor);
+  mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
+}
+#line 3694 "./mql.c"
+        break;
+      case 212: /* aggregate_feature_list ::= aggregate_feature */
+#line 930 "./mql.yxx"
+{ mqlyygotominor.mqlyy250 = mqlyymsp[0].minor.mqlyy250; }
+#line 3699 "./mql.c"
+        break;
+      case 213: /* aggregate_feature_list ::= aggregate_feature_list KEY_COMMA aggregate_feature */
+#line 934 "./mql.yxx"
+{ mqlyygotominor.mqlyy250 = mqlyymsp[0].minor.mqlyy250; mqlyygotominor.mqlyy250->setNext(mqlyymsp[-2].minor.mqlyy250);   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-1].minor);
+}
+#line 3705 "./mql.c"
+        break;
+      case 214: /* aggregate_feature ::= KEY_MIN KEY_OPEN_BRACKET feature_name KEY_CLOSE_BRACKET */
+#line 939 "./mql.yxx"
+{ mqlyygotominor.mqlyy250 = new AggregateFeature(kAFMIN, mqlyymsp[-1].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,93,&mqlyymsp[-3].minor);
+  mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
+  mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
+}
+#line 3713 "./mql.c"
+        break;
+      case 215: /* aggregate_feature ::= KEY_MAX KEY_OPEN_BRACKET feature_name KEY_CLOSE_BRACKET */
+#line 941 "./mql.yxx"
+{ mqlyygotominor.mqlyy250 = new AggregateFeature(kAFMAX, mqlyymsp[-1].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,82,&mqlyymsp[-3].minor);
+  mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
+  mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
+}
+#line 3721 "./mql.c"
+        break;
+      case 216: /* aggregate_feature ::= KEY_SUM KEY_OPEN_BRACKET feature_name KEY_CLOSE_BRACKET */
+#line 943 "./mql.yxx"
+{ mqlyygotominor.mqlyy250 = new AggregateFeature(kAFSUM, mqlyymsp[-1].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,94,&mqlyymsp[-3].minor);
+  mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
+  mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
+}
+#line 3729 "./mql.c"
+        break;
+      case 217: /* aggregate_feature ::= KEY_COUNT KEY_OPEN_BRACKET KEY_STAR KEY_CLOSE_BRACKET */
+#line 945 "./mql.yxx"
+{ mqlyygotominor.mqlyy250 = new AggregateFeature(kAFCOUNT_ALL);   mqlyy_destructor(mqlyypParser,95,&mqlyymsp[-3].minor);
+  mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
+  mqlyy_destructor(mqlyypParser,96,&mqlyymsp[-1].minor);
+  mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
+}
+#line 3738 "./mql.c"
+        break;
+      case 218: /* aggregate_feature ::= KEY_COUNT KEY_OPEN_BRACKET aggregate_feature_comparison KEY_CLOSE_BRACKET */
+#line 948 "./mql.yxx"
+{ mqlyygotominor.mqlyy250 = new AggregateFeature(kAFCOUNT_FEATURE_COMPARISON, mqlyymsp[-1].minor.mqlyy398);   mqlyy_destructor(mqlyypParser,95,&mqlyymsp[-3].minor);
+  mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
+  mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
+}
+#line 3746 "./mql.c"
+        break;
+      case 219: /* aggregate_feature_comparison ::= feature_name comparison_operator value */
+      case 337: /* feature_comparison ::= feature_name comparison_operator value */ mqlyytestcase(mqlyyruleno==337);
+#line 953 "./mql.yxx"
+{ mqlyygotominor.mqlyy398 = new FeatureComparison(mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy200, mqlyymsp[0].minor.mqlyy356); deleteToken(mqlyymsp[-2].minor.mqlyy0); }
+#line 3752 "./mql.c"
+        break;
+      case 220: /* aggregate_feature_comparison ::= feature_name KEY_IN KEY_OPEN_BRACKET list_of_identifier KEY_CLOSE_BRACKET */
+      case 338: /* feature_comparison ::= feature_name KEY_IN KEY_OPEN_BRACKET list_of_identifier KEY_CLOSE_BRACKET */ mqlyytestcase(mqlyyruleno==338);
+#line 955 "./mql.yxx"
+{ mqlyygotominor.mqlyy398 = new FeatureComparison(mqlyymsp[-4].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy216); deleteToken(mqlyymsp[-4].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,80,&mqlyymsp[-3].minor);
+  mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
+  mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
+}
+#line 3761 "./mql.c"
+        break;
+      case 221: /* aggregate_feature_comparison ::= feature_name KEY_IN KEY_OPEN_BRACKET list_of_integer KEY_CLOSE_BRACKET */
+      case 339: /* feature_comparison ::= feature_name KEY_IN KEY_OPEN_BRACKET list_of_integer KEY_CLOSE_BRACKET */ mqlyytestcase(mqlyyruleno==339);
+#line 957 "./mql.yxx"
+{ mqlyygotominor.mqlyy398 = new FeatureComparison(mqlyymsp[-4].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy71); deleteToken(mqlyymsp[-4].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,80,&mqlyymsp[-3].minor);
+  mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
+  mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
+}
+#line 3770 "./mql.c"
+        break;
+      case 222: /* get_objects_having_monads_in_statement ::= KEY_GET KEY_OBJECTS KEY_HAVING KEY_MONADS KEY_IN in_specification using_monad_feature KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET */
+#line 973 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new GetObjectsHavingMonadsInStatement((MQLExecEnv*) pEE, mqlyymsp[-4].minor.mqlyy362, mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[-3].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-9].minor);
   mqlyy_destructor(mqlyypParser,28,&mqlyymsp[-8].minor);
   mqlyy_destructor(mqlyypParser,31,&mqlyymsp[-7].minor);
   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[-6].minor);
@@ -106226,11 +108472,11 @@ static void mqlyy_reduce(
   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 3637 "./mql.c"
+#line 3782 "./mql.c"
         break;
-      case 211: /* get_objects_having_monads_in_statement ::= KEY_GET KEY_OBJECTS KEY_HAVING KEY_MONADS KEY_IN in_specification using_monad_feature KEY_OPEN_SQUARE_BRACKET object_type_name KEY_GET KEY_ALL KEY_CLOSE_SQUARE_BRACKET */
-#line 930 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new GetObjectsHavingMonadsInStatement((MQLExecEnv*) pEE, mqlyymsp[-6].minor.mqlyy34, mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[-5].minor.mqlyy0->extractString(), true); deleteToken(mqlyymsp[-3].minor.mqlyy0); deleteToken(mqlyymsp[-5].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-11].minor);
+      case 223: /* get_objects_having_monads_in_statement ::= KEY_GET KEY_OBJECTS KEY_HAVING KEY_MONADS KEY_IN in_specification using_monad_feature KEY_OPEN_SQUARE_BRACKET object_type_name KEY_GET KEY_ALL KEY_CLOSE_SQUARE_BRACKET */
+#line 981 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new GetObjectsHavingMonadsInStatement((MQLExecEnv*) pEE, mqlyymsp[-6].minor.mqlyy362, mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[-5].minor.mqlyy0->extractString(), true); deleteToken(mqlyymsp[-3].minor.mqlyy0); deleteToken(mqlyymsp[-5].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-11].minor);
   mqlyy_destructor(mqlyypParser,28,&mqlyymsp[-10].minor);
   mqlyy_destructor(mqlyypParser,31,&mqlyymsp[-9].minor);
   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[-8].minor);
@@ -106240,11 +108486,11 @@ static void mqlyy_reduce(
   mqlyy_destructor(mqlyypParser,69,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 3651 "./mql.c"
+#line 3796 "./mql.c"
         break;
-      case 212: /* get_objects_having_monads_in_statement ::= KEY_GET KEY_OBJECTS KEY_HAVING KEY_MONADS KEY_IN in_specification using_monad_feature KEY_OPEN_SQUARE_BRACKET object_type_name KEY_GET feature_list KEY_CLOSE_SQUARE_BRACKET */
-#line 938 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new GetObjectsHavingMonadsInStatement((MQLExecEnv*) pEE, mqlyymsp[-6].minor.mqlyy34, mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[-5].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy242); deleteToken(mqlyymsp[-3].minor.mqlyy0); deleteToken(mqlyymsp[-5].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-11].minor);
+      case 224: /* get_objects_having_monads_in_statement ::= KEY_GET KEY_OBJECTS KEY_HAVING KEY_MONADS KEY_IN in_specification using_monad_feature KEY_OPEN_SQUARE_BRACKET object_type_name KEY_GET feature_list KEY_CLOSE_SQUARE_BRACKET */
+#line 989 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new GetObjectsHavingMonadsInStatement((MQLExecEnv*) pEE, mqlyymsp[-6].minor.mqlyy362, mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[-5].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy98); deleteToken(mqlyymsp[-3].minor.mqlyy0); deleteToken(mqlyymsp[-5].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-11].minor);
   mqlyy_destructor(mqlyypParser,28,&mqlyymsp[-10].minor);
   mqlyy_destructor(mqlyypParser,31,&mqlyymsp[-9].minor);
   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[-8].minor);
@@ -106253,303 +108499,303 @@ static void mqlyy_reduce(
   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 3664 "./mql.c"
+#line 3809 "./mql.c"
         break;
-      case 213: /* using_monad_feature ::= KEY_USING KEY_MONAD KEY_FEATURE IDENTIFIER */
-#line 942 "./mql.yxx"
+      case 225: /* using_monad_feature ::= KEY_USING KEY_MONAD KEY_FEATURE IDENTIFIER */
+#line 993 "./mql.yxx"
 { mqlyygotominor.mqlyy0 = mqlyymsp[0].minor.mqlyy0;   mqlyy_destructor(mqlyypParser,10,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,84,&mqlyymsp[-1].minor);
 }
-#line 3672 "./mql.c"
+#line 3817 "./mql.c"
         break;
-      case 214: /* using_monad_feature ::= KEY_USING KEY_MONAD KEY_FEATURE KEY_MONADS */
-#line 943 "./mql.yxx"
+      case 226: /* using_monad_feature ::= KEY_USING KEY_MONAD KEY_FEATURE KEY_MONADS */
+#line 994 "./mql.yxx"
 { mqlyygotominor.mqlyy0 = newToken(); mqlyygotominor.mqlyy0->setString(new std::string("monads"));   mqlyy_destructor(mqlyypParser,10,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,30,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,84,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[0].minor);
 }
-#line 3681 "./mql.c"
+#line 3826 "./mql.c"
         break;
-      case 215: /* using_monad_feature ::= */
-#line 944 "./mql.yxx"
+      case 227: /* using_monad_feature ::= */
+#line 995 "./mql.yxx"
 { mqlyygotominor.mqlyy0 = newToken(); mqlyygotominor.mqlyy0->setString(new std::string("monads")); }
-#line 3686 "./mql.c"
+#line 3831 "./mql.c"
         break;
-      case 216: /* select_object_types_statement ::= KEY_SELECT opt_OBJECT KEY_TYPES */
-#line 951 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new SelectObjectTypesStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-2].minor);
+      case 228: /* select_object_types_statement ::= KEY_SELECT opt_OBJECT KEY_TYPES */
+#line 1002 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new SelectObjectTypesStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,21,&mqlyymsp[0].minor);
 }
-#line 3693 "./mql.c"
+#line 3838 "./mql.c"
         break;
-      case 217: /* select_features_statement ::= KEY_SELECT KEY_FEATURES KEY_FROM opt_OBJECTYPE KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET */
-#line 958 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new SelectFeaturesStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-6].minor);
-  mqlyy_destructor(mqlyypParser,91,&mqlyymsp[-5].minor);
+      case 229: /* select_features_statement ::= KEY_SELECT KEY_FEATURES KEY_FROM opt_OBJECTYPE KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET */
+#line 1009 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new SelectFeaturesStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-6].minor);
+  mqlyy_destructor(mqlyypParser,92,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,51,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 3703 "./mql.c"
+#line 3848 "./mql.c"
         break;
-      case 218: /* get_set_from_feature_statement ::= KEY_GET KEY_SET KEY_FROM KEY_FEATURE feature_name KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET */
-#line 965 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new GetSetFromFeatureStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[-3].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-7].minor);
+      case 230: /* get_set_from_feature_statement ::= KEY_GET KEY_SET KEY_FROM KEY_FEATURE feature_name KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET */
+#line 1016 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new GetSetFromFeatureStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy0->extractString(), mqlyymsp[-3].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-7].minor);
   mqlyy_destructor(mqlyypParser,46,&mqlyymsp[-6].minor);
   mqlyy_destructor(mqlyypParser,51,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,84,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 3714 "./mql.c"
+#line 3859 "./mql.c"
         break;
-      case 219: /* opt_OBJECTYPE ::= KEY_OBJECT KEY_TYPE */
-#line 970 "./mql.yxx"
-{ mqlyygotominor.mqlyy292=0;   mqlyy_destructor(mqlyypParser,17,&mqlyymsp[-1].minor);
+      case 231: /* opt_OBJECTYPE ::= KEY_OBJECT KEY_TYPE */
+#line 1021 "./mql.yxx"
+{ mqlyygotominor.mqlyy284=0;   mqlyy_destructor(mqlyypParser,17,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,20,&mqlyymsp[0].minor);
 }
-#line 3721 "./mql.c"
+#line 3866 "./mql.c"
         break;
-      case 220: /* opt_OBJECTYPE ::= KEY_TYPE */
-#line 971 "./mql.yxx"
-{ mqlyygotominor.mqlyy292=0;   mqlyy_destructor(mqlyypParser,20,&mqlyymsp[0].minor);
+      case 232: /* opt_OBJECTYPE ::= KEY_TYPE */
+#line 1022 "./mql.yxx"
+{ mqlyygotominor.mqlyy284=0;   mqlyy_destructor(mqlyypParser,20,&mqlyymsp[0].minor);
 }
-#line 3727 "./mql.c"
+#line 3872 "./mql.c"
         break;
-      case 221: /* opt_OBJECTYPE ::= */
-#line 972 "./mql.yxx"
-{ mqlyygotominor.mqlyy292=0; }
-#line 3732 "./mql.c"
+      case 233: /* opt_OBJECTYPE ::= */
+#line 1023 "./mql.yxx"
+{ mqlyygotominor.mqlyy284=0; }
+#line 3877 "./mql.c"
         break;
-      case 222: /* select_enumerations_statement ::= KEY_SELECT KEY_ENUMERATIONS */
-#line 978 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new SelectEnumerationsStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-1].minor);
-  mqlyy_destructor(mqlyypParser,92,&mqlyymsp[0].minor);
+      case 234: /* select_enumerations_statement ::= KEY_SELECT KEY_ENUMERATIONS */
+#line 1029 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new SelectEnumerationsStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-1].minor);
+  mqlyy_destructor(mqlyypParser,97,&mqlyymsp[0].minor);
 }
-#line 3739 "./mql.c"
+#line 3884 "./mql.c"
         break;
-      case 223: /* select_enumeration_constants_statement ::= KEY_SELECT choice_ENUM_ERATION KEY_CONSTANTS KEY_FROM opt_ENUM_ERATION enumeration_name */
-#line 987 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new SelectEnumerationConstantsStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-5].minor);
-  mqlyy_destructor(mqlyypParser,93,&mqlyymsp[-3].minor);
+      case 235: /* select_enumeration_constants_statement ::= KEY_SELECT choice_ENUM_ERATION KEY_CONSTANTS KEY_FROM opt_ENUM_ERATION enumeration_name */
+#line 1038 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new SelectEnumerationConstantsStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-5].minor);
+  mqlyy_destructor(mqlyypParser,98,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,51,&mqlyymsp[-2].minor);
 }
-#line 3747 "./mql.c"
+#line 3892 "./mql.c"
         break;
-      case 224: /* opt_ENUM_ERATION ::= KEY_ENUM */
-#line 992 "./mql.yxx"
-{mqlyygotominor.mqlyy292=0;  mqlyy_destructor(mqlyypParser,76,&mqlyymsp[0].minor);
+      case 236: /* opt_ENUM_ERATION ::= KEY_ENUM */
+#line 1043 "./mql.yxx"
+{mqlyygotominor.mqlyy284=0;  mqlyy_destructor(mqlyypParser,76,&mqlyymsp[0].minor);
 }
-#line 3753 "./mql.c"
+#line 3898 "./mql.c"
         break;
-      case 225: /* opt_ENUM_ERATION ::= KEY_ENUMERATION */
-#line 993 "./mql.yxx"
-{mqlyygotominor.mqlyy292=0;  mqlyy_destructor(mqlyypParser,75,&mqlyymsp[0].minor);
+      case 237: /* opt_ENUM_ERATION ::= KEY_ENUMERATION */
+#line 1044 "./mql.yxx"
+{mqlyygotominor.mqlyy284=0;  mqlyy_destructor(mqlyypParser,75,&mqlyymsp[0].minor);
 }
-#line 3759 "./mql.c"
+#line 3904 "./mql.c"
         break;
-      case 226: /* opt_ENUM_ERATION ::= */
-#line 994 "./mql.yxx"
-{mqlyygotominor.mqlyy292=0;}
-#line 3764 "./mql.c"
+      case 238: /* opt_ENUM_ERATION ::= */
+#line 1045 "./mql.yxx"
+{mqlyygotominor.mqlyy284=0;}
+#line 3909 "./mql.c"
         break;
-      case 227: /* select_object_types_which_use_enum_statement ::= KEY_SELECT opt_OBJECT KEY_TYPES KEY_USING choice_ENUM_ERATION enumeration_name */
-#line 1003 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new SelectObjectTypesUsingEnumerationStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-5].minor);
+      case 239: /* select_object_types_which_use_enum_statement ::= KEY_SELECT opt_OBJECT KEY_TYPES KEY_USING choice_ENUM_ERATION enumeration_name */
+#line 1054 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new SelectObjectTypesUsingEnumerationStatement((MQLExecEnv*) pEE, mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,21,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,10,&mqlyymsp[-2].minor);
 }
-#line 3772 "./mql.c"
+#line 3917 "./mql.c"
         break;
-      case 228: /* select_min_m_statement ::= KEY_SELECT KEY_MIN_M */
-#line 1009 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new SelectMinMStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-1].minor);
-  mqlyy_destructor(mqlyypParser,94,&mqlyymsp[0].minor);
+      case 240: /* select_min_m_statement ::= KEY_SELECT KEY_MIN_M */
+#line 1060 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new SelectMinMStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-1].minor);
+  mqlyy_destructor(mqlyypParser,99,&mqlyymsp[0].minor);
 }
-#line 3779 "./mql.c"
+#line 3924 "./mql.c"
         break;
-      case 229: /* select_max_m_statement ::= KEY_SELECT KEY_MAX_M */
-#line 1015 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new SelectMaxMStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-1].minor);
+      case 241: /* select_max_m_statement ::= KEY_SELECT KEY_MAX_M */
+#line 1066 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new SelectMaxMStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,67,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,83,&mqlyymsp[0].minor);
 }
-#line 3786 "./mql.c"
+#line 3931 "./mql.c"
         break;
-      case 230: /* create_object_from_monads_statement ::= KEY_CREATE KEY_OBJECT KEY_FROM monad_specification with_id_d_specification object_creation_specification */
-#line 1024 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new CreateObjectFromMonadsStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy34, mqlyymsp[-1].minor.mqlyy72, mqlyymsp[0].minor.mqlyy365);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-5].minor);
+      case 242: /* create_object_from_monads_statement ::= KEY_CREATE KEY_OBJECT KEY_FROM monad_specification with_id_d_specification object_creation_specification */
+#line 1075 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new CreateObjectFromMonadsStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy362, mqlyymsp[-1].minor.mqlyy88, mqlyymsp[0].minor.mqlyy173);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,17,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,51,&mqlyymsp[-3].minor);
 }
-#line 3794 "./mql.c"
+#line 3939 "./mql.c"
         break;
-      case 231: /* monad_specification ::= KEY_MONADS KEY_EQUALS monad_set */
-#line 1029 "./mql.yxx"
-{ mqlyygotominor.mqlyy34 = mqlyymsp[0].minor.mqlyy34; mqlyygotominor.mqlyy34->setIsFirst(true);   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[-2].minor);
+      case 243: /* monad_specification ::= KEY_MONADS KEY_EQUALS monad_set */
+#line 1080 "./mql.yxx"
+{ mqlyygotominor.mqlyy362 = mqlyymsp[0].minor.mqlyy362; mqlyygotominor.mqlyy362->setIsFirst(true);   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,72,&mqlyymsp[-1].minor);
 }
-#line 3801 "./mql.c"
+#line 3946 "./mql.c"
         break;
-      case 232: /* with_id_d_specification ::= KEY_WITH KEY_ID_D KEY_EQUALS id_d_const */
-#line 1034 "./mql.yxx"
-{ mqlyygotominor.mqlyy72 = mqlyymsp[0].minor.mqlyy72;   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-3].minor);
+      case 244: /* with_id_d_specification ::= KEY_WITH KEY_ID_D KEY_EQUALS id_d_const */
+#line 1085 "./mql.yxx"
+{ mqlyygotominor.mqlyy88 = mqlyymsp[0].minor.mqlyy88;   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,45,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,72,&mqlyymsp[-1].minor);
 }
-#line 3809 "./mql.c"
+#line 3954 "./mql.c"
         break;
-      case 233: /* with_id_d_specification ::= */
-#line 1036 "./mql.yxx"
-{ mqlyygotominor.mqlyy72 = NIL; }
-#line 3814 "./mql.c"
+      case 245: /* with_id_d_specification ::= */
+#line 1087 "./mql.yxx"
+{ mqlyygotominor.mqlyy88 = NIL; }
+#line 3959 "./mql.c"
         break;
-      case 234: /* id_d_const ::= INTEGER */
-#line 1042 "./mql.yxx"
-{ mqlyygotominor.mqlyy72 = mqlyymsp[0].minor.mqlyy0->integer; deleteToken(mqlyymsp[0].minor.mqlyy0); }
-#line 3819 "./mql.c"
+      case 246: /* id_d_const ::= INTEGER */
+#line 1093 "./mql.yxx"
+{ mqlyygotominor.mqlyy88 = mqlyymsp[0].minor.mqlyy0->integer; deleteToken(mqlyymsp[0].minor.mqlyy0); }
+#line 3964 "./mql.c"
         break;
-      case 235: /* id_d_const ::= KEY_NIL */
-#line 1044 "./mql.yxx"
-{ mqlyygotominor.mqlyy72 = NIL;   mqlyy_destructor(mqlyypParser,78,&mqlyymsp[0].minor);
+      case 247: /* id_d_const ::= KEY_NIL */
+#line 1095 "./mql.yxx"
+{ mqlyygotominor.mqlyy88 = NIL;   mqlyy_destructor(mqlyypParser,78,&mqlyymsp[0].minor);
 }
-#line 3825 "./mql.c"
+#line 3970 "./mql.c"
         break;
-      case 236: /* object_creation_specification ::= KEY_OPEN_SQUARE_BRACKET object_type_name opt_list_of_feature_assignments KEY_CLOSE_SQUARE_BRACKET */
-      case 269: /* object_update_specification ::= KEY_OPEN_SQUARE_BRACKET object_type_name list_of_feature_assignments KEY_CLOSE_SQUARE_BRACKET */ mqlyytestcase(mqlyyruleno==269);
-#line 1052 "./mql.yxx"
-{ mqlyygotominor.mqlyy365 = new ObjectSpec(mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy600); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-3].minor);
+      case 248: /* object_creation_specification ::= KEY_OPEN_SQUARE_BRACKET object_type_name opt_list_of_feature_assignments KEY_CLOSE_SQUARE_BRACKET */
+      case 281: /* object_update_specification ::= KEY_OPEN_SQUARE_BRACKET object_type_name list_of_feature_assignments KEY_CLOSE_SQUARE_BRACKET */ mqlyytestcase(mqlyyruleno==281);
+#line 1103 "./mql.yxx"
+{ mqlyygotominor.mqlyy173 = new ObjectSpec(mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy184); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 3833 "./mql.c"
+#line 3978 "./mql.c"
         break;
-      case 237: /* opt_list_of_feature_assignments ::= list_of_feature_assignments */
-      case 239: /* list_of_feature_assignments ::= feature_assignment */ mqlyytestcase(mqlyyruleno==239);
-#line 1058 "./mql.yxx"
-{ mqlyygotominor.mqlyy600 = mqlyymsp[0].minor.mqlyy600; }
-#line 3839 "./mql.c"
+      case 249: /* opt_list_of_feature_assignments ::= list_of_feature_assignments */
+      case 251: /* list_of_feature_assignments ::= feature_assignment */ mqlyytestcase(mqlyyruleno==251);
+#line 1109 "./mql.yxx"
+{ mqlyygotominor.mqlyy184 = mqlyymsp[0].minor.mqlyy184; }
+#line 3984 "./mql.c"
         break;
-      case 238: /* opt_list_of_feature_assignments ::= */
-#line 1060 "./mql.yxx"
-{ mqlyygotominor.mqlyy600 = 0; }
-#line 3844 "./mql.c"
+      case 250: /* opt_list_of_feature_assignments ::= */
+#line 1111 "./mql.yxx"
+{ mqlyygotominor.mqlyy184 = 0; }
+#line 3989 "./mql.c"
         break;
-      case 240: /* list_of_feature_assignments ::= list_of_feature_assignments feature_assignment */
-#line 1069 "./mql.yxx"
-{ mqlyygotominor.mqlyy600 = mqlyymsp[0].minor.mqlyy600; mqlyygotominor.mqlyy600->setNext(mqlyymsp[-1].minor.mqlyy600); }
-#line 3849 "./mql.c"
+      case 252: /* list_of_feature_assignments ::= list_of_feature_assignments feature_assignment */
+#line 1120 "./mql.yxx"
+{ mqlyygotominor.mqlyy184 = mqlyymsp[0].minor.mqlyy184; mqlyygotominor.mqlyy184->setNext(mqlyymsp[-1].minor.mqlyy184); }
+#line 3994 "./mql.c"
         break;
-      case 241: /* feature_assignment ::= feature_name KEY_ASSIGN expression KEY_SEMICOLON */
-#line 1075 "./mql.yxx"
-{ mqlyygotominor.mqlyy600 = new FeatureAssignment(mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy139, 0); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,95,&mqlyymsp[-2].minor);
+      case 253: /* feature_assignment ::= feature_name KEY_ASSIGN expression KEY_SEMICOLON */
+#line 1126 "./mql.yxx"
+{ mqlyygotominor.mqlyy184 = new FeatureAssignment(mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy563, 0); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,100,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,39,&mqlyymsp[0].minor);
 }
-#line 3856 "./mql.c"
+#line 4001 "./mql.c"
         break;
-      case 243: /* feature_name ::= KEY_MONADS */
-#line 1081 "./mql.yxx"
+      case 255: /* feature_name ::= KEY_MONADS */
+#line 1132 "./mql.yxx"
 { mqlyygotominor.mqlyy0 = newToken(); mqlyygotominor.mqlyy0->setString(new std::string("monads"));   mqlyy_destructor(mqlyypParser,34,&mqlyymsp[0].minor);
 }
-#line 3862 "./mql.c"
+#line 4007 "./mql.c"
         break;
-      case 244: /* expression ::= signed_integer */
-#line 1086 "./mql.yxx"
-{ mqlyygotominor.mqlyy139 = new Expression(mqlyymsp[0].minor.mqlyy249); }
-#line 3867 "./mql.c"
+      case 256: /* expression ::= signed_integer */
+#line 1137 "./mql.yxx"
+{ mqlyygotominor.mqlyy563 = new Expression(mqlyymsp[0].minor.mqlyy377); }
+#line 4012 "./mql.c"
         break;
-      case 245: /* expression ::= STRING */
-#line 1088 "./mql.yxx"
-{ mqlyygotominor.mqlyy139 = new Expression(mqlyymsp[0].minor.mqlyy0->extractString(), kExprString); deleteToken(mqlyymsp[0].minor.mqlyy0); }
-#line 3872 "./mql.c"
+      case 257: /* expression ::= STRING */
+#line 1139 "./mql.yxx"
+{ mqlyygotominor.mqlyy563 = new Expression(mqlyymsp[0].minor.mqlyy0->extractString(), kExprString); deleteToken(mqlyymsp[0].minor.mqlyy0); }
+#line 4017 "./mql.c"
         break;
-      case 246: /* expression ::= IDENTIFIER */
-#line 1090 "./mql.yxx"
-{ mqlyygotominor.mqlyy139 = new Expression(mqlyymsp[0].minor.mqlyy0->extractString(), kExprIdentifier); deleteToken(mqlyymsp[0].minor.mqlyy0); }
-#line 3877 "./mql.c"
+      case 258: /* expression ::= IDENTIFIER */
+#line 1141 "./mql.yxx"
+{ mqlyygotominor.mqlyy563 = new Expression(mqlyymsp[0].minor.mqlyy0->extractString(), kExprIdentifier); deleteToken(mqlyymsp[0].minor.mqlyy0); }
+#line 4022 "./mql.c"
         break;
-      case 247: /* expression ::= monad_set */
-#line 1092 "./mql.yxx"
-{ mqlyygotominor.mqlyy139 = new Expression(mqlyymsp[0].minor.mqlyy34); }
-#line 3882 "./mql.c"
+      case 259: /* expression ::= monad_set */
+#line 1143 "./mql.yxx"
+{ mqlyygotominor.mqlyy563 = new Expression(mqlyymsp[0].minor.mqlyy362); }
+#line 4027 "./mql.c"
         break;
-      case 248: /* expression ::= KEY_OPEN_BRACKET KEY_CLOSE_BRACKET */
-#line 1094 "./mql.yxx"
-{ mqlyygotominor.mqlyy139 = new Expression(); /* empty list */   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-1].minor);
+      case 260: /* expression ::= KEY_OPEN_BRACKET KEY_CLOSE_BRACKET */
+#line 1145 "./mql.yxx"
+{ mqlyygotominor.mqlyy563 = new Expression(); /* empty list */   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-1].minor);
   mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
 }
-#line 3889 "./mql.c"
+#line 4034 "./mql.c"
         break;
-      case 249: /* expression ::= KEY_OPEN_BRACKET list_of_integer KEY_CLOSE_BRACKET */
-#line 1096 "./mql.yxx"
-{ mqlyygotominor.mqlyy139 = new Expression(new IntegerList(mqlyymsp[-1].minor.mqlyy327)); delete mqlyymsp[-1].minor.mqlyy327;   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
+      case 261: /* expression ::= KEY_OPEN_BRACKET list_of_integer KEY_CLOSE_BRACKET */
+#line 1147 "./mql.yxx"
+{ mqlyygotominor.mqlyy563 = new Expression(new IntegerList(mqlyymsp[-1].minor.mqlyy71)); delete mqlyymsp[-1].minor.mqlyy71;   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
 }
-#line 3896 "./mql.c"
+#line 4041 "./mql.c"
         break;
-      case 250: /* expression ::= KEY_OPEN_BRACKET list_of_identifier KEY_CLOSE_BRACKET */
-#line 1098 "./mql.yxx"
-{ mqlyygotominor.mqlyy139 = new Expression(new StringList(mqlyymsp[-1].minor.mqlyy440), kExprListOfIdentifier); delete mqlyymsp[-1].minor.mqlyy440;   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
+      case 262: /* expression ::= KEY_OPEN_BRACKET list_of_identifier KEY_CLOSE_BRACKET */
+#line 1149 "./mql.yxx"
+{ mqlyygotominor.mqlyy563 = new Expression(new StringList(mqlyymsp[-1].minor.mqlyy216), kExprListOfIdentifier); delete mqlyymsp[-1].minor.mqlyy216;   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
 }
-#line 3903 "./mql.c"
+#line 4048 "./mql.c"
         break;
-      case 251: /* list_of_integer ::= signed_integer */
-#line 1104 "./mql.yxx"
-{ mqlyygotominor.mqlyy327 = new IntegerListNode(mqlyymsp[0].minor.mqlyy249, 0); }
-#line 3908 "./mql.c"
+      case 263: /* list_of_integer ::= signed_integer */
+#line 1155 "./mql.yxx"
+{ mqlyygotominor.mqlyy71 = new IntegerListNode(mqlyymsp[0].minor.mqlyy377, 0); }
+#line 4053 "./mql.c"
         break;
-      case 252: /* list_of_integer ::= list_of_integer KEY_COMMA signed_integer */
-#line 1107 "./mql.yxx"
-{ mqlyygotominor.mqlyy327 = new IntegerListNode(mqlyymsp[0].minor.mqlyy249, mqlyymsp[-2].minor.mqlyy327); mqlyymsp[-2].minor.mqlyy327->setNext(mqlyygotominor.mqlyy327);   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-1].minor);
+      case 264: /* list_of_integer ::= list_of_integer KEY_COMMA signed_integer */
+#line 1158 "./mql.yxx"
+{ mqlyygotominor.mqlyy71 = new IntegerListNode(mqlyymsp[0].minor.mqlyy377, mqlyymsp[-2].minor.mqlyy71); mqlyymsp[-2].minor.mqlyy71->setNext(mqlyygotominor.mqlyy71);   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-1].minor);
 }
-#line 3914 "./mql.c"
+#line 4059 "./mql.c"
         break;
-      case 255: /* create_object_from_id_ds_statement ::= KEY_CREATE KEY_OBJECT KEY_FROM id_ds_specification with_id_d_specification object_creation_specification */
-#line 1125 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new CreateObjectFromID_DsStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy51, mqlyymsp[-1].minor.mqlyy72, mqlyymsp[0].minor.mqlyy365);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-5].minor);
+      case 267: /* create_object_from_id_ds_statement ::= KEY_CREATE KEY_OBJECT KEY_FROM id_ds_specification with_id_d_specification object_creation_specification */
+#line 1176 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new CreateObjectFromID_DsStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy515, mqlyymsp[-1].minor.mqlyy88, mqlyymsp[0].minor.mqlyy173);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,17,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,51,&mqlyymsp[-3].minor);
 }
-#line 3922 "./mql.c"
+#line 4067 "./mql.c"
         break;
-      case 256: /* id_ds_specification ::= choice_number_ID_DS KEY_EQUALS id_d_list */
-#line 1131 "./mql.yxx"
-{ mqlyygotominor.mqlyy51 = mqlyymsp[0].minor.mqlyy51;   mqlyy_destructor(mqlyypParser,72,&mqlyymsp[-1].minor);
+      case 268: /* id_ds_specification ::= choice_number_ID_DS KEY_EQUALS id_d_list */
+#line 1182 "./mql.yxx"
+{ mqlyygotominor.mqlyy515 = mqlyymsp[0].minor.mqlyy515;   mqlyy_destructor(mqlyypParser,72,&mqlyymsp[-1].minor);
 }
-#line 3928 "./mql.c"
+#line 4073 "./mql.c"
         break;
-      case 257: /* choice_number_ID_DS ::= KEY_ID_D */
-#line 1136 "./mql.yxx"
-{mqlyygotominor.mqlyy292=0;  mqlyy_destructor(mqlyypParser,45,&mqlyymsp[0].minor);
+      case 269: /* choice_number_ID_DS ::= KEY_ID_D */
+#line 1187 "./mql.yxx"
+{mqlyygotominor.mqlyy284=0;  mqlyy_destructor(mqlyypParser,45,&mqlyymsp[0].minor);
 }
-#line 3934 "./mql.c"
+#line 4079 "./mql.c"
         break;
-      case 258: /* choice_number_ID_DS ::= KEY_ID_DS */
-#line 1137 "./mql.yxx"
-{mqlyygotominor.mqlyy292=0;  mqlyy_destructor(mqlyypParser,96,&mqlyymsp[0].minor);
+      case 270: /* choice_number_ID_DS ::= KEY_ID_DS */
+#line 1188 "./mql.yxx"
+{mqlyygotominor.mqlyy284=0;  mqlyy_destructor(mqlyypParser,101,&mqlyymsp[0].minor);
 }
-#line 3940 "./mql.c"
+#line 4085 "./mql.c"
         break;
-      case 259: /* id_d_list ::= id_d */
-#line 1143 "./mql.yxx"
-{ mqlyygotominor.mqlyy51 = mqlyymsp[0].minor.mqlyy51; }
-#line 3945 "./mql.c"
+      case 271: /* id_d_list ::= id_d */
+#line 1194 "./mql.yxx"
+{ mqlyygotominor.mqlyy515 = mqlyymsp[0].minor.mqlyy515; }
+#line 4090 "./mql.c"
         break;
-      case 260: /* id_d_list ::= id_d_list KEY_COMMA id_d */
-#line 1145 "./mql.yxx"
-{ mqlyygotominor.mqlyy51 = mqlyymsp[0].minor.mqlyy51; mqlyygotominor.mqlyy51->setNext(mqlyymsp[-2].minor.mqlyy51);   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-1].minor);
+      case 272: /* id_d_list ::= id_d_list KEY_COMMA id_d */
+#line 1196 "./mql.yxx"
+{ mqlyygotominor.mqlyy515 = mqlyymsp[0].minor.mqlyy515; mqlyygotominor.mqlyy515->setNext(mqlyymsp[-2].minor.mqlyy515);   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-1].minor);
 }
-#line 3951 "./mql.c"
+#line 4096 "./mql.c"
         break;
-      case 261: /* id_d ::= id_d_const */
-#line 1150 "./mql.yxx"
-{ mqlyygotominor.mqlyy51 = new ID_D(mqlyymsp[0].minor.mqlyy72, 0); }
-#line 3956 "./mql.c"
+      case 273: /* id_d ::= id_d_const */
+#line 1201 "./mql.yxx"
+{ mqlyygotominor.mqlyy515 = new ID_D(mqlyymsp[0].minor.mqlyy88, 0); }
+#line 4101 "./mql.c"
         break;
-      case 262: /* create_objects_statement ::= KEY_CREATE KEY_OBJECTS KEY_WITH KEY_OBJECT KEY_TYPE KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET object_creation_list */
-#line 1162 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new CreateObjectsStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy457); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-8].minor);
+      case 274: /* create_objects_statement ::= KEY_CREATE KEY_OBJECTS KEY_WITH KEY_OBJECT KEY_TYPE KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET object_creation_list */
+#line 1213 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new CreateObjectsStatement((MQLExecEnv*) pEE, mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy17); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-8].minor);
   mqlyy_destructor(mqlyypParser,28,&mqlyymsp[-7].minor);
   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-6].minor);
   mqlyy_destructor(mqlyypParser,17,&mqlyymsp[-5].minor);
@@ -106557,582 +108803,561 @@ static void mqlyy_reduce(
   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[-1].minor);
 }
-#line 3968 "./mql.c"
+#line 4113 "./mql.c"
         break;
-      case 263: /* object_creation_list ::= object_creation_no_object_type */
-#line 1169 "./mql.yxx"
-{ mqlyygotominor.mqlyy457 = mqlyymsp[0].minor.mqlyy457; }
-#line 3973 "./mql.c"
+      case 275: /* object_creation_list ::= object_creation_no_object_type */
+#line 1220 "./mql.yxx"
+{ mqlyygotominor.mqlyy17 = mqlyymsp[0].minor.mqlyy17; }
+#line 4118 "./mql.c"
         break;
-      case 264: /* object_creation_list ::= object_creation_list object_creation_no_object_type */
-#line 1172 "./mql.yxx"
-{ mqlyygotominor.mqlyy457 = mqlyymsp[0].minor.mqlyy457; mqlyygotominor.mqlyy457->setNext(mqlyymsp[-1].minor.mqlyy457); }
-#line 3978 "./mql.c"
+      case 276: /* object_creation_list ::= object_creation_list object_creation_no_object_type */
+#line 1223 "./mql.yxx"
+{ mqlyygotominor.mqlyy17 = mqlyymsp[0].minor.mqlyy17; mqlyygotominor.mqlyy17->setNext(mqlyymsp[-1].minor.mqlyy17); }
+#line 4123 "./mql.c"
         break;
-      case 265: /* object_creation_no_object_type ::= KEY_CREATE KEY_OBJECT KEY_FROM monad_specification with_id_d_specification KEY_OPEN_SQUARE_BRACKET opt_list_of_feature_assignments KEY_CLOSE_SQUARE_BRACKET */
-#line 1184 "./mql.yxx"
-{ mqlyygotominor.mqlyy457 = new ObjectSpecNoOT(mqlyymsp[-4].minor.mqlyy34, mqlyymsp[-3].minor.mqlyy72, mqlyymsp[-1].minor.mqlyy600, 0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-7].minor);
+      case 277: /* object_creation_no_object_type ::= KEY_CREATE KEY_OBJECT KEY_FROM monad_specification with_id_d_specification KEY_OPEN_SQUARE_BRACKET opt_list_of_feature_assignments KEY_CLOSE_SQUARE_BRACKET */
+#line 1235 "./mql.yxx"
+{ mqlyygotominor.mqlyy17 = new ObjectSpecNoOT(mqlyymsp[-4].minor.mqlyy362, mqlyymsp[-3].minor.mqlyy88, mqlyymsp[-1].minor.mqlyy184, 0);   mqlyy_destructor(mqlyypParser,2,&mqlyymsp[-7].minor);
   mqlyy_destructor(mqlyypParser,17,&mqlyymsp[-6].minor);
   mqlyy_destructor(mqlyypParser,51,&mqlyymsp[-5].minor);
   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 3988 "./mql.c"
+#line 4133 "./mql.c"
         break;
-      case 266: /* update_objects_by_monads_statement ::= KEY_UPDATE choice_number_OBJECTS KEY_BY monad_specification object_update_specification */
-#line 1193 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new UpdateObjectsByMonadsStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy34, mqlyymsp[0].minor.mqlyy365);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-4].minor);
-  mqlyy_destructor(mqlyypParser,97,&mqlyymsp[-2].minor);
+      case 278: /* update_objects_by_monads_statement ::= KEY_UPDATE choice_number_OBJECTS KEY_BY monad_specification object_update_specification */
+#line 1244 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new UpdateObjectsByMonadsStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy362, mqlyymsp[0].minor.mqlyy173);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-4].minor);
+  mqlyy_destructor(mqlyypParser,102,&mqlyymsp[-2].minor);
 }
-#line 3995 "./mql.c"
+#line 4140 "./mql.c"
         break;
-      case 267: /* choice_number_OBJECTS ::= KEY_OBJECT */
-#line 1198 "./mql.yxx"
-{mqlyygotominor.mqlyy292=0;  mqlyy_destructor(mqlyypParser,17,&mqlyymsp[0].minor);
+      case 279: /* choice_number_OBJECTS ::= KEY_OBJECT */
+#line 1249 "./mql.yxx"
+{mqlyygotominor.mqlyy284=0;  mqlyy_destructor(mqlyypParser,17,&mqlyymsp[0].minor);
 }
-#line 4001 "./mql.c"
+#line 4146 "./mql.c"
         break;
-      case 268: /* choice_number_OBJECTS ::= KEY_OBJECTS */
-#line 1199 "./mql.yxx"
-{mqlyygotominor.mqlyy292=0;  mqlyy_destructor(mqlyypParser,28,&mqlyymsp[0].minor);
+      case 280: /* choice_number_OBJECTS ::= KEY_OBJECTS */
+#line 1250 "./mql.yxx"
+{mqlyygotominor.mqlyy284=0;  mqlyy_destructor(mqlyypParser,28,&mqlyymsp[0].minor);
 }
-#line 4007 "./mql.c"
+#line 4152 "./mql.c"
         break;
-      case 270: /* update_objects_by_id_ds_statement ::= KEY_UPDATE choice_number_OBJECTS KEY_BY id_ds_specification object_update_specification */
-#line 1219 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new UpdateObjectsByID_DsStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy51, mqlyymsp[0].minor.mqlyy365);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-4].minor);
-  mqlyy_destructor(mqlyypParser,97,&mqlyymsp[-2].minor);
+      case 282: /* update_objects_by_id_ds_statement ::= KEY_UPDATE choice_number_OBJECTS KEY_BY id_ds_specification object_update_specification */
+#line 1270 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new UpdateObjectsByID_DsStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy515, mqlyymsp[0].minor.mqlyy173);   mqlyy_destructor(mqlyypParser,57,&mqlyymsp[-4].minor);
+  mqlyy_destructor(mqlyypParser,102,&mqlyymsp[-2].minor);
 }
-#line 4014 "./mql.c"
+#line 4159 "./mql.c"
         break;
-      case 271: /* delete_objects_by_monads_statement ::= KEY_DELETE choice_number_OBJECTS KEY_BY monad_specification object_deletion_specification */
-#line 1229 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new DeleteObjectsByMonadsStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy34, *(mqlyymsp[0].minor.mqlyy0->pString)); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,61,&mqlyymsp[-4].minor);
-  mqlyy_destructor(mqlyypParser,97,&mqlyymsp[-2].minor);
+      case 283: /* delete_objects_by_monads_statement ::= KEY_DELETE choice_number_OBJECTS KEY_BY monad_specification object_deletion_specification */
+#line 1280 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new DeleteObjectsByMonadsStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy362, *(mqlyymsp[0].minor.mqlyy0->pString)); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,61,&mqlyymsp[-4].minor);
+  mqlyy_destructor(mqlyypParser,102,&mqlyymsp[-2].minor);
 }
-#line 4021 "./mql.c"
+#line 4166 "./mql.c"
         break;
-      case 272: /* object_deletion_specification ::= KEY_OPEN_SQUARE_BRACKET object_type_name_to_delete KEY_CLOSE_SQUARE_BRACKET */
-#line 1238 "./mql.yxx"
+      case 284: /* object_deletion_specification ::= KEY_OPEN_SQUARE_BRACKET object_type_name_to_delete KEY_CLOSE_SQUARE_BRACKET */
+#line 1289 "./mql.yxx"
 { mqlyygotominor.mqlyy0 = mqlyymsp[-1].minor.mqlyy0;   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 4028 "./mql.c"
+#line 4173 "./mql.c"
         break;
-      case 274: /* delete_objects_by_id_ds_statement ::= KEY_DELETE choice_number_OBJECTS KEY_BY id_ds_specification object_deletion_specification */
-#line 1254 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new DeleteObjectsByID_DsStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy51, *(mqlyymsp[0].minor.mqlyy0->pString)); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,61,&mqlyymsp[-4].minor);
-  mqlyy_destructor(mqlyypParser,97,&mqlyymsp[-2].minor);
+      case 286: /* delete_objects_by_id_ds_statement ::= KEY_DELETE choice_number_OBJECTS KEY_BY id_ds_specification object_deletion_specification */
+#line 1305 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new DeleteObjectsByID_DsStatement((MQLExecEnv*) pEE, mqlyymsp[-1].minor.mqlyy515, *(mqlyymsp[0].minor.mqlyy0->pString)); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,61,&mqlyymsp[-4].minor);
+  mqlyy_destructor(mqlyypParser,102,&mqlyymsp[-2].minor);
 }
-#line 4035 "./mql.c"
+#line 4180 "./mql.c"
         break;
-      case 275: /* get_features_statement ::= KEY_GET choice_number_FEATURES feature_list KEY_FROM choice_number_OBJECTS KEY_WITH id_ds_specification KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET */
-#line 1266 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new GetFeaturesStatement((MQLExecEnv*) pEE, mqlyymsp[-7].minor.mqlyy242, mqlyymsp[-3].minor.mqlyy51, mqlyymsp[-1].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-9].minor);
+      case 287: /* get_features_statement ::= KEY_GET choice_number_FEATURES feature_list KEY_FROM choice_number_OBJECTS KEY_WITH id_ds_specification KEY_OPEN_SQUARE_BRACKET object_type_name KEY_CLOSE_SQUARE_BRACKET */
+#line 1317 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new GetFeaturesStatement((MQLExecEnv*) pEE, mqlyymsp[-7].minor.mqlyy98, mqlyymsp[-3].minor.mqlyy515, mqlyymsp[-1].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-1].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-9].minor);
   mqlyy_destructor(mqlyypParser,51,&mqlyymsp[-6].minor);
   mqlyy_destructor(mqlyypParser,8,&mqlyymsp[-4].minor);
   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-2].minor);
   mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
-#line 4045 "./mql.c"
+#line 4190 "./mql.c"
         break;
-      case 276: /* choice_number_FEATURES ::= KEY_FEATURE */
-#line 1271 "./mql.yxx"
-{mqlyygotominor.mqlyy292=0;  mqlyy_destructor(mqlyypParser,84,&mqlyymsp[0].minor);
-}
-#line 4051 "./mql.c"
-        break;
-      case 277: /* choice_number_FEATURES ::= KEY_FEATURES */
-#line 1272 "./mql.yxx"
-{mqlyygotominor.mqlyy292=0;  mqlyy_destructor(mqlyypParser,91,&mqlyymsp[0].minor);
-}
-#line 4057 "./mql.c"
-        break;
-      case 278: /* feature_list ::= feature_name */
-#line 1277 "./mql.yxx"
-{ mqlyygotominor.mqlyy242 = new GrammarFeature(mqlyymsp[0].minor.mqlyy0->extractString(), 0); deleteToken(mqlyymsp[0].minor.mqlyy0); }
-#line 4062 "./mql.c"
-        break;
-      case 279: /* feature_list ::= feature_list KEY_COMMA feature_name */
-#line 1279 "./mql.yxx"
-{ mqlyygotominor.mqlyy242 = new GrammarFeature(mqlyymsp[0].minor.mqlyy0->extractString(), mqlyymsp[-2].minor.mqlyy242); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-1].minor);
-}
-#line 4068 "./mql.c"
-        break;
-      case 280: /* quit_statement ::= KEY_QUIT */
-#line 1285 "./mql.yxx"
-{ mqlyygotominor.mqlyy160 = new QuitStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,98,&mqlyymsp[0].minor);
-}
-#line 4074 "./mql.c"
-        break;
-      case 281: /* mql_query ::= topograph */
-#line 1291 "./mql.yxx"
-{ mqlyygotominor.mqlyy295 = mqlyymsp[0].minor.mqlyy295; }
-#line 4079 "./mql.c"
-        break;
-      case 282: /* topograph ::= blocks */
-#line 1297 "./mql.yxx"
-{ mqlyygotominor.mqlyy295 = new Topograph(mqlyymsp[0].minor.mqlyy377); }
-#line 4084 "./mql.c"
-        break;
-      case 283: /* blocks ::= using_range_clause block_string */
-#line 1303 "./mql.yxx"
-{ mqlyygotominor.mqlyy377 = new Blocks(mqlyymsp[0].minor.mqlyy205, mqlyymsp[-1].minor.mqlyy582); }
-#line 4089 "./mql.c"
-        break;
-      case 284: /* block_string0 ::= block */
-#line 1308 "./mql.yxx"
-{ mqlyygotominor.mqlyy445 = new BlockString0(mqlyymsp[0].minor.mqlyy414); }
-#line 4094 "./mql.c"
-        break;
-      case 285: /* block_string0 ::= KEY_OPEN_SQUARE_BRACKET block_string KEY_CLOSE_SQUARE_BRACKET */
-#line 1310 "./mql.yxx"
-{ mqlyygotominor.mqlyy445 = new BlockString0(mqlyymsp[-1].minor.mqlyy205);   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-2].minor);
-  mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
-}
-#line 4101 "./mql.c"
-        break;
-      case 286: /* block_string1 ::= block_string0 */
-#line 1315 "./mql.yxx"
-{ mqlyygotominor.mqlyy498 = new BlockString1(mqlyymsp[0].minor.mqlyy445); }
-#line 4106 "./mql.c"
-        break;
-      case 287: /* block_string1 ::= block_string0 KEY_STAR star_monad_set */
-#line 1317 "./mql.yxx"
-{ mqlyygotominor.mqlyy498 = new BlockString1(mqlyymsp[-2].minor.mqlyy445, mqlyymsp[0].minor.mqlyy34);   mqlyy_destructor(mqlyypParser,99,&mqlyymsp[-1].minor);
-}
-#line 4112 "./mql.c"
-        break;
-      case 288: /* block_string2 ::= block_string1 */
+      case 288: /* choice_number_FEATURES ::= KEY_FEATURE */
 #line 1322 "./mql.yxx"
-{ mqlyygotominor.mqlyy551 = new BlockString2(mqlyymsp[0].minor.mqlyy498); }
-#line 4117 "./mql.c"
-        break;
-      case 289: /* block_string2 ::= block_string1 block_string2 */
-#line 1324 "./mql.yxx"
-{ mqlyygotominor.mqlyy551 = new BlockString2(mqlyymsp[-1].minor.mqlyy498, mqlyymsp[0].minor.mqlyy551, false); }
-#line 4122 "./mql.c"
-        break;
-      case 290: /* block_string2 ::= block_string1 KEY_EXCLAMATION block_string2 */
-#line 1327 "./mql.yxx"
-{ mqlyygotominor.mqlyy551 = new BlockString2(mqlyymsp[-2].minor.mqlyy498, mqlyymsp[0].minor.mqlyy551, true);   mqlyy_destructor(mqlyypParser,100,&mqlyymsp[-1].minor);
+{mqlyygotominor.mqlyy284=0;  mqlyy_destructor(mqlyypParser,84,&mqlyymsp[0].minor);
 }
-#line 4128 "./mql.c"
+#line 4196 "./mql.c"
         break;
-      case 291: /* block_string ::= block_string2 */
-#line 1332 "./mql.yxx"
-{ mqlyygotominor.mqlyy205 = new BlockString(mqlyymsp[0].minor.mqlyy551); }
-#line 4133 "./mql.c"
-        break;
-      case 292: /* block_string ::= block_string2 KEY_OR block_string */
-#line 1334 "./mql.yxx"
-{ mqlyygotominor.mqlyy205 = new BlockString(mqlyymsp[-2].minor.mqlyy551, mqlyymsp[0].minor.mqlyy205);   mqlyy_destructor(mqlyypParser,101,&mqlyymsp[-1].minor);
+      case 289: /* choice_number_FEATURES ::= KEY_FEATURES */
+#line 1323 "./mql.yxx"
+{mqlyygotominor.mqlyy284=0;  mqlyy_destructor(mqlyypParser,92,&mqlyymsp[0].minor);
 }
-#line 4139 "./mql.c"
+#line 4202 "./mql.c"
         break;
-      case 293: /* notexist ::= KEY_NOTEXIST */
-#line 1339 "./mql.yxx"
-{ mqlyygotominor.mqlyy292 = 0;   mqlyy_destructor(mqlyypParser,102,&mqlyymsp[0].minor);
+      case 290: /* feature_list ::= feature_name */
+#line 1328 "./mql.yxx"
+{ mqlyygotominor.mqlyy98 = new GrammarFeature(mqlyymsp[0].minor.mqlyy0->extractString(), 0); deleteToken(mqlyymsp[0].minor.mqlyy0); }
+#line 4207 "./mql.c"
+        break;
+      case 291: /* feature_list ::= feature_list KEY_COMMA feature_name */
+#line 1330 "./mql.yxx"
+{ mqlyygotominor.mqlyy98 = new GrammarFeature(mqlyymsp[0].minor.mqlyy0->extractString(), mqlyymsp[-2].minor.mqlyy98); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-1].minor);
 }
-#line 4145 "./mql.c"
+#line 4213 "./mql.c"
         break;
-      case 294: /* notexist ::= KEY_NOTEXISTS */
-#line 1340 "./mql.yxx"
-{ mqlyygotominor.mqlyy292 = 0;   mqlyy_destructor(mqlyypParser,103,&mqlyymsp[0].minor);
+      case 292: /* quit_statement ::= KEY_QUIT */
+#line 1336 "./mql.yxx"
+{ mqlyygotominor.mqlyy440 = new QuitStatement((MQLExecEnv*) pEE);   mqlyy_destructor(mqlyypParser,103,&mqlyymsp[0].minor);
 }
-#line 4151 "./mql.c"
+#line 4219 "./mql.c"
         break;
-      case 295: /* object_reference_declaration ::= */
-      case 297: /* mark_declaration ::= */ mqlyytestcase(mqlyyruleno==297);
-#line 1345 "./mql.yxx"
-{ mqlyygotominor.mqlyy0 = newToken(); mqlyygotominor.mqlyy0->setString(new std::string()); }
-#line 4157 "./mql.c"
+      case 293: /* mql_query ::= topograph */
+#line 1342 "./mql.yxx"
+{ mqlyygotominor.mqlyy559 = mqlyymsp[0].minor.mqlyy559; }
+#line 4224 "./mql.c"
         break;
-      case 296: /* object_reference_declaration ::= KEY_AS object_reference */
-#line 1346 "./mql.yxx"
-{ mqlyygotominor.mqlyy0 = mqlyymsp[0].minor.mqlyy0;   mqlyy_destructor(mqlyypParser,104,&mqlyymsp[-1].minor);
-}
-#line 4163 "./mql.c"
-        break;
-      case 300: /* retrieval ::= */
-#line 1361 "./mql.yxx"
-{ mqlyygotominor.mqlyy372 = kRetrieve; }
-#line 4168 "./mql.c"
-        break;
-      case 301: /* retrieval ::= KEY_NORETRIEVE */
-      case 355: /* gap_retrieval ::= KEY_NORETRIEVE */ mqlyytestcase(mqlyyruleno==355);
-#line 1362 "./mql.yxx"
-{ mqlyygotominor.mqlyy372 = kNoRetrieve;   mqlyy_destructor(mqlyypParser,106,&mqlyymsp[0].minor);
-}
-#line 4175 "./mql.c"
-        break;
-      case 302: /* retrieval ::= KEY_RETRIEVE */
-      case 356: /* gap_retrieval ::= KEY_RETRIEVE */ mqlyytestcase(mqlyyruleno==356);
-#line 1363 "./mql.yxx"
-{ mqlyygotominor.mqlyy372 = kRetrieve;   mqlyy_destructor(mqlyypParser,107,&mqlyymsp[0].minor);
-}
-#line 4182 "./mql.c"
-        break;
-      case 303: /* retrieval ::= KEY_FOCUS */
-      case 357: /* gap_retrieval ::= KEY_FOCUS */ mqlyytestcase(mqlyyruleno==357);
-#line 1364 "./mql.yxx"
-{ mqlyygotominor.mqlyy372 = kRetrieveFocus;   mqlyy_destructor(mqlyypParser,81,&mqlyymsp[0].minor);
-}
-#line 4189 "./mql.c"
-        break;
-      case 304: /* firstlast ::= */
-#line 1368 "./mql.yxx"
-{ mqlyygotominor.mqlyy90 = kNoFirstLast; }
-#line 4194 "./mql.c"
-        break;
-      case 305: /* firstlast ::= KEY_FIRST */
-#line 1369 "./mql.yxx"
-{ mqlyygotominor.mqlyy90 = kFirst;   mqlyy_destructor(mqlyypParser,33,&mqlyymsp[0].minor);
-}
-#line 4200 "./mql.c"
-        break;
-      case 306: /* firstlast ::= KEY_LAST */
-#line 1370 "./mql.yxx"
-{ mqlyygotominor.mqlyy90 = kLast;   mqlyy_destructor(mqlyypParser,36,&mqlyymsp[0].minor);
-}
-#line 4206 "./mql.c"
-        break;
-      case 307: /* firstlast ::= KEY_FIRST KEY_AND KEY_LAST */
-#line 1371 "./mql.yxx"
-{ mqlyygotominor.mqlyy90 = kFirstAndLast;   mqlyy_destructor(mqlyypParser,33,&mqlyymsp[-2].minor);
-  mqlyy_destructor(mqlyypParser,35,&mqlyymsp[-1].minor);
-  mqlyy_destructor(mqlyypParser,36,&mqlyymsp[0].minor);
-}
-#line 4214 "./mql.c"
-        break;
-      case 308: /* monad_set_relation_clause ::= monad_set_relation_operation KEY_OPEN_BRACKET monad_set_name KEY_COMMA universe_or_substrate KEY_CLOSE_BRACKET */
-#line 1376 "./mql.yxx"
-{ mqlyygotominor.mqlyy385 = new MonadSetRelationClause(mqlyymsp[-5].minor.mqlyy104, mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy397); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-4].minor);
-  mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-2].minor);
-  mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
-}
-#line 4222 "./mql.c"
-        break;
-      case 309: /* monad_set_relation_clause ::= monad_set_relation_operation KEY_OPEN_BRACKET universe_or_substrate KEY_CLOSE_BRACKET */
-#line 1378 "./mql.yxx"
-{ mqlyygotominor.mqlyy385 = new MonadSetRelationClause(mqlyymsp[-3].minor.mqlyy104, new std::string("monads"), mqlyymsp[-1].minor.mqlyy397);   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
-  mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
-}
+      case 294: /* topograph ::= blocks */
+#line 1348 "./mql.yxx"
+{ mqlyygotominor.mqlyy559 = new Topograph(mqlyymsp[0].minor.mqlyy369); }
 #line 4229 "./mql.c"
         break;
-      case 310: /* monad_set_relation_clause ::= */
-#line 1380 "./mql.yxx"
-{ mqlyygotominor.mqlyy385 = new MonadSetRelationClause(kMSROPartOf, new std::string("monads"), kMSNSubstrate); }
+      case 295: /* blocks ::= using_range_clause block_string */
+#line 1354 "./mql.yxx"
+{ mqlyygotominor.mqlyy369 = new Blocks(mqlyymsp[0].minor.mqlyy557, mqlyymsp[-1].minor.mqlyy94); }
 #line 4234 "./mql.c"
         break;
-      case 311: /* monad_set_relation_operation ::= KEY_PART_OF */
-#line 1385 "./mql.yxx"
-{ mqlyygotominor.mqlyy104 = kMSROPartOf;   mqlyy_destructor(mqlyypParser,108,&mqlyymsp[0].minor);
-}
-#line 4240 "./mql.c"
+      case 296: /* block_string0 ::= block */
+#line 1359 "./mql.yxx"
+{ mqlyygotominor.mqlyy189 = new BlockString0(mqlyymsp[0].minor.mqlyy478); }
+#line 4239 "./mql.c"
         break;
-      case 312: /* monad_set_relation_operation ::= KEY_STARTS_IN */
-#line 1387 "./mql.yxx"
-{ mqlyygotominor.mqlyy104 = kMSROStartsIn;   mqlyy_destructor(mqlyypParser,109,&mqlyymsp[0].minor);
+      case 297: /* block_string0 ::= KEY_OPEN_SQUARE_BRACKET block_string KEY_CLOSE_SQUARE_BRACKET */
+#line 1361 "./mql.yxx"
+{ mqlyygotominor.mqlyy189 = new BlockString0(mqlyymsp[-1].minor.mqlyy557);   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-2].minor);
+  mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
 }
 #line 4246 "./mql.c"
         break;
-      case 313: /* monad_set_relation_operation ::= KEY_OVERLAP */
-#line 1389 "./mql.yxx"
-{ mqlyygotominor.mqlyy104 = kMSROOverlap;   mqlyy_destructor(mqlyypParser,110,&mqlyymsp[0].minor);
+      case 298: /* block_string1 ::= block_string0 */
+#line 1366 "./mql.yxx"
+{ mqlyygotominor.mqlyy242 = new BlockString1(mqlyymsp[0].minor.mqlyy189); }
+#line 4251 "./mql.c"
+        break;
+      case 299: /* block_string1 ::= block_string0 KEY_STAR star_monad_set */
+#line 1368 "./mql.yxx"
+{ mqlyygotominor.mqlyy242 = new BlockString1(mqlyymsp[-2].minor.mqlyy189, mqlyymsp[0].minor.mqlyy362);   mqlyy_destructor(mqlyypParser,96,&mqlyymsp[-1].minor);
 }
-#line 4252 "./mql.c"
+#line 4257 "./mql.c"
         break;
-      case 314: /* universe_or_substrate ::= KEY_UNIVERSE */
-#line 1395 "./mql.yxx"
-{ mqlyygotominor.mqlyy397 = kMSNUniverse;   mqlyy_destructor(mqlyypParser,111,&mqlyymsp[0].minor);
+      case 300: /* block_string2 ::= block_string1 */
+#line 1373 "./mql.yxx"
+{ mqlyygotominor.mqlyy295 = new BlockString2(mqlyymsp[0].minor.mqlyy242); }
+#line 4262 "./mql.c"
+        break;
+      case 301: /* block_string2 ::= block_string1 block_string2 */
+#line 1375 "./mql.yxx"
+{ mqlyygotominor.mqlyy295 = new BlockString2(mqlyymsp[-1].minor.mqlyy242, mqlyymsp[0].minor.mqlyy295, false); }
+#line 4267 "./mql.c"
+        break;
+      case 302: /* block_string2 ::= block_string1 KEY_EXCLAMATION block_string2 */
+#line 1378 "./mql.yxx"
+{ mqlyygotominor.mqlyy295 = new BlockString2(mqlyymsp[-2].minor.mqlyy242, mqlyymsp[0].minor.mqlyy295, true);   mqlyy_destructor(mqlyypParser,104,&mqlyymsp[-1].minor);
 }
-#line 4258 "./mql.c"
+#line 4273 "./mql.c"
         break;
-      case 315: /* universe_or_substrate ::= KEY_SUBSTRATE */
-#line 1397 "./mql.yxx"
-{ mqlyygotominor.mqlyy397 = kMSNSubstrate;   mqlyy_destructor(mqlyypParser,112,&mqlyymsp[0].minor);
+      case 303: /* block_string ::= block_string2 */
+#line 1383 "./mql.yxx"
+{ mqlyygotominor.mqlyy557 = new BlockString(mqlyymsp[0].minor.mqlyy295); }
+#line 4278 "./mql.c"
+        break;
+      case 304: /* block_string ::= block_string2 KEY_OR block_string */
+#line 1385 "./mql.yxx"
+{ mqlyygotominor.mqlyy557 = new BlockString(mqlyymsp[-2].minor.mqlyy295, mqlyymsp[0].minor.mqlyy557);   mqlyy_destructor(mqlyypParser,105,&mqlyymsp[-1].minor);
 }
-#line 4264 "./mql.c"
+#line 4284 "./mql.c"
         break;
-      case 316: /* feature_constraints ::= */
-#line 1402 "./mql.yxx"
-{ mqlyygotominor.mqlyy288 = 0; }
-#line 4269 "./mql.c"
-        break;
-      case 317: /* feature_constraints ::= ffeatures */
-#line 1403 "./mql.yxx"
-{ mqlyygotominor.mqlyy288 = mqlyymsp[0].minor.mqlyy288; }
-#line 4274 "./mql.c"
-        break;
-      case 318: /* ffeatures ::= fterm */
-#line 1408 "./mql.yxx"
-{ mqlyygotominor.mqlyy288 = new FFeatures(mqlyymsp[0].minor.mqlyy313); }
-#line 4279 "./mql.c"
-        break;
-      case 319: /* ffeatures ::= ffeatures KEY_OR fterm */
-#line 1409 "./mql.yxx"
-{ mqlyygotominor.mqlyy288 = new FFeatures(mqlyymsp[-2].minor.mqlyy288, mqlyymsp[0].minor.mqlyy313);   mqlyy_destructor(mqlyypParser,101,&mqlyymsp[-1].minor);
+      case 305: /* notexist ::= KEY_NOTEXIST */
+#line 1390 "./mql.yxx"
+{ mqlyygotominor.mqlyy284 = 0;   mqlyy_destructor(mqlyypParser,106,&mqlyymsp[0].minor);
 }
-#line 4285 "./mql.c"
-        break;
-      case 320: /* fterm ::= ffactor */
-#line 1414 "./mql.yxx"
-{ mqlyygotominor.mqlyy313 = new FTerm(mqlyymsp[0].minor.mqlyy540); }
 #line 4290 "./mql.c"
         break;
-      case 321: /* fterm ::= fterm KEY_AND ffactor */
-#line 1415 "./mql.yxx"
-{ mqlyygotominor.mqlyy313 = new FTerm(mqlyymsp[-2].minor.mqlyy313, mqlyymsp[0].minor.mqlyy540);   mqlyy_destructor(mqlyypParser,35,&mqlyymsp[-1].minor);
+      case 306: /* notexist ::= KEY_NOTEXISTS */
+#line 1391 "./mql.yxx"
+{ mqlyygotominor.mqlyy284 = 0;   mqlyy_destructor(mqlyypParser,107,&mqlyymsp[0].minor);
 }
 #line 4296 "./mql.c"
         break;
-      case 322: /* ffactor ::= KEY_NOT ffactor */
-#line 1420 "./mql.yxx"
-{ mqlyygotominor.mqlyy540 = new FFactor(mqlyymsp[0].minor.mqlyy540);   mqlyy_destructor(mqlyypParser,49,&mqlyymsp[-1].minor);
-}
+      case 307: /* object_reference_declaration ::= */
+      case 309: /* mark_declaration ::= */ mqlyytestcase(mqlyyruleno==309);
+#line 1396 "./mql.yxx"
+{ mqlyygotominor.mqlyy0 = newToken(); mqlyygotominor.mqlyy0->setString(new std::string()); }
 #line 4302 "./mql.c"
         break;
-      case 323: /* ffactor ::= KEY_OPEN_BRACKET ffeatures KEY_CLOSE_BRACKET */
-#line 1422 "./mql.yxx"
-{ mqlyygotominor.mqlyy540 = new FFactor(mqlyymsp[-1].minor.mqlyy288);   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
-  mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
+      case 308: /* object_reference_declaration ::= KEY_AS object_reference */
+#line 1397 "./mql.yxx"
+{ mqlyygotominor.mqlyy0 = mqlyymsp[0].minor.mqlyy0;   mqlyy_destructor(mqlyypParser,108,&mqlyymsp[-1].minor);
 }
-#line 4309 "./mql.c"
+#line 4308 "./mql.c"
         break;
-      case 324: /* ffactor ::= feature_comparison */
-#line 1424 "./mql.yxx"
-{ mqlyygotominor.mqlyy540 = new FFactor(mqlyymsp[0].minor.mqlyy407); }
-#line 4314 "./mql.c"
+      case 312: /* retrieval ::= */
+#line 1412 "./mql.yxx"
+{ mqlyygotominor.mqlyy484 = kRetrieve; }
+#line 4313 "./mql.c"
         break;
-      case 325: /* feature_comparison ::= feature_name comparison_operator value */
-#line 1430 "./mql.yxx"
-{ mqlyygotominor.mqlyy407 = new FeatureComparison(mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy96, mqlyymsp[0].minor.mqlyy204); deleteToken(mqlyymsp[-2].minor.mqlyy0); }
-#line 4319 "./mql.c"
+      case 313: /* retrieval ::= KEY_NORETRIEVE */
+      case 367: /* gap_retrieval ::= KEY_NORETRIEVE */ mqlyytestcase(mqlyyruleno==367);
+#line 1413 "./mql.yxx"
+{ mqlyygotominor.mqlyy484 = kNoRetrieve;   mqlyy_destructor(mqlyypParser,110,&mqlyymsp[0].minor);
+}
+#line 4320 "./mql.c"
         break;
-      case 326: /* feature_comparison ::= feature_name KEY_IN KEY_OPEN_BRACKET list_of_identifier KEY_CLOSE_BRACKET */
-#line 1432 "./mql.yxx"
-{ mqlyygotominor.mqlyy407 = new FeatureComparison(mqlyymsp[-4].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy440); deleteToken(mqlyymsp[-4].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,80,&mqlyymsp[-3].minor);
-  mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
-  mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
+      case 314: /* retrieval ::= KEY_RETRIEVE */
+      case 368: /* gap_retrieval ::= KEY_RETRIEVE */ mqlyytestcase(mqlyyruleno==368);
+#line 1414 "./mql.yxx"
+{ mqlyygotominor.mqlyy484 = kRetrieve;   mqlyy_destructor(mqlyypParser,111,&mqlyymsp[0].minor);
 }
 #line 4327 "./mql.c"
         break;
-      case 327: /* feature_comparison ::= feature_name KEY_IN KEY_OPEN_BRACKET list_of_integer KEY_CLOSE_BRACKET */
-#line 1434 "./mql.yxx"
-{ mqlyygotominor.mqlyy407 = new FeatureComparison(mqlyymsp[-4].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy327); deleteToken(mqlyymsp[-4].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,80,&mqlyymsp[-3].minor);
-  mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
-  mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
+      case 315: /* retrieval ::= KEY_FOCUS */
+      case 369: /* gap_retrieval ::= KEY_FOCUS */ mqlyytestcase(mqlyyruleno==369);
+#line 1415 "./mql.yxx"
+{ mqlyygotominor.mqlyy484 = kRetrieveFocus;   mqlyy_destructor(mqlyypParser,81,&mqlyymsp[0].minor);
 }
-#line 4335 "./mql.c"
+#line 4334 "./mql.c"
         break;
-      case 328: /* feature_comparison ::= feature_name KEY_IN object_reference_usage */
-#line 1436 "./mql.yxx"
-{ mqlyygotominor.mqlyy407 = new FeatureComparison(mqlyymsp[-2].minor.mqlyy0->extractString(), kIn, new Value(mqlyymsp[0].minor.mqlyy6)); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,80,&mqlyymsp[-1].minor);
+      case 316: /* firstlast ::= */
+#line 1419 "./mql.yxx"
+{ mqlyygotominor.mqlyy426 = kNoFirstLast; }
+#line 4339 "./mql.c"
+        break;
+      case 317: /* firstlast ::= KEY_FIRST */
+#line 1420 "./mql.yxx"
+{ mqlyygotominor.mqlyy426 = kFirst;   mqlyy_destructor(mqlyypParser,33,&mqlyymsp[0].minor);
 }
-#line 4341 "./mql.c"
+#line 4345 "./mql.c"
         break;
-      case 329: /* comparison_operator ::= KEY_EQUALS */
-#line 1441 "./mql.yxx"
-{ mqlyygotominor.mqlyy96 = kEqual;   mqlyy_destructor(mqlyypParser,72,&mqlyymsp[0].minor);
+      case 318: /* firstlast ::= KEY_LAST */
+#line 1421 "./mql.yxx"
+{ mqlyygotominor.mqlyy426 = kLast;   mqlyy_destructor(mqlyypParser,36,&mqlyymsp[0].minor);
 }
-#line 4347 "./mql.c"
+#line 4351 "./mql.c"
         break;
-      case 330: /* comparison_operator ::= KEY_LESS_THAN */
-#line 1442 "./mql.yxx"
-{ mqlyygotominor.mqlyy96 = kLessThan;   mqlyy_destructor(mqlyypParser,113,&mqlyymsp[0].minor);
-}
-#line 4353 "./mql.c"
-        break;
-      case 331: /* comparison_operator ::= KEY_GREATER_THAN */
-#line 1443 "./mql.yxx"
-{ mqlyygotominor.mqlyy96 = kGreaterThan;   mqlyy_destructor(mqlyypParser,114,&mqlyymsp[0].minor);
+      case 319: /* firstlast ::= KEY_FIRST KEY_AND KEY_LAST */
+#line 1422 "./mql.yxx"
+{ mqlyygotominor.mqlyy426 = kFirstAndLast;   mqlyy_destructor(mqlyypParser,33,&mqlyymsp[-2].minor);
+  mqlyy_destructor(mqlyypParser,35,&mqlyymsp[-1].minor);
+  mqlyy_destructor(mqlyypParser,36,&mqlyymsp[0].minor);
 }
 #line 4359 "./mql.c"
         break;
-      case 332: /* comparison_operator ::= KEY_NOT_EQUAL */
-#line 1444 "./mql.yxx"
-{ mqlyygotominor.mqlyy96 = kNotEqual;   mqlyy_destructor(mqlyypParser,115,&mqlyymsp[0].minor);
+      case 320: /* monad_set_relation_clause ::= monad_set_relation_operation KEY_OPEN_BRACKET monad_set_name KEY_COMMA universe_or_substrate KEY_CLOSE_BRACKET */
+#line 1427 "./mql.yxx"
+{ mqlyygotominor.mqlyy265 = new MonadSetRelationClause(mqlyymsp[-5].minor.mqlyy560, mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy485); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-4].minor);
+  mqlyy_destructor(mqlyypParser,71,&mqlyymsp[-2].minor);
+  mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
 }
-#line 4365 "./mql.c"
+#line 4367 "./mql.c"
         break;
-      case 333: /* comparison_operator ::= KEY_LESS_THAN_OR_EQUAL */
-#line 1445 "./mql.yxx"
-{ mqlyygotominor.mqlyy96 = kLessThanOrEqual;   mqlyy_destructor(mqlyypParser,116,&mqlyymsp[0].minor);
+      case 321: /* monad_set_relation_clause ::= monad_set_relation_operation KEY_OPEN_BRACKET universe_or_substrate KEY_CLOSE_BRACKET */
+#line 1429 "./mql.yxx"
+{ mqlyygotominor.mqlyy265 = new MonadSetRelationClause(mqlyymsp[-3].minor.mqlyy560, new std::string("monads"), mqlyymsp[-1].minor.mqlyy485);   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
+  mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
 }
-#line 4371 "./mql.c"
+#line 4374 "./mql.c"
         break;
-      case 334: /* comparison_operator ::= KEY_GREATER_THAN_OR_EQUAL */
+      case 322: /* monad_set_relation_clause ::= */
+#line 1431 "./mql.yxx"
+{ mqlyygotominor.mqlyy265 = new MonadSetRelationClause(kMSROPartOf, new std::string("monads"), kMSNSubstrate); }
+#line 4379 "./mql.c"
+        break;
+      case 323: /* monad_set_relation_operation ::= KEY_PART_OF */
+#line 1436 "./mql.yxx"
+{ mqlyygotominor.mqlyy560 = kMSROPartOf;   mqlyy_destructor(mqlyypParser,112,&mqlyymsp[0].minor);
+}
+#line 4385 "./mql.c"
+        break;
+      case 324: /* monad_set_relation_operation ::= KEY_STARTS_IN */
+#line 1438 "./mql.yxx"
+{ mqlyygotominor.mqlyy560 = kMSROStartsIn;   mqlyy_destructor(mqlyypParser,113,&mqlyymsp[0].minor);
+}
+#line 4391 "./mql.c"
+        break;
+      case 325: /* monad_set_relation_operation ::= KEY_OVERLAP */
+#line 1440 "./mql.yxx"
+{ mqlyygotominor.mqlyy560 = kMSROOverlap;   mqlyy_destructor(mqlyypParser,114,&mqlyymsp[0].minor);
+}
+#line 4397 "./mql.c"
+        break;
+      case 326: /* universe_or_substrate ::= KEY_UNIVERSE */
 #line 1446 "./mql.yxx"
-{ mqlyygotominor.mqlyy96 = kGreaterThanOrEqual;   mqlyy_destructor(mqlyypParser,117,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy485 = kMSNUniverse;   mqlyy_destructor(mqlyypParser,115,&mqlyymsp[0].minor);
 }
-#line 4377 "./mql.c"
+#line 4403 "./mql.c"
         break;
-      case 335: /* comparison_operator ::= KEY_TILDE */
-#line 1447 "./mql.yxx"
-{ mqlyygotominor.mqlyy96 = kTilde;   mqlyy_destructor(mqlyypParser,118,&mqlyymsp[0].minor);
-}
-#line 4383 "./mql.c"
-        break;
-      case 336: /* comparison_operator ::= KEY_NOT_TILDE */
+      case 327: /* universe_or_substrate ::= KEY_SUBSTRATE */
 #line 1448 "./mql.yxx"
-{ mqlyygotominor.mqlyy96 = kNotTilde;   mqlyy_destructor(mqlyypParser,119,&mqlyymsp[0].minor);
+{ mqlyygotominor.mqlyy485 = kMSNSubstrate;   mqlyy_destructor(mqlyypParser,116,&mqlyymsp[0].minor);
 }
-#line 4389 "./mql.c"
+#line 4409 "./mql.c"
         break;
-      case 337: /* comparison_operator ::= KEY_HAS */
-#line 1449 "./mql.yxx"
-{ mqlyygotominor.mqlyy96 = kHas;   mqlyy_destructor(mqlyypParser,120,&mqlyymsp[0].minor);
-}
-#line 4395 "./mql.c"
+      case 328: /* feature_constraints ::= */
+#line 1453 "./mql.yxx"
+{ mqlyygotominor.mqlyy441 = 0; }
+#line 4414 "./mql.c"
         break;
-      case 338: /* value ::= enum_const */
-#line 1456 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new Value(mqlyymsp[0].minor.mqlyy0->extractString(), kValEnumConst); deleteToken(mqlyymsp[0].minor.mqlyy0); }
-#line 4400 "./mql.c"
+      case 329: /* feature_constraints ::= ffeatures */
+#line 1454 "./mql.yxx"
+{ mqlyygotominor.mqlyy441 = mqlyymsp[0].minor.mqlyy441; }
+#line 4419 "./mql.c"
         break;
-      case 339: /* value ::= signed_integer */
-#line 1458 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new Value(mqlyymsp[0].minor.mqlyy249); }
-#line 4405 "./mql.c"
+      case 330: /* ffeatures ::= fterm */
+#line 1459 "./mql.yxx"
+{ mqlyygotominor.mqlyy441 = new FFeatures(mqlyymsp[0].minor.mqlyy201); }
+#line 4424 "./mql.c"
         break;
-      case 340: /* value ::= STRING */
+      case 331: /* ffeatures ::= ffeatures KEY_OR fterm */
 #line 1460 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new Value(mqlyymsp[0].minor.mqlyy0->extractString(), kValString); deleteToken(mqlyymsp[0].minor.mqlyy0); }
-#line 4410 "./mql.c"
-        break;
-      case 341: /* value ::= object_reference_usage */
-#line 1462 "./mql.yxx"
-{ mqlyygotominor.mqlyy204 = new Value(mqlyymsp[0].minor.mqlyy6); }
-#line 4415 "./mql.c"
-        break;
-      case 343: /* object_reference_usage ::= object_reference KEY_DOT feature_name */
-#line 1472 "./mql.yxx"
-{ mqlyygotominor.mqlyy6 = new ObjectReferenceUsage(mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-2].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,121,&mqlyymsp[-1].minor);
+{ mqlyygotominor.mqlyy441 = new FFeatures(mqlyymsp[-2].minor.mqlyy441, mqlyymsp[0].minor.mqlyy201);   mqlyy_destructor(mqlyypParser,105,&mqlyymsp[-1].minor);
 }
-#line 4421 "./mql.c"
+#line 4430 "./mql.c"
         break;
-      case 344: /* opt_blocks ::= */
-#line 1477 "./mql.yxx"
-{ mqlyygotominor.mqlyy377 = 0; }
-#line 4426 "./mql.c"
+      case 332: /* fterm ::= ffactor */
+#line 1465 "./mql.yxx"
+{ mqlyygotominor.mqlyy201 = new FTerm(mqlyymsp[0].minor.mqlyy132); }
+#line 4435 "./mql.c"
         break;
-      case 345: /* opt_blocks ::= blocks */
-#line 1478 "./mql.yxx"
-{ mqlyygotominor.mqlyy377 = mqlyymsp[0].minor.mqlyy377; }
-#line 4431 "./mql.c"
+      case 333: /* fterm ::= fterm KEY_AND ffactor */
+#line 1466 "./mql.yxx"
+{ mqlyygotominor.mqlyy201 = new FTerm(mqlyymsp[-2].minor.mqlyy201, mqlyymsp[0].minor.mqlyy132);   mqlyy_destructor(mqlyypParser,35,&mqlyymsp[-1].minor);
+}
+#line 4441 "./mql.c"
         break;
-      case 346: /* block ::= object_block */
-      case 350: /* block ::= notexist_object_block */ mqlyytestcase(mqlyyruleno==350);
-#line 1483 "./mql.yxx"
-{ mqlyygotominor.mqlyy414 = new Block(mqlyymsp[0].minor.mqlyy125); }
-#line 4437 "./mql.c"
-        break;
-      case 347: /* block ::= power */
-#line 1484 "./mql.yxx"
-{ mqlyygotominor.mqlyy414 = new Block(mqlyymsp[0].minor.mqlyy68); }
-#line 4442 "./mql.c"
-        break;
-      case 348: /* block ::= opt_gap_block */
-#line 1485 "./mql.yxx"
-{ mqlyygotominor.mqlyy414 = new Block(mqlyymsp[0].minor.mqlyy265); }
+      case 334: /* ffactor ::= KEY_NOT ffactor */
+#line 1471 "./mql.yxx"
+{ mqlyygotominor.mqlyy132 = new FFactor(mqlyymsp[0].minor.mqlyy132);   mqlyy_destructor(mqlyypParser,49,&mqlyymsp[-1].minor);
+}
 #line 4447 "./mql.c"
         break;
-      case 349: /* block ::= gap_block */
-#line 1486 "./mql.yxx"
-{ mqlyygotominor.mqlyy414 = new Block(mqlyymsp[0].minor.mqlyy18); }
-#line 4452 "./mql.c"
+      case 335: /* ffactor ::= KEY_OPEN_BRACKET ffeatures KEY_CLOSE_BRACKET */
+#line 1473 "./mql.yxx"
+{ mqlyygotominor.mqlyy132 = new FFactor(mqlyymsp[-1].minor.mqlyy441);   mqlyy_destructor(mqlyypParser,52,&mqlyymsp[-2].minor);
+  mqlyy_destructor(mqlyypParser,54,&mqlyymsp[0].minor);
+}
+#line 4454 "./mql.c"
         break;
-      case 351: /* star_monad_set ::= */
-#line 1491 "./mql.yxx"
-{ mqlyygotominor.mqlyy34 = new MQLMonadSetElement(0, MAX_MONAD, 0, true); }
-#line 4457 "./mql.c"
+      case 336: /* ffactor ::= feature_comparison */
+#line 1475 "./mql.yxx"
+{ mqlyygotominor.mqlyy132 = new FFactor(mqlyymsp[0].minor.mqlyy398); }
+#line 4459 "./mql.c"
         break;
-      case 353: /* opt_gap_block ::= KEY_OPEN_SQUARE_BRACKET KEY_OPT_GAP mark_declaration gap_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET */
-#line 1497 "./mql.yxx"
-{ mqlyygotominor.mqlyy265 = new OptGapBlock(mqlyymsp[-2].minor.mqlyy372, mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy377); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-5].minor);
-  mqlyy_destructor(mqlyypParser,122,&mqlyymsp[-4].minor);
-  mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
+      case 340: /* feature_comparison ::= feature_name KEY_IN object_reference_usage */
+#line 1487 "./mql.yxx"
+{ mqlyygotominor.mqlyy398 = new FeatureComparison(mqlyymsp[-2].minor.mqlyy0->extractString(), kIn, new Value(mqlyymsp[0].minor.mqlyy494)); deleteToken(mqlyymsp[-2].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,80,&mqlyymsp[-1].minor);
 }
 #line 4465 "./mql.c"
         break;
-      case 354: /* gap_retrieval ::= */
-#line 1502 "./mql.yxx"
-{ mqlyygotominor.mqlyy372 = kNoRetrieve; }
-#line 4470 "./mql.c"
-        break;
-      case 358: /* gap_block ::= KEY_OPEN_SQUARE_BRACKET KEY_GAP mark_declaration gap_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET */
-#line 1511 "./mql.yxx"
-{ mqlyygotominor.mqlyy18 = new GapBlock(mqlyymsp[-2].minor.mqlyy372, mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy377); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-5].minor);
-  mqlyy_destructor(mqlyypParser,123,&mqlyymsp[-4].minor);
-  mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
+      case 341: /* comparison_operator ::= KEY_EQUALS */
+#line 1492 "./mql.yxx"
+{ mqlyygotominor.mqlyy200 = kEqual;   mqlyy_destructor(mqlyypParser,72,&mqlyymsp[0].minor);
 }
-#line 4478 "./mql.c"
+#line 4471 "./mql.c"
         break;
-      case 359: /* feature_retrieval ::= KEY_GET feature_list */
-#line 1518 "./mql.yxx"
-{ mqlyygotominor.mqlyy242 = mqlyymsp[0].minor.mqlyy242;   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-1].minor);
+      case 342: /* comparison_operator ::= KEY_LESS_THAN */
+#line 1493 "./mql.yxx"
+{ mqlyygotominor.mqlyy200 = kLessThan;   mqlyy_destructor(mqlyypParser,117,&mqlyymsp[0].minor);
 }
-#line 4484 "./mql.c"
+#line 4477 "./mql.c"
         break;
-      case 360: /* feature_retrieval ::= */
-#line 1519 "./mql.yxx"
-{ mqlyygotominor.mqlyy242 = 0; }
+      case 343: /* comparison_operator ::= KEY_GREATER_THAN */
+#line 1494 "./mql.yxx"
+{ mqlyygotominor.mqlyy200 = kGreaterThan;   mqlyy_destructor(mqlyypParser,118,&mqlyymsp[0].minor);
+}
+#line 4483 "./mql.c"
+        break;
+      case 344: /* comparison_operator ::= KEY_NOT_EQUAL */
+#line 1495 "./mql.yxx"
+{ mqlyygotominor.mqlyy200 = kNotEqual;   mqlyy_destructor(mqlyypParser,119,&mqlyymsp[0].minor);
+}
 #line 4489 "./mql.c"
         break;
-      case 361: /* object_block ::= KEY_OPEN_SQUARE_BRACKET object_type_name mark_declaration object_reference_declaration retrieval firstlast monad_set_relation_clause feature_constraints feature_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET */
-#line 1532 "./mql.yxx"
-{ mqlyygotominor.mqlyy125 = new ObjectBlock(mqlyymsp[-9].minor.mqlyy0->extractString(), mqlyymsp[-8].minor.mqlyy0->extractString(), mqlyymsp[-7].minor.mqlyy0->extractString(), mqlyymsp[-6].minor.mqlyy372, mqlyymsp[-5].minor.mqlyy90, mqlyymsp[-4].minor.mqlyy385, mqlyymsp[-3].minor.mqlyy288, mqlyymsp[-2].minor.mqlyy242, mqlyymsp[-1].minor.mqlyy377, false); 
-      deleteToken(mqlyymsp[-9].minor.mqlyy0); deleteToken(mqlyymsp[-8].minor.mqlyy0); deleteToken(mqlyymsp[-7].minor.mqlyy0); 
-      mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-10].minor);
-  mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
+      case 345: /* comparison_operator ::= KEY_LESS_THAN_OR_EQUAL */
+#line 1496 "./mql.yxx"
+{ mqlyygotominor.mqlyy200 = kLessThanOrEqual;   mqlyy_destructor(mqlyypParser,120,&mqlyymsp[0].minor);
 }
-#line 4498 "./mql.c"
+#line 4495 "./mql.c"
         break;
-      case 362: /* notexist_object_block ::= notexist KEY_OPEN_SQUARE_BRACKET object_type_name mark_declaration object_reference_declaration retrieval firstlast monad_set_relation_clause feature_constraints feature_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET */
-#line 1546 "./mql.yxx"
-{ mqlyygotominor.mqlyy125 = new ObjectBlock(mqlyymsp[-9].minor.mqlyy0->extractString(), mqlyymsp[-8].minor.mqlyy0->extractString(), mqlyymsp[-7].minor.mqlyy0->extractString(), mqlyymsp[-6].minor.mqlyy372, mqlyymsp[-5].minor.mqlyy90, mqlyymsp[-4].minor.mqlyy385, mqlyymsp[-3].minor.mqlyy288, mqlyymsp[-2].minor.mqlyy242, mqlyymsp[-1].minor.mqlyy377, true); 
-      deleteToken(mqlyymsp[-9].minor.mqlyy0); deleteToken(mqlyymsp[-8].minor.mqlyy0); deleteToken(mqlyymsp[-7].minor.mqlyy0); 
-      mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-10].minor);
-  mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
+      case 346: /* comparison_operator ::= KEY_GREATER_THAN_OR_EQUAL */
+#line 1497 "./mql.yxx"
+{ mqlyygotominor.mqlyy200 = kGreaterThanOrEqual;   mqlyy_destructor(mqlyypParser,121,&mqlyymsp[0].minor);
+}
+#line 4501 "./mql.c"
+        break;
+      case 347: /* comparison_operator ::= KEY_TILDE */
+#line 1498 "./mql.yxx"
+{ mqlyygotominor.mqlyy200 = kTilde;   mqlyy_destructor(mqlyypParser,122,&mqlyymsp[0].minor);
 }
 #line 4507 "./mql.c"
         break;
-      case 363: /* power ::= KEY_POWER restrictor */
-#line 1554 "./mql.yxx"
-{ mqlyygotominor.mqlyy68 = new Power(mqlyymsp[0].minor.mqlyy352);   mqlyy_destructor(mqlyypParser,124,&mqlyymsp[-1].minor);
+      case 348: /* comparison_operator ::= KEY_NOT_TILDE */
+#line 1499 "./mql.yxx"
+{ mqlyygotominor.mqlyy200 = kNotTilde;   mqlyy_destructor(mqlyypParser,123,&mqlyymsp[0].minor);
 }
 #line 4513 "./mql.c"
         break;
-      case 364: /* power ::= KEY_POWER KEY_BETWEEN limit KEY_AND limit */
-#line 1556 "./mql.yxx"
-{ mqlyygotominor.mqlyy68 = new Power(mqlyymsp[-2].minor.mqlyy352, mqlyymsp[0].minor.mqlyy352);   mqlyy_destructor(mqlyypParser,124,&mqlyymsp[-4].minor);
-  mqlyy_destructor(mqlyypParser,125,&mqlyymsp[-3].minor);
+      case 349: /* comparison_operator ::= KEY_HAS */
+#line 1500 "./mql.yxx"
+{ mqlyygotominor.mqlyy200 = kHas;   mqlyy_destructor(mqlyypParser,124,&mqlyymsp[0].minor);
+}
+#line 4519 "./mql.c"
+        break;
+      case 350: /* value ::= enum_const */
+#line 1507 "./mql.yxx"
+{ mqlyygotominor.mqlyy356 = new Value(mqlyymsp[0].minor.mqlyy0->extractString(), kValEnumConst); deleteToken(mqlyymsp[0].minor.mqlyy0); }
+#line 4524 "./mql.c"
+        break;
+      case 351: /* value ::= signed_integer */
+#line 1509 "./mql.yxx"
+{ mqlyygotominor.mqlyy356 = new Value(mqlyymsp[0].minor.mqlyy377); }
+#line 4529 "./mql.c"
+        break;
+      case 352: /* value ::= STRING */
+#line 1511 "./mql.yxx"
+{ mqlyygotominor.mqlyy356 = new Value(mqlyymsp[0].minor.mqlyy0->extractString(), kValString); deleteToken(mqlyymsp[0].minor.mqlyy0); }
+#line 4534 "./mql.c"
+        break;
+      case 353: /* value ::= object_reference_usage */
+#line 1513 "./mql.yxx"
+{ mqlyygotominor.mqlyy356 = new Value(mqlyymsp[0].minor.mqlyy494); }
+#line 4539 "./mql.c"
+        break;
+      case 355: /* object_reference_usage ::= object_reference KEY_DOT feature_name */
+#line 1523 "./mql.yxx"
+{ mqlyygotominor.mqlyy494 = new ObjectReferenceUsage(mqlyymsp[-2].minor.mqlyy0->extractString(), mqlyymsp[0].minor.mqlyy0->extractString()); deleteToken(mqlyymsp[-2].minor.mqlyy0); deleteToken(mqlyymsp[0].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,125,&mqlyymsp[-1].minor);
+}
+#line 4545 "./mql.c"
+        break;
+      case 356: /* opt_blocks ::= */
+#line 1528 "./mql.yxx"
+{ mqlyygotominor.mqlyy369 = 0; }
+#line 4550 "./mql.c"
+        break;
+      case 357: /* opt_blocks ::= blocks */
+#line 1529 "./mql.yxx"
+{ mqlyygotominor.mqlyy369 = mqlyymsp[0].minor.mqlyy369; }
+#line 4555 "./mql.c"
+        break;
+      case 358: /* block ::= object_block */
+      case 362: /* block ::= notexist_object_block */ mqlyytestcase(mqlyyruleno==362);
+#line 1534 "./mql.yxx"
+{ mqlyygotominor.mqlyy478 = new Block(mqlyymsp[0].minor.mqlyy549); }
+#line 4561 "./mql.c"
+        break;
+      case 359: /* block ::= power */
+#line 1535 "./mql.yxx"
+{ mqlyygotominor.mqlyy478 = new Block(mqlyymsp[0].minor.mqlyy92); }
+#line 4566 "./mql.c"
+        break;
+      case 360: /* block ::= opt_gap_block */
+#line 1536 "./mql.yxx"
+{ mqlyygotominor.mqlyy478 = new Block(mqlyymsp[0].minor.mqlyy97); }
+#line 4571 "./mql.c"
+        break;
+      case 361: /* block ::= gap_block */
+#line 1537 "./mql.yxx"
+{ mqlyygotominor.mqlyy478 = new Block(mqlyymsp[0].minor.mqlyy306); }
+#line 4576 "./mql.c"
+        break;
+      case 363: /* star_monad_set ::= */
+#line 1542 "./mql.yxx"
+{ mqlyygotominor.mqlyy362 = new MQLMonadSetElement(0, MAX_MONAD, 0, true); }
+#line 4581 "./mql.c"
+        break;
+      case 365: /* opt_gap_block ::= KEY_OPEN_SQUARE_BRACKET KEY_OPT_GAP mark_declaration gap_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET */
+#line 1548 "./mql.yxx"
+{ mqlyygotominor.mqlyy97 = new OptGapBlock(mqlyymsp[-2].minor.mqlyy484, mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy369); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-5].minor);
+  mqlyy_destructor(mqlyypParser,126,&mqlyymsp[-4].minor);
+  mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
+}
+#line 4589 "./mql.c"
+        break;
+      case 366: /* gap_retrieval ::= */
+#line 1553 "./mql.yxx"
+{ mqlyygotominor.mqlyy484 = kNoRetrieve; }
+#line 4594 "./mql.c"
+        break;
+      case 370: /* gap_block ::= KEY_OPEN_SQUARE_BRACKET KEY_GAP mark_declaration gap_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET */
+#line 1562 "./mql.yxx"
+{ mqlyygotominor.mqlyy306 = new GapBlock(mqlyymsp[-2].minor.mqlyy484, mqlyymsp[-3].minor.mqlyy0->extractString(), mqlyymsp[-1].minor.mqlyy369); deleteToken(mqlyymsp[-3].minor.mqlyy0);   mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-5].minor);
+  mqlyy_destructor(mqlyypParser,127,&mqlyymsp[-4].minor);
+  mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
+}
+#line 4602 "./mql.c"
+        break;
+      case 371: /* feature_retrieval ::= KEY_GET feature_list */
+#line 1569 "./mql.yxx"
+{ mqlyygotominor.mqlyy98 = mqlyymsp[0].minor.mqlyy98;   mqlyy_destructor(mqlyypParser,62,&mqlyymsp[-1].minor);
+}
+#line 4608 "./mql.c"
+        break;
+      case 372: /* feature_retrieval ::= */
+#line 1570 "./mql.yxx"
+{ mqlyygotominor.mqlyy98 = 0; }
+#line 4613 "./mql.c"
+        break;
+      case 373: /* object_block ::= KEY_OPEN_SQUARE_BRACKET object_type_name mark_declaration object_reference_declaration retrieval firstlast monad_set_relation_clause feature_constraints feature_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET */
+#line 1583 "./mql.yxx"
+{ mqlyygotominor.mqlyy549 = new ObjectBlock(mqlyymsp[-9].minor.mqlyy0->extractString(), mqlyymsp[-8].minor.mqlyy0->extractString(), mqlyymsp[-7].minor.mqlyy0->extractString(), mqlyymsp[-6].minor.mqlyy484, mqlyymsp[-5].minor.mqlyy426, mqlyymsp[-4].minor.mqlyy265, mqlyymsp[-3].minor.mqlyy441, mqlyymsp[-2].minor.mqlyy98, mqlyymsp[-1].minor.mqlyy369, false); 
+      deleteToken(mqlyymsp[-9].minor.mqlyy0); deleteToken(mqlyymsp[-8].minor.mqlyy0); deleteToken(mqlyymsp[-7].minor.mqlyy0); 
+      mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-10].minor);
+  mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
+}
+#line 4622 "./mql.c"
+        break;
+      case 374: /* notexist_object_block ::= notexist KEY_OPEN_SQUARE_BRACKET object_type_name mark_declaration object_reference_declaration retrieval firstlast monad_set_relation_clause feature_constraints feature_retrieval opt_blocks KEY_CLOSE_SQUARE_BRACKET */
+#line 1597 "./mql.yxx"
+{ mqlyygotominor.mqlyy549 = new ObjectBlock(mqlyymsp[-9].minor.mqlyy0->extractString(), mqlyymsp[-8].minor.mqlyy0->extractString(), mqlyymsp[-7].minor.mqlyy0->extractString(), mqlyymsp[-6].minor.mqlyy484, mqlyymsp[-5].minor.mqlyy426, mqlyymsp[-4].minor.mqlyy265, mqlyymsp[-3].minor.mqlyy441, mqlyymsp[-2].minor.mqlyy98, mqlyymsp[-1].minor.mqlyy369, true); 
+      deleteToken(mqlyymsp[-9].minor.mqlyy0); deleteToken(mqlyymsp[-8].minor.mqlyy0); deleteToken(mqlyymsp[-7].minor.mqlyy0); 
+      mqlyy_destructor(mqlyypParser,18,&mqlyymsp[-10].minor);
+  mqlyy_destructor(mqlyypParser,19,&mqlyymsp[0].minor);
+}
+#line 4631 "./mql.c"
+        break;
+      case 375: /* power ::= KEY_POWER restrictor */
+#line 1605 "./mql.yxx"
+{ mqlyygotominor.mqlyy92 = new Power(mqlyymsp[0].minor.mqlyy608);   mqlyy_destructor(mqlyypParser,128,&mqlyymsp[-1].minor);
+}
+#line 4637 "./mql.c"
+        break;
+      case 376: /* power ::= KEY_POWER KEY_BETWEEN limit KEY_AND limit */
+#line 1607 "./mql.yxx"
+{ mqlyygotominor.mqlyy92 = new Power(mqlyymsp[-2].minor.mqlyy608, mqlyymsp[0].minor.mqlyy608);   mqlyy_destructor(mqlyypParser,128,&mqlyymsp[-4].minor);
+  mqlyy_destructor(mqlyypParser,129,&mqlyymsp[-3].minor);
   mqlyy_destructor(mqlyypParser,35,&mqlyymsp[-1].minor);
 }
-#line 4521 "./mql.c"
+#line 4645 "./mql.c"
         break;
-      case 365: /* restrictor ::= */
-#line 1560 "./mql.yxx"
-{ mqlyygotominor.mqlyy352 = MAX_MONAD; }
-#line 4526 "./mql.c"
+      case 377: /* restrictor ::= */
+#line 1611 "./mql.yxx"
+{ mqlyygotominor.mqlyy608 = MAX_MONAD; }
+#line 4650 "./mql.c"
         break;
-      case 366: /* restrictor ::= KEY_LESS_THAN limit */
-#line 1561 "./mql.yxx"
-{ mqlyygotominor.mqlyy352 = mqlyymsp[0].minor.mqlyy352-1;   mqlyy_destructor(mqlyypParser,113,&mqlyymsp[-1].minor);
+      case 378: /* restrictor ::= KEY_LESS_THAN limit */
+#line 1612 "./mql.yxx"
+{ mqlyygotominor.mqlyy608 = mqlyymsp[0].minor.mqlyy608-1;   mqlyy_destructor(mqlyypParser,117,&mqlyymsp[-1].minor);
 }
-#line 4532 "./mql.c"
+#line 4656 "./mql.c"
         break;
-      case 367: /* restrictor ::= KEY_LESS_THAN_OR_EQUAL limit */
-#line 1562 "./mql.yxx"
-{ mqlyygotominor.mqlyy352 = mqlyymsp[0].minor.mqlyy352;   mqlyy_destructor(mqlyypParser,116,&mqlyymsp[-1].minor);
+      case 379: /* restrictor ::= KEY_LESS_THAN_OR_EQUAL limit */
+#line 1613 "./mql.yxx"
+{ mqlyygotominor.mqlyy608 = mqlyymsp[0].minor.mqlyy608;   mqlyy_destructor(mqlyypParser,120,&mqlyymsp[-1].minor);
 }
-#line 4538 "./mql.c"
+#line 4662 "./mql.c"
         break;
-      case 368: /* limit ::= INTEGER */
-#line 1568 "./mql.yxx"
-{ mqlyygotominor.mqlyy352 = mqlyymsp[0].minor.mqlyy0->integer; deleteToken(mqlyymsp[0].minor.mqlyy0); }
-#line 4543 "./mql.c"
+      case 380: /* limit ::= INTEGER */
+#line 1619 "./mql.yxx"
+{ mqlyygotominor.mqlyy608 = mqlyymsp[0].minor.mqlyy0->integer; deleteToken(mqlyymsp[0].minor.mqlyy0); }
+#line 4667 "./mql.c"
         break;
       default:
         break;
@@ -107182,7 +109407,7 @@ static void mqlyy_parse_failed(
 #line 140 "./mql.yxx"
 
   pEE->bSyntaxError = true;
-#line 4593 "./mql.c"
+#line 4717 "./mql.c"
   MQLParserARG_STORE; /* Suppress warning about unused %extra_argument variable */
 }
 #endif /* MQLYYNOERRORRECOVERY */
@@ -107202,7 +109427,7 @@ static void mqlyy_syntax_error(
   pEE->bSyntaxError = true;
   std::string errMsg = "syntax error near " + TOKEN->getTokenName() + '\n';
   pEE->pError->appendError(errMsg);
-#line 4613 "./mql.c"
+#line 4737 "./mql.c"
   MQLParserARG_STORE; /* Suppress warning about unused %extra_argument variable */
 }
 
@@ -107408,7 +109633,7 @@ void MQLParser(
  *
  * Ulrik Petersen
  * Created: 2/27-2001
- * Last update: 4/20-2016
+ * Last update: 7/21-2016
  *
  */
 /************************************************************************
@@ -109391,6 +111616,12 @@ bool FeatureComparison::symbolObjectReferences2(MQLExecEnv *pEE)
 
 
 
+void FeatureComparison::symbolAddFeaturesToSet(std::set<std::string>& myset) const
+{
+	std::string lowercase_feature_name;
+	str_tolower(*m_feature_name, lowercase_feature_name);
+	myset.insert(lowercase_feature_name);
+}
 
 void FeatureComparison::symbolAddFeatures(MQLObject* pObj, EMdFDB *pDB)
 {
@@ -109446,6 +111677,25 @@ void FeatureComparison::symbolAddFeatures(MQLObject* pObj, EMdFDB *pDB)
 	pObj->addFeature(m_feature_info);
 	m_feature_index = pObj->getFeatureIndex(*m_feature_name);
 }
+
+bool FeatureComparison::symbolSetFeatureIndex(const std::vector<std::string>& feature_name_vec, bool& bResult)
+{
+	for (unsigned int i = 0; 
+	     i < feature_name_vec.size(); ++i) {
+		std::string feature_name = feature_name_vec[i];
+
+		if (strcmp_nocase(feature_name, m_feature_info.getName()) == 0) {
+			m_feature_index = i;
+			bResult = true;
+			return true;
+		}
+	}
+	// This should not happen....
+	m_feature_index = -1;
+	bResult = false;
+	return true;
+}
+
 
 bool FeatureComparison::type(MQLExecEnv *pEE, bool& bResult)
 {
@@ -109647,6 +111897,13 @@ bool FeatureComparison::type(MQLExecEnv *pEE, bool& bResult)
 
 	// If we got this far, there were no DB errors
 	return true;
+}
+
+bool FeatureComparison::exec(MQLExecEnv *pEE, const InstObject *pInstObj)
+{
+	NonParentORDSolution *pNonParentORDSolution = 0;
+	const EMdFValue *left_value = pInstObj->getFeature(m_feature_index);
+	return this->compare(pEE, left_value, pNonParentORDSolution);
 }
 
 void FeatureComparison::pretty(std::ostream *pOut, int indent, NonParentORDSolution *pNonParentORDSolution)
@@ -110011,7 +112268,17 @@ bool FFactor::symbolObjectReferences2(MQLExecEnv *pEE)
 
 
 
-
+bool FFactor::symbolSetFeatureIndex(const std::vector<std::string>& feature_name_vec, bool& bResult)
+{
+	if (isNOT()) {
+		return m_ffactor->symbolSetFeatureIndex(feature_name_vec, bResult);
+	} else if (isParenthesis()) {
+		return m_ffeatures->symbolSetFeatureIndex(feature_name_vec, bResult);
+	} else { // is_feature_comparison
+		return m_feature_comparison->symbolSetFeatureIndex(feature_name_vec, bResult);
+	}
+}
+	      
 void FFactor::symbolAddFeatures(MQLObject* pObj, EMdFDB *pDB)
 {
 	if (isNOT()) {
@@ -110023,6 +112290,17 @@ void FFactor::symbolAddFeatures(MQLObject* pObj, EMdFDB *pDB)
 	}
 }
 
+void FFactor::symbolAddFeaturesToSet(std::set<std::string>& myset) const
+{
+	if (isNOT()) {
+		m_ffactor->symbolAddFeaturesToSet(myset);
+	} else if (isParenthesis()) {
+		m_ffeatures->symbolAddFeaturesToSet(myset);
+	} else { // is_feature_comparison
+		m_feature_comparison->symbolAddFeaturesToSet(myset);
+	}
+}
+
 bool FFactor::type(MQLExecEnv *pEE, bool& bResult)
 {
 	if (isNOT()) {
@@ -110031,6 +112309,17 @@ bool FFactor::type(MQLExecEnv *pEE, bool& bResult)
 		return m_ffeatures->type(pEE, bResult);
 	} else { // is_feature_comparison
 		return m_feature_comparison->type(pEE, bResult);
+	}
+}
+
+bool FFactor::exec(MQLExecEnv *pEE, const InstObject *pInstObj)
+{
+	if (isNOT()) {
+		return !m_ffactor->exec(pEE, pInstObj);
+	} else if (isParenthesis()) {
+		return m_ffeatures->exec(pEE, pInstObj);
+	} else { // is_feature_comparison
+		return m_feature_comparison->exec(pEE, pInstObj);
 	}
 }
 
@@ -110202,6 +112491,31 @@ void FTerm::symbolAddFeatures(MQLObject* pObj, EMdFDB *pDB)
 		m_ffactor->symbolAddFeatures(pObj, pDB);
 	}
 }
+	
+bool FTerm::symbolSetFeatureIndex(const std::vector<std::string>& feature_name_vec, bool& bResult)
+{
+	if (isFFactor()) {
+		return m_ffactor->symbolSetFeatureIndex(feature_name_vec, bResult);
+	} else {
+		if (!m_fterm->symbolSetFeatureIndex(feature_name_vec, bResult)) {
+			return false;
+		}
+		if (!bResult) {
+			return true;
+		}
+		return m_ffactor->symbolSetFeatureIndex(feature_name_vec, bResult);
+	}
+}
+
+void FTerm::symbolAddFeaturesToSet(std::set<std::string>& myset) const
+{
+	if (isFFactor()) {
+		m_ffactor->symbolAddFeaturesToSet(myset);
+	} else {
+		m_fterm->symbolAddFeaturesToSet(myset);
+		m_ffactor->symbolAddFeaturesToSet(myset);
+	}
+}
 
 bool FTerm::type(MQLExecEnv *pEE, bool& bResult)
 {
@@ -110213,6 +112527,20 @@ bool FTerm::type(MQLExecEnv *pEE, bool& bResult)
 		if (!bResult)
 			return true;
 		return m_ffactor->type(pEE, bResult);
+	}
+}
+
+bool FTerm::exec(MQLExecEnv *pEE, const InstObject *pInstObj)
+{
+	if (isFFactor()) {
+		// fterm ::= ffactor
+		return m_ffactor->exec(pEE, pInstObj);
+	} else {
+		// fterm ::= fterm "AND" ffactor
+		if (!m_fterm->exec(pEE, pInstObj))
+			return false;
+		
+		return m_ffactor->exec(pEE, pInstObj);
 	}
 }
 
@@ -110582,6 +112910,22 @@ unsigned int FFeatures::getMatchedObjectIndex(MQLExecEnv *pEE,
 }
 
 
+bool FFeatures::symbolSetFeatureIndex(const std::vector<std::string>& feature_name_vec, bool& bResult)
+{
+	if (isFTerm()) {
+		return m_fterm->symbolSetFeatureIndex(feature_name_vec, bResult);
+	} else {
+		if (!m_ffeatures->symbolSetFeatureIndex(feature_name_vec, bResult)) {
+			return false;
+		}
+		if (!bResult) {
+			return true;
+		}
+		
+		return m_fterm->symbolSetFeatureIndex(feature_name_vec, bResult);
+	}
+}
+
 void FFeatures::symbolAddFeatures(MQLObject* pObj, EMdFDB *pDB)
 {
 	if (isFTerm()) {
@@ -110589,6 +112933,16 @@ void FFeatures::symbolAddFeatures(MQLObject* pObj, EMdFDB *pDB)
 	} else {
 		m_ffeatures->symbolAddFeatures(pObj, pDB);
 		m_fterm->symbolAddFeatures(pObj, pDB);
+	}
+}
+
+void FFeatures::symbolAddFeaturesToSet(std::set<std::string>& myset) const
+{
+	if (isFTerm()) {
+		m_fterm->symbolAddFeaturesToSet(myset);
+	} else {
+		m_ffeatures->symbolAddFeaturesToSet(myset);
+		m_fterm->symbolAddFeaturesToSet(myset);
 	}
 }
 
@@ -110603,6 +112957,19 @@ bool FFeatures::type(MQLExecEnv *pEE, bool& bResult)
 		if (!bResult)
 			return true;
 		return m_fterm->type(pEE, bResult);
+	}
+}
+
+bool FFeatures::exec(MQLExecEnv *pEE, const InstObject *pInstObj)
+{
+	if (isFTerm()) {
+		// ffeatures ::= fterm
+		return m_fterm->exec(pEE, pInstObj);
+	} else {
+		// ffeatures ::= ffeatures "OR" fterm
+		if (m_ffeatures->exec(pEE, pInstObj))
+			return true;
+		return m_fterm->exec(pEE,  pInstObj);
 	}
 }
 
@@ -110977,6 +113344,39 @@ ObjectBlock::ObjectBlock(std::string* object_type_name,
 	*m_object_type_name = normalizeOTName(*m_object_type_name);
 	str_tolower(*m_object_reference, m_object_reference_lower);
 }
+
+ObjectBlock::ObjectBlock(std::string* object_type_name,
+			 std::string* mark_declaration,
+			 std::string* object_reference,
+			 eRetrieval retrieval,
+			 eFirstLast first_last,
+			 MonadSetRelationClause *pMSRC,
+			 FFeatures* feature_constraints,
+			 Feature *GET_feature_retrieval,
+			 Blocks* opt_blocks,
+			 bool bIsNOTEXIST)
+	: ObjectBlockBase(object_type_name,
+			  mark_declaration,
+			  retrieval,
+			  GET_feature_retrieval,
+			  bIsNOTEXIST),
+	  m_object_reference(object_reference),
+	  m_first_last(first_last),
+	  m_feature_constraints(feature_constraints),
+	  m_opt_blocks(opt_blocks),
+	  m_bDoCalculatePreQueryString(false),
+	  m_bIsFirstInBlockString(false),
+	  m_bIsLastInBlockString(false),
+	  m_pMSRC(pMSRC),
+	  m_inst(0)
+{
+	m_pOBB = 0;
+	m_object = new MQLObject();
+	*m_object_type_name = normalizeOTName(*m_object_type_name);
+	str_tolower(*m_object_reference, m_object_reference_lower);
+}
+
+
 
 ObjectBlock::~ObjectBlock()
 {
@@ -117071,7 +119471,7 @@ std::string MemObject::getFeature(unsigned int nFeatureIndex)
  *
  * Ulrik Sandborg-Petersen
  * Created: 7/28-2008
- * Last update: 4/16-2016
+ * Last update: 6/18-2016
  *
  */
 /************************************************************************
@@ -118065,7 +120465,7 @@ void TemplateFeature::exec(TemplateLangExecEnv *pEE)
 		break;
 	case kMKJSON:
 		if (hasJSONCharsToMangle(tmp)) {
-			pEE->addToOutput(escapeJSONChars(tmp));
+			pEE->addToOutput(escapeJSONChars(tmp, false));
 		} else {
 			pEE->addToOutput(tmp);
 		}
@@ -119540,7 +121940,7 @@ TemplateASTNode *parseTemplate(TemplateLangExecEnv* pEE, const std::string& temp
 
 /**************** A copy of harvest/templatelang_lexer.cpp ****************/
 #line 1 "harvest/templatelang_lexer.cpp"
-/* Generated by re2c 0.13.5 on Sun May  8 22:29:11 2016 */
+/* Generated by re2c 0.14.3 on Mon Jul 25 17:56:25 2016 */
 #line 1 "./templatelang.re"
 /*
  * templatelang.re
@@ -119990,7 +122390,7 @@ tt75:
 	YYCURSOR = YYMARKER;
 	if (yyaccept <= 2) {
 		if (yyaccept <= 1) {
-			if (yyaccept <= 0) {
+			if (yyaccept == 0) {
 				goto tt3;
 			} else {
 				goto tt5;
@@ -119999,7 +122399,7 @@ tt75:
 			goto tt181;
 		}
 	} else {
-		if (yyaccept <= 3) {
+		if (yyaccept == 3) {
 			goto tt225;
 		} else {
 			goto tt280;
@@ -123067,7 +125467,7 @@ void TemplateLangParser(
  *
  * Ulrik Sandborg-Petersen
  * Created: 22/4-2007
- * Last update: 3/30-2016
+ * Last update: 6/23-2016
  *
  */
 /************************************************************************
@@ -123156,7 +125556,7 @@ void TemplateLangParser(
  *
  * Ulrik Sandborg-Petersen
  * Created: 4/22-2007
- * Last update: 4/14-2016
+ * Last update: 6/23-2016
  *
  */
 /************************************************************************
@@ -123279,7 +125679,9 @@ class MSEPObjectPair {
 		m_mse_last(mse_last),
 		m_pObj(pObj) {};
 	~MSEPObjectPair() {
-		delete m_pObj;
+		// If we do it here, we will have some double free's!
+		// Instead, we do it in RenderObjects::clean().
+		// delete m_pObj;
 	};
 };
 #endif
@@ -123294,7 +125696,7 @@ class RenderObjects {
 	typedef std::map<long, int> Long2IntMap;
 	typedef std::map<monad_m, ListOfMSEPObjectPair*> Monad2MSEObjectPairListMap;
 	//typedef std::map<monad_m, ListOfID_D*> Monad2ID_DListMap;
-	typedef std::vector<MemObject*> Monad2MemObjectVector;
+	typedef std::vector<MemObject*> MemObjectVector;
 	typedef std::map<id_d_t, MemObject*> ID_D2MemObjectMap;
 	typedef std::map<long, std::string> Long2StringMap;
 	typedef std::map<std::string, long> String2LongMap;
@@ -123325,8 +125727,9 @@ class RenderObjects {
 	bool m_bUseDocumentIndexFeatureInsteadOfPriorityList;
 	Long2IntMap m_startPriority;
 	Long2IntMap m_endPriority;
+	Arena m_obj_arena;
 	//ID_D2MemObjectMap m_objs;
-	ListOfMSEPObjectPair m_MSEPObjectPair_list;
+	Arena m_MSEPObjectPair_arena;
 	Monad2MSEObjectPairListMap m_fms, m_lms;
 	String2StringMap m_variables;
 	std::string m_db_name;
@@ -123361,10 +125764,8 @@ class RenderObjects {
 		long OTN_surrogate = pObj->getObjectTypeSurrogate();
 		MSEPObjectPair *pMPObj = 0;
 		if (m_startTemplates[OTN_surrogate] != 0) {
-			//if (pMPObj == 0) {
-			pMPObj = new MSEPObjectPair(first, last, pObj);
-			m_MSEPObjectPair_list.push_back(pMPObj);
-			//}
+			pMPObj = (MSEPObjectPair*) m_MSEPObjectPair_arena.allocate(sizeof(MSEPObjectPair));
+			pMPObj = new(pMPObj) MSEPObjectPair(first, last, pObj);
 			Monad2MSEObjectPairListMap::iterator itfm = m_fms.find(first);
 			if (itfm == m_fms.end()) {
 				//m_fms.insert(std::make_pair(first, ListOfID_D(1, id_d)));
@@ -123376,8 +125777,8 @@ class RenderObjects {
 
 		if (m_endTemplates[OTN_surrogate] != 0) {
 			if (pMPObj == 0) {
-				pMPObj = new MSEPObjectPair(first, last, pObj);
-				m_MSEPObjectPair_list.push_back(pMPObj);
+				pMPObj = (MSEPObjectPair*) m_MSEPObjectPair_arena.allocate(sizeof(MSEPObjectPair));
+				pMPObj = new(pMPObj) MSEPObjectPair(first, last, pObj);
 			}
 			Monad2MSEObjectPairListMap::iterator itlm = m_lms.find(last);
 			if (itlm == m_lms.end()) {
@@ -124060,7 +126461,10 @@ bool RenderObjects::loadObjectsFromMonads(long OTN_surrogate, const std::string&
 			monad_m first = pMO->getFirst();
 			monad_m last = pMO->getLast();
 
-			MemObject *pObj = new MemObject(nNoOfFeaturesToGet);
+			MemObject *pObj = (MemObject*) m_obj_arena.allocate(sizeof(MemObject));
+
+			pObj = new(pObj) MemObject(nNoOfFeaturesToGet);
+			
 			pObj->setFirstLast(first, last);
 			pObj->setObjectTypeSurrogate(OTN_surrogate);
 			pObj->setID_D(id_d);
@@ -124110,13 +126514,19 @@ bool RenderObjects::loadObjectsFromMonads(long OTN_surrogate, const std::string&
 void RenderObjects::clean()
 {
 	/*
-	ID_D2MemObjectMap::iterator it = m_objs.begin();
-	while (it != m_objs.end()) {
-		delete it->second;
-		++it;
+	MemObjectVector::iterator moit = m_obj_vec.begin();
+	while (moit != m_obj_vec.end()) {
+		delete *moit;
+		++moit;
 	}
-	m_objs.clear();
+	m_obj_vec.clear();
 	*/
+	ArenaConstIterator moit = m_obj_arena.const_iterator(sizeof(MemObject));
+	while (moit.hasNext()) {
+		MemObject *pObj = (MemObject*) moit.next();
+		pObj->~MemObject();
+	}
+	m_obj_arena.clear();
 
 	Monad2MSEObjectPairListMap::iterator fmit = m_fms.begin();
 	while (fmit != m_fms.end()) {
@@ -124132,13 +126542,22 @@ void RenderObjects::clean()
 	}
 	m_lms.clear();
 
+	/*
 	ListOfMSEPObjectPair::iterator mse_object_list_it = m_MSEPObjectPair_list.begin();
 	while (mse_object_list_it != m_MSEPObjectPair_list.end()) {
 		delete *mse_object_list_it;
 		++mse_object_list_it;
 	}
 	m_MSEPObjectPair_list.clear();
+	*/
 
+	ArenaConstIterator msepmoit = m_MSEPObjectPair_arena.const_iterator(sizeof(MSEPObjectPair));
+	while (msepmoit.hasNext()) {
+		MSEPObjectPair *pObj = (MSEPObjectPair*) msepmoit.next();
+		pObj->~MSEPObjectPair();
+	}
+	m_MSEPObjectPair_arena.clear();
+	
 	m_error_message = "";
 }
 

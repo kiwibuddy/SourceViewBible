@@ -228,7 +228,7 @@
 #ifndef EMDROS_VERSION__H__
 #define EMDROS_VERSION__H__
 
-#define EMDROS_VERSION "3.4.1.pre24"
+#define EMDROS_VERSION "3.4.1.pre29"
 
 #endif /* EMDROS_VERSION__H__ */
 
@@ -377,15 +377,15 @@ extern long prime_list_get_next_higher_prime(long n);
  *
  * Arena and ArenaConstIterator
  *
- * Ulrik Petersen
+ * Ulrik Sandborg-Petersen
  * Created: 3/2-2005
- * Last update: 2/26-2014
+ * Last update: 6/24-2016
  *
  */
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2001-2014  Ulrik Sandborg-Petersen
+ *   Copyright (C) 2001-2016  Ulrik Sandborg-Petersen
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License as
@@ -707,7 +707,7 @@ public:
  *
  * Ulrik Petersen
  * Created: 3/1-2001
- * Last update: 4/11-2016
+ * Last update: 6/18-2016
  *
  */
 /************************************************************************
@@ -1195,7 +1195,7 @@ extern std::string remove_chars_in_string(const std::string& instr, const std::s
 
 extern std::string remove_punct(const std::string instr);
 
-bool string_ends_with(const std::string& input, const std::string& end);
+extern bool string_ends_with(const std::string& input, const std::string& end);
 
 
 
@@ -1364,31 +1364,34 @@ inline std::string char2octal(unsigned char c)
   return szResult;
 }
 
-void print_indent(std::ostream *pOut, int indent);
+extern void print_indent(std::ostream *pOut, int indent);
 
-bool string2charset(const std::string& input, eCharsets& charset);
-bool charset2string(eCharsets charset, std::string& output);
+extern bool string2charset(const std::string& input, eCharsets& charset);
+extern bool charset2string(eCharsets charset, std::string& output);
 
-bool string2backend_kind(const std::string& input, eBackendKind& backend_kind);
-std::string backend_kind2string(eBackendKind backend_kind);
+extern bool string2backend_kind(const std::string& input, eBackendKind& backend_kind);
+extern std::string backend_kind2string(eBackendKind backend_kind);
 
-void long2utf8(long input, std::string& output);
+extern void long2utf8(long input, std::string& output);
+extern unsigned int readOneUTF8Char(const std::string& instr, std::string::size_type instr_length, std::string::size_type& index);
+extern void codepoint2slashu(std::string& result, unsigned int c); 
+extern std::string escape_UTF8_string_with_slashu(const std::string& instr);
 
 
 /** A function to join a list of std::string with the string between
  *  inbetween each list member.
  */
-std::string joinList(std::string between, const std::list<std::string>& l, unsigned int nBigStringSize = 131072);
+extern std::string joinList(std::string between, const std::list<std::string>& l, unsigned int nBigStringSize = 131072);
 
 /** A function to join a vector of std::string with the string between
  *  inbetween each list member.
  */
-std::string joinVector(std::string between, const std::vector<std::string>& v, unsigned int nBigStringSize = 131072);
+extern std::string joinVector(std::string between, const std::vector<std::string>& v, unsigned int nBigStringSize = 131072);
 
 /** A function to join a list of id_d_t with the string between
  *  inbetween each list member.
  */
-std::string joinList(std::string between, const std::list<id_d_t>& l);
+extern std::string joinList(std::string between, const std::list<id_d_t>& l);
 
 
 /** A template to join a list of T into one long string
@@ -1407,13 +1410,13 @@ template<class T> std::string joinListEmptyBetween(const std::list<T>& l)
 }
 */
 
-std::string joinListEmptyBetween(const std::list<std::string>& l, unsigned int nBigStringSize = 131072);
+extern std::string joinListEmptyBetween(const std::list<std::string>& l, unsigned int nBigStringSize = 131072);
 
 class Bigstring; // Forward
 
-void joinListInBigstring(Bigstring *pBigstring, std::string between, const std::list<std::string>& l);
+extern void joinListInBigstring(Bigstring *pBigstring, std::string between, const std::list<std::string>& l);
 
-void joinListEmptyBetweenInBigstring(Bigstring *pBigstring, const std::list<std::string>& l);
+extern void joinListEmptyBetweenInBigstring(Bigstring *pBigstring, const std::list<std::string>& l);
 
 
 
@@ -1481,7 +1484,7 @@ inline bool hasJSONCharsToMangle(const std::string& input)
 	return input.find_first_of("\"'\\\b\f\n\r\t", 0, 8) != std::string::npos;
 }
 
-inline std::string escapeJSONChars(const std::string& input)
+inline std::string escapeJSONChars(const std::string& input, bool bEscapeAsUnicode)
 {
 	std::string result;
 	result.reserve(input.length() + 4);
@@ -1519,7 +1522,12 @@ inline std::string escapeJSONChars(const std::string& input)
 			break;
 		}
 	}
-	return result;
+	if (bEscapeAsUnicode) {
+		std::string real_result = escape_UTF8_string_with_slashu(result);
+		return real_result;
+	} else {
+		return result;
+	}
 }
 
 
@@ -1634,6 +1642,7 @@ inline std::string escapeJSONChars(const std::string& input)
 
 
 class ArenaConstIterator; // forward declaration
+class ArenaAccessor; // forward declaration
 class Bigstring; // forward declaration
 
 /**\internal
@@ -1645,6 +1654,7 @@ class Bigstring; // forward declaration
  */
 class Arena {
 	friend class ArenaConstIterator;
+	friend class ArenaAccessor;
  protected:
 	/** A chunk memory.
 	 *\ingroup Arena
@@ -1655,6 +1665,7 @@ class Arena {
 	private:
 		friend class Arena;
 		friend class ArenaConstIterator;
+		friend class ArenaAccessor;
 		friend class Bigstring;
 		enum { chunk_size = 512 * 1024 /**< The chunk size */
 		}; // 512KB
@@ -1796,6 +1807,7 @@ class Arena {
 		return pResult;
 	};
 	ArenaConstIterator const_iterator(unsigned int size) const;
+	ArenaAccessor accessor(unsigned int size);
  protected:
 	/** Add a new chunk.*/
 	void grow(void) { 
@@ -1979,6 +1991,72 @@ class Bigstring : protected Arena {
 	}
 };
 
+
+class ObjectArenaChunk {
+ protected:
+	friend class ObjectArenaAccessor;
+	friend class ObjectArenaConstIterator;
+	unsigned int m_object_size;
+	unsigned int m_max_object_count;
+	unsigned int m_cur_object_count;
+	unsigned int m_index; /**< Index of the first free byte in m_pBytes. */
+	unsigned int m_chunk_size;
+	char *m_pBytes;
+ public:
+	ObjectArenaChunk(unsigned int object_size, unsigned int object_count_per_chunk);
+	~ObjectArenaChunk();
+
+	bool canAllocateObject();
+	
+	// Returns 0 upon space not available in chunk
+	void *allocateObject();
+};
+
+class ObjectArena {
+ protected:
+	friend class ObjectArenaAccessor;
+	friend class ObjectArenaConstIterator;
+	std::vector<ObjectArenaChunk*> m_chunks;
+	ObjectArenaChunk *m_pCurChunk;
+	unsigned int m_object_size;
+	unsigned int m_object_count_per_chunk;
+	unsigned int m_total_object_count;
+ public:
+	ObjectArena(unsigned int object_size, unsigned int object_count_per_chunk);
+	~ObjectArena();
+	void *allocateObject();
+	void reset();
+ protected:
+	void deleteAll();
+	void grow();
+};
+
+class ObjectArenaAccessor {
+ private:
+	ObjectArena *m_pMotherArena;
+ public:
+	ObjectArenaAccessor(ObjectArena *pMotherArena);
+	~ObjectArenaAccessor();
+
+	void *operator[](unsigned int object_index);
+};
+
+class ObjectArenaConstIterator {
+ private:
+	const ObjectArena *m_pMotherArena;
+	unsigned int m_chunk_number;
+	ObjectArenaChunk *m_pCurChunk;
+	unsigned int m_chunk_byte_index;
+	unsigned int m_object_count;
+ public:
+	ObjectArenaConstIterator(const ObjectArena *pMotherArena);
+	~ObjectArenaConstIterator();
+
+	bool hasNext() const;
+
+	void *current();
+	void *next();
+};
 
 
 
@@ -5315,6 +5393,7 @@ class EMdFFFeatures {
 #include <string>
 #include <cstdlib>
 
+
 /*
  * <stdint.h> does not exist in MS Visual Studio 2008.
  * Hence, we typedef some things ourselves.
@@ -5331,14 +5410,19 @@ typedef unsigned __int64 uint64_t;
 #include <stdint.h>
 #endif
 
+#include <vector>
+
 /**************** already included emdfdb.h -- not including again *****************/
 
 
-#line 114 "include/emdf_hash.h"
+#line 117 "include/emdf_hash.h"
 /**************** already included debug.h -- not including again *****************/
 
 
-#line 115 "include/emdf_hash.h"
+#line 118 "include/emdf_hash.h"
+
+
+// EmdrosStringHashTableNode
 
 template<class V> class EmdrosStringHashTableNode {
  public:
@@ -5352,6 +5436,8 @@ template<class V> class EmdrosStringHashTableNode {
 		return (m_key == other.m_key);
 	};
 };
+
+// EmdrosStringHashTable
 
 template<class V> class EmdrosStringHashTable {
  protected:
@@ -9024,6 +9110,7 @@ static const char *emdros_reserved_words[] = {
 "having",
 "feature",
 "features",
+"aggregate",
 "universe",
 "substrate",
 "monads",
@@ -9053,7 +9140,10 @@ static const char *emdros_reserved_words[] = {
 "calculation",
 "min_m",
 "max_m",
+"min",
 "max",
+"sum",
+"count",
 "flat",
 "full",
 "on",
@@ -9552,13 +9642,13 @@ class EnumConstCache {
  *
  * Ulrik Sandborg-Petersen
  * Created: 7/28-2008
- * Last update: 4/12-2016
+ * Last update: 6/18-2016
  *
  */
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2008-2012  Ulrik Sandborg-Petersen
+ *   Copyright (C) 2008-2016  Ulrik Sandborg-Petersen
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License as
@@ -10024,8 +10114,8 @@ class JSONValue {
 #endif
 	std::list<std::string> getObjectKeys(void) const;
 	bool hasObjectKey(const std::string& key) const;
-	void pretty(std::ostream *pOut, int indent_level = 0) const;
-	void printCompact(std::ostream *pOut) const;
+	void pretty(std::ostream *pOut, int indent_level = 0, bool bEscapeAsUnicode = false) const;
+	void printCompact(std::ostream *pOut, bool bEscapeAsUnicode = false) const;
  private:
 	JSONValue(const JSONValue& other);
 	JSONValue& operator=(const JSONValue& other);
@@ -13207,6 +13297,161 @@ extern MiniDOMDocument *MiniDOMParseStream(std::istream *pIn, MiniDOMDocument *p
 extern MiniDOMDocument *MiniDOMParseString(const std::string& str, MiniDOMDocument *pDoc = 0) throw(QDException);
 #endif
 
+/**************** A copy of include/string2som_map.h ****************/
+#line 1 "include/string2som_map.h"
+/*
+ * string2som_map.h
+ *
+ * String to SetOfMonads Map
+ *
+ * Ulrik Sandborg-Petersen
+ * Created: 6/22-2016
+ * Last update: 6/22-2016
+ *
+ */
+/************************************************************************
+ *
+ *   Emdros - the database engine for analyzed or annotated text
+ *   Copyright (C) 2016  Ulrik Sandborg-Petersen
+ *
+ *   This program is free software; you can redistribute it and/or
+ *   modify it under the terms of the GNU General Public License as
+ *   published by the Free Software Foundation, license version 2.  
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *   General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+ *   02111-1307 USA
+ *
+ *
+ *   Special exception
+ *   =================
+ * 
+ *   In addition, as a special exception, Ulrik Petersen, the
+ *   copyright holder of Emdros, gives permission to link Emdros, in
+ *   whole or in part, with the libraries which are normally
+ *   distributed with:
+ *   
+ *   a) Sun's Java platform,
+ *   b) Python, 
+ *   c) Jython,
+ *   d) Ruby, and/or 
+ *   e) Perl 
+ *   f) PostgreSQL
+ *   g) OpenSSL
+ *
+ *   (or with modified versions of these), and to distribute linked
+ *   combinations including both Emdros, in whole or in part, and one
+ *   or more of the libraries normally distributed with (a)-(g) above.
+ *
+ *   Please note: This gives you special rights concerning the
+ *   libraries which normally accompany the above pieces of software.
+ *   It gives you no special rights concerning software that you write
+ *   yourself.  You must obey the GNU General Public License in all
+ *   respects for all of the code used other than the libraries
+ *   normally distributed with (a)-(g) above.
+ *
+ *   If you modify this file, you may extend this exception to your
+ *   version of the file, but you are not obligated to do so. If you
+ *   do not wish to do so, delete this exception statement from your
+ *   version.
+ *
+ *
+ *   Other licensing forms
+ *   =====================
+ *
+ *   If you wish to negotiate commercial licensing, please contact
+ *   Ulrik Petersen at ulrikp[at]users.sourceforge.net.
+ *
+ *   Licensing can also be negotiated if your organization is an
+ *   educational, non-profit, charity, missionary or similar
+ *   organization.
+ *
+ *
+ *   Website
+ *   =======
+ *
+ *   Emdros has a website here:
+ *
+ *   http://emdros.org
+ *
+ *
+ *
+ **************************************************************************/
+
+/**@file string2som_map.h
+ *@brief String to SetOfMonads map (EMdF layer)
+ */
+
+
+#ifndef STRING2SOM_MAP_
+#define STRING2SOM_MAP_
+
+#include <string>
+#include <map>
+
+/**************** already included monads.h -- not including again *****************/
+
+
+#line 97 "include/string2som_map.h"
+
+class String2SOMMap; // Forward declaration
+
+class String2SOMMapConstIterator {
+ protected:
+#ifndef SWIG
+	const String2SOMMap *m_pMother;
+	std::map<std::string, SetOfMonads>::const_iterator m_ci;
+#endif // !defined(SWIG)
+ public:
+	String2SOMMapConstIterator();
+	
+#ifndef SWIG
+	String2SOMMapConstIterator(const String2SOMMapConstIterator& other);
+	String2SOMMapConstIterator(const String2SOMMap *pMother);
+#endif // !defined(SWIG)
+
+	~String2SOMMapConstIterator();
+
+	bool hasNext() const;
+	std::string next();
+	std::string current() const;
+#ifndef SWIG
+	void assign(const String2SOMMapConstIterator& other);
+	String2SOMMapConstIterator& operator=(const String2SOMMapConstIterator& other);
+#endif
+};
+
+class String2SOMMap {
+ protected:
+	friend class String2SOMMapConstIterator;
+#ifndef SWIG
+	std::map<std::string, SetOfMonads> m_map;
+#endif // !defined(SWIG)
+ public:
+	String2SOMMap();
+	~String2SOMMap();
+
+	void addMonad(const std::string& key, monad_m monad);
+	void addMonadRange(const std::string& key, monad_m first_monad, monad_m last_monad);
+	void addMonadSet(const std::string& key, const SetOfMonads& som);
+
+	SetOfMonads getMonadSet(const std::string& key) const;
+	String2SOMMapConstIterator const_iterator() const;
+
+	bool hasKey(const std::string& key) const;
+	
+	bool isEmpty() const;
+};
+
+#endif // STRING2SOM_MAP_
+
+
 /**************** A copy of include/mql_database_statements.h ****************/
 #line 1 "include/mql_database_statements.h"
 /*
@@ -13313,13 +13558,13 @@ extern MiniDOMDocument *MiniDOMParseString(const std::string& str, MiniDOMDocume
  *
  * Ulrik Petersen
  * Created: 2/27-2001
- * Last update: 12/1-2014
+ * Last update: 7/19-2016
  *
  */
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2001-2014  Ulrik Sandborg-Petersen
+ *   Copyright (C) 2001-2016  Ulrik Sandborg-Petersen
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License as
@@ -13560,33 +13805,173 @@ public:
 
 
 #line 101 "include/mql_types.h"
-/**************** already included emdf.h -- not including again *****************/
+/**************** leaving include/mql_types.h temporarily *****************/
+/**************** A copy of include/mql_enums.h ****************/
+#line 1 "include/mql_enums.h"
+/*
+ * mql_enums.h
+ *
+ * MQL enumerations
+ *
+ * Ulrik Petersen
+ * Created: 8/21-2003
+ * Last update: 7/21-2016
+ *
+ */
+/************************************************************************
+ *
+ *   Emdros - the database engine for analyzed or annotated text
+ *   Copyright (C) 2004-2016  Ulrik Sandborg-Petersen
+ *
+ *   This program is free software; you can redistribute it and/or
+ *   modify it under the terms of the GNU General Public License as
+ *   published by the Free Software Foundation, license version 2.  
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *   General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+ *   02111-1307 USA
+ *
+ *
+ *   Special exception
+ *   =================
+ * 
+ *   In addition, as a special exception, Ulrik Petersen, the
+ *   copyright holder of Emdros, gives permission to link Emdros, in
+ *   whole or in part, with the libraries which are normally
+ *   distributed with:
+ *   
+ *   a) Sun's Java platform,
+ *   b) Python, 
+ *   c) Jython,
+ *   d) Ruby, and/or 
+ *   e) Perl 
+ *   f) PostgreSQL
+ *   g) OpenSSL
+ *
+ *   (or with modified versions of these), and to distribute linked
+ *   combinations including both Emdros, in whole or in part, and one
+ *   or more of the libraries normally distributed with (a)-(g) above.
+ *
+ *   Please note: This gives you special rights concerning the
+ *   libraries which normally accompany the above pieces of software.
+ *   It gives you no special rights concerning software that you write
+ *   yourself.  You must obey the GNU General Public License in all
+ *   respects for all of the code used other than the libraries
+ *   normally distributed with (a)-(g) above.
+ *
+ *   If you modify this file, you may extend this exception to your
+ *   version of the file, but you are not obligated to do so. If you
+ *   do not wish to do so, delete this exception statement from your
+ *   version.
+ *
+ *
+ *   Other licensing forms
+ *   =====================
+ *
+ *   If you wish to negotiate commercial licensing, please contact
+ *   Ulrik Petersen at ulrikp[at]users.sourceforge.net.
+ *
+ *   Licensing can also be negotiated if your organization is an
+ *   educational, non-profit, charity, missionary or similar
+ *   organization.
+ *
+ *
+ *   Website
+ *   =======
+ *
+ *   Emdros has a website here:
+ *
+ *   http://emdros.org
+ *
+ *
+ *
+ **************************************************************************/
+
+/**@file mql_enums.h
+ *@brief Header file for enumerations relating to the MQL layer
+ */
+
+
+
+#ifndef MQL_ENUMS__H__
+#define MQL_ENUMS__H__
+
+enum eUniverseOrSubstrate {
+	kMSNSubstrate,
+	kMSNUniverse
+};
+
+// From mql_sheaf.h
+
+/** MatchedObject kind (in Sheaf)
+ *
+ * Used to distinguish which kind a MatchedObject is.
+ * The user will only ever see kMOKID_D and kMOKID_M.  The others
+ * are used internally while creating the sheaf.
+ */
+enum eMOKind { 
+	kMOKNIL_mo,   /**< NIL (will never occur in sheaf -- means "failure" of an (opt)_gap_block). */
+	kMOKEMPTY_mo, /**< EMPTY (will never occur in sheaf -- is for (opt_)gap blocks that are empty, and also for STAR blocks that are empty.) */
+	kMOKID_D,     /**< ID_D (from an object_block_(first)) */
+	kMOKID_M      /**< ID_D (from an (opt_)gap_block) */
+};
+
+
+// For mql_select_statements.cpp and mql_query.cpp
+enum eAggregateQueryStrategy {
+	kAQSOutermostFirst,
+	kAQSInnermostFirst
+};
+
+
+enum eAggregateFunction {
+	kAFMIN,
+	kAFMAX,
+	kAFSUM,
+	kAFCOUNT_ALL,
+	kAFCOUNT_FEATURE_COMPARISON
+};
+
+
+#endif /* MQL_ENUMS__H__ */
+
+/**************** continuing include/mql_types.h where we left off *****************/
 
 
 #line 102 "include/mql_types.h"
-/**************** already included emdf_hash.h -- not including again *****************/
+/**************** already included emdf.h -- not including again *****************/
 
 
 #line 103 "include/mql_types.h"
+/**************** already included emdf_hash.h -- not including again *****************/
+
+
+#line 104 "include/mql_types.h"
 #include <string>
 #include <map>
 #include <list>
 /**************** already included infos.h -- not including again *****************/
 
 
-#line 107 "include/mql_types.h"
+#line 108 "include/mql_types.h"
 /**************** already included monads.h -- not including again *****************/
 
 
-#line 108 "include/mql_types.h"
+#line 109 "include/mql_types.h"
 /**************** already included debug.h -- not including again *****************/
 
 
-#line 109 "include/mql_types.h"
+#line 110 "include/mql_types.h"
 #include <utility>
 
 
-
+class FeatureComparison; // Forward declaration
 class Topograph; // Forward declaration
 class MQLExecEnv; // Forward declaration
 class MQLObject; // Forward declaration
@@ -13959,9 +14344,13 @@ class Feature {
 	void execMakeFeatureNameVector(std::vector<std::string>& FeatureNames);
 	void execMakeNameList(MQLResult *pResult);
 	void symbolAddToObject(MQLExecEnv *pEE, MQLObject *pObj);
+#ifndef SWIG
+	void symbolAddFeaturesToSet(std::set<std::string>& myset) const;
+#endif
 	void addEMdFValue(MatchedObject *pMO, MQLObject *pObj, bool bIterate);
 	void makeVectorOfSelves(std::vector<Feature*> **ppVec);
 	void assignListIndex(int current_index);
+	int getFeatureInstListIndex(const std::string& feature_name) const;
  private:
 	int getLength(int current_length) const { 
 		if (m_next != 0) { 
@@ -13971,6 +14360,41 @@ class Feature {
 		} 
 	};
 };
+
+class AggregateFeature {
+ protected:	
+	eAggregateFunction m_function;
+	long m_result;
+	Feature *m_feature;
+	FeatureComparison *m_feature_comparison;
+
+	std::string m_object_type_name;
+	id_d_t m_object_type_id;
+	AggregateFeature *m_next;
+	int m_inst_obj_feature_index;
+ public:
+	AggregateFeature(eAggregateFunction func);
+	AggregateFeature(eAggregateFunction func, std::string *feature_name);
+	AggregateFeature(eAggregateFunction func, FeatureComparison *feature_comparison);
+	virtual ~AggregateFeature();
+
+	virtual AggregateFeature* getNext() { return m_next; };
+	virtual void setNext(AggregateFeature* next) { m_next = next; };
+
+	virtual void setInstObjectFeatureIndex(int inst_obj_feature_index) { m_inst_obj_feature_index = inst_obj_feature_index; };
+	
+	virtual bool hasFeature() const { return m_feature != 0; };
+	virtual bool hasFeatureComparison() const { return m_feature_comparison != 0; };
+	virtual std::string getFeatureName() const;
+	virtual FeatureComparison *getFeatureComparison() const { return m_feature_comparison; };
+	
+	virtual long getResult() const { return m_result; };
+	virtual void weed(MQLExecEnv *pEE, bool& bResult);
+	virtual bool symbol(MQLExecEnv *pEE, const std::string& object_type_name, id_d_t object_type_id, bool& bResult);
+	virtual bool type(MQLExecEnv *pEE, bool& bResult);
+	virtual void exec(MQLExecEnv *pEE, const InstObject *pInstObj);
+};
+
 
 
 #endif // !defined SWIG
@@ -14328,13 +14752,13 @@ class MQLError {
  *
  * Ulrik Petersen
  * Created: 2/27-2001
- * Last update: 6/2-2014
+ * Last update: 7/21-2016
  *
  */
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2001-2014  Ulrik Sandborg-Petersen
+ *   Copyright (C) 2001-2016  Ulrik Sandborg-Petersen
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License as
@@ -15487,135 +15911,7 @@ PCRE_EXP_DECL void pcre32_jit_free_unused_memory(void);
 
 
 #line 110 "include/mql_query.h"
-/**************** leaving include/mql_query.h temporarily *****************/
-/**************** A copy of include/mql_enums.h ****************/
-#line 1 "include/mql_enums.h"
-/*
- * mql_enums.h
- *
- * MQL enumerations
- *
- * Ulrik Petersen
- * Created: 8/21-2003
- * Last update: 1/6-2014
- *
- */
-/************************************************************************
- *
- *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2004-2014  Ulrik Sandborg-Petersen
- *
- *   This program is free software; you can redistribute it and/or
- *   modify it under the terms of the GNU General Public License as
- *   published by the Free Software Foundation, license version 2.  
- *
- *   This program is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *   General Public License for more details.
- *
- *   You should have received a copy of the GNU General Public License
- *   along with this program; if not, write to the Free Software
- *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
- *   02111-1307 USA
- *
- *
- *   Special exception
- *   =================
- * 
- *   In addition, as a special exception, Ulrik Petersen, the
- *   copyright holder of Emdros, gives permission to link Emdros, in
- *   whole or in part, with the libraries which are normally
- *   distributed with:
- *   
- *   a) Sun's Java platform,
- *   b) Python, 
- *   c) Jython,
- *   d) Ruby, and/or 
- *   e) Perl 
- *   f) PostgreSQL
- *   g) OpenSSL
- *
- *   (or with modified versions of these), and to distribute linked
- *   combinations including both Emdros, in whole or in part, and one
- *   or more of the libraries normally distributed with (a)-(g) above.
- *
- *   Please note: This gives you special rights concerning the
- *   libraries which normally accompany the above pieces of software.
- *   It gives you no special rights concerning software that you write
- *   yourself.  You must obey the GNU General Public License in all
- *   respects for all of the code used other than the libraries
- *   normally distributed with (a)-(g) above.
- *
- *   If you modify this file, you may extend this exception to your
- *   version of the file, but you are not obligated to do so. If you
- *   do not wish to do so, delete this exception statement from your
- *   version.
- *
- *
- *   Other licensing forms
- *   =====================
- *
- *   If you wish to negotiate commercial licensing, please contact
- *   Ulrik Petersen at ulrikp[at]users.sourceforge.net.
- *
- *   Licensing can also be negotiated if your organization is an
- *   educational, non-profit, charity, missionary or similar
- *   organization.
- *
- *
- *   Website
- *   =======
- *
- *   Emdros has a website here:
- *
- *   http://emdros.org
- *
- *
- *
- **************************************************************************/
-
-/**@file mql_enums.h
- *@brief Header file for enumerations relating to the MQL layer
- */
-
-
-
-#ifndef MQL_ENUMS__H__
-#define MQL_ENUMS__H__
-
-enum eUniverseOrSubstrate {
-	kMSNSubstrate,
-	kMSNUniverse
-};
-
-// From mql_sheaf.h
-
-/** MatchedObject kind (in Sheaf)
- *
- * Used to distinguish which kind a MatchedObject is.
- * The user will only ever see kMOKID_D and kMOKID_M.  The others
- * are used internally while creating the sheaf.
- */
-enum eMOKind { 
-	kMOKNIL_mo,   /**< NIL (will never occur in sheaf -- means "failure" of an (opt)_gap_block). */
-	kMOKEMPTY_mo, /**< EMPTY (will never occur in sheaf -- is for (opt_)gap blocks that are empty, and also for STAR blocks that are empty.) */
-	kMOKID_D,     /**< ID_D (from an object_block_(first)) */
-	kMOKID_M      /**< ID_D (from an (opt_)gap_block) */
-};
-
-
-// For mql_select_statements.cpp and mql_query.cpp
-enum eAggregateQueryStrategy {
-	kAQSOutermostFirst,
-	kAQSInnermostFirst
-};
-
-
-
-#endif /* MQL_ENUMS__H__ */
-
-/**************** continuing include/mql_query.h where we left off *****************/
+/**************** already included mql_enums.h -- not including again *****************/
 
 
 #line 111 "include/mql_query.h"
@@ -16022,7 +16318,7 @@ class FeatureComparison {
 	pcre_extra *m_pcre_extra;
 	int *m_ovector;
 	int m_ovectorsize;
-	short int m_feature_index;
+	int m_feature_index;
 	bool m_bCanBePreQueried;
 	bool m_bContextHasBeenNegative;
 	node_number_t m_ffeatures_parent;
@@ -16051,12 +16347,18 @@ class FeatureComparison {
 				    std::set<std::string>& ORD_set);
 	bool symbolObjectReferences2(MQLExecEnv *pEE);
 	void symbolAddFeatures(MQLObject* pObj, EMdFDB *pDB);
+#ifndef SWIG
+	void symbolAddFeaturesToSet(std::set<std::string>& myset) const;
+	bool symbolSetFeatureIndex(const std::vector<std::string>& feature_name_vec, bool& bResult);
+#endif
 	bool type(MQLExecEnv *pEE, bool& bResult);
 	const std::string& getFeatureName() { return *m_feature_name; };
 	eComparisonOp getComparisonOp() { return m_comparison_op; };
 	Value* getValue() { return m_value; };
 	void pretty(std::ostream *pOut, int indent, NonParentORDSolution *pNonParentORDSolution);
 	bool compare(MQLExecEnv *pEE, const EMdFValue *left_value, NonParentORDSolution *pNonParentORDSolution);
+	bool exec(MQLExecEnv *pEE, const InstObject *pInstObj);
+	
 	EMdFComparison *makeConstraints(EMdFDB *pDB, bool bContextHasBeenNegative) throw (EMdFDBDBError,EmdrosException);
 	/** Get m_feature_index
 	 *
@@ -16092,9 +16394,14 @@ class FFactor {
 		    id_d_t enclosing_object_type_id, 
 		    bool& bResult);
 	void symbolAddFeatures(MQLObject* pObj, EMdFDB *pDB);
+#ifndef SWIG
+	void symbolAddFeaturesToSet(std::set<std::string>& myset) const;
+	bool symbolSetFeatureIndex(const std::vector<std::string>& feature_name_vec, bool& bResult);	
+#endif
 	bool symbolObjectReferences(MQLExecEnv *pEE, bool& bResult, std::set<std::string>& ORD_set);
 	bool symbolObjectReferences2(MQLExecEnv *pEE);
 	bool type(MQLExecEnv *pEE, bool& bResult);
+	bool exec(MQLExecEnv *pEE, const InstObject *pInstObj);
 	void pretty(std::ostream *pOut, int indent, NonParentORDSolution *pNonParentORDSolution);
 	bool isNOT() const { return m_ffactor != 0; };
 	bool isParenthesis() const { return m_ffeatures != 0; };
@@ -16121,9 +16428,14 @@ class FTerm {
 		    id_d_t enclosing_object_type_id, 
 		    bool& bResult);
 	void symbolAddFeatures(MQLObject* pObj, EMdFDB *pDB);
+#ifndef SWIG
+	void symbolAddFeaturesToSet(std::set<std::string>& myset) const;
+	bool symbolSetFeatureIndex(const std::vector<std::string>& feature_name_vec, bool& bResult);	
+#endif
 	bool symbolObjectReferences(MQLExecEnv *pEE, bool& bResult, std::set<std::string>& ORD_set);
 	bool symbolObjectReferences2(MQLExecEnv *pEE);
 	bool type(MQLExecEnv *pEE, bool& bResult);
+	bool exec(MQLExecEnv *pEE, const InstObject *pInstObj);
 	void pretty(std::ostream *pOut, int indent, NonParentORDSolution *pNonParentORDSolution);
 	bool isFFactor() const { return m_fterm == 0; };
 	FFactor* getFFactor() { return m_ffactor; };
@@ -16159,7 +16471,12 @@ class FFeatures : public QueryNode {
 	bool symbolObjectReferences(MQLExecEnv *pEE, bool& bResult, std::set<std::string>& ORD_set);
 	bool symbolObjectReferences2(MQLExecEnv *pEE);
 	void symbolAddFeatures(MQLObject* pObj, EMdFDB *pDB);
+#ifndef SWIG
+	void symbolAddFeaturesToSet(std::set<std::string>& myset) const;
+	bool symbolSetFeatureIndex(const std::vector<std::string>& feature_name_vec, bool& bResult);	
+#endif
 	bool type(MQLExecEnv *pEE, bool& bResult);
+	bool exec(MQLExecEnv *pEE, const InstObject *pInstObj);
 	void pretty(std::ostream *pOut, int indent, NonParentORDSolution *pNonParentORDSolution);
 	bool isFTerm() const { return m_ffeatures == 0; };
 	FTerm* getFTerm() { return m_fterm; };
@@ -16265,6 +16582,16 @@ class ObjectBlock : public ObjectBlockBase {
 		    MonadSetRelationClause *pMSRC,
 		    FFeatures* feature_constraints,
 		    GrammarFeature* feature_retrieval,
+		    Blocks* opt_blocks,
+		    bool bIsNOTEXIST);
+	ObjectBlock(std::string* object_type_name,
+		    std::string* mark_declaration,
+		    std::string* object_reference,
+		    eRetrieval retrieval,
+		    eFirstLast first_last,
+		    MonadSetRelationClause *pMSRC,
+		    FFeatures* feature_constraints,
+		    Feature *GET_feature_retrieval,
 		    Blocks* opt_blocks,
 		    bool bIsNOTEXIST);
 	virtual ~ObjectBlock();
@@ -16570,9 +16897,9 @@ class Topograph {
  *
  * MQL sheafs
  *
- * Ulrik Petersen
+ * Ulrik Sandborg-Petersen
  * Created: 3/8-2001
- * Last update: 2/13-2016
+ * Last update: 7/15-2016
  *
  */
 /************************************************************************
@@ -16684,10 +17011,18 @@ class Topograph {
 
 
 #line 104 "include/mql_sheaf.h"
-/**************** already included llist.h -- not including again *****************/
+/**************** already included inst.h -- not including again *****************/
 
 
 #line 105 "include/mql_sheaf.h"
+/**************** already included llist.h -- not including again *****************/
+
+
+#line 106 "include/mql_sheaf.h"
+/**************** already included string2som_map.h -- not including again *****************/
+
+
+#line 107 "include/mql_sheaf.h"
 
 
 class Sheaf; // forward declaration
@@ -16913,8 +17248,11 @@ class MatchedObject {
 	 *     -2 means noretrieve
 	 *     -3 means retrieve
 	 *     -4 means focus
-	 * If this object is a kMOKID_D, then m_id_d is >= 0
-	 *     id_d is m_id_d
+	 * If this object is a kMOKID_D, then:
+	 *     EITHER m_id_d is >= 0, and id_d is m_id_d.  
+	 *            Then m_value is of kind m_pValue_vec;
+	 *     OR m_id_d is <= -5, and id_d is m_id_d + 5
+	 *            Then m_value is of kind m_pInstObj
 	 */
 	id_d_t m_id_d;
 	/** The value_vec_t vector of pointers to EMdFValue objects.
@@ -16930,7 +17268,10 @@ class MatchedObject {
 	 *
 	 * @see value_vec_t.
 	 */
-	value_vec_t *m_pValue_vec;
+	union {
+		value_vec_t *m_pValue_vec;
+		const InstObject *m_pInstObject;
+	} m_values;
  public:  
 #ifndef SWIG
 	MatchedObject(const SetOfMonads& monads, 
@@ -16939,6 +17280,7 @@ class MatchedObject {
 		      Sheaf *sheaf); 
 	MatchedObject(id_d_t id_d, const SetOfMonads& monads, Sheaf* sheaf, ObjectBlockBase *pObjectBlock);
 	MatchedObject(id_d_t id_d, monad_m first_monad, monad_m last_monad, Sheaf* sheaf, ObjectBlockBase *pObjectBlock);
+	MatchedObject(const InstObject *pInstObj, ObjectBlockBase *pObjectBlock);
 #endif
 	MatchedObject(monad_m SmMinus1); // for kMOKEMPTY_mo
 	MatchedObject(const MatchedObject& other);
@@ -16952,7 +17294,7 @@ class MatchedObject {
 	 * Otherwise, return NIL.
 	 *
 	 */
-	id_d_t getID_D(void) const { if (m_id_d >= 0) return m_id_d; else return NIL;};
+	id_d_t getID_D(void) const { if (m_id_d >= 0) return m_id_d; else { if (m_id_d <= -5) return -1*(m_id_d + 5); else return NIL;}};
 	const Sheaf* getSheaf(void) const;
 
 	/** See whether inner sheaf is empty.
@@ -16976,6 +17318,8 @@ class MatchedObject {
 			return kMOKID_D;
 		} else if (m_id_d == -1) {
 			return kMOKEMPTY_mo;
+		} else if (m_id_d <= -5) {
+			return kMOKID_D;
 		} else if (m_id_d <= -2) {
 			return kMOKID_M;
 		} else {
@@ -16991,13 +17335,17 @@ class MatchedObject {
 	 * @return \p true if this is an ID_M matched object,
 	 * \p false if it is not.
 	 */
-	bool isID_M(void) const { return m_id_d <= -2; };
+	bool isID_M(void) const { return m_id_d <= -2 && m_id_d >= -4; };
+	/** Return true if the m_values union is of kind const InstObject*.
+	 *
+	 */
+	bool isInstObject(void) const { return m_id_d <= -5; };
 	/** Return true if this is an ID_D.
 	 *
 	 * @return \p true if this is an ID_D matched object,
 	 * \p false if it is not.
 	 */
-	bool isID_D(void) const { return m_id_d >= 0;  };
+	bool isID_D(void) const { return m_id_d >= 0 || m_id_d <= -5;  };
 	/** Return true if this is an EMPTY_mo
 	 *
 	 * @return \p true if this is an EMPTY_mo matched object,
@@ -17011,7 +17359,7 @@ class MatchedObject {
 	 * @return \p true if this matched object is in FOCUS,
 	 * \p false otherwise.
 	 */
-	bool getFocus(void) const { if (m_id_d >= 0) return m_pObjectBlock->isFocus(); else return m_id_d == -4; };
+	bool getFocus(void) const { if (isID_D()) return m_pObjectBlock->isFocus(); else return m_id_d == -4; };
 
 	/** Return the marks string (given in the query with a backping
 	 * ("`"), right after the object type in an object_block, or
@@ -17037,7 +17385,7 @@ class MatchedObject {
 	 * @return \p true if this matched object is to be retrieved,
 	 * \p false otherwise.
 	 */
-	bool getRetrieve(void) const { if (m_id_d >= 0) return m_pObjectBlock->isToBeRetrieved(); else return m_id_d <= -3; };
+	bool getRetrieve(void) const { if (isID_D()) return m_pObjectBlock->isToBeRetrieved(); else return m_id_d <= -3; };
 
 	/** Count objects recursively.
 	 *
@@ -17083,6 +17431,9 @@ class MatchedObject {
 
 	// See Sheaf::getSOM() for an explanation
 	void getSOM(SetOfMonads& som, bool bUseOnlyFocusObjects) const;
+
+	// See Sheaf::harvestMarks() for an explanation
+	void harvestMarks(String2SOMMap& result, bool bUseSingleMarks) const;
 #ifndef SWIG
 	/** Return the last monad of the matched object.
 	 *
@@ -17240,6 +17591,8 @@ class Straw {
 	
 	// See Sheaf::getSOM() for an explanation
 	void getSOM(SetOfMonads& som, bool bUseOnlyFocusObjects) const;
+	// See Sheaf::harvestMarks() for an explanation
+	void harvestMarks(String2SOMMap& result, bool bUseSingleMarks) const;
  private:
 	void copyOther(const Straw& other);
 	void deleteMos(void);
@@ -17418,6 +17771,16 @@ class Sheaf {
 	// want to include monads that are not in the sheaf.
 	void getSOM(SetOfMonads& som, bool bUseOnlyFocusObjects) const;
 
+	// The method retrives, in the String2SOMMap, the big-union of
+	// the sets of monads from the matched_objects which have
+	// "marks" on their blocks.  If bUseSingleMarks is true, every
+	// mark becomes its own key in the result, with possible
+	// duplication of monad set content.  If bUseSingleMarks is
+	// false, then the concatenation of marks is used.
+	// When there are no marks on a matched_object's block, then
+	// that matched_object is not used in the result.
+	void harvestMarks(String2SOMMap& result, bool bUseSingleMarks) const;
+
 	// Here is a version which starts with an empty set and returns the result
 	// rather than passing it as a parameter.
 	SetOfMonads getSOM(bool bUseOnlyFocusObjects) const;
@@ -17446,14 +17809,20 @@ class FlatStrawConstIterator; // forward declaration
 class FlatStraw {
  private:
 	friend class FlatStrawConstIterator;
-	Arena m_arena;
-	//	id_d_t m_object_type_id; // Not necessary
+#ifndef SWIG
+	Arena *m_pArena;
+	Inst *m_pInst;
+	ObjectBlockBase *m_pOBB;
+#endif
 	std::string m_object_type_name;
  public:
-	FlatStraw(const std::string& object_type_name) : m_object_type_name(object_type_name) {};
+        FlatStraw(const std::string& object_type_name);// : m_object_type_name(object_type_name) { m_pArena = new Arena(); };
+#ifndef SWIG
+        FlatStraw(const std::string& object_type_name, Inst *pInst, ObjectBlockBase *pOBB);// : m_object_type_name(object_type_name) { m_pArena = new Arena(); };
+#endif
 	~FlatStraw();
-	FlatStrawConstIterator const_iterator(void) const;
-	void addMO(const MatchedObject *pMO) { const MatchedObject** pMem = (const MatchedObject**) m_arena.allocate(sizeof(MatchedObject*)); *pMem = pMO; };
+	FlatStrawConstIterator const_iterator() const;
+	void addMO(const MatchedObject *pMO) { if (m_pArena != 0) { const MatchedObject** pMem = (const MatchedObject**) m_pArena->allocate(sizeof(MatchedObject*)); *pMem = pMO; } else {ASSERT_THROW(false, "Error: FlatStraw::addMO() was called, even though this was not an Arena-based FlatStraw.")};};
 	void printConsole(EMdFOutput *pOut) const throw(EmdrosException);
 	void printXML(EMdFOutput* pOut) const throw(EmdrosException);
 	void printJSON(EMdFOutput* pOut) const;
@@ -17463,31 +17832,41 @@ class FlatStraw {
 /** A const iterator on a FlatStraw.
  *@ingroup SheafGroup
  */
-class FlatStrawConstIterator : public ArenaConstIterator {
+class FlatStrawConstIterator {
+#ifndef SWIG
+	const FlatStraw *m_pMotherFlatStraw;
+	ArenaConstIterator *m_pArenaIt;
+	Inst::const_iterator m_InstIt;
+	MatchedObject *m_pPrevMO;
+	MatchedObject *m_pCurMO;
+#endif
  public:
-	/** Constructor for empty FlatStrawConstIterator which does
-	 *  not point to any Arena.
-	 */
-	FlatStrawConstIterator() : ArenaConstIterator() {};
-	/** Constructor which points to the beginning fo a FlatStraw.
-	 */
-	FlatStrawConstIterator(const FlatStraw *pMotherFlatStraw) : ArenaConstIterator(sizeof(MatchedObject*), &pMotherFlatStraw->m_arena) {};
+	FlatStrawConstIterator();
+	FlatStrawConstIterator(const FlatStraw *pMotherFlatStraw); // : ArenaConstIterator(sizeof(MatchedObject*), pMotherFlatStraw->m_pArena) {};
 	/** Copy constructor. 
 	 * 
 	 * @param other The other FlatStrawConstIterator from which to
 	 * initialize.
 	 */
-	FlatStrawConstIterator(const FlatStrawConstIterator& other) : ArenaConstIterator(other) {};
+	FlatStrawConstIterator(const FlatStrawConstIterator& other);
 	/** Test whether we have hit the end.
 	 * 
 	 * @return true iff we have not hit the end, i.e., there is at least one more left in the Arena.
 	 */
-	bool hasNext() const { return ArenaConstIterator::hasNext(); }; // Is the iterator == end iterator?  Doesn't alter iterator
+	bool hasNext() const; // { return ArenaConstIterator::hasNext(); }; // Is the iterator == end iterator?  Doesn't alter iterator
 	MatchedObject *next(); // Gets current and advances iterator afterwards
 	MatchedObject *current(); // Gets current without altering iterator
 	/** Destructor. 
 	 */
-	~FlatStrawConstIterator() {};
+	~FlatStrawConstIterator();
+	FlatStrawConstIterator& operator=(const FlatStrawConstIterator& other);
+ private:
+	void assign(const FlatStrawConstIterator& other);
+	void deleteAndShiftToNext();
+#ifndef SWIG
+	void setCurMO(const InstObject* pInstObj);
+#endif
+	
 };
 
 
@@ -17556,6 +17935,7 @@ class FlatSheaf {
 	void printXML(EMdFOutput* pOut) const throw(EmdrosException);
 	void printJSON(EMdFOutput* pOut) const;
 	static void printDTD(EMdFOutput *pOut);
+	void addFlatStraw(id_d_t object_type_id, FlatStraw *pFlatStraw);
 #ifndef SWIG
 	/** Set the m_pOBBVec.
 	 *@internal
@@ -20696,41 +21076,45 @@ class DeleteObjectsByQueryStatement : public DeleteObjectsStatement, public Quer
 #define T_KEY_FLAT                        88
 #define T_KEY_WHERE                       89
 #define T_KEY_AT                          90
-#define T_KEY_FEATURES                    91
-#define T_KEY_ENUMERATIONS                92
-#define T_KEY_CONSTANTS                   93
-#define T_KEY_MIN_M                       94
-#define T_KEY_ASSIGN                      95
-#define T_KEY_ID_DS                       96
-#define T_KEY_BY                          97
-#define T_KEY_QUIT                        98
-#define T_KEY_STAR                        99
-#define T_KEY_EXCLAMATION                100
-#define T_KEY_OR                         101
-#define T_KEY_NOTEXIST                   102
-#define T_KEY_NOTEXISTS                  103
-#define T_KEY_AS                         104
-#define T_MARK                           105
-#define T_KEY_NORETRIEVE                 106
-#define T_KEY_RETRIEVE                   107
-#define T_KEY_PART_OF                    108
-#define T_KEY_STARTS_IN                  109
-#define T_KEY_OVERLAP                    110
-#define T_KEY_UNIVERSE                   111
-#define T_KEY_SUBSTRATE                  112
-#define T_KEY_LESS_THAN                  113
-#define T_KEY_GREATER_THAN               114
-#define T_KEY_NOT_EQUAL                  115
-#define T_KEY_LESS_THAN_OR_EQUAL         116
-#define T_KEY_GREATER_THAN_OR_EQUAL      117
-#define T_KEY_TILDE                      118
-#define T_KEY_NOT_TILDE                  119
-#define T_KEY_HAS                        120
-#define T_KEY_DOT                        121
-#define T_KEY_OPT_GAP                    122
-#define T_KEY_GAP                        123
-#define T_KEY_POWER                      124
-#define T_KEY_BETWEEN                    125
+#define T_KEY_AGGREGATE                   91
+#define T_KEY_FEATURES                    92
+#define T_KEY_MIN                         93
+#define T_KEY_SUM                         94
+#define T_KEY_COUNT                       95
+#define T_KEY_STAR                        96
+#define T_KEY_ENUMERATIONS                97
+#define T_KEY_CONSTANTS                   98
+#define T_KEY_MIN_M                       99
+#define T_KEY_ASSIGN                     100
+#define T_KEY_ID_DS                      101
+#define T_KEY_BY                         102
+#define T_KEY_QUIT                       103
+#define T_KEY_EXCLAMATION                104
+#define T_KEY_OR                         105
+#define T_KEY_NOTEXIST                   106
+#define T_KEY_NOTEXISTS                  107
+#define T_KEY_AS                         108
+#define T_MARK                           109
+#define T_KEY_NORETRIEVE                 110
+#define T_KEY_RETRIEVE                   111
+#define T_KEY_PART_OF                    112
+#define T_KEY_STARTS_IN                  113
+#define T_KEY_OVERLAP                    114
+#define T_KEY_UNIVERSE                   115
+#define T_KEY_SUBSTRATE                  116
+#define T_KEY_LESS_THAN                  117
+#define T_KEY_GREATER_THAN               118
+#define T_KEY_NOT_EQUAL                  119
+#define T_KEY_LESS_THAN_OR_EQUAL         120
+#define T_KEY_GREATER_THAN_OR_EQUAL      121
+#define T_KEY_TILDE                      122
+#define T_KEY_NOT_TILDE                  123
+#define T_KEY_HAS                        124
+#define T_KEY_DOT                        125
+#define T_KEY_OPT_GAP                    126
+#define T_KEY_GAP                        127
+#define T_KEY_POWER                      128
+#define T_KEY_BETWEEN                    129
 
 /**************** A copy of include/mql_R.h ****************/
 #line 1 "include/mql_R.h"
@@ -20981,13 +21365,13 @@ class CreateSegmentStatement : public SegmentStatement {
  *
  * Ulrik Petersen
  * Created: 11/22-2002
- * Last update: 12/1-2014
+ * Last update: 7/21-2016
  *
  */
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2002-2014  Ulrik Sandborg-Petersen
+ *   Copyright (C) 2002-2016  Ulrik Sandborg-Petersen
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License as
@@ -21170,6 +21554,31 @@ public:
   virtual bool type(bool& bResult);
   virtual bool monads(bool& bResult);
   virtual bool exec();
+};
+
+// GET AGGREGATE FEATURES
+class GetAggregateFeaturesStatement : public ObjectTypeStatement {
+private:
+	AggregateFeature *m_aggregate_feature_list;
+	MQLMonadSetElement* m_AST_monads;
+	std::string *m_monads_feature;
+	FFeatures *m_feature_constraints;
+	Feature *m_pFeaturesToGet;
+	ObjectBlock *m_pObjectBlock;
+	SetOfMonads m_monads;
+ public:
+	GetAggregateFeaturesStatement(MQLExecEnv *pEE,
+				      AggregateFeature *aggregate_feature_list,
+				      MQLMonadSetElement* in_clause,
+				      std::string *monads_feature,
+				      std::string *object_type_name,
+				      FFeatures *feature_constraints);
+	virtual ~GetAggregateFeaturesStatement();
+	virtual void weed(bool& bResult);
+	virtual bool symbol(bool& bResult);
+	virtual bool type(bool& bResult);
+	virtual bool monads(bool& bResult);
+	virtual bool exec();
 };
 
 // SELECT OBJECT TYPES
@@ -22599,7 +23008,7 @@ extern std::string app_prefix(void);
  *
  * Ulrik Sandborg-Petersen
  * Created: 4/22-2007
- * Last update: 4/14-2016
+ * Last update: 6/23-2016
  *
  */
 /************************************************************************
@@ -23443,7 +23852,9 @@ class MSEPObjectPair {
 		m_mse_last(mse_last),
 		m_pObj(pObj) {};
 	~MSEPObjectPair() {
-		delete m_pObj;
+		// If we do it here, we will have some double free's!
+		// Instead, we do it in RenderObjects::clean().
+		// delete m_pObj;
 	};
 };
 #endif
@@ -23458,7 +23869,7 @@ class RenderObjects {
 	typedef std::map<long, int> Long2IntMap;
 	typedef std::map<monad_m, ListOfMSEPObjectPair*> Monad2MSEObjectPairListMap;
 	//typedef std::map<monad_m, ListOfID_D*> Monad2ID_DListMap;
-	typedef std::vector<MemObject*> Monad2MemObjectVector;
+	typedef std::vector<MemObject*> MemObjectVector;
 	typedef std::map<id_d_t, MemObject*> ID_D2MemObjectMap;
 	typedef std::map<long, std::string> Long2StringMap;
 	typedef std::map<std::string, long> String2LongMap;
@@ -23489,8 +23900,9 @@ class RenderObjects {
 	bool m_bUseDocumentIndexFeatureInsteadOfPriorityList;
 	Long2IntMap m_startPriority;
 	Long2IntMap m_endPriority;
+	Arena m_obj_arena;
 	//ID_D2MemObjectMap m_objs;
-	ListOfMSEPObjectPair m_MSEPObjectPair_list;
+	Arena m_MSEPObjectPair_arena;
 	Monad2MSEObjectPairListMap m_fms, m_lms;
 	String2StringMap m_variables;
 	std::string m_db_name;
@@ -23525,10 +23937,8 @@ class RenderObjects {
 		long OTN_surrogate = pObj->getObjectTypeSurrogate();
 		MSEPObjectPair *pMPObj = 0;
 		if (m_startTemplates[OTN_surrogate] != 0) {
-			//if (pMPObj == 0) {
-			pMPObj = new MSEPObjectPair(first, last, pObj);
-			m_MSEPObjectPair_list.push_back(pMPObj);
-			//}
+			pMPObj = (MSEPObjectPair*) m_MSEPObjectPair_arena.allocate(sizeof(MSEPObjectPair));
+			pMPObj = new(pMPObj) MSEPObjectPair(first, last, pObj);
 			Monad2MSEObjectPairListMap::iterator itfm = m_fms.find(first);
 			if (itfm == m_fms.end()) {
 				//m_fms.insert(std::make_pair(first, ListOfID_D(1, id_d)));
@@ -23540,8 +23950,8 @@ class RenderObjects {
 
 		if (m_endTemplates[OTN_surrogate] != 0) {
 			if (pMPObj == 0) {
-				pMPObj = new MSEPObjectPair(first, last, pObj);
-				m_MSEPObjectPair_list.push_back(pMPObj);
+				pMPObj = (MSEPObjectPair*) m_MSEPObjectPair_arena.allocate(sizeof(MSEPObjectPair));
+				pMPObj = new(pMPObj) MSEPObjectPair(first, last, pObj);
 			}
 			Monad2MSEObjectPairListMap::iterator itlm = m_lms.find(last);
 			if (itlm == m_lms.end()) {
@@ -32843,7 +33253,7 @@ extern "C" {
 #ifdef SQLITE_VERSION
 # undef SQLITE_VERSION
 #else
-# define SQLITE_VERSION         "3.4.1.pre24"
+# define SQLITE_VERSION         "3.4.1.pre29"
 #endif
 
 /*
