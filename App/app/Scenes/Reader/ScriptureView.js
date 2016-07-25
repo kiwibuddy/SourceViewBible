@@ -21,6 +21,8 @@ import {
 
 import Emdros from '../../API/Emdros';
 
+import { readerURL } from '../../Navigation';
+
 const MINIMUM_PULL_THRESHOLD = 20;
 const MINIMUM_RELEASE_THRESHOLD = 80;
 
@@ -159,7 +161,7 @@ export default class ScriptureView extends Component {
         showNextScripture: false
       });
 
-      this.props.onScriptureChange({book, chapterNumber});
+      this.props.navigate(readerURL({bookID: book.id, chapterNumber, title: book.name}), {replace: true});
 
       this._fetchScripture({monadSet: chapter.monadSet}).then((scripture) => {
         this.setState({

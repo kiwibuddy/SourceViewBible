@@ -135,9 +135,11 @@ export default class App extends Component {
     );
   };
 
-  _navigate = (route: any, callback?: Function) => {
+  _navigate = (route: any, options?: any) => {
     if (route === 'BACK') {
-      this._popRoute(callback);
+      this._popRoute(options);
+    } else if (options && options.replace) {
+      this._replaceCurrentRoute(route);
     } else {
       this._pushRoute(route);
     }
@@ -221,7 +223,7 @@ export default class App extends Component {
       this.setState({navigation});
     }
 
-    History.record(route);
+    History.record(route, {replace: true});
   };
 }
 

@@ -50,15 +50,26 @@ export class History extends Realm.Object {
     return this.all().filtered('path = $0', path)[0];
   }
 
-  static record(route: Object) {
+  static last() {
+    return this.all()[0];
+  }
+
+  static record(route: Object, options?: Object) {
     if (route.modal) return;
 
     let id = null;
-    const existingHistory = this.findByPath(route.path);
-    if (existingHistory) {
-      const today = moment();
-      if (today.diff(existingHistory.date, 'days') == 0) {
-        id = existingHistory.id;
+    if (options && options.replace) {
+      const last = this.last();
+      if (last) {
+        id = last.id;
+      }
+    } else {
+      const existingHistory = this.findByPath(route.path);
+      if (existingHistory) {
+        const today = moment();
+        if (today.diff(existingHistory.date, 'days') == 0) {
+          id = existingHistory.id;
+        }
       }
     }
 

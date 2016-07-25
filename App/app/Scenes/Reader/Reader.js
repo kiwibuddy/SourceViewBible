@@ -22,7 +22,7 @@ import { Book } from '../../Database';
 type Props = {
   bookID: string,
   chapterNumber: number,
-  onScriptureChange: Function,
+  navigate: Function,
 };
 
 export default class Reader extends Component {
@@ -37,7 +37,7 @@ export default class Reader extends Component {
       <ScriptureView
         book={book}
         chapter={chapter}
-        onScriptureChange={this.props.onScriptureChange}
+        navigate={this.props.navigate}
       />
     );
   }
