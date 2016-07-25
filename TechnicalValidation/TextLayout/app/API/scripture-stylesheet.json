@@ -1,23 +1,28 @@
 {
-    "base" : {
-        "object_types": {
-            "Source": {
-              "docindexfeature" : "docindex",
-              "get": [ "source_color" ],
-              "start": "React.createElement(Text, {style:[styles.scripture, styles.sourceColor{{ featurenomangle 0 }}]}, \"",
-              "end": "\"),",
-            },
-            "Token": {
-              "docindexfeature" : "docindex",
-                "get": [ "pre", "surface", "post" ],
-                "start": "{{ featurenomangle 0 }}{{ featurenomangle 1 }}{{ featurenomangle 2 }}",
-                "end": ""
-            }
-        },
-        "priority_list": [
-        ],
-        "prepend_XML_declaration" : false
+  "base" : {
+    "object_types": {
+      "Book" : {
+         "docindexfeature": "docindex",
+         "end": "",
+         "start": "{{ setvar 'TextKind' }}Prose{{ setvarend }}",
+      },
+      "Source": {
+        "docindexfeature": "docindex",
+        "get": [ "source_name", "source_occurrence", "source_color" ],
+        "start": "{{ setvar 'source_color' }}{{ feature 2 }}{{ setvarend }}React.createElement(Text, {style:[styles.scripture, styles.sourceColor{{ emitvar 'source_color' }}]}, \"{{ setvar 'StartParagraph' }}true{{ setvarend }}",
+        "end": "\"),",
+      },
+      "Token": {
+        "docindexfeature" : "docindex",
+        "get": [ "pre", "surface", "post" ],
+        "start": "{{ featurenomangle 0 }}{{ featurenomangle 1 }}{{ featurenomangle 2 }}",
+        "end": ""
+      },
     },
-    "dictionaries": {
-    }
+    "priority_list": [
+    ],
+    "prepend_XML_declaration" : false
+  },
+  "dictionaries": {
+  }
 }
