@@ -28,7 +28,7 @@ import SphereWords from '../Scenes/Spheres/SphereWords';
 
 export const bookmarksURL = router.addRoute('/Bookmarks', Bookmarks);
 export const booksURL = router.addRoute('/Books', Books);
-export const bookChaptersURL = router.addRoute('/Book/:bookID/Chapters', BookChapters);
+export const bookChaptersURL = router.addRoute('/Books/:bookID/Chapters', BookChapters);
 export const bookURL = router.addRoute('/Books/:bookID', BookOverview);
 export const bookSourcesURL = router.addRoute('/Books/:bookID/Sources', BookSources);
 export const bookSpheresURL = router.addRoute('/Books/:bookID/Spheres', BookSpheres);
