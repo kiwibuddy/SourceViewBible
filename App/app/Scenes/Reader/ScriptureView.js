@@ -35,6 +35,7 @@ export default class ScriptureView extends Component {
   waitingForRelease: bool = false;
   releaseDirection: any = null;
   scrollViewHeight: number = 0;
+  shouldFetchScripture: bool = true;
 
   state: {
     book: any,
@@ -66,13 +67,19 @@ export default class ScriptureView extends Component {
   componentDidMount() {
     const { chapter } = this.state;
     this._fetchScripture({monadSet: chapter.monadSet}).then((scripture) => {
-      this.setState({
-        scripture,
-        loading: false
-      });
+      if (this.shouldFetchScripture) {
+        this.setState({
+          scripture,
+          loading: false
+        });
 
-      this._fetchPreviousScripture();
+        this._fetchPreviousScripture();
+      }
     });
+  }
+
+  componentWillUnmount() {
+    this.shouldFetchScripture = false;
   }
 
   render() {
