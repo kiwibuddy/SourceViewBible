@@ -134,23 +134,28 @@ export default class Bookmarks extends Component {
   };
 
   _renderBookmarkRow = (bookmark: Object) => {
+    const icon = this._iconForRoute(bookmark);
+
     return (
       <TouchableOpacity
         onPress={() => this._navigate(bookmark)}
         style={styles.row}
       >
-        <Image source={bookmark.icon} style={styles.icon} />
+        <Image source={icon} style={styles.icon} />
         <Text style={StyleSheet.styles.cell.title}>{bookmark.title}</Text>
       </TouchableOpacity>
     );
   }
 
   _renderHistoryRow = (history: Object) => {
+    const icon = this._iconForRoute(history.route);
+
     return (
       <TouchableOpacity
         onPress={() => this._navigate(history.route)}
         style={styles.row}
       >
+        <Image source={icon} style={styles.icon} />
         <Text style={StyleSheet.styles.cell.title}>{history.description || history.title}</Text>
       </TouchableOpacity>
     );
@@ -184,10 +189,10 @@ export default class Bookmarks extends Component {
 
       default:
         const bookmarks = [
-          {path: '/Discover', title: 'Discover', icon: require('../../Images/tabs/discover.png')},
-          {path: '/Books', title: 'Books', icon: require('../../Images/tabs/chapters.png')},
-          {path: '/Sources', title: 'Sources', icon: require('../../Images/tabs/sources.png')},
-          {path: '/Spheres', title: 'Spheres', icon: require('../../Images/tabs/spheres.png')},
+          {path: '/Discover', title: 'Discover'},
+          {path: '/Books', title: 'Books'},
+          {path: '/Sources', title: 'Sources'},
+          {path: '/Spheres', title: 'Spheres'},
         ];
         return this.state.dataSource.cloneWithRowsAndSections({bookmarks: bookmarks});
     }
@@ -222,7 +227,23 @@ export default class Bookmarks extends Component {
     });
 
     return {rows, sections};
-  }
+  };
+
+  _iconForRoute = (route: Object) => {
+    const index = route.path.indexOf('/', 1);
+    const path = index != -1 ? route.path.substr(0, index) : route.path;
+    switch (path) {
+      case '/Discover': return require('../../Images/tabs/discover.png');
+      case '/Books': return require('../../Images/tabs/chapters.png');
+      case '/Sources': return require('../../Images/tabs/sources.png');
+      case '/Spheres': return require('../../Images/tabs/spheres.png');
+      case '/Reader': return require('../../Images/tabs/chapters.png');
+
+      default:
+        console.log('Cannot find icon for path:' + path);
+        return null;
+    }
+  };
 
   _onSegmentedControlValueChanged = (value: number) => {
     Preference.setNumberForKey(value, SEGMENT_PREFERENCE);
