@@ -23,8 +23,7 @@
 
             "Source" : {
                "docindexfeature" : "docindex",
-               "end" : "</p></td></tr>{{ setvar 'css' }}{{ setvarend }}
-",
+               "end" : "</p></td></tr>{{ setvar 'css' }}{{ setvarend }}",
                "get" : [
                      "source_name",
                      "source_occurrence",
