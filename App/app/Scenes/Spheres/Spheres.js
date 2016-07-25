@@ -270,7 +270,7 @@ export default class Spheres extends Component {
 
   _onPressSphere = (sphere: Object) => {
     if (sphere.id === this.state.sphere.id) return;
-    this.props.navigate(sphereURL({sphereID: sphere.id, title: Localizable.t('spheres.text'), description: Localizable.t('sphere-overview', {name: sphere.name})}), {replace: true});
+    this.props.navigate(sphereURL({sphereID: sphere.id, title: Localizable.t('spheres.text'), description: Localizable.t('sphere-overview', {name: sphere.name})}));
 
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
 
