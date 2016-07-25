@@ -10,7 +10,7 @@ import {
 
 import { NavigationBar, Toolbar, ToolbarButton } from '../Navigation';
 
-import router from '../../Navigation';
+import router, { BACK } from '../../Navigation';
 
 import {
   Colors,
@@ -136,7 +136,7 @@ export default class App extends Component {
   };
 
   _navigate = (route: any, options?: any) => {
-    if (route === 'BACK') {
+    if (route === BACK) {
       this._popRoute(options);
     } else if (options && options.replace) {
       this._replaceCurrentRoute(route);
