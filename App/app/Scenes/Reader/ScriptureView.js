@@ -66,18 +66,14 @@ export default class ScriptureView extends Component {
     };
   }
 
-  componentDidMount() {
-    const { chapter } = this.state;
-    this._fetchScripture({monadSet: chapter.monadSet}).then((scripture) => {
-      if (this.shouldFetchScripture) {
-        this.setState({
-          scripture,
-          loading: false
-        });
+  componentWillReceiveProps(nextProps: Object) {
+    const { book, chapter } = nextProps;
+    this._setScripture(book, chapter);
+  }
 
-        this._fetchPreviousScripture();
-      }
-    });
+  componentDidMount() {
+    const { book, chapter } = this.state;
+    this._setScripture(book, chapter);
   }
 
   componentWillUnmount() {
@@ -112,6 +108,19 @@ export default class ScriptureView extends Component {
       </View>
     )
   }
+
+  _setScripture = (book: Object, chapter: Object) => {
+    this._fetchScripture({monadSet: chapter.monadSet}).then((scripture) => {
+      if (this.shouldFetchScripture) {
+        this.setState({
+          scripture,
+          loading: false
+        });
+
+        this._fetchPreviousScripture();
+      }
+    });
+  };
 
   _hasPreviousScripture = () => {
     return this.state.chapter.chapterNumber > 1;
