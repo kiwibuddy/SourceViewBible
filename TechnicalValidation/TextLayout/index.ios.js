@@ -41,7 +41,7 @@ class TextLayout extends Component {
       const options = {monadSet: {first: 1, last: 1000}};
        Emdros.scripture(options).then(scripture => {
          console.log(scripture);
-         
+
          this.setState({scripture});
        }).catch(error => {
          console.log(error);
@@ -91,6 +91,9 @@ const styles = StyleSheet.create({
   },
   sourceColorBlue: {
     color: 'blue'
+  },
+  verseNumber: {
+    fontSize: 16,
   },
 });
 

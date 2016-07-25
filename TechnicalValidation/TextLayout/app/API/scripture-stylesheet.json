@@ -12,6 +12,12 @@
         "start": "React.createElement(Text, {style:[styles.scripture, styles.sourceColor{{ featurenomangle 0 }}]},",
         "end": "),",
       },
+      "VerseNumberToken": {
+        "docindexfeature" : "docindex",
+        "get": [ "pre", "surface" ],
+        "start": "React.createElement(Text, {style:[styles.scripture, styles.verseNumber]}, \"{{ featurenomangle 0 }}{{ featurenomangle 1 }}\"),",
+        "end": "",
+      },
       "Token": {
         "docindexfeature" : "docindex",
         "get": [ "pre", "surface", "post" ],
