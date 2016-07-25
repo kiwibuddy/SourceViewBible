@@ -58,18 +58,19 @@ export class History extends Realm.Object {
     if (route.modal) return;
 
     let id = null;
+    let path = route.path;
     if (options && options.replace) {
       const last = this.last();
       if (last) {
-        id = last.id;
+        path = last.path;
       }
-    } else {
-      const existingHistory = this.findByPath(route.path);
-      if (existingHistory) {
-        const today = moment();
-        if (today.diff(existingHistory.date, 'days') == 0) {
-          id = existingHistory.id;
-        }
+    }
+
+    const existingHistory = this.findByPath(path);
+    if (existingHistory) {
+      const today = moment();
+      if (today.diff(existingHistory.date, 'days') == 0) {
+        id = existingHistory.id;
       }
     }
 
