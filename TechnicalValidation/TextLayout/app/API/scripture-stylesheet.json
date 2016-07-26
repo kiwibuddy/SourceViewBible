@@ -9,19 +9,19 @@
       "Source": {
         "docindexfeature": "docindex",
         "get": [ "source_color" ],
-        "start": "{{ setvar 'source_color' }}{{ feature 0 }}{{ setvarend }}React.createElement(Text, {style: [styles.scripture, styles.sourceColor{{ emitvar 'source_color' }}], onPress:this._hello}, ",
+        "start": "{{ setvar 'source_color' }}{{ feature 0 }}{{ setvarend }}React.createElement(Text, {style: [styles.scripture, styles.sourceColor{{ emitvar 'source_color' }}]}, ",
         "end": "'<BR />'),",
       },
       "VerseNumberToken": {
         "docindexfeature" : "docindex",
         "get": [ "pre", "surface" ],
-        "start": "React.createElement(Text, {style: [styles.scripture, styles.verseNumber]}, \"{{ featurenomangle 0 }}{{ featurenomangle 1 }}\"),",
+        "start": "React.createElement(VerseNumber, null, \"{{ featurenomangle 0 }}{{ featurenomangle 1 }}\"),",
         "end": "",
       },
       "Verse" : {
          "docindexfeature" : "docindex",
          "get" : [ "chapter", "verse_start" ],
-         "start": "React.createElement(Text, {style: [styles.scripture, styles.verse, styles.sourceColor{{ emitvar 'source_color' }}], onPress:this._world},",
+         "start": "React.createElement(Verse, {style: styles.sourceColor{{ emitvar 'source_color' }}},",
          "end": "),",
       },
       "Paragraph" : {
@@ -39,13 +39,13 @@
       "Token": {
         "docindexfeature" : "docindex",
         "get": [ "pre", "surface", "post" ],
-        "start": "React.createElement(Text, {style: [styles.scripture]}, \"{{ featurenomangle 0 }}{{ featurenomangle 1 }}{{ featurenomangle 2 }}\"),",
+        "start": "\"{{ featurenomangle 0 }}{{ featurenomangle 1 }}{{ featurenomangle 2 }}\",",
         "end": "",
       },
       "NonWordToken": {
         "docindexfeature" : "docindex",
         "get": [ "pre", "surface", "post" ],
-        "start": "React.createElement(Text, {style: [styles.scripture]}, \"{{ featurenomangle 0 }}{{ featurenomangle 1 }}{{ featurenomangle 2 }}\"),",
+        "start": "\"{{ featurenomangle 0 }}{{ featurenomangle 1 }}{{ featurenomangle 2 }}\",",
         "end": "",
       },
     },

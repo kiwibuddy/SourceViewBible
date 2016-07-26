@@ -3,6 +3,7 @@
  * https://github.com/facebook/react-native
  * @flow
  */
+'use strict';
 
  const React = require('react');
  import { Component } from 'react';
@@ -27,6 +28,14 @@ const Paragraph = (props: Object) => (
     <View style={styles.paragraph} />
     {props.children}
   </Text>
+);
+
+const VerseNumber = (props: Object) => (
+  <Text style={styles.verseNumber}>{props.children}</Text>
+);
+
+const Verse = (props: Object) => (
+  <Text style={[styles.scripture, styles.verse, props.style]}>{props.children}</Text>
 );
 
 type State = {
@@ -69,14 +78,6 @@ class TextLayout extends Component {
       </View>
     )
   }
-
-  _hello = () => {
-    console.log('World!!!');
-  };
-
-  _world = () => {
-    console.log('Hello!!!');
-  };
 }
 
 const styles = StyleSheet.create({
@@ -119,7 +120,8 @@ const styles = StyleSheet.create({
 
   },
   verseNumber: {
-    fontSize: 16,
+    color: 'gray',
+    fontSize: 14,
   },
 });
 
