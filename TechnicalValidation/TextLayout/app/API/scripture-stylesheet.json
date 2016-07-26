@@ -2,21 +2,36 @@
   "base" : {
     "object_types": {
       "Book" : {
-         "docindexfeature": "docindex",
-         "end": "",
-         "start": "{{ setvar 'TextKind' }}Prose{{ setvarend }}",
+        "docindexfeature": "docindex",
+        "end": "",
+        "start": "{{ setvar 'TextKind' }}Prose{{ setvarend }}",
       },
+
+      "EmbeddedQuotation" : {
+        "docindexfeature" : "docindex",
+        "end" : "{{ setvar 'embedded_quotation' }}{{ setvarend }}",
+        "start" : "{{ setvar 'embedded_quotation' }} embedded-quotation{{ setvarend }}",
+      },
+
+      "EmbeddedDocument" : {
+        "docindexfeature" : "docindex",
+        "end" : "{{ setvar 'embedded_document' }}{{ setvarend }}",
+        "start" : "{{ setvar 'embedded_document' }} embedded-document{{ setvarend }}",
+      },
+
       "Source": {
         "docindexfeature": "docindex",
         "get": [ "source_color" ],
         "start": "{{ setvar 'source_color' }}{{ feature 0 }}{{ setvarend }}<SourceText {style: styles.sourceColor{{ emitvar 'source_color' }}}, {{ setvar 'StartParagraph' }}true{{ setvarend }}",
         "end": "</Paragraph></SourceText>,",
       },
+
       "PoetryLine" : {
         "docindexfeature" : "docindex",
         "end" : "{{ setvar 'PoetryLineKind' }}PoetryLineNonFirst{{ emitvar 'PoetryZeroIndent' }}{{ setvarend }}</Paragraph>,{{ setvar 'css' }}{{ setvarend }}",
         "start" : "{{ setvar 'StartParagraph' }}true{{ setvarend }}{{ setvar 'ParagraphType' }}{{ emitvar 'PoetryLineKind' }}{{ setvarend }}"
       },
+
       "VerseNumberToken": {
         "docindexfeature" : "docindex",
         "get": [ "pre", "surface" ],
@@ -29,12 +44,14 @@
 <VerseNumber {style: styles.sourceColor{{ emitvar 'source_color' }}}, \"{{ featurenomangle 0 }}{{ featurenomangle 1 }}\"/>,",
         "end": "",
       },
+
       "Verse" : {
          "docindexfeature" : "docindex",
          "get" : [ "chapter", "verse_start" ],
          "start": "{{ setvar 'verse_anchor' }}Verse_{{ featurenomangle 0 }}_{{ featurenomangle 1 }}{{ setvarend }}",
          "end": "",
       },
+
       "Paragraph" : {
          "docindexfeature" : "docindex",
          "get" : [ "is_flush_left" ],
@@ -48,6 +65,7 @@
 {{ setvar 'TextKind' }}Prose{{ setvarend }}",
          "end": "</Paragraph>,",
       },
+
       "ChapterNumberToken" : {
         "docindexfeature" : "docindex",
         "end" : "",
@@ -73,6 +91,7 @@
 \"{{ featurenomangle 0 }}{{ featurenomangle 1 }}{{ featurenomangle 2 }}\",",
         "end": "",
       },
+
       "NonWordToken": {
         "docindexfeature" : "docindex",
         "get": [ "pre", "surface", "post" ],
@@ -86,6 +105,7 @@
         "end": "",
       },
     },
+
     "postprocess" : [
       {"instring": "</Paragraph></SourceText>,</Paragraph>,", "outstring": ")),"},
       {"instring": "</Paragraph>,</Paragraph></SourceText>,", "outstring": ")),"},
@@ -100,8 +120,10 @@
       {"instring": "/>", "outstring": ")"},
       {"instring" : ",)", "outstring" : ")"},
     ],
+
     "priority_list": [
     ],
+
     "prepend_XML_declaration" : false
   },
   "dictionaries": {
