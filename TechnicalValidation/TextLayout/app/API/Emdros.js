@@ -4,6 +4,18 @@
 import Emdros from 'react-native-emdros';
 let DB = null;
 
+const HTML = `
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    {{BODY}}
+  </body>
+</html>
+`;
+
 const SCRIPTURE_STYLESHEET = require('./scripture-stylesheet.json');
 
 function openDatabase() {
@@ -49,7 +61,8 @@ function scripture(options: Object) {
     }
 
     DB.string(monadSet.first, monadSet.last, style).then((result) => {
-      resolve(result);
+      const scripture = HTML.replace('{{BODY}}', result);
+      resolve(scripture);
     }).catch((error) => {
       reject(error);
     });
