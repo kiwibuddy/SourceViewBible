@@ -21,6 +21,14 @@
 
 import Emdros from './app/API/Emdros';
 
+const Paragraph = (props: Object) => (
+  <Text>
+    {"\n"}
+    <View style={styles.paragraph} />
+    {props.children}
+  </Text>
+);
+
 type State = {
   scripture: any;
 };
