@@ -22,6 +22,14 @@
 
 import Emdros from './app/API/Emdros';
 
+const ChapterNumber = (props: Object) => (
+  <Text style={styles.chapterNumber}>
+    <View style={{width: 4, height: 1}} />
+    {props.children}
+    <View style={{width: 4, height: 1}} />
+  </Text>
+);
+
 const Paragraph = (props: Object) => (
   <Text>
     {"\n"}
@@ -113,6 +121,7 @@ const styles = StyleSheet.create({
     // backgroundColor: 'red',
   },
   chapterNumber: {
+    color: '#59626A',
     fontSize: 16,
     fontWeight: 'bold',
   },
