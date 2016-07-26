@@ -18,6 +18,7 @@
    ScrollView,
    StyleSheet,
    TouchableOpacity,
+   WebView,
  } = ReactNative;
 
 import Emdros from './app/API/Emdros';
@@ -70,7 +71,7 @@ class TextLayout extends Component {
     Emdros.openDatabase().then(() => {
       const options = {monadSet: {first: 1, last: 1005}};
        Emdros.scripture(options).then(scripture => {
-         console.log(scripture);
+        //  console.log(scripture);
          this.setState({scripture});
        }).catch(error => {
          console.log(error);
@@ -92,6 +93,18 @@ class TextLayout extends Component {
       </View>
     )
   }
+
+  // render() {
+  //   if (!this.state.scripture) return null;
+  //   return (
+  //     <View style={styles.container}>
+  //       <WebView
+  //         source={{html: this.state.scripture}}
+  //         scalesPageToFit={true}
+  //       />
+  //     </View>
+  //   );
+  // }
 }
 
 const styles = StyleSheet.create({
