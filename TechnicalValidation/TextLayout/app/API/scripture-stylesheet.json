@@ -22,7 +22,7 @@
         "get": [ "pre", "surface" ],
         "start": "\
 {{ if varequal 'StartParagraph' 'true' }}\
-<Paragraph {paragraphType: \"{{ emitvar 'ParagraphType' }}\", style: styles.paragraphType{{ emitvar 'ParagraphType' }}}, \
+<Paragraph {paragraphType: \"{{ emitvar 'ParagraphType' }}\"}, \
 {{ setvar 'StartParagraph' }}{{ setvarend }}\
 {{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}\
 {{ endif }}\
@@ -54,7 +54,7 @@
         "get" : [ "surface" ],
         "start" : "\
 {{ if varequal 'StartParagraph' 'true' }}\
-<Paragraph {paragraphType: \"{{ emitvar 'ParagraphType' }}\", style: styles.paragraphType{{ emitvar 'ParagraphType' }}}, \
+<Paragraph {paragraphType: \"{{ emitvar 'ParagraphType' }}\"}, \
 {{ setvar 'StartParagraph' }}{{ setvarend }}\
 {{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}\
 {{ endif }}\
@@ -66,7 +66,7 @@
         "get": [ "pre", "surface", "post" ],
         "start": "\
 {{ if varequal 'StartParagraph' 'true' }}\
-<Paragraph {paragraphType: \"{{ emitvar 'ParagraphType' }}\", style: styles.paragraphType{{ emitvar 'ParagraphType' }}}, \
+<Paragraph {paragraphType: \"{{ emitvar 'ParagraphType' }}\"}, \
 {{ setvar 'StartParagraph' }}{{ setvarend }}\
 {{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}\
 {{ endif }}\
@@ -78,7 +78,7 @@
         "get": [ "pre", "surface", "post" ],
         "start": "\
 {{ if varequal 'StartParagraph' 'true' }}\
-<Paragraph {paragraphType: \"{{ emitvar 'ParagraphType' }}\", style: styles.paragraphType{{ emitvar 'ParagraphType' }}}, \
+<Paragraph {paragraphType: \"{{ emitvar 'ParagraphType' }}\"}, \
 {{ setvar 'StartParagraph' }}{{ setvarend }}\
 {{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}\
 {{ endif }}\
