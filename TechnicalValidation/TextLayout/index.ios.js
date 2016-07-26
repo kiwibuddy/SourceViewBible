@@ -24,13 +24,13 @@ import Emdros from './app/API/Emdros';
 
 const Paragraph = (props: Object) => {
   const { paragraphType } = props;
-  const lineFeed = paragraphType === 'FlushLeft' ? null : "\n";
+  const lineFeed = paragraphType === 'FlushLeft' ? null : <Text style={{backgroundColor: 'purple'}}>{"\n"}</Text>;
+  const indent = paragraphType === 'FlushLeft' ? null : <View style={[props.style, {backgroundColor: 'orange'}]} />;
   return (
     <Text>
       {lineFeed}
-      <View style={[props.style]} />
+      {indent}
       {props.children}
-
     </Text>
   );
 };
@@ -70,6 +70,7 @@ class TextLayout extends Component {
     Emdros.openDatabase().then(() => {
       const options = {monadSet: {first: 1, last: 1005}};
        Emdros.scripture(options).then(scripture => {
+         console.log(scripture);
          this.setState({scripture});
        }).catch(error => {
          console.log(error);
@@ -140,9 +141,6 @@ const styles = StyleSheet.create({
     color: '#59626A',
     fontSize: 16,
     fontWeight: 'bold',
-  },
-  verse: {
-
   },
   verseNumber: {
     fontSize: 14,
