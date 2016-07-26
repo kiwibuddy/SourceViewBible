@@ -24,14 +24,13 @@ import Emdros from './app/API/Emdros';
 
 const Paragraph = (props: Object) => (
   <Text>
-    {"\n"}
-    <View style={styles.paragraph} />
+    {/*<View style={styles.paragraph} />*/}
     {props.children}
   </Text>
 );
 
 const VerseNumber = (props: Object) => (
-  <Text style={styles.verseNumber}>{props.children}</Text>
+  <Text style={[styles.scripture, styles.verseNumber, props.style]}>{props.children}</Text>
 );
 
 const Verse = (props: Object) => (
