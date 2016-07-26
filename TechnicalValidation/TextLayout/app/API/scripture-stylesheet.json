@@ -10,7 +10,7 @@
         "docindexfeature": "docindex",
         "get": [ "source_color" ],
         "start": "React.createElement(Text, {style: [styles.scripture, styles.sourceColor{{ featurenomangle 0 }}], onPress:this._hello}, ",
-        "end": "),",
+        "end": "'<BR />'),",
       },
       "VerseNumberToken": {
         "docindexfeature" : "docindex",
@@ -27,8 +27,8 @@
       "Paragraph" : {
          "docindexfeature" : "docindex",
          "get" : [ "is_flush_left" ],
-         "start": "React.createElement(Text, {style: [styles.scripture, styles.paragraph], onPress:this._world}, '<BR />', React.createElement(View, {style: styles.paragraph})),",
-         "end": "",
+         "start": "React.createElement(Text, null, React.createElement(View, {style: styles.paragraph}),",
+         "end": "'<BR />'),",
       },
       "ChapterNumberToken": {
         "docindexfeature" : "docindex",
