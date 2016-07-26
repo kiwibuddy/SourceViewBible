@@ -24,9 +24,8 @@ import Emdros from './app/API/Emdros';
 
 const ChapterNumber = (props: Object) => (
   <Text style={styles.chapterNumber}>
-    <View style={{width: 4, height: 1}} />
     {props.children}
-    <View style={{width: 4, height: 1}} />
+    <View style={{width: 8, height: 1}} />
   </Text>
 );
 
