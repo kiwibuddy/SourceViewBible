@@ -128,7 +128,6 @@ const styles = StyleSheet.create({
 
   },
   verseNumber: {
-    color: 'gray',
     fontSize: 14,
   },
 });
