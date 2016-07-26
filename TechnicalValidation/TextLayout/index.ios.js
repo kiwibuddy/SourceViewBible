@@ -98,13 +98,17 @@ const styles = StyleSheet.create({
   sourceColorBlue: {
     color: 'blue'
   },
+  paragraph: {
+    width: 30,
+    height: 1,
+    // backgroundColor: 'red',
+  },
   chapterNumber: {
     fontSize: 16,
     fontWeight: 'bold',
   },
   verse: {
-    width: 30,
-    height: 30,
+
   },
   verseNumber: {
     fontSize: 16,
