@@ -81,30 +81,15 @@ class TextLayout extends Component {
 
   render() {
     if (!this.state.scripture) return null;
-    const scripture = eval(this.state.scripture);
-
     return (
       <View style={styles.container}>
-        <ScrollView
-          contentContainerStyle={styles.scriptureContainer}
-        >
-          {scripture}
-        </ScrollView>
+        <WebView
+          source={{html: this.state.scripture}}
+          scalesPageToFit={true}
+        />
       </View>
-    )
+    );
   }
-
-  // render() {
-  //   if (!this.state.scripture) return null;
-  //   return (
-  //     <View style={styles.container}>
-  //       <WebView
-  //         source={{html: this.state.scripture}}
-  //         scalesPageToFit={true}
-  //       />
-  //     </View>
-  //   );
-  // }
 }
 
 const styles = StyleSheet.create({

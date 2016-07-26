@@ -1,0 +1,131 @@
+{
+  "base" : {
+    "object_types": {
+      "Book" : {
+        "docindexfeature": "docindex",
+        "end": "",
+        "start": "{{ setvar 'TextKind' }}Prose{{ setvarend }}",
+      },
+
+      "EmbeddedQuotation" : {
+        "docindexfeature" : "docindex",
+        "end" : "{{ setvar 'embedded_quotation' }}{{ setvarend }}",
+        "start" : "{{ setvar 'embedded_quotation' }} embedded-quotation{{ setvarend }}",
+      },
+
+      "EmbeddedDocument" : {
+        "docindexfeature" : "docindex",
+        "end" : "{{ setvar 'embedded_document' }}{{ setvarend }}",
+        "start" : "{{ setvar 'embedded_document' }} embedded-document{{ setvarend }}",
+      },
+
+      "Source": {
+        "docindexfeature": "docindex",
+        "get": [ "source_color" ],
+        "start": "{{ setvar 'source_color' }}{{ feature 0 }}{{ setvarend }}<SourceText {style: styles.sourceColor{{ emitvar 'source_color' }}}, {{ setvar 'StartParagraph' }}true{{ setvarend }}",
+        "end": "</Paragraph></SourceText>,",
+      },
+
+      "PoetryLine" : {
+        "docindexfeature" : "docindex",
+        "end" : "{{ setvar 'PoetryLineKind' }}PoetryLineNonFirst{{ emitvar 'PoetryZeroIndent' }}{{ setvarend }}</Paragraph>,{{ setvar 'css' }}{{ setvarend }}",
+        "start" : "{{ setvar 'StartParagraph' }}true{{ setvarend }}{{ setvar 'ParagraphType' }}{{ emitvar 'PoetryLineKind' }}{{ setvarend }}"
+      },
+
+      "VerseNumberToken": {
+        "docindexfeature" : "docindex",
+        "get": [ "pre", "surface" ],
+        "start": "\
+{{ if varequal 'StartParagraph' 'true' }}\
+<Paragraph {paragraphType: \"{{ emitvar 'ParagraphType' }}\"}, \
+{{ setvar 'StartParagraph' }}{{ setvarend }}\
+{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}\
+{{ endif }}\
+<VerseNumber {style: styles.sourceColor{{ emitvar 'source_color' }}}, \"{{ featurenomangle 0 }}{{ featurenomangle 1 }}\"/>,",
+        "end": "",
+      },
+
+      "Verse" : {
+         "docindexfeature" : "docindex",
+         "get" : [ "chapter", "verse_start" ],
+         "start": "{{ setvar 'verse_anchor' }}Verse_{{ featurenomangle 0 }}_{{ featurenomangle 1 }}{{ setvarend }}",
+         "end": "",
+      },
+
+      "Paragraph" : {
+         "docindexfeature" : "docindex",
+         "get" : [ "is_flush_left" ],
+         "start" : "\
+{{ if featureequal 0 'true' }}\
+{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}\
+{{ else }}\
+{{ setvar 'ParagraphType' }}TextIndent1{{ setvarend }}\
+{{ endif }}\
+{{ setvar 'StartParagraph' }}true{{ setvarend }}\
+{{ setvar 'TextKind' }}Prose{{ setvarend }}",
+         "end": "</Paragraph>,",
+      },
+
+      "ChapterNumberToken" : {
+        "docindexfeature" : "docindex",
+        "end" : "",
+        "get" : [ "surface" ],
+        "start" : "\
+{{ if varequal 'StartParagraph' 'true' }}\
+<Paragraph {paragraphType: \"{{ emitvar 'ParagraphType' }}\"}, \
+{{ setvar 'StartParagraph' }}{{ setvarend }}\
+{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}\
+{{ endif }}\
+<ChapterNumber {style: styles.sourceColor{{ emitvar 'source_color' }}}, \"{{ featurenomangle 0 }}\"/>,",
+      },
+
+      "Token": {
+        "docindexfeature" : "docindex",
+        "get": [ "pre", "surface", "post" ],
+        "start": "\
+{{ if varequal 'StartParagraph' 'true' }}\
+<Paragraph {paragraphType: \"{{ emitvar 'ParagraphType' }}\"}, \
+{{ setvar 'StartParagraph' }}{{ setvarend }}\
+{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}\
+{{ endif }}\
+\"{{ featurenomangle 0 }}{{ featurenomangle 1 }}{{ featurenomangle 2 }}\",",
+        "end": "",
+      },
+
+      "NonWordToken": {
+        "docindexfeature" : "docindex",
+        "get": [ "pre", "surface", "post" ],
+        "start": "\
+{{ if varequal 'StartParagraph' 'true' }}\
+<Paragraph {paragraphType: \"{{ emitvar 'ParagraphType' }}\"}, \
+{{ setvar 'StartParagraph' }}{{ setvarend }}\
+{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}\
+{{ endif }}\
+\"{{ featurenomangle 0 }}{{ featurenomangle 1 }}{{ featurenomangle 2 }}\",",
+        "end": "",
+      },
+    },
+
+    "postprocess" : [
+      {"instring": "</Paragraph></SourceText>,</Paragraph>,", "outstring": ")),"},
+      {"instring": "</Paragraph>,</Paragraph></SourceText>,", "outstring": ")),"},
+      {"instring": "<Paragraph ", "outstring": "\nReact.createElement(Paragraph, "},
+      {"instring": "</Paragraph>", "outstring": ")"},
+      {"instring": "<Text ", "outstring": "\nReact.createElement(Text, "},
+      {"instring": "</Text>", "outstring": ")"},
+      {"instring": "<ChapterNumber ", "outstring": "\nReact.createElement(ChapterNumber, "},
+      {"instring": "<VerseNumber ", "outstring": "\nReact.createElement(VerseNumber, "},
+      {"instring": "<SourceText ", "outstring": "\n\nReact.createElement(SourceText, "},
+      {"instring": "</SourceText>", "outstring": ")"},
+      {"instring": "/>", "outstring": ")"},
+      {"instring" : ",)", "outstring" : ")"},
+    ],
+
+    "priority_list": [
+    ],
+
+    "prepend_XML_declaration" : false
+  },
+  "dictionaries": {
+  }
+}
