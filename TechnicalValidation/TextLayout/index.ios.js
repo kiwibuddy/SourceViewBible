@@ -68,26 +68,24 @@ class TextLayout extends Component {
   }
 
   componentDidMount() {
-    Emdros.openDatabase().then(() => {
-      const options = {monadSet: {first: 1, last: 1005}};
-       Emdros.scripture(options).then(scripture => {
-        //  console.log(scripture);
-         this.setState({scripture});
-       }).catch(error => {
-         console.log(error);
-       });
-    })
+    // Emdros.openDatabase().then(() => {
+    //   const options = {monadSet: {first: 1, last: 1005}};
+    //    Emdros.scripture(options).then(scripture => {
+    //     //  console.log(scripture);
+    //      this.setState({scripture});
+    //    }).catch(error => {
+    //      console.log(error);
+    //    });
+    // })
   }
 
   render() {
-    if (!this.state.scripture) return null;
     return (
-      <View style={styles.container}>
-        <WebView
-          source={{html: this.state.scripture}}
-          scalesPageToFit={true}
-        />
-      </View>
+      <WebView
+        style={styles.container}
+        source={require('./scripture.html')}
+        scalesPageToFit={true}
+      />
     );
   }
 }
@@ -96,41 +94,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 20,
-    backgroundColor: 'white',
-  },
-  scriptureContainer: {
-    marginVertical: 20,
-    marginHorizontal: 25,
-    paddingBottom: 25,
-  },
-  scripture: {
-    fontFamily: 'Hoefler Text',
-    fontSize: 18,
-    lineHeight: 30,
-  },
-  sourceColorRed: {
-    color: 'red',
-  },
-  sourceColorBlack: {
-    color: 'black',
-  },
-  sourceColorGreen: {
-    color: 'green',
-  },
-  sourceColorBlue: {
-    color: 'blue'
-  },
-  textIndent: {
-    width: 30,
-    height: 0,
-  },
-  chapterNumber: {
-    color: '#59626A',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  verseNumber: {
-    fontSize: 14,
+    backgroundColor: 'red',
   },
 });
 
