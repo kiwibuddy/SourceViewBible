@@ -24,7 +24,7 @@ import Emdros from './app/API/Emdros';
 
 const Paragraph = (props: Object) => {
   const { paragraphType } = props;
-  const lineFeed = paragraphType === 'FlushLeft' ? null : <Text style={{backgroundColor: 'purple'}}>{"\n"}</Text>;
+  const lineFeed = paragraphType === 'FlushLeft' ? null : <Text>{"\n"}</Text>;
   const indent = paragraphType === 'FlushLeft' ? null : <View style={[styles.textIndent]} />;
   return (
     <Text>
@@ -123,8 +123,7 @@ const styles = StyleSheet.create({
   },
   textIndent: {
     width: 30,
-    height: 1,
-    backgroundColor: 'orange',
+    height: 0,
   },
   chapterNumber: {
     color: '#59626A',
