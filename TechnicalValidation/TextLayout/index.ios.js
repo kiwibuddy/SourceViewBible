@@ -29,12 +29,20 @@ const Paragraph = (props: Object) => (
   </Text>
 );
 
+const ChapterNumber = (props: Object) => (
+  <Text style={[styles.scripture, styles.chapterNumber, props.style]}>{props.children}</Text>
+);
+
 const VerseNumber = (props: Object) => (
   <Text style={[styles.scripture, styles.verseNumber, props.style]}>{props.children}</Text>
 );
 
 const Verse = (props: Object) => (
   <Text style={[styles.scripture, styles.verse, props.style]}>{props.children}</Text>
+);
+
+const SourceText = (props: Object) => (
+  <Text style={[styles.scripture, props.style]}>{props.children}</Text>
 );
 
 type State = {
