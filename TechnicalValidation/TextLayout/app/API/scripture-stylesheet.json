@@ -30,12 +30,6 @@
          "start": "React.createElement(Paragraph, null,",
          "end": "),",
       },
-      "ChapterNumberToken": {
-        "docindexfeature" : "docindex",
-        "get": [ "surface" ],
-        "start": "React.createElement(ChapterNumber, {style: [styles.scripture, styles.chapterNumber]}, \"{{ featurenomangle 0 }}\"),",
-        "end": "",
-      },
       "Token": {
         "docindexfeature" : "docindex",
         "get": [ "pre", "surface", "post" ],
