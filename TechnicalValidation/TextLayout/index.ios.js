@@ -22,12 +22,18 @@
 
 import Emdros from './app/API/Emdros';
 
-const Paragraph = (props: Object) => (
-  <Text>
-    {/*<View style={styles.paragraph} />*/}
-    {props.children}
-  </Text>
-);
+const Paragraph = (props: Object) => {
+  const { paragraphType } = props;
+  const lineFeed = paragraphType === 'FlushLeft' ? null : "\n";
+  return (
+    <Text>
+      {lineFeed}
+      <View style={[props.style]} />
+      {props.children}
+
+    </Text>
+  );
+};
 
 const ChapterNumber = (props: Object) => (
   <Text style={[styles.scripture, styles.chapterNumber, props.style]}>{props.children}</Text>
@@ -114,10 +120,21 @@ const styles = StyleSheet.create({
   sourceColorBlue: {
     color: 'blue'
   },
-  paragraph: {
+  paragraphType: {
     width: 30,
     height: 1,
-    // backgroundColor: 'red',
+  },
+  paragraphTypeFlushLeft: {
+    width: 0,
+    height: 1,
+  },
+  paragraphTypeTextIndent1: {
+    width: 30,
+    height: 1,
+  },
+  paragraphTypePoetryLineNonFirst: {
+    width: 30,
+    height: 1,
   },
   chapterNumber: {
     color: '#59626A',
