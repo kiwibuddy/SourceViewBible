@@ -60,7 +60,6 @@ async function seedSourceWordCloud(emdros, realm) {
     "buckets": {
       "objectTypeName": "Token",
       "feature": "surface",
-      "expression" : "is_word=true"
     }
   }
   `;

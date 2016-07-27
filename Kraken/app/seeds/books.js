@@ -52,7 +52,6 @@ async function seedSources(emdros, realm) {
       "feature": ["source_color", "source_name"],
       "buckets": {
         "objectTypeName": "Token",
-        "expression" : "is_word=true"
       }
     }
   }
@@ -112,7 +111,6 @@ async function seedBookWordCloud(emdros, realm) {
     "buckets": {
       "objectTypeName": "Token",
       "feature": "surface",
-      "expression" : "is_word=true"
     }
   }
   `;
@@ -148,7 +146,6 @@ async function seedSourceWordCloud(emdros, realm) {
       "buckets": {
         "objectTypeName": "Token",
         "feature": "surface",
-        "expression" : "is_word=true"
       }
     }
   }
@@ -192,7 +189,7 @@ async function seedBookSphereWordCount(emdros, realm) {
     "feature": "DJHRef",
     "buckets": {
       "objectTypeName": "Token",
-      "expression" : "is_word=true AND (${sphereExpression})"
+      "expression" : "(${sphereExpression})"
     }
   }
   `;
@@ -228,7 +225,6 @@ async function seedBookSphereCounts(emdros, realm) {
     "buckets": {
       "objectTypeName": "Token",
       "feature": [${sphereFeatures}],
-      "expression" : "is_word=true"
     }
   }
   `;

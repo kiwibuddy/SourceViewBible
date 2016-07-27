@@ -106,7 +106,6 @@ async function seedWordCounts(emdros, realm) {
       "feature": "chapter",
       "buckets": {
         "objectTypeName": "Token",
-        "expression" : "is_word=true"
       }
     }
   }
@@ -158,7 +157,6 @@ async function seedSourceCounts(emdros, realm) {
         "feature": ["source_color", "source_name"],
         "buckets": {
           "objectTypeName": "Token",
-          "expression" : "is_word=true"
         }
       }
     }
@@ -211,7 +209,6 @@ async function seedSphereCounts(emdros, realm) {
       "buckets": {
         "objectTypeName": "Token",
         "feature": [${sphereFeatures}],
-        "expression" : "is_word=true"
       }
     }
   }
@@ -275,7 +272,7 @@ async function seedChapterSphereWordCount(emdros, realm) {
       "feature": "chapter",
       "buckets": {
         "objectTypeName": "Token",
-        "expression" : "is_word=true AND (${sphereExpression})"
+        "expression" : "(${sphereExpression})"
       }
     }
   }

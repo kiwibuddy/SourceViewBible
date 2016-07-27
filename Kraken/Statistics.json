@@ -9,7 +9,6 @@
       "feature": ["source_color", "source_name"],
       "buckets": {
         "objectTypeName": "Token",
-        "expression" : "is_word=true"
       }
     }
   }
