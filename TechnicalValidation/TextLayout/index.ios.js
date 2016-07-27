@@ -84,7 +84,6 @@ class TextLayout extends Component {
       <WebView
         style={styles.container}
         source={require('./scripture.html')}
-        scalesPageToFit={true}
       />
     );
   }
