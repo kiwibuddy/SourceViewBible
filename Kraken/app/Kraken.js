@@ -10,9 +10,20 @@ const now = require('performance-now');
 const DATABASE_PATH = '/tmp/SourceView.realm';
 const JSON_PATH='/tmp/SourceView.json';
 
+const ENCRYPTION_KEY='3fab2edcd8663c6baa91ffeb928ec61e011b19ed866d7365e7d194e43dc47264';
+function stringToArrayBuffer(str) {
+  var buf = new ArrayBuffer(str.length);
+  var bufView = new Int8Array(buf);
+  for (var i=0, strLen=str.length; i<strLen; i++) {
+    bufView[i] = str.charCodeAt(i);
+  }
+  return buf;
+}
+
 const realm = new Realm({
   path: DATABASE_PATH,
-  schema: SourceViewSchema
+  schema: SourceViewSchema,
+  encryptionKey: stringToArrayBuffer(ENCRYPTION_KEY)
 });
 
 const { seedBookObjects, seedBooks } = require('./seeds/books');
@@ -66,7 +77,7 @@ async function seedBaseObjects(emdros) {
 
 async function seedBible(emdros: Object, realm) {
   console.log('Seeding Bible');
-  
+
   realm.write(() => {
     const wordCount = realm.objects('Book').reduce((sum, book) => sum += book.wordCount, 0);
     realm.create('Bible', {wordCount});
