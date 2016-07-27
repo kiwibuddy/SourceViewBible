@@ -12,6 +12,9 @@
 #include <fstream>
 #import "OCDBenchmark.h"
 
+const char RCTKeyCString[] = {48, 120, 51, 48, 97, 49, 50, 56, 50, 57, 32, 48, 120, 48, 50, 50, 56, 102, 53, 50, 55, 32, 48, 120, 49, 56, 55, 49, 56, 49, 51, 100, 32, 48, 120, 54, 53, 50, 53, 54, 55, 101, 57, 32, 48, 120, 53, 99, 101, 97, 50, 56, 98, 53, 32, 48, 120, 51, 100, 55, 100, 52, 98, 99, 55, 32, 48, 120, 53, 48, 48, 102, 101, 99, 100, 49, 32, 48, 120, 54, 99, 57, 51, 53, 54, 56, 100, 0};
+#define RCTKey [NSString stringWithCString:RCTKeyCString encoding:NSASCIIStringEncoding]
+
 @interface RCTEmdrosEnv () {
     EmdrosEnv *_emdrosEnv;
 }
@@ -45,7 +48,7 @@
         std::string hostname("localhost");
         std::string user("emdf");
         eBackendKind backend_kind = kBPT;
-        std::string password = "";
+        std::string password(RCTKey.UTF8String);
 
         _emdrosEnv = new EmdrosEnv(output_kind, kCSUTF8, hostname, user, password, initial_db, backend_kind);
     }
@@ -58,24 +61,24 @@
     try {
         if ([options[@"count"] boolValue]) {
            [[OCDBenchmark sharedBenchmark] begin];
-            
+
             NSInteger firstMonad = options[@"firstMonad"] ? [options[@"firstMonad"] integerValue] : 1;
             NSInteger lastMonad = options[@"lastMonad"] ? [options[@"lastMonad"] integerValue] : MAX_MONAD;
             SetOfMonads substrate(firstMonad, lastMonad);
-            
+
             std::string errorMessage;
             std::string json = countInBuckets(_emdrosEnv, std::string(query.UTF8String), substrate, errorMessage);
             [[OCDBenchmark sharedBenchmark] end:[NSString stringWithFormat:@"%@ countInBuckets", query]];
-            
+
             [[OCDBenchmark sharedBenchmark] begin];
             NSString *data = [NSString stringWithUTF8String:json.c_str()];
             NSError *error = nil;
             NSDictionary *result = [NSJSONSerialization JSONObjectWithData:[data dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
             [[OCDBenchmark sharedBenchmark] end:[NSString stringWithFormat:@"%@ JSONObjectWithData", query]];
-            
+
             if (completion) completion(result, nil);
         } else {
-            
+
         }
     } catch (EMdFDBException e) {
         std::cerr << "ERROR: EMdFDBException (Database error)..." << std::endl;
@@ -147,7 +150,7 @@
         lastMonad = som.last();
         return @{@"first": @(firstMonad), @"last": @(lastMonad)};
     }
-    
+
     return nil;
 }
 

@@ -3,6 +3,7 @@
 
 import { Platform } from 'react-native';
 import Realm from 'realm';
+import Emdros from 'react-native-emdros';
 const RNFS = require('react-native-fs');
 
 const BibleSchema = {
@@ -220,6 +221,7 @@ const Schema = [Bible, Book, Chapter, Source, SourceRelation, Sphere, Count, Con
 const realm = new Realm({
   schema: Schema,
   readOnly: true,
+  encryptionKey: Emdros.key,
   ...Platform.select({
     ios: {
       path: RNFS.MainBundlePath + '/Datasets/en/NLT/SourceView.realm',
