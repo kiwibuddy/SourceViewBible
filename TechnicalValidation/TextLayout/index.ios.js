@@ -21,64 +21,9 @@
    WebView,
  } = ReactNative;
 
-import Emdros from './app/API/Emdros';
-
-const Paragraph = (props: Object) => {
-  const { paragraphType } = props;
-  const lineFeed = paragraphType === 'FlushLeft' ? null : <Text>{"\n"}</Text>;
-  const indent = paragraphType === 'FlushLeft' ? null : <View style={[styles.textIndent]} />;
-  return (
-    <Text>
-      {lineFeed}
-      {indent}
-      {props.children}
-    </Text>
-  );
-};
-
-const ChapterNumber = (props: Object) => (
-  <Text style={[styles.scripture, styles.chapterNumber, props.style]}>{props.children}</Text>
-);
-
-const VerseNumber = (props: Object) => (
-  <Text style={[styles.scripture, styles.verseNumber, props.style]}>{props.children}</Text>
-);
-
-const Verse = (props: Object) => (
-  <Text style={[styles.scripture, styles.verse, props.style]}>{props.children}</Text>
-);
-
-const SourceText = (props: Object) => (
-  <Text style={[styles.scripture, props.style]}>{props.children}</Text>
-);
-
-type State = {
-  scripture: any;
-};
+// import Emdros from './app/API/Emdros';
 
 class TextLayout extends Component {
-  state: State;
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      scripture: null
-    };
-  }
-
-  componentDidMount() {
-    // Emdros.openDatabase().then(() => {
-    //   const options = {monadSet: {first: 1, last: 1005}};
-    //    Emdros.scripture(options).then(scripture => {
-    //     //  console.log(scripture);
-    //      this.setState({scripture});
-    //    }).catch(error => {
-    //      console.log(error);
-    //    });
-    // })
-  }
-
   render() {
     return (
       <WebView
