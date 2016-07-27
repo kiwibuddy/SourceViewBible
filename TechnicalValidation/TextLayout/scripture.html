@@ -14,10 +14,10 @@
         padding:0;
         border-spacing: 0;
         border-collapse: collapse;
-        margin-left: -100pt;
+        margin-left: -110pt;
       }
       .showSource {
-        margin-right: -100pt;
+        margin-right: -110pt;
         margin-left: 0;
       }
       tr {
@@ -43,7 +43,6 @@
         color: #16C658;
       }
       .sourceTitle {
-        font-family: "sf ui display";
         font-size: 11pt;
         color: #9B9B9B;
         text-align: right;
@@ -67,10 +66,23 @@
       .textIndent {
         padding-left: 2em;
       }
+      .sphere {
+        position: relative;
+        display: inline-block;
+      }
+      .sFamily {
+        position: absolute;
+        bottom: 2pt;
+        height: 2pt;
+        background-color: #FF3A30;
+        display: block;
+      }
       .sReligion {
-        border-bottom-style: solid;
-        border-bottom-width: 3pt;
-        border-image: -webkit-linear-gradient(0deg, red 10px, blue 2px, green 2px);
+        position: absolute;
+        bottom: 2pt;
+        height: 2pt;
+        background-color: #88C807;
+        display: block;
       }
     </style>
   </head>
@@ -78,8 +90,8 @@
     <table class="hideSource">
       <tr class="sourceBlack">
         <td class="sourceTitle">The Narrator 1</td>
-        <td><span class="textChapter">1</span><span class="textVerse">1</span> In the beginning God created the heavens and the earth. <span class="textVerse">2</span> The earth was formless and empty, and darkness covered the deep waters. And the Spirit of God was hovering <span class="sReligion">over</span> the surface of the waters.<br />
-        <span class="textVerse textIndent">3</span> Then God said,</td>
+        <td><span class="textChapter">1</span><span class="textVerse">1</span> In the beginning God created the heavens and the earth. <span class="textVerse">2</span> The earth was formless and empty, and darkness covered the deep waters. And the Spirit of God was hovering <span class="sphere"><span class="sReligion" style="left: 50%; width: 50%"></span><span class="sFamily" style="left: 0; width: 50%"></span>over</span> the surface of the waters.
+        <br /><span class="textVerse textIndent">3</span> Then God said,</td>
       </tr>
       <tr class="sourceRed">
         <td class="sourceTitle">God 1</td>
