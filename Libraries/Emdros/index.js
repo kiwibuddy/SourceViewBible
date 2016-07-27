@@ -10,6 +10,18 @@ export default class Emdros {
     this.name = config.name;
   }
 
+  static get key() {
+    const KEY = EmdrosBridge.KEY;
+    const keyLength = KEY.length;
+    const buf = new ArrayBuffer(keyLength);
+    const bufView = new Int8Array(buf);
+
+    for (let i = 0; i < keyLength; i++) {
+      bufView[i] = KEY.charCodeAt(i);
+    }
+    return buf;
+  }
+
   static open(options) {
     let name = options.name;
 

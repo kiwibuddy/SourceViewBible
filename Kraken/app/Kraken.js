@@ -8,22 +8,12 @@ import RNFS from 'react-native-fs';
 
 const now = require('performance-now');
 const DATABASE_PATH = '/tmp/SourceView.realm';
-const JSON_PATH='/tmp/SourceView.json';
-
-const ENCRYPTION_KEY='3fab2edcd8663c6baa91ffeb928ec61e011b19ed866d7365e7d194e43dc47264';
-function stringToArrayBuffer(str) {
-  var buf = new ArrayBuffer(str.length);
-  var bufView = new Int8Array(buf);
-  for (var i=0, strLen=str.length; i<strLen; i++) {
-    bufView[i] = str.charCodeAt(i);
-  }
-  return buf;
-}
+const JSON_PATH = '/tmp/SourceView.json';
 
 const realm = new Realm({
   path: DATABASE_PATH,
   schema: SourceViewSchema,
-  encryptionKey: stringToArrayBuffer(ENCRYPTION_KEY)
+  encryptionKey: Emdros.key
 });
 
 const { seedBookObjects, seedBooks } = require('./seeds/books');
@@ -42,8 +32,8 @@ export async function release() {
 
   const endTime = now();
   const elapsedTime = (endTime - startTime) / 1000;
-
   console.log(`Kraken has been released in ${elapsedTime.toFixed(3)}s!`);
+
   // RNFS.writeFile(JSON_PATH, JSON.stringify(objects), 'utf8').then((success) => {
   //   console.log('Done Seeding.');
   //   console.log(objects);
