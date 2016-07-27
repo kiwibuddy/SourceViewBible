@@ -27,6 +27,7 @@ class TextLayout extends Component {
   render() {
     return (
       <WebView
+        decelerationRate="normal"
         style={styles.container}
         source={require('./scripture.html')}
       />
