@@ -26,6 +26,7 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		AB39CF911D468F9B00C7A360 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AB39CF901D468F9B00C7A360 /* libz.tbd */; };
 		AB39CF931D468FA100C7A360 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AB39CF921D468FA100C7A360 /* libsqlite3.tbd */; };
+		AB5E69E81D491D50000E7DEC /* Datasets in Resources */ = {isa = PBXBuildFile; fileRef = AB5E69E71D491D50000E7DEC /* Datasets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +142,7 @@
 		AB39CF881D468CA800C7A360 /* RCTEmdros.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTEmdros.xcodeproj; path = ../../../Libraries/Emdros/ios/RCTEmdros/RCTEmdros.xcodeproj; sourceTree = "<group>"; };
 		AB39CF901D468F9B00C7A360 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		AB39CF921D468FA100C7A360 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		AB5E69E71D491D50000E7DEC /* Datasets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Datasets; path = ../../../Datasets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -307,6 +309,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				AB5E69E71D491D50000E7DEC /* Datasets */,
 				AB39CF921D468FA100C7A360 /* libsqlite3.tbd */,
 				AB39CF901D468F9B00C7A360 /* libz.tbd */,
 				13B07FAE1A68108700A75B9A /* TextLayout */,
@@ -548,6 +551,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				AB5E69E81D491D50000E7DEC /* Datasets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

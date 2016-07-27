@@ -21,7 +21,7 @@
    WebView,
  } = ReactNative;
 
-// import Emdros from './app/API/Emdros';
+import Emdros from './app/API/Emdros';
 
 class TextLayout extends Component {
   render() {

@@ -20,7 +20,7 @@ const SCRIPTURE_STYLESHEET = require('./scripture-stylesheet.json');
 
 function openDatabase() {
   return new Promise((resolve, reject) => {
-    Emdros.open({name: 'SVB2/SourceView.bpt'}).then((emdros) => {
+    Emdros.open({name: 'Datasets/en/NLT/SourceView.bpt'}).then((emdros) => {
       DB = emdros;
       resolve();
     }).catch((error) => {
