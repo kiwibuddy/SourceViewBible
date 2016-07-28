@@ -1,273 +1,285 @@
 {
-   "fetchinfo" : {
-      "base" : {
-         "prepend_XML_declaration" : false,
-         "object_types" : {
-            "Book" : {
-               "docindexfeature" : "docindex",
-               "end" : "",
-               "start" : "{{ setvar 'TextKind' }}Prose{{ setvarend }}",
-            },
+  "fetchinfo":{
+    "base":{
+      "prepend_XML_declaration":false,
+      "object_types":{
+        "Book":{
+          "docindexfeature":"docindex",
+          "end":"",
+          "start":"{{ setvar 'TextKind' }}Prose{{ setvarend }}"
+        },
+        "EmbeddedQuotation":{
+          "docindexfeature":"docindex",
+          "end":"{{ setvar 'embedded_quotation' }}{{ setvarend }}",
+          "start":"{{ setvar 'embedded_quotation' }} embedded-quotation{{ setvarend }}"
+        },
+        "EmbeddedDocument":{
+          "docindexfeature":"docindex",
+          "end":"{{ setvar 'embedded_document' }}{{ setvarend }}",
+          "start":"{{ setvar 'embedded_document' }} embedded-document{{ setvarend }}"
+        },
+        "Source":{
+          "docindexfeature":"docindex",
+          "end":"</tr>",
+          "get":[
+            "source_name",
+            "source_occurrence",
+            "source_color"
+          ],
+          "start":"\
+<tr class=\"source{{ featurenomangle 2 }}\">\n\
+<!-- <td class=\"sourceTitle\">{{ feature 0 }} {{ featurenomangle 1 }}</td> -->\n\
+<td>"
+        },
+        "NonCanonicalToken":{
+          "docindexfeature":"docindex",
+          "end":"",
+          "get":[
+            "pre",
+            "surface",
+            "post"
+          ],
+          "start":"{{ if varequal 'EndParagraph' 'true' }}</p>{{ setvar 'EndParagraph' }}{{ setvarend }}{{ setvar 'css' }}{{ setvarend }}{{ endif }}{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }} NonCanonicalText\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}{{ endif }}{{ if varequal 'Italics' 'On' }}<i>{{ endif }}{{ if varequal 'Bold' 'On' }}<b>{{ endif }}{{ if varequal 'SmallCaps' 'On' }}<span class=\"small-caps\">{{ endif }}<span class=\"non_canonical_token\">{{ feature 0 }}{{ feature 1 }}{{ feature 2 }}</span>{{ if varequal 'SmallCaps' 'On' }}</span>{{ endif }}{{ if varequal 'Bold' 'On' }}</b>{{ endif }}{{ if varequal 'Italics' 'On' }}</i>{{ endif }}"
+        },
+        "CenteredPsalmHeading":{
+          "docindexfeature":"docindex",
+          "end":"</p></td></tr><tr><td class=\"src-ref\"></td><td class=\"src-clr-{{ emitvar 'source_color' }} txt\">{{ setvar 'css' }}{{ setvarend }}",
+          "start":"</td></tr><tr><td class=\"src-ref\"></td><td class=\"CenteredPsalmHeading\">{{ setvar 'ParagraphType' }}CenteredPsalmHeading{{ setvarend }}{{ setvar 'StartParagraph' }}true{{ setvarend }}"
+        },
+        "CenteredHeading":{
+          "docindexfeature":"docindex",
+          "end":"</td></tr><tr><td class=\"src-ref\"></td><td class=\"src-clr-{{ emitvar 'source_color' }} txt\">",
+          "get":[
+            "has_blank_line_before"
+          ],
+          "start":"</td></tr><tr><td class=\"src-ref\"></td>{{ setvar 'ParagraphType' }}{{ if featureequal 0 'true' }}CenteredHeading{{ else }}CenteredHeadingNoBlankLineBefore{{ endif }}{{ setvarend }}<td class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}true{{ setvarend }}"
+        },
+        "table":{
+          "docindexfeature":"docindex",
+          "end":"</table>",
+          "start":"<table class=\"list\">"
+        },
+        "tr":{
+          "docindexfeature":"docindex",
+          "end":"</tr>",
+          "start":"<tr class=\"list\">"
+        },
+        "td":{
+          "docindexfeature":"docindex",
+          "end":"</td>",
+          "get":[
+            "justification"
+          ],
+          "start":"<td class=\"list {{ featurenomangle 0 }}-justified\">"
+        },
+        "th":{
+          "docindexfeature":"docindex",
+          "end":"</th>",
+          "start":"<th class=\"list\">"
+        },
+        "Poetry":{
+          "docindexfeature":"docindex",
+          "end":"{{ setvar 'PoetryLineKind' }}{{ setvarend }}",
+          "get":[
+            "is_indented"
+          ],
+          "start":"{{ setvar 'TextKind' }}Poetry{{ setvarend }}{{ if featureequal 0 'false' }}{{ setvar 'PoetryZeroIndent' }}ZeroIndent{{ setvarend }}{{ else }}{{ setvar 'PoetryZeroIndent' }}{{ setvarend }}{{ endif }}"
+        },
+        "Stanza":{
+          "docindexfeature":"docindex",
+          "end":"",
+          "get":[
+            "is_first_in_poetry_section"
+          ],
+          "start":"{{ if featureequal 0 'true' }}{{ setvar 'PoetryLineKind' }}PoetryLineFirstInPoetry{{ emitvar 'PoetryZeroIndent' }}{{ setvarend }}{{ else }}{{ setvar 'PoetryLineKind' }}PoetryLineFirstInStanza{{ emitvar 'PoetryZeroIndent' }}{{ setvarend }}{{ endif }}{{ setvar 'TextKind' }}Poetry{{ setvarend }}"
+        },
+        "PoetryLine":{
+          "docindexfeature":"docindex",
+          "end":"<br />",
+          "start":"<span class=\"textIndent\" />"
+        },
+        "Bold":{
+          "docindexfeature":"docindex",
+          "end":"{{ setvar 'Bold' }}{{ setvarend }}",
+          "start":"{{ setvar 'Bold' }}On{{ setvarend }}"
+        },
+        "Italics":{
+          "docindexfeature":"docindex",
+          "end":"{{ setvar 'Italics' }}{{ setvarend }}",
+          "start":"{{ setvar 'Italics' }}On{{ setvarend }}"
+        },
+        "SmallCaps":{
+          "docindexfeature":"docindex",
+          "end":"{{ setvar 'SmallCaps' }}{{ setvarend }}",
+          "start":"{{ setvar 'SmallCaps' }}On{{ setvarend }}"
+        },
+        "VerseNumberToken":{
+          "docindexfeature":"docindex",
+          "end":"",
+          "get":[
+            "pre",
+            "surface",
 
-            "EmbeddedQuotation" : {
-               "docindexfeature" : "docindex",
-               "end" : "{{ setvar 'embedded_quotation' }}{{ setvarend }}",
-               "start" : "{{ setvar 'embedded_quotation' }} embedded-quotation{{ setvarend }}",
-            },
-
-            "EmbeddedDocument" : {
-               "docindexfeature" : "docindex",
-               "end" : "{{ setvar 'embedded_document' }}{{ setvarend }}",
-               "start" : "{{ setvar 'embedded_document' }} embedded-document{{ setvarend }}",
-            },
-
-            "Source" : {
-               "docindexfeature" : "docindex",
-               "end" : "</p></td></tr>{{ setvar 'css' }}{{ setvarend }}",
-               "get" : [
-                     "source_name",
-                     "source_occurrence",
-                     "source_color"
-                  ],
-               "start" : "{{ setvar 'source_color' }}{{ feature 2 }}{{ setvarend }}<tr><td class=\"src-ref\"><a name=\"Source_{{ feature 0 }}_{{ feature 1 }}_\"></a>{{ feature 0 }} {{ featurenomangle 1 }}</td><td class=\"src-clr-{{ emitvar 'source_color' }} txt\">{{ setvar 'StartParagraph' }}true{{ setvarend }}"
-            },
-            "NonCanonicalToken" : {
-               "docindexfeature" : "docindex",
-               "end" : "",
-               "get" : [
-                     "pre",
-                     "surface",
-                     "post"
-                     ],
-                     "start" : "{{ if varequal 'EndParagraph' 'true' }}</p>{{ setvar 'EndParagraph' }}{{ setvarend }}{{ setvar 'css' }}{{ setvarend }}{{ endif }}{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }} NonCanonicalText\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}{{ endif }}{{ if varequal 'Italics' 'On' }}<i>{{ endif }}{{ if varequal 'Bold' 'On' }}<b>{{ endif }}{{ if varequal 'SmallCaps' 'On' }}<span class=\"small-caps\">{{ endif }}<span class=\"non_canonical_token\">{{ feature 0 }}{{ feature 1 }}{{ feature 2 }}</span>{{ if varequal 'SmallCaps' 'On' }}</span>{{ endif }}{{ if varequal 'Bold' 'On' }}</b>{{ endif }}{{ if varequal 'Italics' 'On' }}</i>{{ endif }}"
-
-            },
-
-            "CenteredPsalmHeading" : {
-               "docindexfeature" : "docindex",
-               "end" : "</p></td></tr><tr><td class=\"src-ref\"></td><td class=\"src-clr-{{ emitvar 'source_color' }} txt\">{{ setvar 'css' }}{{ setvarend }}",
-               "start" : "</td></tr><tr><td class=\"src-ref\"></td><td class=\"CenteredPsalmHeading\">{{ setvar 'ParagraphType' }}CenteredPsalmHeading{{ setvarend }}{{ setvar 'StartParagraph' }}true{{ setvarend }}"
-
-            },
-            "CenteredHeading" : {
-               "docindexfeature" : "docindex",
-               "end" : "</td></tr><tr><td class=\"src-ref\"></td><td class=\"src-clr-{{ emitvar 'source_color' }} txt\">",
-               "get" : ["has_blank_line_before"],
-               "start" : "</td></tr><tr><td class=\"src-ref\"></td>{{ setvar 'ParagraphType' }}{{ if featureequal 0 'true' }}CenteredHeading{{ else }}CenteredHeadingNoBlankLineBefore{{ endif }}{{ setvarend }}<td class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}true{{ setvarend }}"
-
-            },
-            "table" : {
-               "docindexfeature" : "docindex",
-               "end" : "</table>",
-               "start" : "<table class=\"list\">"
-
-            },
-            "tr" : {
-               "docindexfeature" : "docindex",
-               "end" : "</tr>",
-               "start" : "<tr class=\"list\">"
-
-            },
-            "td" : {
-               "docindexfeature" : "docindex",
-               "end" : "</td>",
-               "get" : [
-                   "justification"
-               ],
-               "start" : "<td class=\"list {{ featurenomangle 0 }}-justified\">"
-
-            },
-            "th" : {
-               "docindexfeature" : "docindex",
-               "end" : "</th>",
-               "start" : "<th class=\"list\">"
-            },
-            "Poetry" : {
-               "docindexfeature" : "docindex",
-               "end" : "{{ setvar 'PoetryLineKind' }}{{ setvarend }}",
-               "get" : [
-                  "is_indented"
-               ],
-               "start" : "{{ setvar 'TextKind' }}Poetry{{ setvarend }}{{ if featureequal 0 'false' }}{{ setvar 'PoetryZeroIndent' }}ZeroIndent{{ setvarend }}{{ else }}{{ setvar 'PoetryZeroIndent' }}{{ setvarend }}{{ endif }}"
-            },
-            "Stanza" : {
-               "docindexfeature" : "docindex",
-               "end" : "",
-               "get" : ["is_first_in_poetry_section"],
-               "start" : "{{ if featureequal 0 'true' }}{{ setvar 'PoetryLineKind' }}PoetryLineFirstInPoetry{{ emitvar 'PoetryZeroIndent' }}{{ setvarend }}{{ else }}{{ setvar 'PoetryLineKind' }}PoetryLineFirstInStanza{{ emitvar 'PoetryZeroIndent' }}{{ setvarend }}{{ endif }}{{ setvar 'TextKind' }}Poetry{{ setvarend }}"
-
-            },
-            "PoetryLine" : {
-               "docindexfeature" : "docindex",
-               "end" : "{{ setvar 'PoetryLineKind' }}PoetryLineNonFirst{{ emitvar 'PoetryZeroIndent' }}{{ setvarend }}</p>{{ setvar 'css' }}{{ setvarend }}",
-               "start" : "{{ setvar 'StartParagraph' }}true{{ setvarend }}{{ setvar 'ParagraphType' }}{{ emitvar 'PoetryLineKind' }}{{ setvarend }}"
-
-            },
-            "Bold" : {
-               "docindexfeature" : "docindex",
-               "end" : "{{ setvar 'Bold' }}{{ setvarend }}",
-               "start" : "{{ setvar 'Bold' }}On{{ setvarend }}"
-
-            },
-            "Italics" : {
-               "docindexfeature" : "docindex",
-               "end" : "{{ setvar 'Italics' }}{{ setvarend }}",
-               "start" : "{{ setvar 'Italics' }}On{{ setvarend }}"
-            },
-            "SmallCaps" : {
-               "docindexfeature" : "docindex",
-               "end" : "{{ setvar 'SmallCaps' }}{{ setvarend }}",
-               "start" : "{{ setvar 'SmallCaps' }}On{{ setvarend }}"
-            },
-            "VerseNumberToken" : {
-               "docindexfeature" : "docindex",
-               "end" : "",
-               "get" : [
-                     "pre",
-                     "surface",
-                     "sphere_color_number",
-                     "Family",
-                     "Economics",
-                     "Government",
-                     "Religion",
-                     "Education",
-                     "MediaCom",
-                     "Celebration",
-                     ],
-                     "start" : "{{ if varequal 'EndParagraph' 'true' }}</p>{{ setvar 'EndParagraph' }}{{ setvarend }}{{ setvar 'css' }}{{ setvarend }}{{ endif }}{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}{{ endif }}{{ setvar 'new_css' }}{{ if featureequal 3 'true' }}Fam{{ endif }}{{ if featureequal 4 'true' }}Eco{{ endif }}{{ if featureequal 5 'true' }}Gov{{ endif }}{{ if featureequal 6 'true' }}Rel{{ endif }}{{ if featureequal 7 'true' }}Edu{{ endif }}{{ if featureequal 8 'true' }}Com{{ endif }}{{ if featureequal 9 'true' }}Cel{{ endif }}{{ setvarend }}{{ if varequal 'Italics' 'On' }}<i>{{ endif }}{{ if varequal 'Bold' 'On' }}<b>{{ endif }}{{ if varequal 'SmallCaps' 'On' }}<span class=\"small-caps\">{{ endif }}<a name=\"{{ emitvar 'verse_anchor' }}\"></a>{{ if varequal 'new_css' '' }}<span>{{ else }}<span class=\"spv-{{ emitvar 'new_css' }}\">{{ endif }}<span class=\"vs\">{{ featurenomangle 0 }}{{ featurenomangle 1 }}</span>&#160;{{ setvar 'css' }}{{ emitvar 'new_css' }}{{ setvarend }}</span>{{ if varequal 'SmallCaps' 'On' }}</span>{{ endif }}{{ if varequal 'Bold' 'On' }}</b>{{ endif }}{{ if varequal 'Italics' 'On' }}</i>{{ endif }}"
-
-            },
-            "Verse" : {
-               "docindexfeature" : "docindex",
-               "end" : "",
-               "get" : [
-                     "chapter",
-                     "verse_start",
-                     ],
-               "start" : "{{ setvar 'verse_anchor' }}Verse_{{ featurenomangle 0 }}_{{ featurenomangle 1 }}{{ setvarend }}"
-            },
-            "Paragraph" : {
-               "docindexfeature" : "docindex",
-               "get" : [
-                     "is_flush_left"
-                     ],
-               "end" : "</p>{{ setvar 'css' }}{{ setvarend }}",
-               "start" : "{{ if featureequal 0 'true' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ else }}{{ setvar 'ParagraphType' }}TextIndent1{{ setvarend }}{{ endif }}{{ setvar 'StartParagraph' }}true{{ setvarend }}{{ setvar 'TextKind' }}Prose{{ setvarend }}"
-            },
-            "ChapterNumberToken" : {
-               "docindexfeature" : "docindex",
-               "end" : "",
-               "get" : [
-                     "surface",
-                     "Family",
-                     "Economics",
-                     "Government",
-                     "Religion",
-                     "Education",
-                     "MediaCom",
-                     "Celebration",
-                  ],
-               "start" : "{{ if varequal 'EndParagraph' 'true' }}</p>{{ setvar 'EndParagraph' }}{{ setvarend }}{{ setvar 'css' }}{{ setvarend }}{{ endif }}{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}{{ endif }}{{ setvar 'new_css' }}{{ if featureequal 1 'true' }}Fam{{ endif }}{{ if featureequal 2 'true' }}Eco{{ endif }}{{ if featureequal 3 'true' }}Gov{{ endif }}{{ if featureequal 4 'true' }}Rel{{ endif }}{{ if featureequal 5 'true' }}Edu{{ endif }}{{ if featureequal 6 'true' }}Com{{ endif }}{{ if featureequal 7 'true' }}Cel{{ endif }}{{ setvarend }} <a name=\"Chapter_{{ feature 0 }}\"></a>{{ if varequal 'Italics' 'On' }}<i>{{ endif }}{{ if varequal 'Bold' 'On' }}<b>{{ endif }}{{ if varequal 'SmallCaps' 'On' }}<span class=\"small-caps\">{{ endif }}<span class=\"spv-{{ emitvar 'new_css' }}\"><b>{{ featurenomangle 0 }}</b>{{ setvar 'css' }}{{ emitvar 'new_css' }}{{ setvarend }}</span>{{ if varequal 'SmallCaps' 'On' }}</span>{{ endif }}{{ if varequal 'Bold' 'On' }}</b>{{ endif }}{{ if varequal 'Italics' 'On' }}</i>{{ endif }}"
-            },
-            "Token" : {
-               "docindexfeature" : "docindex",
-               "end" : "",
-               "get" : [
-                     "pre",
-                     "surface",
-                     "post",
-                     "sphere_color_number",
-                     "Family",
-                     "Economics",
-                     "Government",
-                     "Religion",
-                     "Education",
-                     "MediaCom",
-                     "Celebration",
-                     "black_override"
-                  ],
-               "start" : "{{ if varequal 'EndParagraph' 'true' }}</p>{{ setvar 'EndParagraph' }}{{ setvarend }}{{ setvar 'css' }}{{ setvarend }}{{ endif }}{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}{{ endif }}{{ setvar 'new_css' }}{{ if featureequal 3 '0' }}{{ else }}{{ if featureequal 4 'true' }}Fam{{ endif }}{{ if featureequal 5 'true' }}Eco{{ endif }}{{ if featureequal 6 'true' }}Gov{{ endif }}{{ if featureequal 7 'true' }}Rel{{ endif }}{{ if featureequal 8 'true' }}Edu{{ endif }}{{ if featureequal 9 'true' }}Com{{ endif }}{{ if featureequal 10 'true' }}Cel{{ endif }}{{ endif }}{{ setvarend }}{{ if varequal 'new_css' '' }}<span>{{ else }}<span class=\"spv-{{ emitvar 'new_css' }}\">{{ endif }}{{ setvar 'css' }}{{ emitvar 'new_css' }}{{ setvarend }}{{ if varequal 'Italics' 'On' }}<i>{{ endif }}{{ if varequal 'Bold' 'On' }}<b>{{ endif }}{{ if varequal 'SmallCaps' 'On' }}<span class=\"small-caps\">{{ endif }}{{ if featureequal 11 'true' }}<span class=\"src-clr-Black\">{{ endif }}<span class=\"dmy{{ emitvar 'embedded_document' }}{{ emitvar 'embedded_quotation' }}\">{{ featurenomangle 0 }}{{ feature 1 }}{{ featurenomangle 2 }}</span>{{ if featureequal 11 'true' }}</span>{{ endif }}{{ if varequal 'SmallCaps' 'On' }}</span>{{ endif }}{{ if varequal 'Bold' 'On' }}</b>{{ endif }}{{ if varequal 'Italics' 'On' }}</i>{{ endif }}</span>"
-            },
-            "NonWordToken" : {
-               "docindexfeature" : "docindex",
-               "end" : "",
-               "get" : [
-                     "pre",
-                     "surface",
-                     "post",
-                     "sphere_color_number",
-                     "Family",
-                     "Economics",
-                     "Government",
-                     "Religion",
-                     "Education",
-                     "MediaCom",
-                     "Celebration",
-                  ],
-               "start" : "{{ if varequal 'EndParagraph' 'true' }}</p>{{ setvar 'EndParagraph' }}{{ setvarend }}{{ setvar 'css' }}{{ setvarend }}{{ endif }}{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}{{ endif }}{{ setvar 'new_css' }}{{ if featureequal 3 '0' }}{{ else }}{{ if featureequal 4 'true' }}Fam{{ endif }}{{ if featureequal 5 'true' }}Eco{{ endif }}{{ if featureequal 6 'true' }}Gov{{ endif }}{{ if featureequal 7 'true' }}Rel{{ endif }}{{ if featureequal 8 'true' }}Edu{{ endif }}{{ if featureequal 9 'true' }}Com{{ endif }}{{ if featureequal 10 'true' }}Cel{{ endif }}{{ endif }}{{ setvarend }}{{ if varequal 'new_css' '' }}<span>{{ else }}<span class=\"spv-{{ emitvar 'new_css' }}\">{{ endif }}{{ setvar 'css' }}{{ emitvar 'new_css' }}{{ setvarend }}{{ if varequal 'Italics' 'On' }}<i>{{ endif }}{{ if varequal 'Bold' 'On' }}<b>{{ endif }}{{ if varequal 'SmallCaps' 'On' }}<span class=\"small-caps\">{{ endif }}<span class=\"dmy{{ emitvar 'embedded_document' }}{{ emitvar 'embedded_quotation' }}\">{{ featurenomangle 0 }}{{ feature 1 }}{{ featurenomangle 2 }}</span>{{ if varequal 'SmallCaps' 'On' }}</span>{{ endif }}{{ if varequal 'Bold' 'On' }}</b>{{ endif }}{{ if varequal 'Italics' 'On' }}</i>{{ endif }}</span>"
-            }
-         },
-         "postprocess" : [
-            {
-               "prefix" : "<table class=\"sourceview\">"
-            },
-            {
-               "suffix" : "</table>"
-            },
-            {
-               "instring" : "<table class=\"sourceview\"></td></tr>",
-               "outstring" : "<table class=\"sourceview\">",
-            },
-            {
-               "instring" : "<p class=\"FlushLeft\"></p>",
-               "outstring" : "",
-            },
-            {
-               "instring" : "<span> </span>",
-               "outstring" : " ",
-            },
-            {
-               "instring" : "txt\"> ",
-               "outstring" : "txt\">",
-            },
-            {
-               "instring" : "txt\"><span> ",
-               "outstring" : "txt\"><span>",
-            },
-            {
-               "instring" : "&#160; ",
-               "outstring" : "&#160;",
-            },
-            {
-              "instring": "</tr></p><tr>",
-              "oustring": "</tr><tr>"
-            }
-            ]
+          ],
+          "start":"\
+{{ if varequal 'StartParagraph' 'true' }}\
+<br />\
+{{ if varequal 'ParagraphType' 'textIndent' }}\
+<span class=\"{{ emitvar 'ParagraphType' }}\" />\
+{{ endif }}\
+{{ setvar 'StartParagraph' }}{{ setvarend }}\
+{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}\
+{{ endif }}\
+<span class=\"textVerse\">{{ featurenomangle 0 }}{{ featurenomangle 1 }}</span>"
+        },
+        "Verse":{
+          "docindexfeature":"docindex",
+          "end":"",
+          "get":[
+            "chapter",
+            "verse_start"
+          ],
+          "start":""
+        },
+        "Paragraph":{
+          "docindexfeature":"docindex",
+          "get":[
+            "is_flush_left"
+          ],
+          "end":"",
+          "start" : "\
+{{ if featureequal 0 'true' }}\
+{{ else }}\
+{{ setvar 'ParagraphType' }}textIndent{{ setvarend }}\
+{{ endif }}\
+{{ setvar 'StartParagraph' }}true{{ setvarend }}\
+{{ setvar 'TextKind' }}Prose{{ setvarend }}",
+        },
+        "ChapterNumberToken":{
+          "docindexfeature":"docindex",
+          "end":"",
+          "get":[
+            "surface",
+          ],
+          "start":"\
+{{ if varequal 'StartParagraph' 'true' }}\
+<br />\
+{{ if varequal 'ParagraphType' 'textIndent' }}\
+<span class=\"{{ emitvar 'ParagraphType' }}\" />\
+{{ endif }}\
+{{ setvar 'StartParagraph' }}{{ setvarend }}\
+{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}\
+{{ endif }}\
+<span class=\"textChapter\">{{ featurenomangle 0 }}</span>"
+        },
+        "Token":{
+          "docindexfeature":"docindex",
+          "end":"",
+          "get":[
+            "pre",
+            "surface",
+            "post",
+          ],
+          "start":"\
+{{ if varequal 'StartParagraph' 'true' }}\
+<br />\
+{{ if varequal 'ParagraphType' 'textIndent' }}\
+<span class=\"{{ emitvar 'ParagraphType' }}\" />\
+{{ endif }}\
+{{ setvar 'StartParagraph' }}{{ setvarend }}\
+{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}\
+{{ endif }}\
+{{ featurenomangle 0 }}{{ feature 1 }}{{ featurenomangle 2 }}"
+        },
+        "NonWordToken":{
+          "docindexfeature":"docindex",
+          "end":"",
+          "get":[
+            "pre",
+            "surface",
+            "post",
+          ],
+          "start":"\
+{{ if varequal 'StartParagraph' 'true' }}\
+<br />\
+{{ if varequal 'ParagraphType' 'textIndent' }}\
+<span class=\"{{ emitvar 'ParagraphType' }}\" />\
+{{ endif }}\
+{{ setvar 'StartParagraph' }}{{ setvarend }}\
+{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}\
+{{ endif }}\
+{{ featurenomangle 0 }}{{ feature 1 }}{{ featurenomangle 2 }}"
+        }
       },
-      "bookname" : {
-         "object_types" : {
-            "Book" : {
-               "docindexfeature" : "docindex",
-               "end" : "",
-               "get" : [
-                     "DJHRef",
-                  ],
-               "start" : "{{ featurenomangle 0 }}",
-            },
-         },
-         "prepend_XML_declaration" : false,
+      "postprocess":[
+        {
+          "prefix":"<table class=\"hideSource\">\n"
+        },
+        {
+          "suffix":"</table>"
+        },
+        {
+          "instring":"<table class=\"sourceview\"></td></tr>",
+          "outstring":"<table class=\"sourceview\">"
+        },
+        {
+          "instring":"<p class=\"FlushLeft\"></p>",
+          "outstring":""
+        },
+        {
+          "instring":"<span> </span>",
+          "outstring":" "
+        },
+        {
+          "instring":"txt\"> ",
+          "outstring":"txt\">"
+        },
+        {
+          "instring":"txt\"><span> ",
+          "outstring":"txt\"><span>"
+        },
+        {
+          "instring":"&#160; ",
+          "outstring":"&#160;"
+        },
+        {
+          "instring":"</tr></p><tr>",
+          "oustring":"</tr><tr>"
+        },
+        {
+          "instring":"<td><br />",
+          "outstring":"<td>"
+        },
+        {
+          "instring":"<br /><br />",
+          "outstring":"<br />"
+        }
+      ]
+    },
+    "bookname":{
+      "object_types":{
+        "Book":{
+          "docindexfeature":"docindex",
+          "end":"",
+          "get":[
+            "DJHRef"
+          ],
+          "start":"{{ featurenomangle 0 }}"
+        }
       },
-   },
-   "renderinfo" : {
-         "base" : {
-            "elements" : {
-               "blah" : {
-                  "end" : "</blah>",
-                  "start" : "<blah>"
-               },
-            },
-            "extends" : "base",
-            "fetch_stylesheet" : "base"
-         }
-      }
+      "prepend_XML_declaration":false
+    }
+  },
+  "renderinfo":{
+    "base":{
+      "elements":{
+        "blah":{
+          "end":"</blah>",
+          "start":"<blah>"
+        }
+      },
+      "extends":"base",
+      "fetch_stylesheet":"base"
+    }
+  }
 }
