@@ -13,7 +13,7 @@
           ],
           "start":"\
 <tr class=\"source{{ featurenomangle 2 }}\">\n\
-<!-- <td class=\"sourceTitle\">{{ feature 0 }} {{ featurenomangle 1 }}</td> -->\n\
+<td class=\"sourceTitle\">{{ feature 0 }} {{ featurenomangle 1 }}</td>\n\
 <td>"
         },
         "NonCanonicalToken":{

@@ -21,6 +21,8 @@
    WebView,
  } = ReactNative;
 
+const RNFS = require('react-native-fs');
+
 import Emdros from './app/API/Emdros';
 
 const Genesis = {
@@ -57,7 +59,9 @@ class TextLayout extends Component {
     Emdros.openDatabase().then(() => {
       const options = {monadSet: Genesis};
        Emdros.scripture(options).then(scripture => {
-        //  console.log(scripture);
+         //  console.log(scripture);
+         this._saveScripture(scripture);
+
          this.setState({scripture});
        }).catch(error => {
          console.log(error);
@@ -86,7 +90,17 @@ class TextLayout extends Component {
         <Text>{this.state.scripture}</Text>
       </ScrollView>
     );
-  }
+  };
+
+  _saveScripture(scripture) {
+    RNFS.writeFile('/tmp/Scripture.html', scripture, 'utf8')
+    .then((success) => {
+      console.log('Scripture written to /tmp/Scripture.html');
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+  };
 }
 
 const styles = StyleSheet.create({

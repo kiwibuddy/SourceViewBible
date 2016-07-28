@@ -8,6 +8,7 @@
   "dependencies": {
     "react": "15.2.1",
     "react-native": "0.30.0",
-    "react-native-emdros": "file:../../Libraries/Emdros/"
+    "react-native-emdros": "file:../../Libraries/Emdros/",
+    "react-native-fs": "^1.5.1"
   }
 }
