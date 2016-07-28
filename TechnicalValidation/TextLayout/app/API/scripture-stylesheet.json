@@ -3,21 +3,6 @@
     "base":{
       "prepend_XML_declaration":false,
       "object_types":{
-        "Book":{
-          "docindexfeature":"docindex",
-          "end":"",
-          "start":"{{ setvar 'TextKind' }}Prose{{ setvarend }}"
-        },
-        "EmbeddedQuotation":{
-          "docindexfeature":"docindex",
-          "end":"{{ setvar 'embedded_quotation' }}{{ setvarend }}",
-          "start":"{{ setvar 'embedded_quotation' }} embedded-quotation{{ setvarend }}"
-        },
-        "EmbeddedDocument":{
-          "docindexfeature":"docindex",
-          "end":"{{ setvar 'embedded_document' }}{{ setvarend }}",
-          "start":"{{ setvar 'embedded_document' }} embedded-document{{ setvarend }}"
-        },
         "Source":{
           "docindexfeature":"docindex",
           "end":"</tr>",
@@ -41,77 +26,10 @@
           ],
           "start":"{{ if varequal 'EndParagraph' 'true' }}</p>{{ setvar 'EndParagraph' }}{{ setvarend }}{{ setvar 'css' }}{{ setvarend }}{{ endif }}{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }} NonCanonicalText\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}{{ endif }}{{ if varequal 'Italics' 'On' }}<i>{{ endif }}{{ if varequal 'Bold' 'On' }}<b>{{ endif }}{{ if varequal 'SmallCaps' 'On' }}<span class=\"small-caps\">{{ endif }}<span class=\"non_canonical_token\">{{ feature 0 }}{{ feature 1 }}{{ feature 2 }}</span>{{ if varequal 'SmallCaps' 'On' }}</span>{{ endif }}{{ if varequal 'Bold' 'On' }}</b>{{ endif }}{{ if varequal 'Italics' 'On' }}</i>{{ endif }}"
         },
-        "CenteredPsalmHeading":{
-          "docindexfeature":"docindex",
-          "end":"</p></td></tr><tr><td class=\"src-ref\"></td><td class=\"src-clr-{{ emitvar 'source_color' }} txt\">{{ setvar 'css' }}{{ setvarend }}",
-          "start":"</td></tr><tr><td class=\"src-ref\"></td><td class=\"CenteredPsalmHeading\">{{ setvar 'ParagraphType' }}CenteredPsalmHeading{{ setvarend }}{{ setvar 'StartParagraph' }}true{{ setvarend }}"
-        },
-        "CenteredHeading":{
-          "docindexfeature":"docindex",
-          "end":"</td></tr><tr><td class=\"src-ref\"></td><td class=\"src-clr-{{ emitvar 'source_color' }} txt\">",
-          "get":[
-            "has_blank_line_before"
-          ],
-          "start":"</td></tr><tr><td class=\"src-ref\"></td>{{ setvar 'ParagraphType' }}{{ if featureequal 0 'true' }}CenteredHeading{{ else }}CenteredHeadingNoBlankLineBefore{{ endif }}{{ setvarend }}<td class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}true{{ setvarend }}"
-        },
-        "table":{
-          "docindexfeature":"docindex",
-          "end":"</table>",
-          "start":"<table class=\"list\">"
-        },
-        "tr":{
-          "docindexfeature":"docindex",
-          "end":"</tr>",
-          "start":"<tr class=\"list\">"
-        },
-        "td":{
-          "docindexfeature":"docindex",
-          "end":"</td>",
-          "get":[
-            "justification"
-          ],
-          "start":"<td class=\"list {{ featurenomangle 0 }}-justified\">"
-        },
-        "th":{
-          "docindexfeature":"docindex",
-          "end":"</th>",
-          "start":"<th class=\"list\">"
-        },
-        "Poetry":{
-          "docindexfeature":"docindex",
-          "end":"{{ setvar 'PoetryLineKind' }}{{ setvarend }}",
-          "get":[
-            "is_indented"
-          ],
-          "start":"{{ setvar 'TextKind' }}Poetry{{ setvarend }}{{ if featureequal 0 'false' }}{{ setvar 'PoetryZeroIndent' }}ZeroIndent{{ setvarend }}{{ else }}{{ setvar 'PoetryZeroIndent' }}{{ setvarend }}{{ endif }}"
-        },
-        "Stanza":{
-          "docindexfeature":"docindex",
-          "end":"",
-          "get":[
-            "is_first_in_poetry_section"
-          ],
-          "start":"{{ if featureequal 0 'true' }}{{ setvar 'PoetryLineKind' }}PoetryLineFirstInPoetry{{ emitvar 'PoetryZeroIndent' }}{{ setvarend }}{{ else }}{{ setvar 'PoetryLineKind' }}PoetryLineFirstInStanza{{ emitvar 'PoetryZeroIndent' }}{{ setvarend }}{{ endif }}{{ setvar 'TextKind' }}Poetry{{ setvarend }}"
-        },
         "PoetryLine":{
           "docindexfeature":"docindex",
           "end":"<br />",
           "start":"<span class=\"textIndent\" />"
-        },
-        "Bold":{
-          "docindexfeature":"docindex",
-          "end":"{{ setvar 'Bold' }}{{ setvarend }}",
-          "start":"{{ setvar 'Bold' }}On{{ setvarend }}"
-        },
-        "Italics":{
-          "docindexfeature":"docindex",
-          "end":"{{ setvar 'Italics' }}{{ setvarend }}",
-          "start":"{{ setvar 'Italics' }}On{{ setvarend }}"
-        },
-        "SmallCaps":{
-          "docindexfeature":"docindex",
-          "end":"{{ setvar 'SmallCaps' }}{{ setvarend }}",
-          "start":"{{ setvar 'SmallCaps' }}On{{ setvarend }}"
         },
         "VerseNumberToken":{
           "docindexfeature":"docindex",
@@ -217,34 +135,6 @@
         },
         {
           "suffix":"</table>"
-        },
-        {
-          "instring":"<table class=\"sourceview\"></td></tr>",
-          "outstring":"<table class=\"sourceview\">"
-        },
-        {
-          "instring":"<p class=\"FlushLeft\"></p>",
-          "outstring":""
-        },
-        {
-          "instring":"<span> </span>",
-          "outstring":" "
-        },
-        {
-          "instring":"txt\"> ",
-          "outstring":"txt\">"
-        },
-        {
-          "instring":"txt\"><span> ",
-          "outstring":"txt\"><span>"
-        },
-        {
-          "instring":"&#160; ",
-          "outstring":"&#160;"
-        },
-        {
-          "instring":"</tr></p><tr>",
-          "oustring":"</tr><tr>"
         },
         {
           "instring":"<td><br />",
