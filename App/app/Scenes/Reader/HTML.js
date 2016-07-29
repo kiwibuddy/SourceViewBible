@@ -23,7 +23,7 @@ module.exports = `
         padding:0;
         border-spacing: 0;
         border-collapse: collapse;
-        margin-left: -135pt;
+        margin-left: -220pt;
       }
       .showSource {
         margin-right: -135pt;
@@ -57,9 +57,14 @@ module.exports = `
         color: #9B9B9B;
         text-align: right;
         white-space: nowrap;
-        padding-top: 2pt;
+        padding-top: 13pt;
         padding-right: 15pt;
         text-transform: uppercase;
+        width: 210pt;
+        display: block;
+      }
+      .sourceText {
+        padding: 0 5pt;
       }
       .textTitle {
         font-family: georgia;
