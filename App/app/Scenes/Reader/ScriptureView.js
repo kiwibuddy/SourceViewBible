@@ -27,19 +27,14 @@ export default class ScriptureView extends Component {
   shouldFetchScripture: bool = true;
 
   state: {
-    book: any,
-    chapter: any,
     scripture: any,
     loading: bool,
   };
 
   constructor(props: Object) {
     super(props);
-    const { book, chapter } = props;
 
     this.state = {
-      book: book,
-      chapter: chapter,
       scripture: null,
       loading: false,
     };
@@ -51,7 +46,7 @@ export default class ScriptureView extends Component {
   }
 
   componentDidMount() {
-    const { book, chapter } = this.state;
+    const { book, chapter } = this.props;
     this._setScripture(book, chapter);
   }
 
