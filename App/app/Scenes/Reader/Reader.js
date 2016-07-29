@@ -21,7 +21,7 @@ import { Book } from '../../Database';
 
 type Props = {
   bookID: string,
-  chapterNumber: number,
+  anchor: string,
   navigate: Function,
 };
 
@@ -30,13 +30,11 @@ export default class Reader extends Component {
 
   render() {
     const book = Book.findByID(this.props.bookID);
-    const chapterNumber = this.props.chapterNumber || 1;
-    const chapter = book.chapters[chapterNumber - 1];
 
     return (
       <ScriptureView
         book={book}
-        chapter={chapter}
+        anchor={this.props.anchor}
         navigate={this.props.navigate}
       />
     );

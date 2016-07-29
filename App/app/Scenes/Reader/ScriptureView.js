@@ -23,13 +23,22 @@ import Emdros from '../../API/Emdros';
 
 const HTML = require('./HTML');
 
-export default class ScriptureView extends Component {
-  shouldFetchScripture: bool = true;
+type Props = {
+  book: Object,
+  anchor: string,
+  navigate: Function,
+};
 
-  state: {
-    scripture: any,
-    loading: bool,
-  };
+type State = {
+  scripture: any,
+  loading: bool,
+};
+
+export default class ScriptureView extends Component {
+  props: Props;
+  state: State;
+
+  shouldFetchScripture: bool = true;
 
   constructor(props: Object) {
     super(props);
@@ -41,13 +50,13 @@ export default class ScriptureView extends Component {
   }
 
   componentWillReceiveProps(nextProps: Object) {
-    const { book, chapter } = nextProps;
-    this._setScripture(book, chapter);
+    const { book, anchor } = nextProps;
+    this._setScripture(book, anchor);
   }
 
   componentDidMount() {
-    const { book, chapter } = this.props;
-    this._setScripture(book, chapter);
+    const { book, anchor } = this.props;
+    this._setScripture(book, anchor);
   }
 
   componentWillUnmount() {
@@ -69,7 +78,7 @@ export default class ScriptureView extends Component {
     );
   }
 
-  _setScripture = (book: Object, chapter: Object) => {
+  _setScripture = (book: Object, anchor: string) => {
     Emdros.scripture({monadSet: book.monadSet}).then((content) => {
       if (this.shouldFetchScripture) {
         const scripture = this._renderScripture(content);
@@ -91,8 +100,10 @@ export default class ScriptureView extends Component {
   };
 
   _renderInjectedJavascript = () => {
-    const { chapter } = this.props;
-    return `location.hash = '#chapter-${chapter.chapterNumber}'`;
+    const { anchor } = this.props;
+    const javascript = `location.hash = '#${anchor}'`;
+    console.log(javascript);
+    return javascript;
   };
 
   _debugScripture(scripture: string) {

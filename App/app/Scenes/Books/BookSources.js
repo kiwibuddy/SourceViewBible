@@ -165,7 +165,7 @@ export default class BookSources extends Component {
     if (occurrence) {
       const { book } = this.state;
       const chapterNumber = occurrence.chapterNumber || 1;
-      this.props.navigate(readerURL({bookID: book.id, chapterNumber, title: book.name}));
+      this.props.navigate(readerURL({bookID: book.id, anchor: `source-${source.name}-1`, title: book.name}));
     }
   };
 }
