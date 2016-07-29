@@ -80,7 +80,7 @@ export default class ScriptureView extends Component {
   }
 
   _setScripture = (book: Object, chapter: Object, anchor?: string) => {
-    Emdros.scripture({monadSet: chapter.monadSet}).then((content) => {
+    Emdros.scripture({monadSet: book.monadSet}).then((content) => {
       if (this.shouldFetchScripture) {
         const scripture = this._renderScripture(content);
 
@@ -101,7 +101,11 @@ export default class ScriptureView extends Component {
   };
 
   _renderInjectedJavascript = () => {
-    return null;
+    const { anchor } = this.props;
+    if (!anchor) return null;
+
+    const javascript = `location.hash = '#${anchor}'`;
+    return javascript;
   };
 
   _debugScripture(scripture: string) {
