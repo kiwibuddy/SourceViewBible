@@ -141,6 +141,10 @@
           "outstring":"<td>"
         },
         {
+          "instring":"\" /><br />",
+          "outstring":"\" />"
+        },
+        {
           "instring":"<br /><br />",
           "outstring":"<br />"
         }
