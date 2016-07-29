@@ -75,62 +75,14 @@
       .textIndent {
         padding-left: 2em;
       }
-      .sphere {
-        position: relative;
-        display: inline-block;
-      }
-      .sFamily {
-        position: absolute;
-        bottom: 2pt;
-        height: 2pt;
-        background-color: #FF3A30;
-        display: block;
-      }
-      .sEconomics {
-        position: absolute;
-        bottom: 2pt;
-        height: 2pt;
-        background-color: #FF9700;
-        display: block;
-      }
-      .sGovernment {
-        position: absolute;
-        bottom: 2pt;
-        height: 2pt;
-        background-color: #FECB01;
-        display: block;
-      }
-      .sReligion {
-        position: absolute;
-        bottom: 2pt;
-        height: 2pt;
-        background-color: #88C807;
-        display: block;
-      }
-      .sEducation {
-        position: absolute;
-        bottom: 2pt;
-        height: 2pt;
-        background-color: #25B8D7;
-        display: block;
-      }
-      .sCommunication {
-        position: absolute;
-        bottom: 2pt;
-        height: 2pt;
-        background-color: #5A5AD3;
-        display: block;
-      }
-      .sCelebration {
-        position: absolute;
-        bottom: 2pt;
-        height: 2pt;
-        background-color: #C44DF8;
-        display: block;
-      }
-      .sAll {
+      .highlightFamily.highlightEconomics.highlightGovernment.highlightReligion.highlightEducation.highlightCommunication.highlightCelebration {
         background: linear-gradient(180deg, #FFD8D6, #FFD8D6 14.28%, #FFEACC 14.28%, #FFEACC 28.56%, #FFF5CD 28.56%, #FFF5CD 42.84%, #E8F4CE 42.84%, #E8F4CE 57.12%, #D4F1F7 57.12%, #D4F1F7 71.4%, #DEDEF7 71.4%, #DEDEF7 85.68%, #F9DEEF 85.68%, #F9DEEF);
-        padding: 2pt 0;
+      }
+      .highlightFamily {
+        background: linear-gradient(180deg, #FFD8D6, #FFD8D6 100%);
+      }
+      .highlightFamily.highlightEconomics {
+        background: linear-gradient(180deg, #FFD8D6, #FFD8D6 50%, #FFEACC 50%, #FFEACC 50%);
       }
       .highlight {
         background-color: rgba(255, 204, 1, .20);
@@ -141,7 +93,7 @@
     <table class="hideSource">
       <tr class="sourceBlack">
         <td class="sourceTitle">The Narrator 1</td>
-        <td><span class="sAll"><span class="textChapter">1</span><span class="textVerse">1</span> In the beginning God created the heavens and the earth.<span class="textVerse"> 2</span> The earth was formless and empty, and darkness covered the deep waters. And the Spirit of God was hovering over the surface of the waters.<br /></span>
+        <td><span class="highlightFamily highlightEconomics"><span class="textChapter">1</span><span class="textVerse">1</span> In the beginning God created the heavens and the earth.<span class="textVerse"> 2</span> The earth was formless and empty, and darkness covered the deep waters. And the Spirit of God was hovering over the surface of the waters.<br /></span>
         <span class="textIndent" /><span class="textVerse">3</span> Then God said,</td>
       </tr>
       <tr class="sourceRed">
