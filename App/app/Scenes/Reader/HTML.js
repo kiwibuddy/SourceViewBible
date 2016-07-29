@@ -15,6 +15,7 @@ module.exports = `
         padding:0;
         border-spacing: 0;
         border-collapse: collapse;
+        margin-left: -135pt;
       }
       .showSource {
         margin-right: -135pt;
