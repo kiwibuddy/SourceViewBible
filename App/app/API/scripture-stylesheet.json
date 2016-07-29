@@ -26,6 +26,11 @@
           ],
           "start":""
         },
+        "CenteredPsalmHeading" : {
+          "docindexfeature" : "docindex",
+          "end" : "</td></tr>",
+          "start" : "<tr><td class=\"sourceTitle\">&nbsp;</td><td class=\"textTitle\">"
+        },
         "PoetryLine":{
           "docindexfeature":"docindex",
           "end":"<br />",
