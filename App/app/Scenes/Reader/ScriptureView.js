@@ -62,7 +62,6 @@ export default class ScriptureView extends Component {
 
     return (
       <WebView
-        contentInset={{top: 20}}
         decelerationRate="normal"
         style={styles.container}
         source={{html: this.state.scripture}}
@@ -71,7 +70,7 @@ export default class ScriptureView extends Component {
   }
 
   _setScripture = (book: Object, chapter: Object) => {
-    Emdros.scripture({monadSet: chapter.monadSet}).then((content) => {
+    Emdros.scripture({monadSet: book.monadSet}).then((content) => {
       if (this.shouldFetchScripture) {
         const scripture = this._renderScripture(content);
         this.setState({

@@ -72,6 +72,15 @@ export class Book extends Realm.Object {
     return count && count.count || 0;
   }
 
+  get monadSet(): Object {
+    const firstChapter = this.chapters[0];
+    const lastChapter = this.chapters[this.chapterCount - 1];
+    return {
+      first: firstChapter.firstMonad,
+      last: lastChapter.lastMonad
+    };
+  }
+
   get sources(): Realm.List {
     return this.sourceRelations.map(relation => relation.source);
   }
