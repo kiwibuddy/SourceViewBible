@@ -17,6 +17,8 @@ import {
 
 import { readerURL } from '../../Navigation';
 
+const RNFS = require('react-native-fs');
+
 import Emdros from '../../API/Emdros';
 
 const HTML = require('./HTML');
@@ -60,9 +62,12 @@ export default class ScriptureView extends Component {
   render() {
     if (!this.state.scripture) return null;
 
+    const injectedJavaScript = this._renderInjectedJavascript();
+
     return (
       <WebView
         decelerationRate="normal"
+        injectedJavaScript={injectedJavaScript}
         style={styles.container}
         source={{html: this.state.scripture}}
       />
@@ -73,6 +78,11 @@ export default class ScriptureView extends Component {
     Emdros.scripture({monadSet: book.monadSet}).then((content) => {
       if (this.shouldFetchScripture) {
         const scripture = this._renderScripture(content);
+
+        if (__DEV__) {
+          this._debugScripture(scripture);
+        }
+
         this.setState({
           scripture,
           loading: false
@@ -83,6 +93,21 @@ export default class ScriptureView extends Component {
 
   _renderScripture = (content: string) => {
     return HTML.replace("{{BODY}}", content);
+  };
+
+  _renderInjectedJavascript = () => {
+    const { chapter } = this.props;
+    return `location.hash = '#chapter-${chapter.chapterNumber}'`;
+  };
+
+  _debugScripture(scripture: string) {
+    RNFS.writeFile('/tmp/Scripture.html', scripture, 'utf8')
+    .then((success) => {
+      console.log('Scripture written to /tmp/Scripture.html');
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
   };
 }
 

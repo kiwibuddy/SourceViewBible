@@ -88,7 +88,7 @@
 {{ setvar 'StartParagraph' }}{{ setvarend }}\
 {{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}\
 {{ endif }}\
-<span class=\"textChapter\">{{ featurenomangle 0 }}</span>"
+<a name=\"chapter-{{ feature 0 }}\" /><span class=\"textChapter\">{{ featurenomangle 0 }}</span>"
         },
         "Token":{
           "docindexfeature":"docindex",
