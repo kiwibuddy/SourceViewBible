@@ -102,7 +102,6 @@ export default class ScriptureView extends Component {
   _renderInjectedJavascript = () => {
     const { anchor } = this.props;
     const javascript = `location.hash = '#${anchor}'`;
-    console.log(javascript);
     return javascript;
   };
 
