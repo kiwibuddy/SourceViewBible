@@ -13,8 +13,8 @@
           ],
           "start":"\
 <tr class=\"source{{ featurenomangle 2 }}\">\n\
-<td class=\"sourceTitle\"><a name=\"source-{{ feature 0 }}-{{ feature 1 }}\" />{{ feature 0 }} {{ featurenomangle 1 }}</td>\n\
-<td>"
+<td class=\"sourceTitle\">{{ feature 0 }} {{ featurenomangle 1 }}</td>\n\
+<td class=\"sourceText\"><a name=\"source-{{ feature 0 }}-{{ feature 1 }}\" />"
         },
         "NonCanonicalToken":{
           "docindexfeature":"docindex",
