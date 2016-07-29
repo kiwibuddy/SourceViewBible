@@ -1,3 +1,11 @@
+/* @flow */
+'use strict';
+
+import {
+  Colors,
+  StyleSheet,
+} from '../../Common';
+
 module.exports = `
 <!DOCTYPE html>
 <html>
@@ -32,16 +40,16 @@ module.exports = `
         margin-top: -10pt;
       }
       .sourceBlack {
-        color: #323B43;
+        color: ${Colors.sources.narrator.tint};
       }
       .sourceRed {
-        color: #E8302C;
-      }
-      .sourceBlue {
-        color: #1D99DF;
+        color: ${Colors.sources.god.tint};
       }
       .sourceGreen {
-        color: #16C658;
+        color: ${Colors.sources.lead.tint};
+      }
+      .sourceBlue {
+        color: ${Colors.sources.support.tint};
       }
       .sourceTitle {
         font-family: -apple-system, "Helvetica Neue", "Lucida Grande";
