@@ -101,6 +101,8 @@ const char RCTKeyCString[] = {48, 120, 51, 48, 97, 49, 50, 56, 50, 57, 32, 48, 1
 //    extern std::string render_objects(EmdrosEnv *pEnv, const std::string& db_name, const std::string& JSON_stylesheet, const std::string& stylesheet, monad_m first_monad, monad_m last_monad, bool& bResult);
 
     try {
+        [[OCDBenchmark sharedBenchmark] begin];
+        
         NSString *stylesheet = ([options[@"stylesheet"] isKindOfClass:[NSString class]] ? options[@"stylesheet"] : [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:options[@"stylesheet"] options:0 error:nil] encoding:NSUTF8StringEncoding]);
 
         std::string dbName("");
@@ -109,6 +111,9 @@ const char RCTKeyCString[] = {48, 120, 51, 48, 97, 49, 50, 56, 50, 57, 32, 48, 1
         bool bResult;
         std::string rendered_objects = render_objects(_emdrosEnv, dbName, stylesheetString, stylesheetName, from, to, bResult);
         NSString *string = [NSString stringWithUTF8String:rendered_objects.c_str()];
+        
+        [[OCDBenchmark sharedBenchmark] end:[NSString stringWithFormat:@"stringFrom: %li, to: %li", (long)from, (long)to]];
+        
         if (completion) completion(string, nil);
     } catch (EMdFDBException e) {
         std::cerr << "ERROR: EMdFDBException (Database error)..." << std::endl;
