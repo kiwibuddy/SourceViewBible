@@ -74,6 +74,13 @@ module.exports = `
         color: #323B43;
         text-align: Center;
       }
+      .textSection {
+        font-family: georgia;
+        font-style: italic;
+        font-size: 15pt;
+        color: #323B43;
+        text-align: Center;
+      }
       .textChapter {
         font-family: charter;
         color: #CF1E00;
