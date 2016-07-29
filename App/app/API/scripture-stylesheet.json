@@ -1,29 +1,175 @@
 {
-    "base" : {
-        "object_types": {
-            "Source": {
-              "docindexfeature" : "docindex",
-              "get": [ "source_color" ],
-              "start": "React.createElement(Text, {ref: \"monad-{{ firstmonad }}\", style:[styles.scripture, styles.sourceColor{{ featurenomangle 0 }}]}, \"",
-              "end": "\"),",
-            },
-            "Token": {
-              "docindexfeature" : "docindex",
-                "get": [ "pre", "surface", "post" ],
-                "start": "{{ featurenomangle 0 }}{{ featurenomangle 1 }}{{ featurenomangle 2 }}",
-                "end": ""
-            },
-            "NonWordToken": {
-              "docindexfeature" : "docindex",
-                "get": [ "pre", "surface", "post" ],
-                "start": "{{ featurenomangle 0 }}{{ featurenomangle 1 }}{{ featurenomangle 2 }}",
-                "end": ""
-            }
+  "fetchinfo":{
+    "base":{
+      "prepend_XML_declaration":false,
+      "object_types":{
+        "Source":{
+          "docindexfeature":"docindex",
+          "end":"</tr>",
+          "get":[
+            "source_name",
+            "source_occurrence",
+            "source_color"
+          ],
+          "start":"\
+<tr class=\"source{{ featurenomangle 2 }}\">\n\
+<td class=\"sourceTitle\" style=\"display: none\">{{ feature 0 }} {{ featurenomangle 1 }}</td>\n\
+<td>"
         },
-        "priority_list": [
-        ],
-        "prepend_XML_declaration" : false
+        "NonCanonicalToken":{
+          "docindexfeature":"docindex",
+          "end":"",
+          "get":[
+            "pre",
+            "surface",
+            "post"
+          ],
+          "start":""
+        },
+        "PoetryLine":{
+          "docindexfeature":"docindex",
+          "end":"<br />",
+          "start":"<span class=\"textIndent\" />"
+        },
+        "VerseNumberToken":{
+          "docindexfeature":"docindex",
+          "end":"",
+          "get":[
+            "pre",
+            "surface",
+
+          ],
+          "start":"\
+{{ if varequal 'StartParagraph' 'true' }}\
+<br />\
+{{ if varequal 'ParagraphType' 'textIndent' }}\
+<span class=\"{{ emitvar 'ParagraphType' }}\" />\
+{{ endif }}\
+{{ setvar 'StartParagraph' }}{{ setvarend }}\
+{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}\
+{{ endif }}\
+<span class=\"textVerse\">{{ featurenomangle 0 }}{{ featurenomangle 1 }}</span>"
+        },
+        "Verse":{
+          "docindexfeature":"docindex",
+          "end":"",
+          "get":[
+            "chapter",
+            "verse_start"
+          ],
+          "start":""
+        },
+        "Paragraph":{
+          "docindexfeature":"docindex",
+          "get":[
+            "is_flush_left"
+          ],
+          "end":"",
+          "start" : "\
+{{ if featureequal 0 'true' }}\
+{{ else }}\
+{{ setvar 'ParagraphType' }}textIndent{{ setvarend }}\
+{{ endif }}\
+{{ setvar 'StartParagraph' }}true{{ setvarend }}\
+{{ setvar 'TextKind' }}Prose{{ setvarend }}",
+        },
+        "ChapterNumberToken":{
+          "docindexfeature":"docindex",
+          "end":"",
+          "get":[
+            "surface",
+          ],
+          "start":"\
+{{ if varequal 'StartParagraph' 'true' }}\
+<br />\
+{{ if varequal 'ParagraphType' 'textIndent' }}\
+<span class=\"{{ emitvar 'ParagraphType' }}\" />\
+{{ endif }}\
+{{ setvar 'StartParagraph' }}{{ setvarend }}\
+{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}\
+{{ endif }}\
+<span class=\"textChapter\">{{ featurenomangle 0 }}</span>"
+        },
+        "Token":{
+          "docindexfeature":"docindex",
+          "end":"",
+          "get":[
+            "pre",
+            "surface",
+            "post",
+          ],
+          "start":"\
+{{ if varequal 'StartParagraph' 'true' }}\
+<br />\
+{{ if varequal 'ParagraphType' 'textIndent' }}\
+<span class=\"{{ emitvar 'ParagraphType' }}\" />\
+{{ endif }}\
+{{ setvar 'StartParagraph' }}{{ setvarend }}\
+{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}\
+{{ endif }}\
+{{ featurenomangle 0 }}{{ feature 1 }}{{ featurenomangle 2 }}"
+        },
+        "NonWordToken":{
+          "docindexfeature":"docindex",
+          "end":"",
+          "get":[
+            "pre",
+            "surface",
+            "post",
+          ],
+          "start":"\
+{{ if varequal 'StartParagraph' 'true' }}\
+<br />\
+{{ if varequal 'ParagraphType' 'textIndent' }}\
+<span class=\"{{ emitvar 'ParagraphType' }}\" />\
+{{ endif }}\
+{{ setvar 'StartParagraph' }}{{ setvarend }}\
+{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}\
+{{ endif }}\
+{{ featurenomangle 0 }}{{ feature 1 }}{{ featurenomangle 2 }}"
+        }
+      },
+      "postprocess":[
+        {
+          "prefix":"<table class=\"hideSource\">\n"
+        },
+        {
+          "suffix":"</table>"
+        },
+        {
+          "instring":"<td><br />",
+          "outstring":"<td>"
+        },
+        {
+          "instring":"<br /><br />",
+          "outstring":"<br />"
+        }
+      ]
     },
-    "dictionaries": {
+    "bookname":{
+      "object_types":{
+        "Book":{
+          "docindexfeature":"docindex",
+          "end":"",
+          "get":[
+            "DJHRef"
+          ],
+          "start":"{{ featurenomangle 0 }}"
+        }
+      },
+      "prepend_XML_declaration":false
     }
+  },
+  "renderinfo":{
+    "base":{
+      "elements":{
+        "blah":{
+          "end":"</blah>",
+          "start":"<blah>"
+        }
+      },
+      "extends":"base",
+      "fetch_stylesheet":"base"
+    }
+  }
 }
