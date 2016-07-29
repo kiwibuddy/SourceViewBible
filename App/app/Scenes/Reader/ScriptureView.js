@@ -104,7 +104,7 @@ export default class ScriptureView extends Component {
     const { anchor } = this.props;
     if (!anchor) return null;
 
-    const javascript = `location.hash = '#${anchor}'`;
+    const javascript = `location.hash = '#${encodeURIComponent(anchor)}'`;
     return javascript;
   };
 
