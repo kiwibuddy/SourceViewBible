@@ -8,6 +8,8 @@
 #define LOG_TAG "Emdros"
 #define LOGV(...) __android_log_print(ANDROID_LOG_VERBOSE, LOG_TAG, __VA_ARGS__)
 
+const char RCTKeyCString[] = {48, 120, 51, 48, 97, 49, 50, 56, 50, 57, 32, 48, 120, 48, 50, 50, 56, 102, 53, 50, 55, 32, 48, 120, 49, 56, 55, 49, 56, 49, 51, 100, 32, 48, 120, 54, 53, 50, 53, 54, 55, 101, 57, 32, 48, 120, 53, 99, 101, 97, 50, 56, 98, 53, 32, 48, 120, 51, 100, 55, 100, 52, 98, 99, 55, 32, 48, 120, 53, 48, 48, 102, 101, 99, 100, 49, 32, 48, 120, 54, 99, 57, 51, 53, 54, 56, 100, 0};
+
 jfieldID getEmdrosEnvField(JNIEnv *env, jobject obj)
 {
     jclass c = env->GetObjectClass(obj);
@@ -49,7 +51,7 @@ void Java_com_sourceviewbible_emdros_Emdros_connect(JNIEnv *env, jobject obj, js
   std::string hostname("localhost");
   std::string user("emdf");
   eBackendKind backend_kind = kBPT;
-  std::string password = "";
+  std::string password(RCTKeyCString);
 
   EmdrosEnv *emdrosEnv;
   try {

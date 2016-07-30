@@ -13,7 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Environment;
 import android.content.res.AssetManager;
-import java.io.IOException;
 import android.util.Log;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

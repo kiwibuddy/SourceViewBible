@@ -18,6 +18,7 @@ import android.util.Log;
 import java.util.Map;
 import java.util.HashMap;
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 
 public class EmdrosModule extends ReactContextBaseJavaModule {
   private static final byte[] RCTKeyCString = new byte[] {51, 102, 97, 98, 50, 101, 100, 99, 100, 56, 54, 54, 51, 99, 54, 98, 97, 97, 57, 49, 102, 102, 101, 98, 57, 50, 56, 101, 99, 54, 49, 101, 48, 49, 49, 98, 49, 57, 101, 100, 56, 54, 54, 100, 55, 51, 54, 53, 101, 55, 100, 49, 57, 52, 101, 52, 51, 100, 99, 52, 55, 50, 54, 52};
@@ -69,8 +70,12 @@ public class EmdrosModule extends ReactContextBaseJavaModule {
   @Override
   public Map<String, Object> getConstants() {
     final Map<String, Object> constants = new HashMap<>();
-    String key = new String(RCTKeyCString, "US-ASCII");
-    constants.put(RCTKey, key);
+    try {
+      String key = new String(RCTKeyCString, "US-ASCII");
+      constants.put(RCTKey, key);
+    } catch (UnsupportedEncodingException e) {
+      Log.v("Emdros", "uh oh: " + e.toString());
+    }
     return constants;
   }
 
