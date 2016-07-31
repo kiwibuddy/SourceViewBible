@@ -81,7 +81,7 @@ export default class ReaderSearch extends Component {
   }
 
   _renderSectionHeader = (sectionData: Object, sectionID: any) => {
-    const title = sectionID;
+    const title = Localizable.t(sectionID);
     return (
       <View style={styles.sectionHeaderContainer}>
         <Text style={styles.sectionHeaderTitle}>{title}</Text>
