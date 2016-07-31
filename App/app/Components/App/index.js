@@ -96,9 +96,16 @@ export default class App extends Component {
 
   _renderNavigationBar = (props: any) => {
     const { navigationState } = props;
-    const route = navigationState.routes[navigationState.index];
+    const navigationRoute = navigationState.routes[navigationState.index];
+
+    const { route, params} = router.match(navigationRoute.path);
+    const Scene = route.scene;
+    if (Scene && typeof(Scene.NavigationBar) !== "undefined") {
+      return <Scene.NavigationBar {...params} />;
+    }
+
     return (
-      <NavigationBar title={route.title}/>
+      <NavigationBar title={navigationRoute.title}/>
     );
   };
 

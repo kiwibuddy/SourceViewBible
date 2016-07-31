@@ -18,6 +18,7 @@ import {
 import ScriptureView from './ScriptureView';
 
 import { Book } from '../../Database';
+import * as Navigation from '../../Components/Navigation';
 
 type Props = {
   bookID: string,
@@ -26,7 +27,14 @@ type Props = {
   navigate: Function,
 };
 
+const NavigationBar = (props: Props) => {
+  const book = Book.findByID(props.bookID);
+  return <Navigation.NavigationBar title={book.name} />;
+};
+
 export default class Reader extends Component {
+  static NavigationBar = NavigationBar;
+
   props: Props;
 
   render() {
