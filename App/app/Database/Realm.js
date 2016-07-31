@@ -43,9 +43,9 @@ function BCVReferenceMatchesInText(text: string) {
           if (!isNaN(verseNumber)) {
             return [{book, chapterNumber, verseNumber}];
           }
-        } else {
-          return [{book, chapterNumber}];
         }
+
+        return [{book, chapterNumber}];
       }
     }
   }
