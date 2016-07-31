@@ -53,7 +53,7 @@
 {{ setvar 'StartParagraph' }}{{ setvarend }}\
 {{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}\
 {{ endif }}\
-<span class=\"textVerse\">{{ featurenomangle 0 }}{{ featurenomangle 1 }}</span>"
+<span class=\"textVerse\"><a name=\"verse-{{ featurenomangle 1 }}\" />{{ featurenomangle 0 }}{{ featurenomangle 1 }}</span>"
         },
         "Verse":{
           "docindexfeature":"docindex",
