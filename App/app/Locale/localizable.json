@@ -73,7 +73,7 @@
     done: "Done",
     cancel: "Cancel",
     "search-references": "Search References",
-    "bcv": "Chapter and Verses",
-    "bso": "Source and Occurrences"
+    "bcv": "Chapter and Verse",
+    "bso": "Source and Occurrence"
   }
 }

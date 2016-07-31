@@ -91,25 +91,36 @@ export default class ReaderSearch extends Component {
 
   _renderRow = (reference: Object) => {
     const { book } = reference;
-    const route = readerURL({bookID: book.id, chapterNumber: 1, anchor: 'chapter-1', title: book.name});
+    const chapterNumber = reference.chapterNumber || 1;
+    const name = this._nameFromReference(reference);
+    const route = readerURL({bookID: book.id, chapterNumber, anchor: `chapter-${chapterNumber}`, title: book.name});
 
     return (
       <TouchableOpacity onPress={() => this._navigate(route)}>
         <View style={styles.row}>
-          <Text style={StyleSheet.styles.cell.title}>{book.name}</Text>
+          <Text style={StyleSheet.styles.cell.title}>{name}</Text>
         </View>
       </TouchableOpacity>
     );
   };
 
   _search = (text: string) => {
-    console.log('SEARCH! ' + text);
-
     const references = Bible.searchReferences(text);
     const sections = Object.keys(references);
 
     return ds.cloneWithRowsAndSections(references, sections);
   };
+
+  _nameFromReference(reference: Object) {
+    const { book, chapterNumber, verseNumber } = reference;
+    if (book && chapterNumber && verseNumber) {
+      return `${book.name} ${chapterNumber}:${verseNumber}`;
+    } else if (book && chapterNumber) {
+      return `${book.name} ${chapterNumber}`;
+    } else {
+      return book.name;
+    }
+  }
 
   _navigate = (route: Object) => {
     this.props.navigate(BACK, () => {

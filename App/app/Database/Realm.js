@@ -6,6 +6,22 @@ import Realm from 'realm';
 import Emdros from 'react-native-emdros';
 const RNFS = require('react-native-fs');
 
+function referenceMatchesInText(text: string) {
+  const matches = [];
+
+  const regex = /([1-3]?\s?[A-Z]*)\s?([0-9]{1,3})?(?:\\:([0-9]{1,3}))?/gi;
+  let m;
+  while ((m = regex.exec(text)) !== null) {
+    if (m.index === regex.lastIndex) {
+        regex.lastIndex++;
+    }
+    matches.push(m);
+  }
+
+  if (matches.length < 1) return null;
+  return matches;
+}
+
 const BibleSchema = {
   name: 'Bible',
   properties: {
@@ -21,11 +37,42 @@ export class Bible extends Realm.Object {
 
   // {"bcv": [], "bso": [], "books": []}
   static searchReferences(text: string): Object {
-    if (!text) return {}
-    const books = Book.all().filtered('name CONTAINS[c] $0', text).sorted('textOrder').map(book => ({book}));
-    return {
-      "books": books,
-    };
+    const references = {};
+    if (!text) return references;
+
+
+    const matches = referenceMatchesInText(text);
+    if (!matches) return references;
+
+    const match = matches[0];
+
+    const bookName = match[1].trim();
+
+    const books = Book.all().filtered('name CONTAINS[c] $0', bookName).sorted('textOrder').map(book => ({book}));
+    if (books.length > 0) {
+      const book = Book.all().filtered('name BEGINSWITH[c] $0', bookName).sorted('textOrder')[0];
+      if (book) {
+        if (match.length > 2 && match[2] !== undefined) {
+          const chapterNumber = parseInt(match[2]);
+          if (!isNaN(chapterNumber) && chapterNumber <= book.chapterCount) {
+            const chapter = book.chapters[chapterNumber - 1];
+
+            if (matches.length > 1 && matches[2] !== undefined && matches[2][0] !== undefined) {
+              const verseNumber = parseInt(matches[2][0]);
+              if (!isNaN(verseNumber)) {
+                references["bcv"] = [{book, chapterNumber, verseNumber}];
+              }
+            } else {
+              references["bcv"] = [{book, chapterNumber}];
+            }
+          }
+        }
+      }
+
+      references["books"] = books;
+    }
+
+    return references;
   }
 }
 Bible.schema = BibleSchema;
