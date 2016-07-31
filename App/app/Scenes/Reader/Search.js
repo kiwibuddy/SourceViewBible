@@ -92,6 +92,8 @@ export default class ReaderSearch extends Component {
   _renderRow = (reference: Object) => {
     const { book } = reference;
     const chapterNumber = reference.chapterNumber || 1;
+    const verseNumber = reference.verseNumber;
+    
     const name = this._nameFromReference(reference);
     const route = readerURL({bookID: book.id, chapterNumber, anchor: `chapter-${chapterNumber}`, title: book.name});
 
