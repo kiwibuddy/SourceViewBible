@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import {
   ListView,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -42,6 +43,14 @@ export default class ReaderSearch extends Component {
     return (
       <View style={styles.container}>
         <NavigationBar>
+          <TextInput
+            autoFocus={true}
+            onChangeText={this._search}
+            placeholder={Localizable.t('search-references')}
+            returnKeyType="search"
+            style={styles.textInput}
+            value={this.state.search}
+          />
           <TouchableOpacity
             onPress={() => this.props.navigate(BACK)}
             style={{position: 'absolute', right: 0}}
@@ -80,6 +89,10 @@ export default class ReaderSearch extends Component {
       </TouchableOpacity>
     );
   };
+
+  _search = (text: string) => {
+    this.setState({search: text});
+  };
 }
 
 const styles = StyleSheet.create({
@@ -111,5 +124,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'center',
     marginLeft: 15,
+  },
+  textInput: {
+    height: 26,
+    borderWidth: 0.5,
+    borderColor: '#0f0f0f',
+    flex: 1,
+    fontSize: 13,
+    padding: 4,
   },
 });

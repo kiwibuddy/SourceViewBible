@@ -71,6 +71,7 @@
     },
     more: "More",
     done: "Done",
-    cancel: "Cancel"
+    cancel: "Cancel",
+    "search-references": "Search References"
   }
 }
