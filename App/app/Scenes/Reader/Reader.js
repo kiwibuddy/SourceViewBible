@@ -27,10 +27,16 @@ type Props = {
   navigate: Function,
 };
 
-const NavigationBar = (props: Props) => {
-  const book = Book.findByID(props.bookID);
-  return <Navigation.NavigationBar title={book.name} />;
-};
+class NavigationBar extends Component {
+  props: Props;
+
+  render() {
+    const book = Book.findByID(this.props.bookID);
+    return (
+      <Navigation.NavigationBar title={book.name} />
+    );
+  }
+}
 
 export default class Reader extends Component {
   static NavigationBar = NavigationBar;
