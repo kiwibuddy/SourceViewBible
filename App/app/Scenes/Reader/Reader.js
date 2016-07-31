@@ -5,7 +5,9 @@ import React, { Component, PropTypes } from 'react';
 const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
 
 import {
+  Image,
   Text,
+  TouchableOpacity,
   View
 } from 'react-native';
 
@@ -20,6 +22,8 @@ import ScriptureView from './ScriptureView';
 import { Book } from '../../Database';
 import * as Navigation from '../../Components/Navigation';
 
+import { readerSearchURL } from '../../Navigation';
+
 type Props = {
   bookID: string,
   chapterNumber: number,
@@ -27,16 +31,18 @@ type Props = {
   navigate: Function,
 };
 
-class NavigationBar extends Component {
-  props: Props;
-
-  render() {
-    const book = Book.findByID(this.props.bookID);
-    return (
-      <Navigation.NavigationBar title={book.name} />
-    );
-  }
-}
+const NavigationBar = (props: Props) => {
+  const book = Book.findByID(props.bookID);
+  return (
+    <Navigation.NavigationBar>
+      <Navigation.NavigationBarButton
+        imageSource={require('../../Components/Navigation/Images/nav-search.png')}
+        onPress={() => {props.navigate(readerSearchURL({modal: true}))}}
+      />
+      <Navigation.NavigationBar.Title title={book.name} />
+    </Navigation.NavigationBar>
+  );
+};
 
 export default class Reader extends Component {
   static NavigationBar = NavigationBar;

@@ -70,6 +70,7 @@
       }
     },
     more: "More",
-    done: "Done"
+    done: "Done",
+    cancel: "Cancel"
   }
 }

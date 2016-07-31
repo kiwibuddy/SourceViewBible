@@ -101,7 +101,7 @@ export default class App extends Component {
     const { route, params} = router.match(navigationRoute.path);
     const Scene = route.scene;
     if (Scene && typeof(Scene.NavigationBar) !== "undefined") {
-      return <Scene.NavigationBar {...params} />;
+      return <Scene.NavigationBar {...params} navigate={this._navigate} />;
     }
 
     return (

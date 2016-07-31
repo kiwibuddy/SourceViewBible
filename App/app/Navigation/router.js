@@ -28,14 +28,16 @@ function urlFor(path: string, params: any) {
   let url = path;
 
   const extraParams = {};
-  Object.keys(params).forEach(param => {
-    const paramKey = '/:' + param;
-    if (url.indexOf(paramKey) != -1) {
-      url = url.replace(paramKey, '/' + params[param]);
-    } else {
-      extraParams[param] = params[param];
-    }
-  });
+  if (params) {
+    Object.keys(params).forEach(param => {
+      const paramKey = '/:' + param;
+      if (url.indexOf(paramKey) != -1) {
+        url = url.replace(paramKey, '/' + params[param]);
+      } else {
+        extraParams[param] = params[param];
+      }
+    });    
+  }
 
   url = url.replace(/\/:.*\?/g, '/').replace(/\?/g, '');
 
