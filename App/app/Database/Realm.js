@@ -18,6 +18,15 @@ export class Bible extends Realm.Object {
     const bible = realm.objects('Bible')[0];
     return bible.wordCount;
   }
+
+  // {"bcv": [], "bso": [], "books": []}
+  static searchReferences(text: string): Object {
+    console.log(text);
+    const books = Book.all().filtered('name CONTAINS[c] $0', text).sorted('textOrder').map(book => ({book}));
+    return {
+      "books": books,
+    };
+  }
 }
 Bible.schema = BibleSchema;
 
@@ -56,10 +65,6 @@ export class Book extends Realm.Object {
 
   static findByID(id: string) {
     return realm.objectForPrimaryKey('Book', id || '');
-  }
-
-  static get wordCount() {
-    return realm.objects('Book').reduce((sum, book) => sum += book.wordCount, 0);
   }
 
   countOfSourceType(sourceType: string): number {

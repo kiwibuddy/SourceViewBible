@@ -17,9 +17,9 @@ import {
 } from '../../Common';
 
 import { NavigationBar, NavigationBarButton } from '../../Components/Navigation';
-import { BACK } from '../../Navigation';
+import { BACK, readerURL } from '../../Navigation';
 
-import Database from '../../Database';
+import { Bible } from '../../Database';
 
 type State = {
   search?: string,
@@ -32,7 +32,7 @@ export default class ReaderSearch extends Component {
   constructor(props: Object) {
     super(props);
 
-    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
+    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     this.state = {
       dataSource,
       search: props.search
@@ -79,19 +79,35 @@ export default class ReaderSearch extends Component {
     );
   };
 
-  _renderRow = (data: Object) => {
+  _renderRow = (reference: Object) => {
+    const { book } = reference;
+    const route = readerURL({bookID: book.id, chapterNumber: 1, anchor: 'chapter-1', title: book.name});
+
     return (
       <TouchableOpacity
-        onPress={() => {}}
+        onPress={() => this._navigate(route)}
         style={styles.row}
       >
-        <Text style={StyleSheet.styles.cell.title}>{data.title}</Text>
+        <Text style={StyleSheet.styles.cell.title}>{book.name}</Text>
       </TouchableOpacity>
     );
   };
 
   _search = (text: string) => {
-    this.setState({search: text});
+    const references = Bible.searchReferences(text);
+    const sections = Object.keys(references);
+
+    const dataSource = this.state.dataSource.cloneWithRowsAndSections(references, sections);
+    this.setState({
+      dataSource,
+      search: text
+    });
+  };
+
+  _navigate = (route: Object) => {
+    this.props.navigate(BACK, () => {
+      this.props.navigate(route);
+    });
   };
 }
 
