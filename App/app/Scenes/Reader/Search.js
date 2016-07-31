@@ -48,7 +48,7 @@ export default class ReaderSearch extends Component {
       <View style={styles.container}>
         <NavigationBar>
           <TextInput
-            autoCapitalize="none"
+            autoCapitalize="words"
             autoCorrect={false}
             autoFocus={true}
             clearButtonMode="always"
