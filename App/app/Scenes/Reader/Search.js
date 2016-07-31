@@ -50,6 +50,7 @@ export default class ReaderSearch extends Component {
           <TextInput
             autoCapitalize="none"
             autoCorrect={false}
+            autoFocus={true}
             clearButtonMode="always"
             onChangeText={text => {
               this.setState({search: text});
@@ -72,6 +73,8 @@ export default class ReaderSearch extends Component {
           renderSectionHeader={this._renderSectionHeader}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={StyleSheet.styles.separator} />}
           style={styles.listView}
+          keyboardShouldPersistTaps={true}
+          keyboardDismissMode="on-drag"
         />
       </View>
     );
