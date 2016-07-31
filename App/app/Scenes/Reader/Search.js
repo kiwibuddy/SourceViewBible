@@ -21,9 +21,13 @@ import { BACK, readerURL } from '../../Navigation';
 
 import { Bible } from '../../Database';
 
+const ds = new ListView.DataSource({
+  rowHasChanged: (r1, r2) => r1 !== r2,
+  sectionHeaderHasChanged: (h1, h2) => h1 !== h2,
+});
+
 type State = {
-  search?: string,
-  dataSource: any
+  search: string,
 };
 
 export default class ReaderSearch extends Component {
@@ -32,23 +36,26 @@ export default class ReaderSearch extends Component {
   constructor(props: Object) {
     super(props);
 
-    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     this.state = {
-      dataSource,
       search: props.search
     };
   }
 
   render() {
+    const dataSource = this._search(this.state.search);
+
     return (
       <View style={styles.container}>
         <NavigationBar>
           <TextInput
-            autoFocus={true}
-            onChangeText={this._search}
+            autoCapitalize="none"
+            autoCorrect={false}
+            clearButtonMode="always"
+            onChangeText={text => {
+              this.setState({search: text});
+            }}
             placeholder={Localizable.t('search-references')}
-            returnKeyType="search"
-            style={styles.textInput}
+            style={styles.searchTextInput}
             value={this.state.search}
           />
           <TouchableOpacity
@@ -60,7 +67,7 @@ export default class ReaderSearch extends Component {
         </NavigationBar>
         <ListView
           enableEmptySections={true}
-          dataSource={this.state.dataSource}
+          dataSource={dataSource}
           renderRow={this._renderRow}
           renderSectionHeader={this._renderSectionHeader}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={StyleSheet.styles.separator} />}
@@ -84,24 +91,21 @@ export default class ReaderSearch extends Component {
     const route = readerURL({bookID: book.id, chapterNumber: 1, anchor: 'chapter-1', title: book.name});
 
     return (
-      <TouchableOpacity
-        onPress={() => this._navigate(route)}
-        style={styles.row}
-      >
-        <Text style={StyleSheet.styles.cell.title}>{book.name}</Text>
+      <TouchableOpacity onPress={() => this._navigate(route)}>
+        <View style={styles.row}>
+          <Text style={StyleSheet.styles.cell.title}>{book.name}</Text>
+        </View>
       </TouchableOpacity>
     );
   };
 
   _search = (text: string) => {
+    console.log('SEARCH! ' + text);
+
     const references = Bible.searchReferences(text);
     const sections = Object.keys(references);
 
-    const dataSource = this.state.dataSource.cloneWithRowsAndSections(references, sections);
-    this.setState({
-      dataSource,
-      search: text
-    });
+    return ds.cloneWithRowsAndSections(references, sections);
   };
 
   _navigate = (route: Object) => {
@@ -141,12 +145,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginLeft: 15,
   },
-  textInput: {
-    height: 26,
-    borderWidth: 0.5,
-    borderColor: '#0f0f0f',
+  searchTextInput: {
     flex: 1,
-    fontSize: 13,
-    padding: 4,
+    backgroundColor: 'white',
+    borderColor: '#cccccc',
+    borderRadius: 3,
+    borderWidth: 1,
+    paddingLeft: 8,
+    height: 26,
   },
 });

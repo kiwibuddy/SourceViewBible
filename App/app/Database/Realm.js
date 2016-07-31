@@ -21,7 +21,7 @@ export class Bible extends Realm.Object {
 
   // {"bcv": [], "bso": [], "books": []}
   static searchReferences(text: string): Object {
-    console.log(text);
+    if (!text) return {}
     const books = Book.all().filtered('name CONTAINS[c] $0', text).sorted('textOrder').map(book => ({book}));
     return {
       "books": books,
