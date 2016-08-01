@@ -165,5 +165,44 @@ class Occurrence extends Realm.Object {
 }
 Occurrence.schema = OccurrenceSchema;
 
+const ActantSchema = {
+  name: 'Actant',
+  properties: {
+    name: 'string',
+    professions: {type: 'list', objectType: 'Profession'},
+  }
+};
+
+const ProfessionSchema = {
+  name: 'Profession',
+  properties: {
+    name: 'string'
+  }
+};
+
+class Profession extends Realm.Object {
+
+}
+Profession.schema = ProfessionSchema;
+
+const StatementSchema = {
+  name: 'Statement',
+  properties: {
+    firstMonad: 'int',
+    lastMonad: 'int',
+    sources: {type: 'list', objectType: 'Actant'},
+    recipients: {type: 'list', objectType: 'Actant'},
+  }
+};
+
+class Statement extends Realm.Object {
+  // static get words() {
+  //   const query = ``;
+  //   emdros.query(query, {firstMonad: this.firstMonad, lastMonad: this.lastMonad, count: true}).then((data) => {
+  //   }).catch(error => console.log(error));
+  // }
+}
+Statement.schema = StatementSchema;
+
 const Schema = [Bible, Book, Chapter, Source, SourceRelation, Sphere, Count, Content, Occurrence];
 export default Schema;
