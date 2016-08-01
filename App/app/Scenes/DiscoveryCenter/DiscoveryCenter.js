@@ -69,7 +69,7 @@ export default class DiscoveryCenter extends Component {
         <NavigationBar title={Localizable.t('discovery-center')}>
           <TouchableOpacity
             onPress={() => this.props.navigate(BACK)}
-            style={{position: 'absolute', left: 0}}
+            style={{position: 'absolute', left: 16}}
           >
             <Text style={StyleSheet.styles.navigationBar.doneButtonTitle}>{Localizable.t('done')}</Text>
           </TouchableOpacity>

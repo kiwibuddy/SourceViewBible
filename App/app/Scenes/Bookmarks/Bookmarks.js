@@ -85,7 +85,7 @@ export default class Bookmarks extends Component {
       <View style={styles.container}>
         <NavigationBar>
           <SegmentedControl
-            style={{flex: 1}}
+            style={{flex: 1, marginLeft: 16}}
             tintColor={Colors.tint}
             values={SEGMENTS}
             selectedIndex={this.state.selectedSegmentIndex}
@@ -93,6 +93,7 @@ export default class Bookmarks extends Component {
           />
           <TouchableOpacity
             onPress={() => this.props.navigate(BACK)}
+            style={{marginRight: 16}}
           >
             <Text style={[StyleSheet.styles.navigationBar.doneButtonTitle, {marginLeft: 16}]}>{Localizable.t('done')}</Text>
           </TouchableOpacity>
