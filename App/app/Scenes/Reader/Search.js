@@ -129,23 +129,18 @@ export default class ReaderSearch extends Component {
   };
 
   _routeFromReference = (reference: Object) => {
-    const { book, source, occurrence, chapterNumber, verseNumber } = reference;
+    const { book, source, occurrence, occurrenceNumber, chapterNumber, verseNumber } = reference;
     const route = {bookID: book.id, chapterNumber: chapterNumber || 1, anchor: null, title: book.name, description: book.name};
 
     if (source) {
-      if (source.occurrences.count > 0) {
-        if (source.occurrences[0] && source.occurrences[0].chapterNumber) {
-          route["chapterNumber"] = source.occurrences[0].chapterNumber;
-        }
-      }
-
-      if (occurrence > 0) {
-        route["description"] = `${book.name} ${source.name} ${occurrence}`;
+      if (occurrence) {
+        route["chapterNumber"] = occurrence.chapterNumber;
+        route["description"] = `${book.name} ${source.name} ${occurrenceNumber}`;
+        route["anchor"] = `source-${source.name}-${occurrenceNumber}`;
       } else {
         route["description"] = `${book.name} ${source.name}`;
+        route["anchor"] = `source-${source.name}-1`;
       }
-
-      route["anchor"] = `source-${source.name}-${occurrence || 1}`;
     } else if (verseNumber > 0) {
       route["anchor"] = `verse-${chapterNumber}-${verseNumber}`;
       route["description"] = `${book.name} ${chapterNumber}:${verseNumber}`;

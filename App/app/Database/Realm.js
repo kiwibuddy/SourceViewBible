@@ -75,17 +75,21 @@ function BSOReferencesInText(text: string) {
       if (sourceName.length > 0) {
         const sourceRelations = book.sourceRelations.filtered('source.name BEGINSWITH[c] $0', sourceName);
         if (sourceRelations.length > 0) {
-          const source = sourceRelations.map(relation => relation.source).sort((a,b) => a.name > b.name ? 1 : -1)[0];
-          if (source) {
+          const sources = sourceRelations.map(relation => relation.source).sort((a,b) => a.name > b.name ? 1 : -1);
+          const references = [];
+          sources.forEach(source => {
             if (match[3] !== undefined) {
-              const occurrence = parseInt(match[3]);
-              if (!isNaN(occurrence)) {
-                return [{book, source, occurrence}];
+              const occurrenceNumber = parseInt(match[3]);
+              if (!isNaN(occurrenceNumber) && occurrenceNumber > 0 && occurrenceNumber <= source.occurrences.length) {
+                const occurrence = source.occurrences[occurrenceNumber - 1];
+                references.push({book, source, occurrence, occurrenceNumber});
               }
+            } else {
+              references.push({book, source});
             }
+          });
 
-            return [{book, source}];
-          }
+          return references;
         }
       }
     }
