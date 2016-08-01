@@ -221,18 +221,20 @@ export default class Bookmarks extends Component {
   };
 
   _iconForRoute = (route: Object) => {
-    switch (route.path) {
-      case '/Reader/Search': return require('../../Images/tabs/search.png');
-      case '/Discover': return require('../../Images/tabs/discover.png');
-      case '/Books': return require('../../Images/tabs/chapters.png');
-      case '/Sources': return require('../../Images/tabs/sources.png');
-      case '/Spheres': return require('../../Images/tabs/spheres.png');
-      case '/Reader': return require('../../Images/tabs/chapters.png');
+    const icons = {
+      '/Reader/Search': require('../../Images/tabs/search.png'),
+      '/Discover': require('../../Images/tabs/discover.png'),
+      '/Books': require('../../Images/tabs/chapters.png'),
+      '/Sources': require('../../Images/tabs/sources.png'),
+      '/Spheres': require('../../Images/tabs/spheres.png'),
+      '/Reader': require('../../Images/tabs/chapters.png'),
+    };
 
-      default:
-        console.log('Cannot find icon for path:' + route.path);
-        return null;
-    }
+    const path = Object.keys(icons).find(path => route.path.startsWith(path));
+    if (path) return icons[path];
+
+    console.log('Cannot find icon for path:' + route.path);
+    return null;
   };
 
   _onSegmentedControlValueChanged = (value: number) => {
