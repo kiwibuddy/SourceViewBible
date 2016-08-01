@@ -167,9 +167,15 @@ Occurrence.schema = OccurrenceSchema;
 
 const ActantSchema = {
   name: 'Actant',
+  primaryKey: 'id',
   properties: {
-    name: 'string',
+    id: 'string',
+    name: {type: 'string', indexed: true},
+    firstInitial: {type: 'string', optional: true},
+    occurrences: {type: 'list', objectType: 'Occurrence'},
     professions: {type: 'list', objectType: 'Profession'},
+    wordCount: {type: 'int', default: 0},
+    words: {type: 'list', objectType: 'Count'},
   }
 };
 
