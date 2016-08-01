@@ -135,7 +135,7 @@ export default class ReaderSearch extends Component {
 
     if (source) {
       if (occurrence) {
-        route["chapterNumber"] = occurrence.chapterNumber;
+        route["chapterNumber"] = 1;
         route["description"] = `${book.name} ${source.name} ${occurrenceNumber}`;
         route["anchor"] = `source-${source.name}-${occurrenceNumber}`;
       } else {
