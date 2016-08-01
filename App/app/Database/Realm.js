@@ -55,7 +55,7 @@ function BCVReferencesInText(text: string) {
 function BSOReferencesInText(text: string) {
   const matches = [];
 
-  const regex = /([1-3]?\s?[A-Z]*)\s?([A-Z]*)\s?([0-9]{1,3})?/gi;
+  const regex = /([1-3]?\s?[A-Z]*)\s?([A-Z\D]*)\s?([0-9]{1,3})?/gi;
 
   let m;
   while ((m = regex.exec(text)) !== null) {
