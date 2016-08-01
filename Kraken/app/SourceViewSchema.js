@@ -64,6 +64,7 @@ const ChapterSchema = {
     sphereCounts: {type: 'list', objectType: 'Count'},
     sphereWordCount: {type: 'int', default: 0},
     wordCount: {type: 'int', default: 0},
+    verseCount: {type: 'int', default: 0},
   }
 };
 

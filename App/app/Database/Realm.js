@@ -43,7 +43,9 @@ function BCVReferencesInText(text: string) {
           if (matches.length > 1 && matches[2] !== undefined && matches[2][0] !== undefined) {
             const verseNumber = parseInt(matches[2][0]);
             if (!isNaN(verseNumber)) {
-              references.push({book, chapterNumber, verseNumber});
+              if (verseNumber > 0 && verseNumber <= chapter.verseCount) {
+                references.push({book, chapterNumber, verseNumber});
+              }
             } else {
               references.push({book, chapterNumber});
             }
@@ -227,6 +229,7 @@ const ChapterSchema = {
     sphereCounts: {type: 'list', objectType: 'Count'},
     sphereWordCount: {type: 'int', default: 0},
     wordCount: {type: 'int', default: 0},
+    verseCount: {type: 'int', default: 0},
   }
 };
 

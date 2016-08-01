@@ -93,6 +93,7 @@ export async function seedChapters(emdros: Object, realm: Object) {
   await seedSphereCounts(emdros, realm);
 
   await seedWordCounts(emdros, realm);
+  await seedChapterVerseCounts(emdros, realm);
 }
 
 async function seedWordCounts(emdros, realm) {
@@ -289,6 +290,47 @@ async function seedChapterSphereWordCount(emdros, realm) {
               for(let [index, chapter] of book.chapters.entries()) {
                 const wordCount = chapterData[chapter.chapterNumber.toString()]["Token"] || 0;
                 chapter.sphereWordCount = wordCount;
+              }
+            }
+          });
+        }
+      }
+
+      resolve();
+    }).catch((error) => {
+      console.log(error);
+    })
+  });
+}
+
+async function seedChapterVerseCounts(emdros, realm) {
+  console.log('Seeding Chapter Verse Counts...');
+
+  const query = `
+  {
+    "objectTypeName": "Book",
+    "feature": "DJHRef",
+    "buckets": {
+      "objectTypeName": "Chapter",
+      "feature": "chapter",
+      "buckets": {
+        "objectTypeName": "Verse"
+      }
+    }
+  }
+  `;
+
+  return new Promise((resolve, reject) => {
+    emdros.query(query, {count: true}).then((data) => {
+      for (let [index, book] of realm.objects('Book').entries()) {
+        const bookData = data["Book"]["DJHRef"][book.DJHRef];
+        if (bookData != null) {
+          realm.write(() => {
+            const chapterData = bookData["Chapter"]["chapter"];
+            if (chapterData != null) {
+              for(let [index, chapter] of book.chapters.entries()) {
+                const verseCount = chapterData[chapter.chapterNumber.toString()]["Verse"] || 0;
+                chapter.verseCount = verseCount;
               }
             }
           });
