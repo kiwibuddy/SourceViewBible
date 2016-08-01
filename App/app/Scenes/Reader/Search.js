@@ -21,13 +21,10 @@ import { BACK, readerURL } from '../../Navigation';
 
 import { Bible } from '../../Database';
 
-const ds = new ListView.DataSource({
-  rowHasChanged: (r1, r2) => r1 !== r2,
-  sectionHeaderHasChanged: (h1, h2) => h1 !== h2,
-});
-
 type State = {
+  dataSource: any,
   search: string,
+  reference?: Object
 };
 
 export default class ReaderSearch extends Component {
@@ -36,14 +33,14 @@ export default class ReaderSearch extends Component {
   constructor(props: Object) {
     super(props);
 
+    const dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (h1, h2) => h1 !== h2});
     this.state = {
+      dataSource,
       search: props.search
     };
   }
 
   render() {
-    const dataSource = this._search(this.state.search);
-
     return (
       <View style={styles.container}>
         <NavigationBar>
@@ -52,9 +49,8 @@ export default class ReaderSearch extends Component {
             autoCorrect={false}
             autoFocus={true}
             clearButtonMode="always"
-            onChangeText={text => {
-              this.setState({search: text});
-            }}
+            onChangeText={this._search}
+            onSubmitEditing={this._onSubmitSearch}
             placeholder={Localizable.t('search-references')}
             style={styles.searchTextInput}
             value={this.state.search}
@@ -68,7 +64,7 @@ export default class ReaderSearch extends Component {
         </NavigationBar>
         <ListView
           enableEmptySections={true}
-          dataSource={dataSource}
+          dataSource={this.state.dataSource}
           renderRow={this._renderRow}
           renderSectionHeader={this._renderSectionHeader}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={StyleSheet.styles.separator} />}
@@ -168,18 +164,21 @@ export default class ReaderSearch extends Component {
     const references = Bible.searchReferences(text);
     const sections = Object.keys(references);
 
-    return ds.cloneWithRowsAndSections(references, sections);
+    let reference;
+    if (sections.length > 0) {
+      reference = references[sections[0]][0];
+    }
+
+    const dataSource = this.state.dataSource.cloneWithRowsAndSections(references, sections);
+    this.setState({
+      dataSource,
+      reference,
+      search: text
+    });
   };
 
-  _nameFromReference(reference: Object) {
-    const { book, chapterNumber, verseNumber } = reference;
-    if (book && chapterNumber && verseNumber) {
-      return `${book.name} ${chapterNumber}:${verseNumber}`;
-    } else if (book && chapterNumber) {
-      return `${book.name} ${chapterNumber}`;
-    } else {
-      return book.name;
-    }
+  _onSubmitSearch = () => {
+
   }
 
   _navigate = (route: Object) => {
