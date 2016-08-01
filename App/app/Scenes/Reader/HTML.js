@@ -14,11 +14,12 @@ module.exports = `
     <style type="text/css">
       body {
         font-family: georgia;
-        font-size: 13pt;
+        font-size: 15pt;
         color: #323B43;
         line-height: 26pt;
       }
       table {
+        margin:0;
         padding:0;
         border-spacing: 0;
         border-collapse: collapse;
