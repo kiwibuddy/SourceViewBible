@@ -53,8 +53,6 @@ highlights = {}
   end
 end
 
-
-
 highlights.each do |key, highlight|
   STDOUT.puts "#{key} { #{highlight} }"
 end
