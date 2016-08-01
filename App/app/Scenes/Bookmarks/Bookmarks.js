@@ -69,17 +69,6 @@ export default class Bookmarks extends Component {
     });
   }
 
-  _getRows = () => {
-    return (
-      [
-        {path: '/Discover', title: 'Discover', icon: require('../../Images/tabs/discover.png')},
-        {path: '/Books', title: 'Books', icon: require('../../Images/tabs/chapters.png')},
-        {path: '/Sources', title: 'Sources', icon: require('../../Images/tabs/sources.png')},
-        {path: '/Spheres', title: 'Spheres', icon: require('../../Images/tabs/spheres.png')},
-      ]
-    );
-  };
-
   render() {
     return (
       <View style={styles.container}>
@@ -190,6 +179,7 @@ export default class Bookmarks extends Component {
 
       default:
         const bookmarks = [
+          {path: '/Reader/Search', title: 'Reference Search', modal: true},
           {path: '/Discover', title: 'Discover'},
           {path: '/Books', title: 'Books'},
           {path: '/Sources', title: 'Sources'},
@@ -231,9 +221,8 @@ export default class Bookmarks extends Component {
   };
 
   _iconForRoute = (route: Object) => {
-    const index = route.path.indexOf('/', 1);
-    const path = index != -1 ? route.path.substr(0, index) : route.path;
-    switch (path) {
+    switch (route.path) {
+      case '/Reader/Search': return require('../../Images/tabs/search.png');
       case '/Discover': return require('../../Images/tabs/discover.png');
       case '/Books': return require('../../Images/tabs/chapters.png');
       case '/Sources': return require('../../Images/tabs/sources.png');
@@ -241,7 +230,7 @@ export default class Bookmarks extends Component {
       case '/Reader': return require('../../Images/tabs/chapters.png');
 
       default:
-        console.log('Cannot find icon for path:' + path);
+        console.log('Cannot find icon for path:' + route.path);
         return null;
     }
   };
