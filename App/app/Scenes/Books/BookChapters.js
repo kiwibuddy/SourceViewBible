@@ -112,7 +112,7 @@ export default class BookChapters extends Component {
     const subtitle = (this.state.selectedSegmentIndex === SEGMENT_INDEXES.SPHERES ? Localizable.t('spheres.count', {count: chapter.sphereCount}) : Localizable.t('sources.count', {count: chapter.sourceCount}) );
 
     return (
-      <TouchableOpacity style={styles.section} onPress={() => this.props.navigate(readerURL({bookID: book.id, chapterNumber, anchor: `chapter-${chapterNumber}`, title: book.name, description: `${book.name} ${chapterNumber}`}))}>
+      <TouchableOpacity style={styles.section} onPress={() => this.props.navigate(readerURL({bookID: book.id, anchor: `chapter-${chapterNumber}`, title: book.name, description: `${book.name} ${chapterNumber}`}))}>
         <View style={[styles.cellContainer, {paddingVertical: 8}]}>
           <View style={styles.horizontalContainer}>
             <View style={styles.leftContainer}>

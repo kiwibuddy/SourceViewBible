@@ -157,7 +157,7 @@ export default class BookOverview extends Component {
 
         <TouchableOpacity
           style={styles.readButton}
-          onPress={() => this.props.navigate(readerURL({bookID: book.id, chapterNumber: 1, anchor: 'chapter-1', title: book.name}))}
+          onPress={() => this.props.navigate(readerURL({bookID: book.id, anchor: 'chapter-1', title: book.name}))}
         >
           <Text style={styles.readButtonTitle}>{ReadingTime(book.wordCount)} read</Text>
         </TouchableOpacity>
