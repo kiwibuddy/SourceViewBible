@@ -100,6 +100,7 @@ export default class ReaderSearch extends Component {
 
   _renderBSORow = (reference: Object) => {
     const { book, source, occurrence } = reference;
+    const route = this._routeFromReference(reference);
 
     let chapterNumber = 1;
     if (source.occurrences.count > 0) {
@@ -108,12 +109,11 @@ export default class ReaderSearch extends Component {
       }
     }
 
-    const route = readerURL({bookID: book.id, chapterNumber, anchor: `source-${source.name}-${occurrence || 1}`, title: book.name});
     let name;
     if (occurrence > 0) {
-      name =  `${book.name} ${source.name} ${occurrence}`;
+      name = `${book.name} ${source.name} ${occurrence}`;
     } else {
-      name =  `${book.name} ${source.name}`;
+      name = `${book.name} ${source.name}`;
     }
 
     return this._renderSearchRow(route, name);
@@ -121,17 +121,10 @@ export default class ReaderSearch extends Component {
 
   _renderBCVRow = (reference: Object) => {
     const { book } = reference;
+    const route = this._routeFromReference(reference);
+
     const chapterNumber = reference.chapterNumber || 1;
     const verseNumber = reference.verseNumber;
-
-    let anchor;
-    if (verseNumber > 0) {
-      anchor = `verse-${chapterNumber}-${verseNumber}`;
-    } else {
-      anchor = `chapter-${chapterNumber}`;
-    }
-
-    const route = readerURL({bookID: book.id, chapterNumber, anchor, title: book.name});
 
     let name = book.name;
     if (book && chapterNumber && verseNumber) {
@@ -145,14 +138,15 @@ export default class ReaderSearch extends Component {
 
   _renderBookRow = (reference: Object) => {
     const { book } = reference;
-    const route = readerURL({bookID: book.id, chapterNumber: 1, anchor: 'chapter-1', title: book.name});
+    const route = this._routeFromReference(reference);
     const name = book.name;
+
     return this._renderSearchRow(route, name);
   };
 
   _renderSearchRow = (route: Object, name: string) => {
     return (
-      <TouchableOpacity onPress={() => this._navigate(route)}>
+      <TouchableOpacity onPress={() => this._navigate(readerURL(route))}>
         <View style={styles.row}>
           <Text style={StyleSheet.styles.cell.title}>{name}</Text>
         </View>
@@ -181,10 +175,31 @@ export default class ReaderSearch extends Component {
 
   }
 
-  _navigate = (route: Object) => {
+  _navigate = (url: Object) => {
     this.props.navigate(BACK, () => {
-      this.props.navigate(route);
+      this.props.navigate(url);
     });
+  };
+
+  _routeFromReference = (reference: Object) => {
+    const { book, source, occurrence, chapterNumber, verseNumber } = reference;
+    const route = {bookID: book.id, chapterNumber: chapterNumber || 1, anchor: null, title: book.name};
+
+    if (source) {
+      if (source.occurrences.count > 0) {
+        if (source.occurrences[0] && source.occurrences[0].chapterNumber) {
+          route["chapterNumber"] = source.occurrences[0].chapterNumber;
+        }
+      }
+
+      route["anchor"] = `source-${source.name}-${occurrence || 1}`;
+    } else if (verseNumber > 0) {
+      route["anchor"] = `verse-${chapterNumber}-${verseNumber}`;
+    } else {
+      route["anchor"] = `chapter-${chapterNumber || 1}`;
+    }
+
+    return route;
   };
 }
 
