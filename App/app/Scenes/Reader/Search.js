@@ -97,55 +97,6 @@ export default class ReaderSearch extends Component {
     );
   };
 
-  _renderBSORow = (reference: Object) => {
-    const { book, source, occurrence } = reference;
-    const route = this._routeFromReference(reference);
-
-    let name;
-    if (occurrence > 0) {
-      name = `${book.name} ${source.name} ${occurrence}`;
-    } else {
-      name = `${book.name} ${source.name}`;
-    }
-
-    return this._renderSearchRow(route, name);
-  };
-
-  _renderBCVRow = (reference: Object) => {
-    const { book } = reference;
-    const route = this._routeFromReference(reference);
-
-    const chapterNumber = reference.chapterNumber || 1;
-    const verseNumber = reference.verseNumber;
-
-    let name = book.name;
-    if (book && chapterNumber && verseNumber) {
-      name = `${book.name} ${chapterNumber}:${verseNumber}`;
-    } else if (book && chapterNumber) {
-      name = `${book.name} ${chapterNumber}`;
-    }
-
-    return this._renderSearchRow(route, name);
-  };
-
-  _renderBookRow = (reference: Object) => {
-    const { book } = reference;
-    const route = this._routeFromReference(reference);
-    const name = book.name;
-
-    return this._renderSearchRow(route, name);
-  };
-
-  _renderSearchRow = (route: Object, name: string) => {
-    return (
-      <TouchableOpacity onPress={() => this._navigate(readerURL(route))}>
-        <View style={styles.row}>
-          <Text style={StyleSheet.styles.cell.title}>{name}</Text>
-        </View>
-      </TouchableOpacity>
-    );
-  };
-
   _search = (text: string) => {
     const references = Bible.searchReferences(text);
     const sections = Object.keys(references);
@@ -164,7 +115,11 @@ export default class ReaderSearch extends Component {
   };
 
   _onSubmitSearch = () => {
-
+    const { reference } = this.state;
+    if (reference) {
+      const route = this._routeFromReference(reference);
+      this._navigate(readerURL(route));
+    }
   }
 
   _navigate = (url: Object) => {
