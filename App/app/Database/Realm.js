@@ -88,9 +88,12 @@ function BSOReferencesInText(text: string) {
           sources.forEach(source => {
             if (match[3] !== undefined) {
               const occurrenceNumber = parseInt(match[3]);
-              if (!isNaN(occurrenceNumber) && occurrenceNumber > 0 && occurrenceNumber <= source.occurrences.length) {
-                const occurrence = source.occurrences[occurrenceNumber - 1];
-                references.push({book, source, occurrence, occurrenceNumber});
+              if (!isNaN(occurrenceNumber)) {
+                const occurrences = source.occurrences.filtered('book.id = $0', book.id);
+                if (occurrenceNumber > 0 && occurrenceNumber <= occurrences.length) {
+                  const occurrence = occurrences[occurrenceNumber - 1];
+                  references.push({book, source, occurrence, occurrenceNumber});
+                }
               }
             } else {
               references.push({book, source});

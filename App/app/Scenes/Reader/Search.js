@@ -118,6 +118,7 @@ export default class ReaderSearch extends Component {
     const { reference } = this.state;
     if (reference) {
       const route = this._routeFromReference(reference);
+      console.log(route);
       this._navigate(readerURL(route));
     }
   }
