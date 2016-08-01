@@ -196,19 +196,19 @@ Profession.schema = ProfessionSchema;
 const StatementSchema = {
   name: 'Statement',
   properties: {
-    firstMonad: 'int',
-    lastMonad: 'int',
+    firstMonad: {type: 'int', indexed: true},
+    lastMonad: {type: 'int', indexed: true},
     source: 'Actant',
     recipient: 'Actant',
     sphereCounts: {type: 'list', objectType: 'Count'},
+    wordCount: {type: 'int', default: 0},
   }
 };
 
 class Statement extends Realm.Object {
-  // static get words() {
+  // async static get wordCounts() {
   //   const query = ``;
-  //   emdros.query(query, {firstMonad: this.firstMonad, lastMonad: this.lastMonad, count: true}).then((data) => {
-  //   }).catch(error => console.log(error));
+  //   const data = await emdros.query(query, {firstMonad: this.firstMonad, lastMonad: this.lastMonad, count: true});
   // }
 }
 Statement.schema = StatementSchema;
