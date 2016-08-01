@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     alignItems: 'center',
-    backgroundColor: Platform.OS === 'ios' ? '#EFEFF2' : '#FFF',
+    backgroundColor: Platform.OS === 'ios' ? '#f6f6f6' : '#FFF',
     borderBottomColor: 'rgba(0, 0, 0, .15)',
     borderBottomWidth: Platform.OS === 'ios' ? StyleSheet.hairlineWidth : 0,
     elevation: 4,

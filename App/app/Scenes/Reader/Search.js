@@ -43,7 +43,7 @@ export default class ReaderSearch extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <NavigationBar>
+        <NavigationBar style>
           <TextInput
             autoCapitalize="words"
             autoCorrect={false}
@@ -57,7 +57,7 @@ export default class ReaderSearch extends Component {
           />
           <TouchableOpacity
             onPress={() => this.props.navigate(BACK)}
-            style={{marginLeft: 16}}
+            style={{marginLeft: 8}}
           >
             <Text style={StyleSheet.styles.navigationBar.doneButtonTitle}>{Localizable.t('cancel')}</Text>
           </TouchableOpacity>
@@ -189,8 +189,8 @@ const styles = StyleSheet.create({
   searchTextInput: {
     flex: 1,
     fontSize: 14,
-    backgroundColor: 'white',
-    borderColor: '#cccccc',
+    backgroundColor: '#ececec',
+    borderColor: '#ececec',
     borderRadius: 3,
     borderWidth: 1,
     paddingLeft: 8,
