@@ -196,8 +196,8 @@ const StatementSchema = {
   properties: {
     firstMonad: 'int',
     lastMonad: 'int',
-    sources: {type: 'list', objectType: 'Actant'},
-    recipients: {type: 'list', objectType: 'Actant'},
+    source: 'Actant',
+    recipient: 'Actant',
   }
 };
 
