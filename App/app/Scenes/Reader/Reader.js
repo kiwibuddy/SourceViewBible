@@ -39,6 +39,10 @@ const NavigationBar = (props: Props) => {
         onPress={() => {props.navigate(readerSearchURL({modal: true}))}}
         style={{position: 'absolute', left: 0}}
       />
+      <Navigation.NavigationBarButton
+        imageSource={require('../../Components/Navigation/Images/nav-filter.png')}
+        onPress={() => {}}
+      />
     </Navigation.NavigationBar>
   );
 };
