@@ -174,6 +174,8 @@ const ActantSchema = {
     firstInitial: {type: 'string', optional: true},
     occurrences: {type: 'list', objectType: 'Occurrence'},
     professions: {type: 'list', objectType: 'Profession'},
+    sphereCount: {type: 'int', default: 0},
+    sphereCounts: {type: 'list', objectType: 'Count'},
     wordCount: {type: 'int', default: 0},
     words: {type: 'list', objectType: 'Count'},
   }
