@@ -26,7 +26,6 @@ import { readerSearchURL } from '../../Navigation';
 
 type Props = {
   bookID: string,
-  chapterNumber: number,
   anchor?: string,
   navigate: Function,
 };
@@ -51,14 +50,12 @@ export default class Reader extends Component {
 
   render() {
     const book = Book.findByID(this.props.bookID);
-    const { chapterNumber, anchor, navigate } = this.props;
-    const chapter = book.chapters[chapterNumber - 1];
+    const { anchor, navigate } = this.props;
 
     return (
       <ScriptureView
         anchor={anchor}
         book={book}
-        chapter={chapter}
         navigate={navigate}
       />
     );

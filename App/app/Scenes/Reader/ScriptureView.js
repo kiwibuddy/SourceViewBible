@@ -25,7 +25,6 @@ const HTML = require('./HTML');
 
 type Props = {
   book: Object,
-  chapter: Object,
   anchor?: string,
   navigate: Function,
 };
@@ -56,8 +55,8 @@ export default class ScriptureView extends Component {
   }
 
   componentDidMount() {
-    const { book, chapter, anchor } = this.props;
-    this._setScripture(book, chapter, anchor);
+    const { book, anchor } = this.props;
+    this._setScripture(book, anchor);
   }
 
   componentWillUnmount() {
@@ -79,7 +78,7 @@ export default class ScriptureView extends Component {
     );
   }
 
-  _setScripture = (book: Object, chapter: Object, anchor?: string) => {
+  _setScripture = (book: Object, anchor?: string) => {
     Emdros.scripture({monadSet: book.monadSet}).then((content) => {
       if (this.shouldFetchScripture) {
         const scripture = this._renderScripture(content);
