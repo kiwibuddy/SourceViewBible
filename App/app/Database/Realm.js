@@ -30,23 +30,31 @@ function BCVReferencesInText(text: string) {
 
   const match = matches[0];
   const bookName = match[1].trim();
-  const book = Book.all().filtered('name BEGINSWITH[c] $0', bookName).sorted('textOrder')[0];
-  if (book) {
+  const books = Book.all().filtered('name CONTAINS[c] $0', bookName).sorted('textOrder');
+  if (books.length > 0) {
+    const references = [];
+
     if (match.length > 2 && match[2] !== undefined) {
       const chapterNumber = parseInt(match[2]);
-      if (!isNaN(chapterNumber) && chapterNumber <= book.chapterCount) {
-        const chapter = book.chapters[chapterNumber - 1];
+      books.forEach(book => {
+        if (!isNaN(chapterNumber) && chapterNumber <= book.chapterCount) {
+          const chapter = book.chapters[chapterNumber - 1];
 
-        if (matches.length > 1 && matches[2] !== undefined && matches[2][0] !== undefined) {
-          const verseNumber = parseInt(matches[2][0]);
-          if (!isNaN(verseNumber)) {
-            return [{book, chapterNumber, verseNumber}];
+          if (matches.length > 1 && matches[2] !== undefined && matches[2][0] !== undefined) {
+            const verseNumber = parseInt(matches[2][0]);
+            if (!isNaN(verseNumber)) {
+              references.push({book, chapterNumber, verseNumber});
+            } else {
+              references.push({book, chapterNumber});
+            }
+          } else {
+            references.push({book, chapterNumber});
           }
         }
-
-        return [{book, chapterNumber}];
-      }
+      });
     }
+
+    return references;
   }
 
   return null;
