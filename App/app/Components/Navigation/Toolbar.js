@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
     left: 0,
-    backgroundColor: Platform.OS === 'ios' ? '#EFEFF2' : '#FFF',
+    backgroundColor: Platform.OS === 'ios' ? 'rgba(248, 248, 248, .85)' : '#FFF',
     borderTopColor: 'rgba(0, 0, 0, .15)',
     borderTopWidth: Platform.OS === 'ios' ? StyleSheet.hairlineWidth : 1,
     flexDirection: 'row',

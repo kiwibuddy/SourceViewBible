@@ -85,7 +85,7 @@ module.exports = `
         color: #CF1E00;
         font-size: 16pt;
         position: relative;
-        top: -0.05em;
+        top: 0;
       }
       .textVerse {
         font-size: 11pt;

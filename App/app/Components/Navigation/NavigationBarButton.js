@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
     height: 30,
     marginHorizontal: 8,
     paddingHorizontal: 16,
+    marginTop: -3,
   },
   image: {
     tintColor: Colors.tint,
