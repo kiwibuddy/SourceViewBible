@@ -179,7 +179,7 @@ export default class Bookmarks extends Component {
 
       default:
         const bookmarks = [
-          {path: '/Reader/Search', title: 'Reference Search', modal: true},
+          {path: '/Reader/Search', title: 'Search', modal: true},
           {path: '/Discover', title: 'Discover'},
           {path: '/Books', title: 'Books'},
           {path: '/Sources', title: 'Sources'},
