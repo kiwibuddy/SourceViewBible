@@ -43,7 +43,7 @@ export default class ReaderSearch extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <NavigationBar style>
+        <NavigationBar>
           <TextInput
             autoCapitalize="words"
             autoCorrect={false}

@@ -33,12 +33,12 @@ type Props = {
 const NavigationBar = (props: Props) => {
   const book = Book.findByID(props.bookID);
   return (
-    <Navigation.NavigationBar>
+    <Navigation.NavigationBar title={book.name}>
       <Navigation.NavigationBarButton
         imageSource={require('../../Components/Navigation/Images/nav-search.png')}
         onPress={() => {props.navigate(readerSearchURL({modal: true}))}}
+        style={{position: 'absolute', left: 0}}
       />
-      <Navigation.NavigationBar.Title title={book.name} />
     </Navigation.NavigationBar>
   );
 };
