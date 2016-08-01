@@ -42,6 +42,7 @@ const NavigationBar = (props: Props) => {
       <Navigation.NavigationBarButton
         imageSource={require('../../Components/Navigation/Images/nav-filter.png')}
         onPress={() => {}}
+        style={{position: 'absolute', right: 0}}
       />
     </Navigation.NavigationBar>
   );
