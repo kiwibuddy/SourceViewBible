@@ -15,7 +15,7 @@ function bookNameInText(text: string) {
   return null;
 }
 
-function BCVReferenceMatchesInText(text: string) {
+function BCVReferencesInText(text: string) {
   const matches = [];
 
   const regex = /([1-3]?\s?[A-Z]*)\s?([0-9]{1,3})?(?:\\:([0-9]{1,3}))?/gi;
@@ -26,7 +26,6 @@ function BCVReferenceMatchesInText(text: string) {
     }
     matches.push(m);
   }
-
   if (matches.length < 1) return null;
 
   const match = matches[0];
@@ -46,6 +45,48 @@ function BCVReferenceMatchesInText(text: string) {
         }
 
         return [{book, chapterNumber}];
+      }
+    }
+  }
+
+  return null;
+}
+
+function BSOReferencesInText(text: string) {
+  const matches = [];
+
+  const regex = /([1-3]?\s?[A-Z]*)\s?([A-Z]*)\s?([0-9]{1,3})?/gi;
+
+  let m;
+  while ((m = regex.exec(text)) !== null) {
+    if (m.index === regex.lastIndex) {
+        regex.lastIndex++;
+    }
+    matches.push(m);
+  }
+  if (matches.length < 1) return null;
+
+  const match = matches[0];
+  const bookName = match[1].trim();
+  const book = Book.all().filtered('name BEGINSWITH[c] $0', bookName).sorted('textOrder')[0];
+  if (book) {
+    if (match.length > 2 && match[2] !== undefined) {
+      const sourceName = match[2].trim();
+      if (sourceName.length > 0) {
+        const sourceRelations = book.sourceRelations.filtered('source.name BEGINSWITH[c] $0', sourceName);
+        if (sourceRelations.length > 0) {
+          const source = sourceRelations.map(relation => relation.source).sort((a,b) => a.name > b.name ? 1 : -1)[0];
+          if (source) {
+            if (match[3] !== undefined) {
+              const occurrence = parseInt(match[3]);
+              if (!isNaN(occurrence)) {
+                return [{book, source, occurrence}];
+              }
+            }
+
+            return [{book, source}];
+          }
+        }
       }
     }
   }
@@ -74,9 +115,14 @@ export class Bible extends Realm.Object {
     const bookName = bookNameInText(text);
     if (!bookName) return references;
 
-    const bcvReferences = BCVReferenceMatchesInText(text);
+    const bcvReferences = BCVReferencesInText(text);
     if (bcvReferences && bcvReferences.length > 0) {
       references["bcv"] = bcvReferences;
+    }
+
+    const bsoReferences = BSOReferencesInText(text);
+    if (bsoReferences && bsoReferences.length > 0) {
+      references["bso"] = bsoReferences;
     }
 
     const books = Book.all().filtered('name CONTAINS[c] $0', bookName).sorted('textOrder').map(book => ({book}));

@@ -89,14 +89,65 @@ export default class ReaderSearch extends Component {
     );
   };
 
-  _renderRow = (reference: Object) => {
+  _renderRow = (reference: Object, sectionID: any) => {
+    const { book } = reference;
+
+    switch (sectionID) {
+      case 'bso':
+        return this._renderBSORow(reference);
+      case 'bcv':
+        return this._renderBCVRow(reference);
+      default:
+        return this._renderBookRow(reference);
+    }
+  };
+
+  _renderBSORow = (reference: Object) => {
+    const { book, source, occurrence } = reference;
+
+    let chapterNumber = 1;
+    if (source.occurrences.count > 0) {
+      if (source.occurrences[0] && source.occurrences[0].chapterNumber) {
+        chapterNumber = source.occurrences[0].chapterNumber;
+      }
+    }
+
+    const route = readerURL({bookID: book.id, chapterNumber, anchor: `source-${source.name}-${occurrence || 1}`, title: book.name});
+    let name;
+    if (occurrence > 0) {
+      name =  `${book.name} ${source.name} ${occurrence}`;
+    } else {
+      name =  `${book.name} ${source.name}`;
+    }
+
+    return this._renderSearchRow(route, name);
+  };
+
+  _renderBCVRow = (reference: Object) => {
     const { book } = reference;
     const chapterNumber = reference.chapterNumber || 1;
     const verseNumber = reference.verseNumber;
-    
-    const name = this._nameFromReference(reference);
+
     const route = readerURL({bookID: book.id, chapterNumber, anchor: `chapter-${chapterNumber}`, title: book.name});
 
+    let name = book.name;
+    if (book && chapterNumber && verseNumber) {
+      name = `${book.name} ${chapterNumber}:${verseNumber}`;
+    } else if (book && chapterNumber) {
+      name = `${book.name} ${chapterNumber}`;
+    }
+
+    return this._renderSearchRow(route, name);
+  };
+
+  _renderBookRow = (reference: Object) => {
+    const { book } = reference;
+    const route = readerURL({bookID: book.id, chapterNumber: 1, anchor: 'chapter-1', title: book.name});
+    const name = book.name;
+    return this._renderSearchRow(route, name);
+  };
+
+  _renderSearchRow = (route: Object, name: string) => {
     return (
       <TouchableOpacity onPress={() => this._navigate(route)}>
         <View style={styles.row}>
