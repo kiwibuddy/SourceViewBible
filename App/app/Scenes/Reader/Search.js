@@ -57,7 +57,7 @@ export default class ReaderSearch extends Component {
           />
           <TouchableOpacity
             onPress={() => this.props.navigate(BACK)}
-            style={{marginLeft: 8}}
+            style={{marginHorizontal: 8}}
           >
             <Text style={StyleSheet.styles.navigationBar.doneButtonTitle}>{Localizable.t('cancel')}</Text>
           </TouchableOpacity>
@@ -193,6 +193,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     borderWidth: 1,
     paddingLeft: 8,
+    marginLeft: 8,
     height: 26,
   },
 });

@@ -97,7 +97,7 @@ module.exports = `
       }
     </style>
   </head>
-  <body>
+  <body id="scripture">
     {{BODY}}
   </body>
 </html>

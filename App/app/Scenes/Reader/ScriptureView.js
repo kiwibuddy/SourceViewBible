@@ -103,7 +103,10 @@ export default class ScriptureView extends Component {
     const { anchor } = this.props;
     if (!anchor) return null;
 
-    const javascript = `location.hash = '#${encodeURIComponent(anchor)}'`;
+    const javascript = `\
+      location.hash = '#${encodeURIComponent(anchor)}';
+      document.getElementById('scripture').scrollTop = document.getElementById('scripture').scrollTop - 8;
+    `;
     return javascript;
   };
 
