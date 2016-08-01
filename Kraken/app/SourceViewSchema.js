@@ -77,7 +77,7 @@ const SourceSchema = {
   primaryKey: 'id',
   properties: {
     id: 'string',
-    name: 'string',
+    name: {type: 'string', indexed: true},
     firstInitial: {type: 'string', optional: true},
     occurrences: {type: 'list', objectType: 'Occurrence'},
     wordCount: {type: 'int', default: 0},
@@ -155,7 +155,7 @@ const OccurrenceSchema = {
   name: 'Occurrence',
   properties: {
     book: 'Book',
-    chapter: 'Chapter',
+    count: 'int',
   }
 };
 

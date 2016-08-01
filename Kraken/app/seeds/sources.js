@@ -115,11 +115,17 @@ async function seedSourceOccurrences(emdros, realm) {
               if (sourceData != null) {
                 Object.keys(sourceData).forEach((sourceName) => {
                   realm.write(() => {
-                    let source = realm.objects('Source').find(source => source.name === sourceName);
-                    source.occurrences.push({
-                      book,
-                      chapter
-                    });
+                    const source = realm.objects('Source').find(source => source.name === sourceName);
+                    let occurrence = source.occurrences.find(occurrence => occurrence.book.id == book.id);
+                    const count = sourceData[sourceName];
+                    if (!occurrence) {
+                      source.occurrences.push({
+                        book,
+                        count
+                      });
+                    } else {
+                      occurrence.count += count;
+                    }
                   });
                 });
               }

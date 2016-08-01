@@ -89,9 +89,8 @@ function BSOReferencesInText(text: string) {
             if (match[3] !== undefined) {
               const occurrenceNumber = parseInt(match[3]);
               if (!isNaN(occurrenceNumber)) {
-                const occurrences = source.occurrences.filtered('book.id = $0', book.id);
-                if (occurrenceNumber > 0 && occurrenceNumber <= occurrences.length) {
-                  const occurrence = occurrences[occurrenceNumber - 1];
+                const occurrence = source.occurrences.filtered('book.id = $0', book.id)[0];
+                if (occurrenceNumber > 0 && occurrenceNumber <= occurrence.count) {
                   references.push({book, source, occurrence, occurrenceNumber});
                 }
               }
@@ -246,7 +245,7 @@ const SourceSchema = {
   primaryKey: 'id',
   properties: {
     id: 'string',
-    name: 'string',
+    name: {type: 'string', indexed: true},
     firstInitial: {type: 'string', optional: true},
     occurrences: {type: 'list', objectType: 'Occurrence'},
     wordCount: {type: 'int', default: 0},
@@ -341,7 +340,7 @@ const OccurrenceSchema = {
   name: 'Occurrence',
   properties: {
     book: 'Book',
-    chapter: 'Chapter',
+    count: 'int',
   }
 };
 
