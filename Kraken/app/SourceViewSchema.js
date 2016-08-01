@@ -198,6 +198,7 @@ const StatementSchema = {
     lastMonad: 'int',
     source: 'Actant',
     recipient: 'Actant',
+    sphereCounts: {type: 'list', objectType: 'Count'},
   }
 };
 
