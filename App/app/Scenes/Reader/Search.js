@@ -61,7 +61,7 @@ export default class ReaderSearch extends Component {
           />
           <TouchableOpacity
             onPress={() => this.props.navigate(BACK)}
-            style={{position: 'absolute', right: 0}}
+            style={{marginLeft: 16}}
           >
             <Text style={StyleSheet.styles.navigationBar.doneButtonTitle}>{Localizable.t('cancel')}</Text>
           </TouchableOpacity>
@@ -128,7 +128,14 @@ export default class ReaderSearch extends Component {
     const chapterNumber = reference.chapterNumber || 1;
     const verseNumber = reference.verseNumber;
 
-    const route = readerURL({bookID: book.id, chapterNumber, anchor: `chapter-${chapterNumber}`, title: book.name});
+    let anchor;
+    if (verseNumber > 0) {
+      anchor = `verse-${chapterNumber}-${verseNumber}`;
+    } else {
+      anchor = `chapter-${chapterNumber}`;
+    }
+
+    const route = readerURL({bookID: book.id, chapterNumber, anchor, title: book.name});
 
     let name = book.name;
     if (book && chapterNumber && verseNumber) {
@@ -214,6 +221,7 @@ const styles = StyleSheet.create({
   },
   searchTextInput: {
     flex: 1,
+    fontSize: 14,
     backgroundColor: 'white',
     borderColor: '#cccccc',
     borderRadius: 3,
