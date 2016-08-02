@@ -49,7 +49,7 @@ highlights = []
         "#{sphereColors[sphere]} #{beginPercent}%, #{sphereColors[sphere]} #{endPercent}%"
       end
     end.join(", ")
-    highlights << "#{highlight_key} { background: linear-gradient(180deg, #{highlight}); }" if highlight.strip.length > 0
+    highlights << ".#{highlight_key} { background: linear-gradient(180deg, #{highlight}); }" if highlight.strip.length > 0
   end
 end
 
