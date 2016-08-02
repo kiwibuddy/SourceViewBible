@@ -15,6 +15,10 @@ function bookNameInText(text: string) {
   return null;
 }
 
+function BookReferencesInText(text: string) {
+  return Book.all().filtered('name CONTAINS[c] $0 OR DJHRef BEGINSWITH[c] $0', text).sorted('textOrder');
+}
+
 function BCVReferencesInText(text: string) {
   const matches = [];
 
@@ -30,7 +34,7 @@ function BCVReferencesInText(text: string) {
 
   const match = matches[0];
   const bookName = match[1].trim();
-  const books = Book.all().filtered('name CONTAINS[c] $0', bookName).sorted('textOrder');
+  const books = BookReferencesInText(bookName);
   if (books.length > 0) {
     const references = [];
 
@@ -78,7 +82,7 @@ function BSOReferencesInText(text: string) {
 
   const match = matches[0];
   const bookName = match[1].trim();
-  const books = Book.all().filtered('name BEGINSWITH[c] $0', bookName).sorted('textOrder');
+  const books = BookReferencesInText(bookName);
   if (books.length > 0) {
     const references = [];
 
@@ -145,7 +149,7 @@ export class Bible extends Realm.Object {
       references["bso"] = bsoReferences;
     }
 
-    const books = Book.all().filtered('name CONTAINS[c] $0', bookName).sorted('textOrder').map(book => ({book}));
+    const books = BookReferencesInText(bookName).map(book => ({book}));
     if (books.length > 0) {
       references["books"] = books;
     }
