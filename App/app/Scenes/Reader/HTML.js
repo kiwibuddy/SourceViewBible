@@ -6,6 +6,8 @@ import {
   StyleSheet,
 } from '../../Common';
 
+const CSS = require('./CSS');
+
 module.exports = `
 <!DOCTYPE html>
 <html>
@@ -96,6 +98,7 @@ module.exports = `
       .textIndent {
         padding-left: 2em;
       }
+      {{CSS}}
     </style>
   </head>
   <body id="scripture">

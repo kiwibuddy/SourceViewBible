@@ -16,15 +16,15 @@ sphereColors = {
   "Celebration" => "#F9DEEF"
 }
 
-sphereColors = {
-  "Family" => "${Colors.spheres.family.highlightTint}",
-  "Economics" => "${Colors.spheres.economics.highlightTint}",
-  "Government" => "${Colors.spheres.government.highlightTint}",
-  "Religion" => "${Colors.spheres.religion.highlightTint}",
-  "Education" => "${Colors.spheres.education.highlightTint}",
-  "Communication" => "${Colors.spheres.communication.highlightTint}",
-  "Celebration" => "${Colors.spheres.celebration.highlightTint}"
-}
+# sphereColors = {
+#   "Family" => "${Colors.spheres.family.highlightTint}",
+#   "Economics" => "${Colors.spheres.economics.highlightTint}",
+#   "Government" => "${Colors.spheres.government.highlightTint}",
+#   "Religion" => "${Colors.spheres.religion.highlightTint}",
+#   "Education" => "${Colors.spheres.education.highlightTint}",
+#   "Communication" => "${Colors.spheres.communication.highlightTint}",
+#   "Celebration" => "${Colors.spheres.celebration.highlightTint}"
+# }
 
 
 spheres = ["Family", "Economics", "Government", "Religion", "Education", "Communication", "Celebration"]
