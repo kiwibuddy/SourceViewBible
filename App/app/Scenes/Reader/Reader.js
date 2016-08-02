@@ -15,7 +15,7 @@ import {
   StyleSheet
 } from '../../Common';
 
-import { readerURL } from '../../Navigation';
+import { readerSearchURL } from '../../Navigation';
 import * as Navigation from '../../Components/Navigation';
 
 const RNFS = require('react-native-fs');
