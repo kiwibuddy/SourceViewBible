@@ -4,7 +4,7 @@
  * Copyright (C) 2016 SourceView LLC. All rights reserved.
  *
  * Created: 2016/04/01
- * Last update: 2016/04/01
+ * Last update: 2016/08/02
  *
  * Contributors:
  *
@@ -26,5 +26,7 @@ bool getMonadsForBook(EmdrosEnv *pEE, const std::string& book, monad_m& first_mo
 bool getSOMForQuery(EmdrosEnv *pEE, const std::string& query, bool bUseOnlyFocusObjects, SetOfMonads& som);
 
 std::string countInBuckets(EmdrosEnv *pEE, const std::string& json_string, const SetOfMonads& substrate, std::string& error_message);
+
+std::string getWordCountsInSOM(EmdrosEnv *pEE, const SetOfMonads& substrate, std::string& error_message);
 
 #endif /* !defined(HARVEST_H_) */

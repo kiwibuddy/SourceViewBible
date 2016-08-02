@@ -228,7 +228,7 @@
 #ifndef EMDROS_VERSION__H__
 #define EMDROS_VERSION__H__
 
-#define EMDROS_VERSION "3.4.1.pre29"
+#define EMDROS_VERSION "3.4.1.pre30"
 
 #endif /* EMDROS_VERSION__H__ */
 
@@ -707,7 +707,7 @@ public:
  *
  * Ulrik Petersen
  * Created: 3/1-2001
- * Last update: 6/18-2016
+ * Last update: 7/30-2016
  *
  */
 /************************************************************************
@@ -1094,6 +1094,73 @@ extern std::string double2string(double d);
 extern std::string monad_m2string(monad_m m);
 extern monad_m string2monad_m(const std::string& str);
 
+inline bool is_whitespace(char c)
+{
+	return c == ' ' || c == '\n' || c == '\t' || c == '\r'; // NOTE: '\v' is missing, but I don't think it is ever used!
+}
+
+inline long long sz2longlong(const char *szBuffer)
+{
+	long long result = 0;
+	const char *p = szBuffer;
+
+	while (*p && is_whitespace(*p)) {
+		++p;
+	};
+	bool bIsNegative = false;	
+	if (*p == '-') {
+		bIsNegative = true;
+		++p;
+	} else if (*p == '+') {
+		++p;
+	}
+
+	while (*p) {
+		int c = *p++ - '0';
+		if (c < 0
+		    || c > 9) {
+			break;
+		} else {
+			result *= 10;
+			result += c;
+		}
+	}
+
+	return (bIsNegative) ? -result : result;
+}
+
+inline void longlong2szNonReversing(long long l, char *szBuffer, int nBufLength, char **szResult, unsigned int *pStringLength)
+{
+	// Build up string
+	char *p = szBuffer + nBufLength;
+	--p;
+
+	// Terminate string
+	*p-- = '\0';
+
+	*pStringLength = 0;
+	
+	long long v = l;
+	do {
+		long long tmp = v;
+		v /= 10;
+		*p-- = "9876543210123456789" [9+(tmp - v*10)];
+
+		++(*pStringLength);
+	} while (v);
+	
+	// Add negative sign at the end if necessary	
+	if (l < 0) {
+		*p = '-';
+		++(*pStringLength);
+	} else {
+		// Point it at the beginning
+		++p;
+	}
+	
+	*szResult = p;
+}
+
 inline void long2szNonReversing(long l, char *szBuffer, int nBufLength, char **szResult, unsigned int *pStringLength)
 {
 	// Build up string
@@ -1127,15 +1194,15 @@ inline void long2szNonReversing(long l, char *szBuffer, int nBufLength, char **s
 }
 
 
+extern std::string longlong2string(long long l);
+extern std::string longlong2string_format(long long l, const std::string& format);
+extern long long string2longlong(const std::string& str);
+
 extern std::string long2string(long l);
 extern std::string long2string_format(long l, const std::string& format);
 extern long string2long(const std::string& str);
 extern std::string encodeSTRINGstring(const std::string& str);
 extern bool is_other_than_whitespace(const std::string& str);
-inline bool is_whitespace(char c)
-{
-	return c == ' ' || c == '\n' || c == '\t' || c == '\r'; // NOTE: '\v' is missing, but I don't think it is ever used!
-}
 
 inline bool is_self(const std::string& str)
 {
@@ -1381,17 +1448,17 @@ extern std::string escape_UTF8_string_with_slashu(const std::string& instr);
 /** A function to join a list of std::string with the string between
  *  inbetween each list member.
  */
-extern std::string joinList(std::string between, const std::list<std::string>& l, unsigned int nBigStringSize = 131072);
+extern std::string joinList(const std::string& between, const std::list<std::string>& l, unsigned int nBigStringSize = 131072);
 
 /** A function to join a vector of std::string with the string between
  *  inbetween each list member.
  */
-extern std::string joinVector(std::string between, const std::vector<std::string>& v, unsigned int nBigStringSize = 131072);
+extern std::string joinVector(const std::string& between, const std::vector<std::string>& v, unsigned int nBigStringSize = 131072);
 
 /** A function to join a list of id_d_t with the string between
  *  inbetween each list member.
  */
-extern std::string joinList(std::string between, const std::list<id_d_t>& l);
+extern std::string joinList(const std::string& between, const std::list<id_d_t>& l);
 
 
 /** A template to join a list of T into one long string
@@ -9642,7 +9709,7 @@ class EnumConstCache {
  *
  * Ulrik Sandborg-Petersen
  * Created: 7/28-2008
- * Last update: 6/18-2016
+ * Last update: 7/30-2016
  *
  */
 /************************************************************************
@@ -9829,13 +9896,13 @@ class EnumConstCache {
  *
  * Ulrik Petersen
  * Created: 5/1 (1st of May, 2001)
- * Last update: 4/8-2014
+ * Last update: 7/30-2016
  *
  */
 /************************************************************************
  *
  *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2001-2014  Ulrik Sandborg-Petersen
+ *   Copyright (C) 2001-2016  Ulrik Sandborg-Petersen
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License as
@@ -9950,7 +10017,7 @@ public:
 	};
 	void setChar(char c) { cChar = c; };
 	void setString(std::string* pS) { pString = pS; };
-	void setInteger(long i) { integer = i; };
+	void setInteger(long long i) { integer = i; };
 	void setName(const char *szName) { szTokenName = szName; };
 	std::string *extractString(void) { std::string *pS = pString; pString = 0; return pS; }
 	std::string getTokenName(void) const { 
@@ -9959,7 +10026,7 @@ public:
 		} else if (strcmp(szTokenName, STRING_MAGIC) == 0) { 
 		  return "the string '" + *pString + "'"; 
 		} else if (strcmp(szTokenName, INTEGER_MAGIC) == 0) { 
-			return std::string("the integer ") + long2string(integer); 
+			return std::string("the integer ") + longlong2string(integer); 
 		} else if (strcmp(szTokenName, CHAR_MAGIC) == 0) { 
 			return std::string("the character 0x") + char2hex(cChar); 
 		} else { 
@@ -9968,7 +10035,7 @@ public:
 	};
 	std::string *pString;
 	Bigstring *pBigstring;
-	long integer;
+	long long integer;
 	const char *szTokenName;
 	char cChar;
 };
@@ -10085,7 +10152,7 @@ class JSONValue {
 	eJSONValueKind m_kind;
 	union {
 		bool m_boolean;
-		long m_integer;
+		long long m_integer;
 		const std::string* m_pString;
 		std::list<JSONValue*> *m_pList;
 		std::map<std::string, JSONValue*> *m_pObject;
@@ -10093,7 +10160,7 @@ class JSONValue {
  public:
 	JSONValue();                        // null
 	JSONValue(bool bValue);             // boolean
-	JSONValue(long integer);            // integer
+	JSONValue(long long integer);       // integer
 	JSONValue(std::string *pString);    // string
 	JSONValue(JSONListElement *pTail);  // list
 	JSONValue(JSONKeyValuePair *pTail); // object
@@ -10102,7 +10169,7 @@ class JSONValue {
 	eJSONValueKind getKind(void) const { return m_kind; };
 	std::string getString(void) const;
 	bool getBoolean(void) const;
-	long getInteger(void) const;
+	long long getInteger(void) const;
 	const std::list<JSONValue*>& getList(void) const;
 	void append(JSONValue* pValue);
 	void addKeyValue(const std::string& key, JSONValue *pValue);
@@ -23121,7 +23188,7 @@ extern std::string app_prefix(void);
  *
  * Ulrik Sandborg-Petersen
  * Created: 7/28-2008
- * Last update: 4/11-2016
+ * Last update: 7/30-2016
  *
  */
 /************************************************************************
@@ -23493,9 +23560,9 @@ class TemplateCounterFormat : public TemplateASTNode {
 class TemplateSetCounter : public TemplateASTNode {
  protected:
 	std::string m_counter_name;
-	long m_value;
+	long long m_value;
  public:
-	TemplateSetCounter(std::string *pString, long value);
+	TemplateSetCounter(std::string *pString, long long value);
 	virtual ~TemplateSetCounter();
 
 	virtual void exec(TemplateLangExecEnv *pEE);
@@ -23515,9 +23582,9 @@ class TemplateSetCounterVar : public TemplateASTNode {
 class TemplateIncCounter : public TemplateASTNode {
  protected:
 	std::string m_counter_name;
-	long m_value;
+	long long m_value;
  public:
-	TemplateIncCounter(std::string *pString, long value);
+	TemplateIncCounter(std::string *pString, long long value);
 	virtual ~TemplateIncCounter();
 
 	virtual void exec(TemplateLangExecEnv *pEE);
@@ -23526,9 +23593,9 @@ class TemplateIncCounter : public TemplateASTNode {
 class TemplateDecCounter : public TemplateASTNode {
  protected:
 	std::string m_counter_name;
-	long m_value;
+	long long m_value;
  public:
-	TemplateDecCounter(std::string *pString, long value);
+	TemplateDecCounter(std::string *pString, long long value);
 	virtual ~TemplateDecCounter();
 
 	virtual void exec(TemplateLangExecEnv *pEE);
@@ -23741,7 +23808,7 @@ class TemplateLangExecEnv {
 	bool m_bOwnsBigString;
 	std::string m_DBName;
 	AttributeMap m_attrs;
-	typedef std::map<std::string, long> CounterMap;
+	typedef std::map<std::string, long long> CounterMap;
 	CounterMap m_counters;
 	typedef std::map<std::string, std::list<std::string> > StringListMap;
 	StringListMap m_lists;
@@ -23803,10 +23870,10 @@ class TemplateLangExecEnv {
 
 	std::string dictLookup(const std::string& dict_name, const std::string& dict_key, const std::string& default_value);
 
-	long getCounter(const std::string& counter_name); // Initializes to 0 if not present!
-	void setCounter(const std::string& counter_name, long value); // Creates if not present!
-	void incCounter(const std::string& counter_name, long value); // Initializes to 0 if not present!
-	void decCounter(const std::string& counter_name, long value); // Initializes to 0 if not present!
+	long long getCounter(const std::string& counter_name); // Initializes to 0 if not present!
+	void setCounter(const std::string& counter_name, long long value); // Creates if not present!
+	void incCounter(const std::string& counter_name, long long value); // Initializes to 0 if not present!
+	void decCounter(const std::string& counter_name, long long value); // Initializes to 0 if not present!
 
 	void enterListMode(const std::string& list_name);
 	void exitListMode();
@@ -33253,7 +33320,7 @@ extern "C" {
 #ifdef SQLITE_VERSION
 # undef SQLITE_VERSION
 #else
-# define SQLITE_VERSION         "3.4.1.pre29"
+# define SQLITE_VERSION         "3.4.1.pre30"
 #endif
 
 /*

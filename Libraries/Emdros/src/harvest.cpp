@@ -4,7 +4,7 @@
  * Copyright (C) 2016 SourceView LLC. All rights reserved.
  *
  * Created: 2016/04/01
- * Last update: 2016/04/02
+ * Last update: 2016/08/02
  *
  * Contributors:
  *
@@ -136,6 +136,30 @@ std::string countInBuckets(EmdrosEnv *pEE, const std::string& bucket_specificati
 	if (pBucket == 0) {
 		return "{}";
 	} else {
+		std::string result = pBucket->getJSON();
+		delete pBucket;
+		return result;
+	}
+}
+
+
+std::string getWordCountsInSOM(EmdrosEnv *pEE, const SetOfMonads& substrate, std::string& error_message)
+{
+	std::string query = "SELECT ALL OBJECTS IN " + substrate.toString() + "WHERE [Token GET surface_fts]";
+
+	bool bCompileResult = false;
+	bool bDBResult = pEE->executeString(query, bCompileResult, false, false, 0);
+	bool bResult = bDBResult && bCompileResult;
+	if (!bResult) {
+		error_message += "DBError: " + pEE->getDBError() + "\nCompilerError: " + pEE->getCompilerError() + "\n";
+		return "{}";
+	} else {
+		TokenBucket *pBucket = new TokenBucket();
+
+		Sheaf *pSheaf = pEE->takeOverSheaf();
+		pBucket->countInSheaf(pSheaf);
+		delete pSheaf;
+
 		std::string result = pBucket->getJSON();
 		delete pBucket;
 		return result;

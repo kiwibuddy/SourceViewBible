@@ -4,7 +4,7 @@
  * Copyright (C) 2016 SourceView LLC. All rights reserved.
  *
  * Created: 2016/03/31
- * Last update: 2016/05/23
+ * Last update: 2016/08/02
  *
  * Contributors:
  *
@@ -1032,13 +1032,13 @@ void BucketBucket::prettyPrint(std::ostream& ostr, int indent) const
 void BucketBucket::getJSONInBigstring(Bigstring *pResult) const
 {
 	eBucketKind myKind = getKind();
-	
+		
 	ADD_SZ("{\"");
 	ADD_STRING(m_object_type_name);
 	ADD_SZ("\":");
 
 	String2String2PBucketMap::const_iterator ci1 = m_feature_map.begin();
-	
+
 	// Is this a next-to-ininermost bucket whose feature
 	// name is empty and whose only feature value is
 	// empty?
@@ -1150,6 +1150,93 @@ void BucketBucket::getJSONInBigstring(Bigstring *pResult) const
 
 	ADD_CHAR('}');
 }
+
+
+
+/////////////////////////////////////////////////////////////////
+//
+// TokenBucket: For simple counting of tokens
+//
+/////////////////////////////////////////////////////////////////
+
+
+TokenBucket::TokenBucket()
+{
+}
+
+
+TokenBucket::~TokenBucket()
+{
+}
+
+
+void TokenBucket::countInSheaf(const Sheaf* pSheaf)
+{
+	SheafConstIterator sheaf_ci = pSheaf->const_iterator();
+	while (sheaf_ci.hasNext()) {
+		const Straw *pStraw = sheaf_ci.next();
+		StrawConstIterator straw_ci = pStraw->const_iterator();
+
+		while (straw_ci.hasNext()) {
+			const MatchedObject *pMO = straw_ci.next();
+
+			std::string surface_fts = pMO->getFeatureAsString(0);
+
+			String2IntMap::iterator it = m_token_count_map.find(surface_fts);
+			if (it == m_token_count_map.end()) {
+				m_token_count_map[surface_fts] = 1;
+
+			} else {
+				m_token_count_map[surface_fts] = it->second + 1;
+			}
+		}
+	}
+}
+
+
+std::string TokenBucket::getJSON() const
+{
+	Bigstring *pResult = new Bigstring();
+
+	this->getJSONInBigstring(pResult);
+	
+	std::string result;
+	result = pResult->toString();
+
+	delete pResult;
+	
+	return result;
+}
+
+
+void TokenBucket::getJSONInBigstring(Bigstring *pResult) const
+{
+	ADD_SZ("{\"token\":{");
+
+	String2IntMap::const_iterator ci = m_token_count_map.begin();
+	String2IntMap::const_iterator cend = m_token_count_map.end();
+	while (ci != cend) {
+		const std::string& surface_fts = ci->first;
+		int count = ci->second;
+
+		ADD_CHAR('"');
+
+		ADD_STRING(surface_fts);
+
+		ADD_SZ("\":");
+
+		ADD_STRING(long2string(count));
+		
+		++ci;
+		if (ci != cend) {
+			ADD_CHAR(',');
+		}
+
+	}
+
+	ADD_SZ("}}");
+}
+
 
 
 

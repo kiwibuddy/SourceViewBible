@@ -4,7 +4,7 @@
  * Copyright (C) 2016 SourceView LLC. All rights reserved.
  *
  * Created: 2016/03/31
- * Last update: 2016/05/20
+ * Last update: 2016/08/02
  *
  * Contributors:
  *
@@ -37,6 +37,7 @@ typedef std::map<monad_m, monad_m> Monad2MonadMap;
 
 typedef std::map<std::string, Bucket*> String2PBucketMap;
 typedef std::map<std::string, String2PBucketMap> String2String2PBucketMap;
+typedef std::map<std::string, int> String2IntMap;
 
 
 class BucketValue {
@@ -148,6 +149,21 @@ class BucketBucket : public Bucket {
 
 
 Bucket *getBucketFromJSONBucketSpecification(EmdrosEnv *pEnv, const std::string& json_string, const SetOfMonads& substrate, std::string& error_message);
+
+
+class TokenBucket {
+ protected:
+	String2IntMap m_token_count_map;
+ public:
+	TokenBucket();
+	~TokenBucket();
+
+	void countInSheaf(const Sheaf* pSheaf);
+
+	std::string getJSON() const;
+
+	void getJSONInBigstring(Bigstring *pResult) const;
+};
 
 #endif /* !defined(BUCKET_H_) */
 
