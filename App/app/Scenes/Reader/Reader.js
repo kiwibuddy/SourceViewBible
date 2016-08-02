@@ -1,34 +1,29 @@
 /* @flow */
 'use strict';
 
-import React, { Component, PropTypes } from 'react';
-const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
+const React = require('react');
+import { Component } from 'react';
 
-import {
-  Image,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import ReactNative from 'react-native';
+
+const {
+  WebView,
+} = ReactNative;
 
 import {
   Colors,
-  StyleSheet,
-  Localizable
+  StyleSheet
 } from '../../Common';
 
-import ScriptureView from './ScriptureView';
-
-import { Book } from '../../Database';
+import { readerURL } from '../../Navigation';
 import * as Navigation from '../../Components/Navigation';
 
-import { readerSearchURL } from '../../Navigation';
+const RNFS = require('react-native-fs');
 
-type Props = {
-  bookID: string,
-  anchor?: string,
-  navigate: Function,
-};
+import Emdros from '../../API/Emdros';
+import { Book } from '../../Database';
+
+const HTML = require('./HTML');
 
 const NavigationBar = (props: Props) => {
   const book = Book.findByID(props.bookID);
@@ -48,27 +43,116 @@ const NavigationBar = (props: Props) => {
   );
 };
 
+type Props = {
+  bookID: string,
+  anchor?: string,
+  navigate: Function,
+};
+
+type State = {
+  scripture: any,
+  loading: bool,
+};
+
 export default class Reader extends Component {
   static NavigationBar = NavigationBar;
 
   props: Props;
+  state: State;
+
+  shouldFetchScripture: bool = true;
+
+  constructor(props: Object) {
+    super(props);
+
+    this.state = {
+      scripture: null,
+      loading: true,
+    };
+  }
+
+  shouldComponentUpdate(nextProps: Object, nextState: Object) {
+    return nextProps.bookID !== this.props.bookID ||
+     nextProps.anchor !== this.props.anchor ||
+     nextState.loading !== this.state.loading;
+  }
+
+  componentWillReceiveProps(nextProps: Object) {
+    const { bookID, anchor } = nextProps;
+    this._setScripture(bookID, anchor);
+  }
+
+  componentDidMount() {
+    const { bookID, anchor } = this.props;
+    this._setScripture(bookID, anchor);
+  }
+
+  componentWillUnmount() {
+    this.shouldFetchScripture = false;
+  }
 
   render() {
-    const book = Book.findByID(this.props.bookID);
-    const { anchor, navigate } = this.props;
+    if (!this.state.scripture) return null;
+
+    const injectedJavaScript = this._renderInjectedJavascript();
 
     return (
-      <ScriptureView
-        anchor={anchor}
-        book={book}
-        navigate={navigate}
+      <WebView
+        decelerationRate="normal"
+        injectedJavaScript={injectedJavaScript}
+        style={styles.container}
+        source={{html: this.state.scripture}}
       />
     );
   }
+
+  _setScripture = (bookID: string, anchor?: string) => {
+    const book = Book.findByID(bookID);
+    Emdros.scripture({monadSet: book.monadSet}).then((content) => {
+      if (this.shouldFetchScripture) {
+        const scripture = this._renderScripture(content);
+
+        if (__DEV__) {
+          this._debugScripture(scripture);
+        }
+
+        this.setState({
+          scripture,
+          loading: false
+        });
+      }
+    });
+  };
+
+  _renderScripture = (content: string) => {
+    return HTML.replace("{{BODY}}", content);
+  };
+
+  _renderInjectedJavascript = () => {
+    const { anchor } = this.props;
+    if (!anchor) return null;
+
+    const javascript = `\
+      location.hash = '#${encodeURIComponent(anchor)}';
+      document.getElementById('scripture').scrollTop = document.getElementById('scripture').scrollTop - 8;
+    `;
+    return javascript;
+  };
+
+  _debugScripture(scripture: string) {
+    RNFS.writeFile('/tmp/Scripture.html', scripture, 'utf8')
+    .then((success) => {
+      console.log('Scripture written to /tmp/Scripture.html');
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+  };
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white',
   },
 });
