@@ -45,8 +45,14 @@ export default class ScriptureView extends Component {
 
     this.state = {
       scripture: null,
-      loading: false,
+      loading: true,
     };
+  }
+
+  shouldComponentUpdate(nextProps: Object, nextState: Object) {
+    return nextProps.book.id !== this.props.book.id ||
+     nextProps.anchor !== this.props.anchor ||
+     nextState.loading !== this.state.loading;
   }
 
   componentWillReceiveProps(nextProps: Object) {
