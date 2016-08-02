@@ -207,7 +207,7 @@ const StatementSchema = {
 };
 
 class Statement extends Realm.Object {
-  // async static get wordCounts() {
+  // async static get words() {
   //   const query = ``;
   //   const data = await emdros.query(query, {firstMonad: this.firstMonad, lastMonad: this.lastMonad, count: true});
   // }
