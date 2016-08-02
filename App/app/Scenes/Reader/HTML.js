@@ -98,7 +98,7 @@ module.exports = `
       .textIndent {
         padding-left: 2em;
       }
-      {{CSS}}
+      ${CSS}
     </style>
   </head>
   <body id="scripture">
