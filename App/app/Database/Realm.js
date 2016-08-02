@@ -78,32 +78,36 @@ function BSOReferencesInText(text: string) {
 
   const match = matches[0];
   const bookName = match[1].trim();
-  const book = Book.all().filtered('name BEGINSWITH[c] $0', bookName).sorted('textOrder')[0];
-  if (book) {
+  const books = Book.all().filtered('name BEGINSWITH[c] $0', bookName).sorted('textOrder');
+  if (books.length > 0) {
+    const references = [];
+
     if (match.length > 2 && match[2] !== undefined) {
       const sourceName = match[2].trim();
       if (sourceName.length > 0) {
-        const sourceRelations = book.sourceRelations.filtered('source.name BEGINSWITH[c] $0', sourceName);
-        if (sourceRelations.length > 0) {
-          const sources = sourceRelations.map(relation => relation.source).sort((a,b) => a.name > b.name ? 1 : -1);
-          const references = [];
-          sources.forEach(source => {
-            if (match[3] !== undefined) {
-              const occurrenceNumber = parseInt(match[3]);
-              if (!isNaN(occurrenceNumber)) {
-                const occurrence = source.occurrences.filtered('book.id = $0', book.id)[0];
-                if (occurrenceNumber > 0 && occurrenceNumber <= occurrence.count) {
-                  references.push({book, source, occurrence, occurrenceNumber});
-                }
-              }
-            } else {
-              references.push({book, source});
-            }
-          });
+        books.forEach(book => {
+          const sourceRelations = book.sourceRelations.filtered('source.name BEGINSWITH[c] $0', sourceName);
+          if (sourceRelations.length > 0) {
+            const sources = sourceRelations.map(relation => relation.source).sort((a,b) => a.name > b.name ? 1 : -1);
 
-          return references;
-        }
+            sources.forEach(source => {
+              if (match[3] !== undefined) {
+                const occurrenceNumber = parseInt(match[3]);
+                if (!isNaN(occurrenceNumber)) {
+                  const occurrence = source.occurrences.filtered('book.id = $0', book.id)[0];
+                  if (occurrenceNumber > 0 && occurrenceNumber <= occurrence.count) {
+                    references.push({book, source, occurrence, occurrenceNumber});
+                  }
+                }
+              } else {
+                references.push({book, source});
+              }
+            });
+          }
+        });
       }
+
+      return references;
     }
   }
 
