@@ -200,6 +200,7 @@ const StatementSchema = {
     firstMonad: {type: 'int', indexed: true},
     lastMonad: {type: 'int', indexed: true},
     book: 'Book',
+    sourceOccurrence:  {type: 'int', default: 0},
     source: 'Actant',
     recipient: 'Actant',
     sphereCounts: {type: 'list', objectType: 'Count'},
