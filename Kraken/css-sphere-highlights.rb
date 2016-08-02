@@ -30,7 +30,7 @@ sphereColors = {
 spheres = ["Family", "Economics", "Government", "Religion", "Education", "Communication", "Celebration"]
 sphere_count = spheres.count
 
-highlights = {}
+highlights = []
 
 (0..sphere_count).each do |i|
   for combination in spheres.combination(i)
@@ -49,12 +49,12 @@ highlights = {}
         "#{sphereColors[sphere]} #{beginPercent}%, #{sphereColors[sphere]} #{endPercent}%"
       end
     end.join(", ")
-    highlights[highlight_key] = "background: linear-gradient(180deg, #{highlight});" if highlight.strip.length > 0
+    highlights << "#{highlight_key} { background: linear-gradient(180deg, #{highlight}); }" if highlight.strip.length > 0
   end
 end
 
-highlights.each do |key, highlight|
-  STDOUT.puts "#{key} { #{highlight} }"
+highlights.each do |highlight|
+  STDOUT.puts highlight
 end
 
 STDERR.puts "Count: #{highlights.length}"
