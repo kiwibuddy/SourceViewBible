@@ -71,12 +71,6 @@ export default class Reader extends Component {
     };
   }
 
-  shouldComponentUpdate(nextProps: Object, nextState: Object) {
-    return nextProps.bookID !== this.props.bookID ||
-     nextProps.anchor !== this.props.anchor ||
-     nextState.loading !== this.state.loading;
-  }
-
   componentWillReceiveProps(nextProps: Object) {
     const { bookID, anchor } = nextProps;
     this._setScripture(bookID, anchor);
