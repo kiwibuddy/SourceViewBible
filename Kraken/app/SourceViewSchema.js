@@ -173,6 +173,7 @@ const ActantSchema = {
     name: {type: 'string', indexed: true},
     firstInitial: {type: 'string', optional: true},
     occurrences: {type: 'list', objectType: 'Occurrence'},
+    professionValues: {type: 'string', indexed: true, optional: true},
     professions: {type: 'list', objectType: 'Profession'},
     sphereCount: {type: 'int', default: 0},
     sphereCounts: {type: 'list', objectType: 'Count'},
