@@ -20,9 +20,7 @@
           "docindexfeature":"docindex",
           "end":"",
           "get":[
-            "pre",
             "surface",
-            "post"
           ],
           "start":""
         },
@@ -40,9 +38,7 @@
           "docindexfeature":"docindex",
           "end":"",
           "get":[
-            "pre",
             "surface",
-
           ],
           "start":"\
 {{ if varequal 'StartParagraph' 'true' }}\
@@ -53,7 +49,7 @@
 {{ setvar 'StartParagraph' }}{{ setvarend }}\
 {{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}\
 {{ endif }}\
-<span class=\"textVerse\"><a name=\"{{ emitvar 'verse_anchor' }}\" />{{ featurenomangle 0 }}{{ featurenomangle 1 }}</span>"
+<span class=\"textVerse\"><a name=\"{{ emitvar 'verse_anchor' }}\" />{{ featurenomangle 0 }}</span>&#160;"
         },
         "Verse":{
           "docindexfeature":"docindex",
@@ -99,9 +95,7 @@
           "docindexfeature":"docindex",
           "end":"",
           "get":[
-            "pre",
             "surface",
-            "post",
           ],
           "start":"\
 {{ if varequal 'StartParagraph' 'true' }}\
@@ -112,15 +106,13 @@
 {{ setvar 'StartParagraph' }}{{ setvarend }}\
 {{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}\
 {{ endif }}\
-{{ featurenomangle 0 }}{{ feature 1 }}{{ featurenomangle 2 }}"
+{{ feature 0 }}"
         },
         "NonWordToken":{
           "docindexfeature":"docindex",
           "end":"",
           "get":[
-            "pre",
             "surface",
-            "post",
           ],
           "start":"\
 {{ if varequal 'StartParagraph' 'true' }}\
@@ -131,7 +123,13 @@
 {{ setvar 'StartParagraph' }}{{ setvarend }}\
 {{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}\
 {{ endif }}\
-{{ featurenomangle 0 }}{{ feature 1 }}{{ featurenomangle 2 }}"
+{{ feature 0 }}"
+        },
+        "SpaceToken" : {
+          "docindexfeature" : "docindex",
+          "end" : "",
+          "get" : [],
+          "start" : " "
         }
       },
       "postprocess":[
@@ -152,6 +150,10 @@
         {
           "instring":"<br /><br />",
           "outstring":"<br />"
+        },
+        {
+          "instring" : "&#160; ",
+          "outstring" : "&#160;",
         }
       ]
     },
