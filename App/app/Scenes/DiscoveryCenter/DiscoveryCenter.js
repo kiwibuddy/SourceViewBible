@@ -48,7 +48,7 @@ async function query() {
   //   }
   // });
 
-  const statements = Statement.all().filtered('firstMonad >= $0 AND lastMonad <= $1 AND source.professionValues CONTAINS $2', 1, 50638, ' 36 ');
+  const statements = Statement.all().filtered('firstMonad >= $0 AND lastMonad <= $1 AND source.professionValues CONTAINS $2 AND recipient.professionValues CONTAINS $2', 1, 50638, ' 36 ');
   for (let statement of statements) {
     const words = await statement.words();
     words.forEach(wordCount => {
