@@ -52,7 +52,7 @@ export default class SourceOverview extends Component {
 
     const metaDataValues = [];
     if (source.genderDescription) {
-      metaDataValues.push(this._renderMetaValue(Localizable.t('gender'), source.genderDescription));
+      metaDataValues.push(this._renderMetaValue(Localizable.t('gender'), 'avatar-human-group', source.genderDescription));
     }
 
     return (
@@ -184,11 +184,11 @@ export default class SourceOverview extends Component {
     );
   }
 
-  _renderMetaValue(title: string, value: string) {
+  _renderMetaValue(title: string, icon: string, value: string) {
     return (
       <View key={title} style={styles.listItemContainer}>
         <Icon
-          name={'avatar-human-group'}
+          name={icon}
           size={20}
           style={[styles.listItemIcon, {color: '#59626A'}]}
         />
