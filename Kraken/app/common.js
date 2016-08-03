@@ -70,14 +70,18 @@ export function seedObjectWordCloud(realm: Object, type: string, key: any, wordC
   if (wordCounts != null) {
     let wordCount = 0;
 
+    if (!Array.isArray(wordCounts)) {
+      wordCounts = Object.keys(wordCounts).map((word) => {
+        return {string: word, count: wordCounts[word]};
+      });
+    }
+
     const words = wordCounts.filter((word) => {
       wordCount += word.count;
       return word.string.length > MINIMUM_WORD_LENGTH && STOP_WORDS.indexOf(word.string) == -1;
     }).sort((a, b) => a.count > b.count ? -1 : 1).slice(0, WORD_CLOUD_LIMIT);
 
-    realm.write(() => {
-      realm.create(type, {id: key, wordCount, words}, true);
-    });
+    realm.create(type, {id: key, wordCount, words}, true);
   }
 }
 

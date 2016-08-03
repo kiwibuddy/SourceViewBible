@@ -108,7 +108,9 @@ async function seedBookWordCloud(emdros, realm) {
   for (let [index, book] of realm.objects('Book').entries()) {
     const monadSet = book.monadSet;
     const wordCounts = await emdros.wordCounts({from: monadSet.first, to: monadSet.last});
-    seedObjectWordCloud(realm, 'Book', book.id, wordCounts)
+    realm.write(() => {
+      seedObjectWordCloud(realm, 'Book', book.id, wordCounts);
+    });
   }
 }
 
