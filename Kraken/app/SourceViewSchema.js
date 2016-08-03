@@ -187,6 +187,11 @@ const ActantSchema = {
   }
 };
 
+class Actant extends Realm.Object {
+
+}
+Actant.schema = ActantSchema;
+
 const StatementSchema = {
   name: 'Statement',
   properties: {
@@ -209,5 +214,5 @@ class Statement extends Realm.Object {
 }
 Statement.schema = StatementSchema;
 
-const Schema = [Bible, Book, Chapter, Source, SourceRelation, Sphere, Count, Content, Occurrence];
+const Schema = [Actant, Bible, Book, Chapter, Source, SourceRelation, Sphere, Count, Content, Occurrence];
 export default Schema;

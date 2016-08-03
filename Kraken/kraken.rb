@@ -39,3 +39,5 @@ actants = actant_objects.all.map do |actant_object|
 end
 
 pp actants
+
+File.open("actants.json", "w+") { |f| f.write JSON.pretty_generate(actants) }
