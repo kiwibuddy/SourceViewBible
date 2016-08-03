@@ -193,12 +193,12 @@ export class Actant extends Realm.Object {
     return realm.objects('Actant');
   }
 
-  static sources() {
-    return realm.objects('Actant').filtered('isSource = $0', true);
-  }
-
   static findByID(id: number) {
     return realm.objectForPrimaryKey('Actant', id ? parseInt(id) : 0);
+  }
+
+  static sources() {
+    return realm.objects('Actant').filtered('isSource = $0', true);
   }
 
   get genderDescription(): ?String {
@@ -216,6 +216,10 @@ export class Actant extends Realm.Object {
 
   get statements(): Realm.ResultList {
     return realm.objects('Statement').filtered('sourceID = $0', this.id);
+  }
+
+  get professions(): any {
+    return this.professionValues ? this.professionValues.trim().split(' ') : [];
   }
 }
 Actant.schema = ActantSchema;
@@ -375,6 +379,10 @@ const StatementSchema = {
 };
 
 export class Statement extends Realm.Object {
+  static all() {
+    return realm.objects('Statement');
+  }
+
   // async static get words() {
   //   const query = ``;
   //   const data = await emdros.query(query, {firstMonad: this.firstMonad, lastMonad: this.lastMonad, count: true});

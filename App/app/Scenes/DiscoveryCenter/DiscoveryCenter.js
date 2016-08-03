@@ -31,6 +31,8 @@ import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigati
 
 import { BACK } from '../../Navigation';
 
+import { Actant, Book, Statement } from '../../Database';
+
 const SCROLLVIEW_REF = 'scrollview';
 
 type Props = {
@@ -61,6 +63,22 @@ export default class DiscoveryCenter extends Component {
   }
 
   render() {
+
+    const statements = {};
+    const foo = Statement.all().filtered('firstMonad >= $0 AND lastMonad <= $1', 1, 50638).forEach(statement => {
+      const source = Actant.findByID(statement.sourceID);
+      if (source) {
+        source.professions.forEach(profession => {
+          const wordCount = statements[profession] || 0;
+          statements[profession] = wordCount + statement.wordCount;
+        });
+      }
+    });
+
+    const data = Object.keys(statements).sort((a,b) => statements[a] > statements[b] ? -1 : 1).map(profession => ({profession, count:statements[profession]}));
+
+    console.log(data);
+
     const toolbar = this._renderToolbar();
     const cards = this.state.cards.map(card => this._renderCard(card));
     const popover = this._renderPopover();
