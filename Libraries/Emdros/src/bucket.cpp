@@ -1164,6 +1164,11 @@ TokenBucket::TokenBucket()
 {
 }
 
+TokenBucket::TokenBucket(const std::set<std::string>& stop_word_set)
+: m_stop_word_set(stop_word_set)
+{
+}
+
 
 TokenBucket::~TokenBucket()
 {
@@ -1181,14 +1186,17 @@ void TokenBucket::countInSheaf(const Sheaf* pSheaf)
 			const MatchedObject *pMO = straw_ci.next();
 
 			std::string surface_fts = pMO->getFeatureAsString(0);
-
-			String2IntMap::iterator it = m_token_count_map.find(surface_fts);
-			if (it == m_token_count_map.end()) {
-				m_token_count_map[surface_fts] = 1;
-
-			} else {
-				m_token_count_map[surface_fts] = it->second + 1;
-			}
+            
+            const bool is_stop_word = m_stop_word_set.find(surface_fts) != m_stop_word_set.end();
+            if (!is_stop_word) {
+                String2IntMap::iterator it = m_token_count_map.find(surface_fts);
+                if (it == m_token_count_map.end()) {
+                    m_token_count_map[surface_fts] = 1;
+                    
+                } else {
+                    m_token_count_map[surface_fts] = it->second + 1;
+                }
+            }
 		}
 	}
 }
@@ -1211,7 +1219,7 @@ std::string TokenBucket::getJSON() const
 
 void TokenBucket::getJSONInBigstring(Bigstring *pResult) const
 {
-	ADD_SZ("{\"token\":{");
+	ADD_CHAR('{');
 
 	String2IntMap::const_iterator ci = m_token_count_map.begin();
 	String2IntMap::const_iterator cend = m_token_count_map.end();
@@ -1234,7 +1242,7 @@ void TokenBucket::getJSONInBigstring(Bigstring *pResult) const
 
 	}
 
-	ADD_SZ("}}");
+	ADD_CHAR('}');
 }
 
 

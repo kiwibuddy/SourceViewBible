@@ -154,8 +154,10 @@ Bucket *getBucketFromJSONBucketSpecification(EmdrosEnv *pEnv, const std::string&
 class TokenBucket {
  protected:
 	String2IntMap m_token_count_map;
+    std::set<std::string> m_stop_word_set;
  public:
 	TokenBucket();
+    TokenBucket(const std::set<std::string>& stop_word_set);
 	~TokenBucket();
 
 	void countInSheaf(const Sheaf* pSheaf);

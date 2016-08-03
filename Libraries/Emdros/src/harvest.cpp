@@ -143,7 +143,7 @@ std::string countInBuckets(EmdrosEnv *pEE, const std::string& bucket_specificati
 }
 
 
-std::string getWordCountsInSOM(EmdrosEnv *pEE, const SetOfMonads& substrate, std::string& error_message)
+std::string getWordCountsInSOM(EmdrosEnv *pEE, const SetOfMonads& substrate, const std::set<std::string>& stop_word_set, std::string& error_message)
 {
 	std::string query = "SELECT ALL OBJECTS IN " + substrate.toString() + "WHERE [Token GET surface_fts]";
 
@@ -154,7 +154,7 @@ std::string getWordCountsInSOM(EmdrosEnv *pEE, const SetOfMonads& substrate, std
 		error_message += "DBError: " + pEE->getDBError() + "\nCompilerError: " + pEE->getCompilerError() + "\n";
 		return "{}";
 	} else {
-		TokenBucket *pBucket = new TokenBucket();
+		TokenBucket *pBucket = new TokenBucket(stop_word_set);
 
 		Sheaf *pSheaf = pEE->takeOverSheaf();
 		pBucket->countInSheaf(pSheaf);

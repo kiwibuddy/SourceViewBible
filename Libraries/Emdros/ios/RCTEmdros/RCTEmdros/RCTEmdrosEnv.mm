@@ -15,6 +15,8 @@
 const char RCTKeyCString[] = {48, 120, 51, 48, 97, 49, 50, 56, 50, 57, 32, 48, 120, 48, 50, 50, 56, 102, 53, 50, 55, 32, 48, 120, 49, 56, 55, 49, 56, 49, 51, 100, 32, 48, 120, 54, 53, 50, 53, 54, 55, 101, 57, 32, 48, 120, 53, 99, 101, 97, 50, 56, 98, 53, 32, 48, 120, 51, 100, 55, 100, 52, 98, 99, 55, 32, 48, 120, 53, 48, 48, 102, 101, 99, 100, 49, 32, 48, 120, 54, 99, 57, 51, 53, 54, 56, 100, 0};
 #define RCTKey [NSString stringWithCString:RCTKeyCString encoding:NSASCIIStringEncoding]
 
+const std::set<std::string> stopwords = {"the","and","of","to","you","will","in","I","a","he","for","they","your","is","with","his","from","that","be","all","them","as","who","it","was","but","my","have","s","this","their","are","me","on","him","people","then","so","not","when","were","had","king","what","by","we","at","said","one","has","t","do","son","out","if","there","no","or","land","like","us","must","these","up","those","her","day","our","now","man","into","am","can","come","let","because","go","about","against","give","down","even","don","an","over","other","she","before","made","been","men","its"};
+
 @interface RCTEmdrosEnv () {
     EmdrosEnv *_emdrosEnv;
 }
@@ -80,6 +82,58 @@ const char RCTKeyCString[] = {48, 120, 51, 48, 97, 49, 50, 56, 50, 57, 32, 48, 1
         } else {
 
         }
+    } catch (EMdFDBException e) {
+        std::cerr << "ERROR: EMdFDBException (Database error)..." << std::endl;
+        std::cerr << _emdrosEnv->getDBError() << std::endl;
+        std::cerr << _emdrosEnv->getCompilerError() << std::endl;
+    } catch (BadMonadsException e) {
+        std::cerr << "BadMonadsException caught.  Program aborted." << std::endl;
+    } catch (WrongCharacterSetException e) {
+        std::cerr << "WrongCharacterSetException caught.  Program aborted." << std::endl;
+    } catch (EMdFOutputException e) {
+        std::cerr << "EMdFOutputException caught.  Program aborted." << std::endl;
+    } catch (EmdrosException e) {
+        std::cerr << "ERROR: EmdrosException (Emdros error)..." << e.what() << std::endl;
+    } catch (...) {
+        std::cerr << "Unknown exception occurred.  Program aborted." << std::endl;
+    }
+}
+
+- (void)wordCounts:(NSArray<NSArray<NSNumber *> *> *)monads limit:(NSInteger)limit completion:(void (^)(id result, NSError *error))completion {
+    try {
+        SetOfMonads soms;
+        
+        for (NSArray<NSNumber *> *monad in monads) {
+            SetOfMonads som(monad.firstObject.integerValue, monad.lastObject.integerValue);
+            soms.unionWith(som);
+        }
+        
+        std::string errorMessage;
+        std::string json = getWordCountsInSOM(_emdrosEnv, soms, stopwords, errorMessage);
+        [[OCDBenchmark sharedBenchmark] end:[NSString stringWithFormat:@"getWordCountsInSOM: %@", monads]];
+        
+        NSString *data = [NSString stringWithUTF8String:json.c_str()];
+        NSError *error = nil;
+        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:[data dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
+        
+        NSArray *words = [result keysSortedByValueUsingComparator:^NSComparisonResult(NSNumber *  _Nonnull obj1, NSNumber *  _Nonnull obj2) {
+            NSInteger a = obj1.integerValue;
+            NSInteger b = obj2.integerValue;
+            
+            if (a > b) return (NSComparisonResult)NSOrderedAscending;
+            if (a < b) return (NSComparisonResult)NSOrderedDescending;
+            return (NSComparisonResult)NSOrderedSame;
+        }];
+        
+        if (limit > 0) words = [words subarrayWithRange:NSMakeRange(0, MIN(limit, words.count))];
+        
+        NSMutableArray *wordCounts = [[NSMutableArray alloc] initWithCapacity:words.count];
+        for (NSString *word in words) {
+            [wordCounts addObject:@{@"string": word, @"count": result[word]}];
+        }
+        
+        
+        if (completion) completion([[NSArray alloc] initWithArray:wordCounts], nil);
     } catch (EMdFDBException e) {
         std::cerr << "ERROR: EMdFDBException (Database error)..." << std::endl;
         std::cerr << _emdrosEnv->getDBError() << std::endl;
