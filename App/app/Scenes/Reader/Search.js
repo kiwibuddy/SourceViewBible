@@ -129,11 +129,11 @@ export default class ReaderSearch extends Component {
   };
 
   _routeFromReference = (reference: Object) => {
-    const { book, source, occurrence, occurrenceNumber, chapterNumber, verseNumber } = reference;
+    const { book, source, occurrenceNumber, chapterNumber, verseNumber } = reference;
     const route = {bookID: book.id, anchor: null, title: book.name, description: book.name};
 
     if (source) {
-      if (occurrence) {
+      if (occurrenceNumber) {
         route["description"] = `${book.name} ${source.name} ${occurrenceNumber}`;
         route["anchor"] = `source-${source.name}-${occurrenceNumber}`;
       } else {

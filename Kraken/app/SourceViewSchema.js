@@ -171,8 +171,8 @@ const StatementSchema = {
     lastMonad: {type: 'int', indexed: true},
     book: 'Book',
     sourceOccurrence:  {type: 'int', default: 0},
-    source: 'Actant',
-    recipient: 'Actant',
+    sourceID: {type: 'int', indexed: true},
+    recipientID: {type: 'int', indexed: true},
     sphereCounts: {type: 'list', objectType: 'Count'},
     wordCount: {type: 'int', default: 0},
   }

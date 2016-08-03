@@ -100,11 +100,14 @@ function BSOReferencesInText(text: string) {
               if (match[3] !== undefined) {
                 const occurrenceNumber = parseInt(match[3]);
                 if (!isNaN(occurrenceNumber)) {
+                  // FIXME: Remove once all statements are in
+                  references.push({book, source, occurrenceNumber});
+
                   const statements = source.statements.filtered('book.id = $0', book.id).sorted('sourceOccurrence', true);
-                  if (statements.length > 0) {
+                  if (false && statements.length > 0) {
                     const occurrence = statements[0];
                     if (occurrenceNumber > 0 && occurrenceNumber <= occurrence.sourceOccurrence) {
-                      references.push({book, source, occurrence, occurrenceNumber});
+                      references.push({book, source, occurrenceNumber});
                     }
                   }
                 }
@@ -212,7 +215,7 @@ export class Actant extends Realm.Object {
   }
 
   get statements(): Realm.ResultList {
-    return realm.objects('Statement').filtered('source.id = $0', this.id);
+    return realm.objects('Statement').filtered('sourceID = $0', this.id);
   }
 }
 Actant.schema = ActantSchema;
@@ -364,8 +367,8 @@ const StatementSchema = {
     lastMonad: {type: 'int', indexed: true},
     book: 'Book',
     sourceOccurrence:  {type: 'int', default: 0},
-    source: 'Actant',
-    recipient: 'Actant',
+    sourceID: {type: 'int', indexed: true},
+    recipientID: {type: 'int', indexed: true},
     sphereCounts: {type: 'list', objectType: 'Count'},
     wordCount: {type: 'int', default: 0},
   }
