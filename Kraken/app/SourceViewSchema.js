@@ -172,12 +172,18 @@ const ActantSchema = {
     id: 'int',
     name: {type: 'string', indexed: true},
     firstInitial: {type: 'string', optional: true},
-    occurrences: {type: 'list', objectType: 'Occurrence'},
+    gender: 'int',
+    natureValues: {type: 'string', indexed: true, optional: true},
+    actantNumber: {type: 'int', optional: true},
+    chronologyValues: {type: 'string', indexed: true, optional: true},
     professionValues: {type: 'string', indexed: true, optional: true},
+    isSource: 'bool',
+    isRecipient: 'bool',
     sphereCount: {type: 'int', default: 0},
     sphereCounts: {type: 'list', objectType: 'Count'},
     wordCount: {type: 'int', default: 0},
     words: {type: 'list', objectType: 'Count'},
+    occurrences: {type: 'list', objectType: 'Occurrence'},
   }
 };
 
