@@ -66,16 +66,10 @@ export function seedObjectSphereWordCounts(realm: Object, type: string, key: any
   }
 }
 
-export function seedObjectWordCloud(realm: Object, type: string, key: any, wordData: Object) {
-  if (wordData != null) {
-    let wordCount = 0;
-    const words = Object.keys(wordData).filter((word) => {
-      wordCount += wordData[word];
-      return word.length > MINIMUM_WORD_LENGTH && STOP_WORDS.indexOf(word.toLowerCase()) == -1;
-    }).sort((a, b) => wordData[a] > wordData[b] ? -1 : 1).slice(0, WORD_CLOUD_LIMIT).map((word) => {
-      return {string: word, count: wordData[word]};
-    });
-
+export function seedObjectWordCloud(realm: Object, type: string, key: any, words: Object) {
+  if (words != null) {
+    let wordCount = words.length;
+    words = words.slice(0, WORD_CLOUD_LIMIT)
     realm.create(type, {id: key, wordCount, words}, true);
   }
 }

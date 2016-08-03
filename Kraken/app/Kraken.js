@@ -46,7 +46,7 @@ export async function release() {
 async function seed(emdros) {
   await seedBaseObjects(emdros);
 
-  // await seedBooks(emdros, realm);
+  await seedBooks(emdros, realm);
   //
   // await seedChapters(emdros, realm);
   //
@@ -60,9 +60,9 @@ async function seed(emdros) {
 async function seedBaseObjects(emdros) {
   console.log('Seeding Base Objects');
 
-  // await seedBookObjects(emdros, realm);
-  // await seedChapterObjects(emdros, realm);
-  await seedActantObjects(emdros, realm)
+  await seedBookObjects(emdros, realm);
+  await seedChapterObjects(emdros, realm);
+  // await seedActantObjects(emdros, realm)
   // await seedSourceObjects(emdros, realm);
   // await seedSphereObjects(emdros, realm);
 }

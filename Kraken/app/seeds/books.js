@@ -104,34 +104,12 @@ async function seedSources(emdros, realm) {
 
 async function seedBookWordCloud(emdros, realm) {
   console.log('Seeding Book Word Cloud...');
-  const query = `
-  {
-    "objectTypeName": "Book",
-    "feature": "DJHRef",
-    "buckets": {
-      "objectTypeName": "Token",
-      "feature": "surface",
-    }
+
+  for (let [index, book] of realm.objects('Book').entries()) {
+    const monadSet = book.monadSet;
+    const wordCounts = await emdros.wordCounts({from: monadSet.first, to: monadSet.last});
+    console.log(wordCounts);
   }
-  `;
-
-  return new Promise((resolve, reject) => {
-    emdros.query(query, {count: true}).then((data) => {
-      realm.write(() => {
-        for (let [index, book] of realm.objects('Book').entries()) {
-          const bookData = data["Book"]["DJHRef"][book.DJHRef];
-          if (bookData != null) {
-            const wordData = bookData["Token"]["surface"];
-            seedObjectWordCloud(realm, 'Book', book.id, wordData);
-          }
-        }
-      });
-
-      resolve();
-    }).catch((error) => {
-      console.log(error);
-    })
-  });
 }
 
 async function seedSourceWordCloud(emdros, realm) {

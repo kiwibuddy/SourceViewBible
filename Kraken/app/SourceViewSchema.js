@@ -44,7 +44,14 @@ const BookSchema = {
 };
 
 class Book extends Realm.Object {
-
+  get monadSet(): Object {
+    const firstChapter = this.chapters[0];
+    const lastChapter = this.chapters[this.chapterCount - 1];
+    return {
+      first: firstChapter.firstMonad,
+      last: lastChapter.lastMonad
+    };
+  }
 }
 Book.schema = BookSchema;
 
