@@ -66,9 +66,9 @@ export default class DiscoveryCenter extends Component {
 
     const statements = {};
     Statement.all().filtered('firstMonad >= $0 AND lastMonad <= $1', 1, 50638).forEach(statement => {
-      const source = Actant.findByID(statement.sourceID);
-      if (source) {
-        source.professions.forEach(profession => {
+      const actant = Actant.findByID(statement.sourceID);
+      if (actant) {
+        actant.professions.forEach(profession => {
           const wordCount = statements[profession.name] || 0;
           statements[profession.name] = wordCount + statement.wordCount;
         });
