@@ -186,15 +186,17 @@ export default class SourceOverview extends Component {
 
   _renderMetaValue(title: string, icon: string, value: string) {
     return (
-      <View key={title} style={styles.listItemContainer}>
-        <Icon
-          name={icon}
-          size={20}
-          style={[styles.listItemIcon, {color: '#59626A'}]}
-        />
-        <View style={styles.listItem}>
-          <Text style={StyleSheet.styles.cell.titlemedium}>{title}</Text>
-          <Text style={StyleSheet.styles.cell.valuetitlemedium}>{value}</Text>
+      <View key={title}>
+        <View style={styles.listItemContainer}>
+          <Icon
+            name={icon}
+            size={20}
+            style={[styles.listItemIcon, {color: '#59626A'}]}
+          />
+          <View style={styles.listItem}>
+            <Text style={StyleSheet.styles.cell.titlemedium}>{title}</Text>
+            <Text style={StyleSheet.styles.cell.valuetitlemedium}>{value}</Text>
+          </View>
         </View>
         <View style={styles.separator} />
       </View>
