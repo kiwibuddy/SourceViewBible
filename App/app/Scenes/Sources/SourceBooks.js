@@ -15,10 +15,10 @@ import {
   Localizable
 } from '../../Common';
 
-import { Source } from '../../Database';
+import { Actant } from '../../Database';
 
 type Props = {
-  sourceID: string,
+  sourceID: number,
 };
 
 type State = {
@@ -32,7 +32,7 @@ export default class SourceBooks extends Component {
   constructor(props: Props) {
     super(props);
 
-    const source = Source.findByID(props.sourceID);
+    const source = Actant.findByID(props.sourceID);
     this.state = {source};
   }
 
@@ -93,7 +93,6 @@ const styles = StyleSheet.create({
     marginLeft: 15,
   },
   body: {
-    ...StyleSheet.styles.body,
     paddingBottom: 5,
   },
 });

@@ -98,9 +98,12 @@ function BSOReferencesInText(text: string) {
               if (match[3] !== undefined) {
                 const occurrenceNumber = parseInt(match[3]);
                 if (!isNaN(occurrenceNumber)) {
-                  const occurrence = source.occurrences.filtered('book.id = $0', book.id)[0];
-                  if (occurrenceNumber > 0 && occurrenceNumber <= occurrence.count) {
-                    references.push({book, source, occurrence, occurrenceNumber});
+                  const statements = source.statements.filtered('book.id = $0', book.id).sorted('sourceOccurrence', true);
+                  if (statements.length > 0) {
+                    const occurrence = statements[0];
+                    if (occurrenceNumber > 0 && occurrenceNumber <= occurrence.sourceOccurrence) {
+                      references.push({book, source, occurrence, occurrenceNumber});
+                    }
                   }
                 }
               } else {
@@ -159,6 +162,46 @@ export class Bible extends Realm.Object {
 }
 Bible.schema = BibleSchema;
 
+const ActantSchema = {
+  name: 'Actant',
+  primaryKey: 'id',
+  properties: {
+    id: 'int',
+    name: {type: 'string', indexed: true},
+    firstInitial: {type: 'string', optional: true},
+    gender: 'int',
+    natureValues: {type: 'string', indexed: true, optional: true},
+    actantNumber: {type: 'int', optional: true},
+    chronologyValues: {type: 'string', indexed: true, optional: true},
+    professionValues: {type: 'string', indexed: true, optional: true},
+    isSource: 'bool',
+    isRecipient: 'bool',
+    sphereCount: {type: 'int', default: 0},
+    sphereCounts: {type: 'list', objectType: 'Count'},
+    wordCount: {type: 'int', default: 0},
+    words: {type: 'list', objectType: 'Count'},
+  }
+};
+
+export class Actant extends Realm.Object {
+  static all() {
+    return realm.objects('Actant');
+  }
+
+  static sources() {
+    return realm.objects('Actant').filtered('isSource = $0', true);
+  }
+
+  static findByID(id: number) {
+    return realm.objectForPrimaryKey('Actant', id ? parseInt(id) : 0);
+  }
+
+  get statements(): Realm.ResultList {
+    return realm.objects('Statement').filtered('source.id = $0', this.id);
+  }
+}
+Actant.schema = ActantSchema;
+
 const BookSchema = {
   name: 'Book',
   primaryKey: 'id',
@@ -168,6 +211,8 @@ const BookSchema = {
     name: {type: 'string', indexed: true},
     testament: 'int',
     textOrder: {type: 'int', indexed: true},
+    firstMonad: {type: 'int', default: 0},
+    lastMonad: {type: 'int', default: 0},
     chapterCount: {type: 'int', default: 0},
     chapters: {type: 'list', objectType: 'Chapter'},
     maxChapterWordCount: {type: 'int', default: 0},
@@ -207,11 +252,9 @@ export class Book extends Realm.Object {
   }
 
   get monadSet(): Object {
-    const firstChapter = this.chapters[0];
-    const lastChapter = this.chapters[this.chapterCount - 1];
     return {
-      first: firstChapter.firstMonad,
-      last: lastChapter.lastMonad
+      first: this.firstMonad,
+      last: this.lastMonad
     };
   }
 
@@ -251,36 +294,12 @@ export class Chapter extends Realm.Object {
 }
 Chapter.schema = ChapterSchema;
 
-const SourceSchema = {
-  name: 'Source',
-  primaryKey: 'id',
-  properties: {
-    id: 'string',
-    name: {type: 'string', indexed: true},
-    firstInitial: {type: 'string', optional: true},
-    occurrences: {type: 'list', objectType: 'Occurrence'},
-    wordCount: {type: 'int', default: 0},
-    words: {type: 'list', objectType: 'Count'},
-  }
-};
-
-export class Source extends Realm.Object {
-  static all() {
-    return realm.objects('Source');
-  }
-
-  static findByID(id: string) {
-    return realm.objectForPrimaryKey('Source', id || '');
-  }
-}
-Source.schema = SourceSchema;
-
 const SourceRelationSchema = {
   name: 'SourceRelation',
   primaryKey: 'id',
   properties: {
     id: 'string',
-    source: 'Source',
+    source: 'Actant',
     wordCount: {type: 'int', default: 0},
     words: {type: 'list', objectType: 'Count'},
   }
@@ -321,6 +340,30 @@ export class Sphere extends Realm.Object {
 }
 Sphere.schema = SphereSchema;
 
+const StatementSchema = {
+  name: 'Statement',
+  primaryKey: 'id',
+  properties: {
+    id: 'int',
+    firstMonad: {type: 'int', indexed: true},
+    lastMonad: {type: 'int', indexed: true},
+    book: 'Book',
+    sourceOccurrence:  {type: 'int', default: 0},
+    source: 'Actant',
+    recipient: 'Actant',
+    sphereCounts: {type: 'list', objectType: 'Count'},
+    wordCount: {type: 'int', default: 0},
+  }
+};
+
+export class Statement extends Realm.Object {
+  // async static get words() {
+  //   const query = ``;
+  //   const data = await emdros.query(query, {firstMonad: this.firstMonad, lastMonad: this.lastMonad, count: true});
+  // }
+}
+Statement.schema = StatementSchema;
+
 const CountSchema = {
   name: 'Count',
   properties: {
@@ -347,20 +390,7 @@ export class Content extends Realm.Object {
 }
 Content.schema = ContentSchema;
 
-const OccurrenceSchema = {
-  name: 'Occurrence',
-  properties: {
-    book: 'Book',
-    count: 'int',
-  }
-};
-
-export class Occurrence extends Realm.Object {
-
-}
-Occurrence.schema = OccurrenceSchema;
-
-const Schema = [Bible, Book, Chapter, Source, SourceRelation, Sphere, Count, Content, Occurrence];
+const Schema = [Bible, Actant, Book, Chapter, SourceRelation, Sphere, Statement, Count, Content];
 
 const realm = new Realm({
   schema: Schema,

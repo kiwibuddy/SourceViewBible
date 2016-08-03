@@ -21,10 +21,10 @@ import SourcesBarChart from '../../Components/Charts/SourcesBarChart';
 
 import Icon from '../../Components/Common/Icon';
 
-import { Source } from '../../Database';
+import { Actant } from '../../Database';
 
 type Props = {
-  sourceID: string,
+  sourceID: number,
 };
 
 type State = {
@@ -38,7 +38,7 @@ export default class SourceConversation extends Component {
   constructor(props: Props) {
     super(props);
 
-    const source = Source.findByID(props.sourceID);
+    const source = Actant.findByID(props.sourceID);
     this.state = {source};
   }
 

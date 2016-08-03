@@ -22,10 +22,10 @@ import {
 import { SourcesBarChart, SpheresBarChart, WordCloud } from '../../Components/Charts';
 import ParallaxMotionView from '../../Components/Common/ParallaxMotionView';
 
-import { Source } from '../../Database';
+import { Actant } from '../../Database';
 
 type Props = {
-  sourceID: string,
+  sourceID: number,
   navigate: Function,
 };
 
@@ -40,7 +40,7 @@ export default class SourceWords extends Component {
   constructor(props: Props) {
     super(props);
 
-    const source = Source.findByID(props.sourceID);
+    const source = Actant.findByID(props.sourceID);
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     this.state = {
       source,

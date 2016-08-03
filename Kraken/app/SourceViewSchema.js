@@ -15,6 +15,32 @@ class Bible extends Realm.Object {
 }
 Bible.schema = BibleSchema;
 
+const ActantSchema = {
+  name: 'Actant',
+  primaryKey: 'id',
+  properties: {
+    id: 'int',
+    name: {type: 'string', indexed: true},
+    firstInitial: {type: 'string', optional: true},
+    gender: 'int',
+    natureValues: {type: 'string', indexed: true, optional: true},
+    actantNumber: {type: 'int', optional: true},
+    chronologyValues: {type: 'string', indexed: true, optional: true},
+    professionValues: {type: 'string', indexed: true, optional: true},
+    isSource: 'bool',
+    isRecipient: 'bool',
+    sphereCount: {type: 'int', default: 0},
+    sphereCounts: {type: 'list', objectType: 'Count'},
+    wordCount: {type: 'int', default: 0},
+    words: {type: 'list', objectType: 'Count'},
+  }
+};
+
+class Actant extends Realm.Object {
+
+}
+Actant.schema = ActantSchema;
+
 const BookSchema = {
   name: 'Book',
   primaryKey: 'id',
@@ -135,45 +161,6 @@ class Content extends Realm.Object {
 
 }
 Content.schema = ContentSchema;
-
-// const OccurrenceSchema = {
-//   name: 'Occurrence',
-//   properties: {
-//     book: 'Book',
-//     count: 'int',
-//   }
-// };
-//
-// class Occurrence extends Realm.Object {
-//
-// }
-// Occurrence.schema = OccurrenceSchema;
-
-const ActantSchema = {
-  name: 'Actant',
-  primaryKey: 'id',
-  properties: {
-    id: 'int',
-    name: {type: 'string', indexed: true},
-    firstInitial: {type: 'string', optional: true},
-    gender: 'int',
-    natureValues: {type: 'string', indexed: true, optional: true},
-    actantNumber: {type: 'int', optional: true},
-    chronologyValues: {type: 'string', indexed: true, optional: true},
-    professionValues: {type: 'string', indexed: true, optional: true},
-    isSource: 'bool',
-    isRecipient: 'bool',
-    sphereCount: {type: 'int', default: 0},
-    sphereCounts: {type: 'list', objectType: 'Count'},
-    wordCount: {type: 'int', default: 0},
-    words: {type: 'list', objectType: 'Count'},
-  }
-};
-
-class Actant extends Realm.Object {
-
-}
-Actant.schema = ActantSchema;
 
 const StatementSchema = {
   name: 'Statement',

@@ -24,10 +24,10 @@ import Icon from '../../Components/Common/Icon';
 
 import { sourceURL, sourceBooksURL, sourceConversationsURL, sourceSpheresURL, sourceWordsURL } from '../../Navigation';
 
-import { Source } from '../../Database';
+import { Actant } from '../../Database';
 
 type Props = {
-  sourceID: string,
+  sourceID: number,
   navigate: Function,
 };
 
@@ -42,7 +42,7 @@ export default class SourceOverview extends Component {
   constructor(props: Props) {
     super(props);
 
-    const source = Source.findByID(props.sourceID);
+    const source = Actant.findByID(props.sourceID);
     this.state = {source};
   }
 

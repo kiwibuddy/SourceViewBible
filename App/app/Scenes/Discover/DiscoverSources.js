@@ -31,7 +31,7 @@ const MAXIMUM_SOURCE_COUNT = 9;
 
 import { sourcesURL, sourceURL } from '../../Navigation';
 
-import { Bible, Book, Source } from '../../Database';
+import { Bible, Actant, Book } from '../../Database';
 
 type Props = {
   navigate: Function,
@@ -56,7 +56,7 @@ export default class DiscoverSources extends Component {
   }
 
   componentDidMount() {
-    const sources = Source.all().sorted('wordCount', true).slice(0, MAXIMUM_SOURCE_COUNT);
+    const sources = Actant.sources().sorted('wordCount', true).slice(0, MAXIMUM_SOURCE_COUNT);
 
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(sources)

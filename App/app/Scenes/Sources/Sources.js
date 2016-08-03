@@ -29,7 +29,7 @@ const LISTVIEW_REF = 'LISTVIEW_REF';
 
 import { sourceURL } from '../../Navigation';
 
-import { Source } from '../../Database';
+import { Actant } from '../../Database';
 
 type Props = {
   navigate: Function,
@@ -47,7 +47,7 @@ export default class Sources extends Component {
     super(props);
 
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
-    const sources = Source.all().sorted('firstInitial').sorted('name');
+    const sources = Actant.sources().sorted('firstInitial').sorted('name');
     const { rows, sections } = this._getRowsAndSections(sources);
 
     this.state = {
