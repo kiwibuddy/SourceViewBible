@@ -99,7 +99,7 @@ const std::set<std::string> RCTStopwords = {"the","and","of","to","you","will","
     }
 }
 
-- (void)wordCounts:(NSArray<NSArray<NSNumber *> *> *)monads limit:(NSInteger)limit completion:(void (^)(id result, NSError *error))completion {
+- (void)wordCounts:(NSArray<NSArray<NSNumber *> *> *)monads limit:(NSInteger)limit useStopWords:(BOOL)useStopWords completion:(void (^)(id result, NSError *error))completion {
     try {
         SetOfMonads soms;
         
@@ -108,7 +108,8 @@ const std::set<std::string> RCTStopwords = {"the","and","of","to","you","will","
             soms.unionWith(som);
         }
         
-        const std::set<std::string> stopwords = {};
+        std::set<std::string> stopwords = {};
+        if (useStopWords) stopwords = RCTStopwords;
         
         std::string errorMessage;
         std::string json = getWordCountsInSOM(_emdrosEnv, soms, stopwords, errorMessage);

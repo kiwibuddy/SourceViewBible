@@ -52,8 +52,21 @@ function scripture(options: Object) {
   })
 }
 
+function wordCounts(options: Object) {
+  if (DB == null) {
+    const promise = new Promise((resolve, reject) => {
+      reject('DB is null');
+    });
+    return promise;
+  }
+
+  return DB.wordCounts(options);
+}
+
 module.exports = {
+  key: Emdros.key,
   openDatabase,
   query,
-  scripture
+  scripture,
+  wordCounts,
 }

@@ -3,7 +3,7 @@
 
 import { Platform } from 'react-native';
 import Realm from 'realm';
-import Emdros from 'react-native-emdros';
+import Emdros from '../API/Emdros';
 const RNFS = require('react-native-fs');
 
 import { Localizable } from '../Common';
@@ -395,10 +395,9 @@ export class Statement extends Realm.Object {
     return realm.objects('Statement');
   }
 
-  // async static get words() {
-  //   const query = ``;
-  //   const data = await emdros.query(query, {firstMonad: this.firstMonad, lastMonad: this.lastMonad, count: true});
-  // }
+  async words() {
+    return await Emdros.wordCounts({from: this.firstMonad, to: this.lastMonad, useStopWords: true});
+  }
 }
 Statement.schema = StatementSchema;
 

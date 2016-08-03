@@ -25,7 +25,7 @@ typedef NS_ENUM(NSInteger, RCTEmdrosBackendKind) {
 - (void)connect:(void (^)(BOOL isConnected, NSError *error))completion;
 
 - (void)query:(NSString *)query options:(NSDictionary *)options completion:(void (^)(id result, NSError *error))completion;
-- (void)wordCounts:(NSArray<NSArray<NSNumber *> *> *)monads limit:(NSInteger)limit completion:(void (^)(id result, NSError *error))completion;
+- (void)wordCounts:(NSArray<NSArray<NSNumber *> *> *)monads limit:(NSInteger)limit useStopWords:(BOOL)useStopWords completion:(void (^)(id result, NSError *error))completion;
 
 - (void)stringFrom:(NSInteger)from to:(NSInteger)to options:(NSDictionary *)options completion:(void (^)(id result, NSError *error))completion;
 

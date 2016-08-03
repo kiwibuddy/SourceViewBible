@@ -35,6 +35,38 @@ import { Actant, Book, Statement } from '../../Database';
 
 const SCROLLVIEW_REF = 'scrollview';
 
+async function query() {
+  const values = {};
+
+  // Statement.all().filtered('firstMonad >= $0 AND lastMonad <= $1', 1, 50638).forEach(statement => {
+  //   const actant = statement.source;
+  //   if (actant) {
+  //     actant.professions.forEach(profession => {
+  //       const wordCount = values[profession.name] || 0;
+  //       values[profession.name] = wordCount + statement.wordCount;
+  //     });
+  //   }
+  // });
+
+  const statements = Statement.all().filtered('firstMonad >= $0 AND lastMonad <= $1 AND source.professionValues CONTAINS $2', 1, 50638, ' 36 ');
+  for (let statement of statements) {
+    const words = await statement.words();
+    words.forEach(wordCount => {
+      const count = values[wordCount.string] || 0;
+      values[wordCount.string] = count + wordCount.count;
+    });
+  }
+//
+//   Statement.filtered('firstMonad >= $0 AND lastMonad <= $1 AND source.professionValues CONTAINS $2', 1, 50638, '|Shepherd|').reduce((words, statement) => {
+// statement.words.forEach(wordCount => words[wordCount.string] += wordCount.count);
+// }, {});
+
+
+  const data = Object.keys(values).sort((a,b) => values[a] > values[b] ? -1 : 1).slice(0, 20).map(key => ({key, count:values[key]}));
+
+  console.log(data);
+}
+
 type Props = {
   navigate: Function,
 };
@@ -63,21 +95,7 @@ export default class DiscoveryCenter extends Component {
   }
 
   render() {
-
-    const statements = {};
-    Statement.all().filtered('firstMonad >= $0 AND lastMonad <= $1', 1, 50638).forEach(statement => {
-      const actant = statement.source;
-      if (actant) {
-        actant.professions.forEach(profession => {
-          const wordCount = statements[profession.name] || 0;
-          statements[profession.name] = wordCount + statement.wordCount;
-        });
-      }
-    });
-
-    const data = Object.keys(statements).sort((a,b) => statements[a] > statements[b] ? -1 : 1).map(profession => ({profession, count:statements[profession]}));
-
-    console.log(data);
+    query();
 
     const toolbar = this._renderToolbar();
     const cards = this.state.cards.map(card => this._renderCard(card));

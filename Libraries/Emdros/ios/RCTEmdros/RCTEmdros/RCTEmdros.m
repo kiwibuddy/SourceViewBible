@@ -94,7 +94,7 @@ RCT_EXPORT_METHOD(wordCounts:(NSDictionary *)options resolver:(RCTPromiseResolve
     }
     
     NSInteger limit = [options[@"limit"] integerValue];
-    [emdros wordCounts:monads limit:limit completion:^(id result, NSError *error) {
+    [emdros wordCounts:monads limit:limit useStopWords:[options[@"useStopWords"] integerValue] completion:^(id result, NSError *error) {
         if (!error) {
             resolve(result);
         } else {
