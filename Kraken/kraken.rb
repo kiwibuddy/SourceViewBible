@@ -7,18 +7,16 @@ require 'pp'
 
 DB = Sequel.connect('sqlite:///tmp/SourceView.sqlite3')
 
+def value_or_nil(value)
+  value.to_s.strip.length > 0 ? value : nil
+end
+
 actant_objects = DB['SELECT DISTINCT actant_objects.*, actant_mdf_real_name_set.string_value AS real_name,
 	CASE WHEN sourceactant_objects.object_id_d > 0 THEN 1 ELSE 0 END AS is_source,
 	CASE WHEN recipientactant_objects.object_id_d > 0 THEN 1 ELSE 0 END AS is_recipient
 FROM actant_objects INNER JOIN actant_mdf_real_name_set ON actant_mdf_real_name_set.id_d = actant_objects.mdf_real_name
 	LEFT JOIN sourceactant_objects ON actant_objects.mdf_actant_id = sourceactant_objects.mdf_actant_id
 	LEFT JOIN recipientactant_objects ON actant_objects.mdf_actant_id = recipientactant_objects.mdf_actant_id']
-
-
-def value_or_nil(value)
-  value.to_s.strip.length > 0 ? value : nil
-end
-
 
 actants = actant_objects.all.map do |actant_object|
   name = actant_object[:real_name]
@@ -39,5 +37,22 @@ actants = actant_objects.all.map do |actant_object|
 end
 
 pp actants
+File.open("data/actants.json", "w+") { |f| f.write JSON.pretty_generate(actants) }
 
-File.open("actants.json", "w+") { |f| f.write JSON.pretty_generate(actants) }
+statements = []
+DB[:statement_objects].each do |statement_object|
+	recipient_values = statement_object[:mdf_recipients].split(" ")
+	recipient_values.each do |recipient_id|
+		id = statements.length + 1
+		statements << {
+			id: id,
+			firstMonad: statement_object[:first_monad],
+			lastMonad: statement_object[:last_monad],
+			recipientID: recipient_id.to_i,
+			sourceID: statement_object[:mdf_sources].to_s.strip.to_i
+		}
+	end
+end
+
+pp statements
+File.open("data/statements.json", "w+") { |f| f.write JSON.pretty_generate(statements) }

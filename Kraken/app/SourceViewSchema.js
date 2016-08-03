@@ -190,7 +190,6 @@ const ActantSchema = {
     sphereCounts: {type: 'list', objectType: 'Count'},
     wordCount: {type: 'int', default: 0},
     words: {type: 'list', objectType: 'Count'},
-    occurrences: {type: 'list', objectType: 'Occurrence'},
   }
 };
 
@@ -201,7 +200,9 @@ Actant.schema = ActantSchema;
 
 const StatementSchema = {
   name: 'Statement',
+  primaryKey: 'id',
   properties: {
+    id: 'int',
     firstMonad: {type: 'int', indexed: true},
     lastMonad: {type: 'int', indexed: true},
     book: 'Book',
@@ -221,5 +222,5 @@ class Statement extends Realm.Object {
 }
 Statement.schema = StatementSchema;
 
-const Schema = [Actant, Bible, Book, Chapter, Source, SourceRelation, Sphere, Count, Content, Occurrence];
+const Schema = [Actant, Bible, Book, Chapter, Source, SourceRelation, Sphere, Count, Content, Occurrence, Statement];
 export default Schema;
