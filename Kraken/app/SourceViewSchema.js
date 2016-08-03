@@ -75,30 +75,12 @@ class Chapter extends Realm.Object {
 }
 Chapter.schema = ChapterSchema;
 
-const SourceSchema = {
-  name: 'Source',
-  primaryKey: 'id',
-  properties: {
-    id: 'string',
-    name: {type: 'string', indexed: true},
-    firstInitial: {type: 'string', optional: true},
-    occurrences: {type: 'list', objectType: 'Occurrence'},
-    wordCount: {type: 'int', default: 0},
-    words: {type: 'list', objectType: 'Count'},
-  }
-};
-
-class Source extends Realm.Object {
-
-}
-Source.schema = SourceSchema;
-
 const SourceRelationSchema = {
   name: 'SourceRelation',
   primaryKey: 'id',
   properties: {
     id: 'string',
-    source: 'Source',
+    source: 'Actant',
     wordCount: {type: 'int', default: 0},
     words: {type: 'list', objectType: 'Count'},
   }
@@ -154,18 +136,18 @@ class Content extends Realm.Object {
 }
 Content.schema = ContentSchema;
 
-const OccurrenceSchema = {
-  name: 'Occurrence',
-  properties: {
-    book: 'Book',
-    count: 'int',
-  }
-};
-
-class Occurrence extends Realm.Object {
-
-}
-Occurrence.schema = OccurrenceSchema;
+// const OccurrenceSchema = {
+//   name: 'Occurrence',
+//   properties: {
+//     book: 'Book',
+//     count: 'int',
+//   }
+// };
+//
+// class Occurrence extends Realm.Object {
+//
+// }
+// Occurrence.schema = OccurrenceSchema;
 
 const ActantSchema = {
   name: 'Actant',
@@ -217,5 +199,5 @@ class Statement extends Realm.Object {
 }
 Statement.schema = StatementSchema;
 
-const Schema = [Actant, Bible, Book, Chapter, Source, SourceRelation, Sphere, Count, Content, Occurrence, Statement];
+const Schema = [Actant, Bible, Book, Chapter, SourceRelation, Sphere, Count, Content, Statement];
 export default Schema;

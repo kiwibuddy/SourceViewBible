@@ -83,7 +83,7 @@ async function seedSphereWordCloud(sphereName, emdros, realm) {
   const query = `
   {
       "objectTypeName": "Token",
-      "feature": ["surface"],
+      "feature": ["surface_fts"],
       "expression" : "${sphereName}=true"
   }
   `;
