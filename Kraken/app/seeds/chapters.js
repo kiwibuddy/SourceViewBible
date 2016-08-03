@@ -68,7 +68,9 @@ async function seedBookChapters(emdros, realm) {
     books.forEach(book => {
       console.log(`Seeding ${book.name} Chapters...`);
       const chapters = bookChapters[book.id];
-      realm.create('Book', {id: book.id, chapters}, true);
+      const firstMonad = chapters[0].firstMonad;
+      const lastMonad = chapters[chapters.length - 1].lastMonad;
+      realm.create('Book', {id: book.id, chapters, firstMonad, lastMonad}, true);
     });
   });
 }

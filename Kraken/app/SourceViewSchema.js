@@ -24,6 +24,8 @@ const BookSchema = {
     name: {type: 'string', indexed: true},
     testament: 'int',
     textOrder: {type: 'int', indexed: true},
+    firstMonad: {type: 'int', default: 0},
+    lastMonad: {type: 'int', default: 0},
     chapterCount: {type: 'int', default: 0},
     chapters: {type: 'list', objectType: 'Chapter'},
     maxChapterWordCount: {type: 'int', default: 0},
@@ -45,11 +47,9 @@ const BookSchema = {
 
 class Book extends Realm.Object {
   get monadSet(): Object {
-    const firstChapter = this.chapters[0];
-    const lastChapter = this.chapters[this.chapterCount - 1];
     return {
-      first: firstChapter.firstMonad,
-      last: lastChapter.lastMonad
+      first: this.firstMonad,
+      last: this.lastMonad
     };
   }
 }

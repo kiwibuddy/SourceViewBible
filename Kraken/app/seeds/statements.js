@@ -9,7 +9,15 @@ export async function seedStatementObjects(emdros: Object, realm: Object) {
   console.log('Seeding Statement Objectss...');
 
   realm.write(() => {
-    STATEMENTS.forEach(statement => realm.create('Statement', statement));
+    STATEMENTS.forEach(statement => {
+      statement.recipient = realm.objectForPrimaryKey('Actant', statement.recipientID);
+      delete statement.recipientID;
+
+      statement.source = realm.objectForPrimaryKey('Actant', statement.sourceID);
+      delete statement.sourceID;
+
+      realm.create('Statement', statement)
+    });
   });
 }
 

@@ -21,6 +21,7 @@ const { seedChapterObjects, seedChapters } = require('./seeds/chapters');
 const { seedActantObjects, seedActants } = require('./seeds/actants');
 const { seedSourceObjects, seedSources } = require('./seeds/sources');
 const { seedSphereObjects, seedSpheres } = require('./seeds/spheres');
+const { seedStatementObjects, seedStatements } = require('./seeds/statements');
 
 export async function release() {
   console.log('Release the Kraken!');
@@ -50,6 +51,10 @@ async function seed(emdros) {
 
   await seedChapters(emdros, realm);
 
+  await seedActants(emdros, realm);
+
+  await seedStatements(emdros, realm);
+
   await seedSources(emdros, realm);
 
   await seedSpheres(emdros, realm);
@@ -63,6 +68,7 @@ async function seedBaseObjects(emdros) {
   await seedBookObjects(emdros, realm);
   await seedChapterObjects(emdros, realm);
   await seedActantObjects(emdros, realm)
+  await seedStatementObjects(emdros, realm);
   await seedSourceObjects(emdros, realm);
   await seedSphereObjects(emdros, realm);
 }
