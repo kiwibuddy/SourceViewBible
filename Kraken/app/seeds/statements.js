@@ -6,15 +6,21 @@ const {getChapterID, firstInitial, seedObjectSphereWordCounts, seedObjectWordClo
 const STATEMENTS = require('../../data/statements');
 
 export async function seedStatementObjects(emdros: Object, realm: Object) {
-  console.log('Seeding Statement Objectss...');
+  console.log('Seeding Statement Objects...');
 
   realm.write(() => {
     STATEMENTS.forEach(statement => {
-      statement.recipient = realm.objectForPrimaryKey('Actant', statement.recipientID);
+      if (statement.recipientID > 0) {
+        statement.recipient = realm.objectForPrimaryKey('Actant', statement.recipientID);
+      }
       delete statement.recipientID;
 
-      statement.source = realm.objectForPrimaryKey('Actant', statement.sourceID);
+      if (statement.sourceID > 0) {
+        statement.source = realm.objectForPrimaryKey('Actant', statement.sourceID);
+      }
       delete statement.sourceID;
+
+      statement.book = realm.objects('Book').filtered('firstMonad <= $0 AND lastMonad >= $0', statement.firstMonad)[0];
 
       realm.create('Statement', statement)
     });
@@ -24,4 +30,22 @@ export async function seedStatementObjects(emdros: Object, realm: Object) {
 export async function seedStatements(emdros: Object, realm: Object) {
   console.log('Seeding Statements...');
 
+  await seedStatementWordCounts(emdros, realm);
+}
+
+async function seedStatementWordCounts(emdros: Object, realm: Object) {
+  console.log('Seeding Statement Word Counts...');
+
+  const wordCountByStatement = {};
+  for (let statement of STATEMENTS) {
+    const wordCounts = await emdros.wordCounts({from: statement.firstMonad, to: statement.lastMonad});
+    wordCountByStatement[statement.id] = wordCounts.reduce((sum, word) => sum += word.count, 0);
+  }
+
+  realm.write(() => {
+    Object.keys(wordCountByStatement).forEach(statementID => {
+      const wordCount = wordCountByStatement[statementID];
+      realm.create('Statement', {id: parseInt(statementID), wordCount}, true);
+    });
+  })
 }

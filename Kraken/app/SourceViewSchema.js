@@ -46,12 +46,7 @@ const BookSchema = {
 };
 
 class Book extends Realm.Object {
-  get monadSet(): Object {
-    return {
-      first: this.firstMonad,
-      last: this.lastMonad
-    };
-  }
+
 }
 Book.schema = BookSchema;
 

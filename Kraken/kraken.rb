@@ -40,7 +40,11 @@ pp actants
 File.open("data/actants.json", "w+") { |f| f.write JSON.pretty_generate(actants) }
 
 statements = []
-DB[:statement_objects].each do |statement_object|
+statement_objects = DB['SELECT statement_objects.*, source_objects.mdf_source_occurrence
+FROM statement_objects INNER JOIN source_objects ON source_objects.first_monad = statement_objects.first_monad
+	AND source_objects.last_monad = statement_objects.last_monad']
+
+statement_objects.each do |statement_object|
 	recipient_values = statement_object[:mdf_recipients].split(" ")
 	recipient_values.each do |recipient_id|
 		id = statements.length + 1
@@ -49,7 +53,8 @@ DB[:statement_objects].each do |statement_object|
 			firstMonad: statement_object[:first_monad],
 			lastMonad: statement_object[:last_monad],
 			recipientID: recipient_id.to_i,
-			sourceID: statement_object[:mdf_sources].to_s.strip.to_i
+			sourceID: statement_object[:mdf_sources].to_s.strip.to_i,
+      sourceOccurrence: statement_object[:mdf_source_occurrence]
 		}
 	end
 end

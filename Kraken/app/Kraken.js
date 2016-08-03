@@ -47,19 +47,19 @@ export async function release() {
 async function seed(emdros) {
   await seedBaseObjects(emdros);
 
-  await seedBooks(emdros, realm);
+  // await seedBooks(emdros, realm);
 
-  await seedChapters(emdros, realm);
+  // await seedChapters(emdros, realm);
 
   await seedActants(emdros, realm);
 
   await seedStatements(emdros, realm);
-
-  await seedSources(emdros, realm);
-
-  await seedSpheres(emdros, realm);
-
-  await seedBible(emdros, realm);
+  //
+  // await seedSources(emdros, realm);
+  //
+  // await seedSpheres(emdros, realm);
+  //
+  // await seedBible(emdros, realm);
 }
 
 async function seedBaseObjects(emdros) {
@@ -69,8 +69,8 @@ async function seedBaseObjects(emdros) {
   await seedChapterObjects(emdros, realm);
   await seedActantObjects(emdros, realm)
   await seedStatementObjects(emdros, realm);
-  await seedSourceObjects(emdros, realm);
-  await seedSphereObjects(emdros, realm);
+  // await seedSourceObjects(emdros, realm);
+  // await seedSphereObjects(emdros, realm);
 }
 
 async function seedBible(emdros: Object, realm) {

@@ -6,7 +6,7 @@ const {getChapterID, firstInitial, seedObjectSphereWordCounts, seedObjectWordClo
 const ACTANTS = require('../../data/actants');
 
 export async function seedActantObjects(emdros: Object, realm: Object) {
-  console.log('Seeding Actant Objectss...');
+  console.log('Seeding Actant Objects...');
 
   realm.write(() => {
     ACTANTS.forEach(actant => realm.create('Actant', actant));
