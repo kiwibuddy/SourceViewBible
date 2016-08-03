@@ -18,7 +18,7 @@ export async function seedActants(emdros: Object, realm: Object) {
 
   await seedActantWordCloud(emdros, realm);
 
-  // await seedActantOccurrences(emdros, realm);
+  await seedSphereCounts(emdros, realm);
 }
 
 async function seedActantWordCloud(emdros, realm) {
@@ -37,16 +37,15 @@ async function seedActantWordCloud(emdros, realm) {
   return new Promise((resolve, reject) => {
     emdros.query(query, {count: true}).then((data) => {
       const actantData = data["SourceActant"]["actant_id"];
-      // console.log(actantData);
 
       if (actantData != null) {
         Object.keys(actantData).forEach(actantID => {
           realm.write(() => {
             const actant = realm.objectForPrimaryKey('Actant', parseInt(actantID));
-            const wordData = actantData[actantID]["Token"]["surface_fts"];
-
-            // console.log(wordData);
-            seedObjectWordCloud(realm, 'Actant', actant.id, wordData);
+            if (actant) {
+              const wordData = actantData[actantID]["Token"]["surface_fts"];
+              seedObjectWordCloud(realm, 'Actant', actant.id, wordData);
+            }
           });
         });
       }
@@ -58,59 +57,37 @@ async function seedActantWordCloud(emdros, realm) {
   });
 }
 
-async function seedActantOccurrences(emdros, realm) {
-  console.log('Seeding Actant Occurrences...');
+async function seedSphereCounts(emdros, realm) {
+  console.log('Seeding Actant Sphere Word Counts...');
+  const sphereFeatures = Object.keys(SPHERE_MAP).map(key => `"${key}"`).join(', ');
   const query = `
   {
-    "objectTypeName": "Book",
-    "feature": "DJHRef",
+    "objectTypeName": "SourceActant",
+    "feature": "actant_id",
     "buckets": {
-      "objectTypeName": "Chapter",
-      "feature": "chapter",
-      "buckets": {
-        "objectTypeName": "Actant",
-        "feature": "actant_name",
-      }
+      "objectTypeName": "Token",
+      "feature": [${sphereFeatures}],
     }
   }
   `;
 
   return new Promise((resolve, reject) => {
     emdros.query(query, {count: true}).then((data) => {
-      for (let [index, book] of realm.objects('Book').entries()) {
-        const bookData = data["Book"]["DJHRef"][book.DJHRef];
-        if (bookData != null) {
-          const actants = book.actants;
-          const chapterData = bookData["Chapter"]["chapter"];
-          if (chapterData != null) {
-            for (let [index, chapter] of book.chapters.entries()) {
-              const chapterNumber = chapter.chapterNumber;
-              const actantData = chapterData[chapterNumber.toString()]["Actant"]["actant_name"];
-              if (actantData != null) {
-                Object.keys(actantData).forEach((actantName) => {
-                  realm.write(() => {
-                    const actant = realm.objects('Actant').find(actant => actant.name === actantName);
-                    let occurrence = actant.occurrences.find(occurrence => occurrence.book.id == book.id);
-                    const count = actantData[actantName];
-                    if (!occurrence) {
-                      actant.occurrences.push({
-                        book,
-                        count
-                      });
-                    } else {
-                      occurrence.count += count;
-                    }
-                  });
-                });
-              }
-            }
+      const actantData = data["SourceActant"]["actant_id"];
+
+      Object.keys(actantData).forEach(actantID => {
+        realm.write(() => {
+          const actant = realm.objectForPrimaryKey('Actant', parseInt(actantID));
+          if (actant) {
+            const spheresData = actantData[actantID]["Token"];
+            seedObjectSphereWordCounts(realm, 'Actant', actant.id, spheresData);
           }
-        }
-      }
+        });
+      });
 
       resolve();
     }).catch((error) => {
       console.log(error);
-    });
+    })
   });
 }
