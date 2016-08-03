@@ -10,6 +10,16 @@ export async function seedStatementObjects(emdros: Object, realm: Object) {
 
   realm.write(() => {
     STATEMENTS.forEach(statement => {
+      if (statement.recipientID > 0) {
+        statement.recipient = realm.objectForPrimaryKey('Actant', statement.recipientID);
+      }
+      delete statement.recipientID;
+
+      if (statement.sourceID > 0) {
+        statement.source = realm.objectForPrimaryKey('Actant', statement.sourceID);
+      }
+      delete statement.sourceID;
+
       statement.book = realm.objects('Book').filtered('firstMonad <= $0 AND lastMonad >= $0', statement.firstMonad)[0];
       realm.create('Statement', statement)
     });

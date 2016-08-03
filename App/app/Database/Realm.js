@@ -216,7 +216,7 @@ export class Actant extends Realm.Object {
   }
 
   get statements(): Realm.ResultList {
-    return realm.objects('Statement').filtered('sourceID = $0', this.id);
+    return realm.objects('Statement').filtered('source.id = $0', this.id);
   }
 }
 Actant.schema = ActantSchema;
@@ -383,8 +383,8 @@ const StatementSchema = {
     lastMonad: {type: 'int', indexed: true},
     book: 'Book',
     sourceOccurrence:  {type: 'int', default: 0},
-    sourceID: {type: 'int', indexed: true},
-    recipientID: {type: 'int', indexed: true},
+    source: 'Actant',
+    recipient: 'Actant',
     sphereCounts: {type: 'list', objectType: 'Count'},
     wordCount: {type: 'int', default: 0},
   }
