@@ -26,6 +26,7 @@ const ActantSchema = {
     natureValues: {type: 'string', indexed: true, optional: true},
     actantNumber: {type: 'int', optional: true},
     chronologyValues: {type: 'string', indexed: true, optional: true},
+    professions: {type: 'list', objectType: 'Profession'},
     professionValues: {type: 'string', indexed: true, optional: true},
     isSource: 'bool',
     isRecipient: 'bool',
@@ -100,6 +101,20 @@ class Chapter extends Realm.Object {
 
 }
 Chapter.schema = ChapterSchema;
+
+const ProfessionSchema = {
+  name: 'Profession',
+  primaryKey: 'id',
+  properties: {
+    id: 'int',
+    key: 'string',
+    name: 'string'
+  }
+}
+class Profession extends Realm.Object {
+
+}
+Profession.schema = ProfessionSchema;
 
 const SourceRelationSchema = {
   name: 'SourceRelation',
@@ -186,5 +201,5 @@ class Statement extends Realm.Object {
 }
 Statement.schema = StatementSchema;
 
-const Schema = [Actant, Bible, Book, Chapter, SourceRelation, Sphere, Count, Content, Statement];
+const Schema = [Actant, Bible, Book, Chapter, Profession, SourceRelation, Sphere, Count, Content, Statement];
 export default Schema;

@@ -16,10 +16,10 @@ const realm = new Realm({
   encryptionKey: Emdros.key
 });
 
+const { seedActantMetaDataObjects } = require('./seeds/actant-meta-data');
 const { seedBookObjects, seedBooks } = require('./seeds/books');
 const { seedChapterObjects, seedChapters } = require('./seeds/chapters');
 const { seedActantObjects, seedActants } = require('./seeds/actants');
-const { seedSourceObjects, seedSources } = require('./seeds/sources');
 const { seedSphereObjects, seedSpheres } = require('./seeds/spheres');
 const { seedStatementObjects, seedStatements } = require('./seeds/statements');
 
@@ -46,30 +46,22 @@ export async function release() {
 
 async function seed(emdros) {
   await seedBaseObjects(emdros);
-
   await seedBooks(emdros, realm);
-
   await seedChapters(emdros, realm);
-
   await seedActants(emdros, realm);
-
   await seedStatements(emdros, realm);
-
-  // await seedSources(emdros, realm);
-
   await seedSpheres(emdros, realm);
-
   await seedBible(emdros, realm);
 }
 
 async function seedBaseObjects(emdros) {
   console.log('Seeding Base Objects');
 
+  await seedActantMetaDataObjects(realm);
   await seedBookObjects(emdros, realm);
   await seedChapterObjects(emdros, realm);
   await seedActantObjects(emdros, realm)
   await seedStatementObjects(emdros, realm);
-  // await seedSourceObjects(emdros, realm);
   await seedSphereObjects(emdros, realm);
 }
 

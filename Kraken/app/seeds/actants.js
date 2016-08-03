@@ -9,7 +9,11 @@ export async function seedActantObjects(emdros: Object, realm: Object) {
   console.log('Seeding Actant Objects...');
 
   realm.write(() => {
-    ACTANTS.forEach(actant => realm.create('Actant', actant));
+    ACTANTS.forEach(actant => {
+      const professions = (actant.professionValues ? actant.professionValues.trim().split(' ').map(professionID => realm.objectForPrimaryKey('Profession', parseInt(professionID))) : null);
+
+      realm.create('Actant', {...actant, professions});
+    });
   });
 }
 
