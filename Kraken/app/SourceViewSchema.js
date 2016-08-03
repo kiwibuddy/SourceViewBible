@@ -169,30 +169,17 @@ const ActantSchema = {
   name: 'Actant',
   primaryKey: 'id',
   properties: {
-    id: 'string',
+    id: 'int',
     name: {type: 'string', indexed: true},
     firstInitial: {type: 'string', optional: true},
     occurrences: {type: 'list', objectType: 'Occurrence'},
     professionValues: {type: 'string', indexed: true, optional: true},
-    professions: {type: 'list', objectType: 'Profession'},
     sphereCount: {type: 'int', default: 0},
     sphereCounts: {type: 'list', objectType: 'Count'},
     wordCount: {type: 'int', default: 0},
     words: {type: 'list', objectType: 'Count'},
   }
 };
-
-const ProfessionSchema = {
-  name: 'Profession',
-  properties: {
-    name: 'string'
-  }
-};
-
-class Profession extends Realm.Object {
-
-}
-Profession.schema = ProfessionSchema;
 
 const StatementSchema = {
   name: 'Statement',
