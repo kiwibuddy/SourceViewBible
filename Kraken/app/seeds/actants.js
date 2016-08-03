@@ -16,7 +16,7 @@ export async function seedActantObjects(emdros: Object, realm: Object) {
 export async function seedActants(emdros: Object, realm: Object) {
   console.log('Seeding Actants...');
 
-  // await seedActantWordCloud(emdros, realm);
+  await seedActantWordCloud(emdros, realm);
 
   // await seedActantOccurrences(emdros, realm);
 }
@@ -25,25 +25,25 @@ async function seedActantWordCloud(emdros, realm) {
   console.log('Seeding Actant Word Cloud...');
   const query = `
   {
-    "objectTypeName": "Actant",
+    "objectTypeName": "SourceActant",
     "feature": "actant_id",
     "buckets": {
       "objectTypeName": "Token",
-      "feature": "surface",
+      "feature": "surface_fts",
     }
   }
   `;
 
   return new Promise((resolve, reject) => {
     emdros.query(query, {count: true}).then((data) => {
-      const actantData = data["Actant"]["actant_id"];
-      console.log(actantData);
+      const actantData = data["SourceActant"]["actant_id"];
+      // console.log(actantData);
 
       if (actantData != null) {
         Object.keys(actantData).forEach(actantID => {
           realm.write(() => {
             const actant = realm.objectForPrimaryKey('Actant', parseInt(actantID));
-            const wordData = actantData[actantID]["Token"]["surface"];
+            const wordData = actantData[actantID]["Token"]["surface_fts"];
 
             // console.log(wordData);
             seedObjectWordCloud(realm, 'Actant', actant.id, wordData);

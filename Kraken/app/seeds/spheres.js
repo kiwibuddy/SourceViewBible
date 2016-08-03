@@ -91,7 +91,7 @@ async function seedSphereWordCloud(sphereName, emdros, realm) {
   return new Promise((resolve, reject) => {
     emdros.query(query, {count: true}).then((data) => {
       realm.write(() => {
-        const wordData = data["Token"]["surface"];
+        const wordData = data["Token"]["surface_fts"];
         seedObjectWordCloud(realm, 'Sphere', sphere.id, wordData);
       });
 

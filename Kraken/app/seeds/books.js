@@ -125,7 +125,7 @@ async function seedSourceWordCloud(emdros, realm) {
       "feature": "source_name",
       "buckets": {
         "objectTypeName": "Token",
-        "feature": "surface",
+        "feature": "surface_fts",
       }
     }
   }
@@ -143,7 +143,7 @@ async function seedSourceWordCloud(emdros, realm) {
                 const source = realm.objectForPrimaryKey('Source', getSourceID(sourceName));
                 if (source != null) {
                   const sourceRelation = book.sourceRelations.find(sourceRelation => sourceRelation.source.id === source.id);
-                  const wordData = sourceData[sourceName]["Token"]["surface"];
+                  const wordData = sourceData[sourceName]["Token"]["surface_fts"];
                   seedObjectWordCloud(realm, 'SourceRelation', sourceRelation.id, wordData);
                 }
               });

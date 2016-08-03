@@ -1,7 +1,7 @@
 /* @flow */
 'use strict';
 
-const {getChapterID, firstInitial, getSourceID, seedObjectSourceTypeWordCounts, seedObjectSphereWordCounts, seedObjectWordCloud, SPHERE_MAP} = require('../common');
+const {getChapterID, firstInitial, getSourceID, seedObjectSourceTypeWordCounts, seedObjectSphereWordCounts, SPHERE_MAP} = require('../common');
 
 export async function seedChapterObjects(emdros: Object, realm: Object) {
   console.log('Seeding Chapter Objects...');
