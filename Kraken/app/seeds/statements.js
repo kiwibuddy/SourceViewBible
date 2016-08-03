@@ -49,3 +49,8 @@ async function seedStatementWordCounts(emdros: Object, realm: Object) {
     });
   })
 }
+
+async function seedSphereCounts(emdros, realm) {
+  console.log('Seeding Statement Sphere Word Counts...');
+
+}
