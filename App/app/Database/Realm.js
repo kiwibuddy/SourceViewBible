@@ -6,6 +6,8 @@ import Realm from 'realm';
 import Emdros from 'react-native-emdros';
 const RNFS = require('react-native-fs');
 
+import { Localizable } from '../Common';
+
 function bookNameInText(text: string) {
   const regex = /([1-3]?\s?[A-Z]*)/gi;
   const match = text.match(regex);
@@ -194,6 +196,19 @@ export class Actant extends Realm.Object {
 
   static findByID(id: number) {
     return realm.objectForPrimaryKey('Actant', id ? parseInt(id) : 0);
+  }
+
+  get genderDescription(): ?String {
+    switch(this.gender) {
+      case 1:
+        return Localizable.t('gender-female');
+
+      case 2:
+        return Localizable.t('gender-male');
+
+      default:
+        return null;
+    }
   }
 
   get statements(): Realm.ResultList {

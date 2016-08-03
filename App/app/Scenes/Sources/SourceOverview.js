@@ -49,6 +49,12 @@ export default class SourceOverview extends Component {
   render() {
     const { source } = this.state;
     const words = source.words.map(word => word.string);
+
+    const metaDataValues = [];
+    if (source.genderDescription) {
+      metaDataValues.push(this._renderMetaValue(Localizable.t('gender'), source.genderDescription));
+    }
+
     return (
       <ScrollView style={styles.container}>
         <TouchableOpacity onPress={() => this.props.navigate(sourceWordsURL({sourceID: source.id, title: Localizable.t('source-words', {name: source.name})}))}>
@@ -114,18 +120,7 @@ export default class SourceOverview extends Component {
           </TouchableOpacity>
         </View>
         <View style={styles.listContainer}>
-          <View style={styles.listItemContainer}>
-            <Icon
-              name={'avatar-human-group'}
-              size={20}
-              style={[styles.listItemIcon, {color: '#59626A'}]}
-            />
-            <View style={styles.listItem}>
-              <Text style={StyleSheet.styles.cell.titlemedium}>Meta Data Title</Text>
-              <Text style={StyleSheet.styles.cell.valuetitlemedium}>Value</Text>
-            </View>
-          </View>
-          <View style={styles.separator} />
+            {metaDataValues}
         </View>
         <View style={styles.listContainer}>
           <View style={styles.listItemHeader}>
@@ -186,6 +181,23 @@ export default class SourceOverview extends Component {
           </TouchableOpacity>
         </View>
       </ScrollView>
+    );
+  }
+
+  _renderMetaValue(title: string, value: string) {
+    return (
+      <View key={title} style={styles.listItemContainer}>
+        <Icon
+          name={'avatar-human-group'}
+          size={20}
+          style={[styles.listItemIcon, {color: '#59626A'}]}
+        />
+        <View style={styles.listItem}>
+          <Text style={StyleSheet.styles.cell.titlemedium}>{title}</Text>
+          <Text style={StyleSheet.styles.cell.valuetitlemedium}>{value}</Text>
+        </View>
+        <View style={styles.separator} />
+      </View>
     );
   }
 }
