@@ -26,7 +26,7 @@ async function seedActantWordCloud(emdros, realm) {
   const query = `
   {
     "objectTypeName": "Actant",
-    "feature": "actant_name",
+    "feature": "actant_id",
     "buckets": {
       "objectTypeName": "Token",
       "feature": "surface",
@@ -36,12 +36,16 @@ async function seedActantWordCloud(emdros, realm) {
 
   return new Promise((resolve, reject) => {
     emdros.query(query, {count: true}).then((data) => {
-      const actantData = data["Actant"]["actant_name"];
+      const actantData = data["Actant"]["actant_id"];
+      console.log(actantData);
+
       if (actantData != null) {
-        Object.keys(actantData).forEach(actantName => {
+        Object.keys(actantData).forEach(actantID => {
           realm.write(() => {
-            let actant = realm.objects('Actant').find(actant => actant.name === actantName);
-            const wordData = actantData[actantName]["Token"]["surface"];
+            const actant = realm.objectForPrimaryKey('Actant', parseInt(actantID));
+            const wordData = actantData[actantID]["Token"]["surface"];
+
+            // console.log(wordData);
             seedObjectWordCloud(realm, 'Actant', actant.id, wordData);
           });
         });
