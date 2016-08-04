@@ -313,6 +313,32 @@ export class Chapter extends Realm.Object {
 }
 Chapter.schema = ChapterSchema;
 
+const ContentSchema = {
+  name: 'Content',
+  properties: {
+    title: 'string',
+    body: 'string',
+  }
+};
+
+export class Content extends Realm.Object {
+
+}
+Content.schema = ContentSchema;
+
+const CountSchema = {
+  name: 'Count',
+  properties: {
+    string: 'string',
+    count: {type: 'int', default: 0},
+  }
+};
+
+export class Count extends Realm.Object {
+
+}
+Count.schema = CountSchema;
+
 const ProfessionSchema = {
   name: 'Profession',
   primaryKey: 'id',
@@ -386,6 +412,7 @@ const StatementSchema = {
     source: 'Actant',
     recipient: 'Actant',
     sphereCounts: {type: 'list', objectType: 'Count'},
+    sphereValues: {type: 'string', indexed: true, optional: true},
     wordCount: {type: 'int', default: 0},
   }
 };
@@ -400,32 +427,6 @@ export class Statement extends Realm.Object {
   }
 }
 Statement.schema = StatementSchema;
-
-const CountSchema = {
-  name: 'Count',
-  properties: {
-    string: 'string',
-    count: {type: 'int', default: 0},
-  }
-};
-
-export class Count extends Realm.Object {
-
-}
-Count.schema = CountSchema;
-
-const ContentSchema = {
-  name: 'Content',
-  properties: {
-    title: 'string',
-    body: 'string',
-  }
-};
-
-export class Content extends Realm.Object {
-
-}
-Content.schema = ContentSchema;
 
 const Schema = [Bible, Actant, Book, Chapter, Profession, SourceRelation, Sphere, Statement, Count, Content];
 

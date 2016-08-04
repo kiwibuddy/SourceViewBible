@@ -102,6 +102,32 @@ class Chapter extends Realm.Object {
 }
 Chapter.schema = ChapterSchema;
 
+const ContentSchema = {
+  name: 'Content',
+  properties: {
+    title: 'string',
+    body: 'string',
+  }
+};
+
+class Content extends Realm.Object {
+
+}
+Content.schema = ContentSchema;
+
+const CountSchema = {
+  name: 'Count',
+  properties: {
+    string: 'string',
+    count: {type: 'int', default: 0},
+  }
+};
+
+class Count extends Realm.Object {
+
+}
+Count.schema = CountSchema;
+
 const ProfessionSchema = {
   name: 'Profession',
   primaryKey: 'id',
@@ -151,32 +177,6 @@ class Sphere extends Realm.Object {
 }
 Sphere.schema = SphereSchema;
 
-const CountSchema = {
-  name: 'Count',
-  properties: {
-    string: 'string',
-    count: {type: 'int', default: 0},
-  }
-};
-
-class Count extends Realm.Object {
-
-}
-Count.schema = CountSchema;
-
-const ContentSchema = {
-  name: 'Content',
-  properties: {
-    title: 'string',
-    body: 'string',
-  }
-};
-
-class Content extends Realm.Object {
-
-}
-Content.schema = ContentSchema;
-
 const StatementSchema = {
   name: 'Statement',
   primaryKey: 'id',
@@ -189,17 +189,16 @@ const StatementSchema = {
     source: 'Actant',
     recipient: 'Actant',
     sphereCounts: {type: 'list', objectType: 'Count'},
+    sphereValues: {type: 'string', indexed: true, optional: true},
     wordCount: {type: 'int', default: 0},
   }
 };
 
 class Statement extends Realm.Object {
-  // async static get words() {
-  //   const query = ``;
-  //   const data = await emdros.query(query, {firstMonad: this.firstMonad, lastMonad: this.lastMonad, count: true});
-  // }
+
 }
 Statement.schema = StatementSchema;
+
 
 const Schema = [Actant, Bible, Book, Chapter, Profession, SourceRelation, Sphere, Count, Content, Statement];
 export default Schema;
