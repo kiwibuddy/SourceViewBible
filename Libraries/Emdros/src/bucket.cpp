@@ -1181,22 +1181,22 @@ void TokenBucket::countInSheaf(const Sheaf* pSheaf)
 	while (sheaf_ci.hasNext()) {
 		const Straw *pStraw = sheaf_ci.next();
 		StrawConstIterator straw_ci = pStraw->const_iterator();
-
+		
 		while (straw_ci.hasNext()) {
 			const MatchedObject *pMO = straw_ci.next();
-
+			
 			std::string surface_fts = pMO->getFeatureAsString(0);
             
-            const bool is_stop_word = m_stop_word_set.find(surface_fts) != m_stop_word_set.end();
-            if (!is_stop_word) {
-                String2IntMap::iterator it = m_token_count_map.find(surface_fts);
-                if (it == m_token_count_map.end()) {
-                    m_token_count_map[surface_fts] = 1;
-                    
-                } else {
-                    m_token_count_map[surface_fts] = it->second + 1;
-                }
-            }
+			const bool is_stop_word = m_stop_word_set.find(surface_fts) != m_stop_word_set.end();
+			if (!is_stop_word) {
+				String2IntMap::iterator it = m_token_count_map.find(surface_fts);
+				if (it == m_token_count_map.end()) {
+					m_token_count_map[surface_fts] = 1;
+					
+				} else {
+					m_token_count_map[surface_fts] = it->second + 1;
+				}
+			}
 		}
 	}
 }
@@ -1244,7 +1244,6 @@ void TokenBucket::getJSONInBigstring(Bigstring *pResult) const
 
 	ADD_CHAR('}');
 }
-
 
 
 

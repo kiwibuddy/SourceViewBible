@@ -4,7 +4,7 @@
  * Copyright (C) 2016 SourceView LLC. All rights reserved.
  *
  * Created: 2016/03/31
- * Last update: 2016/08/02
+ * Last update: 2016/08/03
  *
  * Contributors:
  *
@@ -154,10 +154,10 @@ Bucket *getBucketFromJSONBucketSpecification(EmdrosEnv *pEnv, const std::string&
 class TokenBucket {
  protected:
 	String2IntMap m_token_count_map;
-    std::set<std::string> m_stop_word_set;
+	std::set<std::string> m_stop_word_set;
  public:
 	TokenBucket();
-    TokenBucket(const std::set<std::string>& stop_word_set);
+	TokenBucket(const std::set<std::string>& stop_word_set);
 	~TokenBucket();
 
 	void countInSheaf(const Sheaf* pSheaf);

@@ -10,12 +10,12 @@ export async function seedStatementObjects(emdros: Object, realm: Object) {
 
   realm.write(() => {
     STATEMENTS.forEach(statement => {
-      if (statement.recipientID > 0) {
+      if (statement.recipientID) {
         statement.recipient = realm.objectForPrimaryKey('Actant', statement.recipientID);
       }
       delete statement.recipientID;
 
-      if (statement.sourceID > 0) {
+      if (statement.sourceID) {
         statement.source = realm.objectForPrimaryKey('Actant', statement.sourceID);
       }
       delete statement.sourceID;

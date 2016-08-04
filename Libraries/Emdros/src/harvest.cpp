@@ -165,3 +165,186 @@ std::string getWordCountsInSOM(EmdrosEnv *pEE, const SetOfMonads& substrate, con
 		return result;
 	}
 }
+
+
+
+
+/////////////////////////////////////////////////////////////////
+//
+// WordCount: counts of words and sphere tokens
+//
+/////////////////////////////////////////////////////////////////
+WordCounts::WordCounts()
+	: m_word_count(0),
+	  m_Family(0),
+	  m_Economics(0),
+	  m_Government(0),
+	  m_Religion(0),
+	  m_Education(0),
+	  m_MediaCom(0),
+	  m_Celebration(0)
+{
+}
+
+
+WordCounts::WordCounts(const WordCounts& other)
+{
+	assign(other);
+}
+
+
+WordCounts::~WordCounts()
+{
+}
+
+
+WordCounts& WordCounts::operator=(const WordCounts& other)
+{
+	assign(other);
+	return *this;
+}
+
+void WordCounts::assign(const WordCounts& other)
+{
+	m_word_count = other.m_word_count;
+	m_Family = other.m_Family;
+	m_Economics = other.m_Economics;
+	m_Government = other.m_Government;
+	m_Religion = other.m_Religion;
+	m_Education = other.m_Education;
+	m_MediaCom = other.m_MediaCom;
+	m_Celebration = other.m_Celebration;
+}
+
+
+
+
+/**
+ * Count token counts and sphere counts of tokens within a context
+ * object type (such as Statement), and optionally within a context
+ * substrate (i.e., context set of monads).
+ *
+ * Optionally, limit the Token by a feature value restriction.
+ *
+ * @param pEE The EmdrosEnv to search
+ *
+ * @param substrate A set of monads within which to search.  The set
+ * of monads, if non-empty, must encompass all of the
+ * context_object_type objects being searched.  If empty, all of the
+ * database is searched.
+ *
+ * @param context_object_type The outer context object type inside of
+ * which the tokens must be found.
+ *
+ * @param context_feature_comparison If empty, no restriction is put
+ * on the context object type.  If non-empty, it is placed right in
+ * the MQL, unmodified, at the point where the context object type
+ * gets its feature restrictions.
+ *
+ * @param token_feature_comparison If empty, no restriction is put on
+ * the Tokens inside.  If non-empty, then it is placed straight into
+ * the MQL query at the spot where the Token gets its feature
+ * restrictions.  This means, any string value must be surrounded by
+ * double quotes, and escaped with the escapeSTRINGstring() function
+ * which is part of Emdros.  For example: "Family=true" or
+ * "surface_fts=\"" + escapeSTRINGstring(peace) + "\"".
+ * 
+ *
+ *
+ *
+ *
+ * @return true upon success, false upon error.
+ */
+bool getWordCountsInContext(EmdrosEnv *pEE,
+			    const SetOfMonads& substrate,
+			    const std::string& context_object_type,
+			    const std::string& context_feature_comparison,
+			    const std::string& token_feature_comparison,
+			    ID_D2WordCountsMap& result,
+			    std::string& error_message)
+{
+	std::string query = "SELECT ALL OBJECTS";
+	if (!substrate.isEmpty()) {
+		query += " IN " + substrate.toString();
+	}
+	query += "WHERE [" + context_object_type;
+	if (!context_feature_comparison.empty()) {
+		query += " " + context_feature_comparison;
+	}
+	
+	query += "[Token";
+	if (!token_feature_comparison.empty()) {
+		query += " " + token_feature_comparison;
+	}
+	query += " GET Family, Economics, Government, Religion, Education, MediaCom, Celebration";
+	query += "]]";
+
+	bool bCompileResult = false;
+	bool bDBResult = pEE->executeString(query, bCompileResult, false, false, 0);
+	bool bResult = bDBResult && bCompileResult;
+	if (!bResult) {
+		error_message += "DBError: " + pEE->getDBError() + "\nCompilerError: " + pEE->getCompilerError() + "\n";
+		return false;
+	} else {
+		Sheaf *pSheaf = pEE->takeOverSheaf();
+		
+		SheafConstIterator context_sheaf_ci = pSheaf->const_iterator();
+		while (context_sheaf_ci.hasNext()) {
+			const Straw *pStraw = context_sheaf_ci.next();
+			StrawConstIterator context_straw_ci = pStraw->const_iterator();
+			while (context_straw_ci.hasNext()) {
+				const MatchedObject *pContextMO = context_straw_ci.next();
+
+				id_d_t context_id_d = pContextMO->getID_D();
+				
+				
+				WordCounts wc;
+				
+				SheafConstIterator token_sheaf_ci = pContextMO->getSheaf()->const_iterator();
+				while (token_sheaf_ci.hasNext()) {
+					const Straw *pStraw = token_sheaf_ci.next();
+					StrawConstIterator token_straw_ci = pStraw->const_iterator();
+					while (token_straw_ci.hasNext()) {
+						const MatchedObject *pTokenMO = token_straw_ci.next();
+						++wc.m_word_count;
+
+		
+						if (pTokenMO->getFeatureAsString(0) != "false") {
+							++wc.m_Family;
+						}
+
+						if (pTokenMO->getFeatureAsString(1) != "false") {
+							++wc.m_Economics;
+						}
+						
+						if (pTokenMO->getFeatureAsString(2) != "false") {
+							++wc.m_Government;
+						}
+						
+						if (pTokenMO->getFeatureAsString(3) != "false") {
+							++wc.m_Religion;
+						}
+						
+						if (pTokenMO->getFeatureAsString(4) != "false") {
+							++wc.m_Education;
+						}
+						
+						if (pTokenMO->getFeatureAsString(5) != "false") {
+							++wc.m_MediaCom;
+						}
+						
+						if (pTokenMO->getFeatureAsString(6) != "false") {
+							++wc.m_Celebration;
+						}
+					}
+				}
+				
+				result.insert(std::make_pair(context_id_d, wc));
+			}
+		}
+		
+		delete pSheaf;
+
+		return true;
+	}
+}

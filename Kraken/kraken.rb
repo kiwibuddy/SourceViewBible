@@ -46,6 +46,7 @@ FROM statement_objects INNER JOIN source_objects ON source_objects.first_monad =
 
 statement_objects.each do |statement_object|
 	recipient_values = statement_object[:mdf_recipients].split(" ")
+  recipient_values << nil if recipient_values.length == 0
 	recipient_values.each do |recipient_id|
 		id = statements.length + 1
 		statements << {
@@ -53,7 +54,7 @@ statement_objects.each do |statement_object|
       emdrosID: statement_object[:object_id_d],
 			firstMonad: statement_object[:first_monad],
 			lastMonad: statement_object[:last_monad],
-			recipientID: recipient_id.to_i,
+			recipientID: recipient_id ? recipient_id.to_i : nil,
 			sourceID: statement_object[:mdf_sources].to_s.strip.to_i,
       sourceOccurrence: statement_object[:mdf_source_occurrence]
 		}
