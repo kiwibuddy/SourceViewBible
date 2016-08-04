@@ -280,7 +280,7 @@ bool getWordCountsInContext(EmdrosEnv *pEE,
 	query += "]]";
 
 	bool bCompileResult = false;
-	bool bDBResult = pEE->executeString(query, bCompileResult, false, false, 0);
+	bool bDBResult = pEE->executeString(query, bCompileResult, true, true, 0);
 	bool bResult = bDBResult && bCompileResult;
 	if (!bResult) {
 		error_message += "DBError: " + pEE->getDBError() + "\nCompilerError: " + pEE->getCompilerError() + "\n";

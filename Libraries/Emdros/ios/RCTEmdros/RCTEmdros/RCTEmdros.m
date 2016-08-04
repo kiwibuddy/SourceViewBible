@@ -117,7 +117,7 @@ RCT_EXPORT_METHOD(statements:(NSDictionary *)options resolver:(RCTPromiseResolve
         monads = options[@"monads"];
     }
     
-    NSString *context = options[@"context"] ?: @"";
+    NSString *context = options[@"context"] ?: @"Statement";
     NSString *contextFeatureComparison = options[@"contextFeatureComparison"] ?: @"";
     NSString *tokenFeatureComparison = options[@"tokenFeatureComparison"] ?: @"";
     

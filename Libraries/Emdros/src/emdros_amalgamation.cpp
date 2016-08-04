@@ -58759,7 +58759,7 @@ std::string SQLite3EMdFDB::getEncodingClause(eCharsets charset) const
  *
  * Ulrik Petersen
  * Created: 1/27-2001
- * Last update: 4/27-2016
+ * Last update: 7/26-2016
  *
  */
 /************************************************************************
@@ -65394,7 +65394,7 @@ long BPTColumnValueAccessor::operator[](long row)
 			
 	}
 
-	long real_result = result + m_pParentCursor->m_pTable->getOffset(m_column_index);
+	long real_result = (int) result + m_pParentCursor->m_pTable->getOffset(m_column_index);
 	// std::cerr << "UP210: read_int(" << m_column_index << "): m_currow = " << m_currow << ", result = " << real_result << '\n';
 
 	/*

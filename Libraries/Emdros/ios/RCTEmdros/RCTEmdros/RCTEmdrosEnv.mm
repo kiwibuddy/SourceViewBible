@@ -12,7 +12,7 @@
 #include <fstream>
 #import "OCDBenchmark.h"
 
-const char RCTKeyCString[] = {48, 120, 51, 48, 97, 49, 50, 56, 50, 57, 32, 48, 120, 48, 50, 50, 56, 102, 53, 50, 55, 32, 48, 120, 49, 56, 55, 49, 56, 49, 51, 100, 32, 48, 120, 54, 53, 50, 53, 54, 55, 101, 57, 32, 48, 120, 53, 99, 101, 97, 50, 56, 98, 53, 32, 48, 120, 51, 100, 55, 100, 52, 98, 99, 55, 32, 48, 120, 53, 48, 48, 102, 101, 99, 100, 49, 32, 48, 120, 54, 99, 57, 51, 53, 54, 56, 100, 0};
+const char RCTKeyCString[] = {48, 120, 100, 49, 57, 55, 50, 100, 57, 55, 32, 48, 120, 97, 99, 100, 99, 53, 51, 99, 56, 0};
 #define RCTKey [NSString stringWithCString:RCTKeyCString encoding:NSASCIIStringEncoding]
 
 const std::set<std::string> RCTStopwords = {"the","and","of","to","you","will","in","I","a","he","for","they","your","is","with","his","from","that","be","all","them","as","who","it","was","but","my","have","s","this","their","are","me","on","him","people","then","so","not","when","were","had","king","what","by","we","at","said","one","has","t","do","son","out","if","there","no","or","land","like","us","must","these","up","those","her","day","our","now","man","into","am","can","come","let","because","go","about","against","give","down","even","don","an","over","other","she","before","made","been","men","its"};
@@ -169,17 +169,22 @@ const std::set<std::string> RCTStopwords = {"the","and","of","to","you","will","
         
         NSMutableDictionary *statements = [[NSMutableDictionary alloc] init];
         if (result) {
-            for (ID_D2WordCountsMap::iterator i=wordCountMap.begin(); i != wordCountMap.end(); ++i ) {
-                NSInteger statementID = i->first;
+//            for (ID_D2WordCountsMap::iterator i=wordCountMap.begin(); i != wordCountMap.end(); ++i ) {
+            for (auto const& iterator : wordCountMap) {
+                NSInteger statementID = iterator.first;
                 NSDictionary *statement = @{
-                    @"wordCount": @(i->second.m_word_count),
+                    @"wordCount": @(iterator.second.m_word_count),
                 };
                 [statements setObject:statement forKey:@(statementID)];
             }
         }
         
+        if (statements.count > 0) {
+            NSLog(@"%@", statements);
+        }
         
-        [[OCDBenchmark sharedBenchmark] end:[NSString stringWithFormat:@"getWordCountsInSOM: %@", monads]];
+        
+        [[OCDBenchmark sharedBenchmark] end:[NSString stringWithFormat:@"getWordCountsInContext: %@", monads]];
         
         
         if (completion) completion([[NSDictionary alloc] initWithDictionary:statements], nil);
