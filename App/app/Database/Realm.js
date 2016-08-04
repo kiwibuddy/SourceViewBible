@@ -405,6 +405,7 @@ const StatementSchema = {
   primaryKey: 'id',
   properties: {
     id: 'int',
+    emdrosID: {type: 'int', indexed: true},
     firstMonad: {type: 'int', indexed: true},
     lastMonad: {type: 'int', indexed: true},
     book: 'Book',
