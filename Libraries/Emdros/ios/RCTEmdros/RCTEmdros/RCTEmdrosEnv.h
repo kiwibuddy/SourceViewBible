@@ -9,15 +9,6 @@
 
 #define RCTEmdrosQuery(...) @#__VA_ARGS__
 
-typedef NS_ENUM(NSInteger, RCTEmdrosBackendKind) {
-    RCTEmdrosBackendKindNone = 0,     /**< No backend selected */
-//    RCTEmdrosBackendKindSQL = 1,      /**< PostgreSQL */ Not yet implemented
-//    RCTEmdrosBackendKindMySQL = 2,    /**< MySQL */ Not yet implemented
-//    RCTEmdrosBackendKindSQLite2 = 3,  /**< SQLite 2.X.X */ Not yet implemented
-    RCTEmdrosBackendKindSQLite3 = 4,  /**< SQLite 3.X.X */
-    RCTEmdrosBackendKindBPT = 5       /**< Bit Packed Table */
-};
-
 @interface RCTEmdrosEnv : NSObject
 
 - (instancetype)initWithOptions:(NSDictionary *)options;
@@ -25,8 +16,8 @@ typedef NS_ENUM(NSInteger, RCTEmdrosBackendKind) {
 - (void)connect:(void (^)(BOOL isConnected, NSError *error))completion;
 
 - (void)query:(NSString *)query options:(NSDictionary *)options completion:(void (^)(id result, NSError *error))completion;
-- (void)wordCounts:(NSArray<NSArray<NSNumber *> *> *)monads limit:(NSInteger)limit useStopWords:(BOOL)useStopWords completion:(void (^)(id result, NSError *error))completion;
-- (void)statements:(NSArray<NSArray<NSNumber *> *> *)monads inContext:(NSString *)contentType contextFeatureComparison:(NSString *)contextFeatureComparison tokenFeatureComparison:(NSString *)tokenFeatureComparison completion:(void (^)(id result, NSError *error))completion;
+- (void)wordsInMonads:(NSArray<NSArray<NSNumber *> *> *)monads limit:(NSInteger)limit useStopWords:(BOOL)useStopWords completion:(void (^)(id result, NSError *error))completion;
+- (void)wordCountsForContext:(NSString *)context monads:(NSArray<NSArray<NSNumber *> *> *)monads contextFeatureComparison:(NSString *)contextFeatureComparison tokenFeatureComparison:(NSString *)tokenFeatureComparison completion:(void (^)(id result, NSError *error))completion;
 
 - (void)stringFrom:(NSInteger)from to:(NSInteger)to options:(NSDictionary *)options completion:(void (^)(id result, NSError *error))completion;
 

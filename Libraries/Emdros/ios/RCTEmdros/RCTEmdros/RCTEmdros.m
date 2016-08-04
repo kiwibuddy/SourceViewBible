@@ -79,7 +79,7 @@ RCT_EXPORT_METHOD(query:(NSDictionary *)options resolver:(RCTPromiseResolveBlock
     }];
 }
 
-RCT_EXPORT_METHOD(wordCounts:(NSDictionary *)options resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+RCT_EXPORT_METHOD(wordsInMonads:(NSDictionary *)options resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     RCTEmdrosEnv *emdros = [self databaseForName:options[@"name"]];
     
     NSArray *monads = nil;
@@ -94,7 +94,7 @@ RCT_EXPORT_METHOD(wordCounts:(NSDictionary *)options resolver:(RCTPromiseResolve
     }
     
     NSInteger limit = [options[@"limit"] integerValue];
-    [emdros wordCounts:monads limit:limit useStopWords:[options[@"useStopWords"] integerValue] completion:^(id result, NSError *error) {
+    [emdros wordsInMonads:monads limit:limit useStopWords:[options[@"useStopWords"] integerValue] completion:^(id result, NSError *error) {
         if (!error) {
             resolve(result);
         } else {
@@ -103,8 +103,12 @@ RCT_EXPORT_METHOD(wordCounts:(NSDictionary *)options resolver:(RCTPromiseResolve
     }];
 }
 
-RCT_EXPORT_METHOD(statements:(NSDictionary *)options resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+RCT_EXPORT_METHOD(wordCountsForContext:(NSDictionary *)options resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     RCTEmdrosEnv *emdros = [self databaseForName:options[@"name"]];
+
+    NSString *context = options[@"context"] ?: @"";
+    NSString *contextFeatureComparison = options[@"contextFeatureComparison"] ?: @"";
+    NSString *tokenFeatureComparison = options[@"tokenFeatureComparison"] ?: @"";
     
     NSArray *monads = nil;
     
@@ -117,11 +121,7 @@ RCT_EXPORT_METHOD(statements:(NSDictionary *)options resolver:(RCTPromiseResolve
         monads = options[@"monads"];
     }
     
-    NSString *context = options[@"context"] ?: @"Statement";
-    NSString *contextFeatureComparison = options[@"contextFeatureComparison"] ?: @"";
-    NSString *tokenFeatureComparison = options[@"tokenFeatureComparison"] ?: @"";
-    
-    [emdros statements:monads inContext:context contextFeatureComparison:contextFeatureComparison tokenFeatureComparison:tokenFeatureComparison completion:^(id result, NSError *error) {
+    [emdros wordCountsForContext:context monads:monads contextFeatureComparison:contextFeatureComparison tokenFeatureComparison:tokenFeatureComparison completion:^(id result, NSError *error) {
         if (!error) {
             resolve(result);
         } else {

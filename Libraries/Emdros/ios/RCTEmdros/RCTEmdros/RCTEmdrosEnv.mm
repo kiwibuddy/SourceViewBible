@@ -99,7 +99,7 @@ const std::set<std::string> RCTStopwords = {"the","and","of","to","you","will","
     }
 }
 
-- (void)wordCounts:(NSArray<NSArray<NSNumber *> *> *)monads limit:(NSInteger)limit useStopWords:(BOOL)useStopWords completion:(void (^)(id result, NSError *error))completion {
+- (void)wordsInMonads:(NSArray<NSArray<NSNumber *> *> *)monads limit:(NSInteger)limit useStopWords:(BOOL)useStopWords completion:(void (^)(id result, NSError *error))completion {
     try {
         SetOfMonads soms;
         
@@ -113,7 +113,6 @@ const std::set<std::string> RCTStopwords = {"the","and","of","to","you","will","
         
         std::string errorMessage;
         std::string json = getWordCountsInSOM(_emdrosEnv, soms, stopwords, errorMessage);
-        [[OCDBenchmark sharedBenchmark] end:[NSString stringWithFormat:@"getWordCountsInSOM: %@", monads]];
         
         NSString *data = [NSString stringWithUTF8String:json.c_str()];
         NSError *error = nil;
@@ -154,7 +153,7 @@ const std::set<std::string> RCTStopwords = {"the","and","of","to","you","will","
     }
 }
 
-- (void)statements:(NSArray<NSArray<NSNumber *> *> *)monads inContext:(NSString *)contentType contextFeatureComparison:(NSString *)contextFeatureComparison tokenFeatureComparison:(NSString *)tokenFeatureComparison completion:(void (^)(id result, NSError *error))completion {
+- (void)wordCountsForContext:(NSString *)context monads:(NSArray<NSArray<NSNumber *> *> *)monads contextFeatureComparison:(NSString *)contextFeatureComparison tokenFeatureComparison:(NSString *)tokenFeatureComparison completion:(void (^)(id result, NSError *error))completion {
     try {
         SetOfMonads soms;
         
@@ -165,36 +164,28 @@ const std::set<std::string> RCTStopwords = {"the","and","of","to","you","will","
         std::string errorMessage;
         
         ID_D2WordCountsMap wordCountMap;
-        bool result = getWordCountsInContext(_emdrosEnv, soms, std::string(contentType.UTF8String), std::string(contextFeatureComparison.UTF8String), std::string(tokenFeatureComparison.UTF8String), wordCountMap, errorMessage);
+        bool result = getWordCountsInContext(_emdrosEnv, soms, std::string(context.UTF8String), std::string(contextFeatureComparison.UTF8String), std::string(tokenFeatureComparison.UTF8String), wordCountMap, errorMessage);
         
-        NSMutableDictionary *statements = [[NSMutableDictionary alloc] init];
+        NSMutableDictionary *wordCounts = [[NSMutableDictionary alloc] init];
         if (result) {
-//            for (ID_D2WordCountsMap::iterator i=wordCountMap.begin(); i != wordCountMap.end(); ++i ) {
             for (auto const& iterator : wordCountMap) {
-                NSInteger statementID = iterator.first;
-                NSDictionary *statement = @{
+                NSInteger contextID = iterator.first;
+                NSDictionary *wordCount = @{
                     @"wordCount": @(iterator.second.m_word_count),
-                    @"familyCount": @(iterator.second.m_Family),
-                    @"economicsCount": @(iterator.second.m_Economics),
-                    @"governmentCount": @(iterator.second.m_Government),
-                    @"religionCount": @(iterator.second.m_Religion),
-                    @"educationCount": @(iterator.second.m_Education),
-                    @"communicationCount": @(iterator.second.m_MediaCom),
-                    @"celebrationCount": @(iterator.second.m_Celebration),
+                    @"family": @(iterator.second.m_Family),
+                    @"economics": @(iterator.second.m_Economics),
+                    @"government": @(iterator.second.m_Government),
+                    @"religion": @(iterator.second.m_Religion),
+                    @"education": @(iterator.second.m_Education),
+                    @"communication": @(iterator.second.m_MediaCom),
+                    @"celebration": @(iterator.second.m_Celebration),
                 };
-                [statements setObject:statement forKey:@(statementID)];
+                [wordCounts setObject:wordCount forKey:[NSString stringWithFormat:@"%li", contextID]];
             }
         }
+
         
-        if (statements.count > 0) {
-            NSLog(@"%@", statements);
-        }
-        
-        
-        [[OCDBenchmark sharedBenchmark] end:[NSString stringWithFormat:@"getWordCountsInContext: %@", monads]];
-        
-        
-        if (completion) completion([[NSDictionary alloc] initWithDictionary:statements], nil);
+        if (completion) completion([[NSDictionary alloc] initWithDictionary:wordCounts], nil);
     } catch (EMdFDBException e) {
         std::cerr << "ERROR: EMdFDBException (Database error)..." << std::endl;
         std::cerr << _emdrosEnv->getDBError() << std::endl;
