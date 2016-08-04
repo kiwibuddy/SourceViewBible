@@ -32,6 +32,7 @@ import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigati
 import { BACK } from '../../Navigation';
 
 import { Actant, Book, Statement } from '../../Database';
+import Emdros from '../../API/Emdros';
 
 const SCROLLVIEW_REF = 'scrollview';
 
@@ -48,22 +49,35 @@ async function query() {
   //   }
   // });
 
-  const statements = Statement.all().filtered('firstMonad >= $0 AND lastMonad <= $1 AND source.professionValues CONTAINS $2 AND recipient.professionValues CONTAINS $2', 1, 50638, ' 36 ');
-  for (let statement of statements) {
-    const words = await statement.words();
-    words.forEach(wordCount => {
-      const count = values[wordCount.string] || 0;
-      values[wordCount.string] = count + wordCount.count;
-    });
-  }
-//
-//   Statement.filtered('firstMonad >= $0 AND lastMonad <= $1 AND source.professionValues CONTAINS $2', 1, 50638, '|Shepherd|').reduce((words, statement) => {
-// statement.words.forEach(wordCount => words[wordCount.string] += wordCount.count);
-// }, {});
+  // const statements = Statement.all().filtered('firstMonad >= $0 AND lastMonad <= $1 AND source.professionValues CONTAINS $2 AND recipient.professionValues CONTAINS $2', 1, 50638, ' 36 ');
+  // for (let statement of statements) {
+  //   const words = await statement.words();
+  //   words.forEach(wordCount => {
+  //     const count = values[wordCount.string] || 0;
+  //     values[wordCount.string] = count + wordCount.count;
+  //   });
+  // }
 
+  // C1: Then decide to search the word “peace” and select the “all” option under sources and decide to display as a word cloud.
+  // Graph:
+  // Cloud > Source Name (text) / Source Word (size)
+  // Filters:
+  // Words > "Peace"
+
+  const word = "peace";
+  const wordCounts = await Emdros.wordCountsForContext('Statement', {tokenFeatureComparison: `surface_fts="${word}"`});
+  const emdrosIdentifiers = Object.keys(wordCounts).map(emdrosID => parseInt(emdrosID));
+  const query = emdrosIdentifiers.map(emdrosID => `emdrosID = ${emdrosID}`).join(' OR ');
+  const statements = Statement.all().filtered(query);
+  for (let statement of statements) {
+    if (statement.source) {
+      const name = statement.source.name;
+      const count = values[name] || 0;
+      values[name] = count + wordCounts[statement.emdrosID.toString()].wordCount;
+    }
+  }
 
   const data = Object.keys(values).sort((a,b) => values[a] > values[b] ? -1 : 1).slice(0, 20).map(key => ({key, count:values[key]}));
-
   console.log(data);
 }
 

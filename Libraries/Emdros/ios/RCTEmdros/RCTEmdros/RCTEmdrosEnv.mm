@@ -103,6 +103,7 @@ const std::set<std::string> RCTStopwords = {"the","and","of","to","you","will","
     try {
         SetOfMonads soms;
         
+        if (!monads) monads = @[@[@(1), @(MAX_MONAD)]];
         for (NSArray<NSNumber *> *monad in monads) {
             SetOfMonads som(monad.firstObject.integerValue, monad.lastObject.integerValue);
             soms.unionWith(som);
@@ -157,6 +158,7 @@ const std::set<std::string> RCTStopwords = {"the","and","of","to","you","will","
     try {
         SetOfMonads soms;
         
+        if (!monads) monads = @[@[@(1), @(MAX_MONAD)]];
         for (NSArray<NSNumber *> *monad in monads) {
             SetOfMonads som(monad.firstObject.integerValue, monad.lastObject.integerValue);
             soms.unionWith(som);

@@ -52,7 +52,7 @@ function scripture(options: Object) {
   })
 }
 
-function wordCounts(options: Object) {
+function words(options: Object) {
   if (DB == null) {
     const promise = new Promise((resolve, reject) => {
       reject('DB is null');
@@ -60,7 +60,18 @@ function wordCounts(options: Object) {
     return promise;
   }
 
-  return DB.wordCounts(options);
+  return DB.words(options);
+}
+
+function wordCountsForContext(context: string, options: Object) {
+  if (DB == null) {
+    const promise = new Promise((resolve, reject) => {
+      reject('DB is null');
+    });
+    return promise;
+  }
+
+  return DB.wordCountsForContext(context, options);
 }
 
 module.exports = {
@@ -68,5 +79,6 @@ module.exports = {
   openDatabase,
   query,
   scripture,
-  wordCounts,
-}
+  words,
+  wordCountsForContext,
+};

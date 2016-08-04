@@ -424,7 +424,7 @@ export class Statement extends Realm.Object {
   }
 
   async words() {
-    return await Emdros.wordCounts({from: this.firstMonad, to: this.lastMonad, useStopWords: true});
+    return await Emdros.words({from: this.firstMonad, to: this.lastMonad, useStopWords: true});
   }
 }
 Statement.schema = StatementSchema;

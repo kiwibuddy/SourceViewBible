@@ -1,3 +1,4 @@
+/* @flow */
 "use strict";
 
 import {NativeModules} from 'react-native';
@@ -6,7 +7,9 @@ const EmdrosBridge = NativeModules.Emdros;
 var openedDatabases = {};
 
 export default class Emdros {
-  constructor(config) {
+  name: string;
+
+  constructor(config: Object) {
     this.name = config.name;
   }
 
@@ -22,7 +25,7 @@ export default class Emdros {
     return buf;
   }
 
-  static open(options) {
+  static open(options: Object) {
     let name = options.name;
 
     var promise = new Promise((resolve, reject) => {
@@ -47,23 +50,23 @@ export default class Emdros {
     EmdrosBridge.close(this.name);
   }
 
-  async query(query, options) {
+  async query(query: string, options: Object) {
     return EmdrosBridge.query({...options, query: query, name: this.name});
   }
 
-  async words(options) {
+  async words(options: Object) {
     return EmdrosBridge.wordsInMonads({...options, name: this.name});
   }
 
-  async wordCountsForContext(context: string, options) {
+  async wordCountsForContext(context: string, options?: Object) {
     return EmdrosBridge.wordCountsForContext({...options, context, name: this.name});
   }
 
-  async string(from, to, options) {
+  async string(from: number, to: number, options: Object) {
     return EmdrosBridge.string({...options, from: from, to: to, name: this.name});
   }
 
-  async monadSet(options) {
+  async monadSet(options: Object) {
     return EmdrosBridge.monadSet({...options, name: this.name});
   }
 }
