@@ -58,9 +58,9 @@ export default class BookSources extends Component {
 
   componentDidMount() {
     const { book } = this.state;
-    const sources = book.sources.slice(0).sort((a, b) => a.wordCount > b.wordCount ? -1 : 1);
+    const sourceRelations = book.sourceRelations.slice(0).sort((a, b) => a.wordCount > b.wordCount ? -1 : 1);
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(sources)
+      dataSource: this.state.dataSource.cloneWithRows(sourceRelations)
     });
   }
 
@@ -121,8 +121,9 @@ export default class BookSources extends Component {
     );
   };
 
-  _renderRow = (source: Object, sectionID: string, rowID: string, highlightRow: boolean) => {
+  _renderRow = (sourceRelation: Object, sectionID: string, rowID: string, highlightRow: boolean) => {
     const { book } = this.state;
+    const source = sourceRelation.source;
 
     const SOURCE_TYPE_MAP = {
       "The Narrator": "narrator",
@@ -132,7 +133,7 @@ export default class BookSources extends Component {
 
     const sourceType = SOURCE_TYPE_MAP[source.name] || "support";
     const chartData = {};
-    chartData[sourceType] = source.wordCount;
+    chartData[sourceType] = sourceRelation.wordCount;
 
     return (
       <TouchableOpacity style={styles.section} onPress={() => this._onPressScripture(source)}>
@@ -153,7 +154,7 @@ export default class BookSources extends Component {
               data={[chartData]}
               maxChartValue={book.maxSourceWordCount}
             />
-            <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('words.count', {count: source.wordCount, localizedCount: Localizable.toNumber(source.wordCount, {precision: 0})})}</Text>
+            <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('words.count', {count: sourceRelation.wordCount, localizedCount: Localizable.toNumber(sourceRelation.wordCount, {precision: 0})})}</Text>
           </View>
         </View>
       </TouchableOpacity>
