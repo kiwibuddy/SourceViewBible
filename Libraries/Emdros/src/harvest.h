@@ -54,6 +54,6 @@ class WordCounts {
 
 typedef std::map<id_d_t, WordCounts> ID_D2WordCountsMap;
 
-extern bool getWordCountsInContext(EmdrosEnv *pEE, const SetOfMonads& substrate, const std::string& context_object_type, const std::string& feature_to_compare, const std::string& feature_value, bool feature_is_string, ID_D2WordCountsMap& result, std::string& error_message);
+extern bool getWordCountsInContext(EmdrosEnv *pEE, const SetOfMonads& substrate, const std::string& context_object_type, const std::string& feature_to_compare, const std::string& feature_value, ID_D2WordCountsMap& result, std::string& error_message);
 
 #endif /* !defined(HARVEST_H_) */

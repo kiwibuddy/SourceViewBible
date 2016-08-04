@@ -37,6 +37,8 @@ async function seedStatementWordCounts(emdros: Object, realm: Object) {
 
   const wordCountByStatement = {};
   for (let statement of STATEMENTS) {
+    const statements = await emdros.statements({from: statement.firstMonad, to: statement.lastMonad, });
+
     const wordCounts = await emdros.wordCounts({from: statement.firstMonad, to: statement.lastMonad});
     wordCountByStatement[statement.id] = wordCounts.reduce((sum, word) => sum += word.count, 0);
   }

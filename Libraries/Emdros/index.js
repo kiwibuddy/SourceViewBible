@@ -55,6 +55,10 @@ export default class Emdros {
     return EmdrosBridge.wordCounts({...options, name: this.name});
   }
 
+  async statements(options) {
+    return EmdrosBridge.statements({...options, name: this.name});
+  }
+
   async string(from, to, options) {
     return EmdrosBridge.string({...options, from: from, to: to, name: this.name});
   }

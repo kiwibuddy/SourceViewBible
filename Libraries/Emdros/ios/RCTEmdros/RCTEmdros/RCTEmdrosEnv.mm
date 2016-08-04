@@ -154,6 +154,53 @@ const std::set<std::string> RCTStopwords = {"the","and","of","to","you","will","
     }
 }
 
+- (void)statements:(NSArray<NSArray<NSNumber *> *> *)monads inContext:(NSString *)contentType contextFeatureComparison:(NSString *)contextFeatureComparison tokenFeatureComparison:(NSString *)tokenFeatureComparison completion:(void (^)(id result, NSError *error))completion {
+    try {
+        SetOfMonads soms;
+        
+        for (NSArray<NSNumber *> *monad in monads) {
+            SetOfMonads som(monad.firstObject.integerValue, monad.lastObject.integerValue);
+            soms.unionWith(som);
+        }
+        std::string errorMessage;
+        
+        ID_D2WordCountsMap wordCountMap;
+        bool result = getWordCountsInContext(_emdrosEnv, soms, std::string(contentType.UTF8String), std::string(contextFeatureComparison.UTF8String), std::string(tokenFeatureComparison.UTF8String), wordCountMap, errorMessage);
+        
+        NSMutableDictionary *statements = [[NSMutableDictionary alloc] init];
+        if (result) {
+            for (ID_D2WordCountsMap::iterator i=wordCountMap.begin(); i != wordCountMap.end(); ++i ) {
+                NSInteger statementID = i->first;
+                NSDictionary *statement = @{
+                    @"wordCount": @(i->second.m_word_count),
+                };
+                [statements setObject:statement forKey:@(statementID)];
+            }
+        }
+        
+        
+        [[OCDBenchmark sharedBenchmark] end:[NSString stringWithFormat:@"getWordCountsInSOM: %@", monads]];
+        
+        
+        if (completion) completion([[NSDictionary alloc] initWithDictionary:statements], nil);
+    } catch (EMdFDBException e) {
+        std::cerr << "ERROR: EMdFDBException (Database error)..." << std::endl;
+        std::cerr << _emdrosEnv->getDBError() << std::endl;
+        std::cerr << _emdrosEnv->getCompilerError() << std::endl;
+    } catch (BadMonadsException e) {
+        std::cerr << "BadMonadsException caught.  Program aborted." << std::endl;
+    } catch (WrongCharacterSetException e) {
+        std::cerr << "WrongCharacterSetException caught.  Program aborted." << std::endl;
+    } catch (EMdFOutputException e) {
+        std::cerr << "EMdFOutputException caught.  Program aborted." << std::endl;
+    } catch (EmdrosException e) {
+        std::cerr << "ERROR: EmdrosException (Emdros error)..." << e.what() << std::endl;
+    } catch (...) {
+        std::cerr << "Unknown exception occurred.  Program aborted." << std::endl;
+    }
+}
+
+
 - (void)stringFrom:(NSInteger)from to:(NSInteger)to options:(NSDictionary *)options completion:(void (^)(id result, NSError *error))completion {
 //    extern std::string render_objects(EmdrosEnv *pEnv, const std::string& db_name, const std::string& JSON_stylesheet, const std::string& stylesheet, monad_m first_monad, monad_m last_monad, bool& bResult);
 

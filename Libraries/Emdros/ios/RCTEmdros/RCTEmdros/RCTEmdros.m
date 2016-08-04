@@ -103,6 +103,33 @@ RCT_EXPORT_METHOD(wordCounts:(NSDictionary *)options resolver:(RCTPromiseResolve
     }];
 }
 
+RCT_EXPORT_METHOD(statements:(NSDictionary *)options resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    RCTEmdrosEnv *emdros = [self databaseForName:options[@"name"]];
+    
+    NSArray *monads = nil;
+    
+    NSInteger from = [options[@"from"] integerValue];
+    NSInteger to = [options[@"to"] integerValue];
+    if (from > 0 && to > 0) {
+        NSArray *monad = @[@(from), @(to)];
+        monads = @[monad];
+    } else {
+        monads = options[@"monads"];
+    }
+    
+    NSString *context = options[@"context"] ?: @"";
+    NSString *contextFeatureComparison = options[@"contextFeatureComparison"] ?: @"";
+    NSString *tokenFeatureComparison = options[@"tokenFeatureComparison"] ?: @"";
+    
+    [emdros statements:monads inContext:context contextFeatureComparison:contextFeatureComparison tokenFeatureComparison:tokenFeatureComparison completion:^(id result, NSError *error) {
+        if (!error) {
+            resolve(result);
+        } else {
+            reject(@"word_count_error", [NSString stringWithFormat:@"Error executing wordCount from: %li, to: %li", from, to], error);
+        }
+    }];
+}
+
 RCT_EXPORT_METHOD(string:(NSDictionary *)options resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     RCTEmdrosEnv *emdros = [self databaseForName:options[@"name"]];
     NSInteger from = [options[@"from"] integerValue];
