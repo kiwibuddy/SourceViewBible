@@ -174,6 +174,13 @@ const std::set<std::string> RCTStopwords = {"the","and","of","to","you","will","
                 NSInteger statementID = iterator.first;
                 NSDictionary *statement = @{
                     @"wordCount": @(iterator.second.m_word_count),
+                    @"familyCount": @(iterator.second.m_Family),
+                    @"economicsCount": @(iterator.second.m_Economics),
+                    @"governmentCount": @(iterator.second.m_Government),
+                    @"religionCount": @(iterator.second.m_Religion),
+                    @"educationCount": @(iterator.second.m_Education),
+                    @"communicationCount": @(iterator.second.m_MediaCom),
+                    @"celebrationCount": @(iterator.second.m_Celebration),
                 };
                 [statements setObject:statement forKey:@(statementID)];
             }
