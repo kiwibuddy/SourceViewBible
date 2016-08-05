@@ -2,6 +2,7 @@ STDERR.puts "Seeding Sources"
 
 require './db/seeds/professions.rb'
 require './db/seeds/gender.rb'
+require './db/seeds/natures.rb'
 
 source_statements = EMDROS[:statement_objects].map { |s| {statement_id: s[:object_id_d], source_id: s[:mdf_sources].to_s.strip.to_i}}
 source_statements.each do |source_statement|
@@ -11,5 +12,6 @@ source_statements.each do |source_statement|
 	end
 end
 
-seed_profession_statements("source_profession_statements", "mdf_sources")
-seed_gender_statements("source_gender_statements", "mdf_sources")
+seed_profession_statements("source")
+seed_gender_statements("source")
+seed_nature_statements("source")
