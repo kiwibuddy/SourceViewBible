@@ -62,9 +62,11 @@ async function query() {
   const sqlQuery = `
     SELECT statements.* FROM statements
       INNER JOIN source_profession_statements ON statements.id = source_profession_statements.statement_id
+      INNER JOIN recipient_profession_statements ON statements.id = recipient_profession_statements.statement_id
     WHERE
       statements.first_monad >= ${book.firstMonad} AND statements.last_monad <= ${book.lastMonad}
       AND source_profession_statements.profession_id = 36
+      AND recipient_profession_statements.profession_id = 36
   `;
 
   SQLite.transaction((tx) => {
@@ -76,6 +78,7 @@ async function query() {
         const statements = Statement.all().filtered(query);
         for (let statement of statements) {
           if (statement.source) {
+            // Source Profession
             statement.source.professions.forEach(profession => {
               const key = profession.key;
               const count = values[key] || 0;
