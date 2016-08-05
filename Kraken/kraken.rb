@@ -20,3 +20,5 @@ Sequel::Migrator.run(DB, "db/migrations")
 
 require './db/seeds/statements'
 require './db/seeds/actants'
+require './db/seeds/sources'
+require './db/seeds/recipients'
