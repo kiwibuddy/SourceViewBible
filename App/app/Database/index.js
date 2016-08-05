@@ -10,6 +10,8 @@ import {
   Statement,
 } from './Realm';
 
+const SQLite = require('./SQLite');
+
 module.exports = {
   Bible,
   Actant,
@@ -17,4 +19,5 @@ module.exports = {
   Chapter,
   Sphere,
   Statement,
+  SQLite
 };

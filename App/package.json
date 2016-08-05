@@ -15,6 +15,7 @@
     "react-native-i18n": "0.0.8",
     "react-native-linear-gradient": "^1.5.7",
     "react-native-parallax-motion": "file:../Libraries/react-native-parallax-motion/",
+    "react-native-sqlite-storage": "^3.1.1",
     "react-native-vector-icons": "^2.0.3",
     "realm": "^0.14.1"
   }

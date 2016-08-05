@@ -31,7 +31,7 @@ import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigati
 
 import { BACK } from '../../Navigation';
 
-import { Actant, Book, Statement } from '../../Database';
+import { Actant, Book, Statement, SQLite } from '../../Database';
 import Emdros from '../../API/Emdros';
 
 const SCROLLVIEW_REF = 'scrollview';
@@ -58,27 +58,57 @@ async function query() {
   //   });
   // }
 
+  const book = Book.findByID('genesis');
+  const sqlQuery = `
+    SELECT statements.* FROM statements
+      INNER JOIN source_profession_statements ON statements.id = source_profession_statements.statement_id
+    WHERE
+      statements.first_monad >= ${book.firstMonad} AND statements.last_monad <= ${book.lastMonad}
+      AND source_profession_statements.profession_id = 36
+  `;
+
+  SQLite.transaction((tx) => {
+    tx.executeSql(sqlQuery, [], (tx, results) => {
+        let rows = results.rows.raw();
+        const statementIdentifiers = rows.map(row => row.id);
+
+        const query = statementIdentifiers.map(statementID => `id = ${statementID}`).join(' OR ');
+        const statements = Statement.all().filtered(query);
+        for (let statement of statements) {
+          if (statement.source) {
+            statement.source.professions.forEach(profession => {
+              const key = profession.key;
+              const count = values[key] || 0;
+              values[key] = count + statement.wordCount;
+            });
+          }
+        }
+
+        const data = Object.keys(values).sort((a,b) => values[a] > values[b] ? -1 : 1).slice(0, 20).map(key => ({key, count:values[key]}));
+        console.log(data);
+      });
+  });
+
   // C1: Then decide to search the word “peace” and select the “all” option under sources and decide to display as a word cloud.
   // Graph:
   // Cloud > Source Name (text) / Source Word (size)
   // Filters:
   // Words > "Peace"
-
-  const word = "peace";
-  const wordCounts = await Emdros.wordCountsForContext('Statement', {tokenFeatureComparison: `surface_fts="${word}"`});
-  const statementIdentifiers = Object.keys(wordCounts).map(statementID => parseInt(statementID));
-  const query = statementIdentifiers.map(statementID => `id = ${statementID}`).join(' OR ');
-  const statements = Statement.all().filtered(query);
-  for (let statement of statements) {
-    if (statement.source) {
-      const name = statement.source.name;
-      const count = values[name] || 0;
-      values[name] = count + wordCounts[statement.id.toString()].wordCount;
-    }
-  }
-
-  const data = Object.keys(values).sort((a,b) => values[a] > values[b] ? -1 : 1).slice(0, 20).map(key => ({key, count:values[key]}));
-  console.log(data);
+  // const word = "peace";
+  // const wordCounts = await Emdros.wordCountsForContext('Statement', {tokenFeatureComparison: `surface_fts="${word}"`});
+  // const statementIdentifiers = Object.keys(wordCounts).map(statementID => parseInt(statementID));
+  // const query = statementIdentifiers.map(statementID => `id = ${statementID}`).join(' OR ');
+  // const statements = Statement.all().filtered(query);
+  // for (let statement of statements) {
+  //   if (statement.source) {
+  //     const name = statement.source.name;
+  //     const count = values[name] || 0;
+  //     values[name] = count + wordCounts[statement.id.toString()].wordCount;
+  //   }
+  // }
+  //
+  // const data = Object.keys(values).sort((a,b) => values[a] > values[b] ? -1 : 1).slice(0, 20).map(key => ({key, count:values[key]}));
+  // console.log(data);
 }
 
 type Props = {
