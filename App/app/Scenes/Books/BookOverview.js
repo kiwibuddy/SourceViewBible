@@ -161,7 +161,7 @@ export default class BookOverview extends Component {
         >
           <Text style={styles.readButtonTitle}>Start Reading</Text>
         </TouchableOpacity>
-        <Text style={styles.readTime}>{ReadingTime(book.wordCount)} read</Text>
+        <Text style={styles.readTime}>{ReadingTime(book.wordCount)}</Text>
 
         <View style={[{marginBottom: 5}, StyleSheet.styles.separator]} />
         <View style={styles.overviewContainer}>
