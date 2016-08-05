@@ -1,6 +1,7 @@
 STDERR.puts "Seeding Recipients"
 
 require './db/seeds/professions.rb'
+require './db/seeds/gender.rb'
 
 recipient_statements = []
 EMDROS[:statement_objects].each do |s|
@@ -9,4 +10,5 @@ EMDROS[:statement_objects].each do |s|
 	end
 end
 
-seed_professions("recipient_profession_statements", "mdf_recipients")
+seed_profession_statements("recipient_profession_statements", "mdf_recipients")
+seed_gender_statements("recipient_gender_statements", "mdf_recipients")

@@ -1,5 +1,5 @@
 
-def seed_professions(table, column)
+def seed_profession_statements(table, column)
   STDERR.puts "Seeding #{table}"
 
   EMDROS[:statement_objects].each do |statement_object|
