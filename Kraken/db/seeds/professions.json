@@ -1,0 +1,207 @@
+[
+  {
+    "id": 1,
+    "key": "Agriculture",
+    "name": "Agriculture"
+  },
+  {
+    "id": 2,
+    "key": "Author",
+    "name": "Author"
+  },
+  {
+    "id": 3,
+    "key": "ConstructionManufacturing",
+    "name": "Construction/Manufacturing"
+  },
+  {
+    "id": 4,
+    "key": "Executive",
+    "name": "Executive"
+  },
+  {
+    "id": 5,
+    "key": "Farmer",
+    "name": "Farmer"
+  },
+  {
+    "id": 6,
+    "key": "Food_Services",
+    "name": "Food Services"
+  },
+  {
+    "id": 7,
+    "key": "Governor",
+    "name": "Governor"
+  },
+  {
+    "id": 8,
+    "key": "Health_Services",
+    "name": "Health Services"
+  },
+  {
+    "id": 9,
+    "key": "Hebrew",
+    "name": "Hebrew"
+  },
+  {
+    "id": 10,
+    "key": "High_Priest",
+    "name": "High Priest"
+  },
+  {
+    "id": 11,
+    "key": "Homemaker",
+    "name": "Homemaker"
+  },
+  {
+    "id": 12,
+    "key": "Judge",
+    "name": "Judge"
+  },
+  {
+    "id": 13,
+    "key": "Judicial",
+    "name": "Judicial"
+  },
+  {
+    "id": 14,
+    "key": "King",
+    "name": "King"
+  },
+  {
+    "id": 15,
+    "key": "Manufacturing",
+    "name": "Manufacturing"
+  },
+  {
+    "id": 16,
+    "key": "Messenger",
+    "name": "Messenger"
+  },
+  {
+    "id": 17,
+    "key": "Military",
+    "name": "Military"
+  },
+  {
+    "id": 18,
+    "key": "MilitaryPolice",
+    "name": "Military/Police"
+  },
+  {
+    "id": 19,
+    "key": "Miltary",
+    "name": "Miltary"
+  },
+  {
+    "id": 20,
+    "key": "Musician",
+    "name": "Musician"
+  },
+  {
+    "id": 21,
+    "key": "Not_Hebrew",
+    "name": "Not Hebrew"
+  },
+  {
+    "id": 22,
+    "key": "OfficerLeader",
+    "name": "Officer/Leader"
+  },
+  {
+    "id": 23,
+    "key": "Other_Official",
+    "name": "Other Official"
+  },
+  {
+    "id": 24,
+    "key": "Other_Religious_Leader",
+    "name": "Other Religious Leader"
+  },
+  {
+    "id": 25,
+    "key": "Priest",
+    "name": "Priest"
+  },
+  {
+    "id": 26,
+    "key": "Prince",
+    "name": "Prince"
+  },
+  {
+    "id": 27,
+    "key": "Princess",
+    "name": "Princess"
+  },
+  {
+    "id": 28,
+    "key": "Prophet",
+    "name": "Prophet"
+  },
+  {
+    "id": 29,
+    "key": "Prostitute",
+    "name": "Prostitute"
+  },
+  {
+    "id": 30,
+    "key": "Psalmist",
+    "name": "Psalmist"
+  },
+  {
+    "id": 31,
+    "key": "Queen",
+    "name": "Queen"
+  },
+  {
+    "id": 32,
+    "key": "Royalty",
+    "name": "Royalty"
+  },
+  {
+    "id": 33,
+    "key": "Scribe",
+    "name": "Scribe"
+  },
+  {
+    "id": 34,
+    "key": "Servant",
+    "name": "Servant"
+  },
+  {
+    "id": 35,
+    "key": "ServantSlave",
+    "name": "Servant/Slave"
+  },
+  {
+    "id": 36,
+    "key": "Shepherd",
+    "name": "Shepherd"
+  },
+  {
+    "id": 37,
+    "key": "Slave",
+    "name": "Slave"
+  },
+  {
+    "id": 38,
+    "key": "SlaveServant",
+    "name": "Slave/Servant"
+  },
+  {
+    "id": 39,
+    "key": "SoldierGuard",
+    "name": "Soldier/Guard"
+  },
+  {
+    "id": 40,
+    "key": "TeacherEducator",
+    "name": "Teacher/Educator"
+  },
+  {
+    "id": 41,
+    "key": "Thief",
+    "name": "Thief"
+  }
+]

@@ -3,7 +3,7 @@
 
 const {getChapterID, firstInitial, seedObjectSphereWordCounts, seedObjectWordCloud, SPHERE_MAP} = require('../common');
 
-const ACTANTS = require('../../data/actants');
+const ACTANTS = require('../../db/seeds/actants');
 
 export async function seedActantObjects(emdros: Object, realm: Object) {
   console.log('Seeding Actant Objects...');

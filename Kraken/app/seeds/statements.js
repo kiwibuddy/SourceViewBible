@@ -3,7 +3,7 @@
 
 const {getChapterID, firstInitial, seedObjectSphereWordCounts, seedObjectWordCloud, SPHERE_MAP} = require('../common');
 
-const STATEMENTS = require('../../data/statements');
+const STATEMENTS = require('../../db/seeds/statements');
 
 export async function seedStatementObjects(emdros: Object, realm: Object) {
   console.log('Seeding Statement Objects...');
