@@ -1,9 +1,10 @@
 /* @flow */
 'use strict';
 
-const {getChapterID, firstInitial, seedObjectSphereWordCounts, seedObjectWordCloud, SPHERE_MAP} = require('../common');
+const {getChapterID, firstInitial, seedObjectSphereWordCounts, seedObjectWordCloud, SPHERE_MAP, SPHERES} = require('../common');
 
 const STATEMENTS = require('../../db/seeds/statements');
+import RNFS from 'react-native-fs';
 
 export async function seedStatementObjects(emdros: Object, realm: Object) {
   console.log('Seeding Statement Objects...');
@@ -36,6 +37,7 @@ async function seedStatementWordCounts(emdros: Object, realm: Object) {
   console.log('Seeding Statement Word Counts...');
 
   const statements = [];
+  const sphereStatements = [];
   for (let statement of STATEMENTS) {
     const emdrosID = statement.emdrosID.toString();
     const wordCountsForContext = await emdros.wordCountsForContext('Statement', {from: statement.firstMonad, to: statement.lastMonad});
@@ -53,14 +55,26 @@ async function seedStatementWordCounts(emdros: Object, realm: Object) {
       sphereCounts,
       sphereValues
     });
+
+    spheres.forEach(key => {
+      const sphereID = SPHERES.indexOf(key) + 1;
+      if (sphereID > 0) {
+        sphereStatements.push({
+          sphere_id: sphereID,
+          statement_id: statement.id
+        });
+      }
+    });
+
   }
 
   realm.write(() => {
     statements.forEach(statement => realm.create('Statement', statement, true));
   });
-}
 
-async function seedSphereCounts(emdros, realm) {
-  console.log('Seeding Statement Sphere Word Counts...');
-
+  RNFS.writeFile('/tmp/sphere-statements.json', JSON.stringify(sphereStatements), 'utf8').then((success) => {
+    console.log('Seeded /tmp/sphere-statements.json');
+  }).catch((err) => {
+    console.log(err.message);
+  });
 }

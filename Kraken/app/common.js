@@ -8,6 +8,16 @@ export const SOURCE_TYPE_MAP = {
   "Blue": "support"
 };
 
+export const SPHERES = [
+  "family",
+  "economics",
+  "government",
+  "religion",
+  "education",
+  "communication",
+  "celebration",
+];
+
 export const SPHERE_MAP = {
   "family": "family",
   "economics": "economics",
