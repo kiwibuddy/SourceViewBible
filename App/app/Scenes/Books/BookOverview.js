@@ -159,8 +159,9 @@ export default class BookOverview extends Component {
           style={styles.readButton}
           onPress={() => this.props.navigate(readerURL({bookID: book.id, anchor: 'chapter-1', title: book.name}))}
         >
-          <Text style={styles.readButtonTitle}>{ReadingTime(book.wordCount)} read</Text>
+          <Text style={styles.readButtonTitle}>Start Reading</Text>
         </TouchableOpacity>
+        <Text style={styles.readTime}>{ReadingTime(book.wordCount)} read</Text>
 
         <View style={[{marginBottom: 5}, StyleSheet.styles.separator]} />
         <View style={styles.overviewContainer}>
@@ -275,14 +276,19 @@ const styles = StyleSheet.create({
     overflow:'hidden',
     alignSelf: 'center',
     marginTop: 20,
-    marginBottom: 40,
+    marginBottom: 10,
     justifyContent: 'center',
   },
   readButtonTitle: {
     color: 'white',
-    fontSize: 18,
-    marginVertical: 20,
+    fontSize: 17,
     marginHorizontal: 40,
+  },
+  readTime: {
+    alignSelf: 'center',
+    marginBottom: 40,
+    fontSize: 13,
+    color: '#9B9B9B'
   },
   overviewContainer: {
     paddingBottom: 30,
