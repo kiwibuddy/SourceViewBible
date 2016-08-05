@@ -36,6 +36,21 @@ import Emdros from '../../API/Emdros';
 
 const SCROLLVIEW_REF = 'scrollview';
 
+async function statementsWithSQL(sql: string) {
+  return new Promise((resolve, reject) => {
+    SQLite.transaction((tx) => {
+      tx.executeSql(sql, [], (tx, results) => {
+          let rows = results.rows.raw();
+          const statementIdentifiers = rows.map(row => row.id);
+
+          const query = statementIdentifiers.map(statementID => `id = ${statementID}`).join(' OR ');
+          const statements = Statement.all().filtered(query);
+          resolve(statements);
+        });
+    });
+  });
+}
+
 async function query() {
   const values = {};
 
@@ -69,28 +84,22 @@ async function query() {
       AND recipient_profession_statements.profession_id = 36
   `;
 
-  SQLite.transaction((tx) => {
-    tx.executeSql(sqlQuery, [], (tx, results) => {
-        let rows = results.rows.raw();
-        const statementIdentifiers = rows.map(row => row.id);
+  const statements = await statementsWithSQL(sqlQuery);
+  for (let statement of statements) {
+    // Words
+    // const words = await statement.words();
+    // words.forEach(wordCount => {
+    //   const count = values[wordCount.string] || 0;
+    //   values[wordCount.string] = count + wordCount.count;
+    // });
 
-        const query = statementIdentifiers.map(statementID => `id = ${statementID}`).join(' OR ');
-        const statements = Statement.all().filtered(query);
-        for (let statement of statements) {
-          if (statement.source) {
-            // Source Profession
-            statement.source.professions.forEach(profession => {
-              const key = profession.key;
-              const count = values[key] || 0;
-              values[key] = count + statement.wordCount;
-            });
-          }
-        }
-
-        const data = Object.keys(values).sort((a,b) => values[a] > values[b] ? -1 : 1).slice(0, 20).map(key => ({key, count:values[key]}));
-        console.log(data);
-      });
-  });
+    // Source Profession
+    statement.source.professions.forEach(profession => {
+      const key = profession.key;
+      const count = values[key] || 0;
+      values[key] = count + statement.wordCount;
+    });
+  }
 
   // C1: Then decide to search the word “peace” and select the “all” option under sources and decide to display as a word cloud.
   // Graph:
@@ -110,8 +119,8 @@ async function query() {
   //   }
   // }
   //
-  // const data = Object.keys(values).sort((a,b) => values[a] > values[b] ? -1 : 1).slice(0, 20).map(key => ({key, count:values[key]}));
-  // console.log(data);
+  const data = Object.keys(values).sort((a,b) => values[a] > values[b] ? -1 : 1).slice(0, 20).map(key => ({key, count:values[key]}));
+  console.log(data);
 }
 
 type Props = {
