@@ -4,6 +4,7 @@ require './db/seeds/professions.rb'
 require './db/seeds/gender.rb'
 require './db/seeds/natures.rb'
 require './db/seeds/actant_number.rb'
+require './db/seeds/chronology.rb'
 
 recipient_statements = []
 EMDROS[:statement_objects].each do |s|
@@ -16,3 +17,4 @@ seed_profession_statements("recipient")
 seed_gender_statements("recipient")
 seed_nature_statements("recipient")
 seed_actant_number_statements("recipient")
+seed_chronology_statements("recipient")
