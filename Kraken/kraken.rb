@@ -11,7 +11,7 @@ end
 
 EMDROS = Sequel.connect('sqlite://../../SVB2/sphereview.sqlite3')
 
-DB_NAME = '../Datasets/en/NLT/SourceView.sqlite3'
+DB_NAME = '/tmp/SourceView.sqlite3'
 File.delete(DB_NAME) rescue nil
 DB = Sequel.connect("sqlite://#{DB_NAME}")
 
