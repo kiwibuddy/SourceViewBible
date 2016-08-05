@@ -66,14 +66,14 @@ async function query() {
 
   const word = "peace";
   const wordCounts = await Emdros.wordCountsForContext('Statement', {tokenFeatureComparison: `surface_fts="${word}"`});
-  const emdrosIdentifiers = Object.keys(wordCounts).map(emdrosID => parseInt(emdrosID));
-  const query = emdrosIdentifiers.map(emdrosID => `emdrosID = ${emdrosID}`).join(' OR ');
+  const statementIdentifiers = Object.keys(wordCounts).map(statementID => parseInt(statementID));
+  const query = statementIdentifiers.map(statementID => `id = ${statementID}`).join(' OR ');
   const statements = Statement.all().filtered(query);
   for (let statement of statements) {
     if (statement.source) {
       const name = statement.source.name;
       const count = values[name] || 0;
-      values[name] = count + wordCounts[statement.emdrosID.toString()].wordCount;
+      values[name] = count + wordCounts[statement.id.toString()].wordCount;
     }
   }
 

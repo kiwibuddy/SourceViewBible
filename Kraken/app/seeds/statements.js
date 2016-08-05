@@ -11,15 +11,12 @@ export async function seedStatementObjects(emdros: Object, realm: Object) {
 
   realm.write(() => {
     STATEMENTS.forEach(statement => {
-      if (statement.recipientID) {
-        statement.recipient = realm.objectForPrimaryKey('Actant', statement.recipientID);
-      }
-      delete statement.recipientID;
-
       if (statement.sourceID) {
         statement.source = realm.objectForPrimaryKey('Actant', statement.sourceID);
       }
       delete statement.sourceID;
+
+      statement.recipients = statement.recipients.map(recipientID => realm.objectForPrimaryKey('Actant', recipientID));
 
       statement.book = realm.objects('Book').filtered('firstMonad <= $0 AND lastMonad >= $0', statement.firstMonad)[0];
       realm.create('Statement', statement)
@@ -39,21 +36,18 @@ async function seedStatementWordCounts(emdros: Object, realm: Object) {
   const statements = [];
   const sphereStatements = [];
   for (let statement of STATEMENTS) {
-    const emdrosID = statement.emdrosID.toString();
     const wordCountsForContext = await emdros.wordCountsForContext('Statement', {from: statement.firstMonad, to: statement.lastMonad});
-    const counts = wordCountsForContext[emdrosID];
+    const counts = wordCountsForContext[statement.id.toString()];
     const wordCount = counts.wordCount;
     delete counts.wordCount;
 
     const sphereCounts = Object.keys(counts).map(key => ({string: key, count: counts[key]}));
     const spheres = Object.keys(counts).filter(key => counts[key] > 0).map(key => key);
-    const sphereValues = spheres.length > 0 ? ` ${spheres.join(' ')} ` : null;
 
     statements.push({
       id: statement.id,
       wordCount,
       sphereCounts,
-      sphereValues
     });
 
     spheres.forEach(key => {

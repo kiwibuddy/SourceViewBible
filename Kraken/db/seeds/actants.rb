@@ -11,15 +11,18 @@ actants = actant_objects.all.map do |actant_object|
   name = actant_object[:real_name]
   first_initial = name[0]
 
+	chronologies = actant_object[:mdf_chronology].to_s.strip.split(' ').map{|c| {id: c.to_i} }
+	professions = actant_object[:mdf_professions].to_s.strip.split(' ').map{|c| {id: c.to_i} }
+	natures = actant_object[:mdf_natures].to_s.strip.split(' ').map{|c| {id: c.to_i} }
   {
     id: actant_object[:mdf_actant_id],
     name: name,
     firstInitial: first_initial,
-    natureValues: value_or_nil(actant_object[:mdf_natures]),
+    natures: natures,
     gender: actant_object[:mdf_gender],
     actantNumber: actant_object[:mdf_source_number],
-    chronologyValues: value_or_nil(actant_object[:mdf_chronology]),
-    professionValues: value_or_nil(actant_object[:mdf_professions]),
+    chronologies: chronologies,
+    professions: professions,
     isSource: actant_object[:is_source] == 1,
     isRecipient: actant_object[:is_recipient] == 1,
   }

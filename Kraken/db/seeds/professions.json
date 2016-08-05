@@ -1,207 +1,166 @@
 [
   {
     "id": 1,
-    "key": "Agriculture",
-    "name": "Agriculture"
+    "key": "Agriculture"
   },
   {
     "id": 2,
-    "key": "Author",
-    "name": "Author"
+    "key": "Author"
   },
   {
     "id": 3,
-    "key": "ConstructionManufacturing",
-    "name": "Construction/Manufacturing"
+    "key": "ConstructionManufacturing"
   },
   {
     "id": 4,
-    "key": "Executive",
-    "name": "Executive"
+    "key": "Executive"
   },
   {
     "id": 5,
-    "key": "Farmer",
-    "name": "Farmer"
+    "key": "Farmer"
   },
   {
     "id": 6,
-    "key": "Food_Services",
-    "name": "Food Services"
+    "key": "Food_Services"
   },
   {
     "id": 7,
-    "key": "Governor",
-    "name": "Governor"
+    "key": "Governor"
   },
   {
     "id": 8,
-    "key": "Health_Services",
-    "name": "Health Services"
+    "key": "Health_Services"
   },
   {
     "id": 9,
-    "key": "Hebrew",
-    "name": "Hebrew"
+    "key": "Hebrew"
   },
   {
     "id": 10,
-    "key": "High_Priest",
-    "name": "High Priest"
+    "key": "High_Priest"
   },
   {
     "id": 11,
-    "key": "Homemaker",
-    "name": "Homemaker"
+    "key": "Homemaker"
   },
   {
     "id": 12,
-    "key": "Judge",
-    "name": "Judge"
+    "key": "Judge"
   },
   {
     "id": 13,
-    "key": "Judicial",
-    "name": "Judicial"
+    "key": "Judicial"
   },
   {
     "id": 14,
-    "key": "King",
-    "name": "King"
+    "key": "King"
   },
   {
     "id": 15,
-    "key": "Manufacturing",
-    "name": "Manufacturing"
+    "key": "Manufacturing"
   },
   {
     "id": 16,
-    "key": "Messenger",
-    "name": "Messenger"
+    "key": "Messenger"
   },
   {
     "id": 17,
-    "key": "Military",
-    "name": "Military"
+    "key": "Military"
   },
   {
     "id": 18,
-    "key": "MilitaryPolice",
-    "name": "Military/Police"
+    "key": "MilitaryPolice"
   },
   {
     "id": 19,
-    "key": "Miltary",
-    "name": "Miltary"
+    "key": "Miltary"
   },
   {
     "id": 20,
-    "key": "Musician",
-    "name": "Musician"
+    "key": "Musician"
   },
   {
     "id": 21,
-    "key": "Not_Hebrew",
-    "name": "Not Hebrew"
+    "key": "Not_Hebrew"
   },
   {
     "id": 22,
-    "key": "OfficerLeader",
-    "name": "Officer/Leader"
+    "key": "OfficerLeader"
   },
   {
     "id": 23,
-    "key": "Other_Official",
-    "name": "Other Official"
+    "key": "Other_Official"
   },
   {
     "id": 24,
-    "key": "Other_Religious_Leader",
-    "name": "Other Religious Leader"
+    "key": "Other_Religious_Leader"
   },
   {
     "id": 25,
-    "key": "Priest",
-    "name": "Priest"
+    "key": "Priest"
   },
   {
     "id": 26,
-    "key": "Prince",
-    "name": "Prince"
+    "key": "Prince"
   },
   {
     "id": 27,
-    "key": "Princess",
-    "name": "Princess"
+    "key": "Princess"
   },
   {
     "id": 28,
-    "key": "Prophet",
-    "name": "Prophet"
+    "key": "Prophet"
   },
   {
     "id": 29,
-    "key": "Prostitute",
-    "name": "Prostitute"
+    "key": "Prostitute"
   },
   {
     "id": 30,
-    "key": "Psalmist",
-    "name": "Psalmist"
+    "key": "Psalmist"
   },
   {
     "id": 31,
-    "key": "Queen",
-    "name": "Queen"
+    "key": "Queen"
   },
   {
     "id": 32,
-    "key": "Royalty",
-    "name": "Royalty"
+    "key": "Royalty"
   },
   {
     "id": 33,
-    "key": "Scribe",
-    "name": "Scribe"
+    "key": "Scribe"
   },
   {
     "id": 34,
-    "key": "Servant",
-    "name": "Servant"
+    "key": "Servant"
   },
   {
     "id": 35,
-    "key": "ServantSlave",
-    "name": "Servant/Slave"
+    "key": "ServantSlave"
   },
   {
     "id": 36,
-    "key": "Shepherd",
-    "name": "Shepherd"
+    "key": "Shepherd"
   },
   {
     "id": 37,
-    "key": "Slave",
-    "name": "Slave"
+    "key": "Slave"
   },
   {
     "id": 38,
-    "key": "SlaveServant",
-    "name": "Slave/Servant"
+    "key": "SlaveServant"
   },
   {
     "id": 39,
-    "key": "SoldierGuard",
-    "name": "Soldier/Guard"
+    "key": "SoldierGuard"
   },
   {
     "id": 40,
-    "key": "TeacherEducator",
-    "name": "Teacher/Educator"
+    "key": "TeacherEducator"
   },
   {
     "id": 41,
-    "key": "Thief",
-    "name": "Thief"
+    "key": "Thief"
   }
 ]

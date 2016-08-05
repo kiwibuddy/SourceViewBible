@@ -175,11 +175,10 @@ const ActantSchema = {
     name: {type: 'string', indexed: true},
     firstInitial: {type: 'string', optional: true},
     gender: 'int',
-    natureValues: {type: 'string', indexed: true, optional: true},
+    natures: {type: 'list', objectType: 'Nature'},
     actantNumber: {type: 'int', optional: true},
-    chronologyValues: {type: 'string', indexed: true, optional: true},
+    chronologies: {type: 'list', objectType: 'Chronology'},
     professions: {type: 'list', objectType: 'Profession'},
-    professionValues: {type: 'string', indexed: true, optional: true},
     isSource: 'bool',
     isRecipient: 'bool',
     sphereCount: {type: 'int', default: 0},
@@ -313,6 +312,20 @@ export class Chapter extends Realm.Object {
 }
 Chapter.schema = ChapterSchema;
 
+const ChronologySchema = {
+  name: 'Chronology',
+  primaryKey: 'id',
+  properties: {
+    id: 'int',
+    key: 'string',
+  }
+};
+
+export class Chronology extends Realm.Object {
+
+}
+Chronology.schema = ChronologySchema;
+
 const ContentSchema = {
   name: 'Content',
   properties: {
@@ -339,13 +352,26 @@ export class Count extends Realm.Object {
 }
 Count.schema = CountSchema;
 
+const NatureSchema = {
+  name: 'Nature',
+  primaryKey: 'id',
+  properties: {
+    id: 'int',
+    key: 'string',
+  }
+};
+
+export class Nature extends Realm.Object {
+
+}
+Nature.schema = NatureSchema;
+
 const ProfessionSchema = {
   name: 'Profession',
   primaryKey: 'id',
   properties: {
     id: 'int',
     key: 'string',
-    name: 'string'
   }
 }
 
@@ -405,15 +431,13 @@ const StatementSchema = {
   primaryKey: 'id',
   properties: {
     id: 'int',
-    emdrosID: {type: 'int', indexed: true},
     firstMonad: {type: 'int', indexed: true},
     lastMonad: {type: 'int', indexed: true},
     book: 'Book',
     sourceOccurrence:  {type: 'int', default: 0},
     source: 'Actant',
-    recipient: 'Actant',
+    recipients: {type: 'list', objectType: 'Actant'},
     sphereCounts: {type: 'list', objectType: 'Count'},
-    sphereValues: {type: 'string', indexed: true, optional: true},
     wordCount: {type: 'int', default: 0},
   }
 };
@@ -429,7 +453,7 @@ export class Statement extends Realm.Object {
 }
 Statement.schema = StatementSchema;
 
-const Schema = [Bible, Actant, Book, Chapter, Profession, SourceRelation, Sphere, Statement, Count, Content];
+const Schema = [Actant, Bible, Book, Chapter, Chronology, Nature, Profession, SourceRelation, Sphere, Count, Content, Statement];
 
 const realm = new Realm({
   schema: Schema,
