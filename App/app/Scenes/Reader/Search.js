@@ -8,6 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Image,
 } from 'react-native';
 
 import {
@@ -72,6 +73,15 @@ export default class ReaderSearch extends Component {
           keyboardShouldPersistTaps={true}
           keyboardDismissMode="on-drag"
         />
+        <View style={styles.gettingstartedContainer}>
+          <Image style={styles.gettingstartedIcon} source={require('./Images/reference-icon.png')} />
+          <Text style={styles.gettingstartedHeader}>References</Text>
+          <Text style={styles.gettingstartedBody}>There are a variety of ways to go to a specific reference:</Text>
+          <Text style={styles.gettingstartedExample}>Gen or Genesis</Text>
+          <Text style={styles.gettingstartedExample}>Gen Ab or Genesis Abraham</Text>
+          <Text style={styles.gettingstartedExample}>John 3:16 or J 3:16</Text>
+          <Text style={styles.gettingstartedExample}>John Jesus 18</Text>
+        </View>
       </View>
     );
   }
@@ -195,5 +205,34 @@ const styles = StyleSheet.create({
     paddingLeft: 8,
     marginLeft: 8,
     height: 26,
+  },
+  gettingstartedContainer: {
+    position: 'absolute',
+    top: 90,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    alignItems: 'center',
+  },
+  gettingstartedHeader: {
+    fontSize: 28,
+    fontWeight: '700',
+    color: '#59626A',
+    textAlign: 'center',
+    marginTop: 10,
+  },
+  gettingstartedBody: {
+    fontSize: 17,
+    color: '#59626A',
+    lineHeight: 21,
+    textAlign: 'center',
+    marginVertical: 5,
+    marginHorizontal: 20,
+  },
+  gettingstartedExample: {
+    fontSize: 17,
+    color: '#9B9B9B',
+    textAlign: 'center',
+    marginTop: 5,
   },
 });
