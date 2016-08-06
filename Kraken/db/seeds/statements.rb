@@ -8,7 +8,6 @@ FROM statement_objects INNER JOIN source_objects ON source_objects.first_monad =
 statement_objects.each do |statement_object|
 	statements << {
 		id: statement_object[:object_id_d],
-    emdrosID: statement_object[:object_id_d],
 		firstMonad: statement_object[:first_monad],
 		lastMonad: statement_object[:last_monad],
     recipients: statement_object[:mdf_recipients].to_s.strip.split(' ').map{|r| r.to_i},
@@ -16,7 +15,7 @@ statement_objects.each do |statement_object|
     sourceOccurrence: statement_object[:mdf_source_occurrence]
 	}
 
-  DB[:statements].insert(id: statement_object[:object_id_d], first_monad: statement_object[:first_monad], last_monad: statement_object[:last_monad])
+  DB[:statements].insert(id: statement_object[:object_id_d], first: statement_object[:first_monad], last: statement_object[:last_monad])
 end
 
 # pp statements

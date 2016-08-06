@@ -5,10 +5,10 @@ Sequel.migration do
   change do
     create_table(:statements) do
       primary_key :id
-      Integer :first_monad
-      Integer :last_monad
+      Integer :first
+      Integer :last
 
-      index [:first_monad, :last_monad], unique: true
+      index [:first, :last], unique: true
     end
   end
 end

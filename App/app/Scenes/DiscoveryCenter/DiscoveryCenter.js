@@ -75,14 +75,16 @@ async function query() {
 
   const book = Book.findByID('genesis');
   const sqlQuery = `
-    SELECT statements.* FROM statements
+    SELECT statements.id FROM statements
       INNER JOIN source_profession_statements ON statements.id = source_profession_statements.statement_id
       INNER JOIN recipient_profession_statements ON statements.id = recipient_profession_statements.statement_id
     WHERE
-      statements.first_monad >= ${book.firstMonad} AND statements.last_monad <= ${book.lastMonad}
-      AND source_profession_statements.profession_id = 36
-      AND recipient_profession_statements.profession_id = 36
+      statements.first >= ${book.firstMonad} AND statements.last <= ${book.lastMonad}
+      AND source_profession_statements.id = 36
+      AND recipient_profession_statements.id = 36
   `;
+
+  // const sqlQuery = 'SELECT statements.id FROM statements WHERE statements.first_monad >= 1 AND statements.last_monad <= 80000';
 
   const statements = await statementsWithSQL(sqlQuery);
   for (let statement of statements) {
@@ -94,11 +96,13 @@ async function query() {
     // });
 
     // Source Profession
-    statement.source.professions.forEach(profession => {
-      const key = profession.key;
-      const count = values[key] || 0;
-      values[key] = count + statement.wordCount;
-    });
+    if (statement.source) {
+      statement.source.professions.forEach(profession => {
+        const key = profession.key;
+        const count = values[key] || 0;
+        values[key] = count + statement.wordCount;
+      });
+    }
   }
 
   // C1: Then decide to search the word “peace” and select the “all” option under sources and decide to display as a word cloud.

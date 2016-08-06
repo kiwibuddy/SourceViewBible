@@ -54,7 +54,7 @@ async function seedStatementWordCounts(emdros: Object, realm: Object) {
       const sphereID = SPHERES.indexOf(key) + 1;
       if (sphereID > 0) {
         sphereStatements.push({
-          sphere_id: sphereID,
+          id: sphereID,
           statement_id: statement.id
         });
       }
