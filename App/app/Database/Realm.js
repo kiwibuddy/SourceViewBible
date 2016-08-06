@@ -366,6 +366,20 @@ export class Nature extends Realm.Object {
 }
 Nature.schema = NatureSchema;
 
+class Predicate {
+  static predicateWithFormat(query: string, arg: any) {
+
+  }
+
+  static andPredicateWithSubpredicates(predicates: any) {
+
+  }
+
+  static orPredicateWithSubpredicates(predicates: any) {
+
+  }
+}
+
 const ProfessionSchema = {
   name: 'Profession',
   primaryKey: 'id',
@@ -445,6 +459,10 @@ const StatementSchema = {
 export class Statement extends Realm.Object {
   static all() {
     return realm.objects('Statement');
+  }
+
+  static matchingPredicate(predicate: Object) {
+
   }
 
   async words() {
