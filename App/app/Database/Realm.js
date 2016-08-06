@@ -367,6 +367,8 @@ export class Nature extends Realm.Object {
 Nature.schema = NatureSchema;
 
 class Predicate {
+  query: string;
+
   static predicateWithFormat(query: string, arg: any) {
 
   }
