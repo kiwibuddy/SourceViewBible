@@ -461,7 +461,7 @@ export class Statement extends Realm.Object {
     return realm.objects('Statement');
   }
 
-  static matchingPredicate(predicate: Object) {
+  static matchingPredicate(predicate: Predicate) {
 
   }
 
