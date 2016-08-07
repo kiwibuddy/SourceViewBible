@@ -6,6 +6,17 @@ import Realm from 'realm';
 import Emdros from '../API/Emdros';
 const RNFS = require('react-native-fs');
 
+import {
+  Chapter,
+  Chronology,
+  Content,
+  Count,
+  Nature,
+  Profession,
+  SourceRelation,
+} from './Models';
+
+
 import Predicate from './Predicate';
 
 import { Localizable } from '../Common';
@@ -283,120 +294,6 @@ export class Book extends Realm.Object {
   }
 }
 Book.schema = BookSchema;
-
-const ChapterSchema = {
-  name: 'Chapter',
-  primaryKey: 'id',
-  properties: {
-    id: 'string',
-    chapterNumber: 'int',
-    firstMonad: {type: 'int', default: 0},
-    lastMonad: {type: 'int', default: 0},
-    sourceCount: {type: 'int', default: 0},
-    sourceTypeCount: {type: 'int', default: 0},
-    sourceTypeCounts: {type: 'list', objectType: 'Count'},
-    principalSourceType: {type: 'string', default: 'narrator'},
-    sphereCount: {type: 'int', default: 0},
-    sphereCounts: {type: 'list', objectType: 'Count'},
-    sphereWordCount: {type: 'int', default: 0},
-    wordCount: {type: 'int', default: 0},
-    verseCount: {type: 'int', default: 0},
-  }
-};
-
-export class Chapter extends Realm.Object {
-  get monadSet(): Object {
-    return {
-      first: this.firstMonad,
-      last: this.lastMonad
-    };
-  }
-}
-Chapter.schema = ChapterSchema;
-
-const ChronologySchema = {
-  name: 'Chronology',
-  primaryKey: 'id',
-  properties: {
-    id: 'int',
-    key: 'string',
-  }
-};
-
-export class Chronology extends Realm.Object {
-
-}
-Chronology.schema = ChronologySchema;
-
-const ContentSchema = {
-  name: 'Content',
-  properties: {
-    title: 'string',
-    body: 'string',
-  }
-};
-
-export class Content extends Realm.Object {
-
-}
-Content.schema = ContentSchema;
-
-const CountSchema = {
-  name: 'Count',
-  properties: {
-    string: 'string',
-    count: {type: 'int', default: 0},
-  }
-};
-
-export class Count extends Realm.Object {
-
-}
-Count.schema = CountSchema;
-
-const NatureSchema = {
-  name: 'Nature',
-  primaryKey: 'id',
-  properties: {
-    id: 'int',
-    key: 'string',
-  }
-};
-
-export class Nature extends Realm.Object {
-
-}
-Nature.schema = NatureSchema;
-
-const ProfessionSchema = {
-  name: 'Profession',
-  primaryKey: 'id',
-  properties: {
-    id: 'int',
-    key: 'string',
-  }
-}
-
-class Profession extends Realm.Object {
-
-}
-Profession.schema = ProfessionSchema;
-
-const SourceRelationSchema = {
-  name: 'SourceRelation',
-  primaryKey: 'id',
-  properties: {
-    id: 'string',
-    source: 'Actant',
-    wordCount: {type: 'int', default: 0},
-    words: {type: 'list', objectType: 'Count'},
-  }
-};
-
-export class SourceRelation extends Realm.Object {
-
-}
-SourceRelation.schema = SourceRelationSchema;
 
 const SphereSchema = {
   name: 'Sphere',

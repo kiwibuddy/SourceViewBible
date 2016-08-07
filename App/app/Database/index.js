@@ -2,10 +2,19 @@
 'use strict';
 
 import {
+  Chapter,
+  Chronology,
+  Content,
+  Count,
+  Nature,
+  Profession,
+  SourceRelation,
+} from './Models';
+
+import {
   Bible,
   Actant,
   Book,
-  Chapter,
   Sphere,
   Statement,
 } from './Realm';
