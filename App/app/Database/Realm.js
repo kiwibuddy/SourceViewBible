@@ -470,28 +470,37 @@ export class Statement extends Realm.Object {
       return Statement.all();
     }
 
-    const tables = predicate.subpredicates.filter(predicate => !(predicate instanceof WordPredicate)).map((comparison: ComparisonPredicate) => comparison.leftExpression.split('.')[0]).filter(table => table !== 'statements');
-    const from = tables.map(table => `INNER JOIN ${table} ON statements.id = ${table}.statement_id`).join(' ');
-    const where = predicate.predicateFormat;
-    const sql = `SELECT statements.id, statements.first, statements.last FROM statements ${from} WHERE ${where}`
-
-    const statementRows = await this.statementRowsWithSQL(sql);
     let statementIdentifiers = [];
-    if (statementRows.length > 0) {
-      const wordPredicates = predicate.subpredicates.filter(predicate => (predicate instanceof WordPredicate));
-      let wordCounts = null;
-      if (wordPredicates.length > 0) {
-        const wordPredicate = wordPredicates[0];
-        const word = wordPredicate.word;
+    let statementRows = [];
+    const where = predicate.predicateFormat;
+    if (where.length > 0) {
+      const tables = predicate.subpredicates.filter(predicate => !(predicate instanceof WordPredicate)).map((comparison: ComparisonPredicate) => comparison.leftExpression.split('.')[0]).filter(table => table !== 'statements');
+      const from = tables.map(table => `INNER JOIN ${table} ON statements.id = ${table}.statement_id`).join(' ');
+      const sql = `SELECT statements.id, statements.first, statements.last FROM statements ${from} WHERE ${where}`
+      statementRows = await this.statementRowsWithSQL(sql);
+    }
 
+    const wordPredicates = predicate.subpredicates.filter(predicate => (predicate instanceof WordPredicate));
+    let wordCounts = null;
+    if (wordPredicates.length > 0) {
+      const wordPredicate = wordPredicates[0];
+      const word = wordPredicate.word;
+
+      let options = {}
+      if (statementRows.length > 0) {
         const monads = statementRows.map(statementRow => [statementRow["first"], statementRow["last"]]);
-
-        wordCounts = await Emdros.wordCountsForContext('Statement', {monads, tokenFeatureComparison: `surface_fts="${word}"`});
-        statementIdentifiers = Object.keys(wordCounts).map(statementID => parseInt(statementID));
+        options = {monads, tokenFeatureComparison: `surface_fts="${word}"`}
       } else {
-        statementIdentifiers = statementRows.map(statementRow => statementRow["id"]);
+        options = {tokenFeatureComparison: `surface_fts="${word}"`};
       }
 
+      const wordCounts = await Emdros.wordCountsForContext('Statement', options);
+      statementIdentifiers = Object.keys(wordCounts).map(statementID => parseInt(statementID));
+    } else {
+      statementIdentifiers = statementRows.map(statementRow => statementRow["id"]);
+    }
+
+    if (statementIdentifiers.length > 0) {
       const query = statementIdentifiers.map(statementID => 'id = ' + statementID).join(' OR ');
       return Statement.all().filtered(query);
     }

@@ -24,6 +24,8 @@ export default class CompoundPredicate extends Predicate {
   }
 
   get predicateFormat(): string {
-    return '(' + this.subpredicates.filter(predicate => !(predicate instanceof WordPredicate)).map(predicate => predicate.predicateFormat).join(' ' + this.type.toUpperCase() + ' ') + ')';
+    const subpredicates = this.subpredicates.filter(predicate => !(predicate instanceof WordPredicate));
+    if (subpredicates.length == 0) return '';
+    return '(' + subpredicates.map(predicate => predicate.predicateFormat).join(' ' + this.type.toUpperCase() + ' ') + ')';
   }
 }

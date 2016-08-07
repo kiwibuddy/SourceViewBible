@@ -41,9 +41,9 @@ async function query() {
   const predicates = [];
   predicates.push(ComparisonPredicate.predicateWith('statements.first', '>=', book.firstMonad));
   predicates.push(ComparisonPredicate.predicateWith('statements.last', '<=', book.lastMonad));
-  predicates.push(ComparisonPredicate.predicateWith('source_profession_statements.id', '=', 36));
+  // predicates.push(ComparisonPredicate.predicateWith('source_profession_statements.id', '=', 36));
   // predicates.push(ComparisonPredicate.predicateWith('recipient_profession_statements.id', '=', 36));
-  // predicates.push(WordPredicate.predicateWithWord('peace'));
+  predicates.push(WordPredicate.predicateWithWord('peace'));
   const predicate = CompoundPredicate.andPredicateWithSubpredicates(predicates);
 
   const statements = await Statement.matchingPredicate(predicate);
