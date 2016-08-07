@@ -18,7 +18,7 @@ export default class Predicate {
 
     let index = 0;
     for (let arg of this.args) {
-      const value = (typeof arg == 'string' || arg instanceof String) ? `'${arg}'` : arg;
+      const value = (typeof arg == 'string' || arg instanceof String) ? "'" + arg + "'" : arg;
       predicateFormat = predicateFormat.replace('$' + index, value);
       index++;
     }

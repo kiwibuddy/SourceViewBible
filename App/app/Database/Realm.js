@@ -492,7 +492,7 @@ export class Statement extends Realm.Object {
         statementIdentifiers = statementRows.map(statementRow => statementRow["id"]);
       }
 
-      const query = statementIdentifiers.map(statementID => `id = ${statementID}`).join(' OR ');
+      const query = statementIdentifiers.map(statementID => 'id = ' + statementID).join(' OR ');
       return Statement.all().filtered(query);
     }
 
