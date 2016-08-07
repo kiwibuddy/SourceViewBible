@@ -462,9 +462,7 @@ export class Statement extends Realm.Object {
 
       const tables = predicate.subpredicates.map((comparison: ComparisonPredicate) => comparison.leftExpression.split('.')[0]).filter(table => table !== 'statements');
       const from = tables.map(table => `INNER JOIN ${table} ON statements.id = ${table}.statement_id`).join(' ');
-
       const where = predicate.predicateFormat;
-
       const sql = `SELECT statements.id FROM statements ${from} WHERE ${where}`
 
       SQLite.transaction((tx) => {
