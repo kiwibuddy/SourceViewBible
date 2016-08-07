@@ -4,9 +4,13 @@
 import { Platform } from 'react-native';
 import Realm from 'realm';
 import Emdros from '../API/Emdros';
+import SQLite from './SQLite';
+
 const RNFS = require('react-native-fs');
 
 import Predicate from './Predicate';
+import ComparisonPredicate from './ComparisonPredicate';
+import CompoundPredicate from './CompoundPredicate';
 
 import { Localizable } from '../Common';
 
@@ -126,6 +130,21 @@ function BSOReferencesInText(text: string) {
   }
 
   return null;
+}
+
+async function statementsWithSQL(sql: string) {
+  return new Promise((resolve, reject) => {
+    SQLite.transaction((tx) => {
+      tx.executeSql(sql, [], (tx, results) => {
+          let rows = results.rows.raw();
+          const statementIdentifiers = rows.map(row => row.id);
+
+          const query = statementIdentifiers.map(statementID => `id = ${statementID}`).join(' OR ');
+          const statements = Statement.all().filtered(query);
+          resolve(statements);
+        });
+    });
+  });
 }
 
 const BibleSchema = {
@@ -449,8 +468,14 @@ export class Statement extends Realm.Object {
     return realm.objects('Statement');
   }
 
-  static matchingPredicate(predicate: Predicate) {
+  static async matchingPredicate(predicate: CompoundPredicate) {
+    const tables = predicate.subpredicates.map((comparison: ComparisonPredicate) => comparison.leftExpression.split('.')[0]).filter(table => table !== 'statements');
+    const from = tables.map(table => `INNER JOIN ${table} ON statements.id = ${table}.statement_id`).join(' ');
 
+    const where = predicate.predicateFormat;
+
+    const sql = `SELECT statements.id FROM statements ${from} WHERE ${where}`
+    return await statementsWithSQL(sql);
   }
 
   async words() {

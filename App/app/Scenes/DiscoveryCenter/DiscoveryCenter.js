@@ -31,34 +31,22 @@ import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigati
 
 import { BACK } from '../../Navigation';
 
-import { Actant, Book, Statement, SQLite, ComparisonPredicate, CompoundPredicate, Predicate } from '../../Database';
+import { Actant, Book, Statement, ComparisonPredicate, CompoundPredicate, Predicate } from '../../Database';
 import Emdros from '../../API/Emdros';
 
 const SCROLLVIEW_REF = 'scrollview';
 
-async function statementsWithSQL(sql: string) {
-  return new Promise((resolve, reject) => {
-    SQLite.transaction((tx) => {
-      tx.executeSql(sql, [], (tx, results) => {
-          let rows = results.rows.raw();
-          const statementIdentifiers = rows.map(row => row.id);
-
-          const query = statementIdentifiers.map(statementID => `id = ${statementID}`).join(' OR ');
-          const statements = Statement.all().filtered(query);
-          resolve(statements);
-        });
-    });
-  });
-}
-
 async function query() {
   const book = Book.findByID('genesis');
 
-  let predicate = Predicate.predicateWithFormat('statements.first >= $0 AND statements.last <= $1', book.firstMonad, book.lastMonad);
-  predicate = CompoundPredicate.andPredicateWithSubpredicates([predicate, ComparisonPredicate.predicateWith('source_profession_statements.id', '=', 36)]);
-  predicate = CompoundPredicate.andPredicateWithSubpredicates([predicate, Predicate.predicateWithFormat('recipient_profession_statements.id = $0', 36)]);
+  const predicates = [];
+  predicates.push(ComparisonPredicate.predicateWith('statements.first', '>=', book.firstMonad));
+  predicates.push(ComparisonPredicate.predicateWith('statements.last', '<=', book.lastMonad));
+  predicates.push(ComparisonPredicate.predicateWith('source_profession_statements.id', '=', 36));
+  predicates.push(ComparisonPredicate.predicateWith('recipient_profession_statements.id', '=', 36));
+  const predicate = CompoundPredicate.andPredicateWithSubpredicates(predicates);
 
-  console.log(predicate.predicateFormat);
+  const statements = await Statement.matchingPredicate(predicate);
 
 
 
@@ -83,20 +71,6 @@ async function query() {
   //   });
   // }
 
-
-  const sqlQuery = `
-    SELECT statements.id FROM statements
-      INNER JOIN source_profession_statements ON statements.id = source_profession_statements.statement_id
-      INNER JOIN recipient_profession_statements ON statements.id = recipient_profession_statements.statement_id
-    WHERE
-      statements.first >= ${book.firstMonad} AND statements.last <= ${book.lastMonad}
-      AND source_profession_statements.id = 36
-      AND recipient_profession_statements.id = 36
-  `;
-
-  // const sqlQuery = 'SELECT statements.id FROM statements WHERE statements.first_monad >= 1 AND statements.last_monad <= 80000';
-
-  const statements = await statementsWithSQL(sqlQuery);
   for (let statement of statements) {
     // Words
     // const words = await statement.words();
@@ -134,8 +108,8 @@ async function query() {
   // }
   //
   //
-  // const data = Object.keys(values).sort((a,b) => values[a] > values[b] ? -1 : 1).slice(0, 20).map(key => ({key, count:values[key]}));
-  // console.log(data);
+  const data = Object.keys(values).sort((a,b) => values[a] > values[b] ? -1 : 1).slice(0, 20).map(key => ({key, count:values[key]}));
+  console.log(data);
 }
 
 type Props = {
