@@ -93,7 +93,7 @@ async function query() {
       const count = values[key] || 0;
       values[key] = count + statement.searchWordCount;
 
-      console.log(statement.searchSphereCounts);
+      // console.log(statement.searchSphereCounts);
     }
 
     // Recipient
