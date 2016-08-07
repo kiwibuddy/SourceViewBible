@@ -366,19 +366,40 @@ export class Nature extends Realm.Object {
 }
 Nature.schema = NatureSchema;
 
-class Predicate {
+export class Predicate {
   query: string;
+  arguments: any;
 
   static predicateWithFormat(query: string, arg: any) {
 
   }
 
-  static andPredicateWithSubpredicates(predicates: any) {
+  get predicateFormat(): string {
+    return '';
+  }
+}
 
+export class CompoundPredicate extends Predicate {
+  type: string;
+  subpredicates: Array<Predicate>;
+
+  constructor(type: string, subpredicates: Array<Predicate>) {
+    super();
+
+    this.type = type;
+    this.subpredicates = subpredicates;
   }
 
-  static orPredicateWithSubpredicates(predicates: any) {
+  static andPredicateWithSubpredicates(subpredicates: Array<Predicate>) {
+    return new CompoundPredicate('and', subpredicates);
+  }
 
+  static orPredicateWithSubpredicates(subpredicates: Array<Predicate>) {
+    return new CompoundPredicate('or', subpredicates);
+  }
+
+  get predicateFormat(): string {
+    return '(' + this.subpredicates.map(predicate => predicate.predicateFormat).join(` ${this.type.toUpperCase()}`) + ')';
   }
 }
 

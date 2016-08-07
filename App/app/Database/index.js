@@ -6,6 +6,8 @@ import {
   Actant,
   Book,
   Chapter,
+  CompoundPredicate,
+  Predicate,
   Sphere,
   Statement,
 } from './Realm';
@@ -17,6 +19,8 @@ module.exports = {
   Actant,
   Book,
   Chapter,
+  CompoundPredicate,
+  Predicate,
   Sphere,
   Statement,
   SQLite
