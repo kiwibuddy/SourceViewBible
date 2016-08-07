@@ -132,21 +132,6 @@ function BSOReferencesInText(text: string) {
   return null;
 }
 
-async function statementsWithSQL(sql: string) {
-  return new Promise((resolve, reject) => {
-    SQLite.transaction((tx) => {
-      tx.executeSql(sql, [], (tx, results) => {
-          let rows = results.rows.raw();
-          const statementIdentifiers = rows.map(row => row.id);
-
-          const query = statementIdentifiers.map(statementID => `id = ${statementID}`).join(' OR ');
-          const statements = Statement.all().filtered(query);
-          resolve(statements);
-        });
-    });
-  });
-}
-
 const BibleSchema = {
   name: 'Bible',
   properties: {
@@ -475,7 +460,19 @@ export class Statement extends Realm.Object {
     const where = predicate.predicateFormat;
 
     const sql = `SELECT statements.id FROM statements ${from} WHERE ${where}`
-    return await statementsWithSQL(sql);
+
+    return new Promise((resolve, reject) => {
+      SQLite.transaction((tx) => {
+        tx.executeSql(sql, [], (tx, results) => {
+            let rows = results.rows.raw();
+            const statementIdentifiers = rows.map(row => row.id);
+
+            const query = statementIdentifiers.map(statementID => `id = ${statementID}`).join(' OR ');
+            const statements = Statement.all().filtered(query);
+            resolve(statements);
+          });
+      });
+    });
   }
 
   async words() {
