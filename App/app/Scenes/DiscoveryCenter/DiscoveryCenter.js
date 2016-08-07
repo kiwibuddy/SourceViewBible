@@ -31,7 +31,7 @@ import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigati
 
 import { BACK } from '../../Navigation';
 
-import { Actant, Book, Statement, SQLite, CompoundPredicate, Predicate } from '../../Database';
+import { Actant, Book, Statement, SQLite, ComparisonPredicate, CompoundPredicate, Predicate } from '../../Database';
 import Emdros from '../../API/Emdros';
 
 const SCROLLVIEW_REF = 'scrollview';
@@ -55,7 +55,7 @@ async function query() {
   const book = Book.findByID('genesis');
 
   let predicate = Predicate.predicateWithFormat('statements.first >= $0 AND statements.last <= $1', book.firstMonad, book.lastMonad);
-  predicate = CompoundPredicate.andPredicateWithSubpredicates([predicate, Predicate.predicateWithFormat('source_profession_statements.id = $0', 36)]);
+  predicate = CompoundPredicate.andPredicateWithSubpredicates([predicate, ComparisonPredicate.predicateWith('source_profession_statements.id', '=', 36)]);
   predicate = CompoundPredicate.andPredicateWithSubpredicates([predicate, Predicate.predicateWithFormat('recipient_profession_statements.id = $0', 36)]);
 
   console.log(predicate.predicateFormat);
