@@ -31,7 +31,7 @@ import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigati
 
 import { BACK } from '../../Navigation';
 
-import { Actant, Book, Statement, ComparisonPredicate, CompoundPredicate, Predicate } from '../../Database';
+import { Actant, Book, Statement, ComparisonPredicate, CompoundPredicate } from '../../Database';
 import Emdros from '../../API/Emdros';
 
 const SCROLLVIEW_REF = 'scrollview';
@@ -42,12 +42,12 @@ async function query() {
   const predicates = [];
   predicates.push(ComparisonPredicate.predicateWith('statements.first', '>=', book.firstMonad));
   predicates.push(ComparisonPredicate.predicateWith('statements.last', '<=', book.lastMonad));
-  predicates.push(ComparisonPredicate.predicateWith('source_profession_statements.id', '=', 36));
+  // predicates.push(ComparisonPredicate.predicateWith('source_profession_statements.id', '=', 36));
   predicates.push(ComparisonPredicate.predicateWith('recipient_profession_statements.id', '=', 36));
   const predicate = CompoundPredicate.andPredicateWithSubpredicates(predicates);
 
   const statements = await Statement.matchingPredicate(predicate);
-
+  console.log(statements.length + ' Occurrences');
 
 
   const values = {};
