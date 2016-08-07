@@ -11,6 +11,7 @@ const RNFS = require('react-native-fs');
 import Predicate from './Predicate';
 import ComparisonPredicate from './ComparisonPredicate';
 import CompoundPredicate from './CompoundPredicate';
+import WordPredicate from './WordPredicate';
 
 import { Localizable } from '../Common';
 
@@ -453,29 +454,49 @@ export class Statement extends Realm.Object {
     return realm.objects('Statement');
   }
 
-  static async matchingPredicate(predicate: CompoundPredicate) {
+  static async statementRowsWithSQL(sql: string) {
     return new Promise((resolve, reject) => {
-      if (!predicate) {
-        resolve(Statement.all());
-        return;
-      }
-
-      const tables = predicate.subpredicates.map((comparison: ComparisonPredicate) => comparison.leftExpression.split('.')[0]).filter(table => table !== 'statements');
-      const from = tables.map(table => `INNER JOIN ${table} ON statements.id = ${table}.statement_id`).join(' ');
-      const where = predicate.predicateFormat;
-      const sql = `SELECT statements.id FROM statements ${from} WHERE ${where}`
-
       SQLite.transaction((tx) => {
         tx.executeSql(sql, [], (tx, results) => {
             let rows = results.rows.raw();
-            const statementIdentifiers = rows.map(row => row.id);
-
-            const query = statementIdentifiers.map(statementID => `id = ${statementID}`).join(' OR ');
-            const statements = Statement.all().filtered(query);
-            resolve(statements);
-          });
+            resolve(rows);
+        });
       });
     });
+  }
+
+  static async matchingPredicate(predicate: CompoundPredicate) {
+    if (!predicate) {
+      return Statement.all();
+    }
+
+    const tables = predicate.subpredicates.filter(predicate => !(predicate instanceof WordPredicate)).map((comparison: ComparisonPredicate) => comparison.leftExpression.split('.')[0]).filter(table => table !== 'statements');
+    const from = tables.map(table => `INNER JOIN ${table} ON statements.id = ${table}.statement_id`).join(' ');
+    const where = predicate.predicateFormat;
+    const sql = `SELECT statements.id, statements.first, statements.last FROM statements ${from} WHERE ${where}`
+
+    const statementRows = await this.statementRowsWithSQL(sql);
+    let statementIdentifiers = [];
+    if (statementRows.length > 0) {
+      const wordPredicates = predicate.subpredicates.filter(predicate => (predicate instanceof WordPredicate));
+      let wordCounts = null;
+      if (wordPredicates.length > 0) {
+        const wordPredicate = wordPredicates[0];
+        const word = wordPredicate.word;
+
+        const monads = statementRows.map(statementRow => [statementRow["first"], statementRow["last"]]);
+
+        wordCounts = await Emdros.wordCountsForContext('Statement', {monads, tokenFeatureComparison: `surface_fts="${word}"`});
+        statementIdentifiers = Object.keys(wordCounts).map(statementID => parseInt(statementID));
+      } else {
+        statementIdentifiers = statementRows.map(statementRow => statementRow["id"]);
+      }
+
+      const query = statementIdentifiers.map(statementID => `id = ${statementID}`).join(' OR ');
+      return Statement.all().filtered(query);
+    }
+
+    return [];
   }
 
   async words() {

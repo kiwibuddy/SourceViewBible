@@ -15,6 +15,7 @@ const SQLite = require('./SQLite');
 import Predicate from './Predicate';
 import ComparisonPredicate from './ComparisonPredicate';
 import CompoundPredicate from './CompoundPredicate';
+import WordPredicate from './WordPredicate';
 
 module.exports = {
   Bible,
@@ -23,6 +24,7 @@ module.exports = {
   Chapter,
   ComparisonPredicate,
   CompoundPredicate,
+  WordPredicate,
   Predicate,
   Sphere,
   Statement,

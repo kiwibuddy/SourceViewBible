@@ -31,8 +31,7 @@ import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigati
 
 import { BACK } from '../../Navigation';
 
-import { Actant, Book, Statement, ComparisonPredicate, CompoundPredicate } from '../../Database';
-import Emdros from '../../API/Emdros';
+import { Actant, Book, Statement, ComparisonPredicate, CompoundPredicate, WordPredicate } from '../../Database';
 
 const SCROLLVIEW_REF = 'scrollview';
 
@@ -43,7 +42,8 @@ async function query() {
   predicates.push(ComparisonPredicate.predicateWith('statements.first', '>=', book.firstMonad));
   predicates.push(ComparisonPredicate.predicateWith('statements.last', '<=', book.lastMonad));
   // predicates.push(ComparisonPredicate.predicateWith('source_profession_statements.id', '=', 36));
-  predicates.push(ComparisonPredicate.predicateWith('recipient_profession_statements.id', '=', 36));
+  // predicates.push(ComparisonPredicate.predicateWith('recipient_profession_statements.id', '=', 36));
+  predicates.push(WordPredicate.predicateWithWord('peace'));
   const predicate = CompoundPredicate.andPredicateWithSubpredicates(predicates);
 
   const statements = await Statement.matchingPredicate(predicate);
@@ -79,14 +79,28 @@ async function query() {
     //   values[wordCount.string] = count + wordCount.count;
     // });
 
-    // Source Profession
+    // Source
     if (statement.source) {
-      statement.source.professions.forEach(profession => {
-        const key = profession.key;
-        const count = values[key] || 0;
-        values[key] = count + statement.wordCount;
-      });
+      // Profession
+      // statement.source.professions.forEach(profession => {
+      //   const key = profession.key;
+      //   const count = values[key] || 0;
+      //   values[key] = count + statement.wordCount;
+      // });
+
+      // Name
+      const key = statement.source.name;
+      const count = values[key] || 0;
+      values[key] = count + statement.wordCount;
     }
+
+    // Recipient
+    // if (statement.recipient) {
+    //   // Name
+    //   const key = statement.recipient.name;
+    //   const count = values[key] || 0;
+    //   values[key] = count + statement.wordCount;
+    // }
   }
 
   // C1: Then decide to search the word “peace” and select the “all” option under sources and decide to display as a word cloud.

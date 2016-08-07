@@ -2,10 +2,11 @@
 'use strict';
 
 import Predicate from './Predicate';
+import WordPredicate from './WordPredicate';
 
 export default class CompoundPredicate extends Predicate {
   type: string;
-  subpredicates: Array<Predicate>;
+  subpredicates: Array<any>;
 
   constructor(type: string, subpredicates: Array<Predicate>) {
     super();
@@ -23,6 +24,6 @@ export default class CompoundPredicate extends Predicate {
   }
 
   get predicateFormat(): string {
-    return '(' + this.subpredicates.map(predicate => predicate.predicateFormat).join(` ${this.type.toUpperCase()} `) + ')';
+    return '(' + this.subpredicates.filter(predicate => !(predicate instanceof WordPredicate)).map(predicate => predicate.predicateFormat).join(` ${this.type.toUpperCase()} `) + ')';
   }
 }
