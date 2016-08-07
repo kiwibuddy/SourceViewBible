@@ -454,14 +454,19 @@ export class Statement extends Realm.Object {
   }
 
   static async matchingPredicate(predicate: CompoundPredicate) {
-    const tables = predicate.subpredicates.map((comparison: ComparisonPredicate) => comparison.leftExpression.split('.')[0]).filter(table => table !== 'statements');
-    const from = tables.map(table => `INNER JOIN ${table} ON statements.id = ${table}.statement_id`).join(' ');
-
-    const where = predicate.predicateFormat;
-
-    const sql = `SELECT statements.id FROM statements ${from} WHERE ${where}`
-
     return new Promise((resolve, reject) => {
+      if (!predicate) {
+        resolve(Statement.all());
+        return;
+      }
+
+      const tables = predicate.subpredicates.map((comparison: ComparisonPredicate) => comparison.leftExpression.split('.')[0]).filter(table => table !== 'statements');
+      const from = tables.map(table => `INNER JOIN ${table} ON statements.id = ${table}.statement_id`).join(' ');
+
+      const where = predicate.predicateFormat;
+
+      const sql = `SELECT statements.id FROM statements ${from} WHERE ${where}`
+
       SQLite.transaction((tx) => {
         tx.executeSql(sql, [], (tx, results) => {
             let rows = results.rows.raw();
