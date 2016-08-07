@@ -13,14 +13,6 @@ export default class Predicate {
     }
   }
 
-  static predicateWithFormat(query: string, ...args: any) {
-    const props = {
-      query,
-      args: Array.prototype.slice.call(args)
-    };
-    return new Predicate(props);
-  }
-
   get predicateFormat(): string {
     let predicateFormat = this.query;
 
