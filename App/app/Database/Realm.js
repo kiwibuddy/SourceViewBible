@@ -450,8 +450,8 @@ const StatementSchema = {
 };
 
 export class Statement extends Realm.Object {
-  searchWordCount: number;
-  searchSphereCounts: any;
+  _searchWordCount: number;
+  _searchSphereCounts: Array<Object>;
 
   static all() {
     return realm.objects('Statement');
@@ -517,8 +517,11 @@ export class Statement extends Realm.Object {
             if (counts) {
               const wordCount = counts.wordCount;
               if (wordCount) {
+                delete counts.wordCount;
                 statement.searchWordCount = wordCount;
               }
+
+              statement.searchSphereCounts = Object.keys(counts).map(key => ({string: key, count: counts[key]}));
             }
           }
           return statement;
@@ -533,9 +536,22 @@ export class Statement extends Realm.Object {
     return await Emdros.words({from: this.firstMonad, to: this.lastMonad, useStopWords: true});
   }
 
-  get searchCount(): number {
-    if (this.searchWordCount) return this.searchWordCount;
+  set searchWordCount(searchWordCount: number) {
+    this._searchWordCount = searchWordCount;
+  }
+
+  get searchWordCount(): number {
+    if (this._searchWordCount) return this._searchWordCount;
     return this.wordCount;
+  }
+
+  set searchSphereCounts(searchSphereCounts: Array<Object>) {
+    this._searchSphereCounts = searchSphereCounts;
+  }
+
+  get searchSphereCounts(): Array<Object> {
+    if (this._searchSphereCounts) return this._searchSphereCounts;
+    return this.sphereCounts;
   }
 }
 Statement.schema = StatementSchema;

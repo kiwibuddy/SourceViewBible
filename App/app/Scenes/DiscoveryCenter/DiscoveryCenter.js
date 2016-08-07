@@ -91,7 +91,9 @@ async function query() {
       // Name
       const key = statement.source.name;
       const count = values[key] || 0;
-      values[key] = count + statement.searchCount;
+      values[key] = count + statement.searchWordCount;
+
+      console.log(statement.searchSphereCounts);
     }
 
     // Recipient
