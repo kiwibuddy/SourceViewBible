@@ -39,8 +39,8 @@ async function query() {
   const book = Book.findByID('genesis');
 
   const predicates = [];
-  predicates.push(ComparisonPredicate.predicateWith('statements.first', '>=', book.firstMonad));
-  predicates.push(ComparisonPredicate.predicateWith('statements.last', '<=', book.lastMonad));
+  // predicates.push(ComparisonPredicate.predicateWith('statements.first', '>=', book.firstMonad));
+  // predicates.push(ComparisonPredicate.predicateWith('statements.last', '<=', book.lastMonad));
   // predicates.push(ComparisonPredicate.predicateWith('source_profession_statements.id', '=', 36));
   // predicates.push(ComparisonPredicate.predicateWith('recipient_profession_statements.id', '=', 36));
   predicates.push(WordPredicate.predicateWithWord('peace'));
@@ -91,7 +91,7 @@ async function query() {
       // Name
       const key = statement.source.name;
       const count = values[key] || 0;
-      values[key] = count + statement.wordCount;
+      values[key] = count + statement.searchCount;
     }
 
     // Recipient

@@ -450,6 +450,9 @@ const StatementSchema = {
 };
 
 export class Statement extends Realm.Object {
+  searchWordCount: number;
+  searchSphereCounts: any;
+
   static all() {
     return realm.objects('Statement');
   }
@@ -494,7 +497,7 @@ export class Statement extends Realm.Object {
         options = {tokenFeatureComparison: `surface_fts="${word}"`};
       }
 
-      const wordCounts = await Emdros.wordCountsForContext('Statement', options);
+      wordCounts = await Emdros.wordCountsForContext('Statement', options);
       statementIdentifiers = Object.keys(wordCounts).map(statementID => parseInt(statementID));
     } else {
       statementIdentifiers = statementRows.map(statementRow => statementRow["id"]);
@@ -502,7 +505,25 @@ export class Statement extends Realm.Object {
 
     if (statementIdentifiers.length > 0) {
       const query = statementIdentifiers.map(statementID => 'id = ' + statementID).join(' OR ');
-      return Statement.all().filtered(query);
+      const statements = Statement.all().filtered(query);
+
+      if (wordCounts == null) {
+        return statements;
+      } else {
+        return statements.map(statement => {
+          if (wordCounts) {
+            const statementID = statement.id.toString();
+            const counts = wordCounts[statementID];
+            if (counts) {
+              const wordCount = counts.wordCount;
+              if (wordCount) {
+                statement.searchWordCount = wordCount;
+              }
+            }
+          }
+          return statement;
+        });
+      }
     }
 
     return [];
@@ -510,6 +531,11 @@ export class Statement extends Realm.Object {
 
   async words() {
     return await Emdros.words({from: this.firstMonad, to: this.lastMonad, useStopWords: true});
+  }
+
+  get searchCount(): number {
+    if (this.searchWordCount) return this.searchWordCount;
+    return this.wordCount;
   }
 }
 Statement.schema = StatementSchema;
