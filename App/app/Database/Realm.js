@@ -6,6 +6,8 @@ import Realm from 'realm';
 import Emdros from '../API/Emdros';
 const RNFS = require('react-native-fs');
 
+import Predicate from './Predicate';
+
 import { Localizable } from '../Common';
 
 function bookNameInText(text: string) {
@@ -365,63 +367,6 @@ export class Nature extends Realm.Object {
 
 }
 Nature.schema = NatureSchema;
-
-export class Predicate {
-  query: string;
-  args: Array<any>;
-
-  constructor(props: any) {
-    if (props) {
-      const { query, args } = props;
-      this.query = query;
-      this.args = args;
-    }
-  }
-
-  static predicateWithFormat(query: string, ...args: any) {
-    const props = {
-      query,
-      args: Array.prototype.slice.call(args)
-    };
-    return new Predicate(props);
-  }
-
-  get predicateFormat(): string {
-    let predicateFormat = this.query;
-
-    let index = 0;
-    for (let arg of this.args) {
-      const value = (typeof arg == 'string' || arg instanceof String) ? `'${arg}'` : arg;
-      predicateFormat = predicateFormat.replace('$' + index, value);
-      index++;
-    }
-    return '(' + predicateFormat + ')';
-  }
-}
-
-export class CompoundPredicate extends Predicate {
-  type: string;
-  subpredicates: Array<Predicate>;
-
-  constructor(type: string, subpredicates: Array<Predicate>) {
-    super();
-
-    this.type = type;
-    this.subpredicates = subpredicates;
-  }
-
-  static andPredicateWithSubpredicates(subpredicates: Array<Predicate>) {
-    return new CompoundPredicate('and', subpredicates);
-  }
-
-  static orPredicateWithSubpredicates(subpredicates: Array<Predicate>) {
-    return new CompoundPredicate('or', subpredicates);
-  }
-
-  get predicateFormat(): string {
-    return '(' + this.subpredicates.map(predicate => predicate.predicateFormat).join(` ${this.type.toUpperCase()} `) + ')';
-  }
-}
 
 const ProfessionSchema = {
   name: 'Profession',
