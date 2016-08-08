@@ -32,7 +32,7 @@ const SEGMENT_INDEXES = {
 
 const LISTVIEW_REF = 'LISTVIEW_REF';
 
-import { Book } from '../../../Database';
+import { Book, ComparisonPredicate } from '../../../Database';
 
 type Props = {
   navigate: Function,
@@ -87,8 +87,15 @@ export default class Books extends Component {
   }
 
   _renderRow = (book: Object, sectionID: any, rowID: any) => {
+    const filter = {
+      id: 'filter-' + Date.now(),
+      predicates: [
+        ComparisonPredicate.predicateWith('statments.first', '>=', book.firstMonad),
+        ComparisonPredicate.predicateWith('statments.last', '<=', book.lastMonad),
+      ]
+    }
     return (
-      <TouchableOpacity key={book.id} style={StyleSheet.styles.listItem} onPress={() => console.log(book.name)}>
+      <TouchableOpacity key={book.id} style={StyleSheet.styles.listItem} onPress={() => this.props.onDone(filter)}>
         <Text style={StyleSheet.styles.cell.title}>{book.name}</Text>
       </TouchableOpacity>
     );

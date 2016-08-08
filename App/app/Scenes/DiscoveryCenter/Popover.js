@@ -13,7 +13,6 @@ import {
 } from 'react-native';
 
 
-
 const NavigatorNavigationBarStyles = {
   ...Navigator.NavigationBar.Styles,
   General: {
@@ -72,8 +71,6 @@ const NavigatorNavigationBarStyles = {
 
 const NAV_BAR_HEIGHT = NavigatorNavigationBarStyles.General.NavBarHeight;
 
-console.log(NavigatorNavigationBarStyles);
-
 import {
   Colors,
   Localizable,
@@ -81,7 +78,6 @@ import {
 } from '../../Common';
 
 import router, { BACK } from '../../Navigation';
-
 
 
 type Props = {
