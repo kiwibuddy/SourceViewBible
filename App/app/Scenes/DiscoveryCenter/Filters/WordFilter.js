@@ -57,7 +57,7 @@ class WordFilter extends Component {
           clearButtonMode="always"
           onChangeText={(text) => this.setState({word: text})}
           onSubmitEditing={(text) => this.props.onDone(filterWord(this.state.word))}
-          placeholder="Single Word"
+          placeholder="Word"
           style={styles.textInput}
           value={this.state.word}
         />
