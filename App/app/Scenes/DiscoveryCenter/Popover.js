@@ -18,28 +18,9 @@ import {
   StyleSheet,
 } from '../../Common';
 
-const NAV_BAR_HEIGHT = 44;
+import BookFilters from './Filters/BookFilters';
 
-class MyScene extends Component {
-  static propTypes = {
-    title: PropTypes.string.isRequired,
-    onForward: PropTypes.func.isRequired,
-    onBack: PropTypes.func.isRequired,
-  }
-  render() {
-    return (
-      <View style={{flex: 1, backgroundColor: 'yellow'}}>
-        <Text>Current Scene: { this.props.title }</Text>
-        <TouchableOpacity onPress={this.props.onForward}>
-          <Text>Tap me to load the next scene</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this.props.onBack}>
-          <Text>Tap me to go back</Text>
-        </TouchableOpacity>
-      </View>
-    )
-  }
-}
+const NAV_BAR_HEIGHT = 44;
 
 type Props = {
   initialRoute: Object,
@@ -119,19 +100,8 @@ export default class Popover extends Component {
 
   _renderScene = (route: Object, navigator: Object) => {
     return (
-      <View style={{paddingTop: NAV_BAR_HEIGHT}}>
-        <MyScene
-          title={`Scene ${route.index}`}
-          onForward={() => {
-            const nextIndex = route.index + 1;
-            navigator.push({title: `Scene ${nextIndex}`, index: nextIndex});
-          }}
-          onBack={() => {
-            if (route.index > 0) {
-              navigator.pop();
-            }
-          }}
-        />
+      <View style={{flex: 1, paddingTop: NAV_BAR_HEIGHT}}>
+        <BookFilters />
       </View>
     );
   };
