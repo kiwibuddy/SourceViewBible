@@ -1,39 +1,32 @@
 {
-  en: {
+  "en": {
     "old-testament": "Old Testament",
     "new-testament": "New Testament",
-    discover: "Discover",
-    textual: "Text Order",
-    alphabetical: "Alphabetical",
-    principality: "Read Time",
-    discover: "Discover",
-    books: "Books",
-    sources: {
-      narrator: "Narrator",
-      god: "God",
-      lead: "Lead",
-      support: "Support",
-      text: "Sources",
-      count: {
-        one: "1 source",
-        other: "{{count}} sources"
+    "discover": "Discover",
+    "textual": "Text Order",
+    "alphabetical": "Alphabetical",
+    "principality": "Read Time",
+    "discover": "Discover",
+    "books": "Books",
+    "sources": {
+      "narrator": "Narrator",
+      "god": "God",
+      "lead": "Lead",
+      "support": "Support",
+      "text": "Sources",
+      "count": {
+        "one": "1 source",
+        "other": "{{count}} sources"
       }
     },
-    spheres: {
-      text: "Spheres",
-      count: {
-        one: "1 sphere",
-        other: "{{count}} spheres"
+    "spheres": {
+      "text": "Spheres",
+      "count": {
+        "one": "1 sphere",
+        "other": "{{count}} spheres"
       }
     },
-    introduction: "Introduction",
-    tabs: {
-      overview: "Overview",
-      chapters: "Chapters",
-      sources: "Sources",
-      spheres: "Spheres",
-      words: "Words"
-    },
+    "introduction": "Introduction",
     "how-to-read": "How to read {{name}}",
     "book-overview": "Overview of {{name}}",
     "book-chapters": "Chapters in {{name}}",
@@ -56,22 +49,23 @@
     "highlights": "Highlights",
     "today": "Today",
     "yesterday": "Yesterday",
-    percentage: "Percentage",
-    words: {
-      count: {
-        one: "1 word",
-        other: "{{localizedCount}} words"
+    "percentage": "Percentage",
+    "words": {
+      "count": {
+        "one": "1 word",
+        "other": "{{localizedCount}} words"
       }
     },
     "explore-occurrences": {
-      count: {
-        one: "Explore 1 occurrence",
-        other: "Explore {{localizedCount}} occurrences"
+      "count": {
+        "one": "Explore 1 occurrence",
+        "other": "Explore {{localizedCount}} occurrences"
       }
     },
-    more: "More",
-    done: "Done",
-    cancel: "Cancel",
+    "more": "More",
+    "done": "Done",
+    "cancel": "Cancel",
+    "back": "Back",
     "search-references": "Search References",
     "bcv": "Chapter and Verse",
     "bso": "Source and Occurrence",

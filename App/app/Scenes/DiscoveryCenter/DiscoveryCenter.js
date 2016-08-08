@@ -217,6 +217,7 @@ export default class DiscoveryCenter extends Component {
 
     return (
       <Popover
+        initialRoute={{key: 'Foo', title: 'Hello', index: 0}}
         onDone={(filter) => {
           const { card } = popover.props;
           const filters = [

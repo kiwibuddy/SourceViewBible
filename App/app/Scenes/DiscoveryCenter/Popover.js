@@ -4,7 +4,8 @@
 import React, { Component, PropTypes } from 'react';
 
 import {
-  Image,
+  Navigator,
+  Platform,
   Text,
   TouchableOpacity,
   TouchableWithoutFeedback,
@@ -13,10 +14,73 @@ import {
 
 import {
   Colors,
+  Localizable,
   StyleSheet,
 } from '../../Common';
 
+const NAV_BAR_HEIGHT = 44;
+
+class MyScene extends Component {
+  static propTypes = {
+    title: PropTypes.string.isRequired,
+    onForward: PropTypes.func.isRequired,
+    onBack: PropTypes.func.isRequired,
+  }
+  render() {
+    return (
+      <View style={{flex: 1, backgroundColor: 'yellow'}}>
+        <Text>Current Scene: { this.props.title }</Text>
+        <TouchableOpacity onPress={this.props.onForward}>
+          <Text>Tap me to load the next scene</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.props.onBack}>
+          <Text>Tap me to go back</Text>
+        </TouchableOpacity>
+      </View>
+    )
+  }
+}
+
+const NavigationBarRouteMapper = {
+  LeftButton: function(route, navigator, index, navState) {
+    if (index === 0) {
+      return null;
+    }
+
+    var previousRoute = navState.routeStack[index - 1];
+    return (
+      <TouchableOpacity
+        onPress={() => navigator.pop()}
+        style={styles.navBarLeftButton}>
+        <Text style={[styles.navBarText, styles.navBarButtonText]}>
+          {previousRoute.title || Localizable.t('back')}
+        </Text>
+      </TouchableOpacity>
+    );
+  },
+  RightButton: function(route, navigator, index, navState) {
+    return (
+      <TouchableOpacity
+        onPress={() => console.log('Done!')}
+        style={styles.navBarRightButton}>
+        <Text style={[styles.navBarText, styles.navBarButtonText, StyleSheet.styles.navigationBar.doneButtonTitle]}>
+          {Localizable.t('done')}
+        </Text>
+      </TouchableOpacity>
+    );
+  },
+  Title: function(route, navigator, index, navState) {
+    return (
+      <Text style={[styles.navBarText, styles.navBarTitleText]}>
+        {route.title}
+      </Text>
+    );
+  },
+
+};
+
 type Props = {
+  initialRoute: Object,
   onPressCancel: Function,
   onDone: Function,
 };
@@ -27,30 +91,43 @@ export default class Popover extends Component {
   render() {
     return (
       <View style={styles.overlayContainer}>
-        <View style={styles.popover}>
-          <View style={styles.tableHeader}>
-            <TouchableOpacity  style={styles.backContainer} onPress={this.props.onPressCancel}>
-              <Text style={styles.back}>Cancel</Text>
-            </TouchableOpacity>
-            <Text style={styles.title}>Books Filter</Text>
-          </View>
-          <View style={[styles.separator, {marginLeft: 0}]} />
-          <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => this.props.onDone({id: 'filter-' + Date.now()})}>
-            <Text style={StyleSheet.styles.cell.title}>Whole Bible</Text>
-          </TouchableOpacity>
-          <View style={styles.separator} />
-          <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
-            <Text style={StyleSheet.styles.cell.title}>Old Testament</Text>
-          </TouchableOpacity>
-          <View style={styles.separator} />
-          <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
-            <Text style={StyleSheet.styles.cell.title}>New Testament</Text>
-          </TouchableOpacity>
-          <View style={styles.separator} />
-        </View>
+        <Navigator
+          initialRoute={this.props.initialRoute}
+          navigationBar={this._renderNavigationBar()}
+          renderScene={this._renderScene}
+          style={styles.popover}
+        />
       </View>
     );
   }
+
+  _renderNavigationBar = () => {
+    return (
+      <Navigator.NavigationBar
+        routeMapper={NavigationBarRouteMapper}
+        style={styles.navBar}
+      />
+    );
+  };
+
+  _renderScene = (route: Object, navigator: Object) => {
+    return (
+      <View style={{paddingTop: NAV_BAR_HEIGHT}}>
+        <MyScene
+          title={`Scene ${route.index}`}
+          onForward={() => {
+            const nextIndex = route.index + 1;
+            navigator.push({title: `Scene ${nextIndex}`, index: nextIndex});
+          }}
+          onBack={() => {
+            if (route.index > 0) {
+              navigator.pop();
+            }
+          }}
+        />
+      </View>
+    );
+  };
 }
 
 const styles = StyleSheet.create({
@@ -71,30 +148,29 @@ const styles = StyleSheet.create({
     right: 4,
     left: 4,
   },
-  tableHeader: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 44,
+  navBar: {
+    height: NAV_BAR_HEIGHT,
+    backgroundColor: Platform.OS === 'ios' ? 'rgba(248, 248, 248, .85)' : '#FFF',
+    borderBottomColor: 'rgba(0, 0, 0, .15)',
+    borderBottomWidth: Platform.OS === 'ios' ? StyleSheet.hairlineWidth : 0,
+    elevation: 4,
+    marginBottom: 16, // This is needed for elevation shadow
   },
-  separator: {
-    ...StyleSheet.styles.separator,
-    marginLeft: 15,
+  navBarText: {
+    fontSize: 16,
   },
-  backContainer: {
-    position: 'absolute',
-    left: 15,
-    justifyContent: 'center',
-    height: 44,
-  },
-  back: {
-    color: Colors.tint,
-    fontSize: 17,
-  },
-  title: {
+  navBarTitleText: {
     color: 'black',
     fontSize: 17,
     fontWeight: 'bold',
-
+  },
+  navBarLeftButton: {
+    paddingLeft: 10,
+  },
+  navBarRightButton: {
+    paddingRight: 10,
+  },
+  navBarButtonText: {
+    color: Colors.tint,
   },
 });
