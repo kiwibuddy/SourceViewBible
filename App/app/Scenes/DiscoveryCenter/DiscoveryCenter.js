@@ -31,104 +31,9 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigation';
 
-import { bookFiltersURL, spheresFilterURL, wordFilterURL } from '../../Navigation';
-
-import { Actant, Book, Statement, ComparisonPredicate, CompoundPredicate, WordPredicate } from '../../Database';
+import { bookFiltersURL, discoveryCenterOccurrencesURL, spheresFilterURL, wordFilterURL } from '../../Navigation';
 
 const SCROLLVIEW_REF = 'scrollview';
-
-async function query() {
-  const book = Book.findByID('genesis');
-
-  const predicates = [];
-  // predicates.push(ComparisonPredicate.predicateWith('statements.first', '>=', book.firstMonad));
-  // predicates.push(ComparisonPredicate.predicateWith('statements.last', '<=', book.lastMonad));
-  // predicates.push(ComparisonPredicate.predicateWith('source_profession_statements.id', '=', 36));
-  // predicates.push(ComparisonPredicate.predicateWith('recipient_profession_statements.id', '=', 36));
-  predicates.push(WordPredicate.predicateWithWord('peace'));
-  const predicate = CompoundPredicate.andPredicateWithSubpredicates(predicates);
-
-  const statements = await Statement.matchingPredicate(predicate);
-  console.log(statements.length + ' Occurrences');
-
-
-  const values = {};
-
-  // Statement.all().filtered('firstMonad >= $0 AND lastMonad <= $1', 1, 50638).forEach(statement => {
-  //   const actant = statement.source;
-  //   if (actant) {
-  //     actant.professions.forEach(profession => {
-  //       const wordCount = values[profession.name] || 0;
-  //       values[profession.name] = wordCount + statement.wordCount;
-  //     });
-  //   }
-  // });
-
-  // const statements = Statement.all().filtered('firstMonad >= $0 AND lastMonad <= $1 AND source.professionValues CONTAINS $2 AND recipient.professionValues CONTAINS $2', 1, 50638, ' 36 ');
-  // for (let statement of statements) {
-  //   const words = await statement.words();
-  //   words.forEach(wordCount => {
-  //     const count = values[wordCount.string] || 0;
-  //     values[wordCount.string] = count + wordCount.count;
-  //   });
-  // }
-
-  for (let statement of statements) {
-    // Words
-    // const words = await statement.words();
-    // words.forEach(wordCount => {
-    //   const count = values[wordCount.string] || 0;
-    //   values[wordCount.string] = count + wordCount.count;
-    // });
-
-    // Source
-    if (statement.source) {
-      // Profession
-      // statement.source.professions.forEach(profession => {
-      //   const key = profession.key;
-      //   const count = values[key] || 0;
-      //   values[key] = count + statement.wordCount;
-      // });
-
-      // Name
-      const key = statement.source.name;
-      const count = values[key] || 0;
-      values[key] = count + statement.searchWordCount;
-
-      // console.log(statement.searchSphereCounts);
-    }
-
-    // Recipient
-    // if (statement.recipient) {
-    //   // Name
-    //   const key = statement.recipient.name;
-    //   const count = values[key] || 0;
-    //   values[key] = count + statement.wordCount;
-    // }
-  }
-
-  // C1: Then decide to search the word “peace” and select the “all” option under sources and decide to display as a word cloud.
-  // Graph:
-  // Cloud > Source Name (text) / Source Word (size)
-  // Filters:
-  // Words > "Peace"
-  // const word = "peace";
-  // const wordCounts = await Emdros.wordCountsForContext('Statement', {tokenFeatureComparison: `surface_fts="${word}"`});
-  // const statementIdentifiers = Object.keys(wordCounts).map(statementID => parseInt(statementID));
-  // const query = statementIdentifiers.map(statementID => `id = ${statementID}`).join(' OR ');
-  // const statements = Statement.all().filtered(query);
-  // for (let statement of statements) {
-  //   if (statement.source) {
-  //     const name = statement.source.name;
-  //     const count = values[name] || 0;
-  //     values[name] = count + wordCounts[statement.id.toString()].wordCount;
-  //   }
-  // }
-  //
-  //
-  const data = Object.keys(values).sort((a,b) => values[a] > values[b] ? -1 : 1).slice(0, 20).map(key => ({key, count:values[key]}));
-  console.log(data);
-}
 
 type Props = {
   navigate: Function,
@@ -158,8 +63,6 @@ export default class DiscoveryCenter extends Component {
   }
 
   render() {
-    // query();
-
     const toolbar = this._renderToolbar();
     const cards = this.state.cards.map(card => this._renderCard(card));
     const popover = this._renderPopover();
@@ -208,6 +111,7 @@ export default class DiscoveryCenter extends Component {
         card={card}
         onPressDelete={() => this._deleteCard(card)}
         onPressDuplicate={(card) => this._duplicateCard(card)}
+        onPressOccurrences={this._onPressOccurrences}
         onShowPopover={(props, onComplete) => this._showPopover(props, onComplete)}
       />;
     }
@@ -298,6 +202,13 @@ export default class DiscoveryCenter extends Component {
       ...card,
       key: 'card-'
     });
+  };
+
+  _onPressOccurrences = (card: Object) => {
+    const statements = card.statements;
+    if (statements.length > 0) {
+      this.props.navigate(discoveryCenterOccurrencesURL({title: 'Occurrences', statements}));
+    }
   };
 
   _showPopover = (props: Object, onComplete: Function) => {

@@ -124,27 +124,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  section: {
-    marginLeft: 8,
-  },
-  cellContainer: {
-    flex: 1,
-    marginRight: 15,
-  },
-  horizontalContainer: {
-    flexDirection: 'row',
-  },
-  leftContainer: {
-    flex: 1.5,
-  },
-  rightContainer: {
-    flex: 2,
-  },
-  stackedBarChart: {
-    height: 4,
-    flex: 0,
-    marginTop: 7,
-  },
   separator: {
     ...StyleSheet.styles.separator,
     marginLeft: 8,

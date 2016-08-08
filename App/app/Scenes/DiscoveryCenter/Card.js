@@ -47,6 +47,7 @@ type Props = {
   children?: any,
   onPressDelete?: Function,
   onPressDuplicate?: Function,
+  onPressOccurrences?: Function,
   onShowPopover?: Function,
 };
 
@@ -148,7 +149,7 @@ export default class Card extends Component {
     if (filterCount== 0 && statementCount == 0) return null;
 
     return (
-      <TouchableOpacity style={styles.readButton}>
+      <TouchableOpacity style={styles.readButton} onPress={this._onPressOccurrences}>
         <Text style={styles.readButtonTitle}>{Localizable.t('explore-occurrences.count', {count: statementCount, localizedCount: Localizable.toNumber(statementCount, {precision: 0})})}</Text>
       </TouchableOpacity>
     );
@@ -179,6 +180,12 @@ export default class Card extends Component {
       });
     }
   };
+
+  _onPressOccurrences = () => {
+    if (this.props.onPressOccurrences) {
+      this.props.onPressOccurrences(this.state.card);
+    }
+  }
 
   _addFilter = (filter: Object) => {
     const { card } = this.state;
