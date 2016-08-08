@@ -67,7 +67,7 @@ export default class App extends Component {
     }
 
     const Scene = route.scene;
-    return <Scene {...params} navigate={this._navigate} />;
+    return <Scene {...props.route} {...params} navigate={this._navigate} />;
   };
 
   _renderNavigationBar = (props: any) => {

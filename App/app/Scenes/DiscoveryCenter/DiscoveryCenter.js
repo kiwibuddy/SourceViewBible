@@ -207,7 +207,8 @@ export default class DiscoveryCenter extends Component {
   _onPressOccurrences = (card: Object) => {
     const occurrences = card.statements;
     if (occurrences.length > 0) {
-      this.props.navigate(discoveryCenterOccurrencesURL({title: 'Occurrences', occurrences}));
+      const route = discoveryCenterOccurrencesURL({title: 'Occurrences', occurrences});
+      this.props.navigate(route);
     }
   };
 

@@ -36,7 +36,7 @@ function urlFor(path: string, params: any) {
       } else {
         extraParams[param] = params[param];
       }
-    });    
+    });
   }
 
   url = url.replace(/\/:.*\?/g, '/').replace(/\?/g, '');

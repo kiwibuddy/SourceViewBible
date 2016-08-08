@@ -26,7 +26,7 @@ import { Statement } from '../../Database';
 
 type Props = {
   navigate: Function,
-  occurrences: Array<Statement>
+  occurrences: Array<Object>
 };
 
 type State = {
@@ -68,9 +68,9 @@ export default class DiscoveryCenterOccurrences extends Component {
     );
   }
 
-  _renderRow = (statement: Statement, sectionID: any, rowID: any) => {
+  _renderRow = (occurrence: Object, sectionID: any, rowID: any) => {
     return (
-      <TouchableOpacity key={statement.id} style={StyleSheet.styles.listItem} onPress={() => this.props.onDone(filter)}>
+      <TouchableOpacity key={occurrence.id} style={StyleSheet.styles.listItem} onPress={() => this.props.onDone(filter)}>
         <Text style={StyleSheet.styles.cell.title}>Occurrence</Text>
       </TouchableOpacity>
     );
