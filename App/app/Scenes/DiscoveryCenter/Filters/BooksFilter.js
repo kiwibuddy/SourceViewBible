@@ -89,6 +89,8 @@ export default class Books extends Component {
   _renderRow = (book: Object, sectionID: any, rowID: any) => {
     const filter = {
       id: 'filter-' + Date.now(),
+      type: 'book',
+      book,
       predicates: [
         ComparisonPredicate.predicateWith('statments.first', '>=', book.firstMonad),
         ComparisonPredicate.predicateWith('statments.last', '<=', book.lastMonad),

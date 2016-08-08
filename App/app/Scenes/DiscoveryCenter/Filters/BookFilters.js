@@ -17,7 +17,7 @@ import {
 
 import { booksFilterURL } from '../../../Navigation';
 
-import { ComparisonPredicate } from '../../../Database';
+import { Book, ComparisonPredicate } from '../../../Database';
 
 type Props = {
   navigate: Function,
@@ -26,9 +26,14 @@ type Props = {
 
 const WholeBibleFilter = {
   id: 'filter-' + Date.now(),
+  type: 'book-range',
+  books: {
+    from: Book.findByID('genesis'),
+    to: Book.findByID('revelation')
+  },
   predicates: [
     ComparisonPredicate.predicateWith('statements.first', '>=', 1),
-    ComparisonPredicate.predicateWith('statements.last', '<=', 100000000),
+    ComparisonPredicate.predicateWith('statements.last', '<=', Book.findByID('revelation').lastMonad),
   ]
 }
 
