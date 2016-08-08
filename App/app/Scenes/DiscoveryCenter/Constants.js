@@ -3,9 +3,11 @@
 
 const FilterType = {
   BOOK: 'book',
-  WORD: 'word',
+  CHRONOLOGY: 'chronology',
+  RECIPIENT: 'recipient',
   SOURCE: 'source',
-  SPHERE: 'sphere'
+  SPHERE: 'sphere',
+  WORD: 'word',
 };
 
 module.exports = {
