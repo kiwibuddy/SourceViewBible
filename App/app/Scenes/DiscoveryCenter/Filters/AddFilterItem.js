@@ -49,8 +49,8 @@ export default class AddFilterItem extends Component {
               <Text style={[styles.button, addFilterButtonStyle]}>+ ADD FILTER</Text>
             </TouchableOpacity>
           </View>
-          {this._renderFilterTypes()}
         </View>
+        {this._renderFilterTypes()}
       </View>
     );
   }
@@ -61,19 +61,29 @@ export default class AddFilterItem extends Component {
 
     if (!showFilterOptions) return null;
     return (
-      <View style={[StyleSheet.styles.discoveryCenter.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
-        <TouchableOpacity hitSlop={hitSlop} onPress={() => this._onPressFilterType(FilterType.BOOK)} >
-          <Text style={styles.button}>BOOKS</Text>
-        </TouchableOpacity>
-        <TouchableOpacity hitSlop={hitSlop} onPress={() => this._onPressFilterType(FilterType.WORD)} >
-          <Text style={styles.button}>WORDS</Text>
-        </TouchableOpacity>
-        <TouchableOpacity hitSlop={hitSlop} onPress={() => this._onPressFilterType(FilterType.SOURCE)} >
-          <Text style={styles.button}>SOURCES</Text>
-        </TouchableOpacity>
-        <TouchableOpacity hitSlop={hitSlop} onPress={() => this._onPressFilterType(FilterType.SPHERE)} >
-          <Text style={styles.button}>SPHERES</Text>
-        </TouchableOpacity>
+      <View style={StyleSheet.styles.discoveryCenter.blockContainer}>
+        <View style={StyleSheet.styles.discoveryCenter.blockItem}>
+          <TouchableOpacity hitSlop={hitSlop} onPress={() => this._onPressFilterType(FilterType.BOOK)} >
+            <Text style={styles.button}>BOOKS</Text>
+          </TouchableOpacity>
+          <TouchableOpacity hitSlop={hitSlop} onPress={() => this._onPressFilterType(FilterType.BOOK)} >
+            <Text style={styles.button}>TIME PERIOD</Text>
+          </TouchableOpacity>
+          <TouchableOpacity hitSlop={hitSlop} onPress={() => this._onPressFilterType(FilterType.WORD)} >
+            <Text style={styles.button}>WORDS</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={StyleSheet.styles.discoveryCenter.blockItem}>
+          <TouchableOpacity hitSlop={hitSlop} onPress={() => this._onPressFilterType(FilterType.SOURCE)} >
+            <Text style={styles.button}>SOURCES</Text>
+          </TouchableOpacity>
+          <TouchableOpacity hitSlop={hitSlop} onPress={() => this._onPressFilterType(FilterType.SOURCE)} >
+            <Text style={styles.button}>RECIPIENTS</Text>
+          </TouchableOpacity>
+          <TouchableOpacity hitSlop={hitSlop} onPress={() => this._onPressFilterType(FilterType.SPHERE)} >
+            <Text style={styles.button}>SPHERES</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -87,9 +97,7 @@ export default class AddFilterItem extends Component {
 const styles = StyleSheet.create({
   filterItem: {
     flex: 0,
-    flexDirection: 'row',
-    height: 44,
-    overflow: 'hidden',
+    flexDirection: 'column',
   },
   button: {
     color: Colors.tint,
