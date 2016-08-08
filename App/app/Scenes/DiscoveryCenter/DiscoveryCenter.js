@@ -259,7 +259,7 @@ export default class DiscoveryCenter extends Component {
     return {
       chartType: null,
       filters: [],
-      occurrences: [],
+      statements: [],
     }
   }
 

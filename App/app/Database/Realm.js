@@ -487,7 +487,7 @@ export class Statement extends Realm.Object {
     let wordCounts = null;
     if (wordPredicates.length > 0) {
       const wordPredicate = wordPredicates[0];
-      const word = wordPredicate.word;
+      const word = wordPredicate.word.toLowerCase();
 
       let options = {}
       if (statementRows.length > 0) {

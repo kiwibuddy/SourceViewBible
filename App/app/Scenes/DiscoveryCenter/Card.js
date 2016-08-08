@@ -32,6 +32,8 @@ import { FilterType } from './Constants';
 
 import Popover from './Popover';
 
+import { Statement, ComparisonPredicate, CompoundPredicate, WordPredicate } from '../../Database';
+
 export const Header = (props: Object) => {
   return (
     <View {...props} style={[styles.header, props.style]}>
@@ -141,13 +143,13 @@ export default class Card extends Component {
 
   _renderReadButton = () => {
     const { card } = this.state;
-    const occurrenceCount = card.occurrences.length;
+    const statementCount = card.statements.length;
     const filterCount = card.filters.length;
-    if (filterCount== 0 && occurrenceCount == 0) return null;
+    if (filterCount== 0 && statementCount == 0) return null;
 
     return (
       <TouchableOpacity style={styles.readButton}>
-        <Text style={styles.readButtonTitle}>{Localizable.t('explore-occurrences.count', {count: occurrenceCount, localizedCount: Localizable.toNumber(occurrenceCount, {precision: 0})})}</Text>
+        <Text style={styles.readButtonTitle}>{Localizable.t('explore-occurrences.count', {count: statementCount, localizedCount: Localizable.toNumber(statementCount, {precision: 0})})}</Text>
       </TouchableOpacity>
     );
   }
@@ -173,7 +175,7 @@ export default class Card extends Component {
       const { card } = this.state;
       this.props.onShowPopover({card, filterType}, (card) => {
         this._animateLayout();
-        this.setState({card});
+        this.setState({card}, this._query);
       });
     }
   };
@@ -204,6 +206,47 @@ export default class Card extends Component {
       card: {
         ...card,
         filters
+      }
+    });
+  };
+
+  async _query() {
+    const { card } = this.state;
+    if (!card) return;
+
+    const predicates = [];
+    card.filters.forEach(filter => {
+      switch(filter.type) {
+        case 'book':
+          predicates.push(ComparisonPredicate.predicateWith('statements.first', '>=', filter.book.firstMonad));
+          predicates.push(ComparisonPredicate.predicateWith('statements.last', '<=', filter.book.lastMonad));
+          break;
+
+        case 'book-range':
+          predicates.push(ComparisonPredicate.predicateWith('statements.first', '>=', filter.books.from.firstMonad));
+          predicates.push(ComparisonPredicate.predicateWith('statements.last', '<=', filter.books.to.lastMonad));
+          break;
+
+        case 'sphere':
+          const SPHERES = ["family", "economics", "government", "religion", "education", "communication", "celebration"];
+          const sphereID = SPHERES.indexOf(filter.sphere.id) + 1;
+          predicates.push(ComparisonPredicate.predicateWith('sphere_statements.id', '=', sphereID));
+          break;
+
+        case 'word':
+          predicates.push(WordPredicate.predicateWithWord(filter.word));
+          break;
+      }
+    });
+
+
+    const predicate = CompoundPredicate.andPredicateWithSubpredicates(predicates);
+    const statements = await Statement.matchingPredicate(predicate);
+
+    this.setState({
+      card: {
+        ...card,
+        statements
       }
     });
   };
