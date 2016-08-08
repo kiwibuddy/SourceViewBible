@@ -31,7 +31,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigation';
 
-import { bookFiltersURL, discoveryCenterOccurrencesURL, spheresFilterURL, wordFilterURL } from '../../Navigation';
+import { BACK, bookFiltersURL, discoveryCenterOccurrencesURL, spheresFilterURL, wordFilterURL } from '../../Navigation';
 
 const SCROLLVIEW_REF = 'scrollview';
 
