@@ -36,6 +36,7 @@ import { Book } from '../../../Database';
 
 type Props = {
   navigate: Function,
+  onDone: Function,
 };
 
 type State = {

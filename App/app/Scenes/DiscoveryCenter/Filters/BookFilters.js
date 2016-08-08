@@ -17,14 +17,25 @@ import {
 
 import { booksFilterURL } from '../../../Navigation';
 
-const Props = {
+import { ComparisonPredicate } from '../../../Database';
+
+type Props = {
   navigate: Function,
+  onDone: Function,
 };
+
+const WholeBibleFilter = {
+  id: 'filter-' + Date.now(),
+  predicates: [
+    ComparisonPredicate.predicateWith('statements.first', '>=', 1),
+    ComparisonPredicate.predicateWith('statements.last', '<=', 100000000),
+  ]
+}
 
 const BookFilters = (props: Props) => {
   return (
     <ScrollView style={styles.container}>
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {props.onDone(WholeBibleFilter)}}>
         <Text style={StyleSheet.styles.cell.title}>Whole Bible</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
