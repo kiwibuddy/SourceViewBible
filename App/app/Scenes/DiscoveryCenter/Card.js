@@ -250,7 +250,7 @@ export default class Card extends Component {
     let statements = [];
     if (predicates.length > 0) {
       const predicate = CompoundPredicate.andPredicateWithSubpredicates(predicates);
-      statements = await Statement.matchingPredicate(predicate);
+      statements = await Statement.identifiersMatchingPredicate(predicate);
     }
 
     this.setState({

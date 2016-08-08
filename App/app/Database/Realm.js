@@ -450,9 +450,6 @@ const StatementSchema = {
 };
 
 export class Statement extends Realm.Object {
-  _searchWordCount: number;
-  _searchSphereCounts: Array<Object>;
-
   static all() {
     return realm.objects('Statement');
   }
@@ -468,7 +465,7 @@ export class Statement extends Realm.Object {
     });
   }
 
-  static async matchingPredicate(predicate: CompoundPredicate) {
+  static async identifiersMatchingPredicate(predicate: CompoundPredicate) {
     if (!predicate) {
       return Statement.all();
     }
@@ -504,27 +501,18 @@ export class Statement extends Realm.Object {
     }
 
     if (statementIdentifiers.length > 0) {
-      let statements = [];
-      while (statementIdentifiers.length) {
-        const query = statementIdentifiers.splice(0, 100).map(statementID => 'id = ' + statementID).join(' OR ');
-        statements = statements.concat(Statement.all().filtered(query).map(statement => statement));
-      }
-
       if (wordCounts == null) {
-        return statements;
+        return statementIdentifiers.map(statementID => {id: statementID});
       } else {
-        return statements.map(statement => {
+        return statementIdentifiers.map(statementID => {
+          const statement = {id: statementID, wordCount: null, sphereCounts: null};
+
           if (wordCounts) {
             const statementID = statement.id.toString();
             const counts = wordCounts[statementID];
             if (counts) {
-              const wordCount = counts.wordCount;
-              if (wordCount) {
-                delete counts.wordCount;
-                statement.searchWordCount = wordCount;
-              }
-
-              statement.searchSphereCounts = Object.keys(counts).map(key => ({string: key, count: counts[key]}));
+              statement.wordCount = counts.wordCount;
+              statement.sphereCounts = Object.keys(counts).map(key => ({string: key, count: counts[key]}));
             }
           }
           return statement;
@@ -537,24 +525,6 @@ export class Statement extends Realm.Object {
 
   async words() {
     return await Emdros.words({from: this.firstMonad, to: this.lastMonad, useStopWords: true});
-  }
-
-  set searchWordCount(searchWordCount: number) {
-    this._searchWordCount = searchWordCount;
-  }
-
-  get searchWordCount(): number {
-    if (this._searchWordCount) return this._searchWordCount;
-    return this.wordCount;
-  }
-
-  set searchSphereCounts(searchSphereCounts: Array<Object>) {
-    this._searchSphereCounts = searchSphereCounts;
-  }
-
-  get searchSphereCounts(): Array<Object> {
-    if (this._searchSphereCounts) return this._searchSphereCounts;
-    return this.sphereCounts;
   }
 }
 Statement.schema = StatementSchema;
