@@ -17,7 +17,7 @@ import {
 
 import { booksFilterURL } from '../../../Navigation';
 
-import { Book, ComparisonPredicate } from '../../../Database';
+import { Book } from '../../../Database';
 
 type Props = {
   navigate: Function,
@@ -34,11 +34,7 @@ function filterBooks(fromID: string, toID: string) {
     books: {
       from: from,
       to: to
-    },
-    predicates: [
-      ComparisonPredicate.predicateWith('statements.first', '>=', from.firstMonad),
-      ComparisonPredicate.predicateWith('statements.last', '<=', to.lastMonad),
-    ]
+    }
   });
 }
 

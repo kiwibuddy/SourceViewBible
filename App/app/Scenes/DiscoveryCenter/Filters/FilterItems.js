@@ -17,6 +17,7 @@ import {
 
 import FilterItem from './FilterItem';
 import BookRangeFilterItem from './BookRangeFilterItem';
+import BookFilterItem from './BookFilterItem';
 import AddFilterItem from './AddFilterItem';
 
 
@@ -42,6 +43,10 @@ const FilterItems = (props: Props) => {
     switch (filter.type) {
       case 'book-range':
         Item = BookRangeFilterItem;
+        break;
+
+      case 'book':
+        Item = BookFilterItem;
         break;
 
       default:
