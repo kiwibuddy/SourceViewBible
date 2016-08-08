@@ -26,7 +26,7 @@ import { Statement } from '../../Database';
 
 type Props = {
   navigate: Function,
-  statements: Array<Statement>
+  occurrences: Array<Statement>
 };
 
 type State = {
@@ -40,6 +40,8 @@ export default class DiscoveryCenterOccurrences extends Component {
   constructor(props: Props) {
     super(props);
 
+    console.log(Object.keys(props));
+
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id});
     this.state = {
       dataSource: dataSource
@@ -47,10 +49,10 @@ export default class DiscoveryCenterOccurrences extends Component {
   }
 
   componentDidMount() {
-    const { statements } = this.props;
-    if (statements) {
+    const { occurrences } = this.props;
+    if (occurrences) {
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(statements)
+        dataSource: this.state.dataSource.cloneWithRows(occurrences)
       });
     }
   }
@@ -71,7 +73,7 @@ export default class DiscoveryCenterOccurrences extends Component {
   _renderRow = (statement: Statement, sectionID: any, rowID: any) => {
     return (
       <TouchableOpacity key={statement.id} style={StyleSheet.styles.listItem} onPress={() => this.props.onDone(filter)}>
-        <Text style={StyleSheet.styles.cell.title}>Statement</Text>
+        <Text style={StyleSheet.styles.cell.title}>Occurrence</Text>
       </TouchableOpacity>
     );
   };
