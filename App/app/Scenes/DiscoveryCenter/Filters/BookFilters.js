@@ -24,23 +24,28 @@ type Props = {
   onDone: Function,
 };
 
-const WholeBibleFilter = {
-  id: 'filter-' + Date.now(),
-  type: 'book-range',
-  books: {
-    from: Book.findByID('genesis'),
-    to: Book.findByID('revelation')
-  },
-  predicates: [
-    ComparisonPredicate.predicateWith('statements.first', '>=', 1),
-    ComparisonPredicate.predicateWith('statements.last', '<=', Book.findByID('revelation').lastMonad),
-  ]
+function filterBooks(fromID: string, toID: string) {
+  const from = Book.findByID(fromID);
+  const to = Book.findByID(toID);
+
+  return ({
+    id: 'filter-' + Date.now(),
+    type: 'book-range',
+    books: {
+      from: from,
+      to: to
+    },
+    predicates: [
+      ComparisonPredicate.predicateWith('statements.first', '>=', from.firstMonad),
+      ComparisonPredicate.predicateWith('statements.last', '<=', to.lastMonad),
+    ]
+  });
 }
 
 const BookFilters = (props: Props) => {
   return (
     <ScrollView style={styles.container}>
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {props.onDone(WholeBibleFilter)}}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterBooks('genesis', 'revelation'))}>
         <Text style={StyleSheet.styles.cell.title}>Whole Bible</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
@@ -48,11 +53,11 @@ const BookFilters = (props: Props) => {
         <Text style={StyleSheet.styles.cell.title}>Specific Book</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterBooks('genesis', 'malachi'))}>
         <Text style={StyleSheet.styles.cell.title}>Old Testament</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterBooks('matthew', 'revelation'))}>
         <Text style={StyleSheet.styles.cell.title}>New Testament</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
