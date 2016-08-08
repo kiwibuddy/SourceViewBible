@@ -86,7 +86,7 @@ module.exports = `
       .textChapter {
         font-family: charter;
         color: #CF1E00;
-        font-size: 16pt;
+        font-size: 11pt;
         position: relative;
         top: 0;
       }
