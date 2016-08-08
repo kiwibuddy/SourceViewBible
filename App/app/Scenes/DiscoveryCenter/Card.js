@@ -207,7 +207,7 @@ export default class Card extends Component {
         ...card,
         filters
       }
-    });
+    }, this._query);
   };
 
   async _query() {
@@ -240,8 +240,11 @@ export default class Card extends Component {
     });
 
 
-    const predicate = CompoundPredicate.andPredicateWithSubpredicates(predicates);
-    const statements = await Statement.matchingPredicate(predicate);
+    let statements = [];
+    if (predicates.length > 0) {
+      const predicate = CompoundPredicate.andPredicateWithSubpredicates(predicates);
+      statements = await Statement.matchingPredicate(predicate);
+    }
 
     this.setState({
       card: {
