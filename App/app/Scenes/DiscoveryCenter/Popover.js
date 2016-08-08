@@ -41,44 +41,6 @@ class MyScene extends Component {
   }
 }
 
-const NavigationBarRouteMapper = {
-  LeftButton: function(route, navigator, index, navState) {
-    if (index === 0) {
-      return null;
-    }
-
-    var previousRoute = navState.routeStack[index - 1];
-    return (
-      <TouchableOpacity
-        onPress={() => navigator.pop()}
-        style={styles.navBarLeftButton}>
-        <Text style={[styles.navBarText, styles.navBarButtonText]}>
-          {previousRoute.title || Localizable.t('back')}
-        </Text>
-      </TouchableOpacity>
-    );
-  },
-  RightButton: function(route, navigator, index, navState) {
-    return (
-      <TouchableOpacity
-        onPress={() => console.log('Done!')}
-        style={styles.navBarRightButton}>
-        <Text style={[styles.navBarText, styles.navBarButtonText, StyleSheet.styles.navigationBar.doneButtonTitle]}>
-          {Localizable.t('done')}
-        </Text>
-      </TouchableOpacity>
-    );
-  },
-  Title: function(route, navigator, index, navState) {
-    return (
-      <Text style={[styles.navBarText, styles.navBarTitleText]}>
-        {route.title}
-      </Text>
-    );
-  },
-
-};
-
 type Props = {
   initialRoute: Object,
   onPressCancel: Function,
@@ -102,9 +64,54 @@ export default class Popover extends Component {
   }
 
   _renderNavigationBar = () => {
+    const {onPressCancel} = this.props;
+
     return (
       <Navigator.NavigationBar
-        routeMapper={NavigationBarRouteMapper}
+        routeMapper={{
+          LeftButton: function(route, navigator, index, navState) {
+            if (index === 0) {
+              return (
+                <TouchableOpacity
+                  onPress={() => onPressCancel()}
+                  style={styles.navBarLeftButton}>
+                  <Text style={[styles.navBarText, styles.navBarButtonText]}>
+                    {Localizable.t('cancel')}
+                  </Text>
+                </TouchableOpacity>
+              );
+            }
+
+            var previousRoute = navState.routeStack[index - 1];
+            return (
+              <TouchableOpacity
+                onPress={() => navigator.pop()}
+                style={styles.navBarLeftButton}>
+                <Text style={[styles.navBarText, styles.navBarButtonText]}>
+                  {previousRoute.title || Localizable.t('back')}
+                </Text>
+              </TouchableOpacity>
+            );
+          },
+          RightButton: function(route, navigator, index, navState) {
+            return (
+              <TouchableOpacity
+                onPress={() => console.log('Done!')}
+                style={styles.navBarRightButton}>
+                <Text style={[styles.navBarText, styles.navBarButtonText, StyleSheet.styles.navigationBar.doneButtonTitle]}>
+                  {Localizable.t('done')}
+                </Text>
+              </TouchableOpacity>
+            );
+          },
+          Title: function(route, navigator, index, navState) {
+            return (
+              <Text style={[styles.navBarText, styles.navBarTitleText]}>
+                {route.title}
+              </Text>
+            );
+          },
+        }}
         style={styles.navBar}
       />
     );
