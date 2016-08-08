@@ -18,7 +18,7 @@ import {
   StyleSheet,
 } from '../../Common';
 
-import BookFilters from './Filters/BookFilters';
+import router, { BACK } from '../../Navigation';
 
 const NAV_BAR_HEIGHT = 44;
 
@@ -98,12 +98,27 @@ export default class Popover extends Component {
     );
   };
 
-  _renderScene = (route: Object, navigator: Object) => {
+  _renderScene = (navigatorRoute: Object, navigator: Object) => {
+    const { route, params } = router.match(navigatorRoute.path);
+
+    if (!route) {
+      throw new Error('Could not find route for: ' + navigatorRoute.path);
+    }
+
+    const Scene = route.scene;
     return (
       <View style={{flex: 1, paddingTop: NAV_BAR_HEIGHT}}>
-        <BookFilters />
+        <Scene {...params} navigate={(route: any, options?: any) => this._navigate(navigator, route, options)} />
       </View>
     );
+  };
+
+  _navigate = (navigator: Object, route: any, options?: any) => {
+    if (route === BACK) {
+      navigator.pop();
+    } else {
+      navigator.push(route);
+    }
   };
 }
 

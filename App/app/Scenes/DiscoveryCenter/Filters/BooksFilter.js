@@ -15,20 +15,18 @@ import {
   StyleSheet,
 } from '../../../Common';
 
-import { booksFilterURL } from '../../../Navigation';
-
 const Props = {
   navigate: Function,
 };
 
-const BookFilters = (props: Props) => {
+const BooksFilter = (props: Props) => {
   return (
     <ScrollView style={styles.container}>
       <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
         <Text style={StyleSheet.styles.cell.title}>Whole Bible</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.navigate(booksFilterURL({title: 'Specific Book'}))}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
         <Text style={StyleSheet.styles.cell.title}>Specific Book</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
@@ -54,4 +52,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BookFilters;
+export default BooksFilter;

@@ -29,7 +29,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigation';
 
-import { BACK } from '../../Navigation';
+import { bookFiltersURL } from '../../Navigation';
 
 import { Actant, Book, Statement, ComparisonPredicate, CompoundPredicate, WordPredicate } from '../../Database';
 
@@ -156,7 +156,7 @@ export default class DiscoveryCenter extends Component {
   }
 
   render() {
-    query();
+    // query();
 
     const toolbar = this._renderToolbar();
     const cards = this.state.cards.map(card => this._renderCard(card));
@@ -217,7 +217,7 @@ export default class DiscoveryCenter extends Component {
 
     return (
       <Popover
-        initialRoute={{key: 'Foo', title: 'Book Filters', index: 0}}
+        initialRoute={bookFiltersURL({title: 'Book Filters'})}
         onDone={(filter) => {
           const { card } = popover.props;
           const filters = [
