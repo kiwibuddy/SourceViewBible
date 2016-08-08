@@ -15,10 +15,10 @@ module.exports = `
     <title></title>
     <style type="text/css">
       body {
-        font-family: georgia;
-        font-size: 15pt;
+        font-family: charter, georgia;
+        font-size: 11pt;
         color: #323B43;
-        line-height: 26pt;
+        line-height: 23pt;
       }
       table {
         margin:0;
