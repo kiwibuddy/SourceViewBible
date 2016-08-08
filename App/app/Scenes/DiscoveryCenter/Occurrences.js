@@ -70,7 +70,7 @@ export default class DiscoveryCenterOccurrences extends Component {
 
   _renderRow = (occurrence: Object, sectionID: any, rowID: any) => {
     return (
-      <TouchableOpacity key={occurrence.id} style={StyleSheet.styles.listItem} onPress={() => this.props.onDone(filter)}>
+      <TouchableOpacity key={occurrence.id} style={StyleSheet.styles.listItem} onPress={() => {}}>
         <Text style={StyleSheet.styles.cell.title}>Occurrence</Text>
       </TouchableOpacity>
     );

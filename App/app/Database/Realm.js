@@ -502,7 +502,7 @@ export class Statement extends Realm.Object {
 
     if (statementIdentifiers.length > 0) {
       if (wordCounts == null) {
-        return statementIdentifiers.map(statementID => {id: statementID});
+        return statementIdentifiers.map(statementID => ({id: statementID}));
       } else {
         return statementIdentifiers.map(statementID => {
           const statement = {id: statementID, wordCount: null, sphereCounts: null};
