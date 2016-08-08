@@ -75,15 +75,16 @@ export default class Popover extends Component {
             );
           },
           RightButton: function(route, navigator, index, navState) {
-            return (
-              <TouchableOpacity
-                onPress={() => console.log('Done!')}
-                style={styles.navBarRightButton}>
-                <Text style={[styles.navBarText, styles.navBarButtonText, StyleSheet.styles.navigationBar.doneButtonTitle]}>
-                  {Localizable.t('done')}
-                </Text>
-              </TouchableOpacity>
-            );
+            return null;
+            // return (
+            //   <TouchableOpacity
+            //     onPress={() => console.log('Done!')}
+            //     style={styles.navBarRightButton}>
+            //     <Text style={[styles.navBarText, styles.navBarButtonText, StyleSheet.styles.navigationBar.doneButtonTitle]}>
+            //       {Localizable.t('done')}
+            //     </Text>
+            //   </TouchableOpacity>
+            // );
           },
           Title: function(route, navigator, index, navState) {
             return (
