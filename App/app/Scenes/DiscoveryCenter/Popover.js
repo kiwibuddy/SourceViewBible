@@ -12,6 +12,68 @@ import {
   View,
 } from 'react-native';
 
+
+
+const NavigatorNavigationBarStyles = {
+  ...Navigator.NavigationBar.Styles,
+  General: {
+    ...Navigator.NavigationBar.Styles.General,
+    TotalNavHeight: Navigator.NavigationBar.Styles.General.NavBarHeight
+  },
+  Stages: {
+    ...Navigator.NavigationBar.Styles.Stages,
+    Left: {
+      ...Navigator.NavigationBar.Styles.Stages.Left,
+      Title: {
+        ...Navigator.NavigationBar.Styles.Stages.Left.Title,
+        top: 0,
+      },
+      LeftButton: {
+        ...Navigator.NavigationBar.Styles.Stages.Left.LeftButton,
+        top: 0,
+      },
+      RightButton: {
+        ...Navigator.NavigationBar.Styles.Stages.Left.RightButton,
+        top: 0,
+      }
+    },
+    Center: {
+      ...Navigator.NavigationBar.Styles.Stages.Center,
+      Title: {
+        ...Navigator.NavigationBar.Styles.Stages.Center.Title,
+        top: 0,
+      },
+      LeftButton: {
+        ...Navigator.NavigationBar.Styles.Stages.Center.LeftButton,
+        top: 0,
+      },
+      RightButton: {
+        ...Navigator.NavigationBar.Styles.Stages.Center.RightButton,
+        top: 0,
+      }
+    },
+    Right: {
+      ...Navigator.NavigationBar.Styles.Stages.Right,
+      Title: {
+        ...Navigator.NavigationBar.Styles.Stages.Right.Title,
+        top: 0,
+      },
+      LeftButton: {
+        ...Navigator.NavigationBar.Styles.Stages.Right.LeftButton,
+        top: 0,
+      },
+      RightButton: {
+        ...Navigator.NavigationBar.Styles.Stages.Right.RightButton,
+        top: 0,
+      }
+    }
+  }
+};
+
+const NAV_BAR_HEIGHT = NavigatorNavigationBarStyles.General.NavBarHeight;
+
+console.log(NavigatorNavigationBarStyles);
+
 import {
   Colors,
   Localizable,
@@ -20,7 +82,7 @@ import {
 
 import router, { BACK } from '../../Navigation';
 
-const NAV_BAR_HEIGHT = 44;
+
 
 type Props = {
   initialRoute: Object,
@@ -49,6 +111,7 @@ export default class Popover extends Component {
 
     return (
       <Navigator.NavigationBar
+      navigationStyles={NavigatorNavigationBarStyles}
         routeMapper={{
           LeftButton: function(route, navigator, index, navState) {
             if (index === 0) {
@@ -155,11 +218,13 @@ const styles = StyleSheet.create({
   },
   navBarText: {
     fontSize: 16,
+    marginVertical: 12,
   },
   navBarTitleText: {
     color: 'black',
     fontSize: 17,
     fontWeight: 'bold',
+    marginVertical: 12,
   },
   navBarLeftButton: {
     paddingLeft: 10,
