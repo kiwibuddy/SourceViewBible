@@ -16,6 +16,7 @@ import {
 } from '../../../Common';
 
 import FilterItem from './FilterItem';
+import BookRangeFilterItem from './BookRangeFilterItem';
 import AddFilterItem from './AddFilterItem';
 
 
@@ -36,7 +37,19 @@ type Props = {
 const FilterItems = (props: Props) => {
   const { filters } = props;
   const filterItems = filters.map(filter => {
-    return <FilterItem
+    let Item = null;
+
+    switch (filter.type) {
+      case 'book-range':
+        Item = BookRangeFilterItem;
+        break;
+
+      default:
+        Item = FilterItem;
+        break;
+    }
+
+    return <Item
       key={filter.id}
       filter={filter}
       onPressDeleteFilter={() => props.onPressDeleteFilter(filter)}
