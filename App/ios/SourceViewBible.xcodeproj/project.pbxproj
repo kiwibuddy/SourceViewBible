@@ -381,7 +381,6 @@
 			isa = PBXGroup;
 			children = (
 				AB5489401CE273DC00F96FF0 /* RCTEmdros.xcodeproj */,
-				AB4713101CE251D100E9EB48 /* Resources */,
 			);
 			name = SourceViewBible;
 			sourceTree = "<group>";
@@ -461,6 +460,7 @@
 				00E356EF1AD99517003FC87E /* SourceViewBibleTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				C4CA51BCD05049EA9596F34A /* Frameworks */,
+				AB4713101CE251D100E9EB48 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -1087,7 +1087,7 @@
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
 					"$(SRCROOT)/../node_modules/react-native-sqlite-storage/src/ios",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
@@ -1140,7 +1140,7 @@
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
 					"$(SRCROOT)/../node_modules/react-native-sqlite-storage/src/ios",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = (
 					"-ObjC",

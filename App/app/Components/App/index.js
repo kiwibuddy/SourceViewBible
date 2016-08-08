@@ -40,7 +40,7 @@ import SpherePassages from '../../Scenes/Spheres/SpherePassages';
 import SphereSources from '../../Scenes/Spheres/SphereSources';
 import SphereWords from '../../Scenes/Spheres/SphereWords';
 
-import { Book, Source, Sphere } from '../../Database';
+import { Book, Sphere } from '../../Database';
 
 import { History } from '../../Preferences';
 
