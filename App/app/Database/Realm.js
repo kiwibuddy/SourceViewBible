@@ -504,8 +504,11 @@ export class Statement extends Realm.Object {
     }
 
     if (statementIdentifiers.length > 0) {
-      const query = statementIdentifiers.map(statementID => 'id = ' + statementID).join(' OR ');
-      const statements = Statement.all().filtered(query);
+      let statements = [];
+      while (statementIdentifiers.length) {
+        const query = statementIdentifiers.splice(0, 100).map(statementID => 'id = ' + statementID).join(' OR ');
+        statements = statements.concat(Statement.all().filtered(query).map(statement => statement));
+      }
 
       if (wordCounts == null) {
         return statements;
