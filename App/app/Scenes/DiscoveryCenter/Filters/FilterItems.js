@@ -18,6 +18,7 @@ import {
 import FilterItem from './FilterItem';
 import BookRangeFilterItem from './BookRangeFilterItem';
 import BookFilterItem from './BookFilterItem';
+import SphereFilterItem from './SphereFilterItem';
 import WordFilterItem from './WordFilterItem';
 import AddFilterItem from './AddFilterItem';
 
@@ -48,6 +49,10 @@ const FilterItems = (props: Props) => {
 
       case 'book':
         Item = BookFilterItem;
+        break;
+
+      case 'sphere':
+        Item = SphereFilterItem;
         break;
 
       case 'word':

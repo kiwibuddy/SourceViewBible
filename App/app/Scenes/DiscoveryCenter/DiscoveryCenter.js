@@ -31,7 +31,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigation';
 
-import { bookFiltersURL, wordFilterURL } from '../../Navigation';
+import { bookFiltersURL, spheresFilterURL, wordFilterURL } from '../../Navigation';
 
 import { Actant, Book, Statement, ComparisonPredicate, CompoundPredicate, WordPredicate } from '../../Database';
 
@@ -221,6 +221,10 @@ export default class DiscoveryCenter extends Component {
     switch (popover.props.filterType) {
       case FilterType.BOOK:
         route = bookFiltersURL({title: 'Book Filters'});
+        break;
+
+      case FilterType.SPHERE:
+        route = spheresFilterURL({title: 'Sphere Filter'});
         break;
 
       case FilterType.WORD:
