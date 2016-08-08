@@ -19,6 +19,8 @@ import {
   Localizable
 } from '../../Common';
 
+import { FilterType } from './Constants';
+
 import Card from './Card';
 import GettingStartedCard from './GettingStartedCard';
 import Popover from './Popover';
@@ -29,7 +31,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigation';
 
-import { bookFiltersURL } from '../../Navigation';
+import { bookFiltersURL, wordFilterURL } from '../../Navigation';
 
 import { Actant, Book, Statement, ComparisonPredicate, CompoundPredicate, WordPredicate } from '../../Database';
 
@@ -215,9 +217,22 @@ export default class DiscoveryCenter extends Component {
     const { popover } = this.state;
     if (popover == null) return null;
 
+    let route = null;
+    switch (popover.props.filterType) {
+      case FilterType.BOOK:
+        route = bookFiltersURL({title: 'Book Filters'});
+        break;
+
+      case FilterType.WORD:
+        route = wordFilterURL({title: 'Word Filter'});
+        break;
+    }
+
+    if (route == null) return null;
+
     return (
       <Popover
-        initialRoute={bookFiltersURL({title: 'Book Filters'})}
+        initialRoute={route}
         onDone={(filter) => {
           const { card } = popover.props;
           const filters = [

@@ -65,13 +65,13 @@ export default class AddFilterItem extends Component {
         <TouchableOpacity hitSlop={hitSlop} onPress={() => this._onPressFilterType(FilterType.BOOK)} >
           <Text style={styles.button}>BOOKS</Text>
         </TouchableOpacity>
-        <TouchableOpacity hitSlop={hitSlop} onPress={() => {}} >
+        <TouchableOpacity hitSlop={hitSlop} onPress={() => this._onPressFilterType(FilterType.WORD)} >
           <Text style={styles.button}>WORDS</Text>
         </TouchableOpacity>
-        <TouchableOpacity hitSlop={hitSlop} onPress={() => {}} >
+        <TouchableOpacity hitSlop={hitSlop} onPress={() => this._onPressFilterType(FilterType.SOURCE)} >
           <Text style={styles.button}>SOURCES</Text>
         </TouchableOpacity>
-        <TouchableOpacity hitSlop={hitSlop} onPress={() => {}} >
+        <TouchableOpacity hitSlop={hitSlop} onPress={() => this._onPressFilterType(FilterType.SPHERE)} >
           <Text style={styles.button}>SPHERES</Text>
         </TouchableOpacity>
       </View>

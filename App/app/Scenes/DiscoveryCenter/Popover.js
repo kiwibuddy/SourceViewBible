@@ -79,7 +79,6 @@ import {
 
 import router, { BACK } from '../../Navigation';
 
-
 type Props = {
   initialRoute: Object,
   onPressCancel: Function,
