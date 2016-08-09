@@ -23,11 +23,7 @@ import { axisItemsURL } from '../../../Navigation';
 
 import { Statement } from '../../../Database';
 
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min;
-}
+import { valuesForCard } from './ChartUtils';
 
 function renderChart(card) {
   const statements = card.statements;
@@ -37,19 +33,7 @@ function renderChart(card) {
   const yAxis = card.yAxis;
   if (!xAxis || !yAxis || (filterCount== 0 && statementCount == 0)) return <Image source={require('../Images/chart-bar-blankslate.png')} />;
 
-  const values = {};
-  statements.forEach(occurrence => {
-    const statement = Statement.findByID(occurrence.id);
-    const actant = statement.source;
-    if (actant) {
-      actant.professions.forEach(profession => {
-        const wordCount = values[profession.name] || 0;
-        values[profession.name] = wordCount + statement.wordCount;
-      });
-    }
-  });
-
-  const bars = Object.keys(values).sort((a,b) => values[a] > values[b] ? -1 : 1).map(label => ({label, color: 'red', value: values[label]}));
+  const bars = valuesForCard(card);
 
   return (
     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.chart}>
