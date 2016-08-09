@@ -32,7 +32,7 @@ type State = {
   dataSource: any
 };
 
-export default class Books extends Component {
+export default class Chronologys extends Component {
   props: Props;
   state: State;
 
@@ -71,8 +71,8 @@ export default class Books extends Component {
       chronology
     }
     return (
-      <TouchableOpacity key={book.id} style={StyleSheet.styles.listItem} onPress={() => this.props.onDone(filter)}>
-        <Text style={StyleSheet.styles.cell.title}>{chronology.key}</Text>
+      <TouchableOpacity key={chronology.id} style={StyleSheet.styles.listItem} onPress={() => this.props.onDone(filter)}>
+        <Text style={StyleSheet.styles.cell.title}>{chronology.name}</Text>
       </TouchableOpacity>
     );
   };

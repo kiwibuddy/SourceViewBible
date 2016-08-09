@@ -121,28 +121,20 @@ export default class Popover extends Component {
               );
             }
 
-            var previousRoute = navState.routeStack[index - 1];
+            const previousRoute = navState.routeStack[index - 1];
+            const title = (previousRoute.title && previousRoute.title.length < 10) ? previousRoute.title : Localizable.t('back');
             return (
               <TouchableOpacity
                 onPress={() => navigator.pop()}
                 style={styles.navBarLeftButton}>
                 <Text style={[styles.navBarText, styles.navBarButtonText]}>
-                  {previousRoute.title || Localizable.t('back')}
+                  {title}
                 </Text>
               </TouchableOpacity>
             );
           },
           RightButton: function(route, navigator, index, navState) {
             return null;
-            // return (
-            //   <TouchableOpacity
-            //     onPress={() => console.log('Done!')}
-            //     style={styles.navBarRightButton}>
-            //     <Text style={[styles.navBarText, styles.navBarButtonText, StyleSheet.styles.navigationBar.doneButtonTitle]}>
-            //       {Localizable.t('done')}
-            //     </Text>
-            //   </TouchableOpacity>
-            // );
           },
           Title: function(route, navigator, index, navState) {
             return (

@@ -19,10 +19,10 @@ import FilterItem from './FilterItem';
 import BookRangeFilterItem from './BookRangeFilterItem';
 import BookFilterItem from './BookFilterItem';
 import ChronologyRangeFilterItem from './ChronologyRangeFilterItem';
+import ChronologyFilterItem from './ChronologyFilterItem';
 import SphereFilterItem from './SphereFilterItem';
 import WordFilterItem from './WordFilterItem';
 import AddFilterItem from './AddFilterItem';
-
 
 const Blankslate = () => {
   return (
@@ -54,6 +54,10 @@ const FilterItems = (props: Props) => {
 
       case 'chronology-range':
         Item = ChronologyRangeFilterItem;
+        break;
+
+      case 'chronology':
+        Item = ChronologyFilterItem;
         break;
 
       case 'sphere':
