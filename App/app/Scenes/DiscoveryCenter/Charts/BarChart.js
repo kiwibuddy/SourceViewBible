@@ -15,7 +15,10 @@ import {
 
 import Chart from './Chart';
 
+import { axisItemsURL } from '../../../Navigation';
+
 type Props = {
+  onPressAxis: Function,
   onPressChartType: Function,
 };
 
@@ -28,11 +31,13 @@ const BarChart = (props: Props) => {
       <Chart.Header>
         <Chart.DropdownButton
           image={require('../Images/chart-icn-bar-xaxis.png')}
+          onPress={() => props.onPressAxis(axisItemsURL({title: "Choose X Axis", type: 'x'}))}
           title="Choose X Axis"
           style={StyleSheet.styles.discoveryCenter.leftContainer}
         />
         <Chart.DropdownButton
           image={require('../Images/chart-icn-bar-yaxis.png')}
+          onPress={() => props.onPressAxis(axisItemsURL({title: "Choose Y Axis", type: 'y'}))}
           title="Choose Y Axis"
           style={StyleSheet.styles.discoveryCenter.rightContainer}
         />

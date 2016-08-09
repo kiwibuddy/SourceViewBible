@@ -28,8 +28,6 @@ import FilterItems from './Filters/FilterItems';
 
 import { DeleteButton, DuplicateButton, ShareButton } from './Buttons';
 
-import { FilterType } from './Constants';
-
 import Popover from './Popover';
 
 import { Chronology, Statement, ComparisonPredicate, CompoundPredicate, WordPredicate } from '../../Database';
@@ -117,7 +115,10 @@ export default class Card extends Component {
     const { card } = this.state;
     switch (card.chartType) {
       case Chart.Type.BAR:
-        return <BarChart onPressChartType={this._onPressChartType} />;
+        return <BarChart
+          onPressAxis={this._onPressChartAxis}
+          onPressChartType={this._onPressChartType}
+        />;
 
       case Chart.Type.PIE:
         return <PieChart onPressChartType={this._onPressChartType} />;
@@ -180,6 +181,16 @@ export default class Card extends Component {
       });
     }
   };
+
+  _onPressChartAxis = (route: Object) => {
+    if (this.props.onShowPopover) {
+      const { card } = this.state;
+      this.props.onShowPopover({card, route}, (card) => {
+        this._animateLayout();
+        this.setState({card}, this._query);
+      });
+    }
+  }
 
   _onPressOccurrences = () => {
     if (this.props.onPressOccurrences) {

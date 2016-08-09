@@ -58,6 +58,7 @@ export const BACK = 'BACK';
 // Discovery center
 import ActantFilters from '../Scenes/DiscoveryCenter/Filters/ActantFilters';
 import ActantFilter from '../Scenes/DiscoveryCenter/Filters/ActantFilter';
+import AxisItems from '../Scenes/DiscoveryCenter/Charts/AxisItems';
 import BookFilters from '../Scenes/DiscoveryCenter/Filters/BookFilters';
 import BooksFilter from '../Scenes/DiscoveryCenter/Filters/BooksFilter';
 import ChronologyFilter from '../Scenes/DiscoveryCenter/Filters/ChronologyFilter';
@@ -70,6 +71,7 @@ import WordFilter from '../Scenes/DiscoveryCenter/Filters/WordFilter'
 
 export const actantFiltersURL = router.addRoute('/DiscoveryCenter/Filters/ActantFilters', ActantFilters);
 export const actantFilterURL = router.addRoute('/DiscoveryCenter/Filters/ActantFilter', ActantFilter);
+export const axisItemsURL = router.addRoute('/DiscoveryCenter/Charts/AxisItems', AxisItems);
 export const bookFiltersURL = router.addRoute('/DiscoveryCenter/Filters/BookFilters', BookFilters);
 export const booksFilterURL = router.addRoute('/DiscoveryCenter/Filters/BooksFilter', BooksFilter);
 export const chronologyFiltersURL = router.addRoute('/DiscoveryCenter/Filters/ChronologyFilters', ChronologyFilters);
