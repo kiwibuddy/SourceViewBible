@@ -24,9 +24,9 @@ function filterNature(filter: Object, type: string, key: string) {
   const nature = Nature.findByKey(key);
   return ({
     id: 'filter-' + Date.now(),
-    type: 'nature',
     actantType: type,
     ...filter,
+    type: 'nature',
     nature
   });
 }
@@ -35,9 +35,9 @@ function filterGender(filter: Object, type: string, key: string) {
   const id = (key === 'Male' ? 2 : 1);
   return ({
     id: 'filter-' + Date.now(),
-    type: 'gender',
     actantType: type,
     ...filter,
+    type: 'gender',
     gender: {
       id,
       key
@@ -49,9 +49,9 @@ function filterActantNumber(filter: Object, type: string, key: string) {
   const id = (key === 'Individual' ? 2 : 1);
   return ({
     id: 'filter-' + Date.now(),
-    type: 'actant-number',
     actantType: type,
     ...filter,
+    type: 'actant-number',
     actantNumber: {
       id,
       key

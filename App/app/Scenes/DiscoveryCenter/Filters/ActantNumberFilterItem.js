@@ -16,9 +16,12 @@ import {
   StyleSheet,
 } from '../../../Common';
 
+import { natureFilterURL } from '../../../Navigation';
+
 type Props = {
   filter: Object,
   onPressDeleteFilter: Function,
+  onPressEditFilter: Function,
 };
 
 const ActantNumberFilterItem = (props: Props) => {
@@ -35,7 +38,7 @@ const ActantNumberFilterItem = (props: Props) => {
       </View>
       <View style={StyleSheet.styles.discoveryCenter.bottomContainer}>
         <Text>Is</Text>
-        <TouchableOpacity style={styles.filterButton}>
+        <TouchableOpacity style={styles.filterButton} onPress={() => props.onPressEditFilter(natureFilterURL({title: Localizable.t('nature'), filter: props.filter}))}>
           <Text style={styles.filterButtonTitle}>{Localizable.t('actant-number.' + actantNumber.key)}</Text>
           <Image source={require('../Images/chart-icn-dropdown-filter.png')} />
         </TouchableOpacity>

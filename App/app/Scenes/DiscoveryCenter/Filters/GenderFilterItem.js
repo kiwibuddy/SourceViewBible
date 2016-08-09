@@ -16,6 +16,8 @@ import {
   StyleSheet,
 } from '../../../Common';
 
+import { natureFilterURL } from '../../../Navigation';
+
 type Props = {
   filter: Object,
   onPressDeleteFilter: Function,
@@ -35,7 +37,7 @@ const GenderFilterItem = (props: Props) => {
       </View>
       <View style={StyleSheet.styles.discoveryCenter.bottomContainer}>
         <Text>Is</Text>
-        <TouchableOpacity style={styles.filterButton}>
+        <TouchableOpacity style={styles.filterButton} onPress={() => props.onPressEditFilter(natureFilterURL({title: Localizable.t('nature'), filter: props.filter}))}>
           <Text style={styles.filterButtonTitle}>{Localizable.t('genders.' + gender.key)}</Text>
           <Image source={require('../Images/chart-icn-dropdown-filter.png')} />
         </TouchableOpacity>
