@@ -22,7 +22,8 @@ function filterNature(type: string, key: string) {
   const nature = Nature.findByKey(key);
   return ({
     id: 'filter-' + Date.now(),
-    type: type + '-nature',
+    type: 'nature',
+    actantType: type,
     nature
   });
 }
@@ -31,7 +32,8 @@ function filterGender(type: string, key: string) {
   const gender = (key === 'Male' ? 2 : 1);
   return ({
     id: 'filter-' + Date.now(),
-    type: type + '-gender',
+    type: 'gender',
+    actantType: type,
     gender
   });
 }

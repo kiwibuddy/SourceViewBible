@@ -20,6 +20,7 @@ import BookRangeFilterItem from './BookRangeFilterItem';
 import BookFilterItem from './BookFilterItem';
 import ChronologyRangeFilterItem from './ChronologyRangeFilterItem';
 import ChronologyFilterItem from './ChronologyFilterItem';
+import NatureFilterItem from './NatureFilterItem';
 import SphereFilterItem from './SphereFilterItem';
 import WordFilterItem from './WordFilterItem';
 import AddFilterItem from './AddFilterItem';
@@ -58,6 +59,10 @@ const FilterItems = (props: Props) => {
 
       case 'chronology':
         Item = ChronologyFilterItem;
+        break;
+
+      case 'nature':
+        Item = NatureFilterItem;
         break;
 
       case 'sphere':

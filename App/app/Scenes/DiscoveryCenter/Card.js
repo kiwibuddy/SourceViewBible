@@ -243,26 +243,23 @@ export default class Card extends Component {
           predicates.push(ComparisonPredicate.predicateWith('chronology_statements.id', 'IN', chronologies));
           break;
 
-        case 'recipient-gender':
-          predicates.push(ComparisonPredicate.predicateWith('recipient_gender_statements.id', '=', filter.gender))
+        case 'gender':
+          if (filter.actantType === 'recipient') {
+            predicates.push(ComparisonPredicate.predicateWith('recipient_gender_statements.id', '=', filter.gender));
+          } else {
+            predicates.push(ComparisonPredicate.predicateWith('source_gender_statements.id', '=', filter.gender));
+          }
           break;
 
-        case 'recipient-nature':
-          predicates.push(ComparisonPredicate.predicateWith('recipient_nature_statements.id', '=', filter.nature.id))
+        case 'nature':
+          if (filter.actantType === 'recipient') {
+            predicates.push(ComparisonPredicate.predicateWith('recipient_nature_statements.id', '=', filter.nature.id));
+          } else {
+            predicates.push(ComparisonPredicate.predicateWith('source_nature_statements.id', '=', filter.nature.id));
+          }
           break;
 
-        case 'recipient-role':
-          break;
-
-        case 'source-gender':
-          predicates.push(ComparisonPredicate.predicateWith('source_gender_statements.id', '=', filter.gender))
-          break;
-
-        case 'source-nature':
-          predicates.push(ComparisonPredicate.predicateWith('source_nature_statements.id', '=', filter.nature.id))
-          break;
-
-        case 'source-role':
+        case 'role':
           break;
 
         case 'sphere':

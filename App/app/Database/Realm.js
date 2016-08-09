@@ -384,6 +384,10 @@ export class Nature extends Realm.Object {
   static findByKey(key: string) {
     return realm.objects('Nature').filtered('key = $0', key)[0];
   }
+
+  get name() {
+    return Localizable.t('natures.' + this.key);
+  }
 }
 Nature.schema = NatureSchema;
 

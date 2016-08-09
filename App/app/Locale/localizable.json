@@ -92,6 +92,13 @@
       "Chron_Eschatos": "Eschatos",
       "Chron_PreAbraham": "Pre-Abraham",
     },
+    "natures": {
+      "Angelic": "Angelic",
+      "Demonic": "Demonic",
+      "Divine": "Divine",
+      "Human": "Human",
+      "Other": "Other",
+    },
     "professions": {
       "Agriculture": "Agriculture",
       "Author": "Author",
