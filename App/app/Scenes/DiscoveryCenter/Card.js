@@ -224,6 +224,10 @@ export default class Card extends Component {
     const predicates = [];
     card.filters.forEach(filter => {
       switch(filter.type) {
+        case 'actant-number':
+          predicates.push(ComparisonPredicate.predicateWith(`${filter.actantType}_actant_number_statements.id`, '=', filter.actantNumber.id));
+          break;
+
         case 'book':
           predicates.push(ComparisonPredicate.predicateWith('statements.first', '>=', filter.book.firstMonad));
           predicates.push(ComparisonPredicate.predicateWith('statements.last', '<=', filter.book.lastMonad));
@@ -244,19 +248,11 @@ export default class Card extends Component {
           break;
 
         case 'gender':
-          if (filter.actantType === 'recipient') {
-            predicates.push(ComparisonPredicate.predicateWith('recipient_gender_statements.id', '=', filter.gender.id));
-          } else {
-            predicates.push(ComparisonPredicate.predicateWith('source_gender_statements.id', '=', filter.gender.id));
-          }
+          predicates.push(ComparisonPredicate.predicateWith(`${filter.actantType}_gender_statements.id`, '=', filter.gender.id));
           break;
 
         case 'nature':
-          if (filter.actantType === 'recipient') {
-            predicates.push(ComparisonPredicate.predicateWith('recipient_nature_statements.id', '=', filter.nature.id));
-          } else {
-            predicates.push(ComparisonPredicate.predicateWith('source_nature_statements.id', '=', filter.nature.id));
-          }
+          predicates.push(ComparisonPredicate.predicateWith(`${filter.actantType}_nature_statements.id`, '=', filter.nature.id));
           break;
 
         case 'role':

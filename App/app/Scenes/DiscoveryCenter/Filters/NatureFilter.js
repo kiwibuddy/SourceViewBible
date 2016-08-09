@@ -41,6 +41,19 @@ function filterGender(type: string, key: string) {
   });
 }
 
+function filterActantNumber(type: string, key: string) {
+  const id = (key === 'Individual' ? 2 : 1);
+  return ({
+    id: 'filter-' + Date.now(),
+    type: 'actant-number',
+    actantType: type,
+    actantNumber: {
+      id,
+      key
+    }
+  });
+}
+
 
 type Props = {
   navigate: Function,
@@ -58,11 +71,11 @@ const NatureFilters = (props: Props) => {
         <Text style={StyleSheet.styles.cell.title}>Human</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterActantNumber(props.type, 'Group'))}>
         <Text style={StyleSheet.styles.cell.title}>Human Group</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterActantNumber(props.type, 'Individual'))}>
         <Text style={StyleSheet.styles.cell.title}>Human Individual</Text>
       </TouchableOpacity>
       <View style={styles.separator} />

@@ -72,6 +72,10 @@
     "gender": "Gender",
     "gender-female": "Female",
     "gender-male": "Male",
+    "actant-number": {
+      "Group": "Group",
+      "Individual": "Individual",
+    },
     "chronologies": {
       "Chron_0s_AD": "0s AD",
       "Chron_0s_BC": "0s BC",
