@@ -505,6 +505,7 @@ export class Statement extends Realm.Object {
       const tables = predicate.subpredicates.filter(predicate => !(predicate instanceof WordPredicate)).map((comparison: ComparisonPredicate) => comparison.leftExpression.split('.')[0]).filter(table => table !== 'statements');
       const from = tables.map(table => `INNER JOIN ${table} ON statements.id = ${table}.statement_id`).join(' ');
       const sql = `SELECT statements.id, statements.first, statements.last FROM statements ${from} WHERE ${where}`
+      console.log(sql);
       statementRows = await this.statementRowsWithSQL(sql);
     }
 

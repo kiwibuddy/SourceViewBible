@@ -14,6 +14,7 @@ EMDROS[:statement_objects].each do |s|
 	end
 end
 
+seed_recipient_type_statements()
 seed_profession_statements("recipient")
 seed_gender_statements("recipient")
 seed_nature_statements("recipient")
