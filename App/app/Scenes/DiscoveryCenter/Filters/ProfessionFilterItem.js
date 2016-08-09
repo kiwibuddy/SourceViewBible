@@ -12,12 +12,16 @@ import {
 
 import {
   Colors,
+  Localizable,
   StyleSheet,
 } from '../../../Common';
+
+import { professionFilterURL } from '../../../Navigation';
 
 type Props = {
   filter: Object,
   onPressDeleteFilter: Function,
+  onPressEditFilter: Function,
 };
 
 const ProfessionFilterItem = (props: Props) => {
@@ -34,7 +38,7 @@ const ProfessionFilterItem = (props: Props) => {
       </View>
       <View style={StyleSheet.styles.discoveryCenter.bottomContainer}>
         <Text>Profession is</Text>
-        <TouchableOpacity style={styles.filterButton}>
+        <TouchableOpacity style={styles.filterButton} onPress={() => props.onPressEditFilter(professionFilterURL({title: Localizable.t('profession'), filter: props.filter}))}>
           <Text style={styles.filterButtonTitle}>{profession.name}</Text>
           <Image source={require('../Images/chart-icn-dropdown-filter.png')} />
         </TouchableOpacity>

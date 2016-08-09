@@ -12,12 +12,16 @@ import {
 
 import {
   Colors,
+  Localizable,
   StyleSheet,
 } from '../../../Common';
+
+import { chronologyFilterURL } from '../../../Navigation';
 
 type Props = {
   filter: Object,
   onPressDeleteFilter: Function,
+  onPressEditFilter: Function,
 };
 
 const ChronologyRangeFilterItem = (props: Props) => {
@@ -34,12 +38,12 @@ const ChronologyRangeFilterItem = (props: Props) => {
       </View>
       <View style={StyleSheet.styles.discoveryCenter.bottomContainer}>
         <Text>From</Text>
-        <TouchableOpacity style={styles.filterButton}>
+        <TouchableOpacity style={styles.filterButton} onPress={() => props.onPressEditFilter(chronologyFilterURL({title: Localizable.t('time-period'), filter: props.filter, item: 'from'}))}>
           <Text style={styles.filterButtonTitle}>{from.name}</Text>
           <Image source={require('../Images/chart-icn-dropdown-filter.png')} />
         </TouchableOpacity>
         <Text>To</Text>
-        <TouchableOpacity style={styles.filterButton}>
+        <TouchableOpacity style={styles.filterButton} onPress={() => props.onPressEditFilter(chronologyFilterURL({title: Localizable.t('time-period'), filter: props.filter, item: 'to'}))}>
           <Text style={styles.filterButtonTitle}>{to.name}</Text>
           <Image source={require('../Images/chart-icn-dropdown-filter.png')} />
         </TouchableOpacity>

@@ -12,12 +12,16 @@ import {
 
 import {
   Colors,
+  Localizable,
   StyleSheet,
 } from '../../../Common';
+
+import { chronologyFilterURL } from '../../../Navigation';
 
 type Props = {
   filter: Object,
   onPressDeleteFilter: Function,
+  onPressEditFilter: Function,
 };
 
 const ChronologyFilterItem = (props: Props) => {
@@ -34,7 +38,7 @@ const ChronologyFilterItem = (props: Props) => {
       </View>
       <View style={StyleSheet.styles.discoveryCenter.bottomContainer}>
         <Text>In</Text>
-        <TouchableOpacity style={styles.filterButton}>
+        <TouchableOpacity style={styles.filterButton} onPress={() => props.onPressEditFilter(chronologyFilterURL({title: Localizable.t('time-period'), filter: props.filter}))}>
           <Text style={styles.filterButtonTitle}>{chronology.name}</Text>
           <Image source={require('../Images/chart-icn-dropdown-filter.png')} />
         </TouchableOpacity>

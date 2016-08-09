@@ -67,17 +67,38 @@ export default class Chronologys extends Component {
   }
 
   _renderRow = (chronology: Object, sectionID: any, rowID: any) => {
+    return (
+      <TouchableOpacity key={chronology.id} style={StyleSheet.styles.listItem} onPress={() => this._filterChronology(chronology)}>
+        <Text style={StyleSheet.styles.cell.title}>{chronology.name}</Text>
+      </TouchableOpacity>
+    );
+  };
+
+  _filterChronology = (chronology: Object) => {
     const filter = {
       id: 'filter-' + Date.now(),
       type: 'chronology',
       ...this.props.filter,
-      chronology
+    };
+
+    if (this.props.filter && this.props.filter.type === 'chronology-range') {
+      const { chronologies } = this.props.filter;
+      if (this.props.item === 'from') {
+        filter.chronologies = {
+          ...filter.chronologies,
+          from: chronology,
+        };
+      } else {
+        filter.chronologies = {
+          ...filter.chronologies,
+          to: chronology,
+        };
+      }
+    } else {
+      filter.chronology = chronology;
     }
-    return (
-      <TouchableOpacity key={chronology.id} style={StyleSheet.styles.listItem} onPress={() => this.props.onDone(cardWithFilter(this.props.card, filter))}>
-        <Text style={StyleSheet.styles.cell.title}>{chronology.name}</Text>
-      </TouchableOpacity>
-    );
+
+    this.props.onDone(cardWithFilter(this.props.card, filter));
   };
  }
 

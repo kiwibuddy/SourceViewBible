@@ -15,7 +15,6 @@ import {
   StyleSheet,
 } from '../../../Common';
 
-import FilterItem from './FilterItem';
 import ActantFilterItem from './ActantFilterItem';
 import ActantNumberFilterItem from './ActantNumberFilterItem';
 import BookRangeFilterItem from './BookRangeFilterItem';

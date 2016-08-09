@@ -141,7 +141,7 @@ export default class Books extends Component {
     }
 
     this.props.onDone(cardWithFilter(this.props.card, filter));
-  }
+  };
  }
 
 const styles = StyleSheet.create({

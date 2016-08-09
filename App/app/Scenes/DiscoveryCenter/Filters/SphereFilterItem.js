@@ -12,12 +12,16 @@ import {
 
 import {
   Colors,
+  Localizable,
   StyleSheet,
 } from '../../../Common';
+
+import { spheresFilterURL } from '../../../Navigation';
 
 type Props = {
   filter: Object,
   onPressDeleteFilter: Function,
+  onPressEditFilter: Function,
 };
 
 const SphereFilterItem = (props: Props) => {
@@ -33,8 +37,8 @@ const SphereFilterItem = (props: Props) => {
         </View>
       </View>
       <View style={StyleSheet.styles.discoveryCenter.bottomContainer}>
-        <Text>In</Text>
-        <TouchableOpacity style={styles.filterButton}>
+        <Text>Is</Text>
+        <TouchableOpacity style={styles.filterButton} onPress={() => props.onPressEditFilter(spheresFilterURL({title: Localizable.t('sphere'), filter: props.filter}))}>
           <Text style={styles.filterButtonTitle}>{sphere.name}</Text>
           <Image source={require('../Images/chart-icn-dropdown-filter.png')} />
         </TouchableOpacity>

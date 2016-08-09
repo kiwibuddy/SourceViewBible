@@ -16,9 +16,12 @@ import {
   StyleSheet,
 } from '../../../Common';
 
+import { roleFilterURL } from '../../../Navigation';
+
 type Props = {
   filter: Object,
   onPressDeleteFilter: Function,
+  onPressEditFilter: Function,
 };
 
 const RoleFilterItem = (props: Props) => {
@@ -35,7 +38,7 @@ const RoleFilterItem = (props: Props) => {
       </View>
       <View style={StyleSheet.styles.discoveryCenter.bottomContainer}>
         <Text>Role is</Text>
-        <TouchableOpacity style={styles.filterButton}>
+        <TouchableOpacity style={styles.filterButton} onPress={() => props.onPressEditFilter(roleFilterURL({title: Localizable.t('role'), filter: props.filter}))}>
           <Text style={styles.filterButtonTitle}>{Localizable.t('roles.' + role.key)}</Text>
           <Image source={require('../Images/chart-icn-dropdown-filter.png')} />
         </TouchableOpacity>

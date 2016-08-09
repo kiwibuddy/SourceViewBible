@@ -12,12 +12,16 @@ import {
 
 import {
   Colors,
+  Localizable,
   StyleSheet,
 } from '../../../Common';
+
+import { wordFilterURL } from '../../../Navigation';
 
 type Props = {
   filter: Object,
   onPressDeleteFilter: Function,
+  onPressEditFilter: Function,
 };
 
 const WordFilterItem = (props: Props) => {
@@ -34,7 +38,7 @@ const WordFilterItem = (props: Props) => {
       </View>
       <View style={StyleSheet.styles.discoveryCenter.bottomContainer}>
         <Text>Matching</Text>
-        <TouchableOpacity style={styles.filterButton}>
+        <TouchableOpacity style={styles.filterButton} onPress={() => props.onPressEditFilter(wordFilterURL({title: Localizable.t('word'), filter: props.filter}))}>
           <Text style={styles.filterButtonTitle}>{word}</Text>
           <Image source={require('../Images/chart-icn-dropdown-filter.png')} />
         </TouchableOpacity>

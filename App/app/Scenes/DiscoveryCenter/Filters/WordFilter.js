@@ -44,7 +44,7 @@ class WordFilter extends Component {
     super(props);
 
     this.state = {
-      word: null
+      word: props.filter && props.filter.word
     };
   }
 
