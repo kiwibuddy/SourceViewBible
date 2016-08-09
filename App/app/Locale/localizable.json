@@ -8,6 +8,8 @@
     "principality": "Read Time",
     "discover": "Discover",
     "books": "Books",
+    "source": "Source",
+    "recipient": "Recipient",
     "sources": {
       "narrator": "Narrator",
       "god": "God",
