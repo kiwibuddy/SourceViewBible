@@ -33,7 +33,7 @@ const ActantFilterItem = (props: Props) => {
         </View>
       </View>
       <View style={StyleSheet.styles.discoveryCenter.bottomContainer}>
-        <Text>In</Text>
+        <Text>Is</Text>
         <TouchableOpacity style={styles.filterButton}>
           <Text style={styles.filterButtonTitle}>{actant.name}</Text>
           <Image source={require('../Images/chart-icn-dropdown-filter.png')} />

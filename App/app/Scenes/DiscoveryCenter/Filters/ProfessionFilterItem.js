@@ -21,19 +21,19 @@ type Props = {
 };
 
 const ProfessionFilterItem = (props: Props) => {
-  const { profession } = props.filter;
+  const { profession, actantType } = props.filter;
 
   return (
     <View>
       <View style={StyleSheet.styles.discoveryCenter.topContainer}>
         <View style={StyleSheet.styles.discoveryCenter.leftContainer}>
           <TouchableOpacity>
-            <Text style={[styles.button, {color: '#9B9B9B'}]}>PROFESSION</Text>
+            <Text style={[styles.button, {color: '#9B9B9B'}]}>{actantType.toLocaleUpperCase()}</Text>
           </TouchableOpacity>
         </View>
       </View>
       <View style={StyleSheet.styles.discoveryCenter.bottomContainer}>
-        <Text>In</Text>
+        <Text>Profession is</Text>
         <TouchableOpacity style={styles.filterButton}>
           <Text style={styles.filterButtonTitle}>{profession.name}</Text>
           <Image source={require('../Images/chart-icn-dropdown-filter.png')} />
