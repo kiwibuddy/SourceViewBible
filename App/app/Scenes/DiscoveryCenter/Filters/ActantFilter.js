@@ -9,6 +9,7 @@ import {
   Platform,
   RecyclerViewBackedScrollView,
   Text,
+  TextInput,
   TouchableOpacity,
   View
 } from 'react-native';
@@ -29,7 +30,8 @@ type Props = {
 };
 
 type State = {
-  dataSource: any
+  dataSource: any,
+  search: string,
 };
 
 export default class Actants extends Component {
@@ -42,24 +44,32 @@ export default class Actants extends Component {
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id});
     this.state = {
       dataSource: dataSource,
+      search: null,
     };
   }
 
-  componentDidMount() {
-    const actants = (this.props.type === 'recipient' ? Actant.recipients().sorted('name') : Actant.sources().sorted('name'));
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(actants)
-    });
-  }
-
   render() {
+    const actants = (this.props.type === 'recipient' ? Actant.recipients(this.state.search).sorted('name') : Actant.sources(this.state.search).sorted('name'));
+    const dataSource = this.state.dataSource.cloneWithRows(actants)
     return (
       <View style={styles.container}>
+        <TextInput
+          autoCapitalize="words"
+          autoCorrect={false}
+          autoFocus={true}
+          clearButtonMode="always"
+          onChangeText={(text) => this.setState({search: text})}
+          placeholder="Name"
+          style={styles.textInput}
+          value={this.state.search}
+        />
         <ListView
-          dataSource={this.state.dataSource}
+          dataSource={dataSource}
           renderRow={this._renderRow}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
+          keyboardShouldPersistTaps={true}
+          keyboardDismissMode="on-drag"
         />
       </View>
     );
@@ -87,5 +97,16 @@ const styles = StyleSheet.create({
   separator: {
     ...StyleSheet.styles.separator,
     marginLeft: 8,
+  },
+  textInput: {
+    fontSize: 14,
+    backgroundColor: '#ececec',
+    borderColor: '#ececec',
+    borderRadius: 3,
+    borderWidth: 1,
+    paddingLeft: 8,
+    marginHorizontal: 8,
+    marginVertical: 8,
+    height: 26,
   },
 });
