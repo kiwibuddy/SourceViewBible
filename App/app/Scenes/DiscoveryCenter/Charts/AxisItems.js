@@ -75,7 +75,7 @@ export default class AxisItems extends Component {
   }
 
   _renderSectionHeader = (sectionData: Object, sectionID: any) => {
-    const title = Localizable.t(sectionID);
+    const title = sectionID === 'other' ? null : Localizable.t(sectionID);
     return (
       <View style={styles.sectionHeaderContainer}>
         <Text style={styles.sectionHeaderTitle}>{title}</Text>
@@ -93,6 +93,27 @@ export default class AxisItems extends Component {
 
   _getRowsAndSections = () => {
     const { search } = this.state;
+
+    const rows = {};
+    const sections = [];
+
+    const otherRows = [];
+    if (!search || Localizable.t('book').startsWith(search)) {
+      otherRows.push({id: 'book', name: Localizable.t('book')});
+    }
+
+    if (!search || Localizable.t('time-period').startsWith(search)) {
+      otherRows.push({id: 'chronology', name: Localizable.t('time-period')});
+    }
+
+    if (!search || Localizable.t('words.text').startsWith(search)) {
+      otherRows.push({id: 'words', name: Localizable.t('words.text')});
+    }
+
+    if (otherRows.length > 0) {
+      rows['other'] = otherRows;
+      sections.push('other');
+    }
 
     const actantSectionNames = [
       Localizable.t('source'),
@@ -133,12 +154,11 @@ export default class AxisItems extends Component {
       if (matchedRow) matchedActantRow = true;
     };
 
-    const rows = {};
-    const sections = [];
     if (!search || matchedActantRow || searchSections.find(name => name === Localizable.t('source'))) {
       rows['source'] = actantRows;
       sections.push('source');
     };
+
     if (!search || matchedActantRow || searchSections.find(name => name === Localizable.t('recipient'))) {
       rows['recipient'] = actantRows;
       sections.push('recipient');

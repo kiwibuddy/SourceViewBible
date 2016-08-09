@@ -8,6 +8,7 @@
     "principality": "Read Time",
     "discover": "Discover",
     "books": "Books",
+    "book": "Book",
     "source": "Source",
     "recipient": "Recipient",
     "sources": {
@@ -28,6 +29,7 @@
         "other": "{{count}} spheres"
       }
     },
+    "time-period": "Time Period",
     "introduction": "Introduction",
     "how-to-read": "How to read {{name}}",
     "book-overview": "Overview of {{name}}",
@@ -53,6 +55,7 @@
     "yesterday": "Yesterday",
     "percentage": "Percentage",
     "words": {
+      "text": "Words",
       "count": {
         "one": "1 word",
         "other": "{{localizedCount}} words"
