@@ -21,6 +21,8 @@ import { BarChart } from '../../../Components/Charts';
 
 import { axisItemsURL } from '../../../Navigation';
 
+import { Statement } from '../../../Database';
+
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -31,9 +33,23 @@ function renderChart(card) {
   const statements = card.statements;
   const statementCount = statements.length;
   const filterCount = card.filters.length;
-  if (filterCount== 0 && statementCount == 0) return <Image source={require('../Images/chart-bar-blankslate.png')} />;
+  const xAxis = card.xAxis;
+  const yAxis = card.yAxis;
+  if (!xAxis || !yAxis || (filterCount== 0 && statementCount == 0)) return <Image source={require('../Images/chart-bar-blankslate.png')} />;
 
-  const bars = statements.slice(0, Math.min(statementCount, 50)).map(statement => ({color: 'red', value: getRandomInt(10, 99)}));
+  const values = {};
+  statements.forEach(occurrence => {
+    const statement = Statement.findByID(occurrence.id);
+    const actant = statement.source;
+    if (actant) {
+      actant.professions.forEach(profession => {
+        const wordCount = values[profession.name] || 0;
+        values[profession.name] = wordCount + statement.wordCount;
+      });
+    }
+  });
+
+  const bars = Object.keys(values).sort((a,b) => values[a] > values[b] ? -1 : 1).slice(0, 20).map(key => ({key, color: 'red', value:values[key]}));
 
   return (
     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.chart}>

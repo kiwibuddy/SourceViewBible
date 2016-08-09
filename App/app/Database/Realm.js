@@ -486,6 +486,10 @@ export class Statement extends Realm.Object {
     return realm.objects('Statement');
   }
 
+  static findByID(id: number) {
+    return realm.objectForPrimaryKey('Statement', id ? parseInt(id) : 0);
+  }
+
   static async statementRowsWithSQL(sql: string) {
     return new Promise((resolve, reject) => {
       SQLite.transaction((tx) => {
