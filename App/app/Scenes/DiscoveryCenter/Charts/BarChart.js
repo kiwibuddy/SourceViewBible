@@ -5,6 +5,7 @@ import React, { Component, PropTypes } from 'react';
 
 import {
   Image,
+  ScrollView,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -20,18 +21,30 @@ import { BarChart } from '../../../Components/Charts';
 
 import { axisItemsURL } from '../../../Navigation';
 
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
 function renderChart(card) {
-  const statementCount = card.statements.length;
+  const statements = card.statements;
+  const statementCount = statements.length;
   const filterCount = card.filters.length;
   if (filterCount== 0 && statementCount == 0) return <Image source={require('../Images/chart-bar-blankslate.png')} />;
 
+  const bars = statements.slice(0, Math.min(statementCount, 50)).map(statement => ({color: 'red', value: getRandomInt(10, 99)}));
+
   return (
-    <BarChart
-      bars={[{color: Colors.tint, value: 50}]}
-      deltaStyle={{backgroundColor: Colors.lightTint}}
-      maxChartValue={100}
-      style={styles.chart}
-    />
+    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.chart}>
+      <BarChart
+        bars={bars}
+        barStyle={{flex: 0, width: 8, marginHorizontal: 2}}
+        deltaStyle={{backgroundColor: 'transparent'}}
+        horizontal={false}
+        maxChartValue={100}
+      />
+    </ScrollView>
   );
 }
 
@@ -100,8 +113,9 @@ const BarChartView = (props: Props) => {
 const styles = StyleSheet.create({
   chart: {
     flex: 1,
-    backgroundColor: 'red',
-    height: 260,
+    height: 295,
+    paddingTop: 44,
+    paddingBottom: 120,
   },
 });
 
