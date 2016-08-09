@@ -335,6 +335,10 @@ export class Chronology extends Realm.Object {
     return realm.objects('Chronology').sorted('from');
   }
 
+  static whereInRange(from: Chronology, to: Chronology) {
+    return realm.objects('Chronology').filtered('from >= $0 AND to <= $1', from.from, to.to);
+  }
+
   get name() {
     return Localizable.t('chronologies.' + this.key);
   }

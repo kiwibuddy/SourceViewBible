@@ -32,7 +32,7 @@ import { FilterType } from './Constants';
 
 import Popover from './Popover';
 
-import { Statement, ComparisonPredicate, CompoundPredicate, WordPredicate } from '../../Database';
+import { Chronology, Statement, ComparisonPredicate, CompoundPredicate, WordPredicate } from '../../Database';
 
 export const Header = (props: Object) => {
   return (
@@ -234,6 +234,15 @@ export default class Card extends Component {
           predicates.push(ComparisonPredicate.predicateWith('statements.last', '<=', filter.books.to.lastMonad));
           break;
 
+        case 'chronology':
+          predicates.push(ComparisonPredicate.predicateWith('chronology_statements.id', '=', filter.chronology.id));
+          break;
+
+        case 'chronology-range':
+          const chronologies = Chronology.whereInRange(filter.chronologies.from, filter.chronologies.to).map(chronology => chronology.id);
+          predicates.push(ComparisonPredicate.predicateWith('chronology_statements.id', 'IN', chronologies));
+          break;
+
         case 'sphere':
           const SPHERES = ["family", "economics", "government", "religion", "education", "communication", "celebration"];
           const sphereID = SPHERES.indexOf(filter.sphere.id) + 1;
@@ -250,6 +259,9 @@ export default class Card extends Component {
     let statements = [];
     if (predicates.length > 0) {
       const predicate = CompoundPredicate.andPredicateWithSubpredicates(predicates);
+
+      console.log('Predicate', predicate.predicateFormat);
+
       statements = await Statement.identifiersMatchingPredicate(predicate);
     }
 

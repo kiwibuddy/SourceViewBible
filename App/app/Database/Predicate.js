@@ -18,7 +18,10 @@ export default class Predicate {
 
     let index = 0;
     for (let arg of this.args) {
-      const value = (typeof arg == 'string' || arg instanceof String) ? "'" + arg + "'" : arg;
+      let value = (typeof arg == 'string' || arg instanceof String) ? "'" + arg + "'" : arg;
+      if (Array.isArray(value)) {
+        value = '(' + value.join(',') + ')';
+      }
       predicateFormat = predicateFormat.replace('$' + index, value);
       index++;
     }
