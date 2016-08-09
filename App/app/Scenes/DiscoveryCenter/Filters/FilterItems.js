@@ -25,6 +25,7 @@ import ChronologyFilterItem from './ChronologyFilterItem';
 import GenderFilterItem from './GenderFilterItem';
 import NatureFilterItem from './NatureFilterItem';
 import ProfessionFilterItem from './ProfessionFilterItem';
+import RoleFilterItem from './RoleFilterItem';
 import SphereFilterItem from './SphereFilterItem';
 import WordFilterItem from './WordFilterItem';
 import AddFilterItem from './AddFilterItem';
@@ -52,7 +53,7 @@ const FilterItems = (props: Props) => {
       case 'actant':
         Item = ActantFilterItem;
         break;
-        
+
       case 'actant-number':
         Item = ActantNumberFilterItem;
         break;
@@ -83,6 +84,10 @@ const FilterItems = (props: Props) => {
 
       case 'profession':
         Item = ProfessionFilterItem;
+        break;
+
+      case 'role':
+        Item = RoleFilterItem;
         break;
 
       case 'sphere':

@@ -264,6 +264,7 @@ export default class Card extends Component {
           break;
 
         case 'role':
+          predicates.push(ComparisonPredicate.predicateWith(`${filter.actantType}_type_statements.id`, '=', filter.role.id));
           break;
 
         case 'sphere':

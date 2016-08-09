@@ -74,7 +74,7 @@
     "gender-male": "Male",
     "actant-number": {
       "Group": "Group",
-      "Individual": "Individual",
+      "Individual": "Individual"
     },
     "chronologies": {
       "Chron_0s_AD": "0s AD",
@@ -94,7 +94,7 @@
       "Chron_800s_BC": "800s BC",
       "Chron_900s_BC": "900s BC",
       "Chron_Eschatos": "Eschatos",
-      "Chron_PreAbraham": "Pre-Abraham",
+      "Chron_PreAbraham": "Pre-Abraham"
     },
     "genders": {
       "Female": "Female",
@@ -105,7 +105,7 @@
       "Demonic": "Demonic",
       "Divine": "Divine",
       "Human": "Human",
-      "Other": "Other",
+      "Other": "Other"
     },
     "professions": {
       "Agriculture": "Agriculture",
@@ -148,7 +148,14 @@
       "SlaveServant": "Slave/Servant",
       "SoldierGuard": "Soldier/Guard",
       "TeacherEducator": "Teacher/Educator",
-      "Thief": "Thief",
+      "Thief": "Thief"
+    },
+    "roles": {
+      "text": "Roles",
+      "narrator": "Narrator",
+      "god": "God",
+      "lead": "Lead",
+      "support": "Support"
     }
   }
 }
