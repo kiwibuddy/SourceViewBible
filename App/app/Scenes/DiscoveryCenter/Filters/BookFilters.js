@@ -7,6 +7,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Image,
 } from 'react-native';
 
 import {
@@ -47,6 +48,7 @@ const BookFilters = (props: Props) => {
       <View style={styles.separator} />
       <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.navigate(booksFilterURL({title: 'Specific Book'}))}>
         <Text style={StyleSheet.styles.cell.title}>Specific Book</Text>
+        <Image source={require('../Images/disclosure.png')} />
       </TouchableOpacity>
       <View style={styles.separator} />
       <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterBooks('genesis', 'malachi'))}>
