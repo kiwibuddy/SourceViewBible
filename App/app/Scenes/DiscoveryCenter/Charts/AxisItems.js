@@ -102,6 +102,10 @@ export default class AxisItems extends Component {
       otherRows.push({id: 'book', name: Localizable.t('book')});
     }
 
+    if (!search || Localizable.t('sphere').startsWith(search)) {
+      otherRows.push({id: 'sphere', name: Localizable.t('sphere')});
+    }
+
     if (!search || Localizable.t('time-period').startsWith(search)) {
       otherRows.push({id: 'chronology', name: Localizable.t('time-period')});
     }
