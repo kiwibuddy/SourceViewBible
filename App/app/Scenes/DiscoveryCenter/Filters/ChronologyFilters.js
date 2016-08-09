@@ -7,6 +7,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Image,
 } from 'react-native';
 
 import {
@@ -49,6 +50,7 @@ const ChronologyFilters = (props: Props) => {
       <View style={styles.separator} />
       <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.navigate(chronologyFilterURL({title: 'Specific Time Period'}))}>
         <Text style={StyleSheet.styles.cell.title}>Specific Time Period</Text>
+        <Image source={require('../Images/disclosure.png')} />
       </TouchableOpacity>
       <View style={styles.separator} />
     </ScrollView>
