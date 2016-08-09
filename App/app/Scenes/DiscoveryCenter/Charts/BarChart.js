@@ -10,12 +10,30 @@ import {
 } from 'react-native';
 
 import {
+  Colors,
+  Localizable,
   StyleSheet,
 } from '../../../Common';
 
 import Chart from './Chart';
+import { BarChart } from '../../../Components/Charts';
 
 import { axisItemsURL } from '../../../Navigation';
+
+function renderChart(card) {
+  const statementCount = card.statements.length;
+  const filterCount = card.filters.length;
+  if (filterCount== 0 && statementCount == 0) return <Image source={require('../Images/chart-bar-blankslate.png')} />;
+
+  return (
+    <BarChart
+      bars={[{color: Colors.tint, value: 50}]}
+      deltaStyle={{backgroundColor: Colors.lightTint}}
+      maxChartValue={100}
+      style={styles.chart}
+    />
+  );
+}
 
 type Props = {
   card: Object,
@@ -23,7 +41,7 @@ type Props = {
   onPressChartType: Function,
 };
 
-const BarChart = (props: Props) => {
+const BarChartView = (props: Props) => {
   const { card } = props;
 
   let xAxisTitle = "Choose X Axis";
@@ -36,10 +54,12 @@ const BarChart = (props: Props) => {
     yAxisTitle = props.card.yAxis.name;
   }
 
+  const chart = renderChart(card);
+
   return (
     <Chart>
       <View style={StyleSheet.styles.discoveryCenter.chartContainer}>
-        <Image source={require('../Images/chart-bar-blankslate.png')} />
+        {chart}
       </View>
       <Chart.Header>
         <Chart.DropdownButton
@@ -77,4 +97,12 @@ const BarChart = (props: Props) => {
   );
 };
 
-export default BarChart;
+const styles = StyleSheet.create({
+  chart: {
+    flex: 1,
+    backgroundColor: 'red',
+    height: 260,
+  },
+});
+
+export default BarChartView;
