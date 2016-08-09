@@ -58,10 +58,14 @@ export const BACK = 'BACK';
 // Discovery center
 import BookFilters from '../Scenes/DiscoveryCenter/Filters/BookFilters';
 import BooksFilter from '../Scenes/DiscoveryCenter/Filters/BooksFilter';
+import ChronologyFilter from '../Scenes/DiscoveryCenter/Filters/ChronologyFilter';
+import ChronologyFilters from '../Scenes/DiscoveryCenter/Filters/ChronologyFilters';
 import SpheresFilter from '../Scenes/DiscoveryCenter/Filters/SpheresFilter';
 import WordFilter from '../Scenes/DiscoveryCenter/Filters/WordFilter'
 export const bookFiltersURL = router.addRoute('/DiscoveryCenter/Filters/BookFilters', BookFilters);
 export const booksFilterURL = router.addRoute('/DiscoveryCenter/Filters/BooksFilter', BooksFilter);
+export const chronologyFiltersURL = router.addRoute('/DiscoveryCenter/Filters/ChronologyFilters', ChronologyFilters);
+export const chronologyFilterURL = router.addRoute('/DiscoveryCenter/Filters/ChronologyFilter', ChronologyFilter);
 export const spheresFilterURL = router.addRoute('/DiscoveryCenter/Filters/SpheresFilter', SpheresFilter);
 export const wordFilterURL = router.addRoute('/DiscoveryCenter/Filters/WordFilter', WordFilter);
 

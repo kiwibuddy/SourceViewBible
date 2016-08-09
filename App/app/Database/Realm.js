@@ -325,11 +325,19 @@ const ChronologySchema = {
   properties: {
     id: 'int',
     key: 'string',
+    from: {type: 'int', indexed: true},
+    to: 'int',
   }
 };
 
 export class Chronology extends Realm.Object {
+  static all() {
+    return realm.objects('Chronology').sorted('from');
+  }
 
+  get name() {
+    return Localizable.t('chronologies.' + this.key);
+  }
 }
 Chronology.schema = ChronologySchema;
 

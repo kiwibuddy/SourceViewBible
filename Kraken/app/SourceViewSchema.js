@@ -107,6 +107,8 @@ const ChronologySchema = {
   properties: {
     id: 'int',
     key: 'string',
+    from: {type: 'int', indexed: true},
+    to: 'int',
   }
 };
 

@@ -31,7 +31,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigation';
 
-import { BACK, bookFiltersURL, discoveryCenterOccurrencesURL, spheresFilterURL, wordFilterURL } from '../../Navigation';
+import { BACK, bookFiltersURL, chronologyFiltersURL, discoveryCenterOccurrencesURL, spheresFilterURL, wordFilterURL } from '../../Navigation';
 
 const SCROLLVIEW_REF = 'scrollview';
 
@@ -125,6 +125,10 @@ export default class DiscoveryCenter extends Component {
     switch (popover.props.filterType) {
       case FilterType.BOOK:
         route = bookFiltersURL({title: 'Book Filters'});
+        break;
+
+      case FilterType.CHRONOLOGY:
+        route = chronologyFiltersURL({title: 'Chronology Filters'})
         break;
 
       case FilterType.SPHERE:

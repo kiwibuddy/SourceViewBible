@@ -18,6 +18,7 @@ import {
 import FilterItem from './FilterItem';
 import BookRangeFilterItem from './BookRangeFilterItem';
 import BookFilterItem from './BookFilterItem';
+import ChronologyRangeFilterItem from './ChronologyRangeFilterItem';
 import SphereFilterItem from './SphereFilterItem';
 import WordFilterItem from './WordFilterItem';
 import AddFilterItem from './AddFilterItem';
@@ -51,6 +52,10 @@ const FilterItems = (props: Props) => {
         Item = BookFilterItem;
         break;
 
+      case 'chronology-range':
+        Item = ChronologyRangeFilterItem;
+        break;
+
       case 'sphere':
         Item = SphereFilterItem;
         break;
@@ -58,11 +63,8 @@ const FilterItems = (props: Props) => {
       case 'word':
         Item = WordFilterItem;
         break;
-
-      default:
-        Item = FilterItem;
-        break;
     }
+    if (Item == null) return;
 
     return <Item
       key={filter.id}
