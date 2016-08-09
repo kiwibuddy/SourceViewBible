@@ -2,18 +2,13 @@
 'use strict';
 
 export function cardWithFilter(card: Object, filter: Object) {
-  const existingFilter = card.filters.find(existingFilter => existingFilter.id === filter.id);
+  const filterIndex = card.filters.findIndex(existingFilter => existingFilter.id === filter.id);
 
-  let filters = card.filters;
-  if (!existingFilter) {
-    filters = [
-      ...filters,
-      filter
-    ];
+  if (filterIndex != -1) {
+    card.filters.splice(filterIndex, 1, filter);
+  } else {
+    card.filters.push(filter);
   }
 
-  return {
-    ...card,
-    filters
-  };
+  return card;
 }

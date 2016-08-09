@@ -15,9 +15,12 @@ import {
   StyleSheet,
 } from '../../../Common';
 
+import { booksFilterURL } from '../../../Navigation';
+
 type Props = {
   filter: Object,
   onPressDeleteFilter: Function,
+  onPressEditFilter: Function,
 };
 
 const BookFilterItem = (props: Props) => {
@@ -34,7 +37,7 @@ const BookFilterItem = (props: Props) => {
       </View>
       <View style={StyleSheet.styles.discoveryCenter.bottomContainer}>
         <Text>Is</Text>
-        <TouchableOpacity style={styles.filterButton}>
+        <TouchableOpacity style={styles.filterButton} onPress={() => props.onPressEditFilter(booksFilterURL({title: 'Specific Book', filter: props.filter}))}>
           <Text style={styles.filterButtonTitle}>{book.name}</Text>
           <Image source={require('../Images/chart-icn-dropdown-filter.png')} />
         </TouchableOpacity>

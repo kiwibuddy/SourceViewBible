@@ -41,6 +41,7 @@ const Blankslate = () => {
 type Props = {
   filters: any,
   onPressDeleteFilter: Function,
+  onPressEditFilter: Function,
   onPressFilterType: Function,
 };
 
@@ -104,6 +105,7 @@ const FilterItems = (props: Props) => {
       key={filter.id}
       filter={filter}
       onPressDeleteFilter={() => props.onPressDeleteFilter(filter)}
+      onPressEditFilter={props.onPressEditFilter}
     />
   });
   const blankslate = (filters.length > 0 ? null : <Blankslate />);

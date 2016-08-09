@@ -15,9 +15,12 @@ import {
   StyleSheet,
 } from '../../../Common';
 
+import { booksFilterURL } from '../../../Navigation';
+
 type Props = {
   filter: Object,
   onPressDeleteFilter: Function,
+  onPressEditFilter: Function,
 };
 
 const BookRangeFilterItem = (props: Props) => {
@@ -34,12 +37,12 @@ const BookRangeFilterItem = (props: Props) => {
       </View>
       <View style={StyleSheet.styles.discoveryCenter.bottomContainer}>
         <Text>From</Text>
-        <TouchableOpacity style={styles.filterButton}>
+        <TouchableOpacity style={styles.filterButton} onPress={() => props.onPressEditFilter(booksFilterURL({title: 'From', filter: props.filter, item: 'from'}))}>
           <Text style={styles.filterButtonTitle}>{from.name}</Text>
           <Image source={require('../Images/chart-icn-dropdown-filter.png')} />
         </TouchableOpacity>
         <Text>To</Text>
-        <TouchableOpacity style={styles.filterButton}>
+        <TouchableOpacity style={styles.filterButton} onPress={() => props.onPressEditFilter(booksFilterURL({title: 'To', filter: props.filter, item: 'to'}))}>
           <Text style={styles.filterButtonTitle}>{to.name}</Text>
           <Image source={require('../Images/chart-icn-dropdown-filter.png')} />
         </TouchableOpacity>

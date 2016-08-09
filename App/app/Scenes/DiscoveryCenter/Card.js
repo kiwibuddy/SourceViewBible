@@ -138,6 +138,7 @@ export default class Card extends Component {
       <FilterItems
         filters={card.filters}
         onPressDeleteFilter={(filter) => this._deleteFilter(filter)}
+        onPressEditFilter={this._onPressEditFilter}
         onPressFilterType={this._onPressFilterType}
       />
     );
@@ -196,7 +197,17 @@ export default class Card extends Component {
     if (this.props.onPressOccurrences) {
       this.props.onPressOccurrences(this.state.card);
     }
-  }
+  };
+
+  _onPressEditFilter = (route: Object) => {
+    if (this.props.onShowPopover) {
+      const { card } = this.state;
+      this.props.onShowPopover({card, route}, (card) => {
+        this._animateLayout();
+        this.setState({card}, this._query);
+      });
+    }
+  };
 
   _addFilter = (filter: Object) => {
     const { card } = this.state;

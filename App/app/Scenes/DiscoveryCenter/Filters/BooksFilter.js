@@ -89,14 +89,8 @@ export default class Books extends Component {
   }
 
   _renderRow = (book: Object, sectionID: any, rowID: any) => {
-    const filter = {
-      id: 'filter-' + Date.now(),
-      type: 'book',
-      ...this.props.filter,
-      book
-    }
     return (
-      <TouchableOpacity key={book.id} style={StyleSheet.styles.listItem} onPress={() => this.props.onDone(cardWithFilter(this.props.card, filter))}>
+      <TouchableOpacity key={book.id} style={StyleSheet.styles.listItem} onPress={() => this._filterBook(book)}>
         <Text style={StyleSheet.styles.cell.title}>{book.name}</Text>
       </TouchableOpacity>
     );
@@ -121,6 +115,33 @@ export default class Books extends Component {
       dataSource: this._getDataSource(value)
     });
   };
+
+  _filterBook = (book: Object) => {
+    const filter = {
+      id: 'filter-' + Date.now(),
+      type: 'book',
+      ...this.props.filter,
+    };
+
+    if (this.props.filter && this.props.filter.type === 'book-range') {
+      const { books } = this.props.filter;
+      if (this.props.item === 'from') {
+        filter.books = {
+          ...filter.books,
+          from: book,
+        };
+      } else {
+        filter.books = {
+          ...filter.books,
+          to: book,
+        };
+      }
+    } else {
+      filter.book = book;
+    }
+
+    this.props.onDone(cardWithFilter(this.props.card, filter));
+  }
  }
 
 const styles = StyleSheet.create({
