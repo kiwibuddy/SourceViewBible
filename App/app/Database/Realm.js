@@ -206,13 +206,13 @@ export class Actant extends Realm.Object {
 
   static recipients(search?: string) {
     const recipients = realm.objects('Actant').filtered('isSource = $0', true);
-    if (search) return recipients.filtered('name BEGINSWITH[c] $0', search);
+    if (search) return recipients.filtered('name CONTAINS[c] $0', search);
     return recipients;
   }
 
   static sources(search?: string) {
     const sources = realm.objects('Actant').filtered('isSource = $0', true);
-    if (search) return sources.filtered('name BEGINSWITH[c] $0', search);
+    if (search) return sources.filtered('name CONTAINS[c] $0', search);
     return sources;
   }
 
