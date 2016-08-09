@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 295,
     paddingTop: 48,
-    paddingBottom: 120,
+    paddingBottom: 44,
   },
 });
 

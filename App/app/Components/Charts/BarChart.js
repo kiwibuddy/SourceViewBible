@@ -2,7 +2,10 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
-import { View } from 'react-native';
+import {
+  Text,
+  View,
+} from 'react-native';
 import ColorPropType from 'ColorPropType';
 
 import StyleSheet from '../../Common/StyleSheet';
@@ -34,9 +37,16 @@ const BarChart = (props: Object) => {
     } else {
       chart = [deltaBarGraph, barGraph];
     }
+
+    let label = null;
+    if (bar.label) {
+      label = <Text style={styles.label}>{bar.label}</Text>;
+    }
+
     return (
       <View key={'bar-' + barIndex} style={stackedBarStyle}>
         {chart}
+        {label}
       </View>
     )
   });
@@ -77,7 +87,13 @@ const styles = StyleSheet.create({
   },
   stackedBar: {
     flex: 1,
-  }
+  },
+  label: {
+    flex: 0,
+    fontSize: 9,
+    color: 'white',
+    backgroundColor: 'transparent',
+  },
 });
 
 export default BarChart;
