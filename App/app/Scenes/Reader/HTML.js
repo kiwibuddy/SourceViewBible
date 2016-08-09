@@ -69,7 +69,7 @@ module.exports = `
         padding: 0 5pt;
       }
       .textTitle {
-        font-family: georgia;
+        font-family: charter;
         font-weight: bold;
         font-style: italic;
         font-size: 15pt;
@@ -77,7 +77,7 @@ module.exports = `
         text-align: Center;
       }
       .textSection {
-        font-family: georgia;
+        font-family: charter;
         font-style: italic;
         font-size: 15pt;
         color: #323B43;
