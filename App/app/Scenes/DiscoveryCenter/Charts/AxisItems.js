@@ -57,7 +57,7 @@ export default class AxisItems extends Component {
           autoFocus={true}
           clearButtonMode="always"
           onChangeText={(text) => this.setState({search: text})}
-          placeholder="Data Point"
+          placeholder="Search Data Points"
           style={styles.textInput}
           value={this.state.search}
         />
@@ -94,23 +94,55 @@ export default class AxisItems extends Component {
   _getRowsAndSections = () => {
     const { search } = this.state;
 
-    const actantRows = [
-      {id: 'name', name: 'Name'},
-      {id: 'gender', name: 'Gender'},
-      {id: 'nature', name: 'Nature'},
-      {id: 'profession', name: 'Profession'},
-      {id: 'role', name: 'Role'},
+    const actantSectionNames = [
+      Localizable.t('source'),
+      Localizable.t('recipient'),
     ];
+    const searchSections = actantSectionNames.filter(name => name.startsWith(search));
 
-    const rows = {
-      source: actantRows,
-      recipient: actantRows,
+    let matchedActantRow = false;
+    const actantRows = [];
+
+    let matchedRow = (Localizable.t('name').startsWith(search));
+    if (!search || searchSections.length > 0 || matchedRow) {
+      actantRows.push({id: 'name', name: Localizable.t('name')});
+      if (matchedRow) matchedActantRow = true;
     };
 
-    const sections = [
-      'source',
-      'recipient'
-    ];
+    matchedRow = (Localizable.t('gender').startsWith(search));
+    if (!search || searchSections.length > 0 || matchedRow) {
+      actantRows.push({id: 'gender', name: Localizable.t('gender')});
+      if (matchedRow) matchedActantRow = true;
+    };
+
+    matchedRow = (Localizable.t('nature').startsWith(search));
+    if (!search || searchSections.length > 0 || matchedRow) {
+      actantRows.push({id: 'nature', name: Localizable.t('nature')});
+      if (matchedRow) matchedActantRow = true;
+    };
+
+    matchedRow = (Localizable.t('profession').startsWith(search));
+    if (!search || searchSections.length > 0 || matchedRow) {
+      actantRows.push({id: 'profession', name: Localizable.t('profession')});
+      if (matchedRow) matchedActantRow = true;
+    };
+
+    matchedRow = (Localizable.t('role').startsWith(search));
+    if (!search || searchSections.length > 0 || matchedRow) {
+      actantRows.push({id: 'role', name: Localizable.t('role')});
+      if (matchedRow) matchedActantRow = true;
+    };
+
+    const rows = {};
+    const sections = [];
+    if (!search || matchedActantRow || searchSections.find(name => name === Localizable.t('source'))) {
+      rows['source'] = actantRows;
+      sections.push('source');
+    };
+    if (!search || matchedActantRow || searchSections.find(name => name === Localizable.t('recipient'))) {
+      rows['recipient'] = actantRows;
+      sections.push('recipient');
+    };
 
     return {rows, sections};
   };

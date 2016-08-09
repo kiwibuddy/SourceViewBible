@@ -71,9 +71,13 @@
     "search-references": "Search References",
     "bcv": "Chapter and Verse",
     "bso": "Source and Occurrence",
+    "name": "Name",
     "gender": "Gender",
     "gender-female": "Female",
     "gender-male": "Male",
+    "nature": "Nature",
+    "profession": "Profession",
+    "role": "Role",
     "actant-number": {
       "Group": "Group",
       "Individual": "Individual"
