@@ -29,12 +29,15 @@ function filterNature(type: string, key: string) {
 }
 
 function filterGender(type: string, key: string) {
-  const gender = (key === 'Male' ? 2 : 1);
+  const id = (key === 'Male' ? 2 : 1);
   return ({
     id: 'filter-' + Date.now(),
     type: 'gender',
     actantType: type,
-    gender
+    gender: {
+      id,
+      key
+    }
   });
 }
 

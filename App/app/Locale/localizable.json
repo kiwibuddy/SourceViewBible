@@ -92,6 +92,10 @@
       "Chron_Eschatos": "Eschatos",
       "Chron_PreAbraham": "Pre-Abraham",
     },
+    "genders": {
+      "Female": "Female",
+      "Male": "Male"
+    },
     "natures": {
       "Angelic": "Angelic",
       "Demonic": "Demonic",

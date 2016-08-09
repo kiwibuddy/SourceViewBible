@@ -245,9 +245,9 @@ export default class Card extends Component {
 
         case 'gender':
           if (filter.actantType === 'recipient') {
-            predicates.push(ComparisonPredicate.predicateWith('recipient_gender_statements.id', '=', filter.gender));
+            predicates.push(ComparisonPredicate.predicateWith('recipient_gender_statements.id', '=', filter.gender.id));
           } else {
-            predicates.push(ComparisonPredicate.predicateWith('source_gender_statements.id', '=', filter.gender));
+            predicates.push(ComparisonPredicate.predicateWith('source_gender_statements.id', '=', filter.gender.id));
           }
           break;
 
