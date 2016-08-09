@@ -23,6 +23,7 @@ import ChronologyRangeFilterItem from './ChronologyRangeFilterItem';
 import ChronologyFilterItem from './ChronologyFilterItem';
 import GenderFilterItem from './GenderFilterItem';
 import NatureFilterItem from './NatureFilterItem';
+import ProfessionFilterItem from './ProfessionFilterItem';
 import SphereFilterItem from './SphereFilterItem';
 import WordFilterItem from './WordFilterItem';
 import AddFilterItem from './AddFilterItem';
@@ -50,7 +51,7 @@ const FilterItems = (props: Props) => {
       case 'actant-number':
         Item = ActantNumberFilterItem;
         break;
-        
+
       case 'book-range':
         Item = BookRangeFilterItem;
         break;
@@ -73,6 +74,10 @@ const FilterItems = (props: Props) => {
 
       case 'nature':
         Item = NatureFilterItem;
+        break;
+
+      case 'profession':
+        Item = ProfessionFilterItem;
         break;
 
       case 'sphere':

@@ -62,6 +62,7 @@ import BooksFilter from '../Scenes/DiscoveryCenter/Filters/BooksFilter';
 import ChronologyFilter from '../Scenes/DiscoveryCenter/Filters/ChronologyFilter';
 import ChronologyFilters from '../Scenes/DiscoveryCenter/Filters/ChronologyFilters';
 import NatureFilter from '../Scenes/DiscoveryCenter/Filters/NatureFilter';
+import ProfessionFilter from '../Scenes/DiscoveryCenter/Filters/ProfessionFilter';
 import RoleFilter from '../Scenes/DiscoveryCenter/Filters/RoleFilter';
 import SpheresFilter from '../Scenes/DiscoveryCenter/Filters/SpheresFilter';
 import WordFilter from '../Scenes/DiscoveryCenter/Filters/WordFilter'
@@ -72,6 +73,7 @@ export const booksFilterURL = router.addRoute('/DiscoveryCenter/Filters/BooksFil
 export const chronologyFiltersURL = router.addRoute('/DiscoveryCenter/Filters/ChronologyFilters', ChronologyFilters);
 export const chronologyFilterURL = router.addRoute('/DiscoveryCenter/Filters/ChronologyFilter', ChronologyFilter);
 export const natureFilterURL = router.addRoute('/DiscoveryCenter/Filters/NatureFilter', NatureFilter);
+export const professionFilterURL = router.addRoute('/DiscoveryCenter/Filters/ProfessionFilter', ProfessionFilter);
 export const roleFilterURL = router.addRoute('/DiscoveryCenter/Filters/RoleFilter', RoleFilter);
 export const spheresFilterURL = router.addRoute('/DiscoveryCenter/Filters/SpheresFilter', SpheresFilter);
 export const wordFilterURL = router.addRoute('/DiscoveryCenter/Filters/WordFilter', WordFilter);

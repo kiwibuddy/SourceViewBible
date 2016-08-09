@@ -15,7 +15,7 @@ import {
   StyleSheet,
 } from '../../../Common';
 
-import { natureFilterURL, roleFilterURL } from '../../../Navigation';
+import { natureFilterURL, professionFilterURL, roleFilterURL } from '../../../Navigation';
 
 type Props = {
   navigate: Function,
@@ -37,7 +37,7 @@ const ActantFilters = (props: Props) => {
         <Text style={StyleSheet.styles.cell.title}>Nature</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.navigate(professionFilterURL({title: 'Profession', type: props.type}))}>
         <Text style={StyleSheet.styles.cell.title}>Profession</Text>
       </TouchableOpacity>
       <View style={styles.separator} />

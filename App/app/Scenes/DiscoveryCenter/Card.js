@@ -255,6 +255,10 @@ export default class Card extends Component {
           predicates.push(ComparisonPredicate.predicateWith(`${filter.actantType}_nature_statements.id`, '=', filter.nature.id));
           break;
 
+        case 'profession':
+          predicates.push(ComparisonPredicate.predicateWith(`${filter.actantType}_profession_statements.id`, '=', filter.profession.id));
+          break;
+
         case 'role':
           break;
 

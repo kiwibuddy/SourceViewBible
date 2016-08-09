@@ -400,8 +400,14 @@ const ProfessionSchema = {
   }
 }
 
-class Profession extends Realm.Object {
+export class Profession extends Realm.Object {
+  static all() {
+    return realm.objects('Profession').sorted('key');
+  }
 
+  get name() {
+    return Localizable.t('professions.' + this.key);
+  }
 }
 Profession.schema = ProfessionSchema;
 
