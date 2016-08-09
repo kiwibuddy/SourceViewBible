@@ -70,8 +70,12 @@ export default class DiscoveryCenterOccurrences extends Component {
 
   _renderRow = (occurrence: Object, sectionID: any, rowID: any) => {
     return (
-      <TouchableOpacity key={occurrence.id} style={StyleSheet.styles.listItem} onPress={() => {}}>
-        <Text style={StyleSheet.styles.cell.title}>Occurrence</Text>
+      <TouchableOpacity key={occurrence.id} style={styles.listItemContainer} onPress={() => {}}>
+        <Text style={StyleSheet.styles.cell.occurence}>1</Text>
+        <View style={styles.listItem}>
+          <Text style={styles.body}>Lorem ipsum dolor sit amet, eleifend varius. Risus vitae mauris cras lectus ipsum ante, semper id, tincidunt nunc magnis vehicula magnis in, magna massa, lectus donec vestibulum interdum.</Text>
+          <Text style={StyleSheet.styles.cell.subtitle}>Genesis 1:1</Text>
+        </View>
       </TouchableOpacity>
     );
   };
@@ -84,5 +88,19 @@ const styles = StyleSheet.create({
   separator: {
     ...StyleSheet.styles.separator,
     marginLeft: 8,
+  },
+  listItemContainer: {
+    paddingLeft: 8,
+    paddingRight: 15,
+    paddingVertical: 10,
+    flexDirection: 'row',
+  },
+  listItem: {
+    flex: 1,
+    flexDirection: 'column',
+    paddingLeft: 3,
+  },
+  body: {
+    paddingBottom: 5,
   },
 });

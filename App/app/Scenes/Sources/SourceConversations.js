@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
   listItem: {
     flex: 1,
     flexDirection: 'column',
-    paddingLeft: 8,
+    paddingLeft: 5,
   },
   separator: {
     ...StyleSheet.styles.separator,
