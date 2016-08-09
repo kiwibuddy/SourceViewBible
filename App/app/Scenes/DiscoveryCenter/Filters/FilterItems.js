@@ -16,6 +16,7 @@ import {
 } from '../../../Common';
 
 import FilterItem from './FilterItem';
+import ActantFilterItem from './ActantFilterItem';
 import ActantNumberFilterItem from './ActantNumberFilterItem';
 import BookRangeFilterItem from './BookRangeFilterItem';
 import BookFilterItem from './BookFilterItem';
@@ -48,6 +49,10 @@ const FilterItems = (props: Props) => {
     let Item = null;
 
     switch (filter.type) {
+      case 'actant':
+        Item = ActantFilterItem;
+        break;
+        
       case 'actant-number':
         Item = ActantNumberFilterItem;
         break;

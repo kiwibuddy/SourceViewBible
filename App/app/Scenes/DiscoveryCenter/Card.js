@@ -224,6 +224,10 @@ export default class Card extends Component {
     const predicates = [];
     card.filters.forEach(filter => {
       switch(filter.type) {
+        case 'actant':
+          predicates.push(ComparisonPredicate.predicateWith(`${filter.actantType}_statements.id`, '=', filter.actant.id));
+          break;
+
         case 'actant-number':
           predicates.push(ComparisonPredicate.predicateWith(`${filter.actantType}_actant_number_statements.id`, '=', filter.actantNumber.id));
           break;

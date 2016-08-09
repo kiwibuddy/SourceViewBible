@@ -204,6 +204,10 @@ export class Actant extends Realm.Object {
     return realm.objectForPrimaryKey('Actant', id ? parseInt(id) : 0);
   }
 
+  static recipients() {
+    return realm.objects('Actant').filtered('isSource = $0', true);
+  }
+
   static sources() {
     return realm.objects('Actant').filtered('isSource = $0', true);
   }

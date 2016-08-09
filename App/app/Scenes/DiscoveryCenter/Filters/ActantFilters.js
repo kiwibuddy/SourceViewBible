@@ -15,7 +15,7 @@ import {
   StyleSheet,
 } from '../../../Common';
 
-import { natureFilterURL, professionFilterURL, roleFilterURL } from '../../../Navigation';
+import { actantFilterURL, natureFilterURL, professionFilterURL, roleFilterURL } from '../../../Navigation';
 
 type Props = {
   navigate: Function,
@@ -25,7 +25,7 @@ type Props = {
 const ActantFilters = (props: Props) => {
   return (
     <ScrollView style={styles.container}>
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.navigate(actantFilterURL({title: 'Name', type: props.type}))}>
         <Text style={StyleSheet.styles.cell.title}>Name</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
