@@ -15,12 +15,14 @@ import {
   StyleSheet,
 } from '../../../Common';
 
+import { cardWithFilter } from './FilterUtils';
+
 type Props = {
   navigate: Function,
   onDone: Function,
 };
 
-function filterRole(type: string, key: string) {
+function filterRole(filter: Object, type: string, key: string) {
   let id = null;
   switch (key) {
     case 'narrator':
@@ -44,6 +46,7 @@ function filterRole(type: string, key: string) {
       id: 'filter-' + Date.now(),
       type: 'role',
       actantType: type,
+      ...filter,
       role: {
         id,
         key
@@ -54,19 +57,19 @@ function filterRole(type: string, key: string) {
 const RoleFilters = (props: Props) => {
   return (
     <ScrollView style={styles.container}>
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterRole(props.type, 'narrator'))}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(cardWithFilter(props.card, filterRole(props.filter, props.type, 'narrator')))}>
         <Text style={StyleSheet.styles.cell.title}>Narrator</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterRole(props.type, 'god'))}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(cardWithFilter(props.card, filterRole(props.filter, props.type, 'god')))}>
         <Text style={StyleSheet.styles.cell.title}>God</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterRole(props.type, 'lead'))}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(cardWithFilter(props.card, filterRole(props.filter, props.type, 'lead')))}>
         <Text style={StyleSheet.styles.cell.title}>Lead</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterRole(props.type, 'support'))}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(cardWithFilter(props.card, filterRole(props.filter, props.type, 'support')))}>
         <Text style={StyleSheet.styles.cell.title}>Support</Text>
       </TouchableOpacity>
       <View style={styles.separator} />

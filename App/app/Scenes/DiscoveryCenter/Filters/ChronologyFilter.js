@@ -21,6 +21,8 @@ import {
   Localizable
 } from '../../../Common';
 
+import { cardWithFilter } from './FilterUtils';
+
 import { Chronology } from '../../../Database';
 
 type Props = {
@@ -68,10 +70,11 @@ export default class Chronologys extends Component {
     const filter = {
       id: 'filter-' + Date.now(),
       type: 'chronology',
+      ...this.props.filter,
       chronology
     }
     return (
-      <TouchableOpacity key={chronology.id} style={StyleSheet.styles.listItem} onPress={() => this.props.onDone(filter)}>
+      <TouchableOpacity key={chronology.id} style={StyleSheet.styles.listItem} onPress={() => this.props.onDone(cardWithFilter(this.props.card, filter))}>
         <Text style={StyleSheet.styles.cell.title}>{chronology.name}</Text>
       </TouchableOpacity>
     );

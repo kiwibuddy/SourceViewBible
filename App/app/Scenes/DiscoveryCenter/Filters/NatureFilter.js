@@ -15,25 +15,29 @@ import {
   StyleSheet,
 } from '../../../Common';
 
+import { cardWithFilter } from './FilterUtils';
+
 import { Nature } from '../../../Database';
 
 
-function filterNature(type: string, key: string) {
+function filterNature(filter: Object, type: string, key: string) {
   const nature = Nature.findByKey(key);
   return ({
     id: 'filter-' + Date.now(),
     type: 'nature',
     actantType: type,
+    ...filter,
     nature
   });
 }
 
-function filterGender(type: string, key: string) {
+function filterGender(filter: Object, type: string, key: string) {
   const id = (key === 'Male' ? 2 : 1);
   return ({
     id: 'filter-' + Date.now(),
     type: 'gender',
     actantType: type,
+    ...filter,
     gender: {
       id,
       key
@@ -41,12 +45,13 @@ function filterGender(type: string, key: string) {
   });
 }
 
-function filterActantNumber(type: string, key: string) {
+function filterActantNumber(filter: Object, type: string, key: string) {
   const id = (key === 'Individual' ? 2 : 1);
   return ({
     id: 'filter-' + Date.now(),
     type: 'actant-number',
     actantType: type,
+    ...filter,
     actantNumber: {
       id,
       key
@@ -63,39 +68,39 @@ type Props = {
 const NatureFilters = (props: Props) => {
   return (
     <ScrollView style={styles.container}>
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterNature(props.type, 'Divine'))}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(cardWithFilter(props.card, filterNature(props.filter, props.type, 'Divine')))}>
         <Text style={StyleSheet.styles.cell.title}>Divine</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterNature(props.type, 'Human'))}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(cardWithFilter(props.card, filterNature(props.filter, props.type, 'Human')))}>
         <Text style={StyleSheet.styles.cell.title}>Human</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterActantNumber(props.type, 'Group'))}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(cardWithFilter(props.card, filterActantNumber(props.filter, props.type, 'Group')))}>
         <Text style={StyleSheet.styles.cell.title}>Human Group</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterActantNumber(props.type, 'Individual'))}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(cardWithFilter(props.card, filterActantNumber(props.filter, props.type, 'Individual')))}>
         <Text style={StyleSheet.styles.cell.title}>Human Individual</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterGender(props.type, 'Male'))}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(cardWithFilter(props.card, filterGender(props.filter, props.type, 'Male')))}>
         <Text style={StyleSheet.styles.cell.title}>Male</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterGender(props.type, 'Female'))}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(cardWithFilter(props.card, filterGender(props.filter, props.type, 'Female')))}>
         <Text style={StyleSheet.styles.cell.title}>Female</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterNature(props.type, 'Angelic'))}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(cardWithFilter(props.card, filterNature(props.filter, props.type, 'Angelic')))}>
         <Text style={StyleSheet.styles.cell.title}>Angelic</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterNature(props.type, 'Demonic'))}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(cardWithFilter(props.card, filterNature(props.filter, props.type, 'Demonic')))}>
         <Text style={StyleSheet.styles.cell.title}>Demonic</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterNature(props.type, 'Other'))}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(cardWithFilter(props.card, filterNature(props.filter, props.type, 'Other')))}>
         <Text style={StyleSheet.styles.cell.title}>Other</Text>
       </TouchableOpacity>
       <View style={styles.separator} />

@@ -122,21 +122,14 @@ export default class DiscoveryCenter extends Component {
     if (popover == null) return null;
     const route = popover.props.route;
     if (route == null) return null;
+    const { card } = popover.props;
 
     return (
       <Popover
+        {...popover.props}
         initialRoute={route}
-        onDone={(filter) => {
-          const { card } = popover.props;
-          const filters = [
-            ...card.filters,
-            filter
-          ];
-
-          popover.onComplete({
-            ...card,
-            filters
-          });
+        onDone={(card) => {
+          popover.onComplete(card);
           this._hidePopover();
         }}
         onPressCancel={this._hidePopover}

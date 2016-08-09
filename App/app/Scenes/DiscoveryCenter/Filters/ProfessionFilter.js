@@ -21,6 +21,8 @@ import {
   Localizable
 } from '../../../Common';
 
+import { cardWithFilter } from './FilterUtils';
+
 import { Profession } from '../../../Database';
 
 type Props = {
@@ -69,10 +71,11 @@ export default class Professions extends Component {
       id: 'filter-' + Date.now(),
       type: 'profession',
       actantType: this.props.type,
+      ...this.props.filter,
       profession
     }
     return (
-      <TouchableOpacity key={profession.id} style={StyleSheet.styles.listItem} onPress={() => this.props.onDone(filter)}>
+      <TouchableOpacity key={profession.id} style={StyleSheet.styles.listItem} onPress={() => this.props.onDone(cardWithFilter(this.props.card, filter))}>
         <Text style={StyleSheet.styles.cell.title}>{profession.name}</Text>
       </TouchableOpacity>
     );

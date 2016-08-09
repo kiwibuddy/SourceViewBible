@@ -32,6 +32,8 @@ const SEGMENT_INDEXES = {
 
 const LISTVIEW_REF = 'LISTVIEW_REF';
 
+import { cardWithFilter } from './FilterUtils';
+
 import { Book } from '../../../Database';
 
 type Props = {
@@ -90,10 +92,11 @@ export default class Books extends Component {
     const filter = {
       id: 'filter-' + Date.now(),
       type: 'book',
+      ...this.props.filter,
       book
     }
     return (
-      <TouchableOpacity key={book.id} style={StyleSheet.styles.listItem} onPress={() => this.props.onDone(filter)}>
+      <TouchableOpacity key={book.id} style={StyleSheet.styles.listItem} onPress={() => this.props.onDone(cardWithFilter(this.props.card, filter))}>
         <Text style={StyleSheet.styles.cell.title}>{book.name}</Text>
       </TouchableOpacity>
     );

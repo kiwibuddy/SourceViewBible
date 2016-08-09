@@ -17,7 +17,7 @@ import {
 } from '../../../Common';
 
 import { chronologyFilterURL } from '../../../Navigation';
-
+import { cardWithFilter } from './FilterUtils';
 import { Chronology } from '../../../Database';
 
 type Props = {
@@ -44,7 +44,7 @@ function AllTimeFilter() {
 const ChronologyFilters = (props: Props) => {
   return (
     <ScrollView style={styles.container}>
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(AllTimeFilter())}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(cardWithFilter(props.card, AllTimeFilter()))}>
         <Text style={StyleSheet.styles.cell.title}>All Time</Text>
       </TouchableOpacity>
       <View style={styles.separator} />

@@ -17,7 +17,7 @@ import {
 } from '../../../Common';
 
 import { booksFilterURL } from '../../../Navigation';
-
+import { cardWithFilter } from './FilterUtils';
 import { Book } from '../../../Database';
 
 type Props = {
@@ -42,7 +42,7 @@ function filterBooks(fromID: string, toID: string) {
 const BookFilters = (props: Props) => {
   return (
     <ScrollView style={styles.container}>
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterBooks('genesis', 'revelation'))}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(cardWithFilter(props.card, filterBooks('genesis', 'revelation')))}>
         <Text style={StyleSheet.styles.cell.title}>Whole Bible</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
@@ -51,11 +51,11 @@ const BookFilters = (props: Props) => {
         <Image source={require('../Images/disclosure.png')} />
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterBooks('genesis', 'malachi'))}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(cardWithFilter(props.card, filterBooks('genesis', 'malachi')))}>
         <Text style={StyleSheet.styles.cell.title}>Old Testament</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterBooks('matthew', 'revelation'))}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(cardWithFilter(props.card, filterBooks('matthew', 'revelation')))}>
         <Text style={StyleSheet.styles.cell.title}>New Testament</Text>
       </TouchableOpacity>
       <View style={styles.separator} />

@@ -15,13 +15,14 @@ import {
 } from '../../../Common';
 
 import { booksFilterURL } from '../../../Navigation';
-
+import { cardWithFilter } from './FilterUtils';
 import { Book } from '../../../Database';
 
-function filterWord(word: string) {
+function filterWord(filter: Object, word: string) {
   return ({
     id: 'filter-' + Date.now(),
     type: 'word',
+    ...filter,
     word
   });
 }
@@ -56,7 +57,7 @@ class WordFilter extends Component {
           autoFocus={true}
           clearButtonMode="always"
           onChangeText={(text) => this.setState({word: text})}
-          onSubmitEditing={(text) => this.props.onDone(filterWord(this.state.word))}
+          onSubmitEditing={(text) => this.props.onDone(cardWithFilter(this.props.card, filterWord(this.props.filter, this.state.word)))}
           placeholder="Word"
           style={styles.textInput}
           value={this.state.word}
