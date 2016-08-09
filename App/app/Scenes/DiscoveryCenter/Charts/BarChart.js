@@ -49,7 +49,7 @@ function renderChart(card) {
     }
   });
 
-  const bars = Object.keys(values).sort((a,b) => values[a] > values[b] ? -1 : 1).map(key => ({key, color: 'red', value:values[key]}));
+  const bars = Object.keys(values).sort((a,b) => values[a] > values[b] ? -1 : 1).map(label => ({label, color: 'red', value: values[label]}));
 
   return (
     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.chart}>
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
   chart: {
     flex: 1,
     height: 295,
-    paddingTop: 44,
+    paddingTop: 48,
     paddingBottom: 120,
   },
 });
