@@ -5,6 +5,7 @@ require './db/seeds/gender.rb'
 require './db/seeds/natures.rb'
 require './db/seeds/actant_number.rb'
 require './db/seeds/chronology.rb'
+require './db/seeds/source_types'
 
 source_statements = EMDROS[:statement_objects].map { |s| { id: s[:mdf_sources].to_s.strip.to_i, statement_id: s[:object_id_d]}}
 source_statements.each do |source_statement|
