@@ -15,7 +15,7 @@ import {
   StyleSheet,
 } from '../../../Common';
 
-import { FilterType } from '../Constants';
+import { actantFiltersURL, bookFiltersURL, chronologyFiltersURL, spheresFilterURL, wordFilterURL } from '../../../Navigation';
 
 const hitSlop = {top: 10, left: 5, bottom: 10, right: 0};
 
@@ -63,24 +63,24 @@ export default class AddFilterItem extends Component {
     return (
       <View style={StyleSheet.styles.discoveryCenter.blockContainer}>
         <View style={StyleSheet.styles.discoveryCenter.blockItem}>
-          <TouchableOpacity hitSlop={hitSlop} onPress={() => this._onPressFilterType(FilterType.BOOK)} >
+          <TouchableOpacity hitSlop={hitSlop} onPress={() => this._onPressFilterType(bookFiltersURL({title: 'Book Filters'}))} >
             <Text style={styles.button}>BOOKS</Text>
           </TouchableOpacity>
-          <TouchableOpacity hitSlop={hitSlop} onPress={() => this._onPressFilterType(FilterType.CHRONOLOGY)} >
+          <TouchableOpacity hitSlop={hitSlop} onPress={() => this._onPressFilterType(chronologyFiltersURL({title: 'Time Period Filters'}))} >
             <Text style={styles.button}>TIME PERIOD</Text>
           </TouchableOpacity>
-          <TouchableOpacity hitSlop={hitSlop} onPress={() => this._onPressFilterType(FilterType.WORD)} >
+          <TouchableOpacity hitSlop={hitSlop} onPress={() => this._onPressFilterType(wordFilterURL({title: 'Word Filter'}))} >
             <Text style={styles.button}>WORDS</Text>
           </TouchableOpacity>
         </View>
         <View style={StyleSheet.styles.discoveryCenter.blockItem}>
-          <TouchableOpacity hitSlop={hitSlop} onPress={() => this._onPressFilterType(FilterType.SOURCE)} >
+          <TouchableOpacity hitSlop={hitSlop} onPress={() => this._onPressFilterType(actantFiltersURL({title: 'Source Filters', type: 'source'}))} >
             <Text style={styles.button}>SOURCES</Text>
           </TouchableOpacity>
-          <TouchableOpacity hitSlop={hitSlop} onPress={() => this._onPressFilterType(FilterType.RECIPIENT)} >
+          <TouchableOpacity hitSlop={hitSlop} onPress={() => this._onPressFilterType(actantFiltersURL({title: 'Recipient Filters', type: 'recipient'}))} >
             <Text style={styles.button}>RECIPIENTS</Text>
           </TouchableOpacity>
-          <TouchableOpacity hitSlop={hitSlop} onPress={() => this._onPressFilterType(FilterType.SPHERE)} >
+          <TouchableOpacity hitSlop={hitSlop} onPress={() => this._onPressFilterType(spheresFilterURL({title: 'Sphere Filter'}))} >
             <Text style={styles.button}>SPHERES</Text>
           </TouchableOpacity>
         </View>
