@@ -314,9 +314,6 @@ export default class Card extends Component {
     let statements = [];
     if (predicates.length > 0) {
       const predicate = CompoundPredicate.andPredicateWithSubpredicates(predicates);
-
-      console.log('Predicate', predicate.predicateFormat);
-
       statements = await Statement.identifiersMatchingPredicate(predicate);
     }
 
