@@ -45,7 +45,7 @@ export default class AddFilterItem extends Component {
       <View style={styles.filterItem}>
         <View style={StyleSheet.styles.discoveryCenter.topContainer}>
           <View style={StyleSheet.styles.discoveryCenter.leftContainer}>
-            <TouchableOpacity hitSlop={hitSlop} onPress={() => this.setState({showFilterOptions: true})}>
+            <TouchableOpacity hitSlop={hitSlop} onPress={() => this.setState({showFilterOptions: !this.state.showFilterOptions})}>
               <Text style={[styles.button, addFilterButtonStyle]}>+ ADD FILTER</Text>
             </TouchableOpacity>
           </View>
