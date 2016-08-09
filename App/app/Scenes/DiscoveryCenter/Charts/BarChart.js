@@ -49,7 +49,7 @@ function renderChart(card) {
     }
   });
 
-  const bars = Object.keys(values).sort((a,b) => values[a] > values[b] ? -1 : 1).slice(0, 20).map(key => ({key, color: 'red', value:values[key]}));
+  const bars = Object.keys(values).sort((a,b) => values[a] > values[b] ? -1 : 1).map(key => ({key, color: 'red', value:values[key]}));
 
   return (
     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.chart}>
@@ -58,7 +58,6 @@ function renderChart(card) {
         barStyle={{flex: 0, width: 8, marginHorizontal: 2}}
         deltaStyle={{backgroundColor: 'transparent'}}
         horizontal={false}
-        maxChartValue={100}
       />
     </ScrollView>
   );
