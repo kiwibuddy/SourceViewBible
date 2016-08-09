@@ -15,7 +15,27 @@ import {
   StyleSheet,
 } from '../../../Common';
 
-import { chronologyFilterURL } from '../../../Navigation';
+import { Nature } from '../../../Database';
+
+
+function filterNature(type: string, key: string) {
+  const nature = Nature.findByKey(key);
+  return ({
+    id: 'filter-' + Date.now(),
+    type: type + '-nature',
+    nature
+  });
+}
+
+function filterGender(type: string, key: string) {
+  const gender = (key === 'Male' ? 2 : 1);
+  return ({
+    id: 'filter-' + Date.now(),
+    type: type + '-gender',
+    gender
+  });
+}
+
 
 type Props = {
   navigate: Function,
@@ -25,11 +45,11 @@ type Props = {
 const NatureFilters = (props: Props) => {
   return (
     <ScrollView style={styles.container}>
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterNature(props.type, 'Divine'))}>
         <Text style={StyleSheet.styles.cell.title}>Divine</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterNature(props.type, 'Human'))}>
         <Text style={StyleSheet.styles.cell.title}>Human</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
@@ -41,23 +61,23 @@ const NatureFilters = (props: Props) => {
         <Text style={StyleSheet.styles.cell.title}>Human Individual</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterGender(props.type, 'Male'))}>
         <Text style={StyleSheet.styles.cell.title}>Male</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterGender(props.type, 'Female'))}>
         <Text style={StyleSheet.styles.cell.title}>Female</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterNature(props.type, 'Angelic'))}>
         <Text style={StyleSheet.styles.cell.title}>Angelic</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterNature(props.type, 'Demonic'))}>
         <Text style={StyleSheet.styles.cell.title}>Demonic</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterNature(props.type, 'Other'))}>
         <Text style={StyleSheet.styles.cell.title}>Other</Text>
       </TouchableOpacity>
       <View style={styles.separator} />

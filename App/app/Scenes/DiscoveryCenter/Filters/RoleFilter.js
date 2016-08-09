@@ -15,12 +15,14 @@ import {
   StyleSheet,
 } from '../../../Common';
 
-import { chronologyFilterURL } from '../../../Navigation';
-
 type Props = {
   navigate: Function,
   onDone: Function,
 };
+
+function filterRole(roleID: string) {
+
+}
 
 const RoleFilters = (props: Props) => {
   return (

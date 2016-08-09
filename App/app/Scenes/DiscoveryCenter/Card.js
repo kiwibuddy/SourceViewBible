@@ -243,6 +243,28 @@ export default class Card extends Component {
           predicates.push(ComparisonPredicate.predicateWith('chronology_statements.id', 'IN', chronologies));
           break;
 
+        case 'recipient-gender':
+          predicates.push(ComparisonPredicate.predicateWith('recipient_gender_statements.id', '=', filter.gender))
+          break;
+
+        case 'recipient-nature':
+          predicates.push(ComparisonPredicate.predicateWith('recipient_nature_statements.id', '=', filter.nature.id))
+          break;
+
+        case 'recipient-role':
+          break;
+
+        case 'source-gender':
+          predicates.push(ComparisonPredicate.predicateWith('source_gender_statements.id', '=', filter.gender))
+          break;
+
+        case 'source-nature':
+          predicates.push(ComparisonPredicate.predicateWith('source_nature_statements.id', '=', filter.nature.id))
+          break;
+
+        case 'source-role':
+          break;
+
         case 'sphere':
           const SPHERES = ["family", "economics", "government", "religion", "education", "communication", "celebration"];
           const sphereID = SPHERES.indexOf(filter.sphere.id) + 1;

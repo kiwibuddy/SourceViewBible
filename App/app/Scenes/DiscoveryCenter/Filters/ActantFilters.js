@@ -29,11 +29,11 @@ const ActantFilters = (props: Props) => {
         <Text style={StyleSheet.styles.cell.title}>Name</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.navigate(roleFilterURL({title: 'Role'}))}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.navigate(roleFilterURL({title: 'Role', type: props.type}))}>
         <Text style={StyleSheet.styles.cell.title}>Role</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.navigate(natureFilterURL({title: 'Nature'}))}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.navigate(natureFilterURL({title: 'Nature', type: props.type}))}>
         <Text style={StyleSheet.styles.cell.title}>Nature</Text>
       </TouchableOpacity>
       <View style={styles.separator} />

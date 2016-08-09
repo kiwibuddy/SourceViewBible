@@ -160,6 +160,7 @@ export default class Popover extends Component {
     return (
       <View style={{flex: 1, paddingTop: NAV_BAR_HEIGHT}}>
         <Scene
+          {...navigatorRoute}
           {...params}
           navigate={(route: any, options?: any) => this._navigate(navigator, route, options)}
           onDone={this.props.onDone}

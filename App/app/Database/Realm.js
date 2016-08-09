@@ -381,7 +381,9 @@ const NatureSchema = {
 };
 
 export class Nature extends Realm.Object {
-
+  static findByKey(key: string) {
+    return realm.objects('Nature').filtered('key = $0', key)[0];
+  }
 }
 Nature.schema = NatureSchema;
 
