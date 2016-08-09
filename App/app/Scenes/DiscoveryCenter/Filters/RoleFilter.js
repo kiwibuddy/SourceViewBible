@@ -15,30 +15,30 @@ import {
   StyleSheet,
 } from '../../../Common';
 
-import { natureFilterURL, roleFilterURL } from '../../../Navigation';
+import { chronologyFilterURL } from '../../../Navigation';
 
 type Props = {
   navigate: Function,
   onDone: Function,
 };
 
-const ActantFilters = (props: Props) => {
+const RoleFilters = (props: Props) => {
   return (
     <ScrollView style={styles.container}>
       <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
-        <Text style={StyleSheet.styles.cell.title}>Name</Text>
-      </TouchableOpacity>
-      <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.navigate(roleFilterURL({title: 'Role'}))}>
-        <Text style={StyleSheet.styles.cell.title}>Role</Text>
-      </TouchableOpacity>
-      <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.navigate(natureFilterURL({title: 'Nature'}))}>
-        <Text style={StyleSheet.styles.cell.title}>Nature</Text>
+        <Text style={StyleSheet.styles.cell.title}>Narrator</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
       <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
-        <Text style={StyleSheet.styles.cell.title}>Profession</Text>
+        <Text style={StyleSheet.styles.cell.title}>Lead</Text>
+      </TouchableOpacity>
+      <View style={styles.separator} />
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
+        <Text style={StyleSheet.styles.cell.title}>Support</Text>
+      </TouchableOpacity>
+      <View style={styles.separator} />
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
+        <Text style={StyleSheet.styles.cell.title}>Other</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
     </ScrollView>
@@ -55,4 +55,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ActantFilters;
+export default RoleFilters;
