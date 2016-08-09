@@ -18,11 +18,24 @@ import Chart from './Chart';
 import { axisItemsURL } from '../../../Navigation';
 
 type Props = {
+  card: Object,
   onPressAxis: Function,
   onPressChartType: Function,
 };
 
 const BarChart = (props: Props) => {
+  const { card } = props;
+
+  let xAxisTitle = "Choose X Axis";
+  if (props.card.xAxis) {
+    xAxisTitle = props.card.xAxis.name;
+  }
+
+  let yAxisTitle = "Choose Y Axis";
+  if (props.card.yAxis) {
+    yAxisTitle = props.card.yAxis.name;
+  }
+
   return (
     <Chart>
       <View style={StyleSheet.styles.discoveryCenter.chartContainer}>
@@ -31,14 +44,14 @@ const BarChart = (props: Props) => {
       <Chart.Header>
         <Chart.DropdownButton
           image={require('../Images/chart-icn-bar-xaxis.png')}
-          onPress={() => props.onPressAxis(axisItemsURL({title: "Choose X Axis", type: 'x'}))}
-          title="Choose X Axis"
+          onPress={() => props.onPressAxis(axisItemsURL({title: "Choose X Axis", axis: 'xAxis'}))}
+          title={xAxisTitle}
           style={StyleSheet.styles.discoveryCenter.leftContainer}
         />
         <Chart.DropdownButton
           image={require('../Images/chart-icn-bar-yaxis.png')}
-          onPress={() => props.onPressAxis(axisItemsURL({title: "Choose Y Axis", type: 'y'}))}
-          title="Choose Y Axis"
+          onPress={() => props.onPressAxis(axisItemsURL({title: "Choose Y Axis", axis: 'yAxis'}))}
+          title={yAxisTitle}
           style={StyleSheet.styles.discoveryCenter.rightContainer}
         />
       </Chart.Header>

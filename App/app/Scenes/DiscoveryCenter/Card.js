@@ -113,24 +113,33 @@ export default class Card extends Component {
 
   _renderChart = () => {
     const { card } = this.state;
+
+    let ChartView = null;
     switch (card.chartType) {
       case Chart.Type.BAR:
-        return <BarChart
-          onPressAxis={this._onPressChartAxis}
-          onPressChartType={this._onPressChartType}
-        />;
+        ChartView = BarChart;
+        break;
 
       case Chart.Type.PIE:
-        return <PieChart onPressChartType={this._onPressChartType} />;
+        ChartView = PieChart;
+        break;
 
       case Chart.Type.CLOUD:
-        return <CloudChart onPressChartType={this._onPressChartType} />;
+        ChartView = CloudChart;
+        break;
 
       default:
-        return <ChartBlankslate
-          onPressChartType={this._onPressChartType}
-        />;
+        ChartView = ChartBlankslate;
+        break;
     }
+
+    return (
+      <ChartView
+        card={card}
+        onPressAxis={this._onPressChartAxis}
+        onPressChartType={this._onPressChartType}
+      />
+    );
   };
 
   _renderFilterItems = () => {

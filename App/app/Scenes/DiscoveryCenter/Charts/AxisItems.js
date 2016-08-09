@@ -54,7 +54,6 @@ export default class AxisItems extends Component {
         <TextInput
           autoCapitalize="words"
           autoCorrect={false}
-          autoFocus={true}
           clearButtonMode="always"
           onChangeText={(text) => this.setState({search: text})}
           placeholder="Search Data Points"
@@ -85,11 +84,34 @@ export default class AxisItems extends Component {
 
   _renderRow = (item: Object, sectionID: any, rowID: any) => {
     return (
-      <TouchableOpacity key={sectionID + '-' + item.id} style={StyleSheet.styles.listItem} onPress={() => {}}>
+      <TouchableOpacity key={sectionID + '-' + item.id} style={StyleSheet.styles.listItem} onPress={() => this._updateAxis(item, sectionID)}>
         <Text style={StyleSheet.styles.cell.title}>{item.name}</Text>
       </TouchableOpacity>
     );
   };
+
+  _updateAxis = (item: Object, type: string) => {
+    const {axis} = this.props;
+
+    const card = {
+      ...this.props.card,
+    };
+
+    let name = null;
+    if (type === 'source' || type === 'recipient') {
+      name = Localizable.t(`${type}-${item.name.toLowerCase()}`);
+    } else {
+      name = item.name;
+    }
+
+    card[axis] = {
+      id: item.id,
+      name,
+      type
+    };
+
+    this.props.onDone(card);
+  }
 
   _getRowsAndSections = () => {
     const { search } = this.state;
