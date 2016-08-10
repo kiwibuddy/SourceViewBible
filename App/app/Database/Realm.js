@@ -133,6 +133,17 @@ function BSOReferencesInText(text: string) {
   return null;
 }
 
+async function rowsWithSQL(sql: string) {
+  return new Promise((resolve, reject) => {
+    SQLite.transaction((tx) => {
+      tx.executeSql(sql, [], (tx, results) => {
+          let rows = results.rows.raw();
+          resolve(rows);
+      });
+    });
+  });
+}
+
 const BibleSchema = {
   name: 'Bible',
   properties: {
@@ -503,17 +514,6 @@ export class Statement extends Realm.Object {
     return realm.objectForPrimaryKey('Statement', id ? parseInt(id) : 0);
   }
 
-  static async statementRowsWithSQL(sql: string) {
-    return new Promise((resolve, reject) => {
-      SQLite.transaction((tx) => {
-        tx.executeSql(sql, [], (tx, results) => {
-            let rows = results.rows.raw();
-            resolve(rows);
-        });
-      });
-    });
-  }
-
   static async identifiersMatchingPredicate(predicate: CompoundPredicate) {
     if (!predicate) {
       return Statement.all().map(statement => ({id: statement.id}));
@@ -527,7 +527,7 @@ export class Statement extends Realm.Object {
       const from = tables.map(table => `INNER JOIN ${table} ON statements.id = ${table}.statement_id`).join(' ');
       const sql = `SELECT statements.id, statements.first, statements.last FROM statements ${from} WHERE ${where}`
       console.log(sql);
-      statementRows = await this.statementRowsWithSQL(sql);
+      statementRows = await rowsWithSQL(sql);
     } else {
       return Statement.all().map(statement => ({id: statement.id}));
     }
