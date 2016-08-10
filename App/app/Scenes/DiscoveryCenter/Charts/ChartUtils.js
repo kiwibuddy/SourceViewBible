@@ -5,11 +5,6 @@ import { Actant, Statement } from '../../../Database';
 
 import { Localizable } from '../../../Common';
 
-// actant.professions.forEach(profession => {
-//   const wordCount = values[profession.name] || 0;
-//   values[profession.name] = wordCount + statement.wordCount;
-// });
-
 export async function valuesForCard(card) {
   const statements = card.statements;
   const statementCount = statements.length;

@@ -157,7 +157,7 @@ export default class Card extends Component {
     const { card } = this.state;
     const statementCount = card.statements.length;
     const filterCount = card.filters.length;
-    if (filterCount== 0 && statementCount == 0) return null;
+    if (statementCount == 0) return null;
 
     return (
       <TouchableOpacity style={styles.readButton} onPress={this._onPressOccurrences}>
@@ -311,11 +311,8 @@ export default class Card extends Component {
     });
 
 
-    let statements = [];
-    if (predicates.length > 0) {
-      const predicate = CompoundPredicate.andPredicateWithSubpredicates(predicates);
-      statements = await Statement.identifiersMatchingPredicate(predicate);
-    }
+    const predicate = CompoundPredicate.andPredicateWithSubpredicates(predicates);
+    const statements = await Statement.identifiersMatchingPredicate(predicate);
 
     this.setState({
       card: {

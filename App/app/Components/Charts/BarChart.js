@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   },
   label: {
     height: 8,
-    // width: 20,
+    width: 40,
     fontSize: 8,
     textAlign: 'right',
     color: 'white',

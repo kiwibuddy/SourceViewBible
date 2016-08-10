@@ -516,7 +516,7 @@ export class Statement extends Realm.Object {
 
   static async identifiersMatchingPredicate(predicate: CompoundPredicate) {
     if (!predicate) {
-      return Statement.all();
+      return Statement.all().map(statement => ({id: statement.id}));
     }
 
     let statementIdentifiers = [];
@@ -528,6 +528,8 @@ export class Statement extends Realm.Object {
       const sql = `SELECT statements.id, statements.first, statements.last FROM statements ${from} WHERE ${where}`
       console.log(sql);
       statementRows = await this.statementRowsWithSQL(sql);
+    } else {
+      return Statement.all().map(statement => ({id: statement.id}));
     }
 
     const wordPredicates = predicate.subpredicates.filter(predicate => (predicate instanceof WordPredicate));

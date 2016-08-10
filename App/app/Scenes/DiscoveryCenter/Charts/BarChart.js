@@ -115,7 +115,7 @@ class BarChartView extends Component {
     const filterCount = card.filters.length;
     const xAxis = card.xAxis;
     const yAxis = card.yAxis;
-    return (xAxis && yAxis && filterCount > 0 && statementCount > 0);
+    return (xAxis && yAxis && statementCount > 0);
   };
 
   _renderChart = () => {
