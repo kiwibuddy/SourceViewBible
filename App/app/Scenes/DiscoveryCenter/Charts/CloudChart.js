@@ -23,44 +23,16 @@ import ParallaxMotionView from '../../../Components/Common/ParallaxMotionView';
 
 import { axisItemsURL } from '../../../Navigation';
 
-import { valuesForCard } from './ChartUtils';
-
 type Props = {
   card: Object,
+  data: Object,
   loading: boolean,
   onPressAxis: Function,
   onPressChartType: Function,
 };
 
-type State = {
-  words: any,
-  loading: boolean,
-};
-
 class CloudChartView extends Component {
   props: Props;
-  state: State;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      words: null,
-      loading: false
-    };
-  }
-
-  componentDidMount() {
-    if (!this.props.loading) {
-      this._valuesForCard(this.props.card);
-    }
-  }
-
-  componentWillReceiveProps(nextProps: Props) {
-    if (!nextProps.loading) {
-      this._valuesForCard(nextProps.card);
-    }
-  }
 
   render() {
     const { card } = this.props;
@@ -77,7 +49,7 @@ class CloudChartView extends Component {
 
     const chart = this._renderChart();
 
-    const loading = (this.state.loading ? <ActivityIndicator color="white" size="large" style={styles.activityIndicator} /> : null);
+    const loading = (this.props.loading ? <ActivityIndicator color="white" size="large" style={styles.activityIndicator} /> : null);
 
     return (
       <Chart>
@@ -101,13 +73,13 @@ class CloudChartView extends Component {
         <Chart.Footer>
           <View style={[StyleSheet.styles.discoveryCenter.leftContainer, {justifyContent: 'flex-start', paddingLeft: 5, borderRightWidth: 0}]}>
             <TouchableOpacity onPress={() => this.props.onPressChartType(Chart.Type.BAR)}>
-              <Image source={require('../Images/chart-type-bar-s.png')} />
+              <Image source={require('../Images/chart-type-bar.png')} />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => this.props.onPressChartType(Chart.Type.PIE)}>
               <Image source={require('../Images/chart-type-pie.png')} />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => this.props.onPressChartType(Chart.Type.CLOUD)}>
-              <Image source={require('../Images/chart-type-cloud.png')} />
+              <Image source={require('../Images/chart-type-cloud-s.png')} />
             </TouchableOpacity>
           </View>
           <View style={[StyleSheet.styles.discoveryCenter.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
@@ -131,12 +103,13 @@ class CloudChartView extends Component {
   };
 
   _renderChart = () => {
-    if (!this._shouldRenderChart(this.props.card) || this.state.words == null || this.state.loading) return <Image source={require('../Images/chart-cloud-blankslate.png')} />;
+    const { data } = this.props;
+    if (!this._shouldRenderChart(this.props.card) || data == null || this.props.loading) return <Image source={require('../Images/chart-cloud-blankslate.png')} />;
 
-    const words = this.state.words.slice(0, Math.min(this.state.words.length, 15)).map(word => word.label);
+    const words = data.slice(0, Math.min(data.length, 15)).map(word => word.label);
 
     return (
-      <WordCloud style={StyleSheet.styles.wordCloud}>
+      <WordCloud style={[StyleSheet.styles.wordCloud, styles.chart]}>
         <ParallaxMotionView intensity={5} style={[styles.parallax, {opacity: 0.8}]}>
           <Text style={[styles.wc1, {top: 50, alignSelf: 'center'}]}>{words[0]}</Text>
         </ParallaxMotionView>
@@ -163,19 +136,6 @@ class CloudChartView extends Component {
       </WordCloud>
     );
   };
-
-  _valuesForCard = (card) => {
-    if (this._shouldRenderChart(card)) {
-      this.setState({loading: true});
-
-      valuesForCard(card).then(values => {
-        this.setState({
-          words: values,
-          loading: false
-        });
-      });
-    }
-  }
 }
 
 const styles = StyleSheet.create({

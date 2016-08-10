@@ -22,44 +22,16 @@ import { BarChart } from '../../../Components/Charts';
 
 import { axisItemsURL } from '../../../Navigation';
 
-import { valuesForCard } from './ChartUtils';
-
 type Props = {
   card: Object,
+  data: Object,
   loading: boolean,
   onPressAxis: Function,
   onPressChartType: Function,
 };
 
-type State = {
-  bars: any,
-  loading: boolean,
-};
-
 class BarChartView extends Component {
   props: Props;
-  state: State;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      bars: null,
-      loading: false
-    };
-  }
-
-  componentDidMount() {
-    if (!this.props.loading) {
-      this._valuesForCard(this.props.card);
-    }
-  }
-
-  componentWillReceiveProps(nextProps: Props) {
-    if (!nextProps.loading) {
-      this._valuesForCard(nextProps.card);
-    }
-  }
 
   render() {
     const { card } = this.props;
@@ -76,7 +48,7 @@ class BarChartView extends Component {
 
     const chart = this._renderChart();
 
-    const loading = (this.state.loading ? <ActivityIndicator color="white" size="large" style={styles.activityIndicator} /> : null);
+    const loading = (this.props.loading ? <ActivityIndicator color="white" size="large" style={styles.activityIndicator} /> : null);
 
     return (
       <Chart>
@@ -130,13 +102,13 @@ class BarChartView extends Component {
   };
 
   _renderChart = () => {
-    const {bars} = this.state
-    if (!this._shouldRenderChart(this.props.card) || bars == null || this.state.loading) return <Image source={require('../Images/chart-bar-blankslate.png')} />;
+    const {data} = this.props
+    if (!this._shouldRenderChart(this.props.card) || data == null || this.props.loading) return <Image source={require('../Images/chart-bar-blankslate.png')} />;
 
     return (
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.chart}>
         <BarChart
-          bars={bars}
+          bars={data}
           barColor="#F74260"
           barStyle={{flex: 0, width: 8, marginHorizontal: 6, marginBottom: 100,}}
           deltaStyle={{backgroundColor: 'transparent'}}
@@ -145,19 +117,6 @@ class BarChartView extends Component {
       </ScrollView>
     );
   };
-
-  _valuesForCard = (card) => {
-    if (this._shouldRenderChart(card)) {
-      this.setState({loading: true});
-
-      valuesForCard(card).then(values => {
-        this.setState({
-          bars: values,
-          loading: false
-        });
-      });
-    }
-  }
 }
 
 const styles = StyleSheet.create({

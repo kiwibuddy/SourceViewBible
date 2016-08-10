@@ -26,6 +26,7 @@ import {
 
 import FilterItems from './Filters/FilterItems';
 import { predicateWithCard } from './Filters/FilterUtils';
+import { valuesForCard } from './Charts/ChartUtils';
 
 import { DeleteButton, DuplicateButton, ShareButton } from './Buttons';
 
@@ -52,6 +53,7 @@ type Props = {
 
 type State = {
   card: Object,
+  data: Object,
   loading: boolean,
 };
 
@@ -67,6 +69,7 @@ export default class Card extends Component {
 
     this.state = {
       card,
+      data: null,
       loading: false,
     };
   }
@@ -137,6 +140,7 @@ export default class Card extends Component {
     return (
       <ChartView
         card={card}
+        data={this.state.data}
         loading={this.state.loading}
         onPressAxis={this._onPressChartAxis}
         onPressChartType={this._onPressChartType}
@@ -257,18 +261,23 @@ export default class Card extends Component {
   };
 
   async _query() {
-    const { card } = this.state;
-    if (!card) return;
+    if (!this.state.card) return;
 
-    const predicate = predicateWithCard(card);
+    const predicate = predicateWithCard(this.state.card);
     const statements = await Statement.identifiersMatchingPredicate(predicate);
 
-    this.setState({
-      card: {
-        ...card,
-        statements
-      },
-      loading: false
+    const card = {
+      ...this.state.card,
+      statements
+    };
+
+    this.setState({card, data: null}, () => {
+      valuesForCard(card).then(values => {
+        this.setState({
+          data: values,
+          loading: false
+        });
+      });
     });
   };
 
