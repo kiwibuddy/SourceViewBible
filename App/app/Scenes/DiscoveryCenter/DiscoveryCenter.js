@@ -142,6 +142,10 @@ export default class DiscoveryCenter extends Component {
       chartType: null,
       filters: [],
       statements: [],
+      yAxis: {
+        id: 'words',
+        name: Localizable.t('words.text')
+      },
     }
   }
 
