@@ -4,6 +4,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import {
+  ActivityIndicator,
   Image,
   ScrollView,
   TouchableOpacity,
@@ -34,6 +35,7 @@ type Props = {
 
 type State = {
   bars: any,
+  loading: boolean,
 };
 
 class BarChartView extends Component {
@@ -43,7 +45,10 @@ class BarChartView extends Component {
   constructor(props: Props) {
     super(props);
 
-    this.state = {bars: null};
+    this.state = {
+      bars: null,
+      loading: props.loading
+    };
   }
 
   componentDidMount() {
@@ -72,6 +77,8 @@ class BarChartView extends Component {
     }
 
     const chart = this._renderChart();
+
+    const loading = (this.state.loading ? <ActivityIndicator color="white" size="large" style={styles.activityIndicator} /> : null);
 
     return (
       <Chart>
@@ -110,6 +117,7 @@ class BarChartView extends Component {
             </TouchableOpacity>
           </View>
         </Chart.Footer>
+        {loading}
       </Chart>
     );
   }
@@ -125,7 +133,7 @@ class BarChartView extends Component {
 
   _renderChart = () => {
     const {bars} = this.state
-    if (!this._shouldRenderChart(this.props.card) || bars == null) return <Image source={require('../Images/chart-bar-blankslate.png')} />;
+    if (!this._shouldRenderChart(this.props.card) || bars == null || this.state.loading) return <Image source={require('../Images/chart-bar-blankslate.png')} />;
 
     return (
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.chart}>
@@ -142,7 +150,14 @@ class BarChartView extends Component {
 
   _valuesForCard = (card) => {
     if (this._shouldRenderChart(card)) {
-      valuesForCard(card).then(values => this.setState({bars: values}));
+      this.setState({loading: true});
+
+      valuesForCard(card).then(values => {
+        this.setState({
+          bars: values,
+          loading: false
+        });
+      });
     }
   }
 }
@@ -154,6 +169,13 @@ const styles = StyleSheet.create({
     paddingTop: 55,
     paddingBottom: 44,
     paddingHorizontal: 8,
+  },
+  activityIndicator: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
 });
 
