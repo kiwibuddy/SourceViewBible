@@ -227,6 +227,28 @@ export class Actant extends Realm.Object {
     return sources;
   }
 
+  static async valuesByWordCount(type: string, predicate: Predicate) {
+    const options = {
+      columns: [`${type}_statements.id AS actantID`],
+      tables: [`${type}_statements`]
+    };
+    const statements = await Statement.identifiersMatchingPredicate(predicate, options);
+    if (statements.count == 0) return [];
+
+    const wordCounts = {};
+    statements.reduce((wordCounts, statement) => {
+      const actantID = statement.actantID;
+      const wordCount = wordCounts[actantID] || 0;
+      wordCounts[actantID] = wordCount + statement.wordCount;
+      return wordCounts;
+    }, wordCounts);
+
+    return Object.keys(wordCounts).sort((a,b) => wordCounts[a] > wordCounts[b] ? -1 : 1).map(actantID => {
+      const actant = Actant.findByID(actantID);
+      return {object: actant, label: actant.name, value: wordCounts[actantID]};
+    });
+  }
+
   get actantNumberDescription(): ?String {
     switch(this.actantNumber) {
       case 1:
@@ -390,7 +412,7 @@ export class Chronology extends Realm.Object {
   }
 
   static findByID(id: number) {
-    return realm.objectForPrimaryKey('Chronology', parseInt(id));
+    return realm.objectForPrimaryKey('Chronology', id ? parseInt(id) : 0);
   }
 
   static whereInRange(from: Chronology, to: Chronology) {

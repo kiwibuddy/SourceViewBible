@@ -22,6 +22,9 @@ export async function valuesForCard(card) {
 
         case 'chronology':
           return await Chronology.valuesByWordCount(predicate);
+
+        case 'name':
+          return await Actant.valuesByWordCount(xAxis.type, predicate);
       }
   }
 
@@ -38,14 +41,6 @@ export async function valuesForCard(card) {
     }
 
     switch (xAxis.id) {
-      case 'book':
-        // addCountToLabelValue(count, statement.book.name, statement.book, values);
-        break;
-
-      case 'chronology':
-        // if (statement.source) statement.source.chronologies.forEach(chronology => addCountToLabelValue(count, chronology.name, chronology, values));
-        break;
-
       case 'gender':
         switch (xAxis.type) {
           case 'source':
@@ -54,18 +49,6 @@ export async function valuesForCard(card) {
 
           case 'recipient':
             statement.recipients.forEach(recipient => addCountToLabelValue(count, recipient.genderDescription, recipient, values));
-            break;
-        }
-        break;
-
-      case 'name':
-        switch (xAxis.type) {
-          case 'source':
-            if (statement.source) addCountToLabelValue(count, statement.source.name, statement.source, values);
-            break;
-
-          case 'recipient':
-            statement.recipients.forEach(recipient => addCountToLabelValue(count, recipient.name, recipient, values));
             break;
         }
         break;
