@@ -93,6 +93,13 @@
     "nature": "Nature",
     "profession": "Profession",
     "role": "Role",
+    "family": "Family",
+    "economics": "Economics",
+    "government": "Government",
+    "religion": "Religion",
+    "education": "Education",
+    "communication": "Communication",
+    "celebration": "Celebration",
     "actant-number": {
       "Group": "Group",
       "Individual": "Individual"

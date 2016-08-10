@@ -216,6 +216,19 @@ export class Actant extends Realm.Object {
     return sources;
   }
 
+  get actantNumberDescription(): ?String {
+    switch(this.actantNumber) {
+      case 1:
+        return Localizable.t('actant-number.Group');
+
+      case 2:
+        return Localizable.t('actant-number.Individual');
+
+      default:
+        return null;
+    }
+  }
+
   get genderDescription(): ?String {
     switch(this.gender) {
       case 1:
