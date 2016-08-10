@@ -538,32 +538,76 @@ export class Profession extends Realm.Object {
   }
 
   static async valuesByWordCount(type: string, predicate: Predicate) {
-  const options = {
-    columns: [`${type}_profession_statements.id AS professionID`],
-    tables: [`${type}_profession_statements`]
-  };
-  const statements = await Statement.identifiersMatchingPredicate(predicate, options);
-  if (statements.count == 0) return [];
+    const options = {
+      columns: [`${type}_profession_statements.id AS professionID`],
+      tables: [`${type}_profession_statements`]
+    };
+    const statements = await Statement.identifiersMatchingPredicate(predicate, options);
+    if (statements.count == 0) return [];
 
-  const wordCounts = {};
-  statements.reduce((wordCounts, statement) => {
-    const professionID = statement.professionID;
-    const wordCount = wordCounts[professionID] || 0;
-    wordCounts[professionID] = wordCount + statement.wordCount;
-    return wordCounts;
-  }, wordCounts);
+    const wordCounts = {};
+    statements.reduce((wordCounts, statement) => {
+      const professionID = statement.professionID;
+      const wordCount = wordCounts[professionID] || 0;
+      wordCounts[professionID] = wordCount + statement.wordCount;
+      return wordCounts;
+    }, wordCounts);
 
-  return Object.keys(wordCounts).sort((a,b) => wordCounts[a] > wordCounts[b] ? -1 : 1).map(professionID => {
-    const profession = Profession.findByID(professionID);
-    return {object: profession, label: profession.name, value: wordCounts[professionID]};
-  });
-}
+    return Object.keys(wordCounts).sort((a,b) => wordCounts[a] > wordCounts[b] ? -1 : 1).map(professionID => {
+      const profession = Profession.findByID(professionID);
+      return {object: profession, label: profession.name, value: wordCounts[professionID]};
+    });
+  }
 
   get name() {
     return Localizable.t('professions.' + this.key);
   }
 }
 Profession.schema = ProfessionSchema;
+
+export class Role {
+  static ROLES = ['narrator', 'god', 'lead', 'support'];
+
+  id: number;
+  key: string;
+
+  constructor(id: number, key: string) {
+    this.id = id;
+    this.key = key;
+  }
+
+  static findByID(id: number) {
+    const key = Role.ROLES[id - 1];
+    return new Role(id, key);
+  }
+
+  static async valuesByWordCount(type: string, predicate: Predicate) {
+    const options = {
+      columns: [`${type}_type_statements.id AS roleID`],
+      tables: [`${type}_type_statements`]
+    };
+    const statements = await Statement.identifiersMatchingPredicate(predicate, options);
+    if (statements.count == 0) return [];
+
+    const wordCounts = {};
+    statements.reduce((wordCounts, statement) => {
+      const roleID = statement.roleID;
+      const wordCount = wordCounts[roleID] || 0;
+      wordCounts[roleID] = wordCount + statement.wordCount;
+      return wordCounts;
+    }, wordCounts);
+
+    return Object.keys(wordCounts).sort((a,b) => wordCounts[a] > wordCounts[b] ? -1 : 1).map(roleID => {
+      const role = Role.findByID(roleID);
+      return {object: role, label: role.name, value: wordCounts[roleID]};
+    });
+  }
+
+  get name() {
+    console.log('roles.' + this.key);
+    return Localizable.t('roles.' + this.key);
+  }
+}
 
 const SourceRelationSchema = {
   name: 'SourceRelation',

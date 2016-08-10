@@ -1,7 +1,7 @@
 /* @flow */
 'use strict';
 
-import { Actant, Book, Chronology, Nature, Profession, Sphere, Statement } from '../../../Database';
+import { Actant, Book, Chronology, Nature, Profession, Role, Sphere, Statement } from '../../../Database';
 import { predicateWithCard } from '../Filters/FilterUtils';
 import { Localizable } from '../../../Common';
 
@@ -32,6 +32,9 @@ export async function valuesForCard(card) {
         case 'profession':
           return await Profession.valuesByWordCount(xAxis.type, predicate);
 
+        case 'role':
+          return await Role.valuesByWordCount(xAxis.type, predicate);
+
         case 'sphere':
           return await Sphere.valuesByWordCount(predicate);
       }
@@ -58,17 +61,6 @@ export async function valuesForCard(card) {
 
           case 'recipient':
             statement.recipients.forEach(recipient => addCountToLabelValue(count, recipient.genderDescription, recipient, values));
-            break;
-        }
-        break;
-
-      case 'role':
-        // FIXME
-        switch (xAxis.type) {
-          case 'source':
-            break;
-
-          case 'recipient':
             break;
         }
         break;
