@@ -13,6 +13,7 @@ import {
   Role,
   Sphere,
   Statement,
+  Word,
 } from './Realm';
 
 const SQLite = require('./SQLite');
@@ -34,6 +35,7 @@ module.exports = {
   Role,
   Sphere,
   Statement,
+  Word,
   ComparisonPredicate,
   CompoundPredicate,
   Predicate,

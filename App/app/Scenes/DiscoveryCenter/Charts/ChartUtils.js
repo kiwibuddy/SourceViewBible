@@ -1,7 +1,7 @@
 /* @flow */
 'use strict';
 
-import { Actant, Book, Chronology, Gender, Nature, Profession, Role, Sphere, Statement } from '../../../Database';
+import { Actant, Book, Chronology, Gender, Nature, Profession, Role, Sphere, Statement, Word } from '../../../Database';
 import { predicateWithCard } from '../Filters/FilterUtils';
 import { Localizable } from '../../../Common';
 
@@ -40,30 +40,13 @@ export async function valuesForCard(card) {
 
         case 'sphere':
           return await Sphere.valuesByWordCount(predicate);
+
+        case 'words':
+          return await Word.valuesByWordCount(predicate);
       }
   }
-
-  const values = {};
-
-  for (let occurrence of statements) {
-    const statement = Statement.findByID(occurrence.id);
-
-    let count = 0;
-    switch (yAxis.id) {
-      case 'words':
-        count = statement.wordCount;
-        break;
-    }
-
-    switch (xAxis.id) {
-      case 'words':
-        const words = await statement.words();
-        words.slice(0, 20).forEach(word => addCountToLabelValue(word.count, word.string, word, values));
-        break;
-    }
-  }
-
-  return Object.keys(values).sort((a,b) => values[a].count > values[b].count ? -1 : 1).map(label => ({label, object: values[label], value: values[label].count}));
+  
+  return [];
 }
 
 function addCountToLabelValue(count, label, object, values) {

@@ -816,6 +816,40 @@ export class Statement extends Realm.Object {
 }
 Statement.schema = StatementSchema;
 
+export class Word {
+  static async valuesByWordCount(predicate: Predicate) {
+    const statements = await Statement.identifiersMatchingPredicate(predicate);
+    if (statements.count == 0) return [];
+
+    let searchWord = null;
+    const wordPredicates = predicate.subpredicates.filter(predicate => (predicate instanceof WordPredicate));
+    const hasWordPredicate = wordPredicates.length > 0;
+    if (hasWordPredicate) {
+      const wordPredicate = wordPredicates[0];
+      searchWord = wordPredicate.word;
+    }
+
+    const wordCounts = {};
+    for (let statementIdentifer of statements) {
+      let words = null;
+      if (hasWordPredicate) {
+        words = [{string: searchWord, count: statementIdentifer.wordCount}];
+      } else {
+        const statement = Statement.findByID(statementIdentifer.id);
+        words = await statement.words();
+      }
+      for (let word of words) {
+        const wordCount = wordCounts[word.string] || 0;
+        wordCounts[word.string] = wordCount + word.count;
+      }
+    }
+
+    return Object.keys(wordCounts).sort((a,b) => wordCounts[a] > wordCounts[b] ? -1 : 1).slice(0, 20).map(word => {
+      return {object: word, label: word, value: wordCounts[word]};
+    });
+  }
+}
+
 const Schema = [Actant, Bible, Book, Chapter, Chronology, Nature, Profession, SourceRelation, Sphere, Count, Content, Statement];
 
 const realm = new Realm({
