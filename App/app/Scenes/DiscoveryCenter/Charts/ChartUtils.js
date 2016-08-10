@@ -1,8 +1,8 @@
 /* @flow */
 'use strict';
 
-import { Actant, Statement } from '../../../Database';
-
+import { Actant, Book, Statement } from '../../../Database';
+import { predicateWithCard } from '../Filters/FilterUtils';
 import { Localizable } from '../../../Common';
 
 export async function valuesForCard(card) {
