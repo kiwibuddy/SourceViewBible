@@ -31,21 +31,21 @@ export function valuesForCard(card) {
 
     switch (xAxis.id) {
       case 'book':
-        addCountToLabelValue(count, statement.book.name, values);
+        addCountToLabelValue(count, statement.book.name, statement.book, values);
         break;
 
       case 'chronology':
-        if (statement.source) statement.source.chronologies.forEach(chronology => addCountToLabelValue(count, chronology.name, values));
+        if (statement.source) statement.source.chronologies.forEach(chronology => addCountToLabelValue(count, chronology.name, chronology, values));
         break;
 
       case 'gender':
         switch (xAxis.type) {
           case 'source':
-            if (statement.source) addCountToLabelValue(count, statement.source.genderDescription, values);
+            if (statement.source) addCountToLabelValue(count, statement.source.genderDescription, statement.source, values);
             break;
 
           case 'recipient':
-            statement.recipients.forEach(recipient => addCountToLabelValue(count, recipient.genderDescription, values));
+            statement.recipients.forEach(recipient => addCountToLabelValue(count, recipient.genderDescription, recipient, values));
             break;
         }
         break;
@@ -53,11 +53,11 @@ export function valuesForCard(card) {
       case 'name':
         switch (xAxis.type) {
           case 'source':
-            if (statement.source) addCountToLabelValue(count, statement.source.name, values);
+            if (statement.source) addCountToLabelValue(count, statement.source.name, statement.source, values);
             break;
 
           case 'recipient':
-            statement.recipients.forEach(recipient => addCountToLabelValue(count, recipient.name, values));
+            statement.recipients.forEach(recipient => addCountToLabelValue(count, recipient.name, recipient, values));
             break;
         }
         break;
@@ -65,11 +65,11 @@ export function valuesForCard(card) {
       case 'nature':
         switch (xAxis.type) {
           case 'source':
-            if (statement.source) statement.source.natures.forEach(nature => addCountToLabelValue(count, nature.name, values));
+            if (statement.source) statement.source.natures.forEach(nature => addCountToLabelValue(count, nature.name, nature, values));
             break;
 
           case 'recipient':
-            statement.recipients.forEach(recipient => recipient.natures.forEach(nature => addCountToLabelValue(count, nature.name, values)));
+            statement.recipients.forEach(recipient => recipient.natures.forEach(nature => addCountToLabelValue(count, nature.name, nature, values)));
             break;
         }
         break;
@@ -77,11 +77,11 @@ export function valuesForCard(card) {
       case 'profession':
         switch (xAxis.type) {
           case 'source':
-            if (statement.source) statement.source.professions.forEach(profession => addCountToLabelValue(count, profession.name, values));
+            if (statement.source) statement.source.professions.forEach(profession => addCountToLabelValue(count, profession.name, profession, values));
             break;
 
           case 'recipient':
-            statement.recipients.forEach(recipient => recipient.professions.forEach(profession => addCountToLabelValue(count, profession.name, values)));
+            statement.recipients.forEach(recipient => recipient.professions.forEach(profession => addCountToLabelValue(count, profession.name, profession, values)));
             break;
         }
         break;
@@ -100,7 +100,7 @@ export function valuesForCard(card) {
       case 'sphere':
         statement.sphereCounts.forEach(sphereCount => {
           if (sphereCount.count > 0) {
-            addCountToLabelValue(count, Localizable.t(sphereCount.string), values);
+            addCountToLabelValue(count, Localizable.t(sphereCount.string), sphereCount, values);
           }
         });
         break;
@@ -113,11 +113,13 @@ export function valuesForCard(card) {
     }
   }
 
-  return Object.keys(values).sort((a,b) => values[a] > values[b] ? -1 : 1).map(label => ({label, color: 'red', value: values[label]}));
+  return Object.keys(values).sort((a,b) => values[a] > values[b] ? -1 : 1).map(label => ({label, color: 'red', object: values[label], value: values[label].count}));
 }
 
-function addCountToLabelValue(count, label, values) {
+function addCountToLabelValue(count, label, object, values) {
   if (!label) return;
-  const labelCount = values[label] || 0;
-  values[label] = labelCount + count;
+  let labelValue = values[label];
+  if (!labelValue) labelValue = {label, count: 0};
+  labelValue.count = labelValue.count + count;
+  values[label] = labelValue;
 }
