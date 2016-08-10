@@ -42,6 +42,8 @@ export default class ReaderSearch extends Component {
   }
 
   render() {
+    const content = (this.state.reference ? this._renderList() : this._renderBlankslate());
+
     return (
       <View style={styles.container}>
         <NavigationBar>
@@ -63,26 +65,37 @@ export default class ReaderSearch extends Component {
             <Text style={StyleSheet.styles.navigationBar.doneButtonTitle}>{Localizable.t('cancel')}</Text>
           </TouchableOpacity>
         </NavigationBar>
-        <ListView
-          enableEmptySections={true}
-          dataSource={this.state.dataSource}
-          renderRow={this._renderRow}
-          renderSectionHeader={this._renderSectionHeader}
-          renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={StyleSheet.styles.separator} />}
-          style={styles.listView}
-          keyboardShouldPersistTaps={true}
-          keyboardDismissMode="on-drag"
-        />
-        <View style={styles.gettingstartedContainer}>
-          <Image style={styles.gettingstartedIcon} source={require('./Images/reference-icon.png')} />
-          <Text style={styles.gettingstartedHeader}>References</Text>
-          <Text style={styles.gettingstartedBody}>There are a variety of ways to go to a specific reference:</Text>
-          <Text style={styles.gettingstartedExample}>Gen or Genesis</Text>
-          <Text style={styles.gettingstartedExample}>Gen Ab or Genesis Abraham</Text>
-          <Text style={styles.gettingstartedExample}>John 3:16 or J 3:16</Text>
-          <Text style={styles.gettingstartedExample}>John Jesus 18</Text>
-        </View>
+        {content}
       </View>
+    );
+  }
+
+  _renderBlankslate = () => {
+    return (
+      <View style={styles.gettingstartedContainer}>
+        <Image style={styles.gettingstartedIcon} source={require('./Images/reference-icon.png')} />
+        <Text style={styles.gettingstartedHeader}>References</Text>
+        <Text style={styles.gettingstartedBody}>There are a variety of ways to go to a specific reference:</Text>
+        <Text style={styles.gettingstartedExample}>Gen or Genesis</Text>
+        <Text style={styles.gettingstartedExample}>Gen Ab or Genesis Abraham</Text>
+        <Text style={styles.gettingstartedExample}>John 3:16 or J 3:16</Text>
+        <Text style={styles.gettingstartedExample}>John Jesus 18</Text>
+      </View>
+    );
+  };
+
+  _renderList = () => {
+    return (
+      <ListView
+        enableEmptySections={true}
+        dataSource={this.state.dataSource}
+        renderRow={this._renderRow}
+        renderSectionHeader={this._renderSectionHeader}
+        renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={StyleSheet.styles.separator} />}
+        style={styles.listView}
+        keyboardShouldPersistTaps={true}
+        keyboardDismissMode="on-drag"
+      />
     );
   }
 
@@ -111,7 +124,7 @@ export default class ReaderSearch extends Component {
     const references = Bible.searchReferences(text);
     const sections = Object.keys(references);
 
-    let reference;
+    let reference = null;
     if (sections.length > 0) {
       reference = references[sections[0]][0];
     }
