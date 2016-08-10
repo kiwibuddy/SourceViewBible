@@ -483,8 +483,34 @@ const NatureSchema = {
 };
 
 export class Nature extends Realm.Object {
+  static findByID(id: number) {
+    return realm.objectForPrimaryKey('Nature', id ? parseInt(id) : 0);
+  }
+
   static findByKey(key: string) {
     return realm.objects('Nature').filtered('key = $0', key)[0];
+  }
+
+  static async valuesByWordCount(type: string, predicate: Predicate) {
+    const options = {
+      columns: [`${type}_nature_statements.id AS natureID`],
+      tables: [`${type}_nature_statements`]
+    };
+    const statements = await Statement.identifiersMatchingPredicate(predicate, options);
+    if (statements.count == 0) return [];
+
+    const wordCounts = {};
+    statements.reduce((wordCounts, statement) => {
+      const natureID = statement.natureID;
+      const wordCount = wordCounts[natureID] || 0;
+      wordCounts[natureID] = wordCount + statement.wordCount;
+      return wordCounts;
+    }, wordCounts);
+
+    return Object.keys(wordCounts).sort((a,b) => wordCounts[a] > wordCounts[b] ? -1 : 1).map(natureID => {
+      const nature = Nature.findByID(natureID);
+      return {object: nature, label: nature.name, value: wordCounts[natureID]};
+    });
   }
 
   get name() {
