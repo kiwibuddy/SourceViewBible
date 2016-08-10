@@ -16,7 +16,7 @@ export async function valuesForCard(card) {
     case 'words':
       switch (xAxis.id) {
         case 'book':
-        // return await Book.valuesByWordCount(predicateWithCard(card));
+        return await Book.valuesByWordCount(predicateWithCard(card));
       }
   }
 

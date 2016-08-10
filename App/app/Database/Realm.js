@@ -298,31 +298,26 @@ export class Book extends Realm.Object {
     return realm.objectForPrimaryKey('Book', id || '');
   }
 
-  static async countsMatchingPredicate(predicate: Predicate) {
-    const where = predicate.predicateFormat;
-    let whereSQL = '';
-    if (where.length > 0) {
-      whereSQL = `WHERE ${where}`;
-    }
-
-    const tables = predicate.subpredicates.filter(predicate => !(predicate instanceof WordPredicate)).map((comparison: ComparisonPredicate) => comparison.leftExpression.split('.')[0]).filter(table => (table !== 'statements' && table !== 'book_statements'));
-    const fromSQL = tables.map(table => `INNER JOIN ${table} ON statements.id = ${table}.statement_id`).join(' ');
-    const sql = `SELECT book_statements.id, COUNT(book_statements.id) AS count FROM statements INNER JOIN book_statements ON statements.id = book_statements.statement_id ${fromSQL} ${whereSQL} GROUP BY book_statements.id ORDER BY count DESC`
-    console.log(sql);
-    const bookRows = await rowsWithSQL(sql);
-    return bookRows.map(row => {
-      const book = Book.findByID(row['id']);
-      return (
-        {object: book, label: book.name, value: row['count']}
-      );
-    });
-  }
-
   static async valuesByWordCount(predicate: Predicate) {
-    const statements = await Statement.identifiersMatchingPredicate(predicate);
+    const options = {
+      columns: ['book_statements.id AS bookID'],
+      tables: ['book_statements']
+    };
+    const statements = await Statement.identifiersMatchingPredicate(predicate, options);
     if (statements.count == 0) return [];
 
-    return [];
+    const wordCounts = {};
+    statements.reduce((wordCounts, statement) => {
+      const bookID = statement.bookID;
+      const wordCount = wordCounts[bookID] || 0;
+      wordCounts[bookID] = wordCount + statement.wordCount;
+      return wordCounts;
+    }, wordCounts);
+
+    return Object.keys(wordCounts).sort((a,b) => wordCounts[a] > wordCounts[b] ? -1 : 1).map(bookID => {
+      const book = Book.findByID(bookID);
+      return {object: book, label: book.name, value: wordCounts[bookID]};
+    });
   }
 
   countOfSourceType(sourceType: string): number {
@@ -541,22 +536,33 @@ export class Statement extends Realm.Object {
     return realm.objectForPrimaryKey('Statement', id ? parseInt(id) : 0);
   }
 
-  static async identifiersMatchingPredicate(predicate: CompoundPredicate) {
+  static async identifiersMatchingPredicate(predicate: CompoundPredicate, options?: Object) {
     if (!predicate) {
       return Statement.all().map(statement => ({id: statement.id}));
     }
 
-    let statementRows = [];
-    const where = predicate.predicateFormat;
-    if (where.length > 0) {
-      const tables = predicate.tables.filter(table => table !== 'statements');
-      const from = tables.map(table => `INNER JOIN ${table} ON statements.id = ${table}.statement_id`).join(' ');
-      const sql = `SELECT statements.id, statements.first AS firstMonad, statements.last AS lastMonad, statements.word_count AS wordCount FROM statements ${from} WHERE ${where}`
-      console.log(sql);
-      statementRows = await rowsWithSQL(sql);
-    } else {
-      return Statement.all();
+    let columns = [
+      'statements.id',
+      'statements.first AS firstMonad',
+      'statements.last AS lastMonad',
+      'statements.word_count AS wordCount'
+    ];
+    if (options && options.columns) {
+      columns = [...new Set(columns.concat(options.columns))];
     }
+
+    let tables = predicate.tables.filter(table => table !== 'statements');
+    if (options && options.tables) {
+      tables = [...new Set(tables.concat(options.tables))];
+    }
+    const fromSQL = tables.map(table => `INNER JOIN ${table} ON statements.id = ${table}.statement_id`).join(' ');
+
+    const where = predicate.predicateFormat;
+    const whereSQL = (where.length > 0 ? `WHERE ${where}` : '');
+
+    const sql = `SELECT ${columns.join(', ')} FROM statements ${fromSQL} ${whereSQL}`
+    console.log(sql);
+    const statementRows = await rowsWithSQL(sql);
 
     const wordPredicates = predicate.subpredicates.filter(predicate => (predicate instanceof WordPredicate));
     if (wordPredicates.length > 0) {
