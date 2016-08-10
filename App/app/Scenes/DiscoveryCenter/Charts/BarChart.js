@@ -139,7 +139,7 @@ class BarChartView extends Component {
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.chart}>
         <BarChart
           bars={bars}
-          barColor="rgba(0,0,0,.4)"
+          barColor="#F74260"
           barStyle={{flex: 0, width: 8, marginHorizontal: 6, marginBottom: 100,}}
           deltaStyle={{backgroundColor: 'transparent'}}
           horizontal={false}
