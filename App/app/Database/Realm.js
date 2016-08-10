@@ -578,10 +578,12 @@ export class Statement extends Realm.Object {
       }
 
       const wordCounts = await Emdros.wordCountsForContext('Statement', options);
-      Object.keys(wordCounts).map(statementID => {
+      return Object.keys(wordCounts).map(statementID => {
+        const statement = statementRows.find(statementRow => statementRow.id === parseInt(statementID));
+
         const counts = wordCounts[statementID];
         const sphereCounts = Object.keys(counts).map(key => ({string: key, count: counts[key]}));
-        return {id: parseInt(statementID), wordCount: counts.wordCount, sphereCounts: sphereCounts};
+        return {...statement, wordCount: counts.wordCount, sphereCounts: sphereCounts};
       });
     } else {
       return statementRows;
