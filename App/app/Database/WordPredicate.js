@@ -14,4 +14,8 @@ export default class WordPredicate extends ComparisonPredicate {
   static predicateWithWord(word: string) {
     return new WordPredicate(word);
   }
+
+  get tables(): Array<string> {
+    return [];
+  }
 }

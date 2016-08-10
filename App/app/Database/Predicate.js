@@ -27,4 +27,8 @@ export default class Predicate {
     }
     return '(' + predicateFormat + ')';
   }
+
+  get tables(): Array<string> {
+    return [];
+  }
 }

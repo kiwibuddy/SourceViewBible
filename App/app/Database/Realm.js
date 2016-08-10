@@ -318,20 +318,11 @@ export class Book extends Realm.Object {
     });
   }
 
-  static async booksMatchingPredicate(predicate: Predicate) {
-    const where = predicate.predicateFormat;
-    let whereSQL = '';
-    if (where.length > 0) {
-      whereSQL = `WHERE ${where}`;
-    }
+  static async valuesByWordCount(predicate: Predicate) {
+    const statements = Statement.identifiersMatchingPredicate(predicate);
+    if (statements.count == 0) return [];
 
-    const tables = predicate.subpredicates.filter(predicate => !(predicate instanceof WordPredicate)).map((comparison: ComparisonPredicate) => comparison.leftExpression.split('.')[0]).filter(table => (table !== 'statements' && table !== 'book_statements'));
-    const fromSQL = tables.map(table => `INNER JOIN ${table} ON statements.id = ${table}.statement_id`).join(' ');
-    const sql = `SELECT DISTINCT book_statements.id FROM statements INNER JOIN book_statements ON statements.id = book_statements.statement_id ${fromSQL} ${whereSQL}`
-    console.log(sql);
-    const bookRows = await rowsWithSQL(sql);
-    const query = bookRows.map(row => `id = '${row['id']}'`).join(' OR ')
-    return Book.all().filtered(query);
+    return [];
   }
 
   countOfSourceType(sourceType: string): number {
@@ -555,13 +546,12 @@ export class Statement extends Realm.Object {
       return Statement.all().map(statement => ({id: statement.id}));
     }
 
-    let statementIdentifiers = [];
     let statementRows = [];
     const where = predicate.predicateFormat;
     if (where.length > 0) {
-      const tables = predicate.subpredicates.filter(predicate => !(predicate instanceof WordPredicate)).map((comparison: ComparisonPredicate) => comparison.leftExpression.split('.')[0]).filter(table => table !== 'statements');
+      const tables = predicate.tables.filter(table => table !== 'statements');
       const from = tables.map(table => `INNER JOIN ${table} ON statements.id = ${table}.statement_id`).join(' ');
-      const sql = `SELECT statements.id, statements.first, statements.last FROM statements ${from} WHERE ${where}`
+      const sql = `SELECT statements.id, statements.first AS firstMonad, statements.last AS lastMonad, statements.word_count AS wordCount FROM statements ${from} WHERE ${where}`
       console.log(sql);
       statementRows = await rowsWithSQL(sql);
     } else {
@@ -569,43 +559,26 @@ export class Statement extends Realm.Object {
     }
 
     const wordPredicates = predicate.subpredicates.filter(predicate => (predicate instanceof WordPredicate));
-    let wordCounts = null;
     if (wordPredicates.length > 0) {
       const wordPredicate = wordPredicates[0];
       const word = wordPredicate.word.toLowerCase();
 
       let options = {}
       if (statementRows.length > 0) {
-        const monads = statementRows.map(statementRow => [statementRow["first"], statementRow["last"]]);
+        const monads = statementRows.map(statementRow => [statementRow["firstMonad"], statementRow["lastMonad"]]);
         options = {monads, tokenFeatureComparison: `surface_fts="${word}"`}
       } else {
         options = {tokenFeatureComparison: `surface_fts="${word}"`};
       }
 
-      wordCounts = await Emdros.wordCountsForContext('Statement', options);
-      statementIdentifiers = Object.keys(wordCounts).map(statementID => parseInt(statementID));
+      const wordCounts = await Emdros.wordCountsForContext('Statement', options);
+      Object.keys(wordCounts).map(statementID => {
+        const counts = wordCounts[statementID];
+        const sphereCounts = Object.keys(counts).map(key => ({string: key, count: counts[key]}));
+        return {id: parseInt(statementID), wordCount: counts.wordCount, sphereCounts: sphereCounts};
+      });
     } else {
-      statementIdentifiers = statementRows.map(statementRow => statementRow["id"]);
-    }
-
-    if (statementIdentifiers.length > 0) {
-      if (wordCounts == null) {
-        return statementIdentifiers.map(statementID => ({id: statementID}));
-      } else {
-        return statementIdentifiers.map(statementID => {
-          const statement = {id: statementID, wordCount: null, sphereCounts: null};
-
-          if (wordCounts) {
-            const statementID = statement.id.toString();
-            const counts = wordCounts[statementID];
-            if (counts) {
-              statement.wordCount = counts.wordCount;
-              statement.sphereCounts = Object.keys(counts).map(key => ({string: key, count: counts[key]}));
-            }
-          }
-          return statement;
-        });
-      }
+      return statementRows;
     }
 
     return [];

@@ -2,6 +2,7 @@
 'use strict';
 
 import Predicate from './Predicate';
+import ComparisonPredicate from './ComparisonPredicate';
 import WordPredicate from './WordPredicate';
 
 export default class CompoundPredicate extends Predicate {
@@ -27,5 +28,13 @@ export default class CompoundPredicate extends Predicate {
     const subpredicates = this.subpredicates.filter(predicate => !(predicate instanceof WordPredicate));
     if (subpredicates.length == 0) return '';
     return '(' + subpredicates.map(predicate => predicate.predicateFormat).join(' ' + this.type.toUpperCase() + ' ') + ')';
+  }
+
+  get tables(): Array<string> {
+    let tables = [];
+    this.subpredicates.forEach(predicate => {
+      tables = tables.concat(predicate.tables);
+    });
+    return [...new Set(tables)];
   }
 }
