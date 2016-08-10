@@ -12,6 +12,8 @@ export async function valuesForCard(card) {
   const xAxis = card.xAxis;
   const yAxis = card.yAxis;
 
+  if (!statements || statementCount == 0 || !xAxis || !yAxis) return null;
+
   switch (yAxis.id) {
     case 'words':
       const predicate = predicateWithCard(card);
