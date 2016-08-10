@@ -413,8 +413,6 @@ export class Chronology extends Realm.Object {
       return wordCounts;
     }, wordCounts);
 
-    console.log('wordCounts', wordCounts);
-
     return Object.keys(wordCounts).sort((a,b) => wordCounts[a] > wordCounts[b] ? -1 : 1).map(chronologyID => {
       const chronology = Chronology.findByID(chronologyID);
       return {object: chronology, label: chronology.name, value: wordCounts[chronologyID]};
