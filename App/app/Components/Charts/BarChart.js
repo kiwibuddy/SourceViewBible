@@ -40,12 +40,13 @@ const BarChart = (props: Object) => {
 
     let label = null;
     if (bar.label) {
-      label = <Text style={styles.label}>{bar.label}</Text>;
+      label = <View style={styles.labelContainer}><Text style={styles.label}  numberOfLines={1}>{bar.label}</Text></View>;
     }
 
     return (
       <View key={'bar-' + barIndex} style={stackedBarStyle}>
         {chart}
+        <View style={styles.separator} />
         {label}
       </View>
     )
@@ -87,16 +88,23 @@ const styles = StyleSheet.create({
     backgroundColor: '#ededed',
   },
   stackedBar: {
-    flex: 1,
+    flex: 0,
   },
   label: {
-    height: 8,
-    width: 40,
-    fontSize: 8,
+    flex: 1,
+    height: 20,
+    width: 90,
+    fontSize: 11,
     textAlign: 'right',
     color: 'white',
     backgroundColor: 'transparent',
     transform: [{rotate: '270deg'}],
+    marginBottom: -100,
+  },
+  separator: {
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: "rgba(255,255,255,.2)",
+    marginHorizontal: -6,
   },
 });
 

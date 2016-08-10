@@ -126,8 +126,8 @@ class BarChartView extends Component {
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.chart}>
         <BarChart
           bars={bars}
-          barColor="#272e35"
-          barStyle={{flex: 0, width: 8, marginHorizontal: 2}}
+          barColor="rgba(0,0,0,.4)"
+          barStyle={{flex: 0, width: 8, marginHorizontal: 6, marginBottom: 100,}}
           deltaStyle={{backgroundColor: 'transparent'}}
           horizontal={false}
         />
@@ -145,9 +145,10 @@ class BarChartView extends Component {
 const styles = StyleSheet.create({
   chart: {
     flex: 1,
-    height: 295,
-    paddingTop: 48,
+    minHeight: 295,
+    paddingTop: 55,
     paddingBottom: 44,
+    paddingHorizontal: 8,
   },
 });
 
