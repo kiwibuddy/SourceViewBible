@@ -133,10 +133,10 @@ function BSOReferencesInText(text: string) {
   return null;
 }
 
-async function rowsWithSQL(sql: string) {
+async function rowsWithSQL(sql: string, params?: any) {
   return new Promise((resolve, reject) => {
     SQLite.transaction((tx) => {
-      tx.executeSql(sql, [], (tx, results) => {
+      tx.executeSql(sql, params, (tx, results) => {
           let rows = results.rows.raw();
           resolve(rows);
       });
@@ -319,7 +319,7 @@ export class Book extends Realm.Object {
   }
 
   static async valuesByWordCount(predicate: Predicate) {
-    const statements = Statement.identifiersMatchingPredicate(predicate);
+    const statements = await Statement.identifiersMatchingPredicate(predicate);
     if (statements.count == 0) return [];
 
     return [];
