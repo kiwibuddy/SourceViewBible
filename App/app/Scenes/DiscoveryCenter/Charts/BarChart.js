@@ -22,8 +22,6 @@ import { BarChart } from '../../../Components/Charts';
 
 import { axisItemsURL } from '../../../Navigation';
 
-import { Statement } from '../../../Database';
-
 import { valuesForCard } from './ChartUtils';
 
 type Props = {
