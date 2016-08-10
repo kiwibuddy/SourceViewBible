@@ -54,23 +54,23 @@ const AxisItems = (props: Props) => {
       </TouchableOpacity>
       <View style={styles.separator} />
       <TouchableOpacity style={StyleSheet.styles.listItem}>
-        <Text style={[StyleSheet.styles.cell.title, {color: 'gray'}]}>Name</Text>
+        <Text style={[StyleSheet.styles.cell.title, {color: '#9B9B9B'}]}>Name</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
       <TouchableOpacity style={StyleSheet.styles.listItem}>
-        <Text style={[StyleSheet.styles.cell.title, {color: 'gray'}]}>Role</Text>
+        <Text style={[StyleSheet.styles.cell.title, {color: '#9B9B9B'}]}>Role</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
       <TouchableOpacity style={StyleSheet.styles.listItem}>
-        <Text style={[StyleSheet.styles.cell.title, {color: 'gray'}]}>Nature</Text>
+        <Text style={[StyleSheet.styles.cell.title, {color: '#9B9B9B'}]}>Nature</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
       <TouchableOpacity style={StyleSheet.styles.listItem}>
-        <Text style={[StyleSheet.styles.cell.title, {color: 'gray'}]}>Gender</Text>
+        <Text style={[StyleSheet.styles.cell.title, {color: '#9B9B9B'}]}>Gender</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
       <TouchableOpacity style={StyleSheet.styles.listItem}>
-        <Text style={[StyleSheet.styles.cell.title, {color: 'gray'}]}>Profession</Text>
+        <Text style={[StyleSheet.styles.cell.title, {color: '#9B9B9B'}]}>Profession</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
       <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.navigate(actantAxisItemsURL({title: Localizable.t('source'), axis: props.axis, type: 'source'}))}>

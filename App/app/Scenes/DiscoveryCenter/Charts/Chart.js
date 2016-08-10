@@ -74,7 +74,7 @@ const Chart = (props: Object) => {
   return (
     <View style={styles.chart} {...props}>
       <LinearGradient
-        colors={['#76838F', '#323B43']}
+        colors={['#59626A', '#323B43']}
         start={[0.5, 0.25]} end={[0.5, 1.0]}
         style={{flex: 1}}
       >
