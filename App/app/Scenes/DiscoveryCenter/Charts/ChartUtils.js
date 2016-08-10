@@ -1,7 +1,7 @@
 /* @flow */
 'use strict';
 
-import { Actant, Book, Chronology, Nature, Statement } from '../../../Database';
+import { Actant, Book, Chronology, Nature, Sphere, Statement } from '../../../Database';
 import { predicateWithCard } from '../Filters/FilterUtils';
 import { Localizable } from '../../../Common';
 
@@ -28,6 +28,9 @@ export async function valuesForCard(card) {
 
         case 'nature':
           return await Nature.valuesByWordCount(xAxis.type, predicate);
+
+        case 'sphere':
+          return await Sphere.valuesByWordCount(predicate);
       }
   }
 
@@ -77,14 +80,6 @@ export async function valuesForCard(card) {
           case 'recipient':
             break;
         }
-        break;
-
-      case 'sphere':
-        statement.sphereCounts.forEach(sphereCount => {
-          if (sphereCount.count > 0) {
-            addCountToLabelValue(count, Localizable.t(sphereCount.string), sphereCount, values);
-          }
-        });
         break;
 
       case 'words':

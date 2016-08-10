@@ -570,13 +570,45 @@ const SphereSchema = {
 };
 
 export class Sphere extends Realm.Object {
+  static SPHERES = [
+    'family',
+    'economics',
+    'government',
+    'religion',
+    'education',
+    'communication',
+    'celebration',
+  ];
   static all() {
     return realm.objects('Sphere').sorted('position');
   }
 
-  static findByID(id: string) {
-    return realm.objectForPrimaryKey('Sphere', id || '');
+  static findByID(id: any) {
+    const primaryKey = (Number.isInteger(id) ? Sphere.SPHERES[id - 1] : id) || '';
+    return realm.objectForPrimaryKey('Sphere', primaryKey);
   }
+
+  static async valuesByWordCount(predicate: Predicate) {
+  const options = {
+    columns: ['sphere_statements.id AS sphereID', 'sphere_statements.word_count AS sphereWordCount'],
+    tables: ['sphere_statements']
+  };
+  const statements = await Statement.identifiersMatchingPredicate(predicate, options);
+  if (statements.count == 0) return [];
+
+  const wordCounts = {};
+  statements.reduce((wordCounts, statement) => {
+    const sphereID = statement.sphereID;
+    const wordCount = wordCounts[sphereID] || 0;
+    wordCounts[sphereID] = wordCount + statement.sphereWordCount;
+    return wordCounts;
+  }, wordCounts);
+
+  return Object.keys(wordCounts).sort((a,b) => wordCounts[a] > wordCounts[b] ? -1 : 1).map(sphereID => {
+    const sphere = Sphere.findByID(parseInt(sphereID));
+    return {object: sphere, label: sphere.name, value: wordCounts[sphereID]};
+  });
+}
 
   countOfBook(bookID: string): number {
     const count = this.bookCounts.find(count => count.string === bookID);
