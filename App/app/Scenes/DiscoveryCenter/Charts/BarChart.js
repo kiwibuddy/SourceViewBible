@@ -47,7 +47,7 @@ class BarChartView extends Component {
 
     this.state = {
       bars: null,
-      loading: props.loading
+      loading: false
     };
   }
 
