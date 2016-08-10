@@ -79,6 +79,7 @@ class CloudChartView extends Component {
               <Image source={require('../Images/chart-type-cloud-s.png')} />
             </TouchableOpacity>
           </View>
+          <Text style={styles.chartNote}>Top 15 Professions</Text>
           <View style={[StyleSheet.styles.discoveryCenter.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
             <TouchableOpacity>
               <Image source={require('../Images/btn-fullscreen.png')} />
@@ -105,7 +106,7 @@ class CloudChartView extends Component {
     const words = data.slice(0, Math.min(data.length, 15)).map(word => word.label);
 
     return (
-      <WordCloud style={[StyleSheet.styles.wordCloud, styles.chart]}>
+      <WordCloud style={[styles.wordCloud, styles.chart]}>
         <ParallaxMotionView intensity={5} style={[styles.parallax, {opacity: 0.8}]}>
           <Text style={[styles.wc1, {top: 50, alignSelf: 'center'}]}>{words[0]}</Text>
         </ParallaxMotionView>
@@ -149,6 +150,18 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
   },
+  wordCloud: {
+    flex: 1,
+    minHeight: 295,
+    backgroundColor: 'transparent',
+    shadowColor: "black",
+    shadowOpacity: 0.05,
+    shadowRadius: 0.4,
+    shadowOffset: {
+      height: 1,
+      width: 0
+    },
+  },
   parallax: {
     position: 'absolute',
     top: 0,
@@ -183,6 +196,11 @@ const styles = StyleSheet.create({
     fontWeight: '200',
     position: 'absolute',
   },
+  chartNote: {
+    color: 'rgba(255,255,255,.5)',
+    fontSize: 11,
+    backgroundColor: 'transparent',
+  }
 });
 
 export default CloudChartView;

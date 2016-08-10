@@ -18,7 +18,7 @@ const styles = {
   },
   wordCloud: {
     height: 200,
-    backgroundColor: 'red',
+    backgroundColor: 'transparent',
     shadowColor: "black",
     shadowOpacity: 0.05,
     shadowRadius: 0.4,
