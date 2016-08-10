@@ -59,7 +59,6 @@ async function seedStatementWordCounts(emdros: Object, realm: Object) {
         });
       }
     });
-
   }
 
   realm.write(() => {
@@ -68,6 +67,12 @@ async function seedStatementWordCounts(emdros: Object, realm: Object) {
 
   RNFS.writeFile('/tmp/sphere-statements.json', JSON.stringify(sphereStatements), 'utf8').then((success) => {
     console.log('Seeded /tmp/sphere-statements.json');
+  }).catch((err) => {
+    console.log(err.message);
+  });
+
+  RNFS.writeFile('/tmp/statement-word-counts.json', JSON.stringify(statements), 'utf8').then((success) => {
+    console.log('Seeded /tmp/statement-word-counts.json');
   }).catch((err) => {
     console.log(err.message);
   });

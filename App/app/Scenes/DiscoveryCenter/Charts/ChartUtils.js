@@ -12,6 +12,11 @@ export async function valuesForCard(card) {
   const xAxis = card.xAxis;
   const yAxis = card.yAxis;
 
+  if (xAxis.id === 'book') {
+    const books = await Book.booksMatchingPredicate(predicateWithCard(card));
+    return books.sorted('wordCount', true).map(book => ({object: book, label: book.name, value: book.wordCount}));
+  }
+
   const values = {};
 
   for (let occurrence of statements) {

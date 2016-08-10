@@ -1,7 +1,7 @@
 /* @flow */
 'use strict';
 
-import { ComparisonPredicate, CompoundPredicate, WordPredicate } from '../../../Database';
+import { Chronology, ComparisonPredicate, CompoundPredicate, WordPredicate } from '../../../Database';
 
 export function cardWithFilter(card: Object, filter: Object) {
   const filterIndex = card.filters.findIndex(existingFilter => existingFilter.id === filter.id);

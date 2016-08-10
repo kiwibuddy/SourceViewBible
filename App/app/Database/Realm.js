@@ -318,6 +318,22 @@ export class Book extends Realm.Object {
     });
   }
 
+  static async booksMatchingPredicate(predicate: Predicate) {
+    const where = predicate.predicateFormat;
+    let whereSQL = '';
+    if (where.length > 0) {
+      whereSQL = `WHERE ${where}`;
+    }
+
+    const tables = predicate.subpredicates.filter(predicate => !(predicate instanceof WordPredicate)).map((comparison: ComparisonPredicate) => comparison.leftExpression.split('.')[0]).filter(table => (table !== 'statements' && table !== 'book_statements'));
+    const fromSQL = tables.map(table => `INNER JOIN ${table} ON statements.id = ${table}.statement_id`).join(' ');
+    const sql = `SELECT DISTINCT book_statements.id FROM statements INNER JOIN book_statements ON statements.id = book_statements.statement_id ${fromSQL} ${whereSQL}`
+    console.log(sql);
+    const bookRows = await rowsWithSQL(sql);
+    const query = bookRows.map(row => `id = '${row['id']}'`).join(' OR ')
+    return Book.all().filtered(query);
+  }
+
   countOfSourceType(sourceType: string): number {
     const count = this.sourceTypeCounts.find(count => count.string === sourceType);
     return count && count.count || 0;

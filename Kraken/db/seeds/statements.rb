@@ -1,11 +1,14 @@
 STDERR.puts "Seeding Statements"
 
+statement_word_counts = JSON.parse(open('./db/seeds/statement-word-counts.json').read)
+
 statements = []
 statement_objects = EMDROS['SELECT DISTINCT statement_objects.*, source_objects.mdf_source_occurrence
 FROM statement_objects INNER JOIN source_objects ON source_objects.first_monad = statement_objects.first_monad
 	AND source_objects.last_monad = statement_objects.last_monad']
 
 statement_objects.each do |statement_object|
+	statement_word_count = statement_word_counts.find { |word_count| word_count["id"] == statement_object[:object_id_d] }
 	statements << {
 		id: statement_object[:object_id_d],
 		firstMonad: statement_object[:first_monad],
@@ -15,7 +18,7 @@ statement_objects.each do |statement_object|
     sourceOccurrence: statement_object[:mdf_source_occurrence]
 	}
 
-  DB[:statements].insert(id: statement_object[:object_id_d], first: statement_object[:first_monad], last: statement_object[:last_monad])
+  DB[:statements].insert(id: statement_object[:object_id_d], first: statement_object[:first_monad], last: statement_object[:last_monad], word_count: statement_word_count["wordCount"])
 end
 
 # pp statements

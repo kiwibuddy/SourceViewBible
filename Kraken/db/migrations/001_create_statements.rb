@@ -7,6 +7,7 @@ Sequel.migration do
       primary_key :id
       Integer :first
       Integer :last
+      Integer :word_count
 
       index [:first, :last], unique: true
     end
