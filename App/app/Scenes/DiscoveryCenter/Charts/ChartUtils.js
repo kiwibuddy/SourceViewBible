@@ -10,7 +10,7 @@ import { Localizable } from '../../../Common';
 //   values[profession.name] = wordCount + statement.wordCount;
 // });
 
-export function valuesForCard(card) {
+export async function valuesForCard(card) {
   const statements = card.statements;
   const statementCount = statements.length;
   const filterCount = card.filters.length;
@@ -106,14 +106,13 @@ export function valuesForCard(card) {
         break;
 
       case 'words':
-        // FIXME
-        // const words = await statement.words();
-        // words.forEach(word => addCountToLabelValue(count, word, values));
+        const words = await statement.words();
+        words.slice(0, 20).forEach(word => addCountToLabelValue(word.count, word.string, word, values));
         break;
     }
   }
 
-  return Object.keys(values).sort((a,b) => values[a] > values[b] ? -1 : 1).map(label => ({label, color: 'red', object: values[label], value: values[label].count}));
+  return Object.keys(values).sort((a,b) => values[a].count > values[b].count ? -1 : 1).map(label => ({label, object: values[label], value: values[label].count}));
 }
 
 function addCountToLabelValue(count, label, object, values) {

@@ -27,7 +27,7 @@ const BarChart = (props: Object) => {
   const maxChartValue = props.maxChartValue ||  Math.max.apply(Math, bars.map(bar => bar.value));
 
   const barGraphs = bars.map((bar, barIndex) => {
-    const barGraph = bar.slices.map((slice, sliceIndex) => <View key={'bar-slice-' + sliceIndex} style={{backgroundColor: slice.color, flex: slice.value}} />);
+    const barGraph = bar.slices.map((slice, sliceIndex) => <View key={'bar-slice-' + sliceIndex} style={{backgroundColor: slice.color || props.barColor, flex: slice.value}} />);
 
     const delta = maxChartValue - bar.value;
     const deltaBarGraph = delta > 0 ? <View key={'deltaBar-' + barIndex} style={[styles.deltaBar, props.deltaStyle, {flex: delta}]} /> : null;
@@ -67,6 +67,7 @@ BarChart.propTypes = {
       value: PropTypes.number.isRequired,
     })),
   })).isRequired,
+  barColor: ColorPropType,
   barStyle: PropTypes.any,
   deltaStyle: PropTypes.any,
   horizontal: PropTypes.bool,

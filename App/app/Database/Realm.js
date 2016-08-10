@@ -573,8 +573,8 @@ export class Statement extends Realm.Object {
     return [];
   }
 
-  async words() {
-    return await Emdros.words({from: this.firstMonad, to: this.lastMonad, useStopWords: true});
+  async words(options?: Object) {
+    return await Emdros.words({from: this.firstMonad, to: this.lastMonad, useStopWords: true, ...options});
   }
 }
 Statement.schema = StatementSchema;
