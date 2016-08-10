@@ -90,10 +90,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   label: {
-    flex: 0,
-    fontSize: 9,
+    height: 8,
+    // width: 20,
+    fontSize: 8,
+    textAlign: 'right',
     color: 'white',
     backgroundColor: 'transparent',
+    transform: [{rotate: '270deg'}],
   },
 });
 
