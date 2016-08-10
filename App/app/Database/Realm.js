@@ -533,6 +533,32 @@ export class Profession extends Realm.Object {
     return realm.objects('Profession').sorted('key');
   }
 
+  static findByID(id: number) {
+    return realm.objectForPrimaryKey('Profession', id ? parseInt(id) : 0);
+  }
+
+  static async valuesByWordCount(type: string, predicate: Predicate) {
+  const options = {
+    columns: [`${type}_profession_statements.id AS professionID`],
+    tables: [`${type}_profession_statements`]
+  };
+  const statements = await Statement.identifiersMatchingPredicate(predicate, options);
+  if (statements.count == 0) return [];
+
+  const wordCounts = {};
+  statements.reduce((wordCounts, statement) => {
+    const professionID = statement.professionID;
+    const wordCount = wordCounts[professionID] || 0;
+    wordCounts[professionID] = wordCount + statement.wordCount;
+    return wordCounts;
+  }, wordCounts);
+
+  return Object.keys(wordCounts).sort((a,b) => wordCounts[a] > wordCounts[b] ? -1 : 1).map(professionID => {
+    const profession = Profession.findByID(professionID);
+    return {object: profession, label: profession.name, value: wordCounts[professionID]};
+  });
+}
+
   get name() {
     return Localizable.t('professions.' + this.key);
   }
