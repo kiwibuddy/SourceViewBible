@@ -45,14 +45,6 @@ export async function valuesForCard(card) {
           return await Word.valuesByWordCount(predicate);
       }
   }
-  
-  return [];
-}
 
-function addCountToLabelValue(count, label, object, values) {
-  if (!label) return;
-  let labelValue = values[label];
-  if (!labelValue) labelValue = {label, count: 0};
-  labelValue.count = labelValue.count + count;
-  values[label] = labelValue;
+  return [];
 }
