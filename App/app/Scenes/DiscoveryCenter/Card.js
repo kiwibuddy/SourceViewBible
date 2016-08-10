@@ -280,6 +280,8 @@ export default class Card extends Component {
 
     this.setState({card, data: null, loading: true}, () => {
       valuesForCard(card).then(values => {
+        this._animateLayout();
+        
         this.setState({
           data: values,
           loading: false
