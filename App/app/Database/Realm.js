@@ -389,8 +389,36 @@ export class Chronology extends Realm.Object {
     return realm.objects('Chronology').sorted('from');
   }
 
+  static findByID(id: number) {
+    return realm.objectForPrimaryKey('Chronology', parseInt(id));
+  }
+
   static whereInRange(from: Chronology, to: Chronology) {
     return realm.objects('Chronology').filtered('from >= $0 AND to <= $1', from.from, to.to);
+  }
+
+  static async valuesByWordCount(predicate: Predicate) {
+    const options = {
+      columns: ['chronology_statements.id AS chronologyID'],
+      tables: ['chronology_statements']
+    };
+    const statements = await Statement.identifiersMatchingPredicate(predicate, options);
+    if (statements.count == 0) return [];
+
+    const wordCounts = {};
+    statements.reduce((wordCounts, statement) => {
+      const chronologyID = statement.chronologyID;
+      const wordCount = wordCounts[chronologyID] || 0;
+      wordCounts[chronologyID] = wordCount + statement.wordCount;
+      return wordCounts;
+    }, wordCounts);
+
+    console.log('wordCounts', wordCounts);
+
+    return Object.keys(wordCounts).sort((a,b) => wordCounts[a] > wordCounts[b] ? -1 : 1).map(chronologyID => {
+      const chronology = Chronology.findByID(chronologyID);
+      return {object: chronology, label: chronology.name, value: wordCounts[chronologyID]};
+    });
   }
 
   get name() {

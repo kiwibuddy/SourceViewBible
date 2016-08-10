@@ -1,7 +1,7 @@
 /* @flow */
 'use strict';
 
-import { Actant, Book, Statement } from '../../../Database';
+import { Actant, Book, Chronology, Statement } from '../../../Database';
 import { predicateWithCard } from '../Filters/FilterUtils';
 import { Localizable } from '../../../Common';
 
@@ -14,9 +14,14 @@ export async function valuesForCard(card) {
 
   switch (yAxis.id) {
     case 'words':
+      const predicate = predicateWithCard(card);
+
       switch (xAxis.id) {
         case 'book':
-        return await Book.valuesByWordCount(predicateWithCard(card));
+          return await Book.valuesByWordCount(predicate);
+
+        case 'chronology':
+          return await Chronology.valuesByWordCount(predicate);
       }
   }
 
@@ -34,11 +39,11 @@ export async function valuesForCard(card) {
 
     switch (xAxis.id) {
       case 'book':
-        addCountToLabelValue(count, statement.book.name, statement.book, values);
+        // addCountToLabelValue(count, statement.book.name, statement.book, values);
         break;
 
       case 'chronology':
-        if (statement.source) statement.source.chronologies.forEach(chronology => addCountToLabelValue(count, chronology.name, chronology, values));
+        // if (statement.source) statement.source.chronologies.forEach(chronology => addCountToLabelValue(count, chronology.name, chronology, values));
         break;
 
       case 'gender':
