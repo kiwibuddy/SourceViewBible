@@ -4,6 +4,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import {
+  ActivityIndicator,
   LayoutAnimation,
   Text,
   TouchableOpacity,
@@ -81,11 +82,13 @@ export default class Card extends Component {
     const chartView = this._renderChart();
     const filterView = this._renderFilterItems();
     const readButton = this._renderReadButton();
+    const loadingView = this._renderLoading();
 
     return (
       <View style={styles.card}>
         {headerView}
         {chartView}
+        {loadingView}
         {filterView}
         {readButton}
       </View>
@@ -148,6 +151,16 @@ export default class Card extends Component {
     );
   };
 
+  _renderLoading = () => {
+    if (this.state.loading) {
+      return (
+        <ActivityIndicator color="white" size="large" style={styles.activityIndicator} />
+      );
+    }
+
+    return null;
+  }
+
   _renderFilterItems = () => {
     const { card } = this.state;    return (
       <FilterItems
@@ -190,8 +203,6 @@ export default class Card extends Component {
 
   _onPressFilterType = (route: Object) => {
     if (this.props.onShowPopover) {
-      this.setState({loading: true});
-
       const { card } = this.state;
       this.props.onShowPopover({card, route}, (card) => {
         this._animateLayout();
@@ -202,8 +213,6 @@ export default class Card extends Component {
 
   _onPressChartAxis = (route: Object) => {
     if (this.props.onShowPopover) {
-      this.setState({loading: true});
-
       const { card } = this.state;
       this.props.onShowPopover({card, route}, (card) => {
         this._animateLayout();
@@ -220,8 +229,6 @@ export default class Card extends Component {
 
   _onPressEditFilter = (route: Object) => {
     if (this.props.onShowPopover) {
-      this.setState({loading: true});
-
       const { card } = this.state;
       this.props.onShowPopover({card, route}, (card) => {
         this._animateLayout();
@@ -271,7 +278,7 @@ export default class Card extends Component {
       statements
     };
 
-    this.setState({card, data: null}, () => {
+    this.setState({card, data: null, loading: true}, () => {
       valuesForCard(card).then(values => {
         this.setState({
           data: values,
@@ -321,5 +328,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginVertical: 20,
     marginHorizontal: 40,
+  },
+  activityIndicator: {
+    position: 'absolute',
+    top: 180,
+    left: 0,
+    right: 0,
   },
 });

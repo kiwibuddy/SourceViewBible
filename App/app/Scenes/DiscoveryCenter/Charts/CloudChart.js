@@ -4,7 +4,6 @@
 import React, { Component, PropTypes } from 'react';
 
 import {
-  ActivityIndicator,
   Image,
   Text,
   TouchableOpacity,
@@ -49,8 +48,6 @@ class CloudChartView extends Component {
 
     const chart = this._renderChart();
 
-    const loading = (this.props.loading ? <ActivityIndicator color="white" size="large" style={styles.activityIndicator} /> : null);
-
     return (
       <Chart>
         <View style={StyleSheet.styles.discoveryCenter.chartContainer}>
@@ -88,7 +85,6 @@ class CloudChartView extends Component {
             </TouchableOpacity>
           </View>
         </Chart.Footer>
-        {loading}
       </Chart>
     );
   }

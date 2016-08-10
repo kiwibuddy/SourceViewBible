@@ -4,7 +4,6 @@
 import React, { Component, PropTypes } from 'react';
 
 import {
-  ActivityIndicator,
   Image,
   ScrollView,
   TouchableOpacity,
@@ -48,8 +47,6 @@ class BarChartView extends Component {
 
     const chart = this._renderChart();
 
-    const loading = (this.props.loading ? <ActivityIndicator color="white" size="large" style={styles.activityIndicator} /> : null);
-
     return (
       <Chart>
         <View style={StyleSheet.styles.discoveryCenter.chartContainer}>
@@ -87,7 +84,6 @@ class BarChartView extends Component {
             </TouchableOpacity>
           </View>
         </Chart.Footer>
-        {loading}
       </Chart>
     );
   }
@@ -126,13 +122,6 @@ const styles = StyleSheet.create({
     paddingTop: 55,
     paddingBottom: 44,
     paddingHorizontal: 8,
-  },
-  activityIndicator: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
   },
 });
 
