@@ -44,6 +44,29 @@ export async function valuesForCard(card) {
         case 'words':
           return await Word.valuesByWordCount(predicate);
       }
+
+    case 'gender': {
+      switch (xAxis.id) {
+        case 'book':
+
+        case 'chronology':
+
+        case 'name':
+
+        case 'gender':
+
+        case 'nature':
+
+        case 'profession':
+
+        case 'role':
+
+        case 'sphere':
+
+        case 'words':
+      }
+      break;
+    }
   }
 
   return [];
