@@ -1,7 +1,7 @@
 /* @flow */
 'use strict';
 
-import { Actant, Book, Chronology, Nature, Profession, Role, Sphere, Statement } from '../../../Database';
+import { Actant, Book, Chronology, Gender, Nature, Profession, Role, Sphere, Statement } from '../../../Database';
 import { predicateWithCard } from '../Filters/FilterUtils';
 import { Localizable } from '../../../Common';
 
@@ -25,6 +25,9 @@ export async function valuesForCard(card) {
 
         case 'name':
           return await Actant.valuesByWordCount(xAxis.type, predicate);
+
+        case 'gender':
+          return await Gender.valuesByWordCount(xAxis.type, predicate);
 
         case 'nature':
           return await Nature.valuesByWordCount(xAxis.type, predicate);
@@ -53,18 +56,6 @@ export async function valuesForCard(card) {
     }
 
     switch (xAxis.id) {
-      case 'gender':
-        switch (xAxis.type) {
-          case 'source':
-            if (statement.source) addCountToLabelValue(count, statement.source.genderDescription, statement.source, values);
-            break;
-
-          case 'recipient':
-            statement.recipients.forEach(recipient => addCountToLabelValue(count, recipient.genderDescription, recipient, values));
-            break;
-        }
-        break;
-
       case 'words':
         const words = await statement.words();
         words.slice(0, 20).forEach(word => addCountToLabelValue(word.count, word.string, word, values));

@@ -473,6 +473,49 @@ export class Count extends Realm.Object {
 }
 Count.schema = CountSchema;
 
+export class Gender {
+  static GENDER = ['female', 'male'];
+
+  id: number;
+  key: string;
+
+  constructor(id: number, key: string) {
+    this.id = id;
+    this.key = key;
+  }
+
+  static findByID(id: number) {
+    const key = Gender.GENDER[id - 1];
+    return new Gender(id, key);
+  }
+
+  static async valuesByWordCount(type: string, predicate: Predicate) {
+    const options = {
+      columns: [`${type}_gender_statements.id AS genderID`],
+      tables: [`${type}_gender_statements`]
+    };
+    const statements = await Statement.identifiersMatchingPredicate(predicate, options);
+    if (statements.count == 0) return [];
+
+    const wordCounts = {};
+    statements.reduce((wordCounts, statement) => {
+      const genderID = statement.genderID;
+      const wordCount = wordCounts[genderID] || 0;
+      wordCounts[genderID] = wordCount + statement.wordCount;
+      return wordCounts;
+    }, wordCounts);
+
+    return Object.keys(wordCounts).sort((a,b) => wordCounts[a] > wordCounts[b] ? -1 : 1).map(genderID => {
+      const gender = Gender.findByID(genderID);
+      return {object: gender, label: gender.name, value: wordCounts[genderID]};
+    });
+  }
+
+  get name() {
+    return Localizable.t('gender-' + this.key);
+  }
+}
+
 const NatureSchema = {
   name: 'Nature',
   primaryKey: 'id',
@@ -604,7 +647,6 @@ export class Role {
   }
 
   get name() {
-    console.log('roles.' + this.key);
     return Localizable.t('roles.' + this.key);
   }
 }
