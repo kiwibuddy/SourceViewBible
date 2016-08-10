@@ -126,7 +126,7 @@ class BarChartView extends Component {
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.chart}>
         <BarChart
           bars={bars}
-          barColor="#757c84"
+          barColor="#272e35"
           barStyle={{flex: 0, width: 8, marginHorizontal: 2}}
           deltaStyle={{backgroundColor: 'transparent'}}
           horizontal={false}
