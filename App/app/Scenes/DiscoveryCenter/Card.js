@@ -4,6 +4,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import {
+  ActivityIndicator,
   LayoutAnimation,
   Text,
   TouchableOpacity,
@@ -137,6 +138,7 @@ export default class Card extends Component {
     return (
       <ChartView
         card={card}
+        loading={this.state.loading}
         onPressAxis={this._onPressChartAxis}
         onPressChartType={this._onPressChartType}
       />
@@ -185,6 +187,8 @@ export default class Card extends Component {
 
   _onPressFilterType = (route: Object) => {
     if (this.props.onShowPopover) {
+      this.setState({loading: true});
+
       const { card } = this.state;
       this.props.onShowPopover({card, route}, (card) => {
         this._animateLayout();
@@ -195,6 +199,8 @@ export default class Card extends Component {
 
   _onPressChartAxis = (route: Object) => {
     if (this.props.onShowPopover) {
+      this.setState({loading: true});
+
       const { card } = this.state;
       this.props.onShowPopover({card, route}, (card) => {
         this._animateLayout();
@@ -211,6 +217,8 @@ export default class Card extends Component {
 
   _onPressEditFilter = (route: Object) => {
     if (this.props.onShowPopover) {
+      this.setState({loading: true});
+
       const { card } = this.state;
       this.props.onShowPopover({card, route}, (card) => {
         this._animateLayout();
@@ -260,7 +268,8 @@ export default class Card extends Component {
       card: {
         ...card,
         statements
-      }
+      },
+      loading: false
     });
   };
 

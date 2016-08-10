@@ -27,6 +27,7 @@ import { valuesForCard } from './ChartUtils';
 
 type Props = {
   card: Object,
+  loading: boolean,
   onPressAxis: Function,
   onPressChartType: Function,
 };
@@ -46,11 +47,15 @@ class BarChartView extends Component {
   }
 
   componentDidMount() {
-    this._valuesForCard(this.props.card);
+    if (!this.props.loading) {
+      this._valuesForCard(this.props.card);
+    }
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    this._valuesForCard(nextProps.card);
+    if (!nextProps.loading) {
+      this._valuesForCard(nextProps.card);
+    }
   }
 
   render() {
