@@ -19,6 +19,7 @@ Sequel.extension :migration
 Sequel::Migrator.run(DB, "db/migrations")
 
 require './db/seeds/statements'
+require './db/seeds/books'
 require './db/seeds/actants'
 require './db/seeds/sources'
 require './db/seeds/recipients'

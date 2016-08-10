@@ -1,6 +1,8 @@
 /* @flow */
 'use strict';
 
+import RNFS from 'react-native-fs';
+
 const {getChapterID, firstInitial, getSourceID, seedObjectSourceTypeWordCounts, seedObjectSphereWordCounts, SPHERE_MAP} = require('../common');
 
 export async function seedChapterObjects(emdros: Object, realm: Object) {
@@ -71,6 +73,12 @@ async function seedBookChapters(emdros, realm) {
       const firstMonad = chapters[0].firstMonad;
       const lastMonad = chapters[chapters.length - 1].lastMonad;
       realm.create('Book', {id: book.id, chapters, firstMonad, lastMonad}, true);
+    });
+
+    RNFS.writeFile('/tmp/book-monads.json', JSON.stringify(books.map(book => ({id: book.id, firstMonad: book.firstMonad, lastMonad: book.lastMonad}))), 'utf8').then((success) => {
+      console.log('Seeded /tmp/book-monads.json');
+    }).catch((err) => {
+      console.log(err.message);
     });
   });
 }

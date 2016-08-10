@@ -1,0 +1,332 @@
+[
+  {
+    "id": "genesis",
+    "firstMonad": 1,
+    "lastMonad": 87364
+  },
+  {
+    "id": "exodus",
+    "firstMonad": 87365,
+    "lastMonad": 161288
+  },
+  {
+    "id": "leviticus",
+    "firstMonad": 161289,
+    "lastMonad": 216197
+  },
+  {
+    "id": "numbers",
+    "firstMonad": 216198,
+    "lastMonad": 285596
+  },
+  {
+    "id": "deuteronomy",
+    "firstMonad": 285597,
+    "lastMonad": 346422
+  },
+  {
+    "id": "joshua",
+    "firstMonad": 346423,
+    "lastMonad": 386030
+  },
+  {
+    "id": "judges",
+    "firstMonad": 386031,
+    "lastMonad": 425541
+  },
+  {
+    "id": "ruth",
+    "firstMonad": 425542,
+    "lastMonad": 431275
+  },
+  {
+    "id": "1-samuel",
+    "firstMonad": 431276,
+    "lastMonad": 483697
+  },
+  {
+    "id": "2-samuel",
+    "firstMonad": 483698,
+    "lastMonad": 529514
+  },
+  {
+    "id": "1-kings",
+    "firstMonad": 529515,
+    "lastMonad": 583175
+  },
+  {
+    "id": "2-kings",
+    "firstMonad": 583176,
+    "lastMonad": 635898
+  },
+  {
+    "id": "1-chronicles",
+    "firstMonad": 635899,
+    "lastMonad": 686063
+  },
+  {
+    "id": "2-chronicles",
+    "firstMonad": 686064,
+    "lastMonad": 745004
+  },
+  {
+    "id": "ezra",
+    "firstMonad": 745005,
+    "lastMonad": 762405
+  },
+  {
+    "id": "nehemiah",
+    "firstMonad": 762406,
+    "lastMonad": 787454
+  },
+  {
+    "id": "esther",
+    "firstMonad": 787455,
+    "lastMonad": 800277
+  },
+  {
+    "id": "job",
+    "firstMonad": 800278,
+    "lastMonad": 839258
+  },
+  {
+    "id": "psalms",
+    "firstMonad": 839270,
+    "lastMonad": 936289
+  },
+  {
+    "id": "proverbs",
+    "firstMonad": 936290,
+    "lastMonad": 968376
+  },
+  {
+    "id": "ecclesiastes",
+    "firstMonad": 968377,
+    "lastMonad": 979969
+  },
+  {
+    "id": "song-of-songs",
+    "firstMonad": 979970,
+    "lastMonad": 986066
+  },
+  {
+    "id": "isaiah",
+    "firstMonad": 986067,
+    "lastMonad": 1067307
+  },
+  {
+    "id": "jeremiah",
+    "firstMonad": 1067308,
+    "lastMonad": 1156942
+  },
+  {
+    "id": "lamentations",
+    "firstMonad": 1156943,
+    "lastMonad": 1164466
+  },
+  {
+    "id": "ezekiel",
+    "firstMonad": 1164467,
+    "lastMonad": 1248758
+  },
+  {
+    "id": "daniel",
+    "firstMonad": 1248759,
+    "lastMonad": 1273888
+  },
+  {
+    "id": "hosea",
+    "firstMonad": 1273889,
+    "lastMonad": 1286980
+  },
+  {
+    "id": "joel",
+    "firstMonad": 1286981,
+    "lastMonad": 1291471
+  },
+  {
+    "id": "amos",
+    "firstMonad": 1291472,
+    "lastMonad": 1301290
+  },
+  {
+    "id": "obadiah",
+    "firstMonad": 1301291,
+    "lastMonad": 1302905
+  },
+  {
+    "id": "jonah",
+    "firstMonad": 1302906,
+    "lastMonad": 1305793
+  },
+  {
+    "id": "micah",
+    "firstMonad": 1305794,
+    "lastMonad": 1312964
+  },
+  {
+    "id": "nahum",
+    "firstMonad": 1312965,
+    "lastMonad": 1315672
+  },
+  {
+    "id": "habakkuk",
+    "firstMonad": 1315673,
+    "lastMonad": 1319022
+  },
+  {
+    "id": "zephaniah",
+    "firstMonad": 1319023,
+    "lastMonad": 1322586
+  },
+  {
+    "id": "haggai",
+    "firstMonad": 1322587,
+    "lastMonad": 1325513
+  },
+  {
+    "id": "zechariah",
+    "firstMonad": 1325514,
+    "lastMonad": 1340416
+  },
+  {
+    "id": "malachi",
+    "firstMonad": 1340417,
+    "lastMonad": 1345022
+  },
+  {
+    "id": "matthew",
+    "firstMonad": 1345023,
+    "lastMonad": 1404167
+  },
+  {
+    "id": "mark",
+    "firstMonad": 1404168,
+    "lastMonad": 1441921
+  },
+  {
+    "id": "luke",
+    "firstMonad": 1441922,
+    "lastMonad": 1504428
+  },
+  {
+    "id": "john",
+    "firstMonad": 1504429,
+    "lastMonad": 1551619
+  },
+  {
+    "id": "acts",
+    "firstMonad": 1551620,
+    "lastMonad": 1608647
+  },
+  {
+    "id": "romans",
+    "firstMonad": 1608648,
+    "lastMonad": 1636025
+  },
+  {
+    "id": "1-corinthians",
+    "firstMonad": 1636026,
+    "lastMonad": 1662122
+  },
+  {
+    "id": "2-corinthians",
+    "firstMonad": 1662123,
+    "lastMonad": 1678521
+  },
+  {
+    "id": "galatians",
+    "firstMonad": 1678522,
+    "lastMonad": 1688003
+  },
+  {
+    "id": "ephesians",
+    "firstMonad": 1688004,
+    "lastMonad": 1696372
+  },
+  {
+    "id": "philippians",
+    "firstMonad": 1696373,
+    "lastMonad": 1702327
+  },
+  {
+    "id": "colossians",
+    "firstMonad": 1702328,
+    "lastMonad": 1707664
+  },
+  {
+    "id": "1-thessalonians",
+    "firstMonad": 1707665,
+    "lastMonad": 1712821
+  },
+  {
+    "id": "2-thessalonians",
+    "firstMonad": 1712822,
+    "lastMonad": 1715567
+  },
+  {
+    "id": "1-timothy",
+    "firstMonad": 1715568,
+    "lastMonad": 1722193
+  },
+  {
+    "id": "2-timothy",
+    "firstMonad": 1722194,
+    "lastMonad": 1726674
+  },
+  {
+    "id": "titus",
+    "firstMonad": 1726675,
+    "lastMonad": 1729424
+  },
+  {
+    "id": "philemon",
+    "firstMonad": 1729425,
+    "lastMonad": 1730699
+  },
+  {
+    "id": "hebrews",
+    "firstMonad": 1730700,
+    "lastMonad": 1749715
+  },
+  {
+    "id": "james",
+    "firstMonad": 1749716,
+    "lastMonad": 1756049
+  },
+  {
+    "id": "1-peter",
+    "firstMonad": 1756050,
+    "lastMonad": 1762922
+  },
+  {
+    "id": "2-peter",
+    "firstMonad": 1762923,
+    "lastMonad": 1766951
+  },
+  {
+    "id": "1-john",
+    "firstMonad": 1766952,
+    "lastMonad": 1773578
+  },
+  {
+    "id": "2-john",
+    "firstMonad": 1773579,
+    "lastMonad": 1774373
+  },
+  {
+    "id": "3-john",
+    "firstMonad": 1774374,
+    "lastMonad": 1775280
+  },
+  {
+    "id": "jude",
+    "firstMonad": 1775281,
+    "lastMonad": 1777268
+  },
+  {
+    "id": "revelation",
+    "firstMonad": 1777269,
+    "lastMonad": 1804812
+  }
+]
