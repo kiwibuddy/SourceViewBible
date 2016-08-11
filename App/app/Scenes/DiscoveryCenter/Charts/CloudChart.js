@@ -55,13 +55,13 @@ class CloudChartView extends Component {
         </View>
         <Chart.Header>
           <Chart.DropdownButton
-            image={require('../Images/chart-icn-bar-xaxis.png')}
+            image={require('../Images/chart-icn-word-xaxis.png')}
             onPress={() => this.props.onPressAxis(axisItemsURL({title: "Choose Text", axis: 'xAxis'}))}
             title={xAxisTitle}
             style={StyleSheet.styles.discoveryCenter.leftContainer}
           />
           <Chart.DropdownButton
-            image={require('../Images/chart-icn-bar-yaxis.png')}
+            image={require('../Images/chart-icn-word-yaxis.png')}
             onPress={() => this.props.onPressAxis(axisItemsURL({title: "Choose Size", axis: 'yAxis'}))}
             title={yAxisTitle}
             style={StyleSheet.styles.discoveryCenter.rightContainer}
@@ -79,7 +79,7 @@ class CloudChartView extends Component {
               <Image source={require('../Images/chart-type-cloud-s.png')} />
             </TouchableOpacity>
           </View>
-          <Text style={styles.chartNote}>Top 15 Professions</Text>
+          <Text style={styles.chartNote}>TOP 10</Text>
           <View style={[StyleSheet.styles.discoveryCenter.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
             <TouchableOpacity>
               <Image source={require('../Images/btn-fullscreen.png')} />
@@ -111,24 +111,16 @@ class CloudChartView extends Component {
           <Text style={[styles.wc1, {top: 50, alignSelf: 'center'}]}>{words[0]}</Text>
         </ParallaxMotionView>
         <ParallaxMotionView intensity={10} style={[styles.parallax, {opacity: 0.8}]}>
-          <Text style={[styles.wc2, {top: 125, right: 15}]}>{words[1]}</Text>
-          <Text style={[styles.wc2, {top: 150, left: 15}]}>{words[2]}</Text>
-          <Text style={[styles.wc2, {top: -15, left: -10}]}>{words[3]}</Text>
-          <Text style={[styles.wc2, {top: -20, right: 40}]}>{words[4]}</Text>
+          <Text style={[styles.wc2, {top: 10, left: 10}]}>{words[1]}</Text>
+          <Text style={[styles.wc2, {top: 150, right: 10}]}>{words[2]}</Text>
+          <Text style={[styles.wc2, {top: 30, right: 30}]}>{words[3]}</Text>
+          <Text style={[styles.wc2, {top: 130, left: 0}]}>{words[4]}</Text>
         </ParallaxMotionView>
         <ParallaxMotionView intensity={20} style={[styles.parallax, {opacity: 0.6}]}>
-          <Text style={[styles.wc3, {top: 90, right: 10}]}>{words[5]}</Text>
-          <Text style={[styles.wc3, {top: 55, left: 10}]}>{words[6]}</Text>
-          <Text style={[styles.wc3, {top: 30, right: -10}]}>{words[7]}</Text>
-          <Text style={[styles.wc3, {top: 125, left: 30}]}>{words[8]}</Text>
-        </ParallaxMotionView>
-        <ParallaxMotionView intensity={30} style={[styles.parallax, {opacity: 0.3}]}>
-          <Text style={[styles.wc4, {top: 20, right: 150}]}>{words[9]}</Text>
-          <Text style={[styles.wc4, {top: 150, right: 170}]}>{words[10]}</Text>
-          <Text style={[styles.wc4, {top: 35, left: 80}]}>{words[11]}</Text>
-          <Text style={[styles.wc4, {top: 100, left: -10}]}>{words[12]}</Text>
-          <Text style={[styles.wc4, {top: -10, left: 130}]}>{words[13]}</Text>
-          <Text style={[styles.wc4, {top: 65, right: 60}]}>{words[14]}</Text>
+          <Text style={[styles.wc3, {top: 0, right: 10}]}>{words[5]}</Text>
+          <Text style={[styles.wc3, {top: 60, left: 0}]}>{words[6]}</Text>
+          <Text style={[styles.wc3, {top: 170, left: 20}]}>{words[7]}</Text>
+          <Text style={[styles.wc3, {top: 125, right: 50}]}>{words[8]}</Text>
         </ParallaxMotionView>
       </WordCloud>
     );
@@ -140,7 +132,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginVertical: 44,
     minHeight: 200,
-    width: 400,
+    width: 380,
     overflow: 'hidden',
   },
   activityIndicator: {
@@ -178,21 +170,21 @@ const styles = StyleSheet.create({
   wc2: {
     color: 'white',
     backgroundColor:'transparent',
-    fontSize: 42,
+    fontSize: 28,
     fontWeight: '200',
     position: 'absolute',
   },
   wc3: {
     color: 'white',
     backgroundColor:'transparent',
-    fontSize: 30,
+    fontSize: 18,
     fontWeight: '200',
     position: 'absolute',
   },
   wc4: {
     color: 'white',
     backgroundColor:'transparent',
-    fontSize: 18,
+    fontSize: 13,
     fontWeight: '200',
     position: 'absolute',
   },
