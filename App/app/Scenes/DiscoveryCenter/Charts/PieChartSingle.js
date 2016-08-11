@@ -39,7 +39,11 @@ const PieChartSingle = (props: Props) => {
           size={150}
           style={styles.pie}
         />
-        <PieChartList {...props} style={styles.list} />
+        <PieChartList
+          {...props}
+          labelStyle={styles.listLabel}
+          style={styles.list}
+        />
       </View>
     </View>
   );
@@ -55,13 +59,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   pie: {
+    flex: 1,
     alignSelf: 'center',
-    left: 30,
+    marginLeft: 30,
   },
   list: {
+    flex: 3,
     height: 200,
-    width: 50,
-  }
+    marginRight: 30,
+  },
 });
 
 export default PieChartSingle;

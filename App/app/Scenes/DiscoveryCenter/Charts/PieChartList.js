@@ -56,6 +56,7 @@ export default class PieChartList extends Component {
           renderRow={this._renderRow}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
+          style={styles.listView}
         />
       </View>
     );
@@ -66,7 +67,7 @@ export default class PieChartList extends Component {
       <View style={styles.row}>
         <View style={[styles.dot, {backgroundColor: slice.color}]} />
         <Text style={styles.percentText}>{Localizable.toPercentage(slice.percent, {precision: 0})}</Text>
-        <Text style={styles.titleText}>{slice.label}</Text>
+        <Text numberOfLines={1} style={[styles.labelText, this.props.labelStyle]}>{slice.label}</Text>
       </View>
     );
   };
@@ -76,8 +77,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  listView: {
+    flex: 1,
+    paddingVertical: 10,
+  },
   row: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    height: 20,
   },
   dot: {
     width: 10,
@@ -88,7 +94,7 @@ const styles = StyleSheet.create({
   percentText: {
     backgroundColor: 'transparent',
   },
-  titleText: {
+  labelText: {
     backgroundColor: 'transparent',
   },
 });
