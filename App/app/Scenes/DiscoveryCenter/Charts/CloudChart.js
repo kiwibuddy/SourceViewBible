@@ -103,7 +103,7 @@ class CloudChartView extends Component {
     const { data } = this.props;
     if (!this._shouldRenderChart(this.props.card) || data == null || this.props.loading) return <Image source={require('../Images/chart-cloud-blankslate.png')} />;
 
-    const words = data.slice(0, Math.min(data.length, 15)).map(word => word.label);
+    const words = data.slice(0, Math.min(data.length, 10)).map(word => word.label);
 
     return (
       <WordCloud style={[styles.wordCloud, styles.chart]}>
@@ -146,13 +146,6 @@ const styles = StyleSheet.create({
     flex: 1,
     minHeight: 295,
     backgroundColor: 'transparent',
-    shadowColor: "black",
-    shadowOpacity: 0.05,
-    shadowRadius: 0.4,
-    shadowOffset: {
-      height: 1,
-      width: 0
-    },
   },
   parallax: {
     position: 'absolute',
