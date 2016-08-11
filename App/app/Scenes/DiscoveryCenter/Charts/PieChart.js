@@ -10,11 +10,13 @@ import {
 } from 'react-native';
 
 import {
+  Localizable,
   StyleSheet,
 } from '../../../Common';
 
 import Chart from './Chart';
-import { PieChart } from '../../../Components/Charts';
+import PieChartSingle from './PieChartSingle';
+
 import { axisItemsURL } from '../../../Navigation';
 
 type Props = {
@@ -47,7 +49,7 @@ const PieChartView = (props: Props) => {
   if (!xAxis || !yAxis || statementCount == 0 || data == null || loading) {
     chart = <Image style={{alignSelf: 'center'}} source={require('../Images/chart-pie-blankslate.png')} />;
   } else {
-
+    chart = <PieChartSingle {...props} />;
   }
 
   return (
