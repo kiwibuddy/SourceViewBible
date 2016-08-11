@@ -39,7 +39,7 @@ const PieChartSingle = (props: Props) => {
           size={150}
           style={styles.pie}
         />
-        <PieChartList {...props} style={styles.list} />
+        <PieChartList {...props} height={200} style={styles.list} />
       </View>
     </View>
   );

@@ -24,6 +24,7 @@ import PieColors, { colorAtIndex } from './PieChartColors';
 type Props = {
   card: Object,
   data: Object,
+  height?: number,
 };
 
 type State = {
@@ -43,21 +44,16 @@ export default class PieChartList extends Component {
     };
   }
 
-  componentDidMount() {
+  render() {
     const { data } = this.props;
-
     const totalValue = data.reduce((sum, slice) => sum + slice.value, 0);
     const slices = data.map((slice, index) => ({...slice, color: colorAtIndex(index), percent: (slice.value / totalValue) * 100}));
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(slices)
-    });
-  }
+    const dataSource = this.state.dataSource.cloneWithRows(slices);
 
-  render() {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, {height: this.props.height}]}>
         <ListView
-          dataSource={this.state.dataSource}
+          dataSource={dataSource}
           renderRow={this._renderRow}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
