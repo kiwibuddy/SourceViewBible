@@ -15,7 +15,15 @@ const Colors = [
 ];
 
 export function colorAtIndex(index: number) {
-  return Colors[index];
+  const colorCount = Colors.length;
+  const number = index % colorCount;
+  let color = Colors[number];
+
+  const alpha = parseInt(index / colorCount);
+  if (alpha > 0) {
+    color += (100 - (alpha * 10)).toString();
+  }
+  return color;
 }
 
 export default Colors;
