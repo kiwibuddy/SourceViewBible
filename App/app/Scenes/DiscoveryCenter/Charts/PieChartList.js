@@ -24,7 +24,6 @@ import PieColors, { colorAtIndex } from './PieChartColors';
 type Props = {
   card: Object,
   data: Object,
-  height?: number,
 };
 
 type State = {
@@ -51,7 +50,7 @@ export default class PieChartList extends Component {
     const dataSource = this.state.dataSource.cloneWithRows(slices);
 
     return (
-      <View style={[styles.container, {height: this.props.height}]}>
+      <View style={[styles.container, this.props.style]}>
         <ListView
           dataSource={dataSource}
           renderRow={this._renderRow}

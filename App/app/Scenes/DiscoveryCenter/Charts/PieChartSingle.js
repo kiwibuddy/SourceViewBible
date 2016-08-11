@@ -39,7 +39,7 @@ const PieChartSingle = (props: Props) => {
           size={150}
           style={styles.pie}
         />
-        <PieChartList {...props} height={200} style={styles.list} />
+        <PieChartList {...props} style={styles.list} />
       </View>
     </View>
   );
@@ -59,7 +59,8 @@ const styles = StyleSheet.create({
     left: 30,
   },
   list: {
-    backgroundColor: 'red'
+    height: 200,
+    width: 50,
   }
 });
 
