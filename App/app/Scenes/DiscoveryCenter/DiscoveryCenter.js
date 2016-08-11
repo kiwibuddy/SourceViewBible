@@ -190,7 +190,8 @@ export default class DiscoveryCenter extends Component {
     const occurrences = card.statements;
     if (occurrences.length > 0) {
       const route = discoveryCenterOccurrencesURL({title: 'Occurrences', occurrences});
-      this.props.navigate(route);
+      // FIXME
+      // this.props.navigate(route);
     }
   };
 
