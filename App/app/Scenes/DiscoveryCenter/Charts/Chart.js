@@ -91,6 +91,8 @@ Chart.DropdownButton = DropdownButton;
 
 const styles = StyleSheet.create({
   chart: {
+    flex: 1,
+    minHeight: 295,
     overflow: 'hidden',
     shadowColor: 'black',
     shadowOpacity: 0.1,

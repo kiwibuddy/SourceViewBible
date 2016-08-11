@@ -50,9 +50,7 @@ class CloudChartView extends Component {
 
     return (
       <Chart>
-        <View style={StyleSheet.styles.discoveryCenter.chartContainer}>
-          {chart}
-        </View>
+        {chart}
         <Chart.Header>
           <Chart.DropdownButton
             image={require('../Images/chart-icn-word-xaxis.png')}
@@ -106,7 +104,7 @@ class CloudChartView extends Component {
     const words = data.slice(0, Math.min(data.length, 10)).map(word => word.label);
 
     return (
-      <WordCloud style={[styles.wordCloud, styles.chart]}>
+      <WordCloud style={styles.chart}>
         <ParallaxMotionView intensity={5} style={[styles.parallax, {opacity: 0.8}]}>
           <Text style={[styles.wc1, {top: 50, alignSelf: 'center'}]}>{words[0]}</Text>
         </ParallaxMotionView>
@@ -131,9 +129,8 @@ const styles = StyleSheet.create({
   chart: {
     flex: 1,
     marginVertical: 44,
-    minHeight: 200,
-    width: 380,
     overflow: 'hidden',
+    backgroundColor: 'transparent',
   },
   activityIndicator: {
     position: 'absolute',
@@ -141,11 +138,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-  },
-  wordCloud: {
-    flex: 1,
-    minHeight: 295,
-    backgroundColor: 'transparent',
   },
   parallax: {
     position: 'absolute',

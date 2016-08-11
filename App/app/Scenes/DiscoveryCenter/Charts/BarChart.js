@@ -49,9 +49,7 @@ class BarChartView extends Component {
 
     return (
       <Chart>
-        <View style={StyleSheet.styles.discoveryCenter.chartContainer}>
-          {chart}
-        </View>
+        {chart}
         <Chart.Header>
           <Chart.DropdownButton
             image={require('../Images/chart-icn-bar-xaxis.png')}
@@ -102,15 +100,17 @@ class BarChartView extends Component {
     if (!this._shouldRenderChart(this.props.card) || data == null || this.props.loading) return <Image source={require('../Images/chart-bar-blankslate.png')} />;
 
     return (
-      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.chart}>
-        <BarChart
-          bars={data}
-          barColor="#F74260"
-          barStyle={{flex: 0, width: 8, marginHorizontal: 6, marginBottom: 100,}}
-          deltaStyle={{backgroundColor: 'transparent'}}
-          horizontal={false}
-        />
-      </ScrollView>
+      <View style={styles.chart}>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <BarChart
+            bars={data}
+            barColor="#F74260"
+            barStyle={{flex: 0, width: 8, marginHorizontal: 6, marginBottom: 100,}}
+            deltaStyle={{backgroundColor: 'transparent'}}
+            horizontal={false}
+          />
+        </ScrollView>
+      </View>
     );
   };
 }
@@ -118,10 +118,10 @@ class BarChartView extends Component {
 const styles = StyleSheet.create({
   chart: {
     flex: 1,
-    minHeight: 295,
     paddingTop: 55,
     paddingBottom: 44,
-    paddingHorizontal: 8,
+    paddingHorizontal: 4,
+    alignItems: 'center',
   },
 });
 

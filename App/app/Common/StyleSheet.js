@@ -187,9 +187,6 @@ const styles = {
       height: 44,
       marginTop: -20,
     },
-    chartContainer: {
-      alignItems: 'center',
-    },
   }
 };
 

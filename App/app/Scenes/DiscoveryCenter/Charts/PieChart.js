@@ -22,9 +22,7 @@ type Props = {
 const PieChart = (props: Props) => {
   return (
     <Chart>
-      <View style={StyleSheet.styles.discoveryCenter.chartContainer}>
-        <Image source={require('../Images/chart-pie-blankslate.png')} />
-      </View>
+      <Image source={require('../Images/chart-pie-blankslate.png')} />
       <Chart.Header>
         <Chart.DropdownButton
           image={require('../Images/chart-icn-pie-slices.png')}

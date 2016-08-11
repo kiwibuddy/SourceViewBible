@@ -21,7 +21,7 @@ type Props = {
 const ChartBlankslate = (props: Props) => {
   return (
     <Chart>
-      <View style={StyleSheet.styles.discoveryCenter.chartContainer}>
+      <View style={{alignItems: 'center'}}>
         <Image source={require('../Images/chart-bar-blankslate.png')} />
       </View>
       <Chart.Header style={{paddingLeft: 10}}>
