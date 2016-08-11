@@ -138,10 +138,10 @@ class CloudChartView extends Component {
 const styles = StyleSheet.create({
   chart: {
     flex: 1,
-    minHeight: 295,
-    paddingTop: 55,
-    paddingBottom: 44,
-    paddingHorizontal: 8,
+    marginVertical: 44,
+    minHeight: 200,
+    width: 400,
+    overflow: 'hidden',
   },
   activityIndicator: {
     position: 'absolute',
