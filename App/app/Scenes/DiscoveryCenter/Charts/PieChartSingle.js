@@ -55,10 +55,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   pie: {
-
+    alignSelf: 'center',
+    left: 30,
   },
   list: {
-
+    backgroundColor: 'red'
   }
 });
 
