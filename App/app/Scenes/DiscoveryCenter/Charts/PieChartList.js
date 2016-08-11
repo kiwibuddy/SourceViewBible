@@ -19,7 +19,7 @@ import {
   Localizable
 } from '../../../Common';
 
-import PieColors from './PieChartColors';
+import PieColors, { colorAtIndex } from './PieChartColors';
 
 type Props = {
   card: Object,
@@ -45,7 +45,9 @@ export default class PieChartList extends Component {
 
   componentDidMount() {
     const { data } = this.props;
-    const slices = data.map((slice, index) => ({...slice, color: PieColors[index]}));
+
+    const totalValue = data.reduce((sum, slice) => sum + slice.value, 0);
+    const slices = data.map((slice, index) => ({...slice, color: colorAtIndex(index), percent: (slice.value / totalValue) * 100}));
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(slices)
     });
@@ -68,7 +70,7 @@ export default class PieChartList extends Component {
     return (
       <View style={styles.row}>
         <View style={[styles.dot, {backgroundColor: slice.color}]} />
-        <Text style={styles.percentText}>0%</Text>
+        <Text style={styles.percentText}>{Localizable.toPercentage(slice.percent, {precision: 0})}</Text>
         <Text style={styles.titleText}>{slice.label}</Text>
       </View>
     );

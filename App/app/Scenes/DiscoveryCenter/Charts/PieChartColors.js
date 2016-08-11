@@ -14,4 +14,8 @@ const Colors = [
   '#67871D',
 ];
 
+export function colorAtIndex(index: number) {
+  return Colors[index];
+}
+
 export default Colors;
