@@ -3,10 +3,10 @@ Sequel.extension :migration
 
 Sequel.migration do
   change do
-    create_table(:actant_numbers) do
+    create_table(:actant_natures) do
       Integer :id, index: true
-      Integer :actant_number_id, index: true
-      primary_key [:id, :actant_number_id]
+      Integer :nature_id, index: true
+      primary_key [:id, :nature_id]
     end
   end
 end
