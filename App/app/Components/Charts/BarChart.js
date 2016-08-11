@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ededed',
   },
   stackedBar: {
-    flex: 0,
+    flex: 1,
   },
   label: {
     flex: 1,
