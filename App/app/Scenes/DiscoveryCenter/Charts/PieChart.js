@@ -16,6 +16,7 @@ import {
 
 import Chart from './Chart';
 import PieChartSingle from './PieChartSingle';
+import PieChartMultiple from './PieChartMultiple';
 
 import { axisItemsURL } from '../../../Navigation';
 
@@ -34,20 +35,28 @@ const PieChartView = (props: Props) => {
   const filterCount = card.filters.length;
   const xAxis = card.xAxis;
   const yAxis = card.yAxis;
+  const zAxis = card.zAxis;
 
-  let xAxisTitle = "Slices";
-  if (card.xAxis) {
+  let xAxisTitle = 'Slices';
+  if (xAxis) {
     xAxisTitle = card.xAxis.name;
   }
 
-  let yAxisTitle = "Slice";
-  if (card.yAxis) {
+  let yAxisTitle = 'Slice';
+  if (yAxis) {
     yAxisTitle = card.yAxis.name;
+  }
+
+  let zAxisTitle = 'Pies (optional)';
+  if (zAxis) {
+    zAxisTitle = card.zAxis.name;
   }
 
   let chart = null;
   if (!xAxis || !yAxis || statementCount == 0 || data == null || loading) {
     chart = <Image style={{alignSelf: 'center'}} source={require('../Images/chart-pie-blankslate.png')} />;
+  } else if (zAxis) {
+    chart = <PieChartMultiple {...props} />;
   } else {
     chart = <PieChartSingle {...props} />;
   }
@@ -58,20 +67,21 @@ const PieChartView = (props: Props) => {
       <Chart.Header>
         <Chart.DropdownButton
           image={require('../Images/chart-icn-pie-slices.png')}
-          onPress={() => props.onPressAxis(axisItemsURL({title: "Slices", axis: 'xAxis'}))}
-          title={xAxisTitle}
+          onPress={() => props.onPressAxis(axisItemsURL({title: 'Slices', axis: 'xAxis'}))}
           style={StyleSheet.styles.discoveryCenter.leftContainer}
+          title={xAxisTitle}
         />
         <Chart.DropdownButton
           image={require('../Images/chart-icn-pie-slice-value.png')}
-          onPress={() => props.onPressAxis(axisItemsURL({title: "Slice", axis: 'yAxis'}))}
-          title={yAxisTitle}
+          onPress={() => props.onPressAxis(axisItemsURL({title: 'Slice', axis: 'yAxis'}))}
           style={StyleSheet.styles.discoveryCenter.leftContainer}
+          title={yAxisTitle}
         />
         <Chart.DropdownButton
           image={require('../Images/chart-icn-pies.png')}
-          title="Pies (optional)"
+          onPress={() => props.onPressAxis(axisItemsURL({title: 'Pies', axis: 'zAxis'}))}
           style={StyleSheet.styles.discoveryCenter.rightContainer}
+          title={zAxisTitle}
         />
       </Chart.Header>
       <Chart.Footer>

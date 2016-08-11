@@ -24,6 +24,7 @@ import PieColors, { colorAtIndex } from './PieChartColors';
 type Props = {
   card: Object,
   data: Object,
+  renderHeader?: Function,
 };
 
 type State = {
@@ -53,6 +54,7 @@ export default class PieChartList extends Component {
       <View style={[styles.container, this.props.style]}>
         <ListView
           dataSource={dataSource}
+          renderHeader={this.props.renderHeader}
           renderRow={this._renderRow}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}

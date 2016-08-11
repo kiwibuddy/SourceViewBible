@@ -14,7 +14,6 @@ import {
   StyleSheet,
 } from '../../../Common';
 
-import Chart from './Chart';
 import PieColors, { DeltaColor } from './PieChartColors';
 import PieChartList from './PieChartList';
 import { PieChart } from '../../../Components/Charts';
@@ -48,7 +47,6 @@ const PieChartSingle = (props: Props) => {
         />
         <PieChartList
           {...props}
-          labelStyle={styles.listLabel}
           style={styles.list}
         />
       </View>

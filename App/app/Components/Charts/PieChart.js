@@ -29,7 +29,7 @@ const PieChart = (props: Object) => {
   const chartStyle = [styles.chart, props.style, {width: size, height: size}];
 
   const sliceStyle = [styles.slice, {borderTopColor: color, borderLeftColor: color, borderBottomColor: color }];
-  const title = props.title ? <Text style={[styles.title, {color: color}, titleStyle]}>{props.title}</Text> : null;
+  const title = props.title ? <Text numberOfLines={1} style={[styles.title, {color: color}, titleStyle]}>{props.title}</Text> : null;
   const subtitle = props.subtitle ? <Text style={[styles.subtitle, subtitleStyle]}>{props.subtitle}</Text> : null;
 
   const radius = (size / 2) - STROKE_WIDTH;
