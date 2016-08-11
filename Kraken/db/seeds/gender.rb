@@ -1,5 +1,5 @@
 
-def seed_gender_statements(type)
+['source', 'recipient'].each do |type|
   STDERR.puts "Seeding #{type} gender statements"
 
   EMDROS[:statement_objects].each do |statement_object|
@@ -14,3 +14,12 @@ def seed_gender_statements(type)
     end
   end
 end
+
+insert_sql = "INSERT INTO gender_statements
+SELECT id, statement_id FROM (
+SELECT id, statement_id FROM source_gender_statements
+UNION
+SELECT id, statement_id FROM recipient_gender_statements
+)
+"
+DB.run insert_sql

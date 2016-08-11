@@ -26,8 +26,27 @@ actants = actant_objects.all.map do |actant_object|
     isSource: actant_object[:is_source] == 1,
     isRecipient: actant_object[:is_recipient] == 1,
   }
-
 end
+
+EMDROS[:statement_objects].each do |s|
+	s[:mdf_sources].to_s.strip.split(" ").map{|r| r.to_i}.each do |id|
+		DB[:source_statements].insert({id: id, statement_id: s[:object_id_d]}) if id > 0
+	end
+
+	s[:mdf_recipients].to_s.strip.split(" ").map{|r| r.to_i}.each do |id|
+		DB[:recipient_statements].insert({id: id, statement_id: s[:object_id_d]}) if id > 0
+	end
+end
+
+
+insert_sql = "INSERT INTO actant_statements
+SELECT id, statement_id FROM (
+SELECT id, statement_id FROM source_statements
+UNION
+SELECT id, statement_id FROM recipient_statements
+)
+"
+DB.run insert_sql
 
 # pp actants
 File.open("db/seeds/actants.json", "w+") { |f| f.write JSON.pretty_generate(actants) }

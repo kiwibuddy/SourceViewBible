@@ -1,5 +1,5 @@
 
-def seed_profession_statements(type)
+['source', 'recipient'].each do |type|
   STDERR.puts "Seeding #{type} profession statements"
 
   EMDROS[:statement_objects].each do |statement_object|
@@ -15,3 +15,12 @@ def seed_profession_statements(type)
     end
   end
 end
+
+insert_sql = "INSERT INTO profession_statements
+SELECT id, statement_id FROM (
+SELECT id, statement_id FROM source_profession_statements
+UNION
+SELECT id, statement_id FROM recipient_profession_statements
+)
+"
+DB.run insert_sql

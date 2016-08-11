@@ -1,5 +1,5 @@
 
-def seed_actant_number_statements(type)
+['source', 'recipient'].each do |type|
   STDERR.puts "Seeding #{type} actant_number statements"
 
   EMDROS[:statement_objects].each do |statement_object|
@@ -14,3 +14,12 @@ def seed_actant_number_statements(type)
     end
   end
 end
+
+insert_sql = "INSERT INTO actant_number_statements
+SELECT id, statement_id FROM (
+SELECT id, statement_id FROM source_actant_number_statements
+UNION
+SELECT id, statement_id FROM recipient_actant_number_statements
+)
+"
+DB.run insert_sql

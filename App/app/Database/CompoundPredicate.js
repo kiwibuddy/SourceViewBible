@@ -37,4 +37,8 @@ export default class CompoundPredicate extends Predicate {
     });
     return [...new Set(tables)];
   }
+
+  get empty(): boolean {
+    return this.subpredicates.length == 0;
+  }
 }

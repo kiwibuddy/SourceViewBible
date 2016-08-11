@@ -228,9 +228,10 @@ export class Actant extends Realm.Object {
   }
 
   static async valuesByWordCount(type: string, predicate: Predicate) {
+    const optionType = (type ? type : 'actant');
     const options = {
-      columns: [`${type}_statements.id AS actantID`],
-      tables: [`${type}_statements`]
+      columns: [`${optionType}_statements.id AS actantID`],
+      tables: [`${optionType}_statements`]
     };
     const statements = await Statement.identifiersMatchingPredicate(predicate, options);
     if (statements.count == 0) return [];
@@ -490,9 +491,10 @@ export class Gender {
   }
 
   static async valuesByWordCount(type: string, predicate: Predicate) {
+    const optionType = (type ? `${type}_` : '');
     const options = {
-      columns: [`${type}_gender_statements.id AS genderID`],
-      tables: [`${type}_gender_statements`]
+      columns: [`${optionType}gender_statements.id AS genderID`],
+      tables: [`${optionType}gender_statements`]
     };
     const statements = await Statement.identifiersMatchingPredicate(predicate, options);
     if (statements.count == 0) return [];
@@ -535,9 +537,10 @@ export class Nature extends Realm.Object {
   }
 
   static async valuesByWordCount(type: string, predicate: Predicate) {
+    const optionType = (type ? `${type}_` : '');
     const options = {
-      columns: [`${type}_nature_statements.id AS natureID`],
-      tables: [`${type}_nature_statements`]
+      columns: [`${optionType}nature_statements.id AS natureID`],
+      tables: [`${optionType}nature_statements`]
     };
     const statements = await Statement.identifiersMatchingPredicate(predicate, options);
     if (statements.count == 0) return [];
@@ -581,11 +584,12 @@ export class Profession extends Realm.Object {
   }
 
   static async valuesByWordCount(type: string, predicate: Predicate) {
+    const optionType = (type ? `${type}_` : '');
     const options = {
-      columns: [`${type}_profession_statements.id AS professionID`],
-      tables: [`${type}_profession_statements`]
+      columns: [`${optionType}profession_statements.id AS professionID`],
+      tables: [`${optionType}profession_statements`]
     };
-    const statements = await Statement.identifiersMatchingPredicate(predicate, options);
+    let statements = await Statement.identifiersMatchingPredicate(predicate, options);
     if (statements.count == 0) return [];
 
     const wordCounts = {};
@@ -625,9 +629,10 @@ export class Role {
   }
 
   static async valuesByWordCount(type: string, predicate: Predicate) {
+    const optionType = (type ? `${type}_` : '');
     const options = {
-      columns: [`${type}_type_statements.id AS roleID`],
-      tables: [`${type}_type_statements`]
+      columns: [`${optionType}role_statements.id AS roleID`],
+      tables: [`${optionType}role_statements`]
     };
     const statements = await Statement.identifiersMatchingPredicate(predicate, options);
     if (statements.count == 0) return [];
@@ -755,8 +760,8 @@ export class Statement extends Realm.Object {
   }
 
   static async identifiersMatchingPredicate(predicate: CompoundPredicate, options?: Object) {
-    if (!predicate) {
-      return Statement.all().map(statement => ({id: statement.id}));
+    if (!predicate || predicate.empty && (!options)) {
+      return Statement.all();
     }
 
     let columns = [
@@ -775,8 +780,7 @@ export class Statement extends Realm.Object {
     }
     const fromSQL = tables.map(table => `INNER JOIN ${table} ON statements.id = ${table}.statement_id`).join(' ');
 
-    const where = predicate.predicateFormat;
-    const whereSQL = (where.length > 0 ? `WHERE ${where}` : '');
+    const whereSQL = (!predicate.empty > 0 ? `WHERE ${predicate.predicateFormat}` : '');
 
     const sql = `SELECT ${columns.join(', ')} FROM statements ${fromSQL} ${whereSQL}`
     console.log(sql);

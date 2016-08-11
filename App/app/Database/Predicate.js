@@ -31,4 +31,8 @@ export default class Predicate {
   get tables(): Array<string> {
     return [];
   }
+
+  get empty(): boolean {
+    return !this.query;
+  }
 }

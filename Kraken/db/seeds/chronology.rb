@@ -1,5 +1,5 @@
 
-def seed_chronology_statements(type)
+['source', 'recipient'].each do |type|
   STDERR.puts "Seeding #{type} chronology statements"
 
   EMDROS[:statement_objects].each do |statement_object|
