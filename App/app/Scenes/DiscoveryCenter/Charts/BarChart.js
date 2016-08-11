@@ -29,88 +29,76 @@ type Props = {
   onPressChartType: Function,
 };
 
-class BarChartView extends Component {
-  props: Props;
+const BarChartView = (props: Props) => {
+  const { card, data, loading } = props;
+  const statements = card.statements;
+  const statementCount = statements.length;
+  const filterCount = card.filters.length;
+  const xAxis = card.xAxis;
+  const yAxis = card.yAxis;
 
-  render() {
-    const { card } = this.props;
-
-    let xAxisTitle = "Choose X Axis";
-    if (card.xAxis) {
-      xAxisTitle = card.xAxis.name;
-    }
-
-    let yAxisTitle = "Choose Y Axis";
-    if (card.yAxis) {
-      yAxisTitle = card.yAxis.name;
-    }
-
-    const chart = this._renderChart();
-
-    return (
-      <Chart>
-        {chart}
-        <Chart.Header>
-          <Chart.DropdownButton
-            image={require('../Images/chart-icn-bar-xaxis.png')}
-            onPress={() => this.props.onPressAxis(axisItemsURL({title: "Choose X Axis", axis: 'xAxis'}))}
-            title={xAxisTitle}
-            style={StyleSheet.styles.discoveryCenter.leftContainer}
-          />
-          <Chart.DropdownButton
-            image={require('../Images/chart-icn-bar-yaxis.png')}
-            onPress={() => this.props.onPressAxis(axisItemsURL({title: "Choose Y Axis", axis: 'yAxis'}))}
-            title={yAxisTitle}
-            style={StyleSheet.styles.discoveryCenter.rightContainer}
-          />
-        </Chart.Header>
-        <Chart.Footer>
-          <View style={[StyleSheet.styles.discoveryCenter.leftContainer, {justifyContent: 'flex-start', paddingLeft: 5, borderRightWidth: 0}]}>
-            <TouchableOpacity onPress={() => this.props.onPressChartType(Chart.Type.BAR)}>
-              <Image source={require('../Images/chart-type-bar-s.png')} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.props.onPressChartType(Chart.Type.PIE)}>
-              <Image source={require('../Images/chart-type-pie.png')} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.props.onPressChartType(Chart.Type.CLOUD)}>
-              <Image source={require('../Images/chart-type-cloud.png')} />
-            </TouchableOpacity>
-          </View>
-          <View style={[StyleSheet.styles.discoveryCenter.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
-            <TouchableOpacity>
-              <Image source={require('../Images/btn-fullscreen.png')} />
-            </TouchableOpacity>
-          </View>
-        </Chart.Footer>
-      </Chart>
-    );
+  let xAxisTitle = "Choose X Axis";
+  if (card.xAxis) {
+    xAxisTitle = card.xAxis.name;
   }
 
-  _shouldRenderChart = (card): boolean => {
-    const statements = card.statements;
-    const statementCount = statements.length;
-    const filterCount = card.filters.length;
-    const xAxis = card.xAxis;
-    const yAxis = card.yAxis;
-    return (xAxis && yAxis && statementCount > 0);
-  };
+  let yAxisTitle = "Choose Y Axis";
+  if (card.yAxis) {
+    yAxisTitle = card.yAxis.name;
+  }
 
-  _renderChart = () => {
-    const {data} = this.props
-    if (!this._shouldRenderChart(this.props.card) || data == null || this.props.loading) return <Image style={{alignSelf: 'center'}} source={require('../Images/chart-bar-blankslate.png')} />;
+  let chart = null;
+  if (!xAxis || !yAxis || statementCount == 0 || data == null || loading) {
+    chart = <Image style={{alignSelf: 'center'}} source={require('../Images/chart-bar-blankslate.png')} />;
+  } else {
+    chart = <ScrollView style={styles.chart} horizontal={true} showsHorizontalScrollIndicator={false}>
+      <BarChart
+        bars={data}
+        barColor="#F74260"
+        barStyle={{flex: 0, width: 8, marginHorizontal: 6, marginBottom: 100,}}
+        deltaStyle={{backgroundColor: 'transparent'}}
+        horizontal={false}
+      />
+    </ScrollView>;
+  }
 
-    return (
-      <ScrollView style={styles.chart} horizontal={true} showsHorizontalScrollIndicator={false}>
-        <BarChart
-          bars={data}
-          barColor="#F74260"
-          barStyle={{flex: 0, width: 8, marginHorizontal: 6, marginBottom: 100,}}
-          deltaStyle={{backgroundColor: 'transparent'}}
-          horizontal={false}
+  return (
+    <Chart>
+      {chart}
+      <Chart.Header>
+        <Chart.DropdownButton
+          image={require('../Images/chart-icn-bar-xaxis.png')}
+          onPress={() => props.onPressAxis(axisItemsURL({title: "Choose X Axis", axis: 'xAxis'}))}
+          title={xAxisTitle}
+          style={StyleSheet.styles.discoveryCenter.leftContainer}
         />
-      </ScrollView>
-    );
-  };
+        <Chart.DropdownButton
+          image={require('../Images/chart-icn-bar-yaxis.png')}
+          onPress={() => props.onPressAxis(axisItemsURL({title: "Choose Y Axis", axis: 'yAxis'}))}
+          title={yAxisTitle}
+          style={StyleSheet.styles.discoveryCenter.rightContainer}
+        />
+      </Chart.Header>
+      <Chart.Footer>
+        <View style={[StyleSheet.styles.discoveryCenter.leftContainer, {justifyContent: 'flex-start', paddingLeft: 5, borderRightWidth: 0}]}>
+          <TouchableOpacity onPress={() => props.onPressChartType(Chart.Type.BAR)}>
+            <Image source={require('../Images/chart-type-bar-s.png')} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => props.onPressChartType(Chart.Type.PIE)}>
+            <Image source={require('../Images/chart-type-pie.png')} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => props.onPressChartType(Chart.Type.CLOUD)}>
+            <Image source={require('../Images/chart-type-cloud.png')} />
+          </TouchableOpacity>
+        </View>
+        <View style={[StyleSheet.styles.discoveryCenter.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
+          <TouchableOpacity>
+            <Image source={require('../Images/btn-fullscreen.png')} />
+          </TouchableOpacity>
+        </View>
+      </Chart.Footer>
+    </Chart>
+  );
 }
 
 const styles = StyleSheet.create({
