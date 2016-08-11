@@ -100,17 +100,15 @@ class BarChartView extends Component {
     if (!this._shouldRenderChart(this.props.card) || data == null || this.props.loading) return <Image style={{alignSelf: 'center'}} source={require('../Images/chart-bar-blankslate.png')} />;
 
     return (
-      <View style={styles.chart}>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <BarChart
-            bars={data}
-            barColor="#F74260"
-            barStyle={{flex: 0, width: 8, marginHorizontal: 6, marginBottom: 100,}}
-            deltaStyle={{backgroundColor: 'transparent'}}
-            horizontal={false}
-          />
-        </ScrollView>
-      </View>
+      <ScrollView style={styles.chart} horizontal={true} showsHorizontalScrollIndicator={false}>
+        <BarChart
+          bars={data}
+          barColor="#F74260"
+          barStyle={{flex: 0, width: 8, marginHorizontal: 6, marginBottom: 100,}}
+          deltaStyle={{backgroundColor: 'transparent'}}
+          horizontal={false}
+        />
+      </ScrollView>
     );
   };
 }
@@ -121,7 +119,7 @@ const styles = StyleSheet.create({
     paddingTop: 55,
     paddingBottom: 44,
     paddingHorizontal: 4,
-    alignItems: 'center',
+    alignSelf: 'center',
   },
 });
 
