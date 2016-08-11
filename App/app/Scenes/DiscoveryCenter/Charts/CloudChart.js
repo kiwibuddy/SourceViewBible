@@ -109,15 +109,15 @@ class CloudChartView extends Component {
           <Text style={[styles.wc1, {top: 50, alignSelf: 'center'}]}>{words[0]}</Text>
         </ParallaxMotionView>
         <ParallaxMotionView intensity={10} style={[styles.parallax, {opacity: 0.8}]}>
-          <Text style={[styles.wc2, {top: 10, left: 10}]}>{words[1]}</Text>
+          <Text style={[styles.wc2, {top: 10, left: 20}]}>{words[1]}</Text>
           <Text style={[styles.wc2, {top: 150, right: 10}]}>{words[2]}</Text>
           <Text style={[styles.wc2, {top: 30, right: 30}]}>{words[3]}</Text>
-          <Text style={[styles.wc2, {top: 130, left: 0}]}>{words[4]}</Text>
+          <Text style={[styles.wc2, {top: 130, left: 10}]}>{words[4]}</Text>
         </ParallaxMotionView>
         <ParallaxMotionView intensity={20} style={[styles.parallax, {opacity: 0.6}]}>
           <Text style={[styles.wc3, {top: 0, right: 10}]}>{words[5]}</Text>
-          <Text style={[styles.wc3, {top: 60, left: 0}]}>{words[6]}</Text>
-          <Text style={[styles.wc3, {top: 170, left: 20}]}>{words[7]}</Text>
+          <Text style={[styles.wc3, {top: 60, left: 5}]}>{words[6]}</Text>
+          <Text style={[styles.wc3, {top: 170, left: 30}]}>{words[7]}</Text>
           <Text style={[styles.wc3, {top: 125, right: 50}]}>{words[8]}</Text>
         </ParallaxMotionView>
       </WordCloud>
@@ -149,27 +149,27 @@ const styles = StyleSheet.create({
   wc1: {
     color: 'white',
     backgroundColor:'transparent',
-    fontSize: 66,
+    fontSize: 48,
     fontWeight: '200',
   },
   wc2: {
     color: 'white',
     backgroundColor:'transparent',
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: '200',
     position: 'absolute',
   },
   wc3: {
     color: 'white',
     backgroundColor:'transparent',
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '200',
     position: 'absolute',
   },
   wc4: {
     color: 'white',
     backgroundColor:'transparent',
-    fontSize: 13,
+    fontSize: 11,
     fontWeight: '200',
     position: 'absolute',
   },

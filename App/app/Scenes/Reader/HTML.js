@@ -16,9 +16,9 @@ module.exports = `
     <style type="text/css">
       body {
         font-family: charter, georgia;
-        font-size: 11pt;
+        font-size: 13pt;
         color: #323B43;
-        line-height: 23pt;
+        line-height: 24pt;
       }
       table {
         margin:0;
@@ -55,7 +55,7 @@ module.exports = `
       }
       .sourceTitle {
         font-family: -apple-system, "Helvetica Neue", "Lucida Grande";
-        font-size: 10pt;
+        font-size: .8em;
         color: #9B9B9B;
         text-align: right;
         white-space: nowrap;
@@ -72,26 +72,26 @@ module.exports = `
         font-family: charter;
         font-weight: bold;
         font-style: italic;
-        font-size: 15pt;
+        font-size: 1.5em;
         color: #323B43;
         text-align: Center;
       }
       .textSection {
         font-family: charter;
         font-style: italic;
-        font-size: 15pt;
+        font-size: 1.5em;
         color: #323B43;
         text-align: Center;
       }
       .textChapter {
         font-family: charter;
         color: #CF1E00;
-        font-size: 11pt;
+        font-size: 1em;
         position: relative;
         top: 0;
       }
       .textVerse {
-        font-size: 11pt;
+        font-size: 1em;
         position: relative;
         top: -0.4em;
       }
