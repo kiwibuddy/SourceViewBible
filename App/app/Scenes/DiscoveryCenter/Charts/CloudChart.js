@@ -99,7 +99,7 @@ class CloudChartView extends Component {
 
   _renderChart = () => {
     const { data } = this.props;
-    if (!this._shouldRenderChart(this.props.card) || data == null || this.props.loading) return <Image source={require('../Images/chart-cloud-blankslate.png')} />;
+    if (!this._shouldRenderChart(this.props.card) || data == null || this.props.loading) return <Image style={{alignSelf: 'center'}} source={require('../Images/chart-cloud-blankslate.png')} />;
 
     const words = data.slice(0, Math.min(data.length, 10)).map(word => word.label);
 

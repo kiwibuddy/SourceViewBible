@@ -97,7 +97,7 @@ class BarChartView extends Component {
 
   _renderChart = () => {
     const {data} = this.props
-    if (!this._shouldRenderChart(this.props.card) || data == null || this.props.loading) return <Image source={require('../Images/chart-bar-blankslate.png')} />;
+    if (!this._shouldRenderChart(this.props.card) || data == null || this.props.loading) return <Image style={{alignSelf: 'center'}} source={require('../Images/chart-bar-blankslate.png')} />;
 
     return (
       <View style={styles.chart}>
