@@ -14,9 +14,6 @@ actants = actant_objects.all.map do |actant_object|
 	chronologies = actant_object[:mdf_chronology].to_s.strip.split(' ').map{|c| {id: c.to_i} }
 	professions = actant_object[:mdf_professions].to_s.strip.split(' ').map{|c| {id: c.to_i} }
 	natures = actant_object[:mdf_natures].to_s.strip.split(' ').map{|c| {id: c.to_i} }
-	is_source = actant_object[:is_source] == 1
-	is_recipient = actant_object[:is_recipient] == 1
-
   {
     id: actant_object[:mdf_actant_id],
     name: name,
@@ -26,24 +23,30 @@ actants = actant_objects.all.map do |actant_object|
     actantNumber: actant_object[:mdf_source_number],
     chronologies: chronologies,
     professions: professions,
-    isSource: is_source,
-    isRecipient: is_recipient,
+    isSource: actant_object[:is_source] == 1,
+    isRecipient: actant_object[:is_recipient] == 1,
   }
 end
 
-EMDROS[:statement_objects].each do |statement|
-	statement[:mdf_sources].to_s.strip.split(" ").map{|r| r.to_i}.each do |id|
-		if id > 0 && actant = actants.find{ |actant| actant[:id] == id }
-			DB[:actant_statements].insert(id: id, statement_id: statement[:object_id_d], source: actant[:isSource], recipient: actant[:isRecipient])
-		end
+EMDROS[:statement_objects].each do |s|
+	s[:mdf_sources].to_s.strip.split(" ").map{|r| r.to_i}.each do |id|
+		DB[:source_statements].insert({id: id, statement_id: s[:object_id_d]}) if id > 0
 	end
 
-	statement[:mdf_recipients].to_s.strip.split(" ").map{|r| r.to_i}.each do |id|
-		if id > 0 && actant = actants.find{ |actant| actant[:id] == id }
-			DB[:actant_statements].insert(id: id, statement_id: statement[:object_id_d], source: actant[:isSource], recipient: actant[:isRecipient]) rescue nil
-		end
+	s[:mdf_recipients].to_s.strip.split(" ").map{|r| r.to_i}.each do |id|
+		DB[:recipient_statements].insert({id: id, statement_id: s[:object_id_d]}) if id > 0
 	end
 end
+
+
+insert_sql = "INSERT INTO actant_statements
+SELECT id, statement_id FROM (
+SELECT id, statement_id FROM source_statements
+UNION
+SELECT id, statement_id FROM recipient_statements
+)
+"
+DB.run insert_sql
 
 # pp actants
 File.open("db/seeds/actants.json", "w+") { |f| f.write JSON.pretty_generate(actants) }
