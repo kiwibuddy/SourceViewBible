@@ -182,7 +182,8 @@ export default class DiscoveryCenter extends Component {
   _duplicateCard = (card: Object) => {
     this._addCard({
       ...card,
-      key: 'card-'
+      filters: card.filters.slice(),
+      key: 'card-' + Date.now()
     });
   };
 
