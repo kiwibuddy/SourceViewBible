@@ -19,6 +19,8 @@ import {
   Localizable
 } from '../../../Common';
 
+import PieColors from './PieChartColors';
+
 type Props = {
   card: Object,
   data: Object,
@@ -42,9 +44,10 @@ export default class PieChartList extends Component {
   }
 
   componentDidMount() {
-
+    const { data } = this.props;
+    const slices = data.map((slice, index) => ({...slice, color: PieColors[index]}));
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows([1,2,3])
+      dataSource: this.state.dataSource.cloneWithRows(slices)
     });
   }
 
@@ -64,9 +67,9 @@ export default class PieChartList extends Component {
   _renderRow = (slice: Object, sectionID: any, rowID: any) => {
     return (
       <View style={styles.row}>
-        <View style={styles.dot} />
+        <View style={[styles.dot, {backgroundColor: slice.color}]} />
         <Text style={styles.percentText}>0%</Text>
-        <Text style={styles.titleText}>Foo</Text>
+        <Text style={styles.titleText}>{slice.label}</Text>
       </View>
     );
   };

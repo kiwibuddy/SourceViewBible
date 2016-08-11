@@ -1,8 +1,17 @@
 /* @flow */
 'use static'
 
-const colors = [
-
+const Colors = [
+  '#808BE4',
+  '#D2F4F0',
+  '#967B8E',
+  '#3C7907',
+  '#C61069',
+  '#FD280F',
+  '#A7100F',
+  '#4360EC',
+  '#920EA3',
+  '#67871D',
 ];
 
-module.exports = colors;
+export default Colors;

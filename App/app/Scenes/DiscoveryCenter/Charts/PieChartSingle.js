@@ -15,7 +15,7 @@ import {
 } from '../../../Common';
 
 import Chart from './Chart';
-import PieChartColors from './PieChartColors';
+import PieColors from './PieChartColors';
 import PieChartList from './PieChartList';
 import { PieChart } from '../../../Components/Charts';
 
@@ -26,12 +26,15 @@ type Props = {
 
 const PieChartSingle = (props: Props) => {
   const { card, data } = props;
+
+  const slices = data.slice(0, Math.min(data.length, 10)).map((slice, index) => ({...slice, color: PieColors[index]}));
+
   return (
     <View style={styles.container}>
       <View style={styles.chart}>
         <PieChart
           color={'red'}
-          slices={[{color: 'blue', value: 30}, {color: 'green', value: 50}, {color: 'orange', value: 20}]}
+          slices={slices}
           sliceWidth={10}
           size={150}
           style={styles.pie}
