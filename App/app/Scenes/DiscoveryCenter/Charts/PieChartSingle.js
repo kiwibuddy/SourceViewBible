@@ -15,7 +15,7 @@ import {
 } from '../../../Common';
 
 import Chart from './Chart';
-import PieColors from './PieChartColors';
+import PieColors, { DeltaColor } from './PieChartColors';
 import PieChartList from './PieChartList';
 import { PieChart } from '../../../Components/Charts';
 
@@ -28,6 +28,13 @@ const PieChartSingle = (props: Props) => {
   const { card, data } = props;
 
   const slices = data.slice(0, Math.min(data.length, 10)).map((slice, index) => ({...slice, color: PieColors[index]}));
+
+  const totalValue = data.reduce((sum, slice) => sum + slice.value, 0);
+  const totalSlices = slices.reduce((sum, slice) => sum + slice.value, 0);
+  const deltaValue = totalValue - totalSlices;
+  if (deltaValue > 0) {
+    slices.push({color: DeltaColor, value: deltaValue})
+  }
 
   return (
     <View style={styles.container}>

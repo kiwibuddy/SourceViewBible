@@ -14,6 +14,8 @@ const Colors = [
   '#67871D',
 ];
 
+export const DeltaColor = '#474F57';
+
 const MINIMUM_ALPHA_VALUE = 10;
 const ALPHA_STEP_VALUE = 10;
 
