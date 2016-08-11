@@ -760,7 +760,7 @@ export class Statement extends Realm.Object {
   }
 
   static async identifiersMatchingPredicate(predicate: CompoundPredicate, options?: Object) {
-    if (!predicate || predicate.empty && (!options)) {
+    if (!predicate) {
       return Statement.all();
     }
 
@@ -780,7 +780,7 @@ export class Statement extends Realm.Object {
     }
     const fromSQL = tables.map(table => `INNER JOIN ${table} ON statements.id = ${table}.statement_id`).join(' ');
 
-    const whereSQL = (!predicate.empty > 0 ? `WHERE ${predicate.predicateFormat}` : '');
+    const whereSQL = (predicate.predicateFormat.length > 0 ? `WHERE ${predicate.predicateFormat}` : '');
 
     const sql = `SELECT ${columns.join(', ')} FROM statements ${fromSQL} ${whereSQL}`
     console.log(sql);
