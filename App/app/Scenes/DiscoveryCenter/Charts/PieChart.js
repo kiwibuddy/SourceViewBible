@@ -14,24 +14,56 @@ import {
 } from '../../../Common';
 
 import Chart from './Chart';
+import { PieChart } from '../../../Components/Charts';
+import { axisItemsURL } from '../../../Navigation';
 
 type Props = {
+  card: Object,
+  data: Object,
+  loading: boolean,
+  onPressAxis: Function,
   onPressChartType: Function,
 };
 
-const PieChart = (props: Props) => {
+const PieChartView = (props: Props) => {
+  const { card, data, loading } = props;
+  const statements = card.statements;
+  const statementCount = statements.length;
+  const filterCount = card.filters.length;
+  const xAxis = card.xAxis;
+  const yAxis = card.yAxis;
+
+  let xAxisTitle = "Slices";
+  if (card.xAxis) {
+    xAxisTitle = card.xAxis.name;
+  }
+
+  let yAxisTitle = "Slice";
+  if (card.yAxis) {
+    yAxisTitle = card.yAxis.name;
+  }
+
+  let chart = null;
+  if (!xAxis || !yAxis || statementCount == 0 || data == null || loading) {
+    chart = <Image style={{alignSelf: 'center'}} source={require('../Images/chart-pie-blankslate.png')} />;
+  } else {
+
+  }
+
   return (
     <Chart>
-      <Image style={{alignSelf: 'center'}} source={require('../Images/chart-pie-blankslate.png')} />
+      {chart}
       <Chart.Header>
         <Chart.DropdownButton
           image={require('../Images/chart-icn-pie-slices.png')}
-          title="Slices"
+          onPress={() => props.onPressAxis(axisItemsURL({title: "Slices", axis: 'xAxis'}))}
+          title={xAxisTitle}
           style={StyleSheet.styles.discoveryCenter.leftContainer}
         />
         <Chart.DropdownButton
           image={require('../Images/chart-icn-pie-slice-value.png')}
-          title="Slice"
+          onPress={() => props.onPressAxis(axisItemsURL({title: "Slice", axis: 'yAxis'}))}
+          title={yAxisTitle}
           style={StyleSheet.styles.discoveryCenter.leftContainer}
         />
         <Chart.DropdownButton
@@ -62,4 +94,4 @@ const PieChart = (props: Props) => {
   );
 };
 
-export default PieChart;
+export default PieChartView;
