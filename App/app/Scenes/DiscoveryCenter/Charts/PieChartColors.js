@@ -14,14 +14,18 @@ const Colors = [
   '#67871D',
 ];
 
+const MINIMUM_ALPHA_VALUE = 10;
+const ALPHA_STEP_VALUE = 10;
+
 export function colorAtIndex(index: number) {
   const colorCount = Colors.length;
   const number = index % colorCount;
   let color = Colors[number];
 
-  const alpha = parseInt(index / colorCount);
-  if (alpha > 0) {
-    color += (100 - (alpha * 10)).toString();
+  const percent = parseInt(index / colorCount);
+  if (percent > 0) {
+    const alpha = Math.max((100 - (percent * ALPHA_STEP_VALUE)), MINIMUM_ALPHA_VALUE);
+    color += alpha.toString();
   }
   return color;
 }
