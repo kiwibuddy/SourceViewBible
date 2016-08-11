@@ -99,7 +99,7 @@ const BarChartView = (props: Props) => {
       </Chart.Footer>
     </Chart>
   );
-}
+};
 
 const styles = StyleSheet.create({
   chart: {
