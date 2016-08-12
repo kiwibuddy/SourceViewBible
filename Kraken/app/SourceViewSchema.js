@@ -205,27 +205,6 @@ class Sphere extends Realm.Object {
 }
 Sphere.schema = SphereSchema;
 
-const StatementSchema = {
-  name: 'Statement',
-  primaryKey: 'id',
-  properties: {
-    id: 'int',
-    firstMonad: {type: 'int', indexed: true},
-    lastMonad: {type: 'int', indexed: true},
-    book: 'Book',
-    sourceOccurrence:  {type: 'int', default: 0},
-    source: 'Actant',
-    recipients: {type: 'list', objectType: 'Actant'},
-    sphereCounts: {type: 'list', objectType: 'Count'},
-    wordCount: {type: 'int', default: 0},
-  }
-};
 
-class Statement extends Realm.Object {
-
-}
-Statement.schema = StatementSchema;
-
-
-const Schema = [Actant, Bible, Book, Chapter, Chronology, Nature, Profession, SourceRelation, Sphere, Count, Content, Statement];
+const Schema = [Actant, Bible, Book, Chapter, Chronology, Nature, Profession, SourceRelation, Sphere, Count, Content];
 export default Schema;

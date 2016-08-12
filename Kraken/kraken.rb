@@ -18,13 +18,6 @@ DB = Sequel.connect("sqlite://#{DB_NAME}")
 Sequel.extension :migration
 Sequel::Migrator.run(DB, "db/migrations")
 
-require './db/seeds/statements'
-require './db/seeds/books'
 require './db/seeds/actants'
-require './db/seeds/gender'
-require './db/seeds/nature'
-require './db/seeds/professions'
-require './db/seeds/chronology'
-require './db/seeds/roles'
-require './db/seeds/actant_number'
-require './db/seeds/spheres'
+require './db/seeds/sources'
+require './db/seeds/sources_actants'

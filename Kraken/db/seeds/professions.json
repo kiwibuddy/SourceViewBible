@@ -9,158 +9,202 @@
   },
   {
     "id": 3,
-    "key": "ConstructionManufacturing"
+    "key": "Beggar"
   },
   {
     "id": 4,
-    "key": "Executive"
+    "key": "Church_Leader"
   },
   {
     "id": 5,
-    "key": "Farmer"
+    "key": "ConstructionManufacturing"
   },
   {
     "id": 6,
-    "key": "Food_Services"
+    "key": "EducatorTeacher"
   },
   {
     "id": 7,
-    "key": "Governor"
+    "key": "Executive"
   },
   {
     "id": 8,
-    "key": "Health_Services"
+    "key": "Farmer"
   },
   {
     "id": 9,
-    "key": "Hebrew"
+    "key": "Fisherman"
   },
   {
     "id": 10,
-    "key": "High_Priest"
+    "key": "Food_Services"
   },
   {
     "id": 11,
-    "key": "Homemaker"
+    "key": "Governor"
   },
   {
     "id": 12,
-    "key": "Judge"
+    "key": "Health_Services"
   },
   {
     "id": 13,
-    "key": "Judicial"
+    "key": "Hebrew"
   },
   {
     "id": 14,
-    "key": "King"
+    "key": "High_Priest"
   },
   {
     "id": 15,
-    "key": "Manufacturing"
+    "key": "Homemaker"
   },
   {
     "id": 16,
-    "key": "Messenger"
+    "key": "Judge"
   },
   {
     "id": 17,
-    "key": "Military"
+    "key": "Judicial"
   },
   {
     "id": 18,
-    "key": "MilitaryPolice"
+    "key": "King"
   },
   {
     "id": 19,
-    "key": "Miltary"
+    "key": "Lawyer"
   },
   {
     "id": 20,
-    "key": "Musician"
+    "key": "LinguistScribe"
   },
   {
     "id": 21,
-    "key": "Not_Hebrew"
+    "key": "Manufacturing"
   },
   {
     "id": 22,
-    "key": "OfficerLeader"
+    "key": "Maritime"
   },
   {
     "id": 23,
-    "key": "Other_Official"
+    "key": "Merchant"
   },
   {
     "id": 24,
-    "key": "Other_Religious_Leader"
+    "key": "Messenger"
   },
   {
     "id": 25,
-    "key": "Priest"
+    "key": "Military"
   },
   {
     "id": 26,
-    "key": "Prince"
+    "key": "MilitaryPolice"
   },
   {
     "id": 27,
-    "key": "Princess"
+    "key": "Musician"
   },
   {
     "id": 28,
-    "key": "Prophet"
+    "key": "Not_Hebrew"
   },
   {
     "id": 29,
-    "key": "Prostitute"
+    "key": "Officer"
   },
   {
     "id": 30,
-    "key": "Psalmist"
+    "key": "OfficerLeader"
   },
   {
     "id": 31,
-    "key": "Queen"
+    "key": "Other_Official"
   },
   {
     "id": 32,
-    "key": "Royalty"
+    "key": "Other_Religious_Leader"
   },
   {
     "id": 33,
-    "key": "Scribe"
+    "key": "Priest"
   },
   {
     "id": 34,
-    "key": "Servant"
+    "key": "Prince"
   },
   {
     "id": 35,
-    "key": "ServantSlave"
+    "key": "Princess"
   },
   {
     "id": 36,
-    "key": "Shepherd"
+    "key": "Prophet"
   },
   {
     "id": 37,
-    "key": "Slave"
+    "key": "Prostitute"
   },
   {
     "id": 38,
-    "key": "SlaveServant"
+    "key": "Psalmist"
   },
   {
     "id": 39,
-    "key": "SoldierGuard"
+    "key": "Queen"
   },
   {
     "id": 40,
-    "key": "TeacherEducator"
+    "key": "Royalty"
   },
   {
     "id": 41,
+    "key": "Scribe"
+  },
+  {
+    "id": 42,
+    "key": "Servant"
+  },
+  {
+    "id": 43,
+    "key": "ServantSlave"
+  },
+  {
+    "id": 44,
+    "key": "Shepherd"
+  },
+  {
+    "id": 45,
+    "key": "Slave"
+  },
+  {
+    "id": 46,
+    "key": "SlaveServant"
+  },
+  {
+    "id": 47,
+    "key": "SoldierGuard"
+  },
+  {
+    "id": 48,
+    "key": "StudentDisciple"
+  },
+  {
+    "id": 49,
+    "key": "StudentLearner"
+  },
+  {
+    "id": 50,
+    "key": "Teacher"
+  },
+  {
+    "id": 51,
+    "key": "TeacherEducator"
+  },
+  {
+    "id": 52,
     "key": "Thief"
   }
 ]

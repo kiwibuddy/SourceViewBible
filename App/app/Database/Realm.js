@@ -734,22 +734,6 @@ export class Sphere extends Realm.Object {
 }
 Sphere.schema = SphereSchema;
 
-const StatementSchema = {
-  name: 'Statement',
-  primaryKey: 'id',
-  properties: {
-    id: 'int',
-    firstMonad: {type: 'int', indexed: true},
-    lastMonad: {type: 'int', indexed: true},
-    book: 'Book',
-    sourceOccurrence:  {type: 'int', default: 0},
-    source: 'Actant',
-    recipients: {type: 'list', objectType: 'Actant'},
-    sphereCounts: {type: 'list', objectType: 'Count'},
-    wordCount: {type: 'int', default: 0},
-  }
-};
-
 export class Statement extends Realm.Object {
   static all() {
     return realm.objects('Statement');
@@ -818,7 +802,6 @@ export class Statement extends Realm.Object {
     return await Emdros.words({from: this.firstMonad, to: this.lastMonad, useStopWords: true, ...options});
   }
 }
-Statement.schema = StatementSchema;
 
 export class Word {
   static async valuesByWordCount(predicate: Predicate) {
@@ -865,7 +848,7 @@ export class Word {
   }
 }
 
-const Schema = [Actant, Bible, Book, Chapter, Chronology, Nature, Profession, SourceRelation, Sphere, Count, Content, Statement];
+const Schema = [Actant, Bible, Book, Chapter, Chronology, Nature, Profession, SourceRelation, Sphere, Count, Content];
 
 const realm = new Realm({
   schema: Schema,
