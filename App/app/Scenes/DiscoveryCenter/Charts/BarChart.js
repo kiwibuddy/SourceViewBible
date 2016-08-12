@@ -93,7 +93,6 @@ const BarChartView = (props: Props) => {
         </View>
         <View style={[StyleSheet.styles.discoveryCenter.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
           <TouchableOpacity>
-            <Image source={require('../Images/btn-fullscreen.png')} />
           </TouchableOpacity>
         </View>
       </Chart.Footer>

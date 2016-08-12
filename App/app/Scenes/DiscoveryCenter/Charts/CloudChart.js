@@ -104,7 +104,6 @@ const CloudChartView = (props: Props) => {
         <Text style={styles.chartNote}>TOP 10</Text>
         <View style={[StyleSheet.styles.discoveryCenter.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
           <TouchableOpacity>
-            <Image source={require('../Images/btn-fullscreen.png')} />
           </TouchableOpacity>
         </View>
       </Chart.Footer>
