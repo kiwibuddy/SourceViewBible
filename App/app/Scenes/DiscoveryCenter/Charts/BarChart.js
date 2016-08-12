@@ -54,7 +54,7 @@ const BarChartView = (props: Props) => {
     chart = <ScrollView style={styles.chart} horizontal={true} showsHorizontalScrollIndicator={false}>
       <BarChart
         bars={data}
-        barColor="#F74260"
+        barColor="#EC4E51"
         barStyle={{flex: 0, width: 8, marginHorizontal: 6, marginBottom: 100,}}
         deltaStyle={{backgroundColor: 'transparent'}}
         horizontal={false}

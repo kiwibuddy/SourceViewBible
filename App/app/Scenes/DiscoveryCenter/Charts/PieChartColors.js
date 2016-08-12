@@ -2,19 +2,19 @@
 'use static'
 
 const Colors = [
-  '#808BE4',
-  '#D2F4F0',
-  '#967B8E',
-  '#3C7907',
-  '#C61069',
-  '#FD280F',
-  '#A7100F',
-  '#4360EC',
-  '#920EA3',
-  '#67871D',
+  '#EC4E51',
+  '#FFDA88',
+  '#D4A88D',
+  '#44BEC7',
+  '#917FB7',
+  '#669ACC',
+  '#67B869',
+  '#F5A623',
+  '#E58586',
+  '#885EFF',
 ];
 
-export const DeltaColor = '#474F57';
+export const DeltaColor = '#323B43';
 
 const MINIMUM_ALPHA_VALUE = 10;
 const ALPHA_STEP_VALUE = 10;
