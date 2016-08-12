@@ -26,14 +26,10 @@ type Props = {
 const PieChartSingle = (props: Props) => {
   const { card, data } = props;
 
-  const slices = data.slice(0, Math.min(data.length, 10)).map((slice, index) => ({...slice, color: colorAtIndex(index)}));
-
   const totalValue = data.reduce((sum, slice) => sum + slice.value, 0);
-  const totalSlices = slices.reduce((sum, slice) => sum + slice.value, 0);
-  const deltaValue = totalValue - totalSlices;
-  if (deltaValue > 0) {
-    // slices.push({color: DeltaColor, value: deltaValue})
-  }
+  const slices = data.filter(slice => parseInt((slice.value / totalValue) * 100)).map((slice, index) => {
+    return {...slice, color: colorAtIndex(index)};
+  });
 
   return (
     <View style={styles.container}>
