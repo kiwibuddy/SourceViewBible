@@ -73,7 +73,7 @@ export default class PieChartMultiple extends Component {
     const totalSlices = slices.reduce((sum, slice) => sum + slice.value, 0);
     const deltaValue = totalValue - totalSlices;
     if (deltaValue > 0) {
-      slices.push({color: DeltaColor, value: deltaValue})
+      // slices.push({color: DeltaColor, value: deltaValue})
     }
 
     return (
