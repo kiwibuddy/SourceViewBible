@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   View,
   Image,
+  Dimensions,
 } from 'react-native';
 
 import {
@@ -21,6 +22,8 @@ import { NavigationBar, NavigationBarButton } from '../../Components/Navigation'
 import { BACK, readerURL } from '../../Navigation';
 
 import { Bible } from '../../Database';
+
+const { width } = Dimensions.get('window');
 
 type State = {
   dataSource: any,
@@ -248,4 +251,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 5,
   },
+  gettingstartedIcon: {
+    width: (width <= 320 ? 60 : 120),
+    height: (width <= 320 ? 60 : 120),
+  }
 });
