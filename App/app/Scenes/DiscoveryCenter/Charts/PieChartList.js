@@ -78,12 +78,10 @@ export default class PieChartList extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'red'
   },
   listView: {
     flex: 1.5,
-    paddingVertical: 10,
-    backgroundColor: 'red',
+    paddingVertical: 20,
   },
   row: {
     flexDirection: 'row',
