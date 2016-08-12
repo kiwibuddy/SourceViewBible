@@ -86,11 +86,11 @@ export default class PieChartMultiple extends Component {
               <PieChart
                 color="white"
                 slices={slices}
-                sliceWidth={6}
+                sliceWidth={8}
                 size={100}
                 style={styles.pie}
                 title='Some really long text'
-                titleStyle={{marginHorizontal: 6}}
+                titleStyle={{marginHorizontal: 11, fontSize: 13, fontWeight: 'bold'}}
               />
             );
           }}
@@ -115,8 +115,8 @@ const styles = StyleSheet.create({
   },
   separator: {
     width: StyleSheet.hairlineWidth,
-    marginVertical: 10,
-    backgroundColor: 'red',
+    marginVertical: 5,
+    backgroundColor: 'rgba(0,0,0,.25)',
   },
   pie: {
     flex: 1,
