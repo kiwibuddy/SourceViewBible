@@ -2,22 +2,22 @@
 'use static'
 
 const Colors = [
-  '#EC4E51',
-  '#FFDA88',
-  '#D4A88D',
-  '#44BEC7',
-  '#917FB7',
-  '#669ACC',
-  '#67B869',
-  '#F5A623',
-  '#E58586',
-  '#885EFF',
+  '#FF3F49',
+  '#FF40F9',
+  '#B73FFF',
+  '#7C60FF',
+  '#408BFE',
+  '#6FECFF',
+  '#80FF77',
+  '#F8FF7C',
+  '#FFD877',
+  '#FFAA7C',
 ];
 
 export const DeltaColor = '#323B43';
 
-const MINIMUM_ALPHA_VALUE = 10;
-const ALPHA_STEP_VALUE = 10;
+const MINIMUM_ALPHA_VALUE = 5;
+const ALPHA_STEP_VALUE = 5;
 
 export function colorAtIndex(index: number) {
   const colorCount = Colors.length;
