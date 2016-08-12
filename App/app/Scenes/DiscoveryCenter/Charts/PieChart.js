@@ -47,7 +47,7 @@ const PieChartView = (props: Props) => {
     yAxisTitle = card.yAxis.name;
   }
 
-  let zAxisTitle = 'Pies (optional)';
+  let zAxisTitle = 'Pies (opt.)';
   if (zAxis) {
     zAxisTitle = card.zAxis.name;
   }
