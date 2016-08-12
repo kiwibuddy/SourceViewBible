@@ -14,7 +14,7 @@ import {
   StyleSheet,
 } from '../../../Common';
 
-import PieColors, { DeltaColor } from './PieChartColors';
+import PieColors, { DeltaColor, colorAtIndex } from './PieChartColors';
 import PieChartList from './PieChartList';
 import { PieChart } from '../../../Components/Charts';
 
@@ -26,7 +26,7 @@ type Props = {
 const PieChartSingle = (props: Props) => {
   const { card, data } = props;
 
-  const slices = data.slice(0, Math.min(data.length, 10)).map((slice, index) => ({...slice, color: PieColors[index]}));
+  const slices = data.slice(0, Math.min(data.length, 10)).map((slice, index) => ({...slice, color: colorAtIndex(index)}));
 
   const totalValue = data.reduce((sum, slice) => sum + slice.value, 0);
   const totalSlices = slices.reduce((sum, slice) => sum + slice.value, 0);

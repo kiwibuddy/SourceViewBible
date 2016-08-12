@@ -27,7 +27,7 @@ export function colorAtIndex(index: number) {
   const percent = parseInt(index / colorCount);
   if (percent > 0) {
     const alpha = Math.max((100 - (percent * ALPHA_STEP_VALUE)), MINIMUM_ALPHA_VALUE);
-    color += alpha.toString();
+    color += String('0' + alpha.toString(16)).slice(-2).toUpperCase();
   }
   return color;
 }
