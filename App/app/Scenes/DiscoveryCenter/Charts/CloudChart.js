@@ -55,19 +55,20 @@ const CloudChartView = (props: Props) => {
     const words = data.slice(0, Math.min(data.length, 10)).map(word => word.label);
     chart = <WordCloud style={styles.chart}>
       <ParallaxMotionView intensity={5} style={[styles.parallax, {opacity: 0.8}]}>
-        <Text style={[styles.wc1, {top: 50, alignSelf: 'center'}]}>{words[0]}</Text>
+        <Text style={[styles.wc1, {top: 50, alignSelf: 'center'}]} numberOfLines={1}>{words[0]}</Text>
       </ParallaxMotionView>
       <ParallaxMotionView intensity={10} style={[styles.parallax, {opacity: 0.8}]}>
-        <Text style={[styles.wc2, {top: 10, left: 20}]}>{words[1]}</Text>
-        <Text style={[styles.wc2, {top: 150, right: 10}]}>{words[2]}</Text>
-        <Text style={[styles.wc2, {top: 30, right: 30}]}>{words[3]}</Text>
-        <Text style={[styles.wc2, {top: 130, left: 10}]}>{words[4]}</Text>
+        <Text style={[styles.wc2, {top: 10, left: -5}]}>{words[1]}</Text>
+        <Text style={[styles.wc2, {bottom: 20, right: 15}]}>{words[2]}</Text>
+        <Text style={[styles.wc2, {top: -5, right: 50}]}>{words[3]}</Text>
+        <Text style={[styles.wc2, {bottom: 0, left: 50}]}>{words[4]}</Text>
       </ParallaxMotionView>
       <ParallaxMotionView intensity={20} style={[styles.parallax, {opacity: 0.6}]}>
-        <Text style={[styles.wc3, {top: 0, right: 10}]}>{words[5]}</Text>
-        <Text style={[styles.wc3, {top: 60, left: 5}]}>{words[6]}</Text>
-        <Text style={[styles.wc3, {top: 170, left: 30}]}>{words[7]}</Text>
-        <Text style={[styles.wc3, {top: 125, right: 50}]}>{words[8]}</Text>
+        <Text style={[styles.wc3, {top: 40, right: 15}]}>{words[5]}</Text>
+        <Text style={[styles.wc3, {top: 120, left: 0}]}>{words[6]}</Text>
+        <Text style={[styles.wc3, {top: 60, left: 35}]}>{words[7]}</Text>
+        <Text style={[styles.wc3, {bottom: 70, right: 35}]}>{words[8]}</Text>
+        <Text style={[styles.wc3, {bottom: 10, right: 120}]}>{words[9]}</Text>
       </ParallaxMotionView>
     </WordCloud>
   }
@@ -135,20 +136,20 @@ const styles = StyleSheet.create({
   wc1: {
     color: 'white',
     backgroundColor:'transparent',
-    fontSize: 48,
+    fontSize: 66,
     fontWeight: '200',
   },
   wc2: {
     color: 'white',
     backgroundColor:'transparent',
-    fontSize: 24,
+    fontSize: 42,
     fontWeight: '200',
     position: 'absolute',
   },
   wc3: {
     color: 'white',
     backgroundColor:'transparent',
-    fontSize: 16,
+    fontSize: 30,
     fontWeight: '200',
     position: 'absolute',
   },
