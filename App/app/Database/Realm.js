@@ -4,7 +4,7 @@
 import { Platform } from 'react-native';
 import Realm from 'realm';
 import Emdros from '../API/Emdros';
-import SQLite from './SQLite';
+import SQLite, { fromWithPredicate, rowsWithSQL } from './SQLite';
 
 const RNFS = require('react-native-fs');
 
@@ -131,17 +131,6 @@ function BSOReferencesInText(text: string) {
   }
 
   return null;
-}
-
-async function rowsWithSQL(sql: string, params?: any) {
-  return new Promise((resolve, reject) => {
-    SQLite.transaction((tx) => {
-      tx.executeSql(sql, params, (tx, results) => {
-          let rows = results.rows.raw();
-          resolve(rows);
-      });
-    });
-  });
 }
 
 const BibleSchema = {
@@ -322,25 +311,33 @@ export class Book extends Realm.Object {
   }
 
   static async valuesByWordCount(predicate: Predicate) {
-    const options = {
-      columns: ['book_statements.id AS bookID'],
-      tables: ['book_statements']
-    };
-    const statements = await Statement.identifiersMatchingPredicate(predicate, options);
-    if (statements.count == 0) return [];
+    const fromSQL = fromWithPredicate(predicate);
+    const whereSQL = (predicate.predicateFormat.length > 0 ? `WHERE ${predicate.predicateFormat}` : '');
+    const sql = `SELECT sources.book_id AS id, SUM(source_actants.word_count) AS count ${fromSQL} ${whereSQL} GROUP BY sources.book_id ORDER BY count DESC`
 
-    const wordCounts = {};
-    statements.reduce((wordCounts, statement) => {
-      const bookID = statement.bookID;
-      const wordCount = wordCounts[bookID] || 0;
-      wordCounts[bookID] = wordCount + statement.wordCount;
-      return wordCounts;
-    }, wordCounts);
+    console.log(sql);
 
-    return Object.keys(wordCounts).sort((a,b) => wordCounts[a] > wordCounts[b] ? -1 : 1).map(bookID => {
-      const book = Book.findByID(bookID);
-      return {object: book, label: book.name, value: wordCounts[bookID]};
-    });
+    const rows = await rowsWithSQL(sql);
+
+    // const options = {
+    //   columns: ['book_statements.id AS bookID'],
+    //   tables: ['book_statements']
+    // };
+    // const statements = await Statement.identifiersMatchingPredicate(predicate, options);
+    // if (statements.count == 0) return [];
+    //
+    // const wordCounts = {};
+    // statements.reduce((wordCounts, statement) => {
+    //   const bookID = statement.bookID;
+    //   const wordCount = wordCounts[bookID] || 0;
+    //   wordCounts[bookID] = wordCount + statement.wordCount;
+    //   return wordCounts;
+    // }, wordCounts);
+    //
+    // return Object.keys(wordCounts).sort((a,b) => wordCounts[a] > wordCounts[b] ? -1 : 1).map(bookID => {
+    //   const book = Book.findByID(bookID);
+    //   return {object: book, label: book.name, value: wordCounts[bookID]};
+    // });
   }
 
   countOfSourceType(sourceType: string): number {
@@ -566,8 +563,15 @@ export class Nature extends Realm.Object {
 Nature.schema = NatureSchema;
 
 export class Occurrence {
-  static countOccurrences(predicate: Predicate) {
-    
+  static async countOccurrences(predicate: Predicate) {
+    const fromSQL = fromWithPredicate(predicate);
+    const whereSQL = (predicate.predicateFormat.length > 0 ? `WHERE ${predicate.predicateFormat}` : '');
+    const sql = `SELECT COUNT(DISTINCT sources.id) AS count ${fromSQL} ${whereSQL}`
+
+    console.log(sql);
+
+    const rows = await rowsWithSQL(sql);
+    return rows[0]['count'];
   }
 }
 

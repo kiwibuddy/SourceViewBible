@@ -20,7 +20,7 @@ export function predicateWithCard(card: Object) {
   card.filters.forEach(filter => {
     switch(filter.type) {
       case 'actant':
-        predicates.push(ComparisonPredicate.predicateWith(`${filter.actantType}.id`, '=', filter.actant.id));
+        predicates.push(ComparisonPredicate.predicateWith(`${filter.actantType}_actants.actant_id`, '=', filter.actant.id));
         break;
 
       case 'actant-number':

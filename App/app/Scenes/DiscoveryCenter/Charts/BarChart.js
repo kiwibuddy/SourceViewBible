@@ -31,8 +31,7 @@ type Props = {
 
 const BarChartView = (props: Props) => {
   const { card, data, loading } = props;
-  const statements = card.statements;
-  const statementCount = statements.length;
+  const occurrenceCount = card.occurrenceCount;
   const filterCount = card.filters.length;
   const xAxis = card.xAxis;
   const yAxis = card.yAxis;
@@ -48,7 +47,7 @@ const BarChartView = (props: Props) => {
   }
 
   let chart = null;
-  if (!xAxis || !yAxis || statementCount == 0 || data == null || loading) {
+  if (!xAxis || !yAxis || occurrenceCount == 0 || data == null || loading) {
     chart = <Image style={{alignSelf: 'center'}} source={require('../Images/chart-bar-blankslate.png')} />;
   } else {
     chart = <ScrollView style={styles.chart} horizontal={true} showsHorizontalScrollIndicator={false}>

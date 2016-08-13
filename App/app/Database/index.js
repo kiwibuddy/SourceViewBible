@@ -9,10 +9,10 @@ import {
   Chronology,
   Gender,
   Nature,
+  Occurrence,
   Profession,
   Role,
   Sphere,
-  Statement,
   Word,
 } from './Realm';
 
@@ -31,10 +31,10 @@ module.exports = {
   Chronology,
   Gender,
   Nature,
+  Occurrence,
   Profession,
   Role,
   Sphere,
-  Statement,
   Word,
   ComparisonPredicate,
   CompoundPredicate,

@@ -1,18 +1,17 @@
 /* @flow */
 'use strict';
 
-import { Actant, Book, Chronology, Gender, Nature, Profession, Role, Sphere, Statement, Word } from '../../../Database';
+import { Actant, Book, Chronology, Gender, Nature, Profession, Role, Sphere, Occurrence, Word } from '../../../Database';
 import { predicateWithCard } from '../Filters/FilterUtils';
 import { Localizable } from '../../../Common';
 
-export async function valuesForCard(card) {
-  const statements = card.statements;
-  const statementCount = statements.length;
+export async function valuesForCard(card: Object) {
+  const occurrenceCount = card.occurrenceCount;
   const filterCount = card.filters.length;
   const xAxis = card.xAxis;
   const yAxis = card.yAxis;
 
-  if (!statements || statementCount == 0 || !xAxis || !yAxis) return null;
+  if (occurrenceCount == 0 || !xAxis || !yAxis) return null;
 
   switch (yAxis.id) {
     case 'words':

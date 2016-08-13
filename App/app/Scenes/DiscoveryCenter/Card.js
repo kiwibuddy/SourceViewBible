@@ -33,7 +33,7 @@ import { DeleteButton, DuplicateButton, ShareButton } from './Buttons';
 
 import Popover from './Popover';
 
-import { Chronology, Statement } from '../../Database';
+import { Chronology, Occurrence } from '../../Database';
 
 export const Header = (props: Object) => {
   return (
@@ -174,13 +174,14 @@ export default class Card extends Component {
 
   _renderReadButton = () => {
     const { card } = this.state;
-    const statementCount = card.statements.length;
+    const occurrenceCount = card.occurrenceCount;
+    if (occurrenceCount == 0) return null;
     const filterCount = card.filters.length;
-    if (statementCount == 0) return null;
+    const title = Localizable.t('explore-occurrences.count', {count: occurrenceCount, localizedCount: Localizable.toNumber(occurrenceCount, {precision: 0})});
 
     return (
       <TouchableOpacity style={styles.readButton} onPress={this._onPressOccurrences}>
-        <Text style={styles.readButtonTitle}>{Localizable.t('explore-occurrences.count', {count: statementCount, localizedCount: Localizable.toNumber(statementCount, {precision: 0})})}</Text>
+        <Text style={styles.readButtonTitle}>{title}</Text>
       </TouchableOpacity>
     );
   }
@@ -268,20 +269,18 @@ export default class Card extends Component {
   };
 
   async _query() {
-    if (!this.state.card) return;
-
     const predicate = predicateWithCard(this.state.card);
-    const statements = await Statement.identifiersMatchingPredicate(predicate);
+    const occurrenceCount = await Occurrence.countOccurrences(predicate);
 
     const card = {
       ...this.state.card,
-      statements
+      occurrenceCount
     };
 
     this.setState({card, data: null, loading: true}, () => {
       valuesForCard(card).then(values => {
         this._animateLayout();
-        
+
         this.setState({
           data: values,
           loading: false

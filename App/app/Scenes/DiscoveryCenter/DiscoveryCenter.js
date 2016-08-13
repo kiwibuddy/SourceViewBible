@@ -141,7 +141,7 @@ export default class DiscoveryCenter extends Component {
     return {
       chartType: null,
       filters: [],
-      statements: [],
+      occurrenceCount: 0,
       yAxis: {
         id: 'words',
         name: Localizable.t('words.text')
@@ -188,12 +188,7 @@ export default class DiscoveryCenter extends Component {
   };
 
   _onPressOccurrences = (card: Object) => {
-    const occurrences = card.statements;
-    if (occurrences.length > 0) {
-      const route = discoveryCenterOccurrencesURL({title: 'Occurrences', occurrences});
       // FIXME
-      // this.props.navigate(route);
-    }
   };
 
   _showPopover = (props: Object, onComplete: Function) => {
