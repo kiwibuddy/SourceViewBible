@@ -734,7 +734,7 @@ export class Sphere extends Realm.Object {
 }
 Sphere.schema = SphereSchema;
 
-export class Statement extends Realm.Object {
+export class Statement {
   static all() {
     return realm.objects('Statement');
   }
