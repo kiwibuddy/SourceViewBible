@@ -9,10 +9,7 @@ EMDROS[:actant_objects].each do |actant_object|
 	actant = {
 		id: actant_object[:mdf_actant_id],
 		actant_number: actant_object[:mdf_source_number],
-		chronologies: chronologies.length > 0 ? actant_object[:mdf_chronology] : nil,
 		gender: actant_object[:mdf_gender],
-		natures: natures.length > 0 ? actant_object[:mdf_natures] : nil,
-		professions: professions.length > 0 ? actant_object[:mdf_professions] : nil,
 	}
 
 	name = EMDROS[:actant_mdf_real_name_set][id_d: actant_object[:mdf_real_name]][:string_value]
@@ -23,7 +20,8 @@ EMDROS[:actant_objects].each do |actant_object|
 
 	actants << actant.merge({
 		name: name,
-		first_initial: first_initial,
+		firstInitial: first_initial,
+		actantNumber: actant_object[:mdf_source_number],
 		chronologies: chronologies,
 		natures: natures,
 		professions: professions,

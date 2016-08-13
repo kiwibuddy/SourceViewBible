@@ -17,7 +17,7 @@ async function seedSourceActantWordCounts(emdros: Object, realm: Object) {
 
   const sourceActants = [];
   for (let sourceActant of SOURCES_ACTANTS) {
-    const context = sourceActant.is_source ? 'RecipientActant' : 'SourceActant'
+    const context = sourceActant.is_source ? 'SourceActant' : 'RecipientActant';
     const wordCountsForContext = await emdros.wordCountsForContext(context, {from: sourceActant.first, to: sourceActant.last});
     const counts = wordCountsForContext[sourceActant.id.toString()];
 

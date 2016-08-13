@@ -15,13 +15,6 @@ sources_actants = []
         actant_id: source_actant_object[:mdf_actant_id],
         source_id: source_object[:object_id_d],
     		word_count: source_actant_word_count["wordCount"],
-        family_count: source_actant_word_count["sphereCounts"].find{ |c| c["string"] == "family" }["count"],
-        economics_count: source_actant_word_count["sphereCounts"].find{ |c| c["string"] == "economics" }["count"],
-        government_count: source_actant_word_count["sphereCounts"].find{ |c| c["string"] == "government" }["count"],
-        religion_count: source_actant_word_count["sphereCounts"].find{ |c| c["string"] == "religion" }["count"],
-        education_count: source_actant_word_count["sphereCounts"].find{ |c| c["string"] == "economics" }["count"],
-        communication_count: source_actant_word_count["sphereCounts"].find{ |c| c["string"] == "communication" }["count"],
-        celebration_count: source_actant_word_count["sphereCounts"].find{ |c| c["string"] == "celebration" }["count"],
     	}
 
       DB["#{type}_actants".to_sym].insert(source_actant)

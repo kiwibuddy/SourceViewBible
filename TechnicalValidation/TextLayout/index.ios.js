@@ -25,6 +25,11 @@ const RNFS = require('react-native-fs');
 
 import Emdros from './app/API/Emdros';
 
+const Bible = {
+  first: 1,
+  last: 1887296
+};
+
 const Genesis = {
   first: 1,
   last: 50638,
@@ -57,12 +62,12 @@ class TextLayout extends Component {
 
   componentDidMount() {
     Emdros.openDatabase().then(() => {
-      const options = {monadSet: Genesis};
+      const options = {monadSet: Bible};
        Emdros.scripture(options).then(scripture => {
          //  console.log(scripture);
          this._saveScripture(scripture);
 
-         this.setState({scripture});
+        //  this.setState({scripture});
        }).catch(error => {
          console.log(error);
        });

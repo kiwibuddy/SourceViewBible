@@ -13,7 +13,7 @@ const JSON_PATH = '/tmp/SourceView.json';
 const realm = new Realm({
   path: DATABASE_PATH,
   schema: SourceViewSchema,
-  // encryptionKey: Emdros.key
+  encryptionKey: Emdros.key
 });
 
 const { seedActantMetaDataObjects } = require('./seeds/actant_meta_data');
@@ -46,24 +46,22 @@ export async function release() {
 
 async function seed(emdros) {
   await seedBaseObjects(emdros);
-  // await seedBooks(emdros, realm);
-  // await seedChapters(emdros, realm);
-  // await seedActants(emdros, realm);
-  // await seedStatements(emdros, realm);
-  // await seedSpheres(emdros, realm);
-  // await seedBible(emdros, realm);
+  await seedBooks(emdros, realm);
+  await seedChapters(emdros, realm);
+  await seedActants(emdros, realm);
+  await seedSpheres(emdros, realm);
+  await seedBible(emdros, realm);
 }
 
 async function seedBaseObjects(emdros) {
   console.log('Seeding Base Objects');
 
-  // await seedActantMetaDataObjects(realm);
-  // await seedBookObjects(emdros, realm);
-  // await seedChapterObjects(emdros, realm);
-  // await seedActantObjects(emdros, realm);
+  await seedActantMetaDataObjects(realm);
+  await seedBookObjects(emdros, realm);
+  await seedChapterObjects(emdros, realm);
+  await seedActantObjects(emdros, realm);
   await seedSourcesActants(emdros, realm);
-  // await seedStatementObjects(emdros, realm);
-  // await seedSphereObjects(emdros, realm);
+  await seedSphereObjects(emdros, realm);
 }
 
 async function seedBible(emdros: Object, realm) {

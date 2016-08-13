@@ -18,6 +18,4 @@ DB = Sequel.connect("sqlite://#{DB_NAME}")
 Sequel.extension :migration
 Sequel::Migrator.run(DB, "db/migrations")
 
-require './db/seeds/actants'
-require './db/seeds/sources'
-require './db/seeds/sources_actants'
+require './db/seeds/seeds'

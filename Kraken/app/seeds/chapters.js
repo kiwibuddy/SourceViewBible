@@ -74,12 +74,6 @@ async function seedBookChapters(emdros, realm) {
       const lastMonad = chapters[chapters.length - 1].lastMonad;
       realm.create('Book', {id: book.id, chapters, firstMonad, lastMonad}, true);
     });
-
-    RNFS.writeFile('/tmp/book-monads.json', JSON.stringify(books.map(book => ({id: book.id, firstMonad: book.firstMonad, lastMonad: book.lastMonad}))), 'utf8').then((success) => {
-      console.log('Seeded /tmp/book-monads.json');
-    }).catch((err) => {
-      console.log(err.message);
-    });
   });
 }
 
