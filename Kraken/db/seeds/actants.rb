@@ -8,8 +8,8 @@ EMDROS[:actant_objects].each do |actant_object|
 
 	actant = {
 		id: actant_object[:mdf_actant_id],
-		actant_number: actant_object[:mdf_source_number],
-		gender: actant_object[:mdf_gender],
+		actant_number_id: actant_object[:mdf_source_number],
+		gender_id: actant_object[:mdf_gender],
 	}
 
 	name = EMDROS[:actant_mdf_real_name_set][id_d: actant_object[:mdf_real_name]][:string_value]
@@ -23,6 +23,7 @@ EMDROS[:actant_objects].each do |actant_object|
 		firstInitial: first_initial,
 		actantNumber: actant_object[:mdf_source_number],
 		chronologies: chronologies,
+		gender: actant_object[:mdf_gender],
 		natures: natures,
 		professions: professions,
 		isSource: isSource,

@@ -20,52 +20,52 @@ export function predicateWithCard(card: Object) {
   card.filters.forEach(filter => {
     switch(filter.type) {
       case 'actant':
-        predicates.push(ComparisonPredicate.predicateWith(`${filter.actantType}_statements.id`, '=', filter.actant.id));
+        predicates.push(ComparisonPredicate.predicateWith(`${filter.actantType}.id`, '=', filter.actant.id));
         break;
 
       case 'actant-number':
-        predicates.push(ComparisonPredicate.predicateWith(`${filter.actantType}_actant_number_statements.id`, '=', filter.actantNumber.id));
+        predicates.push(ComparisonPredicate.predicateWith(`${filter.actantType}.actant_number`, '=', filter.actantNumber.id));
         break;
 
       case 'book':
-        predicates.push(ComparisonPredicate.predicateWith('statements.first', '>=', filter.book.firstMonad));
-        predicates.push(ComparisonPredicate.predicateWith('statements.last', '<=', filter.book.lastMonad));
+        predicates.push(ComparisonPredicate.predicateWith('sources.first', '>=', filter.book.firstMonad));
+        predicates.push(ComparisonPredicate.predicateWith('sources.last', '<=', filter.book.lastMonad));
         break;
 
       case 'book-range':
-        predicates.push(ComparisonPredicate.predicateWith('statements.first', '>=', filter.books.from.firstMonad));
-        predicates.push(ComparisonPredicate.predicateWith('statements.last', '<=', filter.books.to.lastMonad));
+        predicates.push(ComparisonPredicate.predicateWith('sources.first', '>=', filter.books.from.firstMonad));
+        predicates.push(ComparisonPredicate.predicateWith('sources.last', '<=', filter.books.to.lastMonad));
         break;
 
       case 'chronology':
-        predicates.push(ComparisonPredicate.predicateWith('chronology_statements.id', '=', filter.chronology.id));
+        predicates.push(ComparisonPredicate.predicateWith('chronologies.chronology_id', '=', filter.chronology.id));
         break;
 
       case 'chronology-range':
         const chronologies = Chronology.whereInRange(filter.chronologies.from, filter.chronologies.to).map(chronology => chronology.id);
-        predicates.push(ComparisonPredicate.predicateWith('chronology_statements.id', 'IN', chronologies));
+        predicates.push(ComparisonPredicate.predicateWith('chronologies.chronology_id', 'IN', chronologies));
         break;
 
       case 'gender':
-        predicates.push(ComparisonPredicate.predicateWith(`${filter.actantType}_gender_statements.id`, '=', filter.gender.id));
+        predicates.push(ComparisonPredicate.predicateWith(`${filter.actantType}.gender_id`, '=', filter.gender.id));
         break;
 
       case 'nature':
-        predicates.push(ComparisonPredicate.predicateWith(`${filter.actantType}_nature_statements.id`, '=', filter.nature.id));
+        predicates.push(ComparisonPredicate.predicateWith(`${filter.actantType}_natures.nature_id`, '=', filter.nature.id));
         break;
 
       case 'profession':
-        predicates.push(ComparisonPredicate.predicateWith(`${filter.actantType}_profession_statements.id`, '=', filter.profession.id));
+        predicates.push(ComparisonPredicate.predicateWith(`${filter.actantType}_professions.profession_id`, '=', filter.profession.id));
         break;
 
       case 'role':
-        predicates.push(ComparisonPredicate.predicateWith(`${filter.actantType}_type_statements.id`, '=', filter.role.id));
+        predicates.push(ComparisonPredicate.predicateWith(`sources.role_id`, '=', filter.role.id));
         break;
 
       case 'sphere':
         const SPHERES = ["family", "economics", "government", "religion", "education", "communication", "celebration"];
         const sphereID = SPHERES.indexOf(filter.sphere.id) + 1;
-        predicates.push(ComparisonPredicate.predicateWith('sphere_statements.id', '=', sphereID));
+        predicates.push(ComparisonPredicate.predicateWith('spheres.sphere_id', '=', sphereID));
         break;
 
       case 'word':

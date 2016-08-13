@@ -565,6 +565,12 @@ export class Nature extends Realm.Object {
 }
 Nature.schema = NatureSchema;
 
+export class Occurrence {
+  static countOccurrences(predicate: Predicate) {
+    
+  }
+}
+
 const ProfessionSchema = {
   name: 'Profession',
   primaryKey: 'id',

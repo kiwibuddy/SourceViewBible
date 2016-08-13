@@ -10,7 +10,7 @@ EMDROS[:source_objects].each do |source_object|
     first: source_object[:first_monad],
     last: source_object[:last_monad],
     occurrence: source_object[:mdf_source_occurrence],
-    role: source_object[:mdf_source_color]
+    role_id: source_object[:mdf_source_color]
   }
 
   DB[:sources].insert(source)

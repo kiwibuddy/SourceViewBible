@@ -9,7 +9,7 @@ Sequel.migration do
       Integer :first, index: true
       Integer :last, index: true
       Integer :occurrence
-      Integer :role
+      Integer :role_id
     end
   end
 end
