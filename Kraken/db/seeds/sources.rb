@@ -1,10 +1,12 @@
 STDERR.puts "Seeding Sources"
 
+BOOKS = EMDROS[:book_objects].map{ |book| book[:mdf_djhref] }
 
 EMDROS[:source_objects].each do |source_object|
+  book = EMDROS[:book_objects]['first_monad <= ? AND last_monad >= ?', source_object[:first_monad], source_object[:last_monad]]
   source = {
     id: source_object[:object_id_d],
-    book_id: EMDROS[:book_objects]['first_monad <= ? AND last_monad >= ?', source_object[:first_monad], source_object[:last_monad]][:mdf_djhref],
+    book_id: BOOKS.index(book[:mdf_djhref]) + 1,
     first: source_object[:first_monad],
     last: source_object[:last_monad],
     occurrence: source_object[:mdf_source_occurrence],
