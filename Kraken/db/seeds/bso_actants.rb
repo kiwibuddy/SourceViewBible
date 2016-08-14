@@ -12,7 +12,8 @@ STDERR.puts "Seeding BSO Actants"
         bso_id: source_object[:object_id_d],
     	}
 
-      DB[:bso_actants].insert(bso_actant)
+      # FIXME: Look into Unique Contstraint Violation
+      DB[:bso_actants].insert(bso_actant) rescue nil
     else
       STDERR.puts "Can't find source object for source actant #{bso_actant_object.inspect}"
     end
