@@ -21,7 +21,7 @@ const { seedBookObjects, seedBooks } = require('./seeds/books');
 const { seedChapterObjects, seedChapters } = require('./seeds/chapters');
 const { seedActantObjects, seedActants } = require('./seeds/actants');
 const { seedSphereObjects, seedSpheres } = require('./seeds/spheres');
-const { seedSourcesActants } = require('./seeds/sources_actants');
+const { seedBSO } = require('./seeds/bso');
 
 export async function release() {
   console.log('Release the Kraken!');
@@ -46,22 +46,22 @@ export async function release() {
 
 async function seed(emdros) {
   await seedBaseObjects(emdros);
-  await seedBooks(emdros, realm);
-  await seedChapters(emdros, realm);
-  await seedActants(emdros, realm);
-  await seedSpheres(emdros, realm);
-  await seedBible(emdros, realm);
+  // await seedBooks(emdros, realm);
+  // await seedChapters(emdros, realm);
+  // await seedActants(emdros, realm);
+  // await seedSpheres(emdros, realm);
+  // await seedBible(emdros, realm);
 }
 
 async function seedBaseObjects(emdros) {
   console.log('Seeding Base Objects');
 
-  await seedActantMetaDataObjects(realm);
-  await seedBookObjects(emdros, realm);
-  await seedChapterObjects(emdros, realm);
-  await seedActantObjects(emdros, realm);
-  await seedSourcesActants(emdros, realm);
-  await seedSphereObjects(emdros, realm);
+  // await seedActantMetaDataObjects(realm);
+  // await seedBookObjects(emdros, realm);
+  // await seedChapterObjects(emdros, realm);
+  // await seedActantObjects(emdros, realm);
+  await seedBSO(emdros, realm);
+  // await seedSphereObjects(emdros, realm);
 }
 
 async function seedBible(emdros: Object, realm) {

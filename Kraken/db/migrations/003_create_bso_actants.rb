@@ -6,9 +6,9 @@ Sequel.migration do
     create_table(:bso_actants) do
       primary_key :id
       foreign_key :actant_id, :actants
-      Integer :type
-      foreign_key :source_id, :sources
-      index [:actant_type, :type], unique: true
+      Integer :type_id
+      foreign_key :bso_id, :bso
+      index [:actant_id, :type_id, :bso_id], unique: true
     end
   end
 end
