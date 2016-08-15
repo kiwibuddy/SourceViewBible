@@ -31,11 +31,12 @@ type Props = {
 };
 
 const CloudChartView = (props: Props) => {
-  const { card, data, loading } = props;
+  const { card, loading } = props;
   const occurrenceCount = card.occurrenceCount;
   const filterCount = card.filters.length;
   const xAxis = card.xAxis;
   const yAxis = card.yAxis;
+  const data = (card.zAxis ? props.data[0].value : props.data);
 
   let xAxisTitle = "Choose Text";
   if (card.xAxis) {
