@@ -279,7 +279,10 @@ export default class Card extends Component {
       occurrenceCount
     };
 
-    this.setState({card, data: null, loading: true}, () => {
+    this.setState({card, data: null, loading: occurrenceCount > 0}, () => {
+      if (occurrenceCount > 0) {
+        const data = query.data();
+      }
       // FIXME
       // valuesForCard(card).then(values => {
       //   this._animateLayout();

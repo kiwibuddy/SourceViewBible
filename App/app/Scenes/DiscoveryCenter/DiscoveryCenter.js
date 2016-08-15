@@ -143,7 +143,7 @@ export default class DiscoveryCenter extends Component {
       filters: [],
       occurrenceCount: 0,
       yAxis: {
-        id: 'words',
+        type: 'words',
         name: Localizable.t('words.text')
       },
     }

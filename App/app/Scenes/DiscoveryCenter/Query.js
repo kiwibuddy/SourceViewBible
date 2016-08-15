@@ -3,6 +3,23 @@
 
 import { Chronology, SQLite, ComparisonPredicate, CompoundPredicate, Predicate, rowsWithSQL } from '../../Database';
 
+class SelectStatement {
+  prefix: string;
+  columns: Array<string>;
+
+  constructor(prefix: ?string) {
+    this.prefix = prefix || 'SELECT';
+    this.columns = [];
+  }
+
+  select(column: string) {
+    this.columns = [...this.columns, column].filter((elem, pos, arr) => arr.indexOf(elem) == pos);
+  }
+
+  toSQL() {
+    return `${this.prefix} ${this.columns.join(', ')}`;
+  }
+}
 
 class FromClause {
   prefix: string;
@@ -37,6 +54,42 @@ class WhereClause {
     if (this.predicates.length == 0) return '';
     const predicate = CompoundPredicate.andPredicateWithSubpredicates(this.predicates);
     return `WHERE ${predicate.predicateFormat}`;
+  }
+}
+
+class GroupByStatement {
+  prefix: string;
+  columns: Array<string>;
+
+  constructor(prefix: ?string) {
+    this.prefix = prefix || 'GROUP BY';
+    this.columns = [];
+  }
+
+  groupBy(column: string) {
+    this.columns = [...this.columns, column].filter((elem, pos, arr) => arr.indexOf(elem) == pos);
+  }
+
+  toSQL() {
+    return `${this.prefix} ${this.columns.join(', ')}`;
+  }
+}
+
+class OrderByStatement {
+  prefix: string;
+  columns: Array<string>;
+
+  constructor(prefix: ?string) {
+    this.prefix = prefix || 'ORDER BY';
+    this.columns = [];
+  }
+
+  orderBy(column: string) {
+    this.columns = [...this.columns, column].filter((elem, pos, arr) => arr.indexOf(elem) == pos);
+  }
+
+  toSQL() {
+    return `${this.prefix} ${this.columns.join(', ')}`;
   }
 }
 
@@ -76,6 +129,15 @@ export default class Query {
     return rows[0]['count'];
   }
 
+  async data() {
+    const dataSQL = this._dataSQL();
+    console.log(dataSQL);
+
+    // const rows = await rowsWithSQL(sql);
+    // console.log(rows);
+    return []
+  }
+
   _sql(select: string, options: ?Object) {
     const sql = [select, this.fromClause.toSQL()];
 
@@ -86,6 +148,86 @@ export default class Query {
     if (options && options.orderBy) sql.push(options.orderBy);
 
     return sql.join(' ');
+  }
+
+  _dataSQL() {
+    const xAxis = this.axis[0];
+    const yAxis = this.axis[1];
+    const zAxis = this.axis[2];
+
+    const selectStatement = new SelectStatement();
+    const groupByStatement = new GroupByStatement();
+    const orderByStatement = new OrderByStatement();
+
+    switch (yAxis.type) {
+      case 'words':
+        let actantType = null;
+        switch (xAxis.actantType) {
+          case 'source':
+            actantType = 'speaker'
+            break;
+
+          case 'recipient':
+            actantType = 'listener';
+            break;
+
+          default:
+            actantType = 'someone';
+            break;
+        }
+
+        switch (xAxis.type) {
+          case 'book':
+            selectStatement.select('bso.book_id AS id');
+            groupByStatement.groupBy('bso.book_id');
+            break;
+
+          case 'chronology':
+            selectStatement.select('chronologies.chronology_id AS id');
+            groupByStatement.groupBy('chronologies.chronology_id');
+            break;
+
+          case 'name':
+            selectStatement.select(`${actantType}.id AS id`);
+            groupByStatement.groupBy(`${actantType}.id`);
+            break;
+
+          case 'gender':
+            selectStatement.select(`${actantType}.gender_id AS id`);
+            groupByStatement.groupBy(`${actantType}.gender_id`);
+            break;
+
+          case 'nature':
+            selectStatement.select(`${actantType}_natures.id AS id`);
+            groupByStatement.groupBy(`${actantType}_natures.id`);
+            break;
+
+          case 'profession':
+            selectStatement.select(`${actantType}_professions.id AS id`);
+            groupByStatement.groupBy(`${actantType}_professions.id`);
+            break;
+
+          case 'role':
+            selectStatement.select('bso.role_id AS id');
+            groupByStatement.groupBy('bso.role_id');
+            break;
+
+          case 'sphere':
+            selectStatement.select('spheres.sphere_id AS id');
+            selectStatement.select('SUM(spheres.word_count) AS count');
+            groupByStatement.groupBy('spheres.sphere_id');
+            break;
+        }
+
+        if (xAxis.type !== 'sphere') {
+          selectStatement.select('SUM(bso.word_count) AS count')
+        }
+        break;
+    }
+
+    orderByStatement.orderBy('count DESC');
+
+    return this._sql(selectStatement.toSQL(), {groupBy: groupByStatement.toSQL(), orderBy: orderByStatement.toSQL()});
   }
 
   _buildFromClause() {
@@ -142,7 +284,7 @@ export default class Query {
 
             default: // Not needed by filter but needed by axis
               fromClause.join('INNER JOIN bso_actants AS everyone ON bso.id = everyone.bso_id');
-              fromClause.join('INNER JOIN natures ON everyone.actant_id = natures.actant_id');
+              fromClause.join('INNER JOIN natures AS someone_natures ON everyone.actant_id = someone_natures.actant_id');
               break;
           }
           break;
@@ -161,7 +303,7 @@ export default class Query {
 
             default: // Not needed by filter but needed by axis
               fromClause.join('INNER JOIN bso_actants AS everyone ON bso.id = everyone.bso_id');
-              fromClause.join('INNER JOIN professions ON everyone.actant_id = professions.actant_id');
+              fromClause.join('INNER JOIN professions AS someone_professions ON everyone.actant_id = someone_professions.actant_id');
               break;
           }
           break;
