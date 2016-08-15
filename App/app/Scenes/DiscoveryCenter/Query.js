@@ -440,8 +440,6 @@ export default class Query {
 
     const dataSQL = this._sql(selectStatement.toSQL(), {groupBy: groupByStatement.toSQL(), orderBy: orderByStatement.toSQL()});
 
-    console.log(dataSQL);
-
     const rows = await rowsWithSQL(dataSQL);
 
     const data = [];
