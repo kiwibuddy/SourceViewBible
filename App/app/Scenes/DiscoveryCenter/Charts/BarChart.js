@@ -30,11 +30,12 @@ type Props = {
 };
 
 const BarChartView = (props: Props) => {
-  const { card, data, loading } = props;
+  const { card, loading } = props;
   const occurrenceCount = card.occurrenceCount;
   const filterCount = card.filters.length;
   const xAxis = card.xAxis;
   const yAxis = card.yAxis;
+  const data = (card.zAxis ? props.data[0].value : props.data);
 
   let xAxisTitle = "Choose X Axis";
   if (card.xAxis) {
