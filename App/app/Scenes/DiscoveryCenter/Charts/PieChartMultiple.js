@@ -65,6 +65,8 @@ export default class PieChartMultiple extends Component {
 
   _renderChart = (pie: Object, sectionID: any, rowID: any) => {
     const data = pie.value;
+    if (!Array.isArray(data)) return null;
+
     const totalValue = data.reduce((sum, slice) => sum + slice.value, 0);
     const slices = data.filter(slice => parseInt((slice.value / totalValue) * 100)).map((slice, index) => {
       return {...slice, color: colorAtIndex(index)};

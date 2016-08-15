@@ -215,6 +215,8 @@ export default class Query {
 
     if (xAxis.type === 'words') {
       return this._words();
+    } else if (zAxis && zAxis.type === 'words') {
+      return [];
     }
 
     const selectStatement = new SelectStatement();
