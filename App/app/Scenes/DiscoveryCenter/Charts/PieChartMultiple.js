@@ -73,7 +73,8 @@ export default class PieChartMultiple extends Component {
     return (
       <View style={styles.chart}>
         <PieChartList
-          {...this.props}
+          card={this.props.card}
+          data={data}
           style={styles.pieList}
           renderHeader={() => {
             return (
