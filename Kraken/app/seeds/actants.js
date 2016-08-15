@@ -10,7 +10,12 @@ export async function seedActantObjects(emdros: Object, realm: Object) {
 
   realm.write(() => {
     ACTANTS.forEach(actant => {
-      realm.create('Actant', actant, true);
+      try {
+        realm.create('Actant', actant, true);
+      } catch(error) {
+        console.log(actant);
+        throw error;
+      }
     });
   });
 }

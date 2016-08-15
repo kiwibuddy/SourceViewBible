@@ -14,6 +14,7 @@ const SPHERES = [
 ];
 
 export async function seedSphereObjects(emdros: Object, realm: Object) {
+  console.log('Seeding Sphere Objects...');
   SPHERES.forEach(sphere => {
     realm.write(() => {
       realm.create('Sphere', sphere);

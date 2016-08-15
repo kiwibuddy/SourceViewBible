@@ -1,6 +1,6 @@
 STDERR.puts "Seeding Sources Actants"
 
-sources_actants_word_counts = JSON.parse(open("db/seeds/sources_actants_word_counts.json").read)
+# sources_actants_word_counts = JSON.parse(open("db/seeds/sources_actants_word_counts.json").read)
 
 EMDROS[:source_objects].each do |source|
     if source_actant = EMDROS[:sourceactant_objects]['first_monad <= ? AND last_monad >= ?', source[:first_monad], source[:last_monad]]

@@ -1,20 +1,18 @@
 STDERR.puts "Seeding Spheres"
 
-sources_actants_word_counts = JSON.parse(open("db/seeds/sources_actants_word_counts.json").read)
+# BSO_WORD_COUNTS = JSON.parse(open("db/seeds/bso_word_counts.json").read)
 
-sources_actants = []
-
-EMDROS["sourceactant_objects".to_sym].each do |source_actant_object|
-  id = source_actant_object[:object_id_d]
-  source_actant_word_count = sources_actants_word_counts.find{ |owc| owc["id"] == id }
+book_source_occurrences = EMDROS[:source_objects].each do |source_object|
+  id = source_object[:object_id_d]
+  word_counts = BSO_WORD_COUNTS.find{ |c| c["id"] == id } || {}
 
   ["family", "economics", "government", "religion", "education", "communication", "celebration"].each_with_index do |sphere_name, index|
-    count = source_actant_word_count["sphereCounts"].find{ |c| c["string"] == sphere_name }["count"]
+    count = word_counts["sphereCounts"].find{ |c| c["string"] == sphere_name }["count"]
     if count > 0
       sphere = {
-        source_actant_id: id,
+        bso_id: id,
         sphere_id: index + 1,
-        count: count,
+        word_count: count,
     	}
       DB[:spheres].insert(sphere)
     end

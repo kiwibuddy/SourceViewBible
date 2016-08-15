@@ -13,7 +13,7 @@ export async function seedBookObjects(emdros: Object, realm: Object) {
     realm.write(() => {
       BOOKS.forEach((bookInfo, index) => {
         const book = {
-          id: index + 1,
+          id: bookInfo.id,
           DJHRef: bookInfo.DJHRef,
           name: bookInfo.name,
           testament: bookInfo.testament,
