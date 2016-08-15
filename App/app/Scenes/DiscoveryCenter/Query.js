@@ -72,6 +72,7 @@ class GroupByStatement {
   }
 
   toSQL() {
+    if (this.columns.length == 0) return '';
     return `${this.prefix} ${this.columns.join(', ')}`;
   }
 }
@@ -90,6 +91,7 @@ class OrderByStatement {
   }
 
   toSQL() {
+    if (this.columns.length == 0) return '';
     return `${this.prefix} ${this.columns.join(', ')}`;
   }
 }
@@ -210,6 +212,10 @@ export default class Query {
     const yAxis = this.axis[1];
     const zAxis = this.axis[2];
     if (!xAxis || !yAxis) return [];
+
+    if (xAxis.type === 'words') {
+      return this._words();
+    }
 
     const selectStatement = new SelectStatement();
     const groupByStatement = new GroupByStatement();
@@ -434,6 +440,8 @@ export default class Query {
 
     const dataSQL = this._sql(selectStatement.toSQL(), {groupBy: groupByStatement.toSQL(), orderBy: orderByStatement.toSQL()});
 
+    console.log(dataSQL);
+
     const rows = await rowsWithSQL(dataSQL);
 
     const data = [];
@@ -466,6 +474,12 @@ export default class Query {
     });
 
     return data;
+  }
+
+  async _words() {
+    const monads = await this._monads();
+    const words = await Emdros.words({monads, useStopWords: true, limit: 20});
+    return words.map(word => ({label: word.string, value: word.count}));
   }
 
   _buildFromClause() {
