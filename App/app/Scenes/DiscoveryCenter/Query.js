@@ -98,9 +98,9 @@ class OrderByStatement {
 
 class EmdrosQuery {
   word: string
-  monads: Array<Array<number>>;
+  monads: ?Array<Array<number>>;
 
-  constructor(word: string, monads: Array<Array<number>>) {
+  constructor(word: string, monads: ?Array<Array<number>>) {
     this.word = word;
     this.monads = monads;
   }
