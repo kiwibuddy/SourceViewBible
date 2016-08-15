@@ -281,17 +281,15 @@ export default class Card extends Component {
 
     this.setState({card, data: null, loading: occurrenceCount > 0}, () => {
       if (occurrenceCount > 0) {
-        const data = query.data();
+        query.data().then(data => {
+          this._animateLayout();
+
+          this.setState({
+            data,
+            loading: false
+          });
+        })
       }
-      // FIXME
-      // valuesForCard(card).then(values => {
-      //   this._animateLayout();
-      //
-      //   this.setState({
-      //     data: values,
-      //     loading: false
-      //   });
-      // });
     });
   };
 

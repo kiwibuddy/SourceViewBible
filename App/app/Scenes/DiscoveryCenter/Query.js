@@ -1,7 +1,7 @@
 /* @flow */
 'use strict';
 
-import { Chronology, SQLite, ComparisonPredicate, CompoundPredicate, Predicate, rowsWithSQL } from '../../Database';
+import { Actant, Book, Chronology, Gender, Nature, Profession, Role, Sphere, SQLite, ComparisonPredicate, CompoundPredicate, Predicate, rowsWithSQL } from '../../Database';
 
 class SelectStatement {
   prefix: string;
@@ -130,12 +130,7 @@ export default class Query {
   }
 
   async data() {
-    const dataSQL = this._dataSQL();
-    console.log(dataSQL);
-
-    // const rows = await rowsWithSQL(sql);
-    // console.log(rows);
-    return []
+    return await this._data();
   }
 
   _sql(select: string, options: ?Object) {
@@ -150,7 +145,7 @@ export default class Query {
     return sql.join(' ');
   }
 
-  _dataSQL() {
+  async _data() {
     const xAxis = this.axis[0];
     const yAxis = this.axis[1];
     const zAxis = this.axis[2];
@@ -158,6 +153,8 @@ export default class Query {
     const selectStatement = new SelectStatement();
     const groupByStatement = new GroupByStatement();
     const orderByStatement = new OrderByStatement();
+
+    let zObject = null;
 
     if (zAxis) {
       let zAxisActantType = null;
@@ -179,48 +176,56 @@ export default class Query {
           selectStatement.select('bso.book_id AS zid');
           groupByStatement.groupBy('bso.book_id');
           orderByStatement.orderBy('bso.book_id');
+          zObject = Book;
           break;
 
         case 'chronology':
           selectStatement.select('chronologies.chronology_id AS zid');
           groupByStatement.groupBy('chronologies.chronology_id');
           orderByStatement.orderBy('chronologies.chronology_id');
+          zObject = Chronology;
           break;
 
         case 'name':
           selectStatement.select(`${zAxisActantType}.id AS zid`);
           groupByStatement.groupBy(`${zAxisActantType}.id`);
           orderByStatement.orderBy(`${zAxisActantType}.id`);
+          zObject = Actant;
           break;
 
         case 'gender':
           selectStatement.select(`${zAxisActantType}.gender_id AS zid`);
           groupByStatement.groupBy(`${zAxisActantType}.gender_id`);
           orderByStatement.orderBy(`${zAxisActantType}.gender_id`);
+          zObject = Gender;
           break;
 
         case 'nature':
           selectStatement.select(`${zAxisActantType}_natures.id AS zid`);
           groupByStatement.groupBy(`${zAxisActantType}_natures.id`);
           orderByStatement.orderBy(`${zAxisActantType}_natures.id`);
+          zObject = Nature;
           break;
 
         case 'profession':
           selectStatement.select(`${zAxisActantType}_professions.id AS zid`);
           groupByStatement.groupBy(`${zAxisActantType}_professions.id`);
           orderByStatement.orderBy(`${zAxisActantType}_professions.id`);
+          zObject = Profession;
           break;
 
         case 'role':
           selectStatement.select('bso.role_id AS zid');
           groupByStatement.groupBy('bso.role_id');
           orderByStatement.orderBy('bso.role_id');
+          zObject = Role;
           break;
 
         case 'sphere':
           selectStatement.select('spheres.sphere_id AS zid');
           groupByStatement.groupBy('spheres.sphere_id');
           orderByStatement.orderBy('spheres.sphere_id');
+          zObject = Sphere;
           break;
       }
     }
@@ -240,45 +245,54 @@ export default class Query {
         break;
     }
 
+    let ObjectClass = null;
     switch (xAxis.type) {
       case 'book':
         selectStatement.select('bso.book_id AS id');
         groupByStatement.groupBy('bso.book_id');
+        ObjectClass = Book;
         break;
 
       case 'chronology':
         selectStatement.select('chronologies.chronology_id AS id');
         groupByStatement.groupBy('chronologies.chronology_id');
+        ObjectClass = Chronology;
         break;
 
       case 'name':
         selectStatement.select(`${xAxisActantType}.id AS id`);
         groupByStatement.groupBy(`${xAxisActantType}.id`);
+        ObjectClass = Actant;
         break;
 
       case 'gender':
         selectStatement.select(`${xAxisActantType}.gender_id AS id`);
         groupByStatement.groupBy(`${xAxisActantType}.gender_id`);
+        ObjectClass = Gender;
         break;
 
       case 'nature':
         selectStatement.select(`${xAxisActantType}_natures.id AS id`);
         groupByStatement.groupBy(`${xAxisActantType}_natures.id`);
+        ObjectClass = Nature;
         break;
 
       case 'profession':
         selectStatement.select(`${xAxisActantType}_professions.id AS id`);
         groupByStatement.groupBy(`${xAxisActantType}_professions.id`);
+        ObjectClass = Profession;
         break;
 
       case 'role':
         selectStatement.select('bso.role_id AS id');
         groupByStatement.groupBy('bso.role_id');
+        ObjectClass = Role;
         break;
 
       case 'sphere':
         selectStatement.select('spheres.sphere_id AS id');
         groupByStatement.groupBy('spheres.sphere_id');
+        ObjectClass = Sphere;
         break;
     }
 
@@ -340,7 +354,22 @@ export default class Query {
 
     orderByStatement.orderBy('count DESC');
 
-    return this._sql(selectStatement.toSQL(), {groupBy: groupByStatement.toSQL(), orderBy: orderByStatement.toSQL()});
+    const dataSQL = this._sql(selectStatement.toSQL(), {groupBy: groupByStatement.toSQL(), orderBy: orderByStatement.toSQL()});
+
+    console.log(dataSQL);
+
+    const rows = await rowsWithSQL(dataSQL);
+
+    const data = rows.map(row => {
+      let object = {};
+      if (ObjectClass) {
+        object = ObjectClass.findByID(row['id']);
+      }
+
+      return {label: object.name, value: row['count']};
+    });
+
+    return data;
   }
 
   _buildFromClause() {
