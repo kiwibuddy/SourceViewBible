@@ -407,6 +407,12 @@ export default class Query {
       case 'words':
         if (xAxis.type === 'sphere' || (zAxis && zAxis.type === 'sphere')) {
           selectStatement.select('SUM(spheres.word_count) AS count');
+        } else if (this.emdrosData) {
+          const caseStatement = Object.keys(this.emdrosData).map(bsoID => {
+            const data = this.emdrosData[bsoID];
+            return `WHEN ${bsoID} THEN ${data.wordCount}`;
+          });
+          selectStatement.select(`SUM(CASE bso.id ${caseStatement.join(' ')} END) AS count`);
         } else {
           selectStatement.select('SUM(bso.word_count) AS count');
         }
@@ -416,6 +422,7 @@ export default class Query {
     orderByStatement.orderBy('count DESC');
 
     const dataSQL = this._sql(selectStatement.toSQL(), {groupBy: groupByStatement.toSQL(), orderBy: orderByStatement.toSQL()});
+
     const rows = await rowsWithSQL(dataSQL);
 
     const data = [];
