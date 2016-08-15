@@ -33,6 +33,8 @@ import { DeleteButton, DuplicateButton, ShareButton } from './Buttons';
 
 import Popover from './Popover';
 
+import Query from './Query';
+
 import { Chronology, Occurrence } from '../../Database';
 
 export const Header = (props: Object) => {
@@ -269,8 +271,8 @@ export default class Card extends Component {
   };
 
   async _query() {
-    const predicate = predicateWithCard(this.state.card);
-    const occurrenceCount = await Occurrence.countOccurrences(predicate);
+    const query = new Query(this.state.card);
+    const occurrenceCount = await query.count();
 
     const card = {
       ...this.state.card,
@@ -278,14 +280,15 @@ export default class Card extends Component {
     };
 
     this.setState({card, data: null, loading: true}, () => {
-      valuesForCard(card).then(values => {
-        this._animateLayout();
-
-        this.setState({
-          data: values,
-          loading: false
-        });
-      });
+      // FIXME
+      // valuesForCard(card).then(values => {
+      //   this._animateLayout();
+      //
+      //   this.setState({
+      //     data: values,
+      //     loading: false
+      //   });
+      // });
     });
   };
 

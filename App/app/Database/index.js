@@ -16,7 +16,7 @@ import {
   Word,
 } from './Realm';
 
-const SQLite = require('./SQLite');
+import SQLite, { rowsWithSQL } from './SQLite';
 
 import Predicate from './Predicate';
 import ComparisonPredicate from './ComparisonPredicate';
@@ -40,4 +40,6 @@ module.exports = {
   CompoundPredicate,
   Predicate,
   WordPredicate,
+  SQLite,
+  rowsWithSQL
 };
