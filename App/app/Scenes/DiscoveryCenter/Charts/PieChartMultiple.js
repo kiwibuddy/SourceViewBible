@@ -64,34 +64,33 @@ export default class PieChartMultiple extends Component {
   }
 
   _renderChart = (pie: Object, sectionID: any, rowID: any) => {
-    console.log('pie', pie.label);
-    return null;
+    const data = pie.value;
+    const totalValue = data.reduce((sum, slice) => sum + slice.value, 0);
+    const slices = data.filter(slice => parseInt((slice.value / totalValue) * 100)).map((slice, index) => {
+      return {...slice, color: colorAtIndex(index)};
+    });
 
-    // const slices = data.filter(slice => parseInt((slice.value / totalValue) * 100)).map((slice, index) => {
-    //   return {...slice, color: colorAtIndex(index)};
-    // });
-    //
-    // return (
-    //   <View style={styles.chart}>
-    //     <PieChartList
-    //       {...this.props}
-    //       style={styles.pieList}
-    //       renderHeader={() => {
-    //         return (
-    //           <PieChart
-    //             color="white"
-    //             slices={slices}
-    //             sliceWidth={8}
-    //             size={100}
-    //             style={styles.pie}
-    //             title={pie.label}
-    //             titleStyle={{marginHorizontal: 11, fontSize: 13, fontWeight: 'bold'}}
-    //           />
-    //         );
-    //       }}
-    //     />
-    //   </View>
-    // );
+    return (
+      <View style={styles.chart}>
+        <PieChartList
+          {...this.props}
+          style={styles.pieList}
+          renderHeader={() => {
+            return (
+              <PieChart
+                color="white"
+                slices={slices}
+                sliceWidth={8}
+                size={100}
+                style={styles.pie}
+                title={pie.label}
+                titleStyle={{marginHorizontal: 11, fontSize: 13, fontWeight: 'bold'}}
+              />
+            );
+          }}
+        />
+      </View>
+    );
   };
  }
 

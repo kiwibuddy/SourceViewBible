@@ -146,6 +146,7 @@ export default class Query {
     const xAxis = this.axis[0];
     const yAxis = this.axis[1];
     const zAxis = this.axis[2];
+    if (!xAxis || !yAxis) return [];
 
     const selectStatement = new SelectStatement();
     const groupByStatement = new GroupByStatement();

@@ -54,7 +54,7 @@ type Props = {
 
 type State = {
   card: Object,
-  data: Object,
+  data: any,
   loading: boolean,
 };
 
@@ -207,7 +207,7 @@ export default class Card extends Component {
       const { card } = this.state;
       this.props.onShowPopover({card, route}, (card) => {
         this._animateLayout();
-        this.setState({card}, this._query);
+        this.setState({card, loading: true}, this._query);
       });
     }
   };
@@ -217,7 +217,7 @@ export default class Card extends Component {
       const { card } = this.state;
       this.props.onShowPopover({card, route}, (card) => {
         this._animateLayout();
-        this.setState({card}, this._query);
+        this.setState({card, loading: true}, this._query);
       });
     }
   }
@@ -233,7 +233,7 @@ export default class Card extends Component {
       const { card } = this.state;
       this.props.onShowPopover({card, route}, (card) => {
         this._animateLayout();
-        this.setState({card}, this._query);
+        this.setState({card, loading: true}, this._query);
       });
     }
   };
@@ -264,7 +264,8 @@ export default class Card extends Component {
       card: {
         ...card,
         filters
-      }
+      },
+      loading: true
     }, this._query);
   };
 
