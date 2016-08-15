@@ -118,23 +118,16 @@ export default class Query {
     this.axis = axis;
 
     this._buildFromClause();
+    this._buildWhereClause();
   }
 
   async count() {
-    if (!this.whereClause) {
-      await this._buildWhereClause();
-    }
-
     const sql = this._sql('SELECT COUNT(DISTINCT bso.id) AS count');
     const rows = await rowsWithSQL(sql);
     return rows[0]['count'];
   }
 
   async data() {
-    if (!this.whereClause) {
-      await this._buildWhereClause();
-    }
-
     return await this._data();
   }
 
@@ -482,7 +475,7 @@ export default class Query {
     this.fromClause = fromClause;
   }
 
-  async _buildWhereClause() {
+  _buildWhereClause() {
     const whereClause = new WhereClause();
 
     this.filters.forEach(filter => {
