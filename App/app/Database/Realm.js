@@ -493,7 +493,7 @@ export class Gender {
     });
   }
 
-  get name() {
+  get name(): string {
     return Localizable.t('gender-' + this.key);
   }
 }
@@ -539,24 +539,11 @@ export class Nature extends Realm.Object {
     });
   }
 
-  get name() {
+  get name(): string {
     return Localizable.t('natures.' + this.key);
   }
 }
 Nature.schema = NatureSchema;
-
-export class Occurrence {
-  static async countOccurrences(predicate: Predicate) {
-    const fromSQL = fromWithPredicate(predicate);
-    const whereSQL = (predicate.predicateFormat.length > 0 ? `WHERE ${predicate.predicateFormat}` : '');
-    const sql = `SELECT COUNT(DISTINCT sources.id) AS count ${fromSQL} ${whereSQL}`
-
-    console.log(sql);
-
-    const rows = await rowsWithSQL(sql);
-    return rows[0]['count'];
-  }
-}
 
 const ProfessionSchema = {
   name: 'Profession',
@@ -599,7 +586,7 @@ export class Profession extends Realm.Object {
     });
   }
 
-  get name() {
+  get name(): string {
     return Localizable.t('professions.' + this.key);
   }
 }
@@ -644,7 +631,7 @@ export class Role {
     });
   }
 
-  get name() {
+  get name(): string {
     return Localizable.t('roles.' + this.key);
   }
 }
