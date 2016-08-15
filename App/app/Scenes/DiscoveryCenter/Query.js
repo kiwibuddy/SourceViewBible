@@ -122,10 +122,7 @@ export default class Query {
 
   async count() {
     const sql = this._sql('SELECT COUNT(DISTINCT bso.id) AS count');
-    console.log(sql);
-
     const rows = await rowsWithSQL(sql);
-    console.log(rows);
     return rows[0]['count'];
   }
 
@@ -154,7 +151,7 @@ export default class Query {
     const groupByStatement = new GroupByStatement();
     const orderByStatement = new OrderByStatement();
 
-    let zObject = null;
+    let GroupByObjectClass = null;
 
     if (zAxis) {
       let zAxisActantType = null;
@@ -176,56 +173,56 @@ export default class Query {
           selectStatement.select('bso.book_id AS zid');
           groupByStatement.groupBy('bso.book_id');
           orderByStatement.orderBy('bso.book_id');
-          zObject = Book;
+          GroupByObjectClass = Book;
           break;
 
         case 'chronology':
           selectStatement.select('chronologies.chronology_id AS zid');
           groupByStatement.groupBy('chronologies.chronology_id');
           orderByStatement.orderBy('chronologies.chronology_id');
-          zObject = Chronology;
+          GroupByObjectClass = Chronology;
           break;
 
         case 'name':
           selectStatement.select(`${zAxisActantType}.id AS zid`);
           groupByStatement.groupBy(`${zAxisActantType}.id`);
           orderByStatement.orderBy(`${zAxisActantType}.id`);
-          zObject = Actant;
+          GroupByObjectClass = Actant;
           break;
 
         case 'gender':
           selectStatement.select(`${zAxisActantType}.gender_id AS zid`);
           groupByStatement.groupBy(`${zAxisActantType}.gender_id`);
           orderByStatement.orderBy(`${zAxisActantType}.gender_id`);
-          zObject = Gender;
+          GroupByObjectClass = Gender;
           break;
 
         case 'nature':
           selectStatement.select(`${zAxisActantType}_natures.id AS zid`);
           groupByStatement.groupBy(`${zAxisActantType}_natures.id`);
           orderByStatement.orderBy(`${zAxisActantType}_natures.id`);
-          zObject = Nature;
+          GroupByObjectClass = Nature;
           break;
 
         case 'profession':
           selectStatement.select(`${zAxisActantType}_professions.id AS zid`);
           groupByStatement.groupBy(`${zAxisActantType}_professions.id`);
           orderByStatement.orderBy(`${zAxisActantType}_professions.id`);
-          zObject = Profession;
+          GroupByObjectClass = Profession;
           break;
 
         case 'role':
           selectStatement.select('bso.role_id AS zid');
           groupByStatement.groupBy('bso.role_id');
           orderByStatement.orderBy('bso.role_id');
-          zObject = Role;
+          GroupByObjectClass = Role;
           break;
 
         case 'sphere':
           selectStatement.select('spheres.sphere_id AS zid');
           groupByStatement.groupBy('spheres.sphere_id');
           orderByStatement.orderBy('spheres.sphere_id');
-          zObject = Sphere;
+          GroupByObjectClass = Sphere;
           break;
       }
     }
@@ -360,14 +357,37 @@ export default class Query {
 
     const rows = await rowsWithSQL(dataSQL);
 
-    const data = rows.map(row => {
+    const data = [];
+    const groupByData = {};
+
+    rows.forEach(row => {
       let object = {};
       if (ObjectClass) {
         object = ObjectClass.findByID(row['id']);
       }
+      const value = {label: object.name, value: row['count']};
 
-      return {label: object.name, value: row['count']};
+      if (GroupByObjectClass) {
+        const groupByID = row['zid'];
+        const values = groupByData[groupByID] || [];
+        values.push(value);
+        groupByData[groupByID] = values;
+      } else {
+        data.push(value);
+      }
     });
+
+    Object.keys(groupByData).forEach(groupByID => {
+      if (GroupByObjectClass) {
+        const groupByObject = GroupByObjectClass.findByID(parseInt(groupByID));
+        data.push({
+          label: groupByObject.name,
+          value: groupByData[groupByID]
+        });
+      }
+    });
+
+    console.log(data);
 
     return data;
   }
