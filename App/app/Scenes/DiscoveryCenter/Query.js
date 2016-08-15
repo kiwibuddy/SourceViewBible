@@ -512,12 +512,12 @@ export default class Query {
           switch (item.actantType) {
             case 'source':
               fromClause.join('INNER JOIN bso_actants AS speakers ON (bso.id = speakers.bso_id AND speakers.type_id = 1)');
-              fromClause.join('INNER JOIN natures AS speakers_natures ON speakers.actant_id = speakers_natures.actant_id');
+              fromClause.join('INNER JOIN natures AS speaker_natures ON speakers.actant_id = speaker_natures.actant_id');
               break;
 
             case 'recipient':
               fromClause.join('INNER JOIN bso_actants AS listeners ON (bso.id = listeners.bso_id AND listeners.type_id = 2)');
-              fromClause.join('INNER JOIN natures AS listeners_natures ON listeners.actant_id = listeners_natures.actant_id');
+              fromClause.join('INNER JOIN natures AS listener_natures ON listeners.actant_id = listener_natures.actant_id');
               break;
 
             default: // Not needed by filter but needed by axis
@@ -531,12 +531,12 @@ export default class Query {
           switch (item.actantType) {
             case 'source':
               fromClause.join('INNER JOIN bso_actants AS speakers ON (bso.id = speakers.bso_id AND speakers.type_id = 1)');
-              fromClause.join('INNER JOIN professions AS speakers_professions ON speakers.actant_id = speakers_professions.actant_id');
+              fromClause.join('INNER JOIN professions AS speaker_professions ON speakers.actant_id = speaker_professions.actant_id');
               break;
 
             case 'recipient':
               fromClause.join('INNER JOIN bso_actants AS listeners ON (bso.id = listeners.bso_id AND listeners.type_id = 2)');
-              fromClause.join('INNER JOIN professions AS listeners_professions ON listeners.actant_id = listeners_professions.actant_id');
+              fromClause.join('INNER JOIN professions AS listener_professions ON listeners.actant_id = listener_professions.actant_id');
               break;
 
             default: // Not needed by filter but needed by axis
@@ -615,7 +615,7 @@ export default class Query {
           break;
 
         case 'sphere':
-          const SPHERES = ["family", "economics", "government", "religion", "education", "communication", "celebration"];
+          const SPHERES = ['family', 'economics', 'government', 'religion', 'education', 'communication', 'celebration'];;
           const sphereID = SPHERES.indexOf(filter.sphere.id) + 1;
           whereClause.where(ComparisonPredicate.predicateWith('spheres.sphere_id', '=', sphereID));
           break;
