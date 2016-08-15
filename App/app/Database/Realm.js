@@ -4,7 +4,6 @@
 import { Platform } from 'react-native';
 import Realm from 'realm';
 import Emdros from '../API/Emdros';
-import SQLite, { rowsWithSQL } from './SQLite';
 
 const RNFS = require('react-native-fs');
 
