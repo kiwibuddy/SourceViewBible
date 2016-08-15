@@ -33,7 +33,7 @@ import Popover from './Popover';
 
 import Query from './Query';
 
-import { Chronology, Occurrence } from '../../Database';
+import { Chronology } from '../../Database';
 
 export const Header = (props: Object) => {
   return (
