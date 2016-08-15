@@ -26,6 +26,7 @@ import { PieChart } from '../../../Components/Charts';
 type Props = {
   card: Object,
   data: Object,
+  style?: Object,
 };
 
 type State = {
@@ -39,21 +40,18 @@ export default class PieChartMultiple extends Component {
   constructor(props: Props) {
     super(props);
 
+    const { data } = this.props;
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id});
     this.state = {
-      dataSource: dataSource,
+      dataSource: dataSource.cloneWithRows(data.slice(0, Math.min(data.length, 10)))
     };
   }
 
   render() {
-    const { data } = this.props;
-
-    const dataSource = this.state.dataSource.cloneWithRows(data.slice(0, Math.min(data.length, 10)));
-
     return (
       <View style={[styles.container, this.props.style]}>
         <ListView
-          dataSource={dataSource}
+          dataSource={this.state.dataSource}
           enableEmptySections={true}
           horizontal={true}
           renderRow={this._renderChart}
@@ -66,34 +64,34 @@ export default class PieChartMultiple extends Component {
   }
 
   _renderChart = (pie: Object, sectionID: any, rowID: any) => {
-    const { data } = this.props;
-    
-    const totalValue = data.reduce((sum, slice) => sum + slice.value, 0);
-    const slices = data.filter(slice => parseInt((slice.value / totalValue) * 100)).map((slice, index) => {
-      return {...slice, color: colorAtIndex(index)};
-    });
+    console.log('pie', pie.label);
+    return null;
 
-    return (
-      <View style={styles.chart}>
-        <PieChartList
-          {...this.props}
-          style={styles.pieList}
-          renderHeader={() => {
-            return (
-              <PieChart
-                color="white"
-                slices={slices}
-                sliceWidth={8}
-                size={100}
-                style={styles.pie}
-                title='Some really long text'
-                titleStyle={{marginHorizontal: 11, fontSize: 13, fontWeight: 'bold'}}
-              />
-            );
-          }}
-        />
-      </View>
-    );
+    // const slices = data.filter(slice => parseInt((slice.value / totalValue) * 100)).map((slice, index) => {
+    //   return {...slice, color: colorAtIndex(index)};
+    // });
+    //
+    // return (
+    //   <View style={styles.chart}>
+    //     <PieChartList
+    //       {...this.props}
+    //       style={styles.pieList}
+    //       renderHeader={() => {
+    //         return (
+    //           <PieChart
+    //             color="white"
+    //             slices={slices}
+    //             sliceWidth={8}
+    //             size={100}
+    //             style={styles.pie}
+    //             title={pie.label}
+    //             titleStyle={{marginHorizontal: 11, fontSize: 13, fontWeight: 'bold'}}
+    //           />
+    //         );
+    //       }}
+    //     />
+    //   </View>
+    // );
   };
  }
 

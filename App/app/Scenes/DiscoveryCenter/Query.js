@@ -370,8 +370,7 @@ export default class Query {
       if (GroupByObjectClass) {
         const groupByID = row['zid'];
         const values = groupByData[groupByID] || [];
-        values.push(value);
-        groupByData[groupByID] = values;
+        groupByData[groupByID] = [...values, value];
       } else {
         data.push(value);
       }
@@ -386,8 +385,6 @@ export default class Query {
         });
       }
     });
-
-    console.log(data);
 
     return data;
   }

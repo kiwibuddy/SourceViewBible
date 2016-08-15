@@ -26,8 +26,6 @@ import {
 } from './Charts';
 
 import FilterItems from './Filters/FilterItems';
-import { predicateWithCard } from './Filters/FilterUtils';
-import { valuesForCard } from './Charts/ChartUtils';
 
 import { DeleteButton, DuplicateButton, ShareButton } from './Buttons';
 

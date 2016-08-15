@@ -55,9 +55,9 @@ const PieChartView = (props: Props) => {
   if (!xAxis || !yAxis || occurrenceCount == 0 || data == null || loading) {
     chart = <Image style={{alignSelf: 'center'}} source={require('../Images/chart-pie-blankslate.png')} />;
   } else if (zAxis) {
-    chart = <PieChartMultiple {...props} />;
+    chart = <PieChartMultiple key="pie-chart-multiple" {...props} />;
   } else {
-    chart = <PieChartSingle {...props} />;
+    chart = <PieChartSingle key="pie-chart-single" {...props} />;
   }
 
   return (
