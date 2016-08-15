@@ -405,14 +405,25 @@ export default class Query {
         break;
 
       case 'words':
-        if (xAxis.type === 'sphere' || (zAxis && zAxis.type === 'sphere')) {
+        if (this.emdrosData) {
+          if (xAxis.type === 'sphere' || (zAxis && zAxis.type === 'sphere')) {
+            const caseStatement = Object.keys(this.emdrosData).map(bsoID => {
+              const data = this.emdrosData[bsoID];
+              const spheres = ['family', 'economics', 'government', 'religion', 'education', 'communication', 'celebration'].map((sphereName, index) => {
+                return `WHEN bso.id = ${bsoID} AND spheres.sphere_id = ${index + 1} THEN ${data[sphereName]}`;
+              });
+              return spheres.join(' ');
+            });
+            selectStatement.select(`SUM(CASE ${caseStatement.join(' ')} END) AS count`);
+          } else {
+            const caseStatement = Object.keys(this.emdrosData).map(bsoID => {
+              const data = this.emdrosData[bsoID];
+              return `WHEN ${bsoID} THEN ${data.wordCount}`;
+            });
+            selectStatement.select(`SUM(CASE bso.id ${caseStatement.join(' ')} END) AS count`);
+          }
+        } else if (xAxis.type === 'sphere' || (zAxis && zAxis.type === 'sphere')) {
           selectStatement.select('SUM(spheres.word_count) AS count');
-        } else if (this.emdrosData) {
-          const caseStatement = Object.keys(this.emdrosData).map(bsoID => {
-            const data = this.emdrosData[bsoID];
-            return `WHEN ${bsoID} THEN ${data.wordCount}`;
-          });
-          selectStatement.select(`SUM(CASE bso.id ${caseStatement.join(' ')} END) AS count`);
         } else {
           selectStatement.select('SUM(bso.word_count) AS count');
         }
