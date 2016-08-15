@@ -159,71 +159,120 @@ export default class Query {
     const groupByStatement = new GroupByStatement();
     const orderByStatement = new OrderByStatement();
 
-    switch (yAxis.type) {
-      case 'words':
-        let actantType = null;
-        switch (xAxis.actantType) {
-          case 'source':
-            actantType = 'speaker'
-            break;
+    let xAxisActantType = null;
+    switch (xAxis.actantType) {
+      case 'source':
+        xAxisActantType = 'speaker'
+        break;
 
-          case 'recipient':
-            actantType = 'listener';
-            break;
+      case 'recipient':
+        xAxisActantType = 'listener';
+        break;
 
-          default:
-            actantType = 'someone';
-            break;
-        }
-
-        switch (xAxis.type) {
-          case 'book':
-            selectStatement.select('bso.book_id AS id');
-            groupByStatement.groupBy('bso.book_id');
-            break;
-
-          case 'chronology':
-            selectStatement.select('chronologies.chronology_id AS id');
-            groupByStatement.groupBy('chronologies.chronology_id');
-            break;
-
-          case 'name':
-            selectStatement.select(`${actantType}.id AS id`);
-            groupByStatement.groupBy(`${actantType}.id`);
-            break;
-
-          case 'gender':
-            selectStatement.select(`${actantType}.gender_id AS id`);
-            groupByStatement.groupBy(`${actantType}.gender_id`);
-            break;
-
-          case 'nature':
-            selectStatement.select(`${actantType}_natures.id AS id`);
-            groupByStatement.groupBy(`${actantType}_natures.id`);
-            break;
-
-          case 'profession':
-            selectStatement.select(`${actantType}_professions.id AS id`);
-            groupByStatement.groupBy(`${actantType}_professions.id`);
-            break;
-
-          case 'role':
-            selectStatement.select('bso.role_id AS id');
-            groupByStatement.groupBy('bso.role_id');
-            break;
-
-          case 'sphere':
-            selectStatement.select('spheres.sphere_id AS id');
-            selectStatement.select('SUM(spheres.word_count) AS count');
-            groupByStatement.groupBy('spheres.sphere_id');
-            break;
-        }
-
-        if (xAxis.type !== 'sphere') {
-          selectStatement.select('SUM(bso.word_count) AS count')
-        }
+      default:
+        xAxisActantType = 'someone';
         break;
     }
+
+    switch (xAxis.type) {
+      case 'book':
+        selectStatement.select('bso.book_id AS id');
+        groupByStatement.groupBy('bso.book_id');
+        break;
+
+      case 'chronology':
+        selectStatement.select('chronologies.chronology_id AS id');
+        groupByStatement.groupBy('chronologies.chronology_id');
+        break;
+
+      case 'name':
+        selectStatement.select(`${xAxisActantType}.id AS id`);
+        groupByStatement.groupBy(`${xAxisActantType}.id`);
+        break;
+
+      case 'gender':
+        selectStatement.select(`${xAxisActantType}.gender_id AS id`);
+        groupByStatement.groupBy(`${xAxisActantType}.gender_id`);
+        break;
+
+      case 'nature':
+        selectStatement.select(`${xAxisActantType}_natures.id AS id`);
+        groupByStatement.groupBy(`${xAxisActantType}_natures.id`);
+        break;
+
+      case 'profession':
+        selectStatement.select(`${xAxisActantType}_professions.id AS id`);
+        groupByStatement.groupBy(`${xAxisActantType}_professions.id`);
+        break;
+
+      case 'role':
+        selectStatement.select('bso.role_id AS id');
+        groupByStatement.groupBy('bso.role_id');
+        break;
+
+      case 'sphere':
+        selectStatement.select('spheres.sphere_id AS id');
+        groupByStatement.groupBy('spheres.sphere_id');
+        break;
+    }
+
+    let yAxisActantType = null;
+    switch (yAxis.actantType) {
+      case 'source':
+        yAxisActantType = 'speaker'
+        break;
+
+      case 'recipient':
+        yAxisActantType = 'listener';
+        break;
+
+      default:
+        yAxisActantType = 'someone';
+        break;
+    }
+    switch (yAxis.type) {
+      case 'book':
+        selectStatement.select('COUNT(DISTINCT bso.book_id) AS count');
+        break;
+
+      case 'chronology':
+        selectStatement.select('COUNT(DISTINCT chronologies.chronology_id) AS count');
+        break;
+
+      case 'name':
+        selectStatement.select(`COUNT(DISTINCT ${yAxisActantType}.id) AS count`);
+        break;
+
+      case 'gender':
+        selectStatement.select(`COUNT(DISTINCT ${yAxisActantType}.gender_id) AS count`);
+        break;
+
+      case 'nature':
+        selectStatement.select(`COUNT(DISTINCT ${yAxisActantType}_natures.id) AS count`);
+        break;
+
+      case 'profession':
+        selectStatement.select(`COUNT(DISTINCT ${yAxisActantType}_professions.id) AS count`);
+        break;
+
+      case 'role':
+        selectStatement.select('COUNT(DISTINCT bso.role_id) AS count');
+        break;
+
+      case 'sphere':
+        selectStatement.select('COUNT(DISTINCT spheres.sphere_id) AS count');
+        break;
+
+      case 'words':
+        if (xAxis.type === 'sphere') {
+          selectStatement.select('SUM(spheres.word_count) AS count');
+        } else {
+          selectStatement.select('SUM(bso.word_count) AS count');
+        }
+    }
+
+
+
 
     orderByStatement.orderBy('count DESC');
 
