@@ -43,7 +43,7 @@ export default class PieChartMultiple extends Component {
     const { data } = this.props;
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id});
     this.state = {
-      dataSource: dataSource.cloneWithRows(data.slice(0, Math.min(data.length, 10)))
+      dataSource: dataSource.cloneWithRows(data.slice(0, Math.min(data.length, 100)))
     };
   }
 

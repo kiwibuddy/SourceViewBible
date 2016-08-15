@@ -199,16 +199,16 @@ export default class Query {
           break;
 
         case 'nature':
-          selectStatement.select(`${zAxisActantType}_natures.id AS zid`);
-          groupByStatement.groupBy(`${zAxisActantType}_natures.id`);
-          orderByStatement.orderBy(`${zAxisActantType}_natures.id`);
+          selectStatement.select(`${zAxisActantType}_natures.nature_id AS zid`);
+          groupByStatement.groupBy(`${zAxisActantType}_natures.nature_id`);
+          orderByStatement.orderBy(`${zAxisActantType}_natures.nature_id`);
           GroupByObjectClass = Nature;
           break;
 
         case 'profession':
-          selectStatement.select(`${zAxisActantType}_professions.id AS zid`);
-          groupByStatement.groupBy(`${zAxisActantType}_professions.id`);
-          orderByStatement.orderBy(`${zAxisActantType}_professions.id`);
+          selectStatement.select(`${zAxisActantType}_professions.profession_id AS zid`);
+          groupByStatement.groupBy(`${zAxisActantType}_professions.profession_id`);
+          orderByStatement.orderBy(`${zAxisActantType}_professions.profession_id`);
           GroupByObjectClass = Profession;
           break;
 
@@ -270,14 +270,14 @@ export default class Query {
         break;
 
       case 'nature':
-        selectStatement.select(`${xAxisActantType}_natures.id AS id`);
-        groupByStatement.groupBy(`${xAxisActantType}_natures.id`);
+        selectStatement.select(`${xAxisActantType}_natures.nature_id AS id`);
+        groupByStatement.groupBy(`${xAxisActantType}_natures.nature_id`);
         ObjectClass = Nature;
         break;
 
       case 'profession':
-        selectStatement.select(`${xAxisActantType}_professions.id AS id`);
-        groupByStatement.groupBy(`${xAxisActantType}_professions.id`);
+        selectStatement.select(`${xAxisActantType}_professions.profession_id AS id`);
+        groupByStatement.groupBy(`${xAxisActantType}_professions.profession_id`);
         ObjectClass = Profession;
         break;
 
@@ -326,11 +326,11 @@ export default class Query {
         break;
 
       case 'nature':
-        selectStatement.select(`COUNT(DISTINCT ${yAxisActantType}_natures.id) AS count`);
+        selectStatement.select(`COUNT(DISTINCT ${yAxisActantType}_natures.nature_id) AS count`);
         break;
 
       case 'profession':
-        selectStatement.select(`COUNT(DISTINCT ${yAxisActantType}_professions.id) AS count`);
+        selectStatement.select(`COUNT(DISTINCT ${yAxisActantType}_professions.profession_id) AS count`);
         break;
 
       case 'role':
