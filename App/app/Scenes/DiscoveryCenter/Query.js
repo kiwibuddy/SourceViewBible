@@ -1,6 +1,7 @@
 /* @flow */
 'use strict';
 
+import Emdros from '../../API/Emdros';
 import { Actant, Book, Chronology, Gender, Nature, Profession, Role, Sphere, SQLite, ComparisonPredicate, CompoundPredicate, Predicate, rowsWithSQL } from '../../Database';
 
 class SelectStatement {
@@ -353,9 +354,6 @@ export default class Query {
     orderByStatement.orderBy('count DESC');
 
     const dataSQL = this._sql(selectStatement.toSQL(), {groupBy: groupByStatement.toSQL(), orderBy: orderByStatement.toSQL()});
-
-    console.log(dataSQL);
-
     const rows = await rowsWithSQL(dataSQL);
 
     const data = [];
