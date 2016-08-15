@@ -162,8 +162,10 @@ export default class Card extends Component {
   }
 
   _renderFilterItems = () => {
-    const { card } = this.state;    return (
+    const { card } = this.state;
+    return (
       <FilterItems
+        card={card}
         filters={card.filters}
         onPressDeleteFilter={(filter) => this._deleteFilter(filter)}
         onPressEditFilter={this._onPressEditFilter}

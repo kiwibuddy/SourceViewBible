@@ -38,6 +38,7 @@ const Blankslate = () => {
 };
 
 type Props = {
+  card: Object,
   filters: any,
   onPressDeleteFilter: Function,
   onPressEditFilter: Function,
@@ -45,7 +46,7 @@ type Props = {
 };
 
 const FilterItems = (props: Props) => {
-  const { filters } = props;
+  const { card, filters } = props;
   const filterItems = filters.map(filter => {
     let Item = null;
 
@@ -107,7 +108,7 @@ const FilterItems = (props: Props) => {
       onPressEditFilter={props.onPressEditFilter}
     />
   });
-  const blankslate = (filters.length > 0 ? null : <Blankslate />);
+  const blankslate = (filters.length > 0 || card.occurrenceCount > 0 ? null : <Blankslate />);
 
   return (
     <View>
