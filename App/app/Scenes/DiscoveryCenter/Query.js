@@ -94,6 +94,30 @@ class OrderByStatement {
   }
 }
 
+class EmdrosQuery {
+  word: string
+  monads: Array<Array<number>>;
+
+  constructor(word: string, monads: Array<Array<number>>) {
+    this.word = word;
+    this.monads = monads;
+  }
+
+  async data() {
+    const word = this.word.toLowerCase();
+    const monads = this.monads;
+
+    let options = null;
+    if (monads && monads.length > 0) {
+      options = {monads, tokenFeatureComparison: `surface_fts="${word}"`}
+    } else {
+      options = {tokenFeatureComparison: `surface_fts="${word}"`};
+    }
+
+    return Emdros.wordCountsForContext('Source', options);
+  }
+}
+
 type Props = {
   filters: any,
   xAxis: any,
@@ -102,13 +126,17 @@ type Props = {
 };
 
 export default class Query {
+  prepared: boolean;
   filters: any;
   axis: Array<Object>;
 
   fromClause: FromClause;
   whereClause: WhereClause;
 
+  emdrosData: any;
+
   constructor(props: Props) {
+    this.prepared = false;
     this.filters = props.filters;
 
     const axis = [];
@@ -122,13 +150,47 @@ export default class Query {
   }
 
   async count() {
+    await this._prepare();
+
     const sql = this._sql('SELECT COUNT(DISTINCT bso.id) AS count');
     const rows = await rowsWithSQL(sql);
     return rows[0]['count'];
   }
 
   async data() {
+    await this._prepare();
     return await this._data();
+  }
+
+  async _prepare() {
+    if (this.prepared) return;
+    this.prepared = true;
+
+    const wordFilter = this.filters.find(filter => filter.type === 'word');
+    if (wordFilter) {
+      let monads = null;
+
+      // If we have more than just the word filter get the monads ranges
+      if (this.filters.length > 1) {
+        monads = await this._monads();
+      }
+
+      const query = new EmdrosQuery(wordFilter.word, monads);
+      const data = await query.data();
+      const identifiers = Object.keys(data).map(bsoID => parseInt(bsoID));
+
+      if (identifiers.length > 0) {
+        this.emdrosData = data;
+        this.whereClause.where(ComparisonPredicate.predicateWith('bso.id', 'IN', identifiers));
+      }
+    }
+  }
+
+  async _monads() {
+    const sql = this._sql('SELECT DISTINCT bso.id, bso.first, bso.last');
+    const rows = await rowsWithSQL(sql);
+    const monads = rows.map(row => [row['first'], row['last']]);
+    return monads;
   }
 
   _sql(select: string, options: ?Object) {
@@ -546,5 +608,9 @@ export default class Query {
     });
 
     this.whereClause = whereClause;
+  }
+
+  async _updateWhereClauseWithWordFilter(wordFilter: Object) {
+
   }
 }
