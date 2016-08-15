@@ -4,14 +4,9 @@
 import { Platform } from 'react-native';
 import Realm from 'realm';
 import Emdros from '../API/Emdros';
-import SQLite, { fromWithPredicate, rowsWithSQL, valuesByWordCount } from './SQLite';
+import SQLite, { rowsWithSQL } from './SQLite';
 
 const RNFS = require('react-native-fs');
-
-import Predicate from './Predicate';
-import ComparisonPredicate from './ComparisonPredicate';
-import CompoundPredicate from './CompoundPredicate';
-import WordPredicate from './WordPredicate';
 
 import { Localizable } from '../Common';
 
@@ -216,29 +211,6 @@ export class Actant extends Realm.Object {
     return sources;
   }
 
-  static async valuesByWordCount(type: string, predicate: Predicate) {
-    const optionType = (type ? type : 'actant');
-    const options = {
-      columns: [`${optionType}_statements.id AS actantID`],
-      tables: [`${optionType}_statements`]
-    };
-    const statements = await Statement.identifiersMatchingPredicate(predicate, options);
-    if (statements.count == 0) return [];
-
-    const wordCounts = {};
-    statements.reduce((wordCounts, statement) => {
-      const actantID = statement.actantID;
-      const wordCount = wordCounts[actantID] || 0;
-      wordCounts[actantID] = wordCount + statement.wordCount;
-      return wordCounts;
-    }, wordCounts);
-
-    return Object.keys(wordCounts).sort((a,b) => wordCounts[a] > wordCounts[b] ? -1 : 1).map(actantID => {
-      const actant = Actant.findByID(actantID);
-      return {object: actant, label: actant.name, value: wordCounts[actantID]};
-    });
-  }
-
   get actantNumberDescription(): ?String {
     switch(this.actantNumber) {
       case 1:
@@ -312,15 +284,6 @@ export class Book extends Realm.Object {
     }
 
     return realm.objectForPrimaryKey('Book', id || '');
-  }
-
-  static async valuesByWordCount(predicate: Predicate) {
-    const values = await valuesByWordCount('sources.book_id', predicate);
-
-    return values.map(value => {
-        const book = Book.findByID(value.id);
-        return {object: book, label: book.name, value: value.count};
-    });
   }
 
   countOfSourceType(sourceType: string): number {
@@ -400,28 +363,6 @@ export class Chronology extends Realm.Object {
     return realm.objects('Chronology').filtered('from >= $0 AND to <= $1', from.from, to.to);
   }
 
-  static async valuesByWordCount(predicate: Predicate) {
-    const options = {
-      columns: ['chronology_statements.id AS chronologyID'],
-      tables: ['chronology_statements']
-    };
-    const statements = await Statement.identifiersMatchingPredicate(predicate, options);
-    if (statements.count == 0) return [];
-
-    const wordCounts = {};
-    statements.reduce((wordCounts, statement) => {
-      const chronologyID = statement.chronologyID;
-      const wordCount = wordCounts[chronologyID] || 0;
-      wordCounts[chronologyID] = wordCount + statement.wordCount;
-      return wordCounts;
-    }, wordCounts);
-
-    return Object.keys(wordCounts).sort((a,b) => wordCounts[a] > wordCounts[b] ? -1 : 1).map(chronologyID => {
-      const chronology = Chronology.findByID(chronologyID);
-      return {object: chronology, label: chronology.name, value: wordCounts[chronologyID]};
-    });
-  }
-
   get name(): string {
     return Localizable.t('chronologies.' + this.key);
   }
@@ -470,29 +411,6 @@ export class Gender {
     return new Gender(id, key);
   }
 
-  static async valuesByWordCount(type: string, predicate: Predicate) {
-    const optionType = (type ? `${type}_` : '');
-    const options = {
-      columns: [`${optionType}gender_statements.id AS genderID`],
-      tables: [`${optionType}gender_statements`]
-    };
-    const statements = await Statement.identifiersMatchingPredicate(predicate, options);
-    if (statements.count == 0) return [];
-
-    const wordCounts = {};
-    statements.reduce((wordCounts, statement) => {
-      const genderID = statement.genderID;
-      const wordCount = wordCounts[genderID] || 0;
-      wordCounts[genderID] = wordCount + statement.wordCount;
-      return wordCounts;
-    }, wordCounts);
-
-    return Object.keys(wordCounts).sort((a,b) => wordCounts[a] > wordCounts[b] ? -1 : 1).map(genderID => {
-      const gender = Gender.findByID(genderID);
-      return {object: gender, label: gender.name, value: wordCounts[genderID]};
-    });
-  }
-
   get name(): string {
     return Localizable.t('gender-' + this.key);
   }
@@ -514,29 +432,6 @@ export class Nature extends Realm.Object {
 
   static findByKey(key: string) {
     return realm.objects('Nature').filtered('key = $0', key)[0];
-  }
-
-  static async valuesByWordCount(type: string, predicate: Predicate) {
-    const optionType = (type ? `${type}_` : '');
-    const options = {
-      columns: [`${optionType}nature_statements.id AS natureID`],
-      tables: [`${optionType}nature_statements`]
-    };
-    const statements = await Statement.identifiersMatchingPredicate(predicate, options);
-    if (statements.count == 0) return [];
-
-    const wordCounts = {};
-    statements.reduce((wordCounts, statement) => {
-      const natureID = statement.natureID;
-      const wordCount = wordCounts[natureID] || 0;
-      wordCounts[natureID] = wordCount + statement.wordCount;
-      return wordCounts;
-    }, wordCounts);
-
-    return Object.keys(wordCounts).sort((a,b) => wordCounts[a] > wordCounts[b] ? -1 : 1).map(natureID => {
-      const nature = Nature.findByID(natureID);
-      return {object: nature, label: nature.name, value: wordCounts[natureID]};
-    });
   }
 
   get name(): string {
@@ -563,29 +458,6 @@ export class Profession extends Realm.Object {
     return realm.objectForPrimaryKey('Profession', id ? parseInt(id) : 0);
   }
 
-  static async valuesByWordCount(type: string, predicate: Predicate) {
-    const optionType = (type ? `${type}_` : '');
-    const options = {
-      columns: [`${optionType}profession_statements.id AS professionID`],
-      tables: [`${optionType}profession_statements`]
-    };
-    let statements = await Statement.identifiersMatchingPredicate(predicate, options);
-    if (statements.count == 0) return [];
-
-    const wordCounts = {};
-    statements.reduce((wordCounts, statement) => {
-      const professionID = statement.professionID;
-      const wordCount = wordCounts[professionID] || 0;
-      wordCounts[professionID] = wordCount + statement.wordCount;
-      return wordCounts;
-    }, wordCounts);
-
-    return Object.keys(wordCounts).sort((a,b) => wordCounts[a] > wordCounts[b] ? -1 : 1).map(professionID => {
-      const profession = Profession.findByID(professionID);
-      return {object: profession, label: profession.name, value: wordCounts[professionID]};
-    });
-  }
-
   get name(): string {
     return Localizable.t('professions.' + this.key);
   }
@@ -606,29 +478,6 @@ export class Role {
   static findByID(id: number) {
     const key = Role.ROLES[id - 1];
     return new Role(id, key);
-  }
-
-  static async valuesByWordCount(type: string, predicate: Predicate) {
-    const optionType = (type ? `${type}_` : '');
-    const options = {
-      columns: [`${optionType}role_statements.id AS roleID`],
-      tables: [`${optionType}role_statements`]
-    };
-    const statements = await Statement.identifiersMatchingPredicate(predicate, options);
-    if (statements.count == 0) return [];
-
-    const wordCounts = {};
-    statements.reduce((wordCounts, statement) => {
-      const roleID = statement.roleID;
-      const wordCount = wordCounts[roleID] || 0;
-      wordCounts[roleID] = wordCount + statement.wordCount;
-      return wordCounts;
-    }, wordCounts);
-
-    return Object.keys(wordCounts).sort((a,b) => wordCounts[a] > wordCounts[b] ? -1 : 1).map(roleID => {
-      const role = Role.findByID(roleID);
-      return {object: role, label: role.name, value: wordCounts[roleID]};
-    });
   }
 
   get name(): string {
@@ -685,148 +534,12 @@ export class Sphere extends Realm.Object {
     return realm.objectForPrimaryKey('Sphere', primaryKey);
   }
 
-  static async valuesByWordCount(predicate: Predicate) {
-  const options = {
-    columns: ['sphere_statements.id AS sphereID', 'sphere_statements.word_count AS sphereWordCount'],
-    tables: ['sphere_statements']
-  };
-  const statements = await Statement.identifiersMatchingPredicate(predicate, options);
-  if (statements.count == 0) return [];
-
-  const wordCounts = {};
-  statements.reduce((wordCounts, statement) => {
-    const sphereID = statement.sphereID;
-    const wordCount = wordCounts[sphereID] || 0;
-    wordCounts[sphereID] = wordCount + statement.sphereWordCount;
-    return wordCounts;
-  }, wordCounts);
-
-  return Object.keys(wordCounts).sort((a,b) => wordCounts[a] > wordCounts[b] ? -1 : 1).map(sphereID => {
-    const sphere = Sphere.findByID(parseInt(sphereID));
-    return {object: sphere, label: sphere.name, value: wordCounts[sphereID]};
-  });
-}
-
   countOfBook(bookID: string): number {
     const count = this.bookCounts.find(count => count.string === bookID);
     return count && count.count || 0;
   }
 }
 Sphere.schema = SphereSchema;
-
-export class Statement {
-  static all() {
-    return realm.objects('Statement');
-  }
-
-  static findByID(id: number) {
-    return realm.objectForPrimaryKey('Statement', id ? parseInt(id) : 0);
-  }
-
-  static async identifiersMatchingPredicate(predicate: CompoundPredicate, options?: Object) {
-    if (!predicate) {
-      return Statement.all();
-    }
-
-    let columns = [
-      'statements.id',
-      'statements.first AS firstMonad',
-      'statements.last AS lastMonad',
-      'statements.word_count AS wordCount'
-    ];
-    if (options && options.columns) {
-      columns = [...new Set(columns.concat(options.columns))];
-    }
-
-    let tables = predicate.tables.filter(table => table !== 'statements');
-    if (options && options.tables) {
-      tables = [...new Set(tables.concat(options.tables))];
-    }
-    const fromSQL = tables.map(table => `INNER JOIN ${table} ON statements.id = ${table}.statement_id`).join(' ');
-
-    const whereSQL = (predicate.predicateFormat.length > 0 ? `WHERE ${predicate.predicateFormat}` : '');
-
-    const sql = `SELECT ${columns.join(', ')} FROM statements ${fromSQL} ${whereSQL}`
-    console.log(sql);
-    const statementRows = await rowsWithSQL(sql);
-
-    const wordPredicates = predicate.subpredicates.filter(predicate => (predicate instanceof WordPredicate));
-    if (wordPredicates.length > 0) {
-      const wordPredicate = wordPredicates[0];
-      const word = wordPredicate.word.toLowerCase();
-
-      let options = {}
-      if (statementRows.length > 0) {
-        const monads = statementRows.map(statementRow => [statementRow["firstMonad"], statementRow["lastMonad"]]);
-        options = {monads, tokenFeatureComparison: `surface_fts="${word}"`}
-      } else {
-        options = {tokenFeatureComparison: `surface_fts="${word}"`};
-      }
-
-      const wordCounts = await Emdros.wordCountsForContext('Statement', options);
-      return Object.keys(wordCounts).map(statementID => {
-        const statement = statementRows.find(statementRow => statementRow.id === parseInt(statementID));
-
-        const counts = wordCounts[statementID];
-        const sphereCounts = Object.keys(counts).map(key => ({string: key, count: counts[key]}));
-        return {...statement, wordCount: counts.wordCount, sphereCounts: sphereCounts};
-      });
-    } else {
-      return statementRows;
-    }
-
-    return [];
-  }
-
-  async words(options?: Object) {
-    return await Emdros.words({from: this.firstMonad, to: this.lastMonad, useStopWords: true, ...options});
-  }
-}
-
-export class Word {
-  static async valuesByWordCount(predicate: Predicate) {
-    const wordCounts = {};
-
-    const wordPredicates = predicate.subpredicates.filter(predicate => (predicate instanceof WordPredicate));
-    const hasWordPredicate = wordPredicates.length > 0;
-    if (!hasWordPredicate && predicate.empty) {
-      const words = await Emdros.words({useStopWords: true, limit: 20});
-      for (let word of words) {
-        const wordCount = wordCounts[word.string] || 0;
-        wordCounts[word.string] = wordCount + word.count;
-      }
-    } else {
-      const statements = await Statement.identifiersMatchingPredicate(predicate);
-      if (statements.count == 0) return [];
-
-      let searchWord = null;
-      const wordPredicates = predicate.subpredicates.filter(predicate => (predicate instanceof WordPredicate));
-      const hasWordPredicate = wordPredicates.length > 0;
-      if (hasWordPredicate) {
-        const wordPredicate = wordPredicates[0];
-        searchWord = wordPredicate.word;
-      }
-
-      for (let statementIdentifer of statements) {
-        let words = null;
-        if (hasWordPredicate) {
-          words = [{string: searchWord, count: statementIdentifer.wordCount}];
-        } else {
-          const statement = Statement.findByID(statementIdentifer.id);
-          words = await statement.words();
-        }
-        for (let word of words) {
-          const wordCount = wordCounts[word.string] || 0;
-          wordCounts[word.string] = wordCount + word.count;
-        }
-      }
-    }
-
-    return Object.keys(wordCounts).sort((a,b) => wordCounts[a] > wordCounts[b] ? -1 : 1).slice(0, 20).map(word => {
-      return {object: word, label: word, value: wordCounts[word]};
-    });
-  }
-}
 
 const Schema = [Actant, Bible, Book, Chapter, Chronology, Nature, Profession, SourceRelation, Sphere, Count, Content];
 
