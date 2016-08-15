@@ -159,6 +159,72 @@ export default class Query {
     const groupByStatement = new GroupByStatement();
     const orderByStatement = new OrderByStatement();
 
+    if (zAxis) {
+      let zAxisActantType = null;
+      switch (zAxis.actantType) {
+        case 'source':
+          zAxisActantType = 'speaker'
+          break;
+
+        case 'recipient':
+          zAxisActantType = 'listener';
+          break;
+
+        default:
+          zAxisActantType = 'someone';
+          break;
+      }
+      switch (zAxis.type) {
+        case 'book':
+          selectStatement.select('bso.book_id AS zid');
+          groupByStatement.groupBy('bso.book_id');
+          orderByStatement.orderBy('bso.book_id');
+          break;
+
+        case 'chronology':
+          selectStatement.select('chronologies.chronology_id AS zid');
+          groupByStatement.groupBy('chronologies.chronology_id');
+          orderByStatement.orderBy('chronologies.chronology_id');
+          break;
+
+        case 'name':
+          selectStatement.select(`${zAxisActantType}.id AS zid`);
+          groupByStatement.groupBy(`${zAxisActantType}.id`);
+          orderByStatement.orderBy(`${zAxisActantType}.id`);
+          break;
+
+        case 'gender':
+          selectStatement.select(`${zAxisActantType}.gender_id AS zid`);
+          groupByStatement.groupBy(`${zAxisActantType}.gender_id`);
+          orderByStatement.orderBy(`${zAxisActantType}.gender_id`);
+          break;
+
+        case 'nature':
+          selectStatement.select(`${zAxisActantType}_natures.id AS zid`);
+          groupByStatement.groupBy(`${zAxisActantType}_natures.id`);
+          orderByStatement.orderBy(`${zAxisActantType}_natures.id`);
+          break;
+
+        case 'profession':
+          selectStatement.select(`${zAxisActantType}_professions.id AS zid`);
+          groupByStatement.groupBy(`${zAxisActantType}_professions.id`);
+          orderByStatement.orderBy(`${zAxisActantType}_professions.id`);
+          break;
+
+        case 'role':
+          selectStatement.select('bso.role_id AS zid');
+          groupByStatement.groupBy('bso.role_id');
+          orderByStatement.orderBy('bso.role_id');
+          break;
+
+        case 'sphere':
+          selectStatement.select('spheres.sphere_id AS zid');
+          groupByStatement.groupBy('spheres.sphere_id');
+          orderByStatement.orderBy('spheres.sphere_id');
+          break;
+      }
+    }
+
     let xAxisActantType = null;
     switch (xAxis.actantType) {
       case 'source':
@@ -264,15 +330,13 @@ export default class Query {
         break;
 
       case 'words':
-        if (xAxis.type === 'sphere') {
+        if (xAxis.type === 'sphere' || (zAxis && zAxis.type === 'sphere')) {
           selectStatement.select('SUM(spheres.word_count) AS count');
         } else {
           selectStatement.select('SUM(bso.word_count) AS count');
         }
+        break;
     }
-
-
-
 
     orderByStatement.orderBy('count DESC');
 
