@@ -319,6 +319,10 @@ export class BookSourceOccurrence extends Realm.Object {
   static findByID(id: number) {
     return realm.objectForPrimaryKey('BookSourceOccurrence', id || 0);
   }
+
+  get reference(): string {
+    return 'Genesis 1:1';
+  }
 }
 BookSourceOccurrence.schema = BookSourceOccurrenceSchema;
 

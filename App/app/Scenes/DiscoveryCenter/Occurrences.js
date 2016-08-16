@@ -6,14 +6,13 @@ const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithP
 
 import {
   AsyncStorage,
-  ListView,
   Platform,
   RecyclerViewBackedScrollView,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
-// import { ListView } from '../../Components/Common/DatabaseListView';
+import { ListView } from '../../Components/Common/DatabaseListView';
 
 import {
   Colors,
@@ -27,6 +26,7 @@ import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigati
 import { BACK } from '../../Navigation';
 
 import { BookSourceOccurrence } from '../../Database';
+import Query from './Query';
 
 type Props = {
   card: Object,
@@ -51,12 +51,13 @@ export default class DiscoveryCenterOccurrences extends Component {
   }
 
   componentDidMount() {
-    // const { occurrences } = this.props;
-    // if (occurrences) {
-    //   this.setState({
-    //     dataSource: this.state.dataSource.cloneWithRows(occurrences)
-    //   });
-    // }
+    const { card } = this.props;
+    const query = new Query(card);
+    query.occurrences().then(occurrences => {
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(occurrences)
+      });
+    });
   }
 
   render() {
@@ -82,12 +83,14 @@ export default class DiscoveryCenterOccurrences extends Component {
   }
 
   _renderRow = (occurrence: Object, sectionID: any, rowID: any) => {
+    const number = parseInt(rowID) + 1;
+
     return (
       <TouchableOpacity key={occurrence.id} style={styles.listItemContainer} onPress={() => {}}>
-        <Text style={StyleSheet.styles.cell.occurence}>1</Text>
+        <Text style={StyleSheet.styles.cell.occurence}>{number}</Text>
         <View style={styles.listItem}>
           <Text style={styles.body}>Lorem ipsum dolor sit amet, eleifend varius. Risus vitae mauris cras lectus ipsum ante, semper id, tincidunt nunc magnis vehicula magnis in, magna massa, lectus donec vestibulum interdum.</Text>
-          <Text style={StyleSheet.styles.cell.subtitle}>Genesis 1:1</Text>
+          <Text style={StyleSheet.styles.cell.subtitle}>{occurrence.reference}</Text>
         </View>
       </TouchableOpacity>
     );

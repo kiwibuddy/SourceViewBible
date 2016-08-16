@@ -2,7 +2,7 @@
 'use strict';
 
 import Emdros from '../../API/Emdros';
-import { Actant, Book, Chronology, Gender, Nature, Profession, Role, Sphere, SQLite, ComparisonPredicate, CompoundPredicate, Predicate, rowsWithSQL } from '../../Database';
+import { Actant, Book, BookSourceOccurrence, Chronology, Gender, Nature, Profession, Role, Sphere, SQLite, ComparisonPredicate, CompoundPredicate, Predicate, rowsWithSQL } from '../../Database';
 
 class SelectStatement {
   prefix: string;
@@ -164,6 +164,14 @@ export default class Query {
     return await this._data();
   }
 
+  async occurrences() {
+    await this._prepare();
+
+    const sql = this._sql('SELECT DISTINCT bso.id', {limit: `LIMIT ${BookSourceOccurrence.MAXIMUM_NUMBER_OF_DISPLAYABLE_OCCURRENCES}`});
+    const rows = await rowsWithSQL(sql);
+    return rows.map(row => BookSourceOccurrence.findByID(row['id']))
+  }
+
   async _prepare() {
     if (this.prepared) return;
     this.prepared = true;
@@ -203,6 +211,7 @@ export default class Query {
 
     if (options && options.groupBy) sql.push(options.groupBy);
     if (options && options.orderBy) sql.push(options.orderBy);
+    if (options && options.limit) sql.push(options.limit);
 
     return sql.join(' ');
   }
