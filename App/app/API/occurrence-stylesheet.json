@@ -3,6 +3,11 @@
     "base":{
       "prepend_XML_declaration":false,
       "object_types":{
+        "PoetryLine":{
+          "docindexfeature":"docindex",
+          "end":"",
+          "start":" "
+        },
         "Token":{
           "docindexfeature":"docindex",
           "end":"",
