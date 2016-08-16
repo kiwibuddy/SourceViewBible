@@ -12,6 +12,7 @@ const DiscoverySchema = {
   properties: {
     id: 'string',
     name: {type: 'string', optional: true},
+    chartType: 'string',
     xAxis: {type: 'string', optional: true},
     yAxis: {type: 'string', optional: true},
     zAxis: {type: 'string', optional: true},

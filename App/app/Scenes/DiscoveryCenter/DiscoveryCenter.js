@@ -100,16 +100,16 @@ export default class DiscoveryCenter extends Component {
   };
 
   _renderCard = (card: Object) => {
-    if (card.key === 'getting-started') {
+    if (card.id === 'getting-started') {
       return <GettingStartedCard
-        key={card.key}
+        key={card.id}
         card={card}
         onPressDelete={() => this._deleteCard(card)}
       />;
     } else {
       return <Card
-        ref={card.key}
-        key={card.key}
+        ref={card.id}
+        key={card.id}
         card={card}
         onPressDelete={() => this._deleteCard(card)}
         onPressDuplicate={(card) => this._duplicateCard(card)}
@@ -156,7 +156,7 @@ export default class DiscoveryCenter extends Component {
       ...this.state.cards,
       {
         ...card,
-        key: 'card-' + Date.now()
+        id: 'card-' + Date.now()
       }
     ];
 
@@ -185,7 +185,6 @@ export default class DiscoveryCenter extends Component {
     this._addCard({
       ...card,
       filters: card.filters.slice(),
-      key: 'card-' + Date.now()
     });
   };
 
