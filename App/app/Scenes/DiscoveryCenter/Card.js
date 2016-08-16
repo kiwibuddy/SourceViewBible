@@ -177,8 +177,9 @@ export default class Card extends Component {
   _renderReadButton = () => {
     const { card } = this.state;
     const occurrenceCount = card.occurrenceCount;
-    if (occurrenceCount == 0) return null;
     const filterCount = card.filters.length;
+    if (occurrenceCount == 0 || filterCount == 0) return null;
+    
     const title = Localizable.t('explore-occurrences.count', {count: occurrenceCount, localizedCount: Localizable.toNumber(occurrenceCount, {precision: 0})});
 
     return (

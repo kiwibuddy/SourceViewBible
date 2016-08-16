@@ -108,7 +108,7 @@ const FilterItems = (props: Props) => {
       onPressEditFilter={props.onPressEditFilter}
     />
   });
-  const blankslate = (filters.length > 0 || card.occurrenceCount > 0 ? null : <Blankslate />);
+  const blankslate = (filters.length > 0 ? null : <Blankslate />);
 
   return (
     <View>

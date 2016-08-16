@@ -314,7 +314,9 @@ const BookSourceOccurrenceSchema = {
 };
 
 class BookSourceOccurrence extends Realm.Object {
-
+  static findByID(id: number) {
+    return realm.objectForPrimaryKey('BookSourceOccurrence', id || 0);
+  }
 }
 BookSourceOccurrence.schema = BookSourceOccurrenceSchema;
 
