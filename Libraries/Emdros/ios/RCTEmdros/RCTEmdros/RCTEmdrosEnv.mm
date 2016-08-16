@@ -62,7 +62,7 @@ const std::set<std::string> RCTStopwords = {"the","and","of","to","you","will","
 - (void)query:(NSString *)query options:(NSDictionary *)options completion:(void (^)(id result, NSError *error))completion {
     try {
         if ([options[@"count"] boolValue]) {
-           [[OCDBenchmark sharedBenchmark] begin];
+//           [[OCDBenchmark sharedBenchmark] begin];
 
             NSInteger firstMonad = options[@"firstMonad"] ? [options[@"firstMonad"] integerValue] : 1;
             NSInteger lastMonad = options[@"lastMonad"] ? [options[@"lastMonad"] integerValue] : MAX_MONAD;
@@ -70,13 +70,13 @@ const std::set<std::string> RCTStopwords = {"the","and","of","to","you","will","
 
             std::string errorMessage;
             std::string json = countInBuckets(_emdrosEnv, std::string(query.UTF8String), substrate, errorMessage);
-            [[OCDBenchmark sharedBenchmark] end:[NSString stringWithFormat:@"%@ countInBuckets", query]];
+//            [[OCDBenchmark sharedBenchmark] end:[NSString stringWithFormat:@"%@ countInBuckets", query]];
 
-            [[OCDBenchmark sharedBenchmark] begin];
+//            [[OCDBenchmark sharedBenchmark] begin];
             NSString *data = [NSString stringWithUTF8String:json.c_str()];
             NSError *error = nil;
             NSDictionary *result = [NSJSONSerialization JSONObjectWithData:[data dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
-            [[OCDBenchmark sharedBenchmark] end:[NSString stringWithFormat:@"%@ JSONObjectWithData", query]];
+//            [[OCDBenchmark sharedBenchmark] end:[NSString stringWithFormat:@"%@ JSONObjectWithData", query]];
 
             if (completion) completion(result, nil);
         } else {
@@ -210,7 +210,7 @@ const std::set<std::string> RCTStopwords = {"the","and","of","to","you","will","
 //    extern std::string render_objects(EmdrosEnv *pEnv, const std::string& db_name, const std::string& JSON_stylesheet, const std::string& stylesheet, monad_m first_monad, monad_m last_monad, bool& bResult);
 
     try {
-        [[OCDBenchmark sharedBenchmark] begin];
+//        [[OCDBenchmark sharedBenchmark] begin];
         
         NSString *stylesheet = ([options[@"stylesheet"] isKindOfClass:[NSString class]] ? options[@"stylesheet"] : [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:options[@"stylesheet"] options:0 error:nil] encoding:NSUTF8StringEncoding]);
 
@@ -221,7 +221,7 @@ const std::set<std::string> RCTStopwords = {"the","and","of","to","you","will","
         std::string rendered_objects = render_objects(_emdrosEnv, dbName, stylesheetString, stylesheetName, from, to, bResult);
         NSString *string = [NSString stringWithUTF8String:rendered_objects.c_str()];
         
-        [[OCDBenchmark sharedBenchmark] end:[NSString stringWithFormat:@"stringFrom: %li, to: %li", (long)from, (long)to]];
+//        [[OCDBenchmark sharedBenchmark] end:[NSString stringWithFormat:@"stringFrom: %li, to: %li", (long)from, (long)to]];
         
         if (completion) completion(string, nil);
     } catch (EMdFDBException e) {
