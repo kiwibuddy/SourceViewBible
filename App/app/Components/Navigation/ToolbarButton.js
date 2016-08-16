@@ -21,6 +21,7 @@ type Props = {
   disabled?: boolean,
   imageSource: any,
   onPress?: Function,
+  style?: any,
   title?: any,
   titleStyle?: any,
 };
@@ -36,8 +37,9 @@ const ToolbarButton = (props: Props) => {
   return (
     <TouchableOpacity
       disabled={props.disabled}
+      hitSlop={{top: 20, bottom: 20}}
       onPress={props.onPress}
-      style={[styles.button, buttonStyle]}
+      style={[styles.button, buttonStyle, props.style]}
     >
     {title}
     {image}
