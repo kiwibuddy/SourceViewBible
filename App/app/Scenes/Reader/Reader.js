@@ -62,7 +62,7 @@ class OccurrenceToolbar extends Component {
     }
 
     let nextRoute = null;
-    if (occurrenceIndex < total) {
+    if (occurrenceIndex < total - 1) {
       const nextOccurrenceIndex = occurrenceIndex + 1;
       const nextOccurrence = occurrences[nextOccurrenceIndex];
       const book = nextOccurrence.book;
