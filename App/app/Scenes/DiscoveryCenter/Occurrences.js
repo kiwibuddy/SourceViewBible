@@ -35,7 +35,8 @@ type Props = {
 };
 
 type State = {
-  dataSource: any
+  dataSource: any,
+  occurrences: any
 };
 
 export default class DiscoveryCenterOccurrences extends Component {
@@ -47,7 +48,8 @@ export default class DiscoveryCenterOccurrences extends Component {
 
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id});
     this.state = {
-      dataSource: dataSource
+      dataSource: dataSource,
+      occurrences: null,
     };
   }
 
@@ -78,9 +80,11 @@ export default class DiscoveryCenterOccurrences extends Component {
   }
 
   _renderRow = (occurrence: Object, sectionID: any, rowID: any) => {
+    const { occurrences } = this.state;
+
     const number = parseInt(rowID) + 1;
     const book = occurrence.book;
-    const url = readerURL({bookID: book.id, anchor: `source-${occurrence.name}-${occurrence.occurrence}`, title: book.name, description: `${book.name} ${occurrence.name} ${occurrence.occurrence}`});
+    const url = readerURL({bookID: book.id, anchor: `source-${occurrence.name}-${occurrence.occurrence}`, title: book.name, description: `${book.name} ${occurrence.name} ${occurrence.occurrence}`, occurrences});
 
     return (
       <TouchableOpacity key={occurrence.id} style={styles.listItemContainer} onPress={() => this.props.navigate(url)}>
