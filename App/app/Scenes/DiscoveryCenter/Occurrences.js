@@ -86,15 +86,18 @@ export default class DiscoveryCenterOccurrences extends Component {
     const book = occurrence.book;
     const role = occurrence.role;
 
-    const route = readerURL({bookID: book.id, anchor: `source-${occurrence.name}-${occurrence.number}`, title: book.name, description: `${book.name} ${occurrence.name} ${occurrence.number}`, occurrences});
+    const bcvReference = Localizable.t('bcv-reference', {book: occurrence.book.name, reference: occurrence.reference});
+    const bsoReference = Localizable.t('bso-reference', {book: occurrence.name, source: occurrence.name, number: occurrence.number})
+
+    const route = readerURL({bookID: book.id, anchor: `source-${occurrence.name}-${occurrence.number}`, title: book.name, description: bsoReference, occurrences});
 
     return (
       <TouchableOpacity key={occurrence.id} style={styles.listItemContainer} onPress={() => this._navigate(route)}>
         <Text style={StyleSheet.styles.cell.occurrence}>{number}</Text>
         <View style={styles.listItem}>
           <Text style={styles.body}>{occurrence.text}</Text>
-          <Text style={StyleSheet.styles.cell.subtitle}>{occurrence.reference}</Text>
-          <Text style={[StyleSheet.styles.cell.subtitle, {color: Colors.sources[role.key].tint}]}>{occurrence.name} {occurrence.number}</Text>
+          <Text style={StyleSheet.styles.cell.subtitle}>{bcvReference}</Text>
+          <Text style={[StyleSheet.styles.cell.subtitle, {color: Colors.sources[role.key].tint}]}>{Localizable.t('so-reference', {name: occurrence.name, number: occurrence.number})}</Text>
         </View>
       </TouchableOpacity>
     );

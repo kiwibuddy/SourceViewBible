@@ -87,6 +87,7 @@ const BookSourceOccurrenceSchema = {
     roleID: 'int',
     firstMonad: 'int',
     lastMonad: 'int',
+    reference: 'string',
   }
 };
 

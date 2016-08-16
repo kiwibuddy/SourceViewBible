@@ -20,6 +20,7 @@ export async function seedBSOObjects(emdros: Object, realm: Object) {
           roleID: bso.role_id,
           firstMonad: bso.first,
           lastMonad: bso.last,
+          reference: bso.reference,
         });
       } catch (error) {
         console.log(bso);

@@ -544,9 +544,7 @@
     "firstInitial": "A",
     "actantNumber": 2,
     "chronologies": [
-      {
-        "id": 19
-      }
+
     ],
     "gender": 2,
     "natures": [
@@ -618,9 +616,7 @@
     "firstInitial": "A",
     "actantNumber": 2,
     "chronologies": [
-      {
-        "id": 19
-      }
+
     ],
     "gender": 2,
     "natures": [
@@ -1837,9 +1833,7 @@
     "firstInitial": "A",
     "actantNumber": 2,
     "chronologies": [
-      {
-        "id": 19
-      }
+
     ],
     "gender": 2,
     "natures": [
@@ -2283,9 +2277,7 @@
     "firstInitial": "A",
     "actantNumber": 2,
     "chronologies": [
-      {
-        "id": 19
-      }
+
     ],
     "gender": 2,
     "natures": [
@@ -2889,9 +2881,7 @@
     "firstInitial": "A",
     "actantNumber": 2,
     "chronologies": [
-      {
-        "id": 19
-      }
+
     ],
     "gender": 2,
     "natures": [
@@ -3585,9 +3575,7 @@
     "firstInitial": "A",
     "actantNumber": 2,
     "chronologies": [
-      {
-        "id": 19
-      }
+
     ],
     "gender": 1,
     "natures": [
@@ -3611,9 +3599,7 @@
     "firstInitial": "A",
     "actantNumber": 2,
     "chronologies": [
-      {
-        "id": 19
-      }
+
     ],
     "gender": 2,
     "natures": [
@@ -7254,9 +7240,7 @@
     "firstInitial": "B",
     "actantNumber": 2,
     "chronologies": [
-      {
-        "id": 19
-      }
+
     ],
     "gender": 2,
     "natures": [
@@ -7540,9 +7524,7 @@
     "firstInitial": "C",
     "actantNumber": 2,
     "chronologies": [
-      {
-        "id": 19
-      }
+
     ],
     "gender": 2,
     "natures": [
@@ -7604,9 +7586,7 @@
     "firstInitial": "C",
     "actantNumber": 2,
     "chronologies": [
-      {
-        "id": 19
-      }
+
     ],
     "gender": 2,
     "natures": [
@@ -7791,9 +7771,7 @@
     "firstInitial": "C",
     "actantNumber": 3,
     "chronologies": [
-      {
-        "id": 19
-      }
+
     ],
     "gender": 3,
     "natures": [
@@ -8686,9 +8664,7 @@
     "firstInitial": "E",
     "actantNumber": 2,
     "chronologies": [
-      {
-        "id": 19
-      }
+
     ],
     "gender": 2,
     "natures": [
@@ -8787,9 +8763,7 @@
     "firstInitial": "E",
     "actantNumber": 2,
     "chronologies": [
-      {
-        "id": 19
-      }
+
     ],
     "gender": 2,
     "natures": [
@@ -9277,9 +9251,7 @@
     "firstInitial": "E",
     "actantNumber": 2,
     "chronologies": [
-      {
-        "id": 19
-      }
+
     ],
     "gender": 1,
     "natures": [
@@ -10221,9 +10193,6 @@
       },
       {
         "id": 13
-      },
-      {
-        "id": 19
       },
       {
         "id": 10
@@ -11963,9 +11932,7 @@
     "firstInitial": "J",
     "actantNumber": 2,
     "chronologies": [
-      {
-        "id": 19
-      }
+
     ],
     "gender": 2,
     "natures": [
@@ -12393,9 +12360,7 @@
     "firstInitial": "J",
     "actantNumber": 3,
     "chronologies": [
-      {
-        "id": 19
-      }
+
     ],
     "gender": 3,
     "natures": [
@@ -14095,9 +14060,7 @@
     "firstInitial": "J",
     "actantNumber": 2,
     "chronologies": [
-      {
-        "id": 19
-      }
+
     ],
     "gender": 2,
     "natures": [
@@ -14124,9 +14087,7 @@
     "firstInitial": "J",
     "actantNumber": 2,
     "chronologies": [
-      {
-        "id": 19
-      }
+
     ],
     "gender": 1,
     "natures": [
@@ -15884,9 +15845,7 @@
     "firstInitial": "L",
     "actantNumber": 2,
     "chronologies": [
-      {
-        "id": 19
-      }
+
     ],
     "gender": 2,
     "natures": [
@@ -15913,9 +15872,7 @@
     "firstInitial": "L",
     "actantNumber": 2,
     "chronologies": [
-      {
-        "id": 19
-      }
+
     ],
     "gender": 2,
     "natures": [
@@ -15942,9 +15899,7 @@
     "firstInitial": "L",
     "actantNumber": 2,
     "chronologies": [
-      {
-        "id": 19
-      }
+
     ],
     "gender": 2,
     "natures": [
@@ -17941,9 +17896,7 @@
     "firstInitial": "N",
     "actantNumber": 2,
     "chronologies": [
-      {
-        "id": 19
-      }
+
     ],
     "gender": 2,
     "natures": [
@@ -17967,9 +17920,7 @@
     "firstInitial": "N",
     "actantNumber": 3,
     "chronologies": [
-      {
-        "id": 19
-      }
+
     ],
     "gender": 3,
     "natures": [
@@ -20448,9 +20399,6 @@
     "actantNumber": 3,
     "chronologies": [
       {
-        "id": 19
-      },
-      {
         "id": 1
       }
     ],
@@ -21307,9 +21255,7 @@
     "firstInitial": "S",
     "actantNumber": 2,
     "chronologies": [
-      {
-        "id": 19
-      }
+
     ],
     "gender": 2,
     "natures": [
@@ -22210,9 +22156,7 @@
     "firstInitial": "S",
     "actantNumber": 1,
     "chronologies": [
-      {
-        "id": 19
-      }
+
     ],
     "gender": 3,
     "natures": [
@@ -22261,9 +22205,7 @@
     "firstInitial": "S",
     "actantNumber": 1,
     "chronologies": [
-      {
-        "id": 19
-      }
+
     ],
     "gender": 3,
     "natures": [
@@ -30442,9 +30384,6 @@
     "actantNumber": 3,
     "chronologies": [
       {
-        "id": 19
-      },
-      {
         "id": 10
       },
       {
@@ -31092,9 +31031,7 @@
     "firstInitial": "U",
     "actantNumber": 2,
     "chronologies": [
-      {
-        "id": 19
-      }
+
     ],
     "gender": 3,
     "natures": [
@@ -31979,9 +31916,7 @@
     "firstInitial": "Z",
     "actantNumber": 2,
     "chronologies": [
-      {
-        "id": 19
-      }
+
     ],
     "gender": 1,
     "natures": [
@@ -32037,9 +31972,7 @@
     "firstInitial": "Z",
     "actantNumber": 2,
     "chronologies": [
-      {
-        "id": 19
-      }
+
     ],
     "gender": 2,
     "natures": [

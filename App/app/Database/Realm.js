@@ -311,6 +311,7 @@ const BookSourceOccurrenceSchema = {
     roleID: 'int',
     firstMonad: 'int',
     lastMonad: 'int',
+    reference: 'string',
   }
 };
 
@@ -326,10 +327,6 @@ export class BookSourceOccurrence extends Realm.Object {
       first: this.firstMonad,
       last: this.lastMonad
     };
-  }
-
-  get reference(): string {
-    return Localizable.t('bcv-reference', {book: this.book.name});
   }
 
   get role(): Role {
