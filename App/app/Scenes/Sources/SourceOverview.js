@@ -55,13 +55,6 @@ export default class SourceOverview extends Component {
       metaDataValues.push(this._renderMetaValue(Localizable.t('gender'), 'avatar-human-group', source.genderDescription));
     }
 
-    // const statements = {};
-    // source.statements.forEach(statement => {
-    //   const recipientID = statement.recipientID;
-    //   const wordCount = statements[recipientID] || 0;
-    //   statements[recipientID] = wordCount + statement.wordCount;
-    // });
-
     return (
       <ScrollView style={styles.container}>
         <TouchableOpacity onPress={() => this.props.navigate(sourceWordsURL({sourceID: source.id, title: Localizable.t('source-words', {name: source.name})}))}>

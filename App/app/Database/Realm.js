@@ -103,14 +103,6 @@ function BSOReferencesInText(text: string) {
                 if (!isNaN(occurrenceNumber)) {
                   // FIXME: Remove once all statements are in
                   references.push({book, source, occurrenceNumber});
-
-                  const statements = source.statements.filtered('book.id = $0', book.id).sorted('sourceOccurrence', true);
-                  if (false && statements.length > 0) {
-                    const occurrence = statements[0];
-                    if (occurrenceNumber > 0 && occurrenceNumber <= occurrence.sourceOccurrence) {
-                      references.push({book, source, occurrenceNumber});
-                    }
-                  }
                 }
               } else {
                 references.push({book, source});
