@@ -98,6 +98,7 @@ class OccurrenceToolbar extends Component {
           title={Localizable.t('range-of', {current, total})}
           onPress={() => {}}
           onPress={() => this._navigate(occurrencesRoute)}
+          style={{marginLeft: -20}}
         />
         <Navigation.ToolbarButton
           title={Localizable.t('done')}
