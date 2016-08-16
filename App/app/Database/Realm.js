@@ -7,7 +7,10 @@ import Emdros from '../API/Emdros';
 
 const RNFS = require('react-native-fs');
 
-import { Localizable } from '../Common';
+import {
+  Colors,
+  Localizable,
+} from '../Common';
 
 function bookNameInText(text: string) {
   const regex = /([1-3]?\s?[A-Z]*)/gi;
@@ -509,6 +512,10 @@ export class Role {
   get name(): string {
     return Localizable.t('roles.' + this.key);
   }
+
+  color(color?: string): string {
+    return Colors.sources[this.key][color || 'tint'];
+  }
 }
 
 const SourceRelationSchema = {
@@ -563,6 +570,10 @@ export class Sphere extends Realm.Object {
   countOfBook(bookID: string): number {
     const count = this.bookCounts.find(count => count.string === bookID);
     return count && count.count || 0;
+  }
+
+  color(color?: string): string {
+    return Colors.spheres[this.id][color || 'tint'];
   }
 }
 Sphere.schema = SphereSchema;

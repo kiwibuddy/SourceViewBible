@@ -458,10 +458,15 @@ export default class Query {
 
     rows.forEach(row => {
       let object = {};
+      let color = null;
       if (ObjectClass) {
         object = ObjectClass.findByID(row['id']);
+        if (typeof(object.color) !== "undefined") {
+          color = object.color();
+        }
       }
-      const value = {label: object.name, value: row['count']};
+
+      const value = {label: object.name, color, value: row['count']};
 
       if (GroupByObjectClass) {
         const groupByID = row['zid'];

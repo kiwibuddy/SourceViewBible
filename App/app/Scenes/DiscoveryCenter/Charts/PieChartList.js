@@ -47,7 +47,7 @@ export default class PieChartList extends Component {
   render() {
     const { data } = this.props;
     const totalValue = data.reduce((sum, slice) => sum + slice.value, 0);
-    const slices = data.map((slice, index) => ({...slice, color: colorAtIndex(index), percent: (slice.value / totalValue) * 100}));
+    const slices = data.map((slice, index) => ({...slice, color: slice.color || colorAtIndex(index), percent: (slice.value / totalValue) * 100}));
     const dataSource = this.state.dataSource.cloneWithRows(slices);
 
     return (
