@@ -5,6 +5,7 @@ import {
   Bible,
   Actant,
   Book,
+  BookSourceOccurrence,
   Chapter,
   Chronology,
   Gender,
@@ -12,7 +13,6 @@ import {
   Profession,
   Role,
   Sphere,
-  Word,
 } from './Realm';
 
 import SQLite, { rowsWithSQL } from './SQLite';
@@ -26,6 +26,7 @@ module.exports = {
   Bible,
   Actant,
   Book,
+  BookSourceOccurrence,
   Chapter,
   Chronology,
   Gender,
@@ -33,7 +34,6 @@ module.exports = {
   Profession,
   Role,
   Sphere,
-  Word,
   ComparisonPredicate,
   CompoundPredicate,
   Predicate,

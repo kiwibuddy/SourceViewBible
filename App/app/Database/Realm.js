@@ -313,7 +313,9 @@ const BookSourceOccurrenceSchema = {
   }
 };
 
-class BookSourceOccurrence extends Realm.Object {
+export class BookSourceOccurrence extends Realm.Object {
+  static MAXIMUM_NUMBER_OF_DISPLAYABLE_OCCURRENCES = 100;
+
   static findByID(id: number) {
     return realm.objectForPrimaryKey('BookSourceOccurrence', id || 0);
   }

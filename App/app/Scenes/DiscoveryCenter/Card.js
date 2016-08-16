@@ -33,7 +33,7 @@ import Popover from './Popover';
 
 import Query from './Query';
 
-import { Chronology } from '../../Database';
+import { BookSourceOccurrence, Chronology } from '../../Database';
 
 export const Header = (props: Object) => {
   return (
@@ -179,8 +179,8 @@ export default class Card extends Component {
     const occurrenceCount = card.occurrenceCount;
     const filterCount = card.filters.length;
     if (occurrenceCount == 0 || filterCount == 0) return null;
-    
-    const title = Localizable.t('explore-occurrences.count', {count: occurrenceCount, localizedCount: Localizable.toNumber(occurrenceCount, {precision: 0})});
+
+    const title = (occurrenceCount >= BookSourceOccurrence.MAXIMUM_NUMBER_OF_DISPLAYABLE_OCCURRENCES ? Localizable.t('explore-occurrences.text') : Localizable.t('explore-occurrences.count', {count: occurrenceCount, localizedCount: Localizable.toNumber(occurrenceCount, {precision: 0})}));
 
     return (
       <TouchableOpacity style={styles.readButton} onPress={this._onPressOccurrences}>
@@ -272,7 +272,7 @@ export default class Card extends Component {
     }, this._query);
   };
 
-  async _query() {
+  async _query(): any {
     const query = new Query(this.state.card);
     const occurrenceCount = await query.count();
 

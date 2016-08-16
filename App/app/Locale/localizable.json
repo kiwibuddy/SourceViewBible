@@ -74,6 +74,7 @@
       }
     },
     "explore-occurrences": {
+      "text": "Explore Occurrences",
       "count": {
         "one": "Explore 1 occurrence",
         "other": "Explore {{localizedCount}} occurrences"
