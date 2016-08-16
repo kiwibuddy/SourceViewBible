@@ -204,6 +204,7 @@ export default class Card extends Component {
       chartType
     }
     this.setState({card});
+    Discovery.record(card);
   };
 
   _onPressFilterType = (route: Object) => {
@@ -212,6 +213,7 @@ export default class Card extends Component {
       this.props.onShowPopover({card, route}, (card) => {
         this._animateLayout();
         this.setState({card, loading: true}, this._query);
+        Discovery.record(card);
       });
     }
   };
@@ -222,6 +224,7 @@ export default class Card extends Component {
       this.props.onShowPopover({card, route}, (card) => {
         this._animateLayout();
         this.setState({card, loading: true}, this._query);
+        Discovery.record(card);
       });
     }
   }
@@ -238,39 +241,39 @@ export default class Card extends Component {
       this.props.onShowPopover({card, route}, (card) => {
         this._animateLayout();
         this.setState({card, loading: true}, this._query);
+        Discovery.record(card);
       });
     }
   };
 
   _addFilter = (filter: Object) => {
-    const { card } = this.state;
     const filters = [
-      ...card.filters,
+      ...this.state.card.filters,
       filter
     ];
 
+    const card = {
+      ...this.state.card,
+      filters
+    };
+
     this._animateLayout();
-    this.setState({
-      card: {
-        ...card,
-        filters
-      }
-    });
+    this.setState({card});
+    Discovery.record(card);
   };
 
   _deleteFilter = (filter: Object) => {
-    const { card } = this.state;
-    const filters = card.filters;
+    const filters = this.state.card.filters;
     filters.splice(filters.indexOf(filter), 1);
 
+    const card = {
+      ...this.state.card,
+      filters
+    };
+
     this._animateLayout();
-    this.setState({
-      card: {
-        ...card,
-        filters
-      },
-      loading: true
-    }, this._query);
+    this.setState({card, loading: true}, this._query);
+    Discovery.record(card);
   };
 
   async _query(): any {
@@ -281,6 +284,7 @@ export default class Card extends Component {
       ...this.state.card,
       occurrenceCount
     };
+    Discovery.record(card);
 
     this.setState({card, data: null, loading: occurrenceCount > 0}, () => {
       if (occurrenceCount > 0) {
