@@ -167,7 +167,7 @@ export default class Query {
   async occurrences() {
     await this._prepare();
 
-    const sql = this._sql('SELECT DISTINCT bso.id', {limit: `LIMIT ${BookSourceOccurrence.MAXIMUM_NUMBER_OF_DISPLAYABLE_OCCURRENCES}`});
+    const sql = this._sql('SELECT DISTINCT bso.id', {orderBy: 'ORDER BY bso.id', limit: `LIMIT ${BookSourceOccurrence.MAXIMUM_NUMBER_OF_DISPLAYABLE_OCCURRENCES}`});
     const rows = await rowsWithSQL(sql);
     return rows.map(row => BookSourceOccurrence.findByID(row['id']))
   }
