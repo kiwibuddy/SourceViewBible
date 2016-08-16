@@ -22,11 +22,15 @@ import {
   Localizable
 } from '../../Common';
 
-import { Statement } from '../../Database';
+import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigation';
+
+import { BACK } from '../../Navigation';
+
+import { BookSourceOccurrence } from '../../Database';
 
 type Props = {
+  card: Object,
   navigate: Function,
-  occurrences: Array<Object>
 };
 
 type State = {
@@ -47,22 +51,31 @@ export default class DiscoveryCenterOccurrences extends Component {
   }
 
   componentDidMount() {
-    const { occurrences } = this.props;
-    if (occurrences) {
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(occurrences)
-      });
-    }
+    // const { occurrences } = this.props;
+    // if (occurrences) {
+    //   this.setState({
+    //     dataSource: this.state.dataSource.cloneWithRows(occurrences)
+    //   });
+    // }
   }
 
   render() {
     return (
       <View style={styles.container}>
+        <NavigationBar title={Localizable.t('occurrences')}>
+          <TouchableOpacity
+            onPress={() => this.props.navigate(BACK)}
+            style={{position: 'absolute', left: 16}}
+          >
+            <Text style={StyleSheet.styles.navigationBar.doneButtonTitle}>{Localizable.t('back')}</Text>
+          </TouchableOpacity>
+        </NavigationBar>
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this._renderRow}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
+          style={styles.content}
         />
       </View>
     );
@@ -84,6 +97,11 @@ export default class DiscoveryCenterOccurrences extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  content: {
+    flex: 1,
+    marginTop: NavigationBar.HEIGHT,
+    marginBottom: Toolbar.HEIGHT,
   },
   separator: {
     ...StyleSheet.styles.separator,
