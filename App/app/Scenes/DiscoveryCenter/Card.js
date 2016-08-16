@@ -76,6 +76,13 @@ export default class Card extends Component {
     };
   }
 
+  componentDidMount() {
+    const { card } = this.state;
+    if (card.occurrenceCount > 0 || card.filters.length > 0) {
+      this._query();
+    }
+  }
+
   render() {
     if (this.props.children) return this._renderCard();
 
