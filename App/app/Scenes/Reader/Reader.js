@@ -13,6 +13,7 @@ const {
 
 import {
   Colors,
+  Localizable,
   StyleSheet
 } from '../../Common';
 
@@ -57,6 +58,13 @@ function renderToolbar(props: Object) {
         />
         <Navigation.ToolbarButton
           imageSource={require('../../Images/common/next.png')}
+          onPress={() => {}}
+        />
+      </View>
+      <View style={{flex: 1}}>
+        <Navigation.ToolbarButton
+          title={Localizable.t('done')}
+          titleStyle={StyleSheet.styles.doneButtonTitle}
           onPress={() => {}}
         />
       </View>

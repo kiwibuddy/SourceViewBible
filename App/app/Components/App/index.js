@@ -92,39 +92,42 @@ export default class App extends Component {
     const { route, params} = router.match(navigationRoute.path);
     const Scene = route.scene;
 
+    let toolbar = null;
     if (Scene && typeof(Scene.renderToolbar) !== "undefined") {
-      const toolbar = Scene.renderToolbar({...navigationRoute, ...params});
-      if (toolbar) return toolbar;
+      toolbar = Scene.renderToolbar({...navigationRoute, ...params});
     }
 
     const canGoBack = navigationState.index > 0;
     const canGoForward = navigationState.index < navigationState.routes.length - 1;
 
     return (
-      <Toolbar>
-        <View style={{flex: 1, flexDirection: 'row'}}>
+      <View>
+        <Toolbar>
+          <View style={{flex: 1, flexDirection: 'row'}}>
+            <ToolbarButton
+              disabled={!canGoBack}
+              imageSource={require('../Navigation/Images/nav-back.png')}
+              onPress={() => this._goBack()}
+            />
+            <ToolbarButton
+              disabled={!canGoForward}
+              imageSource={require('../Navigation/Images/nav-forward.png')}
+              onPress={() => this._goForward()}
+            />
+          </View>
+          <View style={{flex: 1}}>
+            <ToolbarButton
+              imageSource={require('../Navigation/Images/nav-discoverycenter.png')}
+              onPress={() => {this._pushRoute({path: '/DiscoveryCenter', modal: true})}}
+            />
+          </View>
           <ToolbarButton
-            disabled={!canGoBack}
-            imageSource={require('../Navigation/Images/nav-back.png')}
-            onPress={() => this._goBack()}
+            imageSource={require('../Navigation/Images/nav-bookmarks.png')}
+            onPress={() => {this._pushRoute({path: '/Bookmarks', modal: true})}}
           />
-          <ToolbarButton
-            disabled={!canGoForward}
-            imageSource={require('../Navigation/Images/nav-forward.png')}
-            onPress={() => this._goForward()}
-          />
-        </View>
-        <View style={{flex: 1}}>
-          <ToolbarButton
-            imageSource={require('../Navigation/Images/nav-discoverycenter.png')}
-            onPress={() => {this._pushRoute({path: '/DiscoveryCenter', modal: true})}}
-          />
-        </View>
-        <ToolbarButton
-          imageSource={require('../Navigation/Images/nav-bookmarks.png')}
-          onPress={() => {this._pushRoute({path: '/Bookmarks', modal: true})}}
-        />
-      </Toolbar>
+        </Toolbar>
+        {toolbar}
+      </View>
     );
   };
 

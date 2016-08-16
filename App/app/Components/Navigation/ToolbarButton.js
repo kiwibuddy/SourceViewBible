@@ -8,6 +8,7 @@ import {
   Image,
   Platform,
   StyleSheet,
+  Text,
   TouchableOpacity,
   View
 } from 'react-native';
@@ -20,21 +21,26 @@ type Props = {
   disabled?: boolean,
   imageSource: any,
   onPress?: Function,
+  title?: any,
+  titleStyle?: any,
 };
 
 const ToolbarButton = (props: Props) => {
   const imageStyle = props.disabled ? {tintColor: 'gray'} : {};
+  const textStyle = props.disabled ? {color: 'gray'} : {};
+  const title = props.title ? <Text style={[styles.text, props.titleStyle, textStyle]}>{props.title}</Text> : null;
+  const image = props.imageSource ? <Image source={props.imageSource} style={[styles.image, imageStyle]} /> : null;
+
+  const buttonStyle = title ? {width: null, height: null} : {};
 
   return (
     <TouchableOpacity
       disabled={props.disabled}
       onPress={props.onPress}
-      style={styles.button}
+      style={[styles.button, buttonStyle]}
     >
-      <Image
-        source={props.imageSource}
-        style={[styles.image, imageStyle]}
-      />
+    {title}
+    {image}
     </TouchableOpacity>
   );
 };
@@ -48,6 +54,11 @@ const styles = StyleSheet.create({
   },
   image: {
     tintColor: Colors.tint,
+    alignSelf: 'center',
+  },
+  text: {
+    flex: 1,
+    color: Colors.tint,
     alignSelf: 'center',
   },
 });
