@@ -132,7 +132,7 @@ const styles = {
       fontSize: 14,
       fontWeight: 'bold',
     },
-    occurence: {
+    occurrence: {
       color: '#CF1E00',
       fontSize: 13,
       fontWeight: 'bold',

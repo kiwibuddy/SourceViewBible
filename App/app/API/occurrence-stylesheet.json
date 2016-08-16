@@ -3,110 +3,13 @@
     "base":{
       "prepend_XML_declaration":false,
       "object_types":{
-        "Source":{
-          "docindexfeature":"docindex",
-          "end":"</tr>",
-          "get":[
-            "source_name",
-            "source_occurrence",
-            "source_color"
-          ],
-          "start":"\
-<tr class=\"source{{ featurenomangle 2 }}\">\n\
-<td class=\"sourceTitle\">{{ feature 0 }} {{ featurenomangle 1 }}</td>\n\
-<td class=\"sourceText\"><a name=\"source-{{ feature 0 }}-{{ feature 1 }}\" />"
-        },
-        "NonCanonicalToken":{
-          "docindexfeature":"docindex",
-          "end":"",
-          "get":[
-            "surface",
-          ],
-          "start":""
-        },
-        "CenteredPsalmHeading" : {
-          "docindexfeature" : "docindex",
-          "end" : "</td></tr>",
-          "start" : "<tr><td class=\"sourceTitle\">&nbsp;</td><td class=\"textTitle\">"
-        },
-        "PoetryLine":{
-          "docindexfeature":"docindex",
-          "end":"<br />",
-          "start":"<span class=\"textIndent\" />"
-        },
-        "VerseNumberToken":{
-          "docindexfeature":"docindex",
-          "end":"",
-          "get":[
-            "surface",
-          ],
-          "start":"\
-{{ if varequal 'StartParagraph' 'true' }}\
-<br />\
-{{ if varequal 'ParagraphType' 'textIndent' }}\
-<span class=\"{{ emitvar 'ParagraphType' }}\" />\
-{{ endif }}\
-{{ setvar 'StartParagraph' }}{{ setvarend }}\
-{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}\
-{{ endif }}\
-<span class=\"textVerse\"><a name=\"{{ emitvar 'verse_anchor' }}\" />{{ featurenomangle 0 }}</span>&#160;"
-        },
-        "Verse":{
-          "docindexfeature":"docindex",
-          "end":"",
-          "get":[
-            "chapter",
-            "verse_start"
-          ],
-          "start":"{{ setvar 'verse_anchor' }}verse-{{ featurenomangle 0 }}-{{ featurenomangle 1 }}{{ setvarend }}"
-        },
-        "Paragraph":{
-          "docindexfeature":"docindex",
-          "get":[
-            "is_flush_left"
-          ],
-          "end":"",
-          "start" : "\
-{{ if featureequal 0 'true' }}\
-{{ else }}\
-{{ setvar 'ParagraphType' }}textIndent{{ setvarend }}\
-{{ endif }}\
-{{ setvar 'StartParagraph' }}true{{ setvarend }}\
-{{ setvar 'TextKind' }}Prose{{ setvarend }}",
-        },
-        "ChapterNumberToken":{
-          "docindexfeature":"docindex",
-          "end":"",
-          "get":[
-            "surface",
-          ],
-          "start":"\
-{{ if varequal 'StartParagraph' 'true' }}\
-<br />\
-{{ if varequal 'ParagraphType' 'textIndent' }}\
-<span class=\"{{ emitvar 'ParagraphType' }}\" />\
-{{ endif }}\
-{{ setvar 'StartParagraph' }}{{ setvarend }}\
-{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}\
-{{ endif }}\
-<a name=\"chapter-{{ feature 0 }}\" /><span class=\"textChapter\">{{ featurenomangle 0 }} </span>"
-        },
         "Token":{
           "docindexfeature":"docindex",
           "end":"",
           "get":[
             "surface",
           ],
-          "start":"\
-{{ if varequal 'StartParagraph' 'true' }}\
-<br />\
-{{ if varequal 'ParagraphType' 'textIndent' }}\
-<span class=\"{{ emitvar 'ParagraphType' }}\" />\
-{{ endif }}\
-{{ setvar 'StartParagraph' }}{{ setvarend }}\
-{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}\
-{{ endif }}\
-{{ feature 0 }}"
+          "start":"{{ feature 0 }}"
         },
         "NonWordToken":{
           "docindexfeature":"docindex",
@@ -114,16 +17,7 @@
           "get":[
             "surface",
           ],
-          "start":"\
-{{ if varequal 'StartParagraph' 'true' }}\
-<br />\
-{{ if varequal 'ParagraphType' 'textIndent' }}\
-<span class=\"{{ emitvar 'ParagraphType' }}\" />\
-{{ endif }}\
-{{ setvar 'StartParagraph' }}{{ setvarend }}\
-{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}\
-{{ endif }}\
-{{ feature 0 }}"
+          "start":"{{ feature 0 }}"
         },
         "SpaceToken" : {
           "docindexfeature" : "docindex",
@@ -133,28 +27,7 @@
         }
       },
       "postprocess":[
-        {
-          "prefix":"<table class=\"hideSource\">\n"
-        },
-        {
-          "suffix":"</table>"
-        },
-        {
-          "instring":"<td><br />",
-          "outstring":"<td>"
-        },
-        {
-          "instring":"\" /><br />",
-          "outstring":"\" />"
-        },
-        {
-          "instring":"<br /><br />",
-          "outstring":"<br />"
-        },
-        {
-          "instring" : "&#160; ",
-          "outstring" : "&#160;",
-        }
+
       ]
     },
     "bookname":{

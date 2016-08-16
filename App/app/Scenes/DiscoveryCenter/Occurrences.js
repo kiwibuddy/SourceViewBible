@@ -35,7 +35,8 @@ type Props = {
 };
 
 type State = {
-  dataSource: any
+  dataSource: any,
+  contents: any
 };
 
 export default class DiscoveryCenterOccurrences extends Component {
@@ -47,7 +48,8 @@ export default class DiscoveryCenterOccurrences extends Component {
 
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id});
     this.state = {
-      dataSource: dataSource
+      dataSource: dataSource,
+      contents: {}
     };
   }
 
@@ -61,7 +63,9 @@ export default class DiscoveryCenterOccurrences extends Component {
 
       for (let occurrence of occurrences) {
         Emdros.scripture({monadSet: occurrence.monadSet, stylesheet: 'occurrence'}).then((content) => {
-          console.log('content', content);
+          const { contents } = this.state;
+          contents[occurrence.id] = content;
+          this.setState({contents});
         });
       }
     });
@@ -91,12 +95,14 @@ export default class DiscoveryCenterOccurrences extends Component {
 
   _renderRow = (occurrence: Object, sectionID: any, rowID: any) => {
     const number = parseInt(rowID) + 1;
+    const { contents } = this.state;
+    const content = contents[occurrence.id];
 
     return (
       <TouchableOpacity key={occurrence.id} style={styles.listItemContainer} onPress={() => {}}>
-        <Text style={StyleSheet.styles.cell.occurence}>{number}</Text>
+        <Text style={StyleSheet.styles.cell.occurrence}>{number}</Text>
         <View style={styles.listItem}>
-          <Text style={styles.body}>Lorem ipsum dolor sit amet, eleifend varius. Risus vitae mauris cras lectus ipsum ante, semper id, tincidunt nunc magnis vehicula magnis in, magna massa, lectus donec vestibulum interdum.</Text>
+          <Text style={styles.body}>{content}</Text>
           <Text style={StyleSheet.styles.cell.subtitle}>{occurrence.reference}</Text>
         </View>
       </TouchableOpacity>
@@ -111,7 +117,6 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     marginTop: NavigationBar.HEIGHT,
-    marginBottom: Toolbar.HEIGHT,
   },
   separator: {
     ...StyleSheet.styles.separator,

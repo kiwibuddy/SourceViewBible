@@ -47,7 +47,7 @@ export default class SpherePassages extends Component {
       <View style={styles.container}>
         <View style={styles.listContainer}>
           <View style={styles.listItemContainer}>
-            <Text style={StyleSheet.styles.cell.occurence}>1</Text>
+            <Text style={StyleSheet.styles.cell.occurrence}>1</Text>
             <View style={styles.listItem}>
               <Text style={StyleSheet.styles.cell.bodybold}>Lorem ipsum dolor sit amet, eleifend varius.</Text>
               <Text style={styles.body}>Lorem ipsum dolor sit amet, eleifend varius. Risus vitae mauris cras lectus ipsum ante, semper id, tincidunt nunc magnis vehicula magnis in, magna massa, lectus donec vestibulum interdum.</Text>

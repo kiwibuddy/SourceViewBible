@@ -83,7 +83,7 @@ export default class SourceConversation extends Component {
         </TouchableOpacity>
         <View style={styles.sourceOccurences}>
           <View style={styles.listItemContainer}>
-            <Text style={StyleSheet.styles.cell.occurence}>1</Text>
+            <Text style={StyleSheet.styles.cell.occurrence}>1</Text>
             <View style={styles.listItem}>
               <Text style={styles.body}>Lorem ipsum dolor sit amet, eleifend varius. Risus vitae mauris cras lectus ipsum ante, semper id, tincidunt nunc magnis vehicula magnis in, magna massa, lectus donec vestibulum interdum.</Text>
               <Text style={StyleSheet.styles.cell.subtitle}>Genesis 1:1</Text>
