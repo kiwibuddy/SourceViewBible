@@ -88,6 +88,7 @@ export default class DiscoveryCenterOccurrences extends Component {
         <View style={styles.listItem}>
           <Text style={styles.body}>{occurrence.text}</Text>
           <Text style={StyleSheet.styles.cell.subtitle}>{occurrence.reference}</Text>
+          <Text style={[StyleSheet.styles.cell.subtitle, {color: 'red'}]}>Jesus 18</Text>
         </View>
       </TouchableOpacity>
     );
