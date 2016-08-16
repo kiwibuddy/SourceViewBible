@@ -151,13 +151,15 @@ export default class DiscoveryCenter extends Component {
     }
   }
 
-  _addCard = (card: Object) => {
+  _addCard = (props: Object) => {
+    const card = {
+      ...props,
+      id: 'card-' + Date.now()
+    };
+
     const cards = [
       ...this.state.cards,
-      {
-        ...card,
-        id: 'card-' + Date.now()
-      }
+      card
     ];
 
     this.setState({
@@ -181,11 +183,13 @@ export default class DiscoveryCenter extends Component {
     });
   };
 
-  _duplicateCard = (card: Object) => {
-    this._addCard({
-      ...card,
-      filters: card.filters.slice(),
-    });
+  _duplicateCard = (props: Object) => {
+    const card = {
+      ...props,
+      filters: props.filters.slice(),
+    };
+
+    this._addCard(card);
   };
 
   _onPressOccurrences = (card: Object) => {
