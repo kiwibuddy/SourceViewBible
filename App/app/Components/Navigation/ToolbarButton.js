@@ -31,7 +31,7 @@ const ToolbarButton = (props: Props) => {
   const title = props.title ? <View style={styles.textContainer}><Text style={[styles.text, props.titleStyle, textStyle]}>{props.title}</Text></View> : null;
   const image = props.imageSource ? <Image source={props.imageSource} style={[styles.image, imageStyle]} /> : null;
 
-  const buttonStyle = title ? {width: null, height: null} : {};
+  const buttonStyle = title ? {width: null, height: null, flex: 1} : {};
 
   return (
     <TouchableOpacity
@@ -58,6 +58,8 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   text: {
     color: Colors.tint,
