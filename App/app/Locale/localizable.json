@@ -85,6 +85,7 @@
     "cancel": "Cancel",
     "back": "Back",
     "occurrences": "Occurrences",
+    "bcv-reference": "{{book}} Chapter:Verse",
     "search-references": "Search References",
     "bcv": "Chapter and Verse",
     "bso": "Source and Occurrence",

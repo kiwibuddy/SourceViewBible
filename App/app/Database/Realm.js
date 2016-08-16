@@ -321,7 +321,7 @@ export class BookSourceOccurrence extends Realm.Object {
   }
 
   get reference(): string {
-    return 'Genesis 1:1';
+    return Localizable.t('bcv-reference', {book: this.book.name});
   }
 }
 BookSourceOccurrence.schema = BookSourceOccurrenceSchema;
