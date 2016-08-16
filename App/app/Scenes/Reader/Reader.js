@@ -94,7 +94,7 @@ class OccurrenceToolbar extends Component {
             onPress={() => this._navigate(nextRoute)}
           />
         </View>
-        <View style={{flex: 1, flexDirection: 'row'}}>
+        <View style={{flex: 2, flexDirection: 'row'}}>
           <Navigation.ToolbarButton
             title={Localizable.t('range-of', {current, total})}
             onPress={() => {}}
