@@ -54,21 +54,7 @@ export default class DiscoveryCenterOccurrences extends Component {
   }
 
   componentDidMount() {
-    const { card } = this.props;
-    const query = new Query(card);
-    query.occurrences().then(occurrences => {
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(occurrences)
-      });
-
-      for (let occurrence of occurrences) {
-        Emdros.scripture({monadSet: occurrence.monadSet, stylesheet: 'occurrence'}).then((content) => {
-          const { contents } = this.state;
-          contents[occurrence.id] = content;
-          this.setState({contents});
-        });
-      }
-    });
+    this._getOccurrences();
   }
 
   render() {
@@ -107,6 +93,23 @@ export default class DiscoveryCenterOccurrences extends Component {
         </View>
       </TouchableOpacity>
     );
+  };
+
+  async _getOccurrences() {
+    const { card } = this.props;
+    const query = new Query(card);
+    const occurrences = await query.occurrences();
+    const contents = {};
+
+    for (let occurrence of occurrences) {
+      const content = await Emdros.scripture({monadSet: occurrence.monadSet, stylesheet: 'occurrence'});
+      contents[occurrence.id] = content;
+    }
+
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(occurrences),
+      contents
+    });
   };
  }
 
