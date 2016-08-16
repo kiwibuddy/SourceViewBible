@@ -12,11 +12,7 @@ const DiscoverySchema = {
   properties: {
     id: 'string',
     name: {type: 'string', optional: true},
-    chartType: {type: 'string', optional: true},
-    xAxis: {type: 'string', optional: true},
-    yAxis: {type: 'string', optional: true},
-    zAxis: {type: 'string', optional: true},
-    filterData: {type: 'string', optional: true},
+    cardData: {type: 'string', optional: true},
     createdAt: {type: 'date', indexed: true},
     updatedAt: 'date',
   }
@@ -34,30 +30,34 @@ export class Discovery extends Realm.Object {
   }
 
   static record(card: Object) {
+    const date = new Date();
     let discovery = Discovery.findByID(card.id);
-    realm.write(() => {
-      if (!discovery) {
-        discovery = new Discovery();
-        discovery.id = card.id;
-        discovery.createdAt = Date.now();
-      }
+    if (!discovery) {
+      discovery = {
+        id: card.id,
+        name: null,
+        cardData: '',
+        createdAt: date,
+        updatedAt: date
+      };
+    }
 
+    realm.write(() => {
       discovery.name = card.name;
-      discovery.xAxis = card.xAxis;
-      discovery.yAxis = card.yAxis;
-      discovery.zAxis = card.zAxis;
-      discovery.filters = card.filters;
-      discovery.updatedAt = Date.now();
-      realm.create('Discovery', discovery, true);
+      // discovery.cardData = JSON.stringify(card.xAxis);
+      discovery.updatedAt = date;
+
+      try {
+        realm.create('Discovery', discovery, true);
+      } catch(error) {
+        console.log('discovery', discovery);
+        throw error;
+      }
     });
   }
 
-  set filters(filters: Array<Object>) {
-    this.filterData = JSON.stringify(filters);
-  }
-
-  get filters(): Array<Object> {
-    return JSON.parse(this.filterData);
+  get card(): any {
+    return JSON.parse(this.cardData);
   }
 }
 Discovery.schema = DiscoverySchema;

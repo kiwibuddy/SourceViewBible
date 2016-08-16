@@ -157,6 +157,8 @@ export default class DiscoveryCenter extends Component {
       id: 'card-' + Date.now()
     };
 
+    Discovery.record(card);
+
     const cards = [
       ...this.state.cards,
       card
