@@ -94,18 +94,16 @@ class OccurrenceToolbar extends Component {
             onPress={() => this._navigate(nextRoute)}
           />
         </View>
-        <View style={{flex: 1}}>
-          <Navigation.ToolbarButton
-            title={Localizable.t('range-of', {current, total})}
-            onPress={() => {}}
-            onPress={() => this._navigate(occurrencesRoute)}
-          />
-          <Navigation.ToolbarButton
-            title={Localizable.t('done')}
-            titleStyle={StyleSheet.styles.doneButtonTitle}
-            onPress={() => this._navigate(currentRoute)}
-          />
-        </View>
+        <Navigation.ToolbarButton
+          title={Localizable.t('range-of', {current, total})}
+          onPress={() => {}}
+          onPress={() => this._navigate(occurrencesRoute)}
+        />
+        <Navigation.ToolbarButton
+          title={Localizable.t('done')}
+          titleStyle={StyleSheet.styles.doneButtonTitle}
+          onPress={() => this._navigate(currentRoute)}
+        />
       </Navigation.Toolbar>
     );
   }

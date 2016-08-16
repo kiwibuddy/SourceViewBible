@@ -28,7 +28,7 @@ type Props = {
 const ToolbarButton = (props: Props) => {
   const imageStyle = props.disabled ? {tintColor: 'gray'} : {};
   const textStyle = props.disabled ? {color: 'gray'} : {};
-  const title = props.title ? <Text style={[styles.text, props.titleStyle, textStyle]}>{props.title}</Text> : null;
+  const title = props.title ? <View style={styles.textContainer}><Text style={[styles.text, props.titleStyle, textStyle]}>{props.title}</Text></View> : null;
   const image = props.imageSource ? <Image source={props.imageSource} style={[styles.image, imageStyle]} /> : null;
 
   const buttonStyle = title ? {width: null, height: null} : {};
@@ -56,10 +56,11 @@ const styles = StyleSheet.create({
     tintColor: Colors.tint,
     alignSelf: 'center',
   },
-  text: {
+  textContainer: {
     flex: 1,
+  },
+  text: {
     color: Colors.tint,
-    alignSelf: 'center',
   },
 });
 
