@@ -93,7 +93,7 @@ export default class App extends Component {
     const Scene = route.scene;
 
     if (Scene && typeof(Scene.renderToolbar) !== "undefined") {
-      const toolbar = Scene.renderToolbar({...navigationRoute, ...params});
+      const toolbar = Scene.renderToolbar({...navigationRoute, ...params, navigate:this._navigate});
       if (toolbar) return toolbar;
     }
 

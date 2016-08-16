@@ -87,7 +87,7 @@ export default class DiscoveryCenterOccurrences extends Component {
     const role = occurrence.role;
 
     const bcvReference = Localizable.t('bcv-reference', {book: occurrence.book.name, reference: occurrence.reference});
-    const bsoReference = Localizable.t('bso-reference', {book: occurrence.name, source: occurrence.name, number: occurrence.number})
+    const bsoReference = Localizable.t('bso-reference', {book: occurrence.name, source: occurrence.name, number: occurrence.number});
 
     const route = readerURL({bookID: book.id, anchor: `source-${occurrence.name}-${occurrence.number}`, title: book.name, description: bsoReference, occurrenceIndex, occurrences});
 
@@ -97,7 +97,7 @@ export default class DiscoveryCenterOccurrences extends Component {
         <View style={styles.listItem}>
           <Text style={styles.body}>{occurrence.text}</Text>
           <Text style={StyleSheet.styles.cell.subtitle}>{bcvReference}</Text>
-          <Text style={[StyleSheet.styles.cell.subtitle, {color: Colors.sources[role.key].tint}]}>{Localizable.t('so-reference', {name: occurrence.name, number: occurrence.number})}</Text>
+          <Text style={[StyleSheet.styles.cell.subtitle, {color: Colors.sources[role.key].tint}]}>{Localizable.t('so-reference', {source: occurrence.name, number: occurrence.number})}</Text>
         </View>
       </TouchableOpacity>
     );

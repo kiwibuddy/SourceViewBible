@@ -17,7 +17,7 @@ import {
   StyleSheet
 } from '../../Common';
 
-import { readerSearchURL } from '../../Navigation';
+import { readerSearchURL, readerURL } from '../../Navigation';
 import * as Navigation from '../../Components/Navigation';
 
 const RNFS = require('react-native-fs');
@@ -47,22 +47,41 @@ const NavigationBar = (props: Props) => {
 
 class OccurrenceToolbar extends Component {
   render() {
-    const { occurrenceIndex, occurrences } = this.props;
+    const { book, occurrenceIndex, occurrences } = this.props;
 
     const current = occurrenceIndex + 1;
     const total = occurrences.length;
+
+    let previousRoute = null;
+    if (occurrenceIndex > 0) {
+      const previousOccurrenceIndex = occurrenceIndex - 1;
+      const previousOccurrence = occurrences[previousOccurrenceIndex];
+      const book = previousOccurrence.book;
+      const bsoReference = Localizable.t('bso-reference', {book: previousOccurrence.name, source: previousOccurrence.name, number: previousOccurrence.number});
+      previousRoute = readerURL({bookID: book.id, anchor: `source-${previousOccurrence.name}-${previousOccurrence.number}`, title: book.name, description: bsoReference, occurrenceIndex: previousOccurrenceIndex, occurrences});
+    }
+
+    let nextRoute = null;
+    if (occurrenceIndex < total) {
+      const nextOccurrenceIndex = occurrenceIndex + 1;
+      const nextOccurrence = occurrences[nextOccurrenceIndex];
+      const book = nextOccurrence.book;
+      const bsoReference = Localizable.t('bso-reference', {book: nextOccurrence.name, source: nextOccurrence.name, number: nextOccurrence.number});
+      nextRoute = readerURL({bookID: book.id, anchor: `source-${nextOccurrence.name}-${nextOccurrence.number}`, title: book.name, description: bsoReference, occurrenceIndex: nextOccurrenceIndex, occurrences});
+    }
 
     return (
       <Navigation.Toolbar style={styles.toolbar}>
         <View style={{flex: 1, flexDirection: 'row'}}>
           <Navigation.ToolbarButton
-            disabled={occurrenceIndex == 0}
+            disabled={previousRoute == null}
             imageSource={require('../../Images/common/previous.png')}
-            onPress={() => {}}
+            onPress={() => this._navigate(previousRoute)}
           />
           <Navigation.ToolbarButton
+            disabled={nextRoute == null}
             imageSource={require('../../Images/common/next.png')}
-            onPress={() => {}}
+            onPress={() => this._navigate(nextRoute)}
           />
         </View>
         <View style={{flex: 1}}>
@@ -80,6 +99,10 @@ class OccurrenceToolbar extends Component {
       </Navigation.Toolbar>
     );
   }
+
+  _navigate = (route: Object) => {
+    this.props.navigate(route, {replace: false});
+  };
 }
 
 function renderToolbar(props: Object) {
