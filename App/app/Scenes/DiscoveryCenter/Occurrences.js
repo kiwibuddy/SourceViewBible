@@ -87,8 +87,8 @@ export default class DiscoveryCenterOccurrences extends Component {
     const book = occurrence.book;
     const role = occurrence.role;
 
-    const bcvReference = Localizable.t('bcv-reference', {book: occurrence.book.name, reference: occurrence.reference});
-    const bsoReference = Localizable.t('bso-reference', {book: occurrence.name, source: occurrence.name, number: occurrence.number});
+    const bcvReference = Localizable.t('bcv-reference', {book: book.name, reference: occurrence.reference});
+    const bsoReference = Localizable.t('bso-reference', {book: book.name, source: occurrence.name, number: occurrence.number});
 
     const route = readerURL({bookID: book.id, anchor: `source-${occurrence.name}-${occurrence.number}`, title: book.name, description: bsoReference, card, occurrenceIndex, occurrences});
 

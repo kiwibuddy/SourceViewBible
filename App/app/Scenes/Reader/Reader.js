@@ -56,7 +56,7 @@ class OccurrenceToolbar extends Component {
     const occurrence = occurrences[occurrenceIndex];
     if (occurrence) {
       const book = occurrence.book;
-      const bsoReference = Localizable.t('bso-reference', {book: occurrence.name, source: occurrence.name, number: occurrence.number});
+      const bsoReference = Localizable.t('bso-reference', {book: book.name, source: occurrence.name, number: occurrence.number});
       currentRoute = readerURL({bookID: book.id, anchor: `source-${occurrence.name}-${occurrence.number}`, title: book.name, description: bsoReference});
     }
 
@@ -65,7 +65,7 @@ class OccurrenceToolbar extends Component {
       const previousOccurrenceIndex = occurrenceIndex - 1;
       const previousOccurrence = occurrences[previousOccurrenceIndex];
       const book = previousOccurrence.book;
-      const bsoReference = Localizable.t('bso-reference', {book: previousOccurrence.name, source: previousOccurrence.name, number: previousOccurrence.number});
+      const bsoReference = Localizable.t('bso-reference', {book: book.name, source: previousOccurrence.name, number: previousOccurrence.number});
       previousRoute = readerURL({bookID: book.id, anchor: `source-${previousOccurrence.name}-${previousOccurrence.number}`, title: book.name, description: bsoReference, occurrenceIndex: previousOccurrenceIndex, occurrences});
     }
 
@@ -74,7 +74,7 @@ class OccurrenceToolbar extends Component {
       const nextOccurrenceIndex = occurrenceIndex + 1;
       const nextOccurrence = occurrences[nextOccurrenceIndex];
       const book = nextOccurrence.book;
-      const bsoReference = Localizable.t('bso-reference', {book: nextOccurrence.name, source: nextOccurrence.name, number: nextOccurrence.number});
+      const bsoReference = Localizable.t('bso-reference', {book: book.name, source: nextOccurrence.name, number: nextOccurrence.number});
       nextRoute = readerURL({bookID: book.id, anchor: `source-${nextOccurrence.name}-${nextOccurrence.number}`, title: book.name, description: bsoReference, occurrenceIndex: nextOccurrenceIndex, occurrences});
     }
 
