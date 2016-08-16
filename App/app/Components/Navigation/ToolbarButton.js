@@ -37,7 +37,6 @@ const ToolbarButton = (props: Props) => {
   return (
     <TouchableOpacity
       disabled={props.disabled}
-      hitSlop={{top: 20, bottom: 20}}
       onPress={props.onPress}
       style={[styles.button, buttonStyle, props.style]}
     >
@@ -53,6 +52,7 @@ const styles = StyleSheet.create({
     height: 30,
     marginHorizontal: 8,
     paddingHorizontal: 16,
+    backgroundColor: 'blue'
   },
   image: {
     tintColor: Colors.tint,
