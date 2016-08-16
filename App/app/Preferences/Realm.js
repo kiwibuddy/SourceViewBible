@@ -24,11 +24,38 @@ const DiscoverySchema = {
 export class Discovery extends Realm.Object {
   occurrenceCount: number;
 
+  static all() {
+    return realm.objects('Discovery').sorted('createdAt');
+  }
+
+  static findByID(id: string): Discovery {
+    return realm.objectForPrimaryKey('Discovery', id || '');
+  }
+
+  static record(card: Object) {
+    let discovery = Discovery.findByID(card.id);
+    realm.write(() => {
+      if (!discovery) {
+        discovery = new Discovery();
+        discovery.id = card.id;
+        discovery.createdAt = Date.now();
+      }
+
+      discovery.name = card.name;
+      discovery.xAxis = card.xAxis;
+      discovery.yAxis = card.yAxis;
+      discovery.zAxis = card.zAxis;
+      discovery.filters = card.filters;
+      discovery.updatedAt = Date.now();
+      realm.create('Discovery', discovery, true);
+    });
+  }
+
   set filters(filters: Array<Object>) {
     this.filterData = JSON.stringify(filters);
   }
 
-  get filters():  Array<Object> {
+  get filters(): Array<Object> {
     return JSON.parse(this.filterData);
   }
 }

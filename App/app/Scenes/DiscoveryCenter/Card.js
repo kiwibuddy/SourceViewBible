@@ -34,6 +34,7 @@ import Popover from './Popover';
 import Query from './Query';
 
 import { BookSourceOccurrence, Chronology } from '../../Database';
+import { Discovery } from '../../Preferences';
 
 export const Header = (props: Object) => {
   return (

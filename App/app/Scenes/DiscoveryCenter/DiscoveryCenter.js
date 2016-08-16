@@ -33,6 +33,8 @@ import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigati
 
 import { BACK, discoveryCenterOccurrencesURL } from '../../Navigation';
 
+import { Discovery } from '../../Preferences';
+
 const SCROLLVIEW_REF = 'scrollview';
 
 type Props = {
