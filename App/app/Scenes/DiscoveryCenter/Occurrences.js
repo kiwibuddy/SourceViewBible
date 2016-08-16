@@ -23,7 +23,7 @@ import {
 
 import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigation';
 
-import { BACK } from '../../Navigation';
+import { BACK, discoveryCenterURL, readerURL } from '../../Navigation';
 
 import Emdros from '../../API/Emdros';
 import { BookSourceOccurrence } from '../../Database';
@@ -81,11 +81,13 @@ export default class DiscoveryCenterOccurrences extends Component {
 
   _renderRow = (occurrence: Object, sectionID: any, rowID: any) => {
     const number = parseInt(rowID) + 1;
+    const book = occurrence.book;
     const { contents } = this.state;
     const content = contents[occurrence.id];
+    const url = readerURL({bookID: book.id, anchor: `source-${occurrence.name}-${occurrence.occurrence}`, title: book.name});
 
     return (
-      <TouchableOpacity key={occurrence.id} style={styles.listItemContainer} onPress={() => {}}>
+      <TouchableOpacity key={occurrence.id} style={styles.listItemContainer} onPress={() => this.props.navigate(url)}>
         <Text style={StyleSheet.styles.cell.occurrence}>{number}</Text>
         <View style={styles.listItem}>
           <Text style={styles.body}>{content}</Text>
