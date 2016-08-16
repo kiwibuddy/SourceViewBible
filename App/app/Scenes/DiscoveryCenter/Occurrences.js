@@ -25,6 +25,7 @@ import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigati
 
 import { BACK } from '../../Navigation';
 
+import Emdros from '../../API/Emdros';
 import { BookSourceOccurrence } from '../../Database';
 import Query from './Query';
 
@@ -57,6 +58,12 @@ export default class DiscoveryCenterOccurrences extends Component {
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(occurrences)
       });
+
+      for (let occurrence of occurrences) {
+        Emdros.scripture({monadSet: occurrence.monadSet}).then((content) => {
+          console.log('content', content);
+        });
+      }
     });
   }
 

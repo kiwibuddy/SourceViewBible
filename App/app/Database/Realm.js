@@ -320,6 +320,13 @@ export class BookSourceOccurrence extends Realm.Object {
     return realm.objectForPrimaryKey('BookSourceOccurrence', id || 0);
   }
 
+  get monadSet(): Object {
+    return {
+      first: this.firstMonad,
+      last: this.lastMonad
+    };
+  }
+
   get reference(): string {
     return Localizable.t('bcv-reference', {book: this.book.name});
   }
