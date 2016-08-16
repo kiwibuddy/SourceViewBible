@@ -139,7 +139,7 @@ export default class Reader extends Component {
   props: Props;
   state: State;
 
-  shouldFetchScripture: bool = true;
+  shouldFetchScripture: boolean = true;
 
   constructor(props: Object) {
     super(props);

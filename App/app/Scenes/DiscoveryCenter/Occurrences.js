@@ -42,6 +42,7 @@ type State = {
 export default class DiscoveryCenterOccurrences extends Component {
   props: Props;
   state: State;
+  shouldFetch: boolean = true;
 
   constructor(props: Props) {
     super(props);
@@ -55,6 +56,10 @@ export default class DiscoveryCenterOccurrences extends Component {
 
   componentDidMount() {
     this._getOccurrences();
+  }
+
+  componentWillUnmount() {
+    this.shouldFetch = false;
   }
 
   render() {
@@ -117,10 +122,12 @@ export default class DiscoveryCenterOccurrences extends Component {
 
     occurrences = occurrences.map(occurrence => ({...occurrence, role: occurrence.role, reference: occurrence.reference, text: contents[occurrence.id]}));
 
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(occurrences),
-      occurrences
-    });
+    if (this.shouldFetch) {
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(occurrences),
+        occurrences
+      });
+    }
   };
 
   _navigate = (route: Object) => {

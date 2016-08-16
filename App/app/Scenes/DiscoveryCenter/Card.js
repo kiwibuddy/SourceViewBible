@@ -64,6 +64,7 @@ export default class Card extends Component {
 
   props: Props;
   state: State;
+  shouldFetch: boolean = true;
 
   constructor(props: Props) {
     super(props);
@@ -81,6 +82,10 @@ export default class Card extends Component {
     if (card.occurrenceCount > 0 || card.filters.length > 0) {
       this._query();
     }
+  }
+
+  componentWillUnmount() {
+    this.shouldFetch = false;
   }
 
   render() {
@@ -292,18 +297,22 @@ export default class Card extends Component {
     };
     Discovery.record(card);
 
-    this.setState({card, data: null, loading: occurrenceCount > 0}, () => {
-      if (occurrenceCount > 0) {
-        query.data().then(data => {
-          this._animateLayout();
+    if (this.shouldFetch) {
+      this.setState({card, data: null, loading: occurrenceCount > 0}, () => {
+        if (occurrenceCount > 0) {
+          query.data().then(data => {
+            if (this.shouldFetch) {
+              this._animateLayout();
 
-          this.setState({
-            data,
-            loading: false
-          });
-        })
-      }
-    });
+              this.setState({
+                data,
+                loading: false
+              });              
+            }
+          })
+        }
+      });
+    }
   };
 
   _animateLayout = () => {
