@@ -84,7 +84,7 @@ export default class DiscoveryCenterOccurrences extends Component {
     const book = occurrence.book;
     const { contents } = this.state;
     const content = contents[occurrence.id];
-    const url = readerURL({bookID: book.id, anchor: `source-${occurrence.name}-${occurrence.occurrence}`, title: book.name});
+    const url = readerURL({bookID: book.id, anchor: `source-${occurrence.name}-${occurrence.occurrence}`, title: book.name, description: `${book.name} ${occurrence.name} ${occurrence.occurrence}`});
 
     return (
       <TouchableOpacity key={occurrence.id} style={styles.listItemContainer} onPress={() => this.props.navigate(url)}>

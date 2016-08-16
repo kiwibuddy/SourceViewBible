@@ -164,7 +164,7 @@ export default class BookSources extends Component {
   _onPressScripture = (source: Object) => {
     const { book } = this.state;
 
-    this.props.navigate(readerURL({bookID: book.id, anchor: `source-${source.name}-1`, title: book.name}));
+    this.props.navigate(readerURL({bookID: book.id, anchor: `source-${source.name}-1`, title: book.name, description: `${book.name} ${source.name} 1`}));
   };
 }
 
