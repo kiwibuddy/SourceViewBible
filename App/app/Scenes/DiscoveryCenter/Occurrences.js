@@ -86,10 +86,10 @@ export default class DiscoveryCenterOccurrences extends Component {
     const book = occurrence.book;
     const role = occurrence.role;
 
-    const url = readerURL({bookID: book.id, anchor: `source-${occurrence.name}-${occurrence.number}`, title: book.name, description: `${book.name} ${occurrence.name} ${occurrence.number}`, occurrences});
+    const route = readerURL({bookID: book.id, anchor: `source-${occurrence.name}-${occurrence.number}`, title: book.name, description: `${book.name} ${occurrence.name} ${occurrence.number}`, occurrences});
 
     return (
-      <TouchableOpacity key={occurrence.id} style={styles.listItemContainer} onPress={() => this.props.navigate(url)}>
+      <TouchableOpacity key={occurrence.id} style={styles.listItemContainer} onPress={() => this._navigate(route)}>
         <Text style={StyleSheet.styles.cell.occurrence}>{number}</Text>
         <View style={styles.listItem}>
           <Text style={styles.body}>{occurrence.text}</Text>
@@ -117,6 +117,11 @@ export default class DiscoveryCenterOccurrences extends Component {
       dataSource: this.state.dataSource.cloneWithRows(occurrences)
     });
   };
+
+  _navigate = (route: Object) => {
+    this.props.navigate(route);
+  };
+
  }
 
 const styles = StyleSheet.create({
