@@ -52,6 +52,14 @@ class OccurrenceToolbar extends Component {
     const current = occurrenceIndex + 1;
     const total = occurrences.length;
 
+    let currentRoute = null;
+    const occurrence = occurrences[occurrenceIndex];
+    if (occurrence) {
+      const book = occurrence.book;
+      const bsoReference = Localizable.t('bso-reference', {book: occurrence.name, source: occurrence.name, number: occurrence.number});
+      currentRoute = readerURL({bookID: book.id, anchor: `source-${occurrence.name}-${occurrence.number}`, title: book.name, description: bsoReference});
+    }
+
     let previousRoute = null;
     if (occurrenceIndex > 0) {
       const previousOccurrenceIndex = occurrenceIndex - 1;
@@ -91,9 +99,10 @@ class OccurrenceToolbar extends Component {
             onPress={() => {}}
           />
           <Navigation.ToolbarButton
+            disabled={currentRoute == null}
             title={Localizable.t('done')}
             titleStyle={StyleSheet.styles.doneButtonTitle}
-            onPress={() => {}}
+            onPress={() => this._navigate(currentRoute)}
           />
         </View>
       </Navigation.Toolbar>
