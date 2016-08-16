@@ -80,6 +80,7 @@ export default class DiscoveryCenterOccurrences extends Component {
   }
 
   _renderRow = (occurrence: Object, sectionID: any, rowID: any) => {
+    const { card } = this.props;
     const { occurrences } = this.state;
     const occurrenceIndex = parseInt(rowID);
     const number = occurrenceIndex + 1;
@@ -89,7 +90,7 @@ export default class DiscoveryCenterOccurrences extends Component {
     const bcvReference = Localizable.t('bcv-reference', {book: occurrence.book.name, reference: occurrence.reference});
     const bsoReference = Localizable.t('bso-reference', {book: occurrence.name, source: occurrence.name, number: occurrence.number});
 
-    const route = readerURL({bookID: book.id, anchor: `source-${occurrence.name}-${occurrence.number}`, title: book.name, description: bsoReference, occurrenceIndex, occurrences});
+    const route = readerURL({bookID: book.id, anchor: `source-${occurrence.name}-${occurrence.number}`, title: book.name, description: bsoReference, card, occurrenceIndex, occurrences});
 
     return (
       <TouchableOpacity key={occurrence.id} style={styles.listItemContainer} onPress={() => this._navigate(route)}>
