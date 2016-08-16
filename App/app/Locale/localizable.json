@@ -30,6 +30,7 @@
         "other": "{{count}} spheres"
       }
     },
+    "range-of": "{{current}} of {{total}}",
     "time-period": "Time Period",
     "introduction": "Introduction",
     "how-to-read": "How to read {{name}}",

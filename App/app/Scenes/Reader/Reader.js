@@ -45,25 +45,18 @@ const NavigationBar = (props: Props) => {
   );
 };
 
-type OccurrenceState = {
-  index: number,
-};
-
 class OccurrenceToolbar extends Component {
-  state: OccurrenceState;
-
-  constructor(props: Object) {
-    super(props);
-    this.state = {
-      index: props.occurenceIndex || 0
-    };
-  }
-  
   render() {
+    const { occurrenceIndex, occurrences } = this.props;
+
+    const current = occurrenceIndex + 1;
+    const total = occurrences.length;
+
     return (
       <Navigation.Toolbar style={styles.toolbar}>
         <View style={{flex: 1, flexDirection: 'row'}}>
           <Navigation.ToolbarButton
+            disabled={occurrenceIndex == 0}
             imageSource={require('../../Images/common/previous.png')}
             onPress={() => {}}
           />
@@ -74,7 +67,7 @@ class OccurrenceToolbar extends Component {
         </View>
         <View style={{flex: 1}}>
           <Navigation.ToolbarButton
-            title="1 of x"
+            title={Localizable.t('range-of', {current, total})}
             onPress={() => {}}
             onPress={() => {}}
           />

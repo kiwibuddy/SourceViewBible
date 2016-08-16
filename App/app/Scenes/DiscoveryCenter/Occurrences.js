@@ -81,9 +81,8 @@ export default class DiscoveryCenterOccurrences extends Component {
 
   _renderRow = (occurrence: Object, sectionID: any, rowID: any) => {
     const { occurrences } = this.state;
-    const occurrenceIndex = occurrences.indexOf(occurrence);
-
-    const number = parseInt(rowID) + 1;
+    const occurrenceIndex = parseInt(rowID);
+    const number = occurrenceIndex + 1;
     const book = occurrence.book;
     const role = occurrence.role;
 
