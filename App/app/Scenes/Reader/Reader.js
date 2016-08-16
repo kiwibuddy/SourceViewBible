@@ -167,9 +167,10 @@ export default class Reader extends Component {
     if (!this.state.scripture) return null;
 
     const injectedJavaScript = this._renderInjectedJavascript();
-
+    const key = (this.props.anchor ? `anchor-${this.props.anchor}` : 'webview');
     return (
       <WebView
+        key={key}
         decelerationRate="normal"
         injectedJavaScript={injectedJavaScript}
         scalesPageToFit={false}
