@@ -65,6 +65,15 @@ export class Discovery extends Realm.Object {
     });
   }
 
+  static delete(card: Object) {
+    const discovery = Discovery.findByID(card.id);
+    if (discovery) {
+      realm.write(() => {
+        realm.delete(discovery);
+      });
+    }
+  }
+
   get card(): any {
     const cardData = JSON.parse(this.cardData);
     const card = {

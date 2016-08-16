@@ -177,6 +177,8 @@ export default class DiscoveryCenter extends Component {
     const cards = this.state.cards.slice();
     cards.splice(cardIndex, 1);
 
+    Discovery.delete(card);
+
     this._animateLayout();
     this.setState({cards}, () => {
       if (cards.length == 1) {
