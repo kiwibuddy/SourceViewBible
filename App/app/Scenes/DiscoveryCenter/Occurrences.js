@@ -62,7 +62,7 @@ export default class DiscoveryCenterOccurrences extends Component {
       <View style={styles.container}>
         <NavigationBar title={Localizable.t('occurrences')}>
           <TouchableOpacity
-            onPress={() => this.props.navigate(BACK)}
+            onPress={() => this.props.navigate(discoveryCenterURL({title: Localizable.t('discovery-center'), modal: true}), {replace: true})}
             style={{position: 'absolute', left: 16}}
           >
             <Text style={StyleSheet.styles.navigationBar.doneButtonTitle}>{Localizable.t('back')}</Text>
@@ -122,7 +122,7 @@ export default class DiscoveryCenterOccurrences extends Component {
   };
 
   _navigate = (route: Object) => {
-    this.props.navigate(route);
+    this.props.navigate(route, {replace: true});
   };
 
  }
