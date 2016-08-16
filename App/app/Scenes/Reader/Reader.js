@@ -103,7 +103,7 @@ class OccurrenceToolbar extends Component {
           title={Localizable.t('done')}
           titleStyle={StyleSheet.styles.navigationBar.doneButtonTitle}
           onPress={() => this._navigate(currentRoute)}
-          style={{marginRight: -30}}
+          style={{paddingHorizontal: 0, marginHorizontal: 0, marginRight: -20}}
         />
       </Navigation.Toolbar>
     );
