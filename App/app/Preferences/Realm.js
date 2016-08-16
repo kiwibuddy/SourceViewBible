@@ -12,7 +12,7 @@ const DiscoverySchema = {
   properties: {
     id: 'string',
     name: {type: 'string', optional: true},
-    cardData: {type: 'string', optional: true},
+    cardData: 'string',
     createdAt: {type: 'date', indexed: true},
     updatedAt: 'date',
   }
@@ -42,9 +42,18 @@ export class Discovery extends Realm.Object {
       };
     }
 
+    const cardData = {
+      chartType: card.chartType,
+      xAxis: card.xAxis,
+      yAxis: card.yAxis,
+      zAxis: card.zAxis,
+      filters: card.filters,
+      occurrenceCount: card.occurrenceCount
+    };
+
     realm.write(() => {
       discovery.name = card.name;
-      // discovery.cardData = JSON.stringify(card.xAxis);
+      discovery.cardData = JSON.stringify(cardData);
       discovery.updatedAt = date;
 
       try {
@@ -57,7 +66,15 @@ export class Discovery extends Realm.Object {
   }
 
   get card(): any {
-    return JSON.parse(this.cardData);
+    const cardData = JSON.parse(this.cardData);
+    const card = {
+      id: this.id,
+      name: this.name,
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
+      ...cardData,
+    };
+    return card;
   }
 }
 Discovery.schema = DiscoverySchema;

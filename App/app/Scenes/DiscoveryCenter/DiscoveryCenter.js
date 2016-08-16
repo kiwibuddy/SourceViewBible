@@ -57,7 +57,8 @@ export default class DiscoveryCenter extends Component {
 
     this.contentHeight = 0;
 
-    const cards = [{id: 'getting-started'}];
+    const discoveries = Discovery.all();
+    const cards = discoveries.length == 0 ? [{id: 'getting-started'}] : discoveries.map(discovery => discovery.card);
     this.state = {
       cards,
       popover: null
