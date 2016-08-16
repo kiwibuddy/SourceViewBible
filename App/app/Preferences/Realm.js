@@ -12,19 +12,24 @@ const DiscoverySchema = {
   properties: {
     id: 'string',
     name: {type: 'string', optional: true},
-    cardData: 'string',
+    xAxis: {type: 'string', optional: true},
+    yAxis: {type: 'string', optional: true},
+    zAxis: {type: 'string', optional: true},
+    filterData: {type: 'string', optional: true},
     createdAt: {type: 'date', indexed: true},
-    updatedAt: {type: 'date', indexed: true},
+    updatedAt: 'date',
   }
-}
+};
 
 export class Discovery extends Realm.Object {
-  set card(card: Object) {
-    this.cardData = JSON.stringify(card);
+  occurrenceCount: number;
+
+  set filters(filters: Array<Object>) {
+    this.filterData = JSON.stringify(filters);
   }
 
-  get card(): Object {
-    return JSON.parse(this.cardData);
+  get filters():  Array<Object> {
+    return JSON.parse(this.filterData);
   }
 }
 Discovery.schema = DiscoverySchema;
