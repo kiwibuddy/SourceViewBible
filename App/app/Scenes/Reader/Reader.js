@@ -101,7 +101,7 @@ class OccurrenceToolbar extends Component {
   }
 
   _navigate = (route: Object) => {
-    this.props.navigate(route, {replace: false});
+    this.props.navigate(route, {replace: true});
   };
 }
 
@@ -172,6 +172,7 @@ export default class Reader extends Component {
 
   _setScripture = (bookID: string, anchor?: string) => {
     const book = Book.findByID(bookID);
+
     Emdros.scripture({monadSet: book.monadSet}).then((content) => {
       if (this.shouldFetchScripture) {
         const scripture = this._renderScripture(content);
