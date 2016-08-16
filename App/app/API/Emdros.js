@@ -5,6 +5,7 @@ import Emdros from 'react-native-emdros';
 let DB = null;
 
 const SCRIPTURE_STYLESHEET = require('./scripture-stylesheet.json');
+const OCCURRENCE_STYLESHEET = require('./occurrence-stylesheet.json');
 
 function openDatabase() {
   Emdros.open({name: 'Datasets/en/NLT/SourceView.bpt'}).then((emdros) => {
@@ -26,7 +27,13 @@ function query(query: string, options: Object) {
 }
 
 function scripture(options: Object) {
-  const style = {stylesheet: JSON.stringify(SCRIPTURE_STYLESHEET)};
+  let stylesheet = null;
+  if (options && options.stylesheet == 'occurrence') {
+    stylesheet = JSON.stringify(OCCURRENCE_STYLESHEET);
+  } else {
+    stylesheet = JSON.stringify(SCRIPTURE_STYLESHEET);
+  }
+  const style = {stylesheet};
 
   let monadSet = options.monadSet;
   if (!monadSet) {

@@ -60,7 +60,7 @@ export default class DiscoveryCenterOccurrences extends Component {
       });
 
       for (let occurrence of occurrences) {
-        Emdros.scripture({monadSet: occurrence.monadSet}).then((content) => {
+        Emdros.scripture({monadSet: occurrence.monadSet, stylesheet: 'occurrence'}).then((content) => {
           console.log('content', content);
         });
       }
