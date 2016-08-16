@@ -16,7 +16,8 @@ export async function seedBSOObjects(emdros: Object, realm: Object) {
           id: bso.id,
           book: book,
           name: bso.name,
-          occurrence: bso.occurrence_id,
+          number: bso.occurrence_id,
+          roleID: bso.role_id,
           firstMonad: bso.first,
           lastMonad: bso.last,
         });

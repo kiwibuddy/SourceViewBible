@@ -83,7 +83,8 @@ const BookSourceOccurrenceSchema = {
     id: 'int',
     book: 'Book',
     name: 'string',
-    occurrence: 'int',
+    number: 'int',
+    roleID: 'int',
     firstMonad: 'int',
     lastMonad: 'int',
   }

@@ -26,7 +26,7 @@ import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigati
 import { BACK, discoveryCenterURL, readerURL } from '../../Navigation';
 
 import Emdros from '../../API/Emdros';
-import { BookSourceOccurrence } from '../../Database';
+import { BookSourceOccurrence, Role } from '../../Database';
 import Query from './Query';
 
 type Props = {
@@ -84,7 +84,9 @@ export default class DiscoveryCenterOccurrences extends Component {
 
     const number = parseInt(rowID) + 1;
     const book = occurrence.book;
-    const url = readerURL({bookID: book.id, anchor: `source-${occurrence.name}-${occurrence.occurrence}`, title: book.name, description: `${book.name} ${occurrence.name} ${occurrence.occurrence}`, occurrences});
+    const role = occurrence.role;
+
+    const url = readerURL({bookID: book.id, anchor: `source-${occurrence.name}-${occurrence.number}`, title: book.name, description: `${book.name} ${occurrence.name} ${occurrence.number}`, occurrences});
 
     return (
       <TouchableOpacity key={occurrence.id} style={styles.listItemContainer} onPress={() => this.props.navigate(url)}>
@@ -92,7 +94,7 @@ export default class DiscoveryCenterOccurrences extends Component {
         <View style={styles.listItem}>
           <Text style={styles.body}>{occurrence.text}</Text>
           <Text style={StyleSheet.styles.cell.subtitle}>{occurrence.reference}</Text>
-          <Text style={[StyleSheet.styles.cell.subtitle, {color: 'red'}]}>Jesus 18</Text>
+          <Text style={[StyleSheet.styles.cell.subtitle, {color: Colors.sources[role.key].tint}]}>{occurrence.name} {occurrence.number}</Text>
         </View>
       </TouchableOpacity>
     );
@@ -109,7 +111,7 @@ export default class DiscoveryCenterOccurrences extends Component {
       contents[occurrence.id] = content;
     }
 
-    occurrences = occurrences.map(occurrence => ({...occurrence, reference: occurrence.reference, text: contents[occurrence.id]}));
+    occurrences = occurrences.map(occurrence => ({...occurrence, role: occurrence.role, reference: occurrence.reference, text: contents[occurrence.id]}));
 
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(occurrences)
