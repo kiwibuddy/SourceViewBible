@@ -45,33 +45,55 @@ const NavigationBar = (props: Props) => {
   );
 };
 
-function renderToolbar(props: Object) {
-  const { card, occurrences } = props;
-  if (!occurrences) return null;
+type OccurrenceState = {
+  index: number,
+};
 
-  return (
-    <Navigation.Toolbar style={styles.toolbar}>
-      <View style={{flex: 1, flexDirection: 'row'}}>
-        <Navigation.ToolbarButton
-          imageSource={require('../../Images/common/previous.png')}
-          onPress={() => {}}
-        />
-        <Navigation.ToolbarButton
-          imageSource={require('../../Images/common/next.png')}
-          onPress={() => {}}
-        />
-      </View>
-      <View style={{flex: 1}}>
-        <Navigation.ToolbarButton
-          title={Localizable.t('done')}
-          titleStyle={StyleSheet.styles.doneButtonTitle}
-          onPress={() => {}}
-        />
-      </View>
-    </Navigation.Toolbar>
-  );
+class OccurrenceToolbar extends Component {
+  state: OccurrenceState;
+
+  constructor(props: Object) {
+    super(props);
+    this.state = {
+      index: props.occurenceIndex || 0
+    };
+  }
+  
+  render() {
+    return (
+      <Navigation.Toolbar style={styles.toolbar}>
+        <View style={{flex: 1, flexDirection: 'row'}}>
+          <Navigation.ToolbarButton
+            imageSource={require('../../Images/common/previous.png')}
+            onPress={() => {}}
+          />
+          <Navigation.ToolbarButton
+            imageSource={require('../../Images/common/next.png')}
+            onPress={() => {}}
+          />
+        </View>
+        <View style={{flex: 1}}>
+          <Navigation.ToolbarButton
+            title="1 of x"
+            onPress={() => {}}
+            onPress={() => {}}
+          />
+          <Navigation.ToolbarButton
+            title={Localizable.t('done')}
+            titleStyle={StyleSheet.styles.doneButtonTitle}
+            onPress={() => {}}
+          />
+        </View>
+      </Navigation.Toolbar>
+    );
+  }
 }
 
+function renderToolbar(props: Object) {
+  const { occurrences } = props;
+  if (!occurrences) return null;
+  return <OccurrenceToolbar {...props} />;
+}
 
 type Props = {
   bookID: string,
