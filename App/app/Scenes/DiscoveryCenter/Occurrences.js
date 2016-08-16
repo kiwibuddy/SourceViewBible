@@ -35,8 +35,7 @@ type Props = {
 };
 
 type State = {
-  dataSource: any,
-  contents: any
+  dataSource: any
 };
 
 export default class DiscoveryCenterOccurrences extends Component {
@@ -48,8 +47,7 @@ export default class DiscoveryCenterOccurrences extends Component {
 
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id});
     this.state = {
-      dataSource: dataSource,
-      contents: {}
+      dataSource: dataSource
     };
   }
 
@@ -82,15 +80,13 @@ export default class DiscoveryCenterOccurrences extends Component {
   _renderRow = (occurrence: Object, sectionID: any, rowID: any) => {
     const number = parseInt(rowID) + 1;
     const book = occurrence.book;
-    const { contents } = this.state;
-    const content = contents[occurrence.id];
     const url = readerURL({bookID: book.id, anchor: `source-${occurrence.name}-${occurrence.occurrence}`, title: book.name, description: `${book.name} ${occurrence.name} ${occurrence.occurrence}`});
 
     return (
       <TouchableOpacity key={occurrence.id} style={styles.listItemContainer} onPress={() => this.props.navigate(url)}>
         <Text style={StyleSheet.styles.cell.occurrence}>{number}</Text>
         <View style={styles.listItem}>
-          <Text style={styles.body}>{content}</Text>
+          <Text style={styles.body}>{occurrence.text}</Text>
           <Text style={StyleSheet.styles.cell.subtitle}>{occurrence.reference}</Text>
         </View>
       </TouchableOpacity>
@@ -100,7 +96,7 @@ export default class DiscoveryCenterOccurrences extends Component {
   async _getOccurrences() {
     const { card } = this.props;
     const query = new Query(card);
-    const occurrences = await query.occurrences();
+    let occurrences = await query.occurrences();
     const contents = {};
 
     for (let occurrence of occurrences) {
@@ -108,9 +104,10 @@ export default class DiscoveryCenterOccurrences extends Component {
       contents[occurrence.id] = content;
     }
 
+    occurrences = occurrences.map(occurrence => ({...occurrence, reference: occurrence.reference, text: contents[occurrence.id]}));
+
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(occurrences),
-      contents
+      dataSource: this.state.dataSource.cloneWithRows(occurrences)
     });
   };
  }
