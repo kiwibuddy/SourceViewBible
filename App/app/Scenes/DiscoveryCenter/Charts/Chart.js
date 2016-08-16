@@ -50,7 +50,7 @@ const Button = (props: ButtonProps) => {
   const { onPress } = props;
   return (
     <TouchableOpacity hitSlop={{top: 10, left: 5, bottom: 10, right: 0}} onPress={onPress}>
-      <Text style={[styles.button, props.style]}>{props.title}</Text>
+      <Text numberOfLines={1} style={[styles.button, props.style]}>{props.title}</Text>
     </TouchableOpacity>
   );
 };
@@ -63,9 +63,9 @@ type DropdownButtonProps = {
 const DropdownButton = (props: DropdownButtonProps) => {
   return (
     <TouchableOpacity {...props}>
-      <Image style={styles.chartDropdown} source={require('../Images/chart-icn-dropdown.png')} />
       <Image style={styles.chartIcon} source={props.image} />
-      <Text style={styles.chartProperty}>{props.title}</Text>
+      <Text numberOfLines={1} style={styles.chartProperty}>{props.title}</Text>
+      <Image style={styles.chartDropdown} source={require('../Images/chart-icn-dropdown.png')} />
     </TouchableOpacity>
   )
 };
@@ -127,9 +127,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   chartDropdown: {
-    position: 'absolute',
-    right: 8,
-    top: 12,
+  position: 'absolute',
+  right: 5,
+  top: 12,
   },
   footer: {
     flex: 1,
