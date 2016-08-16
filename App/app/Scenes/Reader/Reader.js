@@ -209,7 +209,7 @@ export default class Reader extends Component {
 
     const javascript = `\
       location.hash = '#${encodeURIComponent(anchor)}';
-      document.getElementById('scripture').scrollTop = document.getElementById('scripture').scrollTop - 8;
+      document.getElementById('scripture').scrollTop = document.getElementById('scripture').scrollTop - 12;
     `;
     return javascript;
   };
