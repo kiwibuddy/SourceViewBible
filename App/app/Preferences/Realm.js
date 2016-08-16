@@ -6,6 +6,29 @@ import Realm from 'realm';
 
 import moment from 'moment';
 
+const DiscoverySchema = {
+  name: 'Discovery',
+  primaryKey: 'id',
+  properties: {
+    id: 'string',
+    name: {type: 'string', optional: true},
+    cardData: 'string',
+    createdAt: {type: 'date', indexed: true},
+    updatedAt: {type: 'date', indexed: true},
+  }
+}
+
+export class Discovery extends Realm.Object {
+  set card(card: Object) {
+    this.cardData = JSON.stringify(card);
+  }
+
+  get card(): Object {
+    return JSON.parse(this.cardData);
+  }
+}
+Discovery.schema = DiscoverySchema;
+
 const PreferenceSchema = {
   name: 'Preference',
   primaryKey: 'key',
@@ -94,7 +117,7 @@ export class History extends Realm.Object {
 }
 History.schema = HistorySchema;
 
-const Schema = [Preference, History];
+const Schema = [Discovery, Preference, History];
 
 const realm = new Realm({
   schema: Schema
