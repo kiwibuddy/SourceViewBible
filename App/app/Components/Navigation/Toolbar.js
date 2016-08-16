@@ -17,7 +17,7 @@ export default class Toolbar extends Component {
 
   render() {
     return (
-      <View style={styles.toolbar}>
+      <View style={[styles.toolbar, this.props.style]}>
         {this.props.children}
       </View>
     );

@@ -7,6 +7,7 @@ import { Component } from 'react';
 import ReactNative from 'react-native';
 
 const {
+  View,
   WebView,
 } = ReactNative;
 
@@ -43,6 +44,27 @@ const NavigationBar = (props: Props) => {
   );
 };
 
+function renderToolbar(props: Object) {
+  const { card, occurrences } = props;
+  if (!occurrences) return null;
+
+  return (
+    <Navigation.Toolbar style={styles.toolbar}>
+      <View style={{flex: 1, flexDirection: 'row'}}>
+        <Navigation.ToolbarButton
+          imageSource={require('../../Images/common/previous.png')}
+          onPress={() => {}}
+        />
+        <Navigation.ToolbarButton
+          imageSource={require('../../Images/common/next.png')}
+          onPress={() => {}}
+        />
+      </View>
+    </Navigation.Toolbar>
+  );
+}
+
+
 type Props = {
   bookID: string,
   anchor?: string,
@@ -56,6 +78,7 @@ type State = {
 
 export default class Reader extends Component {
   static NavigationBar = NavigationBar;
+  static renderToolbar = renderToolbar;
 
   props: Props;
   state: State;
@@ -95,7 +118,7 @@ export default class Reader extends Component {
         decelerationRate="normal"
         injectedJavaScript={injectedJavaScript}
         scalesPageToFit={false}
-        style={styles.container}
+        style={styles.webview}
         source={{html: this.state.scripture}}
       />
     );
@@ -148,6 +171,12 @@ export default class Reader extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  webview: {
+    flex: 1,
     backgroundColor: 'white',
+  },
+  toolbar: {
+
   },
 });

@@ -87,6 +87,16 @@ export default class App extends Component {
 
   _renderToolbar = (props: any) => {
     const { navigationState } = props;
+    const navigationRoute = navigationState.routes[navigationState.index];
+
+    const { route, params} = router.match(navigationRoute.path);
+    const Scene = route.scene;
+
+    if (Scene && typeof(Scene.renderToolbar) !== "undefined") {
+      const toolbar = Scene.renderToolbar({...navigationRoute, ...params});
+      if (toolbar) return toolbar;
+    }
+
     const canGoBack = navigationState.index > 0;
     const canGoForward = navigationState.index < navigationState.routes.length - 1;
 

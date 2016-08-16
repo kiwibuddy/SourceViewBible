@@ -117,7 +117,8 @@ export default class DiscoveryCenterOccurrences extends Component {
     occurrences = occurrences.map(occurrence => ({...occurrence, role: occurrence.role, reference: occurrence.reference, text: contents[occurrence.id]}));
 
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(occurrences)
+      dataSource: this.state.dataSource.cloneWithRows(occurrences),
+      occurrences
     });
   };
 
