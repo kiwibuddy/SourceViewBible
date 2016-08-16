@@ -120,7 +120,6 @@ export default class Card extends Component {
         </View>
         <View style={[StyleSheet.styles.discoveryCenter.rightContainer, {justifyContent: 'flex-end'}]}>
           <DuplicateButton onPress={this._onPressDuplicate} />
-          <ShareButton style={{paddingLeft: 10}} />
         </View>
       </Header>
     )
