@@ -111,9 +111,6 @@ export default class SourceWords extends Component {
           <Text style={[styles.wc4, {top: 65, right: 60}]}>{words[14]}</Text>
         </ParallaxMotionView>
 
-        <TouchableOpacity style={styles.wordCloudButton}>
-          <Image source={require('../../Images/common/btn-expand.png')} />
-        </TouchableOpacity>
       </WordCloud>
     );
   };

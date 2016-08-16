@@ -104,10 +104,6 @@ export default class SphereWords extends Component {
           <Text style={[styles.wc4, {top: -10, left: 130}]}>{words[13]}</Text>
           <Text style={[styles.wc4, {top: 65, right: 60}]}>{words[14]}</Text>
         </ParallaxMotionView>
-
-        <TouchableOpacity style={styles.wordCloudButton}>
-          <Image source={require('../../Images/common/btn-expand.png')} />
-        </TouchableOpacity>
       </WordCloud>
     );
   };
