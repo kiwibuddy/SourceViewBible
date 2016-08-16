@@ -300,6 +300,24 @@ export class Book extends Realm.Object {
 }
 Book.schema = BookSchema;
 
+const BookSourceOccurrenceSchema = {
+  name: 'BookSourceOccurrence',
+  primaryKey: 'id',
+  properties: {
+    id: 'int',
+    book: 'Book',
+    name: 'string',
+    occurrence: 'int',
+    firstMonad: 'int',
+    lastMonad: 'int',
+  }
+};
+
+class BookSourceOccurrence extends Realm.Object {
+
+}
+BookSourceOccurrence.schema = BookSourceOccurrenceSchema;
+
 const ChapterSchema = {
   name: 'Chapter',
   primaryKey: 'id',
@@ -532,7 +550,7 @@ export class Sphere extends Realm.Object {
 }
 Sphere.schema = SphereSchema;
 
-const Schema = [Actant, Bible, Book, Chapter, Chronology, Nature, Profession, SourceRelation, Sphere, Count, Content];
+const Schema = [Actant, Bible, Book, BookSourceOccurrence, Chapter, Chronology, Nature, Profession, SourceRelation, Sphere, Count, Content];
 
 const realm = new Realm({
   schema: Schema,

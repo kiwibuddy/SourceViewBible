@@ -4,6 +4,31 @@
 const BOOK_SOURCE_OCCURRENCES = require('../../db/seeds/bso');
 import RNFS from 'react-native-fs';
 
+export async function seedBSOObjects(emdros: Object, realm: Object) {
+  console.log('Seeding BSO Objects...');
+
+  realm.write(() => {
+    for (let bso of BOOK_SOURCE_OCCURRENCES) {
+      const book = realm.objects('Book').find(book => book.textOrder == bso.book_id);
+
+      try {
+        realm.create('BookSourceOccurrence', {
+          id: bso.id,
+          book: book,
+          name: bso.name,
+          occurrence: bso.occurrence_id,
+          firstMonad: bso.first,
+          lastMonad: bso.last,
+        });
+      } catch (error) {
+        console.log(bso);
+        throw error;
+      }
+
+    }
+  });
+};
+
 export async function seedBSO(emdros: Object, realm: Object) {
   console.log('Seeding BSO...');
 
