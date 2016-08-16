@@ -57,7 +57,7 @@ export default class DiscoveryCenter extends Component {
 
     this.contentHeight = 0;
 
-    const cards = [{key: 'getting-started'}];
+    const cards = [{id: 'getting-started'}];
     this.state = {
       cards,
       popover: null
