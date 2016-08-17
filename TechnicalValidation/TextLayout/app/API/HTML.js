@@ -249,12 +249,21 @@ const HTML = `<!DOCTYPE html>
       	if (document.readyState == 'interactive' || document.readyState == 'complete') {
       		ready = true;
 
-          document.addEventListener('touchstart', move, false);
+          document.addEventListener('touchstart', touchStarted, false);
           document.addEventListener('touchmove', move, false);
+          document.addEventListener('touchend', touchEnded, false);
+
+          function touchStarted(e) {
+            document.getElementById('table').style.transform = 'translate3d(100pt, 0px, 0px)';
+          }
 
           function move(e) {
             var x = e.touches[0].pageX;
             document.getElementById('table').style.transform = 'translate3d(' + x +'pt, 0px, 0px)';
+          }
+
+          function touchEnded(e) {
+            // document.getElementById('table').style.transform = 'translate3d(0pt, 0px, 0px)';
           }
       	}
       };
