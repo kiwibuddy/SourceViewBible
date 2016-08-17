@@ -48,7 +48,12 @@ const Genesis1_1 = {
 
 const Isaiah37_16_To_38_20 = {
   first: 1031400,
-  last: 1032747
+  last: 1032838
+};
+
+const Psalm72 = {
+  first: 884957,
+  last: 885806
 };
 
 type State = {
