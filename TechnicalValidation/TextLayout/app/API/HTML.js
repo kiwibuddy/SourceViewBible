@@ -240,6 +240,25 @@ const HTML = `<!DOCTYPE html>
   </head>
   <body id="scripture">
     {{BODY}}
+
+    <script type="text/javascript">
+      var ready = false;
+
+      document.onreadystatechange = function() {
+      	if (ready) return;
+      	if (document.readyState == 'interactive' || document.readyState == 'complete') {
+      		ready = true;
+
+          document.addEventListener('touchstart', move, false);
+          document.addEventListener('touchmove', move, false);
+
+          function move(e) {
+            var x = e.touches[0].pageX;
+            document.getElementById('table').style.transform = 'translate3d(' + x +'pt, 0px, 0px)';
+          }
+      	}
+      };
+    </script>
   </body>
 </html>
 `;
