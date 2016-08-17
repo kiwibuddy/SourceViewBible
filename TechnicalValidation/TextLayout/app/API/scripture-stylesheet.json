@@ -51,7 +51,7 @@
            "docindexfeature" : "docindex",
            "get" : ["has_blank_line_before"],
            "end" : "",
-           "start" : "</p></td></tr><tr><td class=\"sourceTitle\" /><td class=\"textTitle\">"
+           "start" : "</p></td></tr>\n<tr><td class=\"sourceTitle\" /><td class=\"textTitle\">"
         },
         "table" : {
            "docindexfeature" : "docindex",
