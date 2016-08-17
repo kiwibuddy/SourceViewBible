@@ -242,6 +242,9 @@ const HTML = `<!DOCTYPE html>
     {{BODY}}
 
     <script type="text/javascript">
+      var opened = false;
+      var openedWidth = 220;
+      var closedWidth = 0;
       var ready = false;
 
       document.onreadystatechange = function() {
@@ -254,7 +257,9 @@ const HTML = `<!DOCTYPE html>
           document.addEventListener('touchend', touchEnded, false);
 
           function touchStarted(e) {
-            document.getElementById('table').style.transform = 'translate3d(100pt, 0px, 0px)';
+            opened = !opened;
+            var width = (opened ? openedWidth : closedWidth);
+            document.getElementById('table').style.transform = 'translate3d(' + width + 'pt, 0px, 0px)';
           }
 
           function move(e) {
