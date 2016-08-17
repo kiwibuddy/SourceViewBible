@@ -198,7 +198,7 @@ export default class DiscoveryCenter extends Component {
   };
 
   _onPressOccurrences = (card: Object) => {
-    this.props.navigate(occurrencesURL({title: Localizable.t('occurrences'), card, modal: true}), {replace: true});
+    this.props.navigate(occurrencesURL({title: Localizable.t('passages'), card, modal: true}), {replace: true});
   };
 
   _showPopover = (props: Object, onComplete: Function) => {

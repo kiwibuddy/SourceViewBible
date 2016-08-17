@@ -74,18 +74,18 @@
         "other": "{{localizedCount}} words"
       }
     },
-    "explore-occurrences": {
-      "text": "Explore Occurrences",
+    "explore-passages": {
+      "text": "Explore Passages",
       "count": {
-        "one": "Explore 1 occurrence",
-        "other": "Explore {{localizedCount}} occurrences"
+        "one": "Explore 1 passage",
+        "other": "Explore {{localizedCount}} passages"
       }
     },
     "more": "More",
     "done": "Done",
     "cancel": "Cancel",
     "back": "Back",
-    "occurrences": "Occurrences",
+    "passages": "Passages",
     "bcv-reference": "{{book}} {{reference}}",
     "so-reference": "{{source}} {{number}}",
     "bso-reference": "{{book}} {{source}} {{number}}",

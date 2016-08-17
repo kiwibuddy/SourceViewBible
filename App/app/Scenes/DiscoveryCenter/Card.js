@@ -192,7 +192,7 @@ export default class Card extends Component {
     const filterCount = card.filters.length;
     if (occurrenceCount == 0 || filterCount == 0) return null;
 
-    const title = (occurrenceCount >= BookSourceOccurrence.MAXIMUM_NUMBER_OF_DISPLAYABLE_OCCURRENCES ? Localizable.t('explore-occurrences.text') : Localizable.t('explore-occurrences.count', {count: occurrenceCount, localizedCount: Localizable.toNumber(occurrenceCount, {precision: 0})}));
+    const title = (occurrenceCount >= BookSourceOccurrence.MAXIMUM_NUMBER_OF_DISPLAYABLE_OCCURRENCES ? Localizable.t('explore-passages.text') : Localizable.t('explore-passages.count', {count: occurrenceCount, localizedCount: Localizable.toNumber(occurrenceCount, {precision: 0})}));
 
     return (
       <TouchableOpacity style={styles.readButton} onPress={this._onPressOccurrences}>

@@ -65,7 +65,7 @@ export default class DiscoveryCenterOccurrences extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <NavigationBar title={Localizable.t('occurrences')}>
+        <NavigationBar title={Localizable.t('passages')}>
           <TouchableOpacity
             onPress={() => this.props.navigate(discoveryCenterURL({title: Localizable.t('discovery-center'), modal: true}), {replace: true})}
             style={{position: 'absolute', left: 16}}

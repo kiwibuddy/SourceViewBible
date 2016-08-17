@@ -78,7 +78,7 @@ class OccurrenceToolbar extends Component {
       nextRoute = readerURL({bookID: book.id, anchor: `source-${nextOccurrence.name}-${nextOccurrence.number}`, title: book.name, description: bsoReference, card, occurrenceIndex: nextOccurrenceIndex, occurrences});
     }
 
-    const occurrencesRoute = occurrencesURL({title: Localizable.t('occurrences'), card, modal: true});
+    const occurrencesRoute = occurrencesURL({title: Localizable.t('passages'), card, modal: true});
 
     return (
       <Navigation.Toolbar style={styles.toolbar}>
