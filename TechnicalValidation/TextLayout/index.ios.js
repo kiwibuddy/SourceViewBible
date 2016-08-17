@@ -24,6 +24,7 @@
 const RNFS = require('react-native-fs');
 
 import Emdros from './app/API/Emdros';
+import HTML from './app/API/HTML';
 
 const Bible = {
   first: 1,
@@ -45,6 +46,11 @@ const Genesis1_1 = {
   last: 100,
 };
 
+const Isaiah37_16_To_38_20 = {
+  first: 1031400,
+  last: 1032747
+};
+
 type State = {
   scripture: any;
 };
@@ -62,12 +68,12 @@ class TextLayout extends Component {
 
   componentDidMount() {
     Emdros.openDatabase().then(() => {
-      const options = {monadSet: {first: 22900, last: 22978}};
+      const options = {monadSet: Isaiah37_16_To_38_20};
        Emdros.scripture(options).then(scripture => {
          //  console.log(scripture);
          this._saveScripture(scripture);
 
-        //  this.setState({scripture});
+         this.setState({scripture});
        }).catch(error => {
          console.log(error);
        });
@@ -77,28 +83,30 @@ class TextLayout extends Component {
   render() {
     if (this.state.scripture == null) return null;
 
-    return this._renderWebView();
-    // return this._renderPlainText();
+    // return this._renderWebView();
+    return this._renderPlainText();
   }
 
   _renderWebView() {
+    const html =  HTML.replace('{{BODY}}', this.state.scripture);
     return <WebView
       decelerationRate="normal"
       style={styles.container}
-      source={{html: this.state.scripture}}
+      source={{html}}
     />
   };
 
   _renderPlainText() {
     return (
       <ScrollView style={styles.container}>
-        <Text>{this.state.scripture}</Text>
+        <Text style={{fontSize: 10}}>{this.state.scripture}</Text>
       </ScrollView>
     );
   };
 
   _saveScripture(scripture) {
-    RNFS.writeFile('/tmp/Scripture.html', scripture, 'utf8')
+    const html = HTML.replace('{{BODY}}', scripture);
+    RNFS.writeFile('/tmp/Scripture.html', html, 'utf8')
     .then((success) => {
       console.log('Scripture written to /tmp/Scripture.html');
     })

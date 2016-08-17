@@ -10,13 +10,13 @@ const HTML = `
   <head>
     <title></title>
   </head>
-  <body>
+  <body id="scripture">
     {{BODY}}
   </body>
 </html>
 `;
 
-const SCRIPTURE_STYLESHEET = require('./svbdemo-stylesheet.json');
+const SCRIPTURE_STYLESHEET = require('./scripture-stylesheet.json');
 
 function openDatabase() {
   return new Promise((resolve, reject) => {
@@ -61,8 +61,7 @@ function scripture(options: Object) {
     }
 
     DB.string(monadSet.first, monadSet.last, style).then((result) => {
-      const scripture = HTML.replace('{{BODY}}', result);
-      resolve(scripture);
+      resolve(result);
     }).catch((error) => {
       reject(error);
     });
