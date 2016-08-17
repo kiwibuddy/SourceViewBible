@@ -86,13 +86,14 @@
            "docindexfeature" : "docindex",
            "end" : "",
            "get" : ["is_first_in_poetry_section"],
-           "start" : ""
-
+           "start" : "{{ if featureequal 0 'true' }}{{ setvar 'PoetryLineKind' }}{{ setvarend }}{{ else }}{{ setvar 'PoetryLineKind' }}textPoetryStanzaFirst{{ setvarend }}{{ endif }}"
         },
         "PoetryLine" : {
            "docindexfeature" : "docindex",
-           "end" : "</p>\n",
-           "start" : "{{ setvar 'StartParagraph' }}true{{ setvarend }}{{ setvar 'ParagraphType' }}textPoetry{{ setvarend }}"
+           "end" : "\
+{{ setvar 'PoetryLineKind' }}{{ emitvar 'PoetryZeroIndent' }}{{ setvarend }}\
+</p>\n",
+           "start" : "{{ setvar 'StartParagraph' }}true{{ setvarend }}{{ setvar 'ParagraphType' }}textPoetry {{ emitvar 'PoetryLineKind' }}{{ setvarend }}"
         },
         "VerseNumberToken":{
           "docindexfeature":"docindex",
