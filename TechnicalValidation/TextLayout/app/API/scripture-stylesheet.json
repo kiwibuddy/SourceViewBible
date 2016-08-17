@@ -39,13 +39,13 @@
           ],
           "end" : "",
           "start":"\
-{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }} nonCanonicalText\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}\
+{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}nonCanonicalText\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}\
 {{ feature 0 }}"
         },
         "CenteredPsalmHeading" : {
            "docindexfeature" : "docindex",
-           "end" : "",
-           "start" : "CenteredPsalmHeading!!!"
+           "end" : "</p></td></tr>",
+           "start" : "{{ setvar 'StartParagraph' }}true{{ setvarend }}<tr><td class=\"sourceTitle\" /><td class=\"textTitle\">"
         },
         "CenteredHeading" : {
            "docindexfeature" : "docindex",

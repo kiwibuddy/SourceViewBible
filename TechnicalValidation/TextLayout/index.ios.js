@@ -52,7 +52,7 @@ const Isaiah37_16_To_38_20 = {
 };
 
 const Psalm72 = {
-  first: 884957,
+  first: 884954,
   last: 885806
 };
 
