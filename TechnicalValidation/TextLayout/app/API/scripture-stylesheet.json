@@ -39,7 +39,7 @@
           ],
           "end" : "",
           "start":"\
-{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}\
+{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}\
 {{ feature 0 }}"
         },
         "CenteredPsalmHeading" : {
@@ -82,20 +82,20 @@
            "get" : [
               "is_indented"
            ],
-           "start" : ""
+           "start" : "{{ setvar 'TextKind' }}Poetry{{ setvarend }}"
         },
         "Stanza" : {
            "docindexfeature" : "docindex",
            "end" : "",
            "get" : ["is_first_in_poetry_section"],
-           "start" : "{{ if featureequal 0 'true' }}{{ setvar 'PoetryLineKind' }}{{ setvarend }}{{ else }}{{ setvar 'PoetryLineKind' }}textPoetryStanzaFirst{{ setvarend }}{{ endif }}"
+           "start" : "{{ if featureequal 0 'true' }}{{ setvar 'PoetryLineKind' }}{{ setvarend }}{{ else }}{{ setvar 'PoetryLineKind' }} textPoetryStanzaFirst{{ setvarend }}{{ endif }}{{ setvar 'TextKind' }}Poetry{{ setvarend }}"
         },
         "PoetryLine" : {
            "docindexfeature" : "docindex",
            "end" : "\
-{{ setvar 'PoetryLineKind' }}{{ emitvar 'PoetryZeroIndent' }}{{ setvarend }}\
+{{ setvar 'PoetryLineKind' }}{{ setvarend }}\
 </p>\n",
-           "start" : "{{ setvar 'StartParagraph' }}true{{ setvarend }}{{ setvar 'ParagraphType' }}textPoetry {{ emitvar 'PoetryLineKind' }}{{ setvarend }}"
+           "start" : "{{ setvar 'StartParagraph' }}true{{ setvarend }}{{ setvar 'ParagraphType' }}textPoetry{{ emitvar 'PoetryLineKind' }}{{ setvarend }}"
         },
         "Italics" : {
            "docindexfeature" : "docindex",
@@ -109,7 +109,7 @@
             "surface",
           ],
           "start":"\
-{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}\
+{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}\
 <a id=\"{{ emitvar 'verse_anchor' }}\" class=\"textVerse\">{{ featurenomangle 0 }}</a>"
         },
         "Verse":{
@@ -128,7 +128,7 @@
           ],
           "end":"</p>\n",
           "start" : "\
-{{ setvar 'StartParagraph' }}true{{ setvarend }}\
+{{ setvar 'StartParagraph' }}true{{ setvarend }}{{ setvar 'TextKind' }}Prose{{ setvarend }}\
 {{ if featureequal 0 'true' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ else }}{{ setvar 'ParagraphType' }}textIndent{{ setvarend }}{{ endif }}"
         },
         "ChapterNumberToken":{
@@ -138,7 +138,7 @@
             "surface",
           ],
           "start":"\
-{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}\
+{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}\
 <a id=\"chapter-{{ feature 0 }}\" class=\"textChapter\">{{ featurenomangle 0 }}</a>"
         },
         "Token":{
@@ -148,7 +148,7 @@
             "surface",
           ],
           "start":"\
-{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}\
+{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}\
 {{ feature 0 }}"
         },
         "NonWordToken":{
@@ -158,7 +158,7 @@
             "surface",
           ],
           "start":"\
-{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}\
+{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}\
 {{ feature 0 }}"
         },
         "SpaceToken" : {
