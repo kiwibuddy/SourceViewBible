@@ -37,19 +37,21 @@
           "get":[
             "surface",
           ],
-          "start" : "",
-          "end" : ""
+          "end" : "",
+          "start":"\
+{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}\
+{{ feature 0 }}"
         },
         "CenteredPsalmHeading" : {
            "docindexfeature" : "docindex",
-           "start" : "",
-           "end" : ""
+           "end" : "",
+           "start" : "CenteredPsalmHeading!!!"
         },
         "CenteredHeading" : {
            "docindexfeature" : "docindex",
            "get" : ["has_blank_line_before"],
-           "start" : "",
-           "end" : ""
+           "end" : "",
+           "start" : "</p></td></tr><tr><td class=\"sourceTitle\" /><td class=\"textTitle\">"
         },
         "table" : {
            "docindexfeature" : "docindex",
@@ -94,6 +96,11 @@
 {{ setvar 'PoetryLineKind' }}{{ emitvar 'PoetryZeroIndent' }}{{ setvarend }}\
 </p>\n",
            "start" : "{{ setvar 'StartParagraph' }}true{{ setvarend }}{{ setvar 'ParagraphType' }}textPoetry {{ emitvar 'PoetryLineKind' }}{{ setvarend }}"
+        },
+        "Italics" : {
+           "docindexfeature" : "docindex",
+           "end" : "</i>",
+           "start" : "<i>"
         },
         "VerseNumberToken":{
           "docindexfeature":"docindex",

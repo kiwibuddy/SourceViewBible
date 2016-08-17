@@ -17,6 +17,7 @@ const HTML = `
 `;
 
 const SCRIPTURE_STYLESHEET = require('./scripture-stylesheet.json');
+// const SCRIPTURE_STYLESHEET = require('./svbdemo-stylesheet.json');
 
 function openDatabase() {
   return new Promise((resolve, reject) => {
