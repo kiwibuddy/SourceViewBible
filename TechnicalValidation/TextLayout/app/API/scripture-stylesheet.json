@@ -173,7 +173,7 @@
       },
       "postprocess":[
         {
-          "prefix":"<table class=\"\" style=\"transform: translate3d(0pt, 0px, 0px)\">\n"
+          "prefix":"<table class=\"\" style=\"transition: .3s; transform: translate3d(0pt, 0px, 0px)\">\n"
         },
         {
           "suffix":"</table>"
