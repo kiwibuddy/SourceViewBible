@@ -12,10 +12,19 @@ module.exports = `
 <!DOCTYPE html>
 <html>
   <head>
-    <title></title>
+    <title>Scripture</title>
+    <meta charset="utf-8"/>
     <style type="text/css">
+      p, b {
+        font-weight: normal;
+        margin: 0;
+        padding: 0;
+        line-height: 24pt;
+        -webkit-margin-before: 0;
+        -webkit-margin-after: ;
+      }
       body {
-        font-family: charter, georgia;
+        font-family: Georgia;
         font-size: 13pt;
         color: #323B43;
         line-height: 24pt;
@@ -25,6 +34,7 @@ module.exports = `
         padding:0;
         border-spacing: 0;
         border-collapse: collapse;
+        overflow: hidden;
         margin-left: -220pt;
       }
       .showSource {
@@ -56,11 +66,12 @@ module.exports = `
       .sourceTitle {
         font-family: -apple-system, "Helvetica Neue", "Lucida Grande";
         font-size: .8em;
+        line-height: 1em;
         color: #9B9B9B;
         text-align: right;
         white-space: nowrap;
-        padding-top: 13pt;
         padding-right: 15pt;
+        margin-top: 8pt;
         text-transform: uppercase;
         width: 210pt;
         display: block;
@@ -69,34 +80,47 @@ module.exports = `
         padding: 0 5pt;
       }
       .textTitle {
-        font-family: charter;
+        font-family: Georgia;
         font-weight: bold;
-        font-style: italic;
-        font-size: 1.5em;
+        font-size: 1em;
+        line-height: 3em;
         color: #323B43;
         text-align: Center;
       }
+      .textSubTitle {
+        color: #323B43;
+        font-style: italic;
+      }
       .textSection {
-        font-family: charter;
+        font-family: Georgia;
         font-style: italic;
         font-size: 1.5em;
         color: #323B43;
         text-align: Center;
       }
       .textChapter {
-        font-family: charter;
+        font-family: Gurmukhi MN;
         color: #CF1E00;
         font-size: 1em;
         position: relative;
         top: 0;
+        font-weight: normal;
       }
       .textVerse {
-        font-size: 1em;
+        font-family: Gurmukhi MN;
+        font-size: .65em;
         position: relative;
         top: -0.4em;
+        color: #9B9B9B;
       }
-      .textIndent {
-        padding-left: 2em;
+      .textIndent, .textPoetryStanzaFirst {
+        text-indent: 2em;
+      }
+      .textPoetryFirst {
+        margin-left: 2em;
+      }
+      .textPoetry {
+        margin-left: 2em;
       }
       ${CSS}
     </style>

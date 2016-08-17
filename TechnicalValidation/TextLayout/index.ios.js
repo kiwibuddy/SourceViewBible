@@ -73,7 +73,7 @@ class TextLayout extends Component {
 
   componentDidMount() {
     Emdros.openDatabase().then(() => {
-      const options = {monadSet: Psalm72};
+      const options = {monadSet: Isaiah37_16_To_38_20};
        Emdros.scripture(options).then(scripture => {
          //  console.log(scripture);
          this._saveScripture(scripture);
