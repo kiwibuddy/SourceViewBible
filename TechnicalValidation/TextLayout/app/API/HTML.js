@@ -242,33 +242,45 @@ const HTML = `<!DOCTYPE html>
     {{BODY}}
 
     <script type="text/javascript">
+      var threshold = 30;
       var opened = false;
       var openedWidth = 220;
       var closedWidth = 0;
       var ready = false;
+      var originalX = null;
 
       document.onreadystatechange = function() {
       	if (ready) return;
       	if (document.readyState == 'interactive' || document.readyState == 'complete') {
       		ready = true;
 
-          document.addEventListener('touchstart', touchStarted, false);
-          document.addEventListener('touchmove', move, false);
-          document.addEventListener('touchend', touchEnded, false);
+          document.addEventListener('touchstart', handleTouchStart, false);
+          document.addEventListener('touchmove', handleTouchMove, false);
+          document.addEventListener('touchend', handleTouchEnd, false);
 
-          function touchStarted(e) {
-            opened = !opened;
+          function handleTouchStart(e) {
+            originalX = evt.touches[0].clientX;
+          }
+
+          function handleTouchMove(e) {
+            var x = e.touches[0].pageX;
+            var diff = Math.abs(originalX - x);
+            if (diff > threshold) {
+              opened = !opened;
+              done();
+            } else {
+              document.getElementById('table').style.transform = 'translate3d(' + x +'pt, 0px, 0px)';
+            }
+          }
+
+          function handleTouchEnd(e) {
+            done();
+          }
+
+          function done() {
+            originalX = null;
             var width = (opened ? openedWidth : closedWidth);
             document.getElementById('table').style.transform = 'translate3d(' + width + 'pt, 0px, 0px)';
-          }
-
-          function move(e) {
-            var x = e.touches[0].pageX;
-            document.getElementById('table').style.transform = 'translate3d(' + x +'pt, 0px, 0px)';
-          }
-
-          function touchEnded(e) {
-            // document.getElementById('table').style.transform = 'translate3d(0pt, 0px, 0px)';
           }
       	}
       };
