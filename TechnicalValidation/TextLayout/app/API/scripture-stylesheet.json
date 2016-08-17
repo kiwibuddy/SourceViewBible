@@ -109,6 +109,7 @@
             "surface",
           ],
           "start":"\
+{{ if featureequal 0 '0' }}{{ setvar 'ParagraphType' }}textPoetry{{ setvarend }}{{ endif }}\
 {{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}\
 <a id=\"{{ emitvar 'verse_anchor' }}\" class=\"textVerse\">{{ featurenomangle 0 }}</a>"
         },
