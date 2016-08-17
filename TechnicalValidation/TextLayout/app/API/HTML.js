@@ -4,6 +4,9 @@ const HTML = `<!DOCTYPE html>
     <title>Scripture</title>
     <meta charset="utf-8"/>
     <style type="text/css">
+      html, body {
+        overflow-x: hidden !important;
+      }
       p, b {
         font-weight: normal;
         margin: 0;
@@ -22,12 +25,7 @@ const HTML = `<!DOCTYPE html>
         padding:0;
         border-spacing: 0;
         border-collapse: collapse;
-        overflow: hidden;
         margin-left: -220pt;
-      }
-      .showSource {
-        margin-right: -135pt;
-        margin-left: 0;
       }
       tr {
         margin:0;

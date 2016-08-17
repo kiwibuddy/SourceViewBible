@@ -88,8 +88,8 @@ class TextLayout extends Component {
   render() {
     if (this.state.scripture == null) return null;
 
-    // return this._renderWebView();
-    return this._renderPlainText();
+    return this._renderWebView();
+    // return this._renderPlainText();
   }
 
   _renderWebView() {
