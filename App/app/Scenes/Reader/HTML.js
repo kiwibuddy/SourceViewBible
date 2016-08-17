@@ -21,7 +21,6 @@ module.exports = `
         padding: 0;
         line-height: 24pt;
         -webkit-margin-before: 0;
-        -webkit-margin-after: ;
       }
       body {
         font-family: Georgia;
