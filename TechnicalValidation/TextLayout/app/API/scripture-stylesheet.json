@@ -27,6 +27,7 @@
             "source_color"
           ],
           "start":"\
+{{ setvar 'StartParagraph' }}true{{ setvarend }}\
 <tr id=\"source-{{ feature 0 }}-{{ feature 1 }}\" class=\"source{{ featurenomangle 2 }}\">\n\
 <td class=\"sourceTitle\">{{ feature 0 }} {{ featurenomangle 1 }}</td>\n\
 <td class=\"sourceText\">\n"
@@ -91,8 +92,7 @@
         "PoetryLine" : {
            "docindexfeature" : "docindex",
            "end" : "</p>\n",
-           "start" : "<p class=\"textPoetry\">"
-
+           "start" : "{{ setvar 'StartParagraph' }}true{{ setvarend }}{{ setvar 'ParagraphType' }}textPoetry{{ setvarend }}"
         },
         "VerseNumberToken":{
           "docindexfeature":"docindex",
@@ -100,7 +100,9 @@
           "get":[
             "surface",
           ],
-          "start":"<a id=\"{{ emitvar 'verse_anchor' }}\" class=\"textVerse\">{{ featurenomangle 0 }}</a>"
+          "start":"\
+{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}\
+<a id=\"{{ emitvar 'verse_anchor' }}\" class=\"textVerse\">{{ featurenomangle 0 }}</a>"
         },
         "Verse":{
           "docindexfeature":"docindex",
@@ -117,7 +119,9 @@
             "is_flush_left"
           ],
           "end":"</p>\n",
-          "start" : "{{ if featureequal 0 'true' }}<p>{{ else }}<p class=\"textIndent\">{{ endif }}"
+          "start" : "\
+{{ setvar 'StartParagraph' }}true{{ setvarend }}\
+{{ if featureequal 0 'true' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ else }}{{ setvar 'ParagraphType' }}textIndent{{ setvarend }}{{ endif }}"
         },
         "ChapterNumberToken":{
           "docindexfeature":"docindex",
@@ -125,7 +129,9 @@
           "get":[
             "surface",
           ],
-          "start":"<a id=\"chapter-{{ feature 0 }}\" class=\"textChapter\">{{ featurenomangle 0 }}</a>"
+          "start":"\
+{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}\
+<a id=\"chapter-{{ feature 0 }}\" class=\"textChapter\">{{ featurenomangle 0 }}</a>"
         },
         "Token":{
           "docindexfeature":"docindex",
@@ -133,7 +139,9 @@
           "get":[
             "surface",
           ],
-          "start":"{{ feature 0 }}"
+          "start":"\
+{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}\
+{{ feature 0 }}"
         },
         "NonWordToken":{
           "docindexfeature":"docindex",
@@ -141,7 +149,9 @@
           "get":[
             "surface",
           ],
-          "start":"{{ feature 0 }}"
+          "start":"\
+{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}\
+{{ feature 0 }}"
         },
         "SpaceToken" : {
           "docindexfeature" : "docindex",
