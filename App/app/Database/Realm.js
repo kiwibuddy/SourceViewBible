@@ -205,6 +205,30 @@ export class Actant extends Realm.Object {
     return sources;
   }
 
+  get isDivine(): boolean {
+    return this.natures.find(nature => nature.id == 3) !== undefined;
+  }
+
+  get isHuman(): boolean {
+    return this.natures.find(nature => nature.id == 4) !== undefined;
+  }
+
+  get isIndividual(): boolean {
+    return this.actantNumber == 2;
+  }
+
+  get isFemale(): boolean {
+    return this.gender == 1;
+  }
+
+  get isAngelic(): boolean {
+    return this.natures.find(nature => nature.id == 1) !== undefined;
+  }
+
+  get isDemonic(): boolean {
+    return this.natures.find(nature => nature.id == 2) !== undefined;
+  }
+
   get actantNumberDescription(): ?string {
     switch(this.actantNumber) {
       case 1:

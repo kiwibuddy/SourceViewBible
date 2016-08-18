@@ -13,23 +13,34 @@ type Props = {
 
 const SourceIcon = (props: Props) => {
   const SOURCE_TYPE_MAP = {
-    "The Narrator": "narrator",
-    "God": "god",
-    "Jesus": "god"
+    'The Narrator': 'narrator',
+    'God': 'god',
+    'Jesus': 'god'
   };
   const ICON_MAP = {
-    "narrator": "avatar-narrator",
-    "god": "avatar-divine",
+    'narrator': 'avatar-narrator',
+    'god': 'avatar-divine',
   };
 
   const { size, source, style } = props;
-  const sourceType = SOURCE_TYPE_MAP[source.name] || "support";
+  const sourceType = SOURCE_TYPE_MAP[source.name] || 'support';
   const color = Colors.sources[sourceType].tint;
-  const iconName = ICON_MAP[sourceType] || "avatar-human-group";
+  const defaultIconName = 'avatar-human-group';
+
+  let iconName = ICON_MAP[sourceType];
+  if (!iconName) {
+    if (source.isHuman) {
+      if (source.isIndividual) {
+        iconName = source.isFemale ? 'avatar-human-female' : 'avatar-human-male';
+      } else {
+        iconName = 'avatar-human-group';
+      }
+    }
+  }
 
   return (
     <Icon
-      name={iconName}
+      name={iconName || defaultIconName}
       style={[style, {color: color}]}
       size={size}
     />
