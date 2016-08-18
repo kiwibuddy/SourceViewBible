@@ -31,7 +31,6 @@ const FONT_STEP_SIZE = 2;
 
 type Props = {
   navigate: Function,
-  onDone: Function,
 };
 
 type State = {
@@ -46,17 +45,21 @@ export default class Settings extends Component {
 
   constructor(props: Props) {
     super(props);
+
+    let showNumbers = Preference.booleanForKey(Preference.Keys.Reader.showNumbers);
+    if (showNumbers == null) showNumbers = true;
+
     this.state = {
-      fontStepSize: 0,
-      spheres: [],
-      showNumbers: true
+      fontStepSize: Preference.numberForKey(Preference.Keys.Reader.fontStepSize) || 0,
+      spheres: Preference.objectForKey(Preference.Keys.Reader.spheres) || [],
+      showNumbers
     }
   }
 
   render() {
     const { fontStepSize } = this.state;
     const fontSize = BASE_FONT_SIZE + (FONT_STEP_SIZE * fontStepSize);
-    
+
     return (
       <View style={styles.container}>
         <NavigationBar title={Localizable.t('settings')}>
@@ -81,6 +84,7 @@ export default class Settings extends Component {
                 onValueChange={this._onFontSizeChanged}
                 step={0.25}
                 style={styles.slider}
+                value={this.state.fontStepSize / 4}
               />
             </View>
           </View>
@@ -170,6 +174,9 @@ export default class Settings extends Component {
   };
 
   _onDone = () => {
+    Preference.setNumberForKey(this.state.fontStepSize, Preference.Keys.Reader.fontStepSize);
+    Preference.setObjectForKey(this.state.spheres, Preference.Keys.Reader.spheres);
+    Preference.setBooleanForKey(this.state.showNumbers, Preference.Keys.Reader.showNumbers);
     this.props.navigate(BACK);
   };
 };

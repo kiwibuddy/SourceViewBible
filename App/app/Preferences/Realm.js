@@ -93,7 +93,8 @@ const PreferenceSchema = {
   primaryKey: 'key',
   properties: {
     key: 'string',
-    number: 'double'
+    number: {type: 'double', optional: true},
+    string: {type: 'string', optional: true},
   }
 };
 
@@ -107,6 +108,36 @@ export class Preference extends Realm.Object {
   static numberForKey(key: string): ?number {
     const preference = realm.objectForPrimaryKey('Preference', key);
     return preference ? preference.number : null;
+  }
+
+  static setStringForKey(string: string, key: string) {
+    realm.write(() => {
+      realm.create('Preference', {key, string}, true);
+    });
+  }
+
+  static stringForKey(key: string): ?string {
+    const preference = realm.objectForPrimaryKey('Preference', key);
+    return preference ? preference.string : null;
+  }
+
+  static setObjectForKey(object: any, key: string) {
+    const string = JSON.stringify(object);
+    Preference.setStringForKey(string, key);
+  }
+
+  static objectForKey(key: string): ?any {
+    const preference = Preference.stringForKey(key);
+    return preference ? JSON.parse(preference) : null;
+  }
+
+  static setBooleanForKey(bool: boolean, key: string) {
+    Preference.setNumberForKey(bool ? 1 : 0, key);
+  }
+
+  static booleanForKey(key: string): ?boolean {
+    const preference = Preference.numberForKey(key);
+    return preference != null ? (preference != 0) : null;
   }
 }
 Preference.schema = PreferenceSchema;
@@ -179,7 +210,10 @@ History.schema = HistorySchema;
 const Schema = [Discovery, Preference, History];
 
 const realm = new Realm({
-  schema: Schema
+  schema: Schema,
+  schemaVersion: 2,
+  migration: function(oldRealm, newRealm) {
+  }
 });
 
 console.log('Preferences Path: ' + realm.path);
