@@ -54,7 +54,10 @@ export default class Settings extends Component {
             </View>
           </View>
 
-          <View style={styles.section}>
+          <View style={styles.sectionHeaderContainer}>
+            <Text style={styles.sectionHeaderTitle}>{Localizable.t('spheres.text').toLocaleUpperCase()}</Text>
+          </View>
+          <View style={[styles.section, {marginTop: 8}]}>
             <TouchableOpacity style={styles.row} onPress={() => {}}>
 
             </TouchableOpacity>
@@ -111,6 +114,18 @@ const styles = StyleSheet.create({
     borderTopColor: StyleSheet.styles.separator.backgroundColor,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: StyleSheet.styles.separator.backgroundColor,
+  },
+  sectionHeaderContainer: {
+    marginTop: 16,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingLeft: 15,
+  },
+  sectionHeaderTitle: {
+    color: '#59626a',
+    marginTop: 8,
+    fontSize: 13,
+    fontWeight: 'bold',
   },
   row: {
     height: 44,
