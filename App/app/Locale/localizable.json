@@ -30,6 +30,8 @@
         "other": "{{count}} spheres"
       }
     },
+    "add": "Add",
+    "added": "Added",
     "range-of": "{{current}} of {{total}}",
     "settings": "Settings",
     "chapter-and-verse-numbers": "Chapter and Verse Numbers",
