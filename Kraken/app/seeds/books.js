@@ -34,6 +34,7 @@ export async function seedBooks(emdros: Object, realm: Object) {
   await seedSourceTypes(emdros, realm);
 
   await seedSources(emdros, realm);
+  await seedSourceSourceTypes(emdros, realm);
 
   await seedSourceWordCloud(emdros, realm);
 
@@ -149,6 +150,61 @@ async function seedBookWordCloud(emdros, realm) {
       seedObjectWordCloud(realm, 'Book', book.id, words);
     });
   }
+}
+
+
+async function seedSourceSourceTypes(emdros, realm) {
+  console.log('Seeding Book Source Relation Source Types...');
+  const query = `
+  {
+    "objectTypeName": "Book",
+    "feature": "DJHRef",
+    "buckets": {
+      "objectTypeName": "SourceActant",
+      "feature": ["actant_id"],
+      "buckets": {
+        "objectTypeName": "Source",
+        "feature": ["source_color"],
+        "buckets": {
+          "objectTypeName": "Token",
+        }
+      }
+    }
+  }
+  `;
+
+  return new Promise((resolve, reject) => {
+    emdros.query(query, {count: true}).then((data) => {
+      for (let [index, book] of realm.objects('Book').entries()) {
+        console.log(`Seeding ${book.name} Source Relation Sources Types...`);
+
+        const bookData = data["Book"]["DJHRef"][book.DJHRef];
+        if (bookData != null) {
+          const actantData = bookData["SourceActant"]["actant_id"];
+          if (actantData != null) {
+            Object.keys(actantData).forEach(actantID => {
+              const sourceRelation = book.sourceRelations.find(sourceRelation => sourceRelation.source.id === parseInt(actantID));
+              if (sourceRelation) {
+                const sourceData = actantData[actantID]["Source"];
+                if (sourceData != null) {
+                  realm.write(() => {
+                    const sourceTypeData = sourceData["source_color"];
+                    seedObjectSourceTypeWordCounts(realm, 'SourceRelation', sourceRelation.id, sourceTypeData);
+                  });
+                }
+              } else {
+                console.log('No Source Relation??');
+              }
+            });
+          }
+        }
+      }
+
+      resolve();
+    }).catch((error) => {
+      console.log(error);
+    })
+  });
 }
 
 async function seedSourceWordCloud(emdros, realm) {

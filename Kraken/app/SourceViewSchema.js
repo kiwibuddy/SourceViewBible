@@ -200,6 +200,9 @@ const SourceRelationSchema = {
   properties: {
     id: 'string',
     source: 'Actant',
+    sourceTypeCount: {type: 'int', default: 0},
+    sourceTypeCounts: {type: 'list', objectType: 'Count'},
+    principalSourceType: {type: 'string', default: 'support'},
     wordCount: {type: 'int', default: 0},
     words: {type: 'list', objectType: 'Count'},
   }
