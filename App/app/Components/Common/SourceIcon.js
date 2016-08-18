@@ -41,7 +41,7 @@ const SourceIcon = (props: Props) => {
   return (
     <Icon
       name={iconName || defaultIconName}
-      style={[style, {color: color}]}
+      style={[{color: color}, style]}
       size={size}
     />
   );

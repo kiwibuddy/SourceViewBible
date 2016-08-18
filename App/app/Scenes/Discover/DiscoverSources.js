@@ -217,7 +217,6 @@ const styles = StyleSheet.create({
   icon: {
     alignSelf: 'center',
     marginTop: 7,
-    color: Colors.tint
   },
   sourceTitle: {
     flex: 0,

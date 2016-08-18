@@ -21,6 +21,7 @@ import {
 import { SourcesBarChart, SpheresBarChart, WordCloud } from '../../Components/Charts';
 import ParallaxMotionView from '../../Components/Common/ParallaxMotionView';
 import Icon from '../../Components/Common/Icon';
+import SourceIcon from '../../Components/Common/SourceIcon';
 
 import { sourceURL, sourceBooksURL, sourceConversationsURL, sourceSpheresURL, sourceWordsURL } from '../../Navigation';
 
@@ -90,8 +91,8 @@ export default class SourceOverview extends Component {
               <Image style={styles.sourceBackground} source={require('../../Images/sources/avatar-background.png')} />
             </View>
             <View style={styles.sourceIconContainer}>
-              <Icon
-                name={'avatar-human-group'}
+              <SourceIcon
+                source={source}
                 size={100}
                 style={[styles.sourceIcon, {color: 'black'}]}
               />
