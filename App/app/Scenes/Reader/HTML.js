@@ -16,7 +16,6 @@ module.exports = `
     <meta charset="utf-8"/>
     <style type="text/css">
       p, b {
-        font-weight: normal;
         margin: 0;
         padding: 0;
         line-height: 24pt;
