@@ -242,11 +242,12 @@ const HTML = `<!DOCTYPE html>
     {{BODY}}
 
     <script type="text/javascript">
-      var threshold = 30;
       var opened = false;
-      var openedWidth = 220;
+      var openedWidth = 140;
       var closedWidth = 0;
       var ready = false;
+      var startingPosition = 0;
+      var previousPosition = 0;
       var originalX = null;
       var originalY = null;
 
@@ -255,46 +256,45 @@ const HTML = `<!DOCTYPE html>
       	if (document.readyState == 'interactive' || document.readyState == 'complete') {
       		ready = true;
 
-          document.addEventListener('touchstart', handleTouchStart, false);
-          document.addEventListener('touchmove', handleTouchMove, false);
-          document.addEventListener('touchend', handleTouchEnd, false);
-          document.addEventListener('touchcancel', handleTouchEnd, false);
+          document.addEventListener('touchstart', onTouchStart, false);
+          document.addEventListener('touchmove', onTouchMove, false);
+          document.addEventListener('touchend', onTouchEnd, false);
+          document.addEventListener('touchcancel', onTouchEnd, false);
 
-          function handleTouchStart(e) {
+          function onTouchStart(e) {
             originalX = e.touches[0].clientX;
             originalY = e.touches[0].clientY;
             document.getElementById('table').style.transition = null;
           }
 
-          function handleTouchMove(e) {
+          function onTouchMove(e) {
             if (!originalX || !originalY) return;
 
             var currentX = e.touches[0].clientX;
             var currentY = e.touches[0].clientY;
-
             var xDiff = originalX - currentX;
             var yDiff = originalY - currentY;
 
-            if (Math.abs(xDiff) > Math.abs(yDiff)) {
-              if (xDiff > 0) {
-                  /* left swipe */
-                  opened = false;
-              } else {
-                  /* right swipe */
-                  opened = true;
-              }
-              document.getElementById('table').style.transform = 'translate3d(' + currentX + 'pt, 0px, 0px)';
+            if (Math.abs(xDiff) > Math.abs(yDiff) + 10) {
+              opened = currentX > previousPosition;
+              var position = Math.min(openedWidth * 1.5, Math.max(0, startingPosition - xDiff));
+              document.getElementById('table').style.transform = 'translate3d(' + position + 'pt, 0px, 0px)';
+              e.preventDefault();
             }
+
+            previousPosition = currentX;
           }
 
-          function handleTouchEnd(e) {
+          function onTouchEnd(e) {
             if (!originalX || !originalY) return;
             originalX = null;
             originalY = null;
 
-            var width = opened ? openedWidth : closedWidth;
+            var position = opened ? openedWidth : closedWidth;
             document.getElementById('table').style.transition = '.3s';
-            document.getElementById('table').style.transform = 'translate3d(' + width + 'pt, 0px, 0px)';
+            document.getElementById('table').style.transform = 'translate3d(' + position + 'pt, 0px, 0px)';
+
+            startingPosition = position;
           }
       	}
       };
