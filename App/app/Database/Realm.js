@@ -279,10 +279,6 @@ export class Actant extends Realm.Object {
     if (this.chronologies.length > 2) return '∞';
     return this.chronologies.sorted('from').map(chronology => chronology.name).join(', ');
   }
-
-  get statements(): Realm.ResultList {
-    return realm.objects('Statement').filtered('source.id = $0', this.id);
-  }
 }
 Actant.schema = ActantSchema;
 
