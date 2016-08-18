@@ -18,6 +18,8 @@ import {
   StyleSheet,
 } from '../../Common';
 
+import Icon from '../../Components/Common/Icon';
+
 import { NavigationBar, NavigationBarButton } from '../../Components/Navigation';
 import { BACK, readerURL } from '../../Navigation';
 
@@ -90,37 +92,65 @@ export default class Settings extends Component {
           </View>
           <View style={[styles.section, {marginTop: 8}]}>
             <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
-
+              <Icon
+                name="icon-family-filled"
+                size={30}
+                style={{color: Colors.spheres['family'].tint}}
+              />
             </TouchableOpacity>
             <View style={StyleSheet.styles.separator} />
 
             <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
-
+              <Icon
+                name="icon-economics-filled"
+                size={30}
+                style={{color: Colors.spheres['economics'].tint}}
+              />
             </TouchableOpacity>
             <View style={StyleSheet.styles.separator} />
 
             <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
-
+              <Icon
+                name="icon-government-filled"
+                size={30}
+                style={{color: Colors.spheres['government'].tint}}
+              />
             </TouchableOpacity>
             <View style={StyleSheet.styles.separator} />
 
             <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
-
+              <Icon
+                name="icon-religion-filled"
+                size={30}
+                style={{color: Colors.spheres['religion'].tint}}
+              />
             </TouchableOpacity>
             <View style={StyleSheet.styles.separator} />
 
             <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
-
+              <Icon
+                name="icon-education-filled"
+                size={30}
+                style={{color: Colors.spheres['education'].tint}}
+              />
             </TouchableOpacity>
             <View style={StyleSheet.styles.separator} />
 
             <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
-
+              <Icon
+                name="icon-communication-filled"
+                size={30}
+                style={{color: Colors.spheres['communication'].tint}}
+              />
             </TouchableOpacity>
             <View style={StyleSheet.styles.separator} />
 
             <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
-
+              <Icon
+                name="icon-celebration-filled"
+                size={30}
+                style={{color: Colors.spheres['celebration'].tint}}
+              />
             </TouchableOpacity>
           </View>
         </ScrollView>
