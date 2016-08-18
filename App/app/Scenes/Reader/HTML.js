@@ -22,6 +22,9 @@ module.exports = `
         line-height: 24pt;
         -webkit-margin-before: 0;
       }
+      i {
+        color: #323B43;
+      }
       body {
         font-family: Georgia;
         font-size: 13pt;
@@ -112,7 +115,6 @@ module.exports = `
         font-size: .65em;
         position: relative;
         top: -0.4em;
-        color: #9B9B9B;
       }
       .textIndent, .textPoetryStanzaFirst {
         text-indent: 2em;
