@@ -18,15 +18,14 @@ const SphereType = {
   CELEBRATION: 'celebration'
 };
 
-const Preferences = {
-  Books: {
-    Sort: 'com.sourceviewbible.preferences.books.sort',
-    Chapters: 'com.sourceviewbible.preferences.books.chapters',
-  }
-};
+const ReaderBaseFontSize = 17;
+const ReaderFontStepSize = 2;
+const ReaderWebFontConversion = 13/17;
 
 module.exports = {
   SourceType,
   SphereType,
-  Preferences
+  ReaderBaseFontSize,
+  ReaderFontStepSize,
+  ReaderWebFontConversion
 };

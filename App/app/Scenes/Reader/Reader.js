@@ -27,6 +27,9 @@ import { Book } from '../../Database';
 
 const HTML = require('./HTML');
 
+import { Preference } from '../../Preferences';
+import { ReaderBaseFontSize, ReaderFontStepSize, ReaderWebFontConversion } from '../../Common/Constants';
+
 const NavigationBar = (props: Props) => {
   const book = Book.findByID(props.bookID);
   return (
@@ -201,7 +204,13 @@ export default class Reader extends Component {
   };
 
   _renderScripture = (content: string) => {
-    return HTML.replace("{{BODY}}", content);
+    let html = HTML.replace("{{BODY}}", content);
+
+    const fontStepSize = Preference.numberForKey(Preference.Keys.Reader.fontStepSize) || 0;
+    const fontSize = parseInt((ReaderBaseFontSize + (fontStepSize * ReaderFontStepSize)) * ReaderWebFontConversion);
+    html = html.replace("{{FONT_SIZE}}", fontSize.toString());
+
+    return html;
   };
 
   _renderInjectedJavascript = () => {

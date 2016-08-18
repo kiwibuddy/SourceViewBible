@@ -26,7 +26,7 @@ module.exports = `
       }
       body {
         font-family: Georgia;
-        font-size: 13pt;
+        font-size: {{FONT_SIZE}}pt;
         color: #323B43;
         line-height: 24pt;
         -webkit-touch-callout: none;
