@@ -233,26 +233,17 @@ export class Actant extends Realm.Object {
   }
 
   get iconName(): string {
-    const SOURCE_TYPE_MAP = {
-      'The Narrator': 'narrator',
-      'God': 'god',
-      'Jesus': 'god'
-    };
-    const ICON_MAP = {
-      'narrator': 'avatar-narrator',
-      'god': 'avatar-divine',
-    };
-
-    const sourceType = SOURCE_TYPE_MAP[this.name] || 'support';
-    let iconName = ICON_MAP[sourceType];
-    if (!iconName) {
-      if (this.isHuman) {
-        if (this.isIndividual) {
-          iconName = this.isFemale ? 'avatar-human-female' : 'avatar-human-male';
-        } else {
-          iconName = 'avatar-human-group';
-        }
+    let iconName = null;
+    if (this.isDivine) {
+      iconName = 'avatar-divine';
+    } else if (this.isHuman) {
+      if (this.isIndividual) {
+        iconName = this.isFemale ? 'avatar-human-female' : 'avatar-human-male';
+      } else {
+        iconName = 'avatar-human-group';
       }
+    } else if (this.principalSourceType === 'narrator') {
+      iconName = 'avatar-narrator';
     }
 
     return iconName || 'avatar-human-group';

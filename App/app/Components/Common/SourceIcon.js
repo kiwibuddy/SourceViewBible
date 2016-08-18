@@ -12,19 +12,8 @@ type Props = {
 };
 
 const SourceIcon = (props: Props) => {
-  const SOURCE_TYPE_MAP = {
-    'The Narrator': 'narrator',
-    'God': 'god',
-    'Jesus': 'god'
-  };
-  const ICON_MAP = {
-    'narrator': 'avatar-narrator',
-    'god': 'avatar-divine',
-  };
-
   const { size, source, style } = props;
-  const sourceType = SOURCE_TYPE_MAP[source.name] || 'support';
-  const color = Colors.sources[sourceType].tint;
+  const color = Colors.sources[source.principalSourceType || 'support'].tint;
 
   return (
     <Icon

@@ -99,20 +99,13 @@ export default class DiscoverSources extends Component {
   }
 
   _renderSource = (source: Object) => {
-    const SOURCE_TYPE_MAP = {
-      "The Narrator": "narrator",
-      "God": "god",
-      "Jesus": "god"
-    };
-
     const sourcePercent = (source.wordCount / Bible.wordCount) * 100;
-    const sourceType = SOURCE_TYPE_MAP[source.name] || 'support';
 
     return (
       <TouchableOpacity key={'source-' + source.id} style={styles.itemContainer} onPress={ () => this.props.navigate(sourceURL({sourceID: source.id, title: source.name})) }>
         <View style={styles.item}>
           <LinearGradient
-            colors={Colors.sources[sourceType].gradient.tiny}
+            colors={Colors.sources[source.principalSourceType].gradient.tiny}
             start={[0.0, 0.25]} end={[0.5, 1.0]}
             style={styles.gradient}
           />
