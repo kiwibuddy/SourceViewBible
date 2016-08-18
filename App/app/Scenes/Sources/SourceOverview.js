@@ -60,7 +60,7 @@ export default class SourceOverview extends Component {
       <ScrollView style={styles.container}>
         <TouchableOpacity onPress={() => this.props.navigate(sourceWordsURL({sourceID: source.id, title: Localizable.t('source-words', {name: source.name})}))}>
           <WordCloud
-            backgroundColors={Colors.spheres['family'].gradient.big}
+            backgroundColors={Colors.sources[source.principalSourceType].gradient.big}
             style={styles.wordCloud}
           >
             <ParallaxMotionView intensity={5} style={[styles.parallax, {opacity: 0.8}]}>
@@ -94,7 +94,7 @@ export default class SourceOverview extends Component {
               <SourceIcon
                 source={source}
                 size={100}
-                style={[styles.sourceIcon, {color: 'black'}]}
+                style={[styles.sourceIcon]}
               />
             </View>
           </WordCloud>
