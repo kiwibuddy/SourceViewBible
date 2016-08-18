@@ -229,6 +229,32 @@ export class Actant extends Realm.Object {
     return this.natures.find(nature => nature.id == 2) !== undefined;
   }
 
+  get iconName(): string {
+    const SOURCE_TYPE_MAP = {
+      'The Narrator': 'narrator',
+      'God': 'god',
+      'Jesus': 'god'
+    };
+    const ICON_MAP = {
+      'narrator': 'avatar-narrator',
+      'god': 'avatar-divine',
+    };
+
+    const sourceType = SOURCE_TYPE_MAP[this.name] || 'support';
+    let iconName = ICON_MAP[sourceType];
+    if (!iconName) {
+      if (this.isHuman) {
+        if (this.isIndividual) {
+          iconName = this.isFemale ? 'avatar-human-female' : 'avatar-human-male';
+        } else {
+          iconName = 'avatar-human-group';
+        }
+      }
+    }
+
+    return iconName || 'avatar-human-group';
+  }
+
   get actantNumberDescription(): ?string {
     switch(this.actantNumber) {
       case 1:

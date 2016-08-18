@@ -53,7 +53,7 @@ export default class SourceOverview extends Component {
 
     const metaDataValues = [];
     if (source.genderDescription) {
-      metaDataValues.push(this._renderMetaValue(Localizable.t('gender'), 'avatar-human-group', source.genderDescription));
+      metaDataValues.push(this._renderMetaValue(Localizable.t('gender'), source.isFemale ? 'avatar-human-female' : 'avatar-human-male', source.genderDescription));
     }
 
     return (

@@ -25,22 +25,10 @@ const SourceIcon = (props: Props) => {
   const { size, source, style } = props;
   const sourceType = SOURCE_TYPE_MAP[source.name] || 'support';
   const color = Colors.sources[sourceType].tint;
-  const defaultIconName = 'avatar-human-group';
-
-  let iconName = ICON_MAP[sourceType];
-  if (!iconName) {
-    if (source.isHuman) {
-      if (source.isIndividual) {
-        iconName = source.isFemale ? 'avatar-human-female' : 'avatar-human-male';
-      } else {
-        iconName = 'avatar-human-group';
-      }
-    }
-  }
 
   return (
     <Icon
-      name={iconName || defaultIconName}
+      name={source.iconName}
       style={[{color: color}, style]}
       size={size}
     />
