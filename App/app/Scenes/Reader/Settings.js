@@ -24,6 +24,8 @@ import Icon from '../../Components/Common/Icon';
 import { NavigationBar, NavigationBarButton } from '../../Components/Navigation';
 import { BACK, readerURL } from '../../Navigation';
 
+import { Preference } from '../../Preferences';
+
 const BASE_FONT_SIZE = 17;
 const FONT_STEP_SIZE = 2;
 
@@ -33,7 +35,7 @@ type Props = {
 };
 
 type State = {
-  fontSize: number,
+  fontStepSize: number,
   spheres: Array<string>,
   showNumbers: boolean,
 };
@@ -45,15 +47,16 @@ export default class Settings extends Component {
   constructor(props: Props) {
     super(props);
     this.state = {
-      fontSize: 17,
+      fontStepSize: 0,
       spheres: [],
       showNumbers: true
     }
   }
 
   render() {
-    const { fontSize } = this.state;
-
+    const { fontStepSize } = this.state;
+    const fontSize = BASE_FONT_SIZE + (FONT_STEP_SIZE * fontStepSize);
+    
     return (
       <View style={styles.container}>
         <NavigationBar title={Localizable.t('settings')}>
@@ -145,9 +148,9 @@ export default class Settings extends Component {
   };
 
   _onFontSizeChanged = (step: number) => {
-    const increment = (step/1) * 4;
-    const fontSize = BASE_FONT_SIZE + (FONT_STEP_SIZE * increment);
-    this.setState({fontSize});
+    const fontStepSize = (step/1) * 4;
+    const fontSize = BASE_FONT_SIZE + (FONT_STEP_SIZE * fontStepSize);
+    this.setState({fontStepSize});
   };
 
   _onPressSphere = (sphere: string) => {

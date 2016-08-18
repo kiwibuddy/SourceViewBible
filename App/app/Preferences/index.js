@@ -16,6 +16,9 @@ const Keys = {
   Bookmarks: {
     SegmentIndex: PREFIX + 'bookmarks.segmentIndex'
   },
+  Reader: {
+    
+  }
 };
 Preference.Keys = Keys;
 
