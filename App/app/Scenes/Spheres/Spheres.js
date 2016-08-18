@@ -288,7 +288,7 @@ const styles = StyleSheet.create({
   },
   carouselContainer: {
     height: 250,
-    backgroundColor: '#E1E9EE',
+    backgroundColor: '#FFFFFF',
   },
   carousel: {
     flex: 1,
