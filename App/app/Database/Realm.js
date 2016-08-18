@@ -276,6 +276,7 @@ export class Actant extends Realm.Object {
   }
 
   get chronologyDescription(): ?string {
+    if (this.chronologies.length > 2) return '∞';
     return this.chronologies.sorted('from').map(chronology => chronology.name).join(', ');
   }
 
