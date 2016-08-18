@@ -227,6 +227,8 @@ const styles = StyleSheet.create({
   },
   fontSample: {
     paddingHorizontal: 8,
+    fontFamily: 'Georgia',
+    color: '#323B43',
   },
   statusLabel: {
     fontSize: 17,
@@ -248,7 +250,6 @@ const styles = StyleSheet.create({
   cellLeftContainer: {
     flex: 1,
     flexDirection: 'row',
-    paddingTop: 2,
     alignItems: 'center'
   },
   cellRightContainer: {
