@@ -8,6 +8,7 @@ import {
   Image,
   Platform,
   StyleSheet,
+  Text,
   TouchableOpacity,
   View
 } from 'react-native';
@@ -18,24 +19,29 @@ import {
 
 type Props = {
   disabled?: boolean,
-  imageSource: any,
+  imageSource?: any,
   onPress?: Function,
   style?: Object,
+  title?: any,
+  titleStyle?: any,
 };
 
 const NavigationBarButton = (props: Props) => {
   const imageStyle = props.disabled ? {tintColor: 'gray'} : {};
+  const textStyle = props.disabled ? {color: 'gray'} : {};
+  const title = props.title ? <View style={styles.textContainer}><Text style={[styles.text, props.titleStyle, textStyle]}>{props.title}</Text></View> : null;
+  const image = props.imageSource ? <Image source={props.imageSource} style={[styles.image, imageStyle]} /> : null;
+
+  const buttonStyle = title ? {width: null, paddingHorizontal: null, flex: 1} : {};
 
   return (
     <TouchableOpacity
       disabled={props.disabled}
       onPress={props.onPress}
-      style={[styles.button, props.style]}
+      style={[styles.button, buttonStyle, props.style]}
     >
-      <Image
-        source={props.imageSource}
-        style={[styles.image, imageStyle]}
-      />
+    {title}
+    {image}
     </TouchableOpacity>
   );
 };
@@ -51,6 +57,15 @@ const styles = StyleSheet.create({
   image: {
     tintColor: Colors.tint,
     alignSelf: 'center',
+  },
+  textContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {
+    fontSize: 16,
+    color: Colors.tint,
   },
 });
 

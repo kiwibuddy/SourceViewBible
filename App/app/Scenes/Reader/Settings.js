@@ -16,17 +16,37 @@ import {
   StyleSheet,
 } from '../../Common';
 
+import { NavigationBar, NavigationBarButton } from '../../Components/Navigation';
+import { BACK, readerURL } from '../../Navigation';
+
 type Props = {
   navigate: Function,
   onDone: Function,
 };
 
-const Settings = (props: Props) => {
-  return (
-    <ScrollView style={styles.container}>
+export default class Settings extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <NavigationBar title={Localizable.t('settings')}>
+          <NavigationBarButton
+            title={Localizable.t('cancel')}
+            onPress={() => this.props.navigate(BACK)}
+            style={{position: 'absolute', left: 0}}
+          />
+          <NavigationBarButton
+            title={Localizable.t('done')}
+            onPress={() => this.props.navigate(BACK)}
+            style={{position: 'absolute', right: 0}}
+            titleStyle={[StyleSheet.styles.navigationBar.doneButtonTitle, {marginRight: 8}]}
+          />
+        </NavigationBar>
+        <ScrollView style={styles.scrollView}>
 
-    </ScrollView>
-  );
+        </ScrollView>
+      </View>
+    );
+  }
 };
 
 const styles = StyleSheet.create({
@@ -34,10 +54,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
+  scrollView: {
+    flex: 1,
+    marginTop: NavigationBar.HEIGHT,
+  },
   separator: {
     ...StyleSheet.styles.separator,
     marginLeft: 15,
   },
 });
-
-export default Settings;

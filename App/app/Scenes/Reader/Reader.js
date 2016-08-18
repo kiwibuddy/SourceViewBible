@@ -17,7 +17,7 @@ import {
   StyleSheet
 } from '../../Common';
 
-import { occurrencesURL, readerSearchURL, readerURL } from '../../Navigation';
+import { occurrencesURL, readerSearchURL, readerSettingsURL, readerURL } from '../../Navigation';
 import * as Navigation from '../../Components/Navigation';
 
 const RNFS = require('react-native-fs');
@@ -38,7 +38,7 @@ const NavigationBar = (props: Props) => {
       />
       <Navigation.NavigationBarButton
         imageSource={require('../../Components/Navigation/Images/nav-filter.png')}
-        onPress={() => {}}
+        onPress={() => {props.navigate(readerSettingsURL({title: Localizable.t('settings'), modal: true}))}}
         style={{position: 'absolute', right: 0}}
       />
     </Navigation.NavigationBar>

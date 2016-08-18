@@ -31,6 +31,7 @@
       }
     },
     "range-of": "{{current}} of {{total}}",
+    "settings": "Settings",
     "time-period": "Time Period",
     "introduction": "Introduction",
     "how-to-read": "How to read {{name}}",
