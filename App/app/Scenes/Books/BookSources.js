@@ -124,16 +124,8 @@ export default class BookSources extends Component {
   _renderRow = (sourceRelation: Object, sectionID: string, rowID: string, highlightRow: boolean) => {
     const { book } = this.state;
     const source = sourceRelation.source;
-
-    const SOURCE_TYPE_MAP = {
-      "The Narrator": "narrator",
-      "God": "god",
-      "Jesus": "god"
-    };
-
-    const sourceType = SOURCE_TYPE_MAP[source.name] || "support";
     const chartData = {};
-    chartData[sourceType] = sourceRelation.wordCount;
+    chartData[source.principalSourceType] = sourceRelation.wordCount;
 
     return (
       <TouchableOpacity style={styles.section} onPress={() => this._onPressScripture(source)}>

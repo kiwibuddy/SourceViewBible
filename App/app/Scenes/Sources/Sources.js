@@ -95,15 +95,8 @@ export default class Sources extends Component {
   };
 
   _renderRow = (source: Object, sectionID: any, rowID: any) => {
-    const SOURCE_TYPE_MAP = {
-      "The Narrator": "narrator",
-      "God": "god",
-      "Jesus": "god"
-    };
-
-    const sourceType = SOURCE_TYPE_MAP[source.name] || "support";
     const chartData = {};
-    chartData[sourceType] = source.wordCount;
+    chartData[source.principalSourceType] = source.wordCount;
 
     const wordCount = source.wordCount;
 

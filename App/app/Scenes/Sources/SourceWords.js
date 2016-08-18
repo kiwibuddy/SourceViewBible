@@ -72,19 +72,12 @@ export default class SourceWords extends Component {
   };
 
   _renderHeader = (props: any) => {
-    const SOURCE_TYPE_MAP = {
-      "The Narrator": "narrator",
-      "God": "god",
-      "Jesus": "god"
-    };
-
     const { source } = this.state;
     const words = source.words.map(word => word.string);
-    const sourceType = SOURCE_TYPE_MAP[source.name] || 'support';
 
     return (
       <WordCloud
-        backgroundColors={Colors.sources[sourceType].gradient.big}
+        backgroundColors={Colors.sources[source.principalSourceType].gradient.big}
         style={styles.wordCloud}
       >
         <ParallaxMotionView intensity={5} style={[styles.parallax, {opacity: 0.8}]}>
