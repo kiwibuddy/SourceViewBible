@@ -75,26 +75,34 @@ export default class Settings extends Component {
         </NavigationBar>
         <ScrollView style={styles.scrollView}>
           <View style={styles.section}>
-            <View style={StyleSheet.styles.listItem}>
-              <Text style={[StyleSheet.styles.cell.title, {flex: 1}]}>{Localizable.t('text-size')}</Text>
-              <Text style={[styles.fontSample, {fontSize}]}>Aa</Text>
-              <Slider
+            <View style={[styles.cellContainer, {paddingVertical: 2, paddingLeft: 15}]}>
+              <View style={styles.cellLeftContainer}>
+                <Text style={[StyleSheet.styles.cell.title, {flex: 1}]}>{Localizable.t('text-size')}</Text>
+              </View>
+              <View style={[styles.cellRightContainer, {flex: 1, width: 150}]}>
+                <Text style={[styles.fontSample, {fontSize}]}>Aa</Text>
+                <Slider
                 onValueChange={this._onFontSizeChanged}
                 step={0.25}
                 style={styles.slider}
                 value={this.state.fontStepSize / 4}
-              />
+                />
+              </View>
             </View>
           </View>
 
           <View style={styles.section}>
-            <View style={StyleSheet.styles.listItem}>
-              <Text style={[StyleSheet.styles.cell.title, {flex: 3}]}>{Localizable.t('chapter-and-verse-numbers')}</Text>
-              <Switch
+            <View style={[styles.cellContainer, {paddingVertical: 8, paddingLeft: 15}]}>
+              <View style={styles.cellLeftContainer}>
+                <Text style={[StyleSheet.styles.cell.title, {flex: 3}]}>{Localizable.t('chapter-and-verse-numbers')}</Text>
+              </View>
+              <View style={styles.cellRightContainer}>
+                <Switch
                 onValueChange={(value) => this.setState({showNumbers: value})}
                 style={styles.switch}
                 value={this.state.showNumbers}
-              />
+                />
+              </View>
             </View>
           </View>
 
@@ -246,5 +254,7 @@ const styles = StyleSheet.create({
   cellRightContainer: {
     flex: 0,
     justifyContent: 'flex-end',
+    alignItems: 'center',
+    flexDirection: 'row',
   },
 });
