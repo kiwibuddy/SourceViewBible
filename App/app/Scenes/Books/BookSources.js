@@ -125,7 +125,7 @@ export default class BookSources extends Component {
     const { book } = this.state;
     const source = sourceRelation.source;
     const chartData = {};
-    chartData[source.principalSourceType] = sourceRelation.wordCount;
+    chartData[sourceRelation.principalSourceType] = sourceRelation.wordCount;
 
     return (
       <TouchableOpacity style={styles.section} onPress={() => this._onPressScripture(source)}>
@@ -133,6 +133,7 @@ export default class BookSources extends Component {
           <View style={styles.sourcesLeftContainer}>
             <TouchableOpacity onPress={() => this.props.navigate(sourceURL({sourceID: source.id, title: source.name}))}>
               <SourceIcon
+                principalSourceType={sourceRelation.principalSourceType}
                 source={source}
                 style={styles.sourceAvatar}
                 size={20}
