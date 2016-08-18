@@ -47,6 +47,7 @@ export default class Settings extends Component {
           <View style={styles.section}>
             <View style={StyleSheet.styles.listItem}>
               <Text style={[StyleSheet.styles.cell.title, {flex: 1}]}>{Localizable.t('text-size')}</Text>
+              <Text style={[styles.fontSample]}>Aa</Text>
               <Slider
                 step={0.25}
                 style={styles.slider}
@@ -143,4 +144,7 @@ const styles = StyleSheet.create({
   switch: {
     flex: 1,
   },
+  fontSample: {
+    paddingHorizontal: 8,
+  }
 });
