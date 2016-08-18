@@ -108,12 +108,14 @@ module.exports = `
         position: relative;
         top: 0;
         font-weight: normal;
+        {{NUMBER_DISPLAY}}
       }
       .textVerse {
         font-family: Gurmukhi MN;
-        font-size: .65em;
+        font-size: 0.65em;
         position: relative;
         top: -0.4em;
+        {{NUMBER_DISPLAY}}
       }
       .textIndent, .textPoetryStanzaFirst {
         text-indent: 2em;

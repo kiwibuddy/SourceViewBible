@@ -175,7 +175,7 @@ export default class Reader extends Component {
     return (
       <WebView
         key={key}
-        decelerationRate="normal"
+        decelerationRate='normal'
         injectedJavaScript={injectedJavaScript}
         scalesPageToFit={false}
         style={styles.webview}
@@ -204,11 +204,17 @@ export default class Reader extends Component {
   };
 
   _renderScripture = (content: string) => {
-    let html = HTML.replace("{{BODY}}", content);
+    let html = HTML.replace('{{BODY}}', content);
 
     const fontStepSize = Preference.numberForKey(Preference.Keys.Reader.fontStepSize) || 0;
     const fontSize = parseInt((ReaderBaseFontSize + (fontStepSize * ReaderFontStepSize)) * ReaderWebFontConversion);
-    html = html.replace("{{FONT_SIZE}}", fontSize.toString());
+    html = html.replace('{{FONT_SIZE}}', fontSize.toString());
+
+    let showNumbers = Preference.booleanForKey(Preference.Keys.Reader.showNumbers);
+    if (showNumbers == null) showNumbers = true;
+    if (!showNumbers) {
+      html = html.replace(new RegExp('{{NUMBER_DISPLAY}}', 'g'), 'display: none;');
+    }
 
     return html;
   };
