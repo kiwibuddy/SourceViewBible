@@ -124,8 +124,12 @@ export default class BookSources extends Component {
   _renderRow = (sourceRelation: Object, sectionID: string, rowID: string, highlightRow: boolean) => {
     const { book } = this.state;
     const source = sourceRelation.source;
-    const chartData = {};
-    chartData[sourceRelation.principalSourceType] = sourceRelation.wordCount;
+    const chartData = Object.keys(sourceRelation.sourceTypeCounts).filter(sourceType => sourceRelation.sourceTypeCounts[sourceType].count > 0).map(sourceType => {
+      const sourceTypeCount = sourceRelation.sourceTypeCounts[sourceType];
+      const data = {};
+      data[sourceTypeCount.string] = sourceTypeCount.count;
+      return data;
+    });
 
     return (
       <TouchableOpacity style={styles.section} onPress={() => this._onPressScripture(source)}>
@@ -144,7 +148,7 @@ export default class BookSources extends Component {
           <View style={styles.sourcesRightContainer}>
             <SourcesBarChart
               style={styles.sourcesBarChart}
-              data={[chartData]}
+              data={chartData}
               maxChartValue={book.maxSourceWordCount}
             />
             <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('words.count', {count: sourceRelation.wordCount, localizedCount: Localizable.toNumber(sourceRelation.wordCount, {precision: 0})})}</Text>
