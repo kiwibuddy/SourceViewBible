@@ -17,7 +17,9 @@ const Keys = {
     SegmentIndex: PREFIX + 'bookmarks.segmentIndex'
   },
   Reader: {
-    
+    fontStepSize: PREFIX + '.reader.fontStepSize',
+    spheres: PREFIX + '.reader.spheres',
+    showNumbers: PREFIX + '.reader.showNumbers',
   }
 };
 Preference.Keys = Keys;
