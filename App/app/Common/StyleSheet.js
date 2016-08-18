@@ -19,7 +19,7 @@ const styles = {
   wordCloud: {
     height: 200,
     backgroundColor: 'transparent',
-    shadowColor: "black",
+    shadowColor: 'black',
     shadowOpacity: 0.05,
     shadowRadius: 0.4,
     shadowOffset: {
@@ -33,7 +33,7 @@ const styles = {
     marginTop: 5,
     borderBottomColor: Colors.separator,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    shadowColor: "black",
+    shadowColor: 'black',
     shadowOpacity: 0.05,
     shadowRadius: 0.4,
     shadowOffset: {
