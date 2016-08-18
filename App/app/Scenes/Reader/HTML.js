@@ -27,6 +27,12 @@ module.exports = `
         font-size: 13pt;
         color: #323B43;
         line-height: 24pt;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
       }
       table {
         margin:0;
