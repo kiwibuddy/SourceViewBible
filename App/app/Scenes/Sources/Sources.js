@@ -8,6 +8,7 @@ import {
   Platform,
   RecyclerViewBackedScrollView,
   Text,
+  TextInput,
   TouchableOpacity,
   View
 } from 'react-native';
@@ -37,6 +38,7 @@ type Props = {
 
 type State = {
   dataSource: any,
+  search: ?string,
 };
 
 export default class Sources extends Component {
@@ -47,49 +49,33 @@ export default class Sources extends Component {
     super(props);
 
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
-    const sources = Actant.sources().sorted('firstInitial').sorted('name');
-    const { rows, sections } = this._getRowsAndSections(sources);
 
     this.state = {
-      dataSource: dataSource.cloneWithRowsAndSections(rows, sections)
+      dataSource: dataSource,
+      search: null
     };
   }
 
   render() {
+    const sources = Actant.sources(this.state.search).sorted('firstInitial').sorted('name');
+    const { rows, sections } = this._getRowsAndSections(sources);
+    const dataSource = this.state.dataSource.cloneWithRowsAndSections(rows, sections);
+
     return (
       <View style={styles.container}>
-        <View style={styles.listIndexContainer}>
-          <TouchableOpacity><Text style={styles.listIndexTitle}>A</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.listIndexTitle}>B</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.listIndexTitle}>C</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.listIndexTitle}>D</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.listIndexTitle}>E</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.listIndexTitle}>F</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.listIndexTitle}>G</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.listIndexTitle}>H</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.listIndexTitle}>I</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.listIndexTitle}>J</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.listIndexTitle}>K</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.listIndexTitle}>L</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.listIndexTitle}>M</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.listIndexTitle}>N</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.listIndexTitle}>O</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.listIndexTitle}>P</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.listIndexTitle}>Q</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.listIndexTitle}>R</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.listIndexTitle}>S</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.listIndexTitle}>T</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.listIndexTitle}>U</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.listIndexTitle}>V</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.listIndexTitle}>W</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.listIndexTitle}>X</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.listIndexTitle}>Y</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.listIndexTitle}>Z</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.listIndexTitle}>#</Text></TouchableOpacity>
-        </View>
+        <TextInput
+          autoCapitalize="words"
+          autoCorrect={false}
+          autoFocus={false}
+          clearButtonMode="always"
+          onChangeText={(text) => this.setState({search: text})}
+          placeholder={Localizable.t('name')}
+          style={styles.textInput}
+          value={this.state.search || ''}
+        />
         <ListView
           ref="LISTVIEW_REF"
-          dataSource={this.state.dataSource}
+          dataSource={dataSource}
           renderRow={this._renderRow}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSectionHeader={this._renderSectionHeader}
@@ -146,6 +132,7 @@ export default class Sources extends Component {
   _getRowsAndSections = (sources: any) => {
     const rows = {};
     const sections = [];
+    if (sources.length == 0) return {rows, sections};
 
     sources.forEach((source) => {
       const section = source.firstInitial;
@@ -170,6 +157,17 @@ const styles = StyleSheet.create({
   },
   section: {
     marginLeft: 8,
+  },
+  textInput: {
+    fontSize: 14,
+    backgroundColor: '#ececec',
+    borderColor: '#ececec',
+    borderRadius: 3,
+    borderWidth: 1,
+    paddingLeft: 8,
+    marginHorizontal: 8,
+    marginVertical: 8,
+    height: 26,
   },
   sourcesCellContainer: {
     flex: 1,

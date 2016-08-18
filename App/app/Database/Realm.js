@@ -193,13 +193,13 @@ export class Actant extends Realm.Object {
     return realm.objectForPrimaryKey('Actant', id ? parseInt(id) : 0);
   }
 
-  static recipients(search?: string) {
+  static recipients(search: ?string) {
     const recipients = realm.objects('Actant').filtered('isSource = $0', true);
     if (search) return recipients.filtered('name CONTAINS[c] $0', search);
     return recipients;
   }
 
-  static sources(search?: string) {
+  static sources(search: ?string) {
     const sources = realm.objects('Actant').filtered('isSource = $0', true);
     if (search) return sources.filtered('name CONTAINS[c] $0', search);
     return sources;

@@ -27,13 +27,16 @@ import { cardWithFilter } from './FilterUtils';
 import { Actant } from '../../../Database';
 
 type Props = {
+  card: Object,
+  filter: Object,
   navigate: Function,
   onDone: Function,
+  type: string,
 };
 
 type State = {
   dataSource: any,
-  search: string,
+  search: ?string,
 };
 
 export default class Actants extends Component {
@@ -61,9 +64,9 @@ export default class Actants extends Component {
           autoFocus={true}
           clearButtonMode="always"
           onChangeText={(text) => this.setState({search: text})}
-          placeholder="Name"
+          placeholder={Localizable.t('name')}
           style={styles.textInput}
-          value={this.state.search}
+          value={this.state.search || ''}
         />
         <ListView
           dataSource={dataSource}
