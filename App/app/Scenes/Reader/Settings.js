@@ -25,9 +25,7 @@ import { NavigationBar, NavigationBarButton } from '../../Components/Navigation'
 import { BACK, readerURL } from '../../Navigation';
 
 import { Preference } from '../../Preferences';
-
-const BASE_FONT_SIZE = 17;
-const FONT_STEP_SIZE = 2;
+import { ReaderBaseFontSize, ReaderFontStepSize, ReaderWebFontConversion } from '../../Common/Constants';
 
 type Props = {
   navigate: Function,
@@ -58,7 +56,7 @@ export default class Settings extends Component {
 
   render() {
     const { fontStepSize } = this.state;
-    const fontSize = BASE_FONT_SIZE + (FONT_STEP_SIZE * fontStepSize);
+    const fontSize = ReaderBaseFontSize + (ReaderFontStepSize * fontStepSize);
 
     return (
       <View style={styles.container}>
@@ -153,7 +151,7 @@ export default class Settings extends Component {
 
   _onFontSizeChanged = (step: number) => {
     const fontStepSize = (step/1) * 4;
-    const fontSize = BASE_FONT_SIZE + (FONT_STEP_SIZE * fontStepSize);
+    const fontSize = ReaderBaseFontSize + (ReaderFontStepSize * fontStepSize);
     this.setState({fontStepSize});
   };
 
