@@ -122,7 +122,7 @@ export default class Sources extends Component {
             <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('words.count', {count: wordCount, localizedCount: Localizable.toNumber(wordCount, {precision: 0})})}</Text>
           </View>
           <View style={styles.sourcesRightContainer}>
-            <Text style={StyleSheet.styles.cell.subtitle}>0 BC</Text>
+            <Text style={StyleSheet.styles.cell.subtitle}>{source.chronologyDescription}</Text>
           </View>
         </View>
       </TouchableOpacity>

@@ -205,7 +205,7 @@ export class Actant extends Realm.Object {
     return sources;
   }
 
-  get actantNumberDescription(): ?String {
+  get actantNumberDescription(): ?string {
     switch(this.actantNumber) {
       case 1:
         return Localizable.t('actant-number.Group');
@@ -218,7 +218,7 @@ export class Actant extends Realm.Object {
     }
   }
 
-  get genderDescription(): ?String {
+  get genderDescription(): ?string {
     switch(this.gender) {
       case 1:
         return Localizable.t('gender-female');
@@ -229,6 +229,10 @@ export class Actant extends Realm.Object {
       default:
         return null;
     }
+  }
+
+  get chronologyDescription(): ?string {
+    return this.chronologies.sorted('from').map(chronology => chronology.name).join(', ');
   }
 
   get statements(): Realm.ResultList {
