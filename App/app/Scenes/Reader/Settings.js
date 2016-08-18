@@ -42,7 +42,9 @@ export default class Settings extends Component {
           />
         </NavigationBar>
         <ScrollView style={styles.scrollView}>
+          <View style={styles.row}>
 
+          </View>
         </ScrollView>
       </View>
     );
@@ -52,14 +54,18 @@ export default class Settings extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#EBECF3',
   },
   scrollView: {
     flex: 1,
     marginTop: NavigationBar.HEIGHT,
   },
-  separator: {
-    ...StyleSheet.styles.separator,
-    marginLeft: 15,
+  row: {
+    height: 44,
+    backgroundColor: 'white',
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: StyleSheet.styles.separator.backgroundColor,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: StyleSheet.styles.separator.backgroundColor,
   },
 });
