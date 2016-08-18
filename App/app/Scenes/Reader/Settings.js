@@ -21,13 +21,32 @@ import {
 import { NavigationBar, NavigationBarButton } from '../../Components/Navigation';
 import { BACK, readerURL } from '../../Navigation';
 
+const BASE_FONT_SIZE = 17;
+const FONT_STEP_SIZE = 2;
+
 type Props = {
   navigate: Function,
   onDone: Function,
 };
 
+type State = {
+  fontSize: number,
+};
+
 export default class Settings extends Component {
+  props: Props;
+  state: State;
+
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      fontSize: 17,
+    }
+  }
+
   render() {
+    const { fontSize } = this.state;
+
     return (
       <View style={styles.container}>
         <NavigationBar title={Localizable.t('settings')}>
@@ -47,8 +66,9 @@ export default class Settings extends Component {
           <View style={styles.section}>
             <View style={StyleSheet.styles.listItem}>
               <Text style={[StyleSheet.styles.cell.title, {flex: 1}]}>{Localizable.t('text-size')}</Text>
-              <Text style={[styles.fontSample]}>Aa</Text>
+              <Text style={[styles.fontSample, {fontSize}]}>Aa</Text>
               <Slider
+                onValueChange={this._onFontSizeChanged}
                 step={0.25}
                 style={styles.slider}
               />
@@ -107,6 +127,12 @@ export default class Settings extends Component {
       </View>
     );
   }
+
+  _onFontSizeChanged = (step: number) => {
+    const increment = (step/1) * 4;
+    const fontSize = BASE_FONT_SIZE + (FONT_STEP_SIZE * increment);
+    this.setState({fontSize});
+  };
 };
 
 const styles = StyleSheet.create({
