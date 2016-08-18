@@ -187,7 +187,10 @@ export default class Reader extends Component {
   _setScripture = (bookID: string, anchor?: string) => {
     const book = Book.findByID(bookID);
 
-    Emdros.scripture({monadSet: book.monadSet}).then((content) => {
+    const spheres = Preference.objectForKey(Preference.Keys.Reader.spheres) || [];
+    const options = {monadSet: book.monadSet, spheres};
+
+    Emdros.scripture(options).then((content) => {
       if (this.shouldFetchScripture) {
         const scripture = this._renderScripture(content);
 

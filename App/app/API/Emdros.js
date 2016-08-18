@@ -7,32 +7,47 @@ let DB = null;
 const SCRIPTURE_STYLESHEET = require('./scripture-stylesheet.json');
 const OCCURRENCE_STYLESHEET = require('./occurrence-stylesheet.json');
 
-// "Token" : {
-//    "docindexfeature" : "docindex",
-//    "end" : "",
-//    "get" : [
-//          "surface",
-//          "sphere_color_number",
-//          "Family",
-//          "Economics",
-//          "Government",
-//          "Religion",
-//          "Education",
-//          "MediaCom",
-//          "Celebration",
-//          "black_override"
-//       ],
-//    "start" : "{{ if varequal 'EndParagraph' 'true' }}</p>{{ setvar 'EndParagraph' }}{{ setvarend }}{{ setvar 'css' }}{{ setvarend }}{{ endif }}{{ if varequal 'StartParagraph' 'true' }}<p class="{{ emitvar 'ParagraphType' }}">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}FlushLeft{{ setvarend }}{{ endif }}{{ endif }}{{ setvar 'new_css' }}{{ if featureequal 1 '0' }}{{ else }}{{ if featureequal 2 'true' }}Fam{{ endif }}{{ if featureequal 3 'true' }}Eco{{ endif }}{{ if featureequal 4 'true' }}Gov{{ endif }}{{ if featureequal 5 'true' }}Rel{{ endif }}{{ if featureequal 6 'true' }}Edu{{ endif }}{{ if featureequal 7 'true' }}Com{{ endif }}{{ if featureequal 8 'true' }}Cel{{ endif }}{{ endif }}{{ setvarend }}{{ if varequal 'new_css' '' }}<span>{{ else }}<span class="spv-{{ emitvar 'new_css' }}">{{ endif }}{{ setvar 'css' }}{{ emitvar 'new_css' }}{{ setvarend }}{{ if varequal 'Italics' 'On' }}<i>{{ endif }}{{ if varequal 'Bold' 'On' }}<b>{{ endif }}{{ if varequal 'SmallCaps' 'On' }}<span class="small-caps">{{ endif }}{{ if featureequal 9 'true' }}<span class="src-clr-Black">{{ endif }}<span class="dmy{{ emitvar 'embedded_document' }}{{ emitvar 'embedded_quotation' }}">{{ feature 0 }}</span>{{ if featureequal 9 'true' }}</span>{{ endif }}{{ if varequal 'SmallCaps' 'On' }}</span>{{ endif }}{{ if varequal 'Bold' 'On' }}</b>{{ endif }}{{ if varequal 'Italics' 'On' }}</i>{{ endif }}</span>"
-// },
-
 function highlightSpheres(spheres: any) {
-  // {{ setvar 'new_css' }}{{ if featureequal 1 '0' }}{{ else }}{{ if featureequal 2 'true' }}Fam{{ endif }}{{ if featureequal 3 'true' }}Eco{{ endif }}{{ if featureequal 4 'true' }}Gov{{ endif }}{{ if featureequal 5 'true' }}Rel{{ endif }}{{ if featureequal 6 'true' }}Edu{{ endif }}{{ if featureequal 7 'true' }}Com{{ endif }}{{ if featureequal 8 'true' }}Cel{{ endif }}{{ endif }}{{ setvarend }}{{ if varequal 'new_css' '' }}<span>{{ else }}<span class="spv-{{ emitvar 'new_css' }}">{{ endif }}
-  const start = `{{ if varequal 'StartParagraph' 'true' }}<p class="{{ emitvar 'ParagraphType' }}">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}{{ feature 0 }}`;
+  const SPHERE_CLASS_MAP = {
+    'family': 'Fam',
+    'economics': 'Eco',
+    'government': 'Gov',
+    'religion': 'Rel',
+    'education': 'Edu',
+    'communication': 'Com',
+    'celebration': 'Cel'
+  };
+
+  const SPHERE_FEATURE_MAP = {
+    'family': 'Family',
+    'economics': 'Economics',
+    'government': 'Government',
+    'religion': 'Religion',
+    'education': 'Education',
+    'communication': 'MediaCom',
+    'celebration': 'Celebration'
+  };
+
+  const features = ['surface'];
+
+  let value = null;
+  if (spheres.length > 0) {
+    const featureLength = features.length;
+    const sphereClasses = spheres.map((sphere, index) => {
+      const sphereClass = SPHERE_CLASS_MAP[sphere];
+      return (`{{ if featureequal ${index + featureLength} 'true' }} h${sphereClass}{{ endif }}`);
+    });
+
+    value = `{{ setvar 'sphere_classes' }}${sphereClasses.join('')}{{ setvarend }}{{ if varequal 'sphere_classes' '' }}{{ feature 0 }}{{ else }}<span class="{{ emitvar 'sphere_classes' }}">{{ feature 0 }}</span>{{ endif }}`;
+  } else {
+    value = '{{ feature 0 }}';
+  }
+  const start = `{{ if varequal 'StartParagraph' 'true' }}<p class="{{ emitvar 'ParagraphType' }}">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}${value}`;
 
   return {
     "docindexfeature": "docindex",
     "end": "",
-    "get": ["surface"].concat(spheres),
+    "get": features.concat(spheres.map(sphere => SPHERE_FEATURE_MAP[sphere])),
     "start": start
   }
 }
@@ -63,10 +78,10 @@ function scripture(options: Object) {
   } else {
     stylesheet = SCRIPTURE_STYLESHEET;
 
-    if (options && options.spheres) {
+    if (options && options.spheres && options.spheres.length > 0) {
       const base = SCRIPTURE_STYLESHEET['fetchinfo']['base']['object_types'];
-      base['Token'] = highlightSpheres(['Family', 'Education']);
-      console.log('token', SCRIPTURE_STYLESHEET['fetchinfo']['base']['object_types']['Token']);
+      base['Token'] = highlightSpheres(options.spheres);
+      base['NonWordToken'] = highlightSpheres(options.spheres);
     }
   }
   const style = {stylesheet: JSON.stringify(stylesheet)};
