@@ -97,6 +97,7 @@ export default class Settings extends Component {
                 size={30}
                 style={{color: Colors.spheres['family'].tint}}
               />
+              <Text style={[StyleSheet.styles.cell.title]}>{Localizable.t('family')}</Text>
             </TouchableOpacity>
             <View style={StyleSheet.styles.separator} />
 
@@ -106,6 +107,7 @@ export default class Settings extends Component {
                 size={30}
                 style={{color: Colors.spheres['economics'].tint}}
               />
+              <Text style={[StyleSheet.styles.cell.title]}>{Localizable.t('economics')}</Text>
             </TouchableOpacity>
             <View style={StyleSheet.styles.separator} />
 
@@ -115,6 +117,7 @@ export default class Settings extends Component {
                 size={30}
                 style={{color: Colors.spheres['government'].tint}}
               />
+              <Text style={[StyleSheet.styles.cell.title]}>{Localizable.t('government')}</Text>
             </TouchableOpacity>
             <View style={StyleSheet.styles.separator} />
 
@@ -124,6 +127,7 @@ export default class Settings extends Component {
                 size={30}
                 style={{color: Colors.spheres['religion'].tint}}
               />
+              <Text style={[StyleSheet.styles.cell.title]}>{Localizable.t('religion')}</Text>
             </TouchableOpacity>
             <View style={StyleSheet.styles.separator} />
 
@@ -133,6 +137,7 @@ export default class Settings extends Component {
                 size={30}
                 style={{color: Colors.spheres['education'].tint}}
               />
+              <Text style={[StyleSheet.styles.cell.title]}>{Localizable.t('education')}</Text>
             </TouchableOpacity>
             <View style={StyleSheet.styles.separator} />
 
@@ -142,6 +147,7 @@ export default class Settings extends Component {
                 size={30}
                 style={{color: Colors.spheres['communication'].tint}}
               />
+              <Text style={[StyleSheet.styles.cell.title]}>{Localizable.t('communication')}</Text>
             </TouchableOpacity>
             <View style={StyleSheet.styles.separator} />
 
@@ -151,6 +157,7 @@ export default class Settings extends Component {
                 size={30}
                 style={{color: Colors.spheres['celebration'].tint}}
               />
+              <Text style={[StyleSheet.styles.cell.title]}>{Localizable.t('celebration')}</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>
