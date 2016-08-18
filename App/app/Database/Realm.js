@@ -242,11 +242,15 @@ export class Actant extends Realm.Object {
       } else {
         iconName = 'avatar-human-group';
       }
+    } else if (this.isAngelic) {
+      iconName = 'avatar-angelic';
+    } else if (this.isDemonic) {
+      iconName = 'avatar-demonic';
     } else if (this.principalSourceType === 'narrator') {
       iconName = 'avatar-narrator';
     }
 
-    return iconName || 'avatar-human-group';
+    return iconName || 'avatar-other';
   }
 
   get actantNumberDescription(): ?string {
