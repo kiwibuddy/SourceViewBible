@@ -60,7 +60,7 @@ export default class BookOverview extends Component {
     const { book } = this.state;
 
     const sources = book.sourceRelations.slice(0).sort((a, b) => a.wordCount > b.wordCount ? -1 : 1).slice(0, MAX_NUMBER_OF_SOURCES).map((relation) => {
-      return this._renderSource(relation.source);
+      return this._renderSourceRelation(relation);
     });
 
     if (book.sourceCount > MAX_NUMBER_OF_SOURCES) {
@@ -171,7 +171,8 @@ export default class BookOverview extends Component {
     );
   }
 
-  _renderSource = (source: Object) => {
+  _renderSourceRelation = (relation: Object) => {
+    const source = relation.source;
     return (
       <TouchableOpacity
         key={'source-' + source.name}
@@ -179,6 +180,7 @@ export default class BookOverview extends Component {
         style={styles.sourceButton}
       >
         <SourceIcon
+          principalSourceType={relation.principalSourceType}
           source={source}
           size={40}
           style={styles.sourceIcon}

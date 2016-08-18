@@ -8,12 +8,13 @@ import { Colors } from '../../Common';
 type Props = {
   size: number,
   source: Object,
+  principalSourceType?: string,
   style: any
 };
 
 const SourceIcon = (props: Props) => {
-  const { size, source, style } = props;
-  const color = Colors.sources[source.principalSourceType || 'support'].tint;
+  const { principalSourceType, size, source, style } = props;
+  const color = Colors.sources[principalSourceType || source.principalSourceType || 'support'].tint;
 
   return (
     <Icon

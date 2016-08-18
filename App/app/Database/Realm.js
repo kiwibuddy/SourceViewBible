@@ -345,21 +345,6 @@ export class Book extends Realm.Object {
       last: this.lastMonad
     };
   }
-
-  get sources(): Array<Object> {
-    return this.sourceRelations.map(relation => {
-      const sourceTypeInfo = {
-        sourceTypeCount: relation.sourceTypeCount,
-        sourceTypeCounts: relation.sourceTypeCounts,
-        principalSourceType: relation.principalSourceType,
-      };
-      
-      return ({
-        ...relation.source,
-        ...sourceTypeInfo
-      });
-    });
-  }
 }
 Book.schema = BookSchema;
 
