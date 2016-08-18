@@ -35,6 +35,7 @@ type Props = {
 type State = {
   fontSize: number,
   spheres: Array<string>,
+  showNumbers: boolean,
 };
 
 export default class Settings extends Component {
@@ -45,7 +46,8 @@ export default class Settings extends Component {
     super(props);
     this.state = {
       fontSize: 17,
-      spheres: []
+      spheres: [],
+      showNumbers: true
     }
   }
 
@@ -84,8 +86,9 @@ export default class Settings extends Component {
             <View style={StyleSheet.styles.listItem}>
               <Text style={[StyleSheet.styles.cell.title, {flex: 3}]}>{Localizable.t('chapter-and-verse-numbers')}</Text>
               <Switch
+                onValueChange={(value) => this.setState({showNumbers: value})}
                 style={styles.switch}
-                value={true}
+                value={this.state.showNumbers}
               />
             </View>
           </View>
