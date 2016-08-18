@@ -42,8 +42,52 @@ export default class Settings extends Component {
           />
         </NavigationBar>
         <ScrollView style={styles.scrollView}>
-          <View style={styles.row}>
+          <View style={styles.section}>
+            <View style={styles.row}>
 
+            </View>
+          </View>
+
+          <View style={styles.section}>
+            <View style={styles.row}>
+
+            </View>
+          </View>
+
+          <View style={styles.section}>
+            <TouchableOpacity style={styles.row} onPress={() => {}}>
+
+            </TouchableOpacity>
+            <View style={StyleSheet.styles.separator} />
+
+            <TouchableOpacity style={styles.row} onPress={() => {}}>
+
+            </TouchableOpacity>
+            <View style={StyleSheet.styles.separator} />
+
+            <TouchableOpacity style={styles.row} onPress={() => {}}>
+
+            </TouchableOpacity>
+            <View style={StyleSheet.styles.separator} />
+
+            <TouchableOpacity style={styles.row} onPress={() => {}}>
+
+            </TouchableOpacity>
+            <View style={StyleSheet.styles.separator} />
+
+            <TouchableOpacity style={styles.row} onPress={() => {}}>
+
+            </TouchableOpacity>
+            <View style={StyleSheet.styles.separator} />
+
+            <TouchableOpacity style={styles.row} onPress={() => {}}>
+
+            </TouchableOpacity>
+            <View style={StyleSheet.styles.separator} />
+
+            <TouchableOpacity style={styles.row} onPress={() => {}}>
+
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </View>
@@ -54,18 +98,21 @@ export default class Settings extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#EBECF3',
+    backgroundColor: '#D8D8D8',
   },
   scrollView: {
     flex: 1,
     marginTop: NavigationBar.HEIGHT,
   },
-  row: {
-    height: 44,
+  section: {
+    marginTop: 16,
     backgroundColor: 'white',
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: StyleSheet.styles.separator.backgroundColor,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: StyleSheet.styles.separator.backgroundColor,
+  },
+  row: {
+    height: 44,
   },
 });
