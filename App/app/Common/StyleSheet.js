@@ -134,10 +134,11 @@ const styles = {
     },
     occurrence: {
       color: '#CF1E00',
-      fontSize: 13,
+      fontSize: 15,
       fontWeight: 'bold',
-      width: 20,
-      textAlign: 'right',
+      width: 28,
+      textAlign: 'left',
+      paddingTop: 0,
     },
   },
   separator: {

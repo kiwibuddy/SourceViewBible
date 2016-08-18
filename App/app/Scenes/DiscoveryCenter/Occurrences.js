@@ -101,7 +101,7 @@ export default class DiscoveryCenterOccurrences extends Component {
       <TouchableOpacity key={occurrence.id} style={styles.listItemContainer} onPress={() => this._navigate(route)}>
         <Text style={StyleSheet.styles.cell.occurrence}>{number}</Text>
         <View style={styles.listItem}>
-          <Text style={styles.body}>{occurrence.text}</Text>
+          <Text numberOfLines={2} style={styles.body}>{occurrence.text}</Text>
           <Text style={StyleSheet.styles.cell.subtitle}>{bcvReference}</Text>
           <Text style={[StyleSheet.styles.cell.subtitle, {color: Colors.sources[role.key].tint}]}>{Localizable.t('so-reference', {source: occurrence.name, number: occurrence.number})}</Text>
         </View>
@@ -157,9 +157,11 @@ const styles = StyleSheet.create({
   listItem: {
     flex: 1,
     flexDirection: 'column',
-    paddingLeft: 3,
+    paddingLeft: 1,
   },
   body: {
     paddingBottom: 5,
+    color: '#59626A',
+    fontSize: 15,
   },
 });
