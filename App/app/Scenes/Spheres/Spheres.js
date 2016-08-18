@@ -258,7 +258,7 @@ export default class Spheres extends Component {
   };
 
   _renderCarouselIcon = (sphere: Object) => {
-    const iconName = `icon-${sphere.id}-filled`;
+    const iconName = `${sphere.id}-filled`;
     return (
       <Icon
         name={iconName}

@@ -109,7 +109,7 @@ export default class DiscoverSpheres extends Component {
     }
 
     const spherePercent = (sphere.wordCount / Bible.wordCount) * 100;
-    const iconName = `icon-${sphere.id}-filled`;
+    const iconName = `${sphere.id}-filled`;
     return (
       <TouchableOpacity style={styles.itemContainer} onPress={ () => this.props.navigate(sphereURL({sphereID: sphere.id, title: Localizable.t('spheres.text'), description: Localizable.t('sphere-overview', {name: sphere.name})})) }>
         <View style={styles.item}>

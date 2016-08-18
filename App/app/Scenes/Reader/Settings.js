@@ -133,7 +133,7 @@ export default class Settings extends Component {
     const { spheres } = this.state;
 
     const selected = spheres.indexOf(sphere) != -1;
-    const iconName = `icon-${sphere}-filled`;
+    const iconName = `${sphere}-filled`;
     const statusStyle = (selected ? styles.statusLabelSelected : {});
     const status = (selected ? Localizable.t('added') : Localizable.t('add'));
     return (
