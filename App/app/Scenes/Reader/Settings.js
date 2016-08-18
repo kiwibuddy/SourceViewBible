@@ -136,14 +136,18 @@ export default class Settings extends Component {
     const status = (selected ? Localizable.t('added') : Localizable.t('add'));
     return (
       <TouchableWithoutFeedback onPress={() => this._onPressSphere(sphere)}>
-        <View style={StyleSheet.styles.listItem}>
-          <Icon
-            name={iconName}
-            size={30}
-            style={{color: Colors.spheres[sphere].tint}}
-          />
-          <Text style={[StyleSheet.styles.cell.title]}>{Localizable.t(sphere)}</Text>
-          <Text style={[styles.statusLabel, statusStyle]}>{status}</Text>
+        <View style={[styles.cellContainer, {paddingVertical: 8, paddingLeft: 15}]}>
+          <View style={styles.cellLeftContainer}>
+            <Icon
+              name={iconName}
+              size={30}
+              style={{color: Colors.spheres[sphere].tint, paddingRight: 8}}
+            />
+            <Text style={[StyleSheet.styles.cell.title]}>{Localizable.t(sphere)}</Text>
+          </View>
+          <View style={styles.cellRightContainer}>
+            <Text style={[styles.statusLabel, statusStyle]}>{status}</Text>
+          </View>
         </View>
       </TouchableWithoutFeedback>
     );
@@ -182,7 +186,7 @@ export default class Settings extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#D8D8D8',
+    backgroundColor: '#EFEFF4',
   },
   scrollView: {
     flex: 1,
@@ -203,10 +207,9 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
   },
   sectionHeaderTitle: {
-    color: '#59626a',
+    color: '#59626A',
     marginTop: 8,
     fontSize: 13,
-    fontWeight: 'bold',
   },
   slider: {
     flex: 2,
@@ -227,5 +230,21 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     padding: 4,
     overflow: 'hidden',
+  },
+  cellContainer: {
+    flex: 1,
+    marginRight: 15,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  cellLeftContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    paddingTop: 2,
+    alignItems: 'center'
+  },
+  cellRightContainer: {
+    flex: 0,
+    justifyContent: 'flex-end',
   },
 });
