@@ -248,6 +248,7 @@ const HTML = `<!DOCTYPE html>
       var closedWidth = 0;
       var ready = false;
       var originalX = null;
+      var originalY = null;
 
       document.onreadystatechange = function() {
       	if (ready) return;
@@ -257,29 +258,42 @@ const HTML = `<!DOCTYPE html>
           document.addEventListener('touchstart', handleTouchStart, false);
           document.addEventListener('touchmove', handleTouchMove, false);
           document.addEventListener('touchend', handleTouchEnd, false);
+          document.addEventListener('touchcancel', handleTouchEnd, false);
 
           function handleTouchStart(e) {
-            originalX = evt.touches[0].clientX;
+            originalX = e.touches[0].clientX;
+            originalY = e.touches[0].clientY;
+            document.getElementById('table').style.transition = null;
           }
 
           function handleTouchMove(e) {
-            var x = e.touches[0].pageX;
-            var diff = Math.abs(originalX - x);
-            if (diff > threshold) {
-              opened = !opened;
-              done();
-            } else {
-              document.getElementById('table').style.transform = 'translate3d(' + x +'pt, 0px, 0px)';
+            if (!originalX || !originalY) return;
+
+            var currentX = e.touches[0].clientX;
+            var currentY = e.touches[0].clientY;
+
+            var xDiff = originalX - currentX;
+            var yDiff = originalY - currentY;
+
+            if (Math.abs(xDiff) > Math.abs(yDiff)) {
+              if (xDiff > 0) {
+                  /* left swipe */
+                  opened = false;
+              } else {
+                  /* right swipe */
+                  opened = true;
+              }
+              document.getElementById('table').style.transform = 'translate3d(' + currentX + 'pt, 0px, 0px)';
             }
           }
 
           function handleTouchEnd(e) {
-            done();
-          }
-
-          function done() {
+            if (!originalX || !originalY) return;
             originalX = null;
-            var width = (opened ? openedWidth : closedWidth);
+            originalY = null;
+
+            var width = opened ? openedWidth : closedWidth;
+            document.getElementById('table').style.transition = '.3s';
             document.getElementById('table').style.transform = 'translate3d(' + width + 'pt, 0px, 0px)';
           }
       	}

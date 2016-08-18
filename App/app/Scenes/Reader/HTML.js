@@ -126,6 +126,65 @@ module.exports = `
   </head>
   <body id="scripture">
     {{BODY}}
+
+    <script type="text/javascript">
+      var threshold = 30;
+      var opened = false;
+      var openedWidth = 220;
+      var closedWidth = 0;
+      var ready = false;
+      var originalX = null;
+      var originalY = null;
+
+      document.onreadystatechange = function() {
+      	if (ready) return;
+      	if (document.readyState == 'interactive' || document.readyState == 'complete') {
+      		ready = true;
+
+          document.addEventListener('touchstart', handleTouchStart, false);
+          document.addEventListener('touchmove', handleTouchMove, false);
+          document.addEventListener('touchend', handleTouchEnd, false);
+          document.addEventListener('touchcancel', handleTouchEnd, false);
+
+          function handleTouchStart(e) {
+            originalX = e.touches[0].clientX;
+            originalY = e.touches[0].clientY;
+            document.getElementById('table').style.transition = null;
+          }
+
+          function handleTouchMove(e) {
+            if (!originalX || !originalY) return;
+
+            var currentX = e.touches[0].clientX;
+            var currentY = e.touches[0].clientY;
+
+            var xDiff = originalX - currentX;
+            var yDiff = originalY - currentY;
+
+            if (Math.abs(xDiff) > Math.abs(yDiff)) {
+              if (xDiff > 0) {
+                  /* left swipe */
+                  opened = false;
+              } else {
+                  /* right swipe */
+                  opened = true;
+              }
+              document.getElementById('table').style.transform = 'translate3d(' + currentX + 'pt, 0px, 0px)';
+            }
+          }
+
+          function handleTouchEnd(e) {
+            if (!originalX || !originalY) return;
+            originalX = null;
+            originalY = null;
+
+            var width = opened ? openedWidth : closedWidth;
+            document.getElementById('table').style.transition = '.3s';
+            document.getElementById('table').style.transform = 'translate3d(' + width + 'pt, 0px, 0px)';
+          }
+      	}
+      };
+    </script>
   </body>
 </html>
 `;
