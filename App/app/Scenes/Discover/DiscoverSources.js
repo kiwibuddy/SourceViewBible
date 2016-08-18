@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: '#fff',
     height: 138,
-    shadowColor: "black",
+    shadowColor: 'black',
     shadowOpacity: 0.05,
     shadowRadius: 0.4,
     shadowOffset: {

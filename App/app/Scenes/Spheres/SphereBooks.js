@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
     height: 200,
     borderBottomColor: Colors.separator,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    shadowColor: "black",
+    shadowColor: 'black',
     shadowOpacity: 0.05,
     shadowRadius: 0.4,
     shadowOffset: {
