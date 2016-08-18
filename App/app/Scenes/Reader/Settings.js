@@ -3,11 +3,13 @@
 
 import React, { Component } from 'react';
 import {
+  Image,
   ScrollView,
+  Slider,
+  Switch,
   Text,
   TouchableOpacity,
   View,
-  Image,
 } from 'react-native';
 
 import {
@@ -43,14 +45,22 @@ export default class Settings extends Component {
         </NavigationBar>
         <ScrollView style={styles.scrollView}>
           <View style={styles.section}>
-            <View style={styles.row}>
-
+            <View style={StyleSheet.styles.listItem}>
+              <Text style={[StyleSheet.styles.cell.title, {flex: 1}]}>{Localizable.t('text-size')}</Text>
+              <Slider
+                step={0.25}
+                style={styles.slider}
+              />
             </View>
           </View>
 
           <View style={styles.section}>
-            <View style={styles.row}>
-
+            <View style={StyleSheet.styles.listItem}>
+              <Text style={[StyleSheet.styles.cell.title, {flex: 3}]}>{Localizable.t('chapter-and-verse-numbers')}</Text>
+              <Switch
+                style={styles.switch}
+                value={true}
+              />
             </View>
           </View>
 
@@ -58,37 +68,37 @@ export default class Settings extends Component {
             <Text style={styles.sectionHeaderTitle}>{Localizable.t('spheres.text').toLocaleUpperCase()}</Text>
           </View>
           <View style={[styles.section, {marginTop: 8}]}>
-            <TouchableOpacity style={styles.row} onPress={() => {}}>
+            <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
 
             </TouchableOpacity>
             <View style={StyleSheet.styles.separator} />
 
-            <TouchableOpacity style={styles.row} onPress={() => {}}>
+            <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
 
             </TouchableOpacity>
             <View style={StyleSheet.styles.separator} />
 
-            <TouchableOpacity style={styles.row} onPress={() => {}}>
+            <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
 
             </TouchableOpacity>
             <View style={StyleSheet.styles.separator} />
 
-            <TouchableOpacity style={styles.row} onPress={() => {}}>
+            <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
 
             </TouchableOpacity>
             <View style={StyleSheet.styles.separator} />
 
-            <TouchableOpacity style={styles.row} onPress={() => {}}>
+            <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
 
             </TouchableOpacity>
             <View style={StyleSheet.styles.separator} />
 
-            <TouchableOpacity style={styles.row} onPress={() => {}}>
+            <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
 
             </TouchableOpacity>
             <View style={StyleSheet.styles.separator} />
 
-            <TouchableOpacity style={styles.row} onPress={() => {}}>
+            <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
 
             </TouchableOpacity>
           </View>
@@ -127,7 +137,10 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: 'bold',
   },
-  row: {
-    height: 44,
+  slider: {
+    flex: 2,
+  },
+  switch: {
+    flex: 1,
   },
 });

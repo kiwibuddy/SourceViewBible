@@ -32,6 +32,8 @@
     },
     "range-of": "{{current}} of {{total}}",
     "settings": "Settings",
+    "chapter-and-verse-numbers": "Chapter and Verse Numbers",
+    "text-size": "Text Size",
     "time-period": "Time Period",
     "introduction": "Introduction",
     "how-to-read": "How to read {{name}}",
