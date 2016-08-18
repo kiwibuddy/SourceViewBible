@@ -155,6 +155,7 @@ export default class Query {
     await this._prepare();
 
     const sql = this._sql('SELECT COUNT(DISTINCT bso.id) AS count');
+    console.log(sql);
     const rows = await rowsWithSQL(sql);
     return rows[0]['count'];
   }
@@ -450,6 +451,8 @@ export default class Query {
     orderByStatement.orderBy('count DESC');
 
     const dataSQL = this._sql(selectStatement.toSQL(), {groupBy: groupByStatement.toSQL(), orderBy: orderByStatement.toSQL()});
+
+    console.log(dataSQL);
 
     const rows = await rowsWithSQL(dataSQL);
 

@@ -29,7 +29,7 @@ import FilterItems from './Filters/FilterItems';
 
 import { DeleteButton, DuplicateButton, ShareButton } from './Buttons';
 
-import Popover from './Popover';
+import Popover from '../../Components/Common/Popover';
 
 import Query from './Query';
 
@@ -307,7 +307,7 @@ export default class Card extends Component {
               this.setState({
                 data,
                 loading: false
-              });              
+              });
             }
           })
         }
