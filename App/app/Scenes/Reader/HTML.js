@@ -36,10 +36,6 @@ module.exports = `
         overflow: hidden;
         margin-left: -220pt;
       }
-      .showSource {
-        margin-right: -135pt;
-        margin-left: 0;
-      }
       tr {
         margin:0;
         padding:0;
