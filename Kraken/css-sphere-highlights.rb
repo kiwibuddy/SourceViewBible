@@ -7,34 +7,23 @@
 require 'pp'
 
 sphereColors = {
-  "Family" => "#FFD8D6",
-  "Economics" => "#FFEACC",
-  "Government" => "#FFF5CD",
-  "Religion" => "#E8F4CE",
-  "Education" => "#D4F1F7",
-  "Communication" => "#DEDEF7",
-  "Celebration" => "#F9DEEF"
+  "Fam" => "#FFD8D6",
+  "Eco" => "#FFEACC",
+  "Gov" => "#FFF5CD",
+  "Rel" => "#E8F4CE",
+  "Edu" => "#D4F1F7",
+  "Com" => "#DEDEF7",
+  "Cel" => "#F9DEEF"
 }
 
-# sphereColors = {
-#   "Family" => "${Colors.spheres.family.highlightTint}",
-#   "Economics" => "${Colors.spheres.economics.highlightTint}",
-#   "Government" => "${Colors.spheres.government.highlightTint}",
-#   "Religion" => "${Colors.spheres.religion.highlightTint}",
-#   "Education" => "${Colors.spheres.education.highlightTint}",
-#   "Communication" => "${Colors.spheres.communication.highlightTint}",
-#   "Celebration" => "${Colors.spheres.celebration.highlightTint}"
-# }
-
-
-spheres = ["Family", "Economics", "Government", "Religion", "Education", "Communication", "Celebration"]
+spheres = ["Fam", "Eco", "Gov", "Rel", "Edu", "Com", "Cel"]
 sphere_count = spheres.count
 
 highlights = []
 
 (0..sphere_count).each do |i|
   for combination in spheres.combination(i)
-    highlight_key = combination.map{|sphere| "highlight#{sphere}"}.join(".")
+    highlight_key = combination.map{|sphere| "h#{sphere}"}.join(".")
     highlight_count = combination.length
 
     percent = (100.0/combination.length.to_f)
