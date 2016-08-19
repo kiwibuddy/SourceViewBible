@@ -358,8 +358,8 @@ const styles = StyleSheet.create({
   readButtonTitle: {
     color: Colors.tint,
     fontSize: 18,
-    marginVertical: 20,
-    marginHorizontal: 40,
+    marginHorizontal: 30,
+    marginTop: -2,
   },
   activityIndicator: {
     position: 'absolute',
