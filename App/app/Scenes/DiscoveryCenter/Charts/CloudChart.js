@@ -17,6 +17,8 @@ import {
 } from '../../../Common';
 
 import Chart from './Chart';
+import ChartColors from './ChartColors';
+
 import { WordCloud } from '../../../Components/Charts';
 import ParallaxMotionView from '../../../Components/Common/ParallaxMotionView';
 
@@ -53,22 +55,24 @@ const CloudChartView = (props: Props) => {
     chart = <Image style={{alignSelf: 'center'}} source={require('../Images/chart-cloud-blankslate.png')} />;
   } else {
     const words = data.slice(0, Math.min(data.length, 10)).map(word => word.label);
+    const colors = words.map((word, index) => ChartColors.colorAtIndex(index));
+
     chart = <WordCloud style={styles.chart}>
       <ParallaxMotionView intensity={5} style={[styles.parallax, {opacity: 0.8}]}>
-        <Text style={[styles.wc1, {top: 50, alignSelf: 'center'}]} numberOfLines={1}>{words[0]}</Text>
+        <Text style={[styles.wc1, {top: 50, alignSelf: 'center', color: colors[0]}]} numberOfLines={1}>{words[0]}</Text>
       </ParallaxMotionView>
       <ParallaxMotionView intensity={10} style={[styles.parallax, {opacity: 0.8}]}>
-        <Text style={[styles.wc2, {top: 10, left: -5}]}>{words[1]}</Text>
-        <Text style={[styles.wc2, {bottom: 20, right: 15}]}>{words[2]}</Text>
-        <Text style={[styles.wc2, {top: -5, right: 50}]}>{words[3]}</Text>
-        <Text style={[styles.wc2, {bottom: 0, left: 50}]}>{words[4]}</Text>
+        <Text style={[styles.wc2, {top: 10, left: -5, color: colors[1]}]}>{words[1]}</Text>
+        <Text style={[styles.wc2, {bottom: 20, right: 15, color: colors[2]}]}>{words[2]}</Text>
+        <Text style={[styles.wc2, {top: -5, right: 50, color: colors[3]}]}>{words[3]}</Text>
+        <Text style={[styles.wc2, {bottom: 0, left: 50, color: colors[4]}]}>{words[4]}</Text>
       </ParallaxMotionView>
       <ParallaxMotionView intensity={20} style={[styles.parallax, {opacity: 0.6}]}>
-        <Text style={[styles.wc3, {top: 40, right: 15}]}>{words[5]}</Text>
-        <Text style={[styles.wc3, {top: 120, left: 0}]}>{words[6]}</Text>
-        <Text style={[styles.wc3, {top: 60, left: 35}]}>{words[7]}</Text>
-        <Text style={[styles.wc3, {bottom: 70, right: 35}]}>{words[8]}</Text>
-        <Text style={[styles.wc3, {bottom: 10, right: 120}]}>{words[9]}</Text>
+        <Text style={[styles.wc3, {top: 40, right: 15, color: colors[5]}]}>{words[5]}</Text>
+        <Text style={[styles.wc3, {top: 120, left: 0, color: colors[6]}]}>{words[6]}</Text>
+        <Text style={[styles.wc3, {top: 60, left: 35, color: colors[7]}]}>{words[7]}</Text>
+        <Text style={[styles.wc3, {bottom: 70, right: 35, color: colors[8]}]}>{words[8]}</Text>
+        <Text style={[styles.wc3, {bottom: 10, right: 120, color: colors[9]}]}>{words[9]}</Text>
       </ParallaxMotionView>
     </WordCloud>
   }
