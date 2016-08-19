@@ -11,6 +11,9 @@
     "book": "Book",
     "source": "Source",
     "recipient": "Recipient",
+    "everyone": "Everyone",
+    "just-sources": "Just Sources",
+    "just-recipients": "Just Recipients",
     "sources": {
       "narrator": "Narrator",
       "god": "God",
