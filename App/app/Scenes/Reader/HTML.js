@@ -110,12 +110,19 @@ module.exports = `
         font-weight: normal;
         {{NUMBER_DISPLAY}}
       }
+      .textChatper span {
+        margin-top: -2pt;
+        margin-bottom: -1pt;
+      }
       .textVerse {
         font-family: Gurmukhi MN;
         font-size: 0.65em;
         position: relative;
         top: -0.4em;
         {{NUMBER_DISPLAY}}
+      }
+      .textVerse span {
+        padding-bottom: 5px;
       }
       .textIndent, .textPoetryStanzaFirst {
         text-indent: 2em;
