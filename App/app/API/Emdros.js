@@ -67,14 +67,19 @@ function scripture(options: Object) {
     stylesheet = SCRIPTURE_STYLESHEET;
 
     if (options && options.spheres && options.spheres.length > 0) {
-      const sphereFeatures = options.spheres.map(sphere => SPHERE_FEATURE_MAP[sphere]);
+      const { spheres } = options;
+      const sphereFeatures = spheres.map(sphere => SPHERE_FEATURE_MAP[sphere]);
 
       const base = SCRIPTURE_STYLESHEET['fetchinfo']['base']['object_types'];
-      base['Token']['start'] += highlightSpheres('{{ feature 0 }}', options.spheres, 1);
+      base['Token']['start'] = base['Token']['start'].replace('{{SPHERES}}', highlightSpheres('{{ feature 0 }}', spheres, 1));
       base['Token']['get'] = base['Token']['get'].concat(sphereFeatures);
       base['NonWordToken'] = base['Token'];
       base['SpaceToken']['start'] = highlightSpheres(' ', options.spheres, 0);
       base['SpaceToken']['get'] = sphereFeatures;
+      base['VerseNumberToken']['start'] = base['VerseNumberToken']['start'].replace('{{SPHERES}}', highlightSpheres('{{ featurenomangle 0 }}&#160;', spheres, 1));
+      base['VerseNumberToken']['get'] = base['VerseNumberToken']['get'].concat(sphereFeatures);
+      base['ChapterNumberToken']['start'] = base['ChapterNumberToken']['start'].replace('{{SPHERES}}', highlightSpheres('{{ featurenomangle 0 }}', spheres, 1));
+      base['ChapterNumberToken']['get'] = base['ChapterNumberToken']['get'].concat(sphereFeatures);
     }
   }
   const style = {stylesheet: JSON.stringify(stylesheet)};
