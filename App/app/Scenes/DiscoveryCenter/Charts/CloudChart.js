@@ -36,7 +36,7 @@ const CloudChartView = (props: Props) => {
   const filterCount = card.filters.length;
   const xAxis = card.xAxis;
   const yAxis = card.yAxis;
-  const data = (card.zAxis ? props.data[0].value : props.data);
+  const data = (card.zAxis && props.data ? props.data[0].value : props.data);
 
   let xAxisTitle = "Choose Text";
   if (card.xAxis) {
