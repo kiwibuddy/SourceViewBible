@@ -32,7 +32,6 @@ import AddFilterItem from './AddFilterItem';
 const Blankslate = () => {
   return (
     <View style={styles.blankslate}>
-      <Image source={require('../Images/filter-blankslate.png')} />
     </View>
   );
 };
@@ -121,7 +120,7 @@ const FilterItems = (props: Props) => {
 
 const styles = StyleSheet.create({
   blankslate: {
-    paddingVertical: 50,
+    paddingVertical: 82,
     alignSelf: 'center',
   },
 });
