@@ -175,19 +175,6 @@ const styles = {
       paddingHorizontal: 10,
       height: 44,
     },
-    blockContainer: {
-      flex: 0,
-      flexDirection: 'column',
-      height: 44,
-      marginLeft: 20,
-    },
-    blockItem: {
-      flex: 0,
-      flexDirection: 'row',
-      alignItems: 'center',
-      height: 44,
-      marginTop: -20,
-    },
   }
 };
 

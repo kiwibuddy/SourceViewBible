@@ -61,8 +61,8 @@ export default class AddFilterItem extends Component {
 
     if (!showFilterOptions) return null;
     return (
-      <View style={StyleSheet.styles.discoveryCenter.blockContainer}>
-        <View style={StyleSheet.styles.discoveryCenter.blockItem}>
+      <View style={styles.blockContainer}>
+        <View style={styles.blockItem}>
           <TouchableOpacity hitSlop={hitSlop} onPress={() => this._onPressFilterType(bookFiltersURL({title: 'Book Filters'}))} >
             <Text style={styles.button}>BOOKS</Text>
           </TouchableOpacity>
@@ -73,7 +73,7 @@ export default class AddFilterItem extends Component {
             <Text style={styles.button}>WORDS</Text>
           </TouchableOpacity>
         </View>
-        <View style={StyleSheet.styles.discoveryCenter.blockItem}>
+        <View style={styles.blockItem}>
           <TouchableOpacity hitSlop={hitSlop} onPress={() => this._onPressFilterType(actantFiltersURL({title: 'Source Filters', type: 'source'}))} >
             <Text style={styles.button}>SOURCES</Text>
           </TouchableOpacity>
@@ -95,6 +95,17 @@ export default class AddFilterItem extends Component {
 }
 
 const styles = StyleSheet.create({
+  blockContainer: {
+    flex: 0,
+    flexDirection: 'column',
+    marginLeft: 20,
+    marginTop: -7,
+  },
+  blockItem: {
+    flex: 0,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   filterItem: {
     flex: 0,
     flexDirection: 'column',
@@ -104,5 +115,6 @@ const styles = StyleSheet.create({
     fontSize: 11,
     fontWeight: 'bold',
     paddingRight: 15,
+    paddingVertical: 8,
   },
 });
