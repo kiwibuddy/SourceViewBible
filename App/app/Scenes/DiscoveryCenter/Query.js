@@ -97,23 +97,33 @@ class OrderByStatement {
 }
 
 class EmdrosQuery {
-  word: string
+  static SPHERE_FEATURE_MAP = {
+    'family': 'Family',
+    'economics': 'Economics',
+    'government': 'Government',
+    'religion': 'Religion',
+    'education': 'Education',
+    'communication': 'MediaCom',
+    'celebration': 'Celebration'
+  };
+
+  query: string;
   monads: ?Array<Array<number>>;
 
-  constructor(word: string, monads: ?Array<Array<number>>) {
-    this.word = word;
+  constructor(query: string, monads: ?Array<Array<number>>) {
+    this.query = query;
     this.monads = monads;
   }
 
   async data() {
-    const word = this.word.toLowerCase();
+    const tokenFeatureComparison = this.query;
     const monads = this.monads;
 
     let options = null;
     if (monads && monads.length > 0) {
-      options = {monads, tokenFeatureComparison: `surface_fts="${word}"`}
+      options = {monads, tokenFeatureComparison}
     } else {
-      options = {tokenFeatureComparison: `surface_fts="${word}"`};
+      options = {tokenFeatureComparison};
     }
 
     return Emdros.wordCountsForContext('Source', options);
@@ -194,13 +204,22 @@ export default class Query {
         monads = await this._monads();
       }
 
-      const query = new EmdrosQuery(wordFilter.word, monads);
+      const queryParameters = [`surface_fts="${wordFilter.word.toLowerCase()}"`];
+
+      const sphereFilter =  this.filters.find(filter => filter.type === 'sphere');
+      if (sphereFilter) {
+        sphereFilter.spheres.forEach(sphereID => {
+          const sphere = EmdrosQuery.SPHERE_FEATURE_MAP[sphereID];
+          queryParameters.push(`${sphere}=true`);
+        });
+      }
+
+      const query = new EmdrosQuery(queryParameters.join(' AND '), monads);
       const data = await query.data();
       const identifiers = Object.keys(data).map(bsoID => parseInt(bsoID));
 
       if (identifiers.length > 0) {
         this.emdrosData = data;
-
         this.whereClause.where(ComparisonPredicate.predicateWith('bso.id', 'IN', identifiers));
       }
     }
