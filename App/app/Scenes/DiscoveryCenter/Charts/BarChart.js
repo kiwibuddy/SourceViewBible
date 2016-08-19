@@ -17,8 +17,9 @@ import {
 } from '../../../Common';
 
 import Chart from './Chart';
-import { BarChart } from '../../../Components/Charts';
+import ChartColors from './ChartColors';
 
+import { BarChart } from '../../../Components/Charts';
 import { axisItemsURL } from '../../../Navigation';
 
 type Props = {
@@ -51,10 +52,14 @@ const BarChartView = (props: Props) => {
   if (!xAxis || !yAxis || occurrenceCount == 0 || data == null || loading) {
     chart = <Image style={{alignSelf: 'center'}} source={require('../Images/chart-bar-blankslate.png')} />;
   } else {
+    const bars = data.map((slice, index) => {
+      return {...slice, color: slice.color || ChartColors.colorAtIndex(index)};
+    });
+
     chart = <ScrollView style={styles.chart} horizontal={true} showsHorizontalScrollIndicator={false}>
       <BarChart
-        bars={data}
-        barColor="#FF3F49"
+        bars={bars}
+        // barColor="#FF3F49"
         barStyle={{flex: 0, width: 8, marginHorizontal: 6, marginBottom: 100,}}
         deltaStyle={{backgroundColor: 'transparent'}}
         horizontal={false}
