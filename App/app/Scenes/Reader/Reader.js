@@ -259,11 +259,13 @@ export default class Reader extends Component {
   _renderInjectedJavascript = () => {
     if (!this.props.anchor) return null;
 
-    const anchor = (this.props.bookID == 'psalms' ? this.props.anchor.replace('chapter', 'verse') + '-1' : this.props.anchor);
+    const isPsalms = this.props.bookID == 'psalms';
+    const anchor = (isPsalms ? this.props.anchor.replace('chapter', 'verse') + '-1' : this.props.anchor);
+    const scrollOffset = (isPsalms ? 80 : 8);
 
     const javascript = `\
       location.hash = '#${encodeURIComponent(anchor)}';
-      document.getElementById('scripture').scrollTop = document.getElementById('scripture').scrollTop - 8;
+      document.getElementById('scripture').scrollTop = document.getElementById('scripture').scrollTop - ${scrollOffset};
     `;
     return javascript;
   };
