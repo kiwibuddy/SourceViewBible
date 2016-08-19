@@ -84,7 +84,7 @@ class OccurrenceToolbar extends Component {
     const occurrencesRoute = occurrencesURL({title: Localizable.t('passages'), card, modal: true});
 
     return (
-      <Navigation.Toolbar style={styles.toolbar}>
+      <Navigation.Toolbar>
         <View style={{flex: 1, flexDirection: 'row'}}>
           <Navigation.ToolbarButton
             disabled={previousRoute == null}
@@ -170,19 +170,34 @@ export default class Reader extends Component {
   render() {
     if (!this.state.scripture) return null;
 
+    const filterBar = this._renderFilterBar();
+
     const injectedJavaScript = this._renderInjectedJavascript();
     const key = (this.props.anchor ? `anchor-${this.props.anchor}` : 'webview');
     return (
-      <WebView
-        key={key}
-        decelerationRate='normal'
-        injectedJavaScript={injectedJavaScript}
-        scalesPageToFit={false}
-        style={styles.webview}
-        source={{html: this.state.scripture}}
-      />
+      <View key={key} style={styles.container}>
+        {filterBar}
+        <WebView
+          decelerationRate='normal'
+          injectedJavaScript={injectedJavaScript}
+          scalesPageToFit={false}
+          style={styles.webview}
+          source={{html: this.state.scripture}}
+        />
+      </View>
     );
   }
+
+  _renderFilterBar = () => {
+    const spheres = Preference.objectForKey(Preference.Keys.Reader.spheres) || [];
+    if (spheres.length == 0) return null;
+
+    return (
+      <View style={styles.filterBar}>
+
+      </View>
+    );
+  };
 
   _setScripture = (bookID: string, anchor?: string) => {
     const book = Book.findByID(bookID);
@@ -252,7 +267,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
-  toolbar: {
-
+  filterBar: {
+    height: 30,
+    backgroundColor: 'red'
   },
 });
