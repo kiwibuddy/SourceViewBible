@@ -85,7 +85,7 @@ const CloudChartView = (props: Props) => {
         />
         <Chart.DropdownButton
           image={require('../Images/chart-icn-word-yaxis.png')}
-          onPress={() => props.onPressAxis(axisItemsURL({title: "Choose Size", axis: 'yAxis'}))}
+          // onPress={() => props.onPressAxis(axisItemsURL({title: "Choose Size", axis: 'yAxis'}))}
           title={yAxisTitle}
           style={StyleSheet.styles.discoveryCenter.rightContainer}
         />

@@ -72,7 +72,7 @@ const PieChartView = (props: Props) => {
         />
         <Chart.DropdownButton
           image={require('../Images/chart-icn-pie-slice-value.png')}
-          onPress={() => props.onPressAxis(axisItemsURL({title: 'Slice', axis: 'yAxis'}))}
+          // onPress={() => props.onPressAxis(axisItemsURL({title: 'Slice', axis: 'yAxis'}))}
           style={StyleSheet.styles.discoveryCenter.leftContainer}
           title={yAxisTitle}
         />

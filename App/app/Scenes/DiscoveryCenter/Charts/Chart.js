@@ -61,11 +61,12 @@ type DropdownButtonProps = {
 };
 
 const DropdownButton = (props: DropdownButtonProps) => {
+  const enabled = props.onPress ? <Image style={styles.chartDropdown} source={require('../Images/chart-icn-dropdown.png')} /> : null;
   return (
-    <TouchableOpacity {...props}>
+    <TouchableOpacity disabled={!props.onPress} {...props}>
       <Image style={styles.chartIcon} source={props.image} />
       <Text numberOfLines={1} style={styles.chartProperty}>{props.title}</Text>
-      <Image style={styles.chartDropdown} source={require('../Images/chart-icn-dropdown.png')} />
+      {enabled}
     </TouchableOpacity>
   )
 };

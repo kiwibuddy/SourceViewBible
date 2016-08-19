@@ -74,7 +74,7 @@ const BarChartView = (props: Props) => {
         />
         <Chart.DropdownButton
           image={require('../Images/chart-icn-bar-yaxis.png')}
-          onPress={() => props.onPressAxis(axisItemsURL({title: "Choose Y Axis", axis: 'yAxis'}))}
+          // onPress={() => props.onPressAxis(axisItemsURL({title: "Choose Y Axis", axis: 'yAxis'}))}
           title={yAxisTitle}
           style={StyleSheet.styles.discoveryCenter.rightContainer}
         />
