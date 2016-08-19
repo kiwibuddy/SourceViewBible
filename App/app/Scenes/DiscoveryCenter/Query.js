@@ -580,7 +580,7 @@ export default class Query {
           break;
 
         case 'sphere':
-          // fromClause.join('INNER JOIN spheres ON bso.id = spheres.bso_id');
+          fromClause.join('INNER JOIN spheres ON bso.id = spheres.bso_id');
           break;
       }
     });
@@ -589,6 +589,11 @@ export default class Query {
   }
 
   _buildWhereClause() {
+    const xAxis = this.axis[0];
+    const yAxis = this.axis[1];
+    const zAxis = this.axis[2];
+    if (!xAxis || !yAxis) return;
+
     const whereClause = new WhereClause();
 
     this.filters.forEach(filter => {
@@ -652,6 +657,9 @@ export default class Query {
           spheres.forEach(sphere => {
             whereClause.where(RawPredicate.predicateWith(`EXISTS (SELECT spheres.bso_id FROM spheres WHERE bso.id = spheres.bso_id AND spheres.sphere_id = $0)`, [sphere]));
           });
+          if (xAxis.type == 'sphere' || (zAxis && zAxis.type == 'sphere')) {
+            whereClause.where(ComparisonPredicate.predicateWith('spheres.sphere_id', 'IN', spheres));
+          }
           break;
 
         case 'word':
