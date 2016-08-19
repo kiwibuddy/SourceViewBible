@@ -26,7 +26,9 @@ const {
 
 import { PieChart, SourcesBarChart, SpheresBarChart } from '../../Components/Charts';
 
-import { sphereURL } from '../../Navigation';
+import { readerURL, sphereURL } from '../../Navigation';
+
+import { Preference } from '../../Preferences';
 
 import { Book, Sphere } from '../../Database';
 
@@ -109,9 +111,10 @@ export default class BookSpheres extends Component {
     const colors = Colors.spheres[sphere.id];
 
     return (
-      <TouchableOpacity style={styles.listItemContainer} onPress={() => this.props.navigate(sphereURL({sphereID: sphere.id, title: Localizable.t('spheres.text'), description: Localizable.t('sphere-overview', {name: sphere.name})}))}>
+      <TouchableOpacity style={styles.listItemContainer} onPress={() => this._onPressSphere(sphere)}>
         <PieChart
           color={colors.chromeTint}
+          onPress={() => this._onPressSphereIcon(sphere)}
           slices={[{color: colors.tint, value: spherePercent}, {color: colors.lightTint, value: 100 - spherePercent}]}
           title={Localizable.toPercentage(spherePercent, {precision: 0})}
           size={57}
@@ -123,6 +126,16 @@ export default class BookSpheres extends Component {
         </View>
       </TouchableOpacity>
     );
+  };
+
+  _onPressSphere = (sphere: Object) => {
+    const { book } = this.state;
+    Preference.setObjectForKey([sphere.id], Preference.Keys.Reader.spheres);
+    this.props.navigate(readerURL({bookID: book.id, anchor: 'chapter-1', title: book.name}));
+  };
+
+  _onPressSphereIcon = (sphere: Object) => {
+    this.props.navigate(sphereURL({sphereID: sphere.id, title: Localizable.t('spheres.text'), description: Localizable.t('sphere-overview', {name: sphere.name})}));
   };
 }
 

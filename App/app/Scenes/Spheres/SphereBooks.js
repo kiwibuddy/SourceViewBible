@@ -32,7 +32,7 @@ import { BarChart, PieChart } from '../../Components/Charts';
 // $FlowFixMe: - Flow can't find os module extension
 import SegmentedControl from '../../Components/Common/SegmentedControl';
 
-import { bookURL } from '../../Navigation';
+import { readerURL } from '../../Navigation';
 
 import { Book, Sphere } from '../../Database';
 
@@ -175,7 +175,7 @@ export default class SphereBooks extends Component {
     const colors = Colors.spheres[sphere.id];
 
     return (
-      <TouchableOpacity style={styles.section} onPress={() => this.props.navigate(bookURL({bookID: book.id, sphereID: sphere.id, title: Localizable.t('book-overview', {name: book.name})}))}>
+      <TouchableOpacity style={styles.section} onPress={() => this._onPressBook(book)}>
         <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
           <View style={styles.sourcesLeftContainer}>
             <Text style={StyleSheet.styles.cell.title}>{book.name}</Text>
@@ -253,6 +253,11 @@ export default class SphereBooks extends Component {
       selectedSegmentIndex: value,
       dataSource: this._getDataSource(value)
     });
+  };
+
+  _onPressBook = (book: Object) => {
+    Preference.setObjectForKey([this.state.sphere.id], Preference.Keys.Reader.spheres);
+    this.props.navigate(readerURL({bookID: book.id, anchor: 'chapter-1', title: book.name}));
   };
 }
 

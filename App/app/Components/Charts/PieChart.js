@@ -79,7 +79,7 @@ const PieChart = (props: Object) => {
 	});
 
   return (
-    <TouchableOpacity style={chartStyle}>
+    <TouchableOpacity style={chartStyle} onPress={props.onPress}>
 			<View style={StyleSheet.absoluteFill}>
 				<Surface width={size} height={size}>
 					<Group>
@@ -218,6 +218,7 @@ class Wedge extends Component<void, any, any> {
 
 PieChart.propTypes = {
   color: ColorPropType,
+  onPress: PropTypes.func,
   slices: PropTypes.arrayOf(PropTypes.shape({
     color: ColorPropType.isRequired,
     value: PropTypes.number.isRequired,

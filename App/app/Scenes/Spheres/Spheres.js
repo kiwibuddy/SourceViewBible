@@ -29,9 +29,10 @@ const WIDTH = Dimensions.get('window').width;
 const CAROUSEL_ITEM_SIZE = 80;
 const MAXIMUM_BOOK_COUNT = 5;
 
-import { bookURL, sphereBooksURL, spherePassagesURL, sphereSourcesURL, sphereWordsURL, sphereURL } from '../../Navigation';
-
+import { bookURL, readerURL, sphereBooksURL, spherePassagesURL, sphereSourcesURL, sphereWordsURL, sphereURL } from '../../Navigation';
 import { Bible, Book, Sphere } from '../../Database';
+import { Preference } from '../../Preferences';
+
 
 type Props = {
   sphereID?: string,
@@ -215,7 +216,7 @@ export default class Spheres extends Component {
     const spherePercent = (wordCount / book.wordCount) * 100;
 
     return (
-      <TouchableOpacity key={book.id} style={styles.section} onPress={() => this.props.navigate(bookURL({bookID: book.id, title: Localizable.t('book-overview', {name: book.name})}))}>
+      <TouchableOpacity key={book.id} style={styles.section} onPress={() => this._onPressBook(book)}>
         <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
           <View style={styles.sourcesLeftContainer}>
             <Text style={StyleSheet.styles.cell.titlemedium}>{book.name}</Text>
@@ -279,7 +280,12 @@ export default class Spheres extends Component {
       sphere,
       books
     });
-  }
+  };
+
+  _onPressBook = (book: Object) => {
+    Preference.setObjectForKey([this.state.sphere.id], Preference.Keys.Reader.spheres);
+    this.props.navigate(readerURL({bookID: book.id, anchor: 'chapter-1', title: book.name}));
+  };
  }
 
 const styles = StyleSheet.create({
