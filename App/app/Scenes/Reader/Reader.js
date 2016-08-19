@@ -7,10 +7,12 @@ import { Component } from 'react';
 import ReactNative from 'react-native';
 
 const {
+  Image,
+  ScrollView,
+  Text,
+  TouchableOpacity,
   View,
   WebView,
-  Text,
-  Image,
 } = ReactNative;
 
 import {
@@ -194,21 +196,21 @@ export default class Reader extends Component {
     const spheres = Preference.objectForKey(Preference.Keys.Reader.spheres) || [];
     if (spheres.length == 0) return null;
 
-    const sphereLabels = spheres.map(sphereID => {
-      const sphere = Sphere.findByID(sphereID);
-      const color = Colors.spheres[sphereID].tint;
+    const sphereLabels = Sphere.whereIn(spheres).map(sphere => {
+      const color = sphere.color();
       return (
-        <Text key={'sphere-' + sphereID} style={[styles.filterLabel, {backgroundColor: color}]}>{sphere.name}</Text>
+        <Text key={'sphere-' + sphere.id} style={[styles.filterLabel, {backgroundColor: color}]}>{sphere.name}</Text>
       );
     });
 
     return (
       <View style={styles.filterBar}>
-        {sphereLabels}
-        <Image
-          style={styles.filterClear}
-          source={require('./Images/clear-btn.png')}
-        />
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          {sphereLabels}
+        </ScrollView>
+        <TouchableOpacity style={styles.filterClear} onPress={this._onPressClearFilter}>
+          <Image source={require('./Images/clear-btn.png')} />
+        </TouchableOpacity>
       </View>
     );
   };
@@ -260,6 +262,13 @@ export default class Reader extends Component {
       document.getElementById('scripture').scrollTop = document.getElementById('scripture').scrollTop - 8;
     `;
     return javascript;
+  };
+
+  _onPressClearFilter = () => {
+    const { bookID, anchor } = this.props;
+
+    Preference.setObjectForKey([], Preference.Keys.Reader.spheres);
+    this._setScripture(bookID, anchor);
   };
 
   _debugScripture(scripture: string) {

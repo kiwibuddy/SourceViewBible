@@ -615,6 +615,12 @@ export class Sphere extends Realm.Object {
     return realm.objectForPrimaryKey('Sphere', primaryKey);
   }
 
+  static whereIn(ids: any) {
+    if (ids.length == 0) return [];
+    const filter = ids.map((id, index) => `id = $${index}`).join(' OR ');
+    return realm.objects('Sphere').filtered(filter, ...ids).sorted('position');
+  }
+
   countOfBook(bookID: string): number {
     const count = this.bookCounts.find(count => count.string === bookID);
     return count && count.count || 0;
