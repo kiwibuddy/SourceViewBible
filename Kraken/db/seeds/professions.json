@@ -1,7 +1,8 @@
 [
   {
     "id": 1,
-    "key": "Agriculture"
+    "key": "Agriculture",
+    "searchable": false
   },
   {
     "id": 2,
@@ -25,7 +26,8 @@
   },
   {
     "id": 7,
-    "key": "Executive"
+    "key": "Executive",
+    "searchable": false
   },
   {
     "id": 8,
@@ -49,7 +51,8 @@
   },
   {
     "id": 13,
-    "key": "Hebrew"
+    "key": "Hebrew",
+    "searchable": false
   },
   {
     "id": 14,
@@ -65,7 +68,8 @@
   },
   {
     "id": 17,
-    "key": "Judicial"
+    "key": "Judicial",
+    "searchable": false
   },
   {
     "id": 18,
@@ -101,7 +105,8 @@
   },
   {
     "id": 26,
-    "key": "MilitaryPolice"
+    "key": "MilitaryPolice",
+    "searchable": false
   },
   {
     "id": 27,
@@ -109,7 +114,8 @@
   },
   {
     "id": 28,
-    "key": "Not_Hebrew"
+    "key": "Not_Hebrew",
+    "searchable": false
   },
   {
     "id": 29,
@@ -157,7 +163,8 @@
   },
   {
     "id": 40,
-    "key": "Royalty"
+    "key": "Royalty",
+    "searchable": false
   },
   {
     "id": 41,
