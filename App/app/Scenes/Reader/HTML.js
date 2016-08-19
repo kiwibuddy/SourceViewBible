@@ -119,7 +119,7 @@ module.exports = `
         {{NUMBER_DISPLAY}}
       }
       .textVerse span {
-        padding-bottom: 5px;
+        padding-bottom: .4em;
       }
       .textIndent, .textPoetryStanzaFirst {
         text-indent: 2em;
