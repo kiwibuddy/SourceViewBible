@@ -6,6 +6,7 @@ import {
   ScrollView,
   Text,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from 'react-native';
 
@@ -15,11 +16,15 @@ import {
   StyleSheet,
 } from '../../../Common';
 
+import Icon from '../../../Components/Common/Icon';
+
 import { booksFilterURL } from '../../../Navigation';
 import { cardWithFilter } from './FilterUtils';
 import { Sphere } from '../../../Database';
 
 type Props = {
+  card: Object,
+  filter: Object,
   navigate: Function,
   onDone: Function,
 };
@@ -35,49 +40,120 @@ function filterSphere(filter: Object, sphereID: string) {
   });
 }
 
-const SpheresFilter = (props: Props) => {
-  return (
-    <ScrollView style={styles.container}>
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(cardWithFilter(props.card, filterSphere(props.filter, 'family')))}>
-        <Text style={StyleSheet.styles.cell.title}>Family</Text>
-      </TouchableOpacity>
-      <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(cardWithFilter(props.card, filterSphere(props.filter, 'economics')))}>
-        <Text style={StyleSheet.styles.cell.title}>Economics</Text>
-      </TouchableOpacity>
-      <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(cardWithFilter(props.card, filterSphere(props.filter, 'religion')))}>
-        <Text style={StyleSheet.styles.cell.title}>Religion</Text>
-      </TouchableOpacity>
-      <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(cardWithFilter(props.card, filterSphere(props.filter, 'government')))}>
-        <Text style={StyleSheet.styles.cell.title}>Government</Text>
-      </TouchableOpacity>
-      <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(cardWithFilter(props.card, filterSphere(props.filter, 'education')))}>
-        <Text style={StyleSheet.styles.cell.title}>Education</Text>
-      </TouchableOpacity>
-      <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(cardWithFilter(props.card, filterSphere(props.filter, 'communication')))}>
-        <Text style={StyleSheet.styles.cell.title}>Communication</Text>
-      </TouchableOpacity>
-      <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(cardWithFilter(props.card, filterSphere(props.filter, 'celebration')))}>
-        <Text style={StyleSheet.styles.cell.title}>Celebration</Text>
-      </TouchableOpacity>
-      <View style={styles.separator} />
-    </ScrollView>
-  );
+type State = {
+  spheres: Array<string>,
+};
+
+
+export default class SpheresFilter extends Component {
+  props: Props;
+  state: State;
+
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {spheres: []};
+  }
+
+  render() {
+    const spheres = Sphere.all().map(sphere => this._renderSphere(sphere));
+
+    return (
+      <ScrollView style={styles.container}>
+        {spheres}
+      </ScrollView>
+    );
+  }
+
+  _renderSphere = (sphere: Sphere) => {
+    const { spheres } = this.state;
+
+    const selected = spheres.indexOf(sphere.id) != -1;
+    const iconName = `${sphere.id}-filled`;
+    const statusStyle = (selected ? styles.statusLabelSelected : {});
+    const status = (selected ? Localizable.t('added') : Localizable.t('add'));
+    return (
+      <TouchableWithoutFeedback key={sphere.id} onPress={() => this._onPressSphere(sphere)}>
+        <View style={styles.row}>
+          <View style={[styles.cellContainer, {paddingVertical: 8}]}>
+            <View style={styles.cellLeftContainer}>
+              <Icon
+                name={iconName}
+                size={30}
+                style={{color: Colors.spheres[sphere.id].tint, paddingRight: 8}}
+              />
+              <Text style={[StyleSheet.styles.cell.title]}>{Localizable.t(sphere.id)}</Text>
+            </View>
+            <View style={styles.cellRightContainer}>
+              <Text style={[styles.statusLabel, statusStyle]}>{status}</Text>
+            </View>
+          </View>
+        </View>
+      </TouchableWithoutFeedback>
+    );
+  };
+
+  _onPressSphere = (sphere: Sphere) => {
+    const { spheres } = this.state;
+
+    const sphereIndex = spheres.indexOf(sphere.id);
+    if (sphereIndex == -1) {
+      this.setState({
+        spheres: [...spheres, sphere.id]
+      });
+    } else {
+      spheres.splice(sphereIndex, 1);
+      this.setState({
+        spheres
+      });
+    }
+  };
+
+  _onPressDone = () => {
+    // props.onDone(cardWithFilter(props.card, filterSphere(props.filter, 'celebration')))
+  };
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  statusLabel: {
+    fontSize: 17,
+    color: Colors.tint,
+  },
+  statusLabelSelected: {
+    color: 'white',
+    backgroundColor: Colors.tint,
+    borderRadius: 4,
+    padding: 4,
+    overflow: 'hidden',
+  },
+  row: {
+    flex: 1,
+    marginLeft: 15,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: Colors.separator,
+  },
+  cellContainer: {
+    flex: 1,
+    marginRight: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  cellLeftContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  cellRightContainer: {
+    flex: 0,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
   separator: {
     ...StyleSheet.styles.separator,
     marginLeft: 15,
   },
 });
-
-export default SpheresFilter;
