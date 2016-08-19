@@ -53,13 +53,12 @@ const BarChartView = (props: Props) => {
     chart = <Image style={{alignSelf: 'center'}} source={require('../Images/chart-bar-blankslate.png')} />;
   } else {
     const bars = data.map((slice, index) => {
-      return {...slice, color: slice.color || ChartColors.colorAtIndex(index)};
+      return {...slice, color: "#FF3F49"};
     });
 
     chart = <ScrollView style={styles.chart} horizontal={true} showsHorizontalScrollIndicator={false}>
       <BarChart
         bars={bars}
-        // barColor="#FF3F49"
         barStyle={{flex: 0, width: 8, marginHorizontal: 6, marginBottom: 100,}}
         deltaStyle={{backgroundColor: 'transparent'}}
         horizontal={false}
