@@ -482,15 +482,25 @@ export default class Query {
       }
     });
 
-    Object.keys(groupByData).forEach(groupByID => {
-      if (GroupByObjectClass) {
-        const groupByObject = GroupByObjectClass.findByID(parseInt(groupByID));
+    if (GroupByObjectClass === Chronology) {
+      const chronologies = Chronology.whereIn(Object.keys(groupByData).map(chronologyID => parseInt(chronologyID)));
+      chronologies.forEach(chronology => {
         data.push({
-          label: groupByObject.name,
-          value: groupByData[groupByID]
+          label: chronology.name,
+          value: groupByData[chronology.id.toString()]
         });
-      }
-    });
+      });
+    } else {
+      Object.keys(groupByData).forEach(groupByID => {
+        if (GroupByObjectClass) {
+          const groupByObject = GroupByObjectClass.findByID(parseInt(groupByID));
+          data.push({
+            label: groupByObject.name,
+            value: groupByData[groupByID]
+          });
+        }
+      });
+    }
 
     return data;
   }

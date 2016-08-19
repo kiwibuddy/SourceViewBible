@@ -437,6 +437,12 @@ export class Chronology extends Realm.Object {
     return realm.objects('Chronology').filtered('from >= $0 AND to <= $1', from.from, to.to);
   }
 
+  static whereIn(ids: any) {
+    if (ids.length == 0) return [];
+    const filter = ids.map((id, index) => `id = $${index}`).join(' OR ');
+    return realm.objects('Chronology').filtered(filter, ...ids).sorted('from');
+  }
+
   get name(): string {
     return Localizable.t('chronologies.' + this.key);
   }
