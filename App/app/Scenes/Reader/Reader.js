@@ -9,6 +9,8 @@ import ReactNative from 'react-native';
 const {
   View,
   WebView,
+  Text,
+  Image,
 } = ReactNative;
 
 import {
@@ -194,7 +196,11 @@ export default class Reader extends Component {
 
     return (
       <View style={styles.filterBar}>
-
+        <Text style={styles.filterLabel}>Economics</Text>
+        <Image
+          style={styles.filterClear}
+          source={require('./Images/clear-btn.png')}
+        />
       </View>
     );
   };
@@ -269,10 +275,25 @@ const styles = StyleSheet.create({
   },
   filterBar: {
     height: 30,
-    backgroundColor: 'red'
+    backgroundColor: '#F9F9F9',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#c8c7cc',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 8,
   },
   filterLabel: {
+    fontSize: 13,
+    color: 'white',
+    backgroundColor: Colors.tint,
     borderRadius: 4,
-    fontSize: 12,
+    paddingVertical: 2,
+    paddingHorizontal: 5,
+    overflow: 'hidden',
+    marginRight: 8,
   },
+  filterClear: {
+    position: 'absolute',
+    right: 0,
+  }
 });
