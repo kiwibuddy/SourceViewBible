@@ -16,9 +16,10 @@ import {
   StyleSheet,
 } from '../../../Common';
 
-import { actantFilterURL, natureFilterURL, professionFilterURL, roleFilterURL } from '../../../Navigation';
+import { actantFilterURL, genderFilterURL, natureFilterURL, professionFilterURL, roleFilterURL } from '../../../Navigation';
 
 type Props = {
+  type: string,
   navigate: Function,
   onDone: Function,
 };
@@ -38,6 +39,11 @@ const ActantFilters = (props: Props) => {
       <View style={styles.separator} />
       <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.navigate(natureFilterURL({title: 'Nature', type: props.type}))}>
         <Text style={StyleSheet.styles.cell.title}>Nature</Text>
+        <Image source={require('../Images/disclosure.png')} />
+      </TouchableOpacity>
+      <View style={styles.separator} />
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.navigate(genderFilterURL({title: 'Gender', type: props.type}))}>
+        <Text style={StyleSheet.styles.cell.title}>Gender</Text>
         <Image source={require('../Images/disclosure.png')} />
       </TouchableOpacity>
       <View style={styles.separator} />
