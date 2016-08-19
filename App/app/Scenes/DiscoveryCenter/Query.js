@@ -649,7 +649,8 @@ export default class Query {
 
         case 'sphere':
           const args = filter.spheres.map((sphere, index) => `$${index}`).join(',');
-          whereClause.where(RawPredicate.predicateWith(`(bso.id IN (SELECT spheres.bso_id FROM spheres GROUP BY spheres.bso_id HAVING sphere_id IN (${args})))`, filter.spheres));
+          const spheres = Sphere.whereIn(filter.spheres).map(sphere => sphere.position);
+          whereClause.where(RawPredicate.predicateWith(`(bso.id IN (SELECT spheres.bso_id FROM spheres GROUP BY spheres.bso_id HAVING sphere_id IN (${args})))`, spheres));
           break;
 
         case 'word':
