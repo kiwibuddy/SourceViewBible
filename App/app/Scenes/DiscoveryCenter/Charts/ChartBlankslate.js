@@ -25,8 +25,8 @@ const ChartBlankslate = (props: Props) => {
         <Image source={require('../Images/chart-bar-blankslate.png')} />
       </View>
       <Chart.Header style={{paddingLeft: 10}}>
-        <Chart.Button title="BAR CHART" style={{color: '#FFFFFF'}} onPress={() => props.onPressChartType(Chart.Type.BAR)} />
         <Chart.Button title="PIE CHART" style={{color: '#FFFFFF'}} onPress={() => props.onPressChartType(Chart.Type.PIE)}/>
+        <Chart.Button title="BAR CHART" style={{color: '#FFFFFF'}} onPress={() => props.onPressChartType(Chart.Type.BAR)} />
         <Chart.Button title="CLOUD" style={{color: '#FFFFFF'}} onPress={() => props.onPressChartType(Chart.Type.CLOUD)}/>
       </Chart.Header>
       <Chart.Footer />
