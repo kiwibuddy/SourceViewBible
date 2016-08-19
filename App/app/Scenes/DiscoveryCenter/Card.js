@@ -195,9 +195,14 @@ export default class Card extends Component {
     const title = (occurrenceCount >= BookSourceOccurrence.MAXIMUM_NUMBER_OF_DISPLAYABLE_OCCURRENCES ? Localizable.t('explore-passages.text') : Localizable.t('explore-passages.count', {count: occurrenceCount, localizedCount: Localizable.toNumber(occurrenceCount, {precision: 0})}));
 
     return (
-      <TouchableOpacity style={styles.readButton} onPress={this._onPressOccurrences}>
-        <Text style={styles.readButtonTitle}>{title}</Text>
-      </TouchableOpacity>
+      <View>
+        <TouchableOpacity style={styles.readButton} onPress={this._onPressOccurrences}>
+          <Text style={styles.readButtonTitle}>{title}</Text>
+        </TouchableOpacity>
+        <View style={styles.countContainer}>
+          <Text style={styles.countTitleBold}>Peace</Text><Text style={styles.countTitle}>occurs 32 times</Text>
+        </View>
+      </View>
     );
   }
 
@@ -346,7 +351,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     overflow:'hidden',
     alignSelf: 'center',
-    marginTop: 40,
+    marginTop: 20,
     marginBottom: 40,
     justifyContent: 'center',
   },
@@ -361,5 +366,20 @@ const styles = StyleSheet.create({
     top: 180,
     left: 0,
     right: 0,
+  },
+  countContainer: {
+    flex: 0,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: -30,
+    paddingBottom: 30,
+  },
+  countTitle: {
+    color: '#9B9B9B',
+  },
+  countTitleBold: {
+    fontWeight: 'bold',
+    color: '#9B9B9B',
+    marginRight: 5,
   },
 });
