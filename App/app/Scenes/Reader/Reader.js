@@ -32,7 +32,7 @@ import { Book, Sphere } from '../../Database';
 const HTML = require('./HTML');
 
 import { Preference } from '../../Preferences';
-import { ReaderBaseFontSize, ReaderFontStepSize, ReaderWebFontConversion } from '../../Common/Constants';
+import { ReaderBaseFontSize, ReaderBaseLineHeight, ReaderFontStepSize, ReaderWebFontConversion } from '../../Common/Constants';
 
 const NavigationBar = (props: Props) => {
   const book = Book.findByID(props.bookID);
@@ -241,8 +241,11 @@ export default class Reader extends Component {
     let html = HTML.replace('{{BODY}}', content);
 
     const fontStepSize = Preference.numberForKey(Preference.Keys.Reader.fontStepSize) || 0;
-    const fontSize = parseInt((ReaderBaseFontSize + (fontStepSize * ReaderFontStepSize)) * ReaderWebFontConversion);
+    const fontSize = Math.ceil((ReaderBaseFontSize + (fontStepSize * ReaderFontStepSize)) * ReaderWebFontConversion);
+    const lineHeight = Math.ceil((ReaderBaseLineHeight + (fontStepSize * ReaderFontStepSize)) * ReaderWebFontConversion);
+
     html = html.replace('{{FONT_SIZE}}', fontSize.toString());
+    html = html.replace('{{LINE_HEIGHT}}', lineHeight.toString());
 
     let showNumbers = Preference.booleanForKey(Preference.Keys.Reader.showNumbers);
     if (showNumbers == null) showNumbers = true;

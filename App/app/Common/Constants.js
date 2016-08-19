@@ -19,6 +19,7 @@ const SphereType = {
 };
 
 const ReaderBaseFontSize = 17;
+const ReaderBaseLineHeight = 31;
 const ReaderFontStepSize = 2;
 const ReaderWebFontConversion = 13/17;
 
@@ -26,6 +27,7 @@ module.exports = {
   SourceType,
   SphereType,
   ReaderBaseFontSize,
+  ReaderBaseLineHeight,
   ReaderFontStepSize,
   ReaderWebFontConversion
 };
