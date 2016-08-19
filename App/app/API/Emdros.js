@@ -65,7 +65,6 @@ function scripture(options: Object) {
     stylesheet = OCCURRENCE_STYLESHEET;
   } else {
     stylesheet = SCRIPTURE_STYLESHEET;
-
     if (options && options.spheres && options.spheres.length > 0) {
       const { spheres } = options;
       const sphereFeatures = spheres.map(sphere => SPHERE_FEATURE_MAP[sphere]);
