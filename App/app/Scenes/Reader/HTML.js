@@ -105,14 +105,12 @@ module.exports = `
         font-family: Gurmukhi MN;
         color: #CF1E00;
         font-size: 1em;
-        position: relative;
-        top: 0;
         font-weight: normal;
         {{NUMBER_DISPLAY}}
       }
-      .textChatper span {
-        margin-top: -2pt;
-        margin-bottom: -1pt;
+      .textChapter span {
+        height: 1.45em;
+        display: inline-block;
       }
       .textVerse {
         font-family: Gurmukhi MN;
