@@ -14,7 +14,6 @@ import {
 
 import EventEmitter from 'EventEmitter';
 
-
 const NavigatorNavigationBarStyles = {
   ...Navigator.NavigationBar.Styles,
   General: {
@@ -131,10 +130,10 @@ export default class Popover extends Component {
             }
 
             const previousRoute = navState.routeStack[index - 1];
-            const title = (previousRoute.title && previousRoute.title.length < 10) ? previousRoute.title : Localizable.t('back');
+            const title = Localizable.t('back');
             return (
               <TouchableOpacity
-                onPress={() => onPressCancel()}
+                onPress={() => navigator.pop()}
                 style={styles.navBarLeftButton}>
                 <Text style={[styles.navBarText, styles.navBarButtonText]}>
                   {title}
