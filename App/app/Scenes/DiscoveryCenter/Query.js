@@ -580,7 +580,7 @@ export default class Query {
           break;
 
         case 'sphere':
-          fromClause.join('INNER JOIN spheres ON bso.id = spheres.bso_id');
+          // fromClause.join('INNER JOIN spheres ON bso.id = spheres.bso_id');
           break;
       }
     });
@@ -648,9 +648,10 @@ export default class Query {
           break;
 
         case 'sphere':
-          const args = filter.spheres.map((sphere, index) => `$${index}`).join(',');
           const spheres = Sphere.whereIn(filter.spheres).map(sphere => sphere.position);
-          whereClause.where(RawPredicate.predicateWith(`(bso.id IN (SELECT spheres.bso_id FROM spheres GROUP BY spheres.bso_id HAVING sphere_id IN (${args})))`, spheres));
+          spheres.forEach(sphere => {
+            whereClause.where(RawPredicate.predicateWith(`EXISTS (SELECT spheres.bso_id FROM spheres WHERE bso.id = spheres.bso_id AND spheres.sphere_id = $0)`, [sphere]));
+          });
           break;
 
         case 'word':
