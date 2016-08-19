@@ -7,48 +7,36 @@ let DB = null;
 const SCRIPTURE_STYLESHEET = require('./scripture-stylesheet.json');
 const OCCURRENCE_STYLESHEET = require('./occurrence-stylesheet.json');
 
-function highlightSpheres(spheres: any) {
-  const SPHERE_CLASS_MAP = {
-    'family': 'Fam',
-    'economics': 'Eco',
-    'government': 'Gov',
-    'religion': 'Rel',
-    'education': 'Edu',
-    'communication': 'Com',
-    'celebration': 'Cel'
-  };
+const SPHERE_CLASS_MAP = {
+  'family': 'Fam',
+  'economics': 'Eco',
+  'government': 'Gov',
+  'religion': 'Rel',
+  'education': 'Edu',
+  'communication': 'Com',
+  'celebration': 'Cel'
+};
 
-  const SPHERE_FEATURE_MAP = {
-    'family': 'Family',
-    'economics': 'Economics',
-    'government': 'Government',
-    'religion': 'Religion',
-    'education': 'Education',
-    'communication': 'MediaCom',
-    'celebration': 'Celebration'
-  };
+const SPHERE_FEATURE_MAP = {
+  'family': 'Family',
+  'economics': 'Economics',
+  'government': 'Government',
+  'religion': 'Religion',
+  'education': 'Education',
+  'communication': 'MediaCom',
+  'celebration': 'Celebration'
+};
 
-  const features = ['surface'];
-
-  let value = null;
+function highlightSpheres(feature: string, spheres: any, startingPosition: number) {
   if (spheres.length > 0) {
-    const featureLength = features.length;
     const sphereClasses = spheres.map((sphere, index) => {
       const sphereClass = SPHERE_CLASS_MAP[sphere];
-      return (`{{ if featureequal ${index + featureLength} 'true' }} h${sphereClass}{{ endif }}`);
+      return (`{{ if featureequal ${index + startingPosition} 'true' }} h${sphereClass}{{ endif }}`);
     });
 
-    value = `{{ setvar 'sphere_classes' }}${sphereClasses.join('')}{{ setvarend }}{{ if varequal 'sphere_classes' '' }}{{ feature 0 }}{{ else }}<span class="{{ emitvar 'sphere_classes' }}">{{ feature 0 }}</span>{{ endif }}`;
+    return `{{ setvar 'sphere_classes' }}${sphereClasses.join('')}{{ setvarend }}{{ if varequal 'sphere_classes' '' }}${feature}{{ else }}<span class="{{ emitvar 'sphere_classes' }}">${feature}</span>{{ endif }}`;
   } else {
-    value = '{{ feature 0 }}';
-  }
-  const start = `{{ if varequal 'StartParagraph' 'true' }}<p class="{{ emitvar 'ParagraphType' }}">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}${value}`;
-
-  return {
-    "docindexfeature": "docindex",
-    "end": "",
-    "get": features.concat(spheres.map(sphere => SPHERE_FEATURE_MAP[sphere])),
-    "start": start
+    return feature;
   }
 }
 
@@ -79,9 +67,14 @@ function scripture(options: Object) {
     stylesheet = SCRIPTURE_STYLESHEET;
 
     if (options && options.spheres && options.spheres.length > 0) {
+      const sphereFeatures = options.spheres.map(sphere => SPHERE_FEATURE_MAP[sphere]);
+
       const base = SCRIPTURE_STYLESHEET['fetchinfo']['base']['object_types'];
-      base['Token'] = highlightSpheres(options.spheres);
-      base['NonWordToken'] = highlightSpheres(options.spheres);
+      base['Token']['start'] += highlightSpheres('{{ feature 0 }}', options.spheres, 1);
+      base['Token']['get'] = base['Token']['get'].concat(sphereFeatures);
+      base['NonWordToken'] = base['Token'];
+      base['SpaceToken']['start'] = highlightSpheres(' ', options.spheres, 0);
+      base['SpaceToken']['get'] = sphereFeatures;
     }
   }
   const style = {stylesheet: JSON.stringify(stylesheet)};

@@ -102,19 +102,6 @@
            "end" : "</i>",
            "start" : "<i>"
         },
-        "VerseNumberToken":{
-          "docindexfeature":"docindex",
-          "end":"",
-          "get":[
-            "surface",
-          ],
-          "start":"\
-{{ if featureequal 0 '0' }}{{ setvar 'ParagraphType' }}textPoetry{{ setvarend }}{{ endif }}\
-{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}\
-{{ if featureequal 0 '0' }}{{ else }}\
-<a id=\"{{ emitvar 'verse_anchor' }}\" class=\"textVerse\">{{ featurenomangle 0 }}</a>&#160;\
-{{ endif }}"
-        },
         "Verse":{
           "docindexfeature":"docindex",
           "end":"",
@@ -144,6 +131,17 @@
 {{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}\
 <a id=\"chapter-{{ feature 0 }}\" class=\"textChapter\">{{ featurenomangle 0 }}</a>"
         },
+        "VerseNumberToken":{
+          "docindexfeature":"docindex",
+          "end":"",
+          "get":[
+            "surface",
+          ],
+          "start":"\
+{{ if featureequal 0 '0' }}{{ setvar 'ParagraphType' }}textPoetry{{ setvarend }}{{ endif }}\
+{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}\
+{{ if featureequal 0 '0' }}{{ else }}<a id=\"{{ emitvar 'verse_anchor' }}\" class=\"textVerse\">{{ featurenomangle 0 }}</a>&#160;{{ endif }}"
+        },
         "Token":{
           "docindexfeature":"docindex",
           "end":"",
@@ -151,8 +149,7 @@
             "surface",
           ],
           "start":"\
-{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}\
-{{ feature 0 }}"
+{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}"
         },
         "NonWordToken":{
           "docindexfeature":"docindex",
@@ -161,8 +158,7 @@
             "surface",
           ],
           "start":"\
-{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}\
-{{ feature 0 }}"
+{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}"
         },
         "SpaceToken" : {
           "docindexfeature" : "docindex",
