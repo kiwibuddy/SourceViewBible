@@ -147,7 +147,7 @@ export default class DiscoveryCenter extends Component {
       occurrenceCount: 0,
       yAxis: {
         type: 'words',
-        name: Localizable.t('words.text')
+        name: Localizable.t('word-count')
       },
     }
   }

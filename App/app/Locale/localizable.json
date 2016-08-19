@@ -82,6 +82,7 @@
         "other": "{{localizedCount}} words"
       }
     },
+    "word-count": "Word Count",
     "explore-passages": {
       "text": "Explore Passages",
       "count": {
