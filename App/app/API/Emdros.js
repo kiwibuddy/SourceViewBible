@@ -65,9 +65,11 @@ function scripture(options: Object) {
     stylesheet = OCCURRENCE_STYLESHEET;
   } else {
     stylesheet = SCRIPTURE_STYLESHEET;
-    if (options && options.spheres && options.spheres.length > 0) {
-      const { spheres } = options;
+    const spheres = (options && options.spheres ? options.spheres : []);
+
       const sphereFeatures = spheres.map(sphere => SPHERE_FEATURE_MAP[sphere]);
+
+      console.log('spheres', sphereFeatures);
 
       const base = SCRIPTURE_STYLESHEET['fetchinfo']['base']['object_types'];
       base['Token']['start'] = base['Token']['start'].replace('{{SPHERES}}', highlightSpheres('{{ feature 0 }}', spheres, 1));
@@ -79,7 +81,6 @@ function scripture(options: Object) {
       base['VerseNumberToken']['get'] = base['VerseNumberToken']['get'].concat(sphereFeatures);
       base['ChapterNumberToken']['start'] = base['ChapterNumberToken']['start'].replace('{{SPHERES}}', highlightSpheres('{{ featurenomangle 0 }}', spheres, 1));
       base['ChapterNumberToken']['get'] = base['ChapterNumberToken']['get'].concat(sphereFeatures);
-    }
   }
   const style = {stylesheet: JSON.stringify(stylesheet)};
 
