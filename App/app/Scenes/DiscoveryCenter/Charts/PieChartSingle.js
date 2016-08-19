@@ -14,7 +14,7 @@ import {
   StyleSheet,
 } from '../../../Common';
 
-import PieColors, { DeltaColor, colorAtIndex } from './PieChartColors';
+import PieColors, { DeltaColor, colorAtIndex } from './ChartColors';
 import PieChartList from './PieChartList';
 import { PieChart } from '../../../Components/Charts';
 

@@ -19,7 +19,7 @@ import {
   Localizable
 } from '../../../Common';
 
-import PieColors, { colorAtIndex } from './PieChartColors';
+import PieColors, { colorAtIndex } from './ChartColors';
 
 type Props = {
   card: Object,
