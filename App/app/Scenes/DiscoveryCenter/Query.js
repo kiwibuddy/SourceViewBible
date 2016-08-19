@@ -232,6 +232,7 @@ export default class Query {
     }
 
     const selectStatement = new SelectStatement();
+    const whereClause = this.whereClause;
     const groupByStatement = new GroupByStatement();
     const orderByStatement = new OrderByStatement();
 
@@ -276,6 +277,7 @@ export default class Query {
 
         case 'gender':
           selectStatement.select(`${zAxisActantType}.gender_id AS zid`);
+          whereClause.where(ComparisonPredicate.predicateWith(`${zAxisActantType}.gender_id`, 'IN', Gender.MALE_AND_FEMALE));
           groupByStatement.groupBy(`${zAxisActantType}.gender_id`);
           orderByStatement.orderBy(`${zAxisActantType}.gender_id`);
           GroupByObjectClass = Gender;
@@ -348,6 +350,7 @@ export default class Query {
 
       case 'gender':
         selectStatement.select(`${xAxisActantType}.gender_id AS id`);
+        whereClause.where(ComparisonPredicate.predicateWith(`${xAxisActantType}.gender_id`, 'IN', Gender.MALE_AND_FEMALE));
         groupByStatement.groupBy(`${xAxisActantType}.gender_id`);
         ObjectClass = Gender;
         break;
@@ -671,16 +674,9 @@ export default class Query {
             whereClause.where(ComparisonPredicate.predicateWith('spheres.sphere_id', 'IN', spheres));
           }
           break;
-
-        case 'word':
-
       }
     });
 
     this.whereClause = whereClause;
-  }
-
-  async _updateWhereClauseWithWordFilter(wordFilter: Object) {
-
   }
 }

@@ -477,6 +477,7 @@ Count.schema = CountSchema;
 
 export class Gender {
   static GENDER = ['female', 'male'];
+  static MALE_AND_FEMALE = [2,1];
 
   id: number;
   key: string;
