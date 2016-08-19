@@ -22,7 +22,7 @@ const ChartBlankslate = (props: Props) => {
   return (
     <Chart>
       <View style={{alignItems: 'center'}}>
-        <Image source={require('../Images/chart-bar-blankslate.png')} />
+        <Image source={require('../Images/chart-pie-blankslate.png')} />
       </View>
       <Chart.Header style={{paddingLeft: 10}}>
         <Chart.Button title="PIE CHART" style={{color: '#FFFFFF'}} onPress={() => props.onPressChartType(Chart.Type.PIE)}/>
