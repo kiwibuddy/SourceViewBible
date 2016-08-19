@@ -18,7 +18,6 @@ module.exports = `
       p, b {
         margin: 0;
         padding: 0;
-        line-height: 24pt;
         -webkit-margin-before: 0;
       }
       i {
