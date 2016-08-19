@@ -175,6 +175,12 @@ export default class Query {
     return rows.map(row => BookSourceOccurrence.findByID(row['id']))
   }
 
+  async wordCount() {
+    await this._prepare();
+    if (!this.emdrosData) return null;
+    return Object.keys(this.emdrosData).reduce((sum, key) => sum + this.emdrosData[key].wordCount, 0);
+  }
+
   async _prepare() {
     if (this.prepared) return;
     this.prepared = true;
@@ -194,6 +200,7 @@ export default class Query {
 
       if (identifiers.length > 0) {
         this.emdrosData = data;
+
         this.whereClause.where(ComparisonPredicate.predicateWith('bso.id', 'IN', identifiers));
       }
     }
@@ -605,7 +612,6 @@ export default class Query {
     const xAxis = this.axis[0];
     const yAxis = this.axis[1];
     const zAxis = this.axis[2];
-    if (!xAxis || !yAxis) return;
 
     const whereClause = new WhereClause();
 

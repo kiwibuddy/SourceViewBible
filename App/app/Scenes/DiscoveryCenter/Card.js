@@ -56,6 +56,7 @@ type Props = {
 type State = {
   card: Object,
   data: any,
+  wordCount: any,
   loading: boolean,
 };
 
@@ -73,6 +74,7 @@ export default class Card extends Component {
     this.state = {
       card,
       data: null,
+      wordCount: null,
       loading: false,
     };
   }
@@ -194,17 +196,36 @@ export default class Card extends Component {
 
     const title = (occurrenceCount >= BookSourceOccurrence.MAXIMUM_NUMBER_OF_DISPLAYABLE_OCCURRENCES ? Localizable.t('explore-passages.text') : Localizable.t('explore-passages.count', {count: occurrenceCount, localizedCount: Localizable.toNumber(occurrenceCount, {precision: 0})}));
 
+    const wordCount = this._renderWordCount();
+
     return (
       <View>
         <TouchableOpacity style={styles.readButton} onPress={this._onPressOccurrences}>
           <Text style={styles.readButtonTitle}>{title}</Text>
         </TouchableOpacity>
-        <View style={styles.countContainer}>
-          <Text style={styles.countTitleBold}>Peace</Text><Text style={styles.countTitle}>occurs 32 times</Text>
-        </View>
+        {wordCount}
       </View>
     );
-  }
+  };
+
+  _renderWordCount = () => {
+    const { card, wordCount } = this.state;
+
+    console.log(wordCount);
+
+    if (wordCount == null) return null;
+
+    const wordFilter = card.filters.find(filter => filter.type === 'word');
+    if (wordFilter) {
+      return (
+        <View style={styles.countContainer}>
+          <Text style={styles.countTitleBold}>{wordFilter.word}</Text><Text style={styles.countTitle}>occurs {wordCount} times</Text>
+        </View>
+      );
+    }
+
+    return null;
+  };
 
   _onPressDuplicate = () => {
     if (this.props.onPressDuplicate) {
@@ -295,15 +316,16 @@ export default class Card extends Component {
   async _query(): any {
     const query = new Query(this.state.card);
     const occurrenceCount = await query.count();
+    const wordCount = await query.wordCount();
 
     const card = {
       ...this.state.card,
-      occurrenceCount
+      occurrenceCount,
     };
     Discovery.record(card);
 
     if (this.shouldFetch) {
-      this.setState({card, data: null, loading: occurrenceCount > 0}, () => {
+      this.setState({card, data: null, wordCount, loading: occurrenceCount > 0}, () => {
         if (occurrenceCount > 0) {
           query.data().then(data => {
             if (this.shouldFetch) {
@@ -314,7 +336,7 @@ export default class Card extends Component {
                 loading: false
               });
             }
-          })
+          });
         }
       });
     }
