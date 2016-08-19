@@ -111,10 +111,8 @@ export default class BookChapters extends Component {
     const chart = (this.state.selectedSegmentIndex === SEGMENT_INDEXES.SPHERES ? this._renderSpheresChart(book, chapter) : this._renderSourcesChart(book, chapter));
     const subtitle = (this.state.selectedSegmentIndex === SEGMENT_INDEXES.SPHERES ? Localizable.t('spheres.count', {count: chapter.sphereCount}) : Localizable.t('sources.count', {count: chapter.sourceCount}) );
 
-    const anchor = (book.DJHRef !== 'Psa' ? `chapter-${chapterNumber}` : `verse-${chapterNumber}-1`);
-
     return (
-      <TouchableOpacity style={styles.section} onPress={() => this.props.navigate(readerURL({bookID: book.id, anchor, title: book.name, description: `${book.name} ${chapterNumber}`}))}>
+      <TouchableOpacity style={styles.section} onPress={() => this.props.navigate(readerURL({bookID: book.id, anchor: `chapter-${chapterNumber}`, title: book.name, description: `${book.name} ${chapterNumber}`}))}>
         <View style={[styles.cellContainer, {paddingVertical: 8}]}>
           <View style={styles.horizontalContainer}>
             <View style={styles.leftContainer}>

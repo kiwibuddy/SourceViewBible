@@ -257,8 +257,9 @@ export default class Reader extends Component {
   };
 
   _renderInjectedJavascript = () => {
-    const { anchor } = this.props;
-    if (!anchor) return null;
+    if (!this.props.anchor) return null;
+
+    const anchor = (this.props.bookID == 'psalms' ? this.props.anchor.replace('chapter', 'verse') + '-1' : this.props.anchor);
 
     const javascript = `\
       location.hash = '#${encodeURIComponent(anchor)}';
