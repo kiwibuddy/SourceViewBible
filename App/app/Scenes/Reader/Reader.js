@@ -25,7 +25,7 @@ import * as Navigation from '../../Components/Navigation';
 const RNFS = require('react-native-fs');
 
 import Emdros from '../../API/Emdros';
-import { Book } from '../../Database';
+import { Book, Sphere } from '../../Database';
 
 const HTML = require('./HTML');
 
@@ -194,9 +194,17 @@ export default class Reader extends Component {
     const spheres = Preference.objectForKey(Preference.Keys.Reader.spheres) || [];
     if (spheres.length == 0) return null;
 
+    const sphereLabels = spheres.map(sphereID => {
+      const sphere = Sphere.findByID(sphereID);
+      const color = Colors.spheres[sphereID].tint;
+      return (
+        <Text key={'sphere-' + sphereID} style={[styles.filterLabel, {backgroundColor: color}]}>{sphere.name}</Text>
+      );
+    });
+
     return (
       <View style={styles.filterBar}>
-        <Text style={styles.filterLabel}>Economics</Text>
+        {sphereLabels}
         <Image
           style={styles.filterClear}
           source={require('./Images/clear-btn.png')}
