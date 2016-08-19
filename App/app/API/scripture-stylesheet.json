@@ -129,7 +129,7 @@
           ],
           "start":"\
 {{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}\
-<a id=\"chapter-{{ feature 0 }}\" class=\"textChapter\">{{SPHERES}}</a>"
+<a id=\"chapter-{{ feature 0 }}\"><span  class=\"textChapter\">{{SPHERES}}</span></a>"
         },
         "VerseNumberToken":{
           "docindexfeature":"docindex",
@@ -141,7 +141,7 @@
 {{ if featureequal 0 '0' }}{{ setvar 'ParagraphType' }}textPoetry{{ setvarend }}{{ endif }}\
 {{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}\
 {{ if featureequal 0 '0' }}{{ else }}\
-<a id=\"{{ emitvar 'verse_anchor' }}\" class=\"textVerse\">{{SPHERES}}</a>{{ endif }}"
+<a id=\"{{ emitvar 'verse_anchor' }}\"><span class=\"textVerse\">{{SPHERES}}</span></a>{{ endif }}"
         },
         "Token":{
           "docindexfeature":"docindex",
