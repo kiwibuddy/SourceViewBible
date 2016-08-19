@@ -24,26 +24,15 @@ import { Sphere } from '../../../Database';
 
 type Props = {
   card: Object,
+  events: any,
   filter: Object,
   navigate: Function,
   onDone: Function,
 };
 
-function filterSphere(filter: Object, sphereID: string) {
-  const sphere = Sphere.findByID(sphereID);
-
-  return ({
-    id: 'filter-' + Date.now(),
-    type: 'sphere',
-    ...filter,
-    sphere,
-  });
-}
-
 type State = {
   spheres: Array<string>,
 };
-
 
 export default class SpheresFilter extends Component {
   props: Props;
@@ -52,7 +41,16 @@ export default class SpheresFilter extends Component {
   constructor(props: Props) {
     super(props);
 
-    this.state = {spheres: []};
+    const spheres = (props.filter && props.filter.spheres) || [];
+    this.state = {spheres};
+  }
+
+  componentDidMount() {
+    this.props.events.addListener('onPressDone', this._onPressDone);
+  }
+
+  componentWillUnmount() {
+    this.props.events.removeListener('onPressDone', this._onPressDone);
   }
 
   render() {
@@ -110,7 +108,27 @@ export default class SpheresFilter extends Component {
   };
 
   _onPressDone = () => {
-    // props.onDone(cardWithFilter(props.card, filterSphere(props.filter, 'celebration')))
+    const { spheres } = this.state;
+
+    let card = this.props.card;
+    if (spheres.length == 0) {
+      const filters = this.props.card.filters;
+      const filterIndex = filters.indexOf(this.props.filter);
+      if (filterIndex != -1) {
+        filters.splice(filterIndex, 1);
+      }
+    } else {
+      const filter = {
+        id: 'filter-' + Date.now(),
+        type: 'sphere',
+        ...this.props.filter,
+        spheres
+      }
+
+      card = cardWithFilter(this.props.card, filter);
+    }
+
+    this.props.onDone(card);
   };
 };
 

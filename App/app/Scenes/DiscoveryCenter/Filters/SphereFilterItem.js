@@ -17,6 +17,7 @@ import {
 } from '../../../Common';
 
 import { spheresFilterURL } from '../../../Navigation';
+import { Sphere } from '../../../Database';
 
 type Props = {
   filter: Object,
@@ -25,7 +26,8 @@ type Props = {
 };
 
 const SphereFilterItem = (props: Props) => {
-  const { sphere } = props.filter;
+  const { spheres } = props.filter;
+  const title = Sphere.whereIn(spheres).map(sphere => sphere.name).join(' & ');
 
   return (
     <View>
@@ -39,7 +41,7 @@ const SphereFilterItem = (props: Props) => {
       <View style={StyleSheet.styles.discoveryCenter.bottomContainer}>
         <Text>Is</Text>
         <TouchableOpacity style={styles.filterButton} onPress={() => props.onPressEditFilter(spheresFilterURL({title: Localizable.t('sphere'), filter: props.filter}))}>
-          <Text style={styles.filterButtonTitle}>{sphere.name}</Text>
+          <Text style={styles.filterButtonTitle}>{title}</Text>
           <Image source={require('../Images/chart-icn-dropdown-filter.png')} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.filterDelete} onPress={props.onPressDeleteFilter}>

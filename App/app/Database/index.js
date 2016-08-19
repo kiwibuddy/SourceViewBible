@@ -20,6 +20,7 @@ import SQLite, { rowsWithSQL } from './SQLite';
 import Predicate from './Predicate';
 import ComparisonPredicate from './ComparisonPredicate';
 import CompoundPredicate from './CompoundPredicate';
+import RawPredicate from './RawPredicate';
 import WordPredicate from './WordPredicate';
 
 module.exports = {
@@ -36,6 +37,7 @@ module.exports = {
   Sphere,
   ComparisonPredicate,
   CompoundPredicate,
+  RawPredicate,
   Predicate,
   WordPredicate,
   SQLite,

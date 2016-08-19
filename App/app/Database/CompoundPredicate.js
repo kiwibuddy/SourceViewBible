@@ -30,14 +30,6 @@ export default class CompoundPredicate extends Predicate {
     return '(' + subpredicates.map(predicate => predicate.predicateFormat).join(' ' + this.type.toUpperCase() + ' ') + ')';
   }
 
-  get tables(): Array<string> {
-    let tables = [];
-    this.subpredicates.forEach(predicate => {
-      tables = tables.concat(predicate.tables);
-    });
-    return [...new Set(tables)];
-  }
-
   get empty(): boolean {
     return this.subpredicates.length == 0;
   }

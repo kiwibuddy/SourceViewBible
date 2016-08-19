@@ -2,7 +2,7 @@
 'use strict';
 
 import Emdros from '../../API/Emdros';
-import { Actant, Book, BookSourceOccurrence, Chronology, Gender, Nature, Profession, Role, Sphere, SQLite, ComparisonPredicate, CompoundPredicate, Predicate, rowsWithSQL } from '../../Database';
+import { Actant, Book, BookSourceOccurrence, Chronology, Gender, Nature, Profession, Role, Sphere, SQLite, ComparisonPredicate, CompoundPredicate, RawPredicate, Predicate, rowsWithSQL } from '../../Database';
 
 class SelectStatement {
   prefix: string;
@@ -155,7 +155,9 @@ export default class Query {
     await this._prepare();
 
     const sql = this._sql('SELECT COUNT(DISTINCT bso.id) AS count');
+
     console.log(sql);
+
     const rows = await rowsWithSQL(sql);
     return rows[0]['count'];
   }
@@ -646,9 +648,8 @@ export default class Query {
           break;
 
         case 'sphere':
-          const SPHERES = ['family', 'economics', 'government', 'religion', 'education', 'communication', 'celebration'];;
-          const sphereID = SPHERES.indexOf(filter.sphere.id) + 1;
-          whereClause.where(ComparisonPredicate.predicateWith('spheres.sphere_id', '=', sphereID));
+          const args = filter.spheres.map((sphere, index) => `$${index}`).join(',');
+          whereClause.where(RawPredicate.predicateWith(`(bso.id IN (SELECT spheres.bso_id FROM spheres GROUP BY spheres.bso_id HAVING sphere_id IN (${args})))`, filter.spheres));
           break;
 
         case 'word':

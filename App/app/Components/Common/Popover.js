@@ -12,6 +12,8 @@ import {
   View,
 } from 'react-native';
 
+import EventEmitter from 'EventEmitter';
+
 
 const NavigatorNavigationBarStyles = {
   ...Navigator.NavigationBar.Styles,
@@ -88,6 +90,11 @@ type Props = {
 
 export default class Popover extends Component {
   props: Props;
+  eventEmitter: Object;
+
+  componentWillMount() {
+    this.eventEmitter = new EventEmitter();
+  }
 
   render() {
     return (
@@ -104,6 +111,7 @@ export default class Popover extends Component {
 
   _renderNavigationBar = () => {
     const {onPressCancel} = this.props;
+    const eventEmitter = this.eventEmitter;
 
     return (
       <Navigator.NavigationBar
@@ -126,7 +134,7 @@ export default class Popover extends Component {
             const title = (previousRoute.title && previousRoute.title.length < 10) ? previousRoute.title : Localizable.t('back');
             return (
               <TouchableOpacity
-                onPress={() => navigator.pop()}
+                onPress={() => onPressCancel()}
                 style={styles.navBarLeftButton}>
                 <Text style={[styles.navBarText, styles.navBarButtonText]}>
                   {title}
@@ -135,7 +143,17 @@ export default class Popover extends Component {
             );
           },
           RightButton: function(route, navigator, index, navState) {
-            return null;
+            if (route.path !== '/DiscoveryCenter/Filters/SpheresFilter') return null;
+
+            return (
+              <TouchableOpacity
+                onPress={() => eventEmitter.emit('onPressDone')}
+                style={styles.navBarRightButton}>
+                <Text style={[styles.navBarText, styles.navBarButtonText, StyleSheet.styles.navigationBar.doneButtonTitle]}>
+                  {Localizable.t('done')}
+                </Text>
+              </TouchableOpacity>
+            );
           },
           Title: function(route, navigator, index, navState) {
             return (
@@ -166,6 +184,7 @@ export default class Popover extends Component {
           {...params}
           navigate={(route: any, options?: any) => this._navigate(navigator, route, options)}
           onDone={this.props.onDone}
+          events={this.eventEmitter}
         />
       </View>
     );

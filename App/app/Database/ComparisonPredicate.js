@@ -21,10 +21,4 @@ export default class ComparisonPredicate extends Predicate {
   static predicateWith(leftExpression: string, operatorType: string, rightExpression: any) {
     return new ComparisonPredicate(leftExpression, operatorType, rightExpression);
   }
-
-  get tables(): Array<string> {
-    const table = this.leftExpression.split('.')[0];
-    return [table];
-  }
-
 }

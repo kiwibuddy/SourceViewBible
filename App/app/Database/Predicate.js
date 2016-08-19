@@ -28,10 +28,6 @@ export default class Predicate {
     return '(' + predicateFormat + ')';
   }
 
-  get tables(): Array<string> {
-    return [];
-  }
-
   get empty(): boolean {
     return !this.query;
   }
