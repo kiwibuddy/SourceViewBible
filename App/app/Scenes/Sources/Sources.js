@@ -80,6 +80,8 @@ export default class Sources extends Component {
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSectionHeader={this._renderSectionHeader}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
+          keyboardShouldPersistTaps={true}
+          keyboardDismissMode="on-drag"
         />
       </View>
     );
