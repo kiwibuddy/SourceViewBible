@@ -210,6 +210,9 @@ export default class Card extends Component {
 
   _renderWordCount = () => {
     const { card, wordCount } = this.state;
+
+    console.log('wordCount', wordCount);
+    
     if (wordCount == null) return null;
 
     const wordFilter = card.filters.find(filter => filter.type === 'word');
