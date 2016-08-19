@@ -14,12 +14,12 @@ const Colors = [
   '#FFAA7C',
 ];
 
-export const DeltaColor = '#323B43';
+const DeltaColor = '#323B43';
 
 const MINIMUM_ALPHA_VALUE = 5;
 const ALPHA_STEP_VALUE = 5;
 
-export function colorAtIndex(index: number) {
+function colorAtIndex(index: number) {
   const colorCount = Colors.length;
   const number = index % colorCount;
   let color = Colors[number];
@@ -32,4 +32,8 @@ export function colorAtIndex(index: number) {
   return color;
 }
 
-export default Colors;
+module.exports = {
+  colors: Colors,
+  deltaColor: DeltaColor,
+  colorAtIndex
+}

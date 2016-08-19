@@ -19,7 +19,7 @@ import {
   Localizable
 } from '../../../Common';
 
-import ChartColors, { DeltaColor, colorAtIndex } from './ChartColors';
+import ChartColors from './ChartColors';
 import PieChartList from './PieChartList';
 import { PieChart } from '../../../Components/Charts';
 
@@ -69,7 +69,7 @@ export default class PieChartMultiple extends Component {
 
     const totalValue = data.reduce((sum, slice) => sum + slice.value, 0);
     const slices = data.filter(slice => parseInt((slice.value / totalValue) * 100)).map((slice, index) => {
-      return {...slice, color: slice.color || colorAtIndex(index)};
+      return {...slice, color: slice.color || ChartColors.colorAtIndex(index)};
     });
 
     return (
