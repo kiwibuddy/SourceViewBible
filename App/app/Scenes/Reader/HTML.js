@@ -107,10 +107,6 @@ module.exports = `
         font-weight: normal;
         {{NUMBER_DISPLAY}}
       }
-      .textChapter span {
-        height: 1.45em;
-        display: inline-block;
-      }
       .textVerse {
         font-family: Gurmukhi MN;
         font-size: 0.65em;
