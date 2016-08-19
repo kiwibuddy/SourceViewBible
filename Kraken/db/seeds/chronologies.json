@@ -16,6 +16,5 @@
   {"id": 15, "key": "Chron_800s_BC", "from": -899, "to": -800 },
   {"id": 16, "key": "Chron_900s_BC", "from": -999, "to": -900 },
   {"id": 17, "key": "Chron_Eschatos", "from": 100, "to": 10000 },
-  {"id": 18, "key": "Chron_PreAbraham", "from": -2100, "to": -10000 },
-  {"id": 19, "key": "Chron_Overlapping", "from": 10001, "to": 10001 }
+  {"id": 18, "key": "Chron_PreAbraham", "from": -2100, "to": -10000 }
 ]
