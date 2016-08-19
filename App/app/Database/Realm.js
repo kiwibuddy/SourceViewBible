@@ -527,12 +527,13 @@ const ProfessionSchema = {
   properties: {
     id: 'int',
     key: 'string',
+    searchable: {type: 'bool', default: true}
   }
 }
 
 export class Profession extends Realm.Object {
   static all() {
-    return realm.objects('Profession').sorted('key');
+    return realm.objects('Profession').filtered('searchable = $0', true).sorted('key');
   }
 
   static findByID(id: number) {

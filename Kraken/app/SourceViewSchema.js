@@ -187,6 +187,7 @@ const ProfessionSchema = {
   properties: {
     id: 'int',
     key: 'string',
+    searchable: {type: 'bool', default: true}
   }
 }
 class Profession extends Realm.Object {
