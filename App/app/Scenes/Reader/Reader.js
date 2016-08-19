@@ -46,7 +46,7 @@ const NavigationBar = (props: Props) => {
       <Navigation.NavigationBarButton
         imageSource={require('../../Components/Navigation/Images/nav-filter.png')}
         onPress={() => {props.navigate(readerSettingsURL({title: Localizable.t('settings'), modal: true}))}}
-        style={{position: 'absolute', right: 0}}
+        style={{position: 'absolute', right: 5}}
       />
     </Navigation.NavigationBar>
   );
@@ -310,7 +310,7 @@ const styles = StyleSheet.create({
     paddingVertical: 2,
     paddingHorizontal: 5,
     overflow: 'hidden',
-    marginRight: 8,
+    marginRight: 5,
   },
   filterClear: {
     position: 'absolute',
