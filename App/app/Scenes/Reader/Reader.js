@@ -271,4 +271,8 @@ const styles = StyleSheet.create({
     height: 30,
     backgroundColor: 'red'
   },
+  filterLabel: {
+    borderRadius: 4,
+    fontSize: 12,
+  },
 });
