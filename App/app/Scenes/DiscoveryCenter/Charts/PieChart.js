@@ -85,11 +85,11 @@ const PieChartView = (props: Props) => {
       </Chart.Header>
       <Chart.Footer>
         <View style={[StyleSheet.styles.discoveryCenter.leftContainer, {justifyContent: 'flex-start', paddingLeft: 5, borderRightWidth: 0}]}>
-          <TouchableOpacity onPress={() => props.onPressChartType(Chart.Type.BAR)}>
-            <Image source={require('../Images/chart-type-bar.png')} />
-          </TouchableOpacity>
           <TouchableOpacity onPress={() => props.onPressChartType(Chart.Type.PIE)}>
             <Image source={require('../Images/chart-type-pie-s.png')} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => props.onPressChartType(Chart.Type.BAR)}>
+            <Image source={require('../Images/chart-type-bar.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => props.onPressChartType(Chart.Type.CLOUD)}>
             <Image source={require('../Images/chart-type-cloud.png')} />
