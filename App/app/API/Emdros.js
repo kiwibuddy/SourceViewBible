@@ -64,23 +64,20 @@ function scripture(options: Object) {
   if (options && options.stylesheet == 'occurrence') {
     stylesheet = OCCURRENCE_STYLESHEET;
   } else {
-    stylesheet = SCRIPTURE_STYLESHEET;
+    stylesheet = JSON.parse(JSON.stringify(SCRIPTURE_STYLESHEET));
     const spheres = (options && options.spheres ? options.spheres : []);
+    const sphereFeatures = spheres.map(sphere => SPHERE_FEATURE_MAP[sphere]);
 
-      const sphereFeatures = spheres.map(sphere => SPHERE_FEATURE_MAP[sphere]);
-
-      console.log('spheres', sphereFeatures);
-
-      const base = SCRIPTURE_STYLESHEET['fetchinfo']['base']['object_types'];
-      base['Token']['start'] = base['Token']['start'].replace('{{SPHERES}}', highlightSpheres('{{ feature 0 }}', spheres, 1));
-      base['Token']['get'] = base['Token']['get'].concat(sphereFeatures);
-      base['NonWordToken'] = base['Token'];
-      base['SpaceToken']['start'] = highlightSpheres(' ', options.spheres, 0);
-      base['SpaceToken']['get'] = sphereFeatures;
-      base['VerseNumberToken']['start'] = base['VerseNumberToken']['start'].replace('{{SPHERES}}', highlightSpheres('{{ featurenomangle 0 }}&#160;', spheres, 1));
-      base['VerseNumberToken']['get'] = base['VerseNumberToken']['get'].concat(sphereFeatures);
-      base['ChapterNumberToken']['start'] = base['ChapterNumberToken']['start'].replace('{{SPHERES}}', highlightSpheres('{{ featurenomangle 0 }}', spheres, 1));
-      base['ChapterNumberToken']['get'] = base['ChapterNumberToken']['get'].concat(sphereFeatures);
+    const base = stylesheet['fetchinfo']['base']['object_types'];
+    base['Token']['start'] = base['Token']['start'].replace('{{SPHERES}}', highlightSpheres('{{ feature 0 }}', spheres, 1));
+    base['Token']['get'] = base['Token']['get'].concat(sphereFeatures);
+    base['NonWordToken'] = base['Token'];
+    base['SpaceToken']['start'] = highlightSpheres(' ', options.spheres, 0);
+    base['SpaceToken']['get'] = sphereFeatures;
+    base['VerseNumberToken']['start'] = base['VerseNumberToken']['start'].replace('{{SPHERES}}', highlightSpheres('{{ featurenomangle 0 }}&#160;', spheres, 1));
+    base['VerseNumberToken']['get'] = base['VerseNumberToken']['get'].concat(sphereFeatures);
+    base['ChapterNumberToken']['start'] = base['ChapterNumberToken']['start'].replace('{{SPHERES}}', highlightSpheres('{{ featurenomangle 0 }}', spheres, 1));
+    base['ChapterNumberToken']['get'] = base['ChapterNumberToken']['get'].concat(sphereFeatures);
   }
   const style = {stylesheet: JSON.stringify(stylesheet)};
 
