@@ -105,11 +105,6 @@ export default class SourceOverview extends Component {
             <Text style={StyleSheet.styles.statisticSubtitle}>Books</Text>
           </TouchableOpacity>
           <View style={StyleSheet.styles.statisticKeyline} />
-          <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.navigate(sourceConversationsURL({sourceID: source.id, title: Localizable.t('source-conversations', {name: source.name})}))}>
-            <Text style={[StyleSheet.styles.statisticTitle, {fontSize: 18}]}>0</Text>
-            <Text style={StyleSheet.styles.statisticSubtitle}>Conversations</Text>
-          </TouchableOpacity>
-          <View style={StyleSheet.styles.statisticKeyline} />
           <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.navigate(sourceWordsURL({sourceID: source.id, title: Localizable.t('source-words', {name: source.name})}))}>
             <Text style={[StyleSheet.styles.statisticTitle, {fontSize: 18}]}>{Localizable.toNumber(source.wordCount, {precision: 0})}</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Words</Text>
