@@ -163,6 +163,7 @@ module.exports = `
       }
       .footnoteContent {
         padding: 8pt;
+        overflow: scroll;
       }
       ${CSS}
     </style>
