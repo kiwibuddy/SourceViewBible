@@ -177,7 +177,6 @@ const ActantSchema = {
     professions: {type: 'list', objectType: 'Profession'},
     isSource: 'bool',
     isRecipient: 'bool',
-    books: {type: 'list', objectType: 'Book'},
     sourceTypeCount: {type: 'int', default: 0},
     sourceTypeCounts: {type: 'list', objectType: 'Count'},
     principalSourceType: {type: 'string', optional: true},
@@ -225,7 +224,7 @@ export class Actant extends Realm.Object {
   }
 
   get bookCount(): number {
-    return this.books.length;
+    return SourceRelation.whereSource(this).length;
   }
 
   get isDivine(): boolean {
@@ -613,6 +612,7 @@ const SourceRelationSchema = {
   primaryKey: 'id',
   properties: {
     id: 'string',
+    book: 'Book',
     source: 'Actant',
     sourceTypeCount: {type: 'int', default: 0},
     sourceTypeCounts: {type: 'list', objectType: 'Count'},
@@ -626,6 +626,10 @@ const SourceRelationSchema = {
 };
 
 export class SourceRelation extends Realm.Object {
+  static whereSource(source: Actant) {
+    return realm.objects('SourceRelation').filtered('source.id = $0', source.id);
+  }
+
   countOfSourceType(sourceType: string): number {
     const count = this.sourceTypeCounts.find(count => count.string === sourceType);
     return count && count.count || 0;

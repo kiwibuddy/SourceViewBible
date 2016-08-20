@@ -121,11 +121,10 @@ async function seedSources(emdros, realm) {
                   if (wordCount > 0) {
                     sourceRelations.push({
                       id: UUID.v4(),
+                      book,
                       source: actant,
                       wordCount
                     });
-
-                    actant.books.push(book);
                   }
 
                   if (wordCount > maxSourceWordCount) {

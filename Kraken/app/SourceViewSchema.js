@@ -29,7 +29,6 @@ const ActantSchema = {
     professions: {type: 'list', objectType: 'Profession'},
     isSource: 'bool',
     isRecipient: 'bool',
-    books: {type: 'list', objectType: 'Book'},
     sourceTypeCount: {type: 'int', default: 0},
     sourceTypeCounts: {type: 'list', objectType: 'Count'},
     principalSourceType: {type: 'string', optional: true},
@@ -202,6 +201,7 @@ const SourceRelationSchema = {
   primaryKey: 'id',
   properties: {
     id: 'string',
+    book: 'Book',
     source: 'Actant',
     sourceTypeCount: {type: 'int', default: 0},
     sourceTypeCounts: {type: 'list', objectType: 'Count'},

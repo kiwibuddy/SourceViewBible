@@ -82,18 +82,23 @@ export default class Actants extends Component {
   }
 
   _renderRow = (actant: Object, sectionID: any, rowID: any) => {
+    return (
+      <TouchableOpacity key={actant.id} style={StyleSheet.styles.listItem} onPress={() => this._onPressActant(actant)}>
+        <Text style={StyleSheet.styles.cell.title}>{actant.name}</Text>
+      </TouchableOpacity>
+    );
+  };
+
+  _onPressActant = (actant: Object) => {
     const filter = {
       id: 'filter-' + Date.now(),
       type: 'actant',
       actantType: this.props.type,
       ...this.props.filter,
       actant
-    }
-    return (
-      <TouchableOpacity key={actant.id} style={StyleSheet.styles.listItem} onPress={() => this.props.onDone(cardWithFilter(this.props.card, filter))}>
-        <Text style={StyleSheet.styles.cell.title}>{actant.name}</Text>
-      </TouchableOpacity>
-    );
+    };
+
+    this.props.onDone(cardWithFilter(this.props.card, filter));
   };
  }
 
