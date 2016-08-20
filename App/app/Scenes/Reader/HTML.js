@@ -163,7 +163,10 @@ module.exports = `
       }
       .footnoteContent {
         padding: 8pt;
+      }
+      .footnoteScroll {
         overflow: scroll;
+        max-height: 250pt;
       }
       ${CSS}
     </style>
@@ -176,7 +179,7 @@ module.exports = `
           <a href="#" class="footnoteClose">Close</a>
         </div>
         <div class="footnoteContent">
-          <p>Or In the beginning when God created the heavens and the earth,... Or When God began to create the heavens and the earth,...</p>
+          <p class="footnoteScroll">Or In the beginning when God created the heavens and the earth,... Or When God began to create the heavens and the earth,...</p>
         </div>
       </div>
     </div>
