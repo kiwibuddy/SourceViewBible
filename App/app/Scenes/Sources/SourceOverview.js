@@ -278,9 +278,9 @@ export default class SourceOverview extends Component {
           <Icon
             name="metadata-profession"
             size={20}
-            style={[styles.listItemIcon, {color: '#59626A'}]}
+            style={[styles.listItemIcon, {color: '#59626A', alignSelf: 'auto', paddingTop: 5}]}
           />
-          <View style={styles.listItem}>
+          <View style={styles.listItemAlt}>
             <Text style={StyleSheet.styles.cell.titlemedium}>{Localizable.t('profession')}</Text>
             <Text style={StyleSheet.styles.cell.valuetitlemedium}>{source.professionDescription}</Text>
           </View>
@@ -460,7 +460,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    height: 44,
+    paddingVertical: 8,
+  },
+  listItemAlt: {
+    flex: 1,
+    paddingVertical: 6,
   },
   listItemIcon: {
     alignSelf: 'center',
