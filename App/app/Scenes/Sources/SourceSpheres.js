@@ -144,9 +144,8 @@ export default class SourceSpheres extends Component {
   _onPressSphere = (sphere: Object) => {
     const { source } = this.state;
     const book = this.state.book || source.books[0];
-
     Preference.setObjectForKey([sphere.id], Preference.Keys.Reader.spheres);
-    this.props.navigate(readerURL({bookID: book.id, anchor: 'chapter-1', title: source.name}));
+    this.props.navigate(readerURL({bookID: book.id, anchor: `source-${source.name}-1`, title: source.name}));
   };
 
   _onPressSphereIcon = (sphere: Object) => {

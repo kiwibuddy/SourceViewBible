@@ -224,7 +224,7 @@ export class Actant extends Realm.Object {
   }
 
   get books(): Array<Object> {
-    return SourceRelation.whereSource(this);
+    return SourceRelation.whereSource(this).map(relation => relation.book);
   }
 
   get bookCount(): number {
