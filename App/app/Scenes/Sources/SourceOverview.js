@@ -59,9 +59,7 @@ export default class SourceOverview extends Component {
     return (
       <ScrollView style={styles.container}>
         <View style={styles.filterBar}>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            <Text style={styles.filterLabel}>in 2 Samuel</Text>
-          </ScrollView>
+            <Text style={styles.filterLabel}>in 2 Samuel fds fds fds fds das fdsa dsa</Text>
           <TouchableOpacity style={styles.filterClear} onPress={this._onPressClearFilter}>
             <Image source={require('../../Images/sources/clear-btn.png')} />
           </TouchableOpacity>
@@ -205,7 +203,11 @@ export default class SourceOverview extends Component {
         <View style={styles.separator} />
       </View>
     );
-  }
+  };
+
+  _onPressClearFilter = () => {
+
+  };
 }
 
 const styles = StyleSheet.create({
