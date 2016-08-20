@@ -299,6 +299,10 @@ export class Actant extends Realm.Object {
     return this.natures.map(nature => nature.name).join(', ');
   }
 
+  get professionDescription(): ?string {
+    return this.professions.filtered('searchable = $0', true).map(profession => profession.name).sort((a,b) => a > b ? 1 : -1).join(', ');
+  }
+
   get roles(): any {
     return this.sourceTypeCounts.filtered('count > 0').map(sourceTypeCount => Role.findByID(sourceTypeCount.string));
   }
@@ -622,7 +626,7 @@ export class SourceRelation extends Realm.Object {
     const count = this.sphereCounts.find(count => count.string === sphereType);
     return count && count.count || 0;
   }
-  
+
   get roles(): any {
     return this.sourceTypeCounts.filtered('count > 0').map(sourceTypeCount => Role.findByID(sourceTypeCount.string));
   }

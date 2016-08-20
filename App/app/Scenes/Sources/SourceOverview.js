@@ -106,7 +106,6 @@ export default class SourceOverview extends Component {
     const statistics = this._renderStatistics();
     const metaData = this._renderMetaData();
 
-
     const words = source.words.map(word => word.string);
     const principalSourceType = (sourceRelation ? sourceRelation.principalSourceType : source.principalSourceType);
 
@@ -244,6 +243,24 @@ export default class SourceOverview extends Component {
 
     if (source.chronologyDescription) {
       metaData.push(this._renderMetaValue(Localizable.t('time-period'), 'metadata-timeperiod', source.chronologyDescription));
+    }
+
+    if (source.professionDescription) {
+      const profession = <View key="profession">
+        <View style={styles.listItemContainer}>
+          <Icon
+            name="metadata-profession"
+            size={20}
+            style={[styles.listItemIcon, {color: '#59626A'}]}
+          />
+          <View style={styles.listItem}>
+            <Text style={StyleSheet.styles.cell.titlemedium}>{Localizable.t('profession')}</Text>
+            <Text style={StyleSheet.styles.cell.valuetitlemedium}>{source.professionDescription}</Text>
+          </View>
+        </View>
+        <View style={styles.separator} />
+      </View>
+      metaData.push(profession);
     }
 
     return (
