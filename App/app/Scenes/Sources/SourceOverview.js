@@ -66,10 +66,10 @@ export default class SourceOverview extends Component {
   constructor(props: Props) {
     super(props);
 
+    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     const source = Actant.findByID(props.sourceID);
     const book = (props.bookID ? Book.findByID(props.bookID) : null);
     const sourceRelation = (book ? book.sourceRelations.find(relation => relation.source.id === source.id) : null);
-    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
 
     this.state = {
       dataSource,
@@ -85,8 +85,11 @@ export default class SourceOverview extends Component {
   }
 
   componentDidMount() {
-    const { book, sourceRelation } = this.state;
-    this._getSource({book, sourceRelation});
+    this._setSource(this.props);
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    this._setSource(nextProps);
   }
 
   render() {
@@ -350,17 +353,19 @@ export default class SourceOverview extends Component {
   };
 
   _onPressClearFilter = () => {
+    const { source } = this.state;
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    this._getSource({book: null, sourceRelation: null});
+    this._setSource({sourceID: source.id, book: null, sourceRelation: null});
   };
 
   _onPressActant(actant: Actant) {
     this.props.navigate(sourceURL({sourceID: actant.id, title: actant.name}));
   };
 
-  async _getSource(options: ?Object) {
-    const book = (options && options.book ? options.book : null);
-    const sourceRelation = (options && options.sourceRelation ? options.sourceRelation : null)
+  async _setSource(props: Object) {
+    const source = Actant.findByID(props.sourceID);
+    const book = (props.bookID ? Book.findByID(props.bookID) : null);
+    const sourceRelation = (book ? book.sourceRelations.find(relation => relation.source.id === source.id) : null);
 
     const query = new Query(this.state.source, book);
     const bookCount = await query.bookCount();
@@ -387,6 +392,7 @@ export default class SourceOverview extends Component {
     const dataSource = this.state.dataSource.cloneWithRowsAndSections(rows, sections);
 
     this.setState({
+      source,
       book,
       sourceRelation,
       dataSource,
