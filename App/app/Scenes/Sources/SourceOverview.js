@@ -56,7 +56,11 @@ export default class SourceOverview extends Component {
   }
 
   render() {
-    const { source } = this.state;
+    const { source, book } = this.state;
+
+    const sourceRelation = (book ? book.sourceRelations.find(relation => relation.source.id === source.id) : null);
+    const principalSourceType = (sourceRelation ? sourceRelation.principalSourceType : source.principalSourceType);
+
     const words = source.words.map(word => word.string);
 
     const metaData = this._renderMetaData();
@@ -67,7 +71,7 @@ export default class SourceOverview extends Component {
         {filterBar}
         <TouchableOpacity onPress={() => this.props.navigate(sourceWordsURL({sourceID: source.id, title: Localizable.t('source-words', {name: source.name})}))}>
           <WordCloud
-            backgroundColors={Colors.sources[source.principalSourceType].gradient.big}
+            backgroundColors={Colors.sources[principalSourceType].gradient.big}
             style={styles.wordCloud}
           >
             <ParallaxMotionView intensity={5} style={[styles.parallax, {opacity: 0.8}]}>
@@ -99,6 +103,7 @@ export default class SourceOverview extends Component {
             </View>
             <View style={styles.sourceIconContainer}>
               <SourceIcon
+                principalSourceType={principalSourceType}
                 source={source}
                 size={100}
                 style={[styles.sourceIcon]}
