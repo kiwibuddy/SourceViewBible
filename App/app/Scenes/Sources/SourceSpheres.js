@@ -5,6 +5,7 @@ import React, { Component, PropTypes } from 'react';
 const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
 
 import {
+  LayoutAnimation,
   RecyclerViewBackedScrollView,
   Text,
   TouchableOpacity,
@@ -25,6 +26,7 @@ const {
 } = Constants;
 
 import { PieChart, SourcesBarChart, SpheresBarChart } from '../../Components/Charts';
+import FilterBar from './FilterBar';
 
 import { readerURL, sphereURL } from '../../Navigation';
 
@@ -56,23 +58,25 @@ export default class SourceSpheres extends Component {
     const book = (props.bookID ? Book.findByID(props.bookID) : null);
     const sourceRelation = (book ? book.sourceRelations.find(relation => relation.source.id === source.id) : null);
 
-    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
-    const spheres = Sphere.all().map(sphere => {
-      return ({...sphere, sourceWordCount: source.countOfSphereType(sphere.id)});
-    });
+    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
 
     this.state = {
       source,
       book,
       sourceRelation,
-      dataSource: dataSource.cloneWithRows(spheres)
+      dataSource: dataSource
     };
   }
 
+  componentDidMount() {
+    this._setSource(this.state.source, this.state.book, this.state.sourceRelation);
+  }
+
   render() {
-    const { source } = this.state;
+    const { source, book } = this.state;
     return (
       <View style={styles.container}>
+        <FilterBar book={book} onPress={() => this._onPressClearFilter()} />
         <ListView
           dataSource={this.state.dataSource}
           renderHeader={this._renderHeader}
@@ -147,6 +151,22 @@ export default class SourceSpheres extends Component {
   _onPressSphereIcon = (sphere: Object) => {
     this.props.navigate(sphereURL({sphereID: sphere.id, title: Localizable.t('spheres.text'), description: Localizable.t('sphere-overview', {name: sphere.name})}));
   };
+
+  _onPressClearFilter = () => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    this._setSource(this.state.source, null, null);
+  };
+
+  _setSource = (source: Object, book: ?Object, sourceRelation: ?Object) => {
+    const object = sourceRelation || source;
+    const spheres = Sphere.all();
+    this.setState({
+      source,
+      book,
+      sourceRelation,
+      dataSource: this.state.dataSource.cloneWithRows(spheres)
+    });
+  }
 }
 
 const styles = StyleSheet.create({
