@@ -383,7 +383,7 @@ export default class SourceOverview extends Component {
     const book = (props.bookID ? Book.findByID(props.bookID) : null);
     const sourceRelation = (book ? book.sourceRelations.find(relation => relation.source.id === source.id) : null);
 
-    const query = new Query(this.state.source, book);
+    const query = new Query(source, book);
     const bookCount = await query.bookCount();
 
     const rows = {};
