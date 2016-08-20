@@ -12,12 +12,6 @@ export default class Query {
     this.book = book;
   }
 
-  async bookCount() {
-    const sql = `SELECT COUNT(DISTINCT bso.book_id) AS count FROM bso INNER JOIN bso_actants ON bso.id = bso_actants.bso_id WHERE bso_actants.actant_id = ?`;
-    const rows = await rowsWithSQL(sql, this.source.id);
-    return rows[0]['count'];
-  }
-
   async spokeTo() {
     const where = (this.book ? `AND (bso.first >= ${this.book.firstMonad}) AND (bso.last <= ${this.book.lastMonad})` : '');
     const sql = `

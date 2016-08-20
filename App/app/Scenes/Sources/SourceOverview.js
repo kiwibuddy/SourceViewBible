@@ -56,7 +56,6 @@ type State = {
   source: Object,
   book: ?Object,
   sourceRelation: ?Object,
-  bookCount: number,
   spokeToCount: number,
   spokeToOccurrenceCount: number,
   listenedToCount: number,
@@ -81,7 +80,6 @@ export default class SourceOverview extends Component {
       source,
       book,
       sourceRelation,
-      bookCount: 0,
       spokeToCount: 0,
       spokeToOccurrenceCount: 0,
       listenedToCount: 0,
@@ -319,9 +317,10 @@ export default class SourceOverview extends Component {
   };
 
   _renderStatistics = () => {
-    const { source, book, bookCount, sourceRelation } = this.state;
+    const { source, book, sourceRelation } = this.state;
 
     const object = (sourceRelation ? sourceRelation : source);
+    const bookCount = source.bookCount;
     const wordCount = object.wordCount;
     const spherePercent = (object.sphereWordCount / wordCount) * 100;
 
@@ -378,7 +377,6 @@ export default class SourceOverview extends Component {
     const sourceRelation = source.relationForBook(book);
 
     const query = new Query(source, book);
-    const bookCount = await query.bookCount();
 
     const rows = {};
     const sections = [];
@@ -407,7 +405,6 @@ export default class SourceOverview extends Component {
         book,
         sourceRelation,
         dataSource,
-        bookCount,
         spokeToCount,
         spokeToOccurrenceCount,
         listenedToCount,

@@ -118,12 +118,15 @@ async function seedSources(emdros, realm) {
                 const actant = realm.objectForPrimaryKey('Actant', parseInt(actantID));
                 if (actant != null) {
                   const wordCount = sourceData[actantID]["Token"] || 0;
+                  if (wordCount > 0) {
+                    sourceRelations.push({
+                      id: UUID.v4(),
+                      source: actant,
+                      wordCount
+                    });
 
-                  sourceRelations.push({
-                    id: UUID.v4(),
-                    source: actant,
-                    wordCount
-                  });
+                    actant.books.push(book);
+                  }
 
                   if (wordCount > maxSourceWordCount) {
                     maxSourceWordCount = wordCount;
