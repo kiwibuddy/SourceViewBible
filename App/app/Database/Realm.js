@@ -223,8 +223,12 @@ export class Actant extends Realm.Object {
     return count && count.count || 0;
   }
 
+  get books(): Array<Object> {
+    return SourceRelation.whereSource(this);
+  }
+
   get bookCount(): number {
-    return SourceRelation.whereSource(this).length;
+    return this.books.length;
   }
 
   get isDivine(): boolean {
