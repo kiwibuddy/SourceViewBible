@@ -1,7 +1,7 @@
 /* @flow */
 'use strict';
 
-import { Actant, Book, rowsWithSQL } from '../../Database';
+import { Actant, Book, BookSourceOccurrence, rowsWithSQL } from '../../Database';
 
 export default class Query {
   source: Actant;
@@ -45,4 +45,17 @@ export default class Query {
       return {actant: Actant.findByID(row['id']), count: row['count']};
     });
   }
+
+  async occurrences() {
+    const where = (this.book ? `AND (bso.first >= ${this.book.firstMonad}) AND (bso.last <= ${this.book.lastMonad})` : '');
+    const sql = `
+    SELECT DISTINCT bso.id AS id
+    FROM bso INNER JOIN bso_actants AS speakers ON (bso.id = speakers.bso_id AND speakers.type_id = 1)
+    WHERE ((speakers.actant_id = ?) ${where})
+    ORDER BY bso.id`;
+
+    const rows = await rowsWithSQL(sql);
+    return rows.map(row => BookSourceOccurrence.findByID(row['id']));
+  }
+
 }

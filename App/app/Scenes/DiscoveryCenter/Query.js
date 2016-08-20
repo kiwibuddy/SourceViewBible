@@ -182,7 +182,7 @@ export default class Query {
 
     const sql = this._sql('SELECT DISTINCT bso.id', {orderBy: 'ORDER BY bso.id', limit: `LIMIT ${BookSourceOccurrence.MAXIMUM_NUMBER_OF_DISPLAYABLE_OCCURRENCES}`});
     const rows = await rowsWithSQL(sql);
-    return rows.map(row => BookSourceOccurrence.findByID(row['id']))
+    return rows.map(row => BookSourceOccurrence.findByID(row['id']));
   }
 
   async wordCount() {
