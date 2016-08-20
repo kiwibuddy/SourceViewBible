@@ -58,6 +58,14 @@ export default class SourceOverview extends Component {
 
     return (
       <ScrollView style={styles.container}>
+        <View style={styles.filterBar}>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            <Text style={styles.filterLabel}>in 2 Samuel</Text>
+          </ScrollView>
+          <TouchableOpacity style={styles.filterClear} onPress={this._onPressClearFilter}>
+            <Image source={require('../../Images/sources/clear-btn.png')} />
+          </TouchableOpacity>
+        </View>
         <TouchableOpacity onPress={() => this.props.navigate(sourceWordsURL({sourceID: source.id, title: Localizable.t('source-words', {name: source.name})}))}>
           <WordCloud
             backgroundColors={Colors.sources[source.principalSourceType].gradient.big}
@@ -203,6 +211,28 @@ export default class SourceOverview extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  filterBar: {
+    height: 30,
+    backgroundColor: '#F9F9F9',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#c8c7cc',
+    alignItems: 'center',
+    paddingHorizontal: 8,
+    justifyContent: 'center',
+  },
+  filterLabel: {
+    fontSize: 14,
+    color: '#9B9B9B',
+    fontWeight: '600',
+    alignSelf: 'center',
+    textAlign: 'center',
+    marginTop: -1,
+  },
+  filterClear: {
+    position: 'absolute',
+    right: 0,
+    top: 0,
   },
   sourceBackgroundContainer: {
     alignSelf: 'center',
