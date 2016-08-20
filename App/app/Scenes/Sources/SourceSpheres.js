@@ -88,11 +88,6 @@ export default class SourceSpheres extends Component {
     return (
       <View style={StyleSheet.styles.statisticsContainer}>
         <View style={StyleSheet.styles.statisticContainer}>
-          <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toNumber(0, {precision: 0})}</Text>
-          <Text style={StyleSheet.styles.statisticSubtitle}>Book</Text>
-        </View>
-        <View style={StyleSheet.styles.statisticKeyline} />
-        <View style={StyleSheet.styles.statisticContainer}>
           <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toNumber(source.wordCount, {precision: 0})}</Text>
           <Text style={StyleSheet.styles.statisticSubtitle}>Words</Text>
         </View>
