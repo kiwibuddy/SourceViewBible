@@ -41,6 +41,7 @@ type Props = {
 type State = {
   source: Object,
   book: ?Object,
+  sourceRelation: ?Object,
   dataSource: any
 };
 
@@ -52,7 +53,8 @@ export default class SourceSpheres extends Component {
     super(props);
 
     const source = Actant.findByID(props.sourceID);
-    const book = props.bookID ? Book.findByID(props.bookID) : null;
+    const book = (props.bookID ? Book.findByID(props.bookID) : null);
+    const sourceRelation = (book ? book.sourceRelations.find(relation => relation.source.id === source.id) : null);
 
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     const spheres = Sphere.all().map(sphere => {
@@ -62,6 +64,7 @@ export default class SourceSpheres extends Component {
     this.state = {
       source,
       book,
+      sourceRelation,
       dataSource: dataSource.cloneWithRows(spheres)
     };
   }
@@ -82,13 +85,14 @@ export default class SourceSpheres extends Component {
   }
 
   _renderHeader = (props: any) => {
-    const { source } = this.state;
-    const spherePercent = (source.sphereWordCount / source.wordCount) * 100;
+    const { source, sourceRelation } = this.state;
+    const object = sourceRelation || source;
+    const spherePercent = (object.sphereWordCount / object.wordCount) * 100;
 
     return (
       <View style={StyleSheet.styles.statisticsContainer}>
         <View style={StyleSheet.styles.statisticContainer}>
-          <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toNumber(source.wordCount, {precision: 0})}</Text>
+          <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toNumber(object.wordCount, {precision: 0})}</Text>
           <Text style={StyleSheet.styles.statisticSubtitle}>Words</Text>
         </View>
         <View style={StyleSheet.styles.statisticKeyline} />
@@ -99,7 +103,7 @@ export default class SourceSpheres extends Component {
               style={{flex: 0, marginLeft: 4}}
               barStyle={{width: 4, height: 24, marginHorizontal: 2}}
               horizontal={false}
-              data={[{family: source.countOfSphereType(SphereType.FAMILY)}, {economics: source.countOfSphereType(SphereType.ECONOMICS)}, {government: source.countOfSphereType(SphereType.GOVERNMENT)}, {religion: source.countOfSphereType(SphereType.RELIGION)}, {education: source.countOfSphereType(SphereType.EDUCATION)}, {communication: source.countOfSphereType(SphereType.COMMUNICATION)}, {celebration: source.countOfSphereType(SphereType.CELEBRATION)}]}
+              data={[{family: object.countOfSphereType(SphereType.FAMILY)}, {economics: object.countOfSphereType(SphereType.ECONOMICS)}, {government: object.countOfSphereType(SphereType.GOVERNMENT)}, {religion: object.countOfSphereType(SphereType.RELIGION)}, {education: object.countOfSphereType(SphereType.EDUCATION)}, {communication: object.countOfSphereType(SphereType.COMMUNICATION)}, {celebration: object.countOfSphereType(SphereType.CELEBRATION)}]}
             />
           </View>
           <Text style={StyleSheet.styles.statisticSubtitle}>Spheres</Text>
@@ -109,9 +113,10 @@ export default class SourceSpheres extends Component {
   };
 
   _renderRow = (sphere: Object) => {
-    const { source } = this.state;
-    const wordCount = source.countOfSphereType(sphere.id);
-    const spherePercent = (wordCount / source.sphereWordCount) * 100;
+    const { source, sourceRelation } = this.state;
+    const object = sourceRelation || source;
+    const wordCount = object.countOfSphereType(sphere.id);
+    const spherePercent = (wordCount / object.sphereWordCount) * 100;
     const colors = Colors.spheres[sphere.id];
 
     return (
