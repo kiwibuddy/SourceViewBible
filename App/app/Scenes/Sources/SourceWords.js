@@ -6,12 +6,13 @@ const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithP
 
 import {
   Image,
+  LayoutAnimation,
+  ListView,
   RecyclerViewBackedScrollView,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import { ListView } from '../../Components/Common/DatabaseListView';
 
 import {
   Colors,
@@ -21,17 +22,21 @@ import {
 
 import { SourcesBarChart, SpheresBarChart, WordCloud } from '../../Components/Charts';
 import ParallaxMotionView from '../../Components/Common/ParallaxMotionView';
+import FilterBar from './FilterBar';
 
-import { Actant } from '../../Database';
+import { Actant, Book } from '../../Database';
 
 type Props = {
   sourceID: number,
+  bookID: ?string,
   navigate: Function,
 };
 
 type State = {
   dataSource: any,
   source: Object,
+  book: ?Object,
+  sourceRelation: ?Object,
 };
 
 export default class SourceWords extends Component {
@@ -41,16 +46,28 @@ export default class SourceWords extends Component {
     super(props);
 
     const source = Actant.findByID(props.sourceID);
-    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
+    const book = (props.bookID ? Book.findByID(props.bookID) : null);
+    const sourceRelation = (book ? book.sourceRelations.find(relation => relation.source.id === source.id) : null);
+
+    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     this.state = {
       source,
-      dataSource: dataSource.cloneWithRows(source.words)
+      book,
+      sourceRelation,
+      dataSource: dataSource
     };
   }
 
+  componentDidMount() {
+    this._setSource(this.state.source, this.state.book, this.state.sourceRelation);
+  }
+
   render() {
+    const { book } = this.state;
+
     return (
       <View style={styles.container}>
+        <FilterBar book={book} onPress={() => this._onPressClearFilter()} />
         <ListView
           dataSource={this.state.dataSource}
           renderHeader={this._renderHeader}
@@ -72,12 +89,13 @@ export default class SourceWords extends Component {
   };
 
   _renderHeader = (props: any) => {
-    const { source } = this.state;
-    const words = source.words.map(word => word.string);
+    const { source, sourceRelation } = this.state;
+    const object = sourceRelation || source;
+    const words = object.words.map(word => word.string);
 
     return (
       <WordCloud
-        backgroundColors={Colors.sources[source.principalSourceType].gradient.big}
+        backgroundColors={Colors.sources[object.principalSourceType].gradient.big}
         style={styles.wordCloud}
       >
         <ParallaxMotionView intensity={5} style={[styles.parallax, {opacity: 0.8}]}>
@@ -103,10 +121,25 @@ export default class SourceWords extends Component {
           <Text style={[styles.wc4, {top: -10, left: 130}]}>{words[13]}</Text>
           <Text style={[styles.wc4, {top: 65, right: 60}]}>{words[14]}</Text>
         </ParallaxMotionView>
-
       </WordCloud>
     );
   };
+
+  _onPressClearFilter = () => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    this._setSource(this.state.source, null, null);
+  };
+
+  _setSource = (source: Object, book: ?Object, sourceRelation: ?Object) => {
+    const object = sourceRelation || source;
+    const words = object.words;
+    this.setState({
+      source,
+      book,
+      sourceRelation,
+      dataSource: this.state.dataSource.cloneWithRows(words)
+    });
+  }
 }
 
 const styles = StyleSheet.create({
