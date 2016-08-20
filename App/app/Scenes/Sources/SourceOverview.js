@@ -195,11 +195,12 @@ export default class SourceOverview extends Component {
   };
 
   _renderMetaData = () => {
-    const { source } = this.state;
+    const { source, sourceRelation } = this.state;
     const metaData = [];
 
-    if (source.roleDescription) {
-      metaData.push(this._renderMetaValue(Localizable.t('roles.text'), 'metadata-role', source.roleDescription));
+    const roleDescription = (sourceRelation ? sourceRelation.roleDescription : source.roleDescription);
+    if (roleDescription) {
+      metaData.push(this._renderMetaValue(Localizable.t('roles.text'), 'metadata-role', roleDescription));
     }
 
     if (source.natureDescription) {

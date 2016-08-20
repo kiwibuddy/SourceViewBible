@@ -599,7 +599,14 @@ const SourceRelationSchema = {
 };
 
 export class SourceRelation extends Realm.Object {
+  get roles(): any {
+    return this.sourceTypeCounts.filtered('count > 0').map(sourceTypeCount => Role.findByID(sourceTypeCount.string));
+  }
 
+  get roleDescription(): ?string {
+    const roles = this.roles;
+    return (roles && roles.length > 0 ? roles.map(role => role.name).join(', ') : null);
+  }
 }
 SourceRelation.schema = SourceRelationSchema;
 
