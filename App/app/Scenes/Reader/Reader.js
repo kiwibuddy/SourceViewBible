@@ -8,6 +8,7 @@ import ReactNative from 'react-native';
 
 const {
   Image,
+  LayoutAnimation,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -273,6 +274,7 @@ export default class Reader extends Component {
   _onPressClearFilter = () => {
     const { bookID, anchor } = this.props;
 
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     Preference.setObjectForKey([], Preference.Keys.Reader.spheres);
     this._setScripture(bookID, anchor);
   };

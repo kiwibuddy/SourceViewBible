@@ -6,6 +6,7 @@ const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithP
 
 import {
   Image,
+  LayoutAnimation,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -25,15 +26,17 @@ import SourceIcon from '../../Components/Common/SourceIcon';
 
 import { sourceURL, sourceBooksURL, sourceConversationsURL, sourceSpheresURL, sourceWordsURL } from '../../Navigation';
 
-import { Actant } from '../../Database';
+import { Actant, Book } from '../../Database';
 
 type Props = {
+  bookID: ?string,
   sourceID: number,
   navigate: Function,
 };
 
 type State = {
-  source: Object
+  source: Object,
+  book: ?Object,
 };
 
 export default class SourceOverview extends Component {
@@ -44,7 +47,12 @@ export default class SourceOverview extends Component {
     super(props);
 
     const source = Actant.findByID(props.sourceID);
-    this.state = {source};
+    const book = (props.bookID ? Book.findByID(props.bookID) : null);
+
+    this.state = {
+      source,
+      book
+    };
   }
 
   render() {
@@ -56,14 +64,11 @@ export default class SourceOverview extends Component {
       metaDataValues.push(this._renderMetaValue(Localizable.t('gender'), source.isFemale ? 'avatar-human-female' : 'avatar-human-male', source.genderDescription));
     }
 
+    const filterBar = this._renderFilterBar();
+
     return (
       <ScrollView style={styles.container}>
-        <View style={styles.filterBar}>
-            <Text style={styles.filterLabel}>in 2 Samuel fds fds fds fds das fdsa dsa</Text>
-          <TouchableOpacity style={styles.filterClear} onPress={this._onPressClearFilter}>
-            <Image source={require('../../Images/sources/clear-btn.png')} />
-          </TouchableOpacity>
-        </View>
+        {filterBar}
         <TouchableOpacity onPress={() => this.props.navigate(sourceWordsURL({sourceID: source.id, title: Localizable.t('source-words', {name: source.name})}))}>
           <WordCloud
             backgroundColors={Colors.sources[source.principalSourceType].gradient.big}
@@ -186,6 +191,20 @@ export default class SourceOverview extends Component {
     );
   }
 
+  _renderFilterBar = () => {
+    const { book } = this.state;
+    if (!book) return null;
+
+    return (
+      <View style={styles.filterBar}>
+        <Text style={styles.filterLabel}>{Localizable.t('in-book', {book: book.name})}</Text>
+        <TouchableOpacity style={styles.filterClear} onPress={this._onPressClearFilter}>
+          <Image source={require('../../Images/sources/clear-btn.png')} />
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
   _renderMetaValue(title: string, icon: string, value: string) {
     return (
       <View key={title}>
@@ -206,7 +225,8 @@ export default class SourceOverview extends Component {
   };
 
   _onPressClearFilter = () => {
-
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    this.setState({book: null});
   };
 }
 

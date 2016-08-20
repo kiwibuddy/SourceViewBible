@@ -176,7 +176,7 @@ export default class BookOverview extends Component {
     return (
       <TouchableOpacity
         key={'source-' + source.name}
-        onPress={() => this.props.navigate(sourceURL({sourceID: source.id, title: source.name}))}
+        onPress={() => this.props.navigate(sourceURL({sourceID: source.id, title: source.name, bookID: this.state.book.id}))}
         style={styles.sourceButton}
       >
         <SourceIcon
