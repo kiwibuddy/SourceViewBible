@@ -283,6 +283,15 @@ export class Actant extends Realm.Object {
     if (this.chronologies.length > 2) return '∞';
     return this.chronologies.sorted('from').map(chronology => chronology.name).join(', ');
   }
+
+  get roles(): any {
+    return this.sourceTypeCounts.filtered('count > 0').map(sourceTypeCount => Role.findByID(sourceTypeCount.string));
+  }
+
+  get roleDescription(): ?string {
+    const roles = this.roles;
+    return (roles && roles.length > 0 ? roles.map(role => role.name).join(', ') : null);
+  }
 }
 Actant.schema = ActantSchema;
 
@@ -557,8 +566,8 @@ export class Role {
     this.key = key;
   }
 
-  static findByID(id: number) {
-    const key = Role.ROLES[id - 1];
+  static findByID(id: any) {
+    const key = (Number.isInteger(id) ? Role.ROLES[id - 1] : id);
     return new Role(id, key);
   }
 

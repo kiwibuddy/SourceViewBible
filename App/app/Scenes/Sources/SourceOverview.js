@@ -59,11 +59,7 @@ export default class SourceOverview extends Component {
     const { source } = this.state;
     const words = source.words.map(word => word.string);
 
-    const metaDataValues = [];
-    if (source.genderDescription) {
-      metaDataValues.push(this._renderMetaValue(Localizable.t('gender'), source.isFemale ? 'avatar-human-female' : 'avatar-human-male', source.genderDescription));
-    }
-
+    const metaData = this._renderMetaData();
     const filterBar = this._renderFilterBar();
 
     return (
@@ -127,7 +123,7 @@ export default class SourceOverview extends Component {
           </TouchableOpacity>
         </View>
         <View style={styles.listContainer}>
-            {metaDataValues}
+            {metaData}
         </View>
         <View style={styles.listContainer}>
           <View style={styles.listItemHeader}>
@@ -204,6 +200,21 @@ export default class SourceOverview extends Component {
       </View>
     );
   };
+
+  _renderMetaData = () => {
+    const { source } = this.state;
+    const metaData = [];
+
+    if (source.roleDescription) {
+      metaData.push(this._renderMetaValue(Localizable.t('roles.text'), 'metadata-role', source.roleDescription));
+    }
+
+    if (source.genderDescription) {
+      metaData.push(this._renderMetaValue(Localizable.t('gender'), 'metadata-gender', source.genderDescription));
+    }
+
+    return metaData;
+  }
 
   _renderMetaValue(title: string, icon: string, value: string) {
     return (
