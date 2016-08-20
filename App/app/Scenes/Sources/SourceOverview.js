@@ -345,7 +345,7 @@ export default class SourceOverview extends Component {
           <Text style={StyleSheet.styles.statisticSubtitle}>{Localizable.t('words.text')}</Text>
         </TouchableOpacity>
         <View style={StyleSheet.styles.statisticKeyline} />
-        <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.navigate(sourceSpheresURL({sourceID: source.id, title: Localizable.t('source-spheres', {name: source.name})}))}>
+        <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.navigate(sourceSpheresURL({sourceID: source.id, bookID: book && book.id, title: Localizable.t('source-spheres', {name: source.name})}))}>
         <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
           <Text style={StyleSheet.styles.statisticTitle}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
           <SpheresBarChart

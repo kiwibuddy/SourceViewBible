@@ -84,7 +84,7 @@ export default class BookSpheres extends Component {
     return (
       <View style={StyleSheet.styles.statisticsContainer}>
         <View style={StyleSheet.styles.statisticContainer}>
-          <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toNumber(book.sphereWordCount, {precision: 0})}</Text>
+          <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toNumber(book.wordCount, {precision: 0})}</Text>
           <Text style={StyleSheet.styles.statisticSubtitle}>Words</Text>
         </View>
         <View style={StyleSheet.styles.statisticKeyline} />

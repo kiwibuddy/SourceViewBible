@@ -135,7 +135,7 @@ export default class BookSources extends Component {
       <TouchableOpacity style={styles.section} onPress={() => this._onPressScripture(source)}>
         <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
           <View style={styles.sourcesLeftContainer}>
-            <TouchableOpacity onPress={() => this.props.navigate(sourceURL({sourceID: source.id, title: source.name}))}>
+            <TouchableOpacity onPress={() => this.props.navigate(sourceURL({sourceID: source.id, bookID: book.id, title: source.name}))}>
               <SourceIcon
                 principalSourceType={sourceRelation.principalSourceType}
                 source={source}
