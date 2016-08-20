@@ -209,6 +209,10 @@ export class Actant extends Realm.Object {
     return sources;
   }
 
+  sourceRelationForBook(book: ?Object) {
+    return (book ? book.sourceRelations.find(relation => relation.source.id === this.id) : null);
+  }
+
   countOfSourceType(sourceType: string): number {
     const count = this.sourceTypeCounts.find(count => count.string === sourceType);
     return count && count.count || 0;
