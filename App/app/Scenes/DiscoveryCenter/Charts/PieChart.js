@@ -36,17 +36,17 @@ const PieChartView = (props: Props) => {
   const yAxis = card.yAxis;
   const zAxis = card.zAxis;
 
-  let xAxisTitle = 'Slices';
+  let xAxisTitle = 'Show...';
   if (xAxis) {
     xAxisTitle = card.xAxis.name;
   }
 
-  let yAxisTitle = 'Slice';
+  let yAxisTitle = 'By...';
   if (yAxis) {
     yAxisTitle = card.yAxis.name;
   }
 
-  let zAxisTitle = 'Pies (opt.)';
+  let zAxisTitle = 'Across...';
   if (zAxis) {
     zAxisTitle = card.zAxis.name;
   }

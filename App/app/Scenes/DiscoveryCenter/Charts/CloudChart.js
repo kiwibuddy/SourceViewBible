@@ -38,12 +38,12 @@ const CloudChartView = (props: Props) => {
   const yAxis = card.yAxis;
   const data = (card.zAxis && props.data ? props.data[0].value : props.data);
 
-  let xAxisTitle = "Choose Text";
+  let xAxisTitle = "Show...";
   if (card.xAxis) {
     xAxisTitle = card.xAxis.name;
   }
 
-  let yAxisTitle = "Choose Size";
+  let yAxisTitle = "By...";
   if (card.yAxis) {
     yAxisTitle = card.yAxis.name;
   }
