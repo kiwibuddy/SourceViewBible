@@ -214,21 +214,24 @@ export default class SourceOverview extends Component {
   };
 
   _renderRow = (row: Object, sectionID: any, rowID: any) => {
-    const { source, sourceRelation, spokeToOccurrenceCount, listenedToOccurrenceCount } = this.state;
+    const { spokeToOccurrenceCount, listenedToOccurrenceCount } = this.state;
     const actant = row.actant;
+    const sourceRelation = actant.relationForBook(this.state.book);
 
     const occurrenceCount = row.count;
     const totalOccurrenceCount = (sectionID === Section.SPOKE_TO ? spokeToOccurrenceCount : listenedToOccurrenceCount);
     const occurrencePercent = (occurrenceCount / totalOccurrenceCount) * 100;
 
-    const principalSourceType = (sourceRelation ? sourceRelation.principalSourceType : source.principalSourceType);
-
+    const principalSourceType = (sourceRelation ? sourceRelation.principalSourceType : actant.principalSourceType);
+    const principalColor = Colors.sources[principalSourceType];
+    
     return (
       <TouchableOpacity style={styles.section} onPress={() => this._onPressActant(actant)}>
         <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
           <View style={styles.sourcesLeftContainer}>
             <TouchableOpacity onPress={() => this._onPressActantIcon(actant)}>
               <SourceIcon
+                principalSourceType={principalSourceType}
                 source={actant}
                 style={[styles.sourceAvatar]}
                 size={20}
@@ -238,8 +241,8 @@ export default class SourceOverview extends Component {
           </View>
           <View style={styles.sourcesRightContainer}>
             <BarChart
-              bars={[{color: this.principalColor.tint, value: occurrencePercent}]}
-              deltaStyle={{backgroundColor: this.principalColor.lightTint}}
+              bars={[{color: principalColor.tint, value: occurrencePercent}]}
+              deltaStyle={{backgroundColor: principalColor.lightTint}}
               maxChartValue={100}
               style={styles.sourcesBarChart}
             />
