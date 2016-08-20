@@ -226,7 +226,7 @@ export default class SourceOverview extends Component {
     const colors = Colors.sources[principalSourceType];
 
     return (
-      <TouchableOpacity style={styles.section} onPress={() => {}}>
+      <TouchableOpacity style={styles.section} onPress={() => this._onPressActant(actant)}>
         <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
           <View style={styles.sourcesLeftContainer}>
             <SourceIcon
@@ -352,6 +352,10 @@ export default class SourceOverview extends Component {
   _onPressClearFilter = () => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     this._getSource({book: null, sourceRelation: null});
+  };
+
+  _onPressActant(actant: Actant) {
+    this.props.navigate(sourceURL({sourceID: actant.id, title: actant.name}));
   };
 
   async _getSource(options: ?Object) {
