@@ -327,12 +327,12 @@ export default class SourceOverview extends Component {
     return (
       <View style={[StyleSheet.styles.statisticsContainer, {marginTop: 25}]}>
         <TouchableOpacity style={[StyleSheet.styles.statisticContainer, {marginHorizontal: -20}]} onPress={() => this.props.navigate(sourceBooksURL({sourceID: source.id, title: Localizable.t('source-books', {name: source.name})}))}>
-          <Text style={[StyleSheet.styles.statisticTitle, {fontSize: 18}]}>{Localizable.toNumber(bookCount, {precision: 0})}</Text>
+          <Text style={StyleSheet.styles.statisticTitle}>{Localizable.toNumber(bookCount, {precision: 0})}</Text>
           <Text style={StyleSheet.styles.statisticSubtitle}>Books</Text>
         </TouchableOpacity>
         <View style={StyleSheet.styles.statisticKeyline} />
         <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.navigate(sourceWordsURL({sourceID: source.id, bookID: book && book.id, title: Localizable.t('source-words', {name: source.name})}))}>
-          <Text style={[StyleSheet.styles.statisticTitle, {fontSize: 18}]}>{Localizable.toNumber(wordCount, {precision: 0})}</Text>
+          <Text style={StyleSheet.styles.statisticTitle}>{Localizable.toNumber(wordCount, {precision: 0})}</Text>
           <Text style={StyleSheet.styles.statisticSubtitle}>{Localizable.t('words.text')}</Text>
         </TouchableOpacity>
         <View style={StyleSheet.styles.statisticKeyline} />
