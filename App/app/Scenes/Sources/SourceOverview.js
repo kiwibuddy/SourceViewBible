@@ -34,6 +34,7 @@ import SourceIcon from '../../Components/Common/SourceIcon';
 import { sourceURL, sourceBooksURL, sourceConversationsURL, sourceSpheresURL, sourceWordsURL } from '../../Navigation';
 
 import { Actant, Book } from '../../Database';
+import Query from './Query';
 
 type Props = {
   bookID: ?string,
@@ -66,6 +67,10 @@ export default class SourceOverview extends Component {
       book,
       sourceRelation
     };
+  }
+
+  componentDidMount() {
+    this._getSource();
   }
 
   render() {
@@ -329,6 +334,18 @@ export default class SourceOverview extends Component {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     this.setState({book: null, sourceRelation: null});
   };
+
+  async _getSource() {
+    const query = new Query(this.state.source, this.state.book);
+    const bookCount = await query.bookCount();
+
+    const spokeTo = await query.spokeTo();
+    const spokeCount = spokeTo.reduce((sum, occurrence) => sum + occurrence.count, 0);
+
+    const listenedTo = await query.listenedTo();
+    const listenCount = listenedTo.reduce((sum, occurrence) => sum + occurrence.count, 0);
+    
+  }
 }
 
 const styles = StyleSheet.create({
