@@ -46,15 +46,23 @@ export default class Query {
     });
   }
 
-  async occurrences() {
-    const where = (this.book ? `AND (bso.first >= ${this.book.firstMonad}) AND (bso.last <= ${this.book.lastMonad})` : '');
+  async occurrences(listenerID: ?number) {
+    const params = [this.source.id];
+    let from = '';
+    let where = (this.book ? ` AND (bso.first >= ${this.book.firstMonad}) AND (bso.last <= ${this.book.lastMonad})` : '');
+    if (listenerID != null && listenerID > 0) {
+      from += ' INNER JOIN bso_actants AS listeners ON (bso.id = listeners.bso_id AND listeners.type_id = 2)';
+      where += ' AND (listeners.actant_id = ?)';
+      params.push(listenerID);
+    }
+
     const sql = `
     SELECT DISTINCT bso.id AS id
-    FROM bso INNER JOIN bso_actants AS speakers ON (bso.id = speakers.bso_id AND speakers.type_id = 1)
-    WHERE ((speakers.actant_id = ?) ${where})
+    FROM bso INNER JOIN bso_actants AS speakers ON (bso.id = speakers.bso_id AND speakers.type_id = 1)${from}
+    WHERE ((speakers.actant_id = ?)${where})
     ORDER BY bso.id`;
 
-    const rows = await rowsWithSQL(sql, this.source.id);
+    const rows = await rowsWithSQL(sql, params);
     return rows.map(row => BookSourceOccurrence.findByID(row['id']));
   }
 

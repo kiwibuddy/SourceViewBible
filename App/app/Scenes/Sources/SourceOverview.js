@@ -33,7 +33,7 @@ import SourceIcon from '../../Components/Common/SourceIcon';
 
 import FilterBar from './FilterBar';
 
-import { sourceURL, sourceBooksURL, sourceConversationsURL, sourceSpheresURL, sourceWordsURL } from '../../Navigation';
+import { readerURL, sourceURL, sourceBooksURL, sourceConversationsURL, sourceSpheresURL, sourceWordsURL } from '../../Navigation';
 
 import { Actant, Book } from '../../Database';
 import Query from './Query';
@@ -224,7 +224,7 @@ export default class SourceOverview extends Component {
     const principalColor = Colors.sources[principalSourceType];
 
     return (
-      <TouchableOpacity style={styles.section} onPress={() => this._onPressActant(actant)}>
+      <TouchableOpacity style={styles.section} onPress={() => this._onPressActant(actant, sectionID)}>
         <View style={[styles.sourcesCellContainer, {paddingVertical: 10}]}>
           <View style={styles.sourcesLeftContainer}>
             <TouchableOpacity onPress={() => this._onPressActantIcon(actant)}>
@@ -358,8 +358,21 @@ export default class SourceOverview extends Component {
     this._setSource({sourceID: source.id, book: null, sourceRelation: null});
   };
 
-  _onPressActant(actant: Actant) {
-    // ReaderURL with occurrences
+  async _onPressActant(actant: Actant, sectionID: string) {
+    const { source } = this.state;
+    const speaker = (sectionID === Section.SPOKE_TO ? source : actant);
+    const listener = (sectionID === Section.SPOKE_TO ? actant : source);
+    const query = new Query(speaker);
+    const occurrences = await query.occurrences(listener.id);
+    if (occurrences.length > 0) {
+      const occurrence = occurrences[0];
+      const book = occurrence.book;
+      const bsoReference = Localizable.t('bso-reference', {book: book.name, source: occurrence.name, number: occurrence.number});
+      const route = readerURL({bookID: book.id, anchor: `source-${occurrence.name}-${occurrence.number}`, title: book.name, description: bsoReference,  occurrenceIndex: 1, occurrences});
+      this.props.navigate(route);
+      console.log('occurrences', occurrences.length);
+
+    }
   };
 
   _onPressActantIcon(actant: Actant) {
