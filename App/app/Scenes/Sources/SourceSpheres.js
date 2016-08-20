@@ -144,7 +144,7 @@ export default class SourceSpheres extends Component {
   _onPressSphere = (sphere: Object) => {
     const { source } = this.state;
     const book = this.state.book || source.books[0];
-    
+
     Preference.setObjectForKey([sphere.id], Preference.Keys.Reader.spheres);
     this.props.navigate(readerURL({bookID: book.id, anchor: 'chapter-1', title: source.name}));
   };
@@ -167,7 +167,7 @@ export default class SourceSpheres extends Component {
       sourceRelation,
       dataSource: this.state.dataSource.cloneWithRows(spheres)
     });
-  }
+  };
 }
 
 const styles = StyleSheet.create({
