@@ -213,6 +213,10 @@ export default class SourceOverview extends Component {
       metaData.push(this._renderMetaValue(Localizable.t('nature'), 'metadata-nature', source.natureDescription));
     }
 
+    if (source.chronologyDescription) {
+      metaData.push(this._renderMetaValue(Localizable.t('time-period'), 'metadata-timeperiod', source.chronologyDescription));
+    }
+
     if (source.genderDescription) {
       metaData.push(this._renderMetaValue(Localizable.t('gender'), 'metadata-gender', source.genderDescription));
     }
