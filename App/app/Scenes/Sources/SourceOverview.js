@@ -47,6 +47,7 @@ type State = {
   source: Object,
   book: ?Object,
   sourceRelation: ?Object,
+  bookCount: number,
   spokeToCount: number,
   listenedToCount: number
 };
@@ -68,6 +69,7 @@ export default class SourceOverview extends Component {
       source,
       book,
       sourceRelation,
+      bookCount: 0,
       spokeToCount: 0,
       listenedToCount: 0,
     };
@@ -272,13 +274,10 @@ export default class SourceOverview extends Component {
   };
 
   _renderStatistics = () => {
-    const { source, book, sourceRelation } = this.state;
+    const { source, book, bookCount, sourceRelation } = this.state;
 
     const object = (sourceRelation ? sourceRelation : source);
-
-    const bookCount = 0;
     const wordCount = object.wordCount;
-
     const spherePercent = (object.sphereWordCount / wordCount) * 100;
 
     return (
@@ -325,6 +324,7 @@ export default class SourceOverview extends Component {
     const listenedToCount = listenedTo.reduce((sum, occurrence) => sum + occurrence.count, 0);
 
     this.setState({
+      bookCount,
       spokeToCount,
       listenedToCount
     });
