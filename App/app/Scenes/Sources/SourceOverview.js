@@ -41,6 +41,8 @@ const Section = {
   LISTENED_TO: 'LISTENED_TO'
 };
 
+const LISTVIEW_REF = "LISTVIEW_REF";
+
 type Props = {
   bookID: ?string,
   sourceID: number,
@@ -104,6 +106,7 @@ export default class SourceOverview extends Component {
       <View style={styles.container}>
         {filterBar}
         <ListView
+          ref={LISTVIEW_REF}
           dataSource={this.state.dataSource}
           enableEmptySections={true}
           renderHeader={this._renderHeader}
@@ -415,6 +418,8 @@ export default class SourceOverview extends Component {
         spokeToOccurrenceCount,
         listenedToCount,
         listenedToOccurrenceCount
+      }, () => {
+        this.refs[LISTVIEW_REF].scrollTo({y: 0, animated: false});
       });
     }
   };
