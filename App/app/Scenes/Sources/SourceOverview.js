@@ -62,6 +62,7 @@ type State = {
 export default class SourceOverview extends Component {
   props: Props;
   state: State;
+  shouldFetch: boolean = true;
 
   constructor(props: Props) {
     super(props);
@@ -90,6 +91,10 @@ export default class SourceOverview extends Component {
 
   componentWillReceiveProps(nextProps: Props) {
     this._setSource(nextProps);
+  }
+
+  componentWillUnmount() {
+    this.shouldFetch = false;
   }
 
   render() {
@@ -359,10 +364,13 @@ export default class SourceOverview extends Component {
   };
 
   _onPressActant(actant: Actant) {
-    this.props.navigate(sourceURL({sourceID: actant.id, title: actant.name}));
+    const { book } = this.state;
+    this.props.navigate(sourceURL({sourceID: actant.id, bookID: book && book.id, title: actant.name}));
   };
 
   async _setSource(props: Object) {
+    if (!this.shouldFetch) return;
+
     const source = Actant.findByID(props.sourceID);
     const book = (props.bookID ? Book.findByID(props.bookID) : null);
     const sourceRelation = (book ? book.sourceRelations.find(relation => relation.source.id === source.id) : null);
@@ -391,17 +399,19 @@ export default class SourceOverview extends Component {
 
     const dataSource = this.state.dataSource.cloneWithRowsAndSections(rows, sections);
 
-    this.setState({
-      source,
-      book,
-      sourceRelation,
-      dataSource,
-      bookCount,
-      spokeToCount,
-      spokeToOccurrenceCount,
-      listenedToCount,
-      listenedToOccurrenceCount
-    });
+    if (this.shouldFetch) {
+      this.setState({
+        source,
+        book,
+        sourceRelation,
+        dataSource,
+        bookCount,
+        spokeToCount,
+        spokeToOccurrenceCount,
+        listenedToCount,
+        listenedToOccurrenceCount
+      });
+    }
   }
 }
 
