@@ -369,6 +369,12 @@ export class Book extends Realm.Object {
     return realm.objectForPrimaryKey('Book', id || '');
   }
 
+  static whereIn(ids: any) {
+    if (ids.length == 0) return [];
+    const filter = ids.map((id, index) => `id = $${index}`).join(' OR ');
+    return realm.objects('Book').filtered(filter, ...ids).sorted('textOrder');
+  }
+
   countOfSourceType(sourceType: string): number {
     const count = this.sourceTypeCounts.find(count => count.string === sourceType);
     return count && count.count || 0;

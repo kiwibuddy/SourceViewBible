@@ -54,7 +54,7 @@ export default class Query {
     WHERE ((speakers.actant_id = ?) ${where})
     ORDER BY bso.id`;
 
-    const rows = await rowsWithSQL(sql);
+    const rows = await rowsWithSQL(sql, this.source.id);
     return rows.map(row => BookSourceOccurrence.findByID(row['id']));
   }
 
