@@ -39,7 +39,7 @@ const ChronologyFilterItem = (props: Props) => {
       <View style={StyleSheet.styles.discoveryCenter.bottomContainer}>
         <Text>In</Text>
         <TouchableOpacity style={styles.filterButton} onPress={() => props.onPressEditFilter(chronologyFilterURL({title: Localizable.t('time-period'), filter: props.filter}))}>
-          <Text style={styles.filterButtonTitle}>{chronology.name}</Text>
+          <Text style={styles.filterButtonTitle}>{Localizable.t('chronologies.' + chronology.key)}</Text>
           <Image source={require('../Images/chart-icn-dropdown-filter.png')} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.filterDelete} onPress={props.onPressDeleteFilter}>
