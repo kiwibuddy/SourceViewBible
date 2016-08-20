@@ -36,6 +36,11 @@ import { sourceURL, sourceBooksURL, sourceConversationsURL, sourceSpheresURL, so
 import { Actant, Book } from '../../Database';
 import Query from './Query';
 
+const Section = {
+  SPOKE_TO: 'SPOKE_TO',
+  LISTENED_TO: 'LISTENED_TO'
+};
+
 type Props = {
   bookID: ?string,
   sourceID: number,
@@ -49,7 +54,9 @@ type State = {
   sourceRelation: ?Object,
   bookCount: number,
   spokeToCount: number,
-  listenedToCount: number
+  spokeToOccurrenceCount: number,
+  listenedToCount: number,
+  listenedToOccurrenceCount: number,
 };
 
 export default class SourceOverview extends Component {
@@ -71,7 +78,9 @@ export default class SourceOverview extends Component {
       sourceRelation,
       bookCount: 0,
       spokeToCount: 0,
+      spokeToOccurrenceCount: 0,
       listenedToCount: 0,
+      listenedToOccurrenceCount: 0,
     };
   }
 
@@ -173,15 +182,31 @@ export default class SourceOverview extends Component {
   };
 
   _renderSectionHeader = (section: Object, sectionID: any) => {
+    const { source, spokeToCount, spokeToOccurrenceCount, listenedToCount, listenedToOccurrenceCount } = this.state;
+
+    let title = null;
+    let sourceCount = 0;
+    let occurrenceCount = 0;
+
+    if (sectionID === Section.SPOKE_TO) {
+      title = Localizable.t('source-spoke-to', {name: source.name});
+      sourceCount = spokeToCount;
+      occurrenceCount = spokeToOccurrenceCount;
+    } else {
+      title = Localizable.t('spoke-to-source', {name: source.name});
+      sourceCount = listenedToCount;
+      occurrenceCount = listenedToOccurrenceCount;
+    }
+
     return (
       <View style={styles.listItemHeader}>
-        <Text style={StyleSheet.styles.cell.titlebold}>Source spoke to</Text>
+        <Text style={StyleSheet.styles.cell.titlebold}>{title}</Text>
         <View style={styles.sourcesCellContainer}>
           <View style={styles.sourcesLeftContainer}>
-            <Text style={StyleSheet.styles.cell.subtitle}>0 sources</Text>
+            <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('sources.count', {count: sourceCount, localizedCount: Localizable.toNumber(sourceCount, {precision: 0})})}</Text>
           </View>
           <View style={styles.sourcesRightContainer}>
-            <Text style={StyleSheet.styles.cell.subtitle}>0 occurrences</Text>
+            <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('occurrences.count', {count: occurrenceCount, localizedCount: Localizable.toNumber(occurrenceCount, {precision: 0})})}</Text>
           </View>
         </View>
       </View>
@@ -317,16 +342,34 @@ export default class SourceOverview extends Component {
     const query = new Query(this.state.source, this.state.book);
     const bookCount = await query.bookCount();
 
+    const rows = {};
+    const sections = [];
+
     const spokeTo = await query.spokeTo();
-    const spokeToCount = spokeTo.reduce((sum, occurrence) => sum + occurrence.count, 0);
+    const spokeToCount = spokeTo.length;
+    const spokeToOccurrenceCount = spokeTo.reduce((sum, occurrence) => sum + occurrence.count, 0);
+    if (spokeToCount > 0) {
+      sections.push(Section.SPOKE_TO);
+      rows[Section.SPOKE_TO] = spokeTo;
+    }
 
     const listenedTo = await query.listenedTo();
-    const listenedToCount = listenedTo.reduce((sum, occurrence) => sum + occurrence.count, 0);
+    const listenedToCount = listenedTo.length;
+    const listenedToOccurrenceCount = listenedTo.reduce((sum, occurrence) => sum + occurrence.count, 0);
+    if (listenedToCount > 0) {
+      sections.push(Section.LISTENED_TO);
+      rows[Section.LISTENED_TO] = listenedTo;
+    }
+
+    const dataSource = this.state.dataSource.cloneWithRowsAndSections(rows, sections);
 
     this.setState({
+      dataSource,
       bookCount,
       spokeToCount,
-      listenedToCount
+      spokeToOccurrenceCount,
+      listenedToCount,
+      listenedToOccurrenceCount
     });
   }
 }

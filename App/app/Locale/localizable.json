@@ -26,6 +26,13 @@
         "other": "{{count}} sources"
       }
     },
+    "occurrences": {
+      "text": "Occurrences",
+      "count": {
+        "one": "1 occurrence",
+        "other": "{{count}} occurrences"
+      }
+    },
     "sphere": "Sphere",
     "spheres": {
       "text": "Spheres",
@@ -116,6 +123,8 @@
     "education": "Education",
     "communication": "Communication",
     "celebration": "Celebration",
+    "source-spoke-to": "{{name}} spoke to",
+    "spoke-to-source": "Spoke to {{name}}",
     "actant-number": {
       "Group": "Group",
       "Individual": "Individual"

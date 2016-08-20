@@ -30,7 +30,6 @@ export default class Query {
       GROUP BY listener.id ORDER BY count DESC`;
 
     const rows = await rowsWithSQL(sql, this.source.id);
-    console.log(rows);
     return rows.map(row => {
       return {actant: Actant.findByID(row['id']), count: row['count']};
     });
@@ -48,7 +47,6 @@ export default class Query {
       GROUP BY speaker.id ORDER BY count DESC`;
 
     const rows = await rowsWithSQL(sql, this.source.id);
-    console.log(rows);
     return rows.map(row => {
       return {actant: Actant.findByID(row['id']), count: row['count']};
     });
