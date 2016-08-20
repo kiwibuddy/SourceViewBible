@@ -47,6 +47,8 @@ type State = {
   source: Object,
   book: ?Object,
   sourceRelation: ?Object,
+  spokeToCount: number,
+  listenedToCount: number
 };
 
 export default class SourceOverview extends Component {
@@ -65,7 +67,9 @@ export default class SourceOverview extends Component {
       dataSource,
       source,
       book,
-      sourceRelation
+      sourceRelation,
+      spokeToCount: 0,
+      listenedToCount: 0,
     };
   }
 
@@ -85,6 +89,7 @@ export default class SourceOverview extends Component {
           renderHeader={this._renderHeader}
           renderRow={this._renderRow}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+          renderSectionHeader={this._renderSectionHeader}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
         />
       </View>
@@ -160,73 +165,47 @@ export default class SourceOverview extends Component {
         </TouchableOpacity>
 
         {statistics}
-
         {metaData}
+      </View>
+    );
+  };
 
-        <View style={styles.listContainer}>
-          <View style={styles.listItemHeader}>
-            <Text style={StyleSheet.styles.cell.titlebold}>Source spoke to</Text>
-            <View style={styles.sourcesCellContainer}>
-              <View style={styles.sourcesLeftContainer}>
-                <Text style={StyleSheet.styles.cell.subtitle}>0 sources</Text>
-              </View>
-              <View style={styles.sourcesRightContainer}>
-                <Text style={StyleSheet.styles.cell.subtitle}>0 occurrences</Text>
-              </View>
-            </View>
+  _renderSectionHeader = (section: Object, sectionID: any) => {
+    return (
+      <View style={styles.listItemHeader}>
+        <Text style={StyleSheet.styles.cell.titlebold}>Source spoke to</Text>
+        <View style={styles.sourcesCellContainer}>
+          <View style={styles.sourcesLeftContainer}>
+            <Text style={StyleSheet.styles.cell.subtitle}>0 sources</Text>
           </View>
-          <TouchableOpacity style={styles.section} onPress={() => {}}>
-            <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
-              <View style={styles.sourcesLeftContainer}>
-                <Icon
-                  name={'avatar-human-group'}
-                  style={[styles.sourceAvatar, {color: 'red'}]}
-                  size={20}
-                />
-                <Text style={StyleSheet.styles.cell.titlemedium}>Source Name</Text>
-              </View>
-              <View style={styles.sourcesRightContainer}>
-                <View style={styles.sourcesBarChart} />
-                <Text style={StyleSheet.styles.cell.subtitle}>0 words</Text>
-              </View>
-            </View>
-            <View style={[StyleSheet.styles.separator, {marginLeft: 0}]}></View>
-          </TouchableOpacity>
-          <View style={styles.listItemHeader}>
-            <Text style={StyleSheet.styles.cell.titlebold}>Spoke to</Text>
-            <View style={styles.sourcesCellContainer}>
-              <View style={styles.sourcesLeftContainer}>
-                <Text style={StyleSheet.styles.cell.subtitle}>0 sources</Text>
-              </View>
-              <View style={styles.sourcesRightContainer}>
-                <Text style={StyleSheet.styles.cell.subtitle}>0 occurrences</Text>
-              </View>
-            </View>
+          <View style={styles.sourcesRightContainer}>
+            <Text style={StyleSheet.styles.cell.subtitle}>0 occurrences</Text>
           </View>
-          <TouchableOpacity style={styles.section} onPress={() => {}}>
-            <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
-              <View style={styles.sourcesLeftContainer}>
-                <Icon
-                  name={'avatar-human-group'}
-                  style={[styles.sourceAvatar, {color: 'red'}]}
-                  size={20}
-                />
-                <Text style={StyleSheet.styles.cell.titlemedium}>Source Name</Text>
-              </View>
-              <View style={styles.sourcesRightContainer}>
-                <View style={styles.sourcesBarChart} />
-                <Text style={StyleSheet.styles.cell.subtitle}>0 words</Text>
-              </View>
-            </View>
-            <View style={[StyleSheet.styles.separator, {marginLeft: 0}]}></View>
-          </TouchableOpacity>
         </View>
       </View>
     );
   };
 
   _renderRow = (row: Object) => {
-
+    return (
+      <TouchableOpacity style={styles.section} onPress={() => {}}>
+        <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
+          <View style={styles.sourcesLeftContainer}>
+            <Icon
+              name={'avatar-human-group'}
+              style={[styles.sourceAvatar, {color: 'red'}]}
+              size={20}
+            />
+            <Text style={StyleSheet.styles.cell.titlemedium}>Source Name</Text>
+          </View>
+          <View style={styles.sourcesRightContainer}>
+            <View style={styles.sourcesBarChart} />
+            <Text style={StyleSheet.styles.cell.subtitle}>0 words</Text>
+          </View>
+        </View>
+        <View style={[StyleSheet.styles.separator, {marginLeft: 0}]}></View>
+      </TouchableOpacity>
+    );
   };
 
   _renderMetaData = () => {
@@ -340,11 +319,15 @@ export default class SourceOverview extends Component {
     const bookCount = await query.bookCount();
 
     const spokeTo = await query.spokeTo();
-    const spokeCount = spokeTo.reduce((sum, occurrence) => sum + occurrence.count, 0);
+    const spokeToCount = spokeTo.reduce((sum, occurrence) => sum + occurrence.count, 0);
 
     const listenedTo = await query.listenedTo();
-    const listenCount = listenedTo.reduce((sum, occurrence) => sum + occurrence.count, 0);
-    
+    const listenedToCount = listenedTo.reduce((sum, occurrence) => sum + occurrence.count, 0);
+
+    this.setState({
+      spokeToCount,
+      listenedToCount
+    });
   }
 }
 
