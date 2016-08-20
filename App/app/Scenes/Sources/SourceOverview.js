@@ -7,7 +7,8 @@ const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithP
 import {
   Image,
   LayoutAnimation,
-  ScrollView,
+  ListView,
+  RecyclerViewBackedScrollView,
   Text,
   TouchableOpacity,
   View,
@@ -41,6 +42,7 @@ type Props = {
 };
 
 type State = {
+  dataSource: any,
   source: Object,
   book: ?Object,
   sourceRelation: ?Object,
@@ -56,8 +58,10 @@ export default class SourceOverview extends Component {
     const source = Actant.findByID(props.sourceID);
     const book = (props.bookID ? Book.findByID(props.bookID) : null);
     const sourceRelation = (book ? book.sourceRelations.find(relation => relation.source.id === source.id) : null);
+    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
 
     this.state = {
+      dataSource,
       source,
       book,
       sourceRelation
@@ -65,18 +69,49 @@ export default class SourceOverview extends Component {
   }
 
   render() {
+    const filterBar = this._renderFilterBar();
+
+    return (
+      <View style={styles.container}>
+        {filterBar}
+        <ListView
+          dataSource={this.state.dataSource}
+          enableEmptySections={true}
+          renderHeader={this._renderHeader}
+          renderRow={this._renderRow}
+          renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+          renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
+        />
+      </View>
+    );
+  }
+
+  _renderFilterBar = () => {
+    const { book } = this.state;
+    if (!book) return null;
+
+    return (
+      <View style={styles.filterBar}>
+        <Text style={styles.filterLabel}>{Localizable.t('in-book', {book: book.name})}</Text>
+        <TouchableOpacity style={styles.filterClear} onPress={this._onPressClearFilter}>
+          <Image source={require('../../Images/sources/clear-btn.png')} />
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
+  _renderHeader = () => {
     const { source, book, sourceRelation } = this.state;
 
     const statistics = this._renderStatistics();
     const metaData = this._renderMetaData();
-    const filterBar = this._renderFilterBar();
+
 
     const words = source.words.map(word => word.string);
     const principalSourceType = (sourceRelation ? sourceRelation.principalSourceType : source.principalSourceType);
 
     return (
-      <ScrollView style={styles.container}>
-        {filterBar}
+      <View>
         <TouchableOpacity onPress={() => this.props.navigate(sourceWordsURL({sourceID: source.id, title: Localizable.t('source-words', {name: source.name})}))}>
           <WordCloud
             backgroundColors={Colors.sources[principalSourceType].gradient.big}
@@ -182,22 +217,12 @@ export default class SourceOverview extends Component {
             <View style={[StyleSheet.styles.separator, {marginLeft: 0}]}></View>
           </TouchableOpacity>
         </View>
-      </ScrollView>
-    );
-  }
-
-  _renderFilterBar = () => {
-    const { book } = this.state;
-    if (!book) return null;
-
-    return (
-      <View style={styles.filterBar}>
-        <Text style={styles.filterLabel}>{Localizable.t('in-book', {book: book.name})}</Text>
-        <TouchableOpacity style={styles.filterClear} onPress={this._onPressClearFilter}>
-          <Image source={require('../../Images/sources/clear-btn.png')} />
-        </TouchableOpacity>
       </View>
     );
+  };
+
+  _renderRow = (row: Object) => {
+
   };
 
   _renderMetaData = () => {
