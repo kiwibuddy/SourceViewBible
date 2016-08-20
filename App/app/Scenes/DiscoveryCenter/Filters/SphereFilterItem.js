@@ -30,12 +30,10 @@ const SphereFilterItem = (props: Props) => {
   const title = Sphere.whereIn(spheres).map(sphere => sphere.name).join(' & ');
 
   return (
-    <View>
+    <View style={styles.filterContainer}>
       <View style={StyleSheet.styles.discoveryCenter.topContainer}>
         <View style={StyleSheet.styles.discoveryCenter.leftContainer}>
-          <TouchableOpacity>
-            <Text style={[styles.button, {color: '#9B9B9B'}]}>SPHERE</Text>
-          </TouchableOpacity>
+          <Text style={[styles.button, {color: '#9B9B9B'}]}>SPHERE</Text>
         </View>
       </View>
       <View style={StyleSheet.styles.discoveryCenter.bottomContainer}>
@@ -58,6 +56,10 @@ const styles = StyleSheet.create({
     fontSize: 11,
     fontWeight: 'bold',
     paddingRight: 15,
+  },
+  filterContainer: {
+    flex: 1,
+    overflow: 'hidden',
   },
   filterButton: {
     flexDirection: 'row',
