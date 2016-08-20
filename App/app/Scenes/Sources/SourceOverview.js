@@ -26,7 +26,7 @@ const {
   SphereType
 } = Constants;
 
-import { SourcesBarChart, SpheresBarChart, WordCloud } from '../../Components/Charts';
+import { BarChart, SourcesBarChart, SpheresBarChart, WordCloud } from '../../Components/Charts';
 import ParallaxMotionView from '../../Components/Common/ParallaxMotionView';
 import Icon from '../../Components/Common/Icon';
 import SourceIcon from '../../Components/Common/SourceIcon';
@@ -214,9 +214,16 @@ export default class SourceOverview extends Component {
     );
   };
 
-  _renderRow = (row: Object) => {
+  _renderRow = (row: Object, rowID: any, sectionID: any) => {
+    const { source, sourceRelation, spokeToOccurrenceCount, listenedToOccurrenceCount } = this.state;
     const actant = row.actant;
+
     const occurrenceCount = row.count;
+    const totalOccurrenceCount = (sectionID === Section.SPOKE_TO ? spokeToOccurrenceCount : listenedToOccurrenceCount);
+    const occurrencePercent = (occurrenceCount / totalOccurrenceCount) * 100;
+
+    const principalSourceType = (sourceRelation ? sourceRelation.principalSourceType : source.principalSourceType);
+    const colors = Colors.sources[principalSourceType];
 
     return (
       <TouchableOpacity style={styles.section} onPress={() => {}}>
@@ -230,7 +237,12 @@ export default class SourceOverview extends Component {
             <Text style={StyleSheet.styles.cell.titlemedium}>{actant.name}</Text>
           </View>
           <View style={styles.sourcesRightContainer}>
-            <View style={styles.sourcesBarChart} />
+            <BarChart
+              bars={[{color: colors.tint, value: occurrencePercent}]}
+              deltaStyle={{backgroundColor: colors.lightTint}}
+              maxChartValue={100}
+              style={styles.sourcesBarChart}
+            />
             <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('occurrences.count', {count: occurrenceCount, localizedCount: Localizable.toNumber(occurrenceCount, {precision: 0})})}</Text>
           </View>
         </View>
