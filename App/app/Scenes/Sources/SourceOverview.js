@@ -143,7 +143,7 @@ export default class SourceOverview extends Component {
       <View>
         <TouchableOpacity onPress={() => this.props.navigate(sourceWordsURL({sourceID: source.id, title: Localizable.t('source-words', {name: source.name})}))}>
           <WordCloud
-            backgroundColors={Colors.sources[principalSourceType].gradient.big}
+            backgroundColors={this.principalColor.gradient.big}
             style={styles.wordCloud}
           >
             <ParallaxMotionView intensity={5} style={[styles.parallax, {opacity: 0.8}]}>
@@ -208,7 +208,7 @@ export default class SourceOverview extends Component {
     }
 
     return (
-      <View style={styles.listItemHeader}>
+      <View style={[styles.listItemHeader, {borderTopColor: this.principalColor.tint}]}>
         <Text style={StyleSheet.styles.cell.titlebold}>{title}</Text>
         <View style={styles.sourcesCellContainer}>
           <View style={styles.sourcesLeftContainer}>
@@ -222,7 +222,7 @@ export default class SourceOverview extends Component {
     );
   };
 
-  _renderRow = (row: Object, rowID: any, sectionID: any) => {
+  _renderRow = (row: Object, sectionID: any, rowID: any) => {
     const { source, sourceRelation, spokeToOccurrenceCount, listenedToOccurrenceCount } = this.state;
     const actant = row.actant;
 
@@ -231,23 +231,24 @@ export default class SourceOverview extends Component {
     const occurrencePercent = (occurrenceCount / totalOccurrenceCount) * 100;
 
     const principalSourceType = (sourceRelation ? sourceRelation.principalSourceType : source.principalSourceType);
-    const colors = Colors.sources[principalSourceType];
 
     return (
       <TouchableOpacity style={styles.section} onPress={() => this._onPressActant(actant)}>
         <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
           <View style={styles.sourcesLeftContainer}>
-            <SourceIcon
-              source={actant}
-              style={[styles.sourceAvatar]}
-              size={20}
-            />
+            <TouchableOpacity onPress={() => this._onPressActantIcon(actant)}>
+              <SourceIcon
+                source={actant}
+                style={[styles.sourceAvatar]}
+                size={20}
+              />
+            </TouchableOpacity>
             <Text style={StyleSheet.styles.cell.titlemedium}>{actant.name}</Text>
           </View>
           <View style={styles.sourcesRightContainer}>
             <BarChart
-              bars={[{color: colors.tint, value: occurrencePercent}]}
-              deltaStyle={{backgroundColor: colors.lightTint}}
+              bars={[{color: this.principalColor.tint, value: occurrencePercent}]}
+              deltaStyle={{backgroundColor: this.principalColor.lightTint}}
               maxChartValue={100}
               style={styles.sourcesBarChart}
             />
@@ -364,6 +365,10 @@ export default class SourceOverview extends Component {
   };
 
   _onPressActant(actant: Actant) {
+    // ReaderURL with occurrences
+  };
+
+  _onPressActantIcon(actant: Actant) {
     const { book } = this.state;
     this.props.navigate(sourceURL({sourceID: actant.id, bookID: book && book.id, title: actant.name}));
   };
@@ -412,6 +417,12 @@ export default class SourceOverview extends Component {
         listenedToOccurrenceCount
       });
     }
+  };
+
+  get principalColor(): Object {
+    const { source, sourceRelation } = this.state;
+    const principalSourceType = (sourceRelation ? sourceRelation.principalSourceType : source.principalSourceType);
+    return Colors.sources[principalSourceType];
   }
 }
 
