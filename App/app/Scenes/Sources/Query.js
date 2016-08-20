@@ -43,7 +43,7 @@ export default class Query {
         INNER JOIN actants AS speaker ON speaker.id = speakers.actant_id
         INNER JOIN bso_actants AS listeners ON (bso.id = listeners.bso_id AND listeners.type_id = 2)
         INNER JOIN actants AS listener ON listener.id = listeners.actant_id
-      WHERE ((listener.id = 304) ${where})
+      WHERE ((listener.id = ?) ${where})
       GROUP BY speaker.id ORDER BY count DESC`;
 
     const rows = await rowsWithSQL(sql, this.source.id);
