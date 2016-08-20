@@ -227,7 +227,7 @@ export default class SourceOverview extends Component {
 
     return (
       <TouchableOpacity style={styles.section} onPress={() => this._onPressActant(actant)}>
-        <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
+        <View style={[styles.sourcesCellContainer, {paddingVertical: 10}]}>
           <View style={styles.sourcesLeftContainer}>
             <TouchableOpacity onPress={() => this._onPressActantIcon(actant)}>
               <SourceIcon
@@ -237,7 +237,9 @@ export default class SourceOverview extends Component {
                 size={20}
               />
             </TouchableOpacity>
-            <Text style={StyleSheet.styles.cell.titlemedium}>{actant.name}</Text>
+            <View style={styles.sourcesContent}>
+              <Text style={StyleSheet.styles.cell.titlemedium}>{actant.name}</Text>
+            </View>
           </View>
           <View style={styles.sourcesRightContainer}>
             <BarChart
@@ -487,10 +489,17 @@ const styles = StyleSheet.create({
   sourcesLeftContainer: {
     flex: 1,
     flexDirection: 'row',
-    paddingTop: 2,
+    alignSelf: 'center',
   },
   sourcesRightContainer: {
     flex: 1,
+    marginRight: 8,
+    alignSelf: 'center',
+  },
+  sourcesContent: {
+    flex: 1,
+    flexWrap: 'wrap',
+    marginRight: 8,
   },
   sourceAvatar: {
     width: 20,
