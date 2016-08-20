@@ -57,6 +57,10 @@ const ActantAxisItems = (props: Props) => {
         <Text style={StyleSheet.styles.cell.title}>Role</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(updateAxis(props.card, props.axis, {type: 'chronology', name: Localizable.t('time-period'), actantType: props.actantType}))}>
+        <Text style={StyleSheet.styles.cell.title}>Time Period</Text>
+      </TouchableOpacity>
+      <View style={styles.separator} />
     </ScrollView>
   );
 };
