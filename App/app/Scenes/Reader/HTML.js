@@ -126,10 +126,59 @@ module.exports = `
       .textPoetry {
         margin-left: 2em;
       }
+      .footnoteOverlay {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: -3pt;
+        left: 0;
+        background-color: rgba(0,0,0,.15);
+        z-index: 100;
+      }
+      .footnoteContainer {
+        font-family: -apple-system, "Helvetica Neue", "Lucida Grande";
+        font-size: 1em;
+        line-height: 1.3em;
+        color: #59626A;
+        position: absolute;
+        right: 5pt;
+        bottom: 8pt;
+        left: 5pt;
+        background-color: white;
+        box-shadow: 0 1pt 1pt rgba(0,0,0,.10);
+        border-radius: 3pt;
+      }
+      .footnoteHeader {
+        font-weight: 600;
+        color: #59626A;
+        padding: 6pt 8pt;
+        border-bottom: 1pt solid rgba(0,0,0,.10);
+      }
+      .footnoteClose {
+        font-weight: normal;
+        color: #CF1E00;
+        text-decoration: none;
+        position: absolute;
+        right: 10pt;
+      }
+      .footnoteContent {
+        padding: 8pt;
+      }
       ${CSS}
     </style>
   </head>
   <body id="scripture">
+    <div class="footnoteOverlay">
+      <div class="footnoteContainer">
+        <div class="footnoteHeader">
+          Genesis 1:1
+          <a href="#" class="footnoteClose">Close</a>
+        </div>
+        <div class="footnoteContent">
+          <p>Or In the beginning when God created the heavens and the earth,... Or When God began to create the heavens and the earth,...</p>
+        </div>
+      </div>
+    </div>
     {{BODY}}
 
     <script type="text/javascript">
