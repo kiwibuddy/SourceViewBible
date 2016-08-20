@@ -23,7 +23,7 @@ import {
 
 import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigation';
 
-import { BACK, discoveryCenterURL, readerURL } from '../../Navigation';
+import { BACK, discoveryCenterURL, occurrencesURL, readerURL } from '../../Navigation';
 
 import Emdros from '../../API/Emdros';
 import { BookSourceOccurrence, Role } from '../../Database';
@@ -94,8 +94,9 @@ export default class DiscoveryCenterOccurrences extends Component {
 
     const bcvReference = Localizable.t('bcv-reference', {book: book.name, reference: occurrence.reference});
     const bsoReference = Localizable.t('bso-reference', {book: book.name, source: occurrence.name, number: occurrence.number});
+    const occurrencesRoute = occurrencesURL({title: Localizable.t('passages'), card, modal: true});
 
-    const route = readerURL({bookID: book.id, anchor: `source-${occurrence.name}-${occurrence.number}`, title: book.name, description: bsoReference, card, occurrenceIndex, occurrences});
+    const route = readerURL({bookID: book.id, anchor: `source-${occurrence.name}-${occurrence.number}`, title: book.name, description: bsoReference, occurrenceIndex, occurrences, occurrencesRoute});
 
     return (
       <TouchableOpacity key={occurrence.id} style={styles.listItemContainer} onPress={() => this._navigate(route)}>

@@ -33,7 +33,7 @@ import SourceIcon from '../../Components/Common/SourceIcon';
 
 import FilterBar from './FilterBar';
 
-import { readerURL, sourceURL, sourceBooksURL, sourceConversationsURL, sourceSpheresURL, sourceWordsURL } from '../../Navigation';
+import { BACK, readerURL, sourceURL, sourceBooksURL, sourceConversationsURL, sourceSpheresURL, sourceWordsURL } from '../../Navigation';
 
 import { Actant, Book } from '../../Database';
 import Query from './Query';
@@ -368,10 +368,8 @@ export default class SourceOverview extends Component {
       const occurrence = occurrences[0];
       const book = occurrence.book;
       const bsoReference = Localizable.t('bso-reference', {book: book.name, source: occurrence.name, number: occurrence.number});
-      const route = readerURL({bookID: book.id, anchor: `source-${occurrence.name}-${occurrence.number}`, title: book.name, description: bsoReference,  occurrenceIndex: 1, occurrences});
+      const route = readerURL({bookID: book.id, anchor: `source-${occurrence.name}-${occurrence.number}`, title: book.name, description: bsoReference,  occurrenceIndex: 1, occurrences, occurrencesRoute: BACK});
       this.props.navigate(route);
-      console.log('occurrences', occurrences.length);
-
     }
   };
 

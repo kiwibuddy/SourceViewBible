@@ -22,7 +22,7 @@ import {
   StyleSheet
 } from '../../Common';
 
-import { occurrencesURL, readerSearchURL, readerSettingsURL, readerURL } from '../../Navigation';
+import { BACK, readerSearchURL, readerSettingsURL, readerURL } from '../../Navigation';
 import * as Navigation from '../../Components/Navigation';
 
 const RNFS = require('react-native-fs');
@@ -55,7 +55,7 @@ const NavigationBar = (props: Props) => {
 
 class OccurrenceToolbar extends Component {
   render() {
-    const { book, card, occurrenceIndex, occurrences } = this.props;
+    const { book, occurrenceIndex, occurrences, occurrencesRoute } = this.props;
 
     const current = occurrenceIndex + 1;
     const total = occurrences.length;
@@ -74,7 +74,7 @@ class OccurrenceToolbar extends Component {
       const previousOccurrence = occurrences[previousOccurrenceIndex];
       const book = previousOccurrence.book;
       const bsoReference = Localizable.t('bso-reference', {book: book.name, source: previousOccurrence.name, number: previousOccurrence.number});
-      previousRoute = readerURL({bookID: book.id, anchor: `source-${previousOccurrence.name}-${previousOccurrence.number}`, title: book.name, description: bsoReference, card, occurrenceIndex: previousOccurrenceIndex, occurrences});
+      previousRoute = readerURL({bookID: book.id, anchor: `source-${previousOccurrence.name}-${previousOccurrence.number}`, title: book.name, description: bsoReference, occurrenceIndex: previousOccurrenceIndex, occurrences, occurrencesRoute});
     }
 
     let nextRoute = null;
@@ -83,10 +83,8 @@ class OccurrenceToolbar extends Component {
       const nextOccurrence = occurrences[nextOccurrenceIndex];
       const book = nextOccurrence.book;
       const bsoReference = Localizable.t('bso-reference', {book: book.name, source: nextOccurrence.name, number: nextOccurrence.number});
-      nextRoute = readerURL({bookID: book.id, anchor: `source-${nextOccurrence.name}-${nextOccurrence.number}`, title: book.name, description: bsoReference, card, occurrenceIndex: nextOccurrenceIndex, occurrences});
+      nextRoute = readerURL({bookID: book.id, anchor: `source-${nextOccurrence.name}-${nextOccurrence.number}`, title: book.name, description: bsoReference, occurrenceIndex: nextOccurrenceIndex, occurrences, occurrencesRoute});
     }
-
-    const occurrencesRoute = occurrencesURL({title: Localizable.t('passages'), card, modal: true});
 
     return (
       <Navigation.Toolbar>
@@ -119,7 +117,8 @@ class OccurrenceToolbar extends Component {
   }
 
   _navigate = (route: Object) => {
-    this.props.navigate(route, {replace: true});
+    const options = (route !== BACK ? {replace: true} : null);
+    this.props.navigate(route, options);
   };
 }
 
