@@ -209,7 +209,7 @@ export class Actant extends Realm.Object {
     return sources;
   }
 
-  sourceRelationForBook(book: ?Object) {
+  relationForBook(book: ?Object) {
     return (book ? book.sourceRelations.find(relation => relation.source.id === this.id) : null);
   }
 

@@ -47,7 +47,7 @@ export default class SourceWords extends Component {
 
     const source = Actant.findByID(props.sourceID);
     const book = (props.bookID ? Book.findByID(props.bookID) : null);
-    const sourceRelation = (book ? book.sourceRelations.find(relation => relation.source.id === source.id) : null);
+    const sourceRelation = source.relationForBook(book);
 
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     this.state = {

@@ -74,7 +74,7 @@ export default class SourceOverview extends Component {
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     const source = Actant.findByID(props.sourceID);
     const book = (props.bookID ? Book.findByID(props.bookID) : null);
-    const sourceRelation = (book ? book.sourceRelations.find(relation => relation.source.id === source.id) : null);
+    const sourceRelation = source.relationForBook(book);
 
     this.state = {
       dataSource,
@@ -370,7 +370,7 @@ export default class SourceOverview extends Component {
 
     const source = Actant.findByID(props.sourceID);
     const book = (props.bookID ? Book.findByID(props.bookID) : null);
-    const sourceRelation = (book ? book.sourceRelations.find(relation => relation.source.id === source.id) : null);
+    const sourceRelation = source.relationForBook(book);
 
     const query = new Query(source, book);
     const bookCount = await query.bookCount();
