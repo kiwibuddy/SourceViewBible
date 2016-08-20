@@ -209,6 +209,10 @@ export default class SourceOverview extends Component {
       metaData.push(this._renderMetaValue(Localizable.t('roles.text'), 'metadata-role', source.roleDescription));
     }
 
+    if (source.natureDescription) {
+      metaData.push(this._renderMetaValue(Localizable.t('nature'), 'metadata-nature', source.natureDescription));
+    }
+
     if (source.genderDescription) {
       metaData.push(this._renderMetaValue(Localizable.t('gender'), 'metadata-gender', source.genderDescription));
     }

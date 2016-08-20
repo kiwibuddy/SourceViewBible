@@ -266,6 +266,11 @@ export class Actant extends Realm.Object {
     }
   }
 
+  get chronologyDescription(): ?string {
+    if (this.chronologies.length > 2) return '∞';
+    return this.chronologies.sorted('from').map(chronology => chronology.name).join(', ');
+  }
+
   get genderDescription(): ?string {
     switch(this.gender) {
       case 1:
@@ -279,9 +284,8 @@ export class Actant extends Realm.Object {
     }
   }
 
-  get chronologyDescription(): ?string {
-    if (this.chronologies.length > 2) return '∞';
-    return this.chronologies.sorted('from').map(chronology => chronology.name).join(', ');
+  get natureDescription(): ?string {
+    return this.natures.map(nature => nature.name).join(', ');
   }
 
   get roles(): any {
