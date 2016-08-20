@@ -37,6 +37,7 @@ type Props = {
 type State = {
   source: Object,
   book: ?Object,
+  sourceRelation: ?Object,
 };
 
 export default class SourceOverview extends Component {
@@ -48,23 +49,24 @@ export default class SourceOverview extends Component {
 
     const source = Actant.findByID(props.sourceID);
     const book = (props.bookID ? Book.findByID(props.bookID) : null);
+    const sourceRelation = (book ? book.sourceRelations.find(relation => relation.source.id === source.id) : null);
 
     this.state = {
       source,
-      book
+      book,
+      sourceRelation
     };
   }
 
   render() {
-    const { source, book } = this.state;
+    const { source, book, sourceRelation } = this.state;
 
-    const sourceRelation = (book ? book.sourceRelations.find(relation => relation.source.id === source.id) : null);
-    const principalSourceType = (sourceRelation ? sourceRelation.principalSourceType : source.principalSourceType);
-
-    const words = source.words.map(word => word.string);
-
+    const statistics = this._renderStatistics();
     const metaData = this._renderMetaData();
     const filterBar = this._renderFilterBar();
+
+    const words = source.words.map(word => word.string);
+    const principalSourceType = (sourceRelation ? sourceRelation.principalSourceType : source.principalSourceType);
 
     return (
       <ScrollView style={styles.container}>
@@ -111,25 +113,11 @@ export default class SourceOverview extends Component {
             </View>
           </WordCloud>
         </TouchableOpacity>
-        <View style={[StyleSheet.styles.statisticsContainer, {marginTop: 25}]}>
-          <TouchableOpacity style={[StyleSheet.styles.statisticContainer, {marginHorizontal: -20}]} onPress={() => this.props.navigate(sourceBooksURL({sourceID: source.id, title: Localizable.t('source-books', {name: source.name})}))}>
-            <Text style={[StyleSheet.styles.statisticTitle, {fontSize: 18}]}>0</Text>
-            <Text style={StyleSheet.styles.statisticSubtitle}>Books</Text>
-          </TouchableOpacity>
-          <View style={StyleSheet.styles.statisticKeyline} />
-          <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.navigate(sourceWordsURL({sourceID: source.id, title: Localizable.t('source-words', {name: source.name})}))}>
-            <Text style={[StyleSheet.styles.statisticTitle, {fontSize: 18}]}>{Localizable.toNumber(source.wordCount, {precision: 0})}</Text>
-            <Text style={StyleSheet.styles.statisticSubtitle}>Words</Text>
-          </TouchableOpacity>
-          <View style={StyleSheet.styles.statisticKeyline} />
-          <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.navigate(sourceSpheresURL({sourceID: source.id, title: Localizable.t('source-spheres', {name: source.name})}))}>
-            <Text style={[StyleSheet.styles.statisticTitle, {fontSize: 18}]}>0</Text>
-            <Text style={StyleSheet.styles.statisticSubtitle}>Spheres</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.listContainer}>
-            {metaData}
-        </View>
+
+        {statistics}
+
+        {metaData}
+
         <View style={styles.listContainer}>
           <View style={styles.listItemHeader}>
             <Text style={StyleSheet.styles.cell.titlebold}>Source spoke to</Text>
@@ -226,10 +214,12 @@ export default class SourceOverview extends Component {
       metaData.push(this._renderMetaValue(Localizable.t('gender'), 'metadata-gender', source.genderDescription));
     }
 
-    return metaData;
+    return (
+      <View style={styles.listContainer}>{metaData}</View>
+    );
   }
 
-  _renderMetaValue(title: string, icon: string, value: string) {
+  _renderMetaValue = (title: string, icon: string, value: string) => {
     return (
       <View key={title}>
         <View style={styles.listItemContainer}>
@@ -248,9 +238,32 @@ export default class SourceOverview extends Component {
     );
   };
 
+  _renderStatistics = () => {
+    const { source, book, sourceRelation } = this.state;
+
+    return (
+      <View style={[StyleSheet.styles.statisticsContainer, {marginTop: 25}]}>
+        <TouchableOpacity style={[StyleSheet.styles.statisticContainer, {marginHorizontal: -20}]} onPress={() => this.props.navigate(sourceBooksURL({sourceID: source.id, title: Localizable.t('source-books', {name: source.name})}))}>
+          <Text style={[StyleSheet.styles.statisticTitle, {fontSize: 18}]}>0</Text>
+          <Text style={StyleSheet.styles.statisticSubtitle}>Books</Text>
+        </TouchableOpacity>
+        <View style={StyleSheet.styles.statisticKeyline} />
+        <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.navigate(sourceWordsURL({sourceID: source.id, title: Localizable.t('source-words', {name: source.name})}))}>
+          <Text style={[StyleSheet.styles.statisticTitle, {fontSize: 18}]}>{Localizable.toNumber(source.wordCount, {precision: 0})}</Text>
+          <Text style={StyleSheet.styles.statisticSubtitle}>Words</Text>
+        </TouchableOpacity>
+        <View style={StyleSheet.styles.statisticKeyline} />
+        <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.navigate(sourceSpheresURL({sourceID: source.id, title: Localizable.t('source-spheres', {name: source.name})}))}>
+          <Text style={[StyleSheet.styles.statisticTitle, {fontSize: 18}]}>0</Text>
+          <Text style={StyleSheet.styles.statisticSubtitle}>Spheres</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
   _onPressClearFilter = () => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    this.setState({book: null});
+    this.setState({book: null, sourceRelation: null});
   };
 }
 
