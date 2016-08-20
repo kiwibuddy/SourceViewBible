@@ -31,6 +31,8 @@ import ParallaxMotionView from '../../Components/Common/ParallaxMotionView';
 import Icon from '../../Components/Common/Icon';
 import SourceIcon from '../../Components/Common/SourceIcon';
 
+import FilterBar from './FilterBar';
+
 import { sourceURL, sourceBooksURL, sourceConversationsURL, sourceSpheresURL, sourceWordsURL } from '../../Navigation';
 
 import { Actant, Book } from '../../Database';
@@ -100,11 +102,11 @@ export default class SourceOverview extends Component {
   }
 
   render() {
-    const filterBar = this._renderFilterBar();
+    const { book } = this.state;
 
     return (
       <View style={styles.container}>
-        {filterBar}
+        <FilterBar book={book} onPress={() => this._onPressClearFilter()} />
         <ListView
           ref={LISTVIEW_REF}
           dataSource={this.state.dataSource}
@@ -118,20 +120,6 @@ export default class SourceOverview extends Component {
       </View>
     );
   }
-
-  _renderFilterBar = () => {
-    const { book } = this.state;
-    if (!book) return null;
-
-    return (
-      <View style={styles.filterBar}>
-        <Text style={styles.filterLabel}>{Localizable.t('in-book', {book: book.name})}</Text>
-        <TouchableOpacity style={styles.filterClear} onPress={this._onPressClearFilter}>
-          <Image source={require('../../Images/sources/clear-btn.png')} />
-        </TouchableOpacity>
-      </View>
-    );
-  };
 
   _renderHeader = () => {
     const { source, book, sourceRelation } = this.state;
@@ -436,28 +424,6 @@ export default class SourceOverview extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  filterBar: {
-    height: 30,
-    backgroundColor: '#F9F9F9',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#c8c7cc',
-    alignItems: 'center',
-    paddingHorizontal: 8,
-    justifyContent: 'center',
-  },
-  filterLabel: {
-    fontSize: 14,
-    color: '#9B9B9B',
-    fontWeight: '600',
-    alignSelf: 'center',
-    textAlign: 'center',
-    marginTop: -1,
-  },
-  filterClear: {
-    position: 'absolute',
-    right: 0,
-    top: 0,
   },
   sourceBackgroundContainer: {
     alignSelf: 'center',
