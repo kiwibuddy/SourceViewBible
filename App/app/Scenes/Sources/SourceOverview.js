@@ -85,7 +85,8 @@ export default class SourceOverview extends Component {
   }
 
   componentDidMount() {
-    this._getSource();
+    const { book, sourceRelation } = this.state;
+    this._getSource({book, sourceRelation});
   }
 
   render() {
@@ -214,20 +215,23 @@ export default class SourceOverview extends Component {
   };
 
   _renderRow = (row: Object) => {
+    const actant = row.actant;
+    const occurrenceCount = row.count;
+
     return (
       <TouchableOpacity style={styles.section} onPress={() => {}}>
         <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
           <View style={styles.sourcesLeftContainer}>
-            <Icon
-              name={'avatar-human-group'}
-              style={[styles.sourceAvatar, {color: 'red'}]}
+            <SourceIcon
+              source={actant}
+              style={[styles.sourceAvatar]}
               size={20}
             />
-            <Text style={StyleSheet.styles.cell.titlemedium}>Source Name</Text>
+            <Text style={StyleSheet.styles.cell.titlemedium}>{actant.name}</Text>
           </View>
           <View style={styles.sourcesRightContainer}>
             <View style={styles.sourcesBarChart} />
-            <Text style={StyleSheet.styles.cell.subtitle}>0 words</Text>
+            <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('occurrences.count', {count: occurrenceCount, localizedCount: Localizable.toNumber(occurrenceCount, {precision: 0})})}</Text>
           </View>
         </View>
         <View style={[StyleSheet.styles.separator, {marginLeft: 0}]}></View>
@@ -335,11 +339,14 @@ export default class SourceOverview extends Component {
 
   _onPressClearFilter = () => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    this.setState({book: null, sourceRelation: null});
+    this._getSource({book: null, sourceRelation: null});
   };
 
-  async _getSource() {
-    const query = new Query(this.state.source, this.state.book);
+  async _getSource(options: ?Object) {
+    const book = (options && options.book ? options.book : null);
+    const sourceRelation = (options && options.sourceRelation ? options.sourceRelation : null)
+
+    const query = new Query(this.state.source, book);
     const bookCount = await query.bookCount();
 
     const rows = {};
@@ -364,6 +371,8 @@ export default class SourceOverview extends Component {
     const dataSource = this.state.dataSource.cloneWithRowsAndSections(rows, sections);
 
     this.setState({
+      book,
+      sourceRelation,
       dataSource,
       bookCount,
       spokeToCount,
