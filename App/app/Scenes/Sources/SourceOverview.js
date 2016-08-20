@@ -285,7 +285,6 @@ export default class SourceOverview extends Component {
             <Text style={StyleSheet.styles.cell.valuetitlemedium}>{source.professionDescription}</Text>
           </View>
         </View>
-        <View style={styles.separator} />
       </View>
       metaData.push(profession);
     }
