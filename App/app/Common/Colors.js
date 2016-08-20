@@ -11,6 +11,7 @@ module.exports = {
   sources: {
     narrator: {
       tint: '#4A4A4A',
+      lightTint: '#E1E2E3',
       gradient: {
         big:['#76838F', '#323B43'],
         tiny: ['#323B43', '#323B43']
@@ -18,6 +19,7 @@ module.exports = {
     },
     god: {
       tint: '#fc3d39',
+      lightTint: '#FFE2E0',
       gradient: {
         big:['#FF2323', '#9C0D00'],
         tiny: ['#FF4B3B', '#FF4B3B']
@@ -25,6 +27,7 @@ module.exports = {
     },
     divine: {
       tint: '#fc3d39',
+      lightTint: '#FFE2E0',
       gradient: {
         big:['#FF2323', '#9C0D00'],
         tiny: ['#fc3d39', '#fc3d39']
@@ -32,6 +35,7 @@ module.exports = {
     },
     lead: {
       tint: '#19A555',
+      lightTint: '#DCF7E6',
       gradient: {
         big:['#4CDA65', '#0B7E37'],
         tiny: ['#19A555', '#19A555']
@@ -39,6 +43,7 @@ module.exports = {
     },
     support: {
       tint: '#218aff',
+      lightTint: '#DDF0FA',
       gradient: {
         big:['#25B0F5', '#0F628B'],
         tiny: ['#218aff', '#218aff']
