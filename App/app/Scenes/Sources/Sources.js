@@ -63,16 +63,18 @@ export default class Sources extends Component {
 
     return (
       <View style={styles.container}>
-        <TextInput
-          autoCapitalize="words"
-          autoCorrect={false}
-          autoFocus={false}
-          clearButtonMode="always"
-          onChangeText={(text) => this.setState({search: text})}
-          placeholder={Localizable.t('name')}
-          style={styles.textInput}
-          value={this.state.search || ''}
-        />
+        <View style={styles.textInputContainer}>
+          <TextInput
+            autoCapitalize="words"
+            autoCorrect={false}
+            autoFocus={false}
+            clearButtonMode="always"
+            onChangeText={(text) => this.setState({search: text})}
+            placeholder={Localizable.t('name')}
+            style={styles.textInput}
+            value={this.state.search || ''}
+          />
+        </View>
         <ListView
           ref="LISTVIEW_REF"
           dataSource={dataSource}
@@ -153,6 +155,10 @@ const styles = StyleSheet.create({
   section: {
     marginLeft: 8,
   },
+  textInputContainer: {
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#c8c7cc',
+  },
   textInput: {
     fontSize: 14,
     backgroundColor: '#ececec',
@@ -166,7 +172,7 @@ const styles = StyleSheet.create({
   },
   sourcesCellContainer: {
     flex: 1,
-    marginRight: 15,
+    marginRight: 8,
     paddingVertical: 6,
     flexDirection: 'row',
   },
@@ -201,7 +207,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingRight: 15,
     backgroundColor: '#FAFAFA',
-    marginRight: 15,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: '#c8c7cc',
   },
@@ -214,7 +219,6 @@ const styles = StyleSheet.create({
   separator: {
     ...StyleSheet.styles.separator,
     marginLeft: 8,
-    marginRight: 15,
   },
   listIndexContainer: {
     top: 0,
