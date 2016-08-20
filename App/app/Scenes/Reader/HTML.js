@@ -172,7 +172,7 @@ module.exports = `
     </style>
   </head>
   <body id="scripture">
-    <div class="footnoteOverlay">
+    <div class="footnoteOverlay" style="display: none;">
       <div class="footnoteContainer">
         <div class="footnoteHeader">
           Genesis 1:1
@@ -183,6 +183,7 @@ module.exports = `
         </div>
       </div>
     </div>
+    
     {{BODY}}
 
     <script type="text/javascript">
