@@ -379,6 +379,8 @@ export default class SourceOverview extends Component {
   async _setSource(props: Object) {
     if (!this.shouldFetch) return;
 
+    const sourceChanged = this.state.source.id != props.sourceID;
+
     const source = Actant.findByID(props.sourceID);
     const book = (props.bookID ? Book.findByID(props.bookID) : null);
     const sourceRelation = (book ? book.sourceRelations.find(relation => relation.source.id === source.id) : null);
@@ -419,7 +421,7 @@ export default class SourceOverview extends Component {
         listenedToCount,
         listenedToOccurrenceCount
       }, () => {
-        this.refs[LISTVIEW_REF].scrollTo({y: 0, animated: false});
+        if (sourceChanged) this.refs[LISTVIEW_REF].scrollTo({y: 0, animated: false});
       });
     }
   };
