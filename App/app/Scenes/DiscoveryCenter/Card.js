@@ -210,13 +210,12 @@ export default class Card extends Component {
 
   _renderWordCount = () => {
     const { card, wordCount } = this.state;
-    if (wordCount == null) return null;
 
     const wordFilter = card.filters.find(filter => filter.type === 'word');
     if (wordFilter) {
       return (
         <View style={styles.countContainer}>
-          <Text style={styles.countTitleBold}>{wordFilter.word}</Text><Text style={styles.countTitle}>occurs {wordCount} times</Text>
+          <Text style={styles.countTitleBold}>{wordFilter.word}</Text><Text style={styles.countTitle}>occurs {wordCount || 0} times</Text>
         </View>
       );
     }
