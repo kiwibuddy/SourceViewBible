@@ -359,10 +359,10 @@ export default class SourceOverview extends Component {
   };
 
   async _onPressActant(actant: Actant, sectionID: string) {
-    const { source } = this.state;
+    const { source, book } = this.state;
     const speaker = (sectionID === Section.SPOKE_TO ? source : actant);
     const listener = (sectionID === Section.SPOKE_TO ? actant : source);
-    const query = new Query(speaker);
+    const query = new Query(speaker, book);
     const occurrences = await query.occurrences(listener.id);
     if (occurrences.length > 0) {
       const occurrence = occurrences[0];
