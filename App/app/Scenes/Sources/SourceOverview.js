@@ -71,7 +71,7 @@ export default class SourceOverview extends Component {
   constructor(props: Props) {
     super(props);
 
-    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
+    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     const source = Actant.findByID(props.sourceID);
     const book = (props.bookID ? Book.findByID(props.bookID) : null);
     const sourceRelation = source.relationForBook(book);
@@ -224,7 +224,7 @@ export default class SourceOverview extends Component {
 
     const principalSourceType = (sourceRelation ? sourceRelation.principalSourceType : actant.principalSourceType);
     const principalColor = Colors.sources[principalSourceType];
-    
+
     return (
       <TouchableOpacity style={styles.section} onPress={() => this._onPressActant(actant)}>
         <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
