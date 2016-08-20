@@ -42,6 +42,9 @@ export async function seedBooks(emdros: Object, realm: Object) {
   await seedBookSphereCounts(emdros, realm);
 
   await seedBookWordCloud(emdros, realm);
+
+  await seedSourceRelationSphereWordCount(emdros, realm);
+  await seedSourceRelationSphereCounts(emdros, realm);
 }
 
 async function seedSourceTypes(emdros, realm) {
@@ -310,6 +313,101 @@ async function seedBookSphereCounts(emdros, realm) {
           realm.write(() => {
             const spheresData = bookData["Token"];
             seedObjectSphereWordCounts(realm, 'Book', book.id, spheresData);
+          });
+        }
+      }
+
+      resolve();
+    }).catch((error) => {
+      console.log(error);
+    })
+  });
+}
+
+async function seedSourceRelationSphereWordCount(emdros, realm) {
+  console.log('Seeding Source Relation Sphere Word Count...');
+
+  const sphereExpression = Object.keys(SPHERE_MAP).map(key => `${key}=true`).join(' OR ');
+  const query = `
+  {
+    "objectTypeName": "Book",
+    "feature": "DJHRef",
+    "buckets": {
+      "objectTypeName": "SourceActant",
+      "feature": ["actant_id"],
+      "buckets": {
+        "objectTypeName": "Token",
+        "expression" : "(${sphereExpression})"
+      }
+    }
+  }
+  `;
+
+  return new Promise((resolve, reject) => {
+    emdros.query(query, {count: true}).then((data) => {
+      for (let [index, book] of realm.objects('Book').entries()) {
+        const bookData = data["Book"]["DJHRef"][book.DJHRef];
+        if (bookData != null) {
+          realm.write(() => {
+            const sourceData = bookData["SourceActant"]["actant_id"];
+            if (sourceData != null) {
+              Object.keys(sourceData).forEach(actantID => {
+                const actant = realm.objectForPrimaryKey('Actant', parseInt(actantID));
+                if (actant != null) {
+                  const sourceRelation = book.sourceRelations.find(sourceRelation => sourceRelation.source.id === actant.id);
+                  const wordCount = sourceData[actantID]["Token"];
+                  if (wordCount && wordCount > 0) {
+                    sourceRelation.sphereWordCount = wordCount;
+                  }
+                }
+              });
+            }
+          });
+        }
+      }
+
+      resolve();
+    }).catch((error) => {
+      console.log(error);
+    })
+  });
+}
+
+async function seedSourceRelationSphereCounts(emdros, realm) {
+  console.log('Seeding Source Relation Sphere Word Counts...');
+  const sphereFeatures = Object.keys(SPHERE_MAP).map(key => `"${key}"`).join(', ');
+  const query = `
+  {
+    "objectTypeName": "Book",
+    "feature": "DJHRef",
+    "buckets": {
+      "objectTypeName": "SourceActant",
+      "feature": ["actant_id"],
+      "buckets": {
+        "objectTypeName": "Token",
+        "feature": [${sphereFeatures}],
+      }
+    }
+  }
+  `;
+
+  return new Promise((resolve, reject) => {
+    emdros.query(query, {count: true}).then((data) => {
+      for (let [index, book] of realm.objects('Book').entries()) {
+        const bookData = data["Book"]["DJHRef"][book.DJHRef];
+        if (bookData != null) {
+          realm.write(() => {
+            const sourceData = bookData["SourceActant"]["actant_id"];
+            if (sourceData != null) {
+              Object.keys(sourceData).forEach(actantID => {
+                const actant = realm.objectForPrimaryKey('Actant', parseInt(actantID));
+                if (actant != null) {
+                  const sourceRelation = book.sourceRelations.find(sourceRelation => sourceRelation.source.id === actant.id);
+                  const spheresData = sourceData[actantID]["Token"];
+                  seedObjectSphereWordCounts(realm, 'SourceRelation', sourceRelation.id, spheresData);
+                }
+              });
+            }
           });
         }
       }

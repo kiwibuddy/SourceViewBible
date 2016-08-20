@@ -182,6 +182,7 @@ const ActantSchema = {
     principalSourceType: {type: 'string', optional: true},
     sphereCount: {type: 'int', default: 0},
     sphereCounts: {type: 'list', objectType: 'Count'},
+    sphereWordCount: {type: 'int', default: 0},
     wordCount: {type: 'int', default: 0},
     words: {type: 'list', objectType: 'Count'},
   }
@@ -206,6 +207,16 @@ export class Actant extends Realm.Object {
     const sources = realm.objects('Actant').filtered('isSource = $0', true);
     if (search) return sources.filtered('name CONTAINS[c] $0', search);
     return sources;
+  }
+
+  countOfSourceType(sourceType: string): number {
+    const count = this.sourceTypeCounts.find(count => count.string === sourceType);
+    return count && count.count || 0;
+  }
+
+  countOfSphereType(sphereType: string): number {
+    const count = this.sphereCounts.find(count => count.string === sphereType);
+    return count && count.count || 0;
   }
 
   get isDivine(): boolean {
@@ -593,12 +604,25 @@ const SourceRelationSchema = {
     sourceTypeCount: {type: 'int', default: 0},
     sourceTypeCounts: {type: 'list', objectType: 'Count'},
     principalSourceType: {type: 'string', default: 'support'},
+    sphereCount: {type: 'int', default: 0},
+    sphereCounts: {type: 'list', objectType: 'Count'},
+    sphereWordCount: {type: 'int', default: 0},
     wordCount: {type: 'int', default: 0},
     words: {type: 'list', objectType: 'Count'},
   }
 };
 
 export class SourceRelation extends Realm.Object {
+  countOfSourceType(sourceType: string): number {
+    const count = this.sourceTypeCounts.find(count => count.string === sourceType);
+    return count && count.count || 0;
+  }
+
+  countOfSphereType(sphereType: string): number {
+    const count = this.sphereCounts.find(count => count.string === sphereType);
+    return count && count.count || 0;
+  }
+  
   get roles(): any {
     return this.sourceTypeCounts.filtered('count > 0').map(sourceTypeCount => Role.findByID(sourceTypeCount.string));
   }

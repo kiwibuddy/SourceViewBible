@@ -27,6 +27,8 @@ export async function seedActants(emdros: Object, realm: Object) {
 
   await seedActantWordCloud(emdros, realm);
 
+  await seedSphereWordCount(emdros, realm);
+
   await seedSphereCounts(emdros, realm);
 }
 
@@ -97,6 +99,42 @@ async function seedActantWordCloud(emdros, realm) {
           });
         });
       }
+
+      resolve();
+    }).catch((error) => {
+      console.log(error);
+    })
+  });
+}
+
+async function seedSphereWordCount(emdros, realm) {
+  console.log('Seeding Actant Sphere Word Count...');
+
+  const sphereExpression = Object.keys(SPHERE_MAP).map(key => `${key}=true`).join(' OR ');
+  const query = `
+  {
+    "objectTypeName": "SourceActant",
+    "feature": "actant_id",
+    "buckets": {
+      "objectTypeName": "Token",
+      "expression" : "(${sphereExpression})"
+    }
+  }
+  `;
+
+  return new Promise((resolve, reject) => {
+    emdros.query(query, {count: true}).then((data) => {
+      realm.write(() => {
+        for (let [index, actant] of realm.objects('Actant').filtered('isSource = $0', true).entries()) {
+          const actantData = data["SourceActant"]["actant_id"][actant.id.toString()];
+          if (actantData != null) {
+            const wordCount = actantData["Token"];
+            if (wordCount && wordCount > 0) {
+              actant.sphereWordCount = wordCount;
+            }
+          }
+        }
+      });
 
       resolve();
     }).catch((error) => {

@@ -34,6 +34,7 @@ const ActantSchema = {
     principalSourceType: {type: 'string', optional: true},
     sphereCount: {type: 'int', default: 0},
     sphereCounts: {type: 'list', objectType: 'Count'},
+    sphereWordCount: {type: 'int', default: 0},
     wordCount: {type: 'int', default: 0},
     words: {type: 'list', objectType: 'Count'},
   }
@@ -204,6 +205,9 @@ const SourceRelationSchema = {
     sourceTypeCount: {type: 'int', default: 0},
     sourceTypeCounts: {type: 'list', objectType: 'Count'},
     principalSourceType: {type: 'string', default: 'support'},
+    sphereCount: {type: 'int', default: 0},
+    sphereCounts: {type: 'list', objectType: 'Count'},
+    sphereWordCount: {type: 'int', default: 0},
     wordCount: {type: 'int', default: 0},
     words: {type: 'list', objectType: 'Count'},
   }
