@@ -6,6 +6,7 @@ const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithP
 
 import {
   ListView,
+  RecyclerViewBackedScrollView,
   Text,
   TouchableOpacity,
   View
@@ -43,24 +44,63 @@ export default class SpherePassages extends Component {
     };
   }
 
+  componentDidMount() {
+    this._getPassages();
+  }
+
   render() {
     return (
-      <View style={styles.content}>
-        <View style={styles.sectionHeaderContainer}>
-          <Text style={styles.sectionHeaderTitle}>God and the Sphere of Family</Text>
-        </View>
-        <TouchableOpacity style={styles.listItemContainer}>
-          <Text style={[StyleSheet.styles.cell.occurrence, {marginTop: -5}]}>1</Text>
-          <View style={styles.listItem}>
-            <Text style={styles.bodybold}>Lorem ipsum dolor sit amet, eleifend varius.</Text>
-            <Text style={styles.body}>Lorem ipsum dolor sit amet, eleifend varius. Risus vitae mauris cras lectus ipsum ante, semper id, tincidunt nunc magnis vehicula magnis in, magna massa, lectus donec vestibulum interdum.</Text>
-            <View style={styles.referenceContainer}>
-              <Text style={[StyleSheet.styles.cell.subtitle, {paddingRight: 8,}]}>John 1:1</Text>
-            </View>
-          </View>
-        </TouchableOpacity>
+      <ListView
+        dataSource={this.state.dataSource}
+        renderRow={this._renderPassage}
+        renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+        renderSectionHeader={this._renderSectionHeader}
+        renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={StyleSheet.styles.separator} />}
+      />
+    );
+  }
+
+  _renderSectionHeader = (passages: any, section: string) => {
+    return (
+      <View style={styles.sectionHeaderContainer}>
+        <Text style={styles.sectionHeaderTitle}>{section}</Text>
       </View>
     );
+  };
+
+  _renderPassage = (passage: Object) => {
+    return (
+      <TouchableOpacity style={styles.listItemContainer}>
+        <Text style={[StyleSheet.styles.cell.occurrence, {marginTop: -5}]}>{passage.number}</Text>
+        <View style={styles.listItem}>
+          <Text style={styles.bodybold}>{passage.title}</Text>
+          <Text style={styles.body}>Lorem ipsum dolor sit amet, eleifend varius. Risus vitae mauris cras lectus ipsum ante, semper id, tincidunt nunc magnis vehicula magnis in, magna massa, lectus donec vestibulum interdum.</Text>
+          <View style={styles.referenceContainer}>
+            <Text style={[StyleSheet.styles.cell.subtitle, {paddingRight: 8,}]}>{passage.reference}</Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
+  async _getPassages() {
+    const { sphere } = this.state;
+
+    const rows = {};
+    const sections = [];
+    sphere.passages.forEach(passage => {
+      let section = rows[passage.section];
+      if (!section) {
+        section = [];
+        sections.push(passage.section);
+      }
+      rows[passage.section] = [...section, passage];
+    });
+
+    const dataSource = this.state.dataSource.cloneWithRowsAndSections(rows, sections);
+    this.setState({
+      dataSource,
+    });
   }
 }
 
