@@ -704,6 +704,10 @@ export class Sphere extends Realm.Object {
     return realm.objects('Sphere').filtered(filter, ...ids).sorted('position');
   }
 
+  static wordCount(): number {
+    return Sphere.all().reduce((sum, sphere) => sum + sphere.wordCount, 0);
+  }
+
   countOfBook(bookID: string): number {
     const count = this.bookCounts.find(count => count.string === bookID);
     return count && count.count || 0;

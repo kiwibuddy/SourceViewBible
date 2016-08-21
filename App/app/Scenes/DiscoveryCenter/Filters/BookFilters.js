@@ -43,7 +43,7 @@ const BookFilters = (props: Props) => {
   return (
     <ScrollView style={styles.container}>
       <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(cardWithFilter(props.card, filterBooks('genesis', 'revelation')))}>
-        <Text style={StyleSheet.styles.cell.title}>Whole Bible</Text>
+        <Text style={StyleSheet.styles.cell.title}>{Localizable.t('whole-bible')}</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
       <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.navigate(booksFilterURL({title: 'Specific Book'}))}>
@@ -52,11 +52,11 @@ const BookFilters = (props: Props) => {
       </TouchableOpacity>
       <View style={styles.separator} />
       <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(cardWithFilter(props.card, filterBooks('genesis', 'malachi')))}>
-        <Text style={StyleSheet.styles.cell.title}>Old Testament</Text>
+        <Text style={StyleSheet.styles.cell.title}>{Localizable.t('old-testament')}</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
       <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(cardWithFilter(props.card, filterBooks('matthew', 'revelation')))}>
-        <Text style={StyleSheet.styles.cell.title}>New Testament</Text>
+        <Text style={StyleSheet.styles.cell.title}>{Localizable.t('new-testament')}</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
     </ScrollView>

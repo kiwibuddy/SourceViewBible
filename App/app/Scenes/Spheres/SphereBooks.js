@@ -131,17 +131,17 @@ export default class SphereBooks extends Component {
         <View style={StyleSheet.styles.statisticsContainer}>
           <View style={StyleSheet.styles.statisticContainer}>
             <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
-            <Text style={StyleSheet.styles.statisticSubtitle}>Whole Bible</Text>
+            <Text style={StyleSheet.styles.statisticSubtitle}>{Localizable.t('whole-bible')}</Text>
           </View>
           <View style={StyleSheet.styles.statisticKeyline} />
           <View style={StyleSheet.styles.statisticContainer}>
             <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(oldTestamentSpherePercent, {precision: 0})}</Text>
-            <Text style={StyleSheet.styles.statisticSubtitle}>Old Testament</Text>
+            <Text style={StyleSheet.styles.statisticSubtitle}>{Localizable.t('old-testament')}</Text>
           </View>
           <View style={StyleSheet.styles.statisticKeyline} />
           <View style={StyleSheet.styles.statisticContainer}>
             <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(newTestamentSpherePercent, {precision: 0})}</Text>
-            <Text style={StyleSheet.styles.statisticSubtitle}>New Testament</Text>
+            <Text style={StyleSheet.styles.statisticSubtitle}>{Localizable.t('new-testament')}</Text>
           </View>
           <View style={StyleSheet.styles.statisticKeyline} />
         </View>

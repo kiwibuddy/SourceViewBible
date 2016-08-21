@@ -20,7 +20,10 @@ const Keys = {
     fontStepSize: PREFIX + '.reader.fontStepSize',
     spheres: PREFIX + '.reader.spheres',
     showNumbers: PREFIX + '.reader.showNumbers',
-  }
+  },
+  Spheres: {
+    FoundationalSort: PREFIX + '.spheres.foundational.sort',
+  },
 };
 Preference.Keys = Keys;
 
