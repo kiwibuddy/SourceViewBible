@@ -32,7 +32,7 @@ import Query from '../DiscoveryCenter/Query';
 type Props = {
   occurrences: Object,
   navigate: Function,
-  onPressBack: Function,
+  onPressBack: ?Function,
   backTitle: ?string,
 };
 
@@ -70,7 +70,7 @@ export default class DiscoveryCenterOccurrences extends Component {
       <View style={styles.container}>
         <NavigationBar title={Localizable.t('passages')}>
           <TouchableOpacity
-            onPress={this.props.onPressBack}
+            onPress={this.props._onPressBack}
             style={{position: 'absolute', left: 16}}
           >
             <Text style={StyleSheet.styles.navigationBar.doneButtonTitle}>{backTitle}</Text>
@@ -135,6 +135,14 @@ export default class DiscoveryCenterOccurrences extends Component {
 
   _navigate = (route: Object) => {
     this.props.navigate(route, {replace: true});
+  };
+
+  _onPressBack = () => {
+    if (this.props.onPressBack) {
+      this.props.onPressBack();
+    } else {
+      this.props.navigate(BACK);
+    }
   };
 
  }
