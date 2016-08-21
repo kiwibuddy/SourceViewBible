@@ -126,6 +126,7 @@ const styles = {
     body: {
       color: '#59626a',
       fontSize: 13,
+      lineHeight: 20,
     },
     bodybold: {
       color: '#59626a',
@@ -133,7 +134,7 @@ const styles = {
       fontWeight: 'bold',
     },
     occurrence: {
-      color: '#CF1E00',
+      color: '#D8D8D8',
       fontSize: 15,
       fontWeight: 'bold',
       width: 30,
