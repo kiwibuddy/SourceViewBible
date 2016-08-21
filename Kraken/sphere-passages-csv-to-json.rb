@@ -42,6 +42,24 @@ def references_from_pericope(pericope)
   end
 end
 
+def ranges_from_pericope(pericope)
+  recent_chapter = nil # e.g. in 12:1-8, remember that 12 is the chapter when we parse the 8
+  recent_chapter = 1 unless pericope.book_has_chapters?
+  pericope.ranges.map do |range|
+    min_chapter = Pericope.get_chapter(range.begin)
+    min_verse = Pericope.get_verse(range.begin)
+    max_chapter = Pericope.get_chapter(range.end)
+    max_verse = Pericope.get_verse(range.end)
+    {
+      "book": pericope.book_name,
+      "minChapter": min_chapter,
+      "minVerse": min_verse,
+      "maxChapter": max_chapter,
+      "maxVerse": max_verse
+    }
+  end
+end
+
 filename = File.expand_path("../../SVB2/Spheres/KeyPassages/Family-Table 1.csv")
 json = {}
 
@@ -57,12 +75,15 @@ rows.each do |row|
     json[sectionKey] = section
   else
     if pericope = Pericope.parse_one(row["reference"])
+      STDERR.puts ranges_from_pericope(pericope)
+
       references = references_from_pericope(pericope).map do |reference|
+        from =
+
         {
           "firstMonad" => 0,
           "lastMonad" => 0,
           "reference" => "#{pericope.book_name} #{reference}",
-          "text" => ""
         }
       end
 
