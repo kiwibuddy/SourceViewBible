@@ -164,7 +164,7 @@ export default class Spheres extends Component {
         <View style={styles.contentContainer}>
           <Text style={[styles.contentBody, {marginBottom: -25, marginTop: -10}]}>Introduction</Text>
           <Text style={styles.contentHeader}>How {sphere.name} Shows Up in Scripture</Text>
-          <Text style={[styles.contentBody, {marginTop: 5}]}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu imperdiet ipsum, at pellentesque arcu. Quisque eleifend enim id felis semper, id euismod dolor hendrerit. Sed fringilla dui eget enim pulvinar, vitae consequat dui bibendum. Maecenas nulla odio.</Text>
+          <Text style={[styles.contentBody, {marginTop: 5}]}>{sphere.description}</Text>
         </View>
         <View style={styles.listContainer}>
           <View style={[styles.listItemHeader, {borderTopColor: colors.tint}]}>

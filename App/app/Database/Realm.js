@@ -667,6 +667,7 @@ const SphereSchema = {
   properties: {
     id: 'string',
     name: 'string',
+    description: 'string',
     position: 'int',
     bookCount: {type: 'int', default: 0},
     bookCounts: {type: 'list', objectType: 'Count'},
@@ -685,8 +686,11 @@ export class Sphere extends Realm.Object {
     'communication',
     'celebration',
   ];
-  static all() {
-    return realm.objects('Sphere').sorted('position');
+
+  static all(foundational: ?boolean) {
+    let spheres = realm.objects('Sphere');
+    if (!foundational) spheres = spheres.filtered('position > 0');
+    return spheres.sorted('position');
   }
 
   static findByID(id: any) {

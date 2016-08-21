@@ -13,11 +13,20 @@ const SPHERES = [
   { id: "celebration", name: "Celebration", position: 7 },
 ];
 
+const SPHERE_DESCRIPTIONS = require('../spheres');
+
 export async function seedSphereObjects(emdros: Object, realm: Object) {
   console.log('Seeding Sphere Objects...');
+
+  realm.write(() => {
+    const description = SPHERE_DESCRIPTIONS.foundational.description
+    realm.create('Sphere', {id: "foundational", name: "Foundational", description, position: 0});
+  });
+
   SPHERES.forEach(sphere => {
     realm.write(() => {
-      realm.create('Sphere', sphere);
+      const description = SPHERE_DESCRIPTIONS[sphere.id].description
+      realm.create('Sphere', {...sphere, description});
     });
   })
 }
@@ -37,7 +46,7 @@ async function seedSphereWordCounts(emdros, realm) {
   console.log('Seeding Spheres Word Counts...');
 
   return new Promise((resolve, reject) => {
-    realm.objects('Sphere').forEach(sphere => {
+    realm.objects('Sphere').filtered('position > 0').forEach(sphere => {
       realm.write(() => {
         let bookCount = 0;
         const bookCounts = [];
