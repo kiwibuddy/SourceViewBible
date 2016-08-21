@@ -61,9 +61,9 @@ module.exports = {
 
   spheres: {
     foundational: {
-      tint: '#7B7D82',
+      tint: '#323B43',
       lightTint: '#E8E8E8',
-      chromeTint: '#7B7D82',
+      chromeTint: '#323B43',
       highlightTint: '#E8E8E8',
       gradient: {
         big:['#7B7D82', '#E8E8E8'],
