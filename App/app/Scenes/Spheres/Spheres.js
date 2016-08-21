@@ -78,6 +78,7 @@ export default class Spheres extends Component {
     const carouselIcons = sortedSpheres.map(sphere => this._renderCarouselIcon(sphere));
 
     const sphereView = (sphere.isFoundational ? this._renderFoundationalSphere(sphere) : this._renderSphere(sphere));
+    const sphereSubtitle = (sphere.isFoundational ? ' ' : Localizable.toPercentage(spherePercent, {precision: 0}));
     return (
       <ScrollView style={styles.container}>
         <LinearGradient
@@ -137,7 +138,7 @@ export default class Spheres extends Component {
           </View>
           <View style={styles.carouselInfo}>
             <Text style={styles.sphereTitle}>{sphere.name}</Text>
-            <Text style={styles.sphereSubtitle}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
+            <Text style={styles.sphereSubtitle}>{sphereSubtitle}</Text>
           </View>
         </LinearGradient>
         {sphereView}
