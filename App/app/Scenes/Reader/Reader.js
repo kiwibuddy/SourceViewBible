@@ -103,7 +103,7 @@ class OccurrenceToolbar extends Component {
         <Navigation.ToolbarButton
           title={Localizable.t('range-of', {current, total})}
           onPress={() => {}}
-          onPress={() => this._navigate(occurrencesRoute)}
+          onPress={() => this._onPressOccurrences(currentRoute)}
           style={{marginLeft: -10}}
         />
         <Navigation.ToolbarButton
@@ -120,6 +120,15 @@ class OccurrenceToolbar extends Component {
     const options = (route !== BACK ? {replace: true} : null);
     this.props.navigate(route, options);
   };
+
+  _onPressOccurrences = (currentRoute) => {
+    const { occurrenceIndex, occurrences, occurrencesRoute } = this.props;
+
+    occurrencesRoute.onPressBack = () => {
+      this._navigate({...currentRoute, occurrenceIndex, occurrences, occurrencesRoute});
+    }
+    this._navigate(occurrencesRoute);
+  }
 }
 
 function renderToolbar(props: Object) {

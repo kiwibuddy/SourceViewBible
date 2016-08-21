@@ -205,7 +205,7 @@ export default class DiscoveryCenter extends Component {
       this.props.navigate(discoveryCenterURL({title: Localizable.t('discovery-center'), modal: true}), {replace: true});
     }
 
-    this.props.navigate(occurrencesURL({title: Localizable.t('passages'), occurrences, modal: true, onPressBack}), {replace: true});
+    this.props.navigate(occurrencesURL({title: Localizable.t('passages'), occurrences, modal: true, onPressBack, backTitle: Localizable.t('back')}), {replace: true});
   };
 
   _showPopover = (props: Object, onComplete: Function) => {

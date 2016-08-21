@@ -65,12 +65,12 @@ export default class DiscoveryCenterOccurrences extends Component {
   }
 
   render() {
-    const backTitle = this.props.backTitle ? this.props.backTitle : Localizable.t('back');
+    const backTitle = this.props.backTitle ? this.props.backTitle : Localizable.t('close');
     return (
       <View style={styles.container}>
         <NavigationBar title={Localizable.t('passages')}>
           <TouchableOpacity
-            onPress={this.props._onPressBack}
+            onPress={this._onPressBack}
             style={{position: 'absolute', left: 16}}
           >
             <Text style={StyleSheet.styles.navigationBar.doneButtonTitle}>{backTitle}</Text>
