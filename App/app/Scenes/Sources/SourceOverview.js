@@ -175,6 +175,30 @@ export default class SourceOverview extends Component {
 
         {statistics}
         {metaData}
+        <View style={[styles.listItemHeader, {borderTopColor: this.principalColor.tint, paddingVertical: 15}]}>
+          <Text style={StyleSheet.styles.cell.titlebold}>Books</Text>
+        </View>
+        <TouchableOpacity>
+          <View style={[styles.sourcesCellContainer, {paddingVertical: 15, paddingLeft: 15}]}>
+            <View style={styles.sourcesLeftContainer}>
+              <TouchableOpacity onPress={() => this._onPressActantIcon(actant)}>
+                <Icon
+                  name={source.iconName}
+                  style={[{color: 'red'}]}
+                  size={20}
+                  style={[styles.sourceAvatar]}
+                />
+              </TouchableOpacity>
+              <View style={styles.sourcesContent}>
+                <Text style={StyleSheet.styles.cell.titlemedium}>Book Name</Text>
+              </View>
+            </View>
+            <View style={styles.sourcesRightContainer}>
+              <Text style={StyleSheet.styles.cell.subtitle}>81 occurrences</Text>
+            </View>
+          </View>
+          <View style={[StyleSheet.styles.separator, {marginLeft: 0}]}></View>
+        </TouchableOpacity>
       </View>
     );
   };
