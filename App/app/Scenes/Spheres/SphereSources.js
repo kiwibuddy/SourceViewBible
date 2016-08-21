@@ -28,6 +28,8 @@ import {
 import { Preference } from '../../Preferences';
 
 import { BarChart, PieChart } from '../../Components/Charts';
+import Icon from '../../Components/Common/Icon';
+import SourceIcon from '../../Components/Common/SourceIcon';
 
 // $FlowFixMe: - Flow can't find os module extension
 import SegmentedControl from '../../Components/Common/SegmentedControl';
@@ -142,7 +144,14 @@ export default class SphereSources extends Component {
       <TouchableOpacity style={styles.section} onPress={() => this._onPressSource(source)}>
         <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
           <View style={styles.sourcesLeftContainer}>
-            <Text style={StyleSheet.styles.cell.title}>{source.name}</Text>
+            <SourceIcon
+              source={source}
+              style={[styles.sourceAvatar]}
+              size={20}
+            />
+            <View style={styles.sourcesContent}>
+              <Text style={StyleSheet.styles.cell.titlemedium}>{source.name}</Text>
+            </View>
           </View>
           <View style={styles.sourcesRightContainer}>
             <BarChart
@@ -253,12 +262,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   sourcesLeftContainer: {
-    flex: 1.5,
+    flex: 1,
     flexDirection: 'row',
-    paddingTop: 2,
+    alignSelf: 'center',
   },
   sourcesRightContainer: {
-    flex: 2,
+    flex: 1,
+    marginRight: 8,
+    alignSelf: 'center',
+  },
+  sourcesContent: {
+    flex: 1,
+    flexWrap: 'wrap',
+    marginRight: 8,
   },
   sourceAvatar: {
     width: 20,
