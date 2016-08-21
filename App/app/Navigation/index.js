@@ -13,7 +13,7 @@ import BookSpheres from '../Scenes/Books/BookSpheres';
 import BookWords from '../Scenes/Books/BookWords';
 import Discover from '../Scenes/Discover/Discover';
 import DiscoveryCenter from '../Scenes/DiscoveryCenter/DiscoveryCenter';
-import DiscoveryCenterOccurrences from '../Scenes/DiscoveryCenter/Occurrences';
+import ReaderOccurrences from '../Scenes/Reader/Occurrences';
 import Reader from '../Scenes/Reader/Reader';
 import ReaderSearch from '../Scenes/Reader/Search';
 import ReaderSettings from '../Scenes/Reader/Settings';
@@ -38,7 +38,7 @@ export const bookSpheresURL = router.addRoute('/Books/:bookID/Spheres', BookSphe
 export const bookWordsURL = router.addRoute('/Books/:bookID/Words', BookWords);
 export const discoverURL = router.addRoute('/Discover', Discover);
 export const discoveryCenterURL = router.addRoute('/DiscoveryCenter', DiscoveryCenter);
-export const occurrencesURL = router.addRoute('/DiscoveryCenter/Occurrences', DiscoveryCenterOccurrences);
+export const occurrencesURL = router.addRoute('/Reader/Occurrences', ReaderOccurrences);
 export const readerSearchURL = router.addRoute('/Reader/Search/:search?', ReaderSearch);
 export const readerSettingsURL = router.addRoute('/Reader/Settings', ReaderSettings);
 export const readerURL = router.addRoute('/Reader/:bookID/:anchor?', Reader);
