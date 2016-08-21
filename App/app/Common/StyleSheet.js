@@ -13,7 +13,7 @@ const styles = {
     doneButtonTitle: {
       color: Colors.tint,
       fontSize: 17,
-      fontWeight: '500',
+      fontWeight: '600',
     },
   },
   wordCloud: {
@@ -46,12 +46,13 @@ const styles = {
   },
   statisticTitle: {
     fontSize: 24,
+    fontWeight: '600',
     color: Colors.tint,
     alignSelf: 'center'
   },
   statisticTitleBold: {
     fontSize: 34,
-    fontWeight: '700',
+    fontWeight: '600',
     color: '#59626A',
     alignSelf: 'center'
   },
