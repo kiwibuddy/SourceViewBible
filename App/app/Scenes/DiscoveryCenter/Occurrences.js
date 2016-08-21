@@ -30,7 +30,7 @@ import { BookSourceOccurrence, Role } from '../../Database';
 import Query from './Query';
 
 type Props = {
-  card: Object,
+  occurrences: Object,
   navigate: Function,
 };
 
@@ -47,10 +47,10 @@ export default class DiscoveryCenterOccurrences extends Component {
   constructor(props: Props) {
     super(props);
 
-    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id});
+    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       dataSource: dataSource,
-      occurrences: null,
+      occurrences: this.props.occurrences,
     };
   }
 
@@ -85,8 +85,7 @@ export default class DiscoveryCenterOccurrences extends Component {
   }
 
   _renderRow = (occurrence: Object, sectionID: any, rowID: any) => {
-    const { card } = this.props;
-    const { occurrences } = this.state;
+    const { occurrences } = this.props;
     const occurrenceIndex = parseInt(rowID);
     const number = occurrenceIndex + 1;
     const book = occurrence.book;
@@ -94,7 +93,7 @@ export default class DiscoveryCenterOccurrences extends Component {
 
     const bcvReference = Localizable.t('bcv-reference', {book: book.name, reference: occurrence.reference});
     const bsoReference = Localizable.t('bso-reference', {book: book.name, source: occurrence.name, number: occurrence.number});
-    const occurrencesRoute = occurrencesURL({title: Localizable.t('passages'), card, modal: true});
+    const occurrencesRoute = occurrencesURL({title: Localizable.t('passages'), occurrences, modal: true});
 
     const route = readerURL({bookID: book.id, anchor: `source-${occurrence.name}-${occurrence.number}`, title: book.name, description: bsoReference, occurrenceIndex, occurrences, occurrencesRoute});
 
@@ -111,9 +110,7 @@ export default class DiscoveryCenterOccurrences extends Component {
   };
 
   async _getOccurrences() {
-    const { card } = this.props;
-    const query = new Query(card);
-    let occurrences = await query.occurrences();
+    let { occurrences } = this.state;
     const contents = {};
 
     for (let occurrence of occurrences) {

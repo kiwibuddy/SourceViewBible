@@ -34,6 +34,7 @@ import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigati
 import { BACK, occurrencesURL } from '../../Navigation';
 
 import { Discovery } from '../../Preferences';
+import Query from './Query';
 
 const SCROLLVIEW_REF = 'scrollview';
 
@@ -114,7 +115,7 @@ export default class DiscoveryCenter extends Component {
         card={card}
         onPressDelete={() => this._deleteCard(card)}
         onPressDuplicate={(card) => this._duplicateCard(card)}
-        onPressOccurrences={this._onPressOccurrences}
+        onPressOccurrences={(card) => this._onPressOccurrences(card)}
         onShowPopover={(props, onComplete) => this._showPopover(props, onComplete)}
       />;
     }
@@ -197,8 +198,10 @@ export default class DiscoveryCenter extends Component {
     this._addCard(card);
   };
 
-  _onPressOccurrences = (card: Object) => {
-    this.props.navigate(occurrencesURL({title: Localizable.t('passages'), card, modal: true}), {replace: true});
+  async _onPressOccurrences(card: Object) {
+    const query = new Query(card);
+    const occurrences = await query.occurrences();
+    this.props.navigate(occurrencesURL({title: Localizable.t('passages'), occurrences, modal: true}), {replace: true});
   };
 
   _showPopover = (props: Object, onComplete: Function) => {
