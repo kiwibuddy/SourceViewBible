@@ -137,8 +137,8 @@ const styles = {
       fontSize: 15,
       fontWeight: 'bold',
       width: 28,
-      textAlign: 'left',
-      paddingTop: 0,
+      textAlign: 'right',
+      backgroundColor: 'red',
     },
   },
   separator: {

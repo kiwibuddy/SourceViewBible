@@ -103,8 +103,10 @@ export default class DiscoveryCenterOccurrences extends Component {
         <Text style={StyleSheet.styles.cell.occurrence}>{number}</Text>
         <View style={styles.listItem}>
           <Text numberOfLines={2} style={styles.body}>{occurrence.text}</Text>
-          <Text style={StyleSheet.styles.cell.subtitle}>{bcvReference}</Text>
-          <Text style={[StyleSheet.styles.cell.subtitle, {color: Colors.sources[role.key].tint}]}>{Localizable.t('so-reference', {source: occurrence.name, number: occurrence.number})}</Text>
+          <View style={styles.referenceContainer}>
+            <Text style={[StyleSheet.styles.cell.subtitle, {paddingRight: 8,}]}>{bcvReference}</Text>
+            <Text style={[StyleSheet.styles.cell.subtitle, {color: Colors.sources[role.key].tint}]}>{Localizable.t('so-reference', {source: occurrence.name, number: occurrence.number})}</Text>
+          </View>
         </View>
       </TouchableOpacity>
     );
@@ -145,10 +147,9 @@ const styles = StyleSheet.create({
   },
   separator: {
     ...StyleSheet.styles.separator,
-    marginLeft: 8,
   },
   listItemContainer: {
-    paddingLeft: 8,
+    paddingLeft: 5,
     paddingRight: 15,
     paddingVertical: 10,
     flexDirection: 'row',
@@ -156,11 +157,14 @@ const styles = StyleSheet.create({
   listItem: {
     flex: 1,
     flexDirection: 'column',
-    paddingLeft: 1,
+    paddingLeft: 5,
   },
   body: {
     paddingBottom: 5,
     color: '#59626A',
     fontSize: 15,
   },
+  referenceContainer: {
+    flexDirection: 'row',
+  }
 });
