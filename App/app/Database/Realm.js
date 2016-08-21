@@ -375,6 +375,14 @@ export class Book extends Realm.Object {
     return realm.objects('Book').filtered(filter, ...ids).sorted('textOrder');
   }
 
+  static identifiers(testament: ?number): Array<string> {
+    let books = Book.all();
+    if (testament != null) {
+      books = books.filtered('testament = $0', testament);
+    }
+    return books.map(book => book.id);
+  }
+
   countOfSourceType(sourceType: string): number {
     const count = this.sourceTypeCounts.find(count => count.string === sourceType);
     return count && count.count || 0;
@@ -704,13 +712,19 @@ export class Sphere extends Realm.Object {
     return realm.objects('Sphere').filtered(filter, ...ids).sorted('position');
   }
 
-  static wordCount(): number {
-    return Sphere.all().reduce((sum, sphere) => sum + sphere.wordCount, 0);
+  static countOfBible(testament: ?number): number {
+    return Sphere.all().reduce((count, sphere) => count + sphere.countOfBible(testament), 0);
   }
 
   countOfBook(bookID: string): number {
     const count = this.bookCounts.find(count => count.string === bookID);
     return count && count.count || 0;
+  }
+
+  countOfBible(testament: ?number): number {
+    const books = Book.identifiers(testament);
+    const filter = books.map((book, index) => `string = $${index}`).join(' OR ');
+    return this.bookCounts.filtered(filter, ...books).reduce((count, book) => count + book.count, 0);
   }
 
   color(color?: string): string {

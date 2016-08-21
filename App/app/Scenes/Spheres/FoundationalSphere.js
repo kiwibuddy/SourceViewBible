@@ -54,6 +54,7 @@ type State = {
   dataSource: any,
   selectedSegmentIndex: number,
   sphere: Object,
+  wordCount: number,
 };
 
 export default class FoundationalSphere extends Component {
@@ -72,13 +73,15 @@ export default class FoundationalSphere extends Component {
     this.state = {
       dataSource: dataSource,
       selectedSegmentIndex,
-      sphere
+      sphere,
+      wordCount: 0,
     };
   }
 
   componentDidMount() {
     this.setState({
-      dataSource: this._getDataSource(this.state.selectedSegmentIndex)
+      dataSource: this._getDataSource(this.state.selectedSegmentIndex),
+      wordCount: this._getWordCount(this.state.selectedSegmentIndex)
     });
   }
 
@@ -125,8 +128,8 @@ export default class FoundationalSphere extends Component {
   };
 
   _renderRow = (sphere: Object) => {
-    const wordCount = sphere.wordCount;
-    const spherePercent = (wordCount / Sphere.wordCount()) * 100;
+    const wordCount = sphere.countOfBible(this._getTestament(this.state.selectedSegmentIndex));
+    const spherePercent = (wordCount / this.state.wordCount) * 100;
     const colors = Colors.spheres[sphere.id];
 
     return (
@@ -161,12 +164,14 @@ export default class FoundationalSphere extends Component {
 
     this.setState({
       selectedSegmentIndex: value,
-      dataSource: this._getDataSource(value)
+      dataSource: this._getDataSource(value),
+      wordCount: this._getWordCount(value)
     });
   };
 
   _getDataSource = (segmentIndex: number) => {
     const spheres = Sphere.all();
+
     switch (segmentIndex) {
       case SEGMENT_INDEXES.OLD_TESTAMENT:
         return this.state.dataSource.cloneWithRowsAndSections({wholeBible: spheres});
@@ -178,6 +183,32 @@ export default class FoundationalSphere extends Component {
         return this.state.dataSource.cloneWithRowsAndSections({newTestament: spheres});
     }
   };
+
+  _getWordCount = (segmentIndex: number) => {
+    switch (segmentIndex) {
+      case SEGMENT_INDEXES.OLD_TESTAMENT:
+        return Sphere.countOfBible(0);
+
+      case SEGMENT_INDEXES.NEW_TESTAMENT:
+        return Sphere.countOfBible(1);
+
+      default:
+        return Sphere.countOfBible();
+    }
+  };
+
+  _getTestament = (segmentIndex: number) => {
+    switch (segmentIndex) {
+      case SEGMENT_INDEXES.OLD_TESTAMENT:
+        return 0;
+
+      case SEGMENT_INDEXES.NEW_TESTAMENT:
+        return 1;
+
+      default:
+        return null;
+    }
+  }
 }
 
 const styles = StyleSheet.create({
