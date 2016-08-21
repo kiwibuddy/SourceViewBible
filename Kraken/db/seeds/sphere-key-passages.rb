@@ -141,6 +141,11 @@ BOOK_TO_DJHREF = {
   "2 Thessalonians" => "2Th",
 }
 
+BOOK_NAME_MAP = {
+  "Psalm" => "Psalms",
+  "Song of Solomon" => "Song of Songs"
+};
+
 def references_from_pericope(pericope)
   recent_chapter = nil # e.g. in 12:1-8, remember that 12 is the chapter when we parse the 8
   recent_chapter = 1 unless pericope.book_has_chapters?
@@ -211,8 +216,11 @@ json = {}
               first_verse_object = verse_objects.first
               last_verse_object = verse_objects.last
               monads = {
+                "bookName": BOOK_NAME_MAP[pericope.book_name] || pericope.book_name,
                 "firstMonad": first_verse_object[:first_monad],
                 "lastMonad": last_verse_object[:last_monad],
+                "chapter": first_verse_object[:mdf_chapter],
+                "verse": first_verse_object[:mdf_verse_start]
               }
             else
               STDERR.puts "No result for #{sql}"

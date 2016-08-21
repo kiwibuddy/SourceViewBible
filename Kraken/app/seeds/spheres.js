@@ -21,14 +21,24 @@ export async function seedSphereObjects(emdros: Object, realm: Object) {
 
   realm.write(() => {
     const description = SPHERE_DESCRIPTIONS.foundational.description;
-    const passages = SPHERE_PASSAGES['Foundational'];
+    const passages = SPHERE_PASSAGES['Foundational'].map(passage => {
+      const book = realm.objects('Book').find(book => book.name === passage.monads[0].bookName);
+      if (!book) console.log(`No book ${passage.monads[0].bookName}`);
+      const monads = passage.monads.map(monad => ({...monad, book}));
+      return {...passage, monads};
+    });
     realm.create('Sphere', {id: "foundational", name: "Foundational", description, position: 0, passages});
   });
 
   SPHERES.forEach(sphere => {
     realm.write(() => {
       const description = SPHERE_DESCRIPTIONS[sphere.id].description;
-      const passages = SPHERE_PASSAGES[sphere.name];
+      const passages = SPHERE_PASSAGES[sphere.name].map(passage => {
+        const book = realm.objects('Book').find(book => book.name === passage.monads[0].bookName);
+        if (!book) console.log(`No book ${passage.monads[0].bookName}`);
+        const monads = passage.monads.map(monad => ({...monad, book}));
+        return {...passage, monads};
+      });
       realm.create('Sphere', {...sphere, description, passages});
     });
   })
@@ -81,7 +91,39 @@ async function seedSphereWordCounts(emdros, realm) {
           return bookAPercent > bookBPercent ? -1 : 1;
         });
 
-        realm.create('Sphere', {id: sphere.id, bookCount, bookCounts}, true);
+
+        let sourceCount = 0;
+        const sourceCounts = [];
+
+        for (let [index, actant] of realm.objects('Actant').filtered('isSource = $0', true).entries()) {
+          const wordCount = actant.sphereCounts.find(count => count.string === sphere.id).count || 0;
+          sourceCounts.push({
+            string: actant.id.toString(),
+            count: wordCount
+          });
+
+          if (wordCount > 0) {
+            sourceCount++;
+          }
+        }
+
+        sourceCounts.sort((countA, countB) => {
+          const sourceA = realm.objectForPrimaryKey('Actant', parseInt(countA.string));
+          const sourceAWordCount = countA.count;
+          const sourceAPercent = (sourceAWordCount / sourceA.wordCount) * 100;
+
+          const sourceB = realm.objectForPrimaryKey('Actant', parseInt(countB.string));
+          const sourceBWordCount = countB.count;
+          const sourceBPercent = (sourceBWordCount / sourceB.wordCount) * 100;
+
+          if (sourceAPercent == sourceBPercent) {
+            return sourceAWordCount > sourceBWordCount ? -1 : 1;
+          }
+          return sourceAPercent > sourceBPercent ? -1 : 1;
+        });
+
+
+        realm.create('Sphere', {id: sphere.id, bookCount, bookCounts, sourceCount, sourceCounts}, true);
       });
     });
 

@@ -7,8 +7,11 @@
       "reference": "Genesis 1:1",
       "monads": [
         {
+          "bookName": "Genesis",
           "firstMonad": 2,
-          "lastMonad": 80
+          "lastMonad": 80,
+          "chapter": 1,
+          "verse": 1
         }
       ]
     },
@@ -19,8 +22,11 @@
       "reference": "1 Timothy 1:17",
       "monads": [
         {
+          "bookName": "1 Timothy",
           "firstMonad": 1716919,
-          "lastMonad": 1716975
+          "lastMonad": 1716975,
+          "chapter": 1,
+          "verse": 17
         }
       ]
     },
@@ -31,8 +37,11 @@
       "reference": "Isaiah 57:15",
       "monads": [
         {
+          "bookName": "Isaiah",
           "firstMonad": 1056299,
-          "lastMonad": 1056395
+          "lastMonad": 1056395,
+          "chapter": 57,
+          "verse": 15
         }
       ]
     },
@@ -43,8 +52,11 @@
       "reference": "2 Corinthians 13:14",
       "monads": [
         {
+          "bookName": "2 Corinthians",
           "firstMonad": 1678780,
-          "lastMonad": 1678872
+          "lastMonad": 1678872,
+          "chapter": 13,
+          "verse": 14
         }
       ]
     },
@@ -55,8 +67,11 @@
       "reference": "Leviticus 11:44-45",
       "monads": [
         {
+          "bookName": "Leviticus",
           "firstMonad": 180083,
-          "lastMonad": 180227
+          "lastMonad": 180227,
+          "chapter": 11,
+          "verse": 44
         }
       ]
     },
@@ -67,12 +82,18 @@
       "reference": "1 John 4:7-8, 16",
       "monads": [
         {
+          "bookName": "1 John",
           "firstMonad": 1771811,
-          "lastMonad": 1771899
+          "lastMonad": 1771899,
+          "chapter": 4,
+          "verse": 7
         },
         {
+          "bookName": "1 John",
           "firstMonad": 1772244,
-          "lastMonad": 1772316
+          "lastMonad": 1772316,
+          "chapter": 4,
+          "verse": 16
         }
       ]
     },
@@ -83,8 +104,11 @@
       "reference": "Exodus 34:6-7",
       "monads": [
         {
+          "bookName": "Exodus",
           "firstMonad": 147639,
-          "lastMonad": 147825
+          "lastMonad": 147825,
+          "chapter": 34,
+          "verse": 6
         }
       ]
     },
@@ -95,8 +119,11 @@
       "reference": "Genesis 15:7-21",
       "monads": [
         {
+          "bookName": "Genesis",
           "firstMonad": 19446,
-          "lastMonad": 20200
+          "lastMonad": 20200,
+          "chapter": 15,
+          "verse": 7
         }
       ]
     },
@@ -107,12 +134,18 @@
       "reference": "John 1:14, 16-18",
       "monads": [
         {
+          "bookName": "John",
           "firstMonad": 1505277,
-          "lastMonad": 1505383
+          "lastMonad": 1505383,
+          "chapter": 1,
+          "verse": 14
         },
         {
+          "bookName": "John",
           "firstMonad": 1505472,
-          "lastMonad": 1505666
+          "lastMonad": 1505666,
+          "chapter": 1,
+          "verse": 16
         }
       ]
     },
@@ -123,8 +156,11 @@
       "reference": "Romans 5:6-8",
       "monads": [
         {
+          "bookName": "Romans",
           "firstMonad": 1616231,
-          "lastMonad": 1616375
+          "lastMonad": 1616375,
+          "chapter": 5,
+          "verse": 6
         }
       ]
     },
@@ -135,8 +171,11 @@
       "reference": "Revelation 1:18",
       "monads": [
         {
+          "bookName": "Revelation",
           "firstMonad": 1778916,
-          "lastMonad": 1778981
+          "lastMonad": 1778981,
+          "chapter": 1,
+          "verse": 18
         }
       ]
     },
@@ -147,8 +186,11 @@
       "reference": "Ezekiel 36:26-27",
       "monads": [
         {
+          "bookName": "Ezekiel",
           "firstMonad": 1222612,
-          "lastMonad": 1222744
+          "lastMonad": 1222744,
+          "chapter": 36,
+          "verse": 26
         }
       ]
     },
@@ -159,8 +201,11 @@
       "reference": "Genesis 1:26-27",
       "monads": [
         {
+          "bookName": "Genesis",
           "firstMonad": 1268,
-          "lastMonad": 1455
+          "lastMonad": 1455,
+          "chapter": 1,
+          "verse": 26
         }
       ]
     },
@@ -171,8 +216,11 @@
       "reference": "Galatians 3:28",
       "monads": [
         {
+          "bookName": "Galatians",
           "firstMonad": 1683791,
-          "lastMonad": 1683851
+          "lastMonad": 1683851,
+          "chapter": 3,
+          "verse": 28
         }
       ]
     },
@@ -183,8 +231,11 @@
       "reference": "Romans 3:23",
       "monads": [
         {
+          "bookName": "Romans",
           "firstMonad": 1613847,
-          "lastMonad": 1613877
+          "lastMonad": 1613877,
+          "chapter": 3,
+          "verse": 23
         }
       ]
     },
@@ -195,8 +246,11 @@
       "reference": "John 3:16-19",
       "monads": [
         {
+          "bookName": "John",
           "firstMonad": 1509648,
-          "lastMonad": 1509888
+          "lastMonad": 1509888,
+          "chapter": 3,
+          "verse": 16
         }
       ]
     },
@@ -207,8 +261,11 @@
       "reference": "Acts 17:24-28",
       "monads": [
         {
+          "bookName": "Acts",
           "firstMonad": 1586752,
-          "lastMonad": 1587079
+          "lastMonad": 1587079,
+          "chapter": 17,
+          "verse": 24
         }
       ]
     },
@@ -219,8 +276,11 @@
       "reference": "Mark 1:1",
       "monads": [
         {
+          "bookName": "Mark",
           "firstMonad": 1404520,
-          "lastMonad": 1404574
+          "lastMonad": 1404574,
+          "chapter": 1,
+          "verse": 1
         }
       ]
     },
@@ -231,8 +291,11 @@
       "reference": "Zechariah 14:9",
       "monads": [
         {
+          "bookName": "Zechariah",
           "firstMonad": 1339841,
-          "lastMonad": 1339892
+          "lastMonad": 1339892,
+          "chapter": 14,
+          "verse": 9
         }
       ]
     },
@@ -243,8 +306,11 @@
       "reference": "2 Peter 3:13",
       "monads": [
         {
+          "bookName": "2 Peter",
           "firstMonad": 1766891,
-          "lastMonad": 1766938
+          "lastMonad": 1766938,
+          "chapter": 3,
+          "verse": 13
         }
       ]
     },
@@ -255,8 +321,11 @@
       "reference": "Matthew 6:31-33",
       "monads": [
         {
+          "bookName": "Matthew",
           "firstMonad": 1355238,
-          "lastMonad": 1355386
+          "lastMonad": 1355386,
+          "chapter": 6,
+          "verse": 31
         }
       ]
     },
@@ -267,8 +336,11 @@
       "reference": "Matthew 5:13-16",
       "monads": [
         {
+          "bookName": "Matthew",
           "firstMonad": 1351206,
-          "lastMonad": 1351433
+          "lastMonad": 1351433,
+          "chapter": 5,
+          "verse": 13
         }
       ]
     },
@@ -279,8 +351,11 @@
       "reference": "John 14:12-14",
       "monads": [
         {
+          "bookName": "John",
           "firstMonad": 1538102,
-          "lastMonad": 1538254
+          "lastMonad": 1538254,
+          "chapter": 14,
+          "verse": 12
         }
       ]
     },
@@ -291,8 +366,11 @@
       "reference": "Habakkuk 2:14",
       "monads": [
         {
+          "bookName": "Habakkuk",
           "firstMonad": 1317833,
-          "lastMonad": 1317876
+          "lastMonad": 1317876,
+          "chapter": 2,
+          "verse": 14
         }
       ]
     },
@@ -303,8 +381,11 @@
       "reference": "Psalm 111:2-4",
       "monads": [
         {
+          "bookName": "Psalms",
           "firstMonad": 915268,
-          "lastMonad": 915362
+          "lastMonad": 915362,
+          "chapter": 111,
+          "verse": 2
         }
       ]
     },
@@ -315,8 +396,11 @@
       "reference": "2 Corinthians 5:17",
       "monads": [
         {
+          "bookName": "2 Corinthians",
           "firstMonad": 1668390,
-          "lastMonad": 1668440
+          "lastMonad": 1668440,
+          "chapter": 5,
+          "verse": 17
         }
       ]
     },
@@ -327,8 +411,11 @@
       "reference": "2 Chronicles 34:15",
       "monads": [
         {
+          "bookName": "2 Chronicles",
           "firstMonad": 739572,
-          "lastMonad": 739630
+          "lastMonad": 739630,
+          "chapter": 34,
+          "verse": 15
         }
       ]
     },
@@ -339,8 +426,11 @@
       "reference": "Exodus 20:1-17",
       "monads": [
         {
+          "bookName": "Exodus",
           "firstMonad": 120745,
-          "lastMonad": 121551
+          "lastMonad": 121551,
+          "chapter": 20,
+          "verse": 1
         }
       ]
     },
@@ -351,8 +441,11 @@
       "reference": "Romans 1:19-20",
       "monads": [
         {
+          "bookName": "Romans",
           "firstMonad": 1610200,
-          "lastMonad": 1610318
+          "lastMonad": 1610318,
+          "chapter": 1,
+          "verse": 19
         }
       ]
     },
@@ -363,8 +456,11 @@
       "reference": "2 Timothy 3:16-17",
       "monads": [
         {
+          "bookName": "2 Timothy",
           "firstMonad": 1725782,
-          "lastMonad": 1725899
+          "lastMonad": 1725899,
+          "chapter": 3,
+          "verse": 16
         }
       ]
     },
@@ -375,8 +471,11 @@
       "reference": "John 14:6",
       "monads": [
         {
+          "bookName": "John",
           "firstMonad": 1537697,
-          "lastMonad": 1537749
+          "lastMonad": 1537749,
+          "chapter": 14,
+          "verse": 6
         }
       ]
     },
@@ -387,8 +486,11 @@
       "reference": "Romans 12:1-2",
       "monads": [
         {
+          "bookName": "Romans",
           "firstMonad": 1628932,
-          "lastMonad": 1629158
+          "lastMonad": 1629158,
+          "chapter": 12,
+          "verse": 1
         }
       ]
     },
@@ -399,8 +501,11 @@
       "reference": "2 Corinthians 10:3-5",
       "monads": [
         {
+          "bookName": "2 Corinthians",
           "firstMonad": 1673582,
-          "lastMonad": 1673733
+          "lastMonad": 1673733,
+          "chapter": 10,
+          "verse": 3
         }
       ]
     },
@@ -411,8 +516,11 @@
       "reference": "James 3:13-18",
       "monads": [
         {
+          "bookName": "James",
           "firstMonad": 1753717,
-          "lastMonad": 1754055
+          "lastMonad": 1754055,
+          "chapter": 3,
+          "verse": 13
         }
       ]
     },
@@ -423,8 +531,11 @@
       "reference": "Genesis 6:5-6",
       "monads": [
         {
+          "bookName": "Genesis",
           "firstMonad": 7699,
-          "lastMonad": 7798
+          "lastMonad": 7798,
+          "chapter": 6,
+          "verse": 5
         }
       ]
     },
@@ -435,8 +546,11 @@
       "reference": "Ezekiel 18",
       "monads": [
         {
+          "bookName": "Ezekiel",
           "firstMonad": 1188513,
-          "lastMonad": 1190410
+          "lastMonad": 1190410,
+          "chapter": 18,
+          "verse": 1
         }
       ]
     },
@@ -447,8 +561,11 @@
       "reference": "Genesis 11:4-9",
       "monads": [
         {
+          "bookName": "Genesis",
           "firstMonad": 13932,
-          "lastMonad": 14294
+          "lastMonad": 14294,
+          "chapter": 11,
+          "verse": 4
         }
       ]
     },
@@ -459,8 +576,11 @@
       "reference": "Jeremiah 2:13",
       "monads": [
         {
+          "bookName": "Jeremiah",
           "firstMonad": 1069713,
-          "lastMonad": 1069779
+          "lastMonad": 1069779,
+          "chapter": 2,
+          "verse": 13
         }
       ]
     },
@@ -471,8 +591,11 @@
       "reference": "Job 28:28",
       "monads": [
         {
+          "bookName": "Job",
           "firstMonad": 824674,
-          "lastMonad": 824725
+          "lastMonad": 824725,
+          "chapter": 28,
+          "verse": 28
         }
       ]
     },
@@ -483,8 +606,11 @@
       "reference": "Deuteronomy 6:4-5",
       "monads": [
         {
+          "bookName": "Deuteronomy",
           "firstMonad": 298126,
-          "lastMonad": 298261
+          "lastMonad": 298261,
+          "chapter": 6,
+          "verse": 4
         }
       ]
     },
@@ -495,8 +621,11 @@
       "reference": "Leviticus 19:18",
       "monads": [
         {
+          "bookName": "Leviticus",
           "firstMonad": 196758,
-          "lastMonad": 196807
+          "lastMonad": 196807,
+          "chapter": 19,
+          "verse": 18
         }
       ]
     },
@@ -507,8 +636,11 @@
       "reference": "Matthew 6:9-13",
       "monads": [
         {
+          "bookName": "Matthew",
           "firstMonad": 1354086,
-          "lastMonad": 1354334
+          "lastMonad": 1354334,
+          "chapter": 6,
+          "verse": 9
         }
       ]
     },
@@ -519,8 +651,11 @@
       "reference": "Matthew 7:12",
       "monads": [
         {
+          "bookName": "Matthew",
           "firstMonad": 1356110,
-          "lastMonad": 1356168
+          "lastMonad": 1356168,
+          "chapter": 7,
+          "verse": 12
         }
       ]
     },
@@ -531,8 +666,11 @@
       "reference": "1 Timothy 2:3-6",
       "monads": [
         {
+          "bookName": "1 Timothy",
           "firstMonad": 1717268,
-          "lastMonad": 1717406
+          "lastMonad": 1717406,
+          "chapter": 2,
+          "verse": 3
         }
       ]
     },
@@ -543,8 +681,11 @@
       "reference": "Isaiah 28:16-17",
       "monads": [
         {
+          "bookName": "Isaiah",
           "firstMonad": 1018085,
-          "lastMonad": 1018364
+          "lastMonad": 1018364,
+          "chapter": 28,
+          "verse": 16
         }
       ]
     },
@@ -555,8 +696,11 @@
       "reference": "Mark 16:15",
       "monads": [
         {
+          "bookName": "Mark",
           "firstMonad": 1441927,
-          "lastMonad": 1441966
+          "lastMonad": 1441966,
+          "chapter": 16,
+          "verse": 15
         }
       ]
     },
@@ -567,8 +711,11 @@
       "reference": "Matthew 28:18-20",
       "monads": [
         {
+          "bookName": "Matthew",
           "firstMonad": 1404347,
-          "lastMonad": 1404518
+          "lastMonad": 1404518,
+          "chapter": 28,
+          "verse": 18
         }
       ]
     },
@@ -579,8 +726,11 @@
       "reference": "Philippians 2:5-11",
       "monads": [
         {
+          "bookName": "Philippians",
           "firstMonad": 1698670,
-          "lastMonad": 1699006
+          "lastMonad": 1699006,
+          "chapter": 2,
+          "verse": 5
         }
       ]
     },
@@ -591,8 +741,11 @@
       "reference": "John 15:1-17",
       "monads": [
         {
+          "bookName": "John",
           "firstMonad": 1539318,
-          "lastMonad": 1540109
+          "lastMonad": 1540109,
+          "chapter": 15,
+          "verse": 1
         }
       ]
     },
@@ -603,8 +756,11 @@
       "reference": "1 Chronicles 4:9-10",
       "monads": [
         {
+          "bookName": "1 Chronicles",
           "firstMonad": 642264,
-          "lastMonad": 642446
+          "lastMonad": 642446,
+          "chapter": 4,
+          "verse": 9
         }
       ]
     },
@@ -615,8 +771,11 @@
       "reference": "2 Corinthians 10:13-14",
       "monads": [
         {
+          "bookName": "2 Corinthians",
           "firstMonad": 1674153,
-          "lastMonad": 1674311
+          "lastMonad": 1674311,
+          "chapter": 10,
+          "verse": 13
         }
       ]
     },
@@ -627,8 +786,11 @@
       "reference": "1 Corinthians 10:31",
       "monads": [
         {
+          "bookName": "1 Corinthians",
           "firstMonad": 1650905,
-          "lastMonad": 1650946
+          "lastMonad": 1650946,
+          "chapter": 10,
+          "verse": 31
         }
       ]
     }
@@ -641,8 +803,11 @@
       "reference": "1 John 3:1-2",
       "monads": [
         {
+          "bookName": "1 John",
           "firstMonad": 1769880,
-          "lastMonad": 1770062
+          "lastMonad": 1770062,
+          "chapter": 3,
+          "verse": 1
         }
       ]
     },
@@ -653,8 +818,11 @@
       "reference": "Isaiah 49:15",
       "monads": [
         {
+          "bookName": "Isaiah",
           "firstMonad": 1047746,
-          "lastMonad": 1047810
+          "lastMonad": 1047810,
+          "chapter": 49,
+          "verse": 15
         }
       ]
     },
@@ -665,8 +833,11 @@
       "reference": "Psalm 68:5-6",
       "monads": [
         {
+          "bookName": "Psalms",
           "firstMonad": 880761,
-          "lastMonad": 880848
+          "lastMonad": 880848,
+          "chapter": 68,
+          "verse": 5
         }
       ]
     },
@@ -677,8 +848,11 @@
       "reference": "Luke 3:38",
       "monads": [
         {
+          "bookName": "Luke",
           "firstMonad": 1450791,
-          "lastMonad": 1450881
+          "lastMonad": 1450881,
+          "chapter": 3,
+          "verse": 38
         }
       ]
     },
@@ -689,8 +863,11 @@
       "reference": "Hosea 3:1",
       "monads": [
         {
+          "bookName": "Hosea",
           "firstMonad": 1276675,
-          "lastMonad": 1276798
+          "lastMonad": 1276798,
+          "chapter": 3,
+          "verse": 1
         }
       ]
     },
@@ -701,8 +878,11 @@
       "reference": "Genesis 12:1-3",
       "monads": [
         {
+          "bookName": "Genesis",
           "firstMonad": 15506,
-          "lastMonad": 15674
+          "lastMonad": 15674,
+          "chapter": 12,
+          "verse": 1
         }
       ]
     },
@@ -713,8 +893,11 @@
       "reference": "Genesis 18:18-19",
       "monads": [
         {
+          "bookName": "Genesis",
           "firstMonad": 23663,
-          "lastMonad": 23797
+          "lastMonad": 23797,
+          "chapter": 18,
+          "verse": 18
         }
       ]
     },
@@ -725,8 +908,11 @@
       "reference": "Psalm 90:1",
       "monads": [
         {
+          "bookName": "Psalms",
           "firstMonad": 900012,
-          "lastMonad": 900032
+          "lastMonad": 900032,
+          "chapter": 90,
+          "verse": 1
         }
       ]
     },
@@ -737,8 +923,11 @@
       "reference": "Genesis 22:1-18",
       "monads": [
         {
+          "bookName": "Genesis",
           "firstMonad": 29872,
-          "lastMonad": 31019
+          "lastMonad": 31019,
+          "chapter": 22,
+          "verse": 1
         }
       ]
     },
@@ -749,8 +938,11 @@
       "reference": "Numbers 25:1-9",
       "monads": [
         {
+          "bookName": "Numbers",
           "firstMonad": 264050,
-          "lastMonad": 264587
+          "lastMonad": 264587,
+          "chapter": 25,
+          "verse": 1
         }
       ]
     },
@@ -761,8 +953,11 @@
       "reference": "Joshua 24:15",
       "monads": [
         {
+          "bookName": "Joshua",
           "firstMonad": 384819,
-          "lastMonad": 384933
+          "lastMonad": 384933,
+          "chapter": 24,
+          "verse": 15
         }
       ]
     },
@@ -773,8 +968,11 @@
       "reference": "Nehemiah 4:13-14",
       "monads": [
         {
+          "bookName": "Nehemiah",
           "firstMonad": 767983,
-          "lastMonad": 768166
+          "lastMonad": 768166,
+          "chapter": 4,
+          "verse": 13
         }
       ]
     },
@@ -785,12 +983,18 @@
       "reference": "Genesis 2:18, 21-25",
       "monads": [
         {
+          "bookName": "Genesis",
           "firstMonad": 2555,
-          "lastMonad": 2612
+          "lastMonad": 2612,
+          "chapter": 2,
+          "verse": 18
         },
         {
+          "bookName": "Genesis",
           "firstMonad": 2782,
-          "lastMonad": 3062
+          "lastMonad": 3062,
+          "chapter": 2,
+          "verse": 21
         }
       ]
     },
@@ -801,12 +1005,18 @@
       "reference": "Leviticus 21:7, 13-15",
       "monads": [
         {
+          "bookName": "Leviticus",
           "firstMonad": 200017,
-          "lastMonad": 200089
+          "lastMonad": 200089,
+          "chapter": 21,
+          "verse": 7
         },
         {
+          "bookName": "Leviticus",
           "firstMonad": 200445,
-          "lastMonad": 200575
+          "lastMonad": 200575,
+          "chapter": 21,
+          "verse": 13
         }
       ]
     },
@@ -817,8 +1027,11 @@
       "reference": "Song of Solomon 5:1",
       "monads": [
         {
+          "bookName": "Song of Songs",
           "firstMonad": 983290,
-          "lastMonad": 983393
+          "lastMonad": 983393,
+          "chapter": 5,
+          "verse": 1
         }
       ]
     },
@@ -829,8 +1042,11 @@
       "reference": "Hebrews 13:4",
       "monads": [
         {
+          "bookName": "Hebrews",
           "firstMonad": 1748890,
-          "lastMonad": 1748944
+          "lastMonad": 1748944,
+          "chapter": 13,
+          "verse": 4
         }
       ]
     },
@@ -841,8 +1057,11 @@
       "reference": "Ephesians 5:21-6:9",
       "monads": [
         {
+          "bookName": "Ephesians",
           "firstMonad": 1694731,
-          "lastMonad": 1695813
+          "lastMonad": 1695813,
+          "chapter": 5,
+          "verse": 21
         }
       ]
     },
@@ -853,12 +1072,18 @@
       "reference": "1 Corinthians 7:2-16, 32-34",
       "monads": [
         {
+          "bookName": "1 Corinthians",
           "firstMonad": 1644253,
-          "lastMonad": 1645253
+          "lastMonad": 1645253,
+          "chapter": 7,
+          "verse": 2
         },
         {
+          "bookName": "1 Corinthians",
           "firstMonad": 1646186,
-          "lastMonad": 1646395
+          "lastMonad": 1646395,
+          "chapter": 7,
+          "verse": 32
         }
       ]
     },
@@ -869,8 +1094,11 @@
       "reference": "Proverbs 5:15-23",
       "monads": [
         {
+          "bookName": "Proverbs",
           "firstMonad": 941290,
-          "lastMonad": 941675
+          "lastMonad": 941675,
+          "chapter": 5,
+          "verse": 15
         }
       ]
     },
@@ -881,8 +1109,11 @@
       "reference": "Deuteronomy 5:18",
       "monads": [
         {
+          "bookName": "Deuteronomy",
           "firstMonad": 296970,
-          "lastMonad": 296983
+          "lastMonad": 296983,
+          "chapter": 5,
+          "verse": 18
         }
       ]
     },
@@ -893,8 +1124,11 @@
       "reference": "Psalm 51",
       "monads": [
         {
+          "bookName": "Psalms",
           "firstMonad": 871115,
-          "lastMonad": 871905
+          "lastMonad": 871905,
+          "chapter": 51,
+          "verse": 1
         }
       ]
     },
@@ -905,8 +1139,11 @@
       "reference": "2 Chronicles 11:18-21",
       "monads": [
         {
+          "bookName": "2 Chronicles",
           "firstMonad": 702645,
-          "lastMonad": 702833
+          "lastMonad": 702833,
+          "chapter": 11,
+          "verse": 18
         }
       ]
     },
@@ -917,8 +1154,11 @@
       "reference": "Mark 12:18-27",
       "monads": [
         {
+          "bookName": "Mark",
           "firstMonad": 1430490,
-          "lastMonad": 1431106
+          "lastMonad": 1431106,
+          "chapter": 12,
+          "verse": 18
         }
       ]
     },
@@ -929,8 +1169,11 @@
       "reference": "Malachi 2:14-16",
       "monads": [
         {
+          "bookName": "Malachi",
           "firstMonad": 1342996,
-          "lastMonad": 1343378
+          "lastMonad": 1343378,
+          "chapter": 2,
+          "verse": 14
         }
       ]
     },
@@ -941,8 +1184,11 @@
       "reference": "Psalm 127:3-5",
       "monads": [
         {
+          "bookName": "Psalms",
           "firstMonad": 926052,
-          "lastMonad": 926167
+          "lastMonad": 926167,
+          "chapter": 127,
+          "verse": 3
         }
       ]
     },
@@ -953,8 +1199,11 @@
       "reference": "Psalm 139:13-16",
       "monads": [
         {
+          "bookName": "Psalms",
           "firstMonad": 930818,
-          "lastMonad": 931000
+          "lastMonad": 931000,
+          "chapter": 139,
+          "verse": 13
         }
       ]
     },
@@ -965,8 +1214,11 @@
       "reference": "Genesis 4:1",
       "monads": [
         {
+          "bookName": "Genesis",
           "firstMonad": 4641,
-          "lastMonad": 4770
+          "lastMonad": 4770,
+          "chapter": 4,
+          "verse": 1
         }
       ]
     },
@@ -977,8 +1229,11 @@
       "reference": "Genesis 15:1-6",
       "monads": [
         {
+          "bookName": "Genesis",
           "firstMonad": 19081,
-          "lastMonad": 19445
+          "lastMonad": 19445,
+          "chapter": 15,
+          "verse": 1
         }
       ]
     },
@@ -989,8 +1244,11 @@
       "reference": "1 Samuel 1:10-11",
       "monads": [
         {
+          "bookName": "1 Samuel",
           "firstMonad": 431935,
-          "lastMonad": 432122
+          "lastMonad": 432122,
+          "chapter": 1,
+          "verse": 10
         }
       ]
     },
@@ -1001,8 +1259,11 @@
       "reference": "1 Chronicles 1:1-2",
       "monads": [
         {
+          "bookName": "1 Chronicles",
           "firstMonad": 635901,
-          "lastMonad": 635929
+          "lastMonad": 635929,
+          "chapter": 1,
+          "verse": 1
         }
       ]
     },
@@ -1013,8 +1274,11 @@
       "reference": "Leviticus 10:19-20",
       "monads": [
         {
+          "bookName": "Leviticus",
           "firstMonad": 177813,
-          "lastMonad": 177940
+          "lastMonad": 177940,
+          "chapter": 10,
+          "verse": 19
         }
       ]
     },
@@ -1025,8 +1289,11 @@
       "reference": "Luke 2:41-52",
       "monads": [
         {
+          "bookName": "Luke",
           "firstMonad": 1447710,
-          "lastMonad": 1448261
+          "lastMonad": 1448261,
+          "chapter": 2,
+          "verse": 41
         }
       ]
     },
@@ -1037,8 +1304,11 @@
       "reference": "Deuteronomy 5:16",
       "monads": [
         {
+          "bookName": "Deuteronomy",
           "firstMonad": 296891,
-          "lastMonad": 296957
+          "lastMonad": 296957,
+          "chapter": 5,
+          "verse": 16
         }
       ]
     },
@@ -1049,8 +1319,11 @@
       "reference": "Proverbs 1:8",
       "monads": [
         {
+          "bookName": "Proverbs",
           "firstMonad": 936894,
-          "lastMonad": 936949
+          "lastMonad": 936949,
+          "chapter": 1,
+          "verse": 8
         }
       ]
     },
@@ -1061,8 +1334,11 @@
       "reference": "Proverbs 3:11-12",
       "monads": [
         {
+          "bookName": "Proverbs",
           "firstMonad": 938925,
-          "lastMonad": 939040
+          "lastMonad": 939040,
+          "chapter": 3,
+          "verse": 11
         }
       ]
     },
@@ -1073,8 +1349,11 @@
       "reference": "Deuteronomy 29:29",
       "monads": [
         {
+          "bookName": "Deuteronomy",
           "firstMonad": 336933,
-          "lastMonad": 337025
+          "lastMonad": 337025,
+          "chapter": 29,
+          "verse": 29
         }
       ]
     },
@@ -1085,8 +1364,11 @@
       "reference": "Deuteronomy 5:8-10",
       "monads": [
         {
+          "bookName": "Deuteronomy",
           "firstMonad": 296316,
-          "lastMonad": 296553
+          "lastMonad": 296553,
+          "chapter": 5,
+          "verse": 8
         }
       ]
     },
@@ -1097,8 +1379,11 @@
       "reference": "Malachi 4:5-6",
       "monads": [
         {
+          "bookName": "Malachi",
           "firstMonad": 1345265,
-          "lastMonad": 1345373
+          "lastMonad": 1345373,
+          "chapter": 4,
+          "verse": 5
         }
       ]
     },
@@ -1109,8 +1394,11 @@
       "reference": "Romans 8:14-15",
       "monads": [
         {
+          "bookName": "Romans",
           "firstMonad": 1621234,
-          "lastMonad": 1621394
+          "lastMonad": 1621394,
+          "chapter": 8,
+          "verse": 14
         }
       ]
     },
@@ -1121,8 +1409,11 @@
       "reference": "2 Chronicles 31:15-16",
       "monads": [
         {
+          "bookName": "2 Chronicles",
           "firstMonad": 734036,
-          "lastMonad": 734206
+          "lastMonad": 734206,
+          "chapter": 31,
+          "verse": 15
         }
       ]
     },
@@ -1133,12 +1424,18 @@
       "reference": "1 Timothy 5:3-4, 8",
       "monads": [
         {
+          "bookName": "1 Timothy",
           "firstMonad": 1719927,
-          "lastMonad": 1720033
+          "lastMonad": 1720033,
+          "chapter": 5,
+          "verse": 3
         },
         {
+          "bookName": "1 Timothy",
           "firstMonad": 1720167,
-          "lastMonad": 1720224
+          "lastMonad": 1720224,
+          "chapter": 5,
+          "verse": 8
         }
       ]
     },
@@ -1149,8 +1446,11 @@
       "reference": "Exodus 22:22-23",
       "monads": [
         {
+          "bookName": "Exodus",
           "firstMonad": 125838,
-          "lastMonad": 125905
+          "lastMonad": 125905,
+          "chapter": 22,
+          "verse": 22
         }
       ]
     },
@@ -1161,8 +1461,11 @@
       "reference": "Ruth 3:7-4:13",
       "monads": [
         {
+          "bookName": "Ruth",
           "firstMonad": 428962,
-          "lastMonad": 430855
+          "lastMonad": 430855,
+          "chapter": 3,
+          "verse": 7
         }
       ]
     },
@@ -1173,8 +1476,11 @@
       "reference": "2 Samuel 9:1",
       "monads": [
         {
+          "bookName": "2 Samuel",
           "firstMonad": 497025,
-          "lastMonad": 497075
+          "lastMonad": 497075,
+          "chapter": 9,
+          "verse": 1
         }
       ]
     },
@@ -1185,12 +1491,18 @@
       "reference": "Nehemiah 3:23, 28",
       "monads": [
         {
+          "bookName": "Nehemiah",
           "firstMonad": 766543,
-          "lastMonad": 766604
+          "lastMonad": 766604,
+          "chapter": 3,
+          "verse": 23
         },
         {
+          "bookName": "Nehemiah",
           "firstMonad": 766858,
-          "lastMonad": 766903
+          "lastMonad": 766903,
+          "chapter": 3,
+          "verse": 28
         }
       ]
     },
@@ -1201,8 +1513,11 @@
       "reference": "Proverbs 27:10",
       "monads": [
         {
+          "bookName": "Proverbs",
           "firstMonad": 963597,
-          "lastMonad": 963678
+          "lastMonad": 963678,
+          "chapter": 27,
+          "verse": 10
         }
       ]
     },
@@ -1213,8 +1528,11 @@
       "reference": "Acts 5:1-10",
       "monads": [
         {
+          "bookName": "Acts",
           "firstMonad": 1559414,
-          "lastMonad": 1559990
+          "lastMonad": 1559990,
+          "chapter": 5,
+          "verse": 1
         }
       ]
     },
@@ -1225,8 +1543,11 @@
       "reference": "2 Chronicles 25:4",
       "monads": [
         {
+          "bookName": "2 Chronicles",
           "firstMonad": 722136,
-          "lastMonad": 722279
+          "lastMonad": 722279,
+          "chapter": 25,
+          "verse": 4
         }
       ]
     },
@@ -1237,8 +1558,11 @@
       "reference": "Luke 11:27",
       "monads": [
         {
+          "bookName": "Luke",
           "firstMonad": 1472430,
-          "lastMonad": 1472491
+          "lastMonad": 1472491,
+          "chapter": 11,
+          "verse": 27
         }
       ]
     },
@@ -1249,8 +1573,11 @@
       "reference": "Psalm 78:1-8",
       "monads": [
         {
+          "bookName": "Psalms",
           "firstMonad": 889469,
-          "lastMonad": 889806
+          "lastMonad": 889806,
+          "chapter": 78,
+          "verse": 1
         }
       ]
     },
@@ -1261,8 +1588,11 @@
       "reference": "1 Timothy 5:1-2",
       "monads": [
         {
+          "bookName": "1 Timothy",
           "firstMonad": 1719807,
-          "lastMonad": 1719926
+          "lastMonad": 1719926,
+          "chapter": 5,
+          "verse": 1
         }
       ]
     },
@@ -1273,8 +1603,11 @@
       "reference": "Exodus 12:1-4",
       "monads": [
         {
+          "bookName": "Exodus",
           "firstMonad": 105312,
-          "lastMonad": 105538
+          "lastMonad": 105538,
+          "chapter": 12,
+          "verse": 1
         }
       ]
     }
@@ -1287,8 +1620,11 @@
       "reference": "Isaiah 42:5-7",
       "monads": [
         {
+          "bookName": "Isaiah",
           "firstMonad": 1037203,
-          "lastMonad": 1037427
+          "lastMonad": 1037427,
+          "chapter": 42,
+          "verse": 5
         }
       ]
     },
@@ -1299,8 +1635,11 @@
       "reference": "Isaiah 43:19",
       "monads": [
         {
+          "bookName": "Isaiah",
           "firstMonad": 1039464,
-          "lastMonad": 1039536
+          "lastMonad": 1039536,
+          "chapter": 43,
+          "verse": 19
         }
       ]
     },
@@ -1311,8 +1650,11 @@
       "reference": "Psalm 147:8-9",
       "monads": [
         {
+          "bookName": "Psalms",
           "firstMonad": 935272,
-          "lastMonad": 935344
+          "lastMonad": 935344,
+          "chapter": 147,
+          "verse": 8
         }
       ]
     },
@@ -1323,8 +1665,11 @@
       "reference": "Deuteronomy 29:5-6",
       "monads": [
         {
+          "bookName": "Deuteronomy",
           "firstMonad": 335442,
-          "lastMonad": 335542
+          "lastMonad": 335542,
+          "chapter": 29,
+          "verse": 5
         }
       ]
     },
@@ -1335,8 +1680,11 @@
       "reference": "Exodus 15:23-26",
       "monads": [
         {
+          "bookName": "Exodus",
           "firstMonad": 113343,
-          "lastMonad": 113672
+          "lastMonad": 113672,
+          "chapter": 15,
+          "verse": 23
         }
       ]
     },
@@ -1347,8 +1695,11 @@
       "reference": "Isaiah 53:5",
       "monads": [
         {
+          "bookName": "Isaiah",
           "firstMonad": 1052263,
-          "lastMonad": 1052319
+          "lastMonad": 1052319,
+          "chapter": 53,
+          "verse": 5
         }
       ]
     },
@@ -1359,8 +1710,11 @@
       "reference": "Genesis 2:19-20",
       "monads": [
         {
+          "bookName": "Genesis",
           "firstMonad": 2613,
-          "lastMonad": 2781
+          "lastMonad": 2781,
+          "chapter": 2,
+          "verse": 19
         }
       ]
     },
@@ -1371,8 +1725,11 @@
       "reference": "Numbers 13:17-20",
       "monads": [
         {
+          "bookName": "Numbers",
           "firstMonad": 240766,
-          "lastMonad": 240996
+          "lastMonad": 240996,
+          "chapter": 13,
+          "verse": 17
         }
       ]
     },
@@ -1383,8 +1740,11 @@
       "reference": "Nehemiah 2:12-18",
       "monads": [
         {
+          "bookName": "Nehemiah",
           "firstMonad": 764223,
-          "lastMonad": 764783
+          "lastMonad": 764783,
+          "chapter": 2,
+          "verse": 12
         }
       ]
     },
@@ -1395,8 +1755,11 @@
       "reference": "Genesis 30:27-43",
       "monads": [
         {
+          "bookName": "Genesis",
           "firstMonad": 47364,
-          "lastMonad": 48435
+          "lastMonad": 48435,
+          "chapter": 30,
+          "verse": 27
         }
       ]
     },
@@ -1407,12 +1770,18 @@
       "reference": "Judges 5:6, 10",
       "monads": [
         {
+          "bookName": "Judges",
           "firstMonad": 393213,
-          "lastMonad": 393266
+          "lastMonad": 393266,
+          "chapter": 5,
+          "verse": 6
         },
         {
+          "bookName": "Judges",
           "firstMonad": 393415,
-          "lastMonad": 393463
+          "lastMonad": 393463,
+          "chapter": 5,
+          "verse": 10
         }
       ]
     },
@@ -1423,8 +1792,11 @@
       "reference": "2 Kings 20:20",
       "monads": [
         {
+          "bookName": "2 Kings",
           "firstMonad": 625606,
-          "lastMonad": 625707
+          "lastMonad": 625707,
+          "chapter": 20,
+          "verse": 20
         }
       ]
     },
@@ -1435,8 +1807,11 @@
       "reference": "2 Chronicles 26:14-15",
       "monads": [
         {
+          "bookName": "2 Chronicles",
           "firstMonad": 725001,
-          "lastMonad": 725166
+          "lastMonad": 725166,
+          "chapter": 26,
+          "verse": 14
         }
       ]
     },
@@ -1447,8 +1822,11 @@
       "reference": "Matthew 10:1",
       "monads": [
         {
+          "bookName": "Matthew",
           "firstMonad": 1360940,
-          "lastMonad": 1360997
+          "lastMonad": 1360997,
+          "chapter": 10,
+          "verse": 1
         }
       ]
     },
@@ -1459,8 +1837,11 @@
       "reference": "John 9:1-3",
       "monads": [
         {
+          "bookName": "John",
           "firstMonad": 1525453,
-          "lastMonad": 1525600
+          "lastMonad": 1525600,
+          "chapter": 9,
+          "verse": 1
         }
       ]
     },
@@ -1471,8 +1852,11 @@
       "reference": "Luke 13:10-17",
       "monads": [
         {
+          "bookName": "Luke",
           "firstMonad": 1477892,
-          "lastMonad": 1478329
+          "lastMonad": 1478329,
+          "chapter": 13,
+          "verse": 10
         }
       ]
     },
@@ -1483,8 +1867,11 @@
       "reference": "2 Kings 5:1-14",
       "monads": [
         {
+          "bookName": "2 Kings",
           "firstMonad": 591399,
-          "lastMonad": 592581
+          "lastMonad": 592581,
+          "chapter": 5,
+          "verse": 1
         }
       ]
     },
@@ -1495,8 +1882,11 @@
       "reference": "Mark 5:25-34",
       "monads": [
         {
+          "bookName": "Mark",
           "firstMonad": 1413515,
-          "lastMonad": 1413990
+          "lastMonad": 1413990,
+          "chapter": 5,
+          "verse": 25
         }
       ]
     },
@@ -1507,8 +1897,11 @@
       "reference": "Matthew 25:33-46",
       "monads": [
         {
+          "bookName": "Matthew",
           "firstMonad": 1395302,
-          "lastMonad": 1396099
+          "lastMonad": 1396099,
+          "chapter": 25,
+          "verse": 33
         }
       ]
     },
@@ -1519,8 +1912,11 @@
       "reference": "Revelation 21:3-4",
       "monads": [
         {
+          "bookName": "Revelation",
           "firstMonad": 1802205,
-          "lastMonad": 1802371
+          "lastMonad": 1802371,
+          "chapter": 21,
+          "verse": 3
         }
       ]
     },
@@ -1531,12 +1927,18 @@
       "reference": "Genesis 2:8-9, 15",
       "monads": [
         {
+          "bookName": "Genesis",
           "firstMonad": 2095,
-          "lastMonad": 2233
+          "lastMonad": 2233,
+          "chapter": 2,
+          "verse": 8
         },
         {
+          "bookName": "Genesis",
           "firstMonad": 2431,
-          "lastMonad": 2468
+          "lastMonad": 2468,
+          "chapter": 2,
+          "verse": 15
         }
       ]
     },
@@ -1547,12 +1949,18 @@
       "reference": "Deuteronomy 28:1-6, 15-19",
       "monads": [
         {
+          "bookName": "Deuteronomy",
           "firstMonad": 331216,
-          "lastMonad": 331416
+          "lastMonad": 331416,
+          "chapter": 28,
+          "verse": 1
         },
         {
+          "bookName": "Deuteronomy",
           "firstMonad": 331957,
-          "lastMonad": 332125
+          "lastMonad": 332125,
+          "chapter": 28,
+          "verse": 15
         }
       ]
     },
@@ -1563,8 +1971,11 @@
       "reference": "Genesis 2:2-3",
       "monads": [
         {
+          "bookName": "Genesis",
           "firstMonad": 1761,
-          "lastMonad": 1870
+          "lastMonad": 1870,
+          "chapter": 2,
+          "verse": 2
         }
       ]
     },
@@ -1575,8 +1986,11 @@
       "reference": "Leviticus 25",
       "monads": [
         {
+          "bookName": "Leviticus",
           "firstMonad": 207716,
-          "lastMonad": 211119
+          "lastMonad": 211119,
+          "chapter": 25,
+          "verse": 1
         }
       ]
     },
@@ -1587,8 +2001,11 @@
       "reference": "Leviticus 19:35-36",
       "monads": [
         {
+          "bookName": "Leviticus",
           "firstMonad": 197700,
-          "lastMonad": 197837
+          "lastMonad": 197837,
+          "chapter": 19,
+          "verse": 35
         }
       ]
     },
@@ -1599,8 +2016,11 @@
       "reference": "2 Chronicles 20:35-37",
       "monads": [
         {
+          "bookName": "2 Chronicles",
           "firstMonad": 715346,
-          "lastMonad": 715561
+          "lastMonad": 715561,
+          "chapter": 20,
+          "verse": 35
         }
       ]
     },
@@ -1611,8 +2031,11 @@
       "reference": "Mark 11:15-17",
       "monads": [
         {
+          "bookName": "Mark",
           "firstMonad": 1428452,
-          "lastMonad": 1428664
+          "lastMonad": 1428664,
+          "chapter": 11,
+          "verse": 15
         }
       ]
     },
@@ -1623,8 +2046,11 @@
       "reference": "Isaiah 28:24-29",
       "monads": [
         {
+          "bookName": "Isaiah",
           "firstMonad": 1018691,
-          "lastMonad": 1018986
+          "lastMonad": 1018986,
+          "chapter": 28,
+          "verse": 24
         }
       ]
     },
@@ -1635,8 +2061,11 @@
       "reference": "Joel 2:23-26",
       "monads": [
         {
+          "bookName": "Joel",
           "firstMonad": 1289832,
-          "lastMonad": 1290118
+          "lastMonad": 1290118,
+          "chapter": 2,
+          "verse": 23
         }
       ]
     },
@@ -1647,8 +2076,11 @@
       "reference": "Habakkuk 3:17-18",
       "monads": [
         {
+          "bookName": "Habakkuk",
           "firstMonad": 1319152,
-          "lastMonad": 1319277
+          "lastMonad": 1319277,
+          "chapter": 3,
+          "verse": 17
         }
       ]
     },
@@ -1659,8 +2091,11 @@
       "reference": "Deuteronomy 24:17-22",
       "monads": [
         {
+          "bookName": "Deuteronomy",
           "firstMonad": 327138,
-          "lastMonad": 327521
+          "lastMonad": 327521,
+          "chapter": 24,
+          "verse": 17
         }
       ]
     },
@@ -1671,8 +2106,11 @@
       "reference": "Exodus 2:23-25",
       "monads": [
         {
+          "bookName": "Exodus",
           "firstMonad": 89867,
-          "lastMonad": 90026
+          "lastMonad": 90026,
+          "chapter": 2,
+          "verse": 23
         }
       ]
     },
@@ -1683,8 +2121,11 @@
       "reference": "Philemon 10-19",
       "monads": [
         {
+          "bookName": "Philemon",
           "firstMonad": 1730293,
-          "lastMonad": 1730808
+          "lastMonad": 1730808,
+          "chapter": 1,
+          "verse": 10
         }
       ]
     },
@@ -1695,8 +2136,11 @@
       "reference": "Deuteronomy 5:19",
       "monads": [
         {
+          "bookName": "Deuteronomy",
           "firstMonad": 296984,
-          "lastMonad": 296995
+          "lastMonad": 296995,
+          "chapter": 5,
+          "verse": 19
         }
       ]
     },
@@ -1707,8 +2151,11 @@
       "reference": "2 Thessalonians 3:6-12",
       "monads": [
         {
+          "bookName": "2 Thessalonians",
           "firstMonad": 1715248,
-          "lastMonad": 1715651
+          "lastMonad": 1715651,
+          "chapter": 3,
+          "verse": 6
         }
       ]
     },
@@ -1719,8 +2166,11 @@
       "reference": "Ephesians 4:28",
       "monads": [
         {
+          "bookName": "Ephesians",
           "firstMonad": 1693616,
-          "lastMonad": 1693669
+          "lastMonad": 1693669,
+          "chapter": 4,
+          "verse": 28
         }
       ]
     },
@@ -1731,8 +2181,11 @@
       "reference": "Matthew 23:23-24",
       "monads": [
         {
+          "bookName": "Matthew",
           "firstMonad": 1389801,
-          "lastMonad": 1390019
+          "lastMonad": 1390019,
+          "chapter": 23,
+          "verse": 23
         }
       ]
     },
@@ -1743,8 +2196,11 @@
       "reference": "Proverbs 11:24-25",
       "monads": [
         {
+          "bookName": "Proverbs",
           "firstMonad": 947488,
-          "lastMonad": 947539
+          "lastMonad": 947539,
+          "chapter": 11,
+          "verse": 24
         }
       ]
     },
@@ -1755,8 +2211,11 @@
       "reference": "Malachi 3:10-11",
       "monads": [
         {
+          "bookName": "Malachi",
           "firstMonad": 1344218,
-          "lastMonad": 1344435
+          "lastMonad": 1344435,
+          "chapter": 3,
+          "verse": 10
         }
       ]
     },
@@ -1767,8 +2226,11 @@
       "reference": "2 Kings 21:7-9",
       "monads": [
         {
+          "bookName": "2 Kings",
           "firstMonad": 626133,
-          "lastMonad": 626383
+          "lastMonad": 626383,
+          "chapter": 21,
+          "verse": 7
         }
       ]
     },
@@ -1779,8 +2241,11 @@
       "reference": "James 2:1-9",
       "monads": [
         {
+          "bookName": "James",
           "firstMonad": 1751548,
-          "lastMonad": 1752066
+          "lastMonad": 1752066,
+          "chapter": 2,
+          "verse": 1
         }
       ]
     },
@@ -1791,8 +2256,11 @@
       "reference": "Ecclesiastes 5:10-15",
       "monads": [
         {
+          "bookName": "Ecclesiastes",
           "firstMonad": 973378,
-          "lastMonad": 973684
+          "lastMonad": 973684,
+          "chapter": 5,
+          "verse": 10
         }
       ]
     },
@@ -1803,8 +2271,11 @@
       "reference": "Amos 8:4-6",
       "monads": [
         {
+          "bookName": "Amos",
           "firstMonad": 1299659,
-          "lastMonad": 1299888
+          "lastMonad": 1299888,
+          "chapter": 8,
+          "verse": 4
         }
       ]
     },
@@ -1815,8 +2286,11 @@
       "reference": "2 Chronicles 7:13-14",
       "monads": [
         {
+          "bookName": "2 Chronicles",
           "firstMonad": 696649,
-          "lastMonad": 696787
+          "lastMonad": 696787,
+          "chapter": 7,
+          "verse": 13
         }
       ]
     },
@@ -1827,8 +2301,11 @@
       "reference": "Jeremiah 29:4-7",
       "monads": [
         {
+          "bookName": "Jeremiah",
           "firstMonad": 1113110,
-          "lastMonad": 1113314
+          "lastMonad": 1113314,
+          "chapter": 29,
+          "verse": 4
         }
       ]
     },
@@ -1839,8 +2316,11 @@
       "reference": "Luke 5:2-7",
       "monads": [
         {
+          "bookName": "Luke",
           "firstMonad": 1453310,
-          "lastMonad": 1453657
+          "lastMonad": 1453657,
+          "chapter": 5,
+          "verse": 2
         }
       ]
     },
@@ -1851,8 +2331,11 @@
       "reference": "1 Kings 5:14",
       "monads": [
         {
+          "bookName": "1 Kings",
           "firstMonad": 540506,
-          "lastMonad": 540578
+          "lastMonad": 540578,
+          "chapter": 5,
+          "verse": 14
         }
       ]
     },
@@ -1863,8 +2346,11 @@
       "reference": "1 Kings 21:1-19",
       "monads": [
         {
+          "bookName": "1 Kings",
           "firstMonad": 578096,
-          "lastMonad": 579142
+          "lastMonad": 579142,
+          "chapter": 21,
+          "verse": 1
         }
       ]
     },
@@ -1875,8 +2361,11 @@
       "reference": "2 Kings 5:20-27",
       "monads": [
         {
+          "bookName": "2 Kings",
           "firstMonad": 592967,
-          "lastMonad": 593645
+          "lastMonad": 593645,
+          "chapter": 5,
+          "verse": 20
         }
       ]
     },
@@ -1887,8 +2376,11 @@
       "reference": "Galatians 6:6",
       "monads": [
         {
+          "bookName": "Galatians",
           "firstMonad": 1687593,
-          "lastMonad": 1687634
+          "lastMonad": 1687634,
+          "chapter": 6,
+          "verse": 6
         }
       ]
     },
@@ -1899,8 +2391,11 @@
       "reference": "Leviticus 6:1-5",
       "monads": [
         {
+          "bookName": "Leviticus",
           "firstMonad": 168421,
-          "lastMonad": 168744
+          "lastMonad": 168744,
+          "chapter": 6,
+          "verse": 1
         }
       ]
     },
@@ -1911,32 +2406,53 @@
       "reference": "Leviticus 23:3, 7, 8, 21, 25, 35, 36",
       "monads": [
         {
+          "bookName": "Leviticus",
           "firstMonad": 203079,
-          "lastMonad": 203170
+          "lastMonad": 203170,
+          "chapter": 23,
+          "verse": 3
         },
         {
+          "bookName": "Leviticus",
           "firstMonad": 203398,
-          "lastMonad": 203448
+          "lastMonad": 203448,
+          "chapter": 23,
+          "verse": 7
         },
         {
+          "bookName": "Leviticus",
           "firstMonad": 203449,
-          "lastMonad": 203517
+          "lastMonad": 203517,
+          "chapter": 23,
+          "verse": 8
         },
         {
+          "bookName": "Leviticus",
           "firstMonad": 204400,
-          "lastMonad": 204559
+          "lastMonad": 204559,
+          "chapter": 23,
+          "verse": 21
         },
         {
+          "bookName": "Leviticus",
           "firstMonad": 204851,
-          "lastMonad": 204894
+          "lastMonad": 204894,
+          "chapter": 23,
+          "verse": 25
         },
         {
+          "bookName": "Leviticus",
           "firstMonad": 205634,
-          "lastMonad": 205682
+          "lastMonad": 205682,
+          "chapter": 23,
+          "verse": 35
         },
         {
+          "bookName": "Leviticus",
           "firstMonad": 205683,
-          "lastMonad": 205774
+          "lastMonad": 205774,
+          "chapter": 23,
+          "verse": 36
         }
       ]
     }
@@ -1949,8 +2465,11 @@
       "reference": "Hebrews 2:16-18",
       "monads": [
         {
+          "bookName": "Hebrews",
           "firstMonad": 1732993,
-          "lastMonad": 1733193
+          "lastMonad": 1733193,
+          "chapter": 2,
+          "verse": 16
         }
       ]
     },
@@ -1961,8 +2480,11 @@
       "reference": "2 Corinthians 5:18-20",
       "monads": [
         {
+          "bookName": "2 Corinthians",
           "firstMonad": 1668441,
-          "lastMonad": 1668622
+          "lastMonad": 1668622,
+          "chapter": 5,
+          "verse": 18
         }
       ]
     },
@@ -1973,8 +2495,11 @@
       "reference": "John 6:14",
       "monads": [
         {
+          "bookName": "John",
           "firstMonad": 1516450,
-          "lastMonad": 1516534
+          "lastMonad": 1516534,
+          "chapter": 6,
+          "verse": 14
         }
       ]
     },
@@ -1985,8 +2510,11 @@
       "reference": "1 Corinthians 14:3",
       "monads": [
         {
+          "bookName": "1 Corinthians",
           "firstMonad": 1655709,
-          "lastMonad": 1655736
+          "lastMonad": 1655736,
+          "chapter": 14,
+          "verse": 3
         }
       ]
     },
@@ -1997,8 +2525,11 @@
       "reference": "Hebrews 7:24-25",
       "monads": [
         {
+          "bookName": "Hebrews",
           "firstMonad": 1738626,
-          "lastMonad": 1738722
+          "lastMonad": 1738722,
+          "chapter": 7,
+          "verse": 24
         }
       ]
     },
@@ -2009,8 +2540,11 @@
       "reference": "Ezekiel 22:30-31",
       "monads": [
         {
+          "bookName": "Ezekiel",
           "firstMonad": 1198110,
-          "lastMonad": 1198281
+          "lastMonad": 1198281,
+          "chapter": 22,
+          "verse": 30
         }
       ]
     },
@@ -2021,8 +2555,11 @@
       "reference": "Jeremiah 31:33-34",
       "monads": [
         {
+          "bookName": "Jeremiah",
           "firstMonad": 1118408,
-          "lastMonad": 1118630
+          "lastMonad": 1118630,
+          "chapter": 31,
+          "verse": 33
         }
       ]
     },
@@ -2033,8 +2570,11 @@
       "reference": "Hebrews 11:17-19",
       "monads": [
         {
+          "bookName": "Hebrews",
           "firstMonad": 1745385,
-          "lastMonad": 1745569
+          "lastMonad": 1745569,
+          "chapter": 11,
+          "verse": 17
         }
       ]
     },
@@ -2045,12 +2585,18 @@
       "reference": "2 Kings 17:7-18, 22-23",
       "monads": [
         {
+          "bookName": "2 Kings",
           "firstMonad": 616343,
-          "lastMonad": 617219
+          "lastMonad": 617219,
+          "chapter": 17,
+          "verse": 7
         },
         {
+          "bookName": "2 Kings",
           "firstMonad": 617434,
-          "lastMonad": 617547
+          "lastMonad": 617547,
+          "chapter": 17,
+          "verse": 22
         }
       ]
     },
@@ -2061,8 +2607,11 @@
       "reference": "James 1:27",
       "monads": [
         {
+          "bookName": "James",
           "firstMonad": 1751488,
-          "lastMonad": 1751546
+          "lastMonad": 1751546,
+          "chapter": 1,
+          "verse": 27
         }
       ]
     },
@@ -2073,8 +2622,11 @@
       "reference": "Isaiah 58:1-12",
       "monads": [
         {
+          "bookName": "Isaiah",
           "firstMonad": 1056672,
-          "lastMonad": 1057531
+          "lastMonad": 1057531,
+          "chapter": 58,
+          "verse": 1
         }
       ]
     },
@@ -2085,8 +2637,11 @@
       "reference": "Exodus 32:7-14",
       "monads": [
         {
+          "bookName": "Exodus",
           "firstMonad": 143639,
-          "lastMonad": 144296
+          "lastMonad": 144296,
+          "chapter": 32,
+          "verse": 7
         }
       ]
     },
@@ -2097,8 +2652,11 @@
       "reference": "1 Samuel 16:7",
       "monads": [
         {
+          "bookName": "1 Samuel",
           "firstMonad": 457525,
-          "lastMonad": 457617
+          "lastMonad": 457617,
+          "chapter": 16,
+          "verse": 7
         }
       ]
     },
@@ -2109,8 +2667,11 @@
       "reference": "1 Samuel 15:22-23",
       "monads": [
         {
+          "bookName": "1 Samuel",
           "firstMonad": 456213,
-          "lastMonad": 456352
+          "lastMonad": 456352,
+          "chapter": 15,
+          "verse": 22
         }
       ]
     },
@@ -2121,8 +2682,11 @@
       "reference": "Micah 6:8",
       "monads": [
         {
+          "bookName": "Micah",
           "firstMonad": 1311408,
-          "lastMonad": 1311481
+          "lastMonad": 1311481,
+          "chapter": 6,
+          "verse": 8
         }
       ]
     },
@@ -2133,8 +2697,11 @@
       "reference": "Mark 1:14-18",
       "monads": [
         {
+          "bookName": "Mark",
           "firstMonad": 1405239,
-          "lastMonad": 1405530
+          "lastMonad": 1405530,
+          "chapter": 1,
+          "verse": 14
         }
       ]
     },
@@ -2145,8 +2712,11 @@
       "reference": "1 John 1:5-9",
       "monads": [
         {
+          "bookName": "1 John",
           "firstMonad": 1767626,
-          "lastMonad": 1767916
+          "lastMonad": 1767916,
+          "chapter": 1,
+          "verse": 5
         }
       ]
     },
@@ -2157,8 +2727,11 @@
       "reference": "2 Samuel 14:14",
       "monads": [
         {
+          "bookName": "2 Samuel",
           "firstMonad": 506723,
-          "lastMonad": 506820
+          "lastMonad": 506820,
+          "chapter": 14,
+          "verse": 14
         }
       ]
     },
@@ -2169,8 +2742,11 @@
       "reference": "Job 1:1-2:10",
       "monads": [
         {
+          "bookName": "Job",
           "firstMonad": 800280,
-          "lastMonad": 802198
+          "lastMonad": 802198,
+          "chapter": 1,
+          "verse": 1
         }
       ]
     },
@@ -2181,8 +2757,11 @@
       "reference": "Job 42:5-6",
       "monads": [
         {
+          "bookName": "Job",
           "firstMonad": 838480,
-          "lastMonad": 838554
+          "lastMonad": 838554,
+          "chapter": 42,
+          "verse": 5
         }
       ]
     },
@@ -2193,8 +2772,11 @@
       "reference": "Psalm 81:13-16",
       "monads": [
         {
+          "bookName": "Psalms",
           "firstMonad": 894058,
-          "lastMonad": 894209
+          "lastMonad": 894209,
+          "chapter": 81,
+          "verse": 13
         }
       ]
     },
@@ -2205,8 +2787,11 @@
       "reference": "Luke 24:47",
       "monads": [
         {
+          "bookName": "Luke",
           "firstMonad": 1504483,
-          "lastMonad": 1504564
+          "lastMonad": 1504564,
+          "chapter": 24,
+          "verse": 47
         }
       ]
     },
@@ -2217,8 +2802,11 @@
       "reference": "Psalm 96:1-6",
       "monads": [
         {
+          "bookName": "Psalms",
           "firstMonad": 903206,
-          "lastMonad": 903401
+          "lastMonad": 903401,
+          "chapter": 96,
+          "verse": 1
         }
       ]
     },
@@ -2229,8 +2817,11 @@
       "reference": "Acts 20:4",
       "monads": [
         {
+          "bookName": "Acts",
           "firstMonad": 1591614,
-          "lastMonad": 1591686
+          "lastMonad": 1591686,
+          "chapter": 20,
+          "verse": 4
         }
       ]
     },
@@ -2241,8 +2832,11 @@
       "reference": "Colossians 1:28-29",
       "monads": [
         {
+          "bookName": "Colossians",
           "firstMonad": 1704368,
-          "lastMonad": 1704488
+          "lastMonad": 1704488,
+          "chapter": 1,
+          "verse": 28
         }
       ]
     },
@@ -2253,8 +2847,11 @@
       "reference": "Numbers 1:48-53",
       "monads": [
         {
+          "bookName": "Numbers",
           "firstMonad": 217393,
-          "lastMonad": 217761
+          "lastMonad": 217761,
+          "chapter": 1,
+          "verse": 48
         }
       ]
     },
@@ -2265,8 +2862,11 @@
       "reference": "Acts 15:13-22",
       "monads": [
         {
+          "bookName": "Acts",
           "firstMonad": 1581605,
-          "lastMonad": 1582150
+          "lastMonad": 1582150,
+          "chapter": 15,
+          "verse": 13
         }
       ]
     },
@@ -2277,8 +2877,11 @@
       "reference": "1 Chronicles 15:12-13",
       "monads": [
         {
+          "bookName": "1 Chronicles",
           "firstMonad": 662079,
-          "lastMonad": 662242
+          "lastMonad": 662242,
+          "chapter": 15,
+          "verse": 12
         }
       ]
     },
@@ -2289,8 +2892,11 @@
       "reference": "Ephesians 4:11-13",
       "monads": [
         {
+          "bookName": "Ephesians",
           "firstMonad": 1692792,
-          "lastMonad": 1692966
+          "lastMonad": 1692966,
+          "chapter": 4,
+          "verse": 11
         }
       ]
     },
@@ -2301,8 +2907,11 @@
       "reference": "Titus 1:5-9",
       "monads": [
         {
+          "bookName": "Titus",
           "firstMonad": 1727319,
-          "lastMonad": 1727743
+          "lastMonad": 1727743,
+          "chapter": 1,
+          "verse": 5
         }
       ]
     },
@@ -2313,12 +2922,18 @@
       "reference": "2 Timothy 2:1-7, 15",
       "monads": [
         {
+          "bookName": "2 Timothy",
           "firstMonad": 1723670,
-          "lastMonad": 1723943
+          "lastMonad": 1723943,
+          "chapter": 2,
+          "verse": 1
         },
         {
+          "bookName": "2 Timothy",
           "firstMonad": 1724267,
-          "lastMonad": 1724338
+          "lastMonad": 1724338,
+          "chapter": 2,
+          "verse": 15
         }
       ]
     },
@@ -2329,8 +2944,11 @@
       "reference": "Philippians 3:17-18",
       "monads": [
         {
+          "bookName": "Philippians",
           "firstMonad": 1701131,
-          "lastMonad": 1701242
+          "lastMonad": 1701242,
+          "chapter": 3,
+          "verse": 17
         }
       ]
     },
@@ -2341,8 +2959,11 @@
       "reference": "Mark 3:14-15",
       "monads": [
         {
+          "bookName": "Mark",
           "firstMonad": 1409143,
-          "lastMonad": 1409238
+          "lastMonad": 1409238,
+          "chapter": 3,
+          "verse": 14
         }
       ]
     },
@@ -2353,8 +2974,11 @@
       "reference": "2 Chronicles 17:7-10",
       "monads": [
         {
+          "bookName": "2 Chronicles",
           "firstMonad": 709269,
-          "lastMonad": 709505
+          "lastMonad": 709505,
+          "chapter": 17,
+          "verse": 7
         }
       ]
     },
@@ -2365,8 +2989,11 @@
       "reference": "1 Samuel 12:19-25",
       "monads": [
         {
+          "bookName": "1 Samuel",
           "firstMonad": 449262,
-          "lastMonad": 449651
+          "lastMonad": 449651,
+          "chapter": 12,
+          "verse": 19
         }
       ]
     },
@@ -2377,8 +3004,11 @@
       "reference": "Ephesians 1:15-18",
       "monads": [
         {
+          "bookName": "Ephesians",
           "firstMonad": 1689218,
-          "lastMonad": 1689516
+          "lastMonad": 1689516,
+          "chapter": 1,
+          "verse": 15
         }
       ]
     },
@@ -2389,8 +3019,11 @@
       "reference": "Ephesians 6:10-20",
       "monads": [
         {
+          "bookName": "Ephesians",
           "firstMonad": 1695814,
-          "lastMonad": 1696504
+          "lastMonad": 1696504,
+          "chapter": 6,
+          "verse": 10
         }
       ]
     },
@@ -2401,8 +3034,11 @@
       "reference": "Exodus 33:15-17",
       "monads": [
         {
+          "bookName": "Exodus",
           "firstMonad": 146734,
-          "lastMonad": 146919
+          "lastMonad": 146919,
+          "chapter": 33,
+          "verse": 15
         }
       ]
     },
@@ -2413,8 +3049,11 @@
       "reference": "Matthew 1:20-23",
       "monads": [
         {
+          "bookName": "Matthew",
           "firstMonad": 1346526,
-          "lastMonad": 1346800
+          "lastMonad": 1346800,
+          "chapter": 1,
+          "verse": 20
         }
       ]
     },
@@ -2425,8 +3064,11 @@
       "reference": "Mark 10:45",
       "monads": [
         {
+          "bookName": "Mark",
           "firstMonad": 1427212,
-          "lastMonad": 1427265
+          "lastMonad": 1427265,
+          "chapter": 10,
+          "verse": 45
         }
       ]
     },
@@ -2437,8 +3079,11 @@
       "reference": "Matthew 18:20",
       "monads": [
         {
+          "bookName": "Matthew",
           "firstMonad": 1379224,
-          "lastMonad": 1379274
+          "lastMonad": 1379274,
+          "chapter": 18,
+          "verse": 20
         }
       ]
     },
@@ -2449,8 +3094,11 @@
       "reference": "Leviticus 20:26",
       "monads": [
         {
+          "bookName": "Leviticus",
           "firstMonad": 199585,
-          "lastMonad": 199638
+          "lastMonad": 199638,
+          "chapter": 20,
+          "verse": 26
         }
       ]
     },
@@ -2461,8 +3109,11 @@
       "reference": "Luke 18:9-14",
       "monads": [
         {
+          "bookName": "Luke",
           "firstMonad": 1487364,
-          "lastMonad": 1487769
+          "lastMonad": 1487769,
+          "chapter": 18,
+          "verse": 9
         }
       ]
     },
@@ -2473,8 +3124,11 @@
       "reference": "Galatians 5:22-25",
       "monads": [
         {
+          "bookName": "Galatians",
           "firstMonad": 1687115,
-          "lastMonad": 1687285
+          "lastMonad": 1687285,
+          "chapter": 5,
+          "verse": 22
         }
       ]
     },
@@ -2485,8 +3139,11 @@
       "reference": "1 Peter 2:9-10",
       "monads": [
         {
+          "bookName": "1 Peter",
           "firstMonad": 1758632,
-          "lastMonad": 1758822
+          "lastMonad": 1758822,
+          "chapter": 2,
+          "verse": 9
         }
       ]
     },
@@ -2497,8 +3154,11 @@
       "reference": "1 Peter 2:21-25",
       "monads": [
         {
+          "bookName": "1 Peter",
           "firstMonad": 1759401,
-          "lastMonad": 1759666
+          "lastMonad": 1759666,
+          "chapter": 2,
+          "verse": 21
         }
       ]
     },
@@ -2509,8 +3169,11 @@
       "reference": "Jeremiah 32:33-35",
       "monads": [
         {
+          "bookName": "Jeremiah",
           "firstMonad": 1121156,
-          "lastMonad": 1121358
+          "lastMonad": 1121358,
+          "chapter": 32,
+          "verse": 33
         }
       ]
     },
@@ -2521,8 +3184,11 @@
       "reference": "Acts 8:18-23",
       "monads": [
         {
+          "bookName": "Acts",
           "firstMonad": 1566883,
-          "lastMonad": 1567143
+          "lastMonad": 1567143,
+          "chapter": 8,
+          "verse": 18
         }
       ]
     },
@@ -2533,8 +3199,11 @@
       "reference": "Judges 6:25-32",
       "monads": [
         {
+          "bookName": "Judges",
           "firstMonad": 396164,
-          "lastMonad": 396831
+          "lastMonad": 396831,
+          "chapter": 6,
+          "verse": 25
         }
       ]
     },
@@ -2545,8 +3214,11 @@
       "reference": "Matthew 13:52",
       "monads": [
         {
+          "bookName": "Matthew",
           "firstMonad": 1370564,
-          "lastMonad": 1370636
+          "lastMonad": 1370636,
+          "chapter": 13,
+          "verse": 52
         }
       ]
     },
@@ -2557,8 +3229,11 @@
       "reference": "Romans 10:14-15",
       "monads": [
         {
+          "bookName": "Romans",
           "firstMonad": 1625891,
-          "lastMonad": 1626049
+          "lastMonad": 1626049,
+          "chapter": 10,
+          "verse": 14
         }
       ]
     },
@@ -2569,8 +3244,11 @@
       "reference": "2 Chronicles 5:12-14",
       "monads": [
         {
+          "bookName": "2 Chronicles",
           "firstMonad": 692677,
-          "lastMonad": 692944
+          "lastMonad": 692944,
+          "chapter": 5,
+          "verse": 12
         }
       ]
     }
@@ -2583,8 +3261,11 @@
       "reference": "Isaiah 33:22",
       "monads": [
         {
+          "bookName": "Isaiah",
           "firstMonad": 1025298,
-          "lastMonad": 1025339
+          "lastMonad": 1025339,
+          "chapter": 33,
+          "verse": 22
         }
       ]
     },
@@ -2595,8 +3276,11 @@
       "reference": "Jeremiah 7:5-7",
       "monads": [
         {
+          "bookName": "Jeremiah",
           "firstMonad": 1078859,
-          "lastMonad": 1079001
+          "lastMonad": 1079001,
+          "chapter": 7,
+          "verse": 5
         }
       ]
     },
@@ -2607,8 +3291,11 @@
       "reference": "Psalm 147:19-20",
       "monads": [
         {
+          "bookName": "Psalms",
           "firstMonad": 935645,
-          "lastMonad": 935712
+          "lastMonad": 935712,
+          "chapter": 147,
+          "verse": 19
         }
       ]
     },
@@ -2619,8 +3306,11 @@
       "reference": "James 4:12",
       "monads": [
         {
+          "bookName": "James",
           "firstMonad": 1754848,
-          "lastMonad": 1754912
+          "lastMonad": 1754912,
+          "chapter": 4,
+          "verse": 12
         }
       ]
     },
@@ -2631,12 +3321,18 @@
       "reference": "Psalm 89:14, 18",
       "monads": [
         {
+          "bookName": "Psalms",
           "firstMonad": 898652,
-          "lastMonad": 898690
+          "lastMonad": 898690,
+          "chapter": 89,
+          "verse": 14
         },
         {
+          "bookName": "Psalms",
           "firstMonad": 898795,
-          "lastMonad": 898838
+          "lastMonad": 898838,
+          "chapter": 89,
+          "verse": 18
         }
       ]
     },
@@ -2647,8 +3343,11 @@
       "reference": "Isaiah 9:6-7",
       "monads": [
         {
+          "bookName": "Isaiah",
           "firstMonad": 997221,
-          "lastMonad": 997382
+          "lastMonad": 997382,
+          "chapter": 9,
+          "verse": 6
         }
       ]
     },
@@ -2659,8 +3358,11 @@
       "reference": "Romans 13:1-7",
       "monads": [
         {
+          "bookName": "Romans",
           "firstMonad": 1630214,
-          "lastMonad": 1630656
+          "lastMonad": 1630656,
+          "chapter": 13,
+          "verse": 1
         }
       ]
     },
@@ -2671,8 +3373,11 @@
       "reference": "Numbers 27:1-11",
       "monads": [
         {
+          "bookName": "Numbers",
           "firstMonad": 268382,
-          "lastMonad": 268961
+          "lastMonad": 268961,
+          "chapter": 27,
+          "verse": 1
         }
       ]
     },
@@ -2683,8 +3388,11 @@
       "reference": "Esther 4:13-16",
       "monads": [
         {
+          "bookName": "Esther",
           "firstMonad": 793186,
-          "lastMonad": 793481
+          "lastMonad": 793481,
+          "chapter": 4,
+          "verse": 13
         }
       ]
     },
@@ -2695,8 +3403,11 @@
       "reference": "Acts 23:12-35",
       "monads": [
         {
+          "bookName": "Acts",
           "firstMonad": 1598330,
-          "lastMonad": 1599541
+          "lastMonad": 1599541,
+          "chapter": 23,
+          "verse": 12
         }
       ]
     },
@@ -2707,8 +3418,11 @@
       "reference": "Matthew 2:16-18",
       "monads": [
         {
+          "bookName": "Matthew",
           "firstMonad": 1347829,
-          "lastMonad": 1348014
+          "lastMonad": 1348014,
+          "chapter": 2,
+          "verse": 16
         }
       ]
     },
@@ -2719,8 +3433,11 @@
       "reference": "Exodus 2:11-15",
       "monads": [
         {
+          "bookName": "Exodus",
           "firstMonad": 89100,
-          "lastMonad": 89481
+          "lastMonad": 89481,
+          "chapter": 2,
+          "verse": 11
         }
       ]
     },
@@ -2731,8 +3448,11 @@
       "reference": "Judges 21:25",
       "monads": [
         {
+          "bookName": "Judges",
           "firstMonad": 425501,
-          "lastMonad": 425542
+          "lastMonad": 425542,
+          "chapter": 21,
+          "verse": 25
         }
       ]
     },
@@ -2743,8 +3463,11 @@
       "reference": "Ecclesiastes 5:8-9",
       "monads": [
         {
+          "bookName": "Ecclesiastes",
           "firstMonad": 973232,
-          "lastMonad": 973377
+          "lastMonad": 973377,
+          "chapter": 5,
+          "verse": 8
         }
       ]
     },
@@ -2755,8 +3478,11 @@
       "reference": "2 Samuel 23:3-4",
       "monads": [
         {
+          "bookName": "2 Samuel",
           "firstMonad": 525371,
-          "lastMonad": 525473
+          "lastMonad": 525473,
+          "chapter": 23,
+          "verse": 3
         }
       ]
     },
@@ -2767,8 +3493,11 @@
       "reference": "2 Kings 22:2",
       "monads": [
         {
+          "bookName": "2 Kings",
           "firstMonad": 627447,
-          "lastMonad": 627506
+          "lastMonad": 627506,
+          "chapter": 22,
+          "verse": 2
         }
       ]
     },
@@ -2779,12 +3508,18 @@
       "reference": "Judges 4:4-9, 14-16",
       "monads": [
         {
+          "bookName": "Judges",
           "firstMonad": 391662,
-          "lastMonad": 392054
+          "lastMonad": 392054,
+          "chapter": 4,
+          "verse": 4
         },
         {
+          "bookName": "Judges",
           "firstMonad": 392275,
-          "lastMonad": 392485
+          "lastMonad": 392485,
+          "chapter": 4,
+          "verse": 14
         }
       ]
     },
@@ -2795,8 +3530,11 @@
       "reference": "Nehemiah 5:14-18",
       "monads": [
         {
+          "bookName": "Nehemiah",
           "firstMonad": 769643,
-          "lastMonad": 770083
+          "lastMonad": 770083,
+          "chapter": 5,
+          "verse": 14
         }
       ]
     },
@@ -2807,8 +3545,11 @@
       "reference": "Genesis 47:13-26",
       "monads": [
         {
+          "bookName": "Genesis",
           "firstMonad": 81032,
-          "lastMonad": 82046
+          "lastMonad": 82046,
+          "chapter": 47,
+          "verse": 13
         }
       ]
     },
@@ -2819,8 +3560,11 @@
       "reference": "1 Timothy 2:2",
       "monads": [
         {
+          "bookName": "1 Timothy",
           "firstMonad": 1717214,
-          "lastMonad": 1717267
+          "lastMonad": 1717267,
+          "chapter": 2,
+          "verse": 2
         }
       ]
     },
@@ -2831,8 +3575,11 @@
       "reference": "1 Peter 2:13-17",
       "monads": [
         {
+          "bookName": "1 Peter",
           "firstMonad": 1758970,
-          "lastMonad": 1759202
+          "lastMonad": 1759202,
+          "chapter": 2,
+          "verse": 13
         }
       ]
     },
@@ -2843,8 +3590,11 @@
       "reference": "Daniel 3",
       "monads": [
         {
+          "bookName": "Daniel",
           "firstMonad": 1253567,
-          "lastMonad": 1255636
+          "lastMonad": 1255636,
+          "chapter": 3,
+          "verse": 1
         }
       ]
     },
@@ -2855,8 +3605,11 @@
       "reference": "Deuteronomy 17:14-20",
       "monads": [
         {
+          "bookName": "Deuteronomy",
           "firstMonad": 316897,
-          "lastMonad": 317444
+          "lastMonad": 317444,
+          "chapter": 17,
+          "verse": 14
         }
       ]
     },
@@ -2867,8 +3620,11 @@
       "reference": "1 Kings 10:1-11:13",
       "monads": [
         {
+          "bookName": "1 Kings",
           "firstMonad": 553135,
-          "lastMonad": 556004
+          "lastMonad": 556004,
+          "chapter": 10,
+          "verse": 1
         }
       ]
     },
@@ -2879,8 +3635,11 @@
       "reference": "2 Chronicles 16:9",
       "monads": [
         {
+          "bookName": "2 Chronicles",
           "firstMonad": 708516,
-          "lastMonad": 708591
+          "lastMonad": 708591,
+          "chapter": 16,
+          "verse": 9
         }
       ]
     },
@@ -2891,8 +3650,11 @@
       "reference": "2 Chronicles 33:1-20",
       "monads": [
         {
+          "bookName": "2 Chronicles",
           "firstMonad": 736818,
-          "lastMonad": 738278
+          "lastMonad": 738278,
+          "chapter": 33,
+          "verse": 1
         }
       ]
     },
@@ -2903,8 +3665,11 @@
       "reference": "Mark 12:13-17",
       "monads": [
         {
+          "bookName": "Mark",
           "firstMonad": 1430166,
-          "lastMonad": 1430489
+          "lastMonad": 1430489,
+          "chapter": 12,
+          "verse": 13
         }
       ]
     },
@@ -2915,8 +3680,11 @@
       "reference": "Daniel 1:5-20",
       "monads": [
         {
+          "bookName": "Daniel",
           "firstMonad": 1249530,
-          "lastMonad": 1250432
+          "lastMonad": 1250432,
+          "chapter": 1,
+          "verse": 5
         }
       ]
     },
@@ -2927,8 +3695,11 @@
       "reference": "Deuteronomy 1:15-17",
       "monads": [
         {
+          "bookName": "Deuteronomy",
           "firstMonad": 286558,
-          "lastMonad": 286826
+          "lastMonad": 286826,
+          "chapter": 1,
+          "verse": 15
         }
       ]
     },
@@ -2939,8 +3710,11 @@
       "reference": "Leviticus 19:15",
       "monads": [
         {
+          "bookName": "Leviticus",
           "firstMonad": 196559,
-          "lastMonad": 196609
+          "lastMonad": 196609,
+          "chapter": 19,
+          "verse": 15
         }
       ]
     },
@@ -2951,8 +3725,11 @@
       "reference": "Exodus 4:9-18",
       "monads": [
         {
+          "bookName": "Exodus",
           "firstMonad": 92385,
-          "lastMonad": 93082
+          "lastMonad": 93082,
+          "chapter": 4,
+          "verse": 9
         }
       ]
     },
@@ -2963,8 +3740,11 @@
       "reference": "Zechariah 8:16",
       "monads": [
         {
+          "bookName": "Zechariah",
           "firstMonad": 1333658,
-          "lastMonad": 1333715
+          "lastMonad": 1333715,
+          "chapter": 8,
+          "verse": 16
         }
       ]
     },
@@ -2975,8 +3755,11 @@
       "reference": "1 Kings 3:16-28",
       "monads": [
         {
+          "bookName": "1 Kings",
           "firstMonad": 536901,
-          "lastMonad": 537698
+          "lastMonad": 537698,
+          "chapter": 3,
+          "verse": 16
         }
       ]
     },
@@ -2987,8 +3770,11 @@
       "reference": "Luke 18:1-8",
       "monads": [
         {
+          "bookName": "Luke",
           "firstMonad": 1486926,
-          "lastMonad": 1487363
+          "lastMonad": 1487363,
+          "chapter": 18,
+          "verse": 1
         }
       ]
     },
@@ -2999,8 +3785,11 @@
       "reference": "Ezekiel 33:15",
       "monads": [
         {
+          "bookName": "Ezekiel",
           "firstMonad": 1216878,
-          "lastMonad": 1216965
+          "lastMonad": 1216965,
+          "chapter": 33,
+          "verse": 15
         }
       ]
     },
@@ -3011,8 +3800,11 @@
       "reference": "Deuteronomy 4:4-5",
       "monads": [
         {
+          "bookName": "Deuteronomy",
           "firstMonad": 293001,
-          "lastMonad": 293116
+          "lastMonad": 293116,
+          "chapter": 4,
+          "verse": 4
         }
       ]
     },
@@ -3023,8 +3815,11 @@
       "reference": "Daniel 6:6-9",
       "monads": [
         {
+          "bookName": "Daniel",
           "firstMonad": 1260857,
-          "lastMonad": 1261089
+          "lastMonad": 1261089,
+          "chapter": 6,
+          "verse": 6
         }
       ]
     },
@@ -3035,8 +3830,11 @@
       "reference": "Numbers 35:9-15",
       "monads": [
         {
+          "bookName": "Numbers",
           "firstMonad": 283504,
-          "lastMonad": 283776
+          "lastMonad": 283776,
+          "chapter": 35,
+          "verse": 9
         }
       ]
     },
@@ -3047,8 +3845,11 @@
       "reference": "Matthew 17:25-27",
       "monads": [
         {
+          "bookName": "Matthew",
           "firstMonad": 1377705,
-          "lastMonad": 1377987
+          "lastMonad": 1377987,
+          "chapter": 17,
+          "verse": 25
         }
       ]
     },
@@ -3059,8 +3860,11 @@
       "reference": "Daniel 6:10-24",
       "monads": [
         {
+          "bookName": "Daniel",
           "firstMonad": 1261090,
-          "lastMonad": 1262170
+          "lastMonad": 1262170,
+          "chapter": 6,
+          "verse": 10
         }
       ]
     },
@@ -3071,8 +3875,11 @@
       "reference": "Deuteronomy 20",
       "monads": [
         {
+          "bookName": "Deuteronomy",
           "firstMonad": 320089,
-          "lastMonad": 321366
+          "lastMonad": 321366,
+          "chapter": 20,
+          "verse": 1
         }
       ]
     },
@@ -3083,8 +3890,11 @@
       "reference": "2 Samuel 10:1-8",
       "monads": [
         {
+          "bookName": "2 Samuel",
           "firstMonad": 497942,
-          "lastMonad": 498546
+          "lastMonad": 498546,
+          "chapter": 10,
+          "verse": 1
         }
       ]
     },
@@ -3095,8 +3905,11 @@
       "reference": "Luke 7:6-9",
       "monads": [
         {
+          "bookName": "Luke",
           "firstMonad": 1458501,
-          "lastMonad": 1458824
+          "lastMonad": 1458824,
+          "chapter": 7,
+          "verse": 6
         }
       ]
     },
@@ -3107,8 +3920,11 @@
       "reference": "Luke 11:17",
       "monads": [
         {
+          "bookName": "Luke",
           "firstMonad": 1471895,
-          "lastMonad": 1471948
+          "lastMonad": 1471948,
+          "chapter": 11,
+          "verse": 17
         }
       ]
     },
@@ -3119,8 +3935,11 @@
       "reference": "Obadiah 11-15",
       "monads": [
         {
+          "bookName": "Obadiah",
           "firstMonad": 1302360,
-          "lastMonad": 1302731
+          "lastMonad": 1302731,
+          "chapter": 1,
+          "verse": 11
         }
       ]
     },
@@ -3131,8 +3950,11 @@
       "reference": "2 Kings 6:8-23",
       "monads": [
         {
+          "bookName": "2 Kings",
           "firstMonad": 594022,
-          "lastMonad": 595117
+          "lastMonad": 595117,
+          "chapter": 6,
+          "verse": 8
         }
       ]
     },
@@ -3143,8 +3965,11 @@
       "reference": "2 Samuel 11:2-27",
       "monads": [
         {
+          "bookName": "2 Samuel",
           "firstMonad": 499389,
-          "lastMonad": 500977
+          "lastMonad": 500977,
+          "chapter": 11,
+          "verse": 2
         }
       ]
     },
@@ -3155,8 +3980,11 @@
       "reference": "1 Kings 12:4-18",
       "monads": [
         {
+          "bookName": "1 Kings",
           "firstMonad": 558104,
-          "lastMonad": 559119
+          "lastMonad": 559119,
+          "chapter": 12,
+          "verse": 4
         }
       ]
     },
@@ -3167,8 +3995,11 @@
       "reference": "1 Samuel 13:7-14",
       "monads": [
         {
+          "bookName": "1 Samuel",
           "firstMonad": 450198,
-          "lastMonad": 450736
+          "lastMonad": 450736,
+          "chapter": 13,
+          "verse": 7
         }
       ]
     },
@@ -3179,8 +4010,11 @@
       "reference": "Daniel 1:3-4",
       "monads": [
         {
+          "bookName": "Daniel",
           "firstMonad": 1249330,
-          "lastMonad": 1249529
+          "lastMonad": 1249529,
+          "chapter": 1,
+          "verse": 3
         }
       ]
     },
@@ -3191,8 +4025,11 @@
       "reference": "Joshua 9:3-27",
       "monads": [
         {
+          "bookName": "Joshua",
           "firstMonad": 359392,
-          "lastMonad": 360838
+          "lastMonad": 360838,
+          "chapter": 9,
+          "verse": 3
         }
       ]
     },
@@ -3203,8 +4040,11 @@
       "reference": "Mark 6:21-28",
       "monads": [
         {
+          "bookName": "Mark",
           "firstMonad": 1415618,
-          "lastMonad": 1416091
+          "lastMonad": 1416091,
+          "chapter": 6,
+          "verse": 21
         }
       ]
     }
@@ -3217,8 +4057,11 @@
       "reference": "Exodus 6:7",
       "monads": [
         {
+          "bookName": "Exodus",
           "firstMonad": 95733,
-          "lastMonad": 95806
+          "lastMonad": 95806,
+          "chapter": 6,
+          "verse": 7
         }
       ]
     },
@@ -3229,8 +4072,11 @@
       "reference": "Isaiah 54:13",
       "monads": [
         {
+          "bookName": "Isaiah",
           "firstMonad": 1053630,
-          "lastMonad": 1053656
+          "lastMonad": 1053656,
+          "chapter": 54,
+          "verse": 13
         }
       ]
     },
@@ -3241,8 +4087,11 @@
       "reference": "John 13:12-17",
       "monads": [
         {
+          "bookName": "John",
           "firstMonad": 1535906,
-          "lastMonad": 1536164
+          "lastMonad": 1536164,
+          "chapter": 13,
+          "verse": 12
         }
       ]
     },
@@ -3253,8 +4102,11 @@
       "reference": "John 14:26",
       "monads": [
         {
+          "bookName": "John",
           "firstMonad": 1538944,
-          "lastMonad": 1539007
+          "lastMonad": 1539007,
+          "chapter": 14,
+          "verse": 26
         }
       ]
     },
@@ -3265,12 +4117,18 @@
       "reference": "Psalm 27:1-5, 11",
       "monads": [
         {
+          "bookName": "Psalms",
           "firstMonad": 853861,
-          "lastMonad": 854141
+          "lastMonad": 854141,
+          "chapter": 27,
+          "verse": 1
         },
         {
+          "bookName": "Psalms",
           "firstMonad": 854385,
-          "lastMonad": 854428
+          "lastMonad": 854428,
+          "chapter": 27,
+          "verse": 11
         }
       ]
     },
@@ -3281,8 +4139,11 @@
       "reference": "Mark 6:34",
       "monads": [
         {
+          "bookName": "Mark",
           "firstMonad": 1416350,
-          "lastMonad": 1416418
+          "lastMonad": 1416418,
+          "chapter": 6,
+          "verse": 34
         }
       ]
     },
@@ -3293,8 +4154,11 @@
       "reference": "Proverbs 1:2-7",
       "monads": [
         {
+          "bookName": "Proverbs",
           "firstMonad": 936667,
-          "lastMonad": 936893
+          "lastMonad": 936893,
+          "chapter": 1,
+          "verse": 2
         }
       ]
     },
@@ -3305,8 +4169,11 @@
       "reference": "1 Timothy 1:5",
       "monads": [
         {
+          "bookName": "1 Timothy",
           "firstMonad": 1716197,
-          "lastMonad": 1716254
+          "lastMonad": 1716254,
+          "chapter": 1,
+          "verse": 5
         }
       ]
     },
@@ -3317,8 +4184,11 @@
       "reference": "Deuteronomy 28:13",
       "monads": [
         {
+          "bookName": "Deuteronomy",
           "firstMonad": 331808,
-          "lastMonad": 331906
+          "lastMonad": 331906,
+          "chapter": 28,
+          "verse": 13
         }
       ]
     },
@@ -3329,8 +4199,11 @@
       "reference": "Deuteronomy 5:29-31",
       "monads": [
         {
+          "bookName": "Deuteronomy",
           "firstMonad": 297597,
-          "lastMonad": 297771
+          "lastMonad": 297771,
+          "chapter": 5,
+          "verse": 29
         }
       ]
     },
@@ -3341,8 +4214,11 @@
       "reference": "Acts 4:13",
       "monads": [
         {
+          "bookName": "Acts",
           "firstMonad": 1558105,
-          "lastMonad": 1558196
+          "lastMonad": 1558196,
+          "chapter": 4,
+          "verse": 13
         }
       ]
     },
@@ -3353,8 +4229,11 @@
       "reference": "Leviticus 18:1-5",
       "monads": [
         {
+          "bookName": "Leviticus",
           "firstMonad": 194281,
-          "lastMonad": 194490
+          "lastMonad": 194490,
+          "chapter": 18,
+          "verse": 1
         }
       ]
     },
@@ -3365,8 +4244,11 @@
       "reference": "Jeremiah 18:1-11",
       "monads": [
         {
+          "bookName": "Jeremiah",
           "firstMonad": 1095842,
-          "lastMonad": 1096334
+          "lastMonad": 1096334,
+          "chapter": 18,
+          "verse": 1
         }
       ]
     },
@@ -3377,8 +4259,11 @@
       "reference": "Ezra 7:10-11",
       "monads": [
         {
+          "bookName": "Ezra",
           "firstMonad": 754863,
-          "lastMonad": 754981
+          "lastMonad": 754981,
+          "chapter": 7,
+          "verse": 10
         }
       ]
     },
@@ -3389,8 +4274,11 @@
       "reference": "Romans 12:7",
       "monads": [
         {
+          "bookName": "Romans",
           "firstMonad": 1629469,
-          "lastMonad": 1629507
+          "lastMonad": 1629507,
+          "chapter": 12,
+          "verse": 7
         }
       ]
     },
@@ -3401,8 +4289,11 @@
       "reference": "John 4:23-24",
       "monads": [
         {
+          "bookName": "John",
           "firstMonad": 1511866,
-          "lastMonad": 1511975
+          "lastMonad": 1511975,
+          "chapter": 4,
+          "verse": 23
         }
       ]
     },
@@ -3413,8 +4304,11 @@
       "reference": "Mark 7:2-4",
       "monads": [
         {
+          "bookName": "Mark",
           "firstMonad": 1417619,
-          "lastMonad": 1417840
+          "lastMonad": 1417840,
+          "chapter": 7,
+          "verse": 2
         }
       ]
     },
@@ -3425,8 +4319,11 @@
       "reference": "Exodus 4:1-11",
       "monads": [
         {
+          "bookName": "Exodus",
           "firstMonad": 91822,
-          "lastMonad": 92658
+          "lastMonad": 92658,
+          "chapter": 4,
+          "verse": 1
         }
       ]
     },
@@ -3437,8 +4334,11 @@
       "reference": "Luke 8:1-2",
       "monads": [
         {
+          "bookName": "Luke",
           "firstMonad": 1461281,
-          "lastMonad": 1461402
+          "lastMonad": 1461402,
+          "chapter": 8,
+          "verse": 1
         }
       ]
     },
@@ -3449,8 +4349,11 @@
       "reference": "Ephesians 3:14-21",
       "monads": [
         {
+          "bookName": "Ephesians",
           "firstMonad": 1691879,
-          "lastMonad": 1692320
+          "lastMonad": 1692320,
+          "chapter": 3,
+          "verse": 14
         }
       ]
     },
@@ -3461,8 +4364,11 @@
       "reference": "James 3:1",
       "monads": [
         {
+          "bookName": "James",
           "firstMonad": 1753088,
-          "lastMonad": 1753154
+          "lastMonad": 1753154,
+          "chapter": 3,
+          "verse": 1
         }
       ]
     },
@@ -3473,8 +4379,11 @@
       "reference": "Leviticus 11:45",
       "monads": [
         {
+          "bookName": "Leviticus",
           "firstMonad": 180158,
-          "lastMonad": 180227
+          "lastMonad": 180227,
+          "chapter": 11,
+          "verse": 45
         }
       ]
     },
@@ -3485,8 +4394,11 @@
       "reference": "Hebrews 3:1",
       "monads": [
         {
+          "bookName": "Hebrews",
           "firstMonad": 1733195,
-          "lastMonad": 1733295
+          "lastMonad": 1733295,
+          "chapter": 3,
+          "verse": 1
         }
       ]
     },
@@ -3497,8 +4409,11 @@
       "reference": "Psalm 19:7-11",
       "monads": [
         {
+          "bookName": "Psalms",
           "firstMonad": 849449,
-          "lastMonad": 849661
+          "lastMonad": 849661,
+          "chapter": 19,
+          "verse": 7
         }
       ]
     },
@@ -3509,8 +4424,11 @@
       "reference": "James 1:5-6",
       "monads": [
         {
+          "bookName": "James",
           "firstMonad": 1750264,
-          "lastMonad": 1750401
+          "lastMonad": 1750401,
+          "chapter": 1,
+          "verse": 5
         }
       ]
     },
@@ -3521,8 +4439,11 @@
       "reference": "Philippians 4:8",
       "monads": [
         {
+          "bookName": "Philippians",
           "firstMonad": 1701838,
-          "lastMonad": 1701922
+          "lastMonad": 1701922,
+          "chapter": 4,
+          "verse": 8
         }
       ]
     },
@@ -3533,8 +4454,11 @@
       "reference": "Matthew 7:24-27",
       "monads": [
         {
+          "bookName": "Matthew",
           "firstMonad": 1356718,
-          "lastMonad": 1356918
+          "lastMonad": 1356918,
+          "chapter": 7,
+          "verse": 24
         }
       ]
     },
@@ -3545,8 +4469,11 @@
       "reference": "Psalm 131",
       "monads": [
         {
+          "bookName": "Psalms",
           "firstMonad": 926985,
-          "lastMonad": 927130
+          "lastMonad": 927130,
+          "chapter": 131,
+          "verse": 1
         }
       ]
     },
@@ -3557,8 +4484,11 @@
       "reference": "Hosea 6:3",
       "monads": [
         {
+          "bookName": "Hosea",
           "firstMonad": 1279525,
-          "lastMonad": 1279596
+          "lastMonad": 1279596,
+          "chapter": 6,
+          "verse": 3
         }
       ]
     },
@@ -3569,8 +4499,11 @@
       "reference": "2 Kings 22:8",
       "monads": [
         {
+          "bookName": "2 Kings",
           "firstMonad": 627793,
-          "lastMonad": 627868
+          "lastMonad": 627868,
+          "chapter": 22,
+          "verse": 8
         }
       ]
     },
@@ -3581,8 +4514,11 @@
       "reference": "Jonah 1:8",
       "monads": [
         {
+          "bookName": "Jonah",
           "firstMonad": 1303705,
-          "lastMonad": 1303772
+          "lastMonad": 1303772,
+          "chapter": 1,
+          "verse": 8
         }
       ]
     },
@@ -3593,8 +4529,11 @@
       "reference": "Genesis 18:23-33",
       "monads": [
         {
+          "bookName": "Genesis",
           "firstMonad": 23929,
-          "lastMonad": 24646
+          "lastMonad": 24646,
+          "chapter": 18,
+          "verse": 23
         }
       ]
     },
@@ -3605,8 +4544,11 @@
       "reference": "Leviticus 10:10-11",
       "monads": [
         {
+          "bookName": "Leviticus",
           "firstMonad": 177097,
-          "lastMonad": 177179
+          "lastMonad": 177179,
+          "chapter": 10,
+          "verse": 10
         }
       ]
     },
@@ -3617,8 +4559,11 @@
       "reference": "Proverbs 4:20-23",
       "monads": [
         {
+          "bookName": "Proverbs",
           "firstMonad": 940569,
-          "lastMonad": 940691
+          "lastMonad": 940691,
+          "chapter": 4,
+          "verse": 20
         }
       ]
     },
@@ -3629,8 +4574,11 @@
       "reference": "Proverbs 9:10",
       "monads": [
         {
+          "bookName": "Proverbs",
           "firstMonad": 945313,
-          "lastMonad": 945351
+          "lastMonad": 945351,
+          "chapter": 9,
+          "verse": 10
         }
       ]
     },
@@ -3641,8 +4589,11 @@
       "reference": "2 Peter 1:5-8",
       "monads": [
         {
+          "bookName": "2 Peter",
           "firstMonad": 1763609,
-          "lastMonad": 1763786
+          "lastMonad": 1763786,
+          "chapter": 1,
+          "verse": 5
         }
       ]
     },
@@ -3653,12 +4604,18 @@
       "reference": "Proverbs 3:1-6, 11-12",
       "monads": [
         {
+          "bookName": "Proverbs",
           "firstMonad": 938552,
-          "lastMonad": 938791
+          "lastMonad": 938791,
+          "chapter": 3,
+          "verse": 1
         },
         {
+          "bookName": "Proverbs",
           "firstMonad": 938925,
-          "lastMonad": 939040
+          "lastMonad": 939040,
+          "chapter": 3,
+          "verse": 11
         }
       ]
     },
@@ -3669,8 +4626,11 @@
       "reference": "Acts 19:9-10",
       "monads": [
         {
+          "bookName": "Acts",
           "firstMonad": 1589510,
-          "lastMonad": 1589642
+          "lastMonad": 1589642,
+          "chapter": 19,
+          "verse": 9
         }
       ]
     },
@@ -3681,8 +4641,11 @@
       "reference": "1 Chronicles 27:32",
       "monads": [
         {
+          "bookName": "1 Chronicles",
           "firstMonad": 681926,
-          "lastMonad": 681994
+          "lastMonad": 681994,
+          "chapter": 27,
+          "verse": 32
         }
       ]
     },
@@ -3693,8 +4656,11 @@
       "reference": "3 John 6-8",
       "monads": [
         {
+          "bookName": "3 John",
           "firstMonad": 1775002,
-          "lastMonad": 1775156
+          "lastMonad": 1775156,
+          "chapter": 1,
+          "verse": 6
         }
       ]
     },
@@ -3705,8 +4671,11 @@
       "reference": "Deuteronomy 4:10",
       "monads": [
         {
+          "bookName": "Deuteronomy",
           "firstMonad": 293386,
-          "lastMonad": 293525
+          "lastMonad": 293525,
+          "chapter": 4,
+          "verse": 10
         }
       ]
     },
@@ -3717,8 +4686,11 @@
       "reference": "Haggai 2:18",
       "monads": [
         {
+          "bookName": "Haggai",
           "firstMonad": 1325374,
-          "lastMonad": 1325449
+          "lastMonad": 1325449,
+          "chapter": 2,
+          "verse": 18
         }
       ]
     },
@@ -3729,8 +4701,11 @@
       "reference": "1 Corinthians 14:35",
       "monads": [
         {
+          "bookName": "1 Corinthians",
           "firstMonad": 1657680,
-          "lastMonad": 1657752
+          "lastMonad": 1657752,
+          "chapter": 14,
+          "verse": 35
         }
       ]
     },
@@ -3741,8 +4716,11 @@
       "reference": "Job 42:7",
       "monads": [
         {
+          "bookName": "Job",
           "firstMonad": 838555,
-          "lastMonad": 838634
+          "lastMonad": 838634,
+          "chapter": 42,
+          "verse": 7
         }
       ]
     },
@@ -3753,8 +4731,11 @@
       "reference": "Numbers 36:1-12",
       "monads": [
         {
+          "bookName": "Numbers",
           "firstMonad": 284853,
-          "lastMonad": 285526
+          "lastMonad": 285526,
+          "chapter": 36,
+          "verse": 1
         }
       ]
     },
@@ -3765,8 +4746,11 @@
       "reference": "Psalm 98:1",
       "monads": [
         {
+          "bookName": "Psalms",
           "firstMonad": 904113,
-          "lastMonad": 904171
+          "lastMonad": 904171,
+          "chapter": 98,
+          "verse": 1
         }
       ]
     },
@@ -3777,8 +4761,11 @@
       "reference": "Deuteronomy 11:19",
       "monads": [
         {
+          "bookName": "Deuteronomy",
           "firstMonad": 307132,
-          "lastMonad": 307201
+          "lastMonad": 307201,
+          "chapter": 11,
+          "verse": 19
         }
       ]
     },
@@ -3789,8 +4776,11 @@
       "reference": "Titus 1:11",
       "monads": [
         {
+          "bookName": "Titus",
           "firstMonad": 1727801,
-          "lastMonad": 1727856
+          "lastMonad": 1727856,
+          "chapter": 1,
+          "verse": 11
         }
       ]
     },
@@ -3801,8 +4791,11 @@
       "reference": "2 Kings 12:2",
       "monads": [
         {
+          "bookName": "2 Kings",
           "firstMonad": 607183,
-          "lastMonad": 607224
+          "lastMonad": 607224,
+          "chapter": 12,
+          "verse": 2
         }
       ]
     },
@@ -3813,12 +4806,18 @@
       "reference": "Nehemiah 8:2-3, 7-8",
       "monads": [
         {
+          "bookName": "Nehemiah",
           "firstMonad": 774422,
-          "lastMonad": 774623
+          "lastMonad": 774623,
+          "chapter": 8,
+          "verse": 2
         },
         {
+          "bookName": "Nehemiah",
           "firstMonad": 774851,
-          "lastMonad": 774980
+          "lastMonad": 774980,
+          "chapter": 8,
+          "verse": 7
         }
       ]
     },
@@ -3829,8 +4828,11 @@
       "reference": "Mark 4:33-34",
       "monads": [
         {
+          "bookName": "Mark",
           "firstMonad": 1411804,
-          "lastMonad": 1411900
+          "lastMonad": 1411900,
+          "chapter": 4,
+          "verse": 33
         }
       ]
     },
@@ -3841,8 +4843,11 @@
       "reference": "Psalm 60",
       "monads": [
         {
+          "bookName": "Psalms",
           "firstMonad": 876759,
-          "lastMonad": 877234
+          "lastMonad": 877234,
+          "chapter": 60,
+          "verse": 1
         }
       ]
     }
@@ -3855,8 +4860,11 @@
       "reference": "1 Chronicles 28:19",
       "monads": [
         {
+          "bookName": "1 Chronicles",
           "firstMonad": 683565,
-          "lastMonad": 683633
+          "lastMonad": 683633,
+          "chapter": 28,
+          "verse": 19
         }
       ]
     },
@@ -3867,8 +4875,11 @@
       "reference": "Hebrews 1:1-2",
       "monads": [
         {
+          "bookName": "Hebrews",
           "firstMonad": 1731052,
-          "lastMonad": 1731154
+          "lastMonad": 1731154,
+          "chapter": 1,
+          "verse": 1
         }
       ]
     },
@@ -3879,8 +4890,11 @@
       "reference": "1 Thessalonians 5:19-21",
       "monads": [
         {
+          "bookName": "1 Thessalonians",
           "firstMonad": 1712882,
-          "lastMonad": 1712940
+          "lastMonad": 1712940,
+          "chapter": 5,
+          "verse": 19
         }
       ]
     },
@@ -3891,8 +4905,11 @@
       "reference": "Luke 1:1-4",
       "monads": [
         {
+          "bookName": "Luke",
           "firstMonad": 1442274,
-          "lastMonad": 1442442
+          "lastMonad": 1442442,
+          "chapter": 1,
+          "verse": 1
         }
       ]
     },
@@ -3903,8 +4920,11 @@
       "reference": "Colossians 1:6",
       "monads": [
         {
+          "bookName": "Colossians",
           "firstMonad": 1702953,
-          "lastMonad": 1703045
+          "lastMonad": 1703045,
+          "chapter": 1,
+          "verse": 6
         }
       ]
     },
@@ -3915,8 +4935,11 @@
       "reference": "John 20:30-31",
       "monads": [
         {
+          "bookName": "John",
           "firstMonad": 1550231,
-          "lastMonad": 1550365
+          "lastMonad": 1550365,
+          "chapter": 20,
+          "verse": 30
         }
       ]
     },
@@ -3927,8 +4950,11 @@
       "reference": "Zephaniah 3:9",
       "monads": [
         {
+          "bookName": "Zephaniah",
           "firstMonad": 1322109,
-          "lastMonad": 1322146
+          "lastMonad": 1322146,
+          "chapter": 3,
+          "verse": 9
         }
       ]
     },
@@ -3939,8 +4965,11 @@
       "reference": "Proverbs 10:11",
       "monads": [
         {
+          "bookName": "Proverbs",
           "firstMonad": 946003,
-          "lastMonad": 946041
+          "lastMonad": 946041,
+          "chapter": 10,
+          "verse": 11
         }
       ]
     },
@@ -3951,8 +4980,11 @@
       "reference": "Esther 8:9",
       "monads": [
         {
+          "bookName": "Esther",
           "firstMonad": 796878,
-          "lastMonad": 797107
+          "lastMonad": 797107,
+          "chapter": 8,
+          "verse": 9
         }
       ]
     },
@@ -3963,8 +4995,11 @@
       "reference": "2 Timothy 2:2",
       "monads": [
         {
+          "bookName": "2 Timothy",
           "firstMonad": 1723706,
-          "lastMonad": 1723773
+          "lastMonad": 1723773,
+          "chapter": 2,
+          "verse": 2
         }
       ]
     },
@@ -3975,8 +5010,11 @@
       "reference": "Isaiah 61:1-2",
       "monads": [
         {
+          "bookName": "Isaiah",
           "firstMonad": 1060444,
-          "lastMonad": 1060643
+          "lastMonad": 1060643,
+          "chapter": 61,
+          "verse": 1
         }
       ]
     },
@@ -3987,8 +5025,11 @@
       "reference": "Matthew 22:43",
       "monads": [
         {
+          "bookName": "Matthew",
           "firstMonad": 1388390,
-          "lastMonad": 1388441
+          "lastMonad": 1388441,
+          "chapter": 22,
+          "verse": 43
         }
       ]
     },
@@ -3999,8 +5040,11 @@
       "reference": "Matthew 7:28-29",
       "monads": [
         {
+          "bookName": "Matthew",
           "firstMonad": 1356919,
-          "lastMonad": 1356980
+          "lastMonad": 1356980,
+          "chapter": 7,
+          "verse": 28
         }
       ]
     },
@@ -4011,8 +5055,11 @@
       "reference": "Revelation 22:17",
       "monads": [
         {
+          "bookName": "Revelation",
           "firstMonad": 1804808,
-          "lastMonad": 1804879
+          "lastMonad": 1804879,
+          "chapter": 22,
+          "verse": 17
         }
       ]
     },
@@ -4023,8 +5070,11 @@
       "reference": "Ephesians 4:15",
       "monads": [
         {
+          "bookName": "Ephesians",
           "firstMonad": 1693059,
-          "lastMonad": 1693118
+          "lastMonad": 1693118,
+          "chapter": 4,
+          "verse": 15
         }
       ]
     },
@@ -4035,8 +5085,11 @@
       "reference": "Colossians 4:6",
       "monads": [
         {
+          "bookName": "Colossians",
           "firstMonad": 1707275,
-          "lastMonad": 1707325
+          "lastMonad": 1707325,
+          "chapter": 4,
+          "verse": 6
         }
       ]
     },
@@ -4047,8 +5100,11 @@
       "reference": "1 Corinthians 14:26",
       "monads": [
         {
+          "bookName": "1 Corinthians",
           "firstMonad": 1657144,
-          "lastMonad": 1657253
+          "lastMonad": 1657253,
+          "chapter": 14,
+          "verse": 26
         }
       ]
     },
@@ -4059,8 +5115,11 @@
       "reference": "Acts 9:27",
       "monads": [
         {
+          "bookName": "Acts",
           "firstMonad": 1569542,
-          "lastMonad": 1569635
+          "lastMonad": 1569635,
+          "chapter": 9,
+          "verse": 27
         }
       ]
     },
@@ -4071,8 +5130,11 @@
       "reference": "James 3:2-12",
       "monads": [
         {
+          "bookName": "James",
           "firstMonad": 1753155,
-          "lastMonad": 1753716
+          "lastMonad": 1753716,
+          "chapter": 3,
+          "verse": 2
         }
       ]
     },
@@ -4083,8 +5145,11 @@
       "reference": "Proverbs 25:11",
       "monads": [
         {
+          "bookName": "Proverbs",
           "firstMonad": 961658,
-          "lastMonad": 961682
+          "lastMonad": 961682,
+          "chapter": 25,
+          "verse": 11
         }
       ]
     },
@@ -4095,8 +5160,11 @@
       "reference": "Ecclesiastes 12:9-13",
       "monads": [
         {
+          "bookName": "Ecclesiastes",
           "firstMonad": 979979,
-          "lastMonad": 980279
+          "lastMonad": 980279,
+          "chapter": 12,
+          "verse": 9
         }
       ]
     },
@@ -4107,8 +5175,11 @@
       "reference": "Genesis 31:44-54",
       "monads": [
         {
+          "bookName": "Genesis",
           "firstMonad": 51159,
-          "lastMonad": 51886
+          "lastMonad": 51886,
+          "chapter": 31,
+          "verse": 44
         }
       ]
     },
@@ -4119,8 +5190,11 @@
       "reference": "Numbers 15:30",
       "monads": [
         {
+          "bookName": "Numbers",
           "firstMonad": 246224,
-          "lastMonad": 246286
+          "lastMonad": 246286,
+          "chapter": 15,
+          "verse": 30
         }
       ]
     },
@@ -4131,8 +5205,11 @@
       "reference": "Deuteronomy 5:20",
       "monads": [
         {
+          "bookName": "Deuteronomy",
           "firstMonad": 296996,
-          "lastMonad": 297015
+          "lastMonad": 297015,
+          "chapter": 5,
+          "verse": 20
         }
       ]
     },
@@ -4143,8 +5220,11 @@
       "reference": "Psalm 1:1-2",
       "monads": [
         {
+          "bookName": "Psalms",
           "firstMonad": 839274,
-          "lastMonad": 839355
+          "lastMonad": 839355,
+          "chapter": 1,
+          "verse": 1
         }
       ]
     },
@@ -4155,8 +5235,11 @@
       "reference": "Proverbs 17:4",
       "monads": [
         {
+          "bookName": "Proverbs",
           "firstMonad": 952990,
-          "lastMonad": 953014
+          "lastMonad": 953014,
+          "chapter": 17,
+          "verse": 4
         }
       ]
     },
@@ -4167,8 +5250,11 @@
       "reference": "2 Timothy 2:23-25",
       "monads": [
         {
+          "bookName": "2 Timothy",
           "firstMonad": 1724786,
-          "lastMonad": 1724923
+          "lastMonad": 1724923,
+          "chapter": 2,
+          "verse": 23
         }
       ]
     },
@@ -4179,8 +5265,11 @@
       "reference": "Jude 16",
       "monads": [
         {
+          "bookName": "Jude",
           "firstMonad": 1776946,
-          "lastMonad": 1777003
+          "lastMonad": 1777003,
+          "chapter": 1,
+          "verse": 16
         }
       ]
     },
@@ -4191,8 +5280,11 @@
       "reference": "Nehemiah 4:1-4",
       "monads": [
         {
+          "bookName": "Nehemiah",
           "firstMonad": 767143,
-          "lastMonad": 767490
+          "lastMonad": 767490,
+          "chapter": 4,
+          "verse": 1
         }
       ]
     },
@@ -4203,8 +5295,11 @@
       "reference": "Psalm 75:4-5",
       "monads": [
         {
+          "bookName": "Psalms",
           "firstMonad": 887849,
-          "lastMonad": 887923
+          "lastMonad": 887923,
+          "chapter": 75,
+          "verse": 4
         }
       ]
     },
@@ -4215,8 +5310,11 @@
       "reference": "Hebrews 2:1-4",
       "monads": [
         {
+          "bookName": "Hebrews",
           "firstMonad": 1731978,
-          "lastMonad": 1732190
+          "lastMonad": 1732190,
+          "chapter": 2,
+          "verse": 1
         }
       ]
     },
@@ -4227,8 +5325,11 @@
       "reference": "John 1:1-9",
       "monads": [
         {
+          "bookName": "John",
           "firstMonad": 1504781,
-          "lastMonad": 1505127
+          "lastMonad": 1505127,
+          "chapter": 1,
+          "verse": 1
         }
       ]
     },
@@ -4239,8 +5340,11 @@
       "reference": "Amos 3:7",
       "monads": [
         {
+          "bookName": "Amos",
           "firstMonad": 1294157,
-          "lastMonad": 1294193
+          "lastMonad": 1294193,
+          "chapter": 3,
+          "verse": 7
         }
       ]
     },
@@ -4251,8 +5355,11 @@
       "reference": "Luke 18:35-43",
       "monads": [
         {
+          "bookName": "Luke",
           "firstMonad": 1488839,
-          "lastMonad": 1489198
+          "lastMonad": 1489198,
+          "chapter": 18,
+          "verse": 35
         }
       ]
     },
@@ -4263,8 +5370,11 @@
       "reference": "Judges 6:36-40",
       "monads": [
         {
+          "bookName": "Judges",
           "firstMonad": 397009,
-          "lastMonad": 397362
+          "lastMonad": 397362,
+          "chapter": 6,
+          "verse": 36
         }
       ]
     },
@@ -4275,8 +5385,11 @@
       "reference": "Exodus 13:21-22",
       "monads": [
         {
+          "bookName": "Exodus",
           "firstMonad": 110065,
-          "lastMonad": 110194
+          "lastMonad": 110194,
+          "chapter": 13,
+          "verse": 21
         }
       ]
     },
@@ -4287,8 +5400,11 @@
       "reference": "Romans 12:14",
       "monads": [
         {
+          "bookName": "Romans",
           "firstMonad": 1629835,
-          "lastMonad": 1629870
+          "lastMonad": 1629870,
+          "chapter": 12,
+          "verse": 14
         }
       ]
     },
@@ -4299,8 +5415,11 @@
       "reference": "Isaiah 52:7",
       "monads": [
         {
+          "bookName": "Isaiah",
           "firstMonad": 1051405,
-          "lastMonad": 1051476
+          "lastMonad": 1051476,
+          "chapter": 52,
+          "verse": 7
         }
       ]
     },
@@ -4311,8 +5430,11 @@
       "reference": "Psalm 68:11",
       "monads": [
         {
+          "bookName": "Psalms",
           "firstMonad": 881002,
-          "lastMonad": 881044
+          "lastMonad": 881044,
+          "chapter": 68,
+          "verse": 11
         }
       ]
     },
@@ -4323,8 +5445,11 @@
       "reference": "Proverbs 31:8-9",
       "monads": [
         {
+          "bookName": "Proverbs",
           "firstMonad": 967934,
-          "lastMonad": 967998
+          "lastMonad": 967998,
+          "chapter": 31,
+          "verse": 8
         }
       ]
     },
@@ -4335,8 +5460,11 @@
       "reference": "2 John 12",
       "monads": [
         {
+          "bookName": "2 John",
           "firstMonad": 1774595,
-          "lastMonad": 1774680
+          "lastMonad": 1774680,
+          "chapter": 1,
+          "verse": 12
         }
       ]
     },
@@ -4347,8 +5475,11 @@
       "reference": "Ezekiel 3:16-21",
       "monads": [
         {
+          "bookName": "Ezekiel",
           "firstMonad": 1167884,
-          "lastMonad": 1168281
+          "lastMonad": 1168281,
+          "chapter": 3,
+          "verse": 16
         }
       ]
     },
@@ -4359,8 +5490,11 @@
       "reference": "Acts 19:17-20",
       "monads": [
         {
+          "bookName": "Acts",
           "firstMonad": 1589957,
-          "lastMonad": 1590178
+          "lastMonad": 1590178,
+          "chapter": 19,
+          "verse": 17
         }
       ]
     },
@@ -4371,8 +5505,11 @@
       "reference": "1 Corinthians 9:19-23",
       "monads": [
         {
+          "bookName": "1 Corinthians",
           "firstMonad": 1648754,
-          "lastMonad": 1649143
+          "lastMonad": 1649143,
+          "chapter": 9,
+          "verse": 19
         }
       ]
     },
@@ -4383,8 +5520,11 @@
       "reference": "Ecclesiastes 3:7",
       "monads": [
         {
+          "bookName": "Ecclesiastes",
           "firstMonad": 971196,
-          "lastMonad": 971236
+          "lastMonad": 971236,
+          "chapter": 3,
+          "verse": 7
         }
       ]
     },
@@ -4395,8 +5535,11 @@
       "reference": "Esther 2:10",
       "monads": [
         {
+          "bookName": "Esther",
           "firstMonad": 789632,
-          "lastMonad": 789676
+          "lastMonad": 789676,
+          "chapter": 2,
+          "verse": 10
         }
       ]
     },
@@ -4407,8 +5550,11 @@
       "reference": "Genesis 49:28",
       "monads": [
         {
+          "bookName": "Genesis",
           "firstMonad": 85430,
-          "lastMonad": 85492
+          "lastMonad": 85492,
+          "chapter": 49,
+          "verse": 28
         }
       ]
     },
@@ -4419,8 +5565,11 @@
       "reference": "Matthew 28:15",
       "monads": [
         {
+          "bookName": "Matthew",
           "firstMonad": 1404219,
-          "lastMonad": 1404277
+          "lastMonad": 1404277,
+          "chapter": 28,
+          "verse": 15
         }
       ]
     },
@@ -4431,8 +5580,11 @@
       "reference": "Proverbs 15:22",
       "monads": [
         {
+          "bookName": "Proverbs",
           "firstMonad": 951502,
-          "lastMonad": 951526
+          "lastMonad": 951526,
+          "chapter": 15,
+          "verse": 22
         }
       ]
     },
@@ -4443,8 +5595,11 @@
       "reference": "Ecclesiastes 5:1-7",
       "monads": [
         {
+          "bookName": "Ecclesiastes",
           "firstMonad": 972810,
-          "lastMonad": 973231
+          "lastMonad": 973231,
+          "chapter": 5,
+          "verse": 1
         }
       ]
     },
@@ -4455,8 +5610,11 @@
       "reference": "Proverbs 2:1-2",
       "monads": [
         {
+          "bookName": "Proverbs",
           "firstMonad": 937857,
-          "lastMonad": 937911
+          "lastMonad": 937911,
+          "chapter": 2,
+          "verse": 1
         }
       ]
     },
@@ -4467,8 +5625,11 @@
       "reference": "Esther 8:17",
       "monads": [
         {
+          "bookName": "Esther",
           "firstMonad": 797668,
-          "lastMonad": 797768
+          "lastMonad": 797768,
+          "chapter": 8,
+          "verse": 17
         }
       ]
     }
@@ -4481,8 +5642,11 @@
       "reference": "Psalm 145:7",
       "monads": [
         {
+          "bookName": "Psalms",
           "firstMonad": 934089,
-          "lastMonad": 934125
+          "lastMonad": 934125,
+          "chapter": 145,
+          "verse": 7
         }
       ]
     },
@@ -4493,8 +5657,11 @@
       "reference": "Colossians 3:15",
       "monads": [
         {
+          "bookName": "Colossians",
           "firstMonad": 1706551,
-          "lastMonad": 1706613
+          "lastMonad": 1706613,
+          "chapter": 3,
+          "verse": 15
         }
       ]
     },
@@ -4505,8 +5672,11 @@
       "reference": "Zephaniah 3:16-17",
       "monads": [
         {
+          "bookName": "Zephaniah",
           "firstMonad": 1322523,
-          "lastMonad": 1322688
+          "lastMonad": 1322688,
+          "chapter": 3,
+          "verse": 16
         }
       ]
     },
@@ -4517,8 +5687,11 @@
       "reference": "Psalm 19:1",
       "monads": [
         {
+          "bookName": "Psalms",
           "firstMonad": 849188,
-          "lastMonad": 849212
+          "lastMonad": 849212,
+          "chapter": 19,
+          "verse": 1
         }
       ]
     },
@@ -4529,8 +5702,11 @@
       "reference": "Ephesians 2:10",
       "monads": [
         {
+          "bookName": "Ephesians",
           "firstMonad": 1690330,
-          "lastMonad": 1690388
+          "lastMonad": 1690388,
+          "chapter": 2,
+          "verse": 10
         }
       ]
     },
@@ -4541,8 +5717,11 @@
       "reference": "Isaiah 53:2",
       "monads": [
         {
+          "bookName": "Isaiah",
           "firstMonad": 1052025,
-          "lastMonad": 1052097
+          "lastMonad": 1052097,
+          "chapter": 53,
+          "verse": 2
         }
       ]
     },
@@ -4553,8 +5732,11 @@
       "reference": "Hebrews 12:1-2",
       "monads": [
         {
+          "bookName": "Hebrews",
           "firstMonad": 1746826,
-          "lastMonad": 1747061
+          "lastMonad": 1747061,
+          "chapter": 12,
+          "verse": 1
         }
       ]
     },
@@ -4565,12 +5747,18 @@
       "reference": "Genesis 18:1-8, 16",
       "monads": [
         {
+          "bookName": "Genesis",
           "firstMonad": 22729,
-          "lastMonad": 23207
+          "lastMonad": 23207,
+          "chapter": 18,
+          "verse": 1
         },
         {
+          "bookName": "Genesis",
           "firstMonad": 23581,
-          "lastMonad": 23637
+          "lastMonad": 23637,
+          "chapter": 18,
+          "verse": 16
         }
       ]
     },
@@ -4581,8 +5769,11 @@
       "reference": "Exodus 25:8-9",
       "monads": [
         {
+          "bookName": "Exodus",
           "firstMonad": 129871,
-          "lastMonad": 129944
+          "lastMonad": 129944,
+          "chapter": 25,
+          "verse": 8
         }
       ]
     },
@@ -4593,8 +5784,11 @@
       "reference": "Exodus 35:30-36:1",
       "monads": [
         {
+          "bookName": "Exodus",
           "firstMonad": 151324,
-          "lastMonad": 151712
+          "lastMonad": 151712,
+          "chapter": 35,
+          "verse": 30
         }
       ]
     },
@@ -4605,8 +5799,11 @@
       "reference": "Esther 9:26-28",
       "monads": [
         {
+          "bookName": "Esther",
           "firstMonad": 799546,
-          "lastMonad": 799804
+          "lastMonad": 799804,
+          "chapter": 9,
+          "verse": 26
         }
       ]
     },
@@ -4617,8 +5814,11 @@
       "reference": "Psalm 137:1-6",
       "monads": [
         {
+          "bookName": "Psalms",
           "firstMonad": 929590,
-          "lastMonad": 929835
+          "lastMonad": 929835,
+          "chapter": 137,
+          "verse": 1
         }
       ]
     },
@@ -4629,8 +5829,11 @@
       "reference": "Matthew 26:7-13",
       "monads": [
         {
+          "bookName": "Matthew",
           "firstMonad": 1396339,
-          "lastMonad": 1396622
+          "lastMonad": 1396622,
+          "chapter": 26,
+          "verse": 7
         }
       ]
     },
@@ -4641,8 +5844,11 @@
       "reference": "Genesis 10:8-9",
       "monads": [
         {
+          "bookName": "Genesis",
           "firstMonad": 12725,
-          "lastMonad": 12850
+          "lastMonad": 12850,
+          "chapter": 10,
+          "verse": 8
         }
       ]
     },
@@ -4653,8 +5859,11 @@
       "reference": "1 Corinthians 13:4-7",
       "monads": [
         {
+          "bookName": "1 Corinthians",
           "firstMonad": 1655038,
-          "lastMonad": 1655182
+          "lastMonad": 1655182,
+          "chapter": 13,
+          "verse": 4
         }
       ]
     },
@@ -4665,8 +5874,11 @@
       "reference": "Isaiah 42:10-12",
       "monads": [
         {
+          "bookName": "Isaiah",
           "firstMonad": 1037527,
-          "lastMonad": 1037673
+          "lastMonad": 1037673,
+          "chapter": 42,
+          "verse": 10
         }
       ]
     },
@@ -4677,8 +5889,11 @@
       "reference": "Psalm 146:5",
       "monads": [
         {
+          "bookName": "Psalms",
           "firstMonad": 934795,
-          "lastMonad": 934860
+          "lastMonad": 934860,
+          "chapter": 146,
+          "verse": 5
         }
       ]
     },
@@ -4689,8 +5904,11 @@
       "reference": "Ecclesiastes 7:1-4",
       "monads": [
         {
+          "bookName": "Ecclesiastes",
           "firstMonad": 974697,
-          "lastMonad": 974857
+          "lastMonad": 974857,
+          "chapter": 7,
+          "verse": 1
         }
       ]
     },
@@ -4701,8 +5919,11 @@
       "reference": "Numbers 21:8-9",
       "monads": [
         {
+          "bookName": "Numbers",
           "firstMonad": 257050,
-          "lastMonad": 257182
+          "lastMonad": 257182,
+          "chapter": 21,
+          "verse": 8
         }
       ]
     },
@@ -4713,8 +5934,11 @@
       "reference": "2 Timothy 3:4",
       "monads": [
         {
+          "bookName": "2 Timothy",
           "firstMonad": 1725140,
-          "lastMonad": 1725182
+          "lastMonad": 1725182,
+          "chapter": 3,
+          "verse": 4
         }
       ]
     },
@@ -4725,8 +5949,11 @@
       "reference": "1 John 1:1-4",
       "monads": [
         {
+          "bookName": "1 John",
           "firstMonad": 1767303,
-          "lastMonad": 1767625
+          "lastMonad": 1767625,
+          "chapter": 1,
+          "verse": 1
         }
       ]
     },
@@ -4737,8 +5964,11 @@
       "reference": "Ecclesiastes 2:24-26",
       "monads": [
         {
+          "bookName": "Ecclesiastes",
           "firstMonad": 970753,
-          "lastMonad": 970956
+          "lastMonad": 970956,
+          "chapter": 2,
+          "verse": 24
         }
       ]
     },
@@ -4749,8 +5979,11 @@
       "reference": "1 Samuel 9:22-24",
       "monads": [
         {
+          "bookName": "1 Samuel",
           "firstMonad": 444366,
-          "lastMonad": 444564
+          "lastMonad": 444564,
+          "chapter": 9,
+          "verse": 22
         }
       ]
     },
@@ -4761,8 +5994,11 @@
       "reference": "1 Samuel 18:4",
       "monads": [
         {
+          "bookName": "1 Samuel",
           "firstMonad": 462255,
-          "lastMonad": 462305
+          "lastMonad": 462305,
+          "chapter": 18,
+          "verse": 4
         }
       ]
     },
@@ -4773,8 +6009,11 @@
       "reference": "Luke 7:36-47",
       "monads": [
         {
+          "bookName": "Luke",
           "firstMonad": 1460392,
-          "lastMonad": 1461175
+          "lastMonad": 1461175,
+          "chapter": 7,
+          "verse": 36
         }
       ]
     },
@@ -4785,8 +6024,11 @@
       "reference": "Genesis 27:26-27",
       "monads": [
         {
+          "bookName": "Genesis",
           "firstMonad": 41210,
-          "lastMonad": 41345
+          "lastMonad": 41345,
+          "chapter": 27,
+          "verse": 26
         }
       ]
     },
@@ -4797,8 +6039,11 @@
       "reference": "2 Corinthians 2:14-16",
       "monads": [
         {
+          "bookName": "2 Corinthians",
           "firstMonad": 1664768,
-          "lastMonad": 1664988
+          "lastMonad": 1664988,
+          "chapter": 2,
+          "verse": 14
         }
       ]
     },
@@ -4809,8 +6054,11 @@
       "reference": "Judges 5:11",
       "monads": [
         {
+          "bookName": "Judges",
           "firstMonad": 393464,
-          "lastMonad": 393557
+          "lastMonad": 393557,
+          "chapter": 5,
+          "verse": 11
         }
       ]
     },
@@ -4821,8 +6069,11 @@
       "reference": "Psalm 150",
       "monads": [
         {
+          "bookName": "Psalms",
           "firstMonad": 936464,
-          "lastMonad": 936638
+          "lastMonad": 936638,
+          "chapter": 150,
+          "verse": 1
         }
       ]
     },
@@ -4833,8 +6084,11 @@
       "reference": "2 Samuel 14:1-11",
       "monads": [
         {
+          "bookName": "2 Samuel",
           "firstMonad": 505815,
-          "lastMonad": 506584
+          "lastMonad": 506584,
+          "chapter": 14,
+          "verse": 1
         }
       ]
     },
@@ -4845,8 +6099,11 @@
       "reference": "Ezekiel 37:1-10",
       "monads": [
         {
+          "bookName": "Ezekiel",
           "firstMonad": 1223414,
-          "lastMonad": 1224067
+          "lastMonad": 1224067,
+          "chapter": 37,
+          "verse": 1
         }
       ]
     },
@@ -4857,8 +6114,11 @@
       "reference": "Habakkuk 1:1",
       "monads": [
         {
+          "bookName": "Habakkuk",
           "firstMonad": 1316025,
-          "lastMonad": 1316049
+          "lastMonad": 1316049,
+          "chapter": 1,
+          "verse": 1
         }
       ]
     },
@@ -4869,8 +6129,11 @@
       "reference": "1 Kings 11:29-39",
       "monads": [
         {
+          "bookName": "1 Kings",
           "firstMonad": 556916,
-          "lastMonad": 557758
+          "lastMonad": 557758,
+          "chapter": 11,
+          "verse": 29
         }
       ]
     },
@@ -4881,8 +6144,11 @@
       "reference": "Lamentations 1:1",
       "monads": [
         {
+          "bookName": "Lamentations",
           "firstMonad": 1157441,
-          "lastMonad": 1157511
+          "lastMonad": 1157511,
+          "chapter": 1,
+          "verse": 1
         }
       ]
     },
@@ -4893,8 +6159,11 @@
       "reference": "2 Kings 3:15",
       "monads": [
         {
+          "bookName": "2 Kings",
           "firstMonad": 587449,
-          "lastMonad": 587510
+          "lastMonad": 587510,
+          "chapter": 3,
+          "verse": 15
         }
       ]
     },
@@ -4905,8 +6174,11 @@
       "reference": "Ephesians 3:10",
       "monads": [
         {
+          "bookName": "Ephesians",
           "firstMonad": 1691677,
-          "lastMonad": 1691740
+          "lastMonad": 1691740,
+          "chapter": 3,
+          "verse": 10
         }
       ]
     },
@@ -4917,8 +6189,11 @@
       "reference": "2 Kings 4:8-11",
       "monads": [
         {
+          "bookName": "2 Kings",
           "firstMonad": 588880,
-          "lastMonad": 589138
+          "lastMonad": 589138,
+          "chapter": 4,
+          "verse": 8
         }
       ]
     },
@@ -4929,8 +6204,11 @@
       "reference": "1 Chronicles 25:1-8",
       "monads": [
         {
+          "bookName": "1 Chronicles",
           "firstMonad": 676704,
-          "lastMonad": 677351
+          "lastMonad": 677351,
+          "chapter": 25,
+          "verse": 1
         }
       ]
     },
@@ -4941,8 +6219,11 @@
       "reference": "Nahum 1:15",
       "monads": [
         {
+          "bookName": "Nahum",
           "firstMonad": 1314046,
-          "lastMonad": 1314164
+          "lastMonad": 1314164,
+          "chapter": 1,
+          "verse": 15
         }
       ]
     },
@@ -4953,8 +6234,11 @@
       "reference": "Revelation 7:9-12",
       "monads": [
         {
+          "bookName": "Revelation",
           "firstMonad": 1786154,
-          "lastMonad": 1786418
+          "lastMonad": 1786418,
+          "chapter": 7,
+          "verse": 9
         }
       ]
     },
@@ -4965,8 +6249,11 @@
       "reference": "Luke 14:18-21",
       "monads": [
         {
+          "bookName": "Luke",
           "firstMonad": 1480357,
-          "lastMonad": 1480575
+          "lastMonad": 1480575,
+          "chapter": 14,
+          "verse": 18
         }
       ]
     },
@@ -4977,8 +6264,11 @@
       "reference": "Mark 15:34",
       "monads": [
         {
+          "bookName": "Mark",
           "firstMonad": 1439866,
-          "lastMonad": 1439942
+          "lastMonad": 1439942,
+          "chapter": 15,
+          "verse": 34
         }
       ]
     },
@@ -4989,8 +6279,11 @@
       "reference": "John 2:1-11",
       "monads": [
         {
+          "bookName": "John",
           "firstMonad": 1507553,
-          "lastMonad": 1508106
+          "lastMonad": 1508106,
+          "chapter": 2,
+          "verse": 1
         }
       ]
     },
@@ -5001,8 +6294,11 @@
       "reference": "1 Corinthians 11:23-26",
       "monads": [
         {
+          "bookName": "1 Corinthians",
           "firstMonad": 1652333,
-          "lastMonad": 1652628
+          "lastMonad": 1652628,
+          "chapter": 11,
+          "verse": 23
         }
       ]
     },
@@ -5013,8 +6309,11 @@
       "reference": "1 Samuel 20:18-42",
       "monads": [
         {
+          "bookName": "1 Samuel",
           "firstMonad": 466495,
-          "lastMonad": 468086
+          "lastMonad": 468086,
+          "chapter": 20,
+          "verse": 18
         }
       ]
     },
@@ -5025,8 +6324,11 @@
       "reference": "1 Corinthians 9:24-27",
       "monads": [
         {
+          "bookName": "1 Corinthians",
           "firstMonad": 1649144,
-          "lastMonad": 1649340
+          "lastMonad": 1649340,
+          "chapter": 9,
+          "verse": 24
         }
       ]
     },
@@ -5037,8 +6339,11 @@
       "reference": "Genesis 21:8",
       "monads": [
         {
+          "bookName": "Genesis",
           "firstMonad": 28477,
-          "lastMonad": 28519
+          "lastMonad": 28519,
+          "chapter": 21,
+          "verse": 8
         }
       ]
     },
@@ -5049,8 +6354,11 @@
       "reference": "Proverbs 17:22",
       "monads": [
         {
+          "bookName": "Proverbs",
           "firstMonad": 953599,
-          "lastMonad": 953631
+          "lastMonad": 953631,
+          "chapter": 17,
+          "verse": 22
         }
       ]
     },
@@ -5061,8 +6369,11 @@
       "reference": "1 Kings 1:32-40",
       "monads": [
         {
+          "bookName": "1 Kings",
           "firstMonad": 531347,
-          "lastMonad": 531929
+          "lastMonad": 531929,
+          "chapter": 1,
+          "verse": 32
         }
       ]
     },
@@ -5073,8 +6384,11 @@
       "reference": "Acts 16:25-34",
       "monads": [
         {
+          "bookName": "Acts",
           "firstMonad": 1584433,
-          "lastMonad": 1584901
+          "lastMonad": 1584901,
+          "chapter": 16,
+          "verse": 25
         }
       ]
     },
@@ -5085,8 +6399,11 @@
       "reference": "Deuteronomy 31:19-22",
       "monads": [
         {
+          "bookName": "Deuteronomy",
           "firstMonad": 339794,
-          "lastMonad": 340111
+          "lastMonad": 340111,
+          "chapter": 31,
+          "verse": 19
         }
       ]
     },
@@ -5097,8 +6414,11 @@
       "reference": "Matthew 13:34",
       "monads": [
         {
+          "bookName": "Matthew",
           "firstMonad": 1369592,
-          "lastMonad": 1369645
+          "lastMonad": 1369645,
+          "chapter": 13,
+          "verse": 34
         }
       ]
     }

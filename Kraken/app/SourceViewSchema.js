@@ -172,7 +172,10 @@ const MonadSetSchema = {
   name: 'MonadSet',
   properties: {
     firstMonad: 'int',
-    lastMonad: 'int'
+    lastMonad: 'int',
+    book: 'Book',
+    chapter: 'int',
+    verse: 'int',
   }
 }
 export class MonadSet extends Realm.Object {
@@ -241,6 +244,8 @@ const SphereSchema = {
     position: 'int',
     bookCount: {type: 'int', default: 0},
     bookCounts: {type: 'list', objectType: 'Count'},
+    sourceCount: {type: 'int', default: 0},
+    sourceCounts: {type: 'list', objectType: 'Count'},
     wordCount: {type: 'int', default: 0},
     words: {type: 'list', objectType: 'Count'},
     passages: {type: 'list', objectType: 'SpherePassage'},
