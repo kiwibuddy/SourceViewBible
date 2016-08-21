@@ -113,16 +113,16 @@ export default class SphereSources extends Component {
     return (
       <View>
         <ScrollView style={styles.sphereSourcesGraph}>
-          {this._renderPie({source: sources[0], size: 130, sliceWidth: 6, subtitleStyle: {fontSize: 17}, titleStyle: {fontSize: 24}, style: {top: 50, alignSelf: 'center'}})}
-          {this._renderPie({source: sources[1], size: 80, subtitleStyle: {fontSize: 15}, titleStyle: {fontSize: 20}, style: [styles.pie, {top: 95, left: 40}]})}
-          {this._renderPie({source: sources[2], size: 80, subtitleStyle: {fontSize: 15}, titleStyle: {fontSize: 20}, style: [styles.pie, {top: 20, left: -5}]})}
-          {this._renderPie({source: sources[3], size: 80, subtitleStyle: {fontSize: 15}, titleStyle: {fontSize: 20}, style: [styles.pie, {top: 30, right: 40}]})}
-          {this._renderPie({source: sources[4], size: 60, subtitleStyle: {fontSize: 12}, titleStyle: {fontSize: 16}, style: [styles.pie, {top: 130, right: 65}]})}
-          {this._renderPie({source: sources[5], size: 60, subtitleStyle: {fontSize: 12}, titleStyle: {fontSize: 16}, style: [styles.pie, {top: 15, left: 80}]})}
-          {this._renderPie({source: sources[6], size: 60, subtitleStyle: {fontSize: 12}, titleStyle: {fontSize: 16}, style: [styles.pie, {top: 105, right: 0}]})}
-          {this._renderPie({source: sources[7], size: 50, subtitleStyle: {fontSize: 10}, titleStyle: {fontSize: 13}, style: [styles.pie, {top: 5, left: 210}]})}
-          {this._renderPie({source: sources[8], size: 50, subtitleStyle: {fontSize: 10}, titleStyle: {fontSize: 13}, style: [styles.pie, {top: 15, right: -10}]})}
-          {this._renderPie({source: sources[9], size: 50, subtitleStyle: {fontSize: 10}, titleStyle: {fontSize: 13}, style: [styles.pie, {top: 145, left: -5}]})}
+          {this._renderPie({source: sources[0], size: 130, sliceWidth: 6, subtitleStyle: {fontSize: 15, textAlign: 'center'}, titleStyle: {fontSize: 24}, style: {top: 50, alignSelf: 'center'}})}
+          {this._renderPie({source: sources[1], size: 80, subtitleStyle: {fontSize: 13, textAlign: 'center'}, titleStyle: {fontSize: 20}, style: [styles.pie, {top: 95, left: 40}]})}
+          {this._renderPie({source: sources[2], size: 80, subtitleStyle: {fontSize: 13, textAlign: 'center'}, titleStyle: {fontSize: 20}, style: [styles.pie, {top: 20, left: -5}]})}
+          {this._renderPie({source: sources[3], size: 80, subtitleStyle: {fontSize: 13, textAlign: 'center'}, titleStyle: {fontSize: 20}, style: [styles.pie, {top: 30, right: 40}]})}
+          {this._renderPie({source: sources[4], size: 60, subtitleStyle: {fontSize: 11, textAlign: 'center'}, titleStyle: {fontSize: 16}, style: [styles.pie, {top: 130, right: 65}]})}
+          {this._renderPie({source: sources[5], size: 60, subtitleStyle: {fontSize: 11, textAlign: 'center'}, titleStyle: {fontSize: 16}, style: [styles.pie, {top: 15, left: 80}]})}
+          {this._renderPie({source: sources[6], size: 60, subtitleStyle: {fontSize: 11, textAlign: 'center'}, titleStyle: {fontSize: 16}, style: [styles.pie, {top: 105, right: 0}]})}
+          {this._renderPie({source: sources[7], size: 50, subtitleStyle: {fontSize: 8, textAlign: 'center'}, titleStyle: {fontSize: 13}, style: [styles.pie, {top: 5, left: 210}]})}
+          {this._renderPie({source: sources[8], size: 50, subtitleStyle: {fontSize: 8, textAlign: 'center'}, titleStyle: {fontSize: 13}, style: [styles.pie, {top: 15, right: -10}]})}
+          {this._renderPie({source: sources[9], size: 50, subtitleStyle: {fontSize: 8, textAlign: 'center'}, titleStyle: {fontSize: 13}, style: [styles.pie, {top: 145, left: -5}]})}
         </ScrollView>
         <View style={styles.textInputContainer}>
           <TextInput
@@ -309,6 +309,7 @@ const styles = StyleSheet.create({
   },
   pie: {
     position: 'absolute',
+    paddingHorizontal: 5,
   },
   ...Platform.select({
       ios: {
