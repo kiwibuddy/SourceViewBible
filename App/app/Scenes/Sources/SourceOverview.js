@@ -39,6 +39,7 @@ import { Actant, Book } from '../../Database';
 import Query from './Query';
 
 const Section = {
+  BOOKS: 'BOOKS',
   SPOKE_TO: 'SPOKE_TO',
   LISTENED_TO: 'LISTENED_TO'
 };
@@ -174,30 +175,6 @@ export default class SourceOverview extends Component {
         </TouchableOpacity>
         {statistics}
         {metaData}
-        <View style={[styles.listItemHeader, {borderTopColor: this.principalColor.tint, paddingVertical: 15}]}>
-          <Text style={StyleSheet.styles.cell.titlebold}>Books</Text>
-        </View>
-        <TouchableOpacity>
-          <View style={[styles.sourcesCellContainer, {paddingVertical: 15, paddingLeft: 15}]}>
-            <View style={styles.sourcesLeftContainer}>
-              <TouchableOpacity onPress={() => this._onPressActantIcon(actant)}>
-                <Icon
-                  name={source.iconName}
-                  style={[{color: 'red'}]}
-                  size={20}
-                  style={[styles.sourceAvatar]}
-                />
-              </TouchableOpacity>
-              <View style={styles.sourcesContent}>
-                <Text style={StyleSheet.styles.cell.titlemedium}>Book Name</Text>
-              </View>
-            </View>
-            <View style={styles.sourcesRightContainer}>
-              <Text style={StyleSheet.styles.cell.subtitle}>81 occurrences</Text>
-            </View>
-          </View>
-          <View style={[StyleSheet.styles.separator, {marginLeft: 0}]}></View>
-        </TouchableOpacity>
       </View>
     );
   };
@@ -209,7 +186,9 @@ export default class SourceOverview extends Component {
     let sourceCount = 0;
     let occurrenceCount = 0;
 
-    if (sectionID === Section.SPOKE_TO) {
+    if (sectionID === Section.BOOKS) {
+      return this._renderBooksSectionHeader();
+    } else if (sectionID === Section.SPOKE_TO) {
       title = Localizable.t('source-spoke-to', {name: source.name});
       sourceCount = spokeToCount;
       occurrenceCount = spokeToOccurrenceCount;
@@ -234,8 +213,19 @@ export default class SourceOverview extends Component {
     );
   };
 
+  _renderBooksSectionHeader = () => {
+    return (
+      <View style={[styles.listItemHeader, {borderTopColor: this.principalColor.tint, paddingVertical: 15}]}>
+        <Text style={StyleSheet.styles.cell.titlebold}>{Localizable.t('books')}</Text>
+      </View>
+    );
+  }
+
   _renderRow = (row: Object, sectionID: any, rowID: any) => {
     const { spokeToOccurrenceCount, listenedToOccurrenceCount } = this.state;
+
+    if (sectionID === Section.BOOKS) return this._renderBookRow(row);
+
     const actant = row.actant;
     const sourceRelation = actant.relationForBook(this.state.book);
 
@@ -270,6 +260,32 @@ export default class SourceOverview extends Component {
               style={styles.sourcesBarChart}
             />
             <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('occurrences.count', {count: occurrenceCount, localizedCount: Localizable.toNumber(occurrenceCount, {precision: 0})})}</Text>
+          </View>
+        </View>
+        <View style={[StyleSheet.styles.separator, {marginLeft: 0}]}></View>
+      </TouchableOpacity>
+    );
+  };
+
+  _renderBookRow = (book: Object) => {
+    return (
+      <TouchableOpacity>
+        <View style={[styles.sourcesCellContainer, {paddingVertical: 15, paddingLeft: 15}]}>
+          <View style={styles.sourcesLeftContainer}>
+            <TouchableOpacity onPress={() => this._onPressBook(book)}>
+              <Icon
+                name={'avatar-divine'}
+                style={[{color: 'red'}]}
+                size={20}
+                style={[styles.sourceAvatar]}
+              />
+            </TouchableOpacity>
+            <View style={styles.sourcesContent}>
+              <Text style={StyleSheet.styles.cell.titlemedium}>{book.name}</Text>
+            </View>
+          </View>
+          <View style={styles.sourcesRightContainer}>
+            <Text style={StyleSheet.styles.cell.subtitle}>0 occurrences</Text>
           </View>
         </View>
         <View style={[StyleSheet.styles.separator, {marginLeft: 0}]}></View>
@@ -414,6 +430,12 @@ export default class SourceOverview extends Component {
 
     const rows = {};
     const sections = [];
+
+    const books = source.books;
+    if (books.length > 0) {
+      sections.push(Section.BOOKS);
+      rows[Section.BOOKS] = books;
+    }
 
     const spokeTo = await query.spokeTo();
     const spokeToCount = spokeTo.length;
