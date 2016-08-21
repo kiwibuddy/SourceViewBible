@@ -202,18 +202,28 @@ json = {}
     else
       if pericope = Pericope.parse_one(row["reference"])
         references = references_from_pericope(pericope).map do |reference|
-          # EMDROS[:source_objects].each do |source_object|
+          monads = {}
           if djhref = BOOK_TO_DJHREF[pericope.book_name]
             sql = if reference["minChapter"] == reference["maxChapter"]
-              "SELECT * FROM verse_objects WHERE (mdf_djhbook = '#{djhref}' AND mdf_chapter = #{reference["minChapter"]} AND mdf_verse_start >= #{reference["minVerse"]} AND mdf_verse_end <= #{reference["maxVerse"]});"
+              "SELECT * FROM verse_objects WHERE (mdf_djhbook = '#{djhref}' AND mdf_chapter = #{reference["minChapter"]} AND mdf_verse_start >= #{reference["minVerse"]} AND mdf_verse_end <= #{reference["maxVerse"]})"
             else
-              "SELECT * FROM verse_objects WHERE (mdf_djhbook = '#{djhref}' AND mdf_chapter = #{reference["minChapter"]} AND mdf_verse_start >= #{reference["minVerse"]}) OR (mdf_djhbook = '#{djhref}' AND mdf_chapter = #{reference["maxChapter"]} AND mdf_verse_end <= #{reference["maxVerse"]});"
+              "SELECT * FROM verse_objects WHERE (mdf_djhbook = '#{djhref}' AND mdf_chapter = #{reference["minChapter"]} AND mdf_verse_start >= #{reference["minVerse"]}) OR (mdf_djhbook = '#{djhref}' AND mdf_chapter = #{reference["maxChapter"]} AND mdf_verse_end <= #{reference["maxVerse"]})"
             end
-            STDOUT.puts sql
+            verse_objects = EMDROS[sql].to_a
+            if verse_objects.length > 0
+              first_verse_object = verse_objects.first
+              last_verse_object = verse_objects.last
+              monads = {
+                "first": first_verse_object[:first_monad],
+                "last": last_verse_object[:last_monad],
+              }
+            else
+              STDERR.puts "No result for #{sql}"
+            end
           else
             STDERR.puts "Could not find reference for #{pericope.book_name}"
           end
-          reference
+          monads
         end
 
         section << {
@@ -230,4 +240,4 @@ json = {}
   json[sphere_name] = sphere
 end
 
-# STDOUT.puts JSON.pretty_generate(json)
+File.open("db/seeds/sphere-key-passages.json", "w+") {|f| f.write JSON.pretty_generate(json)}

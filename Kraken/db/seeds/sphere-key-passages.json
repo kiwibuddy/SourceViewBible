@@ -7,11 +7,8 @@
         "subtitle": "Genesis 1:1",
         "references": [
           {
-            "book": "Genesis",
-            "minChapter": 1,
-            "minVerse": 1,
-            "maxChapter": 1,
-            "maxVerse": 1
+            "first": 2,
+            "last": 80
           }
         ]
       },
@@ -21,11 +18,8 @@
         "subtitle": "1 Timothy 1:17",
         "references": [
           {
-            "book": "1 Timothy",
-            "minChapter": 1,
-            "minVerse": 17,
-            "maxChapter": 1,
-            "maxVerse": 17
+            "first": 1716919,
+            "last": 1716975
           }
         ]
       },
@@ -35,11 +29,8 @@
         "subtitle": "Isaiah 57:15",
         "references": [
           {
-            "book": "Isaiah",
-            "minChapter": 57,
-            "minVerse": 15,
-            "maxChapter": 57,
-            "maxVerse": 15
+            "first": 1056299,
+            "last": 1056395
           }
         ]
       },
@@ -49,11 +40,8 @@
         "subtitle": "2 Corinthians 13:14",
         "references": [
           {
-            "book": "2 Corinthians",
-            "minChapter": 13,
-            "minVerse": 14,
-            "maxChapter": 13,
-            "maxVerse": 14
+            "first": 1678780,
+            "last": 1678872
           }
         ]
       },
@@ -63,11 +51,8 @@
         "subtitle": "Leviticus 11:44-45",
         "references": [
           {
-            "book": "Leviticus",
-            "minChapter": 11,
-            "minVerse": 44,
-            "maxChapter": 11,
-            "maxVerse": 45
+            "first": 180083,
+            "last": 180227
           }
         ]
       },
@@ -77,18 +62,12 @@
         "subtitle": "1 John 4:7-8, 16",
         "references": [
           {
-            "book": "1 John",
-            "minChapter": 4,
-            "minVerse": 7,
-            "maxChapter": 4,
-            "maxVerse": 8
+            "first": 1771811,
+            "last": 1771899
           },
           {
-            "book": "1 John",
-            "minChapter": 4,
-            "minVerse": 16,
-            "maxChapter": 4,
-            "maxVerse": 16
+            "first": 1772244,
+            "last": 1772316
           }
         ]
       },
@@ -98,11 +77,8 @@
         "subtitle": "Exodus 34:6-7",
         "references": [
           {
-            "book": "Exodus",
-            "minChapter": 34,
-            "minVerse": 6,
-            "maxChapter": 34,
-            "maxVerse": 7
+            "first": 147639,
+            "last": 147825
           }
         ]
       },
@@ -112,11 +88,8 @@
         "subtitle": "Genesis 15:7-21",
         "references": [
           {
-            "book": "Genesis",
-            "minChapter": 15,
-            "minVerse": 7,
-            "maxChapter": 15,
-            "maxVerse": 21
+            "first": 19446,
+            "last": 20200
           }
         ]
       },
@@ -126,18 +99,12 @@
         "subtitle": "John 1:14, 16-18",
         "references": [
           {
-            "book": "John",
-            "minChapter": 1,
-            "minVerse": 14,
-            "maxChapter": 1,
-            "maxVerse": 14
+            "first": 1505277,
+            "last": 1505383
           },
           {
-            "book": "John",
-            "minChapter": 1,
-            "minVerse": 16,
-            "maxChapter": 1,
-            "maxVerse": 18
+            "first": 1505472,
+            "last": 1505666
           }
         ]
       },
@@ -147,11 +114,8 @@
         "subtitle": "Romans 5:6-8",
         "references": [
           {
-            "book": "Romans",
-            "minChapter": 5,
-            "minVerse": 6,
-            "maxChapter": 5,
-            "maxVerse": 8
+            "first": 1616231,
+            "last": 1616375
           }
         ]
       },
@@ -161,11 +125,8 @@
         "subtitle": "Revelation 1:18",
         "references": [
           {
-            "book": "Revelation",
-            "minChapter": 1,
-            "minVerse": 18,
-            "maxChapter": 1,
-            "maxVerse": 18
+            "first": 1778916,
+            "last": 1778981
           }
         ]
       },
@@ -175,11 +136,8 @@
         "subtitle": "Ezekiel 36:26-27",
         "references": [
           {
-            "book": "Ezekiel",
-            "minChapter": 36,
-            "minVerse": 26,
-            "maxChapter": 36,
-            "maxVerse": 27
+            "first": 1222612,
+            "last": 1222744
           }
         ]
       }
@@ -191,11 +149,8 @@
         "subtitle": "Genesis 1:26-27",
         "references": [
           {
-            "book": "Genesis",
-            "minChapter": 1,
-            "minVerse": 26,
-            "maxChapter": 1,
-            "maxVerse": 27
+            "first": 1268,
+            "last": 1455
           }
         ]
       },
@@ -205,11 +160,8 @@
         "subtitle": "Galatians 3:28",
         "references": [
           {
-            "book": "Galatians",
-            "minChapter": 3,
-            "minVerse": 28,
-            "maxChapter": 3,
-            "maxVerse": 28
+            "first": 1683791,
+            "last": 1683851
           }
         ]
       },
@@ -219,11 +171,8 @@
         "subtitle": "Romans 3:23",
         "references": [
           {
-            "book": "Romans",
-            "minChapter": 3,
-            "minVerse": 23,
-            "maxChapter": 3,
-            "maxVerse": 23
+            "first": 1613847,
+            "last": 1613877
           }
         ]
       },
@@ -233,11 +182,8 @@
         "subtitle": "John 3:16-19",
         "references": [
           {
-            "book": "John",
-            "minChapter": 3,
-            "minVerse": 16,
-            "maxChapter": 3,
-            "maxVerse": 19
+            "first": 1509648,
+            "last": 1509888
           }
         ]
       },
@@ -247,11 +193,8 @@
         "subtitle": "Acts 17:24-28",
         "references": [
           {
-            "book": "Acts",
-            "minChapter": 17,
-            "minVerse": 24,
-            "maxChapter": 17,
-            "maxVerse": 28
+            "first": 1586752,
+            "last": 1587079
           }
         ]
       },
@@ -261,11 +204,8 @@
         "subtitle": "Mark 1:1",
         "references": [
           {
-            "book": "Mark",
-            "minChapter": 1,
-            "minVerse": 1,
-            "maxChapter": 1,
-            "maxVerse": 1
+            "first": 1404520,
+            "last": 1404574
           }
         ]
       },
@@ -275,11 +215,8 @@
         "subtitle": "Zechariah 14:9",
         "references": [
           {
-            "book": "Zechariah",
-            "minChapter": 14,
-            "minVerse": 9,
-            "maxChapter": 14,
-            "maxVerse": 9
+            "first": 1339841,
+            "last": 1339892
           }
         ]
       },
@@ -289,11 +226,8 @@
         "subtitle": "2 Peter 3:13",
         "references": [
           {
-            "book": "2 Peter",
-            "minChapter": 3,
-            "minVerse": 13,
-            "maxChapter": 3,
-            "maxVerse": 13
+            "first": 1766891,
+            "last": 1766938
           }
         ]
       },
@@ -303,11 +237,8 @@
         "subtitle": "Matthew 6:31-33",
         "references": [
           {
-            "book": "Matthew",
-            "minChapter": 6,
-            "minVerse": 31,
-            "maxChapter": 6,
-            "maxVerse": 33
+            "first": 1355238,
+            "last": 1355386
           }
         ]
       },
@@ -317,11 +248,8 @@
         "subtitle": "Matthew 5:13-16",
         "references": [
           {
-            "book": "Matthew",
-            "minChapter": 5,
-            "minVerse": 13,
-            "maxChapter": 5,
-            "maxVerse": 16
+            "first": 1351206,
+            "last": 1351433
           }
         ]
       },
@@ -331,11 +259,8 @@
         "subtitle": "John 14:12-14",
         "references": [
           {
-            "book": "John",
-            "minChapter": 14,
-            "minVerse": 12,
-            "maxChapter": 14,
-            "maxVerse": 14
+            "first": 1538102,
+            "last": 1538254
           }
         ]
       },
@@ -345,11 +270,8 @@
         "subtitle": "Habakkuk 2:14",
         "references": [
           {
-            "book": "Habakkuk",
-            "minChapter": 2,
-            "minVerse": 14,
-            "maxChapter": 2,
-            "maxVerse": 14
+            "first": 1317833,
+            "last": 1317876
           }
         ]
       }
@@ -361,11 +283,8 @@
         "subtitle": "Psalm 111:2-4",
         "references": [
           {
-            "book": "Psalm",
-            "minChapter": 111,
-            "minVerse": 2,
-            "maxChapter": 111,
-            "maxVerse": 4
+            "first": 915268,
+            "last": 915362
           }
         ]
       },
@@ -375,11 +294,8 @@
         "subtitle": "2 Corinthians 5:17",
         "references": [
           {
-            "book": "2 Corinthians",
-            "minChapter": 5,
-            "minVerse": 17,
-            "maxChapter": 5,
-            "maxVerse": 17
+            "first": 1668390,
+            "last": 1668440
           }
         ]
       },
@@ -389,11 +305,8 @@
         "subtitle": "2 Chronicles 34:15",
         "references": [
           {
-            "book": "2 Chronicles",
-            "minChapter": 34,
-            "minVerse": 15,
-            "maxChapter": 34,
-            "maxVerse": 15
+            "first": 739572,
+            "last": 739630
           }
         ]
       },
@@ -403,11 +316,8 @@
         "subtitle": "Exodus 20:1-17",
         "references": [
           {
-            "book": "Exodus",
-            "minChapter": 20,
-            "minVerse": 1,
-            "maxChapter": 20,
-            "maxVerse": 17
+            "first": 120745,
+            "last": 121551
           }
         ]
       },
@@ -417,11 +327,8 @@
         "subtitle": "Romans 1:19-20",
         "references": [
           {
-            "book": "Romans",
-            "minChapter": 1,
-            "minVerse": 19,
-            "maxChapter": 1,
-            "maxVerse": 20
+            "first": 1610200,
+            "last": 1610318
           }
         ]
       },
@@ -431,11 +338,8 @@
         "subtitle": "2 Timothy 3:16-17",
         "references": [
           {
-            "book": "2 Timothy",
-            "minChapter": 3,
-            "minVerse": 16,
-            "maxChapter": 3,
-            "maxVerse": 17
+            "first": 1725782,
+            "last": 1725899
           }
         ]
       },
@@ -445,11 +349,8 @@
         "subtitle": "John 14:6",
         "references": [
           {
-            "book": "John",
-            "minChapter": 14,
-            "minVerse": 6,
-            "maxChapter": 14,
-            "maxVerse": 6
+            "first": 1537697,
+            "last": 1537749
           }
         ]
       },
@@ -459,11 +360,8 @@
         "subtitle": "Romans 12:1-2",
         "references": [
           {
-            "book": "Romans",
-            "minChapter": 12,
-            "minVerse": 1,
-            "maxChapter": 12,
-            "maxVerse": 2
+            "first": 1628932,
+            "last": 1629158
           }
         ]
       },
@@ -473,11 +371,8 @@
         "subtitle": "2 Corinthians 10:3-5",
         "references": [
           {
-            "book": "2 Corinthians",
-            "minChapter": 10,
-            "minVerse": 3,
-            "maxChapter": 10,
-            "maxVerse": 5
+            "first": 1673582,
+            "last": 1673733
           }
         ]
       },
@@ -487,11 +382,8 @@
         "subtitle": "James 3:13-18",
         "references": [
           {
-            "book": "James",
-            "minChapter": 3,
-            "minVerse": 13,
-            "maxChapter": 3,
-            "maxVerse": 18
+            "first": 1753717,
+            "last": 1754055
           }
         ]
       }
@@ -503,11 +395,8 @@
         "subtitle": "Genesis 6:5-6",
         "references": [
           {
-            "book": "Genesis",
-            "minChapter": 6,
-            "minVerse": 5,
-            "maxChapter": 6,
-            "maxVerse": 6
+            "first": 7699,
+            "last": 7798
           }
         ]
       },
@@ -517,11 +406,8 @@
         "subtitle": "Ezekiel 18",
         "references": [
           {
-            "book": "Ezekiel",
-            "minChapter": 18,
-            "minVerse": 1,
-            "maxChapter": 18,
-            "maxVerse": 32
+            "first": 1188513,
+            "last": 1190410
           }
         ]
       },
@@ -531,11 +417,8 @@
         "subtitle": "Genesis 11:4-9",
         "references": [
           {
-            "book": "Genesis",
-            "minChapter": 11,
-            "minVerse": 4,
-            "maxChapter": 11,
-            "maxVerse": 9
+            "first": 13932,
+            "last": 14294
           }
         ]
       },
@@ -545,11 +428,8 @@
         "subtitle": "Jeremiah 2:13",
         "references": [
           {
-            "book": "Jeremiah",
-            "minChapter": 2,
-            "minVerse": 13,
-            "maxChapter": 2,
-            "maxVerse": 13
+            "first": 1069713,
+            "last": 1069779
           }
         ]
       },
@@ -559,11 +439,8 @@
         "subtitle": "Job 28:28",
         "references": [
           {
-            "book": "Job",
-            "minChapter": 28,
-            "minVerse": 28,
-            "maxChapter": 28,
-            "maxVerse": 28
+            "first": 824674,
+            "last": 824725
           }
         ]
       },
@@ -573,11 +450,8 @@
         "subtitle": "Deuteronomy 6:4-5",
         "references": [
           {
-            "book": "Deuteronomy",
-            "minChapter": 6,
-            "minVerse": 4,
-            "maxChapter": 6,
-            "maxVerse": 5
+            "first": 298126,
+            "last": 298261
           }
         ]
       },
@@ -587,11 +461,8 @@
         "subtitle": "Leviticus 19:18",
         "references": [
           {
-            "book": "Leviticus",
-            "minChapter": 19,
-            "minVerse": 18,
-            "maxChapter": 19,
-            "maxVerse": 18
+            "first": 196758,
+            "last": 196807
           }
         ]
       },
@@ -601,11 +472,8 @@
         "subtitle": "Matthew 6:9-13",
         "references": [
           {
-            "book": "Matthew",
-            "minChapter": 6,
-            "minVerse": 9,
-            "maxChapter": 6,
-            "maxVerse": 13
+            "first": 1354086,
+            "last": 1354334
           }
         ]
       },
@@ -615,11 +483,8 @@
         "subtitle": "Matthew 7:12",
         "references": [
           {
-            "book": "Matthew",
-            "minChapter": 7,
-            "minVerse": 12,
-            "maxChapter": 7,
-            "maxVerse": 12
+            "first": 1356110,
+            "last": 1356168
           }
         ]
       }
@@ -631,11 +496,8 @@
         "subtitle": "1 Timothy 2:3-6",
         "references": [
           {
-            "book": "1 Timothy",
-            "minChapter": 2,
-            "minVerse": 3,
-            "maxChapter": 2,
-            "maxVerse": 6
+            "first": 1717268,
+            "last": 1717406
           }
         ]
       },
@@ -645,11 +507,8 @@
         "subtitle": "Isaiah 28:16-17",
         "references": [
           {
-            "book": "Isaiah",
-            "minChapter": 28,
-            "minVerse": 16,
-            "maxChapter": 28,
-            "maxVerse": 17
+            "first": 1018085,
+            "last": 1018364
           }
         ]
       },
@@ -659,11 +518,8 @@
         "subtitle": "Mark 16:15",
         "references": [
           {
-            "book": "Mark",
-            "minChapter": 16,
-            "minVerse": 15,
-            "maxChapter": 16,
-            "maxVerse": 15
+            "first": 1441927,
+            "last": 1441966
           }
         ]
       },
@@ -673,11 +529,8 @@
         "subtitle": "Matthew 28:18-20",
         "references": [
           {
-            "book": "Matthew",
-            "minChapter": 28,
-            "minVerse": 18,
-            "maxChapter": 28,
-            "maxVerse": 20
+            "first": 1404347,
+            "last": 1404518
           }
         ]
       },
@@ -687,11 +540,8 @@
         "subtitle": "Philippians 2:5-11",
         "references": [
           {
-            "book": "Philippians",
-            "minChapter": 2,
-            "minVerse": 5,
-            "maxChapter": 2,
-            "maxVerse": 11
+            "first": 1698670,
+            "last": 1699006
           }
         ]
       },
@@ -701,11 +551,8 @@
         "subtitle": "John 15:1-17",
         "references": [
           {
-            "book": "John",
-            "minChapter": 15,
-            "minVerse": 1,
-            "maxChapter": 15,
-            "maxVerse": 17
+            "first": 1539318,
+            "last": 1540109
           }
         ]
       },
@@ -715,11 +562,8 @@
         "subtitle": "1 Chronicles 4:9-10",
         "references": [
           {
-            "book": "1 Chronicles",
-            "minChapter": 4,
-            "minVerse": 9,
-            "maxChapter": 4,
-            "maxVerse": 10
+            "first": 642264,
+            "last": 642446
           }
         ]
       },
@@ -729,11 +573,8 @@
         "subtitle": "2 Corinthians 10:13-14",
         "references": [
           {
-            "book": "2 Corinthians",
-            "minChapter": 10,
-            "minVerse": 13,
-            "maxChapter": 10,
-            "maxVerse": 14
+            "first": 1674153,
+            "last": 1674311
           }
         ]
       },
@@ -743,11 +584,8 @@
         "subtitle": "1 Corinthians 10:31",
         "references": [
           {
-            "book": "1 Corinthians",
-            "minChapter": 10,
-            "minVerse": 31,
-            "maxChapter": 10,
-            "maxVerse": 31
+            "first": 1650905,
+            "last": 1650946
           }
         ]
       }
@@ -761,11 +599,8 @@
         "subtitle": "1 John 3:1-2",
         "references": [
           {
-            "book": "1 John",
-            "minChapter": 3,
-            "minVerse": 1,
-            "maxChapter": 3,
-            "maxVerse": 2
+            "first": 1769880,
+            "last": 1770062
           }
         ]
       },
@@ -775,11 +610,8 @@
         "subtitle": "Isaiah 49:15",
         "references": [
           {
-            "book": "Isaiah",
-            "minChapter": 49,
-            "minVerse": 15,
-            "maxChapter": 49,
-            "maxVerse": 15
+            "first": 1047746,
+            "last": 1047810
           }
         ]
       },
@@ -789,11 +621,8 @@
         "subtitle": "Psalm 68:5-6",
         "references": [
           {
-            "book": "Psalm",
-            "minChapter": 68,
-            "minVerse": 5,
-            "maxChapter": 68,
-            "maxVerse": 6
+            "first": 880761,
+            "last": 880848
           }
         ]
       },
@@ -803,11 +632,8 @@
         "subtitle": "Luke 3:38",
         "references": [
           {
-            "book": "Luke",
-            "minChapter": 3,
-            "minVerse": 38,
-            "maxChapter": 3,
-            "maxVerse": 38
+            "first": 1450791,
+            "last": 1450881
           }
         ]
       },
@@ -817,11 +643,8 @@
         "subtitle": "Hosea 3:1",
         "references": [
           {
-            "book": "Hosea",
-            "minChapter": 3,
-            "minVerse": 1,
-            "maxChapter": 3,
-            "maxVerse": 1
+            "first": 1276675,
+            "last": 1276798
           }
         ]
       },
@@ -831,11 +654,8 @@
         "subtitle": "Genesis 12:1-3",
         "references": [
           {
-            "book": "Genesis",
-            "minChapter": 12,
-            "minVerse": 1,
-            "maxChapter": 12,
-            "maxVerse": 3
+            "first": 15506,
+            "last": 15674
           }
         ]
       },
@@ -845,11 +665,8 @@
         "subtitle": "Genesis 18:18-19",
         "references": [
           {
-            "book": "Genesis",
-            "minChapter": 18,
-            "minVerse": 18,
-            "maxChapter": 18,
-            "maxVerse": 19
+            "first": 23663,
+            "last": 23797
           }
         ]
       },
@@ -859,11 +676,8 @@
         "subtitle": "Psalm 90:1",
         "references": [
           {
-            "book": "Psalm",
-            "minChapter": 90,
-            "minVerse": 1,
-            "maxChapter": 90,
-            "maxVerse": 1
+            "first": 900012,
+            "last": 900032
           }
         ]
       },
@@ -873,11 +687,8 @@
         "subtitle": "Genesis 22:1-18",
         "references": [
           {
-            "book": "Genesis",
-            "minChapter": 22,
-            "minVerse": 1,
-            "maxChapter": 22,
-            "maxVerse": 18
+            "first": 29872,
+            "last": 31019
           }
         ]
       },
@@ -887,11 +698,8 @@
         "subtitle": "Numbers 25:1-9",
         "references": [
           {
-            "book": "Numbers",
-            "minChapter": 25,
-            "minVerse": 1,
-            "maxChapter": 25,
-            "maxVerse": 9
+            "first": 264050,
+            "last": 264587
           }
         ]
       },
@@ -901,11 +709,8 @@
         "subtitle": "Joshua 24:15",
         "references": [
           {
-            "book": "Joshua",
-            "minChapter": 24,
-            "minVerse": 15,
-            "maxChapter": 24,
-            "maxVerse": 15
+            "first": 384819,
+            "last": 384933
           }
         ]
       },
@@ -915,11 +720,8 @@
         "subtitle": "Nehemiah 4:13-14",
         "references": [
           {
-            "book": "Nehemiah",
-            "minChapter": 4,
-            "minVerse": 13,
-            "maxChapter": 4,
-            "maxVerse": 14
+            "first": 767983,
+            "last": 768166
           }
         ]
       }
@@ -931,18 +733,12 @@
         "subtitle": "Genesis 2:18, 21-25",
         "references": [
           {
-            "book": "Genesis",
-            "minChapter": 2,
-            "minVerse": 18,
-            "maxChapter": 2,
-            "maxVerse": 18
+            "first": 2555,
+            "last": 2612
           },
           {
-            "book": "Genesis",
-            "minChapter": 2,
-            "minVerse": 21,
-            "maxChapter": 2,
-            "maxVerse": 25
+            "first": 2782,
+            "last": 3062
           }
         ]
       },
@@ -952,18 +748,12 @@
         "subtitle": "Leviticus 21:7, 13-15",
         "references": [
           {
-            "book": "Leviticus",
-            "minChapter": 21,
-            "minVerse": 7,
-            "maxChapter": 21,
-            "maxVerse": 7
+            "first": 200017,
+            "last": 200089
           },
           {
-            "book": "Leviticus",
-            "minChapter": 21,
-            "minVerse": 13,
-            "maxChapter": 21,
-            "maxVerse": 15
+            "first": 200445,
+            "last": 200575
           }
         ]
       },
@@ -973,11 +763,8 @@
         "subtitle": "Song of Solomon 5:1",
         "references": [
           {
-            "book": "Song of Solomon",
-            "minChapter": 5,
-            "minVerse": 1,
-            "maxChapter": 5,
-            "maxVerse": 1
+            "first": 983290,
+            "last": 983393
           }
         ]
       },
@@ -987,11 +774,8 @@
         "subtitle": "Hebrews 13:4",
         "references": [
           {
-            "book": "Hebrews",
-            "minChapter": 13,
-            "minVerse": 4,
-            "maxChapter": 13,
-            "maxVerse": 4
+            "first": 1748890,
+            "last": 1748944
           }
         ]
       },
@@ -1001,11 +785,8 @@
         "subtitle": "Ephesians 5:21-6:9",
         "references": [
           {
-            "book": "Ephesians",
-            "minChapter": 5,
-            "minVerse": 21,
-            "maxChapter": 6,
-            "maxVerse": 9
+            "first": 1694731,
+            "last": 1695813
           }
         ]
       },
@@ -1015,18 +796,12 @@
         "subtitle": "1 Corinthians 7:2-16, 32-34",
         "references": [
           {
-            "book": "1 Corinthians",
-            "minChapter": 7,
-            "minVerse": 2,
-            "maxChapter": 7,
-            "maxVerse": 16
+            "first": 1644253,
+            "last": 1645253
           },
           {
-            "book": "1 Corinthians",
-            "minChapter": 7,
-            "minVerse": 32,
-            "maxChapter": 7,
-            "maxVerse": 34
+            "first": 1646186,
+            "last": 1646395
           }
         ]
       },
@@ -1036,11 +811,8 @@
         "subtitle": "Proverbs 5:15-23",
         "references": [
           {
-            "book": "Proverbs",
-            "minChapter": 5,
-            "minVerse": 15,
-            "maxChapter": 5,
-            "maxVerse": 23
+            "first": 941290,
+            "last": 941675
           }
         ]
       },
@@ -1050,11 +822,8 @@
         "subtitle": "Deuteronomy 5:18",
         "references": [
           {
-            "book": "Deuteronomy",
-            "minChapter": 5,
-            "minVerse": 18,
-            "maxChapter": 5,
-            "maxVerse": 18
+            "first": 296970,
+            "last": 296983
           }
         ]
       },
@@ -1064,11 +833,8 @@
         "subtitle": "Psalm 51",
         "references": [
           {
-            "book": "Psalm",
-            "minChapter": 51,
-            "minVerse": 1,
-            "maxChapter": 51,
-            "maxVerse": 19
+            "first": 871115,
+            "last": 871905
           }
         ]
       },
@@ -1078,11 +844,8 @@
         "subtitle": "2 Chronicles 11:18-21",
         "references": [
           {
-            "book": "2 Chronicles",
-            "minChapter": 11,
-            "minVerse": 18,
-            "maxChapter": 11,
-            "maxVerse": 21
+            "first": 702645,
+            "last": 702833
           }
         ]
       },
@@ -1092,11 +855,8 @@
         "subtitle": "Mark 12:18-27",
         "references": [
           {
-            "book": "Mark",
-            "minChapter": 12,
-            "minVerse": 18,
-            "maxChapter": 12,
-            "maxVerse": 27
+            "first": 1430490,
+            "last": 1431106
           }
         ]
       },
@@ -1106,11 +866,8 @@
         "subtitle": "Malachi 2:14-16",
         "references": [
           {
-            "book": "Malachi",
-            "minChapter": 2,
-            "minVerse": 14,
-            "maxChapter": 2,
-            "maxVerse": 16
+            "first": 1342996,
+            "last": 1343378
           }
         ]
       }
@@ -1122,11 +879,8 @@
         "subtitle": "Psalm 127:3-5",
         "references": [
           {
-            "book": "Psalm",
-            "minChapter": 127,
-            "minVerse": 3,
-            "maxChapter": 127,
-            "maxVerse": 5
+            "first": 926052,
+            "last": 926167
           }
         ]
       },
@@ -1136,11 +890,8 @@
         "subtitle": "Psalm 139:13-16",
         "references": [
           {
-            "book": "Psalm",
-            "minChapter": 139,
-            "minVerse": 13,
-            "maxChapter": 139,
-            "maxVerse": 16
+            "first": 930818,
+            "last": 931000
           }
         ]
       },
@@ -1150,11 +901,8 @@
         "subtitle": "Genesis 4:1",
         "references": [
           {
-            "book": "Genesis",
-            "minChapter": 4,
-            "minVerse": 1,
-            "maxChapter": 4,
-            "maxVerse": 1
+            "first": 4641,
+            "last": 4770
           }
         ]
       },
@@ -1164,11 +912,8 @@
         "subtitle": "Genesis 15:1-6",
         "references": [
           {
-            "book": "Genesis",
-            "minChapter": 15,
-            "minVerse": 1,
-            "maxChapter": 15,
-            "maxVerse": 6
+            "first": 19081,
+            "last": 19445
           }
         ]
       },
@@ -1178,11 +923,8 @@
         "subtitle": "1 Samuel 1:10-11",
         "references": [
           {
-            "book": "1 Samuel",
-            "minChapter": 1,
-            "minVerse": 10,
-            "maxChapter": 1,
-            "maxVerse": 11
+            "first": 431935,
+            "last": 432122
           }
         ]
       },
@@ -1192,11 +934,8 @@
         "subtitle": "1 Chronicles 1:1-2",
         "references": [
           {
-            "book": "1 Chronicles",
-            "minChapter": 1,
-            "minVerse": 1,
-            "maxChapter": 1,
-            "maxVerse": 2
+            "first": 635901,
+            "last": 635929
           }
         ]
       },
@@ -1206,11 +945,8 @@
         "subtitle": "Leviticus 10:19-20",
         "references": [
           {
-            "book": "Leviticus",
-            "minChapter": 10,
-            "minVerse": 19,
-            "maxChapter": 10,
-            "maxVerse": 20
+            "first": 177813,
+            "last": 177940
           }
         ]
       },
@@ -1220,11 +956,8 @@
         "subtitle": "Luke 2:41-52",
         "references": [
           {
-            "book": "Luke",
-            "minChapter": 2,
-            "minVerse": 41,
-            "maxChapter": 2,
-            "maxVerse": 52
+            "first": 1447710,
+            "last": 1448261
           }
         ]
       },
@@ -1234,11 +967,8 @@
         "subtitle": "Deuteronomy 5:16",
         "references": [
           {
-            "book": "Deuteronomy",
-            "minChapter": 5,
-            "minVerse": 16,
-            "maxChapter": 5,
-            "maxVerse": 16
+            "first": 296891,
+            "last": 296957
           }
         ]
       },
@@ -1248,11 +978,8 @@
         "subtitle": "Proverbs 1:8",
         "references": [
           {
-            "book": "Proverbs",
-            "minChapter": 1,
-            "minVerse": 8,
-            "maxChapter": 1,
-            "maxVerse": 8
+            "first": 936894,
+            "last": 936949
           }
         ]
       },
@@ -1262,11 +989,8 @@
         "subtitle": "Proverbs 3:11-12",
         "references": [
           {
-            "book": "Proverbs",
-            "minChapter": 3,
-            "minVerse": 11,
-            "maxChapter": 3,
-            "maxVerse": 12
+            "first": 938925,
+            "last": 939040
           }
         ]
       },
@@ -1276,11 +1000,8 @@
         "subtitle": "Deuteronomy 29:29",
         "references": [
           {
-            "book": "Deuteronomy",
-            "minChapter": 29,
-            "minVerse": 29,
-            "maxChapter": 29,
-            "maxVerse": 29
+            "first": 336933,
+            "last": 337025
           }
         ]
       },
@@ -1290,11 +1011,8 @@
         "subtitle": "Deuteronomy 5:8-10",
         "references": [
           {
-            "book": "Deuteronomy",
-            "minChapter": 5,
-            "minVerse": 8,
-            "maxChapter": 5,
-            "maxVerse": 10
+            "first": 296316,
+            "last": 296553
           }
         ]
       },
@@ -1304,11 +1022,8 @@
         "subtitle": "Malachi 4:5-6",
         "references": [
           {
-            "book": "Malachi",
-            "minChapter": 4,
-            "minVerse": 5,
-            "maxChapter": 4,
-            "maxVerse": 6
+            "first": 1345265,
+            "last": 1345373
           }
         ]
       },
@@ -1318,11 +1033,8 @@
         "subtitle": "Romans 8:14-15",
         "references": [
           {
-            "book": "Romans",
-            "minChapter": 8,
-            "minVerse": 14,
-            "maxChapter": 8,
-            "maxVerse": 15
+            "first": 1621234,
+            "last": 1621394
           }
         ]
       }
@@ -1334,11 +1046,8 @@
         "subtitle": "2 Chronicles 31:15-16",
         "references": [
           {
-            "book": "2 Chronicles",
-            "minChapter": 31,
-            "minVerse": 15,
-            "maxChapter": 31,
-            "maxVerse": 16
+            "first": 734036,
+            "last": 734206
           }
         ]
       },
@@ -1348,18 +1057,12 @@
         "subtitle": "1 Timothy 5:3-4, 8",
         "references": [
           {
-            "book": "1 Timothy",
-            "minChapter": 5,
-            "minVerse": 3,
-            "maxChapter": 5,
-            "maxVerse": 4
+            "first": 1719927,
+            "last": 1720033
           },
           {
-            "book": "1 Timothy",
-            "minChapter": 5,
-            "minVerse": 8,
-            "maxChapter": 5,
-            "maxVerse": 8
+            "first": 1720167,
+            "last": 1720224
           }
         ]
       },
@@ -1369,11 +1072,8 @@
         "subtitle": "Exodus 22:22-23",
         "references": [
           {
-            "book": "Exodus",
-            "minChapter": 22,
-            "minVerse": 22,
-            "maxChapter": 22,
-            "maxVerse": 23
+            "first": 125838,
+            "last": 125905
           }
         ]
       },
@@ -1383,11 +1083,8 @@
         "subtitle": "Ruth 3:7-4:13",
         "references": [
           {
-            "book": "Ruth",
-            "minChapter": 3,
-            "minVerse": 7,
-            "maxChapter": 4,
-            "maxVerse": 13
+            "first": 428962,
+            "last": 430855
           }
         ]
       },
@@ -1397,11 +1094,8 @@
         "subtitle": "2 Samuel 9:1",
         "references": [
           {
-            "book": "2 Samuel",
-            "minChapter": 9,
-            "minVerse": 1,
-            "maxChapter": 9,
-            "maxVerse": 1
+            "first": 497025,
+            "last": 497075
           }
         ]
       },
@@ -1411,18 +1105,12 @@
         "subtitle": "Nehemiah 3:23, 28",
         "references": [
           {
-            "book": "Nehemiah",
-            "minChapter": 3,
-            "minVerse": 23,
-            "maxChapter": 3,
-            "maxVerse": 23
+            "first": 766543,
+            "last": 766604
           },
           {
-            "book": "Nehemiah",
-            "minChapter": 3,
-            "minVerse": 28,
-            "maxChapter": 3,
-            "maxVerse": 28
+            "first": 766858,
+            "last": 766903
           }
         ]
       },
@@ -1432,11 +1120,8 @@
         "subtitle": "Proverbs 27:10",
         "references": [
           {
-            "book": "Proverbs",
-            "minChapter": 27,
-            "minVerse": 10,
-            "maxChapter": 27,
-            "maxVerse": 10
+            "first": 963597,
+            "last": 963678
           }
         ]
       }
@@ -1448,11 +1133,8 @@
         "subtitle": "Acts 5:1-10",
         "references": [
           {
-            "book": "Acts",
-            "minChapter": 5,
-            "minVerse": 1,
-            "maxChapter": 5,
-            "maxVerse": 10
+            "first": 1559414,
+            "last": 1559990
           }
         ]
       },
@@ -1462,11 +1144,8 @@
         "subtitle": "2 Chronicles 25:4",
         "references": [
           {
-            "book": "2 Chronicles",
-            "minChapter": 25,
-            "minVerse": 4,
-            "maxChapter": 25,
-            "maxVerse": 4
+            "first": 722136,
+            "last": 722279
           }
         ]
       },
@@ -1476,11 +1155,8 @@
         "subtitle": "Luke 11:27",
         "references": [
           {
-            "book": "Luke",
-            "minChapter": 11,
-            "minVerse": 27,
-            "maxChapter": 11,
-            "maxVerse": 27
+            "first": 1472430,
+            "last": 1472491
           }
         ]
       },
@@ -1490,11 +1166,8 @@
         "subtitle": "Psalm 78:1-8",
         "references": [
           {
-            "book": "Psalm",
-            "minChapter": 78,
-            "minVerse": 1,
-            "maxChapter": 78,
-            "maxVerse": 8
+            "first": 889469,
+            "last": 889806
           }
         ]
       },
@@ -1504,11 +1177,8 @@
         "subtitle": "1 Timothy 5:1-2",
         "references": [
           {
-            "book": "1 Timothy",
-            "minChapter": 5,
-            "minVerse": 1,
-            "maxChapter": 5,
-            "maxVerse": 2
+            "first": 1719807,
+            "last": 1719926
           }
         ]
       },
@@ -1518,11 +1188,8 @@
         "subtitle": "Exodus 12:1-4",
         "references": [
           {
-            "book": "Exodus",
-            "minChapter": 12,
-            "minVerse": 1,
-            "maxChapter": 12,
-            "maxVerse": 4
+            "first": 105312,
+            "last": 105538
           }
         ]
       }
@@ -1536,11 +1203,8 @@
         "subtitle": "Isaiah 42:5-7",
         "references": [
           {
-            "book": "Isaiah",
-            "minChapter": 42,
-            "minVerse": 5,
-            "maxChapter": 42,
-            "maxVerse": 7
+            "first": 1037203,
+            "last": 1037427
           }
         ]
       },
@@ -1550,11 +1214,8 @@
         "subtitle": "Isaiah 43:19",
         "references": [
           {
-            "book": "Isaiah",
-            "minChapter": 43,
-            "minVerse": 19,
-            "maxChapter": 43,
-            "maxVerse": 19
+            "first": 1039464,
+            "last": 1039536
           }
         ]
       },
@@ -1564,11 +1225,8 @@
         "subtitle": "Psalm 147:8-9",
         "references": [
           {
-            "book": "Psalm",
-            "minChapter": 147,
-            "minVerse": 8,
-            "maxChapter": 147,
-            "maxVerse": 9
+            "first": 935272,
+            "last": 935344
           }
         ]
       },
@@ -1578,11 +1236,8 @@
         "subtitle": "Deuteronomy 29:5-6",
         "references": [
           {
-            "book": "Deuteronomy",
-            "minChapter": 29,
-            "minVerse": 5,
-            "maxChapter": 29,
-            "maxVerse": 6
+            "first": 335442,
+            "last": 335542
           }
         ]
       },
@@ -1592,11 +1247,8 @@
         "subtitle": "Exodus 15:23-26",
         "references": [
           {
-            "book": "Exodus",
-            "minChapter": 15,
-            "minVerse": 23,
-            "maxChapter": 15,
-            "maxVerse": 26
+            "first": 113343,
+            "last": 113672
           }
         ]
       },
@@ -1606,11 +1258,8 @@
         "subtitle": "Isaiah 53:5",
         "references": [
           {
-            "book": "Isaiah",
-            "minChapter": 53,
-            "minVerse": 5,
-            "maxChapter": 53,
-            "maxVerse": 5
+            "first": 1052263,
+            "last": 1052319
           }
         ]
       }
@@ -1622,11 +1271,8 @@
         "subtitle": "Genesis 2:19-20",
         "references": [
           {
-            "book": "Genesis",
-            "minChapter": 2,
-            "minVerse": 19,
-            "maxChapter": 2,
-            "maxVerse": 20
+            "first": 2613,
+            "last": 2781
           }
         ]
       },
@@ -1636,11 +1282,8 @@
         "subtitle": "Numbers 13:17-20",
         "references": [
           {
-            "book": "Numbers",
-            "minChapter": 13,
-            "minVerse": 17,
-            "maxChapter": 13,
-            "maxVerse": 20
+            "first": 240766,
+            "last": 240996
           }
         ]
       },
@@ -1650,11 +1293,8 @@
         "subtitle": "Nehemiah 2:12-18",
         "references": [
           {
-            "book": "Nehemiah",
-            "minChapter": 2,
-            "minVerse": 12,
-            "maxChapter": 2,
-            "maxVerse": 18
+            "first": 764223,
+            "last": 764783
           }
         ]
       },
@@ -1664,11 +1304,8 @@
         "subtitle": "Genesis 30:27-43",
         "references": [
           {
-            "book": "Genesis",
-            "minChapter": 30,
-            "minVerse": 27,
-            "maxChapter": 30,
-            "maxVerse": 43
+            "first": 47364,
+            "last": 48435
           }
         ]
       },
@@ -1678,18 +1315,12 @@
         "subtitle": "Judges 5:6, 10",
         "references": [
           {
-            "book": "Judges",
-            "minChapter": 5,
-            "minVerse": 6,
-            "maxChapter": 5,
-            "maxVerse": 6
+            "first": 393213,
+            "last": 393266
           },
           {
-            "book": "Judges",
-            "minChapter": 5,
-            "minVerse": 10,
-            "maxChapter": 5,
-            "maxVerse": 10
+            "first": 393415,
+            "last": 393463
           }
         ]
       },
@@ -1699,11 +1330,8 @@
         "subtitle": "2 Kings 20:20",
         "references": [
           {
-            "book": "2 Kings",
-            "minChapter": 20,
-            "minVerse": 20,
-            "maxChapter": 20,
-            "maxVerse": 20
+            "first": 625606,
+            "last": 625707
           }
         ]
       },
@@ -1713,11 +1341,8 @@
         "subtitle": "2 Chronicles 26:14-15",
         "references": [
           {
-            "book": "2 Chronicles",
-            "minChapter": 26,
-            "minVerse": 14,
-            "maxChapter": 26,
-            "maxVerse": 15
+            "first": 725001,
+            "last": 725166
           }
         ]
       }
@@ -1729,11 +1354,8 @@
         "subtitle": "Matthew 10:1",
         "references": [
           {
-            "book": "Matthew",
-            "minChapter": 10,
-            "minVerse": 1,
-            "maxChapter": 10,
-            "maxVerse": 1
+            "first": 1360940,
+            "last": 1360997
           }
         ]
       },
@@ -1743,11 +1365,8 @@
         "subtitle": "John 9:1-3",
         "references": [
           {
-            "book": "John",
-            "minChapter": 9,
-            "minVerse": 1,
-            "maxChapter": 9,
-            "maxVerse": 3
+            "first": 1525453,
+            "last": 1525600
           }
         ]
       },
@@ -1757,11 +1376,8 @@
         "subtitle": "Luke 13:10-17",
         "references": [
           {
-            "book": "Luke",
-            "minChapter": 13,
-            "minVerse": 10,
-            "maxChapter": 13,
-            "maxVerse": 17
+            "first": 1477892,
+            "last": 1478329
           }
         ]
       },
@@ -1771,11 +1387,8 @@
         "subtitle": "2 Kings 5:1-14",
         "references": [
           {
-            "book": "2 Kings",
-            "minChapter": 5,
-            "minVerse": 1,
-            "maxChapter": 5,
-            "maxVerse": 14
+            "first": 591399,
+            "last": 592581
           }
         ]
       },
@@ -1785,11 +1398,8 @@
         "subtitle": "Mark 5:25-34",
         "references": [
           {
-            "book": "Mark",
-            "minChapter": 5,
-            "minVerse": 25,
-            "maxChapter": 5,
-            "maxVerse": 34
+            "first": 1413515,
+            "last": 1413990
           }
         ]
       },
@@ -1799,11 +1409,8 @@
         "subtitle": "Matthew 25:33-46",
         "references": [
           {
-            "book": "Matthew",
-            "minChapter": 25,
-            "minVerse": 33,
-            "maxChapter": 25,
-            "maxVerse": 46
+            "first": 1395302,
+            "last": 1396099
           }
         ]
       },
@@ -1813,11 +1420,8 @@
         "subtitle": "Revelation 21:3-4",
         "references": [
           {
-            "book": "Revelation",
-            "minChapter": 21,
-            "minVerse": 3,
-            "maxChapter": 21,
-            "maxVerse": 4
+            "first": 1802205,
+            "last": 1802371
           }
         ]
       }
@@ -1829,18 +1433,12 @@
         "subtitle": "Genesis 2:8-9, 15",
         "references": [
           {
-            "book": "Genesis",
-            "minChapter": 2,
-            "minVerse": 8,
-            "maxChapter": 2,
-            "maxVerse": 9
+            "first": 2095,
+            "last": 2233
           },
           {
-            "book": "Genesis",
-            "minChapter": 2,
-            "minVerse": 15,
-            "maxChapter": 2,
-            "maxVerse": 15
+            "first": 2431,
+            "last": 2468
           }
         ]
       },
@@ -1850,18 +1448,12 @@
         "subtitle": "Deuteronomy 28:1-6, 15-19",
         "references": [
           {
-            "book": "Deuteronomy",
-            "minChapter": 28,
-            "minVerse": 1,
-            "maxChapter": 28,
-            "maxVerse": 6
+            "first": 331216,
+            "last": 331416
           },
           {
-            "book": "Deuteronomy",
-            "minChapter": 28,
-            "minVerse": 15,
-            "maxChapter": 28,
-            "maxVerse": 19
+            "first": 331957,
+            "last": 332125
           }
         ]
       },
@@ -1871,11 +1463,8 @@
         "subtitle": "Genesis 2:2-3",
         "references": [
           {
-            "book": "Genesis",
-            "minChapter": 2,
-            "minVerse": 2,
-            "maxChapter": 2,
-            "maxVerse": 3
+            "first": 1761,
+            "last": 1870
           }
         ]
       },
@@ -1885,11 +1474,8 @@
         "subtitle": "Leviticus 25",
         "references": [
           {
-            "book": "Leviticus",
-            "minChapter": 25,
-            "minVerse": 1,
-            "maxChapter": 25,
-            "maxVerse": 55
+            "first": 207716,
+            "last": 211119
           }
         ]
       },
@@ -1899,11 +1485,8 @@
         "subtitle": "Leviticus 19:35-36",
         "references": [
           {
-            "book": "Leviticus",
-            "minChapter": 19,
-            "minVerse": 35,
-            "maxChapter": 19,
-            "maxVerse": 36
+            "first": 197700,
+            "last": 197837
           }
         ]
       },
@@ -1913,11 +1496,8 @@
         "subtitle": "2 Chronicles 20:35-37",
         "references": [
           {
-            "book": "2 Chronicles",
-            "minChapter": 20,
-            "minVerse": 35,
-            "maxChapter": 20,
-            "maxVerse": 37
+            "first": 715346,
+            "last": 715561
           }
         ]
       },
@@ -1927,11 +1507,8 @@
         "subtitle": "Mark 11:15-17",
         "references": [
           {
-            "book": "Mark",
-            "minChapter": 11,
-            "minVerse": 15,
-            "maxChapter": 11,
-            "maxVerse": 17
+            "first": 1428452,
+            "last": 1428664
           }
         ]
       },
@@ -1941,11 +1518,8 @@
         "subtitle": "Isaiah 28:24-29",
         "references": [
           {
-            "book": "Isaiah",
-            "minChapter": 28,
-            "minVerse": 24,
-            "maxChapter": 28,
-            "maxVerse": 29
+            "first": 1018691,
+            "last": 1018986
           }
         ]
       },
@@ -1955,11 +1529,8 @@
         "subtitle": "Joel 2:23-26",
         "references": [
           {
-            "book": "Joel",
-            "minChapter": 2,
-            "minVerse": 23,
-            "maxChapter": 2,
-            "maxVerse": 26
+            "first": 1289832,
+            "last": 1290118
           }
         ]
       },
@@ -1969,11 +1540,8 @@
         "subtitle": "Habakkuk 3:17-18",
         "references": [
           {
-            "book": "Habakkuk",
-            "minChapter": 3,
-            "minVerse": 17,
-            "maxChapter": 3,
-            "maxVerse": 18
+            "first": 1319152,
+            "last": 1319277
           }
         ]
       },
@@ -1983,11 +1551,8 @@
         "subtitle": "Deuteronomy 24:17-22",
         "references": [
           {
-            "book": "Deuteronomy",
-            "minChapter": 24,
-            "minVerse": 17,
-            "maxChapter": 24,
-            "maxVerse": 22
+            "first": 327138,
+            "last": 327521
           }
         ]
       },
@@ -1997,11 +1562,8 @@
         "subtitle": "Exodus 2:23-25",
         "references": [
           {
-            "book": "Exodus",
-            "minChapter": 2,
-            "minVerse": 23,
-            "maxChapter": 2,
-            "maxVerse": 25
+            "first": 89867,
+            "last": 90026
           }
         ]
       },
@@ -2011,11 +1573,8 @@
         "subtitle": "Philemon 10-19",
         "references": [
           {
-            "book": "Philemon",
-            "minChapter": 1,
-            "minVerse": 10,
-            "maxChapter": 1,
-            "maxVerse": 19
+            "first": 1730293,
+            "last": 1730808
           }
         ]
       }
@@ -2027,11 +1586,8 @@
         "subtitle": "Deuteronomy 5:19",
         "references": [
           {
-            "book": "Deuteronomy",
-            "minChapter": 5,
-            "minVerse": 19,
-            "maxChapter": 5,
-            "maxVerse": 19
+            "first": 296984,
+            "last": 296995
           }
         ]
       },
@@ -2041,11 +1597,8 @@
         "subtitle": "2 Thessalonians 3:6-12",
         "references": [
           {
-            "book": "2 Thessalonians",
-            "minChapter": 3,
-            "minVerse": 6,
-            "maxChapter": 3,
-            "maxVerse": 12
+            "first": 1715248,
+            "last": 1715651
           }
         ]
       },
@@ -2055,11 +1608,8 @@
         "subtitle": "Ephesians 4:28",
         "references": [
           {
-            "book": "Ephesians",
-            "minChapter": 4,
-            "minVerse": 28,
-            "maxChapter": 4,
-            "maxVerse": 28
+            "first": 1693616,
+            "last": 1693669
           }
         ]
       },
@@ -2069,11 +1619,8 @@
         "subtitle": "Matthew 23:23-24",
         "references": [
           {
-            "book": "Matthew",
-            "minChapter": 23,
-            "minVerse": 23,
-            "maxChapter": 23,
-            "maxVerse": 24
+            "first": 1389801,
+            "last": 1390019
           }
         ]
       },
@@ -2083,11 +1630,8 @@
         "subtitle": "Proverbs 11:24-25",
         "references": [
           {
-            "book": "Proverbs",
-            "minChapter": 11,
-            "minVerse": 24,
-            "maxChapter": 11,
-            "maxVerse": 25
+            "first": 947488,
+            "last": 947539
           }
         ]
       },
@@ -2097,11 +1641,8 @@
         "subtitle": "Malachi 3:10-11",
         "references": [
           {
-            "book": "Malachi",
-            "minChapter": 3,
-            "minVerse": 10,
-            "maxChapter": 3,
-            "maxVerse": 11
+            "first": 1344218,
+            "last": 1344435
           }
         ]
       },
@@ -2111,11 +1652,8 @@
         "subtitle": "2 Kings 21:7-9",
         "references": [
           {
-            "book": "2 Kings",
-            "minChapter": 21,
-            "minVerse": 7,
-            "maxChapter": 21,
-            "maxVerse": 9
+            "first": 626133,
+            "last": 626383
           }
         ]
       },
@@ -2125,11 +1663,8 @@
         "subtitle": "James 2:1-9",
         "references": [
           {
-            "book": "James",
-            "minChapter": 2,
-            "minVerse": 1,
-            "maxChapter": 2,
-            "maxVerse": 9
+            "first": 1751548,
+            "last": 1752066
           }
         ]
       },
@@ -2139,11 +1674,8 @@
         "subtitle": "Ecclesiastes 5:10-15",
         "references": [
           {
-            "book": "Ecclesiastes",
-            "minChapter": 5,
-            "minVerse": 10,
-            "maxChapter": 5,
-            "maxVerse": 15
+            "first": 973378,
+            "last": 973684
           }
         ]
       },
@@ -2153,11 +1685,8 @@
         "subtitle": "Amos 8:4-6",
         "references": [
           {
-            "book": "Amos",
-            "minChapter": 8,
-            "minVerse": 4,
-            "maxChapter": 8,
-            "maxVerse": 6
+            "first": 1299659,
+            "last": 1299888
           }
         ]
       },
@@ -2167,11 +1696,8 @@
         "subtitle": "2 Chronicles 7:13-14",
         "references": [
           {
-            "book": "2 Chronicles",
-            "minChapter": 7,
-            "minVerse": 13,
-            "maxChapter": 7,
-            "maxVerse": 14
+            "first": 696649,
+            "last": 696787
           }
         ]
       },
@@ -2181,11 +1707,8 @@
         "subtitle": "Jeremiah 29:4-7",
         "references": [
           {
-            "book": "Jeremiah",
-            "minChapter": 29,
-            "minVerse": 4,
-            "maxChapter": 29,
-            "maxVerse": 7
+            "first": 1113110,
+            "last": 1113314
           }
         ]
       },
@@ -2195,11 +1718,8 @@
         "subtitle": "Luke 5:2-7",
         "references": [
           {
-            "book": "Luke",
-            "minChapter": 5,
-            "minVerse": 2,
-            "maxChapter": 5,
-            "maxVerse": 7
+            "first": 1453310,
+            "last": 1453657
           }
         ]
       }
@@ -2211,11 +1731,8 @@
         "subtitle": "1 Kings 5:14",
         "references": [
           {
-            "book": "1 Kings",
-            "minChapter": 5,
-            "minVerse": 14,
-            "maxChapter": 5,
-            "maxVerse": 14
+            "first": 540506,
+            "last": 540578
           }
         ]
       },
@@ -2225,11 +1742,8 @@
         "subtitle": "1 Kings 21:1-19",
         "references": [
           {
-            "book": "1 Kings",
-            "minChapter": 21,
-            "minVerse": 1,
-            "maxChapter": 21,
-            "maxVerse": 19
+            "first": 578096,
+            "last": 579142
           }
         ]
       },
@@ -2239,11 +1753,8 @@
         "subtitle": "2 Kings 5:20-27",
         "references": [
           {
-            "book": "2 Kings",
-            "minChapter": 5,
-            "minVerse": 20,
-            "maxChapter": 5,
-            "maxVerse": 27
+            "first": 592967,
+            "last": 593645
           }
         ]
       },
@@ -2253,11 +1764,8 @@
         "subtitle": "Galatians 6:6",
         "references": [
           {
-            "book": "Galatians",
-            "minChapter": 6,
-            "minVerse": 6,
-            "maxChapter": 6,
-            "maxVerse": 6
+            "first": 1687593,
+            "last": 1687634
           }
         ]
       },
@@ -2267,11 +1775,8 @@
         "subtitle": "Leviticus 6:1-5",
         "references": [
           {
-            "book": "Leviticus",
-            "minChapter": 6,
-            "minVerse": 1,
-            "maxChapter": 6,
-            "maxVerse": 5
+            "first": 168421,
+            "last": 168744
           }
         ]
       },
@@ -2281,53 +1786,32 @@
         "subtitle": "Leviticus 23:3, 7, 8, 21, 25, 35, 36",
         "references": [
           {
-            "book": "Leviticus",
-            "minChapter": 23,
-            "minVerse": 3,
-            "maxChapter": 23,
-            "maxVerse": 3
+            "first": 203079,
+            "last": 203170
           },
           {
-            "book": "Leviticus",
-            "minChapter": 23,
-            "minVerse": 7,
-            "maxChapter": 23,
-            "maxVerse": 7
+            "first": 203398,
+            "last": 203448
           },
           {
-            "book": "Leviticus",
-            "minChapter": 23,
-            "minVerse": 8,
-            "maxChapter": 23,
-            "maxVerse": 8
+            "first": 203449,
+            "last": 203517
           },
           {
-            "book": "Leviticus",
-            "minChapter": 23,
-            "minVerse": 21,
-            "maxChapter": 23,
-            "maxVerse": 21
+            "first": 204400,
+            "last": 204559
           },
           {
-            "book": "Leviticus",
-            "minChapter": 23,
-            "minVerse": 25,
-            "maxChapter": 23,
-            "maxVerse": 25
+            "first": 204851,
+            "last": 204894
           },
           {
-            "book": "Leviticus",
-            "minChapter": 23,
-            "minVerse": 35,
-            "maxChapter": 23,
-            "maxVerse": 35
+            "first": 205634,
+            "last": 205682
           },
           {
-            "book": "Leviticus",
-            "minChapter": 23,
-            "minVerse": 36,
-            "maxChapter": 23,
-            "maxVerse": 36
+            "first": 205683,
+            "last": 205774
           }
         ]
       }
@@ -2341,11 +1825,8 @@
         "subtitle": "Hebrews 2:16-18",
         "references": [
           {
-            "book": "Hebrews",
-            "minChapter": 2,
-            "minVerse": 16,
-            "maxChapter": 2,
-            "maxVerse": 18
+            "first": 1732993,
+            "last": 1733193
           }
         ]
       },
@@ -2355,11 +1836,8 @@
         "subtitle": "2 Corinthians 5:18-20",
         "references": [
           {
-            "book": "2 Corinthians",
-            "minChapter": 5,
-            "minVerse": 18,
-            "maxChapter": 5,
-            "maxVerse": 20
+            "first": 1668441,
+            "last": 1668622
           }
         ]
       },
@@ -2369,11 +1847,8 @@
         "subtitle": "John 6:14",
         "references": [
           {
-            "book": "John",
-            "minChapter": 6,
-            "minVerse": 14,
-            "maxChapter": 6,
-            "maxVerse": 14
+            "first": 1516450,
+            "last": 1516534
           }
         ]
       },
@@ -2383,11 +1858,8 @@
         "subtitle": "1 Corinthians 14:3",
         "references": [
           {
-            "book": "1 Corinthians",
-            "minChapter": 14,
-            "minVerse": 3,
-            "maxChapter": 14,
-            "maxVerse": 3
+            "first": 1655709,
+            "last": 1655736
           }
         ]
       },
@@ -2397,11 +1869,8 @@
         "subtitle": "Hebrews 7:24-25",
         "references": [
           {
-            "book": "Hebrews",
-            "minChapter": 7,
-            "minVerse": 24,
-            "maxChapter": 7,
-            "maxVerse": 25
+            "first": 1738626,
+            "last": 1738722
           }
         ]
       },
@@ -2411,11 +1880,8 @@
         "subtitle": "Ezekiel 22:30-31",
         "references": [
           {
-            "book": "Ezekiel",
-            "minChapter": 22,
-            "minVerse": 30,
-            "maxChapter": 22,
-            "maxVerse": 31
+            "first": 1198110,
+            "last": 1198281
           }
         ]
       }
@@ -2427,11 +1893,8 @@
         "subtitle": "Jeremiah 31:33-34",
         "references": [
           {
-            "book": "Jeremiah",
-            "minChapter": 31,
-            "minVerse": 33,
-            "maxChapter": 31,
-            "maxVerse": 34
+            "first": 1118408,
+            "last": 1118630
           }
         ]
       },
@@ -2441,11 +1904,8 @@
         "subtitle": "Hebrews 11:17-19",
         "references": [
           {
-            "book": "Hebrews",
-            "minChapter": 11,
-            "minVerse": 17,
-            "maxChapter": 11,
-            "maxVerse": 19
+            "first": 1745385,
+            "last": 1745569
           }
         ]
       },
@@ -2455,18 +1915,12 @@
         "subtitle": "2 Kings 17:7-18, 22-23",
         "references": [
           {
-            "book": "2 Kings",
-            "minChapter": 17,
-            "minVerse": 7,
-            "maxChapter": 17,
-            "maxVerse": 18
+            "first": 616343,
+            "last": 617219
           },
           {
-            "book": "2 Kings",
-            "minChapter": 17,
-            "minVerse": 22,
-            "maxChapter": 17,
-            "maxVerse": 23
+            "first": 617434,
+            "last": 617547
           }
         ]
       },
@@ -2476,11 +1930,8 @@
         "subtitle": "James 1:27",
         "references": [
           {
-            "book": "James",
-            "minChapter": 1,
-            "minVerse": 27,
-            "maxChapter": 1,
-            "maxVerse": 27
+            "first": 1751488,
+            "last": 1751546
           }
         ]
       },
@@ -2490,11 +1941,8 @@
         "subtitle": "Isaiah 58:1-12",
         "references": [
           {
-            "book": "Isaiah",
-            "minChapter": 58,
-            "minVerse": 1,
-            "maxChapter": 58,
-            "maxVerse": 12
+            "first": 1056672,
+            "last": 1057531
           }
         ]
       },
@@ -2504,11 +1952,8 @@
         "subtitle": "Exodus 32:7-14",
         "references": [
           {
-            "book": "Exodus",
-            "minChapter": 32,
-            "minVerse": 7,
-            "maxChapter": 32,
-            "maxVerse": 14
+            "first": 143639,
+            "last": 144296
           }
         ]
       },
@@ -2518,11 +1963,8 @@
         "subtitle": "1 Samuel 16:7",
         "references": [
           {
-            "book": "1 Samuel",
-            "minChapter": 16,
-            "minVerse": 7,
-            "maxChapter": 16,
-            "maxVerse": 7
+            "first": 457525,
+            "last": 457617
           }
         ]
       },
@@ -2532,11 +1974,8 @@
         "subtitle": "1 Samuel 15:22-23",
         "references": [
           {
-            "book": "1 Samuel",
-            "minChapter": 15,
-            "minVerse": 22,
-            "maxChapter": 15,
-            "maxVerse": 23
+            "first": 456213,
+            "last": 456352
           }
         ]
       },
@@ -2546,11 +1985,8 @@
         "subtitle": "Micah 6:8",
         "references": [
           {
-            "book": "Micah",
-            "minChapter": 6,
-            "minVerse": 8,
-            "maxChapter": 6,
-            "maxVerse": 8
+            "first": 1311408,
+            "last": 1311481
           }
         ]
       },
@@ -2560,11 +1996,8 @@
         "subtitle": "Mark 1:14-18",
         "references": [
           {
-            "book": "Mark",
-            "minChapter": 1,
-            "minVerse": 14,
-            "maxChapter": 1,
-            "maxVerse": 18
+            "first": 1405239,
+            "last": 1405530
           }
         ]
       },
@@ -2574,11 +2007,8 @@
         "subtitle": "1 John 1:5-9",
         "references": [
           {
-            "book": "1 John",
-            "minChapter": 1,
-            "minVerse": 5,
-            "maxChapter": 1,
-            "maxVerse": 9
+            "first": 1767626,
+            "last": 1767916
           }
         ]
       }
@@ -2590,11 +2020,8 @@
         "subtitle": "2 Samuel 14:14",
         "references": [
           {
-            "book": "2 Samuel",
-            "minChapter": 14,
-            "minVerse": 14,
-            "maxChapter": 14,
-            "maxVerse": 14
+            "first": 506723,
+            "last": 506820
           }
         ]
       },
@@ -2604,11 +2031,8 @@
         "subtitle": "Job 1:1-2:10",
         "references": [
           {
-            "book": "Job",
-            "minChapter": 1,
-            "minVerse": 1,
-            "maxChapter": 2,
-            "maxVerse": 10
+            "first": 800280,
+            "last": 802198
           }
         ]
       },
@@ -2618,11 +2042,8 @@
         "subtitle": "Job 42:5-6",
         "references": [
           {
-            "book": "Job",
-            "minChapter": 42,
-            "minVerse": 5,
-            "maxChapter": 42,
-            "maxVerse": 6
+            "first": 838480,
+            "last": 838554
           }
         ]
       },
@@ -2632,11 +2053,8 @@
         "subtitle": "Psalm 81:13-16",
         "references": [
           {
-            "book": "Psalm",
-            "minChapter": 81,
-            "minVerse": 13,
-            "maxChapter": 81,
-            "maxVerse": 16
+            "first": 894058,
+            "last": 894209
           }
         ]
       },
@@ -2646,11 +2064,8 @@
         "subtitle": "Luke 24:47",
         "references": [
           {
-            "book": "Luke",
-            "minChapter": 24,
-            "minVerse": 47,
-            "maxChapter": 24,
-            "maxVerse": 47
+            "first": 1504483,
+            "last": 1504564
           }
         ]
       }
@@ -2662,11 +2077,8 @@
         "subtitle": "Psalm 96:1-6",
         "references": [
           {
-            "book": "Psalm",
-            "minChapter": 96,
-            "minVerse": 1,
-            "maxChapter": 96,
-            "maxVerse": 6
+            "first": 903206,
+            "last": 903401
           }
         ]
       },
@@ -2676,11 +2088,8 @@
         "subtitle": "Acts 20:4",
         "references": [
           {
-            "book": "Acts",
-            "minChapter": 20,
-            "minVerse": 4,
-            "maxChapter": 20,
-            "maxVerse": 4
+            "first": 1591614,
+            "last": 1591686
           }
         ]
       },
@@ -2690,11 +2099,8 @@
         "subtitle": "Colossians 1:28-29",
         "references": [
           {
-            "book": "Colossians",
-            "minChapter": 1,
-            "minVerse": 28,
-            "maxChapter": 1,
-            "maxVerse": 29
+            "first": 1704368,
+            "last": 1704488
           }
         ]
       },
@@ -2704,11 +2110,8 @@
         "subtitle": "Numbers 1:48-53",
         "references": [
           {
-            "book": "Numbers",
-            "minChapter": 1,
-            "minVerse": 48,
-            "maxChapter": 1,
-            "maxVerse": 53
+            "first": 217393,
+            "last": 217761
           }
         ]
       },
@@ -2718,11 +2121,8 @@
         "subtitle": "Acts 15:13-22",
         "references": [
           {
-            "book": "Acts",
-            "minChapter": 15,
-            "minVerse": 13,
-            "maxChapter": 15,
-            "maxVerse": 22
+            "first": 1581605,
+            "last": 1582150
           }
         ]
       }
@@ -2734,11 +2134,8 @@
         "subtitle": "1 Chronicles 15:12-13",
         "references": [
           {
-            "book": "1 Chronicles",
-            "minChapter": 15,
-            "minVerse": 12,
-            "maxChapter": 15,
-            "maxVerse": 13
+            "first": 662079,
+            "last": 662242
           }
         ]
       },
@@ -2748,11 +2145,8 @@
         "subtitle": "Ephesians 4:11-13",
         "references": [
           {
-            "book": "Ephesians",
-            "minChapter": 4,
-            "minVerse": 11,
-            "maxChapter": 4,
-            "maxVerse": 13
+            "first": 1692792,
+            "last": 1692966
           }
         ]
       },
@@ -2762,11 +2156,8 @@
         "subtitle": "Titus 1:5-9",
         "references": [
           {
-            "book": "Titus",
-            "minChapter": 1,
-            "minVerse": 5,
-            "maxChapter": 1,
-            "maxVerse": 9
+            "first": 1727319,
+            "last": 1727743
           }
         ]
       },
@@ -2776,18 +2167,12 @@
         "subtitle": "2 Timothy 2:1-7, 15",
         "references": [
           {
-            "book": "2 Timothy",
-            "minChapter": 2,
-            "minVerse": 1,
-            "maxChapter": 2,
-            "maxVerse": 7
+            "first": 1723670,
+            "last": 1723943
           },
           {
-            "book": "2 Timothy",
-            "minChapter": 2,
-            "minVerse": 15,
-            "maxChapter": 2,
-            "maxVerse": 15
+            "first": 1724267,
+            "last": 1724338
           }
         ]
       },
@@ -2797,11 +2182,8 @@
         "subtitle": "Philippians 3:17-18",
         "references": [
           {
-            "book": "Philippians",
-            "minChapter": 3,
-            "minVerse": 17,
-            "maxChapter": 3,
-            "maxVerse": 18
+            "first": 1701131,
+            "last": 1701242
           }
         ]
       },
@@ -2811,11 +2193,8 @@
         "subtitle": "Mark 3:14-15",
         "references": [
           {
-            "book": "Mark",
-            "minChapter": 3,
-            "minVerse": 14,
-            "maxChapter": 3,
-            "maxVerse": 15
+            "first": 1409143,
+            "last": 1409238
           }
         ]
       },
@@ -2825,11 +2204,8 @@
         "subtitle": "2 Chronicles 17:7-10",
         "references": [
           {
-            "book": "2 Chronicles",
-            "minChapter": 17,
-            "minVerse": 7,
-            "maxChapter": 17,
-            "maxVerse": 10
+            "first": 709269,
+            "last": 709505
           }
         ]
       },
@@ -2839,11 +2215,8 @@
         "subtitle": "1 Samuel 12:19-25",
         "references": [
           {
-            "book": "1 Samuel",
-            "minChapter": 12,
-            "minVerse": 19,
-            "maxChapter": 12,
-            "maxVerse": 25
+            "first": 449262,
+            "last": 449651
           }
         ]
       },
@@ -2853,11 +2226,8 @@
         "subtitle": "Ephesians 1:15-18",
         "references": [
           {
-            "book": "Ephesians",
-            "minChapter": 1,
-            "minVerse": 15,
-            "maxChapter": 1,
-            "maxVerse": 18
+            "first": 1689218,
+            "last": 1689516
           }
         ]
       },
@@ -2867,11 +2237,8 @@
         "subtitle": "Ephesians 6:10-20",
         "references": [
           {
-            "book": "Ephesians",
-            "minChapter": 6,
-            "minVerse": 10,
-            "maxChapter": 6,
-            "maxVerse": 20
+            "first": 1695814,
+            "last": 1696504
           }
         ]
       }
@@ -2883,11 +2250,8 @@
         "subtitle": "Exodus 33:15-17",
         "references": [
           {
-            "book": "Exodus",
-            "minChapter": 33,
-            "minVerse": 15,
-            "maxChapter": 33,
-            "maxVerse": 17
+            "first": 146734,
+            "last": 146919
           }
         ]
       },
@@ -2897,11 +2261,8 @@
         "subtitle": "Matthew 1:20-23",
         "references": [
           {
-            "book": "Matthew",
-            "minChapter": 1,
-            "minVerse": 20,
-            "maxChapter": 1,
-            "maxVerse": 23
+            "first": 1346526,
+            "last": 1346800
           }
         ]
       },
@@ -2911,11 +2272,8 @@
         "subtitle": "Mark 10:45",
         "references": [
           {
-            "book": "Mark",
-            "minChapter": 10,
-            "minVerse": 45,
-            "maxChapter": 10,
-            "maxVerse": 45
+            "first": 1427212,
+            "last": 1427265
           }
         ]
       },
@@ -2925,11 +2283,8 @@
         "subtitle": "Matthew 18:20",
         "references": [
           {
-            "book": "Matthew",
-            "minChapter": 18,
-            "minVerse": 20,
-            "maxChapter": 18,
-            "maxVerse": 20
+            "first": 1379224,
+            "last": 1379274
           }
         ]
       }
@@ -2941,11 +2296,8 @@
         "subtitle": "Leviticus 20:26",
         "references": [
           {
-            "book": "Leviticus",
-            "minChapter": 20,
-            "minVerse": 26,
-            "maxChapter": 20,
-            "maxVerse": 26
+            "first": 199585,
+            "last": 199638
           }
         ]
       },
@@ -2955,11 +2307,8 @@
         "subtitle": "Luke 18:9-14",
         "references": [
           {
-            "book": "Luke",
-            "minChapter": 18,
-            "minVerse": 9,
-            "maxChapter": 18,
-            "maxVerse": 14
+            "first": 1487364,
+            "last": 1487769
           }
         ]
       },
@@ -2969,11 +2318,8 @@
         "subtitle": "Galatians 5:22-25",
         "references": [
           {
-            "book": "Galatians",
-            "minChapter": 5,
-            "minVerse": 22,
-            "maxChapter": 5,
-            "maxVerse": 25
+            "first": 1687115,
+            "last": 1687285
           }
         ]
       },
@@ -2983,11 +2329,8 @@
         "subtitle": "1 Peter 2:9-10",
         "references": [
           {
-            "book": "1 Peter",
-            "minChapter": 2,
-            "minVerse": 9,
-            "maxChapter": 2,
-            "maxVerse": 10
+            "first": 1758632,
+            "last": 1758822
           }
         ]
       },
@@ -2997,11 +2340,8 @@
         "subtitle": "1 Peter 2:21-25",
         "references": [
           {
-            "book": "1 Peter",
-            "minChapter": 2,
-            "minVerse": 21,
-            "maxChapter": 2,
-            "maxVerse": 25
+            "first": 1759401,
+            "last": 1759666
           }
         ]
       }
@@ -3013,11 +2353,8 @@
         "subtitle": "Jeremiah 32:33-35",
         "references": [
           {
-            "book": "Jeremiah",
-            "minChapter": 32,
-            "minVerse": 33,
-            "maxChapter": 32,
-            "maxVerse": 35
+            "first": 1121156,
+            "last": 1121358
           }
         ]
       },
@@ -3027,11 +2364,8 @@
         "subtitle": "Acts 8:18-23",
         "references": [
           {
-            "book": "Acts",
-            "minChapter": 8,
-            "minVerse": 18,
-            "maxChapter": 8,
-            "maxVerse": 23
+            "first": 1566883,
+            "last": 1567143
           }
         ]
       },
@@ -3041,11 +2375,8 @@
         "subtitle": "Judges 6:25-32",
         "references": [
           {
-            "book": "Judges",
-            "minChapter": 6,
-            "minVerse": 25,
-            "maxChapter": 6,
-            "maxVerse": 32
+            "first": 396164,
+            "last": 396831
           }
         ]
       },
@@ -3055,11 +2386,8 @@
         "subtitle": "Matthew 13:52",
         "references": [
           {
-            "book": "Matthew",
-            "minChapter": 13,
-            "minVerse": 52,
-            "maxChapter": 13,
-            "maxVerse": 52
+            "first": 1370564,
+            "last": 1370636
           }
         ]
       },
@@ -3069,11 +2397,8 @@
         "subtitle": "Romans 10:14-15",
         "references": [
           {
-            "book": "Romans",
-            "minChapter": 10,
-            "minVerse": 14,
-            "maxChapter": 10,
-            "maxVerse": 15
+            "first": 1625891,
+            "last": 1626049
           }
         ]
       },
@@ -3083,11 +2408,8 @@
         "subtitle": "2 Chronicles 5:12-14",
         "references": [
           {
-            "book": "2 Chronicles",
-            "minChapter": 5,
-            "minVerse": 12,
-            "maxChapter": 5,
-            "maxVerse": 14
+            "first": 692677,
+            "last": 692944
           }
         ]
       }
@@ -3101,11 +2423,8 @@
         "subtitle": "Isaiah 33:22",
         "references": [
           {
-            "book": "Isaiah",
-            "minChapter": 33,
-            "minVerse": 22,
-            "maxChapter": 33,
-            "maxVerse": 22
+            "first": 1025298,
+            "last": 1025339
           }
         ]
       },
@@ -3115,11 +2434,8 @@
         "subtitle": "Jeremiah 7:5-7",
         "references": [
           {
-            "book": "Jeremiah",
-            "minChapter": 7,
-            "minVerse": 5,
-            "maxChapter": 7,
-            "maxVerse": 7
+            "first": 1078859,
+            "last": 1079001
           }
         ]
       },
@@ -3129,11 +2445,8 @@
         "subtitle": "Psalm 147:19-20",
         "references": [
           {
-            "book": "Psalm",
-            "minChapter": 147,
-            "minVerse": 19,
-            "maxChapter": 147,
-            "maxVerse": 20
+            "first": 935645,
+            "last": 935712
           }
         ]
       },
@@ -3143,11 +2456,8 @@
         "subtitle": "James 4:12",
         "references": [
           {
-            "book": "James",
-            "minChapter": 4,
-            "minVerse": 12,
-            "maxChapter": 4,
-            "maxVerse": 12
+            "first": 1754848,
+            "last": 1754912
           }
         ]
       },
@@ -3157,18 +2467,12 @@
         "subtitle": "Psalm 89:14, 18",
         "references": [
           {
-            "book": "Psalm",
-            "minChapter": 89,
-            "minVerse": 14,
-            "maxChapter": 89,
-            "maxVerse": 14
+            "first": 898652,
+            "last": 898690
           },
           {
-            "book": "Psalm",
-            "minChapter": 89,
-            "minVerse": 18,
-            "maxChapter": 89,
-            "maxVerse": 18
+            "first": 898795,
+            "last": 898838
           }
         ]
       },
@@ -3178,11 +2482,8 @@
         "subtitle": "Isaiah 9:6-7",
         "references": [
           {
-            "book": "Isaiah",
-            "minChapter": 9,
-            "minVerse": 6,
-            "maxChapter": 9,
-            "maxVerse": 7
+            "first": 997221,
+            "last": 997382
           }
         ]
       }
@@ -3194,11 +2495,8 @@
         "subtitle": "Romans 13:1-7",
         "references": [
           {
-            "book": "Romans",
-            "minChapter": 13,
-            "minVerse": 1,
-            "maxChapter": 13,
-            "maxVerse": 7
+            "first": 1630214,
+            "last": 1630656
           }
         ]
       },
@@ -3208,11 +2506,8 @@
         "subtitle": "Numbers 27:1-11",
         "references": [
           {
-            "book": "Numbers",
-            "minChapter": 27,
-            "minVerse": 1,
-            "maxChapter": 27,
-            "maxVerse": 11
+            "first": 268382,
+            "last": 268961
           }
         ]
       },
@@ -3222,11 +2517,8 @@
         "subtitle": "Esther 4:13-16",
         "references": [
           {
-            "book": "Esther",
-            "minChapter": 4,
-            "minVerse": 13,
-            "maxChapter": 4,
-            "maxVerse": 16
+            "first": 793186,
+            "last": 793481
           }
         ]
       },
@@ -3236,11 +2528,8 @@
         "subtitle": "Acts 23:12-35",
         "references": [
           {
-            "book": "Acts",
-            "minChapter": 23,
-            "minVerse": 12,
-            "maxChapter": 23,
-            "maxVerse": 35
+            "first": 1598330,
+            "last": 1599541
           }
         ]
       },
@@ -3250,11 +2539,8 @@
         "subtitle": "Matthew 2:16-18",
         "references": [
           {
-            "book": "Matthew",
-            "minChapter": 2,
-            "minVerse": 16,
-            "maxChapter": 2,
-            "maxVerse": 18
+            "first": 1347829,
+            "last": 1348014
           }
         ]
       },
@@ -3264,11 +2550,8 @@
         "subtitle": "Exodus 2:11-15",
         "references": [
           {
-            "book": "Exodus",
-            "minChapter": 2,
-            "minVerse": 11,
-            "maxChapter": 2,
-            "maxVerse": 15
+            "first": 89100,
+            "last": 89481
           }
         ]
       },
@@ -3278,11 +2561,8 @@
         "subtitle": "Judges 21:25",
         "references": [
           {
-            "book": "Judges",
-            "minChapter": 21,
-            "minVerse": 25,
-            "maxChapter": 21,
-            "maxVerse": 25
+            "first": 425501,
+            "last": 425542
           }
         ]
       },
@@ -3292,11 +2572,8 @@
         "subtitle": "Ecclesiastes 5:8-9",
         "references": [
           {
-            "book": "Ecclesiastes",
-            "minChapter": 5,
-            "minVerse": 8,
-            "maxChapter": 5,
-            "maxVerse": 9
+            "first": 973232,
+            "last": 973377
           }
         ]
       }
@@ -3308,11 +2585,8 @@
         "subtitle": "2 Samuel 23:3-4",
         "references": [
           {
-            "book": "2 Samuel",
-            "minChapter": 23,
-            "minVerse": 3,
-            "maxChapter": 23,
-            "maxVerse": 4
+            "first": 525371,
+            "last": 525473
           }
         ]
       },
@@ -3322,11 +2596,8 @@
         "subtitle": "2 Kings 22:2",
         "references": [
           {
-            "book": "2 Kings",
-            "minChapter": 22,
-            "minVerse": 2,
-            "maxChapter": 22,
-            "maxVerse": 2
+            "first": 627447,
+            "last": 627506
           }
         ]
       },
@@ -3336,18 +2607,12 @@
         "subtitle": "Judges 4:4-9, 14-16",
         "references": [
           {
-            "book": "Judges",
-            "minChapter": 4,
-            "minVerse": 4,
-            "maxChapter": 4,
-            "maxVerse": 9
+            "first": 391662,
+            "last": 392054
           },
           {
-            "book": "Judges",
-            "minChapter": 4,
-            "minVerse": 14,
-            "maxChapter": 4,
-            "maxVerse": 16
+            "first": 392275,
+            "last": 392485
           }
         ]
       },
@@ -3357,11 +2622,8 @@
         "subtitle": "Nehemiah 5:14-18",
         "references": [
           {
-            "book": "Nehemiah",
-            "minChapter": 5,
-            "minVerse": 14,
-            "maxChapter": 5,
-            "maxVerse": 18
+            "first": 769643,
+            "last": 770083
           }
         ]
       },
@@ -3371,11 +2633,8 @@
         "subtitle": "Genesis 47:13-26",
         "references": [
           {
-            "book": "Genesis",
-            "minChapter": 47,
-            "minVerse": 13,
-            "maxChapter": 47,
-            "maxVerse": 26
+            "first": 81032,
+            "last": 82046
           }
         ]
       },
@@ -3385,11 +2644,8 @@
         "subtitle": "1 Timothy 2:2",
         "references": [
           {
-            "book": "1 Timothy",
-            "minChapter": 2,
-            "minVerse": 2,
-            "maxChapter": 2,
-            "maxVerse": 2
+            "first": 1717214,
+            "last": 1717267
           }
         ]
       },
@@ -3399,11 +2655,8 @@
         "subtitle": "1 Peter 2:13-17",
         "references": [
           {
-            "book": "1 Peter",
-            "minChapter": 2,
-            "minVerse": 13,
-            "maxChapter": 2,
-            "maxVerse": 17
+            "first": 1758970,
+            "last": 1759202
           }
         ]
       },
@@ -3413,11 +2666,8 @@
         "subtitle": "Daniel 3",
         "references": [
           {
-            "book": "Daniel",
-            "minChapter": 3,
-            "minVerse": 1,
-            "maxChapter": 3,
-            "maxVerse": 30
+            "first": 1253567,
+            "last": 1255636
           }
         ]
       }
@@ -3429,11 +2679,8 @@
         "subtitle": "Deuteronomy 17:14-20",
         "references": [
           {
-            "book": "Deuteronomy",
-            "minChapter": 17,
-            "minVerse": 14,
-            "maxChapter": 17,
-            "maxVerse": 20
+            "first": 316897,
+            "last": 317444
           }
         ]
       },
@@ -3443,11 +2690,8 @@
         "subtitle": "1 Kings 10:1-11:13",
         "references": [
           {
-            "book": "1 Kings",
-            "minChapter": 10,
-            "minVerse": 1,
-            "maxChapter": 11,
-            "maxVerse": 13
+            "first": 553135,
+            "last": 556004
           }
         ]
       },
@@ -3457,11 +2701,8 @@
         "subtitle": "2 Chronicles 16:9",
         "references": [
           {
-            "book": "2 Chronicles",
-            "minChapter": 16,
-            "minVerse": 9,
-            "maxChapter": 16,
-            "maxVerse": 9
+            "first": 708516,
+            "last": 708591
           }
         ]
       },
@@ -3471,11 +2712,8 @@
         "subtitle": "2 Chronicles 33:1-20",
         "references": [
           {
-            "book": "2 Chronicles",
-            "minChapter": 33,
-            "minVerse": 1,
-            "maxChapter": 33,
-            "maxVerse": 20
+            "first": 736818,
+            "last": 738278
           }
         ]
       },
@@ -3485,11 +2723,8 @@
         "subtitle": "Mark 12:13-17",
         "references": [
           {
-            "book": "Mark",
-            "minChapter": 12,
-            "minVerse": 13,
-            "maxChapter": 12,
-            "maxVerse": 17
+            "first": 1430166,
+            "last": 1430489
           }
         ]
       },
@@ -3499,11 +2734,8 @@
         "subtitle": "Daniel 1:5-20",
         "references": [
           {
-            "book": "Daniel",
-            "minChapter": 1,
-            "minVerse": 5,
-            "maxChapter": 1,
-            "maxVerse": 20
+            "first": 1249530,
+            "last": 1250432
           }
         ]
       }
@@ -3515,11 +2747,8 @@
         "subtitle": "Deuteronomy 1:15-17",
         "references": [
           {
-            "book": "Deuteronomy",
-            "minChapter": 1,
-            "minVerse": 15,
-            "maxChapter": 1,
-            "maxVerse": 17
+            "first": 286558,
+            "last": 286826
           }
         ]
       },
@@ -3529,11 +2758,8 @@
         "subtitle": "Leviticus 19:15",
         "references": [
           {
-            "book": "Leviticus",
-            "minChapter": 19,
-            "minVerse": 15,
-            "maxChapter": 19,
-            "maxVerse": 15
+            "first": 196559,
+            "last": 196609
           }
         ]
       },
@@ -3543,11 +2769,8 @@
         "subtitle": "Exodus 4:9-18",
         "references": [
           {
-            "book": "Exodus",
-            "minChapter": 4,
-            "minVerse": 9,
-            "maxChapter": 4,
-            "maxVerse": 18
+            "first": 92385,
+            "last": 93082
           }
         ]
       },
@@ -3557,11 +2780,8 @@
         "subtitle": "Zechariah 8:16",
         "references": [
           {
-            "book": "Zechariah",
-            "minChapter": 8,
-            "minVerse": 16,
-            "maxChapter": 8,
-            "maxVerse": 16
+            "first": 1333658,
+            "last": 1333715
           }
         ]
       },
@@ -3571,11 +2791,8 @@
         "subtitle": "1 Kings 3:16-28",
         "references": [
           {
-            "book": "1 Kings",
-            "minChapter": 3,
-            "minVerse": 16,
-            "maxChapter": 3,
-            "maxVerse": 28
+            "first": 536901,
+            "last": 537698
           }
         ]
       },
@@ -3585,11 +2802,8 @@
         "subtitle": "Luke 18:1-8",
         "references": [
           {
-            "book": "Luke",
-            "minChapter": 18,
-            "minVerse": 1,
-            "maxChapter": 18,
-            "maxVerse": 8
+            "first": 1486926,
+            "last": 1487363
           }
         ]
       }
@@ -3601,11 +2815,8 @@
         "subtitle": "Ezekiel 33:15",
         "references": [
           {
-            "book": "Ezekiel",
-            "minChapter": 33,
-            "minVerse": 15,
-            "maxChapter": 33,
-            "maxVerse": 15
+            "first": 1216878,
+            "last": 1216965
           }
         ]
       },
@@ -3615,11 +2826,8 @@
         "subtitle": "Deuteronomy 4:4-5",
         "references": [
           {
-            "book": "Deuteronomy",
-            "minChapter": 4,
-            "minVerse": 4,
-            "maxChapter": 4,
-            "maxVerse": 5
+            "first": 293001,
+            "last": 293116
           }
         ]
       },
@@ -3629,11 +2837,8 @@
         "subtitle": "Daniel 6:6-9",
         "references": [
           {
-            "book": "Daniel",
-            "minChapter": 6,
-            "minVerse": 6,
-            "maxChapter": 6,
-            "maxVerse": 9
+            "first": 1260857,
+            "last": 1261089
           }
         ]
       },
@@ -3643,11 +2848,8 @@
         "subtitle": "Numbers 35:9-15",
         "references": [
           {
-            "book": "Numbers",
-            "minChapter": 35,
-            "minVerse": 9,
-            "maxChapter": 35,
-            "maxVerse": 15
+            "first": 283504,
+            "last": 283776
           }
         ]
       },
@@ -3657,11 +2859,8 @@
         "subtitle": "Matthew 17:25-27",
         "references": [
           {
-            "book": "Matthew",
-            "minChapter": 17,
-            "minVerse": 25,
-            "maxChapter": 17,
-            "maxVerse": 27
+            "first": 1377705,
+            "last": 1377987
           }
         ]
       },
@@ -3671,11 +2870,8 @@
         "subtitle": "Daniel 6:10-24",
         "references": [
           {
-            "book": "Daniel",
-            "minChapter": 6,
-            "minVerse": 10,
-            "maxChapter": 6,
-            "maxVerse": 24
+            "first": 1261090,
+            "last": 1262170
           }
         ]
       }
@@ -3687,11 +2883,8 @@
         "subtitle": "Deuteronomy 20",
         "references": [
           {
-            "book": "Deuteronomy",
-            "minChapter": 20,
-            "minVerse": 1,
-            "maxChapter": 20,
-            "maxVerse": 20
+            "first": 320089,
+            "last": 321366
           }
         ]
       },
@@ -3701,11 +2894,8 @@
         "subtitle": "2 Samuel 10:1-8",
         "references": [
           {
-            "book": "2 Samuel",
-            "minChapter": 10,
-            "minVerse": 1,
-            "maxChapter": 10,
-            "maxVerse": 8
+            "first": 497942,
+            "last": 498546
           }
         ]
       },
@@ -3715,11 +2905,8 @@
         "subtitle": "Luke 7:6-9",
         "references": [
           {
-            "book": "Luke",
-            "minChapter": 7,
-            "minVerse": 6,
-            "maxChapter": 7,
-            "maxVerse": 9
+            "first": 1458501,
+            "last": 1458824
           }
         ]
       },
@@ -3729,11 +2916,8 @@
         "subtitle": "Luke 11:17",
         "references": [
           {
-            "book": "Luke",
-            "minChapter": 11,
-            "minVerse": 17,
-            "maxChapter": 11,
-            "maxVerse": 17
+            "first": 1471895,
+            "last": 1471948
           }
         ]
       },
@@ -3743,11 +2927,8 @@
         "subtitle": "Obadiah 11-15",
         "references": [
           {
-            "book": "Obadiah",
-            "minChapter": 1,
-            "minVerse": 11,
-            "maxChapter": 1,
-            "maxVerse": 15
+            "first": 1302360,
+            "last": 1302731
           }
         ]
       },
@@ -3757,11 +2938,8 @@
         "subtitle": "2 Kings 6:8-23",
         "references": [
           {
-            "book": "2 Kings",
-            "minChapter": 6,
-            "minVerse": 8,
-            "maxChapter": 6,
-            "maxVerse": 23
+            "first": 594022,
+            "last": 595117
           }
         ]
       }
@@ -3773,11 +2951,8 @@
         "subtitle": "2 Samuel 11:2-27",
         "references": [
           {
-            "book": "2 Samuel",
-            "minChapter": 11,
-            "minVerse": 2,
-            "maxChapter": 11,
-            "maxVerse": 27
+            "first": 499389,
+            "last": 500977
           }
         ]
       },
@@ -3787,11 +2962,8 @@
         "subtitle": "1 Kings 12:4-18",
         "references": [
           {
-            "book": "1 Kings",
-            "minChapter": 12,
-            "minVerse": 4,
-            "maxChapter": 12,
-            "maxVerse": 18
+            "first": 558104,
+            "last": 559119
           }
         ]
       },
@@ -3801,11 +2973,8 @@
         "subtitle": "1 Samuel 13:7-14",
         "references": [
           {
-            "book": "1 Samuel",
-            "minChapter": 13,
-            "minVerse": 7,
-            "maxChapter": 13,
-            "maxVerse": 14
+            "first": 450198,
+            "last": 450736
           }
         ]
       },
@@ -3815,11 +2984,8 @@
         "subtitle": "Daniel 1:3-4",
         "references": [
           {
-            "book": "Daniel",
-            "minChapter": 1,
-            "minVerse": 3,
-            "maxChapter": 1,
-            "maxVerse": 4
+            "first": 1249330,
+            "last": 1249529
           }
         ]
       },
@@ -3829,11 +2995,8 @@
         "subtitle": "Joshua 9:3-27",
         "references": [
           {
-            "book": "Joshua",
-            "minChapter": 9,
-            "minVerse": 3,
-            "maxChapter": 9,
-            "maxVerse": 27
+            "first": 359392,
+            "last": 360838
           }
         ]
       },
@@ -3843,11 +3006,8 @@
         "subtitle": "Mark 6:21-28",
         "references": [
           {
-            "book": "Mark",
-            "minChapter": 6,
-            "minVerse": 21,
-            "maxChapter": 6,
-            "maxVerse": 28
+            "first": 1415618,
+            "last": 1416091
           }
         ]
       }
@@ -3861,11 +3021,8 @@
         "subtitle": "Exodus 6:7",
         "references": [
           {
-            "book": "Exodus",
-            "minChapter": 6,
-            "minVerse": 7,
-            "maxChapter": 6,
-            "maxVerse": 7
+            "first": 95733,
+            "last": 95806
           }
         ]
       },
@@ -3875,11 +3032,8 @@
         "subtitle": "Isaiah 54:13",
         "references": [
           {
-            "book": "Isaiah",
-            "minChapter": 54,
-            "minVerse": 13,
-            "maxChapter": 54,
-            "maxVerse": 13
+            "first": 1053630,
+            "last": 1053656
           }
         ]
       },
@@ -3889,11 +3043,8 @@
         "subtitle": "John 13:12-17",
         "references": [
           {
-            "book": "John",
-            "minChapter": 13,
-            "minVerse": 12,
-            "maxChapter": 13,
-            "maxVerse": 17
+            "first": 1535906,
+            "last": 1536164
           }
         ]
       },
@@ -3903,11 +3054,8 @@
         "subtitle": "John 14:26",
         "references": [
           {
-            "book": "John",
-            "minChapter": 14,
-            "minVerse": 26,
-            "maxChapter": 14,
-            "maxVerse": 26
+            "first": 1538944,
+            "last": 1539007
           }
         ]
       },
@@ -3917,18 +3065,12 @@
         "subtitle": "Psalm 27:1-5, 11",
         "references": [
           {
-            "book": "Psalm",
-            "minChapter": 27,
-            "minVerse": 1,
-            "maxChapter": 27,
-            "maxVerse": 5
+            "first": 853861,
+            "last": 854141
           },
           {
-            "book": "Psalm",
-            "minChapter": 27,
-            "minVerse": 11,
-            "maxChapter": 27,
-            "maxVerse": 11
+            "first": 854385,
+            "last": 854428
           }
         ]
       },
@@ -3938,11 +3080,8 @@
         "subtitle": "Mark 6:34",
         "references": [
           {
-            "book": "Mark",
-            "minChapter": 6,
-            "minVerse": 34,
-            "maxChapter": 6,
-            "maxVerse": 34
+            "first": 1416350,
+            "last": 1416418
           }
         ]
       }
@@ -3954,11 +3093,8 @@
         "subtitle": "Proverbs 1:2-7",
         "references": [
           {
-            "book": "Proverbs",
-            "minChapter": 1,
-            "minVerse": 2,
-            "maxChapter": 1,
-            "maxVerse": 7
+            "first": 936667,
+            "last": 936893
           }
         ]
       },
@@ -3968,11 +3104,8 @@
         "subtitle": "1 Timothy 1:5",
         "references": [
           {
-            "book": "1 Timothy",
-            "minChapter": 1,
-            "minVerse": 5,
-            "maxChapter": 1,
-            "maxVerse": 5
+            "first": 1716197,
+            "last": 1716254
           }
         ]
       },
@@ -3982,11 +3115,8 @@
         "subtitle": "Deuteronomy 28:13",
         "references": [
           {
-            "book": "Deuteronomy",
-            "minChapter": 28,
-            "minVerse": 13,
-            "maxChapter": 28,
-            "maxVerse": 13
+            "first": 331808,
+            "last": 331906
           }
         ]
       },
@@ -3996,11 +3126,8 @@
         "subtitle": "Deuteronomy 5:29-31",
         "references": [
           {
-            "book": "Deuteronomy",
-            "minChapter": 5,
-            "minVerse": 29,
-            "maxChapter": 5,
-            "maxVerse": 31
+            "first": 297597,
+            "last": 297771
           }
         ]
       },
@@ -4010,11 +3137,8 @@
         "subtitle": "Acts 4:13",
         "references": [
           {
-            "book": "Acts",
-            "minChapter": 4,
-            "minVerse": 13,
-            "maxChapter": 4,
-            "maxVerse": 13
+            "first": 1558105,
+            "last": 1558196
           }
         ]
       },
@@ -4024,11 +3148,8 @@
         "subtitle": "Leviticus 18:1-5",
         "references": [
           {
-            "book": "Leviticus",
-            "minChapter": 18,
-            "minVerse": 1,
-            "maxChapter": 18,
-            "maxVerse": 5
+            "first": 194281,
+            "last": 194490
           }
         ]
       },
@@ -4038,11 +3159,8 @@
         "subtitle": "Jeremiah 18:1-11",
         "references": [
           {
-            "book": "Jeremiah",
-            "minChapter": 18,
-            "minVerse": 1,
-            "maxChapter": 18,
-            "maxVerse": 11
+            "first": 1095842,
+            "last": 1096334
           }
         ]
       }
@@ -4054,11 +3172,8 @@
         "subtitle": "Ezra 7:10-11",
         "references": [
           {
-            "book": "Ezra",
-            "minChapter": 7,
-            "minVerse": 10,
-            "maxChapter": 7,
-            "maxVerse": 11
+            "first": 754863,
+            "last": 754981
           }
         ]
       },
@@ -4068,11 +3183,8 @@
         "subtitle": "Romans 12:7",
         "references": [
           {
-            "book": "Romans",
-            "minChapter": 12,
-            "minVerse": 7,
-            "maxChapter": 12,
-            "maxVerse": 7
+            "first": 1629469,
+            "last": 1629507
           }
         ]
       },
@@ -4082,11 +3194,8 @@
         "subtitle": "John 4:23-24",
         "references": [
           {
-            "book": "John",
-            "minChapter": 4,
-            "minVerse": 23,
-            "maxChapter": 4,
-            "maxVerse": 24
+            "first": 1511866,
+            "last": 1511975
           }
         ]
       },
@@ -4096,11 +3205,8 @@
         "subtitle": "Mark 7:2-4",
         "references": [
           {
-            "book": "Mark",
-            "minChapter": 7,
-            "minVerse": 2,
-            "maxChapter": 7,
-            "maxVerse": 4
+            "first": 1417619,
+            "last": 1417840
           }
         ]
       },
@@ -4110,11 +3216,8 @@
         "subtitle": "Exodus 4:1-11",
         "references": [
           {
-            "book": "Exodus",
-            "minChapter": 4,
-            "minVerse": 1,
-            "maxChapter": 4,
-            "maxVerse": 11
+            "first": 91822,
+            "last": 92658
           }
         ]
       },
@@ -4124,11 +3227,8 @@
         "subtitle": "Luke 8:1-2",
         "references": [
           {
-            "book": "Luke",
-            "minChapter": 8,
-            "minVerse": 1,
-            "maxChapter": 8,
-            "maxVerse": 2
+            "first": 1461281,
+            "last": 1461402
           }
         ]
       },
@@ -4138,11 +3238,8 @@
         "subtitle": "Ephesians 3:14-21",
         "references": [
           {
-            "book": "Ephesians",
-            "minChapter": 3,
-            "minVerse": 14,
-            "maxChapter": 3,
-            "maxVerse": 21
+            "first": 1691879,
+            "last": 1692320
           }
         ]
       },
@@ -4152,11 +3249,8 @@
         "subtitle": "James 3:1",
         "references": [
           {
-            "book": "James",
-            "minChapter": 3,
-            "minVerse": 1,
-            "maxChapter": 3,
-            "maxVerse": 1
+            "first": 1753088,
+            "last": 1753154
           }
         ]
       }
@@ -4168,11 +3262,8 @@
         "subtitle": "Leviticus 11:45",
         "references": [
           {
-            "book": "Leviticus",
-            "minChapter": 11,
-            "minVerse": 45,
-            "maxChapter": 11,
-            "maxVerse": 45
+            "first": 180158,
+            "last": 180227
           }
         ]
       },
@@ -4182,11 +3273,8 @@
         "subtitle": "Hebrews 3:1",
         "references": [
           {
-            "book": "Hebrews",
-            "minChapter": 3,
-            "minVerse": 1,
-            "maxChapter": 3,
-            "maxVerse": 1
+            "first": 1733195,
+            "last": 1733295
           }
         ]
       },
@@ -4196,11 +3284,8 @@
         "subtitle": "Psalm 19:7-11",
         "references": [
           {
-            "book": "Psalm",
-            "minChapter": 19,
-            "minVerse": 7,
-            "maxChapter": 19,
-            "maxVerse": 11
+            "first": 849449,
+            "last": 849661
           }
         ]
       },
@@ -4210,11 +3295,8 @@
         "subtitle": "James 1:5-6",
         "references": [
           {
-            "book": "James",
-            "minChapter": 1,
-            "minVerse": 5,
-            "maxChapter": 1,
-            "maxVerse": 6
+            "first": 1750264,
+            "last": 1750401
           }
         ]
       },
@@ -4224,11 +3306,8 @@
         "subtitle": "Philippians 4:8",
         "references": [
           {
-            "book": "Philippians",
-            "minChapter": 4,
-            "minVerse": 8,
-            "maxChapter": 4,
-            "maxVerse": 8
+            "first": 1701838,
+            "last": 1701922
           }
         ]
       },
@@ -4238,11 +3317,8 @@
         "subtitle": "Matthew 7:24-27",
         "references": [
           {
-            "book": "Matthew",
-            "minChapter": 7,
-            "minVerse": 24,
-            "maxChapter": 7,
-            "maxVerse": 27
+            "first": 1356718,
+            "last": 1356918
           }
         ]
       },
@@ -4252,11 +3328,8 @@
         "subtitle": "Psalm 131",
         "references": [
           {
-            "book": "Psalm",
-            "minChapter": 131,
-            "minVerse": 1,
-            "maxChapter": 131,
-            "maxVerse": 3
+            "first": 926985,
+            "last": 927130
           }
         ]
       },
@@ -4266,11 +3339,8 @@
         "subtitle": "Hosea 6:3",
         "references": [
           {
-            "book": "Hosea",
-            "minChapter": 6,
-            "minVerse": 3,
-            "maxChapter": 6,
-            "maxVerse": 3
+            "first": 1279525,
+            "last": 1279596
           }
         ]
       }
@@ -4282,11 +3352,8 @@
         "subtitle": "2 Kings 22:8",
         "references": [
           {
-            "book": "2 Kings",
-            "minChapter": 22,
-            "minVerse": 8,
-            "maxChapter": 22,
-            "maxVerse": 8
+            "first": 627793,
+            "last": 627868
           }
         ]
       },
@@ -4296,11 +3363,8 @@
         "subtitle": "Jonah 1:8",
         "references": [
           {
-            "book": "Jonah",
-            "minChapter": 1,
-            "minVerse": 8,
-            "maxChapter": 1,
-            "maxVerse": 8
+            "first": 1303705,
+            "last": 1303772
           }
         ]
       },
@@ -4310,11 +3374,8 @@
         "subtitle": "Genesis 18:23-33",
         "references": [
           {
-            "book": "Genesis",
-            "minChapter": 18,
-            "minVerse": 23,
-            "maxChapter": 18,
-            "maxVerse": 33
+            "first": 23929,
+            "last": 24646
           }
         ]
       },
@@ -4324,11 +3385,8 @@
         "subtitle": "Leviticus 10:10-11",
         "references": [
           {
-            "book": "Leviticus",
-            "minChapter": 10,
-            "minVerse": 10,
-            "maxChapter": 10,
-            "maxVerse": 11
+            "first": 177097,
+            "last": 177179
           }
         ]
       },
@@ -4338,11 +3396,8 @@
         "subtitle": "Proverbs 4:20-23",
         "references": [
           {
-            "book": "Proverbs",
-            "minChapter": 4,
-            "minVerse": 20,
-            "maxChapter": 4,
-            "maxVerse": 23
+            "first": 940569,
+            "last": 940691
           }
         ]
       },
@@ -4352,11 +3407,8 @@
         "subtitle": "Proverbs 9:10",
         "references": [
           {
-            "book": "Proverbs",
-            "minChapter": 9,
-            "minVerse": 10,
-            "maxChapter": 9,
-            "maxVerse": 10
+            "first": 945313,
+            "last": 945351
           }
         ]
       },
@@ -4366,11 +3418,8 @@
         "subtitle": "2 Peter 1:5-8",
         "references": [
           {
-            "book": "2 Peter",
-            "minChapter": 1,
-            "minVerse": 5,
-            "maxChapter": 1,
-            "maxVerse": 8
+            "first": 1763609,
+            "last": 1763786
           }
         ]
       },
@@ -4380,18 +3429,12 @@
         "subtitle": "Proverbs 3:1-6, 11-12",
         "references": [
           {
-            "book": "Proverbs",
-            "minChapter": 3,
-            "minVerse": 1,
-            "maxChapter": 3,
-            "maxVerse": 6
+            "first": 938552,
+            "last": 938791
           },
           {
-            "book": "Proverbs",
-            "minChapter": 3,
-            "minVerse": 11,
-            "maxChapter": 3,
-            "maxVerse": 12
+            "first": 938925,
+            "last": 939040
           }
         ]
       },
@@ -4401,11 +3444,8 @@
         "subtitle": "Acts 19:9-10",
         "references": [
           {
-            "book": "Acts",
-            "minChapter": 19,
-            "minVerse": 9,
-            "maxChapter": 19,
-            "maxVerse": 10
+            "first": 1589510,
+            "last": 1589642
           }
         ]
       },
@@ -4415,11 +3455,8 @@
         "subtitle": "1 Chronicles 27:32",
         "references": [
           {
-            "book": "1 Chronicles",
-            "minChapter": 27,
-            "minVerse": 32,
-            "maxChapter": 27,
-            "maxVerse": 32
+            "first": 681926,
+            "last": 681994
           }
         ]
       },
@@ -4429,11 +3466,8 @@
         "subtitle": "3 John 6-8",
         "references": [
           {
-            "book": "3 John",
-            "minChapter": 1,
-            "minVerse": 6,
-            "maxChapter": 1,
-            "maxVerse": 8
+            "first": 1775002,
+            "last": 1775156
           }
         ]
       }
@@ -4445,11 +3479,8 @@
         "subtitle": "Deuteronomy 4:10",
         "references": [
           {
-            "book": "Deuteronomy",
-            "minChapter": 4,
-            "minVerse": 10,
-            "maxChapter": 4,
-            "maxVerse": 10
+            "first": 293386,
+            "last": 293525
           }
         ]
       },
@@ -4459,11 +3490,8 @@
         "subtitle": "Haggai 2:18",
         "references": [
           {
-            "book": "Haggai",
-            "minChapter": 2,
-            "minVerse": 18,
-            "maxChapter": 2,
-            "maxVerse": 18
+            "first": 1325374,
+            "last": 1325449
           }
         ]
       },
@@ -4473,11 +3501,8 @@
         "subtitle": "1 Corinthians 14:35",
         "references": [
           {
-            "book": "1 Corinthians",
-            "minChapter": 14,
-            "minVerse": 35,
-            "maxChapter": 14,
-            "maxVerse": 35
+            "first": 1657680,
+            "last": 1657752
           }
         ]
       },
@@ -4487,11 +3512,8 @@
         "subtitle": "Job 42:7",
         "references": [
           {
-            "book": "Job",
-            "minChapter": 42,
-            "minVerse": 7,
-            "maxChapter": 42,
-            "maxVerse": 7
+            "first": 838555,
+            "last": 838634
           }
         ]
       },
@@ -4501,11 +3523,8 @@
         "subtitle": "Numbers 36:1-12",
         "references": [
           {
-            "book": "Numbers",
-            "minChapter": 36,
-            "minVerse": 1,
-            "maxChapter": 36,
-            "maxVerse": 12
+            "first": 284853,
+            "last": 285526
           }
         ]
       },
@@ -4515,11 +3534,8 @@
         "subtitle": "Psalm 98:1",
         "references": [
           {
-            "book": "Psalm",
-            "minChapter": 98,
-            "minVerse": 1,
-            "maxChapter": 98,
-            "maxVerse": 1
+            "first": 904113,
+            "last": 904171
           }
         ]
       }
@@ -4531,11 +3547,8 @@
         "subtitle": "Deuteronomy 11:19",
         "references": [
           {
-            "book": "Deuteronomy",
-            "minChapter": 11,
-            "minVerse": 19,
-            "maxChapter": 11,
-            "maxVerse": 19
+            "first": 307132,
+            "last": 307201
           }
         ]
       },
@@ -4545,11 +3558,8 @@
         "subtitle": "Titus 1:11",
         "references": [
           {
-            "book": "Titus",
-            "minChapter": 1,
-            "minVerse": 11,
-            "maxChapter": 1,
-            "maxVerse": 11
+            "first": 1727801,
+            "last": 1727856
           }
         ]
       },
@@ -4559,11 +3569,8 @@
         "subtitle": "2 Kings 12:2",
         "references": [
           {
-            "book": "2 Kings",
-            "minChapter": 12,
-            "minVerse": 2,
-            "maxChapter": 12,
-            "maxVerse": 2
+            "first": 607183,
+            "last": 607224
           }
         ]
       },
@@ -4573,18 +3580,12 @@
         "subtitle": "Nehemiah 8:2-3, 7-8",
         "references": [
           {
-            "book": "Nehemiah",
-            "minChapter": 8,
-            "minVerse": 2,
-            "maxChapter": 8,
-            "maxVerse": 3
+            "first": 774422,
+            "last": 774623
           },
           {
-            "book": "Nehemiah",
-            "minChapter": 8,
-            "minVerse": 7,
-            "maxChapter": 8,
-            "maxVerse": 8
+            "first": 774851,
+            "last": 774980
           }
         ]
       },
@@ -4594,11 +3595,8 @@
         "subtitle": "Mark 4:33-34",
         "references": [
           {
-            "book": "Mark",
-            "minChapter": 4,
-            "minVerse": 33,
-            "maxChapter": 4,
-            "maxVerse": 34
+            "first": 1411804,
+            "last": 1411900
           }
         ]
       },
@@ -4608,11 +3606,8 @@
         "subtitle": "Psalm 60",
         "references": [
           {
-            "book": "Psalm",
-            "minChapter": 60,
-            "minVerse": 1,
-            "maxChapter": 60,
-            "maxVerse": 12
+            "first": 876759,
+            "last": 877234
           }
         ]
       }
@@ -4626,11 +3621,8 @@
         "subtitle": "1 Chronicles 28:19",
         "references": [
           {
-            "book": "1 Chronicles",
-            "minChapter": 28,
-            "minVerse": 19,
-            "maxChapter": 28,
-            "maxVerse": 19
+            "first": 683565,
+            "last": 683633
           }
         ]
       },
@@ -4640,11 +3632,8 @@
         "subtitle": "Hebrews 1:1-2",
         "references": [
           {
-            "book": "Hebrews",
-            "minChapter": 1,
-            "minVerse": 1,
-            "maxChapter": 1,
-            "maxVerse": 2
+            "first": 1731052,
+            "last": 1731154
           }
         ]
       },
@@ -4654,11 +3643,8 @@
         "subtitle": "1 Thessalonians 5:19-21",
         "references": [
           {
-            "book": "1 Thessalonians",
-            "minChapter": 5,
-            "minVerse": 19,
-            "maxChapter": 5,
-            "maxVerse": 21
+            "first": 1712882,
+            "last": 1712940
           }
         ]
       },
@@ -4668,11 +3654,8 @@
         "subtitle": "Luke 1:1-4",
         "references": [
           {
-            "book": "Luke",
-            "minChapter": 1,
-            "minVerse": 1,
-            "maxChapter": 1,
-            "maxVerse": 4
+            "first": 1442274,
+            "last": 1442442
           }
         ]
       },
@@ -4682,11 +3665,8 @@
         "subtitle": "Colossians 1:6",
         "references": [
           {
-            "book": "Colossians",
-            "minChapter": 1,
-            "minVerse": 6,
-            "maxChapter": 1,
-            "maxVerse": 6
+            "first": 1702953,
+            "last": 1703045
           }
         ]
       },
@@ -4696,11 +3676,8 @@
         "subtitle": "John 20:30-31",
         "references": [
           {
-            "book": "John",
-            "minChapter": 20,
-            "minVerse": 30,
-            "maxChapter": 20,
-            "maxVerse": 31
+            "first": 1550231,
+            "last": 1550365
           }
         ]
       }
@@ -4712,11 +3689,8 @@
         "subtitle": "Zephaniah 3:9",
         "references": [
           {
-            "book": "Zephaniah",
-            "minChapter": 3,
-            "minVerse": 9,
-            "maxChapter": 3,
-            "maxVerse": 9
+            "first": 1322109,
+            "last": 1322146
           }
         ]
       },
@@ -4726,11 +3700,8 @@
         "subtitle": "Proverbs 10:11",
         "references": [
           {
-            "book": "Proverbs",
-            "minChapter": 10,
-            "minVerse": 11,
-            "maxChapter": 10,
-            "maxVerse": 11
+            "first": 946003,
+            "last": 946041
           }
         ]
       },
@@ -4740,11 +3711,8 @@
         "subtitle": "Esther 8:9",
         "references": [
           {
-            "book": "Esther",
-            "minChapter": 8,
-            "minVerse": 9,
-            "maxChapter": 8,
-            "maxVerse": 9
+            "first": 796878,
+            "last": 797107
           }
         ]
       },
@@ -4754,11 +3722,8 @@
         "subtitle": "2 Timothy 2:2",
         "references": [
           {
-            "book": "2 Timothy",
-            "minChapter": 2,
-            "minVerse": 2,
-            "maxChapter": 2,
-            "maxVerse": 2
+            "first": 1723706,
+            "last": 1723773
           }
         ]
       },
@@ -4768,11 +3733,8 @@
         "subtitle": "Isaiah 61:1-2",
         "references": [
           {
-            "book": "Isaiah",
-            "minChapter": 61,
-            "minVerse": 1,
-            "maxChapter": 61,
-            "maxVerse": 2
+            "first": 1060444,
+            "last": 1060643
           }
         ]
       }
@@ -4784,11 +3746,8 @@
         "subtitle": "Matthew 22:43",
         "references": [
           {
-            "book": "Matthew",
-            "minChapter": 22,
-            "minVerse": 43,
-            "maxChapter": 22,
-            "maxVerse": 43
+            "first": 1388390,
+            "last": 1388441
           }
         ]
       },
@@ -4798,11 +3757,8 @@
         "subtitle": "Matthew 7:28-29",
         "references": [
           {
-            "book": "Matthew",
-            "minChapter": 7,
-            "minVerse": 28,
-            "maxChapter": 7,
-            "maxVerse": 29
+            "first": 1356919,
+            "last": 1356980
           }
         ]
       },
@@ -4812,11 +3768,8 @@
         "subtitle": "Revelation 22:17",
         "references": [
           {
-            "book": "Revelation",
-            "minChapter": 22,
-            "minVerse": 17,
-            "maxChapter": 22,
-            "maxVerse": 17
+            "first": 1804808,
+            "last": 1804879
           }
         ]
       },
@@ -4826,11 +3779,8 @@
         "subtitle": "Ephesians 4:15",
         "references": [
           {
-            "book": "Ephesians",
-            "minChapter": 4,
-            "minVerse": 15,
-            "maxChapter": 4,
-            "maxVerse": 15
+            "first": 1693059,
+            "last": 1693118
           }
         ]
       },
@@ -4840,11 +3790,8 @@
         "subtitle": "Colossians 4:6",
         "references": [
           {
-            "book": "Colossians",
-            "minChapter": 4,
-            "minVerse": 6,
-            "maxChapter": 4,
-            "maxVerse": 6
+            "first": 1707275,
+            "last": 1707325
           }
         ]
       },
@@ -4854,11 +3801,8 @@
         "subtitle": "1 Corinthians 14:26",
         "references": [
           {
-            "book": "1 Corinthians",
-            "minChapter": 14,
-            "minVerse": 26,
-            "maxChapter": 14,
-            "maxVerse": 26
+            "first": 1657144,
+            "last": 1657253
           }
         ]
       },
@@ -4868,11 +3812,8 @@
         "subtitle": "Acts 9:27",
         "references": [
           {
-            "book": "Acts",
-            "minChapter": 9,
-            "minVerse": 27,
-            "maxChapter": 9,
-            "maxVerse": 27
+            "first": 1569542,
+            "last": 1569635
           }
         ]
       },
@@ -4882,11 +3823,8 @@
         "subtitle": "James 3:2-12",
         "references": [
           {
-            "book": "James",
-            "minChapter": 3,
-            "minVerse": 2,
-            "maxChapter": 3,
-            "maxVerse": 12
+            "first": 1753155,
+            "last": 1753716
           }
         ]
       },
@@ -4896,11 +3834,8 @@
         "subtitle": "Proverbs 25:11",
         "references": [
           {
-            "book": "Proverbs",
-            "minChapter": 25,
-            "minVerse": 11,
-            "maxChapter": 25,
-            "maxVerse": 11
+            "first": 961658,
+            "last": 961682
           }
         ]
       },
@@ -4910,11 +3845,8 @@
         "subtitle": "Ecclesiastes 12:9-13",
         "references": [
           {
-            "book": "Ecclesiastes",
-            "minChapter": 12,
-            "minVerse": 9,
-            "maxChapter": 12,
-            "maxVerse": 13
+            "first": 979979,
+            "last": 980279
           }
         ]
       },
@@ -4924,11 +3856,8 @@
         "subtitle": "Genesis 31:44-54",
         "references": [
           {
-            "book": "Genesis",
-            "minChapter": 31,
-            "minVerse": 44,
-            "maxChapter": 31,
-            "maxVerse": 54
+            "first": 51159,
+            "last": 51886
           }
         ]
       }
@@ -4940,11 +3869,8 @@
         "subtitle": "Numbers 15:30",
         "references": [
           {
-            "book": "Numbers",
-            "minChapter": 15,
-            "minVerse": 30,
-            "maxChapter": 15,
-            "maxVerse": 30
+            "first": 246224,
+            "last": 246286
           }
         ]
       },
@@ -4954,11 +3880,8 @@
         "subtitle": "Deuteronomy 5:20",
         "references": [
           {
-            "book": "Deuteronomy",
-            "minChapter": 5,
-            "minVerse": 20,
-            "maxChapter": 5,
-            "maxVerse": 20
+            "first": 296996,
+            "last": 297015
           }
         ]
       },
@@ -4968,11 +3891,8 @@
         "subtitle": "Psalm 1:1-2",
         "references": [
           {
-            "book": "Psalm",
-            "minChapter": 1,
-            "minVerse": 1,
-            "maxChapter": 1,
-            "maxVerse": 2
+            "first": 839274,
+            "last": 839355
           }
         ]
       },
@@ -4982,11 +3902,8 @@
         "subtitle": "Proverbs 17:4",
         "references": [
           {
-            "book": "Proverbs",
-            "minChapter": 17,
-            "minVerse": 4,
-            "maxChapter": 17,
-            "maxVerse": 4
+            "first": 952990,
+            "last": 953014
           }
         ]
       },
@@ -4996,11 +3913,8 @@
         "subtitle": "2 Timothy 2:23-25",
         "references": [
           {
-            "book": "2 Timothy",
-            "minChapter": 2,
-            "minVerse": 23,
-            "maxChapter": 2,
-            "maxVerse": 25
+            "first": 1724786,
+            "last": 1724923
           }
         ]
       },
@@ -5010,11 +3924,8 @@
         "subtitle": "Jude 16",
         "references": [
           {
-            "book": "Jude",
-            "minChapter": 1,
-            "minVerse": 16,
-            "maxChapter": 1,
-            "maxVerse": 16
+            "first": 1776946,
+            "last": 1777003
           }
         ]
       },
@@ -5024,11 +3935,8 @@
         "subtitle": "Nehemiah 4:1-4",
         "references": [
           {
-            "book": "Nehemiah",
-            "minChapter": 4,
-            "minVerse": 1,
-            "maxChapter": 4,
-            "maxVerse": 4
+            "first": 767143,
+            "last": 767490
           }
         ]
       },
@@ -5038,11 +3946,8 @@
         "subtitle": "Psalm 75:4-5",
         "references": [
           {
-            "book": "Psalm",
-            "minChapter": 75,
-            "minVerse": 4,
-            "maxChapter": 75,
-            "maxVerse": 5
+            "first": 887849,
+            "last": 887923
           }
         ]
       }
@@ -5054,11 +3959,8 @@
         "subtitle": "Hebrews 2:1-4",
         "references": [
           {
-            "book": "Hebrews",
-            "minChapter": 2,
-            "minVerse": 1,
-            "maxChapter": 2,
-            "maxVerse": 4
+            "first": 1731978,
+            "last": 1732190
           }
         ]
       },
@@ -5068,11 +3970,8 @@
         "subtitle": "John 1:1-9",
         "references": [
           {
-            "book": "John",
-            "minChapter": 1,
-            "minVerse": 1,
-            "maxChapter": 1,
-            "maxVerse": 9
+            "first": 1504781,
+            "last": 1505127
           }
         ]
       },
@@ -5082,11 +3981,8 @@
         "subtitle": "Amos 3:7",
         "references": [
           {
-            "book": "Amos",
-            "minChapter": 3,
-            "minVerse": 7,
-            "maxChapter": 3,
-            "maxVerse": 7
+            "first": 1294157,
+            "last": 1294193
           }
         ]
       },
@@ -5096,11 +3992,8 @@
         "subtitle": "Luke 18:35-43",
         "references": [
           {
-            "book": "Luke",
-            "minChapter": 18,
-            "minVerse": 35,
-            "maxChapter": 18,
-            "maxVerse": 43
+            "first": 1488839,
+            "last": 1489198
           }
         ]
       },
@@ -5110,11 +4003,8 @@
         "subtitle": "Judges 6:36-40",
         "references": [
           {
-            "book": "Judges",
-            "minChapter": 6,
-            "minVerse": 36,
-            "maxChapter": 6,
-            "maxVerse": 40
+            "first": 397009,
+            "last": 397362
           }
         ]
       },
@@ -5124,11 +4014,8 @@
         "subtitle": "Exodus 13:21-22",
         "references": [
           {
-            "book": "Exodus",
-            "minChapter": 13,
-            "minVerse": 21,
-            "maxChapter": 13,
-            "maxVerse": 22
+            "first": 110065,
+            "last": 110194
           }
         ]
       }
@@ -5140,11 +4027,8 @@
         "subtitle": "Romans 12:14",
         "references": [
           {
-            "book": "Romans",
-            "minChapter": 12,
-            "minVerse": 14,
-            "maxChapter": 12,
-            "maxVerse": 14
+            "first": 1629835,
+            "last": 1629870
           }
         ]
       },
@@ -5154,11 +4038,8 @@
         "subtitle": "Isaiah 52:7",
         "references": [
           {
-            "book": "Isaiah",
-            "minChapter": 52,
-            "minVerse": 7,
-            "maxChapter": 52,
-            "maxVerse": 7
+            "first": 1051405,
+            "last": 1051476
           }
         ]
       },
@@ -5168,11 +4049,8 @@
         "subtitle": "Psalm 68:11",
         "references": [
           {
-            "book": "Psalm",
-            "minChapter": 68,
-            "minVerse": 11,
-            "maxChapter": 68,
-            "maxVerse": 11
+            "first": 881002,
+            "last": 881044
           }
         ]
       },
@@ -5182,11 +4060,8 @@
         "subtitle": "Proverbs 31:8-9",
         "references": [
           {
-            "book": "Proverbs",
-            "minChapter": 31,
-            "minVerse": 8,
-            "maxChapter": 31,
-            "maxVerse": 9
+            "first": 967934,
+            "last": 967998
           }
         ]
       },
@@ -5196,11 +4071,8 @@
         "subtitle": "2 John 12",
         "references": [
           {
-            "book": "2 John",
-            "minChapter": 1,
-            "minVerse": 12,
-            "maxChapter": 1,
-            "maxVerse": 12
+            "first": 1774595,
+            "last": 1774680
           }
         ]
       },
@@ -5210,11 +4082,8 @@
         "subtitle": "Ezekiel 3:16-21",
         "references": [
           {
-            "book": "Ezekiel",
-            "minChapter": 3,
-            "minVerse": 16,
-            "maxChapter": 3,
-            "maxVerse": 21
+            "first": 1167884,
+            "last": 1168281
           }
         ]
       },
@@ -5224,11 +4093,8 @@
         "subtitle": "Acts 19:17-20",
         "references": [
           {
-            "book": "Acts",
-            "minChapter": 19,
-            "minVerse": 17,
-            "maxChapter": 19,
-            "maxVerse": 20
+            "first": 1589957,
+            "last": 1590178
           }
         ]
       },
@@ -5238,11 +4104,8 @@
         "subtitle": "1 Corinthians 9:19-23",
         "references": [
           {
-            "book": "1 Corinthians",
-            "minChapter": 9,
-            "minVerse": 19,
-            "maxChapter": 9,
-            "maxVerse": 23
+            "first": 1648754,
+            "last": 1649143
           }
         ]
       },
@@ -5252,11 +4115,8 @@
         "subtitle": "Ecclesiastes 3:7",
         "references": [
           {
-            "book": "Ecclesiastes",
-            "minChapter": 3,
-            "minVerse": 7,
-            "maxChapter": 3,
-            "maxVerse": 7
+            "first": 971196,
+            "last": 971236
           }
         ]
       },
@@ -5266,11 +4126,8 @@
         "subtitle": "Esther 2:10",
         "references": [
           {
-            "book": "Esther",
-            "minChapter": 2,
-            "minVerse": 10,
-            "maxChapter": 2,
-            "maxVerse": 10
+            "first": 789632,
+            "last": 789676
           }
         ]
       }
@@ -5282,11 +4139,8 @@
         "subtitle": "Genesis 49:28",
         "references": [
           {
-            "book": "Genesis",
-            "minChapter": 49,
-            "minVerse": 28,
-            "maxChapter": 49,
-            "maxVerse": 28
+            "first": 85430,
+            "last": 85492
           }
         ]
       },
@@ -5296,11 +4150,8 @@
         "subtitle": "Matthew 28:15",
         "references": [
           {
-            "book": "Matthew",
-            "minChapter": 28,
-            "minVerse": 15,
-            "maxChapter": 28,
-            "maxVerse": 15
+            "first": 1404219,
+            "last": 1404277
           }
         ]
       },
@@ -5310,11 +4161,8 @@
         "subtitle": "Proverbs 15:22",
         "references": [
           {
-            "book": "Proverbs",
-            "minChapter": 15,
-            "minVerse": 22,
-            "maxChapter": 15,
-            "maxVerse": 22
+            "first": 951502,
+            "last": 951526
           }
         ]
       },
@@ -5324,11 +4172,8 @@
         "subtitle": "Ecclesiastes 5:1-7",
         "references": [
           {
-            "book": "Ecclesiastes",
-            "minChapter": 5,
-            "minVerse": 1,
-            "maxChapter": 5,
-            "maxVerse": 7
+            "first": 972810,
+            "last": 973231
           }
         ]
       },
@@ -5338,11 +4183,8 @@
         "subtitle": "Proverbs 2:1-2",
         "references": [
           {
-            "book": "Proverbs",
-            "minChapter": 2,
-            "minVerse": 1,
-            "maxChapter": 2,
-            "maxVerse": 2
+            "first": 937857,
+            "last": 937911
           }
         ]
       },
@@ -5352,11 +4194,8 @@
         "subtitle": "Esther 8:17",
         "references": [
           {
-            "book": "Esther",
-            "minChapter": 8,
-            "minVerse": 17,
-            "maxChapter": 8,
-            "maxVerse": 17
+            "first": 797668,
+            "last": 797768
           }
         ]
       }
@@ -5370,11 +4209,8 @@
         "subtitle": "Psalm 145:7",
         "references": [
           {
-            "book": "Psalm",
-            "minChapter": 145,
-            "minVerse": 7,
-            "maxChapter": 145,
-            "maxVerse": 7
+            "first": 934089,
+            "last": 934125
           }
         ]
       },
@@ -5384,11 +4220,8 @@
         "subtitle": "Colossians 3:15",
         "references": [
           {
-            "book": "Colossians",
-            "minChapter": 3,
-            "minVerse": 15,
-            "maxChapter": 3,
-            "maxVerse": 15
+            "first": 1706551,
+            "last": 1706613
           }
         ]
       },
@@ -5398,11 +4231,8 @@
         "subtitle": "Zephaniah 3:16-17",
         "references": [
           {
-            "book": "Zephaniah",
-            "minChapter": 3,
-            "minVerse": 16,
-            "maxChapter": 3,
-            "maxVerse": 17
+            "first": 1322523,
+            "last": 1322688
           }
         ]
       },
@@ -5412,11 +4242,8 @@
         "subtitle": "Psalm 19:1",
         "references": [
           {
-            "book": "Psalm",
-            "minChapter": 19,
-            "minVerse": 1,
-            "maxChapter": 19,
-            "maxVerse": 1
+            "first": 849188,
+            "last": 849212
           }
         ]
       },
@@ -5426,11 +4253,8 @@
         "subtitle": "Ephesians 2:10",
         "references": [
           {
-            "book": "Ephesians",
-            "minChapter": 2,
-            "minVerse": 10,
-            "maxChapter": 2,
-            "maxVerse": 10
+            "first": 1690330,
+            "last": 1690388
           }
         ]
       },
@@ -5440,11 +4264,8 @@
         "subtitle": "Isaiah 53:2",
         "references": [
           {
-            "book": "Isaiah",
-            "minChapter": 53,
-            "minVerse": 2,
-            "maxChapter": 53,
-            "maxVerse": 2
+            "first": 1052025,
+            "last": 1052097
           }
         ]
       }
@@ -5456,11 +4277,8 @@
         "subtitle": "Hebrews 12:1-2",
         "references": [
           {
-            "book": "Hebrews",
-            "minChapter": 12,
-            "minVerse": 1,
-            "maxChapter": 12,
-            "maxVerse": 2
+            "first": 1746826,
+            "last": 1747061
           }
         ]
       },
@@ -5470,18 +4288,12 @@
         "subtitle": "Genesis 18:1-8, 16",
         "references": [
           {
-            "book": "Genesis",
-            "minChapter": 18,
-            "minVerse": 1,
-            "maxChapter": 18,
-            "maxVerse": 8
+            "first": 22729,
+            "last": 23207
           },
           {
-            "book": "Genesis",
-            "minChapter": 18,
-            "minVerse": 16,
-            "maxChapter": 18,
-            "maxVerse": 16
+            "first": 23581,
+            "last": 23637
           }
         ]
       },
@@ -5491,11 +4303,8 @@
         "subtitle": "Exodus 25:8-9",
         "references": [
           {
-            "book": "Exodus",
-            "minChapter": 25,
-            "minVerse": 8,
-            "maxChapter": 25,
-            "maxVerse": 9
+            "first": 129871,
+            "last": 129944
           }
         ]
       },
@@ -5505,11 +4314,8 @@
         "subtitle": "Exodus 35:30-36:1",
         "references": [
           {
-            "book": "Exodus",
-            "minChapter": 35,
-            "minVerse": 30,
-            "maxChapter": 36,
-            "maxVerse": 1
+            "first": 151324,
+            "last": 151712
           }
         ]
       },
@@ -5519,11 +4325,8 @@
         "subtitle": "Esther 9:26-28",
         "references": [
           {
-            "book": "Esther",
-            "minChapter": 9,
-            "minVerse": 26,
-            "maxChapter": 9,
-            "maxVerse": 28
+            "first": 799546,
+            "last": 799804
           }
         ]
       },
@@ -5533,11 +4336,8 @@
         "subtitle": "Psalm 137:1-6",
         "references": [
           {
-            "book": "Psalm",
-            "minChapter": 137,
-            "minVerse": 1,
-            "maxChapter": 137,
-            "maxVerse": 6
+            "first": 929590,
+            "last": 929835
           }
         ]
       },
@@ -5547,11 +4347,8 @@
         "subtitle": "Matthew 26:7-13",
         "references": [
           {
-            "book": "Matthew",
-            "minChapter": 26,
-            "minVerse": 7,
-            "maxChapter": 26,
-            "maxVerse": 13
+            "first": 1396339,
+            "last": 1396622
           }
         ]
       },
@@ -5561,11 +4358,8 @@
         "subtitle": "Genesis 10:8-9",
         "references": [
           {
-            "book": "Genesis",
-            "minChapter": 10,
-            "minVerse": 8,
-            "maxChapter": 10,
-            "maxVerse": 9
+            "first": 12725,
+            "last": 12850
           }
         ]
       },
@@ -5575,11 +4369,8 @@
         "subtitle": "1 Corinthians 13:4-7",
         "references": [
           {
-            "book": "1 Corinthians",
-            "minChapter": 13,
-            "minVerse": 4,
-            "maxChapter": 13,
-            "maxVerse": 7
+            "first": 1655038,
+            "last": 1655182
           }
         ]
       },
@@ -5589,11 +4380,8 @@
         "subtitle": "Isaiah 42:10-12",
         "references": [
           {
-            "book": "Isaiah",
-            "minChapter": 42,
-            "minVerse": 10,
-            "maxChapter": 42,
-            "maxVerse": 12
+            "first": 1037527,
+            "last": 1037673
           }
         ]
       },
@@ -5603,11 +4391,8 @@
         "subtitle": "Psalm 146:5",
         "references": [
           {
-            "book": "Psalm",
-            "minChapter": 146,
-            "minVerse": 5,
-            "maxChapter": 146,
-            "maxVerse": 5
+            "first": 934795,
+            "last": 934860
           }
         ]
       },
@@ -5617,11 +4402,8 @@
         "subtitle": "Ecclesiastes 7:1-4",
         "references": [
           {
-            "book": "Ecclesiastes",
-            "minChapter": 7,
-            "minVerse": 1,
-            "maxChapter": 7,
-            "maxVerse": 4
+            "first": 974697,
+            "last": 974857
           }
         ]
       },
@@ -5631,11 +4413,8 @@
         "subtitle": "Numbers 21:8-9",
         "references": [
           {
-            "book": "Numbers",
-            "minChapter": 21,
-            "minVerse": 8,
-            "maxChapter": 21,
-            "maxVerse": 9
+            "first": 257050,
+            "last": 257182
           }
         ]
       },
@@ -5645,11 +4424,8 @@
         "subtitle": "2 Timothy 3:4",
         "references": [
           {
-            "book": "2 Timothy",
-            "minChapter": 3,
-            "minVerse": 4,
-            "maxChapter": 3,
-            "maxVerse": 4
+            "first": 1725140,
+            "last": 1725182
           }
         ]
       }
@@ -5661,11 +4437,8 @@
         "subtitle": "1 John 1:1-4",
         "references": [
           {
-            "book": "1 John",
-            "minChapter": 1,
-            "minVerse": 1,
-            "maxChapter": 1,
-            "maxVerse": 4
+            "first": 1767303,
+            "last": 1767625
           }
         ]
       },
@@ -5675,11 +4448,8 @@
         "subtitle": "Ecclesiastes 2:24-26",
         "references": [
           {
-            "book": "Ecclesiastes",
-            "minChapter": 2,
-            "minVerse": 24,
-            "maxChapter": 2,
-            "maxVerse": 26
+            "first": 970753,
+            "last": 970956
           }
         ]
       },
@@ -5689,11 +4459,8 @@
         "subtitle": "1 Samuel 9:22-24",
         "references": [
           {
-            "book": "1 Samuel",
-            "minChapter": 9,
-            "minVerse": 22,
-            "maxChapter": 9,
-            "maxVerse": 24
+            "first": 444366,
+            "last": 444564
           }
         ]
       },
@@ -5703,11 +4470,8 @@
         "subtitle": "1 Samuel 18:4",
         "references": [
           {
-            "book": "1 Samuel",
-            "minChapter": 18,
-            "minVerse": 4,
-            "maxChapter": 18,
-            "maxVerse": 4
+            "first": 462255,
+            "last": 462305
           }
         ]
       },
@@ -5717,11 +4481,8 @@
         "subtitle": "Luke 7:36-47",
         "references": [
           {
-            "book": "Luke",
-            "minChapter": 7,
-            "minVerse": 36,
-            "maxChapter": 7,
-            "maxVerse": 47
+            "first": 1460392,
+            "last": 1461175
           }
         ]
       },
@@ -5731,11 +4492,8 @@
         "subtitle": "Genesis 27:26-27",
         "references": [
           {
-            "book": "Genesis",
-            "minChapter": 27,
-            "minVerse": 26,
-            "maxChapter": 27,
-            "maxVerse": 27
+            "first": 41210,
+            "last": 41345
           }
         ]
       },
@@ -5745,11 +4503,8 @@
         "subtitle": "2 Corinthians 2:14-16",
         "references": [
           {
-            "book": "2 Corinthians",
-            "minChapter": 2,
-            "minVerse": 14,
-            "maxChapter": 2,
-            "maxVerse": 16
+            "first": 1664768,
+            "last": 1664988
           }
         ]
       },
@@ -5759,11 +4514,8 @@
         "subtitle": "Judges 5:11",
         "references": [
           {
-            "book": "Judges",
-            "minChapter": 5,
-            "minVerse": 11,
-            "maxChapter": 5,
-            "maxVerse": 11
+            "first": 393464,
+            "last": 393557
           }
         ]
       },
@@ -5773,11 +4525,8 @@
         "subtitle": "Psalm 150",
         "references": [
           {
-            "book": "Psalm",
-            "minChapter": 150,
-            "minVerse": 1,
-            "maxChapter": 150,
-            "maxVerse": 6
+            "first": 936464,
+            "last": 936638
           }
         ]
       },
@@ -5787,11 +4536,8 @@
         "subtitle": "2 Samuel 14:1-11",
         "references": [
           {
-            "book": "2 Samuel",
-            "minChapter": 14,
-            "minVerse": 1,
-            "maxChapter": 14,
-            "maxVerse": 11
+            "first": 505815,
+            "last": 506584
           }
         ]
       },
@@ -5801,11 +4547,8 @@
         "subtitle": "Ezekiel 37:1-10",
         "references": [
           {
-            "book": "Ezekiel",
-            "minChapter": 37,
-            "minVerse": 1,
-            "maxChapter": 37,
-            "maxVerse": 10
+            "first": 1223414,
+            "last": 1224067
           }
         ]
       }
@@ -5817,11 +4560,8 @@
         "subtitle": "Habakkuk 1:1",
         "references": [
           {
-            "book": "Habakkuk",
-            "minChapter": 1,
-            "minVerse": 1,
-            "maxChapter": 1,
-            "maxVerse": 1
+            "first": 1316025,
+            "last": 1316049
           }
         ]
       },
@@ -5831,11 +4571,8 @@
         "subtitle": "1 Kings 11:29-39",
         "references": [
           {
-            "book": "1 Kings",
-            "minChapter": 11,
-            "minVerse": 29,
-            "maxChapter": 11,
-            "maxVerse": 39
+            "first": 556916,
+            "last": 557758
           }
         ]
       },
@@ -5845,11 +4582,8 @@
         "subtitle": "Lamentations 1:1",
         "references": [
           {
-            "book": "Lamentations",
-            "minChapter": 1,
-            "minVerse": 1,
-            "maxChapter": 1,
-            "maxVerse": 1
+            "first": 1157441,
+            "last": 1157511
           }
         ]
       },
@@ -5859,11 +4593,8 @@
         "subtitle": "2 Kings 3:15",
         "references": [
           {
-            "book": "2 Kings",
-            "minChapter": 3,
-            "minVerse": 15,
-            "maxChapter": 3,
-            "maxVerse": 15
+            "first": 587449,
+            "last": 587510
           }
         ]
       },
@@ -5873,11 +4604,8 @@
         "subtitle": "Ephesians 3:10",
         "references": [
           {
-            "book": "Ephesians",
-            "minChapter": 3,
-            "minVerse": 10,
-            "maxChapter": 3,
-            "maxVerse": 10
+            "first": 1691677,
+            "last": 1691740
           }
         ]
       },
@@ -5887,11 +4615,8 @@
         "subtitle": "2 Kings 4:8-11",
         "references": [
           {
-            "book": "2 Kings",
-            "minChapter": 4,
-            "minVerse": 8,
-            "maxChapter": 4,
-            "maxVerse": 11
+            "first": 588880,
+            "last": 589138
           }
         ]
       },
@@ -5901,11 +4626,8 @@
         "subtitle": "1 Chronicles 25:1-8",
         "references": [
           {
-            "book": "1 Chronicles",
-            "minChapter": 25,
-            "minVerse": 1,
-            "maxChapter": 25,
-            "maxVerse": 8
+            "first": 676704,
+            "last": 677351
           }
         ]
       },
@@ -5915,11 +4637,8 @@
         "subtitle": "Nahum 1:15",
         "references": [
           {
-            "book": "Nahum",
-            "minChapter": 1,
-            "minVerse": 15,
-            "maxChapter": 1,
-            "maxVerse": 15
+            "first": 1314046,
+            "last": 1314164
           }
         ]
       },
@@ -5929,11 +4648,8 @@
         "subtitle": "Revelation 7:9-12",
         "references": [
           {
-            "book": "Revelation",
-            "minChapter": 7,
-            "minVerse": 9,
-            "maxChapter": 7,
-            "maxVerse": 12
+            "first": 1786154,
+            "last": 1786418
           }
         ]
       }
@@ -5945,11 +4661,8 @@
         "subtitle": "Luke 14:18-21",
         "references": [
           {
-            "book": "Luke",
-            "minChapter": 14,
-            "minVerse": 18,
-            "maxChapter": 14,
-            "maxVerse": 21
+            "first": 1480357,
+            "last": 1480575
           }
         ]
       },
@@ -5959,11 +4672,8 @@
         "subtitle": "Mark 15:34",
         "references": [
           {
-            "book": "Mark",
-            "minChapter": 15,
-            "minVerse": 34,
-            "maxChapter": 15,
-            "maxVerse": 34
+            "first": 1439866,
+            "last": 1439942
           }
         ]
       },
@@ -5973,11 +4683,8 @@
         "subtitle": "John 2:1-11",
         "references": [
           {
-            "book": "John",
-            "minChapter": 2,
-            "minVerse": 1,
-            "maxChapter": 2,
-            "maxVerse": 11
+            "first": 1507553,
+            "last": 1508106
           }
         ]
       },
@@ -5987,11 +4694,8 @@
         "subtitle": "1 Corinthians 11:23-26",
         "references": [
           {
-            "book": "1 Corinthians",
-            "minChapter": 11,
-            "minVerse": 23,
-            "maxChapter": 11,
-            "maxVerse": 26
+            "first": 1652333,
+            "last": 1652628
           }
         ]
       }
@@ -6003,11 +4707,8 @@
         "subtitle": "1 Samuel 20:18-42",
         "references": [
           {
-            "book": "1 Samuel",
-            "minChapter": 20,
-            "minVerse": 18,
-            "maxChapter": 20,
-            "maxVerse": 42
+            "first": 466495,
+            "last": 468086
           }
         ]
       },
@@ -6017,11 +4718,8 @@
         "subtitle": "1 Corinthians 9:24-27",
         "references": [
           {
-            "book": "1 Corinthians",
-            "minChapter": 9,
-            "minVerse": 24,
-            "maxChapter": 9,
-            "maxVerse": 27
+            "first": 1649144,
+            "last": 1649340
           }
         ]
       }
@@ -6033,11 +4731,8 @@
         "subtitle": "Genesis 21:8",
         "references": [
           {
-            "book": "Genesis",
-            "minChapter": 21,
-            "minVerse": 8,
-            "maxChapter": 21,
-            "maxVerse": 8
+            "first": 28477,
+            "last": 28519
           }
         ]
       },
@@ -6047,11 +4742,8 @@
         "subtitle": "Proverbs 17:22",
         "references": [
           {
-            "book": "Proverbs",
-            "minChapter": 17,
-            "minVerse": 22,
-            "maxChapter": 17,
-            "maxVerse": 22
+            "first": 953599,
+            "last": 953631
           }
         ]
       },
@@ -6061,11 +4753,8 @@
         "subtitle": "1 Kings 1:32-40",
         "references": [
           {
-            "book": "1 Kings",
-            "minChapter": 1,
-            "minVerse": 32,
-            "maxChapter": 1,
-            "maxVerse": 40
+            "first": 531347,
+            "last": 531929
           }
         ]
       },
@@ -6075,11 +4764,8 @@
         "subtitle": "Acts 16:25-34",
         "references": [
           {
-            "book": "Acts",
-            "minChapter": 16,
-            "minVerse": 25,
-            "maxChapter": 16,
-            "maxVerse": 34
+            "first": 1584433,
+            "last": 1584901
           }
         ]
       },
@@ -6089,11 +4775,8 @@
         "subtitle": "Deuteronomy 31:19-22",
         "references": [
           {
-            "book": "Deuteronomy",
-            "minChapter": 31,
-            "minVerse": 19,
-            "maxChapter": 31,
-            "maxVerse": 22
+            "first": 339794,
+            "last": 340111
           }
         ]
       },
@@ -6103,11 +4786,8 @@
         "subtitle": "Matthew 13:34",
         "references": [
           {
-            "book": "Matthew",
-            "minChapter": 13,
-            "minVerse": 34,
-            "maxChapter": 13,
-            "maxVerse": 34
+            "first": 1369592,
+            "last": 1369645
           }
         ]
       }
