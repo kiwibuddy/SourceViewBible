@@ -108,18 +108,19 @@ async function seedSphereWordCounts(emdros, realm) {
         }
 
         sourceCounts.sort((countA, countB) => {
-          const sourceA = realm.objectForPrimaryKey('Actant', parseInt(countA.string));
-          const sourceAWordCount = countA.count;
-          const sourceAPercent = (sourceAWordCount / sourceA.wordCount) * 100;
-
-          const sourceB = realm.objectForPrimaryKey('Actant', parseInt(countB.string));
-          const sourceBWordCount = countB.count;
-          const sourceBPercent = (sourceBWordCount / sourceB.wordCount) * 100;
-
-          if (sourceAPercent == sourceBPercent) {
-            return sourceAWordCount > sourceBWordCount ? -1 : 1;
-          }
-          return sourceAPercent > sourceBPercent ? -1 : 1;
+          return countA.count > countB.count ? -1 : 1;
+          // const sourceA = realm.objectForPrimaryKey('Actant', parseInt(countA.string));
+          // const sourceAWordCount = countA.count;
+          // const sourceAPercent = (sourceAWordCount / sourceA.wordCount) * 100;
+          //
+          // const sourceB = realm.objectForPrimaryKey('Actant', parseInt(countB.string));
+          // const sourceBWordCount = countB.count;
+          // const sourceBPercent = (sourceBWordCount / sourceB.wordCount) * 100;
+          //
+          // if (sourceAPercent == sourceBPercent) {
+          //   return sourceAWordCount > sourceBWordCount ? -1 : 1;
+          // }
+          // return sourceAPercent > sourceBPercent ? -1 : 1;
         });
 
 
