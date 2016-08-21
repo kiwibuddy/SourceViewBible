@@ -362,8 +362,10 @@ export default class SourceOverview extends Component {
     const { source, book, sourceRelation } = this.state;
 
     const object = (sourceRelation ? sourceRelation : source);
-    const bookCount = source.bookCount;
     const wordCount = object.wordCount;
+    if (wordCount == 0) return null;
+
+    const bookCount = source.bookCount;
     const spherePercent = (object.sphereWordCount / wordCount) * 100;
 
     return (
@@ -374,16 +376,16 @@ export default class SourceOverview extends Component {
         </TouchableOpacity>
         <View style={StyleSheet.styles.statisticKeyline} />
         <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.navigate(sourceSpheresURL({sourceID: source.id, bookID: book && book.id, title: Localizable.t('source-spheres', {name: source.name})}))}>
-        <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-          <Text style={StyleSheet.styles.statisticTitle}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
-          <SpheresBarChart
-            style={{flex: 0, marginHorizontal: 4}}
-            barStyle={{width: 3, height: 20, marginHorizontal: 1.5}}
-            horizontal={false}
-            data={[{family: object.countOfSphereType(SphereType.FAMILY)}, {economics: object.countOfSphereType(SphereType.ECONOMICS)}, {government: object.countOfSphereType(SphereType.GOVERNMENT)}, {religion: object.countOfSphereType(SphereType.RELIGION)}, {education: object.countOfSphereType(SphereType.EDUCATION)}, {communication: object.countOfSphereType(SphereType.COMMUNICATION)}, {celebration: object.countOfSphereType(SphereType.CELEBRATION)}]}
-          />
-        </View>
-        <Text style={StyleSheet.styles.statisticSubtitle}>Spheres</Text>
+          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+            <Text style={StyleSheet.styles.statisticTitle}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
+            <SpheresBarChart
+              style={{flex: 0, marginHorizontal: 4}}
+              barStyle={{width: 3, height: 20, marginHorizontal: 1.5}}
+              horizontal={false}
+              data={[{family: object.countOfSphereType(SphereType.FAMILY)}, {economics: object.countOfSphereType(SphereType.ECONOMICS)}, {government: object.countOfSphereType(SphereType.GOVERNMENT)}, {religion: object.countOfSphereType(SphereType.RELIGION)}, {education: object.countOfSphereType(SphereType.EDUCATION)}, {communication: object.countOfSphereType(SphereType.COMMUNICATION)}, {celebration: object.countOfSphereType(SphereType.CELEBRATION)}]}
+            />
+          </View>
+          <Text style={StyleSheet.styles.statisticSubtitle}>Spheres</Text>
         </TouchableOpacity>
       </View>
     );
