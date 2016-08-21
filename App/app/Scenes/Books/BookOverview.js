@@ -299,14 +299,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   contentHeader: {
-    fontSize: 24,
+    fontSize: 21,
     fontWeight: 'bold',
     color: '#59626a',
     marginTop: 25,
   },
   contentBody: {
-    fontSize: 16,
-    lineHeight: 26,
+    fontSize: 15,
+    lineHeight: 24,
     color: '#59626a',
   },
   keyline: {
