@@ -293,7 +293,6 @@ export default class SourceOverview extends Component {
             <Text style={StyleSheet.styles.cell.subtitle}>0 occurrences</Text>
           </View>
         </View>
-        <View style={[StyleSheet.styles.separator, {marginLeft: 0}]}></View>
       </TouchableOpacity>
     );
   };
