@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
   },
   body: {
     fontFamily: 'Georgia',
-    paddingBottom: 10,
+    paddingBottom: 15,
     color: '#59626A',
     fontSize: 15,
     lineHeight: 24,
