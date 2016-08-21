@@ -201,7 +201,7 @@ json = {}
       sphere[sectionKey] = section
     else
       if pericope = Pericope.parse_one(row["reference"])
-        references = references_from_pericope(pericope).map do |reference|
+        monads = references_from_pericope(pericope).map do |reference|
           monads = {}
           if djhref = BOOK_TO_DJHREF[pericope.book_name]
             sql = if reference["minChapter"] == reference["maxChapter"]
@@ -229,8 +229,8 @@ json = {}
         section << {
           "number" => row["index"].to_i,
           "title" => row["title"],
-          "subtitle" => pericope.to_s,
-          "references" => references
+          "reference" => pericope.to_s,
+          "monads" => monads
         }
       else
         STDERR.puts "Could not parse reference #{row["reference"]}"

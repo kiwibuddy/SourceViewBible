@@ -4,8 +4,8 @@
       {
         "number": 1,
         "title": "An Incomparably Great Creator",
-        "subtitle": "Genesis 1:1",
-        "references": [
+        "reference": "Genesis 1:1",
+        "monads": [
           {
             "first": 2,
             "last": 80
@@ -15,8 +15,8 @@
       {
         "number": 2,
         "title": "An Astoundingly Infinite God",
-        "subtitle": "1 Timothy 1:17",
-        "references": [
+        "reference": "1 Timothy 1:17",
+        "monads": [
           {
             "first": 1716919,
             "last": 1716975
@@ -26,8 +26,8 @@
       {
         "number": 3,
         "title": "An Amazingly Personal God",
-        "subtitle": "Isaiah 57:15",
-        "references": [
+        "reference": "Isaiah 57:15",
+        "monads": [
           {
             "first": 1056299,
             "last": 1056395
@@ -37,8 +37,8 @@
       {
         "number": 4,
         "title": "An Extraordinarily Relational Trinity",
-        "subtitle": "2 Corinthians 13:14",
-        "references": [
+        "reference": "2 Corinthians 13:14",
+        "monads": [
           {
             "first": 1678780,
             "last": 1678872
@@ -48,8 +48,8 @@
       {
         "number": 5,
         "title": "God Is Holy",
-        "subtitle": "Leviticus 11:44-45",
-        "references": [
+        "reference": "Leviticus 11:44-45",
+        "monads": [
           {
             "first": 180083,
             "last": 180227
@@ -59,8 +59,8 @@
       {
         "number": 6,
         "title": "God Is Love",
-        "subtitle": "1 John 4:7-8, 16",
-        "references": [
+        "reference": "1 John 4:7-8, 16",
+        "monads": [
           {
             "first": 1771811,
             "last": 1771899
@@ -74,8 +74,8 @@
       {
         "number": 7,
         "title": "Giving Mercy Justly",
-        "subtitle": "Exodus 34:6-7",
-        "references": [
+        "reference": "Exodus 34:6-7",
+        "monads": [
           {
             "first": 147639,
             "last": 147825
@@ -85,8 +85,8 @@
       {
         "number": 8,
         "title": "A Covenant-Making and Covenant-Keeping God",
-        "subtitle": "Genesis 15:7-21",
-        "references": [
+        "reference": "Genesis 15:7-21",
+        "monads": [
           {
             "first": 19446,
             "last": 20200
@@ -96,8 +96,8 @@
       {
         "number": 9,
         "title": "Jesus: Fully God and Fully Human",
-        "subtitle": "John 1:14, 16-18",
-        "references": [
+        "reference": "John 1:14, 16-18",
+        "monads": [
           {
             "first": 1505277,
             "last": 1505383
@@ -111,8 +111,8 @@
       {
         "number": 10,
         "title": "Jesus and His Redemptive Sacrifice",
-        "subtitle": "Romans 5:6-8",
-        "references": [
+        "reference": "Romans 5:6-8",
+        "monads": [
           {
             "first": 1616231,
             "last": 1616375
@@ -122,8 +122,8 @@
       {
         "number": 11,
         "title": "Jesus is Alive Forever!",
-        "subtitle": "Revelation 1:18",
-        "references": [
+        "reference": "Revelation 1:18",
+        "monads": [
           {
             "first": 1778916,
             "last": 1778981
@@ -133,8 +133,8 @@
       {
         "number": 12,
         "title": "God’s Spirit Makes All the Difference",
-        "subtitle": "Ezekiel 36:26-27",
-        "references": [
+        "reference": "Ezekiel 36:26-27",
+        "monads": [
           {
             "first": 1222612,
             "last": 1222744
@@ -146,8 +146,8 @@
       {
         "number": 13,
         "title": "Individuals Created as Finite Personal Beings",
-        "subtitle": "Genesis 1:26-27",
-        "references": [
+        "reference": "Genesis 1:26-27",
+        "monads": [
           {
             "first": 1268,
             "last": 1455
@@ -157,8 +157,8 @@
       {
         "number": 14,
         "title": "Humans Are All Equally Valuable",
-        "subtitle": "Galatians 3:28",
-        "references": [
+        "reference": "Galatians 3:28",
+        "monads": [
           {
             "first": 1683791,
             "last": 1683851
@@ -168,8 +168,8 @@
       {
         "number": 15,
         "title": "Humans Have Fallen",
-        "subtitle": "Romans 3:23",
-        "references": [
+        "reference": "Romans 3:23",
+        "monads": [
           {
             "first": 1613847,
             "last": 1613877
@@ -179,8 +179,8 @@
       {
         "number": 16,
         "title": "Individuals Can Be Redeemed",
-        "subtitle": "John 3:16-19",
-        "references": [
+        "reference": "John 3:16-19",
+        "monads": [
           {
             "first": 1509648,
             "last": 1509888
@@ -190,8 +190,8 @@
       {
         "number": 17,
         "title": "Nations Created to Reflect His Character",
-        "subtitle": "Acts 17:24-28",
-        "references": [
+        "reference": "Acts 17:24-28",
+        "monads": [
           {
             "first": 1586752,
             "last": 1587079
@@ -201,8 +201,8 @@
       {
         "number": 18,
         "title": "The Good News of the Kingdom",
-        "subtitle": "Mark 1:1",
-        "references": [
+        "reference": "Mark 1:1",
+        "monads": [
           {
             "first": 1404520,
             "last": 1404574
@@ -212,8 +212,8 @@
       {
         "number": 19,
         "title": "Lord of All or Not at All",
-        "subtitle": "Zechariah 14:9",
-        "references": [
+        "reference": "Zechariah 14:9",
+        "monads": [
           {
             "first": 1339841,
             "last": 1339892
@@ -223,8 +223,8 @@
       {
         "number": 20,
         "title": "Societies Can Be Transformed",
-        "subtitle": "2 Peter 3:13",
-        "references": [
+        "reference": "2 Peter 3:13",
+        "monads": [
           {
             "first": 1766891,
             "last": 1766938
@@ -234,8 +234,8 @@
       {
         "number": 21,
         "title": "Pursuits Prioritized",
-        "subtitle": "Matthew 6:31-33",
-        "references": [
+        "reference": "Matthew 6:31-33",
+        "monads": [
           {
             "first": 1355238,
             "last": 1355386
@@ -245,8 +245,8 @@
       {
         "number": 22,
         "title": "Be Salt and Light",
-        "subtitle": "Matthew 5:13-16",
-        "references": [
+        "reference": "Matthew 5:13-16",
+        "monads": [
           {
             "first": 1351206,
             "last": 1351433
@@ -256,8 +256,8 @@
       {
         "number": 23,
         "title": "Pray for Change",
-        "subtitle": "John 14:12-14",
-        "references": [
+        "reference": "John 14:12-14",
+        "monads": [
           {
             "first": 1538102,
             "last": 1538254
@@ -267,8 +267,8 @@
       {
         "number": 24,
         "title": "Focus on Hope",
-        "subtitle": "Habakkuk 2:14",
-        "references": [
+        "reference": "Habakkuk 2:14",
+        "monads": [
           {
             "first": 1317833,
             "last": 1317876
@@ -280,8 +280,8 @@
       {
         "number": 25,
         "title": "God Loves to Reveal",
-        "subtitle": "Psalm 111:2-4",
-        "references": [
+        "reference": "Psalm 111:2-4",
+        "monads": [
           {
             "first": 915268,
             "last": 915362
@@ -291,8 +291,8 @@
       {
         "number": 26,
         "title": "God’s Revelation Transforms Individuals",
-        "subtitle": "2 Corinthians 5:17",
-        "references": [
+        "reference": "2 Corinthians 5:17",
+        "monads": [
           {
             "first": 1668390,
             "last": 1668440
@@ -302,8 +302,8 @@
       {
         "number": 27,
         "title": "God’s Revelation Transforms Nations",
-        "subtitle": "2 Chronicles 34:15",
-        "references": [
+        "reference": "2 Chronicles 34:15",
+        "monads": [
           {
             "first": 739572,
             "last": 739630
@@ -313,8 +313,8 @@
       {
         "number": 28,
         "title": "Ten ... Two …  One …",
-        "subtitle": "Exodus 20:1-17",
-        "references": [
+        "reference": "Exodus 20:1-17",
+        "monads": [
           {
             "first": 120745,
             "last": 121551
@@ -324,8 +324,8 @@
       {
         "number": 29,
         "title": "Nature - God’s Visible Word",
-        "subtitle": "Romans 1:19-20",
-        "references": [
+        "reference": "Romans 1:19-20",
+        "monads": [
           {
             "first": 1610200,
             "last": 1610318
@@ -335,8 +335,8 @@
       {
         "number": 30,
         "title": "Scripture - God’s Written Word",
-        "subtitle": "2 Timothy 3:16-17",
-        "references": [
+        "reference": "2 Timothy 3:16-17",
+        "monads": [
           {
             "first": 1725782,
             "last": 1725899
@@ -346,8 +346,8 @@
       {
         "number": 31,
         "title": "Jesus - God’s Living Word",
-        "subtitle": "John 14:6",
-        "references": [
+        "reference": "John 14:6",
+        "monads": [
           {
             "first": 1537697,
             "last": 1537749
@@ -357,8 +357,8 @@
       {
         "number": 32,
         "title": "Transformed by the Truth",
-        "subtitle": "Romans 12:1-2",
-        "references": [
+        "reference": "Romans 12:1-2",
+        "monads": [
           {
             "first": 1628932,
             "last": 1629158
@@ -368,8 +368,8 @@
       {
         "number": 33,
         "title": "Standing for the Truth",
-        "subtitle": "2 Corinthians 10:3-5",
-        "references": [
+        "reference": "2 Corinthians 10:3-5",
+        "monads": [
           {
             "first": 1673582,
             "last": 1673733
@@ -379,8 +379,8 @@
       {
         "number": 34,
         "title": "Apply Truth Wisely",
-        "subtitle": "James 3:13-18",
-        "references": [
+        "reference": "James 3:13-18",
+        "monads": [
           {
             "first": 1753717,
             "last": 1754055
@@ -392,8 +392,8 @@
       {
         "number": 35,
         "title": "God’s Heart Broken over Sin",
-        "subtitle": "Genesis 6:5-6",
-        "references": [
+        "reference": "Genesis 6:5-6",
+        "monads": [
           {
             "first": 7699,
             "last": 7798
@@ -403,8 +403,8 @@
       {
         "number": 36,
         "title": "Personal Consequences of Sin:",
-        "subtitle": "Ezekiel 18",
-        "references": [
+        "reference": "Ezekiel 18",
+        "monads": [
           {
             "first": 1188513,
             "last": 1190410
@@ -414,8 +414,8 @@
       {
         "number": 37,
         "title": "Corporate Consequences of Sin",
-        "subtitle": "Genesis 11:4-9",
-        "references": [
+        "reference": "Genesis 11:4-9",
+        "monads": [
           {
             "first": 13932,
             "last": 14294
@@ -425,8 +425,8 @@
       {
         "number": 38,
         "title": "God Abandoned; Worthless Substitutes",
-        "subtitle": "Jeremiah 2:13",
-        "references": [
+        "reference": "Jeremiah 2:13",
+        "monads": [
           {
             "first": 1069713,
             "last": 1069779
@@ -436,8 +436,8 @@
       {
         "number": 39,
         "title": "Fear God",
-        "subtitle": "Job 28:28",
-        "references": [
+        "reference": "Job 28:28",
+        "monads": [
           {
             "first": 824674,
             "last": 824725
@@ -447,8 +447,8 @@
       {
         "number": 40,
         "title": "Love God",
-        "subtitle": "Deuteronomy 6:4-5",
-        "references": [
+        "reference": "Deuteronomy 6:4-5",
+        "monads": [
           {
             "first": 298126,
             "last": 298261
@@ -458,8 +458,8 @@
       {
         "number": 41,
         "title": "Love Neighbor",
-        "subtitle": "Leviticus 19:18",
-        "references": [
+        "reference": "Leviticus 19:18",
+        "monads": [
           {
             "first": 196758,
             "last": 196807
@@ -469,8 +469,8 @@
       {
         "number": 42,
         "title": "The Lord’s Prayer",
-        "subtitle": "Matthew 6:9-13",
-        "references": [
+        "reference": "Matthew 6:9-13",
+        "monads": [
           {
             "first": 1354086,
             "last": 1354334
@@ -480,8 +480,8 @@
       {
         "number": 43,
         "title": "The Golden Rule",
-        "subtitle": "Matthew 7:12",
-        "references": [
+        "reference": "Matthew 7:12",
+        "monads": [
           {
             "first": 1356110,
             "last": 1356168
@@ -493,8 +493,8 @@
       {
         "number": 44,
         "title": "God’s Forever Dream",
-        "subtitle": "1 Timothy 2:3-6",
-        "references": [
+        "reference": "1 Timothy 2:3-6",
+        "monads": [
           {
             "first": 1717268,
             "last": 1717406
@@ -504,8 +504,8 @@
       {
         "number": 45,
         "title": "Jesus, our Foundational Cornerstone",
-        "subtitle": "Isaiah 28:16-17",
-        "references": [
+        "reference": "Isaiah 28:16-17",
+        "monads": [
           {
             "first": 1018085,
             "last": 1018364
@@ -515,8 +515,8 @@
       {
         "number": 46,
         "title": "Every Individual Redeemed",
-        "subtitle": "Mark 16:15",
-        "references": [
+        "reference": "Mark 16:15",
+        "monads": [
           {
             "first": 1441927,
             "last": 1441966
@@ -526,8 +526,8 @@
       {
         "number": 47,
         "title": "Every Society Transformed",
-        "subtitle": "Matthew 28:18-20",
-        "references": [
+        "reference": "Matthew 28:18-20",
+        "monads": [
           {
             "first": 1404347,
             "last": 1404518
@@ -537,8 +537,8 @@
       {
         "number": 48,
         "title": "Our Works Based on His Work",
-        "subtitle": "Philippians 2:5-11",
-        "references": [
+        "reference": "Philippians 2:5-11",
+        "monads": [
           {
             "first": 1698670,
             "last": 1699006
@@ -548,8 +548,8 @@
       {
         "number": 49,
         "title": "Doing it Together with Him",
-        "subtitle": "John 15:1-17",
-        "references": [
+        "reference": "John 15:1-17",
+        "monads": [
           {
             "first": 1539318,
             "last": 1540109
@@ -559,8 +559,8 @@
       {
         "number": 50,
         "title": "Don’t Accept the Status Quo!",
-        "subtitle": "1 Chronicles 4:9-10",
-        "references": [
+        "reference": "1 Chronicles 4:9-10",
+        "monads": [
           {
             "first": 642264,
             "last": 642446
@@ -570,8 +570,8 @@
       {
         "number": 51,
         "title": "Domains of Authority; Spheres of Influence",
-        "subtitle": "2 Corinthians 10:13-14",
-        "references": [
+        "reference": "2 Corinthians 10:13-14",
+        "monads": [
           {
             "first": 1674153,
             "last": 1674311
@@ -581,8 +581,8 @@
       {
         "number": 52,
         "title": "Do All for the Glory of God!",
-        "subtitle": "1 Corinthians 10:31",
-        "references": [
+        "reference": "1 Corinthians 10:31",
+        "monads": [
           {
             "first": 1650905,
             "last": 1650946
@@ -596,8 +596,8 @@
       {
         "number": 1,
         "title": "God is our Father",
-        "subtitle": "1 John 3:1-2",
-        "references": [
+        "reference": "1 John 3:1-2",
+        "monads": [
           {
             "first": 1769880,
             "last": 1770062
@@ -607,8 +607,8 @@
       {
         "number": 2,
         "title": "God Described as a Mother",
-        "subtitle": "Isaiah 49:15",
-        "references": [
+        "reference": "Isaiah 49:15",
+        "monads": [
           {
             "first": 1047746,
             "last": 1047810
@@ -618,8 +618,8 @@
       {
         "number": 3,
         "title": "God is a Father to the Fatherless",
-        "subtitle": "Psalm 68:5-6",
-        "references": [
+        "reference": "Psalm 68:5-6",
+        "monads": [
           {
             "first": 880761,
             "last": 880848
@@ -629,8 +629,8 @@
       {
         "number": 4,
         "title": "Son of Adam, Son of God",
-        "subtitle": "Luke 3:38",
-        "references": [
+        "reference": "Luke 3:38",
+        "monads": [
           {
             "first": 1450791,
             "last": 1450881
@@ -640,8 +640,8 @@
       {
         "number": 5,
         "title": "A Faithful Husband to an Unfaithful People",
-        "subtitle": "Hosea 3:1",
-        "references": [
+        "reference": "Hosea 3:1",
+        "monads": [
           {
             "first": 1276675,
             "last": 1276798
@@ -651,8 +651,8 @@
       {
         "number": 6,
         "title": "God’s Desires to Bless All Families",
-        "subtitle": "Genesis 12:1-3",
-        "references": [
+        "reference": "Genesis 12:1-3",
+        "monads": [
           {
             "first": 15506,
             "last": 15674
@@ -662,8 +662,8 @@
       {
         "number": 7,
         "title": "God Chooses Abraham to Train His Children",
-        "subtitle": "Genesis 18:18-19",
-        "references": [
+        "reference": "Genesis 18:18-19",
+        "monads": [
           {
             "first": 23663,
             "last": 23797
@@ -673,8 +673,8 @@
       {
         "number": 8,
         "title": "God Is Our Home",
-        "subtitle": "Psalm 90:1",
-        "references": [
+        "reference": "Psalm 90:1",
+        "monads": [
           {
             "first": 900012,
             "last": 900032
@@ -684,8 +684,8 @@
       {
         "number": 9,
         "title": "God First. All Else Second (#1).",
-        "subtitle": "Genesis 22:1-18",
-        "references": [
+        "reference": "Genesis 22:1-18",
+        "monads": [
           {
             "first": 29872,
             "last": 31019
@@ -695,8 +695,8 @@
       {
         "number": 10,
         "title": "God First. All Else Second (#2). ",
-        "subtitle": "Numbers 25:1-9",
-        "references": [
+        "reference": "Numbers 25:1-9",
+        "monads": [
           {
             "first": 264050,
             "last": 264587
@@ -706,8 +706,8 @@
       {
         "number": 11,
         "title": "We Will Serve the Lord",
-        "subtitle": "Joshua 24:15",
-        "references": [
+        "reference": "Joshua 24:15",
+        "monads": [
           {
             "first": 384819,
             "last": 384933
@@ -717,8 +717,8 @@
       {
         "number": 12,
         "title": "Fight for Your Family!",
-        "subtitle": "Nehemiah 4:13-14",
-        "references": [
+        "reference": "Nehemiah 4:13-14",
+        "monads": [
           {
             "first": 767983,
             "last": 768166
@@ -730,8 +730,8 @@
       {
         "number": 13,
         "title": "God Creates Eve; Institutes Marriage",
-        "subtitle": "Genesis 2:18, 21-25",
-        "references": [
+        "reference": "Genesis 2:18, 21-25",
+        "monads": [
           {
             "first": 2555,
             "last": 2612
@@ -745,8 +745,8 @@
       {
         "number": 14,
         "title": "Ideal Marriage Pattern Given to Priests",
-        "subtitle": "Leviticus 21:7, 13-15",
-        "references": [
+        "reference": "Leviticus 21:7, 13-15",
+        "monads": [
           {
             "first": 200017,
             "last": 200089
@@ -760,8 +760,8 @@
       {
         "number": 15,
         "title": "Marriage Is to Be Celebrated",
-        "subtitle": "Song of Solomon 5:1",
-        "references": [
+        "reference": "Song of Solomon 5:1",
+        "monads": [
           {
             "first": 983290,
             "last": 983393
@@ -771,8 +771,8 @@
       {
         "number": 16,
         "title": "Marriage Is to Be Honored",
-        "subtitle": "Hebrews 13:4",
-        "references": [
+        "reference": "Hebrews 13:4",
+        "monads": [
           {
             "first": 1748890,
             "last": 1748944
@@ -782,8 +782,8 @@
       {
         "number": 17,
         "title": "God’s Household Code",
-        "subtitle": "Ephesians 5:21-6:9",
-        "references": [
+        "reference": "Ephesians 5:21-6:9",
+        "monads": [
           {
             "first": 1694731,
             "last": 1695813
@@ -793,8 +793,8 @@
       {
         "number": 18,
         "title": "Mutuality in Marriage",
-        "subtitle": "1 Corinthians 7:2-16, 32-34",
-        "references": [
+        "reference": "1 Corinthians 7:2-16, 32-34",
+        "monads": [
           {
             "first": 1644253,
             "last": 1645253
@@ -808,8 +808,8 @@
       {
         "number": 19,
         "title": "Drink Water from Your Own Well",
-        "subtitle": "Proverbs 5:15-23",
-        "references": [
+        "reference": "Proverbs 5:15-23",
+        "monads": [
           {
             "first": 941290,
             "last": 941675
@@ -819,8 +819,8 @@
       {
         "number": 20,
         "title": "No Adultery",
-        "subtitle": "Deuteronomy 5:18",
-        "references": [
+        "reference": "Deuteronomy 5:18",
+        "monads": [
           {
             "first": 296970,
             "last": 296983
@@ -830,8 +830,8 @@
       {
         "number": 21,
         "title": "David Repents of Adultery",
-        "subtitle": "Psalm 51",
-        "references": [
+        "reference": "Psalm 51",
+        "monads": [
           {
             "first": 871115,
             "last": 871905
@@ -841,8 +841,8 @@
       {
         "number": 22,
         "title": "The Destructive Legacy of Polygamy",
-        "subtitle": "2 Chronicles 11:18-21",
-        "references": [
+        "reference": "2 Chronicles 11:18-21",
+        "monads": [
           {
             "first": 702645,
             "last": 702833
@@ -852,8 +852,8 @@
       {
         "number": 23,
         "title": "Marriage and the Resurrection",
-        "subtitle": "Mark 12:18-27",
-        "references": [
+        "reference": "Mark 12:18-27",
+        "monads": [
           {
             "first": 1430490,
             "last": 1431106
@@ -863,8 +863,8 @@
       {
         "number": 24,
         "title": "God Hates Divorce",
-        "subtitle": "Malachi 2:14-16",
-        "references": [
+        "reference": "Malachi 2:14-16",
+        "monads": [
           {
             "first": 1342996,
             "last": 1343378
@@ -876,8 +876,8 @@
       {
         "number": 25,
         "title": "Children Are a Gift from God",
-        "subtitle": "Psalm 127:3-5",
-        "references": [
+        "reference": "Psalm 127:3-5",
+        "monads": [
           {
             "first": 926052,
             "last": 926167
@@ -887,8 +887,8 @@
       {
         "number": 26,
         "title": "Handmade by God",
-        "subtitle": "Psalm 139:13-16",
-        "references": [
+        "reference": "Psalm 139:13-16",
+        "monads": [
           {
             "first": 930818,
             "last": 931000
@@ -898,8 +898,8 @@
       {
         "number": 27,
         "title": "Children Born with God’s Help",
-        "subtitle": "Genesis 4:1",
-        "references": [
+        "reference": "Genesis 4:1",
+        "monads": [
           {
             "first": 4641,
             "last": 4770
@@ -909,8 +909,8 @@
       {
         "number": 28,
         "title": "Abraham Cries out for an Heir",
-        "subtitle": "Genesis 15:1-6",
-        "references": [
+        "reference": "Genesis 15:1-6",
+        "monads": [
           {
             "first": 19081,
             "last": 19445
@@ -920,8 +920,8 @@
       {
         "number": 29,
         "title": "Hannah Prays for a Son",
-        "subtitle": "1 Samuel 1:10-11",
-        "references": [
+        "reference": "1 Samuel 1:10-11",
+        "monads": [
           {
             "first": 431935,
             "last": 432122
@@ -931,8 +931,8 @@
       {
         "number": 30,
         "title": "Genealogies Tell the Story of Life",
-        "subtitle": "1 Chronicles 1:1-2",
-        "references": [
+        "reference": "1 Chronicles 1:1-2",
+        "monads": [
           {
             "first": 635901,
             "last": 635929
@@ -942,8 +942,8 @@
       {
         "number": 31,
         "title": "God Understands Aaron’s Parental Concerns",
-        "subtitle": "Leviticus 10:19-20",
-        "references": [
+        "reference": "Leviticus 10:19-20",
+        "monads": [
           {
             "first": 177813,
             "last": 177940
@@ -953,8 +953,8 @@
       {
         "number": 32,
         "title": "Jesus Models Sonship",
-        "subtitle": "Luke 2:41-52",
-        "references": [
+        "reference": "Luke 2:41-52",
+        "monads": [
           {
             "first": 1447710,
             "last": 1448261
@@ -964,8 +964,8 @@
       {
         "number": 33,
         "title": "Honor Father and Mother",
-        "subtitle": "Deuteronomy 5:16",
-        "references": [
+        "reference": "Deuteronomy 5:16",
+        "monads": [
           {
             "first": 296891,
             "last": 296957
@@ -975,8 +975,8 @@
       {
         "number": 34,
         "title": "Listen to Your Parent’s Instructions",
-        "subtitle": "Proverbs 1:8",
-        "references": [
+        "reference": "Proverbs 1:8",
+        "monads": [
           {
             "first": 936894,
             "last": 936949
@@ -986,8 +986,8 @@
       {
         "number": 35,
         "title": "Discipline Your Children with Love",
-        "subtitle": "Proverbs 3:11-12",
-        "references": [
+        "reference": "Proverbs 3:11-12",
+        "monads": [
           {
             "first": 938925,
             "last": 939040
@@ -997,8 +997,8 @@
       {
         "number": 36,
         "title": "Multigenerational Accountability",
-        "subtitle": "Deuteronomy 29:29",
-        "references": [
+        "reference": "Deuteronomy 29:29",
+        "monads": [
           {
             "first": 336933,
             "last": 337025
@@ -1008,8 +1008,8 @@
       {
         "number": 37,
         "title": "Multigenerational Consequences",
-        "subtitle": "Deuteronomy 5:8-10",
-        "references": [
+        "reference": "Deuteronomy 5:8-10",
+        "monads": [
           {
             "first": 296316,
             "last": 296553
@@ -1019,8 +1019,8 @@
       {
         "number": 38,
         "title": "Parents and Children Reconciled",
-        "subtitle": "Malachi 4:5-6",
-        "references": [
+        "reference": "Malachi 4:5-6",
+        "monads": [
           {
             "first": 1345265,
             "last": 1345373
@@ -1030,8 +1030,8 @@
       {
         "number": 39,
         "title": "Adopted as God’s Children",
-        "subtitle": "Romans 8:14-15",
-        "references": [
+        "reference": "Romans 8:14-15",
+        "monads": [
           {
             "first": 1621234,
             "last": 1621394
@@ -1043,8 +1043,8 @@
       {
         "number": 40,
         "title": "Every Family Member Valued",
-        "subtitle": "2 Chronicles 31:15-16",
-        "references": [
+        "reference": "2 Chronicles 31:15-16",
+        "monads": [
           {
             "first": 734036,
             "last": 734206
@@ -1054,8 +1054,8 @@
       {
         "number": 41,
         "title": "Caring for Family Members",
-        "subtitle": "1 Timothy 5:3-4, 8",
-        "references": [
+        "reference": "1 Timothy 5:3-4, 8",
+        "monads": [
           {
             "first": 1719927,
             "last": 1720033
@@ -1069,8 +1069,8 @@
       {
         "number": 42,
         "title": "Widows and Orphans",
-        "subtitle": "Exodus 22:22-23",
-        "references": [
+        "reference": "Exodus 22:22-23",
+        "monads": [
           {
             "first": 125838,
             "last": 125905
@@ -1080,8 +1080,8 @@
       {
         "number": 43,
         "title": "A Kinsman Redeemer",
-        "subtitle": "Ruth 3:7-4:13",
-        "references": [
+        "reference": "Ruth 3:7-4:13",
+        "monads": [
           {
             "first": 428962,
             "last": 430855
@@ -1091,8 +1091,8 @@
       {
         "number": 44,
         "title": "David Cares for Mephibosheth",
-        "subtitle": "2 Samuel 9:1",
-        "references": [
+        "reference": "2 Samuel 9:1",
+        "monads": [
           {
             "first": 497025,
             "last": 497075
@@ -1102,8 +1102,8 @@
       {
         "number": 45,
         "title": "Families Serve the Community Together",
-        "subtitle": "Nehemiah 3:23, 28",
-        "references": [
+        "reference": "Nehemiah 3:23, 28",
+        "monads": [
           {
             "first": 766543,
             "last": 766604
@@ -1117,8 +1117,8 @@
       {
         "number": 46,
         "title": "Friends and Family",
-        "subtitle": "Proverbs 27:10",
-        "references": [
+        "reference": "Proverbs 27:10",
+        "monads": [
           {
             "first": 963597,
             "last": 963678
@@ -1130,8 +1130,8 @@
       {
         "number": 47,
         "title": "Crossover with ECONOMICS",
-        "subtitle": "Acts 5:1-10",
-        "references": [
+        "reference": "Acts 5:1-10",
+        "monads": [
           {
             "first": 1559414,
             "last": 1559990
@@ -1141,8 +1141,8 @@
       {
         "number": 48,
         "title": "Crossover with GOVERNMENT",
-        "subtitle": "2 Chronicles 25:4",
-        "references": [
+        "reference": "2 Chronicles 25:4",
+        "monads": [
           {
             "first": 722136,
             "last": 722279
@@ -1152,8 +1152,8 @@
       {
         "number": 49,
         "title": "Crossover with RELIGION",
-        "subtitle": "Luke 11:27",
-        "references": [
+        "reference": "Luke 11:27",
+        "monads": [
           {
             "first": 1472430,
             "last": 1472491
@@ -1163,8 +1163,8 @@
       {
         "number": 50,
         "title": "Crossover with EDUCATION",
-        "subtitle": "Psalm 78:1-8",
-        "references": [
+        "reference": "Psalm 78:1-8",
+        "monads": [
           {
             "first": 889469,
             "last": 889806
@@ -1174,8 +1174,8 @@
       {
         "number": 51,
         "title": "Crossover with MEDIA/COMMUNICATION",
-        "subtitle": "1 Timothy 5:1-2",
-        "references": [
+        "reference": "1 Timothy 5:1-2",
+        "monads": [
           {
             "first": 1719807,
             "last": 1719926
@@ -1185,8 +1185,8 @@
       {
         "number": 52,
         "title": "Crossover with CELEBRATION",
-        "subtitle": "Exodus 12:1-4",
-        "references": [
+        "reference": "Exodus 12:1-4",
+        "monads": [
           {
             "first": 105312,
             "last": 105538
@@ -1200,8 +1200,8 @@
       {
         "number": 1,
         "title": "God Created Everything",
-        "subtitle": "Isaiah 42:5-7",
-        "references": [
+        "reference": "Isaiah 42:5-7",
+        "monads": [
           {
             "first": 1037203,
             "last": 1037427
@@ -1211,8 +1211,8 @@
       {
         "number": 2,
         "title": "God Continues to Do New Things",
-        "subtitle": "Isaiah 43:19",
-        "references": [
+        "reference": "Isaiah 43:19",
+        "monads": [
           {
             "first": 1039464,
             "last": 1039536
@@ -1222,8 +1222,8 @@
       {
         "number": 3,
         "title": "God Provides for All of Creation",
-        "subtitle": "Psalm 147:8-9",
-        "references": [
+        "reference": "Psalm 147:8-9",
+        "monads": [
           {
             "first": 935272,
             "last": 935344
@@ -1233,8 +1233,8 @@
       {
         "number": 4,
         "title": "God Provided in the Desert",
-        "subtitle": "Deuteronomy 29:5-6",
-        "references": [
+        "reference": "Deuteronomy 29:5-6",
+        "monads": [
           {
             "first": 335442,
             "last": 335542
@@ -1244,8 +1244,8 @@
       {
         "number": 5,
         "title": "God Is Our Healer",
-        "subtitle": "Exodus 15:23-26",
-        "references": [
+        "reference": "Exodus 15:23-26",
+        "monads": [
           {
             "first": 113343,
             "last": 113672
@@ -1255,8 +1255,8 @@
       {
         "number": 6,
         "title": "Jesus Is Our Healer",
-        "subtitle": "Isaiah 53:5",
-        "references": [
+        "reference": "Isaiah 53:5",
+        "monads": [
           {
             "first": 1052263,
             "last": 1052319
@@ -1268,8 +1268,8 @@
       {
         "number": 7,
         "title": "Given a Scientific Research Task",
-        "subtitle": "Genesis 2:19-20",
-        "references": [
+        "reference": "Genesis 2:19-20",
+        "monads": [
           {
             "first": 2613,
             "last": 2781
@@ -1279,8 +1279,8 @@
       {
         "number": 8,
         "title": "Twelve Spies Research Agricultural Potential",
-        "subtitle": "Numbers 13:17-20",
-        "references": [
+        "reference": "Numbers 13:17-20",
+        "monads": [
           {
             "first": 240766,
             "last": 240996
@@ -1290,8 +1290,8 @@
       {
         "number": 9,
         "title": "Nehemiah Researches Architectural Needs",
-        "subtitle": "Nehemiah 2:12-18",
-        "references": [
+        "reference": "Nehemiah 2:12-18",
+        "monads": [
           {
             "first": 764223,
             "last": 764783
@@ -1301,8 +1301,8 @@
       {
         "number": 10,
         "title": "Jacob’s Sheep Breeding",
-        "subtitle": "Genesis 30:27-43",
-        "references": [
+        "reference": "Genesis 30:27-43",
+        "monads": [
           {
             "first": 47364,
             "last": 48435
@@ -1312,8 +1312,8 @@
       {
         "number": 11,
         "title": "The Value of Safe Transportation Systems",
-        "subtitle": "Judges 5:6, 10",
-        "references": [
+        "reference": "Judges 5:6, 10",
+        "monads": [
           {
             "first": 393213,
             "last": 393266
@@ -1327,8 +1327,8 @@
       {
         "number": 12,
         "title": "Hezekiah’s Engineering Wonder",
-        "subtitle": "2 Kings 20:20",
-        "references": [
+        "reference": "2 Kings 20:20",
+        "monads": [
           {
             "first": 625606,
             "last": 625707
@@ -1338,8 +1338,8 @@
       {
         "number": 13,
         "title": "Uzziah’s Inventive War Machines",
-        "subtitle": "2 Chronicles 26:14-15",
-        "references": [
+        "reference": "2 Chronicles 26:14-15",
+        "monads": [
           {
             "first": 725001,
             "last": 725166
@@ -1351,8 +1351,8 @@
       {
         "number": 14,
         "title": "Commissioned to Heal",
-        "subtitle": "Matthew 10:1",
-        "references": [
+        "reference": "Matthew 10:1",
+        "monads": [
           {
             "first": 1360940,
             "last": 1360997
@@ -1362,8 +1362,8 @@
       {
         "number": 15,
         "title": "Healed for the Glory of God",
-        "subtitle": "John 9:1-3",
-        "references": [
+        "reference": "John 9:1-3",
+        "monads": [
           {
             "first": 1525453,
             "last": 1525600
@@ -1373,8 +1373,8 @@
       {
         "number": 16,
         "title": "Healing Challenges Cultural Paradigms",
-        "subtitle": "Luke 13:10-17",
-        "references": [
+        "reference": "Luke 13:10-17",
+        "monads": [
           {
             "first": 1477892,
             "last": 1478329
@@ -1384,8 +1384,8 @@
       {
         "number": 17,
         "title": "An Enemy Healed",
-        "subtitle": "2 Kings 5:1-14",
-        "references": [
+        "reference": "2 Kings 5:1-14",
+        "monads": [
           {
             "first": 591399,
             "last": 592581
@@ -1395,8 +1395,8 @@
       {
         "number": 18,
         "title": "Jesus Did What Doctors Could Not Do",
-        "subtitle": "Mark 5:25-34",
-        "references": [
+        "reference": "Mark 5:25-34",
+        "monads": [
           {
             "first": 1413515,
             "last": 1413990
@@ -1406,8 +1406,8 @@
       {
         "number": 19,
         "title": "Sheep and Goats",
-        "subtitle": "Matthew 25:33-46",
-        "references": [
+        "reference": "Matthew 25:33-46",
+        "monads": [
           {
             "first": 1395302,
             "last": 1396099
@@ -1417,8 +1417,8 @@
       {
         "number": 20,
         "title": "We Have a Healthy Future!",
-        "subtitle": "Revelation 21:3-4",
-        "references": [
+        "reference": "Revelation 21:3-4",
+        "monads": [
           {
             "first": 1802205,
             "last": 1802371
@@ -1430,8 +1430,8 @@
       {
         "number": 21,
         "title": "A God-Given Job",
-        "subtitle": "Genesis 2:8-9, 15",
-        "references": [
+        "reference": "Genesis 2:8-9, 15",
+        "monads": [
           {
             "first": 2095,
             "last": 2233
@@ -1445,8 +1445,8 @@
       {
         "number": 22,
         "title": "Covenantal Blessings and Curses",
-        "subtitle": "Deuteronomy 28:1-6, 15-19",
-        "references": [
+        "reference": "Deuteronomy 28:1-6, 15-19",
+        "monads": [
           {
             "first": 331216,
             "last": 331416
@@ -1460,8 +1460,8 @@
       {
         "number": 23,
         "title": "The Sabbath Instituted",
-        "subtitle": "Genesis 2:2-3",
-        "references": [
+        "reference": "Genesis 2:2-3",
+        "monads": [
           {
             "first": 1761,
             "last": 1870
@@ -1471,8 +1471,8 @@
       {
         "number": 24,
         "title": "Jubilee Laws Established",
-        "subtitle": "Leviticus 25",
-        "references": [
+        "reference": "Leviticus 25",
+        "monads": [
           {
             "first": 207716,
             "last": 211119
@@ -1482,8 +1482,8 @@
       {
         "number": 25,
         "title": "Integrity in the Marketplace",
-        "subtitle": "Leviticus 19:35-36",
-        "references": [
+        "reference": "Leviticus 19:35-36",
+        "monads": [
           {
             "first": 197700,
             "last": 197837
@@ -1493,8 +1493,8 @@
       {
         "number": 26,
         "title": "Jehoshaphat’s Ungodly Partnership",
-        "subtitle": "2 Chronicles 20:35-37",
-        "references": [
+        "reference": "2 Chronicles 20:35-37",
+        "monads": [
           {
             "first": 715346,
             "last": 715561
@@ -1504,8 +1504,8 @@
       {
         "number": 27,
         "title": "Jesus Cleanses the Temple of Merchants",
-        "subtitle": "Mark 11:15-17",
-        "references": [
+        "reference": "Mark 11:15-17",
+        "monads": [
           {
             "first": 1428452,
             "last": 1428664
@@ -1515,8 +1515,8 @@
       {
         "number": 28,
         "title": "God Gives the Farmer Wisdom",
-        "subtitle": "Isaiah 28:24-29",
-        "references": [
+        "reference": "Isaiah 28:24-29",
+        "monads": [
           {
             "first": 1018691,
             "last": 1018986
@@ -1526,8 +1526,8 @@
       {
         "number": 29,
         "title": "Worship When There Is Abundant Provision",
-        "subtitle": "Joel 2:23-26",
-        "references": [
+        "reference": "Joel 2:23-26",
+        "monads": [
           {
             "first": 1289832,
             "last": 1290118
@@ -1537,8 +1537,8 @@
       {
         "number": 30,
         "title": "Worship When There Is No Provision",
-        "subtitle": "Habakkuk 3:17-18",
-        "references": [
+        "reference": "Habakkuk 3:17-18",
+        "monads": [
           {
             "first": 1319152,
             "last": 1319277
@@ -1548,8 +1548,8 @@
       {
         "number": 31,
         "title": "Provision for Widows, Orphans and Refugees",
-        "subtitle": "Deuteronomy 24:17-22",
-        "references": [
+        "reference": "Deuteronomy 24:17-22",
+        "monads": [
           {
             "first": 327138,
             "last": 327521
@@ -1559,8 +1559,8 @@
       {
         "number": 32,
         "title": "Let My People Go",
-        "subtitle": "Exodus 2:23-25",
-        "references": [
+        "reference": "Exodus 2:23-25",
+        "monads": [
           {
             "first": 89867,
             "last": 90026
@@ -1570,8 +1570,8 @@
       {
         "number": 33,
         "title": "Paul Appeals for Onesimus’ Freedom",
-        "subtitle": "Philemon 10-19",
-        "references": [
+        "reference": "Philemon 10-19",
+        "monads": [
           {
             "first": 1730293,
             "last": 1730808
@@ -1583,8 +1583,8 @@
       {
         "number": 34,
         "title": "Do Not Steal",
-        "subtitle": "Deuteronomy 5:19",
-        "references": [
+        "reference": "Deuteronomy 5:19",
+        "monads": [
           {
             "first": 296984,
             "last": 296995
@@ -1594,8 +1594,8 @@
       {
         "number": 35,
         "title": "Work or Don’t Eat",
-        "subtitle": "2 Thessalonians 3:6-12",
-        "references": [
+        "reference": "2 Thessalonians 3:6-12",
+        "monads": [
           {
             "first": 1715248,
             "last": 1715651
@@ -1605,8 +1605,8 @@
       {
         "number": 36,
         "title": "Work So You Can Be a Giver",
-        "subtitle": "Ephesians 4:28",
-        "references": [
+        "reference": "Ephesians 4:28",
+        "monads": [
           {
             "first": 1693616,
             "last": 1693669
@@ -1616,8 +1616,8 @@
       {
         "number": 37,
         "title": "Tithe Plus",
-        "subtitle": "Matthew 23:23-24",
-        "references": [
+        "reference": "Matthew 23:23-24",
+        "monads": [
           {
             "first": 1389801,
             "last": 1390019
@@ -1627,8 +1627,8 @@
       {
         "number": 38,
         "title": "Be Generous",
-        "subtitle": "Proverbs 11:24-25",
-        "references": [
+        "reference": "Proverbs 11:24-25",
+        "monads": [
           {
             "first": 947488,
             "last": 947539
@@ -1638,8 +1638,8 @@
       {
         "number": 39,
         "title": "Put God to the Test",
-        "subtitle": "Malachi 3:10-11",
-        "references": [
+        "reference": "Malachi 3:10-11",
+        "monads": [
           {
             "first": 1344218,
             "last": 1344435
@@ -1649,8 +1649,8 @@
       {
         "number": 40,
         "title": "Idolatrous Efforts to Prosper",
-        "subtitle": "2 Kings 21:7-9",
-        "references": [
+        "reference": "2 Kings 21:7-9",
+        "monads": [
           {
             "first": 626133,
             "last": 626383
@@ -1660,8 +1660,8 @@
       {
         "number": 41,
         "title": "No Favoritism Based on Economic Status",
-        "subtitle": "James 2:1-9",
-        "references": [
+        "reference": "James 2:1-9",
+        "monads": [
           {
             "first": 1751548,
             "last": 1752066
@@ -1671,8 +1671,8 @@
       {
         "number": 42,
         "title": "Wealth Does Not Equal True Happiness",
-        "subtitle": "Ecclesiastes 5:10-15",
-        "references": [
+        "reference": "Ecclesiastes 5:10-15",
+        "monads": [
           {
             "first": 973378,
             "last": 973684
@@ -1682,8 +1682,8 @@
       {
         "number": 43,
         "title": "Economic Righteousness",
-        "subtitle": "Amos 8:4-6",
-        "references": [
+        "reference": "Amos 8:4-6",
+        "monads": [
           {
             "first": 1299659,
             "last": 1299888
@@ -1693,8 +1693,8 @@
       {
         "number": 44,
         "title": "Prayer Impacts Economic Activity",
-        "subtitle": "2 Chronicles 7:13-14",
-        "references": [
+        "reference": "2 Chronicles 7:13-14",
+        "monads": [
           {
             "first": 696649,
             "last": 696787
@@ -1704,8 +1704,8 @@
       {
         "number": 45,
         "title": "Build … Plant … Pray …",
-        "subtitle": "Jeremiah 29:4-7",
-        "references": [
+        "reference": "Jeremiah 29:4-7",
+        "monads": [
           {
             "first": 1113110,
             "last": 1113314
@@ -1715,8 +1715,8 @@
       {
         "number": 46,
         "title": "Peter’s Miraculous Catch",
-        "subtitle": "Luke 5:2-7",
-        "references": [
+        "reference": "Luke 5:2-7",
+        "monads": [
           {
             "first": 1453310,
             "last": 1453657
@@ -1728,8 +1728,8 @@
       {
         "number": 47,
         "title": "Crossover with FAMILY",
-        "subtitle": "1 Kings 5:14",
-        "references": [
+        "reference": "1 Kings 5:14",
+        "monads": [
           {
             "first": 540506,
             "last": 540578
@@ -1739,8 +1739,8 @@
       {
         "number": 48,
         "title": "Crossover with GOVERNMENT",
-        "subtitle": "1 Kings 21:1-19",
-        "references": [
+        "reference": "1 Kings 21:1-19",
+        "monads": [
           {
             "first": 578096,
             "last": 579142
@@ -1750,8 +1750,8 @@
       {
         "number": 49,
         "title": "Crossover with RELIGION",
-        "subtitle": "2 Kings 5:20-27",
-        "references": [
+        "reference": "2 Kings 5:20-27",
+        "monads": [
           {
             "first": 592967,
             "last": 593645
@@ -1761,8 +1761,8 @@
       {
         "number": 50,
         "title": "Crossover with EDUCATION",
-        "subtitle": "Galatians 6:6",
-        "references": [
+        "reference": "Galatians 6:6",
+        "monads": [
           {
             "first": 1687593,
             "last": 1687634
@@ -1772,8 +1772,8 @@
       {
         "number": 51,
         "title": "Crossover with MEDIA/COMMUNICATIONS",
-        "subtitle": "Leviticus 6:1-5",
-        "references": [
+        "reference": "Leviticus 6:1-5",
+        "monads": [
           {
             "first": 168421,
             "last": 168744
@@ -1783,8 +1783,8 @@
       {
         "number": 52,
         "title": "Crossover with CELEBRATION",
-        "subtitle": "Leviticus 23:3, 7, 8, 21, 25, 35, 36",
-        "references": [
+        "reference": "Leviticus 23:3, 7, 8, 21, 25, 35, 36",
+        "monads": [
           {
             "first": 203079,
             "last": 203170
@@ -1822,8 +1822,8 @@
       {
         "number": 1,
         "title": "Jesus Is Our High Priest",
-        "subtitle": "Hebrews 2:16-18",
-        "references": [
+        "reference": "Hebrews 2:16-18",
+        "monads": [
           {
             "first": 1732993,
             "last": 1733193
@@ -1833,8 +1833,8 @@
       {
         "number": 2,
         "title": "Reconciled to Be Reconcilers",
-        "subtitle": "2 Corinthians 5:18-20",
-        "references": [
+        "reference": "2 Corinthians 5:18-20",
+        "monads": [
           {
             "first": 1668441,
             "last": 1668622
@@ -1844,8 +1844,8 @@
       {
         "number": 3,
         "title": "Jesus Is God's Prophet",
-        "subtitle": "John 6:14",
-        "references": [
+        "reference": "John 6:14",
+        "monads": [
           {
             "first": 1516450,
             "last": 1516534
@@ -1855,8 +1855,8 @@
       {
         "number": 4,
         "title": "The Purpose of Prophesy",
-        "subtitle": "1 Corinthians 14:3",
-        "references": [
+        "reference": "1 Corinthians 14:3",
+        "monads": [
           {
             "first": 1655709,
             "last": 1655736
@@ -1866,8 +1866,8 @@
       {
         "number": 5,
         "title": "Jesus Is Our Intercessor",
-        "subtitle": "Hebrews 7:24-25",
-        "references": [
+        "reference": "Hebrews 7:24-25",
+        "monads": [
           {
             "first": 1738626,
             "last": 1738722
@@ -1877,8 +1877,8 @@
       {
         "number": 6,
         "title": "When There Is No Intercessor",
-        "subtitle": "Ezekiel 22:30-31",
-        "references": [
+        "reference": "Ezekiel 22:30-31",
+        "monads": [
           {
             "first": 1198110,
             "last": 1198281
@@ -1890,8 +1890,8 @@
       {
         "number": 7,
         "title": "A New Covenant",
-        "subtitle": "Jeremiah 31:33-34",
-        "references": [
+        "reference": "Jeremiah 31:33-34",
+        "monads": [
           {
             "first": 1118408,
             "last": 1118630
@@ -1901,8 +1901,8 @@
       {
         "number": 8,
         "title": "True Religion: God First in All.",
-        "subtitle": "Hebrews 11:17-19",
-        "references": [
+        "reference": "Hebrews 11:17-19",
+        "monads": [
           {
             "first": 1745385,
             "last": 1745569
@@ -1912,8 +1912,8 @@
       {
         "number": 9,
         "title": "Greatest Sin #1: Idolatry",
-        "subtitle": "2 Kings 17:7-18, 22-23",
-        "references": [
+        "reference": "2 Kings 17:7-18, 22-23",
+        "monads": [
           {
             "first": 616343,
             "last": 617219
@@ -1927,8 +1927,8 @@
       {
         "number": 10,
         "title": "Genuine Religion: Compassion and Holiness",
-        "subtitle": "James 1:27",
-        "references": [
+        "reference": "James 1:27",
+        "monads": [
           {
             "first": 1751488,
             "last": 1751546
@@ -1938,8 +1938,8 @@
       {
         "number": 11,
         "title": "Greatest Sin #2: Injustice",
-        "subtitle": "Isaiah 58:1-12",
-        "references": [
+        "reference": "Isaiah 58:1-12",
+        "monads": [
           {
             "first": 1056672,
             "last": 1057531
@@ -1949,8 +1949,8 @@
       {
         "number": 12,
         "title": "Moses Intercedes for Israel (and Egypt!)",
-        "subtitle": "Exodus 32:7-14",
-        "references": [
+        "reference": "Exodus 32:7-14",
+        "monads": [
           {
             "first": 143639,
             "last": 144296
@@ -1960,8 +1960,8 @@
       {
         "number": 13,
         "title": "God Looks at the Heart",
-        "subtitle": "1 Samuel 16:7",
-        "references": [
+        "reference": "1 Samuel 16:7",
+        "monads": [
           {
             "first": 457525,
             "last": 457617
@@ -1971,8 +1971,8 @@
       {
         "number": 14,
         "title": "Inner Transformation Desired",
-        "subtitle": "1 Samuel 15:22-23",
-        "references": [
+        "reference": "1 Samuel 15:22-23",
+        "monads": [
           {
             "first": 456213,
             "last": 456352
@@ -1982,8 +1982,8 @@
       {
         "number": 15,
         "title": "What Is the Ultimate Good?",
-        "subtitle": "Micah 6:8",
-        "references": [
+        "reference": "Micah 6:8",
+        "monads": [
           {
             "first": 1311408,
             "last": 1311481
@@ -1993,8 +1993,8 @@
       {
         "number": 16,
         "title": "Repent! Believe! Follow!",
-        "subtitle": "Mark 1:14-18",
-        "references": [
+        "reference": "Mark 1:14-18",
+        "monads": [
           {
             "first": 1405239,
             "last": 1405530
@@ -2004,8 +2004,8 @@
       {
         "number": 17,
         "title": "Forgiven and Cleansed",
-        "subtitle": "1 John 1:5-9",
-        "references": [
+        "reference": "1 John 1:5-9",
+        "monads": [
           {
             "first": 1767626,
             "last": 1767916
@@ -2017,8 +2017,8 @@
       {
         "number": 18,
         "title": "God Devises Ways to Bring Us Back",
-        "subtitle": "2 Samuel 14:14",
-        "references": [
+        "reference": "2 Samuel 14:14",
+        "monads": [
           {
             "first": 506723,
             "last": 506820
@@ -2028,8 +2028,8 @@
       {
         "number": 19,
         "title": "Why? For Love or for Gain?",
-        "subtitle": "Job 1:1-2:10",
-        "references": [
+        "reference": "Job 1:1-2:10",
+        "monads": [
           {
             "first": 800280,
             "last": 802198
@@ -2039,8 +2039,8 @@
       {
         "number": 20,
         "title": "Personal Revelation of God",
-        "subtitle": "Job 42:5-6",
-        "references": [
+        "reference": "Job 42:5-6",
+        "monads": [
           {
             "first": 838480,
             "last": 838554
@@ -2050,8 +2050,8 @@
       {
         "number": 21,
         "title": "God's Heart Longing Expressed",
-        "subtitle": "Psalm 81:13-16",
-        "references": [
+        "reference": "Psalm 81:13-16",
+        "monads": [
           {
             "first": 894058,
             "last": 894209
@@ -2061,8 +2061,8 @@
       {
         "number": 22,
         "title": "Repentance and Forgiveness of Sins",
-        "subtitle": "Luke 24:47",
-        "references": [
+        "reference": "Luke 24:47",
+        "monads": [
           {
             "first": 1504483,
             "last": 1504564
@@ -2074,8 +2074,8 @@
       {
         "number": 23,
         "title": "Declare His Glory among the Nations",
-        "subtitle": "Psalm 96:1-6",
-        "references": [
+        "reference": "Psalm 96:1-6",
+        "monads": [
           {
             "first": 903206,
             "last": 903401
@@ -2085,8 +2085,8 @@
       {
         "number": 24,
         "title": "Paul's Missionary Team",
-        "subtitle": "Acts 20:4",
-        "references": [
+        "reference": "Acts 20:4",
+        "monads": [
           {
             "first": 1591614,
             "last": 1591686
@@ -2096,8 +2096,8 @@
       {
         "number": 25,
         "title": "Paul's Ministry Described",
-        "subtitle": "Colossians 1:28-29",
-        "references": [
+        "reference": "Colossians 1:28-29",
+        "monads": [
           {
             "first": 1704368,
             "last": 1704488
@@ -2107,8 +2107,8 @@
       {
         "number": 26,
         "title": "Levites Called to Serve the Tabernacle",
-        "subtitle": "Numbers 1:48-53",
-        "references": [
+        "reference": "Numbers 1:48-53",
+        "monads": [
           {
             "first": 217393,
             "last": 217761
@@ -2118,8 +2118,8 @@
       {
         "number": 27,
         "title": "James Leads the Church in Jerusalem",
-        "subtitle": "Acts 15:13-22",
-        "references": [
+        "reference": "Acts 15:13-22",
+        "monads": [
           {
             "first": 1581605,
             "last": 1582150
@@ -2131,8 +2131,8 @@
       {
         "number": 28,
         "title": "Doing God's Thing God's Way",
-        "subtitle": "1 Chronicles 15:12-13",
-        "references": [
+        "reference": "1 Chronicles 15:12-13",
+        "monads": [
           {
             "first": 662079,
             "last": 662242
@@ -2142,8 +2142,8 @@
       {
         "number": 29,
         "title": "Five-fold Gifts",
-        "subtitle": "Ephesians 4:11-13",
-        "references": [
+        "reference": "Ephesians 4:11-13",
+        "monads": [
           {
             "first": 1692792,
             "last": 1692966
@@ -2153,8 +2153,8 @@
       {
         "number": 30,
         "title": "Qualifications for Church Leadership",
-        "subtitle": "Titus 1:5-9",
-        "references": [
+        "reference": "Titus 1:5-9",
+        "monads": [
           {
             "first": 1727319,
             "last": 1727743
@@ -2164,8 +2164,8 @@
       {
         "number": 31,
         "title": "Disciplines of a Church Leader",
-        "subtitle": "2 Timothy 2:1-7, 15",
-        "references": [
+        "reference": "2 Timothy 2:1-7, 15",
+        "monads": [
           {
             "first": 1723670,
             "last": 1723943
@@ -2179,8 +2179,8 @@
       {
         "number": 32,
         "title": "Imitate Me",
-        "subtitle": "Philippians 3:17-18",
-        "references": [
+        "reference": "Philippians 3:17-18",
+        "monads": [
           {
             "first": 1701131,
             "last": 1701242
@@ -2190,8 +2190,8 @@
       {
         "number": 33,
         "title": "Come. Go.",
-        "subtitle": "Mark 3:14-15",
-        "references": [
+        "reference": "Mark 3:14-15",
+        "monads": [
           {
             "first": 1409143,
             "last": 1409238
@@ -2201,8 +2201,8 @@
       {
         "number": 34,
         "title": "Mobile Teams Teaching God's Word",
-        "subtitle": "2 Chronicles 17:7-10",
-        "references": [
+        "reference": "2 Chronicles 17:7-10",
+        "monads": [
           {
             "first": 709269,
             "last": 709505
@@ -2212,8 +2212,8 @@
       {
         "number": 35,
         "title": "Ministry of the Prophet",
-        "subtitle": "1 Samuel 12:19-25",
-        "references": [
+        "reference": "1 Samuel 12:19-25",
+        "monads": [
           {
             "first": 449262,
             "last": 449651
@@ -2223,8 +2223,8 @@
       {
         "number": 36,
         "title": "Paul Prays for the Saints",
-        "subtitle": "Ephesians 1:15-18",
-        "references": [
+        "reference": "Ephesians 1:15-18",
+        "monads": [
           {
             "first": 1689218,
             "last": 1689516
@@ -2234,8 +2234,8 @@
       {
         "number": 37,
         "title": "Paul Asks the Saints to Pray for Him",
-        "subtitle": "Ephesians 6:10-20",
-        "references": [
+        "reference": "Ephesians 6:10-20",
+        "monads": [
           {
             "first": 1695814,
             "last": 1696504
@@ -2247,8 +2247,8 @@
       {
         "number": 38,
         "title": "Not Without Your Presence",
-        "subtitle": "Exodus 33:15-17",
-        "references": [
+        "reference": "Exodus 33:15-17",
+        "monads": [
           {
             "first": 146734,
             "last": 146919
@@ -2258,8 +2258,8 @@
       {
         "number": 39,
         "title": "Named Jesus; Named Emmanuel",
-        "subtitle": "Matthew 1:20-23",
-        "references": [
+        "reference": "Matthew 1:20-23",
+        "monads": [
           {
             "first": 1346526,
             "last": 1346800
@@ -2269,8 +2269,8 @@
       {
         "number": 40,
         "title": "Purpose of Jesus' Coming",
-        "subtitle": "Mark 10:45",
-        "references": [
+        "reference": "Mark 10:45",
+        "monads": [
           {
             "first": 1427212,
             "last": 1427265
@@ -2280,8 +2280,8 @@
       {
         "number": 41,
         "title": "Two or Three Gathered in His Name",
-        "subtitle": "Matthew 18:20",
-        "references": [
+        "reference": "Matthew 18:20",
+        "monads": [
           {
             "first": 1379224,
             "last": 1379274
@@ -2293,8 +2293,8 @@
       {
         "number": 42,
         "title": "Be Holy",
-        "subtitle": "Leviticus 20:26",
-        "references": [
+        "reference": "Leviticus 20:26",
+        "monads": [
           {
             "first": 199585,
             "last": 199638
@@ -2304,8 +2304,8 @@
       {
         "number": 43,
         "title": "True Prayer",
-        "subtitle": "Luke 18:9-14",
-        "references": [
+        "reference": "Luke 18:9-14",
+        "monads": [
           {
             "first": 1487364,
             "last": 1487769
@@ -2315,8 +2315,8 @@
       {
         "number": 44,
         "title": "Fruit of the Spirit",
-        "subtitle": "Galatians 5:22-25",
-        "references": [
+        "reference": "Galatians 5:22-25",
+        "monads": [
           {
             "first": 1687115,
             "last": 1687285
@@ -2326,8 +2326,8 @@
       {
         "number": 45,
         "title": "Declare the Excellencies of Him",
-        "subtitle": "1 Peter 2:9-10",
-        "references": [
+        "reference": "1 Peter 2:9-10",
+        "monads": [
           {
             "first": 1758632,
             "last": 1758822
@@ -2337,8 +2337,8 @@
       {
         "number": 46,
         "title": "Imitate Jesus; Embrace Suffering",
-        "subtitle": "1 Peter 2:21-25",
-        "references": [
+        "reference": "1 Peter 2:21-25",
+        "monads": [
           {
             "first": 1759401,
             "last": 1759666
@@ -2350,8 +2350,8 @@
       {
         "number": 47,
         "title": "Crossover with FAMILY",
-        "subtitle": "Jeremiah 32:33-35",
-        "references": [
+        "reference": "Jeremiah 32:33-35",
+        "monads": [
           {
             "first": 1121156,
             "last": 1121358
@@ -2361,8 +2361,8 @@
       {
         "number": 48,
         "title": "Crossover with ECONOMICS",
-        "subtitle": "Acts 8:18-23",
-        "references": [
+        "reference": "Acts 8:18-23",
+        "monads": [
           {
             "first": 1566883,
             "last": 1567143
@@ -2372,8 +2372,8 @@
       {
         "number": 49,
         "title": "Crossover with GOVERNMENT",
-        "subtitle": "Judges 6:25-32",
-        "references": [
+        "reference": "Judges 6:25-32",
+        "monads": [
           {
             "first": 396164,
             "last": 396831
@@ -2383,8 +2383,8 @@
       {
         "number": 50,
         "title": "Crossover with EDUCATION",
-        "subtitle": "Matthew 13:52",
-        "references": [
+        "reference": "Matthew 13:52",
+        "monads": [
           {
             "first": 1370564,
             "last": 1370636
@@ -2394,8 +2394,8 @@
       {
         "number": 51,
         "title": "Crossover with MEDIA/COMMUNICATION",
-        "subtitle": "Romans 10:14-15",
-        "references": [
+        "reference": "Romans 10:14-15",
+        "monads": [
           {
             "first": 1625891,
             "last": 1626049
@@ -2405,8 +2405,8 @@
       {
         "number": 52,
         "title": "Crossover with CELEBRATION",
-        "subtitle": "2 Chronicles 5:12-14",
-        "references": [
+        "reference": "2 Chronicles 5:12-14",
+        "monads": [
           {
             "first": 692677,
             "last": 692944
@@ -2420,8 +2420,8 @@
       {
         "number": 1,
         "title": "God our Judge, Lawgiver and King",
-        "subtitle": "Isaiah 33:22",
-        "references": [
+        "reference": "Isaiah 33:22",
+        "monads": [
           {
             "first": 1025298,
             "last": 1025339
@@ -2431,8 +2431,8 @@
       {
         "number": 2,
         "title": "Mercy and Justice",
-        "subtitle": "Jeremiah 7:5-7",
-        "references": [
+        "reference": "Jeremiah 7:5-7",
+        "monads": [
           {
             "first": 1078859,
             "last": 1079001
@@ -2442,8 +2442,8 @@
       {
         "number": 3,
         "title": "God Gives a Unique Law",
-        "subtitle": "Psalm 147:19-20",
-        "references": [
+        "reference": "Psalm 147:19-20",
+        "monads": [
           {
             "first": 935645,
             "last": 935712
@@ -2453,8 +2453,8 @@
       {
         "number": 4,
         "title": "God Is a Unique Lawgiver",
-        "subtitle": "James 4:12",
-        "references": [
+        "reference": "James 4:12",
+        "monads": [
           {
             "first": 1754848,
             "last": 1754912
@@ -2464,8 +2464,8 @@
       {
         "number": 5,
         "title": "The Foundations of God’s Throne ",
-        "subtitle": "Psalm 89:14, 18",
-        "references": [
+        "reference": "Psalm 89:14, 18",
+        "monads": [
           {
             "first": 898652,
             "last": 898690
@@ -2479,8 +2479,8 @@
       {
         "number": 6,
         "title": "King Messiah",
-        "subtitle": "Isaiah 9:6-7",
-        "references": [
+        "reference": "Isaiah 9:6-7",
+        "monads": [
           {
             "first": 997221,
             "last": 997382
@@ -2492,8 +2492,8 @@
       {
         "number": 7,
         "title": "The Purpose of Government Is to Protect",
-        "subtitle": "Romans 13:1-7",
-        "references": [
+        "reference": "Romans 13:1-7",
+        "monads": [
           {
             "first": 1630214,
             "last": 1630656
@@ -2503,8 +2503,8 @@
       {
         "number": 8,
         "title": "Daughters of Zelophehad",
-        "subtitle": "Numbers 27:1-11",
-        "references": [
+        "reference": "Numbers 27:1-11",
+        "monads": [
           {
             "first": 268382,
             "last": 268961
@@ -2514,8 +2514,8 @@
       {
         "number": 9,
         "title": "For Such a Time as This",
-        "subtitle": "Esther 4:13-16",
-        "references": [
+        "reference": "Esther 4:13-16",
+        "monads": [
           {
             "first": 793186,
             "last": 793481
@@ -2525,8 +2525,8 @@
       {
         "number": 10,
         "title": "Paul Protected by Rome",
-        "subtitle": "Acts 23:12-35",
-        "references": [
+        "reference": "Acts 23:12-35",
+        "monads": [
           {
             "first": 1598330,
             "last": 1599541
@@ -2536,8 +2536,8 @@
       {
         "number": 11,
         "title": "Children Not Protected by Herod",
-        "subtitle": "Matthew 2:16-18",
-        "references": [
+        "reference": "Matthew 2:16-18",
+        "monads": [
           {
             "first": 1347829,
             "last": 1348014
@@ -2547,8 +2547,8 @@
       {
         "number": 12,
         "title": "Vigilante-ism Undermines Justice",
-        "subtitle": "Exodus 2:11-15",
-        "references": [
+        "reference": "Exodus 2:11-15",
+        "monads": [
           {
             "first": 89100,
             "last": 89481
@@ -2558,8 +2558,8 @@
       {
         "number": 13,
         "title": "Anarchy Undermines Justice",
-        "subtitle": "Judges 21:25",
-        "references": [
+        "reference": "Judges 21:25",
+        "monads": [
           {
             "first": 425501,
             "last": 425542
@@ -2569,8 +2569,8 @@
       {
         "number": 14,
         "title": "Bureaucracy Undermines Justice",
-        "subtitle": "Ecclesiastes 5:8-9",
-        "references": [
+        "reference": "Ecclesiastes 5:8-9",
+        "monads": [
           {
             "first": 973232,
             "last": 973377
@@ -2582,8 +2582,8 @@
       {
         "number": 15,
         "title": "Righteous Leadership Is a Blessing",
-        "subtitle": "2 Samuel 23:3-4",
-        "references": [
+        "reference": "2 Samuel 23:3-4",
+        "monads": [
           {
             "first": 525371,
             "last": 525473
@@ -2593,8 +2593,8 @@
       {
         "number": 16,
         "title": "Josiah: Good in the Eyes of the Lord",
-        "subtitle": "2 Kings 22:2",
-        "references": [
+        "reference": "2 Kings 22:2",
+        "monads": [
           {
             "first": 627447,
             "last": 627506
@@ -2604,8 +2604,8 @@
       {
         "number": 17,
         "title": "Deborah: Women in National Leadership",
-        "subtitle": "Judges 4:4-9, 14-16",
-        "references": [
+        "reference": "Judges 4:4-9, 14-16",
+        "monads": [
           {
             "first": 391662,
             "last": 392054
@@ -2619,8 +2619,8 @@
       {
         "number": 18,
         "title": "Nehemiah’s Leadership Integrity",
-        "subtitle": "Nehemiah 5:14-18",
-        "references": [
+        "reference": "Nehemiah 5:14-18",
+        "monads": [
           {
             "first": 769643,
             "last": 770083
@@ -2630,8 +2630,8 @@
       {
         "number": 19,
         "title": "Joseph Enslaves Egypt",
-        "subtitle": "Genesis 47:13-26",
-        "references": [
+        "reference": "Genesis 47:13-26",
+        "monads": [
           {
             "first": 81032,
             "last": 82046
@@ -2641,8 +2641,8 @@
       {
         "number": 20,
         "title": "Pray for Those in Authority",
-        "subtitle": "1 Timothy 2:2",
-        "references": [
+        "reference": "1 Timothy 2:2",
+        "monads": [
           {
             "first": 1717214,
             "last": 1717267
@@ -2652,8 +2652,8 @@
       {
         "number": 21,
         "title": "Fear God and Honor the King",
-        "subtitle": "1 Peter 2:13-17",
-        "references": [
+        "reference": "1 Peter 2:13-17",
+        "monads": [
           {
             "first": 1758970,
             "last": 1759202
@@ -2663,8 +2663,8 @@
       {
         "number": 22,
         "title": "Biblical Civil Disobedience (#1)",
-        "subtitle": "Daniel 3",
-        "references": [
+        "reference": "Daniel 3",
+        "monads": [
           {
             "first": 1253567,
             "last": 1255636
@@ -2676,8 +2676,8 @@
       {
         "number": 23,
         "title": "The Law of the Kings",
-        "subtitle": "Deuteronomy 17:14-20",
-        "references": [
+        "reference": "Deuteronomy 17:14-20",
+        "monads": [
           {
             "first": 316897,
             "last": 317444
@@ -2687,8 +2687,8 @@
       {
         "number": 24,
         "title": "Solomon: Gold, Horses and Wives",
-        "subtitle": "1 Kings 10:1-11:13",
-        "references": [
+        "reference": "1 Kings 10:1-11:13",
+        "monads": [
           {
             "first": 553135,
             "last": 556004
@@ -2698,8 +2698,8 @@
       {
         "number": 25,
         "title": "Asa: a Good King Goes Bad",
-        "subtitle": "2 Chronicles 16:9",
-        "references": [
+        "reference": "2 Chronicles 16:9",
+        "monads": [
           {
             "first": 708516,
             "last": 708591
@@ -2709,8 +2709,8 @@
       {
         "number": 26,
         "title": "Manasseh: a Bad King Goes Good",
-        "subtitle": "2 Chronicles 33:1-20",
-        "references": [
+        "reference": "2 Chronicles 33:1-20",
+        "monads": [
           {
             "first": 736818,
             "last": 738278
@@ -2720,8 +2720,8 @@
       {
         "number": 27,
         "title": "Give to Caesar What Is Caesar’s",
-        "subtitle": "Mark 12:13-17",
-        "references": [
+        "reference": "Mark 12:13-17",
+        "monads": [
           {
             "first": 1430166,
             "last": 1430489
@@ -2731,8 +2731,8 @@
       {
         "number": 28,
         "title": "Biblical Civil Disobedience (#2)",
-        "subtitle": "Daniel 1:5-20",
-        "references": [
+        "reference": "Daniel 1:5-20",
+        "monads": [
           {
             "first": 1249530,
             "last": 1250432
@@ -2744,8 +2744,8 @@
       {
         "number": 29,
         "title": "Selection, Role and Character of Judges",
-        "subtitle": "Deuteronomy 1:15-17",
-        "references": [
+        "reference": "Deuteronomy 1:15-17",
+        "monads": [
           {
             "first": 286558,
             "last": 286826
@@ -2755,8 +2755,8 @@
       {
         "number": 30,
         "title": "Equity in Judgement",
-        "subtitle": "Leviticus 19:15",
-        "references": [
+        "reference": "Leviticus 19:15",
+        "monads": [
           {
             "first": 196559,
             "last": 196609
@@ -2766,8 +2766,8 @@
       {
         "number": 31,
         "title": "A Voice for the Voiceless",
-        "subtitle": "Exodus 4:9-18",
-        "references": [
+        "reference": "Exodus 4:9-18",
+        "monads": [
           {
             "first": 92385,
             "last": 93082
@@ -2777,8 +2777,8 @@
       {
         "number": 32,
         "title": "Verdicts That Produce Peace",
-        "subtitle": "Zechariah 8:16",
-        "references": [
+        "reference": "Zechariah 8:16",
+        "monads": [
           {
             "first": 1333658,
             "last": 1333715
@@ -2788,8 +2788,8 @@
       {
         "number": 33,
         "title": "Solomon’s Legal Wisdom",
-        "subtitle": "1 Kings 3:16-28",
-        "references": [
+        "reference": "1 Kings 3:16-28",
+        "monads": [
           {
             "first": 536901,
             "last": 537698
@@ -2799,8 +2799,8 @@
       {
         "number": 34,
         "title": "Cry Out for Justice!",
-        "subtitle": "Luke 18:1-8",
-        "references": [
+        "reference": "Luke 18:1-8",
+        "monads": [
           {
             "first": 1486926,
             "last": 1487363
@@ -2812,8 +2812,8 @@
       {
         "number": 35,
         "title": "Laws Are to Be Life-giving",
-        "subtitle": "Ezekiel 33:15",
-        "references": [
+        "reference": "Ezekiel 33:15",
+        "monads": [
           {
             "first": 1216878,
             "last": 1216965
@@ -2823,8 +2823,8 @@
       {
         "number": 36,
         "title": "Moses Decrees Good Laws",
-        "subtitle": "Deuteronomy 4:4-5",
-        "references": [
+        "reference": "Deuteronomy 4:4-5",
+        "monads": [
           {
             "first": 293001,
             "last": 293116
@@ -2834,8 +2834,8 @@
       {
         "number": 37,
         "title": "Darius Decrees a Bad Law",
-        "subtitle": "Daniel 6:6-9",
-        "references": [
+        "reference": "Daniel 6:6-9",
+        "monads": [
           {
             "first": 1260857,
             "last": 1261089
@@ -2845,8 +2845,8 @@
       {
         "number": 38,
         "title": "Cities of Refuge",
-        "subtitle": "Numbers 35:9-15",
-        "references": [
+        "reference": "Numbers 35:9-15",
+        "monads": [
           {
             "first": 283504,
             "last": 283776
@@ -2856,8 +2856,8 @@
       {
         "number": 39,
         "title": "Pay Your Taxes",
-        "subtitle": "Matthew 17:25-27",
-        "references": [
+        "reference": "Matthew 17:25-27",
+        "monads": [
           {
             "first": 1377705,
             "last": 1377987
@@ -2867,8 +2867,8 @@
       {
         "number": 40,
         "title": "Biblical Civil Disobedience (#3)",
-        "subtitle": "Daniel 6:10-24",
-        "references": [
+        "reference": "Daniel 6:10-24",
+        "monads": [
           {
             "first": 1261090,
             "last": 1262170
@@ -2880,8 +2880,8 @@
       {
         "number": 41,
         "title": "Laws for War",
-        "subtitle": "Deuteronomy 20",
-        "references": [
+        "reference": "Deuteronomy 20",
+        "monads": [
           {
             "first": 320089,
             "last": 321366
@@ -2891,8 +2891,8 @@
       {
         "number": 42,
         "title": "Diplomacy Versus War",
-        "subtitle": "2 Samuel 10:1-8",
-        "references": [
+        "reference": "2 Samuel 10:1-8",
+        "monads": [
           {
             "first": 497942,
             "last": 498546
@@ -2902,8 +2902,8 @@
       {
         "number": 43,
         "title": "Military Authority and Faith",
-        "subtitle": "Luke 7:6-9",
-        "references": [
+        "reference": "Luke 7:6-9",
+        "monads": [
           {
             "first": 1458501,
             "last": 1458824
@@ -2913,8 +2913,8 @@
       {
         "number": 44,
         "title": "Civil War Destroys a Nation",
-        "subtitle": "Luke 11:17",
-        "references": [
+        "reference": "Luke 11:17",
+        "monads": [
           {
             "first": 1471895,
             "last": 1471948
@@ -2924,8 +2924,8 @@
       {
         "number": 45,
         "title": "Edom Judged for Wartime Disloyalty",
-        "subtitle": "Obadiah 11-15",
-        "references": [
+        "reference": "Obadiah 11-15",
+        "monads": [
           {
             "first": 1302360,
             "last": 1302731
@@ -2935,8 +2935,8 @@
       {
         "number": 46,
         "title": "Elisha “Defeats” the King of Aram",
-        "subtitle": "2 Kings 6:8-23",
-        "references": [
+        "reference": "2 Kings 6:8-23",
+        "monads": [
           {
             "first": 594022,
             "last": 595117
@@ -2948,8 +2948,8 @@
       {
         "number": 47,
         "title": "Crossover with FAMILY",
-        "subtitle": "2 Samuel 11:2-27",
-        "references": [
+        "reference": "2 Samuel 11:2-27",
+        "monads": [
           {
             "first": 499389,
             "last": 500977
@@ -2959,8 +2959,8 @@
       {
         "number": 48,
         "title": "Crossover with ECONOMICS",
-        "subtitle": "1 Kings 12:4-18",
-        "references": [
+        "reference": "1 Kings 12:4-18",
+        "monads": [
           {
             "first": 558104,
             "last": 559119
@@ -2970,8 +2970,8 @@
       {
         "number": 49,
         "title": "Crossover with RELIGION",
-        "subtitle": "1 Samuel 13:7-14",
-        "references": [
+        "reference": "1 Samuel 13:7-14",
+        "monads": [
           {
             "first": 450198,
             "last": 450736
@@ -2981,8 +2981,8 @@
       {
         "number": 50,
         "title": "Crossover with EDUCATION",
-        "subtitle": "Daniel 1:3-4",
-        "references": [
+        "reference": "Daniel 1:3-4",
+        "monads": [
           {
             "first": 1249330,
             "last": 1249529
@@ -2992,8 +2992,8 @@
       {
         "number": 51,
         "title": "Crossover with MEDIA/COMMUNICATION",
-        "subtitle": "Joshua 9:3-27",
-        "references": [
+        "reference": "Joshua 9:3-27",
+        "monads": [
           {
             "first": 359392,
             "last": 360838
@@ -3003,8 +3003,8 @@
       {
         "number": 52,
         "title": "Crossover with CELEBRATION",
-        "subtitle": "Mark 6:21-28",
-        "references": [
+        "reference": "Mark 6:21-28",
+        "monads": [
           {
             "first": 1415618,
             "last": 1416091
@@ -3018,8 +3018,8 @@
       {
         "number": 1,
         "title": "God Longs to Reveal Himself Relationally",
-        "subtitle": "Exodus 6:7",
-        "references": [
+        "reference": "Exodus 6:7",
+        "monads": [
           {
             "first": 95733,
             "last": 95806
@@ -3029,8 +3029,8 @@
       {
         "number": 2,
         "title": "God the Father Is Our Teacher",
-        "subtitle": "Isaiah 54:13",
-        "references": [
+        "reference": "Isaiah 54:13",
+        "monads": [
           {
             "first": 1053630,
             "last": 1053656
@@ -3040,8 +3040,8 @@
       {
         "number": 3,
         "title": "God the Son Is Our Teacher",
-        "subtitle": "John 13:12-17",
-        "references": [
+        "reference": "John 13:12-17",
+        "monads": [
           {
             "first": 1535906,
             "last": 1536164
@@ -3051,8 +3051,8 @@
       {
         "number": 4,
         "title": "God the Holy Spirit Is Our Teacher",
-        "subtitle": "John 14:26",
-        "references": [
+        "reference": "John 14:26",
+        "monads": [
           {
             "first": 1538944,
             "last": 1539007
@@ -3062,8 +3062,8 @@
       {
         "number": 5,
         "title": "God the Warrior Teaches Us",
-        "subtitle": "Psalm 27:1-5, 11",
-        "references": [
+        "reference": "Psalm 27:1-5, 11",
+        "monads": [
           {
             "first": 853861,
             "last": 854141
@@ -3077,8 +3077,8 @@
       {
         "number": 6,
         "title": "God the Shepherd Teaches Us",
-        "subtitle": "Mark 6:34",
-        "references": [
+        "reference": "Mark 6:34",
+        "monads": [
           {
             "first": 1416350,
             "last": 1416418
@@ -3090,8 +3090,8 @@
       {
         "number": 7,
         "title": "Equipped with Practical Wisdom",
-        "subtitle": "Proverbs 1:2-7",
-        "references": [
+        "reference": "Proverbs 1:2-7",
+        "monads": [
           {
             "first": 936667,
             "last": 936893
@@ -3101,8 +3101,8 @@
       {
         "number": 8,
         "title": "The Purpose of My Instruction",
-        "subtitle": "1 Timothy 1:5",
-        "references": [
+        "reference": "1 Timothy 1:5",
+        "monads": [
           {
             "first": 1716197,
             "last": 1716254
@@ -3112,8 +3112,8 @@
       {
         "number": 9,
         "title": "Applied Truth Brings Blessing to Society",
-        "subtitle": "Deuteronomy 28:13",
-        "references": [
+        "reference": "Deuteronomy 28:13",
+        "monads": [
           {
             "first": 331808,
             "last": 331906
@@ -3123,8 +3123,8 @@
       {
         "number": 10,
         "title": "God Desires Education That Transforms",
-        "subtitle": "Deuteronomy 5:29-31",
-        "references": [
+        "reference": "Deuteronomy 5:29-31",
+        "monads": [
           {
             "first": 297597,
             "last": 297771
@@ -3134,8 +3134,8 @@
       {
         "number": 11,
         "title": "Transformed Lives",
-        "subtitle": "Acts 4:13",
-        "references": [
+        "reference": "Acts 4:13",
+        "monads": [
           {
             "first": 1558105,
             "last": 1558196
@@ -3145,8 +3145,8 @@
       {
         "number": 12,
         "title": "Transformed Society",
-        "subtitle": "Leviticus 18:1-5",
-        "references": [
+        "reference": "Leviticus 18:1-5",
+        "monads": [
           {
             "first": 194281,
             "last": 194490
@@ -3156,8 +3156,8 @@
       {
         "number": 13,
         "title": "Revelation in the Potter’s House",
-        "subtitle": "Jeremiah 18:1-11",
-        "references": [
+        "reference": "Jeremiah 18:1-11",
+        "monads": [
           {
             "first": 1095842,
             "last": 1096334
@@ -3169,8 +3169,8 @@
       {
         "number": 14,
         "title": "Study – Obey – Teach",
-        "subtitle": "Ezra 7:10-11",
-        "references": [
+        "reference": "Ezra 7:10-11",
+        "monads": [
           {
             "first": 754863,
             "last": 754981
@@ -3180,8 +3180,8 @@
       {
         "number": 15,
         "title": "Teach Well",
-        "subtitle": "Romans 12:7",
-        "references": [
+        "reference": "Romans 12:7",
+        "monads": [
           {
             "first": 1629469,
             "last": 1629507
@@ -3191,8 +3191,8 @@
       {
         "number": 16,
         "title": "Spirit and Truth",
-        "subtitle": "John 4:23-24",
-        "references": [
+        "reference": "John 4:23-24",
+        "monads": [
           {
             "first": 1511866,
             "last": 1511975
@@ -3202,8 +3202,8 @@
       {
         "number": 17,
         "title": "Know Your Audience",
-        "subtitle": "Mark 7:2-4",
-        "references": [
+        "reference": "Mark 7:2-4",
+        "monads": [
           {
             "first": 1417619,
             "last": 1417840
@@ -3213,8 +3213,8 @@
       {
         "number": 18,
         "title": "Use Didactic Creativity",
-        "subtitle": "Exodus 4:1-11",
-        "references": [
+        "reference": "Exodus 4:1-11",
+        "monads": [
           {
             "first": 91822,
             "last": 92658
@@ -3224,8 +3224,8 @@
       {
         "number": 19,
         "title": "Create a Cohortive, Relational Context",
-        "subtitle": "Luke 8:1-2",
-        "references": [
+        "reference": "Luke 8:1-2",
+        "monads": [
           {
             "first": 1461281,
             "last": 1461402
@@ -3235,8 +3235,8 @@
       {
         "number": 20,
         "title": "Pray for Your Students",
-        "subtitle": "Ephesians 3:14-21",
-        "references": [
+        "reference": "Ephesians 3:14-21",
+        "monads": [
           {
             "first": 1691879,
             "last": 1692320
@@ -3246,8 +3246,8 @@
       {
         "number": 21,
         "title": "Judged by a Higher Standard",
-        "subtitle": "James 3:1",
-        "references": [
+        "reference": "James 3:1",
+        "monads": [
           {
             "first": 1753088,
             "last": 1753154
@@ -3259,8 +3259,8 @@
       {
         "number": 22,
         "title": "Imitate the Master",
-        "subtitle": "Leviticus 11:45",
-        "references": [
+        "reference": "Leviticus 11:45",
+        "monads": [
           {
             "first": 180158,
             "last": 180227
@@ -3270,8 +3270,8 @@
       {
         "number": 23,
         "title": "Consider Jesus",
-        "subtitle": "Hebrews 3:1",
-        "references": [
+        "reference": "Hebrews 3:1",
+        "monads": [
           {
             "first": 1733195,
             "last": 1733295
@@ -3281,8 +3281,8 @@
       {
         "number": 24,
         "title": "Hunger for God and His Word",
-        "subtitle": "Psalm 19:7-11",
-        "references": [
+        "reference": "Psalm 19:7-11",
+        "monads": [
           {
             "first": 849449,
             "last": 849661
@@ -3292,8 +3292,8 @@
       {
         "number": 25,
         "title": "Approach Learning with Faith in God",
-        "subtitle": "James 1:5-6",
-        "references": [
+        "reference": "James 1:5-6",
+        "monads": [
           {
             "first": 1750264,
             "last": 1750401
@@ -3303,8 +3303,8 @@
       {
         "number": 26,
         "title": "Think about These Things",
-        "subtitle": "Philippians 4:8",
-        "references": [
+        "reference": "Philippians 4:8",
+        "monads": [
           {
             "first": 1701838,
             "last": 1701922
@@ -3314,8 +3314,8 @@
       {
         "number": 27,
         "title": "Eagerness to Apply",
-        "subtitle": "Matthew 7:24-27",
-        "references": [
+        "reference": "Matthew 7:24-27",
+        "monads": [
           {
             "first": 1356718,
             "last": 1356918
@@ -3325,8 +3325,8 @@
       {
         "number": 28,
         "title": "Teachableness Versus Pride",
-        "subtitle": "Psalm 131",
-        "references": [
+        "reference": "Psalm 131",
+        "monads": [
           {
             "first": 926985,
             "last": 927130
@@ -3336,8 +3336,8 @@
       {
         "number": 29,
         "title": "Press On. Press On. Press On.",
-        "subtitle": "Hosea 6:3",
-        "references": [
+        "reference": "Hosea 6:3",
+        "monads": [
           {
             "first": 1279525,
             "last": 1279596
@@ -3349,8 +3349,8 @@
       {
         "number": 30,
         "title": "Begin with God’s Revelation",
-        "subtitle": "2 Kings 22:8",
-        "references": [
+        "reference": "2 Kings 22:8",
+        "monads": [
           {
             "first": 627793,
             "last": 627868
@@ -3360,8 +3360,8 @@
       {
         "number": 31,
         "title": "Question Asking is Important!",
-        "subtitle": "Jonah 1:8",
-        "references": [
+        "reference": "Jonah 1:8",
+        "monads": [
           {
             "first": 1303705,
             "last": 1303772
@@ -3371,8 +3371,8 @@
       {
         "number": 32,
         "title": "Question Asking and Implicational Thinking",
-        "subtitle": "Genesis 18:23-33",
-        "references": [
+        "reference": "Genesis 18:23-33",
+        "monads": [
           {
             "first": 23929,
             "last": 24646
@@ -3382,8 +3382,8 @@
       {
         "number": 33,
         "title": "Cultivate Critical Thinking",
-        "subtitle": "Leviticus 10:10-11",
-        "references": [
+        "reference": "Leviticus 10:10-11",
+        "monads": [
           {
             "first": 177097,
             "last": 177179
@@ -3393,8 +3393,8 @@
       {
         "number": 34,
         "title": "Guard Your Heart",
-        "subtitle": "Proverbs 4:20-23",
-        "references": [
+        "reference": "Proverbs 4:20-23",
+        "monads": [
           {
             "first": 940569,
             "last": 940691
@@ -3404,8 +3404,8 @@
       {
         "number": 35,
         "title": "Love Good and Hate Evil",
-        "subtitle": "Proverbs 9:10",
-        "references": [
+        "reference": "Proverbs 9:10",
+        "monads": [
           {
             "first": 945313,
             "last": 945351
@@ -3415,8 +3415,8 @@
       {
         "number": 36,
         "title": "Faith ... Virtue ... Knowledge …",
-        "subtitle": "2 Peter 1:5-8",
-        "references": [
+        "reference": "2 Peter 1:5-8",
+        "monads": [
           {
             "first": 1763609,
             "last": 1763786
@@ -3426,8 +3426,8 @@
       {
         "number": 37,
         "title": "Role of the Family in Education",
-        "subtitle": "Proverbs 3:1-6, 11-12",
-        "references": [
+        "reference": "Proverbs 3:1-6, 11-12",
+        "monads": [
           {
             "first": 938552,
             "last": 938791
@@ -3441,8 +3441,8 @@
       {
         "number": 38,
         "title": "Role of the Church in Education",
-        "subtitle": "Acts 19:9-10",
-        "references": [
+        "reference": "Acts 19:9-10",
+        "monads": [
           {
             "first": 1589510,
             "last": 1589642
@@ -3452,8 +3452,8 @@
       {
         "number": 39,
         "title": "Role of the School in Education",
-        "subtitle": "1 Chronicles 27:32",
-        "references": [
+        "reference": "1 Chronicles 27:32",
+        "monads": [
           {
             "first": 681926,
             "last": 681994
@@ -3463,8 +3463,8 @@
       {
         "number": 40,
         "title": "Support Good Teachers!",
-        "subtitle": "3 John 6-8",
-        "references": [
+        "reference": "3 John 6-8",
+        "monads": [
           {
             "first": 1775002,
             "last": 1775156
@@ -3476,8 +3476,8 @@
       {
         "number": 41,
         "title": "Remembering",
-        "subtitle": "Deuteronomy 4:10",
-        "references": [
+        "reference": "Deuteronomy 4:10",
+        "monads": [
           {
             "first": 293386,
             "last": 293525
@@ -3487,8 +3487,8 @@
       {
         "number": 42,
         "title": "Understanding",
-        "subtitle": "Haggai 2:18",
-        "references": [
+        "reference": "Haggai 2:18",
+        "monads": [
           {
             "first": 1325374,
             "last": 1325449
@@ -3498,8 +3498,8 @@
       {
         "number": 43,
         "title": "Applying",
-        "subtitle": "1 Corinthians 14:35",
-        "references": [
+        "reference": "1 Corinthians 14:35",
+        "monads": [
           {
             "first": 1657680,
             "last": 1657752
@@ -3509,8 +3509,8 @@
       {
         "number": 44,
         "title": "Analyzing",
-        "subtitle": "Job 42:7",
-        "references": [
+        "reference": "Job 42:7",
+        "monads": [
           {
             "first": 838555,
             "last": 838634
@@ -3520,8 +3520,8 @@
       {
         "number": 45,
         "title": "Evaluating",
-        "subtitle": "Numbers 36:1-12",
-        "references": [
+        "reference": "Numbers 36:1-12",
+        "monads": [
           {
             "first": 284853,
             "last": 285526
@@ -3531,8 +3531,8 @@
       {
         "number": 46,
         "title": "Creating",
-        "subtitle": "Psalm 98:1",
-        "references": [
+        "reference": "Psalm 98:1",
+        "monads": [
           {
             "first": 904113,
             "last": 904171
@@ -3544,8 +3544,8 @@
       {
         "number": 47,
         "title": "Crossover with FAMILY",
-        "subtitle": "Deuteronomy 11:19",
-        "references": [
+        "reference": "Deuteronomy 11:19",
+        "monads": [
           {
             "first": 307132,
             "last": 307201
@@ -3555,8 +3555,8 @@
       {
         "number": 48,
         "title": "Crossover with ECONOMICS",
-        "subtitle": "Titus 1:11",
-        "references": [
+        "reference": "Titus 1:11",
+        "monads": [
           {
             "first": 1727801,
             "last": 1727856
@@ -3566,8 +3566,8 @@
       {
         "number": 49,
         "title": "Crossover with GOVERNMENT",
-        "subtitle": "2 Kings 12:2",
-        "references": [
+        "reference": "2 Kings 12:2",
+        "monads": [
           {
             "first": 607183,
             "last": 607224
@@ -3577,8 +3577,8 @@
       {
         "number": 50,
         "title": "Crossover with RELIGION",
-        "subtitle": "Nehemiah 8:2-3, 7-8",
-        "references": [
+        "reference": "Nehemiah 8:2-3, 7-8",
+        "monads": [
           {
             "first": 774422,
             "last": 774623
@@ -3592,8 +3592,8 @@
       {
         "number": 51,
         "title": "Crossover with MEDIA/COMMUNICATION",
-        "subtitle": "Mark 4:33-34",
-        "references": [
+        "reference": "Mark 4:33-34",
+        "monads": [
           {
             "first": 1411804,
             "last": 1411900
@@ -3603,8 +3603,8 @@
       {
         "number": 52,
         "title": "Crossover with CELEBRATION",
-        "subtitle": "Psalm 60",
-        "references": [
+        "reference": "Psalm 60",
+        "monads": [
           {
             "first": 876759,
             "last": 877234
@@ -3618,8 +3618,8 @@
       {
         "number": 1,
         "title": "God’s Ways Are Diverse",
-        "subtitle": "1 Chronicles 28:19",
-        "references": [
+        "reference": "1 Chronicles 28:19",
+        "monads": [
           {
             "first": 683565,
             "last": 683633
@@ -3629,8 +3629,8 @@
       {
         "number": 2,
         "title": "God’s Ways Are Appropriate",
-        "subtitle": "Hebrews 1:1-2",
-        "references": [
+        "reference": "Hebrews 1:1-2",
+        "monads": [
           {
             "first": 1731052,
             "last": 1731154
@@ -3640,8 +3640,8 @@
       {
         "number": 3,
         "title": "God’s Content Is True",
-        "subtitle": "1 Thessalonians 5:19-21",
-        "references": [
+        "reference": "1 Thessalonians 5:19-21",
+        "monads": [
           {
             "first": 1712882,
             "last": 1712940
@@ -3651,8 +3651,8 @@
       {
         "number": 4,
         "title": "God’s Content Is Trustworthy",
-        "subtitle": "Luke 1:1-4",
-        "references": [
+        "reference": "Luke 1:1-4",
+        "monads": [
           {
             "first": 1442274,
             "last": 1442442
@@ -3662,8 +3662,8 @@
       {
         "number": 5,
         "title": "God’s Communication Is Transformative",
-        "subtitle": "Colossians 1:6",
-        "references": [
+        "reference": "Colossians 1:6",
+        "monads": [
           {
             "first": 1702953,
             "last": 1703045
@@ -3673,8 +3673,8 @@
       {
         "number": 6,
         "title": "God’s Communication Gives Life",
-        "subtitle": "John 20:30-31",
-        "references": [
+        "reference": "John 20:30-31",
+        "monads": [
           {
             "first": 1550231,
             "last": 1550365
@@ -3686,8 +3686,8 @@
       {
         "number": 7,
         "title": "Creates Unity Around God’s Purposes",
-        "subtitle": "Zephaniah 3:9",
-        "references": [
+        "reference": "Zephaniah 3:9",
+        "monads": [
           {
             "first": 1322109,
             "last": 1322146
@@ -3697,8 +3697,8 @@
       {
         "number": 8,
         "title": "Creates Life-Enhancing Situations",
-        "subtitle": "Proverbs 10:11",
-        "references": [
+        "reference": "Proverbs 10:11",
+        "monads": [
           {
             "first": 946003,
             "last": 946041
@@ -3708,8 +3708,8 @@
       {
         "number": 9,
         "title": "Creates Community and Cultural Uniqueness",
-        "subtitle": "Esther 8:9",
-        "references": [
+        "reference": "Esther 8:9",
+        "monads": [
           {
             "first": 796878,
             "last": 797107
@@ -3719,8 +3719,8 @@
       {
         "number": 10,
         "title": "Provides Trustworthy Information",
-        "subtitle": "2 Timothy 2:2",
-        "references": [
+        "reference": "2 Timothy 2:2",
+        "monads": [
           {
             "first": 1723706,
             "last": 1723773
@@ -3730,8 +3730,8 @@
       {
         "number": 11,
         "title": "Provides Transformative Information",
-        "subtitle": "Isaiah 61:1-2",
-        "references": [
+        "reference": "Isaiah 61:1-2",
+        "monads": [
           {
             "first": 1060444,
             "last": 1060643
@@ -3743,8 +3743,8 @@
       {
         "number": 12,
         "title": "Inspired by the Spirit",
-        "subtitle": "Matthew 22:43",
-        "references": [
+        "reference": "Matthew 22:43",
+        "monads": [
           {
             "first": 1388390,
             "last": 1388441
@@ -3754,8 +3754,8 @@
       {
         "number": 13,
         "title": "Speak like Jesus",
-        "subtitle": "Matthew 7:28-29",
-        "references": [
+        "reference": "Matthew 7:28-29",
+        "monads": [
           {
             "first": 1356919,
             "last": 1356980
@@ -3765,8 +3765,8 @@
       {
         "number": 14,
         "title": "Align Your Communication with God’s",
-        "subtitle": "Revelation 22:17",
-        "references": [
+        "reference": "Revelation 22:17",
+        "monads": [
           {
             "first": 1804808,
             "last": 1804879
@@ -3776,8 +3776,8 @@
       {
         "number": 15,
         "title": "Speak the Truth in Love",
-        "subtitle": "Ephesians 4:15",
-        "references": [
+        "reference": "Ephesians 4:15",
+        "monads": [
           {
             "first": 1693059,
             "last": 1693118
@@ -3787,8 +3787,8 @@
       {
         "number": 16,
         "title": "Speak Seasoned with Grace",
-        "subtitle": "Colossians 4:6",
-        "references": [
+        "reference": "Colossians 4:6",
+        "monads": [
           {
             "first": 1707275,
             "last": 1707325
@@ -3798,8 +3798,8 @@
       {
         "number": 17,
         "title": "Speak in Order to Build Up",
-        "subtitle": "1 Corinthians 14:26",
-        "references": [
+        "reference": "1 Corinthians 14:26",
+        "monads": [
           {
             "first": 1657144,
             "last": 1657253
@@ -3809,8 +3809,8 @@
       {
         "number": 18,
         "title": "Speak in Order to Encourage",
-        "subtitle": "Acts 9:27",
-        "references": [
+        "reference": "Acts 9:27",
+        "monads": [
           {
             "first": 1569542,
             "last": 1569635
@@ -3820,8 +3820,8 @@
       {
         "number": 19,
         "title": "Speak with Self-control",
-        "subtitle": "James 3:2-12",
-        "references": [
+        "reference": "James 3:2-12",
+        "monads": [
           {
             "first": 1753155,
             "last": 1753716
@@ -3831,8 +3831,8 @@
       {
         "number": 20,
         "title": "Listen to Godly Advice",
-        "subtitle": "Proverbs 25:11",
-        "references": [
+        "reference": "Proverbs 25:11",
+        "monads": [
           {
             "first": 961658,
             "last": 961682
@@ -3842,8 +3842,8 @@
       {
         "number": 21,
         "title": "Communicate in the Fear of the Lord",
-        "subtitle": "Ecclesiastes 12:9-13",
-        "references": [
+        "reference": "Ecclesiastes 12:9-13",
+        "monads": [
           {
             "first": 979979,
             "last": 980279
@@ -3853,8 +3853,8 @@
       {
         "number": 22,
         "title": "Be True to Your Words",
-        "subtitle": "Genesis 31:44-54",
-        "references": [
+        "reference": "Genesis 31:44-54",
+        "monads": [
           {
             "first": 51159,
             "last": 51886
@@ -3866,8 +3866,8 @@
       {
         "number": 23,
         "title": "Do Not Distort God’s Character",
-        "subtitle": "Numbers 15:30",
-        "references": [
+        "reference": "Numbers 15:30",
+        "monads": [
           {
             "first": 246224,
             "last": 246286
@@ -3877,8 +3877,8 @@
       {
         "number": 24,
         "title": "Do Not Distort Your Neighbor’s Character",
-        "subtitle": "Deuteronomy 5:20",
-        "references": [
+        "reference": "Deuteronomy 5:20",
+        "monads": [
           {
             "first": 296996,
             "last": 297015
@@ -3888,8 +3888,8 @@
       {
         "number": 25,
         "title": "Do Not Listen to Ungodly Advice",
-        "subtitle": "Psalm 1:1-2",
-        "references": [
+        "reference": "Psalm 1:1-2",
+        "monads": [
           {
             "first": 839274,
             "last": 839355
@@ -3899,8 +3899,8 @@
       {
         "number": 26,
         "title": "Do Not Participate in Gossip",
-        "subtitle": "Proverbs 17:4",
-        "references": [
+        "reference": "Proverbs 17:4",
+        "monads": [
           {
             "first": 952990,
             "last": 953014
@@ -3910,8 +3910,8 @@
       {
         "number": 27,
         "title": "Do Not Participate in Arguments",
-        "subtitle": "2 Timothy 2:23-25",
-        "references": [
+        "reference": "2 Timothy 2:23-25",
+        "monads": [
           {
             "first": 1724786,
             "last": 1724923
@@ -3921,8 +3921,8 @@
       {
         "number": 28,
         "title": "Do Not Participate in Complaining",
-        "subtitle": "Jude 16",
-        "references": [
+        "reference": "Jude 16",
+        "monads": [
           {
             "first": 1776946,
             "last": 1777003
@@ -3932,8 +3932,8 @@
       {
         "number": 29,
         "title": "Do Not Participate in Slander/Mockery",
-        "subtitle": "Nehemiah 4:1-4",
-        "references": [
+        "reference": "Nehemiah 4:1-4",
+        "monads": [
           {
             "first": 767143,
             "last": 767490
@@ -3943,8 +3943,8 @@
       {
         "number": 30,
         "title": "Do Not Participate in Prideful Boasting",
-        "subtitle": "Psalm 75:4-5",
-        "references": [
+        "reference": "Psalm 75:4-5",
+        "monads": [
           {
             "first": 887849,
             "last": 887923
@@ -3956,8 +3956,8 @@
       {
         "number": 31,
         "title": "God Speaks ... We Should Listen",
-        "subtitle": "Hebrews 2:1-4",
-        "references": [
+        "reference": "Hebrews 2:1-4",
+        "monads": [
           {
             "first": 1731978,
             "last": 1732190
@@ -3967,8 +3967,8 @@
       {
         "number": 32,
         "title": "God Speaks ... We Should Speak",
-        "subtitle": "John 1:1-9",
-        "references": [
+        "reference": "John 1:1-9",
+        "monads": [
           {
             "first": 1504781,
             "last": 1505127
@@ -3978,8 +3978,8 @@
       {
         "number": 33,
         "title": "God Reveals ... We Can Know",
-        "subtitle": "Amos 3:7",
-        "references": [
+        "reference": "Amos 3:7",
+        "monads": [
           {
             "first": 1294157,
             "last": 1294193
@@ -3989,8 +3989,8 @@
       {
         "number": 34,
         "title": "God Listens ... We Can Speak",
-        "subtitle": "Luke 18:35-43",
-        "references": [
+        "reference": "Luke 18:35-43",
+        "monads": [
           {
             "first": 1488839,
             "last": 1489198
@@ -4000,8 +4000,8 @@
       {
         "number": 35,
         "title": "God Responds ... We Can Trust",
-        "subtitle": "Judges 6:36-40",
-        "references": [
+        "reference": "Judges 6:36-40",
+        "monads": [
           {
             "first": 397009,
             "last": 397362
@@ -4011,8 +4011,8 @@
       {
         "number": 36,
         "title": "God Guides ... We Can Follow",
-        "subtitle": "Exodus 13:21-22",
-        "references": [
+        "reference": "Exodus 13:21-22",
+        "monads": [
           {
             "first": 110065,
             "last": 110194
@@ -4024,8 +4024,8 @@
       {
         "number": 37,
         "title": "One on One",
-        "subtitle": "Romans 12:14",
-        "references": [
+        "reference": "Romans 12:14",
+        "monads": [
           {
             "first": 1629835,
             "last": 1629870
@@ -4035,8 +4035,8 @@
       {
         "number": 38,
         "title": "One to Many",
-        "subtitle": "Isaiah 52:7",
-        "references": [
+        "reference": "Isaiah 52:7",
+        "monads": [
           {
             "first": 1051405,
             "last": 1051476
@@ -4046,8 +4046,8 @@
       {
         "number": 39,
         "title": "Many to Many",
-        "subtitle": "Psalm 68:11",
-        "references": [
+        "reference": "Psalm 68:11",
+        "monads": [
           {
             "first": 881002,
             "last": 881044
@@ -4057,8 +4057,8 @@
       {
         "number": 40,
         "title": "Be a Voice for the Voiceless",
-        "subtitle": "Proverbs 31:8-9",
-        "references": [
+        "reference": "Proverbs 31:8-9",
+        "monads": [
           {
             "first": 967934,
             "last": 967998
@@ -4068,8 +4068,8 @@
       {
         "number": 41,
         "title": "High Tech or High Touch?",
-        "subtitle": "2 John 12",
-        "references": [
+        "reference": "2 John 12",
+        "monads": [
           {
             "first": 1774595,
             "last": 1774680
@@ -4079,8 +4079,8 @@
       {
         "number": 42,
         "title": "In Times of Crises and Danger",
-        "subtitle": "Ezekiel 3:16-21",
-        "references": [
+        "reference": "Ezekiel 3:16-21",
+        "monads": [
           {
             "first": 1167884,
             "last": 1168281
@@ -4090,8 +4090,8 @@
       {
         "number": 43,
         "title": "In Times of Joy and Good News",
-        "subtitle": "Acts 19:17-20",
-        "references": [
+        "reference": "Acts 19:17-20",
+        "monads": [
           {
             "first": 1589957,
             "last": 1590178
@@ -4101,8 +4101,8 @@
       {
         "number": 44,
         "title": "In Ways Appropriate for Your Hearers",
-        "subtitle": "1 Corinthians 9:19-23",
-        "references": [
+        "reference": "1 Corinthians 9:19-23",
+        "monads": [
           {
             "first": 1648754,
             "last": 1649143
@@ -4112,8 +4112,8 @@
       {
         "number": 45,
         "title": "Know When to Be Silent",
-        "subtitle": "Ecclesiastes 3:7",
-        "references": [
+        "reference": "Ecclesiastes 3:7",
+        "monads": [
           {
             "first": 971196,
             "last": 971236
@@ -4123,8 +4123,8 @@
       {
         "number": 46,
         "title": "The Right Time and Place to Speak",
-        "subtitle": "Esther 2:10",
-        "references": [
+        "reference": "Esther 2:10",
+        "monads": [
           {
             "first": 789632,
             "last": 789676
@@ -4136,8 +4136,8 @@
       {
         "number": 47,
         "title": "Crossover with FAMILY",
-        "subtitle": "Genesis 49:28",
-        "references": [
+        "reference": "Genesis 49:28",
+        "monads": [
           {
             "first": 85430,
             "last": 85492
@@ -4147,8 +4147,8 @@
       {
         "number": 48,
         "title": "Crossover with ECONOMICS",
-        "subtitle": "Matthew 28:15",
-        "references": [
+        "reference": "Matthew 28:15",
+        "monads": [
           {
             "first": 1404219,
             "last": 1404277
@@ -4158,8 +4158,8 @@
       {
         "number": 49,
         "title": "Crossover with GOVERNMENT",
-        "subtitle": "Proverbs 15:22",
-        "references": [
+        "reference": "Proverbs 15:22",
+        "monads": [
           {
             "first": 951502,
             "last": 951526
@@ -4169,8 +4169,8 @@
       {
         "number": 50,
         "title": "Crossover with RELIGION",
-        "subtitle": "Ecclesiastes 5:1-7",
-        "references": [
+        "reference": "Ecclesiastes 5:1-7",
+        "monads": [
           {
             "first": 972810,
             "last": 973231
@@ -4180,8 +4180,8 @@
       {
         "number": 51,
         "title": "Crossover with EDUCATION",
-        "subtitle": "Proverbs 2:1-2",
-        "references": [
+        "reference": "Proverbs 2:1-2",
+        "monads": [
           {
             "first": 937857,
             "last": 937911
@@ -4191,8 +4191,8 @@
       {
         "number": 52,
         "title": "Crossover with CELEBRATION",
-        "subtitle": "Esther 8:17",
-        "references": [
+        "reference": "Esther 8:17",
+        "monads": [
           {
             "first": 797668,
             "last": 797768
@@ -4206,8 +4206,8 @@
       {
         "number": 1,
         "title": "God’s Kingdom Promotes Righteousness",
-        "subtitle": "Psalm 145:7",
-        "references": [
+        "reference": "Psalm 145:7",
+        "monads": [
           {
             "first": 934089,
             "last": 934125
@@ -4217,8 +4217,8 @@
       {
         "number": 2,
         "title": "God’s Kingdom Promotes Peace",
-        "subtitle": "Colossians 3:15",
-        "references": [
+        "reference": "Colossians 3:15",
+        "monads": [
           {
             "first": 1706551,
             "last": 1706613
@@ -4228,8 +4228,8 @@
       {
         "number": 3,
         "title": "God’s Kingdom Promotes Joy",
-        "subtitle": "Zephaniah 3:16-17",
-        "references": [
+        "reference": "Zephaniah 3:16-17",
+        "monads": [
           {
             "first": 1322523,
             "last": 1322688
@@ -4239,8 +4239,8 @@
       {
         "number": 4,
         "title": "Beauty and Function",
-        "subtitle": "Psalm 19:1",
-        "references": [
+        "reference": "Psalm 19:1",
+        "monads": [
           {
             "first": 849188,
             "last": 849212
@@ -4250,8 +4250,8 @@
       {
         "number": 5,
         "title": "Masterfully Created to Be Master Creators",
-        "subtitle": "Ephesians 2:10",
-        "references": [
+        "reference": "Ephesians 2:10",
+        "monads": [
           {
             "first": 1690330,
             "last": 1690388
@@ -4261,8 +4261,8 @@
       {
         "number": 6,
         "title": "Beauty Within and Without",
-        "subtitle": "Isaiah 53:2",
-        "references": [
+        "reference": "Isaiah 53:2",
+        "monads": [
           {
             "first": 1052025,
             "last": 1052097
@@ -4274,8 +4274,8 @@
       {
         "number": 7,
         "title": "Affirms That We Are Destined for Joy",
-        "subtitle": "Hebrews 12:1-2",
-        "references": [
+        "reference": "Hebrews 12:1-2",
+        "monads": [
           {
             "first": 1746826,
             "last": 1747061
@@ -4285,8 +4285,8 @@
       {
         "number": 8,
         "title": "Creates a Safe and Welcoming Space",
-        "subtitle": "Genesis 18:1-8, 16",
-        "references": [
+        "reference": "Genesis 18:1-8, 16",
+        "monads": [
           {
             "first": 22729,
             "last": 23207
@@ -4300,8 +4300,8 @@
       {
         "number": 9,
         "title": "Creates a Sacred and Restorative Space",
-        "subtitle": "Exodus 25:8-9",
-        "references": [
+        "reference": "Exodus 25:8-9",
+        "monads": [
           {
             "first": 129871,
             "last": 129944
@@ -4311,8 +4311,8 @@
       {
         "number": 10,
         "title": "Releases Gifts of Anointed Craftsmen",
-        "subtitle": "Exodus 35:30-36:1",
-        "references": [
+        "reference": "Exodus 35:30-36:1",
+        "monads": [
           {
             "first": 151324,
             "last": 151712
@@ -4322,8 +4322,8 @@
       {
         "number": 11,
         "title": "Builds Community",
-        "subtitle": "Esther 9:26-28",
-        "references": [
+        "reference": "Esther 9:26-28",
+        "monads": [
           {
             "first": 799546,
             "last": 799804
@@ -4333,8 +4333,8 @@
       {
         "number": 12,
         "title": "Clarifies Identity/Destiny",
-        "subtitle": "Psalm 137:1-6",
-        "references": [
+        "reference": "Psalm 137:1-6",
+        "monads": [
           {
             "first": 929590,
             "last": 929835
@@ -4344,8 +4344,8 @@
       {
         "number": 13,
         "title": "Blessings and Cultural Honor Protocols",
-        "subtitle": "Matthew 26:7-13",
-        "references": [
+        "reference": "Matthew 26:7-13",
+        "monads": [
           {
             "first": 1396339,
             "last": 1396622
@@ -4355,8 +4355,8 @@
       {
         "number": 14,
         "title": "Creates Cultural Heroes/Role Models",
-        "subtitle": "Genesis 10:8-9",
-        "references": [
+        "reference": "Genesis 10:8-9",
+        "monads": [
           {
             "first": 12725,
             "last": 12850
@@ -4366,8 +4366,8 @@
       {
         "number": 15,
         "title": "Promotes True Love",
-        "subtitle": "1 Corinthians 13:4-7",
-        "references": [
+        "reference": "1 Corinthians 13:4-7",
+        "monads": [
           {
             "first": 1655038,
             "last": 1655182
@@ -4377,8 +4377,8 @@
       {
         "number": 16,
         "title": "Strengthens Truth",
-        "subtitle": "Isaiah 42:10-12",
-        "references": [
+        "reference": "Isaiah 42:10-12",
+        "monads": [
           {
             "first": 1037527,
             "last": 1037673
@@ -4388,8 +4388,8 @@
       {
         "number": 17,
         "title": "Reinforces Hope",
-        "subtitle": "Psalm 146:5",
-        "references": [
+        "reference": "Psalm 146:5",
+        "monads": [
           {
             "first": 934795,
             "last": 934860
@@ -4399,8 +4399,8 @@
       {
         "number": 18,
         "title": "Helps Us Cope with Sorrow",
-        "subtitle": "Ecclesiastes 7:1-4",
-        "references": [
+        "reference": "Ecclesiastes 7:1-4",
+        "monads": [
           {
             "first": 974697,
             "last": 974857
@@ -4410,8 +4410,8 @@
       {
         "number": 19,
         "title": "Catalyst for Good or Corrupted for Evil?",
-        "subtitle": "Numbers 21:8-9",
-        "references": [
+        "reference": "Numbers 21:8-9",
+        "monads": [
           {
             "first": 257050,
             "last": 257182
@@ -4421,8 +4421,8 @@
       {
         "number": 20,
         "title": "Use and Abuse of the Arts",
-        "subtitle": "2 Timothy 3:4",
-        "references": [
+        "reference": "2 Timothy 3:4",
+        "monads": [
           {
             "first": 1725140,
             "last": 1725182
@@ -4434,8 +4434,8 @@
       {
         "number": 21,
         "title": "Affirmation of Creation and Community",
-        "subtitle": "1 John 1:1-4",
-        "references": [
+        "reference": "1 John 1:1-4",
+        "monads": [
           {
             "first": 1767303,
             "last": 1767625
@@ -4445,8 +4445,8 @@
       {
         "number": 22,
         "title": "Taste: An Enjoyable Gift",
-        "subtitle": "Ecclesiastes 2:24-26",
-        "references": [
+        "reference": "Ecclesiastes 2:24-26",
+        "monads": [
           {
             "first": 970753,
             "last": 970956
@@ -4456,8 +4456,8 @@
       {
         "number": 23,
         "title": "Taste: Culinary Excellence Shows Honor",
-        "subtitle": "1 Samuel 9:22-24",
-        "references": [
+        "reference": "1 Samuel 9:22-24",
+        "monads": [
           {
             "first": 444366,
             "last": 444564
@@ -4467,8 +4467,8 @@
       {
         "number": 24,
         "title": "Touch: Strengthens Relationship",
-        "subtitle": "1 Samuel 18:4",
-        "references": [
+        "reference": "1 Samuel 18:4",
+        "monads": [
           {
             "first": 462255,
             "last": 462305
@@ -4478,8 +4478,8 @@
       {
         "number": 25,
         "title": "Touch: Displays True Love",
-        "subtitle": "Luke 7:36-47",
-        "references": [
+        "reference": "Luke 7:36-47",
+        "monads": [
           {
             "first": 1460392,
             "last": 1461175
@@ -4489,8 +4489,8 @@
       {
         "number": 26,
         "title": "Smell: Identity and Connections",
-        "subtitle": "Genesis 27:26-27",
-        "references": [
+        "reference": "Genesis 27:26-27",
+        "monads": [
           {
             "first": 41210,
             "last": 41345
@@ -4500,8 +4500,8 @@
       {
         "number": 27,
         "title": "Smell: Triggers Opposing Reactions",
-        "subtitle": "2 Corinthians 2:14-16",
-        "references": [
+        "reference": "2 Corinthians 2:14-16",
+        "monads": [
           {
             "first": 1664768,
             "last": 1664988
@@ -4511,8 +4511,8 @@
       {
         "number": 28,
         "title": "Sound: Carries Cultural Stories",
-        "subtitle": "Judges 5:11",
-        "references": [
+        "reference": "Judges 5:11",
+        "monads": [
           {
             "first": 393464,
             "last": 393557
@@ -4522,8 +4522,8 @@
       {
         "number": 29,
         "title": "Sound: Declares Redemptive Hopes",
-        "subtitle": "Psalm 150",
-        "references": [
+        "reference": "Psalm 150",
+        "monads": [
           {
             "first": 936464,
             "last": 936638
@@ -4533,8 +4533,8 @@
       {
         "number": 30,
         "title": "Sight: Dramatic Arts in the Scriptures",
-        "subtitle": "2 Samuel 14:1-11",
-        "references": [
+        "reference": "2 Samuel 14:1-11",
+        "monads": [
           {
             "first": 505815,
             "last": 506584
@@ -4544,8 +4544,8 @@
       {
         "number": 31,
         "title": "Sight: Visual Arts in the Scriptures",
-        "subtitle": "Ezekiel 37:1-10",
-        "references": [
+        "reference": "Ezekiel 37:1-10",
+        "monads": [
           {
             "first": 1223414,
             "last": 1224067
@@ -4557,8 +4557,8 @@
       {
         "number": 32,
         "title": "The Inner Life of the Prophet/Artist",
-        "subtitle": "Habakkuk 1:1",
-        "references": [
+        "reference": "Habakkuk 1:1",
+        "monads": [
           {
             "first": 1316025,
             "last": 1316049
@@ -4568,8 +4568,8 @@
       {
         "number": 33,
         "title": "Use of the Dramatic Arts",
-        "subtitle": "1 Kings 11:29-39",
-        "references": [
+        "reference": "1 Kings 11:29-39",
+        "monads": [
           {
             "first": 556916,
             "last": 557758
@@ -4579,8 +4579,8 @@
       {
         "number": 34,
         "title": "Use of the Literary Arts",
-        "subtitle": "Lamentations 1:1",
-        "references": [
+        "reference": "Lamentations 1:1",
+        "monads": [
           {
             "first": 1157441,
             "last": 1157511
@@ -4590,8 +4590,8 @@
       {
         "number": 35,
         "title": "Use of the Musical Arts",
-        "subtitle": "2 Kings 3:15",
-        "references": [
+        "reference": "2 Kings 3:15",
+        "monads": [
           {
             "first": 587449,
             "last": 587510
@@ -4601,8 +4601,8 @@
       {
         "number": 36,
         "title": "The Whole Church as Artists",
-        "subtitle": "Ephesians 3:10",
-        "references": [
+        "reference": "Ephesians 3:10",
+        "monads": [
           {
             "first": 1691677,
             "last": 1691740
@@ -4612,8 +4612,8 @@
       {
         "number": 37,
         "title": "Individual Financing of the Arts",
-        "subtitle": "2 Kings 4:8-11",
-        "references": [
+        "reference": "2 Kings 4:8-11",
+        "monads": [
           {
             "first": 588880,
             "last": 589138
@@ -4623,8 +4623,8 @@
       {
         "number": 38,
         "title": "Corporate Financing of the Arts",
-        "subtitle": "1 Chronicles 25:1-8",
-        "references": [
+        "reference": "1 Chronicles 25:1-8",
+        "monads": [
           {
             "first": 676704,
             "last": 677351
@@ -4634,8 +4634,8 @@
       {
         "number": 39,
         "title": "Repetitive Events Platforming the Arts",
-        "subtitle": "Nahum 1:15",
-        "references": [
+        "reference": "Nahum 1:15",
+        "monads": [
           {
             "first": 1314046,
             "last": 1314164
@@ -4645,8 +4645,8 @@
       {
         "number": 40,
         "title": "Unique Events Platforming the Arts",
-        "subtitle": "Revelation 7:9-12",
-        "references": [
+        "reference": "Revelation 7:9-12",
+        "monads": [
           {
             "first": 1786154,
             "last": 1786418
@@ -4658,8 +4658,8 @@
       {
         "number": 41,
         "title": "Jesus Employed Humor",
-        "subtitle": "Luke 14:18-21",
-        "references": [
+        "reference": "Luke 14:18-21",
+        "monads": [
           {
             "first": 1480357,
             "last": 1480575
@@ -4669,8 +4669,8 @@
       {
         "number": 42,
         "title": "Jesus Sang and Quoted Songs",
-        "subtitle": "Mark 15:34",
-        "references": [
+        "reference": "Mark 15:34",
+        "monads": [
           {
             "first": 1439866,
             "last": 1439942
@@ -4680,8 +4680,8 @@
       {
         "number": 43,
         "title": "Jesus Attended Celebratory Events",
-        "subtitle": "John 2:1-11",
-        "references": [
+        "reference": "John 2:1-11",
+        "monads": [
           {
             "first": 1507553,
             "last": 1508106
@@ -4691,8 +4691,8 @@
       {
         "number": 44,
         "title": "Jesus Created Celebratory Events",
-        "subtitle": "1 Corinthians 11:23-26",
-        "references": [
+        "reference": "1 Corinthians 11:23-26",
+        "monads": [
           {
             "first": 1652333,
             "last": 1652628
@@ -4704,8 +4704,8 @@
       {
         "number": 45,
         "title": "Target Practice",
-        "subtitle": "1 Samuel 20:18-42",
-        "references": [
+        "reference": "1 Samuel 20:18-42",
+        "monads": [
           {
             "first": 466495,
             "last": 468086
@@ -4715,8 +4715,8 @@
       {
         "number": 46,
         "title": "Disciplined Training",
-        "subtitle": "1 Corinthians 9:24-27",
-        "references": [
+        "reference": "1 Corinthians 9:24-27",
+        "monads": [
           {
             "first": 1649144,
             "last": 1649340
@@ -4728,8 +4728,8 @@
       {
         "number": 47,
         "title": "Crossover with FAMILY",
-        "subtitle": "Genesis 21:8",
-        "references": [
+        "reference": "Genesis 21:8",
+        "monads": [
           {
             "first": 28477,
             "last": 28519
@@ -4739,8 +4739,8 @@
       {
         "number": 48,
         "title": "Crossover with ECONOMICS",
-        "subtitle": "Proverbs 17:22",
-        "references": [
+        "reference": "Proverbs 17:22",
+        "monads": [
           {
             "first": 953599,
             "last": 953631
@@ -4750,8 +4750,8 @@
       {
         "number": 49,
         "title": "Crossover with GOVERNMENT",
-        "subtitle": "1 Kings 1:32-40",
-        "references": [
+        "reference": "1 Kings 1:32-40",
+        "monads": [
           {
             "first": 531347,
             "last": 531929
@@ -4761,8 +4761,8 @@
       {
         "number": 50,
         "title": "Crossover with RELIGION",
-        "subtitle": "Acts 16:25-34",
-        "references": [
+        "reference": "Acts 16:25-34",
+        "monads": [
           {
             "first": 1584433,
             "last": 1584901
@@ -4772,8 +4772,8 @@
       {
         "number": 51,
         "title": "Crossover with EDUCATION",
-        "subtitle": "Deuteronomy 31:19-22",
-        "references": [
+        "reference": "Deuteronomy 31:19-22",
+        "monads": [
           {
             "first": 339794,
             "last": 340111
@@ -4783,8 +4783,8 @@
       {
         "number": 52,
         "title": "Crossover with MEDIA/COMMUNICATION",
-        "subtitle": "Matthew 13:34",
-        "references": [
+        "reference": "Matthew 13:34",
+        "monads": [
           {
             "first": 1369592,
             "last": 1369645
