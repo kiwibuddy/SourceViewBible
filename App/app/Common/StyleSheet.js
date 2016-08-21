@@ -126,7 +126,6 @@ const styles = {
     body: {
       color: '#59626a',
       fontSize: 13,
-      lineHeight: 20,
     },
     bodybold: {
       color: '#59626a',
@@ -135,10 +134,11 @@ const styles = {
     },
     occurrence: {
       color: '#D8D8D8',
-      fontSize: 15,
+      fontSize: 13,
       fontWeight: 'bold',
       width: 30,
       textAlign: 'right',
+      paddingTop: 8,
     },
   },
   separator: {
