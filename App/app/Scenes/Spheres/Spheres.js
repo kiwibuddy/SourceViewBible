@@ -62,8 +62,11 @@ export default class Spheres extends Component {
   render() {
     const { sphere } = this.state;
 
-    const sphereView = this._renderFoundationalSphere();
-    return sphereView;
+    if (sphere.isFoundational) {
+      return this._renderFoundationalSphere();
+    } else {
+      return this._renderSphere(sphere);
+    }
   }
 
   _renderHeader = () => {
@@ -85,7 +88,6 @@ export default class Spheres extends Component {
 
     const carouselIcons = sortedSpheres.map(sphere => this._renderCarouselIcon(sphere));
 
-    const sphereView = (sphere.isFoundational ? this._renderFoundationalSphere(sphere) : this._renderSphere(sphere));
     const sphereSubtitle = (sphere.isFoundational ? ' ' : Localizable.toPercentage(spherePercent, {precision: 0}));
 
     return (
@@ -158,8 +160,11 @@ export default class Spheres extends Component {
 
     const books = this._getBooks(sphere);
     const bookRows = books.map(book => this._renderBookRow(book));
+
+    const header = this._renderHeader();
     return (
-      <View>
+      <ScrollView style={styles.container}>
+        {header}
         <View style={styles.carouselGraphContainer}>
           <View style={[styles.carouselGraph, {backgroundColor: colors.tint, flex: spherePercent}]} />
           <View style={[styles.carouselGraph, {flex: 100-spherePercent}]} />
@@ -227,7 +232,7 @@ export default class Spheres extends Component {
           <Text style={[StyleSheet.styles.cell.titlemore, {color: colors.chromeTint}]}>View More</Text>
           <Image source={require('../../Images/common/disclosure.png')}  style={styles.disclosure} />
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     );
   };
 
