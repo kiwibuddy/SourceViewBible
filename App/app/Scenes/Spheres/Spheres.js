@@ -452,10 +452,12 @@ const styles = StyleSheet.create({
   sourcesLeftContainer: {
     flex: 1,
     flexDirection: 'row',
-    paddingTop: 2,
+    alignSelf: 'center',
   },
   sourcesRightContainer: {
     flex: 1,
+    marginRight: 8,
+    alignSelf: 'center',
   },
   dataPair: {
     flex: 1,
