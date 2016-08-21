@@ -11,6 +11,7 @@ import {
   RecyclerViewBackedScrollView,
   ScrollView,
   Text,
+  TextInput,
   View,
   TouchableOpacity
 } from 'react-native';
@@ -99,7 +100,7 @@ export default class SphereSources extends Component {
         renderHeader={this._renderHeader}
         renderRow={this._renderRow}
         renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
-        renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={StyleSheet.styles.separator} />}
+        renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={[StyleSheet.styles.separator, {marginLeft: 8}]} />}
       />
     );
   }
@@ -123,13 +124,18 @@ export default class SphereSources extends Component {
           {this._renderPie({source: sources[8], size: 50, subtitleStyle: {fontSize: 10}, titleStyle: {fontSize: 13}, style: [styles.pie, {top: 15, right: -10}]})}
           {this._renderPie({source: sources[9], size: 50, subtitleStyle: {fontSize: 10}, titleStyle: {fontSize: 13}, style: [styles.pie, {top: 145, left: -5}]})}
         </ScrollView>
-        <SegmentedControl
-          style={styles.segmentedControl}
-          tintColor={'#59626A'}
-          values={SEGMENTS}
-          selectedIndex={this.state.selectedSegmentIndex}
-          onValueChange={(value) => this._onSegmentedControlValueChanged(SEGMENTS.indexOf(value))}
-        />
+        <View style={styles.textInputContainer}>
+          <TextInput
+            autoCapitalize="words"
+            autoCorrect={false}
+            autoFocus={false}
+            clearButtonMode="always"
+            onChangeText={(text) => this.setState({search: text})}
+            placeholder={Localizable.t('name')}
+            style={styles.textInput}
+            value={this.state.search || ''}
+          />
+        </View>
       </View>
     );
   };
@@ -235,6 +241,17 @@ export default class SphereSources extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  textInput: {
+    fontSize: 14,
+    backgroundColor: '#ececec',
+    borderColor: '#ececec',
+    borderRadius: 3,
+    borderWidth: 1,
+    paddingLeft: 8,
+    marginHorizontal: 8,
+    marginVertical: 8,
+    height: 26,
   },
   sphereSourcesGraph: {
     height: 200,
