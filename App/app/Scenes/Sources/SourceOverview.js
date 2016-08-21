@@ -262,7 +262,6 @@ export default class SourceOverview extends Component {
             <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('occurrences.count', {count: occurrenceCount, localizedCount: Localizable.toNumber(occurrenceCount, {precision: 0})})}</Text>
           </View>
         </View>
-        <View style={[StyleSheet.styles.separator, {marginLeft: 0}]}></View>
       </TouchableOpacity>
     );
   };
