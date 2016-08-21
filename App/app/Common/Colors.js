@@ -60,6 +60,16 @@ module.exports = {
   },
 
   spheres: {
+    foundational: {
+      tint: '#7B7D82',
+      lightTint: '#E8E8E8',
+      chromeTint: '#7B7D82',
+      highlightTint: '#E8E8E8',
+      gradient: {
+        big:['#7B7D82', '#E8E8E8'],
+        tiny: ['#7B7D82', '#E8E8E8']
+      }
+    },
     family: {
       tint: '#FF3A2E',
       lightTint: '#ffdcda',

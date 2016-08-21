@@ -66,7 +66,7 @@ export default class Spheres extends Component {
     const books = this._getBooks(sphere);
     const bookRows = books.map(book => this._renderBookRow(book));
 
-    const spheres = Sphere.all();
+    const spheres = Sphere.all({foundational: true});
     const sphereCount = spheres.length;
 
     let sphereIndex = 0;
@@ -91,15 +91,21 @@ export default class Spheres extends Component {
         >
           <View style={styles.carousel}>
             <TouchableOpacity
+              key={'sphere-' + sortedSpheres[7].id}
+              onPress={() => this._onPressSphere(sortedSpheres[7])}
+              style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE*1.3, right: (WIDTH/2) - (CAROUSEL_ITEM_SIZE/2.2), transform:[{scale:0.65}]}]}>
+              {carouselIcons[7]}
+            </TouchableOpacity>
+            <TouchableOpacity
               key={'sphere-' + sortedSpheres[3].id}
               onPress={() => this._onPressSphere(sortedSpheres[3])}
-              style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE*1.2, right: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2) - (CAROUSEL_ITEM_SIZE/2.2), transform:[{scale:0.7}]}]}>
+              style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE*1.2, right: (WIDTH/2 - CAROUSEL_ITEM_SIZE/1.4) - (CAROUSEL_ITEM_SIZE/2.2), transform:[{scale:0.7}]}]}>
               {carouselIcons[3]}
             </TouchableOpacity>
             <TouchableOpacity
               key={'sphere-' + sortedSpheres[4].id}
               onPress={() => this._onPressSphere(sortedSpheres[4])}
-              style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE*1.2, left: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2) - (CAROUSEL_ITEM_SIZE/2.2), transform:[{scale:0.7}]}]}>
+              style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE*1.2, left: (WIDTH/2 - CAROUSEL_ITEM_SIZE/1.25) - (CAROUSEL_ITEM_SIZE/2.2), transform:[{scale:0.7}]}]}>
               {carouselIcons[4]}
             </TouchableOpacity>
             <TouchableOpacity
@@ -244,7 +250,7 @@ export default class Spheres extends Component {
     if (props.sphereID) {
       sphere = Sphere.findByID(props.sphereID);
     } else {
-      sphere = Sphere.all()[0];
+      sphere = Sphere.all({foundational: true})[0];
     }
 
     const books = this._getBooks(sphere);

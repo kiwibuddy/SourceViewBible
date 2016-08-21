@@ -687,9 +687,9 @@ export class Sphere extends Realm.Object {
     'celebration',
   ];
 
-  static all(foundational: ?boolean) {
+  static all(options: ?Object) {
     let spheres = realm.objects('Sphere');
-    if (!foundational) spheres = spheres.filtered('position > 0');
+    if (!options || options.foundational !== true) spheres = spheres.filtered('position > 0');
     return spheres.sorted('position');
   }
 
