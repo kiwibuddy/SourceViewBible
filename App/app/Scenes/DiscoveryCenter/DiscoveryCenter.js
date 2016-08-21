@@ -31,7 +31,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigation';
 
-import { BACK, occurrencesURL } from '../../Navigation';
+import { BACK, discoveryCenterURL, occurrencesURL } from '../../Navigation';
 
 import { Discovery } from '../../Preferences';
 import Query from './Query';
@@ -201,7 +201,11 @@ export default class DiscoveryCenter extends Component {
   async _onPressOccurrences(card: Object) {
     const query = new Query(card);
     const occurrences = await query.occurrences();
-    this.props.navigate(occurrencesURL({title: Localizable.t('passages'), occurrences, modal: true}), {replace: true});
+    const onPressBack = () => {
+      this.props.navigate(discoveryCenterURL({title: Localizable.t('discovery-center'), modal: true}), {replace: true});
+    }
+
+    this.props.navigate(occurrencesURL({title: Localizable.t('passages'), occurrences, modal: true, onPressBack}), {replace: true});
   };
 
   _showPopover = (props: Object, onComplete: Function) => {

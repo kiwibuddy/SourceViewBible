@@ -23,7 +23,7 @@ import {
 
 import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigation';
 
-import { BACK, discoveryCenterURL, occurrencesURL, readerURL } from '../../Navigation';
+import { BACK, occurrencesURL, readerURL } from '../../Navigation';
 
 import Emdros from '../../API/Emdros';
 import { BookSourceOccurrence, Role } from '../../Database';
@@ -32,6 +32,7 @@ import Query from '../DiscoveryCenter/Query';
 type Props = {
   occurrences: Object,
   navigate: Function,
+  onPressBack: Function
 };
 
 type State = {
@@ -67,7 +68,7 @@ export default class DiscoveryCenterOccurrences extends Component {
       <View style={styles.container}>
         <NavigationBar title={Localizable.t('passages')}>
           <TouchableOpacity
-            onPress={() => this.props.navigate(discoveryCenterURL({title: Localizable.t('discovery-center'), modal: true}), {replace: true})}
+            onPress={this.props.onPressBack}
             style={{position: 'absolute', left: 16}}
           >
             <Text style={StyleSheet.styles.navigationBar.doneButtonTitle}>{Localizable.t('back')}</Text>
@@ -85,7 +86,7 @@ export default class DiscoveryCenterOccurrences extends Component {
   }
 
   _renderRow = (occurrence: Object, sectionID: any, rowID: any) => {
-    const { occurrences } = this.props;
+    const { occurrences, onPressBack } = this.props;
     const occurrenceIndex = parseInt(rowID);
     const number = occurrenceIndex + 1;
     const book = occurrence.book;
@@ -93,7 +94,7 @@ export default class DiscoveryCenterOccurrences extends Component {
 
     const bcvReference = Localizable.t('bcv-reference', {book: book.name, reference: occurrence.reference});
     const bsoReference = Localizable.t('bso-reference', {book: book.name, source: occurrence.name, number: occurrence.number});
-    const occurrencesRoute = occurrencesURL({title: Localizable.t('passages'), occurrences, modal: true});
+    const occurrencesRoute = occurrencesURL({title: Localizable.t('passages'), occurrences, onPressBack, modal: true});
 
     const route = readerURL({bookID: book.id, anchor: `source-${occurrence.name}-${occurrence.number}`, title: book.name, description: bsoReference, occurrenceIndex, occurrences, occurrencesRoute});
 
