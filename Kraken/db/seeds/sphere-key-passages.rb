@@ -188,17 +188,14 @@ end
 json = {}
 
 ["Foundational", "Family", "Economics", "Religion", "Government", "Education", "Communication", "Celebration"].each do |sphere_name|
-  sphere = {}
+  sphere = []
   filename = File.expand_path("../../SVB2/Spheres/KeyPassages/#{sphere_name}-Table 1.csv")
   rows = CSV.open(filename, headers: true).read
   sectionKey = nil
-  section = nil
   rows.each do |row|
     next if row["index"].nil?
     if row["index"].to_i == 0
       sectionKey = row["index"]
-      section = []
-      sphere[sectionKey] = section
     else
       if pericope = Pericope.parse_one(row["reference"])
         monads = references_from_pericope(pericope).map do |reference|
@@ -214,8 +211,8 @@ json = {}
               first_verse_object = verse_objects.first
               last_verse_object = verse_objects.last
               monads = {
-                "first": first_verse_object[:first_monad],
-                "last": last_verse_object[:last_monad],
+                "firstMonad": first_verse_object[:first_monad],
+                "lastMonad": last_verse_object[:last_monad],
               }
             else
               STDERR.puts "No result for #{sql}"
@@ -226,7 +223,8 @@ json = {}
           monads
         end
 
-        section << {
+        sphere << {
+          "section" => sectionKey,
           "number" => row["index"].to_i,
           "title" => row["title"],
           "reference" => pericope.to_s,

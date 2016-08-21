@@ -14,19 +14,22 @@ const SPHERES = [
 ];
 
 const SPHERE_DESCRIPTIONS = require('../spheres');
+const SPHERE_PASSAGES = require('../../db/seeds/sphere-key-passages');
 
 export async function seedSphereObjects(emdros: Object, realm: Object) {
   console.log('Seeding Sphere Objects...');
 
   realm.write(() => {
-    const description = SPHERE_DESCRIPTIONS.foundational.description
-    realm.create('Sphere', {id: "foundational", name: "Foundational", description, position: 0});
+    const description = SPHERE_DESCRIPTIONS.foundational.description;
+    const passages = SPHERE_PASSAGES['Foundational'];
+    realm.create('Sphere', {id: "foundational", name: "Foundational", description, position: 0, passages});
   });
 
   SPHERES.forEach(sphere => {
     realm.write(() => {
-      const description = SPHERE_DESCRIPTIONS[sphere.id].description
-      realm.create('Sphere', {...sphere, description});
+      const description = SPHERE_DESCRIPTIONS[sphere.id].description;
+      const passages = SPHERE_PASSAGES[sphere.name];
+      realm.create('Sphere', {...sphere, description, passages});
     });
   })
 }

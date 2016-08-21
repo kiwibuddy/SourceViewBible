@@ -551,6 +551,18 @@ export class Gender {
   }
 }
 
+const MonadSetSchema = {
+  name: 'MonadSet',
+  properties: {
+    firstMonad: 'int',
+    lastMonad: 'int'
+  }
+}
+export class MonadSet extends Realm.Object {
+
+}
+MonadSet.schema = MonadSetSchema;
+
 const NatureSchema = {
   name: 'Nature',
   primaryKey: 'id',
@@ -681,6 +693,7 @@ const SphereSchema = {
     bookCounts: {type: 'list', objectType: 'Count'},
     wordCount: {type: 'int', default: 0},
     words: {type: 'list', objectType: 'Count'},
+    passages: {type: 'list', objectType: 'SpherePassage'},
   }
 };
 
@@ -737,7 +750,23 @@ export class Sphere extends Realm.Object {
 }
 Sphere.schema = SphereSchema;
 
-const Schema = [Actant, Bible, Book, BookSourceOccurrence, Chapter, Chronology, Nature, Profession, SourceRelation, Sphere, Count, Content];
+const SpherePassageSchema = {
+  name: 'SpherePassage',
+  properties: {
+    section: 'string',
+    number: 'int',
+    title: 'string',
+    reference: 'string',
+    monads: {type: 'list', objectType: 'MonadSet'},
+  }
+}
+
+export class SpherePassage extends Realm.Object {
+
+}
+SpherePassage.schema = SpherePassageSchema;
+
+const Schema = [Actant, Bible, Book, BookSourceOccurrence, Chapter, Chronology, MonadSet, Nature, Profession, SourceRelation, Sphere, SpherePassage, Count, Content];
 
 const realm = new Realm({
   schema: Schema,
