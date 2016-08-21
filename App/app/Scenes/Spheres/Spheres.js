@@ -109,10 +109,10 @@ export default class Spheres extends Component {
       >
         <View style={styles.carousel}>
           <TouchableOpacity
-            key={'sphere-' + sortedSpheres[7].id}
-            onPress={() => this._onPressSphere(sortedSpheres[7])}
+            key={'sphere-' + sortedSpheres[4].id}
+            onPress={() => this._onPressSphere(sortedSpheres[4])}
             style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE*1.3, right: (WIDTH/2) - (CAROUSEL_ITEM_SIZE/2.2), transform:[{scale:0.65}]}]}>
-            {carouselIcons[7]}
+            {carouselIcons[4]}
           </TouchableOpacity>
           <TouchableOpacity
             key={'sphere-' + sortedSpheres[3].id}
@@ -121,10 +121,10 @@ export default class Spheres extends Component {
             {carouselIcons[3]}
           </TouchableOpacity>
           <TouchableOpacity
-            key={'sphere-' + sortedSpheres[4].id}
-            onPress={() => this._onPressSphere(sortedSpheres[4])}
+            key={'sphere-' + sortedSpheres[5].id}
+            onPress={() => this._onPressSphere(sortedSpheres[5])}
             style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE*1.2, left: (WIDTH/2 - CAROUSEL_ITEM_SIZE/1.25) - (CAROUSEL_ITEM_SIZE/2.2), transform:[{scale:0.7}]}]}>
-            {carouselIcons[4]}
+            {carouselIcons[5]}
           </TouchableOpacity>
           <TouchableOpacity
             key={'sphere-' + sortedSpheres[2].id}
@@ -133,10 +133,10 @@ export default class Spheres extends Component {
             {carouselIcons[2]}
           </TouchableOpacity>
           <TouchableOpacity
-            key={'sphere-' + sortedSpheres[5].id}
-            onPress={() => this._onPressSphere(sortedSpheres[5])}
+            key={'sphere-' + sortedSpheres[6].id}
+            onPress={() => this._onPressSphere(sortedSpheres[6])}
             style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE/1.25, left: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2.5) - (CAROUSEL_ITEM_SIZE*1.5), transform:[{scale:0.8}]}]}>
-            {carouselIcons[5]}
+            {carouselIcons[6]}
           </TouchableOpacity>
           <TouchableOpacity
             key={'sphere-' + sortedSpheres[1].id}
@@ -145,10 +145,10 @@ export default class Spheres extends Component {
             {carouselIcons[1]}
           </TouchableOpacity>
           <TouchableOpacity
-            key={'sphere-' + sortedSpheres[6].id}
-            onPress={() => this._onPressSphere(sortedSpheres[6])}
+            key={'sphere-' + sortedSpheres[7].id}
+            onPress={() => this._onPressSphere(sortedSpheres[7])}
             style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE/2, left: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2.5) - (CAROUSEL_ITEM_SIZE), transform:[{scale:0.9}]}]}>
-            {carouselIcons[6]}
+            {carouselIcons[7]}
           </TouchableOpacity>
           <TouchableOpacity
             key={'sphere-' + sortedSpheres[0].id}
