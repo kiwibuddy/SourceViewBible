@@ -39,14 +39,6 @@ import { readerURL } from '../../Navigation';
 
 import { Actant, Sphere } from '../../Database';
 
-const SEGMENTS = [Localizable.t('alphabetical'), Localizable.t('percentage')];
-const SEGMENT_INDEXES = {
-  ALPHABETICAL: 0,
-  PRINCIPALITY: 1
-};
-
-const SORT_PREFERENCE = Preference.Keys.Spheres.SourcesSort;
-
 type Props = {
   navigate: Function,
   sphereID: string,
@@ -54,8 +46,8 @@ type Props = {
 
 type State = {
   dataSource: any,
-  selectedSegmentIndex: number,
   sphere: Object,
+  search: ?string,
 };
 
 type PieProps = {
@@ -75,28 +67,20 @@ export default class SphereSources extends Component {
     super(props);
 
     const sphere = Sphere.findByID(props.sphereID);
-    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
-
-    let selectedSegmentIndex = Preference.numberForKey(SORT_PREFERENCE);
-    if (selectedSegmentIndex == null) selectedSegmentIndex = SEGMENT_INDEXES.PRINCIPALITY;
+    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id});
 
     this.state = {
       dataSource: dataSource,
       sphere,
-      selectedSegmentIndex
+      search: null
     };
   }
 
-  componentDidMount() {
-    this.setState({
-      dataSource: this._getDataSource(this.state.selectedSegmentIndex)
-    });
-  }
-
   render() {
+    const dataSource = this._getDataSource();
     return (
       <ListView
-        dataSource={this.state.dataSource}
+        dataSource={dataSource}
         renderHeader={this._renderHeader}
         renderRow={this._renderRow}
         renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
@@ -205,31 +189,23 @@ export default class SphereSources extends Component {
     return (this._getCountOfSource(source) / source.wordCount) * 100;
   };
 
-  _getDataSource = (segmentIndex: number) => {
-    const { sphere } = this.state;
+  _getDataSource = () => {
+    const { sphere, search } = this.state;
 
-    switch (segmentIndex) {
-      case SEGMENT_INDEXES.ALPHABETICAL:
-        return this.state.dataSource.cloneWithRowsAndSections({alphabetical: Actant.sources().sorted('name')});
-
-      default:
-        return this.state.dataSource.cloneWithRowsAndSections({percentage: this._sourceSortedByPercentage()});
+    let sources = null;
+    if (search) {
+      sources = Actant.sources(search);
+    } else {
+      sources = this._sourceSortedByPercentage();
     }
+
+    return this.state.dataSource.cloneWithRows(sources);
   };
 
   _sourceSortedByPercentage = () => {
     const { sphere } = this.state;
     return sphere.sourceCounts.map(count => Actant.findByID(parseInt(count.string)));
   }
-
-  _onSegmentedControlValueChanged = (value: number) => {
-    Preference.setNumberForKey(value, SORT_PREFERENCE);
-
-    this.setState({
-      selectedSegmentIndex: value,
-      dataSource: this._getDataSource(value)
-    });
-  };
 
   _onPressSource = (source: Object) => {
     const book = source.books[0];

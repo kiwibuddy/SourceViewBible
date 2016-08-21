@@ -23,7 +23,6 @@ const Keys = {
   },
   Spheres: {
     FoundationalSort: PREFIX + '.spheres.foundational.sort',
-    SourcesSort: PREFIX + '.spheres.sources.sort',
   },
 };
 Preference.Keys = Keys;
