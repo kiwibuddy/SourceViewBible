@@ -32,7 +32,8 @@ import Query from '../DiscoveryCenter/Query';
 type Props = {
   occurrences: Object,
   navigate: Function,
-  onPressBack: Function
+  onPressBack: Function,
+  backTitle: ?string,
 };
 
 type State = {
@@ -64,6 +65,7 @@ export default class DiscoveryCenterOccurrences extends Component {
   }
 
   render() {
+    const backTitle = this.props.backTitle ? this.props.backTitle : Localizable.t('back');
     return (
       <View style={styles.container}>
         <NavigationBar title={Localizable.t('passages')}>
@@ -71,7 +73,7 @@ export default class DiscoveryCenterOccurrences extends Component {
             onPress={this.props.onPressBack}
             style={{position: 'absolute', left: 16}}
           >
-            <Text style={StyleSheet.styles.navigationBar.doneButtonTitle}>{Localizable.t('back')}</Text>
+            <Text style={StyleSheet.styles.navigationBar.doneButtonTitle}>{backTitle}</Text>
           </TouchableOpacity>
         </NavigationBar>
         <ListView

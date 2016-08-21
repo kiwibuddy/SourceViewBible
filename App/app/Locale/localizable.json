@@ -102,6 +102,7 @@
     "done": "Done",
     "cancel": "Cancel",
     "back": "Back",
+    "close": "Close",
     "passages": "Passages",
     "bcv-reference": "{{book}} {{reference}}",
     "so-reference": "{{source}} {{number}}",

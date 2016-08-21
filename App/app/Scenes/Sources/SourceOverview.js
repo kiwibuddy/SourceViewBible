@@ -415,8 +415,11 @@ export default class SourceOverview extends Component {
     if (occurrences.length > 0) {
       const occurrence = occurrences[0];
       const bsoReference = Localizable.t('bso-reference', {book: occurrence.book.name, source: occurrence.name, number: occurrence.number});
-      const occurrencesRoute = occurrencesURL({title: Localizable.t('passages'), occurrences, modal: true});
 
+      const onPressBack = () => {
+        this.props.navigate(BACK);
+      }
+      const occurrencesRoute = occurrencesURL({title: Localizable.t('passages'), occurrences, modal: true, onPressBack, backTitle: Localizable.t('close')});
       const route = readerURL({bookID: occurrence.book.id, anchor: `source-${occurrence.name}-${occurrence.number}`, title: occurrence.book.name, description: bsoReference,  occurrenceIndex: 0, occurrences, occurrencesRoute});
       this.props.navigate(route);
     }
