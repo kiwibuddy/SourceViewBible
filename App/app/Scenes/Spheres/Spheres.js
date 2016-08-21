@@ -36,7 +36,7 @@ import { Preference } from '../../Preferences';
 import FoundationalSphere from './FoundationalSphere';
 
 const SphereIcons = {
-  'foundational': require('./Images/sphere-all.png'),
+  'foundational': require('./Images/sphere-foundational.png'),
   'family': require('./Images/sphere-family.png'),
   'economics': require('./Images/sphere-economics.png'),
   'government': require('./Images/sphere-government.png'),

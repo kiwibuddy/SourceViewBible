@@ -105,6 +105,7 @@ export default class FoundationalSphere extends Component {
     return (
       <View>
         {header}
+        <View style={StyleSheet.styles.statisticsContainer} />
         <TouchableOpacity style={[styles.readButton, {backgroundColor: colors.chromeTint, borderColor: colors.chromeTint}]} onPress={() => this.props.navigate(spherePassagesURL({sphereID: sphere.id, title: Localizable.t('sphere-passages', {name: sphere.name})}))}>
           <Text style={styles.readButtonTitle}>Explore 52 key passages</Text>
         </TouchableOpacity>
