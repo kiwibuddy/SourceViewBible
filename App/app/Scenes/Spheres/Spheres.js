@@ -35,6 +35,17 @@ import { Preference } from '../../Preferences';
 
 import FoundationalSphere from './FoundationalSphere';
 
+const SphereIcons = {
+  'foundational': require('./Images/sphere-all.png'),
+  'family': require('./Images/sphere-family.png'),
+  'economics': require('./Images/sphere-economics.png'),
+  'government': require('./Images/sphere-government.png'),
+  'religion': require('./Images/sphere-religion.png'),
+  'education': require('./Images/sphere-education.png'),
+  'communication': require('./Images/sphere-communication.png'),
+  'celebration': require('./Images/sphere-celebration.png')
+};
+
 type Props = {
   sphereID?: string,
   navigate: Function,
@@ -293,12 +304,11 @@ export default class Spheres extends Component {
   };
 
   _renderCarouselIcon = (sphere: Object) => {
-    const iconName = `${sphere.id}-filled`;
+    const iconName = SphereIcons[sphere.id];
     return (
-      <Icon
-        name={iconName}
-        size={CAROUSEL_ITEM_SIZE}
-        style={{color: Colors.spheres[sphere.id].tint}}
+      <Image
+        source={iconName}
+        style={styles.carouselItem}
       />
     );
   };
@@ -342,10 +352,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: CAROUSEL_ITEM_SIZE,
     height: CAROUSEL_ITEM_SIZE,
-    borderRadius: CAROUSEL_ITEM_SIZE/2,
-    borderWidth: 0,
-    borderColor: 'transparent',
-    overflow:'hidden',
   },
   carouselGraphContainer: {
     height: 2,
