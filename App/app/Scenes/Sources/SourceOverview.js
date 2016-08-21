@@ -266,30 +266,30 @@ export default class SourceOverview extends Component {
     );
   };
 
-  _renderBookRow = (book: Object) => {
+  _renderBookRow = (bookInfo: Object) => {
     const { source } = this.state;
+    const book = bookInfo.book;
+    const occurrenceCount = bookInfo.count;
     const sourceRelation = source.relationForBook(book);
     const principalColor = Colors.sources[sourceRelation.principalSourceType];
 
     return (
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => this._onPressBook(book)}>
         <View style={[styles.sourcesCellContainer, {paddingVertical: 15, paddingLeft: 15}]}>
           <View style={styles.sourcesLeftContainer}>
-            <TouchableOpacity onPress={() => this._onPressBook(book)}>
-              <Icon
-                name="books"
-                source={source}
-                color={principalColor.tint}
-                size={20}
-                style={[styles.sourceAvatar]}
-              />
-            </TouchableOpacity>
+            <Icon
+              name="books"
+              source={source}
+              color={principalColor.tint}
+              size={20}
+              style={[styles.sourceAvatar]}
+            />
             <View style={styles.sourcesContent}>
               <Text style={StyleSheet.styles.cell.titlemedium}>{book.name}</Text>
             </View>
           </View>
           <View style={styles.sourcesRightContainer}>
-            <Text style={StyleSheet.styles.cell.subtitle}>0 occurrences</Text>
+            <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('occurrences.count', {count: occurrenceCount, localizedCount: Localizable.toNumber(occurrenceCount, {precision: 0})})}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -415,6 +415,25 @@ export default class SourceOverview extends Component {
     }
   };
 
+  async _onPressBook(book: Object) {
+    const { source } = this.state;
+    const query = new Query(source, book);
+    const occurrences = await query.occurrences();
+
+    if (occurrences.length > 0) {
+      const occurrence = occurrences[0];
+      const bsoReference = Localizable.t('bso-reference', {book: occurrence.book.name, source: occurrence.name, number: occurrence.number});
+
+      const onPressBack = () => {
+      this.props.navigate(sourceURL({sourceID: source.id, bookID: (book ? book.id : null), title: source.name}), {replace: true});
+      }
+      const occurrencesRoute = occurrencesURL({title: Localizable.t('passages'), occurrences, onPressBack, modal: true});
+
+      const route = readerURL({bookID: occurrence.book.id, anchor: `source-${occurrence.name}-${occurrence.number}`, title: occurrence.book.name, description: bsoReference,  occurrenceIndex: 0, occurrences, occurrencesRoute});
+      this.props.navigate(route);
+    }
+  };
+
   _onPressActantIcon(actant: Actant) {
     const { book } = this.state;
     this.props.navigate(sourceURL({sourceID: actant.id, bookID: book && book.id, title: actant.name}));
@@ -434,7 +453,7 @@ export default class SourceOverview extends Component {
     const rows = {};
     const sections = [];
 
-    const books = source.books;
+    const books = await query.books();
     if (books.length > 0) {
       sections.push(Section.BOOKS);
       rows[Section.BOOKS] = books;

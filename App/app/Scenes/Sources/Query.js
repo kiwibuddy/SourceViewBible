@@ -66,4 +66,18 @@ export default class Query {
     return rows.map(row => BookSourceOccurrence.findByID(row['id']));
   }
 
+  async books() {
+    const sql = `
+    SELECT DISTINCT bso.book_id AS id, COUNT(DISTINCT bso.id) AS count
+    FROM bso INNER JOIN bso_actants AS speakers ON (bso.id = speakers.bso_id AND speakers.type_id = 1)
+    WHERE ((speakers.actant_id = ?))
+    GROUP BY bso.book_id
+    ORDER BY bso.book_id`;
+
+    const rows = await rowsWithSQL(sql, this.source.id);
+    return rows.map(row => {
+      return {book: Book.findByID(row['id']), count: row['count']};
+    });
+  }
+
 }
