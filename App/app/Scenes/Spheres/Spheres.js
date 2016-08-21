@@ -153,7 +153,7 @@ export default class Spheres extends Component {
           <TouchableOpacity
             key={'sphere-' + sortedSpheres[0].id}
             onPress={() => this._onPressSphere(sortedSpheres[0])}
-            style={[styles.carouselItem, {bottom: 0, left: WIDTH/2 - CAROUSEL_ITEM_SIZE/2}]}>
+            style={[styles.carouselItem, {bottom: 15, left: WIDTH/2 - CAROUSEL_ITEM_SIZE/2}]}>
             {carouselIcons[0]}
           </TouchableOpacity>
         </View>
@@ -365,10 +365,12 @@ const styles = StyleSheet.create({
     fontSize: 21,
     fontWeight: 'bold',
     color: '#59626A',
+    marginTop: -20,
   },
   sphereSubtitle: {
     color: '#9B9B9B',
     fontSize: 17,
+    paddingBottom: 10,
   },
   keyline: {
     flex:0,
