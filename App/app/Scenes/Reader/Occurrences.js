@@ -161,7 +161,8 @@ const styles = StyleSheet.create({
   listItemContainer: {
     paddingLeft: 5,
     paddingRight: 15,
-    paddingVertical: 10,
+    paddingTop: 5,
+    paddingBottom: 13,
     flexDirection: 'row',
   },
   listItem: {
@@ -170,9 +171,11 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
   },
   body: {
-    paddingBottom: 5,
+    fontFamily: 'Georgia',
+    paddingBottom: 10,
     color: '#59626A',
     fontSize: 15,
+    lineHeight: 24,
   },
   referenceContainer: {
     flexDirection: 'row',
