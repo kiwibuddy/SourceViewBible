@@ -205,6 +205,8 @@ const styles = StyleSheet.create({
   },
   sourcesRightContainer: {
     flex: 1,
+    marginRight: 8,
+    alignSelf: 'center',
   },
   sourceAvatar: {
     width: 20,

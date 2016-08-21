@@ -252,7 +252,9 @@ export default class Spheres extends Component {
       <TouchableOpacity key={book.id} style={styles.section} onPress={() => this._onPressBook(book)}>
         <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
           <View style={styles.sourcesLeftContainer}>
-            <Text style={StyleSheet.styles.cell.titlemedium}>{book.name}</Text>
+            <View style={styles.sourcesContent}>
+              <Text style={StyleSheet.styles.cell.titlemedium}>{book.name}</Text>
+            </View>
           </View>
           <View style={styles.sourcesRightContainer}>
             <BarChart
@@ -287,7 +289,9 @@ export default class Spheres extends Component {
               style={[styles.sourceAvatar]}
               size={20}
             />
-            <Text style={StyleSheet.styles.cell.titlemedium}>{source.name}</Text>
+            <View style={styles.sourcesContent}>
+              <Text style={StyleSheet.styles.cell.titlemedium}>{source.name}</Text>
+            </View>
           </View>
           <View style={styles.sourcesRightContainer}>
             <BarChart
@@ -485,6 +489,11 @@ const styles = StyleSheet.create({
     flex: 1,
     marginRight: 8,
     alignSelf: 'center',
+  },
+  sourcesContent: {
+    flex: 1,
+    flexWrap: 'wrap',
+    marginRight: 8,
   },
   dataPair: {
     flex: 1,
