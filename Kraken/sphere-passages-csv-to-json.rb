@@ -42,7 +42,7 @@ def references_from_pericope(pericope)
   end
 end
 
-filename = File.expand_path("~/Desktop/SV/Spheres/EconomicsPassages.csv")
+filename = File.expand_path("../../SVB2/Spheres/KeyPassages/Family-Table 1.csv")
 json = {}
 
 rows = CSV.open(filename, headers: true).read
@@ -50,7 +50,7 @@ rows = CSV.open(filename, headers: true).read
 sectionKey = nil
 section = nil
 rows.each do |row|
-  next if row["index"].nil? 
+  next if row["index"].nil?
   if row["index"].to_i == 0
     sectionKey = row["index"]
     section = []
