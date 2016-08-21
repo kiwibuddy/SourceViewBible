@@ -106,6 +106,7 @@
     "close": "Close",
     "passages": "Passages",
     "bcv-reference": "{{book}} {{reference}}",
+    "book-chapter-verse": "{{book}} {{chapter}}:{{verse}}",
     "so-reference": "{{source}} {{number}}",
     "bso-reference": "{{book}} {{source}} {{number}}",
     "search-references": "Search References",

@@ -18,11 +18,16 @@ import {
   Localizable
 } from '../../Common';
 
+import { readerURL } from '../../Navigation';
+
 import Emdros from '../../API/Emdros';
 import { Sphere } from '../../Database';
 
+import { Preference } from '../../Preferences';
+
 type Props = {
   sphereID: string,
+  navigate: Function,
 };
 
 type State = {
@@ -71,7 +76,7 @@ export default class SpherePassages extends Component {
 
   _renderPassage = (passage: Object) => {
     return (
-      <TouchableOpacity style={styles.listItemContainer}>
+      <TouchableOpacity style={styles.listItemContainer} onPress={() => this._onPressPassage(passage)}>
         <Text style={[StyleSheet.styles.cell.occurrence, {marginTop: -5, width: 20}]}>{passage.number}</Text>
         <View style={styles.listItem}>
           <Text style={styles.bodybold}>{passage.title}</Text>
@@ -82,6 +87,23 @@ export default class SpherePassages extends Component {
         </View>
       </TouchableOpacity>
     );
+  };
+
+  _onPressPassage = (passage: Object) => {
+    const { sphere } = this.state;
+
+    const monad = passage.monads[0];
+    const book = monad.book;
+    const chapter = monad.chapter;
+    const verse = monad.verse;
+    const bcvReference = Localizable.t('book-chapter-verse', {book: book.name, chapter, verse});
+
+    if (!sphere.isFoundational) {
+      Preference.setObjectForKey([sphere.id], Preference.Keys.Reader.spheres);
+    }
+
+    const route = readerURL({bookID: book.id, anchor: `verse-${chapter}-${verse}`, title: book.name, description: bcvReference});
+    this.props.navigate(route);
   };
 
   async _getPassages() {
