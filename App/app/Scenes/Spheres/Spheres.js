@@ -31,7 +31,7 @@ const CAROUSEL_ITEM_SIZE = 80;
 const MAXIMUM_BOOK_COUNT = 5;
 const MAXIMUM_SOURCE_COUNT = 5;
 
-import { bookURL, readerURL, sphereBooksURL, spherePassagesURL, sphereSourcesURL, sphereWordsURL, sphereURL } from '../../Navigation';
+import { bookURL, readerURL, sourceURL, sphereBooksURL, spherePassagesURL, sphereSourcesURL, sphereWordsURL, sphereURL } from '../../Navigation';
 import { Bible, Actant, Book, Sphere } from '../../Database';
 import { Preference } from '../../Preferences';
 
@@ -284,11 +284,13 @@ export default class Spheres extends Component {
       <TouchableOpacity key={source.id} style={styles.section} onPress={() => this._onPressSource(source)}>
         <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
           <View style={styles.sourcesLeftContainer}>
-            <SourceIcon
-              source={source}
-              style={[styles.sourceAvatar]}
-              size={20}
-            />
+            <TouchableOpacity onPress={() => this._onPressSourceIcon(source)}>
+              <SourceIcon
+                source={source}
+                style={[styles.sourceAvatar]}
+                size={20}
+              />
+            </TouchableOpacity>
             <View style={styles.sourcesContent}>
               <Text style={StyleSheet.styles.cell.titlemedium}>{source.name}</Text>
             </View>
@@ -368,6 +370,10 @@ export default class Spheres extends Component {
 
     Preference.setObjectForKey([this.state.sphere.id], Preference.Keys.Reader.spheres);
     this.props.navigate(readerURL({bookID: book.id, anchor: `source-${source.name}-1`, title: book.name, description: bsoReference}));
+  };
+
+  _onPressSourceIcon(source: Actant) {
+    this.props.navigate(sourceURL({sourceID: source.id, title: source.name}));
   };
  }
 

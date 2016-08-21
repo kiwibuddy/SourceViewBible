@@ -35,7 +35,7 @@ import SourceIcon from '../../Components/Common/SourceIcon';
 // $FlowFixMe: - Flow can't find os module extension
 import SegmentedControl from '../../Components/Common/SegmentedControl';
 
-import { readerURL } from '../../Navigation';
+import { readerURL, sourceURL } from '../../Navigation';
 
 import { Actant, Sphere } from '../../Database';
 
@@ -134,11 +134,13 @@ export default class SphereSources extends Component {
       <TouchableOpacity style={styles.section} onPress={() => this._onPressSource(source)}>
         <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
           <View style={styles.sourcesLeftContainer}>
-            <SourceIcon
-              source={source}
-              style={[styles.sourceAvatar]}
-              size={20}
-            />
+            <TouchableOpacity onPress={() => this._onPressSourceIcon(source)}>
+              <SourceIcon
+                source={source}
+                style={[styles.sourceAvatar]}
+                size={20}
+              />
+            </TouchableOpacity>
             <View style={styles.sourcesContent}>
               <Text style={StyleSheet.styles.cell.titlemedium}>{source.name}</Text>
             </View>
@@ -213,6 +215,10 @@ export default class SphereSources extends Component {
 
     Preference.setObjectForKey([this.state.sphere.id], Preference.Keys.Reader.spheres);
     this.props.navigate(readerURL({bookID: book.id, anchor: `source-${source.name}-1`, title: book.name, description: bsoReference}));
+  };
+
+  _onPressSourceIcon(source: Actant) {
+    this.props.navigate(sourceURL({sourceID: source.id, title: source.name}));
   };
 }
 
