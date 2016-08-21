@@ -712,6 +712,10 @@ export class Sphere extends Realm.Object {
   color(color?: string): string {
     return Colors.spheres[this.id][color || 'tint'];
   }
+
+  get isFoundational(): boolean {
+    return this.position == 0;
+  }
 }
 Sphere.schema = SphereSchema;
 

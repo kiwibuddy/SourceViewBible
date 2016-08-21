@@ -60,12 +60,7 @@ export default class Spheres extends Component {
 
   render() {
     const { sphere } = this.state;
-    const colors = Colors.spheres[sphere.id];
     const spherePercent = (sphere.wordCount / Bible.wordCount) * 100;
-
-    const books = this._getBooks(sphere);
-    const bookRows = books.map(book => this._renderBookRow(book));
-
     const spheres = Sphere.all({foundational: true});
     const sphereCount = spheres.length;
 
@@ -82,6 +77,7 @@ export default class Spheres extends Component {
 
     const carouselIcons = sortedSpheres.map(sphere => this._renderCarouselIcon(sphere));
 
+    const sphereView = (sphere.isFoundational ? this._renderFoundationalSphere(sphere) : this._renderSphere(sphere));
     return (
       <ScrollView style={styles.container}>
         <LinearGradient
@@ -144,6 +140,19 @@ export default class Spheres extends Component {
             <Text style={styles.sphereSubtitle}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
           </View>
         </LinearGradient>
+        {sphereView}
+      </ScrollView>
+    );
+  }
+
+  _renderSphere = (sphere: Object) => {
+    const colors = Colors.spheres[sphere.id];
+    const spherePercent = (sphere.wordCount / Bible.wordCount) * 100;
+
+    const books = this._getBooks(sphere);
+    const bookRows = books.map(book => this._renderBookRow(book));
+    return (
+      <View>
         <View style={styles.carouselGraphContainer}>
           <View style={[styles.carouselGraph, {backgroundColor: colors.tint, flex: spherePercent}]} />
           <View style={[styles.carouselGraph, {flex: 100-spherePercent}]} />
@@ -211,9 +220,18 @@ export default class Spheres extends Component {
           <Text style={[StyleSheet.styles.cell.titlemore, {color: colors.chromeTint}]}>View More</Text>
           <Image source={require('../../Images/common/disclosure.png')}  style={styles.disclosure} />
         </TouchableOpacity>
-      </ScrollView>
+      </View>
     );
-  }
+  };
+
+  _renderFoundationalSphere = () => {
+    return (
+      <View style={{height: 600, backgroundColor: 'red'}}>
+
+      </View>
+    );
+  };
+
 
   _renderBookRow = (book: Object) => {
     const { sphere } = this.state;
