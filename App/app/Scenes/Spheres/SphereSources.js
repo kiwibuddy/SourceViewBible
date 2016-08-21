@@ -209,8 +209,10 @@ export default class SphereSources extends Component {
 
   _onPressSource = (source: Object) => {
     const book = source.books[0];
+    const bsoReference = Localizable.t('bso-reference', {book: book.name, source: source.name, number: 1});
+
     Preference.setObjectForKey([this.state.sphere.id], Preference.Keys.Reader.spheres);
-    this.props.navigate(readerURL({bookID: book.id, anchor: 'chapter-1', title: book.name}));
+    this.props.navigate(readerURL({bookID: book.id, anchor: `source-${source.name}-1`, title: book.name, description: bsoReference}));
   };
 }
 
