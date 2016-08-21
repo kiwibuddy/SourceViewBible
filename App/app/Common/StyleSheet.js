@@ -136,9 +136,8 @@ const styles = {
       color: '#CF1E00',
       fontSize: 15,
       fontWeight: 'bold',
-      width: 28,
+      width: 30,
       textAlign: 'right',
-      backgroundColor: 'red',
     },
   },
   separator: {
