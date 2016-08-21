@@ -406,9 +406,7 @@ export default class SourceOverview extends Component {
       const bsoReference = Localizable.t('bso-reference', {book: occurrence.book.name, source: occurrence.name, number: occurrence.number});
 
       const onPressBack = () => {
-        const routeOptions = {sourceID: source.id, title: source.name};
-        if (this.state.book) routeOptions['bookID'] = this.state.bookID;
-        this.props.navigate(sourceURL(routeOptions), {replace: true});
+        this.props.navigate(BACK);
       }
       const occurrencesRoute = occurrencesURL({title: Localizable.t('passages'), occurrences, onPressBack, modal: true});
 
@@ -427,9 +425,7 @@ export default class SourceOverview extends Component {
       const bsoReference = Localizable.t('bso-reference', {book: occurrence.book.name, source: occurrence.name, number: occurrence.number});
 
       const onPressBack = () => {
-        const routeOptions = {sourceID: source.id, title: source.name};
-        if (this.state.book) routeOptions['bookID'] = this.state.bookID;
-        this.props.navigate(sourceURL(routeOptions), {replace: true});
+        this.props.navigate(BACK);
       }
       const occurrencesRoute = occurrencesURL({title: Localizable.t('passages'), occurrences, onPressBack, modal: true});
 

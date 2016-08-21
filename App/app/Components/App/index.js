@@ -164,7 +164,7 @@ export default class App extends Component {
       route,
     ];
 
-    console.log('push', routes.map(route => route.path));
+    // console.log('push', routes.map(route => route.path));
 
     const navigation = {
       ...state,
@@ -192,7 +192,7 @@ export default class App extends Component {
       routes,
     };
 
-    console.log('pop', routes.map(route => route.path));
+    // console.log('pop', routes.map(route => route.path));
 
     if (navigation !== this.state.navigation) {
       this.setState({navigation}, callback);
@@ -210,7 +210,7 @@ export default class App extends Component {
       route,
     ];
 
-    console.log('replace', routes.map(route => route.path));
+    // console.log('replace', routes.map(route => route.path));
 
     const navigation = {
       ...state,
