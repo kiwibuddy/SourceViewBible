@@ -559,7 +559,12 @@ const MonadSetSchema = {
   }
 }
 export class MonadSet extends Realm.Object {
-
+  get monadSet(): Object {
+    return {
+      first: this.firstMonad,
+      last: this.lastMonad
+    };
+  }
 }
 MonadSet.schema = MonadSetSchema;
 

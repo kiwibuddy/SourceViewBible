@@ -18,6 +18,7 @@ import {
   Localizable
 } from '../../Common';
 
+import Emdros from '../../API/Emdros';
 import { Sphere } from '../../Database';
 
 type Props = {
@@ -74,7 +75,7 @@ export default class SpherePassages extends Component {
         <Text style={[StyleSheet.styles.cell.occurrence, {marginTop: -5}]}>{passage.number}</Text>
         <View style={styles.listItem}>
           <Text style={styles.bodybold}>{passage.title}</Text>
-          <Text style={styles.body}>Lorem ipsum dolor sit amet, eleifend varius. Risus vitae mauris cras lectus ipsum ante, semper id, tincidunt nunc magnis vehicula magnis in, magna massa, lectus donec vestibulum interdum.</Text>
+          <Text style={styles.body}>{passage.scripture}</Text>
           <View style={styles.referenceContainer}>
             <Text style={[StyleSheet.styles.cell.subtitle, {paddingRight: 8,}]}>{passage.reference}</Text>
           </View>
@@ -88,14 +89,21 @@ export default class SpherePassages extends Component {
 
     const rows = {};
     const sections = [];
-    sphere.passages.forEach(passage => {
+    for(let passage of sphere.passages) {
       let section = rows[passage.section];
       if (!section) {
         section = [];
         sections.push(passage.section);
       }
-      rows[passage.section] = [...section, passage];
-    });
+
+      const contents = [];
+      for(let monad of passage.monads) {
+        const content = await Emdros.scripture({monadSet: monad.monadSet, stylesheet: 'occurrence'});
+        contents.push(content);
+      }
+      const scripture = contents.join(' ');
+      rows[passage.section] = [...section, {...passage, scripture}];
+    }
 
     const dataSource = this.state.dataSource.cloneWithRowsAndSections(rows, sections);
     this.setState({
