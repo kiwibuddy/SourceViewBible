@@ -281,7 +281,7 @@ export default class Spheres extends Component {
     const spherePercent = (wordCount / source.wordCount) * 100;
 
     return (
-      <TouchableOpacity key={source.id} style={styles.section}>
+      <TouchableOpacity key={source.id} style={styles.section} onPress={() => this._onPressSource(source)}>
         <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
           <View style={styles.sourcesLeftContainer}>
             <SourceIcon
@@ -358,6 +358,12 @@ export default class Spheres extends Component {
   };
 
   _onPressBook = (book: Object) => {
+    Preference.setObjectForKey([this.state.sphere.id], Preference.Keys.Reader.spheres);
+    this.props.navigate(readerURL({bookID: book.id, anchor: 'chapter-1', title: book.name}));
+  };
+
+  _onPressSource = (source: Object) => {
+    const book = source.books[0];
     Preference.setObjectForKey([this.state.sphere.id], Preference.Keys.Reader.spheres);
     this.props.navigate(readerURL({bookID: book.id, anchor: 'chapter-1', title: book.name}));
   };
