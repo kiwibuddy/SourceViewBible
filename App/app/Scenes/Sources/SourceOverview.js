@@ -268,14 +268,19 @@ export default class SourceOverview extends Component {
   };
 
   _renderBookRow = (book: Object) => {
+    const { source } = this.state;
+    const sourceRelation = source.relationForBook(book);
+    const principalColor = Colors.sources[sourceRelation.principalSourceType];
+
     return (
       <TouchableOpacity>
         <View style={[styles.sourcesCellContainer, {paddingVertical: 15, paddingLeft: 15}]}>
           <View style={styles.sourcesLeftContainer}>
             <TouchableOpacity onPress={() => this._onPressBook(book)}>
               <Icon
-                name={'avatar-divine'}
-                style={[{color: 'red'}]}
+                name="books"
+                source={source}
+                color={principalColor.tint}
                 size={20}
                 style={[styles.sourceAvatar]}
               />
