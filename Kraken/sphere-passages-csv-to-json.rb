@@ -49,35 +49,38 @@ def references_from_pericope(pericope)
   end
 end
 
-filename = File.expand_path("../../SVB2/Spheres/KeyPassages/Family-Table 1.csv")
 json = {}
 
-rows = CSV.open(filename, headers: true).read
-
-sectionKey = nil
-section = nil
-rows.each do |row|
-  next if row["index"].nil?
-  if row["index"].to_i == 0
-    sectionKey = row["index"]
-    section = []
-    json[sectionKey] = section
-  else
-    if pericope = Pericope.parse_one(row["reference"])
-      references = references_from_pericope(pericope).map do |reference|
-        reference
-      end
-
-      section << {
-        "number" => row["index"].to_i,
-        "title" => row["title"],
-        "subtitle" => pericope.to_s,
-        "references" => references
-      }
+["Foundational", "Family", "Economics", "Religion", "Government", "Education", "Communication", "Celebration"].each do |sphere_name|
+  sphere = {}
+  filename = File.expand_path("../../SVB2/Spheres/KeyPassages/#{sphere_name}-Table 1.csv")
+  rows = CSV.open(filename, headers: true).read
+  sectionKey = nil
+  section = nil
+  rows.each do |row|
+    next if row["index"].nil?
+    if row["index"].to_i == 0
+      sectionKey = row["index"]
+      section = []
+      sphere[sectionKey] = section
     else
-      STDERR.puts "Could not parse reference #{row["reference"]}"
+      if pericope = Pericope.parse_one(row["reference"])
+        references = references_from_pericope(pericope).map do |reference|
+          reference
+        end
+
+        section << {
+          "number" => row["index"].to_i,
+          "title" => row["title"],
+          "subtitle" => pericope.to_s,
+          "references" => references
+        }
+      else
+        STDERR.puts "Could not parse reference #{row["reference"]}"
+      end
     end
   end
+  json[sphere_name] = sphere
 end
 
-pp json
+STDOUT.puts JSON.pretty_generate(json)

@@ -1,0 +1,6116 @@
+{
+  "Foundational": {
+    "God Is Infinite and Personal": [
+      {
+        "number": 1,
+        "title": "An Incomparably Great Creator",
+        "subtitle": "Genesis 1:1",
+        "references": [
+          {
+            "book": "Genesis",
+            "minChapter": 1,
+            "minVerse": 1,
+            "maxChapter": 1,
+            "maxVerse": 1
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "title": "An Astoundingly Infinite God",
+        "subtitle": "1 Timothy 1:17",
+        "references": [
+          {
+            "book": "1 Timothy",
+            "minChapter": 1,
+            "minVerse": 17,
+            "maxChapter": 1,
+            "maxVerse": 17
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "title": "An Amazingly Personal God",
+        "subtitle": "Isaiah 57:15",
+        "references": [
+          {
+            "book": "Isaiah",
+            "minChapter": 57,
+            "minVerse": 15,
+            "maxChapter": 57,
+            "maxVerse": 15
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "title": "An Extraordinarily Relational Trinity",
+        "subtitle": "2 Corinthians 13:14",
+        "references": [
+          {
+            "book": "2 Corinthians",
+            "minChapter": 13,
+            "minVerse": 14,
+            "maxChapter": 13,
+            "maxVerse": 14
+          }
+        ]
+      },
+      {
+        "number": 5,
+        "title": "God Is Holy",
+        "subtitle": "Leviticus 11:44-45",
+        "references": [
+          {
+            "book": "Leviticus",
+            "minChapter": 11,
+            "minVerse": 44,
+            "maxChapter": 11,
+            "maxVerse": 45
+          }
+        ]
+      },
+      {
+        "number": 6,
+        "title": "God Is Love",
+        "subtitle": "1 John 4:7-8, 16",
+        "references": [
+          {
+            "book": "1 John",
+            "minChapter": 4,
+            "minVerse": 7,
+            "maxChapter": 4,
+            "maxVerse": 8
+          },
+          {
+            "book": "1 John",
+            "minChapter": 4,
+            "minVerse": 16,
+            "maxChapter": 4,
+            "maxVerse": 16
+          }
+        ]
+      },
+      {
+        "number": 7,
+        "title": "Giving Mercy Justly",
+        "subtitle": "Exodus 34:6-7",
+        "references": [
+          {
+            "book": "Exodus",
+            "minChapter": 34,
+            "minVerse": 6,
+            "maxChapter": 34,
+            "maxVerse": 7
+          }
+        ]
+      },
+      {
+        "number": 8,
+        "title": "A Covenant-Making and Covenant-Keeping God",
+        "subtitle": "Genesis 15:7-21",
+        "references": [
+          {
+            "book": "Genesis",
+            "minChapter": 15,
+            "minVerse": 7,
+            "maxChapter": 15,
+            "maxVerse": 21
+          }
+        ]
+      },
+      {
+        "number": 9,
+        "title": "Jesus: Fully God and Fully Human",
+        "subtitle": "John 1:14, 16-18",
+        "references": [
+          {
+            "book": "John",
+            "minChapter": 1,
+            "minVerse": 14,
+            "maxChapter": 1,
+            "maxVerse": 14
+          },
+          {
+            "book": "John",
+            "minChapter": 1,
+            "minVerse": 16,
+            "maxChapter": 1,
+            "maxVerse": 18
+          }
+        ]
+      },
+      {
+        "number": 10,
+        "title": "Jesus and His Redemptive Sacrifice",
+        "subtitle": "Romans 5:6-8",
+        "references": [
+          {
+            "book": "Romans",
+            "minChapter": 5,
+            "minVerse": 6,
+            "maxChapter": 5,
+            "maxVerse": 8
+          }
+        ]
+      },
+      {
+        "number": 11,
+        "title": "Jesus is Alive Forever!",
+        "subtitle": "Revelation 1:18",
+        "references": [
+          {
+            "book": "Revelation",
+            "minChapter": 1,
+            "minVerse": 18,
+            "maxChapter": 1,
+            "maxVerse": 18
+          }
+        ]
+      },
+      {
+        "number": 12,
+        "title": "God’s Spirit Makes All the Difference",
+        "subtitle": "Ezekiel 36:26-27",
+        "references": [
+          {
+            "book": "Ezekiel",
+            "minChapter": 36,
+            "minVerse": 26,
+            "maxChapter": 36,
+            "maxVerse": 27
+          }
+        ]
+      }
+    ],
+    "Man Is Finite and Personal": [
+      {
+        "number": 13,
+        "title": "Individuals Created as Finite Personal Beings",
+        "subtitle": "Genesis 1:26-27",
+        "references": [
+          {
+            "book": "Genesis",
+            "minChapter": 1,
+            "minVerse": 26,
+            "maxChapter": 1,
+            "maxVerse": 27
+          }
+        ]
+      },
+      {
+        "number": 14,
+        "title": "Humans Are All Equally Valuable",
+        "subtitle": "Galatians 3:28",
+        "references": [
+          {
+            "book": "Galatians",
+            "minChapter": 3,
+            "minVerse": 28,
+            "maxChapter": 3,
+            "maxVerse": 28
+          }
+        ]
+      },
+      {
+        "number": 15,
+        "title": "Humans Have Fallen",
+        "subtitle": "Romans 3:23",
+        "references": [
+          {
+            "book": "Romans",
+            "minChapter": 3,
+            "minVerse": 23,
+            "maxChapter": 3,
+            "maxVerse": 23
+          }
+        ]
+      },
+      {
+        "number": 16,
+        "title": "Individuals Can Be Redeemed",
+        "subtitle": "John 3:16-19",
+        "references": [
+          {
+            "book": "John",
+            "minChapter": 3,
+            "minVerse": 16,
+            "maxChapter": 3,
+            "maxVerse": 19
+          }
+        ]
+      },
+      {
+        "number": 17,
+        "title": "Nations Created to Reflect His Character",
+        "subtitle": "Acts 17:24-28",
+        "references": [
+          {
+            "book": "Acts",
+            "minChapter": 17,
+            "minVerse": 24,
+            "maxChapter": 17,
+            "maxVerse": 28
+          }
+        ]
+      },
+      {
+        "number": 18,
+        "title": "The Good News of the Kingdom",
+        "subtitle": "Mark 1:1",
+        "references": [
+          {
+            "book": "Mark",
+            "minChapter": 1,
+            "minVerse": 1,
+            "maxChapter": 1,
+            "maxVerse": 1
+          }
+        ]
+      },
+      {
+        "number": 19,
+        "title": "Lord of All or Not at All",
+        "subtitle": "Zechariah 14:9",
+        "references": [
+          {
+            "book": "Zechariah",
+            "minChapter": 14,
+            "minVerse": 9,
+            "maxChapter": 14,
+            "maxVerse": 9
+          }
+        ]
+      },
+      {
+        "number": 20,
+        "title": "Societies Can Be Transformed",
+        "subtitle": "2 Peter 3:13",
+        "references": [
+          {
+            "book": "2 Peter",
+            "minChapter": 3,
+            "minVerse": 13,
+            "maxChapter": 3,
+            "maxVerse": 13
+          }
+        ]
+      },
+      {
+        "number": 21,
+        "title": "Pursuits Prioritized",
+        "subtitle": "Matthew 6:31-33",
+        "references": [
+          {
+            "book": "Matthew",
+            "minChapter": 6,
+            "minVerse": 31,
+            "maxChapter": 6,
+            "maxVerse": 33
+          }
+        ]
+      },
+      {
+        "number": 22,
+        "title": "Be Salt and Light",
+        "subtitle": "Matthew 5:13-16",
+        "references": [
+          {
+            "book": "Matthew",
+            "minChapter": 5,
+            "minVerse": 13,
+            "maxChapter": 5,
+            "maxVerse": 16
+          }
+        ]
+      },
+      {
+        "number": 23,
+        "title": "Pray for Change",
+        "subtitle": "John 14:12-14",
+        "references": [
+          {
+            "book": "John",
+            "minChapter": 14,
+            "minVerse": 12,
+            "maxChapter": 14,
+            "maxVerse": 14
+          }
+        ]
+      },
+      {
+        "number": 24,
+        "title": "Focus on Hope",
+        "subtitle": "Habakkuk 2:14",
+        "references": [
+          {
+            "book": "Habakkuk",
+            "minChapter": 2,
+            "minVerse": 14,
+            "maxChapter": 2,
+            "maxVerse": 14
+          }
+        ]
+      }
+    ],
+    "Truth Is Constant and Knowable": [
+      {
+        "number": 25,
+        "title": "God Loves to Reveal",
+        "subtitle": "Psalm 111:2-4",
+        "references": [
+          {
+            "book": "Psalm",
+            "minChapter": 111,
+            "minVerse": 2,
+            "maxChapter": 111,
+            "maxVerse": 4
+          }
+        ]
+      },
+      {
+        "number": 26,
+        "title": "God’s Revelation Transforms Individuals",
+        "subtitle": "2 Corinthians 5:17",
+        "references": [
+          {
+            "book": "2 Corinthians",
+            "minChapter": 5,
+            "minVerse": 17,
+            "maxChapter": 5,
+            "maxVerse": 17
+          }
+        ]
+      },
+      {
+        "number": 27,
+        "title": "God’s Revelation Transforms Nations",
+        "subtitle": "2 Chronicles 34:15",
+        "references": [
+          {
+            "book": "2 Chronicles",
+            "minChapter": 34,
+            "minVerse": 15,
+            "maxChapter": 34,
+            "maxVerse": 15
+          }
+        ]
+      },
+      {
+        "number": 28,
+        "title": "Ten ... Two …  One …",
+        "subtitle": "Exodus 20:1-17",
+        "references": [
+          {
+            "book": "Exodus",
+            "minChapter": 20,
+            "minVerse": 1,
+            "maxChapter": 20,
+            "maxVerse": 17
+          }
+        ]
+      },
+      {
+        "number": 29,
+        "title": "Nature - God’s Visible Word",
+        "subtitle": "Romans 1:19-20",
+        "references": [
+          {
+            "book": "Romans",
+            "minChapter": 1,
+            "minVerse": 19,
+            "maxChapter": 1,
+            "maxVerse": 20
+          }
+        ]
+      },
+      {
+        "number": 30,
+        "title": "Scripture - God’s Written Word",
+        "subtitle": "2 Timothy 3:16-17",
+        "references": [
+          {
+            "book": "2 Timothy",
+            "minChapter": 3,
+            "minVerse": 16,
+            "maxChapter": 3,
+            "maxVerse": 17
+          }
+        ]
+      },
+      {
+        "number": 31,
+        "title": "Jesus - God’s Living Word",
+        "subtitle": "John 14:6",
+        "references": [
+          {
+            "book": "John",
+            "minChapter": 14,
+            "minVerse": 6,
+            "maxChapter": 14,
+            "maxVerse": 6
+          }
+        ]
+      },
+      {
+        "number": 32,
+        "title": "Transformed by the Truth",
+        "subtitle": "Romans 12:1-2",
+        "references": [
+          {
+            "book": "Romans",
+            "minChapter": 12,
+            "minVerse": 1,
+            "maxChapter": 12,
+            "maxVerse": 2
+          }
+        ]
+      },
+      {
+        "number": 33,
+        "title": "Standing for the Truth",
+        "subtitle": "2 Corinthians 10:3-5",
+        "references": [
+          {
+            "book": "2 Corinthians",
+            "minChapter": 10,
+            "minVerse": 3,
+            "maxChapter": 10,
+            "maxVerse": 5
+          }
+        ]
+      },
+      {
+        "number": 34,
+        "title": "Apply Truth Wisely",
+        "subtitle": "James 3:13-18",
+        "references": [
+          {
+            "book": "James",
+            "minChapter": 3,
+            "minVerse": 13,
+            "maxChapter": 3,
+            "maxVerse": 18
+          }
+        ]
+      }
+    ],
+    "Choices Are Significant and Have Consequences": [
+      {
+        "number": 35,
+        "title": "God’s Heart Broken over Sin",
+        "subtitle": "Genesis 6:5-6",
+        "references": [
+          {
+            "book": "Genesis",
+            "minChapter": 6,
+            "minVerse": 5,
+            "maxChapter": 6,
+            "maxVerse": 6
+          }
+        ]
+      },
+      {
+        "number": 36,
+        "title": "Personal Consequences of Sin:",
+        "subtitle": "Ezekiel 18",
+        "references": [
+          {
+            "book": "Ezekiel",
+            "minChapter": 18,
+            "minVerse": 1,
+            "maxChapter": 18,
+            "maxVerse": 32
+          }
+        ]
+      },
+      {
+        "number": 37,
+        "title": "Corporate Consequences of Sin",
+        "subtitle": "Genesis 11:4-9",
+        "references": [
+          {
+            "book": "Genesis",
+            "minChapter": 11,
+            "minVerse": 4,
+            "maxChapter": 11,
+            "maxVerse": 9
+          }
+        ]
+      },
+      {
+        "number": 38,
+        "title": "God Abandoned; Worthless Substitutes",
+        "subtitle": "Jeremiah 2:13",
+        "references": [
+          {
+            "book": "Jeremiah",
+            "minChapter": 2,
+            "minVerse": 13,
+            "maxChapter": 2,
+            "maxVerse": 13
+          }
+        ]
+      },
+      {
+        "number": 39,
+        "title": "Fear God",
+        "subtitle": "Job 28:28",
+        "references": [
+          {
+            "book": "Job",
+            "minChapter": 28,
+            "minVerse": 28,
+            "maxChapter": 28,
+            "maxVerse": 28
+          }
+        ]
+      },
+      {
+        "number": 40,
+        "title": "Love God",
+        "subtitle": "Deuteronomy 6:4-5",
+        "references": [
+          {
+            "book": "Deuteronomy",
+            "minChapter": 6,
+            "minVerse": 4,
+            "maxChapter": 6,
+            "maxVerse": 5
+          }
+        ]
+      },
+      {
+        "number": 41,
+        "title": "Love Neighbor",
+        "subtitle": "Leviticus 19:18",
+        "references": [
+          {
+            "book": "Leviticus",
+            "minChapter": 19,
+            "minVerse": 18,
+            "maxChapter": 19,
+            "maxVerse": 18
+          }
+        ]
+      },
+      {
+        "number": 42,
+        "title": "The Lord’s Prayer",
+        "subtitle": "Matthew 6:9-13",
+        "references": [
+          {
+            "book": "Matthew",
+            "minChapter": 6,
+            "minVerse": 9,
+            "maxChapter": 6,
+            "maxVerse": 13
+          }
+        ]
+      },
+      {
+        "number": 43,
+        "title": "The Golden Rule",
+        "subtitle": "Matthew 7:12",
+        "references": [
+          {
+            "book": "Matthew",
+            "minChapter": 7,
+            "minVerse": 12,
+            "maxChapter": 7,
+            "maxVerse": 12
+          }
+        ]
+      }
+    ],
+    "Called to Be Change-Makers with God": [
+      {
+        "number": 44,
+        "title": "God’s Forever Dream",
+        "subtitle": "1 Timothy 2:3-6",
+        "references": [
+          {
+            "book": "1 Timothy",
+            "minChapter": 2,
+            "minVerse": 3,
+            "maxChapter": 2,
+            "maxVerse": 6
+          }
+        ]
+      },
+      {
+        "number": 45,
+        "title": "Jesus, our Foundational Cornerstone",
+        "subtitle": "Isaiah 28:16-17",
+        "references": [
+          {
+            "book": "Isaiah",
+            "minChapter": 28,
+            "minVerse": 16,
+            "maxChapter": 28,
+            "maxVerse": 17
+          }
+        ]
+      },
+      {
+        "number": 46,
+        "title": "Every Individual Redeemed",
+        "subtitle": "Mark 16:15",
+        "references": [
+          {
+            "book": "Mark",
+            "minChapter": 16,
+            "minVerse": 15,
+            "maxChapter": 16,
+            "maxVerse": 15
+          }
+        ]
+      },
+      {
+        "number": 47,
+        "title": "Every Society Transformed",
+        "subtitle": "Matthew 28:18-20",
+        "references": [
+          {
+            "book": "Matthew",
+            "minChapter": 28,
+            "minVerse": 18,
+            "maxChapter": 28,
+            "maxVerse": 20
+          }
+        ]
+      },
+      {
+        "number": 48,
+        "title": "Our Works Based on His Work",
+        "subtitle": "Philippians 2:5-11",
+        "references": [
+          {
+            "book": "Philippians",
+            "minChapter": 2,
+            "minVerse": 5,
+            "maxChapter": 2,
+            "maxVerse": 11
+          }
+        ]
+      },
+      {
+        "number": 49,
+        "title": "Doing it Together with Him",
+        "subtitle": "John 15:1-17",
+        "references": [
+          {
+            "book": "John",
+            "minChapter": 15,
+            "minVerse": 1,
+            "maxChapter": 15,
+            "maxVerse": 17
+          }
+        ]
+      },
+      {
+        "number": 50,
+        "title": "Don’t Accept the Status Quo!",
+        "subtitle": "1 Chronicles 4:9-10",
+        "references": [
+          {
+            "book": "1 Chronicles",
+            "minChapter": 4,
+            "minVerse": 9,
+            "maxChapter": 4,
+            "maxVerse": 10
+          }
+        ]
+      },
+      {
+        "number": 51,
+        "title": "Domains of Authority; Spheres of Influence",
+        "subtitle": "2 Corinthians 10:13-14",
+        "references": [
+          {
+            "book": "2 Corinthians",
+            "minChapter": 10,
+            "minVerse": 13,
+            "maxChapter": 10,
+            "maxVerse": 14
+          }
+        ]
+      },
+      {
+        "number": 52,
+        "title": "Do All for the Glory of God!",
+        "subtitle": "1 Corinthians 10:31",
+        "references": [
+          {
+            "book": "1 Corinthians",
+            "minChapter": 10,
+            "minVerse": 31,
+            "maxChapter": 10,
+            "maxVerse": 31
+          }
+        ]
+      }
+    ]
+  },
+  "Family": {
+    "God and the Sphere of Family": [
+      {
+        "number": 1,
+        "title": "God is our Father",
+        "subtitle": "1 John 3:1-2",
+        "references": [
+          {
+            "book": "1 John",
+            "minChapter": 3,
+            "minVerse": 1,
+            "maxChapter": 3,
+            "maxVerse": 2
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "title": "God Described as a Mother",
+        "subtitle": "Isaiah 49:15",
+        "references": [
+          {
+            "book": "Isaiah",
+            "minChapter": 49,
+            "minVerse": 15,
+            "maxChapter": 49,
+            "maxVerse": 15
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "title": "God is a Father to the Fatherless",
+        "subtitle": "Psalm 68:5-6",
+        "references": [
+          {
+            "book": "Psalm",
+            "minChapter": 68,
+            "minVerse": 5,
+            "maxChapter": 68,
+            "maxVerse": 6
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "title": "Son of Adam, Son of God",
+        "subtitle": "Luke 3:38",
+        "references": [
+          {
+            "book": "Luke",
+            "minChapter": 3,
+            "minVerse": 38,
+            "maxChapter": 3,
+            "maxVerse": 38
+          }
+        ]
+      },
+      {
+        "number": 5,
+        "title": "A Faithful Husband to an Unfaithful People",
+        "subtitle": "Hosea 3:1",
+        "references": [
+          {
+            "book": "Hosea",
+            "minChapter": 3,
+            "minVerse": 1,
+            "maxChapter": 3,
+            "maxVerse": 1
+          }
+        ]
+      },
+      {
+        "number": 6,
+        "title": "God’s Desires to Bless All Families",
+        "subtitle": "Genesis 12:1-3",
+        "references": [
+          {
+            "book": "Genesis",
+            "minChapter": 12,
+            "minVerse": 1,
+            "maxChapter": 12,
+            "maxVerse": 3
+          }
+        ]
+      },
+      {
+        "number": 7,
+        "title": "God Chooses Abraham to Train His Children",
+        "subtitle": "Genesis 18:18-19",
+        "references": [
+          {
+            "book": "Genesis",
+            "minChapter": 18,
+            "minVerse": 18,
+            "maxChapter": 18,
+            "maxVerse": 19
+          }
+        ]
+      },
+      {
+        "number": 8,
+        "title": "God Is Our Home",
+        "subtitle": "Psalm 90:1",
+        "references": [
+          {
+            "book": "Psalm",
+            "minChapter": 90,
+            "minVerse": 1,
+            "maxChapter": 90,
+            "maxVerse": 1
+          }
+        ]
+      },
+      {
+        "number": 9,
+        "title": "God First. All Else Second (#1).",
+        "subtitle": "Genesis 22:1-18",
+        "references": [
+          {
+            "book": "Genesis",
+            "minChapter": 22,
+            "minVerse": 1,
+            "maxChapter": 22,
+            "maxVerse": 18
+          }
+        ]
+      },
+      {
+        "number": 10,
+        "title": "God First. All Else Second (#2). ",
+        "subtitle": "Numbers 25:1-9",
+        "references": [
+          {
+            "book": "Numbers",
+            "minChapter": 25,
+            "minVerse": 1,
+            "maxChapter": 25,
+            "maxVerse": 9
+          }
+        ]
+      },
+      {
+        "number": 11,
+        "title": "We Will Serve the Lord",
+        "subtitle": "Joshua 24:15",
+        "references": [
+          {
+            "book": "Joshua",
+            "minChapter": 24,
+            "minVerse": 15,
+            "maxChapter": 24,
+            "maxVerse": 15
+          }
+        ]
+      },
+      {
+        "number": 12,
+        "title": "Fight for Your Family!",
+        "subtitle": "Nehemiah 4:13-14",
+        "references": [
+          {
+            "book": "Nehemiah",
+            "minChapter": 4,
+            "minVerse": 13,
+            "maxChapter": 4,
+            "maxVerse": 14
+          }
+        ]
+      }
+    ],
+    "Biblical Principles for Husbands and Wives": [
+      {
+        "number": 13,
+        "title": "God Creates Eve; Institutes Marriage",
+        "subtitle": "Genesis 2:18, 21-25",
+        "references": [
+          {
+            "book": "Genesis",
+            "minChapter": 2,
+            "minVerse": 18,
+            "maxChapter": 2,
+            "maxVerse": 18
+          },
+          {
+            "book": "Genesis",
+            "minChapter": 2,
+            "minVerse": 21,
+            "maxChapter": 2,
+            "maxVerse": 25
+          }
+        ]
+      },
+      {
+        "number": 14,
+        "title": "Ideal Marriage Pattern Given to Priests",
+        "subtitle": "Leviticus 21:7, 13-15",
+        "references": [
+          {
+            "book": "Leviticus",
+            "minChapter": 21,
+            "minVerse": 7,
+            "maxChapter": 21,
+            "maxVerse": 7
+          },
+          {
+            "book": "Leviticus",
+            "minChapter": 21,
+            "minVerse": 13,
+            "maxChapter": 21,
+            "maxVerse": 15
+          }
+        ]
+      },
+      {
+        "number": 15,
+        "title": "Marriage Is to Be Celebrated",
+        "subtitle": "Song of Solomon 5:1",
+        "references": [
+          {
+            "book": "Song of Solomon",
+            "minChapter": 5,
+            "minVerse": 1,
+            "maxChapter": 5,
+            "maxVerse": 1
+          }
+        ]
+      },
+      {
+        "number": 16,
+        "title": "Marriage Is to Be Honored",
+        "subtitle": "Hebrews 13:4",
+        "references": [
+          {
+            "book": "Hebrews",
+            "minChapter": 13,
+            "minVerse": 4,
+            "maxChapter": 13,
+            "maxVerse": 4
+          }
+        ]
+      },
+      {
+        "number": 17,
+        "title": "God’s Household Code",
+        "subtitle": "Ephesians 5:21-6:9",
+        "references": [
+          {
+            "book": "Ephesians",
+            "minChapter": 5,
+            "minVerse": 21,
+            "maxChapter": 6,
+            "maxVerse": 9
+          }
+        ]
+      },
+      {
+        "number": 18,
+        "title": "Mutuality in Marriage",
+        "subtitle": "1 Corinthians 7:2-16, 32-34",
+        "references": [
+          {
+            "book": "1 Corinthians",
+            "minChapter": 7,
+            "minVerse": 2,
+            "maxChapter": 7,
+            "maxVerse": 16
+          },
+          {
+            "book": "1 Corinthians",
+            "minChapter": 7,
+            "minVerse": 32,
+            "maxChapter": 7,
+            "maxVerse": 34
+          }
+        ]
+      },
+      {
+        "number": 19,
+        "title": "Drink Water from Your Own Well",
+        "subtitle": "Proverbs 5:15-23",
+        "references": [
+          {
+            "book": "Proverbs",
+            "minChapter": 5,
+            "minVerse": 15,
+            "maxChapter": 5,
+            "maxVerse": 23
+          }
+        ]
+      },
+      {
+        "number": 20,
+        "title": "No Adultery",
+        "subtitle": "Deuteronomy 5:18",
+        "references": [
+          {
+            "book": "Deuteronomy",
+            "minChapter": 5,
+            "minVerse": 18,
+            "maxChapter": 5,
+            "maxVerse": 18
+          }
+        ]
+      },
+      {
+        "number": 21,
+        "title": "David Repents of Adultery",
+        "subtitle": "Psalm 51",
+        "references": [
+          {
+            "book": "Psalm",
+            "minChapter": 51,
+            "minVerse": 1,
+            "maxChapter": 51,
+            "maxVerse": 19
+          }
+        ]
+      },
+      {
+        "number": 22,
+        "title": "The Destructive Legacy of Polygamy",
+        "subtitle": "2 Chronicles 11:18-21",
+        "references": [
+          {
+            "book": "2 Chronicles",
+            "minChapter": 11,
+            "minVerse": 18,
+            "maxChapter": 11,
+            "maxVerse": 21
+          }
+        ]
+      },
+      {
+        "number": 23,
+        "title": "Marriage and the Resurrection",
+        "subtitle": "Mark 12:18-27",
+        "references": [
+          {
+            "book": "Mark",
+            "minChapter": 12,
+            "minVerse": 18,
+            "maxChapter": 12,
+            "maxVerse": 27
+          }
+        ]
+      },
+      {
+        "number": 24,
+        "title": "God Hates Divorce",
+        "subtitle": "Malachi 2:14-16",
+        "references": [
+          {
+            "book": "Malachi",
+            "minChapter": 2,
+            "minVerse": 14,
+            "maxChapter": 2,
+            "maxVerse": 16
+          }
+        ]
+      }
+    ],
+    "Biblical Principles for Parents and Children": [
+      {
+        "number": 25,
+        "title": "Children Are a Gift from God",
+        "subtitle": "Psalm 127:3-5",
+        "references": [
+          {
+            "book": "Psalm",
+            "minChapter": 127,
+            "minVerse": 3,
+            "maxChapter": 127,
+            "maxVerse": 5
+          }
+        ]
+      },
+      {
+        "number": 26,
+        "title": "Handmade by God",
+        "subtitle": "Psalm 139:13-16",
+        "references": [
+          {
+            "book": "Psalm",
+            "minChapter": 139,
+            "minVerse": 13,
+            "maxChapter": 139,
+            "maxVerse": 16
+          }
+        ]
+      },
+      {
+        "number": 27,
+        "title": "Children Born with God’s Help",
+        "subtitle": "Genesis 4:1",
+        "references": [
+          {
+            "book": "Genesis",
+            "minChapter": 4,
+            "minVerse": 1,
+            "maxChapter": 4,
+            "maxVerse": 1
+          }
+        ]
+      },
+      {
+        "number": 28,
+        "title": "Abraham Cries out for an Heir",
+        "subtitle": "Genesis 15:1-6",
+        "references": [
+          {
+            "book": "Genesis",
+            "minChapter": 15,
+            "minVerse": 1,
+            "maxChapter": 15,
+            "maxVerse": 6
+          }
+        ]
+      },
+      {
+        "number": 29,
+        "title": "Hannah Prays for a Son",
+        "subtitle": "1 Samuel 1:10-11",
+        "references": [
+          {
+            "book": "1 Samuel",
+            "minChapter": 1,
+            "minVerse": 10,
+            "maxChapter": 1,
+            "maxVerse": 11
+          }
+        ]
+      },
+      {
+        "number": 30,
+        "title": "Genealogies Tell the Story of Life",
+        "subtitle": "1 Chronicles 1:1-2",
+        "references": [
+          {
+            "book": "1 Chronicles",
+            "minChapter": 1,
+            "minVerse": 1,
+            "maxChapter": 1,
+            "maxVerse": 2
+          }
+        ]
+      },
+      {
+        "number": 31,
+        "title": "God Understands Aaron’s Parental Concerns",
+        "subtitle": "Leviticus 10:19-20",
+        "references": [
+          {
+            "book": "Leviticus",
+            "minChapter": 10,
+            "minVerse": 19,
+            "maxChapter": 10,
+            "maxVerse": 20
+          }
+        ]
+      },
+      {
+        "number": 32,
+        "title": "Jesus Models Sonship",
+        "subtitle": "Luke 2:41-52",
+        "references": [
+          {
+            "book": "Luke",
+            "minChapter": 2,
+            "minVerse": 41,
+            "maxChapter": 2,
+            "maxVerse": 52
+          }
+        ]
+      },
+      {
+        "number": 33,
+        "title": "Honor Father and Mother",
+        "subtitle": "Deuteronomy 5:16",
+        "references": [
+          {
+            "book": "Deuteronomy",
+            "minChapter": 5,
+            "minVerse": 16,
+            "maxChapter": 5,
+            "maxVerse": 16
+          }
+        ]
+      },
+      {
+        "number": 34,
+        "title": "Listen to Your Parent’s Instructions",
+        "subtitle": "Proverbs 1:8",
+        "references": [
+          {
+            "book": "Proverbs",
+            "minChapter": 1,
+            "minVerse": 8,
+            "maxChapter": 1,
+            "maxVerse": 8
+          }
+        ]
+      },
+      {
+        "number": 35,
+        "title": "Discipline Your Children with Love",
+        "subtitle": "Proverbs 3:11-12",
+        "references": [
+          {
+            "book": "Proverbs",
+            "minChapter": 3,
+            "minVerse": 11,
+            "maxChapter": 3,
+            "maxVerse": 12
+          }
+        ]
+      },
+      {
+        "number": 36,
+        "title": "Multigenerational Accountability",
+        "subtitle": "Deuteronomy 29:29",
+        "references": [
+          {
+            "book": "Deuteronomy",
+            "minChapter": 29,
+            "minVerse": 29,
+            "maxChapter": 29,
+            "maxVerse": 29
+          }
+        ]
+      },
+      {
+        "number": 37,
+        "title": "Multigenerational Consequences",
+        "subtitle": "Deuteronomy 5:8-10",
+        "references": [
+          {
+            "book": "Deuteronomy",
+            "minChapter": 5,
+            "minVerse": 8,
+            "maxChapter": 5,
+            "maxVerse": 10
+          }
+        ]
+      },
+      {
+        "number": 38,
+        "title": "Parents and Children Reconciled",
+        "subtitle": "Malachi 4:5-6",
+        "references": [
+          {
+            "book": "Malachi",
+            "minChapter": 4,
+            "minVerse": 5,
+            "maxChapter": 4,
+            "maxVerse": 6
+          }
+        ]
+      },
+      {
+        "number": 39,
+        "title": "Adopted as God’s Children",
+        "subtitle": "Romans 8:14-15",
+        "references": [
+          {
+            "book": "Romans",
+            "minChapter": 8,
+            "minVerse": 14,
+            "maxChapter": 8,
+            "maxVerse": 15
+          }
+        ]
+      }
+    ],
+    "Biblical Principles for Living in Family": [
+      {
+        "number": 40,
+        "title": "Every Family Member Valued",
+        "subtitle": "2 Chronicles 31:15-16",
+        "references": [
+          {
+            "book": "2 Chronicles",
+            "minChapter": 31,
+            "minVerse": 15,
+            "maxChapter": 31,
+            "maxVerse": 16
+          }
+        ]
+      },
+      {
+        "number": 41,
+        "title": "Caring for Family Members",
+        "subtitle": "1 Timothy 5:3-4, 8",
+        "references": [
+          {
+            "book": "1 Timothy",
+            "minChapter": 5,
+            "minVerse": 3,
+            "maxChapter": 5,
+            "maxVerse": 4
+          },
+          {
+            "book": "1 Timothy",
+            "minChapter": 5,
+            "minVerse": 8,
+            "maxChapter": 5,
+            "maxVerse": 8
+          }
+        ]
+      },
+      {
+        "number": 42,
+        "title": "Widows and Orphans",
+        "subtitle": "Exodus 22:22-23",
+        "references": [
+          {
+            "book": "Exodus",
+            "minChapter": 22,
+            "minVerse": 22,
+            "maxChapter": 22,
+            "maxVerse": 23
+          }
+        ]
+      },
+      {
+        "number": 43,
+        "title": "A Kinsman Redeemer",
+        "subtitle": "Ruth 3:7-4:13",
+        "references": [
+          {
+            "book": "Ruth",
+            "minChapter": 3,
+            "minVerse": 7,
+            "maxChapter": 4,
+            "maxVerse": 13
+          }
+        ]
+      },
+      {
+        "number": 44,
+        "title": "David Cares for Mephibosheth",
+        "subtitle": "2 Samuel 9:1",
+        "references": [
+          {
+            "book": "2 Samuel",
+            "minChapter": 9,
+            "minVerse": 1,
+            "maxChapter": 9,
+            "maxVerse": 1
+          }
+        ]
+      },
+      {
+        "number": 45,
+        "title": "Families Serve the Community Together",
+        "subtitle": "Nehemiah 3:23, 28",
+        "references": [
+          {
+            "book": "Nehemiah",
+            "minChapter": 3,
+            "minVerse": 23,
+            "maxChapter": 3,
+            "maxVerse": 23
+          },
+          {
+            "book": "Nehemiah",
+            "minChapter": 3,
+            "minVerse": 28,
+            "maxChapter": 3,
+            "maxVerse": 28
+          }
+        ]
+      },
+      {
+        "number": 46,
+        "title": "Friends and Family",
+        "subtitle": "Proverbs 27:10",
+        "references": [
+          {
+            "book": "Proverbs",
+            "minChapter": 27,
+            "minVerse": 10,
+            "maxChapter": 27,
+            "maxVerse": 10
+          }
+        ]
+      }
+    ],
+    "Crossover Passages": [
+      {
+        "number": 47,
+        "title": "Crossover with ECONOMICS",
+        "subtitle": "Acts 5:1-10",
+        "references": [
+          {
+            "book": "Acts",
+            "minChapter": 5,
+            "minVerse": 1,
+            "maxChapter": 5,
+            "maxVerse": 10
+          }
+        ]
+      },
+      {
+        "number": 48,
+        "title": "Crossover with GOVERNMENT",
+        "subtitle": "2 Chronicles 25:4",
+        "references": [
+          {
+            "book": "2 Chronicles",
+            "minChapter": 25,
+            "minVerse": 4,
+            "maxChapter": 25,
+            "maxVerse": 4
+          }
+        ]
+      },
+      {
+        "number": 49,
+        "title": "Crossover with RELIGION",
+        "subtitle": "Luke 11:27",
+        "references": [
+          {
+            "book": "Luke",
+            "minChapter": 11,
+            "minVerse": 27,
+            "maxChapter": 11,
+            "maxVerse": 27
+          }
+        ]
+      },
+      {
+        "number": 50,
+        "title": "Crossover with EDUCATION",
+        "subtitle": "Psalm 78:1-8",
+        "references": [
+          {
+            "book": "Psalm",
+            "minChapter": 78,
+            "minVerse": 1,
+            "maxChapter": 78,
+            "maxVerse": 8
+          }
+        ]
+      },
+      {
+        "number": 51,
+        "title": "Crossover with MEDIA/COMMUNICATION",
+        "subtitle": "1 Timothy 5:1-2",
+        "references": [
+          {
+            "book": "1 Timothy",
+            "minChapter": 5,
+            "minVerse": 1,
+            "maxChapter": 5,
+            "maxVerse": 2
+          }
+        ]
+      },
+      {
+        "number": 52,
+        "title": "Crossover with CELEBRATION",
+        "subtitle": "Exodus 12:1-4",
+        "references": [
+          {
+            "book": "Exodus",
+            "minChapter": 12,
+            "minVerse": 1,
+            "maxChapter": 12,
+            "maxVerse": 4
+          }
+        ]
+      }
+    ]
+  },
+  "Economics": {
+    "God and the Sphere of Economics": [
+      {
+        "number": 1,
+        "title": "God Created Everything",
+        "subtitle": "Isaiah 42:5-7",
+        "references": [
+          {
+            "book": "Isaiah",
+            "minChapter": 42,
+            "minVerse": 5,
+            "maxChapter": 42,
+            "maxVerse": 7
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "title": "God Continues to Do New Things",
+        "subtitle": "Isaiah 43:19",
+        "references": [
+          {
+            "book": "Isaiah",
+            "minChapter": 43,
+            "minVerse": 19,
+            "maxChapter": 43,
+            "maxVerse": 19
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "title": "God Provides for All of Creation",
+        "subtitle": "Psalm 147:8-9",
+        "references": [
+          {
+            "book": "Psalm",
+            "minChapter": 147,
+            "minVerse": 8,
+            "maxChapter": 147,
+            "maxVerse": 9
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "title": "God Provided in the Desert",
+        "subtitle": "Deuteronomy 29:5-6",
+        "references": [
+          {
+            "book": "Deuteronomy",
+            "minChapter": 29,
+            "minVerse": 5,
+            "maxChapter": 29,
+            "maxVerse": 6
+          }
+        ]
+      },
+      {
+        "number": 5,
+        "title": "God Is Our Healer",
+        "subtitle": "Exodus 15:23-26",
+        "references": [
+          {
+            "book": "Exodus",
+            "minChapter": 15,
+            "minVerse": 23,
+            "maxChapter": 15,
+            "maxVerse": 26
+          }
+        ]
+      },
+      {
+        "number": 6,
+        "title": "Jesus Is Our Healer",
+        "subtitle": "Isaiah 53:5",
+        "references": [
+          {
+            "book": "Isaiah",
+            "minChapter": 53,
+            "minVerse": 5,
+            "maxChapter": 53,
+            "maxVerse": 5
+          }
+        ]
+      }
+    ],
+    "Innovative Science and Technology": [
+      {
+        "number": 7,
+        "title": "Given a Scientific Research Task",
+        "subtitle": "Genesis 2:19-20",
+        "references": [
+          {
+            "book": "Genesis",
+            "minChapter": 2,
+            "minVerse": 19,
+            "maxChapter": 2,
+            "maxVerse": 20
+          }
+        ]
+      },
+      {
+        "number": 8,
+        "title": "Twelve Spies Research Agricultural Potential",
+        "subtitle": "Numbers 13:17-20",
+        "references": [
+          {
+            "book": "Numbers",
+            "minChapter": 13,
+            "minVerse": 17,
+            "maxChapter": 13,
+            "maxVerse": 20
+          }
+        ]
+      },
+      {
+        "number": 9,
+        "title": "Nehemiah Researches Architectural Needs",
+        "subtitle": "Nehemiah 2:12-18",
+        "references": [
+          {
+            "book": "Nehemiah",
+            "minChapter": 2,
+            "minVerse": 12,
+            "maxChapter": 2,
+            "maxVerse": 18
+          }
+        ]
+      },
+      {
+        "number": 10,
+        "title": "Jacob’s Sheep Breeding",
+        "subtitle": "Genesis 30:27-43",
+        "references": [
+          {
+            "book": "Genesis",
+            "minChapter": 30,
+            "minVerse": 27,
+            "maxChapter": 30,
+            "maxVerse": 43
+          }
+        ]
+      },
+      {
+        "number": 11,
+        "title": "The Value of Safe Transportation Systems",
+        "subtitle": "Judges 5:6, 10",
+        "references": [
+          {
+            "book": "Judges",
+            "minChapter": 5,
+            "minVerse": 6,
+            "maxChapter": 5,
+            "maxVerse": 6
+          },
+          {
+            "book": "Judges",
+            "minChapter": 5,
+            "minVerse": 10,
+            "maxChapter": 5,
+            "maxVerse": 10
+          }
+        ]
+      },
+      {
+        "number": 12,
+        "title": "Hezekiah’s Engineering Wonder",
+        "subtitle": "2 Kings 20:20",
+        "references": [
+          {
+            "book": "2 Kings",
+            "minChapter": 20,
+            "minVerse": 20,
+            "maxChapter": 20,
+            "maxVerse": 20
+          }
+        ]
+      },
+      {
+        "number": 13,
+        "title": "Uzziah’s Inventive War Machines",
+        "subtitle": "2 Chronicles 26:14-15",
+        "references": [
+          {
+            "book": "2 Chronicles",
+            "minChapter": 26,
+            "minVerse": 14,
+            "maxChapter": 26,
+            "maxVerse": 15
+          }
+        ]
+      }
+    ],
+    "Healthcare": [
+      {
+        "number": 14,
+        "title": "Commissioned to Heal",
+        "subtitle": "Matthew 10:1",
+        "references": [
+          {
+            "book": "Matthew",
+            "minChapter": 10,
+            "minVerse": 1,
+            "maxChapter": 10,
+            "maxVerse": 1
+          }
+        ]
+      },
+      {
+        "number": 15,
+        "title": "Healed for the Glory of God",
+        "subtitle": "John 9:1-3",
+        "references": [
+          {
+            "book": "John",
+            "minChapter": 9,
+            "minVerse": 1,
+            "maxChapter": 9,
+            "maxVerse": 3
+          }
+        ]
+      },
+      {
+        "number": 16,
+        "title": "Healing Challenges Cultural Paradigms",
+        "subtitle": "Luke 13:10-17",
+        "references": [
+          {
+            "book": "Luke",
+            "minChapter": 13,
+            "minVerse": 10,
+            "maxChapter": 13,
+            "maxVerse": 17
+          }
+        ]
+      },
+      {
+        "number": 17,
+        "title": "An Enemy Healed",
+        "subtitle": "2 Kings 5:1-14",
+        "references": [
+          {
+            "book": "2 Kings",
+            "minChapter": 5,
+            "minVerse": 1,
+            "maxChapter": 5,
+            "maxVerse": 14
+          }
+        ]
+      },
+      {
+        "number": 18,
+        "title": "Jesus Did What Doctors Could Not Do",
+        "subtitle": "Mark 5:25-34",
+        "references": [
+          {
+            "book": "Mark",
+            "minChapter": 5,
+            "minVerse": 25,
+            "maxChapter": 5,
+            "maxVerse": 34
+          }
+        ]
+      },
+      {
+        "number": 19,
+        "title": "Sheep and Goats",
+        "subtitle": "Matthew 25:33-46",
+        "references": [
+          {
+            "book": "Matthew",
+            "minChapter": 25,
+            "minVerse": 33,
+            "maxChapter": 25,
+            "maxVerse": 46
+          }
+        ]
+      },
+      {
+        "number": 20,
+        "title": "We Have a Healthy Future!",
+        "subtitle": "Revelation 21:3-4",
+        "references": [
+          {
+            "book": "Revelation",
+            "minChapter": 21,
+            "minVerse": 3,
+            "maxChapter": 21,
+            "maxVerse": 4
+          }
+        ]
+      }
+    ],
+    "Biblical Principles for Business": [
+      {
+        "number": 21,
+        "title": "A God-Given Job",
+        "subtitle": "Genesis 2:8-9, 15",
+        "references": [
+          {
+            "book": "Genesis",
+            "minChapter": 2,
+            "minVerse": 8,
+            "maxChapter": 2,
+            "maxVerse": 9
+          },
+          {
+            "book": "Genesis",
+            "minChapter": 2,
+            "minVerse": 15,
+            "maxChapter": 2,
+            "maxVerse": 15
+          }
+        ]
+      },
+      {
+        "number": 22,
+        "title": "Covenantal Blessings and Curses",
+        "subtitle": "Deuteronomy 28:1-6, 15-19",
+        "references": [
+          {
+            "book": "Deuteronomy",
+            "minChapter": 28,
+            "minVerse": 1,
+            "maxChapter": 28,
+            "maxVerse": 6
+          },
+          {
+            "book": "Deuteronomy",
+            "minChapter": 28,
+            "minVerse": 15,
+            "maxChapter": 28,
+            "maxVerse": 19
+          }
+        ]
+      },
+      {
+        "number": 23,
+        "title": "The Sabbath Instituted",
+        "subtitle": "Genesis 2:2-3",
+        "references": [
+          {
+            "book": "Genesis",
+            "minChapter": 2,
+            "minVerse": 2,
+            "maxChapter": 2,
+            "maxVerse": 3
+          }
+        ]
+      },
+      {
+        "number": 24,
+        "title": "Jubilee Laws Established",
+        "subtitle": "Leviticus 25",
+        "references": [
+          {
+            "book": "Leviticus",
+            "minChapter": 25,
+            "minVerse": 1,
+            "maxChapter": 25,
+            "maxVerse": 55
+          }
+        ]
+      },
+      {
+        "number": 25,
+        "title": "Integrity in the Marketplace",
+        "subtitle": "Leviticus 19:35-36",
+        "references": [
+          {
+            "book": "Leviticus",
+            "minChapter": 19,
+            "minVerse": 35,
+            "maxChapter": 19,
+            "maxVerse": 36
+          }
+        ]
+      },
+      {
+        "number": 26,
+        "title": "Jehoshaphat’s Ungodly Partnership",
+        "subtitle": "2 Chronicles 20:35-37",
+        "references": [
+          {
+            "book": "2 Chronicles",
+            "minChapter": 20,
+            "minVerse": 35,
+            "maxChapter": 20,
+            "maxVerse": 37
+          }
+        ]
+      },
+      {
+        "number": 27,
+        "title": "Jesus Cleanses the Temple of Merchants",
+        "subtitle": "Mark 11:15-17",
+        "references": [
+          {
+            "book": "Mark",
+            "minChapter": 11,
+            "minVerse": 15,
+            "maxChapter": 11,
+            "maxVerse": 17
+          }
+        ]
+      },
+      {
+        "number": 28,
+        "title": "God Gives the Farmer Wisdom",
+        "subtitle": "Isaiah 28:24-29",
+        "references": [
+          {
+            "book": "Isaiah",
+            "minChapter": 28,
+            "minVerse": 24,
+            "maxChapter": 28,
+            "maxVerse": 29
+          }
+        ]
+      },
+      {
+        "number": 29,
+        "title": "Worship When There Is Abundant Provision",
+        "subtitle": "Joel 2:23-26",
+        "references": [
+          {
+            "book": "Joel",
+            "minChapter": 2,
+            "minVerse": 23,
+            "maxChapter": 2,
+            "maxVerse": 26
+          }
+        ]
+      },
+      {
+        "number": 30,
+        "title": "Worship When There Is No Provision",
+        "subtitle": "Habakkuk 3:17-18",
+        "references": [
+          {
+            "book": "Habakkuk",
+            "minChapter": 3,
+            "minVerse": 17,
+            "maxChapter": 3,
+            "maxVerse": 18
+          }
+        ]
+      },
+      {
+        "number": 31,
+        "title": "Provision for Widows, Orphans and Refugees",
+        "subtitle": "Deuteronomy 24:17-22",
+        "references": [
+          {
+            "book": "Deuteronomy",
+            "minChapter": 24,
+            "minVerse": 17,
+            "maxChapter": 24,
+            "maxVerse": 22
+          }
+        ]
+      },
+      {
+        "number": 32,
+        "title": "Let My People Go",
+        "subtitle": "Exodus 2:23-25",
+        "references": [
+          {
+            "book": "Exodus",
+            "minChapter": 2,
+            "minVerse": 23,
+            "maxChapter": 2,
+            "maxVerse": 25
+          }
+        ]
+      },
+      {
+        "number": 33,
+        "title": "Paul Appeals for Onesimus’ Freedom",
+        "subtitle": "Philemon 10-19",
+        "references": [
+          {
+            "book": "Philemon",
+            "minChapter": 1,
+            "minVerse": 10,
+            "maxChapter": 1,
+            "maxVerse": 19
+          }
+        ]
+      }
+    ],
+    "Economic Do’s and Don’ts": [
+      {
+        "number": 34,
+        "title": "Do Not Steal",
+        "subtitle": "Deuteronomy 5:19",
+        "references": [
+          {
+            "book": "Deuteronomy",
+            "minChapter": 5,
+            "minVerse": 19,
+            "maxChapter": 5,
+            "maxVerse": 19
+          }
+        ]
+      },
+      {
+        "number": 35,
+        "title": "Work or Don’t Eat",
+        "subtitle": "2 Thessalonians 3:6-12",
+        "references": [
+          {
+            "book": "2 Thessalonians",
+            "minChapter": 3,
+            "minVerse": 6,
+            "maxChapter": 3,
+            "maxVerse": 12
+          }
+        ]
+      },
+      {
+        "number": 36,
+        "title": "Work So You Can Be a Giver",
+        "subtitle": "Ephesians 4:28",
+        "references": [
+          {
+            "book": "Ephesians",
+            "minChapter": 4,
+            "minVerse": 28,
+            "maxChapter": 4,
+            "maxVerse": 28
+          }
+        ]
+      },
+      {
+        "number": 37,
+        "title": "Tithe Plus",
+        "subtitle": "Matthew 23:23-24",
+        "references": [
+          {
+            "book": "Matthew",
+            "minChapter": 23,
+            "minVerse": 23,
+            "maxChapter": 23,
+            "maxVerse": 24
+          }
+        ]
+      },
+      {
+        "number": 38,
+        "title": "Be Generous",
+        "subtitle": "Proverbs 11:24-25",
+        "references": [
+          {
+            "book": "Proverbs",
+            "minChapter": 11,
+            "minVerse": 24,
+            "maxChapter": 11,
+            "maxVerse": 25
+          }
+        ]
+      },
+      {
+        "number": 39,
+        "title": "Put God to the Test",
+        "subtitle": "Malachi 3:10-11",
+        "references": [
+          {
+            "book": "Malachi",
+            "minChapter": 3,
+            "minVerse": 10,
+            "maxChapter": 3,
+            "maxVerse": 11
+          }
+        ]
+      },
+      {
+        "number": 40,
+        "title": "Idolatrous Efforts to Prosper",
+        "subtitle": "2 Kings 21:7-9",
+        "references": [
+          {
+            "book": "2 Kings",
+            "minChapter": 21,
+            "minVerse": 7,
+            "maxChapter": 21,
+            "maxVerse": 9
+          }
+        ]
+      },
+      {
+        "number": 41,
+        "title": "No Favoritism Based on Economic Status",
+        "subtitle": "James 2:1-9",
+        "references": [
+          {
+            "book": "James",
+            "minChapter": 2,
+            "minVerse": 1,
+            "maxChapter": 2,
+            "maxVerse": 9
+          }
+        ]
+      },
+      {
+        "number": 42,
+        "title": "Wealth Does Not Equal True Happiness",
+        "subtitle": "Ecclesiastes 5:10-15",
+        "references": [
+          {
+            "book": "Ecclesiastes",
+            "minChapter": 5,
+            "minVerse": 10,
+            "maxChapter": 5,
+            "maxVerse": 15
+          }
+        ]
+      },
+      {
+        "number": 43,
+        "title": "Economic Righteousness",
+        "subtitle": "Amos 8:4-6",
+        "references": [
+          {
+            "book": "Amos",
+            "minChapter": 8,
+            "minVerse": 4,
+            "maxChapter": 8,
+            "maxVerse": 6
+          }
+        ]
+      },
+      {
+        "number": 44,
+        "title": "Prayer Impacts Economic Activity",
+        "subtitle": "2 Chronicles 7:13-14",
+        "references": [
+          {
+            "book": "2 Chronicles",
+            "minChapter": 7,
+            "minVerse": 13,
+            "maxChapter": 7,
+            "maxVerse": 14
+          }
+        ]
+      },
+      {
+        "number": 45,
+        "title": "Build … Plant … Pray …",
+        "subtitle": "Jeremiah 29:4-7",
+        "references": [
+          {
+            "book": "Jeremiah",
+            "minChapter": 29,
+            "minVerse": 4,
+            "maxChapter": 29,
+            "maxVerse": 7
+          }
+        ]
+      },
+      {
+        "number": 46,
+        "title": "Peter’s Miraculous Catch",
+        "subtitle": "Luke 5:2-7",
+        "references": [
+          {
+            "book": "Luke",
+            "minChapter": 5,
+            "minVerse": 2,
+            "maxChapter": 5,
+            "maxVerse": 7
+          }
+        ]
+      }
+    ],
+    "Crossover Passages": [
+      {
+        "number": 47,
+        "title": "Crossover with FAMILY",
+        "subtitle": "1 Kings 5:14",
+        "references": [
+          {
+            "book": "1 Kings",
+            "minChapter": 5,
+            "minVerse": 14,
+            "maxChapter": 5,
+            "maxVerse": 14
+          }
+        ]
+      },
+      {
+        "number": 48,
+        "title": "Crossover with GOVERNMENT",
+        "subtitle": "1 Kings 21:1-19",
+        "references": [
+          {
+            "book": "1 Kings",
+            "minChapter": 21,
+            "minVerse": 1,
+            "maxChapter": 21,
+            "maxVerse": 19
+          }
+        ]
+      },
+      {
+        "number": 49,
+        "title": "Crossover with RELIGION",
+        "subtitle": "2 Kings 5:20-27",
+        "references": [
+          {
+            "book": "2 Kings",
+            "minChapter": 5,
+            "minVerse": 20,
+            "maxChapter": 5,
+            "maxVerse": 27
+          }
+        ]
+      },
+      {
+        "number": 50,
+        "title": "Crossover with EDUCATION",
+        "subtitle": "Galatians 6:6",
+        "references": [
+          {
+            "book": "Galatians",
+            "minChapter": 6,
+            "minVerse": 6,
+            "maxChapter": 6,
+            "maxVerse": 6
+          }
+        ]
+      },
+      {
+        "number": 51,
+        "title": "Crossover with MEDIA/COMMUNICATIONS",
+        "subtitle": "Leviticus 6:1-5",
+        "references": [
+          {
+            "book": "Leviticus",
+            "minChapter": 6,
+            "minVerse": 1,
+            "maxChapter": 6,
+            "maxVerse": 5
+          }
+        ]
+      },
+      {
+        "number": 52,
+        "title": "Crossover with CELEBRATION",
+        "subtitle": "Leviticus 23:3, 7, 8, 21, 25, 35, 36",
+        "references": [
+          {
+            "book": "Leviticus",
+            "minChapter": 23,
+            "minVerse": 3,
+            "maxChapter": 23,
+            "maxVerse": 3
+          },
+          {
+            "book": "Leviticus",
+            "minChapter": 23,
+            "minVerse": 7,
+            "maxChapter": 23,
+            "maxVerse": 7
+          },
+          {
+            "book": "Leviticus",
+            "minChapter": 23,
+            "minVerse": 8,
+            "maxChapter": 23,
+            "maxVerse": 8
+          },
+          {
+            "book": "Leviticus",
+            "minChapter": 23,
+            "minVerse": 21,
+            "maxChapter": 23,
+            "maxVerse": 21
+          },
+          {
+            "book": "Leviticus",
+            "minChapter": 23,
+            "minVerse": 25,
+            "maxChapter": 23,
+            "maxVerse": 25
+          },
+          {
+            "book": "Leviticus",
+            "minChapter": 23,
+            "minVerse": 35,
+            "maxChapter": 23,
+            "maxVerse": 35
+          },
+          {
+            "book": "Leviticus",
+            "minChapter": 23,
+            "minVerse": 36,
+            "maxChapter": 23,
+            "maxVerse": 36
+          }
+        ]
+      }
+    ]
+  },
+  "Religion": {
+    "God and the Sphere of Religion": [
+      {
+        "number": 1,
+        "title": "Jesus Is Our High Priest",
+        "subtitle": "Hebrews 2:16-18",
+        "references": [
+          {
+            "book": "Hebrews",
+            "minChapter": 2,
+            "minVerse": 16,
+            "maxChapter": 2,
+            "maxVerse": 18
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "title": "Reconciled to Be Reconcilers",
+        "subtitle": "2 Corinthians 5:18-20",
+        "references": [
+          {
+            "book": "2 Corinthians",
+            "minChapter": 5,
+            "minVerse": 18,
+            "maxChapter": 5,
+            "maxVerse": 20
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "title": "Jesus Is God's Prophet",
+        "subtitle": "John 6:14",
+        "references": [
+          {
+            "book": "John",
+            "minChapter": 6,
+            "minVerse": 14,
+            "maxChapter": 6,
+            "maxVerse": 14
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "title": "The Purpose of Prophesy",
+        "subtitle": "1 Corinthians 14:3",
+        "references": [
+          {
+            "book": "1 Corinthians",
+            "minChapter": 14,
+            "minVerse": 3,
+            "maxChapter": 14,
+            "maxVerse": 3
+          }
+        ]
+      },
+      {
+        "number": 5,
+        "title": "Jesus Is Our Intercessor",
+        "subtitle": "Hebrews 7:24-25",
+        "references": [
+          {
+            "book": "Hebrews",
+            "minChapter": 7,
+            "minVerse": 24,
+            "maxChapter": 7,
+            "maxVerse": 25
+          }
+        ]
+      },
+      {
+        "number": 6,
+        "title": "When There Is No Intercessor",
+        "subtitle": "Ezekiel 22:30-31",
+        "references": [
+          {
+            "book": "Ezekiel",
+            "minChapter": 22,
+            "minVerse": 30,
+            "maxChapter": 22,
+            "maxVerse": 31
+          }
+        ]
+      }
+    ],
+    "The Marks of True and False Religion": [
+      {
+        "number": 7,
+        "title": "A New Covenant",
+        "subtitle": "Jeremiah 31:33-34",
+        "references": [
+          {
+            "book": "Jeremiah",
+            "minChapter": 31,
+            "minVerse": 33,
+            "maxChapter": 31,
+            "maxVerse": 34
+          }
+        ]
+      },
+      {
+        "number": 8,
+        "title": "True Religion: God First in All.",
+        "subtitle": "Hebrews 11:17-19",
+        "references": [
+          {
+            "book": "Hebrews",
+            "minChapter": 11,
+            "minVerse": 17,
+            "maxChapter": 11,
+            "maxVerse": 19
+          }
+        ]
+      },
+      {
+        "number": 9,
+        "title": "Greatest Sin #1: Idolatry",
+        "subtitle": "2 Kings 17:7-18, 22-23",
+        "references": [
+          {
+            "book": "2 Kings",
+            "minChapter": 17,
+            "minVerse": 7,
+            "maxChapter": 17,
+            "maxVerse": 18
+          },
+          {
+            "book": "2 Kings",
+            "minChapter": 17,
+            "minVerse": 22,
+            "maxChapter": 17,
+            "maxVerse": 23
+          }
+        ]
+      },
+      {
+        "number": 10,
+        "title": "Genuine Religion: Compassion and Holiness",
+        "subtitle": "James 1:27",
+        "references": [
+          {
+            "book": "James",
+            "minChapter": 1,
+            "minVerse": 27,
+            "maxChapter": 1,
+            "maxVerse": 27
+          }
+        ]
+      },
+      {
+        "number": 11,
+        "title": "Greatest Sin #2: Injustice",
+        "subtitle": "Isaiah 58:1-12",
+        "references": [
+          {
+            "book": "Isaiah",
+            "minChapter": 58,
+            "minVerse": 1,
+            "maxChapter": 58,
+            "maxVerse": 12
+          }
+        ]
+      },
+      {
+        "number": 12,
+        "title": "Moses Intercedes for Israel (and Egypt!)",
+        "subtitle": "Exodus 32:7-14",
+        "references": [
+          {
+            "book": "Exodus",
+            "minChapter": 32,
+            "minVerse": 7,
+            "maxChapter": 32,
+            "maxVerse": 14
+          }
+        ]
+      },
+      {
+        "number": 13,
+        "title": "God Looks at the Heart",
+        "subtitle": "1 Samuel 16:7",
+        "references": [
+          {
+            "book": "1 Samuel",
+            "minChapter": 16,
+            "minVerse": 7,
+            "maxChapter": 16,
+            "maxVerse": 7
+          }
+        ]
+      },
+      {
+        "number": 14,
+        "title": "Inner Transformation Desired",
+        "subtitle": "1 Samuel 15:22-23",
+        "references": [
+          {
+            "book": "1 Samuel",
+            "minChapter": 15,
+            "minVerse": 22,
+            "maxChapter": 15,
+            "maxVerse": 23
+          }
+        ]
+      },
+      {
+        "number": 15,
+        "title": "What Is the Ultimate Good?",
+        "subtitle": "Micah 6:8",
+        "references": [
+          {
+            "book": "Micah",
+            "minChapter": 6,
+            "minVerse": 8,
+            "maxChapter": 6,
+            "maxVerse": 8
+          }
+        ]
+      },
+      {
+        "number": 16,
+        "title": "Repent! Believe! Follow!",
+        "subtitle": "Mark 1:14-18",
+        "references": [
+          {
+            "book": "Mark",
+            "minChapter": 1,
+            "minVerse": 14,
+            "maxChapter": 1,
+            "maxVerse": 18
+          }
+        ]
+      },
+      {
+        "number": 17,
+        "title": "Forgiven and Cleansed",
+        "subtitle": "1 John 1:5-9",
+        "references": [
+          {
+            "book": "1 John",
+            "minChapter": 1,
+            "minVerse": 5,
+            "maxChapter": 1,
+            "maxVerse": 9
+          }
+        ]
+      }
+    ],
+    "Biblical Purpose of Religion": [
+      {
+        "number": 18,
+        "title": "God Devises Ways to Bring Us Back",
+        "subtitle": "2 Samuel 14:14",
+        "references": [
+          {
+            "book": "2 Samuel",
+            "minChapter": 14,
+            "minVerse": 14,
+            "maxChapter": 14,
+            "maxVerse": 14
+          }
+        ]
+      },
+      {
+        "number": 19,
+        "title": "Why? For Love or for Gain?",
+        "subtitle": "Job 1:1-2:10",
+        "references": [
+          {
+            "book": "Job",
+            "minChapter": 1,
+            "minVerse": 1,
+            "maxChapter": 2,
+            "maxVerse": 10
+          }
+        ]
+      },
+      {
+        "number": 20,
+        "title": "Personal Revelation of God",
+        "subtitle": "Job 42:5-6",
+        "references": [
+          {
+            "book": "Job",
+            "minChapter": 42,
+            "minVerse": 5,
+            "maxChapter": 42,
+            "maxVerse": 6
+          }
+        ]
+      },
+      {
+        "number": 21,
+        "title": "God's Heart Longing Expressed",
+        "subtitle": "Psalm 81:13-16",
+        "references": [
+          {
+            "book": "Psalm",
+            "minChapter": 81,
+            "minVerse": 13,
+            "maxChapter": 81,
+            "maxVerse": 16
+          }
+        ]
+      },
+      {
+        "number": 22,
+        "title": "Repentance and Forgiveness of Sins",
+        "subtitle": "Luke 24:47",
+        "references": [
+          {
+            "book": "Luke",
+            "minChapter": 24,
+            "minVerse": 47,
+            "maxChapter": 24,
+            "maxVerse": 47
+          }
+        ]
+      }
+    ],
+    "Two Streams: Mobile and Local Expressions of Church": [
+      {
+        "number": 23,
+        "title": "Declare His Glory among the Nations",
+        "subtitle": "Psalm 96:1-6",
+        "references": [
+          {
+            "book": "Psalm",
+            "minChapter": 96,
+            "minVerse": 1,
+            "maxChapter": 96,
+            "maxVerse": 6
+          }
+        ]
+      },
+      {
+        "number": 24,
+        "title": "Paul's Missionary Team",
+        "subtitle": "Acts 20:4",
+        "references": [
+          {
+            "book": "Acts",
+            "minChapter": 20,
+            "minVerse": 4,
+            "maxChapter": 20,
+            "maxVerse": 4
+          }
+        ]
+      },
+      {
+        "number": 25,
+        "title": "Paul's Ministry Described",
+        "subtitle": "Colossians 1:28-29",
+        "references": [
+          {
+            "book": "Colossians",
+            "minChapter": 1,
+            "minVerse": 28,
+            "maxChapter": 1,
+            "maxVerse": 29
+          }
+        ]
+      },
+      {
+        "number": 26,
+        "title": "Levites Called to Serve the Tabernacle",
+        "subtitle": "Numbers 1:48-53",
+        "references": [
+          {
+            "book": "Numbers",
+            "minChapter": 1,
+            "minVerse": 48,
+            "maxChapter": 1,
+            "maxVerse": 53
+          }
+        ]
+      },
+      {
+        "number": 27,
+        "title": "James Leads the Church in Jerusalem",
+        "subtitle": "Acts 15:13-22",
+        "references": [
+          {
+            "book": "Acts",
+            "minChapter": 15,
+            "minVerse": 13,
+            "maxChapter": 15,
+            "maxVerse": 22
+          }
+        ]
+      }
+    ],
+    "Role of Religious Leaders": [
+      {
+        "number": 28,
+        "title": "Doing God's Thing God's Way",
+        "subtitle": "1 Chronicles 15:12-13",
+        "references": [
+          {
+            "book": "1 Chronicles",
+            "minChapter": 15,
+            "minVerse": 12,
+            "maxChapter": 15,
+            "maxVerse": 13
+          }
+        ]
+      },
+      {
+        "number": 29,
+        "title": "Five-fold Gifts",
+        "subtitle": "Ephesians 4:11-13",
+        "references": [
+          {
+            "book": "Ephesians",
+            "minChapter": 4,
+            "minVerse": 11,
+            "maxChapter": 4,
+            "maxVerse": 13
+          }
+        ]
+      },
+      {
+        "number": 30,
+        "title": "Qualifications for Church Leadership",
+        "subtitle": "Titus 1:5-9",
+        "references": [
+          {
+            "book": "Titus",
+            "minChapter": 1,
+            "minVerse": 5,
+            "maxChapter": 1,
+            "maxVerse": 9
+          }
+        ]
+      },
+      {
+        "number": 31,
+        "title": "Disciplines of a Church Leader",
+        "subtitle": "2 Timothy 2:1-7, 15",
+        "references": [
+          {
+            "book": "2 Timothy",
+            "minChapter": 2,
+            "minVerse": 1,
+            "maxChapter": 2,
+            "maxVerse": 7
+          },
+          {
+            "book": "2 Timothy",
+            "minChapter": 2,
+            "minVerse": 15,
+            "maxChapter": 2,
+            "maxVerse": 15
+          }
+        ]
+      },
+      {
+        "number": 32,
+        "title": "Imitate Me",
+        "subtitle": "Philippians 3:17-18",
+        "references": [
+          {
+            "book": "Philippians",
+            "minChapter": 3,
+            "minVerse": 17,
+            "maxChapter": 3,
+            "maxVerse": 18
+          }
+        ]
+      },
+      {
+        "number": 33,
+        "title": "Come. Go.",
+        "subtitle": "Mark 3:14-15",
+        "references": [
+          {
+            "book": "Mark",
+            "minChapter": 3,
+            "minVerse": 14,
+            "maxChapter": 3,
+            "maxVerse": 15
+          }
+        ]
+      },
+      {
+        "number": 34,
+        "title": "Mobile Teams Teaching God's Word",
+        "subtitle": "2 Chronicles 17:7-10",
+        "references": [
+          {
+            "book": "2 Chronicles",
+            "minChapter": 17,
+            "minVerse": 7,
+            "maxChapter": 17,
+            "maxVerse": 10
+          }
+        ]
+      },
+      {
+        "number": 35,
+        "title": "Ministry of the Prophet",
+        "subtitle": "1 Samuel 12:19-25",
+        "references": [
+          {
+            "book": "1 Samuel",
+            "minChapter": 12,
+            "minVerse": 19,
+            "maxChapter": 12,
+            "maxVerse": 25
+          }
+        ]
+      },
+      {
+        "number": 36,
+        "title": "Paul Prays for the Saints",
+        "subtitle": "Ephesians 1:15-18",
+        "references": [
+          {
+            "book": "Ephesians",
+            "minChapter": 1,
+            "minVerse": 15,
+            "maxChapter": 1,
+            "maxVerse": 18
+          }
+        ]
+      },
+      {
+        "number": 37,
+        "title": "Paul Asks the Saints to Pray for Him",
+        "subtitle": "Ephesians 6:10-20",
+        "references": [
+          {
+            "book": "Ephesians",
+            "minChapter": 6,
+            "minVerse": 10,
+            "maxChapter": 6,
+            "maxVerse": 20
+          }
+        ]
+      }
+    ],
+    "God with Us – God at the Center": [
+      {
+        "number": 38,
+        "title": "Not Without Your Presence",
+        "subtitle": "Exodus 33:15-17",
+        "references": [
+          {
+            "book": "Exodus",
+            "minChapter": 33,
+            "minVerse": 15,
+            "maxChapter": 33,
+            "maxVerse": 17
+          }
+        ]
+      },
+      {
+        "number": 39,
+        "title": "Named Jesus; Named Emmanuel",
+        "subtitle": "Matthew 1:20-23",
+        "references": [
+          {
+            "book": "Matthew",
+            "minChapter": 1,
+            "minVerse": 20,
+            "maxChapter": 1,
+            "maxVerse": 23
+          }
+        ]
+      },
+      {
+        "number": 40,
+        "title": "Purpose of Jesus' Coming",
+        "subtitle": "Mark 10:45",
+        "references": [
+          {
+            "book": "Mark",
+            "minChapter": 10,
+            "minVerse": 45,
+            "maxChapter": 10,
+            "maxVerse": 45
+          }
+        ]
+      },
+      {
+        "number": 41,
+        "title": "Two or Three Gathered in His Name",
+        "subtitle": "Matthew 18:20",
+        "references": [
+          {
+            "book": "Matthew",
+            "minChapter": 18,
+            "minVerse": 20,
+            "maxChapter": 18,
+            "maxVerse": 20
+          }
+        ]
+      }
+    ],
+    "Life of a Jesus-Follower": [
+      {
+        "number": 42,
+        "title": "Be Holy",
+        "subtitle": "Leviticus 20:26",
+        "references": [
+          {
+            "book": "Leviticus",
+            "minChapter": 20,
+            "minVerse": 26,
+            "maxChapter": 20,
+            "maxVerse": 26
+          }
+        ]
+      },
+      {
+        "number": 43,
+        "title": "True Prayer",
+        "subtitle": "Luke 18:9-14",
+        "references": [
+          {
+            "book": "Luke",
+            "minChapter": 18,
+            "minVerse": 9,
+            "maxChapter": 18,
+            "maxVerse": 14
+          }
+        ]
+      },
+      {
+        "number": 44,
+        "title": "Fruit of the Spirit",
+        "subtitle": "Galatians 5:22-25",
+        "references": [
+          {
+            "book": "Galatians",
+            "minChapter": 5,
+            "minVerse": 22,
+            "maxChapter": 5,
+            "maxVerse": 25
+          }
+        ]
+      },
+      {
+        "number": 45,
+        "title": "Declare the Excellencies of Him",
+        "subtitle": "1 Peter 2:9-10",
+        "references": [
+          {
+            "book": "1 Peter",
+            "minChapter": 2,
+            "minVerse": 9,
+            "maxChapter": 2,
+            "maxVerse": 10
+          }
+        ]
+      },
+      {
+        "number": 46,
+        "title": "Imitate Jesus; Embrace Suffering",
+        "subtitle": "1 Peter 2:21-25",
+        "references": [
+          {
+            "book": "1 Peter",
+            "minChapter": 2,
+            "minVerse": 21,
+            "maxChapter": 2,
+            "maxVerse": 25
+          }
+        ]
+      }
+    ],
+    "Crossover Passages": [
+      {
+        "number": 47,
+        "title": "Crossover with FAMILY",
+        "subtitle": "Jeremiah 32:33-35",
+        "references": [
+          {
+            "book": "Jeremiah",
+            "minChapter": 32,
+            "minVerse": 33,
+            "maxChapter": 32,
+            "maxVerse": 35
+          }
+        ]
+      },
+      {
+        "number": 48,
+        "title": "Crossover with ECONOMICS",
+        "subtitle": "Acts 8:18-23",
+        "references": [
+          {
+            "book": "Acts",
+            "minChapter": 8,
+            "minVerse": 18,
+            "maxChapter": 8,
+            "maxVerse": 23
+          }
+        ]
+      },
+      {
+        "number": 49,
+        "title": "Crossover with GOVERNMENT",
+        "subtitle": "Judges 6:25-32",
+        "references": [
+          {
+            "book": "Judges",
+            "minChapter": 6,
+            "minVerse": 25,
+            "maxChapter": 6,
+            "maxVerse": 32
+          }
+        ]
+      },
+      {
+        "number": 50,
+        "title": "Crossover with EDUCATION",
+        "subtitle": "Matthew 13:52",
+        "references": [
+          {
+            "book": "Matthew",
+            "minChapter": 13,
+            "minVerse": 52,
+            "maxChapter": 13,
+            "maxVerse": 52
+          }
+        ]
+      },
+      {
+        "number": 51,
+        "title": "Crossover with MEDIA/COMMUNICATION",
+        "subtitle": "Romans 10:14-15",
+        "references": [
+          {
+            "book": "Romans",
+            "minChapter": 10,
+            "minVerse": 14,
+            "maxChapter": 10,
+            "maxVerse": 15
+          }
+        ]
+      },
+      {
+        "number": 52,
+        "title": "Crossover with CELEBRATION",
+        "subtitle": "2 Chronicles 5:12-14",
+        "references": [
+          {
+            "book": "2 Chronicles",
+            "minChapter": 5,
+            "minVerse": 12,
+            "maxChapter": 5,
+            "maxVerse": 14
+          }
+        ]
+      }
+    ]
+  },
+  "Government": {
+    "God and the Sphere of Government": [
+      {
+        "number": 1,
+        "title": "God our Judge, Lawgiver and King",
+        "subtitle": "Isaiah 33:22",
+        "references": [
+          {
+            "book": "Isaiah",
+            "minChapter": 33,
+            "minVerse": 22,
+            "maxChapter": 33,
+            "maxVerse": 22
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "title": "Mercy and Justice",
+        "subtitle": "Jeremiah 7:5-7",
+        "references": [
+          {
+            "book": "Jeremiah",
+            "minChapter": 7,
+            "minVerse": 5,
+            "maxChapter": 7,
+            "maxVerse": 7
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "title": "God Gives a Unique Law",
+        "subtitle": "Psalm 147:19-20",
+        "references": [
+          {
+            "book": "Psalm",
+            "minChapter": 147,
+            "minVerse": 19,
+            "maxChapter": 147,
+            "maxVerse": 20
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "title": "God Is a Unique Lawgiver",
+        "subtitle": "James 4:12",
+        "references": [
+          {
+            "book": "James",
+            "minChapter": 4,
+            "minVerse": 12,
+            "maxChapter": 4,
+            "maxVerse": 12
+          }
+        ]
+      },
+      {
+        "number": 5,
+        "title": "The Foundations of God’s Throne ",
+        "subtitle": "Psalm 89:14, 18",
+        "references": [
+          {
+            "book": "Psalm",
+            "minChapter": 89,
+            "minVerse": 14,
+            "maxChapter": 89,
+            "maxVerse": 14
+          },
+          {
+            "book": "Psalm",
+            "minChapter": 89,
+            "minVerse": 18,
+            "maxChapter": 89,
+            "maxVerse": 18
+          }
+        ]
+      },
+      {
+        "number": 6,
+        "title": "King Messiah",
+        "subtitle": "Isaiah 9:6-7",
+        "references": [
+          {
+            "book": "Isaiah",
+            "minChapter": 9,
+            "minVerse": 6,
+            "maxChapter": 9,
+            "maxVerse": 7
+          }
+        ]
+      }
+    ],
+    "To Protect Citizens and Safeguard Justice": [
+      {
+        "number": 7,
+        "title": "The Purpose of Government Is to Protect",
+        "subtitle": "Romans 13:1-7",
+        "references": [
+          {
+            "book": "Romans",
+            "minChapter": 13,
+            "minVerse": 1,
+            "maxChapter": 13,
+            "maxVerse": 7
+          }
+        ]
+      },
+      {
+        "number": 8,
+        "title": "Daughters of Zelophehad",
+        "subtitle": "Numbers 27:1-11",
+        "references": [
+          {
+            "book": "Numbers",
+            "minChapter": 27,
+            "minVerse": 1,
+            "maxChapter": 27,
+            "maxVerse": 11
+          }
+        ]
+      },
+      {
+        "number": 9,
+        "title": "For Such a Time as This",
+        "subtitle": "Esther 4:13-16",
+        "references": [
+          {
+            "book": "Esther",
+            "minChapter": 4,
+            "minVerse": 13,
+            "maxChapter": 4,
+            "maxVerse": 16
+          }
+        ]
+      },
+      {
+        "number": 10,
+        "title": "Paul Protected by Rome",
+        "subtitle": "Acts 23:12-35",
+        "references": [
+          {
+            "book": "Acts",
+            "minChapter": 23,
+            "minVerse": 12,
+            "maxChapter": 23,
+            "maxVerse": 35
+          }
+        ]
+      },
+      {
+        "number": 11,
+        "title": "Children Not Protected by Herod",
+        "subtitle": "Matthew 2:16-18",
+        "references": [
+          {
+            "book": "Matthew",
+            "minChapter": 2,
+            "minVerse": 16,
+            "maxChapter": 2,
+            "maxVerse": 18
+          }
+        ]
+      },
+      {
+        "number": 12,
+        "title": "Vigilante-ism Undermines Justice",
+        "subtitle": "Exodus 2:11-15",
+        "references": [
+          {
+            "book": "Exodus",
+            "minChapter": 2,
+            "minVerse": 11,
+            "maxChapter": 2,
+            "maxVerse": 15
+          }
+        ]
+      },
+      {
+        "number": 13,
+        "title": "Anarchy Undermines Justice",
+        "subtitle": "Judges 21:25",
+        "references": [
+          {
+            "book": "Judges",
+            "minChapter": 21,
+            "minVerse": 25,
+            "maxChapter": 21,
+            "maxVerse": 25
+          }
+        ]
+      },
+      {
+        "number": 14,
+        "title": "Bureaucracy Undermines Justice",
+        "subtitle": "Ecclesiastes 5:8-9",
+        "references": [
+          {
+            "book": "Ecclesiastes",
+            "minChapter": 5,
+            "minVerse": 8,
+            "maxChapter": 5,
+            "maxVerse": 9
+          }
+        ]
+      }
+    ],
+    "Principles and Practices of Godly Government": [
+      {
+        "number": 15,
+        "title": "Righteous Leadership Is a Blessing",
+        "subtitle": "2 Samuel 23:3-4",
+        "references": [
+          {
+            "book": "2 Samuel",
+            "minChapter": 23,
+            "minVerse": 3,
+            "maxChapter": 23,
+            "maxVerse": 4
+          }
+        ]
+      },
+      {
+        "number": 16,
+        "title": "Josiah: Good in the Eyes of the Lord",
+        "subtitle": "2 Kings 22:2",
+        "references": [
+          {
+            "book": "2 Kings",
+            "minChapter": 22,
+            "minVerse": 2,
+            "maxChapter": 22,
+            "maxVerse": 2
+          }
+        ]
+      },
+      {
+        "number": 17,
+        "title": "Deborah: Women in National Leadership",
+        "subtitle": "Judges 4:4-9, 14-16",
+        "references": [
+          {
+            "book": "Judges",
+            "minChapter": 4,
+            "minVerse": 4,
+            "maxChapter": 4,
+            "maxVerse": 9
+          },
+          {
+            "book": "Judges",
+            "minChapter": 4,
+            "minVerse": 14,
+            "maxChapter": 4,
+            "maxVerse": 16
+          }
+        ]
+      },
+      {
+        "number": 18,
+        "title": "Nehemiah’s Leadership Integrity",
+        "subtitle": "Nehemiah 5:14-18",
+        "references": [
+          {
+            "book": "Nehemiah",
+            "minChapter": 5,
+            "minVerse": 14,
+            "maxChapter": 5,
+            "maxVerse": 18
+          }
+        ]
+      },
+      {
+        "number": 19,
+        "title": "Joseph Enslaves Egypt",
+        "subtitle": "Genesis 47:13-26",
+        "references": [
+          {
+            "book": "Genesis",
+            "minChapter": 47,
+            "minVerse": 13,
+            "maxChapter": 47,
+            "maxVerse": 26
+          }
+        ]
+      },
+      {
+        "number": 20,
+        "title": "Pray for Those in Authority",
+        "subtitle": "1 Timothy 2:2",
+        "references": [
+          {
+            "book": "1 Timothy",
+            "minChapter": 2,
+            "minVerse": 2,
+            "maxChapter": 2,
+            "maxVerse": 2
+          }
+        ]
+      },
+      {
+        "number": 21,
+        "title": "Fear God and Honor the King",
+        "subtitle": "1 Peter 2:13-17",
+        "references": [
+          {
+            "book": "1 Peter",
+            "minChapter": 2,
+            "minVerse": 13,
+            "maxChapter": 2,
+            "maxVerse": 17
+          }
+        ]
+      },
+      {
+        "number": 22,
+        "title": "Biblical Civil Disobedience (#1)",
+        "subtitle": "Daniel 3",
+        "references": [
+          {
+            "book": "Daniel",
+            "minChapter": 3,
+            "minVerse": 1,
+            "maxChapter": 3,
+            "maxVerse": 30
+          }
+        ]
+      }
+    ],
+    "Principles for the Executive Branch": [
+      {
+        "number": 23,
+        "title": "The Law of the Kings",
+        "subtitle": "Deuteronomy 17:14-20",
+        "references": [
+          {
+            "book": "Deuteronomy",
+            "minChapter": 17,
+            "minVerse": 14,
+            "maxChapter": 17,
+            "maxVerse": 20
+          }
+        ]
+      },
+      {
+        "number": 24,
+        "title": "Solomon: Gold, Horses and Wives",
+        "subtitle": "1 Kings 10:1-11:13",
+        "references": [
+          {
+            "book": "1 Kings",
+            "minChapter": 10,
+            "minVerse": 1,
+            "maxChapter": 11,
+            "maxVerse": 13
+          }
+        ]
+      },
+      {
+        "number": 25,
+        "title": "Asa: a Good King Goes Bad",
+        "subtitle": "2 Chronicles 16:9",
+        "references": [
+          {
+            "book": "2 Chronicles",
+            "minChapter": 16,
+            "minVerse": 9,
+            "maxChapter": 16,
+            "maxVerse": 9
+          }
+        ]
+      },
+      {
+        "number": 26,
+        "title": "Manasseh: a Bad King Goes Good",
+        "subtitle": "2 Chronicles 33:1-20",
+        "references": [
+          {
+            "book": "2 Chronicles",
+            "minChapter": 33,
+            "minVerse": 1,
+            "maxChapter": 33,
+            "maxVerse": 20
+          }
+        ]
+      },
+      {
+        "number": 27,
+        "title": "Give to Caesar What Is Caesar’s",
+        "subtitle": "Mark 12:13-17",
+        "references": [
+          {
+            "book": "Mark",
+            "minChapter": 12,
+            "minVerse": 13,
+            "maxChapter": 12,
+            "maxVerse": 17
+          }
+        ]
+      },
+      {
+        "number": 28,
+        "title": "Biblical Civil Disobedience (#2)",
+        "subtitle": "Daniel 1:5-20",
+        "references": [
+          {
+            "book": "Daniel",
+            "minChapter": 1,
+            "minVerse": 5,
+            "maxChapter": 1,
+            "maxVerse": 20
+          }
+        ]
+      }
+    ],
+    "Principles for the Judicial Branch": [
+      {
+        "number": 29,
+        "title": "Selection, Role and Character of Judges",
+        "subtitle": "Deuteronomy 1:15-17",
+        "references": [
+          {
+            "book": "Deuteronomy",
+            "minChapter": 1,
+            "minVerse": 15,
+            "maxChapter": 1,
+            "maxVerse": 17
+          }
+        ]
+      },
+      {
+        "number": 30,
+        "title": "Equity in Judgement",
+        "subtitle": "Leviticus 19:15",
+        "references": [
+          {
+            "book": "Leviticus",
+            "minChapter": 19,
+            "minVerse": 15,
+            "maxChapter": 19,
+            "maxVerse": 15
+          }
+        ]
+      },
+      {
+        "number": 31,
+        "title": "A Voice for the Voiceless",
+        "subtitle": "Exodus 4:9-18",
+        "references": [
+          {
+            "book": "Exodus",
+            "minChapter": 4,
+            "minVerse": 9,
+            "maxChapter": 4,
+            "maxVerse": 18
+          }
+        ]
+      },
+      {
+        "number": 32,
+        "title": "Verdicts That Produce Peace",
+        "subtitle": "Zechariah 8:16",
+        "references": [
+          {
+            "book": "Zechariah",
+            "minChapter": 8,
+            "minVerse": 16,
+            "maxChapter": 8,
+            "maxVerse": 16
+          }
+        ]
+      },
+      {
+        "number": 33,
+        "title": "Solomon’s Legal Wisdom",
+        "subtitle": "1 Kings 3:16-28",
+        "references": [
+          {
+            "book": "1 Kings",
+            "minChapter": 3,
+            "minVerse": 16,
+            "maxChapter": 3,
+            "maxVerse": 28
+          }
+        ]
+      },
+      {
+        "number": 34,
+        "title": "Cry Out for Justice!",
+        "subtitle": "Luke 18:1-8",
+        "references": [
+          {
+            "book": "Luke",
+            "minChapter": 18,
+            "minVerse": 1,
+            "maxChapter": 18,
+            "maxVerse": 8
+          }
+        ]
+      }
+    ],
+    "Principles for the Legislative Branch": [
+      {
+        "number": 35,
+        "title": "Laws Are to Be Life-giving",
+        "subtitle": "Ezekiel 33:15",
+        "references": [
+          {
+            "book": "Ezekiel",
+            "minChapter": 33,
+            "minVerse": 15,
+            "maxChapter": 33,
+            "maxVerse": 15
+          }
+        ]
+      },
+      {
+        "number": 36,
+        "title": "Moses Decrees Good Laws",
+        "subtitle": "Deuteronomy 4:4-5",
+        "references": [
+          {
+            "book": "Deuteronomy",
+            "minChapter": 4,
+            "minVerse": 4,
+            "maxChapter": 4,
+            "maxVerse": 5
+          }
+        ]
+      },
+      {
+        "number": 37,
+        "title": "Darius Decrees a Bad Law",
+        "subtitle": "Daniel 6:6-9",
+        "references": [
+          {
+            "book": "Daniel",
+            "minChapter": 6,
+            "minVerse": 6,
+            "maxChapter": 6,
+            "maxVerse": 9
+          }
+        ]
+      },
+      {
+        "number": 38,
+        "title": "Cities of Refuge",
+        "subtitle": "Numbers 35:9-15",
+        "references": [
+          {
+            "book": "Numbers",
+            "minChapter": 35,
+            "minVerse": 9,
+            "maxChapter": 35,
+            "maxVerse": 15
+          }
+        ]
+      },
+      {
+        "number": 39,
+        "title": "Pay Your Taxes",
+        "subtitle": "Matthew 17:25-27",
+        "references": [
+          {
+            "book": "Matthew",
+            "minChapter": 17,
+            "minVerse": 25,
+            "maxChapter": 17,
+            "maxVerse": 27
+          }
+        ]
+      },
+      {
+        "number": 40,
+        "title": "Biblical Civil Disobedience (#3)",
+        "subtitle": "Daniel 6:10-24",
+        "references": [
+          {
+            "book": "Daniel",
+            "minChapter": 6,
+            "minVerse": 10,
+            "maxChapter": 6,
+            "maxVerse": 24
+          }
+        ]
+      }
+    ],
+    "War and Peace": [
+      {
+        "number": 41,
+        "title": "Laws for War",
+        "subtitle": "Deuteronomy 20",
+        "references": [
+          {
+            "book": "Deuteronomy",
+            "minChapter": 20,
+            "minVerse": 1,
+            "maxChapter": 20,
+            "maxVerse": 20
+          }
+        ]
+      },
+      {
+        "number": 42,
+        "title": "Diplomacy Versus War",
+        "subtitle": "2 Samuel 10:1-8",
+        "references": [
+          {
+            "book": "2 Samuel",
+            "minChapter": 10,
+            "minVerse": 1,
+            "maxChapter": 10,
+            "maxVerse": 8
+          }
+        ]
+      },
+      {
+        "number": 43,
+        "title": "Military Authority and Faith",
+        "subtitle": "Luke 7:6-9",
+        "references": [
+          {
+            "book": "Luke",
+            "minChapter": 7,
+            "minVerse": 6,
+            "maxChapter": 7,
+            "maxVerse": 9
+          }
+        ]
+      },
+      {
+        "number": 44,
+        "title": "Civil War Destroys a Nation",
+        "subtitle": "Luke 11:17",
+        "references": [
+          {
+            "book": "Luke",
+            "minChapter": 11,
+            "minVerse": 17,
+            "maxChapter": 11,
+            "maxVerse": 17
+          }
+        ]
+      },
+      {
+        "number": 45,
+        "title": "Edom Judged for Wartime Disloyalty",
+        "subtitle": "Obadiah 11-15",
+        "references": [
+          {
+            "book": "Obadiah",
+            "minChapter": 1,
+            "minVerse": 11,
+            "maxChapter": 1,
+            "maxVerse": 15
+          }
+        ]
+      },
+      {
+        "number": 46,
+        "title": "Elisha “Defeats” the King of Aram",
+        "subtitle": "2 Kings 6:8-23",
+        "references": [
+          {
+            "book": "2 Kings",
+            "minChapter": 6,
+            "minVerse": 8,
+            "maxChapter": 6,
+            "maxVerse": 23
+          }
+        ]
+      }
+    ],
+    "Crossover Passages": [
+      {
+        "number": 47,
+        "title": "Crossover with FAMILY",
+        "subtitle": "2 Samuel 11:2-27",
+        "references": [
+          {
+            "book": "2 Samuel",
+            "minChapter": 11,
+            "minVerse": 2,
+            "maxChapter": 11,
+            "maxVerse": 27
+          }
+        ]
+      },
+      {
+        "number": 48,
+        "title": "Crossover with ECONOMICS",
+        "subtitle": "1 Kings 12:4-18",
+        "references": [
+          {
+            "book": "1 Kings",
+            "minChapter": 12,
+            "minVerse": 4,
+            "maxChapter": 12,
+            "maxVerse": 18
+          }
+        ]
+      },
+      {
+        "number": 49,
+        "title": "Crossover with RELIGION",
+        "subtitle": "1 Samuel 13:7-14",
+        "references": [
+          {
+            "book": "1 Samuel",
+            "minChapter": 13,
+            "minVerse": 7,
+            "maxChapter": 13,
+            "maxVerse": 14
+          }
+        ]
+      },
+      {
+        "number": 50,
+        "title": "Crossover with EDUCATION",
+        "subtitle": "Daniel 1:3-4",
+        "references": [
+          {
+            "book": "Daniel",
+            "minChapter": 1,
+            "minVerse": 3,
+            "maxChapter": 1,
+            "maxVerse": 4
+          }
+        ]
+      },
+      {
+        "number": 51,
+        "title": "Crossover with MEDIA/COMMUNICATION",
+        "subtitle": "Joshua 9:3-27",
+        "references": [
+          {
+            "book": "Joshua",
+            "minChapter": 9,
+            "minVerse": 3,
+            "maxChapter": 9,
+            "maxVerse": 27
+          }
+        ]
+      },
+      {
+        "number": 52,
+        "title": "Crossover with CELEBRATION",
+        "subtitle": "Mark 6:21-28",
+        "references": [
+          {
+            "book": "Mark",
+            "minChapter": 6,
+            "minVerse": 21,
+            "maxChapter": 6,
+            "maxVerse": 28
+          }
+        ]
+      }
+    ]
+  },
+  "Education": {
+    "God and the Sphere of Education": [
+      {
+        "number": 1,
+        "title": "God Longs to Reveal Himself Relationally",
+        "subtitle": "Exodus 6:7",
+        "references": [
+          {
+            "book": "Exodus",
+            "minChapter": 6,
+            "minVerse": 7,
+            "maxChapter": 6,
+            "maxVerse": 7
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "title": "God the Father Is Our Teacher",
+        "subtitle": "Isaiah 54:13",
+        "references": [
+          {
+            "book": "Isaiah",
+            "minChapter": 54,
+            "minVerse": 13,
+            "maxChapter": 54,
+            "maxVerse": 13
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "title": "God the Son Is Our Teacher",
+        "subtitle": "John 13:12-17",
+        "references": [
+          {
+            "book": "John",
+            "minChapter": 13,
+            "minVerse": 12,
+            "maxChapter": 13,
+            "maxVerse": 17
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "title": "God the Holy Spirit Is Our Teacher",
+        "subtitle": "John 14:26",
+        "references": [
+          {
+            "book": "John",
+            "minChapter": 14,
+            "minVerse": 26,
+            "maxChapter": 14,
+            "maxVerse": 26
+          }
+        ]
+      },
+      {
+        "number": 5,
+        "title": "God the Warrior Teaches Us",
+        "subtitle": "Psalm 27:1-5, 11",
+        "references": [
+          {
+            "book": "Psalm",
+            "minChapter": 27,
+            "minVerse": 1,
+            "maxChapter": 27,
+            "maxVerse": 5
+          },
+          {
+            "book": "Psalm",
+            "minChapter": 27,
+            "minVerse": 11,
+            "maxChapter": 27,
+            "maxVerse": 11
+          }
+        ]
+      },
+      {
+        "number": 6,
+        "title": "God the Shepherd Teaches Us",
+        "subtitle": "Mark 6:34",
+        "references": [
+          {
+            "book": "Mark",
+            "minChapter": 6,
+            "minVerse": 34,
+            "maxChapter": 6,
+            "maxVerse": 34
+          }
+        ]
+      }
+    ],
+    "Goals and Purposes of Biblical Education": [
+      {
+        "number": 7,
+        "title": "Equipped with Practical Wisdom",
+        "subtitle": "Proverbs 1:2-7",
+        "references": [
+          {
+            "book": "Proverbs",
+            "minChapter": 1,
+            "minVerse": 2,
+            "maxChapter": 1,
+            "maxVerse": 7
+          }
+        ]
+      },
+      {
+        "number": 8,
+        "title": "The Purpose of My Instruction",
+        "subtitle": "1 Timothy 1:5",
+        "references": [
+          {
+            "book": "1 Timothy",
+            "minChapter": 1,
+            "minVerse": 5,
+            "maxChapter": 1,
+            "maxVerse": 5
+          }
+        ]
+      },
+      {
+        "number": 9,
+        "title": "Applied Truth Brings Blessing to Society",
+        "subtitle": "Deuteronomy 28:13",
+        "references": [
+          {
+            "book": "Deuteronomy",
+            "minChapter": 28,
+            "minVerse": 13,
+            "maxChapter": 28,
+            "maxVerse": 13
+          }
+        ]
+      },
+      {
+        "number": 10,
+        "title": "God Desires Education That Transforms",
+        "subtitle": "Deuteronomy 5:29-31",
+        "references": [
+          {
+            "book": "Deuteronomy",
+            "minChapter": 5,
+            "minVerse": 29,
+            "maxChapter": 5,
+            "maxVerse": 31
+          }
+        ]
+      },
+      {
+        "number": 11,
+        "title": "Transformed Lives",
+        "subtitle": "Acts 4:13",
+        "references": [
+          {
+            "book": "Acts",
+            "minChapter": 4,
+            "minVerse": 13,
+            "maxChapter": 4,
+            "maxVerse": 13
+          }
+        ]
+      },
+      {
+        "number": 12,
+        "title": "Transformed Society",
+        "subtitle": "Leviticus 18:1-5",
+        "references": [
+          {
+            "book": "Leviticus",
+            "minChapter": 18,
+            "minVerse": 1,
+            "maxChapter": 18,
+            "maxVerse": 5
+          }
+        ]
+      },
+      {
+        "number": 13,
+        "title": "Revelation in the Potter’s House",
+        "subtitle": "Jeremiah 18:1-11",
+        "references": [
+          {
+            "book": "Jeremiah",
+            "minChapter": 18,
+            "minVerse": 1,
+            "maxChapter": 18,
+            "maxVerse": 11
+          }
+        ]
+      }
+    ],
+    "Biblical Guidelines for Teachers": [
+      {
+        "number": 14,
+        "title": "Study – Obey – Teach",
+        "subtitle": "Ezra 7:10-11",
+        "references": [
+          {
+            "book": "Ezra",
+            "minChapter": 7,
+            "minVerse": 10,
+            "maxChapter": 7,
+            "maxVerse": 11
+          }
+        ]
+      },
+      {
+        "number": 15,
+        "title": "Teach Well",
+        "subtitle": "Romans 12:7",
+        "references": [
+          {
+            "book": "Romans",
+            "minChapter": 12,
+            "minVerse": 7,
+            "maxChapter": 12,
+            "maxVerse": 7
+          }
+        ]
+      },
+      {
+        "number": 16,
+        "title": "Spirit and Truth",
+        "subtitle": "John 4:23-24",
+        "references": [
+          {
+            "book": "John",
+            "minChapter": 4,
+            "minVerse": 23,
+            "maxChapter": 4,
+            "maxVerse": 24
+          }
+        ]
+      },
+      {
+        "number": 17,
+        "title": "Know Your Audience",
+        "subtitle": "Mark 7:2-4",
+        "references": [
+          {
+            "book": "Mark",
+            "minChapter": 7,
+            "minVerse": 2,
+            "maxChapter": 7,
+            "maxVerse": 4
+          }
+        ]
+      },
+      {
+        "number": 18,
+        "title": "Use Didactic Creativity",
+        "subtitle": "Exodus 4:1-11",
+        "references": [
+          {
+            "book": "Exodus",
+            "minChapter": 4,
+            "minVerse": 1,
+            "maxChapter": 4,
+            "maxVerse": 11
+          }
+        ]
+      },
+      {
+        "number": 19,
+        "title": "Create a Cohortive, Relational Context",
+        "subtitle": "Luke 8:1-2",
+        "references": [
+          {
+            "book": "Luke",
+            "minChapter": 8,
+            "minVerse": 1,
+            "maxChapter": 8,
+            "maxVerse": 2
+          }
+        ]
+      },
+      {
+        "number": 20,
+        "title": "Pray for Your Students",
+        "subtitle": "Ephesians 3:14-21",
+        "references": [
+          {
+            "book": "Ephesians",
+            "minChapter": 3,
+            "minVerse": 14,
+            "maxChapter": 3,
+            "maxVerse": 21
+          }
+        ]
+      },
+      {
+        "number": 21,
+        "title": "Judged by a Higher Standard",
+        "subtitle": "James 3:1",
+        "references": [
+          {
+            "book": "James",
+            "minChapter": 3,
+            "minVerse": 1,
+            "maxChapter": 3,
+            "maxVerse": 1
+          }
+        ]
+      }
+    ],
+    "Biblical Guidelines for Students": [
+      {
+        "number": 22,
+        "title": "Imitate the Master",
+        "subtitle": "Leviticus 11:45",
+        "references": [
+          {
+            "book": "Leviticus",
+            "minChapter": 11,
+            "minVerse": 45,
+            "maxChapter": 11,
+            "maxVerse": 45
+          }
+        ]
+      },
+      {
+        "number": 23,
+        "title": "Consider Jesus",
+        "subtitle": "Hebrews 3:1",
+        "references": [
+          {
+            "book": "Hebrews",
+            "minChapter": 3,
+            "minVerse": 1,
+            "maxChapter": 3,
+            "maxVerse": 1
+          }
+        ]
+      },
+      {
+        "number": 24,
+        "title": "Hunger for God and His Word",
+        "subtitle": "Psalm 19:7-11",
+        "references": [
+          {
+            "book": "Psalm",
+            "minChapter": 19,
+            "minVerse": 7,
+            "maxChapter": 19,
+            "maxVerse": 11
+          }
+        ]
+      },
+      {
+        "number": 25,
+        "title": "Approach Learning with Faith in God",
+        "subtitle": "James 1:5-6",
+        "references": [
+          {
+            "book": "James",
+            "minChapter": 1,
+            "minVerse": 5,
+            "maxChapter": 1,
+            "maxVerse": 6
+          }
+        ]
+      },
+      {
+        "number": 26,
+        "title": "Think about These Things",
+        "subtitle": "Philippians 4:8",
+        "references": [
+          {
+            "book": "Philippians",
+            "minChapter": 4,
+            "minVerse": 8,
+            "maxChapter": 4,
+            "maxVerse": 8
+          }
+        ]
+      },
+      {
+        "number": 27,
+        "title": "Eagerness to Apply",
+        "subtitle": "Matthew 7:24-27",
+        "references": [
+          {
+            "book": "Matthew",
+            "minChapter": 7,
+            "minVerse": 24,
+            "maxChapter": 7,
+            "maxVerse": 27
+          }
+        ]
+      },
+      {
+        "number": 28,
+        "title": "Teachableness Versus Pride",
+        "subtitle": "Psalm 131",
+        "references": [
+          {
+            "book": "Psalm",
+            "minChapter": 131,
+            "minVerse": 1,
+            "maxChapter": 131,
+            "maxVerse": 3
+          }
+        ]
+      },
+      {
+        "number": 29,
+        "title": "Press On. Press On. Press On.",
+        "subtitle": "Hosea 6:3",
+        "references": [
+          {
+            "book": "Hosea",
+            "minChapter": 6,
+            "minVerse": 3,
+            "maxChapter": 6,
+            "maxVerse": 3
+          }
+        ]
+      }
+    ],
+    "Principles and Practices of Biblical Education": [
+      {
+        "number": 30,
+        "title": "Begin with God’s Revelation",
+        "subtitle": "2 Kings 22:8",
+        "references": [
+          {
+            "book": "2 Kings",
+            "minChapter": 22,
+            "minVerse": 8,
+            "maxChapter": 22,
+            "maxVerse": 8
+          }
+        ]
+      },
+      {
+        "number": 31,
+        "title": "Question Asking is Important!",
+        "subtitle": "Jonah 1:8",
+        "references": [
+          {
+            "book": "Jonah",
+            "minChapter": 1,
+            "minVerse": 8,
+            "maxChapter": 1,
+            "maxVerse": 8
+          }
+        ]
+      },
+      {
+        "number": 32,
+        "title": "Question Asking and Implicational Thinking",
+        "subtitle": "Genesis 18:23-33",
+        "references": [
+          {
+            "book": "Genesis",
+            "minChapter": 18,
+            "minVerse": 23,
+            "maxChapter": 18,
+            "maxVerse": 33
+          }
+        ]
+      },
+      {
+        "number": 33,
+        "title": "Cultivate Critical Thinking",
+        "subtitle": "Leviticus 10:10-11",
+        "references": [
+          {
+            "book": "Leviticus",
+            "minChapter": 10,
+            "minVerse": 10,
+            "maxChapter": 10,
+            "maxVerse": 11
+          }
+        ]
+      },
+      {
+        "number": 34,
+        "title": "Guard Your Heart",
+        "subtitle": "Proverbs 4:20-23",
+        "references": [
+          {
+            "book": "Proverbs",
+            "minChapter": 4,
+            "minVerse": 20,
+            "maxChapter": 4,
+            "maxVerse": 23
+          }
+        ]
+      },
+      {
+        "number": 35,
+        "title": "Love Good and Hate Evil",
+        "subtitle": "Proverbs 9:10",
+        "references": [
+          {
+            "book": "Proverbs",
+            "minChapter": 9,
+            "minVerse": 10,
+            "maxChapter": 9,
+            "maxVerse": 10
+          }
+        ]
+      },
+      {
+        "number": 36,
+        "title": "Faith ... Virtue ... Knowledge …",
+        "subtitle": "2 Peter 1:5-8",
+        "references": [
+          {
+            "book": "2 Peter",
+            "minChapter": 1,
+            "minVerse": 5,
+            "maxChapter": 1,
+            "maxVerse": 8
+          }
+        ]
+      },
+      {
+        "number": 37,
+        "title": "Role of the Family in Education",
+        "subtitle": "Proverbs 3:1-6, 11-12",
+        "references": [
+          {
+            "book": "Proverbs",
+            "minChapter": 3,
+            "minVerse": 1,
+            "maxChapter": 3,
+            "maxVerse": 6
+          },
+          {
+            "book": "Proverbs",
+            "minChapter": 3,
+            "minVerse": 11,
+            "maxChapter": 3,
+            "maxVerse": 12
+          }
+        ]
+      },
+      {
+        "number": 38,
+        "title": "Role of the Church in Education",
+        "subtitle": "Acts 19:9-10",
+        "references": [
+          {
+            "book": "Acts",
+            "minChapter": 19,
+            "minVerse": 9,
+            "maxChapter": 19,
+            "maxVerse": 10
+          }
+        ]
+      },
+      {
+        "number": 39,
+        "title": "Role of the School in Education",
+        "subtitle": "1 Chronicles 27:32",
+        "references": [
+          {
+            "book": "1 Chronicles",
+            "minChapter": 27,
+            "minVerse": 32,
+            "maxChapter": 27,
+            "maxVerse": 32
+          }
+        ]
+      },
+      {
+        "number": 40,
+        "title": "Support Good Teachers!",
+        "subtitle": "3 John 6-8",
+        "references": [
+          {
+            "book": "3 John",
+            "minChapter": 1,
+            "minVerse": 6,
+            "maxChapter": 1,
+            "maxVerse": 8
+          }
+        ]
+      }
+    ],
+    "Key Elements of Biblical Education": [
+      {
+        "number": 41,
+        "title": "Remembering",
+        "subtitle": "Deuteronomy 4:10",
+        "references": [
+          {
+            "book": "Deuteronomy",
+            "minChapter": 4,
+            "minVerse": 10,
+            "maxChapter": 4,
+            "maxVerse": 10
+          }
+        ]
+      },
+      {
+        "number": 42,
+        "title": "Understanding",
+        "subtitle": "Haggai 2:18",
+        "references": [
+          {
+            "book": "Haggai",
+            "minChapter": 2,
+            "minVerse": 18,
+            "maxChapter": 2,
+            "maxVerse": 18
+          }
+        ]
+      },
+      {
+        "number": 43,
+        "title": "Applying",
+        "subtitle": "1 Corinthians 14:35",
+        "references": [
+          {
+            "book": "1 Corinthians",
+            "minChapter": 14,
+            "minVerse": 35,
+            "maxChapter": 14,
+            "maxVerse": 35
+          }
+        ]
+      },
+      {
+        "number": 44,
+        "title": "Analyzing",
+        "subtitle": "Job 42:7",
+        "references": [
+          {
+            "book": "Job",
+            "minChapter": 42,
+            "minVerse": 7,
+            "maxChapter": 42,
+            "maxVerse": 7
+          }
+        ]
+      },
+      {
+        "number": 45,
+        "title": "Evaluating",
+        "subtitle": "Numbers 36:1-12",
+        "references": [
+          {
+            "book": "Numbers",
+            "minChapter": 36,
+            "minVerse": 1,
+            "maxChapter": 36,
+            "maxVerse": 12
+          }
+        ]
+      },
+      {
+        "number": 46,
+        "title": "Creating",
+        "subtitle": "Psalm 98:1",
+        "references": [
+          {
+            "book": "Psalm",
+            "minChapter": 98,
+            "minVerse": 1,
+            "maxChapter": 98,
+            "maxVerse": 1
+          }
+        ]
+      }
+    ],
+    "Crossover Passages ": [
+      {
+        "number": 47,
+        "title": "Crossover with FAMILY",
+        "subtitle": "Deuteronomy 11:19",
+        "references": [
+          {
+            "book": "Deuteronomy",
+            "minChapter": 11,
+            "minVerse": 19,
+            "maxChapter": 11,
+            "maxVerse": 19
+          }
+        ]
+      },
+      {
+        "number": 48,
+        "title": "Crossover with ECONOMICS",
+        "subtitle": "Titus 1:11",
+        "references": [
+          {
+            "book": "Titus",
+            "minChapter": 1,
+            "minVerse": 11,
+            "maxChapter": 1,
+            "maxVerse": 11
+          }
+        ]
+      },
+      {
+        "number": 49,
+        "title": "Crossover with GOVERNMENT",
+        "subtitle": "2 Kings 12:2",
+        "references": [
+          {
+            "book": "2 Kings",
+            "minChapter": 12,
+            "minVerse": 2,
+            "maxChapter": 12,
+            "maxVerse": 2
+          }
+        ]
+      },
+      {
+        "number": 50,
+        "title": "Crossover with RELIGION",
+        "subtitle": "Nehemiah 8:2-3, 7-8",
+        "references": [
+          {
+            "book": "Nehemiah",
+            "minChapter": 8,
+            "minVerse": 2,
+            "maxChapter": 8,
+            "maxVerse": 3
+          },
+          {
+            "book": "Nehemiah",
+            "minChapter": 8,
+            "minVerse": 7,
+            "maxChapter": 8,
+            "maxVerse": 8
+          }
+        ]
+      },
+      {
+        "number": 51,
+        "title": "Crossover with MEDIA/COMMUNICATION",
+        "subtitle": "Mark 4:33-34",
+        "references": [
+          {
+            "book": "Mark",
+            "minChapter": 4,
+            "minVerse": 33,
+            "maxChapter": 4,
+            "maxVerse": 34
+          }
+        ]
+      },
+      {
+        "number": 52,
+        "title": "Crossover with CELEBRATION",
+        "subtitle": "Psalm 60",
+        "references": [
+          {
+            "book": "Psalm",
+            "minChapter": 60,
+            "minVerse": 1,
+            "maxChapter": 60,
+            "maxVerse": 12
+          }
+        ]
+      }
+    ]
+  },
+  "Communication": {
+    "God and the Sphere of Media/Communication": [
+      {
+        "number": 1,
+        "title": "God’s Ways Are Diverse",
+        "subtitle": "1 Chronicles 28:19",
+        "references": [
+          {
+            "book": "1 Chronicles",
+            "minChapter": 28,
+            "minVerse": 19,
+            "maxChapter": 28,
+            "maxVerse": 19
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "title": "God’s Ways Are Appropriate",
+        "subtitle": "Hebrews 1:1-2",
+        "references": [
+          {
+            "book": "Hebrews",
+            "minChapter": 1,
+            "minVerse": 1,
+            "maxChapter": 1,
+            "maxVerse": 2
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "title": "God’s Content Is True",
+        "subtitle": "1 Thessalonians 5:19-21",
+        "references": [
+          {
+            "book": "1 Thessalonians",
+            "minChapter": 5,
+            "minVerse": 19,
+            "maxChapter": 5,
+            "maxVerse": 21
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "title": "God’s Content Is Trustworthy",
+        "subtitle": "Luke 1:1-4",
+        "references": [
+          {
+            "book": "Luke",
+            "minChapter": 1,
+            "minVerse": 1,
+            "maxChapter": 1,
+            "maxVerse": 4
+          }
+        ]
+      },
+      {
+        "number": 5,
+        "title": "God’s Communication Is Transformative",
+        "subtitle": "Colossians 1:6",
+        "references": [
+          {
+            "book": "Colossians",
+            "minChapter": 1,
+            "minVerse": 6,
+            "maxChapter": 1,
+            "maxVerse": 6
+          }
+        ]
+      },
+      {
+        "number": 6,
+        "title": "God’s Communication Gives Life",
+        "subtitle": "John 20:30-31",
+        "references": [
+          {
+            "book": "John",
+            "minChapter": 20,
+            "minVerse": 30,
+            "maxChapter": 20,
+            "maxVerse": 31
+          }
+        ]
+      }
+    ],
+    "The Purpose of Communication": [
+      {
+        "number": 7,
+        "title": "Creates Unity Around God’s Purposes",
+        "subtitle": "Zephaniah 3:9",
+        "references": [
+          {
+            "book": "Zephaniah",
+            "minChapter": 3,
+            "minVerse": 9,
+            "maxChapter": 3,
+            "maxVerse": 9
+          }
+        ]
+      },
+      {
+        "number": 8,
+        "title": "Creates Life-Enhancing Situations",
+        "subtitle": "Proverbs 10:11",
+        "references": [
+          {
+            "book": "Proverbs",
+            "minChapter": 10,
+            "minVerse": 11,
+            "maxChapter": 10,
+            "maxVerse": 11
+          }
+        ]
+      },
+      {
+        "number": 9,
+        "title": "Creates Community and Cultural Uniqueness",
+        "subtitle": "Esther 8:9",
+        "references": [
+          {
+            "book": "Esther",
+            "minChapter": 8,
+            "minVerse": 9,
+            "maxChapter": 8,
+            "maxVerse": 9
+          }
+        ]
+      },
+      {
+        "number": 10,
+        "title": "Provides Trustworthy Information",
+        "subtitle": "2 Timothy 2:2",
+        "references": [
+          {
+            "book": "2 Timothy",
+            "minChapter": 2,
+            "minVerse": 2,
+            "maxChapter": 2,
+            "maxVerse": 2
+          }
+        ]
+      },
+      {
+        "number": 11,
+        "title": "Provides Transformative Information",
+        "subtitle": "Isaiah 61:1-2",
+        "references": [
+          {
+            "book": "Isaiah",
+            "minChapter": 61,
+            "minVerse": 1,
+            "maxChapter": 61,
+            "maxVerse": 2
+          }
+        ]
+      }
+    ],
+    "Communication to Imitate": [
+      {
+        "number": 12,
+        "title": "Inspired by the Spirit",
+        "subtitle": "Matthew 22:43",
+        "references": [
+          {
+            "book": "Matthew",
+            "minChapter": 22,
+            "minVerse": 43,
+            "maxChapter": 22,
+            "maxVerse": 43
+          }
+        ]
+      },
+      {
+        "number": 13,
+        "title": "Speak like Jesus",
+        "subtitle": "Matthew 7:28-29",
+        "references": [
+          {
+            "book": "Matthew",
+            "minChapter": 7,
+            "minVerse": 28,
+            "maxChapter": 7,
+            "maxVerse": 29
+          }
+        ]
+      },
+      {
+        "number": 14,
+        "title": "Align Your Communication with God’s",
+        "subtitle": "Revelation 22:17",
+        "references": [
+          {
+            "book": "Revelation",
+            "minChapter": 22,
+            "minVerse": 17,
+            "maxChapter": 22,
+            "maxVerse": 17
+          }
+        ]
+      },
+      {
+        "number": 15,
+        "title": "Speak the Truth in Love",
+        "subtitle": "Ephesians 4:15",
+        "references": [
+          {
+            "book": "Ephesians",
+            "minChapter": 4,
+            "minVerse": 15,
+            "maxChapter": 4,
+            "maxVerse": 15
+          }
+        ]
+      },
+      {
+        "number": 16,
+        "title": "Speak Seasoned with Grace",
+        "subtitle": "Colossians 4:6",
+        "references": [
+          {
+            "book": "Colossians",
+            "minChapter": 4,
+            "minVerse": 6,
+            "maxChapter": 4,
+            "maxVerse": 6
+          }
+        ]
+      },
+      {
+        "number": 17,
+        "title": "Speak in Order to Build Up",
+        "subtitle": "1 Corinthians 14:26",
+        "references": [
+          {
+            "book": "1 Corinthians",
+            "minChapter": 14,
+            "minVerse": 26,
+            "maxChapter": 14,
+            "maxVerse": 26
+          }
+        ]
+      },
+      {
+        "number": 18,
+        "title": "Speak in Order to Encourage",
+        "subtitle": "Acts 9:27",
+        "references": [
+          {
+            "book": "Acts",
+            "minChapter": 9,
+            "minVerse": 27,
+            "maxChapter": 9,
+            "maxVerse": 27
+          }
+        ]
+      },
+      {
+        "number": 19,
+        "title": "Speak with Self-control",
+        "subtitle": "James 3:2-12",
+        "references": [
+          {
+            "book": "James",
+            "minChapter": 3,
+            "minVerse": 2,
+            "maxChapter": 3,
+            "maxVerse": 12
+          }
+        ]
+      },
+      {
+        "number": 20,
+        "title": "Listen to Godly Advice",
+        "subtitle": "Proverbs 25:11",
+        "references": [
+          {
+            "book": "Proverbs",
+            "minChapter": 25,
+            "minVerse": 11,
+            "maxChapter": 25,
+            "maxVerse": 11
+          }
+        ]
+      },
+      {
+        "number": 21,
+        "title": "Communicate in the Fear of the Lord",
+        "subtitle": "Ecclesiastes 12:9-13",
+        "references": [
+          {
+            "book": "Ecclesiastes",
+            "minChapter": 12,
+            "minVerse": 9,
+            "maxChapter": 12,
+            "maxVerse": 13
+          }
+        ]
+      },
+      {
+        "number": 22,
+        "title": "Be True to Your Words",
+        "subtitle": "Genesis 31:44-54",
+        "references": [
+          {
+            "book": "Genesis",
+            "minChapter": 31,
+            "minVerse": 44,
+            "maxChapter": 31,
+            "maxVerse": 54
+          }
+        ]
+      }
+    ],
+    "Communication to Avoid": [
+      {
+        "number": 23,
+        "title": "Do Not Distort God’s Character",
+        "subtitle": "Numbers 15:30",
+        "references": [
+          {
+            "book": "Numbers",
+            "minChapter": 15,
+            "minVerse": 30,
+            "maxChapter": 15,
+            "maxVerse": 30
+          }
+        ]
+      },
+      {
+        "number": 24,
+        "title": "Do Not Distort Your Neighbor’s Character",
+        "subtitle": "Deuteronomy 5:20",
+        "references": [
+          {
+            "book": "Deuteronomy",
+            "minChapter": 5,
+            "minVerse": 20,
+            "maxChapter": 5,
+            "maxVerse": 20
+          }
+        ]
+      },
+      {
+        "number": 25,
+        "title": "Do Not Listen to Ungodly Advice",
+        "subtitle": "Psalm 1:1-2",
+        "references": [
+          {
+            "book": "Psalm",
+            "minChapter": 1,
+            "minVerse": 1,
+            "maxChapter": 1,
+            "maxVerse": 2
+          }
+        ]
+      },
+      {
+        "number": 26,
+        "title": "Do Not Participate in Gossip",
+        "subtitle": "Proverbs 17:4",
+        "references": [
+          {
+            "book": "Proverbs",
+            "minChapter": 17,
+            "minVerse": 4,
+            "maxChapter": 17,
+            "maxVerse": 4
+          }
+        ]
+      },
+      {
+        "number": 27,
+        "title": "Do Not Participate in Arguments",
+        "subtitle": "2 Timothy 2:23-25",
+        "references": [
+          {
+            "book": "2 Timothy",
+            "minChapter": 2,
+            "minVerse": 23,
+            "maxChapter": 2,
+            "maxVerse": 25
+          }
+        ]
+      },
+      {
+        "number": 28,
+        "title": "Do Not Participate in Complaining",
+        "subtitle": "Jude 16",
+        "references": [
+          {
+            "book": "Jude",
+            "minChapter": 1,
+            "minVerse": 16,
+            "maxChapter": 1,
+            "maxVerse": 16
+          }
+        ]
+      },
+      {
+        "number": 29,
+        "title": "Do Not Participate in Slander/Mockery",
+        "subtitle": "Nehemiah 4:1-4",
+        "references": [
+          {
+            "book": "Nehemiah",
+            "minChapter": 4,
+            "minVerse": 1,
+            "maxChapter": 4,
+            "maxVerse": 4
+          }
+        ]
+      },
+      {
+        "number": 30,
+        "title": "Do Not Participate in Prideful Boasting",
+        "subtitle": "Psalm 75:4-5",
+        "references": [
+          {
+            "book": "Psalm",
+            "minChapter": 75,
+            "minVerse": 4,
+            "maxChapter": 75,
+            "maxVerse": 5
+          }
+        ]
+      }
+    ],
+    "Pursue Vertical Communication with God": [
+      {
+        "number": 31,
+        "title": "God Speaks ... We Should Listen",
+        "subtitle": "Hebrews 2:1-4",
+        "references": [
+          {
+            "book": "Hebrews",
+            "minChapter": 2,
+            "minVerse": 1,
+            "maxChapter": 2,
+            "maxVerse": 4
+          }
+        ]
+      },
+      {
+        "number": 32,
+        "title": "God Speaks ... We Should Speak",
+        "subtitle": "John 1:1-9",
+        "references": [
+          {
+            "book": "John",
+            "minChapter": 1,
+            "minVerse": 1,
+            "maxChapter": 1,
+            "maxVerse": 9
+          }
+        ]
+      },
+      {
+        "number": 33,
+        "title": "God Reveals ... We Can Know",
+        "subtitle": "Amos 3:7",
+        "references": [
+          {
+            "book": "Amos",
+            "minChapter": 3,
+            "minVerse": 7,
+            "maxChapter": 3,
+            "maxVerse": 7
+          }
+        ]
+      },
+      {
+        "number": 34,
+        "title": "God Listens ... We Can Speak",
+        "subtitle": "Luke 18:35-43",
+        "references": [
+          {
+            "book": "Luke",
+            "minChapter": 18,
+            "minVerse": 35,
+            "maxChapter": 18,
+            "maxVerse": 43
+          }
+        ]
+      },
+      {
+        "number": 35,
+        "title": "God Responds ... We Can Trust",
+        "subtitle": "Judges 6:36-40",
+        "references": [
+          {
+            "book": "Judges",
+            "minChapter": 6,
+            "minVerse": 36,
+            "maxChapter": 6,
+            "maxVerse": 40
+          }
+        ]
+      },
+      {
+        "number": 36,
+        "title": "God Guides ... We Can Follow",
+        "subtitle": "Exodus 13:21-22",
+        "references": [
+          {
+            "book": "Exodus",
+            "minChapter": 13,
+            "minVerse": 21,
+            "maxChapter": 13,
+            "maxVerse": 22
+          }
+        ]
+      }
+    ],
+    "Pursue Horizontal Communication with Your Neighbor": [
+      {
+        "number": 37,
+        "title": "One on One",
+        "subtitle": "Romans 12:14",
+        "references": [
+          {
+            "book": "Romans",
+            "minChapter": 12,
+            "minVerse": 14,
+            "maxChapter": 12,
+            "maxVerse": 14
+          }
+        ]
+      },
+      {
+        "number": 38,
+        "title": "One to Many",
+        "subtitle": "Isaiah 52:7",
+        "references": [
+          {
+            "book": "Isaiah",
+            "minChapter": 52,
+            "minVerse": 7,
+            "maxChapter": 52,
+            "maxVerse": 7
+          }
+        ]
+      },
+      {
+        "number": 39,
+        "title": "Many to Many",
+        "subtitle": "Psalm 68:11",
+        "references": [
+          {
+            "book": "Psalm",
+            "minChapter": 68,
+            "minVerse": 11,
+            "maxChapter": 68,
+            "maxVerse": 11
+          }
+        ]
+      },
+      {
+        "number": 40,
+        "title": "Be a Voice for the Voiceless",
+        "subtitle": "Proverbs 31:8-9",
+        "references": [
+          {
+            "book": "Proverbs",
+            "minChapter": 31,
+            "minVerse": 8,
+            "maxChapter": 31,
+            "maxVerse": 9
+          }
+        ]
+      },
+      {
+        "number": 41,
+        "title": "High Tech or High Touch?",
+        "subtitle": "2 John 12",
+        "references": [
+          {
+            "book": "2 John",
+            "minChapter": 1,
+            "minVerse": 12,
+            "maxChapter": 1,
+            "maxVerse": 12
+          }
+        ]
+      },
+      {
+        "number": 42,
+        "title": "In Times of Crises and Danger",
+        "subtitle": "Ezekiel 3:16-21",
+        "references": [
+          {
+            "book": "Ezekiel",
+            "minChapter": 3,
+            "minVerse": 16,
+            "maxChapter": 3,
+            "maxVerse": 21
+          }
+        ]
+      },
+      {
+        "number": 43,
+        "title": "In Times of Joy and Good News",
+        "subtitle": "Acts 19:17-20",
+        "references": [
+          {
+            "book": "Acts",
+            "minChapter": 19,
+            "minVerse": 17,
+            "maxChapter": 19,
+            "maxVerse": 20
+          }
+        ]
+      },
+      {
+        "number": 44,
+        "title": "In Ways Appropriate for Your Hearers",
+        "subtitle": "1 Corinthians 9:19-23",
+        "references": [
+          {
+            "book": "1 Corinthians",
+            "minChapter": 9,
+            "minVerse": 19,
+            "maxChapter": 9,
+            "maxVerse": 23
+          }
+        ]
+      },
+      {
+        "number": 45,
+        "title": "Know When to Be Silent",
+        "subtitle": "Ecclesiastes 3:7",
+        "references": [
+          {
+            "book": "Ecclesiastes",
+            "minChapter": 3,
+            "minVerse": 7,
+            "maxChapter": 3,
+            "maxVerse": 7
+          }
+        ]
+      },
+      {
+        "number": 46,
+        "title": "The Right Time and Place to Speak",
+        "subtitle": "Esther 2:10",
+        "references": [
+          {
+            "book": "Esther",
+            "minChapter": 2,
+            "minVerse": 10,
+            "maxChapter": 2,
+            "maxVerse": 10
+          }
+        ]
+      }
+    ],
+    "Crossover Passages": [
+      {
+        "number": 47,
+        "title": "Crossover with FAMILY",
+        "subtitle": "Genesis 49:28",
+        "references": [
+          {
+            "book": "Genesis",
+            "minChapter": 49,
+            "minVerse": 28,
+            "maxChapter": 49,
+            "maxVerse": 28
+          }
+        ]
+      },
+      {
+        "number": 48,
+        "title": "Crossover with ECONOMICS",
+        "subtitle": "Matthew 28:15",
+        "references": [
+          {
+            "book": "Matthew",
+            "minChapter": 28,
+            "minVerse": 15,
+            "maxChapter": 28,
+            "maxVerse": 15
+          }
+        ]
+      },
+      {
+        "number": 49,
+        "title": "Crossover with GOVERNMENT",
+        "subtitle": "Proverbs 15:22",
+        "references": [
+          {
+            "book": "Proverbs",
+            "minChapter": 15,
+            "minVerse": 22,
+            "maxChapter": 15,
+            "maxVerse": 22
+          }
+        ]
+      },
+      {
+        "number": 50,
+        "title": "Crossover with RELIGION",
+        "subtitle": "Ecclesiastes 5:1-7",
+        "references": [
+          {
+            "book": "Ecclesiastes",
+            "minChapter": 5,
+            "minVerse": 1,
+            "maxChapter": 5,
+            "maxVerse": 7
+          }
+        ]
+      },
+      {
+        "number": 51,
+        "title": "Crossover with EDUCATION",
+        "subtitle": "Proverbs 2:1-2",
+        "references": [
+          {
+            "book": "Proverbs",
+            "minChapter": 2,
+            "minVerse": 1,
+            "maxChapter": 2,
+            "maxVerse": 2
+          }
+        ]
+      },
+      {
+        "number": 52,
+        "title": "Crossover with CELEBRATION",
+        "subtitle": "Esther 8:17",
+        "references": [
+          {
+            "book": "Esther",
+            "minChapter": 8,
+            "minVerse": 17,
+            "maxChapter": 8,
+            "maxVerse": 17
+          }
+        ]
+      }
+    ]
+  },
+  "Celebration": {
+    "God and the Sphere of Celebration": [
+      {
+        "number": 1,
+        "title": "God’s Kingdom Promotes Righteousness",
+        "subtitle": "Psalm 145:7",
+        "references": [
+          {
+            "book": "Psalm",
+            "minChapter": 145,
+            "minVerse": 7,
+            "maxChapter": 145,
+            "maxVerse": 7
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "title": "God’s Kingdom Promotes Peace",
+        "subtitle": "Colossians 3:15",
+        "references": [
+          {
+            "book": "Colossians",
+            "minChapter": 3,
+            "minVerse": 15,
+            "maxChapter": 3,
+            "maxVerse": 15
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "title": "God’s Kingdom Promotes Joy",
+        "subtitle": "Zephaniah 3:16-17",
+        "references": [
+          {
+            "book": "Zephaniah",
+            "minChapter": 3,
+            "minVerse": 16,
+            "maxChapter": 3,
+            "maxVerse": 17
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "title": "Beauty and Function",
+        "subtitle": "Psalm 19:1",
+        "references": [
+          {
+            "book": "Psalm",
+            "minChapter": 19,
+            "minVerse": 1,
+            "maxChapter": 19,
+            "maxVerse": 1
+          }
+        ]
+      },
+      {
+        "number": 5,
+        "title": "Masterfully Created to Be Master Creators",
+        "subtitle": "Ephesians 2:10",
+        "references": [
+          {
+            "book": "Ephesians",
+            "minChapter": 2,
+            "minVerse": 10,
+            "maxChapter": 2,
+            "maxVerse": 10
+          }
+        ]
+      },
+      {
+        "number": 6,
+        "title": "Beauty Within and Without",
+        "subtitle": "Isaiah 53:2",
+        "references": [
+          {
+            "book": "Isaiah",
+            "minChapter": 53,
+            "minVerse": 2,
+            "maxChapter": 53,
+            "maxVerse": 2
+          }
+        ]
+      }
+    ],
+    "The Purpose of Celebration": [
+      {
+        "number": 7,
+        "title": "Affirms That We Are Destined for Joy",
+        "subtitle": "Hebrews 12:1-2",
+        "references": [
+          {
+            "book": "Hebrews",
+            "minChapter": 12,
+            "minVerse": 1,
+            "maxChapter": 12,
+            "maxVerse": 2
+          }
+        ]
+      },
+      {
+        "number": 8,
+        "title": "Creates a Safe and Welcoming Space",
+        "subtitle": "Genesis 18:1-8, 16",
+        "references": [
+          {
+            "book": "Genesis",
+            "minChapter": 18,
+            "minVerse": 1,
+            "maxChapter": 18,
+            "maxVerse": 8
+          },
+          {
+            "book": "Genesis",
+            "minChapter": 18,
+            "minVerse": 16,
+            "maxChapter": 18,
+            "maxVerse": 16
+          }
+        ]
+      },
+      {
+        "number": 9,
+        "title": "Creates a Sacred and Restorative Space",
+        "subtitle": "Exodus 25:8-9",
+        "references": [
+          {
+            "book": "Exodus",
+            "minChapter": 25,
+            "minVerse": 8,
+            "maxChapter": 25,
+            "maxVerse": 9
+          }
+        ]
+      },
+      {
+        "number": 10,
+        "title": "Releases Gifts of Anointed Craftsmen",
+        "subtitle": "Exodus 35:30-36:1",
+        "references": [
+          {
+            "book": "Exodus",
+            "minChapter": 35,
+            "minVerse": 30,
+            "maxChapter": 36,
+            "maxVerse": 1
+          }
+        ]
+      },
+      {
+        "number": 11,
+        "title": "Builds Community",
+        "subtitle": "Esther 9:26-28",
+        "references": [
+          {
+            "book": "Esther",
+            "minChapter": 9,
+            "minVerse": 26,
+            "maxChapter": 9,
+            "maxVerse": 28
+          }
+        ]
+      },
+      {
+        "number": 12,
+        "title": "Clarifies Identity/Destiny",
+        "subtitle": "Psalm 137:1-6",
+        "references": [
+          {
+            "book": "Psalm",
+            "minChapter": 137,
+            "minVerse": 1,
+            "maxChapter": 137,
+            "maxVerse": 6
+          }
+        ]
+      },
+      {
+        "number": 13,
+        "title": "Blessings and Cultural Honor Protocols",
+        "subtitle": "Matthew 26:7-13",
+        "references": [
+          {
+            "book": "Matthew",
+            "minChapter": 26,
+            "minVerse": 7,
+            "maxChapter": 26,
+            "maxVerse": 13
+          }
+        ]
+      },
+      {
+        "number": 14,
+        "title": "Creates Cultural Heroes/Role Models",
+        "subtitle": "Genesis 10:8-9",
+        "references": [
+          {
+            "book": "Genesis",
+            "minChapter": 10,
+            "minVerse": 8,
+            "maxChapter": 10,
+            "maxVerse": 9
+          }
+        ]
+      },
+      {
+        "number": 15,
+        "title": "Promotes True Love",
+        "subtitle": "1 Corinthians 13:4-7",
+        "references": [
+          {
+            "book": "1 Corinthians",
+            "minChapter": 13,
+            "minVerse": 4,
+            "maxChapter": 13,
+            "maxVerse": 7
+          }
+        ]
+      },
+      {
+        "number": 16,
+        "title": "Strengthens Truth",
+        "subtitle": "Isaiah 42:10-12",
+        "references": [
+          {
+            "book": "Isaiah",
+            "minChapter": 42,
+            "minVerse": 10,
+            "maxChapter": 42,
+            "maxVerse": 12
+          }
+        ]
+      },
+      {
+        "number": 17,
+        "title": "Reinforces Hope",
+        "subtitle": "Psalm 146:5",
+        "references": [
+          {
+            "book": "Psalm",
+            "minChapter": 146,
+            "minVerse": 5,
+            "maxChapter": 146,
+            "maxVerse": 5
+          }
+        ]
+      },
+      {
+        "number": 18,
+        "title": "Helps Us Cope with Sorrow",
+        "subtitle": "Ecclesiastes 7:1-4",
+        "references": [
+          {
+            "book": "Ecclesiastes",
+            "minChapter": 7,
+            "minVerse": 1,
+            "maxChapter": 7,
+            "maxVerse": 4
+          }
+        ]
+      },
+      {
+        "number": 19,
+        "title": "Catalyst for Good or Corrupted for Evil?",
+        "subtitle": "Numbers 21:8-9",
+        "references": [
+          {
+            "book": "Numbers",
+            "minChapter": 21,
+            "minVerse": 8,
+            "maxChapter": 21,
+            "maxVerse": 9
+          }
+        ]
+      },
+      {
+        "number": 20,
+        "title": "Use and Abuse of the Arts",
+        "subtitle": "2 Timothy 3:4",
+        "references": [
+          {
+            "book": "2 Timothy",
+            "minChapter": 3,
+            "minVerse": 4,
+            "maxChapter": 3,
+            "maxVerse": 4
+          }
+        ]
+      }
+    ],
+    "The Five Senses and God’s Design": [
+      {
+        "number": 21,
+        "title": "Affirmation of Creation and Community",
+        "subtitle": "1 John 1:1-4",
+        "references": [
+          {
+            "book": "1 John",
+            "minChapter": 1,
+            "minVerse": 1,
+            "maxChapter": 1,
+            "maxVerse": 4
+          }
+        ]
+      },
+      {
+        "number": 22,
+        "title": "Taste: An Enjoyable Gift",
+        "subtitle": "Ecclesiastes 2:24-26",
+        "references": [
+          {
+            "book": "Ecclesiastes",
+            "minChapter": 2,
+            "minVerse": 24,
+            "maxChapter": 2,
+            "maxVerse": 26
+          }
+        ]
+      },
+      {
+        "number": 23,
+        "title": "Taste: Culinary Excellence Shows Honor",
+        "subtitle": "1 Samuel 9:22-24",
+        "references": [
+          {
+            "book": "1 Samuel",
+            "minChapter": 9,
+            "minVerse": 22,
+            "maxChapter": 9,
+            "maxVerse": 24
+          }
+        ]
+      },
+      {
+        "number": 24,
+        "title": "Touch: Strengthens Relationship",
+        "subtitle": "1 Samuel 18:4",
+        "references": [
+          {
+            "book": "1 Samuel",
+            "minChapter": 18,
+            "minVerse": 4,
+            "maxChapter": 18,
+            "maxVerse": 4
+          }
+        ]
+      },
+      {
+        "number": 25,
+        "title": "Touch: Displays True Love",
+        "subtitle": "Luke 7:36-47",
+        "references": [
+          {
+            "book": "Luke",
+            "minChapter": 7,
+            "minVerse": 36,
+            "maxChapter": 7,
+            "maxVerse": 47
+          }
+        ]
+      },
+      {
+        "number": 26,
+        "title": "Smell: Identity and Connections",
+        "subtitle": "Genesis 27:26-27",
+        "references": [
+          {
+            "book": "Genesis",
+            "minChapter": 27,
+            "minVerse": 26,
+            "maxChapter": 27,
+            "maxVerse": 27
+          }
+        ]
+      },
+      {
+        "number": 27,
+        "title": "Smell: Triggers Opposing Reactions",
+        "subtitle": "2 Corinthians 2:14-16",
+        "references": [
+          {
+            "book": "2 Corinthians",
+            "minChapter": 2,
+            "minVerse": 14,
+            "maxChapter": 2,
+            "maxVerse": 16
+          }
+        ]
+      },
+      {
+        "number": 28,
+        "title": "Sound: Carries Cultural Stories",
+        "subtitle": "Judges 5:11",
+        "references": [
+          {
+            "book": "Judges",
+            "minChapter": 5,
+            "minVerse": 11,
+            "maxChapter": 5,
+            "maxVerse": 11
+          }
+        ]
+      },
+      {
+        "number": 29,
+        "title": "Sound: Declares Redemptive Hopes",
+        "subtitle": "Psalm 150",
+        "references": [
+          {
+            "book": "Psalm",
+            "minChapter": 150,
+            "minVerse": 1,
+            "maxChapter": 150,
+            "maxVerse": 6
+          }
+        ]
+      },
+      {
+        "number": 30,
+        "title": "Sight: Dramatic Arts in the Scriptures",
+        "subtitle": "2 Samuel 14:1-11",
+        "references": [
+          {
+            "book": "2 Samuel",
+            "minChapter": 14,
+            "minVerse": 1,
+            "maxChapter": 14,
+            "maxVerse": 11
+          }
+        ]
+      },
+      {
+        "number": 31,
+        "title": "Sight: Visual Arts in the Scriptures",
+        "subtitle": "Ezekiel 37:1-10",
+        "references": [
+          {
+            "book": "Ezekiel",
+            "minChapter": 37,
+            "minVerse": 1,
+            "maxChapter": 37,
+            "maxVerse": 10
+          }
+        ]
+      }
+    ],
+    "The Prophet/Artist": [
+      {
+        "number": 32,
+        "title": "The Inner Life of the Prophet/Artist",
+        "subtitle": "Habakkuk 1:1",
+        "references": [
+          {
+            "book": "Habakkuk",
+            "minChapter": 1,
+            "minVerse": 1,
+            "maxChapter": 1,
+            "maxVerse": 1
+          }
+        ]
+      },
+      {
+        "number": 33,
+        "title": "Use of the Dramatic Arts",
+        "subtitle": "1 Kings 11:29-39",
+        "references": [
+          {
+            "book": "1 Kings",
+            "minChapter": 11,
+            "minVerse": 29,
+            "maxChapter": 11,
+            "maxVerse": 39
+          }
+        ]
+      },
+      {
+        "number": 34,
+        "title": "Use of the Literary Arts",
+        "subtitle": "Lamentations 1:1",
+        "references": [
+          {
+            "book": "Lamentations",
+            "minChapter": 1,
+            "minVerse": 1,
+            "maxChapter": 1,
+            "maxVerse": 1
+          }
+        ]
+      },
+      {
+        "number": 35,
+        "title": "Use of the Musical Arts",
+        "subtitle": "2 Kings 3:15",
+        "references": [
+          {
+            "book": "2 Kings",
+            "minChapter": 3,
+            "minVerse": 15,
+            "maxChapter": 3,
+            "maxVerse": 15
+          }
+        ]
+      },
+      {
+        "number": 36,
+        "title": "The Whole Church as Artists",
+        "subtitle": "Ephesians 3:10",
+        "references": [
+          {
+            "book": "Ephesians",
+            "minChapter": 3,
+            "minVerse": 10,
+            "maxChapter": 3,
+            "maxVerse": 10
+          }
+        ]
+      },
+      {
+        "number": 37,
+        "title": "Individual Financing of the Arts",
+        "subtitle": "2 Kings 4:8-11",
+        "references": [
+          {
+            "book": "2 Kings",
+            "minChapter": 4,
+            "minVerse": 8,
+            "maxChapter": 4,
+            "maxVerse": 11
+          }
+        ]
+      },
+      {
+        "number": 38,
+        "title": "Corporate Financing of the Arts",
+        "subtitle": "1 Chronicles 25:1-8",
+        "references": [
+          {
+            "book": "1 Chronicles",
+            "minChapter": 25,
+            "minVerse": 1,
+            "maxChapter": 25,
+            "maxVerse": 8
+          }
+        ]
+      },
+      {
+        "number": 39,
+        "title": "Repetitive Events Platforming the Arts",
+        "subtitle": "Nahum 1:15",
+        "references": [
+          {
+            "book": "Nahum",
+            "minChapter": 1,
+            "minVerse": 15,
+            "maxChapter": 1,
+            "maxVerse": 15
+          }
+        ]
+      },
+      {
+        "number": 40,
+        "title": "Unique Events Platforming the Arts",
+        "subtitle": "Revelation 7:9-12",
+        "references": [
+          {
+            "book": "Revelation",
+            "minChapter": 7,
+            "minVerse": 9,
+            "maxChapter": 7,
+            "maxVerse": 12
+          }
+        ]
+      }
+    ],
+    "Jesus and the Arts": [
+      {
+        "number": 41,
+        "title": "Jesus Employed Humor",
+        "subtitle": "Luke 14:18-21",
+        "references": [
+          {
+            "book": "Luke",
+            "minChapter": 14,
+            "minVerse": 18,
+            "maxChapter": 14,
+            "maxVerse": 21
+          }
+        ]
+      },
+      {
+        "number": 42,
+        "title": "Jesus Sang and Quoted Songs",
+        "subtitle": "Mark 15:34",
+        "references": [
+          {
+            "book": "Mark",
+            "minChapter": 15,
+            "minVerse": 34,
+            "maxChapter": 15,
+            "maxVerse": 34
+          }
+        ]
+      },
+      {
+        "number": 43,
+        "title": "Jesus Attended Celebratory Events",
+        "subtitle": "John 2:1-11",
+        "references": [
+          {
+            "book": "John",
+            "minChapter": 2,
+            "minVerse": 1,
+            "maxChapter": 2,
+            "maxVerse": 11
+          }
+        ]
+      },
+      {
+        "number": 44,
+        "title": "Jesus Created Celebratory Events",
+        "subtitle": "1 Corinthians 11:23-26",
+        "references": [
+          {
+            "book": "1 Corinthians",
+            "minChapter": 11,
+            "minVerse": 23,
+            "maxChapter": 11,
+            "maxVerse": 26
+          }
+        ]
+      }
+    ],
+    "Biblical Principles for Sports": [
+      {
+        "number": 45,
+        "title": "Target Practice",
+        "subtitle": "1 Samuel 20:18-42",
+        "references": [
+          {
+            "book": "1 Samuel",
+            "minChapter": 20,
+            "minVerse": 18,
+            "maxChapter": 20,
+            "maxVerse": 42
+          }
+        ]
+      },
+      {
+        "number": 46,
+        "title": "Disciplined Training",
+        "subtitle": "1 Corinthians 9:24-27",
+        "references": [
+          {
+            "book": "1 Corinthians",
+            "minChapter": 9,
+            "minVerse": 24,
+            "maxChapter": 9,
+            "maxVerse": 27
+          }
+        ]
+      }
+    ],
+    "Crossover Passages": [
+      {
+        "number": 47,
+        "title": "Crossover with FAMILY",
+        "subtitle": "Genesis 21:8",
+        "references": [
+          {
+            "book": "Genesis",
+            "minChapter": 21,
+            "minVerse": 8,
+            "maxChapter": 21,
+            "maxVerse": 8
+          }
+        ]
+      },
+      {
+        "number": 48,
+        "title": "Crossover with ECONOMICS",
+        "subtitle": "Proverbs 17:22",
+        "references": [
+          {
+            "book": "Proverbs",
+            "minChapter": 17,
+            "minVerse": 22,
+            "maxChapter": 17,
+            "maxVerse": 22
+          }
+        ]
+      },
+      {
+        "number": 49,
+        "title": "Crossover with GOVERNMENT",
+        "subtitle": "1 Kings 1:32-40",
+        "references": [
+          {
+            "book": "1 Kings",
+            "minChapter": 1,
+            "minVerse": 32,
+            "maxChapter": 1,
+            "maxVerse": 40
+          }
+        ]
+      },
+      {
+        "number": 50,
+        "title": "Crossover with RELIGION",
+        "subtitle": "Acts 16:25-34",
+        "references": [
+          {
+            "book": "Acts",
+            "minChapter": 16,
+            "minVerse": 25,
+            "maxChapter": 16,
+            "maxVerse": 34
+          }
+        ]
+      },
+      {
+        "number": 51,
+        "title": "Crossover with EDUCATION",
+        "subtitle": "Deuteronomy 31:19-22",
+        "references": [
+          {
+            "book": "Deuteronomy",
+            "minChapter": 31,
+            "minVerse": 19,
+            "maxChapter": 31,
+            "maxVerse": 22
+          }
+        ]
+      },
+      {
+        "number": 52,
+        "title": "Crossover with MEDIA/COMMUNICATION",
+        "subtitle": "Matthew 13:34",
+        "references": [
+          {
+            "book": "Matthew",
+            "minChapter": 13,
+            "minVerse": 34,
+            "maxChapter": 13,
+            "maxVerse": 34
+          }
+        ]
+      }
+    ]
+  }
+}
