@@ -5,6 +5,7 @@ import React, { Component, PropTypes } from 'react';
 const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
 
 import {
+  LayoutAnimation,
   Platform,
   RecyclerViewBackedScrollView,
   Text,
