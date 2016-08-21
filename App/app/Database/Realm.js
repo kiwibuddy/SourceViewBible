@@ -750,6 +750,12 @@ export class Sphere extends Realm.Object {
     return this.bookCounts.filtered(filter, ...books).reduce((count, book) => count + book.count, 0);
   }
 
+  countOfSource(actantID: number): number {
+    const string = actantID.toString();
+    const count = this.sourceCounts.find(count => count.string === string);
+    return count && count.count || 0;
+  }
+
   color(color?: string): string {
     return Colors.spheres[this.id][color || 'tint'];
   }
