@@ -116,6 +116,7 @@ export default class FoundationalSphere extends Component {
         <View style={styles.contentContainer}>
           <Text style={[styles.contentBody, {marginTop: 5}]}>{sphere.description}</Text>
         </View>
+        <View style={StyleSheet.styles.statisticsContainer} />
         <SegmentedControl
           style={styles.segmentedControl}
           tintColor={'#59626A'}
