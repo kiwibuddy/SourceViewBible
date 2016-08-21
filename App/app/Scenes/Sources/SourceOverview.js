@@ -131,7 +131,7 @@ export default class SourceOverview extends Component {
 
     return (
       <View>
-        <TouchableOpacity onPress={() => this.props.navigate(sourceWordsURL({sourceID: source.id, title: Localizable.t('source-words', {name: source.name})}))}>
+        <TouchableOpacity onPress={this._onPressWords}>
           <WordCloud
             backgroundColors={this.principalColor.gradient.big}
             style={styles.wordCloud}
@@ -370,7 +370,7 @@ export default class SourceOverview extends Component {
 
     return (
       <View style={[StyleSheet.styles.statisticsContainer, {marginTop: 25}]}>
-        <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.navigate(sourceWordsURL({sourceID: source.id, bookID: book && book.id, title: Localizable.t('source-words', {name: source.name})}))}>
+        <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={this._onPressWords}>
           <Text style={StyleSheet.styles.statisticTitle}>{Localizable.toNumber(wordCount, {precision: 0})}</Text>
           <Text style={StyleSheet.styles.statisticSubtitle}>{Localizable.t('words.text')}</Text>
         </TouchableOpacity>
@@ -396,6 +396,12 @@ export default class SourceOverview extends Component {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     this._setSource({sourceID: source.id, book: null, sourceRelation: null});
   };
+
+  _onPressWords = () => {
+    const { source } = this.state;
+    if (source.words.length == 0) return;
+    this.props.navigate(sourceWordsURL({sourceID: source.id, title: Localizable.t('source-words', {name: source.name})}));
+  }
 
   async _onPressActant(actant: Actant, sectionID: string) {
     const { source, book } = this.state;
