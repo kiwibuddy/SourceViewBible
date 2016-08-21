@@ -35,7 +35,7 @@ import { readerURL, sphereURL, spherePassagesURL } from '../../Navigation';
 
 import { Preference } from '../../Preferences';
 
-import { Sphere } from '../../Database';
+import { Book, Sphere } from '../../Database';
 
 const SEGMENTS = [Localizable.t('whole-bible'), Localizable.t('old-testament'), Localizable.t('new-testament')];
 const SEGMENT_INDEXES = {
@@ -151,8 +151,9 @@ export default class FoundationalSphere extends Component {
   };
 
   _onPressSphere = (sphere: Object) => {
+    const book = Book.all()[0];
     Preference.setObjectForKey([sphere.id], Preference.Keys.Reader.spheres);
-    // this.props.navigate(readerURL({bookID: book.id, anchor: 'chapter-1', title: book.name}));
+    this.props.navigate(readerURL({bookID: book.id, anchor: 'chapter-1', title: book.name}));
   };
 
   _onPressSphereIcon = (sphere: Object) => {
