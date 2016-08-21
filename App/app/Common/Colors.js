@@ -49,6 +49,14 @@ module.exports = {
         tiny: ['#218aff', '#218aff']
       }
     },
+    other: {
+      tint: '#7B7D82',
+      lightTint: '#E8E8E8',
+      gradient: {
+        big:['#7B7D82', '#E8E8E8'],
+        tiny: ['#7B7D82', '#E8E8E8']
+      }
+    },
   },
 
   spheres: {

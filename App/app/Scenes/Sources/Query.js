@@ -26,7 +26,7 @@ export default class Query {
     const rows = await rowsWithSQL(sql, this.source.id);
     return rows.map(row => {
       return {actant: Actant.findByID(row['id']), count: row['count']};
-    }).filter(row => row.actant && row.actant.isSource);
+    });
   }
 
   async listenedTo() {

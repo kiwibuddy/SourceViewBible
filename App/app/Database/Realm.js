@@ -179,7 +179,7 @@ const ActantSchema = {
     isRecipient: 'bool',
     sourceTypeCount: {type: 'int', default: 0},
     sourceTypeCounts: {type: 'list', objectType: 'Count'},
-    principalSourceType: {type: 'string', optional: true},
+    principalSourceType: {type: 'string', default: 'other'},
     sphereCount: {type: 'int', default: 0},
     sphereCounts: {type: 'list', objectType: 'Count'},
     sphereWordCount: {type: 'int', default: 0},
