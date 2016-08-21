@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
   listItemContainer: {
     paddingLeft: 5,
     paddingRight: 15,
-    paddingTop: 5,
+    paddingTop: 10,
     paddingBottom: 13,
     flexDirection: 'row',
   },
