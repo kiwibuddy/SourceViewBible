@@ -50,8 +50,8 @@ module.exports = {
       }
     },
     other: {
-      tint: '#D8D8D8',
-      lightTint: '#EFEFEF',
+      tint: '#9B9B9B',
+      lightTint: '#E6E6E6',
       gradient: {
         big:['#DBDDDE', '#898C90'],
         tiny: ['#DBDDDE', '#898C90']
