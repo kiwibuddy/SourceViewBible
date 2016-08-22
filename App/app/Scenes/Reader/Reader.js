@@ -22,7 +22,7 @@ import {
   StyleSheet
 } from '../../Common';
 
-import { BACK, readerSearchURL, readerSettingsURL, readerURL } from '../../Navigation';
+import { BACK, bookURL, readerSearchURL, readerSettingsURL, readerURL } from '../../Navigation';
 import * as Navigation from '../../Components/Navigation';
 
 const RNFS = require('react-native-fs');
@@ -36,8 +36,9 @@ import { Preference } from '../../Preferences';
 import { ReaderBaseFontSize, ReaderBaseLineHeight, ReaderFontStepSize, ReaderWebFontConversion } from '../../Common/Constants';
 
 const NavigationBar = (props: Props) => {
+  const book = Book.findByID(props.bookID);
   return (
-    <Navigation.NavigationBar title={props.title}>
+    <Navigation.NavigationBar title={props.title} onPressTitle={() => props.navigate(bookURL({bookID: book.id, title: book.name}))}>
       <Navigation.NavigationBarButton
         imageSource={require('../../Components/Navigation/Images/nav-search.png')}
         onPress={() => {props.navigate(readerSearchURL({modal: true}))}}

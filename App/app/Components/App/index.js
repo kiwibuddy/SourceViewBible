@@ -157,6 +157,12 @@ export default class App extends Component {
     const currentRoute = state.routes[state.index];
     if (route.path === currentRoute.path) return;
 
+    const previousRoute = (state.index > 0 ? state.routes[state.index - 1] : null);
+    if (previousRoute && route.path === previousRoute.path) {
+      this._popRoute();
+      return;
+    }
+    
     const delta = (state.routes.length - state.index) - 1;
 
     const routes = [

@@ -16,12 +16,13 @@ const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
 
 const NavigationBarTitle = (props: any) => {
   return (
-    <Text style={styles.titleText}>{props.title}</Text>
+    <Text style={styles.titleText} onPress={props.onPressTitle}>{props.title}</Text>
   );
 };
 
 type Props = {
   title?: string,
+  onPressTitle?: Function,
   children?: any,
 };
 
@@ -32,7 +33,7 @@ export default class NavigationBar extends Component {
   props: Props;
 
   render() {
-    const title = this.props.title ? <NavigationBarTitle title={this.props.title} /> : null;
+    const title = this.props.title ? <NavigationBarTitle title={this.props.title} onPressTitle={this.props.onPressTitle} /> : null;
 
     return (
       <View style={styles.navigationBar}>
