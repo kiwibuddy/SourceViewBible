@@ -35,7 +35,7 @@ const Help = (props: Props) => {
         />
       </NavigationBar>
       <ScrollView style={styles.scrollView}>
-        <Text>Help!</Text>
+        <Text>Discover Help!</Text>
       </ScrollView>
     </View>
   );
