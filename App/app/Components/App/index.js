@@ -160,7 +160,7 @@ export default class App extends Component {
     if (state.index - 1 > 0) {
       const previousRoute = state.routes[state.index - 1];
       if (previousRoute.path === route.path) {
-        this._goBack();
+        this._popRoute();
         return;
       }
     }
