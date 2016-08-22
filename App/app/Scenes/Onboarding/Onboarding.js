@@ -21,6 +21,7 @@ import {
 import { NavigationBar, NavigationBarButton } from '../../Components/Navigation';
 import { BACK } from '../../Navigation';
 import LinearGradient from 'react-native-linear-gradient';
+import PageControl from '../../Components/Common/PageControl';
 
 const { width: WIDTH } = Dimensions.get('window');
 
@@ -29,75 +30,93 @@ type Props = {
   navigate: Function,
 };
 
-const Onboarding = (props: Props) => {
-  return (
-    <View style={styles.container}>
-      <NavigationBar title={props.title}>
-        <NavigationBarButton
-          title={Localizable.t('close')}
-          onPress={() => props.navigate(BACK)}
-          style={{position: 'absolute', left: 0}}
-        />
-      </NavigationBar>
-      <LinearGradient
-        colors={['#E1E9EE', '#FFFFFF']}
-        start={[0.5, 0.25]} end={[0.5, 1.0]}
-        style={styles.onboardingContainer}
-      >
-        <ScrollView
-          horizontal={true}
-          pagingEnabled={true}
-          showsHorizontalScrollIndicator={false}
-          style={styles.scrollView}
+type State = {
+  currentPage: number,
+};
+
+export default class Onboarding extends Component {
+  props: Props;
+  state: State;
+
+  constructor(props: Props) {
+    super(props);
+    this.state = {currentPage: 0};
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <NavigationBar title={this.props.title}>
+          <NavigationBarButton
+            title={Localizable.t('close')}
+            onPress={() => this.props.navigate(BACK)}
+            style={{position: 'absolute', left: 0}}
+          />
+        </NavigationBar>
+        <LinearGradient
+          colors={['#E1E9EE', '#FFFFFF']}
+          start={[0.5, 0.25]} end={[0.5, 1.0]}
+          style={styles.onboardingContainer}
         >
-          <View style={styles.onboardingContainer}>
-            <View style={styles.onboardingContent}>
-              <Image source={require('./Images/onboarding-1.png')} />
-              <Text style={styles.contentHeader}>Welcome to the SourceView Bible</Text>
-              <Text style={styles.contentBody}>Introducing a fresh way to discover God's Word</Text>
+          <ScrollView
+            horizontal={true}
+            pagingEnabled={true}
+            showsHorizontalScrollIndicator={false}
+            style={styles.scrollView}
+          >
+            <View style={styles.onboardingContainer}>
+              <View style={styles.onboardingContent}>
+                <Image source={require('./Images/onboarding-1.png')} />
+                <Text style={styles.contentHeader}>Welcome to the SourceView Bible</Text>
+                <Text style={styles.contentBody}>Introducing a fresh way to discover God's Word</Text>
+              </View>
             </View>
-          </View>
-          <View style={styles.onboardingContainer}>
-            <View style={styles.onboardingContent}>
-              <Image source={require('./Images/onboarding-2.png')} />
-              <Text style={styles.contentHeader}>What's inside</Text>
-              <Text style={styles.contentBody}>Discovery begins when we look deeper into God's story: what's written, who said it, and how it can impact society.</Text>
+            <View style={styles.onboardingContainer}>
+              <View style={styles.onboardingContent}>
+                <Image source={require('./Images/onboarding-2.png')} />
+                <Text style={styles.contentHeader}>What's inside</Text>
+                <Text style={styles.contentBody}>Discovery begins when we look deeper into God's story: what's written, who said it, and how it can impact society.</Text>
+              </View>
             </View>
-          </View>
-          <View style={styles.onboardingContainer}>
-            <View style={styles.onboardingContent}>
-              <Image source={require('./Images/onboarding-3.png')} />
-              <Text style={styles.contentHeader}>What you'll see</Text>
-              <Text style={styles.contentBody}>A new Scripture layout and dynamic visualisations enabling you to encounter the Bible like never before.</Text>
+            <View style={styles.onboardingContainer}>
+              <View style={styles.onboardingContent}>
+                <Image source={require('./Images/onboarding-3.png')} />
+                <Text style={styles.contentHeader}>What you'll see</Text>
+                <Text style={styles.contentBody}>A new Scripture layout and dynamic visualisations enabling you to encounter the Bible like never before.</Text>
+              </View>
             </View>
-          </View>
-          <View style={styles.onboardingContainer}>
-            <View style={styles.onboardingContent}>
-              <Image source={require('./Images/onboarding-4.png')} />
-              <Text style={styles.contentHeader}>Words matter</Text>
-              <Text style={styles.contentBody}>Every word is enriched by layers of information, enabling you to explore and gain new insights.</Text>
+            <View style={styles.onboardingContainer}>
+              <View style={styles.onboardingContent}>
+                <Image source={require('./Images/onboarding-4.png')} />
+                <Text style={styles.contentHeader}>Words matter</Text>
+                <Text style={styles.contentBody}>Every word is enriched by layers of information, enabling you to explore and gain new insights.</Text>
+              </View>
             </View>
-          </View>
-          <View style={styles.onboardingContainer}>
-            <View style={styles.onboardingContent}>
-              <Image source={require('./Images/onboarding-5.png')} />
-              <Text style={styles.contentHeader}>Share discoveries</Text>
-              <Text style={styles.contentBody}>Create insightful visualizations of Scripture and share them
-with friends.</Text>
+            <View style={styles.onboardingContainer}>
+              <View style={styles.onboardingContent}>
+                <Image source={require('./Images/onboarding-5.png')} />
+                <Text style={styles.contentHeader}>Share discoveries</Text>
+                <Text style={styles.contentBody}>Create insightful visualizations of Scripture and share them
+  with friends.</Text>
+              </View>
             </View>
+          </ScrollView>
+          <View style={styles.onboardingControls}>
+            <TouchableOpacity style={styles.nextButton}>
+              <Text style={styles.nextButtonTitle}>Next</Text>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Text style={styles.skipButton}>Skip Intro</Text>
+            </TouchableOpacity>
+            <PageControl
+              numberOfPages={5}
+              currentPage={this.state.currentPage}
+            />
           </View>
-        </ScrollView>
-        <View style={styles.onboardingControls}>
-          <TouchableOpacity style={styles.nextButton}>
-            <Text style={styles.nextButtonTitle}>Next</Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={styles.skipButton}>Skip Intro</Text>
-          </TouchableOpacity>
-        </View>
-      </LinearGradient>
-    </View>
-  );
+        </LinearGradient>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
