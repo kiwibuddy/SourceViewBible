@@ -104,7 +104,7 @@ export default class BookSources extends Component {
           <View style={StyleSheet.styles.statisticKeyline} />
           <View style={StyleSheet.styles.statisticContainer}>
             <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(godPercent, {precision: 0})}</Text>
-            <Text style={StyleSheet.styles.statisticSubtitle}>Divine</Text>
+            <Text style={StyleSheet.styles.statisticSubtitle}>God</Text>
           </View>
           <View style={StyleSheet.styles.statisticKeyline} />
           <View style={StyleSheet.styles.statisticContainer}>
