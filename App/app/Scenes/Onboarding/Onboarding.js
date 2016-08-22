@@ -60,6 +60,7 @@ export default class Onboarding extends Component {
         >
           <ScrollView
             horizontal={true}
+            onMomentumScrollEnd={this._onScrollEnd}
             pagingEnabled={true}
             showsHorizontalScrollIndicator={false}
             style={styles.scrollView}
@@ -117,6 +118,19 @@ export default class Onboarding extends Component {
       </View>
     );
   }
+
+  _onScrollEnd = (e: Object) => {
+    // making our events coming from android compatible to updateIndex logic
+    if (!e.nativeEvent.contentOffset) {
+      e.nativeEvent.contentOffset = {x: e.nativeEvent.position * WIDTH}
+    }
+
+    const currentPage = Math.floor((e.nativeEvent.contentOffset.x - WIDTH / 2) / WIDTH) + 1;
+
+    this.setState({
+      currentPage: currentPage
+    });
+  };
 }
 
 const styles = StyleSheet.create({
