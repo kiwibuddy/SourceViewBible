@@ -81,6 +81,7 @@ export default class SphereSources extends Component {
     return (
       <ListView
         dataSource={dataSource}
+        enableEmptySections={true}
         renderHeader={this._renderHeader}
         renderRow={this._renderRow}
         renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
