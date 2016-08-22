@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
   },
   activityIndicator: {
     position: 'absolute',
-    top: NavigationBar.HEIGHT,
+    top: 20,
     left: 0,
     bottom: 0,
     right: 0,
