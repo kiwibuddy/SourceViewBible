@@ -37,8 +37,14 @@ const Help = (props: Props) => {
         />
       </NavigationBar>
       <ScrollView style={styles.scrollView}>
-        <Text>Discover Help!</Text>
-        <View style={styles.footer}>
+        <View style={styles.helpContainer}>
+          <Text style={styles.contentHeader}>Discover</Text>
+          <Text style={styles.contentBody}>The Discover screen is where your exploration begins. You can dive into the books of the Bible, learn more about the sources quoted in Scripture, or observe how biblical text influences the seven spheres of society.</Text>
+          <Text style={styles.contentBody}>For each category, you can either tap “View All” to browse the complete list of items or tap on a tile for a closer look at a specific book, source, or sphere. You can swipe left and right to browse through some featured tiles in the category. And if you scroll to the bottom, you can learn more about SourceView.</Text>
+          <Text style={styles.contentH2}>Book Tiles (visual, description w/ no punctuation) - e.g. Genesis</Text>
+          <Text style={styles.contentBody}>The Discover screen is where your exploration begins. You can dive into the books of the Bible, learn more about the sources quoted in Scripture, or observe how biblical text influences the seven spheres of society.</Text>
+        </View>
+        <View style={styles.footerContainer}>
           <View style={styles.separator} />
           <TouchableOpacity style={styles.listItemContainer}>
             <Icon
@@ -82,7 +88,11 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: NavigationBar.HEIGHT,
   },
-  footer: {
+  helpContainer: {
+    paddingVertical: 20,
+    paddingHorizontal: 15,
+  },
+  footerContainer: {
     paddingVertical: 20,
   },
   contentHeader: {
@@ -122,6 +132,12 @@ const styles = StyleSheet.create({
   },
   contentHeader: {
     fontSize: 24,
+    fontWeight: 'bold',
+    color: '#59626a',
+    marginBottom: 5,
+  },
+  contentHeader: {
+    fontSize: 18,
     fontWeight: 'bold',
     color: '#59626a',
     marginBottom: 5,

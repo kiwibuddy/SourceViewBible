@@ -40,7 +40,7 @@ const About = (props: Props) => {
         <View style={styles.header}>
           <Image source={require('./Images/about-icon.png')}/>
           <Text style={styles.contentHeader}>Endless Discovery</Text>
-          <Text style={styles.contentBody}>The SourceView Bible app exists to help you observe and discover the character of God by exploring His Word. May it draw you close to Him and reveal your special purpose in this world.</Text>
+          <Text style={styles.contentBody}>The SourceView Bible app exists to help you observe and discover the character of God by exploring His Word. May it draw you close to Him and affirm your role in God's continuing dramatic narrative.</Text>
         </View>
         <View style={styles.separator} />
         <TouchableOpacity style={styles.listItemContainer}>
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
   },
   header: {
     paddingVertical: 20,
-    paddingHorizontal: 30,
+    paddingHorizontal: 20,
     alignItems: 'center',
   },
   contentHeader: {
