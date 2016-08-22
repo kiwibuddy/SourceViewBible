@@ -22,10 +22,19 @@ import { NavigationBar, NavigationBarButton } from '../../Components/Navigation'
 import { BACK } from '../../Navigation';
 import Icon from '../../Components/Common/Icon';
 
+const WEBSITE_URL = "http://www.sourceviewbible.com";
+const APPSTORE_URL = "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1114617271&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software";
+
 type Props = {
   title: string,
   navigate: Function,
 };
+
+function openURL(url: string) {
+  Linking.openURL(url).catch(error => {
+
+  });
+}
 
 const About = (props: Props) => {
   return (
@@ -44,7 +53,7 @@ const About = (props: Props) => {
           <Text style={styles.contentBody}>The SourceView Bible app exists to help you observe and discover the character of God by exploring His Word. May it draw you close to Him and affirm your role in God's continuing dramatic narrative.</Text>
         </View>
         <View style={styles.separator} />
-        <TouchableOpacity style={styles.listItemContainer}>
+        <TouchableOpacity style={styles.listItemContainer} onPress={() => openURL(APPSTORE_URL)}>
           <Icon
             name="about-rate-ios"
             size={25}
@@ -113,7 +122,7 @@ const About = (props: Props) => {
           </View>
         </TouchableOpacity>
         <View style={styles.separator} />
-        <TouchableOpacity style={styles.listItemContainer} onPress={() => Linking.openURL('http://sourceviewbible.com')}>
+        <TouchableOpacity style={styles.listItemContainer} onPress={() => openURL(WEBSITE_URL)}>
           <Icon
             name="about-web"
             size={25}
