@@ -23,13 +23,26 @@ const {
   SphereType
 } = Constants;
 
-import { bookChaptersURL, bookSourcesURL, bookSpheresURL, bookWordsURL, readerURL, sourceURL } from '../../Navigation';
+import { bookHelpURL, bookChaptersURL, bookSourcesURL, bookSpheresURL, bookWordsURL, readerURL, sourceURL } from '../../Navigation';
 
 import { SourcesBarChart, SpheresBarChart, WordCloud } from '../../Components/Charts';
 import ParallaxMotionView from '../../Components/Common/ParallaxMotionView';
 import SourceIcon from '../../Components/Common/SourceIcon';
 import Icon from '../../Components/Common/Icon';
 import { ReadingTime } from '../../Common/NumberHelper';
+
+import * as Navigation from '../../Components/Navigation';
+const NavigationBar = (props: Props) => {
+  return (
+    <Navigation.NavigationBar title={props.title}>
+      <Navigation.NavigationBarButton
+        imageSource={require('../../Components/Navigation/Images/nav-help.png')}
+        onPress={() => props.navigate(bookHelpURL({title: Localizable.t('help'), modal: true}))}
+        style={{position: 'absolute', right: 5}}
+      />
+    </Navigation.NavigationBar>
+  );
+};
 
 const MAX_NUMBER_OF_SOURCES = 4;
 
@@ -45,6 +58,8 @@ type State = {
 };
 
 export default class BookOverview extends Component {
+  static NavigationBar = NavigationBar;
+  
   props: Props;
   state: State;
 

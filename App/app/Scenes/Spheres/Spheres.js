@@ -31,9 +31,22 @@ const CAROUSEL_ITEM_SIZE = 80;
 const MAXIMUM_BOOK_COUNT = 5;
 const MAXIMUM_SOURCE_COUNT = 5;
 
-import { bookURL, readerURL, sourceURL, sphereBooksURL, spherePassagesURL, sphereSourcesURL, sphereWordsURL, sphereURL } from '../../Navigation';
+import { bookURL, sphereHelpURL, readerURL, sourceURL, sphereBooksURL, spherePassagesURL, sphereSourcesURL, sphereWordsURL, sphereURL } from '../../Navigation';
 import { Bible, Actant, Book, Sphere } from '../../Database';
 import { Preference } from '../../Preferences';
+
+import * as Navigation from '../../Components/Navigation';
+const NavigationBar = (props: Props) => {
+  return (
+    <Navigation.NavigationBar title={props.title}>
+      <Navigation.NavigationBarButton
+        imageSource={require('../../Components/Navigation/Images/nav-help.png')}
+        onPress={() => props.navigate(sphereHelpURL({title: Localizable.t('help'), modal: true}))}
+        style={{position: 'absolute', right: 5}}
+      />
+    </Navigation.NavigationBar>
+  );
+};
 
 import FoundationalSphere from './FoundationalSphere';
 
@@ -59,6 +72,8 @@ type State = {
 };
 
 export default class Spheres extends Component {
+  static NavigationBar = NavigationBar;
+
   props: Props;
   state: State;
 

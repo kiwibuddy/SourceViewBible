@@ -33,7 +33,20 @@ import SourceIcon from '../../Components/Common/SourceIcon';
 
 import FilterBar from './FilterBar';
 
-import { BACK, occurrencesURL, readerURL, sourceURL, sourceBooksURL, sourceConversationsURL, sourceSpheresURL, sourceWordsURL } from '../../Navigation';
+import { BACK, sourceHelpURL, occurrencesURL, readerURL, sourceURL, sourceBooksURL, sourceConversationsURL, sourceSpheresURL, sourceWordsURL } from '../../Navigation';
+
+import * as Navigation from '../../Components/Navigation';
+const NavigationBar = (props: Props) => {
+  return (
+    <Navigation.NavigationBar title={props.title}>
+      <Navigation.NavigationBarButton
+        imageSource={require('../../Components/Navigation/Images/nav-help.png')}
+        onPress={() => props.navigate(sourceHelpURL({title: Localizable.t('help'), modal: true}))}
+        style={{position: 'absolute', right: 5}}
+      />
+    </Navigation.NavigationBar>
+  );
+};
 
 import { Actant, Book } from '../../Database';
 import Query from './Query';
@@ -64,6 +77,8 @@ type State = {
 };
 
 export default class SourceOverview extends Component {
+  static NavigationBar = NavigationBar;
+
   props: Props;
   state: State;
   shouldFetch: boolean = true;

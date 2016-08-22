@@ -29,9 +29,9 @@ import { DeleteButton, DuplicateButton, ShareButton } from './Buttons';
 // $FlowFixMe: Can't find os module extension
 import LinearGradient from 'react-native-linear-gradient';
 
-import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigation';
+import { NavigationBar, NavigationBarButton, Toolbar, ToolbarButton } from '../../Components/Navigation';
 
-import { BACK, discoveryCenterURL, occurrencesURL } from '../../Navigation';
+import { BACK, discoveryCenterURL, discoveryCenterHelpURL, occurrencesURL } from '../../Navigation';
 
 import { Discovery } from '../../Preferences';
 import Query from './Query';
@@ -73,12 +73,17 @@ export default class DiscoveryCenter extends Component {
     return (
       <View style={styles.container}>
         <NavigationBar title={Localizable.t('discovery-center')}>
-          <TouchableOpacity
+          <NavigationBarButton
+            title={Localizable.t('done')}
+            titleStyle={StyleSheet.styles.navigationBar.doneButtonTitle}
             onPress={() => this.props.navigate(BACK)}
-            style={{position: 'absolute', left: 16}}
-          >
-            <Text style={StyleSheet.styles.navigationBar.doneButtonTitle}>{Localizable.t('done')}</Text>
-          </TouchableOpacity>
+            style={{position: 'absolute', left: 5}}
+          />
+          <NavigationBarButton
+            imageSource={require('../../Components/Navigation/Images/nav-help.png')}
+            onPress={() => this.props.navigate(discoveryCenterHelpURL({title: Localizable.t('help'), modal: true}))}
+            style={{position: 'absolute', right: 5}}
+          />
         </NavigationBar>
         <ScrollView ref={SCROLLVIEW_REF}
           style={styles.content}
