@@ -247,11 +247,14 @@ export default class App extends Component {
     const path = route.path.toLowerCase();
 
     if (this._isSphereRoute(route)) {
-      if (Preference.booleanForKey(Preference.Keys.Spheres.Prompted)) {
+      const timestamp = Math.floor(Date.now() / 1000);
+      // const expired = (timestamp - 1477980000 > 0); // Nov 1
+      const expired = (timestamp - 1477980000 > 0);
+      if (!expired && Preference.booleanForKey(Preference.Keys.Spheres.Prompted)) {
         return false;
       }
 
-      this._pushRoute(sphereInAppPurchaseURL({title: Localizable.t('spheres.text'), redirect: route, modal: true}));
+      this._pushRoute(sphereInAppPurchaseURL({title: Localizable.t('spheres.text'), expired, redirect: route, modal: true}));
       return true;
     }
     return false;

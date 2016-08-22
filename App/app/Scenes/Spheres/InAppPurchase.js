@@ -30,6 +30,9 @@ type Props = {
 
 export default class InAppPurchase extends Component {
   render() {
+    const expired = this._renderExpired();
+    const content = (expired ? expired : this._renderContent());
+
     return (
       <View style={styles.container}>
         <NavigationBar title={this.props.title}>
@@ -40,10 +43,26 @@ export default class InAppPurchase extends Component {
           />
         </NavigationBar>
         <ScrollView style={styles.scrollView}>
-          <TouchableOpacity onPress={this._onPressBuy}>
-            <Text>Buy Me</Text>
-          </TouchableOpacity>
+          {content}
         </ScrollView>
+      </View>
+    );
+  }
+
+  _renderContent = () => {
+    return (
+      <TouchableOpacity onPress={this._onPressBuy}>
+        <Text>Buy Me</Text>
+      </TouchableOpacity>
+    );
+  };
+
+  _renderExpired = () => {
+    if (!this.props.expired) return null;
+
+    return (
+      <View style={{flex: 1}}>
+        <Text>Expired</Text>
       </View>
     );
   }
