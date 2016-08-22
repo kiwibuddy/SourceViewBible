@@ -180,10 +180,11 @@ export default class Bookmarks extends Component {
       default:
         const bookmarks = [
           {path: '/Reader/Search', title: 'Go to a Reference', modal: true},
-          {path: '/Discover', title: 'Discover'},
-          {path: '/Books', title: 'Books'},
-          {path: '/Sources', title: 'Sources'},
-          {path: '/Spheres', title: 'Spheres'},
+          {path: '/Discover', title: Localizable.t('discover')},
+          {path: '/Books', title: Localizable.t('books')},
+          {path: '/Sources', title: Localizable.t('sources.text')},
+          {path: '/Spheres', title: Localizable.t('spheres.text')},
+          {path: '/About', title: Localizable.t('about-sourceview'), modal: true},
         ];
         return this.state.dataSource.cloneWithRowsAndSections({bookmarks: bookmarks});
     }
@@ -228,6 +229,7 @@ export default class Bookmarks extends Component {
       '/Sources': require('../../Images/tabs/sources.png'),
       '/Spheres': require('../../Images/tabs/spheres.png'),
       '/Reader': require('../../Images/tabs/chapters.png'),
+      '/About': require('../../Images/tabs/about.png'),
     };
 
     const path = Object.keys(icons).find(path => route.path.startsWith(path));
