@@ -51,9 +51,19 @@ export default class InAppPurchase extends Component {
 
   _renderContent = () => {
     return (
-      <TouchableOpacity onPress={this._onPressBuy}>
-        <Text>Buy Me</Text>
-      </TouchableOpacity>
+      <View style={styles.contentContainer}>
+        <Image source={require('./Images/sphere-iap-header.png')} />
+        <Text style={styles.contentHeader}>Uses spheres free for a limited time</Text>
+        <Text style={styles.contentBody}>Spheres are a brand new way to see and experience the Bible. You will be able to explore the God's word through topics like Family, Government, Education, etc.</Text>
+        <View style={styles.buyControls}>
+          <TouchableOpacity onPress={this._onPressBuy} style={[styles.buyButton, {width: 200}]}>
+            <Text style={styles.buyButtonTitle}>Continue</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.learnButton}>Learn more</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     );
   };
 
@@ -61,8 +71,10 @@ export default class InAppPurchase extends Component {
     if (!this.props.expired) return null;
 
     return (
-      <View style={{flex: 1}}>
-        <Text>Expired</Text>
+      <View style={styles.contentContainer}>
+        <Image source={require('./Images/sphere-iap-header.png')} />
+        <Text style={styles.contentHeader}>Download new version of SourceView</Text>
+        <Text style={styles.contentBody}>Spheres are a brand new way to see and experience the Bible. You will be able to explore the God's word through topics like Family, Government, Education, etc.</Text>
       </View>
     );
   }
@@ -76,10 +88,55 @@ export default class InAppPurchase extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#EFEFF4',
   },
   scrollView: {
     flex: 1,
     marginTop: NavigationBar.HEIGHT,
+  },
+  contentContainer: {
+    alignItems: 'center',
+  },
+  buyControls: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buyButton: {
+    borderColor: Colors.tint,
+    height: 40,
+    borderRadius: 20,
+    borderWidth: 1,
+    overflow:'hidden',
+    alignSelf: 'center',
+    marginBottom: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buyButtonTitle: {
+    color: Colors.tint,
+    fontSize: 17,
+    marginHorizontal: 20,
+  },
+  learnButton: {
+    color: Colors.tint,
+    fontSize: 13,
+    backgroundColor: 'transparent'
+  },
+  contentHeader: {
+    fontSize: 27,
+    lineHeight: 33,
+    fontWeight: 'bold',
+    color: '#59626A',
+    marginBottom: 5,
+    textAlign: 'center',
+    marginTop: 40,
+    marginHorizontal: 20,
+  },
+  contentBody: {
+    fontSize: 21,
+    lineHeight: 25,
+    color: '#59626A',
+    textAlign: 'center',
+    marginBottom: 40,
+    marginHorizontal: 20,
   },
 });
