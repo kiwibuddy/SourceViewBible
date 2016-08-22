@@ -21,7 +21,7 @@
         "Note": {
           "docindexfeature" : "docindex",
           "end" : "\
-<a href=\"javascript:void(0)\" onclick=\"showFootnote(\\'{{BOOK_NAME}} {{ emitvar 'ChapterNumber' }}:{{ emitvar 'VerseNumber' }}\\', \\'{{ emitvar 'Note' }}\\');\" class=\"footnoteIndicator\">*</a>\
+<a href=\"javascript:void(0)\" class=\"footnoteIndicator source{{ emitvar 'SourceColor' }}\" onclick=\"showFootnote(\\'{{BOOK_NAME}} {{ emitvar 'ChapterNumber' }}:{{ emitvar 'VerseNumber' }}\\', \\'{{ emitvar 'Note' }}\\');\">*</a>\
 {{ setvar 'Footnote' }}{{ setvarend }}",
           "start" : "{{ setvar 'Footnote' }}true{{ setvarend }}{{ setvar 'Note' }}{{ setvarend }}"
         },
@@ -46,6 +46,7 @@
           ],
           "start":"\
 {{ setvar 'StartParagraph' }}true{{ setvarend }}\
+{{ setvar 'SourceColor' }}{{ featurenomangle 2 }}{{ setvarend }}\
 <tr id=\"source-{{ feature 0 }}-{{ feature 1 }}\" class=\"source{{ featurenomangle 2 }}\">\n\
 <td class=\"sourceTitle\">{{ feature 0 }} {{ featurenomangle 1 }}</td>\n\
 <td class=\"sourceText\">\n"

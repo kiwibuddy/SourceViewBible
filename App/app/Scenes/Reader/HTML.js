@@ -169,7 +169,6 @@ module.exports = `
         max-height: 250pt;
       }
       .footnoteIndicator {
-        color: #59626A;
         text-decoration: none;
       }
       ${CSS}
