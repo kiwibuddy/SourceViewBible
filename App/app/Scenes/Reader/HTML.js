@@ -172,18 +172,18 @@ module.exports = `
     </style>
   </head>
   <body id="scripture">
-    <div class="footnoteOverlay" style="display: none;">
+    <div id="footnote-overlay" class="footnoteOverlay" style="display: none;">
       <div class="footnoteContainer">
         <div class="footnoteHeader">
-          Genesis 1:1
-          <a href="#" class="footnoteClose">Close</a>
+          <span id="footnote-reference">Genesis 1:1</span>
+          <a href="javascript:void(0)" onclick="closeFootnote();" class="footnoteClose">Close</a>
         </div>
         <div class="footnoteContent">
-          <p class="footnoteScroll">Or In the beginning when God created the heavens and the earth,... Or When God began to create the heavens and the earth,...</p>
+          <p id="footnote" class="footnoteScroll">Or In the beginning when God created the heavens and the earth,... Or When God began to create the heavens and the earth,...</p>
         </div>
       </div>
     </div>
-    
+
     {{BODY}}
 
     <script type="text/javascript">
@@ -195,6 +195,16 @@ module.exports = `
       var previousPosition = 0;
       var originalX = null;
       var originalY = null;
+
+      function showFootnote(footnoteID) {
+        var footnoteOverlay = document.getElementById('footnote-overlay');
+        footnoteOverlay.style.display = 'block';
+      }
+
+      function closeFootnote() {
+        var footnoteOverlay = document.getElementById('footnote-overlay');
+        footnoteOverlay.style.display = 'none';
+      }
 
       document.onreadystatechange = function() {
       	if (ready) return;

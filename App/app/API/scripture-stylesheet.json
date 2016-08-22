@@ -4,19 +4,35 @@
       "prepend_XML_declaration":false,
       "object_types":{
         "Book" : {
-           "docindexfeature" : "docindex",
-           "end" : "",
-           "start" : "{{ setvar 'TextKind' }}Prose{{ setvarend }}"
+          "docindexfeature" : "docindex",
+          "end" : "",
+          "start" : "{{ setvar 'TextKind' }}Prose{{ setvarend }}"
         },
         "EmbeddedQuotation" : {
-           "docindexfeature" : "docindex",
-           "end" : "{{ setvar 'embedded_quotation' }}{{ setvarend }}",
-           "start" : "{{ setvar 'embedded_quotation' }} embedded-quotation{{ setvarend }}"
+          "docindexfeature" : "docindex",
+          "end" : "{{ setvar 'embedded_quotation' }}{{ setvarend }}",
+          "start" : "{{ setvar 'embedded_quotation' }} embedded-quotation{{ setvarend }}"
         },
         "EmbeddedDocument" : {
-           "docindexfeature" : "docindex",
-           "end" : "{{ setvar 'embedded_document' }}{{ setvarend }}",
-           "start" : "{{ setvar 'embedded_document' }} embedded-document{{ setvarend }}"
+          "docindexfeature" : "docindex",
+          "end" : "{{ setvar 'embedded_document' }}{{ setvarend }}",
+          "start" : "{{ setvar 'embedded_document' }} embedded-document{{ setvarend }}"
+        },
+        "Note": {
+          "docindexfeature" : "docindex",
+          "end" : "{{ setvar 'Footnote' }}{{ setvarend }}",
+          "start" : "{{ setvar 'Footnote' }}true{{ setvarend }}{{ setvar 'Note' }}{{ setvarend }}"
+        },
+        "footnoteStart": {
+          "docindexfeature" : "docindex",
+          "end" : "",
+          "start" : "<a href=\"javascript:void(0)\" onclick=\"showFootnote(\\'footnote-{{ emitvar 'ChapterNumber' }}-{{ emitvar 'VerseNumber' }}\\');\" class=\"footnoteStart\">*</a>"
+        },
+        "NoteToken": {
+          "docindexfeature" : "docindex",
+          "end" : "",
+          "get": ["surface"],
+          "start" : "{{ setvar 'NoteToken' }}{{ emitvar 'Note' }}{{ feature 0 }}{{ setvarend }}{{ setvar 'Note' }}{{ emitvar 'NoteToken' }}{{ setvarend }}"
         },
         "Source":{
           "docindexfeature":"docindex",
@@ -99,8 +115,18 @@
         },
         "Italics" : {
            "docindexfeature" : "docindex",
-           "end" : "</i>",
-           "start" : "<i>"
+           "end" : "\
+{{ if varequal 'Footnote' 'true' }}\
+{{ setvar 'NoteToken' }}{{ emitvar 'Note' }}</i>{{ setvarend }}{{ setvar 'Note' }}{{ emitvar 'NoteToken' }}{{ setvarend }}\
+{{ else }}\
+</i>\
+{{ endif }}",
+           "start" : "\
+{{ if varequal 'Footnote' 'true' }}\
+{{ setvar 'NoteToken' }}{{ emitvar 'Note' }}<i>{{ setvarend }}{{ setvar 'Note' }}{{ emitvar 'NoteToken' }}{{ setvarend }}\
+{{ else }}\
+<i>\
+{{ endif }}"
         },
         "Verse":{
           "docindexfeature":"docindex",
@@ -124,10 +150,9 @@
         "ChapterNumberToken":{
           "docindexfeature":"docindex",
           "end":"",
-          "get":[
-            "surface",
-          ],
+          "get":["surface"],
           "start":"\
+{{ setvar 'ChapterNumber' }}{{ featurenomangle 0 }}{{ setvarend }}\
 {{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}\
 <a id=\"chapter-{{ feature 0 }}\"><span  class=\"textChapter\">{{SPHERES}}</span></a>"
         },
@@ -138,6 +163,7 @@
             "surface",
           ],
           "start":"\
+{{ setvar 'VerseNumber' }}{{ featurenomangle 0 }}{{ setvarend }}\
 {{ if featureequal 0 '0' }}{{ setvar 'ParagraphType' }}textPoetry{{ setvarend }}{{ endif }}\
 {{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}\
 {{ if featureequal 0 '0' }}{{ else }}\
