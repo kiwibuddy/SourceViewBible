@@ -16,8 +16,14 @@ const { width } = Dimensions.get('window');
 
 import {
   Colors,
+  Constants,
   StyleSheet,
 } from '../../Common';
+
+const {
+  SourceType,
+  SphereType
+} = Constants;
 
 // $FlowFixMe: Can't find os module extension
 import LinearGradient from 'react-native-linear-gradient';
@@ -100,6 +106,7 @@ export default class DiscoverSources extends Component {
 
   _renderSource = (source: Object) => {
     const sourcePercent = (source.wordCount / Bible.wordCount) * 100;
+    const spherePercent = (source.sphereWordCount / source.wordCount) * 100;
 
     return (
       <TouchableOpacity key={'source-' + source.id} style={styles.itemContainer} onPress={ () => this.props.navigate(sourceURL({sourceID: source.id, title: source.name})) }>
@@ -120,13 +127,13 @@ export default class DiscoverSources extends Component {
           <View style={styles.statisticsContainer}>
             <View style={styles.statisticContainer} >
               <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-                <Text style={styles.statisticTitle}>{source.sourceCount}</Text>
-                <Text style={styles.statisticSubtitle}>Sources</Text>
-                <SourcesBarChart
-                  style={{flex: 0, marginLeft: 4}}
+                <Text style={styles.statisticTitle}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
+                <Text style={styles.statisticSubtitle}>Spheres</Text>
+                <SpheresBarChart
+                  style={{flex: 0, marginLeft: 2}}
                   barStyle={{width: 2, height: 12, marginHorizontal: 1}}
                   horizontal={false}
-                  data={[{narrator: 1}, {god: 1}, {lead: 1}, {support: 1}]}
+                  data={[{family: source.countOfSphereType(SphereType.FAMILY)}, {economics: source.countOfSphereType(SphereType.ECONOMICS)}, {government: source.countOfSphereType(SphereType.GOVERNMENT)}, {religion: source.countOfSphereType(SphereType.RELIGION)}, {education: source.countOfSphereType(SphereType.EDUCATION)}, {communication: source.countOfSphereType(SphereType.COMMUNICATION)}, {celebration: source.countOfSphereType(SphereType.CELEBRATION)}]}
                 />
               </View>
             </View>
