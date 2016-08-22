@@ -19,7 +19,7 @@ import {
 } from '../../Common';
 
 import { NavigationBar, NavigationBarButton } from '../../Components/Navigation';
-import { BACK } from '../../Navigation';
+import { BACK, discoverURL } from '../../Navigation';
 import LinearGradient from 'react-native-linear-gradient';
 import PageControl from '../../Components/Common/PageControl';
 
@@ -103,10 +103,10 @@ export default class Onboarding extends Component {
             </View>
           </ScrollView>
           <View style={styles.onboardingControls}>
-            <TouchableOpacity style={styles.nextButton}>
+            <TouchableOpacity style={styles.nextButton} onPress={this._onPressNext}>
               <Text style={styles.nextButtonTitle}>Next</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={this._onPressDone}>
               <Text style={styles.skipButton}>Skip Intro</Text>
             </TouchableOpacity>
             <PageControl
@@ -119,6 +119,10 @@ export default class Onboarding extends Component {
     );
   }
 
+  _onPressNext = () => {
+
+  };
+
   _onScrollEnd = (e: Object) => {
     // making our events coming from android compatible to updateIndex logic
     if (!e.nativeEvent.contentOffset) {
@@ -130,6 +134,10 @@ export default class Onboarding extends Component {
     this.setState({
       currentPage: currentPage
     });
+  };
+
+  _onPressDone = () => {
+    this.props.navigate(discoverURL({title: Localizable.t('discover')}), {replace: true});
   };
 }
 
