@@ -5022,12 +5022,12 @@
       "section": "Communication to Imitate",
       "number": 12,
       "title": "Inspired by the Spirit",
-      "reference": "Matthew 22:43",
+      "reference": "Matthew 22:43a",
       "monads": [
         {
           "bookName": "Matthew",
           "firstMonad": 1388390,
-          "lastMonad": 1388441,
+          "lastMonad": 1388433,
           "chapter": 22,
           "verse": 43
         }
@@ -5052,12 +5052,12 @@
       "section": "Communication to Imitate",
       "number": 14,
       "title": "Align Your Communication with God’s",
-      "reference": "Revelation 22:17",
+      "reference": "Revelation 22:17a",
       "monads": [
         {
           "bookName": "Revelation",
           "firstMonad": 1804808,
-          "lastMonad": 1804879,
+          "lastMonad": 1804843,
           "chapter": 22,
           "verse": 17
         }
@@ -5517,11 +5517,11 @@
       "section": "Pursue Horizontal Communication with Your Neighbor",
       "number": 45,
       "title": "Know When to Be Silent",
-      "reference": "Ecclesiastes 3:7",
+      "reference": "Ecclesiastes 3:7b",
       "monads": [
         {
           "bookName": "Ecclesiastes",
-          "firstMonad": 971196,
+          "firstMonad": 971217,
           "lastMonad": 971236,
           "chapter": 3,
           "verse": 7
