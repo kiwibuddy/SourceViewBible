@@ -23,6 +23,9 @@ module.exports = `
       i {
         color: #323B43;
       }
+      i + .footnoteIndicator {
+        color: #323B43;
+      }
       body {
         font-family: Georgia;
         font-size: {{FONT_SIZE}}pt;
