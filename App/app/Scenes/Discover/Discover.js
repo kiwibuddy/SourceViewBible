@@ -24,6 +24,8 @@ import DiscoverSpheres from './DiscoverSpheres';
 import * as Navigation from '../../Components/Navigation';
 import { aboutURL, discoverHelpURL } from '../../Navigation';
 
+import { Preference } from '../../Preferences';
+
 const NavigationBar = (props: Props) => {
   return (
     <Navigation.NavigationBar title={props.title}>
@@ -44,17 +46,19 @@ export default class Discovery extends Component {
   static NavigationBar = NavigationBar;
 
   render() {
+    const shouldRefresh = this._shouldRefresh();
+
     return (
       <ScrollView style={styles.container}>
-        <DiscoverBooks navigate={this.props.navigate} />
+        <DiscoverBooks navigate={this.props.navigate} shouldRefresh={shouldRefresh} />
 
         <View style={styles.separator}></View>
 
-        <DiscoverSources navigate={this.props.navigate} />
+        <DiscoverSources navigate={this.props.navigate} shouldRefresh={shouldRefresh} />
 
         <View style={styles.separator}></View>
 
-        <DiscoverSpheres navigate={this.props.navigate} />
+        <DiscoverSpheres navigate={this.props.navigate} shouldRefresh={shouldRefresh} />
 
         <View style={styles.separator}></View>
 
@@ -83,6 +87,23 @@ export default class Discovery extends Component {
       </View>
     );
   };
+
+  _shouldRefresh = () => {
+    let refreshDate = Preference.stringForKey(Preference.Keys.Discover.RefreshDate);
+
+    const date = new Date();
+    const month = date.getUTCMonth() + 1; //months from 1-12
+    const day = date.getUTCDate();
+    const year = date.getUTCFullYear();
+    const currentDate = `${year}${month}${day}`;
+
+    const shouldRefresh = (!refreshDate || currentDate !== refreshDate);
+    if (shouldRefresh) {
+      // Preference.setStringForKey(currentDate, Preference.Keys.Discover.RefreshDate);
+    }
+
+    return shouldRefresh;
+  }
 }
 
 const styles = StyleSheet.create({
