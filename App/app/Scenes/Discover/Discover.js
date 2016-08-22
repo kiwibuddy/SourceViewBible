@@ -22,7 +22,7 @@ import DiscoverSources from './DiscoverSources';
 import DiscoverSpheres from './DiscoverSpheres';
 
 import * as Navigation from '../../Components/Navigation';
-import { discoverHelpURL } from '../../Navigation';
+import { aboutURL, discoverHelpURL } from '../../Navigation';
 
 const NavigationBar = (props: Props) => {
   return (
@@ -58,7 +58,7 @@ export default class Discovery extends Component {
 
         <View style={styles.separator}></View>
 
-        <TouchableOpacity style={styles.aboutContainer}>
+        <TouchableOpacity style={styles.aboutContainer} onPress={() => this.props.navigate(aboutURL({title: Localizable.t('about-sourceview'), modal: true}))}>
           <Text style={styles.copyright}>SourceView Publishing, LLC ©2016</Text>
           <Text style={styles.copyright}>Version 1.0 (Build 1875)</Text>
           <Text style={styles.button}>Learn More</Text>

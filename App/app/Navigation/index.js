@@ -4,6 +4,7 @@
 import React from 'react';
 const router = require('./router');
 
+import About from '../Scenes/About/About';
 import Bookmarks from '../Scenes/Bookmarks/Bookmarks';
 import BookChapters from '../Scenes/Books/BookChapters';
 import BookOverview from '../Scenes/Books/BookOverview';
@@ -34,6 +35,7 @@ import SphereSources from '../Scenes/Spheres/SphereSources';
 import SphereWords from '../Scenes/Spheres/SphereWords';
 import SphereHelp from '../Scenes/Spheres/Help';
 
+export const aboutURL = router.addRoute('/About', About);
 export const bookmarksURL = router.addRoute('/Bookmarks', Bookmarks);
 export const booksURL = router.addRoute('/Books', Books);
 export const bookChaptersURL = router.addRoute('/Books/:bookID/Chapters', BookChapters);

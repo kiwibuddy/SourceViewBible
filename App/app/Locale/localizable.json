@@ -17,6 +17,7 @@
     "just-sources": "Just Sources",
     "just-recipients": "Just Recipients",
     "in-book": "in {{book}}",
+    "about-sourceview": "SourceView",
     "sources": {
       "narrator": "Narrator",
       "god": "God",
