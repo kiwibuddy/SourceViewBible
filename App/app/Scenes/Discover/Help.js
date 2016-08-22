@@ -62,6 +62,12 @@ const Help = (props: Props) => {
             </View>
           </TouchableOpacity>
           <View style={styles.separator} />
+          <TouchableOpacity style={styles.donateContainer}>
+            <Text style={[styles.contentHeader, {marginBottom: 0}]}>Help us</Text>
+            <Text style={[styles.contentHeader, {marginTop: 0}]}>end Biblical poverty</Text>
+            <Text style={styles.contentBody}>With your help we can ensure that more people around the world with smart phones can have access to the Bible.</Text>
+            <Text style={styles.button}>Donate Today</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </View>
@@ -114,6 +120,25 @@ const styles = StyleSheet.create({
     ...StyleSheet.styles.separator,
     marginLeft: 15,
   },
+  contentHeader: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#59626a',
+    marginBottom: 5,
+  },
+  contentBody: {
+    fontSize: 17,
+    lineHeight: 24,
+    color: '#9B9B9B',
+  },
+  button: {
+    fontSize: 17,
+    color: Colors.tint,
+    paddingVertical: 5,
+  },
+  donateContainer: {
+    padding: 15,
+  }
 });
 
 export default Help;
