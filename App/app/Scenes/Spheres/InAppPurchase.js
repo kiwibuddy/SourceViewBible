@@ -7,6 +7,7 @@ import {
   Image,
   ScrollView,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native'
 
@@ -19,26 +20,38 @@ import {
 import { NavigationBar, NavigationBarButton } from '../../Components/Navigation';
 import { BACK } from '../../Navigation';
 
+import { Preference } from '../../Preferences';
+
 type Props = {
   title: string,
   navigate: Function,
+  redirect: Function,
 };
 
-const InAppPurchase = (props: Props) => {
-  return (
-    <View style={styles.container}>
-      <NavigationBar title={props.title}>
-        <NavigationBarButton
-          title={Localizable.t('back')}
-          onPress={() => props.navigate(BACK)}
-          style={{position: 'absolute', left: 0}}
-        />
-      </NavigationBar>
-      <ScrollView style={styles.scrollView}>
-        <Text>Buy Me</Text>
-      </ScrollView>
-    </View>
-  );
+export default class InAppPurchase extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <NavigationBar title={this.props.title}>
+          <NavigationBarButton
+            title={Localizable.t('back')}
+            onPress={() => this.props.navigate(BACK)}
+            style={{position: 'absolute', left: 0}}
+          />
+        </NavigationBar>
+        <ScrollView style={styles.scrollView}>
+          <TouchableOpacity onPress={this._onPressBuy}>
+            <Text>Buy Me</Text>
+          </TouchableOpacity>
+        </ScrollView>
+      </View>
+    );
+  }
+
+  _onPressBuy = () => {
+    Preference.setBooleanForKey(true, Preference.Keys.Spheres.Prompted);
+    this.props.navigate(this.props.redirect, {replace: true});
+  };
 }
 
 const styles = StyleSheet.create({
@@ -51,5 +64,3 @@ const styles = StyleSheet.create({
     marginTop: NavigationBar.HEIGHT,
   },
 });
-
-export default InAppPurchase;

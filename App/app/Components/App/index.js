@@ -18,7 +18,7 @@ import {
   StyleSheet,
 } from '../../Common';
 
-import { History } from '../../Preferences';
+import { History, Preference } from '../../Preferences';
 
 export default class App extends Component {
   state = {
@@ -247,7 +247,11 @@ export default class App extends Component {
     const path = route.path.toLowerCase();
 
     if (this._isSphereRoute(route)) {
-      this._pushRoute(sphereInAppPurchaseURL({title: Localizable.t('spheres.text'), route, modal: true}));
+      if (Preference.booleanForKey(Preference.Keys.Spheres.Prompted)) {
+        return false;
+      }
+
+      this._pushRoute(sphereInAppPurchaseURL({title: Localizable.t('spheres.text'), redirect: route, modal: true}));
       return true;
     }
     return false;
