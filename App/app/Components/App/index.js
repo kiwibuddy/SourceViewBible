@@ -157,6 +157,22 @@ export default class App extends Component {
     const currentRoute = state.routes[state.index];
     if (route.path === currentRoute.path) return;
 
+    if (state.index - 1 > 0) {
+      const previousRoute = state.routes[state.index - 1];
+      if (previousRoute.path === route.path) {
+        this._goBack();
+        return;
+      }
+    }
+
+    if (state.index + 1 < state.routes.length - 1) {
+      const nextRoute = state.routes[state.index + 1];
+      if (nextRoute.path === route.path) {
+        this._goForward();
+        return;
+      }
+    }
+
     const delta = (state.routes.length - state.index) - 1;
 
     const routes = [
