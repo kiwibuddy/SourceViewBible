@@ -68,41 +68,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: '#59626a',
-    marginTop: 15,
-    marginBottom: 5,
-  },
-  contentBody: {
-    fontSize: 17,
-    lineHeight: 24,
-    color: '#9B9B9B',
-    textAlign: 'center',
-  },
-  listItemContainer: {
-    paddingLeft: 15,
-    paddingRight: 15,
-    paddingVertical: 5,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  listItem: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingVertical: 8,
-  },
-  listItemIcon: {
-    alignSelf: 'center',
-    paddingRight: 10,
-  },
-  separator: {
-    ...StyleSheet.styles.separator,
-    marginLeft: 15,
-  },
-  contentHeader: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#59626a',
     marginBottom: 5,
   },
   contentH2: {
