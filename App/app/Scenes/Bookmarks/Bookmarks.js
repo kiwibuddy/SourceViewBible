@@ -185,6 +185,7 @@ export default class Bookmarks extends Component {
           {path: '/Sources', title: Localizable.t('sources.text')},
           {path: '/Spheres', title: Localizable.t('spheres.text')},
           {path: '/About', title: Localizable.t('about-sourceview'), modal: true},
+          {path: '/Onboarding', title: 'Onboarding', modal: true},
         ];
         return this.state.dataSource.cloneWithRowsAndSections({bookmarks: bookmarks});
     }
