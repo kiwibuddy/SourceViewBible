@@ -87,6 +87,74 @@ const About = (props: Props) => {
           </View>
         </TouchableOpacity>
         <View style={styles.separator} />
+        <View style={styles.sectionHeaderContainer}>
+          <Text style={StyleSheet.styles.sectionHeaderTitle}>CONNECT WITH SOURCEVIEW</Text>
+        </View>
+        <TouchableOpacity style={styles.listItemContainer}>
+          <Icon
+            name="about-fb"
+            size={25}
+            style={[styles.listItemIcon, {color: '#59626A'}]}
+          />
+          <View style={styles.listItem}>
+            <Text style={StyleSheet.styles.cell.title}>Facebook</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={styles.separator} />
+        <TouchableOpacity style={styles.listItemContainer}>
+          <Icon
+            name="about-twitter"
+            size={25}
+            style={[styles.listItemIcon, {color: '#59626A'}]}
+            />
+          <View style={styles.listItem}>
+            <Text style={StyleSheet.styles.cell.title}>Twitter</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={styles.separator} />
+        <TouchableOpacity style={styles.listItemContainer}>
+          <Icon
+            name="about-web"
+            size={25}
+            style={[styles.listItemIcon, {color: '#59626A'}]}
+          />
+          <View style={styles.listItem}>
+            <Text style={StyleSheet.styles.cell.title}>SourceView Website</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={styles.separator} />
+        <View style={styles.sectionHeaderContainer}>
+          <Text style={StyleSheet.styles.sectionHeaderTitle}>ABOUT SOURCEVIEW</Text>
+        </View>
+        <TouchableOpacity style={styles.listItemContainer}>
+          <View style={styles.listItem}>
+            <Text style={StyleSheet.styles.cell.title}>Acknowledgments</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={styles.separator} />
+        <TouchableOpacity style={styles.listItemContainer}>
+          <View style={styles.listItem}>
+            <Text style={StyleSheet.styles.cell.title}>Why the SourceView™ Bible?</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={styles.separator} />
+        <TouchableOpacity style={styles.listItemContainer}>
+          <View style={styles.listItem}>
+            <Text style={StyleSheet.styles.cell.title}>A Note to Readers</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={styles.separator} />
+        <TouchableOpacity style={styles.listItemContainer}>
+          <View style={styles.listItem}>
+            <Text style={StyleSheet.styles.cell.title}>New Living Translation</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={styles.separator} />
+        <TouchableOpacity style={styles.listItemContainer}>
+          <View style={styles.listItem}>
+            <Text style={StyleSheet.styles.cell.title}>Terms of Service</Text>
+          </View>
+        </TouchableOpacity>
       </ScrollView>
     </View>
   );
@@ -118,27 +186,16 @@ const styles = StyleSheet.create({
     color: '#9B9B9B',
     textAlign: 'center',
   },
+  sectionHeaderContainer: {
+    ...StyleSheet.styles.sectionHeaderContainer,
+    marginLeft: 15,
+  },
   listItemContainer: {
     paddingLeft: 15,
     paddingRight: 15,
     paddingVertical: 5,
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  listItemHeader: {
-    borderTopWidth: 2,
-    borderTopColor: 'red',
-    paddingLeft: 15,
-    paddingVertical: 8,
-    borderBottomColor: Colors.separator,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    shadowColor: 'black',
-    shadowOpacity: 0.05,
-    shadowRadius: 0.4,
-    shadowOffset: {
-      height: 1,
-      width: 0
-    },
   },
   listItem: {
     flex: 1,
