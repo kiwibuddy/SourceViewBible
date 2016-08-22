@@ -7,4 +7,4 @@ require './db/seeds/professions'
 require './db/seeds/chronologies'
 require './db/seeds/natures'
 require './db/seeds/spheres'
-require './db/seeds/sphere-key-passages'
+# require './db/seeds/sphere-key-passages' If you run this you have to get the correct monad ranges

@@ -79,7 +79,7 @@
       "section": "God Is Infinite and Personal",
       "number": 6,
       "title": "God Is Love",
-      "reference": "1 John 4:7-8, 16",
+      "reference": "1 John 4:7-8, 16b",
       "monads": [
         {
           "bookName": "1 John",
@@ -90,7 +90,7 @@
         },
         {
           "bookName": "1 John",
-          "firstMonad": 1772244,
+          "firstMonad": 1772280,
           "lastMonad": 1772316,
           "chapter": 4,
           "verse": 16

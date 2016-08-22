@@ -16,8 +16,10 @@
    Text,
    Image,
    ScrollView,
+   Slider,
    StyleSheet,
    TouchableOpacity,
+   TextInput,
    WebView,
  } = ReactNative;
 
@@ -57,7 +59,8 @@ const Psalm72 = {
 };
 
 type State = {
-  scripture: any;
+  scripture: any,
+  monadSet: ?Object,
 };
 
 class TextLayout extends Component {
@@ -67,22 +70,13 @@ class TextLayout extends Component {
     super(props);
 
     this.state = {
-      scripture: null
+      scripture: null,
+      monadSet: Psalm72
     };
   }
 
   componentDidMount() {
-    Emdros.openDatabase().then(() => {
-      const options = {monadSet: Psalm72};
-       Emdros.scripture(options).then(scripture => {
-         //  console.log(scripture);
-         this._saveScripture(scripture);
-
-         this.setState({scripture});
-       }).catch(error => {
-         console.log(error);
-       });
-    })
+    this._fetchScripture();
   }
 
   render() {
@@ -93,12 +87,35 @@ class TextLayout extends Component {
   }
 
   _renderWebView() {
-    const html =  HTML.replace('{{BODY}}', this.state.scripture);
-    return <WebView
-      decelerationRate="normal"
-      style={styles.container}
-      source={{html}}
-    />
+    const html = HTML.replace('{{BODY}}', this.state.scripture);
+    return (
+      <View style={styles.container}>
+        <TextInput
+          style={styles.textInput}
+          onChangeText={(text) => {
+            const { monadSet } = this.state;
+            monadSet.first = parseInt(text);
+            this.setState({monadSet});
+          }}
+          onSubmitEditing={() => this._fetchScripture()}
+          value={this.state.monadSet.first.toString()}
+        />
+        <TextInput
+          style={styles.textInput}
+          onChangeText={(text) => {
+            const { monadSet } = this.state;
+            monadSet.last = parseInt(text);
+            this.setState({monadSet});
+          }}
+          onSubmitEditing={() => this._fetchScripture()}
+          value={this.state.monadSet.last.toString()}
+        />
+        <WebView
+          decelerationRate="normal"
+          source={{html}}
+        />
+      </View>
+    )
   };
 
   _renderPlainText() {
@@ -119,12 +136,41 @@ class TextLayout extends Component {
       console.log(err.message);
     });
   };
+
+  _fetchScripture = () => {
+    const { monadSet } = this.state;
+
+    console.log('Fetching', monadSet);
+    Emdros.openDatabase().then(() => {
+      const options = {monadSet};
+       Emdros.scripture(options).then(scripture => {
+         //  console.log(scripture);
+        //  console.log(monadSet);
+         this._saveScripture(scripture);
+
+         this.setState({scripture});
+       }).catch(error => {
+         console.log(error);
+       });
+    });
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 20,
+  },
+  textInput: {
+    fontSize: 14,
+    backgroundColor: '#ececec',
+    borderColor: '#ececec',
+    borderRadius: 3,
+    borderWidth: 1,
+    paddingLeft: 8,
+    marginHorizontal: 8,
+    marginVertical: 8,
+    height: 26,
   },
 });
 
