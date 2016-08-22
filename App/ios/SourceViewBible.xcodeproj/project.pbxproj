@@ -957,7 +957,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ -e /Volumes/MacintoshHD ]\nthen\n./Fabric.framework/run a2e6712e6a9e17e15bd3e889bc9ded53f87b3277 c5af23575c4b8a1863e57e2735e76bd627f087c44a9b8b8725fd7bde84cd25eb\nfi";
+			shellScript = "if [ -e /Volumes/MacintoshHD ]\nthen\n./Fabric.framework/run 6af79aa96001e1e0996891ab5fcb9f8215fff919 8068e15f51f9cfdd78d3df0811bcb1819e6be72f2407180a7617c0faaaa6c9f2\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
