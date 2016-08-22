@@ -11,6 +11,7 @@
     "react": "~15.2.0",
     "react-native": "^0.30.0",
     "react-native-emdros": "file:../Libraries/Emdros/",
+    "react-native-fabric": "^0.3.0",
     "react-native-fs": "^1.5.1",
     "react-native-i18n": "0.0.8",
     "react-native-linear-gradient": "^1.5.7",
