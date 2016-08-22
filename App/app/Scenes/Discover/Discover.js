@@ -102,6 +102,7 @@ export default class Discovery extends Component {
       Preference.setStringForKey(currentDate, Preference.Keys.Discover.RefreshDate);
     }
 
+    // return true;
     return shouldRefresh;
   }
 }

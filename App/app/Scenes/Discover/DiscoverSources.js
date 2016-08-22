@@ -17,6 +17,7 @@ const { width } = Dimensions.get('window');
 import {
   Colors,
   Constants,
+  NumberHelper,
   StyleSheet,
 } from '../../Common';
 
@@ -34,10 +35,13 @@ import Localizable from '../../Common/Localizable';
 import SourceIcon from '../../Components/Common/SourceIcon';
 
 const MAXIMUM_SOURCE_COUNT = 9;
+const MINIMUM_SOURCE_WORD_COUNT = 1000;
 
 import { sourcesURL, sourceURL } from '../../Navigation';
 
 import { Bible, Actant, Book } from '../../Database';
+
+import { Preference } from '../../Preferences';
 
 type Props = {
   navigate: Function,
@@ -62,7 +66,16 @@ export default class DiscoverSources extends Component {
   }
 
   componentDidMount() {
-    const sources = Actant.sources().sorted('wordCount', true).slice(0, MAXIMUM_SOURCE_COUNT);
+    let sources = [];
+    let sourceIdentifiers = Preference.objectForKey(Preference.Keys.Discover.Sources);
+
+    if (!sourceIdentifiers || this.props.shouldRefresh) {
+      sources = NumberHelper.ShuffleArray(Actant.sources().filtered('wordCount > $0', MINIMUM_SOURCE_WORD_COUNT)).slice(0, MAXIMUM_SOURCE_COUNT);
+      sourceIdentifiers = sources.map(source => source.id);
+      Preference.setObjectForKey(sourceIdentifiers, Preference.Keys.Discover.Sources);
+    } else {
+      sources = sourceIdentifiers.map(sourceID => Actant.findByID(sourceID));
+    }
 
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(sources)
