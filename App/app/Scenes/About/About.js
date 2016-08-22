@@ -142,25 +142,25 @@ const About = (props: Props) => {
           </View>
         </TouchableOpacity>
         <View style={styles.separator} />
-        <TouchableOpacity style={styles.listItemContainer}>
+        <TouchableOpacity style={styles.listItemContainer} onPress={() => props.navigate(aboutWhyURL({title: Localizable.t('about-why'), modal: true}))}>
           <View style={styles.listItem}>
             <Text style={StyleSheet.styles.cell.title}>{Localizable.t('about-why')}</Text>
           </View>
         </TouchableOpacity>
         <View style={styles.separator} />
-        <TouchableOpacity style={styles.listItemContainer}>
+        <TouchableOpacity style={styles.listItemContainer} onPress={() => props.navigate(aboutNoteURL({title: Localizable.t('about-note'), modal: true}))}>
           <View style={styles.listItem}>
             <Text style={StyleSheet.styles.cell.title}>{Localizable.t('about-note')}</Text>
           </View>
         </TouchableOpacity>
         <View style={styles.separator} />
-        <TouchableOpacity style={styles.listItemContainer}>
+        <TouchableOpacity style={styles.listItemContainer} onPress={() => props.navigate(aboutNLTURL({title: Localizable.t('about-nlt'), modal: true}))}>
           <View style={styles.listItem}>
             <Text style={StyleSheet.styles.cell.title}>{Localizable.t('about-nlt')}</Text>
           </View>
         </TouchableOpacity>
         <View style={styles.separator} />
-        <TouchableOpacity style={styles.listItemContainer}>
+        <TouchableOpacity style={styles.listItemContainer} onPress={() => props.navigate(aboutTermsURL({title: Localizable.t('about-terms'), modal: true}))}>
           <View style={styles.listItem}>
             <Text style={StyleSheet.styles.cell.title}>{Localizable.t('about-terms')}</Text>
           </View>
