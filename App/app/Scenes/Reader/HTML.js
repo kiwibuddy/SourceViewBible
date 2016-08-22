@@ -174,6 +174,9 @@ module.exports = `
       .footnoteIndicator {
         text-decoration: none;
       }
+      .nonCanonicalText .footnoteIndicator {
+        color: #323B43;
+      }
       ${CSS}
     </style>
   </head>
