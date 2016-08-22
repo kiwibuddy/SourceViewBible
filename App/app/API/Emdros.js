@@ -98,7 +98,7 @@ function scripture(options: Object) {
     }
 
     DB.string(monadSet.first, monadSet.last, style).then((result) => {
-      resolve(result);
+      resolve(result.trim());
     }).catch((error) => {
       reject(error);
     });
