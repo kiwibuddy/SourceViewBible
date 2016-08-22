@@ -38,6 +38,8 @@
 		A2F03BA2CEB145999CF71563 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 898D5CA4A3A34A3AB98693E6 /* Zocial.ttf */; };
 		AB1CF3521CEA744B00547708 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB1CF3501CEA744B00547708 /* LaunchScreen.storyboard */; };
 		AB284CD51D3A8C8E00AFC7EA /* libART.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB284CC41D3A8C7100AFC7EA /* libART.a */; };
+		AB3333631D6B441900740446 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB3333611D6B441900740446 /* Fabric.framework */; };
+		AB3333641D6B441900740446 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB3333621D6B441900740446 /* Crashlytics.framework */; };
 		AB5489481CE2747B00F96FF0 /* libRCTEmdros.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB5489451CE273DC00F96FF0 /* libRCTEmdros.a */; };
 		AB5A7E361CF781DA00728DB2 /* sourceview.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB5A7E351CF781DA00728DB2 /* sourceview.ttf */; };
 		ABA1BCED1CE127AE00BEA3A1 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA1BCEC1CE127AE00BEA3A1 /* libstdc++.tbd */; };
@@ -244,6 +246,8 @@
 		9F768B78912C477AA838DE7A /* RNFS.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFS.xcodeproj; path = "../node_modules/react-native-fs/RNFS.xcodeproj"; sourceTree = "<group>"; };
 		AB1CF3511CEA744B00547708 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = SourceViewBible/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AB284CBF1D3A8C7100AFC7EA /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
+		AB3333611D6B441900740446 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		AB3333621D6B441900740446 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		AB5489401CE273DC00F96FF0 /* RCTEmdros.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTEmdros.xcodeproj; path = ../../Libraries/Emdros/ios/RCTEmdros/RCTEmdros.xcodeproj; sourceTree = "<group>"; };
 		AB5489801CE2760000F96FF0 /* Datasets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Datasets; path = ../../Datasets; sourceTree = "<group>"; };
 		AB5A7E351CF781DA00728DB2 /* sourceview.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sourceview.ttf; sourceTree = "<group>"; };
@@ -276,6 +280,7 @@
 			files = (
 				AB284CD51D3A8C8E00AFC7EA /* libART.a in Frameworks */,
 				ABA1BCEF1CE127B700BEA3A1 /* libsqlite3.tbd in Frameworks */,
+				AB3333641D6B441900740446 /* Crashlytics.framework in Frameworks */,
 				ABA1BCED1CE127AE00BEA3A1 /* libstdc++.tbd in Frameworks */,
 				AB5489481CE2747B00F96FF0 /* libRCTEmdros.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -295,6 +300,7 @@
 				B462F6CF62A44CF4BE151426 /* libRealmReact.a in Frameworks */,
 				E52C03E345C244CDAEA94CA9 /* libc++.tbd in Frameworks */,
 				C1AC094C83E5442297C8F17B /* libz.tbd in Frameworks */,
+				AB3333631D6B441900740446 /* Fabric.framework in Frameworks */,
 				0F8D6BFA51494B59B208B8CF /* libRNFS.a in Frameworks */,
 				4380B6EE3DC44C079D7632D2 /* libsqlite3.0.tbd in Frameworks */,
 				3E85A9D5908A49B4936D9005 /* libSQLite.a in Frameworks */,
@@ -420,6 +426,8 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				AB3333611D6B441900740446 /* Fabric.framework */,
+				AB3333621D6B441900740446 /* Crashlytics.framework */,
 				AB284CBF1D3A8C7100AFC7EA /* ART.xcodeproj */,
 				ABA1BCEE1CE127B700BEA3A1 /* libsqlite3.tbd */,
 				ABA1BCEC1CE127AE00BEA3A1 /* libstdc++.tbd */,
@@ -595,6 +603,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				AB3333601D6B43CF00740446 /* Fabric.io */,
 			);
 			buildRules = (
 			);
@@ -905,6 +914,20 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
 		};
+		AB3333601D6B43CF00740446 /* Fabric.io */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Fabric.io;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ -e /Volumes/MacintoshHD ]\nthen\n./Fabric.framework/run a2e6712e6a9e17e15bd3e889bc9ded53f87b3277 c5af23575c4b8a1863e57e2735e76bd627f087c44a9b8b8725fd7bde84cd25eb\nfi";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -994,6 +1017,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEAD_CODE_STRIPPING = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -1019,6 +1046,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
