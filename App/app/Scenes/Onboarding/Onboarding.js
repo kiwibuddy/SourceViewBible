@@ -19,8 +19,6 @@ import {
   StyleSheet,
 } from '../../Common';
 
-import { NavigationBar, NavigationBarButton } from '../../Components/Navigation';
-import { BACK, discoverURL } from '../../Navigation';
 import LinearGradient from 'react-native-linear-gradient';
 import PageControl from '../../Components/Common/PageControl';
 
@@ -49,13 +47,6 @@ export default class Onboarding extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <NavigationBar title={this.props.title}>
-          <NavigationBarButton
-            title={Localizable.t('close')}
-            onPress={() => this.props.navigate(BACK)}
-            style={{position: 'absolute', left: 0}}
-          />
-        </NavigationBar>
         <LinearGradient
           colors={['#E1E9EE', '#FFFFFF']}
           start={[0.5, 0.25]} end={[0.5, 1.0]}
@@ -169,10 +160,10 @@ export default class Onboarding extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingBottom: 15,
   },
   onboardingContainer: {
     flex: 1,
-    marginTop: NavigationBar.HEIGHT,
     width: WIDTH,
   },
   scrollView: {
@@ -182,7 +173,7 @@ const styles = StyleSheet.create({
   onboardingContent: {
     alignItems: 'center',
     marginHorizontal: 30,
-    marginTop: 10,
+    marginTop: 50,
   },
   contentHeader: {
     fontSize: 27,
@@ -215,11 +206,12 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginBottom: 10,
     justifyContent: 'center',
+    minWidth: 200,
+    alignItems: 'center',
   },
   nextButtonTitle: {
     color: 'white',
     fontSize: 17,
-    marginHorizontal: 80,
   },
   skipButton: {
     color: Colors.tint,
