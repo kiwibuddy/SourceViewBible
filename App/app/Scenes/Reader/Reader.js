@@ -250,7 +250,7 @@ export default class Reader extends Component {
     const { bookID } = this.props;
     const book = Book.findByID(bookID);
     let html = HTML.replace('{{BODY}}', content);
-    html = html.replace('{{BOOK_NAME}}', book.name);
+    html = html.replace(new RegExp('{{BOOK_NAME}}', 'g'), book.name);
 
     const fontStepSize = Preference.numberForKey(Preference.Keys.Reader.fontStepSize) || 0;
     const fontSize = Math.ceil((ReaderBaseFontSize + (fontStepSize * ReaderFontStepSize)) * ReaderWebFontConversion);

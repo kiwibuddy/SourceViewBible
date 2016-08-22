@@ -179,7 +179,7 @@ module.exports = `
           <a href="javascript:void(0)" onclick="closeFootnote();" class="footnoteClose">Close</a>
         </div>
         <div class="footnoteContent">
-          <p id="footnote" class="footnoteScroll">Or In the beginning when God created the heavens and the earth,... Or When God began to create the heavens and the earth,...</p>
+          <p id="footnote-content" class="footnoteScroll">Or In the beginning when God created the heavens and the earth,... Or When God began to create the heavens and the earth,...</p>
         </div>
       </div>
     </div>
@@ -196,7 +196,13 @@ module.exports = `
       var originalX = null;
       var originalY = null;
 
-      function showFootnote(footnoteID) {
+      function showFootnote(reference, note) {
+        var footnoteReference = document.getElementById('footnote-reference');
+        footnoteReference.innerHTML = reference;
+
+        var footnoteContent = document.getElementById('footnote-content');
+        footnoteContent.innerHTML = note;
+
         var footnoteOverlay = document.getElementById('footnote-overlay');
         footnoteOverlay.style.display = 'block';
       }
