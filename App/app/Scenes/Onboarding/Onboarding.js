@@ -6,6 +6,7 @@ import React, { Component } from 'react';
 import {
   Dimensions,
   Image,
+  LayoutAnimation,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -24,8 +25,8 @@ import LinearGradient from 'react-native-linear-gradient';
 import PageControl from '../../Components/Common/PageControl';
 
 const { width: WIDTH } = Dimensions.get('window');
-
 const SCROLLVIEW_REF = 'SCROLLVIEW_REF';
+const NUMBER_OF_PAGES = 5;
 
 type Props = {
   title: string,
@@ -105,22 +106,39 @@ export default class Onboarding extends Component {
               </View>
             </View>
           </ScrollView>
-          <View style={styles.onboardingControls}>
-            <TouchableOpacity style={styles.nextButton} onPress={this._onPressNext}>
-              <Text style={styles.nextButtonTitle}>Next</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this._onPressDone}>
-              <Text style={styles.skipButton}>Skip Intro</Text>
-            </TouchableOpacity>
-            <PageControl
-              numberOfPages={5}
-              currentPage={this.state.currentPage}
-            />
-          </View>
+          {this._renderControls()}
+          <PageControl
+            numberOfPages={NUMBER_OF_PAGES}
+            currentPage={this.state.currentPage}
+          />
         </LinearGradient>
       </View>
     );
   }
+
+  _renderControls = () => {
+    const { currentPage } = this.state;
+    if (currentPage < NUMBER_OF_PAGES - 1) {
+      return (
+        <View style={styles.onboardingControls}>
+          <TouchableOpacity key="next" style={styles.nextButton} onPress={this._onPressNext}>
+            <Text style={styles.nextButtonTitle}>Next</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this._onPressDone}>
+            <Text style={styles.skipButton}>Skip Intro</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else {
+      return (
+        <View style={styles.onboardingControls}>
+          <TouchableOpacity key="next" style={styles.nextButton} onPress={this._onPressDone}>
+            <Text style={styles.nextButtonTitle}>Get Started</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    }
+  };
 
   _onPressNext = () => {
     const { currentPage } = this.state;
@@ -137,6 +155,7 @@ export default class Onboarding extends Component {
 
     const currentPage = Math.floor((e.nativeEvent.contentOffset.x - WIDTH / 2) / WIDTH) + 1;
 
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     this.setState({
       currentPage: currentPage
     });
