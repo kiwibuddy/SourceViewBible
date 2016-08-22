@@ -19,7 +19,7 @@ import {
 } from '../../Common';
 
 import { NavigationBar, NavigationBarButton } from '../../Components/Navigation';
-import { BACK } from '../../Navigation';
+import { BACK, aboutAcknowledgmentsURL, aboutNLTURL, aboutNoteURL, aboutTermsURL, aboutWhyURL } from '../../Navigation';
 import Icon from '../../Components/Common/Icon';
 
 const WEBSITE_URL = "http://www.sourceviewbible.com";
@@ -136,33 +136,33 @@ const About = (props: Props) => {
         <View style={styles.sectionHeaderContainer}>
           <Text style={StyleSheet.styles.sectionHeaderTitle}>ABOUT SOURCEVIEW</Text>
         </View>
-        <TouchableOpacity style={styles.listItemContainer}>
+        <TouchableOpacity style={styles.listItemContainer} onPress={() => props.navigate(aboutAcknowledgmentsURL({title: Localizable.t('about-acknowledgments'), modal: true}))}>
           <View style={styles.listItem}>
-            <Text style={StyleSheet.styles.cell.title}>Acknowledgments</Text>
+            <Text style={StyleSheet.styles.cell.title}>{Localizable.t('about-acknowledgments')}</Text>
           </View>
         </TouchableOpacity>
         <View style={styles.separator} />
         <TouchableOpacity style={styles.listItemContainer}>
           <View style={styles.listItem}>
-            <Text style={StyleSheet.styles.cell.title}>Why the SourceView™ Bible?</Text>
+            <Text style={StyleSheet.styles.cell.title}>{Localizable.t('about-why')}</Text>
           </View>
         </TouchableOpacity>
         <View style={styles.separator} />
         <TouchableOpacity style={styles.listItemContainer}>
           <View style={styles.listItem}>
-            <Text style={StyleSheet.styles.cell.title}>A Note to Readers</Text>
+            <Text style={StyleSheet.styles.cell.title}>{Localizable.t('about-note')}</Text>
           </View>
         </TouchableOpacity>
         <View style={styles.separator} />
         <TouchableOpacity style={styles.listItemContainer}>
           <View style={styles.listItem}>
-            <Text style={StyleSheet.styles.cell.title}>New Living Translation</Text>
+            <Text style={StyleSheet.styles.cell.title}>{Localizable.t('about-nlt')}</Text>
           </View>
         </TouchableOpacity>
         <View style={styles.separator} />
         <TouchableOpacity style={styles.listItemContainer}>
           <View style={styles.listItem}>
-            <Text style={StyleSheet.styles.cell.title}>Terms of Service</Text>
+            <Text style={StyleSheet.styles.cell.title}>{Localizable.t('about-terms')}</Text>
           </View>
         </TouchableOpacity>
       </ScrollView>

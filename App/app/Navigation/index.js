@@ -5,6 +5,11 @@ import React from 'react';
 const router = require('./router');
 
 import About from '../Scenes/About/About';
+import AboutAcknowledgments from '../Scenes/About/Acknowledgments';
+import AboutNLT from '../Scenes/About/NLT';
+import AboutNote from '../Scenes/About/Note';
+import AboutTerms from '../Scenes/About/Terms';
+import AboutWhy from '../Scenes/About/Why';
 import Bookmarks from '../Scenes/Bookmarks/Bookmarks';
 import BookChapters from '../Scenes/Books/BookChapters';
 import BookOverview from '../Scenes/Books/BookOverview';
@@ -36,6 +41,11 @@ import SphereSources from '../Scenes/Spheres/SphereSources';
 import SphereWords from '../Scenes/Spheres/SphereWords';
 import SphereHelp from '../Scenes/Spheres/Help';
 
+export const aboutAcknowledgmentsURL = router.addRoute('/About/Acknowledgments', AboutAcknowledgments);
+export const aboutNLTURL = router.addRoute('/About/NLT', AboutNLT);
+export const aboutNoteURL = router.addRoute('/About/Note', AboutNote);
+export const aboutTermsURL = router.addRoute('/About/Terms', AboutTerms);
+export const aboutWhyURL = router.addRoute('/About/Why', AboutWhy);
 export const aboutURL = router.addRoute('/About', About);
 export const bookmarksURL = router.addRoute('/Bookmarks', Bookmarks);
 export const booksURL = router.addRoute('/Books', Books);
