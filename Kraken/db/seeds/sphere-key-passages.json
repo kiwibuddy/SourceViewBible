@@ -5796,11 +5796,11 @@
       "section": "The Purpose of Celebration",
       "number": 11,
       "title": "Builds Community",
-      "reference": "Esther 9:26-28",
+      "reference": "Esther 9:26b-28",
       "monads": [
         {
           "bookName": "Esther",
-          "firstMonad": 799546,
+          "firstMonad": 799584,
           "lastMonad": 799804,
           "chapter": 9,
           "verse": 26
@@ -5931,11 +5931,11 @@
       "section": "The Purpose of Celebration",
       "number": 20,
       "title": "Use and Abuse of the Arts",
-      "reference": "2 Timothy 3:4",
+      "reference": "2 Timothy 3:4b",
       "monads": [
         {
           "bookName": "2 Timothy",
-          "firstMonad": 1725140,
+          "firstMonad": 1725170,
           "lastMonad": 1725182,
           "chapter": 3,
           "verse": 4
@@ -5961,12 +5961,12 @@
       "section": "The Five Senses and God’s Design",
       "number": 22,
       "title": "Taste: An Enjoyable Gift",
-      "reference": "Ecclesiastes 2:24-26",
+      "reference": "Ecclesiastes 2:24-26a",
       "monads": [
         {
           "bookName": "Ecclesiastes",
           "firstMonad": 970753,
-          "lastMonad": 970956,
+          "lastMonad": 970753,
           "chapter": 2,
           "verse": 24
         }
@@ -6036,12 +6036,12 @@
       "section": "The Five Senses and God’s Design",
       "number": 27,
       "title": "Smell: Triggers Opposing Reactions",
-      "reference": "2 Corinthians 2:14-16",
+      "reference": "2 Corinthians 2:14-16a",
       "monads": [
         {
           "bookName": "2 Corinthians",
           "firstMonad": 1664768,
-          "lastMonad": 1664988,
+          "lastMonad": 1664939,
           "chapter": 2,
           "verse": 14
         }
@@ -6216,11 +6216,11 @@
       "section": "The Prophet/Artist",
       "number": 39,
       "title": "Repetitive Events Platforming the Arts",
-      "reference": "Nahum 1:15",
+      "reference": "Nahum 1:15b",
       "monads": [
         {
           "bookName": "Nahum",
-          "firstMonad": 1314046,
+          "firstMonad": 1314110,
           "lastMonad": 1314164,
           "chapter": 1,
           "verse": 15
