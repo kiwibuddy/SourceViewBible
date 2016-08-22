@@ -93,7 +93,9 @@ async function seedSphereWordCounts(emdros, realm) {
 
 
         let sourceCount = 0;
+
         const sourceCounts = [];
+        const sourceTypes = {};
 
         for (let [index, actant] of realm.objects('Actant').filtered('isSource = $0', true).entries()) {
           const wordCount = actant.sphereCounts.find(count => count.string === sphere.id).count || 0;
@@ -104,8 +106,20 @@ async function seedSphereWordCounts(emdros, realm) {
 
           if (wordCount > 0) {
             sourceCount++;
+
+            actant.sourceTypeCounts.forEach(sourceTypeCount => {
+              if (sourceTypeCount.count > 0) {
+                const count = sourceTypes[sourceTypeCount.string] || 0;
+                sourceTypes[sourceTypeCount.string] = count + sourceTypeCount.count;
+              }
+            });
           }
         }
+
+        const sourceTypeCounts = Object.keys(sourceTypes).map(sourceType => {
+          return {string: sourceType, count: sourceTypes[sourceType]};
+        });
+        const sourceTypeCount = sourceTypeCounts.length;
 
         sourceCounts.sort((countA, countB) => {
           return countA.count > countB.count ? -1 : 1;
@@ -124,7 +138,7 @@ async function seedSphereWordCounts(emdros, realm) {
         });
 
 
-        realm.create('Sphere', {id: sphere.id, bookCount, bookCounts, sourceCount, sourceCounts}, true);
+        realm.create('Sphere', {id: sphere.id, bookCount, bookCounts, sourceCount, sourceCounts, sourceTypeCount, sourceTypeCounts}, true);
       });
     });
 
