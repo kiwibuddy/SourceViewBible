@@ -3430,12 +3430,12 @@
       "section": "To Protect Citizens and Safeguard Justice",
       "number": 12,
       "title": "Vigilante-ism Undermines Justice",
-      "reference": "Exodus 2:11-15",
+      "reference": "Exodus 2:11-15a",
       "monads": [
         {
           "bookName": "Exodus",
           "firstMonad": 89100,
-          "lastMonad": 89481,
+          "lastMonad": 89457,
           "chapter": 2,
           "verse": 11
         }
@@ -3475,11 +3475,11 @@
       "section": "Principles and Practices of Godly Government",
       "number": 15,
       "title": "Righteous Leadership Is a Blessing",
-      "reference": "2 Samuel 23:3-4",
+      "reference": "2 Samuel 23:3b-4",
       "monads": [
         {
           "bookName": "2 Samuel",
-          "firstMonad": 525371,
+          "firstMonad": 525398,
           "lastMonad": 525473,
           "chapter": 23,
           "verse": 3
@@ -3842,11 +3842,11 @@
       "section": "Principles for the Legislative Branch",
       "number": 39,
       "title": "Pay Your Taxes",
-      "reference": "Matthew 17:25-27",
+      "reference": "Matthew 17:25b-27",
       "monads": [
         {
           "bookName": "Matthew",
-          "firstMonad": 1377705,
+          "firstMonad": 1377757,
           "lastMonad": 1377987,
           "chapter": 17,
           "verse": 25
@@ -3902,11 +3902,11 @@
       "section": "War and Peace",
       "number": 43,
       "title": "Military Authority and Faith",
-      "reference": "Luke 7:6-9",
+      "reference": "Luke 7:6b-9",
       "monads": [
         {
           "bookName": "Luke",
-          "firstMonad": 1458501,
+          "firstMonad": 1458547,
           "lastMonad": 1458824,
           "chapter": 7,
           "verse": 6
@@ -3917,12 +3917,12 @@
       "section": "War and Peace",
       "number": 44,
       "title": "Civil War Destroys a Nation",
-      "reference": "Luke 11:17",
+      "reference": "Luke 11:17a",
       "monads": [
         {
           "bookName": "Luke",
           "firstMonad": 1471895,
-          "lastMonad": 1471948,
+          "lastMonad": 1471930,
           "chapter": 11,
           "verse": 17
         }
@@ -3992,11 +3992,11 @@
       "section": "Crossover Passages",
       "number": 49,
       "title": "Crossover with RELIGION",
-      "reference": "1 Samuel 13:7-14",
+      "reference": "1 Samuel 13:7b-14",
       "monads": [
         {
           "bookName": "1 Samuel",
-          "firstMonad": 450198,
+          "firstMonad": 450233,
           "lastMonad": 450736,
           "chapter": 13,
           "verse": 7
