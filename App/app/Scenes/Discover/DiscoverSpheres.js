@@ -77,6 +77,7 @@ export default class DiscoverSpheres extends Component {
            <View style={styles.sectionHeaderContainer}>
              <Text style={StyleSheet.styles.sectionHeaderTitle}>SPHERES</Text>
              <View style={styles.sectionHeaderDetail}>
+               <Text style={[StyleSheet.styles.sectionHeaderTitle, {color: Colors.tint, fontWeight: 'normal'}]}>View All</Text>
                <Image source={require('../../Images/common/disclosure.png')}  style={styles.disclosure} />
              </View>
              </View>
