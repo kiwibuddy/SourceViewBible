@@ -21,6 +21,8 @@ import { NavigationBar, NavigationBarButton } from '../../Components/Navigation'
 import { BACK } from '../../Navigation';
 import Icon from '../../Components/Common/Icon';
 
+import HelpFooter from '../../Components/Common/HelpFooter';
+
 type Props = {
   title: string,
   navigate: Function,
@@ -44,37 +46,7 @@ const Help = (props: Props) => {
           <Text style={styles.contentH2}>Book Tiles (visual, description w/ no punctuation) - e.g. Genesis</Text>
           <Text style={styles.contentBody}>The Discover screen is where your exploration begins. You can dive into the books of the Bible, learn more about the sources quoted in Scripture, or observe how biblical text influences the seven spheres of society.</Text>
         </View>
-        <View style={styles.footerContainer}>
-          <View style={styles.separator} />
-          <TouchableOpacity style={styles.listItemContainer}>
-            <Icon
-              name="about-contact"
-              size={25}
-              style={[styles.listItemIcon, {color: '#59626A'}]}
-            />
-            <View style={styles.listItem}>
-              <Text style={StyleSheet.styles.cell.title}>Contact Us</Text>
-            </View>
-          </TouchableOpacity>
-          <View style={styles.separator} />
-          <TouchableOpacity style={styles.listItemContainer}>
-            <Icon
-              name="about-info"
-              size={25}
-              style={[styles.listItemIcon, {color: '#59626A'}]}
-            />
-            <View style={styles.listItem}>
-              <Text style={StyleSheet.styles.cell.title}>About SourceView</Text>
-            </View>
-          </TouchableOpacity>
-          <View style={styles.separator} />
-          <TouchableOpacity style={styles.donateContainer}>
-            <Text style={[styles.contentHeader, {marginBottom: 0}]}>Help us</Text>
-            <Text style={[styles.contentHeader, {marginTop: 0}]}>end Biblical poverty</Text>
-            <Text style={styles.contentBody}>With your help we can ensure that more people around the world with smart phones can have access to the Bible.</Text>
-            <Text style={styles.button}>Donate Today</Text>
-          </TouchableOpacity>
-        </View>
+        <HelpFooter />
       </ScrollView>
     </View>
   );
@@ -91,9 +63,6 @@ const styles = StyleSheet.create({
   helpContainer: {
     paddingTop: 20,
     paddingHorizontal: 15,
-  },
-  footerContainer: {
-    paddingVertical: 20,
   },
   contentHeader: {
     fontSize: 24,
@@ -149,14 +118,6 @@ const styles = StyleSheet.create({
     color: '#9B9B9B',
     marginBottom: 10,
   },
-  button: {
-    fontSize: 17,
-    color: Colors.tint,
-    paddingVertical: 5,
-  },
-  donateContainer: {
-    padding: 15,
-  }
 });
 
 export default Help;
