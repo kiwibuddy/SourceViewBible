@@ -22,7 +22,7 @@ import moment from 'moment';
 
 import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigation';
 
-import { BACK } from '../../Navigation';
+import { BACK, sphereInAppPurchaseURL } from '../../Navigation';
 
 // $FlowFixMe: - Flow can't find os module extension
 import SegmentedControl from '../../Components/Common/SegmentedControl';
@@ -184,9 +184,15 @@ export default class Bookmarks extends Component {
           {path: '/Books', title: Localizable.t('books')},
           {path: '/Sources', title: Localizable.t('sources.text')},
           {path: '/Spheres', title: Localizable.t('spheres.text')},
-          {path: '/About', title: Localizable.t('about-sourceview'), modal: true},
-          {path: '/Onboarding', title: 'Onboarding', modal: true},
+          {path: '/About', title: Localizable.t('about-sourceview'), modal: true}
         ];
+
+        if (__DEV__) {
+          bookmarks.push({path: '/Onboarding', title: 'Onboarding', modal: true});
+          bookmarks.push(sphereInAppPurchaseURL({title: 'Expired Spheres', expired: true, redirect: '/Discover', modal: true}));
+          bookmarks.push(sphereInAppPurchaseURL({title: 'Promo Spheres', expired: false, redirect: '/Discover', modal: true}));
+        }
+
         return this.state.dataSource.cloneWithRowsAndSections({bookmarks: bookmarks});
     }
   };
