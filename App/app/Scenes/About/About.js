@@ -24,7 +24,7 @@ type Props = {
   navigate: Function,
 };
 
-const Help = (props: Props) => {
+const About = (props: Props) => {
   return (
     <View style={styles.container}>
       <NavigationBar title={props.title}>
@@ -52,4 +52,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Help;
+export default About;
