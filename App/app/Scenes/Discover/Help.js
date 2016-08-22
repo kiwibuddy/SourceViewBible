@@ -53,7 +53,7 @@ const Help = (props: Props) => {
           <View style={styles.separator} />
           <TouchableOpacity style={styles.listItemContainer}>
             <Icon
-              name="about-contact"
+              name="about-info"
               size={25}
               style={[styles.listItemIcon, {color: '#59626A'}]}
             />
