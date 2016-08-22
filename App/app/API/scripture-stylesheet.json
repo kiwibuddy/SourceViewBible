@@ -169,7 +169,7 @@
 {{ setvar 'VerseNumber' }}{{ featurenomangle 0 }}{{ setvarend }}\
 {{ if featureequal 0 '0' }}{{ setvar 'ParagraphType' }}textPoetry{{ setvarend }}{{ endif }}\
 {{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}\
-{{ if featureequal 0 '0' }}{{ else }}\
+{{ if featureequal 0 '0' }}<a id=\"{{ emitvar 'verse_anchor' }}\" />{{ else }}\
 <a id=\"{{ emitvar 'verse_anchor' }}\"><span class=\"textVerse\">{{SPHERES}}</span></a>{{ endif }}"
         },
         "Token":{
