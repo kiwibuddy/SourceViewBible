@@ -369,10 +369,14 @@ export class Book extends Realm.Object {
     return realm.objectForPrimaryKey('Book', id || '');
   }
 
-  static whereIn(ids: any) {
+  static whereIn(ids: any, options: ?Object) {
     if (ids.length == 0) return [];
     const filter = ids.map((id, index) => `id = $${index}`).join(' OR ');
-    return realm.objects('Book').filtered(filter, ...ids).sorted('textOrder');
+    let books = realm.objects('Book').filtered(filter, ...ids);
+    if (options && options.sorted) {
+      books = books.sorted('textOrder');
+    }
+    return books;
   }
 
   static identifiers(testament: ?number): Array<string> {

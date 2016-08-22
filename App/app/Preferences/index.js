@@ -11,6 +11,9 @@ const PREFIX = 'com.sourceviewbible.preferences.';
 const Keys = {
   Discover: {
     RefreshDate: PREFIX + 'discover.refreshdate',
+    Books: PREFIX + 'discover.books',
+    Sources: PREFIX + 'discover.sources',
+    Spheres: PREFIX + 'discover.spheres',
   },
   Books: {
     Sort: PREFIX + 'books.sort',

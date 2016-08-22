@@ -99,7 +99,7 @@ export default class Discovery extends Component {
 
     const shouldRefresh = (!refreshDate || currentDate !== refreshDate);
     if (shouldRefresh) {
-      // Preference.setStringForKey(currentDate, Preference.Keys.Discover.RefreshDate);
+      Preference.setStringForKey(currentDate, Preference.Keys.Discover.RefreshDate);
     }
 
     return shouldRefresh;

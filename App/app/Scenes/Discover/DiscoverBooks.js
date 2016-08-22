@@ -21,6 +21,7 @@ const { width } = Dimensions.get('window');
 import {
   Constants,
   Colors,
+  NumberHelper,
   StyleSheet,
 } from '../../Common';
 
@@ -36,6 +37,8 @@ import PageControl from '../../Components/Common/PageControl';
 import { ReadingTime } from '../../Common/NumberHelper';
 import Localizable from '../../Common/Localizable';
 import Icon from '../../Components/Common/Icon';
+
+import { Preference } from '../../Preferences';
 
 const MAXIMUM_BOOK_COUNT = 9;
 
@@ -62,7 +65,16 @@ export default class DiscoverBooks extends Component {
   }
 
   componentDidMount() {
-    const books = Book.all().sorted('sourceCount', true).slice(0, MAXIMUM_BOOK_COUNT);
+    let books = [];
+    let bookIdentifiers = Preference.objectForKey(Preference.Keys.Discover.Books);
+
+    if (!bookIdentifiers || this.props.shouldRefresh) {
+      books = NumberHelper.ShuffleArray(Book.all()).slice(0, MAXIMUM_BOOK_COUNT);
+      bookIdentifiers = books.map(book => book.id);
+      Preference.setObjectForKey(bookIdentifiers, Preference.Keys.Discover.Books);
+    } else {
+      books = bookIdentifiers.map(bookID => Book.findByID(bookID));
+    }
 
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(books)

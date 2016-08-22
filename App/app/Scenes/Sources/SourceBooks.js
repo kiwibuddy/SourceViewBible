@@ -137,7 +137,7 @@ export default class SourceBooks extends Component {
       return books;
     }, books);
 
-    const sections = Book.whereIn(Object.keys(books)).map(book => book.id);
+    const sections = Book.whereIn(Object.keys(books), {sorted: true}).map(book => book.id);
 
     if (this.shouldFetch) {
       this.setState({
