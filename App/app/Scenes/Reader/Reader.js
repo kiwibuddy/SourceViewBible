@@ -273,8 +273,12 @@ export default class Reader extends Component {
 
     const isPsalms = this.props.bookID == 'psalms';
     let anchor = this.props.anchor;
-    if (isPsalms && anchor.indexOf('chapter-') != -1) {
+    if (isPsalms && anchor.startsWith('chapter-')) {
       anchor = anchor.replace('chapter', 'verse') + '-0';
+
+      if (anchor.endsWith('-119-0')) {
+        anchor = anchor.replace('-119-0', '-119-1');
+      }
     }
     const scrollOffset = (isPsalms ? 48 : 8);
 
