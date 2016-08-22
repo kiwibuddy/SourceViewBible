@@ -104,7 +104,6 @@ module.exports = `
         text-align: Center;
       }
       .textChapter {
-        font-family: Gurmukhi MN;
         color: #CF1E00;
         font-size: 1em;
         font-weight: normal;
