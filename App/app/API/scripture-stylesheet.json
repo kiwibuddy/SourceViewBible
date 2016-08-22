@@ -21,7 +21,7 @@
         "Note": {
           "docindexfeature" : "docindex",
           "end" : "\
-<a href=\"javascript:void(0)\" onclick=\"showFootnote(\\'{{BOOK_NAME}} {{ emitvar 'ChapterNumber' }}:{{ emitvar 'VerseNumber' }}\\', \\'{{ emitvar 'Note' }}\\');\" class=\"footnoteStart\">*</a>\
+<a href=\"javascript:void(0)\" onclick=\"showFootnote(\\'{{BOOK_NAME}} {{ emitvar 'ChapterNumber' }}:{{ emitvar 'VerseNumber' }}\\', \\'{{ emitvar 'Note' }}\\');\" class=\"footnoteIndicator\">*</a>\
 {{ setvar 'Footnote' }}{{ setvarend }}",
           "start" : "{{ setvar 'Footnote' }}true{{ setvarend }}{{ setvar 'Note' }}{{ setvarend }}"
         },

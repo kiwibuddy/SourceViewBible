@@ -168,6 +168,10 @@ module.exports = `
         overflow: scroll;
         max-height: 250pt;
       }
+      .footnoteIndicator {
+        color: #59626A;
+        text-decoration: none;
+      }
       ${CSS}
     </style>
   </head>
