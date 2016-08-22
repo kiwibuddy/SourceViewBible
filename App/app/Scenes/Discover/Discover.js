@@ -7,7 +7,8 @@ const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithP
 import {
   ScrollView,
   Text,
-  View
+  View,
+  TouchableOpacity
 } from 'react-native';
 
 import {
@@ -55,6 +56,14 @@ export default class Discovery extends Component {
 
         <DiscoverSpheres navigate={this.props.navigate} />
 
+        <View style={styles.separator}></View>
+
+        <TouchableOpacity style={styles.aboutContainer}>
+          <Text style={styles.copyright}>SourceView Publishing, LLC ©2016</Text>
+          <Text style={styles.copyright}>Version 1.0 (Build 1875)</Text>
+          <Text style={styles.button}>Learn More</Text>
+        </TouchableOpacity>
+
       </ScrollView>
     );
   }
@@ -101,4 +110,16 @@ const styles = StyleSheet.create({
     ...StyleSheet.styles.separator,
     marginLeft: 8,
   },
+  aboutContainer: {
+    paddingVertical: 10,
+    alignItems: 'center'
+  },
+  copyright: {
+    fontSize: 13,
+    color: '#9B9B9B',
+  },
+  button: {
+    fontSize: 13,
+    color: Colors.tint,
+  }
 });
