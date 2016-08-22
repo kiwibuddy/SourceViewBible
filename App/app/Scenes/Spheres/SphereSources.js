@@ -236,7 +236,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingLeft: 8,
     marginHorizontal: 8,
-    marginVertical: 8,
+    marginTop: 8,
     height: 26,
   },
   sphereSourcesGraph: {
@@ -295,7 +295,7 @@ const styles = StyleSheet.create({
   },
   pie: {
     position: 'absolute',
-    paddingHorizontal: 5,
+    paddingHorizontal: 8,
   },
   ...Platform.select({
       ios: {
