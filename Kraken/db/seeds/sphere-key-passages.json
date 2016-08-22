@@ -830,12 +830,12 @@
       "section": "God and the Sphere of Family",
       "number": 3,
       "title": "God is a Father to the Fatherless",
-      "reference": "Psalm 68:5-6",
+      "reference": "Psalm 68:5-6a",
       "monads": [
         {
           "bookName": "Psalms",
           "firstMonad": 880761,
-          "lastMonad": 880848,
+          "lastMonad": 880808,
           "chapter": 68,
           "verse": 5
         }
@@ -845,11 +845,11 @@
       "section": "God and the Sphere of Family",
       "number": 4,
       "title": "Son of Adam, Son of God",
-      "reference": "Luke 3:38",
+      "reference": "Luke 3:38b",
       "monads": [
         {
           "bookName": "Luke",
-          "firstMonad": 1450791,
+          "firstMonad": 1450857,
           "lastMonad": 1450881,
           "chapter": 3,
           "verse": 38
@@ -950,11 +950,11 @@
       "section": "God and the Sphere of Family",
       "number": 11,
       "title": "We Will Serve the Lord",
-      "reference": "Joshua 24:15",
+      "reference": "Joshua 24:15b",
       "monads": [
         {
           "bookName": "Joshua",
-          "firstMonad": 384819,
+          "firstMonad": 384908,
           "lastMonad": 384933,
           "chapter": 24,
           "verse": 15
@@ -1069,7 +1069,7 @@
       "section": "Biblical Principles for Husbands and Wives",
       "number": 18,
       "title": "Mutuality in Marriage",
-      "reference": "1 Corinthians 7:2-16, 32-34",
+      "reference": "1 Corinthians 7:2-16, 32b-34",
       "monads": [
         {
           "bookName": "1 Corinthians",
@@ -1080,7 +1080,7 @@
         },
         {
           "bookName": "1 Corinthians",
-          "firstMonad": 1646186,
+          "firstMonad": 1646214,
           "lastMonad": 1646395,
           "chapter": 7,
           "verse": 32
