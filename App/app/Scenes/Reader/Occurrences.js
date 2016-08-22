@@ -5,6 +5,7 @@ import React, { Component, PropTypes } from 'react';
 const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
 
 import {
+  ActivityIndicator,
   AsyncStorage,
   Platform,
   RecyclerViewBackedScrollView,
@@ -38,10 +39,11 @@ type Props = {
 
 type State = {
   dataSource: any,
-  occurrences: any
+  occurrences: any,
+  loading: boolean
 };
 
-export default class DiscoveryCenterOccurrences extends Component {
+export default class Occurrences extends Component {
   props: Props;
   state: State;
   shouldFetch: boolean = true;
@@ -53,6 +55,7 @@ export default class DiscoveryCenterOccurrences extends Component {
     this.state = {
       dataSource: dataSource,
       occurrences: this.props.occurrences,
+      loading: true,
     };
   }
 
@@ -66,6 +69,8 @@ export default class DiscoveryCenterOccurrences extends Component {
 
   render() {
     const backTitle = this.props.backTitle ? this.props.backTitle : Localizable.t('close');
+    const loadingView = this._renderLoading();
+
     return (
       <View style={styles.container}>
         <NavigationBar title={Localizable.t('passages')}>
@@ -83,6 +88,7 @@ export default class DiscoveryCenterOccurrences extends Component {
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
           style={styles.content}
         />
+        {loadingView}
       </View>
     );
   }
@@ -114,6 +120,16 @@ export default class DiscoveryCenterOccurrences extends Component {
     );
   };
 
+  _renderLoading = () => {
+    if (this.state.loading) {
+      return (
+        <ActivityIndicator color="gray" size="large" style={styles.activityIndicator} />
+      );
+    }
+
+    return null;
+  }
+
   async _getOccurrences() {
     let { occurrences } = this.state;
     const contents = {};
@@ -128,7 +144,8 @@ export default class DiscoveryCenterOccurrences extends Component {
     if (this.shouldFetch) {
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(occurrences),
-        occurrences
+        occurrences,
+        loading: false
       });
     }
   };
@@ -179,5 +196,12 @@ const styles = StyleSheet.create({
   },
   referenceContainer: {
     flexDirection: 'row',
-  }
+  },
+  activityIndicator: {
+    position: 'absolute',
+    top: NavigationBar.HEIGHT,
+    left: 0,
+    bottom: 0,
+    right: 0,
+  },
 });
