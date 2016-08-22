@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     marginTop: NavigationBar.HEIGHT,
   },
   helpContainer: {
-    paddingVertical: 20,
+    paddingTop: 20,
     paddingHorizontal: 15,
   },
   footerContainer: {
@@ -136,16 +136,18 @@ const styles = StyleSheet.create({
     color: '#59626a',
     marginBottom: 5,
   },
-  contentHeader: {
+  contentH2: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#59626a',
+    marginTop: 5,
     marginBottom: 5,
   },
   contentBody: {
     fontSize: 17,
     lineHeight: 24,
     color: '#9B9B9B',
+    marginBottom: 10,
   },
   button: {
     fontSize: 17,
