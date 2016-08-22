@@ -36,9 +36,8 @@ import { Preference } from '../../Preferences';
 import { ReaderBaseFontSize, ReaderBaseLineHeight, ReaderFontStepSize, ReaderWebFontConversion } from '../../Common/Constants';
 
 const NavigationBar = (props: Props) => {
-  const book = Book.findByID(props.bookID);
   return (
-    <Navigation.NavigationBar title={book.name}>
+    <Navigation.NavigationBar title={props.title}>
       <Navigation.NavigationBarButton
         imageSource={require('../../Components/Navigation/Images/nav-search.png')}
         onPress={() => {props.navigate(readerSearchURL({modal: true}))}}

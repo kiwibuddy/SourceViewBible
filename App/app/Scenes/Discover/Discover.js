@@ -20,11 +20,28 @@ import DiscoverBooks from './DiscoverBooks';
 import DiscoverSources from './DiscoverSources';
 import DiscoverSpheres from './DiscoverSpheres';
 
+import * as Navigation from '../../Components/Navigation';
+import { discoverHelpURL } from '../../Navigation';
+
+const NavigationBar = (props: Props) => {
+  return (
+    <Navigation.NavigationBar title={props.title}>
+      <Navigation.NavigationBarButton
+        imageSource={require('../../Components/Navigation/Images/nav-help.png')}
+        onPress={() => props.navigate(discoverHelpURL({title: Localizable.t('help'), modal: true}))}
+        style={{position: 'absolute', right: 5}}
+      />
+    </Navigation.NavigationBar>
+  );
+};
+
 type Props = {
 
 };
 
 export default class Discovery extends Component {
+  static NavigationBar = NavigationBar;
+
   render() {
     return (
       <ScrollView style={styles.container}>
