@@ -115,7 +115,7 @@ export default class FoundationalSphere extends Component {
         </TouchableOpacity>
         <View style={styles.contentContainer}>
           <Text style={[styles.contentBody, {marginBottom: -25, marginTop: -10}]}>Foundational Passages</Text>
-          <Text style={styles.contentHeader}>How Scripture Establishes a Biblical Worldview</Text>
+          <Text style={styles.contentHeader}>How Scripture Establishes a Biblical Christian Worldview</Text>
           <Text style={[styles.contentBody, {marginTop: 5}]}>{sphere.description}</Text>
         </View>
         <View style={StyleSheet.styles.statisticsContainer} />
