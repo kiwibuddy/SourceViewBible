@@ -10,7 +10,7 @@ import {
 
 import { NavigationBar, Toolbar, ToolbarButton } from '../Navigation';
 
-import router, { BACK } from '../../Navigation';
+import router, { BACK, sphereInAppPurchaseURL } from '../../Navigation';
 
 import {
   Colors,
@@ -157,6 +157,8 @@ export default class App extends Component {
     const currentRoute = state.routes[state.index];
     if (route.path === currentRoute.path) return;
 
+    if (this._interceptRoute(route)) return;
+
     if (state.index - 1 > 0) {
       const previousRoute = state.routes[state.index - 1];
       if (previousRoute.path === route.path) {
@@ -239,6 +241,21 @@ export default class App extends Component {
     }
 
     History.record(route, {replace: true});
+  };
+
+  _interceptRoute = (route: any): boolean => {
+    const path = route.path.toLowerCase();
+
+    if (this._isSphereRoute(route)) {
+      this._pushRoute(sphereInAppPurchaseURL({title: Localizable.t('spheres.text'), route, modal: true}));
+      return true;
+    }
+    return false;
+  };
+
+  _isSphereRoute = (route: any): boolean => {
+    const path = route.path.toLowerCase();
+    return path.indexOf('sphere') != -1 && route.path !== sphereInAppPurchaseURL().path;
   };
 }
 

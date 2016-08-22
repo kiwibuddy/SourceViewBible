@@ -24,12 +24,12 @@ type Props = {
   navigate: Function,
 };
 
-const IAP = (props: Props) => {
+const InAppPurchase = (props: Props) => {
   return (
     <View style={styles.container}>
       <NavigationBar title={props.title}>
         <NavigationBarButton
-          title={Localizable.t('close')}
+          title={Localizable.t('back')}
           onPress={() => props.navigate(BACK)}
           style={{position: 'absolute', left: 0}}
         />
@@ -52,4 +52,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default IAP;
+export default InAppPurchase;

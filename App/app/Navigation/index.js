@@ -40,6 +40,7 @@ import SpherePassages from '../Scenes/Spheres/SpherePassages';
 import SphereSources from '../Scenes/Spheres/SphereSources';
 import SphereWords from '../Scenes/Spheres/SphereWords';
 import SphereHelp from '../Scenes/Spheres/Help';
+import SphereInAppPurchase from '../Scenes/Spheres/InAppPurchase';
 
 export const aboutAcknowledgmentsURL = router.addRoute('/About/Acknowledgments', AboutAcknowledgments);
 export const aboutNLTURL = router.addRoute('/About/NLT', AboutNLT);
@@ -73,6 +74,7 @@ export const sourceURL = router.addRoute('/Sources/:sourceID/:bookID?', SourceOv
 export const sourcesURL = router.addRoute('/Sources', Sources);
 export const spheresURL = router.addRoute('/Spheres', Spheres);
 export const sphereHelpURL = router.addRoute('/Spheres/Help', SphereHelp);
+export const sphereInAppPurchaseURL = router.addRoute('/Spheres/InAppPurchase', SphereInAppPurchase);
 export const sphereURL = router.addRoute('/Spheres/:sphereID', Spheres);
 export const sphereBooksURL = router.addRoute('/Spheres/:sphereID/Books', SphereBooks);
 export const spherePassagesURL = router.addRoute('/Spheres/:sphereID/Passages', SpherePassages);
