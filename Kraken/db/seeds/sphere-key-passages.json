@@ -3722,13 +3722,13 @@
       "section": "Principles for the Judicial Branch",
       "number": 31,
       "title": "A Voice for the Voiceless",
-      "reference": "Exodus 4:9-18",
+      "reference": "Exodus 3:9-18a",
       "monads": [
         {
           "bookName": "Exodus",
-          "firstMonad": 92385,
-          "lastMonad": 93082,
-          "chapter": 4,
+          "firstMonad": 90660,
+          "lastMonad": 91434,
+          "chapter": 3,
           "verse": 9
         }
       ]
