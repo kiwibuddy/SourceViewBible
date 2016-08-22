@@ -4271,11 +4271,11 @@
       "section": "Biblical Guidelines for Teachers",
       "number": 15,
       "title": "Teach Well",
-      "reference": "Romans 12:7",
+      "reference": "Romans 12:7b",
       "monads": [
         {
           "bookName": "Romans",
-          "firstMonad": 1629469,
+          "firstMonad": 1629492,
           "lastMonad": 1629507,
           "chapter": 12,
           "verse": 7
@@ -4331,12 +4331,12 @@
       "section": "Biblical Guidelines for Teachers",
       "number": 19,
       "title": "Create a Cohortive, Relational Context",
-      "reference": "Luke 8:1-2",
+      "reference": "Luke 8:1-2a",
       "monads": [
         {
           "bookName": "Luke",
           "firstMonad": 1461281,
-          "lastMonad": 1461402,
+          "lastMonad": 1461373,
           "chapter": 8,
           "verse": 1
         }
@@ -4421,12 +4421,12 @@
       "section": "Biblical Guidelines for Students",
       "number": 25,
       "title": "Approach Learning with Faith in God",
-      "reference": "James 1:5-6",
+      "reference": "James 1:5-6a",
       "monads": [
         {
           "bookName": "James",
           "firstMonad": 1750264,
-          "lastMonad": 1750401,
+          "lastMonad": 1750346,
           "chapter": 1,
           "verse": 5
         }
@@ -4623,11 +4623,11 @@
       "section": "Principles and Practices of Biblical Education",
       "number": 38,
       "title": "Role of the Church in Education",
-      "reference": "Acts 19:9-10",
+      "reference": "Acts 19:9b-10",
       "monads": [
         {
           "bookName": "Acts",
-          "firstMonad": 1589510,
+          "firstMonad": 1589541,
           "lastMonad": 1589642,
           "chapter": 19,
           "verse": 9
@@ -4653,11 +4653,11 @@
       "section": "Principles and Practices of Biblical Education",
       "number": 40,
       "title": "Support Good Teachers!",
-      "reference": "3 John 6-8",
+      "reference": "3 John 6b-8",
       "monads": [
         {
           "bookName": "3 John",
-          "firstMonad": 1775002,
+          "firstMonad": 1775026,
           "lastMonad": 1775156,
           "chapter": 1,
           "verse": 6
@@ -4698,12 +4698,12 @@
       "section": "Key Elements of Biblical Education",
       "number": 43,
       "title": "Applying",
-      "reference": "1 Corinthians 14:35",
+      "reference": "1 Corinthians 14:35a",
       "monads": [
         {
           "bookName": "1 Corinthians",
           "firstMonad": 1657680,
-          "lastMonad": 1657752,
+          "lastMonad": 1657707,
           "chapter": 14,
           "verse": 35
         }
