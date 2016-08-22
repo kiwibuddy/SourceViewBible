@@ -756,6 +756,11 @@ export class Sphere extends Realm.Object {
     return count && count.count || 0;
   }
 
+  countOfSourceType(sourceType: string): number {
+    const count = this.sourceTypeCounts.find(count => count.string === sourceType);
+    return count && count.count || 0;
+  }
+
   color(color?: string): string {
     return Colors.spheres[this.id][color || 'tint'];
   }

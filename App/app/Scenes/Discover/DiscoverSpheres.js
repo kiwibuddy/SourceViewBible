@@ -16,8 +16,14 @@ const { width } = Dimensions.get('window');
 
 import {
   Colors,
+  Constants,
   StyleSheet,
 } from '../../Common';
+
+const {
+  SourceType,
+  SphereType
+} = Constants;
 
 // $FlowFixMe: Can't find os module extension
 import LinearGradient from 'react-native-linear-gradient';
@@ -130,7 +136,7 @@ export default class DiscoverSpheres extends Component {
           <View style={styles.statisticsContainer}>
             <View style={styles.statisticContainer} >
               <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-                <Text style={styles.statisticTitle}>0</Text>
+                <Text style={styles.statisticTitle}>{sphere.sourceCount}</Text>
                 <Text style={styles.statisticSubtitle}>Sources</Text>
                 <SourcesBarChart
                   style={{flex: 0, marginLeft: 4}}
