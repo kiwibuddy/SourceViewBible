@@ -134,7 +134,9 @@ export default class DiscoverSources extends Component {
             size={40}
             style={styles.icon}
           />
-          <Text numberOfLines={2} style={styles.sourceTitle}>{source.name}</Text>
+          <View style={styles.nameContainer}>
+            <Text numberOfLines={2} style={styles.sourceTitle}>{source.name}</Text>
+          </View>
           <View style={styles.keyline} />
           <View style={styles.statisticsContainer}>
             <View style={styles.statisticContainer} >
@@ -298,4 +300,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#e0e0e0',
     marginHorizontal: 2,
   },
+  nameContainer: {
+    height: 40,
+    justifyContent: 'center',
+  }
 });
