@@ -25,6 +25,8 @@ import PageControl from '../../Components/Common/PageControl';
 
 const { width: WIDTH } = Dimensions.get('window');
 
+const SCROLLVIEW_REF = 'SCROLLVIEW_REF';
+
 type Props = {
   title: string,
   navigate: Function,
@@ -59,6 +61,7 @@ export default class Onboarding extends Component {
           style={styles.onboardingContainer}
         >
           <ScrollView
+            ref={SCROLLVIEW_REF}
             horizontal={true}
             onMomentumScrollEnd={this._onScrollEnd}
             pagingEnabled={true}
@@ -120,7 +123,10 @@ export default class Onboarding extends Component {
   }
 
   _onPressNext = () => {
+    const { currentPage } = this.state;
+    const offset = (currentPage + 1) * WIDTH;
 
+    this.refs[SCROLLVIEW_REF].scrollTo({x: offset, animated: true});
   };
 
   _onScrollEnd = (e: Object) => {
