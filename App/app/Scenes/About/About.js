@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 
 import {
   Image,
+  Linking,
   ScrollView,
   Text,
   View,
@@ -112,7 +113,7 @@ const About = (props: Props) => {
           </View>
         </TouchableOpacity>
         <View style={styles.separator} />
-        <TouchableOpacity style={styles.listItemContainer}>
+        <TouchableOpacity style={styles.listItemContainer} onPress={() => Linking.openURL('http://sourceviewbible.com')}>
           <Icon
             name="about-web"
             size={25}
