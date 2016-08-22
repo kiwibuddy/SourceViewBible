@@ -6,8 +6,7 @@
         "Book" : {
           "docindexfeature" : "docindex",
           "end" : "",
-          "get": ["djhref"],
-          "start" : "{{ setvar 'DJHRef' }}{{ featurenomangle 0 }}{{ setvarend }}{{ setvar 'TextKind' }}Prose{{ setvarend }}"
+          "start" : "{{ setvar 'TextKind' }}Prose{{ setvarend }}"
         },
         "EmbeddedQuotation" : {
           "docindexfeature" : "docindex",

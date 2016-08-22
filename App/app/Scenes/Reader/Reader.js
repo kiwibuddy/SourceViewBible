@@ -249,8 +249,11 @@ export default class Reader extends Component {
   _renderScripture = (content: string) => {
     const { bookID } = this.props;
     const book = Book.findByID(bookID);
+    const isPsalms = this.props.bookID == 'psalms';
+
     let html = HTML.replace('{{BODY}}', content);
     html = html.replace(new RegExp('{{BOOK_NAME}}', 'g'), book.name);
+    html = html.replace('{{IS_PSALMS}}', (isPsalms ? 'true' : 'false'));
 
     const fontStepSize = Preference.numberForKey(Preference.Keys.Reader.fontStepSize) || 0;
     const fontSize = Math.ceil((ReaderBaseFontSize + (fontStepSize * ReaderFontStepSize)) * ReaderWebFontConversion);

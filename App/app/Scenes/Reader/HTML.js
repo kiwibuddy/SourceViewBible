@@ -207,7 +207,7 @@ module.exports = `
 
       function showFootnote(reference, note) {
         var footnoteReference = document.getElementById('footnote-reference');
-        footnoteReference.innerHTML = reference;
+        footnoteReference.innerHTML = ({{IS_PSALMS}} ? '{{BOOK_NAME}}' : reference);
 
         var footnoteContent = document.getElementById('footnote-content');
         footnoteContent.innerHTML = note;
