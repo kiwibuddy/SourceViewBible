@@ -23,7 +23,7 @@ import {
 const { Links } = Constants;
 
 import { NavigationBar, NavigationBarButton } from '../../Components/Navigation';
-import { BACK, aboutAcknowledgmentsURL, aboutCopyrightURL, aboutNoteURL, aboutTermsURL, aboutWhyURL } from '../../Navigation';
+import { BACK, aboutAcknowledgmentsURL, aboutCopyrightURL, aboutNoteURL, aboutNLTURL, aboutTermsURL, aboutWhyURL } from '../../Navigation';
 import Icon from '../../Components/Common/Icon';
 
 type Props = {
@@ -153,6 +153,12 @@ const About = (props: Props) => {
         <TouchableOpacity style={styles.listItemContainer} onPress={() => props.navigate(aboutNoteURL({title: Localizable.t('about-note'), modal: true}))}>
           <View style={styles.listItem}>
             <Text style={StyleSheet.styles.cell.title}>{Localizable.t('about-note')}</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={styles.separator} />
+        <TouchableOpacity style={styles.listItemContainer} onPress={() => props.navigate(aboutNLTURL({title: Localizable.t('about-nlt'), modal: true}))}>
+          <View style={styles.listItem}>
+            <Text style={StyleSheet.styles.cell.title}>{Localizable.t('about-nlt')}</Text>
           </View>
         </TouchableOpacity>
         <View style={styles.separator} />
