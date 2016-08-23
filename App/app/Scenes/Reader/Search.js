@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 
 import {
+  Analytics,
   Colors,
   StyleSheet,
   Localizable
@@ -138,6 +139,8 @@ export default class ReaderSearch extends Component {
       reference,
       search: text
     });
+
+    Analytics.logSearch(text, {type: 'Reference'});
   };
 
   _onSubmitSearch = () => {

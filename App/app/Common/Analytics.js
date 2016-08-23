@@ -22,8 +22,12 @@ function contentTypeForRoute(route: any) {
 }
 
 export default class Analytics {
-  static logRoute(route: any) {
+  static logRoute(route: any, options: ?Object) {
     const contentType = contentTypeForRoute(route);
-    Answers.logContentView(route.title, contentType, route.path);
+    Answers.logContentView(route.title, contentType, route.path, options);
+  }
+
+  static logSearch(query: any, options: ?Object) {
+    Answers.logSearch(query, options);
   }
 }

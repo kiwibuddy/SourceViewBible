@@ -15,6 +15,7 @@ import {
 import { ListView } from '../../Components/Common/DatabaseListView';
 
 import {
+  Analytics,
   Colors,
   StyleSheet,
   Localizable
@@ -69,7 +70,7 @@ export default class Sources extends Component {
             autoCorrect={false}
             autoFocus={false}
             clearButtonMode="always"
-            onChangeText={(text) => this.setState({search: text})}
+            onChangeText={(text) => this._onSearch(text)}
             placeholder={Localizable.t('name')}
             style={styles.textInput}
             value={this.state.search || ''}
@@ -146,6 +147,11 @@ export default class Sources extends Component {
 
     return {rows, sections};
   };
+
+  _onSearch = (text: string) => {
+    this.setState({search: text});
+    Analytics.logSearch(text, {type: 'Source'});
+  }
  }
 
 const styles = StyleSheet.create({
