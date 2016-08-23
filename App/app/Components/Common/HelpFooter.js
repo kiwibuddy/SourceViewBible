@@ -17,6 +17,7 @@ import {
 } from '../../Common';
 
 import Icon from './Icon';
+import { aboutURL } from '../../Navigation';
 
 const HelpFooter = (props: Object) => {
   return (
@@ -33,7 +34,7 @@ const HelpFooter = (props: Object) => {
         </View>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={styles.listItemContainer}>
+      <TouchableOpacity style={styles.listItemContainer} onPress={() => props.navigate(aboutURL({title: Localizable.t('about-sourceview'), modal: true}))}>
         <Icon
           name="about-info"
           size={25}

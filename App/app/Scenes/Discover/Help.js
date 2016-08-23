@@ -76,7 +76,7 @@ const Help = (props: Props) => {
           <Text style={styles.contentH2}>Bookmark Menu</Text>
           <Text style={styles.contentBody}>Bookmarks represent any place you need to go in SourceView. Bookmarks can be the trail of screens you viewed in your history, specific bookmarks you put in the reader, highlighted passages, references lookup, or any of the main screens in SourceView.</Text>
         </View>
-        <HelpFooter />
+        <HelpFooter navigate={props.navigate} />
       </ScrollView>
     </View>
   );
