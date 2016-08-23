@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 
 import {
+  Analytics,
   Colors,
   Constants,
   Localizable,
@@ -25,6 +26,7 @@ function openURL(url: string) {
   Linking.openURL(url).catch(error => {
 
   });
+  Analytics.logCustom('Link', {url});
 }
 
 const HelpFooter = (props: Object) => {

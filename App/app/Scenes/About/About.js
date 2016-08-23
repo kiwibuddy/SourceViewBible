@@ -34,6 +34,7 @@ function openURL(url: string) {
   Linking.openURL(url).catch(error => {
 
   });
+  Analytics.logCustom('Link', {url});
 }
 
 const About = (props: Props) => {

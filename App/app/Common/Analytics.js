@@ -30,4 +30,8 @@ export default class Analytics {
   static logSearch(query: any, options: ?Object) {
     Answers.logSearch(query, options);
   }
+
+  static logCustom(event: string, options: ?Object) {
+    Answers.logCustom(event, options);
+  }
 }
