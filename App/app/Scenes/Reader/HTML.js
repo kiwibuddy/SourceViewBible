@@ -84,6 +84,9 @@ module.exports = `
       .sourceText {
         padding: 0 5pt;
       }
+      .embeddedDocument {
+        font-style: italic;
+      }
       .textTitle {
         font-family: Georgia;
         font-weight: bold;
