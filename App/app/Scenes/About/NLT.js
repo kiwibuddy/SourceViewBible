@@ -112,6 +112,51 @@ const Note = (props: Props) => {
           <Text style={[styles.contentBody, {marginBottom: 0}]}>J. Gordon McConville, The Cheltenham and Gloucester College of Higher Education</Text>
           <Text style={[styles.contentBody, {marginBottom: 0}]}>Eugene H. Merrill, Dallas Theological Seminary</Text>
           <Text style={styles.contentBody}>John A. Thompson, University of Melbourn</Text>
+          <Text style={styles.contentH2}>HISTORICAL BOOKS</Text>
+          <Text style={[styles.contentBody, {marginBottom: 0}]}>Barry J. Beitzel, General Reviewer</Text>
+          <Text style={styles.contentBody}>Trinity Evangelical Divinity School</Text>
+          <Text style={[styles.contentBody, {fontWeight: 'bold', marginBottom: 0}]}>JOSHUA/JUDGES</Text>
+          <Text style={[styles.contentBody, {marginBottom: 0}]}>Carl E. Armerding, Schloss Mittersill Study Centre</Text>
+          <Text style={[styles.contentBody, {marginBottom: 0}]}>Barry J. Beitzel, Trinity Evangelical Divinity School</Text>
+          <Text style={styles.contentBody}>Lawson Stone, Asbury Theological Seminary</Text>
+          <Text style={[styles.contentBody, {fontWeight: 'bold', marginBottom: 0}]}>1 & 2 SAMUEL</Text>
+          <Text style={[styles.contentBody, {marginBottom: 0}]}>Barry J. Beitzel, Trinity Evangelical Divinity School</Text>
+          <Text style={[styles.contentBody, {marginBottom: 0}]}>V. Philips Long, Covenant Theological Seminary</Text>
+          <Text style={styles.contentBody}>J. Robert Vannoy, Biblical Theological Seminary</Text>
+          <Text style={[styles.contentBody, {fontWeight: 'bold', marginBottom: 0}]}>1 & 2 KINGS</Text>
+          <Text style={[styles.contentBody, {marginBottom: 0}]}>Bill T. Arnold, Asbury Theological Seminary</Text>
+          <Text style={[styles.contentBody, {marginBottom: 0}]}>William H. Barnes, Southeastern College of the Assemblies of God</Text>
+          <Text style={styles.contentBody}>Frederic W. Bush, Fuller Theological Seminary</Text>
+          <Text style={[styles.contentBody, {fontWeight: 'bold', marginBottom: 0}]}>1 & 2 CHRONICLES</Text>
+          <Text style={[styles.contentBody, {marginBottom: 0}]}>Raymond B. Dillard (deceased), Westminster Theological Seminary</Text>
+          <Text style={[styles.contentBody, {marginBottom: 0}]}>David A. Dorsey, Evangelical School of Theology</Text>
+          <Text style={styles.contentBody}>Terry Eves, Calvin College</Text>
+          <Text style={[styles.contentBody, {fontWeight: 'bold', marginBottom: 0}]}>EZRA/NEHEMIAH/ESTHER/RUTH</Text>
+          <Text style={[styles.contentBody, {marginBottom: 0}]}>William C. Williams, Southern California College</Text>
+          <Text style={styles.contentBody}>Hugh G. M. Williamson, Oxford University</Text>
+          <Text style={styles.contentH2}>PROPHETS</Text>
+          <Text style={[styles.contentBody, {marginBottom: 0}]}>John N. Oswalt, General Reviewer</Text>
+          <Text style={styles.contentBody}>Asbury Theological Seminary</Text>
+          <Text style={[styles.contentBody, {fontWeight: 'bold', marginBottom: 0}]}>ISAIAH</Text>
+          <Text style={[styles.contentBody, {marginBottom: 0}]}>John N. Oswalt, Asbury Theological Seminary</Text>
+          <Text style={[styles.contentBody, {marginBottom: 0}]}>Gary Smith, Bethel Theological Seminary</Text>
+          <Text style={styles.contentBody}>John Walton, Moody Bible Institute</Text>
+          <Text style={[styles.contentBody, {fontWeight: 'bold', marginBottom: 0}]}>JEREMIAH/LAMENTATIONS</Text>
+          <Text style={[styles.contentBody, {marginBottom: 0}]}>G. Herbert Livingston, Asbury Theological Seminary</Text>
+          <Text style={styles.contentBody}>Elmer A. Martens, Mennonite Brethren Biblical Seminary</Text>
+          <Text style={[styles.contentBody, {fontWeight: 'bold', marginBottom: 0}]}>EZEKIEL</Text>
+          <Text style={[styles.contentBody, {marginBottom: 0}]}>Daniel I. Block, The Southern Baptist Theological Seminary</Text>
+          <Text style={[styles.contentBody, {marginBottom: 0}]}>David H. Engelhard, Calvin Theological Seminary</Text>
+          <Text style={styles.contentBody}>David Thompson, Asbury Theological Seminary</Text>
+          <Text style={[styles.contentBody, {fontWeight: 'bold', marginBottom: 0}]}>DANIEL/HAGGAI/ZECHARIAH/MALACHI</Text>
+          <Text style={[styles.contentBody, {marginBottom: 0}]}>Joyce Baldwin Caine (deceased), Trinity College, Bristol</Text>
+          <Text style={[styles.contentBody, {marginBottom: 0}]}>Douglas Gropp, Catholic University of America</Text>
+          <Text style={styles.contentBody}>Roy Hayden, Oral Roberts School of Theology</Text>
+          <Text style={[styles.contentBody, {fontWeight: 'bold', marginBottom: 0}]}>HOSEA–ZEPHANIAH</Text>
+          <Text style={[styles.contentBody, {marginBottom: 0}]}>Joseph Coleson, Nazarene Theological Seminary</Text>
+          <Text style={[styles.contentBody, {marginBottom: 0}]}>Andrew Hill, Wheaton College
+</Text>
+          <Text style={styles.contentBody}>Richard Patterson, Professor Emeritus, Liberty University</Text>
         </View>
       </ScrollView>
     </View>
