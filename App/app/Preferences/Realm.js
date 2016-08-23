@@ -3,6 +3,7 @@
 
 import { Platform } from 'react-native';
 import Realm from 'realm';
+import Emdros from '../API/Emdros';
 import moment from 'moment';
 
 const DiscoverySchema = {
@@ -210,9 +211,8 @@ const Schema = [Discovery, Preference, History];
 
 const realm = new Realm({
   schema: Schema,
+  encryptionKey: Emdros.preferencesKey,
   schemaVersion: 2,
   migration: function(oldRealm, newRealm) {
   }
 });
-
-console.log('Preferences Path: ' + realm.path);

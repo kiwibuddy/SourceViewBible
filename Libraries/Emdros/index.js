@@ -14,7 +14,19 @@ export default class Emdros {
   }
 
   static get key() {
-    const KEY = EmdrosBridge.KEY;
+    const KEY = EmdrosBridge.Key;
+    const keyLength = KEY.length;
+    const buf = new ArrayBuffer(keyLength);
+    const bufView = new Int8Array(buf);
+
+    for (let i = 0; i < keyLength; i++) {
+      bufView[i] = KEY.charCodeAt(i);
+    }
+    return buf;
+  }
+
+  static get preferencesKey() {
+    const KEY = EmdrosBridge.PreferencesKey;
     const keyLength = KEY.length;
     const buf = new ArrayBuffer(keyLength);
     const bufView = new Int8Array(buf);

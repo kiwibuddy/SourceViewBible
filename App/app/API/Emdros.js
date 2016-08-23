@@ -129,6 +129,7 @@ function wordCountsForContext(context: string, options: Object) {
 
 module.exports = {
   key: Emdros.key,
+  preferencesKey: Emdros.preferencesKey,
   openDatabase,
   query,
   scripture,
