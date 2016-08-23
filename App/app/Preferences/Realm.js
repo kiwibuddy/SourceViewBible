@@ -216,7 +216,8 @@ const options = {
   }
 };
 
-if (!__DEV__) {
+if (__DEV__) {
+} else {
   // $FlowFixMe - Silence warning
   options['encryptionKey'] = Emdros.preferencesKey;
 }
