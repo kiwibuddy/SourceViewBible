@@ -70,9 +70,9 @@ export default class InAppPurchase extends Component {
           <TouchableOpacity onPress={this._onPressBuy} style={[styles.buyButton, {width: 200}]}>
             <Text style={styles.buyButtonTitle}>Start using Spheres</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.props.navigate(sphereHelpURL({title: Localizable.t('help'), modal: true}))}>
+          {/* <TouchableOpacity onPress={() => this.props.navigate(sphereHelpURL({title: Localizable.t('help'), modal: true}))}>
             <Text style={styles.learnButton}>Learn more</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
     );

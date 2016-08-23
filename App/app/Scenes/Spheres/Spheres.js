@@ -72,7 +72,7 @@ type State = {
 };
 
 export default class Spheres extends Component {
-  static NavigationBar = NavigationBar;
+  // static NavigationBar = NavigationBar;
 
   props: Props;
   state: State;
