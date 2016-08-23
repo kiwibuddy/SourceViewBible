@@ -159,12 +159,6 @@ const About = (props: Props) => {
             <Text style={StyleSheet.styles.cell.title}>{Localizable.t('about-nlt')}</Text>
           </View>
         </TouchableOpacity>
-        <View style={styles.separator} />
-        <TouchableOpacity style={styles.listItemContainer} onPress={() => props.navigate(aboutTermsURL({title: Localizable.t('about-terms'), modal: true}))}>
-          <View style={styles.listItem}>
-            <Text style={StyleSheet.styles.cell.title}>{Localizable.t('about-terms')}</Text>
-          </View>
-        </TouchableOpacity>
       </ScrollView>
     </View>
   );
