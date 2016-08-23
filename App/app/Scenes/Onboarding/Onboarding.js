@@ -27,6 +27,7 @@ import { Preference } from '../../Preferences';
 const { width: WIDTH } = Dimensions.get('window');
 const SCROLLVIEW_REF = 'SCROLLVIEW_REF';
 const NUMBER_OF_PAGES = 4;
+const { width } = Dimensions.get('window');
 
 type Props = {
   title: string,
@@ -83,7 +84,7 @@ export default class Onboarding extends Component {
                 <Text style={styles.contentBody}>A new Scripture layout and dynamic visualisations enabling you to encounter the Bible like never before.</Text>
               </View>
             </View>
-            <View style={styles.onboardingContainer}>
+            <View style={[styles.onboardingContainer, {overflow: 'hidden'}]}>
               <View style={styles.onboardingContent}>
                 <Image source={require('./Images/onboarding-4.png')} />
                 <Text style={styles.contentHeader}>Words matter</Text>
@@ -176,7 +177,7 @@ const styles = StyleSheet.create({
   onboardingContent: {
     alignItems: 'center',
     marginHorizontal: 30,
-    marginTop: 50,
+    marginTop: (width <= 320 ? 30 : 50),
   },
   contentHeader: {
     fontSize: 27,
@@ -187,14 +188,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   contentBody: {
-    fontSize: 21,
+    fontSize: (width <= 320 ? 18 : 21),
     lineHeight: 25,
     color: '#59626A',
     textAlign: 'center',
   },
   onboardingControls: {
     position: 'absolute',
-    bottom: 100,
+    bottom: (width <= 320 ? 40 : 100),
     left: 0,
     right: 0,
     alignItems: 'center',
