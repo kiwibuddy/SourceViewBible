@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.facebook.react.ReactApplication;
 import com.smixx.fabric.FabricPackage;
+import org.pgsqlite.SQLitePluginPackage;
 import com.rnfs.RNFSPackage;
 import io.realm.react.RealmReactPackage;
 import com.facebook.react.ReactInstanceManager;
@@ -32,7 +33,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new FabricPackage(),
+          new SQLitePluginPackage(),
+          new FabricPackage(),
           new RNFSPackage(),
           new RealmReactPackage(),
           new VectorIconsPackage(),
