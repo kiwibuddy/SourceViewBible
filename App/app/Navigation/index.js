@@ -43,7 +43,7 @@ import SphereHelp from '../Scenes/Spheres/Help';
 import SphereInAppPurchase from '../Scenes/Spheres/InAppPurchase';
 
 export const aboutAcknowledgmentsURL = router.addRoute('/About/Acknowledgments', AboutAcknowledgments);
-export const aboutNLTURL = router.addRoute('/About/NLT', AboutNLT);
+export const aboutCopyrightURL = router.addRoute('/About/NLT', AboutNLT);
 export const aboutNoteURL = router.addRoute('/About/Note', AboutNote);
 export const aboutTermsURL = router.addRoute('/About/Terms', AboutTerms);
 export const aboutWhyURL = router.addRoute('/About/Why', AboutWhy);
