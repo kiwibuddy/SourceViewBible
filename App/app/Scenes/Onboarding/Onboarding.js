@@ -21,6 +21,7 @@ import {
 
 import LinearGradient from 'react-native-linear-gradient';
 import PageControl from '../../Components/Common/PageControl';
+import { BACK, discoverURL } from '../../Navigation';
 
 const { width: WIDTH } = Dimensions.get('window');
 const SCROLLVIEW_REF = 'SCROLLVIEW_REF';
