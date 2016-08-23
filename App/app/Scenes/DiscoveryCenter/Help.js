@@ -41,12 +41,9 @@ const Help = (props: Props) => {
           <Text style={styles.contentBody}>The Discovery Center is where you can go to dream up new ways to visualize what’s in the Bible. The visualizations you come up with are kept on cards. You can keep, duplicate, share, save, and delete the cards you create.</Text>
           <View style={styles.separator} />
           <Text style={styles.contentH2}>Creating Cards</Text>
-          <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Step 1</Text> — Tap the plus sign at the bottom of the screen to start a new card.</Text>
-          <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Step 2</Text> — Pick which type of visualization you want to start with: bar chart, pie chart, or cloud</Text>
-          <Text style={styles.contentBody}>• Bar Charts — bar charts are used when you want to see a comparison of quantities side by side</Text>
-          <Text style={styles.contentBody}>• Pie Charts — pie charts are used when you want to see the proportion of quantities within a collective whole</Text>
-          <Text style={styles.contentBody}>• Clouds — clouds are used to illustrate relative quantities using size relationships</Text>
-          <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Step 3</Text> — Select the information you would like to display on your chart or cloud.</Text>
+          <View style={[styles.imageContainer, {marginBottom: 20}]}>
+            <Image source={require('./Images/help-discoverycenter.png')}/>
+          </View>
           <Text style={styles.contentH2}>Add Filters</Text>
           <Text style={styles.contentBody}>Once your primary selections are in, you can use filters to narrow the range of what’s on your cards. Filters can be selected from books, words, sources, or spheres.</Text>
           <Text style={styles.contentH2}>What can you do with Cards?</Text>
