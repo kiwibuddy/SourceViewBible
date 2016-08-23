@@ -13,6 +13,7 @@ import { NavigationBar, Toolbar, ToolbarButton } from '../Navigation';
 import router, { BACK, sphereInAppPurchaseURL } from '../../Navigation';
 
 import {
+  Analytics,
   Colors,
   Localizable,
   StyleSheet,
@@ -195,6 +196,7 @@ export default class App extends Component {
     }
 
     History.record(route);
+    Analytics.logRoute(route);
   };
 
   _popRoute = (callback?: Function) => {
@@ -241,6 +243,7 @@ export default class App extends Component {
     }
 
     History.record(route, {replace: true});
+    Analytics.logRoute(route);
   };
 
   _interceptRoute = (route: any): boolean => {
