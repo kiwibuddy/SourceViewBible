@@ -156,9 +156,9 @@ const About = (props: Props) => {
           </View>
         </TouchableOpacity>
         <View style={styles.separator} />
-        <TouchableOpacity style={styles.listItemContainer} onPress={() => props.navigate(aboutCopyrightURL({title: Localizable.t('about-nlt'), modal: true}))}>
+        <TouchableOpacity style={styles.listItemContainer} onPress={() => props.navigate(aboutCopyrightURL({title: Localizable.t('about-copyright'), modal: true}))}>
           <View style={styles.listItem}>
-            <Text style={StyleSheet.styles.cell.title}>{Localizable.t('about-nlt')}</Text>
+            <Text style={StyleSheet.styles.cell.title}>{Localizable.t('about-copyright')}</Text>
           </View>
         </TouchableOpacity>
       </ScrollView>
