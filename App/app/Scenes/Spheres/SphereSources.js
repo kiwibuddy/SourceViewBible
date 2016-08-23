@@ -86,6 +86,8 @@ export default class SphereSources extends Component {
         renderRow={this._renderRow}
         renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
         renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={[StyleSheet.styles.separator, {marginLeft: 8}]} />}
+        keyboardShouldPersistTaps={true}
+        keyboardDismissMode="on-drag"
       />
     );
   }
