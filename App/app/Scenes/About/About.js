@@ -14,6 +14,7 @@ import {
 } from 'react-native'
 
 import {
+  Analytics,
   Colors,
   Constants,
   Localizable,
