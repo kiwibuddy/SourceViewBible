@@ -30,8 +30,6 @@ import SegmentedControl from '../../Components/Common/SegmentedControl';
 import { SourcesBarChart, SpheresBarChart } from '../../Components/Charts';
 import { ReadingTime } from '../../Common/NumberHelper';
 
-// const Bible = require('../../Locale/en/NLT/SourceView.json');
-
 const SEGMENTS = [Localizable.t('textual'), Localizable.t('alphabetical'), Localizable.t('principality')];
 const SEGMENT_INDEXES = {
   TEXT: 0,
