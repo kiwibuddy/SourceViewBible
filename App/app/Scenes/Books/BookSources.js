@@ -143,7 +143,9 @@ export default class BookSources extends Component {
                 size={20}
               />
             </TouchableOpacity>
-            <Text style={StyleSheet.styles.cell.title}>{source.name}</Text>
+            <View style={styles.sourcesContent}>
+              <Text style={StyleSheet.styles.cell.titlemedium}>{source.name}</Text>
+            </View>
           </View>
           <View style={styles.sourcesRightContainer}>
             <SourcesBarChart
@@ -207,6 +209,11 @@ const styles = StyleSheet.create({
     flex: 1,
     marginRight: 8,
     alignSelf: 'center',
+  },
+  sourcesContent: {
+    flex: 1,
+    flexWrap: 'wrap',
+    marginRight: 8,
   },
   sourceAvatar: {
     width: 20,
