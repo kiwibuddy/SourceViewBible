@@ -28,6 +28,8 @@ function filterWord(filter: Object, word: string) {
 }
 
 type Props = {
+  card: Object,
+  filter: Object,
   navigate: Function,
   onDone: Function,
 };

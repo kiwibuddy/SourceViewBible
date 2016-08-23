@@ -21,6 +21,7 @@ import { cardWithFilter } from './FilterUtils';
 import { Chronology } from '../../../Database';
 
 type Props = {
+  card: Object,
   navigate: Function,
   onDone: Function,
 };
@@ -35,8 +36,8 @@ function AllTimeFilter() {
     id: 'filter-' + Date.now(),
     type: 'chronology-range',
     chronologies: {
-      from: from,
-      to: to
+      fromID: from.id,
+      toID: to.id
     }
   });
 }

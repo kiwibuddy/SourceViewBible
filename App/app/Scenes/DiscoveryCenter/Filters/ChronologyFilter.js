@@ -26,6 +26,9 @@ import { cardWithFilter } from './FilterUtils';
 import { Chronology } from '../../../Database';
 
 type Props = {
+  card: Object,
+  filter: Object,
+  item: Object,
   navigate: Function,
   onDone: Function,
 };
@@ -86,16 +89,16 @@ export default class Chronologys extends Component {
       if (this.props.item === 'from') {
         filter.chronologies = {
           ...filter.chronologies,
-          from: chronology,
+          fromID: chronology.id,
         };
       } else {
         filter.chronologies = {
           ...filter.chronologies,
-          to: chronology,
+          toID: chronology.id,
         };
       }
     } else {
-      filter.chronology = chronology;
+      filter.chronologyID = chronology.id;
     }
 
     this.props.onDone(cardWithFilter(this.props.card, filter));

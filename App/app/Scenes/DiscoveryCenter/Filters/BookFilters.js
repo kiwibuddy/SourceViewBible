@@ -21,6 +21,8 @@ import { cardWithFilter } from './FilterUtils';
 import { Book } from '../../../Database';
 
 type Props = {
+  card: Object,
+  filter: Object,
   navigate: Function,
   onDone: Function,
 };
@@ -30,8 +32,8 @@ function filterBooks(fromID: string, toID: string) {
     id: 'filter-' + Date.now(),
     type: 'book-range',
     books: {
-      from: fromID,
-      to: toID
+      fromID,
+      toID
     }
   });
 }

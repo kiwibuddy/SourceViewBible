@@ -17,14 +17,17 @@ import {
 } from '../../../Common';
 
 import { genderFilterURL } from '../../../Navigation';
+import { Gender } from '../../../Database';
 
 type Props = {
   filter: Object,
   onPressDeleteFilter: Function,
+  onPressEditFilter: Function,
 };
 
 const GenderFilterItem = (props: Props) => {
-  const { gender, actantType } = props.filter;
+  const { genderID, actantType } = props.filter;
+  const gender = Gender.findByID(genderID);
 
   return (
     <View>

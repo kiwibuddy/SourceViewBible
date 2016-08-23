@@ -18,27 +18,30 @@ import {
 import { cardWithFilter } from './FilterUtils';
 
 type Props = {
+  card: Object,
+  filter: Object,
+  type: string,
   navigate: Function,
   onDone: Function,
 };
 
 function filterRole(filter: Object, type: string, key: string) {
-  let id = null;
+  let roleID = null;
   switch (key) {
     case 'narrator':
-      id = 1;
+      roleID = 1;
       break;
 
     case 'god':
-      id = 2;
+      roleID = 2;
       break;
 
     case 'lead':
-      id = 3;
+      roleID = 3;
       break;
 
     case 'support':
-      id = 4;
+      roleID = 4;
       break;
   }
 
@@ -47,10 +50,7 @@ function filterRole(filter: Object, type: string, key: string) {
       type: 'role',
       actantType: type,
       ...filter,
-      role: {
-        id,
-        key
-      }
+      roleID
   });
 }
 

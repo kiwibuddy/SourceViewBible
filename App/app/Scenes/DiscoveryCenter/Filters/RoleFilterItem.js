@@ -17,6 +17,7 @@ import {
 } from '../../../Common';
 
 import { roleFilterURL } from '../../../Navigation';
+import { Role } from '../../../Database';
 
 type Props = {
   filter: Object,
@@ -25,8 +26,9 @@ type Props = {
 };
 
 const RoleFilterItem = (props: Props) => {
-  const { role, actantType } = props.filter;
-
+  const { roleID, actantType } = props.filter;
+  const role = Role.findByID(roleID);
+  
   return (
     <View>
       <View style={StyleSheet.styles.discoveryCenter.topContainer}>

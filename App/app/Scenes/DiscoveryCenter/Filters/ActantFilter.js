@@ -95,7 +95,7 @@ export default class Actants extends Component {
       type: 'actant',
       actantType: this.props.type,
       ...this.props.filter,
-      actant
+      actantID: actant.id
     };
 
     this.props.onDone(cardWithFilter(this.props.card, filter));

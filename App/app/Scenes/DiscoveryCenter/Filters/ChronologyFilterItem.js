@@ -17,6 +17,7 @@ import {
 } from '../../../Common';
 
 import { chronologyFilterURL } from '../../../Navigation';
+import { Chronology } from '../../../Database';
 
 type Props = {
   filter: Object,
@@ -25,7 +26,8 @@ type Props = {
 };
 
 const ChronologyFilterItem = (props: Props) => {
-  const { chronology } = props.filter;
+  const { chronologyID } = props.filter;
+  const chronology = Chronology.findByID(chronologyID);
 
   return (
     <View>

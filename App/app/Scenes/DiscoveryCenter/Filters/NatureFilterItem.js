@@ -17,6 +17,7 @@ import {
 } from '../../../Common';
 
 import { natureFilterURL } from '../../../Navigation';
+import { Nature } from '../../../Database';
 
 type Props = {
   filter: Object,
@@ -25,8 +26,9 @@ type Props = {
 };
 
 const NatureFilterItem = (props: Props) => {
-  const { nature, actantType } = props.filter;
-
+  const { natureID, actantType } = props.filter;
+  const nature = Nature.findByID(natureID);
+  
   return (
     <View>
       <View style={StyleSheet.styles.discoveryCenter.topContainer}>

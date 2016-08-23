@@ -27,7 +27,7 @@ function filterNature(filter: Object, type: string, key: string) {
     actantType: type,
     ...filter,
     type: 'nature',
-    nature
+    natureID: nature.id
   });
 }
 

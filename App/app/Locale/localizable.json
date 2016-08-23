@@ -161,8 +161,8 @@
       "Chron_Overlapping": "Overlapping"
     },
     "genders": {
-      "Female": "Female",
-      "Male": "Male"
+      "female": "Female",
+      "male": "Male"
     },
     "natures": {
       "Angelic": "Angelic",

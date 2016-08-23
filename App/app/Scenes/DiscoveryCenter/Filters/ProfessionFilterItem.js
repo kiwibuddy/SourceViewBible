@@ -17,6 +17,7 @@ import {
 } from '../../../Common';
 
 import { professionFilterURL } from '../../../Navigation';
+import { Profession } from '../../../Database';
 
 type Props = {
   filter: Object,
@@ -25,7 +26,8 @@ type Props = {
 };
 
 const ProfessionFilterItem = (props: Props) => {
-  const { profession, actantType } = props.filter;
+  const { professionID, actantType } = props.filter;
+  const profession = Profession.findByID(professionID);
 
   return (
     <View>

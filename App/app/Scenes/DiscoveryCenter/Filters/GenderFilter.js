@@ -18,16 +18,13 @@ import {
 import { cardWithFilter } from './FilterUtils';
 
 function filterGender(filter: Object, type: string, key: string) {
-  const id = (key === 'Male' ? 2 : 1);
+  const genderID = (key === 'Male' ? 2 : 1);
   return ({
     id: 'filter-' + Date.now(),
     actantType: type,
     ...filter,
     type: 'gender',
-    gender: {
-      id,
-      key
-    }
+    genderID
   });
 }
 

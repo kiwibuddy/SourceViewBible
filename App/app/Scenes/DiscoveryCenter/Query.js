@@ -648,49 +648,47 @@ export default class Query {
 
       switch(filter.type) {
         case 'actant':
-          whereClause.where(ComparisonPredicate.predicateWith(`${actantType}.id`, '=', filter.actant.id));
-          break;
-
-        case 'actant-number':
-          whereClause.where(ComparisonPredicate.predicateWith(`${actantType}.actant_number_id`, '=', filter.actantNumber.id));
+          whereClause.where(ComparisonPredicate.predicateWith(`${actantType}.id`, '=', filter.actantID));
           break;
 
         case 'book':
-          const book = Book.findByID(filter.book);
+          const book = Book.findByID(filter.bookID);
           whereClause.where(ComparisonPredicate.predicateWith('bso.first', '>=', book.firstMonad));
           whereClause.where(ComparisonPredicate.predicateWith('bso.last', '<=', book.lastMonad));
           break;
 
         case 'book-range':
-          const from = Book.findByID(filter.books.from);
-          const to = Book.findByID(filter.books.to);
-          whereClause.where(ComparisonPredicate.predicateWith('bso.first', '>=', from.firstMonad));
-          whereClause.where(ComparisonPredicate.predicateWith('bso.last', '<=', to.lastMonad));
+          const fromBook = Book.findByID(filter.books.fromID);
+          const toBook = Book.findByID(filter.books.toID);
+          whereClause.where(ComparisonPredicate.predicateWith('bso.first', '>=', fromBook.firstMonad));
+          whereClause.where(ComparisonPredicate.predicateWith('bso.last', '<=', toBook.lastMonad));
           break;
 
         case 'chronology':
-          whereClause.where(ComparisonPredicate.predicateWith('chronologies.chronology_id', '=', filter.chronology.id));
+          whereClause.where(ComparisonPredicate.predicateWith('chronologies.chronology_id', '=', filter.chronologyID));
           break;
 
         case 'chronology-range':
-          const chronologies = Chronology.whereInRange(filter.chronologies.from, filter.chronologies.to).map(chronology => chronology.id);
+          const fromChronology = Chronology.findByID(filter.chronologies.fromID);
+          const toChronology = Chronology.findByID(filter.chronologies.toID);
+          const chronologies = Chronology.whereInRange(fromChronology, toChronology).map(chronology => chronology.id);
           whereClause.where(ComparisonPredicate.predicateWith('chronologies.chronology_id', 'IN', chronologies));
           break;
 
         case 'gender':
-          whereClause.where(ComparisonPredicate.predicateWith(`${actantType}.gender_id`, '=', filter.gender.id));
+          whereClause.where(ComparisonPredicate.predicateWith(`${actantType}.gender_id`, '=', filter.genderID));
           break;
 
         case 'nature':
-          whereClause.where(ComparisonPredicate.predicateWith(`${actantType}_natures.nature_id`, '=', filter.nature.id));
+          whereClause.where(ComparisonPredicate.predicateWith(`${actantType}_natures.nature_id`, '=', filter.natureID));
           break;
 
         case 'profession':
-          whereClause.where(ComparisonPredicate.predicateWith(`${actantType}_professions.profession_id`, '=', filter.profession.id));
+          whereClause.where(ComparisonPredicate.predicateWith(`${actantType}_professions.profession_id`, '=', filter.professionID));
           break;
 
         case 'role':
-          whereClause.where(ComparisonPredicate.predicateWith(`bso.role_id`, '=', filter.role.id));
+          whereClause.where(ComparisonPredicate.predicateWith(`bso.role_id`, '=', filter.roleID));
           break;
 
         case 'sphere':

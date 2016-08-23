@@ -131,16 +131,16 @@ export default class Books extends Component {
       if (this.props.item === 'from') {
         filter.books = {
           ...filter.books,
-          from: book.id,
+          fromID: book.id,
         };
       } else {
         filter.books = {
           ...filter.books,
-          to: book.id,
+          toID: book.id,
         };
       }
     } else {
-      filter.book = book.id;
+      filter.bookID = book.id;
     }
 
     this.props.onDone(cardWithFilter(this.props.card, filter));

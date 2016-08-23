@@ -25,7 +25,7 @@ type Props = {
 };
 
 const BookRangeFilterItem = (props: Props) => {
-  const { from: fromID, to: toID } = props.filter.books;
+  const { fromID, toID } = props.filter.books;
   const from = Book.findByID(fromID);
   const to = Book.findByID(toID);
 

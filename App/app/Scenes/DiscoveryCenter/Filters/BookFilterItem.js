@@ -25,7 +25,7 @@ type Props = {
 };
 
 const BookFilterItem = (props: Props) => {
-  const { book: bookID } = props.filter;
+  const { bookID } = props.filter;
   const book = Book.findByID(bookID);
 
   return (

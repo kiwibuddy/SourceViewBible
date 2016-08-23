@@ -17,6 +17,7 @@ import {
 } from '../../../Common';
 
 import { actantFilterURL } from '../../../Navigation';
+import { Actant } from '../../../Database';
 
 type Props = {
   filter: Object,
@@ -25,7 +26,8 @@ type Props = {
 };
 
 const ActantFilterItem = (props: Props) => {
-  const { actant, actantType } = props.filter;
+  const { actantID, actantType } = props.filter;
+  const actant = Actant.findByID(actantID);
 
   return (
     <View>

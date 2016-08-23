@@ -26,6 +26,9 @@ import { cardWithFilter } from './FilterUtils';
 import { Profession } from '../../../Database';
 
 type Props = {
+  card: Object,
+  filter: Object,
+  type: string,
   navigate: Function,
   onDone: Function,
 };
@@ -72,7 +75,7 @@ export default class Professions extends Component {
       type: 'profession',
       actantType: this.props.type,
       ...this.props.filter,
-      profession
+      professionID: profession.id
     }
     return (
       <TouchableOpacity key={profession.id} style={StyleSheet.styles.listItem} onPress={() => this.props.onDone(cardWithFilter(this.props.card, filter))}>
