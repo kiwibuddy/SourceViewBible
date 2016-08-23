@@ -10,7 +10,7 @@ import {
 
 import { NavigationBar, Toolbar, ToolbarButton } from '../Navigation';
 
-import router, { BACK, discoverURL, onboardingURL, sphereInAppPurchaseURL } from '../../Navigation';
+import router, { BACK, discoverURL, onboardingURL, sphereHelpURL, sphereInAppPurchaseURL } from '../../Navigation';
 
 import {
   Analytics,
@@ -277,7 +277,7 @@ export default class App extends Component {
 
   _isSphereRoute = (route: any): boolean => {
     const path = route.path.toLowerCase();
-    return path.indexOf('sphere') != -1 && route.path !== sphereInAppPurchaseURL().path;
+    return path.indexOf('sphere') != -1 && route.path !== sphereInAppPurchaseURL().path && route.path !== sphereHelpURL().path;
   };
 }
 

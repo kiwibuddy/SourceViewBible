@@ -18,7 +18,7 @@ import {
 } from '../../Common';
 
 import { NavigationBar, NavigationBarButton } from '../../Components/Navigation';
-import { BACK } from '../../Navigation';
+import { BACK, sphereHelpURL } from '../../Navigation';
 
 import { Preference } from '../../Preferences';
 
@@ -53,13 +53,13 @@ export default class InAppPurchase extends Component {
     return (
       <View style={styles.contentContainer}>
         <Image source={require('./Images/sphere-iap-header.png')} />
-        <Text style={styles.contentHeader}>Uses spheres free for a limited time</Text>
+        <Text style={styles.contentHeader}>Use spheres free for a limited time</Text>
         <Text style={styles.contentBody}>Spheres provide the data for people to meditate on and draw their conclusions with God as they seek to understand what God says about each sphere of society.</Text>
         <View style={styles.buyControls}>
           <TouchableOpacity onPress={this._onPressBuy} style={[styles.buyButton, {width: 200}]}>
             <Text style={styles.buyButtonTitle}>Start using Spheres</Text>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => this.props.navigate(sphereHelpURL({title: Localizable.t('help'), modal: true}))}>
             <Text style={styles.learnButton}>Learn more</Text>
           </TouchableOpacity>
         </View>
