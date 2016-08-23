@@ -43,30 +43,10 @@ const Help = (props: Props) => {
           <Text style={styles.contentHeader}>Discover</Text>
           <Text style={styles.contentBody}>The Discover screen is where your exploration begins. You can dive into the books of the Bible, learn more about the sources quoted in Scripture, or observe how biblical text influences the seven spheres of society.</Text>
           <Text style={styles.contentBody}>For each category, you can either tap “View All” to browse the complete list of items or tap on a tile for a closer look at a specific book, source, or sphere. You can swipe left and right to browse through some featured tiles in the category. And if you scroll to the bottom, you can learn more about SourceView.</Text>
-          <View style={styles.separator} />
-          <Text style={styles.contentH2}>Books</Text>
-          <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Color</Text> — Determined by which source type has the most words</Text>
-          <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Name</Text> — Official name of the book in the Bible</Text>
-          <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Read Time</Text> — Estimated amount of time needed to read the entire book</Text>
-          <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Sources</Text> — The number of sources that are quoted in this book and a preview of amount</Text>
-          <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Spheres</Text> — The percentage of the words in the book that connect to a sphere and a visual breakdown of relative distribution</Text>
-          <Text style={styles.contentBody}>Tap anywhere on the tile to go to the Book Overview.</Text>
-          <View style={styles.separator} />
-          <Text style={styles.contentH2}>Sources</Text>
-          <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Color</Text> —  Determined by role: black is the narrator, red is divine, green is a lead character, and blue plays a supporting role (icon also matches the role)</Text>
-          <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Name</Text> — Name of the biblical character</Text>
-          <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Spheres</Text> — The percentage of the words by the source that connect to a sphere and a visual breakdown of relative distribution</Text>
-          <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Words</Text> — The number of the words spoken by this source</Text>
-          <Text style={styles.contentBody}>Tap anywhere on the tile to go to the Source Overview.</Text>
-          <View style={styles.separator} />
-          <Text style={styles.contentH2}>Spheres</Text>
-          <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Color</Text> — Each sphere is identified by its own color</Text>
-          <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Name</Text> — Name of the sphere</Text>
-          <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Percentage</Text> — Amount of words in Scripture associated with this sphere</Text>
-          <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Sources</Text> — Number of sources who have words associated with this sphere</Text>
-          <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Words</Text> — The number of the words associated with this sphere</Text>
-          <Text style={styles.contentBody}>Tap anywhere on the tile to go to the Sphere Overview.</Text>
-          <View style={styles.separator} />
+          <Text style={styles.contentH2}>Cards</Text>
+          <View style={[styles.imageContainer, {marginBottom: 20}]}>
+            <Image source={require('./Images/help-discover-cards.png')}/>
+          </View>
           <Text style={styles.contentH2}>NAVIGATION</Text>
           <Text style={styles.contentBody}>At the bottom of the screen, there is a navigation bar, similar to what people might experience in a mobile browser. It is broken down into three main components:</Text>
           <Text style={styles.contentH2}>Back and Forward</Text>
@@ -118,6 +98,11 @@ const styles = StyleSheet.create({
       marginRight: -15,
       marginVertical: 10,
   },
+  imageContainer: {
+    marginHorizontal: -15,
+    marginVertical: 10,
+    alignItems: 'center',
+  }
 });
 
 export default Help;
