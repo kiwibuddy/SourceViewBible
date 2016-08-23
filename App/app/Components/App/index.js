@@ -3,6 +3,7 @@
 
 import React, { Component } from 'react';
 import {
+  BackAndroid,
   Text,
   TouchableOpacity,
   View,
@@ -41,6 +42,14 @@ export default class App extends Component {
         ],
       }
     };
+  }
+
+  componentDidMount() {
+    BackAndroid.addEventListener('hardwareBackPress', this._onHardwareBackPress);
+  }
+
+  componentWillUnmount() {
+    BackAndroid.removeEventListener('hardwareBackPress', this._onHardwareBackPress);
   }
 
   render() {
@@ -279,6 +288,16 @@ export default class App extends Component {
     const path = route.path.toLowerCase();
     return path.indexOf('sphere') != -1 && route.path !== sphereInAppPurchaseURL().path && route.path !== sphereHelpURL().path;
   };
+
+  _onHardwareBackPress = () => {
+    const { navigation } = this.state;
+    const canGoBack = navigation.index > 0;
+    if (canGoBack) {
+      this._popRoute();
+    }
+    
+    return false;
+  }
 }
 
 const styles = StyleSheet.create({
