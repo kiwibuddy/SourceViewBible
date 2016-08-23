@@ -102,7 +102,6 @@ class OccurrenceToolbar extends Component {
         </View>
         <Navigation.ToolbarButton
           title={Localizable.t('range-of', {current, total})}
-          onPress={() => {}}
           onPress={() => this._onPressOccurrences(currentRoute)}
           style={{marginLeft: -10}}
         />
