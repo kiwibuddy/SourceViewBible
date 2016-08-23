@@ -135,6 +135,15 @@ export class Bible extends Realm.Object {
     return bible.wordCount;
   }
 
+  static get oldTestamentWordCount() {
+    return Book.whereIn(Book.identifiers(0)).reduce((wordCount, book) => wordCount + book.wordCount, 0);
+  }
+
+  static get newTestamentWordCount() {
+    return Book.whereIn(Book.identifiers(1)).reduce((wordCount, book) => wordCount + book.wordCount, 0);
+  }
+
+
   // {"bcv": [], "bso": [], "books": []}
   static searchReferences(text: string): Object {
     const references = {};
@@ -739,10 +748,6 @@ export class Sphere extends Realm.Object {
     if (ids.length == 0) return [];
     const filter = ids.map((id, index) => `id = $${index}`).join(' OR ');
     return realm.objects('Sphere').filtered(filter, ...ids).sorted('position');
-  }
-
-  static countOfBible(testament: ?number): number {
-    return Sphere.all().reduce((count, sphere) => count + sphere.countOfBible(testament), 0);
   }
 
   countOfBook(bookID: string): number {

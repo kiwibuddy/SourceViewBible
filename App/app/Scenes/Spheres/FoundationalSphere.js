@@ -35,7 +35,7 @@ import { readerURL, sphereURL, spherePassagesURL } from '../../Navigation';
 
 import { Preference } from '../../Preferences';
 
-import { Book, Sphere } from '../../Database';
+import { Bible, Book, Sphere } from '../../Database';
 
 const SEGMENTS = [Localizable.t('whole-bible'), Localizable.t('old-testament'), Localizable.t('new-testament')];
 const SEGMENT_INDEXES = {
@@ -191,13 +191,13 @@ export default class FoundationalSphere extends Component {
   _getWordCount = (segmentIndex: number) => {
     switch (segmentIndex) {
       case SEGMENT_INDEXES.OLD_TESTAMENT:
-        return Sphere.countOfBible(0);
+        return Bible.oldTestamentWordCount;
 
       case SEGMENT_INDEXES.NEW_TESTAMENT:
-        return Sphere.countOfBible(1);
+        return Bible.newTestamentWordCount;
 
       default:
-        return Sphere.countOfBible();
+        return Bible.wordCount;
     }
   };
 
