@@ -71,20 +71,20 @@ const styles = StyleSheet.create({
   contentHeader: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#59626a',
+    color: '#323B43',
     marginBottom: 5,
   },
   contentH2: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#59626a',
+    color: '#323B43',
     marginTop: 5,
     marginBottom: 5,
   },
   contentBody: {
     fontSize: 17,
     lineHeight: 24,
-    color: '#9B9B9B',
+    color: '#59626A',
     marginBottom: 10,
   },
   separator: {

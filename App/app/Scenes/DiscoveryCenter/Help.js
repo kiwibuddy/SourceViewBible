@@ -18,6 +18,7 @@ import {
 
 import { NavigationBar, NavigationBarButton } from '../../Components/Navigation';
 import { BACK } from '../../Navigation';
+import HelpFooter from '../../Components/Common/HelpFooter';
 
 type Props = {
   title: string,
@@ -35,7 +36,28 @@ const Help = (props: Props) => {
         />
       </NavigationBar>
       <ScrollView style={styles.scrollView}>
-        <Text>Discovery Center Help!</Text>
+        <View style={styles.helpContainer}>
+          <Text style={styles.contentHeader}>Discovery Center</Text>
+          <Text style={styles.contentBody}>The Discovery Center is where you can go to dream up new ways to visualize what’s in the Bible. The visualizations you come up with are kept on cards. You can keep, duplicate, share, save, and delete the cards you create.</Text>
+          <View style={styles.separator} />
+          <Text style={styles.contentH2}>Creating Cards</Text>
+          <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Step 1</Text> — Tap the plus sign at the bottom of the screen to start a new card.</Text>
+          <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Step 2</Text> — Pick which type of visualization you want to start with: bar chart, pie chart, or cloud</Text>
+          <Text style={styles.contentBody}>• Bar Charts — bar charts are used when you want to see a comparison of quantities side by side</Text>
+          <Text style={styles.contentBody}>• Pie Charts — pie charts are used when you want to see the proportion of quantities within a collective whole</Text>
+          <Text style={styles.contentBody}>• Clouds — clouds are used to illustrate relative quantities using size relationships</Text>
+          <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Step 3</Text> — Select the information you would like to display on your chart or cloud.</Text>
+          <Text style={styles.contentH2}>Add Filters</Text>
+          <Text style={styles.contentBody}>Once your primary selections are in, you can use filters to narrow the range of what’s on your cards. Filters can be selected from books, words, sources, or spheres.</Text>
+          <Text style={styles.contentH2}>What can you do with Cards?</Text>
+          <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Duplicate</Text> — clone a card to make it a starting point for new discoveries </Text>
+          <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Share</Text> — hare your discoveries with friends, family, and the world by making it your next social post</Text>
+          <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Save</Text> — tap the share option to save an image of the card to your mobile device</Text>
+          <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Delete</Text> — remove the card from your device</Text>
+          <View style={styles.separator} />
+          <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Note:</Text> We do not manage personal accounts at this time, so there is no automatic way to share the cards you create across all of your devices. The cards you create on this phone are stored on this device only. You would have to recreate them to put them on additional devices.</Text>
+        </View>
+        <HelpFooter />
       </ScrollView>
     </View>
   );
@@ -44,11 +66,38 @@ const Help = (props: Props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#EFEFF4',
   },
   scrollView: {
     flex: 1,
     marginTop: NavigationBar.HEIGHT,
+  },
+  helpContainer: {
+    paddingTop: 20,
+    paddingHorizontal: 15,
+  },
+  contentHeader: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#323B43',
+    marginBottom: 5,
+  },
+  contentH2: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#59626a',
+    marginTop: 5,
+    marginBottom: 5,
+  },
+  contentBody: {
+    fontSize: 17,
+    lineHeight: 24,
+    color: '#59626A',
+    marginBottom: 10,
+  },
+  separator: {
+    ...StyleSheet.styles.separator,
+      marginRight: -15,
+      marginVertical: 10,
   },
 });
 

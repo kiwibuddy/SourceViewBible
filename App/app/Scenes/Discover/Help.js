@@ -44,20 +44,22 @@ const Help = (props: Props) => {
           <Text style={styles.contentBody}>The Discover screen is where your exploration begins. You can dive into the books of the Bible, learn more about the sources quoted in Scripture, or observe how biblical text influences the seven spheres of society.</Text>
           <Text style={styles.contentBody}>For each category, you can either tap “View All” to browse the complete list of items or tap on a tile for a closer look at a specific book, source, or sphere. You can swipe left and right to browse through some featured tiles in the category. And if you scroll to the bottom, you can learn more about SourceView.</Text>
           <View style={styles.separator} />
-          <Text style={styles.contentH2}>Book Tiles (visual, description w/ no punctuation) - e.g. Genesis</Text>
+          <Text style={styles.contentH2}>Books</Text>
           <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Color</Text> — Determined by which source type has the most words</Text>
           <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Name</Text> — Official name of the book in the Bible</Text>
           <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Read Time</Text> — Estimated amount of time needed to read the entire book</Text>
           <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Sources</Text> — The number of sources that are quoted in this book and a preview of amount</Text>
           <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Spheres</Text> — The percentage of the words in the book that connect to a sphere and a visual breakdown of relative distribution</Text>
           <Text style={styles.contentBody}>Tap anywhere on the tile to go to the Book Overview.</Text>
-          <Text style={styles.contentH2}>Source Tiles (visual, description w/ no punctuation) - e.g. David</Text>
-          <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Color</Text> —  Determined by role: black is the narrator, red is divine, green is a lead character, and blue plays a supporting role (icon also matches the role) </Text>
+          <View style={styles.separator} />
+          <Text style={styles.contentH2}>Sources</Text>
+          <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Color</Text> —  Determined by role: black is the narrator, red is divine, green is a lead character, and blue plays a supporting role (icon also matches the role)</Text>
           <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Name</Text> — Name of the biblical character</Text>
           <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Spheres</Text> — The percentage of the words by the source that connect to a sphere and a visual breakdown of relative distribution</Text>
           <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Words</Text> — The number of the words spoken by this source</Text>
           <Text style={styles.contentBody}>Tap anywhere on the tile to go to the Source Overview.</Text>
-          <Text style={styles.contentH2}>Sphere Tiles (visual, description w/ no punctuation) - e.g. Family</Text>
+          <View style={styles.separator} />
+          <Text style={styles.contentH2}>Spheres</Text>
           <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Color</Text> — Each sphere is identified by its own color</Text>
           <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Name</Text> — Name of the sphere</Text>
           <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Percentage</Text> — Amount of words in Scripture associated with this sphere</Text>
@@ -95,20 +97,20 @@ const styles = StyleSheet.create({
   contentHeader: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#59626a',
+    color: '#323B43',
     marginBottom: 5,
   },
   contentH2: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#59626a',
+    color: '#323B43',
     marginTop: 5,
     marginBottom: 5,
   },
   contentBody: {
     fontSize: 17,
     lineHeight: 24,
-    color: '#9B9B9B',
+    color: '#59626A',
     marginBottom: 10,
   },
   separator: {
