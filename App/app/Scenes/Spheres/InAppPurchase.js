@@ -26,9 +26,7 @@ import { NavigationBar, NavigationBarButton } from '../../Components/Navigation'
 import { BACK, sphereHelpURL } from '../../Navigation';
 
 import { Preference } from '../../Preferences';
-const { width } = Dimensions.get('window');
 const { width: WIDTH } = Dimensions.get('window');
-
 
 
 function openURL(url: string) {
@@ -141,21 +139,21 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   contentHeader: {
-    fontSize: (width <= 320 ? 24 : 27),
-    lineHeight: (width <= 320 ? 28 : 33),
+    fontSize: (WIDTH <= 320 ? 24 : 27),
+    lineHeight: (WIDTH <= 320 ? 28 : 33),
     fontWeight: 'bold',
     color: '#59626A',
     marginBottom: 5,
     textAlign: 'center',
-    marginTop: (width <= 320 ? 20 : 40),
+    marginTop: (WIDTH <= 320 ? 20 : 40),
     marginHorizontal: 20,
   },
   contentBody: {
-    fontSize: (width <= 320 ? 18 : 21),
-    lineHeight: (width <= 320 ? 21 : 25),
+    fontSize: (WIDTH <= 320 ? 18 : 21),
+    lineHeight: (WIDTH <= 320 ? 21 : 25),
     color: '#59626A',
     textAlign: 'center',
-    marginBottom: (width <= 320 ? 20 : 40),
+    marginBottom: (WIDTH <= 320 ? 20 : 40),
     marginHorizontal: 20,
   },
 });
