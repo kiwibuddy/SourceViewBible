@@ -39,8 +39,6 @@ const Help = (props: Props) => {
         <View style={styles.helpContainer}>
           <Text style={styles.contentHeader}>Discovery Center</Text>
           <Text style={styles.contentBody}>The Discovery Center is where you can go to dream up new ways to visualize what’s in the Bible. The visualizations you come up with are kept on cards. You can keep, duplicate, share, save, and delete the cards you create.</Text>
-          <View style={styles.separator} />
-          <Text style={styles.contentH2}>Creating Cards</Text>
           <View style={[styles.imageContainer, {marginBottom: 20}]}>
             <Image source={require('./Images/help-discoverycenter.png')}/>
           </View>
@@ -96,6 +94,11 @@ const styles = StyleSheet.create({
       marginRight: -15,
       marginVertical: 10,
   },
+  imageContainer: {
+    marginHorizontal: -15,
+    marginVertical: 10,
+    alignItems: 'center',
+  }
 });
 
 export default Help;
