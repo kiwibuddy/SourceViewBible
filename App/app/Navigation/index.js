@@ -6,7 +6,7 @@ const router = require('./router');
 
 import About from '../Scenes/About/About';
 import AboutAcknowledgments from '../Scenes/About/Acknowledgments';
-import AboutCopyright from '../Scenes/About/NLT';
+import AboutCopyright from '../Scenes/About/Copyright';
 import AboutNote from '../Scenes/About/Note';
 import AboutTerms from '../Scenes/About/Terms';
 import AboutWhy from '../Scenes/About/Why';
@@ -43,7 +43,7 @@ import SphereHelp from '../Scenes/Spheres/Help';
 import SphereInAppPurchase from '../Scenes/Spheres/InAppPurchase';
 
 export const aboutAcknowledgmentsURL = router.addRoute('/About/Acknowledgments', AboutAcknowledgments);
-export const aboutCopyrightURL = router.addRoute('/About/NLT', AboutCopyright);
+export const aboutCopyrightURL = router.addRoute('/About/Copyright', AboutCopyright);
 export const aboutNoteURL = router.addRoute('/About/Note', AboutNote);
 export const aboutTermsURL = router.addRoute('/About/Terms', AboutTerms);
 export const aboutWhyURL = router.addRoute('/About/Why', AboutWhy);

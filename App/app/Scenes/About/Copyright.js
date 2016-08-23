@@ -24,7 +24,7 @@ type Props = {
   navigate: Function,
 };
 
-const NLT = (props: Props) => {
+const Copyright = (props: Props) => {
   return (
     <View style={styles.container}>
       <NavigationBar title={props.title}>
@@ -99,4 +99,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NLT;
+export default Copyright;
