@@ -12,18 +12,26 @@ import {
 
 import {
   Colors,
+  Constants,
   Localizable,
   StyleSheet,
 } from '../../Common';
+const { Links } = Constants;
 
 import Icon from './Icon';
 import { aboutURL } from '../../Navigation';
+
+function openURL(url: string) {
+  Linking.openURL(url).catch(error => {
+
+  });
+}
 
 const HelpFooter = (props: Object) => {
   return (
     <View style={styles.footerContainer}>
       <View style={styles.separator} />
-      <TouchableOpacity style={styles.listItemContainer}>
+      <TouchableOpacity style={styles.listItemContainer} onPress={() => openURL(Links.Contact)}>
         <Icon
           name="about-contact"
           size={25}
@@ -45,7 +53,7 @@ const HelpFooter = (props: Object) => {
         </View>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={styles.donateContainer}>
+      <TouchableOpacity style={styles.donateContainer} onPress={() => openURL(Links.Donate)}>
         <Text style={[styles.contentHeader, {marginBottom: 0}]}>Help us</Text>
         <Text style={[styles.contentHeader, {marginTop: 0}]}>end Biblical poverty</Text>
         <Text style={styles.contentBody}>With your help we can ensure that more people around the world with smart phones can have access to the Bible.</Text>

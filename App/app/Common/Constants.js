@@ -23,7 +23,18 @@ const ReaderBaseLineHeight = 31;
 const ReaderFontStepSize = 2;
 const ReaderWebFontConversion = 13/17;
 
+const Links = {
+  Website: 'http://sourceviewbible.com',
+  Donate: 'http://sourceviewbible.com/donate',
+  Twitter: 'https://twitter.com/sourceviewbible',
+  Facebook: 'https://www.facebook.com/sourceviewbible',
+  Contact: 'mailto:support@sourceviewbible.com',
+  AppStore: 'itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1114617271&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software',
+  GooglePlay: 'http://www.google.com',
+};
+
 module.exports = {
+  Links,
   SourceType,
   SphereType,
   ReaderBaseFontSize,

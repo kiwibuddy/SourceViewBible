@@ -6,6 +6,7 @@ import React, { Component } from 'react';
 import {
   Image,
   Linking,
+  Platform,
   ScrollView,
   Text,
   View,
@@ -14,16 +15,15 @@ import {
 
 import {
   Colors,
+  Constants,
   Localizable,
   StyleSheet,
 } from '../../Common';
+const { Links } = Constants;
 
 import { NavigationBar, NavigationBarButton } from '../../Components/Navigation';
 import { BACK, aboutAcknowledgmentsURL, aboutNLTURL, aboutNoteURL, aboutTermsURL, aboutWhyURL } from '../../Navigation';
 import Icon from '../../Components/Common/Icon';
-
-const WEBSITE_URL = "http://www.sourceviewbible.com";
-const APPSTORE_URL = "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1114617271&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software";
 
 type Props = {
   title: string,
@@ -53,7 +53,7 @@ const About = (props: Props) => {
           <Text style={styles.contentBody}>The SourceView Bible app exists to help you observe and discover the character of God by exploring His Word. May it draw you close to Him and affirm your role in God's continuing dramatic narrative.</Text>
         </View>
         <View style={styles.separator} />
-        <TouchableOpacity style={styles.listItemContainer} onPress={() => openURL(APPSTORE_URL)}>
+        <TouchableOpacity style={styles.listItemContainer} onPress={() => openURL(Links.AppStore)}>
           <Icon
             name="about-rate-ios"
             size={25}
@@ -64,7 +64,7 @@ const About = (props: Props) => {
           </View>
         </TouchableOpacity>
         <View style={styles.separator} />
-        <TouchableOpacity style={styles.listItemContainer}>
+        {/* <TouchableOpacity style={styles.listItemContainer} onPress={() => openURL(Links.GooglePlay)}>
           <Icon
             name="about-rate-android"
             size={25}
@@ -74,8 +74,8 @@ const About = (props: Props) => {
             <Text style={StyleSheet.styles.cell.title}>Leave a rating in Google Play</Text>
           </View>
         </TouchableOpacity>
-        <View style={styles.separator} />
-        <TouchableOpacity style={styles.listItemContainer}>
+        <View style={styles.separator} /> */}
+        <TouchableOpacity style={styles.listItemContainer} onPress={() => openURL(Links.Donate)}>
           <Icon
             name="about-donate"
             size={25}
@@ -86,7 +86,7 @@ const About = (props: Props) => {
           </View>
         </TouchableOpacity>
         <View style={styles.separator} />
-        <TouchableOpacity style={styles.listItemContainer}>
+        <TouchableOpacity style={styles.listItemContainer} onPress={() => openURL(Links.Contact)}>
           <Icon
             name="about-contact"
             size={25}
@@ -100,7 +100,7 @@ const About = (props: Props) => {
         <View style={styles.sectionHeaderContainer}>
           <Text style={StyleSheet.styles.sectionHeaderTitle}>CONNECT WITH SOURCEVIEW</Text>
         </View>
-        <TouchableOpacity style={styles.listItemContainer}>
+        <TouchableOpacity style={styles.listItemContainer} onPress={() => openURL(Links.Facebook)}>
           <Icon
             name="about-fb"
             size={25}
@@ -111,7 +111,7 @@ const About = (props: Props) => {
           </View>
         </TouchableOpacity>
         <View style={styles.separator} />
-        <TouchableOpacity style={styles.listItemContainer}>
+        <TouchableOpacity style={styles.listItemContainer} onPress={() => openURL(Links.Twitter)}>
           <Icon
             name="about-twitter"
             size={25}
@@ -122,7 +122,7 @@ const About = (props: Props) => {
           </View>
         </TouchableOpacity>
         <View style={styles.separator} />
-        <TouchableOpacity style={styles.listItemContainer} onPress={() => openURL(WEBSITE_URL)}>
+        <TouchableOpacity style={styles.listItemContainer} onPress={() => openURL(Links.Website)}>
           <Icon
             name="about-web"
             size={25}
