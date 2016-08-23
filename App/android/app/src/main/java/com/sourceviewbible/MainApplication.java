@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
+import co.instea.RNAppInfo.RNAppInfoPackage;
 import com.smixx.fabric.FabricPackage;
 import org.pgsqlite.SQLitePluginPackage;
 import com.rnfs.RNFSPackage;
@@ -33,6 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+          new RNAppInfoPackage(),
           new SQLitePluginPackage(),
           new FabricPackage(),
           new RNFSPackage(),
