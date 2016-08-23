@@ -65,7 +65,9 @@ const DropdownButton = (props: DropdownButtonProps) => {
   return (
     <TouchableOpacity disabled={!props.onPress} {...props}>
       <Image style={styles.chartIcon} source={props.image} />
-      <Text numberOfLines={1} style={styles.chartProperty}>{props.title}</Text>
+      <View style={{flex: 1, flexWrap: 'wrap'}}>
+        <Text numberOfLines={2} style={styles.chartProperty}>{props.title}</Text>        
+      </View>
       {enabled}
     </TouchableOpacity>
   )
