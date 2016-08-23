@@ -10,7 +10,7 @@ import {
 
 import { NavigationBar, Toolbar, ToolbarButton } from '../Navigation';
 
-import router, { BACK, sphereInAppPurchaseURL } from '../../Navigation';
+import router, { BACK, discoverURL, onboardingURL, sphereInAppPurchaseURL } from '../../Navigation';
 
 import {
   Analytics,
@@ -21,15 +21,27 @@ import {
 
 import { History, Preference } from '../../Preferences';
 
+type State = {
+  navigation: Object
+};
+
 export default class App extends Component {
-  state = {
-    navigation: {
-      index: 0,
-      routes: [
-        {path: '/Discover', title: Localizable.t('discover')},
-      ],
-    }
-  };
+  state: State;
+
+  constructor(props: Object) {
+    super(props);
+
+    const onboarded = Preference.booleanForKey(Preference.Keys.Launch.Onboarded);
+    const route = (onboarded ? discoverURL({title: Localizable.t('discover')}) : onboardingURL({title: 'Onboarding', modal: true}));
+    this.state = {
+      navigation: {
+        index: 0,
+        routes: [
+          route
+        ],
+      }
+    };
+  }
 
   render() {
     const { navigation } = this.state;

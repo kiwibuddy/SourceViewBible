@@ -9,6 +9,9 @@ import {
 
 const PREFIX = 'com.sourceviewbible.preferences.';
 const Keys = {
+  Launch: {
+    Onboarded: PREFIX + 'launch.onboarded',
+  },
   Discover: {
     RefreshDate: PREFIX + 'discover.refreshdate',
     Books: PREFIX + 'discover.books',

@@ -22,6 +22,7 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import PageControl from '../../Components/Common/PageControl';
 import { BACK, discoverURL } from '../../Navigation';
+import { Preference } from '../../Preferences';
 
 const { width: WIDTH } = Dimensions.get('window');
 const SCROLLVIEW_REF = 'SCROLLVIEW_REF';
@@ -154,6 +155,7 @@ export default class Onboarding extends Component {
   };
 
   _onPressDone = () => {
+    Preference.setBooleanForKey(true, Preference.Keys.Launch.Onboarded)
     this.props.navigate(discoverURL({title: Localizable.t('discover')}), {replace: true});
   };
 }
