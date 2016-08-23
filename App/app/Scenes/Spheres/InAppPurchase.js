@@ -54,10 +54,10 @@ export default class InAppPurchase extends Component {
       <View style={styles.contentContainer}>
         <Image source={require('./Images/sphere-iap-header.png')} />
         <Text style={styles.contentHeader}>Uses spheres free for a limited time</Text>
-        <Text style={styles.contentBody}>Spheres are a brand new way to see and experience the Bible. You will be able to explore the God's word through topics like Family, Government, Education, etc.</Text>
+        <Text style={styles.contentBody}>Spheres provide the data for people to meditate on and draw their conclusions with God as they seek to understand what God says about each sphere of society.</Text>
         <View style={styles.buyControls}>
           <TouchableOpacity onPress={this._onPressBuy} style={[styles.buyButton, {width: 200}]}>
-            <Text style={styles.buyButtonTitle}>Continue</Text>
+            <Text style={styles.buyButtonTitle}>Start using Spheres</Text>
           </TouchableOpacity>
           <TouchableOpacity>
             <Text style={styles.learnButton}>Learn more</Text>
@@ -73,8 +73,11 @@ export default class InAppPurchase extends Component {
     return (
       <View style={styles.contentContainer}>
         <Image source={require('./Images/sphere-iap-header.png')} />
-        <Text style={styles.contentHeader}>Download new version of SourceView</Text>
-        <Text style={styles.contentBody}>Spheres are a brand new way to see and experience the Bible. You will be able to explore the God's word through topics like Family, Government, Education, etc.</Text>
+        <Text style={styles.contentHeader}>A new version of SourceView is Available</Text>
+        <Text style={styles.contentBody}>The limited time free use of Spheres has expired. In order to continue using the Spheres data set you will need to update to the latest version of SourceView Bible</Text>
+        <TouchableOpacity onPress={this._onPressBuy} style={[styles.buyButton, {width: 200}]}>
+          <Text style={styles.buyButtonTitle}>Download</Text>
+        </TouchableOpacity>
       </View>
     );
   }
