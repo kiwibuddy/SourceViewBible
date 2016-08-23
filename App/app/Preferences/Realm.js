@@ -3,6 +3,8 @@
 
 import { Platform } from 'react-native';
 import Realm from 'realm';
+import Fabric from 'react-native-fabric';
+const { Answers } = Fabric;
 
 import moment from 'moment';
 
@@ -199,6 +201,8 @@ export class History extends Realm.Object {
     realm.write(() => {
       realm.create('History', history, true);
     });
+
+    // Answers.logContentView(route.title, 'To-Do', route.path);
   }
 
   get route(): Object {
