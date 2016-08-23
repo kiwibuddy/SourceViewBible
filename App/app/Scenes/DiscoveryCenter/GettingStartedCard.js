@@ -36,9 +36,6 @@ const GettingStartedCard = (props: Props) => {
         <View style={styles.videoImage}>
           <Image source={require('./Images/video-header-dc.png')} />
         </View>
-        <TouchableOpacity style={styles.videoPlay}>
-          <Image source={require('../../Images/common/btn-play.png')} />
-        </TouchableOpacity>
       </View>
       <View style={styles.gettingstartedContainer}>
         <Image style={styles.gettingstartedIcon} source={require('./Images/dc-icon.png')} />
