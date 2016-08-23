@@ -33,7 +33,7 @@ import SourceIcon from '../../Components/Common/SourceIcon';
 
 import FilterBar from './FilterBar';
 
-import { BACK, sourceHelpURL, occurrencesURL, readerURL, sourceURL, sourceBooksURL, sourceConversationsURL, sourceSpheresURL, sourceWordsURL } from '../../Navigation';
+import { BACK, bookURL, sourceHelpURL, occurrencesURL, readerURL, sourceURL, sourceBooksURL, sourceConversationsURL, sourceSpheresURL, sourceWordsURL } from '../../Navigation';
 
 import * as Navigation from '../../Components/Navigation';
 const NavigationBar = (props: Props) => {
@@ -292,13 +292,14 @@ export default class SourceOverview extends Component {
       <TouchableOpacity onPress={() => this._onPressBook(book)}>
         <View style={[styles.sourcesCellContainer, {paddingVertical: 15, paddingLeft: 15}]}>
           <View style={styles.sourcesLeftContainer}>
-            <Icon
-              name="books"
-              source={source}
-              color={principalColor.tint}
-              size={20}
-              style={[styles.sourceAvatar]}
-            />
+            <TouchableOpacity onPress={() => this._onPressBookIcon(book)}>
+              <Icon
+                name="books"
+                color={principalColor.tint}
+                size={20}
+                style={[styles.sourceAvatar]}
+              />
+            </TouchableOpacity>
             <View style={styles.sourcesContent}>
               <Text style={StyleSheet.styles.cell.titlemedium}>{book.name}</Text>
             </View>
@@ -433,6 +434,10 @@ export default class SourceOverview extends Component {
     const occurrences = await query.occurrences();
     this._navigateReader(occurrences);
   };
+
+  _onPressBookIcon = (book: Object) => {
+    this.props.navigate(bookURL({bookID: book.id, title: book.name}));
+  }
 
   _navigateReader = (occurrences: Object) => {
     if (occurrences.length > 0) {

@@ -15,6 +15,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { ListView } from '../../Components/Common/DatabaseListView';
+import Icon from '../../Components/Common/Icon';
 
 const { width: WIDTH } = Dimensions.get('window');
 
@@ -32,7 +33,7 @@ import { BarChart, PieChart } from '../../Components/Charts';
 // $FlowFixMe: - Flow can't find os module extension
 import SegmentedControl from '../../Components/Common/SegmentedControl';
 
-import { readerURL } from '../../Navigation';
+import { bookURL, readerURL } from '../../Navigation';
 
 import { Book, Sphere } from '../../Database';
 
@@ -173,12 +174,23 @@ export default class SphereBooks extends Component {
     const wordCount = this._getCountOfBook(book);
     const spherePercent = this._getPercentOfBook(book);
     const colors = Colors.spheres[sphere.id];
+    const principalColor = Colors.sources[book.principalSourceType];
 
     return (
       <TouchableOpacity style={styles.section} onPress={() => this._onPressBook(book)}>
         <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
           <View style={styles.sourcesLeftContainer}>
-            <Text style={StyleSheet.styles.cell.title}>{book.name}</Text>
+            <TouchableOpacity onPress={() => this._onPressBookIcon(book)}>
+              <Icon
+                name="books"
+                color={principalColor.tint}
+                size={20}
+                style={[styles.sourceAvatar]}
+              />
+            </TouchableOpacity>
+            <View style={styles.sourcesContent}>
+              <Text style={StyleSheet.styles.cell.titlemedium}>{book.name}</Text>
+            </View>
           </View>
           <View style={styles.sourcesRightContainer}>
             <BarChart
@@ -259,6 +271,10 @@ export default class SphereBooks extends Component {
     Preference.setObjectForKey([this.state.sphere.id], Preference.Keys.Reader.spheres);
     this.props.navigate(readerURL({bookID: book.id, anchor: 'chapter-1', title: book.name}));
   };
+
+  _onPressBookIcon = (book: Object) => {
+    this.props.navigate(bookURL({bookID: book.id, title: book.name}));
+  }
 }
 
 const styles = StyleSheet.create({
@@ -297,6 +313,11 @@ const styles = StyleSheet.create({
   },
   sourcesRightContainer: {
     flex: 2,
+  },
+  sourcesContent: {
+    flex: 1,
+    flexWrap: 'wrap',
+    marginRight: 8,
   },
   sourceAvatar: {
     width: 20,

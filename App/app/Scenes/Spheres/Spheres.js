@@ -262,11 +262,20 @@ export default class Spheres extends Component {
     const colors = Colors.spheres[sphere.id];
     const wordCount = sphere.countOfBook(book.id);
     const spherePercent = (wordCount / book.wordCount) * 100;
+    const principalColor = Colors.sources[book.principalSourceType];
 
     return (
       <TouchableOpacity key={book.id} style={styles.section} onPress={() => this._onPressBook(book)}>
         <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
           <View style={styles.sourcesLeftContainer}>
+            <TouchableOpacity onPress={() => this._onPressBookIcon(book)}>
+              <Icon
+                name="books"
+                color={principalColor.tint}
+                size={20}
+                style={[styles.sourceAvatar]}
+              />
+            </TouchableOpacity>
             <View style={styles.sourcesContent}>
               <Text style={StyleSheet.styles.cell.titlemedium}>{book.name}</Text>
             </View>
@@ -378,6 +387,10 @@ export default class Spheres extends Component {
     Preference.setObjectForKey([this.state.sphere.id], Preference.Keys.Reader.spheres);
     this.props.navigate(readerURL({bookID: book.id, anchor: 'chapter-1', title: book.name}));
   };
+
+  _onPressBookIcon = (book: Object) => {
+    this.props.navigate(bookURL({bookID: book.id, title: book.name}));
+  }
 
   _onPressSource = (source: Object) => {
     const book = source.books[0];
