@@ -57,7 +57,7 @@ const Help = (props: Props) => {
           <View style={styles.separator} />
           <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Note:</Text> We do not manage personal accounts at this time, so there is no automatic way to share the cards you create across all of your devices. The cards you create on this phone are stored on this device only. You would have to recreate them to put them on additional devices.</Text>
         </View>
-        <HelpFooter />
+        <HelpFooter navigate={props.navigate} />
       </ScrollView>
     </View>
   );

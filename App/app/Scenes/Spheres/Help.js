@@ -40,7 +40,7 @@ const Help = (props: Props) => {
           <Text style={styles.contentHeader}>Spheres Overview</Text>
           <Text style={styles.contentBody}>...</Text>
         </View>
-        <HelpFooter />
+        <HelpFooter navigate={props.navigate} />
       </ScrollView>
     </View>
   );

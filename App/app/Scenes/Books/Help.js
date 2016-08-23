@@ -50,7 +50,7 @@ const Help = (props: Props) => {
           <Text style={styles.contentH2}>SPHERES</Text>
           <Text style={styles.contentBody}>Tap on the sphere percentage to see how the seven societal spheres show up in this book. Spheres information is not included and requires an in-app purchase. Your purchase helps SourceView continue its work and is much appreciated. Tap on the percentage to learn more about Spheres.</Text>
         </View>
-        <HelpFooter />
+        <HelpFooter navigate={props.navigate} />
       </ScrollView>
     </View>
   );

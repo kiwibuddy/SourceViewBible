@@ -54,7 +54,7 @@ const Help = (props: Props) => {
           <Text style={styles.contentH2}>RELATED SOURCES</Text>
           <Text style={styles.contentBody}>When a source speaks, there’s always an intended recipient. SourceView has mapped out who the recipients are for every quoted occurrence in Scripture. This allows you to craft your own studies and observations around the original recipients of quoted text.</Text>
         </View>
-        <HelpFooter />
+        <HelpFooter navigate={props.navigate} />
       </ScrollView>
     </View>
   );
