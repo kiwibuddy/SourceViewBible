@@ -209,18 +209,19 @@ History.schema = HistorySchema;
 
 const Schema = [Discovery, Preference, History];
 
-let encryptionKey = Emdros.preferencesKey;
-if (__DEV__) {
-  encryptionKey = null;
-}
-
-const realm = new Realm({
+const options = {
   schema: Schema,
-  encryptionKey,
   schemaVersion: 1,
   migration: function(oldRealm, newRealm) {
   }
-});
+};
+
+if (!__DEV__) {
+  // $FlowFixMe - Silence warning
+  options['encryptionKey'] = Emdros.preferencesKey;
+}
+
+const realm = new Realm(options);
 
 if (__DEV__) {
   console.log('Preferences', realm.path);
