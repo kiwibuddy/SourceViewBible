@@ -64,7 +64,7 @@ export default class Discovery extends Component {
 
         <TouchableOpacity style={styles.aboutContainer} onPress={() => this.props.navigate(aboutURL({title: Localizable.t('about-sourceview'), modal: true}))}>
           <Text style={styles.copyright}>SourceView Publishing, LLC ©2016</Text>
-          <Text style={styles.copyright}>Version 1.0 (Build 1875)</Text>
+          <Text style={styles.copyright}>Version 1.0</Text>
           <Text style={styles.button}>Learn More</Text>
         </TouchableOpacity>
 
