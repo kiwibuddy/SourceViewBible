@@ -77,9 +77,10 @@ public class MainActivity extends ReactActivity {
         String realmDestinationPath = filesDirectoryPath + "/Datasets/en/NLT/SourceView.realm";
         copyAsset(realmSourcePath, realmDestinationPath);
 
-        String sqliteSourcePath = "sourceview/Datasets/en/NLT/SourceView.sqlite3";
-        String sqliteDestinationPath = filesDirectoryPath + "/Datasets/en/NLT/SourceView.sqlite3";
-        copyAsset(sqliteSourcePath, sqliteDestinationPath);
+        // We do not need to copy the file over. react-native-sqlite-storage will do that for us.
+        // String sqliteSourcePath = "sourceview/Datasets/en/NLT/SourceView.sqlite3";
+        // String sqliteDestinationPath = filesDirectoryPath + "/Datasets/en/NLT/SourceView.sqlite3";
+        // copyAsset(sqliteSourcePath, sqliteDestinationPath);
     }
 
     /**

@@ -1,3 +1,8 @@
+/* @flow */
+'use strict';
+
+import { Platform } from 'react-native';
+
 import SQLite from 'react-native-sqlite-storage';
 
 import Predicate from './Predicate';
@@ -5,7 +10,9 @@ import ComparisonPredicate from './ComparisonPredicate';
 import CompoundPredicate from './CompoundPredicate';
 import WordPredicate from './WordPredicate';
 
-const database = SQLite.openDatabase({name : "SourceView", readOnly: true, createFromLocation : "~Datasets/en/NLT/SourceView.sqlite3"});
+const createFromLocation = Platform.OS === 'android' ? '~/sourceview/Datasets/en/NLT/SourceView.sqlite3' : '~/Datasets/en/NLT/SourceView.sqlite3';
+
+const database = SQLite.openDatabase({name : 'en-NLT-SourceView.sqlite3', readOnly: true, createFromLocation});
 export default database;
 
 export async function rowsWithSQL(sql: string, params?: any) {
