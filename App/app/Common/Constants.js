@@ -29,7 +29,8 @@ const Links = {
   Twitter: 'https://twitter.com/sourceviewbible',
   Facebook: 'https://www.facebook.com/sourceviewbible',
   Contact: 'mailto:support@sourceviewbible.com',
-  AppStore: 'itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1114617271&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software',
+  AppStore: 'https://itunes.apple.com/us/app/sourceview-bible/id1114617271?ls=1&mt=8',
+  AppStoreRating: 'itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1114617271&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software',
   GooglePlay: 'http://www.google.com',
 };
 

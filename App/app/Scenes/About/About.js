@@ -55,7 +55,7 @@ const About = (props: Props) => {
           <Text style={styles.contentBody}>The SourceView Bible app exists to help you observe and discover the character of God by exploring His Word. May it draw you close to Him and affirm your role in God's continuing dramatic narrative.</Text>
         </View>
         <View style={styles.separator} />
-        <TouchableOpacity style={styles.listItemContainer} onPress={() => openURL(Links.AppStore)}>
+        <TouchableOpacity style={styles.listItemContainer} onPress={() => openURL(Links.AppStoreRating)}>
           <Icon
             name="about-rate-ios"
             size={25}
@@ -66,7 +66,7 @@ const About = (props: Props) => {
           </View>
         </TouchableOpacity>
         <View style={styles.separator} />
-        {/* <TouchableOpacity style={styles.listItemContainer} onPress={() => openURL(Links.GooglePlay)}>
+        {/* <TouchableOpacity style={styles.listItemContainer} onPress={() => openURL(Links.GooglePlayRating)}>
           <Icon
             name="about-rate-android"
             size={25}

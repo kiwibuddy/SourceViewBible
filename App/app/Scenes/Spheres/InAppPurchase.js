@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 
 import {
   Image,
+  Linking,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -12,15 +13,25 @@ import {
 } from 'react-native'
 
 import {
+  Analytics,
   Colors,
+  Constants,
   Localizable,
   StyleSheet,
 } from '../../Common';
+const { Links } = Constants;
 
 import { NavigationBar, NavigationBarButton } from '../../Components/Navigation';
 import { BACK, sphereHelpURL } from '../../Navigation';
 
 import { Preference } from '../../Preferences';
+
+function openURL(url: string) {
+  Linking.openURL(url).catch(error => {
+
+  });
+  Analytics.logCustom('Link', {url});
+}
 
 type Props = {
   title: string,
@@ -75,7 +86,7 @@ export default class InAppPurchase extends Component {
         <Image source={require('./Images/sphere-iap-header.png')} />
         <Text style={styles.contentHeader}>A new version of SourceView is Available</Text>
         <Text style={styles.contentBody}>The limited time free use of Spheres has expired. In order to continue using the Spheres data set you will need to update to the latest version of SourceView Bible</Text>
-        <TouchableOpacity onPress={this._onPressBuy} style={[styles.buyButton, {width: 200}]}>
+        <TouchableOpacity onPress={() => openURL(Links.AppStore)} style={[styles.buyButton, {width: 200}]}>
           <Text style={styles.buyButtonTitle}>Download</Text>
         </TouchableOpacity>
       </View>
