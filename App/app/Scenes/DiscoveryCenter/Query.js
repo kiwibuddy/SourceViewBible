@@ -656,13 +656,16 @@ export default class Query {
           break;
 
         case 'book':
-          whereClause.where(ComparisonPredicate.predicateWith('bso.first', '>=', filter.book.firstMonad));
-          whereClause.where(ComparisonPredicate.predicateWith('bso.last', '<=', filter.book.lastMonad));
+          const book = Book.findByID(filter.book);
+          whereClause.where(ComparisonPredicate.predicateWith('bso.first', '>=', book.firstMonad));
+          whereClause.where(ComparisonPredicate.predicateWith('bso.last', '<=', book.lastMonad));
           break;
 
         case 'book-range':
-          whereClause.where(ComparisonPredicate.predicateWith('bso.first', '>=', filter.books.from.firstMonad));
-          whereClause.where(ComparisonPredicate.predicateWith('bso.last', '<=', filter.books.to.lastMonad));
+          const from = Book.findByID(filter.books.from);
+          const to = Book.findByID(filter.books.to);
+          whereClause.where(ComparisonPredicate.predicateWith('bso.first', '>=', from.firstMonad));
+          whereClause.where(ComparisonPredicate.predicateWith('bso.last', '<=', to.lastMonad));
           break;
 
         case 'chronology':

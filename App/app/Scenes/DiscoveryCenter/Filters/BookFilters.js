@@ -26,15 +26,12 @@ type Props = {
 };
 
 function filterBooks(fromID: string, toID: string) {
-  const from = Book.findByID(fromID);
-  const to = Book.findByID(toID);
-
   return ({
     id: 'filter-' + Date.now(),
     type: 'book-range',
     books: {
-      from: from,
-      to: to
+      from: fromID,
+      to: toID
     }
   });
 }

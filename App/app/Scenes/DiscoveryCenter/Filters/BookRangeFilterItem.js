@@ -16,6 +16,7 @@ import {
 } from '../../../Common';
 
 import { booksFilterURL } from '../../../Navigation';
+import { Book } from '../../../Database';
 
 type Props = {
   filter: Object,
@@ -24,7 +25,9 @@ type Props = {
 };
 
 const BookRangeFilterItem = (props: Props) => {
-  const { from, to } = props.filter.books;
+  const { from: fromID, to: toID } = props.filter.books;
+  const from = Book.findByID(fromID);
+  const to = Book.findByID(toID);
 
   return (
     <View>

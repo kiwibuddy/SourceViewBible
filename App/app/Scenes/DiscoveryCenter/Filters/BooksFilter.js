@@ -37,6 +37,9 @@ import { cardWithFilter } from './FilterUtils';
 import { Book } from '../../../Database';
 
 type Props = {
+  card: Object,
+  filter: Object,
+  item: Object,
   navigate: Function,
   onDone: Function,
 };
@@ -128,16 +131,16 @@ export default class Books extends Component {
       if (this.props.item === 'from') {
         filter.books = {
           ...filter.books,
-          from: book,
+          from: book.id,
         };
       } else {
         filter.books = {
           ...filter.books,
-          to: book,
+          to: book.id,
         };
       }
     } else {
-      filter.book = book;
+      filter.book = book.id;
     }
 
     this.props.onDone(cardWithFilter(this.props.card, filter));
