@@ -119,7 +119,29 @@ android {
     }
 }
 
+/* Fabric */
+buildscript {
+ repositories {
+   maven { url 'https://maven.fabric.io/public' }
+ }
+ dependencies {
+   // The Fabric Gradle plugin uses an open ended version to react
+   // quickly to Android tooling updates
+   classpath 'io.fabric.tools:gradle:1.+'
+ }
+}
+apply plugin: 'io.fabric'
+repositories {
+ maven { url 'https://maven.fabric.io/public' }
+}
+/* Fabric */
+
+
 dependencies {
+    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
+       transitive = true;
+    }
+
     compile project(':react-native-sqlite-storage')
     compile project(':react-native-fabric')
     compile project(':react-native-fs')

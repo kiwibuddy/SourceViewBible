@@ -21,6 +21,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.File;
 
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
+
 public class MainActivity extends ReactActivity {
     protected void copyAsset(String sourcePath, String destinationPath) {
       try {
@@ -62,6 +65,8 @@ public class MainActivity extends ReactActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Fabric.with(this, new Crashlytics());
+
         String filesDirectoryPath = getFilesDir().toString();
 
         String emdrosSourcePath = "sourceview/Datasets/en/NLT/SourceView.bpt";
@@ -71,6 +76,10 @@ public class MainActivity extends ReactActivity {
         String realmSourcePath = "sourceview/Datasets/en/NLT/SourceView.realm";
         String realmDestinationPath = filesDirectoryPath + "/Datasets/en/NLT/SourceView.realm";
         copyAsset(realmSourcePath, realmDestinationPath);
+
+        String sqliteSourcePath = "sourceview/Datasets/en/NLT/SourceView.sqlite3";
+        String sqliteDestinationPath = filesDirectoryPath + "/Datasets/en/NLT/SourceView.sqlite3";
+        copyAsset(sqliteSourcePath, sqliteDestinationPath);
     }
 
     /**
