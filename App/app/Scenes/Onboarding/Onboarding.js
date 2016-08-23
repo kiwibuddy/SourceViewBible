@@ -19,6 +19,7 @@ import {
   StyleSheet,
 } from '../../Common';
 
+// $FlowFixMe: Can't find os module extension
 import LinearGradient from 'react-native-linear-gradient';
 import PageControl from '../../Components/Common/PageControl';
 import { BACK, discoverURL } from '../../Navigation';
@@ -138,21 +139,28 @@ export default class Onboarding extends Component {
     const { currentPage } = this.state;
     const offset = (currentPage + 1) * WIDTH;
 
-    this.refs[SCROLLVIEW_REF].scrollTo({x: offset, animated: true});
+    console.log('currentPage', currentPage);
+    console.log('width', WIDTH);
+    console.log('offset', offset);
+
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    this.setState({currentPage: currentPage + 1}, () => {
+      this.refs[SCROLLVIEW_REF].scrollTo({x: offset, animated: true});
+    });
   };
 
   _onScrollEnd = (e: Object) => {
+    const { currentPage } = this.state;
     // making our events coming from android compatible to updateIndex logic
     if (!e.nativeEvent.contentOffset) {
       e.nativeEvent.contentOffset = {x: e.nativeEvent.position * WIDTH}
     }
 
-    const currentPage = Math.floor((e.nativeEvent.contentOffset.x - WIDTH / 2) / WIDTH) + 1;
-
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    this.setState({
-      currentPage: currentPage
-    });
+    const page = Math.floor((e.nativeEvent.contentOffset.x - WIDTH / 2) / WIDTH) + 1;
+    if (currentPage != page) {
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+      this.setState({currentPage: page});
+    }
   };
 
   _onPressDone = () => {
@@ -223,5 +231,3 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
 });
-
-export default Onboarding;
