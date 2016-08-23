@@ -25,7 +25,7 @@ import { BACK, discoverURL } from '../../Navigation';
 
 const { width: WIDTH } = Dimensions.get('window');
 const SCROLLVIEW_REF = 'SCROLLVIEW_REF';
-const NUMBER_OF_PAGES = 5;
+const NUMBER_OF_PAGES = 4;
 
 type Props = {
   title: string,
