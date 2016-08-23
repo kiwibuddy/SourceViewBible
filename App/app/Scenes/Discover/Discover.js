@@ -17,13 +17,14 @@ import {
   Localizable
 } from '../../Common';
 
+import AppInfo from 'react-native-app-info';
+
 import DiscoverBooks from './DiscoverBooks';
 import DiscoverSources from './DiscoverSources';
 import DiscoverSpheres from './DiscoverSpheres';
 
 import * as Navigation from '../../Components/Navigation';
 import { aboutURL, discoverHelpURL } from '../../Navigation';
-
 import { Preference } from '../../Preferences';
 
 const NavigationBar = (props: Props) => {
@@ -64,7 +65,7 @@ export default class Discovery extends Component {
 
         <TouchableOpacity style={styles.aboutContainer} onPress={() => this.props.navigate(aboutURL({title: Localizable.t('about-sourceview'), modal: true}))}>
           <Text style={styles.copyright}>SourceView Publishing, LLC ©2016</Text>
-          <Text style={styles.copyright}>Version 1.0</Text>
+          <Text style={styles.copyright}>Version {AppInfo.getInfoShortVersion()} ({AppInfo.getInfoVersion()})</Text>
           <Text style={styles.button}>Learn More</Text>
         </TouchableOpacity>
 

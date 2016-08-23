@@ -29,6 +29,7 @@
 		374C47E00EB14A068E050118 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D7D885A3BBA43058173182B /* Octicons.ttf */; };
 		3E85A9D5908A49B4936D9005 /* libSQLite.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E28DEC24DAC74529960DC389 /* libSQLite.a */; };
 		4380B6EE3DC44C079D7632D2 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B29CB1467D740F6B9F0D4A1 /* libsqlite3.0.tbd */; };
+		6274968386744E08B7135955 /* libRNAppInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F7916BF5805D4AEBA008E4D9 /* libRNAppInfo.a */; };
 		6274C4694D4844B6A806B358 /* libRNI18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE4C78311794C1C9C0D3EA7 /* libRNI18n.a */; };
 		6288D19CD2CD43F5B08CDE31 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB3CA4A942E240D38E5D7D21 /* Foundation.ttf */; };
 		6B60E600E816427C906E6716 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AD6E3E13454A452CB389694B /* MaterialIcons.ttf */; };
@@ -207,6 +208,20 @@
 			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
 			remoteInfo = RNVectorIcons;
 		};
+		ABD69AAE1D6C7B6600610805 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08C9D3F64A104027BD9F7DAC /* RNAppInfo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDD7BF781B2D5125006FDA75;
+			remoteInfo = RNAppInfo;
+		};
+		ABD69AB01D6C7B6600610805 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08C9D3F64A104027BD9F7DAC /* RNAppInfo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDD7BF831B2D5126006FDA75;
+			remoteInfo = RNAppInfoTests;
+		};
 		ABE0009F1CF2565C008130F2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A9A33584A2C4D71B289C392 /* BVLinearGradient.xcodeproj */;
@@ -228,6 +243,7 @@
 		00E356F21AD99517003FC87E /* SourceViewBibleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SourceViewBibleTests.m; sourceTree = "<group>"; };
 		02B51CCD517B4E8FBB03C4EE /* libz.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		056AFA74DE9B49BAAD61D488 /* libRNFS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFS.a; sourceTree = "<group>"; };
+		08C9D3F64A104027BD9F7DAC /* RNAppInfo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNAppInfo.xcodeproj; path = "../node_modules/react-native-app-info/RNAppInfo.xcodeproj"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* SourceViewBible.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SourceViewBible.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -273,6 +289,7 @@
 		E28DEC24DAC74529960DC389 /* libSQLite.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSQLite.a; sourceTree = "<group>"; };
 		E2E9D15626524BD9B579D678 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		E4DDB070ECE646E29D8F3A2C /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		F7916BF5805D4AEBA008E4D9 /* libRNAppInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNAppInfo.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -315,6 +332,7 @@
 				4380B6EE3DC44C079D7632D2 /* libsqlite3.0.tbd in Frameworks */,
 				3E85A9D5908A49B4936D9005 /* libSQLite.a in Frameworks */,
 				A57E6CCB4BED43EC84107B72 /* libSMXCrashlytics.a in Frameworks */,
+				6274968386744E08B7135955 /* libRNAppInfo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,6 +478,7 @@
 				9F768B78912C477AA838DE7A /* RNFS.xcodeproj */,
 				B00300C7C8534F299DF4A596 /* SQLite.xcodeproj */,
 				7A9DDFE78331427693555E7F /* SMXCrashlytics.xcodeproj */,
+				08C9D3F64A104027BD9F7DAC /* RNAppInfo.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -572,6 +591,15 @@
 			isa = PBXGroup;
 			children = (
 				ABCA9D531CF8F37700A645D6 /* libRNVectorIcons.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ABD69A9D1D6C7B6600610805 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ABD69AAF1D6C7B6600610805 /* libRNAppInfo.a */,
+				ABD69AB11D6C7B6600610805 /* RNAppInfoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -717,6 +745,10 @@
 				{
 					ProductGroup = 825F36861D4426D60002894A /* Products */;
 					ProjectRef = 8B6CCF53DA0C42F7B29F6EB4 /* RealmReact.xcodeproj */;
+				},
+				{
+					ProductGroup = ABD69A9D1D6C7B6600610805 /* Products */;
+					ProjectRef = 08C9D3F64A104027BD9F7DAC /* RNAppInfo.xcodeproj */;
 				},
 				{
 					ProductGroup = 825F369B1D4426D60002894A /* Products */;
@@ -892,6 +924,20 @@
 			remoteRef = ABCA9D521CF8F37700A645D6 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		ABD69AAF1D6C7B6600610805 /* libRNAppInfo.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNAppInfo.a;
+			remoteRef = ABD69AAE1D6C7B6600610805 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		ABD69AB11D6C7B6600610805 /* RNAppInfoTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RNAppInfoTests.xctest;
+			remoteRef = ABD69AB01D6C7B6600610805 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		ABE000A01CF2565C008130F2 /* libBVLinearGradient.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1021,6 +1067,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SourceViewBible.app/SourceViewBible";
@@ -1037,6 +1084,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -1067,6 +1115,7 @@
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
 					"$(SRCROOT)/../node_modules/react-native-sqlite-storage/src/ios",
 					"$(SRCROOT)/../node_modules/react-native-fabric/ios/SMXCrashlytics",
+					"$(SRCROOT)/../node_modules/react-native-app-info/RNAppInfo",
 				);
 				INFOPLIST_FILE = SourceViewBible/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1097,6 +1146,7 @@
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
 					"$(SRCROOT)/../node_modules/react-native-sqlite-storage/src/ios",
 					"$(SRCROOT)/../node_modules/react-native-fabric/ios/SMXCrashlytics",
+					"$(SRCROOT)/../node_modules/react-native-app-info/RNAppInfo",
 				);
 				INFOPLIST_FILE = SourceViewBible/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1154,6 +1204,7 @@
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
 					"$(SRCROOT)/../node_modules/react-native-sqlite-storage/src/ios",
 					"$(SRCROOT)/../node_modules/react-native-fabric/ios/SMXCrashlytics",
+					"$(SRCROOT)/../node_modules/react-native-app-info/RNAppInfo",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -1208,6 +1259,7 @@
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
 					"$(SRCROOT)/../node_modules/react-native-sqlite-storage/src/ios",
 					"$(SRCROOT)/../node_modules/react-native-fabric/ios/SMXCrashlytics",
+					"$(SRCROOT)/../node_modules/react-native-app-info/RNAppInfo",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
