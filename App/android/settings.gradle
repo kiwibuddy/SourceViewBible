@@ -1,4 +1,4 @@
-rootProject.name = 'SourceViewBible'
+rootProject.name = 'SourceView'
 
 include ':app'
 include ':react-native-fabric'
