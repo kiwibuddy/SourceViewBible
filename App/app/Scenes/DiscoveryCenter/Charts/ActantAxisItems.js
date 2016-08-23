@@ -34,31 +34,30 @@ type Props = {
 };
 
 const ActantAxisItems = (props: Props) => {
-  const actantTypeKey = (props.actantType ? `${props.actantType}-` : '');
   return (
     <ScrollView style={styles.container}>
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(updateAxis(props.card, props.axis, {type: 'name', name: Localizable.t(`${actantTypeKey}name`), actantType: props.actantType}))}>
-        <Text style={StyleSheet.styles.cell.title}>Name</Text>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(updateAxis(props.card, props.axis, {type: 'name', actantType: props.actantType}))}>
+        <Text style={StyleSheet.styles.cell.title}>{Localizable.t('name')}</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(updateAxis(props.card, props.axis, {type: 'gender', name: Localizable.t(`${actantTypeKey}gender`), actantType: props.actantType}))}>
-        <Text style={StyleSheet.styles.cell.title}>Gender</Text>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(updateAxis(props.card, props.axis, {type: 'gender', actantType: props.actantType}))}>
+        <Text style={StyleSheet.styles.cell.title}>{Localizable.t('gender')}</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(updateAxis(props.card, props.axis, {type: 'nature', name: Localizable.t(`${actantTypeKey}nature`), actantType: props.actantType}))}>
-        <Text style={StyleSheet.styles.cell.title}>Nature</Text>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(updateAxis(props.card, props.axis, {type: 'nature', actantType: props.actantType}))}>
+        <Text style={StyleSheet.styles.cell.title}>{Localizable.t('nature')}</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(updateAxis(props.card, props.axis, {type: 'profession', name: Localizable.t(`${actantTypeKey}profession`), actantType: props.actantType}))}>
-        <Text style={StyleSheet.styles.cell.title}>Profession</Text>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(updateAxis(props.card, props.axis, {type: 'profession', actantType: props.actantType}))}>
+        <Text style={StyleSheet.styles.cell.title}>{Localizable.t('profession')}</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(updateAxis(props.card, props.axis, {type: 'role', name: Localizable.t(`${actantTypeKey}role`), actantType: props.actantType}))}>
-        <Text style={StyleSheet.styles.cell.title}>Role</Text>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(updateAxis(props.card, props.axis, {type: 'role', actantType: props.actantType}))}>
+        <Text style={StyleSheet.styles.cell.title}>{Localizable.t('role')}</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(updateAxis(props.card, props.axis, {type: 'chronology', name: Localizable.t('time-period'), actantType: props.actantType}))}>
-        <Text style={StyleSheet.styles.cell.title}>Time Period</Text>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(updateAxis(props.card, props.axis, {type: 'chronology', actantType: props.actantType}))}>
+        <Text style={StyleSheet.styles.cell.title}>{Localizable.t('time-period')}</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
     </ScrollView>

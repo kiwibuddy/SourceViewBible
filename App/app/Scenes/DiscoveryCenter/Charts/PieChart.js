@@ -36,19 +36,25 @@ const PieChartView = (props: Props) => {
   const yAxis = card.yAxis;
   const zAxis = card.zAxis;
 
-  let xAxisTitle = 'Show...';
-  if (xAxis) {
-    xAxisTitle = card.xAxis.name;
+  let xAxisTitle = "Show...";
+  if (card.xAxis) {
+    const actantType = card.xAxis.actantType;
+    const actantTypeKey = (actantType ? `${actantType}-` : '');
+    xAxisTitle = Localizable.t(`xAxis-${actantTypeKey}${card.xAxis.type}`);
   }
 
-  let yAxisTitle = 'By...';
-  if (yAxis) {
-    yAxisTitle = card.yAxis.name;
+  let yAxisTitle = "By...";
+  if (card.yAxis) {
+    const actantType = card.yAxis.actantType;
+    const actantTypeKey = (actantType ? `${actantType}-` : '');
+    yAxisTitle = Localizable.t(`yAxis-${actantTypeKey}${card.yAxis.type}`);
   }
 
   let zAxisTitle = 'Across...';
   if (zAxis) {
-    zAxisTitle = card.zAxis.name;
+    const actantType = card.zAxis.actantType;
+    const actantTypeKey = (actantType ? `${actantType}-` : '');
+    zAxisTitle = Localizable.t(`zAxis-${actantTypeKey}${card.zAxis.type}`);
   }
 
   let chart = null;

@@ -40,12 +40,16 @@ const CloudChartView = (props: Props) => {
 
   let xAxisTitle = "Show...";
   if (card.xAxis) {
-    xAxisTitle = card.xAxis.name;
+    const actantType = card.xAxis.actantType;
+    const actantTypeKey = (actantType ? `${actantType}-` : '');
+    xAxisTitle = Localizable.t(`xAxis-${actantTypeKey}${card.xAxis.type}`);
   }
 
   let yAxisTitle = "By...";
   if (card.yAxis) {
-    yAxisTitle = card.yAxis.name;
+    const actantType = card.yAxis.actantType;
+    const actantTypeKey = (actantType ? `${actantType}-` : '');
+    yAxisTitle = Localizable.t(`yAxis-${actantTypeKey}${card.yAxis.type}`);
   }
 
   let chart = null;
