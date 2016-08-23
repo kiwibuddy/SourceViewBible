@@ -211,7 +211,7 @@ const Schema = [Discovery, Preference, History];
 
 const options = {
   schema: Schema,
-  schemaVersion: 1,
+  schemaVersion: 2,
   migration: function(oldRealm, newRealm) {
   }
 };
