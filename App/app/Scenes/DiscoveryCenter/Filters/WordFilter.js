@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
     marginVertical: 8,
     height: 26,
+    padding: 0, // Android workaround
   },
 });
 

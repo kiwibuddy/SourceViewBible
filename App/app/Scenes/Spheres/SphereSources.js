@@ -241,6 +241,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
     marginTop: 8,
     height: 26,
+    padding: 0, // Android workaround
   },
   sphereSourcesGraph: {
     height: 200,

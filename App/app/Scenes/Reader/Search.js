@@ -223,6 +223,7 @@ const styles = StyleSheet.create({
     paddingLeft: 8,
     marginLeft: 8,
     height: 26,
+    padding: 0, // Android workaround
   },
   gettingstartedContainer: {
     position: 'absolute',
