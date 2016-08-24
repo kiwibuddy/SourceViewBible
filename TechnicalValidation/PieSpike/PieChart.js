@@ -25,21 +25,24 @@ const PieChart = (props: Object) => {
           fill="transparent"
           stroke="gray"
           strokeWidth={strokeWidth/2}
-          strokeDasharray={[100, 100]}
+          strokeDasharray={[25, 100]}
+          strokeDashoffset={-75}
         />
         <Circle
           r="16" cx="17" cy="16"
           fill="transparent"
           stroke="blue"
           strokeWidth={strokeWidth/2}
-          strokeDasharray={[75, 100]}
+          strokeDasharray={[25, 100]}
+          strokeDashoffset={-50}
         />
         <Circle
           r="16" cx="17" cy="16"
           fill="transparent"
           stroke="green"
           strokeWidth={strokeWidth/2}
-          strokeDasharray={[50, 100]}
+          strokeDasharray={[25, 100]}
+          strokeDashoffset={-25}
         />
         <Circle
           r="16" cx="17" cy="16"
@@ -47,6 +50,7 @@ const PieChart = (props: Object) => {
           stroke="red"
           strokeWidth={strokeWidth/2}
           strokeDasharray={[25, 100]}
+          strokeDashoffset={0}
         />
       </Svg>
     </View>
