@@ -9,7 +9,7 @@
     "moment": "^2.14.1",
     "moment-duration-format": "^1.3.0",
     "react": "~15.2.0",
-    "react-native": "^0.31.0",
+    "react-native": "^0.30.0",
     "react-native-app-info": "git+https://github.com/daikini/react-native-app-info.git",
     "react-native-emdros": "file:../Libraries/Emdros/",
     "react-native-fabric": "^0.3.0",
@@ -19,6 +19,6 @@
     "react-native-parallax-motion": "file:../Libraries/react-native-parallax-motion/",
     "react-native-sqlite-storage": "^3.1.1",
     "react-native-vector-icons": "^2.0.3",
-    "realm": "^0.14.3"
+    "realm": "^0.14.1"
   }
 }
