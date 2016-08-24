@@ -35,30 +35,30 @@ const PieChart = (props: Object) => {
 
   return (
     <View style={styles.chart}>
-      <Svg width="200" height="200" viewBox="0 0 32 32" style={{margin: 10, backgroundColor: 'purple'}}>
+      <Svg width="200" height="200" viewBox="0 0 34 32" style={{margin: 10, backgroundColor: 'purple'}}>
         <Circle
-          r="16" cx="16" cy="16"
+          r="16" cx="17" cy="16"
           fill="transparent"
           stroke="gray"
           strokeWidth={strokeWidth/2}
           strokeDasharray={[100, 100]}
         />
         <Circle
-          r="16" cx="16" cy="16"
+          r="16" cx="17" cy="16"
           fill="transparent"
           stroke="blue"
           strokeWidth={strokeWidth/2}
           strokeDasharray={[75, 100]}
         />
         <Circle
-          r="16" cx="16" cy="16"
+          r="16" cx="17" cy="16"
           fill="transparent"
           stroke="green"
           strokeWidth={strokeWidth/2}
           strokeDasharray={[50, 100]}
         />
         <Circle
-          r="16" cx="16" cy="16"
+          r="16" cx="17" cy="16"
           fill="transparent"
           stroke="red"
           strokeWidth={strokeWidth/2}
