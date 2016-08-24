@@ -6,6 +6,7 @@ import ReactNative, {
   View,
   Text,
   Image,
+  Platform,
   TouchableOpacity,
   RecyclerViewBackedScrollView,
   Dimensions
@@ -222,6 +223,26 @@ const styles = StyleSheet.create({
       width: 0
     },
   },
+  ...Platform.select({
+      android: {
+        item: {
+          marginHorizontal: 4,
+          marginBottom: 8,
+          borderColor: 'rgba(0, 0, 0, 0.15)',
+          borderWidth: StyleSheet.hairlineWidth,
+          borderRadius: 4,
+          backgroundColor: '#fff',
+          height: 142,
+          shadowColor: 'black',
+          shadowOpacity: 0.05,
+          shadowRadius: 0.4,
+          shadowOffset: {
+            height: 1,
+            width: 0
+          },
+        },
+      },
+  }),
   gradient: {
     flex: 0,
     height: 3,
