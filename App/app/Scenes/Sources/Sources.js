@@ -133,7 +133,8 @@ export default class Sources extends Component {
     if (sources.length == 0) return {rows, sections};
 
     sources.forEach((source) => {
-      const section = source.firstInitial;
+      let section = source.firstInitial;
+      if (parseInt(section) > 0) section = '#';
       if (sections.indexOf(section) === -1) {
         sections.push(section);
         rows[section] = [];
