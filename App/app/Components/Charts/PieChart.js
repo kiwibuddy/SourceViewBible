@@ -36,7 +36,7 @@ const PieChart = (props: Object) => {
 
     const pieSlice = <Circle
       key={'slice-' + index}
-      r="16" cx="18" cy="16"
+      r="16" cx="18" cy="18"
       fill="transparent"
       stroke={slice.color}
       strokeWidth={sliceWidth}
@@ -51,7 +51,7 @@ const PieChart = (props: Object) => {
   return (
     <TouchableOpacity style={chartStyle} onPress={props.onPress}>
       <View style={[styles.pie, StyleSheet.absoluteFill]}>
-        <Svg width={size} height={size} viewBox="0 0 36 32">
+        <Svg width={size} height={size} viewBox="0 0 36 36">
           {pieSlices}
         </Svg>
       </View>

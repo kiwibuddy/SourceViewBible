@@ -59,12 +59,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   pie: {
-    flex: .5,
     alignSelf: 'center',
-    marginLeft: 30,
+    marginHorizontal: 30,
   },
   list: {
-    flex: 3.5,
     height: 210,
     marginRight: 10,
   },
