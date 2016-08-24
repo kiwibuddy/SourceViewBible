@@ -101,10 +101,12 @@ export default class Onboarding extends Component {
             </View> */}
           </ScrollView>
           {this._renderControls()}
-          <PageControl
-            numberOfPages={NUMBER_OF_PAGES}
-            currentPage={this.state.currentPage}
-          />
+          <View style={styles.pageControlContainer}>
+            <PageControl
+              numberOfPages={NUMBER_OF_PAGES}
+              currentPage={this.state.currentPage}
+            />
+          </View>
         </LinearGradient>
       </View>
     );
@@ -167,7 +169,6 @@ export default class Onboarding extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingBottom: 15,
   },
   onboardingContainer: {
     flex: 1,
@@ -198,6 +199,9 @@ const styles = StyleSheet.create({
   onboardingControls: {
     paddingVertical: 10,
     marginBottom: (HEIGHT > 600 ? 50 : 0),
+  },
+  pageControlContainer: {
+    marginBottom: 10,
   },
   nextButton: {
     backgroundColor: Colors.tint,
