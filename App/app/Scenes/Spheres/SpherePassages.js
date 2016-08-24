@@ -111,7 +111,10 @@ export default class SpherePassages extends Component {
 
     const rows = {};
     const sections = [];
-    for(let passage of sphere.passages) {
+
+    // Calling slice here because of possible bug in realm 0.14.1
+    const passages = sphere.passages.slice();
+    for(let passage of passages) {
       let section = rows[passage.section];
       if (!section) {
         section = [];
@@ -119,7 +122,10 @@ export default class SpherePassages extends Component {
       }
 
       const contents = [];
-      for(let monad of passage.monads) {
+
+      // Calling slice here because of possible bug in realm 0.14.1
+      const monads = passage.monads.slice();
+      for(let monad of monads) {
         const content = await Emdros.scripture({monadSet: monad.monadSet, stylesheet: 'occurrence'});
         contents.push(content);
       }
