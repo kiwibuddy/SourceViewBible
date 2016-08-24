@@ -39,7 +39,7 @@ const GettingStartedCard = (props: Props) => {
       </View>
       <View style={styles.gettingstartedContainer}>
         <Image style={styles.gettingstartedIcon} source={require('./Images/dc-icon.png')} />
-        <Text style={styles.gettingstartedHeader}>Create & Share Discoveries</Text>
+        <Text style={styles.gettingstartedHeader}>Create & Share Discoveries</Text>
         <Text style={styles.gettingstartedBody}>Tap your way to new Biblical insights and share what your find.</Text>
       </View>
     </Card>
