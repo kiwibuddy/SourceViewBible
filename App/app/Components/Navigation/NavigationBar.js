@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '500',
     color: 'rgba(0, 0, 0, .9)',
-    textAlign: Platform.OS === 'ios' ? 'center' : 'left'
+    textAlign: Platform.OS === 'ios' ? 'center' : 'left',
+    marginLeft: Platform.OS === 'android' ? 8 : null,
   }
 });
