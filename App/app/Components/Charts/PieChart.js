@@ -22,7 +22,6 @@ import Colors from '../../Common/Colors';
 const PieChart = (props: Object) => {
   const { color, size, slices: data, titleStyle, subtitleStyle } = props;
   const chartStyle = [styles.chart, props.style, {width: size, height: size}];
-  const sliceWidth = props.sliceWidth;
 
   const title = props.title ? <Text numberOfLines={1} style={[styles.title, {color: color}, titleStyle]}>{props.title}</Text> : null;
   const subtitle = props.subtitle ? <Text numberOfLines={1} style={[styles.subtitle, subtitleStyle]}>{props.subtitle}</Text> : null;
@@ -39,7 +38,7 @@ const PieChart = (props: Object) => {
       r="16" cx="18" cy="18"
       fill="transparent"
       stroke={slice.color}
-      strokeWidth={sliceWidth}
+      strokeWidth={DEFAULT_SLICE_WIDTH}
       strokeDasharray={[slicePercent, 100]}
       strokeDashoffset={-runningTotal}
     />;
@@ -68,17 +67,12 @@ PieChart.propTypes = {
     color: ColorPropType.isRequired,
     value: PropTypes.number.isRequired,
   })).isRequired,
-  sliceWidth: PropTypes.number,
   style: PropTypes.any,
   size: PropTypes.number.isRequired,
   subtitle: PropTypes.string,
   subtitleStyle: PropTypes.any,
   title: PropTypes.string,
   titleStyle: PropTypes.any,
-};
-
-PieChart.defaultProps = {
-  sliceWidth: DEFAULT_SLICE_WIDTH,
 };
 
 const styles = StyleSheet.create({
