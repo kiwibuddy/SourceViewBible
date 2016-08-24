@@ -108,7 +108,7 @@ export default class Occurrences extends Component {
 
     return (
       <TouchableOpacity key={occurrence.id} style={styles.listItemContainer} onPress={() => this._navigate(route)}>
-        <Text style={StyleSheet.styles.cell.occurrence}>{number}</Text>
+        <Text allowFontScaling={false} style={StyleSheet.styles.cell.occurrence}>{number}</Text>
         <View style={styles.listItem}>
           <Text numberOfLines={2} style={styles.body}>{occurrence.text}</Text>
           <View style={styles.referenceContainer}>
