@@ -4,27 +4,35 @@ const HTML = `<!DOCTYPE html>
     <title>Scripture</title>
     <meta charset="utf-8"/>
     <style type="text/css">
-      html, body {
-        overflow-x: hidden !important;
-      }
       p, b {
-        font-weight: normal;
         margin: 0;
         padding: 0;
-        line-height: 24pt;
         -webkit-margin-before: 0;
+      }
+      i {
+        color: #323B43;
+      }
+      i + .footnoteIndicator {
+        color: #323B43;
       }
       body {
         font-family: Georgia;
         font-size: 13pt;
         color: #323B43;
         line-height: 24pt;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
       }
       table {
         margin:0;
         padding:0;
         border-spacing: 0;
         border-collapse: collapse;
+        overflow: hidden;
         margin-left: -220pt;
       }
       tr {
@@ -65,6 +73,9 @@ const HTML = `<!DOCTYPE html>
       .sourceText {
         padding: 0 5pt;
       }
+      .embeddedDocument {
+        font-style: italic;
+      }
       .textTitle {
         font-family: Georgia;
         font-weight: bold;
@@ -85,19 +96,20 @@ const HTML = `<!DOCTYPE html>
         text-align: Center;
       }
       .textChapter {
-        font-family: Gurmukhi MN;
         color: #CF1E00;
         font-size: 1em;
-        position: relative;
-        top: 0;
         font-weight: normal;
+        {{NUMBER_DISPLAY}}
       }
       .textVerse {
         font-family: Gurmukhi MN;
-        font-size: .65em;
+        font-size: 0.65em;
         position: relative;
         top: -0.4em;
-        color: #9B9B9B;
+        {{NUMBER_DISPLAY}}
+      }
+      .textVerse span {
+        padding-bottom: .4em;
       }
       .textIndent, .textPoetryStanzaFirst {
         text-indent: 2em;
@@ -107,6 +119,54 @@ const HTML = `<!DOCTYPE html>
       }
       .textPoetry {
         margin-left: 2em;
+      }
+      .footnoteOverlay {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: -3pt;
+        left: 0;
+        background-color: rgba(0,0,0,.15);
+        z-index: 100;
+      }
+      .footnoteContainer {
+        font-family: -apple-system, "Helvetica Neue", "Lucida Grande";
+        font-size: 1em;
+        line-height: 1.3em;
+        color: #59626A;
+        position: absolute;
+        right: 5pt;
+        bottom: 8pt;
+        left: 5pt;
+        background-color: white;
+        box-shadow: 0 1pt 1pt rgba(0,0,0,.10);
+        border-radius: 3pt;
+      }
+      .footnoteHeader {
+        font-weight: 600;
+        color: #59626A;
+        padding: 6pt 8pt;
+        border-bottom: 1pt solid rgba(0,0,0,.10);
+      }
+      .footnoteClose {
+        font-weight: normal;
+        color: #CF1E00;
+        text-decoration: none;
+        position: absolute;
+        right: 10pt;
+      }
+      .footnoteContent {
+        padding: 8pt;
+      }
+      .footnoteScroll {
+        overflow: scroll;
+        max-height: 250pt;
+      }
+      .footnoteIndicator {
+        text-decoration: none;
+      }
+      .nonCanonicalText .footnoteIndicator {
+        color: #323B43;
       }
 
 .highlightFamily { background: linear-gradient(180deg, #FFD8D6, #FFD8D6 100.0%); }

@@ -71,7 +71,7 @@ class TextLayout extends Component {
 
     this.state = {
       scripture: null,
-      monadSet: Psalm72
+      monadSet: Genesis
     };
   }
 
