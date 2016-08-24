@@ -100,6 +100,7 @@ export default class DiscoverSources extends Component {
               dataSource={this.state.dataSource}
               enableEmptySections={true}
               horizontal={true}
+              initialListSize={3}
               onMomentumScrollEnd={this._onScrollEnd}
               pageSize={3}
               pagingEnabled={true}
