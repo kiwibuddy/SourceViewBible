@@ -282,7 +282,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     paddingVertical: 10,
-    backgroundColor: 'white',
     alignItems: 'center',
     marginLeft: 15,
   },
