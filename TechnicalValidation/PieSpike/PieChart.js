@@ -31,23 +31,39 @@ const PieChart = (props: Object) => {
   /* 2π × 25 */
   const radius = 2 * Math.PI * circleRadius;
 
+  const strokeWidth = 4;
+
   return (
     <View style={styles.chart}>
-      <Svg width="100" height="100" viewBox="0 0 32 32">
+      <Svg width="200" height="200" viewBox="0 0 32 32" style={{margin: 10, backgroundColor: 'purple'}}>
         <Circle
           r="16" cx="16" cy="16"
           fill="transparent"
-          stroke="#655"
-          strokeWidth={3}
+          stroke="gray"
+          strokeWidth={strokeWidth/2}
+          strokeDasharray={[100, 100]}
+        />
+        <Circle
+          r="16" cx="16" cy="16"
+          fill="transparent"
+          stroke="blue"
+          strokeWidth={strokeWidth/2}
+          strokeDasharray={[75, 100]}
+        />
+        <Circle
+          r="16" cx="16" cy="16"
+          fill="transparent"
+          stroke="green"
+          strokeWidth={strokeWidth/2}
           strokeDasharray={[50, 100]}
         />
-        {/* <Circle
-          r="42" cx="50" cy="50"
+        <Circle
+          r="16" cx="16" cy="16"
           fill="transparent"
           stroke="red"
-          strokeWidth={6}
-          strokeDasharray={[40, 189]}
-        /> */}
+          strokeWidth={strokeWidth/2}
+          strokeDasharray={[25, 100]}
+        />
       </Svg>
     </View>
   );
@@ -55,8 +71,7 @@ const PieChart = (props: Object) => {
 
 const styles = StyleSheet.create({
   chart: {
-    // flex: 1,
-    backgroundColor: 'yellowgreen',
+    backgroundColor: 'orange',
     transform: [{rotate: '-90deg'}],
   }
 })
