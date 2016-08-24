@@ -130,8 +130,8 @@ export default class SphereSources extends Component {
     const { sphere } = this.state;
     const wordCount = this._getCountOfSource(source);
     const spherePercent = this._getPercentOfSource(source);
-    // const colors = Colors.spheres[sphere.id];
-    const colors = Colors.sources[source.principalSourceType];
+    const colors = Colors.spheres[sphere.id];
+    // const colors = Colors.sources[source.principalSourceType];
 
     return (
       <TouchableOpacity style={styles.section} onPress={() => this._onPressSource(source)}>
@@ -167,8 +167,8 @@ export default class SphereSources extends Component {
 
   _renderPie({source, size, style, subtitleStyle, titleStyle}: PieProps) {
     const { sphere } = this.state;
-    // const colors = Colors.spheres[sphere.id];
-    const colors = Colors.sources[source.principalSourceType];
+    const colors = Colors.spheres[sphere.id];
+    // const colors = Colors.sources[source.principalSourceType];
 
     const sourcePercent = this._getPercentOfSource(source);
     const slices = [{color: colors.tint, value: sourcePercent}, {color: colors.lightTint, value: 100-sourcePercent}];
