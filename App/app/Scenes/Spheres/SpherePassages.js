@@ -5,7 +5,9 @@ import React, { Component, PropTypes } from 'react';
 const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
 
 import {
+  ActivityIndicator,
   ListView,
+  Platform,
   RecyclerViewBackedScrollView,
   Text,
   TouchableOpacity,
@@ -33,11 +35,13 @@ type Props = {
 type State = {
   dataSource: any,
   sphere: Object,
+  loading: boolean
 };
 
 export default class SpherePassages extends Component {
   props: Props;
   state: State;
+  shouldFetch: boolean = true;
 
   constructor(props: Props) {
     super(props);
@@ -46,7 +50,8 @@ export default class SpherePassages extends Component {
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     this.state = {
       dataSource: dataSource,
-      sphere
+      sphere,
+      loading: true,
     };
   }
 
@@ -54,7 +59,14 @@ export default class SpherePassages extends Component {
     this._getPassages();
   }
 
+  componentWillUnmount() {
+    this.shouldFetch = false;
+  }
+
   render() {
+    const loadingView = this._renderLoading();
+    if (loadingView) return loadingView;
+
     return (
       <ListView
         dataSource={this.state.dataSource}
@@ -88,6 +100,16 @@ export default class SpherePassages extends Component {
       </TouchableOpacity>
     );
   };
+
+  _renderLoading = () => {
+    if (this.state.loading) {
+      return (
+        <ActivityIndicator color="gray" size="large" style={styles.activityIndicator} />
+      );
+    }
+
+    return null;
+  }
 
   _onPressPassage = (passage: Object) => {
     const { sphere } = this.state;
@@ -134,9 +156,13 @@ export default class SpherePassages extends Component {
     }
 
     const dataSource = this.state.dataSource.cloneWithRowsAndSections(rows, sections);
-    this.setState({
-      dataSource,
-    });
+
+    if (this.shouldFetch) {
+      this.setState({
+        dataSource,
+        loading: false
+      });
+    }
   }
 }
 
@@ -188,5 +214,12 @@ const styles = StyleSheet.create({
   },
   separator: {
     ...StyleSheet.styles.separator,
+  },
+  activityIndicator: {
+    position: 'absolute',
+    top: Platform.OS === 'ios' ? 20 : 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
   },
 });
