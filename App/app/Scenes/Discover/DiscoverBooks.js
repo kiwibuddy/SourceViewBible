@@ -169,10 +169,10 @@ export default class DiscoverBooks extends Component {
   _onScrollEnd = (e: Object) => {
     // making our events coming from android compatible to updateIndex logic
     if (!e.nativeEvent.contentOffset) {
-      e.nativeEvent.contentOffset = {x: e.nativeEvent.position * width}
+      e.nativeEvent.contentOffset = {x: e.nativeEvent.position * WIDTH}
     }
 
-    const currentPage = Math.floor((e.nativeEvent.contentOffset.x - width / 2) / width) + 1;
+    const currentPage = Math.floor((e.nativeEvent.contentOffset.x - WIDTH / 2) / WIDTH) + 1;
 
     this.setState({
       currentPage: currentPage
