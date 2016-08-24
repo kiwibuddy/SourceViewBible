@@ -39,6 +39,7 @@ function openURL(url: string) {
 }
 
 const About = (props: Props) => {
+  const ratingLink = (Platform.OS === 'ios' ? Links.AppStoreRating : Links.GooglePlayRating);
   return (
     <View style={styles.container}>
       <NavigationBar title={props.title}>
@@ -57,26 +58,15 @@ const About = (props: Props) => {
         <View style={styles.separator} />
         <TouchableOpacity style={styles.listItemContainer} onPress={() => openURL(Links.AppStoreRating)}>
           <Icon
-            name="about-rate-ios"
+            name={`about-rate-${Platform.OS}`}
             size={25}
             style={[styles.listItemIcon, {color: '#59626A'}]}
           />
           <View style={styles.listItem}>
-            <Text style={StyleSheet.styles.cell.title}>Leave a rating in App Store</Text>
+            <Text style={StyleSheet.styles.cell.title}>{Localizable.t(`leave-rating-${Platform.OS}`)}</Text>
           </View>
         </TouchableOpacity>
         <View style={styles.separator} />
-        {/* <TouchableOpacity style={styles.listItemContainer} onPress={() => openURL(Links.GooglePlayRating)}>
-          <Icon
-            name="about-rate-android"
-            size={25}
-            style={[styles.listItemIcon, {color: '#59626A'}]}
-          />
-          <View style={styles.listItem}>
-            <Text style={StyleSheet.styles.cell.title}>Leave a rating in Google Play</Text>
-          </View>
-        </TouchableOpacity>
-        <View style={styles.separator} /> */}
         <TouchableOpacity style={styles.listItemContainer} onPress={() => openURL(Links.Donate)}>
           <Icon
             name="about-donate"
