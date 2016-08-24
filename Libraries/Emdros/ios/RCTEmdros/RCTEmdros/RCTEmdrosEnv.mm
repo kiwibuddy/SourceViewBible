@@ -12,7 +12,7 @@
 #include <fstream>
 #import "OCDBenchmark.h"
 
-const char RCTKeyCString[] = {48, 120, 100, 49, 57, 55, 50, 100, 57, 55, 32, 48, 120, 97, 99, 100, 99, 53, 51, 99, 56, 0};
+const char RCTKeyCString[] = {48, 120, 54, 55, 100, 51, 100, 54, 55, 100, 32, 48, 120, 50, 50, 55, 57, 56, 53, 48, 57, 32, 48, 120, 49, 51, 101, 54, 98, 49, 99, 57, 32, 48, 120, 51, 52, 99, 50, 50, 51, 57, 55, 32, 48, 120, 54, 49, 101, 49, 98, 53, 98, 49, 32, 48, 120, 51, 56, 99, 52, 100, 49, 98, 49, 32, 48, 120, 50, 53, 101, 51, 102, 54, 100, 57, 32, 48, 120, 49, 97, 50, 102, 50, 57, 100, 55, 0};
 #define RCTKey [NSString stringWithCString:RCTKeyCString encoding:NSASCIIStringEncoding]
 
 const std::set<std::string> RCTStopwords = {"the","and","of","to","you","will","in","I","a","he","for","they","your","is","with","his","from","that","be","all","them","as","who","it","was","but","my","have","s","this","their","are","me","on","him","people","then","so","not","when","were","had","king","what","by","we","at","said","one","has","t","do","son","out","if","there","no","or","land","like","us","must","these","up","those","her","day","our","now","man","into","am","can","come","let","because","go","about","against","give","down","even","don","an","over","other","she","before","made","been","men","its"};
@@ -102,40 +102,40 @@ const std::set<std::string> RCTStopwords = {"the","and","of","to","you","will","
 - (void)wordsInMonads:(NSArray<NSArray<NSNumber *> *> *)monads limit:(NSInteger)limit useStopWords:(BOOL)useStopWords completion:(void (^)(id result, NSError *error))completion {
     try {
         SetOfMonads soms;
-        
+
         if (!monads) monads = @[@[@(1), @(MAX_MONAD)]];
         for (NSArray<NSNumber *> *monad in monads) {
             SetOfMonads som(monad.firstObject.integerValue, monad.lastObject.integerValue);
             soms.unionWith(som);
         }
-        
+
         std::set<std::string> stopwords = {};
         if (useStopWords) stopwords = RCTStopwords;
-        
+
         std::string errorMessage;
         std::string json = getWordCountsInSOM(_emdrosEnv, soms, stopwords, errorMessage);
-        
+
         NSString *data = [NSString stringWithUTF8String:json.c_str()];
         NSError *error = nil;
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:[data dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
-        
+
         NSArray *words = [result keysSortedByValueUsingComparator:^NSComparisonResult(NSNumber *  _Nonnull obj1, NSNumber *  _Nonnull obj2) {
             NSInteger a = obj1.integerValue;
             NSInteger b = obj2.integerValue;
-            
+
             if (a > b) return (NSComparisonResult)NSOrderedAscending;
             if (a < b) return (NSComparisonResult)NSOrderedDescending;
             return (NSComparisonResult)NSOrderedSame;
         }];
-        
+
         if (limit > 0) words = [words subarrayWithRange:NSMakeRange(0, MIN(limit, words.count))];
-        
+
         NSMutableArray *wordCounts = [[NSMutableArray alloc] initWithCapacity:words.count];
         for (NSString *word in words) {
             [wordCounts addObject:@{@"string": word, @"count": result[word]}];
         }
-        
-        
+
+
         if (completion) completion([[NSArray alloc] initWithArray:wordCounts], nil);
     } catch (EMdFDBException e) {
         std::cerr << "ERROR: EMdFDBException (Database error)..." << std::endl;
@@ -157,17 +157,17 @@ const std::set<std::string> RCTStopwords = {"the","and","of","to","you","will","
 - (void)wordCountsForContext:(NSString *)context monads:(NSArray<NSArray<NSNumber *> *> *)monads contextFeatureComparison:(NSString *)contextFeatureComparison tokenFeatureComparison:(NSString *)tokenFeatureComparison completion:(void (^)(id result, NSError *error))completion {
     try {
         SetOfMonads soms;
-        
+
         if (!monads) monads = @[@[@(1), @(MAX_MONAD)]];
         for (NSArray<NSNumber *> *monad in monads) {
             SetOfMonads som(monad.firstObject.integerValue, monad.lastObject.integerValue);
             soms.unionWith(som);
         }
         std::string errorMessage;
-        
+
         ID_D2WordCountsMap wordCountMap;
         bool result = getWordCountsInContext(_emdrosEnv, soms, std::string(context.UTF8String), std::string(contextFeatureComparison.UTF8String), std::string(tokenFeatureComparison.UTF8String), wordCountMap, errorMessage);
-        
+
         NSMutableDictionary *wordCounts = [[NSMutableDictionary alloc] init];
         if (result) {
             for (auto const& iterator : wordCountMap) {
@@ -186,7 +186,7 @@ const std::set<std::string> RCTStopwords = {"the","and","of","to","you","will","
             }
         }
 
-        
+
         if (completion) completion([[NSDictionary alloc] initWithDictionary:wordCounts], nil);
     } catch (EMdFDBException e) {
         std::cerr << "ERROR: EMdFDBException (Database error)..." << std::endl;
@@ -211,7 +211,7 @@ const std::set<std::string> RCTStopwords = {"the","and","of","to","you","will","
 
     try {
 //        [[OCDBenchmark sharedBenchmark] begin];
-        
+
         NSString *stylesheet = ([options[@"stylesheet"] isKindOfClass:[NSString class]] ? options[@"stylesheet"] : [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:options[@"stylesheet"] options:0 error:nil] encoding:NSUTF8StringEncoding]);
 
         std::string dbName("");
@@ -220,9 +220,9 @@ const std::set<std::string> RCTStopwords = {"the","and","of","to","you","will","
         bool bResult;
         std::string rendered_objects = render_objects(_emdrosEnv, dbName, stylesheetString, stylesheetName, from, to, bResult);
         NSString *string = [NSString stringWithUTF8String:rendered_objects.c_str()];
-        
+
 //        [[OCDBenchmark sharedBenchmark] end:[NSString stringWithFormat:@"stringFrom: %li, to: %li", (long)from, (long)to]];
-        
+
         if (completion) completion(string, nil);
     } catch (EMdFDBException e) {
         std::cerr << "ERROR: EMdFDBException (Database error)..." << std::endl;

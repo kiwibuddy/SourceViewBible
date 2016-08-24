@@ -279,6 +279,8 @@ bool getWordCountsInContext(EmdrosEnv *pEE,
 	query += " GET Family, Economics, Government, Religion, Education, MediaCom, Celebration";
 	query += "]]";
 
+	// std::cerr << "UP200: query = " << query << std::endl;
+
 	bool bCompileResult = false;
 	bool bDBResult = pEE->executeString(query, bCompileResult, false, false, 0);
 	bool bResult = bDBResult && bCompileResult;
@@ -338,7 +340,8 @@ bool getWordCountsInContext(EmdrosEnv *pEE,
 						}
 					}
 				}
-				
+
+				// std::cerr << "UP204: wc.m_word_count = " << wc.m_word_count << "\n";
 				result.insert(std::make_pair(context_id_d, wc));
 			}
 		}

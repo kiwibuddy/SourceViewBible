@@ -54,7 +54,7 @@ public class MainActivity extends ReactActivity {
           destinationOutputStream.close();
           sourceInputStream.close();
 
-          Log.v("Emdros", "Copied: " + destinationPath);
+          Log.v("Emdros", "Copied: " + sourcePath + " to: " + destinationPath);
         }
       } catch (IOException e) {
            Log.v("Emdros", "uh oh: " + e.toString());

@@ -8,7 +8,7 @@
 #define LOG_TAG "Emdros"
 #define LOGV(...) __android_log_print(ANDROID_LOG_VERBOSE, LOG_TAG, __VA_ARGS__)
 
-const char RCTKeyCString[] = {48, 120, 100, 49, 57, 55, 50, 100, 57, 55, 32, 48, 120, 97, 99, 100, 99, 53, 51, 99, 56, 0};
+const char RCTKeyCString[] = {48, 120, 54, 55, 100, 51, 100, 54, 55, 100, 32, 48, 120, 50, 50, 55, 57, 56, 53, 48, 57, 32, 48, 120, 49, 51, 101, 54, 98, 49, 99, 57, 32, 48, 120, 51, 52, 99, 50, 50, 51, 57, 55, 32, 48, 120, 54, 49, 101, 49, 98, 53, 98, 49, 32, 48, 120, 51, 56, 99, 52, 100, 49, 98, 49, 32, 48, 120, 50, 53, 101, 51, 102, 54, 100, 57, 32, 48, 120, 49, 97, 50, 102, 50, 57, 100, 55, 0};
 
 jfieldID getEmdrosEnvField(JNIEnv *env, jobject obj)
 {
@@ -57,7 +57,6 @@ void Java_com_sourceviewbible_emdros_Emdros_connect(JNIEnv *env, jobject obj, js
   try {
     emdrosEnv = new EmdrosEnv(output_kind, kCSUTF8, hostname, user, password, initial_db, backend_kind);
     if (emdrosEnv->connectionOk() == true) {
-      LOGV("Connected!!!!");
     } else {
       LOGV("Not connected: %s", emdrosEnv->getDBError().c_str());
     }
