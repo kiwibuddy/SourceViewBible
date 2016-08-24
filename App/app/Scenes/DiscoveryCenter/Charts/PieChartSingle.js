@@ -27,7 +27,7 @@ const PieChartSingle = (props: Props) => {
   const { card, data } = props;
 
   const totalValue = data.reduce((sum, slice) => sum + slice.value, 0);
-  const slices = data.filter(slice => parseInt((slice.value / totalValue) * 100)).map((slice, index) => {
+  const slices = data.filter(slice => ((slice.value / totalValue) * 100) >= 1).map((slice, index) => {
     return {...slice, color: slice.color || ChartColors.colorAtIndex(index)};
   });
 
