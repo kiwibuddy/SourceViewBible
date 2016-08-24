@@ -233,13 +233,7 @@ const styles = StyleSheet.create({
           borderRadius: 4,
           backgroundColor: '#fff',
           height: 142,
-          shadowColor: 'black',
-          shadowOpacity: 0.05,
-          shadowRadius: 0.4,
-          shadowOffset: {
-            height: 1,
-            width: 0
-          },
+          elevation: .5,
         },
       },
   }),

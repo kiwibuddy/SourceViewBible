@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
           borderRadius: 4,
           backgroundColor: '#fff',
           height: 142,
-          elevation: 1,
+          elevation: .5,
         },
       },
   }),
