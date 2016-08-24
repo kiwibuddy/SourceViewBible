@@ -17,7 +17,7 @@ const Colors = [
 const DeltaColor = '#323B43';
 
 const MINIMUM_ALPHA_VALUE = 5;
-const ALPHA_STEP_VALUE = 5;
+const ALPHA_STEP_VALUE = 10;
 
 function hexToRGBA(hex: string, opacity: number) {
   hex = hex.replace('#','');
