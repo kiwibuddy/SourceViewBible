@@ -207,7 +207,9 @@ export default class Reader extends Component {
     const sphereLabels = Sphere.whereIn(spheres).map(sphere => {
       const color = sphere.color();
       return (
-        <Text key={'sphere-' + sphere.id} style={[styles.filterLabel, {backgroundColor: color}]}>{sphere.name}</Text>
+        <View key={'sphere-' + sphere.id} style={[styles.filterLabelContainer, {backgroundColor: color}]}>
+          <Text style={[styles.filterLabel]}>{sphere.name}</Text>
+        </View>
       );
     });
 
@@ -331,15 +333,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 8,
   },
-  filterLabel: {
-    fontSize: 13,
-    color: 'white',
-    backgroundColor: Colors.tint,
+  filterLabelContainer: {
     borderRadius: 4,
     paddingVertical: 2,
     paddingHorizontal: 5,
     overflow: 'hidden',
     marginRight: 5,
+  },
+  filterLabel: {
+    fontSize: 13,
+    color: 'white',
   },
   filterClear: {
     position: 'absolute',
