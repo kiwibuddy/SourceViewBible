@@ -189,8 +189,8 @@ export default class Bookmarks extends Component {
 
         if (__DEV__) {
           bookmarks.push({path: '/Onboarding', title: 'Onboarding', modal: true});
-          bookmarks.push(sphereInAppPurchaseURL({title: 'Expired Spheres', expired: true, modal: true}));
-          bookmarks.push(sphereInAppPurchaseURL({title: 'Promo Spheres', expired: false, redirect: spheresURL({title: 'Spheres'}), modal: true}));
+          bookmarks.push(sphereInAppPurchaseURL({title: 'Spheres Update Required', expired: true, modal: true}));
+          bookmarks.push(sphereInAppPurchaseURL({title: 'Spheres Free Trial', expired: false, redirect: spheresURL({title: 'Spheres'}), modal: true}));
         }
 
         return this.state.dataSource.cloneWithRowsAndSections({bookmarks: bookmarks});

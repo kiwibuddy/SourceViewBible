@@ -272,13 +272,22 @@ export default class App extends Component {
 
     if (this._isSphereRoute(route)) {
       const timestamp = Math.floor(Date.now() / 1000);
-      // const expired = (timestamp - 1477980000 > 0); // Nov 1
-      const expired = (timestamp - 1477980000 > 0);
-      if (!expired && Preference.booleanForKey(Preference.Keys.Spheres.Prompted)) {
+      const expired = (timestamp - 1477980000 > 0); // Nov 1
+      const prompted = Preference.booleanForKey(Preference.Keys.Spheres.Prompted);
+      if (!expired && prompted) {
         return false;
       }
 
-      this._pushRoute(sphereInAppPurchaseURL({title: Localizable.t('spheres.text'), expired, redirect: route, modal: true}));
+      let title = null;
+      if (expired) {
+        title = Localizable.t('spheres.text');
+      } else if (!prompted) {
+        title = Localizable.t('spheres-trial');
+      } else {
+        title = Localizable.t('update-required');
+      }
+
+      this._pushRoute(sphereInAppPurchaseURL({title, expired, redirect: route, modal: true}));
       return true;
     }
     return false;

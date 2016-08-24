@@ -52,6 +52,8 @@
         "other": "{{count}} spheres"
       }
     },
+    "spheres-trial": "Spheres Free Trial",
+    "update-required": "Update Required",
     "add": "Add",
     "added": "Added",
     "range-of": "{{current}} of {{total}}",
