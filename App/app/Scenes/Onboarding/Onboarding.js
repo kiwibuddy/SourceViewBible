@@ -29,8 +29,6 @@ const { width: WIDTH, height: HEIGHT } = Dimensions.get('window');
 const SCROLLVIEW_REF = 'SCROLLVIEW_REF';
 const NUMBER_OF_PAGES = 4;
 
-console.log('height', HEIGHT);
-
 type Props = {
   title: string,
   navigate: Function,
@@ -139,10 +137,6 @@ export default class Onboarding extends Component {
   _onPressNext = () => {
     const { currentPage } = this.state;
     const offset = (currentPage + 1) * WIDTH;
-
-    console.log('currentPage', currentPage);
-    console.log('width', WIDTH);
-    console.log('offset', offset);
 
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     this.setState({currentPage: currentPage + 1}, () => {

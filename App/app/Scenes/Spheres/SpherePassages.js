@@ -112,7 +112,7 @@ export default class SpherePassages extends Component {
     const rows = {};
     const sections = [];
 
-    // Calling slice here because of possible bug in realm 0.14.1
+    // Calling slice here because of possible bug in realm 0.14.x
     const passages = sphere.passages.slice();
     for(let passage of passages) {
       let section = rows[passage.section];
@@ -123,7 +123,7 @@ export default class SpherePassages extends Component {
 
       const contents = [];
 
-      // Calling slice here because of possible bug in realm 0.14.1
+      // Calling slice here because of possible bug in realm 0.14.x
       const monads = passage.monads.slice();
       for(let monad of monads) {
         const content = await Emdros.scripture({monadSet: monad.monadSet, stylesheet: 'occurrence'});
