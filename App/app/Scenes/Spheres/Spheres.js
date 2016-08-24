@@ -415,6 +415,7 @@ const styles = StyleSheet.create({
   },
   carousel: {
     flex: 1,
+    top: 20,
   },
   carouselInfo: {
     backgroundColor: 'transparent',
@@ -438,7 +439,6 @@ const styles = StyleSheet.create({
     fontSize: 21,
     fontWeight: 'bold',
     color: '#59626A',
-    marginTop: -20,
   },
   sphereSubtitle: {
     color: '#9B9B9B',
