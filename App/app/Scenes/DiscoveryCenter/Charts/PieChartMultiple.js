@@ -83,7 +83,6 @@ export default class PieChartMultiple extends Component {
               <PieChart
                 color="white"
                 slices={slices}
-                sliceWidth={8}
                 size={100}
                 style={styles.pie}
                 title={pie.label}

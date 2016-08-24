@@ -37,7 +37,6 @@ const PieChartSingle = (props: Props) => {
         <PieChart
           color={'red'}
           slices={slices}
-          sliceWidth={12}
           size={150}
           style={styles.pie}
         />

@@ -14,7 +14,7 @@ import Svg,{
 } from 'react-native-svg';
 
 
-const DEFAULT_SLICE_WIDTH = 4;
+const DEFAULT_SLICE_WIDTH = 3;
 
 import StyleSheet from '../../Common/StyleSheet';
 import Colors from '../../Common/Colors';
@@ -22,11 +22,10 @@ import Colors from '../../Common/Colors';
 const PieChart = (props: Object) => {
   const { color, size, slices: data, titleStyle, subtitleStyle } = props;
   const chartStyle = [styles.chart, props.style, {width: size, height: size}];
-  const strokeWidth = 4;
+  const sliceWidth = props.sliceWidth;
 
   const title = props.title ? <Text numberOfLines={1} style={[styles.title, {color: color}, titleStyle]}>{props.title}</Text> : null;
   const subtitle = props.subtitle ? <Text numberOfLines={1} style={[styles.subtitle, subtitleStyle]}>{props.subtitle}</Text> : null;
-
 
   const slices = data.filter(slice => slice.value > 0);
   const sum = slices.reduce((sum, slice) => sum += slice.value, 0);
@@ -37,10 +36,10 @@ const PieChart = (props: Object) => {
 
     const pieSlice = <Circle
       key={'slice-' + index}
-      r="16" cx="17" cy="16"
+      r="16" cx="18" cy="16"
       fill="transparent"
       stroke={slice.color}
-      strokeWidth={strokeWidth/2}
+      strokeWidth={sliceWidth}
       strokeDasharray={[slicePercent, 100]}
       strokeDashoffset={-runningTotal}
     />;
@@ -52,7 +51,7 @@ const PieChart = (props: Object) => {
   return (
     <TouchableOpacity style={chartStyle} onPress={props.onPress}>
       <View style={[styles.pie, StyleSheet.absoluteFill]}>
-        <Svg width={size} height={size} viewBox="0 0 34 32">
+        <Svg width={size} height={size} viewBox="0 0 36 32">
           {pieSlices}
         </Svg>
       </View>
@@ -61,6 +60,26 @@ const PieChart = (props: Object) => {
     </TouchableOpacity>
   );
 }
+
+PieChart.propTypes = {
+  color: ColorPropType,
+  onPress: PropTypes.func,
+  slices: PropTypes.arrayOf(PropTypes.shape({
+    color: ColorPropType.isRequired,
+    value: PropTypes.number.isRequired,
+  })).isRequired,
+  sliceWidth: PropTypes.number,
+  style: PropTypes.any,
+  size: PropTypes.number.isRequired,
+  subtitle: PropTypes.string,
+  subtitleStyle: PropTypes.any,
+  title: PropTypes.string,
+  titleStyle: PropTypes.any,
+};
+
+PieChart.defaultProps = {
+  sliceWidth: DEFAULT_SLICE_WIDTH,
+};
 
 const styles = StyleSheet.create({
   chart: {
