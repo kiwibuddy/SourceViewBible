@@ -12,7 +12,7 @@ import ReactNative, {
 } from 'react-native';
 import { ListView } from '../../Components/Common/DatabaseListView';
 
-const { width } = Dimensions.get('window');
+const { width: WIDTH } = Dimensions.get('window');
 
 import {
   Colors,
@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
   },
 
   itemContainer: {
-    width: ((width - 8) / 3),
+    width: ((WIDTH - 8) / 3),
   },
   item: {
     marginHorizontal: 4,
@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
   },
   sourceTitle: {
     flex: 0,
-    fontSize: (width <= 320 ? 11 : 13),
+    fontSize: (WIDTH <= 320 ? 11 : 13),
     color: '#59626a',
     textAlign: 'center',
     fontWeight: '500',
@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
   statisticsContainer: {
     flex: 1,
     flexDirection: 'column',
-    marginHorizontal: (width <= 320 ? 2 : 5),
+    marginHorizontal: (WIDTH <= 320 ? 2 : 5),
   },
   statisticContainer: {
     marginTop: 7,
@@ -261,14 +261,14 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: Colors.tint,
     marginRight: 2,
-    margin: (width <= 320 ? 0 : null),
-    height: (width <= 320 ? 0 : null),
+    margin: (WIDTH <= 320 ? 0 : null),
+    height: (WIDTH <= 320 ? 0 : null),
   },
   statisticWordsTitle: {
     fontSize: 11,
     color: Colors.tint,
     marginRight: 3,
-    marginLeft: (width <= 320 ? 2 : null),
+    marginLeft: (WIDTH <= 320 ? 2 : null),
   },
   statisticSubtitle: {
     flex: 1,

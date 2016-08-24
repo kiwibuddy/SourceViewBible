@@ -24,7 +24,7 @@ import { BACK, readerURL } from '../../Navigation';
 
 import { Bible } from '../../Database';
 
-const { width } = Dimensions.get('window');
+const { width: WIDTH } = Dimensions.get('window');
 
 type State = {
   dataSource: any,
@@ -255,7 +255,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   gettingstartedIcon: {
-    width: (width <= 320 ? 60 : 120),
-    height: (width <= 320 ? 60 : 120),
+    width: (WIDTH <= 320 ? 60 : 120),
+    height: (WIDTH <= 320 ? 60 : 120),
   }
 });
