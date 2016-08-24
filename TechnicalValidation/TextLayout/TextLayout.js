@@ -89,7 +89,7 @@ export default class TextLayout extends Component {
   }
 
   _renderWebView() {
-    const html = HTML.replace('{{BODY}}', this.state.scripture);
+    const html = this.state.scripture;
     return (
       <View style={styles.container}>
         <TextInput
