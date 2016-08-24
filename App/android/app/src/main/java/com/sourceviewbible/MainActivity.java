@@ -36,7 +36,7 @@ public class MainActivity extends ReactActivity {
         }
 
         if (!destinationFile.exists()) {
-          Log.v("Emdros", "Internal storage: " + destinationPath);
+          // Log.v("Emdros", "Internal storage: " + destinationPath);
 
           // String[] files = assetManager.list("");
           // for (String filename : files) {
@@ -54,7 +54,7 @@ public class MainActivity extends ReactActivity {
           destinationOutputStream.close();
           sourceInputStream.close();
 
-          Log.v("Emdros", "Copied: " + sourcePath + " to: " + destinationPath);
+          // Log.v("Emdros", "Copied: " + sourcePath + " to: " + destinationPath);
         }
       } catch (IOException e) {
            Log.v("Emdros", "uh oh: " + e.toString());
