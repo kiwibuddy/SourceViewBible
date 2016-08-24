@@ -25,10 +25,11 @@ import PageControl from '../../Components/Common/PageControl';
 import { BACK, discoverURL } from '../../Navigation';
 import { Preference } from '../../Preferences';
 
-const { width: WIDTH } = Dimensions.get('window');
+const { width: WIDTH, height: HEIGHT } = Dimensions.get('window');
 const SCROLLVIEW_REF = 'SCROLLVIEW_REF';
 const NUMBER_OF_PAGES = 4;
-const { width } = Dimensions.get('window');
+
+console.log('height', HEIGHT);
 
 type Props = {
   title: string,
@@ -92,14 +93,14 @@ export default class Onboarding extends Component {
                 <Text style={styles.contentBody}>Every word is enriched by layers of information, enabling you to explore and gain new insights.</Text>
               </View>
             </View>
-            <View style={styles.onboardingContainer}>
+            {/* <View style={styles.onboardingContainer}>
               <View style={styles.onboardingContent}>
                 <Image source={require('./Images/onboarding-5.png')} />
                 <Text style={styles.contentHeader}>Share discoveries</Text>
                 <Text style={styles.contentBody}>Create insightful visualizations of Scripture and share them
   with friends.</Text>
               </View>
-            </View>
+            </View> */}
           </ScrollView>
           {this._renderControls()}
           <PageControl
@@ -179,13 +180,12 @@ const styles = StyleSheet.create({
     width: WIDTH,
   },
   scrollView: {
-    flex: 1,
     backgroundColor: 'transparent'
   },
   onboardingContent: {
     alignItems: 'center',
     marginHorizontal: 30,
-    marginTop: (width <= 320 ? 30 : 50),
+    marginTop: (WIDTH <= 320 ? 30 : 50),
   },
   contentHeader: {
     fontSize: 27,
@@ -196,17 +196,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   contentBody: {
-    fontSize: (width <= 320 ? 18 : 21),
+    fontSize: (WIDTH <= 320 || HEIGHT <= 600 ? 18 : 21),
     lineHeight: 25,
     color: '#59626A',
     textAlign: 'center',
   },
   onboardingControls: {
-    position: 'absolute',
-    bottom: (width <= 320 ? 40 : 100),
-    left: 0,
-    right: 0,
-    alignItems: 'center',
+    paddingVertical: 10,
+    marginBottom: (HEIGHT > 600 ? 50 : 0),
   },
   nextButton: {
     backgroundColor: Colors.tint,
@@ -228,6 +225,7 @@ const styles = StyleSheet.create({
   skipButton: {
     color: Colors.tint,
     fontSize: 17,
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
+    alignSelf: 'center',
   },
 });
