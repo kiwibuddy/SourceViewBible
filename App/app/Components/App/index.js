@@ -294,8 +294,9 @@ export default class App extends Component {
     const canGoBack = navigation.index > 0;
     if (canGoBack) {
       this._popRoute();
+      return true;
     }
-    
+
     return false;
   }
 }
