@@ -265,9 +265,7 @@ export default class Reader extends Component {
 
     let showNumbers = Preference.booleanForKey(Preference.Keys.Reader.showNumbers);
     if (showNumbers == null) showNumbers = true;
-    if (!showNumbers) {
-      html = html.replace(new RegExp('{{NUMBER_DISPLAY}}', 'g'), 'display: none;');
-    }
+    html = html.replace(new RegExp('{{NUMBER_DISPLAY}}', 'g'), showNumbers ? '' : 'display: none;');
 
     return html;
   };

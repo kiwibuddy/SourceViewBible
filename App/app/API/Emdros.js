@@ -41,10 +41,13 @@ function highlightSpheres(feature: string, spheres: any, startingPosition: numbe
 }
 
 function openDatabase() {
-  Emdros.open({name: 'Datasets/en/NLT/SourceView.bpt'}).then((emdros) => {
-    DB = emdros;
-  }).catch((error) => {
-    console.log(error);
+  return new Promise((resolve, reject) => {
+    Emdros.open({name: 'Datasets/en/NLT/SourceView.bpt'}).then((emdros) => {
+      DB = emdros;
+      resolve(emdros);
+    }).catch((error) => {
+      console.log(error);
+    });
   });
 }
 

@@ -1,0 +1,64 @@
+{
+  "fetchinfo":{
+    "base":{
+      "prepend_XML_declaration":false,
+      "object_types":{
+        "PoetryLine":{
+          "docindexfeature":"docindex",
+          "end":"",
+          "start":" "
+        },
+        "Token":{
+          "docindexfeature":"docindex",
+          "end":"",
+          "get":[
+            "surface",
+          ],
+          "start":"{{ feature 0 }}"
+        },
+        "NonWordToken":{
+          "docindexfeature":"docindex",
+          "end":"",
+          "get":[
+            "surface",
+          ],
+          "start":"{{ feature 0 }}"
+        },
+        "SpaceToken" : {
+          "docindexfeature" : "docindex",
+          "end" : "",
+          "get" : [],
+          "start" : " "
+        }
+      },
+      "postprocess":[
+
+      ]
+    },
+    "bookname":{
+      "object_types":{
+        "Book":{
+          "docindexfeature":"docindex",
+          "end":"",
+          "get":[
+            "DJHRef"
+          ],
+          "start":"{{ featurenomangle 0 }}"
+        }
+      },
+      "prepend_XML_declaration":false
+    }
+  },
+  "renderinfo":{
+    "base":{
+      "elements":{
+        "blah":{
+          "end":"</blah>",
+          "start":"<blah>"
+        }
+      },
+      "extends":"base",
+      "fetch_stylesheet":"base"
+    }
+  }
+}

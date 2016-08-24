@@ -76,7 +76,9 @@ export default class TextLayout extends Component {
   }
 
   componentDidMount() {
-    this._fetchScripture();
+    Emdros.openDatabase().then(emdros => {
+      this._fetchScripture();
+    });
   }
 
   render() {
@@ -141,19 +143,37 @@ export default class TextLayout extends Component {
     const { monadSet } = this.state;
 
     console.log('Fetching', monadSet);
-    Emdros.openDatabase().then(() => {
-      const options = {monadSet};
-       Emdros.scripture(options).then(scripture => {
-         //  console.log(scripture);
-        //  console.log(monadSet);
-         this._saveScripture(scripture);
+    const options = {monadSet, spheres:[]};
+      Emdros.scripture(options).then(content => {
+        const scripture = this._renderScripture(content);
+        this._saveScripture(scripture);
 
-         this.setState({scripture});
-       }).catch(error => {
-         console.log(error);
-       });
-    });
-  }
+        this.setState({scripture});
+      }).catch(error => {
+        console.log(error);
+      });
+   }
+
+   _renderScripture = (content: string) => {
+      const isPsalms = false;
+
+      let html = HTML.replace('{{BODY}}', content);
+      html = html.replace(new RegExp('{{BOOK_NAME}}', 'g'), 'BOOK');
+      html = html.replace('{{IS_PSALMS}}', (isPsalms ? 'true' : 'false'));
+
+      // const fontStepSize = Preference.numberForKey(Preference.Keys.Reader.fontStepSize) || 0;
+      const fontSize = 13;//Math.ceil((ReaderBaseFontSize + (fontStepSize * ReaderFontStepSize)) * ReaderWebFontConversion);
+      const lineHeight = 24;//Math.ceil((ReaderBaseLineHeight + (fontStepSize * ReaderFontStepSize)) * ReaderWebFontConversion);
+
+      html = html.replace('{{FONT_SIZE}}', fontSize.toString());
+      html = html.replace('{{LINE_HEIGHT}}', lineHeight.toString());
+
+      let showNumbers = true;//Preference.booleanForKey(Preference.Keys.Reader.showNumbers);
+      if (showNumbers == null) showNumbers = true;
+      html = html.replace(new RegExp('{{NUMBER_DISPLAY}}', 'g'), showNumbers ? '' : 'display: none;');
+
+      return html;
+    };
 }
 
 const styles = StyleSheet.create({
