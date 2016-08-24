@@ -54,7 +54,6 @@ type PieProps = {
   source: Object,
   subtitleStyle?: any,
   size: number,
-  sliceWidth?: number,
   style?: any,
   titleStyle?: any
 };
@@ -100,7 +99,7 @@ export default class SphereSources extends Component {
     return (
       <View>
         <ScrollView style={styles.sphereSourcesGraph}>
-          {this._renderPie({source: sources[0], size: 130, sliceWidth: 6, subtitleStyle: {fontSize: 15, textAlign: 'center'}, titleStyle: {fontSize: 24}, style: {top: 50, alignSelf: 'center'}})}
+          {this._renderPie({source: sources[0], size: 130, subtitleStyle: {fontSize: 15, textAlign: 'center'}, titleStyle: {fontSize: 24}, style: {top: 50, alignSelf: 'center'}})}
           {this._renderPie({source: sources[1], size: 80, subtitleStyle: {fontSize: 13, textAlign: 'center'}, titleStyle: {fontSize: 20}, style: [styles.pie, {top: 95, left: 40}]})}
           {this._renderPie({source: sources[2], size: 80, subtitleStyle: {fontSize: 13, textAlign: 'center'}, titleStyle: {fontSize: 20}, style: [styles.pie, {top: 20, left: -5}]})}
           {this._renderPie({source: sources[3], size: 80, subtitleStyle: {fontSize: 13, textAlign: 'center'}, titleStyle: {fontSize: 20}, style: [styles.pie, {top: 30, right: 40}]})}
@@ -166,7 +165,7 @@ export default class SphereSources extends Component {
     );
   };
 
-  _renderPie({source, size, sliceWidth, style, subtitleStyle, titleStyle}: PieProps) {
+  _renderPie({source, size, style, subtitleStyle, titleStyle}: PieProps) {
     const { sphere } = this.state;
     // const colors = Colors.spheres[sphere.id];
     const colors = Colors.sources[source.principalSourceType];
@@ -177,7 +176,6 @@ export default class SphereSources extends Component {
       <PieChart
         color={colors.tint}
         slices={slices}
-        sliceWidth={sliceWidth}
         subtitle={source.name}
         subtitleStyle={subtitleStyle}
         title={Localizable.toPercentage(sourcePercent, {precision: 0})}

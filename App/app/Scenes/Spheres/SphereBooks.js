@@ -61,7 +61,6 @@ type PieProps = {
   book: Object,
   subtitleStyle?: any,
   size: number,
-  sliceWidth?: number,
   style?: any,
   titleStyle?: any
 };
@@ -147,7 +146,7 @@ export default class SphereBooks extends Component {
           <View style={StyleSheet.styles.statisticKeyline} />
         </View>
         <ScrollView style={styles.sphereBooksGraph}>
-          {this._renderPie({book: books[0], size: 130, sliceWidth: 6, subtitleStyle: {fontSize: 17}, titleStyle: {fontSize: 24}, style: {top: 50, alignSelf: 'center'}})}
+          {this._renderPie({book: books[0], size: 130, subtitleStyle: {fontSize: 17}, titleStyle: {fontSize: 24}, style: {top: 50, alignSelf: 'center'}})}
           {this._renderPie({book: books[1], size: 80, subtitleStyle: {fontSize: 15}, titleStyle: {fontSize: 20}, style: [styles.pie, {top: 95, left: 40}]})}
           {this._renderPie({book: books[2], size: 80, subtitleStyle: {fontSize: 15}, titleStyle: {fontSize: 20}, style: [styles.pie, {top: 20, left: -5}]})}
           {this._renderPie({book: books[3], size: 80, subtitleStyle: {fontSize: 15}, titleStyle: {fontSize: 20}, style: [styles.pie, {top: 30, right: 40}]})}
@@ -209,7 +208,7 @@ export default class SphereBooks extends Component {
     );
   };
 
-  _renderPie({book, size, sliceWidth, style, subtitleStyle, titleStyle}: PieProps) {
+  _renderPie({book, size, style, subtitleStyle, titleStyle}: PieProps) {
     const { sphere } = this.state;
     const colors = Colors.spheres[sphere.id];
 
@@ -219,7 +218,6 @@ export default class SphereBooks extends Component {
       <PieChart
         color={colors.tint}
         slices={slices}
-        sliceWidth={sliceWidth}
         subtitle={book.DJHRef}
         subtitleStyle={subtitleStyle}
         title={Localizable.toPercentage(bookPercent, {precision: 0})}
