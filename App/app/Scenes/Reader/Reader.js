@@ -192,7 +192,6 @@ export default class Reader extends Component {
         <WebView
           decelerationRate='normal'
           injectedJavaScript={injectedJavaScript}
-          scalesPageToFit={false}
           style={styles.webview}
           source={{html: this.state.scripture}}
         />
