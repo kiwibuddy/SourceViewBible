@@ -151,7 +151,7 @@ export default class SpherePassages extends Component {
         const content = await Emdros.scripture({monadSet: monad.monadSet, stylesheet: 'occurrence'});
         contents.push(content);
       }
-      const scripture = contents.join(' ');
+      const scripture = contents.join(' ... ');
       rows[passage.section] = [...section, {...passage, scripture}];
     }
 
