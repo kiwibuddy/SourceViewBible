@@ -24,12 +24,9 @@ type Props = {
   style?: Object,
   title?: any,
   titleStyle?: any,
-  visible?: boolean
 };
 
 const NavigationBarButton = (props: Props) => {
-  if (props.visible === false) return null;
-
   const imageStyle = props.disabled ? {tintColor: 'gray'} : {};
   const textStyle = props.disabled ? {color: 'gray'} : {};
   const title = props.title && Platform.OS !== 'android' ? <View style={styles.textContainer}><Text style={[styles.text, props.titleStyle, textStyle]}>{props.title}</Text></View> : null;
@@ -37,7 +34,7 @@ const NavigationBarButton = (props: Props) => {
   const backImage = require('./Images/nav-back.png');
   const image = props.imageSource || Platform.OS === 'android' ? <Image source={props.imageSource || backImage} style={[styles.image, imageStyle]} /> : null;
 
-  const buttonStyle = title ? {width: null, paddingHorizontal: null, flex: 1} : {};
+  const buttonStyle = title ? {width: null, flex: 1} : {};
 
   return (
     <TouchableOpacity
@@ -53,15 +50,14 @@ const NavigationBarButton = (props: Props) => {
 
 const styles = StyleSheet.create({
   button: {
-    width: 30,
-    height: 30,
-    marginHorizontal: 8,
-    paddingHorizontal: 16,
-    marginTop: -3,
+    width: 24,
+    height: 24,
+    margin: Platform.OS === 'ios' ? 10 : 16,
   },
   image: {
     tintColor: Colors.tint,
     alignSelf: 'center',
+    resizeMode: 'contain',
   },
   textContainer: {
     flex: 1,

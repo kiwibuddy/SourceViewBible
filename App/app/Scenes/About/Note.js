@@ -17,7 +17,7 @@ import {
   StyleSheet,
 } from '../../Common';
 
-import { NavigationBar, NavigationBarButton } from '../../Components/Navigation';
+import { NavigationHeader, NavigationBarButton } from '../../Components/Navigation';
 import { BACK } from '../../Navigation';
 
 type Props = {
@@ -28,13 +28,14 @@ type Props = {
 const Note = (props: Props) => {
   return (
     <View style={styles.container}>
-      <NavigationBar title={props.title}>
-        <NavigationBarButton
+      <NavigationHeader
+        navigate={props.navigate}
+        title={props.title}
+        renderLeftComponent={(props: Object) => (<NavigationBarButton
           title={Localizable.t('back')}
           onPress={() => props.navigate(BACK)}
-          style={{position: 'absolute', left: 0}}
-        />
-      </NavigationBar>
+        />)}
+      />
       <ScrollView style={styles.scrollView}>
         <View style={styles.aboutContainer}>
         <Text style={styles.contentBody}>The Holy Bible, New Living Translation, was first published in 1996. It quickly became one of the most popular Bible translations in the English-speaking world. While the NLT’s influence was rapidly growing, the Bible Translation Committee determined that an additional investment in scholarly review and text refinement could make it even better. So shortly after its initial publication, the committee began an eight-year process with the purpose of increasing the level of the NLT’s precision without sacrificing its easy-to-understand quality. This second-generation text was completed in 2004 and is reflected in this edition of the New Living Translation. An additional update with minor changes was subequently introduced in 2007.</Text>
@@ -52,7 +53,6 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
-    marginTop: NavigationBar.HEIGHT,
   },
   aboutContainer: {
     paddingTop: 20,

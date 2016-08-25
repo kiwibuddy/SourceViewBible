@@ -17,7 +17,7 @@ import {
   StyleSheet,
 } from '../../Common';
 
-import { NavigationBar, NavigationBarButton } from '../../Components/Navigation';
+import { NavigationHeader, NavigationBarButton } from '../../Components/Navigation';
 import { BACK } from '../../Navigation';
 
 type Props = {
@@ -28,13 +28,14 @@ type Props = {
 const Acknowledgments = (props: Props) => {
   return (
     <View style={styles.container}>
-      <NavigationBar title={props.title}>
-        <NavigationBarButton
+      <NavigationHeader
+        navigate={props.navigate}
+        title={props.title}
+        renderLeftComponent={(props: Object) => (<NavigationBarButton
           title={Localizable.t('back')}
           onPress={() => props.navigate(BACK)}
-          style={{position: 'absolute', left: 0}}
-        />
-      </NavigationBar>
+        />)}
+      />
       <ScrollView style={styles.scrollView}>
       <View style={styles.aboutContainer}>
         <Text style={styles.contentH2}>Acknowledgments for the SourceView and SphereView Bible Digital Development</Text>
@@ -83,7 +84,6 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
-    marginTop: NavigationBar.HEIGHT,
   },
   aboutContainer: {
     paddingTop: 20,

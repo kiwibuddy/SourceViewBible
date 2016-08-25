@@ -22,7 +22,7 @@ import {
 } from '../../Common';
 const { Links } = Constants;
 
-import { NavigationBar, NavigationBarButton } from '../../Components/Navigation';
+import { NavigationHeader, NavigationBarButton } from '../../Components/Navigation';
 import { BACK, aboutAcknowledgmentsURL, aboutCopyrightURL, aboutNoteURL, aboutNLTURL, aboutTermsURL, aboutWhyURL } from '../../Navigation';
 import Icon from '../../Components/Common/Icon';
 
@@ -42,13 +42,14 @@ const About = (props: Props) => {
   const ratingLink = (Platform.OS === 'ios' ? Links.AppStoreRating : Links.GooglePlayRating);
   return (
     <View style={styles.container}>
-      <NavigationBar title={props.title}>
-        <NavigationBarButton
+      <NavigationHeader
+        navigate={props.navigate}
+        title={props.title}
+        renderLeftComponent={(props: Object) => (<NavigationBarButton
           title={Localizable.t('close')}
           onPress={() => props.navigate(BACK)}
-          style={{position: 'absolute', left: 0}}
-        />
-      </NavigationBar>
+        />)}
+      />
       <ScrollView style={styles.scrollView}>
         <View style={styles.header}>
           <Image source={require('./Images/about-icon.png')}/>
@@ -168,7 +169,6 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
-    marginTop: NavigationBar.HEIGHT,
   },
   header: {
     paddingVertical: 20,

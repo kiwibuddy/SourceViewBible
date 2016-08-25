@@ -17,7 +17,7 @@ import {
   StyleSheet,
 } from '../../Common';
 
-import { NavigationBar, NavigationBarButton } from '../../Components/Navigation';
+import { NavigationHeader, NavigationBarButton } from '../../Components/Navigation';
 import { BACK } from '../../Navigation';
 
 type Props = {
@@ -28,13 +28,14 @@ type Props = {
 const Copyright = (props: Props) => {
   return (
     <View style={styles.container}>
-      <NavigationBar title={props.title}>
-        <NavigationBarButton
+      <NavigationHeader
+        navigate={props.navigate}
+        title={props.title}
+        renderLeftComponent={(props: Object) => (<NavigationBarButton
           title={Localizable.t('back')}
           onPress={() => props.navigate(BACK)}
-          style={{position: 'absolute', left: 0}}
-        />
-      </NavigationBar>
+        />)}
+      />
       <ScrollView style={styles.scrollView}>
         <View style={styles.aboutContainer}>
           <Text style={styles.contentBody}>Holy Bible, New Living Translation, copyright © 1996, 2004, 2007 by Tyndale House Foundation. Used by permission of Tyndale House Publishers, Inc., Carol Stream, Illinois 60188. All rights reserved.</Text>
@@ -68,7 +69,6 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
-    marginTop: NavigationBar.HEIGHT,
   },
   aboutContainer: {
     paddingTop: 20,

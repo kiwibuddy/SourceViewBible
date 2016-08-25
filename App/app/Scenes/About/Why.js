@@ -17,7 +17,7 @@ import {
   StyleSheet,
 } from '../../Common';
 
-import { NavigationBar, NavigationBarButton } from '../../Components/Navigation';
+import { NavigationHeader, NavigationBarButton } from '../../Components/Navigation';
 import { BACK } from '../../Navigation';
 
 type Props = {
@@ -28,13 +28,14 @@ type Props = {
 const Why = (props: Props) => {
   return (
     <View style={styles.container}>
-      <NavigationBar title={props.title}>
-        <NavigationBarButton
+      <NavigationHeader
+        navigate={props.navigate}
+        title={props.title}
+        renderLeftComponent={(props: Object) => (<NavigationBarButton
           title={Localizable.t('back')}
           onPress={() => props.navigate(BACK)}
-          style={{position: 'absolute', left: 0}}
-        />
-      </NavigationBar>
+        />)}
+      />
       <ScrollView style={styles.scrollView}>
         <View style={styles.aboutContainer}>
         <Text style={styles.contentBody}>In your hands you hold a fresh, innovative way to read God’s Word. A half millennium has passed since a new way to format the biblical text has been presented to the Body of Christ. This new way to format the Scriptures subdivides the text along natural lines shaped by the dramatic development of the narrative. It allows you to see the story of redemption emerge with a clarity and intensity that will revitalize your hunger for God’s Word. It is an innovation which fundamentally recaptures and restores the dynamic of the original biblical text, a dynamic rich in conversation and action. So, what has led to the development of the Bible with SourceView™ format?</Text>
@@ -109,7 +110,6 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
-    marginTop: NavigationBar.HEIGHT,
   },
   aboutContainer: {
     paddingTop: 20,
