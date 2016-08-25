@@ -95,10 +95,10 @@ export default class NavigationHeader extends Component {
 const styles = StyleSheet.create({
   appbar: {
     alignItems: 'center',
-    backgroundColor: Platform.OS === 'ios' ? 'rgba(248, 248, 248, .85)' : '#FFF',
+    backgroundColor: Platform.OS === 'ios' ? 'rgba(248, 248, 248, .85)' : '#F9F9F9',
     borderBottomColor: 'rgba(0, 0, 0, .15)',
     borderBottomWidth: Platform.OS === 'ios' ? StyleSheet.hairlineWidth : 0,
-    elevation: 4,
+    elevation: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
   },

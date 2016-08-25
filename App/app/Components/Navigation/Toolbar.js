@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     right: 0,
     left: 0,
     backgroundColor: Platform.OS === 'ios' ? 'rgba(248, 248, 248, .85)' : '#F9F9F9',
-    borderTopColor: Platform.OS === 'ios' ? 'rgba(0, 0, 0, .15)' : 'rgba(0, 0, 0, .10)',
+    borderTopColor: Platform.OS === 'ios' ? 'rgba(0, 0, 0, .15)' : '#E8E8E8',
     borderTopWidth: Platform.OS === 'ios' ? StyleSheet.hairlineWidth : 0.5,
     flexDirection: 'row',
     justifyContent: 'center',
