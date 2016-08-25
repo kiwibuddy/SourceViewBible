@@ -60,7 +60,7 @@ export default class ReaderSearch extends Component {
               onChangeText={this._search}
               onSubmitEditing={this._onSubmitSearch}
               placeholder={Localizable.t('search-references')}
-              style={[styles.searchTextInput, {top: null, bottom: null, left: 0, right: 0, marginVertical: 8, marginRight: 32, marginLeft: -32}]}
+              style={[styles.searchTextInput, {top: null, bottom: null, left: 0, right: 0, marginVertical: 8, marginRight: 32}]}
               value={this.state.search}
             />
           )}
@@ -223,7 +223,6 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     borderWidth: 1,
     paddingLeft: 8,
-    marginLeft: 8,
     height: 26,
     padding: 0, // Android workaround
   },
