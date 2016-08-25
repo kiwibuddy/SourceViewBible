@@ -64,6 +64,7 @@ const Help = (props: Props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFF'
   },
   scrollView: {
     flex: 1,

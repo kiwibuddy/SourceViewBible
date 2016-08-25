@@ -84,7 +84,7 @@ module.exports = `
       .sourceText {
         padding: 0 5pt;
       }
-      .embeddedDocument {
+      .embeddedDocument, .embeddedQuotation {
         font-style: italic;
       }
       .textTitle {
