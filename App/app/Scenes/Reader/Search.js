@@ -68,7 +68,7 @@ export default class ReaderSearch extends Component {
             <NavigationBarButton
               title={Localizable.t('cancel')}
               titleStyle={StyleSheet.styles.navigationBar.doneButtonTitle}
-              onPress={() => props.navigate(BACK)}
+              onPress={() => this.props.navigate(BACK)}
             />
           )}
         />
