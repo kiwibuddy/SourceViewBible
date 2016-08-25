@@ -35,6 +35,9 @@ import SegmentedControl from '../../Components/Common/SegmentedControl';
 import { SourcesBarChart, SpheresBarChart } from '../../Components/Charts';
 import { ReadingTime } from '../../Common/NumberHelper';
 
+import { NavigationHeader } from '../../Components/Navigation';
+
+
 const SEGMENTS = [Localizable.t('sources.text'), Localizable.t('spheres.text')];
 const SEGMENT_INDEXES = {
   SOURCES: 0,
@@ -238,7 +241,7 @@ const styles = StyleSheet.create({
       android: {
         segmentedControl: {
           shadowColor: 'red',
-          elevation: 4,
+          elevation: NavigationHeader.ELEVATION,
         },
       },
   })

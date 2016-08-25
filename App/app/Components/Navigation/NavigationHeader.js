@@ -30,8 +30,14 @@ type Props = {
 
 const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
+const ELEVATION = 2;
 
 export default class NavigationHeader extends Component {
+  static HEIGHT = APPBAR_HEIGHT + STATUSBAR_HEIGHT;
+  static APPBAR_HEIGHT = APPBAR_HEIGHT;
+  static Title = NavigationHeaderTitle;
+  static ELEVATION = ELEVATION;
+
   props: Props;
 
   static defaultProps = {
@@ -86,10 +92,6 @@ export default class NavigationHeader extends Component {
       </View>
     );
   };
-
-  static HEIGHT = APPBAR_HEIGHT + STATUSBAR_HEIGHT;
-  static APPBAR_HEIGHT = APPBAR_HEIGHT;
-  static Title = NavigationHeaderTitle;
 }
 
 const styles = StyleSheet.create({
@@ -98,7 +100,7 @@ const styles = StyleSheet.create({
     backgroundColor: Platform.OS === 'ios' ? 'rgba(248, 248, 248, .85)' : '#F9F9F9',
     borderBottomColor: 'rgba(0, 0, 0, .15)',
     borderBottomWidth: Platform.OS === 'ios' ? StyleSheet.hairlineWidth : 0,
-    elevation: 1,
+    elevation: ELEVATION,
     flexDirection: 'row',
     justifyContent: 'flex-start',
   },
