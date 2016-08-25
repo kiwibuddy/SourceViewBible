@@ -124,12 +124,13 @@ export default class BookSources extends Component {
   _renderRow = (sourceRelation: Object, sectionID: string, rowID: string, highlightRow: boolean) => {
     const { book } = this.state;
     const source = sourceRelation.source;
-    const chartData = Object.keys(sourceRelation.sourceTypeCounts).filter(sourceType => sourceRelation.sourceTypeCounts[sourceType].count > 0).map(sourceType => {
+
+    const data = {};
+    Object.keys(sourceRelation.sourceTypeCounts).filter(sourceType => sourceRelation.sourceTypeCounts[sourceType].count > 0).forEach(sourceType => {
       const sourceTypeCount = sourceRelation.sourceTypeCounts[sourceType];
-      const data = {};
       data[sourceTypeCount.string] = sourceTypeCount.count;
-      return data;
     });
+    const chartData = [data];
 
     return (
       <TouchableOpacity style={styles.section} onPress={() => this._onPressScripture(source)}>
