@@ -23,7 +23,7 @@ import {
 } from '../../Common';
 
 import { BACK, bookURL, readerSearchURL, readerSettingsURL, readerURL } from '../../Navigation';
-import { NavigationHeader, NavigationBarButton } from '../../Components/Navigation';
+import { NavigationHeader, NavigationBarButton, Toolbar, ToolbarButton } from '../../Components/Navigation';
 
 const RNFS = require('react-native-fs');
 
@@ -34,24 +34,6 @@ const HTML = require('./HTML');
 
 import { Preference } from '../../Preferences';
 import { ReaderBaseFontSize, ReaderBaseLineHeight, ReaderFontStepSize, ReaderWebFontConversion } from '../../Common/Constants';
-
-// const NavigationBar = (props: Props) => {
-//   const book = Book.findByID(props.bookID);
-//   return (
-//     <Navigation.NavigationBar title={props.title} onPressTitle={() => props.navigate(bookURL({bookID: book.id, title: book.name}))}>
-//       <Navigation.NavigationBarButton
-//         imageSource={require('../../Components/Navigation/Images/nav-search.png')}
-//         onPress={() => {props.navigate(readerSearchURL({modal: true}))}}
-//         style={{position: 'absolute', left: 0}}
-//       />
-//       <Navigation.NavigationBarButton
-//         imageSource={require('../../Components/Navigation/Images/nav-filter.png')}
-//         onPress={() => {props.navigate(readerSettingsURL({title: Localizable.t('settings'), modal: true}))}}
-//         style={{position: 'absolute', right: 5}}
-//       />
-//     </Navigation.NavigationBar>
-//   );
-// };
 
 class OccurrenceToolbar extends Component {
   render() {
@@ -87,31 +69,31 @@ class OccurrenceToolbar extends Component {
     }
 
     return (
-      <Navigation.Toolbar>
+      <Toolbar>
         <View style={{flex: 1, flexDirection: 'row'}}>
-          <Navigation.ToolbarButton
+          <ToolbarButton
             disabled={previousRoute == null}
             imageSource={require('../../Images/common/previous.png')}
             onPress={() => this._navigate(previousRoute)}
           />
-          <Navigation.ToolbarButton
+          <ToolbarButton
             disabled={nextRoute == null}
             imageSource={require('../../Images/common/next.png')}
             onPress={() => this._navigate(nextRoute)}
           />
         </View>
-        <Navigation.ToolbarButton
+        <ToolbarButton
           title={Localizable.t('range-of', {current, total})}
           onPress={() => this._onPressOccurrences(currentRoute)}
           style={{marginLeft: -10}}
         />
-        <Navigation.ToolbarButton
+        <ToolbarButton
           title={Localizable.t('done')}
           titleStyle={StyleSheet.styles.navigationBar.doneButtonTitle}
           onPress={() => this._navigate(currentRoute)}
           style={{paddingHorizontal: 0, marginHorizontal: 0, marginRight: -20}}
         />
-      </Navigation.Toolbar>
+      </Toolbar>
     );
   }
 
