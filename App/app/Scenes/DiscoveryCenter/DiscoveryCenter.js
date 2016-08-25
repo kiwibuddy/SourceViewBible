@@ -29,7 +29,7 @@ import { DeleteButton, DuplicateButton, ShareButton } from './Buttons';
 // $FlowFixMe: Can't find os module extension
 import LinearGradient from 'react-native-linear-gradient';
 
-import { NavigationBar, NavigationBarButton, Toolbar, ToolbarButton } from '../../Components/Navigation';
+import { NavigationHeader, NavigationBarButton, Toolbar, ToolbarButton } from '../../Components/Navigation';
 
 import { BACK, discoveryCenterURL, discoveryCenterHelpURL, occurrencesURL } from '../../Navigation';
 
@@ -72,19 +72,18 @@ export default class DiscoveryCenter extends Component {
     const popover = this._renderPopover();
     return (
       <View style={styles.container}>
-        <NavigationBar title={Localizable.t('discovery-center')}>
-          <NavigationBarButton
+        <NavigationHeader
+          title={Localizable.t('discovery-center')}
+          renderLeftComponent={(props: Object) => <NavigationBarButton
             title={Localizable.t('done')}
             titleStyle={StyleSheet.styles.navigationBar.doneButtonTitle}
             onPress={() => this.props.navigate(BACK)}
-            style={{position: 'absolute', left: 5}}
-          />
-          <NavigationBarButton
+          />}
+          renderRightComponent={(props: Object) => <NavigationBarButton
             imageSource={require('../../Components/Navigation/Images/nav-help.png')}
             onPress={() => this.props.navigate(discoveryCenterHelpURL({title: Localizable.t('help'), modal: true}))}
-            style={{position: 'absolute', right: 5}}
-          />
-        </NavigationBar>
+          />}
+        />
         <ScrollView ref={SCROLLVIEW_REF}
           style={styles.content}
           onContentSizeChange={(w, h) => this.contentHeight = h}
@@ -246,7 +245,6 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    marginTop: NavigationBar.HEIGHT,
     marginBottom: Toolbar.HEIGHT,
   },
 });
