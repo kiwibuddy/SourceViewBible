@@ -22,7 +22,7 @@ import {
 } from '../../Common';
 const { Links } = Constants;
 
-import { NavigationBar, NavigationBarButton } from '../../Components/Navigation';
+import { NavigationHeader, NavigationBarButton } from '../../Components/Navigation';
 import { BACK, sphereHelpURL } from '../../Navigation';
 
 import { Preference } from '../../Preferences';
@@ -49,13 +49,14 @@ export default class InAppPurchase extends Component {
 
     return (
       <View style={styles.container}>
-        <NavigationBar title={this.props.title}>
-          <NavigationBarButton
+        <NavigationHeader
+          navigate={this.props.navigate}
+          title={this.props.title}
+          renderLeftComponent={(props: Object) => (<NavigationBarButton
             title={Localizable.t('back')}
-            onPress={() => this.props.navigate(BACK)}
-            style={{position: 'absolute', left: 0}}
-          />
-        </NavigationBar>
+            onPress={() => props.navigate(BACK)}
+          />)}
+        />
         <ScrollView style={styles.scrollView}>
           {content}
         </ScrollView>
@@ -108,7 +109,6 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
-    marginTop: NavigationBar.HEIGHT,
   },
   contentContainer: {
     alignItems: 'center',

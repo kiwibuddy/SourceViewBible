@@ -22,7 +22,7 @@ import {
   Localizable
 } from '../../Common';
 
-import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigation';
+import { NavigationHeader, NavigationBarButton } from '../../Components/Navigation';
 
 import { BACK, occurrencesURL, readerURL } from '../../Navigation';
 
@@ -73,14 +73,15 @@ export default class Occurrences extends Component {
 
     return (
       <View style={styles.container}>
-        <NavigationBar title={Localizable.t('passages')}>
-          <TouchableOpacity
+        <NavigationHeader
+          navigate={this.props.navigate}
+          title={Localizable.t('passages')}
+          renderLeftComponent={(props: Object) => (<NavigationBarButton
+            title={backTitle}
+            titleStyle={StyleSheet.styles.navigationBar.doneButtonTitle}
             onPress={this._onPressBack}
-            style={{position: 'absolute', left: 16}}
-          >
-            <Text style={StyleSheet.styles.navigationBar.doneButtonTitle}>{backTitle}</Text>
-          </TouchableOpacity>
-        </NavigationBar>
+          />)}
+        />
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this._renderRow}
@@ -170,7 +171,6 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    marginTop: NavigationBar.HEIGHT,
   },
   separator: {
     ...StyleSheet.styles.separator,
