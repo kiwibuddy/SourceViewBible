@@ -20,7 +20,7 @@ import {
 
 import moment from 'moment';
 
-import { NavigationBar, Toolbar, ToolbarButton } from '../../Components/Navigation';
+import { NavigationHeader, NavigationBarButton, Toolbar, ToolbarButton } from '../../Components/Navigation';
 
 import { BACK, spheresURL, sphereInAppPurchaseURL } from '../../Navigation';
 
@@ -72,21 +72,24 @@ export default class Bookmarks extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <NavigationBar>
-          <SegmentedControl
-            style={{flex: 1, marginLeft: 16}}
-            tintColor={Colors.tint}
-            values={SEGMENTS}
-            selectedIndex={this.state.selectedSegmentIndex}
-            onValueChange={(value) => this._onSegmentedControlValueChanged(SEGMENTS.indexOf(value))}
-          />
-          <TouchableOpacity
-            onPress={() => this.props.navigate(BACK)}
-            style={{marginRight: 16}}
-          >
-            <Text style={[StyleSheet.styles.navigationBar.doneButtonTitle, {marginLeft: 16}]}>{Localizable.t('done')}</Text>
-          </TouchableOpacity>
-        </NavigationBar>
+        <NavigationHeader
+          navigate={this.props.navigate}
+          title={Localizable.t('bookmarks')}
+          renderTitleComponent={(props: Object) => (
+            <SegmentedControl
+              style={{left: 0, right: 0, marginTop: 8, marginRight: 16, marginLeft: -32}}
+              tintColor={Colors.tint}
+              values={SEGMENTS}
+              selectedIndex={this.state.selectedSegmentIndex}
+              onValueChange={(value) => this._onSegmentedControlValueChanged(SEGMENTS.indexOf(value))}
+            />
+          )}
+          renderRightComponent={(props: Object) => (<NavigationBarButton
+            title={Localizable.t('done')}
+            titleStyle={StyleSheet.styles.navigationBar.doneButtonTitle}
+            onPress={() => props.navigate(BACK)}
+          />)}
+        />
         <ListView
           enableEmptySections={true}
           dataSource={this.state.dataSource}
@@ -262,7 +265,6 @@ const styles = StyleSheet.create({
   },
   listView: {
     flex: 1,
-    marginTop: NavigationBar.HEIGHT,
   },
   sectionHeaderContainer: {
     paddingVertical: 4,

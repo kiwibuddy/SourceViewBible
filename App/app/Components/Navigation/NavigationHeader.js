@@ -31,7 +31,7 @@ type Props = {
 const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
 
-class NavigationHeader extends Component {
+export default class NavigationHeader extends Component {
   props: Props;
 
   static defaultProps = {
@@ -96,7 +96,7 @@ class NavigationHeader extends Component {
 const styles = StyleSheet.create({
   appbar: {
     alignItems: 'center',
-    backgroundColor: Platform.OS === 'ios' ? '#EFEFF2' : '#FFF',
+    backgroundColor: Platform.OS === 'ios' ? 'rgba(248, 248, 248, .85)' : '#FFF',
     borderBottomColor: 'rgba(0, 0, 0, .15)',
     borderBottomWidth: Platform.OS === 'ios' ? StyleSheet.hairlineWidth : 0,
     elevation: 4,
@@ -126,5 +126,3 @@ const styles = StyleSheet.create({
     top: 0,
   },
 });
-
-module.exports = NavigationHeader;
