@@ -37,7 +37,8 @@ export default class NavigationHeader extends Component {
   static defaultProps = {
     renderTitleComponent: (props: Object) => {
       const title = String(props.title || '');
-      return <NavigationHeaderTitle>{title}</NavigationHeaderTitle>;
+      const style = (Platform.OS === 'android' && !props.renderLeftComponent ? {marginLeft: -32} : {});
+      return <NavigationHeaderTitle style={style}>{title}</NavigationHeaderTitle>;
     },
 
     statusBarHeight: STATUSBAR_HEIGHT,
@@ -46,10 +47,7 @@ export default class NavigationHeader extends Component {
   render() {
     const { style, viewProps } = this.props;
 
-    const barHeight = (this.props.statusBarHeight instanceof Animated.Value)
-      ? Animated.add(this.props.statusBarHeight, new Animated.Value(APPBAR_HEIGHT))
-      : APPBAR_HEIGHT + this.props.statusBarHeight;
-
+    const barHeight = (this.props.statusBarHeight instanceof Animated.Value) ? Animated.add(this.props.statusBarHeight, new Animated.Value(APPBAR_HEIGHT)) : APPBAR_HEIGHT + this.props.statusBarHeight;
     return (
       <Animated.View style={[styles.appbar, { height: barHeight }, style]} {...viewProps}>
         {this._renderLeft(this.props)}
