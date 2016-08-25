@@ -31,18 +31,7 @@ import SourceIcon from '../../Components/Common/SourceIcon';
 import Icon from '../../Components/Common/Icon';
 import { ReadingTime } from '../../Common/NumberHelper';
 
-import * as Navigation from '../../Components/Navigation';
-const NavigationBar = (props: Props) => {
-  return (
-    <Navigation.NavigationBar title={props.title}>
-      <Navigation.NavigationBarButton
-        imageSource={require('../../Components/Navigation/Images/nav-help.png')}
-        onPress={() => props.navigate(bookHelpURL({title: Localizable.t('help'), modal: true}))}
-        style={{position: 'absolute', right: 5}}
-      />
-    </Navigation.NavigationBar>
-  );
-};
+import { NavigationBarButton } from '../../Components/Navigation';
 
 const MAX_NUMBER_OF_SOURCES = 4;
 
@@ -58,8 +47,15 @@ type State = {
 };
 
 export default class BookOverview extends Component {
-  static NavigationBar = NavigationBar;
-  
+  static renderNavigationHeaderRightComponent(props: Object) {
+    return (
+      <NavigationBarButton
+        imageSource={require('../../Components/Navigation/Images/nav-help.png')}
+        onPress={() => props.navigate(bookHelpURL({title: Localizable.t('help'), modal: true}))}
+      />
+    );
+  }
+
   props: Props;
   state: State;
 
