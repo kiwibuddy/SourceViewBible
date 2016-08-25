@@ -57,8 +57,8 @@ const HelpFooter = (props: Object) => {
       <View style={styles.separator} />
       <TouchableOpacity style={styles.donateContainer} onPress={() => openURL(Links.Donate)}>
         <Text style={[styles.contentHeader, {marginBottom: 0}]}>Help us</Text>
-        <Text style={[styles.contentHeader, {marginTop: 0}]}>end Biblical poverty</Text>
-        <Text style={styles.contentBody}>With your help we can ensure that more people around the world with smart phones can have access to the Bible.</Text>
+        <Text style={[styles.contentHeader, {marginTop: 0}]}>end Bible poverty</Text>
+        <Text style={styles.contentBody}>With your help we can ensure that more people around the world will be able to have access to God's Word in a language and with a technology which is most suitable to them.</Text>
         <Text style={styles.button}>Donate Today</Text>
       </TouchableOpacity>
     </View>
