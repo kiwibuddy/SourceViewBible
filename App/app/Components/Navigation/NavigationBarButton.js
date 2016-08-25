@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    margin: Platform.OS === 'ios' ? 10 : 16,
+    padding: Platform.OS === 'ios' ? 10 : 16,
   },
   image: {
     tintColor: Colors.tint,
