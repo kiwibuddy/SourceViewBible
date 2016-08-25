@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 
-import { NavigationBar, Toolbar, ToolbarButton } from '../Navigation';
+import { NavigationHeader, Toolbar, ToolbarButton } from '../Navigation';
 
 import router, { BACK, discoverURL, onboardingURL, sphereHelpURL, sphereInAppPurchaseURL } from '../../Navigation';
 
@@ -59,12 +59,12 @@ export default class App extends Component {
     const scene = this._renderPage({route});
     if (route.modal) return scene;
 
-    const navigationBar = this._renderNavigationBar({navigationState: navigation});
+    const navigationHeader = this._renderNavigationHeader({navigationState: navigation});
     const toolbar = this._renderToolbar({navigationState: navigation, jumpToIndex: this._jumpToIndex});
     return (
       <View style={{flex: 1}}>
+        {navigationHeader}
         {scene}
-        {navigationBar}
         {toolbar}
       </View>
     );
@@ -75,7 +75,7 @@ export default class App extends Component {
     if (props.route.modal) return scene;
 
     return (
-      <View style={{flex: 1, marginTop: NavigationBar.HEIGHT, marginBottom: Toolbar.HEIGHT}}>
+      <View style={{flex: 1, marginBottom: Toolbar.HEIGHT}}>
         {scene}
       </View>
     );
@@ -92,18 +92,21 @@ export default class App extends Component {
     return <Scene {...props.route} {...params} navigate={this._navigate} />;
   };
 
-  _renderNavigationBar = (props: any) => {
+  _renderNavigationHeader = (props: any) => {
     const { navigationState } = props;
     const navigationRoute = navigationState.routes[navigationState.index];
 
     const { route, params} = router.match(navigationRoute.path);
     const Scene = route.scene;
-    if (Scene && typeof(Scene.NavigationBar) !== "undefined") {
-      return <Scene.NavigationBar {...navigationRoute} {...params} navigate={this._navigate} />;
-    }
 
     return (
-      <NavigationBar title={navigationRoute.title}/>
+      <NavigationHeader
+        navigate={this._navigate}
+        renderLeftComponent={Scene.renderNavigationHeaderLeftComponent}
+        renderTitleComponent={Scene.renderNavigationHeaderTitleComponent}
+        renderLeftComponent={Scene.renderNavigationHeaderRightComponent}
+        title={navigationRoute.title}
+      />
     );
   };
 
