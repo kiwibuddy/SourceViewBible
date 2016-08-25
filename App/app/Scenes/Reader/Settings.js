@@ -243,7 +243,8 @@ const styles = StyleSheet.create({
     flex: 1,
     marginRight: 15,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    minHeight: 44,
   },
   cellLeftContainer: {
     flex: 1,
