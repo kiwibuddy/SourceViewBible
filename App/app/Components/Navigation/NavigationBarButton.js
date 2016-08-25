@@ -24,13 +24,18 @@ type Props = {
   style?: Object,
   title?: any,
   titleStyle?: any,
+  visible?: boolean
 };
 
 const NavigationBarButton = (props: Props) => {
+  if (props.visible === false) return null;
+
   const imageStyle = props.disabled ? {tintColor: 'gray'} : {};
   const textStyle = props.disabled ? {color: 'gray'} : {};
-  const title = props.title ? <View style={styles.textContainer}><Text style={[styles.text, props.titleStyle, textStyle]}>{props.title}</Text></View> : null;
-  const image = props.imageSource ? <Image source={props.imageSource} style={[styles.image, imageStyle]} /> : null;
+  const title = props.title && Platform.OS !== 'android' ? <View style={styles.textContainer}><Text style={[styles.text, props.titleStyle, textStyle]}>{props.title}</Text></View> : null;
+
+  const backImage = require('./Images/nav-back.png');
+  const image = props.imageSource || Platform.OS === 'android' ? <Image source={props.imageSource || backImage} style={[styles.image, imageStyle]} /> : null;
 
   const buttonStyle = title ? {width: null, paddingHorizontal: null, flex: 1} : {};
 

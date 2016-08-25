@@ -127,12 +127,12 @@ export default class App extends Component {
         <View style={{flex: 1, flexDirection: 'row'}}>
           <ToolbarButton
             disabled={!canGoBack}
-            imageSource={require('../Navigation/Images/nav-back.png')}
+            imageSource={require('../Navigation/Images/tb-back.png')}
             onPress={() => this._goBack()}
           />
           <ToolbarButton
             disabled={!canGoForward}
-            imageSource={require('../Navigation/Images/nav-forward.png')}
+            imageSource={require('../Navigation/Images/tb-forward.png')}
             onPress={() => this._goForward()}
           />
         </View>

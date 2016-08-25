@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 
 import {
   Image,
+  Platform,
   ScrollView,
   Text,
   View,
