@@ -58,6 +58,10 @@ type State = {
 };
 
 export default class BookChapters extends Component {
+  static NavigationHeaderStyle = {
+    elevation: null
+  };
+
   props: Props;
   state: State;
 
@@ -182,6 +186,7 @@ export default class BookChapters extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFF',
   },
   section: {
     marginLeft: 8,
@@ -233,7 +238,7 @@ const styles = StyleSheet.create({
       android: {
         segmentedControl: {
           shadowColor: 'red',
-          elevation: 2,
+          elevation: 4,
         },
       },
   })

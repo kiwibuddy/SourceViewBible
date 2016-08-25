@@ -106,6 +106,7 @@ export default class App extends Component {
         renderLeftComponent={Scene.renderNavigationHeaderLeftComponent}
         renderTitleComponent={Scene.renderNavigationHeaderTitleComponent}
         renderRightComponent={Scene.renderNavigationHeaderRightComponent}
+        style={Scene.NavigationHeaderStyle}
         title={navigationRoute.title}
       />
     );

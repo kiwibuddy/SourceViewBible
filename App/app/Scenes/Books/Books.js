@@ -53,6 +53,10 @@ type State = {
 };
 
 export default class Books extends Component {
+  static NavigationHeaderStyle = {
+    elevation: null
+  };
+
   props: Props;
   state: State;
 
@@ -190,7 +194,7 @@ const styles = StyleSheet.create({
       android: {
         segmentedControl: {
           shadowColor: 'red',
-          elevation: 2,
+          elevation: 4,
         },
       },
   })
