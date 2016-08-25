@@ -4,6 +4,7 @@
 import React, { Component } from 'react';
 import {
   Image,
+  Platform,
   ScrollView,
   Slider,
   Switch,
@@ -57,6 +58,7 @@ export default class Settings extends Component {
   render() {
     const { fontStepSize } = this.state;
     const fontSize = ReaderBaseFontSize + (ReaderFontStepSize * fontStepSize);
+    const doneImage = (Platform.OS === 'android' ? require('../../Components/Navigation/Images/nav-discoverycenter.png') : null);
 
     return (
       <View style={styles.container}>
@@ -67,6 +69,7 @@ export default class Settings extends Component {
             onPress={() => this.props.navigate(BACK)}
           />}
           renderRightComponent={(props: Object) => <NavigationBarButton
+            imageSource={doneImage}
             title={Localizable.t('done')}
             onPress={this._onDone}
             titleStyle={StyleSheet.styles.navigationBar.doneButtonTitle}
