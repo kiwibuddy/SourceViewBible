@@ -7,6 +7,7 @@ const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithP
 import {
   ActivityIndicator,
   AsyncStorage,
+  BackAndroid,
   Platform,
   RecyclerViewBackedScrollView,
   Text,
@@ -61,10 +62,12 @@ export default class Occurrences extends Component {
 
   componentDidMount() {
     this._getOccurrences();
+    BackAndroid.addEventListener('hardwareBackPress', this._onHardwareBackPress);
   }
 
   componentWillUnmount() {
     this.shouldFetch = false;
+    BackAndroid.removeEventListener('hardwareBackPress', this._onHardwareBackPress);
   }
 
   render() {
@@ -161,6 +164,11 @@ export default class Occurrences extends Component {
     } else {
       this.props.navigate(BACK);
     }
+  };
+
+  _onHardwareBackPress = () => {
+    this._onPressBack();
+    return true;
   };
 
  }

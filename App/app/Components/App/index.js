@@ -311,7 +311,7 @@ export default class App extends Component {
     }
 
     return false;
-  }
+  };
 }
 
 const styles = StyleSheet.create({
