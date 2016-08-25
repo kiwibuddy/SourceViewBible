@@ -58,7 +58,7 @@ export default class Settings extends Component {
   render() {
     const { fontStepSize } = this.state;
     const fontSize = ReaderBaseFontSize + (ReaderFontStepSize * fontStepSize);
-    const doneImage = (Platform.OS === 'android' ? require('../../Components/Navigation/Images/nav-discoverycenter.png') : null);
+    const doneImage = (Platform.OS === 'android' ? require('../../Components/Navigation/Images/checkmark-icon.png') : null);
 
     return (
       <View style={styles.container}>
