@@ -21,7 +21,7 @@ import {
 
 import Icon from '../../Components/Common/Icon';
 
-import { NavigationBar, NavigationBarButton } from '../../Components/Navigation';
+import { NavigationHeader, NavigationBarButton } from '../../Components/Navigation';
 import { BACK, readerURL } from '../../Navigation';
 
 import { Preference } from '../../Preferences';
@@ -60,19 +60,18 @@ export default class Settings extends Component {
 
     return (
       <View style={styles.container}>
-        <NavigationBar title={Localizable.t('settings')}>
-          <NavigationBarButton
+        <NavigationHeader
+          title={Localizable.t('settings')}
+          renderLeftComponent={(props: Object) => <NavigationBarButton
             title={Localizable.t('cancel')}
             onPress={() => this.props.navigate(BACK)}
-            style={{position: 'absolute', left: 0}}
-          />
-          <NavigationBarButton
+          />}
+          renderRightComponent={(props: Object) => <NavigationBarButton
             title={Localizable.t('done')}
             onPress={this._onDone}
-            style={{position: 'absolute', right: 0}}
-            titleStyle={[StyleSheet.styles.navigationBar.doneButtonTitle, {marginRight: 8}]}
-          />
-        </NavigationBar>
+            titleStyle={StyleSheet.styles.navigationBar.doneButtonTitle}
+          />}
+        />
         <ScrollView style={styles.scrollView}>
           <View style={styles.section}>
             <View style={[styles.cellContainer, {paddingVertical: 2, paddingLeft: 15}]}>
@@ -199,7 +198,6 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
-    marginTop: NavigationBar.HEIGHT,
   },
   section: {
     marginTop: 16,
