@@ -19,7 +19,7 @@ import {
   Localizable
 } from '../../Common';
 
-import { NavigationBar, NavigationBarButton } from '../../Components/Navigation';
+import { NavigationHeader, NavigationBarButton } from '../../Components/Navigation';
 import { BACK, readerURL } from '../../Navigation';
 
 import { Bible } from '../../Database';
@@ -29,7 +29,7 @@ const { width: WIDTH } = Dimensions.get('window');
 type State = {
   dataSource: any,
   search: string,
-  reference?: Object
+  reference: any
 };
 
 export default class ReaderSearch extends Component {
@@ -50,25 +50,28 @@ export default class ReaderSearch extends Component {
 
     return (
       <View style={styles.container}>
-        <NavigationBar>
-          <TextInput
-            autoCapitalize="words"
-            autoCorrect={false}
-            autoFocus={true}
-            clearButtonMode="always"
-            onChangeText={this._search}
-            onSubmitEditing={this._onSubmitSearch}
-            placeholder={Localizable.t('search-references')}
-            style={styles.searchTextInput}
-            value={this.state.search}
-          />
-          <TouchableOpacity
-            onPress={() => this.props.navigate(BACK)}
-            style={{marginHorizontal: 8}}
-          >
-            <Text style={StyleSheet.styles.navigationBar.doneButtonTitle}>{Localizable.t('cancel')}</Text>
-          </TouchableOpacity>
-        </NavigationBar>
+        <NavigationHeader
+          renderTitleComponent={(props: Object) => (
+            <TextInput
+              autoCapitalize="words"
+              autoCorrect={false}
+              autoFocus={true}
+              clearButtonMode="always"
+              onChangeText={this._search}
+              onSubmitEditing={this._onSubmitSearch}
+              placeholder={Localizable.t('search-references')}
+              style={[styles.searchTextInput, {top: null, bottom: null, left: 0, right: 0, marginVertical: 8, marginRight: 32, marginLeft: -32}]}
+              value={this.state.search}
+            />
+          )}
+          renderRightComponent={(props: Object) => (
+            <NavigationBarButton
+              title={Localizable.t('cancel')}
+              titleStyle={StyleSheet.styles.navigationBar.doneButtonTitle}
+              onPress={() => props.navigate(BACK)}
+            />
+          )}
+        />
         {content}
       </View>
     );
@@ -190,7 +193,6 @@ const styles = StyleSheet.create({
   },
   listView: {
     flex: 1,
-    marginTop: NavigationBar.HEIGHT,
   },
   sectionHeaderContainer: {
     paddingVertical: 4,

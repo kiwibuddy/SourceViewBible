@@ -88,6 +88,7 @@ export default class NavigationHeader extends Component {
   };
 
   static HEIGHT = APPBAR_HEIGHT + STATUSBAR_HEIGHT;
+  static APPBAR_HEIGHT = APPBAR_HEIGHT;
   static Title = NavigationHeaderTitle;
 }
 
