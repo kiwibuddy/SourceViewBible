@@ -23,7 +23,7 @@ import {
 } from '../../Common';
 
 import { BACK, bookURL, readerSearchURL, readerSettingsURL, readerURL } from '../../Navigation';
-import * as Navigation from '../../Components/Navigation';
+import { NavigationHeader, NavigationBarButton } from '../../Components/Navigation';
 
 const RNFS = require('react-native-fs');
 
@@ -35,23 +35,23 @@ const HTML = require('./HTML');
 import { Preference } from '../../Preferences';
 import { ReaderBaseFontSize, ReaderBaseLineHeight, ReaderFontStepSize, ReaderWebFontConversion } from '../../Common/Constants';
 
-const NavigationBar = (props: Props) => {
-  const book = Book.findByID(props.bookID);
-  return (
-    <Navigation.NavigationBar title={props.title} onPressTitle={() => props.navigate(bookURL({bookID: book.id, title: book.name}))}>
-      <Navigation.NavigationBarButton
-        imageSource={require('../../Components/Navigation/Images/nav-search.png')}
-        onPress={() => {props.navigate(readerSearchURL({modal: true}))}}
-        style={{position: 'absolute', left: 0}}
-      />
-      <Navigation.NavigationBarButton
-        imageSource={require('../../Components/Navigation/Images/nav-filter.png')}
-        onPress={() => {props.navigate(readerSettingsURL({title: Localizable.t('settings'), modal: true}))}}
-        style={{position: 'absolute', right: 5}}
-      />
-    </Navigation.NavigationBar>
-  );
-};
+// const NavigationBar = (props: Props) => {
+//   const book = Book.findByID(props.bookID);
+//   return (
+//     <Navigation.NavigationBar title={props.title} onPressTitle={() => props.navigate(bookURL({bookID: book.id, title: book.name}))}>
+//       <Navigation.NavigationBarButton
+//         imageSource={require('../../Components/Navigation/Images/nav-search.png')}
+//         onPress={() => {props.navigate(readerSearchURL({modal: true}))}}
+//         style={{position: 'absolute', left: 0}}
+//       />
+//       <Navigation.NavigationBarButton
+//         imageSource={require('../../Components/Navigation/Images/nav-filter.png')}
+//         onPress={() => {props.navigate(readerSettingsURL({title: Localizable.t('settings'), modal: true}))}}
+//         style={{position: 'absolute', right: 5}}
+//       />
+//     </Navigation.NavigationBar>
+//   );
+// };
 
 class OccurrenceToolbar extends Component {
   render() {
@@ -130,12 +130,6 @@ class OccurrenceToolbar extends Component {
   }
 }
 
-function renderToolbar(props: Object) {
-  const { occurrences } = props;
-  if (!occurrences) return null;
-  return <OccurrenceToolbar {...props} />;
-}
-
 type Props = {
   bookID: string,
   anchor?: string,
@@ -148,8 +142,34 @@ type State = {
 };
 
 export default class Reader extends Component {
-  static NavigationBar = NavigationBar;
-  static renderToolbar = renderToolbar;
+  static renderNavigationHeaderLeftComponent(props: Object) {
+    return (
+      <NavigationBarButton
+        imageSource={require('../../Components/Navigation/Images/nav-search.png')}
+        onPress={() => props.navigate(readerSearchURL({title: Localizable.t('search'), modal: true}))}
+      />
+    );
+  }
+
+  static renderNavigationHeaderTitleComponent(props: Object) {
+    const book = Book.findByID(props.routeParams.bookID);
+    return <NavigationHeader.Title onPress={() => props.navigate(bookURL({bookID: book.id, title: book.name}))}>{props.title}</NavigationHeader.Title>;
+  }
+
+  static renderNavigationHeaderRightComponent(props: Object) {
+    return (
+      <NavigationBarButton
+        imageSource={require('../../Components/Navigation/Images/nav-filter.png')}
+        onPress={() => props.navigate(readerSettingsURL({title: Localizable.t('settings'), modal: true}))}
+      />
+    );
+  }
+
+  static renderToolbar(props: Object) {
+    const { occurrences } = props;
+    if (!occurrences) return null;
+    return <OccurrenceToolbar {...props} />;
+  }
 
   props: Props;
   state: State;

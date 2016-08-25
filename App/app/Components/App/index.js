@@ -101,6 +101,7 @@ export default class App extends Component {
 
     return (
       <NavigationHeader
+        routeParams={params}
         navigate={this._navigate}
         renderLeftComponent={Scene.renderNavigationHeaderLeftComponent}
         renderTitleComponent={Scene.renderNavigationHeaderTitleComponent}

@@ -20,9 +20,9 @@ type Props = {
   viewProps?: any,
 }
 
-const NavigationHeaderTitle = ({ children, style, textStyle, viewProps }: Props) => (
+const NavigationHeaderTitle = ({ children, style, textStyle, viewProps, onPress }: Props) => (
   <View style={[ styles.title, style ]} {...viewProps}>
-    <Text style={[ styles.titleText, textStyle ]}>{children}</Text>
+    <Text style={[ styles.titleText, textStyle ]} onPress={onPress}>{children}</Text>
   </View>
 );
 
