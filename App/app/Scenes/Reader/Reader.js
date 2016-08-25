@@ -180,7 +180,7 @@ export default class Reader extends Component {
   }
 
   render() {
-    if (!this.state.scripture) return null;
+    if (this.state.loading) return this._renderLoading();
 
     const filterBar = this._renderFilterBar();
 
@@ -198,6 +198,18 @@ export default class Reader extends Component {
       </View>
     );
   }
+
+  _renderLoading = () => {
+    const key = (this.props.anchor ? `anchor-${this.props.anchor}` : 'webview');
+    return (
+      <View key={key} style={styles.container}>
+        <WebView
+          style={styles.webview}
+          source={require('./Loading.html')}
+        />
+      </View>
+    );
+  };
 
   _renderFilterBar = () => {
     const spheres = Preference.objectForKey(Preference.Keys.Reader.spheres) || [];
@@ -230,6 +242,7 @@ export default class Reader extends Component {
     const spheres = Preference.objectForKey(Preference.Keys.Reader.spheres) || [];
     const options = {monadSet: book.monadSet, spheres};
 
+    this.setState({loading: true});
     Emdros.scripture(options).then((content) => {
       if (this.shouldFetchScripture) {
         const scripture = this._renderScripture(content);
@@ -238,6 +251,7 @@ export default class Reader extends Component {
           this._debugScripture(scripture);
         }
 
+        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
         this.setState({
           scripture,
           loading: false
