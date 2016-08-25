@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
       },
       android: {
         segmentedControl: {
-          shadowColor: 'red',
+          backgroundColor: NavigationHeader.BACKGROUND_COLOR,
           elevation: NavigationHeader.ELEVATION,
         },
       },

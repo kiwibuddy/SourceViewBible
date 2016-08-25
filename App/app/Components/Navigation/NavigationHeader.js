@@ -30,12 +30,15 @@ type Props = {
 
 const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
+
+const BACKGROUND_COLOR = Platform.OS === 'ios' ? 'rgba(248, 248, 248, .85)' : '#F9F9F9';
 const ELEVATION = 2;
 
 export default class NavigationHeader extends Component {
   static HEIGHT = APPBAR_HEIGHT + STATUSBAR_HEIGHT;
   static APPBAR_HEIGHT = APPBAR_HEIGHT;
   static Title = NavigationHeaderTitle;
+  static BACKGROUND_COLOR = BACKGROUND_COLOR;
   static ELEVATION = ELEVATION;
 
   props: Props;
@@ -75,8 +78,9 @@ export default class NavigationHeader extends Component {
   _renderTitle = (props: Object) => {
     const { renderTitleComponent } = this.props;
     if (!renderTitleComponent) return null;
+    const style = Platform.OS === 'android' && !this.props.renderLeftComponent ? {left: 16} : {};
     return (
-      <View style={[styles.title, { marginTop: this.props.statusBarHeight }]}>
+      <View style={[styles.title, style, { marginTop: this.props.statusBarHeight }]}>
         {renderTitleComponent(props)}
       </View>
     );
@@ -96,7 +100,7 @@ export default class NavigationHeader extends Component {
 const styles = StyleSheet.create({
   appbar: {
     alignItems: 'center',
-    backgroundColor: Platform.OS === 'ios' ? 'rgba(248, 248, 248, .85)' : '#F9F9F9',
+    backgroundColor: BACKGROUND_COLOR,
     borderBottomColor: 'rgba(0, 0, 0, .15)',
     borderBottomWidth: Platform.OS === 'ios' ? StyleSheet.hairlineWidth : 0,
     elevation: ELEVATION,
