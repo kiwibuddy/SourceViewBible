@@ -11,6 +11,7 @@ import {
   RecyclerViewBackedScrollView,
   Text,
   TouchableOpacity,
+  Platform,
   View,
 } from 'react-native';
 
@@ -174,22 +175,23 @@ export default class SourceOverview extends Component {
               <Text style={[styles.wc4, {top: -10, left: 130}]}>{words[13]}</Text>
               <Text style={[styles.wc4, {top: 65, right: 60}]}>{words[14]}</Text>
             </ParallaxMotionView>
-
-            <View style={styles.sourceBackgroundContainer}>
-              <Image style={styles.sourceBackground} source={require('../../Images/sources/avatar-background.png')} />
-            </View>
-            <View style={styles.sourceIconContainer}>
-              <SourceIcon
-                principalSourceType={principalSourceType}
-                source={source}
-                size={100}
-                style={[styles.sourceIcon]}
-              />
-            </View>
           </WordCloud>
         </TouchableOpacity>
         {statistics}
         {metaData}
+        <View style={styles.sourceAvatarContainer}>
+          <View style={styles.sourceBackgroundContainer}>
+            <Image style={styles.sourceBackground} source={require('../../Images/sources/avatar-background.png')} />
+          </View>
+          <View style={styles.sourceIconContainer}>
+            <SourceIcon
+              principalSourceType={principalSourceType}
+              source={source}
+              size={100}
+              style={[styles.sourceIcon]}
+            />
+          </View>
+        </View>
       </View>
     );
   };
@@ -527,12 +529,17 @@ const styles = StyleSheet.create({
   },
   sourceBackgroundContainer: {
     alignSelf: 'center',
-    marginTop: 100,
   },
   sourceIconContainer: {
     alignSelf: 'center',
-    marginTop: -114,
     backgroundColor: 'transparent',
+    marginTop: Platform.OS === 'ios' ? -114 : -116,
+  },
+  sourceAvatarContainer: {
+    position: 'absolute',
+    top: 100,
+    right: 0,
+    left: 0,
   },
   listItemContainer: {
     paddingLeft: 15,
