@@ -34,13 +34,11 @@ const NavigationBarButton = (props: Props) => {
   const backImage = require('./Images/nav-back.png');
   const image = props.imageSource || Platform.OS === 'android' ? <Image source={props.imageSource || backImage} style={[styles.image, imageStyle]} /> : null;
 
-  const buttonStyle = title ? {width: null, flex: 1} : {};
-
   return (
     <TouchableOpacity
       disabled={props.disabled}
       onPress={props.onPress}
-      style={[styles.button, buttonStyle, props.style]}
+      style={[styles.button, props.style]}
     >
     {title}
     {image}
@@ -50,14 +48,14 @@ const NavigationBarButton = (props: Props) => {
 
 const styles = StyleSheet.create({
   button: {
-    width: 24,
-    height: 24,
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     margin: Platform.OS === 'ios' ? 10 : 16,
   },
   image: {
     tintColor: Colors.tint,
-    alignSelf: 'center',
-    resizeMode: 'contain',
   },
   textContainer: {
     flex: 1,
