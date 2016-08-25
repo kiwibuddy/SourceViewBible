@@ -75,9 +75,8 @@ export default class NavigationHeader extends Component {
   _renderTitle = (props: Object) => {
     const { renderTitleComponent } = this.props;
     if (!renderTitleComponent) return null;
-    const style = !this.props.renderLeftComponent ? {left: 16} : {};
     return (
-      <View style={[styles.title, style, { marginTop: this.props.statusBarHeight }]}>
+      <View style={[styles.title, { marginTop: this.props.statusBarHeight }]}>
         {renderTitleComponent(props)}
       </View>
     );

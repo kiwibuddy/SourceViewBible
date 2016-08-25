@@ -60,7 +60,7 @@ export default class ReaderSearch extends Component {
               onChangeText={this._search}
               onSubmitEditing={this._onSubmitSearch}
               placeholder={Localizable.t('search-references')}
-              style={[styles.searchTextInput, {top: null, bottom: null, left: 0, right: 0, marginVertical: 8, marginRight: 32}]}
+              style={[styles.searchTextInput, {top: null, bottom: null, left: -32, marginVertical: 8}]}
               value={this.state.search}
             />
           )}

@@ -77,7 +77,7 @@ export default class Bookmarks extends Component {
           title={Localizable.t('bookmarks')}
           renderTitleComponent={(props: Object) => (
             <SegmentedControl
-              style={{left: 0, right: 0, marginTop: 8, marginRight: 16}}
+              style={{left: -32, marginRight: -16, marginTop: 8}}
               tintColor={Colors.tint}
               values={SEGMENTS}
               selectedIndex={this.state.selectedSegmentIndex}
