@@ -187,8 +187,7 @@ export default class App extends Component {
   };
 
   _renderMenu = (options: Function, props: any) => {
-    if (!options) return null;
-    
+    const menuOptions = (options ? options(props) : null);
     return (
       <Menu name="menu">
         <MenuTrigger />
@@ -198,7 +197,7 @@ export default class App extends Component {
             <Text style={{color: 'red'}}>Two</Text>
           </MenuOption>
           <MenuOption value={3} disabled={true} text='Three' /> */}
-          {options(props)}
+          {menuOptions}
         </MenuOptions>
       </Menu>
     );
