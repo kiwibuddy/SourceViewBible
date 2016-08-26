@@ -15,13 +15,19 @@ import {
 const Kraken = require('./app/Kraken');
 
 class KrakenApp extends Component {
+  state = {
+    loading: true
+  };
+
   componentDidMount() {
-    Kraken.release();
+    this.kracken();
   }
 
   render() {
+    const { loading } = this.state;
+    const style = (loading ? {backgroundColor: '#F5FCFF'} : {backgroundColor: 'yellowgreen'});
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, style]}>
         <Text style={styles.welcome}>
           Welcome to React Native!
         </Text>
@@ -34,6 +40,11 @@ class KrakenApp extends Component {
         </Text>
       </View>
     );
+  }
+
+  async kracken() {
+    await Kraken.release();
+    this.setState({loading: false});
   }
 }
 

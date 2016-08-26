@@ -226,7 +226,7 @@ export default class BookOverview extends Component {
         <Text style={styles.contentBody}>{section.body}</Text>
       </View>
     );
-  }
+  };
 }
 
 const styles = StyleSheet.create({

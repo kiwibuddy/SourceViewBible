@@ -145,7 +145,7 @@ Chronology.schema = ChronologySchema;
 const ContentSchema = {
   name: 'Content',
   properties: {
-    title: 'string',
+    title: {type: 'string', optional: true},
     body: 'string',
   }
 };
@@ -240,7 +240,6 @@ const SphereSchema = {
   properties: {
     id: 'string',
     name: 'string',
-    description: 'string',
     position: 'int',
     bookCount: {type: 'int', default: 0},
     bookCounts: {type: 'list', objectType: 'Count'},
@@ -251,6 +250,7 @@ const SphereSchema = {
     wordCount: {type: 'int', default: 0},
     words: {type: 'list', objectType: 'Count'},
     passages: {type: 'list', objectType: 'SpherePassage'},
+    overview: {type: 'list', objectType: 'Content'},
   }
 };
 

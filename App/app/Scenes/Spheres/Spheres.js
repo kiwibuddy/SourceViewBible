@@ -195,6 +195,11 @@ export default class Spheres extends Component {
     const descriptionNumberOfLines = descriptionExpanded ? null : 3;
     const descriptionLabel = (descriptionExpanded ? null : Localizable.t('more').toLocaleLowerCase());
 
+    let overview = null;
+    if (sphere.overview) {
+      overview = sphere.overview.map((section) => this._renderOverviewSection(section));
+    }
+
     return (
       <ScrollView style={styles.container}>
         {header}
@@ -221,13 +226,9 @@ export default class Spheres extends Component {
         <TouchableOpacity style={[styles.readButton, {backgroundColor: colors.chromeTint, borderColor: colors.chromeTint}]} onPress={() => this.props.navigate(spherePassagesURL({sphereID: sphere.id, title: Localizable.t('sphere-passages', {name: sphere.name})}))}>
           <Text style={styles.readButtonTitle}>Explore 52 key passages</Text>
         </TouchableOpacity>
-        <View style={styles.contentContainer}>
-          <Text style={[styles.contentBody, {marginBottom: -25, marginTop: -10}]}>Introduction</Text>
-          <Text style={styles.contentHeader}>How {sphere.name} Shows Up in Scripture</Text>
-          <TouchableOpacity onPress={() => this.setState({descriptionExpanded: !descriptionExpanded})}>
-            <Text numberOfLines={descriptionNumberOfLines} style={[styles.contentBody, {marginTop: 5}]}>{sphere.description}</Text>
-            <Text style={[styles.contentBody, {color: Colors.tint}]}>{descriptionLabel}</Text>
-          </TouchableOpacity>
+
+        <View style={styles.overviewContainer}>
+          {overview}
         </View>
 
         <View style={styles.listContainer}>
@@ -261,6 +262,14 @@ export default class Spheres extends Component {
     );
   };
 
+  _renderOverviewSection = (section: Object) => {
+    return (
+      <View key={section.title} style={styles.contentContainer}>
+        <Text style={styles.contentHeader}>{section.title}</Text>
+        <Text style={styles.contentBody}>{section.body}</Text>
+      </View>
+    );
+  };
 
   _renderBookRow = (book: Object) => {
     const { sphere } = this.state;
@@ -557,5 +566,8 @@ const styles = StyleSheet.create({
     flex: 0,
     height: 4,
     marginBottom: 7,
+  },
+  overviewContainer: {
+    paddingBottom: 30,
   },
 });

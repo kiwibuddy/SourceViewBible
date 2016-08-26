@@ -1,15 +1,19 @@
-{
-  "foundational": {
+[
+  {
     "id": "foundational",
-    "description": [
+    "name": "Foundational",
+    "position": 0,
+    "overview": [
       {
         "body": "God’s dream—expressed through the commissioning vision of Jesus’ final words on earth—is to see every expression of humanity, both individual and corporate, restored by the Spirit of God through the redemptive message of the Gospel. He wants every person to have the opportunity to be experience God’s life and be adopted into the community of the family of God (Mar 16:15). He wants every nation to be able to experience the transformative impact of the kingdom of God in every dimension of its cultural life, shaping every sphere of society. This is a compelling dream; a dream which calls us to love God with all our heart, soul, mind and strength until it has become an experiential reality here on earth. Until then we work and pray as he taught us, “your kingdom come, your will be done on earth as it is in heaven” (Mat 6:10 NIV)."
       }
     ]
   },
-  "family": {
+  {
     "id": "family",
-    "description": [
+    "name": "Family",
+    "position": 1,
+    "overview": [
       {
         "body": "God created the concept of family and wants us to engage with families, to serve and strengthen them, to see His purposes of life and destiny restored in them in order to serve an emerging generation. Family sphere highlights are designed to help you see everything related to family in the Bible. More than one fourth of the Bible speaks of family, underscoring how foundational it is to society."
       },
@@ -27,9 +31,11 @@
       },
     ]
   },
-  "economics": {
+  {
     "id": "economics",
-    "description": [
+    "name": "Economics",
+    "position": 2,
+    "overview": [
       {
         "body": "From the beginning God has given human beings productive tasks to accomplish with the purpose of releasing provision and modeling stewardship. Economics covers the broad spectrum of the human experience, which includes business, science, health, and technology. You may be amazed to see how many parables of Jesus use economic images to teach about the kingdom of God."
       },
@@ -47,9 +53,11 @@
       },
     ]
   },
-  "government": {
+  {
     "id": "government",
-    "description": [
+    "name": "Government",
+    "position": 3,
+    "overview": [
       {
         "body": "God has appointed government to safeguard justice and create a peaceful and safe environment within the nation. Government is the second most highlighted sphere. It marks stories of governmental intrigue, political adversaries, coup d’etats, assassinations, citizenship, foreigners, and refugees. Some stories are examples to imitate while others are warnings that speak of events we should avoid."
       },
@@ -67,9 +75,11 @@
       },
     ]
   },
-  "religion": {
+  {
     "id": "religion",
-    "description": [
+    "name": "Religion",
+    "position": 4,
+    "overview": [
       {
         "body": "God uses religion to extend mercy and promote reconciliation between those with broken relationships, both horizontally and vertically. Not surprisingly, this is the most highlighted sphere in the Bible at over sixty percent. The religion sphere highlights passages that speak of God’s revelation, redemption, and reconciliation. It also highlights all human religious endeavor and practice—whether righteous or idolatrous."
       },
@@ -87,9 +97,11 @@
       },
     ]
   },
-  "education": {
+  {
     "id": "education",
-    "description": [
+    "name": "Education",
+    "position": 5,
+    "overview": [
       {
         "body": "God uses education as a means of discipleship and multiplication. We have highlighted key words that indicate an intentional educational process is at work. Every word that explains purpose or implies thought—thus cultivating critical thinking—is highlighted because education is taking place (e.g. because, for, since, if, so that, therefore). Every question is also highlighted for the one who asks desires to be educated. Add to these the many stories of revelation, study, discovery, and discipleship—you have much to explore."
       },
@@ -107,9 +119,11 @@
       },
     ]
   },
-  "communication": {
+  {
     "id": "communication",
-    "description": [
+    "name": "Communication",
+    "position": 6,
+    "overview": [
       {
         "body": "God gave humans communication to transfer wisdom and develop healthy relationships. We have highlighted myriads of simple statements and phrases that indicate acts of communication (e.g. he said, showed, promised, listened, praised, yelled, etc.). We also highlight verbal and non-verbal communication, private conversations, public expressions (i.e. trumpets, pageantry), cultural protocols, and teachings about what is and what is not godly communication."
       },
@@ -127,9 +141,11 @@
       },
     ]
   },
-  "celebration": {
+  {
     "id": "celebration",
-    "description": [
+    "name": "Celebration",
+    "position": 7,
+    "overview": [
       {
         "body": "Celebration includes all the arts, areas of entertainment, and sports. God’s purposes for celebration in society is to strengthen hope and build community. Many expressions of art—both godly and idolatrous—are highlighted (e.g. fine arts, painting, sculpture, the performing arts, dance). You’ll see passages about celebration or lamentation: births, weddings, funerals, victories, defeats, various festivals, expressions of hospitality, and sporting events."
       },
@@ -147,4 +163,4 @@
       },
     ]
   },
-}
+]
