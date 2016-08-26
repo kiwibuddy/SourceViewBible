@@ -122,7 +122,7 @@ export default class Card extends Component {
   _renderHeader = () => {
     return (
       <Header>
-        <View style={StyleSheet.styles.discoveryCenter.leftContainer}>
+        <View style={[StyleSheet.styles.discoveryCenter.leftContainer, {borderRightWidth: 0}]}>
           <DeleteButton onPress={this.props.onPressDelete} />
         </View>
         <View style={[StyleSheet.styles.discoveryCenter.rightContainer, {justifyContent: 'flex-end'}]}>

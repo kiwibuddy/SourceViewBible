@@ -292,6 +292,7 @@ const styles = StyleSheet.create({
       width: 0
     },
     backgroundColor: '#FFF',
+    elevation: 1,
   },
   sectionHeaderContainer: {
     ...StyleSheet.styles.sectionHeaderContainer,

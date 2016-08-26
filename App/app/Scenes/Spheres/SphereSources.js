@@ -230,18 +230,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFF',
   },
-  textInput: {
-    fontSize: 14,
-    backgroundColor: '#ececec',
-    borderColor: '#ececec',
-    borderRadius: 3,
-    borderWidth: 1,
-    paddingLeft: 8,
-    marginHorizontal: 8,
-    marginTop: 8,
-    height: 26,
-    padding: 0, // Android workaround
-  },
   sphereSourcesGraph: {
     height: 200,
     borderBottomColor: Colors.separator,
@@ -253,6 +241,8 @@ const styles = StyleSheet.create({
       height: 1,
       width: 0
     },
+    elevation: 1,
+    backgroundColor: '#FFF',
   },
   sectionHeaderContainer: {
     ...StyleSheet.styles.sectionHeaderContainer,
@@ -306,11 +296,32 @@ const styles = StyleSheet.create({
           marginTop: 10,
           marginHorizontal: 8,
         },
+        textInput: {
+          fontSize: 14,
+          backgroundColor: '#ececec',
+          borderColor: '#ececec',
+          borderRadius: 3,
+          borderWidth: 1,
+          paddingLeft: 8,
+          marginHorizontal: 8,
+          marginTop: 8,
+          height: 26,
+          padding: 0, // Android workaround
+        },
       },
       android: {
         segmentedControl: {
           shadowColor: 'red',
           elevation: 2,
+        },
+        textInput: {
+          fontSize: 16,
+          backgroundColor: '#FAFAFA',
+          paddingLeft: 8,
+          marginHorizontal: 8,
+          marginVertical: 8,
+          height: 30,
+          padding: 0, // Android workaround
         },
       },
   })
