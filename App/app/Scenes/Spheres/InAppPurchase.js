@@ -145,6 +145,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#59626A',
     marginBottom: 5,
+    marginHorizontal: 20,
     textAlign: 'center',
     marginTop: (WIDTH <= 320 ? 20 : 30),
   },
