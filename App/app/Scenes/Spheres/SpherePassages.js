@@ -120,9 +120,13 @@ export default class SpherePassages extends Component {
     const verse = monad.verse;
     const bcvReference = Localizable.t('book-chapter-verse', {book: book.name, chapter, verse});
 
-    if (!sphere.isFoundational) {
-      Preference.setObjectForKey([sphere.id], Preference.Keys.Reader.spheres);
+    let spheres = [];
+    if (sphere.isFoundational) {
+      spheres = Sphere.all().map(sphere => sphere.id);
+    } else {
+      spheres = [sphere.id];
     }
+    Preference.setObjectForKey(spheres, Preference.Keys.Reader.spheres);
 
     const route = readerURL({bookID: book.id, anchor: `verse-${chapter}-${verse}`, title: book.name, description: bcvReference});
     this.props.navigate(route);
