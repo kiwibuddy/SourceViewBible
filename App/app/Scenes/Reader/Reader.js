@@ -127,15 +127,6 @@ type State = {
 };
 
 export default class Reader extends Component {
-  static renderNavigationHeaderLeftComponent(props: Object) {
-    return (
-      <NavigationBarButton
-        imageSource={require('../../Components/Navigation/Images/nav-search.png')}
-        onPress={() => props.navigate(readerSearchURL({title: Localizable.t('search'), modal: true}))}
-      />
-    );
-  }
-
   static renderNavigationHeaderTitleComponent(props: Object) {
     const book = Book.findByID(props.routeParams.bookID);
     return <NavigationHeader.Title onPress={() => props.navigate(bookURL({bookID: book.id, title: book.name}))}>{props.title}</NavigationHeader.Title>;
