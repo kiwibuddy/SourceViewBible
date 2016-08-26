@@ -158,7 +158,7 @@ export default class App extends Component {
 
     return (
       <Toolbar>
-        <View style={{flex: 1, flexDirection: 'row'}}>
+        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
           <ToolbarButton
             disabled={!canGoBack}
             imageSource={require('../Navigation/Images/tb-back.png')}
@@ -169,14 +169,10 @@ export default class App extends Component {
             imageSource={require('../Navigation/Images/tb-forward.png')}
             onPress={() => this._goForward()}
           />
-        </View>
-        <View style={{flex: 0}}>
           <ToolbarButton
             imageSource={require('../Navigation/Images/nav-discoverycenter.png')}
             onPress={() => {this._pushRoute({path: '/DiscoveryCenter', modal: true})}}
           />
-        </View>
-        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-end'}}>
           <ToolbarButton
             imageSource={require('../Navigation/Images/nav-search.png')}
             onPress={() => {this._pushRoute({path: '/Reader/Search', modal: true})}}
