@@ -47,6 +47,18 @@ export default class Discovery extends Component {
     );
   }
 
+  static renderMenuOptions(props: Object) {
+    return (
+      <MenuOptions>
+        <MenuOption value={1} text={Localizable.t('help')} onSelect={() => props.navigate(discoverHelpURL({title: Localizable.t('help'), modal: true}))}/>
+        <MenuOption value={2}>
+          <Text style={{color: 'red'}}>Two</Text>
+        </MenuOption>
+        <MenuOption value={3} disabled={true} text='Three' />
+      </MenuOptions>
+    );
+  }
+
   render() {
     const shouldRefresh = this._shouldRefresh();
 

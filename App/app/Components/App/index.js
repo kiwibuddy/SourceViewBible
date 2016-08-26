@@ -10,7 +10,7 @@ import {
   View,
 } from 'react-native';
 
-import { NavigationHeader, Toolbar, ToolbarButton } from '../Navigation';
+import { NavigationHeader, NavigationBarButton, Toolbar, ToolbarButton } from '../Navigation';
 
 import Menu, {
   MenuContext,
@@ -32,7 +32,7 @@ import { History, Preference } from '../../Preferences';
 
 type State = {
   navigation: Object,
-  menu: any,
+  menuHidden: boolean,
 };
 
 export default class App extends Component {
@@ -50,7 +50,7 @@ export default class App extends Component {
           route
         ],
       },
-      menu: null
+      menuHidden: true
     };
   }
 
@@ -110,13 +110,31 @@ export default class App extends Component {
     const { route, params} = router.match(navigationRoute.path);
     const Scene = route.scene;
 
+    let renderRightComponent = null;
+    if (Platform.OS === 'android') {
+      const menu = this._renderMenu(Scene.renderMenuOptions, {...props, navigate: this._navigate});
+      renderRightComponent = (props: Object) => {
+        return (
+          <View>
+            {menu}
+            <NavigationBarButton
+              imageSource={require('../../Components/Navigation/Images/nav-more.png')}
+              onPress={() => this.setState({menuHidden: false})}
+            />
+          </View>
+        );
+      };
+    } else {
+      renderRightComponent = Scene.renderNavigationHeaderRightComponent;
+    }
+
     return (
       <NavigationHeader
         routeParams={params}
         navigate={this._navigate}
         renderLeftComponent={Scene.renderNavigationHeaderLeftComponent}
         renderTitleComponent={Scene.renderNavigationHeaderTitleComponent}
-        renderRightComponent={Scene.renderNavigationHeaderRightComponent}
+        renderRightComponent={renderRightComponent}
         style={Scene.NavigationHeaderStyle}
         title={navigationRoute.title}
       />
@@ -168,6 +186,24 @@ export default class App extends Component {
     );
   };
 
+  _renderMenu = (options: Function, props: any) => {
+    const { menuHidden } = this.state;
+    if (!options) return null;
+    return (
+      <Menu opened={!menuHidden} onBackdropPress={() => this.setState({menuHidden: true})}>
+        <MenuTrigger />
+        <MenuOptions>
+          {/* <MenuOption value={1} text='One'/>
+          <MenuOption value={2}>
+            <Text style={{color: 'red'}}>Two</Text>
+          </MenuOption>
+          <MenuOption value={3} disabled={true} text='Three' /> */}
+          {options(props)}
+        </MenuOptions>
+      </Menu>
+    );
+  }
+
   _navigate = (route: any, options?: any) => {
     if (route === BACK) {
       this._popRoute(options);
@@ -181,6 +217,7 @@ export default class App extends Component {
   _jumpToIndex = (index: number) => {
     this.setState({
       navigation: { ...this.state.navigation, index },
+      menuHidden: true,
     });
   };
 
@@ -231,7 +268,10 @@ export default class App extends Component {
     };
 
     if (navigation !== this.state.navigation) {
-      this.setState({navigation});
+      this.setState({
+        navigation,
+        menuHidden: true,
+      });
     }
 
     History.record(route);
@@ -254,7 +294,10 @@ export default class App extends Component {
     // console.log('pop', routes.map(route => route.path));
 
     if (navigation !== this.state.navigation) {
-      this.setState({navigation}, callback);
+      this.setState({
+        navigation,
+        menuHidden: true,
+      }, callback);
     }
   };
 
@@ -278,7 +321,10 @@ export default class App extends Component {
     };
 
     if (navigation !== this.state.navigation) {
-      this.setState({navigation});
+      this.setState({
+        navigation,
+        menuHidden: true,
+      });
     }
 
     History.record(route, {replace: true});
