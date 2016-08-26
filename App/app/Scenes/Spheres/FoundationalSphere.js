@@ -110,6 +110,12 @@ export default class FoundationalSphere extends Component {
     const colors = Colors.spheres[sphere.id];
     const descriptionNumberOfLines = descriptionExpanded ? null : 3;
     const descriptionLabel = (descriptionExpanded ? null : Localizable.t('more').toLocaleLowerCase());
+
+    let overview = null;
+    if (sphere.overview) {
+      overview = sphere.overview.map((section) => this._renderOverviewSection(section));
+    }
+    
     return (
       <View>
         {header}
@@ -117,14 +123,11 @@ export default class FoundationalSphere extends Component {
         <TouchableOpacity style={[styles.readButton, {backgroundColor: colors.chromeTint, borderColor: colors.chromeTint}]} onPress={() => this.props.navigate(spherePassagesURL({sphereID: sphere.id, title: Localizable.t('sphere-passages', {name: sphere.name})}))}>
           <Text style={styles.readButtonTitle}>Explore 52 key passages</Text>
         </TouchableOpacity>
-        <View style={styles.contentContainer}>
-          <Text style={[styles.contentBody, {marginBottom: -25, marginTop: -10}]}>Foundational Passages</Text>
-          <Text style={styles.contentHeader}>How Scripture Establishes a Biblical Christian Worldview</Text>
-          <TouchableOpacity onPress={() => this.setState({descriptionExpanded: !descriptionExpanded})}>
-            <Text numberOfLines={descriptionNumberOfLines} style={[styles.contentBody, {marginTop: 5}]}>{sphere.description}</Text>
-            <Text style={[styles.contentBody, {color: Colors.tint}]}>{descriptionLabel}</Text>
-          </TouchableOpacity>
+
+        <View style={styles.overviewContainer}>
+          {overview}
         </View>
+
         <View style={StyleSheet.styles.statisticsContainer} />
         <SegmentedControl
           style={styles.segmentedControl}
@@ -157,6 +160,15 @@ export default class FoundationalSphere extends Component {
           <Text style={StyleSheet.styles.cell.valuetitle}>{Localizable.t('words.count', {count: wordCount, localizedCount: Localizable.toNumber(wordCount, {precision: 0})})}</Text>
         </View>
       </TouchableOpacity>
+    );
+  };
+
+  _renderOverviewSection = (section: Object) => {
+    return (
+      <View key={section.title} style={styles.contentContainer}>
+        <Text style={styles.contentHeader}>{section.title}</Text>
+        <Text style={styles.contentBody}>{section.body}</Text>
+      </View>
     );
   };
 
@@ -279,6 +291,9 @@ const styles = StyleSheet.create({
   },
   pie: {
     margin: 8,
+  },
+  overviewContainer: {
+    paddingBottom: 30,
   },
   ...Platform.select({
       ios: {
