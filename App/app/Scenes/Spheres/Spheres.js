@@ -222,7 +222,10 @@ export default class Spheres extends Component {
         <View style={styles.contentContainer}>
           <Text style={[styles.contentBody, {marginBottom: -25, marginTop: -10}]}>Introduction</Text>
           <Text style={styles.contentHeader}>How {sphere.name} Shows Up in Scripture</Text>
-          <Text style={[styles.contentBody, {marginTop: 5}]}>{sphere.description}</Text>
+          <TouchableOpacity>
+            <Text numberOfLines={3} style={[styles.contentBody, {marginTop: 5}]}>{sphere.description}</Text>
+            <Text style={[styles.contentBody, {color: Colors.tint}]}>more</Text>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.listContainer}>
