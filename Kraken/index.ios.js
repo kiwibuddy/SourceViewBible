@@ -13,6 +13,9 @@ import {
   View
 } from 'react-native';
 
+const moment = require('moment');
+require('moment-duration-format');
+
 const now = require('performance-now');
 
 const Kraken = require('./app/Kraken');
@@ -30,8 +33,8 @@ class KrakenApp extends Component {
   render() {
     const { loading, elapsedTime } = this.state;
     const style = (loading ? {backgroundColor: '#F5FCFF'} : {backgroundColor: 'yellowgreen'});
-    const title = (loading ? elapsedTime.toFixed(1).toString() : `Released in ${elapsedTime.toFixed(0)}s`);
-    const activityIndicator = (loading ? <ActivityIndicator size="large" color="gray" /> : null);
+    const title = moment.duration(elapsedTime, 'minutes').format('h:mm:ss');
+    const activityIndicator = (loading ? <ActivityIndicator size='large' color='gray' /> : null);
 
     return (
       <View style={[styles.container, style]}>
@@ -67,7 +70,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   welcome: {
-    fontSize: 30,
+    fontSize: 36,
     fontFamily: 'Courier New',
     textAlign: 'center',
     margin: 10,
