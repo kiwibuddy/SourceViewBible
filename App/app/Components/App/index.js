@@ -187,6 +187,8 @@ export default class App extends Component {
   };
 
   _renderMenu = (options: Function, props: any) => {
+    if (!options) return null;
+    
     return (
       <Menu name="menu">
         <MenuTrigger />
