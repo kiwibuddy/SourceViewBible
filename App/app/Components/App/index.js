@@ -142,8 +142,6 @@ export default class App extends Component {
   };
 
   _renderToolbar = (props: any) => {
-    if (Platform.OS === 'android') return null;
-
     const { navigationState } = props;
     const navigationRoute = navigationState.routes[navigationState.index];
 
