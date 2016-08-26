@@ -8,7 +8,8 @@ import {
   Image,
   Text,
   TouchableOpacity,
-  View
+  View,
+  Platform,
 } from 'react-native';
 import { ListView } from 'realm/react-native';
 
@@ -77,7 +78,7 @@ export default class Bookmarks extends Component {
           title={Localizable.t('bookmarks')}
           renderTitleComponent={(props: Object) => (
             <SegmentedControl
-              style={{left: -32, marginRight: -16, marginTop: 8}}
+              style={[styles.segmentedControl, {left: -32, marginRight: -16, marginTop: 8}]}
               tintColor={Colors.tint}
               values={SEGMENTS}
               selectedIndex={this.state.selectedSegmentIndex}
@@ -95,7 +96,7 @@ export default class Bookmarks extends Component {
           dataSource={this.state.dataSource}
           renderRow={this._renderRow}
           renderSectionHeader={this._renderSectionHeader}
-          renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={StyleSheet.styles.separator} />}
+          renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
           style={styles.listView}
         />
       </View>
@@ -262,17 +263,10 @@ export default class Bookmarks extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFF',
   },
   listView: {
     flex: 1,
-  },
-  sectionHeaderContainer: {
-    paddingVertical: 4,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    backgroundColor: '#FAFAFA',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#c8c7cc',
   },
   sectionHeaderTitle: {
     color: '#59626a',
@@ -291,4 +285,30 @@ const styles = StyleSheet.create({
     tintColor: Colors.tint,
     marginRight: 10,
   },
+  separator: {
+    ...StyleSheet.styles.separator,
+    marginLeft: 15,
+  },
+  ...Platform.select({
+      ios: {
+        sectionHeaderContainer: {
+          paddingVertical: 4,
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          backgroundColor: '#FAFAFA',
+          borderBottomWidth: StyleSheet.hairlineWidth,
+          borderBottomColor: '#c8c7cc',
+        },
+      },
+      android: {
+        sectionHeaderContainer: {
+          paddingVertical: 4,
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+        },
+        segmentedControl: {
+          backgroundColor: '#F9F9F9',
+        },
+      },
+  }),
 });
