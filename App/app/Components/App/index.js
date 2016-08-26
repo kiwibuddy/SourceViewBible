@@ -156,6 +156,28 @@ export default class App extends Component {
     const canGoBack = navigationState.index > 0;
     const canGoForward = navigationState.index < navigationState.routes.length - 1;
 
+    if (Platform.OS === 'android') {
+      return (
+        <Toolbar>
+          <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
+            <ToolbarButton
+              imageSource={require('../Navigation/Images/nav-search.png')}
+              onPress={() => {this._pushRoute({path: '/Reader/Search', modal: true})}}
+            />
+            <ToolbarButton
+              imageSource={require('../Navigation/Images/nav-discoverycenter.png')}
+              onPress={() => {this._pushRoute({path: '/DiscoveryCenter', modal: true})}}
+            />
+            <ToolbarButton
+              imageSource={require('../Navigation/Images/nav-bookmarks.png')}
+              onPress={() => {this._pushRoute({path: '/Bookmarks', modal: true})}}
+            />
+          </View>
+        </Toolbar>
+      );
+    }
+
+
     return (
       <Toolbar>
         <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
