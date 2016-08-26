@@ -14,6 +14,7 @@ const {
   TouchableOpacity,
   View,
   WebView,
+  Platform,
 } = ReactNative;
 
 import {
@@ -345,6 +346,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 8,
+    elevation: 2,
+    borderTopColor: Platform.OS === 'ios' ? 0 : 'rgba(0, 0, 0, .15)',
+    borderTopWidth: Platform.OS === 'ios' ? 0 : 1,
   },
   filterLabelContainer: {
     borderRadius: 4,

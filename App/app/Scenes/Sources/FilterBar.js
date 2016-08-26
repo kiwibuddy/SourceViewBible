@@ -7,7 +7,8 @@ import {
   Image,
   Text,
   TouchableOpacity,
-  View
+  View,
+  Platform,
 } from 'react-native';
 
 import {
@@ -43,6 +44,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 8,
     justifyContent: 'center',
+    elevation: 2,
+    borderTopColor: Platform.OS === 'ios' ? 0 : 'rgba(0, 0, 0, .15)',
+    borderTopWidth: Platform.OS === 'ios' ? 0 : 1,
   },
   filterLabel: {
     fontSize: 14,
