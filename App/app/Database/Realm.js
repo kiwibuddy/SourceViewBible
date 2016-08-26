@@ -222,6 +222,12 @@ export class Actant extends Realm.Object {
     return (book ? book.sourceRelations.find(relation => relation.source.id === this.id) : null);
   }
 
+  colorsForBook(book: ?Object) {
+    const sourceRelation = this.relationForBook(book);
+    if (sourceRelation) return sourceRelation.colors;
+    return Colors.sources.other;
+  }
+
   countOfSourceType(sourceType: string): number {
     const count = this.sourceTypeCounts.find(count => count.string === sourceType);
     return count && count.count || 0;
@@ -689,6 +695,10 @@ export class SourceRelation extends Realm.Object {
   countOfSphereType(sphereType: string): number {
     const count = this.sphereCounts.find(count => count.string === sphereType);
     return count && count.count || 0;
+  }
+
+  colors(): Object {
+    return Colors.sources[this.principalSourceType];
   }
 
   get roles(): any {

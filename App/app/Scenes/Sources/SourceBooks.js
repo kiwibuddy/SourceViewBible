@@ -78,11 +78,10 @@ export default class SourceBooks extends Component {
     const { source } = this.state;
     const book = Book.findByID(sectionID);
     const occurrenceCount = occurrences.length;
-    const sourceRelation = source.relationForBook(book);
-    const color = Colors.sources[sourceRelation.principalSourceType];
+    const colors = source.colorsForBook(book);
 
     return (
-      <View style={[styles.listItemHeader, {borderTopColor: color.tint}]}>
+      <View style={[styles.listItemHeader, {borderTopColor: colors.tint}]}>
         <Text style={StyleSheet.styles.cell.titlebold}>{book.name}</Text>
         <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('occurrences.count', {count: occurrenceCount, localizedCount: Localizable.toNumber(occurrenceCount, {precision: 0})})}</Text>
       </View>

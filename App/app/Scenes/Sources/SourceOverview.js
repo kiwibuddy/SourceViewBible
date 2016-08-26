@@ -283,8 +283,7 @@ export default class SourceOverview extends Component {
     const { source } = this.state;
     const book = bookInfo.book;
     const occurrenceCount = bookInfo.count;
-    const sourceRelation = source.relationForBook(book);
-    const principalColor = Colors.sources[sourceRelation.principalSourceType];
+    const principalColor = source.colorsForBook(book);
 
     return (
       <TouchableOpacity onPress={() => this._onPressBook(book)}>
