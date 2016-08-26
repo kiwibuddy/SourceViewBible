@@ -411,10 +411,11 @@ export default class Spheres extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFF',
   },
   carouselContainer: {
     height: 250,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#FFF',
   },
   carousel: {
     flex: 1,
