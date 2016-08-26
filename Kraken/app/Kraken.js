@@ -6,7 +6,6 @@ import Realm from 'realm';
 import Emdros from 'react-native-emdros';
 import RNFS from 'react-native-fs';
 
-const now = require('performance-now');
 const DATABASE_PATH = '/tmp/SourceView.realm';
 const JSON_PATH = '/tmp/SourceView.json';
 
@@ -28,13 +27,7 @@ export async function release() {
 
   const emdros = await Emdros.open({name: 'Datasets/en/NLT/SourceView.bpt'});
 
-  const startTime = now();
-
   await seed(emdros);
-
-  const endTime = now();
-  const elapsedTime = (endTime - startTime) / 1000;
-  console.log(`Kraken has been released in ${elapsedTime.toFixed(3)}s!`);
 
   // RNFS.writeFile(JSON_PATH, JSON.stringify(objects), 'utf8').then((success) => {
   //   console.log('Done Seeding.');
