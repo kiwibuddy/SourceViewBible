@@ -20,7 +20,7 @@ const Kraken = require('./app/Kraken');
 class KrakenApp extends Component {
   state = {
     loading: true,
-    elapsedTime: null,
+    elapsedTime: 0,
   };
 
   componentDidMount() {
@@ -30,7 +30,7 @@ class KrakenApp extends Component {
   render() {
     const { loading, elapsedTime } = this.state;
     const style = (loading ? {backgroundColor: '#F5FCFF'} : {backgroundColor: 'yellowgreen'});
-    const title = (loading ? 'Releasing...' : `Released in ${elapsedTime}s`);
+    const title = (loading ? elapsedTime.toFixed(1).toString() : `Released in ${elapsedTime.toFixed(0)}s`);
     const activityIndicator = (loading ? <ActivityIndicator size="large" color="gray" /> : null);
 
     return (
@@ -45,13 +45,17 @@ class KrakenApp extends Component {
 
   async kracken() {
     const startTime = now();
+    this.interval = setInterval(() => {
+      this.setState({
+        elapsedTime: (now() - startTime) / 1000,
+        loading: true,
+      });
+    }, 30);
 
     await Kraken.release();
 
-    const endTime = now();
-    const elapsedTime = ((endTime - startTime) / 1000).toFixed(3);
-
-    this.setState({loading: false, elapsedTime});
+    clearInterval(this.interval);
+    this.setState({loading: false});
   }
 }
 
@@ -64,6 +68,7 @@ const styles = StyleSheet.create({
   },
   welcome: {
     fontSize: 30,
+    fontFamily: 'Courier New',
     textAlign: 'center',
     margin: 10,
   },
