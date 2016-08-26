@@ -11,6 +11,6 @@ EMDROS[:actant_objects].each do |actant_object|
       actant_id: actant_object[:mdf_actant_id],
       profession_id: profession_id
     }
-    DB[:professions].insert(profession)
+    DB[:professions].insert(profession) rescue nil
   end
 end

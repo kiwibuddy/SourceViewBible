@@ -38,6 +38,7 @@ async function seedSourceTypes(emdros, realm) {
   {
     "objectTypeName": "SourceActant",
     "feature": "actant_id",
+    "expression": "is_source_name=true",
     "buckets": {
       "objectTypeName": "Source",
       "feature": ["source_color"],
@@ -77,6 +78,7 @@ async function seedActantWordCloud(emdros, realm) {
   {
     "objectTypeName": "SourceActant",
     "feature": "actant_id",
+    "expression": "is_source_name=true",
     "buckets": {
       "objectTypeName": "Token",
       "feature": "surface_fts",
@@ -115,6 +117,7 @@ async function seedSphereWordCount(emdros, realm) {
   {
     "objectTypeName": "SourceActant",
     "feature": "actant_id",
+    "expression": "is_source_name=true",
     "buckets": {
       "objectTypeName": "Token",
       "expression" : "(${sphereExpression})"
@@ -150,6 +153,7 @@ async function seedSphereCounts(emdros, realm) {
   {
     "objectTypeName": "SourceActant",
     "feature": "actant_id",
+    "expression": "is_source_name=true",
     "buckets": {
       "objectTypeName": "Token",
       "feature": [${sphereFeatures}],

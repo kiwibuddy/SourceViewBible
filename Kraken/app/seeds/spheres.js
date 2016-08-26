@@ -98,7 +98,8 @@ async function seedSphereWordCounts(emdros, realm) {
         const sourceTypes = {};
 
         for (let [index, actant] of realm.objects('Actant').filtered('isSource = $0', true).entries()) {
-          const wordCount = actant.sphereCounts.find(count => count.string === sphere.id).count || 0;
+          const sphereCount = actant.sphereCounts.find(count => count.string === sphere.id)
+          const wordCount = (sphereCount ? sphereCount.count : 0);
           sourceCounts.push({
             string: actant.id.toString(),
             count: wordCount

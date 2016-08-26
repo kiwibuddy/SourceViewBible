@@ -94,6 +94,7 @@ async function seedSources(emdros, realm) {
     "feature": "DJHRef",
     "buckets": {
       "objectTypeName": "SourceActant",
+      "expression": "is_source_name=true",
       "feature": ["actant_id"],
       "buckets": {
         "objectTypeName": "Token",
@@ -167,6 +168,7 @@ async function seedSourceSourceTypes(emdros, realm) {
     "buckets": {
       "objectTypeName": "SourceActant",
       "feature": ["actant_id"],
+      "expression": "is_source_name=true",
       "buckets": {
         "objectTypeName": "Source",
         "feature": ["source_color"],
@@ -198,7 +200,7 @@ async function seedSourceSourceTypes(emdros, realm) {
                   });
                 }
               } else {
-                console.log('No Source Relation??');
+                console.log('No Source Relation??', actantID);
               }
             });
           }
@@ -221,6 +223,7 @@ async function seedSourceWordCloud(emdros, realm) {
     "buckets": {
       "objectTypeName": "SourceActant",
       "feature": "actant_id",
+      "expression": "is_source_name=true",
       "buckets": {
         "objectTypeName": "Token",
         "feature": "surface_fts",
@@ -337,6 +340,7 @@ async function seedSourceRelationSphereWordCount(emdros, realm) {
     "buckets": {
       "objectTypeName": "SourceActant",
       "feature": ["actant_id"],
+      "expression": "is_source_name=true",
       "buckets": {
         "objectTypeName": "Token",
         "expression" : "(${sphereExpression})"
@@ -385,6 +389,7 @@ async function seedSourceRelationSphereCounts(emdros, realm) {
     "buckets": {
       "objectTypeName": "SourceActant",
       "feature": ["actant_id"],
+      "expression": "is_source_name=true",
       "buckets": {
         "objectTypeName": "Token",
         "feature": [${sphereFeatures}],

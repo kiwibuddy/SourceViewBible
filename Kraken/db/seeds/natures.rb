@@ -8,6 +8,6 @@ EMDROS[:actant_objects].each do |actant_object|
       actant_id: actant_object[:mdf_actant_id],
       nature_id: nature_id
     }
-    DB[:natures].insert(nature)
+    DB[:natures].insert(nature) rescue nil
   end
 end

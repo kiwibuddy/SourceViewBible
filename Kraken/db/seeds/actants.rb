@@ -1,7 +1,14 @@
 STDERR.puts "Seeding Actants"
 
 actants = []
-EMDROS[:actant_objects].each do |actant_object|
+sql = '
+SELECT DISTINCT actant_objects.*
+FROM actant_objects INNER JOIN sourceactant_objects ON actant_objects.mdf_actant_id = sourceactant_objects.mdf_actant_id
+WHERE sourceactant_objects.mdf_is_source_name = ?
+UNION
+SELECT DISTINCT actant_objects.*
+FROM actant_objects INNER JOIN recipientactant_objects ON actant_objects.mdf_actant_id = recipientactant_objects.mdf_actant_id'
+EMDROS[sql, 2].each do |actant_object|
 	actant = {
 		id: actant_object[:mdf_actant_id],
 		actant_number_id: actant_object[:mdf_source_number],
