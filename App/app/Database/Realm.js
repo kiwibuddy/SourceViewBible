@@ -697,7 +697,7 @@ export class SourceRelation extends Realm.Object {
     return count && count.count || 0;
   }
 
-  colors(): Object {
+  get colors(): Object {
     return Colors.sources[this.principalSourceType];
   }
 
