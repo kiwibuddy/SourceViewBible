@@ -158,25 +158,10 @@ export default class Sources extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFF',
   },
   section: {
     marginLeft: 8,
-  },
-  textInputContainer: {
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#c8c7cc',
-  },
-  textInput: {
-    fontSize: 14,
-    backgroundColor: '#ececec',
-    borderColor: '#ececec',
-    borderRadius: 3,
-    borderWidth: 1,
-    paddingLeft: 8,
-    marginHorizontal: 8,
-    marginVertical: 8,
-    height: 26,
-    padding: 0, // Android workaround
   },
   sourcesCellContainer: {
     flex: 1,
@@ -244,6 +229,22 @@ const styles = StyleSheet.create({
   },
   ...Platform.select({
       ios: {
+        textInputContainer: {
+          borderBottomWidth: StyleSheet.hairlineWidth,
+          borderBottomColor: '#c8c7cc',
+        },
+        textInput: {
+          fontSize: 14,
+          backgroundColor: '#ececec',
+          borderColor: '#ececec',
+          borderRadius: 3,
+          borderWidth: 1,
+          paddingLeft: 8,
+          marginHorizontal: 8,
+          marginVertical: 8,
+          height: 26,
+          padding: 0, // Android workaround
+        },
         segmentedControl: {
           marginTop: 8,
           marginHorizontal: 8,
@@ -251,6 +252,20 @@ const styles = StyleSheet.create({
         },
       },
       android: {
+        textInputContainer: {
+          borderBottomWidth: StyleSheet.hairlineWidth,
+          borderBottomColor: '#c8c7cc',
+          backgroundColor: '#FAFAFA',
+        },
+        textInput: {
+          fontSize: 16,
+          backgroundColor: '#FAFAFA',
+          paddingLeft: 8,
+          marginHorizontal: 8,
+          marginVertical: 8,
+          height: 26,
+          padding: 0, // Android workaround
+        },
         segmentedControl: {
           shadowColor: 'red',
           elevation: 2,

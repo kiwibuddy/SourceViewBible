@@ -10,6 +10,7 @@ import {
   View,
   Image,
   Dimensions,
+  Platform,
 } from 'react-native';
 
 import {
@@ -60,7 +61,7 @@ export default class ReaderSearch extends Component {
               onChangeText={this._search}
               onSubmitEditing={this._onSubmitSearch}
               placeholder={Localizable.t('search-references')}
-              style={[styles.searchTextInput, {top: null, bottom: null, left: -32, marginVertical: 8}]}
+              style={styles.searchTextInput}
               value={this.state.search}
             />
           )}
@@ -189,7 +190,8 @@ export default class ReaderSearch extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#FFF',
   },
   listView: {
     flex: 1,
@@ -214,17 +216,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     alignItems: 'center',
     marginLeft: 15,
-  },
-  searchTextInput: {
-    flex: 1,
-    fontSize: 14,
-    backgroundColor: '#ececec',
-    borderColor: '#ececec',
-    borderRadius: 3,
-    borderWidth: 1,
-    paddingLeft: 8,
-    height: 26,
-    padding: 0, // Android workaround
   },
   gettingstartedContainer: {
     position: 'absolute',
@@ -258,5 +249,37 @@ const styles = StyleSheet.create({
   gettingstartedIcon: {
     width: (WIDTH <= 320 ? 60 : 120),
     height: (WIDTH <= 320 ? 60 : 120),
-  }
+  },
+  ...Platform.select({
+      ios: {
+        searchTextInput: {
+          flex: 1,
+          fontSize: 14,
+          backgroundColor: '#ececec',
+          borderColor: '#ececec',
+          borderRadius: 3,
+          borderWidth: 1,
+          paddingLeft: 8,
+          height: 26,
+          padding: 0, // Android workaround
+          top: null,
+          bottom: null,
+          left: -32,
+          marginVertical: 8
+        },
+      },
+      android: {
+        searchTextInput: {
+          flex: 1,
+          fontSize: 16,
+          paddingLeft: 8,
+          backgroundColor: '#F9F9F9',
+          height: 26,
+          padding: 0, // Android workaround
+          top: null,
+          bottom: null,
+          marginVertical: 8
+        },
+      },
+  }),
 });
