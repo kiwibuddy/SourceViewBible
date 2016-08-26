@@ -278,6 +278,7 @@ export default class SphereBooks extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFF',
   },
   sphereBooksGraph: {
     height: 200,
@@ -290,6 +291,7 @@ const styles = StyleSheet.create({
       height: 1,
       width: 0
     },
+    backgroundColor: '#FFF',
   },
   sectionHeaderContainer: {
     ...StyleSheet.styles.sectionHeaderContainer,

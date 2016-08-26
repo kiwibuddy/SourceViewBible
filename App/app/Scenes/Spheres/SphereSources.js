@@ -228,6 +228,7 @@ export default class SphereSources extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFF',
   },
   textInput: {
     fontSize: 14,

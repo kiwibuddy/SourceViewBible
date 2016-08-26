@@ -113,22 +113,22 @@ export default class Settings extends Component {
           </View>
           <View style={[styles.section, {marginTop: 8}]}>
             {this._renderSphereRow('family')}
-            <View style={StyleSheet.styles.separator} />
+            <View style={styles.separator} />
 
             {this._renderSphereRow('economics')}
-            <View style={StyleSheet.styles.separator} />
+            <View style={styles.separator} />
 
             {this._renderSphereRow('government')}
-            <View style={StyleSheet.styles.separator} />
+            <View style={styles.separator} />
 
             {this._renderSphereRow('religion')}
-            <View style={StyleSheet.styles.separator} />
+            <View style={styles.separator} />
 
             {this._renderSphereRow('education')}
-            <View style={StyleSheet.styles.separator} />
+            <View style={styles.separator} />
 
             {this._renderSphereRow('communication')}
-            <View style={StyleSheet.styles.separator} />
+            <View style={styles.separator} />
 
             {this._renderSphereRow('celebration')}
           </View>
@@ -195,31 +195,8 @@ export default class Settings extends Component {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#EFEFF4',
-  },
   scrollView: {
     flex: 1,
-  },
-  section: {
-    marginTop: 16,
-    backgroundColor: 'white',
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: StyleSheet.styles.separator.backgroundColor,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: StyleSheet.styles.separator.backgroundColor,
-  },
-  sectionHeaderContainer: {
-    marginTop: 16,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingLeft: 15,
-  },
-  sectionHeaderTitle: {
-    color: '#59626A',
-    marginTop: 8,
-    fontSize: 13,
   },
   slider: {
     flex: 2,
@@ -242,13 +219,6 @@ const styles = StyleSheet.create({
     padding: 4,
     overflow: 'hidden',
   },
-  cellContainer: {
-    flex: 1,
-    marginRight: 15,
-    flexDirection: 'row',
-    alignItems: 'center',
-    minHeight: 44,
-  },
   cellLeftContainer: {
     flex: 1,
     flexDirection: 'row',
@@ -260,4 +230,76 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
+  ...Platform.select({
+      ios: {
+        container: {
+          flex: 1,
+          backgroundColor: '#EFEFF4',
+        },
+        section: {
+          marginTop: 16,
+          backgroundColor: 'white',
+          borderTopWidth: StyleSheet.hairlineWidth,
+          borderTopColor: StyleSheet.styles.separator.backgroundColor,
+          borderBottomWidth: StyleSheet.hairlineWidth,
+          borderBottomColor: StyleSheet.styles.separator.backgroundColor,
+        },
+        sectionHeaderContainer: {
+          marginTop: 16,
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          paddingLeft: 15,
+        },
+        sectionHeaderTitle: {
+          color: '#59626A',
+          marginTop: 8,
+          fontSize: 13,
+        },
+        separator: {
+          height: StyleSheet.hairlineWidth,
+          backgroundColor: Colors.separator,
+        },
+        cellContainer: {
+          flex: 1,
+          marginRight: 15,
+          flexDirection: 'row',
+          alignItems: 'center',
+          minHeight: 44,
+        },
+      },
+      android: {
+        container: {
+          flex: 1,
+          backgroundColor: '#FFF',
+        },
+        section: {
+          marginTop: 0,
+          borderBottomWidth: 1,
+          borderBottomColor: StyleSheet.styles.separator.backgroundColor,
+        },
+        sectionHeaderContainer: {
+          marginTop: 0,
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          paddingLeft: 15,
+        },
+        sectionHeaderTitle: {
+          color: '#59626A',
+          marginTop: 15,
+          fontSize: 13,
+          fontWeight: 'bold',
+        },
+        separator: {
+          height: 0,
+          backgroundColor: Colors.separator,
+        },
+        cellContainer: {
+          flex: 1,
+          marginRight: 15,
+          flexDirection: 'row',
+          alignItems: 'center',
+          minHeight: 55,
+        },
+      },
+  }),
 });
