@@ -20,13 +20,6 @@ import {
 
 import AppInfo from 'react-native-app-info';
 
-import Menu, {
-  MenuContext,
-  MenuOptions,
-  MenuOption,
-  MenuTrigger,
-} from 'react-native-popup-menu';
-
 import DiscoverBooks from './DiscoverBooks';
 import DiscoverSources from './DiscoverSources';
 import DiscoverSpheres from './DiscoverSpheres';
@@ -35,6 +28,10 @@ import { NavigationBarButton } from '../../Components/Navigation';
 import { aboutURL, discoverHelpURL } from '../../Navigation';
 import { Preference } from '../../Preferences';
 
+import {
+  MenuOptions,
+  MenuOption,
+} from 'react-native-popup-menu';
 
 type Props = {
 
@@ -42,14 +39,6 @@ type Props = {
 
 export default class Discovery extends Component {
   static renderNavigationHeaderRightComponent(props: Object) {
-    if (Platform.OS === 'android') {
-      return (
-        <NavigationBarButton
-          imageSource={require('../../Components/Navigation/Images/nav-more.png')}
-          onPress={() => props.navigate(discoverHelpURL({title: Localizable.t('help'), modal: true}))}
-        />
-      );
-    }
     return (
       <NavigationBarButton
         imageSource={require('../../Components/Navigation/Images/nav-help.png')}

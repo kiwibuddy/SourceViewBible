@@ -12,6 +12,13 @@ import {
 
 import { NavigationHeader, Toolbar, ToolbarButton } from '../Navigation';
 
+import Menu, {
+  MenuContext,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger,
+} from 'react-native-popup-menu';
+
 import router, { BACK, discoverURL, onboardingURL, sphereHelpURL, sphereInAppPurchaseURL } from '../../Navigation';
 
 import {
@@ -24,7 +31,8 @@ import {
 import { History, Preference } from '../../Preferences';
 
 type State = {
-  navigation: Object
+  navigation: Object,
+  menu: any,
 };
 
 export default class App extends Component {
@@ -41,7 +49,8 @@ export default class App extends Component {
         routes: [
           route
         ],
-      }
+      },
+      menu: null
     };
   }
 
@@ -63,11 +72,11 @@ export default class App extends Component {
     const navigationHeader = this._renderNavigationHeader({navigationState: navigation});
     const toolbar = this._renderToolbar({navigationState: navigation, jumpToIndex: this._jumpToIndex});
     return (
-      <View style={{flex: 1}}>
+      <MenuContext style={{flex: 1}}>
         {navigationHeader}
         {scene}
         {toolbar}
-      </View>
+      </MenuContext>
     );
   }
 
