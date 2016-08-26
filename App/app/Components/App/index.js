@@ -158,7 +158,7 @@ export default class App extends Component {
     if (Platform.OS === 'android') {
       return (
         <Toolbar>
-          <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
+          <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around'}}>
             <ToolbarButton
               imageSource={require('../Navigation/Images/nav-search.png')}
               onPress={() => {this._pushRoute({path: '/Reader/Search', modal: true})}}
