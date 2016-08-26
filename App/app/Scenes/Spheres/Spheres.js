@@ -35,18 +35,7 @@ import { bookURL, sphereHelpURL, readerURL, sourceURL, sphereBooksURL, spherePas
 import { Bible, Actant, Book, Sphere } from '../../Database';
 import { Preference } from '../../Preferences';
 
-import * as Navigation from '../../Components/Navigation';
-const NavigationBar = (props: Props) => {
-  return (
-    <Navigation.NavigationBar title={props.title}>
-      <Navigation.NavigationBarButton
-        imageSource={require('../../Components/Navigation/Images/nav-help.png')}
-        onPress={() => props.navigate(sphereHelpURL({title: Localizable.t('help'), modal: true}))}
-        style={{position: 'absolute', right: 5}}
-      />
-    </Navigation.NavigationBar>
-  );
-};
+import { NavigationBarButton } from '../../Components/Navigation';
 
 import FoundationalSphere from './FoundationalSphere';
 
@@ -73,7 +62,14 @@ type State = {
 };
 
 export default class Spheres extends Component {
-  // static NavigationBar = NavigationBar;
+  static renderNavigationHeaderRightComponent(props: Object) {
+    return (
+      <NavigationBarButton
+        imageSource={require('../../Components/Navigation/Images/nav-help.png')}
+        onPress={() => props.navigate(sphereHelpURL({title: Localizable.t('help'), modal: true}))}
+      />
+    );
+  }
 
   props: Props;
   state: State;
