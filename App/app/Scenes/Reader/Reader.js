@@ -75,12 +75,12 @@ class OccurrenceToolbar extends Component {
           <ToolbarButton
             disabled={previousRoute == null}
             imageSource={require('../../Images/common/previous.png')}
-            onPress={() => this._navigate(previousRoute)}
+            onPress={() => previousRoute && this._navigate(previousRoute)}
           />
           <ToolbarButton
             disabled={nextRoute == null}
             imageSource={require('../../Images/common/next.png')}
-            onPress={() => this._navigate(nextRoute)}
+            onPress={() => nextRoute && this._navigate(nextRoute)}
           />
         </View>
         <ToolbarButton
@@ -91,7 +91,7 @@ class OccurrenceToolbar extends Component {
         <ToolbarButton
           title={Localizable.t('done')}
           titleStyle={StyleSheet.styles.navigationBar.doneButtonTitle}
-          onPress={() => this._navigate(currentRoute)}
+          onPress={() => currentRoute && this._navigate(currentRoute)}
           style={{paddingHorizontal: 0, marginHorizontal: 0, marginRight: -20}}
         />
       </Toolbar>
@@ -120,6 +120,8 @@ type Props = {
 };
 
 type State = {
+  bookID: string,
+  anchor?: string,
   scripture: any,
   loading: bool,
 };
@@ -163,6 +165,8 @@ export default class Reader extends Component {
     super(props);
 
     this.state = {
+      bookID: props.bookID,
+      anchor: props.anchor,
       scripture: null,
       loading: true,
     };
@@ -245,7 +249,10 @@ export default class Reader extends Component {
     const spheres = Preference.objectForKey(Preference.Keys.Reader.spheres) || [];
     const options = {monadSet: book.monadSet, spheres};
 
-    this.setState({loading: true});
+    if (bookID !== this.state.bookID || anchor !== this.state.anchor) {
+      this.setState({loading: true});
+    }
+
     Emdros.scripture(options).then((content) => {
       if (this.shouldFetchScripture) {
         const scripture = this._renderScripture(content);
@@ -256,6 +263,8 @@ export default class Reader extends Component {
 
         LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
         this.setState({
+          bookID,
+          anchor,
           scripture,
           loading: false
         });
