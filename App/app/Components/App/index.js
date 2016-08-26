@@ -83,9 +83,8 @@ export default class App extends Component {
     const scene = this._renderScene(props);
     if (props.route.modal) return scene;
 
-    const marginBottom = (Platform.OS === 'android' ? null : Toolbar.HEIGHT);
     return (
-      <View style={{flex: 1, marginBottom}}>
+      <View style={{flex: 1, marginBottom: Toolbar.HEIGHT}}>
         {scene}
       </View>
     );
