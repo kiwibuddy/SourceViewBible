@@ -15,7 +15,7 @@ import {
   StyleSheet
 } from '../../Common';
 
-type BarComponentRenderer = (props: Object) => ?ReactElement<any>;
+type BarComponentRenderer = ?(props: Object) => ?ReactElement<any>;
 
 type Props = {
   navigate: Function,

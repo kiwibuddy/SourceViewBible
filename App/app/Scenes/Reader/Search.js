@@ -27,6 +27,16 @@ import { Bible } from '../../Database';
 
 const { width: WIDTH } = Dimensions.get('window');
 
+function renderBackButton(props: Object) {
+  return (
+    <NavigationBarButton
+      title={Localizable.t('done')}
+      titleStyle={StyleSheet.styles.navigationBar.doneButtonTitle}
+      onPress={() => props.navigate(BACK)}
+    />
+  );
+}
+
 type State = {
   dataSource: any,
   search: string,
@@ -42,7 +52,8 @@ export default class ReaderSearch extends Component {
     const dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (h1, h2) => h1 !== h2});
     this.state = {
       dataSource,
-      search: props.search
+      search: props.search,
+      reference: null
     };
   }
 
@@ -52,6 +63,7 @@ export default class ReaderSearch extends Component {
     return (
       <View style={styles.container}>
         <NavigationHeader
+          navigate={this.props.navigate}
           renderTitleComponent={(props: Object) => (
             <TextInput
               autoCapitalize="words"
@@ -65,13 +77,8 @@ export default class ReaderSearch extends Component {
               value={this.state.search}
             />
           )}
-          renderRightComponent={(props: Object) => (
-            <NavigationBarButton
-              title={Localizable.t('cancel')}
-              titleStyle={StyleSheet.styles.navigationBar.doneButtonTitle}
-              onPress={() => this.props.navigate(BACK)}
-            />
-          )}
+          renderLeftComponent={Platform.OS === 'android' ? renderBackButton : null}
+          renderRightComponent={Platform.OS === 'ios' ? renderBackButton : null}
         />
         {content}
       </View>
