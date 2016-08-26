@@ -186,7 +186,6 @@ export default class App extends Component {
             onPress={() => {this._pushRoute({path: '/Bookmarks', modal: true})}}
           />
         </View>
-
       </Toolbar>
     );
   };
