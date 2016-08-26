@@ -6,6 +6,7 @@ const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithP
 
 import {
   LayoutAnimation,
+  Platform,
   Text,
   TouchableOpacity,
   View,
@@ -95,11 +96,21 @@ export default class DiscoveryCenter extends Component {
   }
 
   _renderToolbar = (props: any) => {
+    if (Platform.OS === 'android') {
+      return (
+        <View style={styles.addButton}>
+          <TouchableOpacity onPress={this._onPressAdd}>
+            <Text style={{flex: 1, fontSize: 30, color: '#FFF', alignSelf: 'center', textAlign: 'center', paddingBottom: 4}}>+</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    }
+
     return (
       <Toolbar>
         <ToolbarButton
           imageSource={require('./Images/btn-add-card.png')}
-          onPress={() => this._addCard(this._defaultCard())}
+          onPress={this._onPressAdd}
         />
       </Toolbar>
     );
@@ -211,6 +222,10 @@ export default class DiscoveryCenter extends Component {
     this.props.navigate(occurrencesURL({title: Localizable.t('passages'), occurrences, modal: true, onPressBack, backTitle: Localizable.t('back')}), {replace: true});
   };
 
+  _onPressAdd = () => {
+    this._addCard(this._defaultCard());
+  };
+
   _showPopover = (props: Object, onComplete: Function) => {
     this._animateLayout();
     this.setState({
@@ -246,5 +261,21 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     marginBottom: Toolbar.HEIGHT,
+    ...Platform.select({
+      android: {
+        marginBottom: null
+      },
+    }),
   },
+  addButton: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    height: 56,
+    width: 56,
+    borderRadius: 28,
+    backgroundColor: Colors.tint,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
 });
