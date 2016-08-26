@@ -19,8 +19,6 @@ export default class SegmentedControl extends Component {
 
   state: {
     selectedIndex: number,
-    __indicatorLeft: any,
-    __indicatorWidth: any
   };
 
   constructor(props) {
@@ -28,8 +26,6 @@ export default class SegmentedControl extends Component {
 
     this.state = {
       selectedIndex: props.selectedIndex || 0,
-      indicatorLeft: new Animated.Value(0),
-      indicatorWidth: new Animated.Value(0)
     };
   }
 
@@ -39,49 +35,32 @@ export default class SegmentedControl extends Component {
     const buttons = values.map((value) => {
       let buttonIndex = index;
       let isButtonSelected = buttonIndex === this.state.selectedIndex;
-      let tintColor = (isButtonSelected ? this.props.tintColor : null);
       index++;
-      return this._renderButton(buttonIndex, value, tintColor);
+      return this._renderButton(buttonIndex, value, isButtonSelected);
     });
 
-    const indicatorStyle = [styles.indicator, {
-      backgroundColor: this.props.tintColor,
-      left: this.state.indicatorLeft,
-      width: this.state.indicatorWidth
-    }];
-
     return (
-      <View
-        style={[styles.tabBar, this.props.style]}
-        onLayout={this._measureSelectedButton}
-      >
+      <View style={[styles.tabBar, this.props.style]}>
         <View style={styles.buttons}>
           {buttons}
         </View>
-        <Animated.View style={indicatorStyle} />
       </View>
     );
   }
 
-  _renderButton(index: PropTypes.number, title: String, tintColor: ColorPropType) {
+  _renderButton(index: PropTypes.number, title: String, isSelected: boolean) {
+    const tintColor = isSelected ? this.props.tintColor : null;
+    const buttonStyle = isSelected ? {borderBottomColor: tintColor} : {};
     return(
       <TouchableOpacity
         key={'button-' + title}
-        ref={SEGMENT_REF + index}
-        style={styles.button}
+        style={[styles.button, buttonStyle]}
         onPress={() => this._onValueChange(index, title)}
       >
         <Text style={[styles.buttonTitle, {color: tintColor}]}>{title.toLocaleUpperCase()}</Text>
       </TouchableOpacity>
     );
   }
-
-  _measureSelectedButton = () => {
-    this.refs[SEGMENT_REF + this.state.selectedIndex].measure((ox, oy, width, height, px, py) => {
-      this.state.indicatorLeft.setValue(px);
-      this.state.indicatorWidth.setValue(width);
-    });
-  };
 
   _onValueChange = (index, title) => {
     if (index === this.state.selectedIndex) return;
@@ -103,15 +82,12 @@ const styles = StyleSheet.create({
   button: {
     flex: 1,
     justifyContent: 'center',
+    borderBottomWidth: 3,
+    borderBottomColor: 'transparent',
   },
   buttonTitle: {
     fontSize: 14,
     fontFamily: 'sans-serif-medium',
     alignSelf: 'center',
   },
-  indicator: {
-    position: 'absolute',
-    height: 3,
-    bottom: 0
-  }
 });
