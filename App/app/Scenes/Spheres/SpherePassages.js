@@ -92,7 +92,7 @@ export default class SpherePassages extends Component {
       <TouchableOpacity style={styles.listItemContainer} onPress={() => this._onPressPassage(passage)}>
         <Text allowFontScaling={false} style={[StyleSheet.styles.cell.occurrence, {marginTop: -5, width: 20}]}>{passage.number}</Text>
         <View style={styles.listItem}>
-          <Text style={styles.bodybold}>{passage.title}</Text>
+          <Text allowFontScaling={false} style={styles.bodybold}>{passage.title}</Text>
           <Text style={styles.body}>{passage.scripture}</Text>
           <View style={styles.referenceContainer}>
             <Text style={[StyleSheet.styles.cell.subtitle, {paddingRight: 8,}]}>{passage.reference}</Text>
