@@ -3,10 +3,12 @@ STDERR.puts "Seeding BSO"
 BOOKS = JSON.parse(open("app/books.json").read)
 BSO_WORD_COUNTS = JSON.parse(open("db/seeds/bso_word_counts.json").read)
 
-sql = 'SELECT DISTINCT source_objects.*, source_mdf_source_name_set.string_value AS name
-FROM source_objects INNER JOIN source_mdf_source_name_set ON source_mdf_source_name_set.id_d = source_objects.mdf_source_name'
+sql = "
+SELECT DISTINCT source_objects.*, source_mdf_source_name_set.string_value AS name
+FROM source_objects INNER JOIN source_mdf_source_name_set ON source_mdf_source_name_set.id_d = source_objects.mdf_source_name
+WHERE source_mdf_source_name_set.id_d != ?"
 
-book_source_occurrences = EMDROS[sql].map do |source_object|
+book_source_occurrences = EMDROS[sql, SOURCE_NARRATOR_ID].map do |source_object|
   id = source_object[:object_id_d]
   first = source_object[:first_monad]
   last = source_object[:last_monad]

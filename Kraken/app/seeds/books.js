@@ -94,7 +94,7 @@ async function seedSources(emdros, realm) {
     "feature": "DJHRef",
     "buckets": {
       "objectTypeName": "SourceActant",
-      "expression": "is_source_name=true",
+      "expression": "is_source_name=true AND NOT real_name='The Narrator'",
       "feature": ["actant_id"],
       "buckets": {
         "objectTypeName": "Token",
@@ -168,10 +168,11 @@ async function seedSourceSourceTypes(emdros, realm) {
     "buckets": {
       "objectTypeName": "SourceActant",
       "feature": ["actant_id"],
-      "expression": "is_source_name=true",
+      "expression": "is_source_name=true AND NOT real_name='The Narrator'",
       "buckets": {
         "objectTypeName": "Source",
         "feature": ["source_color"],
+        "expression": "NOT source_name='The Narrator'",
         "buckets": {
           "objectTypeName": "Token",
         }
@@ -223,7 +224,7 @@ async function seedSourceWordCloud(emdros, realm) {
     "buckets": {
       "objectTypeName": "SourceActant",
       "feature": "actant_id",
-      "expression": "is_source_name=true",
+      "expression": "is_source_name=true AND NOT real_name='The Narrator'",
       "buckets": {
         "objectTypeName": "Token",
         "feature": "surface_fts",
@@ -340,7 +341,7 @@ async function seedSourceRelationSphereWordCount(emdros, realm) {
     "buckets": {
       "objectTypeName": "SourceActant",
       "feature": ["actant_id"],
-      "expression": "is_source_name=true",
+      "expression": "is_source_name=true AND NOT real_name='The Narrator'",
       "buckets": {
         "objectTypeName": "Token",
         "expression" : "(${sphereExpression})"
@@ -389,7 +390,7 @@ async function seedSourceRelationSphereCounts(emdros, realm) {
     "buckets": {
       "objectTypeName": "SourceActant",
       "feature": ["actant_id"],
-      "expression": "is_source_name=true",
+      "expression": "is_source_name=true AND NOT real_name='The Narrator'",
       "buckets": {
         "objectTypeName": "Token",
         "feature": [${sphereFeatures}],

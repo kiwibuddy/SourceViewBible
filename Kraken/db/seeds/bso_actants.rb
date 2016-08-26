@@ -1,10 +1,16 @@
 STDERR.puts "Seeding BSO Actants"
 
+source_actant_narrator_id = EMDROS[:sourceactant_mdf_real_name_set]["string_value = ?", THE_NARRATOR][:id_d]
+
 ["source", "recipient"].each do |type|
-  EMDROS["#{type}actant_objects".to_sym].each do |bso_actant_object|
+  actants = EMDROS["#{type}actant_objects".to_sym]
+  actants = actants.where("mdf_real_name != ?", source_actant_narrator_id) if type == "source"
+  actants.each do |bso_actant_object|
     id = bso_actant_object[:object_id_d]
 
-    if source_object = EMDROS[:source_objects].where('first_monad = ? AND last_monad = ?', bso_actant_object[:first_monad], bso_actant_object[:last_monad]).first
+    source_objects = EMDROS[:source_objects].where('first_monad = ? AND last_monad = ?', bso_actant_object[:first_monad], bso_actant_object[:last_monad])
+    source_objects = source_objects.where('mdf_source_name != ?', source_actant_narrator_id) if type == "source"
+    if source_object = source_objects.first
       bso_actant = {
         id: id,
         actant_id: bso_actant_object[:mdf_actant_id],

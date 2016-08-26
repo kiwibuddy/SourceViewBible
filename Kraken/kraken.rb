@@ -18,4 +18,7 @@ DB = Sequel.connect("sqlite://#{DB_NAME}")
 Sequel.extension :migration
 Sequel::Migrator.run(DB, "db/migrations")
 
+THE_NARRATOR = "The Narrator"
+SOURCE_NARRATOR_ID = EMDROS[:source_mdf_source_name_set]["string_value = ?", THE_NARRATOR][:id_d]
+
 require './db/seeds/seeds'

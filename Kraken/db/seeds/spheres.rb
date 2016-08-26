@@ -2,7 +2,7 @@ STDERR.puts "Seeding Spheres"
 
 # BSO_WORD_COUNTS = JSON.parse(open("db/seeds/bso_word_counts.json").read)
 
-book_source_occurrences = EMDROS[:source_objects].each do |source_object|
+book_source_occurrences = EMDROS[:source_objects].where("mdf_source_name != ?", SOURCE_NARRATOR_ID).each do |source_object|
   id = source_object[:object_id_d]
   word_counts = BSO_WORD_COUNTS.find{ |c| c["id"] == id } || {}
 
