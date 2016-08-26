@@ -4,6 +4,7 @@
 import React, { Component } from 'react';
 import {
   BackAndroid,
+  Platform,
   Text,
   TouchableOpacity,
   View,
@@ -74,8 +75,9 @@ export default class App extends Component {
     const scene = this._renderScene(props);
     if (props.route.modal) return scene;
 
+    const marginBottom = (Platform.OS === 'android' ? null : Toolbar.HEIGHT);
     return (
-      <View style={{flex: 1, marginBottom: Toolbar.HEIGHT}}>
+      <View style={{flex: 1, marginBottom}}>
         {scene}
       </View>
     );
@@ -113,6 +115,8 @@ export default class App extends Component {
   };
 
   _renderToolbar = (props: any) => {
+    if (Platform.OS === 'android') return null;
+
     const { navigationState } = props;
     const navigationRoute = navigationState.routes[navigationState.index];
 
