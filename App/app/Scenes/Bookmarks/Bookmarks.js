@@ -190,7 +190,6 @@ export default class Bookmarks extends Component {
 
       default:
         const bookmarks = [
-          {path: '/Reader/Search', title: 'Go to a Reference', modal: true},
           {path: '/Discover', title: Localizable.t('discover')},
           {path: '/Books', title: Localizable.t('books')},
           {path: '/Sources', title: Localizable.t('sources.text')},
