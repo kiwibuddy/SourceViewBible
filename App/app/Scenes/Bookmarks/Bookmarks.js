@@ -38,6 +38,16 @@ const SEGMENT_INDEXES = {
 };
 const SEGMENT_PREFERENCE = Preference.Keys.Bookmarks.SegmentIndex;
 
+function renderBackButton(props: Object) {
+  return (
+    <NavigationBarButton
+      title={Localizable.t('done')}
+      titleStyle={StyleSheet.styles.navigationBar.doneButtonTitle}
+      onPress={() => props.navigate(BACK)}
+    />
+  );
+}
+
 type Props = {
   navigate: Function,
 };
@@ -78,18 +88,15 @@ export default class Bookmarks extends Component {
           title={Localizable.t('bookmarks')}
           renderTitleComponent={(props: Object) => (
             <SegmentedControl
-              style={[styles.segmentedControl, {left: -32, marginRight: -16, marginTop: 8}]}
+              style={[styles.segmentedControl, {marginTop: 8}]}
               tintColor={Colors.tint}
               values={SEGMENTS}
               selectedIndex={this.state.selectedSegmentIndex}
               onValueChange={(value) => this._onSegmentedControlValueChanged(SEGMENTS.indexOf(value))}
             />
           )}
-          renderRightComponent={(props: Object) => (<NavigationBarButton
-            title={Localizable.t('done')}
-            titleStyle={StyleSheet.styles.navigationBar.doneButtonTitle}
-            onPress={() => props.navigate(BACK)}
-          />)}
+          renderLeftComponent={Platform.OS === 'android' ? renderBackButton : null}
+          renderRightComponent={Platform.OS === 'ios' ? renderBackButton : null}
         />
         <ListView
           enableEmptySections={true}
@@ -299,6 +306,10 @@ const styles = StyleSheet.create({
           borderBottomWidth: StyleSheet.hairlineWidth,
           borderBottomColor: '#c8c7cc',
         },
+        segmentedControl: {
+          left: -32,
+          marginRight: -16,
+        },
       },
       android: {
         sectionHeaderContainer: {
@@ -308,6 +319,8 @@ const styles = StyleSheet.create({
         },
         segmentedControl: {
           backgroundColor: '#F9F9F9',
+          right: -32,
+          marginLeft: -16,
         },
       },
   }),
