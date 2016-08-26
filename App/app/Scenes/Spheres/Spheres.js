@@ -69,6 +69,7 @@ type Props = {
 type State = {
   sphere: Object,
   books: any,
+  descriptionExpanded: boolean,
 };
 
 export default class Spheres extends Component {
@@ -183,6 +184,7 @@ export default class Spheres extends Component {
   };
 
   _renderSphere = (sphere: Object) => {
+    const { descriptionExpanded } = this.state;
     const colors = Colors.spheres[sphere.id];
     const spherePercent = (sphere.wordCount / Bible.wordCount) * 100;
 
@@ -193,6 +195,10 @@ export default class Spheres extends Component {
     const sourceRows = sources.map(source => this._renderSourceRow(source));
 
     const header = this._renderHeader();
+
+    const descriptionNumberOfLines = descriptionExpanded ? null : 3;
+    const descriptionLabel = (descriptionExpanded ? null : Localizable.t('more').toLocaleLowerCase());
+
     return (
       <ScrollView style={styles.container}>
         {header}
@@ -222,9 +228,9 @@ export default class Spheres extends Component {
         <View style={styles.contentContainer}>
           <Text style={[styles.contentBody, {marginBottom: -25, marginTop: -10}]}>Introduction</Text>
           <Text style={styles.contentHeader}>How {sphere.name} Shows Up in Scripture</Text>
-          <TouchableOpacity>
-            <Text numberOfLines={3} style={[styles.contentBody, {marginTop: 5}]}>{sphere.description}</Text>
-            <Text style={[styles.contentBody, {color: Colors.tint}]}>more</Text>
+          <TouchableOpacity onPress={() => this.setState({descriptionExpanded: !descriptionExpanded})}>
+            <Text numberOfLines={descriptionNumberOfLines} style={[styles.contentBody, {marginTop: 5}]}>{sphere.description}</Text>
+            <Text style={[styles.contentBody, {color: Colors.tint}]}>{descriptionLabel}</Text>
           </TouchableOpacity>
         </View>
 
@@ -351,7 +357,8 @@ export default class Spheres extends Component {
     const books = this._getBooks(sphere);
     this.state = {
       sphere,
-      books
+      books,
+      descriptionExpanded: false,
     };
   }
 
