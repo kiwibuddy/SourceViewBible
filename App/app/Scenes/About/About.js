@@ -90,6 +90,17 @@ const About = (props: Props) => {
           </View>
         </TouchableOpacity>
         <View style={styles.separator} />
+        <TouchableOpacity style={styles.listItemContainer} onPress={() => openURL(Links.Help)}>
+          <Icon
+            name="about-help"
+            size={25}
+            style={[styles.listItemIcon, {color: '#59626A'}]}
+          />
+          <View style={styles.listItem}>
+            <Text style={StyleSheet.styles.cell.title}>Help Center</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={styles.separator} />
         <View style={styles.sectionHeaderContainer}>
           <Text style={StyleSheet.styles.sectionHeaderTitle}>CONNECT WITH SOURCEVIEW</Text>
         </View>
