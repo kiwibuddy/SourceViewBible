@@ -21,7 +21,7 @@
         "Note": {
           "docindexfeature" : "docindex",
           "end" : "\
-<a href=\"javascript:void(0)\" class=\"footnoteIndicator source{{ emitvar 'SourceColor' }} {{ emitvar 'sphere_classes' }}{{ emitvar 'embedded_document' }}{{ emitvar 'embedded_quotation' }}\" onclick=\"showFootnote(\\'{{BOOK_NAME}} {{ emitvar 'ChapterNumber' }}:{{ emitvar 'VerseNumber' }}\\', \\'{{ emitvar 'Note' }}\\');\">*</a>\
+<a href=\"javascript:void(0)\" class=\"footnoteIndicator source{{ emitvar 'SourceColor' }} {{ emitvar 'sphere_classes' }}\" onclick=\"showFootnote(\\'{{BOOK_NAME}} {{ emitvar 'ChapterNumber' }}:{{ emitvar 'VerseNumber' }}\\', \\'{{ emitvar 'Note' }}\\');\">*</a>\
 {{ setvar 'Footnote' }}{{ setvarend }}",
           "start" : "{{ setvar 'Footnote' }}true{{ setvarend }}{{ setvar 'Note' }}{{ setvarend }}"
         },
@@ -156,7 +156,7 @@
           "get":["surface"],
           "start":"\
 {{ setvar 'ChapterNumber' }}{{ featurenomangle 0 }}{{ setvarend }}\
-{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}{{ emitvar 'embedded_document' }}{{ emitvar 'embedded_quotation' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}\
+{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}\
 <a id=\"chapter-{{ feature 0 }}\"><span  class=\"textChapter\">{{SPHERES}}</span></a>"
         },
         "VerseNumberToken":{
@@ -168,7 +168,7 @@
           "start":"\
 {{ setvar 'VerseNumber' }}{{ featurenomangle 0 }}{{ setvarend }}\
 {{ if featureequal 0 '0' }}{{ setvar 'ParagraphType' }}textPoetry{{ setvarend }}{{ endif }}\
-{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}{{ emitvar 'embedded_document' }}{{ emitvar 'embedded_quotation' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}\
+{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}\
 {{ if featureequal 0 '0' }}<a id=\"{{ emitvar 'verse_anchor' }}\" />{{ else }}\
 <a id=\"{{ emitvar 'verse_anchor' }}\"><span class=\"textVerse\">{{SPHERES}}</span></a>{{ endif }}"
         },
@@ -179,7 +179,7 @@
             "surface",
           ],
           "start":"\
-{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}{{ emitvar 'embedded_document' }}{{ emitvar 'embedded_quotation' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}\
+{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}\
 {{SPHERES}}"
         },
         "NonWordToken":{
@@ -189,7 +189,7 @@
             "surface",
           ],
           "start":"\
-{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}{{ emitvar 'embedded_document' }}{{ emitvar 'embedded_quotation' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}\
+{{ if varequal 'StartParagraph' 'true' }}<p class=\"{{ emitvar 'ParagraphType' }}\">{{ setvar 'StartParagraph' }}{{ setvarend }}{{ if varequal 'TextKind' 'Prose' }}{{ setvar 'ParagraphType' }}{{ setvarend }}{{ endif }}{{ endif }}\
 {{SPHERES}}"
         },
         "SpaceToken" : {
