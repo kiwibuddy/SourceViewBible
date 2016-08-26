@@ -170,16 +170,23 @@ export default class App extends Component {
             onPress={() => this._goForward()}
           />
         </View>
-        <View style={{flex: 1}}>
+        <View style={{flex: 0}}>
           <ToolbarButton
             imageSource={require('../Navigation/Images/nav-discoverycenter.png')}
             onPress={() => {this._pushRoute({path: '/DiscoveryCenter', modal: true})}}
           />
         </View>
-        <ToolbarButton
-          imageSource={require('../Navigation/Images/nav-bookmarks.png')}
-          onPress={() => {this._pushRoute({path: '/Bookmarks', modal: true})}}
-        />
+        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-end'}}>
+          <ToolbarButton
+            imageSource={require('../Navigation/Images/nav-search.png')}
+            onPress={() => {this._pushRoute({path: '/Reader/Search', modal: true})}}
+          />
+          <ToolbarButton
+            imageSource={require('../Navigation/Images/nav-bookmarks.png')}
+            onPress={() => {this._pushRoute({path: '/Bookmarks', modal: true})}}
+          />
+        </View>
+
       </Toolbar>
     );
   };
