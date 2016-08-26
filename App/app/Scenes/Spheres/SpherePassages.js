@@ -74,6 +74,7 @@ export default class SpherePassages extends Component {
         renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
         renderSectionHeader={this._renderSectionHeader}
         renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={StyleSheet.styles.separator} />}
+        pageSize={10}
       />
     );
   }

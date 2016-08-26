@@ -99,6 +99,7 @@ export default class SphereBooks extends Component {
         renderRow={this._renderRow}
         renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
         renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={StyleSheet.styles.separator} />}
+        pageSize={10}
       />
     );
   }

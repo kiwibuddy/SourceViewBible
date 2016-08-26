@@ -85,6 +85,7 @@ export default class Sources extends Component {
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
           keyboardShouldPersistTaps={true}
           keyboardDismissMode="on-drag"
+          pageSize={10}
         />
       </View>
     );

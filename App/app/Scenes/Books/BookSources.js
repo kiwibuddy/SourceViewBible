@@ -78,6 +78,7 @@ export default class BookSources extends Component {
           renderRow={this._renderRow}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={[StyleSheet.styles.separator, {marginLeft: 0}]} />}
+          pageSize={10}
         />
       </View>
     );

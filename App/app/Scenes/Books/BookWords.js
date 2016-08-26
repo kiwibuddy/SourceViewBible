@@ -58,6 +58,7 @@ export default class BookWords extends Component {
           renderRow={this._renderRow}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
+          pageSize={10}
         />
       </View>
     );
@@ -104,7 +105,7 @@ export default class BookWords extends Component {
           <Text style={[styles.wc4, {top: -10, left: 130}]}>{words[13]}</Text>
           <Text style={[styles.wc4, {top: 65, right: 60}]}>{words[14]}</Text>
         </ParallaxMotionView>
-        
+
       </WordCloud>
     );
   };

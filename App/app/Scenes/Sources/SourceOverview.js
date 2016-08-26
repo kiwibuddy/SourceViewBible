@@ -127,6 +127,7 @@ export default class SourceOverview extends Component {
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSectionHeader={this._renderSectionHeader}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
+          pageSize={10}
         />
       </View>
     );

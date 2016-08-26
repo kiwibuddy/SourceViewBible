@@ -97,6 +97,7 @@ export default class FoundationalSphere extends Component {
           renderRow={this._renderRow}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
+          pageSize={10}
         />
       </View>
     );
