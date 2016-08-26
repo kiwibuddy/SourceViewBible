@@ -194,21 +194,6 @@ const styles = StyleSheet.create({
     flex: 0,
     marginBottom: 7,
   },
-  sectionHeaderContainer: {
-    paddingVertical: 4,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingRight: 15,
-    backgroundColor: '#FAFAFA',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#c8c7cc',
-  },
-  sectionHeaderTitle: {
-    color: '#59626a',
-    fontSize: 15,
-    fontWeight: 'bold',
-    marginLeft: 8,
-  },
   separator: {
     ...StyleSheet.styles.separator,
     marginLeft: 8,
@@ -229,6 +214,21 @@ const styles = StyleSheet.create({
   },
   ...Platform.select({
       ios: {
+        sectionHeaderContainer: {
+          paddingVertical: 4,
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          paddingRight: 15,
+          backgroundColor: '#FAFAFA',
+          borderBottomWidth: StyleSheet.hairlineWidth,
+          borderBottomColor: '#c8c7cc',
+        },
+        sectionHeaderTitle: {
+          color: '#59626a',
+          fontSize: 15,
+          fontWeight: 'bold',
+          marginLeft: 8,
+        },
         textInputContainer: {
           borderBottomWidth: StyleSheet.hairlineWidth,
           borderBottomColor: '#c8c7cc',
@@ -252,10 +252,23 @@ const styles = StyleSheet.create({
         },
       },
       android: {
+        sectionHeaderContainer: {
+          paddingVertical: 4,
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          paddingRight: 15,
+        },
+        sectionHeaderTitle: {
+          color: '#59626a',
+          fontSize: 15,
+          fontWeight: 'bold',
+          marginLeft: 10,
+        },
         textInputContainer: {
           borderBottomWidth: StyleSheet.hairlineWidth,
           borderBottomColor: '#c8c7cc',
           backgroundColor: '#FAFAFA',
+          elevation: 1,
         },
         textInput: {
           fontSize: 16,
@@ -263,7 +276,7 @@ const styles = StyleSheet.create({
           paddingLeft: 8,
           marginHorizontal: 8,
           marginVertical: 8,
-          height: 26,
+          height: 30,
           padding: 0, // Android workaround
         },
         segmentedControl: {
