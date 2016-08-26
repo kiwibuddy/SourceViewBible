@@ -475,7 +475,7 @@ const styles = StyleSheet.create({
     overflow:'hidden',
     alignSelf: 'center',
     marginTop: 40,
-    marginBottom: 40,
+    marginBottom: 20,
     justifyContent: 'center',
   },
   readButtonTitle: {
@@ -486,10 +486,10 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     marginHorizontal: 20,
-    marginBottom: 35,
+    marginBottom: 20,
   },
   contentHeader: {
-    fontSize: 24,
+    fontSize: 18,
     fontWeight: 'bold',
     color: '#59626a',
     marginTop: 0,

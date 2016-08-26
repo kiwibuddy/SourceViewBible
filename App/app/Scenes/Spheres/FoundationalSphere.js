@@ -115,7 +115,7 @@ export default class FoundationalSphere extends Component {
     if (sphere.overview) {
       overview = sphere.overview.map((section) => this._renderOverviewSection(section));
     }
-    
+
     return (
       <View>
         {header}
@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
     overflow:'hidden',
     alignSelf: 'center',
     marginTop: 40,
-    marginBottom: 40,
+    marginBottom: 20,
     justifyContent: 'center',
   },
   readButtonTitle: {
@@ -259,13 +259,13 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     marginHorizontal: 20,
-    marginBottom: 35,
+    marginBottom: 10,
   },
   contentHeader: {
-    fontSize: 24,
+    fontSize: 18,
     fontWeight: 'bold',
     color: '#59626a',
-    marginTop: 25,
+    marginTop: 0,
   },
   contentBody: {
     fontSize: 16,
