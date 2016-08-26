@@ -40,6 +40,10 @@ function highlightSpheres(feature: string, spheres: any, startingPosition: numbe
   }
 }
 
+function styleEmbeddedDocuments(feature: string) {
+  return `{{ if varequal 'embeddedDocument' '' }}${feature}{{ else }}<span class="embeddedDocument">${feature}</span>{{ endif }}`;
+}
+
 function openDatabase() {
   return new Promise((resolve, reject) => {
     Emdros.open({name: 'Datasets/en/NLT/SourceView.bpt'}).then((emdros) => {
@@ -72,14 +76,14 @@ function scripture(options: Object) {
     const sphereFeatures = spheres.map(sphere => SPHERE_FEATURE_MAP[sphere]);
 
     const base = stylesheet['fetchinfo']['base']['object_types'];
-    base['Token']['start'] = base['Token']['start'].replace('{{SPHERES}}', highlightSpheres('{{ feature 0 }}', spheres, 1));
+    base['Token']['start'] = base['Token']['start'].replace('{{SPHERES}}', highlightSpheres(styleEmbeddedDocuments('{{ feature 0 }}'), spheres, 1));
     base['Token']['get'] = base['Token']['get'].concat(sphereFeatures);
     base['NonWordToken'] = base['Token'];
     base['SpaceToken']['start'] = highlightSpheres(' ', options.spheres, 0);
     base['SpaceToken']['get'] = sphereFeatures;
-    base['VerseNumberToken']['start'] = base['VerseNumberToken']['start'].replace('{{SPHERES}}', highlightSpheres('{{ featurenomangle 0 }}&#160;', spheres, 1));
+    base['VerseNumberToken']['start'] = base['VerseNumberToken']['start'].replace('{{SPHERES}}', highlightSpheres(styleEmbeddedDocuments('{{ featurenomangle 0 }}&#160;'), spheres, 1));
     base['VerseNumberToken']['get'] = base['VerseNumberToken']['get'].concat(sphereFeatures);
-    base['ChapterNumberToken']['start'] = base['ChapterNumberToken']['start'].replace('{{SPHERES}}', highlightSpheres('{{ featurenomangle 0 }}', spheres, 1));
+    base['ChapterNumberToken']['start'] = base['ChapterNumberToken']['start'].replace('{{SPHERES}}', highlightSpheres(styleEmbeddedDocuments('{{ featurenomangle 0 }}'), spheres, 1));
     base['ChapterNumberToken']['get'] = base['ChapterNumberToken']['get'].concat(sphereFeatures);
   }
   const style = {stylesheet: JSON.stringify(stylesheet)};

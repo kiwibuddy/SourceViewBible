@@ -58,6 +58,11 @@ const Psalm72 = {
   last: 885806
 };
 
+const Ezra712 = {
+  first: 754920,
+  last: 755240,
+};
+
 type State = {
   scripture: any,
   monadSet: ?Object,
@@ -71,7 +76,7 @@ export default class TextLayout extends Component {
 
     this.state = {
       scripture: null,
-      monadSet: Genesis
+      monadSet: Ezra712
     };
   }
 
