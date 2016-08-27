@@ -34,3 +34,5 @@ libs
 #
 node_modules/
 npm-debug.log
+
+*.keystore
