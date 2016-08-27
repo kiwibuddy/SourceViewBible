@@ -26,6 +26,11 @@ import {
 import { BACK, bookURL, readerSearchURL, readerSettingsURL, readerURL } from '../../Navigation';
 import { NavigationHeader, NavigationBarButton, Toolbar, ToolbarButton } from '../../Components/Navigation';
 
+import {
+  MenuOptions,
+  MenuOption,
+} from 'react-native-popup-menu';
+
 const RNFS = require('react-native-fs');
 
 import Emdros from '../../API/Emdros';
@@ -138,6 +143,14 @@ export default class Reader extends Component {
         imageSource={require('../../Components/Navigation/Images/nav-filter.png')}
         onPress={() => props.navigate(readerSettingsURL({title: Localizable.t('settings'), modal: true}))}
       />
+    );
+  }
+
+  static renderMenuOptions(props: Object) {
+    return (
+      <MenuOptions key="reader-options">
+        <MenuOption text={Localizable.t('settings')} onSelect={() => props.navigate(readerSettingsURL({title: Localizable.t('settings'), modal: true}))}/>
+      </MenuOptions>
     );
   }
 
