@@ -1,34 +1,39 @@
 STDERR.puts "Seeding Actants"
 
 actants = []
-sql = '
-SELECT DISTINCT actant_objects.*
-FROM actant_objects INNER JOIN sourceactant_objects ON actant_objects.mdf_actant_id = sourceactant_objects.mdf_actant_id
-WHERE sourceactant_objects.mdf_is_source_name = ?
-UNION
-SELECT DISTINCT actant_objects.*
-FROM actant_objects INNER JOIN recipientactant_objects ON actant_objects.mdf_actant_id = recipientactant_objects.mdf_actant_id'
-EMDROS[sql, 2].each do |actant_object|
+EMDROS[:actant_objects].each do |actant_object|
 	actant = {
 		id: actant_object[:mdf_actant_id],
 		actant_number_id: actant_object[:mdf_source_number],
 		gender_id: actant_object[:mdf_gender],
 	}
 	DB[:actants].insert(actant)
-
-	name = EMDROS[:actant_mdf_real_name_set][id_d: actant_object[:mdf_real_name]][:string_value]
-	first_initial = name[0]
-
 	chronologies = actant_object[:mdf_chronology].to_s.strip.split(' ').select{|c| c.to_i > 0 && c.to_i < 19 }.map{|c| {id: c.to_i} }
 	natures = actant_object[:mdf_natures].to_s.strip.split(' ').select{|c| c.to_i > 0}.map{|c| {id: c.to_i} }
 	professions = actant_object[:mdf_professions].to_s.strip.split(' ').select{|c| c.to_i > 0}.map{|c| {id: c.to_i} }
 
 	isSource = EMDROS[:sourceactant_objects][mdf_actant_id: actant_object[:mdf_actant_id]] != nil
 	isRecipient = EMDROS[:recipientactant_objects][mdf_actant_id: actant_object[:mdf_actant_id]] != nil
+	next unless isSource || isRecipient
+
+	name = if isSource
+		EMDROS['SELECT string_value AS name FROM sourceactant_mdf_real_name_set INNER JOIN sourceactant_objects ON sourceactant_mdf_real_name_set.id_d = sourceactant_objects.mdf_real_name WHERE mdf_actant_id = ? AND sourceactant_objects.mdf_is_source_name = ? AND mdf_real_name != ? LIMIT 1', actant_object[:mdf_actant_id], 2, SOURCE_NARRATOR_ID].first[:name] rescue nil
+	else
+		EMDROS['SELECT string_value AS name FROM recipientactant_mdf_real_name_set INNER JOIN recipientactant_objects ON recipientactant_mdf_real_name_set.id_d = recipientactant_objects.mdf_real_name WHERE mdf_actant_id = ? LIMIT 1', actant_object[:mdf_actant_id]].first[:name] rescue nil
+	end
+
+	unless name
+		name = EMDROS['SELECT string_value AS name FROM actant_mdf_real_name_set INNER JOIN actant_objects ON actant_mdf_real_name_set.id_d = actant_objects.mdf_real_name WHERE mdf_actant_id = ? LIMIT 1', actant_object[:mdf_actant_id]].first[:name]
+	end
+
+	unless name
+		STDERR.puts actant_object.inspect.to_s
+		exit
+	end
 
 	actants << actant.merge({
 		name: name,
-		firstInitial: first_initial,
+		firstInitial: name[0],
 		actantNumber: actant_object[:mdf_source_number],
 		chronologies: chronologies,
 		gender: actant_object[:mdf_gender],

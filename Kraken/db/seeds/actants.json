@@ -147,6 +147,28 @@
     "isRecipient": true
   },
   {
+    "id": 7,
+    "actant_number_id": 1,
+    "gender_id": 3,
+    "name": "80 Priests",
+    "firstInitial": "8",
+    "actantNumber": 1,
+    "chronologies": [
+
+    ],
+    "gender": 3,
+    "natures": [
+      {
+        "id": 4
+      }
+    ],
+    "professions": [
+
+    ],
+    "isSource": true,
+    "isRecipient": false
+  },
+  {
     "id": 8,
     "actant_number_id": 2,
     "gender_id": 2,
@@ -3187,6 +3209,30 @@
     "isRecipient": true
   },
   {
+    "id": 125,
+    "actant_number_id": 2,
+    "gender_id": 2,
+    "name": "Abiram",
+    "firstInitial": "A",
+    "actantNumber": 2,
+    "chronologies": [
+      {
+        "id": 7
+      }
+    ],
+    "gender": 2,
+    "natures": [
+      {
+        "id": 4
+      }
+    ],
+    "professions": [
+
+    ],
+    "isSource": true,
+    "isRecipient": false
+  },
+  {
     "id": 126,
     "actant_number_id": 2,
     "gender_id": 2,
@@ -6092,8 +6138,8 @@
     "id": 236,
     "actant_number_id": 2,
     "gender_id": 2,
-    "name": "Apollos",
-    "firstInitial": "A",
+    "name": "The Preacher",
+    "firstInitial": "T",
     "actantNumber": 2,
     "chronologies": [
       {
@@ -6393,6 +6439,35 @@
     "isRecipient": false
   },
   {
+    "id": 246,
+    "actant_number_id": 2,
+    "gender_id": 2,
+    "name": "Azariah Son of Hoshaiah",
+    "firstInitial": "A",
+    "actantNumber": 2,
+    "chronologies": [
+      {
+        "id": 12
+      }
+    ],
+    "gender": 2,
+    "natures": [
+      {
+        "id": 4
+      }
+    ],
+    "professions": [
+      {
+        "id": 26
+      },
+      {
+        "id": 30
+      }
+    ],
+    "isSource": true,
+    "isRecipient": false
+  },
+  {
     "id": 247,
     "actant_number_id": 1,
     "gender_id": 3,
@@ -6658,8 +6733,8 @@
     "id": 257,
     "actant_number_id": 2,
     "gender_id": 2,
-    "name": "Barnabas",
-    "firstInitial": "B",
+    "name": "The Preacher",
+    "firstInitial": "T",
     "actantNumber": 2,
     "chronologies": [
       {
@@ -7163,6 +7238,35 @@
     ],
     "isSource": false,
     "isRecipient": true
+  },
+  {
+    "id": 276,
+    "actant_number_id": 2,
+    "gender_id": 2,
+    "name": "Bethuel",
+    "firstInitial": "B",
+    "actantNumber": 2,
+    "chronologies": [
+      {
+        "id": 10
+      }
+    ],
+    "gender": 2,
+    "natures": [
+      {
+        "id": 4
+      }
+    ],
+    "professions": [
+      {
+        "id": 1
+      },
+      {
+        "id": 44
+      }
+    ],
+    "isSource": true,
+    "isRecipient": false
   },
   {
     "id": 277,
@@ -7954,6 +8058,30 @@
     ],
     "isSource": true,
     "isRecipient": true
+  },
+  {
+    "id": 306,
+    "actant_number_id": 2,
+    "gender_id": 2,
+    "name": "Dathan",
+    "firstInitial": "D",
+    "actantNumber": 2,
+    "chronologies": [
+      {
+        "id": 7
+      }
+    ],
+    "gender": 2,
+    "natures": [
+      {
+        "id": 4
+      }
+    ],
+    "professions": [
+
+    ],
+    "isSource": true,
+    "isRecipient": false
   },
   {
     "id": 307,
@@ -9914,6 +10042,30 @@
     ],
     "isSource": true,
     "isRecipient": true
+  },
+  {
+    "id": 384,
+    "actant_number_id": 1,
+    "gender_id": 3,
+    "name": "Gadites",
+    "firstInitial": "G",
+    "actantNumber": 1,
+    "chronologies": [
+      {
+        "id": 6
+      }
+    ],
+    "gender": 3,
+    "natures": [
+      {
+        "id": 4
+      }
+    ],
+    "professions": [
+
+    ],
+    "isSource": true,
+    "isRecipient": false
   },
   {
     "id": 385,
@@ -15879,6 +16031,32 @@
     "isRecipient": true
   },
   {
+    "id": 612,
+    "actant_number_id": 2,
+    "gender_id": 1,
+    "name": "Laban’s Mother",
+    "firstInitial": "L",
+    "actantNumber": 2,
+    "chronologies": [
+      {
+        "id": 10
+      }
+    ],
+    "gender": 1,
+    "natures": [
+      {
+        "id": 4
+      }
+    ],
+    "professions": [
+      {
+        "id": 15
+      }
+    ],
+    "isSource": true,
+    "isRecipient": false
+  },
+  {
     "id": 613,
     "actant_number_id": 1,
     "gender_id": 3,
@@ -16328,6 +16506,30 @@
       {
         "id": 23
       }
+    ],
+    "isSource": true,
+    "isRecipient": false
+  },
+  {
+    "id": 631,
+    "actant_number_id": 2,
+    "gender_id": 2,
+    "name": "Makir",
+    "firstInitial": "M",
+    "actantNumber": 2,
+    "chronologies": [
+      {
+        "id": 16
+      }
+    ],
+    "gender": 2,
+    "natures": [
+      {
+        "id": 4
+      }
+    ],
+    "professions": [
+
     ],
     "isSource": true,
     "isRecipient": false
@@ -18012,10 +18214,69 @@
     "isRecipient": false
   },
   {
+    "id": 695,
+    "actant_number_id": 2,
+    "gender_id": 2,
+    "name": "Nineveh’s King",
+    "firstInitial": "N",
+    "actantNumber": 2,
+    "chronologies": [
+      {
+        "id": 14
+      }
+    ],
+    "gender": 2,
+    "natures": [
+      {
+        "id": 4
+      }
+    ],
+    "professions": [
+      {
+        "id": 7
+      },
+      {
+        "id": 40
+      },
+      {
+        "id": 18
+      },
+      {
+        "id": 28
+      }
+    ],
+    "isSource": true,
+    "isRecipient": false
+  },
+  {
     "id": 696,
     "actant_number_id": 1,
     "gender_id": 3,
     "name": "Nineveh’s King & Nineveh’s Nobles",
+    "firstInitial": "N",
+    "actantNumber": 1,
+    "chronologies": [
+      {
+        "id": 14
+      }
+    ],
+    "gender": 3,
+    "natures": [
+      {
+        "id": 4
+      }
+    ],
+    "professions": [
+
+    ],
+    "isSource": true,
+    "isRecipient": false
+  },
+  {
+    "id": 697,
+    "actant_number_id": 1,
+    "gender_id": 3,
+    "name": "Nineveh’s Nobles",
     "firstInitial": "N",
     "actantNumber": 1,
     "chronologies": [
@@ -19778,8 +20039,8 @@
     "id": 766,
     "actant_number_id": 2,
     "gender_id": 1,
-    "name": "Priscilla",
-    "firstInitial": "P",
+    "name": "The Preacher",
+    "firstInitial": "T",
     "actantNumber": 2,
     "chronologies": [
       {
@@ -19989,6 +20250,30 @@
     "isRecipient": true
   },
   {
+    "id": 774,
+    "actant_number_id": 2,
+    "gender_id": 2,
+    "name": "Regemmelech",
+    "firstInitial": "R",
+    "actantNumber": 2,
+    "chronologies": [
+      {
+        "id": 12
+      }
+    ],
+    "gender": 2,
+    "natures": [
+      {
+        "id": 4
+      }
+    ],
+    "professions": [
+
+    ],
+    "isSource": true,
+    "isRecipient": false
+  },
+  {
     "id": 775,
     "actant_number_id": 2,
     "gender_id": 2,
@@ -20120,6 +20405,30 @@
     "isRecipient": true
   },
   {
+    "id": 780,
+    "actant_number_id": 1,
+    "gender_id": 3,
+    "name": "Returning Exiles",
+    "firstInitial": "R",
+    "actantNumber": 1,
+    "chronologies": [
+      {
+        "id": 11
+      }
+    ],
+    "gender": 3,
+    "natures": [
+      {
+        "id": 4
+      }
+    ],
+    "professions": [
+
+    ],
+    "isSource": true,
+    "isRecipient": false
+  },
+  {
     "id": 781,
     "actant_number_id": 2,
     "gender_id": 2,
@@ -20147,6 +20456,30 @@
     ],
     "isSource": true,
     "isRecipient": true
+  },
+  {
+    "id": 782,
+    "actant_number_id": 1,
+    "gender_id": 3,
+    "name": "Reubenites",
+    "firstInitial": "R",
+    "actantNumber": 1,
+    "chronologies": [
+      {
+        "id": 6
+      }
+    ],
+    "gender": 3,
+    "natures": [
+      {
+        "id": 4
+      }
+    ],
+    "professions": [
+
+    ],
+    "isSource": true,
+    "isRecipient": false
   },
   {
     "id": 783,
@@ -21339,6 +21672,30 @@
     "isRecipient": true
   },
   {
+    "id": 833,
+    "actant_number_id": 2,
+    "gender_id": 2,
+    "name": "Sharezer",
+    "firstInitial": "S",
+    "actantNumber": 2,
+    "chronologies": [
+      {
+        "id": 12
+      }
+    ],
+    "gender": 2,
+    "natures": [
+      {
+        "id": 4
+      }
+    ],
+    "professions": [
+
+    ],
+    "isSource": true,
+    "isRecipient": false
+  },
+  {
     "id": 834,
     "actant_number_id": 1,
     "gender_id": 3,
@@ -21649,6 +22006,30 @@
     ],
     "isSource": true,
     "isRecipient": true
+  },
+  {
+    "id": 846,
+    "actant_number_id": 2,
+    "gender_id": 2,
+    "name": "Shobi",
+    "firstInitial": "S",
+    "actantNumber": 2,
+    "chronologies": [
+      {
+        "id": 16
+      }
+    ],
+    "gender": 2,
+    "natures": [
+      {
+        "id": 4
+      }
+    ],
+    "professions": [
+
+    ],
+    "isSource": true,
+    "isRecipient": false
   },
   {
     "id": 847,
@@ -24277,6 +24658,30 @@
     "isRecipient": true
   },
   {
+    "id": 956,
+    "actant_number_id": 1,
+    "gender_id": 3,
+    "name": "The Elders of the Church",
+    "firstInitial": "T",
+    "actantNumber": 1,
+    "chronologies": [
+      {
+        "id": 1
+      }
+    ],
+    "gender": 3,
+    "natures": [
+      {
+        "id": 4
+      }
+    ],
+    "professions": [
+
+    ],
+    "isSource": true,
+    "isRecipient": false
+  },
+  {
     "id": 957,
     "actant_number_id": 1,
     "gender_id": 3,
@@ -24673,6 +25078,33 @@
     ],
     "isSource": false,
     "isRecipient": true
+  },
+  {
+    "id": 973,
+    "actant_number_id": 3,
+    "gender_id": 3,
+    "name": "The Holy Spirit",
+    "firstInitial": "T",
+    "actantNumber": 3,
+    "chronologies": [
+      {
+        "id": 1
+      },
+      {
+        "id": 17
+      }
+    ],
+    "gender": 3,
+    "natures": [
+      {
+        "id": 3
+      }
+    ],
+    "professions": [
+
+    ],
+    "isSource": true,
+    "isRecipient": false
   },
   {
     "id": 974,
@@ -28293,6 +28725,30 @@
     "isRecipient": true
   },
   {
+    "id": 1123,
+    "actant_number_id": 1,
+    "gender_id": 3,
+    "name": "The People of Sidon",
+    "firstInitial": "T",
+    "actantNumber": 1,
+    "chronologies": [
+      {
+        "id": 1
+      }
+    ],
+    "gender": 3,
+    "natures": [
+      {
+        "id": 4
+      }
+    ],
+    "professions": [
+
+    ],
+    "isSource": true,
+    "isRecipient": false
+  },
+  {
     "id": 1124,
     "actant_number_id": 1,
     "gender_id": 3,
@@ -28411,6 +28867,30 @@
     ],
     "isSource": false,
     "isRecipient": true
+  },
+  {
+    "id": 1129,
+    "actant_number_id": 1,
+    "gender_id": 3,
+    "name": "The People of Tyre",
+    "firstInitial": "T",
+    "actantNumber": 1,
+    "chronologies": [
+      {
+        "id": 1
+      }
+    ],
+    "gender": 3,
+    "natures": [
+      {
+        "id": 4
+      }
+    ],
+    "professions": [
+
+    ],
+    "isSource": true,
+    "isRecipient": false
   },
   {
     "id": 1130,
@@ -31293,8 +31773,8 @@
     "id": 1249,
     "actant_number_id": 3,
     "gender_id": 3,
-    "name": "Unknown",
-    "firstInitial": "U",
+    "name": "The Compiler",
+    "firstInitial": "T",
     "actantNumber": 3,
     "chronologies": [
 
@@ -31317,8 +31797,8 @@
     "id": 1250,
     "actant_number_id": 2,
     "gender_id": 3,
-    "name": "Unknown",
-    "firstInitial": "U",
+    "name": "The Choir",
+    "firstInitial": "T",
     "actantNumber": 2,
     "chronologies": [
       {
@@ -31343,8 +31823,8 @@
     "id": 1251,
     "actant_number_id": 2,
     "gender_id": 3,
-    "name": "Unknown",
-    "firstInitial": "U",
+    "name": "The Preacher",
+    "firstInitial": "T",
     "actantNumber": 2,
     "chronologies": [
       {
