@@ -116,6 +116,7 @@
     "done": "Done",
     "cancel": "Cancel",
     "back": "Back",
+    "forward": "Forward",
     "close": "Close",
     "passages": "Passages",
     "bcv-reference": "{{book}} {{reference}}",

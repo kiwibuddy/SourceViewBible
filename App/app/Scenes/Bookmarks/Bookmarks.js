@@ -240,7 +240,6 @@ export default class Bookmarks extends Component {
 
   _iconForRoute = (route: Object) => {
     const icons = {
-      '/Reader/Search': require('../../Images/tabs/search.png'),
       '/Discover': require('../../Images/tabs/discover.png'),
       '/Books': require('../../Images/tabs/chapters.png'),
       '/Sources': require('../../Images/tabs/sources.png'),

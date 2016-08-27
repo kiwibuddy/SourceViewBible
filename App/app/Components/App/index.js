@@ -4,6 +4,7 @@
 import React, { Component } from 'react';
 import {
   BackAndroid,
+  Image,
   Platform,
   Text,
   TouchableOpacity,
@@ -19,7 +20,7 @@ import Menu, {
   MenuTrigger,
 } from 'react-native-popup-menu';
 
-import router, { BACK, discoverURL, onboardingURL, sphereHelpURL, sphereInAppPurchaseURL } from '../../Navigation';
+import router, { BACK, aboutURL, booksURL, discoverURL, onboardingURL, spheresURL, sphereHelpURL, sphereInAppPurchaseURL, sourcesURL } from '../../Navigation';
 
 import {
   Analytics,
@@ -208,16 +209,26 @@ export default class App extends Component {
   };
 
   _renderMenu = (options: Function, props: any) => {
-    const menuOptions = (options ? options(props) : null);
+    const { navigationState, navigate } = props;
+    const canGoForward = navigationState.index < navigationState.routes.length - 1;
+
+    const menuOptions = [];
+    menuOptions.push(<MenuOption key="forward" disabled={!canGoForward} text={Localizable.t('forward')} onSelect={() => this._goForward()} />);
+    menuOptions.push(<MenuOption key="discover" text={Localizable.t('discover')} onSelect={() => navigate(discoverURL({title: Localizable.t('discover')})) } />);
+    menuOptions.push(<MenuOption key="books" text={Localizable.t('books')} onSelect={() => navigate(booksURL({title: Localizable.t('books')})) } />);
+    menuOptions.push(<MenuOption key="sources" text={Localizable.t('sources.text')} onSelect={() => navigate(sourcesURL({title: Localizable.t('sources.text')})) } />);
+    menuOptions.push(<MenuOption key="spheres" text={Localizable.t('spheres.text')} onSelect={() => navigate(spheresURL({title: Localizable.t('spheres.text')})) } />);
+
+    if (options) {
+      menuOptions.push(options(props));
+    }
+
+    menuOptions.push(<MenuOption key="about" text={Localizable.t('about-sourceview')} onSelect={() => navigate(aboutURL({title: Localizable.t('about-sourceview'), modal: true})) } />);
+
     return (
       <Menu name="menu">
         <MenuTrigger />
         <MenuOptions>
-          {/* <MenuOption value={1} text='One'/>
-          <MenuOption value={2}>
-            <Text style={{color: 'red'}}>Two</Text>
-          </MenuOption>
-          <MenuOption value={3} disabled={true} text='Three' /> */}
           {menuOptions}
         </MenuOptions>
       </Menu>
