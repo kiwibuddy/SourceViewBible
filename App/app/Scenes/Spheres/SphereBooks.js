@@ -146,7 +146,7 @@ export default class SphereBooks extends Component {
           </View>
           <View style={StyleSheet.styles.statisticKeyline} />
         </View>
-        <ScrollView style={styles.sphereBooksGraph}>
+        <View style={styles.sphereBooksGraph}>
           {this._renderPie({book: books[0], size: 130, subtitleStyle: {fontSize: 17}, titleStyle: {fontSize: 24}, style: {top: 50, alignSelf: 'center'}})}
           {this._renderPie({book: books[1], size: 80, subtitleStyle: {fontSize: 15}, titleStyle: {fontSize: 20}, style: [styles.pie, {top: 95, left: 40}]})}
           {this._renderPie({book: books[2], size: 80, subtitleStyle: {fontSize: 15}, titleStyle: {fontSize: 20}, style: [styles.pie, {top: 20, left: -5}]})}
@@ -157,7 +157,7 @@ export default class SphereBooks extends Component {
           {this._renderPie({book: books[7], size: 50, subtitleStyle: {fontSize: 10}, titleStyle: {fontSize: 13}, style: [styles.pie, {top: 5, left: 210}]})}
           {this._renderPie({book: books[8], size: 50, subtitleStyle: {fontSize: 10}, titleStyle: {fontSize: 13}, style: [styles.pie, {top: 15, right: -10}]})}
           {this._renderPie({book: books[9], size: 50, subtitleStyle: {fontSize: 10}, titleStyle: {fontSize: 13}, style: [styles.pie, {top: 145, left: -5}]})}
-        </ScrollView>
+        </View>
         <SegmentedControl
           style={styles.segmentedControl}
           tintColor={'#59626A'}

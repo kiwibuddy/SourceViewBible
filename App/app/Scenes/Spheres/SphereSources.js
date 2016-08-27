@@ -99,7 +99,7 @@ export default class SphereSources extends Component {
 
     return (
       <View>
-        <ScrollView style={styles.sphereSourcesGraph}>
+        <View style={styles.sphereSourcesGraph}>
           {this._renderPie({source: sources[0], size: 130, subtitleStyle: {fontSize: 15, textAlign: 'center'}, titleStyle: {fontSize: 24}, style: {top: 50, alignSelf: 'center'}})}
           {this._renderPie({source: sources[1], size: 80, subtitleStyle: {fontSize: 13, textAlign: 'center'}, titleStyle: {fontSize: 20}, style: [styles.pie, {top: 95, left: 40}]})}
           {this._renderPie({source: sources[2], size: 80, subtitleStyle: {fontSize: 13, textAlign: 'center'}, titleStyle: {fontSize: 20}, style: [styles.pie, {top: 20, left: -5}]})}
@@ -110,7 +110,7 @@ export default class SphereSources extends Component {
           {this._renderPie({source: sources[7], size: 50, subtitleStyle: {fontSize: 8, textAlign: 'center'}, titleStyle: {fontSize: 13}, style: [styles.pie, {top: 5, left: 210}]})}
           {this._renderPie({source: sources[8], size: 50, subtitleStyle: {fontSize: 8, textAlign: 'center'}, titleStyle: {fontSize: 13}, style: [styles.pie, {top: 15, right: -10}]})}
           {this._renderPie({source: sources[9], size: 50, subtitleStyle: {fontSize: 8, textAlign: 'center'}, titleStyle: {fontSize: 13}, style: [styles.pie, {top: 145, left: -5}]})}
-        </ScrollView>
+        </View>
         <View style={styles.textInputContainer}>
           <TextInput
             autoCapitalize="words"
@@ -232,6 +232,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
   },
   sphereSourcesGraph: {
+    flex: 0,
     height: 200,
     borderBottomColor: Colors.separator,
     borderBottomWidth: StyleSheet.hairlineWidth,
@@ -243,7 +244,6 @@ const styles = StyleSheet.create({
       width: 0
     },
     elevation: 1,
-    backgroundColor: '#FFF',
   },
   sectionHeaderContainer: {
     ...StyleSheet.styles.sectionHeaderContainer,
