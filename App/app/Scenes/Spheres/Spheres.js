@@ -37,6 +37,11 @@ import { Preference } from '../../Preferences';
 
 import { NavigationBarButton } from '../../Components/Navigation';
 
+import {
+  MenuOptions,
+  MenuOption,
+} from 'react-native-popup-menu';
+
 import FoundationalSphere from './FoundationalSphere';
 
 const SphereIcons = {
@@ -68,6 +73,14 @@ export default class Spheres extends Component {
         imageSource={require('../../Components/Navigation/Images/nav-help.png')}
         onPress={() => props.navigate(sphereHelpURL({title: Localizable.t('help'), modal: true}))}
       />
+    );
+  }
+
+  static renderMenuOptions(props: Object) {
+    return (
+      <MenuOptions key="book-options">
+        <MenuOption text={Localizable.t('help')} onSelect={() => props.navigate(sphereHelpURL({title: Localizable.t('help'), modal: true}))}/>
+      </MenuOptions>
     );
   }
 

@@ -33,6 +33,11 @@ import { ReadingTime } from '../../Common/NumberHelper';
 
 import { NavigationBarButton } from '../../Components/Navigation';
 
+import {
+  MenuOptions,
+  MenuOption,
+} from 'react-native-popup-menu';
+
 const MAX_NUMBER_OF_SOURCES = 4;
 
 import { Book } from '../../Database';
@@ -53,6 +58,14 @@ export default class BookOverview extends Component {
         imageSource={require('../../Components/Navigation/Images/nav-help.png')}
         onPress={() => props.navigate(bookHelpURL({title: Localizable.t('help'), modal: true}))}
       />
+    );
+  }
+
+  static renderMenuOptions(props: Object) {
+    return (
+      <MenuOptions key="book-options">
+        <MenuOption text={Localizable.t('help')} onSelect={() => props.navigate(bookHelpURL({title: Localizable.t('help'), modal: true}))}/>
+      </MenuOptions>
     );
   }
 

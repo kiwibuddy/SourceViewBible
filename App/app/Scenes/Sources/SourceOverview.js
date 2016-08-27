@@ -38,6 +38,11 @@ import { BACK, bookURL, sourceHelpURL, occurrencesURL, readerURL, sourceURL, sou
 
 import { NavigationBarButton } from '../../Components/Navigation';
 
+import {
+  MenuOptions,
+  MenuOption,
+} from 'react-native-popup-menu';
+
 import { Actant, Book } from '../../Database';
 import Query from './Query';
 
@@ -73,6 +78,14 @@ export default class SourceOverview extends Component {
         imageSource={require('../../Components/Navigation/Images/nav-help.png')}
         onPress={() => props.navigate(sourceHelpURL({title: Localizable.t('help'), modal: true}))}
       />
+    );
+  }
+
+  static renderMenuOptions(props: Object) {
+    return (
+      <MenuOptions key="book-options">
+        <MenuOption text={Localizable.t('help')} onSelect={() => props.navigate(sourceHelpURL({title: Localizable.t('help'), modal: true}))}/>
+      </MenuOptions>
     );
   }
 
