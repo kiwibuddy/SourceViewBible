@@ -18,7 +18,10 @@ import Menu, {
   MenuOptions,
   MenuOption,
   MenuTrigger,
+  NotAnimatedContextMenu,
+  renderers
 } from 'react-native-popup-menu';
+Menu.setDefaultRenderer(renderers.NotAnimatedContextMenu);
 
 import router, { BACK, aboutURL, booksURL, discoverURL, onboardingURL, spheresURL, sphereHelpURL, sphereInAppPurchaseURL, sourcesURL } from '../../Navigation';
 
