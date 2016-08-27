@@ -118,18 +118,22 @@ async function seedSources(emdros, realm) {
               Object.keys(sourceData).forEach((actantID) => {
                 const actant = realm.objectForPrimaryKey('Actant', parseInt(actantID));
                 if (actant != null) {
-                  const wordCount = sourceData[actantID]["Token"] || 0;
-                  if (wordCount > 0) {
-                    sourceRelations.push({
-                      id: UUID.v4(),
-                      book,
-                      source: actant,
-                      wordCount
-                    });
-                  }
+                  // Work around Hebrews having multiple actants assigned when there should just be one.
+                  const shouldAddActant = (book.id !== 'hebrews' || (book.id === 'hebrews' && actant.gender == 3));
+                  if (shouldAddActant) {
+                    const wordCount = sourceData[actantID]["Token"] || 0;
+                    if (wordCount > 0) {
+                      sourceRelations.push({
+                        id: UUID.v4(),
+                        book,
+                        source: actant,
+                        wordCount
+                      });
+                    }
 
-                  if (wordCount > maxSourceWordCount) {
-                    maxSourceWordCount = wordCount;
+                    if (wordCount > maxSourceWordCount) {
+                      maxSourceWordCount = wordCount;
+                    }
                   }
                 }
               });
@@ -245,8 +249,10 @@ async function seedSourceWordCloud(emdros, realm) {
                 const actant = realm.objectForPrimaryKey('Actant', parseInt(actantID));
                 if (actant != null) {
                   const sourceRelation = book.sourceRelations.find(sourceRelation => sourceRelation.source.id === actant.id);
-                  const wordData = sourceData[actantID]["Token"]["surface_fts"];
-                  seedObjectWordCloud(realm, 'SourceRelation', sourceRelation.id, wordData);
+                  if (sourceRelation) {
+                    const wordData = sourceData[actantID]["Token"]["surface_fts"];
+                    seedObjectWordCloud(realm, 'SourceRelation', sourceRelation.id, wordData);
+                  }
                 }
               });
             }
@@ -362,9 +368,11 @@ async function seedSourceRelationSphereWordCount(emdros, realm) {
                 const actant = realm.objectForPrimaryKey('Actant', parseInt(actantID));
                 if (actant != null) {
                   const sourceRelation = book.sourceRelations.find(sourceRelation => sourceRelation.source.id === actant.id);
-                  const wordCount = sourceData[actantID]["Token"];
-                  if (wordCount && wordCount > 0) {
-                    sourceRelation.sphereWordCount = wordCount;
+                  if (sourceRelation) {
+                    const wordCount = sourceData[actantID]["Token"];
+                    if (wordCount && wordCount > 0) {
+                      sourceRelation.sphereWordCount = wordCount;
+                    }
                   }
                 }
               });
@@ -411,8 +419,10 @@ async function seedSourceRelationSphereCounts(emdros, realm) {
                 const actant = realm.objectForPrimaryKey('Actant', parseInt(actantID));
                 if (actant != null) {
                   const sourceRelation = book.sourceRelations.find(sourceRelation => sourceRelation.source.id === actant.id);
-                  const spheresData = sourceData[actantID]["Token"];
-                  seedObjectSphereWordCounts(realm, 'SourceRelation', sourceRelation.id, spheresData);
+                  if (sourceRelation) {
+                    const spheresData = sourceData[actantID]["Token"];
+                    seedObjectSphereWordCounts(realm, 'SourceRelation', sourceRelation.id, spheresData);
+                  }
                 }
               });
             }
