@@ -56,6 +56,12 @@ const styles = StyleSheet.create({
   },
   image: {
     tintColor: Colors.tint,
+    ...Platform.select({
+      android: {
+        width: 24,
+        height: 24,
+      },
+    }),
   },
   textContainer: {
     flex: 1,
@@ -65,7 +71,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     color: Colors.tint,
-  },
+  }
 });
 
 export default NavigationBarButton;
