@@ -176,7 +176,21 @@ const styles = {
       paddingHorizontal: 10,
       height: 44,
     },
-  }
+  },
+  menu: {
+    optionsStyles : {
+      optionsContainer: {
+        padding: 5,
+      },
+      optionWrapper: {
+        margin: 5,
+      },
+      optionText: {
+        fontSize: 17,
+        color: 'black',
+      },
+    },
+  },
 };
 
 module.exports = {

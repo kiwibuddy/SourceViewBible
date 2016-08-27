@@ -126,7 +126,7 @@ export default class DiscoveryCenter extends Component {
     return (
       <Menu name="menu">
         <MenuTrigger />
-        <MenuOptions>
+        <MenuOptions customStyles={StyleSheet.styles.menu.optionsStyles}>
           <MenuOption text={Localizable.t('help')} onSelect={() => this.props.navigate(discoveryCenterHelpURL({title: Localizable.t('help'), modal: true}))} />
         </MenuOptions>
       </Menu>

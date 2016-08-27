@@ -228,7 +228,7 @@ export default class App extends Component {
     return (
       <Menu name="menu">
         <MenuTrigger />
-        <MenuOptions>
+        <MenuOptions customStyles={StyleSheet.styles.menu.optionsStyles}>
           {menuOptions}
         </MenuOptions>
       </Menu>
