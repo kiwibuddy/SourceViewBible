@@ -351,8 +351,9 @@ const styles = StyleSheet.create({
       },
       android: {
         segmentedControl: {
-          shadowColor: 'red',
-          elevation: 2,
+          backgroundColor: '#F9F9F9',
+          borderBottomColor: '#E8E8E8',
+          borderBottomWidth: 1,
         },
       },
   })
