@@ -277,5 +277,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.tint,
     alignItems: 'center',
     justifyContent: 'center',
+    elevation: 4,
   }
 });
