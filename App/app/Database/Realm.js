@@ -258,6 +258,10 @@ export class Actant extends Realm.Object {
     return this.actantNumber == 2;
   }
 
+  get hasGender(): boolean {
+    return this.gender == 1 || this.gender == 2;
+  }
+
   get isFemale(): boolean {
     return this.gender == 1;
   }
@@ -275,7 +279,7 @@ export class Actant extends Realm.Object {
     if (this.isDivine) {
       iconName = 'avatar-divine';
     } else if (this.isHuman) {
-      if (this.isIndividual) {
+      if (this.isIndividual && this.hasGender) {
         iconName = this.isFemale ? 'avatar-human-female' : 'avatar-human-male';
       } else {
         iconName = 'avatar-human-group';
