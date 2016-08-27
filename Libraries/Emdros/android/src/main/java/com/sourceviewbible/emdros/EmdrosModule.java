@@ -24,7 +24,7 @@ public class EmdrosModule extends ReactContextBaseJavaModule {
   private static final byte[] RCTKeyCString = new byte[] {51, 102, 97, 98, 50, 101, 100, 99, 100, 56, 54, 54, 51, 99, 54, 98, 97, 97, 57, 49, 102, 102, 101, 98, 57, 50, 56, 101, 99, 54, 49, 101, 48, 49, 49, 98, 49, 57, 101, 100, 56, 54, 54, 100, 55, 51, 54, 53, 101, 55, 100, 49, 57, 52, 101, 52, 51, 100, 99, 52, 55, 50, 54, 52};
   private static final String RCTKey = "Key";
 
-  private static final byte[] RCTPreferencesKeyCString = new byte[] {98, 53, 50, 101, 55, 51, 49, 50, 53, 48, 99, 101, 56, 49, 101, 56, 52, 51, 50, 50, 57, 102, 52, 48, 102, 102, 100, 55, 50, 101, 49, 101, 49, 57, 54, 48, 52, 48, 52, 51, 54, 50, 50, 101, 49, 56, 97, 52, 53, 50, 57, 49, 53, 53, 52, 52, 100, 99, 97, 98, 97, 102, 98, 57, 0};
+  private static final byte[] RCTPreferencesKeyCString = new byte[] {98, 53, 50, 101, 55, 51, 49, 50, 53, 48, 99, 101, 56, 49, 101, 56, 52, 51, 50, 50, 57, 102, 52, 48, 102, 102, 100, 55, 50, 101, 49, 101, 49, 57, 54, 48, 52, 48, 52, 51, 54, 50, 50, 101, 49, 56, 97, 52, 53, 50, 57, 49, 53, 53, 52, 52, 100, 99, 97, 98, 97, 102, 98, 57};
   private static final String RCTPreferencesKey = "PreferencesKey";
 
   private ReactApplicationContext context;
