@@ -66,7 +66,7 @@ export default class Bookmarks extends Component {
 
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
     let selectedSegmentIndex = Preference.numberForKey(SEGMENT_PREFERENCE);
-    if (selectedSegmentIndex == null) selectedSegmentIndex = SEGMENT_INDEXES.BOOKMARKS;
+    if (selectedSegmentIndex == null) selectedSegmentIndex = Platform.OS === 'android' ? SEGMENT_INDEXES.HISTORY : SEGMENT_INDEXES.BOOKMARKS;
 
     this.state = {
       dataSource: dataSource,
@@ -85,16 +85,7 @@ export default class Bookmarks extends Component {
       <View style={styles.container}>
         <NavigationHeader
           navigate={this.props.navigate}
-          title={Localizable.t('bookmarks')}
-          renderTitleComponent={(props: Object) => (
-            <SegmentedControl
-              style={[styles.segmentedControl, {marginTop: 8}]}
-              tintColor={Colors.tint}
-              values={SEGMENTS}
-              selectedIndex={this.state.selectedSegmentIndex}
-              onValueChange={(value) => this._onSegmentedControlValueChanged(SEGMENTS.indexOf(value))}
-            />
-          )}
+          renderTitleComponent={this._renderTitleComponent.bind(this)}
           renderLeftComponent={Platform.OS === 'android' ? renderBackButton : null}
           renderRightComponent={Platform.OS === 'ios' ? renderBackButton : null}
         />
@@ -109,6 +100,22 @@ export default class Bookmarks extends Component {
       </View>
     );
   }
+
+  _renderTitleComponent(props: Object) {
+    if (Platform.OS === 'android') {
+      return <NavigationHeader.Title>{Localizable.t('history')}</NavigationHeader.Title>;
+    }
+
+    return (
+      <SegmentedControl
+        style={[styles.segmentedControl, {marginTop: 8}]}
+        tintColor={Colors.tint}
+        values={SEGMENTS}
+        selectedIndex={this.state.selectedSegmentIndex}
+        onValueChange={(value) => this._onSegmentedControlValueChanged(SEGMENTS.indexOf(value))}
+      />
+    );
+  };
 
   _renderSectionHeader = (sectionData: Object, sectionID: any) => {
     if (this.state.selectedSegmentIndex != SEGMENT_INDEXES.HISTORY) return null;
