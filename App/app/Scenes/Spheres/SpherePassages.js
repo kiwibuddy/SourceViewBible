@@ -174,6 +174,7 @@ export default class SpherePassages extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFF',
   },
   sectionHeaderContainer: {
     paddingVertical: 4,

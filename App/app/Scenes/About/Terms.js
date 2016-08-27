@@ -46,7 +46,7 @@ const Terms = (props: Props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#EFEFF4',
+    backgroundColor: '#FFF',
   },
   scrollView: {
     flex: 1,

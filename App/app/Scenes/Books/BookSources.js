@@ -172,6 +172,7 @@ export default class BookSources extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFF',
   },
   stackedBarChartHeader: {
     height: 2,

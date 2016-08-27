@@ -346,6 +346,7 @@ export default class Reader extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFF',
   },
   webview: {
     flex: 1,

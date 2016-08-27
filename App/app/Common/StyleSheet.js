@@ -1,7 +1,10 @@
 /* @flow */
 'use strict';
 
-import { StyleSheet } from 'react-native';
+import {
+  StyleSheet,
+  Platform,
+ } from 'react-native';
 import Colors from './Colors';
 
 function create(styles: Object) {

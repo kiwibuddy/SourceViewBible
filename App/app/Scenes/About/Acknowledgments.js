@@ -80,6 +80,7 @@ const Acknowledgments = (props: Props) => {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#FFF',
     flex: 1,
   },
   scrollView: {

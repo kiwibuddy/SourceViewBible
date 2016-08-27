@@ -113,6 +113,7 @@ export default class SphereWords extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFF',
   },
   separator: {
     ...StyleSheet.styles.separator,

@@ -172,6 +172,7 @@ export default class SourceSpheres extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFF',
   },
   listItemContainer: {
     paddingLeft: 8,

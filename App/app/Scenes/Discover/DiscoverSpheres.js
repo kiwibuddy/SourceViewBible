@@ -183,6 +183,7 @@ export default class DiscoverSpheres extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFF',
   },
   sectionHeaderContainer: {
     ...StyleSheet.styles.sectionHeaderContainer,

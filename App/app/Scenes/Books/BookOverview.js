@@ -245,6 +245,7 @@ export default class BookOverview extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFF',
   },
   parallax: {
     position: 'absolute',
