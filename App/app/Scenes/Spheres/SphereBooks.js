@@ -100,6 +100,7 @@ export default class SphereBooks extends Component {
         renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
         renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={StyleSheet.styles.separator} />}
         pageSize={10}
+        style={styles.listView}
       />
     );
   }
@@ -295,6 +296,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     elevation: 1,
   },
+  listView: {
+    backgroundColor: '#FFF',
+  }
   sectionHeaderContainer: {
     ...StyleSheet.styles.sectionHeaderContainer,
     marginLeft: 8,

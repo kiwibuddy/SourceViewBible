@@ -29,6 +29,7 @@ const styles = {
   },
   statisticsContainer: {
     flex: 0,
+    backgroundColor: '#FFF',
     flexDirection: 'row',
     marginTop: 5,
     borderBottomColor: Colors.separator,
