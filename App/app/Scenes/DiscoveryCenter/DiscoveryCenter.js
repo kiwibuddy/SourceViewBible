@@ -32,6 +32,13 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import { NavigationHeader, NavigationBarButton, Toolbar, ToolbarButton } from '../../Components/Navigation';
 
+import Menu, {
+  MenuContext,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger,
+} from 'react-native-popup-menu';
+
 import { BACK, discoveryCenterURL, discoveryCenterHelpURL, occurrencesURL } from '../../Navigation';
 
 import { Discovery } from '../../Preferences';
@@ -51,6 +58,7 @@ type State = {
 export default class DiscoveryCenter extends Component {
   props: Props;
   state: State;
+  _menu: any;
 
   contentHeight: number;
 
@@ -72,7 +80,7 @@ export default class DiscoveryCenter extends Component {
     const cards = this.state.cards.map(card => this._renderCard(card));
     const popover = this._renderPopover();
     return (
-      <View style={styles.container}>
+      <MenuContext ref={component => this._menu = component} style={styles.container}>
         <NavigationHeader
           title={Localizable.t('discovery-center')}
           renderLeftComponent={(props: Object) => <NavigationBarButton
@@ -80,10 +88,7 @@ export default class DiscoveryCenter extends Component {
             titleStyle={StyleSheet.styles.navigationBar.doneButtonTitle}
             onPress={() => this.props.navigate(BACK)}
           />}
-          renderRightComponent={(props: Object) => <NavigationBarButton
-            imageSource={require('../../Components/Navigation/Images/nav-help.png')}
-            onPress={() => this.props.navigate(discoveryCenterHelpURL({title: Localizable.t('help'), modal: true}))}
-          />}
+          renderRightComponent={this._renderRightComponent.bind(this)}
         />
         <ScrollView ref={SCROLLVIEW_REF}
           style={styles.content}
@@ -91,7 +96,40 @@ export default class DiscoveryCenter extends Component {
         >{cards}</ScrollView>
         {toolbar}
         {popover}
-      </View>
+      </MenuContext>
+    );
+  }
+
+  _renderRightComponent(props: Object) {
+    if (Platform.OS === 'android') {
+      const menu = this._renderMenu(props);
+      return (
+        <View>
+          {menu}
+          <NavigationBarButton
+            imageSource={require('../../Components/Navigation/Images/nav-more.png')}
+            onPress={() => this._menu.openMenu('menu')}
+          />
+        </View>
+      );
+    }
+
+    return (
+      <NavigationBarButton
+       imageSource={require('../../Components/Navigation/Images/nav-help.png')}
+       onPress={() => this.props.navigate(discoveryCenterHelpURL({title: Localizable.t('help'), modal: true}))}
+     />
+   );
+  }
+
+  _renderMenu = (props: Object) => {
+    return (
+      <Menu name="menu">
+        <MenuTrigger />
+        <MenuOptions>
+          <MenuOption text={Localizable.t('help')} onSelect={() => this.props.navigate(discoveryCenterHelpURL({title: Localizable.t('help'), modal: true}))} />
+        </MenuOptions>
+      </Menu>
     );
   }
 
