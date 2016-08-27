@@ -88,6 +88,7 @@ export default class SphereSources extends Component {
         keyboardShouldPersistTaps={true}
         keyboardDismissMode="on-drag"
         pageSize={10}
+        style={styles.listView}
       />
     );
   }
@@ -244,6 +245,7 @@ const styles = StyleSheet.create({
       width: 0
     },
     elevation: 1,
+    backgroundColor: '#FFF',
   },
   sectionHeaderContainer: {
     ...StyleSheet.styles.sectionHeaderContainer,
@@ -290,6 +292,9 @@ const styles = StyleSheet.create({
   pie: {
     position: 'absolute',
     paddingHorizontal: 8,
+  },
+  listView: {
+    backgroundColor: '#FFF',
   },
   ...Platform.select({
       ios: {
