@@ -43,6 +43,10 @@ type State = {
 };
 
 export default class Sources extends Component {
+  static NavigationHeaderStyle = {
+    elevation: null
+  };
+  
   props: Props;
   state: State;
 
