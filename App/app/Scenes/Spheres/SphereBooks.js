@@ -298,7 +298,7 @@ const styles = StyleSheet.create({
   },
   listView: {
     backgroundColor: '#FFF',
-  }
+  },
   sectionHeaderContainer: {
     ...StyleSheet.styles.sectionHeaderContainer,
     marginLeft: 8,
