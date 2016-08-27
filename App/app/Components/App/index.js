@@ -215,8 +215,17 @@ export default class App extends Component {
     const { navigationState, navigate } = props;
     const canGoForward = navigationState.index < navigationState.routes.length - 1;
 
+    let forwardMenuOption = null;
+    if (canGoForward) {
+      forwardMenuOption = <MenuOption key="forward" text={Localizable.t('forward')} onSelect={() => this._goForward()} />
+    } else {
+      forwardMenuOption = <MenuOption key="forward" disabled={true}>
+        <Text style={[StyleSheet.styles.menu.optionsStyles.optionText, {color: 'gray'}]}>{Localizable.t('forward')}</Text>
+      </MenuOption>;
+    }
+
     const menuOptions = [];
-    menuOptions.push(<MenuOption key="forward" disabled={!canGoForward} text={Localizable.t('forward')} onSelect={() => this._goForward()} />);
+    menuOptions.push(forwardMenuOption);
     menuOptions.push(<MenuOption key="discover" text={Localizable.t('discover')} onSelect={() => navigate(discoverURL({title: Localizable.t('discover')})) } />);
     menuOptions.push(<MenuOption key="books" text={Localizable.t('books')} onSelect={() => navigate(booksURL({title: Localizable.t('books')})) } />);
     menuOptions.push(<MenuOption key="sources" text={Localizable.t('sources.text')} onSelect={() => navigate(sourcesURL({title: Localizable.t('sources.text')})) } />);
@@ -390,7 +399,7 @@ export default class App extends Component {
     const { navigation } = this.state;
     const canGoBack = navigation.index > 0;
     if (canGoBack) {
-      this._popRoute();
+      this._goBack();
       return true;
     }
 
