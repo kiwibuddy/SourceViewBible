@@ -315,9 +315,14 @@ const styles = StyleSheet.create({
           shadowColor: 'red',
           elevation: 2,
         },
+        textInputContainer: {
+          backgroundColor: '#F9F9F9',
+          borderBottomColor: '#E8E8E8',
+          borderBottomWidth: 1,
+        },
         textInput: {
           fontSize: 16,
-          backgroundColor: '#FAFAFA',
+          backgroundColor: '#F9F9F9',
           paddingLeft: 8,
           marginHorizontal: 8,
           marginVertical: 8,
