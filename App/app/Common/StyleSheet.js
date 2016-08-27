@@ -189,6 +189,9 @@ const styles = {
         fontSize: 17,
         color: 'black',
       },
+      optionTouchable: {
+        activeOpacity: 70,
+      },
     },
   },
 };
