@@ -226,15 +226,15 @@ export default class App extends Component {
 
     const menuOptions = [];
     menuOptions.push(forwardMenuOption);
-    menuOptions.push(<MenuOption key="discover" text={Localizable.t('discover')} onSelect={() => navigate(discoverURL({title: Localizable.t('discover')})) } />);
-    menuOptions.push(<MenuOption key="books" text={Localizable.t('books')} onSelect={() => navigate(booksURL({title: Localizable.t('books')})) } />);
-    menuOptions.push(<MenuOption key="sources" text={Localizable.t('sources.text')} onSelect={() => navigate(sourcesURL({title: Localizable.t('sources.text')})) } />);
-    menuOptions.push(<MenuOption key="spheres" text={Localizable.t('spheres.text')} onSelect={() => navigate(spheresURL({title: Localizable.t('spheres.text')})) } />);
 
     if (options) {
       menuOptions.push(options(props));
     }
-
+    
+    menuOptions.push(<MenuOption key="discover" text={Localizable.t('discover')} onSelect={() => navigate(discoverURL({title: Localizable.t('discover')})) } />);
+    menuOptions.push(<MenuOption key="books" text={Localizable.t('books')} onSelect={() => navigate(booksURL({title: Localizable.t('books')})) } />);
+    menuOptions.push(<MenuOption key="sources" text={Localizable.t('sources.text')} onSelect={() => navigate(sourcesURL({title: Localizable.t('sources.text')})) } />);
+    menuOptions.push(<MenuOption key="spheres" text={Localizable.t('spheres.text')} onSelect={() => navigate(spheresURL({title: Localizable.t('spheres.text')})) } />);
     menuOptions.push(<MenuOption key="about" text={Localizable.t('about-sourceview')} onSelect={() => navigate(aboutURL({title: Localizable.t('about-sourceview'), modal: true})) } />);
 
     return (
