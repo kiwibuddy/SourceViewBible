@@ -215,6 +215,11 @@ const styles = StyleSheet.create({
     bottom: 4,
     right: 4,
     left: 4,
+    ...Platform.select({
+      android: {
+        top: NAV_BAR_HEIGHT + 8,
+      },
+    })
   },
   navBar: {
     height: NAV_BAR_HEIGHT,
