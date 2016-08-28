@@ -270,7 +270,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     ...Platform.select({
       android: {
-        paddingLeft: 8,
+        paddingLeft: 10,
         paddingTop: 16,
       },
     })
