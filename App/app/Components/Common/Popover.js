@@ -140,7 +140,16 @@ export default class Popover extends Component {
               );
             }
 
-            const previousRoute = navState.routeStack[index - 1];
+            if (Platform.OS === 'android') {
+              return (
+                <TouchableOpacity
+                  onPress={() => navigator.pop()}
+                  >
+                  <Image source={require('../../Components/Navigation/Images/nav-back.png')} style={{tintColor: Colors.tint}} />
+                </TouchableOpacity>
+              );
+            }
+
             const title = Localizable.t('back');
             return (
               <TouchableOpacity
@@ -237,7 +246,7 @@ const styles = StyleSheet.create({
     backgroundColor: Platform.OS === 'ios' ? 'rgba(248, 248, 248, .85)' : '#FFF',
     borderBottomColor: 'rgba(0, 0, 0, .15)',
     borderBottomWidth: Platform.OS === 'ios' ? StyleSheet.hairlineWidth : 0,
-    elevation: 4,
+    elevation: 2,
     marginBottom: 16, // This is needed for elevation shadow
   },
   navBarText: {
