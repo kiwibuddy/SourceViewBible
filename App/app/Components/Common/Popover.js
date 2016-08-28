@@ -125,7 +125,7 @@ export default class Popover extends Component {
                     onPress={() => onPressCancel()}
                     style={styles.navBarLeftButton}
                     >
-                    <Image source={require('../../Components/Navigation/Images/nav-close.png')} style={{tintColor: Colors.tint}} />
+                    <Image source={require('../../Components/Navigation/Images/nav-close.png')} style={{width: 24, height: 24, tintColor: Colors.tint}} />
                   </TouchableOpacity>
                 );
               }
@@ -147,7 +147,7 @@ export default class Popover extends Component {
                   onPress={() => navigator.pop()}
                   style={styles.navBarLeftButton}
                   >
-                  <Image source={require('../../Components/Navigation/Images/nav-back.png')} style={{tintColor: Colors.tint}} />
+                  <Image source={require('../../Components/Navigation/Images/nav-back.png')} style={{width: 24, height: 24, tintColor: Colors.tint}} />
                 </TouchableOpacity>
               );
             }
@@ -260,9 +260,20 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: 'bold',
     marginVertical: 12,
+    ...Platform.select({
+      android: {
+        marginVertical: 16,
+      },
+    })
   },
   navBarLeftButton: {
     paddingLeft: 10,
+    ...Platform.select({
+      android: {
+        paddingLeft: 8,
+        paddingTop: 16,
+      },
+    })
   },
   navBarRightButton: {
     paddingRight: 10,
