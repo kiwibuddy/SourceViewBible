@@ -237,7 +237,7 @@ const styles = StyleSheet.create({
     left: 4,
     ...Platform.select({
       android: {
-        top: NAV_BAR_HEIGHT + 8,
+        top: 4,
       },
     })
   },

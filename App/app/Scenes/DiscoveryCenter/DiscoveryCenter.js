@@ -77,19 +77,12 @@ export default class DiscoveryCenter extends Component {
 
   render() {
     const popover = this._renderPopover();
+    const header = popover && Platform.OS === 'android' ? null : this._renderNavigationHeader();
     const toolbar = popover && Platform.OS === 'android' ? null : this._renderToolbar();
     const cards = this.state.cards.map(card => this._renderCard(card));
     return (
       <MenuContext ref={component => this._menu = component} style={styles.container}>
-        <NavigationHeader
-          title={Localizable.t('discovery-center')}
-          renderLeftComponent={(props: Object) => <NavigationBarButton
-            title={Localizable.t('done')}
-            titleStyle={StyleSheet.styles.navigationBar.doneButtonTitle}
-            onPress={() => this.props.navigate(BACK)}
-          />}
-          renderRightComponent={this._renderRightComponent.bind(this)}
-        />
+        {header}
         <ScrollView ref={SCROLLVIEW_REF}
           style={styles.content}
           onContentSizeChange={(w, h) => this.contentHeight = h}
@@ -97,6 +90,20 @@ export default class DiscoveryCenter extends Component {
         {toolbar}
         {popover}
       </MenuContext>
+    );
+  }
+
+  _renderNavigationHeader = () => {
+    return (
+      <NavigationHeader
+        title={Localizable.t('discovery-center')}
+        renderLeftComponent={(props: Object) => <NavigationBarButton
+          title={Localizable.t('done')}
+          titleStyle={StyleSheet.styles.navigationBar.doneButtonTitle}
+          onPress={() => this.props.navigate(BACK)}
+        />}
+        renderRightComponent={this._renderRightComponent.bind(this)}
+      />
     );
   }
 
