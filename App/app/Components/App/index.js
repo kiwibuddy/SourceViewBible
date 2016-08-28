@@ -183,7 +183,7 @@ export default class App extends Component {
 
     return (
       <Toolbar>
-        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around'}}>
+        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
           <ToolbarButton
             disabled={!canGoBack}
             imageSource={require('../Navigation/Images/nav-back.png')}

@@ -50,6 +50,12 @@ const styles = StyleSheet.create({
   button: {
     marginHorizontal: 8,
     paddingHorizontal: 16,
+    ...Platform.select({
+      ios: {
+        width: 30,
+        height: 30,
+      },
+    })
   },
   image: {
     tintColor: Colors.tint,
