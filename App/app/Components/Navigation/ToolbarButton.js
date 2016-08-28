@@ -48,8 +48,6 @@ const ToolbarButton = (props: Props) => {
 
 const styles = StyleSheet.create({
   button: {
-    width: 30,
-    height: 30,
     marginHorizontal: 8,
     paddingHorizontal: 16,
   },

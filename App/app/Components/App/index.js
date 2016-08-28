@@ -183,7 +183,7 @@ export default class App extends Component {
 
     return (
       <Toolbar>
-        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
+        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around'}}>
           <ToolbarButton
             disabled={!canGoBack}
             imageSource={require('../Navigation/Images/nav-back.png')}
@@ -230,7 +230,7 @@ export default class App extends Component {
     if (options) {
       menuOptions.push(options(props));
     }
-    
+
     menuOptions.push(<MenuOption key="discover" text={Localizable.t('discover')} onSelect={() => navigate(discoverURL({title: Localizable.t('discover')})) } />);
     menuOptions.push(<MenuOption key="books" text={Localizable.t('books')} onSelect={() => navigate(booksURL({title: Localizable.t('books')})) } />);
     menuOptions.push(<MenuOption key="sources" text={Localizable.t('sources.text')} onSelect={() => navigate(sourcesURL({title: Localizable.t('sources.text')})) } />);
