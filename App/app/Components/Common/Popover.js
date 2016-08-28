@@ -4,6 +4,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import {
+  Image,
   Navigator,
   Platform,
   Text,
@@ -118,6 +119,16 @@ export default class Popover extends Component {
         routeMapper={{
           LeftButton: function(route, navigator, index, navState) {
             if (index === 0) {
+              if (Platform.OS === 'android') {
+                return (
+                  <TouchableOpacity
+                    onPress={() => onPressCancel()}
+                    >
+                    <Image source={require('../../Components/Navigation/Images/nav-close.png')} style={{tintColor: Colors.tint}} />
+                  </TouchableOpacity>
+                );
+              }
+
               return (
                 <TouchableOpacity
                   onPress={() => onPressCancel()}
