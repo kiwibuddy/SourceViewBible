@@ -123,6 +123,7 @@ export default class Popover extends Component {
                 return (
                   <TouchableOpacity
                     onPress={() => onPressCancel()}
+                    style={styles.navBarLeftButton}
                     >
                     <Image source={require('../../Components/Navigation/Images/nav-close.png')} style={{tintColor: Colors.tint}} />
                   </TouchableOpacity>
@@ -144,6 +145,7 @@ export default class Popover extends Component {
               return (
                 <TouchableOpacity
                   onPress={() => navigator.pop()}
+                  style={styles.navBarLeftButton}
                   >
                   <Image source={require('../../Components/Navigation/Images/nav-back.png')} style={{tintColor: Colors.tint}} />
                 </TouchableOpacity>
