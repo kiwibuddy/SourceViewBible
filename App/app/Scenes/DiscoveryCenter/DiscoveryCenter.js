@@ -76,9 +76,9 @@ export default class DiscoveryCenter extends Component {
   }
 
   render() {
-    const toolbar = this._renderToolbar();
-    const cards = this.state.cards.map(card => this._renderCard(card));
     const popover = this._renderPopover();
+    const toolbar = popover && Platform.OS === 'android' ? null : this._renderToolbar();
+    const cards = this.state.cards.map(card => this._renderCard(card));
     return (
       <MenuContext ref={component => this._menu = component} style={styles.container}>
         <NavigationHeader
