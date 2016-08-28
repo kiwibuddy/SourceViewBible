@@ -115,7 +115,7 @@ export default class Popover extends Component {
 
     return (
       <Navigator.NavigationBar
-      navigationStyles={NavigatorNavigationBarStyles}
+        navigationStyles={NavigatorNavigationBarStyles}
         routeMapper={{
           LeftButton: function(route, navigator, index, navState) {
             if (index === 0) {
