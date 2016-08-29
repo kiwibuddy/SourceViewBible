@@ -37,6 +37,7 @@ import Emdros from '../../API/Emdros';
 import { Book, Sphere } from '../../Database';
 
 const HTML = require('./HTML');
+const LOADING_HTML = require('./Loading.html');
 
 import { Preference } from '../../Preferences';
 import { ReaderBaseFontSize, ReaderBaseLineHeight, ReaderFontStepSize, ReaderWebFontConversion } from '../../Common/Constants';
@@ -216,7 +217,7 @@ export default class Reader extends Component {
       <View key={key} style={styles.container}>
         <WebView
           style={styles.webview}
-          source={require('./Loading.html')}
+          source={LOADING_HTML}
         />
       </View>
     );

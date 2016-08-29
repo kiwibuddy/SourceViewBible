@@ -45,6 +45,7 @@ type State = {
 
 export default class ReaderSearch extends Component {
   state: State;
+  _textInput: any;
 
   constructor(props: Object) {
     super(props);
@@ -66,6 +67,7 @@ export default class ReaderSearch extends Component {
           navigate={this.props.navigate}
           renderTitleComponent={(props: Object) => (
             <TextInput
+              ref={component => this._textInput = component}
               autoCapitalize="words"
               autoCorrect={false}
               autoFocus={true}
@@ -163,6 +165,8 @@ export default class ReaderSearch extends Component {
   }
 
   _navigate = (url: Object) => {
+    this._textInput.blur();
+
     this.props.navigate(BACK, () => {
       this.props.navigate(url);
     });
