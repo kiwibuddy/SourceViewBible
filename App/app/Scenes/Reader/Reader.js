@@ -303,7 +303,6 @@ export default class Reader extends Component {
         <View style={[styles.textPlaceholderContainer, {marginBottom: 20}]}>
           <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: 1}]} />
         </View>
-
       </View>
     );
   };
