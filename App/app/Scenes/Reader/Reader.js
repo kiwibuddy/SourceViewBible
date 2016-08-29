@@ -209,8 +209,10 @@ export default class Reader extends Component {
 
   _renderLoading = () => {
     return (
-      <View style={[styles.container, {backgroundColor: 'gray'}]}>
-
+      <View style={styles.container}>
+        <View style={[styles.textPlaceholder, {flex: 1}]}></View>
+        <View style={[styles.textPlaceholder, {flex: 1}]}></View>
+        <View style={[styles.textPlaceholder, {flex: 1}]}></View>
       </View>
     );
   };
@@ -370,5 +372,9 @@ const styles = StyleSheet.create({
   filterClear: {
     position: 'absolute',
     right: 0,
+  }
+  textPlaceholder: {
+    marginVertical: 10,
+    backgroundColor: '#EDEDED'
   }
 });
