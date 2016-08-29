@@ -333,7 +333,7 @@ export default class App extends Component {
     // console.log('pop', routes.map(route => route.path));
 
     if (navigation !== this.state.navigation) {
-      this.setState({navigation}, callback);
+      this.setState({navigation});
     }
   };
 
