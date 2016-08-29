@@ -5,13 +5,14 @@ import React, { Component, PropTypes } from 'react';
 const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
 
 import {
+  BackAndroid,
+  Image,
   LayoutAnimation,
   Platform,
+  ScrollView,
   Text,
   TouchableOpacity,
   View,
-  Image,
-  ScrollView
 } from 'react-native';
 
 import {
@@ -73,6 +74,14 @@ export default class DiscoveryCenter extends Component {
       cards,
       popover: null
     };
+  }
+
+  componentDidMount() {
+    BackAndroid.addEventListener('hardwareBackPress', this._onHardwareBackPress);
+  }
+
+  componentWillUnmount() {
+    BackAndroid.removeEventListener('hardwareBackPress', this._onHardwareBackPress);
   }
 
   render() {
@@ -269,6 +278,11 @@ export default class DiscoveryCenter extends Component {
 
   _onPressAdd = () => {
     this._addCard(this._defaultCard());
+  };
+
+  _onHardwareBackPress = () => {
+    this.props.navigate(BACK)
+    return true;
   };
 
   _showPopover = (props: Object, onComplete: Function) => {
