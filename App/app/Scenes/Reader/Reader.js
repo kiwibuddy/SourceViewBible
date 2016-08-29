@@ -303,6 +303,27 @@ export default class Reader extends Component {
         <View style={[styles.textPlaceholderContainer, {marginBottom: 20}]}>
           <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: 1}]} />
         </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .20}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+        <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .05}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .08}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+        <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .10}]} />
+        </View>
+        <View style={[styles.textPlaceholderContainer, {marginBottom: 20}]}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: 1}]} />
+        </View>
       </View>
     );
   };
