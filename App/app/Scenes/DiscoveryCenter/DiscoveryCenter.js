@@ -60,6 +60,7 @@ export default class DiscoveryCenter extends Component {
   props: Props;
   state: State;
   _menu: any;
+  _shouldScrollToBottom: boolean;
 
   contentHeight: number;
 
@@ -94,7 +95,13 @@ export default class DiscoveryCenter extends Component {
         {header}
         <ScrollView ref={SCROLLVIEW_REF}
           style={styles.content}
-          onContentSizeChange={(w, h) => this.contentHeight = h}
+          onContentSizeChange={(w, h) => {
+            this.contentHeight = h;
+            if (this._shouldScrollToBottom) {
+              this._shouldScrollToBottom = false;
+              this._scrollToBottom();
+            }
+          }}
         >{cards}</ScrollView>
         {toolbar}
         {popover}
@@ -234,6 +241,7 @@ export default class DiscoveryCenter extends Component {
       card
     ];
 
+    this._shouldScrollToBottom = true;
     this.setState({
       cards
     }, () => {
@@ -302,6 +310,9 @@ export default class DiscoveryCenter extends Component {
   _scrollToBottom = (animated: boolean = true) => {
     const scrollHeight = this.contentHeight;
     if (scrollHeight > 0) {
+      if (Platform.OS === 'ios') {
+        this._shouldScrollToBottom = false;        
+      }
       const scrollView = this.refs[SCROLLVIEW_REF];
       scrollView.scrollTo({y: scrollHeight, animated: animated});
     }
