@@ -34,7 +34,7 @@
  * If bUseOnlyFocusObjects is true, then only those MatchedObjects in
  * the sheaf which arise from an object block with the FOCUS keyword
  * are added to the big-union monad set.
- * 
+ *
  * @param pEE The EmdrosEnv connected to the database which we want to query.
  *
  * @param query The query which we want to execute against the
@@ -71,7 +71,7 @@ bool getSOMForQuery(EmdrosEnv *pEE, const std::string& query, bool bUseOnlyFocus
 		return false;
 	}
 }
-       
+
 /** Retrieve the first and last monads of a given book.
  *
  * The book name passed in must be the three-letter abbreviation used
@@ -143,7 +143,7 @@ std::string countInBuckets(EmdrosEnv *pEE, const std::string& bucket_specificati
 }
 
 
-std::string getWordCountsInSOM(EmdrosEnv *pEE, const SetOfMonads& substrate, const std::set<std::string>& stop_word_set, std::string& error_message)
+bool getWordCountsInSOM(EmdrosEnv *pEE, const SetOfMonads& substrate, const std::set<std::string>& stop_word_set, String2IntMap& result, std::string& error_message)
 {
 	std::string query = "SELECT ALL OBJECTS IN " + substrate.toString() + "WHERE [Token GET surface_fts]";
 
@@ -152,7 +152,7 @@ std::string getWordCountsInSOM(EmdrosEnv *pEE, const SetOfMonads& substrate, con
 	bool bResult = bDBResult && bCompileResult;
 	if (!bResult) {
 		error_message += "DBError: " + pEE->getDBError() + "\nCompilerError: " + pEE->getCompilerError() + "\n";
-		return "{}";
+		return false;
 	} else {
 		TokenBucket *pBucket = new TokenBucket(stop_word_set);
 
@@ -160,9 +160,10 @@ std::string getWordCountsInSOM(EmdrosEnv *pEE, const SetOfMonads& substrate, con
 		pBucket->countInSheaf(pSheaf);
 		delete pSheaf;
 
-		std::string result = pBucket->getJSON();
+		// std::string result = pBucket->getJSON();
+		result = pBucket->m_token_count_map;
 		delete pBucket;
-		return result;
+		return true;
 	}
 }
 
@@ -248,7 +249,7 @@ void WordCounts::assign(const WordCounts& other)
  * double quotes, and escaped with the escapeSTRINGstring() function
  * which is part of Emdros.  For example: "Family=true" or
  * "surface_fts=\"" + escapeSTRINGstring(peace) + "\"".
- * 
+ *
  *
  *
  *
@@ -271,7 +272,7 @@ bool getWordCountsInContext(EmdrosEnv *pEE,
 	if (!context_feature_comparison.empty()) {
 		query += " " + context_feature_comparison;
 	}
-	
+
 	query += "[Token";
 	if (!token_feature_comparison.empty()) {
 		query += " " + token_feature_comparison;
@@ -289,7 +290,7 @@ bool getWordCountsInContext(EmdrosEnv *pEE,
 		return false;
 	} else {
 		Sheaf *pSheaf = pEE->takeOverSheaf();
-		
+
 		SheafConstIterator context_sheaf_ci = pSheaf->const_iterator();
 		while (context_sheaf_ci.hasNext()) {
 			const Straw *pStraw = context_sheaf_ci.next();
@@ -298,10 +299,10 @@ bool getWordCountsInContext(EmdrosEnv *pEE,
 				const MatchedObject *pContextMO = context_straw_ci.next();
 
 				id_d_t context_id_d = pContextMO->getID_D();
-				
-				
+
+
 				WordCounts wc;
-				
+
 				SheafConstIterator token_sheaf_ci = pContextMO->getSheaf()->const_iterator();
 				while (token_sheaf_ci.hasNext()) {
 					const Straw *pStraw = token_sheaf_ci.next();
@@ -310,7 +311,7 @@ bool getWordCountsInContext(EmdrosEnv *pEE,
 						const MatchedObject *pTokenMO = token_straw_ci.next();
 						++wc.m_word_count;
 
-		
+
 						if (pTokenMO->getFeatureAsString(0) != "false") {
 							++wc.m_Family;
 						}
@@ -318,23 +319,23 @@ bool getWordCountsInContext(EmdrosEnv *pEE,
 						if (pTokenMO->getFeatureAsString(1) != "false") {
 							++wc.m_Economics;
 						}
-						
+
 						if (pTokenMO->getFeatureAsString(2) != "false") {
 							++wc.m_Government;
 						}
-						
+
 						if (pTokenMO->getFeatureAsString(3) != "false") {
 							++wc.m_Religion;
 						}
-						
+
 						if (pTokenMO->getFeatureAsString(4) != "false") {
 							++wc.m_Education;
 						}
-						
+
 						if (pTokenMO->getFeatureAsString(5) != "false") {
 							++wc.m_MediaCom;
 						}
-						
+
 						if (pTokenMO->getFeatureAsString(6) != "false") {
 							++wc.m_Celebration;
 						}
@@ -345,7 +346,7 @@ bool getWordCountsInContext(EmdrosEnv *pEE,
 				result.insert(std::make_pair(context_id_d, wc));
 			}
 		}
-		
+
 		delete pSheaf;
 
 		return true;

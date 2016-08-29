@@ -96,14 +96,14 @@ class Bucket {
 	virtual ~Bucket();
 
 	static Bucket *newBucket(eBucketKind bucket_kind, const std::string& object_type_name, eBucketKind child_bucket_kind);
-	
+
 	virtual eBucketKind getKind() const;
 	virtual eBucketKind getChildKind() const;
 
 	virtual void addBucketValue(const BucketValue& bv, eBucketKind child_bucket_kind, const std::string& child_object_type_name, eBucketKind grandchild_bucket_kind);
 
 	virtual void getBucketListFromMonad(const BucketValue& bv, int depth, eBucketKind child_bucket_kind, const std::string& child_object_type_name, eBucketKind grandchild_bucket_kind, std::list<Bucket*>& /* out */ bucket_list);
-	
+
 	virtual void incrementCountInChild(const BucketValue& bv);
 
 	virtual void incrementCount();
@@ -124,7 +124,7 @@ class BucketBucket : public Bucket {
 	std::string m_object_type_name;
 	Monad2String2StringSetMap m_monad_map;
 	Monad2MonadMap m_first_monad_map;
-	String2String2PBucketMap m_feature_map;	
+	String2String2PBucketMap m_feature_map;
  public:
 	BucketBucket(eBucketKind newKind, const std::string& object_type_name, eBucketKind child_kind);
 
@@ -153,8 +153,9 @@ Bucket *getBucketFromJSONBucketSpecification(EmdrosEnv *pEnv, const std::string&
 
 class TokenBucket {
  protected:
-	String2IntMap m_token_count_map;
 	std::set<std::string> m_stop_word_set;
+ public:
+	 String2IntMap m_token_count_map;
  public:
 	TokenBucket();
 	TokenBucket(const std::set<std::string>& stop_word_set);
@@ -168,6 +169,3 @@ class TokenBucket {
 };
 
 #endif /* !defined(BUCKET_H_) */
-
-
-

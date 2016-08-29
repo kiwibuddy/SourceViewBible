@@ -113,11 +113,15 @@ const std::set<std::string> RCTStopwords = {"the","and","of","to","you","will","
         if (useStopWords) stopwords = RCTStopwords;
 
         std::string errorMessage;
-        std::string json = getWordCountsInSOM(_emdrosEnv, soms, stopwords, errorMessage);
+        String2IntMap wordCountMap;
+        getWordCountsInSOM(_emdrosEnv, soms, stopwords, wordCountMap, errorMessage);
 
-        NSString *data = [NSString stringWithUTF8String:json.c_str()];
-        NSError *error = nil;
-        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:[data dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
+        NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
+        for (auto const& iterator : wordCountMap) {
+            NSString *word = [NSString stringWithUTF8String:iterator.first.c_str()];
+            NSInteger wordCount = iterator.second;
+            [result setObject:@(wordCount) forKey:word];
+        }
 
         NSArray *words = [result keysSortedByValueUsingComparator:^NSComparisonResult(NSNumber *  _Nonnull obj1, NSNumber *  _Nonnull obj2) {
             NSInteger a = obj1.integerValue;
@@ -134,7 +138,6 @@ const std::set<std::string> RCTStopwords = {"the","and","of","to","you","will","
         for (NSString *word in words) {
             [wordCounts addObject:@{@"string": word, @"count": result[word]}];
         }
-
 
         if (completion) completion([[NSArray alloc] initWithArray:wordCounts], nil);
     } catch (EMdFDBException e) {

@@ -10,23 +10,23 @@
 
 const char RCTKeyCString[] = {48, 120, 54, 55, 100, 51, 100, 54, 55, 100, 32, 48, 120, 50, 50, 55, 57, 56, 53, 48, 57, 32, 48, 120, 49, 51, 101, 54, 98, 49, 99, 57, 32, 48, 120, 51, 52, 99, 50, 50, 51, 57, 55, 32, 48, 120, 54, 49, 101, 49, 98, 53, 98, 49, 32, 48, 120, 51, 56, 99, 52, 100, 49, 98, 49, 32, 48, 120, 50, 53, 101, 51, 102, 54, 100, 57, 32, 48, 120, 49, 97, 50, 102, 50, 57, 100, 55, 0};
 
-jfieldID getEmdrosEnvField(JNIEnv *env, jobject obj)
-{
+const std::string RCTStopwordsArray[] = {"the","and","of","to","you","will","in","I","a","he","for","they","your","is","with","his","from","that","be","all","them","as","who","it","was","but","my","have","s","this","their","are","me","on","him","people","then","so","not","when","were","had","king","what","by","we","at","said","one","has","t","do","son","out","if","there","no","or","land","like","us","must","these","up","those","her","day","our","now","man","into","am","can","come","let","because","go","about","against","give","down","even","don","an","over","other","she","before","made","been","men","its"};
+const std::set<std::string> RCTStopwords(RCTStopwordsArray, RCTStopwordsArray + sizeof(RCTStopwordsArray) / sizeof(RCTStopwordsArray[0]));
+
+jfieldID getEmdrosEnvField(JNIEnv *env, jobject obj) {
     jclass c = env->GetObjectClass(obj);
     // J is the type signature for long:
     return env->GetFieldID(c, "emdrosEnv", "J");
 }
 
 template <typename T>
-T *getEmdrosEnv(JNIEnv *env, jobject obj)
-{
+T *getEmdrosEnv(JNIEnv *env, jobject obj) {
     jlong emdrosEnv = env->GetLongField(obj, getEmdrosEnvField(env, obj));
     return reinterpret_cast<T *>(emdrosEnv);
 }
 
 template <typename T>
-void setEmdrosEnv(JNIEnv *env, jobject obj, T *t)
-{
+void setEmdrosEnv(JNIEnv *env, jobject obj, T *t) {
     jlong emdrosEnv = reinterpret_cast<jlong>(t);
     env->SetLongField(obj, getEmdrosEnvField(env, obj), emdrosEnv);
 }
@@ -40,6 +40,12 @@ void GetJStringContent(JNIEnv *env, jstring AStr, std::string &ARes) {
   const char *s = env->GetStringUTFChars(AStr,NULL);
   ARes=s;
   env->ReleaseStringUTFChars(AStr,s);
+}
+
+static jobject makeIntegerObject(JNIEnv *env, int value) {
+    jclass clazz = env->FindClass("java/lang/Integer");
+    jmethodID integerConstructID = env->GetMethodID(clazz, "<init>", "(I)V");
+    return env->NewObject(clazz, integerConstructID, value);
 }
 
 void Java_com_sourceviewbible_emdros_Emdros_connect(JNIEnv *env, jobject obj, jstring jdatabasePath) {
@@ -90,6 +96,49 @@ jstring Java_com_sourceviewbible_emdros_Emdros_string(JNIEnv *env, jobject obj, 
   std::string rendered_objects = render_objects(emdrosEnv, dbName, stylesheet, stylesheetName, (long)from, (long)to, bResult);
   return env->NewStringUTF(rendered_objects.c_str());
 }
+
+jobject Java_com_sourceviewbible_emdros_Emdros_words(JNIEnv *env, jobject obj, jobjectArray jmonads, jlong jlimit, jboolean useStopWords) {
+  EmdrosEnv *emdrosEnv = getEmdrosEnv<EmdrosEnv>(env, obj);
+
+  jsize size = env->GetArrayLength(jmonads);
+
+  SetOfMonads soms;
+  for (int i = 0; i < size; i++) {
+    jlongArray jmonad = static_cast<jlongArray>(env->GetObjectArrayElement(jmonads, i));
+    if (jmonad) {
+      jlong *monad = env->GetLongArrayElements(jmonad, 0);
+      SetOfMonads som(monad[0], monad[1]);
+      soms.unionWith(som);
+      env->ReleaseLongArrayElements(jmonad, monad, 0);
+      env->DeleteLocalRef(jmonad);
+    }
+  }
+  std::set<std::string> stopwords;
+  if (useStopWords) stopwords = RCTStopwords;
+
+  std::string errorMessage;
+  String2IntMap wordCountMap;
+  bool result = getWordCountsInSOM(emdrosEnv, soms, stopwords, wordCountMap, errorMessage);
+
+  jclass clazz = env->FindClass("java/util/HashMap");
+  jmethodID init = env->GetMethodID(clazz, "<init>", "()V");
+  jmethodID putMethod = env->GetMethodID(clazz, "put", "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;");
+
+  jobject words = env->NewObject(clazz, init);
+
+  typedef std::map<std::string, int>::iterator iterator_type;
+  for (iterator_type iterator = wordCountMap.begin(); iterator != wordCountMap.end(); ++iterator) {
+    jstring word = env->NewStringUTF(iterator->first.c_str());
+    jobject count = makeIntegerObject(env, iterator->second);
+    env->CallObjectMethod(words, putMethod, word, count);
+
+    env->DeleteLocalRef(word); word = NULL;
+    env->DeleteLocalRef(count); count = NULL;
+  }
+
+  return words;
+}
+
 
 void Java_com_sourceviewbible_emdros_Emdros_dispose(JNIEnv *env, jobject obj) {
   // EmdrosEnv *emdrosEnv = getEmdrosEnv<EmdrosEnv>(env, obj);

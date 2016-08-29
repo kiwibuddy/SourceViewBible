@@ -28,7 +28,8 @@ bool getSOMForQuery(EmdrosEnv *pEE, const std::string& query, bool bUseOnlyFocus
 std::string countInBuckets(EmdrosEnv *pEE, const std::string& json_string, const SetOfMonads& substrate, std::string& error_message);
 
 
-std::string getWordCountsInSOM(EmdrosEnv *pEE, const SetOfMonads& substrate, const std::set<std::string>& stop_word_set, std::string& error_message);
+typedef std::map<std::string, int> String2IntMap;
+bool getWordCountsInSOM(EmdrosEnv *pEE, const SetOfMonads& substrate, const std::set<std::string>& stop_word_set, String2IntMap& result, std::string& error_message);
 
 
 

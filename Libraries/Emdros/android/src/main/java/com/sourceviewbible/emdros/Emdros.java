@@ -2,6 +2,7 @@ package com.sourceviewbible.emdros;
 
 import java.util.Map;
 import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Emdros {
   private long emdrosEnv;
@@ -13,6 +14,7 @@ public class Emdros {
 
   public native void connect(String databasePath);
   public native String string(long from, long to, String options);
+  public native Map<String,Integer> words(long[][] monads, long limit, boolean useStopWords);
 
   // Only used for cleanup of resources. Not called explicitly
   public native void dispose();

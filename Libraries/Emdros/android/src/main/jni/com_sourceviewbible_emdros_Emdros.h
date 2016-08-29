@@ -25,6 +25,14 @@ JNIEXPORT jstring JNICALL Java_com_sourceviewbible_emdros_Emdros_string
 
 /*
  * Class:     com_sourceviewbible_emdros_Emdros
+ * Method:    words
+ * Signature: ([[JJZ)Ljava/util/Map;
+ */
+JNIEXPORT jobject JNICALL Java_com_sourceviewbible_emdros_Emdros_words
+  (JNIEnv *, jobject, jobjectArray, jlong, jboolean);
+
+/*
+ * Class:     com_sourceviewbible_emdros_Emdros
  * Method:    dispose
  * Signature: ()V
  */

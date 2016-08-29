@@ -10,13 +10,23 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.ReadableArray;
+import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReadableMapKeySetIterator;
 
 import android.util.Log;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+import java.lang.Math;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 
@@ -26,6 +36,8 @@ public class EmdrosModule extends ReactContextBaseJavaModule {
 
   private static final byte[] RCTPreferencesKeyCString = new byte[] {98, 53, 50, 101, 55, 51, 49, 50, 53, 48, 99, 101, 56, 49, 101, 56, 52, 51, 50, 50, 57, 102, 52, 48, 102, 102, 100, 55, 50, 101, 49, 101, 49, 57, 54, 48, 52, 48, 52, 51, 54, 50, 50, 101, 49, 56, 97, 52, 53, 50, 57, 49, 53, 53, 52, 52, 100, 99, 97, 98, 97, 102, 98, 57};
   private static final String RCTPreferencesKey = "PreferencesKey";
+
+  private static final long MAX_MONAD = 2100000000L;
 
   private ReactApplicationContext context;
   private Map<String, Emdros> openedDatabases;
@@ -68,6 +80,61 @@ public class EmdrosModule extends ReactContextBaseJavaModule {
     Emdros emdros = this.openedDatabases.get(name);
     String string = emdros.string(from, to, stylesheet);
     promise.resolve(string);
+  }
+
+  @ReactMethod
+  public void wordsInMonads(ReadableMap options, Promise promise) {
+    String name = options.getString("name");
+    Emdros emdros = this.openedDatabases.get(name);
+
+    long[][] monads;
+
+    if (options.hasKey("from") && options.hasKey("to")) {
+      long from = options.getInt("from");
+      long to = options.getInt("to");
+      monads = new long[1][2];
+      monads[0][0] = from;
+      monads[0][1] = to;
+    } else if (options.hasKey("monads")) {
+      ReadableArray monadArray = options.getArray("monads");
+      int size = monadArray.size();
+      monads = new long[size][2];
+      for (int i = 0; i < size; i++) {
+        ReadableArray monad = monadArray.getArray(i);
+        monads[i][0] = monad.getInt(0);
+        monads[i][1] = monad.getInt(1);
+      }
+    } else {
+      monads = new long[1][2];
+      monads[0][0] = 1;
+      monads[0][1] = MAX_MONAD;
+    }
+
+    int limit = options.hasKey("limit") ? options.getInt("limit") : 0;
+    boolean useStopWords = options.hasKey("useStopWords") ? options.getBoolean("useStopWords") : false;
+
+    Map<String,Integer> wordCountMap = emdros.words(monads, limit, useStopWords);
+    Set<Entry<String,Integer>> wordCountEntries = wordCountMap.entrySet();
+    List<Entry<String,Integer>> wordCountList = new LinkedList<Entry<String,Integer>>(wordCountEntries);
+
+    Collections.sort(wordCountList, new Comparator<Entry<String,Integer>>() {
+      @Override
+      public int compare(Entry<String, Integer> a, Entry<String, Integer> b) {
+        return b.getValue().compareTo(a.getValue());
+      }
+    });
+
+    if (limit > 0) wordCountList = wordCountList.subList(0, Math.min(limit, wordCountList.size()));
+
+    WritableArray wordCounts = Arguments.createArray();
+    for (Entry<String,Integer> word: wordCountList) {
+      WritableMap wordCount = Arguments.createMap();
+      wordCount.putString("string", word.getKey());
+      wordCount.putInt("count", word.getValue());
+      wordCounts.pushMap(wordCount);
+    }
+
+    promise.resolve(wordCounts);
   }
 
   @Override
