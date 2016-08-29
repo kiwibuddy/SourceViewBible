@@ -209,10 +209,101 @@ export default class Reader extends Component {
 
   _renderLoading = () => {
     return (
-      <View style={styles.container}>
-        <View style={[styles.textPlaceholder, {flex: 1}]}></View>
-        <View style={[styles.textPlaceholder, {flex: 1}]}></View>
-        <View style={[styles.textPlaceholder, {flex: 1}]}></View>
+      <View style={[styles.container, {flex: 1, flexDirection: 'column', padding: 20}]}>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .05}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .10}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .08}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} />
+        </View>
+        <View style={[styles.textPlaceholderContainer, {marginBottom: 20}]}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .80}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .05}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .10}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} />
+        </View>
+        <View style={[styles.textPlaceholderContainer, {marginBottom: 20}]}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .20}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+        <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .05}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .08}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+        <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .10}]} />
+        </View>
+        <View style={[styles.textPlaceholderContainer, {marginBottom: 20}]}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: 1}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .20}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+        <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .05}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .08}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+        <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .10}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+        <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .05}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .08}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+        <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .10}]} />
+        </View>
+        <View style={[styles.textPlaceholderContainer, {marginBottom: 20}]}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: 1}]} />
+        </View>
+
       </View>
     );
   };
@@ -372,9 +463,18 @@ const styles = StyleSheet.create({
   filterClear: {
     position: 'absolute',
     right: 0,
-  }
+  },
+  textPlaceholderContainer: {
+    height: 10,
+    marginVertical: 5,
+    flexDirection: 'row',
+  },
   textPlaceholder: {
-    marginVertical: 10,
-    backgroundColor: '#EDEDED'
-  }
+    backgroundColor: '#EDEDED',
+    height: 10,
+  },
+  whiteSpace: {
+    backgroundColor: '#FFF',
+    height: 10,
+  },
 });
