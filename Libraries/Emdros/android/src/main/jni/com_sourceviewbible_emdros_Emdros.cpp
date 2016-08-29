@@ -3,6 +3,7 @@
 #include "bucket.h"
 #include "harvest.h"
 #include <fstream>
+#include <sstream>
 
 #include <android/log.h>
 #define LOG_TAG "Emdros"
@@ -40,18 +41,6 @@ void GetJStringContent(JNIEnv *env, jstring AStr, std::string &ARes) {
   const char *s = env->GetStringUTFChars(AStr,NULL);
   ARes=s;
   env->ReleaseStringUTFChars(AStr,s);
-}
-
-static jobject makeIntegerObject(JNIEnv *env, int value) {
-    jclass clazz = env->FindClass("java/lang/Integer");
-    jmethodID integerConstructID = env->GetMethodID(clazz, "<init>", "(I)V");
-    return env->NewObject(clazz, integerConstructID, value);
-}
-
-static jobject makeLongObject(JNIEnv *env, int64_t value) {
-    jclass clazz = env->FindClass("java/lang/Long");
-    jmethodID longConstructID = env->GetMethodID(clazz, "<init>", "(J)V");
-    return env->NewObject(clazz, longConstructID, value);
 }
 
 void Java_com_sourceviewbible_emdros_Emdros_connect(JNIEnv *env, jobject obj, jstring jdatabasePath) {
@@ -115,7 +104,7 @@ jobject Java_com_sourceviewbible_emdros_Emdros_words(JNIEnv *env, jobject obj, j
       SetOfMonads som(monad[0], monad[1]);
       soms.unionWith(som);
       env->ReleaseLongArrayElements(jmonad, monad, 0);
-      env->DeleteLocalRef(jmonad);
+      env->DeleteLocalRef(jmonad); jmonad = NULL;
     }
   }
 
@@ -130,15 +119,18 @@ jobject Java_com_sourceviewbible_emdros_Emdros_words(JNIEnv *env, jobject obj, j
   jmethodID init = env->GetMethodID(clazz, "<init>", "()V");
   jmethodID putMethod = env->GetMethodID(clazz, "put", "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;");
 
+  jclass integerClazz = env->FindClass("java/lang/Integer");
+  jmethodID integerConstructID = env->GetMethodID(integerClazz, "<init>", "(I)V");
+
   jobject words = env->NewObject(clazz, init);
   typedef std::map<std::string, int>::iterator iterator_type;
   for (iterator_type iterator = wordCountMap.begin(); iterator != wordCountMap.end(); ++iterator) {
     jstring word = env->NewStringUTF(iterator->first.c_str());
-    jobject count = makeIntegerObject(env, iterator->second);
-    env->CallObjectMethod(words, putMethod, word, count);
-
+    jobject count = env->NewObject(integerClazz, integerConstructID, iterator->second);
+    jobject wordPut = env->CallObjectMethod(words, putMethod, word, count);
     env->DeleteLocalRef(word); word = NULL;
     env->DeleteLocalRef(count); count = NULL;
+    env->DeleteLocalRef(wordPut); wordPut = NULL;
   }
 
   return words;
@@ -156,7 +148,7 @@ jobject Java_com_sourceviewbible_emdros_Emdros_wordCountsForContext(JNIEnv *env,
       SetOfMonads som(monad[0], monad[1]);
       soms.unionWith(som);
       env->ReleaseLongArrayElements(jmonad, monad, 0);
-      env->DeleteLocalRef(jmonad);
+      env->DeleteLocalRef(jmonad); jmonad = NULL;
     }
   }
 
@@ -170,32 +162,108 @@ jobject Java_com_sourceviewbible_emdros_Emdros_wordCountsForContext(JNIEnv *env,
   GetJStringContent(env, jtokenFeatureComparison, tokenFeatureComparison);
 
   std::string errorMessage;
-  ID_D2WordCountsMap wordCountMap;
-  bool result = getWordCountsInContext(emdrosEnv, soms, context, contextFeatureComparison, tokenFeatureComparison, wordCountMap, errorMessage);
+  ID_D2WordCountsMap wordCountsMap;
+  bool result = getWordCountsInContext(emdrosEnv, soms, context, contextFeatureComparison, tokenFeatureComparison, wordCountsMap, errorMessage);
 
-  jclass clazz = env->FindClass("java/util/HashMap");
-  jmethodID init = env->GetMethodID(clazz, "<init>", "()V");
-  jmethodID putMethod = env->GetMethodID(clazz, "put", "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;");
+  jclass hashmapClazz = env->FindClass("java/util/HashMap");
+  jmethodID hashMapInit = env->GetMethodID(hashmapClazz, "<init>", "()V");
+  jmethodID putMethod = env->GetMethodID(hashmapClazz, "put", "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;");
 
-  jobject wordCounts = env->NewObject(clazz, init);
+  jclass integerClazz = env->FindClass("java/lang/Integer");
+  jmethodID integerConstructID = env->GetMethodID(integerClazz, "<init>", "(I)V");
+
+  jobject wordCountKey = env->NewStringUTF("wordCount");
+  jobject familyKey = env->NewStringUTF("family");
+  jobject economicsKey = env->NewStringUTF("economics");
+  jobject governmentKey = env->NewStringUTF("government");
+  jobject religionKey = env->NewStringUTF("religion");
+  jobject educationKey = env->NewStringUTF("education");
+  jobject communicationKey = env->NewStringUTF("communication");
+  jobject celebrationKey = env->NewStringUTF("celebration");
+
+  jobject wordCounts = env->NewObject(hashmapClazz, hashMapInit);
   typedef ID_D2WordCountsMap::iterator iterator_type;
-  for (iterator_type iterator = wordCountMap.begin(); iterator != wordCountMap.end(); ++iterator) {
-    jobject contextID = makeLongObject(env, iterator->first);
+  for (iterator_type iterator = wordCountsMap.begin(); iterator != wordCountsMap.end(); ++iterator) {
+    std::string contextIDString;
+    std::stringstream strstream;
+    strstream << iterator->first;
+    strstream >> contextIDString;
+    jobject contextID = env->NewStringUTF(contextIDString.c_str());
 
-    jobject wordCount = env->NewObject(clazz, init);
-    env->CallObjectMethod(wordCount, putMethod, env->NewStringUTF("wordCount"), makeIntegerObject(env, iterator->second.m_word_count));
-    env->CallObjectMethod(wordCount, putMethod, env->NewStringUTF("family"), makeIntegerObject(env, iterator->second.m_Family));
-    env->CallObjectMethod(wordCount, putMethod, env->NewStringUTF("economics"), makeIntegerObject(env, iterator->second.m_Economics));
-    env->CallObjectMethod(wordCount, putMethod, env->NewStringUTF("government"), makeIntegerObject(env, iterator->second.m_Government));
-    env->CallObjectMethod(wordCount, putMethod, env->NewStringUTF("religion"), makeIntegerObject(env, iterator->second.m_Religion));
-    env->CallObjectMethod(wordCount, putMethod, env->NewStringUTF("education"), makeIntegerObject(env, iterator->second.m_Education));
-    env->CallObjectMethod(wordCount, putMethod, env->NewStringUTF("communication"), makeIntegerObject(env, iterator->second.m_MediaCom));
-    env->CallObjectMethod(wordCount, putMethod, env->NewStringUTF("celebration"), makeIntegerObject(env, iterator->second.m_Celebration));
-    env->CallObjectMethod(wordCounts, putMethod, contextID, wordCount);
+    jobject wordCountMap = env->NewObject(hashmapClazz, hashMapInit);
 
-    env->DeleteLocalRef(contextID);
-    env->DeleteLocalRef(wordCount);
+    // LOGV("iterating results wordCount... %i", iterator->second.m_word_count);
+    jobject wordCount = env->NewObject(integerClazz, integerConstructID, iterator->second.m_word_count);
+    jobject wordCountPut = env->CallObjectMethod(wordCountMap, putMethod, wordCountKey, wordCount);
+    env->DeleteLocalRef(wordCount); wordCount = NULL;
+    env->DeleteLocalRef(wordCountPut); wordCountPut = NULL;
+    // LOGV("iterated results wordCount...");
+
+    // LOGV("iterating results familyCount... %i", iterator->second.m_Family);
+    jobject familyCount = env->NewObject(integerClazz, integerConstructID, iterator->second.m_Family);
+    jobject familyCountPut = env->CallObjectMethod(wordCountMap, putMethod, familyKey, familyCount);
+    env->DeleteLocalRef(familyCount); familyCount = NULL;
+    env->DeleteLocalRef(familyCountPut); familyCountPut = NULL;
+    // LOGV("iterated results familyCount...");
+
+    // LOGV("iterating results economicsCount... %i", iterator->second.m_Economics);
+    jobject economicsCount = env->NewObject(integerClazz, integerConstructID, iterator->second.m_Economics);
+    jobject economicsCountPut = env->CallObjectMethod(wordCountMap, putMethod, economicsKey, economicsCount);
+    env->DeleteLocalRef(economicsCount); economicsCount = NULL;
+    env->DeleteLocalRef(economicsCountPut); economicsCountPut = NULL;
+    // LOGV("iterated results economicsCount...");
+
+    // LOGV("iterating results governmentCount... %i", iterator->second.m_Government);
+    jobject governmentCount = env->NewObject(integerClazz, integerConstructID, iterator->second.m_Government);
+    jobject governmentCountPut = env->CallObjectMethod(wordCountMap, putMethod, governmentKey, governmentCount);
+    env->DeleteLocalRef(governmentCount); governmentCount = NULL;
+    env->DeleteLocalRef(governmentCountPut); governmentCountPut = NULL;
+    // LOGV("iterated results governmentCount...");
+
+    // LOGV("iterating results religionCount... %i", iterator->second.m_Religion);
+    jobject religionCount = env->NewObject(integerClazz, integerConstructID, iterator->second.m_Religion);
+    jobject religionCountPut = env->CallObjectMethod(wordCountMap, putMethod, religionKey, religionCount);
+    env->DeleteLocalRef(religionCount); religionCount = NULL;
+    env->DeleteLocalRef(religionCountPut); religionCountPut = NULL;
+    // LOGV("iterated results religionCount...");
+
+    // LOGV("iterating results educationCount... %i", iterator->second.m_Education);
+    jobject educationCount = env->NewObject(integerClazz, integerConstructID, iterator->second.m_Education);
+    jobject educationCountPut = env->CallObjectMethod(wordCountMap, putMethod, educationKey, educationCount);
+    env->DeleteLocalRef(educationCount); educationCount = NULL;
+    env->DeleteLocalRef(educationCountPut); educationCountPut = NULL;
+    // LOGV("iterated results educationCount...");
+
+    // LOGV("iterating results communicationCount... %i", iterator->second.m_MediaCom);
+    jobject communicationCount = env->NewObject(integerClazz, integerConstructID, iterator->second.m_MediaCom);
+    jobject communicationCountPut = env->CallObjectMethod(wordCountMap, putMethod, communicationKey, communicationCount);
+    env->DeleteLocalRef(communicationCount); communicationCount = NULL;
+    env->DeleteLocalRef(communicationCountPut); communicationCountPut = NULL;
+    // LOGV("iterated results communicationCount...");
+
+    // LOGV("iterating results celebrationCount... %i", iterator->second.m_Celebration);
+    jobject celebrationCount = env->NewObject(integerClazz, integerConstructID, iterator->second.m_Celebration);
+    jobject celebrationCountPut = env->CallObjectMethod(wordCountMap, putMethod, celebrationKey, celebrationCount);
+    env->DeleteLocalRef(celebrationCount); celebrationCount = NULL;
+    env->DeleteLocalRef(celebrationCountPut); celebrationCountPut = NULL;
+    // LOGV("iterated results celebrationCount...");
+
+    // LOGV("iterating results wordCountMap...");
+    jobject wordCountMapPut = env->CallObjectMethod(wordCounts, putMethod, contextID, wordCountMap);
+    env->DeleteLocalRef(contextID); contextID = NULL;
+    env->DeleteLocalRef(wordCountMap); wordCountMap = NULL;
+    env->DeleteLocalRef(wordCountMapPut); wordCountMapPut = NULL;
+    // LOGV("iterated results wordCountMap...");
   }
+
+  env->DeleteLocalRef(wordCountKey); wordCountKey = NULL;
+  env->DeleteLocalRef(familyKey); familyKey = NULL;
+  env->DeleteLocalRef(economicsKey); economicsKey = NULL;
+  env->DeleteLocalRef(governmentKey); governmentKey = NULL;
+  env->DeleteLocalRef(religionKey); religionKey = NULL;
+  env->DeleteLocalRef(educationKey); educationKey = NULL;
+  env->DeleteLocalRef(communicationKey); communicationKey = NULL;
+  env->DeleteLocalRef(celebrationKey); celebrationKey = NULL;
 
   return wordCounts;
 }

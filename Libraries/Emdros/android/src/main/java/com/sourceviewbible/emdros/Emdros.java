@@ -15,7 +15,7 @@ public class Emdros {
   public native void connect(String databasePath);
   public native String string(long from, long to, String options);
   public native Map<String,Integer> words(long[][] monads, long limit, boolean useStopWords);
-  public native Map<Long,Map<String,Integer>> wordCountsForContext(String context, long[][] monads, String contextFeatureComparison, String tokenFeatureComparison);
+  public native Map<String,Map<String,Integer>> wordCountsForContext(String context, long[][] monads, String contextFeatureComparison, String tokenFeatureComparison);
 
   // Only used for cleanup of resources. Not called explicitly
   public native void dispose();

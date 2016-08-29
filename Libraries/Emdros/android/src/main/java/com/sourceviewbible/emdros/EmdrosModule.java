@@ -16,6 +16,7 @@ import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReadableMapKeySetIterator;
 
+import java.lang.Thread;
 import android.util.Log;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -71,23 +72,30 @@ public class EmdrosModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void string(ReadableMap options, Promise promise) {
+  public void string(ReadableMap options, final Promise promise) {
     String name = options.getString("name");
-    long from = options.getInt("from");
-    long to = options.getInt("to");
-    String stylesheet = options.getString("stylesheet");
+    final Emdros emdros = this.openedDatabases.get(name);
 
-    Emdros emdros = this.openedDatabases.get(name);
-    String string = emdros.string(from, to, stylesheet);
-    promise.resolve(string);
+    final long from = options.getInt("from");
+    final long to = options.getInt("to");
+    final String stylesheet = options.getString("stylesheet");
+
+    Thread thread = new Thread(new Runnable(){
+      @Override
+      public void run(){
+        String string = emdros.string(from, to, stylesheet);
+        promise.resolve(string);
+      }
+    });
+    thread.start();
   }
 
   @ReactMethod
-  public void wordsInMonads(ReadableMap options, Promise promise) {
+  public void wordsInMonads(ReadableMap options, final Promise promise) {
     String name = options.getString("name");
-    Emdros emdros = this.openedDatabases.get(name);
+    final Emdros emdros = this.openedDatabases.get(name);
 
-    long[][] monads;
+    final long[][] monads;
     if (options.hasKey("from") && options.hasKey("to")) {
       long from = options.getInt("from");
       long to = options.getInt("to");
@@ -109,39 +117,45 @@ public class EmdrosModule extends ReactContextBaseJavaModule {
       monads[0][1] = MAX_MONAD;
     }
 
-    int limit = options.hasKey("limit") ? options.getInt("limit") : 0;
-    boolean useStopWords = options.hasKey("useStopWords") ? options.getBoolean("useStopWords") : false;
+    final int limit = options.hasKey("limit") ? options.getInt("limit") : 0;
+    final boolean useStopWords = options.hasKey("useStopWords") ? options.getBoolean("useStopWords") : false;
 
-    Map<String,Integer> wordCountMap = emdros.words(monads, limit, useStopWords);
-    Set<Entry<String,Integer>> wordCountEntries = wordCountMap.entrySet();
-    List<Entry<String,Integer>> wordCountList = new LinkedList<Entry<String,Integer>>(wordCountEntries);
-
-    Collections.sort(wordCountList, new Comparator<Entry<String,Integer>>() {
+    Thread thread = new Thread(new Runnable(){
       @Override
-      public int compare(Entry<String, Integer> a, Entry<String, Integer> b) {
-        return b.getValue().compareTo(a.getValue());
+      public void run(){
+        Map<String,Integer> wordCountMap = emdros.words(monads, limit, useStopWords);
+        Set<Entry<String,Integer>> wordCountEntries = wordCountMap.entrySet();
+        List<Entry<String,Integer>> wordCountList = new LinkedList<Entry<String,Integer>>(wordCountEntries);
+
+        Collections.sort(wordCountList, new Comparator<Entry<String,Integer>>() {
+          @Override
+          public int compare(Entry<String, Integer> a, Entry<String, Integer> b) {
+            return b.getValue().compareTo(a.getValue());
+          }
+        });
+
+        if (limit > 0) wordCountList = wordCountList.subList(0, Math.min(limit, wordCountList.size()));
+
+        WritableArray wordCounts = Arguments.createArray();
+        for (Entry<String,Integer> word: wordCountList) {
+          WritableMap wordCount = Arguments.createMap();
+          wordCount.putString("string", word.getKey());
+          wordCount.putInt("count", word.getValue());
+          wordCounts.pushMap(wordCount);
+        }
+
+        promise.resolve(wordCounts);
       }
     });
-
-    if (limit > 0) wordCountList = wordCountList.subList(0, Math.min(limit, wordCountList.size()));
-
-    WritableArray wordCounts = Arguments.createArray();
-    for (Entry<String,Integer> word: wordCountList) {
-      WritableMap wordCount = Arguments.createMap();
-      wordCount.putString("string", word.getKey());
-      wordCount.putInt("count", word.getValue());
-      wordCounts.pushMap(wordCount);
-    }
-
-    promise.resolve(wordCounts);
+    thread.start();
   }
 
   @ReactMethod
-  public void wordCountsForContext(ReadableMap options, Promise promise) {
+  public void wordCountsForContext(ReadableMap options, final Promise promise) {
     String name = options.getString("name");
-    Emdros emdros = this.openedDatabases.get(name);
+    final Emdros emdros = this.openedDatabases.get(name);
 
-    long[][] monads;
+    final long[][] monads;
     if (options.hasKey("monads")) {
       ReadableArray monadArray = options.getArray("monads");
       int size = monadArray.size();
@@ -157,32 +171,38 @@ public class EmdrosModule extends ReactContextBaseJavaModule {
       monads[0][1] = MAX_MONAD;
     }
 
-    String context = options.hasKey("context") ? options.getString("context") : "";
-    String contextFeatureComparison = options.hasKey("contextFeatureComparison") ? options.getString("contextFeatureComparison") : "";
-    String tokenFeatureComparison = options.hasKey("tokenFeatureComparison") ? options.getString("tokenFeatureComparison") : "";
+    final String context = options.hasKey("context") ? options.getString("context") : "";
+    final String contextFeatureComparison = options.hasKey("contextFeatureComparison") ? options.getString("contextFeatureComparison") : "";
+    final String tokenFeatureComparison = options.hasKey("tokenFeatureComparison") ? options.getString("tokenFeatureComparison") : "";
 
-    Map<Long,Map<String,Integer>> wordCountMap = emdros.wordCountsForContext(context, monads, contextFeatureComparison, tokenFeatureComparison);
-    Set<Entry<Long,Map<String,Integer>>> wordCountEntries = wordCountMap.entrySet();
+    Thread thread = new Thread(new Runnable(){
+      @Override
+      public void run(){
+        Map<String,Map<String,Integer>> wordCountMap = emdros.wordCountsForContext(context, monads, contextFeatureComparison, tokenFeatureComparison);
+        Set<Entry<String,Map<String,Integer>>> wordCountEntries = wordCountMap.entrySet();
 
-    WritableMap wordCounts = Arguments.createMap();
-    for (Entry<Long,Map<String,Integer>> word: wordCountEntries) {
-      String contextID = word.getKey().toString();
-      Map<String,Integer> wordMap = word.getValue();
+        WritableMap wordCounts = Arguments.createMap();
+        for (Entry<String,Map<String,Integer>> word: wordCountEntries) {
+          String contextID = word.getKey();
+          Map<String,Integer> wordMap = word.getValue();
 
-      WritableMap wordCount = Arguments.createMap();
-      wordCount.putInt("wordCount", wordMap.get("wordCount"));
-      wordCount.putInt("family", wordMap.get("family"));
-      wordCount.putInt("economics", wordMap.get("economics"));
-      wordCount.putInt("government", wordMap.get("government"));
-      wordCount.putInt("religion", wordMap.get("religion"));
-      wordCount.putInt("education", wordMap.get("education"));
-      wordCount.putInt("communication", wordMap.get("communication"));
-      wordCount.putInt("celebration", wordMap.get("celebration"));
+          WritableMap wordCount = Arguments.createMap();
+          wordCount.putInt("wordCount", wordMap.get("wordCount"));
+          wordCount.putInt("family", wordMap.get("family"));
+          wordCount.putInt("economics", wordMap.get("economics"));
+          wordCount.putInt("government", wordMap.get("government"));
+          wordCount.putInt("religion", wordMap.get("religion"));
+          wordCount.putInt("education", wordMap.get("education"));
+          wordCount.putInt("communication", wordMap.get("communication"));
+          wordCount.putInt("celebration", wordMap.get("celebration"));
 
-      wordCounts.putMap(contextID, wordCount);
-    }
+          wordCounts.putMap(contextID, wordCount);
+        }
 
-    promise.resolve(wordCounts);
+        promise.resolve(wordCounts);
+      }
+    });
+    thread.start();
   }
 
   @Override
