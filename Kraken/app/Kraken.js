@@ -21,6 +21,7 @@ const { seedChapterObjects, seedChapters } = require('./seeds/chapters');
 const { seedActantObjects, seedActants } = require('./seeds/actants');
 const { seedSphereObjects, seedSpheres } = require('./seeds/spheres');
 const { seedBSOObjects, seedBSO } = require('./seeds/bso');
+const { seedObjectWordCloud } = require('./common');
 
 export async function release() {
   console.log('Release the Kraken!');
@@ -61,8 +62,11 @@ async function seedBaseObjects(emdros) {
 async function seedBible(emdros: Object, realm) {
   console.log('Seeding Bible');
 
+  const from = realm.objectForPrimaryKey('Book', 'genesis');
+  const to = realm.objectForPrimaryKey('Book', 'revelation');
+  const words = await emdros.words({from: from.firstMonad, to: to.lastMonad});
+
   realm.write(() => {
-    const wordCount = realm.objects('Book').reduce((sum, book) => sum += book.wordCount, 0);
-    realm.create('Bible', {wordCount});
-  })
+    seedObjectWordCloud(realm, 'Bible', 0, words);
+  });
 }

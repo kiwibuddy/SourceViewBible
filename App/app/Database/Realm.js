@@ -124,8 +124,11 @@ function BSOReferencesInText(text: string) {
 
 const BibleSchema = {
   name: 'Bible',
+  primaryKey: 'id',
   properties: {
+    id: 'int',
     wordCount: 'int',
+    words: {type: 'list', objectType: 'Count'},
   }
 };
 

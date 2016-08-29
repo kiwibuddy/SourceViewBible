@@ -68,7 +68,8 @@ export default class SpheresFilter extends Component {
 
     const selected = spheres.indexOf(sphere.id) != -1;
     const iconName = `${sphere.id}-filled`;
-    const statusStyle = (selected ? styles.statusLabelSelected : {});
+    const statusStyle = (selected ? styles.statusSelected : {});
+    const statusLabelStyle = (selected ? {color: 'white'} : {});
     const status = (selected ? Localizable.t('added') : Localizable.t('add'));
     return (
       <TouchableWithoutFeedback key={sphere.id} onPress={() => this._onPressSphere(sphere)}>
@@ -82,8 +83,8 @@ export default class SpheresFilter extends Component {
               />
               <Text style={[StyleSheet.styles.cell.title]}>{Localizable.t(sphere.id)}</Text>
             </View>
-            <View style={styles.cellRightContainer}>
-              <Text style={[styles.statusLabel, statusStyle]}>{status}</Text>
+            <View style={[styles.cellRightContainer, statusStyle]}>
+              <Text style={[styles.statusLabel, statusLabelStyle]}>{status}</Text>
             </View>
           </View>
         </View>
@@ -140,8 +141,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     color: Colors.tint,
   },
-  statusLabelSelected: {
-    color: 'white',
+  statusSelected: {
     backgroundColor: Colors.tint,
     borderRadius: 4,
     padding: 4,
