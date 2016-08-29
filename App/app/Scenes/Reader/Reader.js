@@ -82,11 +82,13 @@ class OccurrenceToolbar extends Component {
             disabled={previousRoute == null}
             imageSource={require('../../Images/common/previous.png')}
             onPress={() => previousRoute && this._navigate(previousRoute)}
+            style={{width: 30, height: 30}}
           />
           <ToolbarButton
             disabled={nextRoute == null}
             imageSource={require('../../Images/common/next.png')}
             onPress={() => nextRoute && this._navigate(nextRoute)}
+            style={{width: 30, height: 30}}
           />
         </View>
         <ToolbarButton
