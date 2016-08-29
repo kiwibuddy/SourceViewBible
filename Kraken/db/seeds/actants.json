@@ -6135,30 +6135,6 @@
     "isRecipient": true
   },
   {
-    "id": 236,
-    "actant_number_id": 2,
-    "gender_id": 2,
-    "name": "The Preacher",
-    "firstInitial": "T",
-    "actantNumber": 2,
-    "chronologies": [
-      {
-        "id": 1
-      }
-    ],
-    "gender": 2,
-    "natures": [
-      {
-        "id": 4
-      }
-    ],
-    "professions": [
-
-    ],
-    "isSource": true,
-    "isRecipient": false
-  },
-  {
     "id": 237,
     "actant_number_id": 2,
     "gender_id": 2,
@@ -6724,32 +6700,6 @@
       },
       {
         "id": 30
-      }
-    ],
-    "isSource": true,
-    "isRecipient": true
-  },
-  {
-    "id": 257,
-    "actant_number_id": 2,
-    "gender_id": 2,
-    "name": "The Preacher",
-    "firstInitial": "T",
-    "actantNumber": 2,
-    "chronologies": [
-      {
-        "id": 1
-      }
-    ],
-    "gender": 2,
-    "natures": [
-      {
-        "id": 4
-      }
-    ],
-    "professions": [
-      {
-        "id": 4
       }
     ],
     "isSource": true,
@@ -20034,38 +19984,6 @@
     ],
     "isSource": false,
     "isRecipient": true
-  },
-  {
-    "id": 766,
-    "actant_number_id": 2,
-    "gender_id": 1,
-    "name": "The Preacher",
-    "firstInitial": "T",
-    "actantNumber": 2,
-    "chronologies": [
-      {
-        "id": 1
-      }
-    ],
-    "gender": 1,
-    "natures": [
-      {
-        "id": 4
-      }
-    ],
-    "professions": [
-      {
-        "id": 4
-      },
-      {
-        "id": 5
-      },
-      {
-        "id": 51
-      }
-    ],
-    "isSource": true,
-    "isRecipient": false
   },
   {
     "id": 767,

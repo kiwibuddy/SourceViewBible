@@ -1,7 +1,8 @@
 STDERR.puts "Seeding Actants"
 
+exclude_actants = [236, 257, 766]; # Word around Hebrews. Need to change these number if we get a new data dump
 actants = []
-EMDROS[:actant_objects].each do |actant_object|
+EMDROS[:actant_objects].where('mdf_actant_id NOT IN ?', exclude_actants).each do |actant_object|
 	actant = {
 		id: actant_object[:mdf_actant_id],
 		actant_number_id: actant_object[:mdf_source_number],
