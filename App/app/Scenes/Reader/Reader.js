@@ -176,7 +176,7 @@ export default class Reader extends Component {
     this._setScripture(bookID, anchor);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const { bookID, anchor } = this.props;
     this._setScripture(bookID, anchor);
   }
@@ -186,7 +186,8 @@ export default class Reader extends Component {
   }
 
   render() {
-    const html = (this.state.loading ? LOADING_HTML : {html: this.state.scripture});
+    if (this.state.loading) return this._renderLoading();
+
     const injectedJavaScript = this._renderInjectedJavascript();
     const key = (this.props.anchor ? `anchor-${this.props.anchor}` : 'webview');
 
@@ -196,14 +197,23 @@ export default class Reader extends Component {
       <View key={key} style={styles.container}>
         {filterBar}
         <WebView
+          key="scripture"
           decelerationRate='normal'
           injectedJavaScript={injectedJavaScript}
           style={styles.webview}
-          source={html}
+          source={{html: this.state.scripture}}
         />
       </View>
     );
   }
+
+  _renderLoading = () => {
+    return (
+      <View style={[styles.container, {backgroundColor: 'gray'}]}>
+
+      </View>
+    );
+  };
 
   _renderFilterBar = () => {
     const spheres = Preference.objectForKey(Preference.Keys.Reader.spheres) || [];
