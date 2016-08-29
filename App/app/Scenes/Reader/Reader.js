@@ -262,11 +262,10 @@ export default class Reader extends Component {
       if (this.shouldFetchScripture) {
         const scripture = this._renderScripture(content);
 
-        if (__DEV__) {
+        if (__DEV__ && Platform.OS === 'ios') {
           this._debugScripture(scripture);
         }
 
-        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
         this.setState({
           bookID,
           anchor,
