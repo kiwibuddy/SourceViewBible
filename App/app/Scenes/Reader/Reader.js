@@ -230,13 +230,13 @@ export default class Reader extends Component {
     );
   };
 
-  _setScripture = (bookID: string, anchor?: string) => {
+  _setScripture = (bookID: string, anchor?: string, force?: boolean = false) => {
     const book = Book.findByID(bookID);
 
     const spheres = Preference.objectForKey(Preference.Keys.Reader.spheres) || [];
     const options = {monadSet: book.monadSet, spheres};
 
-    if (bookID !== this.state.bookID || anchor !== this.state.anchor) {
+    if (force || bookID !== this.state.bookID || anchor !== this.state.anchor) {
       this.setState({loading: true});
     }
 
@@ -311,7 +311,7 @@ export default class Reader extends Component {
 
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     Preference.setObjectForKey([], Preference.Keys.Reader.spheres);
-    this._setScripture(bookID, anchor);
+    this._setScripture(bookID, anchor, true);
   };
 
   _debugScripture(scripture: string) {
