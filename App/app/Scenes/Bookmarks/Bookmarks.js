@@ -181,9 +181,7 @@ export default class Bookmarks extends Component {
   };
 
   _navigate = (route: Object) => {
-    this.props.navigate(BACK, () => {
-      this.props.navigate(route);
-    });
+    this.props.navigate(route, {replace: true});
   };
 
   _getDataSource = (segmentIndex: number) => {

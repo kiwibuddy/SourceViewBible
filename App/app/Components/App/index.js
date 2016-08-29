@@ -249,7 +249,7 @@ export default class App extends Component {
 
   _navigate = (route: any, options?: any) => {
     if (route === BACK) {
-      this._popRoute(options);
+      this._popRoute();
     } else if (options && options.replace) {
       this._replaceCurrentRoute(route);
     } else {
@@ -317,7 +317,7 @@ export default class App extends Component {
     Analytics.logRoute(route);
   };
 
-  _popRoute = (callback?: Function) => {
+  _popRoute = () => {
     const state = this.state.navigation;
     if (state.index <= 0) {
       // [Note]: Over-popping does not throw error. Instead, it will be no-op.

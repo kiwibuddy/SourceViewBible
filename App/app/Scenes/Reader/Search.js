@@ -166,10 +166,7 @@ export default class ReaderSearch extends Component {
 
   _navigate = (url: Object) => {
     this._textInput.blur();
-
-    this.props.navigate(BACK, () => {
-      this.props.navigate(url);
-    });
+    this.props.navigate(url, {replace: true});
   };
 
   _routeFromReference = (reference: Object) => {

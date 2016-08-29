@@ -206,8 +206,6 @@ export default class Reader extends Component {
           injectedJavaScript={injectedJavaScript}
           style={styles.webview}
           source={html}
-          onError={(error) => console.log('Error Loading Scripture', error)}
-          onLoad={() => console.log('Done Loading loadingState: ', this.state.loading)}
         />
       </View>
     );
