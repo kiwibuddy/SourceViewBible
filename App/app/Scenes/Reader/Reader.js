@@ -186,7 +186,7 @@ export default class Reader extends Component {
   }
 
   render() {
-    if (this.state.loading) return this._renderLoading();
+    if (this.state.loading || true) return this._renderLoading();
 
     const injectedJavaScript = this._renderInjectedJavascript();
     const key = (this.props.anchor ? `anchor-${this.props.anchor}` : 'webview');
