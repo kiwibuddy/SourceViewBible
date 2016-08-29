@@ -192,12 +192,12 @@ export default class Reader extends Component {
   }
 
   render() {
-    if (this.state.loading) return this._renderLoading();
+    const html = (this.state.loading ? LOADING_HTML : {html: this.state.scripture});
+    const injectedJavaScript = this._renderInjectedJavascript();
+    const key = (this.props.anchor ? `anchor-${this.props.anchor}` : 'webview');
 
     const filterBar = this._renderFilterBar();
 
-    const injectedJavaScript = this._renderInjectedJavascript();
-    const key = (this.props.anchor ? `anchor-${this.props.anchor}` : 'webview');
     return (
       <View key={key} style={styles.container}>
         {filterBar}
@@ -205,23 +205,13 @@ export default class Reader extends Component {
           decelerationRate='normal'
           injectedJavaScript={injectedJavaScript}
           style={styles.webview}
-          source={{html: this.state.scripture}}
+          source={html}
+          onError={(error) => console.log('Error Loading Scripture', error)}
+          onLoad={() => console.log('Done Loading loadingState: ', this.state.loading)}
         />
       </View>
     );
   }
-
-  _renderLoading = () => {
-    const key = (this.props.anchor ? `anchor-${this.props.anchor}` : 'webview');
-    return (
-      <View key={key} style={styles.container}>
-        <WebView
-          style={styles.webview}
-          source={LOADING_HTML}
-        />
-      </View>
-    );
-  };
 
   _renderFilterBar = () => {
     const spheres = Preference.objectForKey(Preference.Keys.Reader.spheres) || [];
@@ -300,7 +290,7 @@ export default class Reader extends Component {
   };
 
   _renderInjectedJavascript = () => {
-    if (!this.props.anchor) return null;
+    if (!this.props.anchor || this.state.loading) return null;
 
     const isPsalms = this.props.bookID == 'psalms';
 
