@@ -33,6 +33,14 @@ JNIEXPORT jobject JNICALL Java_com_sourceviewbible_emdros_Emdros_words
 
 /*
  * Class:     com_sourceviewbible_emdros_Emdros
+ * Method:    wordCountsForContext
+ * Signature: (Ljava/lang/String;[[JLjava/lang/String;Ljava/lang/String;)Ljava/util/Map;
+ */
+JNIEXPORT jobject JNICALL Java_com_sourceviewbible_emdros_Emdros_wordCountsForContext
+  (JNIEnv *, jobject, jstring, jobjectArray, jstring, jstring);
+
+/*
+ * Class:     com_sourceviewbible_emdros_Emdros
  * Method:    dispose
  * Signature: ()V
  */

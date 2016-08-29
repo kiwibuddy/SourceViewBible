@@ -88,7 +88,6 @@ public class EmdrosModule extends ReactContextBaseJavaModule {
     Emdros emdros = this.openedDatabases.get(name);
 
     long[][] monads;
-
     if (options.hasKey("from") && options.hasKey("to")) {
       long from = options.getInt("from");
       long to = options.getInt("to");
@@ -132,6 +131,55 @@ public class EmdrosModule extends ReactContextBaseJavaModule {
       wordCount.putString("string", word.getKey());
       wordCount.putInt("count", word.getValue());
       wordCounts.pushMap(wordCount);
+    }
+
+    promise.resolve(wordCounts);
+  }
+
+  @ReactMethod
+  public void wordCountsForContext(ReadableMap options, Promise promise) {
+    String name = options.getString("name");
+    Emdros emdros = this.openedDatabases.get(name);
+
+    long[][] monads;
+    if (options.hasKey("monads")) {
+      ReadableArray monadArray = options.getArray("monads");
+      int size = monadArray.size();
+      monads = new long[size][2];
+      for (int i = 0; i < size; i++) {
+        ReadableArray monad = monadArray.getArray(i);
+        monads[i][0] = monad.getInt(0);
+        monads[i][1] = monad.getInt(1);
+      }
+    } else {
+      monads = new long[1][2];
+      monads[0][0] = 1;
+      monads[0][1] = MAX_MONAD;
+    }
+
+    String context = options.hasKey("context") ? options.getString("context") : "";
+    String contextFeatureComparison = options.hasKey("contextFeatureComparison") ? options.getString("contextFeatureComparison") : "";
+    String tokenFeatureComparison = options.hasKey("tokenFeatureComparison") ? options.getString("tokenFeatureComparison") : "";
+
+    Map<Long,Map<String,Integer>> wordCountMap = emdros.wordCountsForContext(context, monads, contextFeatureComparison, tokenFeatureComparison);
+    Set<Entry<Long,Map<String,Integer>>> wordCountEntries = wordCountMap.entrySet();
+
+    WritableMap wordCounts = Arguments.createMap();
+    for (Entry<Long,Map<String,Integer>> word: wordCountEntries) {
+      String contextID = word.getKey().toString();
+      Map<String,Integer> wordMap = word.getValue();
+
+      WritableMap wordCount = Arguments.createMap();
+      wordCount.putInt("wordCount", wordMap.get("wordCount"));
+      wordCount.putInt("family", wordMap.get("family"));
+      wordCount.putInt("economics", wordMap.get("economics"));
+      wordCount.putInt("government", wordMap.get("government"));
+      wordCount.putInt("religion", wordMap.get("religion"));
+      wordCount.putInt("education", wordMap.get("education"));
+      wordCount.putInt("communication", wordMap.get("communication"));
+      wordCount.putInt("celebration", wordMap.get("celebration"));
+
+      wordCounts.putMap(contextID, wordCount);
     }
 
     promise.resolve(wordCounts);

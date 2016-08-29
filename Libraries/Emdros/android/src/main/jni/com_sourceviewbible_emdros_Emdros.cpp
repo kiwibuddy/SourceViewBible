@@ -48,6 +48,12 @@ static jobject makeIntegerObject(JNIEnv *env, int value) {
     return env->NewObject(clazz, integerConstructID, value);
 }
 
+static jobject makeLongObject(JNIEnv *env, int64_t value) {
+    jclass clazz = env->FindClass("java/lang/Long");
+    jmethodID longConstructID = env->GetMethodID(clazz, "<init>", "(J)V");
+    return env->NewObject(clazz, longConstructID, value);
+}
+
 void Java_com_sourceviewbible_emdros_Emdros_connect(JNIEnv *env, jobject obj, jstring jdatabasePath) {
   std::string databasePath;
   GetJStringContent(env, jdatabasePath, databasePath);
@@ -101,7 +107,6 @@ jobject Java_com_sourceviewbible_emdros_Emdros_words(JNIEnv *env, jobject obj, j
   EmdrosEnv *emdrosEnv = getEmdrosEnv<EmdrosEnv>(env, obj);
 
   jsize size = env->GetArrayLength(jmonads);
-
   SetOfMonads soms;
   for (int i = 0; i < size; i++) {
     jlongArray jmonad = static_cast<jlongArray>(env->GetObjectArrayElement(jmonads, i));
@@ -113,6 +118,7 @@ jobject Java_com_sourceviewbible_emdros_Emdros_words(JNIEnv *env, jobject obj, j
       env->DeleteLocalRef(jmonad);
     }
   }
+
   std::set<std::string> stopwords;
   if (useStopWords) stopwords = RCTStopwords;
 
@@ -125,7 +131,6 @@ jobject Java_com_sourceviewbible_emdros_Emdros_words(JNIEnv *env, jobject obj, j
   jmethodID putMethod = env->GetMethodID(clazz, "put", "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;");
 
   jobject words = env->NewObject(clazz, init);
-
   typedef std::map<std::string, int>::iterator iterator_type;
   for (iterator_type iterator = wordCountMap.begin(); iterator != wordCountMap.end(); ++iterator) {
     jstring word = env->NewStringUTF(iterator->first.c_str());
@@ -137,6 +142,62 @@ jobject Java_com_sourceviewbible_emdros_Emdros_words(JNIEnv *env, jobject obj, j
   }
 
   return words;
+}
+
+jobject Java_com_sourceviewbible_emdros_Emdros_wordCountsForContext(JNIEnv *env, jobject obj, jstring jcontext, jobjectArray jmonads, jstring jcontextFeatureComparison, jstring jtokenFeatureComparison) {
+  EmdrosEnv *emdrosEnv = getEmdrosEnv<EmdrosEnv>(env, obj);
+
+  jsize size = env->GetArrayLength(jmonads);
+  SetOfMonads soms;
+  for (int i = 0; i < size; i++) {
+    jlongArray jmonad = static_cast<jlongArray>(env->GetObjectArrayElement(jmonads, i));
+    if (jmonad) {
+      jlong *monad = env->GetLongArrayElements(jmonad, 0);
+      SetOfMonads som(monad[0], monad[1]);
+      soms.unionWith(som);
+      env->ReleaseLongArrayElements(jmonad, monad, 0);
+      env->DeleteLocalRef(jmonad);
+    }
+  }
+
+  std::string context;
+  GetJStringContent(env, jcontext, context);
+
+  std::string contextFeatureComparison;
+  GetJStringContent(env, jcontextFeatureComparison, contextFeatureComparison);
+
+  std::string tokenFeatureComparison;
+  GetJStringContent(env, jtokenFeatureComparison, tokenFeatureComparison);
+
+  std::string errorMessage;
+  ID_D2WordCountsMap wordCountMap;
+  bool result = getWordCountsInContext(emdrosEnv, soms, context, contextFeatureComparison, tokenFeatureComparison, wordCountMap, errorMessage);
+
+  jclass clazz = env->FindClass("java/util/HashMap");
+  jmethodID init = env->GetMethodID(clazz, "<init>", "()V");
+  jmethodID putMethod = env->GetMethodID(clazz, "put", "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;");
+
+  jobject wordCounts = env->NewObject(clazz, init);
+  typedef ID_D2WordCountsMap::iterator iterator_type;
+  for (iterator_type iterator = wordCountMap.begin(); iterator != wordCountMap.end(); ++iterator) {
+    jobject contextID = makeLongObject(env, iterator->first);
+
+    jobject wordCount = env->NewObject(clazz, init);
+    env->CallObjectMethod(wordCount, putMethod, env->NewStringUTF("wordCount"), makeIntegerObject(env, iterator->second.m_word_count));
+    env->CallObjectMethod(wordCount, putMethod, env->NewStringUTF("family"), makeIntegerObject(env, iterator->second.m_Family));
+    env->CallObjectMethod(wordCount, putMethod, env->NewStringUTF("economics"), makeIntegerObject(env, iterator->second.m_Economics));
+    env->CallObjectMethod(wordCount, putMethod, env->NewStringUTF("government"), makeIntegerObject(env, iterator->second.m_Government));
+    env->CallObjectMethod(wordCount, putMethod, env->NewStringUTF("religion"), makeIntegerObject(env, iterator->second.m_Religion));
+    env->CallObjectMethod(wordCount, putMethod, env->NewStringUTF("education"), makeIntegerObject(env, iterator->second.m_Education));
+    env->CallObjectMethod(wordCount, putMethod, env->NewStringUTF("communication"), makeIntegerObject(env, iterator->second.m_MediaCom));
+    env->CallObjectMethod(wordCount, putMethod, env->NewStringUTF("celebration"), makeIntegerObject(env, iterator->second.m_Celebration));
+    env->CallObjectMethod(wordCounts, putMethod, contextID, wordCount);
+
+    env->DeleteLocalRef(contextID);
+    env->DeleteLocalRef(wordCount);
+  }
+
+  return wordCounts;
 }
 
 
