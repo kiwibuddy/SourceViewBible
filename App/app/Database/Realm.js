@@ -138,6 +138,11 @@ export class Bible extends Realm.Object {
     return bible.wordCount;
   }
 
+  static get words() {
+    const bible = realm.objects('Bible')[0];
+    return bible.words;
+  }
+
   static get oldTestamentWordCount() {
     return Book.whereIn(Book.identifiers(0)).reduce((wordCount, book) => wordCount + book.wordCount, 0);
   }

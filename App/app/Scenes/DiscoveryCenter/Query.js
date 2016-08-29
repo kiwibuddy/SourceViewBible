@@ -2,7 +2,7 @@
 'use strict';
 
 import Emdros from '../../API/Emdros';
-import { Actant, Book, BookSourceOccurrence, Chronology, Gender, Nature, Profession, Role, Sphere, SQLite, ComparisonPredicate, CompoundPredicate, RawPredicate, Predicate, rowsWithSQL } from '../../Database';
+import { Bible, Actant, Book, BookSourceOccurrence, Chronology, Gender, Nature, Profession, Role, Sphere, SQLite, ComparisonPredicate, CompoundPredicate, RawPredicate, Predicate, rowsWithSQL } from '../../Database';
 
 class SelectStatement {
   prefix: string;
@@ -52,9 +52,13 @@ class WhereClause {
   }
 
   toSQL() {
-    if (this.predicates.length == 0) return '';
+    if (this.isEmpty) return '';
     const predicate = CompoundPredicate.andPredicateWithSubpredicates(this.predicates);
     return `WHERE ${predicate.predicateFormat}`;
+  }
+
+  get isEmpty(): boolean {
+    return this.predicates.length == 0;
   }
 }
 
@@ -226,6 +230,13 @@ export default class Query {
   }
 
   async _monads() {
+    if (this.whereClause.isEmpty) {
+       return null;
+    } else if (this.filters.length == 1) {
+      const bookRangeFilter = this.filters.find(filter => filter.type === 'book-range');
+      if (bookRangeFilter && bookRangeFilter.books.fromID === 'genesis' && bookRangeFilter.books.toID === 'revelation') return null;
+    }
+
     const sql = this._sql('SELECT DISTINCT bso.id, bso.first, bso.last');
     const rows = await rowsWithSQL(sql);
     const monads = rows.map(row => [row['first'], row['last']]);
@@ -535,8 +546,15 @@ export default class Query {
   }
 
   async _words() {
-    const monads = await this._monads();
-    const words = await Emdros.words({monads, useStopWords: true, limit: 20});
+    let words = null;
+
+    let monads = await this._monads();
+    if (monads == null) {
+      words = Bible.words;
+    } else {
+      words = await Emdros.words({monads, useStopWords: true, limit: 20});
+    }
+
     return words.map(word => ({label: word.string, value: word.count}));
   }
 
