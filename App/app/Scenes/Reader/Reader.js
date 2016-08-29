@@ -9,12 +9,12 @@ import ReactNative from 'react-native';
 const {
   Image,
   LayoutAnimation,
+  Platform,
   ScrollView,
   Text,
   TouchableOpacity,
   View,
   WebView,
-  Platform,
 } = ReactNative;
 
 import {
@@ -146,14 +146,6 @@ export default class Reader extends Component {
         imageSource={require('../../Components/Navigation/Images/nav-filter.png')}
         onPress={() => props.navigate(readerSettingsURL({title: Localizable.t('settings'), modal: true}))}
       />
-    );
-  }
-
-  static renderMenuOptions(props: Object) {
-    return (
-      <MenuOptions key="reader-options">
-        <MenuOption text={Localizable.t('settings')} onSelect={() => props.navigate(readerSettingsURL({title: Localizable.t('settings'), modal: true}))}/>
-      </MenuOptions>
     );
   }
 

@@ -116,14 +116,24 @@ export default class App extends Component {
     if (Platform.OS === 'android') {
       const menu = this._renderMenu(Scene.renderMenuOptions, {...props, navigate: this._navigate});
 
+      let rightComponent = null;
+      if (Scene.renderNavigationHeaderRightComponent) {
+        rightComponent = Scene.renderNavigationHeaderRightComponent({...props, navigate: this._navigate});
+      }
+
       renderRightComponent = (props: Object) => {
+        const moreButtonStyle = (rightComponent ? {paddingLeft: 0} : {});
         return (
-          <View>
+          <View style={{flex: 1}}>
             {menu}
-            <NavigationBarButton
-              imageSource={require('../../Components/Navigation/Images/nav-more.png')}
-              onPress={() => this._menu.openMenu('menu')}
-            />
+            <View style={{flex: 1, flexDirection: 'row'}}>
+              {rightComponent}
+              <NavigationBarButton
+                imageSource={require('../../Components/Navigation/Images/nav-more.png')}
+                onPress={() => this._menu.openMenu('menu')}
+                style={moreButtonStyle}
+              />
+            </View>
           </View>
         );
       };

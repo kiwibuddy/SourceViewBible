@@ -5,6 +5,7 @@ import React, { Component, PropTypes } from 'react';
 const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
 
 import {
+  Platform,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -53,6 +54,8 @@ type State = {
 
 export default class BookOverview extends Component {
   static renderNavigationHeaderRightComponent(props: Object) {
+    if (Platform.OS === 'android') return null;
+
     return (
       <NavigationBarButton
         imageSource={require('../../Components/Navigation/Images/nav-help.png')}

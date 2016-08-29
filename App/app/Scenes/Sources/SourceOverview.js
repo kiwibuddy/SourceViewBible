@@ -8,10 +8,10 @@ import {
   Image,
   LayoutAnimation,
   ListView,
+  Platform,
   RecyclerViewBackedScrollView,
   Text,
   TouchableOpacity,
-  Platform,
   View,
 } from 'react-native';
 
@@ -73,6 +73,8 @@ type State = {
 
 export default class SourceOverview extends Component {
   static renderNavigationHeaderRightComponent(props: Object) {
+    if (Platform.OS === 'android') return null;
+
     return (
       <NavigationBarButton
         imageSource={require('../../Components/Navigation/Images/nav-help.png')}

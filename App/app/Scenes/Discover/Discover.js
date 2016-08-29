@@ -39,6 +39,8 @@ type Props = {
 
 export default class Discovery extends Component {
   static renderNavigationHeaderRightComponent(props: Object) {
+    if (Platform.OS === 'android') return null;
+    
     return (
       <NavigationBarButton
         imageSource={require('../../Components/Navigation/Images/nav-help.png')}

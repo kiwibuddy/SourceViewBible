@@ -8,6 +8,7 @@ import {
   Dimensions,
   Image,
   LayoutAnimation,
+  Platform,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -68,6 +69,8 @@ type State = {
 
 export default class Spheres extends Component {
   static renderNavigationHeaderRightComponent(props: Object) {
+    if (Platform.OS === 'android') return null;
+
     return (
       <NavigationBarButton
         imageSource={require('../../Components/Navigation/Images/nav-help.png')}
