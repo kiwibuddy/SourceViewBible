@@ -48,7 +48,6 @@ book_source_occurrences = EMDROS[sql, SOURCE_NARRATOR_ID].map do |source_object|
   end
 
   bso.merge({
-    actant_id: source_object[:mdf_actant_id],
     name: source_object[:name],
     reference: reference
   })

@@ -3,7 +3,7 @@ STDERR.puts "Seeding BSO Actants"
 source_actant_narrator_id = EMDROS[:sourceactant_mdf_real_name_set]["string_value = ?", THE_NARRATOR][:id_d]
 
 ["source", "recipient"].each do |type|
-  actants = EMDROS["#{type}actant_objects".to_sym]
+  actants = EMDROS["#{type}actant_objects".to_sym].where('mdf_actant_id NOT IN ?', EXCLUDE_ACTANTS)
   actants = actants.where("mdf_real_name != ?", source_actant_narrator_id) if type == "source"
   actants.each do |bso_actant_object|
     id = bso_actant_object[:object_id_d]
