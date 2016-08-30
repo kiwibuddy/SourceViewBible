@@ -166,6 +166,16 @@ export default class Popover extends Component {
           RightButton: function(route, navigator, index, navState) {
             if (route.path !== '/DiscoveryCenter/Filters/SpheresFilter') return null;
 
+            if (Platform.OS === 'android') {
+              return (
+                <TouchableOpacity
+                  onPress={() => eventEmitter.emit('onPressDone')}
+                  style={styles.navBarRightButton}>
+                  <Image source={require('../../Components/Navigation/Images/checkmark-icon.png')} style={{width: 24, height: 24, tintColor: Colors.tint}} />
+                </TouchableOpacity>
+              );
+            }
+
             return (
               <TouchableOpacity
                 onPress={() => eventEmitter.emit('onPressDone')}
@@ -270,13 +280,19 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     ...Platform.select({
       android: {
-        paddingLeft: 10,
-        paddingTop: 16,
+        paddingHorizontal: 10,
+        paddingVertical: 16,
       },
     })
   },
   navBarRightButton: {
     paddingRight: 10,
+    ...Platform.select({
+      android: {
+        paddingHorizontal: 10,
+        paddingVertical: 16,
+      },
+    })
   },
   navBarButtonText: {
     color: Colors.tint,
