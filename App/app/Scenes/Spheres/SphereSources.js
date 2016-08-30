@@ -119,7 +119,7 @@ export default class SphereSources extends Component {
             autoFocus={false}
             clearButtonMode="always"
             onChangeText={(text) => this.setState({search: text})}
-            placeholder={Localizable.t('name')}
+            placeholder={Localizable.t('search-name')}
             style={styles.textInput}
             value={this.state.search || ''}
           />

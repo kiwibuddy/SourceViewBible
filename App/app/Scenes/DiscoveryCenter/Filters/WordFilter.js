@@ -60,7 +60,7 @@ class WordFilter extends Component {
           clearButtonMode="always"
           onChangeText={(text) => this.setState({word: text})}
           onSubmitEditing={(text) => this.props.onDone(cardWithFilter(this.props.card, filterWord(this.props.filter, this.state.word)))}
-          placeholder="Word"
+          placeholder={Localizable.t('word')}
           style={styles.textInput}
           value={this.state.word}
         />

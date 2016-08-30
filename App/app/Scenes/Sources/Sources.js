@@ -46,7 +46,7 @@ export default class Sources extends Component {
   static NavigationHeaderStyle = {
     elevation: null
   };
-  
+
   props: Props;
   state: State;
 
@@ -75,7 +75,7 @@ export default class Sources extends Component {
             autoFocus={false}
             clearButtonMode="always"
             onChangeText={(text) => this._onSearch(text)}
-            placeholder={Localizable.t('name')}
+            placeholder={Localizable.t('search-name')}
             style={styles.textInput}
             value={this.state.search || ''}
           />
