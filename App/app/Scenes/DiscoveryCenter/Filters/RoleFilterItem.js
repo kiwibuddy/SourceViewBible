@@ -28,7 +28,7 @@ type Props = {
 const RoleFilterItem = (props: Props) => {
   const { roleID, actantType } = props.filter;
   const role = Role.findByID(roleID);
-  
+
   return (
     <View>
       <View style={StyleSheet.styles.discoveryCenter.topContainer}>
@@ -40,11 +40,11 @@ const RoleFilterItem = (props: Props) => {
       </View>
       <View style={StyleSheet.styles.discoveryCenter.bottomContainer}>
         <Text>Role is</Text>
-        <TouchableOpacity style={styles.filterButton} onPress={() => props.onPressEditFilter(roleFilterURL({title: Localizable.t('role'), filter: props.filter}))}>
+        <TouchableOpacity hitSlop={{top: 10, left: 5, bottom: 10, right: 0}} style={styles.filterButton} onPress={() => props.onPressEditFilter(roleFilterURL({title: Localizable.t('role'), filter: props.filter}))}>
           <Text style={styles.filterButtonTitle}>{Localizable.t('roles.' + role.key)}</Text>
           <Image source={require('../Images/chart-icn-dropdown-filter.png')} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.filterDelete} onPress={props.onPressDeleteFilter}>
+        <TouchableOpacity hitSlop={{top: 10, left: 5, bottom: 10, right:5}} style={styles.filterDelete} onPress={props.onPressDeleteFilter}>
           <Image source={require('../Images/chart-icn-filter-delete.png')} />
         </TouchableOpacity>
       </View>

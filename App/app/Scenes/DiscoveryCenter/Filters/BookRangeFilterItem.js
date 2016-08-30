@@ -40,16 +40,16 @@ const BookRangeFilterItem = (props: Props) => {
       </View>
       <View style={StyleSheet.styles.discoveryCenter.bottomContainer}>
         <Text>From</Text>
-        <TouchableOpacity style={styles.filterButton} onPress={() => props.onPressEditFilter(booksFilterURL({title: 'From', filter: props.filter, item: 'from'}))}>
+        <TouchableOpacity hitSlop={{top: 10, left: 5, bottom: 10, right: 0}} style={styles.filterButton} onPress={() => props.onPressEditFilter(booksFilterURL({title: 'From', filter: props.filter, item: 'from'}))}>
           <Text style={styles.filterButtonTitle}>{from.name}</Text>
           <Image source={require('../Images/chart-icn-dropdown-filter.png')} />
         </TouchableOpacity>
         <Text>To</Text>
-        <TouchableOpacity style={styles.filterButton} onPress={() => props.onPressEditFilter(booksFilterURL({title: 'To', filter: props.filter, item: 'to'}))}>
+        <TouchableOpacity hitSlop={{top: 10, left: 5, bottom: 10, right: 0}} style={styles.filterButton} onPress={() => props.onPressEditFilter(booksFilterURL({title: 'To', filter: props.filter, item: 'to'}))}>
           <Text style={styles.filterButtonTitle}>{to.name}</Text>
           <Image source={require('../Images/chart-icn-dropdown-filter.png')} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.filterDelete} onPress={props.onPressDeleteFilter}>
+        <TouchableOpacity hitSlop={{top: 10, left: 5, bottom: 10, right:5}} style={styles.filterDelete} onPress={props.onPressDeleteFilter}>
           <Image source={require('../Images/chart-icn-filter-delete.png')} />
         </TouchableOpacity>
       </View>

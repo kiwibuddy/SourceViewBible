@@ -40,11 +40,11 @@ const GenderFilterItem = (props: Props) => {
       </View>
       <View style={StyleSheet.styles.discoveryCenter.bottomContainer}>
         <Text>Is</Text>
-        <TouchableOpacity style={styles.filterButton} onPress={() => props.onPressEditFilter(genderFilterURL({title: Localizable.t('gender'), filter: props.filter}))}>
+        <TouchableOpacity hitSlop={{top: 10, left: 5, bottom: 10, right: 0}} style={styles.filterButton} onPress={() => props.onPressEditFilter(genderFilterURL({title: Localizable.t('gender'), filter: props.filter}))}>
           <Text style={styles.filterButtonTitle}>{Localizable.t('genders.' + gender.key)}</Text>
           <Image source={require('../Images/chart-icn-dropdown-filter.png')} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.filterDelete} onPress={props.onPressDeleteFilter}>
+        <TouchableOpacity hitSlop={{top: 10, left: 5, bottom: 10, right:5}} style={styles.filterDelete} onPress={props.onPressDeleteFilter}>
           <Image source={require('../Images/chart-icn-filter-delete.png')} />
         </TouchableOpacity>
       </View>

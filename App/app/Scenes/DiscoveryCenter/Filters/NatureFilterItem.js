@@ -28,7 +28,7 @@ type Props = {
 const NatureFilterItem = (props: Props) => {
   const { natureID, actantType } = props.filter;
   const nature = Nature.findByID(natureID);
-  
+
   return (
     <View>
       <View style={StyleSheet.styles.discoveryCenter.topContainer}>
@@ -40,11 +40,11 @@ const NatureFilterItem = (props: Props) => {
       </View>
       <View style={StyleSheet.styles.discoveryCenter.bottomContainer}>
         <Text>Is</Text>
-        <TouchableOpacity style={styles.filterButton} onPress={() => props.onPressEditFilter(natureFilterURL({title: Localizable.t('nature'), filter: props.filter}))}>
+        <TouchableOpacity hitSlop={{top: 10, left: 5, bottom: 10, right: 0}} style={styles.filterButton} onPress={() => props.onPressEditFilter(natureFilterURL({title: Localizable.t('nature'), filter: props.filter}))}>
           <Text style={styles.filterButtonTitle}>{Localizable.t('natures.' + nature.key)}</Text>
           <Image source={require('../Images/chart-icn-dropdown-filter.png')} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.filterDelete} onPress={props.onPressDeleteFilter}>
+        <TouchableOpacity hitSlop={{top: 10, left: 5, bottom: 10, right:5}} style={styles.filterDelete} onPress={props.onPressDeleteFilter}>
           <Image source={require('../Images/chart-icn-filter-delete.png')} />
         </TouchableOpacity>
       </View>
