@@ -371,6 +371,8 @@ export default class Reader extends Component {
           this._debugScripture(scripture);
         }
 
+        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+
         this.setState({
           bookID,
           anchor,
