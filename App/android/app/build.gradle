@@ -78,14 +78,14 @@ def enableProguardInReleaseBuilds = false
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion "24.0.3"
 
     defaultConfig {
         applicationId "com.sourceviewbible"
         minSdkVersion 19
         targetSdkVersion 22
-        versionCode 2278
-        versionName "1.0.2"
+        versionCode 2280
+        versionName "1.0.3"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
