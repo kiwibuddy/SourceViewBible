@@ -36,7 +36,7 @@ import { sourceURL, sourcesFilterURL } from '../../Navigation';
 import { NavigationBarButton } from '../../Components/Navigation';
 
 import { Preference } from '../../Preferences';
-import { Actant, Gender, Nature, Role, Profession } from '../../Database';
+import { Actant, Chronology, Gender, Nature, Role, Profession } from '../../Database';
 
 type Props = {
   navigate: Function,
@@ -120,6 +120,10 @@ export default class Sources extends Component {
     const filterLabels = filters.map(filter => {
       let title = null;
       switch (filter.type) {
+        case 'chronology':
+          title = Chronology.findByID(filter.chronologyID).name;
+          break;
+
         case 'role':
           title = Role.findByID(filter.roleID).name;
           break;
@@ -136,7 +140,7 @@ export default class Sources extends Component {
           title = Profession.findByID(filter.professionID).name;
           break;
       }
-      
+
       return (
         <View key={'filter-' + filter.id} style={[styles.filterLabelContainer, {backgroundColor: Colors.tint}]}>
           <Text style={[styles.filterLabel]}>{title}</Text>

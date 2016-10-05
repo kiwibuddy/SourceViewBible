@@ -16,7 +16,7 @@ import {
   StyleSheet,
 } from '../../Common';
 
-import { genderFilterURL, natureFilterURL, professionFilterURL, roleFilterURL } from '../../Navigation';
+import { chronologyFilterURL, genderFilterURL, natureFilterURL, professionFilterURL, roleFilterURL } from '../../Navigation';
 
 type Props = {
   card: Object,
@@ -31,11 +31,12 @@ const FilterItems = (props: Props) => {
   const natureFilter = card.filters.find((filter) => filter.type === 'nature');
   const genderFilter = card.filters.find((filter) => filter.type === 'gender');
   const professionFilter = card.filters.find((filter) => filter.type === 'profession');
+  const chronologyFilter = card.filters.find((filter) => filter.type === 'chronology');
 
   return (
     <ScrollView style={styles.container}>
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.navigate(roleFilterURL({title: 'Role', filter: roleFilter}))}>
-        <Text style={StyleSheet.styles.cell.title}>Role</Text>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.navigate(genderFilterURL({title: 'Gender', filter: genderFilter}))}>
+        <Text style={StyleSheet.styles.cell.title}>Gender</Text>
         <Image source={require('../../Images/common/disclosure.png')} />
       </TouchableOpacity>
       <View style={styles.separator} />
@@ -44,13 +45,18 @@ const FilterItems = (props: Props) => {
         <Image source={require('../../Images/common/disclosure.png')} />
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.navigate(genderFilterURL({title: 'Gender', filter: genderFilter}))}>
-        <Text style={StyleSheet.styles.cell.title}>Gender</Text>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.navigate(professionFilterURL({title: 'Profession', filter: professionFilter}))}>
+        <Text style={StyleSheet.styles.cell.title}>Profession</Text>
         <Image source={require('../../Images/common/disclosure.png')} />
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.navigate(professionFilterURL({title: 'Profession', filter: professionFilter}))}>
-        <Text style={StyleSheet.styles.cell.title}>Profession</Text>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.navigate(roleFilterURL({title: 'Role', filter: roleFilter}))}>
+        <Text style={StyleSheet.styles.cell.title}>Role</Text>
+        <Image source={require('../../Images/common/disclosure.png')} />
+      </TouchableOpacity>
+      <View style={styles.separator} />
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.navigate(chronologyFilterURL({title: 'Time Period', filter: chronologyFilter}))}>
+        <Text style={StyleSheet.styles.cell.title}>Time Period</Text>
         <Image source={require('../../Images/common/disclosure.png')} />
       </TouchableOpacity>
       <View style={styles.separator} />
