@@ -5,8 +5,11 @@ import React, { Component, PropTypes } from 'react';
 const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
 
 import {
+  Image,
+  LayoutAnimation,
   Platform,
   RecyclerViewBackedScrollView,
+  ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
@@ -32,6 +35,7 @@ const LISTVIEW_REF = 'LISTVIEW_REF';
 import { sourceURL, sourcesFilterURL } from '../../Navigation';
 import { NavigationBarButton } from '../../Components/Navigation';
 
+import { Preference } from '../../Preferences';
 import { Actant } from '../../Database';
 
 type Props = {
@@ -41,6 +45,7 @@ type Props = {
 type State = {
   dataSource: any,
   search: ?string,
+  filters: any,
 };
 
 export default class Sources extends Component {
@@ -67,7 +72,8 @@ export default class Sources extends Component {
 
     this.state = {
       dataSource: dataSource,
-      search: null
+      search: null,
+      filters: Preference.objectForKey(Preference.Keys.Sources.filters) || []
     };
   }
 
@@ -75,9 +81,11 @@ export default class Sources extends Component {
     const sources = Actant.sources(this.state.search).sorted('firstInitial').sorted('name');
     const { rows, sections } = this._getRowsAndSections(sources);
     const dataSource = this.state.dataSource.cloneWithRowsAndSections(rows, sections);
+    const filterBar = this._renderFilterBar();
 
     return (
       <View style={styles.container}>
+        {filterBar}
         <View style={styles.textInputContainer}>
           <TextInput
             autoCapitalize="words"
@@ -104,6 +112,31 @@ export default class Sources extends Component {
       </View>
     );
   }
+
+  _renderFilterBar = () => {
+    const filters = Preference.objectForKey(Preference.Keys.Sources.filters) || [];
+    if (filters.length == 0) return null;
+
+    const filterLabels = filters.map(filter => {
+      const color = '#F3F3F3';
+      return (
+        <View key={'filter-' + filter.id} style={[styles.filterLabelContainer, {backgroundColor: color}]}>
+          <Text style={[styles.filterLabel]}>Foo</Text>
+        </View>
+      );
+    });
+
+    return (
+      <View style={styles.filterBar}>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          {filterLabels}
+        </ScrollView>
+        <TouchableOpacity style={styles.filterClear} onPress={this._onPressClearFilter}>
+          <Image source={require('../../Images/sources/clear-btn.png')} />
+        </TouchableOpacity>
+      </View>
+    );
+  };
 
   _renderSectionHeader = (sectionData: Object, sectionID: any) => {
     const title = sectionID;
@@ -167,7 +200,13 @@ export default class Sources extends Component {
   _onSearch = (text: string) => {
     this.setState({search: text});
     Analytics.logSearch(text, {type: 'Source'});
-  }
+  };
+
+  _onPressClearFilter = () => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    Preference.setObjectForKey([], Preference.Keys.Sources.filters);
+    this.setState({filters: []});
+  };
  }
 
 const styles = StyleSheet.create({
@@ -226,6 +265,33 @@ const styles = StyleSheet.create({
     color: '#CF1E00',
     fontSize: 11,
     fontWeight: '500',
+  },
+  filterBar: {
+    height: 30,
+    backgroundColor: '#F9F9F9',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#c8c7cc',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 8,
+    elevation: 2,
+    borderTopColor: Platform.OS === 'ios' ? 0 : 'rgba(0, 0, 0, .15)',
+    borderTopWidth: Platform.OS === 'ios' ? 0 : 1,
+  },
+  filterLabelContainer: {
+    borderRadius: 4,
+    paddingVertical: 2,
+    paddingHorizontal: 5,
+    overflow: 'hidden',
+    marginRight: 5,
+  },
+  filterLabel: {
+    fontSize: 13,
+    color: 'white',
+  },
+  filterClear: {
+    position: 'absolute',
+    right: 0,
   },
   ...Platform.select({
       ios: {

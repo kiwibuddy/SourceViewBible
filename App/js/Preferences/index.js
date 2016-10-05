@@ -30,6 +30,9 @@ const Keys = {
     spheres: PREFIX + '.reader.spheres',
     showNumbers: PREFIX + '.reader.showNumbers',
   },
+  Sources: {
+    filters: PREFIX + '.sources.filters',
+  },
   Spheres: {
     FoundationalSort: PREFIX + '.spheres.foundational.sort',
     Prompted: PREFIX + '.spheres.prompted',

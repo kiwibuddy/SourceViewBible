@@ -12,6 +12,7 @@ import {
 
 import Modal from '../../Components/Common/Modal';
 import { BACK, sourcesFilterItemsURL } from '../../Navigation';
+import { Preference } from '../../Preferences';
 
 type Props = {
   navigate: Function,
@@ -29,7 +30,7 @@ class Filters extends Component {
     super(props);
 
     this.state = {
-      card: {filters: []}
+      card: {filters: Preference.objectForKey(Preference.Keys.Sources.filters) || []}
     };
   }
 
@@ -50,6 +51,7 @@ class Filters extends Component {
 
   _onDone = () => {
     const { card } = this.state;
+    Preference.setObjectForKey(card.filters, Preference.Keys.Sources.filters);
     this.props.navigate(BACK);
   };
 };
