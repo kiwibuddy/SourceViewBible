@@ -4,16 +4,8 @@
 import { Actant, Book, BookSourceOccurrence, rowsWithSQL } from '../../Database';
 
 export default class Query {
-  source: Actant;
-  book: ?Book;
-
-  constructor(source: Actant, book: ?Book) {
-    this.source = source;
-    this.book = book;
-  }
-
-  async spokeTo() {
-    const where = (this.book ? `AND (bso.first >= ${this.book.firstMonad}) AND (bso.last <= ${this.book.lastMonad})` : '');
+  async spokeTo(source: Actant, book: ?Book) {
+    const where = (book ? `AND (bso.first >= ${book.firstMonad}) AND (bso.last <= ${book.lastMonad})` : '');
     const sql = `
       SELECT listener.id AS id, COUNT(bso.id) AS count
       FROM bso INNER JOIN bso_actants AS listeners ON (bso.id = listeners.bso_id AND listeners.type_id = 2)
@@ -23,14 +15,14 @@ export default class Query {
       WHERE ((speaker.id = ?) ${where})
       GROUP BY listener.id ORDER BY count DESC`;
 
-    const rows = await rowsWithSQL(sql, this.source.id);
+    const rows = await rowsWithSQL(sql, source.id);
     return rows.map(row => {
       return {actant: Actant.findByID(row['id']), count: row['count']};
     });
   }
 
-  async listenedTo() {
-    const where = (this.book ? `AND (bso.first >= ${this.book.firstMonad}) AND (bso.last <= ${this.book.lastMonad})` : '');
+  async listenedTo(source: Actant, book: ?Book) {
+    const where = (book ? `AND (bso.first >= ${book.firstMonad}) AND (bso.last <= ${book.lastMonad})` : '');
     const sql = `
       SELECT speaker.id AS id, COUNT(bso.id) AS count
       FROM bso INNER JOIN bso_actants AS speakers ON (bso.id = speakers.bso_id AND speakers.type_id = 1)
@@ -40,16 +32,16 @@ export default class Query {
       WHERE ((listener.id = ?) ${where})
       GROUP BY speaker.id ORDER BY count DESC`;
 
-    const rows = await rowsWithSQL(sql, this.source.id);
+    const rows = await rowsWithSQL(sql, source.id);
     return rows.map(row => {
       return {actant: Actant.findByID(row['id']), count: row['count']};
     });
   }
 
-  async occurrences(listenerID: ?number) {
-    const params = [this.source.id];
+  async occurrences(source: Actant, book: ?Book, listenerID: ?number) {
+    const params = [source.id];
     let from = '';
-    let where = (this.book ? ` AND (bso.first >= ${this.book.firstMonad}) AND (bso.last <= ${this.book.lastMonad})` : '');
+    let where = (book ? ` AND (bso.first >= ${book.firstMonad}) AND (bso.last <= ${book.lastMonad})` : '');
     if (listenerID != null && listenerID > 0) {
       from += ' INNER JOIN bso_actants AS listeners ON (bso.id = listeners.bso_id AND listeners.type_id = 2)';
       where += ' AND (listeners.actant_id = ?)';
@@ -66,7 +58,7 @@ export default class Query {
     return rows.map(row => BookSourceOccurrence.findByID(row['id']));
   }
 
-  async books() {
+  async books(source: Actant, book: ?Book) {
     const sql = `
     SELECT DISTINCT bso.book_id AS id, COUNT(DISTINCT bso.id) AS count
     FROM bso INNER JOIN bso_actants AS speakers ON (bso.id = speakers.bso_id AND speakers.type_id = 1)
@@ -74,7 +66,7 @@ export default class Query {
     GROUP BY bso.book_id
     ORDER BY bso.book_id`;
 
-    const rows = await rowsWithSQL(sql, this.source.id);
+    const rows = await rowsWithSQL(sql, source.id);
     return rows.map(row => {
       return {book: Book.findByID(row['id']), count: row['count']};
     });

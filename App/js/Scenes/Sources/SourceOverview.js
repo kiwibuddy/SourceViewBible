@@ -441,15 +441,15 @@ export default class SourceOverview extends Component {
     const { source, book } = this.state;
     const speaker = (sectionID === Section.SPOKE_TO ? source : actant);
     const listener = (sectionID === Section.SPOKE_TO ? actant : source);
-    const query = new Query(speaker, book);
-    const occurrences = await query.occurrences(listener.id);
+    const query = new Query();
+    const occurrences = await query.occurrences(speaker, book, listener.id);
     this._navigateReader(occurrences);
   };
 
   async _onPressBook(book: Object) {
     const { source } = this.state;
-    const query = new Query(source, book);
-    const occurrences = await query.occurrences();
+    const query = new Query();
+    const occurrences = await query.occurrences(source, book);
     this._navigateReader(occurrences);
   };
 
@@ -482,18 +482,18 @@ export default class SourceOverview extends Component {
     const book = (props.bookID ? Book.findByID(props.bookID) : null);
     const sourceRelation = source.relationForBook(book);
 
-    const query = new Query(source, book);
+    const query = new Query();
 
     const rows = {};
     const sections = [];
 
-    const books = await query.books();
+    const books = await query.books(source, book);
     if (books.length > 0) {
       sections.push(Section.BOOKS);
       rows[Section.BOOKS] = books;
     }
 
-    const spokeTo = await query.spokeTo();
+    const spokeTo = await query.spokeTo(source, book);
     const spokeToCount = spokeTo.length;
     const spokeToOccurrenceCount = spokeTo.reduce((sum, occurrence) => sum + occurrence.count, 0);
     if (spokeToCount > 0) {
@@ -501,7 +501,7 @@ export default class SourceOverview extends Component {
       rows[Section.SPOKE_TO] = spokeTo;
     }
 
-    const listenedTo = await query.listenedTo();
+    const listenedTo = await query.listenedTo(source, book);
     const listenedToCount = listenedTo.length;
     const listenedToOccurrenceCount = listenedTo.reduce((sum, occurrence) => sum + occurrence.count, 0);
     if (listenedToCount > 0) {
