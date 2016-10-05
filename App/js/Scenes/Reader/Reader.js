@@ -392,6 +392,10 @@ export default class Reader extends Component {
     html = html.replace(new RegExp('{{BOOK_NAME}}', 'g'), book.name);
     html = html.replace('{{IS_PSALMS}}', (isPsalms ? 'true' : 'false'));
 
+    if (isPsalms) {
+      html = html.replace(new RegExp(/>(Psalm )(\d+?)</, 'g'), ' id="chapter-$2">$1$2<');
+    }
+
     const fontStepSize = Preference.numberForKey(Preference.Keys.Reader.fontStepSize) || 0;
     const fontSize = Math.ceil((ReaderBaseFontSize + (fontStepSize * ReaderFontStepSize)) * ReaderWebFontConversion);
     const lineHeight = Math.ceil((ReaderBaseLineHeight + (fontStepSize * ReaderFontStepSize)) * ReaderWebFontConversion);
@@ -413,16 +417,6 @@ export default class Reader extends Component {
 
     let anchor = this.props.anchor;
     let scrollOffset = 8;
-
-    if (isPsalms && anchor.startsWith('chapter-')) {
-      scrollOffset += 40;
-      anchor = anchor.replace('chapter', 'verse') + '-0';
-
-      if (anchor.endsWith('-119-0')) {
-        anchor = anchor.replace('-119-0', '-119-1');
-        scrollOffset += 48;
-      }
-    }
 
     const javascript = `\
       location.hash = '#${encodeURIComponent(anchor)}';
