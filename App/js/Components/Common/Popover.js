@@ -34,7 +34,7 @@ export default class Popover extends Component {
           initialRoute={this.props.initialRoute}
           modalStyle={styles.popover}
           onPressCancel={this.props.onPressCancel}
-          onPressDone={this.props.onPressDone}
+          onPressDone={this.props.onDone}
         />
       </View>
     );

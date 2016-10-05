@@ -29,7 +29,8 @@ import SourceIcon from '../../Components/Common/SourceIcon';
 
 const LISTVIEW_REF = 'LISTVIEW_REF';
 
-import { sourceURL } from '../../Navigation';
+import { sourceURL, sourcesFilterURL } from '../../Navigation';
+import { NavigationBarButton } from '../../Components/Navigation';
 
 import { Actant } from '../../Database';
 
@@ -46,6 +47,15 @@ export default class Sources extends Component {
   static NavigationHeaderStyle = {
     elevation: null
   };
+
+  static renderNavigationHeaderRightComponent(props: Object) {
+    return (
+      <NavigationBarButton
+        imageSource={require('../../Components/Navigation/Images/nav-filter.png')}
+        onPress={() => props.navigate(sourcesFilterURL({title: Localizable.t('settings'), modal: true}))}
+      />
+    );
+  }
 
   props: Props;
   state: State;

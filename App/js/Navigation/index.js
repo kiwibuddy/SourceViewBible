@@ -29,6 +29,8 @@ import Reader from '../Scenes/Reader/Reader';
 import ReaderSearch from '../Scenes/Reader/Search';
 import ReaderSettings from '../Scenes/Reader/Settings';
 import Sources from '../Scenes/Sources/Sources';
+import SourcesFilterItems from '../Scenes/Sources/FilterItems';
+import SourcesFilters from '../Scenes/Sources/Filters';
 import SourceOverview from '../Scenes/Sources/SourceOverview';
 import SourceBooks from '../Scenes/Sources/SourceBooks';
 import SourceConversations from '../Scenes/Sources/SourceConversations';
@@ -68,6 +70,8 @@ export const readerSearchURL = router.addRoute('/Reader/Search/:search?', Reader
 export const readerSettingsURL = router.addRoute('/Reader/Settings', ReaderSettings);
 export const readerURL = router.addRoute('/Reader/:bookID/:anchor?', Reader);
 export const sourceHelpURL = router.addRoute('/Sources/Help', SourceHelp);
+export const sourcesFilterItemsURL = router.addRoute('/Sources/FilterItems', SourcesFilterItems);
+export const sourcesFilterURL = router.addRoute('/Sources/Filters', SourcesFilters);
 export const sourceBooksURL = router.addRoute('/Sources/:sourceID/Books', SourceBooks);
 export const sourceConversationsURL = router.addRoute('/Sources/:sourceID/Conversations', SourceConversations);
 export const sourceSpheresURL = router.addRoute('/Sources/:sourceID/Spheres', SourceSpheres);

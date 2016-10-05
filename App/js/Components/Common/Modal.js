@@ -83,7 +83,7 @@ import router, { BACK } from '../../Navigation';
 
 type Props = {
   initialRoute: Object,
-  modalStyle: any,
+  modalStyle?: any,
   onPressCancel: Function,
   onDone: Function,
 };
@@ -250,9 +250,9 @@ const styles = StyleSheet.create({
     marginVertical: 12,
   },
   navBarTitleText: {
-    color: 'black',
-    fontSize: 17,
-    fontWeight: 'bold',
+    fontSize: 18,
+    fontWeight: '500',
+    color: 'rgba(0, 0, 0, .9)',
     marginVertical: 12,
     ...Platform.select({
       android: {
