@@ -11,7 +11,7 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from 'react-native'
+} from 'react-native';
 
 import {
   Colors,
@@ -81,7 +81,7 @@ export default class Onboarding extends Component {
               <View style={styles.onboardingContent}>
                 <Image source={require('./Images/onboarding-3.png')} />
                 <Text style={styles.contentHeader}>What you'll see</Text>
-                <Text style={styles.contentBody}>A new Scripture layout and dynamic visualisations enabling you to encounter the Bible like never before.</Text>
+                <Text style={styles.contentBody}>A new Scripture layout and dynamic visualizations enabling you to encounter the Bible like never before.</Text>
               </View>
             </View>
             <View style={[styles.onboardingContainer, {overflow: 'hidden'}]}>
