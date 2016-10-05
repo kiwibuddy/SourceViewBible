@@ -212,9 +212,11 @@ export default class Sources extends Component {
       rows[section].push(source);
     });
 
-    const numericSection = sections[0];
-    sections.shift();
-    sections.push(numericSection);
+    if (sections[0] === '#') {
+      const numericSection = sections[0];
+      sections.shift();
+      sections.push(numericSection);      
+    }
 
     return {rows, sections};
   };
