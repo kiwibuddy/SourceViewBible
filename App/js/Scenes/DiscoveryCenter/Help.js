@@ -47,7 +47,7 @@ const Help = (props: Props) => {
           <Text style={styles.contentBody}>Once your primary selections are in, you can use filters to narrow the range of what’s on your cards. Filters can be selected from books, words, sources, or spheres.</Text>
           <Text style={styles.contentH2}>What can you do with Cards?</Text>
           <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Duplicate</Text> — clone a card to make it a starting point for new discoveries </Text>
-          <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Share</Text> — hare your discoveries with friends, family, and the world by making it your next social post</Text>
+          <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Share</Text> — share your discoveries with friends, family, and the world by making it your next social post</Text>
           <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Save</Text> — tap the share option to save an image of the card to your mobile device</Text>
           <Text style={styles.contentBody}><Text style={[{fontWeight: 'bold'}]}>Delete</Text> — remove the card from your device</Text>
           <View style={styles.separator} />
