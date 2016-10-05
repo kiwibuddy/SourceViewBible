@@ -215,7 +215,7 @@ export default class Sources extends Component {
     if (sections[0] === '#') {
       const numericSection = sections[0];
       sections.shift();
-      sections.push(numericSection);      
+      sections.push(numericSection);
     }
 
     return {rows, sections};
@@ -293,14 +293,13 @@ const styles = StyleSheet.create({
   filterBar: {
     height: 30,
     backgroundColor: '#F9F9F9',
-    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomWidth: Platform.OS === 'ios' ? StyleSheet.hairlineWidth : 0,
     borderBottomColor: '#c8c7cc',
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 8,
-    elevation: 2,
-    borderTopColor: Platform.OS === 'ios' ? 0 : 'rgba(0, 0, 0, .15)',
-    borderTopWidth: Platform.OS === 'ios' ? 0 : 1,
+    elevation: 0,
+    borderTopWidth: 0,
   },
   filterLabelContainer: {
     borderRadius: 4,
