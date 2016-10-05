@@ -215,14 +215,31 @@ export class Actant extends Realm.Object {
   }
 
   static recipients(search: ?string) {
-    const recipients = realm.objects('Actant').filtered('isSource = $0', true);
+    const recipients = realm.objects('Actant').filtered('isRecipient = $0', true);
     if (search) return recipients.filtered('name CONTAINS[c] $0', search);
     return recipients;
   }
 
-  static sources(search: ?string) {
-    const sources = realm.objects('Actant').filtered('isSource = $0', true);
-    if (search) return sources.filtered('name CONTAINS[c] $0', search);
+  static sources(search: ?string, filters?: Object) {
+    let sources = realm.objects('Actant').filtered('isSource = $0', true);
+    if (search) sources = sources.filtered('name CONTAINS[c] $0', search);
+
+    console.log(filters);
+    if (filters && filters.length > 0) {
+      filters.forEach((filter) => {
+        switch (filter.type) {
+          case 'gender':
+            sources = sources.filtered('gender = $0', filter.genderID);
+            break;
+
+          case 'role':
+            const role = Role.findByID(filter.roleID);
+            sources = sources.filtered('principalSourceType = $0', role.key);
+            break;
+        }
+      });
+    }
+
     return sources;
   }
 

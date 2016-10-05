@@ -78,7 +78,7 @@ export default class Sources extends Component {
   }
 
   render() {
-    const sources = Actant.sources(this.state.search).sorted('firstInitial').sorted('name');
+    const sources = Actant.sources(this.state.search, this.state.filters).sorted('firstInitial').sorted('name');
     const { rows, sections } = this._getRowsAndSections(sources);
     const dataSource = this.state.dataSource.cloneWithRowsAndSections(rows, sections);
     const filterBar = this._renderFilterBar();
