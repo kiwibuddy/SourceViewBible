@@ -17,10 +17,26 @@ type Props = {
   navigate: Function,
 };
 
+type State = {
+  card: Object,
+};
+
 class Filters extends Component {
+  props: Props;
+  state: State;
+
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      card: {filters: []}
+    };
+  }
+
   render() {
     return (
       <Modal
+        card={this.state.card}
         initialRoute={sourcesFilterItemsURL({title: Localizable.t('filters')})}
         onPressCancel={this._onPressCancel}
         onDone={this._onDone}
@@ -33,6 +49,7 @@ class Filters extends Component {
   };
 
   _onDone = () => {
+    const { card } = this.state;
     this.props.navigate(BACK);
   };
 };
