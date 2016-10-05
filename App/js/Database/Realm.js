@@ -224,7 +224,6 @@ export class Actant extends Realm.Object {
     let sources = realm.objects('Actant').filtered('isSource = $0', true);
     if (search) sources = sources.filtered('name CONTAINS[c] $0', search);
 
-    console.log(filters);
     if (filters && filters.length > 0) {
       filters.forEach((filter) => {
         switch (filter.type) {
@@ -238,6 +237,21 @@ export class Actant extends Realm.Object {
             break;
         }
       });
+
+      const chronologyFilter = filters.find((filter) => filter.type === 'chronology');
+      if (chronologyFilter) {
+        sources = sources.filtered('chronologies.id = $0', chronologyFilter.chronologyID);
+      }
+
+      const natureFilter = filters.find((filter) => filter.type === 'nature');
+      if (natureFilter) {
+        sources = sources.filtered('natures.id = $0', natureFilter.natureID);
+      }
+
+      const professionFilter = filters.find((filter) => filter.type === 'profession');
+      if (professionFilter) {
+        sources = sources.filtered('professions.id = $0', professionFilter.professionID);
+      }
     }
 
     return sources;
