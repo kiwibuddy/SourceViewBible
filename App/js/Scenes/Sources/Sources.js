@@ -36,7 +36,7 @@ import { sourceURL, sourcesFilterURL } from '../../Navigation';
 import { NavigationBarButton } from '../../Components/Navigation';
 
 import { Preference } from '../../Preferences';
-import { Actant } from '../../Database';
+import { Actant, Gender, Nature, Role, Profession } from '../../Database';
 
 type Props = {
   navigate: Function,
@@ -118,10 +118,28 @@ export default class Sources extends Component {
     if (filters.length == 0) return null;
 
     const filterLabels = filters.map(filter => {
-      const color = '#F3F3F3';
+      let title = null;
+      switch (filter.type) {
+        case 'role':
+          title = Role.findByID(filter.roleID).name;
+          break;
+
+        case 'nature':
+          title = Nature.findByID(filter.natureID).name;
+          break;
+
+        case 'gender':
+          title = Gender.findByID(filter.genderID).name;
+          break;
+
+        case 'profession':
+          title = Profession.findByID(filter.professionID).name;
+          break;
+      }
+      
       return (
-        <View key={'filter-' + filter.id} style={[styles.filterLabelContainer, {backgroundColor: color}]}>
-          <Text style={[styles.filterLabel]}>Foo</Text>
+        <View key={'filter-' + filter.id} style={[styles.filterLabelContainer, {backgroundColor: Colors.tint}]}>
+          <Text style={[styles.filterLabel]}>{title}</Text>
         </View>
       );
     });
