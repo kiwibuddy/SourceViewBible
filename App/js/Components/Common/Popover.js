@@ -4,6 +4,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import {
+  Navigator,
   Platform,
   View,
 } from 'react-native';
@@ -15,6 +16,63 @@ import {
   Localizable,
   StyleSheet,
 } from '../../Common';
+
+const NavigatorNavigationBarStyles = {
+  ...Navigator.NavigationBar.Styles,
+  General: {
+    ...Navigator.NavigationBar.Styles.General,
+    TotalNavHeight: Navigator.NavigationBar.Styles.General.NavBarHeight
+  },
+  Stages: {
+    ...Navigator.NavigationBar.Styles.Stages,
+    Left: {
+      ...Navigator.NavigationBar.Styles.Stages.Left,
+      Title: {
+        ...Navigator.NavigationBar.Styles.Stages.Left.Title,
+        top: 0,
+      },
+      LeftButton: {
+        ...Navigator.NavigationBar.Styles.Stages.Left.LeftButton,
+        top: 0,
+      },
+      RightButton: {
+        ...Navigator.NavigationBar.Styles.Stages.Left.RightButton,
+        top: 0,
+      }
+    },
+    Center: {
+      ...Navigator.NavigationBar.Styles.Stages.Center,
+      Title: {
+        ...Navigator.NavigationBar.Styles.Stages.Center.Title,
+        top: 0,
+      },
+      LeftButton: {
+        ...Navigator.NavigationBar.Styles.Stages.Center.LeftButton,
+        top: 0,
+      },
+      RightButton: {
+        ...Navigator.NavigationBar.Styles.Stages.Center.RightButton,
+        top: 0,
+      }
+    },
+    Right: {
+      ...Navigator.NavigationBar.Styles.Stages.Right,
+      Title: {
+        ...Navigator.NavigationBar.Styles.Stages.Right.Title,
+        top: 0,
+      },
+      LeftButton: {
+        ...Navigator.NavigationBar.Styles.Stages.Right.LeftButton,
+        top: 0,
+      },
+      RightButton: {
+        ...Navigator.NavigationBar.Styles.Stages.Right.RightButton,
+        top: 0,
+      }
+    }
+  }
+};
+
 
 type Props = {
   initialRoute: Object,
@@ -33,6 +91,7 @@ export default class Popover extends Component {
           {...this.props}
           initialRoute={this.props.initialRoute}
           modalStyle={styles.popover}
+          navigationBarStyles={NavigatorNavigationBarStyles}
           onPressCancel={this.props.onPressCancel}
           onPressDone={this.props.onDone}
         />

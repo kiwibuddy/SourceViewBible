@@ -15,64 +15,6 @@ import {
 
 import EventEmitter from 'EventEmitter';
 
-const NavigatorNavigationBarStyles = {
-  ...Navigator.NavigationBar.Styles,
-  General: {
-    ...Navigator.NavigationBar.Styles.General,
-    TotalNavHeight: Navigator.NavigationBar.Styles.General.NavBarHeight
-  },
-  Stages: {
-    ...Navigator.NavigationBar.Styles.Stages,
-    Left: {
-      ...Navigator.NavigationBar.Styles.Stages.Left,
-      Title: {
-        ...Navigator.NavigationBar.Styles.Stages.Left.Title,
-        top: 0,
-      },
-      LeftButton: {
-        ...Navigator.NavigationBar.Styles.Stages.Left.LeftButton,
-        top: 0,
-      },
-      RightButton: {
-        ...Navigator.NavigationBar.Styles.Stages.Left.RightButton,
-        top: 0,
-      }
-    },
-    Center: {
-      ...Navigator.NavigationBar.Styles.Stages.Center,
-      Title: {
-        ...Navigator.NavigationBar.Styles.Stages.Center.Title,
-        top: 0,
-      },
-      LeftButton: {
-        ...Navigator.NavigationBar.Styles.Stages.Center.LeftButton,
-        top: 0,
-      },
-      RightButton: {
-        ...Navigator.NavigationBar.Styles.Stages.Center.RightButton,
-        top: 0,
-      }
-    },
-    Right: {
-      ...Navigator.NavigationBar.Styles.Stages.Right,
-      Title: {
-        ...Navigator.NavigationBar.Styles.Stages.Right.Title,
-        top: 0,
-      },
-      LeftButton: {
-        ...Navigator.NavigationBar.Styles.Stages.Right.LeftButton,
-        top: 0,
-      },
-      RightButton: {
-        ...Navigator.NavigationBar.Styles.Stages.Right.RightButton,
-        top: 0,
-      }
-    }
-  }
-};
-
-const NAV_BAR_HEIGHT = NavigatorNavigationBarStyles.General.NavBarHeight;
-
 import {
   Colors,
   Localizable,
@@ -84,6 +26,7 @@ import router, { BACK } from '../../Navigation';
 type Props = {
   initialRoute: Object,
   modalStyle?: any,
+  navigationBarStyles?: any,
   onPressCancel: Function,
   onDone: Function,
 };
@@ -110,10 +53,11 @@ export default class Popover extends Component {
   _renderNavigationBar = () => {
     const {onPressCancel} = this.props;
     const eventEmitter = this.eventEmitter;
+    const navigationBarStyles = this.props.navigationBarStyles || Navigator.NavigationBar.Styles;
 
     return (
       <Navigator.NavigationBar
-        navigationStyles={NavigatorNavigationBarStyles}
+        navigationStyles={navigationBarStyles}
         routeMapper={{
           LeftButton: function(route, navigator, index, navState) {
             if (index === 0) {
@@ -192,13 +136,14 @@ export default class Popover extends Component {
             );
           },
         }}
-        style={styles.navBar}
+        style={[styles.navBar, {height: navigationBarStyles.General.TotalNavHeight}]}
       />
     );
   };
 
   _renderScene = (navigatorRoute: Object, navigator: Object) => {
     const { route, params } = router.match(navigatorRoute.path);
+    const navigationBarStyles = this.props.navigationBarStyles || Navigator.NavigationBar.Styles;
 
     if (!route) {
       throw new Error('Could not find route for: ' + navigatorRoute.path);
@@ -206,7 +151,7 @@ export default class Popover extends Component {
 
     const Scene = route.scene;
     return (
-      <View style={{flex: 1, paddingTop: NAV_BAR_HEIGHT}}>
+      <View style={{flex: 1, paddingTop: navigationBarStyles.General.TotalNavHeight}}>
         <Scene
           {...this.props}
           {...navigatorRoute}
@@ -238,7 +183,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
   },
   navBar: {
-    height: NAV_BAR_HEIGHT,
     backgroundColor: Platform.OS === 'ios' ? 'rgba(248, 248, 248, .85)' : '#FFF',
     borderBottomColor: 'rgba(0, 0, 0, .15)',
     borderBottomWidth: Platform.OS === 'ios' ? StyleSheet.hairlineWidth : 0,
