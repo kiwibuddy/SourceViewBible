@@ -82,7 +82,6 @@ import {
 import router, { BACK } from '../../Navigation';
 
 type Props = {
-  card: Object,
   initialRoute: Object,
   onPressCancel: Function,
   onDone: Function,
@@ -210,7 +209,7 @@ export default class Popover extends Component {
     return (
       <View style={{flex: 1, paddingTop: NAV_BAR_HEIGHT}}>
         <Scene
-          card={this.props.card}
+          {...this.props}
           {...navigatorRoute}
           {...params}
           navigate={(route: any, options?: any) => this._navigate(navigator, route, options)}
