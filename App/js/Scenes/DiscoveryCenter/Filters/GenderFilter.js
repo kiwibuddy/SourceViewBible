@@ -3,6 +3,7 @@
 
 import React, { Component } from 'react';
 import {
+  Image,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -15,11 +16,16 @@ import {
   StyleSheet,
 } from '../../../Common';
 
-import { cardWithFilter } from './FilterUtils';
+import { cardWithFilter, cardWithoutFilter } from './FilterUtils';
 
-function filterGender(filter: Object, type: string, key: string) {
+function filterGender(card: Object, filter: Object, type: string, key: string) {
   const genderID = (key === 'Male' ? 2 : 1);
-  return ({
+
+  if (card.type === 'sources' && filter && filter.genderID === genderID) {
+    return cardWithoutFilter(card, filter);
+  }
+
+  return cardWithFilter(card, {
     id: 'filter-' + Date.now(),
     actantType: type,
     ...filter,
@@ -37,14 +43,26 @@ type Props = {
 };
 
 const GenderFilter = (props: Props) => {
+  const { card, filter } = props;
+
+  const checkmark = <Image style={{tintColor: Colors.tint}} source={require('../../../Images/common/checkmark.png')} />;
+  let maleCheckmark = null;
+  let femaleCheckmark = null;
+  if (card.type === 'sources' && filter) {
+    maleCheckmark = filter.genderID === 2 ? checkmark : null;
+    femaleCheckmark = filter.genderID === 1 ? checkmark : null;
+  }
+
   return (
     <ScrollView style={styles.container}>
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(cardWithFilter(props.card, filterGender(props.filter, props.type, 'Male')))}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterGender(props.card, props.filter, props.type, 'Male'))}>
         <Text style={StyleSheet.styles.cell.title}>Male</Text>
+        {maleCheckmark}
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(cardWithFilter(props.card, filterGender(props.filter, props.type, 'Female')))}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterGender(props.card, props.filter, props.type, 'Female'))}>
         <Text style={StyleSheet.styles.cell.title}>Female</Text>
+        {femaleCheckmark}
       </TouchableOpacity>
       <View style={styles.separator} />
     </ScrollView>
