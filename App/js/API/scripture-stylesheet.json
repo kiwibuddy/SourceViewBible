@@ -10,8 +10,8 @@
         },
         "EmbeddedQuotation" : {
           "docindexfeature" : "docindex",
-          "end" : "{{ setvar 'embeddedDocument' }}{{ setvarend }}",
-          "start" : "{{ setvar 'embeddedDocument' }} embeddedDocument{{ setvarend }}"
+          "end" : "{{ setvar 'embeddedQuotation' }}{{ setvarend }}",
+          "start" : "{{ setvar 'embeddedQuotation' }} embeddedQuotation{{ setvarend }}"
         },
         "EmbeddedDocument" : {
           "docindexfeature" : "docindex",
