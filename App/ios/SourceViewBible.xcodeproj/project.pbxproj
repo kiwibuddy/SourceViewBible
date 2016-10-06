@@ -1268,7 +1268,6 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1326,7 +1325,6 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PROVISIONING_PROFILE = "de4019ab-fa18-481d-88b9-bd4948eff800";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
