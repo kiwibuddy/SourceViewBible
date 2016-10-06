@@ -125,6 +125,7 @@ type Props = {
   bookID: string,
   anchor?: string,
   navigate: Function,
+  occurrences?: any,
 };
 
 type State = {
@@ -172,13 +173,13 @@ export default class Reader extends Component {
   }
 
   componentWillReceiveProps(nextProps: Object) {
-    const { bookID, anchor } = nextProps;
-    this._setScripture(bookID, anchor);
+    const { bookID, anchor, occurrences } = nextProps;
+    this._setScripture(bookID, anchor, occurrences);
   }
 
   componentWillMount() {
-    const { bookID, anchor } = this.props;
-    this._setScripture(bookID, anchor);
+    const { bookID, anchor, occurrences } = this.props;
+    this._setScripture(bookID, anchor, occurrences);
   }
 
   componentWillUnmount() {
@@ -353,11 +354,11 @@ export default class Reader extends Component {
     );
   };
 
-  _setScripture = (bookID: string, anchor?: string, force?: boolean = false) => {
+  _setScripture = (bookID: string, anchor?: string, occurrences?: any, force?: boolean = false) => {
     const book = Book.findByID(bookID);
 
     const spheres = Preference.objectForKey(Preference.Keys.Reader.spheres) || [];
-    const options = {monadSet: book.monadSet, spheres};
+    const options = {monadSet: book.monadSet, spheres, occurrences};
 
     if (force || bookID !== this.state.bookID || anchor !== this.state.anchor) {
       this.setState({loading: true});
@@ -426,11 +427,11 @@ export default class Reader extends Component {
   };
 
   _onPressClearFilter = () => {
-    const { bookID, anchor } = this.props;
+    const { bookID, anchor, occurrences } = this.props;
 
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     Preference.setObjectForKey([], Preference.Keys.Reader.spheres);
-    this._setScripture(bookID, anchor, true);
+    this._setScripture(bookID, anchor, occurrences, true);
   };
 
   _debugScripture(scripture: string) {

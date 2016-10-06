@@ -90,6 +90,9 @@ module.exports = `
       .embeddedDocument, .embeddedQuotation {
         font-style: italic;
       }
+      .occurrence {
+        text-decoration: underline
+      }
       .textTitle {
         font-family: Georgia;
         font-weight: bold;

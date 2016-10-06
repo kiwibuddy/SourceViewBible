@@ -40,8 +40,16 @@ function highlightSpheres(feature: string, spheres: any, startingPosition: numbe
   }
 }
 
+function styleFeatures(feature: string) {
+  return styleEmbeddedDocuments(styleOccurrences(feature));
+}
+
 function styleEmbeddedDocuments(feature: string) {
   return `{{ if varequal 'embeddedDocument' '' }}${feature}{{ else }}<span class="embeddedDocument">${feature}</span>{{ endif }}`;
+}
+
+function styleOccurrences(feature: string) {
+  return `{{ setvar 'monad' }}{{ firstmonad }}{{ setvarend }}{{ setvar 'occurrence' }}{{ dictlookup 'occurrences' var 'monad' '' }}{{ setvarend }}{{ if varequal 'occurrence' '' }}${feature}{{ else }}<span class="occurrence">${feature}</span>{{ endif }}`;
 }
 
 function openDatabase() {
@@ -75,11 +83,21 @@ function scripture(options: Object) {
     const spheres = (options && options.spheres ? options.spheres : []);
     const sphereFeatures = spheres.map(sphere => SPHERE_FEATURE_MAP[sphere]);
 
+    const occurrences = (options && options.occurrences ? options.occurrences : []);
+    if (occurrences && occurrences.length > 0) {
+      const dictionaries = stylesheet['dictionaries'];
+      occurrences.forEach((occurrence) => {
+        for (let monad = occurrence.firstMonad; monad <= occurrence.lastMonad; monad++) {
+          dictionaries['occurrences'][monad.toString()] = '1';
+        }
+      });
+    }
+
     const base = stylesheet['fetchinfo']['base']['object_types'];
-    base['Token']['start'] = base['Token']['start'].replace('{{SPHERES}}', highlightSpheres(styleEmbeddedDocuments('{{ feature 0 }}'), spheres, 1));
+    base['Token']['start'] = base['Token']['start'].replace('{{SPHERES}}', highlightSpheres(styleFeatures('{{ feature 0 }}'), spheres, 1));
     base['Token']['get'] = base['Token']['get'].concat(sphereFeatures);
     base['NonWordToken'] = base['Token'];
-    base['SpaceToken']['start'] = highlightSpheres(' ', options.spheres, 0);
+    base['SpaceToken']['start'] = highlightSpheres(styleFeatures(' '), options.spheres, 0);
     base['SpaceToken']['get'] = sphereFeatures;
     base['VerseNumberToken']['start'] = base['VerseNumberToken']['start'].replace('{{SPHERES}}', highlightSpheres(styleEmbeddedDocuments('{{ featurenomangle 0 }}&#160;'), spheres, 1));
     base['VerseNumberToken']['get'] = base['VerseNumberToken']['get'].concat(sphereFeatures);
