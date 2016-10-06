@@ -34,6 +34,13 @@ function filterGender(card: Object, filter: Object, type: string, key: string) {
   });
 }
 
+function checkmark(card: Object, filter: Object, genderID: number) {
+  if (card.type === 'sources' && filter && filter.genderID === genderID) {
+    return <Image style={{tintColor: Colors.tint}} source={require('../../../Images/common/checkmark.png')} />;
+  }
+  return null;
+}
+
 type Props = {
   card: Object,
   filter: Object,
@@ -45,24 +52,16 @@ type Props = {
 const GenderFilter = (props: Props) => {
   const { card, filter } = props;
 
-  const checkmark = <Image style={{tintColor: Colors.tint}} source={require('../../../Images/common/checkmark.png')} />;
-  let maleCheckmark = null;
-  let femaleCheckmark = null;
-  if (card.type === 'sources' && filter) {
-    maleCheckmark = filter.genderID === 2 ? checkmark : null;
-    femaleCheckmark = filter.genderID === 1 ? checkmark : null;
-  }
-
   return (
     <ScrollView style={styles.container}>
       <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterGender(props.card, props.filter, props.type, 'Male'))}>
         <Text style={StyleSheet.styles.cell.title}>Male</Text>
-        {maleCheckmark}
+        {checkmark(card, filter, 2)}
       </TouchableOpacity>
       <View style={styles.separator} />
       <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(filterGender(props.card, props.filter, props.type, 'Female'))}>
         <Text style={StyleSheet.styles.cell.title}>Female</Text>
-        {femaleCheckmark}
+        {checkmark(card, filter, 1)}
       </TouchableOpacity>
       <View style={styles.separator} />
     </ScrollView>
