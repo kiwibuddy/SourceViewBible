@@ -684,6 +684,10 @@ Profession.schema = ProfessionSchema;
 
 export class Role {
   static ROLES = ['narrator', 'god', 'lead', 'support'];
+  static Narrator = 1;
+  static God = 2;
+  static Lead = 3;
+  static Support = 4;
 
   id: number;
   key: string;
@@ -696,6 +700,33 @@ export class Role {
   static findByID(id: any) {
     const key = (Number.isInteger(id) ? Role.ROLES[id - 1] : id);
     return new Role(id, key);
+  }
+
+  static findByKey(key: string) {
+    const id = Role.ROLES.indexOf(key) + 1;
+    return new Role(id, key);
+  }
+
+  static IDForKey(key: string) {
+    let roleID = null;
+    switch (key) {
+      case 'narrator':
+        roleID = 1;
+        break;
+
+      case 'god':
+        roleID = 2;
+        break;
+
+      case 'lead':
+        roleID = 3;
+        break;
+
+      case 'support':
+        roleID = 4;
+        break;
+    }
+    return roleID;
   }
 
   get name(): string {
