@@ -227,8 +227,20 @@ export class Actant extends Realm.Object {
     if (filters && filters.length > 0) {
       filters.forEach((filter) => {
         switch (filter.type) {
+          case 'chronology':
+            sources = sources.filtered('chronologies.id = $0', filter.chronologyID);
+            break;
+
           case 'gender':
             sources = sources.filtered('gender = $0', filter.genderID);
+            break;
+
+          case 'nature':
+            sources = sources.filtered('natures.id = $0', filter.natureID);
+            break;
+
+          case 'profession':
+            sources = sources.filtered('professions.id = $0', filter.professionID);
             break;
 
           case 'role':
@@ -237,21 +249,6 @@ export class Actant extends Realm.Object {
             break;
         }
       });
-
-      const chronologyFilter = filters.find((filter) => filter.type === 'chronology');
-      if (chronologyFilter) {
-        sources = sources.filtered('chronologies.id = $0', chronologyFilter.chronologyID);
-      }
-
-      const natureFilter = filters.find((filter) => filter.type === 'nature');
-      if (natureFilter) {
-        sources = sources.filtered('natures.id = $0', natureFilter.natureID);
-      }
-
-      const professionFilter = filters.find((filter) => filter.type === 'profession');
-      if (professionFilter) {
-        sources = sources.filtered('professions.id = $0', professionFilter.professionID);
-      }
     }
 
     return sources;
