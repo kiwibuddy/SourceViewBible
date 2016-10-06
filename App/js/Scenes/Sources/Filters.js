@@ -29,9 +29,12 @@ class Filters extends Component {
   constructor(props: Props) {
     super(props);
 
-    this.state = {
-      card: {filters: Preference.objectForKey(Preference.Keys.Sources.filters) || []}
+    const card = {
+      type: 'sources',
+      filters: Preference.objectForKey(Preference.Keys.Sources.filters) || []
     };
+
+    this.state = { card };
   }
 
   render() {

@@ -5,7 +5,7 @@ import React, { Component, PropTypes } from 'react';
 const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
 
 import {
-  AsyncStorage,
+  Image,
   Platform,
   RecyclerViewBackedScrollView,
   Text,
@@ -21,7 +21,7 @@ import {
   Localizable
 } from '../../../Common';
 
-import { cardWithFilter } from './FilterUtils';
+import { cardWithFilter, cardWithoutFilter } from './FilterUtils';
 
 import { Chronology } from '../../../Database';
 
@@ -70,14 +70,24 @@ export default class Chronologys extends Component {
   }
 
   _renderRow = (chronology: Object, sectionID: any, rowID: any) => {
+    const { card, filter } = this.props;
+    const checkmark = (card.type === 'sources' && filter && filter.chronologyID === chronology.id) ? <Image style={{tintColor: Colors.tint}} source={require('../../../Images/common/checkmark.png')} /> : null;
     return (
       <TouchableOpacity key={chronology.id} style={StyleSheet.styles.listItem} onPress={() => this._filterChronology(chronology)}>
         <Text style={StyleSheet.styles.cell.title}>{chronology.name}</Text>
+        {checkmark}
       </TouchableOpacity>
     );
   };
 
   _filterChronology = (chronology: Object) => {
+    const { card } = this.props;
+
+    if (card.type === 'sources' && this.props.filter && this.props.filter.chronologyID === chronology.id) {
+      this.props.onDone(cardWithoutFilter(card, this.props.filter));
+      return;
+    }
+
     const filter = {
       id: 'filter-' + Date.now(),
       type: 'chronology',
@@ -101,7 +111,7 @@ export default class Chronologys extends Component {
       filter.chronologyID = chronology.id;
     }
 
-    this.props.onDone(cardWithFilter(this.props.card, filter));
+    this.props.onDone(cardWithFilter(card, filter));
   };
  }
 
