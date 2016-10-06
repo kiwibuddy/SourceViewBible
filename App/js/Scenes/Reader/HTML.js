@@ -83,6 +83,8 @@ module.exports = `
         text-transform: uppercase;
         width: 210pt;
         display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .sourceText {
         padding: 0 5pt;
