@@ -5,7 +5,7 @@ import React, { Component, PropTypes } from 'react';
 const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
 
 import {
-  AsyncStorage,
+  Image,
   Platform,
   RecyclerViewBackedScrollView,
   Text,
@@ -21,7 +21,7 @@ import {
   Localizable
 } from '../../../Common';
 
-import { cardWithFilter } from './FilterUtils';
+import { cardWithFilter, cardWithoutFilter } from './FilterUtils';
 
 import { Profession } from '../../../Database';
 
@@ -70,19 +70,34 @@ export default class Professions extends Component {
   }
 
   _renderRow = (profession: Object, sectionID: any, rowID: any) => {
+    const { card, filter } = this.props;
+    const checkmark = (card.type === 'sources' && filter && filter.professionID === profession.id) ? <Image style={{tintColor: Colors.tint}} source={require('../../../Images/common/checkmark.png')} /> : null;
+
+    return (
+      <TouchableOpacity key={profession.id} style={StyleSheet.styles.listItem} onPress={() => this._filterProfession(profession)}>
+        <Text style={StyleSheet.styles.cell.title}>{profession.name}</Text>
+        {checkmark}
+      </TouchableOpacity>
+    );
+  };
+
+  _filterProfession = (profession: Object) => {
+    const { card } = this.props;
+
+    if (card.type === 'sources' && this.props.filter && this.props.filter.professionID === profession.id) {
+      this.props.onDone(cardWithoutFilter(card, this.props.filter));
+      return;
+    }
+
     const filter = {
       id: 'filter-' + Date.now(),
       type: 'profession',
       actantType: this.props.type,
       ...this.props.filter,
       professionID: profession.id
-    }
-    return (
-      <TouchableOpacity key={profession.id} style={StyleSheet.styles.listItem} onPress={() => this.props.onDone(cardWithFilter(this.props.card, filter))}>
-        <Text style={StyleSheet.styles.cell.title}>{profession.name}</Text>
-      </TouchableOpacity>
-    );
-  };
+    };
+    this.props.onDone(cardWithFilter(card, filter));
+  }
  }
 
 const styles = StyleSheet.create({
