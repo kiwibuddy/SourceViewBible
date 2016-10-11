@@ -9,7 +9,7 @@
     "moment": "^2.14.1",
     "moment-duration-format": "^1.3.0",
     "react": "^15.3.1",
-    "react-native": "^0.34.1",
+    "react-native": "0.35.0",
     "react-native-app-info": "git+https://github.com/daikini/react-native-app-info.git",
     "react-native-emdros": "file:../Libraries/Emdros/",
     "react-native-fabric": "^0.3.0",
