@@ -11,6 +11,7 @@
     "react": "^15.3.1",
     "react-native": "0.35.0",
     "react-native-app-info": "git+https://github.com/daikini/react-native-app-info.git",
+    "react-native-billing": "^2.1.0",
     "react-native-emdros": "file:../Libraries/Emdros/",
     "react-native-fabric": "^0.3.0",
     "react-native-fs": "^1.5.1",
