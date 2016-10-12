@@ -4,6 +4,7 @@
 import React, { Component } from 'react';
 
 import {
+  ActivityIndicator,
   Image,
   Linking,
   ScrollView,
@@ -43,7 +44,24 @@ type Props = {
   redirect: Function,
 };
 
+type State = {
+  loading: boolean,
+  product: ?Object,
+}
+
 export default class InAppPurchase extends Component {
+  props: Props;
+  state: State;
+
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      loading: true,
+      product: null,
+    }
+  }
+
   render() {
     const expired = this._renderExpired();
     const content = (expired ? expired : this._renderContent());
@@ -66,22 +84,34 @@ export default class InAppPurchase extends Component {
   }
 
   _renderContent = () => {
+    const buy = (this.state.loading ? this._renderLoading() : this._renderBuy());
+
     return (
       <View style={styles.contentContainer}>
         <Image source={require('./Images/sphere-iap-header.png')} />
         <Text style={styles.contentHeader}>Explore Spheres</Text>
         <Text style={styles.contentBody}>Society is shaped by seven spheres of influence. With the Spheres in-app purchase unlocked, you'll be able to make personal observations about how scripture can be used to shape a Christian worldview. You can read Sphere-highlighted Scripture, explore key passages, and meditate on how a Source's words relate to societal spheres.</Text>
-        <View style={styles.buyControls}>
-          <TouchableOpacity onPress={this._onPressBuy} style={[styles.buyButton, {width: 300}]}>
-            <Text style={styles.buyButtonTitle}>Purchase spheres for $3.99</Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={styles.learnButton}>Restore purchases</Text>
-          </TouchableOpacity>
-        </View>
+        {buy}
       </View>
     );
   };
+
+  _renderLoading = () => {
+    return <ActivityIndicator color="gray" size="small" />
+  }
+
+  _renderBuy = () => {
+    return (
+      <View style={styles.buyControls}>
+        <TouchableOpacity onPress={this._onPressBuy} style={[styles.buyButton, {width: 300}]}>
+          <Text style={styles.buyButtonTitle}>Purchase spheres for $3.99</Text>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Text style={styles.learnButton}>Restore purchases</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 
   _renderExpired = () => {
     if (!this.props.expired) return null;
