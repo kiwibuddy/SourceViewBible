@@ -4,10 +4,10 @@
 import InAppBilling from 'react-native-billing';
 
 export default class Store {
-  static products(identifiers) {
+  static products(productIdentifiers) {
     return new Promise((resolve, reject) => {
       InAppBilling.open()
-      .then(() => InAppBilling.getProductDetailsArray())
+      .then(() => InAppBilling.getProductDetailsArray(productIdentifiers))
       .then((products) => {
         InAppBilling.close();
         resolve(products);
@@ -21,12 +21,19 @@ export default class Store {
       .then(() => InAppBilling.purchase('android.test.purchased'))
       .then((transationDetail) => {
         InAppBilling.close();
-        resolve(transationDetail);
+        resolve(transationDetail.purchaseState === 'PurchasedSuccessfully');
       });
     });
   }
 
   static restorePurchases() {
-    
+    return new Promise((resolve, reject) => {
+      InAppBilling.open()
+      .then(() => InAppBilling.listOwnedProducts())
+      .then((productIdentifiers) => {
+        InAppBilling.close();
+        resolve(productIdentifiers);
+      });
+    });
   }
 }
