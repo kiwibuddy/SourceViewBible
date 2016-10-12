@@ -30,6 +30,8 @@ import { BACK, sphereHelpURL } from '../../Navigation';
 import { Preference } from '../../Preferences';
 const { width: WIDTH } = Dimensions.get('window');
 
+// $FlowFixMe: Can't find os module extension
+import Store from '../../API/Store';
 
 function openURL(url: string) {
   Linking.openURL(url).catch(error => {
@@ -60,6 +62,10 @@ export default class InAppPurchase extends Component {
       loading: true,
       product: null,
     }
+  }
+
+  componentDidMount() {
+    this._fetchPurchase();
   }
 
   render() {
@@ -132,6 +138,13 @@ export default class InAppPurchase extends Component {
     Preference.setBooleanForKey(true, Preference.Keys.Spheres.Prompted);
     this.props.navigate(this.props.redirect, {replace: true});
   };
+
+  _fetchPurchase = () => {
+    Store.products(['com.sourceviewbible.products.spheres']).then((products) => {
+      console.log('products', products);
+      this.setState({loading: false, product: products[0]});
+    });
+  }
 }
 
 const styles = StyleSheet.create({

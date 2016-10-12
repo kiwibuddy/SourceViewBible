@@ -5,13 +5,19 @@ import { NativeModules } from 'react-native';
 import { InAppUtils } from 'NativeModules';
 
 export default class Store {
-  static products() {
-    InAppUtils.loadProducts(['com.sourceviewbible.products.spheres'], (error, products) => {
-      if (error) {
-        console.log('error loading products:', error);
-      } else {
-        console.log('Products', products);
-      }
+  static products(identifiers) {
+    return new Promise((resolve, reject) => {
+      InAppUtils.loadProducts(identifiers, (error, products) => {
+        resolve(products);
+      });
     });
+  }
+
+  static purchase(productID) {
+
+  }
+
+  static restorePurchases() {
+
   }
 }
