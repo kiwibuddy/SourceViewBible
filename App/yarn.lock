@@ -3981,6 +3981,10 @@ react-native-i18n@0.0.8:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/react-native-i18n/-/react-native-i18n-0.0.8.tgz#5c18a9e5dc91719ff2178a0ab42c8c1d282407dd"
 
+react-native-in-app-utils:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-in-app-utils/-/react-native-in-app-utils-4.0.0.tgz#2a3a1e17255d7098946ce37750b13b3a25b9465f"
+
 react-native-linear-gradient@^1.5.7:
   version "1.5.13"
   resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-1.5.13.tgz#98db6d4f0cd54b9f725df98142e0bdbd5e4a0991"
