@@ -506,7 +506,8 @@ export default class Query {
       let color = null;
       if (ObjectClass) {
         object = ObjectClass.findByID(row['id']);
-        if (typeof(object.color) !== "undefined") {
+        if (object != null && typeof(object.color) !== "undefined") {
+          // $FlowFixMe
           color = object.color();
         }
       }

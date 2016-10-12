@@ -171,7 +171,7 @@ export default class ReaderSearch extends Component {
 
   _routeFromReference = (reference: Object) => {
     const { book, source, occurrenceNumber, chapterNumber, verseNumber } = reference;
-    const route = {bookID: book.id, anchor: null, title: book.name, description: book.name};
+    const route = {bookID: book.id, anchor: '', title: book.name, description: book.name};
 
     if (source) {
       if (occurrenceNumber) {

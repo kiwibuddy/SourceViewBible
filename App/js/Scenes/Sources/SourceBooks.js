@@ -119,7 +119,7 @@ export default class SourceBooks extends Component {
   async _getOccurrences() {
     const { source } = this.state;
     const query = new Query(source);
-    let occurrences = await query.occurrences();
+    let occurrences = await query.occurrences(source);
 
     const contents = {};
     for (let occurrence of occurrences) {

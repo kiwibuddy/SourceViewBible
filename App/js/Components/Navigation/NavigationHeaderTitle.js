@@ -18,6 +18,7 @@ type Props = {
   style?: any,
   textStyle?: any,
   viewProps?: any,
+  onPress?: any,
 }
 
 const NavigationHeaderTitle = ({ children, style, textStyle, viewProps, onPress }: Props) => (

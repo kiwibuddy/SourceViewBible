@@ -112,6 +112,7 @@ export default class DiscoveryCenter extends Component {
   _renderNavigationHeader = () => {
     return (
       <NavigationHeader
+        navigate={this.props.navigate}
         title={Localizable.t('discovery-center')}
         renderLeftComponent={(props: Object) => <NavigationBarButton
           title={Localizable.t('done')}
@@ -311,7 +312,7 @@ export default class DiscoveryCenter extends Component {
     const scrollHeight = this.contentHeight;
     if (scrollHeight > 0) {
       if (Platform.OS === 'ios') {
-        this._shouldScrollToBottom = false;        
+        this._shouldScrollToBottom = false;
       }
       const scrollView = this.refs[SCROLLVIEW_REF];
       scrollView.scrollTo({y: scrollHeight, animated: animated});

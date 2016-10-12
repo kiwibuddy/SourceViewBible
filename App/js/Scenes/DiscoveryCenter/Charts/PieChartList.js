@@ -25,6 +25,8 @@ type Props = {
   card: Object,
   data: Object,
   renderHeader?: Function,
+  labelStyle?: any,
+  style?: any,
 };
 
 type State = {

@@ -19,7 +19,7 @@ import {
 
 type Props = {
   disabled?: boolean,
-  imageSource: any,
+  imageSource?: any,
   onPress?: Function,
   style?: any,
   title?: any,

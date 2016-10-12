@@ -63,6 +63,7 @@ export default class Settings extends Component {
     return (
       <View style={styles.container}>
         <NavigationHeader
+          navigate={this.props.navigate}
           title={Localizable.t('settings')}
           renderLeftComponent={(props: Object) => <NavigationBarButton
             title={Localizable.t('cancel')}
