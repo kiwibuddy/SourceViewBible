@@ -69,15 +69,15 @@ export default class InAppPurchase extends Component {
     return (
       <View style={styles.contentContainer}>
         <Image source={require('./Images/sphere-iap-header.png')} />
-        <Text style={styles.contentHeader}>Explore Spheres for a limited time.</Text>
-        <Text style={styles.contentBody}>Society is shaped by seven spheres of influence. With the Spheres in-app purchase unlocked, you'll be able to make personal observations about how scripture can be used to shape a Christian worldview. But as a "thank you" for downloading SourceView, we would love for you to enjoy Spheres at no cost for a limited time. Observe. Discover. Grow.</Text>
+        <Text style={styles.contentHeader}>Explore Spheres</Text>
+        <Text style={styles.contentBody}>Society is shaped by seven spheres of influence. With the Spheres in-app purchase unlocked, you'll be able to make personal observations about how scripture can be used to shape a Christian worldview. You can read Sphere-highlighted Scripture, explore key passages, and meditate on how a Source's words relate to societal spheres.</Text>
         <View style={styles.buyControls}>
-          <TouchableOpacity onPress={this._onPressBuy} style={[styles.buyButton, {width: 200}]}>
-            <Text style={styles.buyButtonTitle}>Continue</Text>
+          <TouchableOpacity onPress={this._onPressBuy} style={[styles.buyButton, {width: 300}]}>
+            <Text style={styles.buyButtonTitle}>Purchase spheres for $3.99</Text>
           </TouchableOpacity>
-          {/* <TouchableOpacity onPress={() => this.props.navigate(sphereHelpURL({title: Localizable.t('help'), modal: true}))}>
-            <Text style={styles.learnButton}>Learn more</Text>
-          </TouchableOpacity> */}
+          <TouchableOpacity>
+            <Text style={styles.learnButton}>Restore purchases</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );
