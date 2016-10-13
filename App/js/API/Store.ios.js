@@ -8,7 +8,12 @@ export default class Store {
   static products(productIdentifiers) {
     return new Promise((resolve, reject) => {
       InAppUtils.loadProducts(productIdentifiers, (error, products) => {
-        resolve(products);
+        resolve(products.map((product) => {
+          return {
+            productID: product.identifier,
+            localizedPrice: product.priceString,
+          };
+        }));
       });
     });
   }
@@ -31,7 +36,12 @@ export default class Store {
        if (error) {
          reject(error);
        } else {
-         return response.map(transaction => transaction.productIdentifier);
+         const purchases = response.map(transaction => {
+           return {
+             productID: transaction.productIdentifier
+           };
+         });
+         resolve(purchases);
        }
       });
     });
