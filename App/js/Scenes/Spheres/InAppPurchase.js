@@ -108,7 +108,7 @@ export default class InAppPurchase extends Component {
         <TouchableOpacity onPress={this._onPressBuy} style={[styles.buyButton, {width: 300}]}>
           <Text style={styles.buyButtonTitle}>{Localizable.t('purchase-spheres-for', {localizedPrice: product.localizedPrice})}</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={this._onPressRestore}>
           <Text style={styles.learnButton}>Restore purchases</Text>
         </TouchableOpacity>
       </View>
@@ -123,6 +123,21 @@ export default class InAppPurchase extends Component {
       }
     });
   };
+
+  _onPressRestore = () => {
+    Store.restorePurchases().then((purchases) => {
+      console.log('purchases', purchases);
+
+      if (purchases.length > 0) {
+        purchases.forEach((purchase) => {
+          if (purchase.productID === SPHERES_PRODUCT_IDENTIFIER) {
+            Preference.setBooleanForKey(true, Preference.Keys.Spheres.Purchased);
+            this.props.navigate(this.props.redirect, {replace: true});
+          }
+        });
+      }
+    });
+  }
 
   _fetchPurchase = () => {
     Store.products([SPHERES_PRODUCT_IDENTIFIER]).then((products) => {

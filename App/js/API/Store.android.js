@@ -36,9 +36,12 @@ export default class Store {
     return new Promise((resolve, reject) => {
       InAppBilling.open().then(() => {
         InAppBilling.listOwnedProducts().then((productIdentifiers) => {
-          console.log('productIdentifiers', productIdentifiers);
           InAppBilling.close();
-          resolve(productIdentifiers);
+
+          const purchases = productIdentifiers.map(productID => {
+            return {productID};
+          });
+          resolve(purchases);
         });
       });
     });
