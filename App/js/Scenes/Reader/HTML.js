@@ -89,8 +89,10 @@ module.exports = `
       .sourceText {
         padding: 0 5pt;
       }
-      .embeddedDocument, .embeddedQuotation {
+      .embeddedDocument {
         font-style: italic;
+      }
+      .embeddedQuotation {
       }
       .occurrence {
         text-decoration: underline

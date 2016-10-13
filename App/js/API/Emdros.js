@@ -41,11 +41,19 @@ function highlightSpheres(feature: string, spheres: any, startingPosition: numbe
 }
 
 function styleFeatures(feature: string) {
-  return styleEmbeddedDocuments(styleOccurrences(feature));
+  return styleEmbedded(styleOccurrences(feature));
+}
+
+function styleEmbedded(feature: string) {
+  return styleEmbeddedDocuments(styleEmbeddedQuotations(styleOccurrences(feature)));
 }
 
 function styleEmbeddedDocuments(feature: string) {
   return `{{ if varequal 'embeddedDocument' '' }}${feature}{{ else }}<span class="embeddedDocument">${feature}</span>{{ endif }}`;
+}
+
+function styleEmbeddedQuotations(feature: string) {
+  return `{{ if varequal 'embeddedQuotation' '' }}${feature}{{ else }}<span class="embeddedQuotation">${feature}</span>{{ endif }}`;
 }
 
 function styleOccurrences(feature: string) {
@@ -99,9 +107,9 @@ function scripture(options: Object) {
     base['NonWordToken'] = base['Token'];
     base['SpaceToken']['start'] = highlightSpheres(styleFeatures(' '), options.spheres, 0);
     base['SpaceToken']['get'] = sphereFeatures;
-    base['VerseNumberToken']['start'] = base['VerseNumberToken']['start'].replace('{{SPHERES}}', highlightSpheres(styleEmbeddedDocuments('{{ featurenomangle 0 }}&#160;'), spheres, 1));
+    base['VerseNumberToken']['start'] = base['VerseNumberToken']['start'].replace('{{SPHERES}}', highlightSpheres(styleEmbedded('{{ featurenomangle 0 }}&#160;'), spheres, 1));
     base['VerseNumberToken']['get'] = base['VerseNumberToken']['get'].concat(sphereFeatures);
-    base['ChapterNumberToken']['start'] = base['ChapterNumberToken']['start'].replace('{{SPHERES}}', highlightSpheres(styleEmbeddedDocuments('{{ featurenomangle 0 }}'), spheres, 1));
+    base['ChapterNumberToken']['start'] = base['ChapterNumberToken']['start'].replace('{{SPHERES}}', highlightSpheres(styleEmbedded('{{ featurenomangle 0 }}'), spheres, 1));
     base['ChapterNumberToken']['get'] = base['ChapterNumberToken']['get'].concat(sphereFeatures);
   }
   const style = {stylesheet: JSON.stringify(stylesheet)};
