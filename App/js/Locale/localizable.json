@@ -53,8 +53,7 @@
         "other": "{{count}} spheres"
       }
     },
-    "spheres-trial": "Spheres Free Trial",
-    "update-required": "Update Required",
+    "purchase-spheres-for": "Purchase spheres for {{localizedPrice}}",
     "add": "Add",
     "added": "Added",
     "range-of": "{{current}} of {{total}}",

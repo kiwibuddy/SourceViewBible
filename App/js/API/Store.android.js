@@ -10,7 +10,12 @@ export default class Store {
       .then(() => InAppBilling.getProductDetailsArray(productIdentifiers))
       .then((products) => {
         InAppBilling.close();
-        resolve(products);
+        resolve(products.map((product) => {
+          return {
+            productID: product.productId,
+            localizedPrice: product.priceText,
+          };
+        }));
       });
     });
   }
@@ -20,6 +25,8 @@ export default class Store {
       InAppBilling.open()
       .then(() => InAppBilling.purchase('android.test.purchased'))
       .then((transationDetail) => {
+        console.log(transationDetail);
+
         InAppBilling.close();
         resolve(transationDetail.purchaseState === 'PurchasedSuccessfully');
       });

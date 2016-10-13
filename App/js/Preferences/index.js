@@ -36,6 +36,7 @@ const Keys = {
   Spheres: {
     FoundationalSort: PREFIX + '.spheres.foundational.sort',
     Prompted: PREFIX + '.spheres.prompted',
+    Purchased: PREFIX + '.spheres.purchased',
   },
 };
 Preference.Keys = Keys;
