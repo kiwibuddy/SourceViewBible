@@ -126,6 +126,7 @@ type Props = {
   anchor?: string,
   navigate: Function,
   occurrences?: any,
+  occurrenceIndex?: any,
 };
 
 type State = {
@@ -173,13 +174,13 @@ export default class Reader extends Component {
   }
 
   componentWillReceiveProps(nextProps: Object) {
-    const { bookID, anchor, occurrences } = nextProps;
-    this._setScripture(bookID, anchor, occurrences);
+    const { bookID, anchor, occurrences, occurrenceIndex } = nextProps;
+    this._setScripture(bookID, anchor, occurrences, occurrenceIndex);
   }
 
   componentWillMount() {
-    const { bookID, anchor, occurrences } = this.props;
-    this._setScripture(bookID, anchor, occurrences);
+    const { bookID, anchor, occurrences, occurrenceIndex } = this.props;
+    this._setScripture(bookID, anchor, occurrences, occurrenceIndex);
   }
 
   componentWillUnmount() {
@@ -354,11 +355,11 @@ export default class Reader extends Component {
     );
   };
 
-  _setScripture = (bookID: string, anchor?: string, occurrences?: any, force?: boolean = false) => {
+  _setScripture = (bookID: string, anchor?: string, occurrences?: any, occurrenceIndex?: number, force?: boolean = false) => {
     const book = Book.findByID(bookID);
 
     const spheres = Preference.objectForKey(Preference.Keys.Reader.spheres) || [];
-    const options = {monadSet: book.monadSet, spheres, occurrences};
+    const options = {monadSet: book.monadSet, spheres, occurrences, occurrenceIndex};
 
     if (force || bookID !== this.state.bookID || anchor !== this.state.anchor) {
       this.setState({loading: true});
@@ -427,11 +428,11 @@ export default class Reader extends Component {
   };
 
   _onPressClearFilter = () => {
-    const { bookID, anchor, occurrences } = this.props;
+    const { bookID, anchor, occurrences, occurrenceIndex } = this.props;
 
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     Preference.setObjectForKey([], Preference.Keys.Reader.spheres);
-    this._setScripture(bookID, anchor, occurrences, true);
+    this._setScripture(bookID, anchor, occurrences, occurrenceIndex, true);
   };
 
   _debugScripture(scripture: string) {

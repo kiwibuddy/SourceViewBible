@@ -84,13 +84,13 @@ function scripture(options: Object) {
     const sphereFeatures = spheres.map(sphere => SPHERE_FEATURE_MAP[sphere]);
 
     const occurrences = (options && options.occurrences ? options.occurrences : []);
-    if (occurrences && occurrences.length > 0) {
+    const occurrenceIndex = (options ? options.occurrenceIndex : -1);
+    if (occurrences && occurrences.length > 0 && occurrenceIndex > -1) {
       const dictionaries = stylesheet['dictionaries'];
-      occurrences.forEach((occurrence) => {
-        for (let monad = occurrence.firstMonad; monad <= occurrence.lastMonad; monad++) {
-          dictionaries['occurrences'][monad.toString()] = '1';
-        }
-      });
+      const occurrence = occurrences[occurrenceIndex];
+      for (let monad = occurrence.firstMonad; monad <= occurrence.lastMonad; monad++) {
+        dictionaries['occurrences'][monad.toString()] = '1';
+      }
     }
 
     const base = stylesheet['fetchinfo']['base']['object_types'];
