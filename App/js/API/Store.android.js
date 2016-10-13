@@ -24,7 +24,7 @@ export default class Store {
   static purchase(productID) {
     return new Promise((resolve, reject) => {
       InAppBilling.open().then(() => {
-        InAppBilling.purchase('android.test.purchased').then((transationDetail) => {
+        InAppBilling.purchase(productID).then((transationDetail) => {
           InAppBilling.close();
           resolve(transationDetail.purchaseState === 'PurchasedSuccessfully');
         });
