@@ -126,8 +126,6 @@ export default class InAppPurchase extends Component {
 
   _onPressRestore = () => {
     Store.restorePurchases().then((purchases) => {
-      console.log('purchases', purchases);
-
       if (purchases.length > 0) {
         purchases.forEach((purchase) => {
           if (purchase.productID === SPHERES_PRODUCT_IDENTIFIER) {
@@ -141,7 +139,6 @@ export default class InAppPurchase extends Component {
 
   _fetchPurchase = () => {
     Store.products([SPHERES_PRODUCT_IDENTIFIER]).then((products) => {
-      console.log('products', products);
       this.setState({loading: false, product: products[0]});
     });
   }
