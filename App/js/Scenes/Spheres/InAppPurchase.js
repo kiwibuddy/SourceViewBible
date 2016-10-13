@@ -116,25 +116,35 @@ export default class InAppPurchase extends Component {
   }
 
   _onPressBuy = () => {
-    Store.purchase(SPHERES_PRODUCT_IDENTIFIER).then((purchased) => {
-      if (purchased) {
-        Preference.setBooleanForKey(true, Preference.Keys.Spheres.Purchased);
-        this.props.navigate(this.props.redirect, {replace: true});
-      }
-    });
+    if (__DEV__) {
+      Preference.setBooleanForKey(true, Preference.Keys.Spheres.Purchased);
+      this.props.navigate(this.props.redirect, {replace: true});
+    } else {
+      Store.purchase(SPHERES_PRODUCT_IDENTIFIER).then((purchased) => {
+        if (purchased) {
+          Preference.setBooleanForKey(true, Preference.Keys.Spheres.Purchased);
+          this.props.navigate(this.props.redirect, {replace: true});
+        }
+      });
+    }
   };
 
   _onPressRestore = () => {
-    Store.restorePurchases().then((purchases) => {
-      if (purchases.length > 0) {
-        purchases.forEach((purchase) => {
-          if (purchase.productID === SPHERES_PRODUCT_IDENTIFIER) {
-            Preference.setBooleanForKey(true, Preference.Keys.Spheres.Purchased);
-            this.props.navigate(this.props.redirect, {replace: true});
-          }
-        });
-      }
-    });
+    if (__DEV__) {
+      Preference.setBooleanForKey(true, Preference.Keys.Spheres.Purchased);
+      this.props.navigate(this.props.redirect, {replace: true});
+    } else {
+      Store.restorePurchases().then((purchases) => {
+        if (purchases.length > 0) {
+          purchases.forEach((purchase) => {
+            if (purchase.productID === SPHERES_PRODUCT_IDENTIFIER) {
+              Preference.setBooleanForKey(true, Preference.Keys.Spheres.Purchased);
+              this.props.navigate(this.props.redirect, {replace: true});
+            }
+          });
+        }
+      });
+    }
   }
 
   _fetchPurchase = () => {
