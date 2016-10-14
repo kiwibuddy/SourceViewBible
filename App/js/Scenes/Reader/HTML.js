@@ -97,6 +97,9 @@ module.exports = `
       .occurrence {
         text-decoration: underline
       }
+      .textVerse .occurrence {
+        text-decoration: none
+      }
       .textTitle {
         font-family: Georgia;
         font-weight: bold;
