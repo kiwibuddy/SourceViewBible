@@ -3962,6 +3962,10 @@ react-native-billing:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/react-native-billing/-/react-native-billing-2.1.0.tgz#0bb9227e7043754c223d69fab636a88c1213c2d1"
 
+react-native-device-info:
+  version "0.9.5"
+  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-0.9.5.tgz#0ab7e1342bf7fa0c3889c97938646d2ea9b3b249"
+
 "react-native-emdros@file:../Libraries/Emdros/":
   version "0.0.1"
 

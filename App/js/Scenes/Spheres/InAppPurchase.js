@@ -29,6 +29,7 @@ import { BACK, sphereHelpURL } from '../../Navigation';
 
 import { Preference } from '../../Preferences';
 const { width: WIDTH } = Dimensions.get('window');
+import DeviceInfo from 'react-native-device-info';
 
 // $FlowFixMe: Can't find os module extension
 import Store from '../../API/Store';
@@ -116,7 +117,7 @@ export default class InAppPurchase extends Component {
   }
 
   _onPressBuy = () => {
-    if (__DEV__) {
+    if (DeviceInfo.getModel() === 'Simulator') {
       Preference.setBooleanForKey(true, Preference.Keys.Spheres.Purchased);
       this.props.navigate(this.props.redirect, {replace: true});
     } else {
@@ -130,7 +131,7 @@ export default class InAppPurchase extends Component {
   };
 
   _onPressRestore = () => {
-    if (__DEV__) {
+    if (DeviceInfo.getModel() === 'Simulator') {
       Preference.setBooleanForKey(true, Preference.Keys.Spheres.Purchased);
       this.props.navigate(this.props.redirect, {replace: true});
     } else {
