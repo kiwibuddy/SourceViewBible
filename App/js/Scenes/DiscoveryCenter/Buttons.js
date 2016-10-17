@@ -31,7 +31,7 @@ export const DuplicateButton = (props: Object) => {
 export const ShareButton = (props: Object) => {
   return (
     <TouchableOpacity {...props}>
-      <Image source={require('./Images/btn-share.png')} />
+      <Image source={require('./Images/btn-share.png')} style={{marginLeft: 8,}} />
     </TouchableOpacity>
   );
 };
