@@ -4020,6 +4020,10 @@ react-native-vector-icons@^2.0.3:
     lodash "^4.0.0"
     yargs "^4.7.0"
 
+react-native-view-shot:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/react-native-view-shot/-/react-native-view-shot-1.5.0.tgz#18cf3da736224ee53aa2224201fbf949d496ad01"
+
 react-native@0.35.0:
   version "0.35.0"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.35.0.tgz#59a53e80109a728a7f6c7c9f0f0899c8b14c13b2"

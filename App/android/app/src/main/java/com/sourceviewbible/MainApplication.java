@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
+import fr.greweb.reactnativeviewshot.RNViewShotPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.idehub.Billing.InAppBillingBridgePackage;
 import com.horcrux.svg.RNSvgPackage;
@@ -46,6 +47,7 @@ public class MainApplication extends Application implements ReactApplication {
 
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNViewShotPackage(),
             new RNDeviceInfo(),
           new InAppBillingBridgePackage(licenseKey),
           new RNSvgPackage(),
