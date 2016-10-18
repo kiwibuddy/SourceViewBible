@@ -190,7 +190,7 @@ export default class Sources extends Component {
             <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('words.count', {count: wordCount, localizedCount: Localizable.toNumber(wordCount, {precision: 0})})}</Text>
           </View>
           <View style={styles.sourcesRightContainer}>
-            <Text style={StyleSheet.styles.cell.subtitle}>{source.chronologyDescription}</Text>
+            <Text numberOfLines={1} style={[StyleSheet.styles.cell.subtitle, {textAlign: 'right'}]}>{source.chronologyDescription}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -257,8 +257,7 @@ const styles = StyleSheet.create({
   },
   sourcesRightContainer: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
+    flexDirection: 'column',
     marginRight: 8,
     paddingTop: 4,
   },
