@@ -378,8 +378,14 @@ export default class SourceOverview extends Component {
             style={[styles.listItemIcon, {color: '#59626A'}]}
           />
           <View style={styles.listItem}>
-            <Text style={StyleSheet.styles.cell.titlemedium}>{title}</Text>
-            <Text style={StyleSheet.styles.cell.valuetitlemedium}>{value}</Text>
+            <View style={styles.sourcesCellContainer}>
+              <View style={styles.sourcesLeftContainer}>
+                <Text style={StyleSheet.styles.cell.titlemedium}>{title}</Text>
+              </View>
+              <View style={[styles.sourcesRightContainer, {marginRight: -8}]}>
+                <Text numberOfLines={1} style={[StyleSheet.styles.cell.valuetitlemedium, {textAlign: 'right'}]}>{value}</Text>
+              </View>
+            </View>
           </View>
         </View>
         <View style={styles.separator} />
@@ -598,8 +604,8 @@ const styles = StyleSheet.create({
   },
   sourcesCellContainer: {
     flex: 1,
-    marginRight: 15,
     flexDirection: 'row',
+    marginRight: 15,
   },
   sourcesLeftContainer: {
     flex: 1,
@@ -608,8 +614,8 @@ const styles = StyleSheet.create({
   },
   sourcesRightContainer: {
     flex: 1,
-    marginRight: 8,
     alignSelf: 'center',
+    marginRight: 8,
   },
   sourcesContent: {
     flex: 1,
