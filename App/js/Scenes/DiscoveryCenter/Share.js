@@ -39,7 +39,7 @@ export default class DiscoveryCenterShare extends Component {
   componentDidMount() {
     // Show share sheet
 
-    // const viewRef = this.refs.share;
+    const viewRef = this.refs.share;
     // RNViewShot.takeSnapshot(viewRef, {
     //   format: 'png',
     //   quality: 1.0
@@ -82,13 +82,16 @@ export default class DiscoveryCenterShare extends Component {
             onPress={() => this.props.navigate(BACK)}
           />}
         />
-        <ChartView
-          card={card}
-          data={data}
-          loading={false}
-          headerHidden={true}
-          footerHidden={true}
-        />
+        <View ref="share" style={{height: 295}}>
+          <ChartView
+            card={card}
+            data={data}
+            loading={false}
+            headerHidden={true}
+            footerHidden={true}
+          />
+        </View>
+
       </View>
     );
   }
