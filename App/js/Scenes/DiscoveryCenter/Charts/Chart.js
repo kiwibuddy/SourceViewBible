@@ -25,6 +25,8 @@ const ChartType = {
 };
 
 const Header = (props: Object) => {
+  if (props.hidden && props.hidden === true) return null;
+
   return (
     <View {...props} style={[styles.header, props.style]}>
       {props.children}
@@ -33,6 +35,8 @@ const Header = (props: Object) => {
 };
 
 const Footer = (props: Object) => {
+  if (props.hidden && props.hidden === true) return null;
+  
   return (
     <View {...props} style={[styles.footer, props.style]}>
       {props.children}
@@ -66,7 +70,7 @@ const DropdownButton = (props: DropdownButtonProps) => {
     <TouchableOpacity disabled={!props.onPress} {...props}>
       <Image style={styles.chartIcon} source={props.image} />
       <View style={{flex: 1, flexWrap: 'wrap'}}>
-        <Text numberOfLines={2} style={styles.chartProperty}>{props.title}</Text>        
+        <Text numberOfLines={2} style={styles.chartProperty}>{props.title}</Text>
       </View>
       {enabled}
     </TouchableOpacity>

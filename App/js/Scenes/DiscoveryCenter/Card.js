@@ -160,7 +160,7 @@ export default class Card extends Component {
 
     return (
       <ChartView
-        ref="chartview"
+        ref="chart"
         card={card}
         data={this.state.data}
         loading={this.state.loading}
@@ -235,7 +235,7 @@ export default class Card extends Component {
   }
 
   _onPressShare = () => {
-    const viewRef = this.refs.chartview.refs.chart;
+    const viewRef = this.refs.chart;
     RNViewShot.takeSnapshot(viewRef, {
       format: "jpeg",
       quality: 0.8

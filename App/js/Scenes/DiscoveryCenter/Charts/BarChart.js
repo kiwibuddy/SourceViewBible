@@ -74,10 +74,8 @@ export default class BarChartView extends Component {
 
     return (
       <Chart>
-        <View ref="chart" style={{flex: 1}}>
-          {chart}
-        </View>
-        <Chart.Header>
+        {chart}
+        <Chart.Header hidden={props.headerHidden}>
           <Chart.DropdownButton
             image={require('../Images/chart-icn-bar-xaxis.png')}
             onPress={() => props.onPressAxis(axisItemsURL({title: "Choose X Axis", axis: 'xAxis'}))}
@@ -91,7 +89,7 @@ export default class BarChartView extends Component {
             style={StyleSheet.styles.discoveryCenter.rightContainer}
           />
         </Chart.Header>
-        <Chart.Footer>
+        <Chart.Footer hidden={props.footerHidden}>
           <View style={[StyleSheet.styles.discoveryCenter.leftContainer, {justifyContent: 'flex-start', paddingLeft: 5, borderRightWidth: 0}]}>
             <TouchableOpacity onPress={() => props.onPressChartType(Chart.Type.PIE)}>
               <Image source={require('../Images/chart-type-pie.png')} />
