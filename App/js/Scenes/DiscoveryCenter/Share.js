@@ -37,17 +37,7 @@ export default class DiscoveryCenterShare extends Component {
   props: Props;
 
   componentDidMount() {
-    // Show share sheet
-
-    const viewRef = this.refs.share;
-    // RNViewShot.takeSnapshot(viewRef, {
-    //   format: 'png',
-    //   quality: 1.0
-    // })
-    // .then(
-    //   uri => console.log('Image saved to', uri),
-    //   error => console.error('Oops, snapshot failed', error)
-    // );
+    setTimeout(this._share.bind(this), 100);
   }
 
   render() {
@@ -91,8 +81,22 @@ export default class DiscoveryCenterShare extends Component {
             footerHidden={true}
           />
         </View>
-
       </View>
+    );
+  }
+
+  _share() {
+    // Show share sheet
+
+    const viewRef = this.refs.share;
+    RNViewShot.takeSnapshot(viewRef, {
+      format: 'png',
+      quality: 1.0
+    })
+    .then(uri => {
+        console.log('woot!', uri);
+      },
+      error => console.error('Oops, snapshot failed', error)
     );
   }
 }
