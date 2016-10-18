@@ -30,91 +30,96 @@ type Props = {
   onPressChartType: Function,
 };
 
-const CloudChartView = (props: Props) => {
-  const { card, loading } = props;
-  const occurrenceCount = card.occurrenceCount;
-  const filterCount = card.filters.length;
-  const xAxis = card.xAxis;
-  const yAxis = card.yAxis;
-  const data = (card.zAxis && props.data ? props.data[0].value : props.data);
+export default class CloudChartView extends Component {
+  render() {
+    const props = this.props;
+    const { card, loading } = props;
+    const occurrenceCount = card.occurrenceCount;
+    const filterCount = card.filters.length;
+    const xAxis = card.xAxis;
+    const yAxis = card.yAxis;
+    const data = (card.zAxis && props.data ? props.data[0].value : props.data);
 
-  let xAxisTitle = "Show...";
-  if (card.xAxis) {
-    const actantType = card.xAxis.actantType;
-    const actantTypeKey = (actantType ? `${actantType}-` : '');
-    xAxisTitle = Localizable.t(`xAxis-${actantTypeKey}${card.xAxis.type}`);
-  }
+    let xAxisTitle = "Show...";
+    if (card.xAxis) {
+      const actantType = card.xAxis.actantType;
+      const actantTypeKey = (actantType ? `${actantType}-` : '');
+      xAxisTitle = Localizable.t(`xAxis-${actantTypeKey}${card.xAxis.type}`);
+    }
 
-  let yAxisTitle = "By...";
-  if (card.yAxis) {
-    const actantType = card.yAxis.actantType;
-    const actantTypeKey = (actantType ? `${actantType}-` : '');
-    yAxisTitle = Localizable.t(`yAxis-${actantTypeKey}${card.yAxis.type}`);
-  }
+    let yAxisTitle = "By...";
+    if (card.yAxis) {
+      const actantType = card.yAxis.actantType;
+      const actantTypeKey = (actantType ? `${actantType}-` : '');
+      yAxisTitle = Localizable.t(`yAxis-${actantTypeKey}${card.yAxis.type}`);
+    }
 
-  let chart = null;
-  if (!xAxis || !yAxis || occurrenceCount == 0 || data == null || loading) {
-    chart = <Image style={{alignSelf: 'center'}} source={require('../Images/chart-cloud-blankslate.png')} />;
-  } else {
-    const words = data.slice(0, Math.min(data.length, 10)).map(word => word.label);
-    chart = <WordCloud style={styles.chart}>
-      <ParallaxMotionView intensity={5} style={[styles.parallax, {opacity: 0.8}]}>
-        <Text style={[styles.wc1, {top: 50, alignSelf: 'center'}]} numberOfLines={1}>{words[0]}</Text>
-      </ParallaxMotionView>
-      <ParallaxMotionView intensity={10} style={[styles.parallax, {opacity: 0.8}]}>
-        <Text style={[styles.wc2, {top: 10, left: -5}]}>{words[1]}</Text>
-        <Text style={[styles.wc2, {bottom: 20, right: 15}]}>{words[2]}</Text>
-        <Text style={[styles.wc2, {top: -5, right: 50}]}>{words[3]}</Text>
-        <Text style={[styles.wc2, {bottom: 0, left: 50}]}>{words[4]}</Text>
-      </ParallaxMotionView>
-      <ParallaxMotionView intensity={20} style={[styles.parallax, {opacity: 0.6}]}>
-        <Text style={[styles.wc3, {top: 40, right: 15}]}>{words[5]}</Text>
-        <Text style={[styles.wc3, {top: 120, left: 0}]}>{words[6]}</Text>
-        <Text style={[styles.wc3, {top: 60, left: 35}]}>{words[7]}</Text>
-        <Text style={[styles.wc3, {bottom: 70, right: 35}]}>{words[8]}</Text>
-        <Text style={[styles.wc3, {bottom: 10, right: 120}]}>{words[9]}</Text>
-      </ParallaxMotionView>
-    </WordCloud>
-  }
+    let chart = null;
+    if (!xAxis || !yAxis || occurrenceCount == 0 || data == null || loading) {
+      chart = <Image style={{alignSelf: 'center'}} source={require('../Images/chart-cloud-blankslate.png')} />;
+    } else {
+      const words = data.slice(0, Math.min(data.length, 10)).map(word => word.label);
+      chart = <WordCloud style={styles.chart}>
+        <ParallaxMotionView intensity={5} style={[styles.parallax, {opacity: 0.8}]}>
+          <Text style={[styles.wc1, {top: 50, alignSelf: 'center'}]} numberOfLines={1}>{words[0]}</Text>
+        </ParallaxMotionView>
+        <ParallaxMotionView intensity={10} style={[styles.parallax, {opacity: 0.8}]}>
+          <Text style={[styles.wc2, {top: 10, left: -5}]}>{words[1]}</Text>
+          <Text style={[styles.wc2, {bottom: 20, right: 15}]}>{words[2]}</Text>
+          <Text style={[styles.wc2, {top: -5, right: 50}]}>{words[3]}</Text>
+          <Text style={[styles.wc2, {bottom: 0, left: 50}]}>{words[4]}</Text>
+        </ParallaxMotionView>
+        <ParallaxMotionView intensity={20} style={[styles.parallax, {opacity: 0.6}]}>
+          <Text style={[styles.wc3, {top: 40, right: 15}]}>{words[5]}</Text>
+          <Text style={[styles.wc3, {top: 120, left: 0}]}>{words[6]}</Text>
+          <Text style={[styles.wc3, {top: 60, left: 35}]}>{words[7]}</Text>
+          <Text style={[styles.wc3, {bottom: 70, right: 35}]}>{words[8]}</Text>
+          <Text style={[styles.wc3, {bottom: 10, right: 120}]}>{words[9]}</Text>
+        </ParallaxMotionView>
+      </WordCloud>
+    }
 
-  return (
-    <Chart>
-      {chart}
-      <Chart.Header>
-        <Chart.DropdownButton
-          image={require('../Images/chart-icn-word-xaxis.png')}
-          onPress={() => props.onPressAxis(axisItemsURL({title: "Choose Text", axis: 'xAxis'}))}
-          title={xAxisTitle}
-          style={StyleSheet.styles.discoveryCenter.leftContainer}
-        />
-        <Chart.DropdownButton
-          image={require('../Images/chart-icn-word-yaxis.png')}
-          // onPress={() => props.onPressAxis(axisItemsURL({title: "Choose Size", axis: 'yAxis'}))}
-          title={yAxisTitle}
-          style={StyleSheet.styles.discoveryCenter.rightContainer}
-        />
-      </Chart.Header>
-      <Chart.Footer>
-        <View style={[StyleSheet.styles.discoveryCenter.leftContainer, {justifyContent: 'flex-start', paddingLeft: 5, borderRightWidth: 0}]}>
-          <TouchableOpacity onPress={() => props.onPressChartType(Chart.Type.PIE)}>
-            <Image source={require('../Images/chart-type-pie.png')} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => props.onPressChartType(Chart.Type.BAR)}>
-            <Image source={require('../Images/chart-type-bar.png')} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => props.onPressChartType(Chart.Type.CLOUD)}>
-            <Image source={require('../Images/chart-type-cloud-s.png')} />
-          </TouchableOpacity>
+    return (
+      <Chart>
+        <View ref="chart" style={{flex: 1}}>
+          {chart}
         </View>
-        <Text style={styles.chartNote}>TOP 10</Text>
-        <View style={[StyleSheet.styles.discoveryCenter.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
-          <TouchableOpacity>
-          </TouchableOpacity>
-        </View>
-      </Chart.Footer>
-    </Chart>
-  );
-};
+        <Chart.Header>
+          <Chart.DropdownButton
+            image={require('../Images/chart-icn-word-xaxis.png')}
+            onPress={() => props.onPressAxis(axisItemsURL({title: "Choose Text", axis: 'xAxis'}))}
+            title={xAxisTitle}
+            style={StyleSheet.styles.discoveryCenter.leftContainer}
+          />
+          <Chart.DropdownButton
+            image={require('../Images/chart-icn-word-yaxis.png')}
+            // onPress={() => props.onPressAxis(axisItemsURL({title: "Choose Size", axis: 'yAxis'}))}
+            title={yAxisTitle}
+            style={StyleSheet.styles.discoveryCenter.rightContainer}
+          />
+        </Chart.Header>
+        <Chart.Footer>
+          <View style={[StyleSheet.styles.discoveryCenter.leftContainer, {justifyContent: 'flex-start', paddingLeft: 5, borderRightWidth: 0}]}>
+            <TouchableOpacity onPress={() => props.onPressChartType(Chart.Type.PIE)}>
+              <Image source={require('../Images/chart-type-pie.png')} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => props.onPressChartType(Chart.Type.BAR)}>
+              <Image source={require('../Images/chart-type-bar.png')} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => props.onPressChartType(Chart.Type.CLOUD)}>
+              <Image source={require('../Images/chart-type-cloud-s.png')} />
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.chartNote}>TOP 10</Text>
+          <View style={[StyleSheet.styles.discoveryCenter.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
+            <TouchableOpacity>
+            </TouchableOpacity>
+          </View>
+        </Chart.Footer>
+      </Chart>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   chart: {
@@ -170,5 +175,3 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   }
 });
-
-export default CloudChartView;

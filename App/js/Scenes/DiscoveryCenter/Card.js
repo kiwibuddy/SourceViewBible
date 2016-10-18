@@ -25,6 +25,8 @@ import {
   ChartBlankslate,
 } from './Charts';
 
+import RNViewShot from 'react-native-view-shot';
+
 import FilterItems from './Filters/FilterItems';
 
 import { DeleteButton, DuplicateButton, ShareButton } from './Buttons';
@@ -158,6 +160,7 @@ export default class Card extends Component {
 
     return (
       <ChartView
+        ref="chartview"
         card={card}
         data={this.state.data}
         loading={this.state.loading}
@@ -232,10 +235,15 @@ export default class Card extends Component {
   }
 
   _onPressShare = () => {
-    if (this.props.onPressShare) {
-      const { card, data } = this.state;
-      this.props.onPressShare(card, data);
-    }
+    const viewRef = this.refs.chartview.refs.chart;
+    RNViewShot.takeSnapshot(viewRef, {
+      format: "jpeg",
+      quality: 0.8
+    })
+    .then(
+      uri => console.log("Image saved to", uri),
+      error => console.error("Oops, snapshot failed", error)
+    );
   }
 
   _onPressChartType = (chartType: string) => {
