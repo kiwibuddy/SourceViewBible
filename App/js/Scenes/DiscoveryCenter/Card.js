@@ -50,6 +50,7 @@ type Props = {
   onPressDelete?: Function,
   onPressDuplicate?: Function,
   onPressOccurrences?: Function,
+  onPressShare?: Function,
   onShowPopover?: Function,
 };
 
@@ -227,6 +228,13 @@ export default class Card extends Component {
   _onPressDuplicate = () => {
     if (this.props.onPressDuplicate) {
       this.props.onPressDuplicate(this.state.card);
+    }
+  }
+
+  _onPressShare = () => {
+    if (this.props.onPressShare) {
+      const { card, data } = this.state;
+      this.props.onPressShare(card, data);
     }
   }
 
