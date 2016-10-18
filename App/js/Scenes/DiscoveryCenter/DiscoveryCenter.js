@@ -40,7 +40,7 @@ import Menu, {
   MenuTrigger,
 } from 'react-native-popup-menu';
 
-import { BACK, discoveryCenterURL, discoveryCenterHelpURL, occurrencesURL } from '../../Navigation';
+import { BACK, discoveryCenterURL, discoveryCenterHelpURL, discoveryCenterShareURL, occurrencesURL } from '../../Navigation';
 
 import { Discovery } from '../../Preferences';
 import Query from './Query';
@@ -193,6 +193,7 @@ export default class DiscoveryCenter extends Component {
         onPressDelete={() => this._deleteCard(card)}
         onPressDuplicate={(card) => this._duplicateCard(card)}
         onPressOccurrences={(card) => this._onPressOccurrences(card)}
+        onPressShare={(share) => this._onPressShare(share)}
         onShowPopover={(props, onComplete) => this._showPopover(props, onComplete)}
       />;
     }
@@ -284,6 +285,11 @@ export default class DiscoveryCenter extends Component {
 
     this.props.navigate(occurrencesURL({title: Localizable.t('passages'), occurrences, modal: true, onPressBack, backTitle: Localizable.t('back')}), {replace: true});
   };
+
+  _onPressShare = (share: Object) => {
+    const { card, data } = share;
+    this.props.navigate(discoveryCenterShareURL({title: Localizable.t('share'), card, data, modal: true}));
+  }
 
   _onPressAdd = () => {
     this._addCard(this._defaultCard());
