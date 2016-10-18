@@ -158,7 +158,6 @@ export default class Card extends Component {
 
     return (
       <ChartView
-        ref="chart"
         card={card}
         data={this.state.data}
         loading={this.state.loading}

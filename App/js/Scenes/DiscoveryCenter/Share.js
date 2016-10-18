@@ -51,6 +51,27 @@ export default class DiscoveryCenterShare extends Component {
   }
 
   render() {
+    const { card, data } = this.props;
+
+    let ChartView = null;
+    switch (card.chartType) {
+      case Chart.Type.BAR:
+        ChartView = BarChart;
+        break;
+
+      case Chart.Type.PIE:
+        ChartView = PieChart;
+        break;
+
+      case Chart.Type.CLOUD:
+        ChartView = CloudChart;
+        break;
+
+      default:
+        ChartView = ChartBlankslate;
+        break;
+    }
+
     return (
       <View style={styles.container}>
         <NavigationHeader
@@ -61,7 +82,13 @@ export default class DiscoveryCenterShare extends Component {
             onPress={() => this.props.navigate(BACK)}
           />}
         />
-
+        <ChartView
+          card={card}
+          data={data}
+          loading={false}
+          headerHidden={true}
+          footerHidden={true}
+        />
       </View>
     );
   }
