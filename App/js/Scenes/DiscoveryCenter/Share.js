@@ -84,8 +84,6 @@ export default class DiscoveryCenterShare extends Component {
   }
 
   _share() {
-    // Show share sheet
-
     const viewRef = this.refs.share;
     RNViewShot.takeSnapshot(viewRef, {
       format: 'png',
