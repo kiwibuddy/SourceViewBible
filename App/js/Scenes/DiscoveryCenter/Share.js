@@ -75,7 +75,7 @@ export default class DiscoveryCenterShare extends Component {
             card={card}
             data={data}
             loading={false}
-            headerHidden={true}
+            headerDisabled={true}
             footerHidden={true}
           />
         </View>

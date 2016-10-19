@@ -36,7 +36,7 @@ const Header = (props: Object) => {
 
 const Footer = (props: Object) => {
   if (props.hidden && props.hidden === true) return null;
-  
+
   return (
     <View {...props} style={[styles.footer, props.style]}>
       {props.children}
@@ -65,14 +65,15 @@ type DropdownButtonProps = {
 };
 
 const DropdownButton = (props: DropdownButtonProps) => {
-  const enabled = props.onPress ? <Image style={styles.chartDropdown} source={require('../Images/chart-icn-dropdown.png')} /> : null;
+  const disabled = !props.onPress || (props.disabled && props.disabled === true);
+  const dropdown = !disabled ? <Image style={styles.chartDropdown} source={require('../Images/chart-icn-dropdown.png')} /> : null;
   return (
-    <TouchableOpacity disabled={!props.onPress} {...props}>
+    <TouchableOpacity disabled={disabled} {...props}>
       <Image style={styles.chartIcon} source={props.image} />
       <View style={{flex: 1, flexWrap: 'wrap'}}>
         <Text numberOfLines={2} style={styles.chartProperty}>{props.title}</Text>
       </View>
-      {enabled}
+      {dropdown}
     </TouchableOpacity>
   )
 };

@@ -85,12 +85,14 @@ export default class CloudChartView extends Component {
         <Chart.Header hidden={props.headerHidden}>
           <Chart.DropdownButton
             image={require('../Images/chart-icn-word-xaxis.png')}
+            disabled={props.headerDisabled}
             onPress={() => props.onPressAxis(axisItemsURL({title: "Choose Text", axis: 'xAxis'}))}
             title={xAxisTitle}
             style={StyleSheet.styles.discoveryCenter.leftContainer}
           />
           <Chart.DropdownButton
             image={require('../Images/chart-icn-word-yaxis.png')}
+            disabled={props.headerDisabled}
             // onPress={() => props.onPressAxis(axisItemsURL({title: "Choose Size", axis: 'yAxis'}))}
             title={yAxisTitle}
             style={StyleSheet.styles.discoveryCenter.rightContainer}

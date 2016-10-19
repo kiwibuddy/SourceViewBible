@@ -74,18 +74,21 @@ export default class PieChartView extends Component {
         <Chart.Header hidden={props.headerHidden}>
           <Chart.DropdownButton
             image={require('../Images/chart-icn-pie-slices.png')}
+            disabled={props.headerDisabled}
             onPress={() => props.onPressAxis(axisItemsURL({title: 'Slices', axis: 'xAxis'}))}
             style={StyleSheet.styles.discoveryCenter.leftContainer}
             title={xAxisTitle}
           />
           <Chart.DropdownButton
             image={require('../Images/chart-icn-pie-slice-value.png')}
+            disabled={props.headerDisabled}
             // onPress={() => props.onPressAxis(axisItemsURL({title: 'Slice', axis: 'yAxis'}))}
             style={StyleSheet.styles.discoveryCenter.leftContainer}
             title={yAxisTitle}
           />
           <Chart.DropdownButton
             image={require('../Images/chart-icn-pies.png')}
+            disabled={props.headerDisabled}
             onPress={() => props.onPressAxis(axisItemsURL({title: 'Pies', axis: 'zAxis'}))}
             style={StyleSheet.styles.discoveryCenter.rightContainer}
             title={zAxisTitle}

@@ -78,12 +78,14 @@ export default class BarChartView extends Component {
         <Chart.Header hidden={props.headerHidden}>
           <Chart.DropdownButton
             image={require('../Images/chart-icn-bar-xaxis.png')}
+            disabled={props.headerDisabled}
             onPress={() => props.onPressAxis(axisItemsURL({title: "Choose X Axis", axis: 'xAxis'}))}
             title={xAxisTitle}
             style={StyleSheet.styles.discoveryCenter.leftContainer}
           />
           <Chart.DropdownButton
             image={require('../Images/chart-icn-bar-yaxis.png')}
+            disabled={props.headerDisabled}
             // onPress={() => props.onPressAxis(axisItemsURL({title: "Choose Y Axis", axis: 'yAxis'}))}
             title={yAxisTitle}
             style={StyleSheet.styles.discoveryCenter.rightContainer}
