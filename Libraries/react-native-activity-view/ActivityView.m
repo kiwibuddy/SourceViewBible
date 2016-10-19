@@ -124,7 +124,7 @@ RCT_EXPORT_METHOD(show:(NSDictionary *)args callback:(RCTResponseSenderBlock)cal
     }
 
     if (file) {
-        [shareObject addObject:file];
+        [shareObject addObject:[NSURL fileURLWithPath:file]];
     }
 
 

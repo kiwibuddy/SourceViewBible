@@ -93,9 +93,7 @@ export default class DiscoveryCenterShare extends Component {
     })
     .then(uri => {
         console.log('woot!', uri);
-        ActivityView.show({
-          file: uri
-        }, (error, result) => {
+        ActivityView.show({file: uri}, (error, result) => {
           this.props.navigate(BACK);
         });
       },
