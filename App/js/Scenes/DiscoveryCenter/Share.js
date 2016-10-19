@@ -25,6 +25,8 @@ import {
   ChartBlankslate,
 } from './Charts';
 
+// $FlowFixMe: - Flow can't find os module extension
+import ActivityView from 'react-native-activity-view';
 import RNViewShot from 'react-native-view-shot';
 
 type Props = {
@@ -67,10 +69,6 @@ export default class DiscoveryCenterShare extends Component {
         <NavigationHeader
           navigate={this.props.navigate}
           title={Localizable.t('share')}
-          renderLeftComponent={(props: Object) => <NavigationBarButton
-            title={Localizable.t('cancel')}
-            onPress={() => this.props.navigate(BACK)}
-          />}
         />
         <View ref="share" style={{height: 295}}>
           <ChartView
@@ -95,6 +93,11 @@ export default class DiscoveryCenterShare extends Component {
     })
     .then(uri => {
         console.log('woot!', uri);
+        ActivityView.show({
+          file: uri
+        }, (error, result) => {
+          this.props.navigate(BACK);
+        });
       },
       error => console.error('Oops, snapshot failed', error)
     );
