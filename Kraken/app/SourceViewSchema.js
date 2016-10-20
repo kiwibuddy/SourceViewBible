@@ -39,7 +39,7 @@ const ActantSchema = {
     sphereCounts: {type: 'list', objectType: 'Count'},
     sphereWordCount: {type: 'int', default: 0},
     wordCount: {type: 'int', default: 0},
-    words: {type: 'list', objectType: 'Count'},
+    words: {type: 'list', objectType: 'WordCount'},
   }
 };
 
@@ -73,7 +73,7 @@ const BookSchema = {
     sphereCounts: {type: 'list', objectType: 'Count'},
     sphereWordCount: {type: 'int', default: 0},
     wordCount: {type: 'int', default: 0},
-    words: {type: 'list', objectType: 'Count'},
+    words: {type: 'list', objectType: 'WordCount'},
     overview: {type: 'list', objectType: 'Content'},
   }
 };
@@ -228,7 +228,7 @@ const SourceRelationSchema = {
     sphereCounts: {type: 'list', objectType: 'Count'},
     sphereWordCount: {type: 'int', default: 0},
     wordCount: {type: 'int', default: 0},
-    words: {type: 'list', objectType: 'Count'},
+    words: {type: 'list', objectType: 'WordCount'},
   }
 };
 
@@ -251,7 +251,7 @@ const SphereSchema = {
     sourceTypeCount: {type: 'int', default: 0},
     sourceTypeCounts: {type: 'list', objectType: 'Count'},
     wordCount: {type: 'int', default: 0},
-    words: {type: 'list', objectType: 'Count'},
+    words: {type: 'list', objectType: 'WordCount'},
     passages: {type: 'list', objectType: 'SpherePassage'},
     overview: {type: 'list', objectType: 'Content'},
   }
@@ -278,6 +278,19 @@ export class SpherePassage extends Realm.Object {
 }
 SpherePassage.schema = SpherePassageSchema;
 
+const WordCountSchema = {
+  name: 'WordCount',
+  properties: {
+    string: 'string',
+    count: {type: 'int', default: 0},
+    monads: {type: 'list', objectType: 'MonadSet'},
+  }
+};
 
-const Schema = [Actant, Bible, Book, BookSourceOccurrence, Chapter, Chronology, MonadSet, Nature, Profession, SourceRelation, Sphere, SpherePassage, Count, Content];
+class WordCount extends Realm.Object {
+
+}
+WordCount.schema = WordCountSchema;
+
+const Schema = [Actant, Bible, Book, BookSourceOccurrence, Chapter, Chronology, MonadSet, Nature, Profession, SourceRelation, Sphere, SpherePassage, Count, Content, WordCount];
 export default Schema;

@@ -89,7 +89,15 @@ export function seedObjectWordCloud(realm: Object, type: string, key: any, wordC
     const words = wordCounts.filter((word) => {
       wordCount += word.count;
       return word.string.length > MINIMUM_WORD_LENGTH && STOP_WORDS.indexOf(word.string) == -1;
-    }).sort((a, b) => a.count > b.count ? -1 : 1).slice(0, WORD_CLOUD_LIMIT);
+    }).sort((a, b) => {
+      if (a.count > b.count) {
+        return -1;
+      } else if (a.count < b.count) {
+        return 1;
+      } else {
+        return a.string > b.string ? 1 : -1
+      }
+    }).slice(0, WORD_CLOUD_LIMIT);
 
     realm.create(type, {id: key, wordCount, words}, true);
   }

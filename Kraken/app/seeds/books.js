@@ -6,6 +6,7 @@ const {getChapterID, firstInitial, getSourceID, seedObjectSourceTypeWordCounts, 
 const UUID = require('react-native-uuid');
 
 const BOOKS = require('../books');
+const BOOK_WORDS = require('../../db/seeds/book_words');
 
 export async function seedBookObjects(emdros: Object, realm: Object) {
   console.log('Seeding Book Names...');
@@ -156,8 +157,29 @@ async function seedBookWordCloud(emdros, realm) {
 
   for (let [index, book] of realm.objects('Book').entries()) {
     const words = await emdros.words({from: book.firstMonad, to: book.lastMonad});
+    const bookMonads = BOOK_WORDS[book.DJHRef];
+
     realm.write(() => {
       seedObjectWordCloud(realm, 'Book', book.id, words);
+
+      book.words.forEach(wordCount => {
+        const wordMonads = bookMonads[wordCount.string];
+        if (wordMonads) {
+          const monads = wordMonads.map(monadSet => {
+            return ({
+              firstMonad: monadSet.first_monad,
+              lastMonad: monadSet.last_monad,
+              book: book,
+              chapter: monadSet.chapter,
+              verse: monadSet.verse
+            });
+          });
+          wordCount.monads = monads;
+        } else {
+          console.log('No monads for book word', book.DJHRef, wordCount.string);
+          // throw('done');
+        }
+      });
     });
   }
 }
