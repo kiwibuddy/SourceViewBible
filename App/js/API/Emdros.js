@@ -57,7 +57,7 @@ function styleEmbeddedQuotations(feature: string) {
 }
 
 function styleOccurrences(feature: string) {
-  return `{{ setvar 'monad' }}{{ firstmonad }}{{ setvarend }}{{ setvar 'occurrence' }}{{ dictlookup 'occurrences' var 'monad' '' }}{{ setvarend }}{{ if varequal 'occurrence' '' }}${feature}{{ else }}<span class="occurrence">${feature}</span>{{ endif }}`;
+  return `{{ setvar 'monad' }}{{ firstmonad }}{{ setvarend }}{{ setvar 'occurrence' }}{{ dictlookup 'occurrences' var 'monad' '' }}{{ setvarend }}{{ if varequal 'occurrence' '' }}${feature}{{ else }}<span id="occurrence-{{ emitvar 'monad' }}" class="occurrence">${feature}</span>{{ endif }}`;
 }
 
 function openDatabase() {

@@ -108,7 +108,7 @@ export default class Occurrences extends Component {
     const bsoReference = Localizable.t('bso-reference', {book: book.name, source: occurrence.name, number: occurrence.number});
     const occurrencesRoute = occurrencesURL({title: Localizable.t('passages'), occurrences, onPressBack, modal: true});
 
-    const route = readerURL({bookID: book.id, anchor: `source-${occurrence.name}-${occurrence.number}`, title: book.name, description: bsoReference, occurrenceIndex, occurrences, occurrencesRoute});
+    const route = readerURL({bookID: book.id, anchor: `occurrence-${occurrence.firstMonad}`, title: book.name, description: bsoReference, occurrenceIndex, occurrences, occurrencesRoute});
 
     return (
       <TouchableOpacity key={occurrence.id} style={styles.listItemContainer} onPress={() => this._navigate(route)}>

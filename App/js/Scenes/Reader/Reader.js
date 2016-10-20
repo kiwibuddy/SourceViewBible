@@ -54,7 +54,7 @@ class OccurrenceToolbar extends Component {
     if (occurrence) {
       const book = occurrence.book;
       const bsoReference = Localizable.t('bso-reference', {book: book.name, source: occurrence.name, number: occurrence.number});
-      currentRoute = readerURL({bookID: book.id, anchor: `source-${occurrence.name}-${occurrence.number}`, title: book.name, description: bsoReference});
+      currentRoute = readerURL({bookID: book.id, anchor: `occurrence-${occurrence.firstMonad}`, title: book.name, description: bsoReference});
     }
 
     let previousRoute = null;
@@ -63,7 +63,7 @@ class OccurrenceToolbar extends Component {
       const previousOccurrence = occurrences[previousOccurrenceIndex];
       const book = previousOccurrence.book;
       const bsoReference = Localizable.t('bso-reference', {book: book.name, source: previousOccurrence.name, number: previousOccurrence.number});
-      previousRoute = readerURL({bookID: book.id, anchor: `source-${previousOccurrence.name}-${previousOccurrence.number}`, title: book.name, description: bsoReference, occurrenceIndex: previousOccurrenceIndex, occurrences, occurrencesRoute});
+      previousRoute = readerURL({bookID: book.id, anchor: `occurrence-${previousOccurrence.firstMonad}`, title: book.name, description: bsoReference, occurrenceIndex: previousOccurrenceIndex, occurrences, occurrencesRoute});
     }
 
     let nextRoute = null;
@@ -72,7 +72,7 @@ class OccurrenceToolbar extends Component {
       const nextOccurrence = occurrences[nextOccurrenceIndex];
       const book = nextOccurrence.book;
       const bsoReference = Localizable.t('bso-reference', {book: book.name, source: nextOccurrence.name, number: nextOccurrence.number});
-      nextRoute = readerURL({bookID: book.id, anchor: `source-${nextOccurrence.name}-${nextOccurrence.number}`, title: book.name, description: bsoReference, occurrenceIndex: nextOccurrenceIndex, occurrences, occurrencesRoute});
+      nextRoute = readerURL({bookID: book.id, anchor: `occurrence-${nextOccurrence.firstMonad}`, title: book.name, description: bsoReference, occurrenceIndex: nextOccurrenceIndex, occurrences, occurrencesRoute});
     }
 
     return (
