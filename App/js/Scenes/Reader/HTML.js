@@ -192,14 +192,41 @@ module.exports = `
       .nonCanonicalText .footnoteIndicator {
         color: #323B43;
       }
+      .editMenuiOS {
+        position: absolute;
+        margin-left: auto;
+        margin-right: auto;
+        z-index: 1000;
+        margin-top: 10pt;
+      }
+      .editMenuiOS a {
+        font-family: -apple-system, "Helvetica Neue", "Lucida Grande";
+        font-size: 14px;
+        color: #FFF;
+        text-decoration: none;
+      }
+      .editMenuiOS .btn {
+        background-color: #29292A;
+        padding: 5pt;
+      }
+      .editMenuiOS .left {
+        border-top-left-radius: 3pt;
+        border-bottom-left-radius: 3pt;
+      }
+      .editMenuiOS .right {
+        margin-right: 0;
+        border-top-right-radius: 3pt;
+        border-bottom-right-radius: 3pt;
+      }
       ${CSS}
     </style>
   </head>
   <body id="scripture">
-    <div id="editMenu" class="iOS">
-      <a href="#" class="left">Highlight</a>
-      <a href="#" class="middle">Bookmark</a>
-      <a href="#" class="right">Share</a>
+    <div id="edit-menu" class="editMenuiOS">
+      <a href="#" class="btn left">Highlight</a>
+      <a href="#" class="btn middle">Bookmark</a>
+      <a href="#" class="btn right">Share</a>
+      <div class="arrow"></div>
     </div>
     <div id="footnote-overlay" class="footnoteOverlay" style="display: none;">
       <div class="footnoteContainer">
