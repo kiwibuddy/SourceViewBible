@@ -153,7 +153,7 @@ export default class BookOverview extends Component {
               <Text style={StyleSheet.styles.statisticTitle}>{book.sourceCount}</Text>
               <SourcesBarChart
                 style={{flex: 0, marginHorizontal: 4}}
-                barStyle={{width: 3, height: 20, marginHorizontal: 1.5}}
+                barStyle={{flex: 0, width: 3, height: 20, marginHorizontal: 1.5}}
                 horizontal={false}
                 data={[{narrator: book.countOfSourceType(SourceType.NARRATOR)}, {god: book.countOfSourceType(SourceType.GOD)}, {lead: book.countOfSourceType(SourceType.LEAD)}, {support: book.countOfSourceType(SourceType.SUPPORT)}]}
               />
@@ -169,7 +169,7 @@ export default class BookOverview extends Component {
               <Text style={StyleSheet.styles.statisticTitle}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
               <SpheresBarChart
                 style={{flex: 0, marginHorizontal: 4}}
-                barStyle={{width: 3, height: 20, marginHorizontal: 1.5}}
+                barStyle={{flex: 0, width: 3, height: 20, marginHorizontal: 1.5}}
                 horizontal={false}
                 data={[{family: book.countOfSphereType(SphereType.FAMILY)}, {economics: book.countOfSphereType(SphereType.ECONOMICS)}, {government: book.countOfSphereType(SphereType.GOVERNMENT)}, {religion: book.countOfSphereType(SphereType.RELIGION)}, {education: book.countOfSphereType(SphereType.EDUCATION)}, {communication: book.countOfSphereType(SphereType.COMMUNICATION)}, {celebration: book.countOfSphereType(SphereType.CELEBRATION)}]}
               />

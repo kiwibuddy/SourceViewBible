@@ -415,7 +415,7 @@ export default class SourceOverview extends Component {
             <Text style={StyleSheet.styles.statisticTitle}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
             <SpheresBarChart
               style={{flex: 0, marginHorizontal: 4}}
-              barStyle={{width: 3, height: 20, marginHorizontal: 1.5}}
+              barStyle={{flex: 0, width: 3, height: 20, marginHorizontal: 1.5}}
               horizontal={false}
               data={[{family: object.countOfSphereType(SphereType.FAMILY)}, {economics: object.countOfSphereType(SphereType.ECONOMICS)}, {government: object.countOfSphereType(SphereType.GOVERNMENT)}, {religion: object.countOfSphereType(SphereType.RELIGION)}, {education: object.countOfSphereType(SphereType.EDUCATION)}, {communication: object.countOfSphereType(SphereType.COMMUNICATION)}, {celebration: object.countOfSphereType(SphereType.CELEBRATION)}]}
             />

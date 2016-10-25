@@ -144,7 +144,7 @@ export default class DiscoverBooks extends Component {
                 <Text style={styles.statisticSubtitle}>Sources</Text>
                 <SourcesBarChart
                   style={{flex: 0, marginLeft: 4}}
-                  barStyle={{width: 2, height: 12, marginHorizontal: 1}}
+                  barStyle={{flex: 0, width: 2, height: 12, marginHorizontal: 1}}
                   horizontal={false}
                   data={[{narrator: book.countOfSourceType(SourceType.NARRATOR)}, {god: book.countOfSourceType(SourceType.GOD)}, {lead: book.countOfSourceType(SourceType.LEAD)}, {support: book.countOfSourceType(SourceType.SUPPORT)}]}
                 />
@@ -156,7 +156,7 @@ export default class DiscoverBooks extends Component {
                 <Text style={styles.statisticSubtitle}>Spheres</Text>
                 <SpheresBarChart
                   style={{flex: 0, marginLeft: 2}}
-                  barStyle={{width: 2, height: 12, marginHorizontal: 1}}
+                  barStyle={{flex: 0, width: 2, height: 12, marginHorizontal: 1}}
                   horizontal={false}
                   data={[{family: book.countOfSphereType(SphereType.FAMILY)}, {economics: book.countOfSphereType(SphereType.ECONOMICS)}, {government: book.countOfSphereType(SphereType.GOVERNMENT)}, {religion: book.countOfSphereType(SphereType.RELIGION)}, {education: book.countOfSphereType(SphereType.EDUCATION)}, {communication: book.countOfSphereType(SphereType.COMMUNICATION)}, {celebration: book.countOfSphereType(SphereType.CELEBRATION)}]}
                 />

@@ -105,7 +105,7 @@ export default class SourceSpheres extends Component {
             <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
             <SpheresBarChart
               style={{flex: 0, marginLeft: 4}}
-              barStyle={{width: 4, height: 24, marginHorizontal: 2}}
+              barStyle={{flex: 0, width: 4, height: 24, marginHorizontal: 2}}
               horizontal={false}
               data={[{family: object.countOfSphereType(SphereType.FAMILY)}, {economics: object.countOfSphereType(SphereType.ECONOMICS)}, {government: object.countOfSphereType(SphereType.GOVERNMENT)}, {religion: object.countOfSphereType(SphereType.RELIGION)}, {education: object.countOfSphereType(SphereType.EDUCATION)}, {communication: object.countOfSphereType(SphereType.COMMUNICATION)}, {celebration: object.countOfSphereType(SphereType.CELEBRATION)}]}
             />

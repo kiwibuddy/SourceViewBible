@@ -93,7 +93,7 @@ export default class BookSpheres extends Component {
             <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
             <SpheresBarChart
               style={{flex: 0, marginLeft: 4}}
-              barStyle={{width: 4, height: 24, marginHorizontal: 2}}
+              barStyle={{flex: 0, width: 4, height: 24, marginHorizontal: 2}}
               horizontal={false}
               data={[{family: book.countOfSphereType(SphereType.FAMILY)}, {economics: book.countOfSphereType(SphereType.ECONOMICS)}, {government: book.countOfSphereType(SphereType.GOVERNMENT)}, {religion: book.countOfSphereType(SphereType.RELIGION)}, {education: book.countOfSphereType(SphereType.EDUCATION)}, {communication: book.countOfSphereType(SphereType.COMMUNICATION)}, {celebration: book.countOfSphereType(SphereType.CELEBRATION)}]}
             />
