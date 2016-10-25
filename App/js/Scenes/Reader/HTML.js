@@ -196,6 +196,11 @@ module.exports = `
     </style>
   </head>
   <body id="scripture">
+    <div id="editMenu" class="iOS">
+      <a href="#" class="left">Highlight</a>
+      <a href="#" class="middle">Bookmark</a>
+      <a href="#" class="right">Share</a>
+    </div>
     <div id="footnote-overlay" class="footnoteOverlay" style="display: none;">
       <div class="footnoteContainer">
         <div class="footnoteHeader">
