@@ -200,18 +200,20 @@ module.exports = `
         margin-left: -6pt;
       }
       .editMenuiOS a {
-        position: relative;
-        z-index: 1000;
         font-family: -apple-system, "Helvetica Neue", "Lucida Grande";
         font-size: 14px;
         color: #FFF;
         text-decoration: none;
-        background-color: #29292A;
-        padding: 5pt;
-        margin-right: -.25em;
         -webkit-tap-highlight-color: rgba(0,0,0,0);
       }
-      .editMenuiOS a:active {
+      .editMenuiOS .btn {
+        position: relative;
+        z-index: 1000;
+        background-color: #29292A;
+        padding: 5pt 8pt;
+        margin-right: -.25em;
+      }
+      .editMenuiOS a:active .btn {
         background-color: #A6A6A6;
       }
       .editMenuiOS .start {
@@ -235,15 +237,24 @@ module.exports = `
         margin-top: -10pt;
         transform: rotate(45deg);
       }
+      .editMenuiOS a:active .arrow {
+        background-color: #A6A6A6;
+      }
       ${CSS}
     </style>
   </head>
   <body id="scripture">
     <div id="edit-menu" class="editMenuiOS">
-      <a href="#" class="start">Highlight</a>
-      <a href="#">Bookmark</a>
-      <a href="#" class="end">Share</a>
-      <div class="arrow">&nbsp;</div>
+      <a href="#">
+        <span class="btn start">Highlight</span>
+      </a>
+      <a href="#">
+        <span class="btn">Bookmark</span>
+        <div class="arrow">&nbsp;</div>
+      </a>
+      <a href="#">
+        <span class="btn end">Share</span>
+      </a>
     </div>
     <div id="footnote-overlay" class="footnoteOverlay" style="display: none;">
       <div class="footnoteContainer">
