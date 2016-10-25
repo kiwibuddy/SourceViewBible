@@ -150,6 +150,7 @@ repositories {
 
 
 dependencies {
+    compile project(':react-native-webview-bridge')
     compile project(':react-native-view-shot')
     compile project(':react-native-device-info')
     compile project(':react-native-billing')
