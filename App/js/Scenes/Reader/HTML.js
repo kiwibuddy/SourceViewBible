@@ -257,8 +257,8 @@ module.exports = `
       .editMenuAndroid a {
         font-family: -apple-system, "Helvetica Neue", "Lucida Grande";
         font-size: 14px;
-        font-weight: 500;
-        color: #29292A;
+        font-weight: 600;
+        color: #4C4C4C;
         text-decoration: none;
         padding: 0 4pt;
         -webkit-tap-highlight-color: rgba(0,0,0,0);
