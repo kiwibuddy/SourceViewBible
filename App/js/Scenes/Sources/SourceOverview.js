@@ -551,7 +551,7 @@ const styles = StyleSheet.create({
   sourceIconContainer: {
     alignSelf: 'center',
     backgroundColor: 'transparent',
-    marginTop: Platform.OS === 'ios' ? -114 : -116,
+    marginTop: Platform.OS === 'ios' ? -107 : -116,
   },
   sourceAvatarContainer: {
     position: 'absolute',
