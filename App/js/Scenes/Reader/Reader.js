@@ -31,6 +31,9 @@ import {
   MenuOption,
 } from 'react-native-popup-menu';
 
+// $FlowFixMe: Can't find os module extension
+import WebViewBridge from 'react-native-webview-bridge'
+
 const RNFS = require('react-native-fs');
 
 import Emdros from '../../API/Emdros';
@@ -161,6 +164,7 @@ export default class Reader extends Component {
   state: State;
 
   shouldFetchScripture: boolean = true;
+  webview = null;
 
   constructor(props: Object) {
     super(props);
@@ -199,8 +203,9 @@ export default class Reader extends Component {
       <View key={key} style={styles.container}>
         {filterBar}
         <WebView
+          ref={webview => { this.webview = webview; }}
           key="scripture"
-          decelerationRate='normal'
+          decelerationRate="normal"
           injectedJavaScript={injectedJavaScript}
           style={styles.webview}
           source={{html: this.state.scripture}}
@@ -433,6 +438,10 @@ export default class Reader extends Component {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     Preference.setObjectForKey([], Preference.Keys.Reader.spheres);
     this._setScripture(bookID, anchor, occurrences, occurrenceIndex, true);
+  };
+
+  _onMessage = (message) => {
+
   };
 
   _debugScripture(scripture: string) {
