@@ -99,7 +99,7 @@ export default class Settings extends Component {
               <View style={styles.cellLeftContainer}>
                 <Text style={[StyleSheet.styles.cell.title, {flex: 3}]}>{Localizable.t('chapter-and-verse-numbers')}</Text>
               </View>
-              <View style={styles.cellRightContainer}>
+              <View style={[styles.cellRightContainer, {width: 50}]}>
                 <Switch
                 onValueChange={(value) => this.setState({showNumbers: value})}
                 style={styles.switch}
