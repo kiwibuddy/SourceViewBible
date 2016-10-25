@@ -209,6 +209,10 @@ module.exports = `
         background-color: #29292A;
         padding: 5pt;
         margin-right: -.25em;
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+      }
+      .editMenuiOS a:active {
+        background-color: #A6A6A6;
       }
       .editMenuiOS .start {
         border-top-left-radius: 4pt;
