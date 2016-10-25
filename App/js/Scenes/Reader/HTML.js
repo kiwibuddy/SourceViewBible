@@ -240,11 +240,37 @@ module.exports = `
       .editMenuiOS a:active .arrow {
         background-color: #A6A6A6;
       }
+      .editMenuAndroid {
+        position: absolute;
+        z-index: 1000;
+        width: 100%;
+        text-align: center;
+        margin-left: -6pt;
+      }
+      .editMenuAndroid .btn {
+        background-color: #FAFAFA;
+        padding: 5pt 8pt;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        border-radius: 2pt;
+        margin: 0 40pt;
+      }
+      .editMenuAndroid a {
+        font-family: -apple-system, "Helvetica Neue", "Lucida Grande";
+        font-size: 14px;
+        font-weight: 500;
+        color: #29292A;
+        text-decoration: none;
+        padding: 0 4pt;
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+      }
+      .editMenuAndroid a:active .btn {
+        background-color: #A6A6A6;
+      }
       ${CSS}
     </style>
   </head>
   <body id="scripture">
-    <div id="edit-menu" class="editMenuiOS">
+    <div id="edit-menu-ios" class="editMenuiOS" style="display:none;">
       <a href="#">
         <span class="btn start">Highlight</span>
       </a>
@@ -255,6 +281,13 @@ module.exports = `
       <a href="#">
         <span class="btn end">Share</span>
       </a>
+    </div>
+    <div id="edit-menu-android" class="editMenuAndroid">
+      <div class="btn">
+        <a href="#">HIGHLIGHT</a>
+        <a href="#">BOOKMARK</a>
+        <a href="#">SHARE</a>
+      </div>
     </div>
     <div id="footnote-overlay" class="footnoteOverlay" style="display: none;">
       <div class="footnoteContainer">
