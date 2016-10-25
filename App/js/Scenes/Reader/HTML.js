@@ -194,39 +194,52 @@ module.exports = `
       }
       .editMenuiOS {
         position: absolute;
-        margin-left: auto;
-        margin-right: auto;
         z-index: 1000;
-        margin-top: 10pt;
+        width: 100%;
+        text-align: center;
+        margin-left: -6pt;
       }
       .editMenuiOS a {
+        position: relative;
+        z-index: 1000;
         font-family: -apple-system, "Helvetica Neue", "Lucida Grande";
         font-size: 14px;
         color: #FFF;
         text-decoration: none;
-      }
-      .editMenuiOS .btn {
         background-color: #29292A;
         padding: 5pt;
+        margin-right: -.25em;
       }
-      .editMenuiOS .left {
-        border-top-left-radius: 3pt;
-        border-bottom-left-radius: 3pt;
+      .editMenuiOS .start {
+        border-top-left-radius: 4pt;
+        border-bottom-left-radius: 4pt;
       }
-      .editMenuiOS .right {
+      .editMenuiOS .end {
         margin-right: 0;
-        border-top-right-radius: 3pt;
-        border-bottom-right-radius: 3pt;
+        border-top-right-radius: 4pt;
+        border-bottom-right-radius: 4pt;
+      }
+      .editMenuiOS .arrow {
+        z-index: 500;
+        position: absolute;
+        display: block;
+        width: 15pt;
+        height: 15pt;
+        background-color: #29292A;
+        left: 50%;
+        margin-left: -5pt;
+        margin-top: -10pt;
+        transform: rotate(45deg);
       }
       ${CSS}
     </style>
   </head>
   <body id="scripture">
     <div id="edit-menu" class="editMenuiOS">
-      <a href="#" class="btn left">Highlight</a>
-      <a href="#" class="btn middle">Bookmark</a>
-      <a href="#" class="btn right">Share</a>
-      <div class="arrow"></div>
+      <a href="#" class="start">Highlight</a>
+      <a href="#">Bookmark</a>
+      <a href="#" class="end">Share</a>
+      <div class="arrow">&nbsp;</div>
     </div>
     <div id="footnote-overlay" class="footnoteOverlay" style="display: none;">
       <div class="footnoteContainer">
