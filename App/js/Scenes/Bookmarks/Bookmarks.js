@@ -169,12 +169,13 @@ export default class Bookmarks extends Component {
 
   _renderBookmarkRow = (bookmark: Object) => {
     return (
-      <TouchableOpacity
-        onPress={() => {}}
-        style={styles.row}
-      >
-        <Text style={StyleSheet.styles.cell.title}></Text>
-      </TouchableOpacity>
+      <View style={styles.row}>
+        <Image source={require('./Images/bookmark-note.png')} style={styles.icon} />
+        <TouchableOpacity style={styles.referenceContainer}>
+          <Text style={StyleSheet.styles.cell.title}>Test</Text>
+          <Text style={StyleSheet.styles.cell.subtitle}>1h</Text>
+        </TouchableOpacity>
+      </View>
     );
   }
 
@@ -317,6 +318,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     alignItems: 'center',
     marginLeft: 15,
+    paddingRight: 15,
   },
   icon: {
     tintColor: Colors.tint,
