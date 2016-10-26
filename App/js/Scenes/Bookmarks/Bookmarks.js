@@ -201,19 +201,6 @@ export default class Bookmarks extends Component {
             </TouchableOpacity>
           </View>
         </View>
-        <View style={styles.row}>
-          <Image source={require('./Images/highlight.png')} style={[styles.icon, {alignSelf: 'flex-start',}]} />
-          <View style={styles.rowContent}>
-            <TouchableOpacity style={styles.referenceContainer}>
-              <View>
-                <Text numberOfLines={5} style={styles.body}>27 John replied, John the Baptist 10
-No one can receive anything unless God gives it from heaven. 28 You yourselves know how plainly I told you, ‘I am not the Messiah. I am only here to prepare the way for him.’</Text>
-                <Text style={StyleSheet.styles.cell.subtitle}>John 3:27-28</Text>
-              </View>
-              <Text style={[StyleSheet.styles.cell.subtitle, styles.date]}>Yesterday</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
       </View>
     );
   }
@@ -234,12 +221,19 @@ No one can receive anything unless God gives it from heaven. 28 You yourselves 
 
   _renderHighlightRow = (history: Object) => {
     return (
-      <TouchableOpacity
-        onPress={() => {}}
-        style={styles.row}
-      >
-        <Text style={StyleSheet.styles.cell.title}></Text>
-      </TouchableOpacity>
+      <View style={styles.row}>
+        <Image source={require('./Images/highlight.png')} style={[styles.icon, {alignSelf: 'flex-start',}]} />
+        <View style={styles.rowContent}>
+          <TouchableOpacity style={styles.referenceContainer}>
+            <View>
+              <Text numberOfLines={5} style={styles.body}>27 John replied, John the Baptist 10
+No one can receive anything unless God gives it from heaven. 28 You yourselves know how plainly I told you, ‘I am not the Messiah. I am only here to prepare the way for him.’</Text>
+              <Text style={StyleSheet.styles.cell.subtitle}>John 3:27-28</Text>
+            </View>
+            <Text style={[StyleSheet.styles.cell.subtitle, styles.date]}>Yesterday</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     );
   };
 
