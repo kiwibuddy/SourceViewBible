@@ -170,11 +170,19 @@ export default class Bookmarks extends Component {
   _renderBookmarkRow = (bookmark: Object) => {
     return (
       <View style={styles.row}>
-        <Image source={require('./Images/bookmark-note.png')} style={styles.icon} />
-        <TouchableOpacity style={styles.referenceContainer}>
-          <Text style={StyleSheet.styles.cell.title}>Test</Text>
-          <Text style={StyleSheet.styles.cell.subtitle}>1h</Text>
-        </TouchableOpacity>
+        <Image source={require('./Images/bookmark.png')} style={[styles.icon, {alignSelf: 'flex-start',}]} />
+        <View style={styles.rowContent}>
+          <TouchableOpacity style={styles.referenceContainer}>
+            <View>
+              <Text numberOfLines={2} style={styles.body}>6 Then God said, “Let there be a space between the waters, to separate the waters of the heavens from the</Text>
+              <Text style={StyleSheet.styles.cell.subtitle}>Genesis 1:6</Text>
+            </View>
+            <Text style={[StyleSheet.styles.cell.subtitle, {lineHeight: 24,}]}>1h</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.button}>Add note</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -320,9 +328,38 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     paddingRight: 15,
   },
+  rowContent: {
+    flex: 1,
+    flexDirection: 'column',
+  },
   icon: {
     tintColor: Colors.tint,
     marginRight: 10,
+  },
+  body: {
+    fontFamily: 'Georgia',
+    paddingBottom: 5,
+    color: '#59626A',
+    fontSize: 15,
+    lineHeight: 24,
+  },
+  button: {
+    color: '#CF1E00',
+    fontSize: 15,
+    paddingVertical: 8,
+  },
+  referenceContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    marginRight: 15,
+    marginTop: -5,
+  },
+  noteContainer: {
+    marginHorizontal: 15,
+    marginVertical: 15,
+    borderLeftColor: '#EDEDED',
+    borderLeftWidth: 4,
+    paddingLeft: 8,
   },
   separator: {
     ...StyleSheet.styles.separator,
