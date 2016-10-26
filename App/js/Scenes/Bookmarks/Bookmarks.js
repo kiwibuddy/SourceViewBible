@@ -23,7 +23,7 @@ import moment from 'moment';
 
 import { NavigationHeader, NavigationBarButton, Toolbar, ToolbarButton } from '../../Components/Navigation';
 
-import { BACK, spheresURL, sphereInAppPurchaseURL } from '../../Navigation';
+import { BACK, bookmarkURL, spheresURL, sphereInAppPurchaseURL } from '../../Navigation';
 
 // $FlowFixMe: - Flow can't find os module extension
 import SegmentedControl from '../../Components/Common/SegmentedControl';
@@ -205,6 +205,7 @@ export default class Bookmarks extends Component {
         if (__DEV__) {
           bookmarks.push({path: '/Onboarding', title: 'Onboarding', modal: true});
           bookmarks.push(sphereInAppPurchaseURL({title: 'Spheres IAP', redirect: spheresURL({title: 'Spheres'}), modal: true}));
+          bookmarks.push(bookmarkURL({title: 'Bookmark', bookmarkID: 'new', modal: true}));
         }
 
         return this.state.dataSource.cloneWithRowsAndSections({bookmarks: bookmarks});
