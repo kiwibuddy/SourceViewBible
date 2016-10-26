@@ -31,9 +31,6 @@ import {
   MenuOption,
 } from 'react-native-popup-menu';
 
-// $FlowFixMe: Can't find os module extension
-import WebViewBridge from 'react-native-webview-bridge'
-
 const RNFS = require('react-native-fs');
 
 import Emdros from '../../API/Emdros';
