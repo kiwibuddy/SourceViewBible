@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
+  TextInput,
 } from 'react-native';
 
 import {
@@ -65,6 +66,18 @@ export default class Bookmark extends Component {
           </View>
         </View>
         <View style={styles.separator} />
+        <View style={styles.reference}>
+
+        </View>
+        <TextInput
+          autoCapitalize="words"
+          autoCorrect={false}
+          autoFocus={true}
+          clearButtonMode="always"
+          onChangeText={(text) => this.setState({search: text})}
+          placeholder="Optional note..."
+          style={styles.textInput}
+        />
       </View>
     );
   }
@@ -89,6 +102,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
+  textInput: {
+    fontSize: 17,
+    paddingLeft: 8,
+    marginHorizontal: 8,
+    marginVertical: 8,
+    height: 26,
+    padding: 0, // Android workaround
+  },
   ...Platform.select({
       ios: {
         separator: {
@@ -105,6 +126,17 @@ const styles = StyleSheet.create({
         },
       },
       android: {
+        separator: {
+          height: 0,
+          backgroundColor: Colors.separator,
+        },
+        cellContainer: {
+          flex: 1,
+          marginRight: 15,
+          flexDirection: 'row',
+          alignItems: 'center',
+          minHeight: 55,
+        },
       },
   }),
 });
