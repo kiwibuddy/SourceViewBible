@@ -30,7 +30,7 @@ import SegmentedControl from '../../Components/Common/SegmentedControl';
 
 import { History, Preference } from '../../Preferences';
 
-const SEGMENTS = [Localizable.t('history'), Localizable.t('bookmarks')];
+const SEGMENTS = [Localizable.t('history'), Localizable.t('bookmarks'), Localizable.t('highlights')];
 const SEGMENT_INDEXES = {
   HISTORY: 0,
   BOOKMARKS: 1,
