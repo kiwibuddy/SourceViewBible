@@ -191,7 +191,7 @@ export default class Bookmarks extends Component {
         return this.state.dataSource.cloneWithRowsAndSections(rows, sections);
 
       case SEGMENT_INDEXES.HIGHLIGHTS:
-        return this.state.dataSource.cloneWithRowsAndSections({highlights: []});
+        return this.state.dataSource.cloneWithRowsAndSections({highlights: [{}]});
 
       default:
         const bookmarks = [
