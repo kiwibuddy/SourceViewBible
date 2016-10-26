@@ -178,7 +178,7 @@ export default class Bookmarks extends Component {
                 <Text numberOfLines={2} style={styles.body}>6 Then God said, “Let there be a space between the waters, to separate the waters of the heavens from the</Text>
                 <Text style={StyleSheet.styles.cell.subtitle}>Genesis 1:6</Text>
               </View>
-              <Text style={[StyleSheet.styles.cell.subtitle, {lineHeight: 24,}]}>1h</Text>
+              <Text style={[StyleSheet.styles.cell.subtitle, styles.date]}>1h</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.noteContainer}>
               <Text style={StyleSheet.styles.cell.titlemedium}>And with these words, God set in to motion all that was to come and established his authority over all of it.</Text>
@@ -194,10 +194,23 @@ export default class Bookmarks extends Component {
                 <Text numberOfLines={2} style={styles.body}>6 Then God said, “Let there be a space between the waters, to separate the waters of the heavens from the</Text>
                 <Text style={StyleSheet.styles.cell.subtitle}>Genesis 1:6</Text>
               </View>
-              <Text style={[StyleSheet.styles.cell.subtitle, {lineHeight: 24,}]}>1h</Text>
+              <Text style={[StyleSheet.styles.cell.subtitle, styles.date]}>1h</Text>
             </TouchableOpacity>
             <TouchableOpacity>
               <Text style={styles.button}>Add note</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.row}>
+          <Image source={require('./Images/highlight.png')} style={[styles.icon, {alignSelf: 'flex-start',}]} />
+          <View style={styles.rowContent}>
+            <TouchableOpacity style={styles.referenceContainer}>
+              <View>
+                <Text numberOfLines={5} style={styles.body}>27 John replied, John the Baptist 10
+No one can receive anything unless God gives it from heaven. 28 You yourselves know how plainly I told you, ‘I am not the Messiah. I am only here to prepare the way for him.’</Text>
+                <Text style={StyleSheet.styles.cell.subtitle}>John 3:27-28</Text>
+              </View>
+              <Text style={[StyleSheet.styles.cell.subtitle, styles.date]}>Yesterday</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -339,6 +352,7 @@ const styles = StyleSheet.create({
     marginLeft: 15,
   },
   row: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     paddingVertical: 10,
@@ -349,6 +363,7 @@ const styles = StyleSheet.create({
   rowContent: {
     flex: 1,
     flexDirection: 'column',
+    paddingRight: 40,
   },
   icon: {
     tintColor: Colors.tint,
@@ -361,15 +376,21 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 24,
   },
+  date: {
+    flex: 0,
+    lineHeight: 24,
+    textAlign: 'right',
+    width: 60,
+    marginLeft: 8,
+  },
   button: {
     color: '#CF1E00',
     fontSize: 15,
     paddingVertical: 8,
   },
   referenceContainer: {
-    flex: 1,
     flexDirection: 'row',
-    marginRight: 15,
+    marginRight: 25,
     marginTop: -5,
   },
   noteContainer: {
