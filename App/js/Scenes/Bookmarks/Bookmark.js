@@ -66,8 +66,9 @@ export default class Bookmark extends Component {
           </View>
         </View>
         <View style={styles.separator} />
-        <View style={styles.reference}>
-
+        <View style={styles.referenceContainer}>
+          <Text numberOfLines={2} style={styles.body}>6 Then God said, “Let there be a space between the waters, to separate the waters of the heavens from the</Text>
+          <Text style={[StyleSheet.styles.cell.subtitle, {paddingRight: 8,}]}>Genesis 1:6</Text>
         </View>
         <TextInput
           autoCapitalize="words"
@@ -101,6 +102,20 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     flexDirection: 'row',
+  },
+  referenceContainer: {
+    marginHorizontal: 15,
+    marginVertical: 15,
+    borderLeftColor: '#FAE8E5',
+    borderLeftWidth: 4,
+    paddingLeft: 8,
+  },
+  body: {
+    fontFamily: 'Georgia',
+    paddingBottom: 5,
+    color: '#59626A',
+    fontSize: 15,
+    lineHeight: 24,
   },
   textInput: {
     fontSize: 17,
