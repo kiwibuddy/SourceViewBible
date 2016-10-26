@@ -169,19 +169,37 @@ export default class Bookmarks extends Component {
 
   _renderBookmarkRow = (bookmark: Object) => {
     return (
-      <View style={styles.row}>
-        <Image source={require('./Images/bookmark.png')} style={[styles.icon, {alignSelf: 'flex-start',}]} />
-        <View style={styles.rowContent}>
-          <TouchableOpacity style={styles.referenceContainer}>
-            <View>
-              <Text numberOfLines={2} style={styles.body}>6 Then God said, “Let there be a space between the waters, to separate the waters of the heavens from the</Text>
-              <Text style={StyleSheet.styles.cell.subtitle}>Genesis 1:6</Text>
-            </View>
-            <Text style={[StyleSheet.styles.cell.subtitle, {lineHeight: 24,}]}>1h</Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={styles.button}>Add note</Text>
-          </TouchableOpacity>
+      <View>
+        <View style={styles.row}>
+          <Image source={require('./Images/note.png')} style={[styles.icon, {alignSelf: 'flex-start',}]} />
+          <View style={styles.rowContent}>
+            <TouchableOpacity style={styles.referenceContainer}>
+              <View>
+                <Text numberOfLines={2} style={styles.body}>6 Then God said, “Let there be a space between the waters, to separate the waters of the heavens from the</Text>
+                <Text style={StyleSheet.styles.cell.subtitle}>Genesis 1:6</Text>
+              </View>
+              <Text style={[StyleSheet.styles.cell.subtitle, {lineHeight: 24,}]}>1h</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.noteContainer}>
+              <Text style={StyleSheet.styles.cell.titlemedium}>And with these words, God set in to motion all that was to come and established his authority over all of it.</Text>
+              <Text style={styles.button}>View note</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.row}>
+          <Image source={require('./Images/bookmark.png')} style={[styles.icon, {alignSelf: 'flex-start',}]} />
+          <View style={styles.rowContent}>
+            <TouchableOpacity style={styles.referenceContainer}>
+              <View>
+                <Text numberOfLines={2} style={styles.body}>6 Then God said, “Let there be a space between the waters, to separate the waters of the heavens from the</Text>
+                <Text style={StyleSheet.styles.cell.subtitle}>Genesis 1:6</Text>
+              </View>
+              <Text style={[StyleSheet.styles.cell.subtitle, {lineHeight: 24,}]}>1h</Text>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Text style={styles.button}>Add note</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     );
@@ -355,7 +373,6 @@ const styles = StyleSheet.create({
     marginTop: -5,
   },
   noteContainer: {
-    marginHorizontal: 15,
     marginVertical: 15,
     borderLeftColor: '#EDEDED',
     borderLeftWidth: 4,
