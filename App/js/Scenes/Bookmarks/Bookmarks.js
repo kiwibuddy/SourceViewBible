@@ -118,17 +118,25 @@ export default class Bookmarks extends Component {
   };
 
   _renderSectionHeader = (sectionData: Object, sectionID: any) => {
-    if (this.state.selectedSegmentIndex != SEGMENT_INDEXES.HISTORY) return null;
+    if (this.state.selectedSegmentIndex == SEGMENT_INDEXES.HISTORY) {
+      const title = sectionID;
+      return (
+        <View style={styles.sectionHeaderContainer}>
+          <Text style={styles.sectionHeaderTitle}>{title}</Text>
+        </View>
+      );
+    } else if (sectionID === 'bookmarks') {
+      return (
+        <View style={styles.sectionHeaderContainer}>
+          <Text style={styles.sectionHeaderTitle}>{Localizable.t('my-bookmarks')}</Text>
+        </View>
+      );
+    }
 
-    const title = sectionID;
-    return (
-      <View style={styles.sectionHeaderContainer}>
-        <Text style={styles.sectionHeaderTitle}>{title}</Text>
-      </View>
-    );
+    return null;
   };
 
-  _renderRow = (data: Object) => {
+  _renderRow = (data: Object, sectionID: any) => {
     switch (this.state.selectedSegmentIndex) {
       case SEGMENT_INDEXES.HISTORY:
         return this._renderHistoryRow(data);
@@ -137,11 +145,15 @@ export default class Bookmarks extends Component {
         return this._renderHighlightRow(data);
 
       default:
-        return this._renderBookmarkRow(data);
+        if (sectionID === 'defaults') {
+          return this._renderDefaultBookmarkRow(data);
+        } else {
+          return this._renderBookmarkRow(data);
+        }
     }
   };
 
-  _renderBookmarkRow = (bookmark: Object) => {
+  _renderDefaultBookmarkRow = (bookmark: Object) => {
     const icon = this._iconForRoute(bookmark);
 
     return (
@@ -151,6 +163,17 @@ export default class Bookmarks extends Component {
       >
         <Image source={icon} style={styles.icon} />
         <Text style={StyleSheet.styles.cell.title}>{bookmark.title}</Text>
+      </TouchableOpacity>
+    );
+  };
+
+  _renderBookmarkRow = (bookmark: Object) => {
+    return (
+      <TouchableOpacity
+        onPress={() => {}}
+        style={styles.row}
+      >
+        <Text style={StyleSheet.styles.cell.title}></Text>
       </TouchableOpacity>
     );
   }
@@ -194,7 +217,7 @@ export default class Bookmarks extends Component {
         return this.state.dataSource.cloneWithRowsAndSections({highlights: [{}]});
 
       default:
-        const bookmarks = [
+        const defaults = [
           {path: '/Discover', title: Localizable.t('discover')},
           {path: '/Books', title: Localizable.t('books')},
           {path: '/Sources', title: Localizable.t('sources.text')},
@@ -203,12 +226,16 @@ export default class Bookmarks extends Component {
         ];
 
         if (__DEV__) {
-          bookmarks.push({path: '/Onboarding', title: 'Onboarding', modal: true});
-          bookmarks.push(sphereInAppPurchaseURL({title: 'Spheres IAP', redirect: spheresURL({title: 'Spheres'}), modal: true}));
-          bookmarks.push(bookmarkURL({title: 'Bookmark', bookmarkID: 'new', modal: true}));
+          defaults.push({path: '/Onboarding', title: 'Onboarding', modal: true});
+          defaults.push(sphereInAppPurchaseURL({title: 'Spheres IAP', redirect: spheresURL({title: 'Spheres'}), modal: true}));
+          defaults.push(bookmarkURL({title: 'Bookmark', bookmarkID: 'new', modal: true}));
         }
 
-        return this.state.dataSource.cloneWithRowsAndSections({bookmarks: bookmarks});
+        const bookmarks = [
+          {}
+        ];
+
+        return this.state.dataSource.cloneWithRowsAndSections({defaults, bookmarks}, ['defaults', 'bookmarks']);
     }
   };
 
