@@ -100,6 +100,12 @@ module.exports = `
       .textVerse .occurrence {
         text-decoration: none
       }
+      .highlight {
+        background-color: #FFF5CD;
+      }
+      .selection {
+        background-color: #FAE8E5;
+      }
       .textTitle {
         font-family: Georgia;
         font-weight: bold;
