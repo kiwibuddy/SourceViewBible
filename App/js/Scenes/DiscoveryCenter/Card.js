@@ -50,7 +50,6 @@ type Props = {
   onPressDelete?: Function,
   onPressDuplicate?: Function,
   onPressOccurrences?: Function,
-  onPressShare?: Function,
   onShowPopover?: Function,
 };
 
@@ -128,7 +127,6 @@ export default class Card extends Component {
         </View>
         <View style={[StyleSheet.styles.discoveryCenter.rightContainer, {justifyContent: 'flex-end'}]}>
           <DuplicateButton onPress={this._onPressDuplicate} />
-          {/* <ShareButton onPress={this._onPressShare} /> */}
         </View>
       </Header>
     )
@@ -229,14 +227,7 @@ export default class Card extends Component {
     if (this.props.onPressDuplicate) {
       this.props.onPressDuplicate(this.state.card);
     }
-  }
-
-  _onPressShare = () => {
-    if (this.props.onPressShare) {
-      const { card, data } = this.state;
-      this.props.onPressShare({card, data});
-    }
-  }
+  };
 
   _onPressChartType = (chartType: string) => {
     this._animateLayout();
