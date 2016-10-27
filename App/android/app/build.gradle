@@ -84,8 +84,8 @@ android {
         applicationId "com.sourceviewbible"
         minSdkVersion 19
         targetSdkVersion 22
-        versionCode 2372
-        versionName "1.1"
+        versionCode 2401
+        versionName "1.1.1"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -150,7 +150,6 @@ repositories {
 
 
 dependencies {
-    compile project(':react-native-view-shot')
     compile project(':react-native-device-info')
     compile project(':react-native-billing')
     compile project(':react-native-svg')
