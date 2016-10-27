@@ -46,13 +46,7 @@ public class MainApplication extends Application implements ReactApplication {
 
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-<<<<<<< HEAD
-            new WebViewBridgePackage(),
-            new RNViewShotPackage(),
-            new RNDeviceInfo(),
-=======
           new RNDeviceInfo(),
->>>>>>> release-1.1
           new InAppBillingBridgePackage(licenseKey),
           new RNSvgPackage(),
           new RNAppInfoPackage(),
