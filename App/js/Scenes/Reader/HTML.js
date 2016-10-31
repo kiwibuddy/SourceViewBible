@@ -288,7 +288,7 @@ module.exports = `
         <span class="btn end">Share</span>
       </a>
     </div>
-    <div id="edit-menu-android" class="editMenuAndroid">
+    <div id="edit-menu-android" class="editMenuAndroid" style="display: none;">
       <div class="btn">
         <a href="#">HIGHLIGHT</a>
         <a href="#">BOOKMARK</a>
