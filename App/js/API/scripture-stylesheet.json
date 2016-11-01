@@ -138,10 +138,7 @@
             "chapter",
             "verse_start"
           ],
-          "end":"</div>",
-          "start":"\
-{{ setvar 'verse_anchor' }}verse-{{ featurenomangle 0 }}-{{ featurenomangle 1 }}{{ setvarend }}\
-<div class=\"verse\">"
+          "start":"{{ setvar 'verse_anchor' }}verse-{{ featurenomangle 0 }}-{{ featurenomangle 1 }}{{ setvarend }}"
         },
         "Paragraph":{
           "docindexfeature":"docindex",
