@@ -10,7 +10,7 @@ const CSS = require('./CSS');
 
 module.exports = `
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>Scripture</title>
     <meta charset="utf-8"/>
