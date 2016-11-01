@@ -371,6 +371,10 @@ module.exports = `
         startingPosition = position;
       }
 
+      function onMessage(e) {
+        var data = JSON.parse(e.data);
+      }
+
       document.onreadystatechange = function() {
       	if (ready) return;
       	if (document.readyState == 'interactive' || document.readyState == 'complete') {
@@ -380,6 +384,19 @@ module.exports = `
           document.addEventListener('touchmove', onTouchMove, false);
           document.addEventListener('touchend', onTouchEnd, false);
           document.addEventListener('touchcancel', onTouchEnd, false);
+
+          document.addEventListener('message', onMessage, false);
+
+          var paragraphs = document.getElementsByTagName('p');
+          for (var i = 0; i < paragraphs.length; i++) {
+            var paragraph = paragraphs[i];
+            paragraph.addEventListener('click', function() {
+              var data = JSON.stringify({
+                hello: 'world'
+              });
+              window.postMessage(data);
+            });
+          }
       	}
       };
     </script>

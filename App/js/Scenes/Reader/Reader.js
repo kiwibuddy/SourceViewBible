@@ -204,6 +204,7 @@ export default class Reader extends Component {
           key="scripture"
           decelerationRate="normal"
           injectedJavaScript={injectedJavaScript}
+          onMessage={this._onMessage}
           style={styles.webview}
           source={{html: this.state.scripture}}
         />
@@ -438,7 +439,8 @@ export default class Reader extends Component {
   };
 
   _onMessage = (event) => {
-    // event.nativeEvent.data
+    const data = JSON.parse(event.nativeEvent.data);
+    console.log('_onMessage', data);
   };
 
   _postMessage = (data) => {
