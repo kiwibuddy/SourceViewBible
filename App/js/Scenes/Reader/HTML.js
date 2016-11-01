@@ -276,7 +276,7 @@ module.exports = `
     </style>
   </head>
   <body id="scripture">
-    <div id="edit-menu-ios" class="editMenuiOS" style="display:none;">
+    <div id="edit-menu-ios-template" class="editMenuiOS" style="display:none;">
       <a href="#">
         <span class="btn start">Highlight</span>
       </a>
@@ -288,7 +288,7 @@ module.exports = `
         <span class="btn end">Share</span>
       </a>
     </div>
-    <div id="edit-menu-android" class="editMenuAndroid" style="display: none;">
+    <div id="edit-menu-android-template" class="editMenuAndroid" style="display: none;">
       <div class="btn">
         <a href="#">HIGHLIGHT</a>
         <a href="#">BOOKMARK</a>
@@ -376,13 +376,21 @@ module.exports = `
       }
 
       function onClickVerse(e) {
-        var verseReference = e.target.dataset.verse;
+        var element = e.target;
+        var verseReference = element.dataset.verse;
 
         var verses = document.querySelectorAll("[data-verse='" + verseReference + "']");
         for (var i = 0; i < verses.length; i++) {
           var verse = verses[i];
           verse.classList.toggle('selection');
         }
+
+        var editMenuTemplate = document.getElementById('edit-menu-ios-template');
+
+        var editMenu = editMenuTemplate.cloneNode(true);
+        editMenu.id = 'edit-menu';
+        // editMenuTemplate.style.display = 'block';
+        // element.parentNode.insertBefore(editMenu);
 
         var data = JSON.stringify({
           hello: 'world',
