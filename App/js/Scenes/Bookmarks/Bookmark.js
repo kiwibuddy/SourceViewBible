@@ -75,7 +75,7 @@ export default class Bookmark extends Component {
           autoCorrect={false}
           autoFocus={true}
           clearButtonMode="always"
-          onChangeText={(text) => this.setState({search: text})}
+          onChangeText={(text) => {}}
           placeholder="Optional note..."
           style={styles.textInput}
         />

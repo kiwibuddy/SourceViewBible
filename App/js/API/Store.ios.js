@@ -2,6 +2,8 @@
 'use strict';
 
 import { NativeModules } from 'react-native';
+
+// $FlowFixMe - Silence warning
 import { InAppUtils } from 'NativeModules';
 
 export default class Store {
