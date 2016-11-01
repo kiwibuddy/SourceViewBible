@@ -207,6 +207,10 @@
           "suffix":"</table>"
         },
         {
+          "instring": "</td></tr></p>",
+          "outstring": "</p></td></tr>"
+        },
+        {
           "instring": "</tr></p>",
           "outstring": "</tr>"
         },
