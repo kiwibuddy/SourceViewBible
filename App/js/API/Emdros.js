@@ -107,7 +107,7 @@ function scripture(options: Object) {
     base['NonWordToken'] = base['Token'];
     base['SpaceToken']['start'] = highlightSpheres(styleFeatures('<span class="verse" data-verse="{{ emitvar \'verse_anchor\' }}"> </span>'), options.spheres, 0);
     base['SpaceToken']['get'] = sphereFeatures;
-    base['VerseNumberToken']['start'] = base['VerseNumberToken']['start'].replace('{{SPHERES}}', highlightSpheres(styleEmbedded('{{ featurenomangle 0 }}&#160;'), spheres, 1));
+    base['VerseNumberToken']['start'] = base['VerseNumberToken']['start'].replace('{{SPHERES}}', highlightSpheres(styleEmbedded('<span class="verse" data-verse="{{ emitvar \'verse_anchor\' }}">{{ featurenomangle 0 }}&#160;</span>'), spheres, 1));
     base['VerseNumberToken']['get'] = base['VerseNumberToken']['get'].concat(sphereFeatures);
     base['ChapterNumberToken']['start'] = base['ChapterNumberToken']['start'].replace('{{SPHERES}}', highlightSpheres(styleEmbedded('{{ featurenomangle 0 }}'), spheres, 1));
     base['ChapterNumberToken']['get'] = base['ChapterNumberToken']['get'].concat(sphereFeatures);
