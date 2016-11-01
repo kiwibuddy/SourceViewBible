@@ -375,6 +375,22 @@ module.exports = `
         var data = JSON.parse(e.data);
       }
 
+      function onClickVerse(e) {
+        var verseReference = e.target.dataset.verse;
+
+        var verses = document.querySelectorAll("[data-verse='" + verseReference + "']");
+        for (var i = 0; i < verses.length; i++) {
+          var verse = verses[i];
+          verse.classList.toggle('selection');
+        }
+
+        var data = JSON.stringify({
+          hello: 'world',
+          verse: verseReference
+        });
+        window.postMessage(data);
+      }
+
       document.onreadystatechange = function() {
       	if (ready) return;
       	if (document.readyState == 'interactive' || document.readyState == 'complete') {
@@ -390,12 +406,7 @@ module.exports = `
           var verses = document.getElementsByClassName('verse');
           for (var i = 0; i < verses.length; i++) {
             var verse = verses[i];
-            verse.addEventListener('click', function() {
-              var data = JSON.stringify({
-                hello: 'world'
-              });
-              window.postMessage(data);
-            });
+            verse.addEventListener('click', onClickVerse, false);
           }
       	}
       };
