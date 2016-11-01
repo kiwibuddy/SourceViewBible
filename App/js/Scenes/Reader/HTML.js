@@ -335,6 +335,42 @@ module.exports = `
         footnoteOverlay.style.display = 'none';
       }
 
+      function onTouchStart(e) {
+        originalX = e.touches[0].clientX;
+        originalY = e.touches[0].clientY;
+        document.getElementById('table').style.transition = null;
+      }
+
+      function onTouchMove(e) {
+        if (!originalX || !originalY) return;
+
+        var currentX = e.touches[0].clientX;
+        var currentY = e.touches[0].clientY;
+        var xDiff = originalX - currentX;
+        var yDiff = originalY - currentY;
+
+        if (Math.abs(xDiff) > Math.abs(yDiff) + 10) {
+          opened = currentX > previousPosition;
+          var position = Math.min(openedWidth * 1.5, Math.max(0, startingPosition - xDiff));
+          document.getElementById('table').style.transform = 'translate3d(' + position + 'pt, 0px, 0px)';
+          e.preventDefault();
+        }
+
+        previousPosition = currentX;
+      }
+
+      function onTouchEnd(e) {
+        if (!originalX || !originalY) return;
+        originalX = null;
+        originalY = null;
+
+        var position = opened ? openedWidth : closedWidth;
+        document.getElementById('table').style.transition = '.3s';
+        document.getElementById('table').style.transform = 'translate3d(' + position + 'pt, 0px, 0px)';
+
+        startingPosition = position;
+      }
+
       document.onreadystatechange = function() {
       	if (ready) return;
       	if (document.readyState == 'interactive' || document.readyState == 'complete') {
@@ -344,42 +380,6 @@ module.exports = `
           document.addEventListener('touchmove', onTouchMove, false);
           document.addEventListener('touchend', onTouchEnd, false);
           document.addEventListener('touchcancel', onTouchEnd, false);
-
-          function onTouchStart(e) {
-            originalX = e.touches[0].clientX;
-            originalY = e.touches[0].clientY;
-            document.getElementById('table').style.transition = null;
-          }
-
-          function onTouchMove(e) {
-            if (!originalX || !originalY) return;
-
-            var currentX = e.touches[0].clientX;
-            var currentY = e.touches[0].clientY;
-            var xDiff = originalX - currentX;
-            var yDiff = originalY - currentY;
-
-            if (Math.abs(xDiff) > Math.abs(yDiff) + 10) {
-              opened = currentX > previousPosition;
-              var position = Math.min(openedWidth * 1.5, Math.max(0, startingPosition - xDiff));
-              document.getElementById('table').style.transform = 'translate3d(' + position + 'pt, 0px, 0px)';
-              e.preventDefault();
-            }
-
-            previousPosition = currentX;
-          }
-
-          function onTouchEnd(e) {
-            if (!originalX || !originalY) return;
-            originalX = null;
-            originalY = null;
-
-            var position = opened ? openedWidth : closedWidth;
-            document.getElementById('table').style.transition = '.3s';
-            document.getElementById('table').style.transform = 'translate3d(' + position + 'pt, 0px, 0px)';
-
-            startingPosition = position;
-          }
       	}
       };
     </script>
