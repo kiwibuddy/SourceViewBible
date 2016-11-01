@@ -138,6 +138,7 @@
             "chapter",
             "verse_start"
           ],
+          "end":"{{ setvar 'verse_anchor' }}{{ setvarend }}",
           "start":"{{ setvar 'verse_anchor' }}verse-{{ featurenomangle 0 }}-{{ featurenomangle 1 }}{{ setvarend }}"
         },
         "Paragraph":{
