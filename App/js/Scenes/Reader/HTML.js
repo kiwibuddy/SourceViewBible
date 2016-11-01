@@ -387,10 +387,10 @@ module.exports = `
 
           document.addEventListener('message', onMessage, false);
 
-          var paragraphs = document.getElementsByTagName('p');
-          for (var i = 0; i < paragraphs.length; i++) {
-            var paragraph = paragraphs[i];
-            paragraph.addEventListener('click', function() {
+          var verses = document.getElementsByClassName('verse');
+          for (var i = 0; i < verses.length; i++) {
+            var verse = verses[i];
+            verse.addEventListener('click', function() {
               var data = JSON.stringify({
                 hello: 'world'
               });
