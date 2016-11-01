@@ -437,8 +437,14 @@ export default class Reader extends Component {
     this._setScripture(bookID, anchor, occurrences, occurrenceIndex, true);
   };
 
-  _onMessage = (message) => {
+  _onMessage = (event) => {
+    // event.nativeEvent.data
+  };
 
+  _postMessage = (data) => {
+    if (this.webview) {
+      this.webview.postMessage(data);
+    }
   };
 
   _debugScripture(scripture: string) {
