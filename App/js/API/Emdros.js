@@ -41,7 +41,8 @@ function highlightSpheres(feature: string, spheres: any, startingPosition: numbe
 }
 
 function styleFeatures(feature: string) {
-  return styleEmbedded(styleOccurrences(feature));
+  const occurrences = "{{ setvar 'monad' }}{{ firstmonad }}{{ setvarend }}{{ setvar 'occurrence' }}{{ dictlookup 'occurrences' var 'monad' '' }}{{ setvarend }}";
+  return `${occurrences}<span id="occurrence-{{ emitvar 'monad' }}" class="verse{{ emitvar 'embeddedDocument' }}{{ emitvar 'embeddedQuotation' }}{{ emitvar 'occurrence' }}" data-verse="{{ emitvar 'verse_anchor' }}">${feature}</span>`;
 }
 
 function styleEmbedded(feature: string) {
@@ -97,15 +98,15 @@ function scripture(options: Object) {
       const dictionaries = stylesheet['dictionaries'];
       const occurrence = occurrences[occurrenceIndex];
       for (let monad = occurrence.firstMonad; monad <= occurrence.lastMonad; monad++) {
-        dictionaries['occurrences'][monad.toString()] = '1';
+        dictionaries['occurrences'][monad.toString()] = ' occurrence ';
       }
     }
 
     const base = stylesheet['fetchinfo']['base']['object_types'];
-    base['Token']['start'] = base['Token']['start'].replace('{{SPHERES}}', highlightSpheres(styleFeatures('<span class="verse" data-verse="{{ emitvar \'verse_anchor\' }}">{{ feature 0 }}</span>'), spheres, 1));
+    base['Token']['start'] = base['Token']['start'].replace('{{SPHERES}}', highlightSpheres(styleFeatures('{{ feature 0 }}'), spheres, 1));
     base['Token']['get'] = base['Token']['get'].concat(sphereFeatures);
     base['NonWordToken'] = base['Token'];
-    base['SpaceToken']['start'] = highlightSpheres(styleFeatures('<span class="verse" data-verse="{{ emitvar \'verse_anchor\' }}"> </span>'), options.spheres, 0);
+    base['SpaceToken']['start'] = highlightSpheres(styleFeatures(' '), options.spheres, 0);
     base['SpaceToken']['get'] = sphereFeatures;
     base['VerseNumberToken']['start'] = base['VerseNumberToken']['start'].replace('{{SPHERES}}', highlightSpheres(styleEmbedded('<span class="verse" data-verse="{{ emitvar \'verse_anchor\' }}">{{ featurenomangle 0 }}&#160;</span>'), spheres, 1));
     base['VerseNumberToken']['get'] = base['VerseNumberToken']['get'].concat(sphereFeatures);

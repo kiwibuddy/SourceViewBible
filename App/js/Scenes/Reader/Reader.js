@@ -5,6 +5,7 @@ const React = require('react');
 import { Component } from 'react';
 
 import ReactNative from 'react-native';
+import DeviceInfo from 'react-native-device-info';
 
 const {
   Image,
@@ -372,7 +373,7 @@ export default class Reader extends Component {
       if (this.shouldFetchScripture) {
         const scripture = this._renderScripture(content);
 
-        if (__DEV__ && Platform.OS === 'ios') {
+        if (__DEV__ && DeviceInfo.getModel() === 'Simulator') {
           this._debugScripture(scripture);
         }
 
@@ -394,11 +395,11 @@ export default class Reader extends Component {
     const isPsalms = this.props.bookID == 'psalms';
 
     let html = HTML.replace('{{BODY}}', content);
-    html = html.replace(new RegExp('{{BOOK_NAME}}', 'g'), book.name);
+    html = html.replace(/{{BOOK_NAME}}/g, book.name);
     html = html.replace('{{IS_PSALMS}}', (isPsalms ? 'true' : 'false'));
 
     if (isPsalms) {
-      html = html.replace(new RegExp(/>(Psalm )(\d+?)</, 'g'), ' id="chapter-$2">$1$2<');
+      html = html.replace(/>(Psalm )(\d+?)</g, ' id="chapter-$2">$1$2<');
     }
 
     const fontStepSize = Preference.numberForKey(Preference.Keys.Reader.fontStepSize) || 0;
@@ -410,7 +411,7 @@ export default class Reader extends Component {
 
     let showNumbers = Preference.booleanForKey(Preference.Keys.Reader.showNumbers);
     if (showNumbers == null) showNumbers = true;
-    html = html.replace(new RegExp('{{NUMBER_DISPLAY}}', 'g'), showNumbers ? '' : 'display: none;');
+    html = html.replace(/{{NUMBER_DISPLAY}}/g, showNumbers ? '' : 'display: none;');
 
     return html;
   };

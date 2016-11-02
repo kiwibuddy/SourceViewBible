@@ -11,12 +11,12 @@
         "EmbeddedQuotation" : {
           "docindexfeature" : "docindex",
           "end" : "{{ setvar 'embeddedQuotation' }}{{ setvarend }}",
-          "start" : "{{ setvar 'embeddedQuotation' }} embeddedQuotation{{ setvarend }}"
+          "start" : "{{ setvar 'embeddedQuotation' }} embeddedQuotation {{ setvarend }}"
         },
         "EmbeddedDocument" : {
           "docindexfeature" : "docindex",
           "end" : "{{ setvar 'embeddedDocument' }}{{ setvarend }}",
-          "start" : "{{ setvar 'embeddedDocument' }} embeddedDocument{{ setvarend }}"
+          "start" : "{{ setvar 'embeddedDocument' }} embeddedDocument {{ setvarend }}"
         },
         "Note": {
           "docindexfeature" : "docindex",
