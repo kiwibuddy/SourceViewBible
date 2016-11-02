@@ -289,15 +289,25 @@ module.exports = `
         var element = e.target;
         var verseReference = element.dataset.verse;
 
-        var verses = document.querySelectorAll("[data-verse='" + verseReference + "']");
-        for (var i = 0; i < verses.length; i++) {
-          var verse = verses[i];
-          verse.classList.toggle('selection');
+        var verseElements = document.querySelectorAll("[data-verse='" + verseReference + "']");
+        for (var i = 0; i < verseElements.length; i++) {
+          var verseElement = verseElements[i];
+          verseElement.classList.toggle('selection');
+        }
+
+        var verses = [];
+        var selectedVerseElements = document.querySelectorAll(".selection");
+        for (var i = 0; i < selectedVerseElements.length; i++) {
+          var verseElement = selectedVerseElements[i];
+          var verseReference = verseElement.dataset.verse;
+          if (verses.indexOf(verseReference) == -1) {
+            verses.push(verseReference);
+          }
         }
 
         var data = JSON.stringify({
-          hello: 'world',
-          verse: verseReference
+          action: 'select',
+          verses: verses
         });
         window.postMessage(data);
       }

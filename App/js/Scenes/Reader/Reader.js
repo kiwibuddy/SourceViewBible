@@ -52,6 +52,7 @@ type Props = {
   navigate: Function,
   occurrences?: any,
   occurrenceIndex?: any,
+  references?: any,
 };
 
 type State = {
@@ -77,9 +78,14 @@ export default class Reader extends Component {
   }
 
   static renderToolbar(props: Object) {
-    const { occurrences } = props;
-    if (!occurrences) return null;
-    return <OccurrenceToolbar {...props} />;
+    const { occurrences, references } = props;
+    if (references) {
+      return <ActionToolbar {...props} />;
+    } else if (occurrences) {
+      return <OccurrenceToolbar {...props} />;
+    }
+
+    return null;
   }
 
   props: Props;
