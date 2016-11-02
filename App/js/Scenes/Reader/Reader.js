@@ -81,14 +81,14 @@ export default class Reader extends Component {
 
   static renderToolbar(props: Object) {
     const { occurrences, references } = props;
-    if (references) {
-      return <ActionToolbar {...props} />;
-    } else if (occurrences) {
+    if (occurrences) {
       return <OccurrenceToolbar {...props} />;
     }
 
     return null;
   }
+
+  static wantsFullScreenLayout = true;
 
   props: Props;
   state: State;
