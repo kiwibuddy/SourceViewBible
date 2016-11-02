@@ -371,7 +371,13 @@ export default class Reader extends Component {
 
   _onMessage = (event) => {
     const data = JSON.parse(event.nativeEvent.data);
-    console.log('_onMessage', data);
+    switch(data.action) {
+      case 'select':
+        break;
+      default:
+        console.log('_onMessage', data);
+        break;
+    };
   };
 
   _postMessage = (data) => {
