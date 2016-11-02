@@ -27,6 +27,7 @@ import {
 import { BACK, bookURL, readerSearchURL, readerSettingsURL, readerURL } from '../../Navigation';
 import { NavigationHeader, NavigationBarButton } from '../../Components/Navigation';
 
+import ActionToolbar from './ActionToolbar';
 import OccurrenceToolbar from './OccurrenceToolbar';
 
 import {

@@ -93,6 +93,8 @@
     "bookmarks": "Bookmarks",
     "bookmark": "Bookmark",
     "history": "History",
+    "highlight": "Highlight",
+    "unhighlight": "Unhighlight",
     "highlights": "Highlights",
     "my-bookmarks": "My Bookmarks",
     "today": "Today",
