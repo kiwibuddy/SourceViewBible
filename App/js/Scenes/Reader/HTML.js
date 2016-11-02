@@ -26,6 +26,9 @@ module.exports = `
       i + .footnoteIndicator {
         color: #323B43;
       }
+      * {
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+      }
       body {
         font-family: Georgia;
         font-size: {{FONT_SIZE}}pt;
@@ -210,7 +213,6 @@ module.exports = `
         font-size: 14px;
         color: #FFF;
         text-decoration: none;
-        -webkit-tap-highlight-color: rgba(0,0,0,0);
       }
       .editMenuiOS .btn {
         position: relative;
@@ -267,7 +269,6 @@ module.exports = `
         color: #4C4C4C;
         text-decoration: none;
         padding: 0 4pt;
-        -webkit-tap-highlight-color: rgba(0,0,0,0);
       }
       .editMenuAndroid a:active .btn {
         background-color: #A6A6A6;
