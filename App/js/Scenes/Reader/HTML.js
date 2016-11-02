@@ -201,101 +201,10 @@ module.exports = `
       .nonCanonicalText .footnoteIndicator {
         color: #323B43;
       }
-      .editMenuiOS {
-        position: absolute;
-        z-index: 1000;
-        width: 100%;
-        text-align: center;
-        margin-left: -6pt;
-      }
-      .editMenuiOS a {
-        font-family: -apple-system, "Helvetica Neue", "Lucida Grande";
-        font-size: 14px;
-        color: #FFF;
-        text-decoration: none;
-      }
-      .editMenuiOS .btn {
-        position: relative;
-        z-index: 1000;
-        background-color: #29292A;
-        padding: 5pt 8pt;
-        margin-right: -.25em;
-      }
-      .editMenuiOS a:active .btn {
-        background-color: #A6A6A6;
-      }
-      .editMenuiOS .start {
-        border-top-left-radius: 4pt;
-        border-bottom-left-radius: 4pt;
-      }
-      .editMenuiOS .end {
-        margin-right: 0;
-        border-top-right-radius: 4pt;
-        border-bottom-right-radius: 4pt;
-      }
-      .editMenuiOS .arrow {
-        z-index: 500;
-        position: absolute;
-        display: block;
-        width: 15pt;
-        height: 15pt;
-        background-color: #29292A;
-        left: 50%;
-        margin-left: -5pt;
-        margin-top: -10pt;
-        transform: rotate(45deg);
-      }
-      .editMenuiOS a:active .arrow {
-        background-color: #A6A6A6;
-      }
-      .editMenuAndroid {
-        position: absolute;
-        z-index: 1000;
-        width: 100%;
-        text-align: center;
-        margin-left: -6pt;
-      }
-      .editMenuAndroid .btn {
-        background-color: #FAFAFA;
-        padding: 5pt 8pt;
-        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-        border-radius: 2pt;
-        margin: 0 40pt;
-      }
-      .editMenuAndroid a {
-        font-family: -apple-system, "Helvetica Neue", "Lucida Grande";
-        font-size: 14px;
-        font-weight: 600;
-        color: #4C4C4C;
-        text-decoration: none;
-        padding: 0 4pt;
-      }
-      .editMenuAndroid a:active .btn {
-        background-color: #A6A6A6;
-      }
       ${CSS}
     </style>
   </head>
   <body id="scripture">
-    <div id="edit-menu-ios-template" class="editMenuiOS" style="display:none;">
-      <a href="#">
-        <span class="btn start">Highlight</span>
-      </a>
-      <a href="#">
-        <span class="btn">Bookmark</span>
-        <div class="arrow">&nbsp;</div>
-      </a>
-      <a href="#">
-        <span class="btn end">Share</span>
-      </a>
-    </div>
-    <div id="edit-menu-android-template" class="editMenuAndroid" style="display: none;">
-      <div class="btn">
-        <a href="#">HIGHLIGHT</a>
-        <a href="#">BOOKMARK</a>
-        <a href="#">SHARE</a>
-      </div>
-    </div>
     <div id="footnote-overlay" class="footnoteOverlay" style="display: none;">
       <div class="footnoteContainer">
         <div class="footnoteHeader">
@@ -385,13 +294,6 @@ module.exports = `
           var verse = verses[i];
           verse.classList.toggle('selection');
         }
-
-        var editMenuTemplate = document.getElementById('edit-menu-ios-template');
-
-        var editMenu = editMenuTemplate.cloneNode(true);
-        editMenu.id = 'edit-menu';
-        // editMenuTemplate.style.display = 'block';
-        // element.parentNode.insertBefore(editMenu);
 
         var data = JSON.stringify({
           hello: 'world',
