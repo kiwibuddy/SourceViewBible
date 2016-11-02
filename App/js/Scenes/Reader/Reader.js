@@ -45,7 +45,6 @@ const LOADING_HTML = require('./Loading.html');
 import { Preference } from '../../Preferences';
 import { ReaderBaseFontSize, ReaderBaseLineHeight, ReaderFontStepSize, ReaderWebFontConversion } from '../../Common/Constants';
 
-
 type Props = {
   bookID: string,
   anchor?: string,
