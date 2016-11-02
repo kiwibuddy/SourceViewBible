@@ -2,18 +2,15 @@
 'use strict';
 
 import React, { Component } from 'react';
-import {
-  View
-} from 'react-native';
+import { View } from 'react-native';
 
 import {
-  Colors,
   Localizable,
   StyleSheet
 } from '../../Common';
 
-import { BACK, bookURL, readerSearchURL, readerSettingsURL, readerURL } from '../../Navigation';
-import { NavigationHeader, NavigationBarButton, Toolbar, ToolbarButton } from '../../Components/Navigation';
+import { BACK, readerURL } from '../../Navigation';
+import { Toolbar, ToolbarButton } from '../../Components/Navigation';
 
 export default class OccurrenceToolbar extends Component {
   render() {
