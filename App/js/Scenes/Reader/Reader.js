@@ -149,7 +149,14 @@ export default class Reader extends Component {
     }
 
     if (references && references.length > 0) {
-      return <ActionToolbar key="ActionToolbar" />;
+      return (<ActionToolbar
+        key="ActionToolbar"
+        onBookmark={() => this._onBookmark(references)}
+        onCancel={() => this.setState({references: null})}
+        onHighlight={() => this._onHighlight(references)}
+        onShare={() => this._onShare(references)}
+        references={references}
+      />);
     }
 
     return (
@@ -224,6 +231,18 @@ export default class Reader extends Component {
     if (this.webview) {
       this.webview.postMessage(data);
     }
+  };
+
+  _onBookmark = (references) => {
+
+  };
+
+  _onHighlight = (references) => {
+
+  };
+
+  _onShare = (references) => {
+
   };
 
   _setScripture = (bookID: string, anchor?: string, occurrences?: any, occurrenceIndex?: number, force?: boolean = false) => {
