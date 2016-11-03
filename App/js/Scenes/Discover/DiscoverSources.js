@@ -27,7 +27,6 @@ const {
   SphereType
 } = Constants;
 
-// $FlowFixMe: Can't find os module extension
 import LinearGradient from 'react-native-linear-gradient';
 import { SourcesBarChart, SpheresBarChart } from '../../Components/Charts';
 import PageControl from '../../Components/Common/PageControl';

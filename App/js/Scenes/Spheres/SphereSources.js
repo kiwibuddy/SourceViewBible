@@ -32,7 +32,6 @@ import { BarChart, PieChart } from '../../Components/Charts';
 import Icon from '../../Components/Common/Icon';
 import SourceIcon from '../../Components/Common/SourceIcon';
 
-// $FlowFixMe: - Flow can't find os module extension
 import SegmentedControl from '../../Components/Common/SegmentedControl';
 
 import { readerURL, sourceURL } from '../../Navigation';

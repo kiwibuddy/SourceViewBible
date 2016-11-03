@@ -19,7 +19,6 @@ import {
   StyleSheet,
 } from '../../Common';
 
-// $FlowFixMe: Can't find os module extension
 import LinearGradient from 'react-native-linear-gradient';
 import PageControl from '../../Components/Common/PageControl';
 import { BACK, discoverURL } from '../../Navigation';

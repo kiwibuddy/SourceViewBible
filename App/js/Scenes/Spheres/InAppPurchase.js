@@ -31,7 +31,6 @@ import { Preference } from '../../Preferences';
 const { width: WIDTH } = Dimensions.get('window');
 import DeviceInfo from 'react-native-device-info';
 
-// $FlowFixMe: Can't find os module extension
 import Store from '../../API/Store';
 
 function openURL(url: string) {

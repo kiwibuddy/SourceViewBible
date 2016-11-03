@@ -1,7 +1,8 @@
 [ignore]
 
 # We fork some components by platform.
-.*/*[.]android.js
+# .*/*[.]android.js # Default
+.*/node_modules/.*/*[.]android.js
 
 # Ignore templates with `@flow` in header
 .*/local-cli/generator.*
@@ -53,6 +54,12 @@ suppress_comment=\\(.\\|\n\\)*\\$FlowIssue\\((\\(>=0\\.\\(3[0-3]\\|1[0-9]\\|[1-2
 suppress_comment=\\(.\\|\n\\)*\\$FlowFixedInNextDeploy
 
 unsafe.enable_getters_and_setters=true
+
+module.file_ext=.ios.js
+module.file_ext=.android.js
+module.file_ext=.js
+module.file_ext=.jsx
+module.file_ext=.json
 
 [version]
 ^0.33.0

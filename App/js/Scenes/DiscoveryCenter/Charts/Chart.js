@@ -15,7 +15,6 @@ import {
   StyleSheet,
 } from '../../../Common';
 
-// $FlowFixMe: Can't find os module extension
 import LinearGradient from 'react-native-linear-gradient';
 
 const ChartType = {

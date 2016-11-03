@@ -28,7 +28,6 @@ const {
 
 import { PieChart, SourcesBarChart, SpheresBarChart } from '../../Components/Charts';
 
-// $FlowFixMe: - Flow can't find os module extension
 import SegmentedControl from '../../Components/Common/SegmentedControl';
 
 import { readerURL, sphereURL, spherePassagesURL } from '../../Navigation';

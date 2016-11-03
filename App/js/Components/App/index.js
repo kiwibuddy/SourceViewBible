@@ -12,7 +12,6 @@ import {
 } from 'react-native';
 
 import { NavigationHeader, NavigationBarButton, Toolbar } from '../Navigation';
-// $FlowFixMe: Can't find os module extension
 import DefaultToolbar from '../Navigation/DefaultToolbar';
 
 import Menu, {

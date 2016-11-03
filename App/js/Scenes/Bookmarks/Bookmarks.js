@@ -25,7 +25,6 @@ import { NavigationHeader, NavigationBarButton, Toolbar, ToolbarButton } from '.
 
 import { BACK, bookmarkURL, spheresURL, sphereInAppPurchaseURL } from '../../Navigation';
 
-// $FlowFixMe: - Flow can't find os module extension
 import SegmentedControl from '../../Components/Common/SegmentedControl';
 
 import { History, Preference } from '../../Preferences';

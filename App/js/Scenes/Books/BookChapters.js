@@ -30,7 +30,6 @@ import { Preference } from '../../Preferences';
 
 import { readerURL } from '../../Navigation';
 
-// $FlowFixMe: - Flow can't find os module extension
 import SegmentedControl from '../../Components/Common/SegmentedControl';
 import { SourcesBarChart, SpheresBarChart } from '../../Components/Charts';
 import { ReadingTime } from '../../Common/NumberHelper';

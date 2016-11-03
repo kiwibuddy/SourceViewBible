@@ -28,7 +28,6 @@ import GettingStartedCard from './GettingStartedCard';
 import Popover from '../../Components/Common/Popover';
 import { DeleteButton, DuplicateButton, ShareButton } from './Buttons';
 
-// $FlowFixMe: Can't find os module extension
 import LinearGradient from 'react-native-linear-gradient';
 
 import { NavigationHeader, NavigationBarButton, Toolbar, ToolbarButton } from '../../Components/Navigation';

@@ -21,7 +21,6 @@ import {
   Localizable
 } from '../../Common';
 
-// $FlowFixMe: Can't find os module extension
 import LinearGradient from 'react-native-linear-gradient';
 import { BarChart } from '../../Components/Charts';
 import Icon from '../../Components/Common/Icon';

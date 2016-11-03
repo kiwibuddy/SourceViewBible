@@ -21,7 +21,7 @@ export default class SegmentedControl extends Component {
     selectedIndex: number,
   };
 
-  constructor(props) {
+  constructor(props: Object) {
     super(props);
 
     this.state = {
@@ -48,7 +48,7 @@ export default class SegmentedControl extends Component {
     );
   }
 
-  _renderButton(index: PropTypes.number, title: String, isSelected: boolean) {
+  _renderButton(index: number, title: string, isSelected: boolean) {
     const tintColor = isSelected ? this.props.tintColor : null;
     const buttonStyle = isSelected ? {borderBottomColor: tintColor} : {};
     return(
