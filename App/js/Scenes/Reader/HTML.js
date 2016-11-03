@@ -295,19 +295,19 @@ module.exports = `
           verseElement.classList.toggle('selection');
         }
 
-        var verses = [];
+        var references = [];
         var selectedVerseElements = document.querySelectorAll(".selection");
         for (var i = 0; i < selectedVerseElements.length; i++) {
           var verseElement = selectedVerseElements[i];
           var verseReference = verseElement.dataset.verse;
-          if (verses.indexOf(verseReference) == -1) {
-            verses.push(verseReference);
+          if (references.indexOf(verseReference) == -1) {
+            references.push(verseReference);
           }
         }
 
         var data = JSON.stringify({
           action: 'select',
-          verses: verses
+          references: references
         });
         window.postMessage(data);
       }

@@ -57,7 +57,6 @@ type Props = {
   navigate: Function,
   occurrences?: any,
   occurrenceIndex?: any,
-  references?: any,
 };
 
 type State = {
@@ -65,6 +64,7 @@ type State = {
   anchor?: string,
   scripture: any,
   loading: bool,
+  references: any,
 };
 
 export default class Reader extends Component {
@@ -98,6 +98,7 @@ export default class Reader extends Component {
       anchor: props.anchor,
       scripture: null,
       loading: true,
+      references: null,
     };
   }
 
@@ -141,9 +142,14 @@ export default class Reader extends Component {
 
   _renderToolbar = () => {
     const { canGoBack, canGoForward, navigate, occurrences } = this.props;
+    const { references } = this.state;
 
     if (occurrences) {
       return <OccurrenceToolbar key="OccurrenceToolbar" {...this.props} />;
+    }
+
+    if (references && references.length > 0) {
+      return <ActionToolbar key="ActionToolbar" />;
     }
 
     return (
@@ -206,6 +212,7 @@ export default class Reader extends Component {
     const data = JSON.parse(event.nativeEvent.data);
     switch(data.action) {
       case 'select':
+        this.setState({references: data.references});
         break;
       default:
         console.log('_onMessage', data);
