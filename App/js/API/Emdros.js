@@ -41,7 +41,7 @@ function highlightSpheres(feature: string, spheres: any, startingPosition: numbe
 }
 
 function styleFeatures(feature: string) {
-  return `{{ setvar 'monad' }}{{ firstmonad }}{{ setvarend }}<span id="occurrence-{{ emitvar 'monad' }}" class="verse{{ emitvar 'embeddedDocument' }}{{ emitvar 'embeddedQuotation' }}{{ dictlookup 'occurrences' var 'monad' '' }}" data-monad="{{ emitvar 'monad' }}" data-verse="{{ emitvar 'verse_anchor' }}">${feature}</span>`;
+  return `{{ setvar 'monad' }}{{ firstmonad }}{{ setvarend }}<span id="occurrence-{{ emitvar 'monad' }}" class="verse{{ emitvar 'embeddedDocument' }}{{ emitvar 'embeddedQuotation' }}{{ dictlookup 'occurrences' var 'monad' '' }}{{ dictlookup 'highlights' var 'monad' '' }}" data-monad="{{ emitvar 'monad' }}" data-verse="{{ emitvar 'verse_anchor' }}">${feature}</span>`;
 }
 
 function styleEmbedded(feature: string) {
@@ -91,15 +91,25 @@ function scripture(options: Object) {
     const spheres = (options && options.spheres ? options.spheres : []);
     const sphereFeatures = spheres.map(sphere => SPHERE_FEATURE_MAP[sphere]);
 
+    const dictionaries = stylesheet['dictionaries'];
+
     const occurrences = (options && options.occurrences ? options.occurrences : []);
     const occurrenceIndex = (options ? options.occurrenceIndex : -1);
     if (occurrences && occurrences.length > 0 && occurrenceIndex > -1) {
-      const dictionaries = stylesheet['dictionaries'];
       const occurrence = occurrences[occurrenceIndex];
       for (let monad = occurrence.firstMonad; monad <= occurrence.lastMonad; monad++) {
         dictionaries['occurrences'][monad.toString()] = ' occurrence ';
       }
     }
+
+    const highlights = (options && options.highlights ? options.highlights : []);
+    highlights.forEach(highlight => {
+      highlight.references.forEach(reference => {
+        for (let monad = reference.firstMonad; monad <= reference.lastMonad; monad++) {
+          dictionaries['highlights'][monad.toString()] = ' highlight ';
+        }
+      });
+    });
 
     const base = stylesheet['fetchinfo']['base']['object_types'];
     base['Token']['start'] = base['Token']['start'].replace('{{SPHERES}}', highlightSpheres(styleFeatures('{{ feature 0 }}'), spheres, 1));
@@ -107,7 +117,7 @@ function scripture(options: Object) {
     base['NonWordToken'] = base['Token'];
     base['SpaceToken']['start'] = highlightSpheres(styleFeatures(' '), options.spheres, 0);
     base['SpaceToken']['get'] = sphereFeatures;
-    base['VerseNumberToken']['start'] = base['VerseNumberToken']['start'].replace('{{SPHERES}}', highlightSpheres(styleEmbedded('<span class="verse" data-verse="{{ emitvar \'verse_anchor\' }}">{{ featurenomangle 0 }}&#160;</span>'), spheres, 1));
+    base['VerseNumberToken']['start'] = base['VerseNumberToken']['start'].replace('{{SPHERES}}', highlightSpheres(styleEmbedded('{{ setvar \'monad\' }}{{ firstmonad }}{{ setvarend }}<span class="verse{{ dictlookup \'highlights\' var \'monad\' \'\' }}" data-monad="{{ emitvar \'monad\' }}" data-verse="{{ emitvar \'verse_anchor\' }}">{{ featurenomangle 0 }}&#160;</span>'), spheres, 1));
     base['VerseNumberToken']['get'] = base['VerseNumberToken']['get'].concat(sphereFeatures);
     base['ChapterNumberToken']['start'] = base['ChapterNumberToken']['start'].replace('{{SPHERES}}', highlightSpheres(styleEmbedded('{{ featurenomangle 0 }}'), spheres, 1));
     base['ChapterNumberToken']['get'] = base['ChapterNumberToken']['get'].concat(sphereFeatures);

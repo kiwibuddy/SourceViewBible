@@ -270,6 +270,8 @@ export default class Reader extends Component {
   _onHighlight = (references) => {
     const highlights = Bookmark.whereReferences(references, {type:Bookmark.Type.Highlight});
 
+    console.log(references);
+
     if (highlights.length > 0) {
       highlights.forEach(highlight => {
         highlight.delete();
@@ -277,6 +279,8 @@ export default class Reader extends Component {
     } else {
       Bookmark.highlight(references);
     }
+
+    this.setState({references: null});
   };
 
   _onShare = (references) => {

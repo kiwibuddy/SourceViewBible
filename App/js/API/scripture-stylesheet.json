@@ -235,6 +235,7 @@
     }
   },
   "dictionaries":{
-    "occurrences": {}
+    "occurrences": {},
+    "highlights": {}
   }
 }
