@@ -278,6 +278,9 @@ export default class Reader extends Component {
       });
     } else {
       Bookmark.highlight(references);
+      this._postMessage({
+        action: 'highlight'
+      });
     }
 
     this.setState({references: null});

@@ -285,6 +285,10 @@ module.exports = `
         var data = JSON.parse(e.data);
 
         switch(data.action) {
+          case 'highlight':
+            highlightSelectedVerses();
+            break;
+
           case 'cancel':
             deselectVerses();
             break;
@@ -333,6 +337,15 @@ module.exports = `
         for (var i = 0; i < selectedVerseElements.length; i++) {
           var verseElement = selectedVerseElements[i];
           verseElement.classList.remove('selection');
+        }
+      }
+
+      function highlightSelectedVerses() {
+        var selectedVerseElements = document.querySelectorAll(".selection");
+        for (var i = 0; i < selectedVerseElements.length; i++) {
+          var verseElement = selectedVerseElements[i];
+          verseElement.classList.remove('selection');
+          verseElement.classList.add('highlight');
         }
       }
 
