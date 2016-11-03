@@ -104,7 +104,13 @@ export default class App extends Component {
     }
 
     const Scene = route.scene;
-    return <Scene {...props.route} {...params} navigate={this._navigate} />;
+    return <Scene
+      {...props.route}
+      {...params}
+      canGoBack={this._canGoBack()}
+      canGoForward={this._canGoForward()}
+      navigate={this._navigate}
+    />;
   };
 
   _renderNavigationHeader = (props: any) => {
@@ -168,13 +174,10 @@ export default class App extends Component {
       if (toolbar) return toolbar;
     }
 
-    const canGoBack = this._canGoBack();
-    const canGoForward = this._canGoForward();
-
     return (
       <DefaultToolbar
-        canGoBack={canGoBack}
-        canGoForward={canGoForward}
+        canGoBack={this._canGoBack()}
+        canGoForward={this._canGoForward()}
         navigate={this._navigate}
       />
     );
