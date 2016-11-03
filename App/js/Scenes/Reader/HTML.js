@@ -283,6 +283,12 @@ module.exports = `
 
       function onMessage(e) {
         var data = JSON.parse(e.data);
+
+        switch(data.action) {
+          case 'cancel':
+            deselectVerses();
+            break;
+        }
       }
 
       function onClickVerse(e) {
@@ -310,6 +316,14 @@ module.exports = `
           references: references
         });
         window.postMessage(data);
+      }
+
+      function deselectVerses() {
+        var selectedVerseElements = document.querySelectorAll(".selection");
+        for (var i = 0; i < selectedVerseElements.length; i++) {
+          var verseElement = selectedVerseElements[i];
+          verseElement.classList.remove('selection');
+        }
       }
 
       document.onreadystatechange = function() {

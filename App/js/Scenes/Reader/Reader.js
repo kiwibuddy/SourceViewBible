@@ -152,7 +152,7 @@ export default class Reader extends Component {
       return (<ActionToolbar
         key="ActionToolbar"
         onBookmark={() => this._onBookmark(references)}
-        onCancel={() => this.setState({references: null})}
+        onCancel={this._onCancelAction}
         onHighlight={() => this._onHighlight(references)}
         onShare={() => this._onShare(references)}
         references={references}
@@ -229,12 +229,19 @@ export default class Reader extends Component {
 
   _postMessage = (data) => {
     if (this.webview) {
-      this.webview.postMessage(data);
+      this.webview.postMessage(JSON.stringify(data));
     }
   };
 
   _onBookmark = (references) => {
 
+  };
+
+  _onCancelAction = () => {
+    this.setState({references: null});
+    this._postMessage({
+      action: 'cancel'
+    });
   };
 
   _onHighlight = (references) => {
