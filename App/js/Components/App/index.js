@@ -165,6 +165,13 @@ export default class App extends Component {
   };
 
   _renderToolbar = (props: any) => {
+    const { navigationState } = props;
+    const navigationRoute = navigationState.routes[navigationState.index];
+
+    const { route, params} = router.match(navigationRoute.path);
+    const Scene = route.scene;
+    if (Scene.wantsFullScreenLayout) return null;
+
     return (
       <DefaultToolbar
         canGoBack={this._canGoBack()}

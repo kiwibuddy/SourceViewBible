@@ -13,123 +13,130 @@ import {
   StyleSheet
 } from '../../Common';
 
-const Loading = () => {
+type Props = {
+  toolbar: ReactElement<any>
+};
+
+const Loading = (props: Props) => {
   return (
-    <View style={[styles.container, {flex: 1, flexDirection: 'column', padding: 20}]}>
-      <View style={styles.textPlaceholderContainer}>
+    <View style={styles.container}>
+      <View style={[styles.container, {flex: 1, flexDirection: 'column', padding: 20}]}>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .05}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .10}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .08}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} />
+        </View>
+        <View style={[styles.textPlaceholderContainer, {marginBottom: 20}]}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .80}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .05}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .10}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} />
+        </View>
+        <View style={[styles.textPlaceholderContainer, {marginBottom: 20}]}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .20}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
         <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .05}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
-        <View style={[styles.textPlaceholder, {flex: 1}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
-        <View style={[styles.textPlaceholder, {flex: 1}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .08}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
         <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .10}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
-        <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .08}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
-        <View style={[styles.textPlaceholder, {flex: 1}]} />
-      </View>
-      <View style={[styles.textPlaceholderContainer, {marginBottom: 20}]}>
-        <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .80}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
+        </View>
+        <View style={[styles.textPlaceholderContainer, {marginBottom: 20}]}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: 1}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .20}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
         <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .05}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .08}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
         <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .10}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+        <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .05}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .08}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+        <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .10}]} />
+        </View>
+        <View style={[styles.textPlaceholderContainer, {marginBottom: 20}]}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: 1}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .20}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+        <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .05}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .08}]} />
+        </View>
+        <View style={styles.textPlaceholderContainer}>
+        <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .10}]} />
+        </View>
+        <View style={[styles.textPlaceholderContainer, {marginBottom: 20}]}>
+          <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: 1}]} />
+        </View>
       </View>
-      <View style={styles.textPlaceholderContainer}>
-        <View style={[styles.textPlaceholder, {flex: 1}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
-        <View style={[styles.textPlaceholder, {flex: 1}]} />
-      </View>
-      <View style={[styles.textPlaceholderContainer, {marginBottom: 20}]}>
-        <View style={[styles.textPlaceholder, {flex: 1}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
-        <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .20}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
-        <View style={[styles.textPlaceholder, {flex: 1}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
-      <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .05}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
-        <View style={[styles.textPlaceholder, {flex: 1}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
-        <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .08}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
-      <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .10}]} />
-      </View>
-      <View style={[styles.textPlaceholderContainer, {marginBottom: 20}]}>
-        <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: 1}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
-        <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .20}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
-        <View style={[styles.textPlaceholder, {flex: 1}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
-      <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .05}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
-        <View style={[styles.textPlaceholder, {flex: 1}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
-        <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .08}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
-      <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .10}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
-        <View style={[styles.textPlaceholder, {flex: 1}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
-      <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .05}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
-        <View style={[styles.textPlaceholder, {flex: 1}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
-        <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .08}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
-      <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .10}]} />
-      </View>
-      <View style={[styles.textPlaceholderContainer, {marginBottom: 20}]}>
-        <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: 1}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
-        <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .20}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
-        <View style={[styles.textPlaceholder, {flex: 1}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
-      <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .05}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
-        <View style={[styles.textPlaceholder, {flex: 1}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
-        <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .08}]} />
-      </View>
-      <View style={styles.textPlaceholderContainer}>
-      <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: .10}]} />
-      </View>
-      <View style={[styles.textPlaceholderContainer, {marginBottom: 20}]}>
-        <View style={[styles.textPlaceholder, {flex: 1}]} /><View style={[styles.whiteSpace, {flex: 1}]} />
-      </View>
+      {props.toolbar}
     </View>
   );
 };

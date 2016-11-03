@@ -45,7 +45,6 @@ import Emdros from '../../API/Emdros';
 import { Book, Sphere } from '../../Database';
 
 const HTML = require('./HTML');
-const LOADING_HTML = require('./Loading.html');
 
 import { Preference } from '../../Preferences';
 import { ReaderBaseFontSize, ReaderBaseLineHeight, ReaderFontStepSize, ReaderWebFontConversion } from '../../Common/Constants';
@@ -117,7 +116,8 @@ export default class Reader extends Component {
   }
 
   render() {
-    if (this.state.loading) return <Loading />;
+    const toolbar = this._renderToolbar();
+    if (this.state.loading) return <Loading toolbar={toolbar} />;
 
     const injectedJavaScript = this._renderInjectedJavascript();
     const key = (this.props.anchor ? `anchor-${this.props.anchor}` : 'webview');
@@ -134,51 +134,27 @@ export default class Reader extends Component {
           style={styles.webview}
           source={{html: this.state.scripture}}
         />
-        {this._renderToolbar()}
+        {toolbar}
       </View>
     );
   }
 
   _renderToolbar = () => {
-    const { canGoBack, canGoForward, navigate } = this.props;
+    const { canGoBack, canGoForward, navigate, occurrences } = this.props;
+
+    if (occurrences) {
+      return <OccurrenceToolbar key="OccurrenceToolbar" {...this.props} />;
+    }
+
     return (
       <DefaultToolbar
+        key="DefaultToolbar"
         canGoBack={canGoBack}
         canGoForward={canGoForward}
         navigate={navigate}
       />
     )
   }
-
-  _setScripture = (bookID: string, anchor?: string, occurrences?: any, occurrenceIndex?: number, force?: boolean = false) => {
-    const book = Book.findByID(bookID);
-
-    const spheres = Preference.objectForKey(Preference.Keys.Reader.spheres) || [];
-    const options = {monadSet: book.monadSet, spheres, occurrences, occurrenceIndex};
-
-    if (force || bookID !== this.state.bookID || anchor !== this.state.anchor) {
-      this.setState({loading: true});
-    }
-
-    Emdros.scripture(options).then((content) => {
-      if (this.shouldFetchScripture) {
-        const scripture = this._renderScripture(content);
-
-        if (__DEV__ && DeviceInfo.getModel() === 'Simulator') {
-          this._debugScripture(scripture);
-        }
-
-        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-
-        this.setState({
-          bookID,
-          anchor,
-          scripture,
-          loading: false
-        });
-      }
-    });
-  };
 
   _renderScripture = (content: string) => {
     const { bookID } = this.props;
@@ -241,6 +217,36 @@ export default class Reader extends Component {
     if (this.webview) {
       this.webview.postMessage(data);
     }
+  };
+
+  _setScripture = (bookID: string, anchor?: string, occurrences?: any, occurrenceIndex?: number, force?: boolean = false) => {
+    const book = Book.findByID(bookID);
+
+    const spheres = Preference.objectForKey(Preference.Keys.Reader.spheres) || [];
+    const options = {monadSet: book.monadSet, spheres, occurrences, occurrenceIndex};
+
+    if (force || bookID !== this.state.bookID || anchor !== this.state.anchor) {
+      this.setState({loading: true});
+    }
+
+    Emdros.scripture(options).then((content) => {
+      if (this.shouldFetchScripture) {
+        const scripture = this._renderScripture(content);
+
+        if (__DEV__ && DeviceInfo.getModel() === 'Simulator') {
+          this._debugScripture(scripture);
+        }
+
+        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+
+        this.setState({
+          bookID,
+          anchor,
+          scripture,
+          loading: false
+        });
+      }
+    });
   };
 
   _debugScripture(scripture: string) {
