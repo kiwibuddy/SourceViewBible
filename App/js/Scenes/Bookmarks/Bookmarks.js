@@ -27,13 +27,13 @@ import { BACK, bookmarkURL, spheresURL, sphereInAppPurchaseURL } from '../../Nav
 
 import SegmentedControl from '../../Components/Common/SegmentedControl';
 
-import { History, Preference } from '../../Preferences';
+import { Bookmark, History, Preference } from '../../Preferences';
 
-const SEGMENTS = [Localizable.t('history'), Localizable.t('bookmarks'), Localizable.t('highlights')];
+const SEGMENTS = [Localizable.t('history'), Localizable.t('highlights'), Localizable.t('bookmarks')];
 const SEGMENT_INDEXES = {
   HISTORY: 0,
-  BOOKMARKS: 1,
-  HIGHLIGHTS: 2,
+  HIGHLIGHTS: 1,
+  BOOKMARKS: 2,
 };
 const SEGMENT_PREFERENCE = Preference.Keys.Bookmarks.SegmentIndex;
 
@@ -247,7 +247,7 @@ No one can receive anything unless God gives it from heaven. 28 You yourselves 
         return this.state.dataSource.cloneWithRowsAndSections(rows, sections);
 
       case SEGMENT_INDEXES.HIGHLIGHTS:
-        return this.state.dataSource.cloneWithRowsAndSections({highlights: [{}]});
+        return this.state.dataSource.cloneWithRowsAndSections({highlights: Bookmark.highlights()});
 
       default:
         const defaults = [

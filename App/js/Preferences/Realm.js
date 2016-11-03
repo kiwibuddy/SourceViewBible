@@ -46,7 +46,11 @@ export class Bookmark extends Realm.Object {
   }
 
   static bookHighlights(bookID: string) {
-    return realm.objects('Bookmark').filtered('references.bookID = $0', bookID);
+    return realm.objects('Bookmark').filtered('references.bookID = $0 AND highlight = $1', bookID, true);
+  }
+
+  static highlights() {
+    return realm.objects('Bookmark').filtered('highlight = $0', true).sorted('createdAt', true);
   }
 
   static highlight(references: Array<Object>) {
