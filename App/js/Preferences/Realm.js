@@ -6,6 +6,23 @@ import Realm from 'realm';
 import Emdros from '../API/Emdros';
 import moment from 'moment';
 
+const BookmarkSchema = {
+  name: 'Bookmark',
+  primaryKey: 'id',
+  properties: {
+    id: 'string',
+    createdAt: {type: 'date', indexed: true},
+    note: 'string',
+    type: 'string',
+    referencesJSON: 'string'
+  }
+};
+
+export class Bookmark extends Realm.Object {
+
+}
+Bookmark.schema = BookmarkSchema;
+
 const DiscoverySchema = {
   name: 'Discovery',
   primaryKey: 'id',
@@ -207,11 +224,11 @@ export class History extends Realm.Object {
 }
 History.schema = HistorySchema;
 
-const Schema = [Discovery, Preference, History];
+const Schema = [Bookmark, Discovery, Preference, History];
 
 const options = {
   schema: Schema,
-  schemaVersion: 2,
+  schemaVersion: 3,
   migration: function(oldRealm, newRealm) {
   }
 };
