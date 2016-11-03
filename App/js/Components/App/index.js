@@ -88,8 +88,11 @@ export default class App extends Component {
     const scene = this._renderScene(props);
     if (props.route.modal) return scene;
 
+    const { route, params} = router.match(props.route.path);
+    const Scene = route.scene;
+
     return (
-      <View style={{flex: 1, marginBottom: Toolbar.HEIGHT}}>
+      <View style={{flex: 1, marginBottom: (Scene.wantsFullScreenLayout ? 0 : Toolbar.HEIGHT)}}>
         {scene}
       </View>
     );
@@ -162,17 +165,6 @@ export default class App extends Component {
   };
 
   _renderToolbar = (props: any) => {
-    const { navigationState } = props;
-    const navigationRoute = navigationState.routes[navigationState.index];
-
-    const { route, params} = router.match(navigationRoute.path);
-    const Scene = route.scene;
-
-    if (Scene && typeof(Scene.renderToolbar) !== "undefined") {
-      const toolbar = Scene.renderToolbar({...navigationRoute, ...params, navigate:this._navigate});
-      if (toolbar) return toolbar;
-    }
-
     return (
       <DefaultToolbar
         canGoBack={this._canGoBack()}

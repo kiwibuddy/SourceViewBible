@@ -25,7 +25,7 @@ import {
 } from '../../Common';
 
 import { BACK, bookURL, readerSearchURL, readerSettingsURL, readerURL } from '../../Navigation';
-import { NavigationHeader, NavigationBarButton } from '../../Components/Navigation';
+import { NavigationHeader, NavigationBarButton, Toolbar } from '../../Components/Navigation';
 
 import DefaultToolbar from '../../Components/Navigation/DefaultToolbar';
 
@@ -53,6 +53,8 @@ import { ReaderBaseFontSize, ReaderBaseLineHeight, ReaderFontStepSize, ReaderWeb
 type Props = {
   bookID: string,
   anchor?: string,
+  canGoBack: boolean,
+  canGoForward: boolean,
   navigate: Function,
   occurrences?: any,
   occurrenceIndex?: any,
@@ -79,15 +81,6 @@ export default class Reader extends Component {
         onPress={() => props.navigate(readerSettingsURL({title: Localizable.t('settings'), modal: true}))}
       />
     );
-  }
-
-  static renderToolbar(props: Object) {
-    const { occurrences, references } = props;
-    if (occurrences) {
-      return <OccurrenceToolbar {...props} />;
-    }
-
-    return null;
   }
 
   static wantsFullScreenLayout = true;
@@ -141,8 +134,20 @@ export default class Reader extends Component {
           style={styles.webview}
           source={{html: this.state.scripture}}
         />
+        {this._renderToolbar()}
       </View>
     );
+  }
+
+  _renderToolbar = () => {
+    const { canGoBack, canGoForward, navigate } = this.props;
+    return (
+      <DefaultToolbar
+        canGoBack={canGoBack}
+        canGoForward={canGoForward}
+        navigate={navigate}
+      />
+    )
   }
 
   _setScripture = (bookID: string, anchor?: string, occurrences?: any, occurrenceIndex?: number, force?: boolean = false) => {
@@ -257,5 +262,6 @@ const styles = StyleSheet.create({
   webview: {
     flex: 1,
     backgroundColor: 'white',
+    marginBottom: Toolbar.HEIGHT,
   },
 });
