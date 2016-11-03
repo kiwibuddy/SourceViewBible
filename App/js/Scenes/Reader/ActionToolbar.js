@@ -15,7 +15,7 @@ import { Toolbar, ToolbarButton } from '../../Components/Navigation';
 export default class ActionToolbar extends Component {
   render() {
     return (
-      <Toolbar style={{zIndex: 100}}>
+      <Toolbar>
         <ToolbarButton
           title={Localizable.t('highlight')}
           onPress={() => {}}

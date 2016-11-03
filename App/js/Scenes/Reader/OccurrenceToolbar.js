@@ -46,7 +46,7 @@ export default class OccurrenceToolbar extends Component {
     }
 
     return (
-      <Toolbar style={{zIndex: 100}}>
+      <Toolbar>
         <View style={{flex: 1, flexDirection: 'row'}}>
           <ToolbarButton
             disabled={previousRoute == null}
