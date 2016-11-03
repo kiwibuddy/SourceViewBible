@@ -224,19 +224,26 @@ export default class Reader extends Component {
   };
 
   _onMessage = (event) => {
+    const { bookID } = this.state;
     const data = JSON.parse(event.nativeEvent.data);
     switch(data.action) {
       case 'select':
         const references = data.verses.map(verseReference => {
-          const verseComponents = verseReference.split('-');
+          const verseComponents = verseReference.verse.split('-');
           const chapter = parseInt(verseComponents[1]);
           const verse = parseInt(verseComponents[2]);
+          const firstMonad = verseReference.firstMonad;
+          const lastMonad = verseReference.lastMonad;
           return ({
-            bookID: this.state.bookID,
+            bookID,
             chapter,
-            verse
+            verse,
+            firstMonad,
+            lastMonad
           });
         });
+
+        console.log(references);
 
         this.setState({references});
         break;

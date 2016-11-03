@@ -302,12 +302,17 @@ module.exports = `
         }
 
         var verses = [];
+        var verseReferences = [];
         var selectedVerseElements = document.querySelectorAll(".selection");
         for (var i = 0; i < selectedVerseElements.length; i++) {
           var verseElement = selectedVerseElements[i];
           var verseReference = verseElement.dataset.verse;
-          if (verses.indexOf(verseReference) == -1) {
-            verses.push(verseReference);
+          if (verseReferences.indexOf(verseReference) == -1) {
+            var verseElements = document.querySelectorAll("[data-verse='" + verseReference + "']")
+            var firstMonad = verseElements[0].dataset.monad;
+            var lastMonad = verseElements[verseElements.length - 1].dataset.monad;
+            verses.push({firstMonad, lastMonad, verse: verseReference});
+            verseReferences.push(verseReference);
           }
         }
 
