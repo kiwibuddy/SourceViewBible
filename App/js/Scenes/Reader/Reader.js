@@ -57,6 +57,7 @@ type Props = {
   navigate: Function,
   occurrences?: any,
   occurrenceIndex?: any,
+  occurrencesRoute?: any,
 };
 
 type State = {
@@ -145,7 +146,14 @@ export default class Reader extends Component {
     const { references } = this.state;
 
     if (occurrences) {
-      return <OccurrenceToolbar key="OccurrenceToolbar" {...this.props} />;
+      const book = Book.findByID(this.state.bookID);
+      return (
+        <OccurrenceToolbar
+          key="OccurrenceToolbar"
+          {...this.props}
+          book={book}
+        />
+      );
     }
 
     if (references && references.length > 0) {

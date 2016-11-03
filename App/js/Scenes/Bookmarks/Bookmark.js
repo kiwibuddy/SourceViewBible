@@ -32,7 +32,7 @@ type State = {
 
 };
 
-export default class Bookmark extends Component {
+export default class BookmarkScene extends Component {
   props: Props;
   state: State;
 

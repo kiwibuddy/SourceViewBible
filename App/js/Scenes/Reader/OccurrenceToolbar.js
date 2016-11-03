@@ -12,7 +12,17 @@ import {
 import { BACK, readerURL } from '../../Navigation';
 import { Toolbar, ToolbarButton } from '../../Components/Navigation';
 
+type Props = {
+  book: Object,
+  navigate: Function,
+  occurrenceIndex: number,
+  occurrences: any,
+  occurrencesRoute: Object
+};
+
 export default class OccurrenceToolbar extends Component {
+  props: Props;
+
   render() {
     const { book, occurrenceIndex, occurrences, occurrencesRoute } = this.props;
 

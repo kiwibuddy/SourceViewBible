@@ -14,7 +14,7 @@ const BookmarkSchema = {
     createdAt: {type: 'date', indexed: true},
     note: 'string',
     type: 'string',
-    referencesJSON: 'string'
+    references: {type: 'list', objectType: 'BookmarkReference'}
   }
 };
 
@@ -22,6 +22,20 @@ export class Bookmark extends Realm.Object {
 
 }
 Bookmark.schema = BookmarkSchema;
+
+const BookmarkReferenceSchema = {
+  name: 'BookmarkReference',
+  properties: {
+    bookID: 'string',
+    chapter: 'int',
+    verse: 'int'
+  }
+};
+
+export class BookmarkReference extends Realm.Object {
+
+}
+BookmarkReference.schema = BookmarkReferenceSchema;
 
 const DiscoverySchema = {
   name: 'Discovery',
@@ -224,7 +238,7 @@ export class History extends Realm.Object {
 }
 History.schema = HistorySchema;
 
-const Schema = [Bookmark, Discovery, Preference, History];
+const Schema = [Bookmark, BookmarkReference, Discovery, Preference, History];
 
 const options = {
   schema: Schema,
