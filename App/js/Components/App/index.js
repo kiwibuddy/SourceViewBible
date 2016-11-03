@@ -11,7 +11,9 @@ import {
   View,
 } from 'react-native';
 
-import { NavigationHeader, NavigationBarButton, Toolbar, ToolbarButton } from '../Navigation';
+import { NavigationHeader, NavigationBarButton, Toolbar } from '../Navigation';
+// $FlowFixMe: Can't find os module extension
+import DefaultToolbar from '../Navigation/DefaultToolbar';
 
 import Menu, {
   MenuContext,
@@ -23,7 +25,7 @@ import Menu, {
 } from 'react-native-popup-menu';
 Menu.setDefaultRenderer(renderers.NotAnimatedContextMenu);
 
-import router, { BACK, aboutURL, booksURL, discoverURL, onboardingURL, spheresURL, sphereHelpURL, sphereInAppPurchaseURL, sourcesURL } from '../../Navigation';
+import router, { BACK, FORWARD, aboutURL, booksURL, discoverURL, onboardingURL, spheresURL, sphereHelpURL, sphereInAppPurchaseURL, sourcesURL } from '../../Navigation';
 
 import {
   Analytics,
@@ -169,55 +171,12 @@ export default class App extends Component {
     const canGoBack = navigationState.index > 0;
     const canGoForward = navigationState.index < navigationState.routes.length - 1;
 
-    if (Platform.OS === 'android') {
-      return (
-        <Toolbar>
-          <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around'}}>
-            <ToolbarButton
-              imageSource={require('../Navigation/Images/nav-search.png')}
-              onPress={() => {this._pushRoute({path: '/Reader/Search', modal: true})}}
-            />
-            <ToolbarButton
-              imageSource={require('../Navigation/Images/nav-discoverycenter.png')}
-              onPress={() => {this._pushRoute({path: '/DiscoveryCenter', modal: true})}}
-            />
-            <ToolbarButton
-              imageSource={require('../Navigation/Images/nav-bookmarks.png')}
-              onPress={() => {this._pushRoute({path: '/Bookmarks', modal: true})}}
-            />
-          </View>
-        </Toolbar>
-      );
-    }
-
-
     return (
-      <Toolbar>
-        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
-          <ToolbarButton
-            disabled={!canGoBack}
-            imageSource={require('../Navigation/Images/nav-back.png')}
-            onPress={() => this._goBack()}
-          />
-          <ToolbarButton
-            disabled={!canGoForward}
-            imageSource={require('../Navigation/Images/nav-forward.png')}
-            onPress={() => this._goForward()}
-          />
-          <ToolbarButton
-            imageSource={require('../Navigation/Images/nav-discoverycenter.png')}
-            onPress={() => {this._pushRoute({path: '/DiscoveryCenter', modal: true})}}
-          />
-          <ToolbarButton
-            imageSource={require('../Navigation/Images/nav-search.png')}
-            onPress={() => {this._pushRoute({path: '/Reader/Search', modal: true})}}
-          />
-          <ToolbarButton
-            imageSource={require('../Navigation/Images/nav-bookmarks.png')}
-            onPress={() => {this._pushRoute({path: '/Bookmarks', modal: true})}}
-          />
-        </View>
-      </Toolbar>
+      <DefaultToolbar
+        canGoBack={canGoBack}
+        canGoForward={canGoForward}
+        navigate={this._navigate}
+      />
     );
   };
 
@@ -259,7 +218,13 @@ export default class App extends Component {
 
   _navigate = (route: any, options?: any) => {
     if (route === BACK) {
-      this._popRoute();
+      if (options && options.replace === false) {
+        this._goBack();
+      } else {
+        this._popRoute();
+      }
+    } else if (route === FORWARD) {
+      this._goForward();
     } else if (options && options.replace) {
       this._replaceCurrentRoute(route);
     } else {

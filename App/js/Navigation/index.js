@@ -90,6 +90,7 @@ export const sphereSourcesURL = router.addRoute('/Spheres/:sphereID/Sources', Sp
 export const sphereWordsURL = router.addRoute('/Spheres/:sphereID/Words', SphereWords);
 
 export const BACK = 'BACK';
+export const FORWARD = 'FORWARD';
 
 // Discovery center
 import ActantFilters from '../Scenes/DiscoveryCenter/Filters/ActantFilters';
