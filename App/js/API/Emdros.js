@@ -41,8 +41,7 @@ function highlightSpheres(feature: string, spheres: any, startingPosition: numbe
 }
 
 function styleFeatures(feature: string) {
-  const occurrences = "{{ setvar 'monad' }}{{ firstmonad }}{{ setvarend }}{{ setvar 'occurrence' }}{{ dictlookup 'occurrences' var 'monad' '' }}{{ setvarend }}";
-  return `${occurrences}<span id="occurrence-{{ emitvar 'monad' }}" class="verse{{ emitvar 'embeddedDocument' }}{{ emitvar 'embeddedQuotation' }}{{ emitvar 'occurrence' }}" data-verse="{{ emitvar 'verse_anchor' }}">${feature}</span>`;
+  return `{{ setvar 'monad' }}{{ firstmonad }}{{ setvarend }}<span id="occurrence-{{ emitvar 'monad' }}" class="verse{{ emitvar 'embeddedDocument' }}{{ emitvar 'embeddedQuotation' }}{{ dictlookup 'occurrences' var 'monad' '' }}" data-monad="{{ emitvar 'monad' }}" data-verse="{{ emitvar 'verse_anchor' }}">${feature}</span>`;
 }
 
 function styleEmbedded(feature: string) {

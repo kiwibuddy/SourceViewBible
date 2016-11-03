@@ -12,14 +12,64 @@ const BookmarkSchema = {
   properties: {
     id: 'string',
     createdAt: {type: 'date', indexed: true},
-    note: 'string',
+    note: {type: 'string', optional: true},
     type: 'string',
+    highlight: 'bool',
     references: {type: 'list', objectType: 'BookmarkReference'}
   }
 };
 
 export class Bookmark extends Realm.Object {
+  static Type = {
+    Bookmark: 'bookmark',
+    Highlight: 'highlight'
+  };
 
+  static all() {
+    return realm.objects('Bookmark').sorted('createdAt', true);
+  }
+
+  static whereReferences(references: Array<Object>, options?: Object) {
+    const bookmarks = [];
+    references.forEach(reference => {
+      let bookmarks = realm.objects('Bookmark').filtered('references.bookID = $0 AND references.chapter = $1 AND references.verse = $2', reference.bookID, reference.chapter, reference.verse);
+      if (options && options.type) {
+        bookmarks = bookmarks.filtered('type = $0', options.type);
+      }
+
+      const bookmark = bookmarks[0];
+      if (bookmark) {
+        bookmarks.push(bookmark);
+      }
+    });
+    return bookmarks;
+  }
+
+  static bookHighlights(bookID: string) {
+    return realm.objects('Bookmark').filtered('references.bookID = $0', bookID);
+  }
+
+  static highlight(references: Array<Object>) {
+    realm.write(() => {
+      const id = 'highlight-' + Date.now();
+      const createdAt = new Date();
+      const type = Bookmark.Type.Highlight
+      const highlight = true;
+
+      realm.create('Bookmark', {id, createdAt, type, references, highlight});
+    });
+  }
+
+  static bookmark(references, note?: string, highlight?: boolean) {
+
+  }
+
+  delete() {
+    const bookmark = this;
+    realm.write(() => {
+      realm.delete(bookmark);
+    });
+  }
 }
 Bookmark.schema = BookmarkSchema;
 
@@ -28,7 +78,9 @@ const BookmarkReferenceSchema = {
   properties: {
     bookID: 'string',
     chapter: 'int',
-    verse: 'int'
+    verse: 'int',
+    firstMonad: 'int',
+    lastMonad: 'int',
   }
 };
 

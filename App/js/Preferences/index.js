@@ -2,6 +2,8 @@
 'use strict';
 
 import {
+  Bookmark,
+  BookmarkReference,
   Discovery,
   History,
   Preference,
@@ -41,6 +43,8 @@ const Keys = {
 Preference.Keys = Keys;
 
 module.exports = {
+  Bookmark,
+  BookmarkReference,
   Discovery,
   History,
   Preference,

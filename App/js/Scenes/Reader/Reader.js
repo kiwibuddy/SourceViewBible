@@ -46,7 +46,7 @@ import { Book, Sphere } from '../../Database';
 
 const HTML = require('./HTML');
 
-import { Preference } from '../../Preferences';
+import { Bookmark, BookmarkReference, Preference } from '../../Preferences';
 import { ReaderBaseFontSize, ReaderBaseLineHeight, ReaderFontStepSize, ReaderWebFontConversion } from '../../Common/Constants';
 
 type Props = {
@@ -227,7 +227,18 @@ export default class Reader extends Component {
     const data = JSON.parse(event.nativeEvent.data);
     switch(data.action) {
       case 'select':
-        this.setState({references: data.references});
+        const references = data.verses.map(verseReference => {
+          const verseComponents = verseReference.split('-');
+          const chapter = parseInt(verseComponents[1]);
+          const verse = parseInt(verseComponents[2]);
+          return ({
+            bookID: this.state.bookID,
+            chapter,
+            verse
+          });
+        });
+
+        this.setState({references});
         break;
       default:
         console.log('_onMessage', data);
@@ -253,7 +264,15 @@ export default class Reader extends Component {
   };
 
   _onHighlight = (references) => {
+    const highlights = Bookmark.whereReferences(references, {type:Bookmark.Type.Highlight});
 
+    if (highlights.length > 0) {
+      highlights.forEach(highlight => {
+        highlight.delete();
+      });
+    } else {
+      Bookmark.highlight(references);
+    }
   };
 
   _onShare = (references) => {
@@ -264,7 +283,9 @@ export default class Reader extends Component {
     const book = Book.findByID(bookID);
 
     const spheres = Preference.objectForKey(Preference.Keys.Reader.spheres) || [];
-    const options = {monadSet: book.monadSet, spheres, occurrences, occurrenceIndex};
+    const highlights = Bookmark.bookHighlights(bookID);
+
+    const options = {monadSet: book.monadSet, spheres, occurrences, occurrenceIndex, highlights};
 
     if (force || bookID !== this.state.bookID || anchor !== this.state.anchor) {
       this.setState({loading: true});

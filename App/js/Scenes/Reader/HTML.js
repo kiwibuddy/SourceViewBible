@@ -301,19 +301,19 @@ module.exports = `
           verseElement.classList.toggle('selection');
         }
 
-        var references = [];
+        var verses = [];
         var selectedVerseElements = document.querySelectorAll(".selection");
         for (var i = 0; i < selectedVerseElements.length; i++) {
           var verseElement = selectedVerseElements[i];
           var verseReference = verseElement.dataset.verse;
-          if (references.indexOf(verseReference) == -1) {
-            references.push(verseReference);
+          if (verses.indexOf(verseReference) == -1) {
+            verses.push(verseReference);
           }
         }
 
         var data = JSON.stringify({
           action: 'select',
-          references: references
+          verses: verses
         });
         window.postMessage(data);
       }
