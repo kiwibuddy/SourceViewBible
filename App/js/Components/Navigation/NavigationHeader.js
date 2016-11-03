@@ -46,6 +46,8 @@ export default class NavigationHeader extends Component {
   static defaultProps = {
     renderTitleComponent: (props: Object) => {
       const title = String(props.title || '');
+
+      // $FlowFixMe - Silence warning
       return <NavigationHeaderTitle>{title}</NavigationHeaderTitle>;
     },
 

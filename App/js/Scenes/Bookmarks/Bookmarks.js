@@ -107,7 +107,7 @@ export default class Bookmarks extends Component {
 
     return (
       <SegmentedControl
-        style={[styles.segmentedControl, {marginTop: 8}]}
+        style={styles.segmentedControl}
         tintColor={Colors.tint}
         values={SEGMENTS}
         selectedIndex={this.state.selectedSegmentIndex}
@@ -409,6 +409,7 @@ const styles = StyleSheet.create({
         segmentedControl: {
           left: -32,
           marginRight: -16,
+          marginTop: 8,
         },
       },
       android: {
@@ -421,6 +422,7 @@ const styles = StyleSheet.create({
           backgroundColor: '#F9F9F9',
           right: -32,
           marginLeft: -16,
+          marginTop: 8,
         },
       },
   }),
