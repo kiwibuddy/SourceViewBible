@@ -289,6 +289,10 @@ module.exports = `
             highlightSelectedVerses();
             break;
 
+          case 'unhighlight':
+            unhighlightSelectedVerses();
+            break;
+
           case 'cancel':
             deselectVerses();
             break;
@@ -346,6 +350,15 @@ module.exports = `
           var verseElement = selectedVerseElements[i];
           verseElement.classList.remove('selection');
           verseElement.classList.add('highlight');
+        }
+      }
+
+      function unhighlightSelectedVerses() {
+        var selectedVerseElements = document.querySelectorAll(".selection");
+        for (var i = 0; i < selectedVerseElements.length; i++) {
+          var verseElement = selectedVerseElements[i];
+          verseElement.classList.remove('selection');
+          verseElement.classList.remove('highlight');
         }
       }
 

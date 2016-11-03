@@ -270,11 +270,12 @@ export default class Reader extends Component {
   _onHighlight = (references) => {
     const highlights = Bookmark.whereReferences(references, {type:Bookmark.Type.Highlight});
 
-    console.log(references);
-
     if (highlights.length > 0) {
       highlights.forEach(highlight => {
         highlight.delete();
+      });
+      this._postMessage({
+        action: 'unhighlight'
       });
     } else {
       Bookmark.highlight(references);

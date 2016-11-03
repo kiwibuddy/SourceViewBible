@@ -12,6 +12,8 @@ import {
 import { BACK, readerURL } from '../../Navigation';
 import { Toolbar, ToolbarButton } from '../../Components/Navigation';
 
+import { Bookmark } from '../../Preferences';
+
 type Props = {
   onBookmark: Function,
   onCancel: Function,
@@ -21,15 +23,20 @@ type Props = {
 };
 
 const ActionToolbar = (props: Props) => {
-  const { onBookmark, onCancel, onHighlight, onShare } = props;
+  const { onBookmark, onCancel, onHighlight, onShare, references } = props;
+
+  const bookmarks = Bookmark.whereReferences(references);
+  const highlightTitle = bookmarks.find(bookmark => bookmark.type === Bookmark.Type.Highlight) ? Localizable.t('unhighlight') : Localizable.t('highlight');
+  const bookmarkTitle = bookmarks.find(bookmark => bookmark.type === Bookmark.Type.Bookmark) ? Localizable.t('unbookmark') : Localizable.t('bookmark');
+
   return (
     <Toolbar>
       <ToolbarButton
-        title={Localizable.t('highlight')}
+        title={highlightTitle}
         onPress={onHighlight}
       />
       <ToolbarButton
-        title={Localizable.t('bookmark')}
+        title={bookmarkTitle}
         onPress={onBookmark}
       />
       <ToolbarButton

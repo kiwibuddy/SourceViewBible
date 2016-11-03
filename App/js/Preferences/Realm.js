@@ -32,12 +32,12 @@ export class Bookmark extends Realm.Object {
   static whereReferences(references: Array<Object>, options?: Object) {
     const bookmarks = [];
     references.forEach(reference => {
-      let bookmarks = realm.objects('Bookmark').filtered('references.bookID = $0 AND references.chapter = $1 AND references.verse = $2', reference.bookID, reference.chapter, reference.verse);
+      let objects = realm.objects('Bookmark').filtered('references.bookID = $0 AND references.chapter = $1 AND references.verse = $2', reference.bookID, reference.chapter, reference.verse);
       if (options && options.type) {
-        bookmarks = bookmarks.filtered('type = $0', options.type);
+        objects = objects.filtered('type = $0', options.type);
       }
 
-      const bookmark = bookmarks[0];
+      const bookmark = objects[0];
       if (bookmark) {
         bookmarks.push(bookmark);
       }
