@@ -30,7 +30,6 @@ export default class ActionToolbar extends Component {
         />
         <ToolbarButton
           title={Localizable.t('cancel')}
-          titleStyle={StyleSheet.styles.navigationBar.doneButtonTitle}
           onPress={() => {}}
         />
       </Toolbar>
