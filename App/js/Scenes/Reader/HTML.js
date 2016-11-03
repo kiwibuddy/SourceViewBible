@@ -308,10 +308,15 @@ module.exports = `
           var verseElement = selectedVerseElements[i];
           var verseReference = verseElement.dataset.verse;
           if (verseReferences.indexOf(verseReference) == -1) {
+            var verseComponents = verseReference.split('-');
+            var chapter = parseInt(verseComponents[1]);
+            var verse = parseInt(verseComponents[2]);
+
             var verseElements = document.querySelectorAll("[data-verse='" + verseReference + "']")
-            var firstMonad = verseElements[0].dataset.monad;
-            var lastMonad = verseElements[verseElements.length - 1].dataset.monad;
-            verses.push({firstMonad, lastMonad, verse: verseReference});
+            var firstMonad = parseInt(verseElements[0].dataset.monad);
+            var lastMonad = parseInt(verseElements[verseElements.length - 1].dataset.monad);
+
+            verses.push({chapter, verse, firstMonad, lastMonad});
             verseReferences.push(verseReference);
           }
         }
