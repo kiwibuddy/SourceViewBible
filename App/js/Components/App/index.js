@@ -168,8 +168,8 @@ export default class App extends Component {
       if (toolbar) return toolbar;
     }
 
-    const canGoBack = navigationState.index > 0;
-    const canGoForward = navigationState.index < navigationState.routes.length - 1;
+    const canGoBack = this._canGoBack();
+    const canGoForward = this._canGoForward();
 
     return (
       <DefaultToolbar
@@ -182,7 +182,7 @@ export default class App extends Component {
 
   _renderMenu = (options: Function, props: any) => {
     const { navigationState, navigate } = props;
-    const canGoForward = navigationState.index < navigationState.routes.length - 1;
+    const canGoForward = this._canGoForward();
 
     let forwardMenuOption = null;
     if (canGoForward) {
@@ -238,9 +238,17 @@ export default class App extends Component {
     });
   };
 
+  _canGoBack = () => {
+    return this.state.navigation.index > 0;
+  }
+
   _goBack = () => {
     this._jumpToIndex(this.state.navigation.index - 1);
   };
+
+  _canGoForward = () => {
+    return this.state.navigation.index < this.state.navigation.routes.length - 1;
+  }
 
   _goForward = () => {
     this._jumpToIndex(this.state.navigation.index + 1);
@@ -361,8 +369,7 @@ export default class App extends Component {
   };
 
   _onHardwareBackPress = () => {
-    const { navigation } = this.state;
-    const canGoBack = navigation.index > 0;
+    const canGoBack = this._canGoBack();
     if (canGoBack) {
       this._goBack();
       return true;
