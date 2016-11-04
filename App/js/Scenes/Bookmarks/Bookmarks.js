@@ -189,7 +189,7 @@ export default class Bookmarks extends Component {
               </View>
               <Text style={[StyleSheet.styles.cell.subtitle, styles.date]}>{RelativeDate(bookmark.createdAt)}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={noteStyle}>
+            <TouchableOpacity style={noteStyle} onPress={() => this.props.navigate(bookmarkURL({bookmarkID: bookmark.id, title: Localizable.t('bookmark'), modal: true}))}>
               {note}
               <Text style={styles.button}>{noteButtonTitle}</Text>
             </TouchableOpacity>

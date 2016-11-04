@@ -31,6 +31,10 @@ export class Bookmark extends Realm.Object {
     return realm.objects('Bookmark').sorted('createdAt', true);
   }
 
+  static findByID(id: string): Discovery {
+    return realm.objectForPrimaryKey('Bookmark', id || '');
+  }
+
   static whereReferences(references: Array<Object>, options?: Object) {
     const bookmarks = [];
     references.forEach(reference => {

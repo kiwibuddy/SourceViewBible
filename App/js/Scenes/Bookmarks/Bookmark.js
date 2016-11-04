@@ -29,6 +29,7 @@ import { Bookmark } from '../../Preferences';
 
 type Props = {
   bookID: string,
+  bookmarkID: string,
   navigate: Function,
   references: Array<Object>,
 };
@@ -36,6 +37,7 @@ type Props = {
 type State = {
   highlight: boolean,
   note: ?string,
+  references: Array<Object>,
   scripture: ?string,
 };
 
@@ -46,11 +48,23 @@ export default class BookmarkScene extends Component {
   constructor(props: Props) {
     super(props);
 
-    this.state = {
-      highlight: true,
-      note: null,
-      scripture: null,
+    const bookmark = Bookmark.findByID(props.bookmarkID);
+    if (bookmark) {
+      this.state = {
+        highlight: bookmark.highlight,
+        note: bookmark.note,
+        references: bookmark.references,
+        scripture: null,
+      }
+    } else {
+      this.state = {
+        highlight: true,
+        note: null,
+        references: props.references,
+        scripture: null,
+      }
     }
+
   }
 
   componentDidMount() {
@@ -116,7 +130,7 @@ export default class BookmarkScene extends Component {
   };
 
   async _getReferences() {
-    const { references } = this.props;
+    const { references } = this.state;
 
     let scripture = '';
     for (let reference of references) {
