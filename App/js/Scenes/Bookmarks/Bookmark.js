@@ -24,6 +24,7 @@ import {
 import { NavigationHeader, NavigationBarButton } from '../../Components/Navigation';
 import { BACK } from '../../Navigation';
 
+import Emdros from '../../API/Emdros';
 import { Bookmark } from '../../Preferences';
 
 type Props = {
@@ -34,6 +35,7 @@ type Props = {
 type State = {
   highlight: boolean,
   note: ?string,
+  scripture: ?string,
 };
 
 export default class BookmarkScene extends Component {
@@ -46,10 +48,16 @@ export default class BookmarkScene extends Component {
     this.state = {
       highlight: true,
       note: null,
+      scripture: null,
     }
   }
 
+  componentDidMount() {
+    this._getReferences();
+  }
+
   render() {
+    const { highlight, note, scripture } = this.state;
     const doneImage = (Platform.OS === 'android' ? require('../../Components/Navigation/Images/checkmark-icon.png') : null);
 
     return (
@@ -76,13 +84,13 @@ export default class BookmarkScene extends Component {
             <Switch
               onValueChange={(value) => this.setState({highlight: value})}
               style={styles.switch}
-              value={this.state.highlight}
+              value={highlight}
             />
           </View>
         </View>
         <View style={styles.separator} />
         <View style={styles.referenceContainer}>
-          <Text numberOfLines={2} style={styles.body}>6 Then God said, “Let there be a space between the waters, to separate the waters of the heavens from the</Text>
+          <Text numberOfLines={2} style={styles.body}>{scripture}</Text>
           <Text style={[StyleSheet.styles.cell.subtitle, {paddingRight: 8,}]}>Genesis 1:6</Text>
         </View>
         <TextInput
@@ -92,6 +100,7 @@ export default class BookmarkScene extends Component {
           onChangeText={(text) => this.setState({note: text})}
           placeholder={Localizable.t('optional-note')}
           style={styles.textInput}
+          value={note}
         />
       </View>
     );
@@ -104,6 +113,22 @@ export default class BookmarkScene extends Component {
     Bookmark.bookmark(references, note, highlight);
     this.props.navigate(BACK);
   };
+
+  async _getReferences() {
+    const { references } = this.props;
+
+    let scripture = '';
+    for (let reference of references) {
+      const monadSet = {
+        first: reference.firstMonad,
+        last: reference.lastMonad
+      };
+      const content = await Emdros.scripture({monadSet, stylesheet: 'occurrence'});
+      scripture += content;
+    }
+
+    this.setState({scripture});
+  }
 };
 
 const styles = StyleSheet.create({

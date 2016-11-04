@@ -29,7 +29,6 @@ import { BACK, occurrencesURL, readerURL } from '../../Navigation';
 
 import Emdros from '../../API/Emdros';
 import { BookSourceOccurrence, Role } from '../../Database';
-import Query from '../DiscoveryCenter/Query';
 
 type Props = {
   occurrences: Object,
