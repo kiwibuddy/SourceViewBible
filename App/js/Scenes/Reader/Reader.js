@@ -266,7 +266,7 @@ export default class Reader extends Component {
         action: 'unhighlight'
       });
     } else {
-      this.props.navigate(bookmarkURL({bookmarkID: null, title: Localizable.t('bookmark'), references, modal: true}));
+      this.props.navigate(bookmarkURL({bookmarkID: null, bookID: this.state.bookID, title: Localizable.t('bookmark'), references, modal: true}));
     }
 
     this.setState({references: null});

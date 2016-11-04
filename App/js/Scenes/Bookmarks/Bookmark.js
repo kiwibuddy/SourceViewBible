@@ -28,6 +28,7 @@ import Emdros from '../../API/Emdros';
 import { Bookmark } from '../../Preferences';
 
 type Props = {
+  bookID: string,
   navigate: Function,
   references: Array<Object>,
 };
