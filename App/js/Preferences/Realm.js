@@ -98,14 +98,32 @@ export class Bookmark extends Realm.Object {
     return this.note && this.note.length > 0;
   }
 
+  get book(): Object {
+    return Book.findByID(this.references[0].bookID);
+  }
+
   get url(): Object {
     const reference = this.references[0];
-    const book = Book.findByID(reference.bookID);
     return ({
       bookID: reference.bookID,
       anchor: `verse-${reference.chapter}-${reference.verse}`,
-      title: book.name
+      title: this.book.name
     });
+  }
+
+  get description(): string {
+    let references = '';
+
+    const reference = this.references[0];
+    const referenceCount = this.references.length;
+    if (referenceCount == 1) {
+      references = `${reference.chapter}:${reference.verse}`;
+    } else {
+      const lastReference = this.references[referenceCount - 1];
+      references = `${reference.chapter}:${reference.verse}-${lastReference.verse}`;
+    }
+
+    return `${this.book.name} ${references}`;
   }
 }
 Bookmark.schema = BookmarkSchema;

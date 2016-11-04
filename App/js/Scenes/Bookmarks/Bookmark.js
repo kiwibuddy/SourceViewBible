@@ -26,6 +26,7 @@ import { BACK } from '../../Navigation';
 
 import Emdros from '../../API/Emdros';
 import { Bookmark } from '../../Preferences';
+import { Book } from '../../Database';
 
 type Props = {
   bookID: string,
@@ -106,7 +107,7 @@ export default class BookmarkScene extends Component {
         <View style={styles.separator} />
         <View style={styles.referenceContainer}>
           <Text numberOfLines={2} style={styles.body}>{scripture}</Text>
-          <Text style={[StyleSheet.styles.cell.subtitle, {paddingRight: 8,}]}>Genesis 1:6</Text>
+          <Text style={[StyleSheet.styles.cell.subtitle, {paddingRight: 8,}]}>{this._referenceDescription()}</Text>
         </View>
         <TextInput
           autoFocus={true}
@@ -145,6 +146,22 @@ export default class BookmarkScene extends Component {
     }
 
     this.setState({scripture});
+  }
+
+  _referenceDescription = () => {
+    let references = '';
+
+    const reference = this.state.references[0];
+    const referenceCount = this.state.references.length;
+    if (referenceCount == 1) {
+      references = `${reference.chapter}:${reference.verse}`;
+    } else {
+      const lastReference = this.state.references[referenceCount - 1];
+      references = `${reference.chapter}:${reference.verse}-${lastReference.verse}`;
+    }
+
+    const book = Book.findByID(this.props.bookID);
+    return `${book.name} ${references}`;
   }
 };
 

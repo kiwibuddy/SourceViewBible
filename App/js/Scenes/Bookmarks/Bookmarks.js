@@ -185,11 +185,11 @@ export default class Bookmarks extends Component {
             <TouchableOpacity style={styles.referenceContainer} onPress={() => this._navigateReader(bookmark.url)}>
               <View>
                 <Text numberOfLines={2} style={styles.body}>{bookmark.scripture}</Text>
-                <Text style={StyleSheet.styles.cell.subtitle}>Genesis 1:6</Text>
+                <Text style={StyleSheet.styles.cell.subtitle}>{bookmark.description}</Text>
               </View>
               <Text style={[StyleSheet.styles.cell.subtitle, styles.date]}>{RelativeDate(bookmark.createdAt)}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={noteStyle} onPress={() => this.props.navigate(bookmarkURL({bookmarkID: bookmark.id, title: Localizable.t('bookmark'), modal: true}))}>
+            <TouchableOpacity style={noteStyle} onPress={() => this._navigateBookmark(bookmark)}>
               {note}
               <Text style={styles.button}>{noteButtonTitle}</Text>
             </TouchableOpacity>
@@ -221,7 +221,7 @@ export default class Bookmarks extends Component {
           <TouchableOpacity style={styles.referenceContainer} onPress={() => this._navigateReader(highlight.url)}>
             <View>
               <Text numberOfLines={5} style={styles.body}>{highlight.scripture}</Text>
-              <Text style={StyleSheet.styles.cell.subtitle}>John 3:27-28</Text>
+              <Text style={StyleSheet.styles.cell.subtitle}>{highlight.description}</Text>
             </View>
             <Text style={[StyleSheet.styles.cell.subtitle, styles.date]}>{RelativeDate(highlight.createdAt)}</Text>
           </TouchableOpacity>
@@ -234,8 +234,13 @@ export default class Bookmarks extends Component {
     this.props.navigate(route, {replace: true});
   };
 
-  _navigateReader = (url: object) => {
+  _navigateReader = (url: Object) => {
     this.props.navigate(readerURL(url), {replace: true});
+  }
+
+  _navigateBookmark = (bookmark: Object) => {
+    const bookID = bookmark.references[0].bookID;
+    this.props.navigate(bookmarkURL({bookmarkID: bookmark.id, bookID, title: Localizable.t('bookmark'), modal: true}))
   }
 
   _getDataSource = (segmentIndex: number) => {
@@ -317,6 +322,7 @@ export default class Bookmarks extends Component {
           highlights.push({
             ...bookmark,
             url: bookmark.url,
+            description: bookmark.description,
             scripture
           });
           break;
@@ -326,6 +332,7 @@ export default class Bookmarks extends Component {
             ...bookmark,
             hasNote: bookmark.hasNote,
             url: bookmark.url,
+            description: bookmark.description,
             scripture
           });
           break;
