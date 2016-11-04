@@ -27,6 +27,7 @@ import { BACK, bookmarkURL, spheresURL, sphereInAppPurchaseURL } from '../../Nav
 
 import SegmentedControl from '../../Components/Common/SegmentedControl';
 
+import Emdros from '../../API/Emdros';
 import { Bookmark, History, Preference } from '../../Preferences';
 
 const SEGMENTS = [Localizable.t('history'), Localizable.t('highlights'), Localizable.t('bookmarks')];
@@ -53,7 +54,9 @@ type Props = {
 
 type State = {
   dataSource: any,
-  selectedSegmentIndex: number
+  selectedSegmentIndex: number,
+  highlights: Array<Object>,
+  bookmarks: Array<Object>
 };
 
 export default class Bookmarks extends Component {
@@ -73,7 +76,9 @@ export default class Bookmarks extends Component {
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    await this._getReferences();
+
     this.setState({
       dataSource: this._getDataSource(this.state.selectedSegmentIndex)
     });
@@ -89,7 +94,7 @@ export default class Bookmarks extends Component {
           renderRightComponent={Platform.OS === 'ios' ? renderBackButton : null}
         />
         <ListView
-          enableEmptySections={true}
+          enableEmptySections={false}
           dataSource={this.state.dataSource}
           renderRow={this._renderRow}
           renderSectionHeader={this._renderSectionHeader}
@@ -202,7 +207,7 @@ export default class Bookmarks extends Component {
         </View>
       </View>
     );
-  }
+  };
 
   _renderHistoryRow = (history: Object) => {
     const icon = this._iconForRoute(history.route);
@@ -218,15 +223,14 @@ export default class Bookmarks extends Component {
     );
   };
 
-  _renderHighlightRow = (history: Object) => {
+  _renderHighlightRow = (highlight: Object) => {
     return (
       <View style={styles.row}>
         <Image source={require('./Images/highlight.png')} style={[styles.icon, {alignSelf: 'flex-start',}]} />
         <View style={styles.rowContent}>
           <TouchableOpacity style={styles.referenceContainer}>
             <View>
-              <Text numberOfLines={5} style={styles.body}>27 John replied, John the Baptist 10
-No one can receive anything unless God gives it from heaven. 28 You yourselves know how plainly I told you, ‘I am not the Messiah. I am only here to prepare the way for him.’</Text>
+              <Text numberOfLines={5} style={styles.body}>{highlight.scripture}</Text>
               <Text style={StyleSheet.styles.cell.subtitle}>John 3:27-28</Text>
             </View>
             <Text style={[StyleSheet.styles.cell.subtitle, styles.date]}>Yesterday</Text>
@@ -241,13 +245,15 @@ No one can receive anything unless God gives it from heaven. 28 You yourselves 
   };
 
   _getDataSource = (segmentIndex: number) => {
+    const { highlights, bookmarks } = this.state;
+
     switch (segmentIndex) {
       case SEGMENT_INDEXES.HISTORY:
         const { rows, sections } = this._getHistory();
         return this.state.dataSource.cloneWithRowsAndSections(rows, sections);
 
       case SEGMENT_INDEXES.HIGHLIGHTS:
-        return this.state.dataSource.cloneWithRowsAndSections({highlights: Bookmark.highlights()});
+        return this.state.dataSource.cloneWithRowsAndSections({highlights});
 
       default:
         const defaults = [
@@ -263,10 +269,6 @@ No one can receive anything unless God gives it from heaven. 28 You yourselves 
           defaults.push(sphereInAppPurchaseURL({title: 'Spheres IAP', redirect: spheresURL({title: 'Spheres'}), modal: true}));
           defaults.push(bookmarkURL({title: 'Bookmark', bookmarkID: 'new', modal: true}));
         }
-
-        const bookmarks = [
-          {}
-        ];
 
         return this.state.dataSource.cloneWithRowsAndSections({defaults, bookmarks}, ['defaults', 'bookmarks']);
     }
@@ -302,6 +304,40 @@ No one can receive anything unless God gives it from heaven. 28 You yourselves 
 
     return {rows, sections};
   };
+
+  async _getReferences() {
+    const highlights = [];
+    const bookmarks = [];
+    for (let bookmark of Bookmark.all()) {
+      let scripture = '';
+      for (let reference of bookmark.references) {
+        const monadSet = {
+          first: reference.firstMonad,
+          last: reference.lastMonad
+        };
+        const content = await Emdros.scripture({monadSet, stylesheet: 'occurrence'});
+        scripture += content;
+      }
+
+      switch(bookmark.type) {
+        case Bookmark.Type.Highlight:
+          highlights.push({
+            ...bookmark,
+            scripture
+          });
+          break;
+
+        case Bookmark.Type.Bookmark:
+          bookmarks.push({
+            ...bookmark,
+            scripture
+          });
+          break;
+      }
+    }
+
+    this.setState({highlights, bookmarks});
+  }
 
   _iconForRoute = (route: Object) => {
     const icons = {
