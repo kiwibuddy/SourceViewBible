@@ -20,6 +20,7 @@ import {
 } from '../../Common';
 
 import moment from 'moment';
+import { RelativeDate } from '../../Common/NumberHelper';
 
 import { NavigationHeader, NavigationBarButton, Toolbar, ToolbarButton } from '../../Components/Navigation';
 
@@ -186,7 +187,7 @@ export default class Bookmarks extends Component {
                 <Text numberOfLines={2} style={styles.body}>{bookmark.scripture}</Text>
                 <Text style={StyleSheet.styles.cell.subtitle}>Genesis 1:6</Text>
               </View>
-              <Text style={[StyleSheet.styles.cell.subtitle, styles.date]}>1h</Text>
+              <Text style={[StyleSheet.styles.cell.subtitle, styles.date]}>{RelativeDate(bookmark.createdAt)}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={noteStyle}>
               {note}
@@ -222,7 +223,7 @@ export default class Bookmarks extends Component {
               <Text numberOfLines={5} style={styles.body}>{highlight.scripture}</Text>
               <Text style={StyleSheet.styles.cell.subtitle}>John 3:27-28</Text>
             </View>
-            <Text style={[StyleSheet.styles.cell.subtitle, styles.date]}>Yesterday</Text>
+            <Text style={[StyleSheet.styles.cell.subtitle, styles.date]}>{RelativeDate(highlight.createdAt)}</Text>
           </TouchableOpacity>
         </View>
       </View>

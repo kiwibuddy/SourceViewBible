@@ -4,6 +4,8 @@
 const moment = require('moment');
 require('moment-duration-format');
 
+import Localizable from './Localizable';
+
 const WORDS_PER_MINUTE = 180;
 
 function ReadingTime(words: number): string {
@@ -11,6 +13,24 @@ function ReadingTime(words: number): string {
   const time = minutes * 60 * 1000;
   const displayed = Math.ceil(minutes);
   return moment.duration(displayed, "minutes").format("h [hr] m [min]");
+}
+
+function RelativeDate(date: Object): string {
+  const today = moment();
+  const dateDiff = today.diff(date, 'days');
+
+  switch (dateDiff) {
+    case 0:
+      return Localizable.t('today');
+      break;
+
+    case 1:
+      return Localizable.t('yesterday');
+      break;
+
+    default:
+      return Localizable.strftime(history.date, "%A, %B %-d");
+  }
 }
 
 function ShuffleArray(array: any): any {
@@ -26,5 +46,6 @@ function ShuffleArray(array: any): any {
 
 module.exports = {
   ReadingTime,
+  RelativeDate,
   ShuffleArray
 };
