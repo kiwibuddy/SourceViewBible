@@ -172,36 +172,25 @@ export default class Bookmarks extends Component {
   };
 
   _renderBookmarkRow = (bookmark: Object) => {
+    const icon = (bookmark.hasNote ? require('./Images/note.png') : require('./Images/bookmark.png'));
+    const noteStyle = (bookmark.hasNote ? styles.noteContainer : null);
+    const noteButtonTitle = (bookmark.hasNote ? Localizable.t('view-note') : Localizable.t('add-note'));
+    const note = (bookmark.hasNote ? <Text style={StyleSheet.styles.cell.titlemedium}>{bookmark.note}</Text> : null);
     return (
       <View>
         <View style={styles.row}>
-          <Image source={require('./Images/note.png')} style={[styles.icon, {alignSelf: 'flex-start',}]} />
+          <Image source={icon} style={[styles.icon, {alignSelf: 'flex-start',}]} />
           <View style={styles.rowContent}>
             <TouchableOpacity style={styles.referenceContainer}>
               <View>
-                <Text numberOfLines={2} style={styles.body}>6 Then God said, “Let there be a space between the waters, to separate the waters of the heavens from the</Text>
+                <Text numberOfLines={2} style={styles.body}>{bookmark.scripture}</Text>
                 <Text style={StyleSheet.styles.cell.subtitle}>Genesis 1:6</Text>
               </View>
               <Text style={[StyleSheet.styles.cell.subtitle, styles.date]}>1h</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.noteContainer}>
-              <Text style={StyleSheet.styles.cell.titlemedium}>And with these words, God set in to motion all that was to come and established his authority over all of it.</Text>
-              <Text style={styles.button}>View note</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.row}>
-          <Image source={require('./Images/bookmark.png')} style={[styles.icon, {alignSelf: 'flex-start',}]} />
-          <View style={styles.rowContent}>
-            <TouchableOpacity style={styles.referenceContainer}>
-              <View>
-                <Text numberOfLines={2} style={styles.body}>6 Then God said, “Let there be a space between the waters, to separate the waters of the heavens from the</Text>
-                <Text style={StyleSheet.styles.cell.subtitle}>Genesis 1:6</Text>
-              </View>
-              <Text style={[StyleSheet.styles.cell.subtitle, styles.date]}>1h</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={styles.button}>Add note</Text>
+            <TouchableOpacity style={noteStyle}>
+              {note}
+              <Text style={styles.button}>{noteButtonTitle}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -330,6 +319,7 @@ export default class Bookmarks extends Component {
         case Bookmark.Type.Bookmark:
           bookmarks.push({
             ...bookmark,
+            hasNote: bookmark.hasNote,
             scripture
           });
           break;

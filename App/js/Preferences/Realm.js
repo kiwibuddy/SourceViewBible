@@ -77,6 +77,10 @@ export class Bookmark extends Realm.Object {
       realm.delete(bookmark);
     });
   }
+
+  get hasNote() {
+    return this.note && this.note.length > 0;
+  }
 }
 Bookmark.schema = BookmarkSchema;
 
