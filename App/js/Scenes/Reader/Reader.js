@@ -24,7 +24,7 @@ import {
   StyleSheet
 } from '../../Common';
 
-import { BACK, bookURL, readerSearchURL, readerSettingsURL, readerURL } from '../../Navigation';
+import { BACK, bookURL, bookmarkURL, readerSearchURL, readerSettingsURL, readerURL } from '../../Navigation';
 import { NavigationHeader, NavigationBarButton, Toolbar } from '../../Components/Navigation';
 
 import DefaultToolbar from '../../Components/Navigation/DefaultToolbar';
@@ -257,7 +257,14 @@ export default class Reader extends Component {
   };
 
   _onBookmark = (references) => {
-
+    const bookmarks = Bookmark.whereReferences(references, {type:Bookmark.Type.Bookmark});
+    if (bookmarks.length > 0) {
+      bookmarks.forEach(bookmark => {
+        bookmark.delete();
+      });
+    } else {
+      this.props.navigate(bookmarkURL({bookmarkID: null, title: Localizable.t('bookmark'), references, modal: true}));
+    }
   };
 
   _onCancelAction = () => {
