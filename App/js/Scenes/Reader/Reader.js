@@ -6,6 +6,7 @@ import { Component } from 'react';
 
 import ReactNative from 'react-native';
 import DeviceInfo from 'react-native-device-info';
+import Share from 'react-native-share';
 
 const {
   Image,
@@ -299,8 +300,31 @@ export default class Reader extends Component {
     this.setState({references: null});
   };
 
-  _onShare = (references) => {
+  async _onShare(references) {
+    let scripture = '';
+    for (let reference of references) {
+      const monadSet = {
+        first: reference.firstMonad,
+        last: reference.lastMonad
+      };
+      const content = await Emdros.scripture({monadSet, stylesheet: 'occurrence'});
+      scripture += content;
+    }
 
+    this.setState({references: null});
+    this._postMessage({
+      action: 'cancel'
+    });
+
+    Share.open({
+      message: scripture,
+      url: "http://sourceviewbible.com",
+    }).then(options => {
+
+    })
+    .catch(error => {
+
+    });
   };
 
   _setScripture = (bookID: string, anchor?: string, occurrences?: any, occurrenceIndex?: number, force?: boolean = false) => {

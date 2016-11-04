@@ -21,6 +21,7 @@
     "react-native-linear-gradient": "^1.5.14",
     "react-native-parallax-motion": "file:../Libraries/react-native-parallax-motion/",
     "react-native-popup-menu": "file:../Libraries/react-native-popup-menu/",
+    "react-native-share": "^1.0.17",
     "react-native-sqlite-storage": "^3.1.1",
     "react-native-svg": "^4.3.1",
     "react-native-vector-icons": "^2.0.3",

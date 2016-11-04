@@ -3988,6 +3988,10 @@ react-native-linear-gradient@^1.5.14:
 "react-native-popup-menu@file:../Libraries/react-native-popup-menu/":
   version "0.5.4"
 
+react-native-share:
+  version "1.0.17"
+  resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-1.0.17.tgz#1a2bcc9fa70d61e66119c5474a56ba8b46a511f1"
+
 react-native-sqlite-storage@^3.1.1:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/react-native-sqlite-storage/-/react-native-sqlite-storage-3.1.2.tgz#ba18863385b039ed251418103255a516199ffd1f"
