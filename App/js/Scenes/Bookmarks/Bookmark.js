@@ -122,10 +122,12 @@ export default class BookmarkScene extends Component {
   }
 
   _onDone = () => {
-    const { references } = this.props;
-    const { highlight, note } = this.state;
+    const { bookmarkID } = this.props;
+    const { references, highlight, note } = this.state;
 
-    Bookmark.bookmark(references, note, highlight);
+    const bookmark = Bookmark.findByID(bookmarkID);
+    const id = (bookmark ? bookmark.id : null);
+    Bookmark.bookmark({id, references, note, highlight});
     this.props.navigate(BACK);
   };
 

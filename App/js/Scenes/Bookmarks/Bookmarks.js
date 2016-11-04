@@ -261,7 +261,6 @@ export default class Bookmarks extends Component {
         if (__DEV__) {
           defaults.push({path: '/Onboarding', title: 'Onboarding', modal: true});
           defaults.push(sphereInAppPurchaseURL({title: 'Spheres IAP', redirect: spheresURL({title: 'Spheres'}), modal: true}));
-          defaults.push(bookmarkURL({title: 'Bookmark', bookmarkID: 'new', modal: true}));
         }
 
         return this.state.dataSource.cloneWithRowsAndSections({defaults, bookmarks}, ['defaults', 'bookmarks']);

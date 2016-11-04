@@ -67,13 +67,24 @@ export class Bookmark extends Realm.Object {
     });
   }
 
-  static bookmark(references, note: ?string, highlight: boolean) {
+  static bookmark({id, references, createdAt, highlight, note}) {
     realm.write(() => {
-      const id = 'bookmark-' + Date.now();
-      const createdAt = new Date();
-      const type = Bookmark.Type.Bookmark
-
-      realm.create('Bookmark', {id, createdAt, type, references, highlight, note});
+      if (id) {
+        realm.create('Bookmark', {
+          id,
+          highlight,
+          note
+        }, true);
+      } else {
+        realm.create('Bookmark', {
+          id: 'bookmark' + Date.now(),
+          createdAt: new Date(),
+          type: Bookmark.Type.Bookmark,
+          references,
+          highlight,
+          note
+        });
+      }
     });
   }
 
