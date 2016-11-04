@@ -312,6 +312,8 @@ module.exports = `
         var verses = [];
         var verseReferences = [];
         var selectedVerseElements = document.querySelectorAll(".selection");
+        var previousChapter = 0;
+        var previousVerse = 0;
         for (var i = 0; i < selectedVerseElements.length; i++) {
           var verseElement = selectedVerseElements[i];
           var verseReference = verseElement.dataset.verse;
@@ -320,12 +322,21 @@ module.exports = `
             var chapter = parseInt(verseComponents[1]);
             var verse = parseInt(verseComponents[2]);
 
+            if ((previousChapter > 0 && chapter != previousChapter) || (previousVerse > 0 && (verse - previousVerse > 1))) {
+              deselectVerses();
+              verses = [];
+              break;
+            }
+
             var verseElements = document.querySelectorAll("[data-verse='" + verseReference + "']")
             var firstMonad = parseInt(verseElements[0].dataset.monad);
             var lastMonad = parseInt(verseElements[verseElements.length - 1].dataset.monad);
 
             verses.push({chapter, verse, firstMonad, lastMonad});
             verseReferences.push(verseReference);
+
+            previousChapter = chapter;
+            previousVerse = verse;
           }
         }
 
