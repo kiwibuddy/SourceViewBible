@@ -22,14 +22,12 @@ function RelativeDate(date: Object): string {
   switch (dateDiff) {
     case 0:
       return Localizable.t('today');
-      break;
 
     case 1:
       return Localizable.t('yesterday');
-      break;
 
     default:
-      return Localizable.strftime(history.date, "%A, %B %-d");
+      return Localizable.strftime(date, "%A, %B %-d");
   }
 }
 
