@@ -5,7 +5,6 @@ import { Platform } from 'react-native';
 import Realm from 'realm';
 import Emdros from '../API/Emdros';
 import moment from 'moment';
-
 import { Book } from '../Database';
 
 const BookmarkSchema = {
@@ -95,11 +94,11 @@ export class Bookmark extends Realm.Object {
     });
   }
 
-  get hasNote() {
+  get hasNote(): boolean {
     return this.note && this.note.length > 0;
   }
 
-  get url() {
+  get url(): Object {
     const reference = this.references[0];
     const book = Book.findByID(reference.bookID);
     return ({
