@@ -73,7 +73,9 @@ export default class Bookmarks extends Component {
 
     this.state = {
       dataSource: dataSource,
-      selectedSegmentIndex
+      selectedSegmentIndex,
+      bookmarks: [],
+      highlights: []
     }
   }
 
