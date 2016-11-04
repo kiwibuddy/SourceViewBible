@@ -331,7 +331,7 @@ export default class Reader extends Component {
 
     Share.open({
       message: scripture,
-      url: "http://sourceviewbible.com",
+      url: "http://onelink.to/svbapp",
     }).then(options => {
 
     })
