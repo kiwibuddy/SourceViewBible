@@ -34,18 +34,22 @@ const ActionToolbar = (props: Props) => {
       <ToolbarButton
         title={highlightTitle}
         onPress={onHighlight}
+        style={{marginHorizontal:0}}
       />
       <ToolbarButton
         title={bookmarkTitle}
         onPress={onBookmark}
+        style={{marginHorizontal:0}}
       />
       <ToolbarButton
         title={Localizable.t('share')}
         onPress={onShare}
+        style={{marginHorizontal:0}}
       />
       <ToolbarButton
         title={Localizable.t('cancel')}
         onPress={onCancel}
+        style={{marginHorizontal:0}}
       />
     </Toolbar>
   );
