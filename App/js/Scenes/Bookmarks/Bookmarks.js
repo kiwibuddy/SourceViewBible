@@ -24,7 +24,7 @@ import { RelativeDate } from '../../Common/NumberHelper';
 
 import { NavigationHeader, NavigationBarButton, Toolbar, ToolbarButton } from '../../Components/Navigation';
 
-import { BACK, bookmarkURL, spheresURL, sphereInAppPurchaseURL } from '../../Navigation';
+import { BACK, bookmarkURL, readerURL, spheresURL, sphereInAppPurchaseURL } from '../../Navigation';
 
 import SegmentedControl from '../../Components/Common/SegmentedControl';
 
@@ -182,7 +182,7 @@ export default class Bookmarks extends Component {
         <View style={styles.row}>
           <Image source={icon} style={[styles.icon, {alignSelf: 'flex-start',}]} />
           <View style={styles.rowContent}>
-            <TouchableOpacity style={styles.referenceContainer}>
+            <TouchableOpacity style={styles.referenceContainer} onPress={() => this._navigateReader(bookmark.url)}>
               <View>
                 <Text numberOfLines={2} style={styles.body}>{bookmark.scripture}</Text>
                 <Text style={StyleSheet.styles.cell.subtitle}>Genesis 1:6</Text>
@@ -218,7 +218,7 @@ export default class Bookmarks extends Component {
       <View style={styles.row}>
         <Image source={require('./Images/highlight.png')} style={[styles.icon, {alignSelf: 'flex-start',}]} />
         <View style={styles.rowContent}>
-          <TouchableOpacity style={styles.referenceContainer}>
+          <TouchableOpacity style={styles.referenceContainer} onPress={() => this._navigateReader(highlight.url)}>
             <View>
               <Text numberOfLines={5} style={styles.body}>{highlight.scripture}</Text>
               <Text style={StyleSheet.styles.cell.subtitle}>John 3:27-28</Text>
@@ -233,6 +233,10 @@ export default class Bookmarks extends Component {
   _navigate = (route: Object) => {
     this.props.navigate(route, {replace: true});
   };
+
+  _navigateReader = (url: object) => {
+    this.props.navigate(readerURL(url), {replace: true});
+  }
 
   _getDataSource = (segmentIndex: number) => {
     const { highlights, bookmarks } = this.state;
@@ -313,6 +317,7 @@ export default class Bookmarks extends Component {
         case Bookmark.Type.Highlight:
           highlights.push({
             ...bookmark,
+            url: bookmark.url,
             scripture
           });
           break;
@@ -321,6 +326,7 @@ export default class Bookmarks extends Component {
           bookmarks.push({
             ...bookmark,
             hasNote: bookmark.hasNote,
+            url: bookmark.url,
             scripture
           });
           break;

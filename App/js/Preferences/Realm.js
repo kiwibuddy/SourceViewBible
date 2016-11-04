@@ -6,6 +6,8 @@ import Realm from 'realm';
 import Emdros from '../API/Emdros';
 import moment from 'moment';
 
+import { Book } from '../Database';
+
 const BookmarkSchema = {
   name: 'Bookmark',
   primaryKey: 'id',
@@ -80,6 +82,16 @@ export class Bookmark extends Realm.Object {
 
   get hasNote() {
     return this.note && this.note.length > 0;
+  }
+
+  get url() {
+    const reference = this.references[0];
+    const book = Book.findByID(reference.bookID);
+    return ({
+      bookID: reference.bookID,
+      anchor: `verse-${reference.chapter}-${reference.verse}`,
+      title: book.name
+    });
   }
 }
 Bookmark.schema = BookmarkSchema;
