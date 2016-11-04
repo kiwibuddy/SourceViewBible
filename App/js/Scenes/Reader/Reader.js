@@ -262,9 +262,14 @@ export default class Reader extends Component {
       bookmarks.forEach(bookmark => {
         bookmark.delete();
       });
+      this._postMessage({
+        action: 'unhighlight'
+      });
     } else {
       this.props.navigate(bookmarkURL({bookmarkID: null, title: Localizable.t('bookmark'), references, modal: true}));
     }
+
+    this.setState({references: null});
   };
 
   _onCancelAction = () => {

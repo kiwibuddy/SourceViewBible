@@ -24,8 +24,11 @@ import {
 import { NavigationHeader, NavigationBarButton } from '../../Components/Navigation';
 import { BACK } from '../../Navigation';
 
+import { Bookmark } from '../../Preferences';
+
 type Props = {
   navigate: Function,
+  references: Array<Object>,
 };
 
 type State = {
@@ -95,6 +98,10 @@ export default class BookmarkScene extends Component {
   }
 
   _onDone = () => {
+    const { references } = this.props;
+    const { highlight, note } = this.state;
+
+    Bookmark.bookmark(references, note, highlight);
     this.props.navigate(BACK);
   };
 };
