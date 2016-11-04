@@ -55,6 +55,7 @@ type Props = {
   anchor?: string,
   canGoBack: boolean,
   canGoForward: boolean,
+  didGoBack: ?boolean,
   navigate: Function,
   occurrences?: any,
   occurrenceIndex?: any,
@@ -209,14 +210,15 @@ export default class Reader extends Component {
     if (this.state.loading) return null;
     const anchor = this.props.anchor;
     const scroll = Preference.objectForKey(Preference.Keys.Reader.scroll);
+    const { didGoBack } = this.props;
 
-    if (anchor) {
+    if (didGoBack && scroll && scroll.bookID === this.state.bookID) {
+      return `document.body.scrollTop = ${scroll.top}`;
+    } else if (anchor) {
       return (`\
         location.hash = '#${encodeURIComponent(anchor)}';
         document.getElementById('scripture').scrollTop = document.getElementById('scripture').scrollTop - 8;
       `);
-    } else if (scroll && scroll.bookID === this.state.bookID) {
-      return `document.body.scrollTop = ${scroll.top}`;
     }
   };
 

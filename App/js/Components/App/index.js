@@ -307,7 +307,15 @@ export default class App extends Component {
       // [Note]: Over-popping does not throw error. Instead, it will be no-op.
       return;
     }
-    const routes = state.routes.slice(0, -1);
+
+    const route = state.routes[state.index - 1];
+    route.didGoBack = true;
+
+    const routes = [
+      ...state.routes.slice(0, -1),
+      route,
+    ];
+
     const navigation = {
       ...state,
       index: routes.length - 1,
