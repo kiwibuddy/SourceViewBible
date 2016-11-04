@@ -7,6 +7,21 @@ import Emdros from '../API/Emdros';
 import moment from 'moment';
 import { Book } from '../Database';
 
+export function ReferenceDescription(book: Object, references: Array<Object>): string {
+  let description = '';
+
+  const reference = references[0];
+  const referenceCount = references.length;
+  if (referenceCount == 1) {
+    description = `${reference.chapter}:${reference.verse}`;
+  } else {
+    const lastReference = references[referenceCount - 1];
+    description = `${reference.chapter}:${reference.verse}-${lastReference.verse}`;
+  }
+
+  return `${book.name} ${description}`;
+}
+
 const BookmarkSchema = {
   name: 'Bookmark',
   primaryKey: 'id',
@@ -112,18 +127,7 @@ export class Bookmark extends Realm.Object {
   }
 
   get description(): string {
-    let references = '';
-
-    const reference = this.references[0];
-    const referenceCount = this.references.length;
-    if (referenceCount == 1) {
-      references = `${reference.chapter}:${reference.verse}`;
-    } else {
-      const lastReference = this.references[referenceCount - 1];
-      references = `${reference.chapter}:${reference.verse}-${lastReference.verse}`;
-    }
-
-    return `${this.book.name} ${references}`;
+    return ReferenceDescription(this.book, this.references);
   }
 }
 Bookmark.schema = BookmarkSchema;

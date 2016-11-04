@@ -25,7 +25,7 @@ import { NavigationHeader, NavigationBarButton } from '../../Components/Navigati
 import { BACK } from '../../Navigation';
 
 import Emdros from '../../API/Emdros';
-import { Bookmark } from '../../Preferences';
+import { Bookmark, ReferenceDescription } from '../../Preferences';
 import { Book } from '../../Database';
 
 type Props = {
@@ -149,19 +149,8 @@ export default class BookmarkScene extends Component {
   }
 
   _referenceDescription = () => {
-    let references = '';
-
-    const reference = this.state.references[0];
-    const referenceCount = this.state.references.length;
-    if (referenceCount == 1) {
-      references = `${reference.chapter}:${reference.verse}`;
-    } else {
-      const lastReference = this.state.references[referenceCount - 1];
-      references = `${reference.chapter}:${reference.verse}-${lastReference.verse}`;
-    }
-
     const book = Book.findByID(this.props.bookID);
-    return `${book.name} ${references}`;
+    return ReferenceDescription(book, this.state.references);
   }
 };
 

@@ -7,6 +7,7 @@ import {
   Discovery,
   History,
   Preference,
+  ReferenceDescription,
 } from './Realm';
 
 const PREFIX = 'com.sourceviewbible.preferences.';
@@ -48,4 +49,5 @@ module.exports = {
   Discovery,
   History,
   Preference,
+  ReferenceDescription,
 };
