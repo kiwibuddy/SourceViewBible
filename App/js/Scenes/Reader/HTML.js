@@ -347,6 +347,14 @@ module.exports = `
         window.postMessage(data);
       }
 
+      function onScroll() {
+        var data = JSON.stringify({
+          action: 'scroll',
+          top: document.body.scrollTop
+        });
+        window.postMessage(data);
+      }
+
       function deselectVerses() {
         var selectedVerseElements = document.querySelectorAll(".selection");
         for (var i = 0; i < selectedVerseElements.length; i++) {
@@ -382,8 +390,8 @@ module.exports = `
           document.addEventListener('touchmove', onTouchMove, false);
           document.addEventListener('touchend', onTouchEnd, false);
           document.addEventListener('touchcancel', onTouchEnd, false);
-
           document.addEventListener('message', onMessage, false);
+          document.addEventListener('scroll', onScroll, false);
 
           var verses = document.getElementsByClassName('verse');
           for (var i = 0; i < verses.length; i++) {

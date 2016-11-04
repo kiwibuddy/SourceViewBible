@@ -206,14 +206,18 @@ export default class Reader extends Component {
   };
 
   _renderInjectedJavascript = () => {
-    if (!this.props.anchor || this.state.loading) return null;
+    if (this.state.loading) return null;
+    const anchor = this.props.anchor;
+    const scroll = Preference.objectForKey(Preference.Keys.Reader.scroll);
 
-    let anchor = this.props.anchor;
-    const javascript = `\
-      location.hash = '#${encodeURIComponent(anchor)}';
-      document.getElementById('scripture').scrollTop = document.getElementById('scripture').scrollTop - 8;
-    `;
-    return javascript;
+    if (anchor) {
+      return (`\
+        location.hash = '#${encodeURIComponent(anchor)}';
+        document.getElementById('scripture').scrollTop = document.getElementById('scripture').scrollTop - 8;
+      `);
+    } else if (scroll && scroll.bookID === this.state.bookID) {
+      return `document.body.scrollTop = ${scroll.top}`;
+    }
   };
 
   _onPressClearFilter = () => {
@@ -244,6 +248,10 @@ export default class Reader extends Component {
         });
 
         this.setState({references});
+        break;
+      case 'scroll':
+        const top = data.top;
+        Preference.setObjectForKey({bookID, top}, Preference.Keys.Reader.scroll);
         break;
       default:
         console.log('_onMessage', data);

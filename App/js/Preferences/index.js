@@ -32,6 +32,7 @@ const Keys = {
     fontStepSize: PREFIX + '.reader.fontStepSize',
     spheres: PREFIX + '.reader.spheres',
     showNumbers: PREFIX + '.reader.showNumbers',
+    scroll: PREFIX + '.reader.scroll',
   },
   Sources: {
     filters: PREFIX + '.sources.filters',
