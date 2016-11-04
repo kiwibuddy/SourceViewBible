@@ -29,12 +29,22 @@ type Props = {
 };
 
 type State = {
-
+  highlight: boolean,
+  note: ?string,
 };
 
 export default class BookmarkScene extends Component {
   props: Props;
   state: State;
+
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      highlight: true,
+      note: null,
+    }
+  }
 
   render() {
     const doneImage = (Platform.OS === 'android' ? require('../../Components/Navigation/Images/checkmark-icon.png') : null);
@@ -57,11 +67,13 @@ export default class BookmarkScene extends Component {
         />
         <View style={[styles.cellContainer, {paddingVertical: 8, paddingLeft: 15}]}>
           <View style={styles.cellLeftContainer}>
-            <Text style={[StyleSheet.styles.cell.title, {flex: 3}]}>Highlight text</Text>
+            <Text style={[StyleSheet.styles.cell.title, {flex: 3}]}>{Localizable.t('highlight-text')}</Text>
           </View>
           <View style={[styles.cellRightContainer, {width: 50}]}>
             <Switch
-            style={styles.switch}
+              onValueChange={(value) => this.setState({highlight: value})}
+              style={styles.switch}
+              value={this.state.highlight}
             />
           </View>
         </View>
@@ -71,12 +83,11 @@ export default class BookmarkScene extends Component {
           <Text style={[StyleSheet.styles.cell.subtitle, {paddingRight: 8,}]}>Genesis 1:6</Text>
         </View>
         <TextInput
-          autoCapitalize="words"
-          autoCorrect={false}
           autoFocus={true}
           clearButtonMode="always"
-          onChangeText={(text) => {}}
-          placeholder="Optional note..."
+          multiline={true}
+          onChangeText={(text) => this.setState({note: text})}
+          placeholder={Localizable.t('optional-note')}
           style={styles.textInput}
         />
       </View>
@@ -122,7 +133,7 @@ const styles = StyleSheet.create({
     paddingLeft: 8,
     marginHorizontal: 8,
     marginVertical: 8,
-    height: 26,
+    height: 200,
     padding: 0, // Android workaround
   },
   ...Platform.select({

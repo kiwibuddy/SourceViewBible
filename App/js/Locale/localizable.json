@@ -53,6 +53,8 @@
         "other": "{{count}} spheres"
       }
     },
+    "optional-note": "Optional note...",
+    "highlight-text": "Highlight text",
     "purchase-spheres-for": "Purchase spheres for {{localizedPrice}}",
     "add": "Add",
     "added": "Added",
