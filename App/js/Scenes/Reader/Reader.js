@@ -47,7 +47,7 @@ import { Book, Sphere } from '../../Database';
 
 const HTML = require('./HTML');
 
-import { Bookmark, BookmarkReference, Preference } from '../../Preferences';
+import { Bookmark, BookmarkReference, Preference, ReferenceDescription } from '../../Preferences';
 import { ReaderBaseFontSize, ReaderBaseLineHeight, ReaderFontStepSize, ReaderWebFontConversion } from '../../Common/Constants';
 
 type Props = {
@@ -310,6 +310,9 @@ export default class Reader extends Component {
       const content = await Emdros.scripture({monadSet, stylesheet: 'occurrence'});
       scripture += content;
     }
+
+    const book = Book.findByID(this.state.bookID);
+    scripture += `\n${ReferenceDescription(book, references)}`;
 
     this.setState({references: null});
     this._postMessage({
