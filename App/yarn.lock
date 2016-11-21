@@ -4013,9 +4013,9 @@ react-native-vector-icons@^2.0.3:
     lodash "^4.0.0"
     yargs "^4.7.0"
 
-react-native@0.37.0-rc.0:
-  version "0.37.0-rc.0"
-  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.37.0-rc.0.tgz#ef434fb84e84efc359c29340124ee64c5e55510d"
+react-native@0.37.0:
+  version "0.37.0"
+  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.37.0.tgz#d871c752b4d87e46b569fd8be2921d4f9248c87d"
   dependencies:
     absolute-path "^0.0.0"
     art "^0.10.0"
