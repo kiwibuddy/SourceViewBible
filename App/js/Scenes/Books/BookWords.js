@@ -113,8 +113,10 @@ export default class BookWords extends Component {
   };
 
   _onPressWord = (word: Object) => {
+    const { book } = this.state;
+
     console.log(word.string);
-    Emdros.wordOccurrences(word.string, {}).then((result, error) => {
+    Emdros.wordOccurrences(word.string, {monadSet: book.monadSet}).then((result, error) => {
       console.log('result', result);
     });
   };

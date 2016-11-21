@@ -75,8 +75,9 @@ export default class Emdros {
   }
 
   async wordOccurrences(word: string, options?: Object) {
+    const monadSet = options && options.monadSet ? `IN {${options.monadSet.first}-${options.monadSet.last}}` : '';
     const query = `SELECT ALL OBJECTS
-      IN {1-51551}
+      ${monadSet}
       WHERE
       [Source GET source_color, source_name, source_occurrence
         [Verse
