@@ -352,3 +352,105 @@ bool getWordCountsInContext(EmdrosEnv *pEE,
 		return true;
 	}
 }
+
+
+/////////////////////////////////////////////////////////////////
+//
+// WordOccurrence: Occurrences of words
+//
+/////////////////////////////////////////////////////////////////
+WordOccurrence::WordOccurrence()
+: m_DJHRef(),
+m_source_name(),
+m_source_color(),
+m_source_occurrence(0),
+m_first(0),
+m_last(0)
+{
+}
+
+
+WordOccurrence::WordOccurrence(const WordOccurrence& other)
+{
+    assign(other);
+}
+
+
+WordOccurrence::~WordOccurrence()
+{
+}
+
+
+WordOccurrence& WordOccurrence::operator=(const WordOccurrence& other)
+{
+    assign(other);
+    return *this;
+}
+
+bool WordOccurrence::operator<(const WordOccurrence& rhs)
+{
+    return m_first < rhs.m_first;  //assume that you compare the record based on a
+}
+
+void WordOccurrence::assign(const WordOccurrence& other)
+{
+    m_DJHRef = other.m_DJHRef;
+    m_source_name = other.m_source_name;
+    m_source_color = other.m_source_color;
+    m_source_occurrence = other.m_source_occurrence;
+    m_first = other.m_first;
+    m_last = other.m_last;
+}
+
+
+
+bool getWordOccurrencesForQuery(EmdrosEnv *pEE,
+                                const std::string& query,
+                                const WordOccurrenceSet& result,
+                                std::string& error_message)
+{
+    bool bCompileResult = false;
+    bool bDBResult = pEE->executeString(query, bCompileResult, false, false, 0);
+    bool bResult = bDBResult && bCompileResult;
+    if (!bResult) {
+        error_message += "DBError: " + pEE->getDBError() + "\nCompilerError: " + pEE->getCompilerError() + "\n";
+        return false;
+    } else {
+        Sheaf *pSheaf = pEE->takeOverSheaf();
+        
+        SheafConstIterator context_sheaf_ci = pSheaf->const_iterator();
+        while (context_sheaf_ci.hasNext()) {
+            const Straw *pStraw = context_sheaf_ci.next();
+            StrawConstIterator context_straw_ci = pStraw->const_iterator();
+            while (context_straw_ci.hasNext()) {
+                const MatchedObject *pContextMO = context_straw_ci.next();
+                
+                
+                
+                WordOccurrence word_occurrence;
+                
+                SheafConstIterator token_sheaf_ci = pContextMO->getSheaf()->const_iterator();
+                while (token_sheaf_ci.hasNext()) {
+                    const Straw *pStraw = token_sheaf_ci.next();
+                    StrawConstIterator token_straw_ci = pStraw->const_iterator();
+                    while (token_straw_ci.hasNext()) {
+                        const MatchedObject *pTokenMO = token_straw_ci.next();
+//                        ++wc.m_word_count;
+//                        
+//                        
+//                        if (pTokenMO->getFeatureAsString(0) != "false") {
+//                            ++wc.m_Family;
+//                        }
+                    }
+                }
+                
+                // std::cerr << "UP204: wc.m_word_count = " << wc.m_word_count << "\n";
+//                result.insert(word_occurrence);
+            }
+        }
+        
+        delete pSheaf;
+        
+        return true;
+    }
+}

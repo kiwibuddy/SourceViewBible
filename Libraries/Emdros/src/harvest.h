@@ -62,4 +62,30 @@ extern bool getWordCountsInContext(EmdrosEnv *pEE,
 				   ID_D2WordCountsMap& result,
 				   std::string& error_message);
 
+
+class WordOccurrence {
+public:
+    std::string m_DJHRef;
+    std::string m_source_name;
+    std::string m_source_color;
+    int m_source_occurrence;
+    monad_m m_first;
+    monad_m m_last;
+public:
+    WordOccurrence();
+    WordOccurrence(const WordOccurrence& other);
+    ~WordOccurrence();
+    
+    WordOccurrence& operator=(const WordOccurrence& other);
+    bool operator<(const WordOccurrence& rhs);
+protected:
+    void assign(const WordOccurrence& other);
+};
+
+typedef std::set<WordOccurrence> WordOccurrenceSet;
+extern bool getWordOccurrencesForQuery(EmdrosEnv *pEE,
+                                       const std::string& query,
+                                       const WordOccurrenceSet& result,
+                                       std::string& error_message);
+
 #endif /* !defined(HARVEST_H_) */

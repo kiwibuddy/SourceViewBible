@@ -271,4 +271,48 @@ const std::set<std::string> RCTStopwords = {"the","and","of","to","you","will","
     return nil;
 }
 
+- (void)wordOccurrencesForQuery:(NSString *)query completion:(void (^)(id result, NSError *error))completion {
+    try {
+        std::string errorMessage;
+        
+        WordOccurrenceSet wordOccurrenceSet;
+        bool result = getWordOccurrencesForQuery(_emdrosEnv, std::string(query.UTF8String), wordOccurrenceSet, errorMessage);
+        
+        NSMutableArray *wordOccurrences = [[NSMutableArray alloc] init];
+        if (result) {
+//            for (auto const& iterator : wordCountMap) {
+//                NSInteger contextID = iterator.first;
+//                NSDictionary *wordCount = @{
+//                                            @"wordCount": @(iterator.second.m_word_count),
+//                                            @"family": @(iterator.second.m_Family),
+//                                            @"economics": @(iterator.second.m_Economics),
+//                                            @"government": @(iterator.second.m_Government),
+//                                            @"religion": @(iterator.second.m_Religion),
+//                                            @"education": @(iterator.second.m_Education),
+//                                            @"communication": @(iterator.second.m_MediaCom),
+//                                            @"celebration": @(iterator.second.m_Celebration),
+//                                            };
+//                [wordCounts setObject:wordCount forKey:[NSString stringWithFormat:@"%li", contextID]];
+//            }
+        }
+        
+        
+        if (completion) completion([[NSArray alloc] initWithArray:wordOccurrences], nil);
+    } catch (EMdFDBException e) {
+        std::cerr << "ERROR: EMdFDBException (Database error)..." << std::endl;
+        std::cerr << _emdrosEnv->getDBError() << std::endl;
+        std::cerr << _emdrosEnv->getCompilerError() << std::endl;
+    } catch (BadMonadsException e) {
+        std::cerr << "BadMonadsException caught.  Program aborted." << std::endl;
+    } catch (WrongCharacterSetException e) {
+        std::cerr << "WrongCharacterSetException caught.  Program aborted." << std::endl;
+    } catch (EMdFOutputException e) {
+        std::cerr << "EMdFOutputException caught.  Program aborted." << std::endl;
+    } catch (EmdrosException e) {
+        std::cerr << "ERROR: EmdrosException (Emdros error)..." << e.what() << std::endl;
+    } catch (...) {
+        std::cerr << "Unknown exception occurred.  Program aborted." << std::endl;
+    }
+}
+
 @end

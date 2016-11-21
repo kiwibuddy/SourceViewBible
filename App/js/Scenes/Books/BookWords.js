@@ -24,6 +24,8 @@ import ParallaxMotionView from '../../Components/Common/ParallaxMotionView';
 
 import { Book } from '../../Database';
 
+import Emdros from '../../API/Emdros';
+
 type Props = {
   bookID: string,
 };
@@ -66,7 +68,7 @@ export default class BookWords extends Component {
 
   _renderRow = (word: Object, sectionID: any, rowID: any) => {
     return (
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => this._onPressWord(word)}>
         <Text style={StyleSheet.styles.cell.title}>{word.string}</Text>
         <Text style={StyleSheet.styles.cell.valuetitle}>{Localizable.toNumber(word.count, {precision: 0})}</Text>
       </TouchableOpacity>
@@ -108,6 +110,13 @@ export default class BookWords extends Component {
 
       </WordCloud>
     );
+  };
+
+  _onPressWord = (word: Object) => {
+    console.log(word.string);
+    Emdros.wordOccurrences(word.string, {}).then((result, error) => {
+      console.log('result', result);
+    });
   };
 }
 

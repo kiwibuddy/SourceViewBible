@@ -74,6 +74,20 @@ export default class Emdros {
     return EmdrosBridge.wordCountsForContext({...options, context, name: this.name});
   }
 
+  async wordOccurrences(word: string, options?: Object) {
+    const query = `SELECT ALL OBJECTS
+      IN {1-51551}
+      WHERE
+      [Source GET source_color, source_name, source_occurrence
+        [Verse
+          GET djhbook, chapter, verse_start
+          [Token surface_fts="${word}"]
+        ]
+      ]
+      GO`;
+    return EmdrosBridge.wordOccurrences({...options, query, name: this.name});
+  }
+
   async string(from: number, to: number, options: Object) {
     return EmdrosBridge.string({...options, from: from, to: to, name: this.name});
   }

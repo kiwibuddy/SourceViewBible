@@ -170,6 +170,17 @@ function wordCountsForContext(context: string, options: Object) {
   return DB.wordCountsForContext(context, options);
 }
 
+function wordOccurrences(word: string, options: Object) {
+  if (DB == null) {
+    const promise = new Promise((resolve, reject) => {
+      reject('DB is null');
+    });
+    return promise;
+  }
+
+  return DB.wordOccurrences(word, options);
+}
+
 module.exports = {
   key: Emdros.key,
   preferencesKey: Emdros.preferencesKey,
@@ -178,4 +189,5 @@ module.exports = {
   scripture,
   words,
   wordCountsForContext,
+  wordOccurrences,
 };

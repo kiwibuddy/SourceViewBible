@@ -133,6 +133,19 @@ RCT_EXPORT_METHOD(wordCountsForContext:(NSDictionary *)options resolver:(RCTProm
     }];
 }
 
+RCT_EXPORT_METHOD(wordOccurrences:(NSDictionary *)options resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    RCTEmdrosEnv *emdros = [self databaseForName:options[@"name"]];
+    
+    NSString *query = options[@"query"] ?: @"";
+    [emdros wordOccurrencesForQuery:query completion:^(id result, NSError *error) {
+        if (!error) {
+            resolve(result);
+        } else {
+            reject(@"wordOccurrencesError", [NSString stringWithFormat:@"Error executing wordOccurrences query: %@", query], error);
+        }
+    }];
+}
+
 RCT_EXPORT_METHOD(string:(NSDictionary *)options resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     RCTEmdrosEnv *emdros = [self databaseForName:options[@"name"]];
     NSInteger from = [options[@"from"] integerValue];

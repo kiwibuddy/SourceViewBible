@@ -18,6 +18,7 @@
 - (void)query:(NSString *)query options:(NSDictionary *)options completion:(void (^)(id result, NSError *error))completion;
 - (void)wordsInMonads:(NSArray<NSArray<NSNumber *> *> *)monads limit:(NSInteger)limit useStopWords:(BOOL)useStopWords completion:(void (^)(id result, NSError *error))completion;
 - (void)wordCountsForContext:(NSString *)context monads:(NSArray<NSArray<NSNumber *> *> *)monads contextFeatureComparison:(NSString *)contextFeatureComparison tokenFeatureComparison:(NSString *)tokenFeatureComparison completion:(void (^)(id result, NSError *error))completion;
+- (void)wordOccurrencesForQuery:(NSString *)query completion:(void (^)(id result, NSError *error))completion;
 
 - (void)stringFrom:(NSInteger)from to:(NSInteger)to options:(NSDictionary *)options completion:(void (^)(id result, NSError *error))completion;
 
