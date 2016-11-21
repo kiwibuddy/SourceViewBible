@@ -387,7 +387,7 @@ WordOccurrence& WordOccurrence::operator=(const WordOccurrence& other)
     return *this;
 }
 
-bool WordOccurrence::operator<(const WordOccurrence& rhs)
+bool WordOccurrence::operator<(const WordOccurrence& rhs) const
 {
     return m_first < rhs.m_first;  //assume that you compare the record based on a
 }
@@ -406,7 +406,7 @@ void WordOccurrence::assign(const WordOccurrence& other)
 
 bool getWordOccurrencesForQuery(EmdrosEnv *pEE,
                                 const std::string& query,
-                                const WordOccurrenceSet& result,
+                                WordOccurrenceSet& result,
                                 std::string& error_message)
 {
     bool bCompileResult = false;
@@ -445,7 +445,7 @@ bool getWordOccurrencesForQuery(EmdrosEnv *pEE,
                 }
                 
                 // std::cerr << "UP204: wc.m_word_count = " << wc.m_word_count << "\n";
-//                result.insert(word_occurrence);
+                result.insert(word_occurrence);
             }
         }
         

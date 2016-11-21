@@ -77,7 +77,7 @@ public:
     ~WordOccurrence();
     
     WordOccurrence& operator=(const WordOccurrence& other);
-    bool operator<(const WordOccurrence& rhs);
+    bool operator<(const WordOccurrence& rhs) const;
 protected:
     void assign(const WordOccurrence& other);
 };
@@ -85,7 +85,7 @@ protected:
 typedef std::set<WordOccurrence> WordOccurrenceSet;
 extern bool getWordOccurrencesForQuery(EmdrosEnv *pEE,
                                        const std::string& query,
-                                       const WordOccurrenceSet& result,
+                                       WordOccurrenceSet& result,
                                        std::string& error_message);
 
 #endif /* !defined(HARVEST_H_) */

@@ -280,20 +280,12 @@ const std::set<std::string> RCTStopwords = {"the","and","of","to","you","will","
         
         NSMutableArray *wordOccurrences = [[NSMutableArray alloc] init];
         if (result) {
-//            for (auto const& iterator : wordCountMap) {
-//                NSInteger contextID = iterator.first;
-//                NSDictionary *wordCount = @{
-//                                            @"wordCount": @(iterator.second.m_word_count),
-//                                            @"family": @(iterator.second.m_Family),
-//                                            @"economics": @(iterator.second.m_Economics),
-//                                            @"government": @(iterator.second.m_Government),
-//                                            @"religion": @(iterator.second.m_Religion),
-//                                            @"education": @(iterator.second.m_Education),
-//                                            @"communication": @(iterator.second.m_MediaCom),
-//                                            @"celebration": @(iterator.second.m_Celebration),
-//                                            };
-//                [wordCounts setObject:wordCount forKey:[NSString stringWithFormat:@"%li", contextID]];
-//            }
+            for (auto const& iterator : wordOccurrenceSet) {
+                NSDictionary *wordOcccurrence = @{
+                                            @"DJHRef": [NSString stringWithUTF8String:iterator.m_DJHRef.c_str()],
+                                            };
+                [wordOccurrences addObject:wordOcccurrence];
+            }
         }
         
         
