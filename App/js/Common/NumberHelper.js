@@ -27,7 +27,7 @@ function RelativeDate(date: Object): string {
       return Localizable.t('yesterday');
 
     default:
-      return Localizable.strftime(date, "%A, %B %-d");
+      return Localizable.strftime(date, "%m/%d/%-y");
   }
 }
 
