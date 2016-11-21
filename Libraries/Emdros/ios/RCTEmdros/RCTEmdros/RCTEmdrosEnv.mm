@@ -283,6 +283,8 @@ const std::set<std::string> RCTStopwords = {"the","and","of","to","you","will","
             for (auto const& iterator : wordOccurrenceSet) {
                 NSDictionary *wordOcccurrence = @{
                                             @"DJHRef": [NSString stringWithUTF8String:iterator.m_DJHRef.c_str()],
+                                            @"chapter": @(iterator.m_chapter),
+                                            @"verse": @(iterator.m_verse),
                                             };
                 [wordOccurrences addObject:wordOcccurrence];
             }

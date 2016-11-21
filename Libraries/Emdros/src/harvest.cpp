@@ -361,6 +361,8 @@ bool getWordCountsInContext(EmdrosEnv *pEE,
 /////////////////////////////////////////////////////////////////
 WordOccurrence::WordOccurrence()
 : m_DJHRef(),
+m_chapter(0),
+m_verse(0),
 m_source_name(),
 m_source_color(),
 m_source_occurrence(0),
@@ -395,6 +397,8 @@ bool WordOccurrence::operator<(const WordOccurrence& rhs) const
 void WordOccurrence::assign(const WordOccurrence& other)
 {
     m_DJHRef = other.m_DJHRef;
+    m_chapter = other.m_chapter;
+    m_verse = other.m_verse;
     m_source_name = other.m_source_name;
     m_source_color = other.m_source_color;
     m_source_occurrence = other.m_source_occurrence;
@@ -429,12 +433,17 @@ bool getWordOccurrencesForQuery(EmdrosEnv *pEE,
                 
                 WordOccurrence word_occurrence;
                 
+                
                 SheafConstIterator token_sheaf_ci = pContextMO->getSheaf()->const_iterator();
                 while (token_sheaf_ci.hasNext()) {
                     const Straw *pStraw = token_sheaf_ci.next();
                     StrawConstIterator token_straw_ci = pStraw->const_iterator();
                     while (token_straw_ci.hasNext()) {
                         const MatchedObject *pTokenMO = token_straw_ci.next();
+                        word_occurrence.m_DJHRef = pTokenMO->getFeatureAsString(0);
+                        word_occurrence.m_chapter = pTokenMO->getFeatureAsLong(1);
+                        word_occurrence.m_verse = pTokenMO->getFeatureAsLong(2);
+                        
 //                        ++wc.m_word_count;
 //                        
 //                        
