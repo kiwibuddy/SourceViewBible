@@ -177,7 +177,7 @@ export default class Bookmarks extends Component {
   _renderBookmarkRow = (bookmark: Object) => {
     const icon = (bookmark.hasNote ? require('./Images/note.png') : require('./Images/bookmark.png'));
     const noteStyle = (bookmark.hasNote ? styles.noteContainer : null);
-    const noteButtonTitle = (bookmark.hasNote ? Localizable.t('view-note') : Localizable.t('add-note'));
+    const noteButtonTitle = (bookmark.hasNote ? Localizable.t('edit-note') : Localizable.t('add-note'));
     const note = (bookmark.hasNote ? <Text style={StyleSheet.styles.cell.titlemedium}>{bookmark.note}</Text> : null);
     return (
       <View>
