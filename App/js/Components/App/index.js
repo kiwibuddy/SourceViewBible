@@ -311,10 +311,13 @@ export default class App extends Component {
     const route = state.routes[state.index - 1];
     route.didGoBack = true;
 
-    const routes = [
-      ...state.routes.slice(0, -1),
-      route,
-    ];
+    const routes = state.routes.slice(0, -1);
+    if (route.modal !== true) {
+      const previousRoute = (routes.length > 0 ? routes[routes.length - 1] : null);
+      if (previousRoute === null || route.path !== previousRoute.path) {
+        routes.push(route);
+      }
+    }
 
     const navigation = {
       ...state,

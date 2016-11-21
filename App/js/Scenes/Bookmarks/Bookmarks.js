@@ -242,7 +242,7 @@ export default class Bookmarks extends Component {
 
   _navigateBookmark = (bookmark: Object) => {
     const bookID = bookmark.references[0].bookID;
-    this.props.navigate(bookmarkURL({bookmarkID: bookmark.id, bookID, title: Localizable.t('bookmark'), modal: true}))
+    this.props.navigate(bookmarkURL({bookmarkID: bookmark.id, bookID, title: Localizable.t('bookmark'), modal: true}), {replace: false});
   }
 
   _getDataSource = (segmentIndex: number) => {
