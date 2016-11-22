@@ -134,7 +134,7 @@ export default class SourceWords extends Component {
   _onPressWord = (word: Object) => {
     const { source, book } = this.state;
     const options = {
-      context: `SourceActant actant_id=${source.id}`,
+      context: `SourceActant actant_id=${source.id} AND is_source_name=true AND NOT real_name='The Narrator'`,
       monadSet: (book ? book.monadSet : null),
     };
 
