@@ -215,26 +215,26 @@ public class EmdrosModule extends ReactContextBaseJavaModule {
     Thread thread = new Thread(new Runnable(){
       @Override
       public void run(){
-        Map<String,Map<String,Object>> wordOccurrenceMap = emdros.wordOccurrencesForQuery(query);
-        Set<Entry<String,Map<String,Object>>> wordOccurrenceEntries = wordOccurrenceMap.entrySet();
+        Map<String,Map<String,Object>> wordOccurrencesMap = emdros.wordOccurrencesForQuery(query);
+        Set<Entry<String,Map<String,Object>>> wordOccurrenceEntries = wordOccurrencesMap.entrySet();
 
         WritableArray wordOccurrences = Arguments.createArray();
         for (Entry<String,Map<String,Object>> wordOccurrenceEntry: wordOccurrenceEntries) {
           Map<String,Object> wordOccurrenceMap = wordOccurrenceEntry.getValue();
 
           WritableMap wordOccurrence = Arguments.createMap();
-          wordOccurrence.putDouble("id", wordMap.get("id"));
-          wordOccurrence.putString("DJHRef", wordMap.get("DJHRef"));
-          wordOccurrence.putInt("chapter", wordMap.get("chapter"));
-          wordOccurrence.putInt("verse", wordMap.get("verse"));
-          wordOccurrence.putInt("roleID", wordMap.get("roleID"));
-          wordOccurrence.putString("name", wordMap.get("name"));
-          wordOccurrence.putInt("number", wordMap.get("number"));
-          wordOccurrence.putInt("monad", wordMap.get("monad"));
+          wordOccurrence.putDouble("id", wordOccurrenceMap.get("id"));
+          wordOccurrence.putString("DJHRef", wordOccurrenceMap.get("DJHRef"));
+          wordOccurrence.putInt("chapter", wordOccurrenceMap.get("chapter"));
+          wordOccurrence.putInt("verse", wordOccurrenceMap.get("verse"));
+          wordOccurrence.putInt("roleID", wordOccurrenceMap.get("roleID"));
+          wordOccurrence.putString("name", wordOccurrenceMap.get("name"));
+          wordOccurrence.putInt("number", wordOccurrenceMap.get("number"));
+          wordOccurrence.putInt("monad", wordOccurrenceMap.get("monad"));
 
           WritableMap monadSet = Arguments.createMap();
-          monadSet.putDouble("first", wordMap.get("firstMonad"));
-          monadSet.putDouble("last", wordMap.get("lastMonad"));
+          monadSet.putDouble("first", wordOccurrenceMap.get("firstMonad"));
+          monadSet.putDouble("last", wordOccurrenceMap.get("lastMonad"));
           wordOccurrence.putMap("monadSet", monadSet);
 
           wordOccurrences.pushMap(wordOccurrence);
