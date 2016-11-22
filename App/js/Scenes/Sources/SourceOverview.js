@@ -433,9 +433,9 @@ export default class SourceOverview extends Component {
   };
 
   _onPressWords = () => {
-    const { source } = this.state;
+    const { source, book } = this.state;
     if (source.words.length == 0) return;
-    this.props.navigate(sourceWordsURL({sourceID: source.id, title: source.name, description: Localizable.t('source-words', {name: source.name})}));
+    this.props.navigate(sourceWordsURL({sourceID: source.id, bookID: book ? book.id : null, title: source.name, description: Localizable.t('source-words', {name: source.name})}));
   };
 
   _onPressSpheres = () => {
