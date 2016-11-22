@@ -223,18 +223,18 @@ public class EmdrosModule extends ReactContextBaseJavaModule {
           Map<String,Object> wordOccurrenceMap = wordOccurrenceEntry.getValue();
 
           WritableMap wordOccurrence = Arguments.createMap();
-          wordOccurrence.putDouble("id", (long)wordOccurrenceMap.get("id"));
+          wordOccurrence.putInt("id", (int)wordOccurrenceMap.get("id"));
           wordOccurrence.putString("DJHRef", wordOccurrenceMap.get("DJHRef").toString());
           wordOccurrence.putInt("chapter", (int)wordOccurrenceMap.get("chapter"));
           wordOccurrence.putInt("verse", (int)wordOccurrenceMap.get("verse"));
           wordOccurrence.putInt("roleID", (int)wordOccurrenceMap.get("roleID"));
           wordOccurrence.putString("name", wordOccurrenceMap.get("name").toString());
           wordOccurrence.putInt("number", (int)wordOccurrenceMap.get("number"));
-          wordOccurrence.putDouble("monad", (long)wordOccurrenceMap.get("monad"));
+          wordOccurrence.putInt("monad", (int)wordOccurrenceMap.get("monad"));
 
           WritableMap monadSet = Arguments.createMap();
-          monadSet.putDouble("first", (long)wordOccurrenceMap.get("firstMonad"));
-          monadSet.putDouble("last", (long)wordOccurrenceMap.get("lastMonad"));
+          monadSet.putInt("first", (int)wordOccurrenceMap.get("firstMonad"));
+          monadSet.putInt("last", (int)wordOccurrenceMap.get("lastMonad"));
           wordOccurrence.putMap("monadSet", monadSet);
 
           wordOccurrences.pushMap(wordOccurrence);

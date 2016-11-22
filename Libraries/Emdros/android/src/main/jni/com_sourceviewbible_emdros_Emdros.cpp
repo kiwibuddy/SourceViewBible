@@ -285,9 +285,6 @@ jobject Java_com_sourceviewbible_emdros_Emdros_wordOccurrencesForQuery(JNIEnv *e
   jclass integerClazz = env->FindClass("java/lang/Integer");
   jmethodID integerConstructID = env->GetMethodID(integerClazz, "<init>", "(I)V");
 
-  jclass longClazz = env->FindClass("java/lang/Long");
-  jmethodID longConstructID = env->GetMethodID(longClazz, "<init>", "(L)V");
-
   jobject idKey = env->NewStringUTF("id");
   jobject DJHRefKey = env->NewStringUTF("DJHRef");
   jobject chapterKey = env->NewStringUTF("chapter");
@@ -303,7 +300,7 @@ jobject Java_com_sourceviewbible_emdros_Emdros_wordOccurrencesForQuery(JNIEnv *e
   for (WordOccurrenceSet::const_iterator iterator = wordOccurrenceSet.begin(); iterator != wordOccurrenceSet.end(); ++iterator) {
     WordOccurrence wordOccurrence = *iterator;
 
-    jobject id = env->NewObject(longClazz, longConstructID, wordOccurrence.m_monad);
+    jobject id = env->NewObject(integerClazz, integerConstructID, wordOccurrence.m_monad);
 
     jobject wordOccurrenceMap = env->NewObject(hashmapClazz, hashMapInit);
 
@@ -340,17 +337,17 @@ jobject Java_com_sourceviewbible_emdros_Emdros_wordOccurrencesForQuery(JNIEnv *e
     env->DeleteLocalRef(number); number = NULL;
     env->DeleteLocalRef(numberPut); numberPut = NULL;
 
-    jobject monad = env->NewObject(longClazz, longConstructID, wordOccurrence.m_monad);
+    jobject monad = env->NewObject(integerClazz, integerConstructID, wordOccurrence.m_monad);
     jobject monadPut = env->CallObjectMethod(wordOccurrenceMap, putMethod, monadKey, monad);
     env->DeleteLocalRef(monad); monad = NULL;
     env->DeleteLocalRef(monadPut); monadPut = NULL;
 
-    jobject firstMonad = env->NewObject(longClazz, longConstructID, wordOccurrence.m_first_monad);
+    jobject firstMonad = env->NewObject(integerClazz, integerConstructID, wordOccurrence.m_first_monad);
     jobject firstMonadPut = env->CallObjectMethod(wordOccurrenceMap, putMethod, firstMonadKey, firstMonad);
     env->DeleteLocalRef(firstMonad); firstMonad = NULL;
     env->DeleteLocalRef(firstMonadPut); firstMonadPut = NULL;
 
-    jobject lastMonad = env->NewObject(longClazz, longConstructID, wordOccurrence.m_last_monad);
+    jobject lastMonad = env->NewObject(integerClazz, integerConstructID, wordOccurrence.m_last_monad);
     jobject lastMonadPut = env->CallObjectMethod(wordOccurrenceMap, putMethod, lastMonadKey, lastMonad);
     env->DeleteLocalRef(lastMonad); lastMonad = NULL;
     env->DeleteLocalRef(lastMonadPut); lastMonadPut = NULL;
