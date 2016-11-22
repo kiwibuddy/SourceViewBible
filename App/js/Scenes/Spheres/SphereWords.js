@@ -22,7 +22,9 @@ import {
 import { SourcesBarChart, SpheresBarChart, WordCloud } from '../../Components/Charts';
 import ParallaxMotionView from '../../Components/Common/ParallaxMotionView';
 
-import { Sphere } from '../../Database';
+import { Sphere, WordOccurrence } from '../../Database';
+import { Preference } from '../../Preferences';
+import { occurrencesURL, readerURL } from '../../Navigation';
 
 type Props = {
   sphereID: string,
@@ -66,7 +68,7 @@ export default class SphereWords extends Component {
 
   _renderRow = (word: Object, sectionID: any, rowID: any) => {
     return (
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => this._onPressWord(word)}>
         <Text style={StyleSheet.styles.cell.title}>{word.string}</Text>
         <Text style={StyleSheet.styles.cell.valuetitle}>{Localizable.toNumber(word.count, {precision: 0})}</Text>
       </TouchableOpacity>
@@ -107,6 +109,19 @@ export default class SphereWords extends Component {
         </ParallaxMotionView>
       </WordCloud>
     );
+  };
+
+  _onPressWord = (word: Object) => {
+    const { sphere } = this.state;
+    WordOccurrence.occurrences(word.string, {sphere: sphere.feature}).then((occurrences, error) => {
+      if (occurrences && occurrences.length > 0) {
+        const occurrence = occurrences[0];
+        const occurrencesRoute = occurrencesURL({title: Localizable.t('passages'), occurrences, modal: true});
+        const route = readerURL({bookID: occurrence.book.id, anchor: `occurrence-${occurrence.firstMonad}`, title: occurrence.book.name, occurrenceIndex: 0, occurrences, occurrencesRoute});
+        Preference.setObjectForKey([sphere.id], Preference.Keys.Reader.spheres);
+        this.props.navigate(route);
+      }
+    });
   };
 }
 

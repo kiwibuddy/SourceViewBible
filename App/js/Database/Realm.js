@@ -818,6 +818,16 @@ export class Sphere extends Realm.Object {
     'celebration',
   ];
 
+  static SPHERE_FEATURE_MAP = {
+    'family': 'Family',
+    'economics': 'Economics',
+    'government': 'Government',
+    'religion': 'Religion',
+    'education': 'Education',
+    'communication': 'MediaCom',
+    'celebration': 'Celebration'
+  };
+
   static all(options: ?Object) {
     let spheres = realm.objects('Sphere');
     if (!options || options.foundational !== true) spheres = spheres.filtered('position > 0');
@@ -863,6 +873,10 @@ export class Sphere extends Realm.Object {
 
   get isFoundational(): boolean {
     return this.position == 0;
+  }
+
+  get feature(): string {
+    return Sphere.SPHERE_FEATURE_MAP[this.id];
   }
 }
 Sphere.schema = SphereSchema;
