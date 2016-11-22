@@ -80,7 +80,11 @@ export default class Bookmarks extends Component {
   }
 
   async componentDidMount() {
-    await this._getReferences();
+    try {
+      await this._getReferences();
+    } catch(error) {
+
+    };
 
     this.setState({
       dataSource: this._getDataSource(this.state.selectedSegmentIndex)
