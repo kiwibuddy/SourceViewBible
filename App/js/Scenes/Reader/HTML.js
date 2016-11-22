@@ -104,10 +104,10 @@ module.exports = `
         text-decoration: none
       }
       .highlight {
-        background-color: #FCE669;
+        background-color: #FFF5CD;
       }
       .selection {
-        background-color: #FF7C7C;
+        background-color: #FAE8E5;
       }
       .textTitle {
         font-family: Georgia;

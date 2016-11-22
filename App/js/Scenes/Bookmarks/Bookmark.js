@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
     paddingLeft: 8,
     marginHorizontal: 8,
     marginVertical: 8,
-    textAlignVertical: 'top',
+    textAlignVertical: 'top', // Android workaround
     height: 200,
     padding: 0, // Android workaround
   },
