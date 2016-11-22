@@ -24,7 +24,8 @@ import { SourcesBarChart, SpheresBarChart, WordCloud } from '../../Components/Ch
 import ParallaxMotionView from '../../Components/Common/ParallaxMotionView';
 import FilterBar from './FilterBar';
 
-import { Actant, Book } from '../../Database';
+import { Actant, Book, WordOccurrence } from '../../Database';
+import { occurrencesURL, readerURL } from '../../Navigation';
 
 type Props = {
   sourceID: number,
@@ -81,7 +82,7 @@ export default class SourceWords extends Component {
 
   _renderRow = (word: Object, sectionID: any, rowID: any) => {
     return (
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => {}}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => this._onPressWord(word)}>
         <Text style={StyleSheet.styles.cell.title}>{word.string}</Text>
         <Text style={StyleSheet.styles.cell.valuetitle}>{Localizable.toNumber(word.count, {precision: 0})}</Text>
       </TouchableOpacity>
@@ -130,6 +131,23 @@ export default class SourceWords extends Component {
     this._setSource(this.state.source, null, null);
   };
 
+  _onPressWord = (word: Object) => {
+    const { source, book } = this.state;
+    const options = {
+      context: `SourceActant actant_id=${source.id}`,
+      monadSet: (book ? book.monadSet : null),
+    };
+
+    WordOccurrence.occurrences(word.string, options).then((occurrences, error) => {
+      if (occurrences && occurrences.length > 0) {
+        const occurrence = occurrences[0];
+        const occurrencesRoute = occurrencesURL({title: Localizable.t('passages'), occurrences, modal: true});
+        const route = readerURL({bookID: occurrence.book.id, anchor: `occurrence-${occurrence.firstMonad}`, title: occurrence.book.name, occurrenceIndex: 0, occurrences, occurrencesRoute});
+        this.props.navigate(route);
+      }
+    });
+  };
+
   _setSource = (source: Object, book: ?Object, sourceRelation: ?Object) => {
     const object = sourceRelation || source;
     const words = object.words;
@@ -139,7 +157,7 @@ export default class SourceWords extends Component {
       sourceRelation,
       dataSource: this.state.dataSource.cloneWithRows(words)
     });
-  }
+  };
 }
 
 const styles = StyleSheet.create({

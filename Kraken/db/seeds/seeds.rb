@@ -1,4 +1,3 @@
-# require './db/seeds/books'
 require './db/seeds/actants'
 require './db/seeds/bso'
 require './db/seeds/bso_actants'

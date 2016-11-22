@@ -145,7 +145,7 @@ std::string countInBuckets(EmdrosEnv *pEE, const std::string& bucket_specificati
 
 bool getWordCountsInSOM(EmdrosEnv *pEE, const SetOfMonads& substrate, const std::set<std::string>& stop_word_set, String2IntMap& result, std::string& error_message)
 {
-	std::string query = "SELECT ALL OBJECTS IN " + substrate.toString() + "WHERE [Token GET surface_fts]";
+	std::string query = "SELECT ALL OBJECTS IN " + substrate.toString() + "WHERE [Source [Verse [Token GET surface_fts] ] ]";
 
 	bool bCompileResult = false;
 	bool bDBResult = pEE->executeString(query, bCompileResult, false, false, 0);
@@ -424,7 +424,6 @@ bool getWordOccurrencesForQuery(EmdrosEnv *pEE,
     } else {
         Sheaf *pSheaf = pEE->takeOverSheaf();
         
-
         SheafConstIterator context_sheaf_ci = pSheaf->const_iterator();
         while (context_sheaf_ci.hasNext()) {
             
@@ -433,7 +432,6 @@ bool getWordOccurrencesForQuery(EmdrosEnv *pEE,
             StrawConstIterator context_straw_ci = pStraw->const_iterator();
             while (context_straw_ci.hasNext()) {
                 const MatchedObject *pContextMO = context_straw_ci.next();
-                
                 
                 // Loop through all the source sheafs
                 SheafConstIterator source_sheaf_ci = pContextMO->getSheaf()->const_iterator();
@@ -490,10 +488,8 @@ bool getWordOccurrencesForQuery(EmdrosEnv *pEE,
                                 }
                             }
                         }
-                        
                     }
                 }
-                
             }
         }
         

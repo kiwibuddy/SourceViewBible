@@ -76,14 +76,16 @@ export default class Emdros {
 
   async wordOccurrences(word: string, options?: Object) {
     const monadSet = options && options.monadSet ? `IN {${options.monadSet.first}-${options.monadSet.last}}` : '';
+    const context = options && options.context ? options.context : 'Book';
+    const sphere = options && options.sphere ? `${options.sphere}=true AND` : '';
     const query = `SELECT ALL OBJECTS
       ${monadSet}
       WHERE
-      [Book
+      [${context}
         [Source GET source_color, source_name, source_occurrence
           [Verse
             GET djhbook, chapter, verse_start
-            [Token surface_fts="${word}"]
+            [Token ${sphere} surface_fts="${word}"]
           ]
         ]
       ]
