@@ -360,8 +360,7 @@ bool getWordCountsInContext(EmdrosEnv *pEE,
 //
 /////////////////////////////////////////////////////////////////
 WordOccurrence::WordOccurrence()
-: m_id(0),
-m_DJHRef(),
+: m_DJHRef(),
 m_chapter(0),
 m_verse(0),
 m_source_name(),
@@ -474,22 +473,20 @@ bool getWordOccurrencesForQuery(EmdrosEnv *pEE,
                                     StrawConstIterator token_straw_ci = pStraw->const_iterator();
                                     while (token_straw_ci.hasNext()) {
                                         const MatchedObject *pTokenMO = token_straw_ci.next();
-                                        monad_m monad = pTokenMO->getMonads().first();
                                         
                                         WordOccurrence word_occurrence;
-                                        word_occurrence.m_id = monad;
                                         word_occurrence.m_DJHRef = djhref;
                                         word_occurrence.m_chapter = chapter;
                                         word_occurrence.m_verse = verse;
                                         word_occurrence.m_role = role;
                                         word_occurrence.m_source_name = source_name;
                                         word_occurrence.m_source_occurrence = source_occurrence;
-                                        word_occurrence.m_monad = monad;
+                                        word_occurrence.m_monad = pTokenMO->getMonads().first();
                                         word_occurrence.m_first_monad = monads.first();
                                         word_occurrence.m_last_monad = monads.last();
                                         
                                         result.insert(word_occurrence);
-                                                                            }
+                                    }
                                 }
                             }
                         }
