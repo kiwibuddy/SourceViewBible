@@ -118,12 +118,12 @@ export default class InAppPurchase extends Component {
   _onPressBuy = () => {
     if (DeviceInfo.getModel() === 'Simulator') {
       Preference.setBooleanForKey(true, Preference.Keys.Spheres.Purchased);
-      this.props.navigate(this.props.redirect, {replace: true});
+      this._navigateRedirect();
     } else {
       Store.purchase(SPHERES_PRODUCT_IDENTIFIER).then((purchased) => {
         if (purchased) {
           Preference.setBooleanForKey(true, Preference.Keys.Spheres.Purchased);
-          this.props.navigate(this.props.redirect, {replace: true});
+          this._navigateRedirect();
         }
       });
     }
@@ -132,14 +132,14 @@ export default class InAppPurchase extends Component {
   _onPressRestore = () => {
     if (DeviceInfo.getModel() === 'Simulator') {
       Preference.setBooleanForKey(true, Preference.Keys.Spheres.Purchased);
-      this.props.navigate(this.props.redirect, {replace: true});
+      this._navigateRedirect();
     } else {
       Store.restorePurchases().then((purchases) => {
         if (purchases.length > 0) {
           purchases.forEach((purchase) => {
             if (purchase.productID === SPHERES_PRODUCT_IDENTIFIER) {
               Preference.setBooleanForKey(true, Preference.Keys.Spheres.Purchased);
-              this.props.navigate(this.props.redirect, {replace: true});
+              this._navigateRedirect();
             }
           });
         }
@@ -147,11 +147,17 @@ export default class InAppPurchase extends Component {
     }
   }
 
+  _navigateRedirect = () => {
+    const { redirect } = this.props;
+    const replace = typeof(redirect.replace) !== "undefined" ? redirect.replace : true;
+    this.props.navigate(redirect, {replace});
+  }
+
   _fetchPurchase = () => {
     Store.products([SPHERES_PRODUCT_IDENTIFIER]).then((products) => {
       this.setState({loading: false, product: products[0]});
     });
-  }
+  };
 }
 
 const styles = StyleSheet.create({

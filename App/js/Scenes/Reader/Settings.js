@@ -176,7 +176,7 @@ export default class Settings extends Component {
 
     const purchased = Preference.booleanForKey(Preference.Keys.Spheres.Purchased);
     if (!purchased) {
-      this.props.navigate(sphereInAppPurchaseURL({title: Localizable.t('spheres.text'), redirect: readerSettingsURL({title: Localizable.t('settings'), modal: true}, {replace: true}), modal: true}));
+      this.props.navigate(sphereInAppPurchaseURL({title: Localizable.t('spheres.text'), redirect: readerSettingsURL({title: Localizable.t('settings'), replace: false, modal: true}), modal: true}));
       return;
     }
 
