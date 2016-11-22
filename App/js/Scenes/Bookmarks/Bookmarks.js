@@ -80,11 +80,7 @@ export default class Bookmarks extends Component {
   }
 
   async componentDidMount() {
-    try {
-      await this._getReferences();
-    } catch(error) {
-
-    };
+    await this._getReferences();
 
     this.setState({
       dataSource: this._getDataSource(this.state.selectedSegmentIndex)
@@ -101,7 +97,7 @@ export default class Bookmarks extends Component {
           renderRightComponent={Platform.OS === 'ios' ? renderBackButton : null}
         />
         <ListView
-          enableEmptySections={false}
+          enableEmptySections={true}
           dataSource={this.state.dataSource}
           renderRow={this._renderRow}
           renderSectionHeader={this._renderSectionHeader}
@@ -113,10 +109,6 @@ export default class Bookmarks extends Component {
   }
 
   _renderTitleComponent(props: Object) {
-    if (Platform.OS === 'android') {
-      return <NavigationHeader.Title>{Localizable.t('history')}</NavigationHeader.Title>;
-    }
-
     return (
       <SegmentedControl
         style={styles.segmentedControl}
@@ -274,7 +266,9 @@ export default class Bookmarks extends Component {
           defaults.push(sphereInAppPurchaseURL({title: 'Spheres IAP', redirect: spheresURL({title: 'Spheres'}), modal: true}));
         }
 
-        return this.state.dataSource.cloneWithRowsAndSections({defaults, bookmarks}, ['defaults', 'bookmarks']);
+        const bookmarkSections = ['defaults'];
+        if (bookmarks.length > 0) bookmarkSections.push('bookmarks');
+        return this.state.dataSource.cloneWithRowsAndSections({defaults, bookmarks}, bookmarkSections);
     }
   };
 
@@ -312,13 +306,17 @@ export default class Bookmarks extends Component {
   async _getReferences() {
     const highlights = [];
     const bookmarks = [];
-    for (let bookmark of Bookmark.all()) {
+    const entries = Bookmark.all().map(bookmark => bookmark);
+
+    for (let bookmark of entries) {
       let scripture = '';
-      for (let reference of bookmark.references) {
+      const references = bookmark.references.map(reference => reference);
+      for (let reference of references) {
         const monadSet = {
           first: reference.firstMonad,
           last: reference.lastMonad
         };
+
         const content = await Emdros.scripture({monadSet, stylesheet: 'occurrence'});
         scripture += content;
       }
