@@ -88,8 +88,25 @@ jstring Java_com_sourceviewbible_emdros_Emdros_string(JNIEnv *env, jobject obj, 
   std::string dbName("");
   std::string stylesheetName("base");
   bool bResult;
-  std::string rendered_objects = render_objects(emdrosEnv, dbName, stylesheet, stylesheetName, (long)from, (long)to, bResult);
-  return env->NewStringUTF(rendered_objects.c_str());
+  try {
+    std::string rendered_objects = render_objects(emdrosEnv, dbName, stylesheet, stylesheetName, (long)from, (long)to, bResult);
+    return env->NewStringUTF(rendered_objects.c_str());
+  } catch (EMdFDBException e) {
+      std::cerr << "ERROR: EMdFDBException (Database error)..." << std::endl;
+      std::cerr << emdrosEnv->getDBError() << std::endl;
+      std::cerr << emdrosEnv->getCompilerError() << std::endl;
+  } catch (BadMonadsException e) {
+      std::cerr << "BadMonadsException caught.  Program aborted." << std::endl;
+  } catch (WrongCharacterSetException e) {
+      std::cerr << "WrongCharacterSetException caught.  Program aborted." << std::endl;
+  } catch (EMdFOutputException e) {
+      std::cerr << "EMdFOutputException caught.  Program aborted." << std::endl;
+  } catch (EmdrosException e) {
+      std::cerr << "ERROR: EmdrosException (Emdros error)..." << e.what() << std::endl;
+  } catch (...) {
+      std::cerr << "Unknown exception occurred.  Program aborted." << std::endl;
+  }
+  return env->NewStringUTF("");
 }
 
 jobject Java_com_sourceviewbible_emdros_Emdros_words(JNIEnv *env, jobject obj, jobjectArray jmonads, jlong jlimit, jboolean useStopWords) {
