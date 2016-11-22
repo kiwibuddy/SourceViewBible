@@ -366,7 +366,9 @@ m_verse(0),
 m_source_name(),
 m_role(0),
 m_source_occurrence(0),
-m_monad(0)
+m_monad(0),
+m_first_monad(0),
+m_last_monad(0)
 {
 }
 
@@ -402,6 +404,8 @@ void WordOccurrence::assign(const WordOccurrence& other)
     m_role = other.m_role;
     m_source_occurrence = other.m_source_occurrence;
     m_monad = other.m_monad;
+    m_first_monad = other.m_first_monad;
+    m_last_monad = other.m_last_monad;
 }
 
 
@@ -458,6 +462,7 @@ bool getWordOccurrencesForQuery(EmdrosEnv *pEE,
                                 const std::string djhref = pVerseMO->getFeatureAsString(0);
                                 const int chapter = (int)pVerseMO->getFeatureAsLong(1);
                                 const int verse = (int)pVerseMO->getFeatureAsLong(2);
+                                const SetOfMonads monads = pVerseMO->getMonads();
                                 
                                 // Loop through all the token sheafs
                                 SheafConstIterator token_sheaf_ci = pVerseMO->getSheaf()->const_iterator();
@@ -477,6 +482,8 @@ bool getWordOccurrencesForQuery(EmdrosEnv *pEE,
                                         word_occurrence.m_source_name = source_name;
                                         word_occurrence.m_source_occurrence = source_occurrence;
                                         word_occurrence.m_monad = pTokenMO->getMonads().first();
+                                        word_occurrence.m_first_monad = monads.first();
+                                        word_occurrence.m_last_monad = monads.last();
                                         
                                         result.insert(word_occurrence);
                                     }

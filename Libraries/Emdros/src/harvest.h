@@ -72,6 +72,8 @@ public:
     int m_role;
     int m_source_occurrence;
     monad_m m_monad;
+    monad_m m_first_monad;
+    monad_m m_last_monad;
 public:
     WordOccurrence();
     WordOccurrence(const WordOccurrence& other);

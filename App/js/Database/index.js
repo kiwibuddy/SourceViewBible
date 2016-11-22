@@ -13,6 +13,7 @@ import {
   Profession,
   Role,
   Sphere,
+  WordOccurrence,
 } from './Realm';
 
 import SQLite, { rowsWithSQL } from './SQLite';
@@ -35,6 +36,7 @@ module.exports = {
   Profession,
   Role,
   Sphere,
+  WordOccurrence,
   ComparisonPredicate,
   CompoundPredicate,
   RawPredicate,

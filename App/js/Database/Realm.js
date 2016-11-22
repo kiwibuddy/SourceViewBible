@@ -424,6 +424,10 @@ export class Book extends Realm.Object {
     return realm.objectForPrimaryKey('Book', id || '');
   }
 
+  static findByDJHRef(DJHRef: string) {
+    return realm.objects('Book').find(book => book.DJHRef === DJHRef);
+  }
+
   static whereIn(ids: any, options: ?Object) {
     if (ids.length == 0) return [];
     const filter = ids.map((id, index) => `id = $${index}`).join(' OR ');
@@ -878,6 +882,38 @@ export class SpherePassage extends Realm.Object {
 
 }
 SpherePassage.schema = SpherePassageSchema;
+
+export class WordOccurrence {
+  static async occurrences(word: string, options: Object) {
+    return new Promise((resolve, reject) => {
+      Emdros.wordOccurrences(word, options).then((result, error) => {
+        if (result) {
+          const occurrences = result.map(occurrence => {
+            const book = Book.findByDJHRef(occurrence.DJHRef);
+            const role = Role.findByID(occurrence.roleID);
+            return (
+              {
+                id: occurrence.monad,
+                book,
+                name: occurrence.name,
+                number: occurrence.number,
+                roleID: occurrence.roleID,
+                firstMonad: occurrence.monad,
+                lastMonad: occurrence.monad,
+                monadSet: occurrence.monadSet,
+                reference: `${occurrence.chapter}:${occurrence.verse}`,
+                role,
+              }
+            );
+          });
+          resolve(occurrences);
+        } else {
+          reject(error);
+        }
+      });
+    });
+  }
+}
 
 const Schema = [Actant, Bible, Book, BookSourceOccurrence, Chapter, Chronology, MonadSet, Nature, Profession, SourceRelation, Sphere, SpherePassage, Count, Content];
 
