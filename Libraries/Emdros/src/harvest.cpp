@@ -364,7 +364,7 @@ WordOccurrence::WordOccurrence()
 m_chapter(0),
 m_verse(0),
 m_source_name(),
-m_source_color(),
+m_role(0),
 m_source_occurrence(0),
 m_monad(0)
 {
@@ -399,7 +399,7 @@ void WordOccurrence::assign(const WordOccurrence& other)
     m_chapter = other.m_chapter;
     m_verse = other.m_verse;
     m_source_name = other.m_source_name;
-    m_source_color = other.m_source_color;
+    m_role = other.m_role;
     m_source_occurrence = other.m_source_occurrence;
     m_monad = other.m_monad;
 }
@@ -441,7 +441,7 @@ bool getWordOccurrencesForQuery(EmdrosEnv *pEE,
                     while (source_straw_ci.hasNext()) {
                         const MatchedObject *pSourceMO = source_straw_ci.next();
                         
-                        const std::string source_color = pSourceMO->getFeatureAsString(0);
+                        const int role = (int)pSourceMO->getFeatureAsLong(0);
                         const std::string source_name = pSourceMO->getFeatureAsString(1);
                         const int source_occurrence = (int)pSourceMO->getFeatureAsLong(2);
                         
@@ -473,7 +473,7 @@ bool getWordOccurrencesForQuery(EmdrosEnv *pEE,
                                         word_occurrence.m_DJHRef = djhref;
                                         word_occurrence.m_chapter = chapter;
                                         word_occurrence.m_verse = verse;
-                                        word_occurrence.m_source_color = source_color;
+                                        word_occurrence.m_role = role;
                                         word_occurrence.m_source_name = source_name;
                                         word_occurrence.m_source_occurrence = source_occurrence;
                                         word_occurrence.m_monad = pTokenMO->getMonads().first();

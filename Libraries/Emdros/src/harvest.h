@@ -69,7 +69,7 @@ public:
     int m_chapter;
     int m_verse;
     std::string m_source_name;
-    std::string m_source_color;
+    int m_role;
     int m_source_occurrence;
     monad_m m_monad;
 public:
