@@ -205,6 +205,47 @@ public class EmdrosModule extends ReactContextBaseJavaModule {
     thread.start();
   }
 
+  @ReactMethod
+  public void wordOccurrences(ReadableMap options, final Promise promise) {
+    String name = options.getString("name");
+    final Emdros emdros = this.openedDatabases.get(name);
+
+    final String query = options.hasKey("query") ? options.getString("query") : "";
+
+    Thread thread = new Thread(new Runnable(){
+      @Override
+      public void run(){
+        Map<String,Map<String,Object>> wordOccurrenceMap = emdros.wordOccurrencesForQuery(query);
+        Set<Entry<String,Map<String,Object>>> wordOccurrenceEntries = wordOccurrenceMap.entrySet();
+
+        WritableArray wordOccurrences = Arguments.createArray();
+        for (Entry<String,Map<String,Object>> wordOccurrenceEntry: wordOccurrenceEntries) {
+          Map<String,Object> wordOccurrenceMap = wordOccurrenceEntry.getValue();
+
+          WritableMap wordOccurrence = Arguments.createMap();
+          wordOccurrence.putDouble("id", wordMap.get("id"));
+          wordOccurrence.putString("DJHRef", wordMap.get("DJHRef"));
+          wordOccurrence.putInt("chapter", wordMap.get("chapter"));
+          wordOccurrence.putInt("verse", wordMap.get("verse"));
+          wordOccurrence.putInt("roleID", wordMap.get("roleID"));
+          wordOccurrence.putString("name", wordMap.get("name"));
+          wordOccurrence.putInt("number", wordMap.get("number"));
+          wordOccurrence.putInt("monad", wordMap.get("monad"));
+
+          WritableMap monadSet = Arguments.createMap();
+          monadSet.putDouble("first", wordMap.get("firstMonad"));
+          monadSet.putDouble("last", wordMap.get("lastMonad"));
+          wordOccurrence.putMap("monadSet", monadSet);
+
+          wordOccurrences.pushMap(wordOccurrence);
+        }
+
+        promise.resolve(wordOccurrences);
+      }
+    });
+    thread.start();
+  }
+
   @Override
   public Map<String, Object> getConstants() {
     final Map<String, Object> constants = new HashMap<>();

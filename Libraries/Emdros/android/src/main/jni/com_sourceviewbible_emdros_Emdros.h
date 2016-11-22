@@ -41,6 +41,14 @@ JNIEXPORT jobject JNICALL Java_com_sourceviewbible_emdros_Emdros_wordCountsForCo
 
 /*
  * Class:     com_sourceviewbible_emdros_Emdros
+ * Method:    wordOccurrencesForQuery
+ * Signature: (Ljava/lang/String;)Ljava/util/Map;
+ */
+JNIEXPORT jobject JNICALL Java_com_sourceviewbible_emdros_Emdros_wordOccurrencesForQuery
+  (JNIEnv *, jobject, jstring);
+
+/*
+ * Class:     com_sourceviewbible_emdros_Emdros
  * Method:    dispose
  * Signature: ()V
  */

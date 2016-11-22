@@ -268,6 +268,110 @@ jobject Java_com_sourceviewbible_emdros_Emdros_wordCountsForContext(JNIEnv *env,
   return wordCounts;
 }
 
+jobject Java_com_sourceviewbible_emdros_Emdros_wordOccurrencesForQuery(JNIEnv *env, jobject obj, jstring jquery) {
+  EmdrosEnv *emdrosEnv = getEmdrosEnv<EmdrosEnv>(env, obj);
+
+  std::string query;
+  GetJStringContent(env, jquery, query);
+
+  std::string errorMessage;
+  WordOccurrenceSet wordOccurrenceSet;
+  bool result = getWordOccurrencesForQuery(emdrosEnv, query, wordOccurrenceSet, errorMessage);
+
+  jclass hashmapClazz = env->FindClass("java/util/HashMap");
+  jmethodID hashMapInit = env->GetMethodID(hashmapClazz, "<init>", "()V");
+  jmethodID putMethod = env->GetMethodID(hashmapClazz, "put", "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;");
+
+  jclass integerClazz = env->FindClass("java/lang/Integer");
+  jmethodID integerConstructID = env->GetMethodID(integerClazz, "<init>", "(I)V");
+
+  jobject idKey = env->NewStringUTF("id");
+  jobject DJHRefKey = env->NewStringUTF("DJHRef");
+  jobject chapterKey = env->NewStringUTF("chapter");
+  jobject verseKey = env->NewStringUTF("verse");
+  jobject roleIDKey = env->NewStringUTF("roleID");
+  jobject nameKey = env->NewStringUTF("name");
+  jobject numberKey = env->NewStringUTF("number");
+  jobject monadKey = env->NewStringUTF("monad");
+  jobject firstMonadKey = env->NewStringUTF("firstMonad");
+  jobject lastMonadKey = env->NewStringUTF("lastMonad");
+
+  jobject wordOccurrences = env->NewObject(hashmapClazz, hashMapInit);
+  for (WordOccurrenceSet::const_iterator iterator = wordOccurrenceSet.begin(); iterator != wordOccurrenceSet.end(); ++iterator) {
+    WordOccurrence wordOccurrence = *iterator;
+
+    jobject id = env->NewObject(integerClazz, integerConstructID, wordOccurrence.m_monad);
+
+    jobject wordOccurrenceMap = env->NewObject(hashmapClazz, hashMapInit);
+
+    jobject idPut = env->CallObjectMethod(wordOccurrenceMap, putMethod, idKey, id);
+    env->DeleteLocalRef(idPut); idPut = NULL;
+
+    jobject DJHRef = env->NewStringUTF(wordOccurrence.m_DJHRef.c_str());
+    jobject DJHRefPut = env->CallObjectMethod(wordOccurrenceMap, putMethod, DJHRefKey, DJHRef);
+    env->DeleteLocalRef(DJHRef); DJHRef = NULL;
+    env->DeleteLocalRef(DJHRefPut); DJHRefPut = NULL;
+
+    jobject chapter = env->NewObject(integerClazz, integerConstructID, wordOccurrence.m_chapter);
+    jobject chapterPut = env->CallObjectMethod(wordOccurrenceMap, putMethod, chapterKey, chapter);
+    env->DeleteLocalRef(chapter); chapter = NULL;
+    env->DeleteLocalRef(chapterPut); chapterPut = NULL;
+
+    jobject verse = env->NewObject(integerClazz, integerConstructID, wordOccurrence.m_verse);
+    jobject versePut = env->CallObjectMethod(wordOccurrenceMap, putMethod, verseKey, verse);
+    env->DeleteLocalRef(verse); verse = NULL;
+    env->DeleteLocalRef(versePut); versePut = NULL;
+
+    jobject roleID = env->NewObject(integerClazz, integerConstructID, wordOccurrence.m_role);
+    jobject roleIDPut = env->CallObjectMethod(wordOccurrenceMap, putMethod, roleIDKey, roleID);
+    env->DeleteLocalRef(roleID); roleID = NULL;
+    env->DeleteLocalRef(roleIDPut); roleIDPut = NULL;
+
+    jobject name = env->NewStringUTF(wordOccurrence.m_source_name.c_str());
+    jobject namePut = env->CallObjectMethod(wordOccurrenceMap, putMethod, nameKey, name);
+    env->DeleteLocalRef(name); name = NULL;
+    env->DeleteLocalRef(namePut); namePut = NULL;
+
+    jobject number = env->NewObject(integerClazz, integerConstructID, wordOccurrence.m_source_occurrence);
+    jobject numberPut = env->CallObjectMethod(wordOccurrenceMap, putMethod, numberKey, number);
+    env->DeleteLocalRef(number); number = NULL;
+    env->DeleteLocalRef(numberPut); numberPut = NULL;
+
+    jobject monad = env->NewObject(integerClazz, integerConstructID, wordOccurrence.m_monad);
+    jobject monadPut = env->CallObjectMethod(wordOccurrenceMap, putMethod, monadKey, monad);
+    env->DeleteLocalRef(monad); monad = NULL;
+    env->DeleteLocalRef(monadPut); monadPut = NULL;
+
+    jobject firstMonad = env->NewObject(integerClazz, integerConstructID, wordOccurrence.m_first_monad);
+    jobject firstMonadPut = env->CallObjectMethod(wordOccurrenceMap, putMethod, firstMonadKey, firstMonad);
+    env->DeleteLocalRef(firstMonad); firstMonad = NULL;
+    env->DeleteLocalRef(firstMonadPut); firstMonadPut = NULL;
+
+    jobject lastMonad = env->NewObject(integerClazz, integerConstructID, wordOccurrence.m_last_monad);
+    jobject lastMonadPut = env->CallObjectMethod(wordOccurrenceMap, putMethod, lastMonadKey, lastMonad);
+    env->DeleteLocalRef(lastMonad); lastMonad = NULL;
+    env->DeleteLocalRef(lastMonadPut); lastMonadPut = NULL;
+
+    jobject wordOccurrenceMapPut = env->CallObjectMethod(wordOccurrences, putMethod, id, wordOccurrenceMap);
+    env->DeleteLocalRef(id); id = NULL;
+    env->DeleteLocalRef(wordOccurrenceMap); wordOccurrenceMap = NULL;
+    env->DeleteLocalRef(wordOccurrenceMapPut); wordOccurrenceMapPut = NULL;
+  }
+
+  env->DeleteLocalRef(idKey); idKey = NULL;
+  env->DeleteLocalRef(DJHRefKey); DJHRefKey = NULL;
+  env->DeleteLocalRef(chapterKey); chapterKey = NULL;
+  env->DeleteLocalRef(verseKey); verseKey = NULL;
+  env->DeleteLocalRef(roleIDKey); roleIDKey = NULL;
+  env->DeleteLocalRef(nameKey); nameKey = NULL;
+  env->DeleteLocalRef(numberKey); numberKey = NULL;
+  env->DeleteLocalRef(monadKey); monadKey = NULL;
+  env->DeleteLocalRef(firstMonadKey); firstMonadKey = NULL;
+  env->DeleteLocalRef(lastMonadKey); lastMonadKey = NULL;
+
+  return wordOccurrences;
+}
+
 
 void Java_com_sourceviewbible_emdros_Emdros_dispose(JNIEnv *env, jobject obj) {
   // EmdrosEnv *emdrosEnv = getEmdrosEnv<EmdrosEnv>(env, obj);

@@ -901,6 +901,8 @@ export class WordOccurrence {
   static async occurrences(word: string, options: Object) {
     return new Promise((resolve, reject) => {
       Emdros.wordOccurrences(word, options).then((result, error) => {
+        console.log(result);
+        
         if (result) {
           const occurrences = result.map(occurrence => {
             const book = Book.findByDJHRef(occurrence.DJHRef);

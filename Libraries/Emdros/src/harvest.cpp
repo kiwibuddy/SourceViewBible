@@ -169,7 +169,10 @@ bool getWordCountsInSOM(EmdrosEnv *pEE, const SetOfMonads& substrate, const std:
 
 bool getBookChapterVerseSOMForMonad(EmdrosEnv *pEE, const monad_m monad, std::string& book, int& chapter, int& verse, SetOfMonads& som)
 {
-    std::string query = "GET OBJECTS HAVING MONADS IN { " + std::to_string(monad) + " } [Verse GET djhbook, chapter, verse_start]";
+    std::stringstream monadstring;
+    monadstring << monad;
+    
+    std::string query = "GET OBJECTS HAVING MONADS IN { " + monadstring.str() + " } [Verse GET djhbook, chapter, verse_start]";
     bool bCompileResult = false;
     bool bDBResult = pEE->executeString(query, bCompileResult, false, false, 0);
     if (bDBResult && bCompileResult) {
