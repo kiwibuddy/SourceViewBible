@@ -282,14 +282,14 @@ const std::set<std::string> RCTStopwords = {"the","and","of","to","you","will","
         if (result) {
             for (auto const& iterator : wordOccurrenceSet) {
                 NSDictionary *wordOcccurrence = @{
-                                            @"DJHRef": [NSString stringWithUTF8String:iterator.m_DJHRef.c_str()],
-                                            @"chapter": @(iterator.m_chapter),
-                                            @"verse": @(iterator.m_verse),
-                                            @"role": @(iterator.m_role),
-                                            @"source_name": [NSString stringWithUTF8String:iterator.m_source_name.c_str()],
-                                            @"source_occurrence": @(iterator.m_source_occurrence),
-                                            @"monad": @(iterator.m_monad)
-                                            };
+                    @"DJHRef": [NSString stringWithUTF8String:iterator.m_DJHRef.c_str()],
+                    @"chapter": @(iterator.m_chapter),
+                    @"verse": @(iterator.m_verse),
+                    @"roleID": @(iterator.m_role),
+                    @"name": [NSString stringWithUTF8String:iterator.m_source_name.c_str()],
+                    @"number": @(iterator.m_source_occurrence),
+                    @"monad": @(iterator.m_monad)
+                };
                 [wordOccurrences addObject:wordOcccurrence];
             }
         }
