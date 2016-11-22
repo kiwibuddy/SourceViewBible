@@ -285,6 +285,10 @@ const std::set<std::string> RCTStopwords = {"the","and","of","to","you","will","
                                             @"DJHRef": [NSString stringWithUTF8String:iterator.m_DJHRef.c_str()],
                                             @"chapter": @(iterator.m_chapter),
                                             @"verse": @(iterator.m_verse),
+                                            @"source_color": [NSString stringWithUTF8String:iterator.m_source_color.c_str()],
+                                            @"source_name": [NSString stringWithUTF8String:iterator.m_source_name.c_str()],
+                                            @"source_occurrence": @(iterator.m_source_occurrence),
+                                            @"monad": @(iterator.m_monad)
                                             };
                 [wordOccurrences addObject:wordOcccurrence];
             }

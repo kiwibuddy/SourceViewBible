@@ -366,8 +366,7 @@ m_verse(0),
 m_source_name(),
 m_source_color(),
 m_source_occurrence(0),
-m_first(0),
-m_last(0)
+m_monad(0)
 {
 }
 
@@ -391,7 +390,7 @@ WordOccurrence& WordOccurrence::operator=(const WordOccurrence& other)
 
 bool WordOccurrence::operator<(const WordOccurrence& rhs) const
 {
-    return m_first < rhs.m_first;  //assume that you compare the record based on a
+    return m_monad < rhs.m_monad;
 }
 
 void WordOccurrence::assign(const WordOccurrence& other)
@@ -402,8 +401,7 @@ void WordOccurrence::assign(const WordOccurrence& other)
     m_source_name = other.m_source_name;
     m_source_color = other.m_source_color;
     m_source_occurrence = other.m_source_occurrence;
-    m_first = other.m_first;
-    m_last = other.m_last;
+    m_monad = other.m_monad;
 }
 
 
@@ -422,39 +420,73 @@ bool getWordOccurrencesForQuery(EmdrosEnv *pEE,
     } else {
         Sheaf *pSheaf = pEE->takeOverSheaf();
         
+
         SheafConstIterator context_sheaf_ci = pSheaf->const_iterator();
         while (context_sheaf_ci.hasNext()) {
+            
+            // Loop through all the context objects
             const Straw *pStraw = context_sheaf_ci.next();
             StrawConstIterator context_straw_ci = pStraw->const_iterator();
             while (context_straw_ci.hasNext()) {
                 const MatchedObject *pContextMO = context_straw_ci.next();
                 
                 
-                
-                WordOccurrence word_occurrence;
-                
-                
-                SheafConstIterator token_sheaf_ci = pContextMO->getSheaf()->const_iterator();
-                while (token_sheaf_ci.hasNext()) {
-                    const Straw *pStraw = token_sheaf_ci.next();
-                    StrawConstIterator token_straw_ci = pStraw->const_iterator();
-                    while (token_straw_ci.hasNext()) {
-                        const MatchedObject *pTokenMO = token_straw_ci.next();
-                        word_occurrence.m_DJHRef = pTokenMO->getFeatureAsString(0);
-                        word_occurrence.m_chapter = pTokenMO->getFeatureAsLong(1);
-                        word_occurrence.m_verse = pTokenMO->getFeatureAsLong(2);
+                // Loop through all the source sheafs
+                SheafConstIterator source_sheaf_ci = pContextMO->getSheaf()->const_iterator();
+                while (source_sheaf_ci.hasNext()) {
+                    
+                    // Loop through all the source straws
+                    const Straw *pStraw = source_sheaf_ci.next();
+                    StrawConstIterator source_straw_ci = pStraw->const_iterator();
+                    while (source_straw_ci.hasNext()) {
+                        const MatchedObject *pSourceMO = source_straw_ci.next();
                         
-//                        ++wc.m_word_count;
-//                        
-//                        
-//                        if (pTokenMO->getFeatureAsString(0) != "false") {
-//                            ++wc.m_Family;
-//                        }
+                        const std::string source_color = pSourceMO->getFeatureAsString(0);
+                        const std::string source_name = pSourceMO->getFeatureAsString(1);
+                        const int source_occurrence = (int)pSourceMO->getFeatureAsLong(2);
+                        
+                        // Loop through all the verse sheafs
+                        SheafConstIterator verse_sheaf_ci = pSourceMO->getSheaf()->const_iterator();
+                        while (verse_sheaf_ci.hasNext()) {
+                            
+                            // Loop through all the verse straws
+                            const Straw *pStraw = verse_sheaf_ci.next();
+                            StrawConstIterator verse_straw_ci = pStraw->const_iterator();
+                            while (verse_straw_ci.hasNext()) {
+                                const MatchedObject *pVerseMO = verse_straw_ci.next();
+                                
+                                const std::string djhref = pVerseMO->getFeatureAsString(0);
+                                const int chapter = (int)pVerseMO->getFeatureAsLong(1);
+                                const int verse = (int)pVerseMO->getFeatureAsLong(2);
+                                
+                                // Loop through all the token sheafs
+                                SheafConstIterator token_sheaf_ci = pVerseMO->getSheaf()->const_iterator();
+                                while (token_sheaf_ci.hasNext()) {
+                                    
+                                    // Loop through all the token straws
+                                    const Straw *pStraw = token_sheaf_ci.next();
+                                    StrawConstIterator token_straw_ci = pStraw->const_iterator();
+                                    while (token_straw_ci.hasNext()) {
+                                        const MatchedObject *pTokenMO = token_straw_ci.next();
+                                        
+                                        WordOccurrence word_occurrence;
+                                        word_occurrence.m_DJHRef = djhref;
+                                        word_occurrence.m_chapter = chapter;
+                                        word_occurrence.m_verse = verse;
+                                        word_occurrence.m_source_color = source_color;
+                                        word_occurrence.m_source_name = source_name;
+                                        word_occurrence.m_source_occurrence = source_occurrence;
+                                        word_occurrence.m_monad = pTokenMO->getMonads().first();
+                                        
+                                        result.insert(word_occurrence);
+                                    }
+                                }
+                            }
+                        }
+                        
                     }
                 }
                 
-                // std::cerr << "UP204: wc.m_word_count = " << wc.m_word_count << "\n";
-                result.insert(word_occurrence);
             }
         }
         
