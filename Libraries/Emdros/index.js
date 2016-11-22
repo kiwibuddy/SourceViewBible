@@ -79,10 +79,12 @@ export default class Emdros {
     const query = `SELECT ALL OBJECTS
       ${monadSet}
       WHERE
-      [Source GET source_color, source_name, source_occurrence
-        [Verse
-          GET djhbook, chapter, verse_start
-          [Token surface_fts="${word}"]
+      [Book
+        [Source GET source_color, source_name, source_occurrence
+          [Verse
+            GET djhbook, chapter, verse_start
+            [Token surface_fts="${word}"]
+          ]
         ]
       ]
       GO`;
