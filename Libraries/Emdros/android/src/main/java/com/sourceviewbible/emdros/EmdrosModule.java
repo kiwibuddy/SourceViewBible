@@ -83,8 +83,13 @@ public class EmdrosModule extends ReactContextBaseJavaModule {
     Thread thread = new Thread(new Runnable(){
       @Override
       public void run(){
-        String string = emdros.string(from, to, stylesheet);
-        promise.resolve(string);
+        try {
+          String string = emdros.string(from, to, stylesheet);
+          promise.resolve(string);
+        } catch(Exception e) {
+          Log.v("Emdros", "uh oh: " + e.toString());
+          promise.resolve("");
+        }
       }
     });
     thread.start();
