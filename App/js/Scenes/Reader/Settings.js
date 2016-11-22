@@ -23,7 +23,7 @@ import {
 import Icon from '../../Components/Common/Icon';
 
 import { NavigationHeader, NavigationBarButton } from '../../Components/Navigation';
-import { BACK, readerURL } from '../../Navigation';
+import { BACK, readerURL, readerSettingsURL, sphereInAppPurchaseURL } from '../../Navigation';
 
 import { Preference } from '../../Preferences';
 import { ReaderBaseFontSize, ReaderFontStepSize, ReaderWebFontConversion } from '../../Common/Constants';
@@ -173,6 +173,12 @@ export default class Settings extends Component {
 
   _onPressSphere = (sphere: string) => {
     const { spheres } = this.state;
+
+    const purchased = Preference.booleanForKey(Preference.Keys.Spheres.Purchased);
+    if (!purchased) {
+      this.props.navigate(sphereInAppPurchaseURL({title: Localizable.t('spheres.text'), redirect: readerSettingsURL({title: Localizable.t('settings'), modal: true}, {replace: true}), modal: true}));
+      return;
+    }
 
     const sphereIndex = spheres.indexOf(sphere);
     if (sphereIndex == -1) {
