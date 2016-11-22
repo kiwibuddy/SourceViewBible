@@ -296,7 +296,6 @@ const std::set<std::string> RCTStopwords = {"the","and","of","to","you","will","
             }
         }
         
-        
         if (completion) completion([[NSArray alloc] initWithArray:wordOccurrences], nil);
     } catch (EMdFDBException e) {
         std::cerr << "ERROR: EMdFDBException (Database error)..." << std::endl;

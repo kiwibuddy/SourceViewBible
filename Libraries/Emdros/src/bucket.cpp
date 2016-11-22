@@ -1177,48 +1177,24 @@ TokenBucket::~TokenBucket()
 
 void TokenBucket::countInSheaf(const Sheaf* pSheaf)
 {
-    // Loop through all the source sheafs
-    SheafConstIterator source_sheaf_ci = pSheaf->const_iterator();
-    while (source_sheaf_ci.hasNext()) {
+    SheafConstIterator sheaf_ci = pSheaf->const_iterator();
+    while (sheaf_ci.hasNext()) {
+        const Straw *pStraw = sheaf_ci.next();
+        StrawConstIterator straw_ci = pStraw->const_iterator();
         
-        // Loop through all the source straws
-        const Straw *pStraw = source_sheaf_ci.next();
-        StrawConstIterator source_straw_ci = pStraw->const_iterator();
-        while (source_straw_ci.hasNext()) {
-            const MatchedObject *pSourceMO = source_straw_ci.next();
+        while (straw_ci.hasNext()) {
+            const MatchedObject *pMO = straw_ci.next();
             
-            // Loop through all the verse sheafs
-            SheafConstIterator verse_sheaf_ci = pSourceMO->getSheaf()->const_iterator();
-            while (verse_sheaf_ci.hasNext()) {
-                
-                // Loop through all the verse straws
-                const Straw *pStraw = verse_sheaf_ci.next();
-                StrawConstIterator verse_straw_ci = pStraw->const_iterator();
-                while (verse_straw_ci.hasNext()) {
-                    const MatchedObject *pVerseMO = verse_straw_ci.next();
-        
-                    SheafConstIterator sheaf_ci = pVerseMO->getSheaf()->const_iterator();
-                    while (sheaf_ci.hasNext()) {
-                        const Straw *pStraw = sheaf_ci.next();
-                        StrawConstIterator straw_ci = pStraw->const_iterator();
-                        
-                        while (straw_ci.hasNext()) {
-                            const MatchedObject *pMO = straw_ci.next();
-                            
-                            std::string surface_fts = pMO->getFeatureAsString(0);
-                            
-                            const bool is_stop_word = m_stop_word_set.find(surface_fts) != m_stop_word_set.end();
-                            if (!is_stop_word) {
-                                String2IntMap::iterator it = m_token_count_map.find(surface_fts);
-                                if (it == m_token_count_map.end()) {
-                                    m_token_count_map[surface_fts] = 1;
-                                    
-                                } else {
-                                    m_token_count_map[surface_fts] = it->second + 1;
-                                }
-                            }
-                        }
-                    }
+            std::string surface_fts = pMO->getFeatureAsString(0);
+            
+            const bool is_stop_word = m_stop_word_set.find(surface_fts) != m_stop_word_set.end();
+            if (!is_stop_word) {
+                String2IntMap::iterator it = m_token_count_map.find(surface_fts);
+                if (it == m_token_count_map.end()) {
+                    m_token_count_map[surface_fts] = 1;
+                    
+                } else {
+                    m_token_count_map[surface_fts] = it->second + 1;
                 }
             }
         }

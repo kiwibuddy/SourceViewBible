@@ -83,10 +83,7 @@ export default class Emdros {
       WHERE
       [${context}
         [Source GET source_color, source_name, source_occurrence
-          [Verse
-            GET djhbook, chapter, verse_start
-            [Token ${sphere} surface_fts="${word}"]
-          ]
+          [Token ${sphere} surface_fts="${word}"]
         ]
       ]
       GO`;

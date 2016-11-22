@@ -25,6 +25,8 @@ bool getMonadsForBook(EmdrosEnv *pEE, const std::string& book, monad_m& first_mo
 
 bool getSOMForQuery(EmdrosEnv *pEE, const std::string& query, bool bUseOnlyFocusObjects, SetOfMonads& som);
 
+bool getBookChapterVerseSOMForMonad(EmdrosEnv *pEE, const monad_m monad, std::string& book, int& chapter, int& verse, SetOfMonads& som);
+
 std::string countInBuckets(EmdrosEnv *pEE, const std::string& json_string, const SetOfMonads& substrate, std::string& error_message);
 
 

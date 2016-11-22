@@ -145,7 +145,7 @@ std::string countInBuckets(EmdrosEnv *pEE, const std::string& bucket_specificati
 
 bool getWordCountsInSOM(EmdrosEnv *pEE, const SetOfMonads& substrate, const std::set<std::string>& stop_word_set, String2IntMap& result, std::string& error_message)
 {
-	std::string query = "SELECT ALL OBJECTS IN " + substrate.toString() + "WHERE [Source [Verse [Token GET surface_fts] ] ]";
+	std::string query = "SELECT ALL OBJECTS IN " + substrate.toString() + "WHERE [Token GET surface_fts]";
 
 	bool bCompileResult = false;
 	bool bDBResult = pEE->executeString(query, bCompileResult, false, false, 0);
@@ -167,6 +167,40 @@ bool getWordCountsInSOM(EmdrosEnv *pEE, const SetOfMonads& substrate, const std:
 	}
 }
 
+bool getBookChapterVerseSOMForMonad(EmdrosEnv *pEE, const monad_m monad, std::string& book, int& chapter, int& verse, SetOfMonads& som)
+{
+    std::string query = "GET OBJECTS HAVING MONADS IN { " + std::to_string(monad) + " } [Verse GET djhbook, chapter, verse_start]";
+    bool bCompileResult = false;
+    bool bDBResult = pEE->executeString(query, bCompileResult, false, false, 0);
+    if (bDBResult && bCompileResult) {
+        if (pEE->isFlatSheaf()) {
+            FlatSheaf *pSheaf = pEE->takeOverFlatSheaf();
+            FlatSheafConstIterator sheaf_ci = pSheaf->const_iterator();
+            while (sheaf_ci.hasNext()) {
+                const FlatStraw *pStraw = sheaf_ci.next();
+                FlatStrawConstIterator straw_ci = pStraw->const_iterator();
+                while (straw_ci.hasNext()) {
+                    const MatchedObject *pMO = straw_ci.next();
+                    book = pMO->getFeatureAsString(0);
+                    chapter = (int)pMO->getFeatureAsLong(1);
+                    verse = (int)pMO->getFeatureAsLong(2);
+                    pMO->getSOM(som, false);
+                }
+            }
+            
+            delete pSheaf;
+            return true;
+        } else if (pEE->isSheaf()) {
+            // Don't currently know how to do sheaves.
+            return false;
+        } else {
+            // Don't currently know how to do tables.
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
 
 
 
@@ -447,45 +481,36 @@ bool getWordOccurrencesForQuery(EmdrosEnv *pEE,
                         const std::string source_name = pSourceMO->getFeatureAsString(1);
                         const int source_occurrence = (int)pSourceMO->getFeatureAsLong(2);
                         
-                        // Loop through all the verse sheafs
-                        SheafConstIterator verse_sheaf_ci = pSourceMO->getSheaf()->const_iterator();
-                        while (verse_sheaf_ci.hasNext()) {
+                        // Loop through all the token sheafs
+                        SheafConstIterator token_sheaf_ci = pSourceMO->getSheaf()->const_iterator();
+                        while (token_sheaf_ci.hasNext()) {
                             
-                            // Loop through all the verse straws
-                            const Straw *pStraw = verse_sheaf_ci.next();
-                            StrawConstIterator verse_straw_ci = pStraw->const_iterator();
-                            while (verse_straw_ci.hasNext()) {
-                                const MatchedObject *pVerseMO = verse_straw_ci.next();
+                            // Loop through all the token straws
+                            const Straw *pStraw = token_sheaf_ci.next();
+                            StrawConstIterator token_straw_ci = pStraw->const_iterator();
+                            while (token_straw_ci.hasNext()) {
+                                const MatchedObject *pTokenMO = token_straw_ci.next();
                                 
-                                const std::string djhref = pVerseMO->getFeatureAsString(0);
-                                const int chapter = (int)pVerseMO->getFeatureAsLong(1);
-                                const int verse = (int)pVerseMO->getFeatureAsLong(2);
-                                const SetOfMonads monads = pVerseMO->getMonads();
+                                const monad_m monad = pTokenMO->getMonads().first();
+                                std::string djhref;// = pVerseMO->getFeatureAsString(0);
+                                int chapter = 0;// = (int)pVerseMO->getFeatureAsLong(1);
+                                int verse = 0;// = (int)pVerseMO->getFeatureAsLong(2);
+                                SetOfMonads monads;// = pVerseMO->getMonads();
                                 
-                                // Loop through all the token sheafs
-                                SheafConstIterator token_sheaf_ci = pVerseMO->getSheaf()->const_iterator();
-                                while (token_sheaf_ci.hasNext()) {
-                                    
-                                    // Loop through all the token straws
-                                    const Straw *pStraw = token_sheaf_ci.next();
-                                    StrawConstIterator token_straw_ci = pStraw->const_iterator();
-                                    while (token_straw_ci.hasNext()) {
-                                        const MatchedObject *pTokenMO = token_straw_ci.next();
-                                        
-                                        WordOccurrence word_occurrence;
-                                        word_occurrence.m_DJHRef = djhref;
-                                        word_occurrence.m_chapter = chapter;
-                                        word_occurrence.m_verse = verse;
-                                        word_occurrence.m_role = role;
-                                        word_occurrence.m_source_name = source_name;
-                                        word_occurrence.m_source_occurrence = source_occurrence;
-                                        word_occurrence.m_monad = pTokenMO->getMonads().first();
-                                        word_occurrence.m_first_monad = monads.first();
-                                        word_occurrence.m_last_monad = monads.last();
-                                        
-                                        result.insert(word_occurrence);
-                                    }
-                                }
+                                getBookChapterVerseSOMForMonad(pEE, monad, djhref, chapter, verse, monads);
+                                
+                                WordOccurrence word_occurrence;
+                                word_occurrence.m_DJHRef = djhref;
+                                word_occurrence.m_chapter = chapter;
+                                word_occurrence.m_verse = verse;
+                                word_occurrence.m_role = role;
+                                word_occurrence.m_source_name = source_name;
+                                word_occurrence.m_source_occurrence = source_occurrence;
+                                word_occurrence.m_monad = monad;
+                                word_occurrence.m_first_monad = monads.first();
+                                word_occurrence.m_last_monad = monads.last();
+                                
+                                result.insert(word_occurrence);
                             }
                         }
                     }
