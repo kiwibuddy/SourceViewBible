@@ -893,7 +893,7 @@ export class WordOccurrence {
             const role = Role.findByID(occurrence.roleID);
             return (
               {
-                id: occurrence.monad,
+                id: occurrence.id,
                 book,
                 name: occurrence.name,
                 number: occurrence.number,

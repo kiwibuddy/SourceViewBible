@@ -65,6 +65,7 @@ extern bool getWordCountsInContext(EmdrosEnv *pEE,
 
 class WordOccurrence {
 public:
+    id_d_t m_id;
     std::string m_DJHRef;
     int m_chapter;
     int m_verse;
