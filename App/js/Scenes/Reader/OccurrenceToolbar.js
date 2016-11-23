@@ -22,36 +22,52 @@ type Props = {
   onPressDone: Function,
 };
 
+type State = {
+  occurrenceIndex: number,
+}
+
 export default class OccurrenceToolbar extends Component {
   props: Props;
+  state: State;
+
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      occurrenceIndex: props.occurrenceIndex
+    };
+  }
 
   render() {
-    const { book, occurrenceIndex, occurrences, occurrencesRoute } = this.props;
+    const { occurrences, occurrencesRoute, onNavigate } = this.props;
+    const { occurrenceIndex } = this.state;
 
     const current = occurrenceIndex + 1;
     const total = occurrences.length;
 
-    let currentRoute = null;
     const occurrence = occurrences[occurrenceIndex];
+    let currentRoute = null;
     if (occurrence) {
       const book = occurrence.book;
       const bsoReference = Localizable.t('bso-reference', {book: book.name, source: occurrence.name, number: occurrence.number});
       currentRoute = readerURL({bookID: book.id, anchor: `occurrence-${occurrence.firstMonad}`, title: book.name, description: bsoReference});
     }
 
+    let previousOccurrence = null;
     let previousRoute = null;
     if (occurrenceIndex > 0) {
       const previousOccurrenceIndex = occurrenceIndex - 1;
-      const previousOccurrence = occurrences[previousOccurrenceIndex];
+      previousOccurrence = occurrences[previousOccurrenceIndex];
       const book = previousOccurrence.book;
       const bsoReference = Localizable.t('bso-reference', {book: book.name, source: previousOccurrence.name, number: previousOccurrence.number});
       previousRoute = readerURL({bookID: book.id, anchor: `occurrence-${previousOccurrence.firstMonad}`, title: book.name, description: bsoReference, occurrenceIndex: previousOccurrenceIndex, occurrences, occurrencesRoute});
     }
 
+    let nextOccurrence = null;
     let nextRoute = null;
     if (occurrenceIndex < total - 1) {
       const nextOccurrenceIndex = occurrenceIndex + 1;
-      const nextOccurrence = occurrences[nextOccurrenceIndex];
+      nextOccurrence = occurrences[nextOccurrenceIndex];
       const book = nextOccurrence.book;
       const bsoReference = Localizable.t('bso-reference', {book: book.name, source: nextOccurrence.name, number: nextOccurrence.number});
       nextRoute = readerURL({bookID: book.id, anchor: `occurrence-${nextOccurrence.firstMonad}`, title: book.name, description: bsoReference, occurrenceIndex: nextOccurrenceIndex, occurrences, occurrencesRoute});
@@ -61,15 +77,35 @@ export default class OccurrenceToolbar extends Component {
       <Toolbar>
         <View style={{flex: 1, flexDirection: 'row'}}>
           <ToolbarButton
-            disabled={previousRoute == null}
+            disabled={previousOccurrence == null}
             imageSource={require('../../Images/common/previous.png')}
-            onPress={() => previousRoute && this._navigate(previousRoute)}
+            onPress={() => {
+              if (previousOccurrence) {
+                if (this.props.book.id === previousOccurrence.book.id) {
+                  onNavigate(previousOccurrence);
+                } else if (previousRoute) {
+                  this._navigate(previousRoute);
+                }
+
+                this.setState({occurrenceIndex: occurrenceIndex - 1});
+              }
+            }}
             style={{width: 30, height: 30}}
           />
           <ToolbarButton
-            disabled={nextRoute == null}
+            disabled={nextOccurrence == null}
             imageSource={require('../../Images/common/next.png')}
-            onPress={() => nextRoute && this._navigate(nextRoute)}
+            onPress={() => {
+              if (nextOccurrence) {
+                if (this.props.book.id === nextOccurrence.book.id) {
+                  onNavigate(nextOccurrence);
+                } else if (nextRoute) {
+                  this._navigate(nextRoute);
+                }
+
+                this.setState({occurrenceIndex: occurrenceIndex + 1});
+              }
+            }}
             style={{width: 30, height: 30}}
           />
         </View>

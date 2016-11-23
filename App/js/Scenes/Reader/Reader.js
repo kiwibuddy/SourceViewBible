@@ -156,7 +156,7 @@ export default class Reader extends Component {
           key="OccurrenceToolbar"
           {...this.props}
           book={book}
-          onNavigate={() => {}}
+          onNavigate={this._onNavigateOccurrence}
           onPressDone={this._onPressOccurrencesDone}
         />
       );
@@ -238,6 +238,20 @@ export default class Reader extends Component {
     this.setState({showOcccurences: false});
     this._postMessage({
       action: 'done-occurrences'
+    });
+  };
+
+  _onNavigateOccurrence = (occurrence: Object) => {
+    const anchor = `occurrence-${occurrence.firstMonad}`;
+    const occurrences = [];
+    for (let monad = occurrence.firstMonad; monad <= occurrence.lastMonad; monad++) {
+      occurrences.push(`occurrence-${monad}`);
+    }
+
+    this._postMessage({
+      action: 'navigate-occurrence',
+      anchor,
+      occurrences
     });
   };
 

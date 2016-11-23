@@ -294,7 +294,13 @@ module.exports = `
             break;
 
           case 'done-occurrences':
-            doneOccurrences();
+            clearOccurrences();
+            break;
+
+          case 'navigate-occurrence':
+            location.hash = '#' + encodeURIComponent(data.anchor);
+            clearOccurrences();
+            selectOccurrences(data.occurrences);
             break;
 
           case 'cancel':
@@ -385,11 +391,21 @@ module.exports = `
         }
       }
 
-      function doneOccurrences() {
+      function clearOccurrences() {
         var occurrenceElements = document.querySelectorAll('.occurrence');
         for (var i = 0; i < occurrenceElements.length; i++) {
           var occurrenceElement = occurrenceElements[i];
           occurrenceElement.classList.remove('occurrence');
+        }
+      }
+
+      function selectOccurrences(occurrences) {
+        for (var i = 0; i < occurrences.length; i++) {
+          var occurrence = occurrences[i];
+          var occurrenceElement = document.getElementById(occurrence);
+          if (occurrenceElement) {
+            occurrenceElement.classList.add('occurrence');
+          }
         }
       }
 
