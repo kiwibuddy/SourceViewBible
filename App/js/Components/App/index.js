@@ -333,6 +333,8 @@ export default class App extends Component {
   };
 
   _replaceCurrentRoute = (route: any) => {
+    if (this._interceptRoute(route)) return;
+    
     const state = this.state.navigation;
     const currentRoute = state.routes[state.index];
 
