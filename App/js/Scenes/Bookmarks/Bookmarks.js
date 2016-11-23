@@ -311,9 +311,10 @@ export default class Bookmarks extends Component {
   async _getReferences() {
     const references = {};
 
-    for (let bookmark of Bookmark.all()) {
+    const bookmarks = Object.values(Bookmark.all());
+    for (let bookmark of bookmarks) {
       let scripture = '';
-      for (let reference of bookmark.references) {
+      for (let reference of Object.values(bookmark.references)) {
         const monadSet = {
           first: reference.firstMonad,
           last: reference.lastMonad

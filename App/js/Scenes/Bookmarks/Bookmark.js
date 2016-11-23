@@ -54,7 +54,7 @@ export default class BookmarkScene extends Component {
       this.state = {
         highlight: bookmark.highlight,
         note: bookmark.note,
-        references: bookmark.references,
+        references: Object.values(bookmark.references),
         scripture: null,
       }
     } else {
