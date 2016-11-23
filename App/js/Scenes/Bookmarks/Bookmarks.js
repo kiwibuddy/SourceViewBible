@@ -111,6 +111,7 @@ export default class Bookmarks extends Component {
     return (
       <SegmentedControl
         style={styles.segmentedControl}
+        buttonStyle={styles.segmentedControlButton}
         tintColor={Colors.tint}
         values={SEGMENTS}
         selectedIndex={this.state.selectedSegmentIndex}
@@ -447,6 +448,9 @@ const styles = StyleSheet.create({
           right: -32,
           marginLeft: -16,
           marginTop: 8,
+        },
+        segmentedControlButton: {
+          flex: null,
         },
       },
   }),

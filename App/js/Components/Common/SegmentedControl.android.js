@@ -11,6 +11,7 @@ const SEGMENT_REF = 'segment-';
 export default class SegmentedControl extends Component {
   static propTypes = {
     style: PropTypes.any,
+    buttonStyle: PropTypes.any,
     tintColor: ColorPropType,
     values: PropTypes.arrayOf(PropTypes.string),
     selectedIndex: PropTypes.number,
@@ -54,7 +55,7 @@ export default class SegmentedControl extends Component {
     return(
       <TouchableOpacity
         key={'button-' + title}
-        style={[styles.button, buttonStyle]}
+        style={[styles.button, this.props.buttonStyle, buttonStyle]}
         onPress={() => this._onValueChange(index, title)}
       >
         <Text style={[styles.buttonTitle, {color: tintColor}]}>{title.toLocaleUpperCase()}</Text>
@@ -77,13 +78,14 @@ const styles = StyleSheet.create({
   },
   buttons: {
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
   button: {
     flex: 1,
-    justifyContent: 'center',
     borderBottomWidth: 3,
     borderBottomColor: 'transparent',
+    justifyContent: 'center',
   },
   buttonTitle: {
     fontSize: 14,
