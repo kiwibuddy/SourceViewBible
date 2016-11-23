@@ -17,7 +17,9 @@ type Props = {
   navigate: Function,
   occurrenceIndex: number,
   occurrences: any,
-  occurrencesRoute: Object
+  occurrencesRoute: Object,
+  onNavigate: Function,
+  onPressDone: Function,
 };
 
 export default class OccurrenceToolbar extends Component {
@@ -79,7 +81,7 @@ export default class OccurrenceToolbar extends Component {
         <ToolbarButton
           title={Localizable.t('done')}
           titleStyle={StyleSheet.styles.navigationBar.doneButtonTitle}
-          onPress={() => currentRoute && this._navigate(currentRoute)}
+          onPress={this.props.onPressDone}
           style={{paddingHorizontal: 0, marginHorizontal: 0, marginRight: -20}}
         />
       </Toolbar>

@@ -68,6 +68,7 @@ type State = {
   scripture: any,
   loading: bool,
   references: any,
+  showOcccurences: boolean
 };
 
 export default class Reader extends Component {
@@ -102,6 +103,7 @@ export default class Reader extends Component {
       scripture: null,
       loading: true,
       references: null,
+      showOcccurences: (props.occurrences && props.occurrences.length > 0)
     };
   }
 
@@ -144,16 +146,18 @@ export default class Reader extends Component {
   }
 
   _renderToolbar = () => {
-    const { canGoBack, canGoForward, navigate, occurrences } = this.props;
-    const { references } = this.state;
+    const { canGoBack, canGoForward, navigate } = this.props;
+    const { references, showOcccurences } = this.state;
 
-    if (occurrences) {
+    if (showOcccurences) {
       const book = Book.findByID(this.state.bookID);
       return (
         <OccurrenceToolbar
           key="OccurrenceToolbar"
           {...this.props}
           book={book}
+          onNavigate={() => {}}
+          onPressDone={this._onPressOccurrencesDone}
         />
       );
     }
@@ -228,6 +232,13 @@ export default class Reader extends Component {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     Preference.setObjectForKey([], Preference.Keys.Reader.spheres);
     this._setScripture(bookID, anchor, occurrences, occurrenceIndex, true);
+  };
+
+  _onPressOccurrencesDone = () => {
+    this.setState({showOcccurences: false});
+    this._postMessage({
+      action: 'done-occurrences'
+    });
   };
 
   _onMessage = (event) => {

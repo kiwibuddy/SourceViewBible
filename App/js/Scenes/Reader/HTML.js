@@ -293,6 +293,10 @@ module.exports = `
             unhighlightSelectedVerses();
             break;
 
+          case 'done-occurrences':
+            doneOccurrences();
+            break;
+
           case 'cancel':
             deselectVerses();
             break;
@@ -311,7 +315,7 @@ module.exports = `
 
         var verses = [];
         var verseReferences = [];
-        var selectedVerseElements = document.querySelectorAll(".selection");
+        var selectedVerseElements = document.querySelectorAll('.selection');
         var previousChapter = 0;
         var previousVerse = 0;
         for (var i = 0; i < selectedVerseElements.length; i++) {
@@ -356,7 +360,7 @@ module.exports = `
       }
 
       function deselectVerses() {
-        var selectedVerseElements = document.querySelectorAll(".selection");
+        var selectedVerseElements = document.querySelectorAll('.selection');
         for (var i = 0; i < selectedVerseElements.length; i++) {
           var verseElement = selectedVerseElements[i];
           verseElement.classList.remove('selection');
@@ -364,7 +368,7 @@ module.exports = `
       }
 
       function highlightSelectedVerses() {
-        var selectedVerseElements = document.querySelectorAll(".selection");
+        var selectedVerseElements = document.querySelectorAll('.selection');
         for (var i = 0; i < selectedVerseElements.length; i++) {
           var verseElement = selectedVerseElements[i];
           verseElement.classList.remove('selection');
@@ -373,11 +377,19 @@ module.exports = `
       }
 
       function unhighlightSelectedVerses() {
-        var selectedVerseElements = document.querySelectorAll(".selection");
+        var selectedVerseElements = document.querySelectorAll('.selection');
         for (var i = 0; i < selectedVerseElements.length; i++) {
           var verseElement = selectedVerseElements[i];
           verseElement.classList.remove('selection');
           verseElement.classList.remove('highlight');
+        }
+      }
+
+      function doneOccurrences() {
+        var occurrenceElements = document.querySelectorAll('.occurrence');
+        for (var i = 0; i < occurrenceElements.length; i++) {
+          var occurrenceElement = occurrenceElements[i];
+          occurrenceElement.classList.remove('occurrence');
         }
       }
 
