@@ -41,8 +41,12 @@ export class Bookmark extends Realm.Object {
     Highlight: 'highlight'
   };
 
-  static all() {
-    return realm.objects('Bookmark').sorted('createdAt', true);
+  static all(options?: Object) {
+    let bookmarks = realm.objects('Bookmark');
+    if (options && options.type && options.type !== 'all') {
+      bookmarks = bookmarks.filtered('type = $0', options.type);
+    }
+    return bookmarks.sorted('createdAt', true);
   }
 
   static findByID(id: string): Discovery {

@@ -57,7 +57,8 @@ type State = {
   dataSource: any,
   selectedSegmentIndex: number,
   highlights: Array<Object>,
-  bookmarks: Array<Object>
+  bookmarks: Array<Object>,
+  references: Object
 };
 
 export default class Bookmarks extends Component {
@@ -74,13 +75,14 @@ export default class Bookmarks extends Component {
     this.state = {
       dataSource: dataSource,
       selectedSegmentIndex,
-      bookmarks: [],
-      highlights: []
+      bookmarks: Bookmark.all({type: Bookmark.Type.Bookmark}),
+      highlights: Bookmark.all({type: Bookmark.Type.Highlight}),
+      references: {}
     }
   }
 
   async componentDidMount() {
-    await this._getReferences();
+    this._getReferences();
 
     this.setState({
       dataSource: this._getDataSource(this.state.selectedSegmentIndex)
@@ -175,6 +177,7 @@ export default class Bookmarks extends Component {
     const noteStyle = (bookmark.hasNote ? styles.noteContainer : null);
     const noteButtonTitle = (bookmark.hasNote ? Localizable.t('edit-note') : Localizable.t('add-note'));
     const note = (bookmark.hasNote ? <Text style={StyleSheet.styles.cell.titlemedium}>{bookmark.note}</Text> : null);
+    const scripture = this.state.references[bookmark.id];
     return (
       <View>
         <View style={styles.row}>
@@ -182,7 +185,7 @@ export default class Bookmarks extends Component {
           <View style={styles.rowContent}>
             <TouchableOpacity style={styles.referenceContainer} onPress={() => this._navigateReader(bookmark.url)}>
               <View>
-                <Text numberOfLines={2} style={styles.body}>{bookmark.scripture}</Text>
+                <Text numberOfLines={2} style={styles.body}>{scripture}</Text>
                 <Text style={StyleSheet.styles.cell.subtitle}>{bookmark.description}</Text>
               </View>
             </TouchableOpacity>
@@ -212,13 +215,14 @@ export default class Bookmarks extends Component {
   };
 
   _renderHighlightRow = (highlight: Object) => {
+    const scripture = this.state.references[highlight.id];
     return (
       <View style={styles.row}>
         <Image source={require('./Images/highlight.png')} style={[styles.icon, {alignSelf: 'flex-start',}]} />
         <View style={styles.rowContent}>
           <TouchableOpacity style={styles.referenceContainer} onPress={() => this._navigateReader(highlight.url)}>
             <View>
-              <Text numberOfLines={5} style={styles.body}>{highlight.scripture}</Text>
+              <Text numberOfLines={5} style={styles.body}>{scripture}</Text>
               <Text style={StyleSheet.styles.cell.subtitle}>{highlight.description}</Text>
             </View>
           </TouchableOpacity>
@@ -304,14 +308,11 @@ export default class Bookmarks extends Component {
   };
 
   async _getReferences() {
-    const highlights = [];
-    const bookmarks = [];
-    const entries = Bookmark.all().map(bookmark => bookmark);
+    const references = {};
 
-    for (let bookmark of entries) {
+    for (let bookmark of Bookmark.all()) {
       let scripture = '';
-      const references = bookmark.references.map(reference => reference);
-      for (let reference of references) {
+      for (let reference of bookmark.references) {
         const monadSet = {
           first: reference.firstMonad,
           last: reference.lastMonad
@@ -321,29 +322,10 @@ export default class Bookmarks extends Component {
         scripture += content;
       }
 
-      switch(bookmark.type) {
-        case Bookmark.Type.Highlight:
-          highlights.push({
-            ...bookmark,
-            url: bookmark.url,
-            description: bookmark.description,
-            scripture
-          });
-          break;
-
-        case Bookmark.Type.Bookmark:
-          bookmarks.push({
-            ...bookmark,
-            hasNote: bookmark.hasNote,
-            url: bookmark.url,
-            description: bookmark.description,
-            scripture
-          });
-          break;
-      }
+      references[bookmark.id] = scripture;
     }
 
-    this.setState({highlights, bookmarks});
+    this.setState({references});
   }
 
   _iconForRoute = (route: Object) => {
