@@ -254,13 +254,16 @@ export default class Bookmarks extends Component {
         return this.state.dataSource.cloneWithRowsAndSections({highlights});
 
       default:
-        const defaults = [
-          {path: '/Discover', title: Localizable.t('discover')},
-          {path: '/Books', title: Localizable.t('books')},
-          {path: '/Sources', title: Localizable.t('sources.text')},
-          {path: '/Spheres', title: Localizable.t('spheres.text')},
-          {path: '/About', title: Localizable.t('about-sourceview'), modal: true}
-        ];
+        let defaults = [];
+        if (Platform.OS === 'ios') {
+          defaults = [
+            {path: '/Discover', title: Localizable.t('discover')},
+            {path: '/Books', title: Localizable.t('books')},
+            {path: '/Sources', title: Localizable.t('sources.text')},
+            {path: '/Spheres', title: Localizable.t('spheres.text')},
+            {path: '/About', title: Localizable.t('about-sourceview'), modal: true}
+          ];
+        }
 
         if (__DEV__) {
           defaults.push({path: '/Onboarding', title: 'Onboarding', modal: true});
