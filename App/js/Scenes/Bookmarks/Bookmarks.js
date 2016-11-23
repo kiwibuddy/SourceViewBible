@@ -81,15 +81,12 @@ export default class Bookmarks extends Component {
     }
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this._getReferences();
-
-    this.setState({
-      dataSource: this._getDataSource(this.state.selectedSegmentIndex)
-    });
   }
 
   render() {
+    const dataSource = this._getDataSource(this.state.selectedSegmentIndex);
     return (
       <View style={styles.container}>
         <NavigationHeader
@@ -100,7 +97,7 @@ export default class Bookmarks extends Component {
         />
         <ListView
           enableEmptySections={true}
-          dataSource={this.state.dataSource}
+          dataSource={dataSource}
           renderRow={this._renderRow}
           renderSectionHeader={this._renderSectionHeader}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
@@ -350,7 +347,6 @@ export default class Bookmarks extends Component {
 
     this.setState({
       selectedSegmentIndex: value,
-      dataSource: this._getDataSource(value)
     });
   };
 }
