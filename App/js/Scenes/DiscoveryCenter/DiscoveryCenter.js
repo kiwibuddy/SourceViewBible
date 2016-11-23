@@ -132,6 +132,7 @@ export default class DiscoveryCenter extends Component {
           <NavigationBarButton
             imageSource={require('../../Components/Navigation/Images/nav-more.png')}
             onPress={() => this._menu.openMenu('menu')}
+            style={{height: NavigationHeader.HEIGHT}}
           />
         </View>
       );
