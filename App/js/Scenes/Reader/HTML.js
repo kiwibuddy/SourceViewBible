@@ -298,7 +298,7 @@ module.exports = `
             break;
 
           case 'navigate-occurrence':
-            location.hash = '#' + encodeURIComponent(data.anchor);
+            location.hash = data.anchor;
             clearOccurrences();
             selectOccurrences(data.occurrences);
             break;

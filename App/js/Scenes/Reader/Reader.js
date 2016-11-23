@@ -212,7 +212,7 @@ export default class Reader extends Component {
 
   _renderInjectedJavascript = () => {
     if (this.state.loading) return null;
-    const anchor = this.props.anchor;
+    const anchor = this.state.anchor;
     const scroll = Preference.objectForKey(Preference.Keys.Reader.scroll);
     const { didGoBack } = this.props;
 
@@ -243,6 +243,8 @@ export default class Reader extends Component {
 
   _onNavigateOccurrence = (occurrence: Object) => {
     const anchor = `occurrence-${occurrence.firstMonad}`;
+    this.setState({anchor});
+
     const occurrences = [];
     for (let monad = occurrence.firstMonad; monad <= occurrence.lastMonad; monad++) {
       occurrences.push(`occurrence-${monad}`);
