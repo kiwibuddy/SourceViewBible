@@ -270,7 +270,8 @@ export default class Bookmarks extends Component {
           defaults.push(sphereInAppPurchaseURL({title: 'Spheres IAP', redirect: spheresURL({title: 'Spheres'}), modal: true}));
         }
 
-        const bookmarkSections = ['defaults'];
+        const bookmarkSections = [];
+        if (defaults.length > 0) bookmarkSections.push('defaults');
         if (bookmarks.length > 0) bookmarkSections.push('bookmarks');
         return this.state.dataSource.cloneWithRowsAndSections({defaults, bookmarks}, bookmarkSections);
     }
