@@ -162,7 +162,7 @@ export default class DiscoveryCenter extends Component {
       return (
         <View style={styles.addButton}>
           <TouchableOpacity onPress={this._onPressAdd}>
-            <Text style={{flex: 1, fontSize: 30, color: '#FFF', alignSelf: 'center', textAlign: 'center', paddingBottom: 4}}>+</Text>
+            <Text style={{flex: 1, fontSize: 30, color: '#FFF', alignSelf: 'center', textAlign: 'center', paddingTop: 6}}>+</Text>
           </TouchableOpacity>
         </View>
       );
