@@ -185,13 +185,13 @@ export default class Bookmarks extends Component {
                 <Text numberOfLines={2} style={styles.body}>{bookmark.scripture}</Text>
                 <Text style={StyleSheet.styles.cell.subtitle}>{bookmark.description}</Text>
               </View>
-              <Text style={[StyleSheet.styles.cell.subtitle, styles.date]}>{RelativeDate(bookmark.createdAt)}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={noteStyle} onPress={() => this._navigateBookmark(bookmark)}>
               {note}
               <Text style={styles.button}>{noteButtonTitle}</Text>
             </TouchableOpacity>
           </View>
+          <Text style={[StyleSheet.styles.cell.subtitle, styles.date]}>{RelativeDate(bookmark.createdAt)}</Text>
         </View>
       </View>
     );
@@ -221,9 +221,9 @@ export default class Bookmarks extends Component {
               <Text numberOfLines={5} style={styles.body}>{highlight.scripture}</Text>
               <Text style={StyleSheet.styles.cell.subtitle}>{highlight.description}</Text>
             </View>
-            <Text style={[StyleSheet.styles.cell.subtitle, styles.date]}>{RelativeDate(highlight.createdAt)}</Text>
           </TouchableOpacity>
         </View>
+        <Text style={[StyleSheet.styles.cell.subtitle, styles.date]}>{RelativeDate(highlight.createdAt)}</Text>
       </View>
     );
   };
@@ -390,7 +390,6 @@ const styles = StyleSheet.create({
   row: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'flex-start',
     paddingVertical: 10,
     alignItems: 'center',
     marginLeft: 15,
@@ -399,7 +398,6 @@ const styles = StyleSheet.create({
   rowContent: {
     flex: 1,
     flexDirection: 'column',
-    paddingRight: 40,
   },
   icon: {
     tintColor: Colors.tint,
@@ -414,7 +412,7 @@ const styles = StyleSheet.create({
   },
   date: {
     flex: 0,
-    lineHeight: 24,
+    alignSelf: 'flex-start',
     textAlign: 'right',
     width: 60,
     marginLeft: 8,
