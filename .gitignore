@@ -37,3 +37,6 @@ npm-debug.log
 
 *.keystore
 .bundle
+
+.vscode
+typings
