@@ -84,7 +84,7 @@ android {
         applicationId "com.sourceviewbible"
         minSdkVersion 19
         targetSdkVersion 22
-        versionCode 2544
+        versionCode 2548
         versionName "1.2"
         ndk {
             abiFilters "armeabi-v7a", "x86"
