@@ -214,14 +214,21 @@ export default class Reader extends Component {
     if (this.state.loading) return null;
     const anchor = this.state.anchor;
     const scroll = Preference.objectForKey(Preference.Keys.Reader.scroll);
-    const { didGoBack } = this.props;
+    const { didGoBack, occurrenceIndex, occurrences } = this.props;
+
+    let occurrenceScript = '';
+    if (occurrences && occurrences.length > 0) {
+      const occurrence = occurrences[occurrenceIndex];
+      occurrenceScript = `selectOccurrences(${occurrence.firstMonad}, ${occurrence.lastMonad});`;
+    }
 
     if (didGoBack && scroll && scroll.bookID === this.state.bookID) {
-      return `document.body.scrollTop = ${scroll.top}`;
+      return `document.body.scrollTop = ${scroll.top}; ${occurrenceScript}`;
     } else if (anchor) {
       return (`\
         location.hash = '#${encodeURIComponent(anchor)}';
         document.getElementById('scripture').scrollTop = document.getElementById('scripture').scrollTop - 8;
+        ${occurrenceScript}
       `);
     }
   };
@@ -245,15 +252,11 @@ export default class Reader extends Component {
     const anchor = `occurrence-${occurrence.firstMonad}`;
     this.setState({anchor});
 
-    const occurrences = [];
-    for (let monad = occurrence.firstMonad; monad <= occurrence.lastMonad; monad++) {
-      occurrences.push(`occurrence-${monad}`);
-    }
-
     this._postMessage({
       action: 'navigate-occurrence',
       anchor,
-      occurrences
+      firstMonad: occurrence.firstMonad,
+      lastMonad: occurrence.lastMonad 
     });
   };
 

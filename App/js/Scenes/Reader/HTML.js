@@ -300,7 +300,7 @@ module.exports = `
           case 'navigate-occurrence':
             location.hash = data.anchor;
             clearOccurrences();
-            selectOccurrences(data.occurrences);
+            selectOccurrences(data.firstMonad, data.lastMonad);
             break;
 
           case 'cancel':
@@ -399,10 +399,9 @@ module.exports = `
         }
       }
 
-      function selectOccurrences(occurrences) {
-        for (var i = 0; i < occurrences.length; i++) {
-          var occurrence = occurrences[i];
-          var occurrenceElement = document.getElementById(occurrence);
+      function selectOccurrences(firstMonad, lastMonad) {
+        for (var monad = firstMonad; monad <= lastMonad; monad++) {
+          var occurrenceElement = document.getElementById('occurrence-' + monad);
           if (occurrenceElement) {
             occurrenceElement.classList.add('occurrence');
           }

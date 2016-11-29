@@ -57,7 +57,7 @@ function styleEmbeddedQuotations(feature: string) {
 }
 
 function styleOccurrences(feature: string) {
-  return `{{ setvar 'monad' }}{{ firstmonad }}{{ setvarend }}{{ setvar 'occurrence' }}{{ dictlookup 'occurrences' var 'monad' '' }}{{ setvarend }}{{ if varequal 'occurrence' '' }}${feature}{{ else }}<span id="occurrence-{{ emitvar 'monad' }}" class="occurrence">${feature}</span>{{ endif }}`;
+  return `<span id="occurrence-{{ firstmonad }}" class="occurrence">${feature}</span>`;
 }
 
 function openDatabase() {
@@ -92,15 +92,6 @@ function scripture(options: Object) {
     const sphereFeatures = spheres.map(sphere => SPHERE_FEATURE_MAP[sphere]);
 
     const dictionaries = stylesheet['dictionaries'];
-
-    const occurrences = (options && options.occurrences ? options.occurrences : []);
-    const occurrenceIndex = (options ? options.occurrenceIndex : -1);
-    if (occurrences && occurrences.length > 0 && occurrenceIndex > -1) {
-      const occurrence = occurrences[occurrenceIndex];
-      for (let monad = occurrence.firstMonad; monad <= occurrence.lastMonad; monad++) {
-        dictionaries['occurrences'][monad.toString()] = ' occurrence ';
-      }
-    }
 
     const highlights = (options && options.highlights ? options.highlights : []);
     highlights.forEach(highlight => {
