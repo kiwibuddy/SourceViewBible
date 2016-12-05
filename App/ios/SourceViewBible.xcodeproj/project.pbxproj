@@ -51,6 +51,7 @@
 		ABA1BCED1CE127AE00BEA3A1 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA1BCEC1CE127AE00BEA3A1 /* libstdc++.tbd */; };
 		ABA1BCEF1CE127B700BEA3A1 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA1BCEE1CE127B700BEA3A1 /* libsqlite3.tbd */; };
 		ABB3CE3B1CF0FD1A00BBA0B7 /* Datasets in Resources */ = {isa = PBXBuildFile; fileRef = AB5489801CE2760000F96FF0 /* Datasets */; };
+		ABF728271DF5D74B001E7108 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABF728241DF5D720001E7108 /* libRCTAnimation.a */; };
 		B462F6CF62A44CF4BE151426 /* libRealmReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74BBD6AC92504458BEA117E2 /* libRealmReact.a */; };
 		C1AC094C83E5442297C8F17B /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 02B51CCD517B4E8FBB03C4EE /* libz.tbd */; };
 		D11FF0B57427410D8F326221 /* libInAppUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B16AE63FAE943E5BD8FB998 /* libInAppUtils.a */; };
@@ -318,6 +319,20 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = BVLinearGradient;
 		};
+		ABF728231DF5D720001E7108 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ABF7281E1DF5D71F001E7108 /* RCTAnimation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTAnimation;
+		};
+		ABF728251DF5D720001E7108 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ABF7281E1DF5D71F001E7108 /* RCTAnimation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D2A28201D9B03D100D4039D;
+			remoteInfo = "RCTAnimation-tvOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -374,6 +389,7 @@
 		AB5A7E351CF781DA00728DB2 /* sourceview.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sourceview.ttf; sourceTree = "<group>"; };
 		ABA1BCEC1CE127AE00BEA3A1 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		ABA1BCEE1CE127B700BEA3A1 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		ABF7281E1DF5D71F001E7108 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		AD6E3E13454A452CB389694B /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		B00300C7C8534F299DF4A596 /* SQLite.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SQLite.xcodeproj; path = "../node_modules/react-native-sqlite-storage/src/ios/SQLite.xcodeproj"; sourceTree = "<group>"; };
 		B7DB8D1FB6544DA2899E3703 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
@@ -403,13 +419,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB284CD51D3A8C8E00AFC7EA /* libART.a in Frameworks */,
 				ABA1BCEF1CE127B700BEA3A1 /* libsqlite3.tbd in Frameworks */,
-				AB3333641D6B441900740446 /* Crashlytics.framework in Frameworks */,
 				ABA1BCED1CE127AE00BEA3A1 /* libstdc++.tbd in Frameworks */,
+				AB3333641D6B441900740446 /* Crashlytics.framework in Frameworks */,
+				AB284CD51D3A8C8E00AFC7EA /* libART.a in Frameworks */,
 				AB5489481CE2747B00F96FF0 /* libRCTEmdros.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
+				ABF728271DF5D74B001E7108 /* libRCTAnimation.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
@@ -572,13 +589,14 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				ABA1BCEE1CE127B700BEA3A1 /* libsqlite3.tbd */,
+				ABA1BCEC1CE127AE00BEA3A1 /* libstdc++.tbd */,
 				AB3333611D6B441900740446 /* Fabric.framework */,
 				AB3333621D6B441900740446 /* Crashlytics.framework */,
 				AB284CBF1D3A8C7100AFC7EA /* ART.xcodeproj */,
-				ABA1BCEE1CE127B700BEA3A1 /* libsqlite3.tbd */,
-				ABA1BCEC1CE127AE00BEA3A1 /* libstdc++.tbd */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
+				ABF7281E1DF5D71F001E7108 /* RCTAnimation.xcodeproj */,
 				00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */,
 				00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */,
 				78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */,
@@ -759,6 +777,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		ABF7281F1DF5D71F001E7108 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ABF728241DF5D720001E7108 /* libRCTAnimation.a */,
+				ABF728261DF5D720001E7108 /* libRCTAnimation-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		C4CA51BCD05049EA9596F34A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -864,6 +891,10 @@
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
+				},
+				{
+					ProductGroup = ABF7281F1DF5D71F001E7108 /* Products */;
+					ProjectRef = ABF7281E1DF5D71F001E7108 /* RCTAnimation.xcodeproj */;
 				},
 				{
 					ProductGroup = AB5489411CE273DC00F96FF0 /* Products */;
@@ -1202,6 +1233,20 @@
 			fileType = archive.ar;
 			path = libBVLinearGradient.a;
 			remoteRef = ABE0009F1CF2565C008130F2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		ABF728241DF5D720001E7108 /* libRCTAnimation.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTAnimation.a;
+			remoteRef = ABF728231DF5D720001E7108 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		ABF728261DF5D720001E7108 /* libRCTAnimation-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRCTAnimation-tvOS.a";
+			remoteRef = ABF728251DF5D720001E7108 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
