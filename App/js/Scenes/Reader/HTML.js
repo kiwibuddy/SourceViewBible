@@ -339,8 +339,8 @@ module.exports = `
             }
 
             var verseElements = document.querySelectorAll("[data-verse='" + verseReference + "']");
-            var firstMonad = parseInt(verseElements[0].dataset.monad);
-            var lastMonad = parseInt(verseElements[verseElements.length - 1].dataset.monad);
+            var firstMonad = parseInt(verseElements[0].id.split('-')[1]);
+            var lastMonad = parseInt(verseElements[verseElements.length - 1].id.split('-')[1]);
 
             verses.push({chapter, verse, firstMonad, lastMonad});
             verseReferences.push(verseReference);
