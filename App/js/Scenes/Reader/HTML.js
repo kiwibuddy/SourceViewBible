@@ -401,7 +401,7 @@ module.exports = `
 
       function selectOccurrences(firstMonad, lastMonad) {
         for (var monad = firstMonad; monad <= lastMonad; monad++) {
-          var occurrenceElement = document.getElementById('occurrence-' + monad);
+          var occurrenceElement = document.getElementById('monad-' + monad);
           if (occurrenceElement) {
             occurrenceElement.classList.add('occurrence');
           }

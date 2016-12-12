@@ -117,7 +117,7 @@ export default class SphereWords extends Component {
       if (occurrences && occurrences.length > 0) {
         const occurrence = occurrences[0];
         const occurrencesRoute = occurrencesURL({title: Localizable.t('passages'), occurrences, modal: true});
-        const route = readerURL({bookID: occurrence.book.id, anchor: `occurrence-${occurrence.firstMonad}`, title: occurrence.book.name, occurrenceIndex: 0, occurrences, occurrencesRoute});
+        const route = readerURL({bookID: occurrence.book.id, anchor: `monad-${occurrence.firstMonad}`, title: occurrence.book.name, occurrenceIndex: 0, occurrences, occurrencesRoute});
         Preference.setObjectForKey([sphere.id], Preference.Keys.Reader.spheres);
         this.props.navigate(route);
       }

@@ -249,7 +249,7 @@ export default class Reader extends Component {
   };
 
   _onNavigateOccurrence = (occurrence: Object) => {
-    const anchor = `occurrence-${occurrence.firstMonad}`;
+    const anchor = `monad-${occurrence.firstMonad}`;
     this.setState({anchor});
 
     this._postMessage({

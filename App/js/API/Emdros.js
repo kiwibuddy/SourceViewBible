@@ -42,7 +42,7 @@ function highlightSpheres(feature: string, spheres: any, startingPosition: numbe
 }
 
 function styleFeatures(feature: string) {
-  return `{{ setvar 'monad' }}{{ firstmonad }}{{ setvarend }}<span id="occurrence-{{ emitvar 'monad' }}" class="verse{{ emitvar 'embeddedDocument' }}{{ emitvar 'embeddedQuotation' }}{{ dictlookup 'occurrences' var 'monad' '' }}{{ dictlookup 'highlights' var 'monad' '' }}" data-monad="{{ emitvar 'monad' }}" data-verse="{{ emitvar 'verse_anchor' }}">${feature}</span>`;
+  return `{{ setvar 'monad' }}{{ firstmonad }}{{ setvarend }}<span id="monad-{{ emitvar 'monad' }}" class="verse{{ emitvar 'embeddedDocument' }}{{ emitvar 'embeddedQuotation' }}{{ dictlookup 'occurrences' var 'monad' '' }}{{ dictlookup 'highlights' var 'monad' '' }}" data-monad="{{ emitvar 'monad' }}" data-verse="{{ emitvar 'verse_anchor' }}">${feature}</span>`;
 }
 
 function styleEmbedded(feature: string) {
@@ -58,7 +58,7 @@ function styleEmbeddedQuotations(feature: string) {
 }
 
 function styleOccurrences(feature: string) {
-  return `<span id="occurrence-{{ firstmonad }}" class="occurrence">${feature}</span>`;
+  return `<span id="monad-{{ firstmonad }}" class="occurrence">${feature}</span>`;
 }
 
 function openDatabase() {
