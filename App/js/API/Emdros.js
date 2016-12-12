@@ -2,36 +2,37 @@
 'use strict';
 
 import Emdros from 'react-native-emdros';
+
 let DB = null;
 
 const SCRIPTURE_STYLESHEET = require('./scripture-stylesheet.json');
 const OCCURRENCE_STYLESHEET = require('./occurrence-stylesheet.json');
 
 const SPHERE_CLASS_MAP = {
-  'family': 'Fam',
-  'economics': 'Eco',
-  'government': 'Gov',
-  'religion': 'Rel',
-  'education': 'Edu',
-  'communication': 'Com',
-  'celebration': 'Cel'
+  family: '1',
+  economics: '2',
+  government: '3',
+  religion: '4',
+  education: '5',
+  communication: '6',
+  celebration: '7'
 };
 
 const SPHERE_FEATURE_MAP = {
-  'family': 'Family',
-  'economics': 'Economics',
-  'government': 'Government',
-  'religion': 'Religion',
-  'education': 'Education',
-  'communication': 'MediaCom',
-  'celebration': 'Celebration'
+  family: 'Family',
+  economics: 'Economics',
+  government: 'Government',
+  religion: 'Religion',
+  education: 'Education',
+  communication: 'MediaCom',
+  celebration: 'Celebration'
 };
 
 function highlightSpheres(feature: string, spheres: any, startingPosition: number) {
   if (spheres.length > 0) {
     const sphereClasses = spheres.map((sphere, index) => {
       const sphereClass = SPHERE_CLASS_MAP[sphere];
-      return (`{{ if featureequal ${index + startingPosition} 'true' }} h${sphereClass}{{ endif }}`);
+      return (`{{ if featureequal ${index + startingPosition} 'true' }} s${sphereClass}{{ endif }}`);
     });
 
     return `{{ setvar 'sphere_classes' }}${sphereClasses.join('')}{{ setvarend }}{{ if varequal 'sphere_classes' '' }}${feature}{{ else }}<span class="{{ emitvar 'sphere_classes' }}">${feature}</span>{{ endif }}`;
