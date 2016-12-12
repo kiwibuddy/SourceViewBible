@@ -127,6 +127,10 @@ export default class Reader extends Component {
 
     const injectedJavaScript = this._renderInjectedJavascript();
     const key = (this.props.anchor ? `anchor-${this.props.anchor}` : 'webview');
+    const source = {html: this.state.scripture};
+    if (Platform.OS === 'android') {
+      source.baseUrl = 'sourceview://ignored';
+    }
 
     return (
       <View key={key} style={styles.container}>
@@ -138,7 +142,7 @@ export default class Reader extends Component {
           injectedJavaScript={injectedJavaScript}
           onMessage={this._onMessage}
           style={styles.webview}
-          source={{html: this.state.scripture}}
+          source={source}
         />
         {toolbar}
       </View>
