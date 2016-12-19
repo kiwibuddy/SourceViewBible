@@ -69,7 +69,7 @@
         "CenteredHeading" : {
            "docindexfeature" : "docindex",
            "get" : ["has_blank_line_before"],
-           "end" : "",
+           "end" : "</td></tr><tr class=\"source{{ emitvar 'SourceColor' }}\"><td class=\"sourceTitle\"></td><td class=\"sourceText\">",
            "start" : "</p></td></tr>\n<tr><td class=\"sourceTitle\" /><td class=\"textTitle\">"
         },
         "table" : {
