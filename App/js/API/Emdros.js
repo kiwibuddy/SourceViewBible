@@ -46,7 +46,7 @@ function styleFeatures(feature: string) {
 }
 
 function styleEmbedded(feature: string) {
-  return styleEmbeddedDocuments(styleEmbeddedQuotations(styleOccurrences(feature)));
+  return styleEmbeddedDocuments(styleEmbeddedQuotations(feature));
 }
 
 function styleEmbeddedDocuments(feature: string) {
@@ -55,10 +55,6 @@ function styleEmbeddedDocuments(feature: string) {
 
 function styleEmbeddedQuotations(feature: string) {
   return `{{ if varequal 'embeddedQuotation' '' }}${feature}{{ else }}<span class="embeddedQuotation">${feature}</span>{{ endif }}`;
-}
-
-function styleOccurrences(feature: string) {
-  return `<span id="monad-{{ firstmonad }}" class="occurrence">${feature}</span>`;
 }
 
 function openDatabase() {
