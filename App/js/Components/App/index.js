@@ -14,15 +14,12 @@ import {
 import { NavigationHeader, NavigationBarButton, Toolbar } from '../Navigation';
 import DefaultToolbar from '../Navigation/DefaultToolbar';
 
-import Menu, {
+import { 
+  Menu,
   MenuContext,
-  MenuOptions,
   MenuOption,
-  MenuTrigger,
-  NotAnimatedContextMenu,
-  renderers
-} from 'react-native-popup-menu';
-Menu.setDefaultRenderer(renderers.NotAnimatedContextMenu);
+  MenuOptions
+} from '../Menu';
 
 import router, { BACK, FORWARD, aboutURL, booksURL, discoverURL, onboardingURL, spheresURL, sphereHelpURL, sphereInAppPurchaseURL, sourcesURL } from '../../Navigation';
 
@@ -75,12 +72,15 @@ export default class App extends Component {
 
     const navigationHeader = this._renderNavigationHeader({navigationState: navigation});
     const toolbar = this._renderToolbar({navigationState: navigation, jumpToIndex: this._jumpToIndex});
+    const menu = this._renderMenu({navigationState: navigation, navigate: this._navigate});
+
     return (
-      <MenuContext ref={component => this._menu = component} style={{flex: 1}}>
+      <View style={{flex: 1}}>
         {navigationHeader}
         {scene}
         {toolbar}
-      </MenuContext>
+        {menu}
+      </View>
     );
   }
 
@@ -124,8 +124,6 @@ export default class App extends Component {
 
     let renderRightComponent = null;
     if (Platform.OS === 'android') {
-      const menu = this._renderMenu(Scene.renderMenuOptions, {...props, navigate: this._navigate});
-
       let rightComponent = null;
       if (Scene.renderNavigationHeaderRightComponent) {
         rightComponent = Scene.renderNavigationHeaderRightComponent({...props, navigate: this._navigate});
@@ -135,12 +133,11 @@ export default class App extends Component {
         const moreButtonStyle = (rightComponent ? {paddingLeft: 0} : {});
         return (
           <View style={{flex: 1}}>
-            {menu}
             <View style={{flex: 1, flexDirection: 'row'}}>
               {rightComponent}
               <NavigationBarButton
                 imageSource={require('../../Components/Navigation/Images/nav-more.png')}
-                onPress={() => this._menu.openMenu('menu')}
+                onPress={() => this._menu.openMenu()}
                 style={moreButtonStyle}
               />
             </View>
@@ -181,9 +178,15 @@ export default class App extends Component {
     );
   };
 
-  _renderMenu = (options: Function, props: any) => {
+  _renderMenu = (props: any) => {
+    if (Platform.OS !== 'android') return null;
+
     const { navigationState, navigate } = props;
     const canGoForward = this._canGoForward();
+
+    const navigationRoute = navigationState.routes[navigationState.index];
+    const { route, params} = router.match(navigationRoute.path);
+    const Scene = route.scene;
 
     let forwardMenuOption = null;
     if (canGoForward) {
@@ -197,8 +200,8 @@ export default class App extends Component {
     const menuOptions = [];
     menuOptions.push(forwardMenuOption);
 
-    if (options) {
-      menuOptions.push(options(props));
+    if (Scene.renderMenuOptions) {
+      menuOptions.push(Scene.renderMenuOptions(props));
     }
 
     menuOptions.push(<MenuOption key="discover" text={Localizable.t('discover')} onSelect={() => navigate(discoverURL({title: Localizable.t('discover')})) } />);
@@ -208,16 +211,19 @@ export default class App extends Component {
     menuOptions.push(<MenuOption key="about" text={Localizable.t('about-sourceview')} onSelect={() => navigate(aboutURL({title: Localizable.t('about-sourceview'), modal: true})) } />);
 
     return (
-      <Menu name="menu">
-        <MenuTrigger />
-        <MenuOptions customStyles={StyleSheet.styles.menu.optionsStyles}>
-          {menuOptions}
-        </MenuOptions>
-      </Menu>
+      <MenuContext ref={component => this._menu = component} style={{flex: 1}}>
+        <Menu>
+          <MenuOptions customStyles={StyleSheet.styles.menu.optionsStyles}>
+            {menuOptions}
+          </MenuOptions>
+        </Menu>
+      </MenuContext>
     );
   }
 
   _navigate = (route: any, options?: any) => {
+    this._closeMenu();
+
     if (route === BACK) {
       if (options && options.replace === false) {
         this._goBack();
@@ -234,6 +240,8 @@ export default class App extends Component {
   };
 
   _jumpToIndex = (index: number) => {
+    this._closeMenu();
+
     this.setState({
       navigation: { ...this.state.navigation, index }
     });
@@ -375,6 +383,10 @@ export default class App extends Component {
       return true;
     }
     return false;
+  };
+
+  _closeMenu = () => {
+    if (this._menu) this._menu.closeMenu();
   };
 
   _isSphereRoute = (route: any): boolean => {

@@ -2,6 +2,7 @@
   "extends": "rallycoding",
   "rules": {
     "object-curly-spacing": 0,
+    "arrow-body-style": 0,
     "max-len": 0
   }
 }

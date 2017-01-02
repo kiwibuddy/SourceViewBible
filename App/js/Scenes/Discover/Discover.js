@@ -1,8 +1,7 @@
 /* @flow */
 'use strict';
 
-import React, { Component, PropTypes } from 'react';
-const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
+import React, { Component } from 'react';
 
 import {
   Platform,
@@ -29,9 +28,8 @@ import { aboutURL, discoverHelpURL } from '../../Navigation';
 import { Preference } from '../../Preferences';
 
 import {
-  MenuOptions,
   MenuOption,
-} from 'react-native-popup-menu';
+} from '../../Components/Menu';
 
 type Props = {
 
@@ -51,9 +49,7 @@ export default class Discovery extends Component {
 
   static renderMenuOptions(props: Object) {
     return (
-      <MenuOptions key="discovery-options">
-        <MenuOption text={Localizable.t('help')} onSelect={() => props.navigate(discoverHelpURL({title: Localizable.t('help'), modal: true}))}/>
-      </MenuOptions>
+      <MenuOption key="help" text={Localizable.t('help')} onSelect={() => props.navigate(discoverHelpURL({title: Localizable.t('help'), modal: true}))} />
     );
   }
 

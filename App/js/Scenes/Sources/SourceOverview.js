@@ -39,9 +39,8 @@ import { BACK, bookURL, sourceHelpURL, occurrencesURL, readerURL, sourceURL, sou
 import { NavigationBarButton } from '../../Components/Navigation';
 
 import {
-  MenuOptions,
   MenuOption,
-} from 'react-native-popup-menu';
+} from '../../Components/Menu';
 
 import { Actant, Book } from '../../Database';
 import Query from './Query';
@@ -85,9 +84,7 @@ export default class SourceOverview extends Component {
 
   static renderMenuOptions(props: Object) {
     return (
-      <MenuOptions key="book-options">
-        <MenuOption text={Localizable.t('help')} onSelect={() => props.navigate(sourceHelpURL({title: Localizable.t('help'), modal: true}))}/>
-      </MenuOptions>
+      <MenuOption key="help" text={Localizable.t('help')} onSelect={() => props.navigate(sourceHelpURL({title: Localizable.t('help'), modal: true}))} />
     );
   }
 

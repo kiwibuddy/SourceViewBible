@@ -68,7 +68,7 @@ const styles = {
     marginBottom: 8,
   },
   statisticKeyline: {
-    flex:0,
+    flex: 0,
     width: StyleSheet.hairlineWidth,
     backgroundColor: Colors.separator
   },

@@ -38,9 +38,8 @@ import { Preference } from '../../Preferences';
 import { NavigationBarButton } from '../../Components/Navigation';
 
 import {
-  MenuOptions,
   MenuOption,
-} from 'react-native-popup-menu';
+} from '../../Components/Menu';
 
 import FoundationalSphere from './FoundationalSphere';
 
@@ -80,9 +79,7 @@ export default class Spheres extends Component {
 
   static renderMenuOptions(props: Object) {
     return (
-      <MenuOptions key="book-options">
-        <MenuOption text={Localizable.t('help')} onSelect={() => props.navigate(sphereHelpURL({title: Localizable.t('help'), modal: true}))}/>
-      </MenuOptions>
+      <MenuOption key="help" text={Localizable.t('help')} onSelect={() => props.navigate(sphereHelpURL({title: Localizable.t('help'), modal: true}))} />
     );
   }
 
