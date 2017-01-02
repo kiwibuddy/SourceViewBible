@@ -21,7 +21,7 @@ const MenuOptions = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 5
+    padding: 15
   }
 });
 

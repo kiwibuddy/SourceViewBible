@@ -26,6 +26,7 @@ const MenuOption = (props) => {
     <TouchableOpacity
       disabled={disabled}
       onPress={() => onSelect(props)}
+      style={styles.container}
     >
       {content}
     </TouchableOpacity>
@@ -34,8 +35,7 @@ const MenuOption = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 5,
-    flex: 1,
+    padding: 5
   }
 });
 
