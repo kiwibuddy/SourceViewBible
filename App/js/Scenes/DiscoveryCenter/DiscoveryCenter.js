@@ -32,12 +32,12 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import { NavigationHeader, NavigationBarButton, Toolbar, ToolbarButton } from '../../Components/Navigation';
 
-import Menu, {
+import { 
+  Menu,
   MenuContext,
-  MenuOptions,
   MenuOption,
-  MenuTrigger,
-} from 'react-native-popup-menu';
+  MenuOptions
+} from '../../Components/Menu';
 
 import { BACK, discoveryCenterURL, discoveryCenterHelpURL, occurrencesURL } from '../../Navigation';
 
@@ -89,8 +89,10 @@ export default class DiscoveryCenter extends Component {
     const header = popover && Platform.OS === 'android' ? null : this._renderNavigationHeader();
     const toolbar = popover && Platform.OS === 'android' ? null : this._renderToolbar();
     const cards = this.state.cards.map(card => this._renderCard(card));
+    const menu = this._renderMenu(this);
+
     return (
-      <MenuContext ref={component => this._menu = component} style={styles.container}>
+      <View style={styles.container}>
         {header}
         <ScrollView ref={SCROLLVIEW_REF}
           style={styles.content}
@@ -104,7 +106,8 @@ export default class DiscoveryCenter extends Component {
         >{cards}</ScrollView>
         {toolbar}
         {popover}
-      </MenuContext>
+        {menu}
+      </View>
     );
   }
 
@@ -125,10 +128,8 @@ export default class DiscoveryCenter extends Component {
 
   _renderRightComponent(props: Object) {
     if (Platform.OS === 'android') {
-      const menu = this._renderMenu(props);
       return (
         <View>
-          {menu}
           <NavigationBarButton
             imageSource={require('../../Components/Navigation/Images/nav-more.png')}
             onPress={() => this._menu.openMenu('menu')}
@@ -147,13 +148,16 @@ export default class DiscoveryCenter extends Component {
   }
 
   _renderMenu = (props: Object) => {
+    if (Platform.OS !== 'android') return null;
+
     return (
-      <Menu name="menu">
-        <MenuTrigger />
-        <MenuOptions customStyles={StyleSheet.styles.menu.optionsStyles}>
-          <MenuOption key="help" text={Localizable.t('help')} onSelect={() => this.props.navigate(discoveryCenterHelpURL({title: Localizable.t('help'), modal: true}))} />
-        </MenuOptions>
-      </Menu>
+      <MenuContext ref={component => this._menu = component} style={{flex: 1}}>
+        <Menu>
+          <MenuOptions customStyles={StyleSheet.styles.menu.optionsStyles}>
+            <MenuOption key="help" text={Localizable.t('help')} onSelect={() => this.props.navigate(discoveryCenterHelpURL({title: Localizable.t('help'), modal: true}))} />
+          </MenuOptions>
+        </Menu>
+      </MenuContext>
     );
   }
 

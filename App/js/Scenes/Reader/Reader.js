@@ -35,11 +35,6 @@ import ActionToolbar from './ActionToolbar';
 import OccurrenceToolbar from './OccurrenceToolbar';
 import Loading from './Loading';
 
-import {
-  MenuOptions,
-  MenuOption,
-} from 'react-native-popup-menu';
-
 const RNFS = require('react-native-fs');
 
 import Emdros from '../../API/Emdros';
