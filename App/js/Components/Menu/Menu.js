@@ -23,7 +23,7 @@ const Menu = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 44,
+    marginTop: 2,
     borderRadius: 2,
     backgroundColor: 'white',
     width: 200,
