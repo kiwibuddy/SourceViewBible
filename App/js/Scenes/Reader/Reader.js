@@ -8,9 +8,22 @@ import ReactNative from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import Share from 'react-native-share';
 
-const { Image, LayoutAnimation, Platform, ScrollView, Text, TouchableOpacity, View, WebView } = ReactNative;
+const {
+  Image,
+  LayoutAnimation,
+  Platform,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+  WebView,
+} = ReactNative;
 
-import { Colors, Localizable, StyleSheet } from '../../Common';
+import {
+  Colors,
+  Localizable,
+  StyleSheet
+} from '../../Common';
 
 import { BACK, bookURL, bookmarkURL, readerSearchURL, readerSettingsURL, readerURL } from '../../Navigation';
 import { NavigationHeader, NavigationBarButton, Toolbar } from '../../Components/Navigation';
@@ -48,22 +61,22 @@ type State = {
   bookID: string,
   anchor?: string,
   scripture: any,
-  loading: boolean,
+  loading: bool,
   references: any,
-  showOcccurences: boolean,
+  showOcccurences: boolean
 };
 
 export default class Reader extends Component {
   static renderNavigationHeaderTitleComponent(props: Object) {
     const book = Book.findByID(props.routeParams.bookID);
-    return <NavigationHeader.Title onPress={() => props.navigate(bookURL({ bookID: book.id, title: book.name }))}>{props.title}</NavigationHeader.Title>;
+    return <NavigationHeader.Title onPress={() => props.navigate(bookURL({bookID: book.id, title: book.name}))}>{props.title}</NavigationHeader.Title>;
   }
 
   static renderNavigationHeaderRightComponent(props: Object) {
     return (
       <NavigationBarButton
         imageSource={require('../../Components/Navigation/Images/nav-filter.png')}
-        onPress={() => props.navigate(readerSettingsURL({ title: Localizable.t('settings'), modal: true }))}
+        onPress={() => props.navigate(readerSettingsURL({title: Localizable.t('settings'), modal: true}))}
       />
     );
   }
@@ -85,11 +98,11 @@ export default class Reader extends Component {
       scripture: null,
       loading: true,
       references: null,
-      showOcccurences: props.occurrences && props.occurrences.length > 0,
+      showOcccurences: (props.occurrences && props.occurrences.length > 0)
     };
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  componentWillReceiveProps(nextProps: Object) {
     const { bookID, anchor, occurrences, occurrenceIndex } = nextProps;
     this._setScripture(bookID, anchor, occurrences, occurrenceIndex);
   }
@@ -108,8 +121,8 @@ export default class Reader extends Component {
     if (this.state.loading) return <Loading toolbar={toolbar} />;
 
     const injectedJavaScript = this._renderInjectedJavascript();
-    const key = this.props.anchor ? `anchor-${this.props.anchor}` : 'webview';
-    const source = { html: this.state.scripture };
+    const key = (this.props.anchor ? `anchor-${this.props.anchor}` : 'webview');
+    const source = {html: this.state.scripture};
     if (Platform.OS === 'android') {
       source.baseUrl = 'sourceview://ignored';
     }
@@ -118,9 +131,7 @@ export default class Reader extends Component {
       <View key={key} style={styles.container}>
         <FilterBar onPressClear={this._onPressClearFilter} />
         <WebView
-          ref={webview => {
-            this.webview = webview;
-          }}
+          ref={webview => { this.webview = webview; }}
           key="scripture"
           decelerationRate="normal"
           injectedJavaScript={injectedJavaScript}
@@ -151,37 +162,42 @@ export default class Reader extends Component {
     }
 
     if (references && references.length > 0) {
-      return (
-        <ActionToolbar
-          key="ActionToolbar"
-          onBookmark={() => this._onBookmark(references)}
-          onCancel={this._onCancelAction}
-          onHighlight={() => this._onHighlight(references)}
-          onShare={() => this._onShare(references)}
-          references={references}
-        />
-      );
+      return (<ActionToolbar
+        key="ActionToolbar"
+        onBookmark={() => this._onBookmark(references)}
+        onCancel={this._onCancelAction}
+        onHighlight={() => this._onHighlight(references)}
+        onShare={() => this._onShare(references)}
+        references={references}
+      />);
     }
 
-    return <DefaultToolbar key="DefaultToolbar" canGoBack={canGoBack} canGoForward={canGoForward} navigate={navigate} />;
-  };
+    return (
+      <DefaultToolbar
+        key="DefaultToolbar"
+        canGoBack={canGoBack}
+        canGoForward={canGoForward}
+        navigate={navigate}
+      />
+    )
+  }
 
   _renderScripture = (content: string) => {
     const { bookID } = this.props;
     const book = Book.findByID(bookID);
-    const isPsalms = this.props.bookID === 'psalms';
+    const isPsalms = this.props.bookID == 'psalms';
 
     let html = HTML.replace('{{BODY}}', content);
     html = html.replace(/{{BOOK_NAME}}/g, book.name);
-    html = html.replace('{{IS_PSALMS}}', isPsalms ? 'true' : 'false');
+    html = html.replace('{{IS_PSALMS}}', (isPsalms ? 'true' : 'false'));
 
     if (isPsalms) {
       html = html.replace(/>(Psalm )(\d+?)</g, ' id="chapter-$2">$1$2<');
     }
 
     const fontStepSize = Preference.numberForKey(Preference.Keys.Reader.fontStepSize) || 0;
-    const fontSize = Math.ceil((ReaderBaseFontSize + fontStepSize * ReaderFontStepSize) * ReaderWebFontConversion);
-    const lineHeight = Math.ceil((ReaderBaseLineHeight + fontStepSize * ReaderFontStepSize) * ReaderWebFontConversion);
+    const fontSize = Math.ceil((ReaderBaseFontSize + (fontStepSize * ReaderFontStepSize)) * ReaderWebFontConversion);
+    const lineHeight = Math.ceil((ReaderBaseLineHeight + (fontStepSize * ReaderFontStepSize)) * ReaderWebFontConversion);
 
     html = html.replace('{{FONT_SIZE}}', fontSize.toString());
     html = html.replace('{{LINE_HEIGHT}}', lineHeight.toString());
@@ -208,20 +224,11 @@ export default class Reader extends Component {
     if (didGoBack && scroll && scroll.bookID === this.state.bookID) {
       return `document.body.scrollTop = ${scroll.top}; ${occurrenceScript}`;
     } else if (anchor) {
-      return `
-        var documentReadyCallback = function() {
-            var hash = '${encodeURIComponent(anchor)}';
-            document.getElementById(hash).scrollIntoView();
-            document.getElementById('scripture').scrollTop = document.getElementById('scripture').scrollTop - 8;
-            ${occurrenceScript}
-        };
-
-        if (document.readyState === "complete" || (document.readyState !== "loading" && !document.documentElement.doScroll)) {
-          documentReadyCallback();
-        } else {
-          document.addEventListener("DOMContentLoaded", documentReadyCallback);
-        }
-      `;
+      return (`\
+        location.hash = '#${encodeURIComponent(anchor)}';
+        document.getElementById('scripture').scrollTop = document.getElementById('scripture').scrollTop - 8;
+        ${occurrenceScript}
+      `);
     }
   };
 
@@ -234,102 +241,102 @@ export default class Reader extends Component {
   };
 
   _onPressOccurrencesDone = () => {
-    this.setState({ showOcccurences: false });
+    this.setState({showOcccurences: false});
     this._postMessage({
-      action: 'done-occurrences',
+      action: 'done-occurrences'
     });
   };
 
   _onNavigateOccurrence = (occurrence: Object) => {
     const anchor = `monad-${occurrence.firstMonad}`;
-    this.setState({ anchor });
+    this.setState({anchor});
 
     this._postMessage({
       action: 'navigate-occurrence',
       anchor,
       firstMonad: occurrence.firstMonad,
-      lastMonad: occurrence.lastMonad,
+      lastMonad: occurrence.lastMonad 
     });
   };
 
-  _onMessage = event => {
+  _onMessage = (event) => {
     const { bookID } = this.state;
     const data = JSON.parse(event.nativeEvent.data);
-    switch (data.action) {
+    switch(data.action) {
       case 'select':
         const references = data.verses.map(reference => {
           const chapter = reference.chapter;
           const verse = reference.verse;
           const firstMonad = reference.firstMonad;
           const lastMonad = reference.lastMonad;
-          return {
+          return ({
             bookID,
             chapter,
             verse,
             firstMonad,
-            lastMonad,
-          };
+            lastMonad
+          });
         });
 
-        this.setState({ references });
+        this.setState({references});
         break;
       case 'scroll':
         const top = data.top;
-        Preference.setObjectForKey({ bookID, top }, Preference.Keys.Reader.scroll);
+        Preference.setObjectForKey({bookID, top}, Preference.Keys.Reader.scroll);
         break;
       default:
         console.log('_onMessage', data);
         break;
-    }
+    };
   };
 
-  _postMessage = data => {
+  _postMessage = (data) => {
     if (this.webview) {
       this.webview.postMessage(JSON.stringify(data));
     }
   };
 
-  _onBookmark = references => {
-    const bookmarks = Bookmark.whereReferences(references, { type: Bookmark.Type.Bookmark });
+  _onBookmark = (references) => {
+    const bookmarks = Bookmark.whereReferences(references, {type:Bookmark.Type.Bookmark});
     if (bookmarks.length > 0) {
       bookmarks.forEach(bookmark => {
         bookmark.delete();
       });
       this._postMessage({
-        action: 'unhighlight',
+        action: 'unhighlight'
       });
     } else {
-      this.props.navigate(bookmarkURL({ bookmarkID: null, bookID: this.state.bookID, title: Localizable.t('bookmark'), references, modal: true }));
+      this.props.navigate(bookmarkURL({bookmarkID: null, bookID: this.state.bookID, title: Localizable.t('bookmark'), references, modal: true}));
     }
 
-    this.setState({ references: null });
+    this.setState({references: null});
   };
 
   _onCancelAction = () => {
-    this.setState({ references: null });
+    this.setState({references: null});
     this._postMessage({
-      action: 'cancel',
+      action: 'cancel'
     });
   };
 
-  _onHighlight = references => {
-    const highlights = Bookmark.whereReferences(references, { type: Bookmark.Type.Highlight });
+  _onHighlight = (references) => {
+    const highlights = Bookmark.whereReferences(references, {type:Bookmark.Type.Highlight});
 
     if (highlights.length > 0) {
       highlights.forEach(highlight => {
         highlight.delete();
       });
       this._postMessage({
-        action: 'unhighlight',
+        action: 'unhighlight'
       });
     } else {
       Bookmark.highlight(references);
       this._postMessage({
-        action: 'highlight',
+        action: 'highlight'
       });
     }
 
-    this.setState({ references: null });
+    this.setState({references: null});
   };
 
   async _onShare(references) {
@@ -337,27 +344,30 @@ export default class Reader extends Component {
     for (let reference of references) {
       const monadSet = {
         first: reference.firstMonad,
-        last: reference.lastMonad,
+        last: reference.lastMonad
       };
-      const content = await Emdros.scripture({ monadSet, stylesheet: 'occurrence' });
+      const content = await Emdros.scripture({monadSet, stylesheet: 'occurrence'});
       scripture += content;
     }
 
     const book = Book.findByID(this.state.bookID);
     scripture += `\n${ReferenceDescription(book, references)}`;
 
-    this.setState({ references: null });
+    this.setState({references: null});
     this._postMessage({
-      action: 'cancel',
+      action: 'cancel'
     });
 
     Share.open({
       message: scripture,
-      url: 'http://onelink.to/svbapp',
+      url: "http://onelink.to/svbapp",
+    }).then(options => {
+
     })
-      .then(options => {})
-      .catch(error => {});
-  }
+    .catch(error => {
+
+    });
+  };
 
   _setScripture = (bookID: string, anchor?: string, occurrences?: any, occurrenceIndex?: number, force?: boolean = false) => {
     const book = Book.findByID(bookID);
@@ -365,13 +375,13 @@ export default class Reader extends Component {
     const spheres = Preference.objectForKey(Preference.Keys.Reader.spheres) || [];
     const highlights = Bookmark.bookHighlights(bookID);
 
-    const options = { monadSet: book.monadSet, spheres, occurrences, occurrenceIndex, highlights };
+    const options = {monadSet: book.monadSet, spheres, occurrences, occurrenceIndex, highlights};
 
     if (force || bookID !== this.state.bookID || anchor !== this.state.anchor) {
-      this.setState({ loading: true });
+      this.setState({loading: true});
     }
 
-    Emdros.scripture(options).then(content => {
+    Emdros.scripture(options).then((content) => {
       if (this.shouldFetchScripture) {
         const scripture = this._renderScripture(content);
 
@@ -385,7 +395,7 @@ export default class Reader extends Component {
           bookID,
           anchor,
           scripture,
-          loading: false,
+          loading: false
         });
       }
     });
@@ -393,13 +403,13 @@ export default class Reader extends Component {
 
   _debugScripture(scripture: string) {
     RNFS.writeFile('/tmp/Scripture.html', scripture, 'utf8')
-      .then(success => {
-        console.log('Scripture written to /tmp/Scripture.html');
-      })
-      .catch(err => {
-        console.log(err.message);
-      });
-  }
+    .then((success) => {
+      console.log('Scripture written to /tmp/Scripture.html');
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+  };
 }
 
 const styles = StyleSheet.create({
