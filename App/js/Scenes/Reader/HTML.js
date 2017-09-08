@@ -1,10 +1,7 @@
 /* @flow */
 'use strict';
 
-import {
-  Colors,
-  StyleSheet,
-} from '../../Common';
+import { Colors, StyleSheet } from '../../Common';
 
 const CSS = require('./CSS');
 
@@ -298,7 +295,7 @@ module.exports = `
             break;
 
           case 'navigate-occurrence':
-            location.hash = data.anchor;
+            document.getElementById(data.anchor).scrollIntoView();
             clearOccurrences();
             selectOccurrences(data.firstMonad, data.lastMonad);
             break;
