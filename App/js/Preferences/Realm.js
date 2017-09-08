@@ -27,18 +27,18 @@ const BookmarkSchema = {
   primaryKey: 'id',
   properties: {
     id: 'string',
-    createdAt: {type: 'date', indexed: true},
-    note: {type: 'string', optional: true},
+    createdAt: { type: 'date', indexed: true },
+    note: { type: 'string', optional: true },
     type: 'string',
     highlight: 'bool',
-    references: {type: 'list', objectType: 'BookmarkReference'}
-  }
+    references: { type: 'list', objectType: 'BookmarkReference' },
+  },
 };
 
 export class Bookmark extends Realm.Object {
   static Type = {
     Bookmark: 'bookmark',
-    Highlight: 'highlight'
+    Highlight: 'highlight',
   };
 
   static all(options?: Object) {
@@ -56,7 +56,9 @@ export class Bookmark extends Realm.Object {
   static whereReferences(references: Array<Object>, options?: Object) {
     const bookmarks = [];
     references.forEach(reference => {
-      let objects = realm.objects('Bookmark').filtered('references.bookID = $0 AND references.chapter = $1 AND references.verse = $2', reference.bookID, reference.chapter, reference.verse);
+      let objects = realm
+        .objects('Bookmark')
+        .filtered('references.bookID = $0 AND references.chapter = $1 AND references.verse = $2', reference.bookID, reference.chapter, reference.verse);
       if (options && options.type) {
         objects = objects.filtered('type = $0', options.type);
       }
@@ -71,28 +73,35 @@ export class Bookmark extends Realm.Object {
   }
 
   static highlights() {
-    return realm.objects('Bookmark').filtered('highlight = $0', true).sorted('createdAt', true);
+    return realm
+      .objects('Bookmark')
+      .filtered('highlight = $0', true)
+      .sorted('createdAt', true);
   }
 
   static highlight(references: Array<Object>) {
     realm.write(() => {
       const id = 'highlight-' + Date.now();
       const createdAt = new Date();
-      const type = Bookmark.Type.Highlight
+      const type = Bookmark.Type.Highlight;
       const highlight = true;
 
-      realm.create('Bookmark', {id, createdAt, type, references, highlight});
+      realm.create('Bookmark', { id, createdAt, type, references, highlight });
     });
   }
 
-  static bookmark({id, references, createdAt, highlight, note}) {
+  static bookmark({ id, references, createdAt, highlight, note }) {
     realm.write(() => {
       if (id) {
-        realm.create('Bookmark', {
-          id,
-          highlight,
-          note
-        }, true);
+        realm.create(
+          'Bookmark',
+          {
+            id,
+            highlight,
+            note,
+          },
+          true
+        );
       } else {
         realm.create('Bookmark', {
           id: 'bookmark' + Date.now(),
@@ -100,7 +109,7 @@ export class Bookmark extends Realm.Object {
           type: Bookmark.Type.Bookmark,
           references,
           highlight,
-          note
+          note,
         });
       }
     });
@@ -123,11 +132,11 @@ export class Bookmark extends Realm.Object {
 
   get url(): Object {
     const reference = this.references[0];
-    return ({
+    return {
       bookID: reference.bookID,
       anchor: `verse-${reference.chapter}-${reference.verse}`,
-      title: this.book.name
-    });
+      title: this.book.name,
+    };
   }
 
   get description(): string {
@@ -144,12 +153,10 @@ const BookmarkReferenceSchema = {
     verse: 'int',
     firstMonad: 'int',
     lastMonad: 'int',
-  }
+  },
 };
 
-export class BookmarkReference extends Realm.Object {
-
-}
+export class BookmarkReference extends Realm.Object {}
 BookmarkReference.schema = BookmarkReferenceSchema;
 
 const DiscoverySchema = {
@@ -157,11 +164,11 @@ const DiscoverySchema = {
   primaryKey: 'id',
   properties: {
     id: 'string',
-    name: {type: 'string', optional: true},
+    name: { type: 'string', optional: true },
     cardData: 'string',
-    createdAt: {type: 'date', indexed: true},
+    createdAt: { type: 'date', indexed: true },
     updatedAt: 'date',
-  }
+  },
 };
 
 export class Discovery extends Realm.Object {
@@ -184,7 +191,7 @@ export class Discovery extends Realm.Object {
         name: null,
         cardData: '',
         createdAt: date,
-        updatedAt: date
+        updatedAt: date,
       };
     }
 
@@ -194,7 +201,7 @@ export class Discovery extends Realm.Object {
       yAxis: card.yAxis,
       zAxis: card.zAxis,
       filters: card.filters,
-      occurrenceCount: card.occurrenceCount
+      occurrenceCount: card.occurrenceCount,
     };
 
     realm.write(() => {
@@ -204,7 +211,7 @@ export class Discovery extends Realm.Object {
 
       try {
         realm.create('Discovery', discovery, true);
-      } catch(error) {
+      } catch (error) {
         console.log('discovery', discovery);
         throw error;
       }
@@ -239,16 +246,16 @@ const PreferenceSchema = {
   primaryKey: 'key',
   properties: {
     key: 'string',
-    number: {type: 'double', optional: true},
-    string: {type: 'string', optional: true},
-  }
+    number: { type: 'double', optional: true },
+    string: { type: 'string', optional: true },
+  },
 };
 
 export class Preference extends Realm.Object {
   static setNumberForKey(number: number, key: string) {
     realm.write(() => {
-      realm.create('Preference', {key, number}, true);
-    })
+      realm.create('Preference', { key, number }, true);
+    });
   }
 
   static numberForKey(key: string): ?number {
@@ -258,7 +265,7 @@ export class Preference extends Realm.Object {
 
   static setStringForKey(string: string, key: string) {
     realm.write(() => {
-      realm.create('Preference', {key, string}, true);
+      realm.create('Preference', { key, string }, true);
     });
   }
 
@@ -283,7 +290,7 @@ export class Preference extends Realm.Object {
 
   static booleanForKey(key: string): ?boolean {
     const preference = Preference.numberForKey(key);
-    return preference != null ? (preference != 0) : null;
+    return preference != null ? preference != 0 : null;
   }
 }
 Preference.schema = PreferenceSchema;
@@ -293,12 +300,12 @@ const HistorySchema = {
   primaryKey: 'id',
   properties: {
     id: 'string',
-    date: {type: 'date', indexed: true},
+    date: { type: 'date', indexed: true },
     title: 'string',
-    description: {type: 'string', optional: true},
-    path: {type: 'string', indexed: true},
-  }
-}
+    description: { type: 'string', optional: true },
+    path: { type: 'string', indexed: true },
+  },
+};
 
 export class History extends Realm.Object {
   static all() {
@@ -339,8 +346,8 @@ export class History extends Realm.Object {
       date,
       title: route.title,
       description: route.description,
-      path: route.path
-    }
+      path: route.path,
+    };
 
     realm.write(() => {
       realm.create('History', history, true);
@@ -348,7 +355,7 @@ export class History extends Realm.Object {
   }
 
   get route(): Object {
-    return {path: this.path, title: this.title, description: this.description};
+    return { path: this.path, title: this.title, description: this.description };
   }
 }
 History.schema = HistorySchema;
@@ -356,17 +363,11 @@ History.schema = HistorySchema;
 const Schema = [Bookmark, BookmarkReference, Discovery, Preference, History];
 
 const options = {
+  encryptionKey: Emdros.preferencesKey,
   schema: Schema,
   schemaVersion: 3,
-  migration: function(oldRealm, newRealm) {
-  }
+  migration: function(oldRealm, newRealm) {},
 };
-
-if (__DEV__) {
-} else {
-  // $FlowFixMe - Silence warning
-  options['encryptionKey'] = Emdros.preferencesKey;
-}
 
 const realm = new Realm(options);
 
