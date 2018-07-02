@@ -640,6 +640,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				C4CA51BCD05049EA9596F34A /* Frameworks */,
 				AB4713101CE251D100E9EB48 /* Resources */,
+				ABABD43120D7F39E00A23BEE /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -750,6 +751,26 @@
 				ABA1BCE91CE1279500BEA3A1 /* RNI18nTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		ABABD43120D7F39E00A23BEE /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				9EE4C78311794C1C9C0D3EA7 /* libRNI18n.a */,
+				699D8687D4C34567A8F121AA /* libBVLinearGradient.a */,
+				D346C26AD7A64111B7664AA8 /* libRNParallaxMotion.a */,
+				E2E9D15626524BD9B579D678 /* libRNVectorIcons.a */,
+				74BBD6AC92504458BEA117E2 /* libRealmReact.a */,
+				056AFA74DE9B49BAAD61D488 /* libRNFS.a */,
+				E28DEC24DAC74529960DC389 /* libSQLite.a */,
+				7803CAC2260345FCAEC9A998 /* libSMXCrashlytics.a */,
+				F7916BF5805D4AEBA008E4D9 /* libRNAppInfo.a */,
+				4F3DBD6A660D4D6B9BDA6F13 /* libRNSVG.a */,
+				3B16AE63FAE943E5BD8FB998 /* libInAppUtils.a */,
+				D667DD5BBC224D2DBE5F8AAE /* libRNDeviceInfo.a */,
+				073054E7E60B4C7F9E39541F /* libRNShare.a */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		ABCA9D401CF8F37700A645D6 /* Products */ = {
