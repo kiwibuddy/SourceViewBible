@@ -23,7 +23,7 @@
     "react-native-popup-menu": "file:../Libraries/react-native-popup-menu/",
     "react-native-share": "^1.0.27",
     "react-native-sqlite-storage": "^3.3.6",
-    "react-native-svg": "^4.4.1",
+    "react-native-svg": "^6.4.1",
     "react-native-vector-icons": "^2.0.3",
     "realm": "2.4.0"
   },
