@@ -146,6 +146,7 @@ const styles = StyleSheet.create({
       height: 1,
       width: 0,
     },
+    backgroundColor: '#FFF',
   },
   listItem: {
     flex: 1,

@@ -569,6 +569,7 @@ const styles = StyleSheet.create({
       height: 1,
       width: 0,
     },
+    backgroundColor: '#FFFFFF',
   },
   listItem: {
     flex: 1,
