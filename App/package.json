@@ -8,8 +8,8 @@
   "dependencies": {
     "moment": "^2.14.1",
     "moment-duration-format": "^1.3.0",
-    "react": "^15.4.1",
-    "react-native": "0.38.1",
+    "react": "16.3.1",
+    "react-native": "0.55.3",
     "react-native-app-info": "git+https://github.com/daikini/react-native-app-info.git",
     "react-native-billing": "file:../Libraries/react-native-billing/",
     "react-native-device-info": "^0.9.5",
