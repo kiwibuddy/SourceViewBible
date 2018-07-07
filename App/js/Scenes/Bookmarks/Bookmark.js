@@ -36,10 +36,12 @@ export default class BookmarkScene extends Component {
 
     const bookmark = Bookmark.findByID(props.bookmarkID);
     if (bookmark) {
+      const references = Object.keys(bookmark.references).map(key => bookmark.references[key]);
+
       this.state = {
         highlight: bookmark.highlight,
         note: bookmark.note,
-        references: Object.values(bookmark.references),
+        references,
         scripture: null,
       };
     } else {
