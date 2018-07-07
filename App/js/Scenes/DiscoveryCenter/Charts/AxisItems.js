@@ -1,23 +1,11 @@
 /* @flow */
 'use strict';
 
-import React, { Component } from 'react';
+import React from 'react';
 
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
-import {
-  Image,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
-
-import {
-  Colors,
-  Constants,
-  StyleSheet,
-  Localizable
-} from '../../../Common';
+import { StyleSheet, Localizable } from '../../../Common';
 
 import { actantAxisItemsURL } from '../../../Navigation';
 
@@ -36,35 +24,44 @@ type Props = {
 const AxisItems = (props: Props) => {
   return (
     <ScrollView style={styles.container}>
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(updateAxis(props.card, props.axis, {type: 'words'}))}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(updateAxis(props.card, props.axis, { type: 'words' }))}>
         <Text style={StyleSheet.styles.cell.title}>{Localizable.t('words.text')}</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
 
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(updateAxis(props.card, props.axis, {type: 'book'}))}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(updateAxis(props.card, props.axis, { type: 'book' }))}>
         <Text style={StyleSheet.styles.cell.title}>{Localizable.t('books')}</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
 
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.navigate(actantAxisItemsURL({title: Localizable.t('everyone'), axis: props.axis}))}>
+      <TouchableOpacity
+        style={StyleSheet.styles.listItem}
+        onPress={() => props.navigate(actantAxisItemsURL({ title: Localizable.t('everyone'), axis: props.axis }))}
+      >
         <Text style={StyleSheet.styles.cell.title}>{Localizable.t('everyone')}</Text>
         <Image source={require('../Images/disclosure.png')} />
       </TouchableOpacity>
       <View style={styles.separator} />
 
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.navigate(actantAxisItemsURL({title: Localizable.t('just-sources'), axis: props.axis, actantType: 'source'}))}>
+      <TouchableOpacity
+        style={StyleSheet.styles.listItem}
+        onPress={() => props.navigate(actantAxisItemsURL({ title: Localizable.t('just-sources'), axis: props.axis, actantType: 'source' }))}
+      >
         <Text style={StyleSheet.styles.cell.title}>{Localizable.t('just-sources')}</Text>
         <Image source={require('../Images/disclosure.png')} />
       </TouchableOpacity>
       <View style={styles.separator} />
 
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.navigate(actantAxisItemsURL({title: Localizable.t('just-recipients'), axis: props.axis, actantType: 'recipient'}))}>
+      <TouchableOpacity
+        style={StyleSheet.styles.listItem}
+        onPress={() => props.navigate(actantAxisItemsURL({ title: Localizable.t('just-recipients'), axis: props.axis, actantType: 'recipient' }))}
+      >
         <Text style={StyleSheet.styles.cell.title}>{Localizable.t('just-recipients')}</Text>
         <Image source={require('../Images/disclosure.png')} />
       </TouchableOpacity>
       <View style={styles.separator} />
 
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(updateAxis(props.card, props.axis, {type: 'sphere'}))}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.onDone(updateAxis(props.card, props.axis, { type: 'sphere' }))}>
         <Text style={StyleSheet.styles.cell.title}>{Localizable.t('spheres.text')}</Text>
       </TouchableOpacity>
       <View style={styles.separator} />

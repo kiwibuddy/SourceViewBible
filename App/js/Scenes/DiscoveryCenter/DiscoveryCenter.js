@@ -3,41 +3,17 @@
 
 import React, { Component } from 'react';
 
+import { BackAndroid, LayoutAnimation, Platform, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
-import {
-  BackAndroid,
-  Image,
-  LayoutAnimation,
-  Platform,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-
-import {
-  Colors,
-  StyleSheet,
-  Localizable
-} from '../../Common';
-
-import { FilterType } from './Constants';
+import { Colors, StyleSheet, Localizable } from '../../Common';
 
 import Card from './Card';
 import GettingStartedCard from './GettingStartedCard';
 import Popover from '../../Components/Common/Popover';
-import { DeleteButton, DuplicateButton, ShareButton } from './Buttons';
-
-import LinearGradient from 'react-native-linear-gradient';
 
 import { NavigationHeader, NavigationBarButton, Toolbar, ToolbarButton } from '../../Components/Navigation';
 
-import { 
-  Menu,
-  MenuContext,
-  MenuOption,
-  MenuOptions
-} from '../../Components/Menu';
+import { Menu, MenuContext, MenuOption, MenuOptions } from '../../Components/Menu';
 
 import { BACK, discoveryCenterURL, discoveryCenterHelpURL, occurrencesURL } from '../../Navigation';
 
@@ -69,10 +45,10 @@ export default class DiscoveryCenter extends Component {
     this.contentHeight = 0;
 
     const discoveries = Discovery.all();
-    const cards = discoveries.length == 0 ? [{id: 'getting-started', occurrenceCount: 0, filters: []}] : discoveries.map(discovery => discovery.card);
+    const cards = discoveries.length == 0 ? [{ id: 'getting-started', occurrenceCount: 0, filters: [] }] : discoveries.map(discovery => discovery.card);
     this.state = {
       cards,
-      popover: null
+      popover: null,
     };
   }
 
@@ -94,7 +70,8 @@ export default class DiscoveryCenter extends Component {
     return (
       <View style={styles.container}>
         {header}
-        <ScrollView ref={SCROLLVIEW_REF}
+        <ScrollView
+          ref={SCROLLVIEW_REF}
           style={styles.content}
           onContentSizeChange={(w, h) => {
             this.contentHeight = h;
@@ -103,7 +80,9 @@ export default class DiscoveryCenter extends Component {
               this._scrollToBottom();
             }
           }}
-        >{cards}</ScrollView>
+        >
+          {cards}
+        </ScrollView>
         {toolbar}
         {popover}
         {menu}
@@ -116,24 +95,26 @@ export default class DiscoveryCenter extends Component {
       <NavigationHeader
         navigate={this.props.navigate}
         title={Localizable.t('discovery-center')}
-        renderLeftComponent={(props: Object) => <NavigationBarButton
-          title={Localizable.t('done')}
-          titleStyle={StyleSheet.styles.navigationBar.doneButtonTitle}
-          onPress={() => this.props.navigate(BACK)}
-        />}
+        renderLeftComponent={() => (
+          <NavigationBarButton
+            title={Localizable.t('done')}
+            titleStyle={StyleSheet.styles.navigationBar.doneButtonTitle}
+            onPress={() => this.props.navigate(BACK)}
+          />
+        )}
         renderRightComponent={this._renderRightComponent.bind(this)}
       />
     );
-  }
+  };
 
-  _renderRightComponent(props: Object) {
+  _renderRightComponent() {
     if (Platform.OS === 'android') {
       return (
         <View>
           <NavigationBarButton
             imageSource={require('../../Components/Navigation/Images/nav-more.png')}
             onPress={() => this._menu.openMenu('menu')}
-            style={{height: NavigationHeader.HEIGHT}}
+            style={{ height: NavigationHeader.HEIGHT }}
           />
         </View>
       );
@@ -141,32 +122,36 @@ export default class DiscoveryCenter extends Component {
 
     return (
       <NavigationBarButton
-       imageSource={require('../../Components/Navigation/Images/nav-help.png')}
-       onPress={() => this.props.navigate(discoveryCenterHelpURL({title: Localizable.t('help'), modal: true}))}
-     />
-   );
+        imageSource={require('../../Components/Navigation/Images/nav-help.png')}
+        onPress={() => this.props.navigate(discoveryCenterHelpURL({ title: Localizable.t('help'), modal: true }))}
+      />
+    );
   }
 
-  _renderMenu = (props: Object) => {
+  _renderMenu = () => {
     if (Platform.OS !== 'android') return null;
 
     return (
-      <MenuContext ref={component => this._menu = component} style={{flex: 1}}>
+      <MenuContext ref={component => (this._menu = component)} style={{ flex: 1 }}>
         <Menu>
           <MenuOptions customStyles={StyleSheet.styles.menu.optionsStyles}>
-            <MenuOption key="help" text={Localizable.t('help')} onSelect={() => this.props.navigate(discoveryCenterHelpURL({title: Localizable.t('help'), modal: true}))} />
+            <MenuOption
+              key="help"
+              text={Localizable.t('help')}
+              onSelect={() => this.props.navigate(discoveryCenterHelpURL({ title: Localizable.t('help'), modal: true }))}
+            />
           </MenuOptions>
         </Menu>
       </MenuContext>
     );
-  }
+  };
 
-  _renderToolbar = (props: any) => {
+  _renderToolbar = () => {
     if (Platform.OS === 'android') {
       return (
         <View style={styles.addButton}>
           <TouchableOpacity onPress={this._onPressAdd}>
-            <Text style={{flex: 1, fontSize: 30, color: '#FFF', alignSelf: 'center', textAlign: 'center', paddingTop: 6}}>+</Text>
+            <Text style={{ flex: 1, fontSize: 30, color: '#FFF', alignSelf: 'center', textAlign: 'center', paddingTop: 6 }}>+</Text>
           </TouchableOpacity>
         </View>
       );
@@ -174,31 +159,26 @@ export default class DiscoveryCenter extends Component {
 
     return (
       <Toolbar>
-        <ToolbarButton
-          imageSource={require('./Images/btn-add-card.png')}
-          onPress={this._onPressAdd}
-        />
+        <ToolbarButton imageSource={require('./Images/btn-add-card.png')} onPress={this._onPressAdd} />
       </Toolbar>
     );
   };
 
   _renderCard = (card: Object) => {
     if (card.id === 'getting-started') {
-      return <GettingStartedCard
-        key={card.id}
-        card={card}
-        onPressDelete={() => this._deleteCard(card)}
-      />;
+      return <GettingStartedCard key={card.id} card={card} onPressDelete={() => this._deleteCard(card)} />;
     } else {
-      return <Card
-        ref={card.id}
-        key={card.id}
-        card={card}
-        onPressDelete={() => this._deleteCard(card)}
-        onPressDuplicate={(card) => this._duplicateCard(card)}
-        onPressOccurrences={(card) => this._onPressOccurrences(card)}
-        onShowPopover={(props, onComplete) => this._showPopover(props, onComplete)}
-      />;
+      return (
+        <Card
+          ref={card.id}
+          key={card.id}
+          card={card}
+          onPressDelete={() => this._deleteCard(card)}
+          onPressDuplicate={card => this._duplicateCard(card)}
+          onPressOccurrences={card => this._onPressOccurrences(card)}
+          onShowPopover={(props, onComplete) => this._showPopover(props, onComplete)}
+        />
+      );
     }
   };
 
@@ -207,20 +187,19 @@ export default class DiscoveryCenter extends Component {
     if (popover == null) return null;
     const route = popover.props.route;
     if (route == null) return null;
-    const { card } = popover.props;
 
     return (
       <Popover
         {...popover.props}
         initialRoute={route}
-        onDone={(card) => {
+        onDone={card => {
           popover.onComplete(card);
           this._hidePopover();
         }}
         onPressCancel={this._hidePopover}
       />
     );
-  }
+  };
 
   _defaultCard = () => {
     return {
@@ -228,30 +207,30 @@ export default class DiscoveryCenter extends Component {
       filters: [],
       occurrenceCount: 0,
       yAxis: {
-        type: 'words'
+        type: 'words',
       },
-    }
-  }
+    };
+  };
 
   _addCard = (props: Object) => {
     const card = {
       ...props,
-      id: 'card-' + Date.now()
+      id: 'card-' + Date.now(),
     };
 
     Discovery.record(card);
 
-    const cards = [
-      ...this.state.cards,
-      card
-    ];
+    const cards = [...this.state.cards, card];
 
     this._shouldScrollToBottom = true;
-    this.setState({
-      cards
-    }, () => {
-      this._scrollToBottom();
-    });
+    this.setState(
+      {
+        cards,
+      },
+      () => {
+        this._scrollToBottom();
+      }
+    );
   };
 
   _deleteCard = (card: Object) => {
@@ -262,10 +241,10 @@ export default class DiscoveryCenter extends Component {
     Discovery.delete(card);
 
     this._animateLayout();
-    this.setState({cards}, () => {
+    this.setState({ cards }, () => {
       if (cards.length == 1) {
         const scrollView = this.refs[SCROLLVIEW_REF];
-        scrollView.scrollTo({y: 0, animated: false});
+        scrollView.scrollTo({ y: 0, animated: false });
       }
     });
   };
@@ -283,32 +262,34 @@ export default class DiscoveryCenter extends Component {
     const query = new Query(card);
     const occurrences = await query.occurrences();
     const onPressBack = () => {
-      this.props.navigate(discoveryCenterURL({title: Localizable.t('discovery-center'), modal: true}), {replace: true});
-    }
+      this.props.navigate(discoveryCenterURL({ title: Localizable.t('discovery-center'), modal: true }), { replace: true });
+    };
 
-    this.props.navigate(occurrencesURL({title: Localizable.t('passages'), occurrences, modal: true, onPressBack, backTitle: Localizable.t('back')}), {replace: true});
-  };
+    this.props.navigate(occurrencesURL({ title: Localizable.t('passages'), occurrences, modal: true, onPressBack, backTitle: Localizable.t('back') }), {
+      replace: true,
+    });
+  }
 
   _onPressAdd = () => {
     this._addCard(this._defaultCard());
   };
 
   _onHardwareBackPress = () => {
-    this.props.navigate(BACK)
+    this.props.navigate(BACK);
     return true;
   };
 
   _showPopover = (props: Object, onComplete: Function) => {
     this._animateLayout();
     this.setState({
-      popover: {props, onComplete}
+      popover: { props, onComplete },
     });
   };
 
   _hidePopover = () => {
     this._animateLayout();
     this.setState({
-      popover: null
+      popover: null,
     });
   };
 
@@ -319,7 +300,7 @@ export default class DiscoveryCenter extends Component {
         this._shouldScrollToBottom = false;
       }
       const scrollView = this.refs[SCROLLVIEW_REF];
-      scrollView.scrollTo({y: scrollHeight, animated: animated});
+      scrollView.scrollTo({ y: scrollHeight, animated: animated });
     }
   };
 
@@ -331,14 +312,14 @@ export default class DiscoveryCenter extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#D8D8D8'
+    backgroundColor: '#D8D8D8',
   },
   content: {
     flex: 1,
     marginBottom: Toolbar.HEIGHT,
     ...Platform.select({
       android: {
-        marginBottom: null
+        marginBottom: null,
       },
     }),
   },
@@ -353,5 +334,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     elevation: 4,
-  }
+  },
 });

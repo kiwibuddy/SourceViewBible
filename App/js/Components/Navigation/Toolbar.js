@@ -3,24 +3,21 @@
 
 import React, { Component } from 'react';
 
-
-import {
-  Platform,
-  StyleSheet,
-  View
-} from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 
 const TOOLBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 
-export default class Toolbar extends Component {
+type Props = {
+  style?: any,
+  children?: any,
+};
+
+export default class Toolbar extends Component<Props> {
   static HEIGHT = TOOLBAR_HEIGHT;
 
   render() {
-    return (
-      <View style={[styles.toolbar, this.props.style]}>
-        {this.props.children}
-      </View>
-    );
+    const { style, children } = this.props;
+    return <View style={[styles.toolbar, style]}>{children}</View>;
   }
 }
 

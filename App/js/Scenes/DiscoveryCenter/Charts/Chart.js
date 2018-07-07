@@ -1,19 +1,11 @@
 /* @flow */
 'use strict';
 
-import React, { Component } from 'react';
+import React from 'react';
 
-import {
-  Image,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 
-import {
-  Colors,
-  StyleSheet,
-} from '../../../Common';
+import { StyleSheet } from '../../../Common';
 
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -52,8 +44,10 @@ type ButtonProps = {
 const Button = (props: ButtonProps) => {
   const { onPress } = props;
   return (
-    <TouchableOpacity hitSlop={{top: 10, left: 5, bottom: 10, right: 0}} onPress={onPress}>
-      <Text numberOfLines={1} style={[styles.button, props.style]}>{props.title}</Text>
+    <TouchableOpacity hitSlop={{ top: 10, left: 5, bottom: 10, right: 0 }} onPress={onPress}>
+      <Text numberOfLines={1} style={[styles.button, props.style]}>
+        {props.title}
+      </Text>
     </TouchableOpacity>
   );
 };
@@ -61,6 +55,8 @@ const Button = (props: ButtonProps) => {
 type DropdownButtonProps = {
   title: string,
   image: any,
+  onPress?: any,
+  disabled?: boolean,
 };
 
 const DropdownButton = (props: DropdownButtonProps) => {
@@ -69,22 +65,20 @@ const DropdownButton = (props: DropdownButtonProps) => {
   return (
     <TouchableOpacity disabled={disabled} {...props}>
       <Image style={styles.chartIcon} source={props.image} />
-      <View style={{flex: 1, flexWrap: 'wrap'}}>
-        <Text numberOfLines={2} style={styles.chartProperty}>{props.title}</Text>
+      <View style={{ flex: 1, flexWrap: 'wrap' }}>
+        <Text numberOfLines={2} style={styles.chartProperty}>
+          {props.title}
+        </Text>
       </View>
       {dropdown}
     </TouchableOpacity>
-  )
+  );
 };
 
 const Chart = (props: Object) => {
   return (
     <View style={styles.chart} {...props}>
-      <LinearGradient
-        colors={['#59626A', '#323B43']}
-        start={[0.5, 0.25]} end={[0.5, 1.0]}
-        style={{flex: 1}}
-      >
+      <LinearGradient colors={['#59626A', '#323B43']} start={[0.5, 0.25]} end={[0.5, 1.0]} style={{ flex: 1 }}>
         {props.children}
       </LinearGradient>
     </View>
@@ -134,9 +128,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   chartDropdown: {
-  position: 'absolute',
-  right: 5,
-  top: 12,
+    position: 'absolute',
+    right: 5,
+    top: 12,
   },
   footer: {
     flex: 1,

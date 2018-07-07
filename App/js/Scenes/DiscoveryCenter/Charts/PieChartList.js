@@ -3,21 +3,9 @@
 
 import React, { Component } from 'react';
 
+import { ListView, RecyclerViewBackedScrollView, Text, View } from 'react-native';
 
-import {
-  ListView,
-  RecyclerViewBackedScrollView,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
-
-import {
-  Colors,
-  Constants,
-  StyleSheet,
-  Localizable
-} from '../../../Common';
+import { StyleSheet, Localizable } from '../../../Common';
 
 import ChartColors from './ChartColors';
 
@@ -30,7 +18,7 @@ type Props = {
 };
 
 type State = {
-  dataSource: any
+  dataSource: any,
 };
 
 export default class PieChartList extends Component {
@@ -40,7 +28,7 @@ export default class PieChartList extends Component {
   constructor(props: Props) {
     super(props);
 
-    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id});
+    const dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1.id !== r2.id });
     this.state = {
       dataSource: dataSource,
     };
@@ -49,7 +37,7 @@ export default class PieChartList extends Component {
   render() {
     const { data } = this.props;
     const totalValue = data.reduce((sum, slice) => sum + slice.value, 0);
-    const slices = data.map((slice, index) => ({...slice, color: slice.color || ChartColors.colorAtIndex(index), percent: (slice.value / totalValue) * 100}));
+    const slices = data.map((slice, index) => ({ ...slice, color: slice.color || ChartColors.colorAtIndex(index), percent: (slice.value / totalValue) * 100 }));
     const dataSource = this.state.dataSource.cloneWithRows(slices);
 
     return (
@@ -66,16 +54,18 @@ export default class PieChartList extends Component {
     );
   }
 
-  _renderRow = (slice: Object, sectionID: any, rowID: any) => {
+  _renderRow = (slice: Object) => {
     return (
       <View style={styles.row}>
-        <View style={[styles.dot, {backgroundColor: slice.color}]} />
-        <Text style={styles.percentText}>{Localizable.toPercentage(slice.percent, {precision: 0})}</Text>
-        <Text numberOfLines={1} style={[styles.labelText, this.props.labelStyle]}>{slice.label}</Text>
+        <View style={[styles.dot, { backgroundColor: slice.color }]} />
+        <Text style={styles.percentText}>{Localizable.toPercentage(slice.percent, { precision: 0 })}</Text>
+        <Text numberOfLines={1} style={[styles.labelText, this.props.labelStyle]}>
+          {slice.label}
+        </Text>
       </View>
     );
   };
- }
+}
 
 const styles = StyleSheet.create({
   container: {

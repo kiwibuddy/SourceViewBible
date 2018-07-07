@@ -3,37 +3,19 @@
 
 import React, { Component } from 'react';
 
-import {
-  ActivityIndicator,
-  LayoutAnimation,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { ActivityIndicator, LayoutAnimation, Text, TouchableOpacity, View } from 'react-native';
 
-import {
-  Colors,
-  Localizable,
-  StyleSheet,
-} from '../../Common';
+import { Colors, Localizable, StyleSheet } from '../../Common';
 
-import {
-  Chart,
-  BarChart,
-  PieChart,
-  CloudChart,
-  ChartBlankslate,
-} from './Charts';
+import { Chart, BarChart, PieChart, CloudChart, ChartBlankslate } from './Charts';
 
 import FilterItems from './Filters/FilterItems';
 
-import { DeleteButton, DuplicateButton, ShareButton } from './Buttons';
-
-import Popover from '../../Components/Common/Popover';
+import { DeleteButton, DuplicateButton } from './Buttons';
 
 import Query from './Query';
 
-import { BookSourceOccurrence, Chronology } from '../../Database';
+import { BookSourceOccurrence } from '../../Database';
 import { Discovery } from '../../Preferences';
 
 export const Header = (props: Object) => {
@@ -112,24 +94,20 @@ export default class Card extends Component {
 
   _renderCard = () => {
     const props = this.props;
-    return (
-      <View style={styles.card}>
-        {props.children}
-      </View>
-    );
+    return <View style={styles.card}>{props.children}</View>;
   };
 
   _renderHeader = () => {
     return (
       <Header>
-        <View style={[StyleSheet.styles.discoveryCenter.leftContainer, {borderRightWidth: 0}]}>
+        <View style={[StyleSheet.styles.discoveryCenter.leftContainer, { borderRightWidth: 0 }]}>
           <DeleteButton onPress={this.props.onPressDelete} />
         </View>
-        <View style={[StyleSheet.styles.discoveryCenter.rightContainer, {justifyContent: 'flex-end'}]}>
+        <View style={[StyleSheet.styles.discoveryCenter.rightContainer, { justifyContent: 'flex-end' }]}>
           <DuplicateButton onPress={this._onPressDuplicate} />
         </View>
       </Header>
-    )
+    );
   };
 
   _renderChart = () => {
@@ -167,13 +145,11 @@ export default class Card extends Component {
 
   _renderLoading = () => {
     if (this.state.loading) {
-      return (
-        <ActivityIndicator color="white" size="large" style={styles.activityIndicator} />
-      );
+      return <ActivityIndicator color="white" size="large" style={styles.activityIndicator} />;
     }
 
     return null;
-  }
+  };
 
   _renderFilterItems = () => {
     const { card } = this.state;
@@ -181,7 +157,7 @@ export default class Card extends Component {
       <FilterItems
         card={card}
         filters={card.filters}
-        onPressDeleteFilter={(filter) => this._deleteFilter(filter)}
+        onPressDeleteFilter={filter => this._deleteFilter(filter)}
         onPressEditFilter={this._onPressEditFilter}
         onPressFilterType={this._onPressFilterType}
       />
@@ -194,7 +170,10 @@ export default class Card extends Component {
     const filterCount = card.filters.length;
     if (occurrenceCount == 0 || filterCount == 0) return null;
 
-    const title = (occurrenceCount >= BookSourceOccurrence.MAXIMUM_NUMBER_OF_DISPLAYABLE_OCCURRENCES ? Localizable.t('explore-passages.text') : Localizable.t('explore-passages.count', {count: occurrenceCount, localizedCount: Localizable.toNumber(occurrenceCount, {precision: 0})}));
+    const title =
+      occurrenceCount >= BookSourceOccurrence.MAXIMUM_NUMBER_OF_DISPLAYABLE_OCCURRENCES
+        ? Localizable.t('explore-passages.text')
+        : Localizable.t('explore-passages.count', { count: occurrenceCount, localizedCount: Localizable.toNumber(occurrenceCount, { precision: 0 }) });
 
     const wordCount = this._renderWordCount();
 
@@ -215,7 +194,8 @@ export default class Card extends Component {
     if (wordFilter) {
       return (
         <View style={styles.countContainer}>
-          <Text style={styles.countTitleBold}>{wordFilter.word}</Text><Text style={styles.countTitle}>occurs {wordCount || 0} times</Text>
+          <Text style={styles.countTitleBold}>{wordFilter.word}</Text>
+          <Text style={styles.countTitle}>occurs {wordCount || 0} times</Text>
         </View>
       );
     }
@@ -234,18 +214,18 @@ export default class Card extends Component {
 
     const card = {
       ...this.state.card,
-      chartType
-    }
-    this.setState({card});
+      chartType,
+    };
+    this.setState({ card });
     Discovery.record(card);
   };
 
   _onPressFilterType = (route: Object) => {
     if (this.props.onShowPopover) {
       const { card } = this.state;
-      this.props.onShowPopover({card, route}, (card) => {
+      this.props.onShowPopover({ card, route }, card => {
         this._animateLayout();
-        this.setState({card, loading: true}, this._query);
+        this.setState({ card, loading: true }, this._query);
         Discovery.record(card);
       });
     }
@@ -254,13 +234,13 @@ export default class Card extends Component {
   _onPressChartAxis = (route: Object) => {
     if (this.props.onShowPopover) {
       const { card } = this.state;
-      this.props.onShowPopover({card, route}, (card) => {
+      this.props.onShowPopover({ card, route }, card => {
         this._animateLayout();
-        this.setState({card, loading: true}, this._query);
+        this.setState({ card, loading: true }, this._query);
         Discovery.record(card);
       });
     }
-  }
+  };
 
   _onPressOccurrences = () => {
     if (this.props.onPressOccurrences) {
@@ -271,27 +251,24 @@ export default class Card extends Component {
   _onPressEditFilter = (route: Object) => {
     if (this.props.onShowPopover) {
       const { card } = this.state;
-      this.props.onShowPopover({card, route}, (card) => {
+      this.props.onShowPopover({ card, route }, card => {
         this._animateLayout();
-        this.setState({card, loading: true}, this._query);
+        this.setState({ card, loading: true }, this._query);
         Discovery.record(card);
       });
     }
   };
 
   _addFilter = (filter: Object) => {
-    const filters = [
-      ...this.state.card.filters,
-      filter
-    ];
+    const filters = [...this.state.card.filters, filter];
 
     const card = {
       ...this.state.card,
-      filters
+      filters,
     };
 
     this._animateLayout();
-    this.setState({card});
+    this.setState({ card });
     Discovery.record(card);
   };
 
@@ -301,11 +278,11 @@ export default class Card extends Component {
 
     const card = {
       ...this.state.card,
-      filters
+      filters,
     };
 
     this._animateLayout();
-    this.setState({card, loading: true}, this._query);
+    this.setState({ card, loading: true }, this._query);
     Discovery.record(card);
   };
 
@@ -321,7 +298,7 @@ export default class Card extends Component {
     Discovery.record(card);
 
     if (this.shouldFetch) {
-      this.setState({card, data: null, wordCount, loading: occurrenceCount > 0}, () => {
+      this.setState({ card, data: null, wordCount, loading: occurrenceCount > 0 }, () => {
         if (occurrenceCount > 0) {
           query.data().then(data => {
             if (this.shouldFetch) {
@@ -329,19 +306,19 @@ export default class Card extends Component {
 
               this.setState({
                 data,
-                loading: false
+                loading: false,
               });
             }
           });
         }
       });
     }
-  };
+  }
 
   _animateLayout = () => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
   };
-};
+}
 
 const styles = StyleSheet.create({
   card: {
@@ -368,7 +345,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 20,
     borderWidth: 1,
-    overflow:'hidden',
+    overflow: 'hidden',
     alignSelf: 'center',
     marginTop: 20,
     marginBottom: 40,

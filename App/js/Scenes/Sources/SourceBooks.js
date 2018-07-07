@@ -3,26 +3,16 @@
 
 import React, { Component } from 'react';
 
-
-import {
-  RecyclerViewBackedScrollView,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { RecyclerViewBackedScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { ListView } from '../../Components/Common/DatabaseListView';
 
-import {
-  Colors,
-  StyleSheet,
-  Localizable
-} from '../../Common';
+import { Colors, StyleSheet, Localizable } from '../../Common';
 
-import { Actant, Book, BookSourceOccurrence } from '../../Database';
+import { Actant, Book } from '../../Database';
 import Emdros from '../../API/Emdros';
 import Query from './Query';
 
-import { BACK, readerURL } from '../../Navigation';
+import { readerURL } from '../../Navigation';
 
 type Props = {
   sourceID: number,
@@ -44,11 +34,11 @@ export default class SourceBooks extends Component {
     super(props);
 
     const source = Actant.findByID(props.sourceID);
-    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
+    const dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2 });
     this.state = {
       dataSource,
       occurrences: null,
-      source
+      source,
     };
   }
 
@@ -81,9 +71,11 @@ export default class SourceBooks extends Component {
     const colors = source.colorsForBook(book);
 
     return (
-      <View style={[styles.listItemHeader, {borderTopColor: colors.tint}]}>
+      <View style={[styles.listItemHeader, { borderTopColor: colors.tint }]}>
         <Text style={StyleSheet.styles.cell.titlebold}>{book.name}</Text>
-        <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('occurrences.count', {count: occurrenceCount, localizedCount: Localizable.toNumber(occurrenceCount, {precision: 0})})}</Text>
+        <Text style={StyleSheet.styles.cell.subtitle}>
+          {Localizable.t('occurrences.count', { count: occurrenceCount, localizedCount: Localizable.toNumber(occurrenceCount, { precision: 0 }) })}
+        </Text>
       </View>
     );
   };
@@ -95,25 +87,36 @@ export default class SourceBooks extends Component {
     const book = occurrence.book;
     const role = occurrence.role;
 
-    const bcvReference = Localizable.t('bcv-reference', {book: book.name, reference: occurrence.reference});
-    const bsoReference = Localizable.t('bso-reference', {book: book.name, source: occurrence.name, number: occurrence.number});
+    const bcvReference = Localizable.t('bcv-reference', { book: book.name, reference: occurrence.reference });
+    const bsoReference = Localizable.t('bso-reference', { book: book.name, source: occurrence.name, number: occurrence.number });
 
-    const route = readerURL({bookID: book.id, anchor: `source-${occurrence.name}-${occurrence.number}`, title: book.name, description: bsoReference, occurrenceIndex, occurrences});
+    const route = readerURL({
+      bookID: book.id,
+      anchor: `source-${occurrence.name}-${occurrence.number}`,
+      title: book.name,
+      description: bsoReference,
+      occurrenceIndex,
+      occurrences,
+    });
 
     return (
       <TouchableOpacity key={occurrence.id} style={styles.listItemContainer} onPress={() => this._navigate(route)}>
         <Text style={StyleSheet.styles.cell.occurrence}>{number}</Text>
         <View style={styles.listItem}>
-          <Text numberOfLines={2} style={styles.body}>{occurrence.text}</Text>
+          <Text numberOfLines={2} style={styles.body}>
+            {occurrence.text}
+          </Text>
           <Text style={StyleSheet.styles.cell.subtitle}>{bcvReference}</Text>
-          <Text style={[StyleSheet.styles.cell.subtitle, {color: Colors.sources[role.key].tint}]}>{Localizable.t('so-reference', {source: occurrence.name, number: occurrence.number})}</Text>
+          <Text style={[StyleSheet.styles.cell.subtitle, { color: Colors.sources[role.key].tint }]}>
+            {Localizable.t('so-reference', { source: occurrence.name, number: occurrence.number })}
+          </Text>
         </View>
       </TouchableOpacity>
     );
   };
 
   _navigate = (route: Object) => {
-    this.props.navigate(route, {replace: true});
+    this.props.navigate(route, { replace: true });
   };
 
   async _getOccurrences() {
@@ -123,10 +126,10 @@ export default class SourceBooks extends Component {
 
     const contents = {};
     for (let occurrence of occurrences) {
-      const content = await Emdros.scripture({monadSet: occurrence.monadSet, stylesheet: 'occurrence'});
+      const content = await Emdros.scripture({ monadSet: occurrence.monadSet, stylesheet: 'occurrence' });
       contents[occurrence.id] = content;
     }
-    occurrences = occurrences.map(occurrence => ({...occurrence, role: occurrence.role, reference: occurrence.reference, text: contents[occurrence.id]}));
+    occurrences = occurrences.map(occurrence => ({ ...occurrence, role: occurrence.role, reference: occurrence.reference, text: contents[occurrence.id] }));
 
     const books = {};
     occurrences.reduce((books, occurrence) => {
@@ -136,15 +139,15 @@ export default class SourceBooks extends Component {
       return books;
     }, books);
 
-    const sections = Book.whereIn(Object.keys(books), {sorted: true}).map(book => book.id);
+    const sections = Book.whereIn(Object.keys(books), { sorted: true }).map(book => book.id);
 
     if (this.shouldFetch) {
       this.setState({
         dataSource: this.state.dataSource.cloneWithRowsAndSections(books, sections),
-        occurrences
+        occurrences,
       });
     }
-  };
+  }
 }
 
 const styles = StyleSheet.create({
@@ -170,7 +173,7 @@ const styles = StyleSheet.create({
     shadowRadius: 0.4,
     shadowOffset: {
       height: 1,
-      width: 0
+      width: 0,
     },
   },
   listItem: {

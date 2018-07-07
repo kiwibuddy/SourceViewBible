@@ -3,30 +3,12 @@
 
 import React, { Component } from 'react';
 
-
-import {
-  LayoutAnimation,
-  Platform,
-  RecyclerViewBackedScrollView,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { Platform, RecyclerViewBackedScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { ListView } from '../../Components/Common/DatabaseListView';
 
-import {
-  Colors,
-  Constants,
-  StyleSheet,
-  Localizable
-} from '../../Common';
+import { Colors, StyleSheet, Localizable } from '../../Common';
 
-const {
-  SourceType,
-  SphereType
-} = Constants;
-
-import { PieChart, SourcesBarChart, SpheresBarChart } from '../../Components/Charts';
+import { PieChart } from '../../Components/Charts';
 
 import SegmentedControl from '../../Components/Common/SegmentedControl';
 
@@ -40,7 +22,7 @@ const SEGMENTS = [Localizable.t('whole-bible'), Localizable.t('old-testament'), 
 const SEGMENT_INDEXES = {
   WHOLE_BIBLE: 0,
   OLD_TESTAMENT: 1,
-  NEW_TESTAMENT: 2
+  NEW_TESTAMENT: 2,
 };
 
 const SORT_PREFERENCE = Preference.Keys.Spheres.FoundationalSort;
@@ -66,7 +48,7 @@ export default class FoundationalSphere extends Component {
     super(props);
 
     const sphere = Sphere.findByID('foundational');
-    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
+    const dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2 });
 
     let selectedSegmentIndex = Preference.numberForKey(SORT_PREFERENCE);
     if (selectedSegmentIndex == null) selectedSegmentIndex = SEGMENT_INDEXES.WHOLE_BIBLE;
@@ -83,7 +65,7 @@ export default class FoundationalSphere extends Component {
   componentDidMount() {
     this.setState({
       dataSource: this._getDataSource(this.state.selectedSegmentIndex),
-      wordCount: this._getWordCount(this.state.selectedSegmentIndex)
+      wordCount: this._getWordCount(this.state.selectedSegmentIndex),
     });
   }
 
@@ -102,30 +84,29 @@ export default class FoundationalSphere extends Component {
     );
   }
 
-  _renderHeader = (props: any) => {
-    const { sphere, descriptionExpanded } = this.state;
+  _renderHeader = () => {
+    const { sphere } = this.state;
 
     const header = this.props.renderHeader();
     const colors = Colors.spheres[sphere.id];
-    const descriptionNumberOfLines = descriptionExpanded ? null : 3;
-    const descriptionLabel = (descriptionExpanded ? null : Localizable.t('more').toLocaleLowerCase());
 
     let overview = null;
     if (sphere.overview) {
-      overview = sphere.overview.map((section) => this._renderOverviewSection(section));
+      overview = sphere.overview.map(section => this._renderOverviewSection(section));
     }
 
     return (
       <View>
         {header}
         <View style={StyleSheet.styles.statisticsContainer} />
-        <TouchableOpacity style={[styles.readButton, {backgroundColor: colors.chromeTint, borderColor: colors.chromeTint}]} onPress={() => this.props.navigate(spherePassagesURL({sphereID: sphere.id, title: Localizable.t('sphere-passages', {name: sphere.name})}))}>
+        <TouchableOpacity
+          style={[styles.readButton, { backgroundColor: colors.chromeTint, borderColor: colors.chromeTint }]}
+          onPress={() => this.props.navigate(spherePassagesURL({ sphereID: sphere.id, title: Localizable.t('sphere-passages', { name: sphere.name }) }))}
+        >
           <Text style={styles.readButtonTitle}>Explore 52 key passages</Text>
         </TouchableOpacity>
 
-        <View style={styles.overviewContainer}>
-          {overview}
-        </View>
+        <View style={styles.overviewContainer}>{overview}</View>
 
         <View style={StyleSheet.styles.statisticsContainer} />
         <SegmentedControl
@@ -133,7 +114,7 @@ export default class FoundationalSphere extends Component {
           tintColor={'#59626A'}
           values={SEGMENTS}
           selectedIndex={this.state.selectedSegmentIndex}
-          onValueChange={(value) => this._onSegmentedControlValueChanged(SEGMENTS.indexOf(value))}
+          onValueChange={value => this._onSegmentedControlValueChanged(SEGMENTS.indexOf(value))}
         />
       </View>
     );
@@ -149,14 +130,16 @@ export default class FoundationalSphere extends Component {
         <PieChart
           color={colors.chromeTint}
           onPress={() => this._onPressSphereIcon(sphere)}
-          slices={[{color: colors.tint, value: spherePercent}, {color: colors.lightTint, value: 100 - spherePercent}]}
-          title={Localizable.toPercentage(spherePercent, {precision: 0})}
+          slices={[{ color: colors.tint, value: spherePercent }, { color: colors.lightTint, value: 100 - spherePercent }]}
+          title={Localizable.toPercentage(spherePercent, { precision: 0 })}
           size={57}
           style={styles.pie}
         />
         <View style={styles.listItem}>
           <Text style={StyleSheet.styles.cell.title}>{sphere.name}</Text>
-          <Text style={StyleSheet.styles.cell.valuetitle}>{Localizable.t('words.count', {count: wordCount, localizedCount: Localizable.toNumber(wordCount, {precision: 0})})}</Text>
+          <Text style={StyleSheet.styles.cell.valuetitle}>
+            {Localizable.t('words.count', { count: wordCount, localizedCount: Localizable.toNumber(wordCount, { precision: 0 }) })}
+          </Text>
         </View>
       </TouchableOpacity>
     );
@@ -174,11 +157,13 @@ export default class FoundationalSphere extends Component {
   _onPressSphere = (sphere: Object) => {
     const book = Book.all()[0];
     Preference.setObjectForKey([sphere.id], Preference.Keys.Reader.spheres);
-    this.props.navigate(readerURL({bookID: book.id, anchor: 'chapter-1', title: book.name}));
+    this.props.navigate(readerURL({ bookID: book.id, anchor: 'chapter-1', title: book.name }));
   };
 
   _onPressSphereIcon = (sphere: Object) => {
-    this.props.navigate(sphereURL({sphereID: sphere.id, title: Localizable.t('spheres.text'), description: Localizable.t('sphere-overview', {name: sphere.name})}));
+    this.props.navigate(
+      sphereURL({ sphereID: sphere.id, title: Localizable.t('spheres.text'), description: Localizable.t('sphere-overview', { name: sphere.name }) })
+    );
   };
 
   _onSegmentedControlValueChanged = (value: number) => {
@@ -187,7 +172,7 @@ export default class FoundationalSphere extends Component {
     this.setState({
       selectedSegmentIndex: value,
       dataSource: this._getDataSource(value),
-      wordCount: this._getWordCount(value)
+      wordCount: this._getWordCount(value),
     });
   };
 
@@ -196,13 +181,13 @@ export default class FoundationalSphere extends Component {
 
     switch (segmentIndex) {
       case SEGMENT_INDEXES.OLD_TESTAMENT:
-        return this.state.dataSource.cloneWithRowsAndSections({wholeBible: spheres});
+        return this.state.dataSource.cloneWithRowsAndSections({ wholeBible: spheres });
 
       case SEGMENT_INDEXES.NEW_TESTAMENT:
-        return this.state.dataSource.cloneWithRowsAndSections({oldTestament: spheres});
+        return this.state.dataSource.cloneWithRowsAndSections({ oldTestament: spheres });
 
       default:
-        return this.state.dataSource.cloneWithRowsAndSections({newTestament: spheres});
+        return this.state.dataSource.cloneWithRowsAndSections({ newTestament: spheres });
     }
   };
 
@@ -230,7 +215,7 @@ export default class FoundationalSphere extends Component {
       default:
         return null;
     }
-  }
+  };
 }
 
 const styles = StyleSheet.create({
@@ -244,7 +229,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 20,
     borderWidth: 1,
-    overflow:'hidden',
+    overflow: 'hidden',
     alignSelf: 'center',
     marginTop: 40,
     marginBottom: 20,
@@ -294,17 +279,17 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
   },
   ...Platform.select({
-      ios: {
-        segmentedControl: {
-          marginTop: 10,
-          marginHorizontal: 8,
-        },
+    ios: {
+      segmentedControl: {
+        marginTop: 10,
+        marginHorizontal: 8,
       },
-      android: {
-        segmentedControl: {
-          shadowColor: 'red',
-          elevation: 2,
-        },
+    },
+    android: {
+      segmentedControl: {
+        shadowColor: 'red',
+        elevation: 2,
       },
-  })
+    },
+  }),
 });

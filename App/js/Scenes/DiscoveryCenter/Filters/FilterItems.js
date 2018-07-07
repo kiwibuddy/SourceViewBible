@@ -1,19 +1,11 @@
 /* @flow */
 'use strict';
 
-import React, { Component } from 'react';
+import React from 'react';
 
-import {
-  Image,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { View } from 'react-native';
 
-import {
-  Colors,
-  StyleSheet,
-} from '../../../Common';
+import { StyleSheet } from '../../../Common';
 
 import ActantFilterItem from './ActantFilterItem';
 import BookRangeFilterItem from './BookRangeFilterItem';
@@ -29,10 +21,7 @@ import WordFilterItem from './WordFilterItem';
 import AddFilterItem from './AddFilterItem';
 
 const Blankslate = () => {
-  return (
-    <View style={styles.blankslate}>
-    </View>
-  );
+  return <View style={styles.blankslate} />;
 };
 
 type Props = {
@@ -44,7 +33,7 @@ type Props = {
 };
 
 const FilterItems = (props: Props) => {
-  const { card, filters } = props;
+  const { filters } = props;
   const filterItems = filters.map(filter => {
     let Item = null;
 
@@ -95,14 +84,9 @@ const FilterItems = (props: Props) => {
     }
     if (Item == null) return;
 
-    return <Item
-      key={filter.id}
-      filter={filter}
-      onPressDeleteFilter={() => props.onPressDeleteFilter(filter)}
-      onPressEditFilter={props.onPressEditFilter}
-    />
+    return <Item key={filter.id} filter={filter} onPressDeleteFilter={() => props.onPressDeleteFilter(filter)} onPressEditFilter={props.onPressEditFilter} />;
   });
-  const blankslate = (filters.length > 0 ? null : <Blankslate />);
+  const blankslate = filters.length > 0 ? null : <Blankslate />;
 
   return (
     <View>

@@ -1,18 +1,11 @@
 /* @flow */
 'use strict';
 
-import React, { Component } from 'react';
+import React from 'react';
 
-import {
-  Image,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { View } from 'react-native';
 
-import {
-  Localizable,
-  StyleSheet,
-} from '../../../Common';
+import { StyleSheet } from '../../../Common';
 
 import ChartColors from './ChartColors';
 import PieChartList from './PieChartList';
@@ -24,26 +17,18 @@ type Props = {
 };
 
 const PieChartSingle = (props: Props) => {
-  const { card, data } = props;
+  const { data } = props;
 
   const totalValue = data.reduce((sum, slice) => sum + slice.value, 0);
-  const slices = data.filter(slice => ((slice.value / totalValue) * 100) >= 1).map((slice, index) => {
-    return {...slice, color: slice.color || ChartColors.colorAtIndex(index)};
+  const slices = data.filter(slice => (slice.value / totalValue) * 100 >= 1).map((slice, index) => {
+    return { ...slice, color: slice.color || ChartColors.colorAtIndex(index) };
   });
 
   return (
     <View style={styles.container}>
       <View style={styles.chart}>
-        <PieChart
-          color={'red'}
-          slices={slices}
-          size={150}
-          style={styles.pie}
-        />
-        <PieChartList
-          {...props}
-          style={styles.list}
-        />
+        <PieChart color={'red'} slices={slices} size={150} style={styles.pie} />
+        <PieChartList {...props} style={styles.list} />
       </View>
     </View>
   );

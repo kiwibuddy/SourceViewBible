@@ -3,23 +3,10 @@
 
 import React, { Component } from 'react';
 
-
-import {
-  Image,
-  Platform,
-  RecyclerViewBackedScrollView,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { Image, RecyclerViewBackedScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { ListView } from '../../../Components/Common/DatabaseListView';
 
-import {
-  Colors,
-  Constants,
-  StyleSheet,
-  Localizable
-} from '../../../Common';
+import { Colors, StyleSheet } from '../../../Common';
 
 import { cardWithFilter, cardWithoutFilter } from './FilterUtils';
 
@@ -34,7 +21,7 @@ type Props = {
 };
 
 type State = {
-  dataSource: any
+  dataSource: any,
 };
 
 export default class Professions extends Component {
@@ -44,7 +31,7 @@ export default class Professions extends Component {
   constructor(props: Props) {
     super(props);
 
-    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id});
+    const dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1.id !== r2.id });
     this.state = {
       dataSource: dataSource,
     };
@@ -52,7 +39,7 @@ export default class Professions extends Component {
 
   componentDidMount() {
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(Profession.all())
+      dataSource: this.state.dataSource.cloneWithRows(Profession.all()),
     });
   }
 
@@ -69,9 +56,12 @@ export default class Professions extends Component {
     );
   }
 
-  _renderRow = (profession: Object, sectionID: any, rowID: any) => {
+  _renderRow = (profession: Object) => {
     const { card, filter } = this.props;
-    const checkmark = (card.type === 'sources' && filter && filter.professionID === profession.id) ? <Image style={{tintColor: Colors.tint}} source={require('../../../Images/common/checkmark.png')} /> : null;
+    const checkmark =
+      card.type === 'sources' && filter && filter.professionID === profession.id ? (
+        <Image style={{ tintColor: Colors.tint }} source={require('../../../Images/common/checkmark.png')} />
+      ) : null;
 
     return (
       <TouchableOpacity key={profession.id} style={StyleSheet.styles.listItem} onPress={() => this._filterProfession(profession)}>
@@ -94,11 +84,11 @@ export default class Professions extends Component {
       type: 'profession',
       actantType: this.props.type,
       ...this.props.filter,
-      professionID: profession.id
+      professionID: profession.id,
     };
     this.props.onDone(cardWithFilter(card, filter));
-  }
- }
+  };
+}
 
 const styles = StyleSheet.create({
   container: {

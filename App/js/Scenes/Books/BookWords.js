@@ -3,23 +3,12 @@
 
 import React, { Component } from 'react';
 
-
-import {
-  Image,
-  RecyclerViewBackedScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { RecyclerViewBackedScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { ListView } from '../../Components/Common/DatabaseListView';
 
-import {
-  Colors,
-  StyleSheet,
-  Localizable
-} from '../../Common';
+import { Colors, StyleSheet, Localizable } from '../../Common';
 
-import { SourcesBarChart, SpheresBarChart, WordCloud } from '../../Components/Charts';
+import { WordCloud } from '../../Components/Charts';
 import ParallaxMotionView from '../../Components/Common/ParallaxMotionView';
 
 import { Book, WordOccurrence } from '../../Database';
@@ -32,7 +21,7 @@ type Props = {
 
 type State = {
   book: Object,
-  dataSource: any
+  dataSource: any,
 };
 
 export default class BookWords extends Component {
@@ -44,10 +33,10 @@ export default class BookWords extends Component {
 
     const book = Book.findByID(props.bookID);
 
-    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
+    const dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2 });
     this.state = {
       book,
-      dataSource: dataSource.cloneWithRows(book.words)
+      dataSource: dataSource.cloneWithRows(book.words),
     };
   }
 
@@ -66,59 +55,62 @@ export default class BookWords extends Component {
     );
   }
 
-  _renderRow = (word: Object, sectionID: any, rowID: any) => {
+  _renderRow = (word: Object) => {
     return (
       <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => this._onPressWord(word)}>
         <Text style={StyleSheet.styles.cell.title}>{word.string}</Text>
-        <Text style={StyleSheet.styles.cell.valuetitle}>{Localizable.toNumber(word.count, {precision: 0})}</Text>
+        <Text style={StyleSheet.styles.cell.valuetitle}>{Localizable.toNumber(word.count, { precision: 0 })}</Text>
       </TouchableOpacity>
     );
   };
 
-  _renderHeader = (props: any) => {
+  _renderHeader = () => {
     const { book } = this.state;
     const words = book.words.map(word => word.string);
 
     return (
-      <WordCloud
-        backgroundColors={Colors.sources[book.principalSourceType].gradient.big}
-        style={styles.wordCloud}
-      >
-        <ParallaxMotionView intensity={5} style={[styles.parallax, {opacity: 0.8}]}>
-          <Text style={[styles.wc1, {top: 50, alignSelf: 'center'}]}>{words[0]}</Text>
+      <WordCloud backgroundColors={Colors.sources[book.principalSourceType].gradient.big} style={styles.wordCloud}>
+        <ParallaxMotionView intensity={5} style={[styles.parallax, { opacity: 0.8 }]}>
+          <Text style={[styles.wc1, { top: 50, alignSelf: 'center' }]}>{words[0]}</Text>
         </ParallaxMotionView>
-        <ParallaxMotionView intensity={10} style={[styles.parallax, {opacity: 0.8}]}>
-          <Text style={[styles.wc2, {top: 125, right: 15}]}>{words[1]}</Text>
-          <Text style={[styles.wc2, {top: 150, left: 15}]}>{words[2]}</Text>
-          <Text style={[styles.wc2, {top: -15, left: -10}]}>{words[3]}</Text>
-          <Text style={[styles.wc2, {top: -20, right: 40}]}>{words[4]}</Text>
+        <ParallaxMotionView intensity={10} style={[styles.parallax, { opacity: 0.8 }]}>
+          <Text style={[styles.wc2, { top: 125, right: 15 }]}>{words[1]}</Text>
+          <Text style={[styles.wc2, { top: 150, left: 15 }]}>{words[2]}</Text>
+          <Text style={[styles.wc2, { top: -15, left: -10 }]}>{words[3]}</Text>
+          <Text style={[styles.wc2, { top: -20, right: 40 }]}>{words[4]}</Text>
         </ParallaxMotionView>
-        <ParallaxMotionView intensity={20} style={[styles.parallax, {opacity: 0.6}]}>
-          <Text style={[styles.wc3, {top: 90, right: 10}]}>{words[5]}</Text>
-          <Text style={[styles.wc3, {top: 55, left: 10}]}>{words[6]}</Text>
-          <Text style={[styles.wc3, {top: 30, right: -10}]}>{words[7]}</Text>
-          <Text style={[styles.wc3, {top: 125, left: 30}]}>{words[8]}</Text>
+        <ParallaxMotionView intensity={20} style={[styles.parallax, { opacity: 0.6 }]}>
+          <Text style={[styles.wc3, { top: 90, right: 10 }]}>{words[5]}</Text>
+          <Text style={[styles.wc3, { top: 55, left: 10 }]}>{words[6]}</Text>
+          <Text style={[styles.wc3, { top: 30, right: -10 }]}>{words[7]}</Text>
+          <Text style={[styles.wc3, { top: 125, left: 30 }]}>{words[8]}</Text>
         </ParallaxMotionView>
-        <ParallaxMotionView intensity={30} style={[styles.parallax, {opacity: 0.3}]}>
-          <Text style={[styles.wc4, {top: 20, right: 150}]}>{words[9]}</Text>
-          <Text style={[styles.wc4, {top: 150, right: 170}]}>{words[10]}</Text>
-          <Text style={[styles.wc4, {top: 35, left: 80}]}>{words[11]}</Text>
-          <Text style={[styles.wc4, {top: 100, left: -10}]}>{words[12]}</Text>
-          <Text style={[styles.wc4, {top: -10, left: 130}]}>{words[13]}</Text>
-          <Text style={[styles.wc4, {top: 65, right: 60}]}>{words[14]}</Text>
+        <ParallaxMotionView intensity={30} style={[styles.parallax, { opacity: 0.3 }]}>
+          <Text style={[styles.wc4, { top: 20, right: 150 }]}>{words[9]}</Text>
+          <Text style={[styles.wc4, { top: 150, right: 170 }]}>{words[10]}</Text>
+          <Text style={[styles.wc4, { top: 35, left: 80 }]}>{words[11]}</Text>
+          <Text style={[styles.wc4, { top: 100, left: -10 }]}>{words[12]}</Text>
+          <Text style={[styles.wc4, { top: -10, left: 130 }]}>{words[13]}</Text>
+          <Text style={[styles.wc4, { top: 65, right: 60 }]}>{words[14]}</Text>
         </ParallaxMotionView>
-
       </WordCloud>
     );
   };
 
   _onPressWord = (word: Object) => {
     const { book } = this.state;
-    WordOccurrence.occurrences(word.string, {monadSet: book.monadSet}).then((occurrences, error) => {
+    WordOccurrence.occurrences(word.string, { monadSet: book.monadSet }).then(occurrences => {
       if (occurrences && occurrences.length > 0) {
         const occurrence = occurrences[0];
-        const occurrencesRoute = occurrencesURL({title: Localizable.t('passages'), occurrences, modal: true});
-        const route = readerURL({bookID: occurrence.book.id, anchor: `monad-${occurrence.firstMonad}`, title: occurrence.book.name, occurrenceIndex: 0, occurrences, occurrencesRoute});
+        const occurrencesRoute = occurrencesURL({ title: Localizable.t('passages'), occurrences, modal: true });
+        const route = readerURL({
+          bookID: occurrence.book.id,
+          anchor: `monad-${occurrence.firstMonad}`,
+          title: occurrence.book.name,
+          occurrenceIndex: 0,
+          occurrences,
+          occurrencesRoute,
+        });
         this.props.navigate(route);
       }
     });
@@ -135,38 +127,38 @@ const styles = StyleSheet.create({
     marginLeft: 15,
   },
   wordCloud: {
-    height: 200
+    height: 200,
   },
   parallax: {
     position: 'absolute',
     top: 0,
     bottom: 0,
     left: 0,
-    right: 0
+    right: 0,
   },
   wc1: {
     color: 'white',
-    backgroundColor:'transparent',
+    backgroundColor: 'transparent',
     fontSize: 66,
     fontWeight: '200',
   },
   wc2: {
     color: 'white',
-    backgroundColor:'transparent',
+    backgroundColor: 'transparent',
     fontSize: 42,
     fontWeight: '200',
     position: 'absolute',
   },
   wc3: {
     color: 'white',
-    backgroundColor:'transparent',
+    backgroundColor: 'transparent',
     fontSize: 30,
     fontWeight: '200',
     position: 'absolute',
   },
   wc4: {
     color: 'white',
-    backgroundColor:'transparent',
+    backgroundColor: 'transparent',
     fontSize: 18,
     fontWeight: '200',
     position: 'absolute',
@@ -175,5 +167,5 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 5,
     right: 5,
-  }
+  },
 });

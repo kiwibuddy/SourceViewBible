@@ -1,18 +1,11 @@
 /* @flow */
 'use strict';
 
-import React, { Component } from 'react';
+import React from 'react';
 
-import {
-  Image,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { Image, Text, View } from 'react-native';
 
-import {
-  StyleSheet,
-} from '../../Common';
+import { StyleSheet } from '../../Common';
 
 import Card from './Card';
 import { DeleteButton } from './Buttons';
@@ -29,7 +22,7 @@ const GettingStartedCard = (props: Props) => {
     <Card card={card}>
       <Card.Header>
         <View style={styles.leftContainer}>
-          <DeleteButton onPress={props.onPressDelete}/>
+          <DeleteButton onPress={props.onPressDelete} />
         </View>
       </Card.Header>
       <View style={styles.video}>
@@ -39,8 +32,8 @@ const GettingStartedCard = (props: Props) => {
       </View>
       <View style={styles.gettingstartedContainer}>
         <Image style={styles.gettingstartedIcon} source={require('./Images/dc-icon.png')} />
-        <Text style={[styles.gettingstartedHeader, {marginHorizontal: 10}]}>Create & Share Discoveries</Text>
-        <Text style={[styles.gettingstartedBody, {marginHorizontal: 10}]}>Tap your way to new Biblical insights and share what you find.</Text>
+        <Text style={[styles.gettingstartedHeader, { marginHorizontal: 10 }]}>Create & Share Discoveries</Text>
+        <Text style={[styles.gettingstartedBody, { marginHorizontal: 10 }]}>Tap your way to new Biblical insights and share what you find.</Text>
       </View>
     </Card>
   );
@@ -48,7 +41,7 @@ const GettingStartedCard = (props: Props) => {
 
 const styles = StyleSheet.create({
   gettingstartedContainer: {
-    alignItems: 'center'
+    alignItems: 'center',
   },
   gettingstartedIcon: {
     marginTop: 30,

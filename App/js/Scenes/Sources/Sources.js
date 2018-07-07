@@ -3,33 +3,12 @@
 
 import React, { Component } from 'react';
 
-
-import {
-  Image,
-  LayoutAnimation,
-  Platform,
-  RecyclerViewBackedScrollView,
-  ScrollView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { Image, LayoutAnimation, Platform, RecyclerViewBackedScrollView, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { ListView } from '../../Components/Common/DatabaseListView';
 
-import {
-  Analytics,
-  Colors,
-  StyleSheet,
-  Localizable
-} from '../../Common';
+import { Analytics, Colors, StyleSheet, Localizable } from '../../Common';
 
-import SegmentedControl from '../../Components/Common/SegmentedControl';
-import { SourcesBarChart, SpheresBarChart } from '../../Components/Charts';
-import { ReadingTime } from '../../Common/NumberHelper';
 import SourceIcon from '../../Components/Common/SourceIcon';
-
-const LISTVIEW_REF = 'LISTVIEW_REF';
 
 import { sourceURL, sourcesFilterURL } from '../../Navigation';
 import { NavigationBarButton } from '../../Components/Navigation';
@@ -49,14 +28,14 @@ type State = {
 
 export default class Sources extends Component {
   static NavigationHeaderStyle = {
-    elevation: null
+    elevation: null,
   };
 
   static renderNavigationHeaderRightComponent(props: Object) {
     return (
       <NavigationBarButton
         imageSource={require('../../Components/Navigation/Images/nav-filter.png')}
-        onPress={() => props.navigate(sourcesFilterURL({title: Localizable.t('settings'), modal: true}))}
+        onPress={() => props.navigate(sourcesFilterURL({ title: Localizable.t('settings'), modal: true }))}
       />
     );
   }
@@ -67,17 +46,19 @@ export default class Sources extends Component {
   constructor(props: Props) {
     super(props);
 
-    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
+    const dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2 });
 
     this.state = {
       dataSource: dataSource,
       search: null,
-      filters: Preference.objectForKey(Preference.Keys.Sources.filters) || []
+      filters: Preference.objectForKey(Preference.Keys.Sources.filters) || [],
     };
   }
 
   render() {
-    const sources = Actant.sources(this.state.search, this.state.filters).sorted('firstInitial').sorted('name');
+    const sources = Actant.sources(this.state.search, this.state.filters)
+      .sorted('firstInitial')
+      .sorted('name');
     const { rows, sections } = this._getRowsAndSections(sources);
     const dataSource = this.state.dataSource.cloneWithRowsAndSections(rows, sections);
     const filterBar = this._renderFilterBar();
@@ -91,7 +72,7 @@ export default class Sources extends Component {
             autoCorrect={false}
             autoFocus={false}
             clearButtonMode="always"
-            onChangeText={(text) => this._onSearch(text)}
+            onChangeText={text => this._onSearch(text)}
             placeholder={Localizable.t('search-name')}
             style={styles.textInput}
             value={this.state.search || ''}
@@ -141,7 +122,7 @@ export default class Sources extends Component {
       }
 
       return (
-        <View key={'filter-' + filter.id} style={[styles.filterLabelContainer, {backgroundColor: Colors.tint}]}>
+        <View key={'filter-' + filter.id} style={[styles.filterLabelContainer, { backgroundColor: Colors.tint }]}>
           <Text style={[styles.filterLabel]}>{title}</Text>
         </View>
       );
@@ -168,28 +149,28 @@ export default class Sources extends Component {
     );
   };
 
-  _renderRow = (source: Object, sectionID: any, rowID: any) => {
+  _renderRow = (source: Object) => {
     const chartData = {};
     chartData[source.principalSourceType] = source.wordCount;
 
     const wordCount = source.wordCount;
 
     return (
-      <TouchableOpacity style={styles.section} onPress={() => this.props.navigate(sourceURL({sourceID: source.id, title: source.name}))}>
+      <TouchableOpacity style={styles.section} onPress={() => this.props.navigate(sourceURL({ sourceID: source.id, title: source.name }))}>
         <View style={styles.sourcesCellContainer}>
           <View style={styles.sourcesAvatar}>
-            <SourceIcon
-              source={source}
-              style={styles.sourceAvatar}
-              size={20}
-            />
+            <SourceIcon source={source} style={styles.sourceAvatar} size={20} />
           </View>
           <View style={styles.sourcesLeftContainer}>
             <Text style={StyleSheet.styles.cell.title}>{source.name}</Text>
-            <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('words.count', {count: wordCount, localizedCount: Localizable.toNumber(wordCount, {precision: 0})})}</Text>
+            <Text style={StyleSheet.styles.cell.subtitle}>
+              {Localizable.t('words.count', { count: wordCount, localizedCount: Localizable.toNumber(wordCount, { precision: 0 }) })}
+            </Text>
           </View>
           <View style={styles.sourcesRightContainer}>
-            <Text numberOfLines={1} style={[StyleSheet.styles.cell.subtitle, {textAlign: 'right'}]}>{source.chronologyDescription}</Text>
+            <Text numberOfLines={1} style={[StyleSheet.styles.cell.subtitle, { textAlign: 'right' }]}>
+              {source.chronologyDescription}
+            </Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -199,9 +180,9 @@ export default class Sources extends Component {
   _getRowsAndSections = (sources: any) => {
     const rows = {};
     const sections = [];
-    if (sources.length == 0) return {rows, sections};
+    if (sources.length == 0) return { rows, sections };
 
-    sources.forEach((source) => {
+    sources.forEach(source => {
       let section = source.firstInitial;
       if (parseInt(section) > 0) section = '#';
       if (sections.indexOf(section) === -1) {
@@ -217,20 +198,20 @@ export default class Sources extends Component {
       sections.push(numericSection);
     }
 
-    return {rows, sections};
+    return { rows, sections };
   };
 
   _onSearch = (text: string) => {
-    this.setState({search: text});
-    Analytics.logSearch(text, {type: 'Source'});
+    this.setState({ search: text });
+    Analytics.logSearch(text, { type: 'Source' });
   };
 
   _onPressClearFilter = () => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     Preference.setObjectForKey([], Preference.Keys.Sources.filters);
-    this.setState({filters: []});
+    this.setState({ filters: [] });
   };
- }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -263,7 +244,7 @@ const styles = StyleSheet.create({
   sourceAvatar: {
     width: 20,
     height: 20,
-    marginRight: 5
+    marginRight: 5,
   },
   sourcesBarChart: {
     height: 4,
@@ -315,76 +296,76 @@ const styles = StyleSheet.create({
     right: 0,
   },
   ...Platform.select({
-      ios: {
-        sectionHeaderContainer: {
-          paddingVertical: 4,
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          paddingRight: 15,
-          backgroundColor: '#FAFAFA',
-          borderBottomWidth: StyleSheet.hairlineWidth,
-          borderBottomColor: '#c8c7cc',
-        },
-        sectionHeaderTitle: {
-          color: '#59626a',
-          fontSize: 15,
-          fontWeight: 'bold',
-          marginLeft: 8,
-        },
-        textInputContainer: {
-          borderBottomWidth: StyleSheet.hairlineWidth,
-          borderBottomColor: '#c8c7cc',
-        },
-        textInput: {
-          fontSize: 14,
-          backgroundColor: '#ececec',
-          borderColor: '#ececec',
-          borderRadius: 3,
-          borderWidth: 1,
-          paddingLeft: 8,
-          marginHorizontal: 8,
-          marginVertical: 8,
-          height: 26,
-          padding: 0, // Android workaround
-        },
-        segmentedControl: {
-          marginTop: 8,
-          marginHorizontal: 8,
-          marginBottom: 10,
-        },
+    ios: {
+      sectionHeaderContainer: {
+        paddingVertical: 4,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingRight: 15,
+        backgroundColor: '#FAFAFA',
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        borderBottomColor: '#c8c7cc',
       },
-      android: {
-        sectionHeaderContainer: {
-          paddingVertical: 4,
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          paddingRight: 15,
-        },
-        sectionHeaderTitle: {
-          color: '#59626a',
-          fontSize: 15,
-          fontWeight: 'bold',
-          marginLeft: 10,
-        },
-        textInputContainer: {
-          borderBottomWidth: StyleSheet.hairlineWidth,
-          borderBottomColor: '#c8c7cc',
-          backgroundColor: '#FAFAFA',
-          elevation: 1,
-        },
-        textInput: {
-          fontSize: 16,
-          backgroundColor: '#FAFAFA',
-          paddingLeft: 8,
-          marginHorizontal: 8,
-          marginVertical: 8,
-          height: 30,
-          padding: 0, // Android workaround
-        },
-        segmentedControl: {
-          shadowColor: 'red',
-          elevation: 2,
-        },
+      sectionHeaderTitle: {
+        color: '#59626a',
+        fontSize: 15,
+        fontWeight: 'bold',
+        marginLeft: 8,
       },
-  })
+      textInputContainer: {
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        borderBottomColor: '#c8c7cc',
+      },
+      textInput: {
+        fontSize: 14,
+        backgroundColor: '#ececec',
+        borderColor: '#ececec',
+        borderRadius: 3,
+        borderWidth: 1,
+        paddingLeft: 8,
+        marginHorizontal: 8,
+        marginVertical: 8,
+        height: 26,
+        padding: 0, // Android workaround
+      },
+      segmentedControl: {
+        marginTop: 8,
+        marginHorizontal: 8,
+        marginBottom: 10,
+      },
+    },
+    android: {
+      sectionHeaderContainer: {
+        paddingVertical: 4,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingRight: 15,
+      },
+      sectionHeaderTitle: {
+        color: '#59626a',
+        fontSize: 15,
+        fontWeight: 'bold',
+        marginLeft: 10,
+      },
+      textInputContainer: {
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        borderBottomColor: '#c8c7cc',
+        backgroundColor: '#FAFAFA',
+        elevation: 1,
+      },
+      textInput: {
+        fontSize: 16,
+        backgroundColor: '#FAFAFA',
+        paddingLeft: 8,
+        marginHorizontal: 8,
+        marginVertical: 8,
+        height: 30,
+        padding: 0, // Android workaround
+      },
+      segmentedControl: {
+        shadowColor: 'red',
+        elevation: 2,
+      },
+    },
+  }),
 });

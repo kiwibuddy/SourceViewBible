@@ -3,23 +3,10 @@
 
 import React, { Component } from 'react';
 
-
-import {
-  AsyncStorage,
-  Platform,
-  RecyclerViewBackedScrollView,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { Platform, RecyclerViewBackedScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { ListView } from '../../../Components/Common/DatabaseListView';
 
-import {
-  Colors,
-  Constants,
-  StyleSheet,
-  Localizable
-} from '../../../Common';
+import { Colors, StyleSheet, Localizable } from '../../../Common';
 
 import SegmentedControl from '../../../Components/Common/SegmentedControl';
 
@@ -55,16 +42,16 @@ export default class Books extends Component {
   constructor(props: Props) {
     super(props);
 
-    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
+    const dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2 });
     this.state = {
       dataSource: dataSource,
-      selectedSegmentIndex: SEGMENT_INDEXES.TEXT
+      selectedSegmentIndex: SEGMENT_INDEXES.TEXT,
     };
   }
 
   componentDidMount() {
     this.setState({
-      dataSource: this._getDataSource(this.state.selectedSegmentIndex)
+      dataSource: this._getDataSource(this.state.selectedSegmentIndex),
     });
   }
 
@@ -76,7 +63,7 @@ export default class Books extends Component {
           tintColor={Colors.tint}
           values={SEGMENTS}
           selectedIndex={this.state.selectedSegmentIndex}
-          onValueChange={(value) => this._onSegmentedControlValueChanged(SEGMENTS.indexOf(value))}
+          onValueChange={value => this._onSegmentedControlValueChanged(SEGMENTS.indexOf(value))}
         />
 
         <ListView
@@ -90,7 +77,7 @@ export default class Books extends Component {
     );
   }
 
-  _renderRow = (book: Object, sectionID: any, rowID: any) => {
+  _renderRow = (book: Object) => {
     return (
       <TouchableOpacity key={book.id} style={StyleSheet.styles.listItem} onPress={() => this._filterBook(book)}>
         <Text style={StyleSheet.styles.cell.title}>{book.name}</Text>
@@ -101,20 +88,20 @@ export default class Books extends Component {
   _getDataSource = (segmentIndex: number) => {
     switch (segmentIndex) {
       case SEGMENT_INDEXES.ALPHABETICAL:
-        return this.state.dataSource.cloneWithRowsAndSections({alphabetical: Book.all().sorted('name')});
+        return this.state.dataSource.cloneWithRowsAndSections({ alphabetical: Book.all().sorted('name') });
 
       default:
-        return this.state.dataSource.cloneWithRowsAndSections({textOrder: Book.all().sorted('textOrder')});
+        return this.state.dataSource.cloneWithRowsAndSections({ textOrder: Book.all().sorted('textOrder') });
     }
   };
 
   _onSegmentedControlValueChanged = (value: number) => {
     const listView = this.refs[LISTVIEW_REF];
-    listView.scrollTo({y: 0, animated: false});
+    listView.scrollTo({ y: 0, animated: false });
 
     this.setState({
       selectedSegmentIndex: value,
-      dataSource: this._getDataSource(value)
+      dataSource: this._getDataSource(value),
     });
   };
 
@@ -126,7 +113,6 @@ export default class Books extends Component {
     };
 
     if (this.props.filter && this.props.filter.type === 'book-range') {
-      const { books } = this.props.filter;
       if (this.props.item === 'from') {
         filter.books = {
           ...filter.books,
@@ -144,7 +130,7 @@ export default class Books extends Component {
 
     this.props.onDone(cardWithFilter(this.props.card, filter));
   };
- }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -155,18 +141,18 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   ...Platform.select({
-      ios: {
-        segmentedControl: {
-          marginTop: 8,
-          marginHorizontal: 8,
-          marginBottom: 8,
-        },
+    ios: {
+      segmentedControl: {
+        marginTop: 8,
+        marginHorizontal: 8,
+        marginBottom: 8,
       },
-      android: {
-        segmentedControl: {
-          shadowColor: 'red',
-          elevation: 2,
-        },
+    },
+    android: {
+      segmentedControl: {
+        shadowColor: 'red',
+        elevation: 2,
       },
-  })
+    },
+  }),
 });

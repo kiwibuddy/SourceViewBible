@@ -3,30 +3,17 @@
 
 import React, { Component } from 'react';
 
-
-import {
-  AsyncStorage,
-  Platform,
-  RecyclerViewBackedScrollView,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { Platform, RecyclerViewBackedScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { ListView } from '../../Components/Common/DatabaseListView';
 
-import {
-  Colors,
-  Constants,
-  StyleSheet,
-  Localizable
-} from '../../Common';
+import { Colors, StyleSheet, Localizable } from '../../Common';
 
 import { Preference } from '../../Preferences';
 
 import { bookURL } from '../../Navigation';
 
 import SegmentedControl from '../../Components/Common/SegmentedControl';
-import { SourcesBarChart, SpheresBarChart } from '../../Components/Charts';
+import { SourcesBarChart } from '../../Components/Charts';
 import { ReadingTime } from '../../Common/NumberHelper';
 
 import { NavigationHeader } from '../../Components/Navigation';
@@ -55,7 +42,7 @@ type State = {
 
 export default class Books extends Component {
   static NavigationHeaderStyle = {
-    elevation: null
+    elevation: null,
   };
 
   props: Props;
@@ -64,16 +51,16 @@ export default class Books extends Component {
   constructor(props: Props) {
     super(props);
 
-    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
+    const dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1.id !== r2.id, sectionHeaderHasChanged: (s1, s2) => s1 !== s2 });
     this.state = {
       dataSource: dataSource,
-      selectedSegmentIndex: Preference.numberForKey(SORT_PREFERENCE) || SEGMENT_INDEXES.TEXT
+      selectedSegmentIndex: Preference.numberForKey(SORT_PREFERENCE) || SEGMENT_INDEXES.TEXT,
     };
   }
 
   componentDidMount() {
     this.setState({
-      dataSource: this._getDataSource(this.state.selectedSegmentIndex)
+      dataSource: this._getDataSource(this.state.selectedSegmentIndex),
     });
   }
 
@@ -85,7 +72,7 @@ export default class Books extends Component {
           tintColor={Colors.tint}
           values={SEGMENTS}
           selectedIndex={this.state.selectedSegmentIndex}
-          onValueChange={(value) => this._onSegmentedControlValueChanged(SEGMENTS.indexOf(value))}
+          onValueChange={value => this._onSegmentedControlValueChanged(SEGMENTS.indexOf(value))}
         />
 
         <ListView
@@ -100,20 +87,20 @@ export default class Books extends Component {
     );
   }
 
-  _renderRow = (book: Object, sectionID: any, rowID: any) => {
+  _renderRow = (book: Object) => {
     return (
-      <TouchableOpacity key={book.id} style={styles.section} onPress={() => this.props.navigate(bookURL({bookID: book.id, title: Localizable.t('book-overview', {name: book.name})}))}>
-        <View style={[styles.cellContainer, {paddingVertical: 8}]}>
+      <TouchableOpacity
+        key={book.id}
+        style={styles.section}
+        onPress={() => this.props.navigate(bookURL({ bookID: book.id, title: Localizable.t('book-overview', { name: book.name }) }))}
+      >
+        <View style={[styles.cellContainer, { paddingVertical: 8 }]}>
           <View style={styles.horizontalContainer}>
             <View style={styles.leftContainer}>
               <Text style={StyleSheet.styles.cell.title}>{book.name}</Text>
             </View>
             <View style={styles.rightContainer}>
-              <SourcesBarChart
-                style={styles.stackedBarChart}
-                data={[book.sourceTypeCounts]}
-                maxChartValue={MAX_BOOK_WORD_COUNT}
-              />
+              <SourcesBarChart style={styles.stackedBarChart} data={[book.sourceTypeCounts]} maxChartValue={MAX_BOOK_WORD_COUNT} />
             </View>
           </View>
           <View style={styles.horizontalContainer}>
@@ -121,8 +108,8 @@ export default class Books extends Component {
               <Text style={StyleSheet.styles.cell.subtitle}>{ReadingTime(book.wordCount)}</Text>
             </View>
             <View style={styles.rightContainer}>
-              <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('sources.count', {count: book.sourceCount})}</Text>
-              </View>
+              <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('sources.count', { count: book.sourceCount })}</Text>
+            </View>
           </View>
         </View>
       </TouchableOpacity>
@@ -132,28 +119,28 @@ export default class Books extends Component {
   _getDataSource = (segmentIndex: number) => {
     switch (segmentIndex) {
       case SEGMENT_INDEXES.ALPHABETICAL:
-        return this.state.dataSource.cloneWithRowsAndSections({alphabetical: Book.all().sorted('name')});
+        return this.state.dataSource.cloneWithRowsAndSections({ alphabetical: Book.all().sorted('name') });
 
       case SEGMENT_INDEXES.PRINCIPALITY:
-        return this.state.dataSource.cloneWithRowsAndSections({principality: Book.all().sorted('wordCount', true)});
+        return this.state.dataSource.cloneWithRowsAndSections({ principality: Book.all().sorted('wordCount', true) });
 
       default:
-        return this.state.dataSource.cloneWithRowsAndSections({textOrder: Book.all().sorted('textOrder')});
+        return this.state.dataSource.cloneWithRowsAndSections({ textOrder: Book.all().sorted('textOrder') });
     }
   };
 
   _onSegmentedControlValueChanged = (value: number) => {
     const listView = this.refs[LISTVIEW_REF];
-    listView.scrollTo({y: 0, animated: false});
+    listView.scrollTo({ y: 0, animated: false });
 
     Preference.setNumberForKey(value, SORT_PREFERENCE);
 
     this.setState({
       selectedSegmentIndex: value,
-      dataSource: this._getDataSource(value)
+      dataSource: this._getDataSource(value),
     });
   };
- }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -186,18 +173,18 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   ...Platform.select({
-      ios: {
-        segmentedControl: {
-          marginTop: 8,
-          marginHorizontal: 8,
-          marginBottom: 8,
-        },
+    ios: {
+      segmentedControl: {
+        marginTop: 8,
+        marginHorizontal: 8,
+        marginBottom: 8,
       },
-      android: {
-        segmentedControl: {
-          backgroundColor: NavigationHeader.BACKGROUND_COLOR,
-          elevation: NavigationHeader.ELEVATION,
-        },
+    },
+    android: {
+      segmentedControl: {
+        backgroundColor: NavigationHeader.BACKGROUND_COLOR,
+        elevation: NavigationHeader.ELEVATION,
       },
-  })
+    },
+  }),
 });

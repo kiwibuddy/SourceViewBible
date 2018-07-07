@@ -3,21 +3,9 @@
 
 import React, { Component } from 'react';
 
+import { ListView, View } from 'react-native';
 
-import {
-  ListView,
-  RecyclerViewBackedScrollView,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
-
-import {
-  Colors,
-  Constants,
-  StyleSheet,
-  Localizable
-} from '../../../Common';
+import { StyleSheet } from '../../../Common';
 
 import ChartColors from './ChartColors';
 import PieChartList from './PieChartList';
@@ -30,7 +18,7 @@ type Props = {
 };
 
 type State = {
-  dataSource: any
+  dataSource: any,
 };
 
 export default class PieChartMultiple extends Component {
@@ -41,9 +29,9 @@ export default class PieChartMultiple extends Component {
     super(props);
 
     const { data } = this.props;
-    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id});
+    const dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1.id !== r2.id });
     this.state = {
-      dataSource: dataSource.cloneWithRows(data.slice(0, Math.min(data.length, 100)))
+      dataSource: dataSource.cloneWithRows(data.slice(0, Math.min(data.length, 100))),
     };
   }
 
@@ -63,13 +51,13 @@ export default class PieChartMultiple extends Component {
     );
   }
 
-  _renderChart = (pie: Object, sectionID: any, rowID: any) => {
+  _renderChart = (pie: Object) => {
     const data = pie.value;
     if (!Array.isArray(data)) return null;
 
     const totalValue = data.reduce((sum, slice) => sum + slice.value, 0);
-    const slices = data.filter(slice => ((slice.value / totalValue) * 100) >= 1).map((slice, index) => {
-      return {...slice, color: slice.color || ChartColors.colorAtIndex(index)};
+    const slices = data.filter(slice => (slice.value / totalValue) * 100 >= 1).map((slice, index) => {
+      return { ...slice, color: slice.color || ChartColors.colorAtIndex(index) };
     });
 
     return (
@@ -86,7 +74,7 @@ export default class PieChartMultiple extends Component {
                 size={100}
                 style={styles.pie}
                 title={pie.label}
-                titleStyle={{marginHorizontal: 11, fontSize: 13, fontWeight: 'bold'}}
+                titleStyle={{ marginHorizontal: 11, fontSize: 13, fontWeight: 'bold' }}
               />
             );
           }}
@@ -94,7 +82,7 @@ export default class PieChartMultiple extends Component {
       </View>
     );
   };
- }
+}
 
 const styles = StyleSheet.create({
   container: {

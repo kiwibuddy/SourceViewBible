@@ -1,16 +1,9 @@
 /* @flow */
 'use strict';
 
-import React, { Component } from 'react';
+import React from 'react';
 
-import {
-  Image,
-  TouchableOpacity,
-} from 'react-native';
-
-import {
-  StyleSheet,
-} from '../../Common';
+import { Image, TouchableOpacity } from 'react-native';
 
 export const DeleteButton = (props: Object) => {
   return (
@@ -31,7 +24,7 @@ export const DuplicateButton = (props: Object) => {
 export const ShareButton = (props: Object) => {
   return (
     <TouchableOpacity {...props}>
-      <Image source={require('./Images/btn-share.png')} style={{marginLeft: 8,}} />
+      <Image source={require('./Images/btn-share.png')} style={{ marginLeft: 8 }} />
     </TouchableOpacity>
   );
 };

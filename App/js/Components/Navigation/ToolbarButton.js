@@ -1,21 +1,11 @@
 /* @flow */
 'use strict';
 
-import React, { Component } from 'react';
+import React from 'react';
 
+import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-import {
-  Image,
-  Platform,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
-
-import {
-  Colors
-} from '../../Common';
+import { Colors } from '../../Common';
 
 type Props = {
   disabled?: boolean,
@@ -27,21 +17,21 @@ type Props = {
 };
 
 const ToolbarButton = (props: Props) => {
-  const imageStyle = props.disabled ? {tintColor: 'gray'} : {};
-  const textStyle = props.disabled ? {color: 'gray'} : {};
-  const title = props.title ? <View style={styles.textContainer}><Text style={[styles.text, props.titleStyle, textStyle]}>{props.title}</Text></View> : null;
+  const imageStyle = props.disabled ? { tintColor: 'gray' } : {};
+  const textStyle = props.disabled ? { color: 'gray' } : {};
+  const title = props.title ? (
+    <View style={styles.textContainer}>
+      <Text style={[styles.text, props.titleStyle, textStyle]}>{props.title}</Text>
+    </View>
+  ) : null;
   const image = props.imageSource ? <Image source={props.imageSource} style={[styles.image, imageStyle]} /> : null;
 
-  const buttonStyle = title ? {width: null, height: null, flex: 1} : {};
+  const buttonStyle = title ? { width: null, height: null, flex: 1 } : {};
 
   return (
-    <TouchableOpacity
-      disabled={props.disabled}
-      onPress={props.onPress}
-      style={[styles.button, buttonStyle, props.style]}
-    >
-    {title}
-    {image}
+    <TouchableOpacity disabled={props.disabled} onPress={props.onPress} style={[styles.button, buttonStyle, props.style]}>
+      {title}
+      {image}
     </TouchableOpacity>
   );
 };
@@ -54,7 +44,7 @@ const styles = StyleSheet.create({
         width: 30,
         height: 30,
       },
-    })
+    }),
   },
   image: {
     tintColor: Colors.tint,

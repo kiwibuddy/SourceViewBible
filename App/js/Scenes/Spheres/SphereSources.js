@@ -3,36 +3,15 @@
 
 import React, { Component } from 'react';
 
-
-import {
-  AsyncStorage,
-  Dimensions,
-  Platform,
-  RecyclerViewBackedScrollView,
-  ScrollView,
-  Text,
-  TextInput,
-  View,
-  TouchableOpacity
-} from 'react-native';
+import { Platform, RecyclerViewBackedScrollView, Text, TextInput, View, TouchableOpacity } from 'react-native';
 import { ListView } from '../../Components/Common/DatabaseListView';
 
-const { width: WIDTH } = Dimensions.get('window');
-
-import {
-  Colors,
-  Constants,
-  Localizable,
-  StyleSheet,
-} from '../../Common';
+import { Colors, Localizable, StyleSheet } from '../../Common';
 
 import { Preference } from '../../Preferences';
 
 import { BarChart, PieChart } from '../../Components/Charts';
-import Icon from '../../Components/Common/Icon';
 import SourceIcon from '../../Components/Common/SourceIcon';
-
-import SegmentedControl from '../../Components/Common/SegmentedControl';
 
 import { readerURL, sourceURL } from '../../Navigation';
 
@@ -54,7 +33,7 @@ type PieProps = {
   subtitleStyle?: any,
   size: number,
   style?: any,
-  titleStyle?: any
+  titleStyle?: any,
 };
 
 export default class SphereSources extends Component {
@@ -65,12 +44,12 @@ export default class SphereSources extends Component {
     super(props);
 
     const sphere = Sphere.findByID(props.sphereID);
-    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id});
+    const dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1.id !== r2.id });
 
     this.state = {
       dataSource: dataSource,
       sphere,
-      search: null
+      search: null,
     };
   }
 
@@ -83,7 +62,7 @@ export default class SphereSources extends Component {
         renderHeader={this._renderHeader}
         renderRow={this._renderRow}
         renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
-        renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={[StyleSheet.styles.separator, {marginLeft: 8}]} />}
+        renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={[StyleSheet.styles.separator, { marginLeft: 8 }]} />}
         keyboardShouldPersistTaps={true}
         keyboardDismissMode="on-drag"
         pageSize={10}
@@ -93,23 +72,81 @@ export default class SphereSources extends Component {
   }
 
   _renderHeader = () => {
-    const { sphere } = this.state;
-    const colors = Colors.spheres[sphere.id];
     const sources = this._sourceSortedByPercentage().slice(0, 10);
 
     return (
       <View>
         <View style={styles.sphereSourcesGraph}>
-          {this._renderPie({source: sources[0], size: 130, subtitleStyle: {fontSize: 15, textAlign: 'center'}, titleStyle: {fontSize: 24}, style: {top: 50, alignSelf: 'center'}})}
-          {this._renderPie({source: sources[1], size: 80, subtitleStyle: {fontSize: 13, textAlign: 'center'}, titleStyle: {fontSize: 20}, style: [styles.pie, {top: 95, left: 40}]})}
-          {this._renderPie({source: sources[2], size: 80, subtitleStyle: {fontSize: 13, textAlign: 'center'}, titleStyle: {fontSize: 20}, style: [styles.pie, {top: 20, left: -5}]})}
-          {this._renderPie({source: sources[3], size: 80, subtitleStyle: {fontSize: 13, textAlign: 'center'}, titleStyle: {fontSize: 20}, style: [styles.pie, {top: 30, right: 40}]})}
-          {this._renderPie({source: sources[4], size: 60, subtitleStyle: {fontSize: 11, textAlign: 'center'}, titleStyle: {fontSize: 16}, style: [styles.pie, {top: 130, right: 65}]})}
-          {this._renderPie({source: sources[5], size: 60, subtitleStyle: {fontSize: 11, textAlign: 'center'}, titleStyle: {fontSize: 16}, style: [styles.pie, {top: 15, left: 80}]})}
-          {this._renderPie({source: sources[6], size: 60, subtitleStyle: {fontSize: 11, textAlign: 'center'}, titleStyle: {fontSize: 16}, style: [styles.pie, {top: 105, right: 0}]})}
-          {this._renderPie({source: sources[7], size: 50, subtitleStyle: {fontSize: 8, textAlign: 'center'}, titleStyle: {fontSize: 13}, style: [styles.pie, {top: 5, left: 210}]})}
-          {this._renderPie({source: sources[8], size: 50, subtitleStyle: {fontSize: 8, textAlign: 'center'}, titleStyle: {fontSize: 13}, style: [styles.pie, {top: 15, right: -10}]})}
-          {this._renderPie({source: sources[9], size: 50, subtitleStyle: {fontSize: 8, textAlign: 'center'}, titleStyle: {fontSize: 13}, style: [styles.pie, {top: 145, left: -5}]})}
+          {this._renderPie({
+            source: sources[0],
+            size: 130,
+            subtitleStyle: { fontSize: 15, textAlign: 'center' },
+            titleStyle: { fontSize: 24 },
+            style: { top: 50, alignSelf: 'center' },
+          })}
+          {this._renderPie({
+            source: sources[1],
+            size: 80,
+            subtitleStyle: { fontSize: 13, textAlign: 'center' },
+            titleStyle: { fontSize: 20 },
+            style: [styles.pie, { top: 95, left: 40 }],
+          })}
+          {this._renderPie({
+            source: sources[2],
+            size: 80,
+            subtitleStyle: { fontSize: 13, textAlign: 'center' },
+            titleStyle: { fontSize: 20 },
+            style: [styles.pie, { top: 20, left: -5 }],
+          })}
+          {this._renderPie({
+            source: sources[3],
+            size: 80,
+            subtitleStyle: { fontSize: 13, textAlign: 'center' },
+            titleStyle: { fontSize: 20 },
+            style: [styles.pie, { top: 30, right: 40 }],
+          })}
+          {this._renderPie({
+            source: sources[4],
+            size: 60,
+            subtitleStyle: { fontSize: 11, textAlign: 'center' },
+            titleStyle: { fontSize: 16 },
+            style: [styles.pie, { top: 130, right: 65 }],
+          })}
+          {this._renderPie({
+            source: sources[5],
+            size: 60,
+            subtitleStyle: { fontSize: 11, textAlign: 'center' },
+            titleStyle: { fontSize: 16 },
+            style: [styles.pie, { top: 15, left: 80 }],
+          })}
+          {this._renderPie({
+            source: sources[6],
+            size: 60,
+            subtitleStyle: { fontSize: 11, textAlign: 'center' },
+            titleStyle: { fontSize: 16 },
+            style: [styles.pie, { top: 105, right: 0 }],
+          })}
+          {this._renderPie({
+            source: sources[7],
+            size: 50,
+            subtitleStyle: { fontSize: 8, textAlign: 'center' },
+            titleStyle: { fontSize: 13 },
+            style: [styles.pie, { top: 5, left: 210 }],
+          })}
+          {this._renderPie({
+            source: sources[8],
+            size: 50,
+            subtitleStyle: { fontSize: 8, textAlign: 'center' },
+            titleStyle: { fontSize: 13 },
+            style: [styles.pie, { top: 15, right: -10 }],
+          })}
+          {this._renderPie({
+            source: sources[9],
+            size: 50,
+            subtitleStyle: { fontSize: 8, textAlign: 'center' },
+            titleStyle: { fontSize: 13 },
+            style: [styles.pie, { top: 145, left: -5 }],
+          })}
         </View>
         <View style={styles.textInputContainer}>
           <TextInput
@@ -117,7 +154,7 @@ export default class SphereSources extends Component {
             autoCorrect={false}
             autoFocus={false}
             clearButtonMode="always"
-            onChangeText={(text) => this.setState({search: text})}
+            onChangeText={text => this.setState({ search: text })}
             placeholder={Localizable.t('search-name')}
             style={styles.textInput}
             value={this.state.search || ''}
@@ -136,14 +173,10 @@ export default class SphereSources extends Component {
 
     return (
       <TouchableOpacity style={styles.section} onPress={() => this._onPressSource(source)}>
-        <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
+        <View style={[styles.sourcesCellContainer, { paddingVertical: 12 }]}>
           <View style={styles.sourcesLeftContainer}>
             <TouchableOpacity onPress={() => this._onPressSourceIcon(source)}>
-              <SourceIcon
-                source={source}
-                style={[styles.sourceAvatar]}
-                size={20}
-              />
+              <SourceIcon source={source} style={[styles.sourceAvatar]} size={20} />
             </TouchableOpacity>
             <View style={styles.sourcesContent}>
               <Text style={StyleSheet.styles.cell.titlemedium}>{source.name}</Text>
@@ -151,14 +184,16 @@ export default class SphereSources extends Component {
           </View>
           <View style={styles.sourcesRightContainer}>
             <BarChart
-              bars={[{color: colors.tint, value: spherePercent}]}
-              deltaStyle={{backgroundColor: colors.lightTint}}
+              bars={[{ color: colors.tint, value: spherePercent }]}
+              deltaStyle={{ backgroundColor: colors.lightTint }}
               maxChartValue={100}
               style={styles.sourcesBarChart}
             />
             <View style={styles.dataPair}>
-              <Text style={[StyleSheet.styles.cell.percentage, {color: colors.chromeTint}]}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
-              <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('words.count', {count: wordCount, localizedCount: Localizable.toNumber(wordCount, {precision: 0})})}</Text>
+              <Text style={[StyleSheet.styles.cell.percentage, { color: colors.chromeTint }]}>{Localizable.toPercentage(spherePercent, { precision: 0 })}</Text>
+              <Text style={StyleSheet.styles.cell.subtitle}>
+                {Localizable.t('words.count', { count: wordCount, localizedCount: Localizable.toNumber(wordCount, { precision: 0 }) })}
+              </Text>
             </View>
           </View>
         </View>
@@ -166,37 +201,37 @@ export default class SphereSources extends Component {
     );
   };
 
-  _renderPie({source, size, style, subtitleStyle, titleStyle}: PieProps) {
+  _renderPie({ source, size, style, subtitleStyle, titleStyle }: PieProps) {
     const { sphere } = this.state;
     const colors = Colors.spheres[sphere.id];
     // const colors = Colors.sources[source.principalSourceType];
 
     const sourcePercent = this._getPercentOfSource(source);
-    const slices = [{color: colors.tint, value: sourcePercent}, {color: colors.lightTint, value: 100-sourcePercent}];
+    const slices = [{ color: colors.tint, value: sourcePercent }, { color: colors.lightTint, value: 100 - sourcePercent }];
     return (
       <PieChart
         color={colors.tint}
         slices={slices}
         subtitle={source.name}
         subtitleStyle={subtitleStyle}
-        title={Localizable.toPercentage(sourcePercent, {precision: 0})}
-        titleStyle={[titleStyle, {color: colors.chromeTint}]}
+        title={Localizable.toPercentage(sourcePercent, { precision: 0 })}
+        titleStyle={[titleStyle, { color: colors.chromeTint }]}
         size={size}
         style={style}
       />
-    )
-  };
+    );
+  }
 
   _getCountOfSource(source: Object) {
     return this.state.sphere.countOfSource(source.id);
-  };
+  }
 
   _getPercentOfSource(source: Object) {
     return (this._getCountOfSource(source) / source.wordCount) * 100;
-  };
+  }
 
   _getDataSource = () => {
-    const { sphere, search } = this.state;
+    const { search } = this.state;
 
     let sources = null;
     if (search) {
@@ -211,19 +246,19 @@ export default class SphereSources extends Component {
   _sourceSortedByPercentage = () => {
     const { sphere } = this.state;
     return sphere.sourceCounts.map(count => Actant.findByID(parseInt(count.string)));
-  }
+  };
 
   _onPressSource = (source: Object) => {
     const book = source.books[0];
-    const bsoReference = Localizable.t('bso-reference', {book: book.name, source: source.name, number: 1});
+    const bsoReference = Localizable.t('bso-reference', { book: book.name, source: source.name, number: 1 });
 
     Preference.setObjectForKey([this.state.sphere.id], Preference.Keys.Reader.spheres);
-    this.props.navigate(readerURL({bookID: book.id, anchor: `source-${source.name}-1`, title: book.name, description: bsoReference}));
+    this.props.navigate(readerURL({ bookID: book.id, anchor: `source-${source.name}-1`, title: book.name, description: bsoReference }));
   };
 
   _onPressSourceIcon(source: Actant) {
-    this.props.navigate(sourceURL({sourceID: source.id, title: source.name}));
-  };
+    this.props.navigate(sourceURL({ sourceID: source.id, title: source.name }));
+  }
 }
 
 const styles = StyleSheet.create({
@@ -241,7 +276,7 @@ const styles = StyleSheet.create({
     shadowRadius: 0.4,
     shadowOffset: {
       height: 1,
-      width: 0
+      width: 0,
     },
     elevation: 1,
     backgroundColor: '#FFF',
@@ -277,7 +312,7 @@ const styles = StyleSheet.create({
   sourceAvatar: {
     width: 20,
     height: 20,
-    marginRight: 5
+    marginRight: 5,
   },
   dataPair: {
     flex: 1,
@@ -296,43 +331,43 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
   },
   ...Platform.select({
-      ios: {
-        segmentedControl: {
-          marginTop: 10,
-          marginHorizontal: 8,
-        },
-        textInput: {
-          fontSize: 14,
-          backgroundColor: '#ececec',
-          borderColor: '#ececec',
-          borderRadius: 3,
-          borderWidth: 1,
-          paddingLeft: 8,
-          marginHorizontal: 8,
-          marginTop: 8,
-          height: 26,
-          padding: 0, // Android workaround
-        },
+    ios: {
+      segmentedControl: {
+        marginTop: 10,
+        marginHorizontal: 8,
       },
-      android: {
-        segmentedControl: {
-          shadowColor: 'red',
-          elevation: 2,
-        },
-        textInputContainer: {
-          backgroundColor: '#F9F9F9',
-          borderBottomColor: '#E8E8E8',
-          borderBottomWidth: 1,
-        },
-        textInput: {
-          fontSize: 16,
-          backgroundColor: '#F9F9F9',
-          paddingLeft: 8,
-          marginHorizontal: 8,
-          marginVertical: 8,
-          height: 30,
-          padding: 0, // Android workaround
-        },
+      textInput: {
+        fontSize: 14,
+        backgroundColor: '#ececec',
+        borderColor: '#ececec',
+        borderRadius: 3,
+        borderWidth: 1,
+        paddingLeft: 8,
+        marginHorizontal: 8,
+        marginTop: 8,
+        height: 26,
+        padding: 0, // Android workaround
       },
-  })
+    },
+    android: {
+      segmentedControl: {
+        shadowColor: 'red',
+        elevation: 2,
+      },
+      textInputContainer: {
+        backgroundColor: '#F9F9F9',
+        borderBottomColor: '#E8E8E8',
+        borderBottomWidth: 1,
+      },
+      textInput: {
+        fontSize: 16,
+        backgroundColor: '#F9F9F9',
+        paddingLeft: 8,
+        marginHorizontal: 8,
+        marginVertical: 8,
+        height: 30,
+        padding: 0, // Android workaround
+      },
+    },
+  }),
 });

@@ -3,23 +3,9 @@
 
 import React, { Component } from 'react';
 
+import { Dimensions, Image, LayoutAnimation, Platform, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
-import {
-  Dimensions,
-  Image,
-  LayoutAnimation,
-  Platform,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
-
-import {
-  Colors,
-  StyleSheet,
-  Localizable
-} from '../../Common';
+import { Colors, StyleSheet, Localizable } from '../../Common';
 
 import LinearGradient from 'react-native-linear-gradient';
 import { BarChart } from '../../Components/Charts';
@@ -37,21 +23,19 @@ import { Preference } from '../../Preferences';
 
 import { NavigationBarButton } from '../../Components/Navigation';
 
-import {
-  MenuOption,
-} from '../../Components/Menu';
+import { MenuOption } from '../../Components/Menu';
 
 import FoundationalSphere from './FoundationalSphere';
 
 const SphereIcons = {
-  'foundational': require('./Images/sphere-foundational.png'),
-  'family': require('./Images/sphere-family.png'),
-  'economics': require('./Images/sphere-economics.png'),
-  'government': require('./Images/sphere-government.png'),
-  'religion': require('./Images/sphere-religion.png'),
-  'education': require('./Images/sphere-education.png'),
-  'communication': require('./Images/sphere-communication.png'),
-  'celebration': require('./Images/sphere-celebration.png')
+  foundational: require('./Images/sphere-foundational.png'),
+  family: require('./Images/sphere-family.png'),
+  economics: require('./Images/sphere-economics.png'),
+  government: require('./Images/sphere-government.png'),
+  religion: require('./Images/sphere-religion.png'),
+  education: require('./Images/sphere-education.png'),
+  communication: require('./Images/sphere-communication.png'),
+  celebration: require('./Images/sphere-celebration.png'),
 };
 
 type Props = {
@@ -72,15 +56,13 @@ export default class Spheres extends Component {
     return (
       <NavigationBarButton
         imageSource={require('../../Components/Navigation/Images/nav-help.png')}
-        onPress={() => props.navigate(sphereHelpURL({title: Localizable.t('help'), modal: true}))}
+        onPress={() => props.navigate(sphereHelpURL({ title: Localizable.t('help'), modal: true }))}
       />
     );
   }
 
   static renderMenuOptions(props: Object) {
-    return (
-      <MenuOption key="help" text={Localizable.t('help')} onSelect={() => props.navigate(sphereHelpURL({title: Localizable.t('help'), modal: true}))} />
-    );
+    return <MenuOption key="help" text={Localizable.t('help')} onSelect={() => props.navigate(sphereHelpURL({ title: Localizable.t('help'), modal: true }))} />;
   }
 
   props: Props;
@@ -109,7 +91,7 @@ export default class Spheres extends Component {
   _renderHeader = () => {
     const { sphere } = this.state;
     const spherePercent = (sphere.wordCount / Bible.wordCount) * 100;
-    const spheres = Sphere.all({foundational: true});
+    const spheres = Sphere.all({ foundational: true });
     const sphereCount = spheres.length;
 
     let sphereIndex = 0;
@@ -125,61 +107,83 @@ export default class Spheres extends Component {
 
     const carouselIcons = sortedSpheres.map(sphere => this._renderCarouselIcon(sphere));
 
-    const sphereSubtitle = (sphere.isFoundational ? ' ' : Localizable.toPercentage(spherePercent, {precision: 0}));
+    const sphereSubtitle = sphere.isFoundational ? ' ' : Localizable.toPercentage(spherePercent, { precision: 0 });
 
     return (
-      <LinearGradient
-        colors={['#E1E9EE', '#FFFFFF']}
-        start={[0.5, 0.25]} end={[0.5, 1.0]}
-        style={styles.carouselContainer}
-      >
+      <LinearGradient colors={['#E1E9EE', '#FFFFFF']} start={[0.5, 0.25]} end={[0.5, 1.0]} style={styles.carouselContainer}>
         <View style={styles.carousel}>
           <TouchableOpacity
             key={'sphere-' + sortedSpheres[4].id}
             onPress={() => this._onPressSphere(sortedSpheres[4])}
-            style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE*1.3, right: (WIDTH/2) - (CAROUSEL_ITEM_SIZE/2.2), transform:[{scale:0.65}]}]}>
+            style={[styles.carouselItem, { bottom: CAROUSEL_ITEM_SIZE * 1.3, right: WIDTH / 2 - CAROUSEL_ITEM_SIZE / 2.2, transform: [{ scale: 0.65 }] }]}
+          >
             {carouselIcons[4]}
           </TouchableOpacity>
           <TouchableOpacity
             key={'sphere-' + sortedSpheres[3].id}
             onPress={() => this._onPressSphere(sortedSpheres[3])}
-            style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE*1.2, right: (WIDTH/2 - CAROUSEL_ITEM_SIZE/1.4) - (CAROUSEL_ITEM_SIZE/2.2), transform:[{scale:0.7}]}]}>
+            style={[
+              styles.carouselItem,
+              { bottom: CAROUSEL_ITEM_SIZE * 1.2, right: WIDTH / 2 - CAROUSEL_ITEM_SIZE / 1.4 - CAROUSEL_ITEM_SIZE / 2.2, transform: [{ scale: 0.7 }] },
+            ]}
+          >
             {carouselIcons[3]}
           </TouchableOpacity>
           <TouchableOpacity
             key={'sphere-' + sortedSpheres[5].id}
             onPress={() => this._onPressSphere(sortedSpheres[5])}
-            style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE*1.2, left: (WIDTH/2 - CAROUSEL_ITEM_SIZE/1.25) - (CAROUSEL_ITEM_SIZE/2.2), transform:[{scale:0.7}]}]}>
+            style={[
+              styles.carouselItem,
+              { bottom: CAROUSEL_ITEM_SIZE * 1.2, left: WIDTH / 2 - CAROUSEL_ITEM_SIZE / 1.25 - CAROUSEL_ITEM_SIZE / 2.2, transform: [{ scale: 0.7 }] },
+            ]}
+          >
             {carouselIcons[5]}
           </TouchableOpacity>
           <TouchableOpacity
             key={'sphere-' + sortedSpheres[2].id}
             onPress={() => this._onPressSphere(sortedSpheres[2])}
-            style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE/1.25, right: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2.5) - (CAROUSEL_ITEM_SIZE*1.5), transform:[{scale:0.8}]}]}>
+            style={[
+              styles.carouselItem,
+              { bottom: CAROUSEL_ITEM_SIZE / 1.25, right: WIDTH / 2 - CAROUSEL_ITEM_SIZE / 2.5 - CAROUSEL_ITEM_SIZE * 1.5, transform: [{ scale: 0.8 }] },
+            ]}
+          >
             {carouselIcons[2]}
           </TouchableOpacity>
           <TouchableOpacity
             key={'sphere-' + sortedSpheres[6].id}
             onPress={() => this._onPressSphere(sortedSpheres[6])}
-            style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE/1.25, left: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2.5) - (CAROUSEL_ITEM_SIZE*1.5), transform:[{scale:0.8}]}]}>
+            style={[
+              styles.carouselItem,
+              { bottom: CAROUSEL_ITEM_SIZE / 1.25, left: WIDTH / 2 - CAROUSEL_ITEM_SIZE / 2.5 - CAROUSEL_ITEM_SIZE * 1.5, transform: [{ scale: 0.8 }] },
+            ]}
+          >
             {carouselIcons[6]}
           </TouchableOpacity>
           <TouchableOpacity
             key={'sphere-' + sortedSpheres[1].id}
             onPress={() => this._onPressSphere(sortedSpheres[1])}
-            style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE/2, right: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2.5) - (CAROUSEL_ITEM_SIZE), transform:[{scale:0.9}]}]}>
+            style={[
+              styles.carouselItem,
+              { bottom: CAROUSEL_ITEM_SIZE / 2, right: WIDTH / 2 - CAROUSEL_ITEM_SIZE / 2.5 - CAROUSEL_ITEM_SIZE, transform: [{ scale: 0.9 }] },
+            ]}
+          >
             {carouselIcons[1]}
           </TouchableOpacity>
           <TouchableOpacity
             key={'sphere-' + sortedSpheres[7].id}
             onPress={() => this._onPressSphere(sortedSpheres[7])}
-            style={[styles.carouselItem, {bottom: CAROUSEL_ITEM_SIZE/2, left: (WIDTH/2 - CAROUSEL_ITEM_SIZE/2.5) - (CAROUSEL_ITEM_SIZE), transform:[{scale:0.9}]}]}>
+            style={[
+              styles.carouselItem,
+              { bottom: CAROUSEL_ITEM_SIZE / 2, left: WIDTH / 2 - CAROUSEL_ITEM_SIZE / 2.5 - CAROUSEL_ITEM_SIZE, transform: [{ scale: 0.9 }] },
+            ]}
+          >
             {carouselIcons[7]}
           </TouchableOpacity>
           <TouchableOpacity
             key={'sphere-' + sortedSpheres[0].id}
             onPress={() => this._onPressSphere(sortedSpheres[0])}
-            style={[styles.carouselItem, {bottom: 15, left: WIDTH/2 - CAROUSEL_ITEM_SIZE/2}]}>
+            style={[styles.carouselItem, { bottom: 15, left: WIDTH / 2 - CAROUSEL_ITEM_SIZE / 2 }]}
+          >
             {carouselIcons[0]}
           </TouchableOpacity>
         </View>
@@ -192,7 +196,6 @@ export default class Spheres extends Component {
   };
 
   _renderSphere = (sphere: Object) => {
-    const { descriptionExpanded } = this.state;
     const colors = Colors.spheres[sphere.id];
     const spherePercent = (sphere.wordCount / Bible.wordCount) * 100;
 
@@ -204,74 +207,85 @@ export default class Spheres extends Component {
 
     const header = this._renderHeader();
 
-    const descriptionNumberOfLines = descriptionExpanded ? null : 3;
-    const descriptionLabel = (descriptionExpanded ? null : Localizable.t('more').toLocaleLowerCase());
-
     let overview = null;
     if (sphere.overview) {
-      overview = sphere.overview.map((section) => this._renderOverviewSection(section));
+      overview = sphere.overview.map(section => this._renderOverviewSection(section));
     }
 
     return (
       <ScrollView style={styles.container}>
         {header}
         <View style={styles.carouselGraphContainer}>
-          <View style={[styles.carouselGraph, {backgroundColor: colors.tint, flex: spherePercent}]} />
-          <View style={[styles.carouselGraph, {flex: 100-spherePercent}]} />
+          <View style={[styles.carouselGraph, { backgroundColor: colors.tint, flex: spherePercent }]} />
+          <View style={[styles.carouselGraph, { flex: 100 - spherePercent }]} />
         </View>
         <View style={StyleSheet.styles.statisticsContainer}>
-          <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.navigate(sphereBooksURL({sphereID: sphere.id, title: Localizable.t('sphere-books', {name: sphere.name})}))}>
-            <Text style={[StyleSheet.styles.statisticTitle, {color: colors.chromeTint}]}>{Localizable.toNumber(sphere.bookCount, {precision: 0})}</Text>
+          <TouchableOpacity
+            style={StyleSheet.styles.statisticContainer}
+            onPress={() => this.props.navigate(sphereBooksURL({ sphereID: sphere.id, title: Localizable.t('sphere-books', { name: sphere.name }) }))}
+          >
+            <Text style={[StyleSheet.styles.statisticTitle, { color: colors.chromeTint }]}>{Localizable.toNumber(sphere.bookCount, { precision: 0 })}</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Books</Text>
           </TouchableOpacity>
           <View style={styles.keyline} />
-          <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.navigate(sphereSourcesURL({sphereID: sphere.id, title: Localizable.t('sphere-sources', {name: sphere.name})}))}>
-            <Text style={[StyleSheet.styles.statisticTitle, {color: colors.chromeTint}]}>{Localizable.toNumber(sphere.sourceCount, {precision: 0})}</Text>
+          <TouchableOpacity
+            style={StyleSheet.styles.statisticContainer}
+            onPress={() => this.props.navigate(sphereSourcesURL({ sphereID: sphere.id, title: Localizable.t('sphere-sources', { name: sphere.name }) }))}
+          >
+            <Text style={[StyleSheet.styles.statisticTitle, { color: colors.chromeTint }]}>{Localizable.toNumber(sphere.sourceCount, { precision: 0 })}</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Sources</Text>
           </TouchableOpacity>
           <View style={styles.keyline} />
-          <TouchableOpacity style={StyleSheet.styles.statisticContainer} onPress={() => this.props.navigate(sphereWordsURL({sphereID: sphere.id, title: Localizable.t('sphere-words', {name: sphere.name})}))}>
-            <Text style={[StyleSheet.styles.statisticTitle, {color: colors.chromeTint}]}>{Localizable.toNumber(sphere.wordCount, {precision: 0})}</Text>
+          <TouchableOpacity
+            style={StyleSheet.styles.statisticContainer}
+            onPress={() => this.props.navigate(sphereWordsURL({ sphereID: sphere.id, title: Localizable.t('sphere-words', { name: sphere.name }) }))}
+          >
+            <Text style={[StyleSheet.styles.statisticTitle, { color: colors.chromeTint }]}>{Localizable.toNumber(sphere.wordCount, { precision: 0 })}</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Words</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity style={[styles.readButton, {backgroundColor: colors.chromeTint, borderColor: colors.chromeTint}]} onPress={() => this.props.navigate(spherePassagesURL({sphereID: sphere.id, title: Localizable.t('sphere-passages', {name: sphere.name})}))}>
+        <TouchableOpacity
+          style={[styles.readButton, { backgroundColor: colors.chromeTint, borderColor: colors.chromeTint }]}
+          onPress={() => this.props.navigate(spherePassagesURL({ sphereID: sphere.id, title: Localizable.t('sphere-passages', { name: sphere.name }) }))}
+        >
           <Text style={styles.readButtonTitle}>Explore 52 key passages</Text>
         </TouchableOpacity>
 
-        <View style={styles.overviewContainer}>
-          {overview}
-        </View>
+        <View style={styles.overviewContainer}>{overview}</View>
 
         <View style={styles.listContainer}>
-          <View style={[styles.listItemHeader, {borderTopColor: colors.tint}]}>
+          <View style={[styles.listItemHeader, { borderTopColor: colors.tint }]}>
             <Text style={StyleSheet.styles.cell.titlebold}>Top Books</Text>
           </View>
         </View>
         {bookRows}
-        <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => this.props.navigate(sphereBooksURL({sphereID: sphere.id, title: Localizable.t('sphere-books', {name: sphere.name})}))}>
-          <Text style={[StyleSheet.styles.cell.titlemore, {color: colors.chromeTint}]}>View More</Text>
-          <Image source={require('../../Images/common/disclosure.png')}  style={styles.disclosure} />
+        <TouchableOpacity
+          style={StyleSheet.styles.listItem}
+          onPress={() => this.props.navigate(sphereBooksURL({ sphereID: sphere.id, title: Localizable.t('sphere-books', { name: sphere.name }) }))}
+        >
+          <Text style={[StyleSheet.styles.cell.titlemore, { color: colors.chromeTint }]}>View More</Text>
+          <Image source={require('../../Images/common/disclosure.png')} style={styles.disclosure} />
         </TouchableOpacity>
 
         <View style={styles.listContainer}>
-          <View style={[styles.listItemHeader, {borderTopColor: colors.tint}]}>
+          <View style={[styles.listItemHeader, { borderTopColor: colors.tint }]}>
             <Text style={StyleSheet.styles.cell.titlebold}>Top Sources</Text>
           </View>
         </View>
         {sourceRows}
-        <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => this.props.navigate(sphereSourcesURL({sphereID: sphere.id, title: Localizable.t('sphere-sources', {name: sphere.name})}))}>
-          <Text style={[StyleSheet.styles.cell.titlemore, {color: colors.chromeTint}]}>View More</Text>
-          <Image source={require('../../Images/common/disclosure.png')}  style={styles.disclosure} />
+        <TouchableOpacity
+          style={StyleSheet.styles.listItem}
+          onPress={() => this.props.navigate(sphereSourcesURL({ sphereID: sphere.id, title: Localizable.t('sphere-sources', { name: sphere.name }) }))}
+        >
+          <Text style={[StyleSheet.styles.cell.titlemore, { color: colors.chromeTint }]}>View More</Text>
+          <Image source={require('../../Images/common/disclosure.png')} style={styles.disclosure} />
         </TouchableOpacity>
       </ScrollView>
     );
   };
 
   _renderFoundationalSphere = () => {
-    return (
-      <FoundationalSphere navigate={this.props.navigate} renderHeader={this._renderHeader} />
-    );
+    return <FoundationalSphere navigate={this.props.navigate} renderHeader={this._renderHeader} />;
   };
 
   _renderOverviewSection = (section: Object) => {
@@ -292,15 +306,10 @@ export default class Spheres extends Component {
 
     return (
       <TouchableOpacity key={book.id} style={styles.section} onPress={() => this._onPressBook(book)}>
-        <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
+        <View style={[styles.sourcesCellContainer, { paddingVertical: 12 }]}>
           <View style={styles.sourcesLeftContainer}>
             <TouchableOpacity onPress={() => this._onPressBookIcon(book)}>
-              <Icon
-                name="books"
-                color={principalColor.tint}
-                size={20}
-                style={[styles.sourceAvatar]}
-              />
+              <Icon name="books" color={principalColor.tint} size={20} style={[styles.sourceAvatar]} />
             </TouchableOpacity>
             <View style={styles.sourcesContent}>
               <Text style={StyleSheet.styles.cell.titlemedium}>{book.name}</Text>
@@ -308,18 +317,20 @@ export default class Spheres extends Component {
           </View>
           <View style={styles.sourcesRightContainer}>
             <BarChart
-              bars={[{color: colors.tint, value: spherePercent}]}
-              deltaStyle={{backgroundColor: colors.lightTint}}
+              bars={[{ color: colors.tint, value: spherePercent }]}
+              deltaStyle={{ backgroundColor: colors.lightTint }}
               maxChartValue={100}
               style={styles.sourcesBarChart}
             />
             <View style={styles.dataPair}>
-              <Text style={[StyleSheet.styles.cell.percentage, {color: colors.chromeTint}]}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
-              <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('words.count', {count: wordCount, localizedCount: Localizable.toNumber(wordCount, {precision: 0})})}</Text>
+              <Text style={[StyleSheet.styles.cell.percentage, { color: colors.chromeTint }]}>{Localizable.toPercentage(spherePercent, { precision: 0 })}</Text>
+              <Text style={StyleSheet.styles.cell.subtitle}>
+                {Localizable.t('words.count', { count: wordCount, localizedCount: Localizable.toNumber(wordCount, { precision: 0 }) })}
+              </Text>
             </View>
           </View>
         </View>
-        <View style={[StyleSheet.styles.separator, {marginLeft: 0}]}></View>
+        <View style={[StyleSheet.styles.separator, { marginLeft: 0 }]} />
       </TouchableOpacity>
     );
   };
@@ -332,14 +343,10 @@ export default class Spheres extends Component {
 
     return (
       <TouchableOpacity key={source.id} style={styles.section} onPress={() => this._onPressSource(source)}>
-        <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
+        <View style={[styles.sourcesCellContainer, { paddingVertical: 12 }]}>
           <View style={styles.sourcesLeftContainer}>
             <TouchableOpacity onPress={() => this._onPressSourceIcon(source)}>
-              <SourceIcon
-                source={source}
-                style={[styles.sourceAvatar]}
-                size={20}
-              />
+              <SourceIcon source={source} style={[styles.sourceAvatar]} size={20} />
             </TouchableOpacity>
             <View style={styles.sourcesContent}>
               <Text style={StyleSheet.styles.cell.titlemedium}>{source.name}</Text>
@@ -347,18 +354,20 @@ export default class Spheres extends Component {
           </View>
           <View style={styles.sourcesRightContainer}>
             <BarChart
-              bars={[{color: colors.tint, value: spherePercent}]}
-              deltaStyle={{backgroundColor: colors.lightTint}}
+              bars={[{ color: colors.tint, value: spherePercent }]}
+              deltaStyle={{ backgroundColor: colors.lightTint }}
               maxChartValue={100}
               style={styles.sourcesBarChart}
             />
             <View style={styles.dataPair}>
-              <Text style={[StyleSheet.styles.cell.percentage, {color: '#59626A'}]}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
-              <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('words.count', {count: wordCount, localizedCount: Localizable.toNumber(wordCount, {precision: 0})})}</Text>
+              <Text style={[StyleSheet.styles.cell.percentage, { color: '#59626A' }]}>{Localizable.toPercentage(spherePercent, { precision: 0 })}</Text>
+              <Text style={StyleSheet.styles.cell.subtitle}>
+                {Localizable.t('words.count', { count: wordCount, localizedCount: Localizable.toNumber(wordCount, { precision: 0 }) })}
+              </Text>
             </View>
           </View>
         </View>
-        <View style={[StyleSheet.styles.separator, {marginLeft: 0}]}></View>
+        <View style={[StyleSheet.styles.separator, { marginLeft: 0 }]} />
       </TouchableOpacity>
     );
   };
@@ -368,7 +377,7 @@ export default class Spheres extends Component {
     if (props.sphereID) {
       sphere = Sphere.findByID(props.sphereID);
     } else {
-      sphere = Sphere.all({foundational: true})[0];
+      sphere = Sphere.all({ foundational: true })[0];
     }
 
     const books = this._getBooks(sphere);
@@ -377,7 +386,7 @@ export default class Spheres extends Component {
       books,
       descriptionExpanded: false,
     };
-  }
+  };
 
   _getBooks = (sphere: Object) => {
     return sphere.bookCounts.map(count => Book.findByID(count.string)).slice(0, MAXIMUM_BOOK_COUNT);
@@ -389,48 +398,46 @@ export default class Spheres extends Component {
 
   _renderCarouselIcon = (sphere: Object) => {
     const iconName = SphereIcons[sphere.id];
-    return (
-      <Image
-        source={iconName}
-        style={styles.carouselItem}
-      />
-    );
+    return <Image source={iconName} style={styles.carouselItem} />;
   };
 
   _onPressSphere = (sphere: Object) => {
     if (sphere.id === this.state.sphere.id) return;
-    this.props.navigate(sphereURL({sphereID: sphere.id, title: Localizable.t('spheres.text'), description: Localizable.t('sphere-overview', {name: sphere.name})}), {replace: true});
+    this.props.navigate(
+      sphereURL({ sphereID: sphere.id, title: Localizable.t('spheres.text'), description: Localizable.t('sphere-overview', { name: sphere.name }) }),
+      { replace: true }
+    );
 
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
 
     const books = this._getBooks(sphere);
     this.setState({
       sphere,
-      books
+      books,
     });
   };
 
   _onPressBook = (book: Object) => {
     Preference.setObjectForKey([this.state.sphere.id], Preference.Keys.Reader.spheres);
-    this.props.navigate(readerURL({bookID: book.id, anchor: 'chapter-1', title: book.name}));
+    this.props.navigate(readerURL({ bookID: book.id, anchor: 'chapter-1', title: book.name }));
   };
 
   _onPressBookIcon = (book: Object) => {
-    this.props.navigate(bookURL({bookID: book.id, title: book.name}));
-  }
+    this.props.navigate(bookURL({ bookID: book.id, title: book.name }));
+  };
 
   _onPressSource = (source: Object) => {
     const book = source.books[0];
-    const bsoReference = Localizable.t('bso-reference', {book: book.name, source: source.name, number: 1});
+    const bsoReference = Localizable.t('bso-reference', { book: book.name, source: source.name, number: 1 });
 
     Preference.setObjectForKey([this.state.sphere.id], Preference.Keys.Reader.spheres);
-    this.props.navigate(readerURL({bookID: book.id, anchor: `source-${source.name}-1`, title: book.name, description: bsoReference}));
+    this.props.navigate(readerURL({ bookID: book.id, anchor: `source-${source.name}-1`, title: book.name, description: bsoReference }));
   };
 
   _onPressSourceIcon(source: Actant) {
-    this.props.navigate(sourceURL({sourceID: source.id, title: source.name}));
-  };
- }
+    this.props.navigate(sourceURL({ sourceID: source.id, title: source.name }));
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -474,9 +481,9 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   keyline: {
-    flex:0,
+    flex: 0,
     width: StyleSheet.hairlineWidth,
-    backgroundColor: Colors.separator
+    backgroundColor: Colors.separator,
   },
   readButton: {
     backgroundColor: Colors.tint,
@@ -484,7 +491,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 20,
     borderWidth: 1,
-    overflow:'hidden',
+    overflow: 'hidden',
     alignSelf: 'center',
     marginTop: 40,
     marginBottom: 20,
@@ -527,7 +534,7 @@ const styles = StyleSheet.create({
     shadowRadius: 0.4,
     shadowOffset: {
       height: 1,
-      width: 0
+      width: 0,
     },
   },
   listItem: {
@@ -571,7 +578,7 @@ const styles = StyleSheet.create({
   sourceAvatar: {
     width: 20,
     height: 20,
-    marginRight: 5
+    marginRight: 5,
   },
   sourcesBarChart: {
     flex: 0,

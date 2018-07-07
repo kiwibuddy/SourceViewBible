@@ -3,21 +3,11 @@
 
 import React, { Component } from 'react';
 
-import {
-  Image,
-  ScrollView,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
 
-import {
-  Colors,
-  Localizable,
-  StyleSheet,
-} from '../../../Common';
+import { Localizable, StyleSheet } from '../../../Common';
 
 import Chart from './Chart';
-import ChartColors from './ChartColors';
 
 import { BarChart } from '../../../Components/Charts';
 import { axisItemsURL } from '../../../Navigation';
@@ -30,46 +20,47 @@ type Props = {
   onPressChartType: Function,
 };
 
-export default class BarChartView extends Component {
+export default class BarChartView extends Component<Props> {
   render() {
     const props = this.props;
     const { card, loading } = props;
     const occurrenceCount = card.occurrenceCount;
-    const filterCount = card.filters.length;
     const xAxis = card.xAxis;
     const yAxis = card.yAxis;
-    const data = (card.zAxis && props.data ? props.data[0].value : props.data);
+    const data = card.zAxis && props.data ? props.data[0].value : props.data;
 
-    let xAxisTitle = "Show...";
+    let xAxisTitle = 'Show...';
     if (card.xAxis) {
       const actantType = card.xAxis.actantType;
-      const actantTypeKey = (actantType ? `${actantType}-` : '');
+      const actantTypeKey = actantType ? `${actantType}-` : '';
       xAxisTitle = Localizable.t(`xAxis-${actantTypeKey}${card.xAxis.type}`);
     }
 
-    let yAxisTitle = "By...";
+    let yAxisTitle = 'By...';
     if (card.yAxis) {
       const actantType = card.yAxis.actantType;
-      const actantTypeKey = (actantType ? `${actantType}-` : '');
+      const actantTypeKey = actantType ? `${actantType}-` : '';
       yAxisTitle = Localizable.t(`yAxis-${actantTypeKey}${card.yAxis.type}`);
     }
 
     let chart = null;
     if (!xAxis || !yAxis || occurrenceCount == 0 || data == null || loading) {
-      chart = <Image style={{alignSelf: 'center'}} source={require('../Images/chart-bar-blankslate.png')} />;
+      chart = <Image style={{ alignSelf: 'center' }} source={require('../Images/chart-bar-blankslate.png')} />;
     } else {
-      const bars = data.map((slice, index) => {
-        return {...slice, color: "#FF3F49"};
+      const bars = data.map(slice => {
+        return { ...slice, color: '#FF3F49' };
       });
 
-      chart = <ScrollView style={styles.chart} horizontal={true} showsHorizontalScrollIndicator={false}>
-        <BarChart
-          bars={bars}
-          barStyle={{flex: 0, width: 8, marginHorizontal: 6, marginBottom: 100,}}
-          deltaStyle={{backgroundColor: 'transparent'}}
-          horizontal={false}
-        />
-      </ScrollView>;
+      chart = (
+        <ScrollView style={styles.chart} horizontal={true} showsHorizontalScrollIndicator={false}>
+          <BarChart
+            bars={bars}
+            barStyle={{ flex: 0, width: 8, marginHorizontal: 6, marginBottom: 100 }}
+            deltaStyle={{ backgroundColor: 'transparent' }}
+            horizontal={false}
+          />
+        </ScrollView>
+      );
     }
 
     return (
@@ -79,7 +70,7 @@ export default class BarChartView extends Component {
           <Chart.DropdownButton
             image={require('../Images/chart-icn-bar-xaxis.png')}
             disabled={props.headerDisabled}
-            onPress={() => props.onPressAxis(axisItemsURL({title: "Choose X Axis", axis: 'xAxis'}))}
+            onPress={() => props.onPressAxis(axisItemsURL({ title: 'Choose X Axis', axis: 'xAxis' }))}
             title={xAxisTitle}
             style={StyleSheet.styles.discoveryCenter.leftContainer}
           />
@@ -92,7 +83,7 @@ export default class BarChartView extends Component {
           />
         </Chart.Header>
         <Chart.Footer hidden={props.footerHidden}>
-          <View style={[StyleSheet.styles.discoveryCenter.leftContainer, {justifyContent: 'flex-start', paddingLeft: 5, borderRightWidth: 0}]}>
+          <View style={[StyleSheet.styles.discoveryCenter.leftContainer, { justifyContent: 'flex-start', paddingLeft: 5, borderRightWidth: 0 }]}>
             <TouchableOpacity onPress={() => props.onPressChartType(Chart.Type.PIE)}>
               <Image source={require('../Images/chart-type-pie.png')} />
             </TouchableOpacity>
@@ -103,9 +94,8 @@ export default class BarChartView extends Component {
               <Image source={require('../Images/chart-type-cloud.png')} />
             </TouchableOpacity>
           </View>
-          <View style={[StyleSheet.styles.discoveryCenter.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
-            <TouchableOpacity>
-            </TouchableOpacity>
+          <View style={[StyleSheet.styles.discoveryCenter.rightContainer, { justifyContent: 'flex-end', paddingRight: -10 }]}>
+            <TouchableOpacity />
           </View>
         </Chart.Footer>
       </Chart>

@@ -3,23 +3,10 @@
 
 import React, { Component } from 'react';
 
-
-import {
-  Image,
-  Platform,
-  RecyclerViewBackedScrollView,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { Image, RecyclerViewBackedScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { ListView } from '../../../Components/Common/DatabaseListView';
 
-import {
-  Colors,
-  Constants,
-  StyleSheet,
-  Localizable
-} from '../../../Common';
+import { Colors, StyleSheet } from '../../../Common';
 
 import { cardWithFilter, cardWithoutFilter } from './FilterUtils';
 
@@ -34,7 +21,7 @@ type Props = {
 };
 
 type State = {
-  dataSource: any
+  dataSource: any,
 };
 
 export default class Chronologys extends Component {
@@ -44,7 +31,7 @@ export default class Chronologys extends Component {
   constructor(props: Props) {
     super(props);
 
-    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id});
+    const dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1.id !== r2.id });
     this.state = {
       dataSource: dataSource,
     };
@@ -52,7 +39,7 @@ export default class Chronologys extends Component {
 
   componentDidMount() {
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(Chronology.all())
+      dataSource: this.state.dataSource.cloneWithRows(Chronology.all()),
     });
   }
 
@@ -69,9 +56,12 @@ export default class Chronologys extends Component {
     );
   }
 
-  _renderRow = (chronology: Object, sectionID: any, rowID: any) => {
+  _renderRow = (chronology: Object) => {
     const { card, filter } = this.props;
-    const checkmark = (card.type === 'sources' && filter && filter.chronologyID === chronology.id) ? <Image style={{tintColor: Colors.tint}} source={require('../../../Images/common/checkmark.png')} /> : null;
+    const checkmark =
+      card.type === 'sources' && filter && filter.chronologyID === chronology.id ? (
+        <Image style={{ tintColor: Colors.tint }} source={require('../../../Images/common/checkmark.png')} />
+      ) : null;
     return (
       <TouchableOpacity key={chronology.id} style={StyleSheet.styles.listItem} onPress={() => this._filterChronology(chronology)}>
         <Text style={StyleSheet.styles.cell.title}>{chronology.name}</Text>
@@ -95,7 +85,6 @@ export default class Chronologys extends Component {
     };
 
     if (this.props.filter && this.props.filter.type === 'chronology-range') {
-      const { chronologies } = this.props.filter;
       if (this.props.item === 'from') {
         filter.chronologies = {
           ...filter.chronologies,
@@ -113,7 +102,7 @@ export default class Chronologys extends Component {
 
     this.props.onDone(cardWithFilter(card, filter));
   };
- }
+}
 
 const styles = StyleSheet.create({
   container: {

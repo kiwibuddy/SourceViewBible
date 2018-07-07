@@ -3,24 +3,10 @@
 
 import React, { Component } from 'react';
 
-
-import {
-  AsyncStorage,
-  Platform,
-  RecyclerViewBackedScrollView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { RecyclerViewBackedScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { ListView } from '../../../Components/Common/DatabaseListView';
 
-import {
-  Colors,
-  Constants,
-  StyleSheet,
-  Localizable
-} from '../../../Common';
+import { StyleSheet, Localizable } from '../../../Common';
 
 import { cardWithFilter } from './FilterUtils';
 
@@ -46,7 +32,7 @@ export default class Actants extends Component {
   constructor(props: Props) {
     super(props);
 
-    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id});
+    const dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1.id !== r2.id });
     this.state = {
       dataSource: dataSource,
       search: null,
@@ -54,8 +40,8 @@ export default class Actants extends Component {
   }
 
   render() {
-    const actants = (this.props.type === 'recipient' ? Actant.recipients(this.state.search).sorted('name') : Actant.sources(this.state.search).sorted('name'));
-    const dataSource = this.state.dataSource.cloneWithRows(actants)
+    const actants = this.props.type === 'recipient' ? Actant.recipients(this.state.search).sorted('name') : Actant.sources(this.state.search).sorted('name');
+    const dataSource = this.state.dataSource.cloneWithRows(actants);
     return (
       <View style={styles.container}>
         <TextInput
@@ -63,7 +49,7 @@ export default class Actants extends Component {
           autoCorrect={false}
           autoFocus={true}
           clearButtonMode="always"
-          onChangeText={(text) => this.setState({search: text})}
+          onChangeText={text => this.setState({ search: text })}
           placeholder={Localizable.t('name')}
           style={styles.textInput}
           value={this.state.search || ''}
@@ -81,7 +67,7 @@ export default class Actants extends Component {
     );
   }
 
-  _renderRow = (actant: Object, sectionID: any, rowID: any) => {
+  _renderRow = (actant: Object) => {
     return (
       <TouchableOpacity key={actant.id} style={StyleSheet.styles.listItem} onPress={() => this._onPressActant(actant)}>
         <Text style={StyleSheet.styles.cell.title}>{actant.name}</Text>
@@ -95,12 +81,12 @@ export default class Actants extends Component {
       type: 'actant',
       actantType: this.props.type,
       ...this.props.filter,
-      actantID: actant.id
+      actantID: actant.id,
     };
 
     this.props.onDone(cardWithFilter(this.props.card, filter));
   };
- }
+}
 
 const styles = StyleSheet.create({
   container: {

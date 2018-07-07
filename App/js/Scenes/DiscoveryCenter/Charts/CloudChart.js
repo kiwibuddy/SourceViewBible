@@ -3,18 +3,9 @@
 
 import React, { Component } from 'react';
 
-import {
-  Image,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 
-import {
-  Colors,
-  Localizable,
-  StyleSheet,
-} from '../../../Common';
+import { Localizable, StyleSheet } from '../../../Common';
 
 import Chart from './Chart';
 import { WordCloud } from '../../../Components/Charts';
@@ -30,53 +21,56 @@ type Props = {
   onPressChartType: Function,
 };
 
-export default class CloudChartView extends Component {
+export default class CloudChartView extends Component<Props> {
   render() {
     const props = this.props;
     const { card, loading } = props;
     const occurrenceCount = card.occurrenceCount;
-    const filterCount = card.filters.length;
     const xAxis = card.xAxis;
     const yAxis = card.yAxis;
-    const data = (card.zAxis && props.data ? props.data[0].value : props.data);
+    const data = card.zAxis && props.data ? props.data[0].value : props.data;
 
-    let xAxisTitle = "Show...";
+    let xAxisTitle = 'Show...';
     if (card.xAxis) {
       const actantType = card.xAxis.actantType;
-      const actantTypeKey = (actantType ? `${actantType}-` : '');
+      const actantTypeKey = actantType ? `${actantType}-` : '';
       xAxisTitle = Localizable.t(`xAxis-${actantTypeKey}${card.xAxis.type}`);
     }
 
-    let yAxisTitle = "By...";
+    let yAxisTitle = 'By...';
     if (card.yAxis) {
       const actantType = card.yAxis.actantType;
-      const actantTypeKey = (actantType ? `${actantType}-` : '');
+      const actantTypeKey = actantType ? `${actantType}-` : '';
       yAxisTitle = Localizable.t(`yAxis-${actantTypeKey}${card.yAxis.type}`);
     }
 
     let chart = null;
     if (!xAxis || !yAxis || occurrenceCount == 0 || data == null || loading) {
-      chart = <Image style={{alignSelf: 'center'}} source={require('../Images/chart-cloud-blankslate.png')} />;
+      chart = <Image style={{ alignSelf: 'center' }} source={require('../Images/chart-cloud-blankslate.png')} />;
     } else {
       const words = data.slice(0, Math.min(data.length, 10)).map(word => word.label);
-      chart = <WordCloud style={styles.chart}>
-        <ParallaxMotionView intensity={5} style={[styles.parallax, {opacity: 0.8}]}>
-          <Text style={[styles.wc1, {top: 50, alignSelf: 'center'}]} numberOfLines={1}>{words[0]}</Text>
-        </ParallaxMotionView>
-        <ParallaxMotionView intensity={10} style={[styles.parallax, {opacity: 0.8}]}>
-          <Text style={[styles.wc2, {top: 10, left: -5}]}>{words[1]}</Text>
-          <Text style={[styles.wc2, {bottom: 20, right: 15}]}>{words[2]}</Text>
-          <Text style={[styles.wc2, {top: -5, right: 50}]}>{words[3]}</Text>
-          <Text style={[styles.wc2, {bottom: 0, left: 50}]}>{words[4]}</Text>
-        </ParallaxMotionView>
-        <ParallaxMotionView intensity={20} style={[styles.parallax, {opacity: 0.6}]}>
-          <Text style={[styles.wc3, {top: 40, right: 15}]}>{words[5]}</Text>
-          <Text style={[styles.wc3, {top: 120, left: 0}]}>{words[6]}</Text>
-          <Text style={[styles.wc3, {top: 60, left: 35}]}>{words[7]}</Text>
-          <Text style={[styles.wc3, {bottom: 70, right: 35}]}>{words[8]}</Text>
-          <Text style={[styles.wc3, {bottom: 10, right: 120}]}>{words[9]}</Text>
-        </ParallaxMotionView>
-      </WordCloud>
+      chart = (
+        <WordCloud style={styles.chart}>
+          <ParallaxMotionView intensity={5} style={[styles.parallax, { opacity: 0.8 }]}>
+            <Text style={[styles.wc1, { top: 50, alignSelf: 'center' }]} numberOfLines={1}>
+              {words[0]}
+            </Text>
+          </ParallaxMotionView>
+          <ParallaxMotionView intensity={10} style={[styles.parallax, { opacity: 0.8 }]}>
+            <Text style={[styles.wc2, { top: 10, left: -5 }]}>{words[1]}</Text>
+            <Text style={[styles.wc2, { bottom: 20, right: 15 }]}>{words[2]}</Text>
+            <Text style={[styles.wc2, { top: -5, right: 50 }]}>{words[3]}</Text>
+            <Text style={[styles.wc2, { bottom: 0, left: 50 }]}>{words[4]}</Text>
+          </ParallaxMotionView>
+          <ParallaxMotionView intensity={20} style={[styles.parallax, { opacity: 0.6 }]}>
+            <Text style={[styles.wc3, { top: 40, right: 15 }]}>{words[5]}</Text>
+            <Text style={[styles.wc3, { top: 120, left: 0 }]}>{words[6]}</Text>
+            <Text style={[styles.wc3, { top: 60, left: 35 }]}>{words[7]}</Text>
+            <Text style={[styles.wc3, { bottom: 70, right: 35 }]}>{words[8]}</Text>
+            <Text style={[styles.wc3, { bottom: 10, right: 120 }]}>{words[9]}</Text>
+          </ParallaxMotionView>
+        </WordCloud>
+      );
     }
 
     return (
@@ -86,7 +80,7 @@ export default class CloudChartView extends Component {
           <Chart.DropdownButton
             image={require('../Images/chart-icn-word-xaxis.png')}
             disabled={props.headerDisabled}
-            onPress={() => props.onPressAxis(axisItemsURL({title: "Choose Text", axis: 'xAxis'}))}
+            onPress={() => props.onPressAxis(axisItemsURL({ title: 'Choose Text', axis: 'xAxis' }))}
             title={xAxisTitle}
             style={StyleSheet.styles.discoveryCenter.leftContainer}
           />
@@ -99,7 +93,7 @@ export default class CloudChartView extends Component {
           />
         </Chart.Header>
         <Chart.Footer hidden={props.footerHidden}>
-          <View style={[StyleSheet.styles.discoveryCenter.leftContainer, {justifyContent: 'flex-start', paddingLeft: 5, borderRightWidth: 0}]}>
+          <View style={[StyleSheet.styles.discoveryCenter.leftContainer, { justifyContent: 'flex-start', paddingLeft: 5, borderRightWidth: 0 }]}>
             <TouchableOpacity onPress={() => props.onPressChartType(Chart.Type.PIE)}>
               <Image source={require('../Images/chart-type-pie.png')} />
             </TouchableOpacity>
@@ -111,9 +105,8 @@ export default class CloudChartView extends Component {
             </TouchableOpacity>
           </View>
           <Text style={styles.chartNote}>TOP 10</Text>
-          <View style={[StyleSheet.styles.discoveryCenter.rightContainer, {justifyContent: 'flex-end', paddingRight: -10}]}>
-            <TouchableOpacity>
-            </TouchableOpacity>
+          <View style={[StyleSheet.styles.discoveryCenter.rightContainer, { justifyContent: 'flex-end', paddingRight: -10 }]}>
+            <TouchableOpacity />
           </View>
         </Chart.Footer>
       </Chart>
@@ -140,31 +133,31 @@ const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
     left: 0,
-    right: 0
+    right: 0,
   },
   wc1: {
     color: 'white',
-    backgroundColor:'transparent',
+    backgroundColor: 'transparent',
     fontSize: 66,
     fontWeight: '200',
   },
   wc2: {
     color: 'white',
-    backgroundColor:'transparent',
+    backgroundColor: 'transparent',
     fontSize: 42,
     fontWeight: '200',
     position: 'absolute',
   },
   wc3: {
     color: 'white',
-    backgroundColor:'transparent',
+    backgroundColor: 'transparent',
     fontSize: 30,
     fontWeight: '200',
     position: 'absolute',
   },
   wc4: {
     color: 'white',
-    backgroundColor:'transparent',
+    backgroundColor: 'transparent',
     fontSize: 11,
     fontWeight: '200',
     position: 'absolute',
@@ -173,5 +166,5 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 11,
     backgroundColor: 'transparent',
-  }
+  },
 });

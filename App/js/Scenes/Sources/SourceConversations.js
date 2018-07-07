@@ -3,21 +3,9 @@
 
 import React, { Component } from 'react';
 
+import { Text, View, TouchableOpacity, Image } from 'react-native';
 
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  Image
-} from 'react-native';
-
-import {
-  Colors,
-  StyleSheet,
-  Localizable
-} from '../../Common';
-
-import SourcesBarChart from '../../Components/Charts/SourcesBarChart';
+import { Colors, StyleSheet, Localizable } from '../../Common';
 
 import Icon from '../../Components/Common/Icon';
 
@@ -28,7 +16,7 @@ type Props = {
 };
 
 type State = {
-  source: Object
+  source: Object,
 };
 
 export default class SourceConversation extends Component {
@@ -39,7 +27,7 @@ export default class SourceConversation extends Component {
     super(props);
 
     const source = Actant.findByID(props.sourceID);
-    this.state = {source};
+    this.state = { source };
   }
 
   render() {
@@ -47,29 +35,24 @@ export default class SourceConversation extends Component {
       <View style={styles.container}>
         <View style={StyleSheet.styles.statisticsContainer}>
           <View style={StyleSheet.styles.statisticContainer}>
-            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toNumber(0, {precision: 0})}</Text>
+            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toNumber(0, { precision: 0 })}</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Book</Text>
           </View>
           <View style={StyleSheet.styles.statisticKeyline} />
           <View style={StyleSheet.styles.statisticContainer}>
-            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toNumber(0, {precision: 0})}</Text>
-              <View style={styles.SpheresBarChart}></View>
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+              <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toNumber(0, { precision: 0 })}</Text>
+              <View style={styles.SpheresBarChart} />
             </View>
             <Text style={StyleSheet.styles.statisticSubtitle}>Spheres</Text>
           </View>
         </View>
-        <View style={styles.conversationGraph}>
-        </View>
+        <View style={styles.conversationGraph} />
         <TouchableOpacity style={styles.section}>
-          <View style={[styles.sourcesCellContainer, {paddingVertical: 15}]}>
+          <View style={[styles.sourcesCellContainer, { paddingVertical: 15 }]}>
             <View style={styles.sourcesLeftContainer}>
               <TouchableOpacity onPress={() => {}}>
-                <Icon
-                  name={'avatar-human-group'}
-                  style={[styles.sourceAvatar, {color: 'black'}]}
-                  size={20}
-                />
+                <Icon name={'avatar-human-group'} style={[styles.sourceAvatar, { color: 'black' }]} size={20} />
               </TouchableOpacity>
               <Text style={StyleSheet.styles.cell.title}>Source Name</Text>
             </View>
@@ -77,15 +60,18 @@ export default class SourceConversation extends Component {
               <View styl={styles.sourcesBarChart} />
               <Text style={StyleSheet.styles.cell.subtitle}>0 conversations</Text>
             </View>
-            <Image source={require('../../Images/common/disclosure.png')}  style={styles.disclosure} />
+            <Image source={require('../../Images/common/disclosure.png')} style={styles.disclosure} />
           </View>
-          <View style={[StyleSheet.styles.separator, {marginLeft: -15}]}></View>
+          <View style={[StyleSheet.styles.separator, { marginLeft: -15 }]} />
         </TouchableOpacity>
         <View style={styles.sourceOccurences}>
           <View style={styles.listItemContainer}>
             <Text style={StyleSheet.styles.cell.occurrence}>1</Text>
             <View style={styles.listItem}>
-              <Text style={styles.body}>Lorem ipsum dolor sit amet, eleifend varius. Risus vitae mauris cras lectus ipsum ante, semper id, tincidunt nunc magnis vehicula magnis in, magna massa, lectus donec vestibulum interdum.</Text>
+              <Text style={styles.body}>
+                Lorem ipsum dolor sit amet, eleifend varius. Risus vitae mauris cras lectus ipsum ante, semper id, tincidunt nunc magnis vehicula magnis in,
+                magna massa, lectus donec vestibulum interdum.
+              </Text>
               <Text style={StyleSheet.styles.cell.subtitle}>Genesis 1:1</Text>
             </View>
           </View>
@@ -110,7 +96,7 @@ const styles = StyleSheet.create({
     shadowRadius: 0.4,
     shadowOffset: {
       height: 1,
-      width: 0
+      width: 0,
     },
   },
   section: {
@@ -132,7 +118,7 @@ const styles = StyleSheet.create({
   sourceAvatar: {
     width: 20,
     height: 20,
-    marginRight: 5
+    marginRight: 5,
   },
   sourcesBarChart: {
     height: 4,
@@ -158,7 +144,7 @@ const styles = StyleSheet.create({
     shadowRadius: 0.4,
     shadowOffset: {
       height: 1,
-      width: 0
+      width: 0,
     },
   },
   listItem: {
