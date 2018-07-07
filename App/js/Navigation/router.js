@@ -9,9 +9,18 @@ function pathToRegexp(path, keys, sensitive, strict) {
     .replace(/\/\(/g, '(?:/')
     .replace(/\+/g, '__plus__')
     .replace(/(\/)?(\.)?:(\w+)(?:(\(.*?\)))?(\?)?/g, function(_, slash, format, key, capture, optional) {
-      keys.push({ name: key, optional: !! optional });
+      keys.push({ name: key, optional: !!optional });
       slash = slash || '';
-      return '' + (optional ? '' : slash) + '(?:' + (optional ? slash : '') + (format || '') + (capture || (format && '([^/.]+?)' || '([^/]+?)')) + ')' + (optional || '');
+      return (
+        '' +
+        (optional ? '' : slash) +
+        '(?:' +
+        (optional ? slash : '') +
+        (format || '') +
+        (capture || ((format && '([^/.]+?)') || '([^/]+?)')) +
+        ')' +
+        (optional || '')
+      );
     })
     .replace(/([\/.])/g, '\\$1')
     .replace(/__plus__/g, '(.+)')
@@ -42,9 +51,9 @@ function urlFor(path: string, params: any) {
   url = url.replace(/\/:.*\?/g, '/').replace(/\?/g, '');
 
   if (url.indexOf(':') != -1) {
-    throw new Error('missing parameters for url: '+path);
+    throw new Error('missing parameters for url: ' + path);
   }
-  return {...extraParams, path: url};
+  return { ...extraParams, path: url };
 }
 
 class Route {
@@ -67,7 +76,7 @@ class Route {
     const params = {};
     matches.forEach((match, i) => {
       const param = this.params[i - 1];
-      const val = ('string' == typeof match) ? decodeURIComponent(match) : match;
+      const val = 'string' == typeof match ? decodeURIComponent(match) : match;
       if (param) {
         params[param.name] = val;
       }
@@ -93,7 +102,7 @@ class Router {
       this.map[key] = route;
       this.routes.push(this.map[key]);
     }
-    return (params) => urlFor(key, params);
+    return params => urlFor(key, params);
   }
 
   addRoutes(routes: any) {
@@ -107,11 +116,11 @@ class Router {
     for (let route of this.routes) {
       const params = route.match(path);
       if (params) {
-        return {route, params}
+        return { route, params };
       }
     }
 
-    return {route: null, params: null};
+    return { route: null, params: null };
   }
 }
 

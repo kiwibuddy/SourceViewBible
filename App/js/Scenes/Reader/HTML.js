@@ -1,7 +1,7 @@
 /* @flow */
 'use strict';
 
-import { Colors, StyleSheet } from '../../Common';
+import { Colors } from '../../Common';
 
 const CSS = require('./CSS');
 

@@ -2,19 +2,18 @@
 'use strict';
 
 import React, { Component } from 'react';
-import ReactNative, { View, Text, Image, Platform, TouchableOpacity, RecyclerViewBackedScrollView, Dimensions } from 'react-native';
+import { View, Text, Image, Platform, TouchableOpacity, Dimensions } from 'react-native';
 import { ListView } from '../../Components/Common/DatabaseListView';
 
 const { width: WIDTH } = Dimensions.get('window');
 
 import { Colors, Constants, NumberHelper, StyleSheet } from '../../Common';
 
-const { SourceType, SphereType } = Constants;
+const { SphereType } = Constants;
 
 import LinearGradient from 'react-native-linear-gradient';
-import { SourcesBarChart, SpheresBarChart } from '../../Components/Charts';
+import { SpheresBarChart } from '../../Components/Charts';
 import PageControl from '../../Components/Common/PageControl';
-import { ReadingTime } from '../../Common/NumberHelper';
 import Localizable from '../../Common/Localizable';
 import SourceIcon from '../../Components/Common/SourceIcon';
 
@@ -23,7 +22,7 @@ const MINIMUM_SOURCE_WORD_COUNT = 1000;
 
 import { sourcesURL, sourceURL } from '../../Navigation';
 
-import { Bible, Actant, Book } from '../../Database';
+import { Actant } from '../../Database';
 
 import { Preference } from '../../Preferences';
 
@@ -36,7 +35,7 @@ type State = {
   currentPage: number,
 };
 
-export default class DiscoverSources extends Component {
+export default class DiscoverSources extends Component<Props> {
   state: State;
 
   constructor(props: Object) {
@@ -100,7 +99,6 @@ export default class DiscoverSources extends Component {
   }
 
   _renderSource = (source: Object) => {
-    const sourcePercent = (source.wordCount / Bible.wordCount) * 100;
     const spherePercent = (source.sphereWordCount / source.wordCount) * 100;
 
     return (

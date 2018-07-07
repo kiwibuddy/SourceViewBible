@@ -2,7 +2,6 @@
 'use strict';
 
 import Predicate from './Predicate';
-import ComparisonPredicate from './ComparisonPredicate';
 import WordPredicate from './WordPredicate';
 
 export default class CompoundPredicate extends Predicate {

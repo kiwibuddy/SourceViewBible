@@ -230,14 +230,15 @@ export default class Bookmarks extends Component {
     const { highlights, bookmarks } = this.state;
 
     switch (segmentIndex) {
-      case SEGMENT_INDEXES.HISTORY:
+      case SEGMENT_INDEXES.HISTORY: {
         const { rows, sections } = this._getHistory();
         return this.state.dataSource.cloneWithRowsAndSections(rows, sections);
+      }
 
       case SEGMENT_INDEXES.HIGHLIGHTS:
         return this.state.dataSource.cloneWithRowsAndSections({ highlights });
 
-      default:
+      default: {
         let defaults = [];
         if (Platform.OS === 'ios') {
           defaults = [
@@ -258,6 +259,7 @@ export default class Bookmarks extends Component {
         if (defaults.length > 0) bookmarkSections.push('defaults');
         if (bookmarks.length > 0) bookmarkSections.push('bookmarks');
         return this.state.dataSource.cloneWithRowsAndSections({ defaults, bookmarks }, bookmarkSections);
+      }
     }
   };
 

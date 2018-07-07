@@ -5,7 +5,7 @@ const SourceType = {
   NARRATOR: 'narrator',
   GOD: 'god',
   LEAD: 'lead',
-  SUPPORT: 'support'
+  SUPPORT: 'support',
 };
 
 const SphereType = {
@@ -15,13 +15,13 @@ const SphereType = {
   RELIGION: 'religion',
   EDUCATION: 'education',
   COMMUNICATION: 'communication',
-  CELEBRATION: 'celebration'
+  CELEBRATION: 'celebration',
 };
 
 const ReaderBaseFontSize = 17;
 const ReaderBaseLineHeight = 31;
 const ReaderFontStepSize = 2;
-const ReaderWebFontConversion = 13/17;
+const ReaderWebFontConversion = 13 / 17;
 
 const Links = {
   Website: 'http://sourceviewbible.com',
@@ -31,7 +31,8 @@ const Links = {
   Contact: 'mailto:feedback@sourceviewbible.com',
   Help: 'https://help.sourceviewbible.com',
   AppStore: 'https://itunes.apple.com/us/app/sourceview-bible/id1114617271?ls=1&mt=8',
-  AppStoreRating: 'itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1114617271&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software',
+  AppStoreRating:
+    'itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1114617271&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software',
   GooglePlay: 'market://details?id=com.sourceviewbible',
   GooglePlayRating: 'market://details?id=com.sourceviewbible',
 };
@@ -43,5 +44,5 @@ module.exports = {
   ReaderBaseFontSize,
   ReaderBaseLineHeight,
   ReaderFontStepSize,
-  ReaderWebFontConversion
+  ReaderWebFontConversion,
 };

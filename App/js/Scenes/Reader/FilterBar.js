@@ -1,27 +1,16 @@
 /* @flow */
 'use strict';
 
-import React, { Component } from 'react';
-import {
-  Image,
-  Platform,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import React from 'react';
+import { Image, Platform, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
-import {
-  Colors,
-  Localizable,
-  StyleSheet
-} from '../../Common';
+import { StyleSheet } from '../../Common';
 
-import { Book, Sphere } from '../../Database';
+import { Sphere } from '../../Database';
 import { Preference } from '../../Preferences';
 
 type Props = {
-  onPressClear: Function
+  onPressClear: Function,
 };
 
 const FilterBar = (props: Props) => {
@@ -31,7 +20,7 @@ const FilterBar = (props: Props) => {
   const sphereLabels = Sphere.whereIn(spheres).map(sphere => {
     const color = sphere.color();
     return (
-      <View key={'sphere-' + sphere.id} style={[styles.filterLabelContainer, {backgroundColor: color}]}>
+      <View key={'sphere-' + sphere.id} style={[styles.filterLabelContainer, { backgroundColor: color }]}>
         <Text style={[styles.filterLabel]}>{sphere.name}</Text>
       </View>
     );

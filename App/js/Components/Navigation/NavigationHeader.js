@@ -3,17 +3,11 @@
 
 import React, { Component } from 'react';
 
-import {
-  Animated,
-  Platform,
-  View
-} from 'react-native';
+import { Animated, Platform, View } from 'react-native';
 
 import NavigationHeaderTitle from './NavigationHeaderTitle';
 
-import {
-  StyleSheet
-} from '../../Common';
+import { StyleSheet } from '../../Common';
 
 type BarComponentRenderer = ?(props: Object) => ?ReactElement<any>;
 
@@ -57,7 +51,10 @@ export default class NavigationHeader extends Component {
   render() {
     const { style, viewProps } = this.props;
 
-    const barHeight = (this.props.statusBarHeight instanceof Animated.Value) ? Animated.add(this.props.statusBarHeight, new Animated.Value(APPBAR_HEIGHT)) : APPBAR_HEIGHT + this.props.statusBarHeight;
+    const barHeight =
+      this.props.statusBarHeight instanceof Animated.Value
+        ? Animated.add(this.props.statusBarHeight, new Animated.Value(APPBAR_HEIGHT))
+        : APPBAR_HEIGHT + this.props.statusBarHeight;
     return (
       <Animated.View style={[styles.appbar, { height: barHeight }, style]} {...viewProps}>
         {this._renderLeft(this.props)}
@@ -70,32 +67,20 @@ export default class NavigationHeader extends Component {
   _renderLeft = (props: Object) => {
     const { renderLeftComponent } = this.props;
     if (!renderLeftComponent) return null;
-    return (
-      <View style={[styles.left, { marginTop: this.props.statusBarHeight }]}>
-        {renderLeftComponent(props)}
-      </View>
-    );
+    return <View style={[styles.left, { marginTop: this.props.statusBarHeight }]}>{renderLeftComponent(props)}</View>;
   };
 
   _renderTitle = (props: Object) => {
     const { renderTitleComponent } = this.props;
     if (!renderTitleComponent) return null;
-    const style = Platform.OS === 'android' && !this.props.renderLeftComponent ? {left: 16} : {};
-    return (
-      <View style={[styles.title, style, { marginTop: this.props.statusBarHeight }]}>
-        {renderTitleComponent(props)}
-      </View>
-    );
+    const style = Platform.OS === 'android' && !this.props.renderLeftComponent ? { left: 16 } : {};
+    return <View style={[styles.title, style, { marginTop: this.props.statusBarHeight }]}>{renderTitleComponent(props)}</View>;
   };
 
   _renderRight = (props: Object) => {
     const { renderRightComponent } = this.props;
     if (!renderRightComponent) return null;
-    return (
-      <View style={[styles.right, { marginTop: this.props.statusBarHeight }]}>
-        {renderRightComponent(props)}
-      </View>
-    );
+    return <View style={[styles.right, { marginTop: this.props.statusBarHeight }]}>{renderRightComponent(props)}</View>;
   };
 }
 

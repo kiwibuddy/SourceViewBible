@@ -15,7 +15,7 @@ const SPHERE_CLASS_MAP = {
   religion: '4',
   education: '5',
   communication: '6',
-  celebration: '7'
+  celebration: '7',
 };
 
 const SPHERE_FEATURE_MAP = {
@@ -25,17 +25,19 @@ const SPHERE_FEATURE_MAP = {
   religion: 'Religion',
   education: 'Education',
   communication: 'MediaCom',
-  celebration: 'Celebration'
+  celebration: 'Celebration',
 };
 
 function highlightSpheres(feature: string, spheres: any, startingPosition: number) {
   if (spheres.length > 0) {
     const sphereClasses = spheres.map((sphere, index) => {
       const sphereClass = SPHERE_CLASS_MAP[sphere];
-      return (`{{ if featureequal ${index + startingPosition} 'true' }} s${sphereClass}{{ endif }}`);
+      return `{{ if featureequal ${index + startingPosition} 'true' }} s${sphereClass}{{ endif }}`;
     });
 
-    return `{{ setvar 'sphere_classes' }}${sphereClasses.join('')}{{ setvarend }}{{ if varequal 'sphere_classes' '' }}${feature}{{ else }}<span class="{{ emitvar 'sphere_classes' }}">${feature}</span>{{ endif }}`;
+    return `{{ setvar 'sphere_classes' }}${sphereClasses.join(
+      ''
+    )}{{ setvarend }}{{ if varequal 'sphere_classes' '' }}${feature}{{ else }}<span class="{{ emitvar 'sphere_classes' }}">${feature}</span>{{ endif }}`;
   } else {
     return feature;
   }
@@ -58,13 +60,15 @@ function styleEmbeddedQuotations(feature: string) {
 }
 
 function openDatabase() {
-  return new Promise((resolve, reject) => {
-    Emdros.open({name: 'Datasets/en/NLT/SourceView.bpt'}).then((emdros) => {
-      DB = emdros;
-      resolve(emdros);
-    }).catch((error) => {
-      console.log(error);
-    });
+  return new Promise(resolve => {
+    Emdros.open({ name: 'Datasets/en/NLT/SourceView.bpt' })
+      .then(emdros => {
+        DB = emdros;
+        resolve(emdros);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   });
 }
 
@@ -85,12 +89,12 @@ function scripture(options: Object) {
     stylesheet = OCCURRENCE_STYLESHEET;
   } else {
     stylesheet = JSON.parse(JSON.stringify(SCRIPTURE_STYLESHEET));
-    const spheres = (options && options.spheres ? options.spheres : []);
+    const spheres = options && options.spheres ? options.spheres : [];
     const sphereFeatures = spheres.map(sphere => SPHERE_FEATURE_MAP[sphere]);
 
     const dictionaries = stylesheet['dictionaries'];
 
-    const highlights = (options && options.highlights ? options.highlights : []);
+    const highlights = options && options.highlights ? options.highlights : [];
     highlights.forEach(highlight => {
       highlight.references.forEach(reference => {
         for (let monad = reference.firstMonad; monad <= reference.lastMonad; monad++) {
@@ -105,12 +109,22 @@ function scripture(options: Object) {
     base['NonWordToken'] = base['Token'];
     base['SpaceToken']['start'] = highlightSpheres(styleFeatures(' '), options.spheres, 0);
     base['SpaceToken']['get'] = sphereFeatures;
-    base['VerseNumberToken']['start'] = base['VerseNumberToken']['start'].replace('{{SPHERES}}', highlightSpheres(styleEmbedded('<span id="monad-{{ firstmonad }} class="verse" data-verse="{{ emitvar \'verse_anchor\' }}">{{ featurenomangle 0 }}&#160;</span>'), spheres, 1));
+    base['VerseNumberToken']['start'] = base['VerseNumberToken']['start'].replace(
+      '{{SPHERES}}',
+      highlightSpheres(
+        styleEmbedded('<span id="monad-{{ firstmonad }} class="verse" data-verse="{{ emitvar \'verse_anchor\' }}">{{ featurenomangle 0 }}&#160;</span>'),
+        spheres,
+        1
+      )
+    );
     base['VerseNumberToken']['get'] = base['VerseNumberToken']['get'].concat(sphereFeatures);
-    base['ChapterNumberToken']['start'] = base['ChapterNumberToken']['start'].replace('{{SPHERES}}', highlightSpheres(styleEmbedded('{{ featurenomangle 0 }}'), spheres, 1));
+    base['ChapterNumberToken']['start'] = base['ChapterNumberToken']['start'].replace(
+      '{{SPHERES}}',
+      highlightSpheres(styleEmbedded('{{ featurenomangle 0 }}'), spheres, 1)
+    );
     base['ChapterNumberToken']['get'] = base['ChapterNumberToken']['get'].concat(sphereFeatures);
   }
-  const style = {stylesheet: JSON.stringify(stylesheet)};
+  const style = { stylesheet: JSON.stringify(stylesheet) };
 
   let monadSet = options.monadSet;
   if (!monadSet) {
@@ -128,12 +142,14 @@ function scripture(options: Object) {
       return;
     }
 
-    DB.string(monadSet.first, monadSet.last, style).then((result) => {
-      resolve(result.trim());
-    }).catch((error) => {
-      reject(error);
-    });
-  })
+    DB.string(monadSet.first, monadSet.last, style)
+      .then(result => {
+        resolve(result.trim());
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
 }
 
 function words(options: Object) {

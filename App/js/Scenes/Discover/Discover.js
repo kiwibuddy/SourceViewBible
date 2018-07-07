@@ -3,19 +3,9 @@
 
 import React, { Component } from 'react';
 
-import {
-  Platform,
-  ScrollView,
-  Text,
-  View,
-  TouchableOpacity
-} from 'react-native';
+import { Platform, ScrollView, Text, View, TouchableOpacity } from 'react-native';
 
-import {
-  Colors,
-  StyleSheet,
-  Localizable
-} from '../../Common';
+import { Colors, StyleSheet, Localizable } from '../../Common';
 
 import AppInfo from 'react-native-app-info';
 
@@ -27,29 +17,23 @@ import { NavigationBarButton } from '../../Components/Navigation';
 import { aboutURL, discoverHelpURL } from '../../Navigation';
 import { Preference } from '../../Preferences';
 
-import {
-  MenuOption,
-} from '../../Components/Menu';
-
-type Props = {
-
-};
+import { MenuOption } from '../../Components/Menu';
 
 export default class Discovery extends Component {
   static renderNavigationHeaderRightComponent(props: Object) {
     if (Platform.OS === 'android') return null;
-    
+
     return (
       <NavigationBarButton
         imageSource={require('../../Components/Navigation/Images/nav-help.png')}
-        onPress={() => props.navigate(discoverHelpURL({title: Localizable.t('help'), modal: true}))}
+        onPress={() => props.navigate(discoverHelpURL({ title: Localizable.t('help'), modal: true }))}
       />
     );
   }
 
   static renderMenuOptions(props: Object) {
     return (
-      <MenuOption key="help" text={Localizable.t('help')} onSelect={() => props.navigate(discoverHelpURL({title: Localizable.t('help'), modal: true}))} />
+      <MenuOption key="help" text={Localizable.t('help')} onSelect={() => props.navigate(discoverHelpURL({ title: Localizable.t('help'), modal: true }))} />
     );
   }
 
@@ -60,22 +44,26 @@ export default class Discovery extends Component {
       <ScrollView style={styles.container}>
         <DiscoverBooks navigate={this.props.navigate} shouldRefresh={shouldRefresh} />
 
-        <View style={styles.separator}></View>
+        <View style={styles.separator} />
 
         <DiscoverSources navigate={this.props.navigate} shouldRefresh={shouldRefresh} />
 
-        <View style={styles.separator}></View>
+        <View style={styles.separator} />
 
         <DiscoverSpheres navigate={this.props.navigate} shouldRefresh={shouldRefresh} />
 
-        <View style={styles.separator}></View>
+        <View style={styles.separator} />
 
-        <TouchableOpacity style={styles.aboutContainer} onPress={() => this.props.navigate(aboutURL({title: Localizable.t('about-sourceview'), modal: true}))}>
+        <TouchableOpacity
+          style={styles.aboutContainer}
+          onPress={() => this.props.navigate(aboutURL({ title: Localizable.t('about-sourceview'), modal: true }))}
+        >
           <Text style={styles.copyright}>SourceView Publishing, LLC ©2016</Text>
-          <Text style={styles.copyright}>Version {AppInfo.getInfoShortVersion()} ({AppInfo.getInfoVersion()})</Text>
+          <Text style={styles.copyright}>
+            Version {AppInfo.getInfoShortVersion()} ({AppInfo.getInfoVersion()})
+          </Text>
           <Text style={styles.button}>Learn More</Text>
         </TouchableOpacity>
-
       </ScrollView>
     );
   }
@@ -87,10 +75,10 @@ export default class Discovery extends Component {
           <Text style={StyleSheet.styles.sectionHeaderTitle}>{title.toLocaleUpperCase()}</Text>
         </View>
 
-        <View style={[styles.sectionContainer, {paddingBottom: 15, marginHorizontal: 4}]}>
-          <View style={styles.itemContainerBlank}></View>
-          <View style={styles.itemContainerBlank}></View>
-          <View style={styles.itemContainerBlank}></View>
+        <View style={[styles.sectionContainer, { paddingBottom: 15, marginHorizontal: 4 }]}>
+          <View style={styles.itemContainerBlank} />
+          <View style={styles.itemContainerBlank} />
+          <View style={styles.itemContainerBlank} />
         </View>
       </View>
     );
@@ -105,14 +93,14 @@ export default class Discovery extends Component {
     const year = date.getUTCFullYear();
     const currentDate = `${year}${month}${day}`;
 
-    const shouldRefresh = (!refreshDate || currentDate !== refreshDate);
+    const shouldRefresh = !refreshDate || currentDate !== refreshDate;
     if (shouldRefresh) {
       Preference.setStringForKey(currentDate, Preference.Keys.Discover.RefreshDate);
     }
 
     // return true;
     return shouldRefresh;
-  }
+  };
 }
 
 const styles = StyleSheet.create({
@@ -143,7 +131,7 @@ const styles = StyleSheet.create({
   },
   aboutContainer: {
     paddingVertical: 10,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   copyright: {
     fontSize: 13,
@@ -152,5 +140,5 @@ const styles = StyleSheet.create({
   button: {
     fontSize: 13,
     color: Colors.tint,
-  }
+  },
 });

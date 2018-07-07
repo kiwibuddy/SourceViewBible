@@ -13,7 +13,7 @@ type Props = {
   onPress?: Function,
   style?: Object,
   title?: any,
-  titleStyle?: any
+  titleStyle?: any,
 };
 
 const NavigationBarButton = (props: Props) => {
@@ -43,26 +43,26 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: Platform.OS === 'ios' ? 10 : 16
+    padding: Platform.OS === 'ios' ? 10 : 16,
   },
   image: {
     tintColor: Colors.tint,
     ...Platform.select({
       android: {
         width: 24,
-        height: 24
-      }
-    })
+        height: 24,
+      },
+    }),
   },
   textContainer: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   text: {
     fontSize: 16,
-    color: Colors.tint
-  }
+    color: Colors.tint,
+  },
 });
 
 export default NavigationBarButton;

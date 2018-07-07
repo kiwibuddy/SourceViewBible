@@ -8,11 +8,11 @@ import ReactNative from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import Share from 'react-native-share';
 
-const { Image, LayoutAnimation, Platform, ScrollView, Text, TouchableOpacity, View, WebView } = ReactNative;
+const { LayoutAnimation, Platform, View, WebView } = ReactNative;
 
-import { Colors, Localizable, StyleSheet } from '../../Common';
+import { Localizable, StyleSheet } from '../../Common';
 
-import { BACK, bookURL, bookmarkURL, readerSearchURL, readerSettingsURL, readerURL } from '../../Navigation';
+import { bookURL, bookmarkURL, readerSettingsURL } from '../../Navigation';
 import { NavigationHeader, NavigationBarButton, Toolbar } from '../../Components/Navigation';
 
 import DefaultToolbar from '../../Components/Navigation/DefaultToolbar';
@@ -25,11 +25,11 @@ import Loading from './Loading';
 const RNFS = require('react-native-fs');
 
 import Emdros from '../../API/Emdros';
-import { Book, Sphere } from '../../Database';
+import { Book } from '../../Database';
 
 const HTML = require('./HTML');
 
-import { Bookmark, BookmarkReference, Preference, ReferenceDescription } from '../../Preferences';
+import { Bookmark, Preference, ReferenceDescription } from '../../Preferences';
 import { ReaderBaseFontSize, ReaderBaseLineHeight, ReaderFontStepSize, ReaderWebFontConversion } from '../../Common/Constants';
 
 type Props = {
@@ -256,7 +256,7 @@ export default class Reader extends Component {
     const { bookID } = this.state;
     const data = JSON.parse(event.nativeEvent.data);
     switch (data.action) {
-      case 'select':
+      case 'select': {
         const references = data.verses.map(reference => {
           const chapter = reference.chapter;
           const verse = reference.verse;
@@ -273,10 +273,14 @@ export default class Reader extends Component {
 
         this.setState({ references });
         break;
-      case 'scroll':
+      }
+
+      case 'scroll': {
         const top = data.top;
         Preference.setObjectForKey({ bookID, top }, Preference.Keys.Reader.scroll);
         break;
+      }
+
       default:
         console.log('_onMessage', data);
         break;
@@ -355,8 +359,8 @@ export default class Reader extends Component {
       message: scripture,
       url: 'http://onelink.to/svbapp',
     })
-      .then(options => {})
-      .catch(error => {});
+      .then(() => {})
+      .catch(() => {});
   }
 
   _setScripture = (bookID: string, anchor?: string, occurrences?: any, occurrenceIndex?: number, force?: boolean = false) => {
@@ -393,7 +397,7 @@ export default class Reader extends Component {
 
   _debugScripture(scripture: string) {
     RNFS.writeFile('/tmp/Scripture.html', scripture, 'utf8')
-      .then(success => {
+      .then(() => {
         console.log('Scripture written to /tmp/Scripture.html');
       })
       .catch(err => {

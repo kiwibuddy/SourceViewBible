@@ -2,23 +2,9 @@
 'use strict';
 
 import React, { Component } from 'react';
-import {
-  ListView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-  Image,
-  Dimensions,
-  Platform,
-} from 'react-native';
+import { ListView, Text, TextInput, TouchableOpacity, View, Image, Dimensions, Platform } from 'react-native';
 
-import {
-  Analytics,
-  Colors,
-  StyleSheet,
-  Localizable
-} from '../../Common';
+import { Analytics, StyleSheet, Localizable } from '../../Common';
 
 import { NavigationHeader, NavigationBarButton } from '../../Components/Navigation';
 import { BACK, readerURL } from '../../Navigation';
@@ -29,18 +15,14 @@ const { width: WIDTH } = Dimensions.get('window');
 
 function renderBackButton(props: Object) {
   return (
-    <NavigationBarButton
-      title={Localizable.t('done')}
-      titleStyle={StyleSheet.styles.navigationBar.doneButtonTitle}
-      onPress={() => props.navigate(BACK)}
-    />
+    <NavigationBarButton title={Localizable.t('done')} titleStyle={StyleSheet.styles.navigationBar.doneButtonTitle} onPress={() => props.navigate(BACK)} />
   );
 }
 
 type State = {
   dataSource: any,
   search: string,
-  reference: any
+  reference: any,
 };
 
 export default class ReaderSearch extends Component {
@@ -50,24 +32,24 @@ export default class ReaderSearch extends Component {
   constructor(props: Object) {
     super(props);
 
-    const dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (h1, h2) => h1 !== h2});
+    const dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (h1, h2) => h1 !== h2 });
     this.state = {
       dataSource,
       search: props.search,
-      reference: null
+      reference: null,
     };
   }
 
   render() {
-    const content = (this.state.reference ? this._renderList() : this._renderBlankslate());
+    const content = this.state.reference ? this._renderList() : this._renderBlankslate();
 
     return (
       <View style={styles.container}>
         <NavigationHeader
           navigate={this.props.navigate}
-          renderTitleComponent={(props: Object) => (
+          renderTitleComponent={() => (
             <TextInput
-              ref={component => this._textInput = component}
+              ref={component => (this._textInput = component)}
               autoCapitalize="words"
               autoCorrect={false}
               autoFocus={true}
@@ -114,7 +96,7 @@ export default class ReaderSearch extends Component {
         keyboardDismissMode="on-drag"
       />
     );
-  }
+  };
 
   _renderSectionHeader = (sectionData: Object, sectionID: any) => {
     const title = Localizable.t(sectionID);
@@ -125,7 +107,7 @@ export default class ReaderSearch extends Component {
     );
   };
 
-  _renderRow = (reference: Object, sectionID: any) => {
+  _renderRow = (reference: Object) => {
     const route = this._routeFromReference(reference);
 
     return (
@@ -150,10 +132,10 @@ export default class ReaderSearch extends Component {
     this.setState({
       dataSource,
       reference,
-      search: text
+      search: text,
     });
 
-    Analytics.logSearch(text, {type: 'Reference'});
+    Analytics.logSearch(text, { type: 'Reference' });
   };
 
   _onSubmitSearch = () => {
@@ -162,33 +144,33 @@ export default class ReaderSearch extends Component {
       const route = this._routeFromReference(reference);
       this._navigate(readerURL(route));
     }
-  }
+  };
 
   _navigate = (url: Object) => {
     this._textInput.blur();
-    this.props.navigate(url, {replace: true});
+    this.props.navigate(url, { replace: true });
   };
 
   _routeFromReference = (reference: Object) => {
     const { book, source, occurrenceNumber, chapterNumber, verseNumber } = reference;
-    const route = {bookID: book.id, anchor: '', title: book.name, description: book.name};
+    const route = { bookID: book.id, anchor: '', title: book.name, description: book.name };
 
     if (source) {
       if (occurrenceNumber) {
-        route["description"] = `${book.name} ${source.name} ${occurrenceNumber}`;
-        route["anchor"] = `source-${source.name}-${occurrenceNumber}`;
+        route['description'] = `${book.name} ${source.name} ${occurrenceNumber}`;
+        route['anchor'] = `source-${source.name}-${occurrenceNumber}`;
       } else {
-        route["description"] = `${book.name} ${source.name}`;
-        route["anchor"] = `source-${source.name}-1`;
+        route['description'] = `${book.name} ${source.name}`;
+        route['anchor'] = `source-${source.name}-1`;
       }
     } else if (verseNumber > 0) {
-      route["anchor"] = `verse-${chapterNumber}-${verseNumber}`;
-      route["description"] = `${book.name} ${chapterNumber}:${verseNumber}`;
+      route['anchor'] = `verse-${chapterNumber}-${verseNumber}`;
+      route['description'] = `${book.name} ${chapterNumber}:${verseNumber}`;
     } else {
-      route["anchor"] = `chapter-${chapterNumber || 1}`;
+      route['anchor'] = `chapter-${chapterNumber || 1}`;
 
       if (chapterNumber > 0) {
-        route["description"] = `${book.name} ${chapterNumber}`;
+        route['description'] = `${book.name} ${chapterNumber}`;
       }
     }
 
@@ -255,39 +237,39 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   gettingstartedIcon: {
-    width: (WIDTH <= 320 ? 60 : 120),
-    height: (WIDTH <= 320 ? 60 : 120),
+    width: WIDTH <= 320 ? 60 : 120,
+    height: WIDTH <= 320 ? 60 : 120,
   },
   ...Platform.select({
-      ios: {
-        searchTextInput: {
-          flex: 1,
-          fontSize: 14,
-          backgroundColor: '#ececec',
-          borderColor: '#ececec',
-          borderRadius: 3,
-          borderWidth: 1,
-          paddingLeft: 8,
-          height: 26,
-          padding: 0, // Android workaround
-          top: null,
-          bottom: null,
-          left: -32,
-          marginVertical: 8
-        },
+    ios: {
+      searchTextInput: {
+        flex: 1,
+        fontSize: 14,
+        backgroundColor: '#ececec',
+        borderColor: '#ececec',
+        borderRadius: 3,
+        borderWidth: 1,
+        paddingLeft: 8,
+        height: 26,
+        padding: 0, // Android workaround
+        top: null,
+        bottom: null,
+        left: -32,
+        marginVertical: 8,
       },
-      android: {
-        searchTextInput: {
-          flex: 1,
-          fontSize: 16,
-          paddingLeft: 8,
-          backgroundColor: '#F9F9F9',
-          height: 26,
-          padding: 0, // Android workaround
-          top: null,
-          bottom: null,
-          marginVertical: 8
-        },
+    },
+    android: {
+      searchTextInput: {
+        flex: 1,
+        fontSize: 16,
+        paddingLeft: 8,
+        backgroundColor: '#F9F9F9',
+        height: 26,
+        padding: 0, // Android workaround
+        top: null,
+        bottom: null,
+        marginVertical: 8,
       },
+    },
   }),
 });

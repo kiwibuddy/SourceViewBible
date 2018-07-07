@@ -1,20 +1,11 @@
 /* @flow */
 'use strict';
 
-import React, { Component } from 'react';
+import React from 'react';
 
-import {
-  Image,
-  Text,
-  TouchableOpacity,
-  View,
-  Platform,
-} from 'react-native';
+import { Image, Text, TouchableOpacity, View, Platform } from 'react-native';
 
-import {
-  Localizable,
-  StyleSheet,
-} from '../../Common';
+import { Localizable, StyleSheet } from '../../Common';
 
 type Props = {
   book: ?Object,
@@ -22,18 +13,18 @@ type Props = {
 };
 
 const FilterBar = (props: Props) => {
-  const { book, onPress } = props;
+  const { book } = props;
   if (!book) return null;
 
   return (
     <View style={styles.filterBar}>
-      <Text style={styles.filterLabel}>{Localizable.t('in-book', {book: book.name})}</Text>
+      <Text style={styles.filterLabel}>{Localizable.t('in-book', { book: book.name })}</Text>
       <TouchableOpacity style={styles.filterClear} onPress={props.onPress}>
         <Image source={require('../../Images/sources/clear-btn.png')} />
       </TouchableOpacity>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   filterBar: {
@@ -61,5 +52,5 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
   },
-})
+});
 export default FilterBar;

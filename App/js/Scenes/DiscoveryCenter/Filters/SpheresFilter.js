@@ -2,23 +2,12 @@
 'use strict';
 
 import React, { Component } from 'react';
-import {
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
+import { ScrollView, Text, TouchableWithoutFeedback, View } from 'react-native';
 
-import {
-  Colors,
-  Localizable,
-  StyleSheet,
-} from '../../../Common';
+import { Colors, Localizable, StyleSheet } from '../../../Common';
 
 import Icon from '../../../Components/Common/Icon';
 
-import { booksFilterURL } from '../../../Navigation';
 import { cardWithFilter } from './FilterUtils';
 import { Sphere } from '../../../Database';
 
@@ -42,7 +31,7 @@ export default class SpheresFilter extends Component {
     super(props);
 
     const spheres = (props.filter && props.filter.spheres) || [];
-    this.state = {spheres};
+    this.state = { spheres };
   }
 
   componentDidMount() {
@@ -56,11 +45,7 @@ export default class SpheresFilter extends Component {
   render() {
     const spheres = Sphere.all().map(sphere => this._renderSphere(sphere));
 
-    return (
-      <ScrollView style={styles.container}>
-        {spheres}
-      </ScrollView>
-    );
+    return <ScrollView style={styles.container}>{spheres}</ScrollView>;
   }
 
   _renderSphere = (sphere: Sphere) => {
@@ -68,19 +53,15 @@ export default class SpheresFilter extends Component {
 
     const selected = spheres.indexOf(sphere.id) != -1;
     const iconName = `${sphere.id}-filled`;
-    const statusStyle = (selected ? styles.statusSelected : {});
-    const statusLabelStyle = (selected ? {color: 'white'} : {});
-    const status = (selected ? Localizable.t('added') : Localizable.t('add'));
+    const statusStyle = selected ? styles.statusSelected : {};
+    const statusLabelStyle = selected ? { color: 'white' } : {};
+    const status = selected ? Localizable.t('added') : Localizable.t('add');
     return (
       <TouchableWithoutFeedback key={sphere.id} onPress={() => this._onPressSphere(sphere)}>
         <View style={styles.row}>
-          <View style={[styles.cellContainer, {paddingVertical: 8}]}>
+          <View style={[styles.cellContainer, { paddingVertical: 8 }]}>
             <View style={styles.cellLeftContainer}>
-              <Icon
-                name={iconName}
-                size={30}
-                style={{color: Colors.spheres[sphere.id].tint, paddingRight: 8}}
-              />
+              <Icon name={iconName} size={30} style={{ color: Colors.spheres[sphere.id].tint, paddingRight: 8 }} />
               <Text style={[StyleSheet.styles.cell.title]}>{Localizable.t(sphere.id)}</Text>
             </View>
             <View style={[styles.cellRightContainer, statusStyle]}>
@@ -98,12 +79,12 @@ export default class SpheresFilter extends Component {
     const sphereIndex = spheres.indexOf(sphere.id);
     if (sphereIndex == -1) {
       this.setState({
-        spheres: [...spheres, sphere.id]
+        spheres: [...spheres, sphere.id],
       });
     } else {
       spheres.splice(sphereIndex, 1);
       this.setState({
-        spheres
+        spheres,
       });
     }
   };
@@ -123,15 +104,15 @@ export default class SpheresFilter extends Component {
         id: 'filter-' + Date.now(),
         type: 'sphere',
         ...this.props.filter,
-        spheres
-      }
+        spheres,
+      };
 
       card = cardWithFilter(this.props.card, filter);
     }
 
     this.props.onDone(card);
   };
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -162,7 +143,7 @@ const styles = StyleSheet.create({
   cellLeftContainer: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   cellRightContainer: {
     flex: 0,

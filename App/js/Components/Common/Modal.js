@@ -3,23 +3,11 @@
 
 import React, { Component } from 'react';
 
-import {
-  Image,
-  Navigator,
-  Platform,
-  Text,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
+import { Image, Navigator, Platform, Text, TouchableOpacity, View } from 'react-native';
 
 import EventEmitter from 'EventEmitter';
 
-import {
-  Colors,
-  Localizable,
-  StyleSheet,
-} from '../../Common';
+import { Colors, Localizable, StyleSheet } from '../../Common';
 
 import router, { BACK } from '../../Navigation';
 
@@ -51,7 +39,7 @@ export default class Popover extends Component {
   }
 
   _renderNavigationBar = () => {
-    const {onPressCancel} = this.props;
+    const { onPressCancel } = this.props;
     const eventEmitter = this.eventEmitter;
     const navigationBarStyles = this.props.navigationBarStyles || Navigator.NavigationBar.Styles;
 
@@ -59,84 +47,60 @@ export default class Popover extends Component {
       <Navigator.NavigationBar
         navigationStyles={navigationBarStyles}
         routeMapper={{
-          LeftButton: function(route, navigator, index, navState) {
+          LeftButton: function(route, navigator, index) {
             if (index === 0) {
               if (Platform.OS === 'android') {
                 return (
-                  <TouchableOpacity
-                    onPress={() => onPressCancel()}
-                    style={styles.navBarLeftButton}
-                    >
-                    <Image source={require('../../Components/Navigation/Images/nav-close.png')} style={{width: 24, height: 24, tintColor: Colors.tint}} />
+                  <TouchableOpacity onPress={() => onPressCancel()} style={styles.navBarLeftButton}>
+                    <Image source={require('../../Components/Navigation/Images/nav-close.png')} style={{ width: 24, height: 24, tintColor: Colors.tint }} />
                   </TouchableOpacity>
                 );
               }
 
               return (
-                <TouchableOpacity
-                  onPress={() => onPressCancel()}
-                  style={styles.navBarLeftButton}>
-                  <Text style={[styles.navBarText, styles.navBarButtonText]}>
-                    {Localizable.t('cancel')}
-                  </Text>
+                <TouchableOpacity onPress={() => onPressCancel()} style={styles.navBarLeftButton}>
+                  <Text style={[styles.navBarText, styles.navBarButtonText]}>{Localizable.t('cancel')}</Text>
                 </TouchableOpacity>
               );
             }
 
             if (Platform.OS === 'android') {
               return (
-                <TouchableOpacity
-                  onPress={() => navigator.pop()}
-                  style={styles.navBarLeftButton}
-                  >
-                  <Image source={require('../../Components/Navigation/Images/nav-back.png')} style={{width: 24, height: 24, tintColor: Colors.tint}} />
+                <TouchableOpacity onPress={() => navigator.pop()} style={styles.navBarLeftButton}>
+                  <Image source={require('../../Components/Navigation/Images/nav-back.png')} style={{ width: 24, height: 24, tintColor: Colors.tint }} />
                 </TouchableOpacity>
               );
             }
 
             const title = Localizable.t('back');
             return (
-              <TouchableOpacity
-                onPress={() => navigator.pop()}
-                style={styles.navBarLeftButton}>
-                <Text style={[styles.navBarText, styles.navBarButtonText]}>
-                  {title}
-                </Text>
+              <TouchableOpacity onPress={() => navigator.pop()} style={styles.navBarLeftButton}>
+                <Text style={[styles.navBarText, styles.navBarButtonText]}>{title}</Text>
               </TouchableOpacity>
             );
           },
-          RightButton: function(route, navigator, index, navState) {
+          RightButton: function(route) {
             if (route.path !== '/DiscoveryCenter/Filters/SpheresFilter') return null;
 
             if (Platform.OS === 'android') {
               return (
-                <TouchableOpacity
-                  onPress={() => eventEmitter.emit('onPressDone')}
-                  style={styles.navBarRightButton}>
-                  <Image source={require('../../Components/Navigation/Images/checkmark-icon.png')} style={{width: 24, height: 24, tintColor: Colors.tint}} />
+                <TouchableOpacity onPress={() => eventEmitter.emit('onPressDone')} style={styles.navBarRightButton}>
+                  <Image source={require('../../Components/Navigation/Images/checkmark-icon.png')} style={{ width: 24, height: 24, tintColor: Colors.tint }} />
                 </TouchableOpacity>
               );
             }
 
             return (
-              <TouchableOpacity
-                onPress={() => eventEmitter.emit('onPressDone')}
-                style={styles.navBarRightButton}>
-                <Text style={[styles.navBarText, styles.navBarButtonText, StyleSheet.styles.navigationBar.doneButtonTitle]}>
-                  {Localizable.t('done')}
-                </Text>
+              <TouchableOpacity onPress={() => eventEmitter.emit('onPressDone')} style={styles.navBarRightButton}>
+                <Text style={[styles.navBarText, styles.navBarButtonText, StyleSheet.styles.navigationBar.doneButtonTitle]}>{Localizable.t('done')}</Text>
               </TouchableOpacity>
             );
           },
-          Title: function(route, navigator, index, navState) {
-            return (
-              <Text style={[styles.navBarText, styles.navBarTitleText]}>
-                {route.title}
-              </Text>
-            );
+          Title: function(route) {
+            return <Text style={[styles.navBarText, styles.navBarTitleText]}>{route.title}</Text>;
           },
         }}
-        style={[styles.navBar, {height: navigationBarStyles.General.TotalNavHeight}]}
+        style={[styles.navBar, { height: navigationBarStyles.General.TotalNavHeight }]}
       />
     );
   };
@@ -151,7 +115,7 @@ export default class Popover extends Component {
 
     const Scene = route.scene;
     return (
-      <View style={{flex: 1, paddingTop: navigationBarStyles.General.TotalNavHeight}}>
+      <View style={{ flex: 1, paddingTop: navigationBarStyles.General.TotalNavHeight }}>
         <Scene
           {...this.props}
           {...navigatorRoute}
@@ -164,7 +128,7 @@ export default class Popover extends Component {
     );
   };
 
-  _navigate = (navigator: Object, route: any, options?: any) => {
+  _navigate = (navigator: Object, route: any) => {
     if (route === BACK) {
       navigator.pop();
     } else {
@@ -202,7 +166,7 @@ const styles = StyleSheet.create({
       android: {
         marginVertical: 16,
       },
-    })
+    }),
   },
   navBarLeftButton: {
     paddingLeft: 10,
@@ -211,7 +175,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 16,
       },
-    })
+    }),
   },
   navBarRightButton: {
     paddingRight: 10,
@@ -220,7 +184,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 16,
       },
-    })
+    }),
   },
   navBarButtonText: {
     color: Colors.tint,

@@ -10,9 +10,8 @@ const WORDS_PER_MINUTE = 180;
 
 function ReadingTime(words: number): string {
   const minutes = words / WORDS_PER_MINUTE;
-  const time = minutes * 60 * 1000;
   const displayed = Math.ceil(minutes);
-  return moment.duration(displayed, "minutes").format("h [hr] m [min]");
+  return moment.duration(displayed, 'minutes').format('h [hr] m [min]');
 }
 
 function RelativeDate(date: Object): string {
@@ -27,7 +26,7 @@ function RelativeDate(date: Object): string {
       return Localizable.t('yesterday');
 
     default:
-      return Localizable.strftime(date, "%m/%d/%-y");
+      return Localizable.strftime(date, '%m/%d/%-y');
   }
 }
 
@@ -45,5 +44,5 @@ function ShuffleArray(array: any): any {
 module.exports = {
   ReadingTime,
   RelativeDate,
-  ShuffleArray
+  ShuffleArray,
 };

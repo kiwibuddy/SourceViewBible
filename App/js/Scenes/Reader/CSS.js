@@ -1,11 +1,6 @@
 /* @flow */
 'use strict';
 
-import {
-  Colors,
-  StyleSheet,
-} from '../../Common';
-
 module.exports = `
 .s1 { background: linear-gradient(180deg, #FFD8D6, #FFD8D6 100.0%); }
 .s2 { background: linear-gradient(180deg, #FFEACC, #FFEACC 100.0%); }

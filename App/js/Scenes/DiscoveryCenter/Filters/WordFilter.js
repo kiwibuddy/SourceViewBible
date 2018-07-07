@@ -2,29 +2,19 @@
 'use strict';
 
 import React, { Component } from 'react';
-import {
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
+import { TextInput, View } from 'react-native';
 
-import {
-  Colors,
-  Localizable,
-  StyleSheet,
-} from '../../../Common';
+import { Localizable, StyleSheet } from '../../../Common';
 
-import { booksFilterURL } from '../../../Navigation';
 import { cardWithFilter } from './FilterUtils';
-import { Book } from '../../../Database';
 
 function filterWord(filter: Object, word: string) {
-  return ({
+  return {
     id: 'filter-' + Date.now(),
     type: 'word',
     ...filter,
-    word
-  });
+    word,
+  };
 }
 
 type Props = {
@@ -46,7 +36,7 @@ class WordFilter extends Component {
     super(props);
 
     this.state = {
-      word: props.filter && props.filter.word
+      word: props.filter && props.filter.word,
     };
   }
 
@@ -58,8 +48,8 @@ class WordFilter extends Component {
           autoCorrect={false}
           autoFocus={true}
           clearButtonMode="always"
-          onChangeText={(text) => this.setState({word: text})}
-          onSubmitEditing={(text) => this.props.onDone(cardWithFilter(this.props.card, filterWord(this.props.filter, this.state.word)))}
+          onChangeText={text => this.setState({ word: text })}
+          onSubmitEditing={() => this.props.onDone(cardWithFilter(this.props.card, filterWord(this.props.filter, this.state.word)))}
           placeholder={Localizable.t('word')}
           style={styles.textInput}
           value={this.state.word}
@@ -67,7 +57,7 @@ class WordFilter extends Component {
       </View>
     );
   }
-};
+}
 
 const styles = StyleSheet.create({
   container: {

@@ -16,5 +16,5 @@ module.exports = {
   StyleSheet,
   Localizable,
   NumberHelper,
-  Platform
+  Platform,
 };

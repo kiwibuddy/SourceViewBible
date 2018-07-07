@@ -1,11 +1,11 @@
 /* @flow */
 'use strict';
 
-import React, { Component } from 'react';
+import React from 'react';
 
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 
-import { Colors, StyleSheet } from '../../Common';
+import { StyleSheet } from '../../Common';
 
 import LinearGradient from 'react-native-linear-gradient';
 

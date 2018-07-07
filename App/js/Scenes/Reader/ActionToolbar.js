@@ -1,15 +1,10 @@
 /* @flow */
 'use strict';
 
-import React, { Component } from 'react';
-import { View } from 'react-native';
+import React from 'react';
 
-import {
-  Localizable,
-  StyleSheet
-} from '../../Common';
+import { Localizable } from '../../Common';
 
-import { BACK, readerURL } from '../../Navigation';
 import { Toolbar, ToolbarButton } from '../../Components/Navigation';
 
 import { Bookmark } from '../../Preferences';
@@ -31,26 +26,10 @@ const ActionToolbar = (props: Props) => {
 
   return (
     <Toolbar>
-      <ToolbarButton
-        title={highlightTitle}
-        onPress={onHighlight}
-        style={{marginHorizontal:0}}
-      />
-      <ToolbarButton
-        title={bookmarkTitle}
-        onPress={onBookmark}
-        style={{marginHorizontal:0}}
-      />
-      <ToolbarButton
-        title={Localizable.t('share')}
-        onPress={onShare}
-        style={{marginHorizontal:0}}
-      />
-      <ToolbarButton
-        title={Localizable.t('cancel')}
-        onPress={onCancel}
-        style={{marginHorizontal:0}}
-      />
+      <ToolbarButton title={highlightTitle} onPress={onHighlight} style={{ marginHorizontal: 0 }} />
+      <ToolbarButton title={bookmarkTitle} onPress={onBookmark} style={{ marginHorizontal: 0 }} />
+      <ToolbarButton title={Localizable.t('share')} onPress={onShare} style={{ marginHorizontal: 0 }} />
+      <ToolbarButton title={Localizable.t('cancel')} onPress={onCancel} style={{ marginHorizontal: 0 }} />
     </Toolbar>
   );
 };

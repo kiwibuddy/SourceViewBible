@@ -2,19 +2,18 @@
 'use strict';
 
 import React, { Component } from 'react';
-import ReactNative, { View, Text, Image, Platform, TouchableOpacity, RecyclerViewBackedScrollView, Dimensions } from 'react-native';
+import { View, Text, Image, Platform, TouchableOpacity, Dimensions } from 'react-native';
 import { ListView } from '../../Components/Common/DatabaseListView';
 
 const { width: WIDTH } = Dimensions.get('window');
 
 import { Colors, Constants, StyleSheet } from '../../Common';
 
-const { SourceType, SphereType } = Constants;
+const { SourceType } = Constants;
 
 import LinearGradient from 'react-native-linear-gradient';
-import { SourcesBarChart, SpheresBarChart } from '../../Components/Charts';
+import { SourcesBarChart } from '../../Components/Charts';
 import PageControl from '../../Components/Common/PageControl';
-import { ReadingTime } from '../../Common/NumberHelper';
 import Localizable from '../../Common/Localizable';
 import Icon from '../../Components/Common/Icon';
 
@@ -22,7 +21,7 @@ const MAXIMUM_SPHERE_COUNT = 9;
 
 import { spheresURL, sphereURL } from '../../Navigation';
 
-import { Bible, Book, Sphere } from '../../Database';
+import { Bible, Sphere } from '../../Database';
 
 type Props = {
   navigate: Function,
@@ -33,7 +32,7 @@ type State = {
   currentPage: number,
 };
 
-export default class DiscoverSpheres extends Component {
+export default class DiscoverSpheres extends Component<Props> {
   state: State;
 
   constructor(props: Object) {

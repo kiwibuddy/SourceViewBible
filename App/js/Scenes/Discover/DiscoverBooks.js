@@ -104,7 +104,12 @@ export default class DiscoverBooks extends Component {
         onPress={() => this.props.navigate(bookURL({ bookID: book.id, title: Localizable.t('book-overview', { name: book.name }) }))}
       >
         <View style={styles.item}>
-          <LinearGradient colors={Colors.sources[book.principalSourceType].gradient.tiny} start={{x: 0, y: 0.25}} end={{x: 0.5, y: 1}} style={styles.gradient} />
+          <LinearGradient
+            colors={Colors.sources[book.principalSourceType].gradient.tiny}
+            start={{ x: 0, y: 0.25 }}
+            end={{ x: 0.5, y: 1 }}
+            style={styles.gradient}
+          />
           <Icon name="books-filled" size={40} style={[styles.icon, { color: Colors.sources[book.principalSourceType].tint }]} />
           <Text numberOfLines={1} style={styles.bookTitle}>
             {book.name}

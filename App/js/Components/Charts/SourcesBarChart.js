@@ -1,12 +1,10 @@
 /* @flow */
 'use strict';
 
-import React, { Component } from 'react';
-import { View } from 'react-native';
+import React from 'react';
 import PropTypes from 'prop-types';
 import BarChart from './BarChart';
 
-import StyleSheet from '../../Common/StyleSheet';
 import Colors from '../../Common/Colors';
 
 import Realm from 'realm';
@@ -27,7 +25,7 @@ const SourcesBarChart = (props: Object) => {
       if (value === undefined) return null;
       return {
         color: Colors.sources[source].tint,
-        value
+        value,
       };
     }).filter(bar => bar != null);
 
@@ -41,11 +39,11 @@ SourcesBarChart.propTypes = {
   style: PropTypes.any,
   barStyle: PropTypes.any,
   data: PropTypes.any.isRequired,
-  horizontal: PropTypes.bool
+  horizontal: PropTypes.bool,
 };
 
 SourcesBarChart.defaultProps = {
-  horizontal: true
+  horizontal: true,
 };
 
 export default SourcesBarChart;

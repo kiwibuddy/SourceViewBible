@@ -3,22 +3,12 @@
 
 import React from 'react';
 
-import {
-  Text,
-  TouchableWithoutFeedback,
-  View
-} from 'react-native';
+import { View } from 'react-native';
 
-import {
-  StyleSheet
-} from '../../Common';
+import { StyleSheet } from '../../Common';
 
-const Menu = (props) => {
-  return (
-    <View style={styles.container}>
-      {props.children}
-    </View>
-  );
+const Menu = props => {
+  return <View style={styles.container}>{props.children}</View>;
 };
 
 const styles = StyleSheet.create({
@@ -28,7 +18,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     width: 200,
     elevation: 5,
-  }
+  },
 });
 
 export { Menu };

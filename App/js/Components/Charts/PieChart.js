@@ -1,7 +1,7 @@
 /* @flow */
 'use strict';
 
-import React, { Component } from 'react';
+import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import PropTypes from 'prop-types';
 import ColorPropType from 'ColorPropType';
@@ -11,7 +11,6 @@ import Svg, { Circle } from 'react-native-svg';
 const DEFAULT_SLICE_WIDTH = 3;
 
 import StyleSheet from '../../Common/StyleSheet';
-import Colors from '../../Common/Colors';
 
 const PieChart = (props: Object) => {
   const { color, size, slices: data, titleStyle, subtitleStyle } = props;
@@ -72,7 +71,7 @@ PieChart.propTypes = {
   slices: PropTypes.arrayOf(
     PropTypes.shape({
       color: ColorPropType.isRequired,
-      value: PropTypes.number.isRequired
+      value: PropTypes.number.isRequired,
     })
   ).isRequired,
   style: PropTypes.any,
@@ -80,26 +79,26 @@ PieChart.propTypes = {
   subtitle: PropTypes.string,
   subtitleStyle: PropTypes.any,
   title: PropTypes.string,
-  titleStyle: PropTypes.any
+  titleStyle: PropTypes.any,
 };
 
 const styles = StyleSheet.create({
   chart: {
     backgroundColor: 'transparent',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   pie: {
-    transform: [{ rotate: '-90deg' }]
+    transform: [{ rotate: '-90deg' }],
   },
   title: {
-    fontSize: 17
+    fontSize: 17,
   },
   subtitle: {
     fontSize: 14,
     color: '#59626A',
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+  },
 });
 
 export default PieChart;

@@ -6,8 +6,6 @@ import { SegmentedControlIOS } from 'react-native';
 
 export default class SegmentedControl extends Component {
   render() {
-    return (
-      <SegmentedControlIOS {...this.props} />
-    );
+    return <SegmentedControlIOS {...this.props} />;
   }
 }

@@ -2,7 +2,6 @@
 'use strict';
 
 module.exports = {
-
   tint: '#cf1e00',
   lightTint: '#ffdcda',
   separator: '#CCCCCC',
@@ -13,49 +12,49 @@ module.exports = {
       tint: '#4A4A4A',
       lightTint: '#E1E2E3',
       gradient: {
-        big:['#76838F', '#323B43'],
-        tiny: ['#323B43', '#323B43']
-      }
+        big: ['#76838F', '#323B43'],
+        tiny: ['#323B43', '#323B43'],
+      },
     },
     god: {
       tint: '#fc3d39',
       lightTint: '#FFE2E0',
       gradient: {
-        big:['#FF2323', '#9C0D00'],
-        tiny: ['#FF4B3B', '#FF4B3B']
-      }
+        big: ['#FF2323', '#9C0D00'],
+        tiny: ['#FF4B3B', '#FF4B3B'],
+      },
     },
     divine: {
       tint: '#fc3d39',
       lightTint: '#FFE2E0',
       gradient: {
-        big:['#FF2323', '#9C0D00'],
-        tiny: ['#fc3d39', '#fc3d39']
-      }
+        big: ['#FF2323', '#9C0D00'],
+        tiny: ['#fc3d39', '#fc3d39'],
+      },
     },
     lead: {
       tint: '#19A555',
       lightTint: '#DCF7E6',
       gradient: {
-        big:['#4CDA65', '#0B7E37'],
-        tiny: ['#19A555', '#19A555']
-      }
+        big: ['#4CDA65', '#0B7E37'],
+        tiny: ['#19A555', '#19A555'],
+      },
     },
     support: {
       tint: '#218aff',
       lightTint: '#DDF0FA',
       gradient: {
-        big:['#25B0F5', '#0F628B'],
-        tiny: ['#218aff', '#218aff']
-      }
+        big: ['#25B0F5', '#0F628B'],
+        tiny: ['#218aff', '#218aff'],
+      },
     },
     other: {
       tint: '#9B9B9B',
       lightTint: '#E6E6E6',
       gradient: {
-        big:['#DBDDDE', '#898C90'],
-        tiny: ['#DBDDDE', '#898C90']
-      }
+        big: ['#DBDDDE', '#898C90'],
+        tiny: ['#DBDDDE', '#898C90'],
+      },
     },
   },
 
@@ -66,9 +65,9 @@ module.exports = {
       chromeTint: '#323B43',
       highlightTint: '#E8E8E8',
       gradient: {
-        big:['#7B7D82', '#E8E8E8'],
-        tiny: ['#7B7D82', '#E8E8E8']
-      }
+        big: ['#7B7D82', '#E8E8E8'],
+        tiny: ['#7B7D82', '#E8E8E8'],
+      },
     },
     family: {
       tint: '#FF3A2E',
@@ -76,9 +75,9 @@ module.exports = {
       chromeTint: '#C11F17',
       highlightTint: '#FFD8D6',
       gradient: {
-        big:['#FF4B3B', '#AA0606'],
-        tiny: ['#FF3A2E', '#FF3A2E']
-      }
+        big: ['#FF4B3B', '#AA0606'],
+        tiny: ['#FF3A2E', '#FF3A2E'],
+      },
     },
     economics: {
       tint: '#FF9700',
@@ -86,9 +85,9 @@ module.exports = {
       chromeTint: '#EA6E00',
       highlightTint: '#FFEACC',
       gradient: {
-        big:['#FC882A', '#D4202F'],
-        tiny: ['#FF9700', '#FF9700']
-      }
+        big: ['#FC882A', '#D4202F'],
+        tiny: ['#FF9700', '#FF9700'],
+      },
     },
     government: {
       tint: '#FECB01',
@@ -97,8 +96,8 @@ module.exports = {
       highlightTint: '#FFF5CD',
       gradient: {
         big: ['#FFBF00', '#FF933A'],
-        tiny: ['#FECB01', '#FECB01']
-      }
+        tiny: ['#FECB01', '#FECB01'],
+      },
     },
     religion: {
       tint: '#88C807',
@@ -107,8 +106,8 @@ module.exports = {
       highlightTint: '#E8F4CE',
       gradient: {
         big: ['#8BC624', '#429321'],
-        tiny: ['#64AA20', '#64AA20']
-      }
+        tiny: ['#64AA20', '#64AA20'],
+      },
     },
     education: {
       tint: '#25B8D7',
@@ -117,8 +116,8 @@ module.exports = {
       highlightTint: '#D4F1F7',
       gradient: {
         big: ['#11C7B8', '#1A5A78'],
-        tiny: ['#25B8D7', '#25B8D7']
-      }
+        tiny: ['#25B8D7', '#25B8D7'],
+      },
     },
     communication: {
       tint: '#5A5AD3',
@@ -127,8 +126,8 @@ module.exports = {
       highlightTint: '#DEDEF7',
       gradient: {
         big: ['#C86DD7', '#3023AE'],
-        tiny: ['#5A5AD3', '#5A5AD3']
-      }
+        tiny: ['#5A5AD3', '#5A5AD3'],
+      },
     },
     celebration: {
       tint: '#C44DF8',
@@ -137,9 +136,8 @@ module.exports = {
       highlightTint: '#F9DEEF',
       gradient: {
         big: ['#D8379F', '#AD39DF'],
-        tiny: ['#C44DF8', '#C44DF8']
-      }
-    }
+        tiny: ['#C44DF8', '#C44DF8'],
+      },
+    },
   },
-
 };

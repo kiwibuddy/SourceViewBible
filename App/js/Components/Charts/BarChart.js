@@ -1,13 +1,12 @@
 /* @flow */
 'use strict';
 
-import React, { Component } from 'react';
+import React from 'react';
 import { Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 import ColorPropType from 'ColorPropType';
 
 import StyleSheet from '../../Common/StyleSheet';
-import Colors from '../../Common/Colors';
 
 const BarChart = (props: Object) => {
   const chartStyle = [styles.chart, props.style];
@@ -69,32 +68,33 @@ BarChart.propTypes = {
       slices: PropTypes.arrayOf(
         PropTypes.shape({
           color: ColorPropType,
-          value: PropTypes.number.isRequired
+          value: PropTypes.number.isRequired,
         })
-      )
+      ),
     })
   ).isRequired,
   barColor: ColorPropType,
   barStyle: PropTypes.any,
   deltaStyle: PropTypes.any,
   horizontal: PropTypes.bool,
-  style: PropTypes.any
+  maxChartValue: PropTypes.any,
+  style: PropTypes.any,
 };
 
 BarChart.defaultProps = {
-  horizontal: true
+  horizontal: true,
 };
 
 const styles = StyleSheet.create({
   chart: {
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   deltaBar: {
-    backgroundColor: '#ededed'
+    backgroundColor: '#ededed',
   },
   stackedBar: {
-    flex: 1
+    flex: 1,
   },
   label: {
     flex: 1,
@@ -105,13 +105,13 @@ const styles = StyleSheet.create({
     color: 'white',
     backgroundColor: 'transparent',
     transform: [{ rotate: '270deg' }],
-    marginBottom: -100
+    marginBottom: -100,
   },
   separator: {
     height: StyleSheet.hairlineWidth,
     backgroundColor: 'rgba(255,255,255,.2)',
-    marginHorizontal: -6
-  }
+    marginHorizontal: -6,
+  },
 });
 
 export default BarChart;

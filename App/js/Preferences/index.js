@@ -1,14 +1,7 @@
 /* @flow */
 'use strict';
 
-import {
-  Bookmark,
-  BookmarkReference,
-  Discovery,
-  History,
-  Preference,
-  ReferenceDescription,
-} from './Realm';
+import { Bookmark, BookmarkReference, Discovery, History, Preference, ReferenceDescription } from './Realm';
 
 const PREFIX = 'com.sourceviewbible.preferences.';
 const Keys = {
@@ -26,7 +19,7 @@ const Keys = {
     Chapters: PREFIX + 'books.chapters',
   },
   Bookmarks: {
-    SegmentIndex: PREFIX + 'bookmarks.segmentIndex'
+    SegmentIndex: PREFIX + 'bookmarks.segmentIndex',
   },
   Reader: {
     fontStepSize: PREFIX + '.reader.fontStepSize',

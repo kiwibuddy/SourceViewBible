@@ -4,10 +4,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 
-import {
-  Localizable,
-  StyleSheet
-} from '../../Common';
+import { Localizable, StyleSheet } from '../../Common';
 
 import { BACK, readerURL } from '../../Navigation';
 import { Toolbar, ToolbarButton } from '../../Components/Navigation';
@@ -24,7 +21,7 @@ type Props = {
 
 type State = {
   occurrenceIndex: number,
-}
+};
 
 export default class OccurrenceToolbar extends Component {
   props: Props;
@@ -34,7 +31,7 @@ export default class OccurrenceToolbar extends Component {
     super(props);
 
     this.state = {
-      occurrenceIndex: props.occurrenceIndex
+      occurrenceIndex: props.occurrenceIndex,
     };
   }
 
@@ -49,8 +46,8 @@ export default class OccurrenceToolbar extends Component {
     let currentRoute = null;
     if (occurrence) {
       const book = occurrence.book;
-      const bsoReference = Localizable.t('bso-reference', {book: book.name, source: occurrence.name, number: occurrence.number});
-      currentRoute = readerURL({bookID: book.id, anchor: `monad-${occurrence.firstMonad}`, title: book.name, description: bsoReference});
+      const bsoReference = Localizable.t('bso-reference', { book: book.name, source: occurrence.name, number: occurrence.number });
+      currentRoute = readerURL({ bookID: book.id, anchor: `monad-${occurrence.firstMonad}`, title: book.name, description: bsoReference });
     }
 
     let previousOccurrence = null;
@@ -59,8 +56,16 @@ export default class OccurrenceToolbar extends Component {
       const previousOccurrenceIndex = occurrenceIndex - 1;
       previousOccurrence = occurrences[previousOccurrenceIndex];
       const book = previousOccurrence.book;
-      const bsoReference = Localizable.t('bso-reference', {book: book.name, source: previousOccurrence.name, number: previousOccurrence.number});
-      previousRoute = readerURL({bookID: book.id, anchor: `monad-${previousOccurrence.firstMonad}`, title: book.name, description: bsoReference, occurrenceIndex: previousOccurrenceIndex, occurrences, occurrencesRoute});
+      const bsoReference = Localizable.t('bso-reference', { book: book.name, source: previousOccurrence.name, number: previousOccurrence.number });
+      previousRoute = readerURL({
+        bookID: book.id,
+        anchor: `monad-${previousOccurrence.firstMonad}`,
+        title: book.name,
+        description: bsoReference,
+        occurrenceIndex: previousOccurrenceIndex,
+        occurrences,
+        occurrencesRoute,
+      });
     }
 
     let nextOccurrence = null;
@@ -69,13 +74,21 @@ export default class OccurrenceToolbar extends Component {
       const nextOccurrenceIndex = occurrenceIndex + 1;
       nextOccurrence = occurrences[nextOccurrenceIndex];
       const book = nextOccurrence.book;
-      const bsoReference = Localizable.t('bso-reference', {book: book.name, source: nextOccurrence.name, number: nextOccurrence.number});
-      nextRoute = readerURL({bookID: book.id, anchor: `monad-${nextOccurrence.firstMonad}`, title: book.name, description: bsoReference, occurrenceIndex: nextOccurrenceIndex, occurrences, occurrencesRoute});
+      const bsoReference = Localizable.t('bso-reference', { book: book.name, source: nextOccurrence.name, number: nextOccurrence.number });
+      nextRoute = readerURL({
+        bookID: book.id,
+        anchor: `monad-${nextOccurrence.firstMonad}`,
+        title: book.name,
+        description: bsoReference,
+        occurrenceIndex: nextOccurrenceIndex,
+        occurrences,
+        occurrencesRoute,
+      });
     }
 
     return (
       <Toolbar>
-        <View style={{flex: 1, flexDirection: 'row'}}>
+        <View style={{ flex: 1, flexDirection: 'row' }}>
           <ToolbarButton
             disabled={previousOccurrence == null}
             imageSource={require('../../Images/common/previous.png')}
@@ -87,10 +100,10 @@ export default class OccurrenceToolbar extends Component {
                   this._navigate(previousRoute);
                 }
 
-                this.setState({occurrenceIndex: occurrenceIndex - 1});
+                this.setState({ occurrenceIndex: occurrenceIndex - 1 });
               }
             }}
-            style={{width: 30, height: 30}}
+            style={{ width: 30, height: 30 }}
           />
           <ToolbarButton
             disabled={nextOccurrence == null}
@@ -103,38 +116,38 @@ export default class OccurrenceToolbar extends Component {
                   this._navigate(nextRoute);
                 }
 
-                this.setState({occurrenceIndex: occurrenceIndex + 1});
+                this.setState({ occurrenceIndex: occurrenceIndex + 1 });
               }
             }}
-            style={{width: 30, height: 30}}
+            style={{ width: 30, height: 30 }}
           />
         </View>
         <ToolbarButton
-          title={Localizable.t('range-of', {current, total})}
+          title={Localizable.t('range-of', { current, total })}
           onPress={() => this._onPressOccurrences(currentRoute)}
-          style={{marginLeft: -10}}
+          style={{ marginLeft: -10 }}
         />
         <ToolbarButton
           title={Localizable.t('done')}
           titleStyle={StyleSheet.styles.navigationBar.doneButtonTitle}
           onPress={this.props.onPressDone}
-          style={{paddingHorizontal: 0, marginHorizontal: 0, marginRight: -20}}
+          style={{ paddingHorizontal: 0, marginHorizontal: 0, marginRight: -20 }}
         />
       </Toolbar>
     );
   }
 
   _navigate = (route: Object) => {
-    const options = (route !== BACK ? {replace: true} : null);
+    const options = route !== BACK ? { replace: true } : null;
     this.props.navigate(route, options);
   };
 
-  _onPressOccurrences = (currentRoute) => {
+  _onPressOccurrences = currentRoute => {
     const { occurrenceIndex, occurrences, occurrencesRoute } = this.props;
 
     occurrencesRoute.onPressBack = () => {
-      this._navigate({...currentRoute, occurrenceIndex, occurrences, occurrencesRoute});
-    }
+      this._navigate({ ...currentRoute, occurrenceIndex, occurrences, occurrencesRoute });
+    };
     this._navigate(occurrencesRoute);
-  }
+  };
 }

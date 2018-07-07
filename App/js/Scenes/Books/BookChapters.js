@@ -3,28 +3,10 @@
 
 import React, { Component } from 'react';
 
-
-import {
-  AsyncStorage,
-  Platform,
-  RecyclerViewBackedScrollView,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { Platform, RecyclerViewBackedScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { ListView } from '../../Components/Common/DatabaseListView';
 
-import {
-  Constants,
-  Colors,
-  Localizable,
-  StyleSheet,
-} from '../../Common';
-
-const {
-  SourceType,
-  SphereType
-} = Constants;
+import { Colors, Localizable, StyleSheet } from '../../Common';
 
 import { Preference } from '../../Preferences';
 
@@ -35,7 +17,6 @@ import { SourcesBarChart, SpheresBarChart } from '../../Components/Charts';
 import { ReadingTime } from '../../Common/NumberHelper';
 
 import { NavigationHeader } from '../../Components/Navigation';
-
 
 const SEGMENTS = [Localizable.t('sources.text'), Localizable.t('spheres.text')];
 const SEGMENT_INDEXES = {
@@ -50,7 +31,7 @@ import { Book } from '../../Database';
 
 type Props = {
   bookID: string,
-  navigate: Function
+  navigate: Function,
 };
 
 type State = {
@@ -61,7 +42,7 @@ type State = {
 
 export default class BookChapters extends Component {
   static NavigationHeaderStyle = {
-    elevation: null
+    elevation: null,
   };
 
   props: Props;
@@ -71,17 +52,17 @@ export default class BookChapters extends Component {
     super(props);
 
     const book = Book.findByID(props.bookID);
-    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
+    const dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2 });
     this.state = {
       book,
       dataSource: dataSource,
-      selectedSegmentIndex: Preference.numberForKey(SEGMENT_PREFERENCE) || SEGMENT_INDEXES.SOURCES
+      selectedSegmentIndex: Preference.numberForKey(SEGMENT_PREFERENCE) || SEGMENT_INDEXES.SOURCES,
     };
   }
 
   componentDidMount() {
     this.setState({
-      dataSource: this._getDataSource(this.state.selectedSegmentIndex)
+      dataSource: this._getDataSource(this.state.selectedSegmentIndex),
     });
   }
 
@@ -93,7 +74,7 @@ export default class BookChapters extends Component {
           tintColor={Colors.tint}
           values={SEGMENTS}
           selectedIndex={this.state.selectedSegmentIndex}
-          onValueChange={(value) => this._onSegmentedControlValueChanged(SEGMENTS.indexOf(value))}
+          onValueChange={value => this._onSegmentedControlValueChanged(SEGMENTS.indexOf(value))}
         />
 
         <ListView
@@ -111,23 +92,32 @@ export default class BookChapters extends Component {
     );
   }
 
-  _renderRow = (chapter: Object, sectionID: string, rowID: string, highlightRow: boolean) => {
+  _renderRow = (chapter: Object) => {
     const { book } = this.state;
     const chapterNumber = chapter.chapterNumber;
 
-    const chart = (this.state.selectedSegmentIndex === SEGMENT_INDEXES.SPHERES ? this._renderSpheresChart(book, chapter) : this._renderSourcesChart(book, chapter));
-    const subtitle = (this.state.selectedSegmentIndex === SEGMENT_INDEXES.SPHERES ? Localizable.t('spheres.count', {count: chapter.sphereCount}) : Localizable.t('sources.count', {count: chapter.sourceCount}) );
+    const chart =
+      this.state.selectedSegmentIndex === SEGMENT_INDEXES.SPHERES ? this._renderSpheresChart(book, chapter) : this._renderSourcesChart(book, chapter);
+    const subtitle =
+      this.state.selectedSegmentIndex === SEGMENT_INDEXES.SPHERES
+        ? Localizable.t('spheres.count', { count: chapter.sphereCount })
+        : Localizable.t('sources.count', { count: chapter.sourceCount });
 
     return (
-      <TouchableOpacity style={styles.section} onPress={() => this.props.navigate(readerURL({bookID: book.id, anchor: `chapter-${chapterNumber}`, title: book.name, description: `${book.name} ${chapterNumber}`}))}>
-        <View style={[styles.cellContainer, {paddingVertical: 8}]}>
+      <TouchableOpacity
+        style={styles.section}
+        onPress={() =>
+          this.props.navigate(
+            readerURL({ bookID: book.id, anchor: `chapter-${chapterNumber}`, title: book.name, description: `${book.name} ${chapterNumber}` })
+          )
+        }
+      >
+        <View style={[styles.cellContainer, { paddingVertical: 8 }]}>
           <View style={styles.horizontalContainer}>
             <View style={styles.leftContainer}>
               <Text style={StyleSheet.styles.cell.title}>Chapter {chapterNumber}</Text>
             </View>
-            <View style={styles.rightContainer}>
-              {chart}
-            </View>
+            <View style={styles.rightContainer}>{chart}</View>
           </View>
           <View style={styles.horizontalContainer}>
             <View style={styles.leftContainer}>
@@ -135,7 +125,7 @@ export default class BookChapters extends Component {
             </View>
             <View style={styles.rightContainer}>
               <Text style={StyleSheet.styles.cell.subtitle}>{subtitle}</Text>
-              </View>
+            </View>
           </View>
         </View>
       </TouchableOpacity>
@@ -143,45 +133,33 @@ export default class BookChapters extends Component {
   };
 
   _renderSourcesChart = (book: Object, chapter: Object) => {
-    return (
-      <SourcesBarChart
-        style={styles.stackedBarChart}
-        data={[chapter.sourceTypeCounts]}
-        maxChartValue={book.maxChapterWordCount}
-      />
-    );
+    return <SourcesBarChart style={styles.stackedBarChart} data={[chapter.sourceTypeCounts]} maxChartValue={book.maxChapterWordCount} />;
   };
 
   _renderSpheresChart = (book: Object, chapter: Object) => {
-    return (
-      <SpheresBarChart
-        style={styles.stackedBarChart}
-        data={[chapter.sphereCounts]}
-        maxChartValue={book.maxChapterSphereWordCount}
-      />
-    );
+    return <SpheresBarChart style={styles.stackedBarChart} data={[chapter.sphereCounts]} maxChartValue={book.maxChapterSphereWordCount} />;
   };
 
   _getDataSource = (segmentIndex: number) => {
     const { book } = this.state;
     switch (segmentIndex) {
       case SEGMENT_INDEXES.SPHERES:
-        return this.state.dataSource.cloneWithRowsAndSections({spheres: book.chapters});
+        return this.state.dataSource.cloneWithRowsAndSections({ spheres: book.chapters });
 
       default:
-        return this.state.dataSource.cloneWithRowsAndSections({sources: book.chapters});
+        return this.state.dataSource.cloneWithRowsAndSections({ sources: book.chapters });
     }
   };
 
   _onSegmentedControlValueChanged = (value: number) => {
     const listView = this.refs[LISTVIEW_REF];
-    listView.scrollTo({y: 0, animated: false});
+    listView.scrollTo({ y: 0, animated: false });
 
     Preference.setNumberForKey(value, SEGMENT_PREFERENCE);
 
     this.setState({
       selectedSegmentIndex: value,
-      dataSource: this._getDataSource(value)
+      dataSource: this._getDataSource(value),
     });
   };
 }
@@ -220,7 +198,7 @@ const styles = StyleSheet.create({
     marginRight: -5,
   },
   disclosureDown: {
-    transform: [{rotate: '90deg'}],
+    transform: [{ rotate: '90deg' }],
   },
   sectionHeaderDetail: {
     flexDirection: 'row',
@@ -231,18 +209,18 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   ...Platform.select({
-      ios: {
-        segmentedControl: {
-          marginTop: 8,
-          marginHorizontal: 8,
-          marginBottom: 8,
-        },
+    ios: {
+      segmentedControl: {
+        marginTop: 8,
+        marginHorizontal: 8,
+        marginBottom: 8,
       },
-      android: {
-        segmentedControl: {
-          backgroundColor: NavigationHeader.BACKGROUND_COLOR,
-          elevation: NavigationHeader.ELEVATION,
-        },
+    },
+    android: {
+      segmentedControl: {
+        backgroundColor: NavigationHeader.BACKGROUND_COLOR,
+        elevation: NavigationHeader.ELEVATION,
       },
-  })
+    },
+  }),
 });

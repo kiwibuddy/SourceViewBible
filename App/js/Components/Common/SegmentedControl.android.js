@@ -4,10 +4,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ColorPropType from 'ColorPropType';
-import { Animated, TouchableOpacity, View, Text } from 'react-native';
+import { TouchableOpacity, View, Text } from 'react-native';
 import StyleSheet from '../../Common/StyleSheet';
-
-const SEGMENT_REF = 'segment-';
 
 export default class SegmentedControl extends Component {
   static propTypes = {
@@ -16,18 +14,18 @@ export default class SegmentedControl extends Component {
     tintColor: ColorPropType,
     values: PropTypes.arrayOf(PropTypes.string),
     selectedIndex: PropTypes.number,
-    onValueChange: PropTypes.func
+    onValueChange: PropTypes.func,
   };
 
   state: {
-    selectedIndex: number
+    selectedIndex: number,
   };
 
   constructor(props: Object) {
     super(props);
 
     this.state = {
-      selectedIndex: props.selectedIndex || 0
+      selectedIndex: props.selectedIndex || 0,
     };
   }
 
@@ -69,22 +67,22 @@ export default class SegmentedControl extends Component {
 const styles = StyleSheet.create({
   tabBar: {
     height: 48,
-    backgroundColor: '#FFF'
+    backgroundColor: '#FFF',
   },
   buttons: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
   },
   button: {
     flex: 1,
     borderBottomWidth: 3,
     borderBottomColor: 'transparent',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   buttonTitle: {
     fontSize: 14,
     fontFamily: 'sans-serif-medium',
-    alignSelf: 'center'
-  }
+    alignSelf: 'center',
+  },
 });

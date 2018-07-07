@@ -3,12 +3,7 @@
 
 import React, { Component } from 'react';
 
-import {
-  Analytics,
-  Colors,
-  StyleSheet,
-  Localizable
-} from '../../Common';
+import { Localizable } from '../../Common';
 
 import Modal from '../../Components/Common/Modal';
 import { BACK, sourcesFilterItemsURL } from '../../Navigation';
@@ -31,7 +26,7 @@ class Filters extends Component {
 
     const card = {
       type: 'sources',
-      filters: Preference.objectForKey(Preference.Keys.Sources.filters) || []
+      filters: Preference.objectForKey(Preference.Keys.Sources.filters) || [],
     };
 
     this.state = { card };
@@ -41,7 +36,7 @@ class Filters extends Component {
     return (
       <Modal
         card={this.state.card}
-        initialRoute={sourcesFilterItemsURL({title: Localizable.t('filters')})}
+        initialRoute={sourcesFilterItemsURL({ title: Localizable.t('filters') })}
         onPressCancel={this._onPressCancel}
         onDone={this._onDone}
       />
@@ -57,6 +52,6 @@ class Filters extends Component {
     Preference.setObjectForKey(card.filters, Preference.Keys.Sources.filters);
     this.props.navigate(BACK);
   };
-};
+}
 
 export default Filters;

@@ -1,7 +1,6 @@
 /* @flow */
 'use strict';
 
-import { Platform } from 'react-native';
 import Realm from 'realm';
 import Emdros from '../API/Emdros';
 import moment from 'moment';
@@ -90,7 +89,7 @@ export class Bookmark extends Realm.Object {
     });
   }
 
-  static bookmark({ id, references, createdAt, highlight, note }) {
+  static bookmark({ id, references, highlight, note }) {
     realm.write(() => {
       if (id) {
         realm.create(
@@ -366,7 +365,7 @@ const options = {
   encryptionKey: Emdros.preferencesKey,
   schema: Schema,
   schemaVersion: 3,
-  migration: function(oldRealm, newRealm) {},
+  migration: function() {},
 };
 
 const realm = new Realm(options);

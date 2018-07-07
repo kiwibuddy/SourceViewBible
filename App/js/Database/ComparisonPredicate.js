@@ -11,7 +11,7 @@ export default class ComparisonPredicate extends Predicate {
   constructor(leftExpression: string, operatorType: string, rightExpression: any) {
     const query = `${leftExpression} ${operatorType} $0`;
     const args = [rightExpression];
-    super({query, args});
+    super({ query, args });
 
     this.leftExpression = leftExpression;
     this.rightExpression = rightExpression;

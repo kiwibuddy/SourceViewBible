@@ -7,10 +7,7 @@ import Emdros from '../API/Emdros';
 
 const RNFS = require('react-native-fs');
 
-import {
-  Colors,
-  Localizable,
-} from '../Common';
+import { Colors, Localizable } from '../Common';
 
 function bookNameInText(text: string) {
   const regex = /([1-3]?\s?[A-Z]*)/gi;
@@ -22,7 +19,9 @@ function bookNameInText(text: string) {
 }
 
 function BookReferencesInText(text: string) {
-  return Book.all().filtered('name CONTAINS[c] $0 OR DJHRef BEGINSWITH[c] $0', text).sorted('textOrder');
+  return Book.all()
+    .filtered('name CONTAINS[c] $0 OR DJHRef BEGINSWITH[c] $0', text)
+    .sorted('textOrder');
 }
 
 function BCVReferencesInText(text: string) {
@@ -32,7 +31,7 @@ function BCVReferencesInText(text: string) {
   let m;
   while ((m = regex.exec(text)) !== null) {
     if (m.index === regex.lastIndex) {
-        regex.lastIndex++;
+      regex.lastIndex++;
     }
     matches.push(m);
   }
@@ -54,13 +53,13 @@ function BCVReferencesInText(text: string) {
             const verseNumber = parseInt(matches[2][0]);
             if (!isNaN(verseNumber)) {
               if (verseNumber > 0 && verseNumber <= chapter.verseCount) {
-                references.push({book, chapterNumber, verseNumber});
+                references.push({ book, chapterNumber, verseNumber });
               }
             } else {
-              references.push({book, chapterNumber});
+              references.push({ book, chapterNumber });
             }
           } else {
-            references.push({book, chapterNumber});
+            references.push({ book, chapterNumber });
           }
         }
       });
@@ -80,7 +79,7 @@ function BSOReferencesInText(text: string) {
   let m;
   while ((m = regex.exec(text)) !== null) {
     if (m.index === regex.lastIndex) {
-        regex.lastIndex++;
+      regex.lastIndex++;
     }
     matches.push(m);
   }
@@ -98,17 +97,17 @@ function BSOReferencesInText(text: string) {
         books.forEach(book => {
           const sourceRelations = book.sourceRelations.filtered('source.name BEGINSWITH[c] $0', sourceName);
           if (sourceRelations.length > 0) {
-            const sources = sourceRelations.map(relation => relation.source).sort((a,b) => a.name > b.name ? 1 : -1);
+            const sources = sourceRelations.map(relation => relation.source).sort((a, b) => (a.name > b.name ? 1 : -1));
 
             sources.forEach(source => {
               if (match[3] !== undefined) {
                 const occurrenceNumber = parseInt(match[3]);
                 if (!isNaN(occurrenceNumber)) {
                   // FIXME: Remove once all statements are in
-                  references.push({book, source, occurrenceNumber});
+                  references.push({ book, source, occurrenceNumber });
                 }
               } else {
-                references.push({book, source});
+                references.push({ book, source });
               }
             });
           }
@@ -128,8 +127,8 @@ const BibleSchema = {
   properties: {
     id: 'int',
     wordCount: 'int',
-    words: {type: 'list', objectType: 'Count'},
-  }
+    words: { type: 'list', objectType: 'Count' },
+  },
 };
 
 export class Bible extends Realm.Object {
@@ -151,7 +150,6 @@ export class Bible extends Realm.Object {
     return Book.whereIn(Book.identifiers(1)).reduce((wordCount, book) => wordCount + book.wordCount, 0);
   }
 
-
   // {"bcv": [], "bso": [], "books": []}
   static searchReferences(text: string): Object {
     const references = {};
@@ -162,17 +160,17 @@ export class Bible extends Realm.Object {
 
     const bcvReferences = BCVReferencesInText(text);
     if (bcvReferences && bcvReferences.length > 0) {
-      references["bcv"] = bcvReferences;
+      references['bcv'] = bcvReferences;
     }
 
     const bsoReferences = BSOReferencesInText(text);
     if (bsoReferences && bsoReferences.length > 0) {
-      references["bso"] = bsoReferences;
+      references['bso'] = bsoReferences;
     }
 
-    const books = BookReferencesInText(bookName).map(book => ({book}));
+    const books = BookReferencesInText(bookName).map(book => ({ book }));
     if (books.length > 0) {
-      references["books"] = books;
+      references['books'] = books;
     }
 
     return references;
@@ -185,24 +183,24 @@ const ActantSchema = {
   primaryKey: 'id',
   properties: {
     id: 'int',
-    name: {type: 'string', indexed: true},
-    firstInitial: {type: 'string', optional: true},
+    name: { type: 'string', indexed: true },
+    firstInitial: { type: 'string', optional: true },
     gender: 'int',
-    natures: {type: 'list', objectType: 'Nature'},
-    actantNumber: {type: 'int', optional: true},
-    chronologies: {type: 'list', objectType: 'Chronology'},
-    professions: {type: 'list', objectType: 'Profession'},
+    natures: { type: 'list', objectType: 'Nature' },
+    actantNumber: { type: 'int', optional: true },
+    chronologies: { type: 'list', objectType: 'Chronology' },
+    professions: { type: 'list', objectType: 'Profession' },
     isSource: 'bool',
     isRecipient: 'bool',
-    sourceTypeCount: {type: 'int', default: 0},
-    sourceTypeCounts: {type: 'list', objectType: 'Count'},
-    principalSourceType: {type: 'string', default: 'other'},
-    sphereCount: {type: 'int', default: 0},
-    sphereCounts: {type: 'list', objectType: 'Count'},
-    sphereWordCount: {type: 'int', default: 0},
-    wordCount: {type: 'int', default: 0},
-    words: {type: 'list', objectType: 'Count'},
-  }
+    sourceTypeCount: { type: 'int', default: 0 },
+    sourceTypeCounts: { type: 'list', objectType: 'Count' },
+    principalSourceType: { type: 'string', default: 'other' },
+    sphereCount: { type: 'int', default: 0 },
+    sphereCounts: { type: 'list', objectType: 'Count' },
+    sphereWordCount: { type: 'int', default: 0 },
+    wordCount: { type: 'int', default: 0 },
+    words: { type: 'list', objectType: 'Count' },
+  },
 };
 
 export class Actant extends Realm.Object {
@@ -225,7 +223,7 @@ export class Actant extends Realm.Object {
     if (search) sources = sources.filtered('name CONTAINS[c] $0', search);
 
     if (filters && filters.length > 0) {
-      filters.forEach((filter) => {
+      filters.forEach(filter => {
         switch (filter.type) {
           case 'chronology':
             sources = sources.filtered('chronologies.id = $0', filter.chronologyID);
@@ -243,10 +241,11 @@ export class Actant extends Realm.Object {
             sources = sources.filtered('professions.id = $0', filter.professionID);
             break;
 
-          case 'role':
+          case 'role': {
             const role = Role.findByID(filter.roleID);
             sources = sources.filtered('principalSourceType = $0', role.key);
             break;
+          }
         }
       });
     }
@@ -255,7 +254,7 @@ export class Actant extends Realm.Object {
   }
 
   relationForBook(book: ?Object) {
-    return (book ? book.sourceRelations.find(relation => relation.source.id === this.id) : null);
+    return book ? book.sourceRelations.find(relation => relation.source.id === this.id) : null;
   }
 
   colorsForBook(book: ?Object) {
@@ -266,12 +265,12 @@ export class Actant extends Realm.Object {
 
   countOfSourceType(sourceType: string): number {
     const count = this.sourceTypeCounts.find(count => count.string === sourceType);
-    return count && count.count || 0;
+    return (count && count.count) || 0;
   }
 
   countOfSphereType(sphereType: string): number {
     const count = this.sphereCounts.find(count => count.string === sphereType);
-    return count && count.count || 0;
+    return (count && count.count) || 0;
   }
 
   get books(): Array<Object> {
@@ -332,7 +331,7 @@ export class Actant extends Realm.Object {
   }
 
   get actantNumberDescription(): ?string {
-    switch(this.actantNumber) {
+    switch (this.actantNumber) {
       case 1:
         return Localizable.t('actant-number.Group');
 
@@ -346,11 +345,14 @@ export class Actant extends Realm.Object {
 
   get chronologyDescription(): ?string {
     if (this.chronologies.length > 4) return '∞';
-    return this.chronologies.sorted('from').map(chronology => chronology.name).join(', ');
+    return this.chronologies
+      .sorted('from')
+      .map(chronology => chronology.name)
+      .join(', ');
   }
 
   get genderDescription(): ?string {
-    switch(this.gender) {
+    switch (this.gender) {
       case 1:
         return Localizable.t('gender-female');
 
@@ -367,7 +369,11 @@ export class Actant extends Realm.Object {
   }
 
   get professionDescription(): ?string {
-    return this.professions.filtered('searchable = $0', true).map(profession => profession.name).sort((a,b) => a > b ? 1 : -1).join(', ');
+    return this.professions
+      .filtered('searchable = $0', true)
+      .map(profession => profession.name)
+      .sort((a, b) => (a > b ? 1 : -1))
+      .join(', ');
   }
 
   get roles(): any {
@@ -376,7 +382,7 @@ export class Actant extends Realm.Object {
 
   get roleDescription(): ?string {
     const roles = this.roles;
-    return (roles && roles.length > 0 ? roles.map(role => role.name).join(', ') : null);
+    return roles && roles.length > 0 ? roles.map(role => role.name).join(', ') : null;
   }
 }
 Actant.schema = ActantSchema;
@@ -387,28 +393,28 @@ const BookSchema = {
   properties: {
     id: 'string',
     DJHRef: 'string',
-    name: {type: 'string', indexed: true},
+    name: { type: 'string', indexed: true },
     testament: 'int',
-    textOrder: {type: 'int', indexed: true},
-    firstMonad: {type: 'int', default: 0},
-    lastMonad: {type: 'int', default: 0},
-    chapterCount: {type: 'int', default: 0},
-    chapters: {type: 'list', objectType: 'Chapter'},
-    maxChapterWordCount: {type: 'int', default: 0},
-    maxSourceWordCount: {type: 'int', default: 0},
-    maxChapterSphereWordCount: {type: 'int', default: 0},
-    sourceCount: {type: 'int', default: 0},
-    sourceRelations: {type: 'list', objectType: 'SourceRelation'},
-    sourceTypeCount: {type: 'int', default: 0},
-    sourceTypeCounts: {type: 'list', objectType: 'Count'},
-    principalSourceType: {type: 'string', default: 'narrator'},
-    sphereCount: {type: 'int', default: 0},
-    sphereCounts: {type: 'list', objectType: 'Count'},
-    sphereWordCount: {type: 'int', default: 0},
-    wordCount: {type: 'int', default: 0},
-    words: {type: 'list', objectType: 'Count'},
-    overview: {type: 'list', objectType: 'Content'},
-  }
+    textOrder: { type: 'int', indexed: true },
+    firstMonad: { type: 'int', default: 0 },
+    lastMonad: { type: 'int', default: 0 },
+    chapterCount: { type: 'int', default: 0 },
+    chapters: { type: 'list', objectType: 'Chapter' },
+    maxChapterWordCount: { type: 'int', default: 0 },
+    maxSourceWordCount: { type: 'int', default: 0 },
+    maxChapterSphereWordCount: { type: 'int', default: 0 },
+    sourceCount: { type: 'int', default: 0 },
+    sourceRelations: { type: 'list', objectType: 'SourceRelation' },
+    sourceTypeCount: { type: 'int', default: 0 },
+    sourceTypeCounts: { type: 'list', objectType: 'Count' },
+    principalSourceType: { type: 'string', default: 'narrator' },
+    sphereCount: { type: 'int', default: 0 },
+    sphereCounts: { type: 'list', objectType: 'Count' },
+    sphereWordCount: { type: 'int', default: 0 },
+    wordCount: { type: 'int', default: 0 },
+    words: { type: 'list', objectType: 'Count' },
+    overview: { type: 'list', objectType: 'Content' },
+  },
 };
 
 export class Book extends Realm.Object {
@@ -448,18 +454,18 @@ export class Book extends Realm.Object {
 
   countOfSourceType(sourceType: string): number {
     const count = this.sourceTypeCounts.find(count => count.string === sourceType);
-    return count && count.count || 0;
+    return (count && count.count) || 0;
   }
 
   countOfSphereType(sphereType: string): number {
     const count = this.sphereCounts.find(count => count.string === sphereType);
-    return count && count.count || 0;
+    return (count && count.count) || 0;
   }
 
   get monadSet(): Object {
     return {
       first: this.firstMonad,
-      last: this.lastMonad
+      last: this.lastMonad,
     };
   }
 }
@@ -477,7 +483,7 @@ const BookSourceOccurrenceSchema = {
     firstMonad: 'int',
     lastMonad: 'int',
     reference: 'string',
-  }
+  },
 };
 
 export class BookSourceOccurrence extends Realm.Object {
@@ -490,7 +496,7 @@ export class BookSourceOccurrence extends Realm.Object {
   get monadSet(): Object {
     return {
       first: this.firstMonad,
-      last: this.lastMonad
+      last: this.lastMonad,
     };
   }
 
@@ -506,25 +512,25 @@ const ChapterSchema = {
   properties: {
     id: 'string',
     chapterNumber: 'int',
-    firstMonad: {type: 'int', default: 0},
-    lastMonad: {type: 'int', default: 0},
-    sourceCount: {type: 'int', default: 0},
-    sourceTypeCount: {type: 'int', default: 0},
-    sourceTypeCounts: {type: 'list', objectType: 'Count'},
-    principalSourceType: {type: 'string', default: 'narrator'},
-    sphereCount: {type: 'int', default: 0},
-    sphereCounts: {type: 'list', objectType: 'Count'},
-    sphereWordCount: {type: 'int', default: 0},
-    wordCount: {type: 'int', default: 0},
-    verseCount: {type: 'int', default: 0},
-  }
+    firstMonad: { type: 'int', default: 0 },
+    lastMonad: { type: 'int', default: 0 },
+    sourceCount: { type: 'int', default: 0 },
+    sourceTypeCount: { type: 'int', default: 0 },
+    sourceTypeCounts: { type: 'list', objectType: 'Count' },
+    principalSourceType: { type: 'string', default: 'narrator' },
+    sphereCount: { type: 'int', default: 0 },
+    sphereCounts: { type: 'list', objectType: 'Count' },
+    sphereWordCount: { type: 'int', default: 0 },
+    wordCount: { type: 'int', default: 0 },
+    verseCount: { type: 'int', default: 0 },
+  },
 };
 
 export class Chapter extends Realm.Object {
   get monadSet(): Object {
     return {
       first: this.firstMonad,
-      last: this.lastMonad
+      last: this.lastMonad,
     };
   }
 }
@@ -536,9 +542,9 @@ const ChronologySchema = {
   properties: {
     id: 'int',
     key: 'string',
-    from: {type: 'int', indexed: true},
+    from: { type: 'int', indexed: true },
     to: 'int',
-  }
+  },
 };
 
 export class Chronology extends Realm.Object {
@@ -557,7 +563,10 @@ export class Chronology extends Realm.Object {
   static whereIn(ids: any) {
     if (ids.length == 0) return [];
     const filter = ids.map((id, index) => `id = $${index}`).join(' OR ');
-    return realm.objects('Chronology').filtered(filter, ...ids).sorted('from');
+    return realm
+      .objects('Chronology')
+      .filtered(filter, ...ids)
+      .sorted('from');
   }
 
   get name(): string {
@@ -569,32 +578,28 @@ Chronology.schema = ChronologySchema;
 const ContentSchema = {
   name: 'Content',
   properties: {
-    title: {type: 'string', optional: true},
+    title: { type: 'string', optional: true },
     body: 'string',
-  }
+  },
 };
 
-export class Content extends Realm.Object {
-
-}
+export class Content extends Realm.Object {}
 Content.schema = ContentSchema;
 
 const CountSchema = {
   name: 'Count',
   properties: {
     string: 'string',
-    count: {type: 'int', default: 0},
-  }
+    count: { type: 'int', default: 0 },
+  },
 };
 
-export class Count extends Realm.Object {
-
-}
+export class Count extends Realm.Object {}
 Count.schema = CountSchema;
 
 export class Gender {
   static GENDER = ['female', 'male'];
-  static MALE_AND_FEMALE = [2,1];
+  static MALE_AND_FEMALE = [2, 1];
 
   id: number;
   key: string;
@@ -622,13 +627,13 @@ const MonadSetSchema = {
     book: 'Book',
     chapter: 'int',
     verse: 'int',
-  }
-}
+  },
+};
 export class MonadSet extends Realm.Object {
   get monadSet(): Object {
     return {
       first: this.firstMonad,
-      last: this.lastMonad
+      last: this.lastMonad,
     };
   }
 }
@@ -640,7 +645,7 @@ const NatureSchema = {
   properties: {
     id: 'int',
     key: 'string',
-  }
+  },
 };
 
 export class Nature extends Realm.Object {
@@ -664,13 +669,16 @@ const ProfessionSchema = {
   properties: {
     id: 'int',
     key: 'string',
-    searchable: {type: 'bool', default: true}
-  }
-}
+    searchable: { type: 'bool', default: true },
+  },
+};
 
 export class Profession extends Realm.Object {
   static all() {
-    return realm.objects('Profession').filtered('searchable = $0', true).sorted('key');
+    return realm
+      .objects('Profession')
+      .filtered('searchable = $0', true)
+      .sorted('key');
   }
 
   static findByID(id: number) {
@@ -699,7 +707,7 @@ export class Role {
   }
 
   static findByID(id: any) {
-    const key = (Number.isInteger(id) ? Role.ROLES[id - 1] : id);
+    const key = Number.isInteger(id) ? Role.ROLES[id - 1] : id;
     return new Role(id, key);
   }
 
@@ -746,15 +754,15 @@ const SourceRelationSchema = {
     id: 'string',
     book: 'Book',
     source: 'Actant',
-    sourceTypeCount: {type: 'int', default: 0},
-    sourceTypeCounts: {type: 'list', objectType: 'Count'},
-    principalSourceType: {type: 'string', default: 'support'},
-    sphereCount: {type: 'int', default: 0},
-    sphereCounts: {type: 'list', objectType: 'Count'},
-    sphereWordCount: {type: 'int', default: 0},
-    wordCount: {type: 'int', default: 0},
-    words: {type: 'list', objectType: 'Count'},
-  }
+    sourceTypeCount: { type: 'int', default: 0 },
+    sourceTypeCounts: { type: 'list', objectType: 'Count' },
+    principalSourceType: { type: 'string', default: 'support' },
+    sphereCount: { type: 'int', default: 0 },
+    sphereCounts: { type: 'list', objectType: 'Count' },
+    sphereWordCount: { type: 'int', default: 0 },
+    wordCount: { type: 'int', default: 0 },
+    words: { type: 'list', objectType: 'Count' },
+  },
 };
 
 export class SourceRelation extends Realm.Object {
@@ -764,12 +772,12 @@ export class SourceRelation extends Realm.Object {
 
   countOfSourceType(sourceType: string): number {
     const count = this.sourceTypeCounts.find(count => count.string === sourceType);
-    return count && count.count || 0;
+    return (count && count.count) || 0;
   }
 
   countOfSphereType(sphereType: string): number {
     const count = this.sphereCounts.find(count => count.string === sphereType);
-    return count && count.count || 0;
+    return (count && count.count) || 0;
   }
 
   get colors(): Object {
@@ -782,7 +790,7 @@ export class SourceRelation extends Realm.Object {
 
   get roleDescription(): ?string {
     const roles = this.roles;
-    return (roles && roles.length > 0 ? roles.map(role => role.name).join(', ') : null);
+    return roles && roles.length > 0 ? roles.map(role => role.name).join(', ') : null;
   }
 }
 SourceRelation.schema = SourceRelationSchema;
@@ -794,38 +802,30 @@ const SphereSchema = {
     id: 'string',
     name: 'string',
     position: 'int',
-    bookCount: {type: 'int', default: 0},
-    bookCounts: {type: 'list', objectType: 'Count'},
-    sourceCount: {type: 'int', default: 0},
-    sourceCounts: {type: 'list', objectType: 'Count'},
-    sourceTypeCount: {type: 'int', default: 0},
-    sourceTypeCounts: {type: 'list', objectType: 'Count'},
-    wordCount: {type: 'int', default: 0},
-    words: {type: 'list', objectType: 'Count'},
-    passages: {type: 'list', objectType: 'SpherePassage'},
-    overview: {type: 'list', objectType: 'Content'},
-  }
+    bookCount: { type: 'int', default: 0 },
+    bookCounts: { type: 'list', objectType: 'Count' },
+    sourceCount: { type: 'int', default: 0 },
+    sourceCounts: { type: 'list', objectType: 'Count' },
+    sourceTypeCount: { type: 'int', default: 0 },
+    sourceTypeCounts: { type: 'list', objectType: 'Count' },
+    wordCount: { type: 'int', default: 0 },
+    words: { type: 'list', objectType: 'Count' },
+    passages: { type: 'list', objectType: 'SpherePassage' },
+    overview: { type: 'list', objectType: 'Content' },
+  },
 };
 
 export class Sphere extends Realm.Object {
-  static SPHERES = [
-    'family',
-    'economics',
-    'government',
-    'religion',
-    'education',
-    'communication',
-    'celebration',
-  ];
+  static SPHERES = ['family', 'economics', 'government', 'religion', 'education', 'communication', 'celebration'];
 
   static SPHERE_FEATURE_MAP = {
-    'family': 'Family',
-    'economics': 'Economics',
-    'government': 'Government',
-    'religion': 'Religion',
-    'education': 'Education',
-    'communication': 'MediaCom',
-    'celebration': 'Celebration'
+    family: 'Family',
+    economics: 'Economics',
+    government: 'Government',
+    religion: 'Religion',
+    education: 'Education',
+    communication: 'MediaCom',
+    celebration: 'Celebration',
   };
 
   static all(options: ?Object) {
@@ -842,12 +842,15 @@ export class Sphere extends Realm.Object {
   static whereIn(ids: any) {
     if (ids.length == 0) return [];
     const filter = ids.map((id, index) => `id = $${index}`).join(' OR ');
-    return realm.objects('Sphere').filtered(filter, ...ids).sorted('position');
+    return realm
+      .objects('Sphere')
+      .filtered(filter, ...ids)
+      .sorted('position');
   }
 
   countOfBook(bookID: string): number {
     const count = this.bookCounts.find(count => count.string === bookID);
-    return count && count.count || 0;
+    return (count && count.count) || 0;
   }
 
   countOfBible(testament: ?number): number {
@@ -859,12 +862,12 @@ export class Sphere extends Realm.Object {
   countOfSource(actantID: number): number {
     const string = actantID.toString();
     const count = this.sourceCounts.find(count => count.string === string);
-    return count && count.count || 0;
+    return (count && count.count) || 0;
   }
 
   countOfSourceType(sourceType: string): number {
     const count = this.sourceTypeCounts.find(count => count.string === sourceType);
-    return count && count.count || 0;
+    return (count && count.count) || 0;
   }
 
   color(color?: string): string {
@@ -888,13 +891,11 @@ const SpherePassageSchema = {
     number: 'int',
     title: 'string',
     reference: 'string',
-    monads: {type: 'list', objectType: 'MonadSet'},
-  }
-}
+    monads: { type: 'list', objectType: 'MonadSet' },
+  },
+};
 
-export class SpherePassage extends Realm.Object {
-
-}
+export class SpherePassage extends Realm.Object {}
 SpherePassage.schema = SpherePassageSchema;
 
 export class WordOccurrence {
@@ -905,20 +906,18 @@ export class WordOccurrence {
           const occurrences = result.map(occurrence => {
             const book = Book.findByDJHRef(occurrence.DJHRef);
             const role = Role.findByID(occurrence.roleID);
-            return (
-              {
-                id: occurrence.id,
-                book,
-                name: occurrence.name,
-                number: occurrence.number,
-                roleID: occurrence.roleID,
-                firstMonad: occurrence.monad,
-                lastMonad: occurrence.monad,
-                monadSet: occurrence.monadSet,
-                reference: `${occurrence.chapter}:${occurrence.verse}`,
-                role,
-              }
-            );
+            return {
+              id: occurrence.id,
+              book,
+              name: occurrence.name,
+              number: occurrence.number,
+              roleID: occurrence.roleID,
+              firstMonad: occurrence.monad,
+              lastMonad: occurrence.monad,
+              monadSet: occurrence.monadSet,
+              reference: `${occurrence.chapter}:${occurrence.verse}`,
+              role,
+            };
           });
           resolve(occurrences);
         } else {
@@ -929,7 +928,22 @@ export class WordOccurrence {
   }
 }
 
-const Schema = [Actant, Bible, Book, BookSourceOccurrence, Chapter, Chronology, MonadSet, Nature, Profession, SourceRelation, Sphere, SpherePassage, Count, Content];
+const Schema = [
+  Actant,
+  Bible,
+  Book,
+  BookSourceOccurrence,
+  Chapter,
+  Chronology,
+  MonadSet,
+  Nature,
+  Profession,
+  SourceRelation,
+  Sphere,
+  SpherePassage,
+  Count,
+  Content,
+];
 
 const realm = new Realm({
   schema: Schema,
@@ -941,6 +955,6 @@ const realm = new Realm({
     },
     android: {
       path: RNFS.DocumentDirectoryPath + '/Datasets/en/NLT/SourceView.realm',
-    }
-  })
+    },
+  }),
 });

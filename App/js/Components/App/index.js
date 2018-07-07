@@ -2,38 +2,32 @@
 'use strict';
 
 import React, { Component } from 'react';
-import {
-  BackAndroid,
-  Image,
-  Platform,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { BackAndroid, Platform, Text, View } from 'react-native';
 
 import { NavigationHeader, NavigationBarButton, Toolbar } from '../Navigation';
 import DefaultToolbar from '../Navigation/DefaultToolbar';
 
-import { 
-  Menu,
-  MenuContext,
-  MenuOption,
-  MenuOptions
-} from '../Menu';
+import { Menu, MenuContext, MenuOption, MenuOptions } from '../Menu';
 
-import router, { BACK, FORWARD, aboutURL, booksURL, discoverURL, onboardingURL, spheresURL, sphereHelpURL, sphereInAppPurchaseURL, sourcesURL } from '../../Navigation';
+import router, {
+  BACK,
+  FORWARD,
+  aboutURL,
+  booksURL,
+  discoverURL,
+  onboardingURL,
+  spheresURL,
+  sphereHelpURL,
+  sphereInAppPurchaseURL,
+  sourcesURL,
+} from '../../Navigation';
 
-import {
-  Analytics,
-  Colors,
-  Localizable,
-  StyleSheet,
-} from '../../Common';
+import { Analytics, Localizable, StyleSheet } from '../../Common';
 
 import { History, Preference } from '../../Preferences';
 
 type State = {
-  navigation: Object
+  navigation: Object,
 };
 
 export default class App extends Component {
@@ -44,14 +38,12 @@ export default class App extends Component {
     super(props);
 
     const onboarded = Preference.booleanForKey(Preference.Keys.Launch.Onboarded);
-    const route = (onboarded ? discoverURL({title: Localizable.t('discover')}) : onboardingURL({title: 'Onboarding', modal: true}));
+    const route = onboarded ? discoverURL({ title: Localizable.t('discover') }) : onboardingURL({ title: 'Onboarding', modal: true });
     this.state = {
       navigation: {
         index: 0,
-        routes: [
-          route
-        ],
-      }
+        routes: [route],
+      },
     };
   }
 
@@ -67,15 +59,15 @@ export default class App extends Component {
     const { navigation } = this.state;
     const route = navigation.routes[navigation.index];
 
-    const scene = this._renderPage({route});
+    const scene = this._renderPage({ route });
     if (route.modal) return scene;
 
-    const navigationHeader = this._renderNavigationHeader({navigationState: navigation});
-    const toolbar = this._renderToolbar({navigationState: navigation, jumpToIndex: this._jumpToIndex});
-    const menu = this._renderMenu({navigationState: navigation, navigate: this._navigate});
+    const navigationHeader = this._renderNavigationHeader({ navigationState: navigation });
+    const toolbar = this._renderToolbar({ navigationState: navigation, jumpToIndex: this._jumpToIndex });
+    const menu = this._renderMenu({ navigationState: navigation, navigate: this._navigate });
 
     return (
-      <View style={{flex: 1}}>
+      <View style={{ flex: 1 }}>
         {navigationHeader}
         {scene}
         {toolbar}
@@ -88,14 +80,10 @@ export default class App extends Component {
     const scene = this._renderScene(props);
     if (props.route.modal) return scene;
 
-    const { route, params} = router.match(props.route.path);
+    const { route } = router.match(props.route.path);
     const Scene = route.scene;
 
-    return (
-      <View style={{flex: 1, marginBottom: (Scene.wantsFullScreenLayout ? 0 : Toolbar.HEIGHT)}}>
-        {scene}
-      </View>
-    );
+    return <View style={{ flex: 1, marginBottom: Scene.wantsFullScreenLayout ? 0 : Toolbar.HEIGHT }}>{scene}</View>;
   };
 
   _renderScene = (props: any) => {
@@ -106,34 +94,28 @@ export default class App extends Component {
     }
 
     const Scene = route.scene;
-    return <Scene
-      {...props.route}
-      {...params}
-      canGoBack={this._canGoBack()}
-      canGoForward={this._canGoForward()}
-      navigate={this._navigate}
-    />;
+    return <Scene {...props.route} {...params} canGoBack={this._canGoBack()} canGoForward={this._canGoForward()} navigate={this._navigate} />;
   };
 
   _renderNavigationHeader = (props: any) => {
     const { navigationState } = props;
     const navigationRoute = navigationState.routes[navigationState.index];
 
-    const { route, params} = router.match(navigationRoute.path);
+    const { route, params } = router.match(navigationRoute.path);
     const Scene = route.scene;
 
     let renderRightComponent = null;
     if (Platform.OS === 'android') {
       let rightComponent = null;
       if (Scene.renderNavigationHeaderRightComponent) {
-        rightComponent = Scene.renderNavigationHeaderRightComponent({...props, navigate: this._navigate});
+        rightComponent = Scene.renderNavigationHeaderRightComponent({ ...props, navigate: this._navigate });
       }
 
-      renderRightComponent = (props: Object) => {
-        const moreButtonStyle = (rightComponent ? {paddingLeft: 0} : {});
+      renderRightComponent = () => {
+        const moreButtonStyle = rightComponent ? { paddingLeft: 0 } : {};
         return (
-          <View style={{flex: 1}}>
-            <View style={{flex: 1, flexDirection: 'row'}}>
+          <View style={{ flex: 1 }}>
+            <View style={{ flex: 1, flexDirection: 'row' }}>
               {rightComponent}
               <NavigationBarButton
                 imageSource={require('../../Components/Navigation/Images/nav-more.png')}
@@ -165,17 +147,11 @@ export default class App extends Component {
     const { navigationState } = props;
     const navigationRoute = navigationState.routes[navigationState.index];
 
-    const { route, params} = router.match(navigationRoute.path);
+    const { route } = router.match(navigationRoute.path);
     const Scene = route.scene;
     if (Scene.wantsFullScreenLayout) return null;
 
-    return (
-      <DefaultToolbar
-        canGoBack={this._canGoBack()}
-        canGoForward={this._canGoForward()}
-        navigate={this._navigate}
-      />
-    );
+    return <DefaultToolbar canGoBack={this._canGoBack()} canGoForward={this._canGoForward()} navigate={this._navigate} />;
   };
 
   _renderMenu = (props: any) => {
@@ -185,16 +161,18 @@ export default class App extends Component {
     const canGoForward = this._canGoForward();
 
     const navigationRoute = navigationState.routes[navigationState.index];
-    const { route, params} = router.match(navigationRoute.path);
+    const { route } = router.match(navigationRoute.path);
     const Scene = route.scene;
 
     let forwardMenuOption = null;
     if (canGoForward) {
-      forwardMenuOption = <MenuOption key="forward" text={Localizable.t('forward')} onSelect={() => this._goForward()} />
+      forwardMenuOption = <MenuOption key="forward" text={Localizable.t('forward')} onSelect={() => this._goForward()} />;
     } else {
-      forwardMenuOption = <MenuOption key="forward" disabled={true}>
-        <Text style={[StyleSheet.styles.menu.optionsStyles.optionText, {color: 'gray'}]}>{Localizable.t('forward')}</Text>
-      </MenuOption>;
+      forwardMenuOption = (
+        <MenuOption key="forward" disabled={true}>
+          <Text style={[StyleSheet.styles.menu.optionsStyles.optionText, { color: 'gray' }]}>{Localizable.t('forward')}</Text>
+        </MenuOption>
+      );
     }
 
     const menuOptions = [];
@@ -204,22 +182,32 @@ export default class App extends Component {
       menuOptions.push(Scene.renderMenuOptions(props));
     }
 
-    menuOptions.push(<MenuOption key="discover" text={Localizable.t('discover')} onSelect={() => navigate(discoverURL({title: Localizable.t('discover')})) } />);
-    menuOptions.push(<MenuOption key="books" text={Localizable.t('books')} onSelect={() => navigate(booksURL({title: Localizable.t('books')})) } />);
-    menuOptions.push(<MenuOption key="sources" text={Localizable.t('sources.text')} onSelect={() => navigate(sourcesURL({title: Localizable.t('sources.text')})) } />);
-    menuOptions.push(<MenuOption key="spheres" text={Localizable.t('spheres.text')} onSelect={() => navigate(spheresURL({title: Localizable.t('spheres.text')})) } />);
-    menuOptions.push(<MenuOption key="about" text={Localizable.t('about-sourceview')} onSelect={() => navigate(aboutURL({title: Localizable.t('about-sourceview'), modal: true})) } />);
+    menuOptions.push(
+      <MenuOption key="discover" text={Localizable.t('discover')} onSelect={() => navigate(discoverURL({ title: Localizable.t('discover') }))} />
+    );
+    menuOptions.push(<MenuOption key="books" text={Localizable.t('books')} onSelect={() => navigate(booksURL({ title: Localizable.t('books') }))} />);
+    menuOptions.push(
+      <MenuOption key="sources" text={Localizable.t('sources.text')} onSelect={() => navigate(sourcesURL({ title: Localizable.t('sources.text') }))} />
+    );
+    menuOptions.push(
+      <MenuOption key="spheres" text={Localizable.t('spheres.text')} onSelect={() => navigate(spheresURL({ title: Localizable.t('spheres.text') }))} />
+    );
+    menuOptions.push(
+      <MenuOption
+        key="about"
+        text={Localizable.t('about-sourceview')}
+        onSelect={() => navigate(aboutURL({ title: Localizable.t('about-sourceview'), modal: true }))}
+      />
+    );
 
     return (
-      <MenuContext ref={component => this._menu = component} style={{flex: 1}}>
+      <MenuContext ref={component => (this._menu = component)} style={{ flex: 1 }}>
         <Menu>
-          <MenuOptions customStyles={StyleSheet.styles.menu.optionsStyles}>
-            {menuOptions}
-          </MenuOptions>
+          <MenuOptions customStyles={StyleSheet.styles.menu.optionsStyles}>{menuOptions}</MenuOptions>
         </Menu>
       </MenuContext>
     );
-  }
+  };
 
   _navigate = (route: any, options?: any) => {
     this._closeMenu();
@@ -243,13 +231,13 @@ export default class App extends Component {
     this._closeMenu();
 
     this.setState({
-      navigation: { ...this.state.navigation, index }
+      navigation: { ...this.state.navigation, index },
     });
   };
 
   _canGoBack = () => {
     return this.state.navigation.index > 0;
-  }
+  };
 
   _goBack = () => {
     this._jumpToIndex(this.state.navigation.index - 1);
@@ -257,7 +245,7 @@ export default class App extends Component {
 
   _canGoForward = () => {
     return this.state.navigation.index < this.state.navigation.routes.length - 1;
-  }
+  };
 
   _goForward = () => {
     this._jumpToIndex(this.state.navigation.index + 1);
@@ -286,12 +274,9 @@ export default class App extends Component {
       }
     }
 
-    const delta = (state.routes.length - state.index) - 1;
+    const delta = state.routes.length - state.index - 1;
 
-    const routes = [
-      ...(delta > 0 ? state.routes.slice(0, -delta) : state.routes),
-      route,
-    ];
+    const routes = [...(delta > 0 ? state.routes.slice(0, -delta) : state.routes), route];
 
     // console.log('push', routes.map(route => route.path));
 
@@ -302,7 +287,7 @@ export default class App extends Component {
     };
 
     if (navigation !== this.state.navigation) {
-      this.setState({navigation});
+      this.setState({ navigation });
     }
 
     History.record(route);
@@ -321,7 +306,7 @@ export default class App extends Component {
 
     const routes = state.routes.slice(0, -1);
     if (route.modal !== true) {
-      const previousRoute = (routes.length > 0 ? routes[routes.length - 1] : null);
+      const previousRoute = routes.length > 0 ? routes[routes.length - 1] : null;
       if (previousRoute === null || route.path !== previousRoute.path) {
         routes.push(route);
       }
@@ -336,22 +321,18 @@ export default class App extends Component {
     // console.log('pop', routes.map(route => route.path));
 
     if (navigation !== this.state.navigation) {
-      this.setState({navigation});
+      this.setState({ navigation });
     }
   };
 
   _replaceCurrentRoute = (route: any) => {
     if (this._interceptRoute(route)) return;
-    
+
     const state = this.state.navigation;
-    const currentRoute = state.routes[state.index];
 
-    const delta = (state.routes.length - state.index);
+    const delta = state.routes.length - state.index;
 
-    const routes = [
-      ...(delta > 0 ? state.routes.slice(0, -delta) : state.routes),
-      route,
-    ];
+    const routes = [...(delta > 0 ? state.routes.slice(0, -delta) : state.routes), route];
 
     // console.log('replace', routes.map(route => route.path));
 
@@ -362,24 +343,22 @@ export default class App extends Component {
     };
 
     if (navigation !== this.state.navigation) {
-      this.setState({navigation});
+      this.setState({ navigation });
     }
 
-    History.record(route, {replace: true});
+    History.record(route, { replace: true });
     Analytics.logRoute(route);
   };
 
   _interceptRoute = (route: any): boolean => {
-    const path = route.path.toLowerCase();
-
     if (this._isSphereRoute(route)) {
       const purchased = Preference.booleanForKey(Preference.Keys.Spheres.Purchased);
       if (purchased) {
         return false;
       }
 
-      let title =  Localizable.t('spheres.text');
-      this._pushRoute(sphereInAppPurchaseURL({title, redirect: route, modal: true}));
+      let title = Localizable.t('spheres.text');
+      this._pushRoute(sphereInAppPurchaseURL({ title, redirect: route, modal: true }));
       return true;
     }
     return false;
@@ -404,7 +383,3 @@ export default class App extends Component {
     return false;
   };
 }
-
-const styles = StyleSheet.create({
-
-});

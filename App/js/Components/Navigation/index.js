@@ -10,5 +10,5 @@ module.exports = {
   NavigationHeader,
   NavigationBarButton,
   Toolbar,
-  ToolbarButton
+  ToolbarButton,
 };

@@ -12,7 +12,7 @@ type Props = {
   style?: any,
   textStyle?: any,
   viewProps?: any,
-  onPress?: any
+  onPress?: any,
 };
 
 const NavigationHeaderTitle = ({ children, style, textStyle, viewProps, onPress }: Props) => (
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   title: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
 
   titleText: {
@@ -35,14 +35,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '500',
     color: 'rgba(0, 0, 0, .9)',
-    textAlign: Platform.OS === 'ios' ? 'center' : 'left'
-  }
+    textAlign: Platform.OS === 'ios' ? 'center' : 'left',
+  },
 });
 
 NavigationHeaderTitle.propTypes = {
   children: PropTypes.node.isRequired,
   style: View.propTypes.style,
-  textStyle: Text.propTypes.style
+  textStyle: Text.propTypes.style,
 };
 
 export default NavigationHeaderTitle;

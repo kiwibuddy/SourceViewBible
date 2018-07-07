@@ -1,20 +1,7 @@
 /* @flow */
 'use strict';
 
-import {
-  Bible,
-  Actant,
-  Book,
-  BookSourceOccurrence,
-  Chapter,
-  Chronology,
-  Gender,
-  Nature,
-  Profession,
-  Role,
-  Sphere,
-  WordOccurrence,
-} from './Realm';
+import { Bible, Actant, Book, BookSourceOccurrence, Chapter, Chronology, Gender, Nature, Profession, Role, Sphere, WordOccurrence } from './Realm';
 
 import SQLite, { rowsWithSQL } from './SQLite';
 
@@ -43,5 +30,5 @@ module.exports = {
   Predicate,
   WordPredicate,
   SQLite,
-  rowsWithSQL
+  rowsWithSQL,
 };

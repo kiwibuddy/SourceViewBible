@@ -3,26 +3,12 @@
 
 import React, { Component } from 'react';
 
-
-import {
-  RecyclerViewBackedScrollView,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { RecyclerViewBackedScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { ListView } from '../../Components/Common/DatabaseListView';
 
-import {
-  Colors,
-  Constants,
-  StyleSheet,
-  Localizable
-} from '../../Common';
+import { Constants, StyleSheet, Localizable } from '../../Common';
 
-const {
-  SourceType,
-  SphereType
-} = Constants;
+const { SourceType } = Constants;
 
 import SourcesBarChart from '../../Components/Charts/SourcesBarChart';
 import SourceIcon from '../../Components/Common/SourceIcon';
@@ -49,24 +35,22 @@ export default class BookSources extends Component {
     super(props);
 
     const book = Book.findByID(props.bookID);
-    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
+    const dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2 });
     this.state = {
       book,
-      dataSource
+      dataSource,
     };
   }
 
   componentDidMount() {
     const { book } = this.state;
-    const sourceRelations = book.sourceRelations.slice(0).sort((a, b) => a.wordCount > b.wordCount ? -1 : 1);
+    const sourceRelations = book.sourceRelations.slice(0).sort((a, b) => (a.wordCount > b.wordCount ? -1 : 1));
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(sourceRelations)
+      dataSource: this.state.dataSource.cloneWithRows(sourceRelations),
     });
   }
 
   render() {
-    const { book } = this.state;
-
     return (
       <View style={styles.container}>
         <ListView
@@ -77,14 +61,14 @@ export default class BookSources extends Component {
           renderHeader={this._renderHeader}
           renderRow={this._renderRow}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
-          renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={[StyleSheet.styles.separator, {marginLeft: 0}]} />}
+          renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={[StyleSheet.styles.separator, { marginLeft: 0 }]} />}
           pageSize={10}
         />
       </View>
     );
   }
 
-  _renderHeader = (props: any) => {
+  _renderHeader = () => {
     const { book } = this.state;
     const narratorPercent = (book.countOfSourceType(SourceType.NARRATOR) / book.wordCount) * 100;
     const godPercent = (book.countOfSourceType(SourceType.GOD) / book.wordCount) * 100;
@@ -93,28 +77,25 @@ export default class BookSources extends Component {
 
     return (
       <View>
-        <SourcesBarChart
-          style={styles.stackedBarChartHeader}
-          data={[book.sourceTypeCounts]}
-        />
+        <SourcesBarChart style={styles.stackedBarChartHeader} data={[book.sourceTypeCounts]} />
         <View style={StyleSheet.styles.statisticsContainer}>
           <View style={StyleSheet.styles.statisticContainer}>
-            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(narratorPercent, {precision: 0})}</Text>
+            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(narratorPercent, { precision: 0 })}</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Narrator</Text>
           </View>
           <View style={StyleSheet.styles.statisticKeyline} />
           <View style={StyleSheet.styles.statisticContainer}>
-            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(godPercent, {precision: 0})}</Text>
+            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(godPercent, { precision: 0 })}</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>God</Text>
           </View>
           <View style={StyleSheet.styles.statisticKeyline} />
           <View style={StyleSheet.styles.statisticContainer}>
-            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(leadPercent, {precision: 0})}</Text>
+            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(leadPercent, { precision: 0 })}</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Lead</Text>
           </View>
           <View style={StyleSheet.styles.statisticKeyline} />
           <View style={StyleSheet.styles.statisticContainer}>
-            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(supportPercent, {precision: 0})}</Text>
+            <Text style={StyleSheet.styles.statisticTitleBold}>{Localizable.toPercentage(supportPercent, { precision: 0 })}</Text>
             <Text style={StyleSheet.styles.statisticSubtitle}>Support</Text>
           </View>
         </View>
@@ -122,40 +103,38 @@ export default class BookSources extends Component {
     );
   };
 
-  _renderRow = (sourceRelation: Object, sectionID: string, rowID: string, highlightRow: boolean) => {
+  _renderRow = (sourceRelation: Object) => {
     const { book } = this.state;
     const source = sourceRelation.source;
 
     const data = {};
-    Object.keys(sourceRelation.sourceTypeCounts).filter(sourceType => sourceRelation.sourceTypeCounts[sourceType].count > 0).forEach(sourceType => {
-      const sourceTypeCount = sourceRelation.sourceTypeCounts[sourceType];
-      data[sourceTypeCount.string] = sourceTypeCount.count;
-    });
+    Object.keys(sourceRelation.sourceTypeCounts)
+      .filter(sourceType => sourceRelation.sourceTypeCounts[sourceType].count > 0)
+      .forEach(sourceType => {
+        const sourceTypeCount = sourceRelation.sourceTypeCounts[sourceType];
+        data[sourceTypeCount.string] = sourceTypeCount.count;
+      });
     const chartData = [data];
 
     return (
       <TouchableOpacity style={styles.section} onPress={() => this._onPressScripture(source)}>
-        <View style={[styles.sourcesCellContainer, {paddingVertical: 12}]}>
+        <View style={[styles.sourcesCellContainer, { paddingVertical: 12 }]}>
           <View style={styles.sourcesLeftContainer}>
-            <TouchableOpacity onPress={() => this.props.navigate(sourceURL({sourceID: source.id, bookID: book.id, title: source.name}))}>
-              <SourceIcon
-                principalSourceType={sourceRelation.principalSourceType}
-                source={source}
-                style={styles.sourceAvatar}
-                size={20}
-              />
+            <TouchableOpacity onPress={() => this.props.navigate(sourceURL({ sourceID: source.id, bookID: book.id, title: source.name }))}>
+              <SourceIcon principalSourceType={sourceRelation.principalSourceType} source={source} style={styles.sourceAvatar} size={20} />
             </TouchableOpacity>
             <View style={styles.sourcesContent}>
               <Text style={StyleSheet.styles.cell.titlemedium}>{source.name}</Text>
             </View>
           </View>
           <View style={styles.sourcesRightContainer}>
-            <SourcesBarChart
-              style={styles.sourcesBarChart}
-              data={chartData}
-              maxChartValue={book.maxSourceWordCount}
-            />
-            <Text style={StyleSheet.styles.cell.subtitle}>{Localizable.t('words.count', {count: sourceRelation.wordCount, localizedCount: Localizable.toNumber(sourceRelation.wordCount, {precision: 0})})}</Text>
+            <SourcesBarChart style={styles.sourcesBarChart} data={chartData} maxChartValue={book.maxSourceWordCount} />
+            <Text style={StyleSheet.styles.cell.subtitle}>
+              {Localizable.t('words.count', {
+                count: sourceRelation.wordCount,
+                localizedCount: Localizable.toNumber(sourceRelation.wordCount, { precision: 0 }),
+              })}
+            </Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -165,7 +144,7 @@ export default class BookSources extends Component {
   _onPressScripture = (source: Object) => {
     const { book } = this.state;
 
-    this.props.navigate(readerURL({bookID: book.id, anchor: `source-${source.name}-1`, title: book.name, description: `${book.name} ${source.name} 1`}));
+    this.props.navigate(readerURL({ bookID: book.id, anchor: `source-${source.name}-1`, title: book.name, description: `${book.name} ${source.name} 1` }));
   };
 }
 
@@ -184,7 +163,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     marginVertical: 8,
     marginBottom: 15,
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
   },
   sourceButtonContainer: {
     flex: 1,
@@ -221,7 +200,7 @@ const styles = StyleSheet.create({
   sourceAvatar: {
     width: 20,
     height: 20,
-    marginRight: 5
+    marginRight: 5,
   },
   sourcesBarChart: {
     height: 4,

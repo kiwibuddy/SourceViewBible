@@ -1,15 +1,12 @@
 /* @flow */
 'use strict';
 
-import {
-  StyleSheet,
-  Platform,
- } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Colors from './Colors';
 
 function create(styles: Object) {
   return StyleSheet.create(styles);
-};
+}
 
 const styles = {
   navigationBar: {
@@ -27,7 +24,7 @@ const styles = {
     shadowRadius: 0.4,
     shadowOffset: {
       height: 1,
-      width: 0
+      width: 0,
     },
   },
   statisticsContainer: {
@@ -42,7 +39,7 @@ const styles = {
     shadowRadius: 0.4,
     shadowOffset: {
       height: 1,
-      width: 0
+      width: 0,
     },
   },
   statisticContainer: {
@@ -52,13 +49,13 @@ const styles = {
     fontSize: 24,
     fontWeight: '600',
     color: Colors.tint,
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   statisticTitleBold: {
     fontSize: 34,
     fontWeight: '600',
     color: '#59626A',
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   statisticSubtitle: {
     flex: 1,
@@ -70,7 +67,7 @@ const styles = {
   statisticKeyline: {
     flex: 0,
     width: StyleSheet.hairlineWidth,
-    backgroundColor: Colors.separator
+    backgroundColor: Colors.separator,
   },
   sectionHeaderContainer: {
     borderBottomWidth: StyleSheet.hairlineWidth,
@@ -182,7 +179,7 @@ const styles = {
     },
   },
   menu: {
-    optionsStyles : {
+    optionsStyles: {
       optionsContainer: {
         padding: 5,
       },

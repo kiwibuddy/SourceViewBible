@@ -5,14 +5,9 @@ import { Platform } from 'react-native';
 
 import SQLite from 'react-native-sqlite-storage';
 
-import Predicate from './Predicate';
-import ComparisonPredicate from './ComparisonPredicate';
-import CompoundPredicate from './CompoundPredicate';
-import WordPredicate from './WordPredicate';
-
 const createFromLocation = Platform.OS === 'android' ? '~/sourceview/Datasets/en/NLT/SourceView.sqlite3' : '~/Datasets/en/NLT/SourceView.sqlite3';
 
-const database = SQLite.openDatabase({name : 'en-NLT-SourceView.sqlite3', readOnly: true, createFromLocation});
+const database = SQLite.openDatabase({ name: 'en-NLT-SourceView.sqlite3', readOnly: true, createFromLocation });
 export default database;
 
 export async function rowsWithSQL(sql: string, params?: any) {
@@ -25,11 +20,11 @@ export async function rowsWithSQL(sql: string, params?: any) {
     }
   }
 
-  return new Promise((resolve, reject) => {
-    database.transaction((tx) => {
+  return new Promise(resolve => {
+    database.transaction(tx => {
       tx.executeSql(sql, parameters, (tx, results) => {
-          let rows = results.rows.raw();
-          resolve(rows);
+        let rows = results.rows.raw();
+        resolve(rows);
       });
     });
   });

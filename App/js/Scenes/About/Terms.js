@@ -1,21 +1,11 @@
 /* @flow */
 'use strict';
 
-import React, { Component } from 'react';
+import React from 'react';
 
-import {
-  Image,
-  Platform,
-  ScrollView,
-  Text,
-  View,
-} from 'react-native'
+import { ScrollView, Text, View } from 'react-native';
 
-import {
-  Colors,
-  Localizable,
-  StyleSheet,
-} from '../../Common';
+import { Localizable, StyleSheet } from '../../Common';
 
 import { NavigationHeader, NavigationBarButton } from '../../Components/Navigation';
 import { BACK } from '../../Navigation';
@@ -31,17 +21,14 @@ const Terms = (props: Props) => {
       <NavigationHeader
         navigate={props.navigate}
         title={props.title}
-        renderLeftComponent={(props: Object) => (<NavigationBarButton
-          title={Localizable.t('back')}
-          onPress={() => props.navigate(BACK)}
-        />)}
+        renderLeftComponent={(props: Object) => <NavigationBarButton title={Localizable.t('back')} onPress={() => props.navigate(BACK)} />}
       />
       <ScrollView style={styles.scrollView}>
         <Text>Terms</Text>
       </ScrollView>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

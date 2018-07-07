@@ -1,25 +1,14 @@
 /* @flow */
 'use strict';
 
-import React, { Component } from 'react';
-import {
-  Image,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import React from 'react';
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
-import {
-  Colors,
-  Localizable,
-  StyleSheet,
-} from '../../../Common';
+import { Colors, StyleSheet } from '../../../Common';
 
 import { cardWithFilter, cardWithoutFilter } from './FilterUtils';
 
 import { Nature } from '../../../Database';
-
 
 function filterNature(card: Object, filter: Object, type: string, key: string) {
   const nature = Nature.findByKey(key);
@@ -33,7 +22,7 @@ function filterNature(card: Object, filter: Object, type: string, key: string) {
     actantType: type,
     ...filter,
     type: 'nature',
-    natureID: nature.id
+    natureID: nature.id,
   });
 }
 
@@ -41,7 +30,7 @@ function checkmark(card: Object, filter: Object, key: string) {
   const nature = Nature.findByKey(key);
 
   if (card.type === 'sources' && filter && filter.natureID === nature.id) {
-    return <Image style={{tintColor: Colors.tint}} source={require('../../../Images/common/checkmark.png')} />;
+    return <Image style={{ tintColor: Colors.tint }} source={require('../../../Images/common/checkmark.png')} />;
   }
   return null;
 }

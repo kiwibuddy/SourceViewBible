@@ -1,7 +1,6 @@
 /* @flow */
 'use strict';
 
-import React from 'react';
 const router = require('./router');
 
 import About from '../Scenes/About/About';
@@ -106,7 +105,7 @@ import NatureFilter from '../Scenes/DiscoveryCenter/Filters/NatureFilter';
 import ProfessionFilter from '../Scenes/DiscoveryCenter/Filters/ProfessionFilter';
 import RoleFilter from '../Scenes/DiscoveryCenter/Filters/RoleFilter';
 import SpheresFilter from '../Scenes/DiscoveryCenter/Filters/SpheresFilter';
-import WordFilter from '../Scenes/DiscoveryCenter/Filters/WordFilter'
+import WordFilter from '../Scenes/DiscoveryCenter/Filters/WordFilter';
 
 export const actantFiltersURL = router.addRoute('/DiscoveryCenter/Filters/ActantFilters', ActantFilters);
 export const actantFilterURL = router.addRoute('/DiscoveryCenter/Filters/ActantFilter', ActantFilter);

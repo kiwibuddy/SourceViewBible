@@ -1,32 +1,19 @@
 /* @flow */
 'use strict';
 
-import React, { Component } from 'react';
+import React from 'react';
 
-import {
-  Linking,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { Linking, Text, TouchableOpacity, View } from 'react-native';
 
-import {
-  Analytics,
-  Colors,
-  Constants,
-  Localizable,
-  StyleSheet,
-} from '../../Common';
+import { Analytics, Colors, Constants, Localizable, StyleSheet } from '../../Common';
 const { Links } = Constants;
 
 import Icon from './Icon';
 import { aboutURL } from '../../Navigation';
 
 function openURL(url: string) {
-  Linking.openURL(url).catch(error => {
-
-  });
-  Analytics.logCustom('Link', {url});
+  Linking.openURL(url).catch(() => {});
+  Analytics.logCustom('Link', { url });
 }
 
 const HelpFooter = (props: Object) => {
@@ -34,47 +21,38 @@ const HelpFooter = (props: Object) => {
     <View style={styles.footerContainer}>
       <View style={styles.separator} />
       <TouchableOpacity style={styles.listItemContainer} onPress={() => openURL(Links.Contact)}>
-        <Icon
-          name="about-contact"
-          size={25}
-          style={[styles.listItemIcon, {color: '#59626A'}]}
-        />
+        <Icon name="about-contact" size={25} style={[styles.listItemIcon, { color: '#59626A' }]} />
         <View style={styles.listItem}>
           <Text style={StyleSheet.styles.cell.title}>Contact Us</Text>
         </View>
       </TouchableOpacity>
       <View style={styles.separator} />
       <TouchableOpacity style={styles.listItemContainer} onPress={() => openURL(Links.Help)}>
-        <Icon
-          name="about-help"
-          size={25}
-          style={[styles.listItemIcon, {color: '#59626A'}]}
-        />
+        <Icon name="about-help" size={25} style={[styles.listItemIcon, { color: '#59626A' }]} />
         <View style={styles.listItem}>
           <Text style={StyleSheet.styles.cell.title}>Help Center</Text>
         </View>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={styles.listItemContainer} onPress={() => props.navigate(aboutURL({title: Localizable.t('about-sourceview'), modal: true}))}>
-        <Icon
-          name="about-info"
-          size={25}
-          style={[styles.listItemIcon, {color: '#59626A'}]}
-        />
+      <TouchableOpacity style={styles.listItemContainer} onPress={() => props.navigate(aboutURL({ title: Localizable.t('about-sourceview'), modal: true }))}>
+        <Icon name="about-info" size={25} style={[styles.listItemIcon, { color: '#59626A' }]} />
         <View style={styles.listItem}>
           <Text style={StyleSheet.styles.cell.title}>About SourceView</Text>
         </View>
       </TouchableOpacity>
       <View style={styles.separator} />
       <TouchableOpacity style={styles.donateContainer} onPress={() => openURL(Links.Donate)}>
-        <Text style={[styles.contentHeader, {marginBottom: 0}]}>Help us</Text>
-        <Text style={[styles.contentHeader, {marginTop: 0}]}>end Bible poverty</Text>
-        <Text style={styles.contentBody}>With your help we can ensure that more people around the world will be able to have access to God's Word in a language and with a technology which is most suitable to them.</Text>
+        <Text style={[styles.contentHeader, { marginBottom: 0 }]}>Help us</Text>
+        <Text style={[styles.contentHeader, { marginTop: 0 }]}>end Bible poverty</Text>
+        <Text style={styles.contentBody}>
+          With your help we can ensure that more people around the world will be able to have access to God's Word in a language and with a technology which is
+          most suitable to them.
+        </Text>
         <Text style={styles.button}>Donate Today</Text>
       </TouchableOpacity>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   footerContainer: {

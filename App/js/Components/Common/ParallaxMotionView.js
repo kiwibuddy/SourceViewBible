@@ -6,9 +6,14 @@ import { View, StyleSheet } from 'react-native';
 
 import ParallaxMotion from 'react-native-parallax-motion';
 
-export default class ParallaxMotionView extends Component {
+type Props = {
+  intensity: any,
+  children?: any,
+};
+
+export default class ParallaxMotionView extends Component<Props> {
   componentDidMount() {
-    ParallaxMotion.startUpdates(1000/60, (motionData) => {
+    ParallaxMotion.startUpdates(1000 / 60, motionData => {
       this._updateChildren(motionData);
     });
   }
@@ -21,15 +26,11 @@ export default class ParallaxMotionView extends Component {
     const children = React.Children.map(this.props.children, (child, index) => {
       return React.cloneElement(child, {
         key: 'parallax-motion-view-child-' + index,
-        ref: 'parallax-motion-view-child-' + index
+        ref: 'parallax-motion-view-child-' + index,
       });
     });
 
-    return (
-      <View {...this.props}>
-        {children}
-      </View>
-    );
+    return <View {...this.props}>{children}</View>;
   }
 
   _updateChildren = (motionData: Object) => {
@@ -56,8 +57,8 @@ export default class ParallaxMotionView extends Component {
       };
 
       this.refs['parallax-motion-view-child-' + index].setNativeProps({
-        style: updatedStyle
+        style: updatedStyle,
       });
     });
   };
-};
+}

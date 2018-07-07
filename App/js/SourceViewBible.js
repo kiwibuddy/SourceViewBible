@@ -10,8 +10,6 @@ export default class SourceViewBible extends Component {
   }
 
   render() {
-    return (
-      <App />
-    );
+    return <App />;
   }
 }

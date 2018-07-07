@@ -1,25 +1,15 @@
 /* @flow */
 'use strict';
 
-import React, { Component } from 'react';
-import {
-  Image,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import React from 'react';
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
-import {
-  Colors,
-  Localizable,
-  StyleSheet,
-} from '../../../Common';
+import { Colors, StyleSheet } from '../../../Common';
 
 import { cardWithFilter, cardWithoutFilter } from './FilterUtils';
 
 function filterGender(card: Object, filter: Object, type: string, key: string) {
-  const genderID = (key === 'Male' ? 2 : 1);
+  const genderID = key === 'Male' ? 2 : 1;
 
   if (card.type === 'sources' && filter && filter.genderID === genderID) {
     return cardWithoutFilter(card, filter);
@@ -30,13 +20,13 @@ function filterGender(card: Object, filter: Object, type: string, key: string) {
     actantType: type,
     ...filter,
     type: 'gender',
-    genderID
+    genderID,
   });
 }
 
 function checkmark(card: Object, filter: Object, genderID: number) {
   if (card.type === 'sources' && filter && filter.genderID === genderID) {
-    return <Image style={{tintColor: Colors.tint}} source={require('../../../Images/common/checkmark.png')} />;
+    return <Image style={{ tintColor: Colors.tint }} source={require('../../../Images/common/checkmark.png')} />;
   }
   return null;
 }

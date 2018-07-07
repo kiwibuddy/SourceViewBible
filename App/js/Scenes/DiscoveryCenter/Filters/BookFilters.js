@@ -1,24 +1,13 @@
 /* @flow */
 'use strict';
 
-import React, { Component } from 'react';
-import {
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-  Image,
-} from 'react-native';
+import React from 'react';
+import { ScrollView, Text, TouchableOpacity, View, Image } from 'react-native';
 
-import {
-  Colors,
-  Localizable,
-  StyleSheet,
-} from '../../../Common';
+import { Localizable, StyleSheet } from '../../../Common';
 
 import { booksFilterURL } from '../../../Navigation';
 import { cardWithFilter } from './FilterUtils';
-import { Book } from '../../../Database';
 
 type Props = {
   card: Object,
@@ -28,14 +17,14 @@ type Props = {
 };
 
 function filterBooks(fromID: string, toID: string) {
-  return ({
+  return {
     id: 'filter-' + Date.now(),
     type: 'book-range',
     books: {
       fromID,
-      toID
-    }
-  });
+      toID,
+    },
+  };
 }
 
 const BookFilters = (props: Props) => {
@@ -45,7 +34,7 @@ const BookFilters = (props: Props) => {
         <Text style={StyleSheet.styles.cell.title}>{Localizable.t('whole-bible')}</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.navigate(booksFilterURL({title: 'Specific Book'}))}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.navigate(booksFilterURL({ title: 'Specific Book' }))}>
         <Text style={StyleSheet.styles.cell.title}>Specific Book</Text>
         <Image source={require('../Images/disclosure.png')} />
       </TouchableOpacity>

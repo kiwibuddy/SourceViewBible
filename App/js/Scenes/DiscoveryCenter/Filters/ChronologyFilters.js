@@ -1,20 +1,10 @@
 /* @flow */
 'use strict';
 
-import React, { Component } from 'react';
-import {
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-  Image,
-} from 'react-native';
+import React from 'react';
+import { ScrollView, Text, TouchableOpacity, View, Image } from 'react-native';
 
-import {
-  Colors,
-  Localizable,
-  StyleSheet,
-} from '../../../Common';
+import { StyleSheet } from '../../../Common';
 
 import { chronologyFilterURL } from '../../../Navigation';
 import { cardWithFilter } from './FilterUtils';
@@ -26,20 +16,19 @@ type Props = {
   onDone: Function,
 };
 
-
 function AllTimeFilter() {
   const chronologies = Chronology.all();
   const from = chronologies[0];
   const to = chronologies[chronologies.length - 1];
 
-  return ({
+  return {
     id: 'filter-' + Date.now(),
     type: 'chronology-range',
     chronologies: {
       fromID: from.id,
-      toID: to.id
-    }
-  });
+      toID: to.id,
+    },
+  };
 }
 
 const ChronologyFilters = (props: Props) => {
@@ -49,7 +38,7 @@ const ChronologyFilters = (props: Props) => {
         <Text style={StyleSheet.styles.cell.title}>All Time</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.navigate(chronologyFilterURL({title: 'Specific Time Period'}))}>
+      <TouchableOpacity style={StyleSheet.styles.listItem} onPress={() => props.navigate(chronologyFilterURL({ title: 'Specific Time Period' }))}>
         <Text style={StyleSheet.styles.cell.title}>Specific Time Period</Text>
         <Image source={require('../Images/disclosure.png')} />
       </TouchableOpacity>

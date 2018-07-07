@@ -2,7 +2,23 @@
 'use strict';
 
 import Emdros from '../../API/Emdros';
-import { Bible, Actant, Book, BookSourceOccurrence, Chronology, Gender, Nature, Profession, Role, Sphere, SQLite, ComparisonPredicate, CompoundPredicate, RawPredicate, Predicate, rowsWithSQL } from '../../Database';
+import {
+  Bible,
+  Actant,
+  Book,
+  BookSourceOccurrence,
+  Chronology,
+  Gender,
+  Nature,
+  Profession,
+  Role,
+  Sphere,
+  ComparisonPredicate,
+  CompoundPredicate,
+  RawPredicate,
+  Predicate,
+  rowsWithSQL,
+} from '../../Database';
 
 class SelectStatement {
   prefix: string;
@@ -102,13 +118,13 @@ class OrderByStatement {
 
 class EmdrosQuery {
   static SPHERE_FEATURE_MAP = {
-    'family': 'Family',
-    'economics': 'Economics',
-    'government': 'Government',
-    'religion': 'Religion',
-    'education': 'Education',
-    'communication': 'MediaCom',
-    'celebration': 'Celebration'
+    family: 'Family',
+    economics: 'Economics',
+    government: 'Government',
+    religion: 'Religion',
+    education: 'Education',
+    communication: 'MediaCom',
+    celebration: 'Celebration',
   };
 
   query: string;
@@ -125,9 +141,9 @@ class EmdrosQuery {
 
     let options = null;
     if (monads && monads.length > 0) {
-      options = {monads, tokenFeatureComparison}
+      options = { monads, tokenFeatureComparison };
     } else {
-      options = {tokenFeatureComparison};
+      options = { tokenFeatureComparison };
     }
 
     return Emdros.wordCountsForContext('Source', options);
@@ -138,7 +154,7 @@ type Props = {
   filters: any,
   xAxis: any,
   yAxis: any,
-  zAxis: any
+  zAxis: any,
 };
 
 export default class Query {
@@ -184,7 +200,10 @@ export default class Query {
   async occurrences() {
     await this._prepare();
 
-    const sql = this._sql('SELECT DISTINCT bso.id', {orderBy: 'ORDER BY bso.id', limit: `LIMIT ${BookSourceOccurrence.MAXIMUM_NUMBER_OF_DISPLAYABLE_OCCURRENCES}`});
+    const sql = this._sql('SELECT DISTINCT bso.id', {
+      orderBy: 'ORDER BY bso.id',
+      limit: `LIMIT ${BookSourceOccurrence.MAXIMUM_NUMBER_OF_DISPLAYABLE_OCCURRENCES}`,
+    });
     const rows = await rowsWithSQL(sql);
     return rows.map(row => BookSourceOccurrence.findByID(row['id']));
   }
@@ -210,7 +229,7 @@ export default class Query {
 
       const queryParameters = [`surface_fts="${wordFilter.word.toLowerCase()}"`];
 
-      const sphereFilter =  this.filters.find(filter => filter.type === 'sphere');
+      const sphereFilter = this.filters.find(filter => filter.type === 'sphere');
       if (sphereFilter) {
         sphereFilter.spheres.forEach(sphereID => {
           const sphere = EmdrosQuery.SPHERE_FEATURE_MAP[sphereID];
@@ -231,7 +250,7 @@ export default class Query {
 
   async _monads() {
     if (this.whereClause.isEmpty) {
-       return null;
+      return null;
     } else if (this.filters.length == 1) {
       const bookRangeFilter = this.filters.find(filter => filter.type === 'book-range');
       if (bookRangeFilter && bookRangeFilter.books.fromID === 'genesis' && bookRangeFilter.books.toID === 'revelation') return null;
@@ -279,7 +298,7 @@ export default class Query {
       let zAxisActantType = null;
       switch (zAxis.actantType) {
         case 'source':
-          zAxisActantType = 'speaker'
+          zAxisActantType = 'speaker';
           break;
 
         case 'recipient':
@@ -353,7 +372,7 @@ export default class Query {
     let xAxisActantType = null;
     switch (xAxis.actantType) {
       case 'source':
-        xAxisActantType = 'speaker'
+        xAxisActantType = 'speaker';
         break;
 
       case 'recipient':
@@ -420,7 +439,7 @@ export default class Query {
     let yAxisActantType = null;
     switch (yAxis.actantType) {
       case 'source':
-        yAxisActantType = 'speaker'
+        yAxisActantType = 'speaker';
         break;
 
       case 'recipient':
@@ -492,7 +511,7 @@ export default class Query {
 
     orderByStatement.orderBy('count DESC');
 
-    const dataSQL = this._sql(selectStatement.toSQL(), {groupBy: groupByStatement.toSQL(), orderBy: orderByStatement.toSQL()});
+    const dataSQL = this._sql(selectStatement.toSQL(), { groupBy: groupByStatement.toSQL(), orderBy: orderByStatement.toSQL() });
 
     if (__DEV__) console.log(dataSQL);
 
@@ -506,13 +525,13 @@ export default class Query {
       let color = null;
       if (ObjectClass) {
         object = ObjectClass.findByID(row['id']);
-        if (object != null && typeof(object.color) !== "undefined") {
+        if (object != null && typeof object.color !== 'undefined') {
           // $FlowFixMe
           color = object.color();
         }
       }
 
-      const value = {label: object.name, color, value: row['count']};
+      const value = { label: object.name, color, value: row['count'] };
 
       if (GroupByObjectClass) {
         const groupByID = row['zid'];
@@ -528,7 +547,7 @@ export default class Query {
       chronologies.forEach(chronology => {
         data.push({
           label: chronology.name,
-          value: groupByData[chronology.id.toString()]
+          value: groupByData[chronology.id.toString()],
         });
       });
     } else {
@@ -537,7 +556,7 @@ export default class Query {
           const groupByObject = GroupByObjectClass.findByID(parseInt(groupByID));
           data.push({
             label: groupByObject.name,
-            value: groupByData[groupByID]
+            value: groupByData[groupByID],
           });
         }
       });
@@ -553,10 +572,10 @@ export default class Query {
     if (monads == null) {
       words = Bible.words;
     } else {
-      words = await Emdros.words({monads, useStopWords: true, limit: 20});
+      words = await Emdros.words({ monads, useStopWords: true, limit: 20 });
     }
 
-    return words.map(word => ({label: word.string, value: word.count}));
+    return words.map(word => ({ label: word.string, value: word.count }));
   }
 
   _buildFromClause() {
@@ -564,7 +583,7 @@ export default class Query {
 
     const items = [...this.axis, ...this.filters];
     items.forEach(item => {
-      switch(item.type) {
+      switch (item.type) {
         case 'actant':
         case 'actant-number':
         case 'gender':
@@ -580,7 +599,8 @@ export default class Query {
               fromClause.join('INNER JOIN actants AS listener ON listener.id = listeners.actant_id');
               break;
 
-            default: // Not needed by filter but needed by axis
+            default:
+              // Not needed by filter but needed by axis
               fromClause.join('INNER JOIN bso_actants AS everyone ON bso.id = everyone.bso_id');
               fromClause.join('INNER JOIN actants AS someone ON someone.id = everyone.actant_id');
               break;
@@ -611,7 +631,8 @@ export default class Query {
               fromClause.join('INNER JOIN natures AS listener_natures ON listeners.actant_id = listener_natures.actant_id');
               break;
 
-            default: // Not needed by filter but needed by axis
+            default:
+              // Not needed by filter but needed by axis
               fromClause.join('INNER JOIN bso_actants AS everyone ON bso.id = everyone.bso_id');
               fromClause.join('INNER JOIN natures AS someone_natures ON everyone.actant_id = someone_natures.actant_id');
               break;
@@ -630,7 +651,8 @@ export default class Query {
               fromClause.join('INNER JOIN professions AS listener_professions ON listeners.actant_id = listener_professions.actant_id');
               break;
 
-            default: // Not needed by filter but needed by axis
+            default:
+              // Not needed by filter but needed by axis
               fromClause.join('INNER JOIN bso_actants AS everyone ON bso.id = everyone.bso_id');
               fromClause.join('INNER JOIN professions AS someone_professions ON everyone.actant_id = someone_professions.actant_id');
               break;
@@ -648,7 +670,6 @@ export default class Query {
 
   _buildWhereClause() {
     const xAxis = this.axis[0];
-    const yAxis = this.axis[1];
     const zAxis = this.axis[2];
 
     const whereClause = new WhereClause();
@@ -657,7 +678,7 @@ export default class Query {
       let actantType = '';
       switch (filter.actantType) {
         case 'source':
-          actantType = 'speaker'
+          actantType = 'speaker';
           break;
 
         case 'recipient':
@@ -665,34 +686,37 @@ export default class Query {
           break;
       }
 
-      switch(filter.type) {
+      switch (filter.type) {
         case 'actant':
           whereClause.where(ComparisonPredicate.predicateWith(`${actantType}.id`, '=', filter.actantID));
           break;
 
-        case 'book':
+        case 'book': {
           const book = Book.findByID(filter.bookID);
           whereClause.where(ComparisonPredicate.predicateWith('bso.first', '>=', book.firstMonad));
           whereClause.where(ComparisonPredicate.predicateWith('bso.last', '<=', book.lastMonad));
           break;
+        }
 
-        case 'book-range':
+        case 'book-range': {
           const fromBook = Book.findByID(filter.books.fromID);
           const toBook = Book.findByID(filter.books.toID);
           whereClause.where(ComparisonPredicate.predicateWith('bso.first', '>=', fromBook.firstMonad));
           whereClause.where(ComparisonPredicate.predicateWith('bso.last', '<=', toBook.lastMonad));
           break;
+        }
 
         case 'chronology':
           whereClause.where(ComparisonPredicate.predicateWith('chronologies.chronology_id', '=', filter.chronologyID));
           break;
 
-        case 'chronology-range':
+        case 'chronology-range': {
           const fromChronology = Chronology.findByID(filter.chronologies.fromID);
           const toChronology = Chronology.findByID(filter.chronologies.toID);
           const chronologies = Chronology.whereInRange(fromChronology, toChronology).map(chronology => chronology.id);
           whereClause.where(ComparisonPredicate.predicateWith('chronologies.chronology_id', 'IN', chronologies));
           break;
+        }
 
         case 'gender':
           whereClause.where(ComparisonPredicate.predicateWith(`${actantType}.gender_id`, '=', filter.genderID));
@@ -710,15 +734,18 @@ export default class Query {
           whereClause.where(ComparisonPredicate.predicateWith(`bso.role_id`, '=', filter.roleID));
           break;
 
-        case 'sphere':
+        case 'sphere': {
           const spheres = Sphere.whereIn(filter.spheres).map(sphere => sphere.position);
           spheres.forEach(sphere => {
-            whereClause.where(RawPredicate.predicateWith(`EXISTS (SELECT spheres.bso_id FROM spheres WHERE bso.id = spheres.bso_id AND spheres.sphere_id = $0)`, [sphere]));
+            whereClause.where(
+              RawPredicate.predicateWith(`EXISTS (SELECT spheres.bso_id FROM spheres WHERE bso.id = spheres.bso_id AND spheres.sphere_id = $0)`, [sphere])
+            );
           });
           if (xAxis.type == 'sphere' || (zAxis && zAxis.type == 'sphere')) {
             whereClause.where(ComparisonPredicate.predicateWith('spheres.sphere_id', 'IN', spheres));
           }
           break;
+        }
       }
     });
 

@@ -1,12 +1,11 @@
 /* @flow */
 'use strict';
 
-import React, { Component } from 'react';
-import { View } from 'react-native';
+import React from 'react';
 import PropTypes from 'prop-types';
 import BarChart from './BarChart';
 
-import { Colors, StyleSheet } from '../../Common';
+import { Colors } from '../../Common';
 
 import Realm from 'realm';
 
@@ -26,7 +25,7 @@ const SpheresBarChart = (props: Object) => {
       if (value === undefined) return null;
       return {
         color: Colors.spheres[sphere].tint,
-        value
+        value,
       };
     }).filter(bar => bar != null);
 
@@ -40,11 +39,11 @@ SpheresBarChart.propTypes = {
   style: PropTypes.any,
   barStyle: PropTypes.any,
   data: PropTypes.any.isRequired,
-  horizontal: PropTypes.bool
+  horizontal: PropTypes.bool,
 };
 
 SpheresBarChart.defaultProps = {
-  horizontal: true
+  horizontal: true,
 };
 
 export default SpheresBarChart;

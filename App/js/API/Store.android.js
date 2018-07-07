@@ -5,26 +5,28 @@ import InAppBilling from 'react-native-billing';
 
 export default class Store {
   static products(productIdentifiers) {
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       InAppBilling.open().then(() => {
-        InAppBilling.getProductDetailsArray(productIdentifiers).then((products) => {
+        InAppBilling.getProductDetailsArray(productIdentifiers).then(products => {
           InAppBilling.close();
 
-          resolve(products.map((product) => {
-            return {
-              productID: product.productId,
-              localizedPrice: product.priceText,
-            };
-          }));
+          resolve(
+            products.map(product => {
+              return {
+                productID: product.productId,
+                localizedPrice: product.priceText,
+              };
+            })
+          );
         });
       });
     });
   }
 
   static purchase(productID) {
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       InAppBilling.open().then(() => {
-        InAppBilling.purchase(productID).then((transationDetail) => {
+        InAppBilling.purchase(productID).then(transationDetail => {
           InAppBilling.close();
           resolve(transationDetail.purchaseState === 'PurchasedSuccessfully');
         });
@@ -33,13 +35,13 @@ export default class Store {
   }
 
   static restorePurchases() {
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       InAppBilling.open().then(() => {
-        InAppBilling.listOwnedProducts().then((productIdentifiers) => {
+        InAppBilling.listOwnedProducts().then(productIdentifiers => {
           InAppBilling.close();
 
           const purchases = productIdentifiers.map(productID => {
-            return {productID};
+            return { productID };
           });
           resolve(purchases);
         });

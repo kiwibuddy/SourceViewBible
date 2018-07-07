@@ -9,7 +9,7 @@ import { Colors, Localizable, StyleSheet } from '../../Common';
 
 import LinearGradient from 'react-native-linear-gradient';
 import PageControl from '../../Components/Common/PageControl';
-import { BACK, discoverURL } from '../../Navigation';
+import { discoverURL } from '../../Navigation';
 import { Preference } from '../../Preferences';
 
 const { width: WIDTH, height: HEIGHT } = Dimensions.get('window');

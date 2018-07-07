@@ -2,24 +2,9 @@
 'use strict';
 
 import React, { Component } from 'react';
-import {
-  Image,
-  Platform,
-  ScrollView,
-  Slider,
-  Switch,
-  Text,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  View,
-  TextInput,
-} from 'react-native';
+import { Platform, Switch, Text, View, TextInput } from 'react-native';
 
-import {
-  Colors,
-  Localizable,
-  StyleSheet,
-} from '../../Common';
+import { Colors, Localizable, StyleSheet } from '../../Common';
 
 import { NavigationHeader, NavigationBarButton } from '../../Components/Navigation';
 import { BACK } from '../../Navigation';
@@ -56,16 +41,15 @@ export default class BookmarkScene extends Component {
         note: bookmark.note,
         references: Object.values(bookmark.references),
         scripture: null,
-      }
+      };
     } else {
       this.state = {
         highlight: true,
         note: null,
         references: props.references,
         scripture: null,
-      }
+      };
     }
-
   }
 
   componentDidMount() {
@@ -74,46 +58,43 @@ export default class BookmarkScene extends Component {
 
   render() {
     const { highlight, note, scripture } = this.state;
-    const doneImage = (Platform.OS === 'android' ? require('../../Components/Navigation/Images/checkmark-icon.png') : null);
+    const doneImage = Platform.OS === 'android' ? require('../../Components/Navigation/Images/checkmark-icon.png') : null;
 
     return (
       <View style={styles.container}>
         <NavigationHeader
           navigate={this.props.navigate}
           title={Localizable.t('bookmark')}
-          renderLeftComponent={(props: Object) => <NavigationBarButton
-            title={Localizable.t('cancel')}
-            onPress={() => this.props.navigate(BACK)}
-          />}
-          renderRightComponent={(props: Object) => <NavigationBarButton
-            imageSource={doneImage}
-            title={Localizable.t('done')}
-            onPress={this._onDone}
-            titleStyle={StyleSheet.styles.navigationBar.doneButtonTitle}
-          />}
-        />
-        <View style={[styles.cellContainer, {paddingVertical: 8, paddingLeft: 15}]}>
-          <View style={styles.cellLeftContainer}>
-            <Text style={[StyleSheet.styles.cell.title, {flex: 3}]}>{Localizable.t('highlight-text')}</Text>
-          </View>
-          <View style={[styles.cellRightContainer, {width: 50}]}>
-            <Switch
-              onValueChange={(value) => this.setState({highlight: value})}
-              style={styles.switch}
-              value={highlight}
+          renderLeftComponent={() => <NavigationBarButton title={Localizable.t('cancel')} onPress={() => this.props.navigate(BACK)} />}
+          renderRightComponent={() => (
+            <NavigationBarButton
+              imageSource={doneImage}
+              title={Localizable.t('done')}
+              onPress={this._onDone}
+              titleStyle={StyleSheet.styles.navigationBar.doneButtonTitle}
             />
+          )}
+        />
+        <View style={[styles.cellContainer, { paddingVertical: 8, paddingLeft: 15 }]}>
+          <View style={styles.cellLeftContainer}>
+            <Text style={[StyleSheet.styles.cell.title, { flex: 3 }]}>{Localizable.t('highlight-text')}</Text>
+          </View>
+          <View style={[styles.cellRightContainer, { width: 50 }]}>
+            <Switch onValueChange={value => this.setState({ highlight: value })} style={styles.switch} value={highlight} />
           </View>
         </View>
         <View style={styles.separator} />
         <View style={styles.referenceContainer}>
-          <Text numberOfLines={2} style={styles.body}>{scripture}</Text>
-          <Text style={[StyleSheet.styles.cell.subtitle, {paddingRight: 8,}]}>{this._referenceDescription()}</Text>
+          <Text numberOfLines={2} style={styles.body}>
+            {scripture}
+          </Text>
+          <Text style={[StyleSheet.styles.cell.subtitle, { paddingRight: 8 }]}>{this._referenceDescription()}</Text>
         </View>
         <TextInput
           autoFocus={true}
           clearButtonMode="always"
           multiline={true}
-          onChangeText={(text) => this.setState({note: text})}
+          onChangeText={text => this.setState({ note: text })}
           placeholder={Localizable.t('optional-note')}
           style={styles.textInput}
           value={note}
@@ -127,8 +108,8 @@ export default class BookmarkScene extends Component {
     const { references, highlight, note } = this.state;
 
     const bookmark = Bookmark.findByID(bookmarkID);
-    const id = (bookmark ? bookmark.id : null);
-    Bookmark.bookmark({id, references, note, highlight});
+    const id = bookmark ? bookmark.id : null;
+    Bookmark.bookmark({ id, references, note, highlight });
     this.props.navigate(BACK);
   };
 
@@ -139,20 +120,20 @@ export default class BookmarkScene extends Component {
     for (let reference of references) {
       const monadSet = {
         first: reference.firstMonad,
-        last: reference.lastMonad
+        last: reference.lastMonad,
       };
-      const content = await Emdros.scripture({monadSet, stylesheet: 'occurrence'});
+      const content = await Emdros.scripture({ monadSet, stylesheet: 'occurrence' });
       scripture += content;
     }
 
-    this.setState({scripture});
+    this.setState({ scripture });
   }
 
   _referenceDescription = () => {
     const book = Book.findByID(this.props.bookID);
     return ReferenceDescription(book, this.state.references);
-  }
-};
+  };
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -161,7 +142,7 @@ const styles = StyleSheet.create({
   cellLeftContainer: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   cellRightContainer: {
     flex: 0,
@@ -193,32 +174,32 @@ const styles = StyleSheet.create({
     padding: 0, // Android workaround
   },
   ...Platform.select({
-      ios: {
-        separator: {
-          height: StyleSheet.hairlineWidth,
-          backgroundColor: Colors.separator,
-          marginLeft: 15,
-        },
-        cellContainer: {
-          flex: 1,
-          marginRight: 15,
-          flexDirection: 'row',
-          alignItems: 'center',
-          minHeight: 44,
-        },
+    ios: {
+      separator: {
+        height: StyleSheet.hairlineWidth,
+        backgroundColor: Colors.separator,
+        marginLeft: 15,
       },
-      android: {
-        separator: {
-          height: 0,
-          backgroundColor: Colors.separator,
-        },
-        cellContainer: {
-          flex: 1,
-          marginRight: 15,
-          flexDirection: 'row',
-          alignItems: 'center',
-          minHeight: 55,
-        },
+      cellContainer: {
+        flex: 1,
+        marginRight: 15,
+        flexDirection: 'row',
+        alignItems: 'center',
+        minHeight: 44,
       },
+    },
+    android: {
+      separator: {
+        height: 0,
+        backgroundColor: Colors.separator,
+      },
+      cellContainer: {
+        flex: 1,
+        marginRight: 15,
+        flexDirection: 'row',
+        alignItems: 'center',
+        minHeight: 55,
+      },
+    },
   }),
 });
