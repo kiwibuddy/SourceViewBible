@@ -2,10 +2,12 @@
 'use strict';
 
 import React, { Component } from 'react';
+import { Dimensions, Platform, StyleSheet, View } from 'react-native';
 
-import { Platform, SafeAreaView, StyleSheet } from 'react-native';
+const window = Dimensions.get('window');
+const isSafeAreaNeeded = Platform.OS === 'ios' && !Platform.isPad && !Platform.isTVOS && (window.height === 812 || window.width === 812);
 
-const TOOLBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
+const TOOLBAR_HEIGHT = Platform.OS === 'ios' ? (isSafeAreaNeeded ? 64 : 44) : 56;
 
 type Props = {
   style?: any,
@@ -17,7 +19,8 @@ export default class Toolbar extends Component<Props> {
 
   render() {
     const { style, children } = this.props;
-    return <SafeAreaView style={[styles.toolbar, style]}>{children}</SafeAreaView>;
+    const safeAreaStyle = isSafeAreaNeeded ? { paddingBottom: 20 } : {};
+    return <View style={[styles.toolbar, safeAreaStyle, style]}>{children}</View>;
   }
 }
 
