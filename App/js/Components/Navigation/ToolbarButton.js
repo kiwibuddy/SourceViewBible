@@ -39,6 +39,7 @@ const ToolbarButton = (props: Props) => {
 const styles = StyleSheet.create({
   button: {
     marginHorizontal: 8,
+    marginVertical: 8,
     ...Platform.select({
       ios: {
         width: 30,
