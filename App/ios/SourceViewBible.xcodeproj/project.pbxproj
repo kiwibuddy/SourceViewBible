@@ -366,13 +366,6 @@
 			remoteGlobalIDString = 46E694321B289730000B634E;
 			remoteInfo = InAppUtils;
 		};
-		ABE4D79E20F0F96500590766 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 22402A33C4E7420E9F5C2390 /* InAppUtils.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 46E6943D1B289730000B634E;
-			remoteInfo = InAppUtilsTests;
-		};
 		ABE4D7A120F0F96500590766 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6FA5D43586744E44B7748E95 /* RCTEmdros.xcodeproj */;
@@ -974,7 +967,6 @@
 			isa = PBXGroup;
 			children = (
 				ABE4D79D20F0F96500590766 /* libInAppUtils.a */,
-				ABE4D79F20F0F96500590766 /* InAppUtilsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1580,13 +1572,6 @@
 			remoteRef = ABE4D79C20F0F96500590766 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		ABE4D79F20F0F96500590766 /* InAppUtilsTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = InAppUtilsTests.xctest;
-			remoteRef = ABE4D79E20F0F96500590766 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		ABE4D7A220F0F96500590766 /* libRCTEmdros.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -2004,6 +1989,7 @@
 					"$(SRCROOT)/../node_modules/react-native-wkwebview-reborn/ios/RCTWKWebView",
 				);
 				INFOPLIST_FILE = SourceViewBible/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -2046,6 +2032,7 @@
 					"$(SRCROOT)/../node_modules/react-native-wkwebview-reborn/ios/RCTWKWebView",
 				);
 				INFOPLIST_FILE = SourceViewBible/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
