@@ -1,8 +1,8 @@
 /* @flow */
 'use strict';
 
-// $FlowFixMe - Silence warning
-import { InAppUtils } from 'NativeModules';
+import { NativeModules } from 'react-native';
+const { InAppUtils } = NativeModules;
 
 export default class Store {
   static products(productIdentifiers) {
