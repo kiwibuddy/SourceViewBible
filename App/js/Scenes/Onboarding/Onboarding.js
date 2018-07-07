@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 
-import { Dimensions, Image, LayoutAnimation, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Image, LayoutAnimation, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
 import { Colors, Localizable, StyleSheet } from '../../Common';
 
@@ -76,19 +76,12 @@ export default class Onboarding extends Component {
                 <Text style={styles.contentBody}>Every word is enriched by layers of information, enabling you to explore and gain new insights.</Text>
               </View>
             </View>
-            {/* <View style={styles.onboardingContainer}>
-              <View style={styles.onboardingContent}>
-                <Image source={require('./Images/onboarding-5.png')} />
-                <Text style={styles.contentHeader}>Share discoveries</Text>
-                <Text style={styles.contentBody}>Create insightful visualizations of Scripture and share them
-  with friends.</Text>
-              </View>
-            </View> */}
           </ScrollView>
           {this._renderControls()}
-          <View style={styles.pageControlContainer}>
+
+          <SafeAreaView style={styles.pageControlContainer}>
             <PageControl numberOfPages={NUMBER_OF_PAGES} currentPage={this.state.currentPage} />
-          </View>
+          </SafeAreaView>
         </LinearGradient>
       </View>
     );
