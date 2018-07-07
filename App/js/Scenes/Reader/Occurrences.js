@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 
-import { ActivityIndicator, BackAndroid, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, BackHandler, Text, TouchableOpacity, View } from 'react-native';
 import { ListView } from '../../Components/Common/DatabaseListView';
 
 import { Colors, StyleSheet, Localizable } from '../../Common';
@@ -45,12 +45,12 @@ export default class Occurrences extends Component {
 
   componentDidMount() {
     this._getOccurrences();
-    BackAndroid.addEventListener('hardwareBackPress', this._onHardwareBackPress);
+    BackHandler.addEventListener('hardwareBackPress', this._onHardwareBackPress);
   }
 
   componentWillUnmount() {
     this.shouldFetch = false;
-    BackAndroid.removeEventListener('hardwareBackPress', this._onHardwareBackPress);
+    BackHandler.removeEventListener('hardwareBackPress', this._onHardwareBackPress);
   }
 
   render() {

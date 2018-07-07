@@ -2,7 +2,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { BackAndroid, Platform, Text, View } from 'react-native';
+import { BackHandler, Platform, Text, View } from 'react-native';
 
 import { NavigationHeader, NavigationBarButton, Toolbar } from '../Navigation';
 import DefaultToolbar from '../Navigation/DefaultToolbar';
@@ -48,11 +48,11 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    BackAndroid.addEventListener('hardwareBackPress', this._onHardwareBackPress);
+    BackHandler.addEventListener('hardwareBackPress', this._onHardwareBackPress);
   }
 
   componentWillUnmount() {
-    BackAndroid.removeEventListener('hardwareBackPress', this._onHardwareBackPress);
+    BackHandler.removeEventListener('hardwareBackPress', this._onHardwareBackPress);
   }
 
   render() {

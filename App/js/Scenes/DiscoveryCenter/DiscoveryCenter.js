@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 
-import { BackAndroid, LayoutAnimation, Platform, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { BackHandler, LayoutAnimation, Platform, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
 import { Colors, StyleSheet, Localizable } from '../../Common';
 
@@ -53,11 +53,11 @@ export default class DiscoveryCenter extends Component {
   }
 
   componentDidMount() {
-    BackAndroid.addEventListener('hardwareBackPress', this._onHardwareBackPress);
+    BackHandler.addEventListener('hardwareBackPress', this._onHardwareBackPress);
   }
 
   componentWillUnmount() {
-    BackAndroid.removeEventListener('hardwareBackPress', this._onHardwareBackPress);
+    BackHandler.removeEventListener('hardwareBackPress', this._onHardwareBackPress);
   }
 
   render() {
