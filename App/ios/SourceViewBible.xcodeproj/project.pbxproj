@@ -59,6 +59,7 @@
 		ABE7661C20F1056100DB34C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABE7661A20F1056100DB34C5 /* LaunchScreen.storyboard */; };
 		ABE7668720F1071E00DB34C5 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE7668620F1071E00DB34C5 /* StoreKit.framework */; };
 		ABE767DE20F10D6200DB34C5 /* sourceview.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ABE767DD20F10D6200DB34C5 /* sourceview.ttf */; };
+		ABE7685020F10E8F00DB34C5 /* Datasets in Resources */ = {isa = PBXBuildFile; fileRef = ABE7681520F10E8F00DB34C5 /* Datasets */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B0C0527E0FDB41CAB97B4A8A /* libRealmReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ACF59FC07534BE4BF4C7831 /* libRealmReact.a */; };
 		B532873476C64C848398E921 /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2F7E5E5D1D48EAA4E02311 /* libRNFS.a */; };
@@ -559,6 +560,7 @@
 		ABE7661B20F1056100DB34C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = SourceViewBible/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ABE7668620F1071E00DB34C5 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		ABE767DD20F10D6200DB34C5 /* sourceview.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sourceview.ttf; sourceTree = "<group>"; };
+		ABE7681520F10E8F00DB34C5 /* Datasets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Datasets; path = ../../Datasets; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		BC376FDF87524A4FB80A6DE7 /* RNFS.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFS.xcodeproj; path = "../node_modules/react-native-fs/RNFS.xcodeproj"; sourceTree = "<group>"; };
 		BE6DD36F3E884ADA9DF56958 /* SQLite.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SQLite.xcodeproj; path = "../node_modules/react-native-sqlite-storage/src/ios/SQLite.xcodeproj"; sourceTree = "<group>"; };
@@ -740,6 +742,7 @@
 		13B07FAE1A68108700A75B9A /* SourceViewBible */ = {
 			isa = PBXGroup;
 			children = (
+				ABE7681520F10E8F00DB34C5 /* Datasets */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -1710,6 +1713,7 @@
 				95E84CB2AAA94E81A88A9436 /* Ionicons.ttf in Resources */,
 				D4A482057B314266875CB902 /* MaterialCommunityIcons.ttf in Resources */,
 				D316ADE529E045C9AC9F88C8 /* MaterialIcons.ttf in Resources */,
+				ABE7685020F10E8F00DB34C5 /* Datasets in Resources */,
 				57CDF8E68BD14719A5CA709F /* Octicons.ttf in Resources */,
 				EC19014B0A3B400F8F060C5F /* SimpleLineIcons.ttf in Resources */,
 				F400AE34E82149E7AFE23EAA /* Zocial.ttf in Resources */,
