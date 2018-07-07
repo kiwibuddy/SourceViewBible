@@ -3,19 +3,11 @@
 
 import React, { Component } from 'react';
 
-import {
-  Navigator,
-  Platform,
-  View,
-} from 'react-native';
-
+import { Platform, View } from 'react-native';
+import { Navigator } from 'react-native-deprecated-custom-components';
 import Modal from './Modal';
 
-import {
-  Colors,
-  Localizable,
-  StyleSheet,
-} from '../../Common';
+import { Colors, Localizable, StyleSheet } from '../../Common';
 
 const NavigatorNavigationBarStyles = {
   ...Navigator.NavigationBar.Styles,
@@ -29,56 +21,55 @@ const NavigatorNavigationBarStyles = {
       ...Navigator.NavigationBar.Styles.Stages.Left,
       Title: {
         ...Navigator.NavigationBar.Styles.Stages.Left.Title,
-        top: 0,
+        top: 0
       },
       LeftButton: {
         ...Navigator.NavigationBar.Styles.Stages.Left.LeftButton,
-        top: 0,
+        top: 0
       },
       RightButton: {
         ...Navigator.NavigationBar.Styles.Stages.Left.RightButton,
-        top: 0,
+        top: 0
       }
     },
     Center: {
       ...Navigator.NavigationBar.Styles.Stages.Center,
       Title: {
         ...Navigator.NavigationBar.Styles.Stages.Center.Title,
-        top: 0,
+        top: 0
       },
       LeftButton: {
         ...Navigator.NavigationBar.Styles.Stages.Center.LeftButton,
-        top: 0,
+        top: 0
       },
       RightButton: {
         ...Navigator.NavigationBar.Styles.Stages.Center.RightButton,
-        top: 0,
+        top: 0
       }
     },
     Right: {
       ...Navigator.NavigationBar.Styles.Stages.Right,
       Title: {
         ...Navigator.NavigationBar.Styles.Stages.Right.Title,
-        top: 0,
+        top: 0
       },
       LeftButton: {
         ...Navigator.NavigationBar.Styles.Stages.Right.LeftButton,
-        top: 0,
+        top: 0
       },
       RightButton: {
         ...Navigator.NavigationBar.Styles.Stages.Right.RightButton,
-        top: 0,
+        top: 0
       }
     }
   }
 };
 
-
 type Props = {
   initialRoute: Object,
   popoverStyle: any,
   onPressCancel: Function,
-  onDone: Function,
+  onDone: Function
 };
 
 export default class Popover extends Component {
@@ -107,7 +98,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
     left: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.10)',
+    backgroundColor: 'rgba(0, 0, 0, 0.10)'
   },
   popover: {
     backgroundColor: 'rgba(255, 255, 255, 0.99)',
@@ -119,8 +110,8 @@ const styles = StyleSheet.create({
     left: 4,
     ...Platform.select({
       android: {
-        top: 4,
-      },
+        top: 4
+      }
     })
-  },
+  }
 });

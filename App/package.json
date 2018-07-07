@@ -13,6 +13,7 @@
     "react-native": "0.55.3",
     "react-native-app-info": "git+https://github.com/daikini/react-native-app-info.git",
     "react-native-billing": "file:../Libraries/react-native-billing/",
+    "react-native-deprecated-custom-components": "^0.1.2",
     "react-native-device-info": "^0.9.5",
     "react-native-emdros": "file:../Libraries/Emdros/",
     "react-native-fabric": "^0.5.1",
