@@ -59,7 +59,7 @@ export default class Actants extends Component {
           enableEmptySections={true}
           renderRow={this._renderRow}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
-          keyboardShouldPersistTaps={true}
+          keyboardShouldPersistTaps="always"
           keyboardDismissMode="on-drag"
         />
       </View>

@@ -84,7 +84,7 @@ export default class Sources extends Component {
           renderRow={this._renderRow}
           renderSectionHeader={this._renderSectionHeader}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
-          keyboardShouldPersistTaps={true}
+          keyboardShouldPersistTaps="always"
           keyboardDismissMode="on-drag"
           pageSize={10}
         />

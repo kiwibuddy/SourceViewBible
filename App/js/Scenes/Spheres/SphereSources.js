@@ -62,7 +62,7 @@ export default class SphereSources extends Component {
         renderHeader={this._renderHeader}
         renderRow={this._renderRow}
         renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={[StyleSheet.styles.separator, { marginLeft: 8 }]} />}
-        keyboardShouldPersistTaps={true}
+        keyboardShouldPersistTaps="always"
         keyboardDismissMode="on-drag"
         pageSize={10}
         style={styles.listView}

@@ -92,7 +92,7 @@ export default class ReaderSearch extends Component {
         renderSectionHeader={this._renderSectionHeader}
         renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={StyleSheet.styles.separator} />}
         style={styles.listView}
-        keyboardShouldPersistTaps={true}
+        keyboardShouldPersistTaps="always"
         keyboardDismissMode="on-drag"
       />
     );
