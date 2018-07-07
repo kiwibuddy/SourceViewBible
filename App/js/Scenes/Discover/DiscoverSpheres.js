@@ -121,7 +121,7 @@ export default class DiscoverSpheres extends Component<Props> {
                 <Text style={styles.statisticSubtitle}>Sources</Text>
                 <SourcesBarChart
                   style={{ flex: 0, marginLeft: 4 }}
-                  barStyle={{ flex: 0, width: 2, height: 12, marginHorizontal: 1 }}
+                  barStyle={{ flex: 0, width: 1, height: 12, marginHorizontal: 1 }}
                   horizontal={false}
                   data={[
                     { narrator: sphere.countOfSourceType(SourceType.NARRATOR) },
