@@ -3,8 +3,8 @@
 
 import React, { Component } from 'react';
 
-import { Image, Navigator, Platform, Text, TouchableOpacity, View } from 'react-native';
-
+import { Image, Platform, Text, TouchableOpacity, View } from 'react-native';
+import { Navigator } from 'react-native-deprecated-custom-components';
 import EventEmitter from 'EventEmitter';
 
 import { Colors, Localizable, StyleSheet } from '../../Common';
