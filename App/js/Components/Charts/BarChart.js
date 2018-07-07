@@ -1,11 +1,9 @@
 /* @flow */
 'use strict';
 
-import React, { Component, PropTypes } from 'react';
-import {
-  Text,
-  View,
-} from 'react-native';
+import React, { Component } from 'react';
+import { Text, View } from 'react-native';
+import PropTypes from 'prop-types';
 import ColorPropType from 'ColorPropType';
 
 import StyleSheet from '../../Common/StyleSheet';
@@ -13,10 +11,10 @@ import Colors from '../../Common/Colors';
 
 const BarChart = (props: Object) => {
   const chartStyle = [styles.chart, props.style];
-  const stackedBarStyle = [styles.stackedBar, {flexDirection: props.horizontal ? 'row' : 'column'}, props.barStyle];
-  const bars = (props.horizontal ? props.bars.slice(0).reverse() : props.bars.slice(0));
+  const stackedBarStyle = [styles.stackedBar, { flexDirection: props.horizontal ? 'row' : 'column' }, props.barStyle];
+  const bars = props.horizontal ? props.bars.slice(0).reverse() : props.bars.slice(0);
 
-  bars.forEach((bar) => {
+  bars.forEach(bar => {
     if (bar.slices != null) {
       bar.value = bar.slices.reduce((barValue, slice) => barValue + slice.value, 0);
     } else {
@@ -24,13 +22,15 @@ const BarChart = (props: Object) => {
     }
   });
 
-  const maxChartValue = props.maxChartValue ||  Math.max.apply(Math, bars.map(bar => bar.value));
+  const maxChartValue = props.maxChartValue || Math.max(...bars.map(bar => bar.value));
 
   const barGraphs = bars.map((bar, barIndex) => {
-    const barGraph = bar.slices.map((slice, sliceIndex) => <View key={'bar-slice-' + sliceIndex} style={{backgroundColor: slice.color || props.barColor, flex: slice.value}} />);
+    const barGraph = bar.slices.map((slice, sliceIndex) => (
+      <View key={`bar-slice-${sliceIndex}`} style={{ backgroundColor: slice.color || props.barColor, flex: slice.value }} />
+    ));
 
     const delta = maxChartValue - bar.value;
-    const deltaBarGraph = delta > 0 ? <View key={'deltaBar-' + barIndex} style={[styles.deltaBar, props.deltaStyle, {flex: delta}]} /> : null;
+    const deltaBarGraph = delta > 0 ? <View key={`deltaBar-${barIndex}`} style={[styles.deltaBar, props.deltaStyle, { flex: delta }]} /> : null;
     let chart = null;
     if (props.horizontal) {
       chart = [barGraph, deltaBarGraph];
@@ -40,55 +40,61 @@ const BarChart = (props: Object) => {
 
     let label = null;
     if (bar.label) {
-      label = <View style={styles.labelContainer}><Text style={styles.label}  numberOfLines={1}>{bar.label}</Text></View>;
+      label = (
+        <View style={styles.labelContainer}>
+          <Text style={styles.label} numberOfLines={1}>
+            {bar.label}
+          </Text>
+        </View>
+      );
     }
 
     return (
-      <View key={'bar-' + barIndex} style={stackedBarStyle}>
+      <View key={`bar-${barIndex}`} style={stackedBarStyle}>
         {chart}
         <View style={styles.separator} />
         {label}
       </View>
-    )
+    );
   });
 
-  return (
-    <View style={chartStyle}>
-      {barGraphs}
-    </View>
-  );
+  return <View style={chartStyle}>{barGraphs}</View>;
 };
 
 BarChart.propTypes = {
-  bars: PropTypes.arrayOf(PropTypes.shape({
-    color: ColorPropType,
-    value: PropTypes.number,
-    slices: PropTypes.arrayOf(PropTypes.shape({
+  bars: PropTypes.arrayOf(
+    PropTypes.shape({
       color: ColorPropType,
-      value: PropTypes.number.isRequired,
-    })),
-  })).isRequired,
+      value: PropTypes.number,
+      slices: PropTypes.arrayOf(
+        PropTypes.shape({
+          color: ColorPropType,
+          value: PropTypes.number.isRequired
+        })
+      )
+    })
+  ).isRequired,
   barColor: ColorPropType,
   barStyle: PropTypes.any,
   deltaStyle: PropTypes.any,
   horizontal: PropTypes.bool,
-  style: PropTypes.any,
+  style: PropTypes.any
 };
 
 BarChart.defaultProps = {
   horizontal: true
-}
+};
 
 const styles = StyleSheet.create({
   chart: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   deltaBar: {
-    backgroundColor: '#ededed',
+    backgroundColor: '#ededed'
   },
   stackedBar: {
-    flex: 1,
+    flex: 1
   },
   label: {
     flex: 1,
@@ -98,14 +104,14 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     color: 'white',
     backgroundColor: 'transparent',
-    transform: [{rotate: '270deg'}],
-    marginBottom: -100,
+    transform: [{ rotate: '270deg' }],
+    marginBottom: -100
   },
   separator: {
     height: StyleSheet.hairlineWidth,
-    backgroundColor: "rgba(255,255,255,.2)",
-    marginHorizontal: -6,
-  },
+    backgroundColor: 'rgba(255,255,255,.2)',
+    marginHorizontal: -6
+  }
 });
 
 export default BarChart;

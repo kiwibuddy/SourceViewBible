@@ -1,10 +1,11 @@
 /* @flow */
 'use strict';
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ColorPropType from 'ColorPropType';
 import { Animated, TouchableOpacity, View, Text } from 'react-native';
-import StyleSheet from '../../Common/StyleSheet'
+import StyleSheet from '../../Common/StyleSheet';
 
 const SEGMENT_REF = 'segment-';
 
@@ -19,46 +20,40 @@ export default class SegmentedControl extends Component {
   };
 
   state: {
-    selectedIndex: number,
+    selectedIndex: number
   };
 
   constructor(props: Object) {
     super(props);
 
     this.state = {
-      selectedIndex: props.selectedIndex || 0,
+      selectedIndex: props.selectedIndex || 0
     };
   }
 
   render() {
     const values = this.props.values;
     let index = 0;
-    const buttons = values.map((value) => {
-      let buttonIndex = index;
-      let isButtonSelected = buttonIndex === this.state.selectedIndex;
+    const buttons = values.map(value => {
+      const buttonIndex = index;
+      const isButtonSelected = buttonIndex === this.state.selectedIndex;
       index++;
       return this._renderButton(buttonIndex, value, isButtonSelected);
     });
 
     return (
       <View style={[styles.tabBar, this.props.style]}>
-        <View style={styles.buttons}>
-          {buttons}
-        </View>
+        <View style={styles.buttons}>{buttons}</View>
       </View>
     );
   }
 
   _renderButton(index: number, title: string, isSelected: boolean) {
     const tintColor = isSelected ? this.props.tintColor : null;
-    const buttonStyle = isSelected ? {borderBottomColor: tintColor} : {};
-    return(
-      <TouchableOpacity
-        key={'button-' + title}
-        style={[styles.button, this.props.buttonStyle, buttonStyle]}
-        onPress={() => this._onValueChange(index, title)}
-      >
-        <Text style={[styles.buttonTitle, {color: tintColor}]}>{title.toLocaleUpperCase()}</Text>
+    const buttonStyle = isSelected ? { borderBottomColor: tintColor } : {};
+    return (
+      <TouchableOpacity key={`button-${title}`} style={[styles.button, this.props.buttonStyle, buttonStyle]} onPress={() => this._onValueChange(index, title)}>
+        <Text style={[styles.buttonTitle, { color: tintColor }]}>{title.toLocaleUpperCase()}</Text>
       </TouchableOpacity>
     );
   }
@@ -66,7 +61,7 @@ export default class SegmentedControl extends Component {
   _onValueChange = (index, title) => {
     if (index === this.state.selectedIndex) return;
 
-    this.setState({selectedIndex: index});
+    this.setState({ selectedIndex: index });
     if (this.props.onValueChange) this.props.onValueChange(title);
   };
 }
@@ -74,22 +69,22 @@ export default class SegmentedControl extends Component {
 const styles = StyleSheet.create({
   tabBar: {
     height: 48,
-    backgroundColor: '#FFF',
+    backgroundColor: '#FFF'
   },
   buttons: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-around'
   },
   button: {
     flex: 1,
     borderBottomWidth: 3,
     borderBottomColor: 'transparent',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   buttonTitle: {
     fontSize: 14,
     fontFamily: 'sans-serif-medium',
-    alignSelf: 'center',
-  },
+    alignSelf: 'center'
+  }
 });

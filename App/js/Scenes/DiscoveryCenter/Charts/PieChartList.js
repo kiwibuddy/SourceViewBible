@@ -1,8 +1,8 @@
 /* @flow */
 'use strict';
 
-import React, { Component, PropTypes } from 'react';
-const ReactComponentWithPureRenderMixin = require('react/lib/ReactComponentWithPureRenderMixin');
+import React, { Component } from 'react';
+
 
 import {
   ListView,
