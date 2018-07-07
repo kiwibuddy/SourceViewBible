@@ -26,7 +26,7 @@
 //
 
 #import "RNParallaxMotion.h"
-#import "RCTEventDispatcher.h"
+#import <React/RCTEventDispatcher.h>
 
 @import CoreMotion;
 

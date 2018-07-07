@@ -25,7 +25,7 @@
 //  THE SOFTWARE.
 //
 
-#import "RCTBridgeModule.h"
+#import <React/RCTBridgeModule.h>
 
 @interface RNParallaxMotion : NSObject <RCTBridgeModule>
 
