@@ -19,7 +19,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>2573</string>
+	<string>2610</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -50,7 +50,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>You can save your discoveries in your photos.</string>
 	<key>UIAppFonts</key>
