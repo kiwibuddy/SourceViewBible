@@ -21,7 +21,7 @@ const SphereType = {
 const ReaderBaseFontSize = 17;
 const ReaderBaseLineHeight = 31;
 const ReaderFontStepSize = 2;
-const ReaderWebFontConversion = 23 / 17;
+const ReaderWebFontConversion = 13 / 17;
 
 const Links = {
   Website: 'http://sourceviewbible.com',
