@@ -1,8 +1,8 @@
 /* @flow */
 'use strict';
 
-import React, { Component } from 'react';
-import { Platform, Text, View } from 'react-native';
+import React from 'react';
+import { Platform, Text, View, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 
 import { StyleSheet } from '../../Common';
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
 
 NavigationHeaderTitle.propTypes = {
   children: PropTypes.node.isRequired,
-  style: View.propTypes.style,
+  style: ViewPropTypes.style,
   textStyle: Text.propTypes.style,
 };
 
