@@ -8,7 +8,7 @@ import ReactNative from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import Share from 'react-native-share';
 
-const { LayoutAnimation, Platform, SafeAreaView, View } = ReactNative;
+const { LayoutAnimation, Platform, View } = ReactNative;
 
 import { Localizable, StyleSheet } from '../../Common';
 import WebView from '../../Components/Common/WebView';
@@ -118,19 +118,17 @@ export default class Reader extends Component {
     return (
       <View key={key} style={styles.container}>
         <FilterBar onPressClear={this._onPressClearFilter} />
-        <SafeAreaView style={{ flex: 1 }}>
-          <WebView
-            ref={webview => {
-              this.webview = webview;
-            }}
-            key="scripture"
-            decelerationRate="normal"
-            injectedJavaScript={injectedJavaScript}
-            onMessage={this._onMessage}
-            style={styles.webview}
-            source={source}
-          />
-        </SafeAreaView>
+        <WebView
+          ref={webview => {
+            this.webview = webview;
+          }}
+          key="scripture"
+          decelerationRate="normal"
+          injectedJavaScript={injectedJavaScript}
+          onMessage={this._onMessage}
+          style={styles.webview}
+          source={source}
+        />
         {toolbar}
       </View>
     );
