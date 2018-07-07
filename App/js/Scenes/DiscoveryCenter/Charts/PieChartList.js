@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 
-import { ListView, RecyclerViewBackedScrollView, Text, View } from 'react-native';
+import { ListView, Text, View } from 'react-native';
 
 import { StyleSheet, Localizable } from '../../../Common';
 
@@ -46,7 +46,6 @@ export default class PieChartList extends Component {
           dataSource={dataSource}
           renderHeader={this.props.renderHeader}
           renderRow={this._renderRow}
-          renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
           style={styles.listView}
         />

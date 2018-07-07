@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 
-import { RecyclerViewBackedScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { ListView } from '../../Components/Common/DatabaseListView';
 
 import { Colors, StyleSheet, Localizable } from '../../Common';
@@ -47,7 +47,6 @@ export default class BookWords extends Component {
           dataSource={this.state.dataSource}
           renderHeader={this._renderHeader}
           renderRow={this._renderRow}
-          renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
           pageSize={10}
         />

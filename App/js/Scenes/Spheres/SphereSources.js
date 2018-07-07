@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 
-import { Platform, RecyclerViewBackedScrollView, Text, TextInput, View, TouchableOpacity } from 'react-native';
+import { Platform, Text, TextInput, View, TouchableOpacity } from 'react-native';
 import { ListView } from '../../Components/Common/DatabaseListView';
 
 import { Colors, Localizable, StyleSheet } from '../../Common';
@@ -61,7 +61,6 @@ export default class SphereSources extends Component {
         enableEmptySections={true}
         renderHeader={this._renderHeader}
         renderRow={this._renderRow}
-        renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
         renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={[StyleSheet.styles.separator, { marginLeft: 8 }]} />}
         keyboardShouldPersistTaps={true}
         keyboardDismissMode="on-drag"

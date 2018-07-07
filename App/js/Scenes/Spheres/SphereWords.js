@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 
-import { ListView, RecyclerViewBackedScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { ListView, Text, TouchableOpacity, View } from 'react-native';
 
 import { Colors, StyleSheet, Localizable } from '../../Common';
 
@@ -46,7 +46,6 @@ export default class SphereWords extends Component {
           dataSource={this.state.dataSource}
           renderHeader={this._renderHeader}
           renderRow={this._renderRow}
-          renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
           pageSize={10}
         />

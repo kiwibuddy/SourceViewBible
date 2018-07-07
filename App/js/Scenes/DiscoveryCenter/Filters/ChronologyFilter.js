@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 
-import { Image, RecyclerViewBackedScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { ListView } from '../../../Components/Common/DatabaseListView';
 
 import { Colors, StyleSheet } from '../../../Common';
@@ -49,7 +49,6 @@ export default class Chronologys extends Component {
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this._renderRow}
-          renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
         />
       </View>

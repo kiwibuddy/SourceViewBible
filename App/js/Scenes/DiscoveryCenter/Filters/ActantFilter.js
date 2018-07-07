@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 
-import { RecyclerViewBackedScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { ListView } from '../../../Components/Common/DatabaseListView';
 
 import { StyleSheet, Localizable } from '../../../Common';
@@ -58,7 +58,6 @@ export default class Actants extends Component {
           dataSource={dataSource}
           enableEmptySections={true}
           renderRow={this._renderRow}
-          renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
           keyboardShouldPersistTaps={true}
           keyboardDismissMode="on-drag"

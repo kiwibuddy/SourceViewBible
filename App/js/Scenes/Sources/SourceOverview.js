@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 
-import { Image, LayoutAnimation, ListView, Platform, RecyclerViewBackedScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Image, LayoutAnimation, ListView, Platform, Text, TouchableOpacity, View } from 'react-native';
 
 import { Colors, Constants, StyleSheet, Localizable } from '../../Common';
 
@@ -114,7 +114,6 @@ export default class SourceOverview extends Component {
           enableEmptySections={true}
           renderHeader={this._renderHeader}
           renderRow={this._renderRow}
-          renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSectionHeader={this._renderSectionHeader}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
           pageSize={10}

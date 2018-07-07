@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 
-import { Platform, RecyclerViewBackedScrollView, Text, View, TouchableOpacity } from 'react-native';
+import { Platform, Text, View, TouchableOpacity } from 'react-native';
 import { ListView } from '../../Components/Common/DatabaseListView';
 import Icon from '../../Components/Common/Icon';
 
@@ -79,7 +79,6 @@ export default class SphereBooks extends Component {
         dataSource={this.state.dataSource}
         renderHeader={this._renderHeader}
         renderRow={this._renderRow}
-        renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
         renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={StyleSheet.styles.separator} />}
         pageSize={10}
         style={styles.listView}

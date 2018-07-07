@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 
-import { Image, LayoutAnimation, Platform, RecyclerViewBackedScrollView, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Image, LayoutAnimation, Platform, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { ListView } from '../../Components/Common/DatabaseListView';
 
 import { Analytics, Colors, StyleSheet, Localizable } from '../../Common';
@@ -82,7 +82,6 @@ export default class Sources extends Component {
           ref="LISTVIEW_REF"
           dataSource={dataSource}
           renderRow={this._renderRow}
-          renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSectionHeader={this._renderSectionHeader}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
           keyboardShouldPersistTaps={true}

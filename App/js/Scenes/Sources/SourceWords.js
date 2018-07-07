@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 
-import { LayoutAnimation, ListView, RecyclerViewBackedScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { LayoutAnimation, ListView, Text, TouchableOpacity, View } from 'react-native';
 
 import { Colors, StyleSheet, Localizable } from '../../Common';
 
@@ -60,7 +60,6 @@ export default class SourceWords extends Component {
           dataSource={this.state.dataSource}
           renderHeader={this._renderHeader}
           renderRow={this._renderRow}
-          renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
         />
       </View>

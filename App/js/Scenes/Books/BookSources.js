@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 
-import { RecyclerViewBackedScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { ListView } from '../../Components/Common/DatabaseListView';
 
 import { Constants, StyleSheet, Localizable } from '../../Common';
@@ -60,7 +60,6 @@ export default class BookSources extends Component {
           enableEmptySections={true}
           renderHeader={this._renderHeader}
           renderRow={this._renderRow}
-          renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={[StyleSheet.styles.separator, { marginLeft: 0 }]} />}
           pageSize={10}
         />

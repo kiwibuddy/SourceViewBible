@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 
-import { RecyclerViewBackedScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { ListView } from '../../Components/Common/DatabaseListView';
 
 import { Colors, StyleSheet, Localizable } from '../../Common';
@@ -56,7 +56,6 @@ export default class SourceBooks extends Component {
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this._renderRow}
-          renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSectionHeader={this._renderSectionHeader}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
         />

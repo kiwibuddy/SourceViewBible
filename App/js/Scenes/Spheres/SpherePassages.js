@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 
-import { ActivityIndicator, ListView, Platform, RecyclerViewBackedScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, ListView, Platform, Text, TouchableOpacity, View } from 'react-native';
 
 import { StyleSheet, Localizable } from '../../Common';
 
@@ -58,7 +58,6 @@ export default class SpherePassages extends Component {
       <ListView
         dataSource={this.state.dataSource}
         renderRow={this._renderPassage}
-        renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
         renderSectionHeader={this._renderSectionHeader}
         renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={StyleSheet.styles.separator} />}
         pageSize={10}
