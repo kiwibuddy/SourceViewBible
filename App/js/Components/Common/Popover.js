@@ -3,11 +3,14 @@
 
 import React, { Component } from 'react';
 
-import { Platform, View } from 'react-native';
+import { Dimensions, Platform, View } from 'react-native';
 import { Navigator } from 'react-native-deprecated-custom-components';
 import Modal from './Modal';
 
 import { StyleSheet } from '../../Common';
+
+const window = Dimensions.get('window');
+const isSafeAreaNeeded = Platform.OS === 'ios' && !Platform.isPad && !Platform.isTVOS && (window.height === 812 || window.width === 812);
 
 const NavigatorNavigationBarStyles = {
   ...Navigator.NavigationBar.Styles,
@@ -104,7 +107,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0.99)',
     borderRadius: 4,
     position: 'absolute',
-    top: 24,
+    top: isSafeAreaNeeded ? 44 : 24,
     bottom: 4,
     right: 4,
     left: 4,
