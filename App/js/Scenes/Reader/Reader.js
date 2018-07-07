@@ -8,9 +8,10 @@ import ReactNative from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import Share from 'react-native-share';
 
-const { LayoutAnimation, Platform, View, WebView } = ReactNative;
+const { LayoutAnimation, Platform, View } = ReactNative;
 
 import { Localizable, StyleSheet } from '../../Common';
+import WebView from '../../Components/Common/WebView';
 
 import { bookURL, bookmarkURL, readerSettingsURL } from '../../Navigation';
 import { NavigationHeader, NavigationBarButton, Toolbar } from '../../Components/Navigation';

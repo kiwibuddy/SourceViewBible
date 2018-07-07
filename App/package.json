@@ -27,6 +27,7 @@
     "react-native-sqlite-storage": "^3.3.6",
     "react-native-svg": "^6.4.1",
     "react-native-vector-icons": "^4.6.0",
+    "react-native-wkwebview-reborn": "^1.21.0",
     "realm": "2.4.0"
   },
   "devDependencies": {
