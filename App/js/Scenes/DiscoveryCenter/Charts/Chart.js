@@ -78,7 +78,7 @@ const DropdownButton = (props: DropdownButtonProps) => {
 const Chart = (props: Object) => {
   return (
     <View style={styles.chart} {...props}>
-      <LinearGradient colors={['#59626A', '#323B43']} start={[0.5, 0.25]} end={[0.5, 1.0]} style={{ flex: 1 }}>
+      <LinearGradient colors={['#59626A', '#323B43']} start={{ x: 0, y: 0.25 }} end={{ x: 0.5, y: 1 }} style={{ flex: 1 }}>
         {props.children}
       </LinearGradient>
     </View>

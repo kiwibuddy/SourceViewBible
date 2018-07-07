@@ -2,30 +2,14 @@
 'use strict';
 
 import React, { Component } from 'react';
-import ReactNative, {
-  View,
-  Text,
-  Image,
-  Platform,
-  TouchableOpacity,
-  RecyclerViewBackedScrollView,
-  Dimensions
-} from 'react-native';
+import ReactNative, { View, Text, Image, Platform, TouchableOpacity, RecyclerViewBackedScrollView, Dimensions } from 'react-native';
 import { ListView } from '../../Components/Common/DatabaseListView';
 
 const { width: WIDTH } = Dimensions.get('window');
 
-import {
-  Colors,
-  Constants,
-  NumberHelper,
-  StyleSheet,
-} from '../../Common';
+import { Colors, Constants, NumberHelper, StyleSheet } from '../../Common';
 
-const {
-  SourceType,
-  SphereType
-} = Constants;
+const { SourceType, SphereType } = Constants;
 
 import LinearGradient from 'react-native-linear-gradient';
 import { SourcesBarChart, SpheresBarChart } from '../../Components/Charts';
@@ -49,8 +33,8 @@ type Props = {
 
 type State = {
   dataSource: any,
-  currentPage: number
-}
+  currentPage: number,
+};
 
 export default class DiscoverSources extends Component {
   state: State;
@@ -58,10 +42,10 @@ export default class DiscoverSources extends Component {
   constructor(props: Object) {
     super(props);
 
-    const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
+    const dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2 });
     this.state = {
       dataSource: dataSource,
-      currentPage: 0
+      currentPage: 0,
     };
   }
 
@@ -78,24 +62,24 @@ export default class DiscoverSources extends Component {
     }
 
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(sources)
+      dataSource: this.state.dataSource.cloneWithRows(sources),
     });
   }
 
   render() {
     return (
-      <View style={{flex: 1}}>
+      <View style={{ flex: 1 }}>
         <View style={styles.container}>
-         <TouchableOpacity onPress={() => this.props.navigate(sourcesURL({title: Localizable.t('sources.text')}))}>
-           <View style={styles.sectionHeaderContainer}>
-             <Text style={StyleSheet.styles.sectionHeaderTitle}>SOURCES</Text>
-             <View style={styles.sectionHeaderDetail}>
-               <Text style={[StyleSheet.styles.sectionHeaderTitle, {color: Colors.tint, fontWeight: 'normal'}]}>View All</Text>
-               <Image source={require('../../Images/common/disclosure.png')}  style={styles.disclosure} />
-             </View>
-             </View>
-         </TouchableOpacity>
-          <View style={{paddingVertical: 5, flexDirection: 'column'}}>
+          <TouchableOpacity onPress={() => this.props.navigate(sourcesURL({ title: Localizable.t('sources.text') }))}>
+            <View style={styles.sectionHeaderContainer}>
+              <Text style={StyleSheet.styles.sectionHeaderTitle}>SOURCES</Text>
+              <View style={styles.sectionHeaderDetail}>
+                <Text style={[StyleSheet.styles.sectionHeaderTitle, { color: Colors.tint, fontWeight: 'normal' }]}>View All</Text>
+                <Image source={require('../../Images/common/disclosure.png')} style={styles.disclosure} />
+              </View>
+            </View>
+          </TouchableOpacity>
+          <View style={{ paddingVertical: 5, flexDirection: 'column' }}>
             <ListView
               dataSource={this.state.dataSource}
               enableEmptySections={true}
@@ -106,12 +90,9 @@ export default class DiscoverSources extends Component {
               pagingEnabled={true}
               renderRow={this._renderSource}
               showsHorizontalScrollIndicator={false}
-              style={{marginHorizontal: 4}}
+              style={{ marginHorizontal: 4 }}
             />
-            <PageControl
-              numberOfPages={3}
-              currentPage={this.state.currentPage}
-            />
+            <PageControl numberOfPages={3} currentPage={this.state.currentPage} />
           </View>
         </View>
       </View>
@@ -123,38 +104,49 @@ export default class DiscoverSources extends Component {
     const spherePercent = (source.sphereWordCount / source.wordCount) * 100;
 
     return (
-      <TouchableOpacity key={'source-' + source.id} style={styles.itemContainer} onPress={ () => this.props.navigate(sourceURL({sourceID: source.id, title: source.name})) }>
+      <TouchableOpacity
+        key={'source-' + source.id}
+        style={styles.itemContainer}
+        onPress={() => this.props.navigate(sourceURL({ sourceID: source.id, title: source.name }))}
+      >
         <View style={styles.item}>
           <LinearGradient
             colors={Colors.sources[source.principalSourceType].gradient.tiny}
-            start={[0.0, 0.25]} end={[0.5, 1.0]}
+            start={{ x: 0, y: 0.25 }}
+            end={{ x: 0.5, y: 1 }}
             style={styles.gradient}
           />
-          <SourceIcon
-            source={source}
-            size={40}
-            style={styles.icon}
-          />
+          <SourceIcon source={source} size={40} style={styles.icon} />
           <View style={styles.nameContainer}>
-            <Text numberOfLines={2} style={styles.sourceTitle}>{source.name}</Text>
+            <Text numberOfLines={2} style={styles.sourceTitle}>
+              {source.name}
+            </Text>
           </View>
           <View style={styles.keyline} />
           <View style={styles.statisticsContainer}>
-            <View style={styles.statisticContainer} >
-              <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-                <Text style={styles.statisticTitle}>{Localizable.toPercentage(spherePercent, {precision: 0})}</Text>
+            <View style={styles.statisticContainer}>
+              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={styles.statisticTitle}>{Localizable.toPercentage(spherePercent, { precision: 0 })}</Text>
                 <Text style={styles.statisticSubtitle}>Spheres</Text>
                 <SpheresBarChart
-                  style={{flex: 0, marginLeft: 2}}
-                  barStyle={{flex: 0, width: 2, height: 12, marginHorizontal: 1}}
+                  style={{ flex: 0, marginLeft: 2 }}
+                  barStyle={{ flex: 0, width: 2, height: 12, marginHorizontal: 1 }}
                   horizontal={false}
-                  data={[{family: source.countOfSphereType(SphereType.FAMILY)}, {economics: source.countOfSphereType(SphereType.ECONOMICS)}, {government: source.countOfSphereType(SphereType.GOVERNMENT)}, {religion: source.countOfSphereType(SphereType.RELIGION)}, {education: source.countOfSphereType(SphereType.EDUCATION)}, {communication: source.countOfSphereType(SphereType.COMMUNICATION)}, {celebration: source.countOfSphereType(SphereType.CELEBRATION)}]}
+                  data={[
+                    { family: source.countOfSphereType(SphereType.FAMILY) },
+                    { economics: source.countOfSphereType(SphereType.ECONOMICS) },
+                    { government: source.countOfSphereType(SphereType.GOVERNMENT) },
+                    { religion: source.countOfSphereType(SphereType.RELIGION) },
+                    { education: source.countOfSphereType(SphereType.EDUCATION) },
+                    { communication: source.countOfSphereType(SphereType.COMMUNICATION) },
+                    { celebration: source.countOfSphereType(SphereType.CELEBRATION) },
+                  ]}
                 />
               </View>
             </View>
-            <View style={styles.statisticContainer} >
-              <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-                <Text style={styles.statisticWordsTitle}>{Localizable.toNumber(source.wordCount, {precision: 0})}</Text>
+            <View style={styles.statisticContainer}>
+              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={styles.statisticWordsTitle}>{Localizable.toNumber(source.wordCount, { precision: 0 })}</Text>
                 <Text style={styles.statisticSubtitle}>Words</Text>
               </View>
             </View>
@@ -167,13 +159,13 @@ export default class DiscoverSources extends Component {
   _onScrollEnd = (e: Object) => {
     // making our events coming from android compatible to updateIndex logic
     if (!e.nativeEvent.contentOffset) {
-      e.nativeEvent.contentOffset = {x: e.nativeEvent.position * WIDTH}
+      e.nativeEvent.contentOffset = { x: e.nativeEvent.position * WIDTH };
     }
 
     const currentPage = Math.floor((e.nativeEvent.contentOffset.x - WIDTH / 2) / WIDTH) + 1;
 
     this.setState({
-      currentPage: currentPage
+      currentPage: currentPage,
     });
   };
 }
@@ -205,7 +197,7 @@ const styles = StyleSheet.create({
   },
 
   itemContainer: {
-    width: ((WIDTH - 8) / 3),
+    width: (WIDTH - 8) / 3,
   },
   item: {
     marginHorizontal: 4,
@@ -220,29 +212,29 @@ const styles = StyleSheet.create({
     shadowRadius: 0.4,
     shadowOffset: {
       height: 1,
-      width: 0
+      width: 0,
     },
   },
   ...Platform.select({
-      android: {
-        item: {
-          marginHorizontal: 4,
-          marginBottom: 8,
-          borderColor: 'rgba(0, 0, 0, 0.15)',
-          borderWidth: StyleSheet.hairlineWidth,
-          borderRadius: 4,
-          backgroundColor: '#fff',
-          height: 142,
-          elevation: .5,
-        },
+    android: {
+      item: {
+        marginHorizontal: 4,
+        marginBottom: 8,
+        borderColor: 'rgba(0, 0, 0, 0.15)',
+        borderWidth: StyleSheet.hairlineWidth,
+        borderRadius: 4,
+        backgroundColor: '#fff',
+        height: 142,
+        elevation: 0.5,
       },
+    },
   }),
   gradient: {
     flex: 0,
     height: 3,
     borderTopLeftRadius: 4,
     borderTopRightRadius: 4,
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   icon: {
     alignSelf: 'center',
@@ -250,7 +242,7 @@ const styles = StyleSheet.create({
   },
   sourceTitle: {
     flex: 0,
-    fontSize: (WIDTH <= 320 ? 11 : 13),
+    fontSize: WIDTH <= 320 ? 11 : 13,
     color: '#59626a',
     textAlign: 'center',
     fontWeight: '500',
@@ -268,7 +260,7 @@ const styles = StyleSheet.create({
   statisticsContainer: {
     flex: 1,
     flexDirection: 'column',
-    marginHorizontal: (WIDTH <= 320 ? 2 : 5),
+    marginHorizontal: WIDTH <= 320 ? 2 : 5,
   },
   statisticContainer: {
     marginTop: 7,
@@ -277,14 +269,14 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: Colors.tint,
     marginRight: 2,
-    margin: (WIDTH <= 320 ? 0 : null),
-    height: (WIDTH <= 320 ? 0 : null),
+    margin: WIDTH <= 320 ? 0 : null,
+    height: WIDTH <= 320 ? 0 : null,
   },
   statisticWordsTitle: {
     fontSize: 11,
     color: Colors.tint,
     marginRight: 3,
-    marginLeft: (WIDTH <= 320 ? 2 : null),
+    marginLeft: WIDTH <= 320 ? 2 : null,
   },
   statisticSubtitle: {
     flex: 1,
@@ -311,7 +303,7 @@ const styles = StyleSheet.create({
     paddingBottom: 8,
   },
   keyline: {
-    flex:0,
+    flex: 0,
     height: StyleSheet.hairlineWidth,
     backgroundColor: '#e0e0e0',
     marginHorizontal: 2,
@@ -319,5 +311,5 @@ const styles = StyleSheet.create({
   nameContainer: {
     height: 40,
     justifyContent: 'center',
-  }
+  },
 });

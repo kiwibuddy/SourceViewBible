@@ -3,18 +3,11 @@
 
 import React, { Component } from 'react';
 
-import {
-  View,
-  Text
-} from 'react-native';
+import { View, Text } from 'react-native';
 
-import {
-  Colors,
-  StyleSheet
-} from '../../Common';
+import { Colors, StyleSheet } from '../../Common';
 
 import LinearGradient from 'react-native-linear-gradient';
-
 
 const WordCloud = (props: Object) => {
   const style = props.style;
@@ -23,21 +16,13 @@ const WordCloud = (props: Object) => {
   if (props.backgroundColors) {
     return (
       <View style={style}>
-        <LinearGradient
-          colors={props.backgroundColors}
-          start={[0.0, 0.25]} end={[0.5, 1.0]}
-          style={styles.container}
-        >
-        {words}
+        <LinearGradient colors={props.backgroundColors} start={{ x: 0, y: 0.25 }} end={{ x: 0.5, y: 1 }} style={styles.container}>
+          {words}
         </LinearGradient>
       </View>
     );
   } else {
-    return (
-      <View style={[styles.container, style]}>
-        {words}
-      </View>
-    );
+    return <View style={[styles.container, style]}>{words}</View>;
   }
 };
 
@@ -45,7 +30,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFF',
     flex: 1,
-  }
+  },
 });
 
 export default WordCloud;

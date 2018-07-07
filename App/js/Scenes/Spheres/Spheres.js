@@ -110,7 +110,7 @@ export default class Spheres extends Component {
     const sphereSubtitle = sphere.isFoundational ? ' ' : Localizable.toPercentage(spherePercent, { precision: 0 });
 
     return (
-      <LinearGradient colors={['#E1E9EE', '#FFFFFF']} start={[0.5, 0.25]} end={[0.5, 1.0]} style={styles.carouselContainer}>
+      <LinearGradient colors={['#E1E9EE', '#FFFFFF']} start={{ x: 0, y: 0.25 }} end={{ x: 0.5, y: 1 }} style={styles.carouselContainer}>
         <View style={styles.carousel}>
           <TouchableOpacity
             key={'sphere-' + sortedSpheres[4].id}

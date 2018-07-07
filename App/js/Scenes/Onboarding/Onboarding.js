@@ -3,21 +3,9 @@
 
 import React, { Component } from 'react';
 
-import {
-  Dimensions,
-  Image,
-  LayoutAnimation,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Dimensions, Image, LayoutAnimation, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
-import {
-  Colors,
-  Localizable,
-  StyleSheet,
-} from '../../Common';
+import { Colors, Localizable, StyleSheet } from '../../Common';
 
 import LinearGradient from 'react-native-linear-gradient';
 import PageControl from '../../Components/Common/PageControl';
@@ -43,17 +31,13 @@ export default class Onboarding extends Component {
 
   constructor(props: Props) {
     super(props);
-    this.state = {currentPage: 0};
+    this.state = { currentPage: 0 };
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <LinearGradient
-          colors={['#E1E9EE', '#FFFFFF']}
-          start={[0.5, 0.25]} end={[0.5, 1.0]}
-          style={styles.onboardingContainer}
-        >
+        <LinearGradient colors={['#E1E9EE', '#FFFFFF']} start={{ x: 0, y: 0.25 }} end={{ x: 0.5, y: 1 }} style={styles.onboardingContainer}>
           <ScrollView
             ref={SCROLLVIEW_REF}
             horizontal={true}
@@ -73,7 +57,9 @@ export default class Onboarding extends Component {
               <View style={styles.onboardingContent}>
                 <Image source={require('./Images/onboarding-2.png')} />
                 <Text style={styles.contentHeader}>What's inside</Text>
-                <Text style={styles.contentBody}>Discovery begins when we look deeper into God's story: what's written, who said it, and how it can impact society.</Text>
+                <Text style={styles.contentBody}>
+                  Discovery begins when we look deeper into God's story: what's written, who said it, and how it can impact society.
+                </Text>
               </View>
             </View>
             <View style={styles.onboardingContainer}>
@@ -83,7 +69,7 @@ export default class Onboarding extends Component {
                 <Text style={styles.contentBody}>A new Scripture layout and dynamic visualizations enabling you to encounter the Bible like never before.</Text>
               </View>
             </View>
-            <View style={[styles.onboardingContainer, {overflow: 'hidden'}]}>
+            <View style={[styles.onboardingContainer, { overflow: 'hidden' }]}>
               <View style={styles.onboardingContent}>
                 <Image source={require('./Images/onboarding-4.png')} />
                 <Text style={styles.contentHeader}>Words matter</Text>
@@ -101,10 +87,7 @@ export default class Onboarding extends Component {
           </ScrollView>
           {this._renderControls()}
           <View style={styles.pageControlContainer}>
-            <PageControl
-              numberOfPages={NUMBER_OF_PAGES}
-              currentPage={this.state.currentPage}
-            />
+            <PageControl numberOfPages={NUMBER_OF_PAGES} currentPage={this.state.currentPage} />
           </View>
         </LinearGradient>
       </View>
@@ -140,8 +123,8 @@ export default class Onboarding extends Component {
     const offset = (currentPage + 1) * WIDTH;
 
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    this.setState({currentPage: currentPage + 1}, () => {
-      this.refs[SCROLLVIEW_REF].scrollTo({x: offset, animated: true});
+    this.setState({ currentPage: currentPage + 1 }, () => {
+      this.refs[SCROLLVIEW_REF].scrollTo({ x: offset, animated: true });
     });
   };
 
@@ -149,19 +132,19 @@ export default class Onboarding extends Component {
     const { currentPage } = this.state;
     // making our events coming from android compatible to updateIndex logic
     if (!e.nativeEvent.contentOffset) {
-      e.nativeEvent.contentOffset = {x: e.nativeEvent.position * WIDTH}
+      e.nativeEvent.contentOffset = { x: e.nativeEvent.position * WIDTH };
     }
 
     const page = Math.floor((e.nativeEvent.contentOffset.x - WIDTH / 2) / WIDTH) + 1;
     if (currentPage != page) {
       LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-      this.setState({currentPage: page});
+      this.setState({ currentPage: page });
     }
   };
 
   _onPressDone = () => {
-    Preference.setBooleanForKey(true, Preference.Keys.Launch.Onboarded)
-    this.props.navigate(discoverURL({title: Localizable.t('discover')}), {replace: true});
+    Preference.setBooleanForKey(true, Preference.Keys.Launch.Onboarded);
+    this.props.navigate(discoverURL({ title: Localizable.t('discover') }), { replace: true });
   };
 }
 
@@ -174,12 +157,12 @@ const styles = StyleSheet.create({
     width: WIDTH,
   },
   scrollView: {
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
   },
   onboardingContent: {
     alignItems: 'center',
     marginHorizontal: 30,
-    marginTop: (WIDTH <= 320 ? 30 : 50),
+    marginTop: WIDTH <= 320 ? 30 : 50,
   },
   contentHeader: {
     fontSize: 27,
@@ -190,14 +173,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   contentBody: {
-    fontSize: (WIDTH <= 320 || HEIGHT <= 600 ? 18 : 21),
+    fontSize: WIDTH <= 320 || HEIGHT <= 600 ? 18 : 21,
     lineHeight: 25,
     color: '#59626A',
     textAlign: 'center',
   },
   onboardingControls: {
     paddingVertical: 10,
-    marginBottom: (HEIGHT > 600 ? 50 : 0),
+    marginBottom: HEIGHT > 600 ? 50 : 0,
   },
   pageControlContainer: {
     marginBottom: 10,
@@ -208,7 +191,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 20,
     borderWidth: 1,
-    overflow:'hidden',
+    overflow: 'hidden',
     alignSelf: 'center',
     marginBottom: 10,
     justifyContent: 'center',
