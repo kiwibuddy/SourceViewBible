@@ -3,13 +3,15 @@
 
 import React, { Component } from 'react';
 
-import { Animated, Platform, View } from 'react-native';
-
+import { Animated, Dimensions, Platform, View } from 'react-native';
 import NavigationHeaderTitle from './NavigationHeaderTitle';
 
 import { StyleSheet } from '../../Common';
 
 type BarComponentRenderer = ?(props: Object) => ?ReactElement<any>;
+
+const window = Dimensions.get('window');
+const isSafeAreaNeeded = Platform.OS === 'ios' && !Platform.isPad && !Platform.isTVOS && (window.height === 812 || window.width === 812);
 
 type Props = {
   navigate: Function,
@@ -25,7 +27,7 @@ type Props = {
 const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
 
-const BACKGROUND_COLOR = Platform.OS === 'ios' ? 'rgba(248, 248, 248, .85)' : '#F9F9F9';
+const BACKGROUND_COLOR = '#F9F9F9';
 const ELEVATION = 2;
 
 export default class NavigationHeader extends Component {
@@ -55,12 +57,16 @@ export default class NavigationHeader extends Component {
       this.props.statusBarHeight instanceof Animated.Value
         ? Animated.add(this.props.statusBarHeight, new Animated.Value(APPBAR_HEIGHT))
         : APPBAR_HEIGHT + this.props.statusBarHeight;
+
+    const safeAreaStyle = isSafeAreaNeeded ? { paddingTop: 20 } : {};
     return (
-      <Animated.View style={[styles.appbar, { height: barHeight }, style]} {...viewProps}>
-        {this._renderLeft(this.props)}
-        {this._renderTitle(this.props)}
-        {this._renderRight(this.props)}
-      </Animated.View>
+      <View style={[safeAreaStyle, { backgroundColor: BACKGROUND_COLOR }]}>
+        <Animated.View style={[styles.appbar, { height: barHeight }, style]} {...viewProps}>
+          {this._renderLeft(this.props)}
+          {this._renderTitle(this.props)}
+          {this._renderRight(this.props)}
+        </Animated.View>
+      </View>
     );
   }
 
