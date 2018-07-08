@@ -209,9 +209,10 @@ export default class Reader extends Component {
     if (didGoBack && scroll && scroll.bookID === this.state.bookID) {
       return `document.body.scrollTop = ${scroll.top}; ${occurrenceScript}`;
     } else if (anchor) {
+      const hash = Platform.OS === 'android' ? encodeURIComponent(anchor) : anchor;
       return `
         var documentReadyCallback = function() {
-            var hash = '${encodeURIComponent(anchor)}';
+            var hash = '${hash}';
             document.getElementById(hash).scrollIntoView();
             document.getElementById('scripture').scrollTop = document.getElementById('scripture').scrollTop - 8;
             ${occurrenceScript}
