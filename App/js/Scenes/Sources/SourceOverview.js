@@ -164,7 +164,7 @@ export default class SourceOverview extends Component {
         {metaData}
         <View style={styles.sourceAvatarContainer}>
           <View style={styles.sourceBackgroundContainer}>
-            <Image style={styles.sourceBackground} source={require('../../Images/sources/avatar-background.png')} />
+            <Image source={require('../../Images/sources/avatar-background.png')} />
           </View>
           <View style={styles.sourceIconContainer}>
             <SourceIcon principalSourceType={principalSourceType} source={source} size={100} style={[styles.sourceIcon]} />
@@ -535,19 +535,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFF',
   },
-  sourceBackgroundContainer: {
-    alignSelf: 'center',
-  },
-  sourceIconContainer: {
-    alignSelf: 'center',
-    backgroundColor: 'transparent',
-    marginTop: Platform.OS === 'ios' ? -107 : -108,
-  },
   sourceAvatarContainer: {
     position: 'absolute',
     top: 100,
     right: 0,
     left: 0,
+    height: 130,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  sourceBackgroundContainer: {
+    position: 'absolute',
+  },
+  sourceIconContainer: {
+    backgroundColor: 'transparent',
   },
   listItemContainer: {
     paddingLeft: 15,
