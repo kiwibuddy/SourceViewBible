@@ -336,13 +336,6 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
-		AB986F5020F2526100921226 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 22402A33C4E7420E9F5C2390 /* InAppUtils.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 46E6943D1B289730000B634E;
-			remoteInfo = InAppUtilsTests;
-		};
 		ABE4D78120F0F96500590766 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BC376FDF87524A4FB80A6DE7 /* RNFS.xcodeproj */;
@@ -955,7 +948,6 @@
 			isa = PBXGroup;
 			children = (
 				ABE4D79D20F0F96500590766 /* libInAppUtils.a */,
-				AB986F5120F2526100921226 /* InAppUtilsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1515,13 +1507,6 @@
 			fileType = archive.ar;
 			path = libRCTText.a;
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		AB986F5120F2526100921226 /* InAppUtilsTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = InAppUtilsTests.xctest;
-			remoteRef = AB986F5020F2526100921226 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		ABE4D78220F0F96500590766 /* libRNFS.a */ = {
