@@ -1,8 +1,6 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import Realm from 'realm';
-import * as FileSystem from 'expo-file-system';
-import { Asset } from 'expo-asset';
-import { realmSchema, Book, Actant, Sphere, Bible, Chapter } from './schema';
+import { realmSchema, Book, Actant, Sphere, Bible } from './schema';
 
 interface DatabaseContextType {
   realm: Realm | null;
@@ -46,25 +44,14 @@ export function DatabaseProvider({ children, encryptionKey }: DatabaseProviderPr
 
     const initDatabase = async () => {
       try {
-        // For development, we'll create an empty database
-        // In production, we'll copy the bundled database from assets
-        const dbPath = `${FileSystem.documentDirectory}SourceView.realm`;
-        
-        // Check if database exists
-        const dbInfo = await FileSystem.getInfoAsync(dbPath);
-        
-        if (!dbInfo.exists) {
-          console.log('Database not found, will need to copy from assets or create new');
-          // TODO: Copy database from bundled assets
-          // For now, create an empty database for development
-        }
-
         // Open Realm with schema
+        // In development, this creates an in-memory database
+        // In production, we'll configure the path and encryption
         const config: Realm.Configuration = {
           schema: realmSchema,
           schemaVersion: 1,
-          // path: dbPath,
-          // Encryption key will be needed for production database
+          // For production with bundled database:
+          // path: `${FileSystem.documentDirectory}SourceView.realm`,
           // encryptionKey: encryptionKey,
         };
 
