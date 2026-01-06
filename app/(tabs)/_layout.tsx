@@ -1,25 +1,28 @@
-import { Tabs } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
+/**
+ * Tab Layout
+ * 
+ * Main navigation tabs for the app.
+ */
 
-type IconName = React.ComponentProps<typeof Ionicons>['name'];
+import React from 'react';
+import { Tabs } from 'expo-router';
+import { Colors } from '../../src/common';
+import { Icon } from '../../src/components';
 
 export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: '#6366f1',
-        tabBarInactiveTintColor: '#64748b',
+        tabBarActiveTintColor: Colors.tint,
+        tabBarInactiveTintColor: Colors.subtitle,
         tabBarStyle: {
-          backgroundColor: '#1a1a2e',
-          borderTopColor: '#2d2d44',
-          paddingBottom: 4,
-          paddingTop: 4,
-          height: 60,
+          backgroundColor: '#FFFFFF',
+          borderTopColor: Colors.separator,
         },
         headerStyle: {
-          backgroundColor: '#1a1a2e',
+          backgroundColor: '#FFFFFF',
         },
-        headerTintColor: '#fff',
+        headerTintColor: Colors.tint,
         headerTitleStyle: {
           fontWeight: '600',
         },
@@ -29,8 +32,8 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Discover',
-          tabBarIcon: ({ color, size }: { color: string; size: number }) => (
-            <Ionicons name="compass-outline" size={size} color={color} />
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="books" size={size} color={color} />
           ),
         }}
       />
@@ -38,8 +41,8 @@ export default function TabLayout() {
         name="books"
         options={{
           title: 'Books',
-          tabBarIcon: ({ color, size }: { color: string; size: number }) => (
-            <Ionicons name="book-outline" size={size} color={color} />
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="books-filled" size={size} color={color} />
           ),
         }}
       />
@@ -47,8 +50,8 @@ export default function TabLayout() {
         name="sources"
         options={{
           title: 'Sources',
-          tabBarIcon: ({ color, size }: { color: string; size: number }) => (
-            <Ionicons name="people-outline" size={size} color={color} />
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="avatar-human-male" size={size} color={color} />
           ),
         }}
       />
@@ -56,12 +59,11 @@ export default function TabLayout() {
         name="spheres"
         options={{
           title: 'Spheres',
-          tabBarIcon: ({ color, size }: { color: string; size: number }) => (
-            <Ionicons name="globe-outline" size={size} color={color} />
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="religion-filled" size={size} color={color} />
           ),
         }}
       />
     </Tabs>
   );
 }
-

@@ -1,198 +1,338 @@
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import { useLocalSearchParams, Stack, Link } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
+/**
+ * Sphere Overview Screen
+ * 
+ * Shows sphere statistics, key passages, and related content.
+ * Ported from legacy/App/js/Scenes/Spheres/SphereOverview.js
+ */
 
-const SPHERES: Record<string, { name: string; color: string; wordCount: number; description: string }> = {
-  family: { 
-    name: 'Family', 
-    color: '#ef4444', 
+import React from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Colors, formatNumber } from '../../../src/common';
+import { Icon, SourceIcon } from '../../../src/components';
+
+// Mock data
+const MOCK_SPHERE_DATA: Record<string, any> = {
+  family: {
+    id: 'family',
+    name: 'Family',
     wordCount: 45000,
-    description: 'Marriage, parenting, and household relationships' 
+    sourceCount: 85,
+    overview: 'The Family sphere encompasses all aspects of family life in Scripture, from marriage and parenting to extended family relationships and inheritance. God\'s design for the family is foundational to society and reflects His relationship with His people.',
+    topBooks: [
+      { id: 'genesis', name: 'Genesis', wordCount: 12000 },
+      { id: 'ruth', name: 'Ruth', wordCount: 1800 },
+      { id: 'proverbs', name: 'Proverbs', wordCount: 4500 },
+    ],
+    topSources: [
+      { id: 1, name: 'Jacob', wordCount: 3200, principalSourceType: 'lead', isHuman: true, isIndividual: true, hasGender: true, isFemale: false },
+      { id: 2, name: 'Abraham', wordCount: 2400, principalSourceType: 'lead', isHuman: true, isIndividual: true, hasGender: true, isFemale: false },
+    ],
+    passages: [
+      { title: 'God Creates Marriage', reference: 'Genesis 2:18-25' },
+      { title: 'Honor Your Parents', reference: 'Exodus 20:12' },
+      { title: 'Train Up a Child', reference: 'Proverbs 22:6' },
+    ],
   },
-  economics: { 
-    name: 'Economics', 
-    color: '#f59e0b', 
-    wordCount: 38000,
-    description: 'Work, money, resources, and stewardship' 
-  },
-  government: { 
-    name: 'Government', 
-    color: '#3b82f6', 
-    wordCount: 52000,
-    description: 'Law, justice, authority, and civic life' 
-  },
-  religion: { 
-    name: 'Religion', 
-    color: '#8b5cf6', 
-    wordCount: 120000,
-    description: 'Worship, prayer, faith, and spiritual practices' 
-  },
-  education: { 
-    name: 'Education', 
-    color: '#10b981', 
-    wordCount: 32000,
-    description: 'Teaching, learning, wisdom, and knowledge' 
-  },
-  communication: { 
-    name: 'Communication', 
-    color: '#06b6d4', 
-    wordCount: 28000,
-    description: 'Speech, writing, media, and arts' 
-  },
-  celebration: { 
-    name: 'Celebration', 
-    color: '#ec4899', 
-    wordCount: 25000,
-    description: 'Festivals, rest, joy, and community gatherings' 
+  religion: {
+    id: 'religion',
+    name: 'Religion',
+    wordCount: 78000,
+    sourceCount: 120,
+    overview: 'The Religion sphere covers worship, sacrifice, priesthood, the temple, and humanity\'s relationship with God. This sphere reveals how God established systems for people to approach Him and maintain fellowship with the divine.',
+    topBooks: [
+      { id: 'leviticus', name: 'Leviticus', wordCount: 18000 },
+      { id: 'psalms', name: 'Psalms', wordCount: 15000 },
+      { id: 'hebrews', name: 'Hebrews', wordCount: 6000 },
+    ],
+    topSources: [
+      { id: 1, name: 'God', wordCount: 12000, principalSourceType: 'god', isDivine: true },
+      { id: 3, name: 'David', wordCount: 8000, principalSourceType: 'lead', isHuman: true, isIndividual: true, hasGender: true, isFemale: false },
+    ],
+    passages: [
+      { title: 'The Greatest Commandment', reference: 'Deuteronomy 6:4-9' },
+      { title: 'A Living Sacrifice', reference: 'Romans 12:1-2' },
+      { title: 'True Worship', reference: 'John 4:23-24' },
+    ],
   },
 };
 
-export default function SphereDetailScreen() {
+const DEFAULT_SPHERE_DATA = {
+  id: 'unknown',
+  name: 'Sphere',
+  wordCount: 10000,
+  sourceCount: 20,
+  overview: 'Sphere overview will be loaded from the database.',
+  topBooks: [],
+  topSources: [],
+  passages: [],
+};
+
+const TOTAL_BIBLE_WORD_COUNT = 783137;
+
+export default function SphereOverviewScreen() {
   const { sphereId } = useLocalSearchParams<{ sphereId: string }>();
-  const sphere = SPHERES[sphereId || 'family'] || SPHERES.family;
+  const router = useRouter();
+
+  const sphere = MOCK_SPHERE_DATA[sphereId || ''] || { ...DEFAULT_SPHERE_DATA, name: sphereId || 'Sphere', id: sphereId };
+  const sphereColors = Colors.spheres[sphere.id as keyof typeof Colors.spheres] || Colors.spheres.foundational;
+  const percent = Math.round((sphere.wordCount / TOTAL_BIBLE_WORD_COUNT) * 100);
 
   return (
-    <>
-      <Stack.Screen options={{ title: sphere.name }} />
-      <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-        <View style={styles.header}>
-          <View style={[styles.icon, { backgroundColor: sphere.color }]}>
-            <Ionicons name="globe" size={48} color="#fff" />
+    <ScrollView style={styles.container}>
+      {/* Header */}
+      <LinearGradient
+        colors={sphereColors.gradient.big as [string, string, ...string[]]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={styles.header}
+      >
+        <Icon
+          name={`${sphere.id}-filled`}
+          size={60}
+          color="#FFFFFF"
+        />
+        <Text style={styles.headerName}>{sphere.name}</Text>
+        <Text style={styles.headerSubtitle}>
+          {percent}% of the Bible
+        </Text>
+      </LinearGradient>
+
+      {/* Stats */}
+      <View style={styles.statsContainer}>
+        <View style={styles.statItem}>
+          <Text style={[styles.statValue, { color: sphereColors.tint }]}>{sphere.sourceCount}</Text>
+          <Text style={styles.statLabel}>Sources</Text>
+        </View>
+        <View style={styles.statDivider} />
+        <View style={styles.statItem}>
+          <Text style={[styles.statValue, { color: sphereColors.tint }]}>{formatNumber(sphere.wordCount)}</Text>
+          <Text style={styles.statLabel}>Words</Text>
+        </View>
+        <View style={styles.statDivider} />
+        <View style={styles.statItem}>
+          <Text style={[styles.statValue, { color: sphereColors.tint }]}>52</Text>
+          <Text style={styles.statLabel}>Key Passages</Text>
+        </View>
+      </View>
+
+      {/* Overview */}
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>OVERVIEW</Text>
+        <Text style={styles.overviewText}>{sphere.overview}</Text>
+      </View>
+
+      {/* Key Passages */}
+      {sphere.passages.length > 0 && (
+        <View style={styles.section}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>KEY PASSAGES</Text>
+            <TouchableOpacity onPress={() => router.push(`/spheres/${sphereId}/passages`)}>
+              <Text style={[styles.viewAllLink, { color: sphereColors.tint }]}>View All 52</Text>
+            </TouchableOpacity>
           </View>
-          <Text style={styles.name}>{sphere.name}</Text>
-          <Text style={styles.description}>{sphere.description}</Text>
-        </View>
-
-        <View style={styles.stats}>
-          <View style={styles.statItem}>
-            <Text style={[styles.statValue, { color: sphere.color }]}>
-              {sphere.wordCount.toLocaleString()}
-            </Text>
-            <Text style={styles.statLabel}>Words</Text>
-          </View>
-        </View>
-
-        <View style={styles.actions}>
-          <Link href={`/spheres/${sphereId}/passages`} asChild>
-            <TouchableOpacity style={styles.actionButton}>
-              <Ionicons name="document-text-outline" size={24} color={sphere.color} />
-              <Text style={styles.actionText}>Key Passages</Text>
+          {sphere.passages.map((passage: any, index: number) => (
+            <TouchableOpacity
+              key={index}
+              style={styles.passageItem}
+              onPress={() => router.push(`/reader/${sphereId}?passage=${index}`)}
+            >
+              <View style={styles.passageInfo}>
+                <Text style={styles.passageTitle}>{passage.title}</Text>
+                <Text style={styles.passageReference}>{passage.reference}</Text>
+              </View>
+              <Text style={styles.arrow}>›</Text>
             </TouchableOpacity>
-          </Link>
-
-          <Link href={`/spheres/${sphereId}/books`} asChild>
-            <TouchableOpacity style={styles.actionButton}>
-              <Ionicons name="book-outline" size={24} color={sphere.color} />
-              <Text style={styles.actionText}>Books</Text>
-            </TouchableOpacity>
-          </Link>
-
-          <Link href={`/spheres/${sphereId}/sources`} asChild>
-            <TouchableOpacity style={styles.actionButton}>
-              <Ionicons name="people-outline" size={24} color={sphere.color} />
-              <Text style={styles.actionText}>Sources</Text>
-            </TouchableOpacity>
-          </Link>
-
-          <Link href={`/spheres/${sphereId}/words`} asChild>
-            <TouchableOpacity style={styles.actionButton}>
-              <Ionicons name="text-outline" size={24} color={sphere.color} />
-              <Text style={styles.actionText}>Words</Text>
-            </TouchableOpacity>
-          </Link>
+          ))}
         </View>
+      )}
 
-        <View style={styles.overview}>
-          <Text style={styles.overviewTitle}>Overview</Text>
-          <Text style={styles.overviewText}>
-            Sphere overview content will be loaded from the Realm database.
-            This section contains information about what the Bible teaches
-            about this sphere of life and society.
-          </Text>
+      {/* Top Books */}
+      {sphere.topBooks.length > 0 && (
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>TOP BOOKS</Text>
+          {sphere.topBooks.map((book: any) => (
+            <TouchableOpacity
+              key={book.id}
+              style={styles.bookItem}
+              onPress={() => router.push(`/books/${book.id}`)}
+            >
+              <Text style={styles.bookName}>{book.name}</Text>
+              <Text style={styles.bookStats}>{formatNumber(book.wordCount)} words</Text>
+              <Text style={styles.arrow}>›</Text>
+            </TouchableOpacity>
+          ))}
         </View>
-      </ScrollView>
-    </>
+      )}
+
+      {/* Top Sources */}
+      {sphere.topSources.length > 0 && (
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>TOP SOURCES</Text>
+          {sphere.topSources.map((source: any) => (
+            <TouchableOpacity
+              key={source.id}
+              style={styles.sourceItem}
+              onPress={() => router.push(`/sources/${source.id}`)}
+            >
+              <SourceIcon
+                source={source}
+                principalSourceType={source.principalSourceType}
+                size={40}
+              />
+              <View style={styles.sourceInfo}>
+                <Text style={styles.sourceName}>{source.name}</Text>
+                <Text style={styles.sourceStats}>{formatNumber(source.wordCount)} words</Text>
+              </View>
+              <Text style={styles.arrow}>›</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      )}
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0f0f1a',
-  },
-  content: {
-    padding: 20,
+    backgroundColor: '#FFFFFF',
   },
   header: {
     alignItems: 'center',
-    marginBottom: 24,
+    paddingVertical: 30,
+    paddingHorizontal: 20,
   },
-  icon: {
-    width: 96,
-    height: 96,
-    borderRadius: 24,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 16,
-  },
-  name: {
-    fontSize: 32,
+  headerName: {
+    fontSize: 28,
     fontWeight: '700',
-    color: '#fff',
-    marginBottom: 8,
+    color: '#FFFFFF',
+    marginTop: 15,
   },
-  description: {
+  headerSubtitle: {
     fontSize: 16,
-    color: '#94a3b8',
-    textAlign: 'center',
+    color: 'rgba(255, 255, 255, 0.8)',
+    marginTop: 5,
   },
-  stats: {
-    alignItems: 'center',
-    marginBottom: 32,
+  statsContainer: {
+    flexDirection: 'row',
+    paddingVertical: 15,
+    paddingHorizontal: 10,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: Colors.separator,
   },
   statItem: {
+    flex: 1,
     alignItems: 'center',
   },
   statValue: {
-    fontSize: 32,
-    fontWeight: '700',
-  },
-  statLabel: {
-    fontSize: 14,
-    color: '#64748b',
-  },
-  actions: {
-    gap: 12,
-    marginBottom: 24,
-  },
-  actionButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#1a1a2e',
-    padding: 16,
-    borderRadius: 12,
-    gap: 12,
-  },
-  actionText: {
-    fontSize: 18,
-    fontWeight: '500',
-    color: '#fff',
-  },
-  overview: {
-    backgroundColor: '#1a1a2e',
-    padding: 20,
-    borderRadius: 12,
-  },
-  overviewTitle: {
     fontSize: 20,
     fontWeight: '600',
-    color: '#fff',
+  },
+  statLabel: {
+    fontSize: 11,
+    color: Colors.subtitle,
+    marginTop: 2,
+  },
+  statDivider: {
+    width: StyleSheet.hairlineWidth,
+    backgroundColor: Colors.separator,
+  },
+  section: {
+    paddingHorizontal: 15,
+    paddingVertical: 15,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: Colors.separator,
+  },
+  sectionHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginBottom: 12,
+  },
+  sectionTitle: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: Colors.subtitle,
+    letterSpacing: 1,
+    marginBottom: 12,
+  },
+  viewAllLink: {
+    fontSize: 14,
+    fontWeight: '500',
   },
   overviewText: {
     fontSize: 16,
-    color: '#94a3b8',
-    lineHeight: 26,
+    lineHeight: 24,
+    color: Colors.textSecondary,
+  },
+  passageItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 10,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: Colors.separator,
+  },
+  passageInfo: {
+    flex: 1,
+  },
+  passageTitle: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: Colors.text,
+  },
+  passageReference: {
+    fontSize: 14,
+    color: Colors.subtitle,
+    marginTop: 2,
+  },
+  bookItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 10,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: Colors.separator,
+  },
+  bookName: {
+    flex: 1,
+    fontSize: 17,
+    color: Colors.text,
+  },
+  bookStats: {
+    fontSize: 14,
+    color: Colors.subtitle,
+    marginRight: 10,
+  },
+  sourceItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 10,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: Colors.separator,
+  },
+  sourceInfo: {
+    flex: 1,
+    marginLeft: 12,
+  },
+  sourceName: {
+    fontSize: 17,
+    fontWeight: '500',
+    color: Colors.text,
+  },
+  sourceStats: {
+    fontSize: 14,
+    color: Colors.subtitle,
+    marginTop: 2,
+  },
+  arrow: {
+    fontSize: 22,
+    color: Colors.separator,
   },
 });
-

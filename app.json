@@ -37,7 +37,13 @@
     },
     "plugins": [
       "expo-router",
-      "expo-dev-client"
+      "expo-dev-client",
+      [
+        "expo-font",
+        {
+          "fonts": ["./assets/fonts/sourceview.ttf"]
+        }
+      ]
     ],
     "extra": {
       "eas": {

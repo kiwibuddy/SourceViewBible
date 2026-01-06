@@ -1,60 +1,59 @@
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
-import { useLocalSearchParams, Stack, Link } from 'expo-router';
+/**
+ * Book Chapters Screen
+ * Placeholder - shows list of chapters for a book
+ */
 
-const BOOK_CHAPTERS: Record<string, number> = {
-  gen: 50, exod: 40, lev: 27, num: 36, deut: 34,
-  matt: 28, mark: 16, luke: 24, john: 21, acts: 28,
-};
+import React from 'react';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { Colors } from '../../../src/common';
+
+const MOCK_CHAPTERS = Array.from({ length: 50 }, (_, i) => ({
+  number: i + 1,
+  verseCount: Math.floor(Math.random() * 30) + 10,
+}));
 
 export default function BookChaptersScreen() {
   const { bookId } = useLocalSearchParams<{ bookId: string }>();
-  const chapterCount = BOOK_CHAPTERS[bookId || 'gen'] || 50;
-  const chapters = Array.from({ length: chapterCount }, (_, i) => i + 1);
+  const router = useRouter();
 
   return (
-    <>
-      <Stack.Screen options={{ title: 'Chapters' }} />
-      <View style={styles.container}>
-        <FlatList
-          data={chapters}
-          numColumns={5}
-          keyExtractor={(item) => item.toString()}
-          contentContainerStyle={styles.grid}
-          renderItem={({ item }) => (
-            <Link href={`/reader/${bookId}?chapter=${item}`} asChild>
-              <TouchableOpacity style={styles.chapterButton}>
-                <Text style={styles.chapterText}>{item}</Text>
-              </TouchableOpacity>
-            </Link>
-          )}
-        />
-      </View>
-    </>
+    <FlatList
+      data={MOCK_CHAPTERS}
+      keyExtractor={(item) => item.number.toString()}
+      numColumns={5}
+      contentContainerStyle={styles.container}
+      renderItem={({ item }) => (
+        <TouchableOpacity
+          style={styles.chapterItem}
+          onPress={() => router.push(`/reader/${bookId}?chapter=${item.number}`)}
+        >
+          <Text style={styles.chapterNumber}>{item.number}</Text>
+        </TouchableOpacity>
+      )}
+    />
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#0f0f1a',
+    padding: 10,
+    backgroundColor: '#FFFFFF',
   },
-  grid: {
-    padding: 16,
-  },
-  chapterButton: {
+  chapterItem: {
     flex: 1,
     aspectRatio: 1,
-    margin: 6,
-    backgroundColor: '#1a1a2e',
-    borderRadius: 12,
+    margin: 5,
+    borderRadius: 8,
+    backgroundColor: '#F9F9F9',
     alignItems: 'center',
     justifyContent: 'center',
-    maxWidth: '18%',
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: Colors.separator,
   },
-  chapterText: {
+  chapterNumber: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#fff',
+    color: Colors.tint,
   },
 });
-

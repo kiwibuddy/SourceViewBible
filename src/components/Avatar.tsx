@@ -1,49 +1,57 @@
-import { View, StyleSheet, ViewStyle } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+/**
+ * Avatar Component
+ * 
+ * A reusable avatar component for displaying user/source avatars.
+ */
+
+import React from 'react';
+import { View, Text, StyleSheet, ViewStyle, ImageBackground } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Colors } from '../common/colors';
 
 interface AvatarProps {
-  icon?: keyof typeof Ionicons.glyphMap;
-  color?: string;
-  size?: 'small' | 'medium' | 'large';
+  name?: string;
+  size?: number;
+  gradientColors?: string[];
   style?: ViewStyle;
 }
 
-const SIZES = {
-  small: { container: 32, icon: 16 },
-  medium: { container: 48, icon: 24 },
-  large: { container: 80, icon: 40 },
-};
-
-export function Avatar({ 
-  icon = 'person', 
-  color = '#6366f1', 
-  size = 'medium',
-  style 
+export function Avatar({
+  name,
+  size = 40,
+  gradientColors = Colors.sources.other.gradient.big,
+  style,
 }: AvatarProps) {
-  const dimensions = SIZES[size];
-  
+  const initial = name ? name.charAt(0).toUpperCase() : '?';
+  const fontSize = size * 0.45;
+
   return (
-    <View 
-      style={[
-        styles.container, 
-        { 
-          width: dimensions.container, 
-          height: dimensions.container, 
-          borderRadius: dimensions.container / 2,
-          backgroundColor: color,
-        },
-        style
-      ]}
-    >
-      <Ionicons name={icon} size={dimensions.icon} color="#fff" />
+    <View style={[styles.container, { width: size, height: size, borderRadius: size / 2 }, style]}>
+      <LinearGradient
+        colors={gradientColors as [string, string, ...string[]]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={[styles.gradient, { borderRadius: size / 2 }]}
+      >
+        <Text style={[styles.initial, { fontSize }]}>{initial}</Text>
+      </LinearGradient>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    overflow: 'hidden',
+  },
+  gradient: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
+  initial: {
+    color: '#FFFFFF',
+    fontWeight: '600',
+  },
 });
 
+export default Avatar;

@@ -1,96 +1,85 @@
-import { View, Text, StyleSheet, ViewStyle } from 'react-native';
-import Svg, { G, Path, Circle } from 'react-native-svg';
-import { Colors } from '../../common/colors';
+/**
+ * PieChart Component
+ * 
+ * Simple pie chart using SVG for data visualization.
+ * Ported from legacy/App/js/Components/Charts/PieChart.js
+ */
 
-interface PieChartData {
+import React from 'react';
+import { View, StyleSheet, ViewStyle } from 'react-native';
+import Svg, { G, Path, Circle } from 'react-native-svg';
+
+interface Slice {
   value: number;
   color: string;
   label?: string;
 }
 
 interface PieChartProps {
-  data: PieChartData[];
+  data: Slice[];
   size?: number;
   innerRadius?: number;
   style?: ViewStyle;
-  showLabels?: boolean;
 }
 
-/**
- * PieChart Component
- * 
- * Displays data as a pie/donut chart.
- * Migrated from legacy/App/js/Components/Charts/PieChart.js
- */
 export function PieChart({
   data,
-  size = 200,
+  size = 100,
   innerRadius = 0,
   style,
-  showLabels = false,
 }: PieChartProps) {
+  const total = data.reduce((sum, slice) => sum + slice.value, 0);
+  if (total === 0) return null;
+
   const radius = size / 2;
   const center = size / 2;
-  
-  // Calculate total
-  const total = data.reduce((sum, item) => sum + item.value, 0);
-  if (total === 0) {
-    return (
-      <View style={[styles.container, { width: size, height: size }, style]}>
-        <Text style={styles.emptyText}>No data</Text>
-      </View>
-    );
-  }
 
-  // Generate pie slices
-  let currentAngle = -90; // Start from top
-  const slices = data.map((item, index) => {
-    const percentage = item.value / total;
-    const angle = percentage * 360;
+  // Calculate paths for each slice
+  let currentAngle = -Math.PI / 2; // Start from top
+  const paths = data.map((slice, index) => {
+    const sliceAngle = (slice.value / total) * 2 * Math.PI;
     const startAngle = currentAngle;
-    const endAngle = currentAngle + angle;
+    const endAngle = currentAngle + sliceAngle;
     currentAngle = endAngle;
 
-    const startRad = (startAngle * Math.PI) / 180;
-    const endRad = (endAngle * Math.PI) / 180;
+    // Calculate arc points
+    const startX = center + radius * Math.cos(startAngle);
+    const startY = center + radius * Math.sin(startAngle);
+    const endX = center + radius * Math.cos(endAngle);
+    const endY = center + radius * Math.sin(endAngle);
 
-    const x1 = center + radius * Math.cos(startRad);
-    const y1 = center + radius * Math.sin(startRad);
-    const x2 = center + radius * Math.cos(endRad);
-    const y2 = center + radius * Math.sin(endRad);
+    const largeArcFlag = sliceAngle > Math.PI ? 1 : 0;
 
-    const largeArcFlag = angle > 180 ? 1 : 0;
-
-    let d: string;
+    let pathD = '';
     if (innerRadius > 0) {
       // Donut chart
-      const ix1 = center + innerRadius * Math.cos(startRad);
-      const iy1 = center + innerRadius * Math.sin(startRad);
-      const ix2 = center + innerRadius * Math.cos(endRad);
-      const iy2 = center + innerRadius * Math.sin(endRad);
+      const innerStartX = center + innerRadius * Math.cos(startAngle);
+      const innerStartY = center + innerRadius * Math.sin(startAngle);
+      const innerEndX = center + innerRadius * Math.cos(endAngle);
+      const innerEndY = center + innerRadius * Math.sin(endAngle);
 
-      d = [
-        `M ${x1} ${y1}`,
-        `A ${radius} ${radius} 0 ${largeArcFlag} 1 ${x2} ${y2}`,
-        `L ${ix2} ${iy2}`,
-        `A ${innerRadius} ${innerRadius} 0 ${largeArcFlag} 0 ${ix1} ${iy1}`,
-        'Z',
-      ].join(' ');
+      pathD = `
+        M ${startX} ${startY}
+        A ${radius} ${radius} 0 ${largeArcFlag} 1 ${endX} ${endY}
+        L ${innerEndX} ${innerEndY}
+        A ${innerRadius} ${innerRadius} 0 ${largeArcFlag} 0 ${innerStartX} ${innerStartY}
+        Z
+      `;
     } else {
       // Pie chart
-      d = [
-        `M ${center} ${center}`,
-        `L ${x1} ${y1}`,
-        `A ${radius} ${radius} 0 ${largeArcFlag} 1 ${x2} ${y2}`,
-        'Z',
-      ].join(' ');
+      pathD = `
+        M ${center} ${center}
+        L ${startX} ${startY}
+        A ${radius} ${radius} 0 ${largeArcFlag} 1 ${endX} ${endY}
+        Z
+      `;
     }
 
     return (
       <Path
         key={index}
-        d={d}
-        fill={item.color}
+        d={pathD}
+        fill={slice.color}
       />
     );
   });
@@ -98,18 +87,16 @@ export function PieChart({
   return (
     <View style={[styles.container, { width: size, height: size }, style]}>
       <Svg width={size} height={size}>
-        <G>{slices}</G>
+        <G>{paths}</G>
+        {innerRadius > 0 && (
+          <Circle
+            cx={center}
+            cy={center}
+            r={innerRadius}
+            fill="white"
+          />
+        )}
       </Svg>
-      {showLabels && (
-        <View style={styles.legend}>
-          {data.map((item, index) => (
-            <View key={index} style={styles.legendItem}>
-              <View style={[styles.legendColor, { backgroundColor: item.color }]} />
-              <Text style={styles.legendLabel}>{item.label || `Item ${index + 1}`}</Text>
-            </View>
-          ))}
-        </View>
-      )}
     </View>
   );
 }
@@ -119,29 +106,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  emptyText: {
-    color: Colors.textMuted,
-    fontSize: 14,
-  },
-  legend: {
-    marginTop: 16,
-  },
-  legendItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 4,
-  },
-  legendColor: {
-    width: 12,
-    height: 12,
-    borderRadius: 2,
-    marginRight: 8,
-  },
-  legendLabel: {
-    color: Colors.textSecondary,
-    fontSize: 12,
-  },
 });
 
 export default PieChart;
-

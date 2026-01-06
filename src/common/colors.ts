@@ -1,91 +1,211 @@
 /**
- * Color palette for SourceView Bible
+ * Color System for SourceView Bible
  * 
- * Migrated from legacy/App/js/Common/Colors.js
+ * Ported from legacy/App/js/Common/Colors.js
  */
 
 export const Colors = {
-  // Base colors
-  background: '#0f0f1a',
-  surface: '#1a1a2e',
-  border: '#2d2d44',
-  
-  // Text colors
-  textPrimary: '#ffffff',
-  textSecondary: '#94a3b8',
-  textMuted: '#64748b',
-  
-  // Brand colors
-  primary: '#6366f1',
-  primaryLight: '#818cf8',
-  primaryDark: '#4f46e5',
-  
-  // Source role colors
+  // Main app tint colors
+  tint: '#cf1e00',
+  lightTint: '#ffdcda',
+  separator: '#CCCCCC',
+  subtitle: '#9B9B9B',
+
+  // Source type colors (narrator, god, lead, support)
   sources: {
-    divine: {
-      tint: '#f59e0b',
-      background: '#78350f',
+    narrator: {
+      tint: '#4A4A4A',
+      lightTint: '#E1E2E3',
+      gradient: {
+        big: ['#76838F', '#323B43'],
+        tiny: ['#323B43', '#323B43'],
+      },
     },
     god: {
-      tint: '#f59e0b',
-      background: '#78350f',
+      tint: '#fc3d39',
+      lightTint: '#FFE2E0',
+      gradient: {
+        big: ['#FF2323', '#9C0D00'],
+        tiny: ['#FF4B3B', '#FF4B3B'],
+      },
     },
-    narrator: {
-      tint: '#8b5cf6',
-      background: '#4c1d95',
+    divine: {
+      tint: '#fc3d39',
+      lightTint: '#FFE2E0',
+      gradient: {
+        big: ['#FF2323', '#9C0D00'],
+        tiny: ['#fc3d39', '#fc3d39'],
+      },
     },
     lead: {
-      tint: '#3b82f6',
-      background: '#1e3a8a',
+      tint: '#19A555',
+      lightTint: '#DCF7E6',
+      gradient: {
+        big: ['#4CDA65', '#0B7E37'],
+        tiny: ['#19A555', '#19A555'],
+      },
     },
     support: {
-      tint: '#10b981',
-      background: '#064e3b',
+      tint: '#218aff',
+      lightTint: '#DDF0FA',
+      gradient: {
+        big: ['#25B0F5', '#0F628B'],
+        tiny: ['#218aff', '#218aff'],
+      },
     },
     other: {
-      tint: '#64748b',
-      background: '#334155',
+      tint: '#9B9B9B',
+      lightTint: '#E6E6E6',
+      gradient: {
+        big: ['#DBDDDE', '#898C90'],
+        tiny: ['#DBDDDE', '#898C90'],
+      },
     },
   },
-  
-  // Sphere colors
+
+  // Sphere colors (the 7 life spheres + foundational)
   spheres: {
+    foundational: {
+      tint: '#323B43',
+      lightTint: '#E8E8E8',
+      chromeTint: '#323B43',
+      highlightTint: '#E8E8E8',
+      gradient: {
+        big: ['#7B7D82', '#E8E8E8'],
+        tiny: ['#7B7D82', '#E8E8E8'],
+      },
+    },
     family: {
-      tint: '#ef4444',
-      background: '#7f1d1d',
+      tint: '#FF3A2E',
+      lightTint: '#ffdcda',
+      chromeTint: '#C11F17',
+      highlightTint: '#FFD8D6',
+      gradient: {
+        big: ['#FF4B3B', '#AA0606'],
+        tiny: ['#FF3A2E', '#FF3A2E'],
+      },
     },
     economics: {
-      tint: '#f59e0b',
-      background: '#78350f',
+      tint: '#FF9700',
+      lightTint: '#ffedd2',
+      chromeTint: '#EA6E00',
+      highlightTint: '#FFEACC',
+      gradient: {
+        big: ['#FC882A', '#D4202F'],
+        tiny: ['#FF9700', '#FF9700'],
+      },
     },
     government: {
-      tint: '#3b82f6',
-      background: '#1e3a8a',
+      tint: '#FECB01',
+      lightTint: '#fff8d1',
+      chromeTint: '#FF9700',
+      highlightTint: '#FFF5CD',
+      gradient: {
+        big: ['#FFBF00', '#FF933A'],
+        tiny: ['#FECB01', '#FECB01'],
+      },
     },
     religion: {
-      tint: '#8b5cf6',
-      background: '#4c1d95',
+      tint: '#88C807',
+      lightTint: '#DCEEB3',
+      chromeTint: '#639104',
+      highlightTint: '#E8F4CE',
+      gradient: {
+        big: ['#8BC624', '#429321'],
+        tiny: ['#64AA20', '#64AA20'],
+      },
     },
     education: {
-      tint: '#10b981',
-      background: '#064e3b',
+      tint: '#25B8D7',
+      lightTint: '#d9f2f9',
+      chromeTint: '#1F94AD',
+      highlightTint: '#D4F1F7',
+      gradient: {
+        big: ['#11C7B8', '#1A5A78'],
+        tiny: ['#25B8D7', '#25B8D7'],
+      },
     },
     communication: {
-      tint: '#06b6d4',
-      background: '#164e63',
+      tint: '#5A5AD3',
+      lightTint: '#e1e2f8',
+      chromeTint: '#3B3B88',
+      highlightTint: '#DEDEF7',
+      gradient: {
+        big: ['#C86DD7', '#3023AE'],
+        tiny: ['#5A5AD3', '#5A5AD3'],
+      },
     },
     celebration: {
-      tint: '#ec4899',
-      background: '#831843',
+      tint: '#C44DF8',
+      lightTint: '#f9e0f0',
+      chromeTint: '#7B349A',
+      highlightTint: '#F9DEEF',
+      gradient: {
+        big: ['#D8379F', '#AD39DF'],
+        tiny: ['#C44DF8', '#C44DF8'],
+      },
     },
   },
-  
-  // Status colors
-  success: '#10b981',
-  warning: '#f59e0b',
-  error: '#ef4444',
-  info: '#3b82f6',
+
+  // UI colors
+  background: '#FFFFFF',
+  backgroundSecondary: '#F9F9F9',
+  text: '#000000',
+  textSecondary: '#59626A',
+  textLight: '#9B9B9B',
+  border: '#E8E8E8',
+};
+
+// Constants for source types
+export const SourceType = {
+  NARRATOR: 'narrator',
+  GOD: 'god',
+  LEAD: 'lead',
+  SUPPORT: 'support',
+} as const;
+
+// Constants for sphere types
+export const SphereType = {
+  FAMILY: 'family',
+  ECONOMICS: 'economics',
+  GOVERNMENT: 'government',
+  RELIGION: 'religion',
+  EDUCATION: 'education',
+  COMMUNICATION: 'communication',
+  CELEBRATION: 'celebration',
+} as const;
+
+// Sphere order for display
+export const SphereOrder = [
+  'foundational',
+  'family',
+  'economics',
+  'government',
+  'religion',
+  'education',
+  'communication',
+  'celebration',
+];
+
+// Human-readable sphere names
+export const SphereNames: Record<string, string> = {
+  foundational: 'Foundational',
+  family: 'Family',
+  economics: 'Economics',
+  government: 'Government',
+  religion: 'Religion',
+  education: 'Education',
+  communication: 'Communication',
+  celebration: 'Celebration',
+};
+
+// Human-readable source type names
+export const SourceTypeNames: Record<string, string> = {
+  narrator: 'Narrator',
+  god: 'God',
+  lead: 'Lead Character',
+  support: 'Supporting Character',
+  other: 'Other',
 };
 
 export default Colors;
-

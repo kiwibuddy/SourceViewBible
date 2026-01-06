@@ -1,178 +1,335 @@
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+/**
+ * Spheres Screen
+ * 
+ * Display of the 7 spheres of life in a circular arrangement.
+ * Ported from legacy/App/js/Scenes/Spheres/Spheres.js
+ */
 
-// The 7 Spheres from the original app
-const SPHERES = [
-  { 
-    id: 'family', 
-    name: 'Family', 
-    color: '#ef4444',
-    icon: 'heart',
-    description: 'Marriage, parenting, and household relationships',
-    wordCount: 45000,
-  },
-  { 
-    id: 'economics', 
-    name: 'Economics', 
-    color: '#f59e0b',
-    icon: 'cash',
-    description: 'Work, money, resources, and stewardship',
-    wordCount: 38000,
-  },
-  { 
-    id: 'government', 
-    name: 'Government', 
-    color: '#3b82f6',
-    icon: 'flag',
-    description: 'Law, justice, authority, and civic life',
-    wordCount: 52000,
-  },
-  { 
-    id: 'religion', 
-    name: 'Religion', 
-    color: '#8b5cf6',
-    icon: 'flame',
-    description: 'Worship, prayer, faith, and spiritual practices',
-    wordCount: 120000,
-  },
-  { 
-    id: 'education', 
-    name: 'Education', 
-    color: '#10b981',
-    icon: 'school',
-    description: 'Teaching, learning, wisdom, and knowledge',
-    wordCount: 32000,
-  },
-  { 
-    id: 'communication', 
-    name: 'Communication', 
-    color: '#06b6d4',
-    icon: 'megaphone',
-    description: 'Speech, writing, media, and arts',
-    wordCount: 28000,
-  },
-  { 
-    id: 'celebration', 
-    name: 'Celebration', 
-    color: '#ec4899',
-    icon: 'musical-notes',
-    description: 'Festivals, rest, joy, and community gatherings',
-    wordCount: 25000,
-  },
+import React, { useState, useRef } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  Dimensions,
+  Animated,
+  Image,
+} from 'react-native';
+import { useRouter } from 'expo-router';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Colors, formatNumber } from '../../src/common';
+import { Icon } from '../../src/components';
+
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
+const CIRCLE_SIZE = Math.min(SCREEN_WIDTH - 80, 280);
+const SPHERE_ICON_SIZE = 60;
+
+// Mock data - will be replaced with real Realm data
+const MOCK_SPHERES = [
+  { id: 'family', name: 'Family', position: 1, wordCount: 45000, sourceCount: 85, passageCount: 52 },
+  { id: 'economics', name: 'Economics', position: 2, wordCount: 38000, sourceCount: 72, passageCount: 52 },
+  { id: 'government', name: 'Government', position: 3, wordCount: 52000, sourceCount: 95, passageCount: 52 },
+  { id: 'religion', name: 'Religion', position: 4, wordCount: 78000, sourceCount: 120, passageCount: 52 },
+  { id: 'education', name: 'Education', position: 5, wordCount: 28000, sourceCount: 55, passageCount: 52 },
+  { id: 'communication', name: 'Communication', position: 6, wordCount: 32000, sourceCount: 65, passageCount: 52 },
+  { id: 'celebration', name: 'Celebration', position: 7, wordCount: 18000, sourceCount: 42, passageCount: 52 },
 ];
 
-type Sphere = {
-  id: string;
-  name: string;
-  color: string;
-  icon: string;
-  description: string;
-  wordCount: number;
-};
+const TOTAL_BIBLE_WORD_COUNT = 783137;
 
-export default function SpheresScreen() {
-  const renderSphere = ({ item }: { item: Sphere }) => (
-    <TouchableOpacity style={styles.sphereItem}>
-      <View style={[styles.sphereIcon, { backgroundColor: item.color }]}>
-        <Ionicons name={item.icon as any} size={28} color="#fff" />
-      </View>
-      <View style={styles.sphereInfo}>
-        <Text style={styles.sphereName}>{item.name}</Text>
-        <Text style={styles.sphereDescription} numberOfLines={2}>
-          {item.description}
-        </Text>
-        <Text style={styles.sphereMeta}>
-          {item.wordCount.toLocaleString()} words
-        </Text>
-      </View>
-      <Text style={styles.chevron}>›</Text>
-    </TouchableOpacity>
-  );
+// Calculate positions for spheres in a circle
+function getCirclePosition(index: number, total: number, radius: number) {
+  const angle = (index / total) * 2 * Math.PI - Math.PI / 2; // Start from top
+  const x = radius * Math.cos(angle);
+  const y = radius * Math.sin(angle);
+  return { x, y };
+}
+
+interface SphereCircleProps {
+  sphere: typeof MOCK_SPHERES[0];
+  position: { x: number; y: number };
+  onPress: () => void;
+  isSelected: boolean;
+}
+
+function SphereCircle({ sphere, position, onPress, isSelected }: SphereCircleProps) {
+  const sphereColors = Colors.spheres[sphere.id as keyof typeof Colors.spheres];
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>7 Spheres of Society</Text>
-        <Text style={styles.headerText}>
-          Discover what the Bible says about each sphere of life
-        </Text>
+    <TouchableOpacity
+      style={[
+        styles.sphereCircle,
+        {
+          transform: [
+            { translateX: position.x - SPHERE_ICON_SIZE / 2 },
+            { translateY: position.y - SPHERE_ICON_SIZE / 2 },
+          ],
+        },
+        isSelected && styles.sphereCircleSelected,
+      ]}
+      onPress={onPress}
+      activeOpacity={0.8}
+    >
+      <LinearGradient
+        colors={sphereColors.gradient.big as [string, string, ...string[]]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={styles.sphereGradient}
+      >
+        <Icon
+          name={`${sphere.id}-filled`}
+          size={30}
+          color="#FFFFFF"
+        />
+      </LinearGradient>
+    </TouchableOpacity>
+  );
+}
+
+export default function SpheresScreen() {
+  const router = useRouter();
+  const [selectedSphere, setSelectedSphere] = useState<string | null>(null);
+
+  const radius = CIRCLE_SIZE / 2 - SPHERE_ICON_SIZE / 2;
+
+  const selectedData = selectedSphere
+    ? MOCK_SPHERES.find(s => s.id === selectedSphere)
+    : null;
+
+  return (
+    <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+      {/* Circle Visualization */}
+      <View style={styles.circleContainer}>
+        <View style={[styles.circle, { width: CIRCLE_SIZE, height: CIRCLE_SIZE }]}>
+          {/* Center text */}
+          <View style={styles.centerContent}>
+            {selectedData ? (
+              <>
+                <Text style={styles.centerTitle}>{selectedData.name}</Text>
+                <Text style={styles.centerSubtitle}>
+                  {Math.round((selectedData.wordCount / TOTAL_BIBLE_WORD_COUNT) * 100)}% of Bible
+                </Text>
+              </>
+            ) : (
+              <>
+                <Text style={styles.centerTitle}>Spheres</Text>
+                <Text style={styles.centerSubtitle}>Tap to explore</Text>
+              </>
+            )}
+          </View>
+
+          {/* Sphere icons */}
+          {MOCK_SPHERES.map((sphere, index) => {
+            const position = getCirclePosition(index, MOCK_SPHERES.length, radius);
+            return (
+              <SphereCircle
+                key={sphere.id}
+                sphere={sphere}
+                position={position}
+                isSelected={selectedSphere === sphere.id}
+                onPress={() => {
+                  if (selectedSphere === sphere.id) {
+                    router.push(`/spheres/${sphere.id}`);
+                  } else {
+                    setSelectedSphere(sphere.id);
+                  }
+                }}
+              />
+            );
+          })}
+        </View>
       </View>
-      <FlatList
-        data={SPHERES}
-        keyExtractor={(item) => item.id}
-        renderItem={renderSphere}
-        contentContainerStyle={styles.listContent}
-        ItemSeparatorComponent={() => <View style={styles.separator} />}
-      />
-    </View>
+
+      {/* Instructions */}
+      <Text style={styles.instructions}>
+        Tap a sphere to see details, tap again to explore
+      </Text>
+
+      {/* Selected Sphere Details */}
+      {selectedData && (
+        <View style={styles.detailsContainer}>
+          <View style={styles.statsRow}>
+            <View style={styles.statItem}>
+              <Text style={[styles.statValue, { color: Colors.spheres[selectedData.id as keyof typeof Colors.spheres].tint }]}>
+                {selectedData.sourceCount}
+              </Text>
+              <Text style={styles.statLabel}>Sources</Text>
+            </View>
+            <View style={styles.statItem}>
+              <Text style={[styles.statValue, { color: Colors.spheres[selectedData.id as keyof typeof Colors.spheres].tint }]}>
+                {formatNumber(selectedData.wordCount)}
+              </Text>
+              <Text style={styles.statLabel}>Words</Text>
+            </View>
+            <View style={styles.statItem}>
+              <Text style={[styles.statValue, { color: Colors.spheres[selectedData.id as keyof typeof Colors.spheres].tint }]}>
+                {selectedData.passageCount}
+              </Text>
+              <Text style={styles.statLabel}>Key Passages</Text>
+            </View>
+          </View>
+
+          <TouchableOpacity
+            style={[styles.exploreButton, { backgroundColor: Colors.spheres[selectedData.id as keyof typeof Colors.spheres].tint }]}
+            onPress={() => router.push(`/spheres/${selectedData.id}`)}
+          >
+            <Text style={styles.exploreButtonText}>Explore {selectedData.name}</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+
+      {/* All Spheres List */}
+      <View style={styles.listContainer}>
+        <Text style={styles.sectionTitle}>ALL SPHERES</Text>
+        {MOCK_SPHERES.map((sphere) => {
+          const sphereColors = Colors.spheres[sphere.id as keyof typeof Colors.spheres];
+          const percent = Math.round((sphere.wordCount / TOTAL_BIBLE_WORD_COUNT) * 100);
+
+          return (
+            <TouchableOpacity
+              key={sphere.id}
+              style={styles.listItem}
+              onPress={() => router.push(`/spheres/${sphere.id}`)}
+              activeOpacity={0.7}
+            >
+              <View style={[styles.listDot, { backgroundColor: sphereColors.tint }]} />
+              <Text style={styles.listName}>{sphere.name}</Text>
+              <Text style={styles.listPercent}>{percent}%</Text>
+              <Text style={styles.arrow}>›</Text>
+            </TouchableOpacity>
+          );
+        })}
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0f0f1a',
+    backgroundColor: '#FFFFFF',
   },
-  header: {
-    padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#2d2d44',
-    alignItems: 'center',
+  contentContainer: {
+    paddingBottom: 30,
   },
-  headerTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#fff',
-    marginBottom: 4,
-  },
-  headerText: {
-    fontSize: 14,
-    color: '#94a3b8',
-    textAlign: 'center',
-  },
-  listContent: {
-    padding: 16,
-  },
-  sphereItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 16,
-    paddingHorizontal: 12,
-    backgroundColor: '#1a1a2e',
-    borderRadius: 16,
-  },
-  sphereIcon: {
-    width: 56,
-    height: 56,
-    borderRadius: 16,
+  circleContainer: {
     alignItems: 'center',
     justifyContent: 'center',
+    paddingVertical: 30,
+  },
+  circle: {
+    position: 'relative',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  centerContent: {
+    alignItems: 'center',
+  },
+  centerTitle: {
+    fontSize: 22,
+    fontWeight: '600',
+    color: Colors.text,
+  },
+  centerSubtitle: {
+    fontSize: 14,
+    color: Colors.subtitle,
+    marginTop: 4,
+  },
+  sphereCircle: {
+    position: 'absolute',
+    width: SPHERE_ICON_SIZE,
+    height: SPHERE_ICON_SIZE,
+  },
+  sphereCircleSelected: {
+    transform: [{ scale: 1.2 }],
+  },
+  sphereGradient: {
+    width: '100%',
+    height: '100%',
+    borderRadius: SPHERE_ICON_SIZE / 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    shadowOffset: { width: 0, height: 2 },
+  },
+  instructions: {
+    textAlign: 'center',
+    fontSize: 14,
+    color: Colors.subtitle,
+    marginBottom: 20,
+  },
+  detailsContainer: {
+    marginHorizontal: 20,
+    marginBottom: 20,
+    padding: 20,
+    backgroundColor: '#F9F9F9',
+    borderRadius: 12,
+  },
+  statsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginBottom: 15,
+  },
+  statItem: {
+    alignItems: 'center',
+  },
+  statValue: {
+    fontSize: 20,
+    fontWeight: '600',
+  },
+  statLabel: {
+    fontSize: 12,
+    color: Colors.subtitle,
+    marginTop: 2,
+  },
+  exploreButton: {
+    paddingVertical: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  exploreButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  listContainer: {
+    paddingHorizontal: 15,
+  },
+  sectionTitle: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: Colors.subtitle,
+    letterSpacing: 1,
+    marginBottom: 12,
+  },
+  listItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 14,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: Colors.separator,
+  },
+  listDot: {
+    width: 12,
+    height: 12,
+    borderRadius: 6,
     marginRight: 12,
   },
-  sphereInfo: {
+  listName: {
     flex: 1,
+    fontSize: 17,
+    color: Colors.text,
   },
-  sphereName: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#fff',
-    marginBottom: 4,
+  listPercent: {
+    fontSize: 14,
+    color: Colors.subtitle,
+    marginRight: 10,
   },
-  sphereDescription: {
-    fontSize: 13,
-    color: '#94a3b8',
-    marginBottom: 4,
-  },
-  sphereMeta: {
-    fontSize: 12,
-    color: '#64748b',
-  },
-  chevron: {
-    fontSize: 24,
-    color: '#64748b',
-  },
-  separator: {
-    height: 12,
+  arrow: {
+    fontSize: 22,
+    color: Colors.separator,
   },
 });
-
