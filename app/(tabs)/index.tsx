@@ -47,9 +47,21 @@ export default function DiscoverScreen() {
           </TouchableOpacity>
         </Link>
 
-        <Link href="/about" asChild>
+        <Link href="/discovery-center" asChild>
           <TouchableOpacity style={styles.card}>
             <View style={[styles.cardIcon, { backgroundColor: '#f59e0b' }]}>
+              <Ionicons name="analytics" size={32} color="#fff" />
+            </View>
+            <Text style={styles.cardTitle}>Discovery Center</Text>
+            <Text style={styles.cardDescription}>
+              Explore patterns and insights
+            </Text>
+          </TouchableOpacity>
+        </Link>
+
+        <Link href="/about" asChild>
+          <TouchableOpacity style={styles.card}>
+            <View style={[styles.cardIcon, { backgroundColor: '#64748b' }]}>
               <Ionicons name="information-circle" size={32} color="#fff" />
             </View>
             <Text style={styles.cardTitle}>About</Text>

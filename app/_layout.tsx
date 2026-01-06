@@ -80,6 +80,12 @@ export default function RootLayout() {
           }} 
         />
         <Stack.Screen 
+          name="discovery-center/index" 
+          options={{ 
+            title: 'Discovery Center',
+          }} 
+        />
+        <Stack.Screen 
           name="about" 
           options={{ 
             title: 'About SourceView',
