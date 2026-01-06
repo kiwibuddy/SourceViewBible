@@ -1,3 +1,6 @@
+# Dependencies (already in .gitignore but being explicit)
+node_modules/
+
 # Ignore legacy codebase
 legacy/
 
