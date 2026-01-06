@@ -40,14 +40,16 @@
     ],
     "extra": {
       "eas": {
-        "projectId": ""
-      }
+        "projectId": "befcb230-d453-4e7c-91f8-9053761722f3"
+      },
+      "router": {}
     },
     "updates": {
       "url": ""
     },
     "runtimeVersion": {
       "policy": "appVersion"
-    }
+    },
+    "owner": "kiwibuddy"
   }
 }
