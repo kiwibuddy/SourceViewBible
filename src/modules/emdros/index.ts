@@ -136,28 +136,48 @@ class EmdrosInstance {
   }
 }
 
+// Encryption keys extracted from legacy/Libraries/Emdros/ios/RCTEmdros/RCTEmdros/RCTEmdros.m
+// These are stored as ASCII character codes in the original native module
+const REALM_KEY_STRING = '3fab2edcd8663c6baa91ffeb928ec61e011b19ed866d7365e7d194e43dc47264';
+const PREFERENCES_KEY_STRING = 'b52e731250ce81e843229f40ffd72e1e19604043622e18a452915544dcabafb9';
+
+/**
+ * Convert a string to an ArrayBuffer where each byte is the ASCII code of the character
+ * This matches how the original native module passed the key to JavaScript
+ */
+function stringToKeyBuffer(str: string): ArrayBuffer {
+  const buf = new ArrayBuffer(str.length);
+  const bufView = new Int8Array(buf);
+  for (let i = 0; i < str.length; i++) {
+    bufView[i] = str.charCodeAt(i);
+  }
+  return buf;
+}
+
 /**
  * Emdros - main API class
  */
 export class Emdros {
   /**
    * Get the encryption key for Realm database
-   * This key is stored in the native module
+   * This is a 64-byte key where each byte is the ASCII code of the hex string characters
    */
   static get key(): ArrayBuffer {
-    // TODO: Get from native module
-    // For development, return a placeholder key
-    const key = new ArrayBuffer(64);
-    return key;
+    return stringToKeyBuffer(REALM_KEY_STRING);
   }
 
   /**
    * Get the encryption key for preferences
    */
   static get preferencesKey(): ArrayBuffer {
-    // TODO: Get from native module
-    const key = new ArrayBuffer(64);
-    return key;
+    return stringToKeyBuffer(PREFERENCES_KEY_STRING);
+  }
+  
+  /**
+   * Get the Realm encryption key as Int8Array (for Realm.Configuration)
+   */
+  static get realmEncryptionKey(): Int8Array {
+    return new Int8Array(Emdros.key);
   }
 
   /**

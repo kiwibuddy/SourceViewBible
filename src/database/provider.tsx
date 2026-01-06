@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import Realm from 'realm';
 import { realmSchema, Book, Actant, Sphere, Bible } from './schema';
+import { Emdros } from '../modules/emdros';
 
 interface DatabaseContextType {
   realm: Realm | null;
@@ -44,18 +45,23 @@ export function DatabaseProvider({ children, encryptionKey }: DatabaseProviderPr
 
     const initDatabase = async () => {
       try {
-        // Open Realm with schema
-        // In development, this creates an in-memory database
-        // In production, we'll configure the path and encryption
+        // Get the encryption key from Emdros module
+        const realmKey = Emdros.realmEncryptionKey;
+        
+        // Open Realm with schema and encryption
+        // In development mode without the bundled database, we create an empty one
+        // In production, we'll load the bundled SourceView.realm file
         const config: Realm.Configuration = {
           schema: realmSchema,
           schemaVersion: 1,
-          // For production with bundled database:
-          // path: `${FileSystem.documentDirectory}SourceView.realm`,
-          // encryptionKey: encryptionKey,
+          // Encryption key for the bundled database
+          encryptionKey: realmKey,
+          // TODO: In production, set path to bundled database:
+          // path: `${documentDirectory}SourceView.realm`,
         };
 
         realmInstance = await Realm.open(config);
+        console.log('Realm database opened successfully');
         setRealm(realmInstance);
         setIsLoading(false);
       } catch (err) {
