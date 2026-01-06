@@ -1,99 +1,102 @@
-import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import Realm from 'realm';
-import { realmSchema, Book, Actant, Sphere, Bible } from './schema';
-import { Emdros } from '../modules/emdros';
+import React, { createContext, useContext, ReactNode } from 'react';
+
+// Mock types for development without Realm
+interface Book {
+  id: string;
+  name: string;
+  abbreviation: string;
+  testament: string;
+  textOrder: number;
+}
+
+interface Actant {
+  id: string;
+  name: string;
+  isSource: boolean;
+}
+
+interface Sphere {
+  id: string;
+  name: string;
+  position: number;
+  color: string;
+}
+
+interface Bible {
+  id: string;
+  name: string;
+  version: string;
+}
 
 interface DatabaseContextType {
-  realm: Realm | null;
   isLoading: boolean;
   error: Error | null;
   // Convenience query methods
-  books: Realm.Results<Book> | null;
-  sources: Realm.Results<Actant> | null;
-  spheres: Realm.Results<Sphere> | null;
+  books: Book[];
+  sources: Actant[];
+  spheres: Sphere[];
   bible: Bible | null;
 }
 
 const DatabaseContext = createContext<DatabaseContextType>({
-  realm: null,
-  isLoading: true,
+  isLoading: false,
   error: null,
-  books: null,
-  sources: null,
-  spheres: null,
+  books: [],
+  sources: [],
+  spheres: [],
   bible: null,
 });
 
 interface DatabaseProviderProps {
   children: ReactNode;
-  encryptionKey?: ArrayBuffer;
 }
+
+// Mock data for development
+const mockBooks: Book[] = [
+  { id: 'genesis', name: 'Genesis', abbreviation: 'Gen', testament: 'OT', textOrder: 1 },
+  { id: 'exodus', name: 'Exodus', abbreviation: 'Exod', testament: 'OT', textOrder: 2 },
+  { id: 'matthew', name: 'Matthew', abbreviation: 'Matt', testament: 'NT', textOrder: 40 },
+  { id: 'john', name: 'John', abbreviation: 'John', testament: 'NT', textOrder: 43 },
+  { id: 'revelation', name: 'Revelation', abbreviation: 'Rev', testament: 'NT', textOrder: 66 },
+];
+
+const mockSpheres: Sphere[] = [
+  { id: 'divine', name: 'Divine', position: 1, color: '#FFD700' },
+  { id: 'angelic', name: 'Angelic', position: 2, color: '#C0C0C0' },
+  { id: 'human', name: 'Human', position: 3, color: '#FFA500' },
+  { id: 'demonic', name: 'Demonic', position: 4, color: '#8B0000' },
+  { id: 'narrator', name: 'Narrator', position: 5, color: '#4169E1' },
+  { id: 'uncertain', name: 'Uncertain', position: 6, color: '#808080' },
+  { id: 'mixed', name: 'Mixed', position: 7, color: '#9932CC' },
+];
+
+const mockSources: Actant[] = [
+  { id: 'god', name: 'God', isSource: true },
+  { id: 'jesus', name: 'Jesus', isSource: true },
+  { id: 'moses', name: 'Moses', isSource: true },
+  { id: 'paul', name: 'Paul', isSource: true },
+];
+
+const mockBible: Bible = {
+  id: 'nlt',
+  name: 'New Living Translation',
+  version: 'NLT',
+};
 
 /**
  * DatabaseProvider
  * 
- * Provides Realm database access throughout the app.
- * The database file is bundled with the app and copied to the document directory on first run.
+ * Provides mock database access throughout the app for development.
+ * In production, this will be replaced with Realm integration.
  */
-export function DatabaseProvider({ children, encryptionKey }: DatabaseProviderProps) {
-  const [realm, setRealm] = useState<Realm | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
-
-  useEffect(() => {
-    let realmInstance: Realm | null = null;
-
-    const initDatabase = async () => {
-      try {
-        // Get the encryption key from Emdros module
-        const realmKey = Emdros.realmEncryptionKey;
-        
-        // Open Realm with schema and encryption
-        // In development mode without the bundled database, we create an empty one
-        // In production, we'll load the bundled SourceView.realm file
-        const config: Realm.Configuration = {
-          schema: realmSchema,
-          schemaVersion: 1,
-          // Encryption key for the bundled database
-          encryptionKey: realmKey,
-          // TODO: In production, set path to bundled database:
-          // path: `${documentDirectory}SourceView.realm`,
-        };
-
-        realmInstance = await Realm.open(config);
-        console.log('Realm database opened successfully');
-        setRealm(realmInstance);
-        setIsLoading(false);
-      } catch (err) {
-        console.error('Failed to open Realm database:', err);
-        setError(err as Error);
-        setIsLoading(false);
-      }
-    };
-
-    initDatabase();
-
-    return () => {
-      if (realmInstance && !realmInstance.isClosed) {
-        realmInstance.close();
-      }
-    };
-  }, [encryptionKey]);
-
-  // Compute derived values
-  const books = realm?.objects<Book>('Book').sorted('textOrder') ?? null;
-  const sources = realm?.objects<Actant>('Actant').filtered('isSource == true') ?? null;
-  const spheres = realm?.objects<Sphere>('Sphere').filtered('position > 0').sorted('position') ?? null;
-  const bible = realm?.objects<Bible>('Bible')[0] ?? null;
-
+export function DatabaseProvider({ children }: DatabaseProviderProps) {
   const value: DatabaseContextType = {
-    realm,
-    isLoading,
-    error,
-    books,
-    sources,
-    spheres,
-    bible,
+    isLoading: false,
+    error: null,
+    books: mockBooks,
+    sources: mockSources,
+    spheres: mockSpheres,
+    bible: mockBible,
   };
 
   return (
@@ -106,7 +109,7 @@ export function DatabaseProvider({ children, encryptionKey }: DatabaseProviderPr
 /**
  * useDatabase hook
  * 
- * Provides access to the Realm database and common queries.
+ * Provides access to the database and common queries.
  */
 export function useDatabase(): DatabaseContextType {
   const context = useContext(DatabaseContext);
@@ -132,8 +135,8 @@ export function useBooks() {
  * Returns a specific book by ID.
  */
 export function useBook(bookId: string) {
-  const { realm, isLoading, error } = useDatabase();
-  const book = realm?.objectForPrimaryKey<Book>('Book', bookId) ?? null;
+  const { books, isLoading, error } = useDatabase();
+  const book = books.find(b => b.id === bookId) ?? null;
   return { book, isLoading, error };
 }
 
@@ -143,18 +146,20 @@ export function useBook(bookId: string) {
  * Returns all sources (speakers) in the Bible.
  */
 export function useSources(search?: string) {
-  const { realm, isLoading, error } = useDatabase();
-  let sources = realm?.objects<Actant>('Actant').filtered('isSource == true') ?? null;
-  if (sources && search) {
-    sources = sources.filtered('name CONTAINS[c] $0', search);
+  const { sources, isLoading, error } = useDatabase();
+  let filteredSources = sources;
+  if (search) {
+    filteredSources = sources.filter(s => 
+      s.name.toLowerCase().includes(search.toLowerCase())
+    );
   }
-  return { sources, isLoading, error };
+  return { sources: filteredSources, isLoading, error };
 }
 
 /**
  * useSpheres hook
  * 
- * Returns all 7 spheres (excluding foundational).
+ * Returns all 7 spheres.
  */
 export function useSpheres() {
   const { spheres, isLoading, error } = useDatabase();
@@ -167,8 +172,7 @@ export function useSpheres() {
  * Returns a specific sphere by ID.
  */
 export function useSphere(sphereId: string) {
-  const { realm, isLoading, error } = useDatabase();
-  const sphere = realm?.objectForPrimaryKey<Sphere>('Sphere', sphereId) ?? null;
+  const { spheres, isLoading, error } = useDatabase();
+  const sphere = spheres.find(s => s.id === sphereId) ?? null;
   return { sphere, isLoading, error };
 }
-
