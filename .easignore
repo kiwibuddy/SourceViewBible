@@ -1,0 +1,36 @@
+# Ignore legacy codebase
+legacy/
+
+# Large data files (will be bundled differently for production)
+Datasets/
+
+# Git directory
+.git/
+
+# Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# macOS
+.DS_Store
+
+# Build outputs
+ios/
+android/
+
+# Test files
+__tests__/
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+
+# Documentation
+*.md
+!README.md
+
+# Cursor/IDE files
+.cursor/
+
