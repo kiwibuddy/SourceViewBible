@@ -1,0 +1,20 @@
+[
+  {"id": 1, "key": "Chron_0s_AD", "from": 0, "to": 99 },
+  {"id": 2, "key": "Chron_0s_BC", "from": -99, "to": -1 },
+  {"id": 3, "key": "Chron_1000s_BC", "from": -1099, "to": -1000 },
+  {"id": 4, "key": "Chron_1100s_BC", "from": -1299, "to": -1100 },
+  {"id": 5, "key": "Chron_1200s_BC", "from": -1299, "to": -1200 },
+  {"id": 6, "key": "Chron_1300s_BC", "from": -1399, "to": -1300 },
+  {"id": 7, "key": "Chron_1400s_BC", "from": -1499, "to": -1400 },
+  {"id": 8, "key": "Chron_1800s_BC", "from": -1899, "to": -1800 },
+  {"id": 9, "key": "Chron_1900s_BC", "from": -1999, "to": -1900 },
+  {"id": 10, "key": "Chron_2000s_BC", "from": -2099, "to": -2000 },
+  {"id": 11, "key": "Chron_400s_BC", "from": -499, "to": -400 },
+  {"id": 12, "key": "Chron_500s_BC", "from": -599, "to": -500 },
+  {"id": 13, "key": "Chron_600s_BC", "from": -699, "to": -600 },
+  {"id": 14, "key": "Chron_700s_BC", "from": -799, "to": -700 },
+  {"id": 15, "key": "Chron_800s_BC", "from": -899, "to": -800 },
+  {"id": 16, "key": "Chron_900s_BC", "from": -999, "to": -900 },
+  {"id": 17, "key": "Chron_Eschatos", "from": 100, "to": 10000 },
+  {"id": 18, "key": "Chron_PreAbraham", "from": -2100, "to": -10000 }
+]

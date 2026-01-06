@@ -6,7 +6,7 @@
 
 import React, { ReactNode } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ViewStyle, Image, ImageSourcePropType } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+// LinearGradient removed - requires native rebuild
 import { Colors } from '../common/colors';
 
 interface CardProps {
@@ -28,22 +28,22 @@ export function Card({
   gradientColors,
   image,
 }: CardProps) {
+  // Use the first color from gradient as background
+  const backgroundColor = gradientColors?.[0] || undefined;
+
   const content = (
     <>
       {image && <Image source={image} style={styles.image} />}
       {gradientColors ? (
-        <LinearGradient
-          colors={gradientColors as [string, string, ...string[]]}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 1 }}
-          style={styles.gradient}
+        <View
+          style={[styles.gradient, { backgroundColor }]}
         >
           <View style={styles.content}>
             {title && <Text style={styles.titleWhite}>{title}</Text>}
             {subtitle && <Text style={styles.subtitleWhite}>{subtitle}</Text>}
             {children}
           </View>
-        </LinearGradient>
+        </View>
       ) : (
         <View style={styles.content}>
           {title && <Text style={styles.title}>{title}</Text>}

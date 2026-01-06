@@ -1,0 +1,332 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AB3E37F31CA9927D00A7C3A1 /* RCTEmdros.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AB3E37F21CA9927D00A7C3A1 /* RCTEmdros.h */; };
+		AB3E37F51CA9927D00A7C3A1 /* RCTEmdros.m in Sources */ = {isa = PBXBuildFile; fileRef = AB3E37F41CA9927D00A7C3A1 /* RCTEmdros.m */; };
+		AB626BB81CAD2E3800544E7F /* RCTEmdrosEnv.mm in Sources */ = {isa = PBXBuildFile; fileRef = AB626BB71CAD2E3800544E7F /* RCTEmdrosEnv.mm */; };
+		AB934E3C1CC5621F00689C4D /* bucket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB934E331CC5621F00689C4D /* bucket.cpp */; };
+		AB934E3D1CC5621F00689C4D /* emdros_amalgamation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB934E351CC5621F00689C4D /* emdros_amalgamation.cpp */; };
+		AB934E3E1CC5621F00689C4D /* emdros_c_amalgamation.c in Sources */ = {isa = PBXBuildFile; fileRef = AB934E361CC5621F00689C4D /* emdros_c_amalgamation.c */; };
+		AB934E3F1CC5621F00689C4D /* harvest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB934E3A1CC5621F00689C4D /* harvest.cpp */; };
+		AB934E431CC5622C00689C4D /* OCDBenchmark.m in Sources */ = {isa = PBXBuildFile; fileRef = AB934E421CC5622C00689C4D /* OCDBenchmark.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AB3E37ED1CA9927D00A7C3A1 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				AB3E37F31CA9927D00A7C3A1 /* RCTEmdros.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		AB3E37EF1CA9927D00A7C3A1 /* libRCTEmdros.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTEmdros.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB3E37F21CA9927D00A7C3A1 /* RCTEmdros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTEmdros.h; sourceTree = "<group>"; };
+		AB3E37F41CA9927D00A7C3A1 /* RCTEmdros.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTEmdros.m; sourceTree = "<group>"; };
+		AB626BB61CAD2E3800544E7F /* RCTEmdrosEnv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTEmdrosEnv.h; sourceTree = "<group>"; };
+		AB626BB71CAD2E3800544E7F /* RCTEmdrosEnv.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RCTEmdrosEnv.mm; sourceTree = "<group>"; };
+		AB934E331CC5621F00689C4D /* bucket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bucket.cpp; path = ../../src/bucket.cpp; sourceTree = "<group>"; };
+		AB934E341CC5621F00689C4D /* bucket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bucket.h; path = ../../src/bucket.h; sourceTree = "<group>"; };
+		AB934E351CC5621F00689C4D /* emdros_amalgamation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = emdros_amalgamation.cpp; path = ../../src/emdros_amalgamation.cpp; sourceTree = "<group>"; };
+		AB934E361CC5621F00689C4D /* emdros_c_amalgamation.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = emdros_c_amalgamation.c; path = ../../src/emdros_c_amalgamation.c; sourceTree = "<group>"; };
+		AB934E371CC5621F00689C4D /* emdros-config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "emdros-config.h"; path = "../../src/emdros-config.h"; sourceTree = "<group>"; };
+		AB934E381CC5621F00689C4D /* emdros-lconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "emdros-lconfig.h"; path = "../../src/emdros-lconfig.h"; sourceTree = "<group>"; };
+		AB934E391CC5621F00689C4D /* emdros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = emdros.h; path = ../../src/emdros.h; sourceTree = "<group>"; };
+		AB934E3A1CC5621F00689C4D /* harvest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = harvest.cpp; path = ../../src/harvest.cpp; sourceTree = "<group>"; };
+		AB934E3B1CC5621F00689C4D /* harvest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = harvest.h; path = ../../src/harvest.h; sourceTree = "<group>"; };
+		AB934E411CC5622C00689C4D /* OCDBenchmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCDBenchmark.h; sourceTree = "<group>"; };
+		AB934E421CC5622C00689C4D /* OCDBenchmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCDBenchmark.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AB3E37EC1CA9927D00A7C3A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AB3E37E61CA9927D00A7C3A1 = {
+			isa = PBXGroup;
+			children = (
+				AB3E37F11CA9927D00A7C3A1 /* RCTEmdros */,
+				AB626BA41CAD2CA300544E7F /* Emdros */,
+				AB934E401CC5622C00689C4D /* ThirdParty */,
+				AB3E37F01CA9927D00A7C3A1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AB3E37F01CA9927D00A7C3A1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AB3E37EF1CA9927D00A7C3A1 /* libRCTEmdros.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AB3E37F11CA9927D00A7C3A1 /* RCTEmdros */ = {
+			isa = PBXGroup;
+			children = (
+				AB3E37F21CA9927D00A7C3A1 /* RCTEmdros.h */,
+				AB3E37F41CA9927D00A7C3A1 /* RCTEmdros.m */,
+				AB626BB61CAD2E3800544E7F /* RCTEmdrosEnv.h */,
+				AB626BB71CAD2E3800544E7F /* RCTEmdrosEnv.mm */,
+			);
+			path = RCTEmdros;
+			sourceTree = "<group>";
+		};
+		AB626BA41CAD2CA300544E7F /* Emdros */ = {
+			isa = PBXGroup;
+			children = (
+				AB934E331CC5621F00689C4D /* bucket.cpp */,
+				AB934E341CC5621F00689C4D /* bucket.h */,
+				AB934E351CC5621F00689C4D /* emdros_amalgamation.cpp */,
+				AB934E361CC5621F00689C4D /* emdros_c_amalgamation.c */,
+				AB934E371CC5621F00689C4D /* emdros-config.h */,
+				AB934E381CC5621F00689C4D /* emdros-lconfig.h */,
+				AB934E391CC5621F00689C4D /* emdros.h */,
+				AB934E3A1CC5621F00689C4D /* harvest.cpp */,
+				AB934E3B1CC5621F00689C4D /* harvest.h */,
+			);
+			name = Emdros;
+			sourceTree = "<group>";
+		};
+		AB934E401CC5622C00689C4D /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				AB934E411CC5622C00689C4D /* OCDBenchmark.h */,
+				AB934E421CC5622C00689C4D /* OCDBenchmark.m */,
+			);
+			path = ThirdParty;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AB3E37EE1CA9927D00A7C3A1 /* RCTEmdros */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AB3E37F81CA9927D00A7C3A1 /* Build configuration list for PBXNativeTarget "RCTEmdros" */;
+			buildPhases = (
+				AB3E37EB1CA9927D00A7C3A1 /* Sources */,
+				AB3E37EC1CA9927D00A7C3A1 /* Frameworks */,
+				AB3E37ED1CA9927D00A7C3A1 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RCTEmdros;
+			productName = RCTEmdros;
+			productReference = AB3E37EF1CA9927D00A7C3A1 /* libRCTEmdros.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AB3E37E71CA9927D00A7C3A1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = "Overcommitted, LLC";
+				TargetAttributes = {
+					AB3E37EE1CA9927D00A7C3A1 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
+			};
+			buildConfigurationList = AB3E37EA1CA9927D00A7C3A1 /* Build configuration list for PBXProject "RCTEmdros" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = AB3E37E61CA9927D00A7C3A1;
+			productRefGroup = AB3E37F01CA9927D00A7C3A1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AB3E37EE1CA9927D00A7C3A1 /* RCTEmdros */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AB3E37EB1CA9927D00A7C3A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB934E3E1CC5621F00689C4D /* emdros_c_amalgamation.c in Sources */,
+				AB934E3C1CC5621F00689C4D /* bucket.cpp in Sources */,
+				AB934E3F1CC5621F00689C4D /* harvest.cpp in Sources */,
+				AB934E3D1CC5621F00689C4D /* emdros_amalgamation.cpp in Sources */,
+				AB934E431CC5622C00689C4D /* OCDBenchmark.m in Sources */,
+				AB626BB81CAD2E3800544E7F /* RCTEmdrosEnv.mm in Sources */,
+				AB3E37F51CA9927D00A7C3A1 /* RCTEmdros.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AB3E37F61CA9927D00A7C3A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		AB3E37F71CA9927D00A7C3A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AB3E37F91CA9927D00A7C3A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../../../react-native/React/**",
+					"$(SRCROOT)/../../../../App/node_modules/react-native/React/**",
+				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		AB3E37FA1CA9927D00A7C3A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../../../react-native/React/**",
+					"$(SRCROOT)/../../../../App/node_modules/react-native/React/**",
+				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AB3E37EA1CA9927D00A7C3A1 /* Build configuration list for PBXProject "RCTEmdros" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB3E37F61CA9927D00A7C3A1 /* Debug */,
+				AB3E37F71CA9927D00A7C3A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AB3E37F81CA9927D00A7C3A1 /* Build configuration list for PBXNativeTarget "RCTEmdros" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB3E37F91CA9927D00A7C3A1 /* Debug */,
+				AB3E37FA1CA9927D00A7C3A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AB3E37E71CA9927D00A7C3A1 /* Project object */;
+}

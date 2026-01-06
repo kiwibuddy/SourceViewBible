@@ -14,7 +14,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { LinearGradient } from 'expo-linear-gradient';
+// LinearGradient removed - requires native rebuild
 import { Colors, formatNumber } from '../../src/common';
 import { SourceIcon, SpheresBarChart } from '../../src/components';
 
@@ -63,12 +63,7 @@ export default function SourceOverviewScreen() {
   return (
     <ScrollView style={styles.container}>
       {/* Header */}
-      <LinearGradient
-        colors={sourceColors.gradient.big as [string, string, ...string[]]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={styles.header}
-      >
+      <View style={[styles.header, { backgroundColor: sourceColors.tint }]}>
         <SourceIcon
           source={source}
           principalSourceType={source.principalSourceType}
@@ -79,7 +74,7 @@ export default function SourceOverviewScreen() {
         <Text style={styles.headerSubtitle}>
           {formatNumber(source.wordCount)} words
         </Text>
-      </LinearGradient>
+      </View>
 
       {/* Stats */}
       <View style={styles.statsContainer}>

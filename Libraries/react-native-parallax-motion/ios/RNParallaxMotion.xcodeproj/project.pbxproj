@@ -1,0 +1,266 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AB8EB6B71CF75449005D4006 /* RNParallaxMotion.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AB8EB6B61CF75449005D4006 /* RNParallaxMotion.h */; };
+		AB8EB6B91CF75449005D4006 /* RNParallaxMotion.m in Sources */ = {isa = PBXBuildFile; fileRef = AB8EB6B81CF75449005D4006 /* RNParallaxMotion.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AB8EB6B11CF75449005D4006 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				AB8EB6B71CF75449005D4006 /* RNParallaxMotion.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		AB8EB6B31CF75449005D4006 /* libRNParallaxMotion.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNParallaxMotion.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB8EB6B61CF75449005D4006 /* RNParallaxMotion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNParallaxMotion.h; sourceTree = "<group>"; };
+		AB8EB6B81CF75449005D4006 /* RNParallaxMotion.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNParallaxMotion.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AB8EB6B01CF75449005D4006 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AB8EB6AA1CF75449005D4006 = {
+			isa = PBXGroup;
+			children = (
+				AB8EB6B51CF75449005D4006 /* RNParallaxMotion */,
+				AB8EB6B41CF75449005D4006 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AB8EB6B41CF75449005D4006 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AB8EB6B31CF75449005D4006 /* libRNParallaxMotion.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AB8EB6B51CF75449005D4006 /* RNParallaxMotion */ = {
+			isa = PBXGroup;
+			children = (
+				AB8EB6B61CF75449005D4006 /* RNParallaxMotion.h */,
+				AB8EB6B81CF75449005D4006 /* RNParallaxMotion.m */,
+			);
+			path = RNParallaxMotion;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AB8EB6B21CF75449005D4006 /* RNParallaxMotion */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AB8EB6BC1CF75449005D4006 /* Build configuration list for PBXNativeTarget "RNParallaxMotion" */;
+			buildPhases = (
+				AB8EB6AF1CF75449005D4006 /* Sources */,
+				AB8EB6B01CF75449005D4006 /* Frameworks */,
+				AB8EB6B11CF75449005D4006 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RNParallaxMotion;
+			productName = RNParallaxMotion;
+			productReference = AB8EB6B31CF75449005D4006 /* libRNParallaxMotion.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AB8EB6AB1CF75449005D4006 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Overcommitted, LLC";
+				TargetAttributes = {
+					AB8EB6B21CF75449005D4006 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
+			};
+			buildConfigurationList = AB8EB6AE1CF75449005D4006 /* Build configuration list for PBXProject "RNParallaxMotion" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = AB8EB6AA1CF75449005D4006;
+			productRefGroup = AB8EB6B41CF75449005D4006 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AB8EB6B21CF75449005D4006 /* RNParallaxMotion */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AB8EB6AF1CF75449005D4006 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB8EB6B91CF75449005D4006 /* RNParallaxMotion.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AB8EB6BA1CF75449005D4006 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		AB8EB6BB1CF75449005D4006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AB8EB6BD1CF75449005D4006 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../../react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native/React/**",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		AB8EB6BE1CF75449005D4006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../../react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native/React/**",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AB8EB6AE1CF75449005D4006 /* Build configuration list for PBXProject "RNParallaxMotion" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB8EB6BA1CF75449005D4006 /* Debug */,
+				AB8EB6BB1CF75449005D4006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AB8EB6BC1CF75449005D4006 /* Build configuration list for PBXNativeTarget "RNParallaxMotion" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB8EB6BD1CF75449005D4006 /* Debug */,
+				AB8EB6BE1CF75449005D4006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AB8EB6AB1CF75449005D4006 /* Project object */;
+}

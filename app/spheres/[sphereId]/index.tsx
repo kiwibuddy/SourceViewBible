@@ -14,7 +14,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { LinearGradient } from 'expo-linear-gradient';
+// LinearGradient removed - requires native rebuild
 import { Colors, formatNumber } from '../../../src/common';
 import { Icon, SourceIcon } from '../../../src/components';
 
@@ -88,12 +88,7 @@ export default function SphereOverviewScreen() {
   return (
     <ScrollView style={styles.container}>
       {/* Header */}
-      <LinearGradient
-        colors={sphereColors.gradient.big as [string, string, ...string[]]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={styles.header}
-      >
+      <View style={[styles.header, { backgroundColor: sphereColors.tint }]}>
         <Icon
           name={`${sphere.id}-filled`}
           size={60}
@@ -103,7 +98,7 @@ export default function SphereOverviewScreen() {
         <Text style={styles.headerSubtitle}>
           {percent}% of the Bible
         </Text>
-      </LinearGradient>
+      </View>
 
       {/* Stats */}
       <View style={styles.statsContainer}>

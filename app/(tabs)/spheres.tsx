@@ -5,7 +5,7 @@
  * Ported from legacy/App/js/Scenes/Spheres/Spheres.js
  */
 
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -13,30 +13,18 @@ import {
   ScrollView,
   TouchableOpacity,
   Dimensions,
-  Animated,
-  Image,
+  ActivityIndicator,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import { LinearGradient } from 'expo-linear-gradient';
+// LinearGradient removed - requires native rebuild
 import { Colors, formatNumber } from '../../src/common';
 import { Icon } from '../../src/components';
+import { useSpheres, useDatabase } from '../../src/database/provider';
+import { Sphere } from '../../src/data';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const CIRCLE_SIZE = Math.min(SCREEN_WIDTH - 80, 280);
 const SPHERE_ICON_SIZE = 60;
-
-// Mock data - will be replaced with real Realm data
-const MOCK_SPHERES = [
-  { id: 'family', name: 'Family', position: 1, wordCount: 45000, sourceCount: 85, passageCount: 52 },
-  { id: 'economics', name: 'Economics', position: 2, wordCount: 38000, sourceCount: 72, passageCount: 52 },
-  { id: 'government', name: 'Government', position: 3, wordCount: 52000, sourceCount: 95, passageCount: 52 },
-  { id: 'religion', name: 'Religion', position: 4, wordCount: 78000, sourceCount: 120, passageCount: 52 },
-  { id: 'education', name: 'Education', position: 5, wordCount: 28000, sourceCount: 55, passageCount: 52 },
-  { id: 'communication', name: 'Communication', position: 6, wordCount: 32000, sourceCount: 65, passageCount: 52 },
-  { id: 'celebration', name: 'Celebration', position: 7, wordCount: 18000, sourceCount: 42, passageCount: 52 },
-];
-
-const TOTAL_BIBLE_WORD_COUNT = 783137;
 
 // Calculate positions for spheres in a circle
 function getCirclePosition(index: number, total: number, radius: number) {
@@ -47,14 +35,14 @@ function getCirclePosition(index: number, total: number, radius: number) {
 }
 
 interface SphereCircleProps {
-  sphere: typeof MOCK_SPHERES[0];
+  sphere: Sphere;
   position: { x: number; y: number };
   onPress: () => void;
   isSelected: boolean;
 }
 
 function SphereCircle({ sphere, position, onPress, isSelected }: SphereCircleProps) {
-  const sphereColors = Colors.spheres[sphere.id as keyof typeof Colors.spheres];
+  const sphereColors = Colors.spheres[sphere.id as keyof typeof Colors.spheres] || Colors.spheres.family;
 
   return (
     <TouchableOpacity
@@ -71,31 +59,40 @@ function SphereCircle({ sphere, position, onPress, isSelected }: SphereCirclePro
       onPress={onPress}
       activeOpacity={0.8}
     >
-      <LinearGradient
-        colors={sphereColors.gradient.big as [string, string, ...string[]]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={styles.sphereGradient}
-      >
+      <View style={[styles.sphereGradient, { backgroundColor: sphereColors.tint || '#666' }]}>
         <Icon
           name={`${sphere.id}-filled`}
           size={30}
           color="#FFFFFF"
         />
-      </LinearGradient>
+      </View>
     </TouchableOpacity>
   );
 }
 
 export default function SpheresScreen() {
   const router = useRouter();
+  const { spheres, getSpherePassages, isLoading } = useSpheres();
+  const { totalWordCount } = useDatabase();
   const [selectedSphere, setSelectedSphere] = useState<string | null>(null);
 
   const radius = CIRCLE_SIZE / 2 - SPHERE_ICON_SIZE / 2;
 
   const selectedData = selectedSphere
-    ? MOCK_SPHERES.find(s => s.id === selectedSphere)
+    ? spheres.find(s => s.id === selectedSphere)
     : null;
+
+  const selectedPassages = selectedSphere
+    ? getSpherePassages(selectedSphere)
+    : [];
+
+  if (isLoading) {
+    return (
+      <View style={[styles.container, styles.centered]}>
+        <ActivityIndicator size="large" color={Colors.tint} />
+      </View>
+    );
+  }
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
@@ -108,7 +105,7 @@ export default function SpheresScreen() {
               <>
                 <Text style={styles.centerTitle}>{selectedData.name}</Text>
                 <Text style={styles.centerSubtitle}>
-                  {Math.round((selectedData.wordCount / TOTAL_BIBLE_WORD_COUNT) * 100)}% of Bible
+                  {Math.round(((selectedData.wordCount || 0) / (totalWordCount || 1)) * 100)}% of Bible
                 </Text>
               </>
             ) : (
@@ -120,8 +117,8 @@ export default function SpheresScreen() {
           </View>
 
           {/* Sphere icons */}
-          {MOCK_SPHERES.map((sphere, index) => {
-            const position = getCirclePosition(index, MOCK_SPHERES.length, radius);
+          {spheres.map((sphere, index) => {
+            const position = getCirclePosition(index, spheres.length, radius);
             return (
               <SphereCircle
                 key={sphere.id}
@@ -151,27 +148,27 @@ export default function SpheresScreen() {
         <View style={styles.detailsContainer}>
           <View style={styles.statsRow}>
             <View style={styles.statItem}>
-              <Text style={[styles.statValue, { color: Colors.spheres[selectedData.id as keyof typeof Colors.spheres].tint }]}>
-                {selectedData.sourceCount}
+              <Text style={[styles.statValue, { color: Colors.spheres[selectedData.id as keyof typeof Colors.spheres]?.tint || Colors.tint }]}>
+                {selectedData.sourceCount || 0}
               </Text>
               <Text style={styles.statLabel}>Sources</Text>
             </View>
             <View style={styles.statItem}>
-              <Text style={[styles.statValue, { color: Colors.spheres[selectedData.id as keyof typeof Colors.spheres].tint }]}>
-                {formatNumber(selectedData.wordCount)}
+              <Text style={[styles.statValue, { color: Colors.spheres[selectedData.id as keyof typeof Colors.spheres]?.tint || Colors.tint }]}>
+                {formatNumber(selectedData.wordCount || 0)}
               </Text>
               <Text style={styles.statLabel}>Words</Text>
             </View>
             <View style={styles.statItem}>
-              <Text style={[styles.statValue, { color: Colors.spheres[selectedData.id as keyof typeof Colors.spheres].tint }]}>
-                {selectedData.passageCount}
+              <Text style={[styles.statValue, { color: Colors.spheres[selectedData.id as keyof typeof Colors.spheres]?.tint || Colors.tint }]}>
+                {selectedPassages.length}
               </Text>
               <Text style={styles.statLabel}>Key Passages</Text>
             </View>
           </View>
 
           <TouchableOpacity
-            style={[styles.exploreButton, { backgroundColor: Colors.spheres[selectedData.id as keyof typeof Colors.spheres].tint }]}
+            style={[styles.exploreButton, { backgroundColor: Colors.spheres[selectedData.id as keyof typeof Colors.spheres]?.tint || Colors.tint }]}
             onPress={() => router.push(`/spheres/${selectedData.id}`)}
           >
             <Text style={styles.exploreButtonText}>Explore {selectedData.name}</Text>
@@ -182,9 +179,9 @@ export default function SpheresScreen() {
       {/* All Spheres List */}
       <View style={styles.listContainer}>
         <Text style={styles.sectionTitle}>ALL SPHERES</Text>
-        {MOCK_SPHERES.map((sphere) => {
-          const sphereColors = Colors.spheres[sphere.id as keyof typeof Colors.spheres];
-          const percent = Math.round((sphere.wordCount / TOTAL_BIBLE_WORD_COUNT) * 100);
+        {spheres.map((sphere) => {
+          const sphereColors = Colors.spheres[sphere.id as keyof typeof Colors.spheres] || Colors.spheres.family;
+          const percent = Math.round(((sphere.wordCount || 0) / (totalWordCount || 1)) * 100);
 
           return (
             <TouchableOpacity
@@ -209,6 +206,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
+  },
+  centered: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   contentContainer: {
     paddingBottom: 30,

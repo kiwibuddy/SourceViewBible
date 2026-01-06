@@ -13,51 +13,56 @@ import {
   FlatList,
   TouchableOpacity,
   TextInput,
+  ActivityIndicator,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Colors, formatNumber } from '../../src/common';
 import { SourceIcon } from '../../src/components';
-
-// Mock data - will be replaced with real Realm data
-const MOCK_SOURCES = [
-  { id: 1, name: 'God', wordCount: 35000, principalSourceType: 'god', isDivine: true, sphereWordCount: 18000, bookCount: 55 },
-  { id: 2, name: 'Jesus', wordCount: 32000, principalSourceType: 'god', isDivine: true, sphereWordCount: 16500, bookCount: 4 },
-  { id: 3, name: 'Moses', wordCount: 18000, principalSourceType: 'lead', isHuman: true, isIndividual: true, hasGender: true, isFemale: false, sphereWordCount: 9500, bookCount: 5 },
-  { id: 4, name: 'David', wordCount: 15000, principalSourceType: 'lead', isHuman: true, isIndividual: true, hasGender: true, isFemale: false, sphereWordCount: 7200, bookCount: 6 },
-  { id: 5, name: 'Paul', wordCount: 25000, principalSourceType: 'support', isHuman: true, isIndividual: true, hasGender: true, isFemale: false, sphereWordCount: 12000, bookCount: 13 },
-  { id: 6, name: 'Peter', wordCount: 12000, principalSourceType: 'support', isHuman: true, isIndividual: true, hasGender: true, isFemale: false, sphereWordCount: 5800, bookCount: 3 },
-  { id: 7, name: 'Abraham', wordCount: 8000, principalSourceType: 'lead', isHuman: true, isIndividual: true, hasGender: true, isFemale: false, sphereWordCount: 3800, bookCount: 2 },
-  { id: 8, name: 'Isaiah', wordCount: 6500, principalSourceType: 'support', isHuman: true, isIndividual: true, hasGender: true, isFemale: false, sphereWordCount: 3200, bookCount: 1 },
-  { id: 9, name: 'Solomon', wordCount: 5500, principalSourceType: 'lead', isHuman: true, isIndividual: true, hasGender: true, isFemale: false, sphereWordCount: 2800, bookCount: 3 },
-  { id: 10, name: 'Jacob', wordCount: 4800, principalSourceType: 'lead', isHuman: true, isIndividual: true, hasGender: true, isFemale: false, sphereWordCount: 2200, bookCount: 1 },
-  { id: 11, name: 'Joseph', wordCount: 4500, principalSourceType: 'lead', isHuman: true, isIndividual: true, hasGender: true, isFemale: false, sphereWordCount: 2100, bookCount: 1 },
-  { id: 12, name: 'John', wordCount: 10000, principalSourceType: 'support', isHuman: true, isIndividual: true, hasGender: true, isFemale: false, sphereWordCount: 4500, bookCount: 5 },
-  { id: 13, name: 'Elijah', wordCount: 3500, principalSourceType: 'lead', isHuman: true, isIndividual: true, hasGender: true, isFemale: false, sphereWordCount: 1800, bookCount: 2 },
-  { id: 14, name: 'Samuel', wordCount: 3200, principalSourceType: 'lead', isHuman: true, isIndividual: true, hasGender: true, isFemale: false, sphereWordCount: 1600, bookCount: 2 },
-  { id: 15, name: 'Mary', wordCount: 900, principalSourceType: 'support', isHuman: true, isIndividual: true, hasGender: true, isFemale: true, sphereWordCount: 450, bookCount: 2 },
-  { id: 16, name: 'Satan', wordCount: 1200, principalSourceType: 'support', isDemonic: true, sphereWordCount: 600, bookCount: 3 },
-  { id: 17, name: 'Gabriel', wordCount: 800, principalSourceType: 'support', isAngelic: true, sphereWordCount: 400, bookCount: 2 },
-];
+import { useSources } from '../../src/database/provider';
+import { Actant, getActantIconName } from '../../src/data';
 
 type FilterType = 'all' | 'divine' | 'human' | 'angelic' | 'demonic';
 
 interface SourceItemProps {
-  source: typeof MOCK_SOURCES[0];
+  source: Actant;
   onPress: () => void;
 }
 
 function SourceItem({ source, onPress }: SourceItemProps) {
+  const isDivine = source.natures.some(n => n.id === 3);
+  const isHuman = source.natures.some(n => n.id === 4);
+  const isAngelic = source.natures.some(n => n.id === 1);
+  const isDemonic = source.natures.some(n => n.id === 2);
+  const isIndividual = source.actantNumber === 2;
+  const hasGender = source.gender === 1 || source.gender === 2;
+  const isFemale = source.gender === 1;
+
+  // Get icon properties
+  const iconProps = {
+    isDivine,
+    isHuman,
+    isAngelic,
+    isDemonic,
+    isIndividual,
+    hasGender,
+    isFemale,
+    principalSourceType: source.principalSourceType || 'support',
+  };
+
+  // Count books from chronologies
+  const bookCount = source.chronologies?.length || 0;
+
   return (
     <TouchableOpacity style={styles.sourceItem} onPress={onPress} activeOpacity={0.7}>
       <SourceIcon
-        source={source}
-        principalSourceType={source.principalSourceType}
+        source={iconProps}
+        principalSourceType={source.principalSourceType || 'support'}
         size={44}
       />
       <View style={styles.sourceInfo}>
         <Text style={styles.sourceName}>{source.name}</Text>
         <Text style={styles.sourceStats}>
-          {formatNumber(source.wordCount)} words • {source.bookCount} books
+          {formatNumber(source.wordCount || 0)} words
         </Text>
       </View>
       <Text style={styles.arrow}>›</Text>
@@ -67,40 +72,54 @@ function SourceItem({ source, onPress }: SourceItemProps) {
 
 export default function SourcesScreen() {
   const router = useRouter();
+  const { sources, isLoading } = useSources();
   const [searchQuery, setSearchQuery] = useState('');
   const [filter, setFilter] = useState<FilterType>('all');
 
   const filteredSources = useMemo(() => {
-    let sources = [...MOCK_SOURCES];
+    let results = [...sources];
 
     // Apply search filter
     if (searchQuery) {
-      sources = sources.filter(s =>
+      results = results.filter(s =>
         s.name.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
     // Apply type filter
     if (filter !== 'all') {
-      sources = sources.filter(s => {
-        if (filter === 'divine') return s.isDivine;
-        if (filter === 'human') return s.isHuman;
-        if (filter === 'angelic') return s.isAngelic;
-        if (filter === 'demonic') return s.isDemonic;
+      results = results.filter(s => {
+        const isDivine = s.natures.some(n => n.id === 3);
+        const isHuman = s.natures.some(n => n.id === 4);
+        const isAngelic = s.natures.some(n => n.id === 1);
+        const isDemonic = s.natures.some(n => n.id === 2);
+        
+        if (filter === 'divine') return isDivine;
+        if (filter === 'human') return isHuman;
+        if (filter === 'angelic') return isAngelic;
+        if (filter === 'demonic') return isDemonic;
         return true;
       });
     }
 
-    // Sort by word count
-    return sources.sort((a, b) => b.wordCount - a.wordCount);
-  }, [searchQuery, filter]);
+    // Sort by word count (if available) or name
+    return results.sort((a, b) => (b.wordCount || 0) - (a.wordCount || 0));
+  }, [sources, searchQuery, filter]);
 
-  const renderSource = ({ item }: { item: typeof MOCK_SOURCES[0] }) => (
+  const renderSource = ({ item }: { item: Actant }) => (
     <SourceItem
       source={item}
       onPress={() => router.push(`/sources/${item.id}`)}
     />
   );
+
+  if (isLoading) {
+    return (
+      <View style={[styles.container, styles.centered]}>
+        <ActivityIndicator size="large" color={Colors.tint} />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -152,6 +171,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
+  },
+  centered: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   searchContainer: {
     paddingHorizontal: 15,

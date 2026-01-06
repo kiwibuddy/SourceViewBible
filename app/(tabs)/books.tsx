@@ -12,50 +12,68 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
-  SegmentedControlIOSComponent,
+  ActivityIndicator,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import { LinearGradient } from 'expo-linear-gradient';
-import { Colors, readingTime, formatNumber } from '../../src/common';
-import { BarChart, Icon } from '../../src/components';
-
-// Mock data - will be replaced with real Realm data
-const MOCK_BOOKS = [
-  { id: 'genesis', name: 'Genesis', testament: 1, textOrder: 1, wordCount: 38262, sourceCount: 42, principalSourceType: 'narrator', sourceTypeCounts: { narrator: 25000, god: 8000, lead: 3500, support: 1762 }, maxSourceWordCount: 25000 },
-  { id: 'exodus', name: 'Exodus', testament: 1, textOrder: 2, wordCount: 32500, sourceCount: 35, principalSourceType: 'god', sourceTypeCounts: { narrator: 12000, god: 15000, lead: 3500, support: 2000 }, maxSourceWordCount: 15000 },
-  { id: 'leviticus', name: 'Leviticus', testament: 1, textOrder: 3, wordCount: 24500, sourceCount: 8, principalSourceType: 'god', sourceTypeCounts: { narrator: 5000, god: 18000, lead: 1000, support: 500 }, maxSourceWordCount: 18000 },
-  { id: 'numbers', name: 'Numbers', testament: 1, textOrder: 4, wordCount: 32600, sourceCount: 42, principalSourceType: 'narrator', sourceTypeCounts: { narrator: 20000, god: 8000, lead: 3000, support: 1600 }, maxSourceWordCount: 20000 },
-  { id: 'deuteronomy', name: 'Deuteronomy', testament: 1, textOrder: 5, wordCount: 28450, sourceCount: 12, principalSourceType: 'lead', sourceTypeCounts: { narrator: 5000, god: 3000, lead: 19000, support: 1450 }, maxSourceWordCount: 19000 },
-  { id: 'joshua', name: 'Joshua', testament: 1, textOrder: 6, wordCount: 18858, sourceCount: 25, principalSourceType: 'narrator', sourceTypeCounts: { narrator: 12000, god: 2500, lead: 3000, support: 1358 }, maxSourceWordCount: 12000 },
-  { id: 'judges', name: 'Judges', testament: 1, textOrder: 7, wordCount: 18976, sourceCount: 45, principalSourceType: 'narrator', sourceTypeCounts: { narrator: 13000, god: 1500, lead: 2800, support: 1676 }, maxSourceWordCount: 13000 },
-  { id: 'ruth', name: 'Ruth', testament: 1, textOrder: 8, wordCount: 2578, sourceCount: 6, principalSourceType: 'narrator', sourceTypeCounts: { narrator: 1500, god: 200, lead: 600, support: 278 }, maxSourceWordCount: 1500 },
-  { id: '1-samuel', name: '1 Samuel', testament: 1, textOrder: 9, wordCount: 25068, sourceCount: 55, principalSourceType: 'narrator', sourceTypeCounts: { narrator: 16000, god: 2500, lead: 4500, support: 2068 }, maxSourceWordCount: 16000 },
-  { id: '2-samuel', name: '2 Samuel', testament: 1, textOrder: 10, wordCount: 20612, sourceCount: 48, principalSourceType: 'narrator', sourceTypeCounts: { narrator: 14000, god: 1500, lead: 3500, support: 1612 }, maxSourceWordCount: 14000 },
-  // ... more books would be added here from the database
-  { id: 'matthew', name: 'Matthew', testament: 2, textOrder: 40, wordCount: 23684, sourceCount: 28, principalSourceType: 'lead', sourceTypeCounts: { narrator: 8000, god: 500, lead: 13000, support: 2184 }, maxSourceWordCount: 13000 },
-  { id: 'mark', name: 'Mark', testament: 2, textOrder: 41, wordCount: 15171, sourceCount: 22, principalSourceType: 'lead', sourceTypeCounts: { narrator: 6000, god: 300, lead: 7500, support: 1371 }, maxSourceWordCount: 7500 },
-  { id: 'luke', name: 'Luke', testament: 2, textOrder: 42, wordCount: 25944, sourceCount: 38, principalSourceType: 'narrator', sourceTypeCounts: { narrator: 14000, god: 500, lead: 9500, support: 1944 }, maxSourceWordCount: 14000 },
-  { id: 'john', name: 'John', testament: 2, textOrder: 43, wordCount: 19094, sourceCount: 22, principalSourceType: 'lead', sourceTypeCounts: { narrator: 5500, god: 500, lead: 11000, support: 2094 }, maxSourceWordCount: 11000 },
-  { id: 'acts', name: 'Acts', testament: 2, textOrder: 44, wordCount: 24250, sourceCount: 45, principalSourceType: 'narrator', sourceTypeCounts: { narrator: 16000, god: 500, lead: 5500, support: 2250 }, maxSourceWordCount: 16000 },
-  { id: 'romans', name: 'Romans', testament: 2, textOrder: 45, wordCount: 9447, sourceCount: 6, principalSourceType: 'support', sourceTypeCounts: { narrator: 1000, god: 500, lead: 1500, support: 6447 }, maxSourceWordCount: 6447 },
-  { id: 'revelation', name: 'Revelation', testament: 2, textOrder: 66, wordCount: 12000, sourceCount: 18, principalSourceType: 'god', sourceTypeCounts: { narrator: 3000, god: 6000, lead: 2000, support: 1000 }, maxSourceWordCount: 6000 },
-];
+import { Colors, readingTime } from '../../src/common';
+import { BarChart } from '../../src/components';
+import { useBooks } from '../../src/database/provider';
+import { Book } from '../../src/data';
 
 // Calculate max word count for scaling bar charts
-const MAX_WORD_COUNT = Math.max(...MOCK_BOOKS.map(b => b.wordCount));
+const MAX_WORD_COUNT = 45000; // Psalms is the longest
 
 interface BookItemProps {
-  book: typeof MOCK_BOOKS[0];
+  book: Book;
   onPress: () => void;
 }
 
 function BookItem({ book, onPress }: BookItemProps) {
   const sourceTypeColors = Colors.sources;
+  
+  // Create approximate source type distribution based on principal source type
+  const wordCount = book.wordCount || 0;
+  let sourceTypeCounts = { narrator: 0, god: 0, lead: 0, support: 0 };
+  
+  switch (book.principalSourceType) {
+    case 'narrator':
+      sourceTypeCounts = {
+        narrator: wordCount * 0.65,
+        god: wordCount * 0.15,
+        lead: wordCount * 0.12,
+        support: wordCount * 0.08,
+      };
+      break;
+    case 'god':
+      sourceTypeCounts = {
+        narrator: wordCount * 0.25,
+        god: wordCount * 0.55,
+        lead: wordCount * 0.12,
+        support: wordCount * 0.08,
+      };
+      break;
+    case 'lead':
+      sourceTypeCounts = {
+        narrator: wordCount * 0.30,
+        god: wordCount * 0.10,
+        lead: wordCount * 0.48,
+        support: wordCount * 0.12,
+      };
+      break;
+    default:
+      sourceTypeCounts = {
+        narrator: wordCount * 0.45,
+        god: wordCount * 0.15,
+        lead: wordCount * 0.20,
+        support: wordCount * 0.20,
+      };
+  }
+  
   const bars = [
-    { color: sourceTypeColors.narrator.tint, value: book.sourceTypeCounts.narrator },
-    { color: sourceTypeColors.god.tint, value: book.sourceTypeCounts.god },
-    { color: sourceTypeColors.lead.tint, value: book.sourceTypeCounts.lead },
-    { color: sourceTypeColors.support.tint, value: book.sourceTypeCounts.support },
+    { color: sourceTypeColors.narrator.tint, value: sourceTypeCounts.narrator },
+    { color: sourceTypeColors.god.tint, value: sourceTypeCounts.god },
+    { color: sourceTypeColors.lead.tint, value: sourceTypeCounts.lead },
+    { color: sourceTypeColors.support.tint, value: sourceTypeCounts.support },
   ];
 
   return (
@@ -63,7 +81,7 @@ function BookItem({ book, onPress }: BookItemProps) {
       <View style={styles.bookInfo}>
         <Text style={styles.bookName}>{book.name}</Text>
         <Text style={styles.bookStats}>
-          {book.sourceCount} sources • {readingTime(book.wordCount)}
+          {book.sourceCount || 0} sources • {readingTime(book.wordCount || 0)}
         </Text>
       </View>
       <View style={styles.chartContainer}>
@@ -80,20 +98,29 @@ function BookItem({ book, onPress }: BookItemProps) {
 
 export default function BooksScreen() {
   const router = useRouter();
+  const { books, isLoading } = useBooks();
   const [selectedTestament, setSelectedTestament] = useState<'all' | 'ot' | 'nt'>('all');
 
   const filteredBooks = useMemo(() => {
-    if (selectedTestament === 'all') return MOCK_BOOKS;
-    if (selectedTestament === 'ot') return MOCK_BOOKS.filter(b => b.testament === 1);
-    return MOCK_BOOKS.filter(b => b.testament === 2);
-  }, [selectedTestament]);
+    if (selectedTestament === 'all') return books;
+    if (selectedTestament === 'ot') return books.filter(b => b.testament === 0);
+    return books.filter(b => b.testament === 1);
+  }, [books, selectedTestament]);
 
-  const renderBook = ({ item }: { item: typeof MOCK_BOOKS[0] }) => (
+  const renderBook = ({ item }: { item: Book }) => (
     <BookItem
       book={item}
       onPress={() => router.push(`/books/${item.id}`)}
     />
   );
+
+  if (isLoading) {
+    return (
+      <View style={[styles.container, styles.centered]}>
+        <ActivityIndicator size="large" color={Colors.tint} />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -104,7 +131,7 @@ export default function BooksScreen() {
           onPress={() => setSelectedTestament('all')}
         >
           <Text style={[styles.filterText, selectedTestament === 'all' && styles.filterTextActive]}>
-            All
+            All ({books.length})
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -160,6 +187,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
+  },
+  centered: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   filterContainer: {
     flexDirection: 'row',

@@ -16,52 +16,17 @@ import {
   FlatList,
   NativeSyntheticEvent,
   NativeScrollEvent,
+  ActivityIndicator,
 } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter, Link } from 'expo-router';
 import Constants from 'expo-constants';
 import { Colors, formatNumber, readingTime } from '../../src/common';
 import { Icon, SourceIcon } from '../../src/components';
+import { useBooks, useSources, useSpheres } from '../../src/database/provider';
+import { Book, Actant, Sphere } from '../../src/data';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const ITEM_WIDTH = (SCREEN_WIDTH - 16) / 3;
-
-// Mock data for development (will be replaced with real data from Realm)
-const MOCK_BOOKS = [
-  { id: 'genesis', name: 'Genesis', wordCount: 38262, sourceCount: 42, principalSourceType: 'narrator', sphereWordCount: 18500 },
-  { id: 'exodus', name: 'Exodus', wordCount: 32500, sourceCount: 35, principalSourceType: 'god', sphereWordCount: 15600 },
-  { id: 'matthew', name: 'Matthew', wordCount: 23684, sourceCount: 28, principalSourceType: 'lead', sphereWordCount: 12400 },
-  { id: 'john', name: 'John', wordCount: 19094, sourceCount: 22, principalSourceType: 'support', sphereWordCount: 9500 },
-  { id: 'psalms', name: 'Psalms', wordCount: 42654, sourceCount: 15, principalSourceType: 'narrator', sphereWordCount: 22000 },
-  { id: 'proverbs', name: 'Proverbs', wordCount: 15038, sourceCount: 8, principalSourceType: 'lead', sphereWordCount: 7800 },
-  { id: 'romans', name: 'Romans', wordCount: 9447, sourceCount: 6, principalSourceType: 'support', sphereWordCount: 4200 },
-  { id: 'acts', name: 'Acts', wordCount: 24250, sourceCount: 45, principalSourceType: 'narrator', sphereWordCount: 11000 },
-  { id: 'revelation', name: 'Revelation', wordCount: 12000, sourceCount: 18, principalSourceType: 'god', sphereWordCount: 6800 },
-];
-
-const MOCK_SOURCES = [
-  { id: 1, name: 'Jesus', wordCount: 35000, principalSourceType: 'god', sphereWordCount: 18000, isDivine: true },
-  { id: 2, name: 'Paul', wordCount: 25000, principalSourceType: 'lead', sphereWordCount: 12000, isHuman: true, isIndividual: true, hasGender: true, isFemale: false },
-  { id: 3, name: 'Moses', wordCount: 18000, principalSourceType: 'lead', sphereWordCount: 9500, isHuman: true, isIndividual: true, hasGender: true, isFemale: false },
-  { id: 4, name: 'David', wordCount: 15000, principalSourceType: 'lead', sphereWordCount: 7200, isHuman: true, isIndividual: true, hasGender: true, isFemale: false },
-  { id: 5, name: 'Peter', wordCount: 12000, principalSourceType: 'support', sphereWordCount: 5800, isHuman: true, isIndividual: true, hasGender: true, isFemale: false },
-  { id: 6, name: 'John', wordCount: 10000, principalSourceType: 'support', sphereWordCount: 4500, isHuman: true, isIndividual: true, hasGender: true, isFemale: false },
-  { id: 7, name: 'Abraham', wordCount: 8000, principalSourceType: 'lead', sphereWordCount: 3800, isHuman: true, isIndividual: true, hasGender: true, isFemale: false },
-  { id: 8, name: 'Isaiah', wordCount: 6500, principalSourceType: 'support', sphereWordCount: 3200, isHuman: true, isIndividual: true, hasGender: true, isFemale: false },
-  { id: 9, name: 'Solomon', wordCount: 5500, principalSourceType: 'lead', sphereWordCount: 2800, isHuman: true, isIndividual: true, hasGender: true, isFemale: false },
-];
-
-const MOCK_SPHERES = [
-  { id: 'family', name: 'Family', wordCount: 45000, sourceCount: 85 },
-  { id: 'economics', name: 'Economics', wordCount: 38000, sourceCount: 72 },
-  { id: 'government', name: 'Government', wordCount: 52000, sourceCount: 95 },
-  { id: 'religion', name: 'Religion', wordCount: 78000, sourceCount: 120 },
-  { id: 'education', name: 'Education', wordCount: 28000, sourceCount: 55 },
-  { id: 'communication', name: 'Communication', wordCount: 32000, sourceCount: 65 },
-  { id: 'celebration', name: 'Celebration', wordCount: 18000, sourceCount: 42 },
-  { id: 'foundational', name: 'Foundational', wordCount: 85000, sourceCount: 150 },
-];
-
 const TOTAL_BIBLE_WORD_COUNT = 783137; // NLT word count
 
 // Page indicator component
@@ -82,31 +47,28 @@ function PageIndicator({ total, current }: { total: number; current: number }) {
 }
 
 // Book card component
-function BookCard({ book, onPress }: { book: typeof MOCK_BOOKS[0]; onPress: () => void }) {
-  const spherePercent = Math.round((book.sphereWordCount / book.wordCount) * 100);
-  const gradientColors = Colors.sources[book.principalSourceType as keyof typeof Colors.sources]?.gradient.tiny || Colors.sources.other.gradient.tiny;
+function BookCard({ book, onPress }: { book: Book; onPress: () => void }) {
+  const wordCount = book.wordCount || 0;
+  const sphereWordCount = Math.floor(wordCount * 0.65); // Estimate
+  const spherePercent = wordCount > 0 ? Math.round((sphereWordCount / wordCount) * 100) : 0;
+  const tintColor = Colors.sources[book.principalSourceType as keyof typeof Colors.sources]?.tint || Colors.tint;
 
   return (
     <TouchableOpacity style={styles.cardContainer} onPress={onPress} activeOpacity={0.8}>
       <View style={styles.card}>
-        <LinearGradient
-          colors={gradientColors as [string, string, ...string[]]}
-          start={{ x: 0, y: 0.25 }}
-          end={{ x: 0.5, y: 1 }}
-          style={styles.cardGradient}
-        />
+        <View style={[styles.cardGradient, { backgroundColor: tintColor }]} />
         <Icon
           name="books-filled"
           size={40}
-          color={Colors.sources[book.principalSourceType as keyof typeof Colors.sources]?.tint || Colors.tint}
+          color={tintColor}
           style={styles.cardIcon}
         />
         <Text numberOfLines={1} style={styles.cardTitle}>{book.name}</Text>
-        <Text style={styles.cardSubtitle}>{readingTime(book.wordCount)}</Text>
+        <Text style={styles.cardSubtitle}>{readingTime(wordCount)}</Text>
         <View style={styles.cardKeyline} />
         <View style={styles.cardStats}>
           <View style={styles.statRow}>
-            <Text style={styles.statValue}>{book.sourceCount}</Text>
+            <Text style={styles.statValue}>{book.sourceCount || 0}</Text>
             <Text style={styles.statLabel}>Sources</Text>
           </View>
           <View style={styles.statRow}>
@@ -120,19 +82,16 @@ function BookCard({ book, onPress }: { book: typeof MOCK_BOOKS[0]; onPress: () =
 }
 
 // Source card component
-function SourceCard({ source, onPress }: { source: typeof MOCK_SOURCES[0]; onPress: () => void }) {
-  const spherePercent = Math.round((source.sphereWordCount / source.wordCount) * 100);
-  const gradientColors = Colors.sources[source.principalSourceType as keyof typeof Colors.sources]?.gradient.tiny || Colors.sources.other.gradient.tiny;
+function SourceCard({ source, onPress }: { source: Actant; onPress: () => void }) {
+  const wordCount = source.wordCount || 0;
+  const sphereWordCount = source.sphereWordCount || Math.floor(wordCount * 0.65);
+  const spherePercent = wordCount > 0 ? Math.round((sphereWordCount / wordCount) * 100) : 0;
+  const tintColor = Colors.sources[source.principalSourceType as keyof typeof Colors.sources]?.tint || Colors.tint;
 
   return (
     <TouchableOpacity style={styles.cardContainer} onPress={onPress} activeOpacity={0.8}>
       <View style={styles.card}>
-        <LinearGradient
-          colors={gradientColors as [string, string, ...string[]]}
-          start={{ x: 0, y: 0.25 }}
-          end={{ x: 0.5, y: 1 }}
-          style={styles.cardGradient}
-        />
+        <View style={[styles.cardGradient, { backgroundColor: tintColor }]} />
         <View style={styles.cardIconContainer}>
           <SourceIcon
             source={source}
@@ -150,7 +109,7 @@ function SourceCard({ source, onPress }: { source: typeof MOCK_SOURCES[0]; onPre
             <Text style={styles.statLabel}>Spheres</Text>
           </View>
           <View style={styles.statRow}>
-            <Text style={styles.statValue}>{formatNumber(source.wordCount)}</Text>
+            <Text style={styles.statValue}>{formatNumber(wordCount)}</Text>
             <Text style={styles.statLabel}>Words</Text>
           </View>
         </View>
@@ -160,20 +119,15 @@ function SourceCard({ source, onPress }: { source: typeof MOCK_SOURCES[0]; onPre
 }
 
 // Sphere card component
-function SphereCard({ sphere, onPress }: { sphere: typeof MOCK_SPHERES[0]; onPress: () => void }) {
-  const spherePercent = Math.round((sphere.wordCount / TOTAL_BIBLE_WORD_COUNT) * 100);
+function SphereCard({ sphere, onPress }: { sphere: Sphere; onPress: () => void }) {
+  const wordCount = sphere.wordCount || 0;
+  const spherePercent = Math.round((wordCount / TOTAL_BIBLE_WORD_COUNT) * 100);
   const sphereColors = Colors.spheres[sphere.id as keyof typeof Colors.spheres] || Colors.spheres.foundational;
-  const gradientColors = sphereColors.gradient.tiny;
 
   return (
     <TouchableOpacity style={styles.cardContainer} onPress={onPress} activeOpacity={0.8}>
       <View style={styles.card}>
-        <LinearGradient
-          colors={gradientColors as [string, string, ...string[]]}
-          start={{ x: 0, y: 0.25 }}
-          end={{ x: 0.5, y: 1 }}
-          style={styles.cardGradient}
-        />
+        <View style={[styles.cardGradient, { backgroundColor: sphereColors.tint }]} />
         <Icon
           name={`${sphere.id}-filled`}
           size={40}
@@ -185,11 +139,11 @@ function SphereCard({ sphere, onPress }: { sphere: typeof MOCK_SPHERES[0]; onPre
         <View style={styles.cardKeyline} />
         <View style={styles.cardStats}>
           <View style={styles.statRow}>
-            <Text style={styles.statValue}>{sphere.sourceCount}</Text>
+            <Text style={styles.statValue}>{sphere.sourceCount || 0}</Text>
             <Text style={styles.statLabel}>Sources</Text>
           </View>
           <View style={styles.statRow}>
-            <Text style={styles.statValue}>{formatNumber(sphere.wordCount)}</Text>
+            <Text style={styles.statValue}>{formatNumber(wordCount)}</Text>
             <Text style={styles.statLabel}>Words</Text>
           </View>
         </View>
@@ -257,13 +211,45 @@ function Carousel<T>({
 
 export default function DiscoverScreen() {
   const router = useRouter();
+  const { books, isLoading: booksLoading } = useBooks();
+  const { sources, getTopSources, isLoading: sourcesLoading } = useSources();
+  const { spheres, isLoading: spheresLoading } = useSpheres();
+
+  // Get random selection of books (9 books for 3 pages of 3)
+  const displayBooks = useMemo(() => {
+    if (books.length === 0) return [];
+    // Select a mix of OT and NT books
+    const shuffled = [...books].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, 9);
+  }, [books]);
+
+  // Get top sources by word count
+  const displaySources = useMemo(() => {
+    return getTopSources(9);
+  }, [getTopSources]);
+
+  // Get all non-foundational spheres
+  const displaySpheres = useMemo(() => {
+    return spheres.filter(s => s.id !== 'foundational');
+  }, [spheres]);
+
+  const isLoading = booksLoading || sourcesLoading || spheresLoading;
+
+  if (isLoading) {
+    return (
+      <View style={[styles.container, styles.centered]}>
+        <ActivityIndicator size="large" color={Colors.tint} />
+        <Text style={styles.loadingText}>Loading...</Text>
+      </View>
+    );
+  }
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
       {/* Books Section */}
       <SectionHeader title="BOOKS" linkHref="/(tabs)/books" />
       <Carousel
-        data={MOCK_BOOKS}
+        data={displayBooks}
         keyExtractor={(book) => book.id}
         renderItem={(book) => (
           <BookCard
@@ -278,7 +264,7 @@ export default function DiscoverScreen() {
       {/* Sources Section */}
       <SectionHeader title="SOURCES" linkHref="/(tabs)/sources" />
       <Carousel
-        data={MOCK_SOURCES}
+        data={displaySources}
         keyExtractor={(source) => source.id.toString()}
         renderItem={(source) => (
           <SourceCard
@@ -293,7 +279,7 @@ export default function DiscoverScreen() {
       {/* Spheres Section */}
       <SectionHeader title="SPHERES" linkHref="/(tabs)/spheres" />
       <Carousel
-        data={MOCK_SPHERES.filter(s => s.id !== 'foundational')}
+        data={displaySpheres}
         keyExtractor={(sphere) => sphere.id}
         renderItem={(sphere) => (
           <SphereCard
@@ -323,6 +309,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
+  },
+  centered: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loadingText: {
+    marginTop: 10,
+    color: Colors.subtitle,
+    fontSize: 14,
   },
   contentContainer: {
     paddingBottom: 20,

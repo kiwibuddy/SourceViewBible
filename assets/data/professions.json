@@ -1,0 +1,217 @@
+[
+  {
+    "id": 1,
+    "key": "Agriculture",
+    "searchable": false
+  },
+  {
+    "id": 2,
+    "key": "Author"
+  },
+  {
+    "id": 3,
+    "key": "Beggar"
+  },
+  {
+    "id": 4,
+    "key": "Church_Leader"
+  },
+  {
+    "id": 5,
+    "key": "ConstructionManufacturing"
+  },
+  {
+    "id": 6,
+    "key": "EducatorTeacher"
+  },
+  {
+    "id": 7,
+    "key": "Executive",
+    "searchable": false
+  },
+  {
+    "id": 8,
+    "key": "Farmer"
+  },
+  {
+    "id": 9,
+    "key": "Fisherman"
+  },
+  {
+    "id": 10,
+    "key": "Food_Services"
+  },
+  {
+    "id": 11,
+    "key": "Governor"
+  },
+  {
+    "id": 12,
+    "key": "Health_Services"
+  },
+  {
+    "id": 13,
+    "key": "Hebrew",
+    "searchable": false
+  },
+  {
+    "id": 14,
+    "key": "High_Priest"
+  },
+  {
+    "id": 15,
+    "key": "Homemaker"
+  },
+  {
+    "id": 16,
+    "key": "Judge"
+  },
+  {
+    "id": 17,
+    "key": "Judicial",
+    "searchable": false
+  },
+  {
+    "id": 18,
+    "key": "King"
+  },
+  {
+    "id": 19,
+    "key": "Lawyer"
+  },
+  {
+    "id": 20,
+    "key": "LinguistScribe"
+  },
+  {
+    "id": 21,
+    "key": "Manufacturing"
+  },
+  {
+    "id": 22,
+    "key": "Maritime"
+  },
+  {
+    "id": 23,
+    "key": "Merchant"
+  },
+  {
+    "id": 24,
+    "key": "Messenger"
+  },
+  {
+    "id": 25,
+    "key": "Military"
+  },
+  {
+    "id": 26,
+    "key": "MilitaryPolice",
+    "searchable": false
+  },
+  {
+    "id": 27,
+    "key": "Musician"
+  },
+  {
+    "id": 28,
+    "key": "Not_Hebrew",
+    "searchable": false
+  },
+  {
+    "id": 29,
+    "key": "Officer"
+  },
+  {
+    "id": 30,
+    "key": "OfficerLeader"
+  },
+  {
+    "id": 31,
+    "key": "Other_Official"
+  },
+  {
+    "id": 32,
+    "key": "Other_Religious_Leader"
+  },
+  {
+    "id": 33,
+    "key": "Priest"
+  },
+  {
+    "id": 34,
+    "key": "Prince"
+  },
+  {
+    "id": 35,
+    "key": "Princess"
+  },
+  {
+    "id": 36,
+    "key": "Prophet"
+  },
+  {
+    "id": 37,
+    "key": "Prostitute"
+  },
+  {
+    "id": 38,
+    "key": "Psalmist"
+  },
+  {
+    "id": 39,
+    "key": "Queen"
+  },
+  {
+    "id": 40,
+    "key": "Royalty",
+    "searchable": false
+  },
+  {
+    "id": 41,
+    "key": "Scribe"
+  },
+  {
+    "id": 42,
+    "key": "Servant"
+  },
+  {
+    "id": 43,
+    "key": "ServantSlave"
+  },
+  {
+    "id": 44,
+    "key": "Shepherd"
+  },
+  {
+    "id": 45,
+    "key": "Slave"
+  },
+  {
+    "id": 46,
+    "key": "SlaveServant"
+  },
+  {
+    "id": 47,
+    "key": "SoldierGuard"
+  },
+  {
+    "id": 48,
+    "key": "StudentDisciple"
+  },
+  {
+    "id": 49,
+    "key": "StudentLearner"
+  },
+  {
+    "id": 50,
+    "key": "Teacher"
+  },
+  {
+    "id": 51,
+    "key": "TeacherEducator"
+  },
+  {
+    "id": 52,
+    "key": "Thief"
+  }
+]

@@ -6,8 +6,8 @@
  */
 
 import React from 'react';
-import { View, StyleSheet, ViewStyle, Image } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { View, StyleSheet, ViewStyle } from 'react-native';
+// LinearGradient removed - requires native rebuild
 import { Icon } from './Icon';
 import { Colors } from '../common/colors';
 
@@ -70,20 +70,20 @@ export function SourceIcon({
   const iconSize = size * 0.6;
 
   if (showBackground) {
+    // Use first color from gradient as solid background
+    const backgroundColor = colors.gradient?.big?.[0] || colors.tint;
+    
     return (
       <View style={[styles.container, { width: size, height: size, borderRadius: size / 2 }, style]}>
-        <LinearGradient
-          colors={colors.gradient.big as [string, string, ...string[]]}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 1 }}
-          style={[styles.gradient, { borderRadius: size / 2 }]}
+        <View
+          style={[styles.gradient, { borderRadius: size / 2, backgroundColor }]}
         >
           <Icon
             name={iconName}
             size={iconSize}
             color="#FFFFFF"
           />
-        </LinearGradient>
+        </View>
       </View>
     );
   }
@@ -115,4 +115,3 @@ const styles = StyleSheet.create({
 });
 
 export default SourceIcon;
-

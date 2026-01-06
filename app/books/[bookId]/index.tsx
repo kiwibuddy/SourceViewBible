@@ -15,7 +15,7 @@ import {
   Dimensions,
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { LinearGradient } from 'expo-linear-gradient';
+// LinearGradient removed - requires native rebuild
 import { Colors, readingTime, formatNumber } from '../../../src/common';
 import { Icon, SourceIcon, WordCloud, SourcesBarChart, SpheresBarChart } from '../../../src/components';
 
@@ -144,14 +144,9 @@ export default function BookOverviewScreen() {
         style={styles.startButton}
         onPress={() => router.push(`/reader/${bookId}?chapter=1`)}
       >
-        <LinearGradient
-          colors={sourceColors.gradient.big as [string, string, ...string[]]}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 0 }}
-          style={styles.startButtonGradient}
-        >
+        <View style={[styles.startButtonGradient, { backgroundColor: sourceColors.tint }]}>
           <Text style={styles.startButtonText}>Start Reading</Text>
-        </LinearGradient>
+        </View>
       </TouchableOpacity>
 
       {/* Top Sources */}

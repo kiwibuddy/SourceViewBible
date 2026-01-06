@@ -5,8 +5,8 @@
  */
 
 import React from 'react';
-import { View, Text, StyleSheet, ViewStyle, ImageBackground } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { View, Text, StyleSheet, ViewStyle } from 'react-native';
+// LinearGradient removed - requires native rebuild
 import { Colors } from '../common/colors';
 
 interface AvatarProps {
@@ -24,17 +24,16 @@ export function Avatar({
 }: AvatarProps) {
   const initial = name ? name.charAt(0).toUpperCase() : '?';
   const fontSize = size * 0.45;
+  // Use the first color from gradient as background
+  const backgroundColor = gradientColors?.[0] || Colors.sources.other.tint;
 
   return (
     <View style={[styles.container, { width: size, height: size, borderRadius: size / 2 }, style]}>
-      <LinearGradient
-        colors={gradientColors as [string, string, ...string[]]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={[styles.gradient, { borderRadius: size / 2 }]}
+      <View
+        style={[styles.gradient, { borderRadius: size / 2, backgroundColor }]}
       >
         <Text style={[styles.initial, { fontSize }]}>{initial}</Text>
-      </LinearGradient>
+      </View>
     </View>
   );
 }

@@ -3,9 +3,11 @@ import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import { useCallback } from 'react';
-import { View } from 'react-native';
+import { useCallback, useEffect, useState } from 'react';
+import { View, ActivityIndicator } from 'react-native';
 import { Colors } from '../src/common';
+import { DatabaseProvider } from '../src/database/provider';
+import { dataService } from '../src/data';
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
@@ -14,20 +16,39 @@ export default function RootLayout() {
   const [fontsLoaded] = useFonts({
     sourceview: require('../assets/fonts/sourceview.ttf'),
   });
+  const [dataReady, setDataReady] = useState(false);
+
+  useEffect(() => {
+    async function loadData() {
+      try {
+        await dataService.initialize();
+        setDataReady(true);
+      } catch (e) {
+        console.error('Failed to initialize data:', e);
+        setDataReady(true); // Continue anyway
+      }
+    }
+    loadData();
+  }, []);
 
   const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
+    if (fontsLoaded && dataReady) {
       await SplashScreen.hideAsync();
     }
-  }, [fontsLoaded]);
+  }, [fontsLoaded, dataReady]);
 
-  if (!fontsLoaded) {
-    return null;
+  if (!fontsLoaded || !dataReady) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#1a1a2e' }}>
+        <ActivityIndicator size="large" color="#ffffff" />
+      </View>
+    );
   }
 
   return (
-    <SafeAreaProvider>
-      <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+    <DatabaseProvider>
+      <SafeAreaProvider>
+        <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
         <StatusBar style="dark" />
         <Stack
           screenOptions={{
@@ -123,7 +144,8 @@ export default function RootLayout() {
             }}
           />
         </Stack>
-      </View>
-    </SafeAreaProvider>
+        </View>
+      </SafeAreaProvider>
+    </DatabaseProvider>
   );
 }
