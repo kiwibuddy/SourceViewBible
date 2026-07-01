@@ -124,8 +124,8 @@ def main() -> None:
       <h1 class="h-hero rise d2">The Word,<br><span class="serif-it tint" style="color:#ff6a5c">fully sourced.</span></h1>
       <p class="lead rise d3" style="max-width:620px">Re-launching the only Scripture platform with intelligence at the level of the <b style="color:#fff">individual word</b> — who is speaking, to whom, and in what sphere of life.</p>
       <p class="small rise d4" style="letter-spacing:.16em;text-transform:uppercase">A new round of development &nbsp;·&nbsp; Investor &amp; engineering brief &nbsp;·&nbsp; July 2026</p>""": """      <div class="badge light rise d1"><span class="dot"></span> Partnership brief · Bible Societies</div>
-      <h1 class="h-hero rise d2">What if every new translation<br><span class="serif-it tint" style="color:#ff6a5c">carried the structure</span><br>of the original text?</h1>
-      <p class="lead rise d3" style="max-width:680px">Imagining faithful Bible engagement when word-level metadata, your translations, and today’s AI tools are developed <b style="color:#fff">together</b> — not in isolation.</p>
+      <h1 class="h-hero rise d2">What if every new translation<br><span class="serif-it tint" style="color:#ff6a5c">carried word-level insight</span><br>for an AI age — carefully built from 40,000 hours of human observation?</h1>
+      <p class="lead rise d3" style="max-width:680px">Over 200 contributors from 50 nations — scholarly research, tagged at every word. Structured metadata ready to align with your translations and the tools we develop <b style="color:#fff">together</b>.</p>
       <p class="small rise d4" style="letter-spacing:.16em;text-transform:uppercase">SourceView × Bible Society partnership &nbsp;·&nbsp; July 2026</p>""",
         # Thesis
         """      <h2 class="h-xl rise" style="max-width:1000px">Every other Bible app stops at the <span class="serif-it">verse.</span></h2>
