@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+"""Inline repo image assets into the pitch HTML as base64 data URIs.
+
+Replaces every ``__ASSET:<repo-relative-path>__`` token in the target HTML file
+with a ``data:image/...;base64,...`` URI so the deck is a single, self-contained
+file (logos travel with the document; only the Unsplash photography loads from the
+network). Run from anywhere:
+
+    python3 presentation/inline_assets.py
+"""
+import base64
+import mimetypes
+import pathlib
+import re
+import sys
+
+REPO = pathlib.Path(__file__).resolve().parent.parent
+HTML = REPO / "presentation" / "sourceview-pitch.html"
+TOKEN = re.compile(r"__ASSET:([^_][^\n\"]*?)__")
+
+
+def data_uri(rel_path: str) -> str:
+    path = (REPO / rel_path).resolve()
+    if not path.exists():
+        raise FileNotFoundError(f"asset not found: {rel_path}")
+    mime = mimetypes.guess_type(str(path))[0] or "image/png"
+    payload = base64.b64encode(path.read_bytes()).decode("ascii")
+    return f"data:{mime};base64,{payload}"
+
+
+def main() -> int:
+    html = HTML.read_text(encoding="utf-8")
+    seen = {}
+
+    def repl(match: "re.Match[str]") -> str:
+        rel = match.group(1)
+        if rel not in seen:
+            seen[rel] = data_uri(rel)
+            print(f"  inlined {rel} ({len(seen[rel])//1024} KB base64)")
+        return seen[rel]
+
+    new_html, count = TOKEN.subn(repl, html)
+    if count == 0:
+        print("No __ASSET:...__ tokens found (already inlined?).")
+        return 0
+    HTML.write_text(new_html, encoding="utf-8")
+    print(f"Inlined {count} asset reference(s) across {len(seen)} unique file(s).")
+    print(f"Wrote {HTML.relative_to(REPO)} ({HTML.stat().st_size//1024} KB).")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
