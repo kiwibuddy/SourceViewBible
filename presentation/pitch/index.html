@@ -225,19 +225,40 @@ p{margin:0;line-height:1.55}
 /* translation fan diagram uses inline svg */
 
 /* ============================================================
-   Chrome: progress, controls, counter, present button
+   Chrome: progress, dock controls, counter
    ============================================================ */
 .chrome{position:fixed;z-index:50;color:#fff;font-family:var(--sans)}
 .progress{top:0;left:0;height:3px;background:linear-gradient(90deg,var(--sv-red),var(--sv-green),var(--sv-blue),var(--sph-celebration));width:0%;transition:width .4s ease}
-.counter{bottom:16px;left:50%;transform:translateX(-50%);font-size:12.5px;letter-spacing:.14em;color:rgba(255,255,255,.6);font-weight:600}
-.nav{bottom:14px;display:flex;gap:8px}
-.nav.left{right:78px}.nav.right{right:24px}
-.btn{width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);
-  color:#fff;font-size:18px;cursor:pointer;display:grid;place-items:center;transition:.2s;backdrop-filter:blur(6px)}
-.btn:hover{background:rgba(255,255,255,.2)}
-.present{top:20px;right:22px;display:flex;gap:8px;align-items:center}
-.present .btn{width:auto;height:40px;border-radius:999px;padding:0 16px;font-size:13px;font-weight:700;letter-spacing:.04em;gap:8px}
-.hint{position:fixed;bottom:16px;left:24px;z-index:50;color:rgba(255,255,255,.45);font-size:12px;letter-spacing:.05em}
+.counter{bottom:18px;left:50%;transform:translateX(-50%);font-size:11.5px;letter-spacing:.16em;color:rgba(255,255,255,.5);font-weight:500;font-variant-numeric:tabular-nums}
+.dock{
+  bottom:14px;right:22px;display:flex;align-items:center;gap:1px;padding:4px;
+  border-radius:999px;border:1px solid rgba(255,255,255,.09);
+  background:rgba(8,10,12,.48);backdrop-filter:blur(16px) saturate(1.12);-webkit-backdrop-filter:blur(16px) saturate(1.12);
+  box-shadow:0 10px 40px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.05)
+}
+.dock-btn{
+  width:36px;height:36px;border:0;border-radius:50%;background:transparent;
+  color:rgba(255,255,255,.72);cursor:pointer;display:grid;place-items:center;
+  transition:background .18s ease,color .18s ease,transform .12s ease
+}
+.dock-btn:hover{background:rgba(255,255,255,.08);color:#fff}
+.dock-btn:active{transform:scale(.93)}
+.dock-nav{font-size:19px;font-weight:300;line-height:1}
+.dock-present{
+  position:relative;width:40px;height:40px;margin:0 1px;
+  background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)
+}
+.dock-present:hover{background:rgba(255,255,255,.1)}
+.present-ring{
+  position:absolute;inset:0;border-radius:50%;pointer-events:none;opacity:.5;
+  background:conic-gradient(from 225deg,var(--sv-red),var(--sv-green),var(--sv-blue),var(--sv-red));
+  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 1.5px),#000 calc(100% - 1px));
+  mask:radial-gradient(farthest-side,transparent calc(100% - 1.5px),#000 calc(100% - 1px))
+}
+.dock-present[aria-pressed="true"] .present-ring{opacity:.85}
+.dock-present[aria-pressed="true"]{background:rgba(255,255,255,.1)}
+.dock-present svg{position:relative;z-index:1;display:block}
+.hint{position:fixed;bottom:18px;left:24px;z-index:50;color:rgba(255,255,255,.38);font-size:11px;letter-spacing:.06em}
 
 /* thumbnails / jump not included to keep it light */
 
@@ -246,10 +267,6 @@ p{margin:0;line-height:1.55}
   font-size:12px;color:var(--muted);letter-spacing:.04em}
 .foot .mono{font-variant-numeric:tabular-nums}
 
-/* mobile: allow vertical scroll fallback when very small handled by scale */
-@media (max-width:640px){
-  .present .lbl-full{display:none}
-}
 .noscroll{overflow:hidden}
 
 /* entrance animations for content */
@@ -832,14 +849,17 @@ p{margin:0;line-height:1.55}
 
 <!-- Chrome -->
 <div class="chrome progress" id="progress"></div>
-<div class="chrome present">
-  <button class="btn" id="prevTop" title="Previous">‹</button>
-  <button class="btn" id="fsBtn" title="Present fullscreen">▶ <span class="lbl-full">Present</span></button>
+<div class="chrome dock" role="toolbar" aria-label="Slide controls">
+  <button class="dock-btn dock-nav" id="prevBtn" type="button" title="Previous slide (←)" aria-label="Previous slide">‹</button>
+  <button class="dock-btn dock-present" id="fsBtn" type="button" title="Fullscreen (F)" aria-label="Present fullscreen" aria-pressed="false">
+    <span class="present-ring" aria-hidden="true"></span>
+    <svg class="icon-fs-enter" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" aria-hidden="true"><path d="M8 4H4v4M16 4h4v4M8 20H4v-4M16 20h4v-4"/></svg>
+    <svg class="icon-fs-exit" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" aria-hidden="true" hidden><path d="M4 10V4h6M20 10V4h-6M4 14v6h6M20 14v6h-6"/></svg>
+  </button>
+  <button class="dock-btn dock-nav" id="nextBtn" type="button" title="Next slide (→)" aria-label="Next slide">›</button>
 </div>
-<div class="chrome nav left"><button class="btn" id="prevBtn" title="Previous">‹</button></div>
-<div class="chrome nav right"><button class="btn" id="nextBtn" title="Next">›</button></div>
 <div class="chrome counter" id="counter">01 / 31</div>
-<div class="hint" id="hint">← → to navigate · F to present</div>
+<div class="hint" id="hint">← → navigate · F fullscreen</div>
 
 <script>
 (function(){
@@ -956,9 +976,17 @@ p{margin:0;line-height:1.55}
   /* ---------- controls ---------- */
   document.getElementById('nextBtn').addEventListener('click', next);
   document.getElementById('prevBtn').addEventListener('click', prev);
-  document.getElementById('prevTop').addEventListener('click', prev);
 
   var fsBtn=document.getElementById('fsBtn');
+  var fsEnter=fsBtn.querySelector('.icon-fs-enter');
+  var fsExit=fsBtn.querySelector('.icon-fs-exit');
+  function syncFsBtn(){
+    var on=!!(document.fullscreenElement||document.webkitFullscreenElement);
+    fsBtn.setAttribute('aria-pressed', on?'true':'false');
+    fsBtn.title=on?'Exit fullscreen (F)':'Fullscreen (F)';
+    if(fsEnter) fsEnter.hidden=on;
+    if(fsExit) fsExit.hidden=!on;
+  }
   fsBtn.addEventListener('click', function(){
     var el=viewport;
     if(!document.fullscreenElement && !document.webkitFullscreenElement){
@@ -968,6 +996,8 @@ p{margin:0;line-height:1.55}
       (document.exitFullscreen||document.webkitExitFullscreen||function(){}).call(document);
     }
   });
+  document.addEventListener('fullscreenchange', syncFsBtn);
+  document.addEventListener('webkitfullscreenchange', syncFsBtn);
 
   document.addEventListener('keydown', function(e){
     switch(e.key){
