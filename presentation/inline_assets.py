@@ -13,10 +13,15 @@ Vercel layout (each deck is its own static site root):
 
     presentation/pitch/index.html
     presentation/data-guide/index.html
+    presentation/bible-societies/index.html
 
-Set the Vercel project Root Directory to ``presentation/pitch`` or
-``presentation/data-guide`` for separate URLs, or use ``presentation`` to serve
-both at ``/pitch`` and ``/data-guide``.
+Set the Vercel project Root Directory to ``presentation/pitch``, ``presentation/data-guide``,
+or ``presentation/bible-societies`` for separate URLs, or use ``presentation`` to serve
+all three at ``/pitch``, ``/data-guide``, and ``/bible-societies``.
+
+Rebuild the Bible Societies deck from the pitch template:
+
+    python3 presentation/build_bible_societies.py
 """
 import base64
 import mimetypes
@@ -28,6 +33,7 @@ REPO = pathlib.Path(__file__).resolve().parent.parent
 DEFAULT_HTML = (
     REPO / "presentation" / "pitch" / "index.html",
     REPO / "presentation" / "data-guide" / "index.html",
+    REPO / "presentation" / "bible-societies" / "index.html",
 )
 TOKEN = re.compile(r"__ASSET:([^_][^\n\"]*?)__")
 
