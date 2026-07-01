@@ -7,7 +7,16 @@ file (logos travel with the document; only the Unsplash photography loads from t
 network). Run from anywhere:
 
     python3 presentation/inline_assets.py
-    python3 presentation/inline_assets.py presentation/sourceview-data-guide.html
+    python3 presentation/inline_assets.py presentation/data-guide/index.html
+
+Vercel layout (each deck is its own static site root):
+
+    presentation/pitch/index.html
+    presentation/data-guide/index.html
+
+Set the Vercel project Root Directory to ``presentation/pitch`` or
+``presentation/data-guide`` for separate URLs, or use ``presentation`` to serve
+both at ``/pitch`` and ``/data-guide``.
 """
 import base64
 import mimetypes
@@ -17,8 +26,8 @@ import sys
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 DEFAULT_HTML = (
-    REPO / "presentation" / "sourceview-pitch.html",
-    REPO / "presentation" / "sourceview-data-guide.html",
+    REPO / "presentation" / "pitch" / "index.html",
+    REPO / "presentation" / "data-guide" / "index.html",
 )
 TOKEN = re.compile(r"__ASSET:([^_][^\n\"]*?)__")
 
