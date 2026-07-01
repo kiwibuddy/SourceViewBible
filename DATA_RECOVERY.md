@@ -48,7 +48,7 @@ attributes* (gender/nature/vocation/chronology).
 | File | Size | Format | Encrypted? | Contents |
 | --- | --- | --- | --- | --- |
 | `SourceView.sqlite3` | 2.4 MB | plain SQLite 3 | **No** — open it right now | The relational metadata (actants, BSO spans, speaker/audience links, spheres, professions, natures, chronologies). §3. |
-| `SourceView.bpt` | 23 MB | Emdros Bit‑Packed Table v1 | **Yes** — Emdros page codec | The full annotated NLT corpus: every word's *surface text*, book/chapter/verse structure, `Source` spans, and per‑word sphere flags. §5. |
+| `SourceView.bpt` | 23 MB | Emdros Bit‑Packed Table v1 | **Yes** — Emdros page codec | The full annotated NLT corpus: every word's *surface text*, book/chapter/verse structure, `Source` spans, and per‑word sphere flags. **Verified decryptable using only files in this repo — see §5.** |
 | `SourceView.realm` | 3.2 MB | Realm DB | **Yes** — Realm 64‑byte key | Pre-computed aggregates/statistics for the app's discovery UI (word clouds, counts, source relations). *Derived data* — regenerable from the two above. |
 
 ### 2b. The build pipeline & source seeds — `Kraken/`
@@ -286,47 +286,60 @@ python3 tools/extract_metadata.py     # see §7; writes build/metadata/*
 This alone gives you every span with speaker, audience, role, vocation, gender, nature,
 chronology and sphere breakdown — i.e. the bulk of the IP — with no Emdros build.
 
-### Step 1 — Build the Emdros command-line tools
+### Step 1 — Read the corpus with the in-repo harness (no download, VERIFIED)
 
-Emdros is open source and its amalgamated sources are vendored at
-`Libraries/Emdros/src/emdros_amalgamation.cpp`. To get the `mql` and `bptdump` (a.k.a.
-`bpt2dump`) utilities, fetch the matching Emdros release referenced by the original
-pipeline (`emdros-3.4.1` per `Kraken/sqlite-to-bpt.sh`) or newer from
-<https://emdros.org/download.html>, then:
+The whole Emdros engine is vendored in this repo, so nothing needs to be downloaded.
+`tools/build_dump_words.sh` compiles `tools/dump_words.cpp` against
+`Libraries/Emdros/src/` and produces a small program that opens the encrypted corpus
+with the committed key and prints `monad <tab> surface <tab> spheres`:
 
 ```sh
-tar xzf emdros-3.4.1.tar.gz && cd emdros-3.4.1
-./configure --with-sqlite3=yes --with-bpt=yes    # BPT support must be enabled
-make -j
-# binaries land in src/  (mql, and the BPT dumper: bptdump / bpt2dump)
+sh tools/build_dump_words.sh                                    # ~30s, offline
+/tmp/emdros-build/dump_words Datasets/en/NLT/SourceView.bpt 1 90
 ```
 
-### Step 2 — Decrypt / open the corpus
+This was run while writing this document; actual output (Genesis 1:1–1:2):
 
-Point the tools at the shipped file with the corpus key (§5). Two options:
+```
+Connected OK to encrypted BPT: Datasets/en/NLT/SourceView.bpt
+3   In          family,economics,government,religion,education,communication,celebration
+5   the         family,economics,government,religion,education,communication,celebration
+7   beginning   family,economics,government,religion,education,communication,celebration
+9   God         family,economics,government,religion,education,communication,celebration
+11  created     family,economics,government,religion,education,communication,celebration
+...
+84  The         religion
+86  earth       religion
+88  was         religion
+90  formless    religion
+```
+
+To export the entire corpus, run the harness over the full monad range (`1 … lastMonad`)
+and redirect to a file, giving a flat **words table**:
+`monad, surface, family, economics, government, religion, education, communication,
+celebration` (one row per word). (Add book/chapter/verse by also querying the `Verse`
+object, as `harvest.cpp: getBookChapterVerseSOMForMonad` does.)
+
+### Step 2 — (Alternative) use the standard Emdros CLI tools
+
+If you prefer the official utilities instead of the harness, fetch Emdros
+(`emdros-3.4.1` per `Kraken/sqlite-to-bpt.sh`, or newer, from
+<https://emdros.org/download.html>), build with `--with-bpt=yes`, then:
 
 ```sh
 KEY='0x67d3d67d 0x22798509 0x13e6b1c9 0x34c22397 0x61e1b5b1 0x38c4d1b1 0x25e3f6d9 0x1a2f29d7'
-
-# (a) Query the BPT directly with mql. Example: pull every word + its sphere flags:
 mql -b bpt --key "$KEY" -d Datasets/en/NLT/SourceView.bpt <<'EOF'
 SELECT ALL OBJECTS
 WHERE [Token GET surface, Family, Economics, Government, Religion, Education, MediaCom, Celebration]
 GO
 EOF
-
-# (b) Or dump the whole corpus to an *unencrypted* SQLite/EMdF database you can read
-#     with the plain sqlite3 CLI, then export the monad→surface table.
-bptdump --key "$KEY" Datasets/en/NLT/SourceView.bpt SourceView.plain.sqlite3
 ```
 
-> If a given tool build rejects the 8-word form, the identical key is also expressible as
-> the raw 64-hex-char string `67d3d67d22798509...1a2f29d7`; use whichever form your
-> Emdros build's `--key` parser accepts (see `decode_codec_key3`).
-
-From the decrypted corpus, produce a flat **words table**:
-`monad, surface, book, chapter, verse, family, economics, government, religion,
-education, communication, celebration` (one row per word/monad).
+> **Copyright note:** the surface text is the New Living Translation (© Tyndale House).
+> It is recoverable here for engineering/verification, but shipping it in a new product
+> requires an NLT licence. Your proprietary tagging (spheres, speakers, actant
+> attributes) is separate and translation-independent, which is why a full NLT text
+> export is deliberately **not** committed to this repo.
 
 ### Step 3 — Reunite words with the relational metadata
 
@@ -453,4 +466,5 @@ data, so they need not be preserved separately.
 | BPT creation command | `Kraken/sqlite-to-bpt.sh` |
 | Corpus object model / features | `App/js/API/scripture-stylesheet.json`, `App/js/API/Emdros.js` |
 | Encryption internals | `Libraries/Emdros/src/emdros_amalgamation.cpp` (`decode_codec_key3`, `useCodecOnPageData`) |
-| One-shot extractor | `tools/extract_metadata.py` |
+| Relational metadata extractor | `tools/extract_metadata.py` |
+| Corpus (word) decrypt+read harness | `tools/dump_words.cpp` + `tools/build_dump_words.sh` (VERIFIED, offline) |
