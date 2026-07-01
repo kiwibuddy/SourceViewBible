@@ -56,6 +56,11 @@ GENDER = {1: "Female", 2: "Male", 3: "Other/Unspecified"}
 # source => 1 (the speaker), recipient => 2 (the audience).
 ACTANT_ROLE = {1: "speaker", 2: "audience"}
 
+# bso.role_id (a.k.a. source_color) mapping is derived from the Role class in
+# App/js/Database/Realm.js: 1=narrator, 2=god, 3=lead, 4=support. It drove the
+# per-speaker colour coding in the reader.
+ROLE = {1: "narrator", 2: "god", 3: "lead", 4: "support"}
+
 # Sphere ids 1..7 are assigned in Kraken/db/seeds/spheres.rb in this fixed order.
 SPHERE_ORDER = [
     "family",
@@ -102,6 +107,7 @@ def build_lookups():
     return {
         "gender": GENDER,
         "actant_role": ACTANT_ROLE,
+        "role": ROLE,
         "natures": {n["id"]: n["key"] for n in natures},
         "professions": {p["id"]: p["key"] for p in professions},
         "chronologies": {c["id"]: c for c in chronologies},
@@ -190,6 +196,7 @@ def build_spans(conn, actants, books, lookups):
                 "last_monad": row.get("last"),
                 "word_count": row.get("word_count"),
                 "role_id": row.get("role_id"),
+                "role": ROLE.get(row.get("role_id")),
                 "occurrence": row.get("occurrence_id"),
                 "speaker": row.get("name"),
                 "speaker_actant_ids": links["speaker"],
@@ -213,6 +220,7 @@ def write_csv(spans, path):
                 "first_monad",
                 "last_monad",
                 "word_count",
+                "role",
                 "speaker",
                 "audience",
                 "spheres",
@@ -227,6 +235,7 @@ def write_csv(spans, path):
                     span["first_monad"],
                     span["last_monad"],
                     span["word_count"],
+                    span["role"],
                     span["speaker"],
                     "; ".join(span["audience"]),
                     "; ".join(
@@ -252,6 +261,7 @@ def main():
     serializable_lookups = {
         "gender": {str(k): v for k, v in lookups["gender"].items()},
         "actant_role": {str(k): v for k, v in lookups["actant_role"].items()},
+        "role": {str(k): v for k, v in lookups["role"].items()},
         "natures": {str(k): v for k, v in lookups["natures"].items()},
         "professions": {str(k): v for k, v in lookups["professions"].items()},
         "chronologies": {str(k): v for k, v in lookups["chronologies"].items()},
